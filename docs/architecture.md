@@ -6,6 +6,20 @@
 
 ---
 
+## Active Direction
+
+**Phase 1 uses HubSpot + Zapier — no self-hosted infrastructure.**
+
+See [`docs/architecture-phase1.md`](architecture-phase1.md) for the active
+implementation plan, Zapier workflow designs, cost comparison, and the
+conditions under which a VPS becomes justified.
+
+The documents below describe the **full target architecture** (HubSpot + n8n
+on VPS) which represents the phase 2 / scale-up path. It is documented and
+ready, but not the starting point.
+
+---
+
 ## 1. Design Principles
 
 | Principle | Description |

@@ -1,56 +1,127 @@
-# Architecture Overview
+# Sonty — System Architecture
 
-> Status: Staging — design phase only.
+> Status: Design phase. No live systems connected.
+> Last updated: 2026-03-08
+> Author: Lead Systems Architect
 
-## Design Principles
+---
 
-- **Modular integrations**: each system has its own isolated connector
-- **Central orchestration**: automation workflows coordinate across connectors
-- **Config-driven**: all credentials and endpoints live in `configs/` (never hardcoded)
-- **Testable**: every integration and workflow has corresponding tests
+## 1. Design Principles
 
-## System Diagram (Planned)
+| Principle | Description |
+|---|---|
+| **HubSpot as source of truth** | All lead, contact, deal, and pipeline data lives in HubSpot |
+| **n8n as automation brain** | All cross-system workflows are orchestrated by n8n on a dedicated VPS |
+| **Postgres as reporting layer** | Normalized snapshots of operational data are written to Postgres for dashboards |
+| **Modular connectors** | Each external system has an isolated connector module — changes to one system don't break others |
+| **Config-driven** | All credentials and endpoints live in `configs/` and environment variables, never hardcoded |
+| **Staging-first** | All integrations are developed and validated in staging before touching live data |
+| **Audit trail** | Every automated action is logged with timestamp, trigger, system, and outcome |
+
+---
+
+## 2. System Roles
+
+| System | Role | Owns |
+|---|---|---|
+| **HubSpot** | Central CRM | Contacts, Deals, Pipeline stages, Activities, Notes |
+| **Reuzenpanda** | Product configurator | Product specs, first-quote PDF |
+| **Microsoft Bookings** | Appointment scheduling | Measurement appointments |
+| **Gripp** | Financial admin | Final quotes, invoices, payment status |
+| **Outlook** | Email communication | Inbound/outbound emails linked to HubSpot |
+| **WhatsApp (via API)** | Messaging | Follow-up messages linked to HubSpot contact |
+| **n8n** | Automation orchestrator | Workflow logic, triggers, cross-system routing |
+| **Postgres** | Reporting database | Normalized KPI data, funnel snapshots |
+| **Dashboard layer** | Business intelligence | Owner dashboards, conversion metrics, revenue |
+| **Meta / Google / Pinterest** | Lead acquisition | Ad campaigns, lead form submissions |
+
+---
+
+## 3. Layered Architecture
 
 ```
-┌─────────────────────────────────────────────────────┐
-│                   Automation Layer                  │
-│              (scripts / workflows)                  │
-└────────┬──────────┬──────────┬──────────┬───────────┘
-         │          │          │          │
-   ┌─────▼───┐ ┌────▼────┐ ┌──▼────┐ ┌──▼──────┐
-   │HubSpot  │ │Reuzen-  │ │Planning│ │  Gripp  │
-   │  CRM    │ │ panda   │ │        │ │         │
-   └─────────┘ └─────────┘ └────────┘ └─────────┘
-         │
-   ┌─────▼──────────┐
-   │  Ads Platforms │
-   │ (Meta, Google) │
-   └────────────────┘
-         │
-   ┌─────▼──────────┐
-   │   Dashboards   │
-   │  (Reporting)   │
-   └────────────────┘
+┌──────────────────────────────────────────────────────────────────────┐
+│                        LEAD ACQUISITION LAYER                        │
+│            Meta Ads · Google Ads · Pinterest Ads · Organic           │
+└───────────────────────────────┬──────────────────────────────────────┘
+                                │ Lead form submissions / webhooks
+                                ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│                        HubSpot CRM (Core)                            │
+│   Contacts · Deals · Pipeline · Activities · Notes · Sequences       │
+└───┬───────────────┬────────────────┬────────────────┬────────────────┘
+    │               │                │                │
+    ▼               ▼                ▼                ▼
+┌───────┐     ┌──────────┐    ┌──────────┐    ┌──────────┐
+│Outlook│     │WhatsApp  │    │Bookings  │    │Reuzen-   │
+│ Email │     │(Business)│    │(Appts)   │    │ panda    │
+└───┬───┘     └────┬─────┘    └────┬─────┘    └────┬─────┘
+    │              │               │                │
+    └──────────────┴───────────────┴────────────────┘
+                                │
+                                ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│                        n8n AUTOMATION LAYER                          │
+│        Workflow Engine · Triggers · Logic · Cross-system Routing     │
+│                         (Self-hosted on VPS)                         │
+└───────────────────────────────┬──────────────────────────────────────┘
+                                │ Normalized data writes
+                                ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│                    Gripp (Quotes & Invoices)                         │
+│         Final Quote · Deposit Invoice · Final Invoice                │
+└───────────────────────────────┬──────────────────────────────────────┘
+                                │
+                                ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│                    Postgres REPORTING DATABASE                        │
+│         Funnel snapshots · KPI events · Revenue · Lead source        │
+└───────────────────────────────┬──────────────────────────────────────┘
+                                │
+                                ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│                       DASHBOARD LAYER                                │
+│         Owner KPI Dashboard · Conversion Funnel · Revenue Tracker    │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
-## Data Flow
+---
 
-1. Source systems expose data via API
-2. Integration connectors fetch and normalize data
-3. Automation scripts orchestrate cross-system workflows
-4. Dashboards consume normalized data for reporting
+## 4. VPS Architecture (n8n host)
 
-## Integration Contracts
+```
+VPS (Ubuntu 22.04 LTS)
+├── n8n                  (Docker container, port 5678)
+├── Postgres             (Docker container, port 5432)
+├── Nginx                (Reverse proxy, SSL termination)
+├── Certbot              (Let's Encrypt SSL)
+└── Docker Compose       (Orchestrates all containers)
+```
 
-Each integration module must expose:
+All services run behind Nginx. n8n is accessible via `https://automation.sonty.nl` (staging: `https://staging.automation.sonty.nl`). Postgres is not exposed externally — only accessible within the Docker network or via SSH tunnel.
 
-- `connect()` — validate credentials and establish session
-- `fetch(resource, params)` — retrieve data from the system
-- `push(resource, payload)` — write data to the system
-- `disconnect()` — cleanly close the session
+---
 
-## Security
+## 5. Security Model
 
-- All secrets stored in `configs/` (excluded from version control via `.gitignore`)
-- No credentials hardcoded anywhere in the codebase
-- Each integration uses its own scoped API key or OAuth token
+- All API keys stored as n8n credentials (encrypted at rest)
+- Postgres credentials never leave the VPS
+- Nginx enforces HTTPS — no HTTP traffic
+- n8n webhooks protected by HMAC signature validation where supported
+- Separate staging and production credential sets — never shared
+- No credentials committed to version control
+- `.gitignore` excludes all `*.env` and `configs/secrets/` paths
+
+---
+
+## 6. Related Documents
+
+| Document | Path |
+|---|---|
+| System Diagram | `docs/system-diagram.md` |
+| Data Flow | `docs/data-flow.md` |
+| CRM Data Model | `docs/crm-data-model.md` |
+| Automation Flow Map | `docs/automation-flow-map.md` |
+| Staging Environment | `docs/staging-environment.md` |
+| Testing Strategy | `docs/testing-strategy.md` |
+| Integrations Reference | `docs/integrations.md` |

@@ -1,9 +1,16 @@
 # Environment / secrets
 configs/.env
+configs/.env.*
+!configs/example.env
 *.env
+.env.*
 *.key
 *.pem
 secrets/
+
+# Backup files
+*.sql.gz
+*.tar.gz
 
 # Python
 __pycache__/

@@ -18,6 +18,16 @@ const CREDS = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'rp-
 const TP = JSON.parse(fs.readFileSync(path.join(process.env.HOME, 'zonweringdirect', 'data', 'toppoint-parsed-prices.json'), 'utf8'));
 const MASTER_NAAM = 'Stel je product samen';
 
+// Foto's + omschrijvingen uit de huidige live widget (RP-gehost, werken gegarandeerd)
+const LIVE = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'rp-configurator-voorbeelden', 'live-product-templates.json'), 'utf8'));
+const liveByName = new Map(LIVE.map((p) => [p.name.toLowerCase().trim(), p]));
+const liveFoto = (naam) => { const p = liveByName.get(naam.toLowerCase().trim()); return p && p.image_url; };
+const liveUitleg = (naam) => {
+  const p = liveByName.get(naam.toLowerCase().trim());
+  const d = p && (p.description || '').trim().replace(/\s+/g, ' ');
+  return d && !/^stel hier/i.test(d) && !/opmerking veld/i.test(d) ? d : null;
+};
+
 const uuid = () => crypto.randomUUID();
 
 async function login() {
@@ -58,6 +68,23 @@ const pagina = (naam, vragen, position) => ({
   relations: [], layout: { composition: 'FULL_WIDTH', fixedHeading: false, progressBar: true, mediaType: 'FULL' },
   questions: vragen.map((q, i) => ({ ...q, position: i })),
 });
+// Conditionele paginafoto: wisselt mee met het gekozen antwoord (zoals de oude flow)
+const headingImage = (vraag, fotoPerAnswerIdx, defaultUrl) => {
+  const data = [];
+  (vraag.metaData.answers || []).forEach((a, i) => {
+    const url = fotoPerAnswerIdx[i];
+    if (!url) return;
+    data.push({ id: uuid(), type: 'ALL_TRUE', conditions: [{ type: 'QUESTION', metaData: { comparator: 'EQUAL', questionId: vraag.id, answerId: a.id } }], url });
+  });
+  if (defaultUrl) data.push({ id: uuid(), type: 'ALL_TRUE', conditions: [], url: defaultUrl });
+  return [{ index: 0, image: { data } }];
+};
+const metFoto = (p, vraag, fotos, defaultUrl) => {
+  p.metaData.headingImage = headingImage(vraag, fotos, defaultUrl);
+  p.layout = { composition: 'HORIZONTAL_RIGHT', fixedHeading: true, progressBar: false, mediaType: 'SMALL' };
+  return p;
+};
+
 const rel = (from, to, conditions = null) => ({
   id: uuid(), from, to, position: 0,
   conditionType: conditions ? 'AND' : 'NO_CONDITION',
@@ -85,14 +112,26 @@ const TP_NAMEN = {
   'jaloezieen-hout': 'Jaloezieën (hout)', plisse: 'Plissé', lamellen: 'Verticale lamellen',
   vouwgordijnen: 'Vouwgordijnen', horren: 'Horren',
 };
+const TP_UITLEG = {
+  rolgordijnen: 'Strak en tijdloos. Keuze uit verduisterende of lichtdoorlatende doeken, in vijf collecties.',
+  'duo-rolgordijnen': 'Afwisselend transparante en dichte banen: regel lichtinval traploos zonder het rolgordijn op te trekken.',
+  jaloezieen: 'Aluminium jaloezieën (Scala) met kantelbare lamellen — licht sturen wanneer jij dat wilt.',
+  'jaloezieen-hout': 'Houten jaloezieën (Silva) voor een warme, natuurlijke uitstraling.',
+  plisse: 'Gevouwen stof die compact opvouwt. Ook als isolerend dubbel doek (Iso) of top-down/bottom-up.',
+  lamellen: 'Verticale lamellen, ideaal voor grote ramen en schuifpuien. In stof, PVC/ALU of isolerend (Iso Reflex).',
+  vouwgordijnen: 'De zachte uitstraling van een gordijn, het gemak van een rolgordijn: vouwt op in horizontale plooien.',
+  horren: 'Op maat gemaakte inzethorren, rolhorren en plissé hordeuren — ongestoord ventileren.',
+};
 
 function bouwToppointFlow(naarContactId) {
   const steps = [], relations = [];
   const catKeys = Object.keys(TP_NAMEN);
 
   const binnenMenu = pagina('Raamdecoratie binnen', [
-    radio('Welke raamdecoratie zoek je?', catKeys.map((k) => ({ text: TP_NAMEN[k] }))),
+    radio('Welke raamdecoratie zoek je?', catKeys.map((k) => ({ text: TP_NAMEN[k], beschrijving: TP_UITLEG[k] }))),
   ], 0);
+  const raamdecoFoto = liveFoto('Raamdecoratie');
+  metFoto(binnenMenu, binnenMenu.questions[0], [], raamdecoFoto);
   steps.push(binnenMenu);
   const menuVraag = binnenMenu.questions[0];
 
@@ -117,7 +156,9 @@ function bouwToppointFlow(naarContactId) {
     const bediening = TP_BEDIENING[key] || [];
     if (bediening.length > 1) vragen.push(radio('Welk type bediening wil je?', bediening.map(([t, b]) => ({ text: t, beschrijving: b }))));
 
+    if (vragen[0] && vragen[0].type === 'RADIO') vragen[0].description = TP_UITLEG[key] || '';
     const p = pagina(TP_NAMEN[key], vragen, i + 1);
+    metFoto(p, vragen[0], [], raamdecoFoto);
     steps.push(p);
     relations.push(rel(binnenMenu.id, p.id, [condEq(menuVraag.id, menuVraag.metaData.answers[i].id)]));
     relations.push(rel(p.id, naarContactId));
@@ -166,8 +207,11 @@ function bouwToppointFlow(naarContactId) {
   const keuzemenu = pagina('Productkeuze', [
     radio('Waar ben je naar op zoek?', categorieen.map((c) => ({ text: c.naam, beschrijving: c.beschrijving }))),
   ], 0);
-  masterSteps.push(keuzemenu);
   const hoofdvraag = keuzemenu.questions[0];
+  // Foto wisselt mee met de gekozen categorie (RP-gehoste foto's uit de live widget)
+  const FOTO_NAAM = { Knikarmscherm: 'Knikarmschermen', Screen: 'Screens', Uitvalscherm: 'Uitvalschermen', Rolluik: 'Rolluik', 'Serre zonwering': 'Serre zonwering', Markies: 'Markiezen', Pergola: 'Pergola', 'Raamdecoratie binnen': 'Raamdecoratie' };
+  metFoto(keuzemenu, hoofdvraag, categorieen.map((c) => liveFoto(FOTO_NAAM[c.naam] || c.naam)), liveFoto('Knikarmschermen'));
+  masterSteps.push(keuzemenu);
 
   // Sunmaster-categorieflows invoegen
   categorieen.forEach((cat, i) => {
@@ -180,7 +224,19 @@ function bouwToppointFlow(naarContactId) {
     const pages = bron.steps.filter((s) => !skip.has(s.id));
     const entry = pages.slice().sort((a, b) => a.position - b.position)[0];
 
-    masterSteps.push(...JSON.parse(JSON.stringify(pages)));
+    const pagesKopie = JSON.parse(JSON.stringify(pages));
+    // Model-uitleg uit de live widget toevoegen aan keuze-antwoorden zonder omschrijving
+    for (const p of pagesKopie) {
+      for (const q of p.questions || []) {
+        if (q.type !== 'RADIO') continue;
+        for (const a of (q.metaData && q.metaData.answers) || []) {
+          if (a.metaData && a.metaData.description) continue;
+          const uitleg = liveUitleg(a.text);
+          if (uitleg) { a.metaData = a.metaData || {}; a.metaData.description = uitleg; }
+        }
+      }
+    }
+    masterSteps.push(...pagesKopie);
     for (const r of bron.relations) {
       if (skip.has(r.from)) continue;
       const to = skip.has(r.to) ? contact.id : r.to;
@@ -210,11 +266,16 @@ function bouwToppointFlow(naarContactId) {
     analyticsSettings: { trackingPixels: [] }, locale: '', domains: [], show: false, metaData: {}, type: 'EXTERNAL',
   };
 
-  // Idempotent: bestaande master updaten
+  // Idempotent: bestaande master updaten via PUT /configurators/{id}
+  // (PUT op de collectie máákt altijd een nieuwe, ook als er een id meegaat)
   const huidige = bestaand.find((c) => c.name === MASTER_NAAM);
-  if (huidige) master.id = huidige.id;
-
-  const res = await call('PUT', `/widget-service/${TEST_PID}/configurators?templateId=`, { configurator: master });
+  let res;
+  if (huidige) {
+    master.id = huidige.id;
+    res = await call('PUT', `/widget-service/${TEST_PID}/configurators/${huidige.id}`, { configurator: master });
+  } else {
+    res = await call('PUT', `/widget-service/${TEST_PID}/configurators?templateId=`, { configurator: master });
+  }
   const ok = res.status === 200 || res.status === 201;
   console.log(`Master "${MASTER_NAAM}" -> ${res.status}${ok ? ' id=' + res.body.configurator.id : ''}`);
   if (!ok) console.log(JSON.stringify(res.body).slice(0, 400));

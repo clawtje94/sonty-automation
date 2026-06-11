@@ -123,15 +123,31 @@ const TP_UITLEG = {
   horren: 'Op maat gemaakte inzethorren, rolhorren en plissé hordeuren — ongestoord ventileren.',
 };
 
+// RP-gehoste foto's per binnen-type uit de oude widget (alleen exacte product-matches)
+function toppointFotos() {
+  const p = LIVE.find((x) => x.name === 'Raamdecoratie');
+  const optie = p && (p.options || []).find((o) => (o.choices || []).length);
+  const choice = (naam) => { const c = optie && optie.choices.find((ch) => ch.name === naam); return c && c.image && c.image.url; };
+  return {
+    rolgordijnen: choice('Rolgordijn'),
+    jaloezieen: choice('Jaloezie aluminium'),
+    'jaloezieen-hout': choice('Jaloezie Hout'),
+    plisse: choice('Duo plissé'),
+    vouwgordijnen: choice('Vouwgordijnen'),
+    // duo-rolgordijnen, lamellen, horren: nog geen eigen foto → default
+  };
+}
+
 function bouwToppointFlow(naarContactId) {
   const steps = [], relations = [];
   const catKeys = Object.keys(TP_NAMEN);
+  const tpFoto = toppointFotos();
 
   const binnenMenu = pagina('Raamdecoratie binnen', [
     radio('Welke raamdecoratie zoek je?', catKeys.map((k) => ({ text: TP_NAMEN[k], beschrijving: TP_UITLEG[k] }))),
   ], 0);
   const raamdecoFoto = liveFoto('Raamdecoratie');
-  metFoto(binnenMenu, binnenMenu.questions[0], [], raamdecoFoto);
+  metFoto(binnenMenu, binnenMenu.questions[0], catKeys.map((k) => tpFoto[k]), raamdecoFoto);
   steps.push(binnenMenu);
   const menuVraag = binnenMenu.questions[0];
 
@@ -158,7 +174,7 @@ function bouwToppointFlow(naarContactId) {
 
     if (vragen[0] && vragen[0].type === 'RADIO') vragen[0].description = TP_UITLEG[key] || '';
     const p = pagina(TP_NAMEN[key], vragen, i + 1);
-    metFoto(p, vragen[0], [], raamdecoFoto);
+    metFoto(p, vragen[0], [], tpFoto[key] || raamdecoFoto);
     steps.push(p);
     relations.push(rel(binnenMenu.id, p.id, [condEq(menuVraag.id, menuVraag.metaData.answers[i].id)]));
     relations.push(rel(p.id, naarContactId));
@@ -252,6 +268,22 @@ function bouwToppointFlow(naarContactId) {
   const binnenIdx = categorieen.findIndex((c) => c.naam === 'Raamdecoratie binnen');
   masterRels.push(rel(keuzemenu.id, tpFlow.entryId, [condEq(hoofdvraag.id, hoofdvraag.metaData.answers[binnenIdx].id)]));
 
+  // "Nog een product?"-lus: elke categorieflow eindigt hier; Ja → terug naar keuzemenu
+  const nogEen = pagina('Nog een product?', [
+    radio('Wil je nog een product toevoegen?', [
+      { text: 'Ja, nog een product toevoegen' },
+      { text: 'Nee, ik ben klaar' },
+    ]),
+  ], 0);
+  nogEen.questions[0].description = 'Je kunt meerdere producten in één aanvraag samenstellen.';
+  const nogVraag = nogEen.questions[0];
+  for (const r of masterRels) {
+    if (r.to === contact.id && r.from !== nogEen.id) r.to = nogEen.id;
+  }
+  masterRels.push(rel(nogEen.id, keuzemenu.id, [condEq(nogVraag.id, nogVraag.metaData.answers[0].id)]));
+  masterRels.push(rel(nogEen.id, contact.id, [condEq(nogVraag.id, nogVraag.metaData.answers[1].id)]));
+  masterSteps.push(nogEen);
+
   // Contact + bedankt achteraan
   masterSteps.push(contact, bedankt);
   masterSteps.forEach((s, i) => { s.position = i; });
@@ -262,7 +294,14 @@ function bouwToppointFlow(naarContactId) {
     resultScore: null, priceCalculationType: null,
     steps: masterSteps, relations: masterRels,
     companyProfile: { id: TEST_PID, name: 'Sonty test' },
-    style: eerste.style, displaySettings: eerste.displaySettings,
+    style: {
+      ...eerste.style,
+      // Sonty-branding (sonty.nl: oranje + zwart + logo)
+      buttonColor: '#F97316', borderColor: '#F97316', questionColor: '#0a0a0a',
+      answerColor: '#1a1a1a', answerSelectedColor: '#F97316', buttonTextColor: '#FFFFFF',
+      logoUrl: 'https://cdn.prod.website-files.com/666ab30f0f595f63bc4b0971/666ab58ba2dd970e144ccb1c_logo-sonty.webp',
+    },
+    displaySettings: eerste.displaySettings,
     analyticsSettings: { trackingPixels: [] }, locale: '', domains: [], show: false, metaData: {}, type: 'EXTERNAL',
   };
 

@@ -100,3 +100,19 @@ configurator
 4. Toppoint raamdecoratie-configurator (data ligt klaar in `~/zonweringdirect/data/toppoint-parsed-prices.json`)
 5. Eigen productfoto's uploaden (nu verwijzen afbeeldingen naar de oude Sonty B.V. uploads — werkt, maar niet zelf beheerd)
 6. Review door Daimy → daarna live profiel
+
+## Huidige LIVE inrichting (oude widget, gedecodeerd 2026-06-11)
+
+Daimy's mail "producten" (widget.json + product.json) = export van de live "Direct Samenstellen"-widget op sonty.nl/offerte. Actuele versie zelf opgehaald via de **publieke** endpoints (geen auth):
+- `GET backend.reuzenpanda.nl/widget-service/get-widget?id=4909baad-1717-4bfa-a93a-ba9355f7a9e3`
+- `GET backend.reuzenpanda.nl/widget-service/get-widget-templates?id=...` (52 producten)
+- Opgeslagen: `data/rp-configurator-voorbeelden/live-widget.json` + `live-product-templates.json`
+
+**Logica van het huidige systeem** (product-templates met upsell-ketens):
+1. Hoofdcategorie (Knikarmschermen/Screens/...) → upsell "Maak je keuze" → modellen
+2. Model (bv. Sunbasic open cassette, met doekkleur-optie) → upsell "Maten" → **breedte-staffel-producten** ("Breedte tussen 3201-3400 mm")
+3. Staffel-product: Breedte (RANGE binnen staffel), Hoogte/Uitval (RANGE), Framekleur (choices, fixed_price_value meestal 0), Bediening (choices met meerprijzen, bv. rolluik: draaischakelaar −100, motor+afst. +75, solar +314)
+4. Losse producten voor montage ("Inclusief montage ...") en accessoires (windsensor, app-bediening)
+5. Prijs = staffel-basisprijs + som van fixed_price_value's (basisprijzen zitten server-side in de offerte-automation, niet in de publieke payload)
+
+**Wat de nieuwe build hiervan overneemt**: de staffel-prijslogica en meerprijzen (zit al fijnmaziger in `data/rp-prijzen.json` per exacte maatcombinatie), montage als aparte artikelen, de upsell-volgorde als vraagvolgorde. **Wat beter wordt**: één vragenflow per categorie i.p.v. tientallen losse staffel-producten (52 stuks, allemaal status DRAFT), echte min/max per model, prijzen centraal aanpasbaar per categorie.

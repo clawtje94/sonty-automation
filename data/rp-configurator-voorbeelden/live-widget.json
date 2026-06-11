@@ -1,0 +1,499 @@
+{
+ "id": "4909baad-1717-4bfa-a93a-ba9355f7a9e3",
+ "configurator_type": "CONFIGURATOR",
+ "status": "CREATED",
+ "name": "Formulier productkeuze",
+ "locale": "nl",
+ "theme": {
+  "id": null,
+  "page_theme": "sonty",
+  "configurator_theme_id": "f3cb02b1-b612-44e1-b44f-937cbeac9066",
+  "configurator_theme": {
+   "id": "f3cb02b1-b612-44e1-b44f-937cbeac9066",
+   "name": "",
+   "company_profile_id": "731483fa-ef6b-4aae-afcf-883ec09219dd",
+   "colours": {
+    "ACCENT": "#e1ab00"
+   },
+   "position": null,
+   "hide_if_not_chosen": false,
+   "default_theme": false
+  },
+  "primary_color": null,
+  "accent_color": null,
+  "text_color": null,
+  "button_hidden": false,
+  "logo_hidden": false,
+  "background_image_url": null
+ },
+ "domain": {
+  "url": null
+ },
+ "landing_page": {
+  "id": null,
+  "facebook_pixel": "",
+  "tiktok_pixel": ""
+ },
+ "google_tag": {
+  "tag_id": "",
+  "event_id": ""
+ },
+ "advanced_setting": {
+  "allow_multiple_products": true,
+  "auto_send": false,
+  "index_page": false,
+  "recursive_upsells": true,
+  "button_text": null,
+  "custom_css": ".StyledBadge_badge___RiTS  {\ndisplay: none !important;\n}",
+  "custom_comment_title": null,
+  "slim_option_dropdown": false,
+  "show_calculated_prices": false,
+  "blur_background": false,
+  "widget_align_left": false,
+  "show_configuration": false,
+  "configuration_scene": "",
+  "disable_cart_overview": false,
+  "opt_in_text": null,
+  "tooltip_settings": null,
+  "show_live_cart_overview": false,
+  "use_automation": true,
+  "show_model_viewer": false,
+  "default_configuration": null
+ },
+ "page_components": [
+  {
+   "position": 0,
+   "page_component": {
+    "title": null,
+    "type": "ProductConfigurationPageComponent",
+    "children": [
+     {
+      "name": "Productkeuze",
+      "position": 0,
+      "items": [
+       {
+        "position": 0,
+        "product_template_id": "1210bb7b-4019-4669-9552-62ed2f66cba4"
+       },
+       {
+        "position": 1,
+        "product_template_id": "61894948-4416-4918-a16a-067025b6a210"
+       },
+       {
+        "position": 2,
+        "product_template_id": "480a142b-4402-4052-a987-d2a5226f5764"
+       },
+       {
+        "position": 3,
+        "product_template_id": "a8a5ad9d-2930-4390-9272-bcd6bc3d1486"
+       },
+       {
+        "position": 4,
+        "product_template_id": "172f3979-2f51-49a5-965d-8b553ba26800"
+       },
+       {
+        "position": 5,
+        "product_template_id": "04582b19-aeb6-4a29-bc4a-28ff3a97760e"
+       },
+       {
+        "position": 6,
+        "product_template_id": "c9cf526e-c5fc-40de-9599-b9569c1571cd"
+       },
+       {
+        "position": 7,
+        "product_template_id": "21b6ce1f-5f41-44cc-9fe4-0178c3718303"
+       },
+       {
+        "position": 8,
+        "product_template_id": "8d881ac5-6558-43ce-bb3f-b5b44c2f65a7"
+       },
+       {
+        "position": 9,
+        "product_template_id": "57fabb9b-9c1e-472f-b85a-5a1098623049"
+       },
+       {
+        "position": 10,
+        "product_template_id": "fbdf3ec4-5377-4688-8dab-59ffe90bea5e"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "position": 1,
+   "page_component": {
+    "title": null,
+    "type": "ProductOverviewPageComponent",
+    "page_options": {
+     "show_product_description": false
+    }
+   }
+  },
+  {
+   "position": 2,
+   "page_component": {
+    "title": null,
+    "type": "UserInputPageComponent",
+    "children": [
+     {
+      "name": "Contactgegevens",
+      "position": 0,
+      "items": [
+       {
+        "position": 0,
+        "contact_info": true,
+        "required": true,
+        "input_field_type": "EmailInputField",
+        "input_name": "email",
+        "input_option": {
+         "type": "StringInputOption",
+         "width": "100%",
+         "class_name": null,
+         "element_id": null,
+         "default_value": null,
+         "show_label": false,
+         "hidden": false,
+         "label_text": "E-mailadres",
+         "placeholder_text": "E-mailadres",
+         "description_text": null,
+         "error_text": null
+        }
+       },
+       {
+        "position": 1,
+        "contact_info": true,
+        "required": true,
+        "input_field_type": "PhoneInputField",
+        "input_name": "phone",
+        "input_option": {
+         "type": "StringInputOption",
+         "width": "100%",
+         "class_name": null,
+         "element_id": null,
+         "default_value": null,
+         "show_label": false,
+         "hidden": false,
+         "label_text": "Telefoonnummer",
+         "placeholder_text": "Telefoonnummer",
+         "description_text": null,
+         "error_text": null
+        }
+       }
+      ]
+     },
+     {
+      "name": "Adresgegevens",
+      "position": 1,
+      "items": [
+       {
+        "position": 0,
+        "contact_info": true,
+        "required": true,
+        "input_field_type": "CountryInputField",
+        "input_name": "country",
+        "input_option": {
+         "type": "SelectInputOption",
+         "width": "100%",
+         "class_name": null,
+         "element_id": null,
+         "default_value": "Nederland",
+         "show_label": false,
+         "hidden": false,
+         "label_text": "Land",
+         "placeholder_text": "Land",
+         "description_text": "Staat je land er niet tussen? Kies dan overige.",
+         "error_text": null,
+         "choices": [
+          {
+           "value": "Nederland",
+           "text": "Nederland",
+           "position": 0
+          },
+          {
+           "value": "België",
+           "text": "België",
+           "position": 1
+          },
+          {
+           "value": "Duitsland",
+           "text": "Duitsland",
+           "position": 2
+          },
+          {
+           "value": "Overige",
+           "text": "Overige",
+           "position": 3
+          }
+         ]
+        }
+       },
+       {
+        "position": 1,
+        "contact_info": true,
+        "required": true,
+        "input_field_type": "StringInputField",
+        "input_name": "first_name",
+        "input_option": {
+         "type": "StringInputOption",
+         "width": "50%",
+         "class_name": null,
+         "element_id": null,
+         "default_value": null,
+         "show_label": false,
+         "hidden": false,
+         "label_text": "Voornaam",
+         "placeholder_text": "Voornaam",
+         "description_text": null,
+         "error_text": null
+        }
+       },
+       {
+        "position": 2,
+        "contact_info": true,
+        "required": true,
+        "input_field_type": "StringInputField",
+        "input_name": "last_name",
+        "input_option": {
+         "type": "StringInputOption",
+         "width": "50%",
+         "class_name": null,
+         "element_id": null,
+         "default_value": null,
+         "show_label": false,
+         "hidden": false,
+         "label_text": "Achternaam",
+         "placeholder_text": "Achternaam",
+         "description_text": null,
+         "error_text": null
+        }
+       },
+       {
+        "position": 3,
+        "contact_info": true,
+        "required": true,
+        "input_field_type": "AdressItemInputField",
+        "input_name": "postal_code",
+        "input_option": {
+         "type": "StringInputOption",
+         "width": "60%",
+         "class_name": null,
+         "element_id": null,
+         "default_value": null,
+         "show_label": false,
+         "hidden": false,
+         "label_text": "Postcode",
+         "placeholder_text": "Postcode",
+         "description_text": null,
+         "error_text": null
+        }
+       },
+       {
+        "position": 4,
+        "contact_info": true,
+        "required": true,
+        "input_field_type": "AdressItemInputField",
+        "input_name": "address_number",
+        "input_option": {
+         "type": "StringInputOption",
+         "width": "40%",
+         "class_name": null,
+         "element_id": null,
+         "default_value": null,
+         "show_label": false,
+         "hidden": false,
+         "label_text": "Huisnummer",
+         "placeholder_text": "Huisnummer",
+         "description_text": null,
+         "error_text": null
+        }
+       },
+       {
+        "position": 5,
+        "contact_info": true,
+        "required": true,
+        "input_field_type": "AdressItemInputField",
+        "input_name": "city",
+        "input_option": {
+         "type": "StringInputOption",
+         "width": "40%",
+         "class_name": null,
+         "element_id": null,
+         "default_value": null,
+         "show_label": false,
+         "hidden": false,
+         "label_text": "Plaats",
+         "placeholder_text": "Plaats",
+         "description_text": null,
+         "error_text": null
+        }
+       },
+       {
+        "position": 6,
+        "contact_info": true,
+        "required": true,
+        "input_field_type": "AdressItemInputField",
+        "input_name": "address_street",
+        "input_option": {
+         "type": "StringInputOption",
+         "width": "60%",
+         "class_name": null,
+         "element_id": null,
+         "default_value": null,
+         "show_label": false,
+         "hidden": false,
+         "label_text": "Straatnaam",
+         "placeholder_text": "Straatnaam",
+         "description_text": null,
+         "error_text": null
+        }
+       },
+       {
+        "position": 7,
+        "contact_info": false,
+        "required": true,
+        "input_field_type": "SelectInputField",
+        "input_name": "52d50710-0615-4d43-ab5f-03adf5d70c6d",
+        "input_option": {
+         "type": "SelectInputOption",
+         "width": "100%",
+         "class_name": null,
+         "element_id": null,
+         "default_value": null,
+         "show_label": false,
+         "hidden": false,
+         "label_text": null,
+         "placeholder_text": "Hoe komt u bij ons terecht?",
+         "description_text": null,
+         "error_text": null,
+         "choices": [
+          {
+           "value": "Social media",
+           "text": "Social media",
+           "position": 0
+          },
+          {
+           "value": "Google",
+           "text": "Google",
+           "position": 1
+          },
+          {
+           "value": "Bekende",
+           "text": "Bekende",
+           "position": 2
+          },
+          {
+           "value": "Buren",
+           "text": "Buren",
+           "position": 3
+          },
+          {
+           "value": "Anders",
+           "text": "Anders",
+           "position": 4
+          }
+         ]
+        }
+       }
+      ]
+     },
+     {
+      "name": "Opmerking toevoegen",
+      "position": 2,
+      "items": [
+       {
+        "position": 0,
+        "contact_info": false,
+        "required": false,
+        "input_field_type": "CommentInputField",
+        "input_name": "comment",
+        "input_option": {
+         "type": "TextInputOption",
+         "width": "100%",
+         "class_name": null,
+         "element_id": null,
+         "default_value": null,
+         "show_label": false,
+         "hidden": false,
+         "label_text": "Waar kunnen wij nog rekening mee houden?",
+         "placeholder_text": "Waar kunnen wij nog rekening mee houden?",
+         "description_text": null,
+         "error_text": null,
+         "min_lines": 0,
+         "max_lines": 0
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "position": 3,
+   "page_component": {
+    "title": null,
+    "type": "ConfirmationPageComponent",
+    "page_options": {
+     "use_confirmation_page": false,
+     "redirect_url": "https://www.sonty.nl/offerte-bedankt",
+     "title": "Gelukt!",
+     "message": "Bedankt dat je een offerte hebt aangevraagd! We doen ons best om de offerte zo snel mogelijk te versturen!",
+     "address": null,
+     "phone": null,
+     "mail": null
+    }
+   }
+  }
+ ],
+ "audience_id": "6c271b3f-b079-4fd6-9a57-84de3d5e1213",
+ "company_profile_id": "731483fa-ef6b-4aae-afcf-883ec09219dd",
+ "company_profile": {
+  "id": "731483fa-ef6b-4aae-afcf-883ec09219dd",
+  "name": "Sonty B.V.",
+  "logo_url": "https://user-info.reuzenpanda.nl/company-profiles/731483fa-ef6b-4aae-afcf-883ec09219dd/logo.png",
+  "terms_of_agreement_url": "https://cdn.prod.website-files.com/666ab30f0f595f63bc4b0971/6682de66c3d515c8605205b9_Algemene%20voorwaarden%20Sonty%20B.V.%20(2).pdf",
+  "privacy_policy_url": "https://www.sonty.nl/privacyverklaring",
+  "users": [
+   {
+    "id": "f40a0436-14c9-4646-939f-0fc57dc08e06",
+    "role": null
+   },
+   {
+    "id": "29bd6e9f-58af-4aea-9699-8b6cbaad85cd",
+    "role": null
+   },
+   {
+    "id": "16e28c1d-20ca-4d04-bd8f-51132f511147",
+    "role": null
+   },
+   {
+    "id": "226f54e2-40df-4df1-be4c-3838abd24566",
+    "role": null
+   },
+   {
+    "id": "49aee3f7-c734-44c5-a700-e6e20aee9091",
+    "role": null
+   },
+   {
+    "id": "679dbf67-819f-45a2-bded-19cb8c0ce1d4",
+    "role": null
+   },
+   {
+    "id": "950757a4-0a86-4353-a162-50c03cd3ef53",
+    "role": null
+   },
+   {
+    "id": "6df4c0a5-8c95-470e-a557-083a122c0222",
+    "role": null
+   },
+   {
+    "id": "3d9a60cd-fcda-4fc7-ac20-c1a91d0742df",
+    "role": null
+   },
+   {
+    "id": "15703778-57c2-4e0d-a50c-fb46fc9d31f4",
+    "role": null
+   }
+  ]
+ }
+}

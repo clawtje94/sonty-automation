@@ -1,0 +1,2326 @@
+{
+ "_uitleg": "Centrale prijzenfile voor RP-artikelen (Sonty test). Pas prijzen of marge_per_categorie aan en draai: node scripts/sync-rp-artikelen.js",
+ "_bron": {
+  "source": "Sunmaster Prijscatalogus 2026",
+  "markup": "10% boven advies verkoopprijs",
+  "generatedAt": "2026-04-10T16:08:36.777Z",
+  "montageKosten": "Separate montagekosten (niet in productprijs)"
+ },
+ "marge_per_categorie": {
+  "Knikarmschermen": 1.0,
+  "Uitvalschermen": 1.0,
+  "Screens": 1.0,
+  "Rolluiken": 1.0,
+  "Serre zonwering": 1.0,
+  "Pergola": 1.0,
+  "Markiezen": 1.0,
+  "Montage": 1.0,
+  "Accessoires": 1.0
+ },
+ "categorieen": {
+  "Screens": [
+   {
+    "naam": "Screen Square 85 100×100 cm",
+    "sku": "SM-SCREEN-SQUARE-85-100X100",
+    "verkoop_incl": 645,
+    "omschrijving": "Screen Square 85, breedte×hoogte 100x100 cm, incl. draaistang"
+   },
+   {
+    "naam": "Screen Square 85 150×150 cm",
+    "sku": "SM-SCREEN-SQUARE-85-150X150",
+    "verkoop_incl": 739,
+    "omschrijving": "Screen Square 85, breedte×hoogte 150x150 cm, incl. draaistang"
+   },
+   {
+    "naam": "Screen Square 85 200×200 cm",
+    "sku": "SM-SCREEN-SQUARE-85-200X200",
+    "verkoop_incl": 878,
+    "omschrijving": "Screen Square 85, breedte×hoogte 200x200 cm, incl. draaistang"
+   },
+   {
+    "naam": "Screen Square 85 240×200 cm",
+    "sku": "SM-SCREEN-SQUARE-85-240X200",
+    "verkoop_incl": 944,
+    "omschrijving": "Screen Square 85, breedte×hoogte 240x200 cm, incl. draaistang"
+   },
+   {
+    "naam": "ZipScreen Square 85/100 100×100 cm",
+    "sku": "SM-ZIPSCREEN-SQUARE-85-100X100",
+    "verkoop_incl": 1027,
+    "omschrijving": "ZipScreen Square 85/100, breedte×hoogte 100x100 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "ZipScreen Square 85/100 150×150 cm",
+    "sku": "SM-ZIPSCREEN-SQUARE-85-150X150",
+    "verkoop_incl": 1306,
+    "omschrijving": "ZipScreen Square 85/100, breedte×hoogte 150x150 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "ZipScreen Square 85/100 200×200 cm",
+    "sku": "SM-ZIPSCREEN-SQUARE-85-200X200",
+    "verkoop_incl": 1681,
+    "omschrijving": "ZipScreen Square 85/100, breedte×hoogte 200x200 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "ZipScreen Square 85/100 250×200 cm",
+    "sku": "SM-ZIPSCREEN-SQUARE-85-250X200",
+    "verkoop_incl": 1782,
+    "omschrijving": "ZipScreen Square 85/100, breedte×hoogte 250x200 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "ZipScreen Square 85/100 300×200 cm",
+    "sku": "SM-ZIPSCREEN-SQUARE-85-300X200",
+    "verkoop_incl": 1954,
+    "omschrijving": "ZipScreen Square 85/100, breedte×hoogte 300x200 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "ZipScreen Square 85/100 300×300 cm",
+    "sku": "SM-ZIPSCREEN-SQUARE-85-300X300",
+    "verkoop_incl": 2332,
+    "omschrijving": "ZipScreen Square 85/100, breedte×hoogte 300x300 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "ZipScreen Square 85/100 400×200 cm",
+    "sku": "SM-ZIPSCREEN-SQUARE-85-400X200",
+    "verkoop_incl": 1980,
+    "omschrijving": "ZipScreen Square 85/100, breedte×hoogte 400x200 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "ZipScreen Square 85/100 400×300 cm",
+    "sku": "SM-ZIPSCREEN-SQUARE-85-400X300",
+    "verkoop_incl": 2332,
+    "omschrijving": "ZipScreen Square 85/100, breedte×hoogte 400x300 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "Meerprijs bediening — draaischakelaar (screen)",
+    "sku": "BED-SCREEN-DRAAISCHAKELAAR",
+    "verkoop_incl": -89,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   },
+   {
+    "naam": "Meerprijs bediening — motor afstandsbediening (screen)",
+    "sku": "BED-SCREEN-MOTOR-AFSTANDSBEDIENING",
+    "verkoop_incl": 75,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   },
+   {
+    "naam": "Meerprijs bediening — solar (screen)",
+    "sku": "BED-SCREEN-SOLAR",
+    "verkoop_incl": 248,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   },
+   {
+    "naam": "Meerprijs bediening — draaischakelaar (zipscreen)",
+    "sku": "BED-ZIPSCREEN-DRAAISCHAKELAAR",
+    "verkoop_incl": -89,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   },
+   {
+    "naam": "Meerprijs bediening — motor afstandsbediening (zipscreen)",
+    "sku": "BED-ZIPSCREEN-MOTOR-AFSTANDSBEDIENING",
+    "verkoop_incl": 75,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   },
+   {
+    "naam": "Meerprijs bediening — solar (zipscreen)",
+    "sku": "BED-ZIPSCREEN-SOLAR",
+    "verkoop_incl": 248,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   }
+  ],
+  "Rolluiken": [
+   {
+    "naam": "Rolluik S-37 100×100 cm",
+    "sku": "SM-ROLLUIK-S37-100X100",
+    "verkoop_incl": 694,
+    "omschrijving": "Rolluik S-37, breedte×hoogte 100x100 cm, incl. RS 100 io motor"
+   },
+   {
+    "naam": "Rolluik S-37 150×150 cm",
+    "sku": "SM-ROLLUIK-S37-150X150",
+    "verkoop_incl": 807,
+    "omschrijving": "Rolluik S-37, breedte×hoogte 150x150 cm, incl. RS 100 io motor"
+   },
+   {
+    "naam": "Rolluik S-37 200×200 cm",
+    "sku": "SM-ROLLUIK-S37-200X200",
+    "verkoop_incl": 1092,
+    "omschrijving": "Rolluik S-37, breedte×hoogte 200x200 cm, incl. RS 100 io motor"
+   },
+   {
+    "naam": "Rolluik S-37 250×200 cm",
+    "sku": "SM-ROLLUIK-S37-250X200",
+    "verkoop_incl": 1210,
+    "omschrijving": "Rolluik S-37, breedte×hoogte 250x200 cm, incl. RS 100 io motor"
+   },
+   {
+    "naam": "Rolluik S-37 300×200 cm",
+    "sku": "SM-ROLLUIK-S37-300X200",
+    "verkoop_incl": 1387,
+    "omschrijving": "Rolluik S-37, breedte×hoogte 300x200 cm, incl. RS 100 io motor"
+   },
+   {
+    "naam": "Rolluik S-37 200×300 cm",
+    "sku": "SM-ROLLUIK-S37-200X300",
+    "verkoop_incl": 1358,
+    "omschrijving": "Rolluik S-37, breedte×hoogte 200x300 cm, incl. RS 100 io motor"
+   },
+   {
+    "naam": "Rolluik S-42 (groot formaat) 100×100 cm",
+    "sku": "SM-ROLLUIK-S42-100X100",
+    "verkoop_incl": 723,
+    "omschrijving": "Rolluik S-42 (groot formaat), breedte×hoogte 100x100 cm, incl. RS 100 io motor 17 rpm"
+   },
+   {
+    "naam": "Rolluik S-42 (groot formaat) 200×100 cm",
+    "sku": "SM-ROLLUIK-S42-200X100",
+    "verkoop_incl": 903,
+    "omschrijving": "Rolluik S-42 (groot formaat), breedte×hoogte 200x100 cm, incl. RS 100 io motor 17 rpm"
+   },
+   {
+    "naam": "Rolluik S-42 (groot formaat) 300×100 cm",
+    "sku": "SM-ROLLUIK-S42-300X100",
+    "verkoop_incl": 1087,
+    "omschrijving": "Rolluik S-42 (groot formaat), breedte×hoogte 300x100 cm, incl. RS 100 io motor 17 rpm"
+   },
+   {
+    "naam": "Rolluik S-42 (groot formaat) 400×100 cm",
+    "sku": "SM-ROLLUIK-S42-400X100",
+    "verkoop_incl": 1301,
+    "omschrijving": "Rolluik S-42 (groot formaat), breedte×hoogte 400x100 cm, incl. RS 100 io motor 17 rpm"
+   },
+   {
+    "naam": "Rolluik S-42 (groot formaat) 100×200 cm",
+    "sku": "SM-ROLLUIK-S42-100X200",
+    "verkoop_incl": 868,
+    "omschrijving": "Rolluik S-42 (groot formaat), breedte×hoogte 100x200 cm, incl. RS 100 io motor 17 rpm"
+   },
+   {
+    "naam": "Rolluik S-42 (groot formaat) 200×200 cm",
+    "sku": "SM-ROLLUIK-S42-200X200",
+    "verkoop_incl": 1137,
+    "omschrijving": "Rolluik S-42 (groot formaat), breedte×hoogte 200x200 cm, incl. RS 100 io motor 17 rpm"
+   },
+   {
+    "naam": "Rolluik S-42 (groot formaat) 300×200 cm",
+    "sku": "SM-ROLLUIK-S42-300X200",
+    "verkoop_incl": 1439,
+    "omschrijving": "Rolluik S-42 (groot formaat), breedte×hoogte 300x200 cm, incl. RS 100 io motor 17 rpm"
+   },
+   {
+    "naam": "Rolluik S-42 (groot formaat) 400×200 cm",
+    "sku": "SM-ROLLUIK-S42-400X200",
+    "verkoop_incl": 1783,
+    "omschrijving": "Rolluik S-42 (groot formaat), breedte×hoogte 400x200 cm, incl. RS 100 io motor 17 rpm"
+   },
+   {
+    "naam": "Rolluik S-42 (groot formaat) 100×280 cm",
+    "sku": "SM-ROLLUIK-S42-100X280",
+    "verkoop_incl": 1000,
+    "omschrijving": "Rolluik S-42 (groot formaat), breedte×hoogte 100x280 cm, incl. RS 100 io motor 17 rpm"
+   },
+   {
+    "naam": "Rolluik S-42 (groot formaat) 200×280 cm",
+    "sku": "SM-ROLLUIK-S42-200X280",
+    "verkoop_incl": 1374,
+    "omschrijving": "Rolluik S-42 (groot formaat), breedte×hoogte 200x280 cm, incl. RS 100 io motor 17 rpm"
+   },
+   {
+    "naam": "Rolluik S-42 (groot formaat) 300×280 cm",
+    "sku": "SM-ROLLUIK-S42-300X280",
+    "verkoop_incl": 1780,
+    "omschrijving": "Rolluik S-42 (groot formaat), breedte×hoogte 300x280 cm, incl. RS 100 io motor 17 rpm"
+   },
+   {
+    "naam": "Meerprijs bediening — draaischakelaar (rolluik)",
+    "sku": "BED-ROLLUIK-DRAAISCHAKELAAR",
+    "verkoop_incl": -100,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   },
+   {
+    "naam": "Meerprijs bediening — motor afstandsbediening (rolluik)",
+    "sku": "BED-ROLLUIK-MOTOR-AFSTANDSBEDIENING",
+    "verkoop_incl": 75,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   },
+   {
+    "naam": "Meerprijs bediening — solar (rolluik)",
+    "sku": "BED-ROLLUIK-SOLAR",
+    "verkoop_incl": 314,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   }
+  ],
+  "Knikarmschermen": [
+   {
+    "naam": "SunBasic (open arm) 300×250 cm",
+    "sku": "SM-SUNBASIC-OPEN-300X250",
+    "verkoop_incl": 2247,
+    "omschrijving": "SunBasic (open arm), breedte×uitval 300x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic (open arm) 350×250 cm",
+    "sku": "SM-SUNBASIC-OPEN-350X250",
+    "verkoop_incl": 2322,
+    "omschrijving": "SunBasic (open arm), breedte×uitval 350x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic (open arm) 400×250 cm",
+    "sku": "SM-SUNBASIC-OPEN-400X250",
+    "verkoop_incl": 2435,
+    "omschrijving": "SunBasic (open arm), breedte×uitval 400x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic (open arm) 450×250 cm",
+    "sku": "SM-SUNBASIC-OPEN-450X250",
+    "verkoop_incl": 2548,
+    "omschrijving": "SunBasic (open arm), breedte×uitval 450x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic (open arm) 500×250 cm",
+    "sku": "SM-SUNBASIC-OPEN-500X250",
+    "verkoop_incl": 2660,
+    "omschrijving": "SunBasic (open arm), breedte×uitval 500x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic (open arm) 550×250 cm",
+    "sku": "SM-SUNBASIC-OPEN-550X250",
+    "verkoop_incl": 2760,
+    "omschrijving": "SunBasic (open arm), breedte×uitval 550x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic (open arm) 350×300 cm",
+    "sku": "SM-SUNBASIC-OPEN-350X300",
+    "verkoop_incl": 2561,
+    "omschrijving": "SunBasic (open arm), breedte×uitval 350x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic (open arm) 400×300 cm",
+    "sku": "SM-SUNBASIC-OPEN-400X300",
+    "verkoop_incl": 2597,
+    "omschrijving": "SunBasic (open arm), breedte×uitval 400x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic (open arm) 450×300 cm",
+    "sku": "SM-SUNBASIC-OPEN-450X300",
+    "verkoop_incl": 2722,
+    "omschrijving": "SunBasic (open arm), breedte×uitval 450x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic (open arm) 500×300 cm",
+    "sku": "SM-SUNBASIC-OPEN-500X300",
+    "verkoop_incl": 2860,
+    "omschrijving": "SunBasic (open arm), breedte×uitval 500x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic (open arm) 550×300 cm",
+    "sku": "SM-SUNBASIC-OPEN-550X300",
+    "verkoop_incl": 2960,
+    "omschrijving": "SunBasic (open arm), breedte×uitval 550x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 269×250 cm",
+    "sku": "SM-SUNEYE-DICHT-269X250",
+    "verkoop_incl": 2662,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 269x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 300×250 cm",
+    "sku": "SM-SUNEYE-DICHT-300X250",
+    "verkoop_incl": 2705,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 300x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 350×250 cm",
+    "sku": "SM-SUNEYE-DICHT-350X250",
+    "verkoop_incl": 2918,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 350x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 400×250 cm",
+    "sku": "SM-SUNEYE-DICHT-400X250",
+    "verkoop_incl": 3056,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 400x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 450×250 cm",
+    "sku": "SM-SUNEYE-DICHT-450X250",
+    "verkoop_incl": 3200,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 450x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 500×250 cm",
+    "sku": "SM-SUNEYE-DICHT-500X250",
+    "verkoop_incl": 3405,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 500x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 550×250 cm",
+    "sku": "SM-SUNEYE-DICHT-550X250",
+    "verkoop_incl": 3545,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 550x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 600×250 cm",
+    "sku": "SM-SUNEYE-DICHT-600X250",
+    "verkoop_incl": 3705,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 600x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 319×300 cm",
+    "sku": "SM-SUNEYE-DICHT-319X300",
+    "verkoop_incl": 2966,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 319x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 350×300 cm",
+    "sku": "SM-SUNEYE-DICHT-350X300",
+    "verkoop_incl": 3091,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 350x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 400×300 cm",
+    "sku": "SM-SUNEYE-DICHT-400X300",
+    "verkoop_incl": 3212,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 400x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 450×300 cm",
+    "sku": "SM-SUNEYE-DICHT-450X300",
+    "verkoop_incl": 3374,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 450x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 500×300 cm",
+    "sku": "SM-SUNEYE-DICHT-500X300",
+    "verkoop_incl": 3625,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 500x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye dichte cassette 550×300 cm",
+    "sku": "SM-SUNEYE-DICHT-550X300",
+    "verkoop_incl": 3793,
+    "omschrijving": "SunEye dichte cassette, breedte×uitval 550x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 315×250 cm",
+    "sku": "SM-SUNELITE-DICHT-315X250",
+    "verkoop_incl": 3480,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 315x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 350×250 cm",
+    "sku": "SM-SUNELITE-DICHT-350X250",
+    "verkoop_incl": 3496,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 350x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 400×250 cm",
+    "sku": "SM-SUNELITE-DICHT-400X250",
+    "verkoop_incl": 3589,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 400x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 450×250 cm",
+    "sku": "SM-SUNELITE-DICHT-450X250",
+    "verkoop_incl": 4023,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 450x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 500×250 cm",
+    "sku": "SM-SUNELITE-DICHT-500X250",
+    "verkoop_incl": 4120,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 500x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 550×250 cm",
+    "sku": "SM-SUNELITE-DICHT-550X250",
+    "verkoop_incl": 4550,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 550x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 600×250 cm",
+    "sku": "SM-SUNELITE-DICHT-600X250",
+    "verkoop_incl": 4650,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 600x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 365×300 cm",
+    "sku": "SM-SUNELITE-DICHT-365X300",
+    "verkoop_incl": 3884,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 365x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 400×300 cm",
+    "sku": "SM-SUNELITE-DICHT-400X300",
+    "verkoop_incl": 3884,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 400x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 450×300 cm",
+    "sku": "SM-SUNELITE-DICHT-450X300",
+    "verkoop_incl": 4328,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 450x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 500×300 cm",
+    "sku": "SM-SUNELITE-DICHT-500X300",
+    "verkoop_incl": 4441,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 500x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 550×300 cm",
+    "sku": "SM-SUNELITE-DICHT-550X300",
+    "verkoop_incl": 4871,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 550x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 600×300 cm",
+    "sku": "SM-SUNELITE-DICHT-600X300",
+    "verkoop_incl": 4982,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 600x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 415×350 cm",
+    "sku": "SM-SUNELITE-DICHT-415X350",
+    "verkoop_incl": 4598,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 415x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 450×350 cm",
+    "sku": "SM-SUNELITE-DICHT-450X350",
+    "verkoop_incl": 4609,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 450x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 500×350 cm",
+    "sku": "SM-SUNELITE-DICHT-500X350",
+    "verkoop_incl": 4736,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 500x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 550×350 cm",
+    "sku": "SM-SUNELITE-DICHT-550X350",
+    "verkoop_incl": 5166,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 550x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunElite (Nieuw 2026) 600×350 cm",
+    "sku": "SM-SUNELITE-DICHT-600X350",
+    "verkoop_incl": 5292,
+    "omschrijving": "SunElite (Nieuw 2026), breedte×uitval 600x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic Cassette (dichte cassette) 300×250 cm",
+    "sku": "SM-SUNBASIC-DICHT-300X250",
+    "verkoop_incl": 2428,
+    "omschrijving": "SunBasic Cassette (dichte cassette), breedte×uitval 300x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic Cassette (dichte cassette) 350×250 cm",
+    "sku": "SM-SUNBASIC-DICHT-350X250",
+    "verkoop_incl": 2502,
+    "omschrijving": "SunBasic Cassette (dichte cassette), breedte×uitval 350x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic Cassette (dichte cassette) 400×250 cm",
+    "sku": "SM-SUNBASIC-DICHT-400X250",
+    "verkoop_incl": 2640,
+    "omschrijving": "SunBasic Cassette (dichte cassette), breedte×uitval 400x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic Cassette (dichte cassette) 450×250 cm",
+    "sku": "SM-SUNBASIC-DICHT-450X250",
+    "verkoop_incl": 2778,
+    "omschrijving": "SunBasic Cassette (dichte cassette), breedte×uitval 450x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic Cassette (dichte cassette) 500×250 cm",
+    "sku": "SM-SUNBASIC-DICHT-500X250",
+    "verkoop_incl": 2915,
+    "omschrijving": "SunBasic Cassette (dichte cassette), breedte×uitval 500x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic Cassette (dichte cassette) 550×250 cm",
+    "sku": "SM-SUNBASIC-DICHT-550X250",
+    "verkoop_incl": 3039,
+    "omschrijving": "SunBasic Cassette (dichte cassette), breedte×uitval 550x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic Cassette (dichte cassette) 350×300 cm",
+    "sku": "SM-SUNBASIC-DICHT-350X300",
+    "verkoop_incl": 2690,
+    "omschrijving": "SunBasic Cassette (dichte cassette), breedte×uitval 350x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic Cassette (dichte cassette) 400×300 cm",
+    "sku": "SM-SUNBASIC-DICHT-400X300",
+    "verkoop_incl": 2827,
+    "omschrijving": "SunBasic Cassette (dichte cassette), breedte×uitval 400x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic Cassette (dichte cassette) 450×300 cm",
+    "sku": "SM-SUNBASIC-DICHT-450X300",
+    "verkoop_incl": 2965,
+    "omschrijving": "SunBasic Cassette (dichte cassette), breedte×uitval 450x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic Cassette (dichte cassette) 500×300 cm",
+    "sku": "SM-SUNBASIC-DICHT-500X300",
+    "verkoop_incl": 3114,
+    "omschrijving": "SunBasic Cassette (dichte cassette), breedte×uitval 500x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunBasic Cassette (dichte cassette) 550×300 cm",
+    "sku": "SM-SUNBASIC-DICHT-550X300",
+    "verkoop_incl": 3229,
+    "omschrijving": "SunBasic Cassette (dichte cassette), breedte×uitval 550x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 300×250 cm",
+    "sku": "SM-SUNEYE-XL-300X250",
+    "verkoop_incl": 3406,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 300x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 350×250 cm",
+    "sku": "SM-SUNEYE-XL-350X250",
+    "verkoop_incl": 3531,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 350x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 400×250 cm",
+    "sku": "SM-SUNEYE-XL-400X250",
+    "verkoop_incl": 3814,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 400x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 450×250 cm",
+    "sku": "SM-SUNEYE-XL-450X250",
+    "verkoop_incl": 3939,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 450x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 500×250 cm",
+    "sku": "SM-SUNEYE-XL-500X250",
+    "verkoop_incl": 4230,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 500x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 550×250 cm",
+    "sku": "SM-SUNEYE-XL-550X250",
+    "verkoop_incl": 4574,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 550x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 600×250 cm",
+    "sku": "SM-SUNEYE-XL-600X250",
+    "verkoop_incl": 4849,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 600x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 650×250 cm",
+    "sku": "SM-SUNEYE-XL-650X250",
+    "verkoop_incl": 6376,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 650x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 700×250 cm",
+    "sku": "SM-SUNEYE-XL-700X250",
+    "verkoop_incl": 6640,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 700x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 745×250 cm",
+    "sku": "SM-SUNEYE-XL-745X250",
+    "verkoop_incl": 6906,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 745x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 350×300 cm",
+    "sku": "SM-SUNEYE-XL-350X300",
+    "verkoop_incl": 3717,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 350x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 400×300 cm",
+    "sku": "SM-SUNEYE-XL-400X300",
+    "verkoop_incl": 4018,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 400x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 450×300 cm",
+    "sku": "SM-SUNEYE-XL-450X300",
+    "verkoop_incl": 4145,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 450x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 500×300 cm",
+    "sku": "SM-SUNEYE-XL-500X300",
+    "verkoop_incl": 4436,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 500x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 550×300 cm",
+    "sku": "SM-SUNEYE-XL-550X300",
+    "verkoop_incl": 4723,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 550x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 600×300 cm",
+    "sku": "SM-SUNEYE-XL-600X300",
+    "verkoop_incl": 5001,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 600x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 650×300 cm",
+    "sku": "SM-SUNEYE-XL-650X300",
+    "verkoop_incl": 6122,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 650x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 700×300 cm",
+    "sku": "SM-SUNEYE-XL-700X300",
+    "verkoop_incl": 6178,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 700x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 745×300 cm",
+    "sku": "SM-SUNEYE-XL-745X300",
+    "verkoop_incl": 7183,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 745x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 450×350 cm",
+    "sku": "SM-SUNEYE-XL-450X350",
+    "verkoop_incl": 4280,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 450x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 500×350 cm",
+    "sku": "SM-SUNEYE-XL-500X350",
+    "verkoop_incl": 4563,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 500x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 550×350 cm",
+    "sku": "SM-SUNEYE-XL-550X350",
+    "verkoop_incl": 4877,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 550x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 600×350 cm",
+    "sku": "SM-SUNEYE-XL-600X350",
+    "verkoop_incl": 5114,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 600x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 650×350 cm",
+    "sku": "SM-SUNEYE-XL-650X350",
+    "verkoop_incl": 6263,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 650x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 700×350 cm",
+    "sku": "SM-SUNEYE-XL-700X350",
+    "verkoop_incl": 6362,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 700x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunEye XL dichte cassette 745×350 cm",
+    "sku": "SM-SUNEYE-XL-745X350",
+    "verkoop_incl": 6677,
+    "omschrijving": "SunEye XL dichte cassette, breedte×uitval 745x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "Meerprijs bediening — handbediend (knikarmscherm)",
+    "sku": "BED-KNIKARMSCHERM-HANDBEDIEND",
+    "verkoop_incl": -300,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   },
+   {
+    "naam": "Meerprijs bediening — draaischakelaar (knikarmscherm)",
+    "sku": "BED-KNIKARMSCHERM-DRAAISCHAKELAAR",
+    "verkoop_incl": -51,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   },
+   {
+    "naam": "Meerprijs bediening — motor afstandsbediening (knikarmscherm)",
+    "sku": "BED-KNIKARMSCHERM-MOTOR-AFSTANDSBEDIENING",
+    "verkoop_incl": 75,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   }
+  ],
+  "Uitvalschermen": [
+   {
+    "naam": "SunCube 150 uitvalscherm 140×95 cm",
+    "sku": "SM-SUNCUBE-150-140X95",
+    "verkoop_incl": 1618,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 140x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 140×115 cm",
+    "sku": "SM-SUNCUBE-150-140X115",
+    "verkoop_incl": 1670,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 140x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 140×135 cm",
+    "sku": "SM-SUNCUBE-150-140X135",
+    "verkoop_incl": 1707,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 140x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 160×95 cm",
+    "sku": "SM-SUNCUBE-150-160X95",
+    "verkoop_incl": 1651,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 160x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 160×115 cm",
+    "sku": "SM-SUNCUBE-150-160X115",
+    "verkoop_incl": 1718,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 160x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 160×135 cm",
+    "sku": "SM-SUNCUBE-150-160X135",
+    "verkoop_incl": 1746,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 160x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 180×95 cm",
+    "sku": "SM-SUNCUBE-150-180X95",
+    "verkoop_incl": 1697,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 180x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 180×115 cm",
+    "sku": "SM-SUNCUBE-150-180X115",
+    "verkoop_incl": 1760,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 180x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 180×135 cm",
+    "sku": "SM-SUNCUBE-150-180X135",
+    "verkoop_incl": 1793,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 180x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 200×95 cm",
+    "sku": "SM-SUNCUBE-150-200X95",
+    "verkoop_incl": 1739,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 200x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 200×115 cm",
+    "sku": "SM-SUNCUBE-150-200X115",
+    "verkoop_incl": 1801,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 200x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 200×135 cm",
+    "sku": "SM-SUNCUBE-150-200X135",
+    "verkoop_incl": 1839,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 200x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 220×95 cm",
+    "sku": "SM-SUNCUBE-150-220X95",
+    "verkoop_incl": 1769,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 220x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 220×115 cm",
+    "sku": "SM-SUNCUBE-150-220X115",
+    "verkoop_incl": 1845,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 220x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 220×135 cm",
+    "sku": "SM-SUNCUBE-150-220X135",
+    "verkoop_incl": 1877,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 220x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 240×95 cm",
+    "sku": "SM-SUNCUBE-150-240X95",
+    "verkoop_incl": 1866,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 240x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 240×115 cm",
+    "sku": "SM-SUNCUBE-150-240X115",
+    "verkoop_incl": 1937,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 240x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 240×135 cm",
+    "sku": "SM-SUNCUBE-150-240X135",
+    "verkoop_incl": 1989,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 240x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 260×95 cm",
+    "sku": "SM-SUNCUBE-150-260X95",
+    "verkoop_incl": 1895,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 260x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 260×115 cm",
+    "sku": "SM-SUNCUBE-150-260X115",
+    "verkoop_incl": 1983,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 260x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 260×135 cm",
+    "sku": "SM-SUNCUBE-150-260X135",
+    "verkoop_incl": 2025,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 260x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 280×95 cm",
+    "sku": "SM-SUNCUBE-150-280X95",
+    "verkoop_incl": 1946,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 280x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 280×115 cm",
+    "sku": "SM-SUNCUBE-150-280X115",
+    "verkoop_incl": 2026,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 280x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 280×135 cm",
+    "sku": "SM-SUNCUBE-150-280X135",
+    "verkoop_incl": 2068,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 280x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 300×95 cm",
+    "sku": "SM-SUNCUBE-150-300X95",
+    "verkoop_incl": 1978,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 300x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 300×115 cm",
+    "sku": "SM-SUNCUBE-150-300X115",
+    "verkoop_incl": 2070,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 300x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 300×135 cm",
+    "sku": "SM-SUNCUBE-150-300X135",
+    "verkoop_incl": 2120,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 300x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 320×95 cm",
+    "sku": "SM-SUNCUBE-150-320X95",
+    "verkoop_incl": 2017,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 320x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 320×115 cm",
+    "sku": "SM-SUNCUBE-150-320X115",
+    "verkoop_incl": 2108,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 320x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 320×135 cm",
+    "sku": "SM-SUNCUBE-150-320X135",
+    "verkoop_incl": 2158,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 320x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 340×95 cm",
+    "sku": "SM-SUNCUBE-150-340X95",
+    "verkoop_incl": 2057,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 340x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 340×115 cm",
+    "sku": "SM-SUNCUBE-150-340X115",
+    "verkoop_incl": 2149,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 340x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 340×135 cm",
+    "sku": "SM-SUNCUBE-150-340X135",
+    "verkoop_incl": 2207,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 340x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 360×95 cm",
+    "sku": "SM-SUNCUBE-150-360X95",
+    "verkoop_incl": 2135,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 360x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 360×115 cm",
+    "sku": "SM-SUNCUBE-150-360X115",
+    "verkoop_incl": 2257,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 360x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 360×135 cm",
+    "sku": "SM-SUNCUBE-150-360X135",
+    "verkoop_incl": 2304,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 360x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 380×95 cm",
+    "sku": "SM-SUNCUBE-150-380X95",
+    "verkoop_incl": 2179,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 380x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 380×115 cm",
+    "sku": "SM-SUNCUBE-150-380X115",
+    "verkoop_incl": 2301,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 380x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 380×135 cm",
+    "sku": "SM-SUNCUBE-150-380X135",
+    "verkoop_incl": 2351,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 380x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 400×95 cm",
+    "sku": "SM-SUNCUBE-150-400X95",
+    "verkoop_incl": 2214,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 400x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 400×115 cm",
+    "sku": "SM-SUNCUBE-150-400X115",
+    "verkoop_incl": 2344,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 400x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 400×135 cm",
+    "sku": "SM-SUNCUBE-150-400X135",
+    "verkoop_incl": 2395,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 400x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 420×95 cm",
+    "sku": "SM-SUNCUBE-150-420X95",
+    "verkoop_incl": 2255,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 420x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 420×115 cm",
+    "sku": "SM-SUNCUBE-150-420X115",
+    "verkoop_incl": 2386,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 420x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 420×135 cm",
+    "sku": "SM-SUNCUBE-150-420X135",
+    "verkoop_incl": 2442,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 420x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 440×95 cm",
+    "sku": "SM-SUNCUBE-150-440X95",
+    "verkoop_incl": 2299,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 440x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 440×115 cm",
+    "sku": "SM-SUNCUBE-150-440X115",
+    "verkoop_incl": 2433,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 440x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 440×135 cm",
+    "sku": "SM-SUNCUBE-150-440X135",
+    "verkoop_incl": 2488,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 440x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 460×95 cm",
+    "sku": "SM-SUNCUBE-150-460X95",
+    "verkoop_incl": 2335,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 460x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 460×115 cm",
+    "sku": "SM-SUNCUBE-150-460X115",
+    "verkoop_incl": 2477,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 460x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 460×135 cm",
+    "sku": "SM-SUNCUBE-150-460X135",
+    "verkoop_incl": 2532,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 460x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 480×95 cm",
+    "sku": "SM-SUNCUBE-150-480X95",
+    "verkoop_incl": 2642,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 480x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 480×115 cm",
+    "sku": "SM-SUNCUBE-150-480X115",
+    "verkoop_incl": 2770,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 480x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 480×135 cm",
+    "sku": "SM-SUNCUBE-150-480X135",
+    "verkoop_incl": 2845,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 480x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 500×95 cm",
+    "sku": "SM-SUNCUBE-150-500X95",
+    "verkoop_incl": 2693,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 500x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 500×115 cm",
+    "sku": "SM-SUNCUBE-150-500X115",
+    "verkoop_incl": 2822,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 500x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 500×135 cm",
+    "sku": "SM-SUNCUBE-150-500X135",
+    "verkoop_incl": 2897,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 500x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 520×95 cm",
+    "sku": "SM-SUNCUBE-150-520X95",
+    "verkoop_incl": 2744,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 520x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 520×115 cm",
+    "sku": "SM-SUNCUBE-150-520X115",
+    "verkoop_incl": 2875,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 520x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 520×135 cm",
+    "sku": "SM-SUNCUBE-150-520X135",
+    "verkoop_incl": 2950,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 520x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 540×95 cm",
+    "sku": "SM-SUNCUBE-150-540X95",
+    "verkoop_incl": 2784,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 540x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 540×115 cm",
+    "sku": "SM-SUNCUBE-150-540X115",
+    "verkoop_incl": 2926,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 540x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 540×135 cm",
+    "sku": "SM-SUNCUBE-150-540X135",
+    "verkoop_incl": 3007,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 540x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 560×95 cm",
+    "sku": "SM-SUNCUBE-150-560X95",
+    "verkoop_incl": 2835,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 560x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 560×115 cm",
+    "sku": "SM-SUNCUBE-150-560X115",
+    "verkoop_incl": 2978,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 560x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 560×135 cm",
+    "sku": "SM-SUNCUBE-150-560X135",
+    "verkoop_incl": 3056,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 560x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 580×95 cm",
+    "sku": "SM-SUNCUBE-150-580X95",
+    "verkoop_incl": 2882,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 580x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 580×115 cm",
+    "sku": "SM-SUNCUBE-150-580X115",
+    "verkoop_incl": 3027,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 580x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 580×135 cm",
+    "sku": "SM-SUNCUBE-150-580X135",
+    "verkoop_incl": 3109,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 580x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 600×95 cm",
+    "sku": "SM-SUNCUBE-150-600X95",
+    "verkoop_incl": 2971,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 600x95 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 600×115 cm",
+    "sku": "SM-SUNCUBE-150-600X115",
+    "verkoop_incl": 3135,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 600x115 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunCube 150 uitvalscherm 600×135 cm",
+    "sku": "SM-SUNCUBE-150-600X135",
+    "verkoop_incl": 3212,
+    "omschrijving": "SunCube 150 uitvalscherm, breedte×uitval 600x135 cm, incl. Sunilus io motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 80×95 cm",
+    "sku": "SM-SUNPROJECT-100-80X95",
+    "verkoop_incl": 1018,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 80x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 80×115 cm",
+    "sku": "SM-SUNPROJECT-100-80X115",
+    "verkoop_incl": 1052,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 80x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 100×95 cm",
+    "sku": "SM-SUNPROJECT-100-100X95",
+    "verkoop_incl": 1063,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 100x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 100×115 cm",
+    "sku": "SM-SUNPROJECT-100-100X115",
+    "verkoop_incl": 1092,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 100x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 120×95 cm",
+    "sku": "SM-SUNPROJECT-100-120X95",
+    "verkoop_incl": 1138,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 120x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 120×115 cm",
+    "sku": "SM-SUNPROJECT-100-120X115",
+    "verkoop_incl": 1190,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 120x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 140×95 cm",
+    "sku": "SM-SUNPROJECT-100-140X95",
+    "verkoop_incl": 1180,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 140x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 140×115 cm",
+    "sku": "SM-SUNPROJECT-100-140X115",
+    "verkoop_incl": 1239,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 140x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 160×95 cm",
+    "sku": "SM-SUNPROJECT-100-160X95",
+    "verkoop_incl": 1223,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 160x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 160×115 cm",
+    "sku": "SM-SUNPROJECT-100-160X115",
+    "verkoop_incl": 1276,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 160x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 180×95 cm",
+    "sku": "SM-SUNPROJECT-100-180X95",
+    "verkoop_incl": 1258,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 180x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 180×115 cm",
+    "sku": "SM-SUNPROJECT-100-180X115",
+    "verkoop_incl": 1324,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 180x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 200×95 cm",
+    "sku": "SM-SUNPROJECT-100-200X95",
+    "verkoop_incl": 1305,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 200x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 200×115 cm",
+    "sku": "SM-SUNPROJECT-100-200X115",
+    "verkoop_incl": 1363,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 200x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 220×95 cm",
+    "sku": "SM-SUNPROJECT-100-220X95",
+    "verkoop_incl": 1341,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 220x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 220×115 cm",
+    "sku": "SM-SUNPROJECT-100-220X115",
+    "verkoop_incl": 1407,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 220x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 240×95 cm",
+    "sku": "SM-SUNPROJECT-100-240X95",
+    "verkoop_incl": 1425,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 240x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 240×115 cm",
+    "sku": "SM-SUNPROJECT-100-240X115",
+    "verkoop_incl": 1496,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 240x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 260×95 cm",
+    "sku": "SM-SUNPROJECT-100-260X95",
+    "verkoop_incl": 1466,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 260x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 260×115 cm",
+    "sku": "SM-SUNPROJECT-100-260X115",
+    "verkoop_incl": 1535,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 260x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 280×95 cm",
+    "sku": "SM-SUNPROJECT-100-280X95",
+    "verkoop_incl": 1507,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 280x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 280×115 cm",
+    "sku": "SM-SUNPROJECT-100-280X115",
+    "verkoop_incl": 1583,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 280x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 300×95 cm",
+    "sku": "SM-SUNPROJECT-100-300X95",
+    "verkoop_incl": 1548,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 300x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 300×115 cm",
+    "sku": "SM-SUNPROJECT-100-300X115",
+    "verkoop_incl": 1626,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 300x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 320×95 cm",
+    "sku": "SM-SUNPROJECT-100-320X95",
+    "verkoop_incl": 1583,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 320x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 320×115 cm",
+    "sku": "SM-SUNPROJECT-100-320X115",
+    "verkoop_incl": 1668,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 320x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 340×95 cm",
+    "sku": "SM-SUNPROJECT-100-340X95",
+    "verkoop_incl": 1624,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 340x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 340×115 cm",
+    "sku": "SM-SUNPROJECT-100-340X115",
+    "verkoop_incl": 1711,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 340x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 360×95 cm",
+    "sku": "SM-SUNPROJECT-100-360X95",
+    "verkoop_incl": 1703,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 360x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 360×115 cm",
+    "sku": "SM-SUNPROJECT-100-360X115",
+    "verkoop_incl": 1817,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 360x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 380×95 cm",
+    "sku": "SM-SUNPROJECT-100-380X95",
+    "verkoop_incl": 1738,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 380x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 380×115 cm",
+    "sku": "SM-SUNPROJECT-100-380X115",
+    "verkoop_incl": 1852,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 380x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 400×95 cm",
+    "sku": "SM-SUNPROJECT-100-400X95",
+    "verkoop_incl": 1779,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 400x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 400×115 cm",
+    "sku": "SM-SUNPROJECT-100-400X115",
+    "verkoop_incl": 1899,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 400x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 420×95 cm",
+    "sku": "SM-SUNPROJECT-100-420X95",
+    "verkoop_incl": 1817,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 420x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 420×115 cm",
+    "sku": "SM-SUNPROJECT-100-420X115",
+    "verkoop_incl": 1947,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 420x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 440×95 cm",
+    "sku": "SM-SUNPROJECT-100-440X95",
+    "verkoop_incl": 1858,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 440x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 440×115 cm",
+    "sku": "SM-SUNPROJECT-100-440X115",
+    "verkoop_incl": 1983,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 440x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 460×95 cm",
+    "sku": "SM-SUNPROJECT-100-460X95",
+    "verkoop_incl": 1904,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 460x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 460×115 cm",
+    "sku": "SM-SUNPROJECT-100-460X115",
+    "verkoop_incl": 2032,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 460x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 500×95 cm",
+    "sku": "SM-SUNPROJECT-100-500X95",
+    "verkoop_incl": 2527,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 500x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 500×115 cm",
+    "sku": "SM-SUNPROJECT-100-500X115",
+    "verkoop_incl": 2674,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 500x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 550×95 cm",
+    "sku": "SM-SUNPROJECT-100-550X95",
+    "verkoop_incl": 2654,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 550x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 550×115 cm",
+    "sku": "SM-SUNPROJECT-100-550X115",
+    "verkoop_incl": 2819,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 550x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 600×95 cm",
+    "sku": "SM-SUNPROJECT-100-600X95",
+    "verkoop_incl": 2782,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 600x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 600×115 cm",
+    "sku": "SM-SUNPROJECT-100-600X115",
+    "verkoop_incl": 2966,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 600x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 650×95 cm",
+    "sku": "SM-SUNPROJECT-100-650X95",
+    "verkoop_incl": 2912,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 650x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 650×115 cm",
+    "sku": "SM-SUNPROJECT-100-650X115",
+    "verkoop_incl": 3105,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 650x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 700×95 cm",
+    "sku": "SM-SUNPROJECT-100-700X95",
+    "verkoop_incl": 3003,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 700x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 700×115 cm",
+    "sku": "SM-SUNPROJECT-100-700X115",
+    "verkoop_incl": 3200,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 700x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 750×95 cm",
+    "sku": "SM-SUNPROJECT-100-750X95",
+    "verkoop_incl": 3177,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 750x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 750×115 cm",
+    "sku": "SM-SUNPROJECT-100-750X115",
+    "verkoop_incl": 3405,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 750x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 800×95 cm",
+    "sku": "SM-SUNPROJECT-100-800X95",
+    "verkoop_incl": 3266,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 800x95 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "SunProject 100 uitvalscherm 800×115 cm",
+    "sku": "SM-SUNPROJECT-100-800X115",
+    "verkoop_incl": 3499,
+    "omschrijving": "SunProject 100 uitvalscherm, breedte×uitval 800x115 cm, incl. Somfy LT motor"
+   },
+   {
+    "naam": "Meerprijs bediening — handbediend (uitvalscherm)",
+    "sku": "BED-UITVALSCHERM-HANDBEDIEND",
+    "verkoop_incl": -299,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   },
+   {
+    "naam": "Meerprijs bediening — motor afstandsbediening (uitvalscherm)",
+    "sku": "BED-UITVALSCHERM-MOTOR-AFSTANDSBEDIENING",
+    "verkoop_incl": 135,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   },
+   {
+    "naam": "Meerprijs bediening — solar (uitvalscherm)",
+    "sku": "BED-UITVALSCHERM-SOLAR",
+    "verkoop_incl": 159,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   }
+  ],
+  "Serre zonwering": [
+   {
+    "naam": "SunControl 150 onderliggend 450×350 cm",
+    "sku": "SM-SUNCONTROL-150-450X350",
+    "verkoop_incl": 4249,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 450x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 500×450 cm",
+    "sku": "SM-SUNCONTROL-150-500X450",
+    "verkoop_incl": 5083,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 500x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 550×400 cm",
+    "sku": "SM-SUNCONTROL-150-550X400",
+    "verkoop_incl": 5022,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 550x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 550×300 cm",
+    "sku": "SM-SUNCONTROL-150-550X300",
+    "verkoop_incl": 4402,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 550x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 550×450 cm",
+    "sku": "SM-SUNCONTROL-150-550X450",
+    "verkoop_incl": 5365,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 550x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 550×250 cm",
+    "sku": "SM-SUNCONTROL-150-550X250",
+    "verkoop_incl": 4223,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 550x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 350×250 cm",
+    "sku": "SM-SUNCONTROL-150-350X250",
+    "verkoop_incl": 3550,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 350x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 500×250 cm",
+    "sku": "SM-SUNCONTROL-150-500X250",
+    "verkoop_incl": 4018,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 500x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 400×250 cm",
+    "sku": "SM-SUNCONTROL-150-400X250",
+    "verkoop_incl": 3697,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 400x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 300×350 cm",
+    "sku": "SM-SUNCONTROL-150-300X350",
+    "verkoop_incl": 3632,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 300x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 600×450 cm",
+    "sku": "SM-SUNCONTROL-150-600X450",
+    "verkoop_incl": 5669,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 600x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 600×250 cm",
+    "sku": "SM-SUNCONTROL-150-600X250",
+    "verkoop_incl": 4428,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 600x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 550×350 cm",
+    "sku": "SM-SUNCONTROL-150-550X350",
+    "verkoop_incl": 4785,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 550x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 600×350 cm",
+    "sku": "SM-SUNCONTROL-150-600X350",
+    "verkoop_incl": 5060,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 600x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 300×400 cm",
+    "sku": "SM-SUNCONTROL-150-300X400",
+    "verkoop_incl": 3750,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 300x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 600×400 cm",
+    "sku": "SM-SUNCONTROL-150-600X400",
+    "verkoop_incl": 5302,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 600x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 500×300 cm",
+    "sku": "SM-SUNCONTROL-150-500X300",
+    "verkoop_incl": 4169,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 500x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 400×450 cm",
+    "sku": "SM-SUNCONTROL-150-400X450",
+    "verkoop_incl": 4424,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 400x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 450×400 cm",
+    "sku": "SM-SUNCONTROL-150-450X400",
+    "verkoop_incl": 4423,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 450x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 450×250 cm",
+    "sku": "SM-SUNCONTROL-150-450X250",
+    "verkoop_incl": 3857,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 450x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 350×350 cm",
+    "sku": "SM-SUNCONTROL-150-350X350",
+    "verkoop_incl": 3812,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 350x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 400×300 cm",
+    "sku": "SM-SUNCONTROL-150-400X300",
+    "verkoop_incl": 3874,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 400x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 450×300 cm",
+    "sku": "SM-SUNCONTROL-150-450X300",
+    "verkoop_incl": 4022,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 450x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 500×400 cm",
+    "sku": "SM-SUNCONTROL-150-500X400",
+    "verkoop_incl": 4741,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 500x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 450×450 cm",
+    "sku": "SM-SUNCONTROL-150-450X450",
+    "verkoop_incl": 4742,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 450x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 300×450 cm",
+    "sku": "SM-SUNCONTROL-150-300X450",
+    "verkoop_incl": 4045,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 300x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 300×300 cm",
+    "sku": "SM-SUNCONTROL-150-300X300",
+    "verkoop_incl": 3572,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 300x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 500×350 cm",
+    "sku": "SM-SUNCONTROL-150-500X350",
+    "verkoop_incl": 4508,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 500x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 400×350 cm",
+    "sku": "SM-SUNCONTROL-150-400X350",
+    "verkoop_incl": 3989,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 400x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 350×400 cm",
+    "sku": "SM-SUNCONTROL-150-350X400",
+    "verkoop_incl": 3929,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 350x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 600×300 cm",
+    "sku": "SM-SUNCONTROL-150-600X300",
+    "verkoop_incl": 4634,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 600x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 350×450 cm",
+    "sku": "SM-SUNCONTROL-150-350X450",
+    "verkoop_incl": 4222,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 350x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 350×300 cm",
+    "sku": "SM-SUNCONTROL-150-350X300",
+    "verkoop_incl": 3722,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 350x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 300×250 cm",
+    "sku": "SM-SUNCONTROL-150-300X250",
+    "verkoop_incl": 3402,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 300x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 150 onderliggend 400×400 cm",
+    "sku": "SM-SUNCONTROL-150-400X400",
+    "verkoop_incl": 4106,
+    "omschrijving": "SunControl 150 onderliggend, breedte×uitval 400x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 500×300 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-500X300",
+    "verkoop_incl": 4798,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 500x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 550×450 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-550X450",
+    "verkoop_incl": 5559,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 550x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 600×300 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-600X300",
+    "verkoop_incl": 5070,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 600x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 400×250 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-400X250",
+    "verkoop_incl": 4080,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 400x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 350×350 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-350X350",
+    "verkoop_incl": 4290,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 350x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 550×350 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-550X350",
+    "verkoop_incl": 5081,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 550x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 450×250 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-450X250",
+    "verkoop_incl": 4298,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 450x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 400×400 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-400X400",
+    "verkoop_incl": 4737,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 400x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 450×400 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-450X400",
+    "verkoop_incl": 4948,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 450x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 500×400 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-500X400",
+    "verkoop_incl": 5236,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 500x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 350×300 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-350X300",
+    "verkoop_incl": 4070,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 350x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 500×450 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-500X450",
+    "verkoop_incl": 5411,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 500x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 600×450 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-600X450",
+    "verkoop_incl": 5779,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 600x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 350×450 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-350X450",
+    "verkoop_incl": 4730,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 350x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 450×300 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-450X300",
+    "verkoop_incl": 4519,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 450x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 600×400 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-600X400",
+    "verkoop_incl": 5513,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 600x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 300×450 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-300X450",
+    "verkoop_incl": 4398,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 300x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 300×350 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-300X350",
+    "verkoop_incl": 4050,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 300x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 450×350 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-450X350",
+    "verkoop_incl": 4758,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 450x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 350×250 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-350X250",
+    "verkoop_incl": 3850,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 350x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 550×250 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-550X250",
+    "verkoop_incl": 4728,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 550x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 500×350 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-500X350",
+    "verkoop_incl": 5008,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 500x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 300×300 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-300X300",
+    "verkoop_incl": 3955,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 300x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 550×300 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-550X300",
+    "verkoop_incl": 4853,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 550x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 400×300 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-400X300",
+    "verkoop_incl": 4293,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 400x300 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 500×250 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-500X250",
+    "verkoop_incl": 4600,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 500x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 350×400 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-350X400",
+    "verkoop_incl": 4510,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 350x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 400×350 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-400X350",
+    "verkoop_incl": 4516,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 400x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 300×250 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-300X250",
+    "verkoop_incl": 3765,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 300x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 600×350 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-600X350",
+    "verkoop_incl": 5300,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 600x350 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 600×250 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-600X250",
+    "verkoop_incl": 4915,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 600x250 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 550×400 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-550X400",
+    "verkoop_incl": 5311,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 550x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 400×450 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-400X450",
+    "verkoop_incl": 4960,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 400x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 450×450 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-450X450",
+    "verkoop_incl": 5060,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 450x450 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "SunControl 165 ZIP onderliggend 300×400 cm",
+    "sku": "SM-SUNCONTROL-165-ONDERDAK-300X400",
+    "verkoop_incl": 4284,
+    "omschrijving": "SunControl 165 ZIP onderliggend, breedte×uitval 300x400 cm, incl. Sunea io motor"
+   },
+   {
+    "naam": "Meerprijs bediening — draaischakelaar (verandazonwering)",
+    "sku": "BED-VERANDAZONWERING-DRAAISCHAKELAAR",
+    "verkoop_incl": -50,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   },
+   {
+    "naam": "Meerprijs bediening — motor afstandsbediening (verandazonwering)",
+    "sku": "BED-VERANDAZONWERING-MOTOR-AFSTANDSBEDIENING",
+    "verkoop_incl": 75,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   }
+  ],
+  "Pergola": [
+   {
+    "naam": "SunControl 165 ZIP pergola 350×250 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-350X250",
+    "verkoop_incl": 6312,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 350x250 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 550×250 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-550X250",
+    "verkoop_incl": 7703,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 550x250 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 550×450 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-550X450",
+    "verkoop_incl": 8667,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 550x450 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 300×300 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-300X300",
+    "verkoop_incl": 6285,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 300x300 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 600×400 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-600X400",
+    "verkoop_incl": 8740,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 600x400 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 400×250 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-400X250",
+    "verkoop_incl": 6667,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 400x250 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 400×350 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-400X350",
+    "verkoop_incl": 7095,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 400x350 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 350×350 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-350X350",
+    "verkoop_incl": 6686,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 350x350 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 400×400 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-400X400",
+    "verkoop_incl": 7311,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 400x400 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 450×400 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-450X400",
+    "verkoop_incl": 7522,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 450x400 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 300×250 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-300X250",
+    "verkoop_incl": 6096,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 300x250 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 550×400 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-550X400",
+    "verkoop_incl": 8424,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 550x400 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 600×350 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-600X350",
+    "verkoop_incl": 8496,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 600x350 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 350×300 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-350X300",
+    "verkoop_incl": 6500,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 350x300 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 600×250 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-600X250",
+    "verkoop_incl": 8021,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 600x250 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 350×400 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-350X400",
+    "verkoop_incl": 6881,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 350x400 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 500×450 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-500X450",
+    "verkoop_incl": 8193,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 500x450 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 450×250 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-450X250",
+    "verkoop_incl": 6881,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 450x250 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 400×450 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-400X450",
+    "verkoop_incl": 7522,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 400x450 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 450×450 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-450X450",
+    "verkoop_incl": 7730,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 450x450 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 600×300 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-600X300",
+    "verkoop_incl": 8270,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 600x300 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 500×350 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-500X350",
+    "verkoop_incl": 7720,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 500x350 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 500×250 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-500X250",
+    "verkoop_incl": 7245,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 500x250 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 300×350 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-300X350",
+    "verkoop_incl": 6476,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 300x350 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 450×350 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-450X350",
+    "verkoop_incl": 7307,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 450x350 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 550×350 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-550X350",
+    "verkoop_incl": 8186,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 550x350 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 450×300 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-450X300",
+    "verkoop_incl": 7095,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 450x300 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 400×300 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-400X300",
+    "verkoop_incl": 6884,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 400x300 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 500×300 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-500X300",
+    "verkoop_incl": 7480,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 500x300 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 300×450 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-300X450",
+    "verkoop_incl": 6853,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 300x450 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 600×450 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-600X450",
+    "verkoop_incl": 8979,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 600x450 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 550×300 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-550X300",
+    "verkoop_incl": 7940,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 550x300 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 350×450 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-350X450",
+    "verkoop_incl": 7071,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 350x450 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 500×400 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-500X400",
+    "verkoop_incl": 7955,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 500x400 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "SunControl 165 ZIP pergola 300×400 cm",
+    "sku": "SM-SUNCONTROL-165-PERGOLA-300X400",
+    "verkoop_incl": 6661,
+    "omschrijving": "SunControl 165 ZIP pergola, breedte×uitval 300x400 cm, incl. Sunea io motor (excl. zender)"
+   },
+   {
+    "naam": "Meerprijs bediening — draaischakelaar (pergola)",
+    "sku": "BED-PERGOLA-DRAAISCHAKELAAR",
+    "verkoop_incl": -50,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   },
+   {
+    "naam": "Meerprijs bediening — motor afstandsbediening (pergola)",
+    "sku": "BED-PERGOLA-MOTOR-AFSTANDSBEDIENING",
+    "verkoop_incl": 75,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   }
+  ],
+  "Markiezen": [
+   {
+    "naam": "Markies 150×80 cm",
+    "sku": "SM-MARKIES-150X80",
+    "verkoop_incl": 660,
+    "omschrijving": "Markies, breedte×hoogte 150x80 cm, incl. standaard bediening"
+   },
+   {
+    "naam": "Markies 200×100 cm",
+    "sku": "SM-MARKIES-200X100",
+    "verkoop_incl": 825,
+    "omschrijving": "Markies, breedte×hoogte 200x100 cm, incl. standaard bediening"
+   },
+   {
+    "naam": "Markies 300×135 cm",
+    "sku": "SM-MARKIES-300X135",
+    "verkoop_incl": 1100,
+    "omschrijving": "Markies, breedte×hoogte 300x135 cm, incl. standaard bediening"
+   },
+   {
+    "naam": "Meerprijs bediening — motor afstandsbediening (markies)",
+    "sku": "BED-MARKIES-MOTOR-AFSTANDSBEDIENING",
+    "verkoop_incl": 75,
+    "omschrijving": "Meer-/minderprijs t.o.v. standaard motorbediening"
+   }
+  ],
+  "Montage": [
+   {
+    "naam": "Montage — Knikarmscherm standaard",
+    "sku": "MONT-KNIKARMSCHERM-STANDAARD",
+    "verkoop_incl": 275,
+    "omschrijving": "Montage door Sonty monteurs"
+   },
+   {
+    "naam": "Montage — Knikarmscherm uitgebreid",
+    "sku": "MONT-KNIKARMSCHERM-UITGEBREID",
+    "verkoop_incl": 325,
+    "omschrijving": "Montage door Sonty monteurs"
+   },
+   {
+    "naam": "Montage — Screen solar",
+    "sku": "MONT-SCREEN-SOLAR",
+    "verkoop_incl": 175,
+    "omschrijving": "Montage door Sonty monteurs"
+   },
+   {
+    "naam": "Montage — Screen bedraad",
+    "sku": "MONT-SCREEN-BEDRAAD",
+    "verkoop_incl": 195,
+    "omschrijving": "Montage door Sonty monteurs"
+   },
+   {
+    "naam": "Montage — Rolluik solar",
+    "sku": "MONT-ROLLUIK-SOLAR",
+    "verkoop_incl": 175,
+    "omschrijving": "Montage door Sonty monteurs"
+   },
+   {
+    "naam": "Montage — Rolluik bedraad",
+    "sku": "MONT-ROLLUIK-BEDRAAD",
+    "verkoop_incl": 195,
+    "omschrijving": "Montage door Sonty monteurs"
+   },
+   {
+    "naam": "Montage — Serre suncontrol",
+    "sku": "MONT-SERRE-SUNCONTROL",
+    "verkoop_incl": 350,
+    "omschrijving": "Montage door Sonty monteurs"
+   },
+   {
+    "naam": "Montage — Pergola",
+    "sku": "MONT-PERGOLA",
+    "verkoop_incl": 650,
+    "omschrijving": "Montage door Sonty monteurs"
+   },
+   {
+    "naam": "Montage — Uitvalscherm",
+    "sku": "MONT-UITVALSCHERM",
+    "verkoop_incl": 195,
+    "omschrijving": "Montage door Sonty monteurs"
+   },
+   {
+    "naam": "Montage — Markies",
+    "sku": "MONT-MARKIES",
+    "verkoop_incl": 195,
+    "omschrijving": "Montage door Sonty monteurs"
+   }
+  ],
+  "Accessoires": [
+   {
+    "naam": "Tahoma app bediening",
+    "sku": "ACC-TAHOMA-APP-BEDIENING",
+    "verkoop_incl": 195,
+    "omschrijving": ""
+   },
+   {
+    "naam": "Windsensor eolis 3d",
+    "sku": "ACC-WINDSENSOR-EOLIS-3D",
+    "verkoop_incl": 169,
+    "omschrijving": ""
+   },
+   {
+    "naam": "Somfy situo handzender",
+    "sku": "ACC-SOMFY-SITUO-HANDZENDER",
+    "verkoop_incl": 84,
+    "omschrijving": ""
+   },
+   {
+    "naam": "Somfy situo 5ch",
+    "sku": "ACC-SOMFY-SITUO-5CH",
+    "verkoop_incl": 226,
+    "omschrijving": ""
+   },
+   {
+    "naam": "Sunfix draaistang",
+    "sku": "ACC-SUNFIX-DRAAISTANG",
+    "verkoop_incl": 75,
+    "omschrijving": ""
+   },
+   {
+    "naam": "Sunfix elektrisch",
+    "sku": "ACC-SUNFIX-ELEKTRISCH",
+    "verkoop_incl": 263,
+    "omschrijving": ""
+   },
+   {
+    "naam": "Meerprijs kleur — Trendkleur",
+    "sku": "KLEUR-TREND",
+    "verkoop_incl": 127,
+    "omschrijving": "Meerprijs t.o.v. standaardkleur"
+   },
+   {
+    "naam": "Meerprijs kleur — RAL kleur op maat",
+    "sku": "KLEUR-RAL",
+    "verkoop_incl": 252,
+    "omschrijving": "Meerprijs t.o.v. standaardkleur"
+   }
+  ]
+ }
+}

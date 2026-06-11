@@ -56,16 +56,47 @@ configurator
 - **Toppoint** (binnen): prijsdata al geparsed in `~/zonweringdirect/data/toppoint-parsed-prices.json` (24k prijspunten, 61 grids, 20 types). Rolgordijn, duo-plissé, jaloezie, vouwgordijn, etc.
 - Gripp-koppeling productnamen: `data/product-mapping-rp-gripp.json`; montagetijden: `data/product-tijden.json`.
 
-## Volgende stappen
+## Schrijf-API (bevestigd werkend, 2026-06-11)
 
-1. ⏳ Casper: Daimy toevoegen aan Sonty test profiel + schrijfrechten widget-service voor API-user
-2. Sunmaster modellen/maten/opties inventariseren vanaf dealerportaal
-3. Per productcategorie configurator bouwen op testprofiel (zelfde logica als bestaande, maar met prijsindicatie)
-4. Toppoint raamdecoratie-configurator toevoegen
-5. Review door Daimy via hub → daarna live profiel
+- **Create/update configurator**: `PUT /widget-service/{pid}/configurators?templateId=` met `{configurator: {...}}` → 201/200. Het hele model (steps, questions, relations, style, settings) gaat in één call. UUID's worden client-side gegenereerd. Update = zelfde call met `id` gezet.
+- **Delete**: `DELETE /widget-service/{pid}/configurators/{id}` → 200
+- De API-user mag dit gewoon (eerdere POST-test was het verkeerde werkwoord — het is PUT)
+- Condities in relations verwijzen naar `questionId` + `value` (= answer-UUID bij RADIO, getal bij NUMBER) → bij klonen ALLE id's globaal hermappen, behalve afbeelding-URL's
+- Contactvelden mappen via `technicalType`: FIRST_NAME, LAST_NAME, EMAIL, PHONE, adresvelden
 
-## Verkenningsscripts
+## Artikelen (inventory-service)
 
-- `scripts/explore-rp-configurator.js` — login + profielen + routes
-- `scripts/explore-rp-configurator2.js` — formulieren-sectie + API-call capture
-- `scripts/explore-rp-configurator3.js` — bestaande configurators read-only dumpen
+- `GET/POST /inventory-service/{pid}/articles`, `GET/POST /inventory-service/{pid}/categories`
+- Artikel-payload: `{article: {id, companyProfileId, name, sku, description, imageSrc, archived, categoryId, salesPrice: {isoCurrency, amount, inclusiveExclusive: "inclusive", vat}, purchasePrice}}`
+- ⚠️ API-user heeft hier GEEN rechten (alleen `/sync`) — sync loopt via Daimy's hub-sessie (Playwright). Aan Casper vragen: inventory-service rechten voor de API-user.
+- Hub UI: Artikelen-module met import/export-knoppen (handmatig prijsbeheer voor Daimy)
+
+## Gebouwd op Sonty test (2026-06-11)
+
+- **7 configurators** (gekloond van Sonty B.V., ID's hermapt, vraagvolgorde logisch gemaakt: maten → kleur → bediening): Knikarmschermen, Screens, Uitvalschermen, Pergola, Rolluiken, Serre zonwering, Markies. ID's in `data/rp-testprofiel-configurators.json`. Staan op `show: false` (nog niet live).
+- **381 artikelen in 9 categorieën** (Knikarmschermen 83, Uitvalschermen 129, Serre 72, Pergola 37, Rolluiken 20, Screens 18, Markiezen 4, Montage 10, Accessoires 8) — bron: Sunmaster Prijscatalogus 2026 + 10% markup.
+
+## Prijzen aanpassen (de "makkelijke functie")
+
+1. **Per categorie**: pas `marge_per_categorie` aan in `data/rp-prijzen.json` (bv. 1.05 = +5%) → `node scripts/sync-rp-artikelen.js`
+2. **Per artikel**: pas `verkoop_incl` aan in dezelfde file → zelfde sync
+3. **Handmatig**: hub → Artikelen → categorie openklikken, of via Exporteer/Importeer artikelen
+4. Bron-prijzen opnieuw genereren uit de Sunmaster-catalogus: `python3 scripts/genereer-rp-prijzen.py`
+
+## Scripts
+
+- `scripts/build-rp-testprofiel.js` — bouwt/updatet de 7 configurators op het testprofiel (idempotent)
+- `scripts/genereer-rp-prijzen.py` — genereert `data/rp-prijzen.json` uit de Sunmaster-catalogus
+- `scripts/sync-rp-artikelen.js` — synct prijzenfile → RP-artikelen (idempotent, ruimt testrommel op)
+- `scripts/dump-rp-configurators.js` — referentie-dump van Sonty B.V. configurators
+- `scripts/analyse-rp-configurators.py` — genereert `data/rp-configurator-voorbeelden/STRUCTUUR.md`
+- `scripts/explore-rp-configurator*.js`, `capture-rp-*.js` — verkenning/captures
+
+## Open punten
+
+1. ⏳ Casper: inventory-service rechten voor de API-user (nu via browsersessie)
+2. Prijsindicatie ín de widget: `priceCalculationType: LOGIC_SCORE` + `resultScore` bestaat maar de editor-UI voor scores is nog niet gevonden; huidige flow (prijsvoorstel via offerte-automation) werkt ook met artikelen
+3. Koppeling configurator-antwoorden → offerte met artikelen (automation in RP — uitzoeken hoe Casper dit voor Sonty B.V. heeft ingericht)
+4. Toppoint raamdecoratie-configurator (data ligt klaar in `~/zonweringdirect/data/toppoint-parsed-prices.json`)
+5. Eigen productfoto's uploaden (nu verwijzen afbeeldingen naar de oude Sonty B.V. uploads — werkt, maar niet zelf beheerd)
+6. Review door Daimy → daarna live profiel

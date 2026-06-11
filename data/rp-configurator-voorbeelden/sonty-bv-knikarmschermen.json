@@ -1,0 +1,2385 @@
+{
+  "status": 200,
+  "body": {
+    "message": "OK",
+    "configurator": {
+      "id": "e7308f69-6d57-4fc3-84d0-aa65bf2e2187",
+      "templateId": null,
+      "name": "Knikarmschermen",
+      "advancedSettings": {
+        "automation": true,
+        "showCloseButton": false,
+        "configuratorLanguage": null,
+        "showAnalytics": true,
+        "showCookieBanner": "NONE",
+        "formType": null,
+        "technicalName": null
+      },
+      "resultScore": null,
+      "priceCalculationType": null,
+      "steps": [
+        {
+          "id": "92f6ba88-5590-43b2-abac-830a867b2b9c",
+          "name": "Keuzemenu",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [
+              {
+                "index": 0,
+                "image": {
+                  "data": [
+                    {
+                      "id": "0d34ecb3-2b95-4553-84cc-e5aaa60b9149",
+                      "type": "ALL_TRUE",
+                      "conditions": [
+                        {
+                          "type": "QUESTION",
+                          "metaData": {
+                            "comparator": "EQUAL",
+                            "questionId": "e98bf5c3-0197-4b9b-b54d-0d53b38d8ef3",
+                            "answerId": "aaf614b9-a585-4de7-9909-48c25267d2b7"
+                          }
+                        }
+                      ],
+                      "url": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image3285424761727790069.png"
+                    },
+                    {
+                      "id": "1151f6e0-cb45-484b-9366-088df6d87706",
+                      "type": "ALL_TRUE",
+                      "conditions": [
+                        {
+                          "type": "QUESTION",
+                          "metaData": {
+                            "comparator": "EQUAL",
+                            "questionId": "e98bf5c3-0197-4b9b-b54d-0d53b38d8ef3",
+                            "answerId": "ca8b0432-53fa-468d-9ca5-245f9393cdeb"
+                          }
+                        }
+                      ],
+                      "url": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image4603462914950395288.png"
+                    },
+                    {
+                      "id": "e27e4807-b783-4aa1-af15-5f913c22e8e2",
+                      "type": "ALL_TRUE",
+                      "conditions": [
+                        {
+                          "type": "QUESTION",
+                          "metaData": {
+                            "comparator": "EQUAL",
+                            "questionId": "e98bf5c3-0197-4b9b-b54d-0d53b38d8ef3",
+                            "answerId": "aadb7c8b-0fb6-413b-a347-bfccb8aaa3a6"
+                          }
+                        }
+                      ],
+                      "url": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image12042088938982940225.png"
+                    },
+                    {
+                      "id": "e355c5f1-3078-45c4-a69d-4d6491779b24",
+                      "type": "ALL_TRUE",
+                      "conditions": [
+                        {
+                          "type": "QUESTION",
+                          "metaData": {
+                            "comparator": "EQUAL",
+                            "questionId": "e98bf5c3-0197-4b9b-b54d-0d53b38d8ef3",
+                            "answerId": "0672b9fc-2d8f-40b2-bee8-527a1c203a1a"
+                          }
+                        }
+                      ],
+                      "url": ""
+                    }
+                  ]
+                },
+                "format": "",
+                "link": null
+              }
+            ]
+          },
+          "position": 0,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "e98bf5c3-0197-4b9b-b54d-0d53b38d8ef3",
+              "name": "Kies je knikarmscherm",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "aaf614b9-a585-4de7-9909-48c25267d2b7",
+                    "text": "Sunbasic open cassette",
+                    "position": 0,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "ca8b0432-53fa-468d-9ca5-245f9393cdeb",
+                    "text": "Sunbasic dichte cassette",
+                    "position": 1,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "aadb7c8b-0fb6-413b-a347-bfccb8aaa3a6",
+                    "text": "Suneye Dichte Cassette",
+                    "position": 2,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "0672b9fc-2d8f-40b2-bee8-527a1c203a1a",
+                    "text": "Sunelite Dichte Cassette",
+                    "position": 3,
+                    "metaData": {}
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "18127444-076a-4949-85aa-564593e23b4c",
+          "name": "Sunbasic open cassette",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [],
+            "headingTitle": "Sunbasic open cassette",
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 1,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "99ade967-e17f-45de-8ed0-4b345f3ba2c0",
+              "name": "Kleur",
+              "conditionalName": null,
+              "description": "Wenst u uw knikarmscherm in een andere RAL-kleur? Ga dan terug naar het keuzemenu en selecteer de 'Suneye dichte cassette'.",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "3b67a01d-6969-43aa-8245-48797283c230",
+                    "text": "Cremewit",
+                    "position": 0,
+                    "metaData": {
+                      "description": "RAL 9001",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image13210662687111416794.png"
+                    }
+                  },
+                  {
+                    "id": "ffa7e757-6be7-4a10-8aaa-225faeaed0bc",
+                    "text": "Antraciet",
+                    "position": 1,
+                    "metaData": {
+                      "description": "RAL 7016 structuur",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image11925991730227085468.png"
+                    }
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "d5b3a7a4-c32c-4918-96ac-d026a003bea3",
+              "name": "Welk type bediening wil je?",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "8bc5f5a4-9cd6-48ba-b90e-68194757dc28",
+                    "text": "Handbediend",
+                    "position": 0,
+                    "metaData": {
+                      "description": "Slingerstang"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  },
+                  {
+                    "id": "541a6d9c-fe6c-4c69-8467-3fc38e72b70c",
+                    "text": "Somfy WT motor",
+                    "position": 1,
+                    "metaData": {
+                      "description": "Draaischakelaar"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  },
+                  {
+                    "id": "52b9588f-633a-4979-9669-a868f97a99a0",
+                    "text": "Somfy IO motor",
+                    "position": 2,
+                    "metaData": {
+                      "description": "Motor + afstandsbediening"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 1,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": [],
+              "conditionType": "AND",
+              "condition": {
+                "groupConditionType": null,
+                "logicType": "AND",
+                "type": "QUESTION",
+                "conditions": [],
+                "metaData": {},
+                "position": 0
+              },
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "45ceba7b-0a2d-43b3-9a49-3b4381829cf2",
+              "name": "Breedte",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "NUMBER",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "max": 5500,
+                "min": 2800,
+                "step": 1,
+                "placeholder": "0",
+                "marginTop": "DEFAULT"
+              },
+              "position": 2,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "16902758-8cdb-4ab9-b81f-666dcfb38472",
+          "name": "Sunbasic open cassette uitval (breedte >5500mm)",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [],
+            "headingTitle": "Sunbasic open cassette",
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 2,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "ccad6431-dd08-4c6d-aa54-a4465fa82732",
+              "name": "Uitval",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "bb320722-62fe-451d-94ef-ac95371757ac",
+                    "text": "2000 mm",
+                    "position": 0,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "2dd32cf5-abe3-431b-a5ae-bf92fd24e401",
+                    "text": "2500 mm",
+                    "position": 1,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "c7b48507-2b3b-44dd-a122-8351de60cb41",
+                    "text": "3000 mm",
+                    "position": 2,
+                    "metaData": {}
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "b90c9a5c-a4db-4f6d-bee8-481ecc2e38a4",
+          "name": "Sunbasic open cassette uitval (breedte <5500mm) 2",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [],
+            "headingTitle": "Sunbasic open cassette",
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 3,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "2258a566-b945-4595-bc0c-7bb6d6c70d85",
+              "name": "Uitval",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "402efdc6-bf64-4915-8fec-890cb6530f99",
+                    "text": "2000 mm",
+                    "position": 0,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "3d0f6ef4-77f6-4e8c-9a37-8821addeb46f",
+                    "text": "2500 mm",
+                    "position": 1,
+                    "metaData": {}
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "7a446528-3925-44fc-b645-bfad77e28286",
+          "name": "Sunbasic gesloten cassette",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [],
+            "headingTitle": "Sunbasic gesloten cassette",
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 4,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "6b5274a6-68f8-4767-8594-a1b64376fff7",
+              "name": "Kleur",
+              "conditionalName": null,
+              "description": "Wenst u uw knikarmscherm in een andere RAL-kleur? Ga dan terug naar het keuzemenu en selecteer de 'Suneye dichte cassette'.",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "c1143df1-d288-4025-a6d8-e1f05929ff2a",
+                    "text": "Cremewit",
+                    "position": 0,
+                    "metaData": {
+                      "description": "RAL 9001",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image13210662687111416794.png"
+                    }
+                  },
+                  {
+                    "id": "1e0c1063-2895-45e3-bace-da904d34d14f",
+                    "text": "Antraciet",
+                    "position": 1,
+                    "metaData": {
+                      "description": "RAL 7016 structuur",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image11925991730227085468.png"
+                    }
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "986af40a-27ee-4ce7-b0d9-ea470f1e9e65",
+              "name": "Welk type bediening wil je?",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "7fea17b8-7fd2-4cb8-a32e-32c3f77a6260",
+                    "text": "Somfy WT motor",
+                    "position": 0,
+                    "metaData": {
+                      "description": "Draaischakelaar"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  },
+                  {
+                    "id": "4364aa61-609c-4194-8400-eb7a85d562ec",
+                    "text": "Somfy IO motor",
+                    "position": 1,
+                    "metaData": {
+                      "description": "Motor + Afstandsbediening"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 1,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": [],
+              "conditionType": "AND",
+              "condition": {
+                "groupConditionType": null,
+                "logicType": "AND",
+                "type": "QUESTION",
+                "conditions": [],
+                "metaData": {},
+                "position": 0
+              },
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "9584ce0a-b795-4132-ad68-fc21a8a5a422",
+              "name": "Breedte",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "NUMBER",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "max": 5500,
+                "min": 2800,
+                "step": 1,
+                "placeholder": "0",
+                "marginTop": "DEFAULT"
+              },
+              "position": 2,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "17ea51bd-669b-4628-ad6b-e873360a5321",
+          "name": "Suneye dichte cassette",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [],
+            "headingTitle": "Suneye dichte cassette",
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 5,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "a1f825d0-ff88-4e15-95e3-73664902fd2e",
+              "name": "Kleur",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "82dc7c59-b44f-4259-a3a5-eaff4003b1ff",
+                    "text": "Gebroken wit",
+                    "position": 0,
+                    "metaData": {
+                      "description": "RAL 9010",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image7855729556123505589.png"
+                    }
+                  },
+                  {
+                    "id": "d4b12e2f-226c-4d38-bd55-108391c6a189",
+                    "text": "Cremewit",
+                    "position": 1,
+                    "metaData": {
+                      "description": "RAL 9001",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image13210662687111416794.png"
+                    }
+                  },
+                  {
+                    "id": "d4fef77c-1343-49f8-8fd0-66c40efdd971",
+                    "text": "Antraciet",
+                    "position": 2,
+                    "metaData": {
+                      "description": "RAL 7016 structuur",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image11925991730227085468.png"
+                    }
+                  },
+                  {
+                    "id": "cce11e14-e921-4a0d-b2e6-08a986bf29d8",
+                    "text": "Blank aluminium",
+                    "position": 3,
+                    "metaData": {
+                      "description": "RAL 9007",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image6829259573267159952.jpg"
+                    }
+                  },
+                  {
+                    "id": "dd2d5b40-f42a-4277-b493-2ceed57d611f",
+                    "text": "Andere RAL kleur",
+                    "position": 4,
+                    "metaData": {
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image17903475984899680196.png"
+                    }
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "147fd374-88a4-4986-8e60-bc8895b79312",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": null,
+              "required": false,
+              "metaData": {
+                "placeholder": "Namelijk...",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 1,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "9b66c650-50ff-4c77-ae0d-3b6d512a45ed",
+              "name": "Welk type bediening wil je?",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "2a805dff-9b6b-497f-8aa9-b9de785d65ca",
+                    "text": "Handbediend",
+                    "position": 0,
+                    "metaData": {
+                      "description": "Slingerstang"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  },
+                  {
+                    "id": "25ba40df-97b6-4d07-abe8-4ee2493d18dc",
+                    "text": "Somfy WT motor",
+                    "position": 1,
+                    "metaData": {
+                      "description": "Draaischakelaar"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  },
+                  {
+                    "id": "c384e1b2-3a78-4dd2-9e9a-0d2c73e7ebb4",
+                    "text": "Somfy IO motor",
+                    "position": 2,
+                    "metaData": {
+                      "description": "Motor + Afstandsbediening"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 2,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": [],
+              "conditionType": "AND",
+              "condition": {
+                "groupConditionType": null,
+                "logicType": "AND",
+                "type": "QUESTION",
+                "conditions": [],
+                "metaData": {},
+                "position": 0
+              },
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "8853c902-9c6b-421e-89a9-df31a5985d9c",
+              "name": "Breedte",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "NUMBER",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "max": 6000,
+                "min": 2250,
+                "step": 1,
+                "placeholder": "0",
+                "marginTop": "DEFAULT"
+              },
+              "position": 3,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "456d046b-bafe-4270-ba2c-9dcf98eb6fa5",
+          "name": "Suneye dichte cassette (alle uitvallen)",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [],
+            "headingTitle": "Suneye dichte cassette",
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 6,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "0bfc025d-7e79-4b2c-b6f5-6c2e6abd7813",
+              "name": "Uitval",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "9803c1e7-06d8-4ac1-9a2f-136f3f4701d2",
+                    "text": "1500 mm",
+                    "position": 0,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "c14815a8-0f12-422f-bfca-fc86d8624c51",
+                    "text": "2000 mm",
+                    "position": 1,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "92c70e2b-eeaf-4714-b296-205662558d97",
+                    "text": "2500 mm",
+                    "position": 2,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "9e1201db-b74b-42af-a52f-aa261ac12d75",
+                    "text": "3000 mm",
+                    "position": 3,
+                    "metaData": {}
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "5bfab9c9-e77c-4b35-a85b-0ab41f48f453",
+          "name": "Suneye dichte cassette (geen 300cm uitval)",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [],
+            "headingTitle": "Suneye dichte cassette",
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 7,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "ea9d622e-4807-4b20-9275-b39fb98aa109",
+              "name": "Uitval",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "4646aa27-5860-4d51-8c43-7a470507b2f8",
+                    "text": "1500 mm",
+                    "position": 0,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "9076dcd0-f5fc-43bf-909e-0a6dcfc58192",
+                    "text": "2000 mm",
+                    "position": 1,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "f7b3c54f-18f7-449d-90b4-7f3a9a0bbed8",
+                    "text": "2500 mm",
+                    "position": 2,
+                    "metaData": {}
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "315a2923-2eac-4070-b42c-d251805569ca",
+          "name": "Sunelite dichte cassette",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [],
+            "headingTitle": "Sunelite dichte cassette",
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 8,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "c1d5bd44-dec6-4a79-94d3-a43f11f282f0",
+              "name": "Kleur",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "aa5ff857-6d6e-4169-bc09-ae532e275a99",
+                    "text": "Gebroken wit",
+                    "position": 0,
+                    "metaData": {
+                      "description": "RAL 9010 mat",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image7855729556123505589.png"
+                    }
+                  },
+                  {
+                    "id": "6b9a7867-b8ab-4c00-b197-8ff843c75874",
+                    "text": "Antraciet",
+                    "position": 3,
+                    "metaData": {
+                      "description": "RAL 7016 structuur",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image11925991730227085468.png"
+                    }
+                  },
+                  {
+                    "id": "d0313a6d-831a-4a5e-918c-8539a8434ce3",
+                    "text": "Andere RAL kleur",
+                    "position": 4,
+                    "metaData": {
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image17903475984899680196.png"
+                    }
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "bff065a6-3528-4fae-80e8-15e791ed4fa6",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": null,
+              "required": false,
+              "metaData": {
+                "placeholder": "Namelijk...",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 1,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "eca13574-3d09-4a2f-956a-370d5c52f053",
+              "name": "Welk type bediening wil je?",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "0925ccaf-3add-4fc9-b4de-fb00ddd4c421",
+                    "text": "Somfy WT motor",
+                    "position": 0,
+                    "metaData": {
+                      "description": "Draaischakelaar"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  },
+                  {
+                    "id": "2c4843b6-681d-4c6f-8f80-f3774b07c7cf",
+                    "text": "Somfy IO motor",
+                    "position": 1,
+                    "metaData": {
+                      "description": "Motor + Afstandsbediening"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  },
+                  {
+                    "id": "e132e076-af72-4b7c-91ea-e1b444503db0",
+                    "text": "Somfy IO motor + ledverlichting",
+                    "position": 2,
+                    "metaData": {
+                      "description": "Motor + afstandsbediening + Dimbare ledverlichting"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 2,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": [],
+              "conditionType": "AND",
+              "condition": {
+                "groupConditionType": null,
+                "logicType": "AND",
+                "type": "QUESTION",
+                "conditions": [],
+                "metaData": {},
+                "position": 0
+              },
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "5c56af3d-0fcd-406d-bc50-e70798fcd3e3",
+              "name": "Breedte",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "NUMBER",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "max": 6000,
+                "min": 2450,
+                "step": 1,
+                "placeholder": "0",
+                "marginTop": "DEFAULT"
+              },
+              "position": 3,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "13c0a03b-a863-4552-a1ee-bf6d5255166b",
+          "name": "Sunelite dichte cassette (alle opties)",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [],
+            "headingTitle": "Sunelite dichte cassette",
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 9,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "9aeaa8a1-6829-49bc-8e89-169011960e1c",
+              "name": "Uitval",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "947977e4-bd93-4814-aba1-e431f8859722",
+                    "text": "2500 mm",
+                    "position": 0,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "99a5b8dd-efbf-440a-afc9-962b2d20ee75",
+                    "text": "3000 mm",
+                    "position": 1,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "436f57ad-de40-4c39-9321-ad703ee4f3b3",
+                    "text": "3500 mm",
+                    "position": 2,
+                    "metaData": {}
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "37168ab5-41e9-4cd9-b2fe-2365e14e6bab",
+          "name": "Sunelite dichte cassette (2 opties) ",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [],
+            "headingTitle": "Sunelite dichte cassette",
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 10,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "d3d94ae9-7fcb-4026-808e-b5e3c80bd915",
+              "name": "Uitval",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "da7c6c04-cf26-4634-b687-079e1df86bcc",
+                    "text": "2500 mm",
+                    "position": 0,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "a6262f86-3ead-43ea-9964-ab3194a80840",
+                    "text": "3000 mm",
+                    "position": 1,
+                    "metaData": {}
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "810c54dd-5db5-4ebc-baa4-0cac940b5454",
+          "name": "Sunelite dichte cassette (1 optie) ",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [],
+            "headingTitle": "Sunelite dichte cassette",
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 11,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "225dcdcc-f4b2-49af-b8c0-2d54752e75ad",
+              "name": "Uitval",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "9ce64e70-2913-45f8-a75f-d40551887af7",
+                    "text": "2500 mm",
+                    "position": 0,
+                    "metaData": {}
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "8ad577b8-0af0-42e4-bb82-cb546eb00ee9",
+          "name": "Eolis 3D Windsensor",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": false,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [],
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 12,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "eeb51079-4f09-4e40-b39e-3271621c69e6",
+              "name": "Wil je een 100% draadloze windsensor toevoegen?",
+              "conditionalName": null,
+              "description": "Reageert op abrupte beweging en stuurt het zonnescherm automatisch omhoog",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "b8ce3a48-1ad7-4d3e-b203-55ee7231dc2e",
+                    "text": "Ja",
+                    "position": 0,
+                    "metaData": {
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image15871399515927525640.png"
+                    }
+                  },
+                  {
+                    "id": "8094da5b-3b0e-44b8-8cf0-9c03e0e75a03",
+                    "text": "Nee",
+                    "position": 1,
+                    "metaData": {}
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "6be0f7a3-d25c-438b-88ad-a32ca6bbcaaa",
+              "name": "Somfy connectivity app bediening",
+              "conditionalName": null,
+              "description": "Bedien jouw apparatuur vanuit de app, individueel of gegroepeerd, waar je ook bent\n",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "d14e4650-00fb-4021-b6f1-74772ee37e50",
+                    "text": "Ja",
+                    "position": 0,
+                    "metaData": {
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image15264290562246383307.jpg"
+                    }
+                  },
+                  {
+                    "id": "0cb1b695-71b7-4de4-9370-9eb467694757",
+                    "text": "Nee",
+                    "position": 1,
+                    "metaData": {}
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 1,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "f2aae723-1187-4706-8a40-180f597d60d2",
+          "name": "Uitbouw",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [],
+            "headingTitle": "Sunelite dichte cassette",
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 13,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "a140d9e1-7166-4711-925f-cfb523b08834",
+              "name": "Heeft u een uitbouw?",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "42ab4dde-7d02-4158-b701-147e3399c462",
+                    "text": "Ja",
+                    "position": 0,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "5e701feb-2e01-4ab0-8ed8-14a6eca1ac32",
+                    "text": "Nee",
+                    "position": 1,
+                    "metaData": {}
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "1368dd79-7df9-4fe0-8419-e53bccea57f3",
+          "name": "Contactgegevens",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "check",
+            "footerNextButtonText": "Bevestig & vraag aan",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingTitle": "Waar mogen we de offerte naartoe sturen?",
+            "headingImage": [],
+            "headingImageLink": "92f6ba88-5590-43b2-abac-830a867b2b9c"
+          },
+          "position": 14,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "905ee0f6-1b6b-4644-b298-927a82c112ca",
+              "name": "Persoonsgegevens",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "FIRST_NAME",
+              "required": true,
+              "metaData": {
+                "placeholder": "Voornaam",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "7220e27c-3778-4338-bd56-1125dfd9a159",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "LAST_NAME",
+              "required": true,
+              "metaData": {
+                "placeholder": "Achternaam",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 1,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "3ea6bb3e-2848-4740-9657-1be99376e0db",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "EMAIL",
+              "required": true,
+              "metaData": {
+                "placeholder": "E-mailadres",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 2,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "06182f87-b543-4a0b-8c71-3ef4821eb130",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "PHONE",
+              "required": true,
+              "metaData": {
+                "placeholder": "Telefoonnummer",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 3,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "9b2140d5-6dc0-4ed0-83d0-0ce90f79c364",
+              "name": "Adresgegevens",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "POSTAL_CODE",
+              "required": true,
+              "metaData": {
+                "placeholder": "Postcode",
+                "textType": "UNLIMITED",
+                "marginTop": "DEFAULT"
+              },
+              "position": 4,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "d00736d7-9deb-42a6-85bf-268154575c1e",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "HOUSE_NUMBER",
+              "required": true,
+              "metaData": {
+                "placeholder": "Huisnummer",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 5,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "15f37ab8-d267-4faf-b546-28c2de69884a",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "CITY",
+              "required": true,
+              "metaData": {
+                "placeholder": "Woonplaats",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 6,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "0503964c-7786-4103-a908-5b752163cbf1",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "STREET",
+              "required": true,
+              "metaData": {
+                "placeholder": "Straatnaam",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 7,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "e13aa916-1531-4388-a6c3-2b33297cdbb4",
+              "name": "Stel hier jouw vraag",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT_AREA",
+              "technicalType": null,
+              "required": false,
+              "metaData": {
+                "placeholder": "Waar kunnen wij nog rekening mee houden?",
+                "textType": "UNLIMITED",
+                "marginTop": "DEFAULT"
+              },
+              "position": 8,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "8be00f9e-88c2-4fa7-90fa-0999aa3a4db4",
+          "name": "Bedankt pagina",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": false,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "FINAL_PAGE",
+          "subType": "THANK_YOU",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingTitle": "Dankjewel!"
+          },
+          "position": 12,
+          "theme": "BARCELONA",
+          "questions": [],
+          "hide": false
+        }
+      ],
+      "relations": [
+        {
+          "id": "6e63a496-2516-455d-a247-05a417e90f18",
+          "from": "7a446528-3925-44fc-b645-bfad77e28286",
+          "to": "16902758-8cdb-4ab9-b81f-666dcfb38472",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 1
+        },
+        {
+          "id": "5587659c-ff7b-464d-a164-c7c143c7d961",
+          "from": "7a446528-3925-44fc-b645-bfad77e28286",
+          "to": "16902758-8cdb-4ab9-b81f-666dcfb38472",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 2
+        },
+        {
+          "id": "f20bfa9e-bcb5-414a-9a9a-7bdddcba3012",
+          "from": "17ea51bd-669b-4628-ad6b-e873360a5321",
+          "to": "456d046b-bafe-4270-ba2c-9dcf98eb6fa5",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 5
+        },
+        {
+          "id": "cec4741f-9da6-4f8c-acf8-42ca14475cc6",
+          "from": "456d046b-bafe-4270-ba2c-9dcf98eb6fa5",
+          "to": "1368dd79-7df9-4fe0-8419-e53bccea57f3",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 6
+        },
+        {
+          "id": "604e1eb3-168a-4e06-b87b-52b79aad7393",
+          "from": "5bfab9c9-e77c-4b35-a85b-0ab41f48f453",
+          "to": "1368dd79-7df9-4fe0-8419-e53bccea57f3",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 7
+        },
+        {
+          "id": "715e0528-26e1-4c4d-8dad-64b811e75ed7",
+          "from": "1368dd79-7df9-4fe0-8419-e53bccea57f3",
+          "to": "8be00f9e-88c2-4fa7-90fa-0999aa3a4db4",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 11
+        },
+        {
+          "id": "f6b7b118-6ea1-4c36-b7b2-c46f60cb1a02",
+          "from": "18127444-076a-4949-85aa-564593e23b4c",
+          "to": "16902758-8cdb-4ab9-b81f-666dcfb38472",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 12
+        },
+        {
+          "id": "5925d547-a5af-4eff-b58c-553daacdbd84",
+          "from": "92f6ba88-5590-43b2-abac-830a867b2b9c",
+          "to": "1368dd79-7df9-4fe0-8419-e53bccea57f3",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 15
+        },
+        {
+          "id": "1bad2718-43c9-48d6-9674-2ceaa874fd63",
+          "from": "1368dd79-7df9-4fe0-8419-e53bccea57f3",
+          "to": "8be00f9e-88c2-4fa7-90fa-0999aa3a4db4",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "",
+                "condition": ""
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "NO_CONDITION",
+          "position": 17
+        },
+        {
+          "id": "996aa491-0e58-4894-a618-7de07e029570",
+          "from": "92f6ba88-5590-43b2-abac-830a867b2b9c",
+          "to": "18127444-076a-4949-85aa-564593e23b4c",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "e98bf5c3-0197-4b9b-b54d-0d53b38d8ef3",
+                "condition": "",
+                "comparator": "EQUALS",
+                "value": "aaf614b9-a585-4de7-9909-48c25267d2b7"
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 18
+        },
+        {
+          "id": "dc4d7f78-90e3-4778-8e8e-b04fa72d8cce",
+          "from": "92f6ba88-5590-43b2-abac-830a867b2b9c",
+          "to": "7a446528-3925-44fc-b645-bfad77e28286",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "e98bf5c3-0197-4b9b-b54d-0d53b38d8ef3",
+                "condition": "",
+                "comparator": "EQUALS",
+                "value": "ca8b0432-53fa-468d-9ca5-245f9393cdeb"
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 19
+        },
+        {
+          "id": "faf13000-3bcf-4106-a8bd-d0da9a1f8f47",
+          "from": "92f6ba88-5590-43b2-abac-830a867b2b9c",
+          "to": "17ea51bd-669b-4628-ad6b-e873360a5321",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "e98bf5c3-0197-4b9b-b54d-0d53b38d8ef3",
+                "condition": "",
+                "comparator": "EQUALS",
+                "value": "aadb7c8b-0fb6-413b-a347-bfccb8aaa3a6"
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 20
+        },
+        {
+          "id": "7e217ae4-367e-4d59-b5a2-e2842cc94767",
+          "from": "92f6ba88-5590-43b2-abac-830a867b2b9c",
+          "to": "315a2923-2eac-4070-b42c-d251805569ca",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "e98bf5c3-0197-4b9b-b54d-0d53b38d8ef3",
+                "comparator": "EQUALS",
+                "value": "0672b9fc-2d8f-40b2-bee8-527a1c203a1a"
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 21
+        },
+        {
+          "id": "ed1a1603-826c-4c0e-8450-1bff83c96256",
+          "from": "18127444-076a-4949-85aa-564593e23b4c",
+          "to": "b90c9a5c-a4db-4f6d-bee8-481ecc2e38a4",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "45ceba7b-0a2d-43b3-9a49-3b4381829cf2",
+                "comparator": "IS_LESS_THAN",
+                "value": 3500
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 22
+        },
+        {
+          "id": "b05f4514-7738-4c95-a913-cad42ed48c5f",
+          "from": "18127444-076a-4949-85aa-564593e23b4c",
+          "to": "b90c9a5c-a4db-4f6d-bee8-481ecc2e38a4",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "45ceba7b-0a2d-43b3-9a49-3b4381829cf2",
+                "comparator": "IS_GREATER_THAN",
+                "value": 5000,
+                "calculations": []
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 23
+        },
+        {
+          "id": "d7b3d25e-7024-4b86-bfaf-90b19ca510e9",
+          "from": "16902758-8cdb-4ab9-b81f-666dcfb38472",
+          "to": "8ad577b8-0af0-42e4-bb82-cb546eb00ee9",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "d5b3a7a4-c32c-4918-96ac-d026a003bea3",
+                "comparator": "EQUALS",
+                "value": "52b9588f-633a-4979-9669-a868f97a99a0"
+              },
+              "position": 0
+            },
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "986af40a-27ee-4ce7-b0d9-ea470f1e9e65",
+                "comparator": "EQUALS",
+                "value": "4364aa61-609c-4194-8400-eb7a85d562ec"
+              },
+              "position": 1
+            }
+          ],
+          "conditionType": "OR",
+          "position": 24
+        },
+        {
+          "id": "ae65211f-68e3-40b0-96ea-422b737f977b",
+          "from": "b90c9a5c-a4db-4f6d-bee8-481ecc2e38a4",
+          "to": "8ad577b8-0af0-42e4-bb82-cb546eb00ee9",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "d5b3a7a4-c32c-4918-96ac-d026a003bea3",
+                "comparator": "EQUALS",
+                "value": "52b9588f-633a-4979-9669-a868f97a99a0"
+              },
+              "position": 0
+            },
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "986af40a-27ee-4ce7-b0d9-ea470f1e9e65",
+                "comparator": "EQUALS",
+                "value": "4364aa61-609c-4194-8400-eb7a85d562ec"
+              },
+              "position": 1
+            }
+          ],
+          "conditionType": "OR",
+          "position": 25
+        },
+        {
+          "id": "0bc99c5d-ca57-467d-a5d1-869f883a1629",
+          "from": "7a446528-3925-44fc-b645-bfad77e28286",
+          "to": "b90c9a5c-a4db-4f6d-bee8-481ecc2e38a4",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "9584ce0a-b795-4132-ad68-fc21a8a5a422",
+                "comparator": "IS_LESS_THAN",
+                "value": 3500,
+                "calculations": []
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 26
+        },
+        {
+          "id": "cc51eec2-3c94-4c6b-bec1-55db7f6b3052",
+          "from": "17ea51bd-669b-4628-ad6b-e873360a5321",
+          "to": "5bfab9c9-e77c-4b35-a85b-0ab41f48f453",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "8853c902-9c6b-421e-89a9-df31a5985d9c",
+                "comparator": "IS_LESS_THAN",
+                "value": 3189
+              },
+              "position": 0
+            },
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "8853c902-9c6b-421e-89a9-df31a5985d9c",
+                "comparator": "IS_GREATER_THAN",
+                "value": 5500,
+                "calculations": []
+              },
+              "position": 1
+            }
+          ],
+          "conditionType": "OR",
+          "position": 27
+        },
+        {
+          "id": "11ac2fde-0b0c-4981-9dbf-4664fc806a0f",
+          "from": "456d046b-bafe-4270-ba2c-9dcf98eb6fa5",
+          "to": "8ad577b8-0af0-42e4-bb82-cb546eb00ee9",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "9b66c650-50ff-4c77-ae0d-3b6d512a45ed",
+                "comparator": "EQUALS",
+                "value": "c384e1b2-3a78-4dd2-9e9a-0d2c73e7ebb4"
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 28
+        },
+        {
+          "id": "737a56f4-94b7-48e7-8845-12057c7edf33",
+          "from": "5bfab9c9-e77c-4b35-a85b-0ab41f48f453",
+          "to": "8ad577b8-0af0-42e4-bb82-cb546eb00ee9",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "9b66c650-50ff-4c77-ae0d-3b6d512a45ed",
+                "comparator": "EQUALS",
+                "value": "c384e1b2-3a78-4dd2-9e9a-0d2c73e7ebb4"
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 29
+        },
+        {
+          "id": "3dab069a-6056-4b28-a008-75f5f31b87a0",
+          "from": "8ad577b8-0af0-42e4-bb82-cb546eb00ee9",
+          "to": "f2aae723-1187-4706-8a40-180f597d60d2",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 30
+        },
+        {
+          "id": "ee0a2b53-f9a9-42f1-9a55-cb04cedb85aa",
+          "from": "315a2923-2eac-4070-b42c-d251805569ca",
+          "to": "810c54dd-5db5-4ebc-baa4-0cac940b5454",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "5c56af3d-0fcd-406d-bc50-e70798fcd3e3",
+                "comparator": "IS_LESS_THAN",
+                "value": 3650
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 31
+        },
+        {
+          "id": "61337df8-54bc-4a7e-8644-4793210189f5",
+          "from": "315a2923-2eac-4070-b42c-d251805569ca",
+          "to": "37168ab5-41e9-4cd9-b2fe-2365e14e6bab",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "5c56af3d-0fcd-406d-bc50-e70798fcd3e3",
+                "comparator": "IS_GREATER_THAN",
+                "value": 3649
+              },
+              "position": 0
+            },
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "5c56af3d-0fcd-406d-bc50-e70798fcd3e3",
+                "comparator": "IS_LESS_THAN",
+                "value": 4150,
+                "calculations": []
+              },
+              "position": 1
+            }
+          ],
+          "conditionType": "AND",
+          "position": 32
+        },
+        {
+          "id": "a66de082-c5a8-4f7b-b588-b453639963b8",
+          "from": "315a2923-2eac-4070-b42c-d251805569ca",
+          "to": "13c0a03b-a863-4552-a1ee-bf6d5255166b",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        },
+        {
+          "id": "ebb992ed-da21-49ca-ab15-90352f3fb8d9",
+          "from": "13c0a03b-a863-4552-a1ee-bf6d5255166b",
+          "to": "8ad577b8-0af0-42e4-bb82-cb546eb00ee9",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "eca13574-3d09-4a2f-956a-370d5c52f053",
+                "comparator": "EQUALS",
+                "value": "2c4843b6-681d-4c6f-8f80-f3774b07c7cf"
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 33
+        },
+        {
+          "id": "1036beda-c4b0-432b-8a2d-9d14e04438c6",
+          "from": "37168ab5-41e9-4cd9-b2fe-2365e14e6bab",
+          "to": "8ad577b8-0af0-42e4-bb82-cb546eb00ee9",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "eca13574-3d09-4a2f-956a-370d5c52f053",
+                "comparator": "EQUALS",
+                "value": "2c4843b6-681d-4c6f-8f80-f3774b07c7cf"
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 34
+        },
+        {
+          "id": "9a6524ef-e8c9-4c20-8bfa-ace413a5cf9a",
+          "from": "810c54dd-5db5-4ebc-baa4-0cac940b5454",
+          "to": "8ad577b8-0af0-42e4-bb82-cb546eb00ee9",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "eca13574-3d09-4a2f-956a-370d5c52f053",
+                "comparator": "EQUALS",
+                "value": "2c4843b6-681d-4c6f-8f80-f3774b07c7cf"
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 35
+        },
+        {
+          "id": "a545d9a3-f766-4c6d-b079-44671242bf9f",
+          "from": "315a2923-2eac-4070-b42c-d251805569ca",
+          "to": "13c0a03b-a863-4552-a1ee-bf6d5255166b",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        },
+        {
+          "id": "bb10ba94-53e4-4b61-b306-8a974a09ce5d",
+          "from": "f2aae723-1187-4706-8a40-180f597d60d2",
+          "to": "1368dd79-7df9-4fe0-8419-e53bccea57f3",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        },
+        {
+          "id": "999ea85e-6b58-480b-9934-197552e7f794",
+          "from": "16902758-8cdb-4ab9-b81f-666dcfb38472",
+          "to": "f2aae723-1187-4706-8a40-180f597d60d2",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        },
+        {
+          "id": "b6fd4275-0251-4036-bcc8-907254604fc0",
+          "from": "b90c9a5c-a4db-4f6d-bee8-481ecc2e38a4",
+          "to": "f2aae723-1187-4706-8a40-180f597d60d2",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        },
+        {
+          "id": "7de628fd-085d-4ad9-8d29-2c8118d94ad2",
+          "from": "456d046b-bafe-4270-ba2c-9dcf98eb6fa5",
+          "to": "f2aae723-1187-4706-8a40-180f597d60d2",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        },
+        {
+          "id": "f5756894-4d54-40a6-b32a-4eda23fd9db3",
+          "from": "5bfab9c9-e77c-4b35-a85b-0ab41f48f453",
+          "to": "f2aae723-1187-4706-8a40-180f597d60d2",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        },
+        {
+          "id": "a90a6690-2bf2-472e-b7bd-2827be528f43",
+          "from": "13c0a03b-a863-4552-a1ee-bf6d5255166b",
+          "to": "f2aae723-1187-4706-8a40-180f597d60d2",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        },
+        {
+          "id": "d585bd03-0a2a-4687-a987-4ad0ba7c171f",
+          "from": "37168ab5-41e9-4cd9-b2fe-2365e14e6bab",
+          "to": "f2aae723-1187-4706-8a40-180f597d60d2",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        },
+        {
+          "id": "95d3d249-8b3e-4f36-94b3-ade70c54ba37",
+          "from": "810c54dd-5db5-4ebc-baa4-0cac940b5454",
+          "to": "f2aae723-1187-4706-8a40-180f597d60d2",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        }
+      ],
+      "companyProfile": {
+        "id": "731483fa-ef6b-4aae-afcf-883ec09219dd",
+        "name": null,
+        "logo_url": null,
+        "terms_of_agreement_url": null,
+        "privacy_policy_url": null,
+        "users": null
+      },
+      "style": {
+        "fontFamily": "poppins",
+        "fontSize": "16px",
+        "borderRadius": "",
+        "border": "5px",
+        "borderColor": "#bf5317",
+        "questionColor": "#000000",
+        "answerColor": "#000000",
+        "answerSelectedColor": null,
+        "priceIndicator": null,
+        "scrollIndicator": null,
+        "buttonColor": "#bf5317",
+        "buttonTextColor": "#FFFFFF",
+        "backgroundColor": "#FFFFFF",
+        "logoUrl": "",
+        "customCss": "",
+        "wrapperBorderRadius": "20px",
+        "inputBorderRadius": "99999px",
+        "buttonBorderRadius": "99999px",
+        "widgetButtonBorderRadius": "10px"
+      },
+      "displaySettings": {
+        "showBranding": true,
+        "showActionButton": false,
+        "actionButtonText": null,
+        "disableWidget": true
+      },
+      "analyticsSettings": {
+        "trackingPixels": []
+      },
+      "locale": "",
+      "domains": [],
+      "show": false,
+      "metaData": {},
+      "type": null
+    },
+    "country": null,
+    "ipAddress": null
+  }
+}

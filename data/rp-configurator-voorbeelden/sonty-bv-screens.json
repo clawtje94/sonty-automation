@@ -1,0 +1,1036 @@
+{
+  "status": 200,
+  "body": {
+    "message": "OK",
+    "configurator": {
+      "id": "4c0a51ce-0036-4def-940a-73ab2cac3f4d",
+      "templateId": null,
+      "name": "Screens",
+      "advancedSettings": {
+        "automation": true,
+        "showCloseButton": false,
+        "configuratorLanguage": null,
+        "showAnalytics": false,
+        "showCookieBanner": null,
+        "formType": null,
+        "technicalName": null
+      },
+      "resultScore": null,
+      "priceCalculationType": null,
+      "steps": [
+        {
+          "id": "f8c0d1ca-724e-499a-a986-dd2434bcb193",
+          "name": "Keuzemenu",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [
+              {
+                "index": 0,
+                "image": {
+                  "data": [
+                    {
+                      "id": "4cd13332-f1f3-42dd-8b23-16377f9f6335",
+                      "type": "ALL_TRUE",
+                      "conditions": [
+                        {
+                          "type": "QUESTION",
+                          "metaData": {
+                            "comparator": "EQUAL",
+                            "questionId": "c317b655-9db8-421c-ba8d-843a78f9ef91",
+                            "answerId": "df18851d-1b9d-4f1d-a0f8-8d271d046e45"
+                          }
+                        }
+                      ],
+                      "url": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/4c0a51ce-0036-4def-940a-73ab2cac3f4d/image16110865270030740346.png"
+                    },
+                    {
+                      "id": "f5af05dc-57f4-4877-9041-69746f6e1efa",
+                      "type": "ALL_TRUE",
+                      "conditions": [
+                        {
+                          "type": "QUESTION",
+                          "metaData": {
+                            "comparator": "EQUAL",
+                            "questionId": "c317b655-9db8-421c-ba8d-843a78f9ef91",
+                            "answerId": "c2250106-31be-49bb-9818-b3077957954a"
+                          }
+                        }
+                      ],
+                      "url": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/4c0a51ce-0036-4def-940a-73ab2cac3f4d/image12013058022151756475.png"
+                    }
+                  ]
+                },
+                "format": "",
+                "link": null
+              }
+            ]
+          },
+          "position": 0,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "c317b655-9db8-421c-ba8d-843a78f9ef91",
+              "name": "Kies je screen",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "df18851d-1b9d-4f1d-a0f8-8d271d046e45",
+                    "text": "Windvast",
+                    "position": 0,
+                    "metaData": {}
+                  },
+                  {
+                    "id": "c2250106-31be-49bb-9818-b3077957954a",
+                    "text": "Niet windvast",
+                    "position": 2,
+                    "metaData": {}
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "62fb42f0-d978-4dfc-9344-aa8adcfd6f87",
+          "name": "Square 85",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [
+              {
+                "index": 0,
+                "image": {
+                  "data": [
+                    {
+                      "id": "ad61e080-48c2-4f34-842e-bdd7a66040ad",
+                      "type": "ALL_TRUE",
+                      "conditions": [],
+                      "url": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/4c0a51ce-0036-4def-940a-73ab2cac3f4d/image4008896718798760410.png"
+                    }
+                  ]
+                },
+                "format": "",
+                "link": null
+              }
+            ],
+            "headingTitle": "Screen square 85"
+          },
+          "position": 1,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "f342505c-a77c-45e2-8373-1b8e4e8e49e3",
+              "name": "Kleur",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "0cf01f81-e971-4f22-8d55-a5ba25ed2395",
+                    "text": "Gebroken wit",
+                    "position": 0,
+                    "metaData": {
+                      "description": "RAL 9010",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/4c0a51ce-0036-4def-940a-73ab2cac3f4d/image3961035776145651843.png"
+                    }
+                  },
+                  {
+                    "id": "18b3153e-07cc-4708-87ca-27dfc18b567c",
+                    "text": "Cremewit",
+                    "position": 1,
+                    "metaData": {
+                      "description": "RAL 9001",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image13210662687111416794.png"
+                    }
+                  },
+                  {
+                    "id": "836b395e-f0f6-46b0-bfb6-358c1111a88f",
+                    "text": "Antraciet",
+                    "position": 2,
+                    "metaData": {
+                      "description": "RAL 7016 structuur",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image11925991730227085468.png"
+                    }
+                  },
+                  {
+                    "id": "9d0574c0-c166-43bf-9b3d-60200c616c2a",
+                    "text": "Blank aluminium",
+                    "position": 3,
+                    "metaData": {
+                      "description": "RAL 9007",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/4c0a51ce-0036-4def-940a-73ab2cac3f4d/image8174837530022016171.jpg"
+                    }
+                  },
+                  {
+                    "id": "89541564-c7e5-44f2-8b8c-bb1423d97e89",
+                    "text": "Andere RAL kleur",
+                    "position": 6,
+                    "metaData": {
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/4c0a51ce-0036-4def-940a-73ab2cac3f4d/image10655168402174504803.png"
+                    }
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "bfff5931-3a70-49c5-85c6-3e33c1a928ed",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": null,
+              "required": false,
+              "metaData": {
+                "placeholder": "Namelijk...",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 1,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "c78cc342-c555-4271-8edf-8f015d026dd3",
+              "name": "Welk type bediening wil je?",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "57ceb745-b20b-4f15-8aea-68fbbb3e2f17",
+                    "text": "Handbediend",
+                    "position": 0,
+                    "metaData": {
+                      "description": "Slingerstang buitenzijde"
+                    }
+                  },
+                  {
+                    "id": "794bd9b4-fbde-4283-92fd-009c686255be",
+                    "text": "Somfy LT motor",
+                    "position": 1,
+                    "metaData": {
+                      "description": "Draaischakelaar"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  },
+                  {
+                    "id": "882497da-ad8c-4fe5-be08-124c54ed19d4",
+                    "text": "Somfy IO motor",
+                    "position": 2,
+                    "metaData": {
+                      "description": "Motor + afstandsbediening"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 2,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": [],
+              "conditionType": "AND",
+              "condition": {
+                "groupConditionType": null,
+                "logicType": "AND",
+                "type": "QUESTION",
+                "conditions": [],
+                "metaData": {},
+                "position": 0
+              },
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "2abfff1a-b18e-459f-86cc-9d167a0e7da1",
+              "name": "Breedte",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "NUMBER",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "max": 4000,
+                "min": 1000,
+                "step": 1,
+                "placeholder": "0",
+                "marginTop": "DEFAULT"
+              },
+              "position": 3,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "feb2a1c9-9eb7-4a48-aaa9-eba8a9406954",
+              "name": "Hoogte",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "NUMBER",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "max": 2800,
+                "min": 1000,
+                "step": 1,
+                "placeholder": "0",
+                "marginTop": "DEFAULT"
+              },
+              "position": 4,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "86869663-a4cf-410e-977b-d98a817f6078",
+          "name": "Sunzip design",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingImage": [
+              {
+                "index": 0,
+                "image": {
+                  "data": [
+                    {
+                      "id": "8b16ae1c-ecfc-443a-9ce8-b3c68fcf489d",
+                      "type": "ALL_TRUE",
+                      "conditions": [],
+                      "url": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/4c0a51ce-0036-4def-940a-73ab2cac3f4d/image16243225600249879285.png"
+                    }
+                  ]
+                },
+                "format": "",
+                "link": null
+              }
+            ],
+            "headingTitle": "Screen sunzip design"
+          },
+          "position": 2,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "a19ddb06-88bf-49a3-814a-2fdd17fbefc4",
+              "name": "Kleur",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "1e819dbe-c0d9-4976-a1e8-65eeff9c78d5",
+                    "text": "Gebroken wit",
+                    "position": 0,
+                    "metaData": {
+                      "description": "RAL 9010",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/4c0a51ce-0036-4def-940a-73ab2cac3f4d/image3961035776145651843.png"
+                    }
+                  },
+                  {
+                    "id": "93132e1d-298e-44e4-a2db-629b2124f374",
+                    "text": "Cremewit",
+                    "position": 1,
+                    "metaData": {
+                      "description": "RAL 9001",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image13210662687111416794.png"
+                    }
+                  },
+                  {
+                    "id": "7e6ed428-8d9a-43d5-a09f-fbe29f1e4820",
+                    "text": "Antraciet",
+                    "position": 2,
+                    "metaData": {
+                      "description": "RAL 7016 structuur",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/e7308f69-6d57-4fc3-84d0-aa65bf2e2187/image11925991730227085468.png"
+                    }
+                  },
+                  {
+                    "id": "05886378-d370-4c28-8002-b783003f58a1",
+                    "text": "Blank aluminium",
+                    "position": 4,
+                    "metaData": {
+                      "description": "RAL 9007",
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/4c0a51ce-0036-4def-940a-73ab2cac3f4d/image8174837530022016171.jpg"
+                    }
+                  },
+                  {
+                    "id": "9f8a1ef4-6f2a-4ec5-9159-4ebf8dee92c9",
+                    "text": "Andere RAL kleur",
+                    "position": 6,
+                    "metaData": {
+                      "image": "https://user-info.reuzenpanda.nl/widget-service/product-templates/configurators/4c0a51ce-0036-4def-940a-73ab2cac3f4d/image10655168402174504803.png"
+                    }
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "f2466304-ad0e-4ff1-bb62-e730f130b8fe",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": null,
+              "required": false,
+              "metaData": {
+                "placeholder": "Namelijk...",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 1,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "0fb7d4d8-aacf-4308-b5a9-d4852fea0800",
+              "name": "Welk type bediening wil je?",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "RADIO",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "answers": [
+                  {
+                    "id": "9bc9fbef-308b-466a-8a31-187dae53ab42",
+                    "text": "Somfy LT motor",
+                    "position": 1,
+                    "metaData": {
+                      "description": "Draaischakelaar"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  },
+                  {
+                    "id": "0637a497-1708-416f-af0b-02c6fcaf1260",
+                    "text": "Somfy IO motor",
+                    "position": 2,
+                    "metaData": {
+                      "description": "Motor + afstandsbediening"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  },
+                  {
+                    "id": "934f41dd-a62b-4730-bf3d-da02b3812eca",
+                    "text": "Somfy IO solar",
+                    "position": 3,
+                    "metaData": {
+                      "description": "Motor zonder kabels"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  },
+                  {
+                    "id": "7fd1f05b-3e5a-4007-b3f7-7abceb69b4b7",
+                    "text": "Brel Solar motor",
+                    "position": 4,
+                    "metaData": {
+                      "description": "Motor zonder kabels"
+                    },
+                    "conditions": [],
+                    "conditionType": "AND",
+                    "name": "",
+                    "technicalName": "",
+                    "condition": null,
+                    "value": null
+                  }
+                ],
+                "marginTop": "DEFAULT"
+              },
+              "position": 2,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": [],
+              "conditionType": "AND",
+              "condition": {
+                "groupConditionType": null,
+                "logicType": "AND",
+                "type": "QUESTION",
+                "conditions": [],
+                "metaData": {},
+                "position": 0
+              },
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "991f9e44-6d19-4c7d-81ec-fab7f872afef",
+              "name": "Breedte",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "NUMBER",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "max": 6000,
+                "min": 2000,
+                "step": 1,
+                "placeholder": "0",
+                "marginTop": "DEFAULT"
+              },
+              "position": 3,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "6b3ace50-d61c-4436-98cc-7226d5584543",
+              "name": "Hoogte",
+              "conditionalName": null,
+              "description": "(in millimeters)",
+              "conditionalDescription": null,
+              "type": "NUMBER",
+              "technicalType": null,
+              "required": true,
+              "metaData": {
+                "max": 2700,
+                "min": 2000,
+                "step": 1,
+                "placeholder": "0",
+                "marginTop": "DEFAULT"
+              },
+              "position": 4,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "eed816fa-18bb-481c-817e-c530b7483e1d",
+          "name": "Contactgegevens",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": true,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "PAGE",
+          "subType": "DEFAULT",
+          "metaData": {
+            "footerNextButtonIcon": "check",
+            "footerNextButtonText": "Bevestig & vraag aan",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingTitle": "Waar mogen we de offerte naartoe sturen?",
+            "headingImage": [],
+            "headingImageLink": "f8c0d1ca-724e-499a-a986-dd2434bcb193"
+          },
+          "position": 4,
+          "theme": "BARCELONA",
+          "questions": [
+            {
+              "id": "d1cdd34a-816a-4694-ab81-8c9bae4be411",
+              "name": "Persoonsgegevens",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "FIRST_NAME",
+              "required": true,
+              "metaData": {
+                "placeholder": "Voornaam",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 0,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "06da5ee5-55b6-47f7-863c-ebf795fa2493",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "LAST_NAME",
+              "required": true,
+              "metaData": {
+                "placeholder": "Achternaam",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 1,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "6a62ca9c-8507-4e61-9ff1-57af2cc752d1",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "EMAIL",
+              "required": true,
+              "metaData": {
+                "placeholder": "E-mailadres",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 2,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "b529b0cb-6376-49cd-b00f-6be39bbb5c4d",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "PHONE",
+              "required": true,
+              "metaData": {
+                "placeholder": "Telefoonnummer",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 3,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "1552005f-9568-4464-8f26-5783e68ebdd0",
+              "name": "Adresgegevens",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "POSTAL_CODE",
+              "required": true,
+              "metaData": {
+                "placeholder": "Postcode",
+                "textType": "UNLIMITED",
+                "marginTop": "DEFAULT"
+              },
+              "position": 4,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "fa07cb9a-3ab7-4b32-9d6e-7a5098702adc",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "HOUSE_NUMBER",
+              "required": true,
+              "metaData": {
+                "placeholder": "Huisnummer",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 5,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "f01e8a75-3fe6-4d03-a955-ace0fdbcb3f3",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "CITY",
+              "required": true,
+              "metaData": {
+                "placeholder": "Woonplaats",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 6,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "2d23455c-6ba4-424c-a5f4-2e2174c087ba",
+              "name": "",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT",
+              "technicalType": "STREET",
+              "required": true,
+              "metaData": {
+                "placeholder": "Straatnaam",
+                "textType": "UNLIMITED",
+                "marginTop": "SMALL"
+              },
+              "position": 7,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            },
+            {
+              "id": "64f7b781-2ca2-4c37-8b37-9ca45583a42c",
+              "name": "Stel hier jouw vraag",
+              "conditionalName": null,
+              "description": "",
+              "conditionalDescription": null,
+              "type": "TEXT_AREA",
+              "technicalType": null,
+              "required": false,
+              "metaData": {
+                "placeholder": "Waar kunnen wij nog rekening mee houden?",
+                "textType": "UNLIMITED",
+                "marginTop": "DEFAULT"
+              },
+              "position": 8,
+              "answerAsumeLogic": null,
+              "conditionalInfo": null,
+              "conditions": null,
+              "conditionType": null,
+              "condition": null,
+              "hide": false,
+              "technicalName": null
+            }
+          ],
+          "hide": false
+        },
+        {
+          "id": "cd792ef1-e563-4272-9b1f-d39a8c421e12",
+          "name": "Bedankt pagina",
+          "layout": {
+            "composition": "HORIZONTAL_RIGHT",
+            "fixedHeading": false,
+            "progressBar": false,
+            "mobileFullWidth": null,
+            "mediaType": "SMALL"
+          },
+          "type": "FINAL_PAGE",
+          "subType": "THANK_YOU",
+          "metaData": {
+            "footerNextButtonIcon": "arrow_right",
+            "footerNextButtonText": "Volgende",
+            "footerPreviousButtonIcon": "arrow_left",
+            "headingTitle": "Dankjewel!"
+          },
+          "position": 5,
+          "theme": "BARCELONA",
+          "questions": [],
+          "hide": false
+        }
+      ],
+      "relations": [
+        {
+          "id": "ff085483-b4bd-422b-8f5c-693fe7742b6d",
+          "from": "f8c0d1ca-724e-499a-a986-dd2434bcb193",
+          "to": "86869663-a4cf-410e-977b-d98a817f6078",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "c317b655-9db8-421c-ba8d-843a78f9ef91",
+                "condition": "",
+                "comparator": "EQUALS",
+                "value": "df18851d-1b9d-4f1d-a0f8-8d271d046e45"
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 3
+        },
+        {
+          "id": "5ab4b610-15f2-4a64-b3f6-bf6b188c7e75",
+          "from": "f8c0d1ca-724e-499a-a986-dd2434bcb193",
+          "to": "62fb42f0-d978-4dfc-9344-aa8adcfd6f87",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "c317b655-9db8-421c-ba8d-843a78f9ef91",
+                "condition": "",
+                "comparator": "EQUALS",
+                "value": "c2250106-31be-49bb-9818-b3077957954a"
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "AND",
+          "position": 4
+        },
+        {
+          "id": "fe7a1d2a-8d11-4e68-98e6-0407cebef41b",
+          "from": "eed816fa-18bb-481c-817e-c530b7483e1d",
+          "to": "cd792ef1-e563-4272-9b1f-d39a8c421e12",
+          "conditions": [],
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        },
+        {
+          "id": "d7e015d9-d66f-4cc5-8e33-26d89c069ee0",
+          "from": "62fb42f0-d978-4dfc-9344-aa8adcfd6f87",
+          "to": "eed816fa-18bb-481c-817e-c530b7483e1d",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        },
+        {
+          "id": "89d2348d-c7d9-4b8f-b7af-32383945a5dc",
+          "from": "86869663-a4cf-410e-977b-d98a817f6078",
+          "to": "eed816fa-18bb-481c-817e-c530b7483e1d",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        },
+        {
+          "id": "16829ffb-76e0-40ba-bd08-d919150097b6",
+          "from": "f8c0d1ca-724e-499a-a986-dd2434bcb193",
+          "to": "eed816fa-18bb-481c-817e-c530b7483e1d",
+          "conditions": null,
+          "conditionType": "NO_CONDITION",
+          "position": 0
+        },
+        {
+          "id": "3019b633-85a8-4267-8c35-698310ffbd9f",
+          "from": "86869663-a4cf-410e-977b-d98a817f6078",
+          "to": "eed816fa-18bb-481c-817e-c530b7483e1d",
+          "conditions": [
+            {
+              "groupConditionType": null,
+              "logicType": null,
+              "type": "QUESTION",
+              "conditions": null,
+              "metaData": {
+                "questionId": "",
+                "condition": ""
+              },
+              "position": 0
+            }
+          ],
+          "conditionType": "NO_CONDITION",
+          "position": 2
+        }
+      ],
+      "companyProfile": {
+        "id": "731483fa-ef6b-4aae-afcf-883ec09219dd",
+        "name": null,
+        "logo_url": null,
+        "terms_of_agreement_url": null,
+        "privacy_policy_url": null,
+        "users": null
+      },
+      "style": {
+        "fontFamily": "poppins",
+        "fontSize": "16px",
+        "borderRadius": "",
+        "border": "5px",
+        "borderColor": "#bf5317",
+        "questionColor": "#000000",
+        "answerColor": "#000000",
+        "answerSelectedColor": null,
+        "priceIndicator": null,
+        "scrollIndicator": null,
+        "buttonColor": "#bf5317",
+        "buttonTextColor": "#FFFFFF",
+        "backgroundColor": "#FFFFFF",
+        "logoUrl": "",
+        "customCss": "",
+        "wrapperBorderRadius": "20px",
+        "inputBorderRadius": "99999px",
+        "buttonBorderRadius": "99999px",
+        "widgetButtonBorderRadius": "10px"
+      },
+      "displaySettings": {
+        "showBranding": true,
+        "showActionButton": true,
+        "actionButtonText": null,
+        "disableWidget": false
+      },
+      "analyticsSettings": {
+        "trackingPixels": []
+      },
+      "locale": "",
+      "domains": [],
+      "show": false,
+      "metaData": {},
+      "type": null
+    },
+    "country": null,
+    "ipAddress": null
+  }
+}

@@ -107,3 +107,81 @@ tellingen = {k: len(v) for k, v in prijzen['categorieen'].items()}
 print('Geschreven:', OUT)
 print(json.dumps(tellingen, indent=1, ensure_ascii=False))
 print('Totaal artikelen:', sum(tellingen.values()))
+
+# ──────────────────────────────────────────────────────────────────
+# Toppoint raamdecoratie binnen (VERKOOPprijzen voor consumentenoffertes)
+# Bron: bruto dealerprijzen excl. BTW → verkoop = bruto × 1.21 (incl. BTW)
+# LET OP: dit zijn verkoopprijzen, géén inkoopprijzen (expliciete wens Daimy 2026-06-11)
+# ──────────────────────────────────────────────────────────────────
+TP_SRC = os.path.expanduser('~/zonweringdirect/data/toppoint-parsed-prices.json')
+tp = json.load(open(TP_SRC))
+
+TP_CAT = {
+    'rolgordijnen': 'Raamdeco — Rolgordijnen',
+    'duo-rolgordijnen': 'Raamdeco — Duo-rolgordijnen',
+    'jaloezieen': 'Raamdeco — Jaloezieën',
+    'jaloezieen-hout': 'Raamdeco — Jaloezieën hout',
+    'plisse': 'Raamdeco — Plissé',
+    'lamellen': 'Raamdeco — Lamellen',
+    'vouwgordijnen': 'Raamdeco — Vouwgordijnen',
+    'horren': 'Raamdeco — Horren',
+    # outdoorscreen bewust overgeslagen: Daimy beslist nog waar die thuishoort
+}
+STOFGROEP = {'1': 'Basis collectie', '2': 'Comfort collectie', '3': 'Plus collectie',
+             '4': 'Luxe collectie', '5': 'Premium collectie', 'A': 'Standaard model', 'B': 'Vrijhangend model'}
+BTW = 1.21
+
+def subsample(lst, n):
+    if len(lst) <= n:
+        return list(range(len(lst)))
+    stap = (len(lst) - 1) / (n - 1)
+    return sorted({round(i * stap) for i in range(n)})
+
+for tp_cat, rp_cat in TP_CAT.items():
+    for t in tp['categories'].get(tp_cat, []):
+        grid = t['grids'][0]
+        groep = STOFGROEP.get(str(grid.get('stofgroep')), f"collectie {grid.get('stofgroep')}")
+        ws, hs, ps = grid['widths'], grid['heights'], grid['prices']
+        for hi in subsample(hs, 3):
+            for wi in subsample(ws, 4):
+                try:
+                    bruto = ps[hi][wi]
+                except (IndexError, TypeError):
+                    continue
+                if not bruto:
+                    continue
+                verkoop = round(float(bruto) * BTW)
+                maat = f'{ws[wi]}×{hs[hi]} cm'
+                cat(rp_cat).append({
+                    'naam': f'{t["name"]} {maat}',
+                    'sku': f'TP-{t["id"]}-{ws[wi]}X{hs[hi]}'.upper(),
+                    'verkoop_incl': verkoop,
+                    'omschrijving': f'{t["name"]}, breedte×hoogte {maat}, {groep}, handbediend. Verkoopprijs incl. 21% BTW.',
+                })
+    prijzen['marge_per_categorie'].setdefault(rp_cat, 1.0)
+
+# Elektrische bediening als meerprijs-artikelen
+ELEKTRA = {
+    'rolgordijnen': [('Motion accu (USB-C)', 100), ('Brel 230V', 150), ('Somfy io', 325)],
+    'duo-rolgordijnen': [('Motion accu (USB-C)', 100), ('Brel 230V', 150)],
+    'jaloezieen': [('Motion accu', 125), ('Somfy Tilt & Lift', 250)],
+    'jaloezieen-hout': [('Motion accu', 150)],
+    'plisse': [('Motion accu', 125)],
+    'lamellen': [('Somfy RTS', 675)],
+    'vouwgordijnen': [('Motion accu', 125)],
+}
+for tp_cat, opts in ELEKTRA.items():
+    rp_cat = TP_CAT[tp_cat]
+    for naam, meerprijs_ex in opts:
+        cat(rp_cat).append({
+            'naam': f'Meerprijs elektrisch — {naam} ({tp_cat})',
+            'sku': f'TP-ELEK-{tp_cat}-{naam}'.upper().replace(' ', '-').replace('(', '').replace(')', '').replace('&', 'EN'),
+            'verkoop_incl': round(meerprijs_ex * BTW),
+            'omschrijving': 'Meerprijs elektrische bediening t.o.v. handbediend, incl. BTW',
+        })
+
+json.dump(prijzen, open(OUT, 'w'), indent=1, ensure_ascii=False)
+tellingen = {k: len(v) for k, v in prijzen['categorieen'].items()}
+print('\nMet Toppoint:')
+print(json.dumps(tellingen, indent=1, ensure_ascii=False))
+print('Totaal artikelen:', sum(tellingen.values()))

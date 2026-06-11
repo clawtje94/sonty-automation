@@ -15,7 +15,15 @@
   "Pergola": 1.0,
   "Markiezen": 1.0,
   "Montage": 1.0,
-  "Accessoires": 1.0
+  "Accessoires": 1.0,
+  "Raamdeco — Rolgordijnen": 1.0,
+  "Raamdeco — Duo-rolgordijnen": 1.0,
+  "Raamdeco — Jaloezieën": 1.0,
+  "Raamdeco — Jaloezieën hout": 1.0,
+  "Raamdeco — Plissé": 1.0,
+  "Raamdeco — Lamellen": 1.0,
+  "Raamdeco — Vouwgordijnen": 1.0,
+  "Raamdeco — Horren": 1.0
  },
  "categorieen": {
   "Screens": [
@@ -2320,6 +2328,1384 @@
     "sku": "KLEUR-RAL",
     "verkoop_incl": 252,
     "omschrijving": "Meerprijs t.o.v. standaardkleur"
+   }
+  ],
+  "Raamdeco — Rolgordijnen": [
+   {
+    "naam": "Rolgordijn Basic (30mm) 60×100 cm",
+    "sku": "TP-ROLGORDIJN-3000-60X100",
+    "verkoop_incl": 139,
+    "omschrijving": "Rolgordijn Basic (30mm), breedte×hoogte 60×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Basic (30mm) 110×100 cm",
+    "sku": "TP-ROLGORDIJN-3000-110X100",
+    "verkoop_incl": 163,
+    "omschrijving": "Rolgordijn Basic (30mm), breedte×hoogte 110×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Basic (30mm) 160×100 cm",
+    "sku": "TP-ROLGORDIJN-3000-160X100",
+    "verkoop_incl": 218,
+    "omschrijving": "Rolgordijn Basic (30mm), breedte×hoogte 160×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Basic (30mm) 210×100 cm",
+    "sku": "TP-ROLGORDIJN-3000-210X100",
+    "verkoop_incl": 290,
+    "omschrijving": "Rolgordijn Basic (30mm), breedte×hoogte 210×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Basic (30mm) 60×180 cm",
+    "sku": "TP-ROLGORDIJN-3000-60X180",
+    "verkoop_incl": 169,
+    "omschrijving": "Rolgordijn Basic (30mm), breedte×hoogte 60×180 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Basic (30mm) 110×180 cm",
+    "sku": "TP-ROLGORDIJN-3000-110X180",
+    "verkoop_incl": 200,
+    "omschrijving": "Rolgordijn Basic (30mm), breedte×hoogte 110×180 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Basic (30mm) 160×180 cm",
+    "sku": "TP-ROLGORDIJN-3000-160X180",
+    "verkoop_incl": 248,
+    "omschrijving": "Rolgordijn Basic (30mm), breedte×hoogte 160×180 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Basic (30mm) 210×180 cm",
+    "sku": "TP-ROLGORDIJN-3000-210X180",
+    "verkoop_incl": 333,
+    "omschrijving": "Rolgordijn Basic (30mm), breedte×hoogte 210×180 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Basic (30mm) 60×260 cm",
+    "sku": "TP-ROLGORDIJN-3000-60X260",
+    "verkoop_incl": 188,
+    "omschrijving": "Rolgordijn Basic (30mm), breedte×hoogte 60×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Basic (30mm) 110×260 cm",
+    "sku": "TP-ROLGORDIJN-3000-110X260",
+    "verkoop_incl": 224,
+    "omschrijving": "Rolgordijn Basic (30mm), breedte×hoogte 110×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Basic (30mm) 160×260 cm",
+    "sku": "TP-ROLGORDIJN-3000-160X260",
+    "verkoop_incl": 284,
+    "omschrijving": "Rolgordijn Basic (30mm), breedte×hoogte 160×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Basic (30mm) 210×260 cm",
+    "sku": "TP-ROLGORDIJN-3000-210X260",
+    "verkoop_incl": 381,
+    "omschrijving": "Rolgordijn Basic (30mm), breedte×hoogte 210×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Standaard (42mm) 60×100 cm",
+    "sku": "TP-ROLGORDIJN-4000-60X100",
+    "verkoop_incl": 157,
+    "omschrijving": "Rolgordijn Standaard (42mm), breedte×hoogte 60×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Standaard (42mm) 130×100 cm",
+    "sku": "TP-ROLGORDIJN-4000-130X100",
+    "verkoop_incl": 206,
+    "omschrijving": "Rolgordijn Standaard (42mm), breedte×hoogte 130×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Standaard (42mm) 190×100 cm",
+    "sku": "TP-ROLGORDIJN-4000-190X100",
+    "verkoop_incl": 302,
+    "omschrijving": "Rolgordijn Standaard (42mm), breedte×hoogte 190×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Standaard (42mm) 260×100 cm",
+    "sku": "TP-ROLGORDIJN-4000-260X100",
+    "verkoop_incl": 357,
+    "omschrijving": "Rolgordijn Standaard (42mm), breedte×hoogte 260×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Standaard (42mm) 60×180 cm",
+    "sku": "TP-ROLGORDIJN-4000-60X180",
+    "verkoop_incl": 188,
+    "omschrijving": "Rolgordijn Standaard (42mm), breedte×hoogte 60×180 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Standaard (42mm) 130×180 cm",
+    "sku": "TP-ROLGORDIJN-4000-130X180",
+    "verkoop_incl": 248,
+    "omschrijving": "Rolgordijn Standaard (42mm), breedte×hoogte 130×180 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Standaard (42mm) 190×180 cm",
+    "sku": "TP-ROLGORDIJN-4000-190X180",
+    "verkoop_incl": 333,
+    "omschrijving": "Rolgordijn Standaard (42mm), breedte×hoogte 190×180 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Standaard (42mm) 260×180 cm",
+    "sku": "TP-ROLGORDIJN-4000-260X180",
+    "verkoop_incl": 393,
+    "omschrijving": "Rolgordijn Standaard (42mm), breedte×hoogte 260×180 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Standaard (42mm) 60×260 cm",
+    "sku": "TP-ROLGORDIJN-4000-60X260",
+    "verkoop_incl": 206,
+    "omschrijving": "Rolgordijn Standaard (42mm), breedte×hoogte 60×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Standaard (42mm) 130×260 cm",
+    "sku": "TP-ROLGORDIJN-4000-130X260",
+    "verkoop_incl": 272,
+    "omschrijving": "Rolgordijn Standaard (42mm), breedte×hoogte 130×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Standaard (42mm) 190×260 cm",
+    "sku": "TP-ROLGORDIJN-4000-190X260",
+    "verkoop_incl": 375,
+    "omschrijving": "Rolgordijn Standaard (42mm), breedte×hoogte 190×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Standaard (42mm) 260×260 cm",
+    "sku": "TP-ROLGORDIJN-4000-260X260",
+    "verkoop_incl": 442,
+    "omschrijving": "Rolgordijn Standaard (42mm), breedte×hoogte 260×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Breed (50mm) 60×100 cm",
+    "sku": "TP-ROLGORDIJN-5000-60X100",
+    "verkoop_incl": 206,
+    "omschrijving": "Rolgordijn Breed (50mm), breedte×hoogte 60×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Breed (50mm) 110×100 cm",
+    "sku": "TP-ROLGORDIJN-5000-110X100",
+    "verkoop_incl": 248,
+    "omschrijving": "Rolgordijn Breed (50mm), breedte×hoogte 110×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Breed (50mm) 160×100 cm",
+    "sku": "TP-ROLGORDIJN-5000-160X100",
+    "verkoop_incl": 321,
+    "omschrijving": "Rolgordijn Breed (50mm), breedte×hoogte 160×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Breed (50mm) 210×100 cm",
+    "sku": "TP-ROLGORDIJN-5000-210X100",
+    "verkoop_incl": 399,
+    "omschrijving": "Rolgordijn Breed (50mm), breedte×hoogte 210×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Breed (50mm) 60×200 cm",
+    "sku": "TP-ROLGORDIJN-5000-60X200",
+    "verkoop_incl": 242,
+    "omschrijving": "Rolgordijn Breed (50mm), breedte×hoogte 60×200 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Breed (50mm) 110×200 cm",
+    "sku": "TP-ROLGORDIJN-5000-110X200",
+    "verkoop_incl": 290,
+    "omschrijving": "Rolgordijn Breed (50mm), breedte×hoogte 110×200 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Breed (50mm) 160×200 cm",
+    "sku": "TP-ROLGORDIJN-5000-160X200",
+    "verkoop_incl": 387,
+    "omschrijving": "Rolgordijn Breed (50mm), breedte×hoogte 160×200 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Breed (50mm) 210×200 cm",
+    "sku": "TP-ROLGORDIJN-5000-210X200",
+    "verkoop_incl": 454,
+    "omschrijving": "Rolgordijn Breed (50mm), breedte×hoogte 210×200 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Breed (50mm) 60×300 cm",
+    "sku": "TP-ROLGORDIJN-5000-60X300",
+    "verkoop_incl": 284,
+    "omschrijving": "Rolgordijn Breed (50mm), breedte×hoogte 60×300 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Breed (50mm) 110×300 cm",
+    "sku": "TP-ROLGORDIJN-5000-110X300",
+    "verkoop_incl": 327,
+    "omschrijving": "Rolgordijn Breed (50mm), breedte×hoogte 110×300 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Breed (50mm) 160×300 cm",
+    "sku": "TP-ROLGORDIJN-5000-160X300",
+    "verkoop_incl": 411,
+    "omschrijving": "Rolgordijn Breed (50mm), breedte×hoogte 160×300 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn Breed (50mm) 210×300 cm",
+    "sku": "TP-ROLGORDIJN-5000-210X300",
+    "verkoop_incl": 496,
+    "omschrijving": "Rolgordijn Breed (50mm), breedte×hoogte 210×300 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XL (65mm) 60×100 cm",
+    "sku": "TP-ROLGORDIJN-6000-60X100",
+    "verkoop_incl": 224,
+    "omschrijving": "Rolgordijn XL (65mm), breedte×hoogte 60×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XL (65mm) 160×100 cm",
+    "sku": "TP-ROLGORDIJN-6000-160X100",
+    "verkoop_incl": 351,
+    "omschrijving": "Rolgordijn XL (65mm), breedte×hoogte 160×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XL (65mm) 260×100 cm",
+    "sku": "TP-ROLGORDIJN-6000-260X100",
+    "verkoop_incl": 478,
+    "omschrijving": "Rolgordijn XL (65mm), breedte×hoogte 260×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XL (65mm) 360×100 cm",
+    "sku": "TP-ROLGORDIJN-6000-360X100",
+    "verkoop_incl": 617,
+    "omschrijving": "Rolgordijn XL (65mm), breedte×hoogte 360×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XL (65mm) 60×260 cm",
+    "sku": "TP-ROLGORDIJN-6000-60X260",
+    "verkoop_incl": 284,
+    "omschrijving": "Rolgordijn XL (65mm), breedte×hoogte 60×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XL (65mm) 160×260 cm",
+    "sku": "TP-ROLGORDIJN-6000-160X260",
+    "verkoop_incl": 436,
+    "omschrijving": "Rolgordijn XL (65mm), breedte×hoogte 160×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XL (65mm) 260×260 cm",
+    "sku": "TP-ROLGORDIJN-6000-260X260",
+    "verkoop_incl": 581,
+    "omschrijving": "Rolgordijn XL (65mm), breedte×hoogte 260×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XL (65mm) 360×260 cm",
+    "sku": "TP-ROLGORDIJN-6000-360X260",
+    "verkoop_incl": 738,
+    "omschrijving": "Rolgordijn XL (65mm), breedte×hoogte 360×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XL (65mm) 60×400 cm",
+    "sku": "TP-ROLGORDIJN-6000-60X400",
+    "verkoop_incl": 339,
+    "omschrijving": "Rolgordijn XL (65mm), breedte×hoogte 60×400 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XL (65mm) 160×400 cm",
+    "sku": "TP-ROLGORDIJN-6000-160X400",
+    "verkoop_incl": 508,
+    "omschrijving": "Rolgordijn XL (65mm), breedte×hoogte 160×400 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XL (65mm) 260×400 cm",
+    "sku": "TP-ROLGORDIJN-6000-260X400",
+    "verkoop_incl": 744,
+    "omschrijving": "Rolgordijn XL (65mm), breedte×hoogte 260×400 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XL (65mm) 360×400 cm",
+    "sku": "TP-ROLGORDIJN-6000-360X400",
+    "verkoop_incl": 1016,
+    "omschrijving": "Rolgordijn XL (65mm), breedte×hoogte 360×400 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XXL (80mm) 60×100 cm",
+    "sku": "TP-ROLGORDIJN-8000-60X100",
+    "verkoop_incl": 266,
+    "omschrijving": "Rolgordijn XXL (80mm), breedte×hoogte 60×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XXL (80mm) 120×100 cm",
+    "sku": "TP-ROLGORDIJN-8000-120X100",
+    "verkoop_incl": 345,
+    "omschrijving": "Rolgordijn XXL (80mm), breedte×hoogte 120×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XXL (80mm) 190×100 cm",
+    "sku": "TP-ROLGORDIJN-8000-190X100",
+    "verkoop_incl": 466,
+    "omschrijving": "Rolgordijn XXL (80mm), breedte×hoogte 190×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XXL (80mm) 250×100 cm",
+    "sku": "TP-ROLGORDIJN-8000-250X100",
+    "verkoop_incl": 544,
+    "omschrijving": "Rolgordijn XXL (80mm), breedte×hoogte 250×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XXL (80mm) 60×220 cm",
+    "sku": "TP-ROLGORDIJN-8000-60X220",
+    "verkoop_incl": 321,
+    "omschrijving": "Rolgordijn XXL (80mm), breedte×hoogte 60×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XXL (80mm) 120×220 cm",
+    "sku": "TP-ROLGORDIJN-8000-120X220",
+    "verkoop_incl": 405,
+    "omschrijving": "Rolgordijn XXL (80mm), breedte×hoogte 120×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XXL (80mm) 190×220 cm",
+    "sku": "TP-ROLGORDIJN-8000-190X220",
+    "verkoop_incl": 520,
+    "omschrijving": "Rolgordijn XXL (80mm), breedte×hoogte 190×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XXL (80mm) 250×220 cm",
+    "sku": "TP-ROLGORDIJN-8000-250X220",
+    "verkoop_incl": 629,
+    "omschrijving": "Rolgordijn XXL (80mm), breedte×hoogte 250×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XXL (80mm) 60×350 cm",
+    "sku": "TP-ROLGORDIJN-8000-60X350",
+    "verkoop_incl": 369,
+    "omschrijving": "Rolgordijn XXL (80mm), breedte×hoogte 60×350 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XXL (80mm) 120×350 cm",
+    "sku": "TP-ROLGORDIJN-8000-120X350",
+    "verkoop_incl": 430,
+    "omschrijving": "Rolgordijn XXL (80mm), breedte×hoogte 120×350 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XXL (80mm) 190×350 cm",
+    "sku": "TP-ROLGORDIJN-8000-190X350",
+    "verkoop_incl": 557,
+    "omschrijving": "Rolgordijn XXL (80mm), breedte×hoogte 190×350 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolgordijn XXL (80mm) 250×350 cm",
+    "sku": "TP-ROLGORDIJN-8000-250X350",
+    "verkoop_incl": 678,
+    "omschrijving": "Rolgordijn XXL (80mm), breedte×hoogte 250×350 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Meerprijs elektrisch — Motion accu (USB-C) (rolgordijnen)",
+    "sku": "TP-ELEK-ROLGORDIJNEN-MOTION-ACCU-USB-C",
+    "verkoop_incl": 121,
+    "omschrijving": "Meerprijs elektrische bediening t.o.v. handbediend, incl. BTW"
+   },
+   {
+    "naam": "Meerprijs elektrisch — Brel 230V (rolgordijnen)",
+    "sku": "TP-ELEK-ROLGORDIJNEN-BREL-230V",
+    "verkoop_incl": 182,
+    "omschrijving": "Meerprijs elektrische bediening t.o.v. handbediend, incl. BTW"
+   },
+   {
+    "naam": "Meerprijs elektrisch — Somfy io (rolgordijnen)",
+    "sku": "TP-ELEK-ROLGORDIJNEN-SOMFY-IO",
+    "verkoop_incl": 393,
+    "omschrijving": "Meerprijs elektrische bediening t.o.v. handbediend, incl. BTW"
+   }
+  ],
+  "Raamdeco — Duo-rolgordijnen": [
+   {
+    "naam": "Duo-rolgordijn Basic 60×100 cm",
+    "sku": "TP-DUO-ROLGORDIJN-3011-60X100",
+    "verkoop_incl": 309,
+    "omschrijving": "Duo-rolgordijn Basic, breedte×hoogte 60×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Basic 110×100 cm",
+    "sku": "TP-DUO-ROLGORDIJN-3011-110X100",
+    "verkoop_incl": 393,
+    "omschrijving": "Duo-rolgordijn Basic, breedte×hoogte 110×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Basic 160×100 cm",
+    "sku": "TP-DUO-ROLGORDIJN-3011-160X100",
+    "verkoop_incl": 484,
+    "omschrijving": "Duo-rolgordijn Basic, breedte×hoogte 160×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Basic 210×100 cm",
+    "sku": "TP-DUO-ROLGORDIJN-3011-210X100",
+    "verkoop_incl": 581,
+    "omschrijving": "Duo-rolgordijn Basic, breedte×hoogte 210×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Basic 60×170 cm",
+    "sku": "TP-DUO-ROLGORDIJN-3011-60X170",
+    "verkoop_incl": 333,
+    "omschrijving": "Duo-rolgordijn Basic, breedte×hoogte 60×170 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Basic 110×170 cm",
+    "sku": "TP-DUO-ROLGORDIJN-3011-110X170",
+    "verkoop_incl": 448,
+    "omschrijving": "Duo-rolgordijn Basic, breedte×hoogte 110×170 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Basic 160×170 cm",
+    "sku": "TP-DUO-ROLGORDIJN-3011-160X170",
+    "verkoop_incl": 557,
+    "omschrijving": "Duo-rolgordijn Basic, breedte×hoogte 160×170 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Basic 210×170 cm",
+    "sku": "TP-DUO-ROLGORDIJN-3011-210X170",
+    "verkoop_incl": 672,
+    "omschrijving": "Duo-rolgordijn Basic, breedte×hoogte 210×170 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Basic 60×240 cm",
+    "sku": "TP-DUO-ROLGORDIJN-3011-60X240",
+    "verkoop_incl": 417,
+    "omschrijving": "Duo-rolgordijn Basic, breedte×hoogte 60×240 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Basic 110×240 cm",
+    "sku": "TP-DUO-ROLGORDIJN-3011-110X240",
+    "verkoop_incl": 514,
+    "omschrijving": "Duo-rolgordijn Basic, breedte×hoogte 110×240 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Basic 160×240 cm",
+    "sku": "TP-DUO-ROLGORDIJN-3011-160X240",
+    "verkoop_incl": 641,
+    "omschrijving": "Duo-rolgordijn Basic, breedte×hoogte 160×240 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Basic 210×240 cm",
+    "sku": "TP-DUO-ROLGORDIJN-3011-210X240",
+    "verkoop_incl": 768,
+    "omschrijving": "Duo-rolgordijn Basic, breedte×hoogte 210×240 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Standaard 60×100 cm",
+    "sku": "TP-DUO-ROLGORDIJN-4011-60X100",
+    "verkoop_incl": 393,
+    "omschrijving": "Duo-rolgordijn Standaard, breedte×hoogte 60×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Standaard 130×100 cm",
+    "sku": "TP-DUO-ROLGORDIJN-4011-130X100",
+    "verkoop_incl": 557,
+    "omschrijving": "Duo-rolgordijn Standaard, breedte×hoogte 130×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Standaard 200×100 cm",
+    "sku": "TP-DUO-ROLGORDIJN-4011-200X100",
+    "verkoop_incl": 726,
+    "omschrijving": "Duo-rolgordijn Standaard, breedte×hoogte 200×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Standaard 265×100 cm",
+    "sku": "TP-DUO-ROLGORDIJN-4011-265X100",
+    "verkoop_incl": 889,
+    "omschrijving": "Duo-rolgordijn Standaard, breedte×hoogte 265×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Standaard 60×140 cm",
+    "sku": "TP-DUO-ROLGORDIJN-4011-60X140",
+    "verkoop_incl": 424,
+    "omschrijving": "Duo-rolgordijn Standaard, breedte×hoogte 60×140 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Standaard 130×140 cm",
+    "sku": "TP-DUO-ROLGORDIJN-4011-130X140",
+    "verkoop_incl": 605,
+    "omschrijving": "Duo-rolgordijn Standaard, breedte×hoogte 130×140 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Standaard 200×140 cm",
+    "sku": "TP-DUO-ROLGORDIJN-4011-200X140",
+    "verkoop_incl": 793,
+    "omschrijving": "Duo-rolgordijn Standaard, breedte×hoogte 200×140 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Standaard 265×140 cm",
+    "sku": "TP-DUO-ROLGORDIJN-4011-265X140",
+    "verkoop_incl": 974,
+    "omschrijving": "Duo-rolgordijn Standaard, breedte×hoogte 265×140 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Standaard 60×180 cm",
+    "sku": "TP-DUO-ROLGORDIJN-4011-60X180",
+    "verkoop_incl": 442,
+    "omschrijving": "Duo-rolgordijn Standaard, breedte×hoogte 60×180 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Standaard 130×180 cm",
+    "sku": "TP-DUO-ROLGORDIJN-4011-130X180",
+    "verkoop_incl": 641,
+    "omschrijving": "Duo-rolgordijn Standaard, breedte×hoogte 130×180 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Standaard 200×180 cm",
+    "sku": "TP-DUO-ROLGORDIJN-4011-200X180",
+    "verkoop_incl": 859,
+    "omschrijving": "Duo-rolgordijn Standaard, breedte×hoogte 200×180 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Duo-rolgordijn Standaard 265×180 cm",
+    "sku": "TP-DUO-ROLGORDIJN-4011-265X180",
+    "verkoop_incl": 1059,
+    "omschrijving": "Duo-rolgordijn Standaard, breedte×hoogte 265×180 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Meerprijs elektrisch — Motion accu (USB-C) (duo-rolgordijnen)",
+    "sku": "TP-ELEK-DUO-ROLGORDIJNEN-MOTION-ACCU-USB-C",
+    "verkoop_incl": 121,
+    "omschrijving": "Meerprijs elektrische bediening t.o.v. handbediend, incl. BTW"
+   },
+   {
+    "naam": "Meerprijs elektrisch — Brel 230V (duo-rolgordijnen)",
+    "sku": "TP-ELEK-DUO-ROLGORDIJNEN-BREL-230V",
+    "verkoop_incl": 182,
+    "omschrijving": "Meerprijs elektrische bediening t.o.v. handbediend, incl. BTW"
+   }
+  ],
+  "Raamdeco — Jaloezieën": [
+   {
+    "naam": "Jaloezie aluminium (Scala) 60×100 cm",
+    "sku": "TP-JALOEZIE-SCALA-ALU-60X100",
+    "verkoop_incl": 254,
+    "omschrijving": "Jaloezie aluminium (Scala), breedte×hoogte 60×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie aluminium (Scala) 120×100 cm",
+    "sku": "TP-JALOEZIE-SCALA-ALU-120X100",
+    "verkoop_incl": 321,
+    "omschrijving": "Jaloezie aluminium (Scala), breedte×hoogte 120×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie aluminium (Scala) 190×100 cm",
+    "sku": "TP-JALOEZIE-SCALA-ALU-190X100",
+    "verkoop_incl": 411,
+    "omschrijving": "Jaloezie aluminium (Scala), breedte×hoogte 190×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie aluminium (Scala) 250×100 cm",
+    "sku": "TP-JALOEZIE-SCALA-ALU-250X100",
+    "verkoop_incl": 460,
+    "omschrijving": "Jaloezie aluminium (Scala), breedte×hoogte 250×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie aluminium (Scala) 60×210 cm",
+    "sku": "TP-JALOEZIE-SCALA-ALU-60X210",
+    "verkoop_incl": 278,
+    "omschrijving": "Jaloezie aluminium (Scala), breedte×hoogte 60×210 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie aluminium (Scala) 120×210 cm",
+    "sku": "TP-JALOEZIE-SCALA-ALU-120X210",
+    "verkoop_incl": 381,
+    "omschrijving": "Jaloezie aluminium (Scala), breedte×hoogte 120×210 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie aluminium (Scala) 190×210 cm",
+    "sku": "TP-JALOEZIE-SCALA-ALU-190X210",
+    "verkoop_incl": 496,
+    "omschrijving": "Jaloezie aluminium (Scala), breedte×hoogte 190×210 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie aluminium (Scala) 250×210 cm",
+    "sku": "TP-JALOEZIE-SCALA-ALU-250X210",
+    "verkoop_incl": 587,
+    "omschrijving": "Jaloezie aluminium (Scala), breedte×hoogte 250×210 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie aluminium (Scala) 60×320 cm",
+    "sku": "TP-JALOEZIE-SCALA-ALU-60X320",
+    "verkoop_incl": 321,
+    "omschrijving": "Jaloezie aluminium (Scala), breedte×hoogte 60×320 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie aluminium (Scala) 120×320 cm",
+    "sku": "TP-JALOEZIE-SCALA-ALU-120X320",
+    "verkoop_incl": 442,
+    "omschrijving": "Jaloezie aluminium (Scala), breedte×hoogte 120×320 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie aluminium (Scala) 190×320 cm",
+    "sku": "TP-JALOEZIE-SCALA-ALU-190X320",
+    "verkoop_incl": 593,
+    "omschrijving": "Jaloezie aluminium (Scala), breedte×hoogte 190×320 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie aluminium (Scala) 250×320 cm",
+    "sku": "TP-JALOEZIE-SCALA-ALU-250X320",
+    "verkoop_incl": 708,
+    "omschrijving": "Jaloezie aluminium (Scala), breedte×hoogte 250×320 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Meerprijs elektrisch — Motion accu (jaloezieen)",
+    "sku": "TP-ELEK-JALOEZIEEN-MOTION-ACCU",
+    "verkoop_incl": 151,
+    "omschrijving": "Meerprijs elektrische bediening t.o.v. handbediend, incl. BTW"
+   },
+   {
+    "naam": "Meerprijs elektrisch — Somfy Tilt & Lift (jaloezieen)",
+    "sku": "TP-ELEK-JALOEZIEEN-SOMFY-TILT-EN-LIFT",
+    "verkoop_incl": 302,
+    "omschrijving": "Meerprijs elektrische bediening t.o.v. handbediend, incl. BTW"
+   }
+  ],
+  "Raamdeco — Jaloezieën hout": [
+   {
+    "naam": "Jaloezie hout (Silva) 80×100 cm",
+    "sku": "TP-JALOEZIE-SILVA-HOUT-80X100",
+    "verkoop_incl": 351,
+    "omschrijving": "Jaloezie hout (Silva), breedte×hoogte 80×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie hout (Silva) 140×100 cm",
+    "sku": "TP-JALOEZIE-SILVA-HOUT-140X100",
+    "verkoop_incl": 520,
+    "omschrijving": "Jaloezie hout (Silva), breedte×hoogte 140×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie hout (Silva) 210×100 cm",
+    "sku": "TP-JALOEZIE-SILVA-HOUT-210X100",
+    "verkoop_incl": 762,
+    "omschrijving": "Jaloezie hout (Silva), breedte×hoogte 210×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie hout (Silva) 270×100 cm",
+    "sku": "TP-JALOEZIE-SILVA-HOUT-270X100",
+    "verkoop_incl": 938,
+    "omschrijving": "Jaloezie hout (Silva), breedte×hoogte 270×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie hout (Silva) 80×220 cm",
+    "sku": "TP-JALOEZIE-SILVA-HOUT-80X220",
+    "verkoop_incl": 478,
+    "omschrijving": "Jaloezie hout (Silva), breedte×hoogte 80×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie hout (Silva) 140×220 cm",
+    "sku": "TP-JALOEZIE-SILVA-HOUT-140X220",
+    "verkoop_incl": 726,
+    "omschrijving": "Jaloezie hout (Silva), breedte×hoogte 140×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie hout (Silva) 210×220 cm",
+    "sku": "TP-JALOEZIE-SILVA-HOUT-210X220",
+    "verkoop_incl": 1089,
+    "omschrijving": "Jaloezie hout (Silva), breedte×hoogte 210×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie hout (Silva) 270×220 cm",
+    "sku": "TP-JALOEZIE-SILVA-HOUT-270X220",
+    "verkoop_incl": 1349,
+    "omschrijving": "Jaloezie hout (Silva), breedte×hoogte 270×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie hout (Silva) 80×325 cm",
+    "sku": "TP-JALOEZIE-SILVA-HOUT-80X325",
+    "verkoop_incl": 575,
+    "omschrijving": "Jaloezie hout (Silva), breedte×hoogte 80×325 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie hout (Silva) 140×325 cm",
+    "sku": "TP-JALOEZIE-SILVA-HOUT-140X325",
+    "verkoop_incl": 926,
+    "omschrijving": "Jaloezie hout (Silva), breedte×hoogte 140×325 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie hout (Silva) 210×325 cm",
+    "sku": "TP-JALOEZIE-SILVA-HOUT-210X325",
+    "verkoop_incl": 1373,
+    "omschrijving": "Jaloezie hout (Silva), breedte×hoogte 210×325 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Jaloezie hout (Silva) 270×325 cm",
+    "sku": "TP-JALOEZIE-SILVA-HOUT-270X325",
+    "verkoop_incl": 1718,
+    "omschrijving": "Jaloezie hout (Silva), breedte×hoogte 270×325 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Meerprijs elektrisch — Motion accu (jaloezieen-hout)",
+    "sku": "TP-ELEK-JALOEZIEEN-HOUT-MOTION-ACCU",
+    "verkoop_incl": 182,
+    "omschrijving": "Meerprijs elektrische bediening t.o.v. handbediend, incl. BTW"
+   }
+  ],
+  "Raamdeco — Plissé": [
+   {
+    "naam": "Iso Plissé (dubbel, isolerend) 60×100 cm",
+    "sku": "TP-ISO-PLISSE-60X100",
+    "verkoop_incl": 260,
+    "omschrijving": "Iso Plissé (dubbel, isolerend), breedte×hoogte 60×100 cm, Standaard model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Iso Plissé (dubbel, isolerend) 120×100 cm",
+    "sku": "TP-ISO-PLISSE-120X100",
+    "verkoop_incl": 387,
+    "omschrijving": "Iso Plissé (dubbel, isolerend), breedte×hoogte 120×100 cm, Standaard model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Iso Plissé (dubbel, isolerend) 190×100 cm",
+    "sku": "TP-ISO-PLISSE-190X100",
+    "verkoop_incl": 532,
+    "omschrijving": "Iso Plissé (dubbel, isolerend), breedte×hoogte 190×100 cm, Standaard model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Iso Plissé (dubbel, isolerend) 250×100 cm",
+    "sku": "TP-ISO-PLISSE-250X100",
+    "verkoop_incl": 666,
+    "omschrijving": "Iso Plissé (dubbel, isolerend), breedte×hoogte 250×100 cm, Standaard model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Iso Plissé (dubbel, isolerend) 60×250 cm",
+    "sku": "TP-ISO-PLISSE-60X250",
+    "verkoop_incl": 351,
+    "omschrijving": "Iso Plissé (dubbel, isolerend), breedte×hoogte 60×250 cm, Standaard model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Iso Plissé (dubbel, isolerend) 120×250 cm",
+    "sku": "TP-ISO-PLISSE-120X250",
+    "verkoop_incl": 581,
+    "omschrijving": "Iso Plissé (dubbel, isolerend), breedte×hoogte 120×250 cm, Standaard model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Iso Plissé (dubbel, isolerend) 190×250 cm",
+    "sku": "TP-ISO-PLISSE-190X250",
+    "verkoop_incl": 847,
+    "omschrijving": "Iso Plissé (dubbel, isolerend), breedte×hoogte 190×250 cm, Standaard model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Iso Plissé (dubbel, isolerend) 250×250 cm",
+    "sku": "TP-ISO-PLISSE-250X250",
+    "verkoop_incl": 1071,
+    "omschrijving": "Iso Plissé (dubbel, isolerend), breedte×hoogte 250×250 cm, Standaard model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Iso Plissé (dubbel, isolerend) 60×400 cm",
+    "sku": "TP-ISO-PLISSE-60X400",
+    "verkoop_incl": 448,
+    "omschrijving": "Iso Plissé (dubbel, isolerend), breedte×hoogte 60×400 cm, Standaard model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Iso Plissé (dubbel, isolerend) 120×400 cm",
+    "sku": "TP-ISO-PLISSE-120X400",
+    "verkoop_incl": 786,
+    "omschrijving": "Iso Plissé (dubbel, isolerend), breedte×hoogte 120×400 cm, Standaard model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Iso Plissé (dubbel, isolerend) 190×400 cm",
+    "sku": "TP-ISO-PLISSE-190X400",
+    "verkoop_incl": 1107,
+    "omschrijving": "Iso Plissé (dubbel, isolerend), breedte×hoogte 190×400 cm, Standaard model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Iso Plissé (dubbel, isolerend) 250×400 cm",
+    "sku": "TP-ISO-PLISSE-250X400",
+    "verkoop_incl": 1422,
+    "omschrijving": "Iso Plissé (dubbel, isolerend), breedte×hoogte 250×400 cm, Standaard model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé (enkel) 60×100 cm",
+    "sku": "TP-PLISSE-60X100",
+    "verkoop_incl": 236,
+    "omschrijving": "Plissé (enkel), breedte×hoogte 60×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé (enkel) 120×100 cm",
+    "sku": "TP-PLISSE-120X100",
+    "verkoop_incl": 333,
+    "omschrijving": "Plissé (enkel), breedte×hoogte 120×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé (enkel) 180×100 cm",
+    "sku": "TP-PLISSE-180X100",
+    "verkoop_incl": 424,
+    "omschrijving": "Plissé (enkel), breedte×hoogte 180×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé (enkel) 240×100 cm",
+    "sku": "TP-PLISSE-240X100",
+    "verkoop_incl": 502,
+    "omschrijving": "Plissé (enkel), breedte×hoogte 240×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé (enkel) 60×250 cm",
+    "sku": "TP-PLISSE-60X250",
+    "verkoop_incl": 302,
+    "omschrijving": "Plissé (enkel), breedte×hoogte 60×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé (enkel) 120×250 cm",
+    "sku": "TP-PLISSE-120X250",
+    "verkoop_incl": 448,
+    "omschrijving": "Plissé (enkel), breedte×hoogte 120×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé (enkel) 180×250 cm",
+    "sku": "TP-PLISSE-180X250",
+    "verkoop_incl": 575,
+    "omschrijving": "Plissé (enkel), breedte×hoogte 180×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé (enkel) 240×250 cm",
+    "sku": "TP-PLISSE-240X250",
+    "verkoop_incl": 708,
+    "omschrijving": "Plissé (enkel), breedte×hoogte 240×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé (enkel) 60×400 cm",
+    "sku": "TP-PLISSE-60X400",
+    "verkoop_incl": 357,
+    "omschrijving": "Plissé (enkel), breedte×hoogte 60×400 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé (enkel) 120×400 cm",
+    "sku": "TP-PLISSE-120X400",
+    "verkoop_incl": 496,
+    "omschrijving": "Plissé (enkel), breedte×hoogte 120×400 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé (enkel) 180×400 cm",
+    "sku": "TP-PLISSE-180X400",
+    "verkoop_incl": 641,
+    "omschrijving": "Plissé (enkel), breedte×hoogte 180×400 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé (enkel) 240×400 cm",
+    "sku": "TP-PLISSE-240X400",
+    "verkoop_incl": 762,
+    "omschrijving": "Plissé (enkel), breedte×hoogte 240×400 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Meerprijs elektrisch — Motion accu (plisse)",
+    "sku": "TP-ELEK-PLISSE-MOTION-ACCU",
+    "verkoop_incl": 151,
+    "omschrijving": "Meerprijs elektrische bediening t.o.v. handbediend, incl. BTW"
+   }
+  ],
+  "Raamdeco — Lamellen": [
+   {
+    "naam": "Verticale lamellen Iso Reflex (isolerend) 100×100 cm",
+    "sku": "TP-LAMELLEN-ISO-REFLEX-100X100",
+    "verkoop_incl": 575,
+    "omschrijving": "Verticale lamellen Iso Reflex (isolerend), breedte×hoogte 100×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen Iso Reflex (isolerend) 200×100 cm",
+    "sku": "TP-LAMELLEN-ISO-REFLEX-200X100",
+    "verkoop_incl": 1059,
+    "omschrijving": "Verticale lamellen Iso Reflex (isolerend), breedte×hoogte 200×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen Iso Reflex (isolerend) 300×100 cm",
+    "sku": "TP-LAMELLEN-ISO-REFLEX-300X100",
+    "verkoop_incl": 1543,
+    "omschrijving": "Verticale lamellen Iso Reflex (isolerend), breedte×hoogte 300×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen Iso Reflex (isolerend) 400×100 cm",
+    "sku": "TP-LAMELLEN-ISO-REFLEX-400X100",
+    "verkoop_incl": 2051,
+    "omschrijving": "Verticale lamellen Iso Reflex (isolerend), breedte×hoogte 400×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen Iso Reflex (isolerend) 100×250 cm",
+    "sku": "TP-LAMELLEN-ISO-REFLEX-100X250",
+    "verkoop_incl": 986,
+    "omschrijving": "Verticale lamellen Iso Reflex (isolerend), breedte×hoogte 100×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen Iso Reflex (isolerend) 200×250 cm",
+    "sku": "TP-LAMELLEN-ISO-REFLEX-200X250",
+    "verkoop_incl": 1888,
+    "omschrijving": "Verticale lamellen Iso Reflex (isolerend), breedte×hoogte 200×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen Iso Reflex (isolerend) 300×250 cm",
+    "sku": "TP-LAMELLEN-ISO-REFLEX-300X250",
+    "verkoop_incl": 2789,
+    "omschrijving": "Verticale lamellen Iso Reflex (isolerend), breedte×hoogte 300×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen Iso Reflex (isolerend) 400×250 cm",
+    "sku": "TP-LAMELLEN-ISO-REFLEX-400X250",
+    "verkoop_incl": 3757,
+    "omschrijving": "Verticale lamellen Iso Reflex (isolerend), breedte×hoogte 400×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen Iso Reflex (isolerend) 100×400 cm",
+    "sku": "TP-LAMELLEN-ISO-REFLEX-100X400",
+    "verkoop_incl": 1404,
+    "omschrijving": "Verticale lamellen Iso Reflex (isolerend), breedte×hoogte 100×400 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen Iso Reflex (isolerend) 200×400 cm",
+    "sku": "TP-LAMELLEN-ISO-REFLEX-200X400",
+    "verkoop_incl": 2722,
+    "omschrijving": "Verticale lamellen Iso Reflex (isolerend), breedte×hoogte 200×400 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen Iso Reflex (isolerend) 300×400 cm",
+    "sku": "TP-LAMELLEN-ISO-REFLEX-300X400",
+    "verkoop_incl": 4047,
+    "omschrijving": "Verticale lamellen Iso Reflex (isolerend), breedte×hoogte 300×400 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen Iso Reflex (isolerend) 400×400 cm",
+    "sku": "TP-LAMELLEN-ISO-REFLEX-400X400",
+    "verkoop_incl": 5457,
+    "omschrijving": "Verticale lamellen Iso Reflex (isolerend), breedte×hoogte 400×400 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen stof 100×100 cm",
+    "sku": "TP-LAMELLEN-STOF-100X100",
+    "verkoop_incl": 290,
+    "omschrijving": "Verticale lamellen stof, breedte×hoogte 100×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen stof 200×100 cm",
+    "sku": "TP-LAMELLEN-STOF-200X100",
+    "verkoop_incl": 417,
+    "omschrijving": "Verticale lamellen stof, breedte×hoogte 200×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen stof 300×100 cm",
+    "sku": "TP-LAMELLEN-STOF-300X100",
+    "verkoop_incl": 551,
+    "omschrijving": "Verticale lamellen stof, breedte×hoogte 300×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen stof 400×100 cm",
+    "sku": "TP-LAMELLEN-STOF-400X100",
+    "verkoop_incl": 684,
+    "omschrijving": "Verticale lamellen stof, breedte×hoogte 400×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen stof 100×100 cm",
+    "sku": "TP-LAMELLEN-STOF-100X100",
+    "verkoop_incl": 145,
+    "omschrijving": "Verticale lamellen stof, breedte×hoogte 100×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen stof 200×100 cm",
+    "sku": "TP-LAMELLEN-STOF-200X100",
+    "verkoop_incl": 266,
+    "omschrijving": "Verticale lamellen stof, breedte×hoogte 200×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen stof 300×100 cm",
+    "sku": "TP-LAMELLEN-STOF-300X100",
+    "verkoop_incl": 387,
+    "omschrijving": "Verticale lamellen stof, breedte×hoogte 300×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen stof 400×100 cm",
+    "sku": "TP-LAMELLEN-STOF-400X100",
+    "verkoop_incl": 508,
+    "omschrijving": "Verticale lamellen stof, breedte×hoogte 400×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen stof 100×400 cm",
+    "sku": "TP-LAMELLEN-STOF-100X400",
+    "verkoop_incl": 478,
+    "omschrijving": "Verticale lamellen stof, breedte×hoogte 100×400 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen stof 200×400 cm",
+    "sku": "TP-LAMELLEN-STOF-200X400",
+    "verkoop_incl": 817,
+    "omschrijving": "Verticale lamellen stof, breedte×hoogte 200×400 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen stof 300×400 cm",
+    "sku": "TP-LAMELLEN-STOF-300X400",
+    "verkoop_incl": 1162,
+    "omschrijving": "Verticale lamellen stof, breedte×hoogte 300×400 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen stof 400×400 cm",
+    "sku": "TP-LAMELLEN-STOF-400X400",
+    "verkoop_incl": 1555,
+    "omschrijving": "Verticale lamellen stof, breedte×hoogte 400×400 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen PVC/ALU 100×100 cm",
+    "sku": "TP-LAMELLEN-PVC-ALU-100X100",
+    "verkoop_incl": 278,
+    "omschrijving": "Verticale lamellen PVC/ALU, breedte×hoogte 100×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen PVC/ALU 200×100 cm",
+    "sku": "TP-LAMELLEN-PVC-ALU-200X100",
+    "verkoop_incl": 448,
+    "omschrijving": "Verticale lamellen PVC/ALU, breedte×hoogte 200×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen PVC/ALU 300×100 cm",
+    "sku": "TP-LAMELLEN-PVC-ALU-300X100",
+    "verkoop_incl": 653,
+    "omschrijving": "Verticale lamellen PVC/ALU, breedte×hoogte 300×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen PVC/ALU 400×100 cm",
+    "sku": "TP-LAMELLEN-PVC-ALU-400X100",
+    "verkoop_incl": 853,
+    "omschrijving": "Verticale lamellen PVC/ALU, breedte×hoogte 400×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen PVC/ALU 100×100 cm",
+    "sku": "TP-LAMELLEN-PVC-ALU-100X100",
+    "verkoop_incl": 145,
+    "omschrijving": "Verticale lamellen PVC/ALU, breedte×hoogte 100×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen PVC/ALU 200×100 cm",
+    "sku": "TP-LAMELLEN-PVC-ALU-200X100",
+    "verkoop_incl": 266,
+    "omschrijving": "Verticale lamellen PVC/ALU, breedte×hoogte 200×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen PVC/ALU 300×100 cm",
+    "sku": "TP-LAMELLEN-PVC-ALU-300X100",
+    "verkoop_incl": 387,
+    "omschrijving": "Verticale lamellen PVC/ALU, breedte×hoogte 300×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen PVC/ALU 400×100 cm",
+    "sku": "TP-LAMELLEN-PVC-ALU-400X100",
+    "verkoop_incl": 508,
+    "omschrijving": "Verticale lamellen PVC/ALU, breedte×hoogte 400×100 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen PVC/ALU 100×400 cm",
+    "sku": "TP-LAMELLEN-PVC-ALU-100X400",
+    "verkoop_incl": 563,
+    "omschrijving": "Verticale lamellen PVC/ALU, breedte×hoogte 100×400 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen PVC/ALU 200×400 cm",
+    "sku": "TP-LAMELLEN-PVC-ALU-200X400",
+    "verkoop_incl": 992,
+    "omschrijving": "Verticale lamellen PVC/ALU, breedte×hoogte 200×400 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen PVC/ALU 300×400 cm",
+    "sku": "TP-LAMELLEN-PVC-ALU-300X400",
+    "verkoop_incl": 1440,
+    "omschrijving": "Verticale lamellen PVC/ALU, breedte×hoogte 300×400 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Verticale lamellen PVC/ALU 400×400 cm",
+    "sku": "TP-LAMELLEN-PVC-ALU-400X400",
+    "verkoop_incl": 1930,
+    "omschrijving": "Verticale lamellen PVC/ALU, breedte×hoogte 400×400 cm, Vrijhangend model, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Meerprijs elektrisch — Somfy RTS (lamellen)",
+    "sku": "TP-ELEK-LAMELLEN-SOMFY-RTS",
+    "verkoop_incl": 817,
+    "omschrijving": "Meerprijs elektrische bediening t.o.v. handbediend, incl. BTW"
+   }
+  ],
+  "Raamdeco — Vouwgordijnen": [
+   {
+    "naam": "Vouwgordijn 100×100 cm",
+    "sku": "TP-VOUWGORDIJN-100X100",
+    "verkoop_incl": 121,
+    "omschrijving": "Vouwgordijn, breedte×hoogte 100×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vouwgordijn 180×100 cm",
+    "sku": "TP-VOUWGORDIJN-180X100",
+    "verkoop_incl": 212,
+    "omschrijving": "Vouwgordijn, breedte×hoogte 180×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vouwgordijn 300×100 cm",
+    "sku": "TP-VOUWGORDIJN-300X100",
+    "verkoop_incl": 302,
+    "omschrijving": "Vouwgordijn, breedte×hoogte 300×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vouwgordijn 380×100 cm",
+    "sku": "TP-VOUWGORDIJN-380X100",
+    "verkoop_incl": 363,
+    "omschrijving": "Vouwgordijn, breedte×hoogte 380×100 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vouwgordijn 100×260 cm",
+    "sku": "TP-VOUWGORDIJN-100X260",
+    "verkoop_incl": 272,
+    "omschrijving": "Vouwgordijn, breedte×hoogte 100×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vouwgordijn 180×260 cm",
+    "sku": "TP-VOUWGORDIJN-180X260",
+    "verkoop_incl": 363,
+    "omschrijving": "Vouwgordijn, breedte×hoogte 180×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vouwgordijn 300×260 cm",
+    "sku": "TP-VOUWGORDIJN-300X260",
+    "verkoop_incl": 454,
+    "omschrijving": "Vouwgordijn, breedte×hoogte 300×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vouwgordijn 380×260 cm",
+    "sku": "TP-VOUWGORDIJN-380X260",
+    "verkoop_incl": 605,
+    "omschrijving": "Vouwgordijn, breedte×hoogte 380×260 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vouwgordijn 100×350 cm",
+    "sku": "TP-VOUWGORDIJN-100X350",
+    "verkoop_incl": 393,
+    "omschrijving": "Vouwgordijn, breedte×hoogte 100×350 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vouwgordijn 180×350 cm",
+    "sku": "TP-VOUWGORDIJN-180X350",
+    "verkoop_incl": 454,
+    "omschrijving": "Vouwgordijn, breedte×hoogte 180×350 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vouwgordijn 300×350 cm",
+    "sku": "TP-VOUWGORDIJN-300X350",
+    "verkoop_incl": 635,
+    "omschrijving": "Vouwgordijn, breedte×hoogte 300×350 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vouwgordijn 380×350 cm",
+    "sku": "TP-VOUWGORDIJN-380X350",
+    "verkoop_incl": 756,
+    "omschrijving": "Vouwgordijn, breedte×hoogte 380×350 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Meerprijs elektrisch — Motion accu (vouwgordijnen)",
+    "sku": "TP-ELEK-VOUWGORDIJNEN-MOTION-ACCU",
+    "verkoop_incl": 151,
+    "omschrijving": "Meerprijs elektrische bediening t.o.v. handbediend, incl. BTW"
+   }
+  ],
+  "Raamdeco — Horren": [
+   {
+    "naam": "Inzethor 50×60 cm",
+    "sku": "TP-HOR-INZET-50X60",
+    "verkoop_incl": 169,
+    "omschrijving": "Inzethor, breedte×hoogte 50×60 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Inzethor 120×60 cm",
+    "sku": "TP-HOR-INZET-120X60",
+    "verkoop_incl": 218,
+    "omschrijving": "Inzethor, breedte×hoogte 120×60 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Inzethor 190×60 cm",
+    "sku": "TP-HOR-INZET-190X60",
+    "verkoop_incl": 302,
+    "omschrijving": "Inzethor, breedte×hoogte 190×60 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Inzethor 260×60 cm",
+    "sku": "TP-HOR-INZET-260X60",
+    "verkoop_incl": 327,
+    "omschrijving": "Inzethor, breedte×hoogte 260×60 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Inzethor 50×110 cm",
+    "sku": "TP-HOR-INZET-50X110",
+    "verkoop_incl": 206,
+    "omschrijving": "Inzethor, breedte×hoogte 50×110 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Inzethor 120×110 cm",
+    "sku": "TP-HOR-INZET-120X110",
+    "verkoop_incl": 242,
+    "omschrijving": "Inzethor, breedte×hoogte 120×110 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Inzethor 190×110 cm",
+    "sku": "TP-HOR-INZET-190X110",
+    "verkoop_incl": 339,
+    "omschrijving": "Inzethor, breedte×hoogte 190×110 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Inzethor 260×110 cm",
+    "sku": "TP-HOR-INZET-260X110",
+    "verkoop_incl": 375,
+    "omschrijving": "Inzethor, breedte×hoogte 260×110 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Inzethor 50×160 cm",
+    "sku": "TP-HOR-INZET-50X160",
+    "verkoop_incl": 278,
+    "omschrijving": "Inzethor, breedte×hoogte 50×160 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Inzethor 120×160 cm",
+    "sku": "TP-HOR-INZET-120X160",
+    "verkoop_incl": 333,
+    "omschrijving": "Inzethor, breedte×hoogte 120×160 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Inzethor 190×160 cm",
+    "sku": "TP-HOR-INZET-190X160",
+    "verkoop_incl": 454,
+    "omschrijving": "Inzethor, breedte×hoogte 190×160 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Inzethor 260×160 cm",
+    "sku": "TP-HOR-INZET-260X160",
+    "verkoop_incl": 496,
+    "omschrijving": "Inzethor, breedte×hoogte 260×160 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolhor Basic 40×40 cm",
+    "sku": "TP-ROLHOR-BASIC-40X40",
+    "verkoop_incl": 127,
+    "omschrijving": "Rolhor Basic, breedte×hoogte 40×40 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolhor Basic 80×40 cm",
+    "sku": "TP-ROLHOR-BASIC-80X40",
+    "verkoop_incl": 145,
+    "omschrijving": "Rolhor Basic, breedte×hoogte 80×40 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolhor Basic 110×40 cm",
+    "sku": "TP-ROLHOR-BASIC-110X40",
+    "verkoop_incl": 157,
+    "omschrijving": "Rolhor Basic, breedte×hoogte 110×40 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolhor Basic 150×40 cm",
+    "sku": "TP-ROLHOR-BASIC-150X40",
+    "verkoop_incl": 169,
+    "omschrijving": "Rolhor Basic, breedte×hoogte 150×40 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolhor Basic 40×120 cm",
+    "sku": "TP-ROLHOR-BASIC-40X120",
+    "verkoop_incl": 157,
+    "omschrijving": "Rolhor Basic, breedte×hoogte 40×120 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolhor Basic 80×120 cm",
+    "sku": "TP-ROLHOR-BASIC-80X120",
+    "verkoop_incl": 175,
+    "omschrijving": "Rolhor Basic, breedte×hoogte 80×120 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolhor Basic 110×120 cm",
+    "sku": "TP-ROLHOR-BASIC-110X120",
+    "verkoop_incl": 194,
+    "omschrijving": "Rolhor Basic, breedte×hoogte 110×120 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolhor Basic 150×120 cm",
+    "sku": "TP-ROLHOR-BASIC-150X120",
+    "verkoop_incl": 212,
+    "omschrijving": "Rolhor Basic, breedte×hoogte 150×120 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolhor Basic 40×200 cm",
+    "sku": "TP-ROLHOR-BASIC-40X200",
+    "verkoop_incl": 218,
+    "omschrijving": "Rolhor Basic, breedte×hoogte 40×200 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolhor Basic 80×200 cm",
+    "sku": "TP-ROLHOR-BASIC-80X200",
+    "verkoop_incl": 242,
+    "omschrijving": "Rolhor Basic, breedte×hoogte 80×200 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolhor Basic 110×200 cm",
+    "sku": "TP-ROLHOR-BASIC-110X200",
+    "verkoop_incl": 260,
+    "omschrijving": "Rolhor Basic, breedte×hoogte 110×200 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Rolhor Basic 150×200 cm",
+    "sku": "TP-ROLHOR-BASIC-150X200",
+    "verkoop_incl": 284,
+    "omschrijving": "Rolhor Basic, breedte×hoogte 150×200 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé hordeur 80×220 cm",
+    "sku": "TP-PLISSEHORDEUR-80X220",
+    "verkoop_incl": 520,
+    "omschrijving": "Plissé hordeur, breedte×hoogte 80×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé hordeur 120×220 cm",
+    "sku": "TP-PLISSEHORDEUR-120X220",
+    "verkoop_incl": 599,
+    "omschrijving": "Plissé hordeur, breedte×hoogte 120×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé hordeur 160×220 cm",
+    "sku": "TP-PLISSEHORDEUR-160X220",
+    "verkoop_incl": 659,
+    "omschrijving": "Plissé hordeur, breedte×hoogte 160×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé hordeur 200×220 cm",
+    "sku": "TP-PLISSEHORDEUR-200X220",
+    "verkoop_incl": 805,
+    "omschrijving": "Plissé hordeur, breedte×hoogte 200×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé hordeur 80×240 cm",
+    "sku": "TP-PLISSEHORDEUR-80X240",
+    "verkoop_incl": 532,
+    "omschrijving": "Plissé hordeur, breedte×hoogte 80×240 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé hordeur 120×240 cm",
+    "sku": "TP-PLISSEHORDEUR-120X240",
+    "verkoop_incl": 623,
+    "omschrijving": "Plissé hordeur, breedte×hoogte 120×240 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé hordeur 160×240 cm",
+    "sku": "TP-PLISSEHORDEUR-160X240",
+    "verkoop_incl": 678,
+    "omschrijving": "Plissé hordeur, breedte×hoogte 160×240 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé hordeur 200×240 cm",
+    "sku": "TP-PLISSEHORDEUR-200X240",
+    "verkoop_incl": 829,
+    "omschrijving": "Plissé hordeur, breedte×hoogte 200×240 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé hordeur 80×250 cm",
+    "sku": "TP-PLISSEHORDEUR-80X250",
+    "verkoop_incl": 544,
+    "omschrijving": "Plissé hordeur, breedte×hoogte 80×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé hordeur 120×250 cm",
+    "sku": "TP-PLISSEHORDEUR-120X250",
+    "verkoop_incl": 629,
+    "omschrijving": "Plissé hordeur, breedte×hoogte 120×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé hordeur 160×250 cm",
+    "sku": "TP-PLISSEHORDEUR-160X250",
+    "verkoop_incl": 690,
+    "omschrijving": "Plissé hordeur, breedte×hoogte 160×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Plissé hordeur 200×250 cm",
+    "sku": "TP-PLISSEHORDEUR-200X250",
+    "verkoop_incl": 841,
+    "omschrijving": "Plissé hordeur, breedte×hoogte 200×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
    }
   ]
  }

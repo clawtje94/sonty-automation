@@ -192,5 +192,53 @@
     "amount": 4111,
     "processedAt": "2026-06-10T16:30:59.142Z",
     "redoneAt": "2026-06-10T20:10:39.841Z"
+  },
+  "Jaap Bal": {
+    "grippCompanyId": 99260,
+    "grippOfferId": 8070,
+    "rpDocNumber": "20266667",
+    "allOffers": [
+      {
+        "grippOfferId": 8070,
+        "rpDocNumber": "20266667"
+      }
+    ],
+    "processedAt": "2026-06-11T16:30:31.271Z"
+  },
+  "Louis Sikkes": {
+    "grippCompanyId": 99261,
+    "grippOfferId": 8071,
+    "rpDocNumber": "20266108",
+    "allOffers": [
+      {
+        "grippOfferId": 8071,
+        "rpDocNumber": "20266108"
+      }
+    ],
+    "processedAt": "2026-06-11T16:30:34.934Z"
+  },
+  "Koen Agahozo-van der Ham": {
+    "grippCompanyId": 99262,
+    "grippOfferId": 8072,
+    "rpDocNumber": "20266768",
+    "allOffers": [
+      {
+        "grippOfferId": 8072,
+        "rpDocNumber": "20266768"
+      }
+    ],
+    "processedAt": "2026-06-11T16:30:38.455Z"
+  },
+  "Marijke Van den bout": {
+    "grippCompanyId": 99263,
+    "grippOfferId": 8073,
+    "rpDocNumber": "20266719",
+    "allOffers": [
+      {
+        "grippOfferId": 8073,
+        "rpDocNumber": "20266719"
+      }
+    ],
+    "processedAt": "2026-06-11T16:30:42.065Z"
   }
 }

@@ -1,344 +1,127 @@
 # Sonty — Automation Flow Map
 
-> Status: Design phase. No live systems connected.
-> Last updated: 2026-03-08
+> Status: Active design
+> Last updated: 2026-03-10
 
 ---
 
-## Automation Principles
+## Customer Journey (18 Steps)
 
-- Every automation is triggered by a **specific event** (not a schedule where possible)
-- Every automation has a **fallback** if an API call fails (log error, create HubSpot task for manual action)
-- Every automation is **idempotent** — running it twice produces the same result
-- All automations are built in **n8n** and documented below before implementation begins
+```
+┌──────────────────────────────────────────────────────────────────┐
+│  1. Lead enters Reuzenpanda configurator                         │
+│     (via Meta / Google / Pinterest ad)                           │
+│                                                                  │
+│  2. Reuzenpanda generates first price indication                 │
+│     → ZAP-01: Lead + deal created in HubSpot                    │
+│                                                                  │
+│  3. Sales performs call attempts                                  │
+│     → WF-01: HubSpot creates call tasks                         │
+│                                                                  │
+│  4. Price indication sent by email                               │
+│     → Sales sends from HubSpot                                  │
+│                                                                  │
+│  5. WhatsApp follow-up via Trengo                                │
+│     → ZAP-02: randomized templates                              │
+│                                                                  │
+│  6. Customer responds via WhatsApp                               │
+│     → Handled in Trengo                                         │
+│                                                                  │
+│  7. Customer agrees → measurement scheduled in Planado           │
+│     → ZAP-03: HubSpot stage change → Planado job                │
+│                                                                  │
+│  8. Measurement completed                                        │
+│     → ZAP-04: Planado webhook → HubSpot update                  │
+│                                                                  │
+│  9. Final quote created in Gripp                                 │
+│     → ZAP-05: HubSpot → Gripp quote                            │
+│                                                                  │
+│ 10. Customer approves final quote                                │
+│     → Sales marks in HubSpot                                    │
+│                                                                  │
+│ 11. Deposit invoice sent                                         │
+│     → ZAP-06: HubSpot → Gripp invoice                          │
+│                                                                  │
+│ 12. Products ordered from supplier                               │
+│     → Manual by operations                                      │
+│                                                                  │
+│ 13. Supplier sends order confirmation to orders@sonty.nl         │
+│     → ZAP-07: Email → HubSpot update                           │
+│                                                                  │
+│ 14. HubSpot deal updated (via ZAP-07)                            │
+│                                                                  │
+│ 15. Installation scheduled in Planado                            │
+│     → ZAP-08: HubSpot stage change → Planado job                │
+│                                                                  │
+│ 16. Installation completed                                       │
+│     → ZAP-09: Planado webhook → HubSpot update                  │
+│                                                                  │
+│ 17. Final invoice sent via Gripp                                 │
+│     → ZAP-10: HubSpot → Gripp invoice                          │
+│                                                                  │
+│ 18. Review request sent via Trengo                               │
+│     → ZAP-11: WhatsApp review request → deal closed             │
+└──────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Workflow Index
+## Automation Responsibility Matrix
 
-| ID | Name | Trigger | Systems Involved |
+| Step | System | Automation | Manual? |
 |---|---|---|---|
-| WF-01 | Lead Intake | Ad platform webhook | Meta/Google/Pinterest → HubSpot → Postgres |
-| WF-02 | Call Attempt 1 | Timer after lead created | n8n → HubSpot (task) |
-| WF-03 | Call Attempt 2 | Timer after WF-02 | n8n → HubSpot (task) |
-| WF-04 | First Quote Send | No contact after 2 attempts | Reuzenpanda → Outlook → HubSpot |
-| WF-05 | Quote Follow-up | No response after 3 days | WhatsApp → HubSpot |
-| WF-06 | Measurement Booking | Quote accepted | Bookings → Outlook → WhatsApp → HubSpot |
-| WF-07 | Post-Measurement Alert | Appointment completed | Bookings → HubSpot (task) |
-| WF-08 | Final Quote Send | Measurements entered | Gripp → Outlook → HubSpot |
-| WF-09 | Deal Won + Deposit Invoice | Quote approved | Gripp → Outlook → HubSpot |
-| WF-10 | Deposit Confirmed | Invoice paid | Gripp → HubSpot (task) → WhatsApp |
-| WF-11 | Installation Scheduling | Products arrived | Bookings → Outlook → HubSpot |
-| WF-12 | Post-Installation Wrap-up | Installation completed | Gripp → Outlook → WhatsApp → HubSpot |
-| WF-13 | Reporting ETL | Scheduled (hourly) | All systems → Postgres |
-| WF-14 | KPI Snapshot | Scheduled (daily) | Postgres → kpi_snapshots |
+| 1 | Reuzenpanda | Customer self-service | — |
+| 2 | Zapier → HubSpot | ZAP-01 | — |
+| 3 | HubSpot | WF-01 (call tasks) | Sales makes calls |
+| 4 | HubSpot | — | Sales sends email |
+| 5 | Zapier → Trengo | ZAP-02 | — |
+| 6 | Trengo | — | Sales handles response |
+| 7 | Zapier → Planado | ZAP-03 | Sales sets stage |
+| 8 | Planado → Zapier → HubSpot | ZAP-04 | — |
+| 9 | Zapier → Gripp | ZAP-05 | Sales triggers |
+| 10 | HubSpot | — | Sales marks approval |
+| 11 | Zapier → Gripp | ZAP-06 | — |
+| 12 | — | — | Operations orders |
+| 13 | Email → Zapier → HubSpot | ZAP-07 | — |
+| 14 | HubSpot | Via ZAP-07 | — |
+| 15 | Zapier → Planado | ZAP-08 | Dispatcher sets date |
+| 16 | Planado → Zapier → HubSpot | ZAP-09 | — |
+| 17 | Zapier → Gripp | ZAP-10 | — |
+| 18 | Zapier → Trengo | ZAP-11 | — |
 
 ---
 
-## WF-01: Lead Intake
+## Zapier Zaps Summary
 
-```
-TRIGGER: Webhook from Meta / Google / Pinterest (lead form submission)
-
-STEPS:
-  1. Receive webhook payload
-  2. Map fields to HubSpot contact schema
-  3. Check for duplicate (by email, then phone)
-     ├── Duplicate found → update existing contact, log note
-     └── No duplicate → create new contact
-  4. Create HubSpot Deal
-     · Name: "{Lastname} – {Product interest}"
-     · Stage: "New Lead"
-     · Source: lead platform + UTM data
-  5. Write to Postgres: leads table + funnel_event (new_lead)
-  6. Trigger WF-02 (schedule call attempt 1)
-
-ERROR HANDLING:
-  · If HubSpot API fails → retry 3x with backoff → alert via email
-  · If duplicate detection ambiguous → create contact, flag sonty_possible_duplicate
-```
+| ID | Name | Trigger | Action |
+|---|---|---|---|
+| ZAP-01 | Lead Intake | Reuzenpanda new lead | Create HubSpot contact + deal |
+| ZAP-02 | WhatsApp Follow-up | HubSpot stage: Prijsindicatie Verstuurd | Trengo WhatsApp (random template) |
+| ZAP-03 | Schedule Measurement | HubSpot stage: Opmeting Ingepland | Planado create job (Opmeting) |
+| ZAP-04 | Measurement Done | Planado job_finished (Opmeting) | HubSpot stage update + task |
+| ZAP-05 | Final Quote | HubSpot stage: Definitieve Offerte | Gripp create quote |
+| ZAP-06 | Deposit Invoice | HubSpot stage: Offerte Akkoord | Gripp create invoice (50%) |
+| ZAP-07 | Order Confirmation | Email at orders@sonty.nl | HubSpot stage update |
+| ZAP-08 | Schedule Installation | HubSpot stage: Installatie Ingepland | Planado create job (Installatie) |
+| ZAP-09 | Installation Done | Planado job_finished (Installatie) | HubSpot stage update + task |
+| ZAP-10 | Final Invoice | HubSpot stage: Eindfactuur | Gripp create invoice (50%) |
+| ZAP-11 | Review Request | HubSpot stage: Eindfactuur (24h delay) | Trengo WhatsApp review |
 
 ---
 
-## WF-02: Call Attempt 1
+## HubSpot Native Workflows
 
-```
-TRIGGER: 1 hour after lead created (or next business hour if outside 08:30–18:00)
-
-STEPS:
-  1. Check deal is still in stage "New Lead"
-     └── If stage has advanced → abort (already contacted)
-  2. Create HubSpot Task:
-     · Title: "Bel {Firstname} – Poging 1"
-     · Due: now
-     · Assign to: deal owner
-  3. Update deal stage: "Call Attempt 1"
-  4. Set sonty_call_attempt_1_date = now
-  5. Schedule WF-03 for 24 hours later
-
-ERROR HANDLING:
-  · If HubSpot API fails → log, retry, alert
-```
+| ID | Name | Trigger | Action |
+|---|---|---|---|
+| WF-01 | Call Attempt Tasks | New deal (Nieuwe Lead) | Create call tasks (1h + 24h delay) |
+| WF-02 | Internal Notifications | Any stage change | Notify deal owner |
+| WF-03 | Stale Deal Alert | No change 7 days | Create task + alert |
+| WF-04 | Lost Deal Cleanup | Deal marked lost | Close date + log reason |
 
 ---
 
-## WF-03: Call Attempt 2
+## Business Hours
 
-```
-TRIGGER: 24 hours after WF-02 (business hours only)
-
-STEPS:
-  1. Check deal stage
-     └── If stage has advanced past "Call Attempt 1" → abort
-  2. Create HubSpot Task:
-     · Title: "Bel {Firstname} – Poging 2"
-     · Due: now
-  3. Update deal stage: "Call Attempt 2"
-  4. Set sonty_call_attempt_2_date = now
-  5. Schedule WF-04 for 4 hours later (send first quote if still no contact)
-```
-
----
-
-## WF-04: First Quote Send (Reuzenpanda)
-
-```
-TRIGGER:
-  Option A: 4 hours after WF-03, if stage is still "Call Attempt 2"
-  Option B: Manual trigger by sales rep from HubSpot
-
-STEPS:
-  1. Check deal stage — abort if already past "Call Attempt 2"
-  2. Call Reuzenpanda API:
-     · Input: product_interest, postal_code
-     · Output: quote PDF URL + first quote amount
-  3. Store quote PDF link on HubSpot deal
-  4. Set sonty_first_quote_amount + sonty_first_quote_date
-  5. Send email via Outlook:
-     · Template: first_quote_email
-     · Attach: Reuzenpanda PDF
-     · Log email activity in HubSpot
-  6. Update deal stage: "First Quote Sent"
-  7. Write to Postgres: funnel_event
-  8. Schedule WF-05 for 3 days later
-
-ERROR HANDLING:
-  · If Reuzenpanda API fails → create HubSpot task "Stuur eerste offerte handmatig"
-  · If email fails → retry, then alert
-```
-
----
-
-## WF-05: Quote Follow-up (WhatsApp)
-
-```
-TRIGGER: 3 days after WF-04, if stage is still "First Quote Sent"
-
-STEPS:
-  1. Check deal stage — abort if advanced
-  2. Check sonty_whatsapp_opt_in = true
-     └── If false → send follow-up email instead via Outlook
-  3. Send WhatsApp message:
-     · Template: quote_followup_whatsapp
-     · Variables: firstname, product_interest
-  4. Log WhatsApp message as note in HubSpot
-  5. Update deal stage: "Quote Follow-up"
-  6. Create HubSpot task: "Opvolgen als geen reactie binnen 48u"
-```
-
----
-
-## WF-06: Measurement Booking
-
-```
-TRIGGER: Sales rep marks deal stage "Quote Accepted" in HubSpot
-
-STEPS:
-  1. Create appointment in Microsoft Bookings:
-     · Service: "Opmeting"
-     · Duration: 60 minutes
-     · Customer: contact name + email + phone
-  2. Store appointment ID on HubSpot deal (sonty_measurement_date)
-  3. Send confirmation email via Outlook:
-     · Template: measurement_confirmation_email
-     · Include: date, time, address confirmation
-  4. If WhatsApp opt-in: send WhatsApp confirmation
-  5. Update deal stage: "Measurement Scheduled"
-  6. Write to Postgres: funnel_event
-
-ERROR HANDLING:
-  · If no slots available → create task "Plan opmeting handmatig"
-```
-
----
-
-## WF-07: Post-Measurement Alert
-
-```
-TRIGGER: Microsoft Bookings marks appointment as completed
-
-STEPS:
-  1. Update deal stage: "Measurement Done"
-  2. Create HubSpot task: "Verwerk opmeting en maak definitieve offerte in Gripp"
-     · Assign to: deal owner
-     · Due: same day
-  3. Write to Postgres: funnel_event (measurement_done)
-```
-
----
-
-## WF-08: Final Quote Send (Gripp)
-
-```
-TRIGGER: Sales rep triggers via HubSpot (after entering measurements in Gripp)
-
-STEPS:
-  1. Call Gripp API:
-     · Input: deal details, product specs, measured dimensions
-     · Creates quote in Gripp
-     · Returns: quote_id, PDF URL, total amount
-  2. Store gripp_quote_id + sonty_final_quote_amount on HubSpot deal
-  3. Send email via Outlook:
-     · Template: final_quote_email
-     · Attach: Gripp quote PDF
-     · Log in HubSpot
-  4. Update deal stage: "Final Quote Sent"
-  5. Set sonty_final_quote_date
-  6. Write to Postgres: funnel_event
-```
-
----
-
-## WF-09: Deal Won + Deposit Invoice
-
-```
-TRIGGER: Gripp quote status changes to "Accepted"
-         (n8n polls Gripp every 30 min, or webhook if available)
-
-STEPS:
-  1. Update HubSpot deal:
-     · Stage: "Won"
-     · Amount: final_quote_amount
-     · Close date: today
-  2. Create deposit invoice in Gripp:
-     · Amount: 50% of final quote
-     · Due: 14 days
-  3. Store gripp_invoice_id_deposit on HubSpot deal
-  4. Send deposit invoice email via Outlook:
-     · Template: deposit_invoice_email
-     · Attach: Gripp invoice PDF
-  5. Write to Postgres: funnel_event (won) + revenue_event (deposit, invoiced)
-```
-
----
-
-## WF-10: Deposit Confirmed → Product Order
-
-```
-TRIGGER: Gripp deposit invoice status changes to "Paid"
-
-STEPS:
-  1. Update HubSpot deal stage: "Deposit Received"
-  2. Set sonty_deposit_paid_date
-  3. Create HubSpot task: "Bestel producten bij leverancier"
-     · Assign to: operations
-     · Due: today
-  4. Send internal notification (email or WhatsApp to operations team)
-  5. Write to Postgres: funnel_event (deposit_paid) + revenue_event (deposit, paid)
-```
-
----
-
-## WF-11: Installation Scheduling
-
-```
-TRIGGER: Sales rep marks deal "Products Arrived" in HubSpot
-
-STEPS:
-  1. Set sonty_products_arrived_date
-  2. Update deal stage: "Products Ordered"
-  3. Create appointment in Microsoft Bookings:
-     · Service: "Installatie"
-     · Duration: depends on product (stored on deal)
-  4. Store installation_date on deal
-  5. Send installation confirmation email + WhatsApp to customer
-  6. Update deal stage: "Installation Scheduled"
-  7. Write to Postgres: funnel_event
-```
-
----
-
-## WF-12: Post-Installation Wrap-up
-
-```
-TRIGGER: Microsoft Bookings installation appointment marked completed
-
-STEPS:
-  1. Update deal stage: "Installation Done"
-  2. Create final invoice in Gripp:
-     · Amount: 50% remaining balance
-     · Due: 14 days
-  3. Store gripp_invoice_id_final
-  4. Send final invoice email via Outlook
-  5. Wait 24 hours → send review request via WhatsApp (if opt-in)
-     Fallback: send review request via email
-  6. Update deal stage: "Completed"
-  7. Write to Postgres: funnel_event (completed) + revenue_event (final, invoiced)
-```
-
----
-
-## WF-13: Reporting ETL
-
-```
-TRIGGER: Scheduled — every hour
-
-STEPS:
-  1. Pull from HubSpot: all updated contacts + deals since last run
-  2. Pull from Gripp: invoice + payment status for open deals
-  3. Pull from Microsoft Bookings: appointment status changes
-  4. Pull from Meta / Google / Pinterest: daily ad spend + lead counts
-  5. Transform to Postgres schema
-  6. UPSERT into: leads, deals, funnel_events, revenue_events, ad_performance
-  7. Log ETL run result (rows updated, errors)
-
-ERROR HANDLING:
-  · Log failed pulls per system
-  · Continue with available data — do not abort full ETL for one failing source
-  · Alert if same source fails 3+ consecutive runs
-```
-
----
-
-## WF-14: Daily KPI Snapshot
-
-```
-TRIGGER: Scheduled — daily at 06:00
-
-STEPS:
-  1. Query Postgres for previous day's data
-  2. Calculate:
-     · leads_total (count by date)
-     · leads_contacted (deals past "New Lead")
-     · first_quotes_sent
-     · measurements_done
-     · deals_won
-     · deals_completed
-     · revenue_invoiced (sum of all invoices created)
-     · revenue_collected (sum of paid invoices)
-     · conversion_rate (won / leads_total)
-     · avg_deal_value (revenue / won)
-  3. INSERT into kpi_snapshots (period=daily)
-  4. Rollup: weekly snapshot on Mondays, monthly on 1st of month
-```
-
----
-
-## Business Hours Definition
-
-All time-based triggers respect business hours:
 - **Monday–Friday: 08:30–18:00**
 - **Saturday: 09:00–13:00**
 - **Sunday + public holidays: no automated outreach**
-
-Triggers that fall outside business hours are queued and fire at the next business hour open.

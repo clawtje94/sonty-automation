@@ -34,3 +34,46 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Browser sessions / persistent data
+data/hubspot-browser/
+data/zapier-browser/
+data/trengo-browser/
+data/nmbrs-browser/
+
+# Telegram state
+.telegram-state.json
+scripts/.telegram-daemon.pid
+scripts/.telegram-inbox-lastread.txt
+scripts/.telegram-last-read.txt
+scripts/.telegram-messages.json
+scripts/.telegram-offset.txt
+telegram-inbox.txt
+
+# Session files
+scripts/.zapier-session.json
+scripts/.zapier-webhook-url-*.txt
+
+# Token/key files
+scripts/webhook-token.txt
+scripts/planado-api-key.txt
+scripts/telegram-offset.txt
+scripts/zap09-webhook-url.txt
+
+# Screenshots (large binary files)
+screenshots/
+scripts/*.png
+
+# Videos
+scripts/videos/
+
+# Logs
+logs/
+
+# PDF files (generated)
+docs/*.pdf
+.vercel
+scripts/.anthropic-api-key.txt
+scripts/secrets.js
+.next/
+data/google-service-account.json

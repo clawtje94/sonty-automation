@@ -1,0 +1,80 @@
+{
+  "bijgewerkt": "2026-03-20",
+  "bron": "Joris via Telegram (definitieve teamindeling)",
+  "teams": [
+    {
+      "naam": "Marvin / Kevin",
+      "type": "montage",
+      "leden": ["Marvin", "Kevin Gibson"],
+      "planado_status": "TODO — Marvin moet nog worden toegevoegd"
+    },
+    {
+      "naam": "Yudi / Nick",
+      "type": "montage",
+      "leden": ["Yudi", "Nick Huizer"],
+      "planado_status": "TODO — Yudi moet nog worden toegevoegd"
+    },
+    {
+      "naam": "Mick / Tygo",
+      "type": "montage",
+      "leden": ["Mick Mulders", "Tygo Krikke"],
+      "planado_team_uuid": "1f1242e6-110b-6630-9096-5ee1ed195271",
+      "planado_status": "OK"
+    },
+    {
+      "naam": "Marvin / Bart",
+      "type": "zzp",
+      "leden": ["Marvin", "Bart"],
+      "opmerking": "ZZP team — mogelijk onder 1 Planado gebruiker",
+      "planado_status": "TODO"
+    },
+    {
+      "naam": "Joey",
+      "type": "solo",
+      "leden": ["Joey Engelen"],
+      "planado_team_uuid": "1f1242e6-deb5-68f0-96a3-5efdf4d75733",
+      "planado_status": "OK"
+    },
+    {
+      "naam": "Sjoerd",
+      "type": "solo",
+      "leden": ["Sjoerd Pelle"],
+      "planado_team_uuid": "1f1242e6-9c96-60c0-a7ee-3e759a52d93f",
+      "planado_status": "OK"
+    },
+    {
+      "naam": "Nanny",
+      "type": "solo",
+      "leden": ["Nanny van Vliet - Kester"],
+      "planado_team_uuid": "1f1242e7-5d8d-63f0-a4ba-2e4f867ea114",
+      "planado_status": "OK"
+    },
+    {
+      "naam": "Jaimy",
+      "type": "solo",
+      "leden": ["Jaimy de Wit"],
+      "planado_team_uuid": "1f1242e7-1c8d-61b0-9e62-6efa2abd20b5",
+      "planado_status": "OK"
+    },
+    {
+      "naam": "Jorren",
+      "type": "solo",
+      "leden": ["Jorren Plugge"],
+      "planado_status": "TODO — team aanmaken in Planado"
+    }
+  ],
+  "te_verwijderen": [
+    {
+      "naam": "Kevin / Nick",
+      "planado_team_uuid": "1f1242e6-5edb-6790-96a3-5efdf4d75733",
+      "reden": "Foutieve samenstelling — Kevin hoort bij Marvin, Nick bij Yudi"
+    }
+  ],
+  "openstaand": [
+    "Marvin toevoegen aan Planado (email bevestigen)",
+    "Yudi toevoegen aan Planado (yudi@sonty.nl)",
+    "Bart: apart account of onder Marvin?",
+    "Jorren solo team aanmaken in Planado",
+    "Kevin / Nick team verwijderen in Planado"
+  ]
+}

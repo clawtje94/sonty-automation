@@ -1,0 +1,196 @@
+{
+  "Samantha Erkelens": {
+    "processedAt": "2026-06-06T11:24:31.306Z",
+    "grippCompanyId": 99206,
+    "grippOfferId": 7965,
+    "rpDocNumber": "20266581"
+  },
+  "Angelique Hartman": {
+    "processedAt": "2026-06-06T11:24:31.306Z",
+    "grippCompanyId": 99209,
+    "grippOfferId": 7969,
+    "rpDocNumber": "20266740"
+  },
+  "Robert Barmentloo": {
+    "grippCompanyId": 99211,
+    "grippOfferId": 7971,
+    "rpDocNumber": "20266031",
+    "amount": 6795.3,
+    "processedAt": "2026-06-06T11:25:47.983Z"
+  },
+  "Wim van Asperen": {
+    "grippCompanyId": 99212,
+    "grippOfferId": 7972,
+    "rpDocNumber": "20266353",
+    "amount": 5832.6,
+    "processedAt": "2026-06-06T11:26:03.135Z"
+  },
+  "Sander Philipse": {
+    "grippCompanyId": 99213,
+    "grippOfferId": 7973,
+    "rpDocNumber": "20265843",
+    "amount": 9316.5,
+    "processedAt": "2026-06-06T11:26:27.509Z"
+  },
+  "Thijs Rosenkrands": {
+    "grippCompanyId": 99214,
+    "grippOfferId": 7974,
+    "rpDocNumber": "20264993",
+    "amount": 1592.6,
+    "processedAt": "2026-06-06T11:26:52.049Z"
+  },
+  "Lisa Jansen - de Witte": {
+    "grippCompanyId": 99215,
+    "grippOfferId": 7975,
+    "rpDocNumber": "20265799",
+    "amount": 3974.5,
+    "processedAt": "2026-06-06T11:27:06.272Z"
+  },
+  "Suresh Nehara": {
+    "grippCompanyId": 99216,
+    "grippOfferId": 7976,
+    "rpDocNumber": "202513597",
+    "amount": 1723,
+    "processedAt": "2026-06-06T11:27:21.992Z"
+  },
+  "Thomas Engels": {
+    "grippCompanyId": 99217,
+    "grippOfferId": 7977,
+    "rpDocNumber": "20265535",
+    "amount": 2097,
+    "processedAt": "2026-06-06T11:30:59.108Z"
+  },
+  "Marco Van den Hooven": {
+    "grippCompanyId": 99218,
+    "grippOfferId": 7978,
+    "rpDocNumber": "20266507",
+    "amount": 4150,
+    "processedAt": "2026-06-06T11:31:23.827Z"
+  },
+  "Ercan Kahraman": {
+    "grippCompanyId": 99219,
+    "grippOfferId": 7979,
+    "rpDocNumber": "20266248",
+    "amount": 6101.2,
+    "processedAt": "2026-06-06T11:31:50.464Z"
+  },
+  "Rafal Mateuszak": {
+    "grippCompanyId": 99220,
+    "grippOfferId": 7980,
+    "rpDocNumber": "20265828",
+    "amount": 4219.5,
+    "processedAt": "2026-06-06T11:32:08.727Z"
+  },
+  "Michael Jooste": {
+    "grippCompanyId": 99221,
+    "grippOfferId": 7981,
+    "rpDocNumber": "20265466",
+    "amount": 3311.3,
+    "processedAt": "2026-06-06T11:32:32.782Z"
+  },
+  "Joost Spee": {
+    "grippCompanyId": 99222,
+    "grippOfferId": 7982,
+    "rpDocNumber": "20263192",
+    "amount": 8644.29,
+    "processedAt": "2026-06-06T11:32:56.988Z"
+  },
+  "Froukje Udink": {
+    "grippCompanyId": 99244,
+    "grippOfferId": 8043,
+    "rpDocNumber": "20266613",
+    "amount": 1702.08,
+    "processedAt": "2026-06-10T13:18:45.178Z",
+    "kortingRegelAt": "2026-06-10T20:14:21.980Z"
+  },
+  "John Ouwendijk": {
+    "grippCompanyId": 99245,
+    "grippOfferId": 8044,
+    "rpDocNumber": "20266609",
+    "amount": 3304.8,
+    "processedAt": "2026-06-10T13:18:45.643Z",
+    "kortingRegelAt": "2026-06-10T20:14:22.264Z"
+  },
+  "Oscar Hoogenraad": {
+    "grippCompanyId": 99246,
+    "grippOfferId": 8045,
+    "rpDocNumber": "20266637",
+    "amount": 3425,
+    "processedAt": "2026-06-10T13:18:46.132Z",
+    "kortingRegelAt": "2026-06-10T20:14:22.580Z"
+  },
+  "Bas Werther": {
+    "grippCompanyId": 99247,
+    "grippOfferId": 8046,
+    "rpDocNumber": "20266615",
+    "amount": 3389.3,
+    "processedAt": "2026-06-10T13:18:46.624Z",
+    "kortingRegelAt": "2026-06-10T20:14:22.877Z"
+  },
+  "Wouter Meijers": {
+    "grippCompanyId": 99248,
+    "grippOfferId": 8047,
+    "rpDocNumber": "20265805",
+    "amount": 1762,
+    "processedAt": "2026-06-10T13:18:47.109Z",
+    "kortingRegelAt": "2026-06-10T20:14:23.172Z"
+  },
+  "Kieran Harding": {
+    "grippCompanyId": 99249,
+    "grippOfferId": 8048,
+    "rpDocNumber": "20266159",
+    "amount": 4944.9,
+    "processedAt": "2026-06-10T13:18:47.691Z",
+    "redoneAt": "2026-06-10T20:10:38.565Z",
+    "kortingRegelAt": "2026-06-10T20:14:23.526Z"
+  },
+  "Henkjan  Heemskerk": {
+    "grippCompanyId": 99250,
+    "grippOfferId": 8049,
+    "rpDocNumber": "20266548",
+    "amount": 1546.1,
+    "processedAt": "2026-06-10T13:18:48.646Z",
+    "kortingRegelAt": "2026-06-10T20:14:23.831Z"
+  },
+  "Irma van Veen": {
+    "grippCompanyId": 99251,
+    "grippOfferId": 8050,
+    "rpDocNumber": "20264899",
+    "amount": 3372.51,
+    "processedAt": "2026-06-10T13:18:49.133Z",
+    "kortingRegelAt": "2026-06-10T20:14:24.140Z"
+  },
+  "Husain Kapadia": {
+    "grippCompanyId": 99252,
+    "grippOfferId": 8051,
+    "rpDocNumber": "20264281",
+    "amount": 11436,
+    "processedAt": "2026-06-10T13:18:49.779Z",
+    "kortingRegelAt": "2026-06-10T20:17:08.896Z",
+    "grippOfferId2": 8053,
+    "rpDocNumber2": "20264282"
+  },
+  "Nout van Zon": {
+    "grippCompanyId": 99253,
+    "grippOfferId": 8052,
+    "rpDocNumber": "20266731",
+    "amount": 6768.5,
+    "processedAt": "2026-06-10T13:18:50.330Z",
+    "redoneAt": "2026-06-10T20:10:39.285Z",
+    "kortingRegelAt": "2026-06-10T20:17:14.402Z"
+  },
+  "Samantha Kats": {
+    "grippCompanyId": 99254,
+    "grippOfferId": 8034,
+    "rpDocNumber": "202515515",
+    "processedAt": "2026-06-10T13:24:26.786Z"
+  },
+  "Silvia Ark": {
+    "grippCompanyId": 99257,
+    "grippOfferId": 8042,
+    "rpDocNumber": "20266884",
+    "amount": 4111,
+    "processedAt": "2026-06-10T16:30:59.142Z",
+    "redoneAt": "2026-06-10T20:10:39.841Z"
+  }
+}

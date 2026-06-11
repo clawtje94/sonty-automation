@@ -1,0 +1,102 @@
+[
+  {
+    "id": "mmkv0zxubnt5",
+    "title": "HubSpot tracking code op sonty.nl plaatsen",
+    "description": "Nodig voor leadbron-tracking (Google/Meta/Organisch)",
+    "author": "Claude",
+    "priority": "hoog",
+    "status": "idee",
+    "created": "2026-03-10T17:04:19.698Z",
+    "updated": "2026-03-11T10:09:31.256Z"
+  },
+  {
+    "id": "mmkv0zy6x21w",
+    "title": "Google Ads koppelen aan HubSpot",
+    "description": "Account 777-367-3700 verbinden via HubSpot Instellingen > Advertenties",
+    "author": "Claude",
+    "priority": "hoog",
+    "status": "idee",
+    "created": "2026-03-10T17:04:19.710Z",
+    "updated": "2026-03-10T17:04:19.710Z"
+  },
+  {
+    "id": "mmkv0zyd3vbp",
+    "title": "Meta Ads koppelen aan HubSpot",
+    "description": "Account 1633352477464320 verbinden via HubSpot Instellingen > Advertenties",
+    "author": "Claude",
+    "priority": "hoog",
+    "status": "idee",
+    "created": "2026-03-10T17:04:19.718Z",
+    "updated": "2026-03-10T17:04:19.718Z"
+  },
+  {
+    "id": "mmkv0zylkgka",
+    "title": "ZAP-03/08: Adres + telefoon toevoegen aan Planado jobs",
+    "description": "Get Contact tussenstap afronden zodat klantgegevens in Planado komen",
+    "author": "Claude",
+    "priority": "hoog",
+    "status": "idee",
+    "created": "2026-03-10T17:04:19.725Z",
+    "updated": "2026-03-10T17:04:19.725Z"
+  },
+  {
+    "id": "mmkv0zyrspkf",
+    "title": "ZAP-04 + ZAP-09 bouwen: Planado webhooks",
+    "description": "Planado job_finished -> HubSpot deal stage updaten",
+    "author": "Claude",
+    "priority": "normaal",
+    "status": "idee",
+    "created": "2026-03-10T17:04:19.731Z",
+    "updated": "2026-03-10T17:04:19.731Z"
+  },
+  {
+    "id": "mmkv0zyxcaes",
+    "title": "UTM parameters instellen op alle ads",
+    "description": "utm_source/medium/campaign op Google en Meta campagnes",
+    "author": "Claude",
+    "priority": "normaal",
+    "status": "idee",
+    "created": "2026-03-10T17:04:19.737Z",
+    "updated": "2026-03-10T17:04:19.737Z"
+  },
+  {
+    "id": "mmkv0zz3jdaq",
+    "title": "Dashboard online bereikbaar maken",
+    "description": "Via VPS of tunnel zodat je niet alleen lokaal kunt bekijken",
+    "author": "Claude",
+    "priority": "laag",
+    "status": "idee",
+    "created": "2026-03-10T17:04:19.743Z",
+    "updated": "2026-03-10T17:04:19.743Z"
+  },
+  {
+    "id": "mmkv0zz9f9h1",
+    "title": "Gripp koppeling bouwen",
+    "description": "ZAP-05/06/10 voor offertes en facturen",
+    "author": "Claude",
+    "priority": "normaal",
+    "status": "idee",
+    "created": "2026-03-10T17:04:19.749Z",
+    "updated": "2026-03-10T17:04:19.749Z"
+  },
+  {
+    "id": "mmkvx209gpwr",
+    "title": "Planado Pro plan activeren voor API/webhooks",
+    "description": "Nodig voor ZAP-04 en ZAP-09 (opmeting/montage afgerond triggers). ~$29/user/maand.",
+    "author": "Claude",
+    "priority": "hoog",
+    "status": "idee",
+    "created": "2026-03-10T17:29:15.369Z",
+    "updated": "2026-03-10T17:29:15.369Z"
+  },
+  {
+    "id": "mmkvx3ozdt4w",
+    "title": "Trengo Channel ID opvragen voor WhatsApp",
+    "description": "Nodig voor ZAP-02 (WhatsApp follow-up). Channel ID uit Trengo admin halen.",
+    "author": "Claude",
+    "priority": "normaal",
+    "status": "idee",
+    "created": "2026-03-10T17:29:17.555Z",
+    "updated": "2026-03-10T17:29:17.555Z"
+  }
+]

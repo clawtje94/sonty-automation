@@ -65,6 +65,8 @@ Custom properties to create on Deal:
 | `sonty_first_quote_date` | Date | When Reuzenpanda quote was sent |
 | `sonty_first_quote_amount` | Number | Amount on first quote |
 | `sonty_measurement_date` | Date | Date of measurement appointment |
+| `sonty_planado_job_id_measurement` | Text | Planado job ID for measurement visit (for webhook lookup) |
+| `sonty_planado_job_id_installation` | Text | Planado job ID for installation visit (for webhook lookup) |
 | `sonty_final_quote_date` | Date | When Gripp final quote was sent |
 | `sonty_final_quote_amount` | Number | Amount on final quote |
 | `sonty_gripp_quote_id` | Text | Gripp quote reference |
@@ -82,26 +84,28 @@ Custom properties to create on Deal:
 
 ---
 
-### HubSpot Pipeline: Sonty Sales Pipeline
+### HubSpot Pipeline: Sonty Verkooppijplijn
 
-| Stage | Stage ID (slug) | Description |
+Pipeline ID: `3623322812`
+
+| Stage | HubSpot Stage ID | Kans |
 |---|---|---|
-| New Lead | `new_lead` | Lead just entered system |
-| Call Attempt 1 | `call_attempt_1` | First call attempted, no contact yet |
-| Call Attempt 2 | `call_attempt_2` | Second call attempted, no contact yet |
-| In Contact | `in_contact` | Live contact established |
-| First Quote Sent | `first_quote_sent` | Reuzenpanda quote emailed |
-| Quote Follow-up | `quote_followup` | No response to first quote — following up |
-| Measurement Scheduled | `measurement_scheduled` | Appointment booked |
-| Measurement Done | `measurement_done` | Visit completed, awaiting final quote |
-| Final Quote Sent | `final_quote_sent` | Gripp final quote emailed |
-| Won | `won` | Quote approved, deposit invoice sent |
-| Deposit Received | `deposit_received` | Payment confirmed |
-| Products Ordered | `products_ordered` | Order placed with supplier |
-| Installation Scheduled | `installation_scheduled` | Installation appointment booked |
-| Installation Done | `installation_done` | Work completed on site |
-| Completed | `completed` | Final invoice sent and paid |
-| Lost | `lost` | Deal closed without sale |
+| Nieuwe Lead | `4998659267` | 5% |
+| Belpoging 1 | `4999295181` | 10% |
+| Belpoging 2 | `4999295182` | 10% |
+| In Contact | `4999295183` | 20% |
+| Eerste Offerte Verstuurd | `4999295184` | 25% |
+| Offerte Follow-up | `4999295185` | 30% |
+| Opmeting Ingepland | `4999295186` | 50% |
+| Opmeting Gedaan | `4999295187` | 60% |
+| Definitieve Offerte Verstuurd | `4999295188` | 70% |
+| Gewonnen | `4999295189` | 100% (won) |
+| Aanbetaling Ontvangen | `4999295190` | 90% |
+| Producten Besteld | `4999295191` | 90% |
+| Installatie Ingepland | `4999295192` | 95% |
+| Installatie Gedaan | `4999295193` | 98% |
+| Afgerond | `4999295194` | 100% (won) |
+| Verloren | `4999295195` | 0% (lost) |
 
 ---
 

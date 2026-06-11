@@ -1,0 +1,317 @@
+[
+  {
+    "category": "ROLLUIKEN",
+    "items": [
+      {
+        "rp": "Rolluik (RollSUPER)",
+        "gripp": "Rolluik (RollSUPER)",
+        "grippId": 76
+      },
+      {
+        "rp": "Rolluik ROMA",
+        "gripp": "Roma geëxrudeerd rolluik",
+        "grippId": 319
+      }
+    ]
+  },
+  {
+    "category": "ROLLUIK MONTAGE",
+    "items": [
+      {
+        "rp": "Inclusief montage rolluik solar",
+        "rp_bediening": "Somfy IO motor solar / BREL Solar",
+        "gripp": "Montage rolluik solar",
+        "grippId": 255
+      },
+      {
+        "rp": "Inclusief montage rolluik solar (3+)",
+        "rp_bediening": "Solar, 3+ stuks",
+        "gripp": "Montage rolluik solar (vanaf 3 stuks)",
+        "grippId": 256
+      },
+      {
+        "rp": "montage rolluik draaischakelaar",
+        "rp_bediening": "Draaischakelaar",
+        "gripp": "Montage Rolluik Bedraad",
+        "grippId": 77
+      },
+      {
+        "rp": "Inmeten + montage rolluik bedraad",
+        "rp_bediening": "Somfy IO motor bedraad",
+        "gripp": "Montage Rolluik Bedraad",
+        "grippId": 77
+      },
+      {
+        "rp": "montage rolluik bedraad (3+)",
+        "rp_bediening": "Bedraad, 3+ stuks",
+        "gripp": "Montage rolluik bedraad (vanaf 3 stuks)",
+        "grippId": 254
+      },
+      {
+        "rp": "gekoppeld rolluik solar",
+        "rp_bediening": "Gekoppeld solar",
+        "gripp": "Montage gekoppeld rolluik solar",
+        "grippId": 258
+      },
+      {
+        "rp": "gekoppeld rolluik bedraad",
+        "rp_bediening": "Gekoppeld bedraad",
+        "gripp": "Montage gekoppeld rolluik bedraad",
+        "grippId": 257
+      }
+    ]
+  },
+  {
+    "category": "SCREENS",
+    "items": [
+      {
+        "rp": "Zip Design 110",
+        "gripp": "Zip Design",
+        "grippId": 105
+      },
+      {
+        "rp": "Suncontrol 165 zip",
+        "gripp": "Suncontrol 165 zip",
+        "grippId": 291
+      },
+      {
+        "rp": "Suncontrol 150",
+        "gripp": "Suncontrol 150",
+        "grippId": 290
+      },
+      {
+        "rp": "SunElite",
+        "gripp": "Sunelite",
+        "grippId": 311
+      },
+      {
+        "rp": "SunProject 100",
+        "gripp": "SunProject 100",
+        "grippId": 211
+      },
+      {
+        "rp": "SunCube XL",
+        "gripp": "Suncube 150",
+        "grippId": 164
+      },
+      {
+        "rp": "Square 85/100",
+        "gripp": "Square 85/100 (half afgeschuind)",
+        "grippId": 185
+      },
+      {
+        "rp": "ZipScreen ROMA",
+        "gripp": "Roma Zipscreen",
+        "grippId": 322
+      }
+    ]
+  },
+  {
+    "category": "SCREEN MONTAGE",
+    "items": [
+      {
+        "rp": "Inmeten + montage screen solar",
+        "rp_bediening": "Solar",
+        "gripp": "Montage screen solar",
+        "grippId": 267
+      },
+      {
+        "rp": "montage screen solar (3+)",
+        "rp_bediening": "Solar 3+",
+        "gripp": "Montage screen solar (vanaf 3 stuks)",
+        "grippId": 268
+      },
+      {
+        "rp": "montage screen bedraad",
+        "rp_bediening": "Bedraad",
+        "gripp": "Montage screen bedraad.",
+        "grippId": 265
+      },
+      {
+        "rp": "montage screen bedraad (3+)",
+        "rp_bediening": "Bedraad 3+",
+        "gripp": "Montage screen bedraad (vanaf 3 stuks)",
+        "grippId": 266
+      },
+      {
+        "rp": "gekoppeld screen solar",
+        "rp_bediening": "Gekoppeld solar",
+        "gripp": "Montage gekoppeld screen solar.",
+        "grippId": 270
+      },
+      {
+        "rp": "gekoppeld screen bedraad",
+        "rp_bediening": "Gekoppeld bedraad",
+        "gripp": "Montage gekoppeld screen bedraad.",
+        "grippId": 269
+      }
+    ]
+  },
+  {
+    "category": "VOORRAADSCHERMEN",
+    "items": [
+      {
+        "rp": "Suneye / Suneye voorraad scherm",
+        "gripp": "Suneye",
+        "grippId": 145
+      },
+      {
+        "rp": "Suneye XL",
+        "gripp": "Suneye XL",
+        "grippId": 150
+      }
+    ]
+  },
+  {
+    "category": "KNIKARMSCHERMEN",
+    "items": [
+      {
+        "rp": "SunBasic Cassette",
+        "gripp": "Sunbasic Cassette",
+        "grippId": 128
+      },
+      {
+        "rp": "SunBasic / SunBasic Open cassette",
+        "gripp": "Sunbasic Open Casette",
+        "grippId": 191
+      }
+    ]
+  },
+  {
+    "category": "KNIKARM MONTAGE",
+    "items": [
+      {
+        "rp": "Inmeten + montage Knikarmscherm.",
+        "gripp": "Montage knikarmscherm standaard.",
+        "grippId": 281
+      },
+      {
+        "rp": "Inmeten + montage Knikarmscherm uitgebreid.",
+        "gripp": "Montage Knikarmscherm uitgebreid.",
+        "grippId": 251
+      }
+    ]
+  },
+  {
+    "category": "PERGOLA",
+    "items": [
+      {
+        "rp": "Pergola 165 zip",
+        "gripp": "Pergola Zip P350",
+        "grippId": 305
+      }
+    ]
+  },
+  {
+    "category": "PERGOLA MONTAGE",
+    "items": [
+      {
+        "rp": "Montage pergola",
+        "gripp": "Montage Pergola",
+        "grippId": 306
+      }
+    ]
+  },
+  {
+    "category": "MARKIEZEN",
+    "items": [
+      {
+        "rp": "Markies",
+        "gripp": "Markies",
+        "grippId": 161
+      },
+      {
+        "rp": "Markies herbekleden",
+        "gripp": "Markies opnieuw bekleden",
+        "grippId": 131
+      }
+    ]
+  },
+  {
+    "category": "UITVALSCHERMEN",
+    "items": [
+      {
+        "rp": "SunCube XL (uitvalscherm context)",
+        "gripp": "Suncube 150",
+        "grippId": 164
+      }
+    ]
+  },
+  {
+    "category": "UITVALSCHERM MONTAGE",
+    "items": [
+      {
+        "rp": "Inmeten + Montage uitvalscherm",
+        "gripp": "Montage uitvalscherm",
+        "grippId": 264
+      }
+    ]
+  },
+  {
+    "category": "RAAMDECO",
+    "items": [
+      {
+        "rp": "Duoplisse / Duo Plisse",
+        "gripp": "Duo Plisse",
+        "grippId": 197
+      },
+      {
+        "rp": "Rolgordijn",
+        "gripp": "Rolgordijn",
+        "grippId": 190
+      },
+      {
+        "rp": "Houten jaloezie",
+        "gripp": "Houten Jaloezie",
+        "grippId": 82
+      },
+      {
+        "rp": "Plissé",
+        "gripp": "Plissé",
+        "grippId": 166
+      },
+      {
+        "rp": "Vouwgordijn",
+        "gripp": "Vouwgordijn",
+        "grippId": 214
+      },
+      {
+        "rp": "Gordijn",
+        "gripp": "Gordijn",
+        "grippId": 212
+      }
+    ]
+  },
+  {
+    "category": "ACCESSOIRES",
+    "items": [
+      {
+        "rp": "Tahoma Switch",
+        "gripp": "Tahoma switch",
+        "grippId": 155
+      },
+      {
+        "rp": "Eolis 3D windsensor IO",
+        "gripp": "Eolis 3D windsensor IO",
+        "grippId": 62
+      }
+    ]
+  },
+  {
+    "category": "ONBEKEND / NIET GEVONDEN",
+    "items": [
+      {
+        "rp": "Serre Zonwering Suncontrol",
+        "gripp": "???",
+        "grippId": null,
+        "note": "Montage serre zonwering (321) bestaat wel"
+      },
+      {
+        "rp": "Rainbow Knikarmscherm",
+        "gripp": "Rainbow Knikarmscherm",
+        "grippId": 315,
+        "note": "Staat in Gripp"
+      }
+    ]
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "bron": "Outlook kalenderdata (511 montages, 346 inmeten, 173 showroom) + branche standaarden",
+  "laatste_update": "2026-03-18",
+  "opmerking": "Producttypes niet in Outlook titels - gebaseerd op gemiddelde duur. Wordt verfijnd zodra HubSpot deals aan afspraken gekoppeld zijn.",
+
+  "inmeten": {
+    "standaard": { "duur_min": 60, "opmerking": "85% van alle inmeetafspraken is 60 min" },
+    "groot_project": { "duur_min": 120, "opmerking": "7% van inmeetafspraken, meerdere ramen/producten" }
+  },
+
+  "montage_per_product": {
+    "rolgordijn": { "duur_min": 60, "opmerking": "Per raam, enkelvoudig product" },
+    "duo_plisse": { "duur_min": 60, "opmerking": "Per raam" },
+    "jaloezie_hout": { "duur_min": 60, "opmerking": "Per raam" },
+    "gordijn": { "duur_min": 90, "opmerking": "Inclusief rail montage" },
+    "vouwgordijn": { "duur_min": 60, "opmerking": "Per raam" },
+    "shutters": { "duur_min": 120, "opmerking": "Per raam, complexer" },
+    "screens": { "duur_min": 150, "opmerking": "Buitenmontage, per screen" },
+    "rolluiken": { "duur_min": 180, "opmerking": "Buitenmontage, per rolluik" },
+    "knikarmscherm": { "duur_min": 240, "opmerking": "Grotere installatie" },
+    "uitvalscherm": { "duur_min": 180, "opmerking": "Buitenmontage" },
+    "markies": { "duur_min": 240, "opmerking": "Groot, zware montage" },
+    "pergola": { "duur_min": 480, "opmerking": "Hele dag project (uit data: 540 min max)" },
+    "zonwering_buiten": { "duur_min": 180, "opmerking": "Gemiddelde buitenmontage" },
+    "raamdeco_binnen": { "duur_min": 90, "opmerking": "Gemiddelde binnenmontage per raam" },
+    "behang": { "duur_min": 240, "opmerking": "Per kamer" }
+  },
+
+  "showroom": {
+    "standaard": { "duur_min": 60, "opmerking": "70% van showroom afspraken" },
+    "uitgebreid": { "duur_min": 90, "opmerking": "Meerdere producten bespreken" }
+  },
+
+  "service_reparatie": {
+    "standaard": { "duur_min": 60, "opmerking": "Standaard service call" }
+  },
+
+  "montage_statistieken_outlook": {
+    "gemiddeld_min": 155,
+    "mediaan_min": 120,
+    "meest_voorkomend_min": 60,
+    "range": "30-540 min",
+    "per_monteur": {
+      "Sonty Montage (Yudi)": { "count": 285, "gem_min": 160 },
+      "Yudi den Heijer": { "count": 136, "gem_min": 156 },
+      "Sjoerd Hoogduin": { "count": 89, "gem_min": 150 }
+    }
+  }
+}

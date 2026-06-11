@@ -1,0 +1,1220 @@
+[
+  {
+    "docId": "e3007f3f-b155-4115-b987-d6a80e8d3864",
+    "number": "20266154",
+    "status": "DRAFT",
+    "createdAt": 1779893045913,
+    "date": "2026-05-27",
+    "title": "Offerte #20266154",
+    "contactPersonId": "fa1f6abd-7c0d-4e97-825a-73136991a3ab",
+    "name": "Jeroen  Gabriels",
+    "firstName": "Jeroen",
+    "lastName": " Gabriels",
+    "phone": "+31623883059",
+    "email": "gabriels.jeroen@gmail.com",
+    "address": "Ceresahof 18, 6006VW Weert, Nederland",
+    "city": "Ceresahof 18",
+    "amount": 7910.6,
+    "amountInclBtw": 9571.826000000001,
+    "products": [
+      {
+        "name": "Pergola 165 zip",
+        "units": 1,
+        "price": 7260.6
+      },
+      {
+        "name": "Inmeten + montage Pergola",
+        "units": 1,
+        "price": 650
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "f1fe30ea-0ef6-40d2-83a6-2f4147a032f4",
+    "number": "20266153",
+    "status": "DRAFT",
+    "createdAt": 1779891490260,
+    "date": "2026-05-27",
+    "title": "Offerte #20266153",
+    "contactPersonId": "f2313f82-2571-40ac-9996-2be7caf4aeb3",
+    "name": "Bas de Jong",
+    "firstName": "Bas",
+    "lastName": "de Jong",
+    "phone": "+31642133971",
+    "email": "dejong.bas@live.nl",
+    "address": "Prins Hendrikstraat 162, 4835PT Breda, Nederland",
+    "city": "Prins Hendrikstraat 162",
+    "amount": 2416.2,
+    "amountInclBtw": 2923.602,
+    "products": [
+      {
+        "name": "Zip Design 110",
+        "units": 1,
+        "price": 2241.2
+      },
+      {
+        "name": "Inmeten + montage screen solar",
+        "units": 1,
+        "price": 175
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "1659ec2f-1798-4b3a-9ce0-55b5b00225a3",
+    "number": "20266152",
+    "status": "DRAFT",
+    "createdAt": 1779890899158,
+    "date": "2026-05-27",
+    "title": "Offerte #20266152",
+    "contactPersonId": "ad330536-0f7c-4be7-94e8-e6fd502545d0",
+    "name": "Deborah v Nimwegen",
+    "firstName": "Deborah",
+    "lastName": "v Nimwegen",
+    "phone": "+31643785165",
+    "email": "dvnimwegen@hotmail.com",
+    "address": "Dorpsweg  59, 3245VB Sommelsdijk, Nederland",
+    "city": "Dorpsweg  59",
+    "amount": 12938.64,
+    "amountInclBtw": 15655.754399999998,
+    "products": [
+      {
+        "name": "SunCube XL",
+        "units": 1,
+        "price": 3216.04
+      },
+      {
+        "name": "Suncontrol 165 zip",
+        "units": 1,
+        "price": 4928.2
+      },
+      {
+        "name": "Inmeten + montage serre zonwering.",
+        "units": 1,
+        "price": 350
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      },
+      {
+        "name": "Zip Design 110",
+        "units": 1,
+        "price": 2230.2
+      },
+      {
+        "name": "Inmeten + montage screen solar",
+        "units": 1,
+        "price": 175
+      },
+      {
+        "name": "Rolluik (RollSUPER)",
+        "units": 1,
+        "price": 1669.2
+      },
+      {
+        "name": "Inmeten + montage rolluik solar",
+        "units": 1,
+        "price": 175
+      }
+    ],
+    "hasTahoma": true,
+    "tahomaCount": 1,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "6712bd0e-d25c-494c-9e0b-1298fdc8196d",
+    "number": "20266151",
+    "status": "DRAFT",
+    "createdAt": 1779889525179,
+    "date": "2026-05-27",
+    "title": "Offerte #20266151",
+    "contactPersonId": "7a8b122c-7452-481e-9dc1-0cd4f9833ca4",
+    "name": "F. Hoppenbrouwer",
+    "firstName": "F.",
+    "lastName": "Hoppenbrouwer",
+    "phone": "+31621322835",
+    "email": "hoppenbrouwer@upcmail.nl",
+    "address": "Dennenlaan 18G, 1161CR Zwanenburg, Nederland",
+    "city": "Dennenlaan 18G",
+    "amount": 3571.8,
+    "amountInclBtw": 4321.878,
+    "products": [
+      {
+        "name": "Suneye",
+        "units": 1,
+        "price": 2932.8
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm.",
+        "units": 1,
+        "price": 275
+      },
+      {
+        "name": "Eolis 3D windsensor IO",
+        "units": 1,
+        "price": 169
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      }
+    ],
+    "hasTahoma": true,
+    "tahomaCount": 1,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "c290042d-d4dc-4d9a-9275-55aabd8cb112",
+    "number": "20266150",
+    "status": "DRAFT",
+    "createdAt": 1779888990396,
+    "date": "2026-05-27",
+    "title": "Offerte #20266150",
+    "contactPersonId": "bdca5674-cc5b-47e5-a6e1-04536837bc10",
+    "name": "Niels Fischer",
+    "firstName": "Niels",
+    "lastName": "Fischer",
+    "phone": "+31638341811",
+    "email": "niels.fischer94@gmail.com",
+    "address": "Venezuelastraat 10, 2622BR Delft, Nederland",
+    "city": "Venezuelastraat 10",
+    "amount": 3237,
+    "amountInclBtw": 3916.77,
+    "products": [
+      {
+        "name": "Suneye",
+        "units": 1,
+        "price": 2912
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm uitgebreid.",
+        "units": 1,
+        "price": 325
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "c35085b9-642b-4c48-ba7c-68fbbdb9dea1",
+    "number": "20266149",
+    "status": "DRAFT",
+    "createdAt": 1779888652996,
+    "date": "2026-05-27",
+    "title": "Offerte #20266149",
+    "contactPersonId": "dfd187cb-3cfb-4844-804a-5ea70bc25585",
+    "name": "Jan van Breukelen",
+    "firstName": "Jan",
+    "lastName": "van Breukelen",
+    "phone": "+31623331350",
+    "email": "janvanbreukelen@gmail.com",
+    "address": "Prinsessenhof 5, 3481cb Harmelen, Nederland",
+    "city": "Prinsessenhof 5",
+    "amount": 2490.2,
+    "amountInclBtw": 3013.142,
+    "products": [
+      {
+        "name": "Zip Design 110",
+        "units": 1,
+        "price": 2120.2
+      },
+      {
+        "name": "Inmeten + montage screen solar",
+        "units": 1,
+        "price": 175
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      }
+    ],
+    "hasTahoma": true,
+    "tahomaCount": 1,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "02e39826-1498-4cf7-b0bf-09abc87f8375",
+    "number": "20266148",
+    "status": "DRAFT",
+    "createdAt": 1779888459393,
+    "date": "2026-05-27",
+    "title": "Offerte #20266148",
+    "contactPersonId": "383b2555-eba0-4b22-b14b-adf8e97f9521",
+    "name": "Andre De Vries",
+    "firstName": "Andre",
+    "lastName": "De Vries",
+    "phone": "+31621938290",
+    "email": "dreofzo2@gmail.com",
+    "address": "Reigerskamp 808, 3607jx Maarssen, Nederland",
+    "city": "Reigerskamp 808",
+    "amount": 2131,
+    "amountInclBtw": 2578.5099999999998,
+    "products": [
+      {
+        "name": "SunBasic",
+        "units": 1,
+        "price": 1856
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm.",
+        "units": 1,
+        "price": 275
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "a43af954-9ce5-46d2-9bf2-19664d92c72e",
+    "number": "20266147",
+    "status": "DRAFT",
+    "createdAt": 1779888129316,
+    "date": "2026-05-27",
+    "title": "Offerte #20266147",
+    "contactPersonId": "913e3325-185e-49e9-936a-19b635224b52",
+    "name": "Erik Zwetsloot",
+    "firstName": "Erik",
+    "lastName": "Zwetsloot",
+    "phone": "+31614443304",
+    "email": "erikzwetsloot@hotmail.com",
+    "address": "Marnixstraat 66, 2023rg Haarlem, Nederland",
+    "city": "Marnixstraat 66",
+    "amount": 3839,
+    "amountInclBtw": 4645.19,
+    "products": [
+      {
+        "name": "Suneye voorraad scherm",
+        "units": 1,
+        "price": 3175
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm uitgebreid.",
+        "units": 1,
+        "price": 300
+      },
+      {
+        "name": "Eolis 3D windsensor IO",
+        "units": 1,
+        "price": 169
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      }
+    ],
+    "hasTahoma": true,
+    "tahomaCount": 1,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "5edbcea5-38b5-4c9e-8f12-96cd50fc0f41",
+    "number": "20266146",
+    "status": "DRAFT",
+    "createdAt": 1779887318083,
+    "date": "2026-05-27",
+    "title": "Offerte #20266146",
+    "contactPersonId": "37cd8033-874b-456a-99b4-dfaa34430532",
+    "name": "Gijs Friso",
+    "firstName": "Gijs",
+    "lastName": "Friso",
+    "phone": "+31634916855",
+    "email": "gijs.95@hotmail.com",
+    "address": "Vechtstraat 168h, 1079JV Amsterdam, Nederland",
+    "city": "Vechtstraat 168h",
+    "amount": 3475,
+    "amountInclBtw": 4204.75,
+    "products": [
+      {
+        "name": "Suneye voorraad scherm",
+        "units": 1,
+        "price": 3175
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm uitgebreid.",
+        "units": 1,
+        "price": 300
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "0ac08659-05ab-4e4f-9f55-ac192ce3d493",
+    "number": "20266145",
+    "status": "DRAFT",
+    "createdAt": 1779886549287,
+    "date": "2026-05-27",
+    "title": "Offerte #20266145",
+    "contactPersonId": "b761d816-dded-4ce8-96e3-0ca648d06a78",
+    "name": "Shewit Ghebreamlak",
+    "firstName": "Shewit",
+    "lastName": "Ghebreamlak",
+    "phone": "+31653303157",
+    "email": "shewityg@gmail.com",
+    "address": "Velderwoude 38, 5221 PB ‘s-Hertogenbosch, Nederland",
+    "city": "Velderwoude 38",
+    "amount": 9864.56,
+    "amountInclBtw": 11936.1176,
+    "products": [
+      {
+        "name": "Zip Design 110",
+        "units": 2,
+        "price": 1159.5
+      },
+      {
+        "name": "Inmeten + montage screen solar",
+        "units": 2,
+        "price": 175
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      },
+      {
+        "name": "Zip Design 110",
+        "units": 1,
+        "price": 1473.4
+      },
+      {
+        "name": "Inmeten + montage screen solar",
+        "units": 1,
+        "price": 175
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      },
+      {
+        "name": "SunProject 100",
+        "units": 1,
+        "price": 2120.02
+      },
+      {
+        "name": "SunCube XL",
+        "units": 1,
+        "price": 2622.14
+      },
+      {
+        "name": "Inmeten + Montage uitvalscherm",
+        "units": 1,
+        "price": 220
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      }
+    ],
+    "hasTahoma": true,
+    "tahomaCount": 3,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "8d9600f2-3dcc-48ad-91f6-300be2a01655",
+    "number": "20266144",
+    "status": "DRAFT",
+    "createdAt": 1779885087177,
+    "date": "2026-05-27",
+    "title": "Offerte #20266144",
+    "contactPersonId": "626933d2-b342-408d-ab83-34f75feadf33",
+    "name": "Karin Bron",
+    "firstName": "Karin",
+    "lastName": "Bron",
+    "phone": "+31648382881",
+    "email": "karinbron78@hotmail.com",
+    "address": "Burgemeester Blessinglaan 58, 6644dd Ewijk, Nederland",
+    "city": "Burgemeester Blessinglaan 58",
+    "amount": 1762,
+    "amountInclBtw": 2132.02,
+    "products": [
+      {
+        "name": "Inmeten + montage rolluik solar",
+        "units": 1,
+        "price": 175
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      },
+      {
+        "name": "Rolluik (RollSUPER)",
+        "units": 1,
+        "price": 1392
+      }
+    ],
+    "hasTahoma": true,
+    "tahomaCount": 1,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "196a520a-d0fb-4340-a296-5e2e5909388e",
+    "number": "20266143",
+    "status": "DRAFT",
+    "createdAt": 1779884930390,
+    "date": "2026-05-27",
+    "title": "Offerte #20266143",
+    "contactPersonId": "adf879da-0777-4a8c-bd4a-c564e25df255",
+    "name": "Sharon Gomes",
+    "firstName": "Sharon",
+    "lastName": "Gomes",
+    "phone": "+31634067828",
+    "email": "sharon.gomes25@gmail.com",
+    "address": "Prinses Margrietstraat 53, 2983ED Ridderkerk, Nederland",
+    "city": "Prinses Margrietstraat 53",
+    "amount": 3892.7,
+    "amountInclBtw": 4710.1669999999995,
+    "products": [
+      {
+        "name": "Suneye",
+        "units": 1,
+        "price": 3448.7
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm.",
+        "units": 1,
+        "price": 275
+      },
+      {
+        "name": "Eolis 3D windsensor IO",
+        "units": 1,
+        "price": 169
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "2147be0c-7a9e-4b83-bfbd-0006d4acb2b3",
+    "number": "20266141",
+    "status": "DRAFT",
+    "createdAt": 1779882894307,
+    "date": "2026-05-27",
+    "title": "Offerte #20266141",
+    "contactPersonId": "2c81c799-cd8d-4eaa-8341-c82e1c5c161e",
+    "name": "Ineke Grient",
+    "firstName": "Ineke",
+    "lastName": "Grient",
+    "phone": "0620347818",
+    "email": "inekegrient@gmail.com",
+    "address": "Gravenweg 14 B, 8144rk Lierderholthuis, Nederland",
+    "city": "Gravenweg 14 B",
+    "amount": 8555.2,
+    "amountInclBtw": 10351.792000000001,
+    "products": [
+      {
+        "name": "Pergola 165 zip",
+        "units": 1,
+        "price": 7905.2
+      },
+      {
+        "name": "Inmeten + montage Pergola",
+        "units": 1,
+        "price": 650
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "6ff7b5a3-293c-413f-925a-eb2ccb432952",
+    "number": "20266140",
+    "status": "DRAFT",
+    "createdAt": 1779882261432,
+    "date": "2026-05-27",
+    "title": "Offerte #20266140",
+    "contactPersonId": "d40c180d-26bc-4c94-b99a-b67564eecb15",
+    "name": "Geert Steenhof",
+    "firstName": "Geert",
+    "lastName": "Steenhof",
+    "phone": "+31627008445",
+    "email": "geert@cntnrpartners.com",
+    "address": "Nijverheidsweg 48, 3341 LJ Hendrik-Ido-Ambacht, Nederland",
+    "city": "Nijverheidsweg 48",
+    "amount": 24134.5,
+    "amountInclBtw": 29202.745,
+    "products": [
+      {
+        "name": "Zip Design 110",
+        "units": 7,
+        "price": 2600.9
+      },
+      {
+        "name": "Inmeten + montage screen solar",
+        "units": 7,
+        "price": 175
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      },
+      {
+        "name": "Zip Design 110",
+        "units": 2,
+        "price": 1981.6
+      },
+      {
+        "name": "Inmeten + montage screen solar",
+        "units": 2,
+        "price": 175
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      }
+    ],
+    "hasTahoma": true,
+    "tahomaCount": 2,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "3cd209d0-849b-4c4b-8ecf-9c5715c3bbb4",
+    "number": "20266139",
+    "status": "DRAFT",
+    "createdAt": 1779882005106,
+    "date": "2026-05-27",
+    "title": "Offerte #20266139",
+    "contactPersonId": "83098524-9d38-49e8-8cf3-1094381eee63",
+    "name": "Tamara de Kat",
+    "firstName": "Tamara",
+    "lastName": "de Kat",
+    "phone": "+31640802678",
+    "email": "robin.tamara@hotmail.com",
+    "address": "Zonnekruidstraat 8, 6666XL Heteren, Nederland",
+    "city": "Zonnekruidstraat 8",
+    "amount": 12954.2,
+    "amountInclBtw": 15674.582,
+    "products": [
+      {
+        "name": "Rolluik (RollSUPER)",
+        "units": 2,
+        "price": 2032.2
+      },
+      {
+        "name": "Inmeten + montage rolluik solar",
+        "units": 2,
+        "price": 175
+      },
+      {
+        "name": "Pergola 165 zip",
+        "units": 1,
+        "price": 7889.8
+      },
+      {
+        "name": "Inmeten + montage Pergola",
+        "units": 1,
+        "price": 650
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "277edb90-3820-49dc-a803-82c6ee611d85",
+    "number": "20266138",
+    "status": "DRAFT",
+    "createdAt": 1779881920017,
+    "date": "2026-05-27",
+    "title": "Offerte #20266138",
+    "contactPersonId": "6d6b0903-f342-4dc1-bce0-28300af64983",
+    "name": "Rachella Bosma",
+    "firstName": "Rachella",
+    "lastName": "Bosma",
+    "phone": "+31613624075",
+    "email": "rachellabosma@hotmail.com",
+    "address": "Bosboom Toussaintlaan 32, 2103sm Heemstede, Nederland",
+    "city": "Bosboom Toussaintlaan 32",
+    "amount": 3328.7,
+    "amountInclBtw": 4027.727,
+    "products": [
+      {
+        "name": "Rolluik (RollSUPER)",
+        "units": 1,
+        "price": 1583.4
+      },
+      {
+        "name": "Inmeten + montage rolluik solar",
+        "units": 1,
+        "price": 175
+      },
+      {
+        "name": "Rolluik (RollSUPER)",
+        "units": 1,
+        "price": 1395.3
+      },
+      {
+        "name": "Inmeten + montage rolluik solar",
+        "units": 1,
+        "price": 175
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "47eac766-4429-48b8-8e60-cf53284671d0",
+    "number": "20266136",
+    "status": "DRAFT",
+    "createdAt": 1779881245587,
+    "date": "2026-05-27",
+    "title": "Offerte #20266136",
+    "contactPersonId": "893cc9c7-b7df-457e-89a0-7728ba3d1783",
+    "name": "Hidde ten Hoor",
+    "firstName": "Hidde",
+    "lastName": "ten Hoor",
+    "phone": "+31654227803",
+    "email": "hidde@me.com",
+    "address": "Suzannapolder 16, 3825 LP Amersfoort, Nederland",
+    "city": "Suzannapolder 16",
+    "amount": 15880,
+    "amountInclBtw": 19214.8,
+    "products": [
+      {
+        "name": "Pergola 165 zip",
+        "units": 1,
+        "price": 15035
+      },
+      {
+        "name": "Inmeten + montage Pergola",
+        "units": 1,
+        "price": 650
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      }
+    ],
+    "hasTahoma": true,
+    "tahomaCount": 1,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "9e96468d-af62-4e81-a7ab-42be710ac597",
+    "number": "20266135",
+    "status": "DRAFT",
+    "createdAt": 1779879578657,
+    "date": "2026-05-27",
+    "title": "Offerte #20266135",
+    "contactPersonId": "48bfdc37-563d-40f9-94fe-c516d088f5ad",
+    "name": "Kevin van Overdijk",
+    "firstName": "Kevin",
+    "lastName": "van Overdijk",
+    "phone": "+31648116267",
+    "email": "kevinvanoverdijk@msn.com",
+    "address": "Tilburgseweg 47, 5081 NG Hilvarenbeek, Nederland",
+    "city": "Tilburgseweg 47",
+    "amount": 3789,
+    "amountInclBtw": 4584.69,
+    "products": [
+      {
+        "name": "Suneye voorraad scherm",
+        "units": 1,
+        "price": 3175
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm.",
+        "units": 1,
+        "price": 250
+      },
+      {
+        "name": "Eolis 3D windsensor IO",
+        "units": 1,
+        "price": 169
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      }
+    ],
+    "hasTahoma": true,
+    "tahomaCount": 1,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "f9da2a38-8795-4417-9412-1da2921fd5bc",
+    "number": "20266134",
+    "status": "DRAFT",
+    "createdAt": 1779879347571,
+    "date": "2026-05-27",
+    "title": "Offerte #20266134",
+    "contactPersonId": "1233f904-381c-46e9-9be6-dbbc97cb9b12",
+    "name": "Twan Daanen",
+    "firstName": "Twan",
+    "lastName": "Daanen",
+    "phone": "+31614528439",
+    "email": "twandaanen@gmail.com",
+    "address": "Hysophof 17, 3544 BV Utrecht, Nederland",
+    "city": "Hysophof 17",
+    "amount": 3541,
+    "amountInclBtw": 4284.61,
+    "products": [
+      {
+        "name": "SunBasic Cassette",
+        "units": 1,
+        "price": 2902
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm.",
+        "units": 1,
+        "price": 275
+      },
+      {
+        "name": "Eolis 3D windsensor IO",
+        "units": 1,
+        "price": 169
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      }
+    ],
+    "hasTahoma": true,
+    "tahomaCount": 1,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "12a1fdf9-2af0-4098-8b5c-007f97de800b",
+    "number": "20266133",
+    "status": "DRAFT",
+    "createdAt": 1779879130470,
+    "date": "2026-05-27",
+    "title": "Offerte #20266133",
+    "contactPersonId": "16ba118f-c095-4c13-b0b1-698fb71eca96",
+    "name": "Jan de Bruijn",
+    "firstName": "Jan",
+    "lastName": "de Bruijn",
+    "phone": "+31611305760",
+    "email": "janjr.debruijn@kpnmail.nl",
+    "address": "Maria Rutgersweg 38, 2331 NW Leiden, Nederland",
+    "city": "Maria Rutgersweg 38",
+    "amount": 5881,
+    "amountInclBtw": 7116.01,
+    "products": [
+      {
+        "name": "Inmeten + montage Knikarmscherm uitgebreid.",
+        "units": 1,
+        "price": 325
+      },
+      {
+        "name": "SunBasic",
+        "units": 1,
+        "price": 2367
+      },
+      {
+        "name": "SunBasic Cassette",
+        "units": 1,
+        "price": 2864
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm uitgebreid.",
+        "units": 1,
+        "price": 325
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "fa749b24-b586-4d59-a8f1-42945a3871a8",
+    "number": "20266131",
+    "status": "DRAFT",
+    "createdAt": 1779878996899,
+    "date": "2026-05-27",
+    "title": "Offerte #20266131",
+    "contactPersonId": "438efe38-dea4-405a-81c0-643b06cc4501",
+    "name": "Virgillia Getrouw",
+    "firstName": "Virgillia",
+    "lastName": "Getrouw",
+    "phone": "+31681914515",
+    "email": "v.getrouw@gmail.com",
+    "address": "De Ritte 26, 3201 LE Spijkenisse, Nederland",
+    "city": "De Ritte 26",
+    "amount": 3839,
+    "amountInclBtw": 4645.19,
+    "products": [
+      {
+        "name": "Suneye voorraad scherm",
+        "units": 1,
+        "price": 3175
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm uitgebreid.",
+        "units": 1,
+        "price": 300
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      },
+      {
+        "name": "Eolis 3D windsensor IO",
+        "units": 1,
+        "price": 169
+      }
+    ],
+    "hasTahoma": true,
+    "tahomaCount": 1,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "778a3329-04e7-4b8d-aac9-0ab97becc6c6",
+    "number": "20266130",
+    "status": "DRAFT",
+    "createdAt": 1779878788276,
+    "date": "2026-05-27",
+    "title": "Offerte #20266130",
+    "contactPersonId": "d14245cb-7c01-4f72-8b38-26295a9f7dbc",
+    "name": "Rik Pennings",
+    "firstName": "Rik",
+    "lastName": "Pennings",
+    "phone": "+31626092057",
+    "email": "rikpennings@gmail.com",
+    "address": "Bosschebaan 17, 5384VX Heesch, Nederland",
+    "city": "Bosschebaan 17",
+    "amount": 9391.9,
+    "amountInclBtw": 11364.198999999999,
+    "products": [
+      {
+        "name": "Pergola 165 zip",
+        "units": 1,
+        "price": 8741.9
+      },
+      {
+        "name": "Inmeten + montage Pergola",
+        "units": 1,
+        "price": 650
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "8a0456c5-5db7-48f6-bc12-b66970aea37b",
+    "number": "20266129",
+    "status": "DRAFT",
+    "createdAt": 1779878620630,
+    "date": "2026-05-27",
+    "title": "Offerte #20266129",
+    "contactPersonId": "1b69e77c-83e1-4de4-9612-740827d4c22c",
+    "name": "J Blonk",
+    "firstName": "J",
+    "lastName": "Blonk",
+    "phone": "+31631927723",
+    "email": "johanblonk@yahoo.com",
+    "address": "Tochtleede 20, 2991WH Barendrecht, Nederland",
+    "city": "Tochtleede 20",
+    "amount": 5337.099999999999,
+    "amountInclBtw": 6457.890999999999,
+    "products": [
+      {
+        "name": "Rolluik (RollSUPER)",
+        "units": 3,
+        "price": 849.3
+      },
+      {
+        "name": "Inmeten + montage rolluik solar",
+        "units": 3,
+        "price": 175
+      },
+      {
+        "name": "Rolluik (RollSUPER)",
+        "units": 2,
+        "price": 957.1
+      },
+      {
+        "name": "Inmeten + montage rolluik solar",
+        "units": 2,
+        "price": 175
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "2b00ae5c-03ce-4ebe-97b6-8b3069119c0c",
+    "number": "20266119",
+    "status": "DRAFT",
+    "createdAt": 1779870501287,
+    "date": "2026-05-27",
+    "title": "Offerte #20266119",
+    "contactPersonId": "a0de76e7-fb1d-4ce4-af3f-93277bc87ec8",
+    "name": "Sophie Troost",
+    "firstName": "Sophie",
+    "lastName": "Troost",
+    "phone": "+31636155756",
+    "email": "sophie_de_keijzer@hotmail.com",
+    "address": "Citroenvlinderpad 2, 1706BX Heerhugowaard, Nederland",
+    "city": "Citroenvlinderpad 2",
+    "amount": 6788.4,
+    "amountInclBtw": 8213.964,
+    "products": [
+      {
+        "name": "Suneye",
+        "units": 1,
+        "price": 3462.4
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm.",
+        "units": 1,
+        "price": 275
+      },
+      {
+        "name": "SunBasic Cassette",
+        "units": 1,
+        "price": 2776
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm.",
+        "units": 1,
+        "price": 275
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "3f0ad960-6925-478e-8466-b8afaeefd4f3",
+    "number": "20266109",
+    "status": "DRAFT",
+    "createdAt": 1779861518995,
+    "date": "2026-05-27",
+    "title": "Offerte #20266109",
+    "contactPersonId": "5c1da632-d85d-4dec-8785-b082e7c34a1b",
+    "name": "Arent Steenstr",
+    "firstName": "Arent",
+    "lastName": "Steenstr",
+    "phone": "+31614906232",
+    "email": "arentjansteenstra@gmail.com",
+    "address": "Warmoezenierstraat 17, 8933et Leeuwarden, Nederland",
+    "city": "Warmoezenierstraat 17",
+    "amount": 2024.6,
+    "amountInclBtw": 2449.7659999999996,
+    "products": [
+      {
+        "name": "Rolluik (RollSUPER)",
+        "units": 1,
+        "price": 1849.6
+      },
+      {
+        "name": "Inmeten + montage rolluik solar",
+        "units": 1,
+        "price": 175
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "145a9d4a-e931-4727-9ebf-a6e75afe05be",
+    "number": "20266103",
+    "status": "DRAFT",
+    "createdAt": 1779835983379,
+    "date": "2026-05-26",
+    "title": "Offerte #20266103",
+    "contactPersonId": "8ab25d2a-7958-4905-8e3c-b3642a411ffc",
+    "name": "Wesley Dong",
+    "firstName": "Wesley",
+    "lastName": "Dong",
+    "phone": "+31648564432",
+    "email": "wesleydong2301@gmail.com",
+    "address": "Kootwijkstraat 97, 2573xl 's-Gravenhage, Nederland",
+    "city": "Kootwijkstraat 97",
+    "amount": 0,
+    "amountInclBtw": 0,
+    "products": [],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "bca7aadb-0cc5-42f6-8ed6-8dfed856212e",
+    "number": "20266101",
+    "status": "DRAFT",
+    "createdAt": 1779831748422,
+    "date": "2026-05-26",
+    "title": "Offerte #20266101",
+    "contactPersonId": "e7379720-bb50-42c5-bc8a-569428bb1aa9",
+    "name": "Rudy Van Duijvenvoorde",
+    "firstName": "Rudy",
+    "lastName": "Van Duijvenvoorde",
+    "phone": "+31638685720",
+    "email": "rudy@vdmcbv.com",
+    "address": "De Hoop 7, 8044VX Zwolle, Nederland",
+    "city": "De Hoop 7",
+    "amount": 3644,
+    "amountInclBtw": 4409.24,
+    "products": [
+      {
+        "name": "Suneye voorraad scherm",
+        "units": 1,
+        "price": 3175
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm uitgebreid.",
+        "units": 1,
+        "price": 300
+      },
+      {
+        "name": "Eolis 3D windsensor IO",
+        "units": 1,
+        "price": 169
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "cac8d7d5-45ae-44d7-a451-d8c6639a3377",
+    "number": "20266089",
+    "status": "DRAFT",
+    "createdAt": 1779824135783,
+    "date": "2026-05-26",
+    "title": "Offerte #20266089",
+    "contactPersonId": "718c8815-761c-4367-81b2-98124afeecfb",
+    "name": "R Aidar",
+    "firstName": "R",
+    "lastName": "Aidar",
+    "phone": "+31641734838",
+    "email": "rachidaaidar@live.nl",
+    "address": "Vijfheerenlanden  260, 4131er  Vianen , Nederland",
+    "city": "Vijfheerenlanden  260",
+    "amount": 2180.5,
+    "amountInclBtw": 2638.4049999999997,
+    "products": [
+      {
+        "name": "Inmeten + montage rolluik solar",
+        "units": 1,
+        "price": 175
+      },
+      {
+        "name": "Tahoma Switch",
+        "units": 1,
+        "price": 195
+      },
+      {
+        "name": "Rolluik (RollSUPER)",
+        "units": 1,
+        "price": 1810.5
+      }
+    ],
+    "hasTahoma": true,
+    "tahomaCount": 1,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "c7e83722-c2f8-4687-84b3-df177ab54019",
+    "number": "20266088",
+    "status": "DRAFT",
+    "createdAt": 1779823231904,
+    "date": "2026-05-26",
+    "title": "Offerte #20266088",
+    "contactPersonId": "c981d95a-e9e9-4601-ac6f-b48b7f3ae78a",
+    "name": "Lamintha de Vries",
+    "firstName": "Lamintha",
+    "lastName": "de Vries",
+    "phone": "+31634026374",
+    "email": "laminthadevries@hotmail.com",
+    "address": "Stoelenmatter 3, 3341HJ Hendrik-Ido-Ambacht, Nederland",
+    "city": "Stoelenmatter 3",
+    "amount": 0,
+    "amountInclBtw": 0,
+    "products": [],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  },
+  {
+    "docId": "2098bd72-0d3a-4d34-a32a-df684d797ce3",
+    "number": "20266081",
+    "status": "DRAFT",
+    "createdAt": 1779818272748,
+    "date": "2026-05-26",
+    "title": "Offerte #20266081",
+    "contactPersonId": "8ee1c7a9-ef0f-42e6-a32f-6f8df2a52fd2",
+    "name": "Marijke Graventein",
+    "firstName": "Marijke",
+    "lastName": "Graventein",
+    "phone": "+31644153387",
+    "email": "marijkevanetten@hotmail.com",
+    "address": "Holsteiner 28, 9613dm Meerstad, Nederland",
+    "city": "Holsteiner 28",
+    "amount": 3475,
+    "amountInclBtw": 4204.75,
+    "products": [
+      {
+        "name": "Suneye voorraad scherm",
+        "units": 1,
+        "price": 3175
+      },
+      {
+        "name": "Inmeten + montage Knikarmscherm uitgebreid.",
+        "units": 1,
+        "price": 300
+      }
+    ],
+    "hasTahoma": false,
+    "tahomaCount": 0,
+    "hasAttachment": false,
+    "artifactCount": 0
+  }
+]

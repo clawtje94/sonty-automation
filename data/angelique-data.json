@@ -1,0 +1,556 @@
+{
+  "contact": {
+    "name": "Angelique Hartman",
+    "fields": [
+      {
+        "label": "name",
+        "value": "Angelique Hartman"
+      },
+      {
+        "label": "address",
+        "value": "Viool  30, 2678HG  De Lier, Nederland"
+      },
+      {
+        "label": "email",
+        "value": "angelique_stolk@hotmail.com"
+      },
+      {
+        "label": "phone",
+        "value": "+31612613602"
+      }
+    ],
+    "backlogDesc": "Land: Nederland\nE-mailadres: angelique_stolk@hotmail.com\nTelefoonnummer: +31612613602\nVoornaam: Angelique\nAchternaam: Hartman\nPostcode: 2678HG\nPlaats: De Lier\nStraatnaam: Viool\nHuisnummer: 30\nHoe komt u bij ons terecht?: Anders\n\n1x Rolluik: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Draaischakelaar\n- hoogte: 1800.0\n- breedte: 1800.0\n\n1x Inclusief montage rolluik solar"
+  },
+  "docs": [
+    {
+      "number": "202510103",
+      "status": "ACCEPTED"
+    },
+    {
+      "number": "20265728",
+      "status": "SENT"
+    },
+    {
+      "number": "20266740",
+      "status": "ACCEPTED"
+    },
+    {
+      "number": "202510176",
+      "status": "SENT"
+    },
+    {
+      "number": "202510632",
+      "status": "SENT"
+    },
+    {
+      "number": "202510833",
+      "status": "SENT"
+    },
+    {
+      "number": "202511554",
+      "status": "SENT"
+    },
+    {
+      "number": "202513342",
+      "status": "SENT"
+    },
+    {
+      "number": "202513362",
+      "status": "DRAFT"
+    },
+    {
+      "number": "202515810",
+      "status": "DRAFT"
+    },
+    {
+      "number": "202516109",
+      "status": "DRAFT"
+    },
+    {
+      "number": "202516543",
+      "status": "SENT"
+    },
+    {
+      "number": "202518322",
+      "status": "SENT"
+    },
+    {
+      "number": "20260041",
+      "status": "SENT"
+    },
+    {
+      "number": "20261711",
+      "status": "SENT"
+    },
+    {
+      "number": "20261822",
+      "status": "SENT"
+    },
+    {
+      "number": "20262202",
+      "status": "SENT"
+    },
+    {
+      "number": "20263351",
+      "status": "DRAFT"
+    },
+    {
+      "number": "20264532",
+      "status": "SENT"
+    },
+    {
+      "number": "20265459",
+      "status": "ACCEPTED"
+    },
+    {
+      "number": "20265881",
+      "status": "SENT"
+    },
+    {
+      "number": "20266083",
+      "status": "SENT"
+    },
+    {
+      "number": "20266106",
+      "status": "SENT"
+    }
+  ],
+  "accepted": {
+    "id": "dc8a7aa5-a7db-473e-a47f-61a93061f940",
+    "number": "202510103"
+  },
+  "segments": [
+    {
+      "ref": "defaultSignaturePart",
+      "type": "signature",
+      "data": {
+        "isSignedByCustomer": true,
+        "signingProps": {
+          "IP_ADDRESS": "84.24.232.213",
+          "SIGNATURE_PATH": "document-service/signature/731483fa-ef6b-4aae-afcf-883ec09219dd/dc8a7aa5-a7db-473e-a47f-61a93061f940/08f5e889-5984-48b2-b2f9-e6c047b586f6/signature-1743408160374.png",
+          "USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+          "FULL_NAME": ""
+        },
+        "artifactName": "artifact",
+        "timestamp": 1743408160462
+      },
+      "content": null,
+      "hints": null
+    },
+    {
+      "ref": "defaultTemplateProfileLogo",
+      "type": "companyProfileLogo",
+      "data": null,
+      "content": "![|8lh]($companyProfile.logo)",
+      "hints": null
+    },
+    {
+      "ref": "b5458b57-7cc0-4bfd-a00a-e4604c034780",
+      "type": "text",
+      "data": null,
+      "content": "Vertrouwende u hiermede een passende aanbieding te hebben gedaan, danken wij u voor de daartoe geboden gelegenheid.\n\nDe geldigheidsduur van deze offerte bedraagt 14 dagen.\nVoor vragen omtrent deze offerte staan wij graag tot Uw beschikking.",
+      "hints": null
+    },
+    {
+      "ref": "e0e8436b-a3a3-40c8-a1b0-b2fb2332c95b",
+      "type": "img",
+      "data": null,
+      "content": "![|15lh](https://user-info.reuzenpanda.nl/document-service/images/731483fa-ef6b-4aae-afcf-883ec09219dd/317d8016-4f87-4001-aaaa-94313ce5094c.png)",
+      "hints": null
+    },
+    {
+      "ref": "e02960eb-e31c-44e4-9fef-391bca829c3d",
+      "type": "text",
+      "data": null,
+      "content": "# Offerte",
+      "hints": null
+    },
+    {
+      "ref": "1c518fff-10f6-409e-a17f-cea1017cc140",
+      "type": "text",
+      "data": null,
+      "content": "Voor akkoord:",
+      "hints": null
+    },
+    {
+      "ref": "defaultTemplatePriceLineGroup",
+      "type": "priceLineGroup",
+      "data": {
+        "name": null,
+        "lines": [
+          {
+            "units": 1,
+            "description": "Rolluik (RollSUPER)\nBreedte: 3500 mm\nHoogte: 1000 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: Crèmewit\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Motor + afstandsbediening\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+            "pricePerUnit": 1032,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": null,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "Montage rolluik \n- Montage\n- Klein materiaal\n- Afstellen motor",
+            "pricePerUnit": 150,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": null,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": {
+          "name": "15% tijdelijke actie.",
+          "amount": 15,
+          "type": "PERCENTAGE",
+          "vatPercentage": 21
+        },
+        "showPrices": null
+      },
+      "content": null,
+      "hints": null
+    },
+    {
+      "ref": "11035e82-659c-444f-a844-02ac284e206f",
+      "type": "text",
+      "data": null,
+      "content": null,
+      "hints": null
+    },
+    {
+      "ref": "fd108533-148d-4844-85a0-a66aecf28331",
+      "type": "text",
+      "data": null,
+      "content": "${contactPerson.name} \n${contactPerson.address}",
+      "hints": null
+    },
+    {
+      "ref": "f2d33174-60bf-4549-ac72-663b51877f41",
+      "type": "text",
+      "data": null,
+      "content": "${companyProfile.addressLine} \n${companyProfile.postalCode} ${companyProfile.city} \nNederland\n\n**Tel:** 085 006 9681\n**Bank:** ${companyProfile.financialIBAN} \n**Btw:** ${companyProfile.financialVatNumber} \n**Kvk:** ${companyProfile.chamberOfCommerceNumber}",
+      "hints": null
+    }
+  ],
+  "quotation": {
+    "documentId": "dc8a7aa5-a7db-473e-a47f-61a93061f940",
+    "versionId": "08f5e889-5984-48b2-b2f9-e6c047b586f6",
+    "profileId": null,
+    "documentTitle": "Offerte #202510103",
+    "documentStatus": "ACCEPTED",
+    "documentNumber": "202510103",
+    "documentType": "QUOTATION",
+    "title": "Offerte #202510103",
+    "quotationNumber": "202510103",
+    "quotationTitle": "Offerte #202510103",
+    "quotationCreationTimestamp": 1742849418550,
+    "quotationExpirationTimestamp": 1745441418550,
+    "quotationStatus": "ACCEPTED",
+    "isoCurrency": "EUR",
+    "locale": null,
+    "subjects": {
+      "leadConfiguration": "998fac8f-88db-44f4-b3f0-353cdcaf38e9",
+      "contactPerson": "3543e553-cc5b-4e3e-8d63-8318d48f208c"
+    },
+    "segments": {
+      "defaultSignaturePart": {
+        "type": "signature",
+        "data": {
+          "isSignedByCustomer": true,
+          "signingProps": {
+            "IP_ADDRESS": "84.24.232.213",
+            "SIGNATURE_PATH": "document-service/signature/731483fa-ef6b-4aae-afcf-883ec09219dd/dc8a7aa5-a7db-473e-a47f-61a93061f940/08f5e889-5984-48b2-b2f9-e6c047b586f6/signature-1743408160374.png",
+            "USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+            "FULL_NAME": ""
+          },
+          "artifactName": "artifact",
+          "timestamp": 1743408160462
+        }
+      },
+      "defaultTemplateProfileLogo": {
+        "type": "companyProfileLogo",
+        "data": "![|8lh]($companyProfile.logo)"
+      },
+      "b5458b57-7cc0-4bfd-a00a-e4604c034780": {
+        "type": "text",
+        "data": "Vertrouwende u hiermede een passende aanbieding te hebben gedaan, danken wij u voor de daartoe geboden gelegenheid.\n\nDe geldigheidsduur van deze offerte bedraagt 14 dagen.\nVoor vragen omtrent deze offerte staan wij graag tot Uw beschikking."
+      },
+      "e0e8436b-a3a3-40c8-a1b0-b2fb2332c95b": {
+        "type": "img",
+        "data": "![|15lh](https://user-info.reuzenpanda.nl/document-service/images/731483fa-ef6b-4aae-afcf-883ec09219dd/317d8016-4f87-4001-aaaa-94313ce5094c.png)"
+      },
+      "e02960eb-e31c-44e4-9fef-391bca829c3d": {
+        "type": "text",
+        "data": "# Offerte"
+      },
+      "1c518fff-10f6-409e-a17f-cea1017cc140": {
+        "type": "text",
+        "data": "Voor akkoord:"
+      },
+      "defaultTemplatePriceLineGroup": {
+        "type": "priceLineGroup",
+        "data": {
+          "name": null,
+          "lines": [
+            {
+              "units": 1,
+              "description": "Rolluik (RollSUPER)\nBreedte: 3500 mm\nHoogte: 1000 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: Crèmewit\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Motor + afstandsbediening\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+              "pricePerUnit": 1032,
+              "imageUri": null,
+              "vatPercentage": 21,
+              "discount": null,
+              "position": null,
+              "lockTotalPrice": false
+            },
+            {
+              "units": 1,
+              "description": "Montage rolluik \n- Montage\n- Klein materiaal\n- Afstellen motor",
+              "pricePerUnit": 150,
+              "imageUri": null,
+              "vatPercentage": 21,
+              "discount": null,
+              "position": null,
+              "lockTotalPrice": false
+            }
+          ],
+          "vatSetting": "INCL",
+          "groupDiscount": {
+            "name": "15% tijdelijke actie.",
+            "amount": 15,
+            "type": "PERCENTAGE",
+            "vatPercentage": 21
+          },
+          "showPrices": null
+        }
+      },
+      "11035e82-659c-444f-a844-02ac284e206f": {
+        "type": "text",
+        "data": null
+      },
+      "fd108533-148d-4844-85a0-a66aecf28331": {
+        "type": "text",
+        "data": "${contactPerson.name} \n${contactPerson.address}"
+      },
+      "f2d33174-60bf-4549-ac72-663b51877f41": {
+        "type": "text",
+        "data": "${companyProfile.addressLine} \n${companyProfile.postalCode} ${companyProfile.city} \nNederland\n\n**Tel:** 085 006 9681\n**Bank:** ${companyProfile.financialIBAN} \n**Btw:** ${companyProfile.financialVatNumber} \n**Kvk:** ${companyProfile.chamberOfCommerceNumber}"
+      }
+    },
+    "pricing": {
+      "total": 1004.7
+    },
+    "renderRows": [
+      {
+        "delegateMargins": false,
+        "widths": [
+          59.759304,
+          40.240696
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "text",
+                "target": "fd108533-148d-4844-85a0-a66aecf28331"
+              }
+            ]
+          },
+          {
+            "elements": [
+              {
+                "type": "text",
+                "target": "defaultTemplateProfileLogo"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "empty",
+                "target": "1lh"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          60.093716,
+          39.906284
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "text",
+                "target": "e02960eb-e31c-44e4-9fef-391bca829c3d"
+              }
+            ]
+          },
+          {
+            "elements": [
+              {
+                "type": "text",
+                "target": "f2d33174-60bf-4549-ac72-663b51877f41"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "empty",
+                "target": "2lh"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "quotationData",
+                "target": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "empty",
+                "target": "2lh"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "priceLineGroupCombined",
+                "target": "defaultTemplatePriceLineGroup"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "empty",
+                "target": "8lh"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "text",
+                "target": "b5458b57-7cc0-4bfd-a00a-e4604c034780"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "empty",
+                "target": "2lh"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          50,
+          50
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "text",
+                "target": "e0e8436b-a3a3-40c8-a1b0-b2fb2332c95b"
+              }
+            ]
+          },
+          {
+            "elements": [
+              {
+                "type": "text",
+                "target": "1c518fff-10f6-409e-a17f-cea1017cc140"
+              },
+              {
+                "type": "signature",
+                "target": "defaultSignaturePart"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "renderTemplate": null,
+    "artifacts": null
+  },
+  "opmerking": ""
+}

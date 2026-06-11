@@ -1,0 +1,312 @@
+{
+  "message": "OK",
+  "quotationData": {
+    "documentId": "b805fe5d-a85a-4932-b4f7-c45030093e09",
+    "versionId": "d97f5abe-ea1b-4821-90a8-9191b59aa0e7",
+    "profileId": null,
+    "documentTitle": "Offerte #20266757",
+    "documentStatus": "DRAFT",
+    "documentNumber": "20266757",
+    "documentType": "QUOTATION",
+    "title": "Offerte #20266757",
+    "quotationNumber": "20266757",
+    "quotationTitle": "Offerte #20266757",
+    "quotationCreationTimestamp": 1780753286189,
+    "quotationExpirationTimestamp": 1783345286189,
+    "quotationStatus": "DRAFT",
+    "isoCurrency": "EUR",
+    "locale": null,
+    "subjects": {
+      "leadConfiguration": "b11e8afd-5acd-4b08-bf63-5ce4212fcea1",
+      "contactPerson": "41c5678d-cc0b-4001-b493-5ee7e02a5790"
+    },
+    "segments": {
+      "defaultTemplateContactPart": {
+        "type": "contactPerson",
+        "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+      },
+      "defaultSignaturePart": {
+        "type": "signature",
+        "data": {
+          "isSignedByCustomer": null,
+          "signingProps": null,
+          "artifactName": null,
+          "timestamp": null
+        }
+      },
+      "defaultTemplateProfileLogo": {
+        "type": "companyProfileLogo",
+        "data": "![|6lh]($companyProfile.logo)"
+      },
+      "defaultTemplateProfileText": {
+        "type": "text",
+        "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+      },
+      "defaultTemplatePriceLineGroup": {
+        "type": "priceLineGroup",
+        "data": {
+          "name": null,
+          "lines": [
+            {
+              "units": 1,
+              "description": "Suneye\nBreedte: 4500 mm\nUitval: 3000 mm\nFrame kleur: RAL 9010\nKleur doek: NTB\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+              "pricePerUnit": 3448.7,
+              "imageUri": null,
+              "vatPercentage": 21,
+              "discount": null,
+              "position": 0,
+              "lockTotalPrice": false
+            },
+            {
+              "units": 1,
+              "description": "Inmeten + montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+              "pricePerUnit": 275,
+              "imageUri": null,
+              "vatPercentage": 21,
+              "discount": null,
+              "position": 1,
+              "lockTotalPrice": false
+            },
+            {
+              "units": 1,
+              "description": "Eolis 3D windsensor IO\n- Windbeveiliging in de voorlijst\n- De windsensor is een hulp stuk hier kunnen geen garantie rechten aan verleend worden mbt windschade.",
+              "pricePerUnit": 169,
+              "imageUri": null,
+              "vatPercentage": 21,
+              "discount": null,
+              "position": 2,
+              "lockTotalPrice": false
+            },
+            {
+              "units": 1,
+              "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+              "pricePerUnit": 195,
+              "imageUri": null,
+              "vatPercentage": 21,
+              "discount": null,
+              "position": 3,
+              "lockTotalPrice": false
+            },
+            {
+              "units": 1,
+              "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+              "pricePerUnit": 195,
+              "imageUri": null,
+              "vatPercentage": 21,
+              "discount": null,
+              "position": 4,
+              "lockTotalPrice": false
+            },
+            {
+              "units": 1,
+              "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+              "pricePerUnit": 195,
+              "imageUri": null,
+              "vatPercentage": 21,
+              "discount": null,
+              "position": 5,
+              "lockTotalPrice": false
+            },
+            {
+              "units": 1,
+              "description": "Inmeten + montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+              "pricePerUnit": 275,
+              "imageUri": null,
+              "vatPercentage": 21,
+              "discount": null,
+              "position": 6,
+              "lockTotalPrice": false
+            },
+            {
+              "units": 1,
+              "description": "Inmeten + montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+              "pricePerUnit": 275,
+              "imageUri": null,
+              "vatPercentage": 21,
+              "discount": null,
+              "position": 7,
+              "lockTotalPrice": false
+            }
+          ],
+          "vatSetting": "INCL",
+          "groupDiscount": {
+            "name": "15% tijdelijke actie",
+            "amount": 15,
+            "type": "PERCENTAGE",
+            "vatPercentage": 21
+          },
+          "showPrices": null
+        }
+      }
+    },
+    "pricing": {
+      "total": 4273.545
+    },
+    "renderRows": [
+      {
+        "delegateMargins": false,
+        "widths": [
+          50,
+          50
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "text",
+                "target": "defaultTemplateProfileLogo"
+              }
+            ]
+          },
+          {
+            "elements": [
+              {
+                "type": "text",
+                "target": "defaultTemplateProfileText"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "empty",
+                "target": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "text",
+                "target": "defaultTemplateContactPart"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "empty",
+                "target": "2lh"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "quotationData",
+                "target": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "empty",
+                "target": "2lh"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "priceLineGroupCombined",
+                "target": "defaultTemplatePriceLineGroup"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          100
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "empty",
+                "target": "2lh"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "delegateMargins": false,
+        "widths": [
+          50,
+          50
+        ],
+        "columns": [
+          {
+            "elements": [
+              {
+                "type": "userDecline",
+                "target": null
+              }
+            ]
+          },
+          {
+            "elements": [
+              {
+                "type": "signature",
+                "target": "defaultSignaturePart"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "renderTemplate": null,
+    "artifacts": null
+  }
+}

@@ -1,7 +1,7 @@
 # Sonty — Integrations Reference
 
-> Status: Design phase. No live systems connected.
-> Last updated: 2026-03-08
+> Status: Design phase
+> Last updated: 2026-03-10
 
 ---
 
@@ -9,135 +9,92 @@
 
 | System | Role | Auth Method | Status |
 |---|---|---|---|
-| HubSpot | Central CRM | Private App Token | Design |
-| Reuzenpanda | Product configurator / first quote | API Key | Design |
-| Microsoft Bookings | Appointment scheduling | Microsoft Graph API (OAuth) | Design |
+| Reuzenpanda | Product configurator + first price indication | Zapier native (Invite Only) | Connected in Zapier |
+| HubSpot | Central CRM | Private App Token / Zapier OAuth | OAuth in progress |
+| Zapier | Automation layer | — | Active |
+| Planado | Field operations | API Key + Webhooks | Design |
 | Gripp | Quotes and invoices | API Key | Design |
-| Outlook | Email communication | Microsoft Graph API (OAuth) | Design |
-| WhatsApp Business | Customer messaging | Meta Business Cloud API | Design |
-| Meta Ads | Lead acquisition | OAuth + Lead Ads Webhook | Design |
-| Google Ads | Lead acquisition | OAuth + Lead Form API | Design |
-| Pinterest Ads | Lead acquisition | OAuth | Design |
-| Postgres | Reporting database | Direct connection (internal) | Design |
-
----
-
-## HubSpot
-
-- **Purpose**: Central CRM — contacts, deals, pipeline, activities, sequences
-- **Auth**: Private App Token (scopes: contacts, deals, activities, notes, owners)
-- **Config key**: `HUBSPOT_API_TOKEN`
-- **Sandbox**: HubSpot Developer Sandbox portal
-- **Docs**: https://developers.hubspot.com/docs/api/overview
-- **Folder**: `integrations/hubspot/`
-- **Used by workflows**: WF-01 through WF-14
+| Trengo | WhatsApp messaging | Zapier native | Design |
+| Outlook | Email (incl. orders@sonty.nl) | Microsoft 365 | Design |
+| Meta Ads | Lead acquisition → Reuzenpanda | Zapier native | Design |
+| Google Ads | Lead acquisition → Reuzenpanda | Zapier native | Design |
+| Pinterest Ads | Lead acquisition → Reuzenpanda | Zapier native | Design |
 
 ---
 
 ## Reuzenpanda
 
-- **Purpose**: Product configurator — generates first quote based on product interest and postal code
-- **Auth**: API Key (TBC — confirm with Reuzenpanda)
-- **Config key**: `REUZENPANDA_API_KEY`, `REUZENPANDA_BASE_URL`
-- **Sandbox**: Confirm test environment availability with Reuzenpanda
-- **Folder**: `integrations/reuzenpanda/`
-- **Used by workflows**: WF-04
+- **Purpose**: Product configurator — customer configures product, gets first price indication. Entry point for all leads.
+- **Auth**: Zapier native integration (Invite Only)
+- **Already connected**: Yes (3 zaps in Zapier, including active "Reuzenpanda Offerte → Google Sheets")
+- **Used by**: ZAP-01
 
 ---
 
-## Microsoft Bookings
+## HubSpot
 
-- **Purpose**: Scheduling measurement and installation appointments
-- **Auth**: Microsoft Graph API via OAuth 2.0 (app registration in Azure AD)
-- **Config keys**: `MS_TENANT_ID`, `MS_CLIENT_ID`, `MS_CLIENT_SECRET`, `MS_BOOKINGS_BUSINESS_ID`
-- **Sandbox**: Separate Microsoft 365 dev tenant
-- **Docs**: https://learn.microsoft.com/en-us/graph/api/resources/booking-api-overview
-- **Folder**: `integrations/planning/`
-- **Used by workflows**: WF-06, WF-07, WF-11, WF-12
-- **Services to configure**:
-  - "Opmeting" (60 min, assigned to measurement team)
-  - "Installatie" (variable duration, assigned to installation team)
+- **Purpose**: Central CRM — contacts, deals, pipeline, tasks, notes
+- **Auth**: Private App Token (pat-eu1-ba8f1c56-...) + Zapier OAuth
+- **Portal ID**: 147970649
+- **Private App**: Sonty Automation (ID: 33327041)
+- **Used by**: ZAP-01 through ZAP-11, WF-01 through WF-04
+
+---
+
+## Planado
+
+- **Purpose**: Field operations — measurement and installation jobs
+- **Auth**: API Key (Bearer token); Webhooks via `X-Planado-Secret`
+- **API base**: `https://api.planadoapp.com/v2`
+- **Zapier**: Native integration — "Create Job" action, "Job Event" trigger
+- **Required plan**: Pro (for API + webhooks)
+- **Job types**: Opmeting (60 min), Installatie (variable)
+- **Webhook event**: `job_finished` (used by ZAP-04, ZAP-09)
+- **Used by**: ZAP-03, ZAP-04, ZAP-08, ZAP-09
 
 ---
 
 ## Gripp
 
-- **Purpose**: Create and manage quotes and invoices; read payment status
+- **Purpose**: Final quotes, deposit invoices, final invoices
 - **Auth**: API Key
-- **Config key**: `GRIPP_API_KEY`, `GRIPP_BASE_URL`
-- **Sandbox**: Confirm test environment with Gripp support
 - **Docs**: https://developers.gripp.nl/
-- **Folder**: `integrations/gripp/`
-- **Used by workflows**: WF-08, WF-09, WF-10, WF-12, WF-13
+- **Used by**: ZAP-05, ZAP-06, ZAP-10
 
 ---
 
-## Outlook (Microsoft Graph)
+## Trengo
 
-- **Purpose**: Send transactional emails (quotes, invoices, confirmations); read replies
-- **Auth**: Microsoft Graph API via OAuth 2.0 (same app registration as Bookings)
-- **Config keys**: `MS_TENANT_ID`, `MS_CLIENT_ID`, `MS_CLIENT_SECRET`, `MS_SENDER_EMAIL`
-- **Sandbox**: Test mailbox in dev tenant
-- **Docs**: https://learn.microsoft.com/en-us/graph/api/user-sendmail
-- **Folder**: `integrations/hubspot/` (email activity logged back to HubSpot)
-- **Used by workflows**: WF-04, WF-06, WF-08, WF-09, WF-11, WF-12
+- **Purpose**: WhatsApp messaging — follow-up after price indication + review requests
+- **Auth**: Zapier native integration
+- **Already connected**: Yes (in Zapier, 1 existing zap)
+- **Templates**: Randomized WhatsApp templates for follow-up (step 5)
+- **Used by**: ZAP-02, ZAP-11
 
 ---
 
-## WhatsApp Business
+## Outlook / Email
 
-- **Purpose**: Send follow-up messages and confirmations to customers who have opted in
-- **Auth**: Meta Business Cloud API — access token per phone number
-- **Config keys**: `WHATSAPP_API_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID`
-- **Sandbox**: Meta Developer test phone number
-- **Docs**: https://developers.facebook.com/docs/whatsapp/cloud-api
-- **Folder**: `integrations/hubspot/` (messages logged as notes in HubSpot)
-- **Used by workflows**: WF-05, WF-06, WF-11, WF-12
-- **Note**: All templates must be pre-approved by Meta before use in production
+- **Purpose**: Transactional emails + orders@sonty.nl for supplier order confirmations
+- **Auth**: Microsoft 365
+- **Key mailbox**: orders@sonty.nl (monitored for supplier order confirmations → ZAP-07)
+- **Used by**: ZAP-07
 
 ---
 
-## Meta Ads
+## Meta Ads / Google Ads / Pinterest Ads
 
-- **Purpose**: Receive lead form submissions; read campaign performance data
-- **Auth**: OAuth 2.0 — Meta Business access token
-- **Config keys**: `META_ACCESS_TOKEN`, `META_AD_ACCOUNT_ID`, `META_PIXEL_ID`
-- **Sandbox**: Meta Business test ad account with test leads
-- **Docs**: https://developers.facebook.com/docs/marketing-api/
-- **Folder**: `integrations/ads/`
-- **Used by workflows**: WF-01, WF-13
+- **Purpose**: Lead acquisition — ads link to Reuzenpanda configurator
+- **Auth**: Via Zapier native integrations
+- **Flow**: Ad click → Reuzenpanda configurator → lead data → Zapier → HubSpot
+- **Note**: Ads drive traffic to Reuzenpanda, not directly to HubSpot
 
 ---
 
-## Google Ads
+## Zapier Account Details
 
-- **Purpose**: Receive lead form submissions; read campaign performance data
-- **Auth**: OAuth 2.0 — Google Ads API
-- **Config keys**: `GOOGLE_ADS_DEVELOPER_TOKEN`, `GOOGLE_ADS_CLIENT_ID`, `GOOGLE_ADS_CLIENT_SECRET`, `GOOGLE_ADS_REFRESH_TOKEN`, `GOOGLE_ADS_CUSTOMER_ID`
-- **Sandbox**: Google Ads test account
-- **Docs**: https://developers.google.com/google-ads/api/docs/start
-- **Folder**: `integrations/ads/`
-- **Used by workflows**: WF-01, WF-13
-
----
-
-## Pinterest Ads
-
-- **Purpose**: Read campaign performance data (lead volumes, spend)
-- **Auth**: OAuth 2.0
-- **Config keys**: `PINTEREST_ACCESS_TOKEN`, `PINTEREST_AD_ACCOUNT_ID`
-- **Sandbox**: Pinterest developer app
-- **Docs**: https://developers.pinterest.com/docs/api/v5/
-- **Folder**: `integrations/ads/`
-- **Used by workflows**: WF-13
-
----
-
-## Postgres (Reporting Database)
-
-- **Purpose**: Normalized reporting data for dashboards
-- **Auth**: Username + password (internal VPS only, not exposed externally)
-- **Config keys**: `POSTGRES_HOST`, `POSTGRES_PORT`, `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`
-- **Schema**: Defined in `docs/crm-data-model.md`
-- **Folder**: `integrations/` (ETL logic in n8n workflows)
-- **Used by workflows**: WF-01 through WF-14
+- **Email**: daimy@sonty.nl
+- **Plan**: Professional (tasks limit ~10,000/month, currently using ~858)
+- **Connected apps**: Trengo, Google Sheets (x2), Reuzenpanda (Invite Only)
+- **Active zap (DO NOT TOUCH)**: "Reuzenpanda Offerte → Google Sheets"
+- **In progress**: ZAP-02 draft (ID 353373774)

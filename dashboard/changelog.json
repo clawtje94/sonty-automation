@@ -1,0 +1,154 @@
+[
+  {
+    "id": "mmnst7d5zoin",
+    "title": "HubSpot login + Meetings voorbereiding",
+    "description": "HubSpot browser login werkt (Playwright script). Meetings setup voorbereid voor winkelafspraken. Wacht op 2FA code voor afronding. Portal guides gevalideerd — alle 4 rollen hebben uitgebreide stap-voor-stap handleidingen met duidelijke start/eindpunten.",
+    "category": "verbetering",
+    "snapshot": {
+      "totaal_deals": 6,
+      "open_deals": 3,
+      "gewonnen": 2,
+      "verloren": 1,
+      "omzet": 7250,
+      "inkoop": 3080,
+      "marge": 4170,
+      "slagingspercentage": 66.7,
+      "gem_dealwaarde": 3625,
+      "gem_dagen_tot_sluiting": 30
+    },
+    "created": "2026-03-12T18:25:35.369Z"
+  },
+  {
+    "id": "mmnotxw9gpv8",
+    "title": "Medewerkerportaal met rolscheiding",
+    "description": "Portal voor sales, planning, monteurs & klantenservice. Elk rol ziet alleen eigen taken met duidelijk begin- en eindpunt. Inclusief handleidingen, FAQ, ideeën board.",
+    "category": "nieuw",
+    "snapshot": {
+      "totaal_deals": 6,
+      "open_deals": 3,
+      "gewonnen": 2,
+      "verloren": 1,
+      "omzet": 7250,
+      "inkoop": 3080,
+      "marge": 4170,
+      "slagingspercentage": 66.7,
+      "gem_dealwaarde": 3625,
+      "gem_dagen_tot_sluiting": 30
+    },
+    "created": "2026-03-12T16:34:11.289Z"
+  },
+  {
+    "id": "mmnottk9hdve",
+    "title": "Email templates: €75 inmeten regel + spelling check",
+    "description": "Prijsindicatie email aangepast: gratis opmeting bij afname, anders €75. Alle 9 emails nagelezen op spelling — geen fouten gevonden.",
+    "category": "verbetering",
+    "snapshot": {
+      "totaal_deals": 6,
+      "open_deals": 3,
+      "gewonnen": 2,
+      "verloren": 1,
+      "omzet": 7250,
+      "inkoop": 3080,
+      "marge": 4170,
+      "slagingspercentage": 66.7,
+      "gem_dealwaarde": 3625,
+      "gem_dagen_tot_sluiting": 30
+    },
+    "created": "2026-03-12T16:34:05.673Z"
+  },
+  {
+    "id": "mmn16xko3y0a",
+    "title": "Changelog & KPI tracking systeem",
+    "description": "Elke verandering wordt vastgelegd met KPI snapshot voor voor/na vergelijking",
+    "category": "nieuw",
+    "snapshot": {
+      "totaal_deals": 6,
+      "open_deals": 3,
+      "gewonnen": 2,
+      "verloren": 1,
+      "omzet": 7250,
+      "inkoop": 3080,
+      "marge": 4170,
+      "slagingspercentage": 66.7,
+      "gem_dealwaarde": 3625,
+      "gem_dagen_tot_sluiting": 30
+    },
+    "created": "2026-03-12T05:32:26.616Z"
+  },
+  {
+    "id": "mmn16xkhdjbb",
+    "title": "Conversie-optimalisatie plan geschreven",
+    "description": "Premium pricing strategie, sales filosofie, 6 automatiserings-flows gespecificeerd",
+    "category": "verbetering",
+    "snapshot": {
+      "totaal_deals": 6,
+      "open_deals": 3,
+      "gewonnen": 2,
+      "verloren": 1,
+      "omzet": 7250,
+      "inkoop": 3080,
+      "marge": 4170,
+      "slagingspercentage": 66.7,
+      "gem_dealwaarde": 3625,
+      "gem_dagen_tot_sluiting": 30
+    },
+    "created": "2026-03-12T05:32:26.609Z"
+  },
+  {
+    "id": "mmn16xkaah94",
+    "title": "HubSpot lead scoring properties",
+    "description": "lead_kwaliteit, lead_score, aantal_belpogingen, laatste_belpoging aangemaakt",
+    "category": "automatisering",
+    "snapshot": {
+      "totaal_deals": 6,
+      "open_deals": 3,
+      "gewonnen": 2,
+      "verloren": 1,
+      "omzet": 7250,
+      "inkoop": 3080,
+      "marge": 4170,
+      "slagingspercentage": 66.7,
+      "gem_dealwaarde": 3625,
+      "gem_dagen_tot_sluiting": 30
+    },
+    "created": "2026-03-12T05:32:26.602Z"
+  },
+  {
+    "id": "mmn16xk23eum",
+    "title": "9 email templates met social proof",
+    "description": "WhatsApp knop, Waarom Sonty blokken, Sonty logo, echt telefoonnummer",
+    "category": "verbetering",
+    "snapshot": {
+      "totaal_deals": 6,
+      "open_deals": 3,
+      "gewonnen": 2,
+      "verloren": 1,
+      "omzet": 7250,
+      "inkoop": 3080,
+      "marge": 4170,
+      "slagingspercentage": 66.7,
+      "gem_dealwaarde": 3625,
+      "gem_dagen_tot_sluiting": 30
+    },
+    "created": "2026-03-12T05:32:26.594Z"
+  },
+  {
+    "id": "mmn16xjor89k",
+    "title": "Dashboard live met Sonty branding",
+    "description": "Logo, favicon, live indicator, 12 KPIs, 7 grafieken, deal tabel, ideas board",
+    "category": "nieuw",
+    "snapshot": {
+      "totaal_deals": 6,
+      "open_deals": 3,
+      "gewonnen": 2,
+      "verloren": 1,
+      "omzet": 7250,
+      "inkoop": 3080,
+      "marge": 4170,
+      "slagingspercentage": 66.7,
+      "gem_dealwaarde": 3625,
+      "gem_dagen_tot_sluiting": 30
+    },
+    "created": "2026-03-12T05:32:26.580Z"
+  }
+]

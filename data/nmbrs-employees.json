@@ -1,0 +1,37 @@
+{
+  "company": "Sonty B.V.",
+  "company_id": 769,
+  "nmbrs_domain": "maasaccountants",
+  "scraped_at": "2026-03-16",
+  "employees": [
+    { "id": 3, "name": "Ramona Hansen - Gijbe", "type": "Loondienst", "function": "Adm. mdw.", "hours_pattern": "3,0 (wo+vr)" },
+    { "id": 5, "name": "Nanny van Vliet - Kester", "type": "Loondienst", "function": "Verkoop mdw.", "hours_pattern": "8,0 (di-vr)" },
+    { "id": 6, "name": "Sjoerd Pelle", "type": "Loondienst", "function": "Monteur", "hours_pattern": "8,0 (ma-do) 6,0 (vr)" },
+    { "id": 7, "name": "Nick Huizer", "type": "Loondienst", "function": "", "hours_pattern": "8,0 (ma-do) 6,0 (vr)" },
+    { "id": 9, "name": "Daimy Boot", "type": "Loondienst", "function": "", "hours_pattern": "5,0 (ma+di)" },
+    { "id": 10, "name": "Jorren Plugge", "type": "Loondienst", "function": "Hulpmonteur", "hours_pattern": "7,6 (ma-vr)" },
+    { "id": 13, "name": "Tygo Krikke", "type": "Loondienst", "function": "Hulpmonteur", "hours_pattern": "8,0 (ma-do) 6,0 (vr)" },
+    { "id": 14, "name": "Marvin Vrij", "type": "Loondienst", "function": "Hoofdmonteur", "hours_pattern": "8,0 (ma-vr)" },
+    { "id": 15, "name": "Jaimy de Wit", "type": "Loondienst", "function": "Mdw klantenservice", "hours_pattern": "7,6 (ma-vr)" },
+    { "id": 16, "name": "Loïs Engelen", "type": "Loondienst", "function": "Adm. mdw.", "hours_pattern": "7,6 (ma-di)" },
+    { "id": 17, "name": "Mick Mulders", "type": "Loondienst", "function": "Hoofdmonteur", "hours_pattern": "7,6 (ma-vr)" },
+    { "id": 18, "name": "Kevin Gibson", "type": "Loondienst", "function": "Hulpmonteur", "hours_pattern": "" }
+  ],
+  "planado_relevant_employees": [
+    { "id": 6, "name": "Sjoerd Pelle", "role": "Monteur", "note": "Field worker for Planado" },
+    { "id": 7, "name": "Nick Huizer", "role": "Monteur/field", "note": "Field worker for Planado" },
+    { "id": 10, "name": "Jorren Plugge", "role": "Hulpmonteur", "note": "Field worker for Planado" },
+    { "id": 13, "name": "Tygo Krikke", "role": "Hulpmonteur", "note": "Field worker for Planado" },
+    { "id": 14, "name": "Marvin Vrij", "role": "Hoofdmonteur", "note": "Lead field worker for Planado" },
+    { "id": 17, "name": "Mick Mulders", "role": "Hoofdmonteur", "note": "Lead field worker for Planado" },
+    { "id": 18, "name": "Kevin Gibson", "role": "Hulpmonteur", "note": "Field worker for Planado" }
+  ],
+  "leave_march_2026": [
+    { "employee_id": 7, "name": "Nick Huizer", "dates": "2026-03-10 to 2026-03-14", "type": "Leave (V)", "note": "Full week leave" },
+    { "employee_id": 15, "name": "Jaimy de Wit", "dates": "2026-03-28", "type": "Leave (V)", "note": "1 day leave (Saturday)" }
+  ],
+  "pending_leave_requests": [
+    { "employee": "Nanny van Vliet - Kester", "type": "Vakantie uren", "dates": "2026-05-12 to 2026-05-12", "hours": 8.0 },
+    { "employee": "Nanny van Vliet - Kester", "type": "Vakantie uren", "dates": "2026-05-15 to 2026-05-15", "hours": 8.0 }
+  ]
+}

@@ -10,9 +10,9 @@ Sonty is a modular business automation platform that integrates key operational 
 
 | System | Category | Status |
 |---|---|---|
-| HubSpot CRM | CRM / Sales | Staging |
-| Reuzenpanda | Operations | Staging |
-| Planning Software | Scheduling / Projects | Staging |
+| HubSpot CRM + Meetings | CRM / Sales / Showroom scheduling | Staging |
+| Reuzenpanda | Product config / First quote | Staging |
+| Planado | Field operations / Measurements / Installations | Staging |
 | Gripp | Invoicing / Admin | Staging |
 | Advertising Platforms | Marketing | Staging |
 | Dashboards | Reporting / BI | Staging |

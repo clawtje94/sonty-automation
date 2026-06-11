@@ -1,0 +1,862 @@
+[
+  {
+    "id": "eb223ee3-71df-4084-9add-7a6df21cf0c6",
+    "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+    "summary": "Samantha Erkelens",
+    "description": "Land: Nederland\nE-mailadres: sam.erkelens@hotmail.com\nTelefoonnummer: +31646610746\nVoornaam: Samantha\nAchternaam: Erkelens\nPostcode: 2992EH\nHuisnummer: 45\nPlaats: Barendrecht\nStraatnaam: Griegplantsoen\nHoe komt u bij ons terecht?: Social media\nOpmerking: Het rolluik zal geplaatst moeten worden op de dakkapel, 2e etage aan de achterzijde. \nDe woning hebben wij gekocht, maar 22 juni zal de sleuteloverdracht plaats vinden. De afmetingen zijn een schatting, gemaakt doormiddel van de plattegrond. \nHet zou fijn zijn als er nog een meet afspraak gemaakt zou kunnen worden. \nHet liefste willen wij zo snel als mogelijk het rolluik geplaatst hebben ivm de warmte in de ruimte, dit wordt de slaapplek van onze dochter.  \n\n1x Rolluik: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Draaischakelaar\n- hoogte: 1500.0\n- breedte: 2500.0\n\n1x Inclusief montage rolluik solar",
+    "lead_value": "€ 1,055.78",
+    "fields": {
+      "address": "Griegplantsoen 45, 2992EH Barendrecht, Nederland",
+      "phone": "+31646610746",
+      "cf_lead_value": {
+        "amount": "1055.7849999999999",
+        "isoCurrency": "EUR",
+        "type": "currency"
+      },
+      "email": "sam.erkelens@hotmail.com"
+    },
+    "labels": {
+      "result": ""
+    },
+    "status_label": "grip invullen",
+    "status_id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846",
+    "assignee_id": null,
+    "assignee": null,
+    "status": {
+      "type": "STATUS",
+      "id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846"
+    },
+    "free_fields": [
+      {
+        "label": "address",
+        "value": "Griegplantsoen 45, 2992EH Barendrecht, Nederland"
+      },
+      {
+        "label": "email",
+        "value": "sam.erkelens@hotmail.com"
+      },
+      {
+        "label": "phone",
+        "value": "+31646610746"
+      },
+      {
+        "label": "_widgetId",
+        "value": "4909baad-1717-4bfa-a93a-ba9355f7a9e3"
+      },
+      {
+        "label": "cf_lead_value",
+        "value": {
+          "amount": "1055.7849999999999",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        }
+      }
+    ],
+    "item_subject": {
+      "type": "LEAD_CONFIGURATION",
+      "id": "69796002-84f9-428d-a9ae-ef2ef694f1ae",
+      "identifier": "type=LEAD_CONFIGURATION,id=69796002-84f9-428d-a9ae-ef2ef694f1ae"
+    },
+    "technical_labels": [
+      {
+        "timestamp": 1780431594975,
+        "type": "ITEM_ACTIVE"
+      },
+      {
+        "timestamp": 1780431594975,
+        "type": "ITEM_UNREAD"
+      }
+    ],
+    "rank": "0|i02h4f:",
+    "timestamp_created": 1780431594975,
+    "timestamp_updated": 1780660820499
+  },
+  {
+    "id": "79d8b350-dae6-4fd8-b013-7f5804f0df13",
+    "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+    "summary": "Robert Barmentloo",
+    "description": "Land: Nederland\nE-mailadres: rjbarmentloo@gmail.com\nTelefoonnummer: +31624271417\nVoornaam: Robert\nAchternaam: Barmentloo\nPostcode: 2355AG\nHuisnummer: 32\nPlaats: Hoogmade\nStraatnaam: Kerkstraat\nHoe komt u bij ons terecht?: Google\n\n1x Suneye dichte cassette: \n- doekkleur: Doekkleur naar keuze\n- framekleur: RAL 7016 structuur\n- heb_je_een_uitbouw?: Ja\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Breedte tussen 2450 mm - 3190 mm: \n- framekleur: RAL 7016 structuur\n- uitval: 2000 mm\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- breedte: 3000.0\n\n1x Inclusief montage Knikarmscherm: \n- heb_je_een_uitbouw?: Ja\n\n1x Windvast: \n- framekleur: RAL 7016 structuur\n- hoogte: 2700.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening bedraad\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 1800.0\n\n1x Inclusief montage screen solar\n1x Windvast: \n- framekleur: RAL 7016 structuur\n- hoogte: 2300.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening bedraad\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 1800.0\n\n1x Inclusief montage screen solar",
+    "lead_value": "€ 5,742.01",
+    "fields": {
+      "address": "Kerkstraat 32, 2355AG Hoogmade, Nederland",
+      "phone": "+31624271417",
+      "cf_lead_value": {
+        "amount": "5742.005",
+        "isoCurrency": "EUR",
+        "type": "currency"
+      },
+      "email": "rjbarmentloo@gmail.com"
+    },
+    "labels": {
+      "result": ""
+    },
+    "status_label": "grip invullen",
+    "status_id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846",
+    "assignee_id": null,
+    "assignee": null,
+    "status": {
+      "type": "STATUS",
+      "id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846"
+    },
+    "free_fields": [
+      {
+        "label": "address",
+        "value": "Kerkstraat 32, 2355AG Hoogmade, Nederland"
+      },
+      {
+        "label": "email",
+        "value": "rjbarmentloo@gmail.com"
+      },
+      {
+        "label": "phone",
+        "value": "+31624271417"
+      },
+      {
+        "label": "_widgetId",
+        "value": "4909baad-1717-4bfa-a93a-ba9355f7a9e3"
+      },
+      {
+        "label": "cf_lead_value",
+        "value": {
+          "amount": "5742.005",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        }
+      }
+    ],
+    "item_subject": {
+      "type": "LEAD_CONFIGURATION",
+      "id": "27799b23-5bdb-4836-873d-3b08ef747552",
+      "identifier": "type=LEAD_CONFIGURATION,id=27799b23-5bdb-4836-873d-3b08ef747552"
+    },
+    "technical_labels": [
+      {
+        "timestamp": 1779798764080,
+        "type": "ITEM_ACTIVE"
+      },
+      {
+        "timestamp": 1779798764080,
+        "type": "ITEM_UNREAD"
+      }
+    ],
+    "rank": "0|i02dqn:",
+    "timestamp_created": 1779798764080,
+    "timestamp_updated": 1780660516713
+  },
+  {
+    "id": "776de14b-0b19-4fc8-b36b-6c4468c7968a",
+    "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+    "summary": "Marco Van den Hooven",
+    "description": "Land: Nederland\nE-mailadres: mvandenhooven@gmail.com\nTelefoonnummer: +31618258995\nVoornaam: Marco\nAchternaam: Van den Hooven\nPostcode: 3059 PT\nHuisnummer: 27\nPlaats: Rotterdam\nStraatnaam: Kurt Schwittersstraat\nHoe komt u bij ons terecht?: Social media\nOpmerking: De maten 250x103 + 170x103 zijn verdeelde rolluiken van een dakkapel van 420 breed. De overige 2 rolluiken komen op de 1e verdieping welke wel makkelijk te bereiken is via de uitbouw. Evt. zou het dakkapel vanaf daar met een ladder te bereiken zijn. Maar dat durf ik niet te zeggen.\n\n1x Rolluik: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n2x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- hoogte: 1070.0\n- breedte: 2260.0\n\n2x Inclusief montage rolluik solar\n1x Somfy connectivity app bediening\n1x Rolluik: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- hoogte: 1030.0\n- breedte: 1700.0\n\n1x Inclusief montage rolluik solar\n1x Somfy connectivity app bediening\n1x Rolluik: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- hoogte: 1030.0\n- breedte: 2500.0\n\n1x Inclusief montage rolluik solar\n1x Somfy connectivity app bediening",
+    "lead_value": "€ 4,150.00",
+    "fields": {
+      "address": "Kurt Schwittersstraat 27, 3059 PT Rotterdam, Nederland",
+      "phone": "+31618258995",
+      "cf_lead_value": {
+        "isoCurrency": "EUR",
+        "amount": "4149.999999999999",
+        "type": "currency"
+      },
+      "email": "mvandenhooven@gmail.com"
+    },
+    "labels": {
+      "result": ""
+    },
+    "status_label": "grip invullen",
+    "status_id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846",
+    "assignee_id": null,
+    "assignee": null,
+    "status": {
+      "type": "STATUS",
+      "id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846"
+    },
+    "free_fields": [
+      {
+        "label": "address",
+        "value": "Kurt Schwittersstraat 27, 3059 PT Rotterdam, Nederland"
+      },
+      {
+        "label": "email",
+        "value": "mvandenhooven@gmail.com"
+      },
+      {
+        "label": "phone",
+        "value": "+31618258995"
+      },
+      {
+        "label": "_widgetId",
+        "value": "4909baad-1717-4bfa-a93a-ba9355f7a9e3"
+      },
+      {
+        "label": "cf_lead_value",
+        "value": {
+          "isoCurrency": "EUR",
+          "amount": "4149.999999999999",
+          "type": "currency"
+        }
+      }
+    ],
+    "item_subject": {
+      "type": "LEAD_CONFIGURATION",
+      "id": "00d73988-9177-4ecf-9e33-84468d6fb807",
+      "identifier": "type=LEAD_CONFIGURATION,id=00d73988-9177-4ecf-9e33-84468d6fb807"
+    },
+    "technical_labels": [
+      {
+        "timestamp": 1780335974758,
+        "type": "ITEM_ACTIVE"
+      },
+      {
+        "timestamp": 1780335974758,
+        "type": "ITEM_UNREAD"
+      }
+    ],
+    "rank": "0|i02gkn:",
+    "timestamp_created": 1780335974759,
+    "timestamp_updated": 1780657981731
+  },
+  {
+    "id": "d137bc37-b089-4759-8afd-aa4e84962fd0",
+    "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+    "summary": "Wim van Asperen",
+    "description": "Land: Nederland\nE-mailadres: w.asperen@ziggo.nl\nTelefoonnummer: +31626282060\nVoornaam: Wim\nAchternaam: van Asperen \nPostcode: 2951BJ \nHuisnummer: 12 d\nPlaats: Alblasserdam \nStraatnaam: Groene Zoom\nHoe komt u bij ons terecht?: Google\nOpmerking: Het is op de 3e verdieping \n\n3x Windvast: \n- framekleur: Andere RAL kleur\n- hoogte: 1890.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening bedraad\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 1565.0\n\n3x Inclusief montage screen solar",
+    "lead_value": "€ 4,906.71",
+    "fields": {
+      "address": "Groene Zoom 12 d, 2951BJ  Alblasserdam , Nederland",
+      "phone": "+31626282060",
+      "cf_lead_value": {
+        "amount": "4906.71",
+        "isoCurrency": "EUR",
+        "type": "currency"
+      },
+      "email": "w.asperen@ziggo.nl"
+    },
+    "labels": {
+      "result": ""
+    },
+    "status_label": "grip invullen",
+    "status_id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846",
+    "assignee_id": null,
+    "assignee": null,
+    "status": {
+      "type": "STATUS",
+      "id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846"
+    },
+    "free_fields": [
+      {
+        "label": "address",
+        "value": "Groene Zoom 12 d, 2951BJ  Alblasserdam , Nederland"
+      },
+      {
+        "label": "email",
+        "value": "w.asperen@ziggo.nl"
+      },
+      {
+        "label": "phone",
+        "value": "+31626282060"
+      },
+      {
+        "label": "_widgetId",
+        "value": "4909baad-1717-4bfa-a93a-ba9355f7a9e3"
+      },
+      {
+        "label": "cf_lead_value",
+        "value": {
+          "amount": "4906.71",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        }
+      }
+    ],
+    "item_subject": {
+      "type": "LEAD_CONFIGURATION",
+      "id": "386b0003-52a1-43e9-a8e9-b53e46785282",
+      "identifier": "type=LEAD_CONFIGURATION,id=386b0003-52a1-43e9-a8e9-b53e46785282"
+    },
+    "technical_labels": [
+      {
+        "timestamp": 1780149887147,
+        "type": "ITEM_ACTIVE"
+      },
+      {
+        "timestamp": 1780149887147,
+        "type": "ITEM_UNREAD"
+      }
+    ],
+    "rank": "0|i0225n:",
+    "timestamp_created": 1780149887147,
+    "timestamp_updated": 1780656919843
+  },
+  {
+    "id": "1f23ab2b-107f-419b-84da-3760174c2aa7",
+    "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+    "summary": "Ercan Kahraman",
+    "description": "Land: Nederland\nE-mailadres: ercan__kahraman@hotmail.com\nTelefoonnummer: +31630777787\nVoornaam: Ercan\nAchternaam: Kahraman\nPostcode: 2134AT\nHuisnummer: 60\nPlaats: Hoofddorp\nStraatnaam: Laan van Zuiderhoeven\nHoe komt u bij ons terecht?: Social media\nOpmerking: Graag ontvang ik een offerte.\n\n1x Sunelite dichte cassette: \n- doekkleur: Doekkleur naar keuze\n- framekleur: RAL 7039\n- heb_je_een_uitbouw?: Ja\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Breedte tussen 4151 mm - 6000 mm: \n- framekleur: RAL 7039\n- uitval: 3000 mm\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- breedte: 6000.0\n\n1x Inclusief montage Knikarmscherm: \n- heb_je_een_uitbouw?: Ja\n\n1x Somfy connectivity app bediening\n1x Draadloze windsensor",
+    "lead_value": "€ 5,186.02",
+    "fields": {
+      "address": "Laan van Zuiderhoeven 60, 2134AT Hoofddorp, Nederland",
+      "phone": "+31630777787",
+      "cf_lead_value": {
+        "amount": "5186.019999999999",
+        "isoCurrency": "EUR",
+        "type": "currency"
+      },
+      "email": "ercan__kahraman@hotmail.com"
+    },
+    "labels": {
+      "result": ""
+    },
+    "status_label": "grip invullen",
+    "status_id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846",
+    "assignee_id": null,
+    "assignee": null,
+    "status": {
+      "type": "STATUS",
+      "id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846"
+    },
+    "free_fields": [
+      {
+        "label": "address",
+        "value": "Laan van Zuiderhoeven 60, 2134AT Hoofddorp, Nederland"
+      },
+      {
+        "label": "email",
+        "value": "ercan__kahraman@hotmail.com"
+      },
+      {
+        "label": "phone",
+        "value": "+31630777787"
+      },
+      {
+        "label": "_widgetId",
+        "value": "4909baad-1717-4bfa-a93a-ba9355f7a9e3"
+      },
+      {
+        "label": "cf_lead_value",
+        "value": {
+          "amount": "5186.019999999999",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        }
+      }
+    ],
+    "item_subject": {
+      "type": "LEAD_CONFIGURATION",
+      "id": "ea9d42cb-c885-43d1-aa29-488efd0b8dab",
+      "identifier": "type=LEAD_CONFIGURATION,id=ea9d42cb-c885-43d1-aa29-488efd0b8dab"
+    },
+    "technical_labels": [
+      {
+        "timestamp": 1780006018358,
+        "type": "ITEM_ACTIVE"
+      },
+      {
+        "timestamp": 1780006018358,
+        "type": "ITEM_UNREAD"
+      }
+    ],
+    "rank": "0|i02f0z:",
+    "timestamp_created": 1780006018358,
+    "timestamp_updated": 1780656699133
+  },
+  {
+    "id": "98d2e99e-6a49-46c1-82cd-d2de225ca1cb",
+    "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+    "summary": "Sander Philipse",
+    "description": "Land: Nederland\nE-mailadres: sanderenromy2015@gmail.com\nVoornaam: Sander\nAchternaam: Philipse\nPostcode: 2216AA\nPlaats: Voorhout\nTelefoonnummer: +31617467450\nHuisnummer: 16\nStraatnaam: TAXUSHAAG\nHoe komt u bij ons terecht?: Social media\n\n1x Suneye dichte cassette: \n- doekkleur: Doekkleur naar keuze\n- framekleur: RAL 9005 structuur\n- heb_je_een_uitbouw?: Ja\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Breedte tussen 3191 mm - 5500 mm: \n- framekleur: RAL 9005 structuur\n- uitval: 3000 mm\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- breedte: 4800.0\n\n1x Inclusief montage Knikarmscherm: \n- heb_je_een_uitbouw?: Ja\n\n1x Somfy connectivity app bediening\n1x Rolluik: \n- framekleur: RAL 7016 glans\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 glans\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1700.0\n- breedte: 3000.0\n\n1x Inclusief montage rolluik solar\n1x Rolluik: \n- framekleur: RAL 7016 glans\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 glans\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1700.0\n- breedte: 2400.0\n\n1x Inclusief montage rolluik solar\n1x Rolluik: \n- framekleur: RAL 7016 glans\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 glans\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1400.0\n- breedte: 2400.0\n\n1x Inclusief montage rolluik solar",
+    "lead_value": "€ 7,919.02",
+    "fields": {
+      "address": "TAXUSHAAG 16, 2216AA Voorhout, Nederland",
+      "phone": "+31617467450",
+      "cf_lead_value": {
+        "amount": "7919.025",
+        "isoCurrency": "EUR",
+        "type": "currency"
+      },
+      "email": "sanderenromy2015@gmail.com"
+    },
+    "labels": {
+      "result": ""
+    },
+    "status_label": "grip invullen",
+    "status_id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846",
+    "assignee_id": null,
+    "assignee": null,
+    "status": {
+      "type": "STATUS",
+      "id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846"
+    },
+    "free_fields": [
+      {
+        "label": "address",
+        "value": "TAXUSHAAG 16, 2216AA Voorhout, Nederland"
+      },
+      {
+        "label": "email",
+        "value": "sanderenromy2015@gmail.com"
+      },
+      {
+        "label": "phone",
+        "value": "+31617467450"
+      },
+      {
+        "label": "_widgetId",
+        "value": "4909baad-1717-4bfa-a93a-ba9355f7a9e3"
+      },
+      {
+        "label": "cf_lead_value",
+        "value": {
+          "amount": "7919.025",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        }
+      }
+    ],
+    "item_subject": {
+      "type": "LEAD_CONFIGURATION",
+      "id": "e4a344bc-744b-4425-accf-72af559e760c",
+      "identifier": "type=LEAD_CONFIGURATION,id=e4a344bc-744b-4425-accf-72af559e760c"
+    },
+    "technical_labels": [
+      {
+        "timestamp": 1779622408026,
+        "type": "ITEM_ACTIVE"
+      },
+      {
+        "timestamp": 1779622408026,
+        "type": "ITEM_UNREAD"
+      }
+    ],
+    "rank": "0|i02clb:",
+    "timestamp_created": 1779622408026,
+    "timestamp_updated": 1780656108559
+  },
+  {
+    "id": "e56dfb38-a8e5-485c-8be8-05bc3237371a",
+    "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+    "summary": "Thijs Rosenkrands",
+    "description": "Land: Nederland\nE-mailadres: thijsrosenkrands@gmail.com\nTelefoonnummer: +31627884152\nVoornaam: Thijs\nAchternaam: Rosenkrands\nPostcode: 3065JG\nHuisnummer: 28\nPlaats: Rotterdam\nStraatnaam: Jean Augierstraat\nHoe komt u bij ons terecht?: Social media\n\n1x Rolluik: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1320.0\n- breedte: 1525.0\n\n1x Inclusief montage rolluik solar\n1x Somfy connectivity app bediening",
+    "lead_value": "€ 1,353.71",
+    "fields": {
+      "address": "Jean Augierstraat 28, 3065JG Rotterdam, Nederland",
+      "phone": "+31627884152",
+      "cf_lead_value": {
+        "amount": "1353.71",
+        "isoCurrency": "EUR",
+        "type": "currency"
+      },
+      "email": "thijsrosenkrands@gmail.com"
+    },
+    "labels": {
+      "result": ""
+    },
+    "status_label": "grip invullen",
+    "status_id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846",
+    "assignee_id": null,
+    "assignee": null,
+    "status": {
+      "type": "STATUS",
+      "id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846"
+    },
+    "free_fields": [
+      {
+        "label": "address",
+        "value": "Jean Augierstraat 28, 3065JG Rotterdam, Nederland"
+      },
+      {
+        "label": "email",
+        "value": "thijsrosenkrands@gmail.com"
+      },
+      {
+        "label": "phone",
+        "value": "+31627884152"
+      },
+      {
+        "label": "_widgetId",
+        "value": "4909baad-1717-4bfa-a93a-ba9355f7a9e3"
+      },
+      {
+        "label": "cf_lead_value",
+        "value": {
+          "amount": "1353.71",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        }
+      }
+    ],
+    "item_subject": {
+      "type": "LEAD_CONFIGURATION",
+      "id": "938e4f41-3af6-4987-b069-76085b919a49",
+      "identifier": "type=LEAD_CONFIGURATION,id=938e4f41-3af6-4987-b069-76085b919a49"
+    },
+    "technical_labels": [
+      {
+        "timestamp": 1778223479913,
+        "type": "ITEM_ACTIVE"
+      },
+      {
+        "timestamp": 1778223479913,
+        "type": "ITEM_UNREAD"
+      }
+    ],
+    "rank": "0|i027jz:",
+    "timestamp_created": 1778223479913,
+    "timestamp_updated": 1780655561935
+  },
+  {
+    "id": "d7e18948-8cc5-459f-b0b4-0d9a875eabb4",
+    "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+    "summary": "Rafal Mateuszak",
+    "description": "Land: Nederland\nE-mailadres: rafalmateuszak@googlemail.com\nVoornaam: Rafal\nAchternaam: Mateuszak\nPostcode: 2728 AW\nHuisnummer: 13\nPlaats: Zoetermeer\nStraatnaam: Gaudilijn\nTelefoonnummer: +31648354049\nHoe komt u bij ons terecht?: Buren\n\n1x Suneye dichte cassette: \n- doekkleur: Doekkleur naar keuze\n- framekleur: RAL 9010\n- heb_je_een_uitbouw?: Ja\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Breedte tussen 3191 mm - 5500 mm: \n- framekleur: RAL 9010\n- uitval: 3000 mm\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- breedte: 5000.0\n\n1x Inclusief montage Knikarmscherm: \n- heb_je_een_uitbouw?: Ja\n\n1x Somfy connectivity app bediening",
+    "lead_value": "€ 3,586.57",
+    "fields": {
+      "address": "Gaudilijn 13, 2728 AW Zoetermeer, Nederland",
+      "phone": "+31648354049",
+      "cf_lead_value": {
+        "amount": "3586.575",
+        "isoCurrency": "EUR",
+        "type": "currency"
+      },
+      "email": "rafalmateuszak@googlemail.com"
+    },
+    "labels": {
+      "result": ""
+    },
+    "status_label": "grip invullen",
+    "status_id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846",
+    "assignee_id": null,
+    "assignee": null,
+    "status": {
+      "type": "STATUS",
+      "id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846"
+    },
+    "free_fields": [
+      {
+        "label": "address",
+        "value": "Gaudilijn 13, 2728 AW Zoetermeer, Nederland"
+      },
+      {
+        "label": "email",
+        "value": "rafalmateuszak@googlemail.com"
+      },
+      {
+        "label": "phone",
+        "value": "+31648354049"
+      },
+      {
+        "label": "_widgetId",
+        "value": "4909baad-1717-4bfa-a93a-ba9355f7a9e3"
+      },
+      {
+        "label": "cf_lead_value",
+        "value": {
+          "amount": "3586.575",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        }
+      }
+    ],
+    "item_subject": {
+      "type": "LEAD_CONFIGURATION",
+      "id": "40b56f2b-849c-47f0-80ed-32df12dc8452",
+      "identifier": "type=LEAD_CONFIGURATION,id=40b56f2b-849c-47f0-80ed-32df12dc8452"
+    },
+    "technical_labels": [
+      {
+        "timestamp": 1779615308691,
+        "type": "ITEM_ACTIVE"
+      },
+      {
+        "timestamp": 1779615308691,
+        "type": "ITEM_UNREAD"
+      }
+    ],
+    "rank": "0|i02chz:",
+    "timestamp_created": 1779615308691,
+    "timestamp_updated": 1780654552238
+  },
+  {
+    "id": "2c0e0744-0445-4d11-98a0-d938bec89db1",
+    "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+    "summary": "Lisa Jansen - de Witte",
+    "description": "Land: Nederland\nE-mailadres: lisa.dewitte@live.nl\nTelefoonnummer: +31646607810\nVoornaam: Lisa\nAchternaam: Jansen - de Witte\nPostcode: 2681wz\nHuisnummer: 7\nPlaats: Monster\nStraatnaam: Pieter Florisz Couckdreef\nHoe komt u bij ons terecht?: Social media\n\n1x Suneye dichte cassette: \n- doekkleur: Doekkleur naar keuze\n- framekleur: RAL 9010\n- heb_je_een_uitbouw?: Nee\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Inclusief montage Knikarmscherm: \n- heb_je_een_uitbouw?: Nee\n\n1x Breedte tussen 3191 mm - 5500 mm: \n- framekleur: RAL 9010\n- uitval: 3000 mm\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- breedte: 4800.0",
+    "lead_value": "€ 3,378.32",
+    "fields": {
+      "address": "Pieter Florisz Couckdreef 7, 2681wz Monster, Nederland",
+      "phone": "+31646607810",
+      "cf_lead_value": {
+        "amount": "3378.325",
+        "isoCurrency": "EUR",
+        "type": "currency"
+      },
+      "email": "lisa.dewitte@live.nl"
+    },
+    "labels": {
+      "result": ""
+    },
+    "status_label": "grip invullen",
+    "status_id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846",
+    "assignee_id": null,
+    "assignee": null,
+    "status": {
+      "type": "STATUS",
+      "id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846"
+    },
+    "free_fields": [
+      {
+        "label": "address",
+        "value": "Pieter Florisz Couckdreef 7, 2681wz Monster, Nederland"
+      },
+      {
+        "label": "email",
+        "value": "lisa.dewitte@live.nl"
+      },
+      {
+        "label": "phone",
+        "value": "+31646607810"
+      },
+      {
+        "label": "_widgetId",
+        "value": "4909baad-1717-4bfa-a93a-ba9355f7a9e3"
+      },
+      {
+        "label": "cf_lead_value",
+        "value": {
+          "amount": "3378.325",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        }
+      }
+    ],
+    "item_subject": {
+      "type": "LEAD_CONFIGURATION",
+      "id": "e8a7a123-a519-493e-b761-b47ebef48c66",
+      "identifier": "type=LEAD_CONFIGURATION,id=e8a7a123-a519-493e-b761-b47ebef48c66"
+    },
+    "technical_labels": [
+      {
+        "timestamp": 1779563071941,
+        "type": "ITEM_ACTIVE"
+      },
+      {
+        "timestamp": 1779563071941,
+        "type": "ITEM_UNREAD"
+      }
+    ],
+    "rank": "0|i02cbj:",
+    "timestamp_created": 1779563071941,
+    "timestamp_updated": 1780654118280
+  },
+  {
+    "id": "54cb984f-8e2f-45ab-9b27-c3dca5428ab4",
+    "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+    "summary": "Michael Jooste",
+    "description": "Land: Nederland\nE-mailadres: mwj3007@gmail.com\nTelefoonnummer: +31645282159\nVoornaam: Michael\nAchternaam: Jooste\nPostcode: 1171 NV\nHuisnummer: 345, Nieuwemeerdijk\nPlaats: Badhoevedorp\nStraatnaam: 345, Nieuwemeerdijk\nHoe komt u bij ons terecht?: Google\n\n1x Suneye dichte cassette: \n- doekkleur: Doekkleur naar keuze\n- framekleur: RAL 7016 structuur\n- heb_je_een_uitbouw?: Nee\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 2450 mm - 3190 mm: \n- framekleur: RAL 7016 structuur\n- uitval: 2500 mm\n- welk_type_bediening_wil_je?: Draaischakelaar\n- breedte: 3190.0\n\n1x Inclusief montage Knikarmscherm: \n- heb_je_een_uitbouw?: Nee\n\n1x Draadloze windsensor\n1x Suncube XL: \n- doekkleur: Doekkleur naar keuze\n- framekleur: RAL 7016 structuur\n- uitval: 1350 mm\n- welk_type_bediening_wil_je?: Draaischakelaar\n- breedte: 1400.0\n\n1x Inclusief montage  uitvalscherm",
+    "lead_value": "€ 2,814.60",
+    "fields": {
+      "address": "345, Nieuwemeerdijk 345, Nieuwemeerdijk, 1171 NV Badhoevedorp, Nederland",
+      "phone": "+31645282159",
+      "cf_lead_value": {
+        "isoCurrency": "EUR",
+        "amount": "2814.6000000000004",
+        "type": "currency"
+      },
+      "email": "mwj3007@gmail.com"
+    },
+    "labels": {
+      "result": ""
+    },
+    "status_label": "grip invullen",
+    "status_id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846",
+    "assignee_id": null,
+    "assignee": null,
+    "status": {
+      "type": "STATUS",
+      "id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846"
+    },
+    "free_fields": [
+      {
+        "label": "address",
+        "value": "345, Nieuwemeerdijk 345, Nieuwemeerdijk, 1171 NV Badhoevedorp, Nederland"
+      },
+      {
+        "label": "email",
+        "value": "mwj3007@gmail.com"
+      },
+      {
+        "label": "phone",
+        "value": "+31645282159"
+      },
+      {
+        "label": "_widgetId",
+        "value": "4909baad-1717-4bfa-a93a-ba9355f7a9e3"
+      },
+      {
+        "label": "cf_lead_value",
+        "value": {
+          "isoCurrency": "EUR",
+          "amount": "2814.6000000000004",
+          "type": "currency"
+        }
+      }
+    ],
+    "item_subject": {
+      "type": "LEAD_CONFIGURATION",
+      "id": "8861b8d9-e6be-4e7c-bf4c-f76244013227",
+      "identifier": "type=LEAD_CONFIGURATION,id=8861b8d9-e6be-4e7c-bf4c-f76244013227"
+    },
+    "technical_labels": [
+      {
+        "timestamp": 1779088308735,
+        "type": "ITEM_ACTIVE"
+      },
+      {
+        "timestamp": 1779088308735,
+        "type": "ITEM_UNREAD"
+      }
+    ],
+    "rank": "0|i01wrb:",
+    "timestamp_created": 1779088308735,
+    "timestamp_updated": 1780654012720
+  },
+  {
+    "id": "db87b311-523f-4b89-ab06-422fc9f7760b",
+    "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+    "summary": "Joost Spee",
+    "description": "Land: Nederland\nE-mailadres: gezwinder.vloeistof14@icloud.com\nTelefoonnummer: 0648157311\nVoornaam: Joost\nAchternaam: Spee\nPostcode: 3245RR\nHuisnummer: 23\nPlaats: Sommelsdijk\nStraatnaam: Multatulilaan\nHoe komt u bij ons terecht?: Google\nOpmerking: We hebben een bestaande houten pergola Zie foto.. Kan dit systeem daarbinnen worden gemonteerd? Dus zonder metalen staanders?\n\n1x Pergola: \n- doekkleur: Doekkleur naar keuze\n- framekleur: RAL 7016 structuur\n- uitval: 4500 mm\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- breedte: 4000.0\n\n1x Inclusief montage Pergola\n1x Somfy connectivity app bediening",
+    "lead_value": "€ 6,437.21",
+    "fields": {
+      "address": "Multatulilaan 23, 3245RR Sommelsdijk, Nederland",
+      "phone": "0648157311",
+      "cf_lead_value": {
+        "amount": "6437.2115",
+        "isoCurrency": "EUR",
+        "type": "currency"
+      },
+      "email": "gezwinder.vloeistof14@icloud.com"
+    },
+    "labels": {
+      "result": ""
+    },
+    "status_label": "grip invullen",
+    "status_id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846",
+    "assignee_id": null,
+    "assignee": null,
+    "status": {
+      "type": "STATUS",
+      "id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846"
+    },
+    "free_fields": [
+      {
+        "label": "address",
+        "value": "Multatulilaan 23, 3245RR Sommelsdijk, Nederland"
+      },
+      {
+        "label": "email",
+        "value": "gezwinder.vloeistof14@icloud.com"
+      },
+      {
+        "label": "phone",
+        "value": "0648157311"
+      },
+      {
+        "label": "_widgetId",
+        "value": "4909baad-1717-4bfa-a93a-ba9355f7a9e3"
+      },
+      {
+        "label": "cf_lead_value",
+        "value": {
+          "amount": "6437.2115",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        }
+      }
+    ],
+    "item_subject": {
+      "type": "LEAD_CONFIGURATION",
+      "id": "b72a3da4-d694-4376-91dd-38ada81006a4",
+      "identifier": "type=LEAD_CONFIGURATION,id=b72a3da4-d694-4376-91dd-38ada81006a4"
+    },
+    "technical_labels": [
+      {
+        "timestamp": 1775397989460,
+        "type": "ITEM_ACTIVE"
+      },
+      {
+        "timestamp": 1775397989460,
+        "type": "ITEM_UNREAD"
+      }
+    ],
+    "rank": "0|i01wr3:",
+    "timestamp_created": 1775397989460,
+    "timestamp_updated": 1780653378415
+  },
+  {
+    "id": "5254a7db-bae6-457e-b672-790b2cfeccd0",
+    "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+    "summary": "Suresh Nehara",
+    "description": "Land: Nederland\nE-mailadres: sureshnehranitk@gmail.com\nVoornaam: Suresh\nAchternaam: Nehara\nPostcode: 2132VG\nPlaats: Hoofddorp\nTelefoonnummer: +31687648302\nHuisnummer: 14520\nStraatnaam: Graan voor Visch\nHoe komt u bij ons terecht?: Google\n\n1x Rolluik: \n- framekleur: Antraciet\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 3401 mm - 3800 mm: \n- framekleur: Antraciet\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1000.0\n- breedte: 3401.0\n\n1x Inclusief montage rolluik solar",
+    "lead_value": "€ 1,372.03",
+    "fields": {
+      "address": "Graan voor Visch 14520, 2132VG Hoofddorp, Nederland",
+      "phone": "+31687648302",
+      "cf_lead_value": {
+        "amount": "1372.0275000000001",
+        "isoCurrency": "EUR",
+        "type": "currency"
+      },
+      "email": "sureshnehranitk@gmail.com"
+    },
+    "labels": {
+      "result": ""
+    },
+    "status_label": "grip invullen",
+    "status_id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846",
+    "assignee_id": null,
+    "assignee": null,
+    "status": {
+      "type": "STATUS",
+      "id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846"
+    },
+    "free_fields": [
+      {
+        "label": "address",
+        "value": "Graan voor Visch 14520, 2132VG Hoofddorp, Nederland"
+      },
+      {
+        "label": "email",
+        "value": "sureshnehranitk@gmail.com"
+      },
+      {
+        "label": "phone",
+        "value": "+31687648302"
+      },
+      {
+        "label": "_widgetId",
+        "value": "4909baad-1717-4bfa-a93a-ba9355f7a9e3"
+      },
+      {
+        "label": "cf_lead_value",
+        "value": {
+          "amount": "1372.0275000000001",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        }
+      }
+    ],
+    "item_subject": {
+      "type": "LEAD_CONFIGURATION",
+      "id": "83942c9d-91b8-43d3-8c88-164043d96ba0",
+      "identifier": "type=LEAD_CONFIGURATION,id=83942c9d-91b8-43d3-8c88-164043d96ba0"
+    },
+    "technical_labels": [
+      {
+        "timestamp": 1752677536860,
+        "type": "ITEM_ARCHIVED"
+      }
+    ],
+    "rank": "0|i00mgv:",
+    "timestamp_created": 1751315573653,
+    "timestamp_updated": 1752677536860
+  }
+]

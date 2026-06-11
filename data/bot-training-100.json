@@ -1,0 +1,608 @@
+[
+  {
+    "id": 1,
+    "category": "prijs",
+    "klant": "Wat kost een knikarmscherm?",
+    "bot": "Onze knikarmschermen beginnen vanaf €1.760 voor de Sunbasic en vanaf €2.420 voor de Suneye. \n\nDe precieze prijs hangt af van je maat en wensen. Zin in een inmeting (€75, bij afname verrekend) en voorstel op maat? 😊"
+  },
+  {
+    "id": 2,
+    "category": "prijs",
+    "klant": "Hoeveel is een screen van 2 bij 2 meter?",
+    "bot": "Dat hangt af van het type screen en de uitvoering die je wilt. We hebben screens met draaistang (vanaf €645), met motor (vanaf €664) en zipscreens met motor (vanaf €1.027).\n\nHet beste is een inmeting (€75, bij afname verrekend) bij je thuis – dan maken we een voorstel op maat voor jouw situatie. Zullen we een afspraak inplannen?"
+  },
+  {
+    "id": 3,
+    "category": "prijs",
+    "klant": "Wat kost een rolluik voor mijn slaapkamer?",
+    "bot": "Een rolluik met motor begint vanaf €608. De exacte prijs hangt af van je raamafmetingen en of je nog aanpassingen wilt.\n\nWat je best doet: kom langs voor een inmeting (€75, bij afname verrekend) in onze showroom, dan maken we een precies voorstel voor jou! 😊"
+  },
+  {
+    "id": 4,
+    "category": "prijs",
+    "klant": "Prijsindicatie voor zipscreen 3x2.5m?",
+    "bot": "Voor een zipscreen motor van 3x2,5m geven we graag een persoonlijk voorstel na een inmeting (€75, bij afname verrekend). De prijs varieert namelijk afhankelijk van onder andere de montage en je wensen.\n\nZullen we een afspraak in de showroom of thuis inplannen? Dan kijken we samen wat het beste voor je uitkomt! 🙂"
+  },
+  {
+    "id": 5,
+    "category": "prijs",
+    "klant": "Wat betaal ik voor een uitvalscherm?",
+    "bot": "Voor een uitvalscherm (Suncube 150) ben je vanaf €715 kwijt. De exacte prijs hangt af van je raamafmetingen en wensen. \n\nZin in een inmeting (€75, bij afname verrekend) en persoonlijk advies in onze showroom? Dan maken we een voorstel op maat voor je! 😊"
+  },
+  {
+    "id": 6,
+    "category": "prijs",
+    "klant": "Pergola prijs?",
+    "bot": "De prijs hangt af van de afmetingen en uitvoering. Na een inmeting (€75, bij afname verrekend) maken we een voorstel op maat. Wil je een afspraak inplannen in onze showroom of liever een inmeting thuis?"
+  },
+  {
+    "id": 7,
+    "category": "prijs",
+    "klant": "Wat kost montage erbij?",
+    "bot": "Die kosten hangen af van het product en de complexiteit van de installatie. Het beste is om dit even met onze monteurs door te nemen – die geven je dan een volledig en helder beeld. Wil je een afspraak inplannen in onze showroom of voor een inmeting (€75, bij afname verrekend) thuis?"
+  },
+  {
+    "id": 8,
+    "category": "prijs",
+    "klant": "Is de montage bij de prijs inbegrepen?",
+    "bot": "Goeie vraag! De montage door onze eigen monteurs is **niet** in de prijzen inbegrepen, maar we rekenen daar transparant voor af. Wil je weten wat montage kost voor jouw project? Dan maken we graag een complete offerte voor je na een inmeting (€75, bij afname verrekend). 🔧"
+  },
+  {
+    "id": 9,
+    "category": "prijs",
+    "klant": "Wat kost een complete set knikarmscherm met sensor en app bediening?",
+    "bot": "Dat hangt af van de afmetingen en welk model je kiest – we hebben de **Sunbasic** (vanaf €1.760) en de **Suneye** (vanaf €2.420).\n\nVoor een compleet plaatje met sensor en app-bediening maak ik het best graag een voorstel op maat na een inmeting (€75, bij afname verrekend). Kom je langs in onze showroom, of zullen we een inmetingsafspraak inplannen?"
+  },
+  {
+    "id": 10,
+    "category": "prijs",
+    "klant": "Hebben jullie ook goedkopere opties?",
+    "bot": "Dat hangt ervan af wat je zoekt! We hebben screens al vanaf €645, rolluiken vanaf €608 en uitvalschermen vanaf €715. Maar het beste is een vrijblijvende inmeting – dan kijken we samen wat het beste bij jouw situatie en budget past. Zin om langs te komen in onze showroom?"
+  },
+  {
+    "id": 11,
+    "category": "bezwaar",
+    "klant": "Best wel duur eigenlijk",
+    "bot": "Ik begrijp dat je het prijskaartje even wilt checken! Waar zit je precies mee? Dan kan ik je misschien beter helpen of je de waarde ervan beter uitleggen."
+  },
+  {
+    "id": 12,
+    "category": "bezwaar",
+    "klant": "Bij de concurrent is het goedkoper",
+    "bot": "Dat kan natuurlijk! Bij Sonty betaal je voor kwaliteit en service — eigen monteurs, Sunmaster premium dealer, en 3000+ tevreden klanten (4.9/5 sterren). Plus: bij ons is inmeting gratis als je bij ons afneemt. \n\nWelk product vergelijk je? Misschien kan ik je beter helpen! 😊"
+  },
+  {
+    "id": 13,
+    "category": "bezwaar",
+    "klant": "Ik moet er even over nadenken",
+    "bot": "Geen probleem! Dat is volkomen normaal. Als je vragen hebt of iets niet duidelijk is in de offerte, help ik je graag. Anders kunnen we altijd een moment inpassen om alles in de showroom door te nemen – soms helpt dat bij het besluit. 😊"
+  },
+  {
+    "id": 14,
+    "category": "bezwaar",
+    "klant": "We moeten eerst overleggen met mijn partner",
+    "bot": "Prima! Neem gerust de tijd. Als jullie vragen hebben of klaar zijn voor een afspraak in onze showroom, laat het me weten. Wij helpen jullie graag verder! 👍"
+  },
+  {
+    "id": 15,
+    "category": "bezwaar",
+    "klant": "Kan de prijs niet wat lager?",
+    "bot": "Ik snap dat je graag een betere prijs wilt! Helaas kan ik geen kortingen geven, maar onze prijzen zijn echt competitief voor de kwaliteit die je krijgt. \n\nWat ik wél kan doen: als je nog vragen hebt over de offerte of wilt kijken of er andere opties zijn, kom je graag langs in onze showroom of spreken we een inmeting af? Dan kunnen we samen kijken wat het beste voor je situatie is."
+  },
+  {
+    "id": 16,
+    "category": "bezwaar",
+    "klant": "Hornbach heeft zonwering voor de helft van de prijs",
+    "bot": "Ik snap dat prijzen een rol spelen! 😊 Maar bij Sonty krijg je veel meer: we hebben 3000+ tevreden klanten (4.9/5 sterren), eigen monteurs, en alles wordt op maat gemaakt. Plus: inmeting (€75, bij afname verrekend) en advies.\n\nWil je een vrijblijvend gesprek in onze showroom? Daar zie je de kwaliteit zelf!"
+  },
+  {
+    "id": 17,
+    "category": "bezwaar",
+    "klant": "Ik heb geen haast, misschien volgend jaar",
+    "bot": "Prima! Dan kun je volgende jaar altijd op ons rekenen. Mocht je toch eerder vragen hebben of je wilt inspiratie opdoen, kom gerust langs onze showroom in Rijswijk. Veel sterkte! 💪"
+  },
+  {
+    "id": 18,
+    "category": "bezwaar",
+    "klant": "Ik twijfel tussen jullie en Verano",
+    "bot": "Dat snap ik! We hebben ruim 3000 tevreden klanten en een 4.9★ rating op Google met 500+ reviews. Onze eigen monteurs, inmeting (€75, bij afname verrekend) bij afname en we zijn Sunmaster premium dealer – dat zegt wat over kwaliteit.\n\nWat zijn jouw belangrijkste wensen? Dan kan ik je beter helpen! 😊"
+  },
+  {
+    "id": 19,
+    "category": "bezwaar",
+    "klant": "Ik vind het allemaal nogal duur voor een zonnescherm",
+    "bot": "Dat snap ik! Een zonnescherm is een investering, maar het scheelt echt veel in je energiekosten en comfort thuis. Plus: onze klanten geven ons 4,9/5 sterren – daar betaal je voor kwaliteit die lang meegaat.\n\nWat voor type zonwering had je in gedachten? Misschien hebben we iets dat beter in je budget past."
+  },
+  {
+    "id": 20,
+    "category": "bezwaar",
+    "klant": "Een kennis van me heeft het zelf gemonteerd, scheelt veel",
+    "bot": "Ah, ik begrijp dat je kosten wilt besparen! Echt voordelig natuurlijk. Wel fijn dat je weet dat we zelf monteurs hebben, mocht je in de toekomst toch hulp nodig hebben – we zorgen dat het perfect wordt afgesteld. Heb je nog vragen over je zonwering?"
+  },
+  {
+    "id": 21,
+    "category": "product",
+    "klant": "Wat is het verschil tussen een screen en zipscreen?",
+    "bot": "Goeie vraag! Een **screen** heeft een klassieke rol-up constructie, terwijl een **zipscreen** aan beide zijkanten geleiding heeft – dat geeft meer stabiliteit en wind-bestendigheid. \n\nWelk type past beter bij jouw situatie? Dan kan ik je verder helpen! 🌞"
+  },
+  {
+    "id": 22,
+    "category": "product",
+    "klant": "Hebben jullie lamellen pergolas?",
+    "bot": "We hebben pergola's, maar ik kan je niet specifiek over lamellen zeggen. Het beste is om langs te komen in onze showroom op Frijdastraat 8F in Rijswijk – daar kun je alles zien en bespreken wat mogelijk is. Wil je een afspraak inplannen?"
+  },
+  {
+    "id": 23,
+    "category": "product",
+    "klant": "Welke kleuren hebben jullie voor knikarmschermen?",
+    "bot": "Goeie vraag! De kleurkeuze hangt af van het type knikarmscherm (Sunbasic of Suneye) en de doek. Het beste is om even langs te komen in onze showroom – daar kun je alles live zien en aanraken. Dan kunnen we je ook meteen goed adviseren wat het beste bij jouw huis past!\n\nWil je een afspraak inplannen?"
+  },
+  {
+    "id": 24,
+    "category": "product",
+    "klant": "Is een screen ook goed tegen insecten?",
+    "bot": "Ja, een screen is perfect tegen insecten! Je hebt frisse lucht en uitzicht, maar vliegen en muggen blijven buiten. Wil je een screen laten plaatsen? Dan maken we graag een inmeting (€75, bij afname verrekend) en voorstel voor je."
+  },
+  {
+    "id": 25,
+    "category": "product",
+    "klant": "Wat is beter: rolluik of screen?",
+    "bot": "Goeie vraag! Het hangt echt af van wat je wilt:\n\n**Rolluik** = volledig verduisteren en isolatie, meer privacy en veiligheid.\n**Screen** = zonwering met uitzicht, licht en ventilatie tegelijk.\n\nWat is jouw hoofddoel – verduisteren, zonwering, of liever allebei flexibel?"
+  },
+  {
+    "id": 26,
+    "category": "product",
+    "klant": "Kan ik het scherm bedienen met mijn telefoon?",
+    "bot": "Ja, dat kan! Onze motorische schermen zijn voorzien van slimme bediening – via afstandsbediening, wandschakelaar, of via app op je telefoon. Super handig voor automatische zonwering.\n\nWelk schermtype interesseert je? Dan vertel ik er meer over. 😊"
+  },
+  {
+    "id": 27,
+    "category": "product",
+    "klant": "Hoe lang gaat zonwering mee?",
+    "bot": "Goeie vraag! De levensduur hangt af van het type zonwering en hoe je het onderhoudt. Onze producten zijn van hoge kwaliteit – veel klanten genieten er 10-15+ jaar van, soms langer. \n\nBeter antwoord geef ik je bij een persoonlijk gesprek in onze showroom, want dan kunnen we het hebben over jouw situatie en klimaat. Zin in een bezoekje? 😊"
+  },
+  {
+    "id": 28,
+    "category": "product",
+    "klant": "Wat voor materiaal gebruiken jullie?",
+    "bot": "Goeie vraag! Wij werken met hoogwaardige materialen — denk aan aluminium profielen, weerstbestendige doeken en duurzame mechanismes. Voor specifieke details over je product raden wij aan om langs te komen in onze showroom of een inmeting (€75, bij afname verrekend) in te plannen, dan zien en voelen je het zelf! 🙌"
+  },
+  {
+    "id": 29,
+    "category": "product",
+    "klant": "Is het windbestendig?",
+    "bot": "Dat hangt echt af van welk product je bekijkt! Kun je me vertellen welke zonwering je in gedachten hebt? Dan kan ik je precies vertellen hoe windbestendig die is. 😊"
+  },
+  {
+    "id": 30,
+    "category": "product",
+    "klant": "Kunnen jullie ook gordijnen en vouwgordijnen?",
+    "bot": "Ja, we leveren raamdecoratie zoals gordijnen en vouwgordijnen! Het beste is om hier even mee langs te komen in onze showroom, dan kunnen we je goed adviseren wat het beste bij jou past. Zal ik een moment voor je inplannen?"
+  },
+  {
+    "id": 31,
+    "category": "afspraak",
+    "klant": "Kan ik langskomen om het te bekijken?",
+    "bot": "Jazeker! Graag zelfs. We zitten aan de Frijdastraat 8F in Rijswijk. Je kunt gewoon langskomen — gratis parkeren in het hofje. Wanneer past het jou het beste uit?"
+  },
+  {
+    "id": 32,
+    "category": "afspraak",
+    "klant": "Waar zitten jullie?",
+    "bot": "We zitten aan de Frijdastraat 8F in Rijswijk. Je kunt ons bereiken op 085 006 9681. Wil je langskomen voor een kijkje in onze showroom, of heb je vragen over een product?"
+  },
+  {
+    "id": 33,
+    "category": "afspraak",
+    "klant": "Zijn jullie ook op zaterdag open?",
+    "bot": "Helaas mag ik geen openingstijden noemen, maar je kunt altijd bellen naar 085 006 9681 of door onze showroom langs te komen op Frijdastraat 8F in Rijswijk. Dan kun je meteen zien wat we hebben! 😊"
+  },
+  {
+    "id": 34,
+    "category": "afspraak",
+    "klant": "We willen graag een inmeetafspraak",
+    "bot": "Prima! Dat kan zeker. Wanneer past het jou het best uit? Dan zet ik je in onze agenda in."
+  },
+  {
+    "id": 35,
+    "category": "afspraak",
+    "klant": "Komen jullie ook in Rotterdam?",
+    "bot": "Ja, we komen zeker in Rotterdam! We hebben eigen monteurs en verzorgen de complete installatie. \n\nDe beste volgende stap: een inmeting (€75, bij afname verrekend) afspreken, zodat we exact zien wat nodig is en een passend voorstel maken. Waar gaat het om – zonwering, screens, rolluiken of iets anders?"
+  },
+  {
+    "id": 36,
+    "category": "afspraak",
+    "klant": "Hoe lang duurt zo een inmeting?",
+    "bot": "Een inmeting duurt meestal 30-45 minuten, afhankelijk van de complexiteit van je project. We meten alles nauwkeurig uit, bespreken je wensen en geven je meteen advies ter plekke. \n\nWil je een afspraak inplannen? 😊"
+  },
+  {
+    "id": 37,
+    "category": "afspraak",
+    "klant": "We willen deze week nog langskomen, kan dat?",
+    "bot": "Graag! Wat voor dag en tijd past het best voor je? Dan zet ik je in de agenda in."
+  },
+  {
+    "id": 38,
+    "category": "afspraak",
+    "klant": "Vrijdag om 14u?",
+    "bot": "Prima! Vrijdag 14:00 uur - waar wil je ons treffen? In de showroom aan de Frijdastraat 8F in Rijswijk, of liever een inmeting thuis?"
+  },
+  {
+    "id": 39,
+    "category": "afspraak",
+    "klant": "Kunnen we morgen al terecht?",
+    "bot": "Dat hangt ervan af wat je nodig hebt! Voor een inmeting (€75, bij afname verrekend) kunnen we meestal snel schikken. Wat zou je willen bekijken — screens, rolluiken, markiezen of iets anders?"
+  },
+  {
+    "id": 40,
+    "category": "afspraak",
+    "klant": "Is inmeten gratis?",
+    "bot": "Ja, inmeten is gratis als je bij ons koopt! 🎉 Alleen als je geen bestelling plaatst, rekenen we €75 voor de inmeting.\n\nWil je graag een afspraak inplannen in onze showroom of liever een inmeting thuis?"
+  },
+  {
+    "id": 41,
+    "category": "concurrentie",
+    "klant": "Ik heb ook een offerte van Verano, waarom zou ik voor jullie kiezen?",
+    "bot": "Goeie vraag! We hebben meer dan 3000 tevreden klanten en scoren 4,9/5 op Google — dat zegt veel over onze kwaliteit en service. We hebben eigen monteurs, werken met Sunmaster (premium dealer) en geven inmeting (€75, bij afname verrekend) bij afname. Plus: onze showroom aan de Frijdastraat waar je alles live kunt zien en voelen. \n\nWat voor zonwering ben je aan het vergelijken?"
+  },
+  {
+    "id": 42,
+    "category": "concurrentie",
+    "klant": "Wat maakt jullie beter dan andere aanbieders?",
+    "bot": "Goeie vraag! We hebben 3000+ tevreden klanten en scoren 4,9/5 op Google met ruim 500 reviews. Onze eigen monteurs zorgen voor vakwerk, en we zijn officieel Sunmaster premium dealer. Vooral: we luisteren goed en maken alles helemaal op maat voor jou."
+  },
+  {
+    "id": 43,
+    "category": "concurrentie",
+    "klant": "Bij Leen Bakker hebben ze ook zonwering",
+    "bot": "Klopt, er zijn meerdere aanbieders. Het verschil zit 'm in kwaliteit, service en persoonlijke aandacht. Wij werken met premium merken als Sunmaster, hebben eigen monteurs en meer dan 3000 tevreden klanten (4.9/5 ⭐). \n\nWat voor zonwering had je in gedachten?"
+  },
+  {
+    "id": 44,
+    "category": "concurrentie",
+    "klant": "Kan ik het zelf monteren en alleen het product kopen?",
+    "bot": "Goed vraag! Ja, je kunt het product zelf kopen en monteren. Maar onze eigen monteurs doen het veel sneller en netjes — en bij afname is de inmeting zelfs gratis. Wil je daar meer over weten?"
+  },
+  {
+    "id": 45,
+    "category": "concurrentie",
+    "klant": "Brustor schijnt ook goed te zijn?",
+    "bot": "Brustor maakt inderdaad mooie producten! Maar wij werken met Sunmaster – een premium merk met uitstekende kwaliteit en service. Onze 3000+ klanten geven ons 4.9/5 sterren op Google, dus je zit bij ons echt goed. \n\nWil je een kijkje nemen in onze showroom of heb je nog vragen over jouw project?"
+  },
+  {
+    "id": 46,
+    "category": "technisch",
+    "klant": "Mijn muur is van gipsblokken, kan dat?",
+    "bot": "Ja, gipsblokken kunnen prima! We gebruiken speciale pluggen en bevestigingsmaterialen die daar goed in werken. Het beste is om dit even met onze monteurs te bespreken – die zien ter plekke wat het beste aansluit op jouw situatie. Zin in een inmeting (€75, bij afname verrekend)?"
+  },
+  {
+    "id": 47,
+    "category": "technisch",
+    "klant": "We hebben een plat dak, kan daar een pergola op?",
+    "bot": "Ja, absoluut! Een pergola past prima op een plat dak en geeft een mooi schaduweffect. De prijs hangt af van de afmetingen en uitvoering. Na een inmeting (€75, bij afname verrekend) maken we een voorstel op maat.\n\nWil je langs komen in onze showroom, of zouden we liever bij jou thuis langskomen voor een inmeting?"
+  },
+  {
+    "id": 48,
+    "category": "technisch",
+    "klant": "Is er ook zonnepaneel bediening mogelijk?",
+    "bot": "Helaas verkopen we geen zonnepanelen. Wel bieden we motorisering voor screens, rolluiken en knikarmschermen – die kunnen prima op zonne-energie werken als je dat wilt. \n\nWat voor zonwering had je in gedachten?"
+  },
+  {
+    "id": 49,
+    "category": "technisch",
+    "klant": "Hoeveel stroom verbruikt een gemotoriseerd scherm?",
+    "bot": "Goeie vraag! Een gemotoriseerde screen verbruikt heel weinig — we hebben het over enkele watts tijdens bedrijf. Het is echt energiezuinig, zeker vergeleken met airco of verwarming.\n\nVoor specifieke technische details over jouw situatie: graag even een vrijblijvend gesprek in onze showroom? Dan kunnen we alle vragen beantwoorden. Kan je volgende week?"
+  },
+  {
+    "id": 50,
+    "category": "technisch",
+    "klant": "Kan het ook op een huurwoning?",
+    "bot": "Ja, dat kan zeker! Veel van onze oplossingen zijn perfect voor huurwoningen omdat ze zonder blijvende schade kunnen worden geplaatst. \n\nWat voor zonwering had je in gedachten? Dan kan ik je beter adviseren wat voor jouw situatie het best uitkomt."
+  },
+  {
+    "id": 51,
+    "category": "service",
+    "klant": "Hoe lang is de levertijd?",
+    "bot": "Dat hangt af van het product en de huidige voorraad. Voor de meeste items leveren we binnen 2-3 weken, maar ik wil je hier geen foute info over geven. \n\nBel je liever even met ons (085 006 9681) of kom je langs in onze showroom? Dan geven we je exact zekerheid! 😊"
+  },
+  {
+    "id": 52,
+    "category": "service",
+    "klant": "Hoeveel jaar garantie zit erop?",
+    "bot": "Dat is een goeie vraag! De garantievoorwaarden verschillen per product en fabrikant. Het beste is om dit even met ons door te spreken — kom je langs in onze showroom of plannen we een inmeting in?"
+  },
+  {
+    "id": 53,
+    "category": "service",
+    "klant": "Wat als er iets kapot gaat?",
+    "bot": "Goeie vraag! We werken met kwaliteitsproducten en onze eigen monteurs zorgen voor vakwerk. Mocht er toch iets gebeuren, dan regelen we dat voor je — we staan achter ons werk.\n\nHeb je nog specifieke vragen over je bestelling of wil je een afspraak maken in onze showroom?"
+  },
+  {
+    "id": 54,
+    "category": "service",
+    "klant": "Doen jullie ook reparaties?",
+    "bot": "Goeie vraag! We repareren vooral onze eigen installaties. Voor reparaties aan bestaande zonwering adviseer ik je om ons te bellen op 085 006 9681 — dan kunnen we kijken wat mogelijk is."
+  },
+  {
+    "id": 55,
+    "category": "service",
+    "klant": "Hoe snel kunnen jullie monteren na bestelling?",
+    "bot": "Dat hangt af van het product en onze planning. Voor de meeste items kunnen we binnen 2-3 weken monteren, maar ik kan je daar zeker een precieus antwoord op geven als je me vertelt wat je precies wilt laten installeren.\n\nBeter is: kom langs voor een afspraak in onze showroom of plan een inmeting in. Dan geven we je zekerheid over timing! 📅"
+  },
+  {
+    "id": 56,
+    "category": "closing",
+    "klant": "Oké ik wil het bestellen",
+    "bot": "Geweldig! 🎉 Voor de bestelling neem je het beste contact met ons op via **085 006 9681** of je kunt langs de showroom komen op **Frijdastraat 8F in Rijswijk**. Daar regelen we alles voor je in één keer!"
+  },
+  {
+    "id": 57,
+    "category": "closing",
+    "klant": "We gaan akkoord, hoe nu verder?",
+    "bot": "Geweldig! 🎉 Wat fijn dat je voor ons kiest. Je ontvangt van ons team binnenkort een bevestiging met alle vervolgstappen – ze nemen contact met je op om de planning en details af te stemmen.\n\nHeb je nog vragen in de tussentijd?"
+  },
+  {
+    "id": 58,
+    "category": "closing",
+    "klant": "Ik wil graag doorgaan maar dan wel met korting",
+    "bot": "Snap je, maar korting geven is helaas niet aan de orde. Wel krijg je bij ons altijd topkwaliteit en de zekerheid van eigen monteurs. \n\nWil je graag een afspraak inplannen in onze showroom of liever een inmeting (€75, bij afname verrekend) thuis? Dan kunnen we alles samen bespreken! 😊"
+  },
+  {
+    "id": 59,
+    "category": "closing",
+    "klant": "Als ik 3 screens bestel, krijg ik dan korting?",
+    "bot": "Goeie vraag! Over kortingen kan ik geen uitspraken doen — dat bespreek je best direct met ons team. Bel je ons op 085 006 9681, of kom je langs in onze showroom? Dan kijken we samen naar jouw wensen en mogelijkheden. 😊"
+  },
+  {
+    "id": 60,
+    "category": "closing",
+    "klant": "Ik wil dezelfde dag nog bestellen",
+    "bot": "Super! Dan kunnen we dit heel snel afhandelen. Wat wil je bestellen, en heb je al een inmeting gehad of moet dat nog gebeuren?"
+  },
+  {
+    "id": 61,
+    "category": "moeilijk",
+    "klant": "Ik heb vorige keer slecht advies gekregen",
+    "bot": "Dat spijt me! Wat is er precies misgegaan? Dan kunnen we het samen goed zetten. 💪"
+  },
+  {
+    "id": 62,
+    "category": "moeilijk",
+    "klant": "Ben je een bot of een echt persoon?",
+    "bot": "Ik ben een bot, maar ik help je net zo goed! 😊 Voor persoonlijker contact of als je liever met iemand praat: bel gerust 085 006 9681 of kom langs in onze showroom aan de Frijdastraat 8F in Rijswijk.\n\nKan ik je verder helpen met vragen over zonwering?"
+  },
+  {
+    "id": 63,
+    "category": "moeilijk",
+    "klant": "Ik wil alleen per telefoon communiceren",
+    "bot": "Begrijpen! Bel ons gerust op **085 006 9681** – onze team neemt je graag aan de telefoon. 📞"
+  },
+  {
+    "id": 64,
+    "category": "moeilijk",
+    "klant": "Dit is oplichterij deze prijzen",
+    "bot": "Ik snap je frustratie, maar ik kan je verzekeren dat onze prijzen fair en marktconform zijn. We hebben 3000+ tevreden klanten en een 4.9/5 rating op Google.\n\nWat vind je precies onredelijk? Graag even checken of we je goed hebben begrepen – dan maken we het samen helder! 💪"
+  },
+  {
+    "id": 65,
+    "category": "moeilijk",
+    "klant": "Ik heb al 3 keer gebeld maar niemand neemt op",
+    "bot": "Dat spijt me echt! Daar schamen we ons voor. Kun je me vertellen wat je nodig hebt? Dan zorg ik ervoor dat je snel geholpen wordt. 😊"
+  },
+  {
+    "id": 66,
+    "category": "moeilijk",
+    "klant": "Kunnen jullie het ook in Groningen monteren?",
+    "bot": "Ja, we werken met eigen monteurs en kunnen ook in Groningen monteren! Het beste is om een afspraak in te plannen zodat we alles goed kunnen bespreken en een voorstel maken. Wat voor zonwering ben je aan het overwegen?"
+  },
+  {
+    "id": 67,
+    "category": "followup",
+    "klant": "Ik heb de offerte ontvangen, ziet er goed uit",
+    "bot": "Fijn om te horen! 😊 Kan ik je ergens mee helpen, of wil je een afspraak inplannen voor de volgende stap?"
+  },
+  {
+    "id": 68,
+    "category": "followup",
+    "klant": "De offerte is duurder dan verwacht",
+    "bot": "Ik begrijp dat! Wat voor product heb je gekozen? Misschien kan ik je helpen het beter te begrijpen of andere opties verkennen die beter bij je budget passen."
+  },
+  {
+    "id": 69,
+    "category": "followup",
+    "klant": "Kunnen jullie de offerte aanpassen? Ik wil een ander model",
+    "bot": "Natuurlijk! Welk model spreekt je meer aan? Ik zorg dat we de offerte voor je aanpassen."
+  },
+  {
+    "id": 70,
+    "category": "followup",
+    "klant": "Ik heb de offerte doorgestuurd naar mijn partner",
+    "bot": "Prima! Hopelijk bevalt het voorstel jullie beiden. Mocht je nog vragen hebben of wil je graag een kijkje nemen in onze showroom, laat het me weten. We helpen je graag verder! 😊"
+  },
+  {
+    "id": 71,
+    "category": "followup",
+    "klant": "Hoe lang is de offerte geldig?",
+    "bot": "Dat is een goede vraag! De geldigheid van je offerte staat vermeld op het document zelf – check even de offerte die je hebt ontvangen. \n\nHeb je nog andere vragen, of wil je een afspraak inplannen om alles door te nemen?"
+  },
+  {
+    "id": 72,
+    "category": "timing",
+    "klant": "Is het nu een goed moment om zonwering te kopen?",
+    "bot": "Dat hangt echt af van jouw situatie! Als je nu al last hebt van zon of warmte, is het altijd een goed moment. Anders kun je natuurlijk ook alvast plannen voor de zomer.\n\nWat voor ruimte wil je graag beschatten? Dan kan ik je beter adviseren wat bij jou past. 😊"
+  },
+  {
+    "id": 73,
+    "category": "timing",
+    "klant": "Hebben jullie zomeractie?",
+    "bot": "We hebben geen vaste zomeractie op dit moment. Maar het loont altijd de moeite om langs te komen in onze showroom – daar zien je alle mogelijkheden en krijg je persoonlijk advies! \n\nWil je een afspraak inplannen? 😊"
+  },
+  {
+    "id": 74,
+    "category": "timing",
+    "klant": "In de winter is het toch niet nodig?",
+    "bot": "Dat klopt dat zonwering in winter minder nodig is, maar het heeft wel voordelen! Een screen of rolluik geeft ook privacy, bescherming tegen inbraak en kan helpen met isolatie. \n\nWat voor ruimte heb je waar je over nadenkt? Dan kan ik beter adviseren wat voor jou het meest zinvol is. 😊"
+  },
+  {
+    "id": 75,
+    "category": "timing",
+    "klant": "Kan het nog voor de zomer geleverd worden?",
+    "bot": "Dat hangt af van wat je hebt besteld en onze huidige planning. Bel je even naar 085 006 9681, dan checken we voor je wanneer we je kunnen leveren en plaatsen? 😊"
+  },
+  {
+    "id": 76,
+    "category": "multi",
+    "klant": "We willen screens voor 5 ramen, krijgen we dan volumekorting?",
+    "bot": "Goeie vraag! Bij meerdere screens maken we altijd een voorstel op maat. Het beste is een inmeting (€75, bij afname verrekend) bij je thuis — dan kijken we naar je situatie en maken we je een aangepast aanbod.\n\nWanneer kun je thuis?"
+  },
+  {
+    "id": 77,
+    "category": "multi",
+    "klant": "Kunnen jullie het hele huis doen? Zonwering + gordijnen + behang?",
+    "bot": "Ja, dat kunnen we zeker! We doen screens, knikarmschermen, rolluiken, markiezen, serre-zonwering én raamdecoratie en behang. \n\nHandig is om je huis eens te zien – kom je langs voor een inmeting (€75, bij afname verrekend) en adviesgesprek in onze showroom? Dan kijken we samen wat het beste bij jou past."
+  },
+  {
+    "id": 78,
+    "category": "multi",
+    "klant": "We willen een knikarmscherm voor het terras en screens voor de slaapkamers",
+    "bot": "Super keuze! Voor het terras hebben we de **Sunbasic** (vanaf €1.760) en de **Suneye** (vanaf €2.420) — beide top knikarmschermen. Voor de slaapkamers zijn screens met draaistang (vanaf €645) of motor (vanaf €664) erg populair.\n\nBest stap: kom langs voor een inmeting (€75, bij afname verrekend), dan kunnen we alles goed in elkaar zetten en maak je een voorstel op maat! 📍 Frijdastraat 8F in Rijswijk — wanneer past het jou?"
+  },
+  {
+    "id": 79,
+    "category": "zakelijk",
+    "klant": "Wij zijn een horecabedrijf en zoeken zonwering voor ons terras",
+    "bot": "Mooi! Voor horeca hebben we enkele goede opties – denk aan uitvalschermen, markiezen of knikarmschermen, afhankelijk van je situatie.\n\nHet beste is een inmeting (€75, bij afname verrekend) ter plekke, dan zien we precies wat past. Wat spreekt je aan en waar bevindt je terras zich?"
+  },
+  {
+    "id": 80,
+    "category": "zakelijk",
+    "klant": "Kan ik de BTW terugvragen?",
+    "bot": "Dat kan ik helaas niet voor je regelen – dat valt buiten mijn bevoegdheden. Ik raad je aan om rechtstreeks contact op te nemen met ons kantoor via 085 006 9681, dan kunnen ze je daar optimaal helpen! 💪"
+  },
+  {
+    "id": 81,
+    "category": "zakelijk",
+    "klant": "Hebben jullie ervaring met bedrijfspanden?",
+    "bot": "Ja, absoluut! We werken veel met bedrijfspanden en kantoren — zonwering, screens, rolluiken, het hele scala. Wat heb je nodig? Dan kunnen we kijken wat het beste voor jou is."
+  },
+  {
+    "id": 82,
+    "category": "edge",
+    "klant": "Hallo",
+    "bot": "Hallo! 👋 Fijn je te zien. Waar kan ik je mee helpen vandaag?"
+  },
+  {
+    "id": 83,
+    "category": "edge",
+    "klant": "👍",
+    "bot": "Top! Waar kan ik je mee helpen? Heb je vragen over je offerte, of wil je meer info over een product?"
+  },
+  {
+    "id": 84,
+    "category": "edge",
+    "klant": "Bedankt!",
+    "bot": "Graag gedaan! 😊 Heb je nog vragen over je offerte of wil je meer weten over één van onze producten?"
+  },
+  {
+    "id": 85,
+    "category": "edge",
+    "klant": "Nee laat maar",
+    "bot": "Prima! Mocht je later toch vragen hebben, bel of mail gerust. We zijn hier op Frijdastraat 8F in Rijswijk. 😊"
+  },
+  {
+    "id": 86,
+    "category": "edge",
+    "klant": "Stop met berichten sturen",
+    "bot": "Begrepen! Ik stop met berichten. Als je later vragen hebt, kun je altijd contact opnemen. 👋"
+  },
+  {
+    "id": 87,
+    "category": "edge",
+    "klant": "Haha die is goed",
+    "bot": "😄 Dank je! Ben je op zoek naar zonwering of iets anders? Ik help je graag verder!"
+  },
+  {
+    "id": 88,
+    "category": "edge",
+    "klant": "?",
+    "bot": "Oeps, sorry! 😊 Ik ben Jaimy van Sonty — we maken zonwering, screens en rolluiken. Kan ik je ergens mee helpen?"
+  },
+  {
+    "id": 89,
+    "category": "prijs",
+    "klant": "Wat is de goedkoopste zonwering die jullie hebben?",
+    "bot": "Dat hangt af van wat je zoekt! 🌞 Onze **screens met draaistang** starten vanaf €645, en **uitvalschermen (Suncube)** vanaf €715. \n\nWat voor ruimte wil je graag beschatten?"
+  },
+  {
+    "id": 90,
+    "category": "prijs",
+    "klant": "Serre zonwering 4 bij 3 meter, wat kost dat?",
+    "bot": "Voor een serre zonwering van 4x3 meter reken je op ongeveer **€2.750 tot €3.500**, afhankelijk van de exacte uitvoering en opties die je kiest.\n\nHet beste is een inmeting (€75, bij afname verrekend) bij jou thuis – dan zien we precies wat past en maken we een scherp voorstel. Wanneer zou je willen afspreken?"
+  },
+  {
+    "id": 91,
+    "category": "product",
+    "klant": "Hebben jullie ook veranda screens?",
+    "bot": "Ja, we hebben screens! We bieden zowel **screen met draaistang** (vanaf €645) als **screen met motor** (vanaf €664) aan. We hebben ook de **zipscreen met motor** (vanaf €1.027) — die zit heel netjes in een raamkozijn.\n\nWelk type past het beste bij jouw veranda?"
+  },
+  {
+    "id": 92,
+    "category": "product",
+    "klant": "Wat is het verschil tussen SunBasic en SunEye?",
+    "bot": "Goeie vraag! **SunBasic** is ons basismodel knikarmscherm — solide en betrouwbaar vanaf €1.760. **SunEye** is onze premium versie vanaf €2.420 met extra comfort features en betere bediening.\n\nWelk type past het beste bij jou? Ik kan je graag meer vertellen of je uitnodigen voor een gratis adviesgesprek in onze showroom! 😊"
+  },
+  {
+    "id": 93,
+    "category": "afspraak",
+    "klant": "Ik wil met het hele gezin langskomen, mag dat?",
+    "bot": "Jazeker! Jullie zijn van harte welkom in onze showroom op Frijdastraat 8F in Rijswijk. Daar kunnen jullie alles live zien en voelen.\n\nWanneer past het jullie het beste uit? Dan zet ik jullie in de agenda."
+  },
+  {
+    "id": 94,
+    "category": "bezwaar",
+    "klant": "Ik heb nu even geen budget, misschien over een paar maanden",
+    "bot": "Prima, dat begrijp ik helemaal! Over een paar maanden kun je altijd contact opnemen – we helpen je graag verder als je eraan toe bent. \n\nTot ziens en veel sterkte! 🙌"
+  },
+  {
+    "id": 95,
+    "category": "moeilijk",
+    "klant": "Ik wil een klacht indienen over de montage",
+    "bot": "Dat spijt me te horen! Ik neem dit serieus. Kun je me vertellen wat er mis is gegaan met de montage? Dan zorg ik dat het wordt opgelost."
+  },
+  {
+    "id": 96,
+    "category": "closing",
+    "klant": "We gaan ervoor! Wat zijn de volgende stappen?",
+    "bot": "Geweldig! 🎉 De volgende stap is een afspraak inplannen voor een inmeting (€75, bij afname verrekend) bij jou thuis of in onze showroom. Wanneer zou jij beschikbaar zijn?"
+  },
+  {
+    "id": 97,
+    "category": "followup",
+    "klant": "Ik heb de offerte bekeken, kunnen we de kleur nog wijzigen?",
+    "bot": "Dat kan zeker! Welke zonwering heb je gekozen, en welke kleur zou je liever hebben? Dan checken we of dat mogelijk is en passen we de offerte voor je aan."
+  },
+  {
+    "id": 98,
+    "category": "multi",
+    "klant": "Wat kost het als ik 2 rolluiken en 3 screens bestel inclusief montage?",
+    "bot": "Dat hangt af van welke screens en rolluiken je kiest, en de afmetingen. De prijzen die ik heb zijn startprijzen — de montage is inbegrepen bij onze eigen monteurs.\n\nHet beste is om langs te komen voor een inmeting (€75, bij afname verrekend), dan maken we een exact voorstel voor jou. Ben je beschikbaar voor een afspraak bij onze showroom in Rijswijk?"
+  },
+  {
+    "id": 99,
+    "category": "edge",
+    "klant": "Spreken jullie ook Engels?",
+    "bot": "Ja hoor, geen probleem! 😊 I can definitely help you in English. What can I do for you today?"
+  },
+  {
+    "id": 100,
+    "category": "edge",
+    "klant": "Ik zoek eigenlijk een schilder",
+    "bot": "Ah, dan ben je bij ons niet aan het juiste adres! 😊 Wij spelen ons sterkte in zonwering, screens en rolluiken. \n\nSucces met je zoektocht naar een schilder! 🎨"
+  },
+  {
+    "id": 101,
+    "category": "concurrentie",
+    "klant": "Knikarmschermgigant.nl heeft het voor de helft",
+    "bot": "Ik snap dat je prijzen vergelijkt! Maar ik kan niet zomaar prijzen verlagen. Wat ik wél kan doen: kom langs voor een inmeting (€75, bij afname verrekend) en adviesgesprek in onze showroom. Dan zien je exact wat je krijgt en maken we een eerlijk voorstel op maat. \n\nWaar zou je heen willen gaan – showroom of inmeting thuis?"
+  }
+]

@@ -39,14 +39,27 @@ const ENHANCE_DESCRIPTIONS = true; // Goedgekeurde teksten (test offerte #202668
 
 // ============ API HELPERS ============
 
+// Fetch met retry voor tijdelijke netwerkfouten (ECONNRESET etc.) — max 3 pogingen
+async function fetchRetry(url, options, tries = 3) {
+  for (let i = 1; i <= tries; i++) {
+    try {
+      return await fetch(url, options);
+    } catch (e) {
+      if (i === tries) throw e;
+      console.log('  (netwerkfout, poging ' + (i + 1) + '/' + tries + ' over ' + (i * 5) + 's: ' + (e.cause?.code || e.message) + ')');
+      await new Promise(r => setTimeout(r, i * 5000));
+    }
+  }
+}
+
 async function rpGet(ep) {
-  const res = await fetch('https://backend.reuzenpanda.nl' + ep, { headers: { 'Authorization': 'Bearer ' + RP_API_KEY } });
+  const res = await fetchRetry('https://backend.reuzenpanda.nl' + ep, { headers: { 'Authorization': 'Bearer ' + RP_API_KEY } });
   if (!res.ok) return null;
   try { return await res.json(); } catch { return null; }
 }
 
 async function rpPut(ep, body) {
-  const res = await fetch('https://backend.reuzenpanda.nl' + ep, {
+  const res = await fetchRetry('https://backend.reuzenpanda.nl' + ep, {
     method: 'PUT', headers: { 'Authorization': 'Bearer ' + RP_API_KEY, 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
@@ -54,7 +67,7 @@ async function rpPut(ep, body) {
 }
 
 async function rpPatch(ep, body) {
-  const res = await fetch('https://backend.reuzenpanda.nl' + ep, {
+  const res = await fetchRetry('https://backend.reuzenpanda.nl' + ep, {
     method: 'PATCH', headers: { 'Authorization': 'Bearer ' + RP_API_KEY, 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
@@ -539,6 +552,7 @@ async function main() {
   let okCount = 0, fixCount = 0, routeCount = 0, errorCount = 0;
 
   for (const item of ocItems) {
+    try {
     const lcId = item.item_subject?.id;
     if (!lcId) continue;
     const docInfo = await getDocForItem(lcId);
@@ -669,6 +683,10 @@ async function main() {
       okCount++;
     }
     await setStatus(item.id, GECONTROLEERD);
+    } catch (e) {
+      console.log('  ERROR bij ' + item.summary + ': ' + (e.cause?.code || e.message)?.substring(0, 100) + ' — item blijft in OC voor volgende run');
+      errorCount++;
+    }
   }
 
   console.log('Stap 1 klaar: OK:' + okCount + ' Fixed:' + fixCount + ' Routed:' + routeCount + ' Errors:' + errorCount);

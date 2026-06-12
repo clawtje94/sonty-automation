@@ -206,8 +206,12 @@ function bouwToppointFlow(naarContactId) {
   contact.questions = contact.questions.map((q) => ({ ...q, id: uuid() }));
   const bedankt = JSON.parse(JSON.stringify(bedanktBron).replace(new RegExp(bedanktBron.id, 'g'), uuid()));
 
-  const masterSteps = [];
-  const masterRels = [rel(contact.id, bedankt.id)];
+  // ── Productflow (keuzemenu + alle categorieflows) één keer bouwen ──
+  // Relaties die het einde van een productflow markeren wijzen naar de sentinel;
+  // bij het samenstellen van de rondes wordt die vervangen door de juiste volgende stap.
+  const EINDE = '__PRODUCT_EINDE__';
+  const flowSteps = [];
+  const flowRels = [];
 
   // Centraal keuzemenu
   const categorieen = [
@@ -227,7 +231,7 @@ function bouwToppointFlow(naarContactId) {
   // Foto wisselt mee met de gekozen categorie (RP-gehoste foto's uit de live widget)
   const FOTO_NAAM = { Knikarmscherm: 'Knikarmschermen', Screen: 'Screens', Uitvalscherm: 'Uitvalschermen', Rolluik: 'Rolluik', 'Serre zonwering': 'Serre zonwering', Markies: 'Markiezen', Pergola: 'Pergola', 'Raamdecoratie binnen': 'Raamdecoratie' };
   metFoto(keuzemenu, hoofdvraag, categorieen.map((c) => liveFoto(FOTO_NAAM[c.naam] || c.naam)), liveFoto('Knikarmschermen'));
-  masterSteps.push(keuzemenu);
+  flowSteps.push(keuzemenu);
 
   // Sunmaster-categorieflows invoegen
   categorieen.forEach((cat, i) => {
@@ -252,37 +256,80 @@ function bouwToppointFlow(naarContactId) {
         }
       }
     }
-    masterSteps.push(...pagesKopie);
+    flowSteps.push(...pagesKopie);
+    const gezien = new Set();
     for (const r of bron.relations) {
       if (skip.has(r.from)) continue;
-      const to = skip.has(r.to) ? contact.id : r.to;
-      masterRels.push({ ...JSON.parse(JSON.stringify(r)), id: uuid(), to });
+      const to = skip.has(r.to) ? EINDE : r.to;
+      const kopie = { ...JSON.parse(JSON.stringify(r)), id: uuid(), to };
+      // Sanering: bronnen bevatten half-geconfigureerde relaties (NO_CONDITION mét
+      // achtergebleven conditie-object) waar de widget op vastloopt
+      if (kopie.conditionType === 'NO_CONDITION') kopie.conditions = [];
+      kopie.conditions = (kopie.conditions || []).filter((c) => c && c.metaData && c.metaData.questionId);
+      if (!kopie.conditions.length && kopie.conditionType !== 'NO_CONDITION') kopie.conditionType = 'NO_CONDITION';
+      const sig = `${kopie.from}|${kopie.to}|${kopie.conditionType}|${JSON.stringify(kopie.conditions)}`;
+      if (gezien.has(sig)) continue;
+      gezien.add(sig);
+      flowRels.push(kopie);
     }
-    masterRels.push(rel(keuzemenu.id, entry.id, [condEq(hoofdvraag.id, hoofdvraag.metaData.answers[i].id)]));
+    flowRels.push(rel(keuzemenu.id, entry.id, [condEq(hoofdvraag.id, hoofdvraag.metaData.answers[i].id)]));
   });
 
   // Toppoint-flow invoegen
-  const tpFlow = bouwToppointFlow(contact.id);
-  masterSteps.push(...tpFlow.steps);
-  masterRels.push(...tpFlow.relations);
+  const tpFlow = bouwToppointFlow(EINDE);
+  flowSteps.push(...tpFlow.steps);
+  flowRels.push(...tpFlow.relations);
   const binnenIdx = categorieen.findIndex((c) => c.naam === 'Raamdecoratie binnen');
-  masterRels.push(rel(keuzemenu.id, tpFlow.entryId, [condEq(hoofdvraag.id, hoofdvraag.metaData.answers[binnenIdx].id)]));
+  flowRels.push(rel(keuzemenu.id, tpFlow.entryId, [condEq(hoofdvraag.id, hoofdvraag.metaData.answers[binnenIdx].id)]));
 
-  // "Nog een product?"-lus: elke categorieflow eindigt hier; Ja → terug naar keuzemenu
-  const nogEen = pagina('Nog een product?', [
-    radio('Wil je nog een product toevoegen?', [
-      { text: 'Ja, nog een product toevoegen' },
-      { text: 'Nee, ik ben klaar' },
-    ]),
-  ], 0);
-  nogEen.questions[0].description = 'Je kunt meerdere producten in één aanvraag samenstellen.';
-  const nogVraag = nogEen.questions[0];
-  for (const r of masterRels) {
-    if (r.to === contact.id && r.from !== nogEen.id) r.to = nogEen.id;
-  }
-  masterRels.push(rel(nogEen.id, keuzemenu.id, [condEq(nogVraag.id, nogVraag.metaData.answers[0].id)]));
-  masterRels.push(rel(nogEen.id, contact.id, [condEq(nogVraag.id, nogVraag.metaData.answers[1].id)]));
-  masterSteps.push(nogEen);
+  // ── Winkelmand: 3 productrondes — elke ronde is een volledige kloon van de
+  // productflow met eigen vraag-id's, zodat invoer van product 1/2/3 elkaar
+  // nooit overschrijft. Tussen de rondes: "Nog een product toevoegen?" ──
+  const RONDES = 3;
+  const UUID_RE = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/g;
+  const kloonRonde = (n) => {
+    let json = JSON.stringify({ steps: flowSteps, rels: flowRels });
+    const imgs = [];
+    json = json.replace(/"https:\/\/[^"]+"/g, (m) => { imgs.push(m); return `"__IMG_${imgs.length - 1}__"`; });
+    if (n > 1) {
+      const map = new Map();
+      json = json.replace(UUID_RE, (u) => { if (!map.has(u)) map.set(u, uuid()); return map.get(u); });
+    }
+    json = json.replace(/"__IMG_(\d+)__"/g, (_, i) => imgs[Number(i)]);
+    const r = JSON.parse(json);
+    if (n > 1) for (const s of r.steps) s.name = `${s.name} · product ${n}`;
+    return r;
+  };
+  const rondes = [];
+  for (let n = 1; n <= RONDES; n++) rondes.push(kloonRonde(n));
+
+  const masterSteps = [];
+  const masterRels = [rel(contact.id, bedankt.id)];
+  rondes.forEach((ronde, idx) => {
+    const n = idx + 1;
+    if (n > 1) ronde.steps[0].questions[0].name = `Product ${n} — waar ben je naar op zoek?`;
+    masterSteps.push(...ronde.steps);
+    let doel;
+    if (n === RONDES) {
+      doel = contact.id;
+    } else {
+      // LET OP: geen beschrijvingen op deze antwoorden — answer-metaData.description
+      // op deze beslispagina breekt de relatie-evaluatie van de widget (empirisch, 2026-06-12)
+      const nogEen = pagina(`Nog een product? (${n})`, [
+        radio('Wil je nog een product toevoegen?', [
+          { text: 'Ja, nog een product toevoegen' },
+          { text: 'Nee, ik ben klaar' },
+        ]),
+      ], 0);
+      nogEen.questions[0].description = `Je kunt tot ${RONDES} producten in één aanvraag samenstellen.`;
+      const v = nogEen.questions[0];
+      masterSteps.push(nogEen);
+      masterRels.push(rel(nogEen.id, rondes[idx + 1].steps[0].id, [condEq(v.id, v.metaData.answers[0].id)]));
+      masterRels.push(rel(nogEen.id, contact.id, [condEq(v.id, v.metaData.answers[1].id)]));
+      doel = nogEen.id;
+    }
+    for (const r of ronde.rels) masterRels.push(r.to === EINDE ? { ...r, to: doel } : r);
+  });
 
   // Contact + bedankt achteraan
   masterSteps.push(contact, bedankt);

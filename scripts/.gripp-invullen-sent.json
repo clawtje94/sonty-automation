@@ -240,5 +240,65 @@
       }
     ],
     "processedAt": "2026-06-11T16:30:42.065Z"
+  },
+  "Mitch Van de wetering": {
+    "grippCompanyId": 99265,
+    "grippOfferId": 8081,
+    "rpDocNumber": "20265398",
+    "allOffers": [
+      {
+        "grippOfferId": 8081,
+        "rpDocNumber": "20265398"
+      }
+    ],
+    "processedAt": "2026-06-12T16:36:21.549Z"
+  },
+  "Jordy Tegelaar": {
+    "grippCompanyId": 99266,
+    "grippOfferId": 8082,
+    "rpDocNumber": "20266879",
+    "allOffers": [
+      {
+        "grippOfferId": 8082,
+        "rpDocNumber": "20266879"
+      }
+    ],
+    "processedAt": "2026-06-12T16:36:25.022Z"
+  },
+  "Ronald van Huis": {
+    "grippCompanyId": 99267,
+    "grippOfferId": 8083,
+    "rpDocNumber": "20266483",
+    "allOffers": [
+      {
+        "grippOfferId": 8083,
+        "rpDocNumber": "20266483"
+      }
+    ],
+    "processedAt": "2026-06-12T16:36:28.460Z"
+  },
+  "Suzanne Cremer": {
+    "grippCompanyId": 99268,
+    "grippOfferId": 8084,
+    "rpDocNumber": "20265506",
+    "allOffers": [
+      {
+        "grippOfferId": 8084,
+        "rpDocNumber": "20265506"
+      }
+    ],
+    "processedAt": "2026-06-12T16:36:31.921Z"
+  },
+  "Miguel Pereira Calado": {
+    "grippCompanyId": 99270,
+    "grippOfferId": 8086,
+    "rpDocNumber": "20266889",
+    "allOffers": [
+      {
+        "grippOfferId": 8086,
+        "rpDocNumber": "20266889"
+      }
+    ],
+    "processedAt": "2026-06-12T16:52:51.859Z"
   }
 }

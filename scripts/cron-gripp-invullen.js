@@ -38,14 +38,27 @@ function markSent(name, data) {
 
 // ============ API HELPERS ============
 
+// Fetch met retry voor tijdelijke netwerkfouten (ECONNRESET etc.) — max 3 pogingen
+async function fetchRetry(url, options, tries = 3) {
+  for (let i = 1; i <= tries; i++) {
+    try {
+      return await fetch(url, options);
+    } catch (e) {
+      if (i === tries) throw e;
+      console.log('  (netwerkfout, poging ' + (i + 1) + '/' + tries + ' over ' + (i * 5) + 's: ' + (e.cause?.code || e.message) + ')');
+      await new Promise(r => setTimeout(r, i * 5000));
+    }
+  }
+}
+
 async function rpGet(ep) {
-  const res = await fetch('https://backend.reuzenpanda.nl' + ep, { headers: { 'Authorization': 'Bearer ' + RP_API_KEY } });
+  const res = await fetchRetry('https://backend.reuzenpanda.nl' + ep, { headers: { 'Authorization': 'Bearer ' + RP_API_KEY } });
   if (!res.ok) return null;
   try { return await res.json(); } catch { return null; }
 }
 
 async function rpPatch(ep, body) {
-  const res = await fetch('https://backend.reuzenpanda.nl' + ep, {
+  const res = await fetchRetry('https://backend.reuzenpanda.nl' + ep, {
     method: 'PATCH', headers: { 'Authorization': 'Bearer ' + RP_API_KEY, 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
@@ -57,7 +70,7 @@ async function setStatus(itemId, statusId) {
 }
 
 async function gripp(calls) {
-  const res = await fetch('https://api.gripp.com/public/api3.php', {
+  const res = await fetchRetry('https://api.gripp.com/public/api3.php', {
     method: 'POST',
     headers: { 'Authorization': 'Bearer ' + GRIPP_KEY, 'Content-Type': 'application/json' },
     body: JSON.stringify(calls)

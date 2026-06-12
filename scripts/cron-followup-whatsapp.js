@@ -32,8 +32,21 @@ function markSent(phone) {
   fs.writeFileSync(SENT_FILE, JSON.stringify(log, null, 2));
 }
 
+// Fetch met retry voor tijdelijke netwerkfouten (ECONNRESET etc.) — max 3 pogingen
+async function fetchRetry(url, options, tries = 3) {
+  for (let i = 1; i <= tries; i++) {
+    try {
+      return await fetch(url, options);
+    } catch (e) {
+      if (i === tries) throw e;
+      console.log('  (netwerkfout, poging ' + (i + 1) + '/' + tries + ' over ' + (i * 5) + 's: ' + (e.cause?.code || e.message) + ')');
+      await new Promise(r => setTimeout(r, i * 5000));
+    }
+  }
+}
+
 async function rpGet(endpoint) {
-  const res = await fetch('https://backend.reuzenpanda.nl' + endpoint, {
+  const res = await fetchRetry('https://backend.reuzenpanda.nl' + endpoint, {
     headers: { 'Authorization': 'Bearer ' + RP_API_KEY }
   });
   if (!res.ok) return null;
@@ -187,7 +200,7 @@ async function main() {
   for (const s of batch) {
     // Check Trengo voor "geen interesse"
     try {
-      const searchRes = await fetch('https://app.trengo.com/api/v2/tickets?term=' + encodeURIComponent(s.phone) + '&channel_id=' + WA_CHANNEL + '&limit=3', {
+      const searchRes = await fetchRetry('https://app.trengo.com/api/v2/tickets?term=' + encodeURIComponent(s.phone) + '&channel_id=' + WA_CHANNEL + '&limit=3', {
         headers: { 'Authorization': 'Bearer ' + TRENGO_TOKEN }
       });
       const searchData = await searchRes.json();
@@ -195,7 +208,7 @@ async function main() {
 
       let skip = false;
       for (const ticket of tickets.slice(0, 1)) {
-        const msgRes = await fetch('https://app.trengo.com/api/v2/tickets/' + ticket.id + '/messages?limit=5', {
+        const msgRes = await fetchRetry('https://app.trengo.com/api/v2/tickets/' + ticket.id + '/messages?limit=5', {
           headers: { 'Authorization': 'Bearer ' + TRENGO_TOKEN }
         });
         const msgData = await msgRes.json();
@@ -214,7 +227,7 @@ async function main() {
     // Stuur WhatsApp
     const offerteLink = 'https://document.reuzenpanda.nl/nl/' + PID + '/' + s.docNumber + '/latest';
 
-    const waRes = await fetch('https://app.trengo.com/api/v2/wa_sessions', {
+    const waRes = await fetchRetry('https://app.trengo.com/api/v2/wa_sessions', {
       method: 'POST',
       headers: { 'Authorization': 'Bearer ' + TRENGO_TOKEN, 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -230,7 +243,7 @@ async function main() {
     const waBody = await waRes.json();
 
     if (waRes.ok && waBody.message?.ticket_id) {
-      await fetch('https://app.trengo.com/api/v2/tickets/' + waBody.message.ticket_id + '/close', {
+      await fetchRetry('https://app.trengo.com/api/v2/tickets/' + waBody.message.ticket_id + '/close', {
         method: 'POST', headers: { 'Authorization': 'Bearer ' + TRENGO_TOKEN },
       });
       markSent(s.phone);

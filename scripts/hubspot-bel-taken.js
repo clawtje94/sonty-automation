@@ -1,0 +1,137 @@
+#!/usr/bin/env node
+// Sonty — bel-taken generator voor verse leads (<=10 dagen, stage Nieuwe Lead)
+// Maakt/ververst per lead een HubSpot CALL-taak met alle beschikbare info, toegewezen aan owner.
+// Idempotent: bestaat er al een open bel-taak, dan wordt de body ververst (geen dubbele).
+// Gebruik:
+//   node scripts/hubspot-bel-taken.js [aantal]     -> verwerk N nieuwste leads (default 5)
+//   node scripts/hubspot-bel-taken.js all          -> verwerk ALLE verse leads (<=10 dgn)
+//   node scripts/hubspot-bel-taken.js 5 --dry       -> toon alleen, niets schrijven
+const TOKEN = require('./secrets').HUBSPOT_TOKEN;
+const OWNER = 89279987;               // Daimy (later: Marijn)
+const STAGE_NIEUWE_LEAD = '4998659267';
+const PORTAL = '147970649';
+const BASE = 'https://api.hubapi.com';
+const H = { Authorization: `Bearer ${TOKEN}`, 'Content-Type': 'application/json' };
+
+const arg = process.argv[2] || '5';
+const ALL = arg === 'all';
+const LIMIT = ALL ? 200 : parseInt(arg, 10);
+const DRY = process.argv.includes('--dry');
+
+const jget = async (u) => (await fetch(u, { headers: H })).json();
+const jpost = async (u, b) => { const r = await fetch(u, { method: 'POST', headers: H, body: JSON.stringify(b) }); return { ok: r.ok, status: r.status, data: await r.json() }; };
+const jpatch = async (u, b) => { const r = await fetch(u, { method: 'PATCH', headers: H, body: JSON.stringify(b) }); return { ok: r.ok, status: r.status, data: await r.json() }; };
+
+function daysAgo(iso) {
+  if (!iso) return null;
+  return Math.floor((Date.now() - new Date(iso).getTime()) / 864e5);
+}
+function nlDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return `${String(d.getDate()).padStart(2, '0')}-${String(d.getMonth() + 1).padStart(2, '0')}-${d.getFullYear()}`;
+}
+
+// Bouwt een volledige, goed leesbare taak-body met alles wat beschikbaar is.
+function buildBody({ naam, tel, mail, createdate, rp, quote, product, dealUrl }) {
+  const d = daysAgo(createdate);
+  const ouderdom = d === null ? '—' : (d === 0 ? 'vandaag binnengekomen' : `${d} dag${d === 1 ? '' : 'en'} geleden`);
+  const telLine = tel && tel !== '(geen nummer)'
+    ? `📞 <b><a href="tel:${tel.replace(/\s/g, '')}">${tel}</a></b>  (klik om te bellen)`
+    : `📞 <b>Geen telefoonnummer bekend</b> — mail de klant`;
+  const L = [];
+  L.push(`<b>━━ KLANT ━━</b>`);
+  L.push(`👤 ${naam}`);
+  L.push(telLine);
+  L.push(mail ? `✉️ <a href="mailto:${mail}">${mail}</a>` : `✉️ Geen e-mail bekend`);
+  L.push(``);
+  L.push(`<b>━━ LEAD ━━</b>`);
+  L.push(`📅 Binnengekomen: ${nlDate(createdate)} (${ouderdom})`);
+  L.push(`🌐 Bron: Reuzenpanda / advertentie`);
+  L.push(`🛒 Interesse / product: ${product || '— (nog niet geconfigureerd)'}`);
+  L.push(`💰 Prijsindicatie: ${quote ? '€ ' + quote : '— (nog geen offerte)'}`);
+  L.push(``);
+  L.push(`<b>━━ LINKS ━━</b>`);
+  L.push(`🔗 <a href="${dealUrl}">Open deal in HubSpot</a>`);
+  L.push(rp ? `🟠 <a href="${rp}">Open offerte in Reuzenpanda</a>` : `🟠 Reuzenpanda-offerte: nog niet beschikbaar`);
+  L.push(``);
+  L.push(`<b>━━ NA HET BELLEN ━━</b>`);
+  L.push(`1️⃣ Zet op de deal het veld <b>"📞 Bel-uitkomst"</b>`);
+  L.push(`2️⃣ Verschuif de stage (Belpoging 1 → Belpoging 2 → In Contact)`);
+  L.push(`3️⃣ Notitie maken? Klik <b>"Notitie"</b> op de deal, of voeg een opmerking toe aan deze taak`);
+  return L.join('<br>');
+}
+
+async function getOpenBelTaak(dealId) {
+  const at = await jget(`${BASE}/crm/v4/objects/deals/${dealId}/associations/tasks`);
+  for (const t of (at.results || [])) {
+    const tk = await jget(`${BASE}/crm/v3/objects/tasks/${t.toObjectId}?properties=hs_task_subject,hs_task_status`);
+    if (tk.properties && tk.properties.hs_task_status !== 'COMPLETED' && /Bel:/.test(tk.properties.hs_task_subject || '')) {
+      return t.toObjectId;
+    }
+  }
+  return null;
+}
+
+(async () => {
+  const tenDaysAgo = new Date(Date.now() - 10 * 864e5).toISOString().slice(0, 10);
+  const body = {
+    filterGroups: [{ filters: [
+      { propertyName: 'dealstage', operator: 'EQ', value: STAGE_NIEUWE_LEAD },
+      { propertyName: 'createdate', operator: 'GTE', value: tenDaysAgo },
+    ] }],
+    sorts: [{ propertyName: 'createdate', direction: 'ASCENDING' }],
+    properties: ['dealname', 'createdate', 'sonty_reuzenpanda_link', 'sonty_first_quote_amount', 'product_categorie'],
+    limit: LIMIT,
+  };
+  const deals = (await jpost(`${BASE}/crm/v3/objects/deals/search`, body)).data;
+  const todo = deals.results.slice(0, LIMIT);
+  console.log(`Verse leads totaal: ${deals.total}. Verwerk: ${todo.length}${DRY ? ' (DRY)' : ''}\n`);
+
+  let created = 0, updated = 0, skipped = 0;
+  for (const d of todo) {
+    const id = d.id, naam = d.properties.dealname || 'Onbekend';
+    // contact + telefoon
+    const ac = await jget(`${BASE}/crm/v4/objects/deals/${id}/associations/contacts`);
+    const cid = ac.results && ac.results[0] && ac.results[0].toObjectId;
+    let tel = '(geen nummer)', mail = '';
+    if (cid) {
+      const c = await jget(`${BASE}/crm/v3/objects/contacts/${cid}?properties=phone,mobilephone,email`);
+      tel = c.properties.phone || c.properties.mobilephone || '(geen nummer)';
+      mail = c.properties.email || '';
+    }
+    const taskBody = buildBody({
+      naam, tel, mail,
+      createdate: d.properties.createdate,
+      rp: d.properties.sonty_reuzenpanda_link,
+      quote: d.properties.sonty_first_quote_amount,
+      product: d.properties.product_categorie,
+      dealUrl: `https://app-eu1.hubspot.com/contacts/${PORTAL}/record/0-3/${id}`,
+    });
+    if (DRY) { console.log(`DRY  ${naam} | tel ${tel}`); continue; }
+
+    const existing = await getOpenBelTaak(id);
+    if (existing) {
+      const u = await jpatch(`${BASE}/crm/v3/objects/tasks/${existing}`, { properties: { hs_task_body: taskBody, hs_task_priority: 'HIGH', hs_task_type: 'CALL' } });
+      console.log(u.ok ? `UPD  ${naam} — taak ${existing} ververst` : `FAIL ${naam} — ${u.status}`);
+      if (u.ok) updated++;
+      continue;
+    }
+    const task = await jpost(`${BASE}/crm/v3/objects/tasks`, { properties: {
+      hs_task_subject: `📞 Bel: ${naam}`,
+      hs_task_body: taskBody,
+      hs_task_status: 'NOT_STARTED',
+      hs_task_priority: 'HIGH',
+      hs_task_type: 'CALL',
+      hs_timestamp: String(Date.now()),
+      hubspot_owner_id: String(OWNER),
+    } });
+    if (!task.ok) { console.log(`FAIL ${naam} — ${task.status} ${JSON.stringify(task.data).slice(0, 160)}`); continue; }
+    const tid = task.data.id;
+    await fetch(`${BASE}/crm/v4/objects/tasks/${tid}/associations/default/deals/${id}`, { method: 'PUT', headers: H });
+    if (cid) await fetch(`${BASE}/crm/v4/objects/tasks/${tid}/associations/default/contacts/${cid}`, { method: 'PUT', headers: H });
+    console.log(`OK   ${naam} — taak ${tid} | tel ${tel}`);
+    created++;
+  }
+  console.log(`\nKlaar. Aangemaakt: ${created}, ververst: ${updated}, overgeslagen: ${skipped}`);
+})();

@@ -53,6 +53,23 @@ async function main() {
       .unref();
   } catch (e) {}
 
+  // WhatsApp/mail-status + samenvattingen bijwerken voor nieuwe leads (afgelopen 2u)
+  try {
+    require('child_process').spawn(process.execPath, [__dirname + '/hubspot-sync-trengo-wa.js', 'recent'], { detached: true, stdio: 'ignore' }).unref();
+    require('child_process').spawn(process.execPath, [__dirname + '/hubspot-trengo-summary.js', 'recent'], { detached: true, stdio: 'ignore' }).unref();
+  } catch (e) {}
+
+  // Dagelijks sales-monitoring rapport naar Telegram (1x per dag, na 18:00)
+  try {
+    const fs = require('fs'), mark = __dirname + '/.sales-report-date.txt';
+    const today = new Date().toISOString().slice(0, 10);
+    let last = ''; try { last = fs.readFileSync(mark, 'utf8').trim(); } catch (e) {}
+    if (new Date().getHours() >= 18 && last !== today) {
+      require('child_process').spawn(process.execPath, [__dirname + '/sales-report.js', 'dag'], { detached: true, stdio: 'ignore' }).unref();
+      fs.writeFileSync(mark, today);
+    }
+  } catch (e) {}
+
   // 1. Get ALL HubSpot deals in Sonty pipeline (not just without desc — also re-check existing for updates)
   const hsRes = await (await fetch(HS_BASE + '/crm/v3/objects/deals/search', {
     method: 'POST',

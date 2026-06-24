@@ -35,7 +35,7 @@ function nlDate(iso) {
 }
 
 // Bouwt een volledige, goed leesbare taak-body met alles wat beschikbaar is.
-function buildBody({ naam, tel, mail, createdate, rp, quote, product, dealUrl, amount, waContact, waStatus, waLink }) {
+function buildBody({ naam, tel, mail, createdate, rp, offerteLink, quote, product, dealUrl, amount, waContact, waStatus, waLink }) {
   const d = daysAgo(createdate);
   const ouderdom = d === null ? '—' : (d === 0 ? 'vandaag binnengekomen' : `${d} dag${d === 1 ? '' : 'en'} geleden`);
   const telLine = tel && tel !== '(geen nummer)'
@@ -61,7 +61,8 @@ function buildBody({ naam, tel, mail, createdate, rp, quote, product, dealUrl, a
   L.push(``);
   L.push(`<b>━━ LINKS ━━</b>`);
   L.push(`🔗 <a href="${dealUrl}">Open deal in HubSpot</a>`);
-  L.push(rp ? `🟠 <a href="${rp}">Open offerte in Reuzenpanda</a>` : `🟠 Reuzenpanda-offerte: nog niet beschikbaar`);
+  L.push(rp ? `✏️ <a href="${rp}">Offerte aanpassen in Reuzenpanda</a>` : `✏️ Reuzenpanda: nog geen offerte`);
+  if (offerteLink) L.push(`🟠 <a href="${offerteLink}">Offerte bekijken / sturen (klantlink)</a>`);
   L.push(``);
   L.push(`<b>━━ NA HET BELLEN ━━</b>`);
   L.push(`1️⃣ Zet op de deal het veld <b>"📞 Bel resultaat"</b>`);
@@ -92,7 +93,7 @@ async function getOpenBelTaak(dealId) {
       { propertyName: 'createdate', operator: 'GTE', value: sinceValue },
     ] }],
     sorts: [{ propertyName: 'createdate', direction: 'ASCENDING' }],
-    properties: ['dealname', 'createdate', 'sonty_reuzenpanda_link', 'sonty_first_quote_amount', 'product_categorie', 'inkoopbedrag', 'amount', 'sonty_wa_contact_gehad', 'sonty_wa_status', 'sonty_wa_link'],
+    properties: ['dealname', 'createdate', 'sonty_reuzenpanda_link', 'sonty_offerte_link', 'sonty_first_quote_amount', 'product_categorie', 'inkoopbedrag', 'amount', 'sonty_wa_contact_gehad', 'sonty_wa_status', 'sonty_wa_link'],
     limit: LIMIT,
   };
   // Pagineer: bij 'all' alle pagina's ophalen, anders alleen de eerste (max LIMIT)
@@ -143,6 +144,7 @@ async function getOpenBelTaak(dealId) {
       naam, tel, mail,
       createdate: d.properties.createdate,
       rp: d.properties.sonty_reuzenpanda_link,
+      offerteLink: d.properties.sonty_offerte_link,
       quote: d.properties.sonty_first_quote_amount,
       product: d.properties.product_categorie,
       amount: d.properties.amount,

@@ -108,11 +108,15 @@ async function getQuote(lcId) {
     const quote = lcId ? await getQuote(lcId) : null;
     const dealValue = (quote && quote.total) ? quote.total : leadValue;
     const props = {};
-    if (lcId) props.sonty_reuzenpanda_id = lcId;
+    if (lcId) {
+      props.sonty_reuzenpanda_id = lcId;
+      // bewerk-link: open de offerte in Reuzenpanda om aan te passen
+      props.sonty_reuzenpanda_link = `https://hub.reuzenpanda.nl/app/deals/pipeline?item=${lcId}`;
+    }
     if (product) props.sonty_reuzenpanda_description = [product, plaats ? `\nPlaats: ${plaats}` : '', bron ? `\nBron: ${bron}` : '', opmerking ? `\nOpmerking: ${opmerking}` : ''].join('');
     if (leadValue > 0) props.sonty_first_quote_amount = String(Math.round(leadValue));
     if (dealValue > 0 && !d.properties.amount) props.amount = String(Math.round(dealValue));
-    if (quote && quote.link) props.sonty_reuzenpanda_link = quote.link;
+    if (quote && quote.link) props.sonty_offerte_link = quote.link; // klant-offertelink (bekijken/sturen)
     const cat = productCat(product); if (cat) props.product_categorie = cat;
     const naam = d.properties.dealname;
     if (DRY) { console.log(`DRY ${naam} | ${plaats} | ${(product.split('\n')[0]||'').trim()} | €${dealValue} | offerte:${quote?'ja':'nee'}`); continue; }

@@ -105,12 +105,12 @@ const TP_BEDIENING = {
   plisse: [['Handbediend (handgreep)', 'Standaard'], ['Elektrisch — Motion accu', 'Oplaadbare accu, draadloos']],
   lamellen: [['Handbediend (koord + ketting)', 'Standaard'], ['Elektrisch — Somfy RTS', 'Volledig elektrisch draaien + schuiven']],
   vouwgordijnen: [['Handbediend (ketting)', 'Standaard'], ['Elektrisch — Motion accu', 'Oplaadbare accu, draadloos']],
-  horren: [['Standaard', '']],
+  // horren: nu een eigen Unilux-flow (zie bouwUniluxHorrenFlow), niet langer Toppoint
 };
 const TP_NAMEN = {
   rolgordijnen: 'Rolgordijnen', 'duo-rolgordijnen': 'Duo-rolgordijnen', jaloezieen: 'Jaloezieën (aluminium)',
   'jaloezieen-hout': 'Jaloezieën (hout)', plisse: 'Plissé', lamellen: 'Verticale lamellen',
-  vouwgordijnen: 'Vouwgordijnen', horren: 'Horren',
+  vouwgordijnen: 'Vouwgordijnen',
 };
 const TP_UITLEG = {
   rolgordijnen: 'Strak en tijdloos. Keuze uit verduisterende of lichtdoorlatende doeken, in vijf collecties.',
@@ -120,8 +120,127 @@ const TP_UITLEG = {
   plisse: 'Gevouwen stof die compact opvouwt. Ook als isolerend dubbel doek (Iso) of top-down/bottom-up.',
   lamellen: 'Verticale lamellen, ideaal voor grote ramen en schuifpuien. In stof, PVC/ALU of isolerend (Iso Reflex).',
   vouwgordijnen: 'De zachte uitstraling van een gordijn, het gemak van een rolgordijn: vouwt op in horizontale plooien.',
-  horren: 'Op maat gemaakte inzethorren, rolhorren en plissé hordeuren — ongestoord ventileren.',
 };
+
+// ── Unilux horren-flow (bron: docs/horren-leverancier.md, dealer.unilux.nl) ──
+// Alleen geverifieerde Unilux-feiten. Nog GEEN prijslijst → flow eindigt in offerte na inmeten.
+const HOR_GAAS = {
+  basis: ['Zwart gaas (standaard)', 'Grijs gaas'],
+  pollen: ['Zwart gaas (standaard)', 'Grijs gaas', 'Pollengaas (houdt stuifmeel tegen)'],
+  pet: ['Zwart gaas (standaard)', 'Grijs gaas', 'Pollengaas (houdt stuifmeel tegen)', 'Petscreengaas (huisdierbestendig)'],
+};
+const HOR_KLEUREN = [
+  { text: 'Wit', beschrijving: 'RAL 9001 / 9010' },
+  { text: 'Antraciet', beschrijving: 'RAL 7016' },
+  { text: 'Aluminium', beschrijving: 'RAL 9006' },
+  { text: 'Zwart', beschrijving: 'RAL 9005' },
+  { text: 'Andere RAL-kleur', beschrijving: 'Op aanvraag in elke RAL-kleur' },
+];
+const UNILUX_TYPES = [
+  {
+    naam: 'Plisséhordeur',
+    uitleg: 'Voor terras- en schuifpuideuren — het plissédoek vouwt als een harmonica strak opzij.',
+    vragen: (V) => [
+      V.radio('Welke uitvoering?', [
+        { text: 'Plisséfit Standaard (enkel)', beschrijving: 'Enkele plisséhordeur, tot ca. 200 cm breed' },
+        { text: 'Plisséfit Easy (enkel)', beschrijving: 'Enkele plisséhordeur, Easy-uitvoering' },
+        { text: 'Plisséfit Easy-Dubbel', beschrijving: 'Dubbele uitvoering voor brede of openslaande deuren' },
+      ]),
+      V.number('Breedte deuropening in cm', 60, 400),
+      V.number('Hoogte in cm', 180, 280),
+      V.radio('Sluiting', [{ text: 'Magneetsluiting' }, { text: 'Borstelsluiting' }]),
+      V.radio('Welk gaas?', HOR_GAAS.pollen.map((g) => ({ text: g }))),
+      V.radio('Kleur', HOR_KLEUREN),
+    ],
+  },
+  {
+    naam: 'Raamplisséhor',
+    uitleg: 'Plissé voor ramen — als inklem-unit (zonder boren) of als voorzet-unit.',
+    vragen: (V) => [
+      V.radio('Welk type?', [
+        { text: 'Inklem Unit', beschrijving: 'Klemt in het kozijn, zonder boren' },
+        { text: 'Inklem Unit-Dubbel', beschrijving: 'Dubbel, voor brede ramen' },
+        { text: 'Voorzet Unit', beschrijving: 'Vóór het kozijn gemonteerd' },
+        { text: 'Voorzet Unit-Dubbel', beschrijving: 'Dubbel, vóór het kozijn' },
+      ]),
+      V.number('Breedte in cm', 30, 250),
+      V.number('Hoogte in cm', 30, 260),
+      V.radio('Welk gaas?', HOR_GAAS.pollen.map((g) => ({ text: g }))),
+      V.radio('Kleur', HOR_KLEUREN),
+    ],
+  },
+  {
+    naam: 'Rolhor',
+    uitleg: 'Oprolbaar — het gaas verdwijnt in een slanke cassette als je de hor niet gebruikt.',
+    vragen: (V) => [
+      V.radio('Welk model?', [
+        { text: 'Comfort', beschrijving: 'Sluiting met magneet of kantelsluiting' },
+        { text: 'Super+', beschrijving: 'Met treklijst, optioneel trekkoord' },
+      ]),
+      V.radio('Montage', [
+        { text: 'Op de dag', beschrijving: 'Op het kozijn / de muur' },
+        { text: 'In de dag', beschrijving: 'In het kozijn' },
+      ]),
+      V.number('Breedte in cm', 30, 160),
+      V.number('Hoogte in cm', 30, 250),
+      V.radio('Welk gaas?', HOR_GAAS.basis.map((g) => ({ text: g }))),
+      V.radio('Kleur', HOR_KLEUREN),
+    ],
+  },
+  {
+    naam: 'Vaste raam- of deurhor',
+    uitleg: 'Vast frame voor ramen en deuren — van boorloze inklemhor tot het slanke Softfit-frame.',
+    vragen: (V) => [
+      V.radio('Welk model?', [
+        { text: 'Inklemhor', beschrijving: 'Klemt in het kozijn, zonder boren' },
+        { text: 'Raamhor Vast Scharnierend', beschrijving: 'Scharnierend of met wervel' },
+        { text: 'Raamhor Vast Veerstift', beschrijving: 'Met veerstiften' },
+        { text: 'Softfit', beschrijving: 'Vast raamframe, extra slank profiel' },
+      ]),
+      V.number('Breedte in cm', 30, 150),
+      V.number('Hoogte in cm', 30, 250),
+      V.radio('Welk gaas?', HOR_GAAS.pollen.map((g) => ({ text: g }))),
+      V.radio('Kleur', HOR_KLEUREN),
+    ],
+  },
+  {
+    naam: 'Schuif- of pendelhordeur (Luxe)',
+    uitleg: 'Luxe hordeuren die schuiven of zwaaien — optioneel met kattenluik, zelfsluiting en duwplaat.',
+    vragen: (V) => [
+      V.radio('Welk model?', [
+        { text: 'Schuifhordeur Luxe', beschrijving: 'Schuivende hordeur' },
+        { text: 'Vaste Hordeur Luxe (scharnierend/pendel)', beschrijving: 'Zwaaiende deur, scharnier of pendel' },
+      ]),
+      V.radio('Greep / draairichting', [{ text: 'Links' }, { text: 'Rechts' }, { text: 'Dubbel' }]),
+      V.number('Breedte in cm', 60, 300),
+      V.number('Hoogte in cm', 180, 260),
+      V.radio('Welk gaas?', HOR_GAAS.pet.map((g) => ({ text: g }))),
+      V.radio('Kleur', HOR_KLEUREN),
+      V.radio('Kattenluik toevoegen?', [{ text: 'Nee' }, { text: 'Ja' }]),
+      V.radio('Zelfsluitende deur (hydraulische pomp)?', [{ text: 'Nee' }, { text: 'Ja' }]),
+    ],
+  },
+];
+
+function bouwUniluxHorrenFlow(naarEinde, V) {
+  const steps = [], relations = [];
+  const menu = V.pagina('Horren', [
+    V.radio('Welke hor zoek je?', UNILUX_TYPES.map((t) => ({ text: t.naam, beschrijving: t.uitleg }))),
+  ], 0);
+  steps.push(menu);
+  const menuVraag = menu.questions[0];
+
+  UNILUX_TYPES.forEach((t, i) => {
+    const vragen = t.vragen(V);
+    vragen[0].description = t.uitleg;
+    const p = V.pagina(t.naam, vragen, i + 1);
+    steps.push(p);
+    relations.push(V.rel(menu.id, p.id, [V.condEq(menuVraag.id, menuVraag.metaData.answers[i].id)]));
+    relations.push(V.rel(p.id, naarEinde));
+  });
+
+  return { steps, relations, entryId: menu.id };
+}
 
 // RP-gehoste foto's per binnen-type uit de oude widget (alleen exacte product-matches)
 function toppointFotos() {
@@ -223,6 +342,7 @@ function bouwToppointFlow(naarContactId) {
     { naam: 'Markies', bron: 'Markies', beschrijving: 'Klassieke gebogen zonwering' },
     { naam: 'Pergola', bron: 'Pergola', beschrijving: 'Vaste overkapping met doek' },
     { naam: 'Raamdecoratie binnen', bron: null, beschrijving: 'Rolgordijnen, jaloezieën, plissé en meer' },
+    { naam: 'Horren', bron: null, beschrijving: 'Plisséhordeuren, raamhorren, rolhorren en vaste horren (Unilux)' },
   ];
   const keuzemenu = pagina('Productkeuze', [
     radio('Waar ben je naar op zoek?', categorieen.map((c) => ({ text: c.naam, beschrijving: c.beschrijving }))),
@@ -281,6 +401,13 @@ function bouwToppointFlow(naarContactId) {
   flowRels.push(...tpFlow.relations);
   const binnenIdx = categorieen.findIndex((c) => c.naam === 'Raamdecoratie binnen');
   flowRels.push(rel(keuzemenu.id, tpFlow.entryId, [condEq(hoofdvraag.id, hoofdvraag.metaData.answers[binnenIdx].id)]));
+
+  // Unilux horren-flow invoegen
+  const horFlow = bouwUniluxHorrenFlow(EINDE, { radio, number, pagina, rel, condEq });
+  flowSteps.push(...horFlow.steps);
+  flowRels.push(...horFlow.relations);
+  const horIdx = categorieen.findIndex((c) => c.naam === 'Horren');
+  flowRels.push(rel(keuzemenu.id, horFlow.entryId, [condEq(hoofdvraag.id, hoofdvraag.metaData.answers[horIdx].id)]));
 
   // ── Winkelmand: 3 productrondes — elke ronde is een volledige kloon van de
   // productflow met eigen vraag-id's, zodat invoer van product 1/2/3 elkaar

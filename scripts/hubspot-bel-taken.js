@@ -35,7 +35,7 @@ function nlDate(iso) {
 }
 
 // Bouwt een volledige, goed leesbare taak-body met alles wat beschikbaar is.
-function buildBody({ naam, tel, mail, createdate, rp, quote, product, dealUrl }) {
+function buildBody({ naam, tel, mail, createdate, rp, quote, product, dealUrl, amount, waContact, waStatus, waLink }) {
   const d = daysAgo(createdate);
   const ouderdom = d === null ? '—' : (d === 0 ? 'vandaag binnengekomen' : `${d} dag${d === 1 ? '' : 'en'} geleden`);
   const telLine = tel && tel !== '(geen nummer)'
@@ -52,6 +52,12 @@ function buildBody({ naam, tel, mail, createdate, rp, quote, product, dealUrl })
   L.push(`🌐 Bron: Reuzenpanda / advertentie`);
   L.push(`🛒 Interesse / product: ${product || '— (nog niet geconfigureerd)'}`);
   L.push(`💰 Prijsindicatie: ${quote ? '€ ' + quote : '— (nog geen offerte)'}`);
+  L.push(`💶 Deal-waarde: ${amount ? '€ ' + amount : '—'}`);
+  L.push(``);
+  L.push(`<b>━━ WHATSAPP ━━</b>`);
+  if (waContact === 'true') L.push(`💬 Al WhatsApp-contact${waStatus ? ' (' + (waStatus === 'closed' ? 'gesloten' : 'open') + ')' : ''}${waLink ? ' — <a href="' + waLink + '">open in Trengo</a>' : ''}`);
+  else L.push(`💬 Nog geen WhatsApp-contact`);
+  L.push(`📜 Volledige WhatsApp- & mailgeschiedenis: zie de <a href="${dealUrl}">contactkaart</a>`);
   L.push(``);
   L.push(`<b>━━ LINKS ━━</b>`);
   L.push(`🔗 <a href="${dealUrl}">Open deal in HubSpot</a>`);
@@ -86,7 +92,7 @@ async function getOpenBelTaak(dealId) {
       { propertyName: 'createdate', operator: 'GTE', value: sinceValue },
     ] }],
     sorts: [{ propertyName: 'createdate', direction: 'ASCENDING' }],
-    properties: ['dealname', 'createdate', 'sonty_reuzenpanda_link', 'sonty_first_quote_amount', 'product_categorie', 'inkoopbedrag'],
+    properties: ['dealname', 'createdate', 'sonty_reuzenpanda_link', 'sonty_first_quote_amount', 'product_categorie', 'inkoopbedrag', 'amount', 'sonty_wa_contact_gehad', 'sonty_wa_status', 'sonty_wa_link'],
     limit: LIMIT,
   };
   // Pagineer: bij 'all' alle pagina's ophalen, anders alleen de eerste (max LIMIT)
@@ -139,6 +145,10 @@ async function getOpenBelTaak(dealId) {
       rp: d.properties.sonty_reuzenpanda_link,
       quote: d.properties.sonty_first_quote_amount,
       product: d.properties.product_categorie,
+      amount: d.properties.amount,
+      waContact: d.properties.sonty_wa_contact_gehad,
+      waStatus: d.properties.sonty_wa_status,
+      waLink: d.properties.sonty_wa_link,
       dealUrl: `https://app-eu1.hubspot.com/contacts/${PORTAL}/record/0-3/${id}`,
     });
     if (DRY) { console.log(`DRY  ${naam} | tel ${tel}`); continue; }

@@ -7,6 +7,7 @@
 //   node scripts/hubspot-bel-taken.js all          -> verwerk ALLE verse leads (<=10 dgn)
 //   node scripts/hubspot-bel-taken.js 5 --dry       -> toon alleen, niets schrijven
 const TOKEN = require('./secrets').HUBSPOT_TOKEN;
+const { getTeVer, normPhone } = require('./te-ver-phones'); // "TE VER"-leads uit register uitsluiten
 const OWNER = 89279987;               // Daimy (later: Marijn)
 const STAGE_NIEUWE_LEAD = '4998659267';
 const PORTAL = '147970649';
@@ -101,7 +102,12 @@ async function getOpenBelTaak(dealId) {
   if (!ALL) todo = todo.slice(0, LIMIT);
   console.log(`Verse leads totaal: ${total}. Verwerk: ${todo.length}${DRY ? ' (DRY)' : ''}\n`);
 
-  let created = 0, updated = 0, skipped = 0;
+  // "TE VER"-leads uit het register laden (niet bellen). Faalt dit, dan gaan we door zonder uitsluiting.
+  let teVer = { phones: new Set(), names: new Set() };
+  try { teVer = await getTeVer(); console.log(`TE VER-uitsluiting: ${teVer.phones.size} nummers (tabs: ${teVer.scannedTabs.join(', ')})\n`); }
+  catch (e) { console.log(`⚠️ TE VER-lijst niet geladen (${e.message}) — ga door zonder uitsluiting\n`); }
+
+  let created = 0, updated = 0, skipped = 0, teVerSkip = 0;
   for (const d of todo) {
     await new Promise(r => setTimeout(r, 80)); // throttle tegen rate limits
     const id = d.id, naam = d.properties.dealname || 'Onbekend';
@@ -113,6 +119,14 @@ async function getOpenBelTaak(dealId) {
       const c = await jget(`${BASE}/crm/v3/objects/contacts/${cid}?properties=phone,mobilephone,email`);
       tel = c.properties.phone || c.properties.mobilephone || '(geen nummer)';
       mail = c.properties.email || '';
+    }
+    // TE VER? -> geen bel-taak; bestaande open bel-taak verwijderen
+    const np = normPhone(tel);
+    const isTeVer = (np && teVer.phones.has(np)) || teVer.names.has(naam.trim().toLowerCase());
+    if (isTeVer) {
+      if (!DRY) { const ex = await getOpenBelTaak(id); if (ex) await fetch(`${BASE}/crm/v3/objects/tasks/${ex}`, { method: 'DELETE', headers: H }); }
+      console.log(`TE VER  ${naam} — overgeslagen${''}`);
+      teVerSkip++; continue;
     }
     const taskBody = buildBody({
       naam, tel, mail,
@@ -148,5 +162,5 @@ async function getOpenBelTaak(dealId) {
     console.log(`OK   ${naam} — taak ${tid} | tel ${tel}`);
     created++;
   }
-  console.log(`\nKlaar. Aangemaakt: ${created}, ververst: ${updated}, overgeslagen: ${skipped}`);
+  console.log(`\nKlaar. Aangemaakt: ${created}, ververst: ${updated}, TE VER overgeslagen/verwijderd: ${teVerSkip}`);
 })();

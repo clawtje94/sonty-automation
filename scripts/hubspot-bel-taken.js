@@ -57,7 +57,7 @@ function buildBody({ naam, tel, mail, createdate, rp, quote, product, dealUrl, a
   L.push(`<b>━━ WHATSAPP ━━</b>`);
   if (waContact === 'true') L.push(`💬 Al WhatsApp-contact${waStatus ? ' (' + (waStatus === 'closed' ? 'gesloten' : 'open') + ')' : ''}${waLink ? ' — <a href="' + waLink + '">open in Trengo</a>' : ''}`);
   else L.push(`💬 Nog geen WhatsApp-contact`);
-  L.push(`📜 Volledige WhatsApp- & mailgeschiedenis: zie de <a href="${dealUrl}">contactkaart</a>`);
+  L.push(`📜 Volledige WhatsApp- en mailgeschiedenis: zie de <a href="${dealUrl}">contactkaart</a>`);
   L.push(``);
   L.push(`<b>━━ LINKS ━━</b>`);
   L.push(`🔗 <a href="${dealUrl}">Open deal in HubSpot</a>`);

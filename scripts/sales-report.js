@@ -15,6 +15,17 @@ const S = {
   akkoord: '4999295189', aanbet: '5002974448', producten: '4999295191', installatie: '4999295192',
   afgerond: '4999295194', verloren: '4999295195',
 };
+// Reuzenpanda — Marijn's KPI zit in de RP-statussen
+const RP = 'reuzenpanda_cpat_WMD2KmDRune53bj7.d0_ls8loPpAjb2TrSNOS_Xd_QLdxHq1xwOC9pyyJado';
+const RP_BASE = 'https://backend.reuzenpanda.nl';
+const RP_PID = '731483fa-ef6b-4aae-afcf-883ec09219dd';
+const RP_BID = 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7';
+const RP_STATUS = {
+  inmeten_inplannen: '2e9819bd-26f0-4082-8f18-32bb48f87f54', // Marijn: offerte ondertekend
+  gripp_invullen: 'f895f76f-175e-4ea0-bb7c-6cc2f4e5d846',     // inmeet afspraak gemaakt
+  inmeten_wacht: '704fff9f-d99c-4047-a4aa-76776dd8260e',      // in de wacht
+};
+
 const mode = process.argv[2] || 'week';
 const since = new Date();
 if (mode === 'dag') since.setHours(0, 0, 0, 0);
@@ -70,17 +81,27 @@ async function stageValue(stageId) {
     ]);
     if (n) uitkomsten.push(`   • ${label}: ${n}`);
   }
-  // huidige stand verderop in de funnel + omzet
-  const afspraken = await count('deals', [{ propertyName: 'dealstage', operator: 'IN', values: [S.opmeting_in, S.opmeting_af] }]);
-  const offertes = await count('deals', [{ propertyName: 'dealstage', operator: 'EQ', value: S.offerte }]);
-  const akkoord = await count('deals', [{ propertyName: 'dealstage', operator: 'EQ', value: S.akkoord }]);
-  const akkoordValue = await stageValue(S.akkoord);
-  const afgerond = await count('deals', [{ propertyName: 'dealstage', operator: 'EQ', value: S.afgerond }]);
-  const afgerondValue = await stageValue(S.afgerond);
   const fmt = n => '€ ' + Math.round(n).toLocaleString('nl-NL');
+
+  // Reuzenpanda-statussen (Marijn's KPI: offerte ondertekend = Inmeten inplannen)
+  let rp = { onderTotaal: 0, onderPeriode: 0, grippTotaal: 0, grippPeriode: 0, wacht: 0 };
+  try {
+    const r = await (await fetch(`${RP_BASE}/contact-service/${RP_PID}/backlogs/${RP_BID}/items`, { headers: { Authorization: `Bearer ${RP}` } })).json();
+    for (const it of (r.items || [])) {
+      const recent = Number(it.timestamp_updated || 0) >= Number(sinceMs);
+      if (it.status_id === RP_STATUS.inmeten_inplannen) { rp.onderTotaal++; if (recent) rp.onderPeriode++; }
+      else if (it.status_id === RP_STATUS.gripp_invullen) { rp.grippTotaal++; if (recent) rp.grippPeriode++; }
+      else if (it.status_id === RP_STATUS.inmeten_wacht) { rp.wacht++; }
+    }
+  } catch (e) {}
 
   const msg = [
     `📊 *Sales-monitoring* (${period})`,
+    ``,
+    `*✍️ Marijn — offertes ondertekend:*`,
+    `• Klaar voor inmeten (Inmeten inplannen): ${rp.onderTotaal}  _(+${rp.onderPeriode} ${mode === 'dag' ? 'vandaag' : 'deze week'})_`,
+    `• 📐 Inmeet afspraak gemaakt (Gripp invullen): ${rp.grippTotaal}  _(+${rp.grippPeriode})_`,
+    `• ⏸️ Inmeten in de wacht: ${rp.wacht}`,
     ``,
     `*Activiteit:*`,
     `🆕 Nieuwe leads: ${nieuweLeads}`,
@@ -88,11 +109,7 @@ async function stageValue(stageId) {
     `📋 Open bel-taken (te bellen): ${openBelTaken}`,
     uitkomsten.length ? `📊 Bel-uitkomsten:\n${uitkomsten.join('\n')}` : `📊 Bel-uitkomsten: nog geen`,
     ``,
-    `*Resultaat (huidige stand):*`,
-    `🤝 Opmeting ingepland/afgerond: ${afspraken}`,
-    `📄 Offerte verstuurd: ${offertes}`,
-    `✅ Offerte akkoord: ${akkoord} (${fmt(akkoordValue)})`,
-    `🏁 Afgerond: ${afgerond} (${fmt(afgerondValue)})`,
+    `_Marijn's doel: offerte laten ondertekenen → status "Inmeten inplannen". Planning maakt daarna de inmeet-afspraak → "Gripp invullen"._`,
   ].join('\n');
 
   if (process.argv.includes('--print')) { console.log(msg); return; }

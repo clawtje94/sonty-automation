@@ -21,9 +21,9 @@ const tget = async u => { const r = await fetch(u, { headers: TH }); return r.ok
 
 function buildThread(messages) {
   if (!messages || !messages.length) return '';
-  // Trengo geeft nieuwste eerst -> omdraaien naar chronologisch (oudste boven), dan de nieuwste 15
-  const chron = messages.slice().reverse();
-  return chron.slice(-15).map(m => {
+  // chronologisch sorteren (oudste boven), dan de nieuwste 20 berichten
+  const chron = messages.slice().sort((a, b) => new Date(a.created_at || 0) - new Date(b.created_at || 0));
+  return chron.slice(-20).map(m => {
     const who = (m.type === 'INBOUND') ? 'Klant' : 'Sonty';
     const txt = (m.message || m.body || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 220);
     const dt = (m.created_at || '').slice(0, 16);
@@ -53,14 +53,20 @@ async function buildWaMap() {
   return map;
 }
 
-// zoek recentste e-mailticket voor een e-mailadres
-async function findEmailTicket(email) {
+// volledige e-maildiscussie: voeg ALLE e-mailtickets van het adres samen (incl. antwoorden naar aanvragen@ etc.)
+async function getEmailThread(email) {
   const j = await tget(`https://app.trengo.com/api/v2/tickets?term=${encodeURIComponent(email)}`);
-  const tickets = (j && j.data) || [];
-  const emailTickets = tickets.filter(t => EMAIL_CHANNELS.has(t.channel && t.channel.id) || (t.channel && /mail/i.test(t.channel.type || '')));
-  if (!emailTickets.length) return null;
-  emailTickets.sort((a, b) => new Date(b.latest_message_at || b.updated_at || 0) - new Date(a.latest_message_at || a.updated_at || 0));
-  return emailTickets[0].id;
+  const tickets = ((j && j.data) || []).filter(t => EMAIL_CHANNELS.has(t.channel && t.channel.id) || (t.channel && /mail/i.test(t.channel.type || '')));
+  if (!tickets.length) return '';
+  // nieuwste tickets eerst, max 6 tickets samenvoegen
+  tickets.sort((a, b) => new Date(b.latest_message_at || b.updated_at || 0) - new Date(a.latest_message_at || a.updated_at || 0));
+  let all = [];
+  for (const t of tickets.slice(0, 6)) {
+    const m = await tget(`https://app.trengo.com/api/v2/tickets/${t.id}/messages`);
+    const msgs = (m && (m.data || m)) || [];
+    all.push(...msgs);
+  }
+  return buildThread(all);
 }
 
 (async () => {
@@ -93,7 +99,7 @@ async function findEmailTicket(email) {
     const props = {};
     const waHit = ph && wa.get(ph);
     if (waHit) { const t = await ticketThread(waHit.ticketId); if (t) { props.sonty_wa_samenvatting = t; waN++; } }
-    if (email) { const etid = await findEmailTicket(email); if (etid) { const t = await ticketThread(etid); if (t) { props.sonty_mail_samenvatting = t; mailN++; } } }
+    if (email) { const t = await getEmailThread(email); if (t) { props.sonty_mail_samenvatting = t; mailN++; } }
     if (Object.keys(props).length) {
       await fetch(`${HS}/crm/v3/objects/contacts/${cid}`, { method: 'PATCH', headers: HH, body: JSON.stringify({ properties: props }) });
       console.log(`${d.properties.dealname}: ${props.sonty_wa_samenvatting ? 'WA ' : ''}${props.sonty_mail_samenvatting ? 'Mail' : ''}`);

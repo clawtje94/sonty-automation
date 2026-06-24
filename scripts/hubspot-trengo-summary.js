@@ -21,7 +21,9 @@ const tget = async u => { const r = await fetch(u, { headers: TH }); return r.ok
 
 function buildThread(messages) {
   if (!messages || !messages.length) return '';
-  return messages.slice(-15).map(m => {
+  // Trengo geeft nieuwste eerst -> omdraaien naar chronologisch (oudste boven), dan de nieuwste 15
+  const chron = messages.slice().reverse();
+  return chron.slice(-15).map(m => {
     const who = (m.type === 'INBOUND') ? 'Klant' : 'Sonty';
     const txt = (m.message || m.body || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 220);
     const dt = (m.created_at || '').slice(0, 16);

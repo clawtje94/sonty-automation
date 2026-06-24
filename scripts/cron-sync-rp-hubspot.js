@@ -45,6 +45,14 @@ function formatQuote(qd, vd) {
 async function main() {
   console.log('[' + new Date().toISOString().substring(11, 19) + '] Sync start');
 
+  // Bel-taken voor nieuwe leads (afgelopen 2u) — non-blocking, faalt nooit de sync.
+  // Draait mee op deze bestaande 15-min cron i.p.v. een aparte crontab-regel.
+  try {
+    require('child_process')
+      .spawn(process.execPath, [__dirname + '/hubspot-bel-taken.js', 'recent'], { detached: true, stdio: 'ignore' })
+      .unref();
+  } catch (e) {}
+
   // 1. Get ALL HubSpot deals in Sonty pipeline (not just without desc — also re-check existing for updates)
   const hsRes = await (await fetch(HS_BASE + '/crm/v3/objects/deals/search', {
     method: 'POST',

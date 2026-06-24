@@ -15,7 +15,8 @@ const H = { Authorization: `Bearer ${TOKEN}`, 'Content-Type': 'application/json'
 
 const arg = process.argv[2] || '5';
 const ALL = arg === 'all';
-const LIMIT = ALL ? 200 : parseInt(arg, 10);
+const RECENT = arg === 'recent';        // alleen leads van de afgelopen 2 uur (goedkope cron-modus)
+const LIMIT = (ALL || RECENT) ? 200 : parseInt(arg, 10);
 const DRY = process.argv.includes('--dry');
 
 const jget = async (u) => (await fetch(u, { headers: H })).json();
@@ -56,7 +57,7 @@ function buildBody({ naam, tel, mail, createdate, rp, quote, product, dealUrl })
   L.push(rp ? `🟠 <a href="${rp}">Open offerte in Reuzenpanda</a>` : `🟠 Reuzenpanda-offerte: nog niet beschikbaar`);
   L.push(``);
   L.push(`<b>━━ NA HET BELLEN ━━</b>`);
-  L.push(`1️⃣ Zet op de deal het veld <b>"📞 Bel-uitkomst"</b>`);
+  L.push(`1️⃣ Zet op de deal het veld <b>"📞 Bel resultaat"</b>`);
   L.push(`2️⃣ Verschuif de stage (Belpoging 1 → Belpoging 2 → In Contact)`);
   L.push(`3️⃣ Notitie maken? Klik <b>"Notitie"</b> op de deal, of voeg een opmerking toe aan deze taak`);
   return L.join('<br>');
@@ -74,22 +75,35 @@ async function getOpenBelTaak(dealId) {
 }
 
 (async () => {
-  const tenDaysAgo = new Date(Date.now() - 10 * 864e5).toISOString().slice(0, 10);
+  // RECENT: alleen afgelopen 2 uur (ms-timestamp). Anders: laatste 10 dagen (datum).
+  const sinceValue = RECENT
+    ? String(Date.now() - 2 * 3600 * 1000)
+    : new Date(Date.now() - 10 * 864e5).toISOString().slice(0, 10);
   const body = {
     filterGroups: [{ filters: [
       { propertyName: 'dealstage', operator: 'EQ', value: STAGE_NIEUWE_LEAD },
-      { propertyName: 'createdate', operator: 'GTE', value: tenDaysAgo },
+      { propertyName: 'createdate', operator: 'GTE', value: sinceValue },
     ] }],
     sorts: [{ propertyName: 'createdate', direction: 'ASCENDING' }],
     properties: ['dealname', 'createdate', 'sonty_reuzenpanda_link', 'sonty_first_quote_amount', 'product_categorie'],
     limit: LIMIT,
   };
-  const deals = (await jpost(`${BASE}/crm/v3/objects/deals/search`, body)).data;
-  const todo = deals.results.slice(0, LIMIT);
-  console.log(`Verse leads totaal: ${deals.total}. Verwerk: ${todo.length}${DRY ? ' (DRY)' : ''}\n`);
+  // Pagineer: bij 'all' alle pagina's ophalen, anders alleen de eerste (max LIMIT)
+  let todo = [];
+  let after;
+  let total = 0;
+  do {
+    const page = (await jpost(`${BASE}/crm/v3/objects/deals/search`, after ? { ...body, after } : body)).data;
+    total = page.total;
+    todo.push(...(page.results || []));
+    after = page.paging && page.paging.next && page.paging.next.after;
+  } while (ALL && after && todo.length < total);
+  if (!ALL) todo = todo.slice(0, LIMIT);
+  console.log(`Verse leads totaal: ${total}. Verwerk: ${todo.length}${DRY ? ' (DRY)' : ''}\n`);
 
   let created = 0, updated = 0, skipped = 0;
   for (const d of todo) {
+    await new Promise(r => setTimeout(r, 80)); // throttle tegen rate limits
     const id = d.id, naam = d.properties.dealname || 'Onbekend';
     // contact + telefoon
     const ac = await jget(`${BASE}/crm/v4/objects/deals/${id}/associations/contacts`);
@@ -123,7 +137,8 @@ async function getOpenBelTaak(dealId) {
       hs_task_status: 'NOT_STARTED',
       hs_task_priority: 'HIGH',
       hs_task_type: 'CALL',
-      hs_timestamp: String(Date.now()),
+      // due = moment dat de lead binnenkwam → oudste leads bovenaan in de queue (oplopend op due-datum)
+      hs_timestamp: String(new Date(d.properties.createdate || Date.now()).getTime()),
       hubspot_owner_id: String(OWNER),
     } });
     if (!task.ok) { console.log(`FAIL ${naam} — ${task.status} ${JSON.stringify(task.data).slice(0, 160)}`); continue; }

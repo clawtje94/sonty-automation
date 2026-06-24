@@ -35,33 +35,43 @@ async function getTeVer(now = new Date()) {
   const tabsByTrim = {};
   for (const s of meta.data.sheets) tabsByTrim[s.properties.title.trim()] = s.properties.title;
 
-  const phones = new Set();
+  const phones = new Set();           // TE VER (kolom F)
   const names = new Set();
+  const akkoordPhones = new Set();     // al akkoord/ingekocht: inkoop (W) gevuld of akkoord (L) = TRUE
+  const akkoordNames = new Set();
+  const num = (v) => { const d = String(v || '').replace(/[^\d]/g, ''); return d ? parseInt(d, 10) : 0; };
   let scannedTabs = [];
   for (const target of recentMonthTitles(now)) {
     const actual = tabsByTrim[target];
     if (!actual) continue;
     scannedTabs.push(actual.trim());
-    const res = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: `'${actual}'!A4:F4000` });
+    const res = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: `'${actual}'!A4:W4000` });
     for (const r of (res.data.values || [])) {
-      const f = (r[5] || '').toString().trim().toUpperCase();
-      if (f !== 'TE VER') continue;
       const ph = normPhone(r[4]);
-      if (ph) phones.add(ph);
       const naam = `${(r[1] || '').trim()} ${(r[2] || '').trim()}`.trim().toLowerCase();
-      if (naam) names.add(naam);
+      const f = (r[5] || '').toString().trim().toUpperCase();       // F: bedrag of TE VER
+      const akkoord = (r[11] || '').toString().trim().toUpperCase(); // L: Akkoord TRUE/FALSE
+      const inkoop = num(r[22]);                                     // W: inkoop incl btw
+      if (f === 'TE VER') {
+        if (ph) phones.add(ph);
+        if (naam) names.add(naam);
+      }
+      if (inkoop > 0 || ['TRUE', 'WAAR', 'JA'].includes(akkoord)) {  // al akkoord -> niet bellen
+        if (ph) akkoordPhones.add(ph);
+        if (naam) akkoordNames.add(naam);
+      }
     }
   }
-  return { phones, names, scannedTabs };
+  return { phones, names, akkoordPhones, akkoordNames, scannedTabs };
 }
 
 module.exports = { getTeVer, normPhone };
 
 // CLI: print samenvatting
 if (require.main === module) {
-  getTeVer().then(({ phones, names, scannedTabs }) => {
+  getTeVer().then(({ phones, names, akkoordPhones, akkoordNames, scannedTabs }) => {
     console.log('Tabs gescand:', scannedTabs.join(' | '));
     console.log('TE VER telefoonnummers:', phones.size, '| namen:', names.size);
-    console.log('Sample tel:', [...phones].slice(0, 5).join(', '));
+    console.log('AKKOORD/ingekocht telefoonnummers:', akkoordPhones.size, '| namen:', akkoordNames.size);
   }).catch(e => { console.error('FOUT:', e.message); process.exit(1); });
 }

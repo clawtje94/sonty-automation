@@ -86,7 +86,7 @@ async function getOpenBelTaak(dealId) {
       { propertyName: 'createdate', operator: 'GTE', value: sinceValue },
     ] }],
     sorts: [{ propertyName: 'createdate', direction: 'ASCENDING' }],
-    properties: ['dealname', 'createdate', 'sonty_reuzenpanda_link', 'sonty_first_quote_amount', 'product_categorie'],
+    properties: ['dealname', 'createdate', 'sonty_reuzenpanda_link', 'sonty_first_quote_amount', 'product_categorie', 'inkoopbedrag'],
     limit: LIMIT,
   };
   // Pagineer: bij 'all' alle pagina's ophalen, anders alleen de eerste (max LIMIT)
@@ -103,8 +103,8 @@ async function getOpenBelTaak(dealId) {
   console.log(`Verse leads totaal: ${total}. Verwerk: ${todo.length}${DRY ? ' (DRY)' : ''}\n`);
 
   // "TE VER"-leads uit het register laden (niet bellen). Faalt dit, dan gaan we door zonder uitsluiting.
-  let teVer = { phones: new Set(), names: new Set() };
-  try { teVer = await getTeVer(); console.log(`TE VER-uitsluiting: ${teVer.phones.size} nummers (tabs: ${teVer.scannedTabs.join(', ')})\n`); }
+  let teVer = { phones: new Set(), names: new Set(), akkoordPhones: new Set(), akkoordNames: new Set() };
+  try { teVer = await getTeVer(); console.log(`Uitsluiting: ${teVer.phones.size} TE VER + ${teVer.akkoordPhones.size} akkoord/ingekocht (tabs: ${teVer.scannedTabs.join(', ')})\n`); }
   catch (e) { console.log(`⚠️ TE VER-lijst niet geladen (${e.message}) — ga door zonder uitsluiting\n`); }
 
   let created = 0, updated = 0, skipped = 0, teVerSkip = 0;
@@ -120,12 +120,17 @@ async function getOpenBelTaak(dealId) {
       tel = c.properties.phone || c.properties.mobilephone || '(geen nummer)';
       mail = c.properties.email || '';
     }
-    // TE VER? -> geen bel-taak; bestaande open bel-taak verwijderen
+    // Uitsluiten? TE VER (kolom F) OF al akkoord/ingekocht (sheet kolom W/L of HubSpot inkoopbedrag).
+    // Zo ja: geen bel-taak; bestaande open bel-taak verwijderen.
     const np = normPhone(tel);
-    const isTeVer = (np && teVer.phones.has(np)) || teVer.names.has(naam.trim().toLowerCase());
-    if (isTeVer) {
+    const naamLower = naam.trim().toLowerCase();
+    const inkoopHS = parseFloat(d.properties.inkoopbedrag || '0') || 0;
+    let reden = null;
+    if ((np && teVer.phones.has(np)) || teVer.names.has(naamLower)) reden = 'TE VER';
+    else if (inkoopHS > 0 || (np && teVer.akkoordPhones.has(np)) || teVer.akkoordNames.has(naamLower)) reden = 'AKKOORD';
+    if (reden) {
       if (!DRY) { const ex = await getOpenBelTaak(id); if (ex) await fetch(`${BASE}/crm/v3/objects/tasks/${ex}`, { method: 'DELETE', headers: H }); }
-      console.log(`TE VER  ${naam} — overgeslagen${''}`);
+      console.log(`${reden}  ${naam} — overgeslagen`);
       teVerSkip++; continue;
     }
     const taskBody = buildBody({
@@ -162,5 +167,5 @@ async function getOpenBelTaak(dealId) {
     console.log(`OK   ${naam} — taak ${tid} | tel ${tel}`);
     created++;
   }
-  console.log(`\nKlaar. Aangemaakt: ${created}, ververst: ${updated}, TE VER overgeslagen/verwijderd: ${teVerSkip}`);
+  console.log(`\nKlaar. Aangemaakt: ${created}, ververst: ${updated}, uitgesloten (TE VER/akkoord): ${teVerSkip}`);
 })();

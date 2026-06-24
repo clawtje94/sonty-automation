@@ -77,3 +77,5 @@ scripts/.anthropic-api-key.txt
 scripts/secrets.js
 .next/
 data/google-service-account.json
+data/unilux/*.pdf
+data/unilux/*.zip

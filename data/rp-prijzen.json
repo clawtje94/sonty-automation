@@ -23,7 +23,7 @@
   "Raamdeco — Plissé": 1.0,
   "Raamdeco — Lamellen": 1.0,
   "Raamdeco — Vouwgordijnen": 1.0,
-  "Raamdeco — Horren": 1.0
+  "Horren": 1.0
  },
  "categorieen": {
   "Screens": [
@@ -3490,222 +3490,840 @@
     "omschrijving": "Meerprijs elektrische bediening t.o.v. handbediend, incl. BTW"
    }
   ],
-  "Raamdeco — Horren": [
+  "Horren": [
    {
-    "naam": "Inzethor 50×60 cm",
-    "sku": "TP-HOR-INZET-50X60",
-    "verkoop_incl": 169,
-    "omschrijving": "Inzethor, breedte×hoogte 50×60 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Comfort 800×600 mm",
+    "sku": "UNI-COMF-800X600",
+    "verkoop_incl": 215,
+    "omschrijving": "Raamrolhor Comfort (Unilux), breedte×hoogte 800×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Inzethor 120×60 cm",
-    "sku": "TP-HOR-INZET-120X60",
-    "verkoop_incl": 218,
-    "omschrijving": "Inzethor, breedte×hoogte 120×60 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Comfort 1200×600 mm",
+    "sku": "UNI-COMF-1200X600",
+    "verkoop_incl": 263,
+    "omschrijving": "Raamrolhor Comfort (Unilux), breedte×hoogte 1200×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Inzethor 190×60 cm",
-    "sku": "TP-HOR-INZET-190X60",
-    "verkoop_incl": 302,
-    "omschrijving": "Inzethor, breedte×hoogte 190×60 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Comfort 1400×600 mm",
+    "sku": "UNI-COMF-1400X600",
+    "verkoop_incl": 295,
+    "omschrijving": "Raamrolhor Comfort (Unilux), breedte×hoogte 1400×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Inzethor 260×60 cm",
-    "sku": "TP-HOR-INZET-260X60",
-    "verkoop_incl": 327,
-    "omschrijving": "Inzethor, breedte×hoogte 260×60 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Comfort 1800×600 mm",
+    "sku": "UNI-COMF-1800X600",
+    "verkoop_incl": 360,
+    "omschrijving": "Raamrolhor Comfort (Unilux), breedte×hoogte 1800×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Inzethor 50×110 cm",
-    "sku": "TP-HOR-INZET-50X110",
-    "verkoop_incl": 206,
-    "omschrijving": "Inzethor, breedte×hoogte 50×110 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Comfort 800×1600 mm",
+    "sku": "UNI-COMF-800X1600",
+    "verkoop_incl": 296,
+    "omschrijving": "Raamrolhor Comfort (Unilux), breedte×hoogte 800×1600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Inzethor 120×110 cm",
-    "sku": "TP-HOR-INZET-120X110",
-    "verkoop_incl": 242,
-    "omschrijving": "Inzethor, breedte×hoogte 120×110 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Comfort 1200×1600 mm",
+    "sku": "UNI-COMF-1200X1600",
+    "verkoop_incl": 361,
+    "omschrijving": "Raamrolhor Comfort (Unilux), breedte×hoogte 1200×1600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Inzethor 190×110 cm",
-    "sku": "TP-HOR-INZET-190X110",
-    "verkoop_incl": 339,
-    "omschrijving": "Inzethor, breedte×hoogte 190×110 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Comfort 1400×1600 mm",
+    "sku": "UNI-COMF-1400X1600",
+    "verkoop_incl": 394,
+    "omschrijving": "Raamrolhor Comfort (Unilux), breedte×hoogte 1400×1600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Inzethor 260×110 cm",
-    "sku": "TP-HOR-INZET-260X110",
-    "verkoop_incl": 375,
-    "omschrijving": "Inzethor, breedte×hoogte 260×110 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Comfort 800×2600 mm",
+    "sku": "UNI-COMF-800X2600",
+    "verkoop_incl": 377,
+    "omschrijving": "Raamrolhor Comfort (Unilux), breedte×hoogte 800×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Inzethor 50×160 cm",
-    "sku": "TP-HOR-INZET-50X160",
-    "verkoop_incl": 278,
-    "omschrijving": "Inzethor, breedte×hoogte 50×160 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Super+ 600×600 mm",
+    "sku": "UNI-SUPP-600X600",
+    "verkoop_incl": 286,
+    "omschrijving": "Raamrolhor Super+ (Unilux), breedte×hoogte 600×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Inzethor 120×160 cm",
-    "sku": "TP-HOR-INZET-120X160",
-    "verkoop_incl": 333,
-    "omschrijving": "Inzethor, breedte×hoogte 120×160 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Super+ 1000×600 mm",
+    "sku": "UNI-SUPP-1000X600",
+    "verkoop_incl": 332,
+    "omschrijving": "Raamrolhor Super+ (Unilux), breedte×hoogte 1000×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Inzethor 190×160 cm",
-    "sku": "TP-HOR-INZET-190X160",
-    "verkoop_incl": 454,
-    "omschrijving": "Inzethor, breedte×hoogte 190×160 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Super+ 1200×600 mm",
+    "sku": "UNI-SUPP-1200X600",
+    "verkoop_incl": 377,
+    "omschrijving": "Raamrolhor Super+ (Unilux), breedte×hoogte 1200×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Inzethor 260×160 cm",
-    "sku": "TP-HOR-INZET-260X160",
-    "verkoop_incl": 496,
-    "omschrijving": "Inzethor, breedte×hoogte 260×160 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Super+ 1600×600 mm",
+    "sku": "UNI-SUPP-1600X600",
+    "verkoop_incl": 425,
+    "omschrijving": "Raamrolhor Super+ (Unilux), breedte×hoogte 1600×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Rolhor Basic 40×40 cm",
-    "sku": "TP-ROLHOR-BASIC-40X40",
-    "verkoop_incl": 127,
-    "omschrijving": "Rolhor Basic, breedte×hoogte 40×40 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Super+ 600×1400 mm",
+    "sku": "UNI-SUPP-600X1400",
+    "verkoop_incl": 378,
+    "omschrijving": "Raamrolhor Super+ (Unilux), breedte×hoogte 600×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Rolhor Basic 80×40 cm",
-    "sku": "TP-ROLHOR-BASIC-80X40",
-    "verkoop_incl": 145,
-    "omschrijving": "Rolhor Basic, breedte×hoogte 80×40 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamrolhor Super+ 1000×1400 mm",
+    "sku": "UNI-SUPP-1000X1400",
+    "verkoop_incl": 425,
+    "omschrijving": "Raamrolhor Super+ (Unilux), breedte×hoogte 1000×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Rolhor Basic 110×40 cm",
-    "sku": "TP-ROLHOR-BASIC-110X40",
+    "naam": "Raamrolhor Super+ 1200×1400 mm",
+    "sku": "UNI-SUPP-1200X1400",
+    "verkoop_incl": 471,
+    "omschrijving": "Raamrolhor Super+ (Unilux), breedte×hoogte 1200×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamrolhor Super+ 1600×1400 mm",
+    "sku": "UNI-SUPP-1600X1400",
+    "verkoop_incl": 517,
+    "omschrijving": "Raamrolhor Super+ (Unilux), breedte×hoogte 1600×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamrolhor Super+ 600×2000 mm",
+    "sku": "UNI-SUPP-600X2000",
+    "verkoop_incl": 471,
+    "omschrijving": "Raamrolhor Super+ (Unilux), breedte×hoogte 600×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamrolhor Super+ 1000×2000 mm",
+    "sku": "UNI-SUPP-1000X2000",
+    "verkoop_incl": 517,
+    "omschrijving": "Raamrolhor Super+ (Unilux), breedte×hoogte 1000×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamrolhor Super+ 1200×2000 mm",
+    "sku": "UNI-SUPP-1200X2000",
+    "verkoop_incl": 518,
+    "omschrijving": "Raamrolhor Super+ (Unilux), breedte×hoogte 1200×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamrolhor Super+ 1600×2000 mm",
+    "sku": "UNI-SUPP-1600X2000",
+    "verkoop_incl": 564,
+    "omschrijving": "Raamrolhor Super+ (Unilux), breedte×hoogte 1600×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Voorzethor 600×600 mm",
+    "sku": "UNI-VZH-600X600",
+    "verkoop_incl": 146,
+    "omschrijving": "Raamhor vast Voorzethor (Unilux), breedte×hoogte 600×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Voorzethor 1000×600 mm",
+    "sku": "UNI-VZH-1000X600",
     "verkoop_incl": 157,
-    "omschrijving": "Rolhor Basic, breedte×hoogte 110×40 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "omschrijving": "Raamhor vast Voorzethor (Unilux), breedte×hoogte 1000×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Rolhor Basic 150×40 cm",
-    "sku": "TP-ROLHOR-BASIC-150X40",
+    "naam": "Raamhor vast Voorzethor 1400×600 mm",
+    "sku": "UNI-VZH-1400X600",
     "verkoop_incl": 169,
-    "omschrijving": "Rolhor Basic, breedte×hoogte 150×40 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "omschrijving": "Raamhor vast Voorzethor (Unilux), breedte×hoogte 1400×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Rolhor Basic 40×120 cm",
-    "sku": "TP-ROLHOR-BASIC-40X120",
-    "verkoop_incl": 157,
-    "omschrijving": "Rolhor Basic, breedte×hoogte 40×120 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Voorzethor 1800×600 mm",
+    "sku": "UNI-VZH-1800X600",
+    "verkoop_incl": 193,
+    "omschrijving": "Raamhor vast Voorzethor (Unilux), breedte×hoogte 1800×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Rolhor Basic 80×120 cm",
-    "sku": "TP-ROLHOR-BASIC-80X120",
-    "verkoop_incl": 175,
-    "omschrijving": "Rolhor Basic, breedte×hoogte 80×120 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Voorzethor 600×1400 mm",
+    "sku": "UNI-VZH-600X1400",
+    "verkoop_incl": 169,
+    "omschrijving": "Raamhor vast Voorzethor (Unilux), breedte×hoogte 600×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Rolhor Basic 110×120 cm",
-    "sku": "TP-ROLHOR-BASIC-110X120",
-    "verkoop_incl": 194,
-    "omschrijving": "Rolhor Basic, breedte×hoogte 110×120 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Voorzethor 1000×1400 mm",
+    "sku": "UNI-VZH-1000X1400",
+    "verkoop_incl": 193,
+    "omschrijving": "Raamhor vast Voorzethor (Unilux), breedte×hoogte 1000×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Rolhor Basic 150×120 cm",
-    "sku": "TP-ROLHOR-BASIC-150X120",
-    "verkoop_incl": 212,
-    "omschrijving": "Rolhor Basic, breedte×hoogte 150×120 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Voorzethor 1400×1400 mm",
+    "sku": "UNI-VZH-1400X1400",
+    "verkoop_incl": 216,
+    "omschrijving": "Raamhor vast Voorzethor (Unilux), breedte×hoogte 1400×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Rolhor Basic 40×200 cm",
-    "sku": "TP-ROLHOR-BASIC-40X200",
-    "verkoop_incl": 218,
-    "omschrijving": "Rolhor Basic, breedte×hoogte 40×200 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Voorzethor 1800×1400 mm",
+    "sku": "UNI-VZH-1800X1400",
+    "verkoop_incl": 238,
+    "omschrijving": "Raamhor vast Voorzethor (Unilux), breedte×hoogte 1800×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Rolhor Basic 80×200 cm",
-    "sku": "TP-ROLHOR-BASIC-80X200",
-    "verkoop_incl": 242,
-    "omschrijving": "Rolhor Basic, breedte×hoogte 80×200 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Voorzethor 600×2400 mm",
+    "sku": "UNI-VZH-600X2400",
+    "verkoop_incl": 238,
+    "omschrijving": "Raamhor vast Voorzethor (Unilux), breedte×hoogte 600×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Rolhor Basic 110×200 cm",
-    "sku": "TP-ROLHOR-BASIC-110X200",
-    "verkoop_incl": 260,
-    "omschrijving": "Rolhor Basic, breedte×hoogte 110×200 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Voorzethor 1000×2400 mm",
+    "sku": "UNI-VZH-1000X2400",
+    "verkoop_incl": 261,
+    "omschrijving": "Raamhor vast Voorzethor (Unilux), breedte×hoogte 1000×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Rolhor Basic 150×200 cm",
-    "sku": "TP-ROLHOR-BASIC-150X200",
+    "naam": "Raamhor vast Voorzethor 1400×2400 mm",
+    "sku": "UNI-VZH-1400X2400",
     "verkoop_incl": 284,
-    "omschrijving": "Rolhor Basic, breedte×hoogte 150×200 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "omschrijving": "Raamhor vast Voorzethor (Unilux), breedte×hoogte 1400×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Plissé hordeur 80×220 cm",
-    "sku": "TP-PLISSEHORDEUR-80X220",
-    "verkoop_incl": 520,
-    "omschrijving": "Plissé hordeur, breedte×hoogte 80×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Inklemhor 600×600 mm",
+    "sku": "UNI-IKH-600X600",
+    "verkoop_incl": 146,
+    "omschrijving": "Raamhor vast Inklemhor (Unilux), breedte×hoogte 600×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Plissé hordeur 120×220 cm",
-    "sku": "TP-PLISSEHORDEUR-120X220",
-    "verkoop_incl": 599,
-    "omschrijving": "Plissé hordeur, breedte×hoogte 120×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Inklemhor 1000×600 mm",
+    "sku": "UNI-IKH-1000X600",
+    "verkoop_incl": 157,
+    "omschrijving": "Raamhor vast Inklemhor (Unilux), breedte×hoogte 1000×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Plissé hordeur 160×220 cm",
-    "sku": "TP-PLISSEHORDEUR-160X220",
-    "verkoop_incl": 659,
-    "omschrijving": "Plissé hordeur, breedte×hoogte 160×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Inklemhor 1400×600 mm",
+    "sku": "UNI-IKH-1400X600",
+    "verkoop_incl": 169,
+    "omschrijving": "Raamhor vast Inklemhor (Unilux), breedte×hoogte 1400×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Plissé hordeur 200×220 cm",
-    "sku": "TP-PLISSEHORDEUR-200X220",
-    "verkoop_incl": 805,
-    "omschrijving": "Plissé hordeur, breedte×hoogte 200×220 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Inklemhor 1800×600 mm",
+    "sku": "UNI-IKH-1800X600",
+    "verkoop_incl": 193,
+    "omschrijving": "Raamhor vast Inklemhor (Unilux), breedte×hoogte 1800×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Plissé hordeur 80×240 cm",
-    "sku": "TP-PLISSEHORDEUR-80X240",
-    "verkoop_incl": 532,
-    "omschrijving": "Plissé hordeur, breedte×hoogte 80×240 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Inklemhor 600×1400 mm",
+    "sku": "UNI-IKH-600X1400",
+    "verkoop_incl": 169,
+    "omschrijving": "Raamhor vast Inklemhor (Unilux), breedte×hoogte 600×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Plissé hordeur 120×240 cm",
-    "sku": "TP-PLISSEHORDEUR-120X240",
-    "verkoop_incl": 623,
-    "omschrijving": "Plissé hordeur, breedte×hoogte 120×240 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Inklemhor 1000×1400 mm",
+    "sku": "UNI-IKH-1000X1400",
+    "verkoop_incl": 193,
+    "omschrijving": "Raamhor vast Inklemhor (Unilux), breedte×hoogte 1000×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Plissé hordeur 160×240 cm",
-    "sku": "TP-PLISSEHORDEUR-160X240",
-    "verkoop_incl": 678,
-    "omschrijving": "Plissé hordeur, breedte×hoogte 160×240 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Raamhor vast Inklemhor 1400×1400 mm",
+    "sku": "UNI-IKH-1400X1400",
+    "verkoop_incl": 216,
+    "omschrijving": "Raamhor vast Inklemhor (Unilux), breedte×hoogte 1400×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Plissé hordeur 200×240 cm",
-    "sku": "TP-PLISSEHORDEUR-200X240",
+    "naam": "Raamhor vast Inklemhor 1800×1400 mm",
+    "sku": "UNI-IKH-1800X1400",
+    "verkoop_incl": 238,
+    "omschrijving": "Raamhor vast Inklemhor (Unilux), breedte×hoogte 1800×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Inklemhor 600×2400 mm",
+    "sku": "UNI-IKH-600X2400",
+    "verkoop_incl": 238,
+    "omschrijving": "Raamhor vast Inklemhor (Unilux), breedte×hoogte 600×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Inklemhor 1000×2400 mm",
+    "sku": "UNI-IKH-1000X2400",
+    "verkoop_incl": 261,
+    "omschrijving": "Raamhor vast Inklemhor (Unilux), breedte×hoogte 1000×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Inklemhor 1400×2400 mm",
+    "sku": "UNI-IKH-1400X2400",
+    "verkoop_incl": 284,
+    "omschrijving": "Raamhor vast Inklemhor (Unilux), breedte×hoogte 1400×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Veerstifthor / Softfit 600×600 mm",
+    "sku": "UNI-VSH-600X600",
+    "verkoop_incl": 186,
+    "omschrijving": "Raamhor vast Veerstifthor / Softfit (Unilux), breedte×hoogte 600×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Veerstifthor / Softfit 1000×600 mm",
+    "sku": "UNI-VSH-1000X600",
+    "verkoop_incl": 204,
+    "omschrijving": "Raamhor vast Veerstifthor / Softfit (Unilux), breedte×hoogte 1000×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Veerstifthor / Softfit 1400×600 mm",
+    "sku": "UNI-VSH-1400X600",
+    "verkoop_incl": 220,
+    "omschrijving": "Raamhor vast Veerstifthor / Softfit (Unilux), breedte×hoogte 1400×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Veerstifthor / Softfit 1800×600 mm",
+    "sku": "UNI-VSH-1800X600",
+    "verkoop_incl": 249,
+    "omschrijving": "Raamhor vast Veerstifthor / Softfit (Unilux), breedte×hoogte 1800×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Veerstifthor / Softfit 600×1600 mm",
+    "sku": "UNI-VSH-600X1600",
+    "verkoop_incl": 249,
+    "omschrijving": "Raamhor vast Veerstifthor / Softfit (Unilux), breedte×hoogte 600×1600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Veerstifthor / Softfit 1000×1600 mm",
+    "sku": "UNI-VSH-1000X1600",
+    "verkoop_incl": 266,
+    "omschrijving": "Raamhor vast Veerstifthor / Softfit (Unilux), breedte×hoogte 1000×1600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Veerstifthor / Softfit 1400×1600 mm",
+    "sku": "UNI-VSH-1400X1600",
+    "verkoop_incl": 284,
+    "omschrijving": "Raamhor vast Veerstifthor / Softfit (Unilux), breedte×hoogte 1400×1600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Veerstifthor / Softfit 1800×1600 mm",
+    "sku": "UNI-VSH-1800X1600",
+    "verkoop_incl": 300,
+    "omschrijving": "Raamhor vast Veerstifthor / Softfit (Unilux), breedte×hoogte 1800×1600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Veerstifthor / Softfit 600×2600 mm",
+    "sku": "UNI-VSH-600X2600",
+    "verkoop_incl": 284,
+    "omschrijving": "Raamhor vast Veerstifthor / Softfit (Unilux), breedte×hoogte 600×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamhor vast Veerstifthor / Softfit 1000×2600 mm",
+    "sku": "UNI-VSH-1000X2600",
+    "verkoop_incl": 300,
+    "omschrijving": "Raamhor vast Veerstifthor / Softfit (Unilux), breedte×hoogte 1000×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Voorzet Unit 600×600 mm",
+    "sku": "UNI-VZU-600X600",
+    "verkoop_incl": 271,
+    "omschrijving": "Raamplissé Voorzet Unit (Unilux), breedte×hoogte 600×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Voorzet Unit 800×600 mm",
+    "sku": "UNI-VZU-800X600",
+    "verkoop_incl": 305,
+    "omschrijving": "Raamplissé Voorzet Unit (Unilux), breedte×hoogte 800×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Voorzet Unit 1000×600 mm",
+    "sku": "UNI-VZU-1000X600",
+    "verkoop_incl": 305,
+    "omschrijving": "Raamplissé Voorzet Unit (Unilux), breedte×hoogte 1000×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Voorzet Unit 1200×600 mm",
+    "sku": "UNI-VZU-1200X600",
+    "verkoop_incl": 339,
+    "omschrijving": "Raamplissé Voorzet Unit (Unilux), breedte×hoogte 1200×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Voorzet Unit 600×1400 mm",
+    "sku": "UNI-VZU-600X1400",
+    "verkoop_incl": 339,
+    "omschrijving": "Raamplissé Voorzet Unit (Unilux), breedte×hoogte 600×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Voorzet Unit 800×1400 mm",
+    "sku": "UNI-VZU-800X1400",
+    "verkoop_incl": 373,
+    "omschrijving": "Raamplissé Voorzet Unit (Unilux), breedte×hoogte 800×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Voorzet Unit 1000×1400 mm",
+    "sku": "UNI-VZU-1000X1400",
+    "verkoop_incl": 374,
+    "omschrijving": "Raamplissé Voorzet Unit (Unilux), breedte×hoogte 1000×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Voorzet Unit 1200×1400 mm",
+    "sku": "UNI-VZU-1200X1400",
+    "verkoop_incl": 408,
+    "omschrijving": "Raamplissé Voorzet Unit (Unilux), breedte×hoogte 1200×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Voorzet Unit 600×2400 mm",
+    "sku": "UNI-VZU-600X2400",
+    "verkoop_incl": 442,
+    "omschrijving": "Raamplissé Voorzet Unit (Unilux), breedte×hoogte 600×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Voorzet Unit 800×2400 mm",
+    "sku": "UNI-VZU-800X2400",
+    "verkoop_incl": 442,
+    "omschrijving": "Raamplissé Voorzet Unit (Unilux), breedte×hoogte 800×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Voorzet Unit 1000×2400 mm",
+    "sku": "UNI-VZU-1000X2400",
+    "verkoop_incl": 477,
+    "omschrijving": "Raamplissé Voorzet Unit (Unilux), breedte×hoogte 1000×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Voorzet Unit 1200×2400 mm",
+    "sku": "UNI-VZU-1200X2400",
+    "verkoop_incl": 477,
+    "omschrijving": "Raamplissé Voorzet Unit (Unilux), breedte×hoogte 1200×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Inklem Unit 600×600 mm",
+    "sku": "UNI-IKU-600X600",
+    "verkoop_incl": 271,
+    "omschrijving": "Raamplissé Inklem Unit (Unilux), breedte×hoogte 600×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Inklem Unit 800×600 mm",
+    "sku": "UNI-IKU-800X600",
+    "verkoop_incl": 305,
+    "omschrijving": "Raamplissé Inklem Unit (Unilux), breedte×hoogte 800×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Inklem Unit 1000×600 mm",
+    "sku": "UNI-IKU-1000X600",
+    "verkoop_incl": 305,
+    "omschrijving": "Raamplissé Inklem Unit (Unilux), breedte×hoogte 1000×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Inklem Unit 1200×600 mm",
+    "sku": "UNI-IKU-1200X600",
+    "verkoop_incl": 339,
+    "omschrijving": "Raamplissé Inklem Unit (Unilux), breedte×hoogte 1200×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Inklem Unit 600×1400 mm",
+    "sku": "UNI-IKU-600X1400",
+    "verkoop_incl": 339,
+    "omschrijving": "Raamplissé Inklem Unit (Unilux), breedte×hoogte 600×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Inklem Unit 800×1400 mm",
+    "sku": "UNI-IKU-800X1400",
+    "verkoop_incl": 373,
+    "omschrijving": "Raamplissé Inklem Unit (Unilux), breedte×hoogte 800×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Inklem Unit 1000×1400 mm",
+    "sku": "UNI-IKU-1000X1400",
+    "verkoop_incl": 374,
+    "omschrijving": "Raamplissé Inklem Unit (Unilux), breedte×hoogte 1000×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Inklem Unit 1200×1400 mm",
+    "sku": "UNI-IKU-1200X1400",
+    "verkoop_incl": 408,
+    "omschrijving": "Raamplissé Inklem Unit (Unilux), breedte×hoogte 1200×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Inklem Unit 600×2400 mm",
+    "sku": "UNI-IKU-600X2400",
+    "verkoop_incl": 442,
+    "omschrijving": "Raamplissé Inklem Unit (Unilux), breedte×hoogte 600×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Inklem Unit 800×2400 mm",
+    "sku": "UNI-IKU-800X2400",
+    "verkoop_incl": 442,
+    "omschrijving": "Raamplissé Inklem Unit (Unilux), breedte×hoogte 800×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Inklem Unit 1000×2400 mm",
+    "sku": "UNI-IKU-1000X2400",
+    "verkoop_incl": 477,
+    "omschrijving": "Raamplissé Inklem Unit (Unilux), breedte×hoogte 1000×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Inklem Unit 1200×2400 mm",
+    "sku": "UNI-IKU-1200X2400",
+    "verkoop_incl": 477,
+    "omschrijving": "Raamplissé Inklem Unit (Unilux), breedte×hoogte 1200×2400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Dubbel Systeem (Voorzet/Inklem) 1400×600 mm",
+    "sku": "UNI-UDB-1400X600",
+    "verkoop_incl": 608,
+    "omschrijving": "Raamplissé Dubbel Systeem (Voorzet/Inklem) (Unilux), breedte×hoogte 1400×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Dubbel Systeem (Voorzet/Inklem) 1800×600 mm",
+    "sku": "UNI-UDB-1800X600",
+    "verkoop_incl": 609,
+    "omschrijving": "Raamplissé Dubbel Systeem (Voorzet/Inklem) (Unilux), breedte×hoogte 1800×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Dubbel Systeem (Voorzet/Inklem) 2000×600 mm",
+    "sku": "UNI-UDB-2000X600",
+    "verkoop_incl": 609,
+    "omschrijving": "Raamplissé Dubbel Systeem (Voorzet/Inklem) (Unilux), breedte×hoogte 2000×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Dubbel Systeem (Voorzet/Inklem) 2400×600 mm",
+    "sku": "UNI-UDB-2400X600",
+    "verkoop_incl": 679,
+    "omschrijving": "Raamplissé Dubbel Systeem (Voorzet/Inklem) (Unilux), breedte×hoogte 2400×600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Dubbel Systeem (Voorzet/Inklem) 1400×1400 mm",
+    "sku": "UNI-UDB-1400X1400",
+    "verkoop_incl": 746,
+    "omschrijving": "Raamplissé Dubbel Systeem (Voorzet/Inklem) (Unilux), breedte×hoogte 1400×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Dubbel Systeem (Voorzet/Inklem) 1800×1400 mm",
+    "sku": "UNI-UDB-1800X1400",
+    "verkoop_incl": 747,
+    "omschrijving": "Raamplissé Dubbel Systeem (Voorzet/Inklem) (Unilux), breedte×hoogte 1800×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Dubbel Systeem (Voorzet/Inklem) 2000×1400 mm",
+    "sku": "UNI-UDB-2000X1400",
+    "verkoop_incl": 747,
+    "omschrijving": "Raamplissé Dubbel Systeem (Voorzet/Inklem) (Unilux), breedte×hoogte 2000×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Dubbel Systeem (Voorzet/Inklem) 2400×1400 mm",
+    "sku": "UNI-UDB-2400X1400",
+    "verkoop_incl": 816,
+    "omschrijving": "Raamplissé Dubbel Systeem (Voorzet/Inklem) (Unilux), breedte×hoogte 2400×1400 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Dubbel Systeem (Voorzet/Inklem) 1400×2000 mm",
+    "sku": "UNI-UDB-1400X2000",
+    "verkoop_incl": 815,
+    "omschrijving": "Raamplissé Dubbel Systeem (Voorzet/Inklem) (Unilux), breedte×hoogte 1400×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Dubbel Systeem (Voorzet/Inklem) 1800×2000 mm",
+    "sku": "UNI-UDB-1800X2000",
+    "verkoop_incl": 884,
+    "omschrijving": "Raamplissé Dubbel Systeem (Voorzet/Inklem) (Unilux), breedte×hoogte 1800×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Dubbel Systeem (Voorzet/Inklem) 2000×2000 mm",
+    "sku": "UNI-UDB-2000X2000",
+    "verkoop_incl": 884,
+    "omschrijving": "Raamplissé Dubbel Systeem (Voorzet/Inklem) (Unilux), breedte×hoogte 2000×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Raamplissé Dubbel Systeem (Voorzet/Inklem) 2400×2000 mm",
+    "sku": "UNI-UDB-2400X2000",
+    "verkoop_incl": 886,
+    "omschrijving": "Raamplissé Dubbel Systeem (Voorzet/Inklem) (Unilux), breedte×hoogte 2400×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Plisséfit (enkel) 1100×2000 mm",
+    "sku": "UNI-PF-1100X2000",
+    "verkoop_incl": 515,
+    "omschrijving": "Hordeur Plisséfit (enkel) (Unilux), breedte×hoogte 1100×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Plisséfit (enkel) 1450×2000 mm",
+    "sku": "UNI-PF-1450X2000",
+    "verkoop_incl": 558,
+    "omschrijving": "Hordeur Plisséfit (enkel) (Unilux), breedte×hoogte 1450×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Plisséfit (enkel) 1800×2000 mm",
+    "sku": "UNI-PF-1800X2000",
+    "verkoop_incl": 714,
+    "omschrijving": "Hordeur Plisséfit (enkel) (Unilux), breedte×hoogte 1800×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Plisséfit (enkel) 2000×2000 mm",
+    "sku": "UNI-PF-2000X2000",
+    "verkoop_incl": 928,
+    "omschrijving": "Hordeur Plisséfit (enkel) (Unilux), breedte×hoogte 2000×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Plisséfit (enkel) 1100×2600 mm",
+    "sku": "UNI-PF-1100X2600",
+    "verkoop_incl": 603,
+    "omschrijving": "Hordeur Plisséfit (enkel) (Unilux), breedte×hoogte 1100×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Plisséfit (enkel) 1450×2600 mm",
+    "sku": "UNI-PF-1450X2600",
+    "verkoop_incl": 646,
+    "omschrijving": "Hordeur Plisséfit (enkel) (Unilux), breedte×hoogte 1450×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Plisséfit (enkel) 1800×2600 mm",
+    "sku": "UNI-PF-1800X2600",
+    "verkoop_incl": 834,
+    "omschrijving": "Hordeur Plisséfit (enkel) (Unilux), breedte×hoogte 1800×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Plisséfit (enkel) 2000×2600 mm",
+    "sku": "UNI-PF-2000X2600",
+    "verkoop_incl": 1084,
+    "omschrijving": "Hordeur Plisséfit (enkel) (Unilux), breedte×hoogte 2000×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Plisséfit (enkel) 1100×3000 mm",
+    "sku": "UNI-PF-1100X3000",
+    "verkoop_incl": 883,
+    "omschrijving": "Hordeur Plisséfit (enkel) (Unilux), breedte×hoogte 1100×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Plisséfit (enkel) 1450×3000 mm",
+    "sku": "UNI-PF-1450X3000",
+    "verkoop_incl": 967,
+    "omschrijving": "Hordeur Plisséfit (enkel) (Unilux), breedte×hoogte 1450×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Plisséfit (enkel) 1800×3000 mm",
+    "sku": "UNI-PF-1800X3000",
+    "verkoop_incl": 1167,
+    "omschrijving": "Hordeur Plisséfit (enkel) (Unilux), breedte×hoogte 1800×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Plisséfit (enkel) 2000×3000 mm",
+    "sku": "UNI-PF-2000X3000",
+    "verkoop_incl": 1517,
+    "omschrijving": "Hordeur Plisséfit (enkel) (Unilux), breedte×hoogte 2000×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Dubbele Plisséfit 2x1100×2000 mm",
+    "sku": "UNI-PFD-2200X2000",
+    "verkoop_incl": 1098,
+    "omschrijving": "Hordeur Dubbele Plisséfit (Unilux), breedte×hoogte 2x1100×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Dubbele Plisséfit 2x1450×2000 mm",
+    "sku": "UNI-PFD-2900X2000",
+    "verkoop_incl": 1184,
+    "omschrijving": "Hordeur Dubbele Plisséfit (Unilux), breedte×hoogte 2x1450×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Dubbele Plisséfit 2x1800×2000 mm",
+    "sku": "UNI-PFD-3600X2000",
+    "verkoop_incl": 1496,
+    "omschrijving": "Hordeur Dubbele Plisséfit (Unilux), breedte×hoogte 2x1800×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Dubbele Plisséfit 2x2000×2000 mm",
+    "sku": "UNI-PFD-4000X2000",
+    "verkoop_incl": 1922,
+    "omschrijving": "Hordeur Dubbele Plisséfit (Unilux), breedte×hoogte 2x2000×2000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Dubbele Plisséfit 2x1100×2600 mm",
+    "sku": "UNI-PFD-2200X2600",
+    "verkoop_incl": 1276,
+    "omschrijving": "Hordeur Dubbele Plisséfit (Unilux), breedte×hoogte 2x1100×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Dubbele Plisséfit 2x1450×2600 mm",
+    "sku": "UNI-PFD-2900X2600",
+    "verkoop_incl": 1360,
+    "omschrijving": "Hordeur Dubbele Plisséfit (Unilux), breedte×hoogte 2x1450×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Dubbele Plisséfit 2x1800×2600 mm",
+    "sku": "UNI-PFD-3600X2600",
+    "verkoop_incl": 1737,
+    "omschrijving": "Hordeur Dubbele Plisséfit (Unilux), breedte×hoogte 2x1800×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Dubbele Plisséfit 2x2000×2600 mm",
+    "sku": "UNI-PFD-4000X2600",
+    "verkoop_incl": 2234,
+    "omschrijving": "Hordeur Dubbele Plisséfit (Unilux), breedte×hoogte 2x2000×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Dubbele Plisséfit 2x1100×3000 mm",
+    "sku": "UNI-PFD-2200X3000",
+    "verkoop_incl": 1835,
+    "omschrijving": "Hordeur Dubbele Plisséfit (Unilux), breedte×hoogte 2x1100×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Dubbele Plisséfit 2x1450×3000 mm",
+    "sku": "UNI-PFD-2900X3000",
+    "verkoop_incl": 2001,
+    "omschrijving": "Hordeur Dubbele Plisséfit (Unilux), breedte×hoogte 2x1450×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Dubbele Plisséfit 2x1800×3000 mm",
+    "sku": "UNI-PFD-3600X3000",
+    "verkoop_incl": 2400,
+    "omschrijving": "Hordeur Dubbele Plisséfit (Unilux), breedte×hoogte 2x1800×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Hordeur Dubbele Plisséfit 2x2000×3000 mm",
+    "sku": "UNI-PFD-4000X3000",
+    "verkoop_incl": 3100,
+    "omschrijving": "Hordeur Dubbele Plisséfit (Unilux), breedte×hoogte 2x2000×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vaste hordeur Luxe 1000×2200 mm",
+    "sku": "UNI-VHL-1000X2200",
+    "verkoop_incl": 695,
+    "omschrijving": "Vaste hordeur Luxe (Unilux), breedte×hoogte 1000×2200 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vaste hordeur Luxe 1200×2200 mm",
+    "sku": "UNI-VHL-1200X2200",
+    "verkoop_incl": 740,
+    "omschrijving": "Vaste hordeur Luxe (Unilux), breedte×hoogte 1200×2200 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vaste hordeur Luxe 1400×2200 mm",
+    "sku": "UNI-VHL-1400X2200",
+    "verkoop_incl": 823,
+    "omschrijving": "Vaste hordeur Luxe (Unilux), breedte×hoogte 1400×2200 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vaste hordeur Luxe 1000×2600 mm",
+    "sku": "UNI-VHL-1000X2600",
+    "verkoop_incl": 745,
+    "omschrijving": "Vaste hordeur Luxe (Unilux), breedte×hoogte 1000×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vaste hordeur Luxe 1200×2600 mm",
+    "sku": "UNI-VHL-1200X2600",
+    "verkoop_incl": 792,
+    "omschrijving": "Vaste hordeur Luxe (Unilux), breedte×hoogte 1200×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vaste hordeur Luxe 1400×2600 mm",
+    "sku": "UNI-VHL-1400X2600",
+    "verkoop_incl": 876,
+    "omschrijving": "Vaste hordeur Luxe (Unilux), breedte×hoogte 1400×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Vaste hordeur Luxe 1000×3000 mm",
+    "sku": "UNI-VHL-1000X3000",
     "verkoop_incl": 829,
-    "omschrijving": "Plissé hordeur, breedte×hoogte 200×240 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "omschrijving": "Vaste hordeur Luxe (Unilux), breedte×hoogte 1000×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Plissé hordeur 80×250 cm",
-    "sku": "TP-PLISSEHORDEUR-80X250",
-    "verkoop_incl": 544,
-    "omschrijving": "Plissé hordeur, breedte×hoogte 80×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Vaste hordeur Luxe 1200×3000 mm",
+    "sku": "UNI-VHL-1200X3000",
+    "verkoop_incl": 877,
+    "omschrijving": "Vaste hordeur Luxe (Unilux), breedte×hoogte 1200×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Plissé hordeur 120×250 cm",
-    "sku": "TP-PLISSEHORDEUR-120X250",
-    "verkoop_incl": 629,
-    "omschrijving": "Plissé hordeur, breedte×hoogte 120×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Vaste hordeur Luxe 1400×3000 mm",
+    "sku": "UNI-VHL-1400X3000",
+    "verkoop_incl": 924,
+    "omschrijving": "Vaste hordeur Luxe (Unilux), breedte×hoogte 1400×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Plissé hordeur 160×250 cm",
-    "sku": "TP-PLISSEHORDEUR-160X250",
-    "verkoop_incl": 690,
-    "omschrijving": "Plissé hordeur, breedte×hoogte 160×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Schuifhordeur Luxe 1000×2200 mm",
+    "sku": "UNI-SHL-1000X2200",
+    "verkoop_incl": 779,
+    "omschrijving": "Schuifhordeur Luxe (Unilux), breedte×hoogte 1000×2200 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
    },
    {
-    "naam": "Plissé hordeur 200×250 cm",
-    "sku": "TP-PLISSEHORDEUR-200X250",
-    "verkoop_incl": 841,
-    "omschrijving": "Plissé hordeur, breedte×hoogte 200×250 cm, Basis collectie, handbediend. Verkoopprijs incl. 21% BTW."
+    "naam": "Schuifhordeur Luxe 1400×2200 mm",
+    "sku": "UNI-SHL-1400X2200",
+    "verkoop_incl": 867,
+    "omschrijving": "Schuifhordeur Luxe (Unilux), breedte×hoogte 1400×2200 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Schuifhordeur Luxe 1600×2200 mm",
+    "sku": "UNI-SHL-1600X2200",
+    "verkoop_incl": 916,
+    "omschrijving": "Schuifhordeur Luxe (Unilux), breedte×hoogte 1600×2200 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Schuifhordeur Luxe 2000×2200 mm",
+    "sku": "UNI-SHL-2000X2200",
+    "verkoop_incl": 1007,
+    "omschrijving": "Schuifhordeur Luxe (Unilux), breedte×hoogte 2000×2200 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Schuifhordeur Luxe 1000×2600 mm",
+    "sku": "UNI-SHL-1000X2600",
+    "verkoop_incl": 834,
+    "omschrijving": "Schuifhordeur Luxe (Unilux), breedte×hoogte 1000×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Schuifhordeur Luxe 1400×2600 mm",
+    "sku": "UNI-SHL-1400X2600",
+    "verkoop_incl": 924,
+    "omschrijving": "Schuifhordeur Luxe (Unilux), breedte×hoogte 1400×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Schuifhordeur Luxe 1600×2600 mm",
+    "sku": "UNI-SHL-1600X2600",
+    "verkoop_incl": 968,
+    "omschrijving": "Schuifhordeur Luxe (Unilux), breedte×hoogte 1600×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Schuifhordeur Luxe 2000×2600 mm",
+    "sku": "UNI-SHL-2000X2600",
+    "verkoop_incl": 1057,
+    "omschrijving": "Schuifhordeur Luxe (Unilux), breedte×hoogte 2000×2600 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Schuifhordeur Luxe 1000×3000 mm",
+    "sku": "UNI-SHL-1000X3000",
+    "verkoop_incl": 927,
+    "omschrijving": "Schuifhordeur Luxe (Unilux), breedte×hoogte 1000×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Schuifhordeur Luxe 1400×3000 mm",
+    "sku": "UNI-SHL-1400X3000",
+    "verkoop_incl": 1021,
+    "omschrijving": "Schuifhordeur Luxe (Unilux), breedte×hoogte 1400×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Schuifhordeur Luxe 1600×3000 mm",
+    "sku": "UNI-SHL-1600X3000",
+    "verkoop_incl": 1069,
+    "omschrijving": "Schuifhordeur Luxe (Unilux), breedte×hoogte 1600×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Schuifhordeur Luxe 2000×3000 mm",
+    "sku": "UNI-SHL-2000X3000",
+    "verkoop_incl": 1164,
+    "omschrijving": "Schuifhordeur Luxe (Unilux), breedte×hoogte 2000×3000 mm, standaardgaas. Adviesverkoopprijs incl. 21% BTW."
+   },
+   {
+    "naam": "Meerprijs pollengaas (raamhor)",
+    "sku": "UNI-OPT-POLLEN-RAAM",
+    "verkoop_incl": 43,
+    "omschrijving": "Unilux meerprijs t.o.v. standaard, incl. BTW"
+   },
+   {
+    "naam": "Meerprijs pollengaas (luxe hordeur)",
+    "sku": "UNI-OPT-POLLEN-DEUR",
+    "verkoop_incl": 83,
+    "omschrijving": "Unilux meerprijs t.o.v. standaard, incl. BTW"
+   },
+   {
+    "naam": "Meerprijs petscreengaas (luxe hordeur, huisdierbestendig)",
+    "sku": "UNI-OPT-PETSCREEN",
+    "verkoop_incl": 98,
+    "omschrijving": "Unilux meerprijs t.o.v. standaard, incl. BTW"
+   },
+   {
+    "naam": "Meerprijs andere RAL-kleur (starttarief)",
+    "sku": "UNI-OPT-RAL",
+    "verkoop_incl": 100,
+    "omschrijving": "Unilux meerprijs t.o.v. standaard, incl. BTW"
+   },
+   {
+    "naam": "Meerprijs kattenluik (luxe hordeur)",
+    "sku": "UNI-OPT-KATTENLUIK",
+    "verkoop_incl": 152,
+    "omschrijving": "Unilux meerprijs t.o.v. standaard, incl. BTW"
+   },
+   {
+    "naam": "Meerprijs zelfsluitende deur (hydraulische pomp)",
+    "sku": "UNI-OPT-SLUITPOMP",
+    "verkoop_incl": 50,
+    "omschrijving": "Unilux meerprijs t.o.v. standaard, incl. BTW"
    }
   ]
  }

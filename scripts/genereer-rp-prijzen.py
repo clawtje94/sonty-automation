@@ -124,7 +124,7 @@ TP_CAT = {
     'plisse': 'Raamdeco — Plissé',
     'lamellen': 'Raamdeco — Lamellen',
     'vouwgordijnen': 'Raamdeco — Vouwgordijnen',
-    'horren': 'Raamdeco — Horren',
+    # horren: vervallen bij Toppoint — horren komen nu van Unilux (eigen categorie, zie onder)
     # outdoorscreen bewust overgeslagen: Daimy beslist nog waar die thuishoort
 }
 STOFGROEP = {'1': 'Basis collectie', '2': 'Comfort collectie', '3': 'Plus collectie',
@@ -183,5 +183,60 @@ for tp_cat, opts in ELEKTRA.items():
 json.dump(prijzen, open(OUT, 'w'), indent=1, ensure_ascii=False)
 tellingen = {k: len(v) for k, v in prijzen['categorieen'].items()}
 print('\nMet Toppoint:')
+print(json.dumps(tellingen, indent=1, ensure_ascii=False))
+print('Totaal artikelen:', sum(tellingen.values()))
+
+# ──────────────────────────────────────────────────────────────────
+# Unilux horren (Adviesprijslijst 2026 +10% incl. BTW = consumentenprijs)
+# Bron: data/unilux-prijzen-2026.json (geverifieerd uit dealer.unilux.nl PDF)
+# Prijzen zijn AL advies-verkoop +10% incl BTW → geen extra markup.
+# ──────────────────────────────────────────────────────────────────
+UNILUX = json.load(open(os.path.expanduser('~/sonty/data/unilux-prijzen-2026.json')))['producten']
+
+def sample_idx(n, k):
+    if n <= k:
+        return list(range(n))
+    step = (n - 1) / (k - 1)
+    return sorted({round(i * step) for i in range(k)})
+
+UNI_SKU = {
+  'comfort':'COMF','super_plus':'SUPP','voorzethor':'VZH','inklemhor':'IKH','veerstifthor':'VSH',
+  'voorzet_unit':'VZU','inklem_unit':'IKU','unit_dubbel':'UDB','plissefit':'PF','plissefit_dubbel':'PFD',
+  'vaste_hordeur_luxe':'VHL','schuifhordeur_luxe':'SHL',
+}
+for key, p in UNILUX.items():
+    ws, hs, pr = p['widths'], p['heights'], p['prices']
+    wlabels = p.get('widths_label')
+    for hi in sample_idx(len(hs), 3):
+        for wi in sample_idx(len(ws), 4):
+            v = pr[hi][wi]
+            if not v:
+                continue
+            wl = wlabels[wi] if wlabels else str(ws[wi])
+            maat = f'{wl}×{hs[hi]} mm'
+            cat('Horren').append({
+                'naam': f"{p['naam']} {maat}",
+                'sku': f"UNI-{UNI_SKU[key]}-{ws[wi]}X{hs[hi]}",
+                'verkoop_incl': int(v),
+                'omschrijving': f"{p['naam']} (Unilux), breedte×hoogte {maat}, standaardgaas. Adviesverkoopprijs incl. 21% BTW.",
+            })
+prijzen['marge_per_categorie'].setdefault('Horren', 1.0)
+
+# Unilux opties als losse meerprijs-artikelen
+UO = json.load(open(os.path.expanduser('~/sonty/data/unilux-prijzen-2026.json')))['opties']
+for sku, naam, bedrag in [
+    ('UNI-OPT-POLLEN-RAAM', 'Meerprijs pollengaas (raamhor)', UO['gaas_pollen_raam']),
+    ('UNI-OPT-POLLEN-DEUR', 'Meerprijs pollengaas (luxe hordeur)', UO['gaas_pollen_deur_luxe']),
+    ('UNI-OPT-PETSCREEN', 'Meerprijs petscreengaas (luxe hordeur, huisdierbestendig)', UO['gaas_petscreen_deur_luxe']),
+    ('UNI-OPT-RAL', 'Meerprijs andere RAL-kleur (starttarief)', UO['ral_starttarief']),
+    ('UNI-OPT-KATTENLUIK', 'Meerprijs kattenluik (luxe hordeur)', UO['kattenluik_luxe']),
+    ('UNI-OPT-SLUITPOMP', 'Meerprijs zelfsluitende deur (hydraulische pomp)', UO['sluitpomp_luxe']),
+]:
+    cat('Horren').append({'naam': naam, 'sku': sku, 'verkoop_incl': int(bedrag),
+                          'omschrijving': 'Unilux meerprijs t.o.v. standaard, incl. BTW'})
+
+json.dump(prijzen, open(OUT, 'w'), indent=1, ensure_ascii=False)
+tellingen = {k: len(v) for k, v in prijzen['categorieen'].items()}
+print('\nMet Unilux horren:')
 print(json.dumps(tellingen, indent=1, ensure_ascii=False))
 print('Totaal artikelen:', sum(tellingen.values()))

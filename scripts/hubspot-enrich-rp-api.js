@@ -16,6 +16,7 @@ const RH = { Authorization: `Bearer ${RP}` };
 
 const arg = process.argv[2] || '5';
 const ALL = arg === 'all';
+const RECENT = arg === 'recent';   // leads van de afgelopen 3 uur (cron-modus)
 const DRY = process.argv.includes('--dry');
 
 const hget = async u => (await fetch(u, { headers: HH })).json();
@@ -77,8 +78,8 @@ async function getQuote(lcId) {
   const rp = await buildRpIndex();
   console.log(`RP items: ${rp.count} (telefoon-index ${rp.byPhone.size}, email-index ${rp.byEmail.size})\n`);
 
-  // HubSpot verse leads
-  const since = new Date(Date.now() - 10 * 864e5).toISOString().slice(0, 10);
+  // HubSpot verse leads (RECENT = afgelopen 3 uur, anders 10 dagen)
+  const since = RECENT ? String(Date.now() - 3 * 3600 * 1000) : new Date(Date.now() - 10 * 864e5).toISOString().slice(0, 10);
   const body = { filterGroups: [{ filters: [
       { propertyName: 'dealstage', operator: 'EQ', value: STAGE_NIEUWE_LEAD },
       { propertyName: 'createdate', operator: 'GTE', value: since }] }],
@@ -87,8 +88,8 @@ async function getQuote(lcId) {
   let deals = [], after, total = 0;
   do { const p = await hpost(`${HS}/crm/v3/objects/deals/search`, after ? { ...body, after } : body);
     total = p.total; deals.push(...(p.results || [])); after = p.paging?.next?.after;
-  } while (ALL && after && deals.length < total);
-  if (!ALL) deals = deals.slice(0, parseInt(arg, 10) || 5);
+  } while ((ALL || RECENT) && after && deals.length < total);
+  if (!ALL && !RECENT) deals = deals.slice(0, parseInt(arg, 10) || 5);
   console.log(`Verse leads: ${total}. Verwerk: ${deals.length}${DRY ? ' (DRY)' : ''}\n`);
 
   let matched = 0, enriched = 0, noMatch = 0;

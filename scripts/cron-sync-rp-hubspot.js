@@ -53,8 +53,9 @@ async function main() {
       .unref();
   } catch (e) {}
 
-  // WhatsApp/mail-status + samenvattingen bijwerken voor nieuwe leads (afgelopen 2u)
+  // Reuzenpanda-data (product/prijs/offerte-link) via de RP API + WhatsApp/mail bijwerken voor nieuwe leads
   try {
+    require('child_process').spawn(process.execPath, [__dirname + '/hubspot-enrich-rp-api.js', 'recent'], { detached: true, stdio: 'ignore' }).unref();
     require('child_process').spawn(process.execPath, [__dirname + '/hubspot-sync-trengo-wa.js', 'recent'], { detached: true, stdio: 'ignore' }).unref();
     require('child_process').spawn(process.execPath, [__dirname + '/hubspot-trengo-summary.js', 'recent'], { detached: true, stdio: 'ignore' }).unref();
   } catch (e) {}
@@ -69,6 +70,12 @@ async function main() {
       fs.writeFileSync(mark, today);
     }
   } catch (e) {}
+
+  // De oude Playwright RP-sync + WhatsApp-follow-up hieronder is vervangen door de API-hooks hierboven
+  // (hubspot-enrich-rp-api.js) en faalde structureel ("Failed to fetch backend.reuzenpanda.nl").
+  // Uitgeschakeld om errors en link-overschrijvingen te voorkomen.
+  console.log('[' + new Date().toISOString().substring(11, 19) + '] API-hooks gestart; oude browser-sync overgeslagen.');
+  return;
 
   // 1. Get ALL HubSpot deals in Sonty pipeline (not just without desc — also re-check existing for updates)
   const hsRes = await (await fetch(HS_BASE + '/crm/v3/objects/deals/search', {

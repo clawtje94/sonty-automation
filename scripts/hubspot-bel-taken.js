@@ -93,7 +93,7 @@ async function getOpenBelTaak(dealId) {
       { propertyName: 'createdate', operator: 'GTE', value: sinceValue },
     ] }],
     sorts: [{ propertyName: 'createdate', direction: 'ASCENDING' }],
-    properties: ['dealname', 'createdate', 'sonty_reuzenpanda_link', 'sonty_offerte_link', 'sonty_first_quote_amount', 'product_categorie', 'inkoopbedrag', 'amount', 'sonty_wa_contact_gehad', 'sonty_wa_status', 'sonty_wa_link'],
+    properties: ['dealname', 'createdate', 'sonty_reuzenpanda_link', 'sonty_offerte_link', 'sonty_first_quote_amount', 'product_categorie', 'inkoopbedrag', 'amount', 'sonty_wa_contact_gehad', 'sonty_wa_status', 'sonty_wa_link', 'sonty_niet_bellen'],
     limit: LIMIT,
   };
   // Pagineer: bij 'all' alle pagina's ophalen, anders alleen de eerste (max LIMIT)
@@ -136,7 +136,11 @@ async function getOpenBelTaak(dealId) {
     if ((np && teVer.phones.has(np)) || teVer.names.has(naamLower)) reden = 'TE VER';
     else if (inkoopHS > 0 || (np && teVer.akkoordPhones.has(np)) || teVer.akkoordNames.has(naamLower)) reden = 'AKKOORD';
     if (reden) {
-      if (!DRY) { const ex = await getOpenBelTaak(id); if (ex) await fetch(`${BASE}/crm/v3/objects/tasks/${ex}`, { method: 'DELETE', headers: H }); }
+      if (!DRY) {
+        const ex = await getOpenBelTaak(id); if (ex) await fetch(`${BASE}/crm/v3/objects/tasks/${ex}`, { method: 'DELETE', headers: H });
+        // vlag voor het belscherm (sonty.nl/admin/belscherm): deze lead niet bellen
+        if (d.properties.sonty_niet_bellen !== 'true') await jpatch(`${BASE}/crm/v3/objects/deals/${id}`, { properties: { sonty_niet_bellen: 'true' } });
+      }
       console.log(`${reden}  ${naam} — overgeslagen`);
       teVerSkip++; continue;
     }

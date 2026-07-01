@@ -242,6 +242,21 @@ async function setStatus(itemId, statusId) {
   return rpPatch('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items/' + itemId, { item: { status_id: statusId } });
 }
 
+// Sheets write met throttle (limiet 60/min) + retry bij 429 quota-fout
+async function sheetsWrite(fn) {
+  await new Promise(r => setTimeout(r, 1100));
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try { return await fn(); }
+    catch (e) {
+      if (e.code === 429 || e.status === 429) {
+        console.log('  Sheets 429, wacht 65s (poging ' + (attempt + 1) + ')');
+        await new Promise(r => setTimeout(r, 65000));
+      } else throw e;
+    }
+  }
+  throw new Error('Sheets write bleef 429 geven na 3 pogingen');
+}
+
 async function getDocForItem(lcId) {
   const data = await rpGet('/document-service/v1/' + PID + '/quotations?lead_configuration_id=' + lcId);
   const docs = data?.quotationDatas || [];
@@ -1643,17 +1658,18 @@ async function main() {
         nextRow++;
       }
 
-      await sheets.spreadsheets.values.update({
+      // Google Sheets limiet: 60 writes/min/user — throttle + retry bij 429 (quota)
+      await sheetsWrite(() => sheets.spreadsheets.values.update({
         spreadsheetId: SHEET_ID, range: "'" + sheetTabNaam + "'!A" + nextRow + ':L' + nextRow,
         valueInputOption: 'USER_ENTERED', requestBody: { values: [newRow] },
-      });
-      await sheets.spreadsheets.batchUpdate({
+      }));
+      await sheetsWrite(() => sheets.spreadsheets.batchUpdate({
         spreadsheetId: SHEET_ID, requestBody: { requests: [{ repeatCell: {
           range: { sheetId: tab.id, startRowIndex: nextRow - 1, endRowIndex: nextRow, startColumnIndex: 0, endColumnIndex: 12 },
           cell: { userEnteredFormat: { backgroundColor: { red: 1, green: 1, blue: 0 } } },
           fields: 'userEnteredFormat.backgroundColor',
         }}]},
-      });
+      }));
       written++;
       nextRow++;
     }

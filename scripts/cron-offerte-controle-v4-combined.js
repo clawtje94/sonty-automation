@@ -466,20 +466,15 @@ function reorderAndMerge(lines) {
     if (l.pricePerUnit === 0 && (l.units === 0 || d.length < 5)) { opmerkingen.push(l); continue; }
     producten.push(l);
   }
-  // Dedup tahoma: als er meerdere identieke tahoma-regels zijn, houd 1 met opgetelde units
-  const tahomaDeduped = [];
-  const tahomaKeys = {};
-  for (const t of tahomaLines) {
-    const key = (t.description?.split('\n')[0] || '') + '|' + t.pricePerUnit;
-    if (!tahomaKeys[key]) {
-      tahomaKeys[key] = { ...t };
-      tahomaDeduped.push(tahomaKeys[key]);
-    } else {
-      tahomaKeys[key].units += t.units;
-      changed = true;
-    }
+  // Tahoma: altijd 1 stuk per offerte (RP voegt er meerdere toe per productgroep)
+  let tahomaLine = null;
+  if (tahomaLines.length > 0) {
+    tahomaLine = { ...tahomaLines[0], units: 1 };
+    if (tahomaLines.length > 1) changed = true;
   }
-  const newLines = [...producten, ...montageLines, ...tahomaDeduped, ...opmerkingen];
+  const newLines = [...producten, ...montageLines];
+  if (tahomaLine) newLines.push(tahomaLine);
+  newLines.push(...opmerkingen);
   if (newLines.length !== lines.length) changed = true;
   else for (let i = 0; i < lines.length; i++) {
     if (lines[i].description?.split('\n')[0] !== newLines[i].description?.split('\n')[0] ||
@@ -493,32 +488,66 @@ function reorderAndMerge(lines) {
 // Self-check: verifieer resultaat VOOR opslaan
 function selfCheck(origLines, newLines) {
   const errors = [];
-  // Product prijzen: V4 mag prijzen corrigeren, dus alleen checken of er GEEN producten verdwenen zijn
-  const origProductCount = origLines.filter(l => {
+  const isTahoma = l => (l.description?.split('\n')[0] || '').toLowerCase().includes('tahoma');
+  const isProduct = l => {
     const d = (l.description?.split('\n')[0] || '').toLowerCase();
-    return !d.includes('montage') && !d.includes('inmeten') && !d.includes('tahoma') && l.pricePerUnit > 0;
-  }).length;
-  const newProductCount = newLines.filter(l => {
-    const d = (l.description?.split('\n')[0] || '').toLowerCase();
-    return !d.includes('montage') && !d.includes('inmeten') && !d.includes('tahoma') && l.pricePerUnit > 0;
-  }).length;
-  if (origProductCount !== newProductCount) {
-    errors.push('Aantal producten gewijzigd! orig: ' + origProductCount + ' nieuw: ' + newProductCount);
-  }
-  // Tahoma: identieke regels moeten gedesupt zijn (1 regel met opgetelde units)
-  const tahomaKeys = {};
-  newLines.forEach(l => {
-    if (l.description?.toLowerCase().includes('tahoma')) {
-      const k = (l.description?.split('\n')[0] || '') + '|' + l.pricePerUnit;
-      tahomaKeys[k] = (tahomaKeys[k] || 0) + 1;
-    }
-  });
-  for (const [k, c] of Object.entries(tahomaKeys)) { if (c > 1) errors.push('Tahoma duplicaat niet gedesupt'); }
-  // Units check: totaal units per type mag niet wijzigen
-  const origTotal = origLines.reduce((s, l) => s + l.units, 0);
-  const newTotal = newLines.reduce((s, l) => s + l.units, 0);
+    return !d.includes('montage') && !d.includes('inmeten') && !isTahoma(l) && l.pricePerUnit > 0;
+  };
+  // Check 1: product count
+  const origPC = origLines.filter(isProduct).length;
+  const newPC = newLines.filter(isProduct).length;
+  if (origPC !== newPC) errors.push('Aantal producten gewijzigd! orig: ' + origPC + ' nieuw: ' + newPC);
+  // Check 2: units (excl Tahoma)
+  const origTotal = origLines.filter(l => !isTahoma(l)).reduce((s, l) => s + l.units, 0);
+  const newTotal = newLines.filter(l => !isTahoma(l)).reduce((s, l) => s + l.units, 0);
   if (origTotal !== newTotal) errors.push('Totaal units gewijzigd! orig: ' + origTotal + ' nieuw: ' + newTotal);
   return errors;
+}
+
+function selfCheckAndFix(origLines, newLines) {
+  const isTahoma = l => (l.description?.split('\n')[0] || '').toLowerCase().includes('tahoma');
+
+  // Ronde 1: check
+  let errors = selfCheck(origLines, newLines);
+  if (errors.length === 0) return { lines: newLines, errors: [], fixed: false };
+
+  // Ronde 2: probeer te fixen
+  let fixed = [...newLines];
+  const fixes = [];
+
+  // Fix: Tahoma duplicaten → dedup naar 1 met units=1
+  const tahomaLines = fixed.filter(isTahoma);
+  if (tahomaLines.length > 1) {
+    fixed = fixed.filter(l => !isTahoma(l));
+    fixed.push({ ...tahomaLines[0], units: 1 });
+    fixes.push('tahoma gedesupt');
+  }
+
+  // Fix: montage units check — als montage lijnen gemerged zijn, units moeten kloppen
+  const isMontage = l => {
+    const d = (l.description?.split('\n')[0] || '').toLowerCase();
+    return d.includes('montage') || d.includes('inmeten');
+  };
+  const origMontageUnits = origLines.filter(isMontage).reduce((s, l) => s + l.units, 0);
+  const newMontageUnits = fixed.filter(isMontage).reduce((s, l) => s + l.units, 0);
+  if (origMontageUnits !== newMontageUnits && origMontageUnits > 0) {
+    // Montage units kloppen niet — herstel naar origineel totaal
+    const montageLijnen = fixed.filter(isMontage);
+    if (montageLijnen.length === 1 && origMontageUnits > montageLijnen[0].units) {
+      montageLijnen[0].units = origMontageUnits;
+      fixes.push('montage units hersteld naar ' + origMontageUnits);
+    }
+  }
+
+  // Ronde 3: hercheck na fixes
+  errors = selfCheck(origLines, fixed);
+  if (errors.length === 0) {
+    console.log('    Self-check gerepareerd: ' + fixes.join(', '));
+    return { lines: fixed, errors: [], fixed: true };
+  }
+
+  // Nog steeds fout — niet fixbaar
+  return { lines: newLines, errors, fixed: false };
 }
 
 // ============ VERKOOPTEKSTEN (ENHANCE) — goedgekeurd door Daimy 2026-06-10 (test offerte #20266838) ============
@@ -668,7 +697,7 @@ function enhanceAllDescriptions(lines) {
         }
         // V4: voeg kleur-annotatie, product-info en upgrade/downgrade opties toe
         const hasTahoma = lines.some(l => (l.description || '').toLowerCase().includes('tahoma'));
-        lines[i].description = addV4Enhancements(lines[i].description, fl, hasTahoma);
+        lines[i].description = addV4Enhancements(lines[i].description, fl, hasTahoma, lines[i].pricePerUnit);
       }
     }
     if (lines[i].description !== orig) changed = true;
@@ -822,15 +851,19 @@ function isStandaardKleur(productKey, kleurStr) {
   return kleuren.some(k => norm.includes(k.toLowerCase()));
 }
 
-function buildUpgradeDowngradeBlock(productKey, breedteCm, hoogteCm, uitvalCm, hasIO, kleurType, hasTahoma, isDraaischakelaar) {
+function buildUpgradeDowngradeBlock(productKey, breedteCm, hoogteCm, uitvalCm, hasIO, kleurType, hasTahoma, isDraaischakelaar, actualPrice) {
+  // actualPrice: de werkelijke offerte prijs (voor voorraadschermen die een afwijkende prijs hebben)
   // kleurType: 'standaard', 'trend', 'ral'
   const product = SUNMASTER_PRICES[productKey];
   if (!product) return '';
   // Normaliseer category: 'zipscreen' → 'screen' voor v3 compatibiliteit
   const rawCat = product.category;
   const pCat = rawCat === 'zipscreen' ? 'screen' : rawCat;
-  const currentPrice = lookupPrice(productKey, breedteCm, hoogteCm, uitvalCm);
-  if (!currentPrice) return '';
+  const bookPrice = lookupPrice(productKey, breedteCm, hoogteCm, uitvalCm);
+  if (!bookPrice && !actualPrice) return '';
+  const currentPrice = bookPrice || 0;
+  // Bij voorraadschermen: gebruik de werkelijke offerte prijs voor vergelijking
+  const comparePrice = actualPrice || (currentPrice * MARKUP);
   const hz = SUNMASTER_PRICES.handzenderPrijs || 76;
   const lines = ['', '', '**Liever een ander model of bediening?**', ''];
 
@@ -852,7 +885,7 @@ function buildUpgradeDowngradeBlock(productKey, breedteCm, hoogteCm, uitvalCm, h
     if (key === 'screenSquare85100' && (productKey === 'zipDesign110' || productKey === 'zipSquare85100')) {
       altPrice += 199; // Sunilus IO upgrade t.o.v. LT50
     }
-    const diff = Math.round((altPrice - currentPrice) * MARKUP);
+    const diff = Math.round(altPrice * MARKUP - comparePrice);
 
     // Bij pergola-alternatieven: toon welke maten het alternatief heeft
     let maatInfo = '';
@@ -1029,7 +1062,7 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
     // Tabel = Sunilus IO
     if (isIO) totaal += hz;
     else if (isDraaischakelaar) totaal -= 89; // LT50
-    else if (isSolar) totaal += 135; // Solar Brel incl handzender, geen extra hz
+    else if (isSolar) totaal += 173 + hz; // Somfy RS 100 IO Solar (excl zender) + handzender
     else totaal += hz;
   }
   else if (pCat === 'rolluik') {
@@ -1134,7 +1167,7 @@ function correctProductPrice(line, productKey, breedteCm, hoogteCm, uitvalCm) {
   return false;
 }
 
-function addV4Enhancements(desc, firstLine, hasTahoma) {
+function addV4Enhancements(desc, firstLine, hasTahoma, linePrice) {
   if (desc.includes('Liever een ander model')) return desc; // idempotent
   const pKey = getProductKey(firstLine);
   if (!pKey) return desc;
@@ -1263,7 +1296,9 @@ function addV4Enhancements(desc, firstLine, hasTahoma) {
     kleurType = isTrend ? 'trend' : 'ral';
   }
 
-  const block = buildUpgradeDowngradeBlock(pKey, maat.breedte, maat.hoogte, maat.uitval, hasIO, kleurType, hasTahoma || false, isDraaischakelaar);
+  // Bij voorraadschermen: geef de werkelijke prijs mee zodat up/downgrades t.o.v. de echte prijs worden berekend
+  const isVoorraad = firstLine.includes('voorraad');
+  const block = buildUpgradeDowngradeBlock(pKey, maat.breedte, maat.hoogte, maat.uitval, hasIO, kleurType, hasTahoma || false, isDraaischakelaar, isVoorraad ? linePrice : null);
   if (block) return lines.join('\n') + block;
   return lines.join('\n');
 }
@@ -1339,9 +1374,22 @@ async function main() {
 
     const qd = fullData.quotationData;
     const plg = qd.segments?.defaultTemplatePriceLineGroup;
-    if (!plg?.data?.lines) continue;
+    const lines = plg?.data?.lines || [];
 
-    const lines = plg.data.lines;
+    // Gordijnen/behang detectie VOOR lege-offerte skip (desc-based, niet afhankelijk van productlijnen)
+    const desc = item.description || '';
+    const email = desc.match(/E-mailadres:\s*([^\n]+)/i)?.[1]?.trim() || item.fields?.email || '';
+    const descLower = desc.toLowerCase();
+    const isGordijnDesc = descLower.includes('gordijn') || (descLower.includes('pliss') && !descLower.includes('zip')) || descLower.includes('behang');
+    if (isGordijnDesc && lines.length <= 1 && (!lines[0] || !lines[0].pricePerUnit)) {
+      if (email) await sendGordijnenEmail(item.summary, email);
+      await setStatus(item.id, GORDIJNEN_STATUS);
+      console.log('  → Gordijnen/showroom (lege offerte): ' + item.summary);
+      routeCount++; continue;
+    }
+
+    if (lines.length === 0) continue;
+
     const origLines = JSON.parse(JSON.stringify(lines)); // backup voor self-check
 
     // Persistente backup naar disk (voor herstel bij fouten)
@@ -1351,14 +1399,12 @@ async function main() {
     if (!fs.existsSync(backupFile)) {
       fs.writeFileSync(backupFile, JSON.stringify({ quotationNumber: docInfo.quotationNumber, documentId: docInfo.documentId, name: item.summary, timestamp: new Date().toISOString(), lines: origLines }, null, 2));
     }
-    const desc = item.description || '';
-    const email = desc.match(/E-mailadres:\s*([^\n]+)/i)?.[1]?.trim() || item.fields?.email || '';
     const city = desc.match(/Plaats:\s*([^\n]+)/i)?.[1]?.trim() || '';
     const opmerking = desc.match(/Opmerking:\s*([\s\S]*?)(?=\n\d+x |\n*$)/i)?.[1]?.trim() || '';
     const hasToevoegingen = opmerking.toLowerCase().includes('toevoeg') || opmerking.toLowerCase().includes('aanpass') || desc.includes('TOEVOEGEN');
     const isMarkies = lines.some(l => l.description?.toLowerCase().includes('markies'));
     const isGordijn = lines.some(l => l.description?.toLowerCase().includes('gordijn') || (l.description?.toLowerCase().includes('plisse') && !l.description?.toLowerCase().includes('zip')))
-      || desc.toLowerCase().includes('gordijn') || (desc.toLowerCase().includes('pliss') && !desc.toLowerCase().includes('zip'));
+      || descLower.includes('gordijn') || (descLower.includes('pliss') && !descLower.includes('zip'));
 
     // Bedrag berekenen
     const total = lines.reduce((s, l) => s + l.units * l.pricePerUnit, 0);
@@ -1461,13 +1507,18 @@ async function main() {
     const { newLines, changed: reorderChanged } = reorderAndMerge(lines);
     if (reorderChanged) changed = true;
 
-    // STAP 4: SELF-CHECK (skip voor markiezen — prijzen veranderen bij markies-opbouw)
+    // STAP 4: SELF-CHECK + AUTO-FIX (skip voor markiezen — prijzen veranderen bij markies-opbouw)
     if (!isMarkies) {
-      const errors = selfCheck(origLines, newLines);
-      if (errors.length > 0) {
-        console.log('⚠️ SELF-CHECK FAIL #' + docInfo.quotationNumber + ' ' + item.summary + ': ' + errors.join(', '));
-        await sendTelegram('⚠️ Self-check fail: #' + docInfo.quotationNumber + ' ' + item.summary + '\n' + errors.join('\n'));
+      const scResult = selfCheckAndFix(origLines, newLines);
+      if (scResult.errors.length > 0) {
+        console.log('⚠️ SELF-CHECK FAIL (niet fixbaar) #' + docInfo.quotationNumber + ' ' + item.summary + ': ' + scResult.errors.join(', '));
+        await sendTelegram('⚠️ Self-check fail (niet fixbaar): #' + docInfo.quotationNumber + ' ' + item.summary + '\n' + scResult.errors.join('\n'));
         errorCount++; continue;
+      }
+      if (scResult.fixed) {
+        newLines.length = 0;
+        newLines.push(...scResult.lines);
+        changed = true;
       }
     }
 
@@ -1570,30 +1621,50 @@ async function main() {
     const newRows = rows.filter(r => !existingNrs.has(r[6]));
     if (newRows.length === 0) continue;
 
-    const fullRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: "'" + sheetTabNaam + "'!A4:A2000" });
-    let lastRow = 3;
-    for (let i = (fullRes.data.values || []).length - 1; i >= 0; i--) {
-      if ((fullRes.data.values || [])[i][0]?.trim()) { lastRow = i + 4; break; }
-    }
-    const startRow = lastRow + 1;
+    // BACKUP: sla huidige sheet data op voor herstel bij fouten
+    const fullRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: "'" + sheetTabNaam + "'!A4:X3000" });
+    const existingRows = fullRes.data.values || [];
+    const backupPath = path.join(__dirname, '../data/sheet-backup-' + sheetTabNaam.trim().replace(/\s+/g, '-') + '.json');
+    fs.writeFileSync(backupPath, JSON.stringify({ tab: sheetTabNaam, timestamp: new Date().toISOString(), rows: existingRows }, null, 2));
 
-    await sheets.spreadsheets.values.update({
-      spreadsheetId: SHEET_ID, range: "'" + sheetTabNaam + "'!A" + startRow + ':L' + (startRow + newRows.length - 1),
-      valueInputOption: 'USER_ENTERED', requestBody: { values: newRows },
-    });
-    await sheets.spreadsheets.batchUpdate({
-      spreadsheetId: SHEET_ID, requestBody: { requests: [{ repeatCell: {
-        range: { sheetId: tab.id, startRowIndex: startRow - 1, endRowIndex: startRow - 1 + newRows.length, startColumnIndex: 0, endColumnIndex: 12 },
-        cell: { userEnteredFormat: { backgroundColor: { red: 1, green: 1, blue: 0 } } },
-        fields: 'userEnteredFormat.backgroundColor',
-      }}]},
-    });
-    sheetRows += newRows.length;
+    // Schrijf RIJ VOOR RIJ — sla elke rij met data in A, T, U, V of X over
+    let written = 0;
+    let nextRow = 4;
+    for (const newRow of newRows) {
+      // Zoek de eerstvolgende volledig lege rij (geen A, geen T/U/V/X)
+      while (nextRow - 4 < existingRows.length) {
+        const r = existingRows[nextRow - 4];
+        const hasA = r?.[0]?.toString().trim();
+        const hasT = r?.[19]?.toString().trim();
+        const hasU = r?.[20]?.toString().trim();
+        const hasV = r?.[21]?.toString().trim();
+        const hasX = r?.[23]?.toString().trim();
+        if (!hasA && !hasT && !hasU && !hasV && !hasX) break; // lege rij gevonden
+        nextRow++;
+      }
+
+      await sheets.spreadsheets.values.update({
+        spreadsheetId: SHEET_ID, range: "'" + sheetTabNaam + "'!A" + nextRow + ':L' + nextRow,
+        valueInputOption: 'USER_ENTERED', requestBody: { values: [newRow] },
+      });
+      await sheets.spreadsheets.batchUpdate({
+        spreadsheetId: SHEET_ID, requestBody: { requests: [{ repeatCell: {
+          range: { sheetId: tab.id, startRowIndex: nextRow - 1, endRowIndex: nextRow, startColumnIndex: 0, endColumnIndex: 12 },
+          cell: { userEnteredFormat: { backgroundColor: { red: 1, green: 1, blue: 0 } } },
+          fields: 'userEnteredFormat.backgroundColor',
+        }}]},
+      });
+      written++;
+      nextRow++;
+    }
+    sheetRows += written;
   }
 
   console.log('Sheet: ' + sheetRows + ' rijen, ' + teVerSheetCount + ' TE VER');
 
   // GECONTROLEERD → OFFERTE VERSTUURD (geactiveerd door Daimy 2026-06-29)
+  // Haal VERS op (niet cached) zodat ook items die in DEZE run naar GC zijn gezet worden meegenomen
+  await new Promise(r => setTimeout(r, 5000)); // 5s wachten zodat RP de status-wijzigingen heeft verwerkt
   const gcToOvData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
   const gcToOv = (gcToOvData?.items || []).filter(i =>
     i.status_id === GECONTROLEERD && !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')

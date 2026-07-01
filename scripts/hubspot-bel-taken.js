@@ -118,6 +118,8 @@ async function getOpenBelTaak(dealId) {
   for (const d of todo) {
     await new Promise(r => setTimeout(r, 80)); // throttle tegen rate limits
     const id = d.id, naam = d.properties.dealname || 'Onbekend';
+    // proefleads (belscherm-test) krijgen geen bel-taak
+    if (/proefklant|\btest\b/i.test(naam)) continue;
     // contact + telefoon
     const ac = await jget(`${BASE}/crm/v4/objects/deals/${id}/associations/contacts`);
     const cid = ac.results && ac.results[0] && ac.results[0].toObjectId;

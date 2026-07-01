@@ -94,6 +94,8 @@ async function getQuote(lcId) {
 
   let matched = 0, enriched = 0, noMatch = 0;
   for (const d of deals) {
+    // proefleads (belscherm-test) nooit overschrijven met echte RP-data
+    if (/proefklant|\btest\b/i.test(d.properties.dealname || '')) continue;
     await new Promise(r => setTimeout(r, 60));
     const ac = await hget(`${HS}/crm/v4/objects/deals/${d.id}/associations/contacts`);
     const cid = ac.results?.[0]?.toObjectId; if (!cid) { noMatch++; continue; }

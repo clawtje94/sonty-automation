@@ -791,6 +791,15 @@ function lookupPrice(productKey, breedteCm, hoogteCm, uitvalCm) {
     const uitvalMM = (uitvalCm || 300) * 10; // cm → mm voor tabel lookup
     const tbl = product.tables[findNearest(product.tables, uitvalMM)?.key];
     if (!tbl) return null;
+    const maxBreedte = Math.max(...Object.keys(tbl).map(Number));
+    // GEKOPPELDE PERGOLA: breder dan de tabel (>6000mm) = 2 pergola's gekoppeld.
+    // Prijs = 2× een pergola van de halve breedte (bv. 9000mm = 2× 4500mm).
+    if (pCat === 'pergola' && breedteCm > maxBreedte) {
+      const halveBreedte = Math.ceil(breedteCm / 2);
+      if (halveBreedte > maxBreedte) return null; // > 2×6000mm: niet zeker → handmatige controle
+      const half = findNearest(tbl, halveBreedte)?.value;
+      return half ? half * 2 : null;
+    }
     return findNearest(tbl, breedteCm)?.value || null;
   }
   if (product.tableLarge || product.tableSmall) {

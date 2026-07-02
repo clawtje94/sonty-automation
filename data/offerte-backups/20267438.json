@@ -1,0 +1,28 @@
+{
+  "quotationNumber": "20267438",
+  "documentId": "6d08a7a2-3f8d-4fff-a67e-1adef6aaec21",
+  "name": "Marcel Trouw",
+  "timestamp": "2026-06-22T07:33:03.929Z",
+  "lines": [
+    {
+      "units": 2,
+      "description": "Rolluik (RollSUPER)\nBreedte: 1550 mm\nHoogte: 1530 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 7016 structuur\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1263.3,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "Inmeten + montage rolluik solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

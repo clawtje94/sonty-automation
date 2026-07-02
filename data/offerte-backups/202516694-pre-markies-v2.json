@@ -1,0 +1,94 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suneye voorraad scherm\nBreedte: 5000 mm\nUitval: 3000 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: Grijs\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 3267,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 0,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 1100mm\n- Uitval: 900 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Somfy IO motor Solar\n- Montage: ",
+      "pricePerUnit": 1868,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 1,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 1900 mm\nHoogte: 1500 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9010\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1513,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 2,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 1700mm\n- Uitval: 900 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 1372,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 3,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "Markies\n- Breedte: 1100mm\n- Uitval: 900 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 1239,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 4,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering",
+      "pricePerUnit": 250,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 5,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 4,
+      "description": "Montage markies (houten kappen)\n- montage\n- klein materiaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 6,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Eolis 3D windsensor IO\n- Windbeveiliging in de voorlijst\n- De windsensor is een hulp stuk hier kunnen geen garantie rechten aan verleend worden mbt windschade.",
+      "pricePerUnit": 153.13,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 7,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage screen solar ( GRATIS MONTAGE )\n- Montage\n- Klein materiaal\n- Afstellen motor",
+      "pricePerUnit": 0,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 8,
+      "lockTotalPrice": false
+    }
+  ]
+}

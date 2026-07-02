@@ -1,0 +1,38 @@
+{
+  "quotationNumber": "20267498",
+  "documentId": "76d38a3e-9437-43a7-9752-db8149e022e5",
+  "name": "Carla Vis",
+  "timestamp": "2026-06-22T11:01:33.171Z",
+  "lines": [
+    {
+      "units": 2,
+      "description": "SunProject 100\nBreedte: 5000 mm\nUitval: 1150 mm\nFrame Kleur: Technisch aluminium\nKleur doek: NTB\nBediening: Draaischakelaar\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 2677.28,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "Inmeten + Montage uitvalscherm\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+      "pricePerUnit": 195,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

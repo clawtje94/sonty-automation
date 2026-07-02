@@ -1,0 +1,54 @@
+{
+  "lines": [
+    {
+      "units": 2,
+      "description": "Markies\n- Breedte: 1330mm\n- Uitval: 800 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Motor + afstandsbediening\n- Montage: ",
+      "pricePerUnit": 1839,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 0,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2990mm\n- Uitval: 1350 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 2166,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 1,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2090mm\n- Uitval: 1000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 1658,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 2,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Somfy Connectivity\n- Telefoon bediening Somfy motoren.",
+      "pricePerUnit": 129.27,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 3,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 4,
+      "description": "Montage markies (houten kappen)\n- montage\n- klein materiaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 4,
+      "lockTotalPrice": false
+    }
+  ]
+}

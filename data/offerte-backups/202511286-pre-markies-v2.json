@@ -1,0 +1,44 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 2895 mm\nHoogte: 1794 mm\nKastmaat: 105 mm\nFrame kleur: TNA\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening bedraad\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1699,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor",
+      "pricePerUnit": 150,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2985mm\n- Uitval: 1650 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Motor + afstandsbediening\n- Montage: ",
+      "pricePerUnit": 3296,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage markies (houten kappen)\n- montage\n- klein materiaal",
+      "pricePerUnit": 275,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

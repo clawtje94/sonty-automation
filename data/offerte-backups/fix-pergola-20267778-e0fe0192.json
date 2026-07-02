@@ -1,0 +1,281 @@
+{
+ "documentId": "e0fe0192-0de7-4ffa-9119-edafff8814c9",
+ "versionId": "53133bdd-3954-4942-858e-f67de6acede5",
+ "documentTitle": "Offerte #20267778",
+ "documentStatus": "SENT",
+ "documentNumber": "20267778",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20267778",
+ "quotationNumber": "20267778",
+ "quotationTitle": "Offerte #20267778",
+ "quotationCreationTimestamp": 1782366032076,
+ "quotationExpirationTimestamp": 1784958032076,
+ "quotationStatus": "SENT",
+ "isoCurrency": "EUR",
+ "subjects": {
+  "leadConfiguration": "546cd880-63a3-4db2-9429-d890474ebf6a",
+  "contactPerson": "8e65bf17-cb85-4926-bccd-32f9bfc1282b"
+ },
+ "segments": {
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 1,
+      "description": "**Pergola 165 zip**\nType: pergola bedraad\nBreedte: 8500 mm\nUitval: 3500 mm\nFrame Kleur: RAL 7016 structuur\nKleur doek: NTB\nBediening: afstandsbediening\nMotor: somfy IO motor\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nWaarom deze pergola:\n- Sunmaster Pergola: terrasoverkapping met waterdicht doek\n- Beschermd tegen zon en regen: uw terras het hele jaar bruikbaar\n- Stevig aluminium frame: duurzaam en onderhoudsarm\n- Gemotoriseerd: doek in- en uitrollen met afstandsbediening\n\nGarantie:\n- 5 jaar op het product.\n- 7 jaar op de motor",
+      "pricePerUnit": 14477.3,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "**Inmeten + montage Pergola**\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 650,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "15% tijdelijke actie",
+     "amount": 15,
+     "type": "PERCENTAGE",
+     "vatPercentage": 21
+    }
+   }
+  },
+  "28c31f18-8da0-4821-810e-48830c60042a": {
+   "type": "text",
+   "data": "**Waarom Sonty?**\n\n- Sunmaster Premium Dealer: wij leveren uitsluitend A-merk zonwering van de hoogste kwaliteit\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij u thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 500+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+  }
+ },
+ "pricing": {
+  "total": 12858.205
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "28c31f18-8da0-4821-810e-48830c60042a"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

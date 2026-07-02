@@ -1,0 +1,44 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2700mm\n- Uitval: 1000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Handbediend\n- Montage:",
+      "pricePerUnit": 1814,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 0,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Doek vervangen Markies\nBreedte : 2700 mm \nUitval : 1000 mm\nKleur : Ntb",
+      "pricePerUnit": 1150,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 1,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage markies (Aluminium kappen)\n- montage\n- klein materiaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 2,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Demonteren/ terug plaatsen doek",
+      "pricePerUnit": 200,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 3,
+      "lockTotalPrice": false
+    }
+  ]
+}

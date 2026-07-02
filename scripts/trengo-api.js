@@ -9,7 +9,7 @@ const path = require('path');
 
 const TRENGO_EMAIL = 'daimy@sonty.nl';
 const TRENGO_PASSWORD = 'CZ%bWD64XVs6Kf';
-const STYTCH_ORG_ID = 'organization-live-52c4e194-a68f-4c3c-8bbb-a4db6b498b29';
+const STYTCH_ORG_ID = 'organization-live-adb9d87b-579e-4155-8afa-7b72b0d4760e';
 const STYTCH_PUBLIC_TOKEN = 'public-token-live-5dda5d15-f149-4631-a28c-dea06989205d';
 const STYTCH_AUTH = Buffer.from(STYTCH_PUBLIC_TOKEN + ':' + STYTCH_PUBLIC_TOKEN).toString('base64');
 const TOKEN_FILE = path.join(__dirname, '.trengo-jwt.txt');
@@ -63,13 +63,14 @@ async function getToken() {
     throw new Error('Stytch auth failed: ' + res.status + ' ' + err.substring(0, 200));
   }
 
-  const data = await res.json();
+  const raw = await res.json();
+  const data = raw.data || raw;
   if (!data.session_jwt) throw new Error('No JWT in response');
 
   // Cache token
   fs.writeFileSync(TOKEN_FILE, JSON.stringify({
     jwt: data.session_jwt,
-    expires_at: data.session?.expires_at || new Date(Date.now() + 604800000).toISOString(),
+    expires_at: data.member_session?.expires_at || new Date(Date.now() + 604800000).toISOString(),
   }));
 
   console.log('[Trengo] JWT refreshed, expires:', data.session?.expires_at);

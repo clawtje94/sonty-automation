@@ -1,0 +1,229 @@
+{
+ "documentId": "75c96483-b0c3-4b88-9b27-705afd4472d8",
+ "versionId": "f75e63cf-60cd-4637-b82a-23ffcbcfbaf7",
+ "documentTitle": "Offerte #20261052",
+ "documentStatus": "SENT",
+ "documentNumber": "20261052",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20261052",
+ "quotationNumber": "20261052",
+ "quotationTitle": "Offerte #20261052",
+ "quotationCreationTimestamp": 1771085315579,
+ "quotationExpirationTimestamp": 1773677315579,
+ "quotationStatus": "SENT",
+ "isoCurrency": "EUR",
+ "subjects": {
+  "leadConfiguration": "9bcefab1-0bb9-4801-afa8-8538a3bf01f5",
+  "contactPerson": "ced23aab-5086-439a-86a0-739ba927d5c5"
+ },
+ "segments": {
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 1,
+      "description": "Pergola 165 zip\nBreedte: 10000 mm\nUitval: 3000 mm\nFrame Kleur: RAL 7016 structuur\nKleur doek: NTB\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product.\n- 7 jaar op de motor",
+      "pricePerUnit": 13691.5,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "montage Pergola\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 450,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "15% tijdelijke actie",
+     "amount": 15,
+     "type": "PERCENTAGE",
+     "vatPercentage": 21
+    }
+   }
+  }
+ },
+ "pricing": {
+  "total": 12020.275
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

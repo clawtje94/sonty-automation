@@ -1,0 +1,44 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 1610mm\n- Uitval: 900 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 1226,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage markies (houten kappen)\n- montage\n- klein materiaal",
+      "pricePerUnit": 250,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 1610mm\n- Uitval: 900 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 1230,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage markies (houten kappen)\n- montage\n- klein materiaal",
+      "pricePerUnit": 250,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

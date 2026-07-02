@@ -1,0 +1,24 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 3310mm\n- Uitval: 2000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Draaischakelaar\n- Montage: ",
+      "pricePerUnit": 3646.94,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage markies (Aluminiumkappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

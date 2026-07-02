@@ -1,0 +1,236 @@
+{
+ "documentId": "3875b829-c941-4fc6-a001-9b271ce9d05f",
+ "versionId": "2d4ccb72-c3a3-4911-a8a0-4073f7794bf4",
+ "documentTitle": "Offerte #20264780",
+ "documentStatus": "SENT",
+ "documentNumber": "20264780",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20264780",
+ "quotationNumber": "20264780",
+ "quotationTitle": "Offerte #20264780",
+ "quotationCreationTimestamp": 1777878234921,
+ "quotationExpirationTimestamp": 1780470234921,
+ "quotationStatus": "SENT",
+ "isoCurrency": "EUR",
+ "subjects": {
+  "leadConfiguration": "7153941b-929b-4076-92cd-64b53fe3672b",
+  "contactPerson": "0de66af4-8a33-4b2b-bffb-ac14c638c6d6"
+ },
+ "segments": {
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 1,
+      "description": "Pergola 165 zip\nBreedte: 6593 mm\nUitval: 3500 mm\nFrame Kleur: RAL 7016 structuur\nKleur doek: NTB\nBediening: Draaischakelaar\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product.\n- 7 jaar op de motor",
+      "pricePerUnit": 13321.6,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Inmeten + montage Pergola\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 650,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "15% tijdelijke actie",
+     "amount": 15,
+     "type": "PERCENTAGE",
+     "vatPercentage": 21
+    }
+   }
+  }
+ },
+ "pricing": {
+  "total": 12041.61
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

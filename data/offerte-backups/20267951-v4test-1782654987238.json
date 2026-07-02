@@ -1,0 +1,301 @@
+{
+  "documentId": "c19fd5ec-007b-43da-8732-061764f6975d",
+  "versionId": "acc8bd69-db1a-41ef-81f7-151cb450da6a",
+  "profileId": null,
+  "documentTitle": "Offerte #20267951",
+  "documentStatus": "DRAFT",
+  "documentNumber": "20267951",
+  "documentType": "QUOTATION",
+  "title": "Offerte #20267951",
+  "quotationNumber": "20267951",
+  "quotationTitle": "Offerte #20267951",
+  "quotationCreationTimestamp": 1782485829078,
+  "quotationExpirationTimestamp": 1785077829078,
+  "quotationStatus": "DRAFT",
+  "isoCurrency": "EUR",
+  "locale": null,
+  "subjects": {
+    "leadConfiguration": "71b49091-06b5-451b-bd8c-96fd9c35199c",
+    "contactPerson": "1510c51c-c1f6-4ee1-8c53-053c9d54f4b2"
+  },
+  "segments": {
+    "defaultTemplateContactPart": {
+      "type": "contactPerson",
+      "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+    },
+    "defaultSignaturePart": {
+      "type": "signature",
+      "data": {
+        "isSignedByCustomer": null,
+        "signingProps": null,
+        "artifactName": null,
+        "timestamp": null
+      }
+    },
+    "defaultTemplateProfileLogo": {
+      "type": "companyProfileLogo",
+      "data": "![|6lh]($companyProfile.logo)"
+    },
+    "defaultTemplateProfileText": {
+      "type": "text",
+      "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+    },
+    "defaultTemplatePriceLineGroup": {
+      "type": "priceLineGroup",
+      "data": {
+        "name": null,
+        "lines": [
+          {
+            "units": 1,
+            "description": "SunCube XL\nBreedte: 4403 mm\nUitval: 1350 mm\nFrame Kleur: Andere RAL kleur\nKleur doek: NTB\nBediening: Brel Solar motor\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+            "pricePerUnit": 3083.48,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": null,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "Inmeten + Montage uitvalscherm\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 220,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": null,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "Zip Design 110\nBreedte: 4780 mm\nHoogte: 1633 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening bedraad\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+            "pricePerUnit": 2387.2,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": null,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 175,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": null,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": {
+          "name": "15% tijdelijke actie",
+          "amount": 15,
+          "type": "PERCENTAGE",
+          "vatPercentage": 21
+        },
+        "showPrices": null
+      }
+    }
+  },
+  "pricing": {
+    "total": 4985.8279999999995
+  },
+  "renderRows": [
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileLogo"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileText"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateContactPart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "quotationData",
+              "target": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "priceLineGroupCombined",
+              "target": "defaultTemplatePriceLineGroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "userDecline",
+              "target": null
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "signature",
+              "target": "defaultSignaturePart"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "renderTemplate": null,
+  "artifacts": null
+}

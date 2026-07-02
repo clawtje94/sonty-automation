@@ -1,0 +1,34 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "**Markies Aluminium kap**\nBreedte: 2400 mm\nUitval: 1000 mm\nFrame kleur: Verkeerswit (RAL 9016)\nKleur doek: naar keuze\nBediening: handbediend (koord)\n\nInclusief:\n- Aluminium kap met kunststof scharnieren\n- Kikker in kleur en RVS katrollen\n- PVC afbiesband in kleur\n- Slijtlat\n- Uni- of streepdoek uit de standaard collectie\n\nGarantie:\n- 2 jaar op de montage\n- 3 jaar op het product\n- 5 jaar op de motor (indien van toepassing)",
+      "pricePerUnit": 1120.46,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 0,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "**Inmeten + montage markies**\n- Montage\n- Klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 1,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 0,
+      "description": "**Opties (niet inbegrepen, op aanvraag toe te voegen)**\n\nMateriaal upgrade:\n- Grenenhouten kap: klassieke uitstraling, standaard RAL 9001/9010 — op aanvraag\n- Hardhouten kap: duurzaam hout, klassieke look — meerprijs afhankelijk van maat\n\nBediening upgrade:\n- Motor + afstandsbediening (Somfy LT): bedien uw markies elektrisch met een afstandsbediening — +€399\n- Somfy Solar motor: draadloze motor op zonne-energie, geen elektricien nodig — +€805\n\nKappen:\n- Bovenkap: beschermt de markies tegen regen en vuil wanneer deze is ingeklapt — prijs afhankelijk van maat en materiaal\n- Zijkappen (set van 2): zijpanelen voor een strakke afwerking van de markies — vanaf €200\n\nExtra opties:\n- Tussenpoot: extra steunpoot in het midden, aanbevolen bij markiezen breder dan 3 meter — +€194\n- Stormstrook: beschermt het doek tegen regen als de markies is ingeklapt — +€67\n- Rond of afgeschuind achterpoot: andere vorm achterpoot voor een klassiekere uitstraling — +€30\n- Niet-standaard RAL kleur: uw markies in een kleur naar keuze — +10% op markiesprijs",
+      "pricePerUnit": 0,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 2,
+      "lockTotalPrice": false
+    }
+  ]
+}

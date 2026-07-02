@@ -29,7 +29,7 @@ const GORDIJNEN_STATUS = '7286b1fb-bca1-4772-a993-373f957b3b61';
 const SHEET_ID = '1NesKeIKLVOLJjSy-fqo5KXrEVG2VJTYSfjgN7EHY85g';
 const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
 const TRENGO_TOKEN = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
-const TRENGO_EMAIL_CHANNEL = 1359813;
+const TRENGO_EMAIL_CHANNEL = 1363384; // Aanvragen (aanvragen@sonty.nl)
 const BOOKINGS_URL = 'https://bookings.cloud.microsoft/book/SontyMontage1@sontymontage.nl/s/lAKws2wHtEOFjHYzLwjXdQ2?ismsaljsauthenabled=true';
 const TEVER_SENT_FILE = path.join(__dirname, '.tever-sent.json');
 const SONTY_LAT = 52.0446, SONTY_LON = 4.3188;
@@ -600,12 +600,13 @@ async function main() {
       await setStatus(item.id, GORDIJNEN_STATUS);
       routeCount++; continue;
     }
-    if (isMarkies || hasToevoegingen) {
+    if (hasToevoegingen && !isMarkies) {
       await setStatus(item.id, HANDMATIG);
       routeCount++; continue;
     }
 
     // STAP 2: OFFERTE AANPASSEN (in originele volgorde!)
+    // Bij markiezen-combi: verwerk de niet-markies producten WEL, routeer daarna naar Handmatig
     let changed = false;
 
     // 2a. Voorraadscherm korting
@@ -682,7 +683,15 @@ async function main() {
     } else {
       okCount++;
     }
-    await setStatus(item.id, GECONTROLEERD);
+    // Markiezen-combi: verwerkte offerte naar Handmatig (markiezen daemon pakt het daarna op)
+    // Alleen markies + toevoegingen: naar Handmatig
+    // Pure niet-markies: naar Gecontroleerd
+    if (isMarkies || hasToevoegingen) {
+      await setStatus(item.id, HANDMATIG);
+      routeCount++;
+    } else {
+      await setStatus(item.id, GECONTROLEERD);
+    }
     } catch (e) {
       console.log('  ERROR bij ' + item.summary + ': ' + (e.cause?.code || e.message)?.substring(0, 100) + ' — item blijft in OC voor volgende run');
       errorCount++;
@@ -750,18 +759,19 @@ async function main() {
   let sheetRows = 0;
   for (const [tabNaam, rows] of Object.entries(perMaand)) {
     rows.sort((a, b) => (parseInt(a[6]) || 0) - (parseInt(b[6]) || 0));
-    const tab = bestaandeTabs.find(t => t.title === tabNaam);
+    const tab = bestaandeTabs.find(t => t.title.trim() === tabNaam);
     if (!tab) {
       await sendTelegram('Tab "' + tabNaam + '" bestaat niet. Maak deze aan.');
       continue;
     }
+    const sheetTabNaam = tab.title; // echte naam inclusief eventuele spaties
     // Dedup op offerte nummer
-    const existRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: tabNaam + '!G4:G2000' });
+    const existRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: "'" + sheetTabNaam + "'!G4:G2000" });
     const existingNrs = new Set((existRes.data.values || []).map(r => r[0]).filter(Boolean));
     const newRows = rows.filter(r => !existingNrs.has(r[6]));
     if (newRows.length === 0) continue;
 
-    const fullRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: tabNaam + '!A4:A2000' });
+    const fullRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: "'" + sheetTabNaam + "'!A4:A2000" });
     let lastRow = 3;
     for (let i = (fullRes.data.values || []).length - 1; i >= 0; i--) {
       if ((fullRes.data.values || [])[i][0]?.trim()) { lastRow = i + 4; break; }
@@ -769,7 +779,7 @@ async function main() {
     const startRow = lastRow + 1;
 
     await sheets.spreadsheets.values.update({
-      spreadsheetId: SHEET_ID, range: tabNaam + '!A' + startRow + ':L' + (startRow + newRows.length - 1),
+      spreadsheetId: SHEET_ID, range: "'" + sheetTabNaam + "'!A" + startRow + ':L' + (startRow + newRows.length - 1),
       valueInputOption: 'USER_ENTERED', requestBody: { values: newRows },
     });
     await sheets.spreadsheets.batchUpdate({
@@ -784,8 +794,19 @@ async function main() {
 
   console.log('Sheet: ' + sheetRows + ' rijen, ' + teVerSheetCount + ' TE VER');
 
-  if (ocItems.length > 0) {
-    await sendTelegram('Offerte controle v3: ' + okCount + ' OK, ' + fixCount + ' aangepast, ' + routeCount + ' gerouted, ' + errorCount + ' errors\nSheet: ' + sheetRows + ' rijen');
+  // GECONTROLEERD → OFFERTE VERSTUURD (automatisch na verwerking)
+  const gcToOvData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
+  const gcToOv = (gcToOvData?.items || []).filter(i =>
+    i.status_id === GECONTROLEERD && !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
+  );
+  let ovCount = 0;
+  for (const item of gcToOv) {
+    if (await setStatus(item.id, '15c4f0be-c6bf-447d-bf5f-a233c482eb53')) ovCount++;
+  }
+  if (ovCount > 0) console.log('Gecontroleerd → Offerte verstuurd: ' + ovCount);
+
+  if (ocItems.length > 0 || ovCount > 0) {
+    await sendTelegram('Offerte controle v3: ' + okCount + ' OK, ' + fixCount + ' aangepast, ' + routeCount + ' gerouted, ' + errorCount + ' errors\nSheet: ' + sheetRows + ' rijen' + (ovCount > 0 ? '\n→ Offerte verstuurd: ' + ovCount : ''));
   }
 }
 

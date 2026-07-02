@@ -1,0 +1,28 @@
+{
+  "quotationNumber": "20267249",
+  "documentId": "6b3be4d8-654f-4082-84d5-a0cda22d6ebd",
+  "name": "Tom Kamstra",
+  "timestamp": "2026-06-19T07:31:47.768Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suncontrol 150\nBreedte: 5900 mm\nUitval: 3000 mm\nFrame Kleur: RAL 7016 structuur\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 4709.3,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage serre zonwering.\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 350,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

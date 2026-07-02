@@ -1,0 +1,48 @@
+{
+  "quotationNumber": "20267620",
+  "documentId": "69a17558-a689-4326-9566-f076ec8cb61b",
+  "name": "Sanny Terpstra",
+  "timestamp": "2026-06-23T15:00:53.231Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suneye voorraad scherm\nBreedte: 5000 mm\nUitval: 3000 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: Beige\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 3175,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm uitgebreid.\n- Inclusief uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 325,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Eolis 3D windsensor IO\n- Windbeveiliging in de voorlijst\n- De windsensor is een hulp stuk hier kunnen geen garantie rechten aan verleend worden mbt windschade.",
+      "pricePerUnit": 169,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+      "pricePerUnit": 195,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

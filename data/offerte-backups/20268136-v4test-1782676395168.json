@@ -1,0 +1,351 @@
+{
+  "documentId": "d05b226a-87bc-4264-8096-a4d717569982",
+  "versionId": "b7b04a28-1714-47e1-9cc8-a8882cd83480",
+  "profileId": null,
+  "documentTitle": "Offerte #20268136",
+  "documentStatus": "DRAFT",
+  "documentNumber": "20268136",
+  "documentType": "QUOTATION",
+  "title": "Offerte #20268136",
+  "quotationNumber": "20268136",
+  "quotationTitle": "Offerte #20268136",
+  "quotationCreationTimestamp": 1782650624981,
+  "quotationExpirationTimestamp": 1785242624981,
+  "quotationStatus": "DRAFT",
+  "isoCurrency": "EUR",
+  "locale": null,
+  "subjects": {
+    "leadConfiguration": "83586206-041c-4f26-8c8b-61a4b635f2ca",
+    "contactPerson": "6332e8ac-e59b-4152-a418-8419ce16ada9"
+  },
+  "segments": {
+    "defaultTemplateContactPart": {
+      "type": "contactPerson",
+      "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+    },
+    "defaultSignaturePart": {
+      "type": "signature",
+      "data": {
+        "isSignedByCustomer": null,
+        "signingProps": null,
+        "artifactName": null,
+        "timestamp": null
+      }
+    },
+    "defaultTemplateProfileLogo": {
+      "type": "companyProfileLogo",
+      "data": "![|6lh]($companyProfile.logo)"
+    },
+    "defaultTemplateProfileText": {
+      "type": "text",
+      "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+    },
+    "defaultTemplatePriceLineGroup": {
+      "type": "priceLineGroup",
+      "data": {
+        "name": null,
+        "lines": [
+          {
+            "units": 5,
+            "description": "Markies\n- Breedte: 1200mm\n- Uitval: 1000 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Somfy IO motor Solar\n- Montage: ",
+            "pricePerUnit": 0,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 0,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**SunCube XL**\nType: uitvalscherm bedraad\nBreedte: 2007 mm\nUitval: 950 mm\nFrame Kleur: RAL 9005 structuur (standaard)\nKleur doek: NTB\nBediening: afstandsbediening\nMotor: somfy RS100 IO\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\nCassette: Gesloten, rond design (150mm)\n\n**Waarom dit uitvalscherm**\nCompact en stijlvol uitvalscherm. Fluisterstille Somfy motor met afstandsbediening. Bescherming tegen directe zonnestraling en warmte.\nGarantie: 5 jaar op het product, 7 jaar op de motor.\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• SunProject 100 (rechthoekig, breder leverbaar): -€420\n\nAndere bediening:\n• Draaistang (handmatig): -€479\n• Orea WT (bedraad, wandschakelaar): -€150\n\nLaat het ons weten, we passen je offerte graag aan.",
+            "pricePerUnit": 1810.6,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 2,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 5,
+            "description": "**Markies grenenhouten kap**\nBreedte: 2007 mm\nUitval: 950 mm\nFrame kleur: RAL 9005 structuur\nKleur doek: Doekkleur naar keuze\nBediening: Elektrisch (Somfy IO motor met afstandsbediening)\n\nInclusief:\n- Houten bovenkap (recht 25cm diep)\n- Zijkappen (set van 2, hardhout recht 22cm)\n- Koord met RVS katrollen en koordkikker\n- PVC afbiesband in kleur\n- Slijtlat\n- Doek uit de standaard collectie\n- Volant (schulp, recht of recht met inkam)\n- Scharnieren in kleur\n- Somfy IO motor met afstandsbediening\n\nGarantie: 2 jaar montage | 3 jaar product | 5 jaar motor\n\n**Liever een ander materiaal of bediening?**\n\nAnder materiaal:\n• Hardhouten kap (meranti): duurzamer, langere levensduur: +€53\n• Aluminium kap: onderhoudsvrij, 8 standaard RAL kleuren: +€171\n\nAndere bediening:\n• Handbediend (koord): geen motor nodig: -€599\n• Draaischakelaar (Somfy LT motor): vaste schakelaar aan de muur: -€200\n• Brel Solar motor: draadloze motor op zonne-energie: +€85\n• Somfy Solar motor: draadloze motor op zonne-energie met afstandsbediening: +€206\n\nExtra:\n• Stormstrook: beschermt het raam als markies ingeklapt — +€67\n• Tussenpoot: steunpoot in het midden — +€194\n• Niet-standaard RAL kleur — +10%\n• Koord onderlangs i.p.v. bovenlangs — +€48\n• Spots/verlichting — vanaf €847\n\nLaat het ons weten, we passen je offerte graag aan.",
+            "pricePerUnit": 2032.8,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 6,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Markies grenenhouten kap**\nBreedte: 2021 mm\nUitval: 1000 mm\nFrame kleur: Antraciet\nKleur doek: Doekkleur naar keuze\nBediening: Elektrisch solar (draadloze motor op zonne-energie)\n\nInclusief:\n- Houten bovenkap (recht 25cm diep)\n- Zijkappen (set van 2, hardhout recht 22cm)\n- Koord met RVS katrollen en koordkikker\n- PVC afbiesband in kleur\n- Slijtlat\n- Doek uit de standaard collectie\n- Volant (schulp, recht of recht met inkam)\n- Scharnieren in kleur\n- Somfy IO motor Solar\n\nGarantie: 2 jaar montage | 3 jaar product | 5 jaar motor\n\n**Liever een ander materiaal of bediening?**\n\nAnder materiaal:\n• Hardhouten kap (meranti): duurzamer, langere levensduur: +€53\n• Aluminium kap: onderhoudsvrij, 8 standaard RAL kleuren: +€171\n\nAndere bediening:\n• Handbediend (koord): geen motor nodig: -€805\n• Draaischakelaar (Somfy LT motor): vaste schakelaar aan de muur: -€405\n• Motor + afstandsbediening (Somfy IO): bedien je markies elektrisch: -€206\n• Brel Solar motor: draadloze motor op zonne-energie: -€121\n\nExtra:\n• Stormstrook: beschermt het raam als markies ingeklapt — +€67\n• Tussenpoot: steunpoot in het midden — +€194\n• Niet-standaard RAL kleur — +10%\n• Koord onderlangs i.p.v. bovenlangs — +€48\n• Spots/verlichting — vanaf €847\n\nLaat het ons weten, we passen je offerte graag aan.",
+            "pricePerUnit": 2238.5,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 7,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Inmeten + Montage uitvalscherm**\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 220,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 3,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 6,
+            "description": "**Inmeten + montage markies**\n- Inmeetafspraak bij je thuis\n- Professionele montage door ons eigen montageteam\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 220,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 8,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Tahoma Switch**\n- Automatiseren van je Somfy producten\n- Producten bedienen waar je ook bent met de telefoon\n- Inclusief installatie en uitleg\n- Al uw smart home producten op 1 app (zoals Philips Hue)",
+            "pricePerUnit": 195,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 1,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": {
+          "name": "15% tijdelijke actie",
+          "amount": 15,
+          "type": "PERCENTAGE",
+          "vatPercentage": 21
+        },
+        "showPrices": null
+      }
+    },
+    "ed1d91ee-5dcb-43cd-9edb-d74e6a33bb85": {
+      "type": "text",
+      "data": "**Waarom Sonty?**\n\n- Sunmaster Premium Dealer: wij leveren uitsluitend A-merk zonwering van de hoogste kwaliteit\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij je thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 600+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+    }
+  },
+  "pricing": {
+    "total": 13555.885
+  },
+  "renderRows": [
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileLogo"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileText"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateContactPart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "quotationData",
+              "target": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "priceLineGroupCombined",
+              "target": "defaultTemplatePriceLineGroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "ed1d91ee-5dcb-43cd-9edb-d74e6a33bb85"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "userDecline",
+              "target": null
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "signature",
+              "target": "defaultSignaturePart"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "renderTemplate": null,
+  "artifacts": null
+}

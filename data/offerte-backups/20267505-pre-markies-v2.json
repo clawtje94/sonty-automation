@@ -1,0 +1,44 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "**Markies Grenenhouten kap**\nBreedte: 1000 mm\nUitval: 0 mm\nFrame kleur: naar keuze\nKleur doek: naar keuze\nBediening: handbediend (koord)\n\nInclusief:\n- Kap met scharnieren en katrollen\n- PVC afbiesband in kleur\n- Slijtlat\n- Doek uit de standaard collectie\n\nGarantie:\n- 2 jaar op de montage\n- 3 jaar op het product\n",
+      "pricePerUnit": 717.53,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 0,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "**Markies Grenenhouten kap**\nBreedte: 4000 mm\nUitval: 1000 mm\nFrame kleur: Andere RAL kleur\nKleur doek: naar keuze\nBediening: motor + afstandsbediening\n\nInclusief:\n- Kap met scharnieren en katrollen\n- PVC afbiesband in kleur\n- Slijtlat\n- Doek uit de standaard collectie\n- Motor + afstandsbediening\n\nGarantie:\n- 2 jaar op de montage\n- 3 jaar op het product\n- 5 jaar op de motor",
+      "pricePerUnit": 1824.68,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 1,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "**Inmeten + montage markies**\n- Montage\n- Klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 2,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 0,
+      "description": "**Opties (niet inbegrepen, op aanvraag toe te voegen)**\n\nMateriaal upgrade:\n- Hardhout kap: duurzamer hout, langere levensduur — meerprijs afhankelijk van maat\n- Aluminium kap: onderhoudsvrij, moderne uitstraling — meerprijs afhankelijk van maat\n\nBediening upgrade:\n- Somfy Solar motor: draadloze motor op zonne-energie, geen elektricien nodig — meerpijs +€406\n\nKappen:\n- Bovenkap: beschermt de markies tegen regen en vuil wanneer deze is ingeklapt — prijs afhankelijk van maat en materiaal\n- Zijkappen (set van 2): zijpanelen voor een strakke afwerking van de markies — vanaf €200\n\nExtra opties:\n- Tussenpoot: extra steunpoot in het midden, aanbevolen bij markiezen breder dan 3 meter — +€194\n- Stormstrook: beschermt het doek tegen regen als de markies is ingeklapt — +€67\n- Rond of afgeschuind achterpoot: andere vorm achterpoot voor een klassiekere uitstraling — +€30\n- Niet-standaard RAL kleur: uw markies in een kleur naar keuze — +10% op markiesprijs",
+      "pricePerUnit": 0,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 3,
+      "lockTotalPrice": false
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "quotationNumber": "20268506",
+  "documentId": "869d057f-805d-4a6d-a17d-600db67fbb1f",
+  "name": "André Ouwerkerk",
+  "timestamp": "2026-07-02T11:00:47.941Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 1000mm\n- Uitval: \n\n- Materiaal:  \n- Kleur: \n- Type bediening: \n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 1000mm\n- Uitval: \n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: \n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 4000mm\n- Uitval: 1800 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Motor + afstandsbediening\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

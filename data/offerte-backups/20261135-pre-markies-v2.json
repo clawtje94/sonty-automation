@@ -1,0 +1,24 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 3000mm\n- Uitval: 1000 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Draaischakelaar\n- Montage: ",
+      "pricePerUnit": 2100,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 0,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 1,
+      "lockTotalPrice": false
+    }
+  ]
+}

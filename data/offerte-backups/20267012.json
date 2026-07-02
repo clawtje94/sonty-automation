@@ -1,0 +1,28 @@
+{
+  "quotationNumber": "20267012",
+  "documentId": "aec07941-a093-4b86-9879-0fd13cf0ffae",
+  "name": "Philine van Karnebeek",
+  "timestamp": "2026-06-15T07:32:14.073Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "SunCube XL\nBreedte: 1600 mm\nUitval: 1150 mm\nFrame Kleur: RAL 9001\nKleur doek: NTB\nBediening: Draaischakelaar\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1717.84,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + Montage uitvalscherm\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

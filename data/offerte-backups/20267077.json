@@ -1,0 +1,28 @@
+{
+  "quotationNumber": "20267077",
+  "documentId": "3c57cc8a-7f1c-4ea8-99b9-50f1ec98cba9",
+  "name": "Gwen Hermes",
+  "timestamp": "2026-06-15T15:00:50.047Z",
+  "lines": [
+    {
+      "units": 3,
+      "description": "Markies\n- Breedte: 2553mm\n- Uitval: 900 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Draaischakelaar\n- Montage: ",
+      "pricePerUnit": 0,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 3,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

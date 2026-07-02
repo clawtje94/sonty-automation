@@ -1,0 +1,10 @@
+EXTRA INSTRUCTIE:
+Als je klaar bent met fixes:
+1. Draai v4 --test op 10 random offertes uit OC
+2. Zet die 10 in Gecontroleerd (NIET Offerte verstuurd)
+3. Stuur Telegram bericht (chat_id: 1700128390, token: 8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40) met:
+   - Welke 10 offertes (nummers + namen)
+   - Per offerte: product, prijs, kleur
+   - Of alles klopt
+4. Restore elke offerte naar origineel eerst (backup in data/offerte-backups/)
+5. Bypass kantooruren: gebruik --test mode

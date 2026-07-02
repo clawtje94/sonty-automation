@@ -1,0 +1,34 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 1000mm\n- Uitval: \n\n- Materiaal:  \n- Kleur: \n- Type bediening: \n- Montage: ",
+      "pricePerUnit": 0,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 4000mm\n- Uitval: 1000 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Motor + afstandsbediening\n- Montage: ",
+      "pricePerUnit": 0,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

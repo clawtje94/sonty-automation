@@ -1,0 +1,68 @@
+{
+  "quotationNumber": "20268016",
+  "documentId": "206d4e62-70e0-4418-9c9e-ed9e0056f52a",
+  "name": "maurice",
+  "timestamp": "2026-06-27T11:01:00.599Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "**SunControl 165 ZIP Pergola — 1-delig**\nBreedte: 6000 mm\nUitval: 2900 mm\nFrame kleur: Antraciet structuur (standaard)\nDoek: naar keuze\nBediening: Afstandsbediening (Somfy IO)\nHandzender: Situo 1 IO (1-kanaal)\nMotor: Somfy Sunea IO\nType: Vrijstaande pergola (windvast ZIP)\nStaanderlengte: 300 cm (verlengd)\nInclusief: 2 voetplaten 150×150, tussenrol\n\n**Waarom deze pergola**\nVrijstaande terrasoverkapping met windvast ZIP-doek. Beschermd tegen zon en regen: je terras het hele jaar bruikbaar. Stevig aluminium frame: duurzaam en onderhoudsarm. Gemotoriseerd: doek in- en uitrollen met afstandsbediening.\nGarantie: 2 jaar montage, 3 jaar product, 5 jaar motor.\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• Knikarmscherm SunEye XL (wandmontage, geen palen nodig): -€3.441\n\nAndere bediening:\n• Orea WT (bedraad, wandschakelaar): -€139\n\nExtra:\n• RAL kleur naar keuze: +15%\n• Verstelbare staander: +€845 per stuk\n• Extra tussenrol: +€370 per stuk\n\nLaat het ons weten, we passen je offerte graag aan.",
+      "pricePerUnit": 8800.2,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 0,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "**SunEye XL — Knikarmscherm (alternatief voor pergola)**\nBreedte: 6000 mm\nUitval: 3000 mm\nFrame kleur: Antraciet structuur (standaard)\nKleur doek: naar keuze\nBediening: Afstandsbediening (Somfy IO)\nHandzender: Situo 1 IO (1-kanaal)\nMotor: Somfy Sunea IO\nCassette: Gesloten, slank design (extra breed)\n\n**Waarom dit knikarmscherm**\nPremium knikarmscherm met gesloten cassette. Doek en mechaniek volledig beschermd. Sterke aluminium armen: lang meegaand en stabiel. Fluisterstille Somfy motor met afstandsbediening. Wandmontage: geen palen of fundatie nodig.\nGarantie: 2 jaar montage, 3 jaar product, 5 jaar motor.",
+      "pricePerUnit": 5359.2,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 1,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "**Zip Square 85/100 — Zipscreen op Somfy Solar**\nBreedte: 2570 mm\nHoogte: 3000 mm\nFrame kleur: Antraciet structuur (standaard)\nDoek: Sergé 525 gr/m²\nBediening: Somfy Solar RS 100 IO (draadloos, zonnepaneel)\nMotor: Somfy Solar RS 100 IO\nHandzender: Situo 1 IO (1-kanaal)\nGeleiding: ZIP (windvast)\nOnderlat: Standaard (los)\n\n**Waarom dit screen**\nPremium kwaliteit met zip-technologie. Ritsgeleidingssysteem: doek zit vast in de geleiders, geen klapperen bij wind. Op zonne-energie met Somfy RS 100 IO: geen bekabeling nodig, volledig draadloos. Premium Somfy solar motor. Bescherming tegen zon, warmte en inkijk met behoud van uitzicht.\nGarantie: 2 jaar montage, 3 jaar product, 5 jaar motor.\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• Zip Design 110 (geïntegreerde onderlat, max H=270cm): niet mogelijk bij deze hoogte\n\nAndere bediening:\n• Motor + afstandsbediening bedraad (Sunilus IO + handzender): -€190\n• Brel Solar (incl. handzender, goedkoper): -€42\n\nExtra:\n• Trendkleur: +€208\n• RAL kleur naar keuze: +€415\n\nLaat het ons weten, we passen je offerte graag aan.",
+      "pricePerUnit": 2256.1,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 2,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "**Montage pergola**\n- Professionele montage door ons eigen montageteam\n- Verankering en afwerking\n- Klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 650,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 3,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "**Montage screen solar**\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 4,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "**Montage knikarmscherm**\n- Montage\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 5,
+      "lockTotalPrice": false
+    }
+  ]
+}

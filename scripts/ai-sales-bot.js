@@ -117,11 +117,21 @@ async function getConversationHistory(ticketId) {
   })).reverse(); // oldest first
 }
 
+// Verstuurt een antwoord en geeft {ok, status, data} terug — check ALTIJD .ok:
+// voorheen werd het response genegeerd en logde de bot "Verstuurd!" ook bij een Trengo-fout.
 async function sendReply(ticketId, message) {
-  return trengoAPI('/tickets/' + ticketId + '/messages', 'POST', {
-    message: message,
-    type: 'OUTBOUND',
-  });
+  try {
+    const res = await fetch('https://app.trengo.com/api/v2/tickets/' + ticketId + '/messages', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + TRENGO_TOKEN, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: message, type: 'OUTBOUND' }),
+    });
+    let data = null;
+    try { data = await res.json(); } catch {}
+    return { ok: res.ok, status: res.status, data };
+  } catch (e) {
+    return { ok: false, status: 0, data: { error: e.message } };
+  }
 }
 
 function logConversation(ticketId, contact, messages, botReply) {
@@ -172,6 +182,7 @@ async function processNewMessages() {
         const isManualReply = m.user_id && m.user_id !== 736327 && m.user_id !== SONNY_USER_ID;
         if (isManualReply) {
           state.humanTakeover[ticketId] = new Date().toISOString();
+          saveState(state);
           console.log('  👤 Mens heeft ticket #' + ticketId + ' overgenomen (' + contactName + ') → bot stopt');
           break;
         }
@@ -224,10 +235,12 @@ async function processNewMessages() {
         }) + '\n');
 
         // Confirm via WhatsApp
-        await sendReply(ticketId, '✅ Feedback ontvangen! Ik pas dit aan: "' + feedback.substring(0, 100) + '"');
+        const fbRes = await sendReply(ticketId, '✅ Feedback ontvangen! Ik pas dit aan: "' + feedback.substring(0, 100) + '"');
+        if (!fbRes.ok) console.log('  ❌ Feedback-bevestiging niet verstuurd (Trengo ' + fbRes.status + ')');
         console.log('📝 Feedback opgeslagen: ' + feedback.substring(0, 60));
 
         state.processed[msgId] = new Date().toISOString();
+        saveState(state); // direct opslaan: crash verderop mag geen dubbele verwerking geven
         processed++;
         continue;
       }
@@ -248,7 +261,7 @@ async function processNewMessages() {
 
     // Ask Claude for response
     const botReply = await askClaude(history, customerContext);
-    if (!botReply) { console.log('  ⛔ Geen antwoord — wordt niet verstuurd'); state.processed[msgId] = new Date().toISOString(); continue; }
+    if (!botReply) { console.log('  ⛔ Geen antwoord — wordt niet verstuurd'); state.processed[msgId] = new Date().toISOString(); saveState(state); continue; }
     console.log('🤖 Antwoord: ' + botReply.substring(0, 80));
 
     // Check if bot should escalate to human
@@ -258,11 +271,19 @@ async function processNewMessages() {
     const appointmentConfirmed = /(?:staat genoteerd|ingepland|afspraak.*bevestig|tot (?:maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag))/i.test(botReply);
 
     // Send reply via Trengo — ALLEEN als we een geldig antwoord hebben
+    let replySent = false;
     if (botReply && botReply.length > 5) {
-      await sendReply(ticketId, botReply);
-      console.log('✅ Verstuurd!');
+      const sendRes = await sendReply(ticketId, botReply);
+      replySent = sendRes.ok;
+      if (!replySent) {
+        // Bewust WEL als processed markeren (hieronder): opnieuw proberen kan een
+        // dubbel bericht opleveren als Trengo het tóch afgeleverd heeft.
+        console.log('  ❌ NIET verstuurd (Trengo ' + sendRes.status + '): ' + JSON.stringify(sendRes.data).substring(0, 120));
+      } else {
+        console.log('✅ Verstuurd!');
+      }
 
-      try {
+      if (replySent) try {
         if (needsHuman) {
           // Escaleer: unassign ticket zodat het in "New" komt + label
           await trengoAPI('/tickets/' + ticketId, 'PUT', { user_id: null });
@@ -327,8 +348,10 @@ async function processNewMessages() {
       console.log('  ⚠️ HubSpot note fout:', e.message?.substring(0, 60));
     }
 
-    // Mark as processed
+    // Mark as processed + DIRECT opslaan: een crash bij een volgend ticket mag er niet
+    // toe leiden dat dit bericht opnieuw beantwoord wordt (dubbele WhatsApp naar klant).
     state.processed[msgId] = new Date().toISOString();
+    saveState(state);
     processed++;
 
     await new Promise(r => setTimeout(r, 1000)); // Rate limit

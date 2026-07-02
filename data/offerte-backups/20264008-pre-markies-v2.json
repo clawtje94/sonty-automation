@@ -1,0 +1,44 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 3700mm\n- Uitval: 1150 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 1986.82,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 0,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2200mm\n- Uitval: 1150 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 1582.68,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 1,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 1850mm\n- Uitval: 1150 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 1536.7,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 2,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 3,
+      "description": "Montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 245,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 3,
+      "lockTotalPrice": false
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "lines": [
+    {
+      "units": 2,
+      "description": "Markies\n- Breedte: 1800mm\n- Uitval: 800 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Draaischakelaar\n- Montage: ",
+      "pricePerUnit": 1622,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "Montage markies \n- montage\n- klein materiaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

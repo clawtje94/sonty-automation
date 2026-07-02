@@ -1,0 +1,292 @@
+{
+ "documentId": "7cb44787-43bd-4858-b277-9ca20e7c04e8",
+ "versionId": "27e48583-f10b-4e03-bdaf-ea6327f625d0",
+ "documentTitle": "Offerte #20265788",
+ "documentStatus": "SENT",
+ "documentNumber": "20265788",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20265788",
+ "quotationNumber": "20265788",
+ "quotationTitle": "Offerte #20265788",
+ "quotationCreationTimestamp": 1779550711958,
+ "quotationExpirationTimestamp": 1782142711958,
+ "quotationStatus": "SENT",
+ "isoCurrency": "EUR",
+ "subjects": {
+  "leadConfiguration": "8b084a6f-ba82-486f-8d7d-b5dd46a32050",
+  "contactPerson": "4eebf5c0-a74c-4196-ae38-f5bad9bb753d"
+ },
+ "segments": {
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 1,
+      "description": "Pergola 165 zip\nBreedte: 8000 mm\nUitval: 3500 mm\nFrame Kleur: Andere RAL kleur (meerprijs 15%)\nKleur doek: NTB\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product.\n- 7 jaar op de motor",
+      "pricePerUnit": 16393.5,
+      "vatPercentage": 21,
+      "position": 0,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Inmeten + montage Pergola\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 650,
+      "vatPercentage": 21,
+      "position": 1,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 2,
+      "description": "Zip Design 110\nBreedte: 4000 mm\nHoogte: 2100 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7021 STR\nKleur doek: NTB\nOnderlat: Design\nBediening: Somfy IO SOLAR\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 2810,
+      "vatPercentage": 21,
+      "position": 2,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 1680 mm\nHoogte: 2200 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7021 STR\nKleur doek: NTB\nOnderlat: Design\nBediening: Somfy IO SOLAR\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1833,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 3,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 2,
+      "description": "MY ANGLE\nBreedte: 3000 mm\nHoogte: 800 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7021 STR\nKleur doek: NTB\nOnderlat: Design\nBediening: Somfy IO SOLAR\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 4181,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 4,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 5,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "position": 5,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "plisse hordeur Unilux (Enkele deur)\nBreedte: 1250 mm\nHoogte: 2500 mm\nKleur: Ral 7021 STR",
+      "pricePerUnit": 646,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 6,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "plisse hordeur (Dubbele deur)\nBreedte: 2000 mm\nHoogte: 2500 mm\nKleur: Ral 7021 STR",
+      "pricePerUnit": 1098,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 7,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Montage plisse hordeuren.",
+      "pricePerUnit": 225,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 8,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "Korting iom Joey",
+     "amount": 6702.5,
+     "type": "ABSOLUTE",
+     "vatPercentage": 21
+    }
+   }
+  }
+ },
+ "pricing": {
+  "total": 29000
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

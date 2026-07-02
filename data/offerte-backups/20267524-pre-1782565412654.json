@@ -1,0 +1,311 @@
+{
+  "documentId": "54bb7b3c-7fe7-4c0f-99f2-d02a2a6c5c9f",
+  "versionId": "1b3e16aa-8b36-4068-a598-debc965d72a9",
+  "profileId": null,
+  "documentTitle": "Offerte #20267524",
+  "documentStatus": "SENT",
+  "documentNumber": "20267524",
+  "documentType": "QUOTATION",
+  "title": "Offerte #20267524",
+  "quotationNumber": "20267524",
+  "quotationTitle": "Offerte #20267524",
+  "quotationCreationTimestamp": 1782127906327,
+  "quotationExpirationTimestamp": 1784719906327,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "locale": null,
+  "subjects": {
+    "leadConfiguration": "7678fc7d-c03c-4b13-812a-df008c2fcc02",
+    "contactPerson": "9e4bcc2b-d7c9-476f-a47b-b213137fc438"
+  },
+  "segments": {
+    "defaultTemplateContactPart": {
+      "type": "contactPerson",
+      "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+    },
+    "defaultSignaturePart": {
+      "type": "signature",
+      "data": {
+        "isSignedByCustomer": null,
+        "signingProps": null,
+        "artifactName": null,
+        "timestamp": null
+      }
+    },
+    "defaultTemplateProfileLogo": {
+      "type": "companyProfileLogo",
+      "data": "![|6lh]($companyProfile.logo)"
+    },
+    "defaultTemplateProfileText": {
+      "type": "text",
+      "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+    },
+    "defaultTemplatePriceLineGroup": {
+      "type": "priceLineGroup",
+      "data": {
+        "name": null,
+        "lines": [
+          {
+            "units": 1,
+            "description": "**Zip Design 110**\nType: screen bedraad\nBreedte: 3300 mm\nHoogte: 1300 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9001\nKleur doek: NTB\nOnderlat: Design\nBediening: afstandsbediening\nMotor: somfy RS100 IO motor\nMontage: NTB\nType geleider: NTB\n\nWaarom dit screen:\n- Sunmaster screen: premium kwaliteit met zip-technologie\n- Ritsgeleidingssysteem: doek zit vast in de geleiders, geen klapperen bij wind\n- Fluisterstille Somfy motor met afstandsbediening\n- Bescherming tegen zon, warmte en inkijk met behoud van uitzicht\n- Compacte cassette: doek en motor beschermd tegen weersinvloeden\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+            "pricePerUnit": 1892.2,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 0,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Inmeten + montage screen**\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 195,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 1,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "Rolluik (RollSUPER)\nBreedte: 3300 mm\nHoogte: 1300 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 9001\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Motor + afstandsbediening\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+            "pricePerUnit": 1355.4,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 2,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": {
+          "name": "15% tijdelijke actie",
+          "amount": 15,
+          "type": "PERCENTAGE",
+          "vatPercentage": 21
+        },
+        "showPrices": null
+      }
+    },
+    "b9862c35-0879-4c3a-acf2-cdff316b62d2": {
+      "type": "text",
+      "data": "**Waarom Sonty?**\n\n- Sunmaster Premium Dealer: wij leveren uitsluitend A-merk zonwering van de hoogste kwaliteit\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij u thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 500+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+    }
+  },
+  "pricing": {
+    "total": 2926.2100000000005
+  },
+  "renderRows": [
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileLogo"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileText"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateContactPart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "quotationData",
+              "target": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "priceLineGroupCombined",
+              "target": "defaultTemplatePriceLineGroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "b9862c35-0879-4c3a-acf2-cdff316b62d2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "userDecline",
+              "target": null
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "signature",
+              "target": "defaultSignaturePart"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "renderTemplate": null,
+  "artifacts": null
+}

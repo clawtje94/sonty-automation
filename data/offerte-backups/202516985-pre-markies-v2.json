@@ -1,0 +1,34 @@
+{
+  "lines": [
+    {
+      "units": 3,
+      "description": "Markies\n- Breedte: 1567mm\n- Uitval: 1000 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Motor + afstandsbediening\n- Montage: ",
+      "pricePerUnit": 2073,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 3,
+      "description": "Montage markies (houten kappen)\n- montage\n- klein materiaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Somfy Connectivity\n- Telefoon bediening Somfy motoren.",
+      "pricePerUnit": 129.27,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

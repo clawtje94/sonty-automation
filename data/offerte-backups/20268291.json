@@ -1,0 +1,28 @@
+{
+  "quotationNumber": "20268291",
+  "documentId": "c42dd470-48ce-4e8b-ae91-ce414bc9b727",
+  "name": "Gunay Yildiz",
+  "timestamp": "2026-06-30T11:01:06.838Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suncontrol 165 zip\nBreedte: 5000 mm\nUitval: 3000 MM\nFrame Kleur: RAL 7016 structuur\nBediening: Draaischakelaar\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 4748.2,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage serre zonwering.\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 350,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

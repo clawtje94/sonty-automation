@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 /**
- * Follow-up WhatsApp voor openstaande offertes
+ * Follow-up WhatsApp voor openstaande offertes — v2
  *
- * Draait dagelijks. Stuurt max 25 WhatsApp per dag.
+ * Draait dagelijks om 10:30 via launchd. Stuurt max 25 WhatsApp per dag.
  *
  * Regels:
- * - Alleen SENT offertes (niet ACCEPTED/DRAFT)
- * - Alleen laatste 14 dagen
- * - NIET sturen als de persoon een ACCEPTED offerte heeft (of in Afgerond staat)
+ * - Alleen items in "Offerte verstuurd" status (recent, 14 dagen)
+ * - Per item: haal offerte via lead_configuration_id (zelfde als v3, geen grote lijsten)
+ * - NIET sturen als de offerte ACCEPTED is (klant al akkoord)
+ * - NIET sturen als de persoon in Afgerond/Gripp invullen staat
  * - 1 bericht per telefoonnummer
  * - Check Trengo voor "geen interesse" signalen
  */
@@ -20,10 +21,15 @@ const PID = '731483fa-ef6b-4aae-afcf-883ec09219dd';
 const TRENGO_TOKEN = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
 const SENT_FILE = path.join(__dirname, '.followup-v2-sent.json');
 const MAX_PER_DAY = 25;
-const TEMPLATE_ID = 235382; // followup_offerte_recent
+const TEMPLATE_ID = 235382;
 const WA_CHANNEL = 1359857;
 const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
 const BACKLOG_ID = 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7';
+const OV_STATUS = '15c4f0be-c6bf-447d-bf5f-a233c482eb53';
+const SKIP_STATUSES = [
+  '2082ad8a-517c-4e24-8c0f-a5be69b1588a', // Afgerond
+  'f895f76f-175e-4ea0-bb7c-6cc2f4e5d846', // Gripp invullen (= al akkoord)
+];
 
 function getSentLog() { try { return JSON.parse(fs.readFileSync(SENT_FILE, 'utf8')); } catch { return {}; } }
 function markSent(phone) {
@@ -32,12 +38,11 @@ function markSent(phone) {
   fs.writeFileSync(SENT_FILE, JSON.stringify(log, null, 2));
 }
 
-// Fetch met retry voor tijdelijke netwerkfouten (ECONNRESET etc.) — max 3 pogingen
+// Fetch met retry
 async function fetchRetry(url, options, tries = 3) {
   for (let i = 1; i <= tries; i++) {
-    try {
-      return await fetch(url, options);
-    } catch (e) {
+    try { return await fetch(url, options); }
+    catch (e) {
       if (i === tries) throw e;
       console.log('  (netwerkfout, poging ' + (i + 1) + '/' + tries + ' over ' + (i * 5) + 's: ' + (e.cause?.code || e.message) + ')');
       await new Promise(r => setTimeout(r, i * 5000));
@@ -45,16 +50,22 @@ async function fetchRetry(url, options, tries = 3) {
   }
 }
 
+// Veilige JSON parse — Trengo geeft soms HTML terug bij rate limit/errors
+async function safeJson(res) {
+  const text = await res.text();
+  try { return JSON.parse(text); }
+  catch { console.log('  (ongeldige JSON response, ' + text.substring(0, 50) + '...)'); return null; }
+}
+
 async function rpGet(endpoint) {
   const res = await fetchRetry('https://backend.reuzenpanda.nl' + endpoint, {
     headers: { 'Authorization': 'Bearer ' + RP_API_KEY }
   });
   if (!res.ok) return null;
-  return res.json();
+  return safeJson(res);
 }
 
 async function main() {
-  // Tijdcheck: alleen ma-za 9-18
   const now = new Date();
   const hour = now.getHours();
   const day = now.getDay();
@@ -63,123 +74,72 @@ async function main() {
     return;
   }
 
-  console.log('[' + now.toISOString().substring(11, 19) + '] Follow-up WhatsApp start');
-
-  // Haal alle quotations
-  const qData = await rpGet('/document-service/v1/' + PID + '/quotations?document_number=2026');
-  const qList = qData?.quotationDatas || [];
+  console.log('[' + now.toISOString().substring(11, 19) + '] Follow-up WhatsApp v2 start');
 
   const fourteenDaysAgo = Date.now() - 14 * 86400000;
 
-  // Filter: SENT + laatste 14 dagen
-  const sentDocs = qList.filter(q =>
-    q.quotationStatus === 'SENT' &&
-    q.quotationCreationTimestamp > fourteenDaysAgo
-  );
-
-  // Maak set van contact persons met ACCEPTED offerte
-  const acceptedTotals = new Set();
-  qList.filter(q => q.quotationStatus === 'ACCEPTED').forEach(q => {
-    // We weten niet de contact_person_id uit de qList
-    // Maar we kunnen matchen via pricing.total
-    acceptedTotals.add(q.pricing?.total);
-  });
-
-  // Haal backlog items om te checken welke in Afgerond staan
+  // Haal alle backlog items op
   const itemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
   const allItems = itemsData?.items || [];
 
-  // Maak sets van emails die in Afgerond of ACCEPTED status staan
-  const afgerondEmails = new Set();
-  const AFGEROND_STATUSES = [
-    'f984913c-1e91-455b-b45a-6c0ed36ffaeb', // Afgerond
-    '2082ad8a-517c-4e24-8c0f-a5be69b1588a', // Afgerond (2)
-    'f895f76f-175e-4ea0-bb7c-6cc2f4e5d846', // grip invullen (= al akkoord)
-  ];
+  // Filter: items in "Offerte verstuurd", laatste 14 dagen, niet gearchiveerd
+  const ovItems = allItems.filter(i =>
+    i.status_id === OV_STATUS &&
+    i.timestamp_created > fourteenDaysAgo &&
+    !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
+  );
+
+  // Maak set van emails die in Afgerond/Gripp invullen staan
+  const skipEmails = new Set();
   allItems.forEach(i => {
-    if (AFGEROND_STATUSES.includes(i.status_id)) {
-      if (i.fields?.email) afgerondEmails.add(i.fields.email.toLowerCase());
+    if (SKIP_STATUSES.includes(i.status_id) && i.fields?.email) {
+      skipEmails.add(i.fields.email.toLowerCase());
     }
   });
 
-  // Haal contacts op
-  const contactsData = await rpGet('/contact-service/' + PID + '/contact-persons');
-  const contacts = contactsData?.contact_persons || [];
+  console.log('Offerte verstuurd items (14 dagen): ' + ovItems.length);
+  console.log('Skip emails (afgerond/gripp): ' + skipEmails.size);
 
-  // Maak email → contact map
-  const emailToContact = {};
-  contacts.forEach(c => {
-    const email = c.free_fields?.find(f => f.label === 'email')?.value?.toLowerCase();
-    const phone = c.free_fields?.find(f => f.label === 'phone')?.value;
-    const name = c.display_name || '';
-    if (email) emailToContact[email] = { id: c.id, name, phone, email };
-  });
-
-  // Maak contact_person_id → heeft ACCEPTED set
-  // Check via de backlog items welke personen ACCEPTED offertes hebben
-  const acceptedEmails = new Set();
-  allItems.forEach(i => {
-    // Check of deze persoon een ACCEPTED offerte heeft
-    // We matchen via email
-    const email = i.fields?.email?.toLowerCase();
-    if (!email) return;
-
-    // Check in qList of er een ACCEPTED doc is met matching lead_value
-    const itemValue = parseFloat((i.lead_value || '').replace(/[^0-9.]/g, '')) || 0;
-    const hasAccepted = qList.some(q =>
-      q.quotationStatus === 'ACCEPTED' &&
-      Math.abs((q.pricing?.total || 0) - itemValue) < 5
-    );
-    if (hasAccepted) acceptedEmails.add(email);
-  });
-
-  // Merge: iedereen die in afgerond OF accepted staat
-  const skipEmails = new Set([...afgerondEmails, ...acceptedEmails]);
-
-  console.log('SENT docs (14 dagen):', sentDocs.length);
-  console.log('Skip emails (afgerond/accepted):', skipEmails.size);
-
-  // Match SENT docs met contacts en filter
+  // Per item: haal offerte op via lead_configuration_id
   const sentLog = getSentLog();
   const toSend = [];
 
-  for (const doc of sentDocs) {
-    // Match contact via timestamp (zelfde als offerte controle)
-    const itemValue = doc.pricing?.total || 0;
-    let matchedItem = null;
-
-    // Zoek het backlog item met matching bedrag
-    const byValue = allItems.filter(i => {
-      const val = parseFloat((i.lead_value || '').replace(/[^0-9.]/g, '')) || 0;
-      return Math.abs(val - itemValue) < 5;
-    });
-    if (byValue.length === 1) matchedItem = byValue[0];
-    else if (byValue.length > 1) {
-      byValue.sort((a, b) => Math.abs(a.timestamp_created - doc.quotationCreationTimestamp) - Math.abs(b.timestamp_created - doc.quotationCreationTimestamp));
-      matchedItem = byValue[0];
-    }
-
-    if (!matchedItem) continue;
-
-    const email = matchedItem.fields?.email?.toLowerCase();
-    const phone = matchedItem.fields?.phone;
-    const name = matchedItem.summary;
+  for (const item of ovItems) {
+    const email = item.fields?.email?.toLowerCase();
+    const phone = item.fields?.phone;
+    const name = item.summary;
 
     if (!phone || phone.length < 9) continue;
     if (!name) continue;
-
-    // Skip als deze persoon al akkoord/afgerond is
     if (email && skipEmails.has(email)) continue;
 
-    // Skip als al follow-up gehad
     let cleanPhone = phone.replace(/[\s\-\(\)]/g, '');
     if (cleanPhone.startsWith('06')) cleanPhone = '+31' + cleanPhone.substring(1);
     if (cleanPhone.startsWith('31') && !cleanPhone.startsWith('+')) cleanPhone = '+' + cleanPhone;
     if (!cleanPhone.startsWith('+')) cleanPhone = '+31' + cleanPhone;
 
+    // Al follow-up gehad?
     if (sentLog[cleanPhone]) continue;
 
-    toSend.push({ name, phone: cleanPhone, firstName: name.split(' ')[0], docNumber: doc.quotationNumber });
+    // Haal offerte op via lead_configuration_id (lichtgewicht, per item)
+    const lcId = item.item_subject?.id;
+    if (!lcId) continue;
+
+    const docData = await rpGet('/document-service/v1/' + PID + '/quotations?lead_configuration_id=' + lcId);
+    const docs = (docData?.quotationDatas || []);
+    docs.sort((a, b) => (b.quotationCreationTimestamp || 0) - (a.quotationCreationTimestamp || 0));
+    const doc = docs[0];
+    if (!doc) continue;
+
+    // Skip als offerte al ACCEPTED is
+    if (doc.quotationStatus === 'ACCEPTED') continue;
+
+    toSend.push({
+      name,
+      phone: cleanPhone,
+      firstName: name.split(' ')[0],
+      docId: doc.documentId,
+    });
   }
 
   // Dedup op telefoon
@@ -190,8 +150,8 @@ async function main() {
     return true;
   });
 
-  console.log('Te versturen (na filters):', deduped.length);
-  console.log('Max vandaag:', MAX_PER_DAY);
+  console.log('Te versturen (na filters): ' + deduped.length);
+  console.log('Max vandaag: ' + MAX_PER_DAY);
 
   const batch = deduped.slice(0, MAX_PER_DAY);
   let sent = 0;
@@ -203,7 +163,7 @@ async function main() {
       const searchRes = await fetchRetry('https://app.trengo.com/api/v2/tickets?term=' + encodeURIComponent(s.phone) + '&channel_id=' + WA_CHANNEL + '&limit=3', {
         headers: { 'Authorization': 'Bearer ' + TRENGO_TOKEN }
       });
-      const searchData = await searchRes.json();
+      const searchData = await safeJson(searchRes);
       const tickets = searchData.data || [];
 
       let skip = false;
@@ -211,7 +171,7 @@ async function main() {
         const msgRes = await fetchRetry('https://app.trengo.com/api/v2/tickets/' + ticket.id + '/messages?limit=5', {
           headers: { 'Authorization': 'Bearer ' + TRENGO_TOKEN }
         });
-        const msgData = await msgRes.json();
+        const msgData = await safeJson(msgRes);
         for (const m of (msgData.data || [])) {
           const msg = (m.message || m.body || '').toLowerCase();
           if (msg.includes('geen interesse') || msg.includes('niet meer nodig') || msg.includes('annuleer') ||
@@ -224,8 +184,8 @@ async function main() {
       if (skip) continue;
     } catch {}
 
-    // Stuur WhatsApp
-    const offerteLink = 'https://document.reuzenpanda.nl/nl/' + PID + '/' + s.docNumber + '/latest';
+    // Stuur WhatsApp met correcte link
+    const offerteLink = 'https://document.reuzenpanda.nl/nl/' + PID + '/' + s.docId + '/latest?pdfAction=DOCSIGN';
 
     const waRes = await fetchRetry('https://app.trengo.com/api/v2/wa_sessions', {
       method: 'POST',
@@ -240,7 +200,7 @@ async function main() {
         ]
       })
     });
-    const waBody = await waRes.json();
+    const waBody = await safeJson(waRes);
 
     if (waRes.ok && waBody.message?.ticket_id) {
       await fetchRetry('https://app.trengo.com/api/v2/tickets/' + waBody.message.ticket_id + '/close', {
@@ -252,20 +212,20 @@ async function main() {
       failed++;
     }
 
-    await new Promise(r => setTimeout(r, 500));
+    // Rate limit
+    await new Promise(r => setTimeout(r, 2000));
   }
 
   console.log('\n=== SAMENVATTING ===');
-  console.log('Verstuurd:', sent);
-  console.log('Mislukt:', failed);
-  console.log('Nog te gaan:', Math.max(0, deduped.length - MAX_PER_DAY));
+  console.log('Verstuurd: ' + sent);
+  console.log('Mislukt: ' + failed);
+  console.log('Nog te gaan: ' + Math.max(0, deduped.length - MAX_PER_DAY));
 
-  if (sent > 0) {
-    const msg = 'Follow-up WhatsApp: ' + sent + ' verstuurd, ' + failed + ' mislukt, ' + Math.max(0, deduped.length - MAX_PER_DAY) + ' morgen';
-    await fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
+  if (sent > 0 || failed > 0) {
+    await fetchRetry('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: 1700128390, text: msg }),
-    });
+      body: JSON.stringify({ chat_id: 1700128390, text: 'Follow-up WhatsApp: ' + sent + ' verstuurd' + (failed > 0 ? ', ' + failed + ' mislukt' : '') + '\nNog te gaan: ' + Math.max(0, deduped.length - MAX_PER_DAY) }),
+    }).catch(() => {});
   }
 }
 

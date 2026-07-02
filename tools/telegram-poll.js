@@ -68,11 +68,20 @@ async function poll() {
 
       if (data.ok && data.result.length > 0) {
         for (const update of data.result) {
+          // Offset ALTIJD opschuiven (ook bij skips), anders blijft dezelfde update terugkomen
+          lastUpdateId = update.update_id;
+          saveState();
+
           const msg = update.message;
           if (!msg || msg.from.is_bot) continue;
 
-          lastUpdateId = update.update_id;
-          saveState();
+          // SECURITY: alleen berichten uit de chat van Daimy verwerken.
+          // Zonder dit filter kan iedereen die de bot vindt tekst in de inbox injecteren
+          // die door Claude als opdracht van Daimy wordt gelezen.
+          if (String(msg.chat?.id) !== CHAT_ID) {
+            console.log(`[telegram-poll] Genegeerd: bericht uit vreemde chat ${msg.chat?.id} (${msg.from?.first_name || '?'})`);
+            continue;
+          }
 
           const timestamp = new Date(msg.date * 1000).toISOString();
           const text = msg.text || msg.caption || (msg.photo ? '[foto]' : msg.sticker ? '[sticker]' : msg.voice ? '[spraakbericht]' : msg.document ? `[bestand: ${msg.document.file_name || 'onbekend'}]` : '[geen tekst]');

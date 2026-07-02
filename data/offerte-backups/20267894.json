@@ -1,0 +1,28 @@
+{
+  "quotationNumber": "20267894",
+  "documentId": "593f9c10-1b50-4c12-b916-e7e417d976da",
+  "name": "jeroen moerman",
+  "timestamp": "2026-06-26T07:03:05.711Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "SunProject 100\nBreedte: 2600 mm\nUitval: 1150 mm\nFrame Kleur: RAL 9001\nKleur doek: NTB\nBediening: Brel Solar motor\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1695.35,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + Montage uitvalscherm\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

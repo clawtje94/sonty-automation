@@ -1,0 +1,28 @@
+{
+  "quotationNumber": "20267922",
+  "documentId": "8c500ff2-97e1-480e-963c-520595586e50",
+  "name": "Rg Vd meer",
+  "timestamp": "2026-06-26T15:01:15.419Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2500mm\n- Uitval: 900 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 0,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

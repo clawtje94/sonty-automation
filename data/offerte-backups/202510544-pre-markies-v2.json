@@ -1,0 +1,34 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 3700mm\n- Uitval: 1150 MM\n\n- Materiaal:  Hardhout\n- Kleur: \n- Type bediening: Motor + afstandsbediening\n- Montage:",
+      "pricePerUnit": 2598,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 0,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage markies (houten kappen)\n- montage\n- klein materiaal",
+      "pricePerUnit": 250,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 1,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Somfy Connectivity\n- Telefoon bediening Somfy motoren.",
+      "pricePerUnit": 130,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 2,
+      "lockTotalPrice": false
+    }
+  ]
+}

@@ -18,7 +18,7 @@ function normPhone(p) {
   return d.slice(-9);
 }
 
-// Bepaal de relevante maand-tabnamen (huidige + vorige maand) o.b.v. een datum
+// Bepaal de relevante maanden (huidige + vorige maand) o.b.v. een datum
 function recentMonthTitles(now = new Date()) {
   const out = [];
   for (let back = 0; back < 2; back++) {
@@ -28,12 +28,26 @@ function recentMonthTitles(now = new Date()) {
   return out;
 }
 
+// Vind alle tabs die bij een maand horen — robuust tegen naamvarianten.
+// De sheet bevat historisch zowel "Aug 2025" als "Augustus 2025": match daarom op
+// maandprefix (eerste 3 letters, case-insensitive) + jaartal i.p.v. exacte naam.
+// NL-maandprefixen (jan/feb/maa/apr/mei/jun/jul/aug/sep/okt/nov/dec) zijn uniek.
+function findMonthTabs(allTitles, target) {
+  const m = target.match(/^(\S+)\s+(\d{4})$/);
+  if (!m) return [];
+  const prefix = m[1].slice(0, 3).toLowerCase();
+  const year = m[2];
+  return allTitles.filter(t => {
+    const tt = t.trim().toLowerCase();
+    return tt.startsWith(prefix) && tt.includes(year);
+  });
+}
+
 async function getTeVer(now = new Date()) {
   const auth = new google.auth.GoogleAuth({ keyFile: KEYFILE, scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'] });
   const sheets = google.sheets({ version: 'v4', auth });
   const meta = await sheets.spreadsheets.get({ spreadsheetId: SHEET_ID });
-  const tabsByTrim = {};
-  for (const s of meta.data.sheets) tabsByTrim[s.properties.title.trim()] = s.properties.title;
+  const allTitles = meta.data.sheets.map(s => s.properties.title);
 
   const phones = new Set();           // TE VER (kolom F)
   const names = new Set();
@@ -41,9 +55,19 @@ async function getTeVer(now = new Date()) {
   const akkoordNames = new Set();
   const num = (v) => { const d = String(v || '').replace(/[^\d]/g, ''); return d ? parseInt(d, 10) : 0; };
   let scannedTabs = [];
+  const missingMonths = [];
+  const tabsToScan = [];
   for (const target of recentMonthTitles(now)) {
-    const actual = tabsByTrim[target];
-    if (!actual) continue;
+    const matches = findMonthTabs(allTitles, target);
+    if (!matches.length) {
+      // WAARSCHUWING: zonder deze tab vervalt de TE VER-uitsluiting voor die maand
+      console.warn(`⚠️ TE VER: geen maandtab gevonden voor "${target}" — uitsluitingen van die maand ontbreken!`);
+      missingMonths.push(target);
+      continue;
+    }
+    tabsToScan.push(...matches);
+  }
+  for (const actual of tabsToScan) {
     scannedTabs.push(actual.trim());
     const res = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: `'${actual}'!A4:W4000` });
     for (const r of (res.data.values || [])) {
@@ -62,7 +86,7 @@ async function getTeVer(now = new Date()) {
       }
     }
   }
-  return { phones, names, akkoordPhones, akkoordNames, scannedTabs };
+  return { phones, names, akkoordPhones, akkoordNames, scannedTabs, missingMonths };
 }
 
 module.exports = { getTeVer, normPhone };

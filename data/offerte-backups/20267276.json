@@ -1,0 +1,28 @@
+{
+  "quotationNumber": "20267276",
+  "documentId": "18d76b8a-37c9-42a1-8cf2-fb09b313413a",
+  "name": "Sander Quarles van Ufford",
+  "timestamp": "2026-06-19T11:01:04.972Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "SunBasic Cassette\nBreedte: 4203mm\nUitval: 2500 mm\nFrame Kleur: RAL 9001\nKleur doek: NTB\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product.\n- 7 jaar op de motor",
+      "pricePerUnit": 2852.5,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm uitgebreid.\n- Inclusief uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 325,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

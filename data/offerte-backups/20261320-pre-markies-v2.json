@@ -1,0 +1,64 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 1600mm\n- Uitval: 1000 MM\n\n- Materiaal:  Aluminium\n- Kleur doek: Groen/wit gestreept\n- Type bediening: Somfy IO motor Solar met afstandsbediening\n- Montage:",
+      "pricePerUnit": 2281,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (aluminium kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inklemhor\nBreedte: 625 mm\nHoogte: 1260 mm\nKleur profiel: RAL 9010\nKleur gaas: Zwart",
+      "pricePerUnit": 193,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 2,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "Plissehordeur\nBreedte: 675 mm\nHoogte: 1970 mm\nKleur profiel: RAL 9010\nKleur gaas: Zwart",
+      "pricePerUnit": 515,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 3,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage inklemhor en plissehordeur",
+      "pricePerUnit": 110,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 4,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage plissehordeur",
+      "pricePerUnit": 75,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 5,
+      "lockTotalPrice": false
+    }
+  ]
+}

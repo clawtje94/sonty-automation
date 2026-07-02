@@ -1,0 +1,34 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suneye\nBreedte: 5000 mm\nUitval: 3000 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: NTB\nBediening: Somfy IO motor + Afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 3280,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 0,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Suneye\nBreedte: 3200 mm (Minimale breedte voor 3000mm uitval)\nUitval: 3000 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: NTB\nBediening: Somfy IO motor + Afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 2710,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 1,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "Montage knikarmscherm\n- Klein materiaal\n- Chemisch anker\n- Afstellen zonwering",
+      "pricePerUnit": 250,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 2,
+      "lockTotalPrice": false
+    }
+  ]
+}

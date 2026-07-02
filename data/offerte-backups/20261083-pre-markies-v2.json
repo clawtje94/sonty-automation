@@ -1,0 +1,34 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Velux dakraam \nMaat codem : GGL-C02\nRolgordijn verduisterend\nKleur doek : 4577\nBediening : Handbediend",
+      "pricePerUnit": 120,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 0,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 4,
+      "description": "Velux dakraam \nMaat codem : GGU-C04\nRolgordijn verduisterend\nKleur doek : 4577\nBediening : Handbediend",
+      "pricePerUnit": 126,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 1,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 5,
+      "description": "Montage rolgordijnen Velux dakraam",
+      "pricePerUnit": 110,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 2,
+      "lockTotalPrice": false
+    }
+  ]
+}

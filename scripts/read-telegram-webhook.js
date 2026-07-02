@@ -1,39 +1,16 @@
-// Reads Telegram messages — checks inbox file + auto-restarts daemon if needed
+// Reads Telegram messages — checks inbox file (daemon = launchd nl.sonty.telegram-poll)
+// NB: daemon-beheer (pgrep/kill/spawn) is hier bewust verwijderd. launchd met KeepAlive
+// is de enige beheerder; de oude zelf-spawn/kill veroorzaakte een kill-loop met launchd
+// (bewijs: last exit code -15 op nl.sonty.telegram-poll).
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const { execSync, spawn } = require('child_process');
 
 const TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
 const CHAT_ID = 1700128390;
 const TELEGRAM_FALLBACK_IP = '149.154.167.220';
 const INBOX_FILE = path.join(__dirname, '..', 'telegram-inbox.txt');
 const INBOX_READ_FILE = path.join(__dirname, '.telegram-inbox-lastread.txt');
-const DAEMON_SCRIPT = path.join(__dirname, '..', 'tools', 'telegram-poll.js');
-
-// === Step 0: Ensure exactly 1 daemon is running ===
-try {
-  const result = execSync('pgrep -f "telegram-poll.js"', { encoding: 'utf8' }).trim();
-  const pids = result.split('\n').filter(p => p.trim());
-  if (pids.length === 0) throw new Error('not running');
-  // Kill extra daemons if more than 1
-  if (pids.length > 1) {
-    for (let i = 1; i < pids.length; i++) {
-      try { execSync(`kill ${pids[i]}`); } catch(e) {}
-    }
-  }
-} catch(e) {
-  if (e.message === 'not running' || e.status) {
-    try {
-      const child = spawn('node', [DAEMON_SCRIPT], {
-        detached: true,
-        stdio: 'ignore'
-      });
-      child.unref();
-      console.log('[daemon herstart]');
-    } catch(e2) {}
-  }
-}
 
 // === Step 1: Read from telegram-inbox.txt (daemon output) ===
 if (fs.existsSync(INBOX_FILE)) {

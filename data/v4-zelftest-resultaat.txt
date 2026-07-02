@@ -1,0 +1,235 @@
+==========================================
+V4 OFFERTE CONTROLE — VOLLEDIGE ZELFTEST
+Datum: 2026-06-28 15:49:34
+==========================================
+
+=== DEEL 1: Unit tests (137 combinaties) ===
+
+===========================================
+V4 OFFERTE CONTROLE — ZELFTEST
+===========================================
+
+--- 1. Basisprijs lookup ---
+
+--- 2. Prijs met bediening ---
+
+--- 3. Kleur-logica ---
+
+--- 4. Rolluik kleur-meerprijs ---
+
+--- 5. Serre/Pergola kleur-meerprijs ---
+
+--- 6. Screen/Knikarm vaste meerprijs ---
+
+--- 7. Pergola uitval lookup ---
+
+--- 8. Alle bediening types ---
+
+--- 9. Tahoma logica ---
+(Tahoma logica wordt getest in --test mode met echte offertes)
+
+--- 10. Maat extractie ---
+
+===========================================
+RESULTAAT: 137/137 geslaagd, 0 gefaald
+===========================================
+
+
+=== DEEL 2: Echte offerte test — Pauline Bastie (rolluik) ===
+
+=== TEST MODE: alleen items met "Pauline Bastie" ===
+Gevonden: 1 items
+
+--- #20267840 Pauline Bastie ---
+    Kleur meerprijs rolluik: trend +15% = +€256.08
+    Prijs gecorrigeerd: €2011.63 → €1963.28 (rolluikS42 +RAL)
+    Kleur meerprijs rolluik: trend +15% = +€207.57
+    Prijs gecorrigeerd: €1609.36 → €1591.37 (rolluikS42 +RAL)
+
+**Rolluik (RollSUPER)** — €1963.28 x 1
+  Type: rolluik solar
+  Breedte: 2716 mm
+  Hoogte: 2014 mm
+  Kastmaat: 170 mm (schuin)
+  Frame Kleur: RAL 7021 structuur (+15% trendkleur)
+  Kleur Pantser: RAL 7021 structuur
+  Onderlat: Standaard
+  Bediening: afstandsbediening
+  Motor: Somfy RS100 IO solar
+  Paneel zijde: NTB
+  Lamel: RS 42, 1,0 cm dik.
+  Profiel: S-42 (42mm lamel, steviger, tot 400cm breed)
+  Montage: NTB
+  
+  **Waarom dit rolluik**
+  Premium kwaliteit, Nederlands geproduceerd. Dubbelwandige aluminium lamellen met PU-schuim voor isolatie. Op zonne-energie: geen bekabeling nodig, volledig draadloos. Bescherming tegen inbraak, zon, warmte en kou.
+  Garantie: 5 jaar op het product, 7 jaar op de motor.
+  
+  **Liever een ander model of bediening?**
+  
+  Ander model:
+  • Rolluik S-37 (37mm lamel, compact, tot 300cm): -€128
+  
+  Andere bediening:
+  • Bandbediening (handmatig): -€370
+  • LT 50 draaischakelaar (bedraad): -€249
+  • Somfy Solar RS 100 IO (premium, excl. handzender): +€263
+  • Solar Brel (zonnepaneel, incl. handzender): +€135
+  
+  Kleur:
+  • Standaardkleur (geen meerprijs): -15% op productprijs
+  • RAL kleur naar keuze: +5% op productprijs
+  
+  Smart home:
+  • Tahoma Switch (bedien alles via je telefoon): +€195
+  
+  Laat het ons weten, we passen je offerte graag aan.
+
+**Rolluik (RollSUPER)** — €1591.37 x 1
+  Type: rolluik solar
+  Breedte: 1505 mm
+  Hoogte: 2307 mm
+  Kastmaat: 170 mm (schuin)
+  Frame Kleur: RAL 7021 structuur (+15% trendkleur)
+  Kleur Pantser: RAL 7021 structuur
+  Onderlat: Standaard
+  Bediening: afstandsbediening
+  Motor: Somfy RS100 IO solar
+  Paneel zijde: NTB
+  Lamel: RS 42, 1,0 cm dik.
+  Profiel: S-42 (42mm lamel, steviger, tot 400cm breed)
+  Montage: NTB
+  
+  **Waarom dit rolluik**
+  Premium kwaliteit, Nederlands geproduceerd. Dubbelwandige aluminium lamellen met PU-schuim voor isolatie. Op zonne-energie: geen bekabeling nodig, volledig draadloos. Bescherming tegen inbraak, zon, warmte en kou.
+  Garantie: 5 jaar op het product, 7 jaar op de motor.
+  
+  **Liever een ander model of bediening?**
+  
+  Ander model:
+  • Rolluik S-37 (37mm lamel, compact, tot 300cm): -€42
+  
+  Andere bediening:
+  • Bandbediening (handmatig): -€370
+  • LT 50 draaischakelaar (bedraad): -€249
+  • Somfy Solar RS 100 IO (premium, excl. handzender): +€263
+  • Solar Brel (zonnepaneel, incl. handzender): +€135
+  
+  Kleur:
+  • Standaardkleur (geen meerprijs): -15% op productprijs
+  • RAL kleur naar keuze: +5% op productprijs
+  
+  Laat het ons weten, we passen je offerte graag aan.
+
+**Inmeten + montage rolluik solar** — €175 x 2
+  - Montage
+  - Klein materiaal
+  - Afstellen motor
+  - Verwerken verpakkingsmateriaal
+
+Opgeslagen: OK
+
+=== DEEL 3: Echte offerte test — Koert Kerk (zipscreen) ===
+
+=== TEST MODE: alleen items met "Koert Kerk" ===
+Gevonden: 1 items
+
+--- #20268027 Koert Kerk ---
+    Kleur meerprijs RAL: +€397.1
+
+**Zip Design 110** — €2570.7 x 1
+  Type: screen bedraad
+  Breedte: 2950 mm
+  Hoogte: 2500 mm
+  Kastmaat: 105 mm
+  Frame kleur: Andere RAL kleur (+€397 andere RAL kleur)
+  Kleur doek: NTB
+  Onderlat: Design
+  Bediening: afstandsbediening
+  Motor: somfy RS100 IO motor
+  Montage: NTB
+  Type geleider: NTB
+  Geleiding: ZIP (windvast)
+  
+  **Liever een ander model of bediening?**
+  
+  Ander model:
+  • Zip Square 85/100 (ZIP, dunner profiel, budget): -€159
+  • Screen Square 85/100 (zonder ZIP, niet windvast): -€565
+  
+  Andere bediening:
+  • LT 50 draaischakelaar (bedraad): -€182
+  • Solar Brel (zonnepaneel, incl. handzender): +€65
+  • Somfy Solar RS 100 IO (premium, excl. handzender): +€190
+  
+  Kleur:
+  • Standaardkleur: -€397
+  • Trendkleur: -€198
+  
+  Laat het ons weten, we passen je offerte graag aan.
+  
+  **Waarom dit screen**
+  Premium kwaliteit met zip-technologie. Ritsgeleidingssysteem: doek zit vast in de geleiders, geen klapperen bij wind. Fluisterstille Somfy motor met afstandsbediening. Bescherming tegen zon, warmte en inkijk met behoud van uitzicht. Compacte cassette: doek en motor beschermd tegen weersinvloeden.
+  Garantie: .
+
+**Inmeten + montage screen** — €195 x 1
+  - Montage
+  - Klein materiaal
+  - Afstellen motor
+  - Verwerken verpakkingsmateriaal
+
+Opgeslagen: OK
+
+=== DEEL 4: Echte offerte test — Bernadette CIJNTJE (pergola) ===
+
+=== TEST MODE: alleen items met "Bernadette CIJNTJE" ===
+Gevonden: 1 items
+
+--- #20268030 Bernadette CIJNTJE ---
+
+**Pergola 165 zip** — €7466.8 x 1
+  Type: pergola draaischakelaar
+  Breedte: 4500 mm
+  Uitval: 4000 mm
+  Frame Kleur: RAL 7016 structuur (standaard)
+  Kleur doek: NTB
+  Bediening: vaste draaischakelaar op de muur
+  Motor: Somfy LT motor
+  Motorzijde: NTB
+  Kleur/lengte motorkabel: NTB
+  Montagesteunen: NTB
+  Overige: NTB
+  
+  **Liever een ander model of bediening?**
+  
+  Ander model:
+  • Knikarmscherm SunEye (wandmontage, geen palen nodig) (4500×3000mm): -€4148
+  • Knikarmscherm SunEye XL (extra breed, tot 745cm) (4500×3500mm): -€3242
+  
+  Andere bediening:
+  • Motor + afstandsbediening (Sunea IO + handzender): +€139
+  
+  Kleur:
+  • RAL kleur naar keuze: +15% op productprijs
+  
+  Smart home:
+  • Tahoma Switch (bedien alles via je telefoon, vereist IO motor): +€195 (excl. motor upgrade)
+  
+  Laat het ons weten, we passen je offerte graag aan.
+  
+  **Waarom deze pergola**
+  Terrasoverkapping met waterdicht doek. Beschermd tegen zon en regen: je terras het hele jaar bruikbaar. Stevig aluminium frame: duurzaam en onderhoudsarm. Gemotoriseerd: doek in- en uitrollen met afstandsbediening.
+  Garantie: .
+
+**Inmeten + montage Pergola** — €650 x 1
+  - Montage
+  - Klein materiaal
+  - Afstellen
+  - Elektra afwerken
+  - Verwerken verpakkingsmateriaal
+
+Opgeslagen: OK
+
+==========================================
+ZELFTEST AFGEROND
+==========================================

@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20268339",
+  "documentId": "bb16837f-e304-4cd7-a241-65b53a3423a7",
+  "name": "Mark Wessels",
+  "timestamp": "2026-07-01T07:32:34.002Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 4000mm\n- Uitval: 2000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Draaischakelaar\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

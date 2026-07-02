@@ -1,0 +1,54 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2635mm\n- Uitval: 1000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Motor + afstandsbediening\n- Montage:",
+      "pricePerUnit": 2400,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": {
+        "name": "",
+        "amount": 15,
+        "type": "PERCENTAGE",
+        "vatPercentage": 21
+      },
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage markies (Aluminium kappen)\n- montage\n- klein materiaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": {
+        "name": "",
+        "amount": 15,
+        "type": "PERCENTAGE",
+        "vatPercentage": 21
+      },
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Takelkosten",
+      "pricePerUnit": 125,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 2,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "als de markies niet op het balkon geplaatst wordt rekenen wij wel hoogwerker kosten dit is 550,- euro",
+      "pricePerUnit": 0,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "discount": null,
+      "position": 3,
+      "lockTotalPrice": false
+    }
+  ]
+}

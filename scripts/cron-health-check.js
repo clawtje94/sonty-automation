@@ -22,14 +22,18 @@ const LOGS_DIR = '/Users/clawdboot/sonty/logs';
 
 // Verwachte actieve daemons + max uren sinds laatste log update
 const DAEMONS = [
-  { label: 'nl.sonty.offerte-controle-v3', log: 'offerte-controle-v3.log', maxLogAgeH: 30, name: 'Offerte controle v3' },
+  { label: 'nl.sonty.offerte-v4', log: 'v4.log', maxLogAgeH: 30, name: 'Offerte controle v4' },
+  { label: 'nl.sonty.v4-selfcheck', log: 'v4-selfcheck.log', maxLogAgeH: 30, name: 'V4 self-check' },
   { label: 'nl.sonty.gripp-invullen', log: 'gripp-invullen.log', maxLogAgeH: 26, name: 'Gripp invullen' },
   { label: 'nl.sonty.followup-whatsapp', log: 'followup-whatsapp.log', maxLogAgeH: 26, name: 'Follow-up WhatsApp' },
   { label: 'nl.sonty.telegram-poll', log: null, maxLogAgeH: null, name: 'Telegram poll' },
-  { label: 'nl.sonty.auto-sync', log: 'sync.log', maxLogAgeH: 3, name: 'Auto-sync (Outlook/Planado)' },
+  { label: 'nl.sonty.reviews-sync', log: 'reviews-sync.log', maxLogAgeH: 26, name: 'Reviews-sync' },
   { label: 'nl.sonty.auto-resume', log: null, maxLogAgeH: null, name: 'Auto-resume' },
   { label: 'nl.sonty.feedback-processor', log: null, maxLogAgeH: null, name: 'Feedback processor' },
 ];
+// NB: nl.sonty.auto-sync is hier bewust weg — de RP→HubSpot-sync draait via crontab,
+// niet via launchd. Die wordt hieronder gecheckt op de mtime van logs/sync.log.
+// De Outlook/Planado-sync uit de oude naam bestaat niet meer als daemon.
 
 async function sendTelegram(text) {
   await fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
@@ -72,7 +76,9 @@ function checkDaemon(d) {
         const lastStart = content.lastIndexOf('start');
         const lastRun = lastStart >= 0 ? content.substring(lastStart) : content.slice(-3000);
         if (/SELF-CHECK FAIL/i.test(lastRun)) issues.push('SELF-CHECK FAIL in laatste run');
-        if (/(TypeError|ReferenceError|ECONNREFUSED|ECONNRESET|UnhandledPromise)/.test(lastRun)) issues.push('error in laatste run');
+        // Filter retry-meldingen eruit — alleen echte crashes tellen
+        const lastRunClean = lastRun.replace(/\(netwerkfout, poging .+?\)/g, '');
+        if (/(TypeError|ReferenceError|ECONNREFUSED|ECONNRESET|UnhandledPromise)/.test(lastRunClean)) issues.push('error in laatste run');
       } catch {}
     } else {
       issues.push('logbestand ontbreekt');
@@ -97,6 +103,27 @@ async function main() {
     }
   }
 
+  // RP→HubSpot sync (crontab, elke 15 min): check dat logs/sync.log vers is
+  try {
+    const syncLog = path.join(LOGS_DIR, 'sync.log');
+    if (!fs.existsSync(syncLog)) { results.push('❌ RP→HubSpot sync (cron): sync.log ontbreekt'); problems++; }
+    else {
+      const ageMin = (Date.now() - fs.statSync(syncLog).mtimeMs) / 60000;
+      if (ageMin > 30) { results.push('❌ RP→HubSpot sync (cron): laatste run ' + Math.round(ageMin) + ' min geleden (verwacht elke 15 min)'); problems++; }
+      else results.push('✅ RP→HubSpot sync (cron)');
+    }
+  } catch (e) { results.push('❌ RP→HubSpot sync (cron): check faalde: ' + e.message); problems++; }
+
+  // Sales-bot: staat sinds 20 mei uit (plist bestaat, niet geladen). Waarschuwing, geen alarm.
+  try {
+    let loaded = true;
+    try {
+      const out = execSync('launchctl print gui/501/nl.sonty.sales-bot 2>&1', { encoding: 'utf8' });
+      if (out.includes('Could not find service')) loaded = false;
+    } catch { loaded = false; }
+    results.push(loaded ? '✅ Sales-bot (WhatsApp AI)' : '⚠️ Sales-bot (WhatsApp AI): staat uit sinds 20 mei — bewust? (plist bestaat, niet geladen)');
+  } catch {}
+
   // Schijfruimte check
   try {
     const df = execSync("df -h / | tail -1 | awk '{print $5}'", { encoding: 'utf8' }).trim();
@@ -111,7 +138,8 @@ async function main() {
   if (problems > 0) {
     await sendTelegram('🚨 HEALTH CHECK: ' + problems + ' probleem(en)\n\n' + results.join('\n'));
   } else if (now.getHours() < 12) {
-    await sendTelegram('✅ Health check: alle ' + DAEMONS.length + ' daemons healthy');
+    const warnings = results.filter(r => r.startsWith('⚠️'));
+    await sendTelegram('✅ Health check: alles healthy' + (warnings.length ? '\n\n' + warnings.join('\n') : ''));
   }
 }
 

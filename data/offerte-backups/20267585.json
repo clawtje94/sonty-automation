@@ -1,0 +1,28 @@
+{
+  "quotationNumber": "20267585",
+  "documentId": "503dbbe7-5020-41d8-968a-4eb7f0a5387b",
+  "name": "Martijn Sweere",
+  "timestamp": "2026-06-23T11:01:01.162Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 3536mm\n- Uitval: 1350 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 0,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "quotationNumber": "20267763",
+  "documentId": "348d5d68-3bed-4167-a5e7-3000afcb2d74",
+  "name": "Rob Carton",
+  "timestamp": "2026-06-25T07:31:33.507Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suneye\nBreedte: 5500 mm\nUitval: 3000 mm\nFrame kleur: RAL 9005 structuur\nKleur doek: NTB\nBediening: Handbediend\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 3492.8,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm uitgebreid.\n- Inclusief uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 325,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

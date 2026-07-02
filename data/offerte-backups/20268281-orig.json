@@ -1,0 +1,253 @@
+{
+  "documentId": "d9993268-3e2d-457f-bd9b-b3bb8bfca2e1",
+  "versionId": "02693d52-fe9d-4c8f-8bbd-ff770a352c82",
+  "profileId": null,
+  "documentTitle": "Offerte #20268281",
+  "documentStatus": "DRAFT",
+  "documentNumber": "20268281",
+  "documentType": "QUOTATION",
+  "title": "Offerte #20268281",
+  "quotationNumber": "20268281",
+  "quotationTitle": "Offerte #20268281",
+  "quotationCreationTimestamp": 1782801639053,
+  "quotationExpirationTimestamp": 1785393639053,
+  "quotationStatus": "DRAFT",
+  "isoCurrency": "EUR",
+  "locale": "nl-NL",
+  "subjects": {
+    "leadConfiguration": "831ba714-afc6-43bd-93fd-114d1f3e1b97",
+    "contactPerson": "b325b8bc-88be-41c1-b40e-cb287224541f"
+  },
+  "segments": {
+    "defaultTemplateContactPart": {
+      "type": "contactPerson",
+      "data": "**${organisation.name}**\n${organisation.address}\n**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+    },
+    "defaultUserDeclinePart": {
+      "type": "userDecline",
+      "data": {
+        "isDeclinedByCustomer": null,
+        "signingProps": null,
+        "artifactName": null,
+        "timestamp": null
+      }
+    },
+    "defaultSignaturePart": {
+      "type": "signature",
+      "data": {
+        "isSignedByCustomer": null,
+        "signingProps": null,
+        "artifactName": null,
+        "timestamp": null
+      }
+    },
+    "defaultTemplateProfileLogo": {
+      "type": "companyProfileLogo",
+      "data": "![|6lh]($companyProfile.logo)"
+    },
+    "defaultTemplateProfileText": {
+      "type": "text",
+      "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+    },
+    "defaultTemplatePriceLineGroup": {
+      "type": "priceLineGroup",
+      "data": {
+        "name": null,
+        "lines": [
+          {
+            "units": 1,
+            "description": "**SunEye — Knikarmscherm**\nBreedte: 3350 mm | Uitval: 3000 mm\nFrame kleur: RAL 9010 (standaard)\nKleur doek: NTB\nBediening: Afstandsbediening (Somfy IO)\nHandzender: Situo 1 IO (1-kanaal)\nMotor: Somfy Sunea IO\nCassette: Gesloten, slank design\n\nGarantie: 2 jaar montage | 3 jaar product | 5 jaar motor\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• SunBasic (open arm, geen cassette): -€688\n• SunBasic Cassette (gesloten, instap): -€431\n• SunEye XL (extra breed, tot 745cm): +€814\n• SunElite (topmodel, LED mogelijk): +€1.008\n\nAndere bediening:\n• Draaistang (handmatig, geen motor): -€414\n• Orea WT (bedraad, wandschakelaar): -€140\n\nExtra:\n• Verlengde muursteun 50/80cm: +€83/€116 per stuk\n• Trendkleur: +€323 | RAL kleur: +€461\n\nLaat het ons weten, we passen je offerte graag aan.",
+            "pricePerUnit": 3106.5,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": null,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Montage knikarmscherm**",
+            "pricePerUnit": 275,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": null,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": null,
+        "showPrices": null
+      }
+    }
+  },
+  "pricing": {
+    "total": 0
+  },
+  "renderRows": [
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileLogo"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileText"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateContactPart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "quotationData",
+              "target": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "priceLineGroupCombined",
+              "target": "defaultTemplatePriceLineGroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "userDecline",
+              "target": "defaultUserDeclinePart"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "signature",
+              "target": "defaultSignaturePart"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "renderTemplate": null,
+  "artifacts": null
+}

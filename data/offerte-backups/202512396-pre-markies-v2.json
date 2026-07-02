@@ -1,0 +1,24 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 3000mm\n- Uitval: 1350 MM\n\n- Materiaal:  Hout (Meranti)\n- Kleur:  NTB\n- Type bediening: Handbediend\n- Montage:\n- Diepe kappen icm Uitval 1350mm",
+      "pricePerUnit": 2128,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage markies (houten kappen)\n- montage\n- klein materiaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "lines": [
+    {
+      "units": 7,
+      "description": "Markies\n- Breedte: 1847mm\n- Uitval: 1150 MM\n\n- Materiaal:  Hard hout\n- Kleur:  NTB\n- Type bediening: Draaischakelaar\n- Montage: NTB",
+      "pricePerUnit": 1981,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 7,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

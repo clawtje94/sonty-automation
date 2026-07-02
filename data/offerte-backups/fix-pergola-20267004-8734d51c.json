@@ -1,0 +1,301 @@
+{
+ "documentId": "8734d51c-a38e-43a7-b9ca-e349446d2776",
+ "versionId": "23165829-c5e5-45ba-a7ab-9609a29b94d5",
+ "documentTitle": "Offerte #20267004",
+ "documentStatus": "REJECTED",
+ "documentNumber": "20267004",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20267004",
+ "quotationNumber": "20267004",
+ "quotationTitle": "Offerte #20267004",
+ "quotationCreationTimestamp": 1781347764766,
+ "quotationExpirationTimestamp": 1783939764766,
+ "quotationStatus": "REJECTED",
+ "isoCurrency": "EUR",
+ "subjects": {
+  "leadConfiguration": "896d6bad-7b8b-4f4b-9d00-4d0afb5adb88",
+  "contactPerson": "76e62fd3-17f2-44c7-bd59-f52a2eb1d821"
+ },
+ "segments": {
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "c536a4f6-780b-4bf4-aa2f-250a5787f416": {
+   "type": "userDecline",
+   "data": {
+    "isDeclinedByCustomer": true,
+    "signingProps": {
+     "REASON_CATEGORY": "",
+     "REASON": "",
+     "USER_AGENT": "node"
+    },
+    "artifactName": "artifact",
+    "timestamp": 1782028311461
+   }
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 1,
+      "description": "**Suncontrol 165 zip**\nType: serre zonwering draaischakelaar\nBreedte: 6079 mm\nUitval: 2500 MM\nFrame Kleur: RAL 9010 structuur\nBediening: vaste draaischakelaar op de muur\nMotor: Somfy LT motor\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nWaarom deze serre zonwering:\n- Sunmaster Suncontrol: speciaal ontworpen voor glazen daken en serres\n- Houdt warmte buiten: aangenaam klimaat in uw serre\n- Stevig aluminium frame met strakke afwerking\n- Fluisterstille Somfy motor met afstandsbediening\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 7565.3,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "**Suncontrol 165 zip**\nType: serre zonwering draaischakelaar\nBreedte: 6079 mm\nUitval: 2500 MM\nFrame Kleur: RAL 9010 structuur\nBediening: vaste draaischakelaar op de muur\nMotor: Somfy LT motor\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nWaarom deze serre zonwering:\n- Sunmaster Suncontrol: speciaal ontworpen voor glazen daken en serres\n- Houdt warmte buiten: aangenaam klimaat in uw serre\n- Stevig aluminium frame met strakke afwerking\n- Fluisterstille Somfy motor met afstandsbediening\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 7565.3,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 2,
+      "description": "**Inmeten + montage serre zonwering.**\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 350,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "15% tijdelijke actie",
+     "amount": 15,
+     "type": "PERCENTAGE",
+     "vatPercentage": 21
+    }
+   }
+  },
+  "6972cde3-dd9d-4125-9b5e-ae20b9ac0423": {
+   "type": "text",
+   "data": "**Waarom Sonty?**\n\n- Sunmaster Premium Dealer: wij leveren uitsluitend A-merk zonwering van de hoogste kwaliteit\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij u thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 500+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+  }
+ },
+ "pricing": {
+  "total": 13456.01
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "6972cde3-dd9d-4125-9b5e-ae20b9ac0423"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

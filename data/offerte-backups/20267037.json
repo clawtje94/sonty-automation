@@ -1,0 +1,28 @@
+{
+  "quotationNumber": "20267037",
+  "documentId": "a4344f35-e942-4061-ac71-2294360bece0",
+  "name": "T Quintarelli",
+  "timestamp": "2026-06-15T07:31:27.309Z",
+  "lines": [
+    {
+      "units": 2,
+      "description": "SunCube XL\nBreedte: 5000 mm\nUitval: 1150 mm\nFrame Kleur: RAL 9001\nKleur doek: NTB\nBediening: Brel Solar motor\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 2981.51,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "Inmeten + Montage uitvalscherm\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": null,
+      "position": null,
+      "lockTotalPrice": false
+    }
+  ]
+}

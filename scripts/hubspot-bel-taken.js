@@ -20,6 +20,25 @@ const RECENT = arg === 'recent';        // alleen leads van de afgelopen 2 uur (
 const LIMIT = (ALL || RECENT) ? 200 : parseInt(arg, 10);
 const DRY = process.argv.includes('--dry');
 
+const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
+async function sendTelegram(text) {
+  await fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: 1700128390, text: text.substring(0, 4000) }),
+  }).catch(() => {});
+}
+
+// Alert max 1x per 6 uur (script draait elke 15 min — anders alert-spam)
+function alertThrottled(key, text) {
+  const fs = require('fs'), path = require('path');
+  const marker = path.join(__dirname, '.beltaken-alert-' + key + '.txt');
+  try {
+    if (fs.existsSync(marker) && Date.now() - fs.statSync(marker).mtimeMs < 6 * 3600 * 1000) return Promise.resolve();
+    fs.writeFileSync(marker, new Date().toISOString());
+  } catch {}
+  return sendTelegram(text);
+}
+
 const jget = async (u) => (await fetch(u, { headers: H })).json();
 const jpost = async (u, b) => { const r = await fetch(u, { method: 'POST', headers: H, body: JSON.stringify(b) }); return { ok: r.ok, status: r.status, data: await r.json() }; };
 const jpatch = async (u, b) => { const r = await fetch(u, { method: 'PATCH', headers: H, body: JSON.stringify(b) }); return { ok: r.ok, status: r.status, data: await r.json() }; };
@@ -109,10 +128,21 @@ async function getOpenBelTaak(dealId) {
   if (!ALL) todo = todo.slice(0, LIMIT);
   console.log(`Verse leads totaal: ${total}. Verwerk: ${todo.length}${DRY ? ' (DRY)' : ''}\n`);
 
-  // "TE VER"-leads uit het register laden (niet bellen). Faalt dit, dan gaan we door zonder uitsluiting.
-  let teVer = { phones: new Set(), names: new Set(), akkoordPhones: new Set(), akkoordNames: new Set() };
-  try { teVer = await getTeVer(); console.log(`Uitsluiting: ${teVer.phones.size} TE VER + ${teVer.akkoordPhones.size} akkoord/ingekocht (tabs: ${teVer.scannedTabs.join(', ')})\n`); }
-  catch (e) { console.log(`⚠️ TE VER-lijst niet geladen (${e.message}) — ga door zonder uitsluiting\n`); }
+  // "TE VER"-leads uit het register laden (niet bellen).
+  // Faalt dit, dan SLAAN we de run OVER: doorgaan zonder uitsluiting zou bel-taken
+  // aanmaken voor TE VER-leads. Volgende cron-run (15 min) probeert het opnieuw.
+  let teVer;
+  try {
+    teVer = await getTeVer();
+    console.log(`Uitsluiting: ${teVer.phones.size} TE VER + ${teVer.akkoordPhones.size} akkoord/ingekocht (tabs: ${teVer.scannedTabs.join(', ')})\n`);
+    if (teVer.missingMonths && teVer.missingMonths.length) {
+      await alertThrottled('tab', '⚠️ Bel-taken: maandtab(s) niet gevonden in offerte-register: ' + teVer.missingMonths.join(', ') + '. TE VER-uitsluiting voor die maand(en) ontbreekt — check de tabnaam in de sheet.');
+    }
+  } catch (e) {
+    console.log(`❌ TE VER-lijst niet geladen (${e.message}) — run OVERGESLAGEN\n`);
+    await alertThrottled('fail', '🚨 Bel-taken run overgeslagen: TE VER-lijst kon niet geladen worden (' + e.message.substring(0, 150) + '). Zonder die lijst zouden TE VER-leads een bel-taak krijgen. Volgende run probeert opnieuw.');
+    process.exit(1);
+  }
 
   let created = 0, updated = 0, skipped = 0, teVerSkip = 0;
   for (const d of todo) {

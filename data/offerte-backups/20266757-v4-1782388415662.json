@@ -1,0 +1,329 @@
+{
+  "documentId": "b805fe5d-a85a-4932-b4f7-c45030093e09",
+  "versionId": "d97f5abe-ea1b-4821-90a8-9191b59aa0e7",
+  "profileId": null,
+  "documentTitle": "Offerte #20266757",
+  "documentStatus": "SENT",
+  "documentNumber": "20266757",
+  "documentType": "QUOTATION",
+  "title": "Offerte #20266757",
+  "quotationNumber": "20266757",
+  "quotationTitle": "Offerte #20266757",
+  "quotationCreationTimestamp": 1780753286189,
+  "quotationExpirationTimestamp": 1783345286189,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "locale": null,
+  "subjects": {
+    "leadConfiguration": "b11e8afd-5acd-4b08-bf63-5ce4212fcea1",
+    "contactPerson": "41c5678d-cc0b-4001-b493-5ee7e02a5790"
+  },
+  "segments": {
+    "defaultTemplateContactPart": {
+      "type": "contactPerson",
+      "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+    },
+    "defaultSignaturePart": {
+      "type": "signature",
+      "data": {
+        "isSignedByCustomer": null,
+        "signingProps": null,
+        "artifactName": null,
+        "timestamp": null
+      }
+    },
+    "defaultTemplateProfileLogo": {
+      "type": "companyProfileLogo",
+      "data": "![|6lh]($companyProfile.logo)"
+    },
+    "defaultTemplateProfileText": {
+      "type": "text",
+      "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+    },
+    "defaultTemplatePriceLineGroup": {
+      "type": "priceLineGroup",
+      "data": {
+        "name": null,
+        "lines": [
+          {
+            "units": 1,
+            "description": "**SunEye — Knikarmscherm**\nBreedte: 4500 mm | Uitval: 3000 mm\nFrame kleur: RAL 9010 (standaard)\nKleur doek: NTB\nBediening: Afstandsbediening (Somfy IO)\nHandzender: Situo 1 IO (1-kanaal)\nMotor: Somfy Sunea IO\nCassette: Gesloten, slank design\n\nGarantie: 2 jaar montage | 3 jaar product | 5 jaar motor\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• SunBasic (open arm, geen cassette): -€688\n• SunBasic Cassette (gesloten, instap): -€431\n• SunEye XL (extra breed, tot 745cm): +€814\n• SunElite (topmodel, LED mogelijk): +€1.008\n\nAndere bediening:\n• Draaistang (handmatig, geen motor): -€414\n• Orea WT (bedraad, wandschakelaar): -€140\n\nExtra:\n• Verlengde muursteun 50/80cm: +€83/€116 per stuk\n• Trendkleur: +€323 | RAL kleur: +€461\n\nLaat het ons weten, we passen je offerte graag aan.",
+            "pricePerUnit": 3643.2,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 0,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Zip Design 110 — Zipscreen**\nBreedte: 2000 mm | Hoogte: 1500 mm\nFrame kleur: RAL 9010 (standaard)\nDoek: Sergé 525 gr/m²\nBediening: Afstandsbediening (Somfy IO)\nHandzender: Situo 1 IO (1-kanaal)\nMotor: Somfy Sunilus IO (17 rpm)\nGeleiding: ZIP (windvast)\nOnderlat: Geïntegreerd (strak design)\n\nGarantie: 2 jaar montage | 3 jaar product | 5 jaar motor\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• Zip Square 85/100 (ZIP, kleiner profiel): -€73\n• Screen Square 85/100 (zonder ZIP, niet windvast): -€322\n\nAndere bediening:\n• LT 50 draaischakelaar (bedraad): -€182\n• Solar Brel (zonnepaneel, incl. handzender): +€65\n• Solar RS 100 IO (premium solar): +€190\n\nExtra:\n• Wandmontagebeugel: +€19/stuk\n• Trendkleur: +€171 | RAL kleur: +€340\n\nLaat het ons weten, we passen je offerte graag aan.",
+            "pricePerUnit": 1579.6,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 1,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Rolluik S-37 — Rolluik**\nBreedte: 1500 mm | Hoogte: 1500 mm\nKleur: RAL 9010 (standaard)\nBediening: Afstandsbediening (Somfy IO)\nHandzender: Situo 1 IO (1-kanaal)\nMotor: Somfy RS 100 IO (17 rpm)\nKast: 45° afgeschuinde kast (standaard)\nProfiel: S-37 (standaard, tot 300cm breed)\n\nGarantie: 2 jaar montage | 3 jaar product | 5 jaar motor\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• Rolluik S-42 (breder profiel, tot 400cm): +€153\n• Ronde kast (i.p.v. 45° afgeschuind): +20% meerprijs\n\nAndere bediening:\n• Bandbediening (handmatig, geen motor): -€370\n• LT 50 draaischakelaar (bedraad): -€249\n• Ilmo WT (bedraad, wandschakelaar): -€194\n• Solar RS 100 IO (zonnepaneel): +€263\n• Solar Brel (zonnepaneel, incl. handzender): +€135\n\nExtra:\n• Trendkleur: +15% | RAL kleur/ronde kast: +20%\n\nLaat het ons weten, we passen je offerte graag aan.",
+            "pricePerUnit": 1030.7,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 2,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**SunCube 150 — Uitvalscherm**\nBreedte: 2000 mm | Doek: 165 (uitval 115 tot 90°)\nFrame kleur: RAL 9010 (standaard)\nKleur doek: NTB\nBediening: Afstandsbediening (Somfy IO)\nHandzender: Situo 1 IO (1-kanaal)\nMotor: Somfy Sunea IO\nCassette: Gesloten, rond design (150mm)\n\nGarantie: 2 jaar montage | 3 jaar product | 5 jaar motor\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• SunProject 100 (rechthoekige cassette, breder leverbaar): -€369\n\nAndere bediening:\n• Draaistang (handmatig, geen motor): -€479\n• Orea WT (bedraad, wandschakelaar): -€150\n• Solar Brel (zonnepaneel, incl. handzender): -€1\n\nExtra:\n• Balkonuitvoering (2 armen): +€142\n• Trendkleur: per maat | RAL kleur: per maat\n\nLaat het ons weten, we passen je offerte graag aan.",
+            "pricePerUnit": 1870,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 3,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**SunControl 165 ZIP — Serre/Veranda zonwering**\nBreedte: 4000 mm | Uitval: 3000 mm\nFrame kleur: Antraciet structuur (standaard)\nDoek: NTB\nBediening: Afstandsbediening (Somfy IO)\nHandzender: Situo 1 IO (1-kanaal)\nMotor: Somfy Sunea IO\nType: Onderdak zonwering (windvast ZIP)\n\nGarantie: 2 jaar montage | 3 jaar product | 5 jaar motor\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• SunControl 150 (onderdak, zonder ZIP): -€551\n• SunControl 165 ZIP bovendak (boven de serre): €0 verschil\n• SunControl 165 ZIP pergola (vrijstaand met palen): +€2.695\n\nAndere bediening:\n• Orea WT (bedraad, wandschakelaar): -€139\n\nExtra:\n• Hoeksteun wandbevestiging 50×50: +€19/stuk\n• Hoeksteun wandbevestiging 80×60: +€21/stuk\n• RAL kleur naar keuze: +15%\n\nLaat het ons weten, we passen je offerte graag aan.",
+            "pricePerUnit": 4802.6,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 4,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Montage knikarmscherm**",
+            "pricePerUnit": 275,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 5,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Montage screen**",
+            "pricePerUnit": 195,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 6,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Montage rolluik**",
+            "pricePerUnit": 195,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 7,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Montage uitvalscherm**",
+            "pricePerUnit": 220,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 8,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Montage serre zonwering**",
+            "pricePerUnit": 350,
+            "imageUri": null,
+            "vatPercentage": 21,
+            "discount": null,
+            "position": 9,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": {
+          "name": "15% tijdelijke actie",
+          "amount": 15,
+          "type": "PERCENTAGE",
+          "vatPercentage": 21
+        },
+        "showPrices": null
+      }
+    }
+  },
+  "pricing": {
+    "total": 12036.935000000001
+  },
+  "renderRows": [
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileLogo"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileText"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateContactPart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "quotationData",
+              "target": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "priceLineGroupCombined",
+              "target": "defaultTemplatePriceLineGroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "userDecline",
+              "target": null
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "signature",
+              "target": "defaultSignaturePart"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "renderTemplate": null,
+  "artifacts": null
+}

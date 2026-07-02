@@ -1,0 +1,94 @@
+{
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suneye voorraad scherm\nBreedte: 5000 mm\nUitval: 3000 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: Grijs\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 3524,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": {
+        "name": "",
+        "amount": 20,
+        "type": "PERCENTAGE",
+        "vatPercentage": 21
+      },
+      "position": 0,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Eolis 3D windsensor IO\n- Windbeveiliging in de voorlijst\n- De windsensor is een hulp stuk hier kunnen geen garantie rechten aan verleend worden mbt windschade.",
+      "pricePerUnit": 165.55,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": {
+        "name": "",
+        "amount": 20,
+        "type": "PERCENTAGE",
+        "vatPercentage": 21
+      },
+      "position": 1,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage Knikarmscherm uitgebreid.\n- Inclusief uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering",
+      "pricePerUnit": 300,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": {
+        "name": "",
+        "amount": 20,
+        "type": "PERCENTAGE",
+        "vatPercentage": 21
+      },
+      "position": 2,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2588mm\n- Uitval: 1350 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Somfy IO motor Solar\n- Montage:",
+      "pricePerUnit": 2747,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": {
+        "name": "",
+        "amount": 15,
+        "type": "PERCENTAGE",
+        "vatPercentage": 21
+      },
+      "position": 3,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Montage markies \n- montage\n- klein materiaal",
+      "pricePerUnit": 220,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": {
+        "name": "",
+        "amount": 15,
+        "type": "PERCENTAGE",
+        "vatPercentage": 21
+      },
+      "position": 4,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Somfy Connectivity\n- Telefoon bediening Somfy motoren.",
+      "pricePerUnit": 139.75,
+      "imageUri": null,
+      "vatPercentage": 21,
+      "discount": {
+        "name": "",
+        "amount": 15,
+        "type": "PERCENTAGE",
+        "vatPercentage": 21
+      },
+      "position": 5,
+      "lockTotalPrice": false
+    }
+  ]
+}

@@ -194,16 +194,18 @@ function findGrippProductId(description) {
 async function main() {
   console.log('[' + new Date().toISOString().substring(11, 19) + '] Gripp invullen v2 start');
 
-  const ninetyDaysAgo = Date.now() - 90 * 86400000;
   const itemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
   const items = (itemsData?.items || []).filter(i =>
     i.status_id === GRIP_INVULLEN_STATUS &&
-    !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED') &&
-    i.timestamp_created > ninetyDaysAgo
+    !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
   );
 
   const sentLog = getSentLog();
-  const toProcess = items.filter(i => !sentLog[i.summary]);
+  // Dedup op uniek RP backlog-item-id ('item:<id>'), niet op klantnaam: een tweede
+  // order van dezelfde klant (nieuw item, zelfde naam) werd vroeger stil overgeslagen.
+  // Migratie: oude markers zijn op naam gekeyd — die blijven geldig (naam-key OF id-key
+  // = al gedaan), zodat historische items niet opnieuw verwerkt worden.
+  const toProcess = items.filter(i => !sentLog[i.summary] && !sentLog['item:' + i.id]);
 
   console.log('Gripp invullen items:', items.length, '| Nieuw:', toProcess.length);
   if (toProcess.length === 0) { console.log('Niets te doen'); return; }
@@ -357,6 +359,8 @@ async function main() {
               company: companyId,
               description: beschrijving.join('\n'),
               offerlines: offerlines,
+              filesavailableforclient: true,
+              signingenabled: true,
             }
           },
           id: 2,
@@ -392,7 +396,9 @@ async function main() {
       const statusOk = await setStatus(item.id, AFGEROND_STATUS);
       console.log('  RP status → Afgerond:', statusOk ? 'OK' : 'FAIL');
 
-      markSent(item.summary, {
+      // Nieuwe key: uniek item-id (naam als info in de data, niet meer als key)
+      markSent('item:' + item.id, {
+        summary: item.summary,
         grippCompanyId: companyId,
         grippOfferId: createdOffers[0].grippOfferId,
         rpDocNumber: createdOffers[0].rpDocNumber,

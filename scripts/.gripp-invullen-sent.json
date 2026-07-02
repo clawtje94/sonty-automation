@@ -1080,5 +1080,122 @@
       }
     ],
     "processedAt": "2026-07-01T16:31:01.465Z"
+  },
+  "item:975ec522-3b56-488e-976c-7d32219882f6": {
+    "summary": "R. Rai",
+    "grippCompanyId": 99411,
+    "grippOfferId": 8353,
+    "rpDocNumber": "20267963",
+    "allOffers": [
+      {
+        "grippOfferId": 8353,
+        "rpDocNumber": "20267963"
+      }
+    ],
+    "processedAt": "2026-07-02T16:30:30.432Z"
+  },
+  "item:0cc6a250-5c50-4832-9160-1612c3a68b7f": {
+    "summary": "Sander van der Linden",
+    "grippCompanyId": 99412,
+    "grippOfferId": 8354,
+    "rpDocNumber": "20267943",
+    "allOffers": [
+      {
+        "grippOfferId": 8354,
+        "rpDocNumber": "20267943"
+      }
+    ],
+    "processedAt": "2026-07-02T16:30:34.361Z"
+  },
+  "item:333e3394-9eb1-492a-a430-8a749565dae0": {
+    "summary": "Carin Gelpke",
+    "grippCompanyId": 99413,
+    "grippOfferId": 8355,
+    "rpDocNumber": "20267780",
+    "allOffers": [
+      {
+        "grippOfferId": 8355,
+        "rpDocNumber": "20267780"
+      }
+    ],
+    "processedAt": "2026-07-02T16:30:37.936Z"
+  },
+  "item:9ab4d098-e7f8-454f-a460-a1ab45095ef5": {
+    "summary": "Danique van den Berge",
+    "grippCompanyId": 99414,
+    "grippOfferId": 8356,
+    "rpDocNumber": "20268344",
+    "allOffers": [
+      {
+        "grippOfferId": 8356,
+        "rpDocNumber": "20268344"
+      }
+    ],
+    "processedAt": "2026-07-02T16:30:41.482Z"
+  },
+  "item:3448e6af-ffe5-40db-ad50-5b0c1955aafa": {
+    "summary": "Marco Meijer",
+    "grippCompanyId": 99415,
+    "grippOfferId": 8357,
+    "rpDocNumber": "20267714",
+    "allOffers": [
+      {
+        "grippOfferId": 8357,
+        "rpDocNumber": "20267714"
+      }
+    ],
+    "processedAt": "2026-07-02T16:30:44.995Z"
+  },
+  "item:4a6aad8e-9a00-49dd-a34c-e0137c138a8e": {
+    "summary": "Anouk Mommen",
+    "grippCompanyId": 99416,
+    "grippOfferId": 8358,
+    "rpDocNumber": "20267645",
+    "allOffers": [
+      {
+        "grippOfferId": 8358,
+        "rpDocNumber": "20267645"
+      }
+    ],
+    "processedAt": "2026-07-02T16:30:48.516Z"
+  },
+  "item:85cf0db8-aec4-481d-8d76-cb205f641cb2": {
+    "summary": "Mark Gotz",
+    "grippCompanyId": 99417,
+    "grippOfferId": 8359,
+    "rpDocNumber": "20265008",
+    "allOffers": [
+      {
+        "grippOfferId": 8359,
+        "rpDocNumber": "20265008"
+      }
+    ],
+    "processedAt": "2026-07-02T16:30:52.032Z"
+  },
+  "item:5a076763-e089-486e-8af6-641abafcc532": {
+    "summary": "Vincent Silvius",
+    "grippCompanyId": 99418,
+    "grippOfferId": 8360,
+    "rpDocNumber": "20267965",
+    "allOffers": [
+      {
+        "grippOfferId": 8360,
+        "rpDocNumber": "20267965"
+      }
+    ],
+    "processedAt": "2026-07-02T16:30:55.568Z"
+  },
+  "item:5bf5c7a9-08c1-4ae9-b36a-0de657e35b4a": {
+    "summary": "Raymond .",
+    "grippCompanyId": 99419,
+    "grippOfferId": 8361,
+    "rpDocNumber": "20266045",
+    "allOffers": [
+      {
+        "grippOfferId": 8361,
+        "rpDocNumber": "20266045"
+      }
+    ],
+    "processedAt": "2026-07-02T16:30:59.024Z"
   }
 }

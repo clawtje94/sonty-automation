@@ -62,6 +62,9 @@ const MK_BEDIENING = {
 
 function mkLookupMarkies(tabel, breedteMM, uitvalMM) {
   const breed = Math.ceil(breedteMM / 10), uitv = Math.ceil(uitvalMM / 10);
+  // Boven tabelbereik → null (geen stille fallback naar grootste maat) → handmatige controle
+  if (breed > tabel[tabel.length - 1][0]) return null;
+  if (uitv > MK_UITVAL_COLS[MK_UITVAL_COLS.length - 1]) return null;
   let row = tabel[tabel.length - 1][1];
   for (const [b, p] of tabel) { if (b >= breed) { row = p; break; } }
   let idx = MK_UITVAL_COLS.length - 1;
@@ -70,12 +73,14 @@ function mkLookupMarkies(tabel, breedteMM, uitvalMM) {
 }
 function mkLookupBovenkap(breedteMM, alu) {
   const breed = Math.ceil(breedteMM / 10);
+  if (breed > MK_BOVENKAP_B[MK_BOVENKAP_B.length - 1]) return null; // boven tabelbereik → handmatig
   let idx = MK_BOVENKAP_B.length - 1;
   for (let i = 0; i < MK_BOVENKAP_B.length; i++) { if (MK_BOVENKAP_B[i] >= breed) { idx = i; break; } }
   return alu ? MK_BOVENKAP_ALU[idx] : MK_BOVENKAP_HARDHOUT[idx];
 }
 function mkLookupZijkap(uitvalMM, alu) {
   const uitv = Math.ceil(uitvalMM / 10);
+  if (uitv > MK_UITVAL_COLS[MK_UITVAL_COLS.length - 1]) return null; // boven tabelbereik → handmatig
   let idx = MK_UITVAL_COLS.length - 1;
   for (let i = 0; i < MK_UITVAL_COLS.length; i++) { if (MK_UITVAL_COLS[i] >= uitv) { idx = i; break; } }
   return alu ? MK_ZIJKAP_ALU[idx] : MK_ZIJKAP_HARDHOUT[idx];
@@ -84,24 +89,31 @@ function mkGetTabel(mat) { return mat === 'Aluminium' ? MK_ALUMINIUM : mat === '
 function mkGetMatLabel(mat) { return mat === 'Aluminium' ? 'aluminium' : mat === 'Hardhout' ? 'hardhouten' : 'grenenhouten'; }
 function mkTotaalExcl(mat, breedteMM, uitvalMM) {
   const alu = mat === 'Aluminium';
-  return mkLookupMarkies(mkGetTabel(mat), breedteMM, uitvalMM) + mkLookupBovenkap(breedteMM, alu) + (uitvalMM > 0 ? mkLookupZijkap(uitvalMM, alu) : 0);
+  const markies = mkLookupMarkies(mkGetTabel(mat), breedteMM, uitvalMM);
+  const bovenkap = mkLookupBovenkap(breedteMM, alu);
+  const zijkap = uitvalMM > 0 ? mkLookupZijkap(uitvalMM, alu) : 0;
+  if (markies == null || bovenkap == null || zijkap == null) return null; // buiten tabel → handmatig
+  return markies + bovenkap + zijkap;
 }
 
 function mkBuildOptiesBlok(bediening, materiaal, breedteMM, uitvalMM) {
   const lines = ['', '', '**Liever een ander materiaal of bediening?**', ''];
   const huidigTotaal = mkTotaalExcl(materiaal, breedteMM, uitvalMM);
+  if (huidigTotaal == null) return ''; // buiten tabelbereik: geen optieblok (offerte gaat sowieso naar handmatig)
   const matOpties = [
     { key: 'Grenen', label: 'Grenenhouten kap: klassieke uitstraling' },
     { key: 'Hardhout', label: 'Hardhouten kap (meranti): duurzamer, langere levensduur' },
     { key: 'Aluminium', label: 'Aluminium kap: onderhoudsvrij, 8 standaard RAL kleuren' },
   ].filter(o => !(materiaal === 'Hout' || materiaal === 'Grenen' ? o.key === 'Grenen' : materiaal === o.key));
-  if (matOpties.length > 0) {
-    lines.push('Ander materiaal:');
-    for (const opt of matOpties) {
-      const verschil = Math.round((mkTotaalExcl(opt.key, breedteMM, uitvalMM) - huidigTotaal) * 1.21);
-      lines.push('• ' + opt.label + ': ' + (verschil >= 0 ? '+€' : '-€') + Math.abs(verschil));
-    }
-    lines.push('');
+  const matRegels = [];
+  for (const opt of matOpties) {
+    const altTotaal = mkTotaalExcl(opt.key, breedteMM, uitvalMM);
+    if (altTotaal == null) continue; // alternatief buiten tabelbereik: niet tonen
+    const verschil = Math.round((altTotaal - huidigTotaal) * 1.21);
+    matRegels.push('• ' + opt.label + ': ' + (verschil >= 0 ? '+€' : '-€') + Math.abs(verschil));
+  }
+  if (matRegels.length > 0) {
+    lines.push('Ander materiaal:', ...matRegels, '');
   }
   const huidigBed = MK_BEDIENING[bediening]?.excl || 0;
   const anderen = Object.entries(MK_BEDIENING).filter(([k]) => k !== bediening);
@@ -125,30 +137,59 @@ function mkBuildOptiesBlok(bediening, materiaal, breedteMM, uitvalMM) {
   return lines.join('\n');
 }
 
+// Match bediening case-insensitief tegen MK_BEDIENING keys (configurator kan afwijkende hoofdletters sturen)
+function mkFindBediening(str) {
+  if (!str) return null;
+  const norm = str.trim().toLowerCase();
+  for (const k of Object.keys(MK_BEDIENING)) { if (k.toLowerCase() === norm) return k; }
+  return null;
+}
+const MK_MATERIALEN = ['Grenen', 'Hout', 'Hardhout', 'Aluminium'];
+
+// Retourneert { lines, issues }: issues niet-leeg → offerte NIET automatisch verwerken (→ handmatige controle)
 function processMarkiezen(desc, existingLines) {
   const markiezen = [];
   let cur = null;
   for (const line of desc.split('\n')) {
-    const mm = line.match(/(\d+)x Markiezen/);
-    if (mm) { if (cur) markiezen.push(cur); cur = { units: parseInt(mm[1]), materiaal: '', breedte: 0, uitval: 0, bediening: 'Handbediend', framekleur: '', doekkleur: '' }; }
+    const mm = line.match(/(\d+)x markiezen/i);
+    if (mm) { if (cur) markiezen.push(cur); cur = { units: parseInt(mm[1]), materiaal: '', breedte: 0, uitval: 0, bediening: '', framekleur: '', doekkleur: '' }; }
     if (cur) {
-      const m1 = line.match(/kies_materiaal: (.+)/); if (m1) cur.materiaal = m1[1].trim();
-      const m2 = line.match(/breedte: ([\d.]+)/); if (m2) cur.breedte = parseFloat(m2[1]);
-      const m3 = line.match(/uitval: (\d+)/); if (m3) cur.uitval = parseInt(m3[1]);
-      const m4 = line.match(/welk_type_bediening_wil_je\?: (.+)/); if (m4) cur.bediening = m4[1].trim();
-      const m5 = line.match(/framekleur: (.+)/); if (m5) cur.framekleur = m5[1].trim();
-      const m6 = line.match(/doekkleur: (.+)/); if (m6) cur.doekkleur = m6[1].trim();
+      const m1 = line.match(/kies_materiaal:\s*(.+)/i); if (m1) cur.materiaal = m1[1].trim();
+      const m2 = line.match(/breedte:\s*([\d.]+)/i); if (m2) cur.breedte = parseFloat(m2[1]);
+      const m3 = line.match(/uitval:\s*(\d+)/i); if (m3) cur.uitval = parseInt(m3[1]);
+      const m4 = line.match(/welk_type_bediening_wil_je\?:\s*(.+)/i); if (m4) cur.bediening = m4[1].trim();
+      const m5 = line.match(/framekleur:\s*(.+)/i); if (m5) cur.framekleur = m5[1].trim();
+      const m6 = line.match(/doekkleur:\s*(.+)/i); if (m6) cur.doekkleur = m6[1].trim();
     }
   }
   if (cur) markiezen.push(cur);
-  if (markiezen.length === 0) return null;
+  if (markiezen.length === 0) return { lines: null, issues: [] };
+
+  // Validatie: ontbrekende/onbekende velden of maten buiten tabel → NIET verzinnen, naar handmatige controle
+  const issues = [];
+  markiezen.forEach((mk, i) => {
+    const nr = 'markies ' + (i + 1);
+    if (mk.breedte <= 0) issues.push(nr + ': breedte ontbreekt');
+    if (mk.uitval <= 0) issues.push(nr + ': uitval ontbreekt');
+    const matKey = MK_MATERIALEN.find(m => m.toLowerCase() === (mk.materiaal || '').toLowerCase());
+    if (!mk.materiaal) issues.push(nr + ': materiaal ontbreekt');
+    else if (!matKey) issues.push(nr + ': onbekend materiaal "' + mk.materiaal + '"');
+    else mk.materiaal = matKey; // normaliseer naar canonieke naam (mkGetTabel/alu-check zijn case-sensitief)
+    const bedKey = mkFindBediening(mk.bediening);
+    if (!bedKey) issues.push(nr + ': ' + (mk.bediening ? 'onbekende bediening "' + mk.bediening + '"' : 'bediening ontbreekt'));
+    else mk.bediening = bedKey; // normaliseer naar exacte MK_BEDIENING key
+    if (mk.breedte > 0 && mk.uitval > 0 && mk.materiaal && mkTotaalExcl(mk.materiaal, mk.breedte, mk.uitval) == null) {
+      issues.push(nr + ': maat ' + mk.breedte + '×' + mk.uitval + 'mm buiten prijstabel');
+    }
+  });
+  if (issues.length > 0) return { lines: null, issues };
 
   const baseLine = { imageUri: null, vatPercentage: 21, discount: null, lockTotalPrice: false };
-  // Behoud niet-markies regels
+  // Behoud niet-markies regels. ALLE bestaande markiesregels (ook geprijsde of units>1) worden
+  // vervangen door de hieronder opgebouwde regels — anders staat het markies dubbel in de offerte.
   const keepLines = existingLines.filter(l => {
     const fl = (l.description?.split('\n')[0] || '').toLowerCase();
-    if (fl.includes('markies') && l.pricePerUnit === 0 && l.units <= 1) return false;
-    if (fl.includes('montage markies')) return false;
+    if (fl.includes('markies')) return false; // incl. 'montage markies' en eerder opgebouwde markiesregels
     if (fl.includes('opties (op aanvraag') || fl.includes('opties (niet inbegrepen')) return false;
     return true;
   });
@@ -156,7 +197,6 @@ function processMarkiezen(desc, existingLines) {
   const markiesLines = [];
   let totalMontages = 0;
   for (const mk of markiezen) {
-    if (mk.breedte <= 0) continue;
     const alu = mk.materiaal === 'Aluminium';
     const markiesExcl = mkLookupMarkies(mkGetTabel(mk.materiaal), mk.breedte, mk.uitval);
     const bedExcl = MK_BEDIENING[mk.bediening]?.excl || 0;
@@ -198,7 +238,7 @@ function processMarkiezen(desc, existingLines) {
 
   const combined = [...keepLines, ...markiesLines];
   combined.forEach((l, i) => l.position = i);
-  return combined;
+  return { lines: combined, issues: [] };
 }
 
 // ============ API HELPERS ============
@@ -401,6 +441,21 @@ function getMontagePrice(cat, bedType, isUitgebreid) {
   if (cat === 'uitvalscherm') return 220;
   if (cat === 'pergola') return 650;
   if (cat === 'serre') return 350;
+  return null;
+}
+
+// Categorie uit de montagetitel zelf ('Inmeten + montage screen solar' → screen).
+// Bij combi-offertes [product A, product B, montage A, montage B] is de titel leidend;
+// lastCat is alleen fallback. 'markies' → aparte flow (processMarkiezen), niet hier prijzen.
+function getMontageCategory(firstLine) {
+  const d = firstLine.toLowerCase();
+  if (d.includes('markies')) return 'markies';
+  if (d.includes('rolluik')) return 'rolluik';
+  if (d.includes('screen')) return 'screen';
+  if (d.includes('knikarm')) return 'knikarmscherm';
+  if (d.includes('uitvalscherm')) return 'uitvalscherm';
+  if (d.includes('pergola')) return 'pergola';
+  if (d.includes('serre')) return 'serre';
   return null;
 }
 
@@ -770,20 +825,26 @@ function lookupPrice(productKey, breedteCm, hoogteCm, uitvalCm) {
     for (const uk of uitvalKeys) {
       if (uk > uitval) continue; // sla grotere uitvallen over
       const tbl = product.tables[String(uk)];
-      const minB = Math.min(...Object.keys(tbl).map(Number));
-      if (breedteCm >= minB) {
+      const bKeys = Object.keys(tbl).map(Number);
+      if (breedteCm >= Math.min(...bKeys)) {
+        if (breedteCm > Math.max(...bKeys)) return null; // breder dan tabel → geen stille fallback, handmatige controle
         return findNearest(tbl, breedteCm)?.value || null;
       }
     }
     // Fallback: grootste uitval die past
     const tbl = product.tables[findNearest(product.tables, uitval)?.key];
     if (!tbl) return null;
+    if (breedteCm > Math.max(...Object.keys(tbl).map(Number))) return null; // breder dan tabel → handmatige controle
     return findNearest(tbl, breedteCm)?.value || null;
   }
   if (product.tables && pCat === 'uitvalscherm') {
-    const doek = 165;
+    // Doekmaat op basis van uitval (prijsboek p42-43, bevestigd door Daimy 2026-07-02):
+    // doek 165 = uitval ≤95cm, doek 200 = uitval ≤115cm, anders doek 225.
+    // Configurator biedt 950/1150/1350mm. Zonder uitval: 165 (kleinste, huidige data ≤1350mm).
+    const doek = (!uitvalCm || uitvalCm <= 0) ? 165 : uitvalCm <= 95 ? 165 : uitvalCm <= 115 ? 200 : 225;
     const tbl = product.tables[findNearest(product.tables, doek)?.key];
     if (!tbl) return null;
+    if (breedteCm > Math.max(...Object.keys(tbl).map(Number))) return null; // breder dan tabel → handmatige controle
     return findNearest(tbl, breedteCm)?.value || null;
   }
   if (product.tables && (pCat === 'serre' || pCat === 'pergola')) {
@@ -803,18 +864,34 @@ function lookupPrice(productKey, breedteCm, hoogteCm, uitvalCm) {
     return findNearest(tbl, breedteCm)?.value || null;
   }
   if (product.tableLarge || product.tableSmall) {
+    // tableSmall (kleine breedtes) EERST proberen — tableLarge zou kleine maten te duur afronden.
+    // Prijslijst-conventie: eerstvolgende maat OMHOOG. Breedte onder tabelminimum of in het gat
+    // tussen small (t/m 180) en large (vanaf 200) rondt dus omhoog af — nooit te goedkoop.
+    // Alleen breder dan de grootste tabel → null (handmatige controle).
     const b = breedteCm, h = hoogteCm || 150;
-    for (const tbl of [product.tableLarge, product.tableSmall]) {
+    for (const tbl of [product.tableSmall, product.tableLarge]) {
       if (!tbl) continue;
-      const bE = findNearest(tbl, b);
-      if (bE) { const hE = findNearest(bE.value, h); if (hE) return hE.value; }
+      const bKeys = Object.keys(tbl).map(Number);
+      if (b > Math.max(...bKeys)) continue; // te breed voor deze tabel, probeer de volgende
+      const bE = findNearest(tbl, b); // rondt omhoog naar eerstvolgende tabelbreedte
+      if (bE) {
+        const hKeys = Object.keys(bE.value).map(Number);
+        if (h > Math.max(...hKeys)) return null; // hoger dan tabel → geen stille fallback, handmatige controle
+        const hE = findNearest(bE.value, h);
+        if (hE) return hE.value;
+      }
     }
     return null;
   }
   if (product.table) {
+    const bKeys = Object.keys(product.table).map(Number);
+    if (breedteCm > Math.max(...bKeys)) return null; // breder dan tabel → geen stille fallback, handmatige controle
     const bE = findNearest(product.table, breedteCm);
     if (bE && typeof bE.value === 'object') {
-      return findNearest(bE.value, hoogteCm || breedteCm)?.value || null;
+      const h = hoogteCm || breedteCm;
+      const hKeys = Object.keys(bE.value).map(Number);
+      if (h > Math.max(...hKeys)) return null; // hoger dan tabel → handmatige controle
+      return findNearest(bE.value, h)?.value || null;
     }
     return null;
   }
@@ -1076,6 +1153,12 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
 
   // Motor-aanpassingen t.o.v. standaard motor in tabel
   if (pCat === 'knikarmscherm') {
+    // Minderprijs kleinere uitval: tabellen beginnen bij uitval 250; catalogus geeft
+    // vaste minderprijs voor uitval 150/200 (bv. suneye: -180/-160). Zonder deze regel te veel gerekend.
+    if (uitvalCm && uitvalCm > 0 && product.minderprijzen) {
+      if (uitvalCm <= 150 && typeof product.minderprijzen.uitval150 === 'number') totaal += product.minderprijzen.uitval150;
+      else if (uitvalCm <= 200 && typeof product.minderprijzen.uitval200 === 'number') totaal += product.minderprijzen.uitval200;
+    }
     // Tabel = Sunea IO. IO + handzender is standaard bestelling.
     if (isIO) totaal += hz;
     else if (isDraaischakelaar) totaal -= 51; // Orea WT als "draaischakelaar" interpretatie
@@ -1126,6 +1209,8 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
   return Math.round(totaal * MARKUP * 100) / 100;
 }
 
+// Retourneert { changed, priceUnknown }. priceUnknown=true → prijs kon niet bepaald worden
+// (maat buiten tabel e.d.): offerte moet naar HANDMATIGE controle, niet ongecontroleerd door.
 function correctProductPrice(line, productKey, breedteCm, hoogteCm, uitvalCm) {
   const bedStr = extractField(line.description, 'Bediening').toLowerCase();
   const motorStr = extractField(line.description, 'Motor').toLowerCase();
@@ -1137,7 +1222,7 @@ function correctProductPrice(line, productKey, breedteCm, hoogteCm, uitvalCm) {
   else if (bedStr.includes('handbediend') || bedStr.includes('slingerstang') || bedStr.includes('band')) bedType = 'handbediend';
 
   let correctPrice = calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedType);
-  if (!correctPrice) return false;
+  if (!correctPrice) return { changed: false, priceUnknown: true };
 
   // RAL kleur meerprijs toevoegen als niet-standaard kleur
   const product = SUNMASTER_PRICES[productKey];
@@ -1186,9 +1271,9 @@ function correctProductPrice(line, productKey, breedteCm, hoogteCm, uitvalCm) {
   if (Math.abs(line.pricePerUnit - correctPrice) > 1) {
     console.log('    Prijs gecorrigeerd: €' + line.pricePerUnit + ' → €' + correctPrice + ' (' + productKey + (isRAL ? ' +RAL' : '') + ')');
     line.pricePerUnit = correctPrice;
-    return true;
+    return { changed: true, priceUnknown: false };
   }
-  return false;
+  return { changed: false, priceUnknown: false };
 }
 
 function addV4Enhancements(desc, firstLine, hasTahoma, linePrice) {
@@ -1469,6 +1554,8 @@ async function main() {
 
     // 2b. Product omschrijving + montage prijs (in originele volgorde)
     let lastCat = null, lastBed = null;
+    const catBed = {}; // bedieningstype per categorie (voor montageregels bij combi-offertes)
+    const priceUnknown = []; // producten waarvan de prijs niet bepaald kon worden → handmatige controle
     for (let i = 0; i < lines.length; i++) {
       const firstLine = lines[i].description?.split('\n')[0] || '';
       const bediening = lines[i].description?.match(/Bediening:\s*([^\n]+)/i)?.[1]?.trim() || '';
@@ -1478,6 +1565,7 @@ async function main() {
       if (cat && lines[i].pricePerUnit > 0) {
         lastCat = cat;
         lastBed = getBedType(bediening, motor);
+        catBed[cat] = lastBed;
         // Transform product omschrijving
         const newDesc = transformProductDesc(lines[i].description, lastCat, lastBed);
         if (newDesc !== lines[i].description) { lines[i].description = newDesc; changed = true; }
@@ -1487,27 +1575,49 @@ async function main() {
         if (pKey && !firstLine.toLowerCase().includes('voorraad')) {
           const maat = extractMaatFromDesc(lines[i].description);
           if (maat.breedte || maat.hoogte) {
-            if (correctProductPrice(lines[i], pKey, maat.breedte, maat.hoogte, maat.uitval)) changed = true;
+            const pc = correctProductPrice(lines[i], pKey, maat.breedte, maat.hoogte, maat.uitval);
+            if (pc.changed) changed = true;
+            if (pc.priceUnknown) priceUnknown.push(firstLine.replace(/\*\*/g, '') + ' (' + Math.round(maat.breedte || 0) + '×' + Math.round(maat.hoogte || maat.uitval || 0) + 'cm)');
           }
         }
         continue;
       }
 
       const d = firstLine.toLowerCase();
-      if ((d.includes('montage') || d.includes('inmeten')) && lastCat) {
-        // Montage prijs aanpassen (behoudt originele titel + bullets)
-        if (adjustMontageInPlace(lines[i], lastCat, lastBed)) changed = true;
+      if (d.includes('montage') || d.includes('inmeten')) {
+        // Categorie EERST uit de montagetitel zelf; lastCat alleen als fallback (combi-offertes!)
+        const mCat = getMontageCategory(d) || lastCat;
+        // Alleen aanpassen als er ook echt een product van die categorie in de offerte zit
+        // (catBed gevuld) — anders niet aanraken i.p.v. gokken.
+        if (mCat && mCat !== 'markies' && catBed[mCat] !== undefined) {
+          // Montage prijs aanpassen (behoudt originele titel + bullets)
+          if (adjustMontageInPlace(lines[i], mCat, catBed[mCat])) changed = true;
+        }
         continue;
       }
+    }
+
+    // H1: product herkend maar prijs niet bepaalbaar (maat buiten tabel e.d.)
+    // → NIET ongecontroleerd naar de klant; naar handmatige controle. Niets is nog opgeslagen.
+    if (priceUnknown.length > 0) {
+      console.log('  → Handmatige controle (prijs niet bepaalbaar): ' + priceUnknown.join(' | ') + ' — ' + item.summary);
+      await setStatus(item.id, HANDMATIG);
+      routeCount++; continue;
     }
 
     // STAP 2c: MARKIEZEN VERWERKEN (was aparte daemon, nu geïntegreerd)
     if (isMarkies) {
       const mkResult = processMarkiezen(desc, lines);
-      if (mkResult) {
+      if (mkResult.issues.length > 0) {
+        // Onvolledige/onbekende markies-gegevens of maat buiten tabel → handmatige controle
+        console.log('  → Handmatige controle (markies): ' + mkResult.issues.join('; ') + ' — ' + item.summary);
+        await setStatus(item.id, HANDMATIG);
+        routeCount++; continue;
+      }
+      if (mkResult.lines) {
         // Vervang lines met gecombineerde regels (bestaande + markies)
         lines.length = 0;
-        lines.push(...mkResult);
+        lines.push(...mkResult.lines);
         changed = true;
       }
     }
@@ -1826,11 +1936,16 @@ if (testName) {
       const isMarkies = lines.some(l => l.description?.toLowerCase().includes('markies'));
       if (isMarkies) {
         const mkResult = processMarkiezen(item.description || '', lines);
-        if (mkResult) { lines.length = 0; lines.push(...mkResult); }
+        if (mkResult.issues.length > 0) {
+          console.log('  !! MARKIES ISSUES (zou naar Handmatige controle gaan): ' + mkResult.issues.join('; '));
+          continue;
+        }
+        if (mkResult.lines) { lines.length = 0; lines.push(...mkResult.lines); }
       }
 
       // 2b. Transform + montage
       let lastCat = null, lastBed = null;
+      const catBed = {};
       for (let i = 0; i < lines.length; i++) {
         const firstLine = lines[i].description?.split('\n')[0] || '';
         const bediening = lines[i].description?.match(/Bediening:\s*([^\n]+)/i)?.[1]?.trim() || '';
@@ -1838,18 +1953,25 @@ if (testName) {
         const cat = getCategory(firstLine);
         if (cat && lines[i].pricePerUnit > 0) {
           lastCat = cat; lastBed = getBedType(bediening, motor);
+          catBed[cat] = lastBed;
           const newDesc = transformProductDesc(lines[i].description, lastCat, lastBed);
           if (newDesc !== lines[i].description) lines[i].description = newDesc;
           // Prijscorrectie (niet bij voorraadschermen)
           const pKey = getProductKey(firstLine);
           if (pKey && !firstLine.toLowerCase().includes('voorraad')) {
             const maat = extractMaatFromDesc(lines[i].description);
-            if (maat.breedte || maat.hoogte) correctProductPrice(lines[i], pKey, maat.breedte, maat.hoogte, maat.uitval);
+            if (maat.breedte || maat.hoogte) {
+              const pc = correctProductPrice(lines[i], pKey, maat.breedte, maat.hoogte, maat.uitval);
+              if (pc.priceUnknown) console.log('  !! Prijs niet bepaalbaar voor "' + firstLine + '" (zou naar Handmatige controle gaan)');
+            }
           }
         }
         const d = firstLine.toLowerCase();
-        if ((d.includes('montage') || d.includes('inmeten')) && lastCat) {
-          adjustMontageInPlace(lines[i], lastCat, lastBed);
+        if (d.includes('montage') || d.includes('inmeten')) {
+          const mCat = getMontageCategory(d) || lastCat;
+          if (mCat && mCat !== 'markies' && catBed[mCat] !== undefined) {
+            adjustMontageInPlace(lines[i], mCat, catBed[mCat]);
+          }
         }
       }
 

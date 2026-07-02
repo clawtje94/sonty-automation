@@ -1,0 +1,353 @@
+{
+ "documentId": "206d4e62-70e0-4418-9c9e-ed9e0056f52a",
+ "versionId": "fb228dd9-8ad7-4680-ab4d-bb0e18a2526b",
+ "documentTitle": "Offerte #20268016",
+ "documentStatus": "SENT",
+ "documentNumber": "20268016",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20268016",
+ "quotationNumber": "20268016",
+ "quotationTitle": "Offerte #20268016",
+ "quotationCreationTimestamp": 1782554683363,
+ "quotationExpirationTimestamp": 1785146683363,
+ "quotationStatus": "SENT",
+ "isoCurrency": "EUR",
+ "locale": "nl-NL",
+ "subjects": {
+  "leadConfiguration": "5584b26f-5ee2-4aca-aba1-9db31406a55a",
+  "contactPerson": "74904b93-d72c-460b-8b9a-8499c75e36c9"
+ },
+ "segments": {
+  "f86194a6-7ea0-4150-8b7c-304d721ec7c6": {
+   "type": "text",
+   "data": "**Waarom Sonty?**\n\n- Sunmaster Premium Dealer: wij leveren uitsluitend A-merk zonwering van de hoogste kwaliteit\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij je thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 600+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+  },
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${organisation.name}**\n${organisation.address}\n**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultUserDeclinePart": {
+   "type": "userDecline",
+   "data": {}
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 1,
+      "description": "**SunControl 165 ZIP Pergola — 1-delig**\nType: pergola bedraad\nBreedte: 6000 mm\nUitval: 2900 mm\nFrame kleur: Antraciet structuur (standaard)\nDoek: naar keuze\nBediening: afstandsbediening\nMotor: somfy IO motor\nHandzender: Situo 1 IO (1-kanaal)\nStaanderlengte: 300 cm (verlengd)\nInclusief: 2 voetplaten 150×150, tussenrol\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• Knikarmscherm SunEye XL (wandmontage, geen palen nodig): -€3.441\n\nAndere bediening:\n• Orea WT (bedraad, wandschakelaar): -€139\n\nExtra:\n• RAL kleur naar keuze: +15%\n• Verstelbare staander: +€845 per stuk\n• Extra tussenrol: +€370 per stuk\n\nLaat het ons weten, we passen je offerte graag aan.\n\n**Waarom deze pergola**\nTerrasoverkapping met waterdicht doek. Beschermd tegen zon en regen: je terras het hele jaar bruikbaar. Stevig aluminium frame: duurzaam en onderhoudsarm. Gemotoriseerd: doek in- en uitrollen met afstandsbediening.\nGarantie: .",
+      "pricePerUnit": 8353.4,
+      "vatPercentage": 21,
+      "position": 0,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "**SunEye XL — Knikarmscherm (alternatief voor pergola)**\nType: knikarmscherm bedraad\nBreedte: 6000 mm\nUitval: 3000 mm\nFrame kleur: Antraciet structuur (standaard)\nKleur doek: naar keuze\nBediening: afstandsbediening\nMotor: somfy RS100 IO\nHandzender: Situo 1 IO (1-kanaal)\nCassette: Gesloten, slank design (extra breed)\n\n**Waarom dit knikarmscherm**\nPremium knikarmscherm met gesloten cassette. Doek en mechaniek volledig beschermd. Sterke aluminium armen: lang meegaand en stabiel. Fluisterstille Somfy motor met afstandsbediening.\nGarantie: .\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• SunBasic (open arm, geen cassette): -€2041\n• SunBasic Cassette (gesloten, instap): -€1772\n• SunEye (gesloten, slank): -€1208\n• SunElite (topmodel, LED mogelijk): -€19\n\nAndere bediening:\n• Draaistang (handmatig, geen motor): -€414\n• Orea WT (bedraad, wandschakelaar): -€140\n\nKleur:\n• Trendkleur: +€593\n• RAL kleur naar keuze: +€847\n\nSmart home:\n• Tahoma Switch (bedien alles via je telefoon): +€195\n\nLaat het ons weten, we passen je offerte graag aan.",
+      "pricePerUnit": 5084.2,
+      "vatPercentage": 21,
+      "position": 1,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "**Zip Square 85/100 — Zipscreen op Somfy Solar**\nType: screen solar\nBreedte: 2570 mm\nHoogte: 3000 mm\nFrame kleur: Antraciet structuur (standaard)\nDoek: Sergé 525 gr/m²\nBediening: afstandsbediening\nMotor: Somfy RS100 IO solar\nHandzender: Situo 1 IO (1-kanaal)\nGeleiding: ZIP (windvast)\nOnderlat: Standaard (los)\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• Zip Design 110 (geïntegreerde onderlat, max H=270cm): niet mogelijk bij deze hoogte\n\nAndere bediening:\n• Motor + afstandsbediening bedraad (Sunilus IO + handzender): -€190\n• Brel Solar (incl. handzender, goedkoper): -€42\n\nExtra:\n• Trendkleur: +€208\n• RAL kleur naar keuze: +€415\n\nLaat het ons weten, we passen je offerte graag aan.\n\n**Waarom dit screen**\nPremium kwaliteit met zip-technologie. Ritsgeleidingssysteem: doek zit vast in de geleiders, geen klapperen bij wind. Op zonne-energie: geen bekabeling nodig, volledig draadloos. Bescherming tegen zon, warmte en inkijk met behoud van uitzicht. Compacte cassette: doek en motor beschermd tegen weersinvloeden.\nGarantie: .",
+      "pricePerUnit": 2046,
+      "vatPercentage": 21,
+      "position": 2,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "**Montage pergola**\n- Professionele montage door ons eigen montageteam\n- Verankering en afwerking\n- Klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "position": 3,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "**Montage screen solar**\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "position": 4,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "**Montage knikarmscherm**\n- Montage\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "position": 5,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "15% tijdelijke actie",
+     "amount": 15,
+     "type": "PERCENTAGE",
+     "vatPercentage": 0
+    }
+   }
+  }
+ },
+ "pricing": {
+  "total": 13607.31
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "f86194a6-7ea0-4150-8b7c-304d721ec7c6"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline",
+       "target": "defaultUserDeclinePart"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

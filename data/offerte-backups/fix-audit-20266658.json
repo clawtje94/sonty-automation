@@ -1,0 +1,328 @@
+{
+ "documentId": "cceddeb4-c4fd-439c-853b-7ba1f9b6011a",
+ "versionId": "0cd431f2-0646-4921-bab9-5b1db50b804e",
+ "documentTitle": "Offerte #20266658",
+ "documentStatus": "DRAFT",
+ "documentNumber": "20266658",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20266658",
+ "quotationNumber": "20266658",
+ "quotationTitle": "Offerte #20266658",
+ "quotationCreationTimestamp": 1780569053902,
+ "quotationExpirationTimestamp": 1783161053902,
+ "quotationStatus": "DRAFT",
+ "isoCurrency": "EUR",
+ "subjects": {
+  "leadConfiguration": "4dd88499-dd11-40a3-9ead-b489b298b0e0",
+  "contactPerson": "0d85773b-9242-4e8e-ba34-63e3d7bdbea5"
+ },
+ "segments": {
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 1,
+      "description": "Rolluik (RollSUPER)\nBreedte: 1850 mm\nHoogte: 1800 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 7016 structuur\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1403,
+      "vatPercentage": 21,
+      "position": 0,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Rolluik (RollSUPER)\nBreedte: 1100 mm\nHoogte: 1801 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 7016 structuur\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1239.1,
+      "vatPercentage": 21,
+      "position": 1,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Rolluik (RollSUPER)\nBreedte: 1650 mm\nHoogte: 1800 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 7016 structuur\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1354.6,
+      "vatPercentage": 21,
+      "position": 2,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 3,
+      "description": "Inmeten + montage rolluik solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "position": 3,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Rolhor\nBreedte: 900 mm\nHoogte: 1500 mm",
+      "pricePerUnit": 360.8,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 4,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Rolhor\nBreedte: 780 mm\nHoogte: 1460 mm",
+      "pricePerUnit": 325.6,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 5,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Rolhor\nBreedte: 650 mm\nHoogte: 1460 mm",
+      "pricePerUnit": 325.6,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 6,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Rolhor\nBreedte: 400 mm\nHoogte: 1200 mm\nDe minimale breedte moet 440mm, dus hier kunnen we geen prijs voor geven voor een rolhor.",
+      "pricePerUnit": 0,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 7,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 2,
+      "description": "Rolhor\nBreedte: 950 mm\nHoogte: 1400 mm",
+      "pricePerUnit": 334.4,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 8,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Rolhor\nBreedte: 550 mm\nHoogte: 1220 mm",
+      "pricePerUnit": 306.9,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 9,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Enkele Hordeur\nBreedte: 900 mm\nHoogte: 2350 mm",
+      "pricePerUnit": 663.3,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 10,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 6,
+      "description": "Montage rolhor",
+      "pricePerUnit": 45,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 11,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Montage hordeur",
+      "pricePerUnit": 75,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 12,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "15% tijdelijke actie",
+     "amount": 15,
+     "type": "PERCENTAGE",
+     "vatPercentage": 21
+    }
+   }
+  }
+ },
+ "pricing": {
+  "total": 6390.045
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,243 @@
+{
+ "documentId": "5a4f8247-7ebc-414a-959e-69c990512734",
+ "versionId": "6dcf0377-13d7-4fcd-96aa-be37ee42d288",
+ "documentTitle": "Offerte #20266864",
+ "documentStatus": "SENT",
+ "documentNumber": "20266864",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20266864",
+ "quotationNumber": "20266864",
+ "quotationTitle": "Offerte #20266864",
+ "quotationCreationTimestamp": 1781020234446,
+ "quotationExpirationTimestamp": 1783612234446,
+ "quotationStatus": "SENT",
+ "isoCurrency": "EUR",
+ "subjects": {
+  "leadConfiguration": "e2a4fe1b-13b7-4f6f-809a-87cb87b84944",
+  "contactPerson": "9ffb0d54-12ce-4f6b-842c-daba8eda64ad"
+ },
+ "segments": {
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 2,
+      "description": "Rolluik (RollSUPER) — Aluminium rolluik op zonne-energie\nType: rolluik solar\n\nBreedte: 1430 mm\nHoogte: 1430 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 9010\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: afstandsbediening\nMotor: Somfy RS100 IO solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\n- Aluminium rolluik met RS 42 lamellen\n- Op zonne-energie: geen bekabeling nodig, volledig draadloos\n- Bescherming tegen zon, warmte, kou en inbraak\n- Isolerend effect: houdt warmte binnen in de winter, buiten in de zomer\n- Bediening via afstandsbediening (Somfy IO solar)\n\n- 5 jaar volledige productgarantie\n- 7 jaar motorgarantie (Somfy, Europees marktleider)\n\nWat u krijgt:\n- Aluminium rolluik met RS 42 lamellen\n- Op zonne-energie: geen bekabeling nodig, volledig draadloos\n- Bescherming tegen zon, warmte, kou en inbraak\n- Isolerend effect: houdt warmte binnen in de winter, buiten in de zomer\n- Bediening via afstandsbediening (Somfy IO solar)\n",
+      "pricePerUnit": 1263.3,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Rolluik (RollSUPER) — Aluminium rolluik op zonne-energie\nType: rolluik solar\n\nBreedte: 1430 mm\nHoogte: 1450 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 9010\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: afstandsbediening\nMotor: Somfy RS100 IO solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\n- Aluminium rolluik met RS 42 lamellen\n- Op zonne-energie: geen bekabeling nodig, volledig draadloos\n- Bescherming tegen zon, warmte, kou en inbraak\n- Isolerend effect: houdt warmte binnen in de winter, buiten in de zomer\n- Bediening via afstandsbediening (Somfy IO solar)\n\n- 5 jaar volledige productgarantie\n- 7 jaar motorgarantie (Somfy, Europees marktleider)\n\nWat u krijgt:\n- Aluminium rolluik met RS 42 lamellen\n- Op zonne-energie: geen bekabeling nodig, volledig draadloos\n- Bescherming tegen zon, warmte, kou en inbraak\n- Isolerend effect: houdt warmte binnen in de winter, buiten in de zomer\n- Bediening via afstandsbediening (Somfy IO solar)\n",
+      "pricePerUnit": 1263.3,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 3,
+      "description": "Inmeten + montage rolluik solar\n- Professionele montage door ons eigen montageteam\n- Inclusief inmeetafspraak bij u thuis\n- Klein materiaal en bevestiging\n- Motor afstellen en bediening uitleggen\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Tahoma Switch — Smart home bediening\n- Automatiseer al uw Somfy zonwering vanuit één app\n- Bedien uw zonwering waar u ook bent\n- Stel automatische scenario's in (bijv. sluiten bij zonsondergang)\n- Koppel met andere smart home systemen (Philips Hue, Google Home)\n- Inclusief installatie en persoonlijke uitleg",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "15% tijdelijke actie",
+     "amount": 15,
+     "type": "PERCENTAGE",
+     "vatPercentage": 21
+    }
+   }
+  }
+ },
+ "pricing": {
+  "total": 3833.415
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

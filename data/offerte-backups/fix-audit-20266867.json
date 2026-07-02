@@ -1,0 +1,249 @@
+{
+ "documentId": "f2761eff-56f7-48d5-b663-7dbbee15ef72",
+ "versionId": "7f10210c-e048-4e23-9b39-b440e2e81f6a",
+ "documentTitle": "Offerte #20266867",
+ "documentStatus": "REJECTED",
+ "documentNumber": "20266867",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20266867",
+ "quotationNumber": "20266867",
+ "quotationTitle": "Offerte #20266867",
+ "quotationCreationTimestamp": 1781025412653,
+ "quotationExpirationTimestamp": 1783617412653,
+ "quotationStatus": "REJECTED",
+ "isoCurrency": "EUR",
+ "subjects": {
+  "leadConfiguration": "ee6c27c0-5c60-4c62-91f0-ecb4bc2b6890",
+  "contactPerson": "69386a87-e614-4715-b936-cc2b33ee5df0"
+ },
+ "segments": {
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 1,
+      "description": "Suneye — Knikarmscherm zonwering\nType: knikarmscherm bedraad\n\nBreedte: 3750 mm\nUitval: 3000 mm\nFrame kleur: RAL 9010\nKleur doek: NTB\nBediening: afstandsbediening\nMotor: somfy RS100 IO\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\n- Knikarmscherm van Sunmaster (premium dealer-kwaliteit)\n- 3750 mm breed: ruime zonwering\n- Motor met afstandsbediening: in- en uitrollen met een druk op de knop\n- Compact cassette: het doek is beschermd als het scherm is ingerold\n\n- 5 jaar volledige productgarantie\n- 7 jaar motorgarantie (Somfy, Europees marktleider)\n\nWat u krijgt:\n- Knikarmscherm van Sunmaster (premium dealer-kwaliteit)\n- 3750 mm breed: ruime zonwering\n- Motor met afstandsbediening: in- en uitrollen met een druk op de knop\n- Compact cassette: het doek is beschermd als het scherm is ingerold\n",
+      "pricePerUnit": 3287,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm.\n- Professionele montage door ons eigen montageteam\n- Montage d.m.v. chemisch anker (zonder uitbouw)\n- Inclusief inmeetafspraak bij u thuis\n- Elektra netjes afwerken\n- Klein materiaal en bevestiging\n- Zonwering afstellen en bediening uitleggen\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Tahoma Switch — Smart home bediening\n- Automatiseer al uw Somfy zonwering vanuit één app\n- Bedien uw zonwering waar u ook bent\n- Stel automatische scenario's in (bijv. sluiten bij zonsondergang)\n- Koppel met andere smart home systemen (Philips Hue, Google Home)\n- Inclusief installatie en persoonlijke uitleg",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "15% tijdelijke actie",
+     "amount": 15,
+     "type": "PERCENTAGE",
+     "vatPercentage": 21
+    }
+   }
+  },
+  "c7642102-e95d-4733-907f-7773c9f7cf40": {
+   "type": "userDecline",
+   "data": {
+    "isDeclinedByCustomer": true,
+    "signingProps": {
+     "REASON_CATEGORY": "TOO_EXPENSIVE",
+     "REASON": "",
+     "USER_AGENT": "node"
+    },
+    "artifactName": "artifact",
+    "timestamp": 1781090438744
+   }
+  }
+ },
+ "pricing": {
+  "total": 3193.45
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

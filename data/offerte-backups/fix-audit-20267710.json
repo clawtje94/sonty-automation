@@ -1,0 +1,339 @@
+{
+ "documentId": "5d1e3e1b-93e0-4304-bc43-c143fdf224b5",
+ "versionId": "768ad92b-8053-4055-8848-5a06b34c6772",
+ "documentTitle": "Offerte #20267710",
+ "documentStatus": "SENT",
+ "documentNumber": "20267710",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20267710",
+ "quotationNumber": "20267710",
+ "quotationTitle": "Offerte #20267710",
+ "quotationCreationTimestamp": 1782303001508,
+ "quotationExpirationTimestamp": 1784895001508,
+ "quotationStatus": "SENT",
+ "isoCurrency": "EUR",
+ "subjects": {
+  "leadConfiguration": "1e7652de-1be0-494c-9fd0-a659d361e53c",
+  "contactPerson": "3f715c08-ba99-401d-9cb1-9a94cca3cd3a"
+ },
+ "segments": {
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 1,
+      "description": "**SunCube XL**\nType: uitvalscherm bedraad\nBreedte: 3100 mm\nUitval: 1350 mm\nFrame Kleur: Technisch aluminium\nKleur doek: Doekkleur naar keuze\nBediening: afstandsbediening\nMotor: Brel Solar motor\n\nWaarom dit uitvalscherm:\n- Sunmaster SunCube XL: compact uitvalscherm met strakke cassette\n- Draadloze motor op zonne-energie: geen elektricien nodig\n- Bescherming tegen directe zonnestraling en warmte\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 2317.57,
+      "vatPercentage": 21,
+      "position": 0,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "**SunCube XL**\nType: uitvalscherm bedraad\nBreedte: 1400 mm\nUitval: 1350 mm\nFrame Kleur: Technisch aluminium\nKleur doek: Doekkleur naar keuze\nBediening: afstandsbediening\nMotor: Brel Solar motor\n\nWaarom dit uitvalscherm:\n- Sunmaster SunCube XL: compact uitvalscherm met strakke cassette\n- Draadloze motor op zonne-energie: geen elektricien nodig\n- Bescherming tegen directe zonnestraling en warmte\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1865.51,
+      "vatPercentage": 21,
+      "position": 1,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 2,
+      "description": "**Inmeten + montage uitvalscherm**\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "position": 2,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "**Markies grenenhouten kap**\nBreedte: 3100 mm\nUitval: 1350 mm\nFrame kleur: Cremewit\nKleur doek: Doekkleur naar keuze\nBediening: Elektrisch solar (draadloze motor op zonne-energie met afstandsbediening)\n\nInclusief:\n- Houten bovenkap (recht 25cm diep)\n- Zijkappen (set van 2, hardhout recht 22cm)\n- Koord met RVS katrollen en koordkikker\n- PVC afbiesband in kleur\n- Slijtlat\n- Doek uit de standaard collectie (Tibelly/Dickson/Sattler/Citel)\n- Volant (schulp, recht of recht met inkam)\n- Scharnieren in kleur\n- Somfy Solar motor met afstandsbediening\n\nGarantie:\n- 2 jaar op de montage\n- 3 jaar op het product\n- 5 jaar op de motor",
+      "pricePerUnit": 2789.05,
+      "vatPercentage": 21,
+      "position": 3,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "**Markies grenenhouten kap**\nBreedte: 1300 mm\nUitval: 1350 mm\nFrame kleur: Cremewit\nKleur doek: Doekkleur naar keuze\nBediening: Elektrisch solar (draadloze motor op zonne-energie met afstandsbediening)\n\nInclusief:\n- Houten bovenkap (recht 25cm diep)\n- Zijkappen (set van 2, hardhout recht 22cm)\n- Koord met RVS katrollen en koordkikker\n- PVC afbiesband in kleur\n- Slijtlat\n- Doek uit de standaard collectie (Tibelly/Dickson/Sattler/Citel)\n- Volant (schulp, recht of recht met inkam)\n- Scharnieren in kleur\n- Somfy Solar motor met afstandsbediening\n\nGarantie:\n- 2 jaar op de montage\n- 3 jaar op het product\n- 5 jaar op de motor",
+      "pricePerUnit": 2332.88,
+      "vatPercentage": 21,
+      "position": 4,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "**Markies grenenhouten kap**\nBreedte: 1000 mm\nUitval: 1350 mm\nFrame kleur: Cremewit\nKleur doek: Doekkleur naar keuze\nBediening: Elektrisch solar (draadloze motor op zonne-energie met afstandsbediening)\n\nInclusief:\n- Houten bovenkap (recht 25cm diep)\n- Zijkappen (set van 2, hardhout recht 22cm)\n- Koord met RVS katrollen en koordkikker\n- PVC afbiesband in kleur\n- Slijtlat\n- Doek uit de standaard collectie (Tibelly/Dickson/Sattler/Citel)\n- Volant (schulp, recht of recht met inkam)\n- Scharnieren in kleur\n- Somfy Solar motor met afstandsbediening\n\nGarantie:\n- 2 jaar op de montage\n- 3 jaar op het product\n- 5 jaar op de motor",
+      "pricePerUnit": 2238.5,
+      "vatPercentage": 21,
+      "position": 5,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 3,
+      "description": "**Inmeten + montage markies**\n- Inmeetafspraak bij u thuis\n- Professionele montage door ons eigen montageteam\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "vatPercentage": 21,
+      "position": 6,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "**Tahoma Switch**\n- Automatiseren van je Somfy producten\n- Producten bedienen waar je ook bent met de telefoon\n- Inclusief installatie en uitleg\n- Al uw smart home producten op 1 app (zoals Philips Hue)",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "position": 7,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 0,
+      "description": "**Opties markiezen (op aanvraag toe te voegen)**\n\nMateriaal kap:\n- Hardhouten kap (meranti): duurzamer hout met langere levensduur — prijs op aanvraag\n- Aluminium kap: onderhoudsvrij — prijs op aanvraag\n\nBediening (alternatief voor uw huidige keuze):\n- Handbediend (koord): geen motor nodig — -€805\n- Draaischakelaar (Somfy LT motor): vaste schakelaar aan de muur — -€405\n- Motor + afstandsbediening (Somfy IO): bedien uw markies elektrisch met afstandsbediening — -€206\n\nExtra opties:\n- Stormstrook: extra doekstrook die het raam beschermt als de markies is ingeklapt — +€67\n- Tussenpoot: extra steunpoot in het midden (aanbevolen bij uw breedte) — +€194\n- Niet-standaard RAL kleur — +10%\n- Premium doekcollectie: Swela/Sunvas (+15%), Dickson MAX (+20%), Sattler Lumera (+5%)\n- Koord onderlangs i.p.v. bovenlangs — +€48\n- Spots/verlichting: dimbare inbouwspots — vanaf €847",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "position": 8,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "15% tijdelijke actie",
+     "amount": 15,
+     "type": "PERCENTAGE",
+     "vatPercentage": 0
+    }
+   }
+  },
+  "78a03285-7eea-414b-94a5-79177a05600d": {
+   "type": "text",
+   "data": "**Waarom Sonty?**\n\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij u thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 500+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+  }
+ },
+ "pricing": {
+  "total": 11052.9835
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "78a03285-7eea-414b-94a5-79177a05600d"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

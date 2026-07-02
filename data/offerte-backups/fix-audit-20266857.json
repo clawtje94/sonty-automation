@@ -1,0 +1,229 @@
+{
+ "documentId": "1c326dc3-2c9e-4b4a-a847-55acbb6ba869",
+ "versionId": "030094a0-27e6-4ff9-89ab-4af19a018dcb",
+ "documentTitle": "Offerte #20266857",
+ "documentStatus": "SENT",
+ "documentNumber": "20266857",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20266857",
+ "quotationNumber": "20266857",
+ "quotationTitle": "Offerte #20266857",
+ "quotationCreationTimestamp": 1781005509459,
+ "quotationExpirationTimestamp": 1783597509459,
+ "quotationStatus": "SENT",
+ "isoCurrency": "EUR",
+ "subjects": {
+  "leadConfiguration": "ebaf4382-404c-47ec-9882-8ffbd38c684b",
+  "contactPerson": "caed390a-7433-49be-bbff-551586a5fea1"
+ },
+ "segments": {
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 1,
+      "description": "Pergola 165 zip — Terrasoverkapping met waterdicht doek\nType: pergola bedraad\n\nBreedte: 5000 mm\nUitval: 3500 mm\nFrame Kleur: RAL 9010 structuur\nKleur doek: NTB (wordt bepaald bij inmeetafspraak)\nBediening: afstandsbediening\nMotor: somfy IO motor\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\n\n- Terrasoverkapping met waterdicht doek: beschermd tegen zon en regen\n- Geïntegreerde zipscreens voor wind- en privacybescherming aan de zijkanten\n- Uw terras het hele jaar door bruikbaar, ongeacht het weer\n- 5 x 3.5 meter: volledige overkapping van uw buitenruimte\n- Gemotoriseerd: doek in- en uitrollen met afstandsbediening\n- Aluminium frame: duurzaam, onderhoudsarm en stijlvol\n\n- 5 jaar op het frame en de constructie\n- 7 jaar motorgarantie (Somfy, Europees marktleider)\n\nWat u krijgt:\n- Terrasoverkapping met waterdicht doek: beschermd tegen zon en regen\n- Uw terras het hele jaar door bruikbaar, ongeacht het weer\n- 5 x 3.5 meter: volledige overkapping\n- Gemotoriseerd: doek in- en uitrollen met afstandsbediening\n- Aluminium frame: duurzaam, onderhoudsarm en stijlvol\n",
+      "pricePerUnit": 7794.8,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Inmeten + montage Pergola\n- Professionele montage door ons eigen montageteam\n- Inclusief inmeetafspraak bij u thuis\n- Volledige plaatsing en constructie\n- Elektra afwerken en aansluiten\n- Klein materiaal en bevestiging\n- Afstellen en testen\n- Bediening uitleggen\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 650,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "15% tijdelijke actie",
+     "amount": 15,
+     "type": "PERCENTAGE",
+     "vatPercentage": 21
+    }
+   }
+  }
+ },
+ "pricing": {
+  "total": 7178.08
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

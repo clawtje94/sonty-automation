@@ -1,0 +1,257 @@
+{
+ "documentId": "89f01f74-721e-4295-bac2-e48f704ef9cd",
+ "versionId": "9737e468-e2f9-408f-93d9-c8050d6453e1",
+ "documentTitle": "Offerte #20266862",
+ "documentStatus": "SENT",
+ "documentNumber": "20266862",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20266862",
+ "quotationNumber": "20266862",
+ "quotationTitle": "Offerte #20266862",
+ "quotationCreationTimestamp": 1781009755668,
+ "quotationExpirationTimestamp": 1783601755668,
+ "quotationStatus": "SENT",
+ "isoCurrency": "EUR",
+ "subjects": {
+  "leadConfiguration": "61aa8449-665e-407b-af00-0b63d348b224",
+  "contactPerson": "9f6010c8-e205-4a26-96c9-6dd532de0113"
+ },
+ "segments": {
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 1,
+      "description": "Pergola 165 zip — Terrasoverkapping met waterdicht doek\nType: pergola bedraad\n\nBreedte: 5573 mm\nUitval: 3500 mm\nFrame Kleur: Andere RAL kleur (wordt bepaald bij inmeetafspraak)\nKleur doek: NTB (wordt bepaald bij inmeetafspraak)\nBediening: afstandsbediening\nMotor: somfy IO motor\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\n\n- Terrasoverkapping met waterdicht doek: beschermd tegen zon en regen\n- Geïntegreerde zipscreens voor wind- en privacybescherming aan de zijkanten\n- Uw terras het hele jaar door bruikbaar, ongeacht het weer\n- 5.6 x 3.5 meter: volledige overkapping van uw buitenruimte\n- Gemotoriseerd: doek in- en uitrollen met afstandsbediening\n- Aluminium frame: duurzaam, onderhoudsarm en stijlvol\n\n- 5 jaar op het frame en de constructie\n- 7 jaar motorgarantie (Somfy, Europees marktleider)\n\nWat u krijgt:\n- Terrasoverkapping met waterdicht doek: beschermd tegen zon en regen\n- Uw terras het hele jaar door bruikbaar, ongeacht het weer\n- 5.6 x 3.5 meter: volledige overkapping\n- Gemotoriseerd: doek in- en uitrollen met afstandsbediening\n- Aluminium frame: duurzaam, onderhoudsarm en stijlvol\n",
+      "pricePerUnit": 9845.86,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Pergola 165 zip — Terrasoverkapping met waterdicht doek\nType: pergola bedraad\n\nBreedte: 5701 mm\nUitval: 3500 mm\nFrame Kleur: Andere RAL kleur (wordt bepaald bij inmeetafspraak)\nKleur doek: NTB (wordt bepaald bij inmeetafspraak)\nBediening: afstandsbediening\nMotor: somfy IO motor\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\n\n- Terrasoverkapping met waterdicht doek: beschermd tegen zon en regen\n- Geïntegreerde zipscreens voor wind- en privacybescherming aan de zijkanten\n- Uw terras het hele jaar door bruikbaar, ongeacht het weer\n- 5.7 x 3.5 meter: volledige overkapping van uw buitenruimte\n- Gemotoriseerd: doek in- en uitrollen met afstandsbediening\n- Aluminium frame: duurzaam, onderhoudsarm en stijlvol\n\n- 5 jaar op het frame en de constructie\n- 7 jaar motorgarantie (Somfy, Europees marktleider)\n\nWat u krijgt:\n- Terrasoverkapping met waterdicht doek: beschermd tegen zon en regen\n- Uw terras het hele jaar door bruikbaar, ongeacht het weer\n- 5.7 x 3.5 meter: volledige overkapping\n- Gemotoriseerd: doek in- en uitrollen met afstandsbediening\n- Aluminium frame: duurzaam, onderhoudsarm en stijlvol\n",
+      "pricePerUnit": 9845.86,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Zip Design 110 — Windvaste screen zonwering\nType: screen bedraad\n\nBreedte: 1518 mm\nHoogte: 2165 mm\nKastmaat: 105 mm\nFrame kleur: Andere RAL kleur (wordt bepaald bij inmeetafspraak)\nKleur doek: NTB (wordt bepaald bij inmeetafspraak)\nOnderlat: Design\nBediening: afstandsbediening\nMotor: somfy RS100 IO motor\nMontage: NTB\nType geleider: NTB\n\n- Windvaste screen dankzij zip-technologie (ritsgeleidingssysteem)\n- Bescherming tegen zon, warmte en inkijk\n- Strakke, minimalistische uitstraling met design onderlat\n- Motor met afstandsbediening: bedienen vanaf de bank\n\n- 5 jaar volledige productgarantie\n- 7 jaar motorgarantie (Somfy, Europees marktleider)\n\nWat u krijgt:\n- Windvaste screen dankzij zip-technologie (ritsgeleidingssysteem)\n- Bescherming tegen zon, warmte en inkijk\n- Strakke uitstraling met design onderlat\n- Motor met afstandsbediening: bedienen vanaf de bank\n",
+      "pricePerUnit": 1945.3,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 2,
+      "description": "Inmeten + montage Pergola\n- Professionele montage door ons eigen montageteam\n- Inclusief inmeetafspraak bij u thuis\n- Volledige plaatsing en constructie\n- Elektra afwerken en aansluiten\n- Klein materiaal en bevestiging\n- Afstellen en testen\n- Bediening uitleggen\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 650,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Inmeten + montage screen\n- Professionele montage door ons eigen montageteam\n- Inclusief inmeetafspraak bij u thuis\n- Klein materiaal en bevestiging\n- Motor afstellen en bediening uitleggen\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Tahoma Switch — Smart home bediening\n- Automatiseer al uw Somfy zonwering vanuit één app\n- Bedien uw zonwering waar u ook bent\n- Stel automatische scenario's in (bijv. sluiten bij zonsondergang)\n- Koppel met andere smart home systemen (Philips Hue, Google Home)\n- Inclusief installatie en persoonlijke uitleg",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "15% tijdelijke actie",
+     "amount": 15,
+     "type": "PERCENTAGE",
+     "vatPercentage": 21
+    }
+   }
+  }
+ },
+ "pricing": {
+  "total": 19827.967
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,299 @@
+{
+ "documentId": "c211a91d-0cb3-4ba6-b417-2e49cbddb56f",
+ "versionId": "4be4e78c-3f12-4164-af6f-d59f4af93c81",
+ "documentTitle": "Offerte #20266695",
+ "documentStatus": "SENT",
+ "documentNumber": "20266695",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20266695",
+ "quotationNumber": "20266695",
+ "quotationTitle": "Offerte #20266695",
+ "quotationCreationTimestamp": 1780641442838,
+ "quotationExpirationTimestamp": 1783233442838,
+ "quotationStatus": "SENT",
+ "isoCurrency": "EUR",
+ "subjects": {
+  "leadConfiguration": "59e32bc1-8eed-49f4-8e84-8780a2ad53f2",
+  "contactPerson": "2260df28-b0e0-4353-8578-83a95a379dd2"
+ },
+ "segments": {
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 1,
+      "description": "Suneye\nBreedte: 4000 mm\nUitval: 2500 mm\nFrame kleur: RAL 9010\nKleur doek: NTB\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 3130.8,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Eolis 3D windsensor IO\n- Windbeveiliging in de voorlijst\n- De windsensor is een hulp stuk hier kunnen geen garantie rechten aan verleend worden mbt windschade.",
+      "pricePerUnit": 169,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 3,
+      "description": "Duoplisse\nBreedte: 550 mm\nHoogte: 1380 mm\nKleur profiel: RAL9010\nKleur doek: 911328, prijsgroep 1\nMontage: Glasmontage\nBediening: Handgreep",
+      "pricePerUnit": 361,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 3,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Duoplisse\nBreedte: 810 mm\nHoogte: 1460 mm\nKleur profiel: RAL9010\nKleur doek: 911328, prijsgroep 1\nMontage: Glasmontage\nBediening: Handgreep",
+      "pricePerUnit": 505,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 4,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 2,
+      "description": "Duoplisse\nBreedte: 800 mm\nHoogte: 1500 mm\nKleur profiel: RAL9010\nKleur doek: 911328, prijsgroep 1\nMontage: Glasmontage\nBediening: Handgreep",
+      "pricePerUnit": 442,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 5,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 2,
+      "description": "Duoplisse\nBreedte: 550 mm\nHoogte: 1350 mm\nKleur profiel: RAL9010\nKleur doek: 911328, prijsgroep 1\nMontage: Glasmontage\nBediening: Handgreep",
+      "pricePerUnit": 361,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 6,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Duoplisse\nBreedte: 800 mm\nHoogte: 1200 mm\nKleur profiel: RAL9010\nKleur doek: 911328, prijsgroep 1\nMontage: Glasmontage\nBediening: Handgreep",
+      "pricePerUnit": 400,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 7,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Duoplisse\nBreedte: 1010 mm\nHoogte: 1010 mm\nKleur profiel: RAL9010\nKleur doek: 911328, prijsgroep 1\nMontage: Glasmontage\nBediening: Handgreep",
+      "pricePerUnit": 510,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 8,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 10,
+      "description": "Montage duoplissee\n- Ontvetten glas\n- Montage product",
+      "pricePerUnit": 65,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 9,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "15% tijdelijke actie",
+     "amount": 15,
+     "type": "PERCENTAGE",
+     "vatPercentage": 21
+    }
+   }
+  }
+ },
+ "pricing": {
+  "total": 7079.4800000000005
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

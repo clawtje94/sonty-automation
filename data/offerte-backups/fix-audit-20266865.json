@@ -1,0 +1,257 @@
+{
+ "documentId": "04b32ebe-be9f-43c7-971c-014aa8e91cbd",
+ "versionId": "0e9f12c5-10cc-4332-979e-a9d083c8d919",
+ "documentTitle": "Offerte #20266865",
+ "documentStatus": "SENT",
+ "documentNumber": "20266865",
+ "documentType": "QUOTATION",
+ "title": "Offerte #20266865",
+ "quotationNumber": "20266865",
+ "quotationTitle": "Offerte #20266865",
+ "quotationCreationTimestamp": 1781023428817,
+ "quotationExpirationTimestamp": 1783615428817,
+ "quotationStatus": "SENT",
+ "isoCurrency": "EUR",
+ "subjects": {
+  "leadConfiguration": "6f5185a6-def7-4fdd-8f37-0fcfe4a449b3",
+  "contactPerson": "8b977a76-8203-4e61-a1cf-72d5d4a62a4b"
+ },
+ "segments": {
+  "defaultTemplateContactPart": {
+   "type": "contactPerson",
+   "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+  },
+  "defaultSignaturePart": {
+   "type": "signature",
+   "data": {}
+  },
+  "defaultTemplateProfileLogo": {
+   "type": "companyProfileLogo",
+   "data": "![|6lh]($companyProfile.logo)"
+  },
+  "defaultTemplateProfileText": {
+   "type": "text",
+   "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+  },
+  "defaultTemplatePriceLineGroup": {
+   "type": "priceLineGroup",
+   "data": {
+    "lines": [
+     {
+      "units": 2,
+      "description": "Zip Design 110 — Windvaste screen zonwering\nType: screen bedraad\n\nBreedte: 1200 mm\nHoogte: 2100 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7039\nKleur doek: NTB (wordt bepaald bij inmeetafspraak)\nOnderlat: Design\nBediening: afstandsbediening\nMotor: somfy RS100 IO motor\nMontage: NTB\nType geleider: NTB\n\n- Windvaste screen dankzij zip-technologie (ritsgeleidingssysteem)\n- Bescherming tegen zon, warmte en inkijk\n- Strakke, minimalistische uitstraling met design onderlat\n- Motor met afstandsbediening: bedienen vanaf de bank\n\n- 5 jaar volledige productgarantie\n- 7 jaar motorgarantie (Somfy, Europees marktleider)\n\nWat u krijgt:\n- Windvaste screen dankzij zip-technologie (ritsgeleidingssysteem)\n- Bescherming tegen zon, warmte en inkijk\n- Strakke uitstraling met design onderlat\n- Motor met afstandsbediening: bedienen vanaf de bank\n",
+      "pricePerUnit": 1716.5,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Zip Design 110 — Windvaste screen zonwering\nType: screen bedraad\n\nBreedte: 2100 mm\nHoogte: 1500 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7039\nKleur doek: NTB (wordt bepaald bij inmeetafspraak)\nOnderlat: Design\nBediening: afstandsbediening\nMotor: somfy RS100 IO motor\nMontage: NTB\nType geleider: NTB\n\n- Windvaste screen dankzij zip-technologie (ritsgeleidingssysteem)\n- Bescherming tegen zon, warmte en inkijk\n- Strakke, minimalistische uitstraling met design onderlat\n- Motor met afstandsbediening: bedienen vanaf de bank\n\n- 5 jaar volledige productgarantie\n- 7 jaar motorgarantie (Somfy, Europees marktleider)\n\nWat u krijgt:\n- Windvaste screen dankzij zip-technologie (ritsgeleidingssysteem)\n- Bescherming tegen zon, warmte en inkijk\n- Strakke uitstraling met design onderlat\n- Motor met afstandsbediening: bedienen vanaf de bank\n",
+      "pricePerUnit": 1981.6,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 2,
+      "description": "Zip Design 110 — Windvaste screen zonwering\nType: screen bedraad\n\nBreedte: 1200 mm\nHoogte: 1650 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7039\nKleur doek: NTB (wordt bepaald bij inmeetafspraak)\nOnderlat: Design\nBediening: afstandsbediening\nMotor: somfy RS100 IO motor\nMontage: NTB\nType geleider: NTB\n\n- Windvaste screen dankzij zip-technologie (ritsgeleidingssysteem)\n- Bescherming tegen zon, warmte en inkijk\n- Strakke, minimalistische uitstraling met design onderlat\n- Motor met afstandsbediening: bedienen vanaf de bank\n\n- 5 jaar volledige productgarantie\n- 7 jaar motorgarantie (Somfy, Europees marktleider)\n\nWat u krijgt:\n- Windvaste screen dankzij zip-technologie (ritsgeleidingssysteem)\n- Bescherming tegen zon, warmte en inkijk\n- Strakke uitstraling met design onderlat\n- Motor met afstandsbediening: bedienen vanaf de bank\n",
+      "pricePerUnit": 1636.2,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Zip Design 110 — Windvaste screen zonwering\nType: screen bedraad\n\nBreedte: 1000 mm\nHoogte: 1650 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7039\nKleur doek: NTB (wordt bepaald bij inmeetafspraak)\nOnderlat: Design\nBediening: afstandsbediening\nMotor: somfy RS100 IO motor\nMontage: NTB\nType geleider: NTB\n\n- Windvaste screen dankzij zip-technologie (ritsgeleidingssysteem)\n- Bescherming tegen zon, warmte en inkijk\n- Strakke, minimalistische uitstraling met design onderlat\n- Motor met afstandsbediening: bedienen vanaf de bank\n\n- 5 jaar volledige productgarantie\n- 7 jaar motorgarantie (Somfy, Europees marktleider)\n\nWat u krijgt:\n- Windvaste screen dankzij zip-technologie (ritsgeleidingssysteem)\n- Bescherming tegen zon, warmte en inkijk\n- Strakke uitstraling met design onderlat\n- Motor met afstandsbediening: bedienen vanaf de bank\n",
+      "pricePerUnit": 1557,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 6,
+      "description": "Inmeten + montage screen\n- Professionele montage door ons eigen montageteam\n- Inclusief inmeetafspraak bij u thuis\n- Klein materiaal en bevestiging\n- Motor afstellen en bediening uitleggen\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     },
+     {
+      "units": 1,
+      "description": "Tahoma Switch — Smart home bediening\n- Automatiseer al uw Somfy zonwering vanuit één app\n- Bedien uw zonwering waar u ook bent\n- Stel automatische scenario's in (bijv. sluiten bij zonsondergang)\n- Koppel met andere smart home systemen (Philips Hue, Google Home)\n- Inclusief installatie en persoonlijke uitleg",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+     }
+    ],
+    "vatSetting": "INCL",
+    "groupDiscount": {
+     "name": "15% tijdelijke actie",
+     "amount": 15,
+     "type": "PERCENTAGE",
+     "vatPercentage": 21
+    }
+   }
+  }
+ },
+ "pricing": {
+  "total": 9867.65
+ },
+ "renderRows": [
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileLogo"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateProfileText"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "text",
+       "target": "defaultTemplateContactPart"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "quotationData"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "priceLineGroupCombined",
+       "target": "defaultTemplatePriceLineGroup"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    100
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "empty",
+       "target": "2lh"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "delegateMargins": false,
+   "widths": [
+    50,
+    50
+   ],
+   "columns": [
+    {
+     "elements": [
+      {
+       "type": "userDecline"
+      }
+     ]
+    },
+    {
+     "elements": [
+      {
+       "type": "signature",
+       "target": "defaultSignaturePart"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

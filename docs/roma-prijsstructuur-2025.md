@@ -64,6 +64,7 @@ Resterende (gemarkeerde) aandachtspunten:
 
 ## Bij toekomstige koppeling (fase-1-checklist)
 
+0. ⛔ Besluit Daimy 2026-07-03: **garagedeuren doen we NIET** (van de site gehaald).
 1. ✅ Besluit Daimy 2026-07-03: **Sunmaster is leidend** bij overlap (rolluiken/screens); Roma voor garagedeuren, buitenjaloezieën, TRENDO en afwijkende RAL-kleuren.
 2. ✅ Besluit Daimy 2026-07-03: Roma-verkoopprijs = netto boekprijs × 1,21 (alleen BTW), verder niets.
 3. `data/roma-prices-2025.json` bouwen uit de extracts (zelfde structuur als sunmaster-prices-2026.json).

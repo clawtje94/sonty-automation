@@ -68,6 +68,7 @@ const TOOL_DEFS = [
           description: 'Nieuwe productregels; montageregel wordt automatisch toegevoegd',
         },
         aantalWijzigen: { type: 'array', items: { type: 'object', properties: { product: { type: 'string' }, aantal: { type: 'integer' } }, required: ['product', 'aantal'] } },
+        kortingRegel: { type: 'object', properties: { omschrijving: { type: 'string' }, bedrag: { type: 'number', description: 'Kortingsbedrag in euro (positief getal; komt als minregel op de offerte)' } }, required: ['bedrag'], description: 'ALLEEN binnen je mandaat: max 2,5% van het offertetotaal (= totaal max 17,5% incl. de standaard 15%). Zichtbare aparte regel.' },
         samenvatting: { type: 'string', description: 'Korte omschrijving van de wijziging voor het logboek' },
       },
       required: ['documentId', 'samenvatting'],

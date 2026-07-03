@@ -38,12 +38,15 @@ async function findRpOffertes({ email, phone }) {
     let offertes = [];
     if (lcId) {
       const docs = await rpGet(`/document-service/v1/${CFG.RP_PID}/quotations?lead_configuration_id=${lcId}`);
-      offertes = (docs?.quotationDatas || []).map(d => ({
-        nummer: d.quotationNumber, status: d.quotationStatus,
-        totaalIncl: d.totalPriceInclVat ?? d.totalIncl ?? null,
-        documentId: d.documentId,
-        link: `https://document.reuzenpanda.nl/nl/${CFG.RP_PID}/${d.documentId}/latest?pdfAction=DOCSIGN`,
-      }));
+      offertes = (docs?.quotationDatas || [])
+        .sort((a, b) => String(b.quotationCreationTimestamp || '').localeCompare(String(a.quotationCreationTimestamp || '')))
+        .map((d, idx) => ({
+          nummer: d.quotationNumber, status: d.quotationStatus,
+          aangemaakt: d.quotationCreationTimestamp || null,
+          nieuwste: idx === 0, // gesorteerd nieuw → oud
+          documentId: d.documentId,
+          link: `https://document.reuzenpanda.nl/nl/${CFG.RP_PID}/${d.documentId}/latest?pdfAction=DOCSIGN`,
+        }));
     }
     results.push({
       itemId: it.id,

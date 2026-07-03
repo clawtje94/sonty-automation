@@ -53,8 +53,9 @@ const MONTAGE_CAT = {
  *   verwijderen      — [string] producttermen; elke regel waarvan de titel deze term bevat wordt verwijderd
  *   toevoegen        — [{product, breedteMM, hoogteMM?, uitvalMM?, bediening?, aantal?}] nieuwe productregels (incl. automatische montageregel)
  *   aantalWijzigen   — [{product, aantal}] aantal van een bestaande regel wijzigen
+ *   kortingRegel     — {omschrijving, bedrag} zichtbare kortingsregel (negatief bedrag op de offerte)
  */
-async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aantalWijzigen = [] }) {
+async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aantalWijzigen = [], kortingRegel = null }) {
   const doc = await rpGet(`/document-service/v1/${CFG.RP_PID}/quotations/${documentId}`);
   const qd = doc?.quotationData;
   const plg = qd?.segments?.defaultTemplatePriceLineGroup;
@@ -98,6 +99,13 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
       description: `**Inmeten + montage ${MONTAGE_CAT[p.productKey] || ''}**\n- Inmeetafspraak bij je thuis\n- Professionele montage door ons eigen montageteam\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal`,
       units: item.aantal || 1, pricePerUnit: p.montageIncl, position: 0,
     });
+  }
+
+  // Zichtbare kortingsregel (regel uit memory: korting ALTIJD als aparte regel, nooit verstopt)
+  if (kortingRegel && kortingRegel.bedrag > 0) {
+    // Eventuele eerdere AI-kortingsregel vervangen (nooit stapelen)
+    lines = lines.filter(l => !titel(l).includes('extra korting'));
+    lines.push({ ...base, description: `**Extra korting**\n${kortingRegel.omschrijving || 'Eenmalige extra korting'}`, units: 1, pricePerUnit: -Math.abs(kortingRegel.bedrag), position: 0 });
   }
 
   // Volgorde exact volgens v4-logica: producten → montage → tahoma → opmerkingen

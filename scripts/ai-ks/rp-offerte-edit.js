@@ -100,6 +100,24 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
     });
   }
 
+  // Volgorde exact volgens v4-logica: producten → montage → tahoma → opmerkingen
+  // (v4's reorderAndMerge, 1-op-1 hergebruikt) + accessoires ná de hoofdproducten
+  // (windsensor bovenaan zag er raar uit — instructie Daimy 2026-07-03).
+  const ACCESSOIRE = /windsensor|zonsensor|handzender|verlengkabel|smart hub|afstandsbediening|eolis|sunteis|situo/i;
+  const reordered = v4.reorderAndMerge(lines).newLines;
+  const hoofd = reordered.filter(l => {
+    const d = ((l.description || '').split('\n')[0]).toLowerCase();
+    return !ACCESSOIRE.test(d) || d.includes('montage') || d.includes('inmeten');
+  });
+  const accessoires = reordered.filter(l => !hoofd.includes(l));
+  // Accessoires direct ná de laatste productregel (vóór montage), zoals in RP-offertes gebruikelijk
+  const eersteMontage = hoofd.findIndex(l => {
+    const d = ((l.description || '').split('\n')[0]).toLowerCase();
+    return d.includes('montage') || d.includes('inmeten');
+  });
+  const invoeg = eersteMontage === -1 ? hoofd.length : eersteMontage;
+  lines = [...hoofd.slice(0, invoeg), ...accessoires, ...hoofd.slice(invoeg)];
+
   // Posities opnieuw nummeren
   lines.forEach((l, i) => { l.position = i; });
   plg.data.lines = lines;

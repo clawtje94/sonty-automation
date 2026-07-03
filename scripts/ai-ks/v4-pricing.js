@@ -9,7 +9,7 @@ const code = src.slice(src.indexOf('const MK_UITVAL_COLS'), src.indexOf('// ====
 const SUNMASTER_PRICES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'sunmaster-prices-2026.json'), 'utf8'));
 const MARKUP = 1.10;
 
-const api = eval(code + `;({lookupPrice, calculateCorrectPrice, getProductKey, getCategory, getBedType, getMontagePrice, mkTotaalExcl, findNearest})`);
+const api = eval(code + `;({lookupPrice, calculateCorrectPrice, getProductKey, getCategory, getBedType, getMontagePrice, mkTotaalExcl, findNearest, reorderAndMerge})`);
 
 // Nette totaalprijs incl montage voor een productconfiguratie.
 // bediening: 'io' | 'solar' | 'solarBrel' | 'draaischakelaar' | 'handbediend'

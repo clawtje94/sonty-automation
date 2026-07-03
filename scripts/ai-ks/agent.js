@@ -15,7 +15,11 @@ const client = new Anthropic({ apiKey });
  * @returns {{ antwoord: string, acties: array, toolCalls: array, usage: object }}
  */
 async function beantwoord(gesprek) {
-  const ctx = { acties: [], liveTest: !!gesprek.liveTest, ticketId: gesprek.ticketId || null };
+  const ctx = {
+    acties: [], liveTest: !!gesprek.liveTest, ticketId: gesprek.ticketId || null,
+    // Harde eis Daimy: inmeet-doorzetting kan alleen als de offerte-link in dít gesprek gedeeld is
+    offerteLinkGedeeld: (gesprek.berichten || []).some(b => b.van === 'sonty' && /document\.reuzenpanda\.nl/.test(b.tekst || '')),
+  };
   const toolCalls = [];
 
   const historie = gesprek.berichten.map(b =>

@@ -19,12 +19,18 @@
 | Gesprekken waarin Sonty actief inmeten voorstelde | ±99 |
 | Wie beantwoordt: Daimy | 2.888 gesprekken (≈88% van alles) |
 
+> **Belangrijke kanttekening (Daimy, 3 juli):** het team werkt nog niet volledig in
+> Trengo — een deel van de e-mails wordt beantwoord vanuit de gewone mail-login
+> (Outlook), en die antwoorden zijn in Trengo niet zichtbaar. De "nooit beantwoord"-
+> cijfers voor het MAILKANAAL zijn dus een overschatting. De WhatsApp-cijfers (loopt
+> wél volledig via Trengo) en de kwalitatieve bevindingen blijven geldig.
+
 **Conclusie:** het probleem is niet de kwaliteit van de antwoorden (die is goed — zie §4),
-maar de **capaciteit en snelheid**. Vier van de tien klanten krijgen nooit antwoord, en
-warme leads die expliciet vragen "wanneer komen jullie inmeten?" blijven dagen of voorgoed
-liggen. Voorbeelden: klant die al akkoord gaf en om de afspraak vroeg (onbeantwoord),
-klant die voorkeursdagen voor het inmeten doorgaf (onbeantwoord), terugkerende klant die
-5 extra producten wilde (2x gevraagd, nooit beantwoord). Dit is de businesscase voor de AI.
+maar de **capaciteit, snelheid en versnippering over systemen**. Op WhatsApp blijven
+warme leads buiten het 24-uursvenster hangen; op mail is niet vast te stellen wat er
+beantwoord is omdat het antwoord buiten Trengo om kan zijn gegaan — wat op zichzelf al
+een structureel probleem is (geen centraal klantbeeld, geen meetbaarheid). De AI lost
+beide op: reageren binnen minuten, en alles in één systeem gelogd.
 
 ## 2. Wat klanten vragen (intent-verdeling over 1.168 gesprekken)
 

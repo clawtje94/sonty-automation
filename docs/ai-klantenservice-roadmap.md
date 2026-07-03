@@ -51,8 +51,11 @@ Replay: replay.js — AI naast echte team-antwoorden op historische gesprekken
 ## Fase 2 — Live op de veilige helft (week 3-4, na akkoord Daimy)
 - Live voor: productvragen, FAQ, prijsindicaties, showroom-uitnodigingen,
   inmeet-flow t/m boekingslink + planningstaak. Escalaties blijven naar mens.
-- WhatsApp eerst (24-uursvenster maximaal benutten: reageren binnen minuten),
-  daarna Aanvragen-mail (daar is de winst het grootst: mediane reactietijd nu 20 uur).
+- WhatsApp eerst (24-uursvenster maximaal benutten: reageren binnen minuten).
+- Aanvragen-mail daarna, MITS de mail volledig via Trengo loopt. Let op (Daimy, 3 juli):
+  het team beantwoordt nu deels vanuit de gewone mail-login buiten Trengo om — de AI kan
+  dus dubbel antwoorden. Vóór mail-livegang: óf iedereen op Trengo voor aanvragen@, óf de
+  AI leest de Outlook-mailbox mee om al-beantwoorde threads over te slaan.
 - Offerte_aanpassen live: AI voert wijziging door in RP (met backup zoals v4 dat doet)
   en stuurt de nieuwe offerte-link. Eerst 2 weken met vier-ogen-knop (team keurt de
   RP-wijziging in 1 klik goed via interne notitie), daarna vol automatisch.

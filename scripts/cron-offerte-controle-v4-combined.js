@@ -22,6 +22,12 @@ const fs = require('fs');
 const SUNMASTER_PRICES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'sunmaster-prices-2026.json'), 'utf8'));
 const MARKUP = 1.10;
 
+// Roma duo-offertes (instructie Daimy 2026-07-03): bij rolluik/screen ook een apart Roma-document
+const { maakRomaDuo, romaEquivalent } = require('./roma-duo-offerte.js');
+const ROMA_DUO_LOG = path.join(__dirname, '..', 'data', 'roma-duo-gemaakt.json');
+let romaDuoLog = {};
+try { romaDuoLog = JSON.parse(fs.readFileSync(ROMA_DUO_LOG, 'utf8')); } catch {}
+
 const RP_API_KEY = 'reuzenpanda_cpat_WMD2KmDRune53bj7.d0_ls8loPpAjb2TrSNOS_Xd_QLdxHq1xwOC9pyyJado';
 const PID = '731483fa-ef6b-4aae-afcf-883ec09219dd';
 const BACKLOG_ID = 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7';
@@ -1709,6 +1715,26 @@ async function main() {
       okCount++;
     }
     await setStatus(item.id, GECONTROLEERD);
+
+    // STAP 6: ROMA DUO-OFFERTE — apart document met het Roma-alternatief bij rolluiken/screens.
+    // Mag NOOIT de hoofdverwerking breken; dedupe via data/roma-duo-gemaakt.json.
+    try {
+      const eindLines = changed ? newLines : lines;
+      const heeftKandidaat = eindLines.some(l => {
+        const t = (l.description || '').split('\n')[0].replace(/\*\*/g, '').trim();
+        return !/inmeten|montage|korting|actie/i.test(t) && romaEquivalent(t);
+      });
+      if (heeftKandidaat && !romaDuoLog[docInfo.documentId]) {
+        const duo = await maakRomaDuo(docInfo.documentId);
+        if (duo.ok) {
+          romaDuoLog[docInfo.documentId] = { romaNummer: duo.romaNummer, romaDocumentId: duo.romaDocumentId, bron: docInfo.quotationNumber, klant: item.summary, tijd: new Date().toISOString() };
+          fs.writeFileSync(ROMA_DUO_LOG, JSON.stringify(romaDuoLog, null, 1));
+          console.log('  → Roma duo-offerte ' + duo.romaNummer + ' aangemaakt naast ' + docInfo.quotationNumber + (duo.overgeslagen?.length ? ' (overgeslagen: ' + duo.overgeslagen.join('; ') + ')' : ''));
+        } else if (duo.error) {
+          console.log('  Roma duo FOUT bij ' + docInfo.quotationNumber + ': ' + duo.error);
+        }
+      }
+    } catch (e) { console.log('  Roma duo error: ' + (e.message || e).toString().substring(0, 100)); }
     } catch (e) {
       console.log('  ERROR bij ' + item.summary + ': ' + (e.cause?.code || e.message)?.substring(0, 100) + ' — item blijft in OC voor volgende run');
       errorCount++;

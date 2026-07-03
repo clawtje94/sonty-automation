@@ -23,13 +23,14 @@ async function rpGet(ep) {
 // RP: zoek pipeline-items + offertes op e-mail of telefoon (via het snelle board-endpoint)
 async function findRpOffertes({ email, phone }) {
   const data = await rpGet(`/contact-service/${CFG.RP_PID}/boards/${CFG.RP_BOARD}/items`);
-  const items = data?.items || [];
+  if (!data?.items) return { fout: 'Reuzenpanda was even niet bereikbaar — probeer het zo nog een keer voordat je concludeert dat er geen offerte is.' };
+  const items = data.items;
   const e = norm(email), p = normPhone(phone);
+  // RP zet contactgegevens als platte tekst in summary/description — daar matchen we op
   const matches = items.filter(it => {
-    const c = it.contact || it.item_subject?.contact || {};
-    const ce = norm(c.email || c.email_address);
-    const cp = normPhone(c.phone || c.phone_number);
-    return (e && ce && ce === e) || (p && cp && cp === p);
+    const blob = ((it.summary || '') + '\n' + (it.description || '')).toLowerCase();
+    const digits = blob.replace(/[^0-9]/g, '');
+    return (e && blob.includes(e)) || (p && p.length >= 10 && digits.includes(p));
   }).slice(0, 5);
 
   const results = [];
@@ -50,8 +51,9 @@ async function findRpOffertes({ email, phone }) {
     }
     results.push({
       itemId: it.id,
-      itemNaam: it.title || it.name || null,
+      itemNaam: it.summary || it.title || it.name || null,
       statusId: it.status_id || it.status?.id || null,
+      aanvraag: (it.description || '').substring(0, 600) || null, // originele configurator-aanvraag van de klant
       lcId, offertes,
     });
   }

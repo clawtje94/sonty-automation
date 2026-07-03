@@ -198,7 +198,7 @@ async function verwerkPendingOffertes() {
     const ticket = tRes?.data || tRes;
     if (ticket && isLiveTestContact(ticket)) {
       const voornaam = (p.klantNaam || '').split(' ')[0];
-      const bericht = `Hi ${voornaam}, je offerte staat klaar. Je bekijkt hem hier: ${res.link}\n\nDe offerte is 7 dagen geldig. Neem hem rustig door en laat maar weten als je vragen hebt!`;
+      const bericht = `Hi ${voornaam}, je offerte staat klaar. Je bekijkt hem hier: ${res.link}\n\nOffertenummer: ${doc.quotationNumber || ''}\nDe offerte is 7 dagen geldig. Neem hem rustig door en laat maar weten als je vragen hebt!`;
       const sendRes = await sendLiveReply(ticket, bericht);
       console.log(`  → pending offerte geleverd aan ${p.klantNaam}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status}`);
     }

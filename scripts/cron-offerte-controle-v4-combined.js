@@ -1934,7 +1934,9 @@ async function main() {
           params: [
             { type: 'body', key: '{{1}}', value: voornaam || 'daar' },
             { type: 'body', key: '{{2}}', value: 'Jaimy' },
-            { type: 'body', key: '{{3}}', value: offerteLink },
+            // Offertenummer los erbij (instructie Daimy): team kan hem direct in RP zoeken.
+            // Spatie-suffix, want WhatsApp-templatevariabelen mogen geen regelovergang bevatten.
+            { type: 'body', key: '{{3}}', value: offerteLink + (docs[0].quotationNumber ? ' — offertenummer: ' + docs[0].quotationNumber : '') },
           ]
         })
       });

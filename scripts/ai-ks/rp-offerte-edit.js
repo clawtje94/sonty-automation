@@ -207,6 +207,7 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
 
   return {
     ok: true,
+    offertenummer: qd.quotationNumber,
     regelsVoor: voor,
     regelsNa: nieuweLijnen.length,
     nieuweRegels: nieuweLijnen.map(l => ({ aantal: l.units, prijs: l.pricePerUnit, product: (l.description || '').split('\n')[0].replace(/\*\*/g, '') })),

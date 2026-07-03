@@ -92,7 +92,13 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
     const dims = [`Breedte: ${item.breedteMM} mm`];
     if (item.uitvalMM) dims.push(`Uitval: ${item.uitvalMM} mm`);
     if (item.hoogteMM) dims.push(`Hoogte: ${item.hoogteMM} mm`);
-    const desc = `**${naam}**\n${dims.join('\n')}\nBediening: ${bed}\nFrame Kleur: n.t.b. (kiezen bij inmeten)\nGarantie: 3 jaar montage | 5 jaar product | 7 jaar motor`;
+    let desc = `**${naam}**\n${dims.join('\n')}\nBediening: ${bed}\nFrame Kleur: n.t.b. (kiezen bij inmeten)\nGarantie: 3 jaar montage | 5 jaar product | 7 jaar motor`;
+    // Markies: v4's eigen opties-blok (materiaal-alternatieven + bediening + extra's)
+    if (p.productKey.startsWith('markies')) {
+      const mat = p.productKey.replace('markies', '');
+      const mkBed = { handbediend: 'Handbediend', draaischakelaar: 'Draaischakelaar', io: 'Motor + afstandsbediening', solarBrel: 'Brel Solar motor', solar: 'Somfy IO motor Solar' }[item.bediening || 'handbediend'];
+      try { desc += v4.mkBuildOptiesBlok(mkBed, mat, item.breedteMM, item.uitvalMM || 1000); } catch {}
+    }
     lines.push({ ...base, description: desc, units: item.aantal || 1, pricePerUnit: p.productPrijsIncl, position: 0 });
     lines.push({
       ...base,
@@ -125,6 +131,15 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
   });
   const invoeg = eersteMontage === -1 ? hoofd.length : eersteMontage;
   lines = [...hoofd.slice(0, invoeg), ...accessoires, ...hoofd.slice(invoeg)];
+
+  // v4-VERRIJKING (instructie Daimy): dezelfde uitleg als de offertecontrole — kleur-annotatie,
+  // product-info, upgrade/downgrade-opties per productregel + het "Waarom Sonty"-blok.
+  const heeftTahoma = lines.some(l => titel(l).includes('tahoma'));
+  for (const l of lines) {
+    const first = ((l.description || '').split('\n')[0] || '').replace(/\*\*/g, '');
+    try { l.description = v4.addV4Enhancements(l.description, first, heeftTahoma, l.pricePerUnit); } catch {}
+  }
+  try { v4.addWaaromSontyBlock(qd); } catch {}
 
   // Posities opnieuw nummeren
   lines.forEach((l, i) => { l.position = i; });

@@ -9,10 +9,18 @@ const code = src.slice(src.indexOf('const MK_UITVAL_COLS'), src.indexOf('// ====
 const SUNMASTER_PRICES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'sunmaster-prices-2026.json'), 'utf8'));
 const MARKUP = 1.10;
 
-const api = eval(code + `;({lookupPrice, calculateCorrectPrice, getProductKey, getCategory, getBedType, getMontagePrice, mkTotaalExcl, findNearest, reorderAndMerge})`);
+const api = eval(code + `;({lookupPrice, calculateCorrectPrice, getProductKey, getCategory, getBedType, getMontagePrice, mkTotaalExcl, findNearest, reorderAndMerge, addV4Enhancements, addWaaromSontyBlock, mkBuildOptiesBlok})`);
 
 const UNILUX = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'unilux-prijzen-2026.json'), 'utf8'));
 const BTW = 1.21;
+const STANDAARD_KORTING_PCT = 15; // lopende actiekorting; staat ook op de RP-offerte
+
+// Voegt de actiekorting-weergave toe aan een prijsresultaat (instructie Daimy: laat zien wat mensen nu krijgen)
+function metKorting(res) {
+  if (res.error) return res;
+  const korting = Math.round(res.totaalIncl * STANDAARD_KORTING_PCT / 100);
+  return { ...res, actiekorting: { pct: STANDAARD_KORTING_PCT, bedrag: korting, prijsNaKorting: res.totaalIncl - korting, uitleg: `Vermeld altijd: bruto €${res.totaalIncl}, met de ${STANDAARD_KORTING_PCT}% actiekorting €${res.totaalIncl - korting} (bespaart €${korting}). De korting staat ook op de offerte.` } };
+}
 // Markies bediening-meerprijzen excl BTW (v4/offerte-tool)
 const MK_BEDIENING_EXCL = { handbediend: 0, draaischakelaar: 330, io: 495, solarBrel: 565, solar: 665 };
 
@@ -55,7 +63,7 @@ function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'i
   // ── Horren (Unilux) ──
   if (/\bhor\b|hordeur|plisse|plissé|rolhor/.test(zoek)) {
     if (!breedteMM || !hoogteMM) return { error: 'Breedte en hoogte (mm) nodig voor een hor.' };
-    return horPrijs({ type: zoek, breedteMM, hoogteMM });
+    return metKorting(horPrijs({ type: zoek, breedteMM, hoogteMM }));
   }
 
   // ── Markiezen (Markiezen NL tabellen, excl BTW × 1.21; zelfde bron als v4) ──
@@ -71,7 +79,7 @@ function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'i
     const bedExcl = MK_BEDIENING_EXCL[bediening] ?? 0;
     const productIncl = Math.round((excl + bedExcl) * BTW);
     const montage = 275;
-    return { productKey: 'markies' + mat, productPrijsIncl: productIncl, montageIncl: montage, totaalIncl: productIncl + montage, toelichting: `Markies met ${mat.toLowerCase()} kap, uitval ${uitval}mm, incl. BTW; montage door eigen monteurs. Bediening: ${bediening === 'handbediend' ? 'koord (handbediend)' : bediening}. Indicatie; definitief na inmeten.` };
+    return metKorting({ productKey: 'markies' + mat, productPrijsIncl: productIncl, montageIncl: montage, totaalIncl: productIncl + montage, toelichting: `Markies met ${mat.toLowerCase()} kap, uitval ${uitval}mm, incl. BTW; montage door eigen monteurs. Bediening: ${bediening === 'handbediend' ? 'koord (handbediend)' : bediening}. Indicatie; definitief na inmeten.` });
   }
   // VALKUIL: "sunbasic open cassette" (= de open-arm variant, Daimy's terminologie) bevat
   // het woord 'cassette' en zou anders naar het duurdere dichte-cassette-model mappen.
@@ -97,13 +105,13 @@ function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'i
   const montageBed = bediening === 'solar' ? 'solar' : bediening === 'draaischakelaar' ? 'draaischakelaar' : bediening === 'handbediend' ? 'handbediend' : 'bedraad';
   const montage = api.getMontagePrice(cat === 'pergola' ? 'pergola' : cat, montageBed, false) || 195;
 
-  return {
+  return metKorting({
     productKey,
     productPrijsIncl: Math.round(prijs),
     montageIncl: montage,
     totaalIncl: Math.round(prijs + montage),
     toelichting: 'Prijzen incl. BTW, product incl. Somfy motor, montage door eigen monteurs. Indicatie op basis van opgegeven maten; definitief na inmeten.',
-  };
+  });
 }
 
 module.exports = { prijsIndicatie, v4: api, SUNMASTER_PRICES, MARKUP };

@@ -78,7 +78,8 @@ async function verwerkTicket(t, state) {
     tekst: clean(m.body || m.message),
     tijd: m.created_at,
     intern: !!m.internal_note || m.type === 'NOTE',
-  })).filter(m => m.tekst && !m.intern);
+  })).filter(m => m.tekst && !m.intern)
+    .sort((a, b) => String(a.tijd).localeCompare(String(b.tijd))); // Trengo geeft nieuwste-eerst; wij willen oud → nieuw
   if (!rows.length) return;
 
   const laatste = rows[rows.length - 1];

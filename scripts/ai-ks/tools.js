@@ -109,6 +109,7 @@ const TOOL_DEFS = [
         },
         aantalWijzigen: { type: 'array', items: { type: 'object', properties: { product: { type: 'string' }, aantal: { type: 'integer' } }, required: ['product', 'aantal'] } },
         kortingRegel: { type: 'object', properties: { omschrijving: { type: 'string' }, bedrag: { type: 'number', description: 'Kortingsbedrag in euro (positief getal; komt als minregel op de offerte)' } }, required: ['bedrag'], description: 'ALLEEN binnen je mandaat: max 2,5% van het offertetotaal (= totaal max 17,5% incl. de standaard 15%). Zichtbare aparte regel.' },
+        vastePosten: { type: 'array', items: { type: 'object', properties: { soort: { type: 'string', enum: ['hoogwerker', 'demontage_oud_product', 'verlengde_muursteunen'] }, aantal: { type: 'integer' } }, required: ['soort'] }, description: 'Vaste posten toevoegen: hoogwerker €650/dag (boven 2e verdieping), demontage+afvoer oud product €75/stuk, verlengde muursteunen €150' },
         samenvatting: { type: 'string', description: 'Korte omschrijving van de wijziging voor het logboek' },
       },
       required: ['documentId', 'samenvatting'],

@@ -62,6 +62,13 @@ function montageTitel(productKey, itemProduct) {
   return MONTAGE_CAT[productKey] || itemProduct || '';
 }
 
+// Vaste posten die aan een offerte toegevoegd kunnen worden (prijzen uit teamgesprekken/beleid)
+const VASTE_POSTEN = {
+  hoogwerker: { naam: 'Hoogwerker (montage boven de 2e verdieping)', prijs: 650, uitleg: 'Per dag. Nodig als montage niet met ladders kan.' },
+  demontage_oud_product: { naam: 'Demonteren en afvoeren oud scherm/rolluik', prijs: 75, uitleg: 'Per product, waarvan €25 gedoneerd aan het Prinses Máxima Kinderziekenhuis.' },
+  verlengde_muursteunen: { naam: 'Verlengde muursteunen', prijs: 150, uitleg: 'Indien nodig, beoordeling bij het inmeten.' },
+};
+
 /**
  * Voert een offerte-aanpassing ECHT door in Reuzenpanda.
  * @param {object} p
@@ -71,7 +78,7 @@ function montageTitel(productKey, itemProduct) {
  *   aantalWijzigen   — [{product, aantal}] aantal van een bestaande regel wijzigen
  *   kortingRegel     — {omschrijving, bedrag} zichtbare kortingsregel (negatief bedrag op de offerte)
  */
-async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aantalWijzigen = [], kortingRegel = null }) {
+async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aantalWijzigen = [], kortingRegel = null, vastePosten = [] }) {
   const doc = await rpGet(`/document-service/v1/${CFG.RP_PID}/quotations/${documentId}`);
   const qd = doc?.quotationData;
   const plg = qd?.segments?.defaultTemplatePriceLineGroup;
@@ -121,6 +128,13 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
       description: `**Inmeten + montage ${montageTitel(p.productKey, item.product)}**\n- Inmeetafspraak bij je thuis\n- Professionele montage door ons eigen montageteam\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal`,
       units: item.aantal || 1, pricePerUnit: p.montageIncl, position: 0,
     });
+  }
+
+  // Vaste posten (hoogwerker, demontage oud product, verlengde muursteunen)
+  for (const vp of vastePosten) {
+    const post = VASTE_POSTEN[vp.soort];
+    if (!post) return { error: `Onbekende vaste post "${vp.soort}". Mogelijk: ${Object.keys(VASTE_POSTEN).join(', ')}` };
+    lines.push({ ...base, description: `**${post.naam}**\n${post.uitleg}`, units: vp.aantal || 1, pricePerUnit: post.prijs, position: 0 });
   }
 
   // Zichtbare kortingsregel (regel uit memory: korting ALTIJD als aparte regel, nooit verstopt)

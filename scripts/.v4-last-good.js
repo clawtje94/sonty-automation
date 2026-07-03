@@ -386,8 +386,19 @@ async function sendTeVerEmail(naam, email) {
 
 async function sendGordijnenEmail(naam, email) {
   const voornaam = naam.split(' ')[0];
-  return sendEmail(email, 'Uitnodiging voor een afspraak in onze showroom - Sonty',
-    '<p>Hi ' + voornaam + ',</p><p>Bedankt voor je interesse in gordijnen bij Sonty! We waarderen het dat je aan ons hebt gedacht.</p><p>In onze showroom in Rijswijk hebben we een breed assortiment aan binnenraamdecoratie: van gordijnen en gordijnrailsen tot plissés, vouwgordijnen en zelfs prachtig Arte behang. Zo kun je de verschillende stoffen zien, voelen en op je gemak de juiste keuze maken.</p><p>Tijdens je bezoek nemen we alles met je door: van stofkeuze en kleur tot ophangsysteem en afmetingen. Onze adviseur helpt je graag met een passend advies.</p><p><strong>Plan je afspraak in via deze link:</strong><br><a href="' + BOOKINGS_URL + '">' + BOOKINGS_URL + '</a></p><p><strong>Onze showroom:</strong><br>Frijdastraat 8F, 2288 EX Rijswijk<br>Di t/m vr: 9:30 - 17:00<br>Za: 9:30 - 16:00</p><p>Heb je vragen? Bel of app ons gerust op 085 006 9681.</p><p>We kijken ernaar uit je te ontvangen!</p><p>Met vriendelijke groet,<br>Het Sonty Team</p><p>Sonty B.V.</p>',
+  return sendEmail(email, 'Kom stoffen voelen in onze showroom - dan weet je het zeker (en krijg je direct een prijs)',
+    '<p>Hi ' + voornaam + ',</p>' +
+    '<p>Bedankt voor je aanvraag voor gordijnen bij Sonty!</p>' +
+    '<p>Eerlijk gezegd: gordijnen kiezen op afstand werkt niet goed. En dat heeft een simpele reden - de stof bepaalt alles:</p>' +
+    '<p><strong>1. Elke stof heeft een andere prijs.</strong><br>Een linnenlook, een velours of een verduisterende stof: het prijsverschil per meter is groot. Pas als jij de stof hebt gekozen, kunnen we een echte prijs maken. Een offerte zonder stofkeuze is dus altijd een slag in de lucht - en daar heb je niks aan.</p>' +
+    '<p><strong>2. Kleur en stof moet je voelen, niet googlen.</strong><br>Op een beeldscherm ziet elke stof er anders uit dan in het echt. De kleur naast jouw muurverf, de val van de stof, hoeveel licht erdoor komt - dat zie je alleen met de stof in je handen.</p>' +
+    '<p><strong>3. In &eacute;&eacute;n bezoek is alles geregeld.</strong><br>In onze showroom in Rijswijk staan honderden stalen: gordijnen, vitrage, pliss&eacute;s, vouwgordijnen, jaloezie&euml;n en Arte behang. Onze adviseur helpt je kiezen, rekent direct de prijs voor jouw ramen uit en plant meteen het inmeten in.</p>' +
+    '<p><strong>Plan je showroombezoek in:</strong><br><a href="' + BOOKINGS_URL + '">' + BOOKINGS_URL + '</a></p>' +
+    '<p>Liever gewoon binnenlopen? Dat kan ook - een afspraak is niet verplicht, maar dan weet je zeker dat er een adviseur voor je klaarzit.</p>' +
+    '<p><strong>Onze showroom:</strong><br>Frijdastraat 8F, 2288 EX Rijswijk<br>Di t/m vr: 9:30 - 17:00<br>Za: 9:30 - 16:00</p>' +
+    '<p>Vragen? Bel of app ons op 085 006 9681.</p>' +
+    '<p>Tot snel!</p>' +
+    '<p>Met vriendelijke groet,<br>Het Sonty Team</p><p>Sonty B.V.</p>',
     'gordijn_' + email);
 }
 
@@ -451,6 +462,7 @@ function getMontagePrice(cat, bedType, isUitgebreid) {
 function getMontageCategory(firstLine) {
   const d = firstLine.toLowerCase();
   if (d.includes('markies')) return 'markies';
+  if (d.includes('hor')) return 'hor'; // horren: eigen montageprijzen per type (zie adjustMontageInPlace)
   if (d.includes('rolluik')) return 'rolluik';
   if (d.includes('screen')) return 'screen';
   if (d.includes('knikarm')) return 'knikarmscherm';
@@ -496,12 +508,22 @@ function transformProductDesc(desc, cat, bedType) {
   return result.join('\n');
 }
 
+// Montagekosten horren (Daimy 2026-07-03): inklem/vaste raamhor 20, rolhor 35, enkele deur 75, dubbele deur 95
+function getHorMontagePrice(desc) {
+  const d = desc.toLowerCase();
+  if (/dubbel/.test(d)) return 95;              // dubbele plisséfit / dubbele deuren / schuifpui
+  if (/deur|pliss[eé]fit|schuifhor/.test(d)) return 75; // enkele hordeur
+  if (/rolhor|comfort|super/.test(d)) return 35; // raamrolhorren
+  if (/inklem|voorzet|veerstift|pliss[eé]|raamhor/.test(d)) return 20; // vaste raamhorren / raamplissé
+  return null; // onbekend hortype → niet aanpassen, handmatige controle
+}
+
 // Pas montage aan: behoud originele titel + bullets, alleen prijs wijzigen
 function adjustMontageInPlace(line, cat, bedType) {
   let changed = false;
   const fullDesc = (line.description || '').toLowerCase();
   const isUitgebreid = fullDesc.includes('uitgebreid') || fullDesc.includes('inclusief uitbouw') || fullDesc.includes('met uitbouw');
-  const correctPrice = getMontagePrice(cat, bedType, isUitgebreid);
+  const correctPrice = cat === 'hor' ? getHorMontagePrice(fullDesc) : getMontagePrice(cat, bedType, isUitgebreid);
   if (correctPrice !== null && line.pricePerUnit !== correctPrice) {
     line.pricePerUnit = correctPrice;
     changed = true;
@@ -1416,6 +1438,16 @@ function addV4Enhancements(desc, firstLine, hasTahoma, linePrice) {
   return lines.join('\n');
 }
 
+// Offertes zijn 7 dagen geldig vanaf aanmaak (instructie Daimy 2026-07-03; RP-standaard was 30 dagen)
+function setGeldigheid7Dagen(qd) {
+  const WEEK = 7 * 86400000;
+  const doel = (qd.quotationCreationTimestamp || Date.now()) + WEEK;
+  if (doel < Date.now()) return false; // oude offerte niet met terugwerkende kracht laten verlopen
+  if (qd.quotationExpirationTimestamp === doel) return false;
+  qd.quotationExpirationTimestamp = doel;
+  return true;
+}
+
 // "Waarom Sonty" tekstblok 1x onderaan het document (via renderRows)
 function addWaaromSontyBlock(qd) {
   // Check of het al bestaat (idempotent)
@@ -1664,6 +1696,9 @@ async function main() {
     if (ENHANCE_DESCRIPTIONS) {
       if (addWaaromSontyBlock(qd)) changed = true;
     }
+
+    // STAP 4c: GELDIGHEID → 7 dagen (instructie Daimy)
+    if (setGeldigheid7Dagen(qd)) changed = true;
 
     // STAP 5: OPSLAAN + STATUS → altijd GECONTROLEERD (Daimy checkt, pas daarna verstuurd)
     if (changed) {
@@ -1998,6 +2033,9 @@ if (testName) {
 
       // Waarom Sonty
       addWaaromSontyBlock(qd);
+
+      // Geldigheid → 7 dagen
+      setGeldigheid7Dagen(qd);
 
       // Print resultaat
       for (const l of newLines) {

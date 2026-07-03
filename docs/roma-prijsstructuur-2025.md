@@ -12,7 +12,7 @@
 | | **Sunmaster** | **Roma** |
 |---|---|---|
 | Prijstype | **Advies-verkoopprijzen INCL. BTW** | **Netto dealerprijzen EXCL. BTW** (voorwaarden p324 §3: "netto prijzen … plus de toepasselijke btw") |
-| Sonty-rekenregel | boekprijs × 1,10 | nog te bepalen (× 1,21 BTW × marge) |
+| Sonty-rekenregel | boekprijs × 1,10 | **boekprijs × 1,21 (alleen BTW, géén extra marge)** — besluit Daimy 2026-07-03 |
 | Motoren in tabelprijs | Somfy (Sunea/Sunilus/RS100, zonder handzender €76) | Rolluiken: RS100 io + Smoove io · Screens: Maestria io + Smoove io · Buitenjaloezieën: J4 io + Smoove io (zenders al ingeleerd af fabriek) |
 | Garantie fabrikant | — | 5 jaar op materialen, 7 jaar op RS100 io solar |
 | Jaargang | 2026 | **2025** (check of er een 2026-lijst komt) |
@@ -64,8 +64,8 @@ Resterende (gemarkeerde) aandachtspunten:
 
 ## Bij toekomstige koppeling (fase-1-checklist)
 
-1. Beslissing Daimy: welke producten via Roma, welke via Sunmaster (en wat bij overlap rolluiken/screens).
-2. Sonty-marge op Roma-netto bepalen (excl → incl BTW × marge).
+1. ✅ Besluit Daimy 2026-07-03: **Sunmaster is leidend** bij overlap (rolluiken/screens); Roma voor garagedeuren, buitenjaloezieën, TRENDO en afwijkende RAL-kleuren.
+2. ✅ Besluit Daimy 2026-07-03: Roma-verkoopprijs = netto boekprijs × 1,21 (alleen BTW), verder niets.
 3. `data/roma-prices-2025.json` bouwen uit de extracts (zelfde structuur als sunmaster-prices-2026.json).
 4. Koppelen in v4 + AI-klantenservice mét merk-onderscheid in de productnaam.
 5. De gemarkeerde cellen (zie hierboven) herbevestigen.

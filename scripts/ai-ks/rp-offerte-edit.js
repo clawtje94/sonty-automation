@@ -141,6 +141,9 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
   }
   try { v4.addWaaromSontyBlock(qd); } catch {}
 
+  // Geldigheid: AI-aangepaste offertes zijn 7 dagen geldig vanaf NU (klant krijgt zojuist de nieuwe versie)
+  qd.quotationExpirationTimestamp = Date.now() + 7 * 86400000;
+
   // Posities opnieuw nummeren
   lines.forEach((l, i) => { l.position = i; });
   plg.data.lines = lines;

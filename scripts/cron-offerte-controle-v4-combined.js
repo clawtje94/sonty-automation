@@ -1438,6 +1438,16 @@ function addV4Enhancements(desc, firstLine, hasTahoma, linePrice) {
   return lines.join('\n');
 }
 
+// Offertes zijn 7 dagen geldig vanaf aanmaak (instructie Daimy 2026-07-03; RP-standaard was 30 dagen)
+function setGeldigheid7Dagen(qd) {
+  const WEEK = 7 * 86400000;
+  const doel = (qd.quotationCreationTimestamp || Date.now()) + WEEK;
+  if (doel < Date.now()) return false; // oude offerte niet met terugwerkende kracht laten verlopen
+  if (qd.quotationExpirationTimestamp === doel) return false;
+  qd.quotationExpirationTimestamp = doel;
+  return true;
+}
+
 // "Waarom Sonty" tekstblok 1x onderaan het document (via renderRows)
 function addWaaromSontyBlock(qd) {
   // Check of het al bestaat (idempotent)
@@ -1686,6 +1696,9 @@ async function main() {
     if (ENHANCE_DESCRIPTIONS) {
       if (addWaaromSontyBlock(qd)) changed = true;
     }
+
+    // STAP 4c: GELDIGHEID → 7 dagen (instructie Daimy)
+    if (setGeldigheid7Dagen(qd)) changed = true;
 
     // STAP 5: OPSLAAN + STATUS → altijd GECONTROLEERD (Daimy checkt, pas daarna verstuurd)
     if (changed) {
@@ -2020,6 +2033,9 @@ if (testName) {
 
       // Waarom Sonty
       addWaaromSontyBlock(qd);
+
+      // Geldigheid → 7 dagen
+      setGeldigheid7Dagen(qd);
 
       // Print resultaat
       for (const l of newLines) {

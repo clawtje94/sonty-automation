@@ -386,8 +386,19 @@ async function sendTeVerEmail(naam, email) {
 
 async function sendGordijnenEmail(naam, email) {
   const voornaam = naam.split(' ')[0];
-  return sendEmail(email, 'Uitnodiging voor een afspraak in onze showroom - Sonty',
-    '<p>Hi ' + voornaam + ',</p><p>Bedankt voor je interesse in gordijnen bij Sonty! We waarderen het dat je aan ons hebt gedacht.</p><p>In onze showroom in Rijswijk hebben we een breed assortiment aan binnenraamdecoratie: van gordijnen en gordijnrailsen tot plissés, vouwgordijnen en zelfs prachtig Arte behang. Zo kun je de verschillende stoffen zien, voelen en op je gemak de juiste keuze maken.</p><p>Tijdens je bezoek nemen we alles met je door: van stofkeuze en kleur tot ophangsysteem en afmetingen. Onze adviseur helpt je graag met een passend advies.</p><p><strong>Plan je afspraak in via deze link:</strong><br><a href="' + BOOKINGS_URL + '">' + BOOKINGS_URL + '</a></p><p><strong>Onze showroom:</strong><br>Frijdastraat 8F, 2288 EX Rijswijk<br>Di t/m vr: 9:30 - 17:00<br>Za: 9:30 - 16:00</p><p>Heb je vragen? Bel of app ons gerust op 085 006 9681.</p><p>We kijken ernaar uit je te ontvangen!</p><p>Met vriendelijke groet,<br>Het Sonty Team</p><p>Sonty B.V.</p>',
+  return sendEmail(email, 'Kom stoffen voelen in onze showroom - dan weet je het zeker (en krijg je direct een prijs)',
+    '<p>Hi ' + voornaam + ',</p>' +
+    '<p>Bedankt voor je aanvraag voor gordijnen bij Sonty!</p>' +
+    '<p>Eerlijk gezegd: gordijnen kiezen op afstand werkt niet goed. En dat heeft een simpele reden - de stof bepaalt alles:</p>' +
+    '<p><strong>1. Elke stof heeft een andere prijs.</strong><br>Een linnenlook, een velours of een verduisterende stof: het prijsverschil per meter is groot. Pas als jij de stof hebt gekozen, kunnen we een echte prijs maken. Een offerte zonder stofkeuze is dus altijd een slag in de lucht - en daar heb je niks aan.</p>' +
+    '<p><strong>2. Kleur en stof moet je voelen, niet googlen.</strong><br>Op een beeldscherm ziet elke stof er anders uit dan in het echt. De kleur naast jouw muurverf, de val van de stof, hoeveel licht erdoor komt - dat zie je alleen met de stof in je handen.</p>' +
+    '<p><strong>3. In &eacute;&eacute;n bezoek is alles geregeld.</strong><br>In onze showroom in Rijswijk staan honderden stalen: gordijnen, vitrage, pliss&eacute;s, vouwgordijnen, jaloezie&euml;n en Arte behang. Onze adviseur helpt je kiezen, rekent direct de prijs voor jouw ramen uit en plant meteen het inmeten in.</p>' +
+    '<p><strong>Plan je showroombezoek in:</strong><br><a href="' + BOOKINGS_URL + '">' + BOOKINGS_URL + '</a></p>' +
+    '<p>Liever gewoon binnenlopen? Dat kan ook - een afspraak is niet verplicht, maar dan weet je zeker dat er een adviseur voor je klaarzit.</p>' +
+    '<p><strong>Onze showroom:</strong><br>Frijdastraat 8F, 2288 EX Rijswijk<br>Di t/m vr: 9:30 - 17:00<br>Za: 9:30 - 16:00</p>' +
+    '<p>Vragen? Bel of app ons op 085 006 9681.</p>' +
+    '<p>Tot snel!</p>' +
+    '<p>Met vriendelijke groet,<br>Het Sonty Team</p><p>Sonty B.V.</p>',
     'gordijn_' + email);
 }
 

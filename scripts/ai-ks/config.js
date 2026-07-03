@@ -20,8 +20,8 @@ module.exports = {
 
   // LIVE-TEST WHITELIST: uitsluitend deze nummers krijgen een écht antwoord,
   // ook in schaduwmodus. Genormaliseerd formaat: 31xxxxxxxxx (geen +, geen 06).
-  // Toegevoegd op verzoek van Daimy (2026-07-03): eigen testnummer.
-  TEST_LIVE_PHONES: ['31683500506'],
+  // Toegevoegd op verzoek van Daimy (2026-07-03): eigen testnummer + tweede tester.
+  TEST_LIVE_PHONES: ['31683500506', '31636516410'],
 
   // Menselijke antwoord-vertraging (instructie Daimy: "straks iets meer tijd nemen").
   // Uit tijdens de test; bij livegang aanzetten. Vertraging schaalt met de lengte

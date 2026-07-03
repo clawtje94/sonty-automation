@@ -44,6 +44,28 @@ async function telegram(text) {
 
 const clean = b => (b || '').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
 
+function normPhone(p) {
+  let d = (p || '').replace(/\D/g, '');
+  if (d.startsWith('0031')) d = '31' + d.slice(4);
+  if (d.startsWith('06') && d.length === 10) d = '31' + d.slice(1);
+  if (d.startsWith('6') && d.length === 9) d = '31' + d;
+  return d;
+}
+
+// Mag dit ticket een ÉCHT antwoord krijgen? Alleen als het contact-nummer exact op de
+// whitelist staat. Dubbel gecheckt: hier én vlak voor verzending.
+function isLiveTestContact(t) {
+  const p = normPhone(t.contact?.phone);
+  return !!p && CFG.TEST_LIVE_PHONES.includes(p);
+}
+
+async function sendLiveReply(t, tekst) {
+  // Verdedigingslaag 2: nooit versturen als het nummer niet op de whitelist staat.
+  if (!isLiveTestContact(t)) throw new Error('sendLiveReply geblokkeerd: contact staat niet op de live-test whitelist');
+  if (!tekst || !tekst.trim()) throw new Error('sendLiveReply geblokkeerd: leeg antwoord');
+  return tPost(`/tickets/${t.id}/messages`, { message: tekst, type: 'OUTBOUND' });
+}
+
 function isRelevantTicket(t) {
   if (t.channel?.id === CFG.WA_CHANNEL_ID || t.channel?.type === 'WA_BUSINESS') return true;
   return CFG.EMAIL_CHANNEL_NAMES.includes(t.channel?.title);
@@ -78,9 +100,16 @@ async function verwerkTicket(t, state) {
   const acties = res.acties.length
     ? '\n\nActies die de AI zou uitvoeren:\n' + res.acties.map(a => '- ' + JSON.stringify(a)).join('\n')
     : '';
-  const notitie = `🤖 AI-KLANTENSERVICE (schaduwmodus — NIET verstuurd)\n\nConcept-antwoord:\n${res.antwoord || '(geen antwoord — geëscaleerd)'}${acties}`;
 
-  if (CFG.MODE === 'shadow') {
+  const liveTest = isLiveTestContact(t);
+  if (liveTest && res.antwoord) {
+    // LIVE-TEST: alleen voor whitelist-nummers (Daimy's testnummer) — écht versturen
+    const sendRes = await sendLiveReply(t, res.antwoord);
+    console.log(`  → LIVE-TEST antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status + ' ' + sendRes.body.substring(0, 200)}`);
+    await tPost(`/tickets/${t.id}/notes`, { note: `🤖 AI-KS LIVE-TEST (whitelist ${t.contact?.phone})${acties}` });
+    if (!sendRes.ok) await telegram(`⚠️ AI-KS live-test verzenden MISLUKT op ticket ${t.id}: ${sendRes.status} ${sendRes.body.substring(0, 200)}`);
+  } else if (CFG.MODE === 'shadow') {
+    const notitie = `🤖 AI-KLANTENSERVICE (schaduwmodus — NIET verstuurd)\n\nConcept-antwoord:\n${res.antwoord || '(geen antwoord — geëscaleerd)'}${acties}`;
     // Interne notitie op het ticket — team ziet het, klant niet
     const noteRes = await tPost(`/tickets/${t.id}/notes`, { note: notitie });
     if (!noteRes.ok) {
@@ -102,8 +131,7 @@ async function verwerkTicket(t, state) {
   console.log(`  → notitie geplaatst (${res.acties.length} acties, ${res.toolCalls.length} tool-calls)`);
 }
 
-(async () => {
-  const state = loadState();
+async function pollRonde(state, { onlyTest }) {
   const specificTicket = process.argv.includes('--ticket') ? process.argv[process.argv.indexOf('--ticket') + 1] : null;
 
   let tickets = [];
@@ -120,10 +148,12 @@ async function verwerkTicket(t, state) {
     }
   }
 
-  console.log(`AI-KS daemon (${CFG.MODE.toUpperCase()}): ${tickets.length} kandidaat-tickets`);
-  let verwerkt = 0;
+  // --only-test: ALLEEN whitelist-tickets aanraken; alle andere volledig negeren (ook geen notities)
+  if (onlyTest) tickets = tickets.filter(isLiveTestContact);
+
+  console.log(`[${new Date().toLocaleTimeString()}] AI-KS (${CFG.MODE.toUpperCase()}${onlyTest ? ', ONLY-TEST' : ''}): ${tickets.length} kandidaat-tickets`);
   for (const t of tickets) {
-    try { await verwerkTicket(t, state); verwerkt++; }
+    try { await verwerkTicket(t, state); }
     catch (e) { console.error(`Ticket ${t.id} FOUT:`, e.message); log({ ticket: t.id, fout: String(e.message || e) }); }
     saveState(state);
   }
@@ -131,5 +161,24 @@ async function verwerkTicket(t, state) {
   const keys = Object.keys(state.verwerkt);
   if (keys.length > 2000) for (const k of keys.slice(0, keys.length - 2000)) delete state.verwerkt[k];
   saveState(state);
-  console.log('Klaar.');
+}
+
+(async () => {
+  const state = loadState();
+  const onlyTest = process.argv.includes('--only-test');
+  const watchIdx = process.argv.indexOf('--watch');
+  const watchMin = watchIdx >= 0 ? parseInt(process.argv[watchIdx + 1] || '60', 10) : 0;
+
+  if (watchMin > 0) {
+    console.log(`Watch-modus: elke 30s pollen, ${watchMin} minuten lang${onlyTest ? ' (alleen whitelist-nummers)' : ''}.`);
+    const tot = Date.now() + watchMin * 60000;
+    while (Date.now() < tot) {
+      await pollRonde(state, { onlyTest });
+      await new Promise(r => setTimeout(r, 30000));
+    }
+    console.log('Watch-venster afgelopen.');
+  } else {
+    await pollRonde(state, { onlyTest });
+    console.log('Klaar.');
+  }
 })();

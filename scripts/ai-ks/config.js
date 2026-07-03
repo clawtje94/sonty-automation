@@ -23,6 +23,11 @@ module.exports = {
   // Toegevoegd op verzoek van Daimy (2026-07-03): eigen testnummer.
   TEST_LIVE_PHONES: ['31683500506'],
 
+  // Menselijke antwoord-vertraging (instructie Daimy: "straks iets meer tijd nemen").
+  // Uit tijdens de test; bij livegang aanzetten. Vertraging schaalt met de lengte
+  // van het antwoord: basis + ~1s per 15 tekens, begrensd tussen min en max.
+  REPLY_DELAY: { enabled: false, baseSec: 25, perCharSec: 1 / 15, minSec: 20, maxSec: 180 },
+
   // Kanalen die de AI behandelt (Trengo channel_ids)
   WA_CHANNEL_ID: 1359857,          // WhatsApp Business +31 85 006 9681
   EMAIL_CHANNEL_NAMES: ['Aanvragen', 'Klantenservice'],

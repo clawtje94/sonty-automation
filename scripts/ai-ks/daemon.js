@@ -92,6 +92,7 @@ async function verwerkTicket(t, state) {
     kanaal: t.channel?.type === 'WA_BUSINESS' ? 'WA' : 'EMAIL',
     klant: { naam: t.contact?.full_name || null, email: t.contact?.email || null, phone: t.contact?.phone || null },
     berichten: rows.slice(-25),
+    liveTest: isLiveTestContact(t), // whitelist-nummers: actie-tools mogen echt uitvoeren
   };
 
   console.log(`Ticket ${t.id} (${gesprek.kanaal}, ${gesprek.klant.naam || 'onbekend'}): agent draait...`);
@@ -104,6 +105,12 @@ async function verwerkTicket(t, state) {
 
   const liveTest = isLiveTestContact(t);
   if (liveTest && res.antwoord) {
+    // Menselijke typ-vertraging (config REPLY_DELAY; uit tijdens test, aan bij livegang)
+    if (CFG.REPLY_DELAY?.enabled) {
+      const d = Math.min(CFG.REPLY_DELAY.maxSec, Math.max(CFG.REPLY_DELAY.minSec, CFG.REPLY_DELAY.baseSec + res.antwoord.length * CFG.REPLY_DELAY.perCharSec));
+      console.log(`  typ-vertraging ${Math.round(d)}s...`);
+      await new Promise(r => setTimeout(r, d * 1000));
+    }
     // LIVE-TEST: alleen voor whitelist-nummers (Daimy's testnummer) — écht versturen
     const sendRes = await sendLiveReply(t, res.antwoord);
     console.log(`  → LIVE-TEST antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status + ' ' + sendRes.body.substring(0, 200)}`);

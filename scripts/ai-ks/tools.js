@@ -8,7 +8,7 @@ const { buildKlantContext, getOfferteInhoud } = require('./klant-context.js');
 const TOOL_DEFS = [
   {
     name: 'prijs_berekenen',
-    description: 'Bereken de actuele Sonty verkoopprijs (incl. BTW en montage) voor een zonwering-product. Gebruik dit ALTIJD voordat je een prijs noemt — nooit prijzen uit je hoofd. Werkt voor: knikarmschermen (SunEye/SunEye XL/SunBasic/SunElite), screens (Zip Design 110/Zip Square), rolluiken (S-37/S-42), uitvalschermen (SunCube/SunProject), serre zonwering (SunControl), pergola.',
+    description: 'Bereken de actuele Sonty verkoopprijs (incl. BTW en montage) voor een zonwering-product. Gebruik dit ALTIJD voordat je een prijs noemt — nooit prijzen uit je hoofd. Werkt voor: knikarmschermen (SunEye/SunEye XL/SunElite/SunBasic open cassette/SunBasic dichte cassette — let op: "SunBasic open" is de goedkopere open-arm variant, "SunBasic dichte cassette" de gesloten), screens (Zip Design 110/Zip Square), rolluiken (S-37/S-42), uitvalschermen (SunCube/SunProject), serre zonwering (SunControl), pergola.',
     input_schema: {
       type: 'object',
       properties: {
@@ -45,15 +45,32 @@ const TOOL_DEFS = [
   },
   {
     name: 'offerte_aanpassen',
-    description: 'Pas een bestaande offerte aan of maak een nieuwe offerte-variant (bv. andere maat, andere bediening, product erbij/eraf, ander model). Beschrijf de gewenste wijziging exact. De wijziging wordt doorgevoerd in Reuzenpanda en de klant krijgt een nieuwe offerte-link.',
+    description: 'Pas een bestaande offerte ECHT aan in Reuzenpanda: regels verwijderen, producten toevoegen (met automatische montageregel) of aantallen wijzigen. Gebruik EERST offerte_bekijken zodat je de exacte regeltitels kent. Wil je een product vervangen (ander model/maat/bediening): verwijder de oude regel(s) én de bijbehorende montageregel, en voeg het nieuwe product toe. Prijzen worden automatisch correct berekend. Na afloop krijg je de nieuwe regels + link terug; noem die link aan de klant.',
     input_schema: {
       type: 'object',
       properties: {
-        offerteNummer: { type: 'string', description: 'Bestaand offertenummer (bv. 20266838)' },
-        documentId: { type: 'string', description: 'RP documentId (UUID) als bekend uit klant_opzoeken' },
-        wijziging: { type: 'string', description: 'Exacte beschrijving van de gewenste aanpassing, incl. nieuwe maten/bediening/kleur en de nieuwe prijs per regel (eerst prijs_berekenen gebruiken!)' },
+        documentId: { type: 'string', description: 'RP documentId (UUID) uit klant_opzoeken' },
+        verwijderen: { type: 'array', items: { type: 'string' }, description: 'Regeltitels (of uniek deel ervan) die verwijderd moeten worden, bv ["Suneye", "Inmeten + montage Knikarmscherm"]. Vergeet de montageregel van een verwijderd product niet!' },
+        toevoegen: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              product: { type: 'string', description: 'bv "sunbasic open cassette", "zip design 110", "rolluik s-42"' },
+              breedteMM: { type: 'integer' },
+              hoogteMM: { type: 'integer' },
+              uitvalMM: { type: 'integer' },
+              bediening: { type: 'string', enum: ['io', 'solar', 'solarBrel', 'draaischakelaar', 'handbediend'] },
+              aantal: { type: 'integer' },
+            },
+            required: ['product', 'breedteMM'],
+          },
+          description: 'Nieuwe productregels; montageregel wordt automatisch toegevoegd',
+        },
+        aantalWijzigen: { type: 'array', items: { type: 'object', properties: { product: { type: 'string' }, aantal: { type: 'integer' } }, required: ['product', 'aantal'] } },
+        samenvatting: { type: 'string', description: 'Korte omschrijving van de wijziging voor het logboek' },
       },
-      required: ['wijziging'],
+      required: ['documentId', 'samenvatting'],
     },
   },
   {
@@ -98,13 +115,16 @@ async function runTool(name, input, ctx) {
     return JSON.stringify(res).substring(0, 6000);
   }
   if (name === 'offerte_aanpassen') {
-    if (CFG.MODE !== 'live') {
-      ctx.acties.push({ type: 'offerte_aanpassen', ...input });
-      return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', beschrijving: input.wijziging, opmerking: 'In live-modus wordt dit in Reuzenpanda doorgevoerd. Vertel de klant dat de aangepaste offerte er zo snel mogelijk aankomt.' });
+    ctx.acties.push({ type: 'offerte_aanpassen', ...input });
+    if (CFG.MODE === 'live' || ctx.liveTest) {
+      // ECHT doorvoeren (live-modus, of live-test op whitelist-nummer)
+      const { pasOfferteAan } = require('./rp-offerte-edit.js');
+      const res = await pasOfferteAan(input);
+      if (res.error) return JSON.stringify({ status: 'MISLUKT', fout: res.error, opmerking: 'Zeg tegen de klant dat een collega de aanpassing zo snel mogelijk verwerkt. Roep ook escaleren_naar_mens aan.' });
+      return JSON.stringify({ status: 'DOORGEVOERD', ...res, opmerking: 'De offerte is nu echt aangepast. Deel de link met de klant en noem het nieuwe totaal.' });
     }
-    // LIVE: nog niet geïmplementeerd — bewust. Wordt gebouwd + getest vóór activatie.
-    ctx.acties.push({ type: 'offerte_aanpassen', ...input, LIVE_NIET_GEIMPLEMENTEERD: true });
-    return JSON.stringify({ status: 'FOUT', opmerking: 'Live offerte-aanpassing is nog niet vrijgegeven. Escaleer naar een medewerker.' });
+    // Schaduwmodus: alleen voorstel. BELANGRIJK: beloof de klant NIET dat er al iets is aangepast of verstuurd.
+    return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — NIET uitgevoerd)', opmerking: 'Er is nog NIETS aangepast. Zeg tegen de klant dat je de aanpassing hebt klaargezet en dat de nieuwe offerte zo snel mogelijk volgt via een collega. Beloof geen directe link.' });
   }
   if (name === 'inmeet_afspraak_voorstellen') {
     ctx.acties.push({ type: 'inmeet_afspraak', ...input });

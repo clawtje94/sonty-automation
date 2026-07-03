@@ -14,7 +14,13 @@ const api = eval(code + `;({lookupPrice, calculateCorrectPrice, getProductKey, g
 // Nette totaalprijs incl montage voor een productconfiguratie.
 // bediening: 'io' | 'solar' | 'solarBrel' | 'draaischakelaar' | 'handbediend'
 function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'io' }) {
-  const productKey = api.getProductKey(product.toLowerCase());
+  let zoek = product.toLowerCase();
+  // VALKUIL: "sunbasic open cassette" (= de open-arm variant, Daimy's terminologie) bevat
+  // het woord 'cassette' en zou anders naar het duurdere dichte-cassette-model mappen.
+  if (/sunbasic/.test(zoek)) {
+    zoek = /\bopen\b/.test(zoek) ? 'sunbasic' : (/cassette|dicht|gesloten/.test(zoek) ? 'sunbasic cassette' : 'sunbasic');
+  }
+  const productKey = api.getProductKey(zoek);
   if (!productKey) return { error: 'Onbekend product: ' + product + '. Bekende producten: zonneschermen (SunEye/SunBasic/SunElite), screens (Zip Design/Zip Square), rolluiken (S-37/S-42), uitvalschermen (SunCube/SunProject), serre zonwering (SunControl), pergola.' };
 
   const b = breedteMM ? breedteMM / 10 : null;

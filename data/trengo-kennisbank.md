@@ -478,9 +478,9 @@ Onze eigen monteurs komen het product plaatsen. Inclusief:
 
 ### Inmeetkosten
 - De inmeetafspraak is gratis als je bij ons bestelt
-- Ga je na inmeten niet met ons verder? Dan brengen we €75 inmeetkosten in rekening
-- Van dit bedrag doneren we €25 aan het Maxima Kinderziekenhuis
+- Ga je na inmeten niet met ons verder? Dan brengen we €75 inmeetkosten in rekening, puur om onze kosten te dekken
 - Dit doen we zodat we niet overal gratis langs hoeven en we onze tijd effectief besteden
+- (Let op: de €25-donatie aan het Máxima Kinderziekenhuis hoort NIET bij de inmeetkosten, maar bij de €75 voor demontage/afvoer van een oud product)
 
 ### Montage op hoogte
 - Alles tot en met de tweede verdieping: standaard montage met ladders
@@ -623,7 +623,7 @@ Stuur gerust de andere offerte op, dan kunnen we je precies vertellen wat de ver
 Onze prijzen zijn scherp en all-in. Bij voorraadschermen zit er al 20% korting verwerkt. Bij grotere opdrachten met meerdere producten kunnen we soms kijken naar een pakketprijs. Neem contact op om de mogelijkheden te bespreken.
 
 **"Hoeveel kost een inmeetafspraak?"**
-De inmeetafspraak is gratis als je bij ons bestelt. Ga je na inmeten niet met ons verder? Dan brengen we €75 in rekening, waarvan we €25 doneren aan het Maxima Kinderziekenhuis.
+De inmeetafspraak is gratis als je bij ons bestelt. Ga je na inmeten niet met ons verder? Dan brengen we €75 in rekening, puur om onze kosten van het inmeten te dekken.
 
 ### Levertijd en planning
 

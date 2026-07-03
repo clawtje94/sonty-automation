@@ -46,8 +46,9 @@ async function findRpOffertes({ email, phone }) {
       }));
     }
     results.push({
+      itemId: it.id,
       itemNaam: it.title || it.name || null,
-      status: it.status?.label || it.status_id || null,
+      statusId: it.status_id || it.status?.id || null,
       lcId, offertes,
     });
   }

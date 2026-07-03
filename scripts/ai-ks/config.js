@@ -44,6 +44,8 @@ module.exports = {
   RP_API_KEY: 'reuzenpanda_cpat_WMD2KmDRune53bj7.d0_ls8loPpAjb2TrSNOS_Xd_QLdxHq1xwOC9pyyJado',
   RP_PID: '731483fa-ef6b-4aae-afcf-883ec09219dd',
   RP_BOARD: 'edb9b0b7-b70e-4064-95b5-ec0d03357c0a',
+  RP_BACKLOG: 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7',
+  RP_STATUS_INMETEN_INPLANNEN: '2e9819bd-26f0-4082-8f18-32bb48f87f54', // klant akkoord → planning belt binnen 3 werkdagen
 
   BOOKINGS_URL: 'https://bookings.cloud.microsoft/book/SontyMontage1@sontymontage.nl/s/lAKws2wHtEOFjHYzLwjXdQ2?ismsaljsauthenabled=true',
 };

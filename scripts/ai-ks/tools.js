@@ -75,12 +75,12 @@ const TOOL_DEFS = [
   },
   {
     name: 'inmeet_afspraak_voorstellen',
-    description: 'Zet een inmeetafspraak in gang voor deze klant. Gebruik dit zodra de klant interesse toont — dit is het HOOFDDOEL van elk gesprek. De planning neemt daarna contact op om een datum te prikken (of stuur de boekingslink mee).',
+    description: 'Zet het inmeet-traject in gang zodra de klant akkoord geeft: het Reuzenpanda-item wordt verplaatst naar de kolom "Inmeten inplannen", waarna de planning binnen 3 werkdagen contact opneemt om de afspraak te maken. Dit is de closing van elk gesprek. LET OP: klanten kunnen NOOIT zelf een inmeetafspraak plannen, stuur dus nooit een boekingslink voor inmeten. Het itemId haal je uit klant_opzoeken.',
     input_schema: {
       type: 'object',
       properties: {
+        itemId: { type: 'string', description: 'Reuzenpanda item-id uit klant_opzoeken' },
         klantNaam: { type: 'string' },
-        adres: { type: 'string', description: 'Adres of woonplaats indien bekend' },
         product: { type: 'string', description: 'Waar gaat het om' },
         notitie: { type: 'string', description: 'Context voor de planner (voorkeursdagen, bijzonderheden)' },
       },
@@ -129,10 +129,16 @@ async function runTool(name, input, ctx) {
   }
   if (name === 'inmeet_afspraak_voorstellen') {
     ctx.acties.push({ type: 'inmeet_afspraak', ...input });
-    if (CFG.MODE !== 'live') {
-      return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'In live-modus wordt een taak voor de planning aangemaakt. Deel eventueel de boekingslink met de klant: ' + CFG.BOOKINGS_URL });
+    if ((CFG.MODE === 'live' || ctx.liveTest) && input.itemId) {
+      // Item naar RP-kolom "Inmeten inplannen" (zelfde PATCH als v4's setStatus)
+      const res = await fetch(`https://backend.reuzenpanda.nl/contact-service/${CFG.RP_PID}/backlogs/${CFG.RP_BACKLOG}/items/${input.itemId}`, {
+        method: 'PATCH', headers: { Authorization: 'Bearer ' + CFG.RP_API_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ item: { status_id: CFG.RP_STATUS_INMETEN_INPLANNEN } }),
+      });
+      if (!res.ok) return JSON.stringify({ status: 'MISLUKT', opmerking: 'Status verplaatsen lukte niet. Zeg dat een collega het oppakt en roep escaleren_naar_mens aan.' });
+      return JSON.stringify({ status: 'DOORGEVOERD', opmerking: 'Item staat nu op "Inmeten inplannen". Vertel de klant: de planning neemt binnen 3 werkdagen contact op om de inmeetafspraak te maken. GEEN boekingslink sturen.' });
     }
-    return JSON.stringify({ status: 'FOUT', opmerking: 'Live inplannen is nog niet vrijgegeven. Deel de boekingslink: ' + CFG.BOOKINGS_URL });
+    return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets verplaatst. Vertel de klant dat de planning binnen 3 werkdagen contact opneemt om de afspraak te maken. GEEN boekingslink sturen (die is alleen voor showroombezoek).' });
   }
   if (name === 'escaleren_naar_mens') {
     ctx.acties.push({ type: 'escalatie', ...input });

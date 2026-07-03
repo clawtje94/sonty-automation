@@ -1,0 +1,78 @@
+                                                                                         Garagedeuren en Rolhekken
+2025
+                                                                                         Besturingen
+
+
+
+       Deursturingspakket en hoe deze toe te passen volgens EU-Norm 12453
+
+       Besloten bereik (Beperkte toegang door toegangshek bijv.)                 Open bereik (Iedereen heeft vrije toegang)
+
+       Besturingstype         Roldeur ROLENTO type: Plafonddeur:                 Besturingstype         Roldeur ROLENTO type: Plafonddeur:
+                              B1/55; B1/77; B2/77     SILENTO / GECCO                                   B1/55; B1/77; B2/77     SILENTO / GECCO
+                              Roldeur type: B3/77; F1                                                   Roldeur type: B3/77; F1
+
+
+       Dodemanssturing                                                           Dodemanssturing                 niet toegestaan        niet toegestaan
+                                       T1     +    HS
+
+                                       T2     +    HS
+
+       Pulsbesturing met                                                         Pulsbesturing met
+                                                                    SIMA                                                                 SIMA
+       zicht op de deur                                                          zicht op de deur                   IR   /    I2
+                                       IR     /    I2                                                                                                  +   LS
+                                                                    GECCO                                                               GECCO
+                                                                                                                         +    LS
+
+       Pulsbesturing zonder                                                      Pulsbesturing zonder            niet toegestaan        niet toegestaan
+                                       IR     /    I2               SIMA
+       zicht op de deur in                                                       zicht op de deur in
+                                             of
+       het niet openlijke                                                        het niet openlijke
+                                                                    GECCO
+       bereik                   IFR     /    IF2   / IF io                       bereik
+       Pulsbesturing zonder                                                      Pulsbesturing zonder
+       zicht op de deur in              I2    +    LS                SIMA        zicht op de deur in                I2   +    LS                SIMA
+
+       het openlijke bereik                                           +          het openlijke bereik                                             +
+                                             of                                                                          of
+                                       IF2 +       LS                 LS                                           IF2   +    LS                  LS
+       of                                                                        of
+                                             of                                                                          of
+       automatisch                     IR     +    LS               GECCO        automatisch                        IR   +    LS                GECCO
+       sluiten                               of                       +          sluiten                                 of                       +
+                                       IFR +       LS                 LS                                           IFR +      LS                  LS
+
+
+                                      IF io +      LS
+
+       Symboolverklaring                                                         Symboolverklaring
+                               T1 Dodemanssturing vanaf 1 plaats                                         IF2 Draadloze pulsbesturing met TS 600
+                                                                                 (vervolg)
+
+                               T2 Dodemanssturing met twee of meerdere                                      LS    Fotocel onder
+                                  plaatsen
+
+                                      Pulsbesturing met ROLENTO plus besturing                              HS Hoofdschakelaar
+                               IR
+
+                                                                                                     SIMA         SIMA-trekmotor (voor SILENTO)
+                               I2     Pulsbesturing met TS 600
+                                                                                                     GECCO        GECCO-aandrijfunit
+                                      Draadloze pulsbesturing met
+                               IFR
+                                      ROLENTO-besturing
+
+                                      Draadloze pulsbesturing met Rollixo io
+                              IF io
+                                      besturing
+
+       Tip:
+       Voor rolhekken met pulsbesturing zijn de besturingspakketten I2 en IF2 geschikt. Oprolbeveiligingssensoren zijn noodzakelijk.
+
+
+
+
+       316                      Prijslijst extra’s
+

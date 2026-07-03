@@ -1,0 +1,128 @@
+                                                                                                                                  MODULO
+2025
+                                                                                                                                  MODULO.P/.XP/.S
+
+
+
+       Maximale dagmaathoogte en elementhoogte in mm
+
+
+                                                                                                                                                                                                TD02644
+                                 Koofhoogte →                    200                    240                  260                 280                 320
+       Buitenjaloezielamel ↓                                                                                                                                      Afbeelding lamel
+                                 Uitvoering ↓              DH          EH          DH         EH      DH           EH     DH           EH      DH          EH
+
+
+
+
+                                                                                                                                                                                     TD02644
+       CDL 70 (geleider)
+                                 .P                       1267         1467    1982           2222    2339         2599   2697         2977   3411         3731
+       gekraald
+       max. Breedte: 4000 mm
+       max. opp.: 18,0 m²
+                                                                                                                                                                         70
+
+                                                                                                                                                                                               TD03182
+       (per element)
+                                 .XP (met ISG)*            512         712     1227           1467    1584         1844   1942         2222   2657         2977
+       max. EH: 4500 mm
+
+
+
+
+                                                                                                                                                                                     TD03182
+                                                                                                                                               4180     4500
+       ZL 81
+                                 .P                       1988         2188    2908           3148    3367         3627   3827         4107   draad:   draad:
+       gekraald
+                                                                                                                                               3930     4250
+       max. Breedte: 4000 mm
+
+
+                                                                                                                                                                                                TD02645
+       max. opp.: 18,0 m²
+       (per element)                                                                                                                                                     81
+                                 .XP (met ISG)*           1029         1229    1948           2188    2408         2668   2868         3148   3787         4107
+       max. EH: 4500 mm
+
+
+
+
+                                                                                                                                                                                     TD02645
+                                                                                                                                               4180     4500
+       DBL 70
+                                 .P                       1752         1952    2545           2785    2942         3202   2505         3618   draad:   draad:
+       gekraald
+                                                                                                                                               3930     4250
+       max. Breedte: 4000 mm
+
+
+                                                                                                                                                                                                 TD04768
+       max. opp.: 18,0 m²
+       (per element)                                                                                                                                                     70
+                                 .XP (met ISG)*            918         1118    1712           1952    2108         2368   2505         2785   3298         3618
+       max. EH: 4500 mm
+
+
+
+       GL 85
+                                 .P                       1587         1787    2309           2549    2670         2930   3031         3311   3680         4000
+       gekraald
+
+
+                                                                                                                                                                                     TD04768
+       max. Breedte: 4000 mm
+       max. opp.: 20,0 m²                                                                                                                                                 85
+       (per element)
+                                 .XP (met ISG)*            825         1025    1547           1787    1908         2168   2269         2549   2991         3311
+       max. EH: 5000 mm
+
+
+
+       PH = Pakkethoogte | EH= Elementhoogte | DH= Dagmaathoogte
+       * XP-element zonder ISG heeft dezelfde hoogte als een P-element
+
+
+
+
+       Minimale elementbreedte
+
+                    BEDRAAD                     Fabrikant        Omw/min            Minimale EB
+
+       JA (Mechanisch)                            Elero            26                   630 mm
+       J4 WT (Electronisch)                       Somfy            24                   630 mm
+       GJ 56 SMI                                  Geiger           26                   630 mm
+
+
+
+                   DRAADLOOS                    Fabrikant        Omw/min            Minimale EB
+
+       J4 io                                      Somfy            24                   630 mm
+       JA met externe elero 868 ontvanger         Elero            26                   830 mm
+       GJ56 AIR (Loxone)                          Geiger           26                   630 mm
+       Solar 868                                  Elero            33                   630 mm
+
+
+
+
+       Extra windzekeringen benodigd per lameltype
+                                  CDL 70             ZL 81               DBL 70               GL 85
+       Aantal windzekeringen
+                                                vanaf elementbreedte in [mm]
+       1 windzekering                 3000*          3000                   3000              3000
+       op basis van zijdelings gesloten geleiders aanbevolen (* windzekering vereist)
+
+
+
+
+       Aandrijfcombinaties
+       max. breedte        = 4000 mm
+       max. lamelpakketten = 3 stuks
+       max. oppervlakte    = 15 m2
+
+
+
+
+       168
+

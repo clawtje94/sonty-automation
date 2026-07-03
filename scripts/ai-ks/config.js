@@ -46,6 +46,7 @@ module.exports = {
   RP_BOARD: 'edb9b0b7-b70e-4064-95b5-ec0d03357c0a',
   RP_BACKLOG: 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7',
   RP_STATUS_INMETEN_INPLANNEN: '2e9819bd-26f0-4082-8f18-32bb48f87f54', // klant akkoord → planning belt binnen 3 werkdagen
+  RP_STATUS_AI_OFFERTE_VERSTUURD: 'dc0efe4f-2cd6-45d8-aeff-7f1c817a0fb2', // AI heeft offerte gemaakt/aangepast en link geappt
 
   BOOKINGS_URL: 'https://bookings.cloud.microsoft/book/SontyMontage1@sontymontage.nl/s/lAKws2wHtEOFjHYzLwjXdQ2?ismsaljsauthenabled=true',
 };

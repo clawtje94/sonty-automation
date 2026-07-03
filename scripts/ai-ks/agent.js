@@ -15,7 +15,7 @@ const client = new Anthropic({ apiKey });
  * @returns {{ antwoord: string, acties: array, toolCalls: array, usage: object }}
  */
 async function beantwoord(gesprek) {
-  const ctx = { acties: [], liveTest: !!gesprek.liveTest };
+  const ctx = { acties: [], liveTest: !!gesprek.liveTest, ticketId: gesprek.ticketId || null };
   const toolCalls = [];
 
   const historie = gesprek.berichten.map(b =>

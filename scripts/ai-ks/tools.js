@@ -18,19 +18,55 @@ const TOOL_DEFS = [
         uitvalMM: { type: 'integer', description: 'Uitval in mm (knikarm/uitvalscherm/serre/pergola/markies)' },
         bediening: { type: 'string', enum: ['io', 'solar', 'solarBrel', 'draaischakelaar', 'handbediend'], description: 'io = Somfy motor + afstandsbediening (standaard); markies standaard = handbediend (koord)' },
         materiaal: { type: 'string', description: 'Alleen voor markiezen: grenen, hardhout of aluminium' },
+        framekleur: { type: 'string', description: 'VERPLICHT uit te vragen bij zonwering (beïnvloedt de prijs): standaardkleuren gratis, andere RAL heeft meerprijs. Zonder deze parameter krijg je de gratis standaardkleuren terug om aan de klant voor te leggen.' },
       },
       required: ['product', 'breedteMM'],
     },
   },
   {
     name: 'klant_opzoeken',
-    description: 'Zoek de klant op in Reuzenpanda (offertes + pipeline-status) en HubSpot (contact + deals) op basis van e-mail of telefoonnummer. Doe dit aan het begin van elk gesprek zodat je weet wie je spreekt en welke offertes er lopen.',
+    description: 'Zoek de klant op in Reuzenpanda (offertes + pipeline-status + itemId) en HubSpot (contact + deals). Doe dit aan het begin van elk gesprek. Zoek GERICHT met alles wat je weet: telefoonnummer en e-mail uit het gesprek, plus naam en adres als de klant die noemt — nooit lukraak (instructie Daimy).',
     input_schema: {
       type: 'object',
       properties: {
         email: { type: 'string' },
         phone: { type: 'string' },
+        naam: { type: 'string', description: 'Volledige naam als bekend' },
+        adres: { type: 'string', description: 'Straat/postcode/plaats als bekend' },
       },
+    },
+  },
+  {
+    name: 'offerte_aanmaken',
+    description: 'Maak een NIEUWE offerte aan in Reuzenpanda (nieuwe lead + contact + offerte + pipeline-item). Gebruik dit als de klant om een nieuwe offerte vraagt of nog geen offerte heeft — NIET een bestaande offerte volproppen. Reuzenpanda verwerkt dit in ±5 minuten; daarna wordt de offerte automatisch gevuld met de opgegeven producten en krijgt de klant de link vanzelf geappt. Zeg dus: "ik maak hem nu voor je in orde, je ontvangt de offerte-link over een paar minuten hier op WhatsApp". Zorg dat producten COMPLEET zijn (maten, bediening, framekleur, materiaal bij markiezen) vóór je dit aanroept.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        naam: { type: 'string' },
+        telefoon: { type: 'string' },
+        email: { type: 'string' },
+        plaats: { type: 'string' },
+        postcode: { type: 'string' },
+        straat: { type: 'string', description: 'Straat + huisnummer' },
+        producten: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              product: { type: 'string' },
+              breedteMM: { type: 'integer' },
+              hoogteMM: { type: 'integer' },
+              uitvalMM: { type: 'integer' },
+              bediening: { type: 'string', enum: ['io', 'solar', 'solarBrel', 'draaischakelaar', 'handbediend'] },
+              framekleur: { type: 'string' },
+              materiaal: { type: 'string' },
+              aantal: { type: 'integer' },
+            },
+            required: ['product', 'breedteMM'],
+          },
+        },
+      },
+      required: ['naam', 'telefoon', 'producten'],
     },
   },
   {
@@ -51,6 +87,7 @@ const TOOL_DEFS = [
       type: 'object',
       properties: {
         documentId: { type: 'string', description: 'RP documentId (UUID) uit klant_opzoeken' },
+        itemId: { type: 'string', description: 'RP item-id uit klant_opzoeken — nodig om de status na versturen op "Ai offerte verstuurd" te zetten' },
         verwijderen: { type: 'array', items: { type: 'string' }, description: 'Regeltitels (of uniek deel ervan) die verwijderd moeten worden, bv ["Suneye", "Inmeten + montage Knikarmscherm"]. Vergeet de montageregel van een verwijderd product niet!' },
         toevoegen: {
           type: 'array',
@@ -62,6 +99,8 @@ const TOOL_DEFS = [
               hoogteMM: { type: 'integer' },
               uitvalMM: { type: 'integer' },
               bediening: { type: 'string', enum: ['io', 'solar', 'solarBrel', 'draaischakelaar', 'handbediend'] },
+              framekleur: { type: 'string', description: 'Verplicht uitgevraagd bij de klant (beïnvloedt de prijs)' },
+              materiaal: { type: 'string', description: 'Alleen markiezen: grenen/hardhout/aluminium' },
               aantal: { type: 'integer' },
             },
             required: ['product', 'breedteMM'],
@@ -121,10 +160,11 @@ async function runTool(name, input, ctx) {
     ctx.acties.push({ type: 'offerte_aanpassen', ...input });
     if (CFG.MODE === 'live' || ctx.liveTest) {
       // ECHT doorvoeren (live-modus, of live-test op whitelist-nummer)
-      const { pasOfferteAan } = require('./rp-offerte-edit.js');
+      const { pasOfferteAan, zetStatus } = require('./rp-offerte-edit.js');
       const res = await pasOfferteAan(input);
       if (res.error) return JSON.stringify({ status: 'MISLUKT', fout: res.error, opmerking: 'Zeg tegen de klant dat een collega de aanpassing zo snel mogelijk verwerkt. Roep ook escaleren_naar_mens aan.' });
-      return JSON.stringify({ status: 'DOORGEVOERD', ...res, opmerking: 'De offerte is nu echt aangepast. Deel de link met de klant en noem het nieuwe totaal.' });
+      if (input.itemId) await zetStatus(input.itemId, CFG.RP_STATUS_AI_OFFERTE_VERSTUURD).catch(() => {});
+      return JSON.stringify({ status: 'DOORGEVOERD', ...res, opmerking: 'De offerte is nu echt aangepast. Deel de link met de klant, noem het nieuwe totaal en dat de offerte 7 dagen geldig is.' });
     }
     // Schaduwmodus: alleen voorstel. BELANGRIJK: beloof de klant NIET dat er al iets is aangepast of verstuurd.
     return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — NIET uitgevoerd)', opmerking: 'Er is nog NIETS aangepast. Zeg tegen de klant dat je de aanpassing hebt klaargezet en dat de nieuwe offerte zo snel mogelijk volgt via een collega. Beloof geen directe link.' });
@@ -141,6 +181,22 @@ async function runTool(name, input, ctx) {
       return JSON.stringify({ status: 'DOORGEVOERD', opmerking: 'Item staat nu op "Inmeten inplannen". Vertel de klant: de planning neemt binnen 3 werkdagen contact op om de inmeetafspraak te maken. GEEN boekingslink sturen.' });
     }
     return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets verplaatst. Vertel de klant dat de planning binnen 3 werkdagen contact opneemt om de afspraak te maken. GEEN boekingslink sturen (die is alleen voor showroombezoek).' });
+  }
+  if (name === 'offerte_aanmaken') {
+    ctx.acties.push({ type: 'offerte_aanmaken', klant: input.naam, producten: (input.producten || []).length });
+    // Producten valideren: prijzen moeten te berekenen zijn vóór we de lead aanmaken
+    for (const p of input.producten || []) {
+      const check = prijsIndicatie(p);
+      if (check.error) return JSON.stringify({ status: 'ONVOLLEDIG', fout: `Product "${p.product}": ${check.error}`, opmerking: 'Vraag de ontbrekende informatie aan de klant en probeer opnieuw.' });
+    }
+    if (CFG.MODE === 'live' || ctx.liveTest) {
+      const { maakLead, registreerPending } = require('./rp-offerte-create.js');
+      const res = await maakLead(input);
+      if (res.error) return JSON.stringify({ status: 'MISLUKT', fout: res.error, opmerking: 'Zeg dat een collega de offerte zo snel mogelijk maakt en roep escaleren_naar_mens aan.' });
+      registreerPending({ lcId: res.lcId, ticketId: ctx.ticketId, klantNaam: input.naam, producten: input.producten });
+      return JSON.stringify({ status: 'IN_BEHANDELING', opmerking: 'De offerte wordt aangemaakt (±5 minuten). De klant krijgt de link daarna AUTOMATISCH hier op WhatsApp — zeg dat erbij en beloof geen exacte tijd korter dan dat.' });
+    }
+    return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets aangemaakt. Zeg dat de offerte zo snel mogelijk volgt via een collega.' });
   }
   if (name === 'escaleren_naar_mens') {
     ctx.acties.push({ type: 'escalatie', ...input });

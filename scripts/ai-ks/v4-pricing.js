@@ -9,7 +9,7 @@ const code = src.slice(src.indexOf('const MK_UITVAL_COLS'), src.indexOf('// ====
 const SUNMASTER_PRICES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'sunmaster-prices-2026.json'), 'utf8'));
 const MARKUP = 1.10;
 
-const api = eval(code + `;({lookupPrice, calculateCorrectPrice, getProductKey, getCategory, getBedType, getMontagePrice, mkTotaalExcl, findNearest, reorderAndMerge, addV4Enhancements, addWaaromSontyBlock, mkBuildOptiesBlok})`);
+const api = eval(code + `;({lookupPrice, calculateCorrectPrice, getProductKey, getCategory, getBedType, getMontagePrice, mkTotaalExcl, findNearest, reorderAndMerge, addV4Enhancements, addWaaromSontyBlock, mkBuildOptiesBlok, STANDAARD_KLEUREN_MAP})`);
 
 const UNILUX = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'unilux-prijzen-2026.json'), 'utf8'));
 const BTW = 1.21;
@@ -57,7 +57,7 @@ function horPrijs({ type, breedteMM, hoogteMM }) {
 
 // Nette totaalprijs incl montage voor een productconfiguratie.
 // bediening: 'io' | 'solar' | 'solarBrel' | 'draaischakelaar' | 'handbediend'
-function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'io', materiaal }) {
+function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'io', materiaal, framekleur }) {
   let zoek = product.toLowerCase();
 
   // ── Horren (Unilux) ──
@@ -105,11 +105,37 @@ function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'i
   const montageBed = bediening === 'solar' ? 'solar' : bediening === 'draaischakelaar' ? 'draaischakelaar' : bediening === 'handbediend' ? 'handbediend' : 'bedraad';
   const montage = api.getMontagePrice(cat === 'pergola' ? 'pergola' : cat, montageBed, false) || 195;
 
+  // FRAMEKLEUR (beleid Daimy): moet de klant altijd kiezen — beïnvloedt de prijs.
+  // Doekkleur is vrij (op locatie kiezen), framekleur niet. Meerprijzen exact als v4.
+  const pd = SUNMASTER_PRICES[productKey] || {};
+  const stdKleuren = pd.standaardKleuren || api.STANDAARD_KLEUREN_MAP[productKey] || [];
+  let kleur = null;
+  if (framekleur && !/n\.?t\.?b|nader te bepalen|weet (ik |het )?niet/i.test(framekleur)) {
+    const fk = framekleur.toLowerCase();
+    const isStd = stdKleuren.some(k => fk.includes(k.toLowerCase()) || k.toLowerCase() === fk);
+    if (isStd) kleur = { kleur: framekleur, type: 'standaard', meerprijsIncl: 0 };
+    else {
+      const TREND = ['ral 7039', 'ral 9007', 'ral 9010 structuur', 'db 703', 'db703', 'ral 7021'];
+      const isTrend = TREND.some(k => fk.includes(k));
+      let sur = 0;
+      if (cat === 'rolluik') sur = Math.round(prijs * (isTrend ? 0.15 : 0.20));
+      else if (cat === 'serre' || cat === 'pergola') sur = Math.round(prijs * 0.15);
+      else {
+        const tbl = isTrend ? pd.meerprijsTrend : pd.meerprijsRAL;
+        const e = tbl ? api.findNearest(tbl, b) : null;
+        sur = e ? Math.round(e.value * MARKUP) : 0;
+      }
+      kleur = { kleur: framekleur, type: isTrend ? 'trendkleur' : 'RAL buiten standaard', meerprijsIncl: sur };
+    }
+  }
+  const kleurSur = kleur?.meerprijsIncl || 0;
+
   return metKorting({
     productKey,
-    productPrijsIncl: Math.round(prijs),
+    productPrijsIncl: Math.round(prijs) + kleurSur,
     montageIncl: montage,
-    totaalIncl: Math.round(prijs + montage),
+    totaalIncl: Math.round(prijs + montage) + kleurSur,
+    framekleur: kleur || { keuzeNodig: true, gratisStandaardkleuren: stdKleuren, opmerking: 'FRAMEKLEUR MOET DE KLANT KIEZEN (beïnvloedt de prijs). Noem de gratis standaardkleuren; andere RAL-kleuren hebben een meerprijs (reken door met framekleur-parameter). Doekkleur mag wél wachten tot het inmeten.' },
     toelichting: 'Prijzen incl. BTW, product incl. Somfy motor, montage door eigen monteurs. Indicatie op basis van opgegeven maten; definitief na inmeten.',
   });
 }

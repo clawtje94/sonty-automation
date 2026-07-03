@@ -98,6 +98,7 @@ async function verwerkTicket(t, state) {
     klant: { naam: t.contact?.full_name || null, email: t.contact?.email || null, phone: t.contact?.phone || null },
     berichten: rows.slice(-25),
     liveTest: isLiveTestContact(t), // whitelist-nummers: actie-tools mogen echt uitvoeren
+    ticketId: t.id,
   };
 
   console.log(`Ticket ${t.id} (${gesprek.kanaal}, ${gesprek.klant.naam || 'onbekend'}): agent draait...`);
@@ -144,7 +145,64 @@ async function verwerkTicket(t, state) {
   console.log(`  → notitie geplaatst (${res.acties.length} acties, ${res.toolCalls.length} tool-calls)`);
 }
 
+// Pending offerte-creaties afronden: RP heeft ±5-7 min nodig om lead+offerte aan te maken;
+// daarna vullen we de offerte met de echte producten, zetten de status en appen de link.
+async function verwerkPendingOffertes() {
+  const { loadPending, savePending } = require('./rp-offerte-create.js');
+  const { pasOfferteAan, zetStatus } = require('./rp-offerte-edit.js');
+  const pending = loadPending();
+  const open = pending.filter(p => p.status === 'wachten');
+  if (!open.length) return;
+
+  const board = await (async () => {
+    try {
+      const res = await fetch(`https://backend.reuzenpanda.nl/contact-service/${CFG.RP_PID}/boards/${CFG.RP_BOARD}/items`, { headers: { Authorization: 'Bearer ' + CFG.RP_API_KEY } });
+      return res.ok ? (await res.json()).items || [] : null;
+    } catch { return null; }
+  })();
+  if (!board) return;
+
+  for (const p of open) {
+    if (Date.now() - p.aangemaakt > 25 * 60000) {
+      p.status = 'timeout';
+      await telegram(`⚠️ AI-KS: nieuwe offerte voor ${p.klantNaam} is na 25 min nog niet verschenen in RP (lcId ${p.lcId}). Handmatig checken.`);
+      continue;
+    }
+    const item = board.find(i => i.item_subject?.id === p.lcId);
+    if (!item) continue; // RP nog bezig
+    let docs;
+    try {
+      docs = await (await fetch(`https://backend.reuzenpanda.nl/document-service/v1/${CFG.RP_PID}/quotations?lead_configuration_id=${p.lcId}`, { headers: { Authorization: 'Bearer ' + CFG.RP_API_KEY } })).json();
+    } catch { continue; }
+    const doc = (docs?.quotationDatas || [])[0];
+    if (!doc) continue; // offerte nog niet gegenereerd
+
+    // Placeholder eruit, echte producten erin (incl. v4-verrijking + 7 dagen geldigheid)
+    const res = await pasOfferteAan({ documentId: doc.documentId, verwijderen: ['offerte op maat', 'shutter', 'winkel offerte'], toevoegen: p.producten });
+    if (res.error) {
+      p.status = 'fout';
+      await telegram(`⚠️ AI-KS: offerte vullen mislukt voor ${p.klantNaam}: ${res.error}`);
+      continue;
+    }
+    await zetStatus(item.id, CFG.RP_STATUS_AI_OFFERTE_VERSTUURD).catch(() => {});
+
+    // Link appen op het oorspronkelijke ticket (met whitelist-check)
+    const tRes = await tGet(`/tickets/${p.ticketId}`);
+    const ticket = tRes?.data || tRes;
+    if (ticket && isLiveTestContact(ticket)) {
+      const voornaam = (p.klantNaam || '').split(' ')[0];
+      const bericht = `Hi ${voornaam}, je offerte staat klaar. Je bekijkt hem hier: ${res.link}\n\nDe offerte is 7 dagen geldig. Neem hem rustig door en laat maar weten als je vragen hebt!`;
+      const sendRes = await sendLiveReply(ticket, bericht);
+      console.log(`  → pending offerte geleverd aan ${p.klantNaam}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status}`);
+    }
+    p.status = 'klaar';
+    log({ pendingOfferte: p.lcId, klant: p.klantNaam, documentId: doc.documentId, regels: res.regelsNa, totaal: res.totaalIndicatie });
+  }
+  savePending(pending);
+}
+
 async function pollRonde(state, { onlyTest }) {
+  try { await verwerkPendingOffertes(); } catch (e) { console.error('pending-offertes FOUT:', e.message); }
   const specificTicket = process.argv.includes('--ticket') ? process.argv[process.argv.indexOf('--ticket') + 1] : null;
 
   let tickets = [];

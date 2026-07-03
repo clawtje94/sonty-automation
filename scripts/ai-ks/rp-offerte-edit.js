@@ -46,6 +46,22 @@ const MONTAGE_CAT = {
   suncontrol150: 'serre zonwering', suncontrol165ZIP: 'serre zonwering', suncontrolPergola: 'pergola',
 };
 
+const HOR_LABELS = {
+  'hor:comfort': 'Raamrolhor Comfort (Unilux)', 'hor:super_plus': 'Raamrolhor Super+ (Unilux)',
+  'hor:voorzethor': 'Vaste raamhor Voorzet (Unilux)', 'hor:inklemhor': 'Vaste raamhor Inklem (Unilux)', 'hor:veerstifthor': 'Vaste raamhor Veerstift (Unilux)',
+  'hor:voorzet_unit': 'Raamplissé Voorzet (Unilux)', 'hor:inklem_unit': 'Raamplissé Inklem (Unilux)', 'hor:unit_dubbel': 'Raamplissé Dubbel (Unilux)',
+  'hor:plissefit': 'Plisséfit hordeur (Unilux)', 'hor:plissefit_dubbel': 'Dubbele plisséfit hordeur (Unilux)',
+  'hor:vaste_hordeur_luxe': 'Vaste hordeur Luxe (Unilux)', 'hor:schuifhordeur_luxe': 'Schuifhordeur Luxe (Unilux)',
+};
+
+// Titel van de montageregel: altijd benoemen om welk product het gaat (instructie Daimy),
+// zeker bij horren: "Inmeten + montage plisséfit hordeur" i.p.v. generiek "montage".
+function montageTitel(productKey, itemProduct) {
+  if (productKey.startsWith('hor:')) return HOR_LABELS[productKey] || itemProduct || 'hor';
+  if (productKey.startsWith('markies')) return 'markies';
+  return MONTAGE_CAT[productKey] || itemProduct || '';
+}
+
 /**
  * Voert een offerte-aanpassing ECHT door in Reuzenpanda.
  * @param {object} p
@@ -87,12 +103,12 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
   for (const item of toevoegen) {
     const p = prijsIndicatie(item);
     if (p.error) return { error: `Prijs niet gevonden voor "${item.product}": ${p.error}` };
-    const naam = PRODUCT_LABELS[p.productKey] || item.product;
+    const naam = PRODUCT_LABELS[p.productKey] || HOR_LABELS[p.productKey] || item.product;
     const bed = BED_LABELS[item.bediening || 'io'];
     const dims = [`Breedte: ${item.breedteMM} mm`];
     if (item.uitvalMM) dims.push(`Uitval: ${item.uitvalMM} mm`);
     if (item.hoogteMM) dims.push(`Hoogte: ${item.hoogteMM} mm`);
-    let desc = `**${naam}**\n${dims.join('\n')}\nBediening: ${bed}\nFrame Kleur: n.t.b. (kiezen bij inmeten)\nGarantie: 3 jaar montage | 5 jaar product | 7 jaar motor`;
+    let desc = `**${naam}**\n${dims.join('\n')}\nBediening: ${bed}\nFrame Kleur: ${item.framekleur || 'n.t.b.'}\nGarantie: 3 jaar montage | 5 jaar product | 7 jaar motor`;
     // Markies: v4's eigen opties-blok (materiaal-alternatieven + bediening + extra's)
     if (p.productKey.startsWith('markies')) {
       const mat = p.productKey.replace('markies', '');
@@ -102,7 +118,7 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
     lines.push({ ...base, description: desc, units: item.aantal || 1, pricePerUnit: p.productPrijsIncl, position: 0 });
     lines.push({
       ...base,
-      description: `**Inmeten + montage ${MONTAGE_CAT[p.productKey] || ''}**\n- Inmeetafspraak bij je thuis\n- Professionele montage door ons eigen montageteam\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal`,
+      description: `**Inmeten + montage ${montageTitel(p.productKey, item.product)}**\n- Inmeetafspraak bij je thuis\n- Professionele montage door ons eigen montageteam\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal`,
       units: item.aantal || 1, pricePerUnit: p.montageIncl, position: 0,
     });
   }
@@ -168,4 +184,13 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
   };
 }
 
-module.exports = { pasOfferteAan };
+// Status van een pipeline-item zetten (zelfde PATCH als v4's setStatus)
+async function zetStatus(itemId, statusId) {
+  const res = await fetch(`https://backend.reuzenpanda.nl/contact-service/${CFG.RP_PID}/backlogs/${CFG.RP_BACKLOG}/items/${itemId}`, {
+    method: 'PATCH', headers: { Authorization: 'Bearer ' + CFG.RP_API_KEY, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ item: { status_id: statusId } }),
+  });
+  return res.ok;
+}
+
+module.exports = { pasOfferteAan, zetStatus };

@@ -21,16 +21,21 @@ async function rpGet(ep) {
 }
 
 // RP: zoek pipeline-items + offertes op e-mail of telefoon (via het snelle board-endpoint)
-async function findRpOffertes({ email, phone }) {
+async function findRpOffertes({ email, phone, naam, adres }) {
   const data = await rpGet(`/contact-service/${CFG.RP_PID}/boards/${CFG.RP_BOARD}/items`);
   if (!data?.items) return { fout: 'Reuzenpanda was even niet bereikbaar — probeer het zo nog een keer voordat je concludeert dat er geen offerte is.' };
   const items = data.items;
   const e = norm(email), p = normPhone(phone);
-  // RP zet contactgegevens als platte tekst in summary/description — daar matchen we op
+  const n = norm(naam), a = norm(adres);
+  // RP zet contactgegevens als platte tekst in summary/description — daar matchen we op.
+  // Gericht zoeken (instructie Daimy): telefoon/e-mail eerst; naam/adres als extra invalshoek.
   const matches = items.filter(it => {
     const blob = ((it.summary || '') + '\n' + (it.description || '')).toLowerCase();
     const digits = blob.replace(/[^0-9]/g, '');
-    return (e && blob.includes(e)) || (p && p.length >= 10 && digits.includes(p));
+    if ((e && blob.includes(e)) || (p && p.length >= 10 && digits.includes(p))) return true;
+    if (n && n.length > 5 && blob.includes(n)) return true;
+    if (a && a.length > 5 && blob.includes(a)) return true;
+    return false;
   }).slice(0, 5);
 
   const results = [];
@@ -125,8 +130,8 @@ async function getOfferteInhoud(documentId) {
   };
 }
 
-async function buildKlantContext({ email, phone, naam }) {
-  const [rp, hs] = await Promise.all([findRpOffertes({ email, phone }), findHubspot({ email, phone })]);
+async function buildKlantContext({ email, phone, naam, adres }) {
+  const [rp, hs] = await Promise.all([findRpOffertes({ email, phone, naam, adres }), findHubspot({ email, phone })]);
   return { naam: naam || hs?.naam || null, rp, hubspot: hs };
 }
 

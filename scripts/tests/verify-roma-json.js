@@ -13,19 +13,23 @@ const json = JSON.parse(fs.readFileSync(path.join(BASE, 'data', 'roma-prices-202
 
 const md = {
   zip: fs.readFileSync(path.join(SRC, 'roma-10b-zipscreen2-matrix.md'), 'utf8'),
+  zsol: fs.readFileSync(path.join(SRC, 'roma-10c-zipscreen2-solar-matrix.md'), 'utf8'),
   vxp: fs.readFileSync(path.join(SRC, 'roma-04-voorzetrolluiken.md'), 'utf8'),
   tre: fs.readFileSync(path.join(SRC, 'roma-05-gerolvormd-trendo.md'), 'utf8'),
 };
 
 // Onafhankelijke bron-lookup: pak de sectie na `heading`, vind de kopregel
-// ("| Hoogte\Breedte |...") voor de kolomindex en de rij die met "| <hoogte> |" begint.
+// ("| Hoogte\Breedte |..." of "| Hoogte \ Breedte |...") voor de kolomindex en
+// de rij die met "| <hoogte> |" begint. Kolomkoppen mogen een suffix hebben,
+// zoals "3600 (As ø63)".
 function sourceCell(text, heading, height, width) {
   const start = text.indexOf(heading);
   if (start < 0) throw new Error('Heading niet gevonden: ' + heading);
   const section = text.slice(start);
-  const headerLine = section.split('\n').find((l) => l.trim().startsWith('| Hoogte\\Breedte |'));
+  const headerLine = section.split('\n').find((l) => /^\|\s*Hoogte\s*\\\s*Breedte\s*\|/.test(l.trim()));
   if (!headerLine) throw new Error('Tabelkop niet gevonden onder: ' + heading);
-  const cols = headerLine.trim().replace(/^\||\|$/g, '').split('|').map((s) => s.trim());
+  const cols = headerLine.trim().replace(/^\||\|$/g, '').split('|')
+    .map((s) => s.trim().replace(/\s*\(.*\)$/, ''));
   const colIdx = cols.indexOf(String(width));
   if (colIdx < 1) throw new Error(`Breedte ${width} niet in kop van "${heading}"`);
   const rowRe = new RegExp('^\\| ' + height + ' \\|.*$', 'm');
@@ -94,6 +98,20 @@ function report(name, checks) {
   report('zipscreen2_mini (meerprijzen)', checks);
 }
 
+// ---- zipscreen2_solar --------------------------------------------------------
+{
+  const p = json.zipscreen2_solar;
+  const coords = [];
+  for (const h of p.heightsMM) for (const w of p.widthsMM) coords.push([h, w]);
+  const heading = (h, w) => (w <= 3000 ? '## Tabel 1' : '## Tabel 3');
+  const checks = samplePairs(coords, 25).map(([h, w]) => {
+    const src = normNumber(sourceCell(md.zsol, heading(h, w), h, w));
+    const js = p.prices[p.heightsMM.indexOf(h)][p.widthsMM.indexOf(w)];
+    return { h, w, src, js, match: src === js };
+  });
+  report('zipscreen2_solar', checks);
+}
+
 // ---- voorzetrolluik_xp ------------------------------------------------------
 {
   const p = json.voorzetrolluik_xp;
@@ -110,6 +128,22 @@ function report(name, checks) {
     return { h, w, src, js, match: src === js };
   });
   report('voorzetrolluik_xp', checks);
+}
+
+// ---- voorzetrolluik_xp_solar -------------------------------------------------
+{
+  const p = json.voorzetrolluik_xp_solar;
+  const coords = [];
+  for (const h of p.heightsMM) for (const w of p.widthsMM) coords.push([h, w]);
+  const heading = (h, w) => (w <= 2300
+    ? '### Tabel A — breedte 800 t/m 2300 mm (bron: p72)'
+    : '### Tabel B — breedte 2400 t/m 4000 mm (bron: p73)');
+  const checks = samplePairs(coords, 25).map(([h, w]) => {
+    const src = normNumber(sourceCell(md.vxp, heading(h, w), h, w));
+    const js = p.prices[p.heightsMM.indexOf(h)][p.widthsMM.indexOf(w)];
+    return { h, w, src, js, match: src === js };
+  });
+  report('voorzetrolluik_xp_solar', checks);
 }
 
 // ---- trendo (elke cel = 3 waarden, alle 3 moeten kloppen) -------------------

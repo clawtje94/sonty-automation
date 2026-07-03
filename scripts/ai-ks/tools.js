@@ -89,12 +89,13 @@ const TOOL_DEFS = [
   },
   {
     name: 'escaleren_naar_mens',
-    description: 'Draag het gesprek over aan een medewerker. Gebruik dit bij: boze/ontevreden klanten, klachten over uitgevoerd werk, complexe technische situaties die je niet zeker weet, kortingsonderhandeling boven je mandaat, juridische dreigingen, of als de klant expliciet om een mens vraagt.',
+    description: 'Draag het gesprek over aan een medewerker. Gebruik dit bij: boze/ontevreden klanten, klachten over uitgevoerd werk, complexe technische situaties die je niet zeker weet, kortingsonderhandeling boven je mandaat, juridische dreigingen, of als de klant expliciet om een mens vraagt. Zet stil=true als je het antwoord simpelweg niet weet: dan stuur je de klant NIETS en blijft het gesprek open staan voor een collega (schrijf dan ook geen antwoordtekst meer).',
     input_schema: {
       type: 'object',
       properties: {
         reden: { type: 'string' },
         urgentie: { type: 'string', enum: ['laag', 'normaal', 'hoog'] },
+        stil: { type: 'boolean', description: 'true = klant krijgt géén bericht; gesprek blijft open voor een collega' },
       },
       required: ['reden'],
     },
@@ -135,6 +136,10 @@ async function runTool(name, input, ctx) {
   }
   if (name === 'escaleren_naar_mens') {
     ctx.acties.push({ type: 'escalatie', ...input });
+    if (input.stil) {
+      ctx.stil = true;
+      return JSON.stringify({ status: 'GENOTEERD (stil)', opmerking: 'Het gesprek blijft open staan; een collega antwoordt. Stuur de klant NIETS: geef als eindantwoord uitsluitend de tekst [STIL].' });
+    }
     return JSON.stringify({ status: 'GENOTEERD', opmerking: 'Medewerker wordt geïnformeerd. Vertel de klant dat een collega er persoonlijk op terugkomt.' });
   }
   return JSON.stringify({ error: 'Onbekende tool' });

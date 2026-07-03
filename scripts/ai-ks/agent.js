@@ -65,7 +65,9 @@ async function beantwoord(gesprek) {
       return { antwoord: null, acties: ctx.acties, toolCalls, usage };
     }
 
-    const tekst = response.content.filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+    let tekst = response.content.filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+    // Stille escalatie: klant krijgt niets, gesprek blijft open voor een collega
+    if (ctx.stil || tekst === '[STIL]' || /^\[STIL\]$/m.test(tekst)) tekst = null;
     return { antwoord: tekst, acties: ctx.acties, toolCalls, usage };
   }
 

@@ -101,9 +101,27 @@ async function findHubspot({ email, phone }) {
   };
 }
 
+// Volledige inhoud (prijsregels) van een offerte — zodat de AI weet wat er al in zit
+async function getOfferteInhoud(documentId) {
+  const doc = await rpGet(`/document-service/v1/${CFG.RP_PID}/quotations/${documentId}`);
+  const qd = doc?.quotationData;
+  if (!qd) return { error: 'Offerte niet gevonden' };
+  const lines = (qd.segments?.defaultTemplatePriceLineGroup?.data?.lines || []).map(l => ({
+    aantal: l.units,
+    prijsPerStuk: l.pricePerUnit,
+    product: (l.description || '').split('\n')[0].replace(/\*\*/g, '').trim(),
+    details: (l.description || '').split('\n').slice(1, 8).map(s => s.replace(/\*\*/g, '').trim()).filter(Boolean).join(' | ').substring(0, 300),
+  }));
+  return {
+    nummer: qd.quotationNumber, status: qd.quotationStatus,
+    totaalIncl: qd.totalPriceInclVat ?? qd.totalIncl ?? null,
+    regels: lines,
+  };
+}
+
 async function buildKlantContext({ email, phone, naam }) {
   const [rp, hs] = await Promise.all([findRpOffertes({ email, phone }), findHubspot({ email, phone })]);
   return { naam: naam || hs?.naam || null, rp, hubspot: hs };
 }
 
-module.exports = { buildKlantContext, findRpOffertes, findHubspot, normPhone };
+module.exports = { buildKlantContext, findRpOffertes, findHubspot, normPhone, getOfferteInhoud };

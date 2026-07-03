@@ -3,7 +3,7 @@
 // zodat het voorstel in de interne notitie belandt en beoordeeld kan worden.
 const CFG = require('./config.js');
 const { prijsIndicatie } = require('./v4-pricing.js');
-const { buildKlantContext } = require('./klant-context.js');
+const { buildKlantContext, getOfferteInhoud } = require('./klant-context.js');
 
 const TOOL_DEFS = [
   {
@@ -30,6 +30,17 @@ const TOOL_DEFS = [
         email: { type: 'string' },
         phone: { type: 'string' },
       },
+    },
+  },
+  {
+    name: 'offerte_bekijken',
+    description: 'Haal de volledige inhoud (alle prijsregels: producten, opties, accessoires, montage) van een bestaande offerte op. Gebruik dit ALTIJD voordat je een lopende offerte bespreekt, iets adviseert of een aanpassing voorstelt — zodat je weet wat er al in zit (bv. of er al een windsensor of Tahoma in staat) en niets dubbel aanbiedt. Het documentId vind je via klant_opzoeken.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        documentId: { type: 'string', description: 'RP documentId (UUID) uit klant_opzoeken' },
+      },
+      required: ['documentId'],
     },
   },
   {
@@ -80,6 +91,10 @@ async function runTool(name, input, ctx) {
   }
   if (name === 'klant_opzoeken') {
     const res = await buildKlantContext(input);
+    return JSON.stringify(res).substring(0, 6000);
+  }
+  if (name === 'offerte_bekijken') {
+    const res = await getOfferteInhoud(input.documentId);
     return JSON.stringify(res).substring(0, 6000);
   }
   if (name === 'offerte_aanpassen') {

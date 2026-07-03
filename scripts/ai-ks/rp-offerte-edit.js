@@ -111,11 +111,23 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
     const p = prijsIndicatie(item);
     if (p.error) return { error: `Prijs niet gevonden voor "${item.product}": ${p.error}` };
     const naam = PRODUCT_LABELS[p.productKey] || HOR_LABELS[p.productKey] || item.product;
-    const bed = BED_LABELS[item.bediening || 'io'];
     const dims = [`Breedte: ${item.breedteMM} mm`];
     if (item.uitvalMM) dims.push(`Uitval: ${item.uitvalMM} mm`);
     if (item.hoogteMM) dims.push(`Hoogte: ${item.hoogteMM} mm`);
-    let desc = `**${naam}**\n${dims.join('\n')}\nBediening: ${bed}\nFrame Kleur: ${item.framekleur || 'n.t.b.'}\nGarantie: 3 jaar montage | 5 jaar product | 7 jaar motor`;
+    // Bediening + Motor exact volgens v4's PRODUCT_MAP (aparte regels, zoals alle v4-offertes)
+    const catVoorMap = p.productKey.startsWith('rolluik') ? 'rolluik' : p.productKey.startsWith('zip') || p.productKey.startsWith('screen') ? 'screen'
+      : ['suncube150', 'sunproject100'].includes(p.productKey) ? 'uitvalscherm' : p.productKey === 'suncontrolPergola' ? 'pergola'
+      : p.productKey.startsWith('suncontrol') ? 'serre' : p.productKey.startsWith('markies') || p.productKey.startsWith('hor:') ? null : 'knikarmscherm';
+    const bedKey = item.bediening === 'solar' || item.bediening === 'solarBrel' ? 'solar' : item.bediening === 'draaischakelaar' ? 'draaischakelaar' : item.bediening === 'handbediend' ? 'handbediend' : 'bedraad';
+    const map = catVoorMap ? (v4.PRODUCT_MAP[`${catVoorMap}|${bedKey}`] || v4.PRODUCT_MAP[`${catVoorMap}|bedraad`]) : null;
+    const bedRegels = map
+      ? [`Bediening: ${map.bediening}`, ...(map.motor ? [`Motor: ${map.motor}`] : [])]
+      : [`Bediening: ${BED_LABELS[item.bediening || 'io'] || item.bediening}`];
+    // Doekproducten: doekkleur-regel (kiezen bij inmeten, alle stalen mee — beleid Daimy)
+    const heeftDoek = ['knikarmscherm', 'screen', 'uitvalscherm', 'serre', 'pergola'].includes(catVoorMap) || p.productKey.startsWith('markies');
+    const doekRegel = heeftDoek ? ['Kleur doek: n.t.b. (alle doekstalen bekijk je bij het inmeten)'] : [];
+    const kleurLabel = p.productKey.startsWith('rolluik') ? 'Frame Kleur: ' + (item.framekleur || 'n.t.b.') + '\nKleur pantser: ' + (item.framekleur || 'n.t.b.') : 'Frame Kleur: ' + (item.framekleur || 'n.t.b.');
+    let desc = `**${naam}**\n${dims.join('\n')}\n${bedRegels.join('\n')}\n${doekRegel.join('\n')}${doekRegel.length ? '\n' : ''}${kleurLabel}\nGarantie: 3 jaar montage | 5 jaar product | 7 jaar motor`;
     // Markies: v4's eigen opties-blok (materiaal-alternatieven + bediening + extra's)
     if (p.productKey.startsWith('markies')) {
       const mat = p.productKey.replace('markies', '');

@@ -8,15 +8,16 @@ const { buildKlantContext, getOfferteInhoud } = require('./klant-context.js');
 const TOOL_DEFS = [
   {
     name: 'prijs_berekenen',
-    description: 'Bereken de actuele Sonty verkoopprijs (incl. BTW en montage) voor een zonwering-product. Gebruik dit ALTIJD voordat je een prijs noemt — nooit prijzen uit je hoofd. Werkt voor: knikarmschermen (SunEye/SunEye XL/SunElite/SunBasic open cassette/SunBasic dichte cassette — let op: "SunBasic open" is de goedkopere open-arm variant, "SunBasic dichte cassette" de gesloten), screens (Zip Design 110/Zip Square), rolluiken (S-37/S-42), uitvalschermen (SunCube/SunProject), serre zonwering (SunControl), pergola.',
+    description: 'Bereken de actuele Sonty verkoopprijs (incl. BTW en montage) voor een product. Gebruik dit ALTIJD voordat je een prijs noemt — nooit prijzen uit je hoofd. Werkt voor: knikarmschermen (SunEye/SunEye XL/SunElite/SunBasic open cassette/SunBasic dichte cassette — "SunBasic open" is de goedkopere open-arm variant), screens (Zip Design 110/Zip Square), rolluiken (S-37/S-42), uitvalschermen (SunCube/SunProject), serre zonwering (SunControl), pergola, MARKIEZEN (geef materiaal mee: grenen/hardhout/aluminium) en HORREN van Unilux (geef het type in product: raamrolhor comfort/super+, voorzethor/inklemhor/veerstifthor, raamplissé voorzet/inklem/dubbel, plisséfit hordeur (enkel, voor openslaande deuren) of plisséfit dubbel (dubbele deuren/schuifpui), vaste of schuifhordeur luxe).',
     input_schema: {
       type: 'object',
       properties: {
-        product: { type: 'string', description: 'Productnaam, bv "zip design 110", "suneye knikarmscherm", "rolluik s-42"' },
+        product: { type: 'string', description: 'Productnaam, bv "zip design 110", "suneye knikarmscherm", "markies aluminium", "plissefit dubbel hordeur"' },
         breedteMM: { type: 'integer', description: 'Breedte in millimeters' },
-        hoogteMM: { type: 'integer', description: 'Hoogte in mm (screens/rolluiken)' },
-        uitvalMM: { type: 'integer', description: 'Uitval in mm (knikarm/uitvalscherm/serre/pergola)' },
-        bediening: { type: 'string', enum: ['io', 'solar', 'solarBrel', 'draaischakelaar', 'handbediend'], description: 'io = Somfy motor + afstandsbediening (standaard)' },
+        hoogteMM: { type: 'integer', description: 'Hoogte in mm (screens/rolluiken/horren)' },
+        uitvalMM: { type: 'integer', description: 'Uitval in mm (knikarm/uitvalscherm/serre/pergola/markies)' },
+        bediening: { type: 'string', enum: ['io', 'solar', 'solarBrel', 'draaischakelaar', 'handbediend'], description: 'io = Somfy motor + afstandsbediening (standaard); markies standaard = handbediend (koord)' },
+        materiaal: { type: 'string', description: 'Alleen voor markiezen: grenen, hardhout of aluminium' },
       },
       required: ['product', 'breedteMM'],
     },

@@ -88,6 +88,11 @@ async function verwerkTicket(t, state) {
   const sleutel = `${t.id}:${laatste.tijd}`;
   if (state.verwerkt[sleutel]) return; // al behandeld
 
+  // Debounce: wacht tot het laatste klantbericht ±45s oud is. Voorkomt dubbel antwoorden
+  // als de klant meerdere berichten kort na elkaar stuurt (die pakken we dan in één keer mee).
+  const leeftijdSec = (Date.now() - new Date(String(laatste.tijd).replace(' ', 'T'))) / 1000;
+  if (isFinite(leeftijdSec) && leeftijdSec < 45) return; // volgende poll-ronde
+
   const gesprek = {
     kanaal: t.channel?.type === 'WA_BUSINESS' ? 'WA' : 'EMAIL',
     klant: { naam: t.contact?.full_name || null, email: t.contact?.email || null, phone: t.contact?.phone || null },

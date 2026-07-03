@@ -66,7 +66,7 @@ const TOOL_DEFS = [
           },
         },
       },
-      required: ['naam', 'telefoon', 'producten'],
+      required: ['naam', 'telefoon', 'email', 'straat', 'postcode', 'plaats', 'producten'],
     },
   },
   {
@@ -138,6 +138,7 @@ const TOOL_DEFS = [
         reden: { type: 'string' },
         urgentie: { type: 'string', enum: ['laag', 'normaal', 'hoog'] },
         stil: { type: 'boolean', description: 'true = klant krijgt géén bericht; gesprek blijft open voor een collega' },
+        leervraag: { type: 'boolean', description: 'true = je weet het antwoord niet of twijfelt; de vraag gaat naar Daimy op Telegram zodat het antwoord aangeleerd kan worden. Zet de letterlijke klantvraag in reden.' },
       },
       required: ['reden'],
     },
@@ -172,6 +173,9 @@ async function runTool(name, input, ctx) {
   }
   if (name === 'inmeet_afspraak_voorstellen') {
     ctx.acties.push({ type: 'inmeet_afspraak', ...input });
+    if ((CFG.MODE === 'live' || ctx.liveTest) && !input.itemId) {
+      return JSON.stringify({ status: 'GEBLOKKEERD', opmerking: 'Geen dossier (itemId) bekend voor deze klant — je kunt niets doorzetten naar de planning. Zoek eerst het dossier via klant_opzoeken (vraag zo nodig het e-mailadres of offertenummer), of maak eerst een offerte aan met VOLLEDIGE contactgegevens (naam, e-mail, adres). Beloof de klant nog GEEN inmeetafspraak.' });
+    }
     if ((CFG.MODE === 'live' || ctx.liveTest) && input.itemId) {
       // Item naar RP-kolom "Inmeten inplannen" (zelfde PATCH als v4's setStatus)
       const res = await fetch(`https://backend.reuzenpanda.nl/contact-service/${CFG.RP_PID}/backlogs/${CFG.RP_BACKLOG}/items/${input.itemId}`, {

@@ -137,7 +137,14 @@ async function verwerkTicket(t, state) {
 
   const escalatie = res.acties.find(a => a.type === 'escalatie');
   if (escalatie) {
-    await telegram(`⚠️ AI-KS escalatie (schaduw) — ticket ${t.id} (${gesprek.klant.naam || gesprek.klant.phone || gesprek.klant.email}):\n${escalatie.reden}\n\nLaatste klantbericht: ${laatste.tekst.substring(0, 300)}`);
+    const wie = gesprek.klant.naam || gesprek.klant.phone || gesprek.klant.email;
+    if (escalatie.leervraag) {
+      // Leervraag (instructie Daimy): vraag naar Telegram zodat het antwoord aangeleerd kan worden
+      fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leervragen.jsonl'), JSON.stringify({ tijd: new Date().toISOString(), ticket: t.id, klant: wie, vraag: laatste.tekst.substring(0, 500), toelichtingAI: escalatie.reden, status: 'open' }) + '\n');
+      await telegram(`🎓 LEERVRAAG van klant ${wie} (ticket ${t.id}):\n\n"${laatste.tekst.substring(0, 400)}"\n\nAI: ${escalatie.reden.substring(0, 400)}\n\nAntwoord hier op Telegram, dan leer ik het de AI aan en ${escalatie.stil ? 'beantwoorden we de klant (gesprek staat nog open)' : 'weet hij het voortaan zelf'}.`);
+    } else {
+      await telegram(`⚠️ AI-KS escalatie — ticket ${t.id} (${wie}):\n${escalatie.reden}\n\nLaatste klantbericht: ${laatste.tekst.substring(0, 300)}`);
+    }
   }
 
   state.verwerkt[sleutel] = { tijd: new Date().toISOString(), acties: res.acties.length };

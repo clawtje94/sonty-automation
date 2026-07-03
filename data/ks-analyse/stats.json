@@ -1,0 +1,40 @@
+{
+  "generated": "2026-07-03T06:30:00.479Z",
+  "totaal_raw": 4163,
+  "totaal_met_inhoud": 4109,
+  "met_inbound": 1651,
+  "per_kanaal": {
+    "WhatsApp Business (+31 85 006 9681)": 2768,
+    "Aanvragen": 748,
+    "Werkbon": 118,
+    "Orders": 246,
+    "Scans": 138,
+    "Klantenservice": 91
+  },
+  "onbeantwoord_eindigend_inbound": 1207,
+  "nooit_beantwoord": 671,
+  "responstijd_min": {
+    "mediaan": 115,
+    "p75": 1290,
+    "p90": 3028,
+    "gem": 1028
+  },
+  "responstijd_wa": {
+    "n": 397,
+    "mediaan": 39,
+    "p90": 1308
+  },
+  "responstijd_email": {
+    "n": 271,
+    "mediaan": 1201,
+    "p90": 4329
+  },
+  "per_agent": {
+    "Daimy Boot": 2888,
+    "Jorren Plugge": 157,
+    "Tanya Plugge": 63,
+    "Joey Engelen": 26,
+    "Jaimy Wit": 105,
+    "Nanny van Vliet": 1
+  }
+}

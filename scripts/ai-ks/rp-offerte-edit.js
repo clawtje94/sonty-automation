@@ -174,6 +174,12 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
   // Geldigheid: AI-aangepaste offertes zijn 7 dagen geldig vanaf NU (klant krijgt zojuist de nieuwe versie)
   qd.quotationExpirationTimestamp = Date.now() + 7 * 86400000;
 
+  // 15% actiekorting geldt op ALLES (Daimy 2026-07-03) — zetten als er nog geen korting op staat.
+  // NOOIT overschrijven (voorraad heeft bv. 20%) en nooit stapelen.
+  if (!plg.data.groupDiscount?.amount) {
+    plg.data.groupDiscount = { type: 'PERCENTAGE', amount: 15, name: '15% tijdelijke actie', vatPercentage: 21 };
+  }
+
   // Posities opnieuw nummeren
   lines.forEach((l, i) => { l.position = i; });
   plg.data.lines = lines;

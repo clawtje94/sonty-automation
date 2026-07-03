@@ -462,6 +462,7 @@ function getMontagePrice(cat, bedType, isUitgebreid) {
 function getMontageCategory(firstLine) {
   const d = firstLine.toLowerCase();
   if (d.includes('markies')) return 'markies';
+  if (d.includes('hor')) return 'hor'; // horren: eigen montageprijzen per type (zie adjustMontageInPlace)
   if (d.includes('rolluik')) return 'rolluik';
   if (d.includes('screen')) return 'screen';
   if (d.includes('knikarm')) return 'knikarmscherm';
@@ -507,12 +508,22 @@ function transformProductDesc(desc, cat, bedType) {
   return result.join('\n');
 }
 
+// Montagekosten horren (Daimy 2026-07-03): inklem/vaste raamhor 20, rolhor 35, enkele deur 75, dubbele deur 95
+function getHorMontagePrice(desc) {
+  const d = desc.toLowerCase();
+  if (/dubbel/.test(d)) return 95;              // dubbele plisséfit / dubbele deuren / schuifpui
+  if (/deur|pliss[eé]fit|schuifhor/.test(d)) return 75; // enkele hordeur
+  if (/rolhor|comfort|super/.test(d)) return 35; // raamrolhorren
+  if (/inklem|voorzet|veerstift|pliss[eé]|raamhor/.test(d)) return 20; // vaste raamhorren / raamplissé
+  return null; // onbekend hortype → niet aanpassen, handmatige controle
+}
+
 // Pas montage aan: behoud originele titel + bullets, alleen prijs wijzigen
 function adjustMontageInPlace(line, cat, bedType) {
   let changed = false;
   const fullDesc = (line.description || '').toLowerCase();
   const isUitgebreid = fullDesc.includes('uitgebreid') || fullDesc.includes('inclusief uitbouw') || fullDesc.includes('met uitbouw');
-  const correctPrice = getMontagePrice(cat, bedType, isUitgebreid);
+  const correctPrice = cat === 'hor' ? getHorMontagePrice(fullDesc) : getMontagePrice(cat, bedType, isUitgebreid);
   if (correctPrice !== null && line.pricePerUnit !== correctPrice) {
     line.pricePerUnit = correctPrice;
     changed = true;

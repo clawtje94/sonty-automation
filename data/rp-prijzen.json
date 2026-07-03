@@ -7,23 +7,23 @@
   "montageKosten": "Separate montagekosten (niet in productprijs)"
  },
  "marge_per_categorie": {
-  "Knikarmschermen": 1.0,
-  "Uitvalschermen": 1.0,
-  "Screens": 1.0,
-  "Rolluiken": 1.0,
-  "Serre zonwering": 1.0,
-  "Pergola": 1.0,
-  "Markiezen": 1.0,
-  "Montage": 1.0,
-  "Accessoires": 1.0,
-  "Raamdeco — Rolgordijnen": 1.0,
-  "Raamdeco — Duo-rolgordijnen": 1.0,
-  "Raamdeco — Jaloezieën": 1.0,
-  "Raamdeco — Jaloezieën hout": 1.0,
-  "Raamdeco — Plissé": 1.0,
-  "Raamdeco — Lamellen": 1.0,
-  "Raamdeco — Vouwgordijnen": 1.0,
-  "Horren": 1.0
+  "Knikarmschermen": 1,
+  "Uitvalschermen": 1,
+  "Screens": 1,
+  "Rolluiken": 1,
+  "Serre zonwering": 1,
+  "Pergola": 1,
+  "Markiezen": 1,
+  "Montage": 1,
+  "Accessoires": 1,
+  "Raamdeco — Rolgordijnen": 1,
+  "Raamdeco — Duo-rolgordijnen": 1,
+  "Raamdeco — Jaloezieën": 1,
+  "Raamdeco — Jaloezieën hout": 1,
+  "Raamdeco — Plissé": 1,
+  "Raamdeco — Lamellen": 1,
+  "Raamdeco — Vouwgordijnen": 1,
+  "Horren": 1
  },
  "categorieen": {
   "Screens": [
@@ -2277,6 +2277,30 @@
     "naam": "Montage — Markies",
     "sku": "MONT-MARKIES",
     "verkoop_incl": 195,
+    "omschrijving": "Montage door Sonty monteurs"
+   },
+   {
+    "naam": "Montage — Hor inklem/vast raam",
+    "sku": "MONT-HOR-RAAM-VAST",
+    "verkoop_incl": 20,
+    "omschrijving": "Montage door Sonty monteurs"
+   },
+   {
+    "naam": "Montage — Rolhor raam",
+    "sku": "MONT-HOR-ROLHOR",
+    "verkoop_incl": 35,
+    "omschrijving": "Montage door Sonty monteurs"
+   },
+   {
+    "naam": "Montage — Hordeur enkel",
+    "sku": "MONT-HOR-DEUR-ENKEL",
+    "verkoop_incl": 75,
+    "omschrijving": "Montage door Sonty monteurs"
+   },
+   {
+    "naam": "Montage — Hordeur dubbel",
+    "sku": "MONT-HOR-DEUR-DUBBEL",
+    "verkoop_incl": 95,
     "omschrijving": "Montage door Sonty monteurs"
    }
   ],

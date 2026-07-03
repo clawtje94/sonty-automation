@@ -66,7 +66,7 @@ Replay: replay.js — AI naast echte team-antwoorden op historische gesprekken
 - Inmeet_afspraak volledig automatisch: AI maakt de afspraak in Planado/HubSpot-agenda
   (koppeling met beschikbaarheid van inmeters, zoals belscherm-flow) i.p.v. alleen een taak.
 - Status-vragen beantwoorden uit Gripp/Planado ("wanneer wordt er gemonteerd?").
-- Proactieve opvolging: onbeantwoorde offertes na 3 dagen persoonlijk (niet-template)
+- Proactieve opvolging: PAUZE (Daimy 3 juli: WhatsApp gaf spam-waarschuwing, alle herinnerings-WA uit). Eventueel later alleen zeer gedoseerd/via e-mail. Was: onbeantwoorde offertes na 3 dagen persoonlijk (niet-template)
   opvolgen binnen het WhatsApp-venster; reactivatie van stille leads.
 - €75-facturatie-signaal: na inmeten-zonder-akkoord automatisch taak voor factuur.
 

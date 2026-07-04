@@ -46,6 +46,10 @@ function horPrijs({ type, breedteMM, hoogteMM }) {
   for (const [naam, k] of Object.entries(HOR_TYPES)) if (t.includes(naam)) { key = k; break; }
   if (!key) return { error: 'Onbekend hortype. Kies uit: raamrolhor Comfort of Super+, vaste raamhor (voorzet/inklem/veerstift), raamplissé (voorzet/inklem/dubbel), plisséfit hordeur (enkel, voor openslaande deuren) of plisséfit dubbel (dubbele deuren/schuifpui), vaste hordeur luxe, schuifhordeur luxe. Vraag de klant wat past bij de situatie.' };
   const p = UNILUX.producten[key];
+  // Gedocumenteerde Unilux-bestelminima (catalogus 2026); kleiner dan de kleinste staffel mag verder
+  // gewoon en krijgt de kleinste-staffelprijs (instructie Daimy 2026-07-04)
+  if (key === 'comfort' && hoogteMM < 440) return { error: 'Raamrolhor Comfort: minimale kastmaat/hoogte is 440mm.' };
+  if (key === 'super_plus' && breedteMM < 300) return { error: 'Raamrolhor Super+: minimale breedte is 300mm (zonder veervertrager; standaard vanaf 540mm).' };
   const wIdx = p.widths.findIndex(w => w >= breedteMM);
   const hIdx = p.heights.findIndex(h => h >= hoogteMM);
   if (wIdx === -1 || hIdx === -1) return { error: `Maat ${breedteMM}x${hoogteMM}mm valt buiten het leverbare bereik van dit model (max ${p.widths[p.widths.length - 1]}x${p.heights[p.heights.length - 1]}mm).` };

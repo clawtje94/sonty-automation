@@ -674,6 +674,9 @@ Ja! In onze showroom in Rijswijk hebben we een breed assortiment binnenraamdecor
 **"Doen jullie ook horren?"**
 Ja, wij leveren horren van Unilux — een A-merk in horren en hordeuren. Beschikbaar als plissehor, rolhor, schuifhor en hordeur. Neem contact op voor een offerte.
 
+**"Welke kleuren hebben de horren?" (Unilux catalogus 2026)**
+Standaardkleuren zonder meerprijs: RAL 9001 (crèmewit), RAL 9010 (wit), RAL 7016 structuur (antraciet), RAL 9006 (aluminium) en RAL 9005 structuur (zwart). Elke andere RAL-kleur kan tegen meerprijs, zonder langere levertijd. Het gaas is standaard zwart (pollengaas en petscreen mogelijk bij de meeste modellen). Detail: bij RAL 9001 zijn de kunststof onderdelen crèmewit, bij RAL 9003/9010/9016 wit, bij overige kleuren zwart.
+
 **"Hoe onderhoud ik mijn zonwering?"**
 Rol het product regelmatig in en uit. Bij knikarmschermen: altijd inrollen bij wind en regen. Doek reinigen met lauw water en een zachte borstel — geen hogedrukreiniger. Frame af en toe afspoelen met water.
 

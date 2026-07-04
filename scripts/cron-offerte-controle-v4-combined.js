@@ -1745,8 +1745,10 @@ async function main() {
 
   // SHEET BIJWERKEN
   const gcItemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
+  // Tool-leads (pipeline-kolom "Winkel ") horen ook in het offerte-register (instructie Daimy 2026-07-04)
+  const WINKEL_SHEET_STATUS = '058e79f8-12fa-4a41-8614-9f7ea2e78b4b';
   const gcItems = (gcItemsData?.items || []).filter(i =>
-    (i.status_id === GECONTROLEERD || i.status_id === TEVER_STATUS || i.status_id === GORDIJNEN_STATUS) && i.timestamp_created > sevenDaysAgo &&
+    (i.status_id === GECONTROLEERD || i.status_id === TEVER_STATUS || i.status_id === GORDIJNEN_STATUS || i.status_id === WINKEL_SHEET_STATUS) && i.timestamp_created > sevenDaysAgo &&
     !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
   );
 
@@ -1802,7 +1804,10 @@ async function main() {
 
     if (!perMaand[tabNaam]) perMaand[tabNaam] = [];
     perMaand[tabNaam].push([datum, item.summary.split(' ')[0], item.summary.split(' ').slice(1).join(' '),
-      city, phone, bedragStr, offerteNr, '', 'Online', afkomst, 'Prive', productCat]);
+      city, phone, bedragStr, offerteNr, '',
+      // Kanaal: tool-leads (Winkel-kolom) volgen de gekozen herkomst (Winkel/Online), rest is Online
+      item.status_id === WINKEL_SHEET_STATUS ? (afkomstRaw === 'online' ? 'Online' : 'Winkel') : 'Online',
+      afkomst, 'Prive', productCat]);
   }
 
   let sheetRows = 0;

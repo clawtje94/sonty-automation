@@ -27,8 +27,8 @@ const SELFCHECK_LOG = path.join(__dirname, '../logs/v4-selfcheck.log');
 
 function log(msg) {
   const line = '[' + new Date().toISOString().substring(11, 19) + '] ' + msg;
+  // Alleen console.log — launchd stuurt stdout al naar SELFCHECK_LOG (dubbel schrijven gaf dubbele regels)
   console.log(line);
-  fs.appendFileSync(SELFCHECK_LOG, line + '\n');
 }
 
 async function sendTelegram(text) {
@@ -145,6 +145,12 @@ function diagnoseAndFix(origLines, newLines) {
 // ============ MAIN ============
 
 async function main() {
+  // V4 draait niet op zondag (kantooruren-check) — dan is "stuck in OC" normaal weekend-aanwas, geen fout.
+  if (new Date().getDay() === 0) {
+    log('Zondag: V4 draait niet, self-check skip (aanwas wordt maandag 9:30 verwerkt)');
+    return;
+  }
+
   log('=== V4 Self-Check start ===');
 
   const sevenDaysAgo = Date.now() - 7 * 86400000;

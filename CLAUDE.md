@@ -1,5 +1,7 @@
 # Sonty Agent Context
 
+> **NIEUWE SESSIE? Lees eerst `~/sonty/HANDOFF.md`** — volledige stand van zaken, draaiende processen (AI-KS test-watcher), en openstaande punten (bijgewerkt 2026-07-05). Eerste actie altijd: `node scripts/read-telegram-webhook.js`.
+
 ## Projectoverzicht
 Sonty — zonwering & raamdecoratie specialist (Rijswijk/Haaglanden).
 Twee samenhangende projecten:

@@ -1197,5 +1197,96 @@
       }
     ],
     "processedAt": "2026-07-02T16:30:59.024Z"
+  },
+  "item:f3ba26ea-0d6a-4ca6-a013-b7ef80c2284d": {
+    "summary": "Gerard van Eeden",
+    "grippCompanyId": 99423,
+    "grippOfferId": 8376,
+    "rpDocNumber": "20268240",
+    "allOffers": [
+      {
+        "grippOfferId": 8376,
+        "rpDocNumber": "20268240"
+      }
+    ],
+    "processedAt": "2026-07-03T16:30:29.932Z"
+  },
+  "item:94668c43-36e0-49ac-9c2f-40f887e17dc6": {
+    "summary": "Anna Danne",
+    "grippCompanyId": 99424,
+    "grippOfferId": 8377,
+    "rpDocNumber": "20268142",
+    "allOffers": [
+      {
+        "grippOfferId": 8377,
+        "rpDocNumber": "20268142"
+      }
+    ],
+    "processedAt": "2026-07-03T16:30:33.443Z"
+  },
+  "item:5e4b21e5-aebd-4941-bdfc-f0ffcd9f1407": {
+    "summary": "Marja van Dijkhuizen",
+    "grippCompanyId": 99425,
+    "grippOfferId": 8378,
+    "rpDocNumber": "20268604",
+    "allOffers": [
+      {
+        "grippOfferId": 8378,
+        "rpDocNumber": "20268604"
+      }
+    ],
+    "processedAt": "2026-07-03T16:30:37.491Z"
+  },
+  "item:bb69f3e4-995d-417c-ada8-a43882aa63c0": {
+    "summary": "Marijke van Aalst",
+    "grippCompanyId": 99426,
+    "grippOfferId": 8379,
+    "rpDocNumber": "20267905",
+    "allOffers": [
+      {
+        "grippOfferId": 8379,
+        "rpDocNumber": "20267905"
+      }
+    ],
+    "processedAt": "2026-07-03T16:30:40.964Z"
+  },
+  "item:cf409849-d9b1-42f2-82cf-9c18ecfe20d9": {
+    "summary": "Daan Witkop",
+    "grippCompanyId": 99427,
+    "grippOfferId": 8385,
+    "rpDocNumber": "20267577",
+    "allOffers": [
+      {
+        "grippOfferId": 8385,
+        "rpDocNumber": "20267577"
+      }
+    ],
+    "processedAt": "2026-07-04T16:30:32.017Z"
+  },
+  "item:f3764b2b-6043-4346-aa3b-e1273f63d0b6": {
+    "summary": "Jan  Vellekoop",
+    "grippCompanyId": 99428,
+    "grippOfferId": 8386,
+    "rpDocNumber": "20267912",
+    "allOffers": [
+      {
+        "grippOfferId": 8386,
+        "rpDocNumber": "20267912"
+      }
+    ],
+    "processedAt": "2026-07-04T16:30:35.926Z"
+  },
+  "item:ece099d6-03d1-4ee6-80e8-9a33efc0592c": {
+    "summary": "van der ven",
+    "grippCompanyId": 99429,
+    "grippOfferId": 8387,
+    "rpDocNumber": "20268680",
+    "allOffers": [
+      {
+        "grippOfferId": 8387,
+        "rpDocNumber": "20268680"
+      }
+    ],
+    "processedAt": "2026-07-04T16:30:39.397Z"
   }
 }

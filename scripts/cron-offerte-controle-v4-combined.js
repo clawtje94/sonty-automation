@@ -775,6 +775,9 @@ function enhanceAllDescriptions(lines) {
   for (let i = 0; i < lines.length; i++) {
     const fl = (lines[i].description?.split('\n')[0] || '').replace(/^\*\*|\*\*$/g, '').toLowerCase();
     const orig = lines[i].description;
+    // Roma-regels niet verrijken: eigen merkverhaal/beschrijving; Sunmaster Waarom-blok en
+    // up/downgrade-opties horen daar niet bij (Roma ís al het alternatief via de duo-offerte)
+    if (fl.includes('roma')) continue;
     if (fl.includes('montage') || fl.includes('inmeten')) {
       // Montage: NIET aanpassen (originele bullets behouden)
       continue;
@@ -1600,6 +1603,9 @@ async function main() {
     const priceUnknown = []; // producten waarvan de prijs niet bepaald kon worden → handmatige controle
     for (let i = 0; i < lines.length; i++) {
       const firstLine = lines[i].description?.split('\n')[0] || '';
+      // Roma-regels NIET aanraken: eigen prijsboek (netto ×1,15 via tool/duo-script) en complete
+      // eigen beschrijving. getProductKey zou ze anders als Sunmaster prijzen (zipSCREEN.2 → zipscreen).
+      if (firstLine.toLowerCase().includes('roma')) continue;
       const bediening = lines[i].description?.match(/Bediening:\s*([^\n]+)/i)?.[1]?.trim() || '';
       const motor = lines[i].description?.match(/Motor:\s*([^\n]+)/i)?.[1]?.trim() || '';
       const cat = getCategory(firstLine);
@@ -2020,6 +2026,8 @@ if (testName) {
       const catBed = {};
       for (let i = 0; i < lines.length; i++) {
         const firstLine = lines[i].description?.split('\n')[0] || '';
+        // Roma-regels niet aanraken (eigen prijsboek + beschrijving), zelfde skip als in stap 2b
+        if (firstLine.toLowerCase().includes('roma')) continue;
         const bediening = lines[i].description?.match(/Bediening:\s*([^\n]+)/i)?.[1]?.trim() || '';
         const motor = lines[i].description?.match(/Motor:\s*([^\n]+)/i)?.[1]?.trim() || '';
         const cat = getCategory(firstLine);

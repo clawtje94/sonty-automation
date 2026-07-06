@@ -8,53 +8,81 @@ const TRENGO_TOKEN = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt
 const AANVRAGEN_CHANNEL = 1363384; // EMAIL "Aanvragen" (aanvragen@sonty.nl)
 const TH = { Authorization: 'Bearer ' + TRENGO_TOKEN, 'Content-Type': 'application/json' };
 
-// Zelfde huisstijl als templates/emails/*.html (logo-header, oranje knoppen, je-vorm)
+// Huisstijl van templates/emails/*.html, maar als tabel-layout: Outlook (Word-engine)
+// negeert max-width/margin/div-padding, dus alleen tables + bgcolor + td-padding
+// renderen overal goed. Knoppen als "bulletproof button" (bgcolor op de td).
+const FONT = "font-family: Arial, Helvetica, sans-serif;";
+
 function mailTekst({ voornaam, product, hoofdNummer, hoofdLink, romaNummer, romaLink }) {
-  const knop = (link, tekst) => `<div style="text-align: center; margin: 16px 0;"><a href="${link}" style="display: inline-block; background: #FF6B00; color: white; text-decoration: none; padding: 14px 40px; border-radius: 8px; font-weight: 600; font-size: 16px;">${tekst}</a></div>`;
-  return `<div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+  const knop = (link, tekst, kleur) => `
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto;">
+        <tr>
+          <td align="center" bgcolor="${kleur}" style="border-radius: 8px;">
+            <a href="${link}" style="display: inline-block; padding: 14px 36px; ${FONT} font-size: 16px; font-weight: bold; color: #ffffff; text-decoration: none;">${tekst}</a>
+          </td>
+        </tr>
+      </table>`;
 
-  <div style="background: #0a0a0a; padding: 24px 32px; text-align: center;">
-    <img src="https://cdn.prod.website-files.com/666ab30f0f595f63bc4b0971/666ab58ba2dd970e144ccb1c_logo-sonty.webp" alt="Sonty" style="height: 40px;" />
-  </div>
+  const offerteBlok = (kop, nummer, link, knopTekst) => `
+    <tr>
+      <td bgcolor="#f4f4f4" style="padding: 20px; border-radius: 12px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr><td align="center" style="${FONT} font-size: 16px; font-weight: bold; color: #333333; padding-bottom: 4px;">${kop}</td></tr>
+          <tr><td align="center" style="${FONT} font-size: 14px; color: #555555; padding-bottom: 16px;">Offertenummer ${nummer}</td></tr>
+          <tr><td align="center">${knop(link, knopTekst, '#FF6B00')}</td></tr>
+        </table>
+      </td>
+    </tr>
+    <tr><td height="16" style="font-size: 0; line-height: 0;">&nbsp;</td></tr>`;
 
-  <div style="padding: 32px;">
-    <p>Hoi ${voornaam || 'daar'},</p>
+  const tekstcel = (inhoud, extra) => `<tr><td style="${FONT} font-size: 15px; color: #333333; line-height: 24px; ${extra || ''}">${inhoud}</td></tr>`;
 
-    <p>Je ontving van ons een offerte voor je <strong>${product || 'zonwering'}</strong>. Omdat wij met twee A-merken werken, sturen we je hierbij ook het alternatief van het Duitse premiummerk <strong>ROMA</strong>. Zo kun je beide rustig naast elkaar leggen.</p>
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ebebeb">
+  <tr>
+    <td align="center" style="padding: 24px 12px;">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; max-width: 600px;">
 
-    <div style="background: #f8f8f8; border-radius: 12px; padding: 20px; margin: 24px 0;">
-      <p style="margin: 0 0 4px; font-weight: 600;">Je Sunmaster-offerte</p>
-      <p style="margin: 0; color: #555; font-size: 14px;">Offertenummer ${hoofdNummer}</p>
-      ${knop(hoofdLink, 'Bekijk je Sunmaster-offerte')}
-    </div>
+        <tr>
+          <td align="center" bgcolor="#0a0a0a" style="padding: 24px 32px;">
+            <img src="https://cdn.prod.website-files.com/666ab30f0f595f63bc4b0971/666ab58ba2dd970e144ccb1c_logo-sonty.webp" alt="Sonty" width="120" style="display: block; height: auto;" />
+          </td>
+        </tr>
 
-    <div style="background: #f8f8f8; border-radius: 12px; padding: 20px; margin: 24px 0;">
-      <p style="margin: 0 0 4px; font-weight: 600;">Je ROMA-offerte</p>
-      <p style="margin: 0; color: #555; font-size: 14px;">Offertenummer ${romaNummer}</p>
-      ${knop(romaLink, 'Bekijk je ROMA-offerte')}
-    </div>
+        <tr>
+          <td bgcolor="#ffffff" style="padding: 32px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              ${tekstcel(`Hoi ${voornaam || 'daar'},`, 'padding-bottom: 16px;')}
+              ${tekstcel(`Je ontving van ons een offerte voor je <strong>${product || 'zonwering'}</strong>. Omdat wij met twee A-merken werken, sturen we je hierbij ook het alternatief van het Duitse premiummerk <strong>ROMA</strong>. Zo kun je beide rustig naast elkaar leggen.`, 'padding-bottom: 24px;')}
+              ${offerteBlok('Je Sunmaster-offerte', hoofdNummer, hoofdLink, 'Bekijk je Sunmaster-offerte')}
+              ${offerteBlok('Je ROMA-offerte', romaNummer, romaLink, 'Bekijk je ROMA-offerte')}
+              <tr>
+                <td bgcolor="#0a0a0a" style="padding: 20px; border-radius: 12px;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr><td style="${FONT} font-size: 15px; font-weight: bold; color: #FF6B00; padding-bottom: 10px;">Waarom twee merken?</td></tr>
+                    <tr><td style="${FONT} font-size: 13px; color: #cccccc; line-height: 21px;">Beide zijn topkwaliteit. ROMA is de keuze als je n&eacute;t dat beetje extra wilt: dikker ge&euml;xtrudeerd aluminium, hogere windweerstandsklasse, poedercoating en 209 kleuren zonder meerprijs. In beide offertes staat wat je krijgt, zodat je eerlijk kunt vergelijken.</td></tr>
+                  </table>
+                </td>
+              </tr>
+              <tr><td height="24" style="font-size: 0; line-height: 0;">&nbsp;</td></tr>
+              ${tekstcel('Vragen, of een van de twee laten aanpassen? Reageer gerust op deze mail of app ons, we denken graag mee.', 'padding-bottom: 16px;')}
+              ${tekstcel('Groet,<br /><strong>Het Sonty team</strong>')}
+              <tr><td height="24" style="font-size: 0; line-height: 0;">&nbsp;</td></tr>
+              <tr><td align="center">${knop('https://wa.me/31850069681', 'WhatsApp ons direct', '#25D366')}</td></tr>
+            </table>
+          </td>
+        </tr>
 
-    <div style="background: #0a0a0a; border-radius: 12px; padding: 20px; margin: 24px 0; color: #fff;">
-      <p style="margin: 0 0 12px; font-weight: 600; color: #FF6B00;">Waarom twee merken?</p>
-      <p style="margin: 0; color: #ccc; font-size: 13px;">Beide zijn topkwaliteit. ROMA is de keuze als je n&eacute;t dat beetje extra wilt: dikker ge&euml;xtrudeerd aluminium, hogere windweerstandsklasse, poedercoating en 209 kleuren zonder meerprijs. In beide offertes staat wat je krijgt, zodat je eerlijk kunt vergelijken.</p>
-    </div>
+        <tr>
+          <td align="center" bgcolor="#f5f5f5" style="padding: 16px 32px; ${FONT} font-size: 12px; color: #999999; line-height: 18px;">
+            Sonty &mdash; Zonwering &amp; Raamdecoratie<br />
+            <a href="https://sonty.nl" style="color: #FF6B00; text-decoration: none;">sonty.nl</a> &nbsp;&middot;&nbsp; Frijdastraat 8F, Rijswijk &nbsp;&middot;&nbsp; 085 006 9681
+          </td>
+        </tr>
 
-    <p>Vragen, of een van de twee laten aanpassen? Reageer gerust op deze mail of app ons, we denken graag mee.</p>
-
-    <p>Groet,<br>
-    <strong>Het Sonty team</strong></p>
-  </div>
-
-  <div style="text-align: center; margin: 24px 0 0;">
-    <a href="https://wa.me/31850069681" style="display: inline-block; background: #25D366; color: white; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 14px;">WhatsApp ons direct</a>
-  </div>
-
-  <div style="background: #f5f5f5; padding: 16px 32px; text-align: center; font-size: 12px; color: #999;">
-    Sonty &mdash; Zonwering &amp; Raamdecoratie<br>
-    <a href="https://sonty.nl" style="color: #FF6B00;">sonty.nl</a>
-  </div>
-
-</div>`;
+      </table>
+    </td>
+  </tr>
+</table>`;
 }
 
 async function trengoContact(email, naam) {

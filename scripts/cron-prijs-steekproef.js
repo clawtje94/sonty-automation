@@ -44,11 +44,18 @@ function grab(name) {
   return m[0];
 }
 /* eslint-disable no-eval */
-eval(src.match(/const MK_UITVAL_COLS[\s\S]*?const MK_BEDIENING = \{[\s\S]*?\};/)[0]);
+// Alles in ÉÉN eval: function-declaraties lekken in sloppy mode naar module-scope, maar
+// const-declaraties blijven in de eval-scope. Alleen als consts en functies in dezelfde
+// eval zitten zien de functies de consts via hun closure. Losse evals gaven
+// "STANDAARD_KLEUREN_MAP is not defined" zodra de steekproef een kleuren-/markiesregel trok.
+const v4Snippets = [
+  src.match(/const MK_UITVAL_COLS[\s\S]*?const MK_BEDIENING = \{[\s\S]*?\};/)[0],
+  src.match(/const STANDAARD_KLEUREN_MAP = \{[\s\S]*?\};/)[0],
+];
 for (const fn of ['findNearest', 'getCategory', 'getProductKey', 'extractField', 'extractMaatFromDesc', 'lookupPrice', 'calculateCorrectPrice', 'isStandaardKleur', 'mkLookupMarkies', 'mkLookupBovenkap', 'mkLookupZijkap', 'mkGetTabel', 'mkTotaalExcl']) {
-  eval(grab(fn));
+  v4Snippets.push(grab(fn));
 }
-eval(src.match(/const STANDAARD_KLEUREN_MAP = \{[\s\S]*?\};/)[0]);
+eval(v4Snippets.join('\n'));
 
 async function rpGet(ep) {
   const r = await fetch(B + ep, { headers: H });
@@ -111,6 +118,10 @@ function bedTypeFromDesc(desc) {
       const firstLine = desc.split('\n')[0] || '';
       const fl = firstLine.toLowerCase();
       if (fl.includes('montage') || fl.includes('inmeten') || fl.includes('voorraad') || fl.includes('korting')) continue;
+      // Roma heeft een eigen prijsboek (netto × 1,15) — getProductKey zou "zipSCREEN.2" als
+      // Sunmaster-zipscreen prijzen en valse afwijkingen melden. Duo-offertes zijn bovendien
+      // machine-gegenereerd uit roma-prices-2025.json, dus buiten scope net als markiezen.
+      if (fl.includes('roma')) continue;
       if (l.pricePerUnit <= 0) continue;
       const pKey = getProductKey(firstLine);
       if (!pKey) continue; // markiezen/onbekende producten: buiten scope van de steekproef

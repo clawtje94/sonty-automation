@@ -271,7 +271,9 @@ Een rolluik is een buitenzonwering die volledig afsluit. Het bestaat uit alumini
 | Isolatie | Beperkt | Tot 30% besparing |
 | Geluidsdemping | Nee | Ja |
 | Windvast (ZIP) | Ja | Ja |
-| Prijs | Goedkoper | Duurder |
+| Prijs | Duurder | Goedkoper |
+
+**Let op prijsverhouding (gecorrigeerd 2026-07-06):** screens zijn DUURDER dan rolluiken, niet andersom. Team bevestigt dit meermaals aan klanten: "het is gek maar screens zijn duurder als rolluiken!" Uitleg voor de klant: "dat komt omdat er eigenlijk in zip screens meer techniek zit als in een rolluik" — het doek zit met een rits (ZIP) in de geleiders, bij een rolluik lopen de lamellen er gewoon tussen.
 
 ---
 
@@ -963,3 +965,56 @@ Dan kan ik je precies vertellen welk product het beste past bij jouw situatie."
 - Klant kiest Screen Square → noem voordelen Zip Design 110
 - Klant kiest SunBasic → noem voordelen SunEye (cassette)
 - Klant heeft buitenzonwering → cross-sell binnenraamdecoratie in showroom
+
+---
+
+## DEEL 21: UPDATE UIT WHATSAPP-GESPREKKEN (22 juni – 6 juli 2026)
+
+Gedistilleerd uit 1.137 echte WhatsApp-tickets. Alles hieronder komt letterlijk uit team-antwoorden (bron-tickets gearchiveerd in data/ks-analyse/nieuwe-leerpunten-1/2/3.md).
+
+### Kortingen — hoe het echt werkt
+- Er loopt een doorlopende **15% actiekorting op (bijna) alle maatwerk-zonwering** en **20% op voorraadschermen**. Kortingen stapelen NOOIT: voorraadscherm = 20%, niet 20%+15%. Standaardzin: "er zit 15% korting op al onze zonwering en 20% op voorraadschermen."
+- **Burenkorting**: als 2+ buren samen bestellen (minimaal 2 producten per buur) én tekenen, inmeten en montage gelijktijdig kunnen, kan het team 20% op het totaal geven. Nooit meer dan 20% met buren. Vanaf ±5 buren / €35k+ kan een projectprijs (max 20-22,5%).
+- Collega's geven bij prijsbezwaar soms discretionair 2,5% tot 5% extra boven op de 15% (bv. bij snel akkoord). **De AI onderhandelt NOOIT zelf over korting** (regel Deel 20 blijft), maar mag wél zeggen dat een collega meekijkt naar de prijs — dat is een zinvolle route, collega's onderhandelen echt.
+- Bij meerdere producten op één adres kan het team montagekosten deels laten vervallen ("2 montages eraf omdat we alles op 1 locatie doen").
+
+### Concrete bedragen die het team noemt (voor context, niet zelf beloven)
+- Hoogwerker: €600-650. Uitvalscherm-montage: €220. Tahoma Switch: €195.
+- Screen zonder ZIP (niet-windvast): €300-400 per screen goedkoper, vuistregel 30-40% van de prijs. Windkracht 2-3 maximaal, "daar wil je niet overheen".
+- Draaischakelaar i.p.v. afstandsbediening: ca. €89 per screen goedkoper. Handbediend scheelt fors (voorbeeld markies: €805).
+- Solar vs. bedraad rolluik: €200-300 per rolluik. Solar-upgrade screens in de praktijk €190-428 afhankelijk van maat.
+- RAL 9007-cassette: meerprijs ±€241 per screen.
+- Doek vervangen op bestaand scherm: aparte dienst, richtprijs ±€1.600 incl. demontage/afvoer/montage; kan lange wachttijd hebben in het seizoen. Herbekleden van markiezen doen we ook.
+
+### Roma — breder inzetbaar dan alleen 0%-doek
+- Roma is het antwoord bij: (1) niet-standaard RAL-kleuren op rolluiken ("vrijwel zelfde prijs als Sunmaster+RAL-meerprijs, maar dikker aluminium, 2x gepoedercoat en alle 209 RAL-kleuren"), (2) maten boven de Sunmaster-grenzen ("een screen met deze hoogte wordt automatisch van het merk ROMA"), (3) rolluiken met geïntegreerde insectenhor (alleen Roma .XP). Roma is ±€300-400 duurder per rolluik maar heeft snellere levertijd.
+
+### Planning en proces
+- Na akkoord neemt planning **binnen 3 werkdagen** contact op voor de inmeetafspraak. Inmeten zelf: 2-3 weken wachttijd, daarna 8-10 weken tot montage (hoogseizoen: rond de 10 weken).
+- Monteurs komen met een marge van ±1 uur rond de afgesproken tijd.
+- Montage uitstellen na tekenen (bv. verbouwing) kan maanden, geen probleem — wel doorgeven aan planning.
+- Technische vragen ná montage (bv. palen verzetten): direct naar Joey/montageafdeling, 085 006 9681 — niet via sales afhandelen.
+
+### Kleine feiten en formuleringen die werken
+- Minimale breedte elektrisch screen: 600mm. Smaller (bv. 480mm): screendoek met tourniquettes (vast, niet elektrisch) als alternatief.
+- Uitval berekenen bij uitvalscherm: kozijnmaat + 20, gedeeld door 2. Leg "uitval" altijd even uit (afstand scherm tot muur) — klanten verwarren het met doeklengte.
+- Glans vs. structuur: "glans is glad en licht reflecterend, structuur heeft een matte afwerking met een subtiel, voelbaar korreltje."
+- Onderhoud lamellen: 1x per half jaar laten meenemen door de glazenwasser houdt ze goed.
+- Verlengde muursteunen zijn ook de oplossing bij een niet-stevige muur (niet alleen bij overstek/dakgoot).
+- Prijsbezwaar: benoem regel-voor-regel concrete besparingen met bedragen (cassettekleur, bediening, zonder ZIP) i.p.v. algemeen "er zijn alternatieven". Waardeframing: "het product gaat 20 jaar mee, dan betaal je ±€175 per jaar."
+- Pergola te duur → knikarmscherm aanbieden: "houdt ook zon en warmte tegen, alleen niet windvast zoals een pergola, maar scheelt aanzienlijk in kosten."
+- Vergelijken met bouwmarkt: "vergelijk de Hornbach/Karwei niet met ons — qua prijs winnen we dat nooit, qua kwaliteit en levensduur zeker." Rainbow verkopen we bewust niet.
+- Zonnepanelen doen we niet (alleen zonwering) — klanten vragen dit soms.
+- "Offerte niet ontvangen" → eerst spamfolder laten checken.
+- Glazen serre: reken erop dat er vaak nog serre-zonwering bij nodig is (4-6k extra) voor hetzelfde effect.
+- Voorraadscherm heeft een VASTE maat 5000×3000mm; andere maat = maatwerk (15% i.p.v. 20% korting, langere levertijd). Leg het verschil actief uit als een klant "3 weken levertijd" verwacht bij maatwerk.
+- Offertefout gemeld door klant (verkeerde kleur/bediening/aantal/product)? Direct erkennen dat dit een bekende invoerfout kan zijn en een collega laten corrigeren — niet wegredeneren.
+- Follow-up-toon: als een klant al aangaf te willen nadenken, kort reageren en niet alles herhalen — te lange "we laten je met rust"-berichten irriteren juist.
+
+### NIET ZELF BEWEREN — eerst bevestiging van Daimy (tegenstrijdig aangetroffen)
+- Montagegarantie: kennisbank zegt 2 jaar, team zei ergens 3 jaar → escaleren bij garantievragen over montage.
+- Levensduur: officiële lijn blijft 15-20 jaar (team zei eenmalig informeel "25-30 jaar" — niet overnemen).
+- RAL 9001 / gebroken wit: staat als standaardkleur (8-10 weken), maar één collega noemde 10-12 weken → bij twijfel escaleren.
+- Pergoladoek: officiële lijn is waterafstotend maar NIET 100% waterdicht; bij storm doek inrollen. (Eén collega zei "waterdicht" — niet overnemen.)
+- Geldigheid offerte: meestal "7 dagen" gecommuniceerd, soms "tot einde maand" → geen vaste termijn beloven, verwijzen naar wat er op de offerte zelf staat.
+- Einddatum van de 15%-actie is niet vastgelegd → nooit een einddatum noemen of verzinnen.

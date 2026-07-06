@@ -1,0 +1,18 @@
+{
+  "omschrijving": "Klanten die op 2026-07-06 per WhatsApp de Roma duo-offerte-link kregen i.p.v. hun hoofdofferte (bug in WA-linkkeuze v4, gefixt in commit dc2fdc0). Wacht op keuze Daimy: alsnog juiste link sturen / handmatig / laten.",
+  "klanten": [
+    { "naam": "Danielle V wijk", "romaLink": "20268818", "hoofdofferte": "20268816", "waVerstuurd": "2026-07-06T11:04:33.428Z" },
+    { "naam": "Onno Lookermans", "romaLink": "20268820", "hoofdofferte": "20268811", "waVerstuurd": "2026-07-06T11:04:47.768Z" },
+    { "naam": "Viktor Vijverberh", "romaLink": "20268827", "hoofdofferte": "20268798", "waVerstuurd": "2026-07-06T11:05:32.549Z" },
+    { "naam": "Zia Ladrak Ladrak", "romaLink": "20268831", "hoofdofferte": "20268790", "waVerstuurd": "2026-07-06T11:05:59.174Z" },
+    { "naam": "Ronald Bouman", "romaLink": "20268832", "hoofdofferte": "20268789", "waVerstuurd": "2026-07-06T11:06:02.829Z" },
+    { "naam": "Claudia Haakman", "romaLink": "20268834", "hoofdofferte": "20268786", "waVerstuurd": "2026-07-06T11:06:10.543Z" },
+    { "naam": "Anton Simone", "romaLink": "20268839", "hoofdofferte": "20268765", "waVerstuurd": "2026-07-06T11:07:11.618Z" },
+    { "naam": "Victoria Vermeeren", "romaLink": "20268841", "hoofdofferte": "20268763", "waVerstuurd": "2026-07-06T11:07:20.374Z" },
+    { "naam": "Cees Willigenburg", "romaLink": "20268842", "hoofdofferte": "20268761", "waVerstuurd": "2026-07-06T11:07:23.954Z" },
+    { "naam": "Teunis de Haas", "romaLink": "20268843", "hoofdofferte": "20268760", "waVerstuurd": "2026-07-06T11:07:27.574Z" },
+    { "naam": "Nick Heemskerk", "romaLink": "20268848", "hoofdofferte": "20268745", "waVerstuurd": "2026-07-06T11:08:04.756Z" },
+    { "naam": "Wendy Raczewski", "romaLink": "20268871", "hoofdofferte": "20268855", "waVerstuurd": "2026-07-06T15:05:00.602Z" },
+    { "naam": "Manuela  Burhenne", "romaLink": "20268873", "hoofdofferte": "20268853", "waVerstuurd": "2026-07-06T15:05:08.934Z" }
+  ]
+}

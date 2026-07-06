@@ -53,21 +53,10 @@ Naast Sunmaster werken wij met het Duitse premiummerk ROMA. Beide zijn topkwalit
 De prijzen staan hieronder, inclusief Somfy-motor met afstandsbediening (zelfde uitvoering als in uw andere offerte) en montage door ons eigen team. Zo kunt u beide offertes rustig naast elkaar leggen.`;
 
 /**
- * Maakt het Roma duo-document naast een bestaande Sunmaster-offerte.
- * @param {string} documentId — de bron-offerte (Sunmaster)
- * @returns {{ok, romaDocumentId, romaNummer, link, regels, overgeslagen} | {skip} | {error}}
+ * Bouwt de Roma-prijsregels op basis van de prijsregelgroep van een bron-offerte.
+ * @returns {{romaLines, overgeslagen} | {skip, overgeslagen}}
  */
-async function maakRomaDuo(documentId) {
-  const H = { Authorization: 'Bearer ' + rpKey(), 'Content-Type': 'application/json' };
-  const bron = await (await fetch(`${RP}/document-service/v1/${RP_PID}/quotations/${documentId}`, { headers: H })).json();
-  const bronQd = bron.quotationData;
-  if (!bronQd) return { error: 'bron-offerte niet gevonden' };
-  const bronPlg = bronQd.segments?.defaultTemplatePriceLineGroup?.data;
-  if (!bronPlg) return { error: 'bron-offerte zonder prijsregels' };
-
-  // Al een Roma-versie? Nooit dubbel maken.
-  if (bronPlg.lines.some(l => /\bROMA\b/i.test(l.description || ''))) return { skip: 'bron is zelf al een Roma-offerte' };
-
+function bouwRomaLines(bronPlg) {
   const romaLines = [];
   const overgeslagen = [];
   const montages = new Map(); // montageTitel → {prijs, aantal}
@@ -105,6 +94,28 @@ async function maakRomaDuo(documentId) {
       pricePerUnit: m.prijs, imageUri: null, vatPercentage: 21, discount: null, position: null, lockTotalPrice: false,
     });
   }
+  return { romaLines, overgeslagen };
+}
+
+/**
+ * Maakt het Roma duo-document naast een bestaande Sunmaster-offerte.
+ * @param {string} documentId — de bron-offerte (Sunmaster)
+ * @returns {{ok, romaDocumentId, romaNummer, link, regels, overgeslagen} | {skip} | {error}}
+ */
+async function maakRomaDuo(documentId) {
+  const H = { Authorization: 'Bearer ' + rpKey(), 'Content-Type': 'application/json' };
+  const bron = await (await fetch(`${RP}/document-service/v1/${RP_PID}/quotations/${documentId}`, { headers: H })).json();
+  const bronQd = bron.quotationData;
+  if (!bronQd) return { error: 'bron-offerte niet gevonden' };
+  const bronPlg = bronQd.segments?.defaultTemplatePriceLineGroup?.data;
+  if (!bronPlg) return { error: 'bron-offerte zonder prijsregels' };
+
+  // Al een Roma-versie? Nooit dubbel maken.
+  if (bronPlg.lines.some(l => /\bROMA\b/i.test(l.description || ''))) return { skip: 'bron is zelf al een Roma-offerte' };
+
+  const gebouwd = bouwRomaLines(bronPlg);
+  if (gebouwd.skip) return gebouwd;
+  const { romaLines, overgeslagen } = gebouwd;
 
   // Nieuw document op basis van de bron (zelfde klant/opmaak), eigen nummer
   const qd = JSON.parse(JSON.stringify(bronQd));
@@ -134,4 +145,4 @@ async function maakRomaDuo(documentId) {
   };
 }
 
-module.exports = { maakRomaDuo, romaEquivalent, romaPrijsIncl };
+module.exports = { maakRomaDuo, romaEquivalent, romaPrijsIncl, bouwRomaLines };

@@ -1926,8 +1926,18 @@ async function main() {
 
     // Haal offerte-link op
     const docData = await rpGet('/document-service/v1/' + PID + '/quotations?lead_configuration_id=' + lcId);
-    // Alleen SENT offertes (niet DRAFT) — zoals oude cron
-    const docs = (docData?.quotationDatas || []).filter(d => d.quotationStatus === 'SENT' || d.quotationStatus === 'ACCEPTED');
+    // Alleen SENT offertes (niet DRAFT) — zoals oude cron.
+    // Roma duo-offertes uitsluiten: die zijn nieuwer dan de hoofdofferte en werden
+    // anders als "de" offerte-link gestuurd (13 klanten kregen op 6 juli de Roma-link
+    // i.p.v. hun hoofdofferte). Tot Daimy beslist of de klant beide links krijgt,
+    // sturen we alleen de hoofdofferte.
+    let romaDuoDocIds = new Set();
+    try {
+      const duoLog = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'roma-duo-gemaakt.json'), 'utf8'));
+      romaDuoDocIds = new Set(Object.values(duoLog).map(d => d.romaDocumentId));
+    } catch {}
+    const docs = (docData?.quotationDatas || []).filter(d =>
+      (d.quotationStatus === 'SENT' || d.quotationStatus === 'ACCEPTED') && !romaDuoDocIds.has(d.documentId));
     docs.sort((a, b) => (b.quotationCreationTimestamp || 0) - (a.quotationCreationTimestamp || 0));
     if (!docs[0]) continue;
 

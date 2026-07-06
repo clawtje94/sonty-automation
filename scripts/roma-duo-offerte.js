@@ -12,11 +12,22 @@ const RP_PID = CFG.RP_PID;
 function rpKey() { return CFG.RP_API_KEY; }
 const RP = 'https://backend.reuzenpanda.nl';
 
-// Sunmaster-producttitel → Roma-equivalent
-function romaEquivalent(titel) {
+// Sunmaster-producttitel → Roma-equivalent. Solar-bron → solar-tabel + solar-motor:
+// anders vergelijkt de klant een solar-Sunmaster met een bedrade Roma en lijkt Roma
+// kunstmatig even duur (Roma solar is ±€300/element duurder, aparte prijsmatrix).
+function romaEquivalent(titel, beschrijving) {
   const t = titel.toLowerCase();
-  if (/rolluik|s-37|s-42|rollsuper/.test(t)) return { key: 'voorzetrolluik_xp', naam: 'ROMA geëxtrudeerd voorzetrolluik .XP', montageTitel: 'rolluik' };
-  if (/zip|screen/.test(t)) return { key: 'zipscreen2', naam: 'ROMA zipSCREEN.2 (windvast ritsscreen)', montageTitel: 'screen' };
+  const solar = /solar/i.test(beschrijving || titel);
+  if (/rolluik|s-37|s-42|rollsuper/.test(t)) {
+    return solar
+      ? { key: 'voorzetrolluik_xp_solar', naam: 'ROMA geëxtrudeerd voorzetrolluik .XP Solar', montageTitel: 'rolluik', motor: 'Somfy RS100 Solar io (op zonne-energie, geen bekabeling nodig, inclusief ingeleerde handzender)', solar }
+      : { key: 'voorzetrolluik_xp', naam: 'ROMA geëxtrudeerd voorzetrolluik .XP', montageTitel: 'rolluik', motor: 'Somfy io (inclusief ingeleerde handzender)', solar };
+  }
+  if (/zip|screen/.test(t)) {
+    return solar
+      ? { key: 'zipscreen2_solar', naam: 'ROMA zipSCREEN.2 Solar (windvast ritsscreen)', montageTitel: 'screen', motor: 'Somfy Solar io (op zonne-energie, geen bekabeling nodig, inclusief ingeleerde handzender)', solar }
+      : { key: 'zipscreen2', naam: 'ROMA zipSCREEN.2 (windvast ritsscreen)', montageTitel: 'screen', motor: 'Somfy io (inclusief ingeleerde handzender)', solar };
+  }
   return null;
 }
 
@@ -39,7 +50,7 @@ Naast Sunmaster werken wij met het Duitse premiummerk ROMA. Beide zijn topkwalit
 - Keuze uit 209 kleuren (mat en structuur) zonder meerprijs, voor kast, geleiders én onderlijst
 - Design-onderlijst, RVS-schroeven en blinde bevestiging standaard
 - 5 jaar fabrieksgarantie (7 jaar op de solar-motor) plus onze eigen montagegarantie
-De prijzen staan hieronder, inclusief Somfy io-motor met afstandsbediening en montage door ons eigen team. Zo kunt u beide offertes rustig naast elkaar leggen.`;
+De prijzen staan hieronder, inclusief Somfy-motor met afstandsbediening (zelfde uitvoering als in uw andere offerte) en montage door ons eigen team. Zo kunt u beide offertes rustig naast elkaar leggen.`;
 
 /**
  * Maakt het Roma duo-document naast een bestaande Sunmaster-offerte.
@@ -64,7 +75,7 @@ async function maakRomaDuo(documentId) {
   for (const l of bronPlg.lines) {
     const titel = (l.description || '').split('\n')[0].replace(/\*\*/g, '').trim();
     if (/inmeten|montage|korting|actie|waarom/i.test(titel)) continue;
-    const eq = romaEquivalent(titel);
+    const eq = romaEquivalent(titel, l.description || '');
     if (!eq) continue; // knikarmschermen etc: geen Roma-equivalent in de tool
     const b = (l.description.match(/Breedte:\s*(\d+)\s*mm/i) || [])[1];
     const h = (l.description.match(/Hoogte:\s*(\d+)\s*mm/i) || [])[1];
@@ -73,7 +84,7 @@ async function maakRomaDuo(documentId) {
     if (prijs == null) { overgeslagen.push(titel + ` (${b}×${h}mm buiten Roma-leverprogramma)`); continue; }
     romaLines.push({
       units: l.units || 1,
-      description: `**${eq.naam}**\nBreedte: ${b} mm\nHoogte: ${h} mm\nBediening: Elektrisch met afstandsbediening\nMotor: Somfy io (inclusief ingeleerde handzender)\nFrame- en pantserkleur: naar keuze uit 209 RAL-kleuren (mat/structuur) zonder meerprijs\nGarantie: 3 jaar montage | 5 jaar ROMA fabrieksgarantie | 7 jaar op solar-motor`,
+      description: `**${eq.naam}**\nBreedte: ${b} mm\nHoogte: ${h} mm\nBediening: Elektrisch met afstandsbediening\nMotor: ${eq.motor}\nFrame- en pantserkleur: naar keuze uit 209 RAL-kleuren (mat/structuur) zonder meerprijs\nGarantie: 3 jaar montage | 5 jaar ROMA fabrieksgarantie${eq.solar ? ' | 7 jaar op solar-motor' : ''}`,
       pricePerUnit: prijs, imageUri: null, vatPercentage: 21, discount: null, position: null, lockTotalPrice: false,
     });
     const mBron = bronPlg.lines.find(x => new RegExp('inmeten \\+ montage.*' + eq.montageTitel, 'i').test((x.description || '').split('\n')[0]));

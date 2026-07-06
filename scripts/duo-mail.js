@@ -8,23 +8,53 @@ const TRENGO_TOKEN = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt
 const AANVRAGEN_CHANNEL = 1363384; // EMAIL "Aanvragen" (aanvragen@sonty.nl)
 const TH = { Authorization: 'Bearer ' + TRENGO_TOKEN, 'Content-Type': 'application/json' };
 
+// Zelfde huisstijl als templates/emails/*.html (logo-header, oranje knoppen, je-vorm)
 function mailTekst({ voornaam, product, hoofdNummer, hoofdLink, romaNummer, romaLink }) {
-  return [
-    `Beste ${voornaam || 'klant'},`,
-    '',
-    `U ontving van ons een offerte voor uw ${product || 'zonwering'}. Omdat wij met twee A-merken werken, ontvangt u hierbij ook het alternatief van het Duitse premiummerk ROMA. Zo kunt u beide rustig naast elkaar leggen.`,
-    '',
-    `Uw Sunmaster-offerte (nr ${hoofdNummer}):`,
-    hoofdLink,
-    '',
-    `Uw ROMA-offerte (nr ${romaNummer}):`,
-    romaLink,
-    '',
-    'Vragen, of een van de twee laten aanpassen? Reageer gerust op deze mail of app ons.',
-    '',
-    'Met zonnige groet,',
-    'Team Sonty',
-  ].join('\n');
+  const knop = (link, tekst) => `<div style="text-align: center; margin: 16px 0;"><a href="${link}" style="display: inline-block; background: #FF6B00; color: white; text-decoration: none; padding: 14px 40px; border-radius: 8px; font-weight: 600; font-size: 16px;">${tekst}</a></div>`;
+  return `<div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+
+  <div style="background: #0a0a0a; padding: 24px 32px; text-align: center;">
+    <img src="https://cdn.prod.website-files.com/666ab30f0f595f63bc4b0971/666ab58ba2dd970e144ccb1c_logo-sonty.webp" alt="Sonty" style="height: 40px;" />
+  </div>
+
+  <div style="padding: 32px;">
+    <p>Hoi ${voornaam || 'daar'},</p>
+
+    <p>Je ontving van ons een offerte voor je <strong>${product || 'zonwering'}</strong>. Omdat wij met twee A-merken werken, sturen we je hierbij ook het alternatief van het Duitse premiummerk <strong>ROMA</strong>. Zo kun je beide rustig naast elkaar leggen.</p>
+
+    <div style="background: #f8f8f8; border-radius: 12px; padding: 20px; margin: 24px 0;">
+      <p style="margin: 0 0 4px; font-weight: 600;">Je Sunmaster-offerte</p>
+      <p style="margin: 0; color: #555; font-size: 14px;">Offertenummer ${hoofdNummer}</p>
+      ${knop(hoofdLink, 'Bekijk je Sunmaster-offerte')}
+    </div>
+
+    <div style="background: #f8f8f8; border-radius: 12px; padding: 20px; margin: 24px 0;">
+      <p style="margin: 0 0 4px; font-weight: 600;">Je ROMA-offerte</p>
+      <p style="margin: 0; color: #555; font-size: 14px;">Offertenummer ${romaNummer}</p>
+      ${knop(romaLink, 'Bekijk je ROMA-offerte')}
+    </div>
+
+    <div style="background: #0a0a0a; border-radius: 12px; padding: 20px; margin: 24px 0; color: #fff;">
+      <p style="margin: 0 0 12px; font-weight: 600; color: #FF6B00;">Waarom twee merken?</p>
+      <p style="margin: 0; color: #ccc; font-size: 13px;">Beide zijn topkwaliteit. ROMA is de keuze als je n&eacute;t dat beetje extra wilt: dikker ge&euml;xtrudeerd aluminium, hogere windweerstandsklasse, poedercoating en 209 kleuren zonder meerprijs. In beide offertes staat wat je krijgt, zodat je eerlijk kunt vergelijken.</p>
+    </div>
+
+    <p>Vragen, of een van de twee laten aanpassen? Reageer gerust op deze mail of app ons, we denken graag mee.</p>
+
+    <p>Groet,<br>
+    <strong>Het Sonty team</strong></p>
+  </div>
+
+  <div style="text-align: center; margin: 24px 0 0;">
+    <a href="https://wa.me/31850069681" style="display: inline-block; background: #25D366; color: white; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 14px;">WhatsApp ons direct</a>
+  </div>
+
+  <div style="background: #f5f5f5; padding: 16px 32px; text-align: center; font-size: 12px; color: #999;">
+    Sonty &mdash; Zonwering &amp; Raamdecoratie<br>
+    <a href="https://sonty.nl" style="color: #FF6B00;">sonty.nl</a>
+  </div>
+
+</div>`;
 }
 
 async function trengoContact(email, naam) {

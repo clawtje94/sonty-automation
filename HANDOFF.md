@@ -15,7 +15,7 @@
   - Reageert LIVE, maar ALLEEN op de 3 whitelist-testnummers (config.js TEST_LIVE_PHONES): 31683500506 (Daimy), 31636516410 (Jarne), 31628209480.
   - Stopt na het watch-venster; herstart met bovenstaande regel (nohup verplicht, anders kilt de Bash-timeout hem). Check: `ps aux | grep "[d]aemon.js --watch"`.
   - MODE is SHADOW tenzij `scripts/ai-ks/.live-enabled` bestaat met inhoud "JA ECHT" (alleen Daimy mag dat aanmaken). Whitelist-nummers krijgen wél echte antwoorden via de dubbele check.
-- **launchd crons** (~/Library/LaunchAgents/nl.sonty.*): o.a. offerte-v4 (productie offertecontrole), telegram-poll. Herinnerings-WhatsApps (followup-whatsapp) staan UIT sinds 3 juli (WhatsApp spam-waarschuwing) — plist in ~/Library/LaunchAgents/uitgeschakeld/, NIET heraanzetten zonder opdracht.
+- **launchd crons** (~/Library/LaunchAgents/nl.sonty.*): o.a. offerte-v4 (productie offertecontrole), telegram-poll. **ALLE herinnerings-WhatsApp-crons staan UIT (Meta-blokkeringsrisico, opdracht Daimy):** followup-whatsapp (sinds 3 juli), + followup (followup-offertes.js) en followup-3d (followup-3dagen.js) sinds 7 juli. Alle drie plists in ~/Library/LaunchAgents/uitgeschakeld/, NIET heraanzetten zonder expliciete opdracht. LET OP: followup-offertes.js stuurde 7 juli nog 50 herinneringen (2626 in wachtrij) vóór het uitzetten — dát was de spam. offerte-v4 stuurt nog wél de transactionele offerte-LINK-WhatsApp (template offerte_met_link 235187, 11-68/run); wacht op Daimy of dat ook uit moet.
 
 ## Wat deze sessie (3-5 juli) is gebouwd — AI-KS (`scripts/ai-ks/`)
 Autonome AI-klantenservice (Opus 4.8, persona "Jaimy"), shadow + live-op-whitelist. Kernregels in system-prompt.js:

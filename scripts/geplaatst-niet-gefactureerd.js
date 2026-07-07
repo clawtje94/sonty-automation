@@ -58,25 +58,49 @@ async function haalAlles(entity, fields, filters) {
     ['invoice.id', 'invoice.number', 'invoice.subject', 'invoice.totalinclvat', 'invoice.totalpayed', 'invoice.company', 'invoice.date', 'invoice.status'],
     []);
 
-  // Facturen koppelen: "(NNNN)" in subject = opdracht/offerte-nummer; anders via company
+  // Facturen koppelen: "(NNNN)" in subject = opdracht/offerte-nummer; anders via company.
+  // Facturen met nummer-match worden EXCLUSIEF aan die opdracht toegerekend; de rest
+  // van de facturen van een klant wordt op KLANTNIVEAU vergeleken met de rest van de
+  // opdrachten van die klant. Zo kan een klant met meerdere opdrachten nooit dubbel
+  // tellen (waardoor een niet-gefactureerde opdracht onterecht uit de lijst zou vallen).
   const factByNummer = {}; // opdrachtnummer → [facturen]
-  const factByCompany = {};
+  const factByCompanyRest = {}; // companyId → [facturen zonder herkenbaar opdrachtnummer]
+  const projectNummers = new Set(projecten.map(p => p.number));
   for (const f of facturen) {
     const m = (f.subject || '').match(/\((\d{3,5})\)/);
-    if (m) (factByNummer[Number(m[1])] = factByNummer[Number(m[1])] || []).push(f);
-    const cid = f.company?.id;
-    if (cid) (factByCompany[cid] = factByCompany[cid] || []).push(f);
+    const nr = m ? Number(m[1]) : null;
+    if (nr && projectNummers.has(nr)) {
+      (factByNummer[nr] = factByNummer[nr] || []).push(f);
+    } else {
+      const cid = f.company?.id;
+      if (cid) (factByCompanyRest[cid] = factByCompanyRest[cid] || []).push(f);
+    }
   }
+
+  const projPerCompany = {};
+  for (const p of projecten) if (p.company?.id) (projPerCompany[p.company.id] = projPerCompany[p.company.id] || []).push(p);
 
   const open = [];
   for (const p of projecten) {
     const totaal = Number(p.totalinclvat || 0);
     if (totaal <= 0) continue;
-    let fs_ = factByNummer[p.number] || [];
-    if (!fs_.length && p.company?.id) fs_ = factByCompany[p.company.id] || [];
-    const gefactureerd = fs_.reduce((s, f) => s + Number(f.totalinclvat || 0), 0);
+    const direct = factByNummer[p.number] || [];
+    const directBedrag = direct.reduce((s, f) => s + Number(f.totalinclvat || 0), 0);
+    // Restfacturen van de klant naar rato verdelen over diens opdrachten ZONDER
+    // volledige nummer-dekking (chronologie is niet betrouwbaar te herleiden).
+    const rest = p.company?.id ? (factByCompanyRest[p.company.id] || []) : [];
+    const restBedragKlant = rest.reduce((s, f) => s + Number(f.totalinclvat || 0), 0);
+    const broersZonderDekking = (projPerCompany[p.company?.id] || []).filter(q => {
+      const qDirect = (factByNummer[q.number] || []).reduce((s, f) => s + Number(f.totalinclvat || 0), 0);
+      return qDirect / Number(q.totalinclvat || 1) < 0.95;
+    });
+    const totaalBroers = broersZonderDekking.reduce((s, q) => s + Number(q.totalinclvat || 0), 0) || 1;
+    const isBroer = broersZonderDekking.some(q => q.number === p.number);
+    const restAandeel = isBroer ? restBedragKlant * (totaal / totaalBroers) : 0;
+    const gefactureerd = directBedrag + restAandeel;
     const dekking = totaal > 0 ? gefactureerd / totaal : 1;
     if (dekking >= 0.95) continue; // volledig gefactureerd (eindfactuur is er)
+    const meerdereOpdrachten = (projPerCompany[p.company?.id] || []).length > 1 && restBedragKlant > 0;
     open.push({
       nummer: p.number,
       naam: p.name,
@@ -85,9 +109,10 @@ async function haalAlles(entity, fields, filters) {
       opdrachtInclVat: totaal,
       gefactureerd: Math.round(gefactureerd * 100) / 100,
       dekkingPct: Math.round(dekking * 100),
-      aantalFacturen: fs_.length,
+      aantalFacturen: direct.length + (isBroer ? rest.length : 0),
+      bedragNota: meerdereOpdrachten ? 'klant heeft meerdere opdrachten — bedrag naar rato, check' : '',
       opdrachtDatum: p.createdon?.date?.slice(0, 10) || '',
-      factuurDatums: fs_.map(f => (f.date?.date || '').slice(0, 10)).filter(Boolean),
+      factuurDatums: [...direct, ...(isBroer ? rest : [])].map(f => (f.date?.date || '').slice(0, 10)).filter(Boolean),
     });
   }
   open.sort((a, b) => (a.opdrachtDatum || '').localeCompare(b.opdrachtDatum || ''));

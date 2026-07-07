@@ -8,24 +8,11 @@
   "gefactureerd": 5405.09,
   "dekkingPct": 81,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2022-05-11",
   "factuurDatums": [
    "2022-05-11",
    "2022-09-14"
-  ]
- },
- {
-  "nummer": 1197,
-  "naam": "Prijsopgaaf zonwering.",
-  "klant": "VOF Rudie Otten's fruithandel",
-  "companyId": 95790,
-  "opdrachtInclVat": 3039.8,
-  "gefactureerd": 911.94,
-  "dekkingPct": 30,
-  "aantalFacturen": 1,
-  "opdrachtDatum": "2022-07-27",
-  "factuurDatums": [
-   "2022-07-27"
   ]
  },
  {
@@ -37,6 +24,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 4,
+  "bedragNota": "",
   "opdrachtDatum": "2023-02-26",
   "factuurDatums": [
    "2023-02-26",
@@ -54,6 +42,7 @@
   "gefactureerd": -496.5,
   "dekkingPct": -30,
   "aantalFacturen": 5,
+  "bedragNota": "",
   "opdrachtDatum": "2023-03-05",
   "factuurDatums": [
    "2023-03-15",
@@ -72,6 +61,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2023-03-22",
   "factuurDatums": [
    "2023-03-22",
@@ -86,13 +76,16 @@
   "opdrachtInclVat": 4443.8,
   "gefactureerd": 0,
   "dekkingPct": 0,
-  "aantalFacturen": 4,
+  "aantalFacturen": 6,
+  "bedragNota": "",
   "opdrachtDatum": "2023-03-24",
   "factuurDatums": [
    "2023-03-24",
    "2023-04-21",
    "2023-04-21",
-   "2023-04-21"
+   "2023-04-21",
+   "2023-04-21",
+   "2023-07-11"
   ]
  },
  {
@@ -104,6 +97,7 @@
   "gefactureerd": 799.99,
   "dekkingPct": 26,
   "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2023-04-01",
   "factuurDatums": [
    "2023-04-01",
@@ -120,6 +114,7 @@
   "gefactureerd": 1590,
   "dekkingPct": 30,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2023-06-17",
   "factuurDatums": [
    "2023-06-17"
@@ -134,6 +129,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2023-07-18",
   "factuurDatums": [
    "2023-07-18",
@@ -149,6 +145,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2023-08-15",
   "factuurDatums": [
    "2023-08-15",
@@ -164,6 +161,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2023-08-25",
   "factuurDatums": [
    "2023-08-30",
@@ -171,22 +169,17 @@
   ]
  },
  {
-  "nummer": 2003,
-  "naam": "Prijsopgaaf Zonwering Sportlaan 22",
-  "klant": "Expat Residence Real Estate",
-  "companyId": 96434,
-  "opdrachtInclVat": 2014.38,
-  "gefactureerd": 604.32,
-  "dekkingPct": 30,
-  "aantalFacturen": 5,
-  "opdrachtDatum": "2024-03-13",
-  "factuurDatums": [
-   "2024-03-13",
-   "2024-03-13",
-   "2024-03-13",
-   "2024-04-26",
-   "2024-04-26"
-  ]
+  "nummer": 1985,
+  "naam": "Menno",
+  "klant": "Sjoerd Hoogduin.",
+  "companyId": 96366,
+  "opdrachtInclVat": 1032.51,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2024-03-06",
+  "factuurDatums": []
  },
  {
   "nummer": 2062,
@@ -197,6 +190,7 @@
   "gefactureerd": 395.79,
   "dekkingPct": 30,
   "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2024-04-03",
   "factuurDatums": [
    "2024-04-03",
@@ -213,6 +207,7 @@
   "gefactureerd": 1556.8,
   "dekkingPct": 40,
   "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2024-04-09",
   "factuurDatums": [
    "2024-04-09",
@@ -226,15 +221,20 @@
   "klant": "Amvest RCF Custodian BV",
   "companyId": 95615,
   "opdrachtInclVat": 15702.28,
-  "gefactureerd": 0,
-  "dekkingPct": 0,
-  "aantalFacturen": 4,
+  "gefactureerd": 1057.32,
+  "dekkingPct": 7,
+  "aantalFacturen": 8,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
   "opdrachtDatum": "2024-04-23",
   "factuurDatums": [
    "2024-04-23",
    "2024-05-01",
    "2024-05-02",
-   "2024-05-02"
+   "2024-05-02",
+   "2022-06-15",
+   "2023-07-01",
+   "2025-07-15",
+   "2025-11-07"
   ]
  },
  {
@@ -243,13 +243,18 @@
   "klant": "Amvest RCF Custodian BV",
   "companyId": 95615,
   "opdrachtInclVat": 107.99,
-  "gefactureerd": 0,
-  "dekkingPct": 0,
-  "aantalFacturen": 2,
+  "gefactureerd": 7.27,
+  "dekkingPct": 7,
+  "aantalFacturen": 6,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
   "opdrachtDatum": "2024-05-02",
   "factuurDatums": [
    "2024-05-02",
-   "2024-06-04"
+   "2024-06-04",
+   "2022-06-15",
+   "2023-07-01",
+   "2025-07-15",
+   "2025-11-07"
   ]
  },
  {
@@ -261,6 +266,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2024-05-16",
   "factuurDatums": [
    "2024-09-03",
@@ -268,18 +274,33 @@
   ]
  },
  {
+  "nummer": 2191,
+  "naam": "Kevin",
+  "klant": "Sjoerd Hoogduin.",
+  "companyId": 96366,
+  "opdrachtInclVat": 3205,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2024-05-16",
+  "factuurDatums": []
+ },
+ {
   "nummer": 2343,
   "naam": "Service",
   "klant": "Florine van Logtestijn",
   "companyId": 95696,
   "opdrachtInclVat": 54.99,
-  "gefactureerd": 0,
-  "dekkingPct": 0,
-  "aantalFacturen": 2,
+  "gefactureerd": 1.19,
+  "dekkingPct": 2,
+  "aantalFacturen": 3,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
   "opdrachtDatum": "2024-07-05",
   "factuurDatums": [
    "2024-09-04",
-   "2024-09-04"
+   "2024-09-04",
+   "2024-07-12"
   ]
  },
  {
@@ -288,29 +309,15 @@
   "klant": "Marvin Mertakusuma",
   "companyId": 96094,
   "opdrachtInclVat": 1395,
-  "gefactureerd": 0,
-  "dekkingPct": 0,
-  "aantalFacturen": 2,
+  "gefactureerd": 928.59,
+  "dekkingPct": 67,
+  "aantalFacturen": 3,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
   "opdrachtDatum": "2024-07-17",
   "factuurDatums": [
    "2024-09-16",
-   "2024-09-30"
-  ]
- },
- {
-  "nummer": 2403,
-  "naam": "Gewerkte uren",
-  "klant": "Ruiter Klus & Onderhoud",
-  "companyId": 96398,
-  "opdrachtInclVat": 1000,
-  "gefactureerd": 330.58,
-  "dekkingPct": 33,
-  "aantalFacturen": 3,
-  "opdrachtDatum": "2024-07-25",
-  "factuurDatums": [
-   "2024-07-25",
-   "2024-09-02",
-   "2024-09-02"
+   "2024-09-30",
+   "2024-05-27"
   ]
  },
  {
@@ -322,6 +329,7 @@
   "gefactureerd": 1108.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2024-08-03",
   "factuurDatums": [
    "2024-08-03"
@@ -336,6 +344,7 @@
   "gefactureerd": 300,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2024-08-09",
   "factuurDatums": [
    "2024-08-09"
@@ -350,6 +359,7 @@
   "gefactureerd": 1162.77,
   "dekkingPct": 40,
   "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2024-08-20",
   "factuurDatums": [
    "2024-08-20",
@@ -366,11 +376,25 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2024-08-20",
   "factuurDatums": [
    "2024-08-20",
    "2024-08-20"
   ]
+ },
+ {
+  "nummer": 2679,
+  "naam": "Monique",
+  "klant": "Sjoerd Hoogduin.",
+  "companyId": 96366,
+  "opdrachtInclVat": 1755,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2024-10-02",
+  "factuurDatums": []
  },
  {
   "nummer": 2637,
@@ -381,6 +405,7 @@
   "gefactureerd": 113.22,
   "dekkingPct": 30,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2024-10-05",
   "factuurDatums": [
    "2024-10-05"
@@ -395,6 +420,7 @@
   "gefactureerd": 700.87,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2024-10-05",
   "factuurDatums": [
    "2024-10-05"
@@ -409,6 +435,7 @@
   "gefactureerd": 2880,
   "dekkingPct": 90,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2024-11-05",
   "factuurDatums": [
    "2024-11-05",
@@ -424,6 +451,7 @@
   "gefactureerd": 1539.99,
   "dekkingPct": 40,
   "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2024-11-18",
   "factuurDatums": [
    "2024-11-18",
@@ -440,6 +468,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 4,
+  "bedragNota": "",
   "opdrachtDatum": "2024-12-14",
   "factuurDatums": [
    "2024-12-14",
@@ -457,6 +486,7 @@
   "gefactureerd": 2073.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2024-12-18",
   "factuurDatums": [
    "2024-12-18"
@@ -471,6 +501,7 @@
   "gefactureerd": 172.3,
   "dekkingPct": 40,
   "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2025-02-07",
   "factuurDatums": [
    "2025-02-07",
@@ -487,6 +518,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2025-03-07",
   "factuurDatums": [
    "2025-03-14",
@@ -502,6 +534,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2025-03-26",
   "factuurDatums": [
    "2025-03-26",
@@ -517,6 +550,7 @@
   "gefactureerd": 110,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-04-04",
   "factuurDatums": [
    "2025-04-04"
@@ -531,28 +565,12 @@
   "gefactureerd": -210.39,
   "dekkingPct": -40,
   "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2025-04-05",
   "factuurDatums": [
    "2025-04-05",
    "2025-12-10",
    "2025-12-11"
-  ]
- },
- {
-  "nummer": 3271,
-  "naam": "Prijsopgaaf Sonty.",
-  "klant": "Steven van der Cammen",
-  "companyId": 97287,
-  "opdrachtInclVat": 4044,
-  "gefactureerd": 0,
-  "dekkingPct": 0,
-  "aantalFacturen": 4,
-  "opdrachtDatum": "2025-04-09",
-  "factuurDatums": [
-   "2025-04-09",
-   "2025-04-12",
-   "2025-04-15",
-   "2025-04-15"
   ]
  },
  {
@@ -564,6 +582,7 @@
   "gefactureerd": 140,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-04-25",
   "factuurDatums": [
    "2025-04-25"
@@ -578,6 +597,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2025-05-13",
   "factuurDatums": [
    "2025-05-13",
@@ -593,6 +613,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2025-05-19",
   "factuurDatums": [
    "2025-08-02",
@@ -608,6 +629,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2025-05-19",
   "factuurDatums": [
    "2025-05-19",
@@ -623,10 +645,37 @@
   "gefactureerd": 1330.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-06-11",
   "factuurDatums": [
    "2025-06-11"
   ]
+ },
+ {
+  "nummer": 3813,
+  "naam": "Scherm BABETTE",
+  "klant": "Sjoerd Hoogduin.",
+  "companyId": 96366,
+  "opdrachtInclVat": 2011.79,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2025-06-21",
+  "factuurDatums": []
+ },
+ {
+  "nummer": 3828,
+  "naam": "Prijsopgaaf Jaq",
+  "klant": "Sjoerd Hoogduin.",
+  "companyId": 96366,
+  "opdrachtInclVat": 368,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2025-06-25",
+  "factuurDatums": []
  },
  {
   "nummer": 3847,
@@ -634,13 +683,15 @@
   "klant": "Tijs Roubos",
   "companyId": 96132,
   "opdrachtInclVat": 1385,
-  "gefactureerd": 1230,
-  "dekkingPct": 89,
-  "aantalFacturen": 2,
+  "gefactureerd": 980,
+  "dekkingPct": 71,
+  "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2025-06-28",
   "factuurDatums": [
    "2025-06-28",
-   "2025-07-01"
+   "2025-07-01",
+   "2025-08-06"
   ]
  },
  {
@@ -649,13 +700,15 @@
   "klant": "Diana Kriesch",
   "companyId": 97792,
   "opdrachtInclVat": 799.99,
-  "gefactureerd": 320,
-  "dekkingPct": 40,
-  "aantalFacturen": 3,
+  "gefactureerd": 547,
+  "dekkingPct": 68,
+  "aantalFacturen": 4,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
   "opdrachtDatum": "2025-07-12",
   "factuurDatums": [
    "2025-07-12",
    "2026-03-27",
+   "2026-04-09",
    "2026-04-09"
   ]
  },
@@ -668,6 +721,7 @@
   "gefactureerd": 1040,
   "dekkingPct": 40,
   "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2025-07-29",
   "factuurDatums": [
    "2025-07-29",
@@ -684,6 +738,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2025-08-02",
   "factuurDatums": [
    "2025-08-02",
@@ -699,6 +754,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2025-08-14",
   "factuurDatums": [
    "2025-08-14",
@@ -714,6 +770,7 @@
   "gefactureerd": 643.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-08-14",
   "factuurDatums": [
    "2025-08-14"
@@ -728,6 +785,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2025-09-18",
   "factuurDatums": [
    "2025-09-18",
@@ -743,6 +801,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2025-09-26",
   "factuurDatums": [
    "2025-09-26",
@@ -750,18 +809,33 @@
   ]
  },
  {
+  "nummer": 4463,
+  "naam": "Horren Emma",
+  "klant": "Sjoerd Hoogduin.",
+  "companyId": 96366,
+  "opdrachtInclVat": 1210,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2025-10-01",
+  "factuurDatums": []
+ },
+ {
   "nummer": 4470,
   "naam": "Rolluiken nakijken",
   "klant": "Elaine van Dalen",
   "companyId": 98238,
   "opdrachtInclVat": 175,
-  "gefactureerd": 0,
-  "dekkingPct": 0,
-  "aantalFacturen": 2,
+  "gefactureerd": 109.98,
+  "dekkingPct": 63,
+  "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2025-10-03",
   "factuurDatums": [
    "2026-02-17",
-   "2026-02-21"
+   "2026-02-21",
+   "2025-10-21"
   ]
  },
  {
@@ -773,6 +847,7 @@
   "gefactureerd": 1817.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-10-03",
   "factuurDatums": [
    "2025-10-03"
@@ -787,37 +862,22 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2025-10-08",
   "factuurDatums": []
  },
  {
-  "nummer": 4510,
-  "naam": "test",
-  "klant": "Daimy Boot",
-  "companyId": 95997,
-  "opdrachtInclVat": 1,
-  "gefactureerd": 0.4,
-  "dekkingPct": 40,
-  "aantalFacturen": 1,
-  "opdrachtDatum": "2025-10-10",
-  "factuurDatums": [
-   "2025-10-10"
-  ]
- },
- {
-  "nummer": 4237,
-  "naam": "Prijsopgave voorraadscherm",
-  "klant": "Claire Sprokkereef",
-  "companyId": 98069,
-  "opdrachtInclVat": 2974,
+  "nummer": 4521,
+  "naam": "Prinses Beatrixlaan 264N",
+  "klant": "Schep Vastgoedmanagers B.V.",
+  "companyId": 96160,
+  "opdrachtInclVat": 175,
   "gefactureerd": 0,
   "dekkingPct": 0,
-  "aantalFacturen": 2,
+  "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2025-10-14",
-  "factuurDatums": [
-   "2025-10-14",
-   "2025-11-07"
-  ]
+  "factuurDatums": []
  },
  {
   "nummer": 4528,
@@ -828,6 +888,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2025-10-18",
   "factuurDatums": [
    "2025-12-30",
@@ -843,12 +904,31 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 4,
+  "bedragNota": "",
   "opdrachtDatum": "2025-10-21",
   "factuurDatums": [
    "2025-10-21",
    "2025-11-23",
    "2026-05-01",
    "2026-05-01"
+  ]
+ },
+ {
+  "nummer": 4591,
+  "naam": "Pegasusstraat 30",
+  "klant": "Amvest RCF Custodian BV",
+  "companyId": 95615,
+  "opdrachtInclVat": 154,
+  "gefactureerd": 10.37,
+  "dekkingPct": 7,
+  "aantalFacturen": 4,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
+  "opdrachtDatum": "2025-11-04",
+  "factuurDatums": [
+   "2022-06-15",
+   "2023-07-01",
+   "2025-07-15",
+   "2025-11-07"
   ]
  },
  {
@@ -860,6 +940,7 @@
   "gefactureerd": 160,
   "dekkingPct": 50,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-11-05",
   "factuurDatums": [
    "2025-11-05"
@@ -874,6 +955,7 @@
   "gefactureerd": 160,
   "dekkingPct": 50,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-11-05",
   "factuurDatums": [
    "2025-11-05"
@@ -888,6 +970,7 @@
   "gefactureerd": 160,
   "dekkingPct": 50,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-11-05",
   "factuurDatums": [
    "2025-11-05"
@@ -902,6 +985,7 @@
   "gefactureerd": 160,
   "dekkingPct": 50,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-11-05",
   "factuurDatums": [
    "2025-11-05"
@@ -916,6 +1000,7 @@
   "gefactureerd": 160,
   "dekkingPct": 50,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-11-05",
   "factuurDatums": [
    "2025-11-05"
@@ -930,6 +1015,7 @@
   "gefactureerd": 200,
   "dekkingPct": 50,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-11-05",
   "factuurDatums": [
    "2025-11-05"
@@ -944,6 +1030,7 @@
   "gefactureerd": 3084.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-11-12",
   "factuurDatums": [
    "2025-11-12"
@@ -958,6 +1045,7 @@
   "gefactureerd": 1361.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-11-18",
   "factuurDatums": [
    "2025-11-18"
@@ -972,6 +1060,7 @@
   "gefactureerd": 643.2,
   "dekkingPct": 40,
   "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2025-11-26",
   "factuurDatums": [
    "2025-11-26",
@@ -988,6 +1077,7 @@
   "gefactureerd": 2787.59,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-11-26",
   "factuurDatums": [
    "2025-11-26"
@@ -1002,6 +1092,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2025-11-26",
   "factuurDatums": [
    "2026-02-16",
@@ -1014,14 +1105,16 @@
   "klant": "Paul van der Laan",
   "companyId": 98292,
   "opdrachtInclVat": 11233.6,
-  "gefactureerd": 3960.02,
-  "dekkingPct": 35,
-  "aantalFacturen": 3,
+  "gefactureerd": 10233.6,
+  "dekkingPct": 91,
+  "aantalFacturen": 4,
+  "bedragNota": "",
   "opdrachtDatum": "2025-12-10",
   "factuurDatums": [
    "2025-12-10",
    "2026-02-05",
-   "2026-06-18"
+   "2026-06-18",
+   "2026-06-26"
   ]
  },
  {
@@ -1030,13 +1123,15 @@
   "klant": "Casa Amore",
   "companyId": 98179,
   "opdrachtInclVat": 3234.51,
-  "gefactureerd": 707.49,
-  "dekkingPct": 22,
-  "aantalFacturen": 2,
+  "gefactureerd": 1425.99,
+  "dekkingPct": 44,
+  "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2025-12-10",
   "factuurDatums": [
    "2025-12-30",
-   "2026-02-25"
+   "2026-02-25",
+   "2025-09-16"
   ]
  },
  {
@@ -1048,6 +1143,7 @@
   "gefactureerd": 1248.79,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-12-17",
   "factuurDatums": [
    "2025-12-17"
@@ -1062,23 +1158,10 @@
   "gefactureerd": 3780.79,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2025-12-23",
   "factuurDatums": [
    "2025-12-23"
-  ]
- },
- {
-  "nummer": 4542,
-  "naam": "Prijsopgave Sonty",
-  "klant": "Hannes Sibbel",
-  "companyId": 98289,
-  "opdrachtInclVat": 3780,
-  "gefactureerd": 1511.99,
-  "dekkingPct": 40,
-  "aantalFacturen": 1,
-  "opdrachtDatum": "2026-01-06",
-  "factuurDatums": [
-   "2026-01-06"
   ]
  },
  {
@@ -1090,6 +1173,7 @@
   "gefactureerd": 576.4,
   "dekkingPct": 40,
   "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2026-01-13",
   "factuurDatums": [
    "2026-01-13",
@@ -1106,6 +1190,7 @@
   "gefactureerd": 5705.61,
   "dekkingPct": 56,
   "aantalFacturen": 5,
+  "bedragNota": "",
   "opdrachtDatum": "2026-01-13",
   "factuurDatums": [
    "2026-01-13",
@@ -1124,6 +1209,7 @@
   "gefactureerd": 164.98,
   "dekkingPct": 94,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-01-16",
   "factuurDatums": [
    "2026-02-03"
@@ -1138,6 +1224,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-01-20",
   "factuurDatums": []
  },
@@ -1150,6 +1237,7 @@
   "gefactureerd": 1113.5,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-02-07",
   "factuurDatums": [
    "2026-02-07"
@@ -1161,13 +1249,15 @@
   "klant": "Julie  Djotaroeno",
   "companyId": 98460,
   "opdrachtInclVat": 725.04,
-  "gefactureerd": 0,
-  "dekkingPct": 0,
-  "aantalFacturen": 2,
+  "gefactureerd": -360,
+  "dekkingPct": -50,
+  "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2026-02-07",
   "factuurDatums": [
    "2026-02-07",
-   "2026-02-12"
+   "2026-02-12",
+   "2026-04-11"
   ]
  },
  {
@@ -1179,6 +1269,7 @@
   "gefactureerd": 7000,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-02-12",
   "factuurDatums": [
    "2026-02-12"
@@ -1193,10 +1284,24 @@
   "gefactureerd": 888.01,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-02-25",
   "factuurDatums": [
    "2026-02-25"
   ]
+ },
+ {
+  "nummer": 4962,
+  "naam": "Rolluiken nakijken",
+  "klant": "Sander van der Put",
+  "companyId": 98600,
+  "opdrachtInclVat": 175,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2026-03-03",
+  "factuurDatums": []
  },
  {
   "nummer": 4964,
@@ -1207,6 +1312,7 @@
   "gefactureerd": 1606.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-03-03",
   "factuurDatums": [
    "2026-03-03"
@@ -1221,6 +1327,7 @@
   "gefactureerd": 1599.98,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-03-06",
   "factuurDatums": [
    "2026-03-06"
@@ -1235,6 +1342,7 @@
   "gefactureerd": 1625.42,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-03-07",
   "factuurDatums": [
    "2026-03-07"
@@ -1249,6 +1357,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2026-03-11",
   "factuurDatums": [
    "2026-05-05",
@@ -1264,20 +1373,7 @@
   "gefactureerd": 6112.01,
   "dekkingPct": 40,
   "aantalFacturen": 1,
-  "opdrachtDatum": "2026-03-11",
-  "factuurDatums": [
-   "2026-03-11"
-  ]
- },
- {
-  "nummer": 5030,
-  "naam": "Prijsopgave duo plisse",
-  "klant": "Martin Verbaas",
-  "companyId": 98525,
-  "opdrachtInclVat": 8709,
-  "gefactureerd": 3483.6,
-  "dekkingPct": 40,
-  "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-03-11",
   "factuurDatums": [
    "2026-03-11"
@@ -1292,6 +1388,7 @@
   "gefactureerd": 6880.77,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-03-18",
   "factuurDatums": [
    "2026-03-18"
@@ -1306,6 +1403,7 @@
   "gefactureerd": 3252.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-03-20",
   "factuurDatums": [
    "2026-03-20"
@@ -1320,6 +1418,7 @@
   "gefactureerd": 736.1,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-03-23",
   "factuurDatums": [
    "2026-03-23"
@@ -1331,12 +1430,14 @@
   "klant": "Binck Padel B.V.",
   "companyId": 98141,
   "opdrachtInclVat": 9872.4,
-  "gefactureerd": 3697.28,
-  "dekkingPct": 37,
-  "aantalFacturen": 1,
+  "gefactureerd": 5373.33,
+  "dekkingPct": 54,
+  "aantalFacturen": 2,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
   "opdrachtDatum": "2026-03-24",
   "factuurDatums": [
-   "2026-03-24"
+   "2026-03-24",
+   "2026-02-25"
   ]
  },
  {
@@ -1348,6 +1449,7 @@
   "gefactureerd": 2943.66,
   "dekkingPct": 39,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-03-24",
   "factuurDatums": [
    "2026-03-24"
@@ -1362,6 +1464,7 @@
   "gefactureerd": 5309.13,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-03-30",
   "factuurDatums": [
    "2026-03-30"
@@ -1376,6 +1479,7 @@
   "gefactureerd": 2133.44,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-01",
   "factuurDatums": [
    "2026-04-01"
@@ -1390,6 +1494,7 @@
   "gefactureerd": 1600.01,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-01",
   "factuurDatums": [
    "2026-04-01"
@@ -1404,6 +1509,7 @@
   "gefactureerd": 3091.96,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-01",
   "factuurDatums": [
    "2026-04-01"
@@ -1418,6 +1524,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-02",
   "factuurDatums": []
  },
@@ -1430,6 +1537,7 @@
   "gefactureerd": 1120,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-02",
   "factuurDatums": [
    "2026-04-02"
@@ -1444,6 +1552,7 @@
   "gefactureerd": 1008.64,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-02",
   "factuurDatums": [
    "2026-04-02"
@@ -1458,6 +1567,7 @@
   "gefactureerd": 484.51,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-03",
   "factuurDatums": [
    "2026-04-03"
@@ -1472,6 +1582,7 @@
   "gefactureerd": 1182,
   "dekkingPct": 39,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-03",
   "factuurDatums": [
    "2026-04-03"
@@ -1486,6 +1597,7 @@
   "gefactureerd": 756.81,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-03",
   "factuurDatums": [
    "2026-04-03"
@@ -1500,6 +1612,7 @@
   "gefactureerd": 1312,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-03",
   "factuurDatums": [
    "2026-04-03"
@@ -1514,6 +1627,7 @@
   "gefactureerd": 1624,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-07",
   "factuurDatums": [
    "2026-04-07"
@@ -1528,6 +1642,7 @@
   "gefactureerd": 1472.13,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-07",
   "factuurDatums": [
    "2026-04-07"
@@ -1542,6 +1657,7 @@
   "gefactureerd": 127.5,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-07",
   "factuurDatums": [
    "2026-04-07"
@@ -1556,6 +1672,7 @@
   "gefactureerd": 2055.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-07",
   "factuurDatums": [
    "2026-04-07"
@@ -1570,6 +1687,7 @@
   "gefactureerd": 1000.66,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-08",
   "factuurDatums": [
    "2026-04-08"
@@ -1584,23 +1702,10 @@
   "gefactureerd": 340,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-08",
   "factuurDatums": [
    "2026-04-08"
-  ]
- },
- {
-  "nummer": 5260,
-  "naam": "Prijsopgave Sonty screendoeken",
-  "klant": "Carla Meersma",
-  "companyId": 95848,
-  "opdrachtInclVat": 475.7,
-  "gefactureerd": 190.28,
-  "dekkingPct": 40,
-  "aantalFacturen": 1,
-  "opdrachtDatum": "2026-04-09",
-  "factuurDatums": [
-   "2026-04-09"
   ]
  },
  {
@@ -1612,6 +1717,7 @@
   "gefactureerd": 626.62,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-09",
   "factuurDatums": [
    "2026-04-09"
@@ -1626,6 +1732,7 @@
   "gefactureerd": 2232.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-09",
   "factuurDatums": [
    "2026-04-09"
@@ -1640,6 +1747,7 @@
   "gefactureerd": 1185.41,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-10",
   "factuurDatums": [
    "2026-04-10"
@@ -1654,6 +1762,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-10",
   "factuurDatums": [
    "2026-04-10",
@@ -1669,6 +1778,7 @@
   "gefactureerd": 1515.16,
   "dekkingPct": 33,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-10",
   "factuurDatums": [
    "2026-04-10"
@@ -1683,6 +1793,7 @@
   "gefactureerd": 960.16,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-10",
   "factuurDatums": [
    "2026-04-10"
@@ -1697,6 +1808,7 @@
   "gefactureerd": 1033.41,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-11",
   "factuurDatums": [
    "2026-04-11"
@@ -1711,6 +1823,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-11",
   "factuurDatums": []
  },
@@ -1723,6 +1836,7 @@
   "gefactureerd": 1465.66,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-14",
   "factuurDatums": [
    "2026-04-14"
@@ -1737,6 +1851,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-14",
   "factuurDatums": [
    "2026-04-14",
@@ -1752,6 +1867,7 @@
   "gefactureerd": 1955.19,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-14",
   "factuurDatums": [
    "2026-04-14"
@@ -1766,6 +1882,7 @@
   "gefactureerd": 990.19,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-14",
   "factuurDatums": [
    "2026-04-14"
@@ -1780,20 +1897,7 @@
   "gefactureerd": 1346.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
-  "opdrachtDatum": "2026-04-14",
-  "factuurDatums": [
-   "2026-04-14"
-  ]
- },
- {
-  "nummer": 5339,
-  "naam": "Prijsopgaaf Rolluik",
-  "klant": "The Box",
-  "companyId": 96851,
-  "opdrachtInclVat": 1362,
-  "gefactureerd": 544.8,
-  "dekkingPct": 40,
-  "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-14",
   "factuurDatums": [
    "2026-04-14"
@@ -1808,6 +1912,7 @@
   "gefactureerd": 2185.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-14",
   "factuurDatums": [
    "2026-04-14"
@@ -1822,6 +1927,7 @@
   "gefactureerd": 1108,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-14",
   "factuurDatums": [
    "2026-04-14"
@@ -1836,6 +1942,7 @@
   "gefactureerd": 2038.87,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-14",
   "factuurDatums": [
    "2026-04-14"
@@ -1850,6 +1957,7 @@
   "gefactureerd": 1026.64,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-14",
   "factuurDatums": [
    "2026-04-14"
@@ -1864,6 +1972,7 @@
   "gefactureerd": 631.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-15",
   "factuurDatums": [
    "2026-04-15"
@@ -1878,6 +1987,7 @@
   "gefactureerd": 1733.12,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-15",
   "factuurDatums": [
    "2026-04-15"
@@ -1892,6 +2002,7 @@
   "gefactureerd": 2460,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-15",
   "factuurDatums": [
    "2026-04-15"
@@ -1906,6 +2017,7 @@
   "gefactureerd": 1246.08,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-15",
   "factuurDatums": [
    "2026-04-15"
@@ -1920,6 +2032,7 @@
   "gefactureerd": 1180.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-15",
   "factuurDatums": [
    "2026-04-15"
@@ -1934,6 +2047,7 @@
   "gefactureerd": 887.06,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-15",
   "factuurDatums": [
    "2026-04-15"
@@ -1948,6 +2062,7 @@
   "gefactureerd": 1153.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-15",
   "factuurDatums": [
    "2026-04-15"
@@ -1962,6 +2077,7 @@
   "gefactureerd": 560,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-15",
   "factuurDatums": [
    "2026-04-15"
@@ -1976,6 +2092,7 @@
   "gefactureerd": 1099.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-16",
   "factuurDatums": [
    "2026-04-16"
@@ -1990,6 +2107,7 @@
   "gefactureerd": 812.49,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-16",
   "factuurDatums": [
    "2026-04-16"
@@ -2004,6 +2122,7 @@
   "gefactureerd": 1736.05,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-16",
   "factuurDatums": [
    "2026-04-16"
@@ -2018,6 +2137,7 @@
   "gefactureerd": 2224.96,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-16",
   "factuurDatums": [
    "2026-04-16"
@@ -2032,6 +2152,7 @@
   "gefactureerd": 1040.07,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-16",
   "factuurDatums": [
    "2026-04-16"
@@ -2046,6 +2167,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-17",
   "factuurDatums": []
  },
@@ -2058,6 +2180,7 @@
   "gefactureerd": 582.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-18",
   "factuurDatums": [
    "2026-04-18"
@@ -2072,6 +2195,7 @@
   "gefactureerd": 3284.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-18",
   "factuurDatums": [
    "2026-04-18"
@@ -2086,9 +2210,25 @@
   "gefactureerd": 900,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-18",
   "factuurDatums": [
    "2026-04-18"
+  ]
+ },
+ {
+  "nummer": 5378,
+  "naam": "Rolluik + kokers",
+  "klant": "Marvin Mertakusuma",
+  "companyId": 96094,
+  "opdrachtInclVat": 759,
+  "gefactureerd": 505.23,
+  "dekkingPct": 67,
+  "aantalFacturen": 1,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
+  "opdrachtDatum": "2026-04-20",
+  "factuurDatums": [
+   "2024-05-27"
   ]
  },
  {
@@ -2100,6 +2240,7 @@
   "gefactureerd": 3597.98,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-20",
   "factuurDatums": [
    "2026-04-20"
@@ -2114,6 +2255,7 @@
   "gefactureerd": 1002,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-21",
   "factuurDatums": [
    "2026-04-21"
@@ -2128,6 +2270,7 @@
   "gefactureerd": 1194.21,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-21",
   "factuurDatums": [
    "2026-04-21"
@@ -2139,12 +2282,14 @@
   "klant": "Koen Lintelo",
   "companyId": 97697,
   "opdrachtInclVat": 2144.46,
-  "gefactureerd": 857.78,
-  "dekkingPct": 40,
-  "aantalFacturen": 1,
+  "gefactureerd": 1567.78,
+  "dekkingPct": 73,
+  "aantalFacturen": 2,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
   "opdrachtDatum": "2026-04-22",
   "factuurDatums": [
-   "2026-04-22"
+   "2026-04-22",
+   "2026-02-21"
   ]
  },
  {
@@ -2156,6 +2301,7 @@
   "gefactureerd": 1099.21,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-22",
   "factuurDatums": [
    "2026-04-22"
@@ -2170,6 +2316,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-23",
   "factuurDatums": []
  },
@@ -2182,6 +2329,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-23",
   "factuurDatums": []
  },
@@ -2194,10 +2342,24 @@
   "gefactureerd": 804.81,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-23",
   "factuurDatums": [
    "2026-04-24"
   ]
+ },
+ {
+  "nummer": 5416,
+  "naam": "Scherm afstellen",
+  "klant": "Jamilla Ruiz",
+  "companyId": 98945,
+  "opdrachtInclVat": 175,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2026-04-24",
+  "factuurDatums": []
  },
  {
   "nummer": 5306,
@@ -2208,6 +2370,7 @@
   "gefactureerd": 843.54,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-24",
   "factuurDatums": [
    "2026-04-24"
@@ -2222,6 +2385,7 @@
   "gefactureerd": 2609.16,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-24",
   "factuurDatums": [
    "2026-04-24"
@@ -2236,6 +2400,7 @@
   "gefactureerd": 3923.23,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-24",
   "factuurDatums": [
    "2026-04-24"
@@ -2250,6 +2415,7 @@
   "gefactureerd": 2746.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-24",
   "factuurDatums": [
    "2026-04-24"
@@ -2261,16 +2427,12 @@
   "klant": "Sjoerd Hoogduin.",
   "companyId": 96366,
   "opdrachtInclVat": 6739.99,
-  "gefactureerd": 3959.49,
-  "dekkingPct": 59,
-  "aantalFacturen": 4,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-24",
-  "factuurDatums": [
-   "2024-03-16",
-   "2025-09-18",
-   "2026-03-11",
-   "2026-06-18"
-  ]
+  "factuurDatums": []
  },
  {
   "nummer": 5305,
@@ -2281,6 +2443,7 @@
   "gefactureerd": 2901.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-24",
   "factuurDatums": [
    "2026-04-24"
@@ -2295,6 +2458,7 @@
   "gefactureerd": 785,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-24",
   "factuurDatums": [
    "2026-04-25"
@@ -2309,6 +2473,7 @@
   "gefactureerd": 2497.61,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-25",
   "factuurDatums": [
    "2026-04-25"
@@ -2323,6 +2488,7 @@
   "gefactureerd": 940.32,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-28",
   "factuurDatums": [
    "2026-04-28"
@@ -2337,6 +2503,7 @@
   "gefactureerd": 642.95,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-28",
   "factuurDatums": [
    "2026-04-28"
@@ -2351,6 +2518,7 @@
   "gefactureerd": 1887.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-28",
   "factuurDatums": [
    "2026-04-28"
@@ -2365,6 +2533,7 @@
   "gefactureerd": 917.72,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-28",
   "factuurDatums": [
    "2026-04-28"
@@ -2379,6 +2548,7 @@
   "gefactureerd": 1069.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-28",
   "factuurDatums": [
    "2026-04-28"
@@ -2393,6 +2563,7 @@
   "gefactureerd": 588.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-28",
   "factuurDatums": [
    "2026-04-28"
@@ -2407,6 +2578,7 @@
   "gefactureerd": 1263.09,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-28",
   "factuurDatums": [
    "2026-04-28"
@@ -2421,6 +2593,7 @@
   "gefactureerd": 1826.82,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-28",
   "factuurDatums": [
    "2026-04-28"
@@ -2435,6 +2608,7 @@
   "gefactureerd": 282,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-30",
   "factuurDatums": [
    "2026-04-30"
@@ -2449,6 +2623,7 @@
   "gefactureerd": 1836.01,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-30",
   "factuurDatums": [
    "2026-04-30"
@@ -2463,6 +2638,7 @@
   "gefactureerd": 593.3,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-30",
   "factuurDatums": [
    "2026-04-30"
@@ -2477,6 +2653,7 @@
   "gefactureerd": 1032,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-30",
   "factuurDatums": [
    "2026-04-30"
@@ -2491,6 +2668,7 @@
   "gefactureerd": 1162.46,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-30",
   "factuurDatums": [
    "2026-04-30"
@@ -2505,6 +2683,7 @@
   "gefactureerd": 733.39,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-30",
   "factuurDatums": [
    "2026-04-30"
@@ -2519,6 +2698,7 @@
   "gefactureerd": 1275.44,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-30",
   "factuurDatums": [
    "2026-04-30"
@@ -2533,6 +2713,7 @@
   "gefactureerd": 2049.86,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-30",
   "factuurDatums": [
    "2026-04-30"
@@ -2547,6 +2728,7 @@
   "gefactureerd": 1228.04,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-30",
   "factuurDatums": [
    "2026-04-30"
@@ -2561,6 +2743,7 @@
   "gefactureerd": 998.01,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-30",
   "factuurDatums": [
    "2026-04-30"
@@ -2575,6 +2758,7 @@
   "gefactureerd": 1162.58,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-04-30",
   "factuurDatums": [
    "2026-04-30"
@@ -2589,6 +2773,7 @@
   "gefactureerd": 879.92,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-01",
   "factuurDatums": [
    "2026-05-01"
@@ -2603,6 +2788,7 @@
   "gefactureerd": 180.19,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-01",
   "factuurDatums": [
    "2026-05-01"
@@ -2614,12 +2800,14 @@
   "klant": "Jessica den Dulk",
   "companyId": 96570,
   "opdrachtInclVat": 1089,
-  "gefactureerd": 359.6,
-  "dekkingPct": 33,
-  "aantalFacturen": 1,
+  "gefactureerd": 329.6,
+  "dekkingPct": 30,
+  "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-01",
   "factuurDatums": [
-   "2026-05-01"
+   "2026-05-01",
+   "2024-08-13"
   ]
  },
  {
@@ -2631,6 +2819,7 @@
   "gefactureerd": 500.69,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-01",
   "factuurDatums": [
    "2026-05-01"
@@ -2645,6 +2834,7 @@
   "gefactureerd": 476.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-01",
   "factuurDatums": [
    "2026-05-01"
@@ -2659,6 +2849,7 @@
   "gefactureerd": 1173.99,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-05",
   "factuurDatums": [
    "2026-05-05"
@@ -2673,6 +2864,7 @@
   "gefactureerd": 412.33,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-05",
   "factuurDatums": [
    "2026-05-05"
@@ -2687,6 +2879,7 @@
   "gefactureerd": 481.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-05",
   "factuurDatums": [
    "2026-05-05"
@@ -2701,6 +2894,7 @@
   "gefactureerd": 1944,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-05",
   "factuurDatums": [
    "2026-05-05"
@@ -2715,6 +2909,7 @@
   "gefactureerd": 1190.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-05",
   "factuurDatums": [
    "2026-05-06"
@@ -2729,6 +2924,7 @@
   "gefactureerd": 1425.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-06",
   "factuurDatums": [
    "2026-05-06"
@@ -2743,10 +2939,24 @@
   "gefactureerd": 499.23,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-07",
   "factuurDatums": [
    "2026-05-21"
   ]
+ },
+ {
+  "nummer": 5496,
+  "naam": "Scherm demonteren en weer monteren",
+  "klant": "Alexander  Rafflenbeul",
+  "companyId": 97692,
+  "opdrachtInclVat": 1000,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2026-05-07",
+  "factuurDatums": []
  },
  {
   "nummer": 5489,
@@ -2757,6 +2967,7 @@
   "gefactureerd": 464.45,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-07",
   "factuurDatums": [
    "2026-05-07"
@@ -2771,6 +2982,7 @@
   "gefactureerd": 4905.35,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-07",
   "factuurDatums": [
    "2026-05-07"
@@ -2785,6 +2997,7 @@
   "gefactureerd": 1292.41,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-07",
   "factuurDatums": [
    "2026-05-07"
@@ -2799,6 +3012,7 @@
   "gefactureerd": 959.48,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-07",
   "factuurDatums": [
    "2026-05-07"
@@ -2813,10 +3027,24 @@
   "gefactureerd": 1711.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-07",
   "factuurDatums": [
    "2026-05-07"
   ]
+ },
+ {
+  "nummer": 5429,
+  "naam": "Prijsopgave Sonty",
+  "klant": "Daisy Akdeniz",
+  "companyId": 95719,
+  "opdrachtInclVat": 1500,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2026-05-07",
+  "factuurDatums": []
  },
  {
   "nummer": 5375,
@@ -2827,6 +3055,7 @@
   "gefactureerd": 1227.74,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-08",
   "factuurDatums": [
    "2026-05-08"
@@ -2841,6 +3070,7 @@
   "gefactureerd": 2077.19,
   "dekkingPct": 39,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-08",
   "factuurDatums": [
    "2026-05-08"
@@ -2855,6 +3085,7 @@
   "gefactureerd": 1382.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-08",
   "factuurDatums": [
    "2026-05-09"
@@ -2869,6 +3100,7 @@
   "gefactureerd": 1100,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-09",
   "factuurDatums": [
    "2026-05-09"
@@ -2883,6 +3115,7 @@
   "gefactureerd": 1480.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-09",
   "factuurDatums": [
    "2026-05-09"
@@ -2897,6 +3130,7 @@
   "gefactureerd": 1600.01,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-09",
   "factuurDatums": [
    "2026-05-09"
@@ -2911,6 +3145,7 @@
   "gefactureerd": 199.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-09",
   "factuurDatums": [
    "2026-05-09"
@@ -2925,6 +3160,7 @@
   "gefactureerd": 577.04,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-09",
   "factuurDatums": [
    "2026-05-09"
@@ -2939,6 +3175,7 @@
   "gefactureerd": 552.85,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-09",
   "factuurDatums": [
    "2026-05-09"
@@ -2953,6 +3190,7 @@
   "gefactureerd": 1513.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-09",
   "factuurDatums": [
    "2026-05-09"
@@ -2967,6 +3205,7 @@
   "gefactureerd": 1820.07,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-11",
   "factuurDatums": [
    "2026-05-11"
@@ -2981,6 +3220,7 @@
   "gefactureerd": 1867.27,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-11",
   "factuurDatums": [
    "2026-05-11"
@@ -2995,6 +3235,7 @@
   "gefactureerd": 1369.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-11",
   "factuurDatums": [
    "2026-05-11"
@@ -3009,6 +3250,7 @@
   "gefactureerd": 2121.26,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-11",
   "factuurDatums": [
    "2026-05-11"
@@ -3023,6 +3265,7 @@
   "gefactureerd": 1519.66,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-11",
   "factuurDatums": [
    "2026-05-11"
@@ -3037,6 +3280,7 @@
   "gefactureerd": 1336.01,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-11",
   "factuurDatums": [
    "2026-05-11"
@@ -3051,6 +3295,7 @@
   "gefactureerd": 1600,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-12",
   "factuurDatums": [
    "2026-05-12"
@@ -3065,6 +3310,7 @@
   "gefactureerd": 1007.42,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-13",
   "factuurDatums": [
    "2026-05-13"
@@ -3079,6 +3325,7 @@
   "gefactureerd": 836.74,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-13",
   "factuurDatums": [
    "2026-05-13"
@@ -3093,6 +3340,7 @@
   "gefactureerd": 459.28,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-13",
   "factuurDatums": [
    "2026-05-13"
@@ -3107,6 +3355,7 @@
   "gefactureerd": 760,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-13",
   "factuurDatums": [
    "2026-05-13"
@@ -3121,6 +3370,7 @@
   "gefactureerd": 1518.3,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-13",
   "factuurDatums": [
    "2026-05-13"
@@ -3135,6 +3385,7 @@
   "gefactureerd": 661.43,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-13",
   "factuurDatums": [
    "2026-05-13"
@@ -3149,6 +3400,7 @@
   "gefactureerd": 2708.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-13",
   "factuurDatums": [
    "2026-05-13"
@@ -3163,6 +3415,7 @@
   "gefactureerd": 180.19,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-13",
   "factuurDatums": [
    "2026-05-13"
@@ -3177,6 +3430,7 @@
   "gefactureerd": 1499.41,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-15",
   "factuurDatums": [
    "2026-05-15"
@@ -3191,6 +3445,7 @@
   "gefactureerd": 3778.42,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-15",
   "factuurDatums": [
    "2026-05-15"
@@ -3205,6 +3460,7 @@
   "gefactureerd": 796.81,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-15",
   "factuurDatums": [
    "2026-05-15"
@@ -3219,6 +3475,7 @@
   "gefactureerd": 1924.65,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-16",
   "factuurDatums": [
    "2026-05-16"
@@ -3233,6 +3490,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-16",
   "factuurDatums": []
  },
@@ -3245,6 +3503,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-16",
   "factuurDatums": []
  },
@@ -3257,6 +3516,7 @@
   "gefactureerd": 3174.51,
   "dekkingPct": 30,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-19",
   "factuurDatums": [
    "2026-05-19"
@@ -3271,6 +3531,7 @@
   "gefactureerd": 1661.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-19",
   "factuurDatums": [
    "2026-05-19"
@@ -3285,6 +3546,7 @@
   "gefactureerd": 336.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-19",
   "factuurDatums": [
    "2026-05-19"
@@ -3299,6 +3561,7 @@
   "gefactureerd": 1099.9,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-19",
   "factuurDatums": [
    "2026-05-19"
@@ -3313,6 +3576,7 @@
   "gefactureerd": 1385.84,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-19",
   "factuurDatums": [
    "2026-05-19"
@@ -3327,6 +3591,7 @@
   "gefactureerd": 2200.17,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-19",
   "factuurDatums": [
    "2026-05-19"
@@ -3341,6 +3606,7 @@
   "gefactureerd": 1393.65,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-19",
   "factuurDatums": [
    "2026-05-19"
@@ -3355,6 +3621,7 @@
   "gefactureerd": 653.48,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-19",
   "factuurDatums": [
    "2026-05-19"
@@ -3369,6 +3636,7 @@
   "gefactureerd": 1126.09,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-20",
   "factuurDatums": [
    "2026-05-20"
@@ -3383,6 +3651,7 @@
   "gefactureerd": 200.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-20",
   "factuurDatums": [
    "2026-05-20"
@@ -3397,6 +3666,7 @@
   "gefactureerd": 188,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-20",
   "factuurDatums": [
    "2026-05-20"
@@ -3411,6 +3681,7 @@
   "gefactureerd": 1026.23,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-20",
   "factuurDatums": [
    "2026-05-20"
@@ -3425,6 +3696,7 @@
   "gefactureerd": 528,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-20",
   "factuurDatums": [
    "2026-05-20"
@@ -3439,6 +3711,7 @@
   "gefactureerd": 451.84,
   "dekkingPct": 25,
   "aantalFacturen": 3,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-20",
   "factuurDatums": [
    "2026-05-20",
@@ -3455,6 +3728,7 @@
   "gefactureerd": 1566.31,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-20",
   "factuurDatums": [
    "2026-05-20"
@@ -3469,6 +3743,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-20",
   "factuurDatums": [
    "2026-05-20",
@@ -3484,6 +3759,7 @@
   "gefactureerd": 626.68,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-20",
   "factuurDatums": [
    "2026-05-20"
@@ -3498,6 +3774,7 @@
   "gefactureerd": 1041.82,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-20",
   "factuurDatums": [
    "2026-05-20"
@@ -3512,6 +3789,7 @@
   "gefactureerd": 1692.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-20",
   "factuurDatums": [
    "2026-05-20"
@@ -3526,6 +3804,7 @@
   "gefactureerd": 1293.1,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-20",
   "factuurDatums": [
    "2026-05-20"
@@ -3540,10 +3819,37 @@
   "gefactureerd": 595.38,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-20",
   "factuurDatums": [
    "2026-05-20"
   ]
+ },
+ {
+  "nummer": 5590,
+  "naam": "Veren vervangen",
+  "klant": "Darrnell Chotkan",
+  "companyId": 96843,
+  "opdrachtInclVat": 214.98,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2026-05-21",
+  "factuurDatums": []
+ },
+ {
+  "nummer": 5591,
+  "naam": "Klankband rolluiken",
+  "klant": "Maarten vd Marel",
+  "companyId": 98305,
+  "opdrachtInclVat": 99.99,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2026-05-21",
+  "factuurDatums": []
  },
  {
   "nummer": 5568,
@@ -3554,6 +3860,7 @@
   "gefactureerd": 595.38,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-21",
   "factuurDatums": [
    "2026-05-21"
@@ -3568,6 +3875,7 @@
   "gefactureerd": 1858.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-21",
   "factuurDatums": [
    "2026-05-21"
@@ -3582,6 +3890,7 @@
   "gefactureerd": 235.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-21",
   "factuurDatums": [
    "2026-05-21"
@@ -3596,6 +3905,7 @@
   "gefactureerd": 1362.86,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-21",
   "factuurDatums": [
    "2026-05-21"
@@ -3610,6 +3920,7 @@
   "gefactureerd": 1288.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-21",
   "factuurDatums": [
    "2026-05-21"
@@ -3624,6 +3935,7 @@
   "gefactureerd": 817.69,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-22",
   "factuurDatums": [
    "2026-05-22"
@@ -3638,6 +3950,7 @@
   "gefactureerd": 942.38,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-22",
   "factuurDatums": [
    "2026-05-22"
@@ -3652,6 +3965,7 @@
   "gefactureerd": 1724.41,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-22",
   "factuurDatums": [
    "2026-05-22"
@@ -3666,6 +3980,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-22",
   "factuurDatums": []
  },
@@ -3678,6 +3993,7 @@
   "gefactureerd": 3540.08,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-22",
   "factuurDatums": [
    "2026-05-22"
@@ -3692,6 +4008,7 @@
   "gefactureerd": 921.71,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-22",
   "factuurDatums": [
    "2026-05-22"
@@ -3706,6 +4023,7 @@
   "gefactureerd": 1169.03,
   "dekkingPct": 37,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-22",
   "factuurDatums": [
    "2026-05-22"
@@ -3717,12 +4035,14 @@
   "klant": "Benner",
   "companyId": 97017,
   "opdrachtInclVat": 300,
-  "gefactureerd": 120.01,
-  "dekkingPct": 40,
-  "aantalFacturen": 1,
+  "gefactureerd": 20.02,
+  "dekkingPct": 7,
+  "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-22",
   "factuurDatums": [
-   "2026-05-22"
+   "2026-05-22",
+   "2025-02-22"
   ]
  },
  {
@@ -3734,6 +4054,7 @@
   "gefactureerd": 605.59,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-26",
   "factuurDatums": [
    "2026-05-26"
@@ -3748,6 +4069,7 @@
   "gefactureerd": 991.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-26",
   "factuurDatums": [
    "2026-05-26"
@@ -3762,6 +4084,7 @@
   "gefactureerd": 1413.38,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-26",
   "factuurDatums": [
    "2026-05-26"
@@ -3776,6 +4099,7 @@
   "gefactureerd": 1090,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-26",
   "factuurDatums": [
    "2026-05-26"
@@ -3790,6 +4114,7 @@
   "gefactureerd": 1178.31,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-26",
   "factuurDatums": [
    "2026-05-26"
@@ -3804,6 +4129,7 @@
   "gefactureerd": 1014.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-26",
   "factuurDatums": [
    "2026-05-26"
@@ -3815,12 +4141,14 @@
   "klant": "Binck Padel B.V.",
   "companyId": 98141,
   "opdrachtInclVat": 960.99,
-  "gefactureerd": 384.39,
-  "dekkingPct": 40,
-  "aantalFacturen": 1,
+  "gefactureerd": 547.54,
+  "dekkingPct": 57,
+  "aantalFacturen": 2,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
   "opdrachtDatum": "2026-05-26",
   "factuurDatums": [
-   "2026-05-26"
+   "2026-05-26",
+   "2026-02-25"
   ]
  },
  {
@@ -3832,6 +4160,7 @@
   "gefactureerd": 2775.97,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-26",
   "factuurDatums": [
    "2026-05-26"
@@ -3846,6 +4175,7 @@
   "gefactureerd": 692.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-27",
   "factuurDatums": [
    "2026-05-27"
@@ -3860,6 +4190,7 @@
   "gefactureerd": 994.75,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-27",
   "factuurDatums": [
    "2026-05-27"
@@ -3874,6 +4205,7 @@
   "gefactureerd": 740.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-27",
   "factuurDatums": [
    "2026-05-27"
@@ -3888,6 +4220,7 @@
   "gefactureerd": 3521.74,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-27",
   "factuurDatums": [
    "2026-05-27"
@@ -3902,6 +4235,7 @@
   "gefactureerd": 1201.22,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-27",
   "factuurDatums": [
    "2026-05-27"
@@ -3916,6 +4250,7 @@
   "gefactureerd": 2012.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-27",
   "factuurDatums": [
    "2026-05-27"
@@ -3930,6 +4265,7 @@
   "gefactureerd": 379.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-27",
   "factuurDatums": [
    "2026-05-27"
@@ -3944,6 +4280,7 @@
   "gefactureerd": 910.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-28",
   "factuurDatums": [
    "2026-05-28"
@@ -3958,6 +4295,7 @@
   "gefactureerd": 1696.95,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-28",
   "factuurDatums": [
    "2026-05-28"
@@ -3972,6 +4310,7 @@
   "gefactureerd": 996.88,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-28",
   "factuurDatums": [
    "2026-05-28"
@@ -3986,6 +4325,7 @@
   "gefactureerd": 1426.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-28",
   "factuurDatums": [
    "2026-05-28"
@@ -4000,6 +4340,7 @@
   "gefactureerd": 944.18,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-28",
   "factuurDatums": [
    "2026-05-28"
@@ -4014,6 +4355,7 @@
   "gefactureerd": 1296.89,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-28",
   "factuurDatums": [
    "2026-05-28"
@@ -4028,6 +4370,7 @@
   "gefactureerd": 2574.01,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-29",
   "factuurDatums": [
    "2026-05-29"
@@ -4042,6 +4385,7 @@
   "gefactureerd": 1130.79,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-29",
   "factuurDatums": [
    "2026-05-29"
@@ -4056,6 +4400,7 @@
   "gefactureerd": 256.7,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-29",
   "factuurDatums": [
    "2026-05-29"
@@ -4070,6 +4415,7 @@
   "gefactureerd": 932.76,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-29",
   "factuurDatums": [
    "2026-05-29"
@@ -4084,6 +4430,7 @@
   "gefactureerd": 1424.56,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-29",
   "factuurDatums": [
    "2026-05-29"
@@ -4098,6 +4445,7 @@
   "gefactureerd": 7575.64,
   "dekkingPct": 38,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-29",
   "factuurDatums": [
    "2026-05-29"
@@ -4112,6 +4460,7 @@
   "gefactureerd": 933.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-30",
   "factuurDatums": [
    "2026-05-30"
@@ -4126,6 +4475,7 @@
   "gefactureerd": 1677.28,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-30",
   "factuurDatums": [
    "2026-05-30"
@@ -4140,10 +4490,24 @@
   "gefactureerd": 4612.48,
   "dekkingPct": 37,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-05-30",
   "factuurDatums": [
    "2026-05-30"
   ]
+ },
+ {
+  "nummer": 5685,
+  "naam": "Screen Arie",
+  "klant": "Sjoerd Hoogduin.",
+  "companyId": 96366,
+  "opdrachtInclVat": 341.4,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2026-05-30",
+  "factuurDatums": []
  },
  {
   "nummer": 5665,
@@ -4154,6 +4518,7 @@
   "gefactureerd": 554,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-01",
   "factuurDatums": [
    "2026-06-01"
@@ -4168,6 +4533,7 @@
   "gefactureerd": 435.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-01",
   "factuurDatums": [
    "2026-06-01"
@@ -4182,6 +4548,7 @@
   "gefactureerd": 2804.86,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4196,6 +4563,7 @@
   "gefactureerd": 2265.39,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4210,6 +4578,7 @@
   "gefactureerd": 1143.68,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4224,6 +4593,7 @@
   "gefactureerd": 1176.45,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4238,6 +4608,7 @@
   "gefactureerd": 1184.21,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4252,6 +4623,7 @@
   "gefactureerd": 904.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-12"
@@ -4266,6 +4638,7 @@
   "gefactureerd": 992.61,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4280,6 +4653,7 @@
   "gefactureerd": 547.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4294,6 +4668,7 @@
   "gefactureerd": 1239.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4308,6 +4683,7 @@
   "gefactureerd": 3037.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4322,6 +4698,7 @@
   "gefactureerd": 463.77,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4336,6 +4713,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03",
@@ -4351,6 +4729,7 @@
   "gefactureerd": 1389.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4365,6 +4744,7 @@
   "gefactureerd": 570.01,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4379,6 +4759,7 @@
   "gefactureerd": 2510,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4393,6 +4774,7 @@
   "gefactureerd": 797.47,
   "dekkingPct": 43,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4407,6 +4789,7 @@
   "gefactureerd": 843.68,
   "dekkingPct": 42,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4421,6 +4804,7 @@
   "gefactureerd": 773.27,
   "dekkingPct": 42,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4435,6 +4819,7 @@
   "gefactureerd": 797.47,
   "dekkingPct": 42,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4449,6 +4834,7 @@
   "gefactureerd": 1900.49,
   "dekkingPct": 42,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4463,6 +4849,7 @@
   "gefactureerd": 916.6,
   "dekkingPct": 42,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4477,6 +4864,7 @@
   "gefactureerd": 797.47,
   "dekkingPct": 42,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4491,6 +4879,7 @@
   "gefactureerd": 2115.08,
   "dekkingPct": 44,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4505,6 +4894,7 @@
   "gefactureerd": 940.8,
   "dekkingPct": 42,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-03",
   "factuurDatums": [
    "2026-06-03"
@@ -4519,6 +4909,7 @@
   "gefactureerd": 855.2,
   "dekkingPct": 42,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-04",
   "factuurDatums": [
    "2026-06-04"
@@ -4533,6 +4924,7 @@
   "gefactureerd": 1481.58,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-04",
   "factuurDatums": [
    "2026-06-04"
@@ -4547,6 +4939,7 @@
   "gefactureerd": 1177.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-04",
   "factuurDatums": [
    "2026-06-04"
@@ -4561,6 +4954,7 @@
   "gefactureerd": 1329.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-04",
   "factuurDatums": [
    "2026-06-04"
@@ -4575,6 +4969,7 @@
   "gefactureerd": 725.56,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-04",
   "factuurDatums": [
    "2026-06-04"
@@ -4589,6 +4984,7 @@
   "gefactureerd": 601.85,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-04",
   "factuurDatums": [
    "2026-06-04"
@@ -4603,6 +4999,7 @@
   "gefactureerd": 1039.98,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-04",
   "factuurDatums": [
    "2026-06-04"
@@ -4617,6 +5014,7 @@
   "gefactureerd": 610.3,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-04",
   "factuurDatums": [
    "2026-06-04"
@@ -4631,6 +5029,7 @@
   "gefactureerd": 1828.18,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-04",
   "factuurDatums": [
    "2026-06-04"
@@ -4645,6 +5044,7 @@
   "gefactureerd": 1282.44,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-04",
   "factuurDatums": [
    "2026-06-04"
@@ -4659,6 +5059,7 @@
   "gefactureerd": 1780.01,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-04",
   "factuurDatums": [
    "2026-06-04"
@@ -4673,6 +5074,7 @@
   "gefactureerd": 780.21,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-04",
   "factuurDatums": [
    "2026-06-04"
@@ -4687,6 +5089,7 @@
   "gefactureerd": 1993.61,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-05",
   "factuurDatums": [
    "2026-06-05"
@@ -4701,6 +5104,7 @@
   "gefactureerd": 809.41,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-05",
   "factuurDatums": [
    "2026-06-05"
@@ -4715,6 +5119,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-05",
   "factuurDatums": []
  },
@@ -4727,6 +5132,7 @@
   "gefactureerd": 1363.45,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-05",
   "factuurDatums": [
    "2026-06-05"
@@ -4741,6 +5147,7 @@
   "gefactureerd": 473.62,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-05",
   "factuurDatums": [
    "2026-06-05"
@@ -4755,6 +5162,7 @@
   "gefactureerd": 2734.29,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-05",
   "factuurDatums": [
    "2026-06-05"
@@ -4769,6 +5177,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-05",
   "factuurDatums": []
  },
@@ -4781,6 +5190,7 @@
   "gefactureerd": 5520.01,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-06",
   "factuurDatums": [
    "2026-06-06"
@@ -4795,6 +5205,7 @@
   "gefactureerd": 1031.62,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-06",
   "factuurDatums": [
    "2026-06-06"
@@ -4809,6 +5220,7 @@
   "gefactureerd": 783.25,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-06",
   "factuurDatums": [
    "2026-06-06"
@@ -4823,6 +5235,7 @@
   "gefactureerd": 1257.66,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-06",
   "factuurDatums": [
    "2026-06-06"
@@ -4834,12 +5247,19 @@
   "klant": "Unicoz Onderwijsgroep",
   "companyId": 97749,
   "opdrachtInclVat": 836.13,
-  "gefactureerd": 167.22,
-  "dekkingPct": 20,
-  "aantalFacturen": 1,
+  "gefactureerd": 549.06,
+  "dekkingPct": 66,
+  "aantalFacturen": 7,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
   "opdrachtDatum": "2026-06-08",
   "factuurDatums": [
-   "2026-06-08"
+   "2026-06-08",
+   "2025-06-12",
+   "2025-11-01",
+   "2025-11-18",
+   "2026-01-08",
+   "2026-03-07",
+   "2026-04-01"
   ]
  },
  {
@@ -4851,6 +5271,7 @@
   "gefactureerd": 3016.41,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-08",
   "factuurDatums": [
    "2026-06-08"
@@ -4865,6 +5286,7 @@
   "gefactureerd": 3687.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-09",
   "factuurDatums": [
    "2026-06-09"
@@ -4879,6 +5301,7 @@
   "gefactureerd": 436.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-09",
   "factuurDatums": [
    "2026-06-09"
@@ -4893,6 +5316,7 @@
   "gefactureerd": 250.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-09",
   "factuurDatums": [
    "2026-06-10"
@@ -4907,10 +5331,24 @@
   "gefactureerd": 599.08,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-09",
   "factuurDatums": [
    "2026-06-09"
   ]
+ },
+ {
+  "nummer": 5812,
+  "naam": "Rolluiken demonteren/monteren",
+  "klant": "Michelle van den Berg",
+  "companyId": 97066,
+  "opdrachtInclVat": 300.01,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2026-06-09",
+  "factuurDatums": []
  },
  {
   "nummer": 5605,
@@ -4921,6 +5359,7 @@
   "gefactureerd": 5530.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-10",
   "factuurDatums": [
    "2026-06-10"
@@ -4935,10 +5374,24 @@
   "gefactureerd": 2800,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-10",
   "factuurDatums": [
    "2026-06-10"
   ]
+ },
+ {
+  "nummer": 5811,
+  "naam": "Prijsopgave hoeklijnen",
+  "klant": "Jurian Witsenburg",
+  "companyId": 98016,
+  "opdrachtInclVat": 195,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2026-06-10",
+  "factuurDatums": []
  },
  {
   "nummer": 5472,
@@ -4949,6 +5402,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-11",
   "factuurDatums": []
  },
@@ -4961,6 +5415,7 @@
   "gefactureerd": 5299.99,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-11",
   "factuurDatums": [
    "2026-06-11"
@@ -4975,6 +5430,7 @@
   "gefactureerd": 1583.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-11",
   "factuurDatums": [
    "2026-06-11"
@@ -4989,6 +5445,7 @@
   "gefactureerd": 734.86,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-11",
   "factuurDatums": [
    "2026-06-11"
@@ -5003,6 +5460,7 @@
   "gefactureerd": 1478.64,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-11",
   "factuurDatums": [
    "2026-06-11"
@@ -5017,6 +5475,7 @@
   "gefactureerd": 834.11,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-11",
   "factuurDatums": [
    "2026-06-11"
@@ -5031,6 +5490,7 @@
   "gefactureerd": 1732.32,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-11",
   "factuurDatums": [
    "2026-06-11"
@@ -5045,6 +5505,7 @@
   "gefactureerd": 4803.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-11",
   "factuurDatums": [
    "2026-06-11"
@@ -5059,6 +5520,7 @@
   "gefactureerd": 1225.69,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-11",
   "factuurDatums": [
    "2026-06-11"
@@ -5073,6 +5535,7 @@
   "gefactureerd": 809.82,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-11",
   "factuurDatums": [
    "2026-06-11"
@@ -5087,6 +5550,7 @@
   "gefactureerd": 565.42,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-11",
   "factuurDatums": [
    "2026-06-11"
@@ -5101,6 +5565,7 @@
   "gefactureerd": 1436.69,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-11",
   "factuurDatums": [
    "2026-06-11"
@@ -5115,6 +5580,7 @@
   "gefactureerd": 1515.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-11",
   "factuurDatums": [
    "2026-06-11"
@@ -5129,6 +5595,7 @@
   "gefactureerd": 466.14,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-12",
   "factuurDatums": [
    "2026-06-12"
@@ -5143,6 +5610,7 @@
   "gefactureerd": 482,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-12",
   "factuurDatums": [
    "2026-06-12"
@@ -5157,6 +5625,7 @@
   "gefactureerd": 822.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-12",
   "factuurDatums": [
    "2026-06-12"
@@ -5171,9 +5640,25 @@
   "gefactureerd": 1387.33,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-12",
   "factuurDatums": [
    "2026-06-12"
+  ]
+ },
+ {
+  "nummer": 5854,
+  "naam": "Sophie en Gijs",
+  "klant": "Marvin Mertakusuma",
+  "companyId": 96094,
+  "opdrachtInclVat": 1151,
+  "gefactureerd": 766.17,
+  "dekkingPct": 67,
+  "aantalFacturen": 1,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
+  "opdrachtDatum": "2026-06-12",
+  "factuurDatums": [
+   "2024-05-27"
   ]
  },
  {
@@ -5185,7 +5670,21 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-12",
+  "factuurDatums": []
+ },
+ {
+  "nummer": 5856,
+  "naam": "prijsopgaaf Sonty.",
+  "klant": "Blok Carpet Shop Zoetermeer bv",
+  "companyId": 98804,
+  "opdrachtInclVat": 2085.02,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2026-06-15",
   "factuurDatums": []
  },
  {
@@ -5197,6 +5696,7 @@
   "gefactureerd": 1270.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-15",
   "factuurDatums": [
    "2026-06-15"
@@ -5211,10 +5711,24 @@
   "gefactureerd": 548.14,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-15",
   "factuurDatums": [
    "2026-06-15"
   ]
+ },
+ {
+  "nummer": 5872,
+  "naam": "Meerprijs raamdecoratie",
+  "klant": "Den Dekker TSO",
+  "companyId": 96269,
+  "opdrachtInclVat": 157,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2026-06-16",
+  "factuurDatums": []
  },
  {
   "nummer": 5875,
@@ -5225,6 +5739,7 @@
   "gefactureerd": 1237.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-18",
   "factuurDatums": [
    "2026-06-18"
@@ -5239,6 +5754,7 @@
   "gefactureerd": 519.17,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-18",
   "factuurDatums": [
    "2026-06-18"
@@ -5253,6 +5769,7 @@
   "gefactureerd": 1239.29,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-18",
   "factuurDatums": [
    "2026-06-18"
@@ -5267,6 +5784,7 @@
   "gefactureerd": 578.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-18",
   "factuurDatums": [
    "2026-06-18"
@@ -5281,6 +5799,7 @@
   "gefactureerd": 658.41,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-18",
   "factuurDatums": [
    "2026-06-18"
@@ -5295,6 +5814,7 @@
   "gefactureerd": 857.59,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-18",
   "factuurDatums": [
    "2026-06-18"
@@ -5306,12 +5826,14 @@
   "klant": "Florine van Logtestijn",
   "companyId": 95696,
   "opdrachtInclVat": 2486,
-  "gefactureerd": 994.4,
-  "dekkingPct": 40,
-  "aantalFacturen": 1,
+  "gefactureerd": 1048.2,
+  "dekkingPct": 42,
+  "aantalFacturen": 2,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
   "opdrachtDatum": "2026-06-18",
   "factuurDatums": [
-   "2026-06-18"
+   "2026-06-18",
+   "2024-07-12"
   ]
  },
  {
@@ -5323,6 +5845,7 @@
   "gefactureerd": 1352.24,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-18",
   "factuurDatums": [
    "2026-06-18"
@@ -5337,6 +5860,7 @@
   "gefactureerd": 2055.21,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-18",
   "factuurDatums": [
    "2026-06-18"
@@ -5351,6 +5875,7 @@
   "gefactureerd": 943.99,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-18",
   "factuurDatums": [
    "2026-06-18"
@@ -5365,6 +5890,7 @@
   "gefactureerd": 1790.39,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-18",
   "factuurDatums": [
    "2026-06-18"
@@ -5379,6 +5905,7 @@
   "gefactureerd": 804.43,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-19",
   "factuurDatums": [
    "2026-06-19"
@@ -5393,6 +5920,7 @@
   "gefactureerd": 3255.02,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-19",
   "factuurDatums": [
    "2026-06-19"
@@ -5407,6 +5935,7 @@
   "gefactureerd": 1410,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-19",
   "factuurDatums": [
    "2026-06-19"
@@ -5418,12 +5947,19 @@
   "klant": "Unicoz Onderwijsgroep",
   "companyId": 97749,
   "opdrachtInclVat": 3642.22,
-  "gefactureerd": 1456.89,
-  "dekkingPct": 40,
-  "aantalFacturen": 1,
+  "gefactureerd": 3120.2,
+  "dekkingPct": 86,
+  "aantalFacturen": 7,
+  "bedragNota": "klant heeft meerdere opdrachten — bedrag naar rato, check",
   "opdrachtDatum": "2026-06-19",
   "factuurDatums": [
-   "2026-06-19"
+   "2026-06-19",
+   "2025-06-12",
+   "2025-11-01",
+   "2025-11-18",
+   "2026-01-08",
+   "2026-03-07",
+   "2026-04-01"
   ]
  },
  {
@@ -5435,6 +5971,7 @@
   "gefactureerd": 2817.19,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-19",
   "factuurDatums": [
    "2026-06-19"
@@ -5449,6 +5986,7 @@
   "gefactureerd": 634.83,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-19",
   "factuurDatums": [
    "2026-06-19"
@@ -5463,6 +6001,7 @@
   "gefactureerd": 1454.18,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-19",
   "factuurDatums": [
    "2026-06-19"
@@ -5477,6 +6016,7 @@
   "gefactureerd": 1103.06,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-19",
   "factuurDatums": [
    "2026-06-19"
@@ -5491,6 +6031,7 @@
   "gefactureerd": 6753.52,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-19",
   "factuurDatums": [
    "2026-06-19"
@@ -5505,6 +6046,7 @@
   "gefactureerd": 4462.07,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-20",
   "factuurDatums": [
    "2026-06-20"
@@ -5519,6 +6061,7 @@
   "gefactureerd": 270.4,
   "dekkingPct": 10,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-20",
   "factuurDatums": [
    "2026-06-20"
@@ -5533,6 +6076,7 @@
   "gefactureerd": 140.76,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-22",
   "factuurDatums": [
    "2026-06-22"
@@ -5547,6 +6091,7 @@
   "gefactureerd": 3850.79,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-22",
   "factuurDatums": [
    "2026-06-22"
@@ -5561,6 +6106,7 @@
   "gefactureerd": 2602.54,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-22",
   "factuurDatums": [
    "2026-06-22"
@@ -5575,6 +6121,7 @@
   "gefactureerd": 489.94,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-22",
   "factuurDatums": [
    "2026-06-22"
@@ -5589,6 +6136,7 @@
   "gefactureerd": 2765.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-23",
   "factuurDatums": [
    "2026-06-23"
@@ -5603,6 +6151,7 @@
   "gefactureerd": 1375.69,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-23",
   "factuurDatums": [
    "2026-06-23"
@@ -5617,6 +6166,7 @@
   "gefactureerd": 1210.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-23",
   "factuurDatums": [
    "2026-06-23"
@@ -5631,6 +6181,7 @@
   "gefactureerd": 2320.49,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-23",
   "factuurDatums": [
    "2026-06-23"
@@ -5645,6 +6196,7 @@
   "gefactureerd": 3902.53,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-23",
   "factuurDatums": [
    "2026-06-23"
@@ -5659,6 +6211,7 @@
   "gefactureerd": 1920,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-23",
   "factuurDatums": [
    "2026-06-23"
@@ -5673,10 +6226,24 @@
   "gefactureerd": 1898.87,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-23",
   "factuurDatums": [
    "2026-06-23"
   ]
+ },
+ {
+  "nummer": 5935,
+  "naam": "Rolluik piet ",
+  "klant": "Sjoerd Hoogduin.",
+  "companyId": 96366,
+  "opdrachtInclVat": 617,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2026-06-23",
+  "factuurDatums": []
  },
  {
   "nummer": 5790,
@@ -5687,6 +6254,7 @@
   "gefactureerd": 1473.32,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-24",
   "factuurDatums": [
    "2026-06-24"
@@ -5701,6 +6269,7 @@
   "gefactureerd": 98,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-24",
   "factuurDatums": [
    "2026-06-24"
@@ -5715,6 +6284,7 @@
   "gefactureerd": 1153.46,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-24",
   "factuurDatums": [
    "2026-06-24"
@@ -5729,6 +6299,7 @@
   "gefactureerd": 631.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-24",
   "factuurDatums": [
    "2026-06-24"
@@ -5743,6 +6314,7 @@
   "gefactureerd": 2785.3,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-24",
   "factuurDatums": [
    "2026-06-24"
@@ -5757,6 +6329,7 @@
   "gefactureerd": 1551.44,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-24",
   "factuurDatums": [
    "2026-06-24"
@@ -5771,6 +6344,7 @@
   "gefactureerd": 1433.68,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-25",
   "factuurDatums": [
    "2026-06-25"
@@ -5785,6 +6359,7 @@
   "gefactureerd": 1344.7,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-25",
   "factuurDatums": [
    "2026-06-25"
@@ -5799,6 +6374,7 @@
   "gefactureerd": 517.48,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-25",
   "factuurDatums": [
    "2026-06-25"
@@ -5813,6 +6389,7 @@
   "gefactureerd": 2698.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-25",
   "factuurDatums": [
    "2026-06-25"
@@ -5827,6 +6404,7 @@
   "gefactureerd": 555.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-25",
   "factuurDatums": [
    "2026-06-25"
@@ -5841,6 +6419,7 @@
   "gefactureerd": 754.12,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-26",
   "factuurDatums": [
    "2026-06-26"
@@ -5855,6 +6434,7 @@
   "gefactureerd": 500.82,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-26",
   "factuurDatums": [
    "2026-06-26"
@@ -5869,6 +6449,7 @@
   "gefactureerd": 1595.99,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-26",
   "factuurDatums": [
    "2026-06-26"
@@ -5883,6 +6464,7 @@
   "gefactureerd": 288.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-26",
   "factuurDatums": [
    "2026-06-26"
@@ -5897,6 +6479,7 @@
   "gefactureerd": 9599.99,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-26",
   "factuurDatums": [
    "2026-06-26"
@@ -5911,6 +6494,7 @@
   "gefactureerd": 2324.24,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-27",
   "factuurDatums": [
    "2026-06-27"
@@ -5925,6 +6509,7 @@
   "gefactureerd": 526.07,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-27",
   "factuurDatums": [
    "2026-06-27"
@@ -5939,6 +6524,7 @@
   "gefactureerd": 2221.61,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-27",
   "factuurDatums": [
    "2026-06-27"
@@ -5953,6 +6539,7 @@
   "gefactureerd": 2221.61,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-27",
   "factuurDatums": [
    "2026-06-27"
@@ -5967,6 +6554,7 @@
   "gefactureerd": 2069.61,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-27",
   "factuurDatums": [
    "2026-06-27"
@@ -5981,6 +6569,7 @@
   "gefactureerd": 2069.61,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-27",
   "factuurDatums": [
    "2026-06-27"
@@ -5995,6 +6584,7 @@
   "gefactureerd": 755.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-29",
   "factuurDatums": [
    "2026-06-29"
@@ -6009,6 +6599,7 @@
   "gefactureerd": 2069.61,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-29",
   "factuurDatums": [
    "2026-06-29"
@@ -6023,6 +6614,7 @@
   "gefactureerd": 900,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-29",
   "factuurDatums": [
    "2026-06-29"
@@ -6037,6 +6629,7 @@
   "gefactureerd": 1126.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-29",
   "factuurDatums": [
    "2026-06-29"
@@ -6051,6 +6644,7 @@
   "gefactureerd": 1369.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-29",
   "factuurDatums": [
    "2026-06-29"
@@ -6065,6 +6659,7 @@
   "gefactureerd": 2982.14,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-29",
   "factuurDatums": [
    "2026-06-29"
@@ -6079,6 +6674,7 @@
   "gefactureerd": 1399.99,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-29",
   "factuurDatums": [
    "2026-06-29"
@@ -6093,6 +6689,7 @@
   "gefactureerd": 2191.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-29",
   "factuurDatums": [
    "2026-06-29"
@@ -6107,6 +6704,7 @@
   "gefactureerd": 642.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-29",
   "factuurDatums": [
    "2026-06-29"
@@ -6121,6 +6719,7 @@
   "gefactureerd": 1094.12,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-29",
   "factuurDatums": [
    "2026-06-29"
@@ -6135,6 +6734,7 @@
   "gefactureerd": 1139.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-29",
   "factuurDatums": [
    "2026-06-29"
@@ -6149,6 +6749,7 @@
   "gefactureerd": 432.79,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6163,6 +6764,7 @@
   "gefactureerd": 1376.83,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6177,6 +6779,7 @@
   "gefactureerd": 799.21,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6191,6 +6794,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 2,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30",
@@ -6206,6 +6810,7 @@
   "gefactureerd": 555.41,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6220,6 +6825,7 @@
   "gefactureerd": 4537.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6234,6 +6840,7 @@
   "gefactureerd": 3166.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6248,6 +6855,7 @@
   "gefactureerd": 6031.85,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6262,6 +6870,7 @@
   "gefactureerd": 1833.23,
   "dekkingPct": 41,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6276,6 +6885,7 @@
   "gefactureerd": 1785.19,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6290,6 +6900,7 @@
   "gefactureerd": 2279.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6304,6 +6915,7 @@
   "gefactureerd": 3997.97,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6318,6 +6930,7 @@
   "gefactureerd": 1248.76,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6332,6 +6945,7 @@
   "gefactureerd": 1326.77,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6346,6 +6960,7 @@
   "gefactureerd": 2774.86,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-06-30",
   "factuurDatums": [
    "2026-06-30"
@@ -6360,6 +6975,7 @@
   "gefactureerd": 641.58,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-01",
   "factuurDatums": [
    "2026-07-01"
@@ -6374,6 +6990,7 @@
   "gefactureerd": 1133.9,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-01",
   "factuurDatums": [
    "2026-07-01"
@@ -6388,6 +7005,7 @@
   "gefactureerd": 4909.79,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-01",
   "factuurDatums": [
    "2026-07-01"
@@ -6402,6 +7020,7 @@
   "gefactureerd": 2384,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-01",
   "factuurDatums": [
    "2026-07-01"
@@ -6416,6 +7035,7 @@
   "gefactureerd": 1786.49,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-01",
   "factuurDatums": [
    "2026-07-01"
@@ -6430,6 +7050,7 @@
   "gefactureerd": 3731.13,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-01",
   "factuurDatums": [
    "2026-07-01"
@@ -6444,6 +7065,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-01",
   "factuurDatums": []
  },
@@ -6456,6 +7078,7 @@
   "gefactureerd": 1786.49,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-01",
   "factuurDatums": [
    "2026-07-01"
@@ -6470,6 +7093,7 @@
   "gefactureerd": 809.18,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-02",
   "factuurDatums": [
    "2026-07-02"
@@ -6484,6 +7108,7 @@
   "gefactureerd": 809.54,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-02",
   "factuurDatums": [
    "2026-07-02"
@@ -6498,6 +7123,7 @@
   "gefactureerd": 1168,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-02",
   "factuurDatums": [
    "2026-07-02"
@@ -6512,6 +7138,7 @@
   "gefactureerd": 1724.79,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-02",
   "factuurDatums": [
    "2026-07-02"
@@ -6526,6 +7153,7 @@
   "gefactureerd": 885.6,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-02",
   "factuurDatums": [
    "2026-07-02"
@@ -6540,6 +7168,7 @@
   "gefactureerd": 1715.99,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-02",
   "factuurDatums": [
    "2026-07-02"
@@ -6554,6 +7183,7 @@
   "gefactureerd": 150.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-02",
   "factuurDatums": [
    "2026-07-02"
@@ -6568,6 +7198,7 @@
   "gefactureerd": 1959.99,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-02",
   "factuurDatums": [
    "2026-07-02"
@@ -6582,6 +7213,7 @@
   "gefactureerd": 2707.59,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-02",
   "factuurDatums": [
    "2026-07-02"
@@ -6596,6 +7228,7 @@
   "gefactureerd": 1224.01,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-03",
   "factuurDatums": [
    "2026-07-03"
@@ -6610,6 +7243,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-04",
   "factuurDatums": []
  },
@@ -6622,6 +7256,7 @@
   "gefactureerd": 0,
   "dekkingPct": 0,
   "aantalFacturen": 0,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-04",
   "factuurDatums": []
  },
@@ -6634,6 +7269,7 @@
   "gefactureerd": 630.77,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-04",
   "factuurDatums": [
    "2026-07-04"
@@ -6648,6 +7284,7 @@
   "gefactureerd": 709.21,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-04",
   "factuurDatums": [
    "2026-07-04"
@@ -6662,10 +7299,24 @@
   "gefactureerd": 691.93,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-06",
   "factuurDatums": [
    "2026-07-06"
   ]
+ },
+ {
+  "nummer": 6038,
+  "naam": "Prijsopgaaf Sonty.",
+  "klant": "Schuurhof",
+  "companyId": 96286,
+  "opdrachtInclVat": 375,
+  "gefactureerd": 0,
+  "dekkingPct": 0,
+  "aantalFacturen": 0,
+  "bedragNota": "",
+  "opdrachtDatum": "2026-07-06",
+  "factuurDatums": []
  },
  {
   "nummer": 5930,
@@ -6676,6 +7327,7 @@
   "gefactureerd": 3626.82,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-06",
   "factuurDatums": [
    "2026-07-06"
@@ -6690,6 +7342,7 @@
   "gefactureerd": 586.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-06",
   "factuurDatums": [
    "2026-07-06"
@@ -6704,6 +7357,7 @@
   "gefactureerd": 1376,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-06",
   "factuurDatums": [
    "2026-07-06"
@@ -6718,6 +7372,7 @@
   "gefactureerd": 2879.99,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-06",
   "factuurDatums": [
    "2026-07-06"
@@ -6732,6 +7387,7 @@
   "gefactureerd": 2990.32,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-07",
   "factuurDatums": [
    "2026-07-07"
@@ -6746,6 +7402,7 @@
   "gefactureerd": 465.2,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-07",
   "factuurDatums": [
    "2026-07-07"
@@ -6760,6 +7417,7 @@
   "gefactureerd": 498.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-07",
   "factuurDatums": [
    "2026-07-07"
@@ -6774,6 +7432,7 @@
   "gefactureerd": 1198.89,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-07",
   "factuurDatums": [
    "2026-07-07"
@@ -6788,6 +7447,7 @@
   "gefactureerd": 547.4,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-07",
   "factuurDatums": [
    "2026-07-07"
@@ -6802,6 +7462,7 @@
   "gefactureerd": 2065.74,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-07",
   "factuurDatums": [
    "2026-07-07"
@@ -6816,6 +7477,7 @@
   "gefactureerd": 4052.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-07",
   "factuurDatums": [
    "2026-07-07"
@@ -6830,6 +7492,7 @@
   "gefactureerd": 2708.8,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-07",
   "factuurDatums": [
    "2026-07-07"
@@ -6844,6 +7507,7 @@
   "gefactureerd": 5277.49,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-07",
   "factuurDatums": [
    "2026-07-07"
@@ -6858,6 +7522,7 @@
   "gefactureerd": 680,
   "dekkingPct": 40,
   "aantalFacturen": 1,
+  "bedragNota": "",
   "opdrachtDatum": "2026-07-07",
   "factuurDatums": [
    "2026-07-07"

@@ -111,11 +111,11 @@ console.log('Klaar voor eindfactuur: €' + Math.round(klaar.reduce((s, r) => s 
   }
   const auth = new google.auth.GoogleAuth({ keyFile: path.join(__dirname, '..', 'data', 'google-service-account.json'), scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
   const sheets = google.sheets({ version: 'v4', auth });
-  const header = ['Status', 'Gripp nr', 'Klant', 'Geplaatst op', 'Nog open in planning', 'Opdracht incl BTW', 'Gefactureerd', 'Nog te factureren', 'Team', 'Opmerking planning', 'Opdrachtdatum', 'Match'];
+  const header = ['Status', 'Gripp nr', 'Klant', 'Geplaatst op', 'Nog open in planning', 'Opdracht incl BTW', 'Gefactureerd', 'Nog te factureren', 'Team', 'Opmerking planning', 'Opdrachtdatum', 'Match', 'Bedrag-notitie'];
   const values = [header, ...rijen.map(r => [
     r.status, r.nummer, r.klant, r.geplaatstOp, r.openstaandeRegels,
     r.opdrachtInclVat, r.gefactureerd, Math.round((r.opdrachtInclVat - r.gefactureerd) * 100) / 100,
-    r.team, r.opmerking, r.opdrachtDatum, r.matchType,
+    r.team, r.opmerking, r.opdrachtDatum, r.matchType, r.bedragNota || '',
   ])];
   // Oude inhoud wissen zodat er geen restjes van de vorige versie blijven staan
   await sheets.spreadsheets.values.clear({ spreadsheetId: SHEET_ID, range: `'${TAB}'!A1:Z600` });

@@ -268,6 +268,28 @@ async function rpGet(ep) {
   try { return await res.json(); } catch { return null; }
 }
 
+// Haalt de volledige backlog-itemlijst op. KRITIEK: een mislukte of lege ophaal
+// (RP geeft geregeld 504 op deze grote/trage lijst) mag NOOIT als "0 items, klaar"
+// gelden — anders slaat v4 stil hele batches over (44 offertes bleven zo staan 7-7).
+// Daarom: geduldig herproberen, en bij aanhoudende fout luid alarm + gooien (run stopt).
+async function rpGetItemsOrThrow(context) {
+  const ep = '/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items';
+  for (let poging = 1; poging <= 5; poging++) {
+    let data = null;
+    try {
+      const res = await fetchRetry('https://backend.reuzenpanda.nl' + ep, { headers: { 'Authorization': 'Bearer ' + RP_API_KEY } });
+      if (res.ok) { try { data = await res.json(); } catch { data = null; } }
+      else console.log('  (items-ophaal ' + context + ': HTTP ' + res.status + ', poging ' + poging + '/5)');
+    } catch (e) {
+      console.log('  (items-ophaal ' + context + ': ' + (e.cause?.code || e.message) + ', poging ' + poging + '/5)');
+    }
+    if (Array.isArray(data?.items)) return data.items;
+    if (poging < 5) await new Promise(r => setTimeout(r, poging * 10000));
+  }
+  await sendTelegram('⚠️ Offerte controle v4 GESTOPT: kon de offertelijst niet ophalen bij Reuzenpanda (' + context + '), na 5 pogingen. Er is NIETS verwerkt — dit is GEEN "0 offertes". Volgende run probeert opnieuw; blijft dit, dan is de RP API traag/down.');
+  throw new Error('rpGetItemsOrThrow: items-lijst niet op te halen na 5 pogingen (' + context + ')');
+}
+
 async function rpPut(ep, body) {
   const res = await fetchRetry('https://backend.reuzenpanda.nl' + ep, {
     method: 'PUT', headers: { 'Authorization': 'Bearer ' + RP_API_KEY, 'Content-Type': 'application/json' },
@@ -1508,7 +1530,7 @@ async function main() {
   console.log('[' + now.toISOString().substring(11, 19) + '] Offerte controle v3 start');
 
   const sevenDaysAgo = Date.now() - 7 * 86400000;
-  const itemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
+  const itemsData = { items: await rpGetItemsOrThrow('v4-run') };
   const ocItems = (itemsData?.items || []).filter(i =>
     i.status_id === OC_STATUS && i.timestamp_created > sevenDaysAgo &&
     !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
@@ -1750,7 +1772,7 @@ async function main() {
   console.log('Stap 1 klaar: OK:' + okCount + ' Fixed:' + fixCount + ' Routed:' + routeCount + ' Errors:' + errorCount);
 
   // SHEET BIJWERKEN
-  const gcItemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
+  const gcItemsData = { items: await rpGetItemsOrThrow('v4-run') };
   // Tool-leads (pipeline-kolom "Winkel ") horen ook in het offerte-register (instructie Daimy 2026-07-04)
   const WINKEL_SHEET_STATUS = '058e79f8-12fa-4a41-8614-9f7ea2e78b4b';
   const gcItems = (gcItemsData?.items || []).filter(i =>
@@ -1876,7 +1898,7 @@ async function main() {
   // GECONTROLEERD → OFFERTE VERSTUURD (geactiveerd door Daimy 2026-06-29)
   // Haal VERS op (niet cached) zodat ook items die in DEZE run naar GC zijn gezet worden meegenomen
   await new Promise(r => setTimeout(r, 5000)); // 5s wachten zodat RP de status-wijzigingen heeft verwerkt
-  const gcToOvData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
+  const gcToOvData = { items: await rpGetItemsOrThrow('v4-run') };
   const gcToOv = (gcToOvData?.items || []).filter(i =>
     i.status_id === GECONTROLEERD && !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
   );
@@ -1893,7 +1915,7 @@ async function main() {
   function getWaSent() { try { return JSON.parse(fs.readFileSync(WA_OFFERTE_SENT_FILE, 'utf8')); } catch { return {}; } }
   function markWaSent(key) { const d = getWaSent(); d[key] = new Date().toISOString(); fs.writeFileSync(WA_OFFERTE_SENT_FILE, JSON.stringify(d, null, 2)); }
 
-  const ovItemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
+  const ovItemsData = { items: await rpGetItemsOrThrow('v4-run') };
   const ovItems = (ovItemsData?.items || []).filter(i =>
     i.status_id === '15c4f0be-c6bf-447d-bf5f-a233c482eb53' && // Offerte verstuurd
     !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED') &&
@@ -1994,7 +2016,7 @@ const testName = testArg ? process.argv[process.argv.indexOf(testArg) + 1] : nul
 if (testName) {
   (async () => {
     console.log('=== TEST MODE: alleen items met "' + testName + '" ===');
-    const itemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
+    const itemsData = { items: await rpGetItemsOrThrow('v4-run') };
     const items = (itemsData?.items || []).filter(i =>
       i.status_id === '64788881-632c-4217-8f56-d20732c94b08' &&
       (i.summary || '').toLowerCase().includes(testName.toLowerCase()) &&
@@ -2101,5 +2123,10 @@ if (testName) {
     }
   })().catch(e => { console.error(e); process.exit(1); });
 } else {
-  main().catch(e => { console.error(e); process.exit(1); });
+  main().catch(async e => {
+    console.error(e);
+    // Nooit stil falen: een crash moet zichtbaar zijn, niet lijken op "niks te doen".
+    await sendTelegram('⚠️ Offerte controle v4 CRASH: ' + (e.message || e).toString().slice(0, 300)).catch(() => {});
+    process.exit(1);
+  });
 }

@@ -1,0 +1,4316 @@
+{
+  "generatedAt": "2026-07-08T08:11:15.657Z",
+  "toCreate": [
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUzyzN8AAA=",
+      "subject": "Montage Sonty",
+      "start": "2026-07-08T07:00:00.0000000",
+      "scheduledAt": "2026-07-08T07:00:00+02:00",
+      "duration": 60,
+      "teamName": "Yudi / Nick",
+      "address": null,
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU4cUDJAAA=",
+      "subject": "Inmeten Sonty - Oscar Hoogenraad",
+      "start": "2026-07-08T09:00:00.0000000",
+      "scheduledAt": "2026-07-08T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Einsteindreef 11, 3146bd Maassluis, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0eAAA=",
+      "subject": "Inmeten Sonty - Jean-Paul ter Schure",
+      "start": "2026-07-08T09:00:00.0000000",
+      "scheduledAt": "2026-07-08T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "de Goejestraat 38, 2313NX, Leiden, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUzyzN7AAA=",
+      "subject": "Montage Sonty - Vincent de Jong",
+      "start": "2026-07-08T08:00:00.0000000",
+      "scheduledAt": "2026-07-08T08:00:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Sinjeur Semeynsweg 21, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0CAAA=",
+      "subject": "Inmeten Sonty - Erwin Vink",
+      "start": "2026-07-08T10:00:00.0000000",
+      "scheduledAt": "2026-07-08T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Lange Kruisweg 37A, 2676BN, Maasdijk, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVBzCE9AAA=",
+      "subject": "Inmeten Sonty - De heer Cornelisse, mevrouw Huisman",
+      "start": "2026-07-08T10:00:00.0000000",
+      "scheduledAt": "2026-07-08T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Vossenbes 6, Leiden",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU1yOAUAAA=",
+      "subject": "Montage Sonty - Mark Zegwaard",
+      "start": "2026-07-08T08:00:00.0000000",
+      "scheduledAt": "2026-07-08T08:00:00+02:00",
+      "duration": 240,
+      "teamName": "Marvin / Kevin",
+      "address": "Hoefslag 25, Maasland",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU4cUDPAAA=",
+      "subject": "Inmeten Sonty - Froukje Udink",
+      "start": "2026-07-08T11:00:00.0000000",
+      "scheduledAt": "2026-07-08T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Sir Winston Churchilllaan 116, 2282JG, Rijswijk, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU6iGqpAAA=",
+      "subject": "Inmeten Sonty - Raymond Bosman",
+      "start": "2026-07-08T11:00:00.0000000",
+      "scheduledAt": "2026-07-08T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Prinses irenestraat 32, 2741dp Waddinxveen, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU4cUC8AAA=",
+      "subject": "Montage Sonty - benoist claassen",
+      "start": "2026-07-08T08:00:00.0000000",
+      "scheduledAt": "2026-07-08T08:00:00+02:00",
+      "duration": 270,
+      "teamName": "Mick / Tygo",
+      "address": "Finneburg 132, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Mick Mulders"
+      ],
+      "worker": {
+        "uuid": "1f122ec6-1cbb-6d00-9aad-4269fe2bbe9c",
+        "name": "Mick Mulders"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU4cUC5AAA=",
+      "subject": "Montage Sonty - Aron de Ridder",
+      "start": "2026-07-08T10:30:00.0000000",
+      "scheduledAt": "2026-07-08T10:30:00+02:00",
+      "duration": 120,
+      "teamName": null,
+      "address": "Lammerbaan 153, Zoetermeer",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0GAAA=",
+      "subject": "Inmeten Sonty - Cornelis Kleibeuker",
+      "start": "2026-07-08T12:00:00.0000000",
+      "scheduledAt": "2026-07-08T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Voorwillenseweg 57, 2806ZD Gouda, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDGPGHAAA=",
+      "subject": "Inmeten Sonty - Sharleen Delgado",
+      "start": "2026-07-08T13:00:00.0000000",
+      "scheduledAt": "2026-07-08T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Waaierdans 18, Cappelle aan den IJssel",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbSAAA=",
+      "subject": "Afspraak showroom Locatie: Frijdastraat 8F, 2288 EX Rijswijk - Ruud Jansen",
+      "start": "2026-07-08T13:00:00.0000000",
+      "scheduledAt": "2026-07-08T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": null,
+      "template": "1f11c802-658a-62d0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU8LfcTAAA=",
+      "subject": "Montage Sonty - Lotte Bernards",
+      "start": "2026-07-08T12:30:00.0000000",
+      "scheduledAt": "2026-07-08T12:30:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Ru Paresingel 44, Pijnacker",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0cAAA=",
+      "subject": "Inmeten Sonty - Martin van der Gaag",
+      "start": "2026-07-08T14:00:00.0000000",
+      "scheduledAt": "2026-07-08T14:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Ribeslaan 18, 2641CK, Pijnacker, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0hAAA=",
+      "subject": "Montage Sonty - Roxanne Wiegerinck",
+      "start": "2026-07-08T08:00:00.0000000",
+      "scheduledAt": "2026-07-08T08:00:00+02:00",
+      "duration": 480,
+      "teamName": null,
+      "address": "Hunzestroom 20, Zoetermeer",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjbAAA=",
+      "subject": "Inmeten Sonty",
+      "start": "2026-07-08T15:00:00.0000000",
+      "scheduledAt": "2026-07-08T15:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": null,
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVIiHp9AAA=",
+      "subject": "Inmeten Sonty - van Dijkhuizen",
+      "start": "2026-07-08T15:00:00.0000000",
+      "scheduledAt": "2026-07-08T15:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "abraham van der Knaapkade 9 Rotterdam",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU6iGqfAAA=",
+      "subject": "Montage Sonty - Lindy de Wildt",
+      "start": "2026-07-08T12:00:00.0000000",
+      "scheduledAt": "2026-07-08T12:00:00+02:00",
+      "duration": 300,
+      "teamName": "Marvin / Kevin",
+      "address": "Spechtstraat 10, Vianen",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU6iGquAAA=",
+      "subject": "Montage Sonty - Wouter Molhoek",
+      "start": "2026-07-08T12:30:00.0000000",
+      "scheduledAt": "2026-07-08T12:30:00+02:00",
+      "duration": 270,
+      "teamName": "Mick / Tygo",
+      "address": "Tuinhommel 19, 's Gravenzande",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Mick Mulders"
+      ],
+      "worker": {
+        "uuid": "1f122ec6-1cbb-6d00-9aad-4269fe2bbe9c",
+        "name": "Mick Mulders"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwSAAA=",
+      "subject": "Montage Sonty - Craft Zonweringreclame",
+      "start": "2026-07-08T16:00:00.0000000",
+      "scheduledAt": "2026-07-08T16:00:00+02:00",
+      "duration": 60,
+      "teamName": null,
+      "address": "Biezen 118C, Boskoop",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU4cUC1AAA=",
+      "subject": "Montage Sonty - romario mohanlal",
+      "start": "2026-07-09T08:00:00.0000000",
+      "scheduledAt": "2026-07-09T08:00:00+02:00",
+      "duration": 90,
+      "teamName": null,
+      "address": "Schepenstraat 24, Krimpen aan de Lek",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0aAAA=",
+      "subject": "Inmeten Sonty - Marianne Busch",
+      "start": "2026-07-09T09:00:00.0000000",
+      "scheduledAt": "2026-07-09T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Noorderbeekdwarsstraat 53, 2562XN, Den Haag, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVCgXlIAAA=",
+      "subject": "Inmeten Sonty - Marc Verboon",
+      "start": "2026-07-09T09:00:00.0000000",
+      "scheduledAt": "2026-07-09T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Celciusstraat 33 2652XM Berkel en Rodenrijs",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU8LfcUAAA=",
+      "subject": "Montage Sonty - Lorenz Steinbock",
+      "start": "2026-07-09T08:00:00.0000000",
+      "scheduledAt": "2026-07-09T08:00:00+02:00",
+      "duration": 150,
+      "teamName": "Marvin / Kevin",
+      "address": "Kraaienlaan 36, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVCgXlRAAA=",
+      "subject": "Inmeten Sonty - Jeffrey Onstein",
+      "start": "2026-07-09T10:00:00.0000000",
+      "scheduledAt": "2026-07-09T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Messstraat 36, 2586XK 's-Gravenhage, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVCgXlVAAA=",
+      "subject": "Inmeten Sonty - Saskia Kreuger",
+      "start": "2026-07-09T10:00:00.0000000",
+      "scheduledAt": "2026-07-09T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Palissanderhout 26, 2719KW Zoetermeer, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU7f3byAAA=",
+      "subject": "Montage Sonty - Mark van der Kerk",
+      "start": "2026-07-09T09:30:00.0000000",
+      "scheduledAt": "2026-07-09T09:30:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Honingbijstraat 31, Rotterdam",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVAy4foAAA=",
+      "subject": "Inmeten Sonty - Nick de Ruiter",
+      "start": "2026-07-09T11:00:00.0000000",
+      "scheduledAt": "2026-07-09T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Mantelmeeuw 9, 2678xn De Lier, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDGPGOAAA=",
+      "subject": "Inmeten Sonty - Peter Zeestraten",
+      "start": "2026-07-09T11:00:00.0000000",
+      "scheduledAt": "2026-07-09T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Merbauhout 6, De Lier",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVCgXlYAAA=",
+      "subject": "Inmeten Sonty - Sadan Yilmaz",
+      "start": "2026-07-09T12:00:00.0000000",
+      "scheduledAt": "2026-07-09T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Oostergosingel 15, 2548NW, Den Haag, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDGPGQAAA=",
+      "subject": "Inmeten Sonty - Martijn Sweere",
+      "start": "2026-07-09T12:00:00.0000000",
+      "scheduledAt": "2026-07-09T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Rijnweg 234, 2681 SW Monster, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDGPGRAAA=",
+      "subject": "Montage Sonty - Robin Broek",
+      "start": "2026-07-09T10:30:00.0000000",
+      "scheduledAt": "2026-07-09T10:30:00+02:00",
+      "duration": 210,
+      "teamName": "Marvin / Kevin",
+      "address": "Van Lierepad 26, Zoetermeer",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk1EAAA=",
+      "subject": "Inmeten Sonty - Vincent Silvius",
+      "start": "2026-07-09T13:00:00.0000000",
+      "scheduledAt": "2026-07-09T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Oudemansstraat 354, 2522TG 's-Gravenhage, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUvXVt1AAA=",
+      "subject": "Montage Sonty - Martijn Hannenberg",
+      "start": "2026-07-09T08:00:00.0000000",
+      "scheduledAt": "2026-07-09T08:00:00+02:00",
+      "duration": 420,
+      "teamName": null,
+      "address": "Dorpstraat 46, Nieuw-Vennep",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU8LfcYAAA=",
+      "subject": "Montage Sonty - Rom waardenburg",
+      "start": "2026-07-09T12:00:00.0000000",
+      "scheduledAt": "2026-07-09T12:00:00+02:00",
+      "duration": 180,
+      "teamName": null,
+      "address": "Rembrandtstraat 51, Vlaardingen",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjtAAA=",
+      "subject": "Montage Sonty - IKC De Baanbreker",
+      "start": "2026-07-09T14:00:00.0000000",
+      "scheduledAt": "2026-07-09T14:00:00+02:00",
+      "duration": 60,
+      "teamName": "Marvin / Kevin",
+      "address": "Lijnbaan 319, Zoetermeer",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkvaAAA=",
+      "subject": "Inmeten Sonty - Willem de Graaf",
+      "start": "2026-07-09T14:00:00.0000000",
+      "scheduledAt": "2026-07-09T14:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Gaardenierstraat 5, 2645 JA, Delfgauw, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU56-ryAAA=",
+      "subject": "Montage Sonty - Boryana Delcheva",
+      "start": "2026-07-09T09:00:00.0000000",
+      "scheduledAt": "2026-07-09T09:00:00+02:00",
+      "duration": 390,
+      "teamName": "Mick / Tygo",
+      "address": "Lepelaarstraat 39, Delft",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Mick Mulders"
+      ],
+      "worker": {
+        "uuid": "1f122ec6-1cbb-6d00-9aad-4269fe2bbe9c",
+        "name": "Mick Mulders"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjaAAA=",
+      "subject": "Inmeten Sonty - Corne Nelemans",
+      "start": "2026-07-09T13:00:00.0000000",
+      "scheduledAt": "2026-07-09T13:00:00+02:00",
+      "duration": 180,
+      "teamName": "Joey",
+      "address": "Waterlinie 116, Sleeuwijk",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjfAAA=",
+      "subject": "Montage Sonty - Astrid Nijmeijer",
+      "start": "2026-07-09T15:30:00.0000000",
+      "scheduledAt": "2026-07-09T15:30:00+02:00",
+      "duration": 60,
+      "teamName": "Mick / Tygo",
+      "address": "Schansbaan 203, Zoetermeer",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Mick Mulders"
+      ],
+      "worker": {
+        "uuid": "1f122ec6-1cbb-6d00-9aad-4269fe2bbe9c",
+        "name": "Mick Mulders"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU4cUCnAAA=",
+      "subject": "Montage Sonty - Familie Krebaum",
+      "start": "2026-07-09T09:00:00.0000000",
+      "scheduledAt": "2026-07-09T09:00:00+02:00",
+      "duration": 480,
+      "teamName": "Yudi / Nick",
+      "address": "Weidezoom 74, Waddinxveen",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkv4AAA=",
+      "subject": "Montage Sonty - Marja  Grootendorst",
+      "start": "2026-07-09T15:00:00.0000000",
+      "scheduledAt": "2026-07-09T15:00:00+02:00",
+      "duration": 120,
+      "teamName": "Marvin / Kevin",
+      "address": "Charentestroom 93, Zoetermeer",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbeAAA=",
+      "subject": "Montage Sonty - Brian de Boer /Joyce Witter",
+      "start": "2026-07-09T15:00:00.0000000",
+      "scheduledAt": "2026-07-09T15:00:00+02:00",
+      "duration": 120,
+      "teamName": null,
+      "address": "Melkweg 31, Hellevoetsluis",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVElfq5AAA=",
+      "subject": "Inmeten Sonty - Arvid Staarink",
+      "start": "2026-07-10T08:00:00.0000000",
+      "scheduledAt": "2026-07-10T08:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Blériotlaan 100",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV00AAA=",
+      "subject": "Inmeten Sonty - Afza Hasrat",
+      "start": "2026-07-10T09:00:00.0000000",
+      "scheduledAt": "2026-07-10T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Moerhoek 12, Boskoop",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU1yOANAAA=",
+      "subject": "Montage Sonty - Daniel Badal",
+      "start": "2026-07-10T08:00:00.0000000",
+      "scheduledAt": "2026-07-10T08:00:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Buitensingel 46, Rijswijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDGPGJAAA=",
+      "subject": "Montage Sonty - Koen Lintelo",
+      "start": "2026-07-10T08:00:00.0000000",
+      "scheduledAt": "2026-07-10T08:00:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Abdis Immastraat 17, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUvXVuGAAA=",
+      "subject": "Montage Sonty - Yorian Petrovic",
+      "start": "2026-07-10T08:00:00.0000000",
+      "scheduledAt": "2026-07-10T08:00:00+02:00",
+      "duration": 180,
+      "teamName": "Marvin / Kevin",
+      "address": "Langemoor 67, Nieuw-Vennep",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU4cUCgAAA=",
+      "subject": "Montage Sonty - jeroen Vos",
+      "start": "2026-07-10T08:00:00.0000000",
+      "scheduledAt": "2026-07-10T08:00:00+02:00",
+      "duration": 180,
+      "teamName": "Yudi / Nick",
+      "address": "Bilderdijkstraat 78, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFj6AAA=",
+      "subject": "Montage Sonty - Ron Boeje",
+      "start": "2026-07-10T10:30:00.0000000",
+      "scheduledAt": "2026-07-10T10:30:00+02:00",
+      "duration": 90,
+      "teamName": null,
+      "address": "Leehoeve 48, Delft",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUvXVuHAAA=",
+      "subject": "Montage Sonty - Khalid Hamdi",
+      "start": "2026-07-10T10:30:00.0000000",
+      "scheduledAt": "2026-07-10T10:30:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Sperwersingel 33, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU8LfcWAAA=",
+      "subject": "Montage Sonty - Gerrit Kloos",
+      "start": "2026-07-10T11:00:00.0000000",
+      "scheduledAt": "2026-07-10T11:00:00+02:00",
+      "duration": 120,
+      "teamName": "Marvin / Kevin",
+      "address": "Zuidstraat 23, Katwijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwIAAA=",
+      "subject": "Montage Sonty - Floor de Raad",
+      "start": "2026-07-10T12:00:00.0000000",
+      "scheduledAt": "2026-07-10T12:00:00+02:00",
+      "duration": 60,
+      "teamName": null,
+      "address": "Molenpad 25, Leidschendam",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU0ZfpKAAA=",
+      "subject": "Inmeten Sonty - TBI OVB",
+      "start": "2026-07-10T10:00:00.0000000",
+      "scheduledAt": "2026-07-10T10:00:00+02:00",
+      "duration": 240,
+      "teamName": "Joey",
+      "address": null,
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU8LfcXAAA=",
+      "subject": "Montage Sonty - Olga Rangelova",
+      "start": "2026-07-10T11:00:00.0000000",
+      "scheduledAt": "2026-07-10T11:00:00+02:00",
+      "duration": 180,
+      "teamName": "Yudi / Nick",
+      "address": "Stekelbaarssingel 19, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjlAAA=",
+      "subject": "Montage Sonty - Bernard Devilee",
+      "start": "2026-07-10T13:00:00.0000000",
+      "scheduledAt": "2026-07-10T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Marvin / Kevin",
+      "address": "Meerkreuk 5, Oude Wetering",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwFAAA=",
+      "subject": "Montage Sonty - Jasper Schuurbiers",
+      "start": "2026-07-10T13:00:00.0000000",
+      "scheduledAt": "2026-07-10T13:00:00+02:00",
+      "duration": 60,
+      "teamName": null,
+      "address": "Annet Nieuwenhuijzengracht 29, Berkel en Rodenrijs",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbdAAA=",
+      "subject": "Montage Sonty",
+      "start": "2026-07-10T13:00:00.0000000",
+      "scheduledAt": "2026-07-10T13:00:00+02:00",
+      "duration": 60,
+      "teamName": null,
+      "address": "Schapennatjesduin, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVElfq2AAA=",
+      "subject": "Inmeten Sonty - Vlugt",
+      "start": "2026-07-10T14:00:00.0000000",
+      "scheduledAt": "2026-07-10T14:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Bogerd 3 Den Hoorn",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVIiHqDAAA=",
+      "subject": "Afspraak showroom Locatie: Frijdastraat 8F, 2288 EX Rijswijk - Andy Postma",
+      "start": "2026-07-11T09:30:00.0000000",
+      "scheduledAt": "2026-07-11T09:30:00+02:00",
+      "duration": 60,
+      "teamName": "Jaimy",
+      "address": null,
+      "template": "1f11c802-658a-62d0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Jaimy de Wit"
+      ],
+      "worker": {
+        "uuid": "1f122ffc-6d14-6660-9432-16c0e7faeed6",
+        "name": "Jaimy de Wit"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVBzCFMAAA=",
+      "subject": "Afspraak showroom Locatie: Frijdastraat 8F, 2288 EX Rijswijk - Kim Hollander",
+      "start": "2026-07-11T10:30:00.0000000",
+      "scheduledAt": "2026-07-11T10:30:00+02:00",
+      "duration": 60,
+      "teamName": "Jaimy",
+      "address": null,
+      "template": "1f11c802-658a-62d0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Jaimy de Wit"
+      ],
+      "worker": {
+        "uuid": "1f122ffc-6d14-6660-9432-16c0e7faeed6",
+        "name": "Jaimy de Wit"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbqAAA=",
+      "subject": "Afspraak showroom Locatie: Frijdastraat 8F, 2288 EX Rijswijk - Wikash Gokoel",
+      "start": "2026-07-11T10:30:00.0000000",
+      "scheduledAt": "2026-07-11T10:30:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": null,
+      "template": "1f11c802-658a-62d0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDa0AAA=",
+      "subject": "Afspraak showroom Locatie: Frijdastraat 8F, 2288 EX Rijswijk - Irene en Stan van Eijndhoven",
+      "start": "2026-07-11T13:30:00.0000000",
+      "scheduledAt": "2026-07-11T13:30:00+02:00",
+      "duration": 60,
+      "teamName": "Jaimy",
+      "address": null,
+      "template": "1f11c802-658a-62d0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Jaimy de Wit"
+      ],
+      "worker": {
+        "uuid": "1f122ffc-6d14-6660-9432-16c0e7faeed6",
+        "name": "Jaimy de Wit"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkvcAAA=",
+      "subject": "Inmeten Sonty - Martijn Lancee",
+      "start": "2026-07-13T09:00:00.0000000",
+      "scheduledAt": "2026-07-13T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Van Humboldtstraat 97, 3514GN Utrecht, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkvlAAA=",
+      "subject": "Inmeten Sonty - Lodewijk Van Zwieten",
+      "start": "2026-07-13T09:00:00.0000000",
+      "scheduledAt": "2026-07-13T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "van Naeltwijckstraat 105, 2274nx Voorburg, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkveAAA=",
+      "subject": "Inmeten Sonty - Manodj Nandpejsad",
+      "start": "2026-07-13T10:00:00.0000000",
+      "scheduledAt": "2026-07-13T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Pastinaak 112, 2394 KB, Hazerswoude-Rijndijk, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkvgAAA=",
+      "subject": "Inmeten Sonty - Janine McCaughey",
+      "start": "2026-07-13T10:00:00.0000000",
+      "scheduledAt": "2026-07-13T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "IJsvogelhof 21, 2496pe 's-Gravenhage, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVBzCEvAAA=",
+      "subject": "Montage Sonty - Suise Blange - Wittenblos",
+      "start": "2026-07-13T08:00:00.0000000",
+      "scheduledAt": "2026-07-13T08:00:00+02:00",
+      "duration": 210,
+      "teamName": null,
+      "address": "Poortlaan 81, Oud-Beijerland",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUxV9EyAAA=",
+      "subject": "Montage Sonty - Yuri Blokland",
+      "start": "2026-07-13T08:00:00.0000000",
+      "scheduledAt": "2026-07-13T08:00:00+02:00",
+      "duration": 240,
+      "teamName": "Yudi / Nick",
+      "address": "Onderling 75, Maassluis",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU4cUCrAAA=",
+      "subject": "Montage Sonty - Ruud Bankeman",
+      "start": "2026-07-13T08:00:00.0000000",
+      "scheduledAt": "2026-07-13T08:00:00+02:00",
+      "duration": 240,
+      "teamName": "Mick / Tygo",
+      "address": "Wolferdstraat 23, Zoetermeer",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Mick Mulders"
+      ],
+      "worker": {
+        "uuid": "1f122ec6-1cbb-6d00-9aad-4269fe2bbe9c",
+        "name": "Mick Mulders"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CVz3AAA=",
+      "subject": "Inmeten Sonty - Nicole van Gortel",
+      "start": "2026-07-13T11:00:00.0000000",
+      "scheduledAt": "2026-07-13T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Aakstraat 29, 1503KL Zaandam, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkviAAA=",
+      "subject": "Inmeten Sonty - Sandra Bakker",
+      "start": "2026-07-13T11:00:00.0000000",
+      "scheduledAt": "2026-07-13T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Teylingerlaan 14, 2215RR Voorhout, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU248exAAA=",
+      "subject": "Inmeten Sonty - Bleeker",
+      "start": "2026-07-13T12:00:00.0000000",
+      "scheduledAt": "2026-07-13T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Hans van Kilsdonklaan 1, 1948bb Beverwijk, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0WAAA=",
+      "subject": "Inmeten Sonty - Samentha Draijer-Warmerdam",
+      "start": "2026-07-13T12:00:00.0000000",
+      "scheduledAt": "2026-07-13T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Rodelindalaan 63, 2152 PN Nieuw-Vennep, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkv_AAA=",
+      "subject": "Montage Sonty - Marta Chu",
+      "start": "2026-07-13T11:30:00.0000000",
+      "scheduledAt": "2026-07-13T11:30:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Amazoneweg 24, Delft",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0AAAA=",
+      "subject": "Inmeten Sonty - Julia Nijland",
+      "start": "2026-07-13T13:00:00.0000000",
+      "scheduledAt": "2026-07-13T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Drakenstein 34, 1121HC, Landsmeer, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkvsAAA=",
+      "subject": "Inmeten Sonty - Fabio Antunes",
+      "start": "2026-07-13T13:00:00.0000000",
+      "scheduledAt": "2026-07-13T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Zeezwaluwstraat 57, 2583 RH, Den Haag, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU0b6umAAA=",
+      "subject": "Montage Sonty - Jordy de Vendt",
+      "start": "2026-07-13T12:00:00.0000000",
+      "scheduledAt": "2026-07-13T12:00:00+02:00",
+      "duration": 150,
+      "teamName": "Yudi / Nick",
+      "address": "Zalmstael 19, Maassluis",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVAy4fbAAA=",
+      "subject": "Inmeten Sonty - Peter Kramer",
+      "start": "2026-07-13T13:30:00.0000000",
+      "scheduledAt": "2026-07-13T13:30:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Oosteinderweg 398, 1432bn Aalsmeer, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkv0AAA=",
+      "subject": "Inmeten Sonty - Saoed Goelam",
+      "start": "2026-07-13T14:00:00.0000000",
+      "scheduledAt": "2026-07-13T14:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Lau Mazirellaan 203, 2525ZM, Den Haag, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwHAAA=",
+      "subject": "Inmeten Sonty - Jack Steur",
+      "start": "2026-07-13T14:00:00.0000000",
+      "scheduledAt": "2026-07-13T14:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Luchtenburg 7, 2342CN Oegstgeest, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHCY4TAAA=",
+      "subject": "Montage Sonty - Ries van der Wouden",
+      "start": "2026-07-13T14:00:00.0000000",
+      "scheduledAt": "2026-07-13T14:00:00+02:00",
+      "duration": 90,
+      "teamName": null,
+      "address": "Andrej Sacharowstraat 43, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDa6AAA=",
+      "subject": "Inmeten Sonty - Matthijs Assink",
+      "start": "2026-07-13T15:00:00.0000000",
+      "scheduledAt": "2026-07-13T15:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Van Hogenhoucklaan 26 26, 2596 TD The Hague, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU8LfcVAAA=",
+      "subject": "Montage Sonty - Kim Verhoeff",
+      "start": "2026-07-13T12:00:00.0000000",
+      "scheduledAt": "2026-07-13T12:00:00+02:00",
+      "duration": 300,
+      "teamName": "Mick / Tygo",
+      "address": "Donker Curtiusstraat 1, Delft",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Mick Mulders"
+      ],
+      "worker": {
+        "uuid": "1f122ec6-1cbb-6d00-9aad-4269fe2bbe9c",
+        "name": "Mick Mulders"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU4cUC3AAA=",
+      "subject": "Montage Sonty - Michelle van de Berg",
+      "start": "2026-07-13T14:30:00.0000000",
+      "scheduledAt": "2026-07-13T14:30:00+02:00",
+      "duration": 150,
+      "teamName": "Yudi / Nick",
+      "address": "Tjalk 23, Schipluiden",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHCY4UAAA=",
+      "subject": "Inmeten Sonty - Corpus",
+      "start": "2026-07-13T15:00:00.0000000",
+      "scheduledAt": "2026-07-13T15:00:00+02:00",
+      "duration": 120,
+      "teamName": "Joey",
+      "address": "Hoornbeekstraat 27 Den haag",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk0hAAA=",
+      "subject": "Montage Sonty - witberg Totaalonderhoud",
+      "start": "2026-07-13T15:00:00.0000000",
+      "scheduledAt": "2026-07-13T15:00:00+02:00",
+      "duration": 120,
+      "teamName": null,
+      "address": "Dick de Hoogstraat 61, Rijswijk",
+      "template": "1f11c802-63cb-6a80-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUr5ZclAAA=",
+      "subject": "Montage Sonty",
+      "start": "2026-07-14T07:00:00.0000000",
+      "scheduledAt": "2026-07-14T07:00:00+02:00",
+      "duration": 60,
+      "teamName": "Yudi / Nick",
+      "address": null,
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU4cUCTAAA=",
+      "subject": "Montage Sonty",
+      "start": "2026-07-14T07:00:00.0000000",
+      "scheduledAt": "2026-07-14T07:00:00+02:00",
+      "duration": 60,
+      "teamName": "Marvin / Kevin",
+      "address": null,
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbLAAA=",
+      "subject": "Montage Sonty - Dirk Groenewegen",
+      "start": "2026-07-14T08:00:00.0000000",
+      "scheduledAt": "2026-07-14T08:00:00+02:00",
+      "duration": 90,
+      "teamName": "Sjoerd",
+      "address": "van Sevenbergsestraat 52, Voorburg",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVBzCE-AAA=",
+      "subject": "Montage Sonty - Donny Vaal",
+      "start": "2026-07-14T08:00:00.0000000",
+      "scheduledAt": "2026-07-14T08:00:00+02:00",
+      "duration": 120,
+      "teamName": null,
+      "address": "De Wherelande 101, Purmerend",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUzyzN6AAA=",
+      "subject": "Inmeten Sonty - Patricia Garcia de Prado",
+      "start": "2026-07-14T09:00:00.0000000",
+      "scheduledAt": "2026-07-14T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Gijs van Veldhuizenlaan 124, 3034KB, Rotterdam, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0zAAA=",
+      "subject": "Inmeten Sonty - J Nunnink",
+      "start": "2026-07-14T09:00:00.0000000",
+      "scheduledAt": "2026-07-14T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Laantje van Braskamp 5, 2289AM, Rijswijk, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV01AAA=",
+      "subject": "Inmeten Sonty - frank Wietsma",
+      "start": "2026-07-14T10:00:00.0000000",
+      "scheduledAt": "2026-07-14T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Jan Adriaen Doesendreef 24, 2681WX Monster, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkvfAAA=",
+      "subject": "Inmeten Sonty - Katinka De Munter",
+      "start": "2026-07-14T10:00:00.0000000",
+      "scheduledAt": "2026-07-14T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Tureluur 38, 3191gj Hoogvliet Rotterdam, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0SAAA=",
+      "subject": "Montage Sonty - Marcel Lugthart",
+      "start": "2026-07-14T08:00:00.0000000",
+      "scheduledAt": "2026-07-14T08:00:00+02:00",
+      "duration": 210,
+      "teamName": "Yudi / Nick",
+      "address": "Plasweg 27B, Waddinxveen",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU8LfcRAAA=",
+      "subject": "Montage Sonty - Sanjin Busnov",
+      "start": "2026-07-14T08:00:00.0000000",
+      "scheduledAt": "2026-07-14T08:00:00+02:00",
+      "duration": 240,
+      "teamName": "Mick / Tygo",
+      "address": "Hoog Dalemseweg 99, Gorinchem",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Mick Mulders"
+      ],
+      "worker": {
+        "uuid": "1f122ec6-1cbb-6d00-9aad-4269fe2bbe9c",
+        "name": "Mick Mulders"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHCY4bAAA=",
+      "subject": "Inmeten Sonty - Anne van den Berg-Mulder",
+      "start": "2026-07-14T11:00:00.0000000",
+      "scheduledAt": "2026-07-14T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "De Wurft 17, 3056LV Rotterdam, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHCY4gAAA=",
+      "subject": "Inmeten Sonty - Birgul Oktem",
+      "start": "2026-07-14T12:00:00.0000000",
+      "scheduledAt": "2026-07-14T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Virginia Gaaipad 17, 3084bv Rotterdam, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDGPF-AAA=",
+      "subject": "Montage Sonty - Amina a",
+      "start": "2026-07-14T11:30:00.0000000",
+      "scheduledAt": "2026-07-14T11:30:00+02:00",
+      "duration": 120,
+      "teamName": "Yudi / Nick",
+      "address": "Pastoor Daalmansplantsoen 9, Boskoop",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU7M5RlAAA=",
+      "subject": "Montage Sonty - Michel Maat",
+      "start": "2026-07-14T10:00:00.0000000",
+      "scheduledAt": "2026-07-14T10:00:00+02:00",
+      "duration": 240,
+      "teamName": null,
+      "address": "Poterne 6, Vijfhuizen",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHCY4fAAA=",
+      "subject": "Inmeten Sonty - Michiel de Kwaasteniet",
+      "start": "2026-07-14T13:00:00.0000000",
+      "scheduledAt": "2026-07-14T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Ravenswey 49, 3261 VA Oud-Beijerland, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDGPGMAAA=",
+      "subject": "Inmeten Sonty - Jos Westerhuis",
+      "start": "2026-07-14T11:00:00.0000000",
+      "scheduledAt": "2026-07-14T11:00:00+02:00",
+      "duration": 240,
+      "teamName": "Joey",
+      "address": "Segbroeklaan, 2565DM 's-Gravenhage, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0XAAA=",
+      "subject": "Montage Sonty - Finn jaarsveld",
+      "start": "2026-07-14T12:00:00.0000000",
+      "scheduledAt": "2026-07-14T12:00:00+02:00",
+      "duration": 180,
+      "teamName": "Mick / Tygo",
+      "address": "Drostlaan 56, Asperen",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Mick Mulders"
+      ],
+      "worker": {
+        "uuid": "1f122ec6-1cbb-6d00-9aad-4269fe2bbe9c",
+        "name": "Mick Mulders"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjqAAA=",
+      "subject": "Montage Sonty - Omar Wuite",
+      "start": "2026-07-14T13:30:00.0000000",
+      "scheduledAt": "2026-07-14T13:30:00+02:00",
+      "duration": 90,
+      "teamName": "Yudi / Nick",
+      "address": "Koningsspil 72, Moerkapelle",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHCY4eAAA=",
+      "subject": "Inmeten Sonty - Chafik Hachioui",
+      "start": "2026-07-14T14:00:00.0000000",
+      "scheduledAt": "2026-07-14T14:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Johann Straussplein 350, 3122 ZG, Schiedam, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVBzCExAAA=",
+      "subject": "Montage Sonty - Lotte Korteknie",
+      "start": "2026-07-14T08:00:00.0000000",
+      "scheduledAt": "2026-07-14T08:00:00+02:00",
+      "duration": 480,
+      "teamName": null,
+      "address": "Salvia 22, Dordrecht",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU7f3b1AAA=",
+      "subject": "Montage Sonty - Trudie Erades",
+      "start": "2026-07-14T14:00:00.0000000",
+      "scheduledAt": "2026-07-14T14:00:00+02:00",
+      "duration": 120,
+      "teamName": null,
+      "address": "Anthoinette Kleystraat 7, Leiden",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjcAAA=",
+      "subject": "Montage Sonty - Corne Nelemans",
+      "start": "2026-07-14T15:00:00.0000000",
+      "scheduledAt": "2026-07-14T15:00:00+02:00",
+      "duration": 120,
+      "teamName": "Mick / Tygo",
+      "address": "Waterlinie 116, Sleeuwijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Mick Mulders"
+      ],
+      "worker": {
+        "uuid": "1f122ec6-1cbb-6d00-9aad-4269fe2bbe9c",
+        "name": "Mick Mulders"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwCAAA=",
+      "subject": "Montage Sonty - Davide en Lisa Boschma",
+      "start": "2026-07-14T15:00:00.0000000",
+      "scheduledAt": "2026-07-14T15:00:00+02:00",
+      "duration": 120,
+      "teamName": "Sjoerd",
+      "address": "Leonard Springerstraat 6, Waddinxveen",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVJdWPiAAA=",
+      "subject": "Inmeten Sonty - Daan witkop",
+      "start": "2026-07-14T15:00:00.0000000",
+      "scheduledAt": "2026-07-14T15:00:00+02:00",
+      "duration": 120,
+      "teamName": "Joey",
+      "address": "Van Bleiswijkstraat 104, 2582lh 's-Gravenhage, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHCY4aAAA=",
+      "subject": "Montage Sonty - Maria Calandrino",
+      "start": "2026-07-14T16:00:00.0000000",
+      "scheduledAt": "2026-07-14T16:00:00+02:00",
+      "duration": 60,
+      "teamName": null,
+      "address": "Voorhouterweg Noordzijde 15, Rijnsburg",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUr5ZcmAAA=",
+      "subject": "Montage Sonty",
+      "start": "2026-07-15T07:00:00.0000000",
+      "scheduledAt": "2026-07-15T07:00:00+02:00",
+      "duration": 60,
+      "teamName": "Yudi / Nick",
+      "address": null,
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVAy4fgAAA=",
+      "subject": "Inmeten Sonty - Jan van Gorsel",
+      "start": "2026-07-15T09:00:00.0000000",
+      "scheduledAt": "2026-07-15T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Nieuwe Gracht 693, 2627 CS Delft, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU6iGqmAAA=",
+      "subject": "Montage Sonty - Natalia Aleksandrova",
+      "start": "2026-07-15T08:00:00.0000000",
+      "scheduledAt": "2026-07-15T08:00:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Nieuwediepstraat 43, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjjAAA=",
+      "subject": "Montage Sonty - Ricardo huisman",
+      "start": "2026-07-15T08:00:00.0000000",
+      "scheduledAt": "2026-07-15T08:00:00+02:00",
+      "duration": 180,
+      "teamName": null,
+      "address": "Lindelaan 214, Rijswijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVAy4fjAAA=",
+      "subject": "Inmeten Sonty - Pim Hajee",
+      "start": "2026-07-15T10:00:00.0000000",
+      "scheduledAt": "2026-07-15T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Nicoline Brouwerlaan 9, 2809VC Gouda, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVCgXlPAAA=",
+      "subject": "Inmeten Sonty - Leo Roodenburg",
+      "start": "2026-07-15T11:00:00.0000000",
+      "scheduledAt": "2026-07-15T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Clauslaan 4, 2713 VN, Zoetermeer, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU8LfccAAA=",
+      "subject": "Montage Sonty - Bsri Ali",
+      "start": "2026-07-15T08:00:00.0000000",
+      "scheduledAt": "2026-07-15T08:00:00+02:00",
+      "duration": 270,
+      "teamName": "Mick / Tygo",
+      "address": "Kingstonplantsoen 7, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Mick Mulders"
+      ],
+      "worker": {
+        "uuid": "1f122ec6-1cbb-6d00-9aad-4269fe2bbe9c",
+        "name": "Mick Mulders"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFj7AAA=",
+      "subject": "Montage Sonty - Sander Meijers",
+      "start": "2026-07-15T11:00:00.0000000",
+      "scheduledAt": "2026-07-15T11:00:00+02:00",
+      "duration": 90,
+      "teamName": null,
+      "address": "Van Swietenstraat 19, 2381TH, Zoeterwoude, Nederland",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0ZAAA=",
+      "subject": "Montage Sonty - Chris Pek",
+      "start": "2026-07-15T10:30:00.0000000",
+      "scheduledAt": "2026-07-15T10:30:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Kortenhoeve 20, Delft",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDGPGFAAA=",
+      "subject": "Inmeten Sonty - Albert Immink",
+      "start": "2026-07-15T12:00:00.0000000",
+      "scheduledAt": "2026-07-15T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Christiaan Huygensstraat 1 2251 CH Voorschoten",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDGPF3AAA=",
+      "subject": "Montage Sonty - Alexandra Marcoci",
+      "start": "2026-07-15T12:30:00.0000000",
+      "scheduledAt": "2026-07-15T12:30:00+02:00",
+      "duration": 90,
+      "teamName": "Mick / Tygo",
+      "address": "Pieter Florisz Couckdreef 8, Monster",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Mick Mulders"
+      ],
+      "worker": {
+        "uuid": "1f122ec6-1cbb-6d00-9aad-4269fe2bbe9c",
+        "name": "Mick Mulders"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDGPGNAAA=",
+      "subject": "Inmeten Sonty - Pauline van der Burg",
+      "start": "2026-07-15T13:00:00.0000000",
+      "scheduledAt": "2026-07-15T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Noordeindseweg 266A, 2651LL Berkel en Rodenrijs, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk03AAA=",
+      "subject": "Montage Sonty - Lisa van Dijk",
+      "start": "2026-07-15T12:30:00.0000000",
+      "scheduledAt": "2026-07-15T12:30:00+02:00",
+      "duration": 120,
+      "teamName": null,
+      "address": "Bromeliatuin 8, Pijnacker",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0UAAA=",
+      "subject": "Montage Sonty - Hannes Sibbel",
+      "start": "2026-07-15T13:00:00.0000000",
+      "scheduledAt": "2026-07-15T13:00:00+02:00",
+      "duration": 120,
+      "teamName": null,
+      "address": "Julianalaan 123, Delft",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkvjAAA=",
+      "subject": "Inmeten Sonty - Melanie Kaizer",
+      "start": "2026-07-15T14:00:00.0000000",
+      "scheduledAt": "2026-07-15T14:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Willem de zwijgerlaan 38, 2641 HW Pijnacker, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDblAAA=",
+      "subject": "Montage Sonty - Danielle Moret",
+      "start": "2026-07-15T14:00:00.0000000",
+      "scheduledAt": "2026-07-15T14:00:00+02:00",
+      "duration": 60,
+      "teamName": null,
+      "address": "Foulkeslaan 19, Delft",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk05AAA=",
+      "subject": "Montage Sonty - Rob Krens",
+      "start": "2026-07-15T14:30:00.0000000",
+      "scheduledAt": "2026-07-15T14:30:00+02:00",
+      "duration": 60,
+      "teamName": null,
+      "address": "Brilduiker 17, Pijnacker",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVJdWPlAAA=",
+      "subject": "Inmeten Sonty - Viet",
+      "start": "2026-07-15T15:00:00.0000000",
+      "scheduledAt": "2026-07-15T15:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Blanchardstraat 12 2497 BP Den Haag Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbgAAA=",
+      "subject": "Montage Sonty - Jacqueline de Jonge",
+      "start": "2026-07-15T15:30:00.0000000",
+      "scheduledAt": "2026-07-15T15:30:00+02:00",
+      "duration": 60,
+      "teamName": null,
+      "address": "Laurierzoom 13, Zoetermeer",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0TAAA=",
+      "subject": "Montage Sonty",
+      "start": "2026-07-15T08:00:00.0000000",
+      "scheduledAt": "2026-07-15T08:00:00+02:00",
+      "duration": 540,
+      "teamName": "Marvin / Kevin",
+      "address": "Gereserveerd CS Staal, Oude Tonge",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkvqAAA=",
+      "subject": "Inmeten Sonty - Sven de Haas",
+      "start": "2026-07-16T09:00:00.0000000",
+      "scheduledAt": "2026-07-16T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Radijsstraat 13, 2292 AL, Wateringen, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwDAAA=",
+      "subject": "Inmeten Sonty - Ruud Huurman",
+      "start": "2026-07-16T09:00:00.0000000",
+      "scheduledAt": "2026-07-16T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Ertsstraat 20, 3072 AB Rotterdam, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU56-sMAAA=",
+      "subject": "Inmeten Sonty - Jaap Bal",
+      "start": "2026-07-16T10:00:00.0000000",
+      "scheduledAt": "2026-07-16T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Patrijs 5, 3263 AE Oud-Beijerland, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVBzCFCAAA=",
+      "subject": "Inmeten Sonty - Ron Kleijnhans",
+      "start": "2026-07-16T10:00:00.0000000",
+      "scheduledAt": "2026-07-16T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Willem Hanegraaflaan 51, Den Haag",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU8LfcbAAA=",
+      "subject": "Montage Sonty - Stefan Hordijk",
+      "start": "2026-07-16T08:00:00.0000000",
+      "scheduledAt": "2026-07-16T08:00:00+02:00",
+      "duration": 210,
+      "teamName": null,
+      "address": "Schout Eeuwoutstraat 25, Pernis",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU8LfcNAAA=",
+      "subject": "Montage Sonty - Pim van Geuns",
+      "start": "2026-07-16T09:00:00.0000000",
+      "scheduledAt": "2026-07-16T09:00:00+02:00",
+      "duration": 150,
+      "teamName": "Yudi / Nick",
+      "address": "'t Kerkestuk 27, Reeuwijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU8LfcdAAA=",
+      "subject": "Montage Sonty - Familie Budding",
+      "start": "2026-07-16T08:00:00.0000000",
+      "scheduledAt": "2026-07-16T08:00:00+02:00",
+      "duration": 240,
+      "teamName": null,
+      "address": "Maasoord 23, Woerden",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjsAAA=",
+      "subject": "Montage Sonty - Mevrouw Grootenboer",
+      "start": "2026-07-16T08:00:00.0000000",
+      "scheduledAt": "2026-07-16T08:00:00+02:00",
+      "duration": 240,
+      "teamName": "Marvin / Kevin",
+      "address": "Torbeckestraat 71, Delft",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVCgXlJAAA=",
+      "subject": "Inmeten Sonty - Maarten Bosma",
+      "start": "2026-07-16T11:00:00.0000000",
+      "scheduledAt": "2026-07-16T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Ternatestraat 10, 3312 XW, Dordrecht, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwGAAA=",
+      "subject": "Inmeten Sonty - Marina Taal",
+      "start": "2026-07-16T11:00:00.0000000",
+      "scheduledAt": "2026-07-16T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Valkenboslaan 104, Den Haag",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwLAAA=",
+      "subject": "Inmeten Sonty - Jean Claude Najar",
+      "start": "2026-07-16T12:00:00.0000000",
+      "scheduledAt": "2026-07-16T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Doelenstraat 63, 2611 NS, Delft, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHCY4hAAA=",
+      "subject": "Inmeten Sonty - Ben Hooijberg",
+      "start": "2026-07-16T12:00:00.0000000",
+      "scheduledAt": "2026-07-16T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Dr. Kuyperstraat 13, 2991gb Barendrecht , Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU8LfcOAAA=",
+      "subject": "Montage Sonty - Fred Brons",
+      "start": "2026-07-16T11:30:00.0000000",
+      "scheduledAt": "2026-07-16T11:30:00+02:00",
+      "duration": 120,
+      "teamName": "Yudi / Nick",
+      "address": "'t Kerkestuk 75, Reeuwijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVBzCFJAAA=",
+      "subject": "Montage Sonty - Vos Logistics",
+      "start": "2026-07-16T12:00:00.0000000",
+      "scheduledAt": "2026-07-16T12:00:00+02:00",
+      "duration": 120,
+      "teamName": null,
+      "address": "Blekerijlaan 2, Woerden",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwQAAA=",
+      "subject": "Inmeten Sonty - Suzanne Hoogenes",
+      "start": "2026-07-16T13:00:00.0000000",
+      "scheduledAt": "2026-07-16T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Generaal Spoorlaan 173, 2283GE Rijswijk, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbBAAA=",
+      "subject": "Inmeten Sonty - leo van leeuwen",
+      "start": "2026-07-16T13:00:00.0000000",
+      "scheduledAt": "2026-07-16T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "IJsvogelplein 133, 3334XJ Zwijndrecht, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUxV9E4AAA=",
+      "subject": "Montage Sonty - Sheila Roepan",
+      "start": "2026-07-16T12:00:00.0000000",
+      "scheduledAt": "2026-07-16T12:00:00+02:00",
+      "duration": 150,
+      "teamName": "Marvin / Kevin",
+      "address": "Langeland 25, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0kAAA=",
+      "subject": "Inmeten Sonty - Ljoedmila van de Werf",
+      "start": "2026-07-16T14:00:00.0000000",
+      "scheduledAt": "2026-07-16T14:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Mijlpaal 14, Den Haag",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDGPF8AAA=",
+      "subject": "Montage Sonty - Rosielle van Doorn",
+      "start": "2026-07-16T13:30:00.0000000",
+      "scheduledAt": "2026-07-16T13:30:00+02:00",
+      "duration": 120,
+      "teamName": "Yudi / Nick",
+      "address": "Kerkestuk 37, Reeuwijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHCY4cAAA=",
+      "subject": "Montage Sonty - Leo Vroegindeweij",
+      "start": "2026-07-16T13:30:00.0000000",
+      "scheduledAt": "2026-07-16T13:30:00+02:00",
+      "duration": 120,
+      "teamName": "Yudi / Nick",
+      "address": "kerkestuk 35, 2811BD, Reeuwijk, Nederland",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjuAAA=",
+      "subject": "Montage Sonty - De heer Henskens",
+      "start": "2026-07-16T14:30:00.0000000",
+      "scheduledAt": "2026-07-16T14:30:00+02:00",
+      "duration": 60,
+      "teamName": "Marvin / Kevin",
+      "address": "Santigosingel 8, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkvxAAA=",
+      "subject": "Montage Sonty - Ellen Adriaans",
+      "start": "2026-07-16T14:00:00.0000000",
+      "scheduledAt": "2026-07-16T14:00:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Chirugijnstraat 1, Delfgauw",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk01AAA=",
+      "subject": "Montage Sonty - Kelly Zevenhoven",
+      "start": "2026-07-16T15:00:00.0000000",
+      "scheduledAt": "2026-07-16T15:00:00+02:00",
+      "duration": 120,
+      "teamName": "Joey",
+      "address": "Haarzichtlaan 85, Vleuten",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk02AAA=",
+      "subject": "Montage Sonty",
+      "start": "2026-07-16T15:00:00.0000000",
+      "scheduledAt": "2026-07-16T15:00:00+02:00",
+      "duration": 120,
+      "teamName": "Sjoerd",
+      "address": "Haarzichtlaan 85, Vleuten",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDGPGBAAA=",
+      "subject": "Montage Sonty - Peter van Dam",
+      "start": "2026-07-16T15:30:00.0000000",
+      "scheduledAt": "2026-07-16T15:30:00+02:00",
+      "duration": 90,
+      "teamName": "Yudi / Nick",
+      "address": "Kerkestuk 43, Reeuwijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjrAAA=",
+      "subject": "Inmeten Sonty",
+      "start": "2026-07-17T08:30:00.0000000",
+      "scheduledAt": "2026-07-17T08:30:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Louis Braillelaan 60, Zoetermeer",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU56-r5AAA=",
+      "subject": "Montage Sonty - Sankar Bose",
+      "start": "2026-07-17T08:00:00.0000000",
+      "scheduledAt": "2026-07-17T08:00:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Sagiusstraat 70, Pernis",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkvoAAA=",
+      "subject": "Afspraak showroom Locatie: Frijdastraat 8F, 2288 EX Rijswijk - Marin Pielage",
+      "start": "2026-07-17T09:30:00.0000000",
+      "scheduledAt": "2026-07-17T09:30:00+02:00",
+      "duration": 60,
+      "teamName": "Jaimy",
+      "address": null,
+      "template": "1f11c802-658a-62d0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Jaimy de Wit"
+      ],
+      "worker": {
+        "uuid": "1f122ffc-6d14-6660-9432-16c0e7faeed6",
+        "name": "Jaimy de Wit"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHCY4iAAA=",
+      "subject": "Inmeten Sonty - Richard Groenendijk-Li",
+      "start": "2026-07-17T09:30:00.0000000",
+      "scheduledAt": "2026-07-17T09:30:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Bizetstraat 39, 2901JV Capelle aan den IJssel, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU56-r9AAA=",
+      "subject": "Montage Sonty - matty van Rijn",
+      "start": "2026-07-17T08:00:00.0000000",
+      "scheduledAt": "2026-07-17T08:00:00+02:00",
+      "duration": 180,
+      "teamName": "Marvin / Kevin",
+      "address": "Emmalaan 42, Woubrugge",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkv9AAA=",
+      "subject": "Montage Sonty - Dominique van Dijkhuizen",
+      "start": "2026-07-17T08:00:00.0000000",
+      "scheduledAt": "2026-07-17T08:00:00+02:00",
+      "duration": 180,
+      "teamName": null,
+      "address": "Marconistraat 22, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk1MAAA=",
+      "subject": "Afspraak showroom Locatie: Frijdastraat 8F, 2288 EX Rijswijk - Wilco Vendrig",
+      "start": "2026-07-17T10:30:00.0000000",
+      "scheduledAt": "2026-07-17T10:30:00+02:00",
+      "duration": 60,
+      "teamName": "Nanny",
+      "address": null,
+      "template": "1f11c802-658a-62d0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Nanny van Vliet - Kester"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-4eba-6810-9aad-4269fe2bbe9c",
+        "name": "Nanny van Vliet - Kester"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkv1AAA=",
+      "subject": "Montage Sonty - Eldin Rahmanovic",
+      "start": "2026-07-17T10:30:00.0000000",
+      "scheduledAt": "2026-07-17T10:30:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Offenbachrode 37, Zoetermeer",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwPAAA=",
+      "subject": "Montage Sonty - PC070",
+      "start": "2026-07-17T11:00:00.0000000",
+      "scheduledAt": "2026-07-17T11:00:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Fredrik Hendriklaan 299, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU8LfcaAAA=",
+      "subject": "Montage Sonty - Rob Lugtigheid",
+      "start": "2026-07-17T08:00:00.0000000",
+      "scheduledAt": "2026-07-17T08:00:00+02:00",
+      "duration": 360,
+      "teamName": "Yudi / Nick",
+      "address": "Herelsestraat 213, Moerstraten",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0YAAA=",
+      "subject": "Montage Sonty - Marjolein Heemkerk",
+      "start": "2026-07-17T11:00:00.0000000",
+      "scheduledAt": "2026-07-17T11:00:00+02:00",
+      "duration": 180,
+      "teamName": "Marvin / Kevin",
+      "address": "Meerkreuk 5A, Oude-Wetering",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbpAAA=",
+      "subject": "Afspraak showroom Locatie: Frijdastraat 8F, 2288 EX Rijswijk - Lisa Terreehorst",
+      "start": "2026-07-18T13:30:00.0000000",
+      "scheduledAt": "2026-07-18T13:30:00+02:00",
+      "duration": 60,
+      "teamName": "Jaimy",
+      "address": null,
+      "template": "1f11c802-658a-62d0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Jaimy de Wit"
+      ],
+      "worker": {
+        "uuid": "1f122ffc-6d14-6660-9432-16c0e7faeed6",
+        "name": "Jaimy de Wit"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkvzAAA=",
+      "subject": "Montage Sonty - Alison georgala",
+      "start": "2026-07-20T08:00:00.0000000",
+      "scheduledAt": "2026-07-20T08:00:00+02:00",
+      "duration": 90,
+      "teamName": "Yudi / Nick",
+      "address": "Laan van Zuiderhoeven 87, Hoofddorp",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU6iGqrAAA=",
+      "subject": "Inmeten Sonty - Ricardo van Dijk",
+      "start": "2026-07-20T09:00:00.0000000",
+      "scheduledAt": "2026-07-20T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Bergbeek 57, 2685PS, Poeldijk, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk06AAA=",
+      "subject": "Inmeten Sonty - Dhr. Hans Elders",
+      "start": "2026-07-20T09:00:00.0000000",
+      "scheduledAt": "2026-07-20T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Savornin Lohmanlaan 459, Den Haag",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVIiHqAAAA=",
+      "subject": "Inmeten Sonty - Anna Danne",
+      "start": "2026-07-20T10:00:00.0000000",
+      "scheduledAt": "2026-07-20T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Westduinweg 108, 2583AB 's-Gravenhage, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVIiHqFAAA=",
+      "subject": "Inmeten Sonty - van der Ven",
+      "start": "2026-07-20T10:00:00.0000000",
+      "scheduledAt": "2026-07-20T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Kanaalweg 2F Waddinxveen",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVIiHqEAAA=",
+      "subject": "Inmeten Sonty - Ter beek",
+      "start": "2026-07-20T11:00:00.0000000",
+      "scheduledAt": "2026-07-20T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Abeelstraat 17 Den haag",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDa-AAA=",
+      "subject": "Inmeten Sonty - Mireia Xicola",
+      "start": "2026-07-20T11:00:00.0000000",
+      "scheduledAt": "2026-07-20T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Pompe van Meerdervoortstraat 4, 2274PR Voorburg, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwBAAA=",
+      "subject": "Montage Sonty - Jurgen van der Zalm",
+      "start": "2026-07-20T09:30:00.0000000",
+      "scheduledAt": "2026-07-20T09:30:00+02:00",
+      "duration": 180,
+      "teamName": "Yudi / Nick",
+      "address": "Benjamin Jonsonlaan 127, Hoofddorp",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwJAAA=",
+      "subject": "Montage Sonty - Erik Spitter",
+      "start": "2026-07-20T08:00:00.0000000",
+      "scheduledAt": "2026-07-20T08:00:00+02:00",
+      "duration": 300,
+      "teamName": null,
+      "address": "Spoorbaan 151, Hellevoetsluis",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwKAAA=",
+      "subject": "Montage Sonty",
+      "start": "2026-07-20T08:00:00.0000000",
+      "scheduledAt": "2026-07-20T08:00:00+02:00",
+      "duration": 300,
+      "teamName": "Mick / Tygo",
+      "address": "Spoorbaan 151, Hellevoetsluis",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Mick Mulders"
+      ],
+      "worker": {
+        "uuid": "1f122ec6-1cbb-6d00-9aad-4269fe2bbe9c",
+        "name": "Mick Mulders"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVJcMwnAAA=",
+      "subject": "Inmeten Sonty - Vellekoop",
+      "start": "2026-07-20T12:00:00.0000000",
+      "scheduledAt": "2026-07-20T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Sportlaan 15 de Lier",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbEAAA=",
+      "subject": "Inmeten Sonty - Armando Indrajuana",
+      "start": "2026-07-20T12:00:00.0000000",
+      "scheduledAt": "2026-07-20T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Wethouder Verheulplantsoen 5, 2497BS 's-Gravenhage, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHCY4WAAA=",
+      "subject": "Montage Sonty - Wendy Niblett",
+      "start": "2026-07-20T12:30:00.0000000",
+      "scheduledAt": "2026-07-20T12:30:00+02:00",
+      "duration": 90,
+      "teamName": "Yudi / Nick",
+      "address": "Nieuwe Voorstraat 116, Noordwijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbJAAA=",
+      "subject": "Inmeten Sonty - Tim van Eick",
+      "start": "2026-07-20T13:00:00.0000000",
+      "scheduledAt": "2026-07-20T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Strijpwetering 11, Rijswijk",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbMAAA=",
+      "subject": "Montage Sonty - Judith de Swart",
+      "start": "2026-07-20T13:00:00.0000000",
+      "scheduledAt": "2026-07-20T13:00:00+02:00",
+      "duration": 120,
+      "teamName": null,
+      "address": "Sneeuwbalstraat 33, Poortugaal",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbWAAA=",
+      "subject": "Inmeten Sonty - Caroline Lebens",
+      "start": "2026-07-20T14:00:00.0000000",
+      "scheduledAt": "2026-07-20T14:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Klaverweide 161 2272 VZ Voorburg",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU4cUCSAAA=",
+      "subject": "Montage Sonty",
+      "start": "2026-07-21T07:00:00.0000000",
+      "scheduledAt": "2026-07-21T07:00:00+02:00",
+      "duration": 60,
+      "teamName": "Marvin / Kevin",
+      "address": null,
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk1LAAA=",
+      "subject": "Inmeten Sonty - R. Rai",
+      "start": "2026-07-21T09:00:00.0000000",
+      "scheduledAt": "2026-07-21T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Laan van Wateringse Veld 913, 2548BR 's-Gravenhage, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjvAAA=",
+      "subject": "Montage Sonty - De heer Henskens",
+      "start": "2026-07-21T08:00:00.0000000",
+      "scheduledAt": "2026-07-21T08:00:00+02:00",
+      "duration": 180,
+      "teamName": "Sjoerd",
+      "address": "Santigosingel 8, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk1JAAA=",
+      "subject": "Inmeten Sonty - Carin Gelpke",
+      "start": "2026-07-21T10:00:00.0000000",
+      "scheduledAt": "2026-07-21T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Vuurbloem 26, 2317 lp Leiden, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwNAAA=",
+      "subject": "Montage Sonty - G.F. Development B.V.",
+      "start": "2026-07-21T08:00:00.0000000",
+      "scheduledAt": "2026-07-21T08:00:00+02:00",
+      "duration": 210,
+      "teamName": "Yudi / Nick",
+      "address": "Vechtstraat 168H, Amsterdam",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkvbAAA=",
+      "subject": "Inmeten Sonty - Justin Schellekens",
+      "start": "2026-07-21T11:00:00.0000000",
+      "scheduledAt": "2026-07-21T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Papoeaplein 7, 2022ZP Haarlem, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVIiHp6AAA=",
+      "subject": "Inmeten Sonty - Auke Teeninga",
+      "start": "2026-07-21T11:00:00.0000000",
+      "scheduledAt": "2026-07-21T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Parelgraslaan 23, 2288 HB RIJSWIJK ZH, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk0tAAA=",
+      "subject": "Montage Sonty - Roel Anbeek",
+      "start": "2026-07-21T08:00:00.0000000",
+      "scheduledAt": "2026-07-21T08:00:00+02:00",
+      "duration": 270,
+      "teamName": null,
+      "address": "Tuinpad 48, Dorst",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHCY4XAAA=",
+      "subject": "Inmeten Sonty - Djurre Boukes",
+      "start": "2026-07-21T12:00:00.0000000",
+      "scheduledAt": "2026-07-21T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Constantijn Huygensstraat 9, 2041NL Zandvoort, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk1HAAA=",
+      "subject": "Inmeten Sonty - Marco Meijer",
+      "start": "2026-07-21T12:00:00.0000000",
+      "scheduledAt": "2026-07-21T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Ganzerik 3, 2631dg Nootdorp, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk0XAAA=",
+      "subject": "Inmeten Sonty - Koert Kerk",
+      "start": "2026-07-21T13:00:00.0000000",
+      "scheduledAt": "2026-07-21T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Kleiburg 612, 1104EA Amsterdam, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVIiHp7AAA=",
+      "subject": "Inmeten Sonty - H. Koevoet",
+      "start": "2026-07-21T13:00:00.0000000",
+      "scheduledAt": "2026-07-21T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Koekamp 56, 2623 XW, Delft, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbIAAA=",
+      "subject": "Montage Sonty - Ahmad Qurishi",
+      "start": "2026-07-21T12:30:00.0000000",
+      "scheduledAt": "2026-07-21T12:30:00+02:00",
+      "duration": 120,
+      "teamName": null,
+      "address": "Kwelder 18, Hendrik Ido-Ambacht",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHCY4kAAA=",
+      "subject": "Inmeten Sonty - Simone Ottenbros",
+      "start": "2026-07-21T14:00:00.0000000",
+      "scheduledAt": "2026-07-21T14:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Leo Dongelmansstraat 3 , 1391 EW Abcoude , Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbDAAA=",
+      "subject": "Inmeten Sonty - Rachel Voskuijl",
+      "start": "2026-07-21T14:00:00.0000000",
+      "scheduledAt": "2026-07-21T14:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "De Harnasch 21, 2642DV Pijnacker, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0VAAA=",
+      "subject": "Montage Sonty - Jamy Moussavi",
+      "start": "2026-07-21T08:00:00.0000000",
+      "scheduledAt": "2026-07-21T08:00:00+02:00",
+      "duration": 480,
+      "teamName": null,
+      "address": "De Moucheronstraat 84, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjwAAA=",
+      "subject": "Montage Sonty",
+      "start": "2026-07-22T07:00:00.0000000",
+      "scheduledAt": "2026-07-22T07:00:00+02:00",
+      "duration": 60,
+      "teamName": "Yudi / Nick",
+      "address": null,
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbKAAA=",
+      "subject": "Montage Sonty - Jane Kronshorst",
+      "start": "2026-07-22T08:00:00.0000000",
+      "scheduledAt": "2026-07-22T08:00:00+02:00",
+      "duration": 90,
+      "teamName": null,
+      "address": "Geestbrugkade 28B, Rijswijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbFAAA=",
+      "subject": "Inmeten Sonty - Kathy Van der Knaap",
+      "start": "2026-07-22T09:00:00.0000000",
+      "scheduledAt": "2026-07-22T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Diepenbrockrode 39, 2717bs Zoetermeer , Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbGAAA=",
+      "subject": "Inmeten Sonty - Henk van der Burg",
+      "start": "2026-07-22T10:00:00.0000000",
+      "scheduledAt": "2026-07-22T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Hoogaarskade 20, 2725 AN Zoetermeer, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbAAAA=",
+      "subject": "Montage Sonty - Corrie van der Sluis - Folkerts",
+      "start": "2026-07-22T08:00:00.0000000",
+      "scheduledAt": "2026-07-22T08:00:00+02:00",
+      "duration": 210,
+      "teamName": null,
+      "address": "Tentweg 131, Stolwijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk1FAAA=",
+      "subject": "Inmeten Sonty - Mark Gotz",
+      "start": "2026-07-22T11:00:00.0000000",
+      "scheduledAt": "2026-07-22T11:00:00+02:00",
+      "duration": 90,
+      "teamName": "Sjoerd",
+      "address": "Kapelstraat 7, 4841GE Prinsenbeek, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbYAAA=",
+      "subject": "Montage Sonty - Manuel van den Belt",
+      "start": "2026-07-22T11:30:00.0000000",
+      "scheduledAt": "2026-07-22T11:30:00+02:00",
+      "duration": 90,
+      "teamName": null,
+      "address": "Anna Maria van Cappellenpark 16, Capelle aan den Ijssel",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbbAAA=",
+      "subject": "Inmeten Sonty - Nithin Paltan",
+      "start": "2026-07-22T12:30:00.0000000",
+      "scheduledAt": "2026-07-22T12:30:00+02:00",
+      "duration": 90,
+      "teamName": "Sjoerd",
+      "address": "Hooghagen 30 3078BA Rotterdam Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVJdWPkAAA=",
+      "subject": "Inmeten Sonty - de Bruin",
+      "start": "2026-07-23T09:00:00.0000000",
+      "scheduledAt": "2026-07-23T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Merellaan 855, 3145GH Maassluis, Nederlan",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDboAAA=",
+      "subject": "Inmeten Sonty - Jesus Alcantara",
+      "start": "2026-07-23T09:00:00.0000000",
+      "scheduledAt": "2026-07-23T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Sytwinde 142, 2631GW Nootdorp, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVIiHp_AAA=",
+      "subject": "Inmeten Sonty - Wiebe Waaijer",
+      "start": "2026-07-23T10:00:00.0000000",
+      "scheduledAt": "2026-07-23T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "De Constant Rebecquestraat 66, 2518 RE 's-Gravenhage, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbVAAA=",
+      "subject": "Inmeten Sonty - Princess Paliso",
+      "start": "2026-07-23T10:00:00.0000000",
+      "scheduledAt": "2026-07-23T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Apollostraat 10 3054 TA Rotterdam",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk1KAAA=",
+      "subject": "Inmeten Sonty - Sander van der Linden",
+      "start": "2026-07-23T11:00:00.0000000",
+      "scheduledAt": "2026-07-23T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Kerckwervelaan 43, 2343 LG Oegstgeest, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbXAAA=",
+      "subject": "Inmeten Sonty - Jacky Schilperoort",
+      "start": "2026-07-23T11:00:00.0000000",
+      "scheduledAt": "2026-07-23T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Boslaan 6, 2912PA, Nieuwerkerk aan den IJssel, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbhAAA=",
+      "subject": "Inmeten Sonty - Dhr. de Groot",
+      "start": "2026-07-23T12:00:00.0000000",
+      "scheduledAt": "2026-07-23T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Máximalaan 4, 2171VT Sassenheim",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbnAAA=",
+      "subject": "Inmeten Sonty - GM Willemse",
+      "start": "2026-07-23T12:00:00.0000000",
+      "scheduledAt": "2026-07-23T12:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "B van Waningstraat 1, 2935xb Ouderkerk aan den IJssel, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbCAAA=",
+      "subject": "Inmeten Sonty - Bas Melman",
+      "start": "2026-07-23T13:00:00.0000000",
+      "scheduledAt": "2026-07-23T13:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Dageraadweg 14, 2141 VP Vijfhuizen, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjzAAA=",
+      "subject": "Montage Sonty - De heer en mevrouw Schellart",
+      "start": "2026-07-23T08:00:00.0000000",
+      "scheduledAt": "2026-07-23T08:00:00+02:00",
+      "duration": 420,
+      "teamName": "Marvin / Kevin",
+      "address": "Tinnegieterhof 6, Schiedam",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVIiHqBAAA=",
+      "subject": "Inmeten Sonty - Gerard van Eeden",
+      "start": "2026-07-23T14:00:00.0000000",
+      "scheduledAt": "2026-07-23T14:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Ina Dammanstraat 41, 1507pg Zaandam, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkv3AAA=",
+      "subject": "Montage Sonty - Angelique Kluwen",
+      "start": "2026-07-23T08:00:00.0000000",
+      "scheduledAt": "2026-07-23T08:00:00+02:00",
+      "duration": 480,
+      "teamName": null,
+      "address": "Burgemeester de Zeeuwstraat 37, Ridderkerk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDGPGCAAA=",
+      "subject": "Montage Sonty",
+      "start": "2026-07-23T09:00:00.0000000",
+      "scheduledAt": "2026-07-23T09:00:00+02:00",
+      "duration": 480,
+      "teamName": "Yudi / Nick",
+      "address": null,
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk0yAAA=",
+      "subject": "Montage Sonty - Richard Groenendijk - Li",
+      "start": "2026-07-24T08:00:00.0000000",
+      "scheduledAt": "2026-07-24T08:00:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Bizetstraat 39, Capelle aan den Ijssel",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU4cUC4AAA=",
+      "subject": "Montage Sonty - Michelle van den Berg",
+      "start": "2026-07-24T08:00:00.0000000",
+      "scheduledAt": "2026-07-24T08:00:00+02:00",
+      "duration": 180,
+      "teamName": "Yudi / Nick",
+      "address": "Tjalk 23, Schipluiden",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFj4AAA=",
+      "subject": "Montage Sonty - Fred Weij",
+      "start": "2026-07-24T08:00:00.0000000",
+      "scheduledAt": "2026-07-24T08:00:00+02:00",
+      "duration": 180,
+      "teamName": "Marvin / Kevin",
+      "address": "Barnsteenlaan 28, Utrecht",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU1yOAWAAA=",
+      "subject": "Montage Sonty - Carla van Riemsdijk",
+      "start": "2026-07-24T11:00:00.0000000",
+      "scheduledAt": "2026-07-24T11:00:00+02:00",
+      "duration": 90,
+      "teamName": "Yudi / Nick",
+      "address": "Boogaardplein 116, Rijswijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbkAAA=",
+      "subject": "Montage Sonty - Maikel Leeuwestein",
+      "start": "2026-07-24T10:30:00.0000000",
+      "scheduledAt": "2026-07-24T10:30:00+02:00",
+      "duration": 150,
+      "teamName": null,
+      "address": "Beekenstein 99, Dordrecht",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkvdAAA=",
+      "subject": "Inmeten Sonty - Serge Rodrigues",
+      "start": "2026-07-27T09:00:00.0000000",
+      "scheduledAt": "2026-07-27T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Binckhorstlaan 285, 2516 BC, Den Haag, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVIiHp5AAA=",
+      "subject": "Inmeten Sonty - Marijke van Aalst",
+      "start": "2026-07-27T09:00:00.0000000",
+      "scheduledAt": "2026-07-27T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Moerasveen 19, 2461hc Ter Aar, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0qAAA=",
+      "subject": "Montage Sonty - Caroline breukhoven",
+      "start": "2026-07-27T08:00:00.0000000",
+      "scheduledAt": "2026-07-27T08:00:00+02:00",
+      "duration": 150,
+      "teamName": "Yudi / Nick",
+      "address": "Vivienstraat 80, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAU_CV0PAAA=",
+      "subject": "Montage Sonty - Giovanni Langerak",
+      "start": "2026-07-27T08:00:00.0000000",
+      "scheduledAt": "2026-07-27T08:00:00+02:00",
+      "duration": 180,
+      "teamName": "Mick / Tygo",
+      "address": "Tapijtschelp 33, Hellevoetsluis",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Mick Mulders"
+      ],
+      "worker": {
+        "uuid": "1f122ec6-1cbb-6d00-9aad-4269fe2bbe9c",
+        "name": "Mick Mulders"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbOAAA=",
+      "subject": "Inmeten Sonty - Bo-Jane Pijst",
+      "start": "2026-07-27T10:00:00.0000000",
+      "scheduledAt": "2026-07-27T10:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Tolheksbos 80, 2134GB Hoofddorp, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbaAAA=",
+      "subject": "Montage Sonty - Hasan Ozer",
+      "start": "2026-07-27T10:30:00.0000000",
+      "scheduledAt": "2026-07-27T10:30:00+02:00",
+      "duration": 90,
+      "teamName": "Yudi / Nick",
+      "address": "Brinckerickstraat 100, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbjAAA=",
+      "subject": "Inmeten Sonty - Martin van Bentem",
+      "start": "2026-07-27T11:00:00.0000000",
+      "scheduledAt": "2026-07-27T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Benjamin Jonsonlaan 121, 2135 VP, Hoofddorp, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbfAAA=",
+      "subject": "Inmeten Sonty - Tari de Jong",
+      "start": "2026-07-28T09:00:00.0000000",
+      "scheduledAt": "2026-07-28T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Rhijnvis feithstraat 10, 2806RH, Gouda, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbcAAA=",
+      "subject": "Montage Sonty - Clint ouwendijk",
+      "start": "2026-07-28T08:00:00.0000000",
+      "scheduledAt": "2026-07-28T08:00:00+02:00",
+      "duration": 180,
+      "teamName": null,
+      "address": "Koolzaadstraat 14, Nieuw Vennep",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjpAAA=",
+      "subject": "Montage Sonty - Unicoz Zoetermeer",
+      "start": "2026-07-28T08:00:00.0000000",
+      "scheduledAt": "2026-07-28T08:00:00+02:00",
+      "duration": 240,
+      "teamName": null,
+      "address": "Louis Braillelaan 60, Zoetermeer",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUAMM8cAAA=",
+      "subject": "Inmeten Sonty",
+      "start": "2026-07-28T08:00:00.0000000",
+      "scheduledAt": "2026-07-28T08:00:00+02:00",
+      "duration": 540,
+      "teamName": "Joey",
+      "address": null,
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbZAAA=",
+      "subject": "Inmeten Sonty - Shriley Heins",
+      "start": "2026-07-29T09:00:00.0000000",
+      "scheduledAt": "2026-07-29T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "van watervlietstraat 28, Voorburg",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbiAAA=",
+      "subject": "Montage Sonty - Gido Stuurman",
+      "start": "2026-07-29T08:00:00.0000000",
+      "scheduledAt": "2026-07-29T08:00:00+02:00",
+      "duration": 240,
+      "teamName": null,
+      "address": "Oudeweg 8, Reeuwijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFj8AAA=",
+      "subject": "Montage Sonty - Barbara Veldhuizen",
+      "start": "2026-07-29T08:00:00.0000000",
+      "scheduledAt": "2026-07-29T08:00:00+02:00",
+      "duration": 540,
+      "teamName": "Marvin / Kevin",
+      "address": "Keizer Karelweg 427, Amstelveen",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbNAAA=",
+      "subject": "Montage Sonty - Tiago Paoliello",
+      "start": "2026-07-30T08:00:00.0000000",
+      "scheduledAt": "2026-07-30T08:00:00+02:00",
+      "duration": 120,
+      "teamName": null,
+      "address": "Centaurusstraat 11, Haarlem",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUAMM8dAAA=",
+      "subject": "Inmeten Sonty",
+      "start": "2026-07-30T08:00:00.0000000",
+      "scheduledAt": "2026-07-30T08:00:00+02:00",
+      "duration": 540,
+      "teamName": "Joey",
+      "address": null,
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbHAAA=",
+      "subject": "Montage Sonty - Gideon Begeer",
+      "start": "2026-07-31T08:00:00.0000000",
+      "scheduledAt": "2026-07-31T08:00:00+02:00",
+      "duration": 120,
+      "teamName": "Yudi / Nick",
+      "address": "Componistenlaan 89, Gouda",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUAMM8eAAA=",
+      "subject": "Inmeten Sonty",
+      "start": "2026-07-31T08:00:00.0000000",
+      "scheduledAt": "2026-07-31T08:00:00+02:00",
+      "duration": 540,
+      "teamName": "Joey",
+      "address": null,
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk1GAAA=",
+      "subject": "Inmeten Sonty - Anouk Mommen",
+      "start": "2026-08-03T09:00:00.0000000",
+      "scheduledAt": "2026-08-03T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Johannes Camphuijsstraat 164, 2593CW, Den Haag, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk0qAAA=",
+      "subject": "Montage Sonty - Jurian Witsenburg",
+      "start": "2026-08-03T08:00:00.0000000",
+      "scheduledAt": "2026-08-03T08:00:00+02:00",
+      "duration": 150,
+      "teamName": "Yudi / Nick",
+      "address": "Johan Huizingastraat 60, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAUgN4C-AAA=",
+      "subject": "Montage Sonty - Alexander Rafflenbeul",
+      "start": "2026-08-04T08:00:00.0000000",
+      "scheduledAt": "2026-08-04T08:00:00+02:00",
+      "duration": 210,
+      "teamName": "Marvin / Kevin",
+      "address": "Koninging Marialaan 116, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjgAAA=",
+      "subject": "Montage Sonty - Jeffrey Antonisse",
+      "start": "2026-08-07T14:00:00.0000000",
+      "scheduledAt": "2026-08-07T14:00:00+02:00",
+      "duration": 180,
+      "teamName": "Marvin / Kevin",
+      "address": "Wattstraat 17D, Zoetermeer",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVDyFjhAAA=",
+      "subject": "Montage Sonty",
+      "start": "2026-08-07T14:00:00.0000000",
+      "scheduledAt": "2026-08-07T14:00:00+02:00",
+      "duration": 180,
+      "teamName": "Sjoerd",
+      "address": "Wattstraat 17D, Zoetermeer",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDa8AAA=",
+      "subject": "Inmeten Sonty - Olaf Goenheijde",
+      "start": "2026-08-10T09:00:00.0000000",
+      "scheduledAt": "2026-08-10T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Schönbergrode 13, 2717HW Zoetermeer, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk04AAA=",
+      "subject": "Montage Sonty - Michel de Lange",
+      "start": "2026-08-11T08:00:00.0000000",
+      "scheduledAt": "2026-08-11T08:00:00+02:00",
+      "duration": 90,
+      "teamName": null,
+      "address": "Dr. R.J. Fruinplantsoen 52, Den Haag",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVBzCE_AAA=",
+      "subject": "Inmeten Sonty - Arold Borger, Wittgensteinlaan 123, 1062KC Amsterdam, Nederland",
+      "start": "2026-08-11T11:00:00.0000000",
+      "scheduledAt": "2026-08-11T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": null,
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkv8AAA=",
+      "subject": "Montage Sonty - Jeremy Romijn",
+      "start": "2026-08-11T08:00:00.0000000",
+      "scheduledAt": "2026-08-11T08:00:00+02:00",
+      "duration": 540,
+      "teamName": "Yudi / Nick",
+      "address": "Klarinetstraat 12, Rijswijk",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Yudi den Heijer"
+      ],
+      "worker": {
+        "uuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+        "name": "Nick Huizer (team Yudi)"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwMAAA=",
+      "subject": "Montage Sonty - Jeroen Pasterkamp",
+      "start": "2026-08-13T08:00:00.0000000",
+      "scheduledAt": "2026-08-13T08:00:00+02:00",
+      "duration": 210,
+      "teamName": null,
+      "address": "Jaap de Boerstraat 14, Westzaan",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [],
+      "worker": null
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDbmAAA=",
+      "subject": "Inmeten Sonty - C.J. Kleist",
+      "start": "2026-08-17T11:00:00.0000000",
+      "scheduledAt": "2026-08-17T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Straat van Makassar 45A, 1183gz Amstelveen, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVFfkwRAAA=",
+      "subject": "Inmeten Sonty - Daisy Van den Berg",
+      "start": "2026-08-20T11:00:00.0000000",
+      "scheduledAt": "2026-08-20T11:00:00+02:00",
+      "duration": 60,
+      "teamName": "Sjoerd",
+      "address": "Houtlaan 48, 2334 cl Leiden, Nederland",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Sjoerd Pelle"
+      ],
+      "worker": {
+        "uuid": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+        "name": "Sjoerd Pelle"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVHyk0YAAA=",
+      "subject": "Inmeten Sonty - Raymond van der Ent",
+      "start": "2026-08-24T09:00:00.0000000",
+      "scheduledAt": "2026-08-24T09:00:00+02:00",
+      "duration": 60,
+      "teamName": "Joey",
+      "address": "Goopad 11, Leidschendam",
+      "template": "1f11c802-65cd-6aa0-9d06-7e73cee772e4",
+      "workerNames": [
+        "Joey Engelen"
+      ],
+      "worker": {
+        "uuid": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+        "name": "Joey Engelen"
+      }
+    },
+    {
+      "externalId": "outlook-z6ijAACuhh0yywzeTLdqTJ20F-l3AAVKGDa_AAA=",
+      "subject": "Montage Sonty - Leonie van Duijn",
+      "start": "2026-08-28T08:00:00.0000000",
+      "scheduledAt": "2026-08-28T08:00:00+02:00",
+      "duration": 360,
+      "teamName": "Marvin / Kevin",
+      "address": "Oranjelust 2, Voorburg",
+      "template": "1f11c802-6613-6d00-9d06-7e73cee772e4",
+      "workerNames": [
+        "Marvin Vrij"
+      ],
+      "worker": {
+        "uuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+        "name": "Kevin Gibson (team Marvin)"
+      }
+    }
+  ],
+  "toFix": [],
+  "okJobs": 0,
+  "blockEvents": [
+    {
+      "subject": "Vakantie",
+      "worker": null,
+      "attendees": [
+        "Mick Mulders"
+      ],
+      "calendar": "Sonty Montage",
+      "start": "2026-07-10T07:00:00.0000000",
+      "end": "2026-07-10T08:00:00.0000000"
+    },
+    {
+      "subject": "Montage Sonty",
+      "worker": null,
+      "attendees": [
+        "Marvin Vrij"
+      ],
+      "calendar": "Sonty Montage",
+      "start": "2026-07-10T14:00:00.0000000",
+      "end": "2026-07-10T17:00:00.0000000"
+    },
+    {
+      "subject": "Montage Sonty",
+      "worker": null,
+      "attendees": [
+        "Marvin Vrij"
+      ],
+      "calendar": "Sonty Montage",
+      "start": "2026-07-17T14:00:00.0000000",
+      "end": "2026-07-17T17:00:00.0000000"
+    },
+    {
+      "subject": "Montage Sonty",
+      "worker": null,
+      "attendees": [
+        "Marvin Vrij"
+      ],
+      "calendar": "Sonty Montage",
+      "start": "2026-07-24T14:00:00.0000000",
+      "end": "2026-07-24T17:00:00.0000000"
+    },
+    {
+      "subject": "Vakantie",
+      "worker": null,
+      "attendees": [
+        "Jorren Plugge"
+      ],
+      "calendar": "Sonty Montage",
+      "start": "2026-07-27T08:00:00.0000000",
+      "end": "2026-07-31T17:00:00.0000000"
+    },
+    {
+      "subject": "Vakantie",
+      "worker": null,
+      "attendees": [
+        "Mick Mulders"
+      ],
+      "calendar": "Sonty Montage",
+      "start": "2026-07-15T08:00:00.0000000",
+      "end": "2026-08-06T17:00:00.0000000"
+    },
+    {
+      "subject": "Vakantie - SJOERD VRIJ",
+      "worker": null,
+      "attendees": [
+        "Sjoerd Pelle"
+      ],
+      "calendar": "Sonty Montage",
+      "start": "2026-08-14T07:00:00.0000000",
+      "end": "2026-08-14T08:00:00.0000000"
+    },
+    {
+      "subject": "Vakantie - SJOERD VRIJ",
+      "worker": null,
+      "attendees": [
+        "Sjoerd Pelle"
+      ],
+      "calendar": "Sonty Montage",
+      "start": "2026-08-21T07:00:00.0000000",
+      "end": "2026-08-21T08:00:00.0000000"
+    },
+    {
+      "subject": "Vakantie",
+      "worker": null,
+      "attendees": [
+        "Marvin Vrij"
+      ],
+      "calendar": "Sonty Montage",
+      "start": "2026-08-10T08:00:00.0000000",
+      "end": "2026-08-21T17:00:00.0000000"
+    },
+    {
+      "subject": "Vakantie",
+      "worker": null,
+      "attendees": [
+        "Nanny van Vliet - Kester"
+      ],
+      "calendar": "Sonty Montage",
+      "start": "2026-08-10T08:00:00.0000000",
+      "end": "2026-08-28T17:00:00.0000000"
+    },
+    {
+      "subject": "Vakantie",
+      "worker": null,
+      "attendees": [
+        "Yudi den Heijer"
+      ],
+      "calendar": "Sonty Montage",
+      "start": "2026-08-17T07:00:00.0000000",
+      "end": "2026-08-28T17:00:00.0000000"
+    },
+    {
+      "subject": "Vakantie",
+      "worker": null,
+      "attendees": [
+        "Sjoerd Pelle"
+      ],
+      "calendar": "Sonty Montage",
+      "start": "2026-08-24T07:00:00.0000000",
+      "end": "2026-09-11T08:00:00.0000000"
+    },
+    {
+      "subject": "Vakantie",
+      "worker": "Yudi den Heijer",
+      "attendees": [
+        "Yudi den Heijer"
+      ],
+      "calendar": "Yudi den Heijer  Sonty Montage",
+      "start": "2026-08-17T07:00:00.0000000",
+      "end": "2026-08-28T17:00:00.0000000"
+    },
+    {
+      "subject": "Vakantie",
+      "worker": "Nanny van Vliet - Kester",
+      "attendees": [
+        "Nanny van Vliet - Kester"
+      ],
+      "calendar": "Nanny van Vliet | Sonty",
+      "start": "2026-08-10T08:00:00.0000000",
+      "end": "2026-08-28T17:00:00.0000000"
+    },
+    {
+      "subject": "Vakantie - SJOERD VRIJ",
+      "worker": "Sjoerd Pelle",
+      "attendees": [
+        "Sjoerd Pelle"
+      ],
+      "calendar": "Sjoerd Hoogduin | Sonty",
+      "start": "2026-08-14T07:00:00.0000000",
+      "end": "2026-08-14T08:00:00.0000000"
+    },
+    {
+      "subject": "Vakantie - SJOERD VRIJ",
+      "worker": "Sjoerd Pelle",
+      "attendees": [
+        "Sjoerd Pelle"
+      ],
+      "calendar": "Sjoerd Hoogduin | Sonty",
+      "start": "2026-08-21T07:00:00.0000000",
+      "end": "2026-08-21T08:00:00.0000000"
+    },
+    {
+      "subject": "Vakantie",
+      "worker": "Sjoerd Pelle",
+      "attendees": [
+        "Sjoerd Pelle"
+      ],
+      "calendar": "Sjoerd Hoogduin | Sonty",
+      "start": "2026-08-24T07:00:00.0000000",
+      "end": "2026-09-11T08:00:00.0000000"
+    }
+  ]
+}

@@ -48,6 +48,10 @@ Autonome AI-klantenservice (Opus 4.8, persona "Jaimy"), shadow + live-op-whiteli
 - **Roma 2025**: `data/prijsboeken/roma-extract/` (13 md-bestanden, cel-voor-cel geverifieerd tegen pdftotext-tekstlaag `data/prijsboeken/roma-tekst/`, ±11.500 correcties). Overzicht: `docs/roma-prijsstructuur-2025.md`. KRITIEK: Roma = netto EXCL BTW; Sunmaster = advies INCL BTW. LES: extractie op beelden verzint prijzen — ALTIJD tegen tekstlaag verifiëren.
 - **Unilux horren 2026**: `data/unilux/` (catalogus + prijslijst + meetformulier). Bestelmaten: `data/unilux/echte-bestelmaten.md`.
 
+## CRM nabouw (RP vervangen) — ACTIEF sinds 8 juli
+Besluit Daimy: RP (€1000+/mnd) vervangen door eigen CRM. Masterplan: `docs/sonty-crm-masterplan.md`.
+**Fase 1 LIVE + getest (8 juli)**: offerte-tool heeft knop "Sonty-link maken" → eigen deelbare offerte-link (/offerte/[token]) met online ondertekenen (naam+vinkje+IP/tijd-logging, inmeetvoorkeur), Telegram bij akkoord. Hergebruikt lead-share-infra (lib/leads.ts). Linkstructuur sonty.nl (offerte-aanvragen) ONGEWIJZIGD (eis Daimy). RP blijft parallel leidend. Fase 2 = pipeline-bord /admin/pipeline; fase 3 = migratie 16,7k items + RP opzeggen (opzegtermijn nog vragen).
+
 ## Openstaand / wacht op Daimy
 0. **WA verkeerde offerte-link (6 juli)**: 13 klanten kregen de Roma duo-link i.p.v. hun hoofdofferte (WA-cron pakte nieuwste SENT offerte; duo-batch van 09:32 was nieuwer). Bug gefixt (duo-docIds uitgesloten, commit dc2fdc0). Lijst: `data/wa-verkeerde-link-2026-07-06.json`. GEEN nieuwe WhatsApp sturen (expliciete opdracht Daimy). Voorstel dat openstaat: inhoud van die 13 Roma-documenten vervangen door de hoofdofferte zodat de al-gedeelde link de juiste offerte toont — wacht op ja/nee.
 0b. **Roma duo solar-bug (6 juli)**: duo-script pakte altijd de bedrade .XP/zipSCREEN-matrix, ook bij solar-hoofdoffertes. Script gefixt én alle bestaande duo-documenten herberekend met `herbereken-roma-duos.js` (69 in-place bijgewerkt, akkoord Daimy). 3 skips: zipscreens 4267-5000mm breed — Roma solar-zipscreen gaat maar tot 4000mm, daar blijft de bedrade duo-variant staan (Gerrit Boogaardt, Ertugrul Selat, marthijn middelkoop).

@@ -1,0 +1,138 @@
+[
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#c4c9c4",
+  "id": "64788881-632c-4217-8f56-d20732c94b08",
+  "label": "Offerte controle",
+  "position": 0,
+  "standard": true
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#e2e2e2",
+  "id": "fa9d0fe5-5aab-4520-9b63-c057100682f1",
+  "label": "25% Korting (alleen vandaag)",
+  "position": 0,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#e2e2e2",
+  "id": "99d63cca-0877-48d2-a403-697b5870144c",
+  "label": "Jorren",
+  "position": 0,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#e2e2e2",
+  "id": "058e79f8-12fa-4a41-8614-9f7ea2e78b4b",
+  "label": "Winkel ",
+  "position": 1,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#3edb23",
+  "id": "c860c5ae-7eef-45cc-8e79-3b4bcd285b7a",
+  "label": "Gecontroleerd",
+  "position": 2,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#e52a2a",
+  "id": "6221c9fd-c835-45dc-a494-f81e40a8e184",
+  "label": "Handmatige controle",
+  "position": 3,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#ffc52f",
+  "id": "15c4f0be-c6bf-447d-bf5f-a233c482eb53",
+  "label": "Offerte vestuurd",
+  "position": 4,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#47f554",
+  "id": "2e9819bd-26f0-4082-8f18-32bb48f87f54",
+  "label": "Inmeten inplannen",
+  "position": 5,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#e62121",
+  "id": "704fff9f-d99c-4047-a4aa-76776dd8260e",
+  "label": "Inmeten in de wacht",
+  "position": 6,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#e2e2e2",
+  "id": "03ff2483-07a0-4b94-8827-40dd96684fef",
+  "label": "Inmeet whatsapp",
+  "position": 7,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#c87e0f",
+  "id": "f895f76f-175e-4ea0-bb7c-6cc2f4e5d846",
+  "label": "grip invullen",
+  "position": 8,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#153715",
+  "id": "2082ad8a-517c-4e24-8c0f-a5be69b1588a",
+  "label": "Afgerond",
+  "position": 9,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#e2e2e2",
+  "id": "0055a9bd-f2be-4a9e-ad75-f507543dd43d",
+  "label": "Geen herinnering meer",
+  "position": 10,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#e2e2e2",
+  "id": "20815fa5-94ce-40a3-8e1f-d36093de006f",
+  "label": "te ver ",
+  "position": 11,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#e2e2e2",
+  "id": "7286b1fb-bca1-4772-a993-373f957b3b61",
+  "label": "Gordijnen ",
+  "position": 12,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#3fe6ef",
+  "id": "dc0efe4f-2cd6-45d8-aeff-7f1c817a0fb2",
+  "label": "Ai offerte verstuurd",
+  "position": 13,
+  "standard": false
+ },
+ {
+  "backlog_id": "e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7",
+  "color": "#e2e2e2",
+  "id": "e4febc8d-bf8a-4c65-99cd-c3248f5e617d",
+  "label": "winkel verstuurd",
+  "position": 14,
+  "standard": false
+ }
+]

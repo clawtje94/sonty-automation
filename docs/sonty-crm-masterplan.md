@@ -99,3 +99,18 @@ De lead-intake op sonty.nl loopt nu via de RP-widget (offerte.directsamenstellen
 Status: eigen configurator bestaat al op /configurator (7 stappen, categorie-tabs,
 productkaarten — op mobiel al beter dan RP). Rebuild = verbeteren + leads direct
 naar het eigen CRM-bord (kolom Offerte controle) i.p.v. naar RP.
+
+
+### Configurator-verbeterlijst (uit ZD-analyse 2026-07-08, ConfiguratorStepper.tsx als referentie)
+Sonty /configurator heeft al: 8-staps flow mét contact/lead-stap (leads landen al
+in het eigen CRM), localStorage-resume, breadcrumbs, cart/upsells, auto-scroll.
+Toevoegen uit ZD (mobiel eerst):
+1. **Echte prijs i.p.v. "circa"**: de publieke configurator koppelen aan de echte
+   prijsengine van de offerte-tool (alle staffels) — grootste upgrade
+2. **Sticky prijsbalk bovenaan op mobiel** (backdrop-blur) met live prijs
+3. **Defaults voorinvullen** (bestseller-type + gangbare maat) i.p.v. lege velden
+4. **Visuele productpreview** die meebeweegt met maten/kleur (SVG per categorie)
+5. **Meetinstructies + meetdiagram** per producttype
+6. **Stepper met vinkjes** + klikbaar terug (i.p.v. alleen "Stap X van 7")
+7. Shareable URL-state (?product/maat/kleur), besparings-badge, SVG-iconen i.p.v. emoji
+8. Tap-targets overal min 44px

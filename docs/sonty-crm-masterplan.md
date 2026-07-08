@@ -88,3 +88,14 @@ NIET zelf bouwen: boekhouding/BTW-aangifte (accountant), betaalverwerking
 (Mollie), WhatsApp-infrastructuur (officiële Meta-API), salaris (Nmbrs).
 Regels: per module weken parallel draaien vóór opzeggen; alles in git;
 dagelijkse backups; besparing ±€20-30k/jaar aan abonnementen.
+
+
+## Configurator-rebuild (onderdeel van "RP afmaken", opdracht Daimy 2026-07-08)
+De lead-intake op sonty.nl loopt nu via de RP-widget (offerte.directsamenstellen.nl)
+— die moet dus ook vervangen vóór RP eruit kan. Eisen Daimy:
+- Beter dan de RP-widget (die toont op mobiel zelfs een lege productkeuze)
+- Stijl/UX zoals de ZD-configurator die eerder gebouwd is (referentie, read-only bekeken)
+- **MOBIEL EERST**: merendeel van de bezoekers is mobiel — moet "supahhh" werken
+Status: eigen configurator bestaat al op /configurator (7 stappen, categorie-tabs,
+productkaarten — op mobiel al beter dan RP). Rebuild = verbeteren + leads direct
+naar het eigen CRM-bord (kolom Offerte controle) i.p.v. naar RP.

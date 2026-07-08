@@ -70,3 +70,21 @@
 1. RP-opzegtermijn/contractdatum? (bepaalt tempo fase 3)
 2. Eigen offertenummer-formaat OK? (voorstel S-2026-0001)
 3. Wie van het team test fase 2 als eerste? (voorstel: Jaimy + Nanny)
+
+
+## Sonty OS — de lange-termijn-roadmap (akkoord Daimy 2026-07-08)
+Alles-in-één platform, module voor module, per module ALLEEN bouwen wat Sonty
+echt gebruikt (geen feature-pariteit om de pariteit). Volgorde:
+1. **CRM (= Reuzenpanda vervangen)** — NU BEZIG, eerst dit af
+2. **sonty.nl van Webflow → eigen site** (domein omzetten, Webflow eruit)
+3. **Planning** (= Planado-achtig, alleen wat nodig is): planbord, monteurs-app
+   (PWA), meetbonnen, montagetijden-berekening — Planado + Outlook-agenda eruit
+4. **Facturatie** (= Gripp-achtig, alleen wat nodig is): aanbetalings-/eindfacturen
+   vanuit de opdracht, Mollie-betaallinks, herinneringen, UBL/CSV-export naar
+   accountant — Gripp eruit
+5. **Aftersales**: reviewverzoeken, onderhoudsherinneringen, garantie-dossiers
+6. **Communicatie/marketing**: daarna pas Trengo/Klaviyo/HubSpot/Zapier saneren
+NIET zelf bouwen: boekhouding/BTW-aangifte (accountant), betaalverwerking
+(Mollie), WhatsApp-infrastructuur (officiële Meta-API), salaris (Nmbrs).
+Regels: per module weken parallel draaien vóór opzeggen; alles in git;
+dagelijkse backups; besparing ±€20-30k/jaar aan abonnementen.

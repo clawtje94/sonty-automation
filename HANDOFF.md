@@ -66,3 +66,9 @@ Besluit Daimy: RP (€1000+/mnd) vervangen door eigen CRM. Masterplan: `docs/son
 
 ## Credentials & IDs
 Alles in memory: `~/.claude/projects/-Users-clawdboot/memory/reference_sonty_credentials.md` + `reference_reuzenpanda_api.md`. RP: PID 731483fa-ef6b-4aae-afcf-883ec09219dd. Anthropic API-key: `scripts/.anthropic-api-key.txt` (tegoed kan opraken — Daimy laadt bij).
+
+## Update 2026-07-08: agenda → Planado sync
+- 261 agenda-afspraken (Sonty Montage, 8 wkn) als Planado-jobs gezet via `scripts/agenda-full-sync-2026-07.js` (0 fouten; 60 bewust niet-toegewezen, geen monteur-info in agenda).
+- Werkroosters + vakantieblokken herbouwd via `scripts/planado-shifts-rebuild-2026-07.js` (292 shift-dagen; geen shift = geblokt).
+- API-lessen: shifts alleen batchgewijs `PATCH /users/{uuid}/shifts` met `{shifts:[...]}`; per-datum endpoint bestaat niet (404, faalde stil). Templates niet via API aan jobs te koppelen.
+- Wacht op Daimy: rooster Jaimy bevestigen; oude auto-sync (dood sinds 30/3) reactiveren ja/nee.

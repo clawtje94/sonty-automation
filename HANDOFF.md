@@ -51,6 +51,11 @@ Autonome AI-klantenservice (Opus 4.8, persona "Jaimy"), shadow + live-op-whiteli
 ## CRM nabouw (RP vervangen) — ACTIEF sinds 8 juli
 Besluit Daimy: RP (€1000+/mnd) vervangen door eigen CRM. Masterplan: `docs/sonty-crm-masterplan.md`.
 **Fase 1 LIVE + getest (8 juli)**: offerte-tool knop "Sonty-link maken" → /offerte/[token] met ECHTE krabbel-handtekening (canvas, verplicht, PNG opgeslagen in lead.offerteShare.signedSignatureImage + IP/tijd audit). GEEN inmeet-voorkeursvelden (opdracht Daimy), geen verzonnen beloftes in teksten. Ondertekenen → status akkoord → Telegram. Linkstructuur sonty.nl ONGEWIJZIGD.
+**Fase 2b LIVE (8 juli, na verkenning van het echte RP-CRM met Playwright-screenshots)**:
+- /admin/automations — automatiseringen zoals RP mét werkende aan/uit-toggles + run-tellers (lib/crm/automations.ts, KV crm:automations). Toggles zijn ECHT: createLead/changeStatus/shareOfferte/signOfferte checken automationActief(). Automations: nieuwe-lead-melding, offerte-mail-bij-delen, akkoord-naar-inmeten, melding-na-akkoord, melding-statuswissel.
+- Pipeline-bord: RP-zijbalk (Open/Gewonnen/Verloren-tabs, datumfilter 7/30/90/alles, weergave Pipeline/Tabel, sorteren, kolommen aan/uit met localStorage), kaartjes met tel/mail/avatar, detailpaneel zoals RP (stepper, kolom-pill, gewonnen/verloren-knoppen, bel/mail/WhatsApp, contactblok, offerteregels, tijdlijn, opmerking toevoegen via add_interne_notitie).
+- Daimy's RP-testoffertes geïmporteerd op het bord (20268595/20268614/20266838, kolom Offerte vestuurd) met werkende Sonty-links.
+- LET OP: leads gebruiken veld `timestamp` (niet createdAt) — bord heeft aangemaakt()-fallback.
 **Fase 2 LIVE (8 juli)**: /admin/pipeline met EXACT de 17 RP-kolommen (labels/kleuren/volgorde uit RP statuses-API, snapshot data/rp-pipeline-statussen.json; definitie lib/crm/rp-kolommen.ts, incl. RP-typefout "Offerte vestuurd"). Lead heeft rpKolom-veld met de RP status-id → migratie fase 3 wordt 1-op-1. Slepen = update_kolom; kolommen met gemapte interne status (Offerte vestuurd/Inmeten inplannen/Afgerond/te ver/Geen herinnering meer) triggeren changeStatus-automations (timeline/Telegram/Klaviyo). Getest: 17/17 kolommen zichtbaar, drag&drop server-side geverifieerd. Fase 3 = migratie 16,7k RP-items + RP opzeggen (opzegtermijn nog vragen aan Daimy).
 
 ## Openstaand / wacht op Daimy

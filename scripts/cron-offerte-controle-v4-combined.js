@@ -290,6 +290,17 @@ async function rpGetItemsOrThrow(context) {
   throw new Error('rpGetItemsOrThrow: items-lijst niet op te halen na 5 pogingen (' + context + ')');
 }
 
+// REGEL "RP API: nooit grote lijsten": de volledige backlog (16k+ items, 30+ sec)
+// wordt maar ÉÉN keer per run opgehaald. Latere stappen werken met deze kopie;
+// setStatus houdt hem bij, zodat "vers ophalen" na eigen wijzigingen niet nodig is.
+// (Het lichte /boards/-endpoint is GEEN alternatief: dat verzwijgt de kolom
+// Offerte controle — geverifieerd 2026-07-08 met 43 OC-items: board-endpoint gaf 0.)
+let _itemsRunCache = null;
+async function getItemsCached(context) {
+  if (!_itemsRunCache) _itemsRunCache = await rpGetItemsOrThrow(context);
+  return _itemsRunCache;
+}
+
 async function rpPut(ep, body) {
   const res = await fetchRetry('https://backend.reuzenpanda.nl' + ep, {
     method: 'PUT', headers: { 'Authorization': 'Bearer ' + RP_API_KEY, 'Content-Type': 'application/json' },
@@ -307,7 +318,14 @@ async function rpPatch(ep, body) {
 }
 
 async function setStatus(itemId, statusId) {
-  return rpPatch('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items/' + itemId, { item: { status_id: statusId } });
+  const ok = await rpPatch('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items/' + itemId, { item: { status_id: statusId } });
+  // Run-cache meebewegen met wat we net in RP hebben gewijzigd (zelfde effect
+  // als opnieuw ophalen: nieuwe status + verse timestamp_updated).
+  if (ok && _itemsRunCache) {
+    const it = _itemsRunCache.find(i => i.id === itemId);
+    if (it) { it.status_id = statusId; it.timestamp_updated = Date.now(); }
+  }
+  return ok;
 }
 
 // Sheets write met throttle (limiet 60/min) + retry bij 429 quota-fout
@@ -1462,9 +1480,13 @@ function addV4Enhancements(desc, firstLine, hasTahoma, linePrice) {
     kleurType = isTrend ? 'trend' : 'ral';
   }
 
-  // Bij voorraadschermen: geef de werkelijke prijs mee zodat up/downgrades t.o.v. de echte prijs worden berekend
+  // Voorraadschermen: GEEN up/downgrade-blok (keuze Daimy 2026-07-08). Het is een
+  // vaste actie-deal (5000×3000, 20% voorraadkorting); de getoonde verschillen
+  // klopten niet met de werkelijke bijbetaling omdat reguliere alternatieven onder
+  // de 15%-actie vallen i.p.v. 20%. Wie iets anders wil krijgt een normale offerte.
   const isVoorraad = firstLine.includes('voorraad');
-  const block = buildUpgradeDowngradeBlock(pKey, maat.breedte, maat.hoogte, maat.uitval, hasIO, kleurType, hasTahoma || false, isDraaischakelaar, isVoorraad ? linePrice : null);
+  if (isVoorraad) return lines.join('\n');
+  const block = buildUpgradeDowngradeBlock(pKey, maat.breedte, maat.hoogte, maat.uitval, hasIO, kleurType, hasTahoma || false, isDraaischakelaar, null);
   if (block) return lines.join('\n') + block;
   return lines.join('\n');
 }
@@ -1530,7 +1552,7 @@ async function main() {
   console.log('[' + now.toISOString().substring(11, 19) + '] Offerte controle v3 start');
 
   const sevenDaysAgo = Date.now() - 7 * 86400000;
-  const itemsData = { items: await rpGetItemsOrThrow('v4-run') };
+  const itemsData = { items: await getItemsCached('v4-run stap 1') };
   const ocItems = (itemsData?.items || []).filter(i =>
     i.status_id === OC_STATUS && i.timestamp_created > sevenDaysAgo &&
     !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
@@ -1771,8 +1793,8 @@ async function main() {
 
   console.log('Stap 1 klaar: OK:' + okCount + ' Fixed:' + fixCount + ' Routed:' + routeCount + ' Errors:' + errorCount);
 
-  // SHEET BIJWERKEN
-  const gcItemsData = { items: await rpGetItemsOrThrow('v4-run') };
+  // SHEET BIJWERKEN (run-cache: statuswijzigingen van stap 1 zitten er al in)
+  const gcItemsData = { items: await getItemsCached('v4-run sheet') };
   // Tool-leads (pipeline-kolom "Winkel ") horen ook in het offerte-register (instructie Daimy 2026-07-04)
   const WINKEL_SHEET_STATUS = '058e79f8-12fa-4a41-8614-9f7ea2e78b4b';
   const gcItems = (gcItemsData?.items || []).filter(i =>
@@ -1896,9 +1918,8 @@ async function main() {
   console.log('Sheet: ' + sheetRows + ' rijen, ' + teVerSheetCount + ' TE VER');
 
   // GECONTROLEERD → OFFERTE VERSTUURD (geactiveerd door Daimy 2026-06-29)
-  // Haal VERS op (niet cached) zodat ook items die in DEZE run naar GC zijn gezet worden meegenomen
-  await new Promise(r => setTimeout(r, 5000)); // 5s wachten zodat RP de status-wijzigingen heeft verwerkt
-  const gcToOvData = { items: await rpGetItemsOrThrow('v4-run') };
+  // Run-cache: items die in DEZE run naar GC zijn gezet, zijn door setStatus al bijgewerkt
+  const gcToOvData = { items: await getItemsCached('v4-run gc→ov') };
   const gcToOv = (gcToOvData?.items || []).filter(i =>
     i.status_id === GECONTROLEERD && !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
   );
@@ -1915,7 +1936,7 @@ async function main() {
   function getWaSent() { try { return JSON.parse(fs.readFileSync(WA_OFFERTE_SENT_FILE, 'utf8')); } catch { return {}; } }
   function markWaSent(key) { const d = getWaSent(); d[key] = new Date().toISOString(); fs.writeFileSync(WA_OFFERTE_SENT_FILE, JSON.stringify(d, null, 2)); }
 
-  const ovItemsData = { items: await rpGetItemsOrThrow('v4-run') };
+  const ovItemsData = { items: await getItemsCached('v4-run whatsapp') };
   const ovItems = (ovItemsData?.items || []).filter(i =>
     i.status_id === '15c4f0be-c6bf-447d-bf5f-a233c482eb53' && // Offerte verstuurd
     !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED') &&

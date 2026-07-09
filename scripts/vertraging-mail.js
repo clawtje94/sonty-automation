@@ -93,13 +93,55 @@ async function stuurVertragingsMail({ email, naam, voornaam }) {
 
 module.exports = { stuurVertragingsMail, mailTekst, ONDERWERP };
 
-if (require.main === module) {
-  if (!process.argv.includes('--test')) {
-    console.log('Alleen testmodus beschikbaar: node scripts/vertraging-mail.js --test (bulk komt pas na expliciet akkoord Daimy)');
-    process.exit(1);
+// Aanhef-regel: geen rare voornamen in de mail. Initialen ("F.a"), 1-2 letters
+// of "Fam" → mail zonder naam ("Hi,").
+function netteVoornaam(v) {
+  const s = (v || '').trim();
+  if (!s || s.length <= 2 || s.includes('.') || /^fam$/i.test(s)) return '';
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+const VERSTUURD_LOG = path.join(__dirname, '..', 'data', 'vertraging-mail-verstuurd.json');
+const leesLog = () => { try { return JSON.parse(fs.readFileSync(VERSTUURD_LOG, 'utf8')); } catch { return {}; } };
+
+async function bulk(echt) {
+  const { lijst } = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'vertraging-maillijst.json'), 'utf8'));
+  const log = leesLog();
+  let nr = 0, verstuurd = 0, overgeslagen = 0;
+  for (const k of lijst) {
+    nr++;
+    const voornaam = netteVoornaam(k.voornaam);
+    if (log[k.email]) { overgeslagen++; console.log(String(nr).padStart(2) + '. SKIP (al verstuurd ' + log[k.email] + '): ' + k.email); continue; }
+    console.log(String(nr).padStart(2) + '. ' + (echt ? 'VERSTUUR' : 'DRY') + '  "Hi ' + (voornaam || '(zonder naam)') + ',"  → ' + k.email + '  (' + k.naam + ')');
+    if (echt) {
+      const res = await stuurVertragingsMail({ email: k.email, naam: k.grippNaam || k.naam, voornaam });
+      log[k.email] = new Date().toISOString();
+      fs.writeFileSync(VERSTUURD_LOG, JSON.stringify(log, null, 2));
+      verstuurd++;
+      console.log('     ✓ ticket ' + res.ticketId);
+      await new Promise(r => setTimeout(r, 2500));
+    }
   }
+  console.log('\nKlaar: ' + (echt ? verstuurd + ' verstuurd, ' : lijst.length - overgeslagen + ' te versturen (dry-run), ') + overgeslagen + ' overgeslagen (al gehad).');
+}
+
+if (require.main === module) {
   (async () => {
-    const res = await stuurVertragingsMail({ email: 'daimy@sonty.nl', naam: 'Daimy Boot (test)', voornaam: 'Daimy' });
-    console.log('Testmail verstuurd naar daimy@sonty.nl, ticket', res.ticketId);
+    if (process.argv.includes('--test')) {
+      const res = await stuurVertragingsMail({ email: 'daimy@sonty.nl', naam: 'Daimy Boot (test)', voornaam: 'Daimy' });
+      console.log('Testmail verstuurd naar daimy@sonty.nl, ticket', res.ticketId);
+    } else if (process.argv.includes('--bulk-dry')) {
+      await bulk(false);
+    } else if (process.argv.includes('--bulk-echt')) {
+      // HARDE REGEL: alleen draaien na expliciet startsein van Daimy.
+      if (!process.argv.includes('--ja-daimy-heeft-akkoord-gegeven')) {
+        console.log('GEBLOKKEERD: --bulk-echt vereist ook --ja-daimy-heeft-akkoord-gegeven (expliciet startsein Daimy).');
+        process.exit(1);
+      }
+      await bulk(true);
+    } else {
+      console.log('Gebruik: --test | --bulk-dry | --bulk-echt --ja-daimy-heeft-akkoord-gegeven');
+      process.exit(1);
+    }
   })().catch(e => { console.error('FOUT:', e.message); process.exit(1); });
 }

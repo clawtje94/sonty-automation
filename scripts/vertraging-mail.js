@@ -62,31 +62,43 @@ function mailTekst({ voornaam }) {
 </table>`;
 }
 
+// Trengo rate-limit (429): wachten en opnieuw, max 5 pogingen
+async function trengoFetch(url, opties, label) {
+  for (let poging = 1; poging <= 5; poging++) {
+    const r = await fetch(url, opties);
+    if (r.status === 429) {
+      console.log('     … rate-limit bij ' + label + ', ' + (poging < 5 ? 'wacht 65s en probeer opnieuw' : 'opgegeven'));
+      if (poging === 5) throw new Error(label + ' mislukt: HTTP 429 na 5 pogingen');
+      await new Promise(res => setTimeout(res, 65000));
+      continue;
+    }
+    if (!r.ok) throw new Error(label + ' mislukt: HTTP ' + r.status + ' ' + (await r.text()).slice(0, 120));
+    return r;
+  }
+}
+
 async function trengoContact(email, naam) {
-  const r = await fetch(`https://app.trengo.com/api/v2/channels/${AANVRAGEN_CHANNEL}/contacts`, {
+  const r = await trengoFetch(`https://app.trengo.com/api/v2/channels/${AANVRAGEN_CHANNEL}/contacts`, {
     method: 'POST', headers: TH,
     body: JSON.stringify({ identifier: email, name: naam || email }),
-  });
-  if (!r.ok) throw new Error('contact aanmaken mislukt: HTTP ' + r.status + ' ' + (await r.text()).slice(0, 120));
+  }, 'contact aanmaken');
   return (await r.json()).id;
 }
 
 async function stuurVertragingsMail({ email, naam, voornaam }) {
   const contactId = await trengoContact(email, naam);
-  const tr = await fetch('https://app.trengo.com/api/v2/tickets', {
+  const tr = await trengoFetch('https://app.trengo.com/api/v2/tickets', {
     method: 'POST', headers: TH,
     body: JSON.stringify({ contact_id: contactId, channel_id: AANVRAGEN_CHANNEL, subject: ONDERWERP }),
-  });
-  if (!tr.ok) throw new Error('ticket aanmaken mislukt: HTTP ' + tr.status + ' ' + (await tr.text()).slice(0, 120));
+  }, 'ticket aanmaken');
   const ticketId = (await tr.json()).id;
-  const mr = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages`, {
+  await trengoFetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages`, {
     method: 'POST', headers: TH,
     body: JSON.stringify({
       email: { subject: ONDERWERP },
       message: mailTekst({ voornaam }),
     }),
-  });
-  if (!mr.ok) throw new Error('mail versturen mislukt: HTTP ' + mr.status + ' ' + (await mr.text()).slice(0, 200));
+  }, 'mail versturen');
   await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/close`, { method: 'POST', headers: TH }).catch(() => {});
   return { ticketId };
 }
@@ -119,7 +131,7 @@ async function bulk(echt) {
       fs.writeFileSync(VERSTUURD_LOG, JSON.stringify(log, null, 2));
       verstuurd++;
       console.log('     ✓ ticket ' + res.ticketId);
-      await new Promise(r => setTimeout(r, 2500));
+      await new Promise(r => setTimeout(r, 10000));
     }
   }
   console.log('\nKlaar: ' + (echt ? verstuurd + ' verstuurd, ' : lijst.length - overgeslagen + ' te versturen (dry-run), ') + overgeslagen + ' overgeslagen (al gehad).');

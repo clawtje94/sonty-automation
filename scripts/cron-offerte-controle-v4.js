@@ -441,7 +441,7 @@ function buildOptionsBlock(productKey, breedteCm, hoogteCm, uitvalCm, bedieningT
     lines.push('');
   }
 
-  lines.push('Laat het ons weten, we passen je offerte graag aan.');
+  lines.push('Laat het ons weten, we passen het graag voor je aan.');
 
   return lines.join('\n');
 }

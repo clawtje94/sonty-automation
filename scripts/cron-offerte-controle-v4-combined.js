@@ -139,7 +139,7 @@ function mkBuildOptiesBlok(bediening, materiaal, breedteMM, uitvalMM) {
   lines.push('• Koord onderlangs i.p.v. bovenlangs — +€48');
   lines.push('• Spots/verlichting — vanaf €847');
   lines.push('');
-  lines.push('Laat het ons weten, we passen je offerte graag aan.');
+  lines.push('Laat het ons weten, we passen het graag voor je aan.');
   return lines.join('\n');
 }
 
@@ -1200,7 +1200,7 @@ function buildUpgradeDowngradeBlock(productKey, breedteCm, hoogteCm, uitvalCm, h
     lines.push('');
   }
 
-  lines.push('Laat het ons weten, we passen je offerte graag aan.');
+  lines.push('Laat het ons weten, we passen het graag voor je aan.');
   return lines.join('\n');
 }
 

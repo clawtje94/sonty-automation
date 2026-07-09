@@ -33,13 +33,13 @@ function mailTekst({ voornaam }) {
           <td bgcolor="#ffffff" style="padding: 32px;">
             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
               ${alinea(aanhef)}
-              ${alinea('Je hoort van ons omdat je een bestelling bij Sonty hebt lopen. Eerlijk is eerlijk: de levering duurt langer dan de bedoeling was, en daar balen wij minstens zo hard van als jij. Daarom leggen we je graag uit wat er speelt.')}
+              ${alinea('Je hoort van ons omdat je een bestelling bij Sonty hebt lopen. Eerlijk is eerlijk: de levering duurt langer dan de bedoeling was, en daar balen wij minstens net zo hard van als jij. Daarom leggen we je graag uit wat er speelt.')}
               ${alinea('Sonty is het afgelopen jaar harder gegroeid dan we hadden durven dromen. Meer mensen dan ooit kozen voor onze zonwering, en dat merken we op twee plekken. Onze leverancier heeft door de drukte langere levertijden nodig, en ook onze eigen montageplanning kon de vraag even niet bijbenen. Dat laatste hebben we inmiddels opgelost, en we zijn de achterstand nu volop aan het inlopen. We hopen die over 3 tot 4 weken te hebben ingehaald.')}
               <tr>
                 <td bgcolor="#0a0a0a" style="padding: 20px; border-radius: 12px;">
                   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr><td style="${FONT} font-size: 15px; font-weight: bold; color: #FF6B00; padding-bottom: 10px;">Goed om te weten</td></tr>
-                    <tr><td style="${FONT} font-size: 13px; color: #cccccc; line-height: 21px;">We behandelen alle bestellingen strikt op volgorde van binnenkomst. De oudste bestelling is dus als eerste aan de beurt, en daar maken we voor niemand een uitzondering op. Zo komt iedereen zo snel en eerlijk mogelijk aan de beurt, en zo zorgen we er ook voor dat we de service en kwaliteit kunnen blijven leveren die je van Sonty gewend bent. Want liever iets meer geduld vragen dan haastwerk afleveren. Bellen of mailen maakt je levering daarom helaas niet sneller, hoe graag we je ook aan de telefoon te woord staan. Een precieze indicatie van de wachttijd tot montage kunnen we op dit moment ook nog niet geven.</td></tr>
+                    <tr><td style="${FONT} font-size: 13px; color: #cccccc; line-height: 21px;">We behandelen alle bestellingen strikt op volgorde van binnenkomst. De oudste bestelling is dus als eerste aan de beurt, en daar maken we voor niemand een uitzondering op. Zo zorgen we ervoor dat we de service en kwaliteit kunnen blijven leveren die je van Sonty gewend bent. Want liever iets meer geduld vragen dan haastwerk afleveren. Bellen of mailen maakt je levering daarom helaas niet sneller, hoe graag we je ook aan de telefoon te woord staan. Een precieze indicatie van de wachttijd tot montage kunnen we op dit moment niet geven.</td></tr>
                   </table>
                 </td>
               </tr>

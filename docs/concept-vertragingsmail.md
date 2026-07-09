@@ -18,11 +18,11 @@ Verzendkanaal (voorstel, zelfde als duo-mail): Trengo "Aanvragen" (aanvragen@son
 
 Hi [voornaam],
 
-Je hoort van ons omdat je een bestelling bij Sonty hebt lopen. Eerlijk is eerlijk: de levering duurt langer dan de bedoeling was, en daar balen wij minstens zo hard van als jij. Daarom leggen we je graag uit wat er speelt.
+Je hoort van ons omdat je een bestelling bij Sonty hebt lopen. Eerlijk is eerlijk: de levering duurt langer dan de bedoeling was, en daar balen wij minstens net zo hard van als jij. Daarom leggen we je graag uit wat er speelt.
 
 Sonty is het afgelopen jaar harder gegroeid dan we hadden durven dromen. Meer mensen dan ooit kozen voor onze zonwering, en dat merken we op twee plekken. Onze leverancier heeft door de drukte langere levertijden nodig, en ook onze eigen montageplanning kon de vraag even niet bijbenen. Dat laatste hebben we inmiddels opgelost, en we zijn de achterstand nu volop aan het inlopen. We hopen die over 3 tot 4 weken te hebben ingehaald.
 
-Goed om te weten: we behandelen alle bestellingen strikt op volgorde van binnenkomst. De oudste bestelling is dus als eerste aan de beurt, en daar maken we voor niemand een uitzondering op. Zo komt iedereen zo snel en eerlijk mogelijk aan de beurt, en zo zorgen we er ook voor dat we de service en kwaliteit kunnen blijven leveren die je van Sonty gewend bent. Want liever iets meer geduld vragen dan haastwerk afleveren. Bellen of mailen maakt je levering daarom helaas niet sneller, hoe graag we je ook aan de telefoon te woord staan. Een precieze indicatie van de wachttijd tot montage kunnen we op dit moment ook nog niet geven.
+Goed om te weten: we behandelen alle bestellingen strikt op volgorde van binnenkomst. De oudste bestelling is dus als eerste aan de beurt, en daar maken we voor niemand een uitzondering op. Zo zorgen we ervoor dat we de service en kwaliteit kunnen blijven leveren die je van Sonty gewend bent. Want liever iets meer geduld vragen dan haastwerk afleveren. Bellen of mailen maakt je levering daarom helaas niet sneller, hoe graag we je ook aan de telefoon te woord staan. Een precieze indicatie van de wachttijd tot montage kunnen we op dit moment niet geven.
 
 Wat je van ons mag verwachten: zodra jouw producten bij ons binnen zijn, nemen wij direct contact met je op om de montageafspraak in te plannen. Je hoeft daar zelf niets voor te doen, wij houden jouw bestelling in de gaten.
 

@@ -1,4 +1,4 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-05)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-09)
 
 > Dit document is het startpunt voor een nieuwe Claude-sessie (welk Anthropic-account dan ook).
 > Lees dit eerst, daarna de memory-index. Alle code staat in git (beide repos gepusht).
@@ -66,6 +66,17 @@ Regel Daimy: wat v4 handmatig corrigeert moet aan de BRON goed staan (configurat
 ## Configurator → echte prijsengine (8 juli, blok 1 van de rebuild)
 action=configurator-prijs (route offerte-tool) + lib/offerte-tool/configurator-map.ts: variant/bediening/framekleur → centrale prijsengine (incl. KV-prijsconfig). Backend cent-exact gelijk aan v4 (S-42 io 1670×1360 = €1.227,90 ✓, solar+RAL = €1.629,64 ✓). BELEID DAIMY 2026-07-08: GEEN prijzen zichtbaar in de configurator-UI (prijsindicatie komt per mail); engine-prijs blijft op de achtergrond voor lead/offerte. Maten = sliders + invulveld, vooringevuld op gangbare maat (midden bereik, per 50mm). Mobiele uitlijning gefixt: zijpadding cfg-root, gat boven stap 1 weg (paddingTop 80→24), sticky onderbalk gerepareerd (transform:none op stap-wrapper — translateY(0) brak position:fixed), Verder-knop full-width, breadcrumb autoscroll. Verzonnen claims uit productdata (40% isolatie/130 km/u/SKG); "tot 90% minder warmte" heeft bron (trengo-kennisbank:910). Hele mobiele flow visueel getest. VOLGT in de rebuild: stepper met vinkjes, meetinstructies+diagram, productvisual, URL-state, beschrijving-generator (v4-teksten aan de bron). Werkwijze-mandaat Daimy: doorbouwen + altijd backend & visueel testen tot goed (memory feedback_doorbouwen_testen). Open: bestaand "binnen 24 uur exacte offerte"-blok in cartstap laten staan, gemeld aan Daimy.
 
+## Configurator-rebuild AFGEROND (9 juli, live op sonty-website.vercel.app)
+Alle VOLGT-punten gebouwd + getest (desktop/mobiel, prod-verificatie, commit 5d0ce62):
+- Stepper met groene vinkjes in de breadcrumb (afgerond=✓, actief=nummer).
+- Meethulp-uitklap in Afmetingen: SVG-meetdiagram + in de dag/op de dag-instructies (geen kostenclaims; "monteur meet vóór productie").
+- URL-state: ?product=&variant= deep-links (landen direct op de juiste stap), adresbalk volgt keuzes, onbekende ids worden genegeerd+opgeschoond. Deep-links bruikbaar voor ads/mail.
+- Productvisual: echte RP-productfoto's in zijbalk + offerte-overzicht (geen verzonnen visuals).
+- SAMENSPEL (opdracht Daimy 9 juli "alles moet samenwerken"): /api/configurator/submit rekent nu via de CENTRALE prijsengine (configurator-map + KV-prijsconfig, cent-exact = offerte-tool/v4; getest: S-42 io 1670×1360 = €1.227,90 ✓). Oude Sunmaster-engine alleen nog fallback voor niet-gemapte varianten (regel krijgt veld engine:"centraal"|"sunmaster").
+- Beschrijving-generator aan de bron: lib/offerte-tool/beschrijving.ts (1-op-1 port van goedgekeurde v4 "Waarom dit product"-teksten, 2026-06-10); elke lead-regel krijgt veld beschrijving met klantkeuzes + Waarom-blok. Leads uit de configurator zijn zo meteen v4-kwaliteit.
+- Fix: setOpts naar functionele updates (pill-keuzes konden elkaar overschrijven bij snelle opeenvolgende klikken).
+- LET OP dev-testen: browser kan oude Turbopack-chunks cachen (zelfde chunknaam, oude inhoud); bij "edit doet niks" → prod-build checken i.p.v. eindeloos dev debuggen.
+
 ## Openstaand / wacht op Daimy
 0. **WA verkeerde offerte-link (6 juli)**: 13 klanten kregen de Roma duo-link i.p.v. hun hoofdofferte (WA-cron pakte nieuwste SENT offerte; duo-batch van 09:32 was nieuwer). Bug gefixt (duo-docIds uitgesloten, commit dc2fdc0). Lijst: `data/wa-verkeerde-link-2026-07-06.json`. GEEN nieuwe WhatsApp sturen (expliciete opdracht Daimy). Voorstel dat openstaat: inhoud van die 13 Roma-documenten vervangen door de hoofdofferte zodat de al-gedeelde link de juiste offerte toont — wacht op ja/nee.
 0b. **Roma duo solar-bug (6 juli)**: duo-script pakte altijd de bedrade .XP/zipSCREEN-matrix, ook bij solar-hoofdoffertes. Script gefixt én alle bestaande duo-documenten herberekend met `herbereken-roma-duos.js` (69 in-place bijgewerkt, akkoord Daimy). 3 skips: zipscreens 4267-5000mm breed — Roma solar-zipscreen gaat maar tot 4000mm, daar blijft de bedrade duo-variant staan (Gerrit Boogaardt, Ertugrul Selat, marthijn middelkoop).
@@ -77,6 +88,7 @@ action=configurator-prijs (route offerte-tool) + lib/offerte-tool/configurator-m
 5. **Voorraadschermen** (aanbetaald, geen eindfactuur): 11 stuks (5 beige, 3 grijs, 4 kleur onbekend). 4 zonder kleur nazoeken in RP/HubSpot. Peter van der Maat staat lang open (jan). Data: `data/voorraadschermen-open.json`.
 6. **Beleidsvragen analyse §6**: burenkorting-regel, kortingsmandaat AI (nu max 17,5%), service-nodi.nl, orderstatus-toegang.
 7. AI-KS niet live buiten whitelist tot Daimy akkoord (fase-1 shadow-cron voor alle gesprekken wacht).
+8. **TE VER-regel vs 60km-Gouda-afspraak (9 juli)**: v4 checkTeVer meet vanaf RIJSWIJK (>125km altijd te ver; ≥60km én <€7500 te ver). Almere/Amersfoort/Den Bosch/Tilburg/Breda = 61-78km vanaf Rijswijk → auto TE VER, maar vallen wél binnen de afgesproken 60km rond GOUDA (49-57km). Vraag op Telegram: A) regel gelijktrekken met Gouda-afspraak, B) straal bij partij kleiner, C) anders. Wacht op antwoord.
 
 ## Credentials & IDs
 Alles in memory: `~/.claude/projects/-Users-clawdboot/memory/reference_sonty_credentials.md` + `reference_reuzenpanda_api.md`. RP: PID 731483fa-ef6b-4aae-afcf-883ec09219dd. Anthropic API-key: `scripts/.anthropic-api-key.txt` (tegoed kan opraken — Daimy laadt bij).

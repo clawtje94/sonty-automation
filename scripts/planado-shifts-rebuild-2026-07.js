@@ -22,14 +22,17 @@ const WEEKS_AHEAD = 8;
 // Nmbrs rosters (uren per dag [ma-vr]) - overgenomen uit auto-sync.js
 // Jaimy de Wit stond niet in de oude lijst: standaard monteursrooster, flaggen bij Daimy.
 const ROSTERS = {
-  'Sjoerd Pelle': { hours: [8, 8, 8, 8, 6], start: '07:00' },
+  // Sjoerd vrijdag niet beschikbaar (Daimy 2026-07-09)
+  'Sjoerd Pelle': { hours: [8, 8, 8, 8, 0], start: '07:00' },
   'Jorren Plugge': { hours: [7.6, 7.6, 7.6, 7.6, 7.6], start: '07:00' },
   'Mick Mulders': { hours: [7.6, 7.6, 7.6, 7.6, 7.6], start: '07:00' },
   'Tygo Krikke': { hours: [8, 8, 8, 8, 6], start: '07:00' },
-  'Kevin Gibson': { hours: [8, 8, 8, 8, 6], start: '07:00' },
-  'Nick Huizer': { hours: [8, 8, 8, 8, 6], start: '07:00' },
+  // users hernoemd naar duo-namen op 2026-07-08 (Daimy wil teams zichtbaar)
+  'Kevin Gibson + Marvin': { hours: [8, 8, 8, 8, 6], start: '07:00' },
+  'Nick Huizer + Yudi': { hours: [8, 8, 8, 8, 6], start: '07:00' },
   'Nanny van Vliet - Kester': { hours: [8, 8, 8, 8, 0], start: '08:00' },
-  'Joey Engelen': { hours: [8, 8, 8, 8, 8], start: '08:00' },
+  // Joey woensdag niet beschikbaar, vrijdag tot 14:00 (Daimy 2026-07-09)
+  'Joey Engelen': { hours: [8, 8, 0, 8, 6], start: '08:00' },
   'Jaimy de Wit': { hours: [8, 8, 8, 8, 6], start: '07:00' },
 };
 

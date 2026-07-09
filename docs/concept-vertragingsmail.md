@@ -3,7 +3,8 @@
 ## HARDE REGELS (Daimy 2026-07-09)
 - IEDEREEN in de Vertraging-tab mailen, allemaal DEZELFDE mail (ook "is binnen"-regels, geen uitzonderingen).
 - NIETS versturen (ook geen testmail-run naar klanten) tot Daimy er EXPLICIET om vraagt.
-- Onderwerpregel: keuze ligt bij Daimy, opties voorgelegd op Telegram 2026-07-09.
+- Onderwerpregel DEFINITIEF (keuze Daimy): "Update over je bestelling bij Sonty".
+- Verzendscript: scripts/vertraging-mail.js (alleen testmodus; bulk pas na expliciet verzoek). Testmail naar daimy@sonty.nl verstuurd 2026-07-09.
 
 Status: concept v2 na feedback Daimy (2026-07-09): niet uitnodigen tot bellen, FIFO uitleggen
 (oudste order eerst, geen uitzonderingen), bellen/klagen versnelt niets, achterstand naar

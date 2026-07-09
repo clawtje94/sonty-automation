@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20269084",
+  "documentId": "cb31d330-82f3-4bb3-a029-93a04c2e68bf",
+  "name": "Rinse Beusekom",
+  "timestamp": "2026-07-08T15:01:30.318Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2500mm\n- Uitval: 1000 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

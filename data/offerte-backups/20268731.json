@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20268731",
+  "documentId": "4aba08ab-a191-458e-a4c2-04091791d005",
+  "name": "Rommy Elzinga",
+  "timestamp": "2026-07-06T07:34:00.561Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2150mm\n- Uitval: 1000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

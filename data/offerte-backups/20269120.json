@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20269120",
+  "documentId": "99ba81b3-98cf-40bc-b80a-311845b4a553",
+  "name": "Paul -",
+  "timestamp": "2026-07-09T07:32:06.284Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "**SunCube 150 (Suncube XL)**\nType: uitvalscherm draaischakelaar\nBreedte: 4700 mm\nUitval: 1150 mm\nFrame Kleur: RAL 9001 (standaard)\nKleur doek: NTB\nBediening: Draaischakelaar (Somfy LT)\nMotor: Somfy LT",
+      "pricePerUnit": 2495.9,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "**Inmeten + montage uitvalscherm**\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

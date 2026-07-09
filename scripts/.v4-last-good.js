@@ -268,6 +268,39 @@ async function rpGet(ep) {
   try { return await res.json(); } catch { return null; }
 }
 
+// Haalt de volledige backlog-itemlijst op. KRITIEK: een mislukte of lege ophaal
+// (RP geeft geregeld 504 op deze grote/trage lijst) mag NOOIT als "0 items, klaar"
+// gelden — anders slaat v4 stil hele batches over (44 offertes bleven zo staan 7-7).
+// Daarom: geduldig herproberen, en bij aanhoudende fout luid alarm + gooien (run stopt).
+async function rpGetItemsOrThrow(context) {
+  const ep = '/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items';
+  for (let poging = 1; poging <= 5; poging++) {
+    let data = null;
+    try {
+      const res = await fetchRetry('https://backend.reuzenpanda.nl' + ep, { headers: { 'Authorization': 'Bearer ' + RP_API_KEY } });
+      if (res.ok) { try { data = await res.json(); } catch { data = null; } }
+      else console.log('  (items-ophaal ' + context + ': HTTP ' + res.status + ', poging ' + poging + '/5)');
+    } catch (e) {
+      console.log('  (items-ophaal ' + context + ': ' + (e.cause?.code || e.message) + ', poging ' + poging + '/5)');
+    }
+    if (Array.isArray(data?.items)) return data.items;
+    if (poging < 5) await new Promise(r => setTimeout(r, poging * 10000));
+  }
+  await sendTelegram('⚠️ Offerte controle v4 GESTOPT: kon de offertelijst niet ophalen bij Reuzenpanda (' + context + '), na 5 pogingen. Er is NIETS verwerkt — dit is GEEN "0 offertes". Volgende run probeert opnieuw; blijft dit, dan is de RP API traag/down.');
+  throw new Error('rpGetItemsOrThrow: items-lijst niet op te halen na 5 pogingen (' + context + ')');
+}
+
+// REGEL "RP API: nooit grote lijsten": de volledige backlog (16k+ items, 30+ sec)
+// wordt maar ÉÉN keer per run opgehaald. Latere stappen werken met deze kopie;
+// setStatus houdt hem bij, zodat "vers ophalen" na eigen wijzigingen niet nodig is.
+// (Het lichte /boards/-endpoint is GEEN alternatief: dat verzwijgt de kolom
+// Offerte controle — geverifieerd 2026-07-08 met 43 OC-items: board-endpoint gaf 0.)
+let _itemsRunCache = null;
+async function getItemsCached(context) {
+  if (!_itemsRunCache) _itemsRunCache = await rpGetItemsOrThrow(context);
+  return _itemsRunCache;
+}
+
 async function rpPut(ep, body) {
   const res = await fetchRetry('https://backend.reuzenpanda.nl' + ep, {
     method: 'PUT', headers: { 'Authorization': 'Bearer ' + RP_API_KEY, 'Content-Type': 'application/json' },
@@ -285,7 +318,14 @@ async function rpPatch(ep, body) {
 }
 
 async function setStatus(itemId, statusId) {
-  return rpPatch('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items/' + itemId, { item: { status_id: statusId } });
+  const ok = await rpPatch('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items/' + itemId, { item: { status_id: statusId } });
+  // Run-cache meebewegen met wat we net in RP hebben gewijzigd (zelfde effect
+  // als opnieuw ophalen: nieuwe status + verse timestamp_updated).
+  if (ok && _itemsRunCache) {
+    const it = _itemsRunCache.find(i => i.id === itemId);
+    if (it) { it.status_id = statusId; it.timestamp_updated = Date.now(); }
+  }
+  return ok;
 }
 
 // Sheets write met throttle (limiet 60/min) + retry bij 429 quota-fout
@@ -775,6 +815,9 @@ function enhanceAllDescriptions(lines) {
   for (let i = 0; i < lines.length; i++) {
     const fl = (lines[i].description?.split('\n')[0] || '').replace(/^\*\*|\*\*$/g, '').toLowerCase();
     const orig = lines[i].description;
+    // Roma-regels niet verrijken: eigen merkverhaal/beschrijving; Sunmaster Waarom-blok en
+    // up/downgrade-opties horen daar niet bij (Roma ís al het alternatief via de duo-offerte)
+    if (fl.includes('roma')) continue;
     if (fl.includes('montage') || fl.includes('inmeten')) {
       // Montage: NIET aanpassen (originele bullets behouden)
       continue;
@@ -1437,9 +1480,13 @@ function addV4Enhancements(desc, firstLine, hasTahoma, linePrice) {
     kleurType = isTrend ? 'trend' : 'ral';
   }
 
-  // Bij voorraadschermen: geef de werkelijke prijs mee zodat up/downgrades t.o.v. de echte prijs worden berekend
+  // Voorraadschermen: GEEN up/downgrade-blok (keuze Daimy 2026-07-08). Het is een
+  // vaste actie-deal (5000×3000, 20% voorraadkorting); de getoonde verschillen
+  // klopten niet met de werkelijke bijbetaling omdat reguliere alternatieven onder
+  // de 15%-actie vallen i.p.v. 20%. Wie iets anders wil krijgt een normale offerte.
   const isVoorraad = firstLine.includes('voorraad');
-  const block = buildUpgradeDowngradeBlock(pKey, maat.breedte, maat.hoogte, maat.uitval, hasIO, kleurType, hasTahoma || false, isDraaischakelaar, isVoorraad ? linePrice : null);
+  if (isVoorraad) return lines.join('\n');
+  const block = buildUpgradeDowngradeBlock(pKey, maat.breedte, maat.hoogte, maat.uitval, hasIO, kleurType, hasTahoma || false, isDraaischakelaar, null);
   if (block) return lines.join('\n') + block;
   return lines.join('\n');
 }
@@ -1505,7 +1552,7 @@ async function main() {
   console.log('[' + now.toISOString().substring(11, 19) + '] Offerte controle v3 start');
 
   const sevenDaysAgo = Date.now() - 7 * 86400000;
-  const itemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
+  const itemsData = { items: await getItemsCached('v4-run stap 1') };
   const ocItems = (itemsData?.items || []).filter(i =>
     i.status_id === OC_STATUS && i.timestamp_created > sevenDaysAgo &&
     !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
@@ -1600,6 +1647,9 @@ async function main() {
     const priceUnknown = []; // producten waarvan de prijs niet bepaald kon worden → handmatige controle
     for (let i = 0; i < lines.length; i++) {
       const firstLine = lines[i].description?.split('\n')[0] || '';
+      // Roma-regels NIET aanraken: eigen prijsboek (netto ×1,15 via tool/duo-script) en complete
+      // eigen beschrijving. getProductKey zou ze anders als Sunmaster prijzen (zipSCREEN.2 → zipscreen).
+      if (firstLine.toLowerCase().includes('roma')) continue;
       const bediening = lines[i].description?.match(/Bediening:\s*([^\n]+)/i)?.[1]?.trim() || '';
       const motor = lines[i].description?.match(/Motor:\s*([^\n]+)/i)?.[1]?.trim() || '';
       const cat = getCategory(firstLine);
@@ -1743,8 +1793,8 @@ async function main() {
 
   console.log('Stap 1 klaar: OK:' + okCount + ' Fixed:' + fixCount + ' Routed:' + routeCount + ' Errors:' + errorCount);
 
-  // SHEET BIJWERKEN
-  const gcItemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
+  // SHEET BIJWERKEN (run-cache: statuswijzigingen van stap 1 zitten er al in)
+  const gcItemsData = { items: await getItemsCached('v4-run sheet') };
   // Tool-leads (pipeline-kolom "Winkel ") horen ook in het offerte-register (instructie Daimy 2026-07-04)
   const WINKEL_SHEET_STATUS = '058e79f8-12fa-4a41-8614-9f7ea2e78b4b';
   const gcItems = (gcItemsData?.items || []).filter(i =>
@@ -1868,9 +1918,8 @@ async function main() {
   console.log('Sheet: ' + sheetRows + ' rijen, ' + teVerSheetCount + ' TE VER');
 
   // GECONTROLEERD → OFFERTE VERSTUURD (geactiveerd door Daimy 2026-06-29)
-  // Haal VERS op (niet cached) zodat ook items die in DEZE run naar GC zijn gezet worden meegenomen
-  await new Promise(r => setTimeout(r, 5000)); // 5s wachten zodat RP de status-wijzigingen heeft verwerkt
-  const gcToOvData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
+  // Run-cache: items die in DEZE run naar GC zijn gezet, zijn door setStatus al bijgewerkt
+  const gcToOvData = { items: await getItemsCached('v4-run gc→ov') };
   const gcToOv = (gcToOvData?.items || []).filter(i =>
     i.status_id === GECONTROLEERD && !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
   );
@@ -1887,7 +1936,7 @@ async function main() {
   function getWaSent() { try { return JSON.parse(fs.readFileSync(WA_OFFERTE_SENT_FILE, 'utf8')); } catch { return {}; } }
   function markWaSent(key) { const d = getWaSent(); d[key] = new Date().toISOString(); fs.writeFileSync(WA_OFFERTE_SENT_FILE, JSON.stringify(d, null, 2)); }
 
-  const ovItemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
+  const ovItemsData = { items: await getItemsCached('v4-run whatsapp') };
   const ovItems = (ovItemsData?.items || []).filter(i =>
     i.status_id === '15c4f0be-c6bf-447d-bf5f-a233c482eb53' && // Offerte verstuurd
     !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED') &&
@@ -1920,8 +1969,18 @@ async function main() {
 
     // Haal offerte-link op
     const docData = await rpGet('/document-service/v1/' + PID + '/quotations?lead_configuration_id=' + lcId);
-    // Alleen SENT offertes (niet DRAFT) — zoals oude cron
-    const docs = (docData?.quotationDatas || []).filter(d => d.quotationStatus === 'SENT' || d.quotationStatus === 'ACCEPTED');
+    // Alleen SENT offertes (niet DRAFT) — zoals oude cron.
+    // Roma duo-offertes uitsluiten: die zijn nieuwer dan de hoofdofferte en werden
+    // anders als "de" offerte-link gestuurd (13 klanten kregen op 6 juli de Roma-link
+    // i.p.v. hun hoofdofferte). Tot Daimy beslist of de klant beide links krijgt,
+    // sturen we alleen de hoofdofferte.
+    let romaDuoDocIds = new Set();
+    try {
+      const duoLog = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'roma-duo-gemaakt.json'), 'utf8'));
+      romaDuoDocIds = new Set(Object.values(duoLog).map(d => d.romaDocumentId));
+    } catch {}
+    const docs = (docData?.quotationDatas || []).filter(d =>
+      (d.quotationStatus === 'SENT' || d.quotationStatus === 'ACCEPTED') && !romaDuoDocIds.has(d.documentId));
     docs.sort((a, b) => (b.quotationCreationTimestamp || 0) - (a.quotationCreationTimestamp || 0));
     if (!docs[0]) continue;
 
@@ -1978,7 +2037,7 @@ const testName = testArg ? process.argv[process.argv.indexOf(testArg) + 1] : nul
 if (testName) {
   (async () => {
     console.log('=== TEST MODE: alleen items met "' + testName + '" ===');
-    const itemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
+    const itemsData = { items: await rpGetItemsOrThrow('v4-run') };
     const items = (itemsData?.items || []).filter(i =>
       i.status_id === '64788881-632c-4217-8f56-d20732c94b08' &&
       (i.summary || '').toLowerCase().includes(testName.toLowerCase()) &&
@@ -2020,6 +2079,8 @@ if (testName) {
       const catBed = {};
       for (let i = 0; i < lines.length; i++) {
         const firstLine = lines[i].description?.split('\n')[0] || '';
+        // Roma-regels niet aanraken (eigen prijsboek + beschrijving), zelfde skip als in stap 2b
+        if (firstLine.toLowerCase().includes('roma')) continue;
         const bediening = lines[i].description?.match(/Bediening:\s*([^\n]+)/i)?.[1]?.trim() || '';
         const motor = lines[i].description?.match(/Motor:\s*([^\n]+)/i)?.[1]?.trim() || '';
         const cat = getCategory(firstLine);
@@ -2083,5 +2144,10 @@ if (testName) {
     }
   })().catch(e => { console.error(e); process.exit(1); });
 } else {
-  main().catch(e => { console.error(e); process.exit(1); });
+  main().catch(async e => {
+    console.error(e);
+    // Nooit stil falen: een crash moet zichtbaar zijn, niet lijken op "niks te doen".
+    await sendTelegram('⚠️ Offerte controle v4 CRASH: ' + (e.message || e).toString().slice(0, 300)).catch(() => {});
+    process.exit(1);
+  });
 }

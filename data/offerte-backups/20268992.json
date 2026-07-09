@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20268992",
+  "documentId": "bc517c6d-5600-48fc-b1f4-8785b256ad0e",
+  "name": "Rajaa Bouisaghouane",
+  "timestamp": "2026-07-08T07:35:34.041Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 4000mm\n- Uitval: 1800 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

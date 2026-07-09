@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20268758",
+  "documentId": "90858c3b-ca9a-4f2d-a328-2656b976081c",
+  "name": "Carel van Venetiën",
+  "timestamp": "2026-07-06T07:32:51.718Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 3378mm\n- Uitval: 1350 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Draaischakelaar\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

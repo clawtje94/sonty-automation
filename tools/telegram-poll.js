@@ -85,7 +85,17 @@ async function poll() {
 
           const timestamp = new Date(msg.date * 1000).toISOString();
           const text = msg.text || msg.caption || (msg.photo ? '[foto]' : msg.sticker ? '[sticker]' : msg.voice ? '[spraakbericht]' : msg.document ? `[bestand: ${msg.document.file_name || 'onbekend'}]` : '[geen tekst]');
-          const line = `[${timestamp}] ${msg.from.first_name}: ${text}\n`;
+          // Reply/quote-context meenemen: als Daimy op een bericht reageert weet
+          // Claude anders niet waarop het antwoord slaat.
+          let replyCtx = '';
+          const orig = msg.reply_to_message;
+          if (orig) {
+            // msg.quote = het stuk tekst dat Daimy selecteerde; anders het hele originele bericht
+            const origText = (msg.quote && msg.quote.text) || orig.text || orig.caption || '[media]';
+            const wie = orig.from?.is_bot ? 'Clawtje' : (orig.from?.first_name || '?');
+            replyCtx = ` (antwoord op ${wie}: "${origText.replace(/\n/g, ' ').slice(0, 150)}")`;
+          }
+          const line = `[${timestamp}] ${msg.from.first_name}: ${text}${replyCtx}\n`;
 
           // Download voice/audio berichten
           if (msg.voice || msg.audio) {

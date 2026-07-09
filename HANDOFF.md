@@ -96,6 +96,9 @@ Opdracht Daimy: alle verkochte producten met bekende prijzen erin + prijsverschi
 - Beschrijving-generator: ROMA-varianten krijgen het goedgekeurde "Waarom ROMA?"-blok (nooit de Sunmaster-tekst "Nederlands geproduceerd"). Keuzehulp uitgebreid: rolluik- en horren-varianthulp, ROMA-regels bij screens/rolluik.
 - E2E getest: backend-audit alle 33 varianten, submit-test hor+ROMA (centraal geprijsd, extras + Waarom ROMA in lead), prod-visueel desktop (grid, varianten, vanaf-prijzen, horren-tab).
 
+## Gevel-visualisatietool LIVE (9 juli)
+sonty-website.vercel.app/visualisatie (header-nav "Op jouw gevel"): klant uploadt gevelfoto → Gemini 2.5 Flash Image rendert gekozen product (knikarm/screens/rolluiken/markiezen/uitvalschermen) + doek-/framekleur fotorealistisch op de foto (~4ct/render). E-mail-gate → lead type `visualisatie` (Telegram-melding), 12/dag per IP + 400/dag globaal via KV. GEMINI_API_KEY in Vercel prod env (billing door Daimy aangezet 9 juli); echte renders getest op prod. PR #9 ready-for-review (mergen = git en prod gelijk); duplicaat-PR #7 gesloten. Details: memory project_sonty_gevel_visualisatie.md.
+
 ## Openstaand / wacht op Daimy
 
 9. **TO DO: onzekerheden website bevestigen (2026-07-09, lijst op Telegram gestuurd, Daimy komt erop terug)**: garantiejaren (site inconsistent: FAQ 5j+7j, over-ons 5j, offertes 3j montage), "12 jaar ervaring", 15%-kortingsbalk (geldig? einddatum?), vacature monteur salaris 2800-3600, openingstijden di-vr 9:30-17/za 9:30-16, "reactie binnen 24 uur", FAQ-antwoorden zonder bron, blogpost-prijzen (AI-onderzoek), portfolio echte fotos?, zakelijk-sectorpaginas onbevestigd, dubbele privacy-paginas (/privacy-beleid + /privacyverklaring), BTW-nummer ontbreekt, levertijden-pagina verwijderd door andere sessie (bevestigen dat dat klopte).

@@ -1,5 +1,10 @@
 # Concept vertragingsmail v2 (Vertraging-tab, 70 klanten) — NOG NIET VERSTUREN
 
+## HARDE REGELS (Daimy 2026-07-09)
+- IEDEREEN in de Vertraging-tab mailen, allemaal DEZELFDE mail (ook "is binnen"-regels, geen uitzonderingen).
+- NIETS versturen (ook geen testmail-run naar klanten) tot Daimy er EXPLICIET om vraagt.
+- Onderwerpregel: keuze ligt bij Daimy, opties voorgelegd op Telegram 2026-07-09.
+
 Status: concept v2 na feedback Daimy (2026-07-09): niet uitnodigen tot bellen, FIFO uitleggen
 (oudste order eerst, geen uitzonderingen), bellen/klagen versnelt niets, achterstand naar
 verwachting over 3 tot 4 weken ingelopen, geen wachttijd-indicatie tot montage mogelijk.
@@ -20,7 +25,7 @@ Goed om te weten: we behandelen alle bestellingen strikt op volgorde van binnenk
 
 Wat je van ons mag verwachten: zodra jouw producten bij ons binnen zijn, nemen wij direct contact met je op om de montageafspraak in te plannen. Je hoeft daar zelf niets voor te doen, wij houden jouw bestelling in de gaten.
 
-We vragen je dus om nog even geduld. Dat is geen leuke boodschap om te sturen, maar we vertellen je liever eerlijk hoe het zit. Zijn je contactgegevens veranderd? Geef het dan wel even door via een reactie op deze mail, zodat we je straks direct kunnen bereiken.
+Zeker nu het warmere weer voor de deur staat, snappen we de frustratie van het wachten maar al te goed: je wilt gewoon van je zonwering genieten. Toch vragen we je om nog even geduld. Dat is geen leuke boodschap om te sturen, maar we vertellen je liever eerlijk hoe het zit. Zijn je contactgegevens veranderd? Geef het dan wel even door via een reactie op deze mail, zodat we je straks direct kunnen bereiken.
 
 Nogmaals sorry voor het wachten, en bedankt voor je vertrouwen in Sonty.
 

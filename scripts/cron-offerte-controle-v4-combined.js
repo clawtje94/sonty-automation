@@ -25,6 +25,7 @@ const MARKUP = 1.10;
 // Roma duo-offertes (instructie Daimy 2026-07-03): bij rolluik/screen ook een apart Roma-document
 const { maakRomaDuo, romaEquivalent } = require('./roma-duo-offerte.js');
 const ROMA_DUO_LOG = path.join(__dirname, '..', 'data', 'roma-duo-gemaakt.json');
+const ROMA_DUO_AAN = false; // 2026-07-10 Daimy: duo's uit tot het eigen verzendcentrum live is (zie stap 6)
 let romaDuoLog = {};
 try { romaDuoLog = JSON.parse(fs.readFileSync(ROMA_DUO_LOG, 'utf8')); } catch {}
 
@@ -1768,7 +1769,11 @@ async function main() {
 
     // STAP 6: ROMA DUO-OFFERTE — apart document met het Roma-alternatief bij rolluiken/screens.
     // Mag NOOIT de hoofdverwerking breken; dedupe via data/roma-duo-gemaakt.json.
-    try {
+    // UIT per 2026-07-10 (opdracht Daimy): de RP-automation mailt bij verplaatsing naar
+    // "Offerte verstuurd" het NIEUWSTE document van de lead, dus een vooraf gemaakte duo
+    // verdringt de Sunmaster-offerte. Duo's komen terug via het eigen verzendcentrum
+    // (aanvragen@) zodra we volledig overstappen.
+    if (ROMA_DUO_AAN) try {
       const eindLines = changed ? newLines : lines;
       const heeftKandidaat = eindLines.some(l => {
         const t = (l.description || '').split('\n')[0].replace(/\*\*/g, '').trim();

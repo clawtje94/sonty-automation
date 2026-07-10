@@ -1,4 +1,6 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-09)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-10)
+
+> **REGEL (Daimy 2026-07-10): dit bestand na ELK afgerond werkblok direct bijwerken** — als zijn pc uitvalt moet de laatste stand er altijd in staan.
 
 > Dit document is het startpunt voor een nieuwe Claude-sessie (welk Anthropic-account dan ook).
 > Lees dit eerst, daarna de memory-index. Alle code staat in git (beide repos gepusht).
@@ -98,6 +100,17 @@ Opdracht Daimy: alle verkochte producten met bekende prijzen erin + prijsverschi
 
 ## Gevel-visualisatietool LIVE (9 juli)
 sonty-website.vercel.app/visualisatie (header-nav "Op jouw gevel"): klant uploadt gevelfoto → Gemini 2.5 Flash Image rendert gekozen product (knikarm/screens/rolluiken/markiezen/uitvalschermen) + doek-/framekleur fotorealistisch op de foto (~4ct/render). E-mail-gate → lead type `visualisatie` (Telegram-melding), 12/dag per IP + 400/dag globaal via KV. GEMINI_API_KEY in Vercel prod env (billing door Daimy aangezet 9 juli); echte renders getest op prod. PR #9 ready-for-review (mergen = git en prod gelijk); duplicaat-PR #7 gesloten. Details: memory project_sonty_gevel_visualisatie.md.
+
+## Verzendcentrum LIVE in testmodus (10 juli) — offertes versturen zonder RP-automation
+`/admin/verzendcentrum` (sonty-website, branch `verzendcentrum`, 2 commits boven main: 4abea5c + 03ccb30):
+- Offertes versturen via Trengo "Aanvragen" (aanvragen@sonty.nl) i.p.v. de RP-automation; enkel- én duo-mail (Roma) met FAQ-blok en Sonty-opmaak.
+- **Testmodus staat AAN**: testmails gaan ALTIJD naar joey@sonty.nl + daimy@sonty.nl (afspraak Daimy), nooit naar het adres van de test-lead; echte klanten kunnen in testmodus niet gemaild worden.
+- Dashboard-statistiekenbalk: wachtrij, vandaag/totaal verstuurd, herinneringen vandaag, laatste cron-run (OK/fouten), foutenlog (laatste 25 in KV).
+- Herinneringscron `/api/cron/offerte-herinneringen` (Vercel cron, dagelijks 08:00) — staat standaard UIT via settings.herinneringenAan en respecteert testmodus.
+- **WhatsApp-knop in alle mails voorgevuld** (wens Daimy 10 juli): wa.me-link met offertenummer(s), naam en adres voor-ingevuld zodat het team direct ziet wie er appt (`lib/verzendcentrum/mail-templates.ts` waLink, ook in de herinneringscron).
+- **504-fix (10 juli)**: RP backlog-endpoint geeft ALTIJD alle 16,9k items (30-55s, geen filter-params — getest) → route maxDuration 300 + KV-cache 3 min (`?vers=1` forceert vers) + RP-calls parallel (16 workers). Prod-getest: vers 43s, cache-hit 0,4s, 358 items. Branch bevat nu ook main (14 commits gemerged) — deployen vanaf deze branch is veilig.
+- LET OP: op 10 juli draaiden er twee Claude-sessies tegelijk in sonty-website (overschreven elkaars bestanden — bron van "er gaat steeds wat mis"). Vraag aan Daimy gesteld om er één te sluiten.
+- Volgende stap: Daimy laten testen op prod, daarna testmodus uit + branch mergen.
 
 ## Openstaand / wacht op Daimy
 

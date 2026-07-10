@@ -18,10 +18,11 @@ const RP = 'https://backend.reuzenpanda.nl';
 function romaEquivalent(titel, beschrijving) {
   const t = titel.toLowerCase();
   const solar = /solar/i.test(beschrijving || titel);
+  // .P-serie i.p.v. .XP (instructie Daimy 2026-07-10): bedraad = prijsboek p82-83, solar = p84-85
   if (/rolluik|s-37|s-42|rollsuper/.test(t)) {
     return solar
-      ? { key: 'voorzetrolluik_xp_solar', naam: 'ROMA geëxtrudeerd voorzetrolluik .XP Solar', montageTitel: 'rolluik', motor: 'Somfy RS100 Solar io (op zonne-energie, geen bekabeling nodig, inclusief ingeleerde handzender)', solar }
-      : { key: 'voorzetrolluik_xp', naam: 'ROMA geëxtrudeerd voorzetrolluik .XP', montageTitel: 'rolluik', motor: 'Somfy io (inclusief ingeleerde handzender)', solar };
+      ? { key: 'voorzetrolluik_p_solar', naam: 'ROMA geëxtrudeerd voorzetrolluik .P Solar', montageTitel: 'rolluik', motor: 'Somfy RS100 Solar io (op zonne-energie, geen bekabeling nodig, inclusief ingeleerde handzender)', solar }
+      : { key: 'voorzetrolluik_p', naam: 'ROMA geëxtrudeerd voorzetrolluik .P', montageTitel: 'rolluik', motor: 'Somfy io (inclusief ingeleerde handzender)', solar };
   }
   if (/zip|screen/.test(t)) {
     return solar
@@ -119,6 +120,14 @@ async function maakRomaDuo(documentId) {
 
   // Nieuw document op basis van de bron (zelfde klant/opmaak), eigen nummer
   const qd = JSON.parse(JSON.stringify(bronQd));
+  // Het "Waarom Sonty"-tekstblok (Sunmaster-verkooppraatje uit v4 stap 4b) hoort niet
+  // in het Roma-document; het duo heeft zijn eigen waarom-twee-merken-regel.
+  for (const [segId, seg] of Object.entries(qd.segments || {})) {
+    if (seg?.type === 'text' && typeof seg.data === 'string' && seg.data.includes('Waarom Sonty')) {
+      delete qd.segments[segId];
+      qd.renderRows = (qd.renderRows || []).filter(r => !r.columns?.some(c => c.elements?.some(e => e.target === segId)));
+    }
+  }
   delete qd.documentId; delete qd.versionId; delete qd.documentNumber; delete qd.quotationNumber;
   qd.segments.defaultTemplatePriceLineGroup.data.lines = romaLines;
   qd.segments.defaultTemplatePriceLineGroup.data.groupDiscount = { type: 'PERCENTAGE', amount: 15, name: '15% tijdelijke actie', vatPercentage: 21 };

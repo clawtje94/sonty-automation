@@ -32,6 +32,11 @@ const lineTotaal = (lines) => lines.reduce((s, l) => s + (l.pricePerUnit || 0) *
       const qs = (await (await fetch(`${RP}/document-service/v1/${PID}/quotations?lead_configuration_id=${lcId}`, { headers: H })).json()).quotationDatas || [];
       const bronRef = qs.find(q => String(q.quotationNumber) === String(d.bron));
       if (!bronRef) { console.log('FOUT: bron niet gevonden:', d.klant, d.bron); fouten++; continue; }
+      // Klant heeft al akkoord gegeven? Dan documenten met rust laten (instructie Daimy 2026-07-10)
+      if (bronRef.documentStatus === 'ACCEPTED' || duoDoc.documentStatus === 'ACCEPTED') {
+        console.log('SKIP (akkoord gegeven):', d.klant, '(' + d.romaNummer + ')');
+        continue;
+      }
       const bronDoc = (await (await fetch(`${RP}/document-service/v1/${PID}/quotations/${bronRef.documentId}`, { headers: H })).json()).quotationData;
       const bronPlg = bronDoc?.segments?.defaultTemplatePriceLineGroup?.data;
       if (!bronPlg) { console.log('FOUT: bron zonder prijsregels:', d.klant, d.bron); fouten++; continue; }

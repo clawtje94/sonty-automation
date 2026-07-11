@@ -7,7 +7,7 @@
 ## DEEL 1: OVER SONTY
 
 ### Wie zijn wij
-Sonty is de specialist in zonwering en woninginrichting in de regio Haaglanden en omstreken. Opgericht door Daimy Boot, gevestigd in Rijswijk.
+Sonty is de specialist in zonwering en woninginrichting in de regio Haaglanden en omstreken. Opgericht door Joey Engelen; Daimy Boot kwam er in 2024 bij als mede-eigenaar. Gevestigd in Rijswijk.
 
 ### Onze kernwaarden
 - We leveren uitsluitend A-merk producten: Sunmaster (Nederlands merk, geproduceerd in Nijkerk) en Somfy motoren (wereldleider in motoren voor zonwering)

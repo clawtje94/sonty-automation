@@ -143,6 +143,13 @@ Alles op branch `feature/visualisatie-mobiel`, prod = deze branch:
 - **Subsidie-blog herschreven op echte bronnen** (RVO/Belastingdienst/6 gemeentesites, checkdatum 11-7): GEEN subsidie voor particulieren op zonwering; BTW 21% (9%-claim was fout); zakelijk alleen EIA-code 210400 (met isolerende beglazing, rolluiken uitgesloten). Bronvermelding per sectie in de blog.
 - Antwoorden Daimy: onderhoudscontracten "misschien later" (blog blijft zonder pakketten), Luxaflex leveren we wel (blijft op over-ons).
 
+## Herstelronde na feedback Daimy (11 juli avond)
+- **Hub-navigatie-bug (oorzaak "kan niet doorklikken")**: fixer had op hub-pagina's mobiel de grote kaarten MÉT links verborgen en de linkloze "Welke variant"-kaarten (oranje linkerrand → leken kapotte knoppen) laten staan. Omgedraaid: link-kaarten compact zichtbaar (m-grid2, details verborgen), linkloze sectie op hub-pagina's mobiel weg.
+- **m-grid2 overflow-fix**: kaart-min-content duwde kolommen breder dan het scherm (body 459px op 390px viewport) → `.m-grid2 > * { min-width: 0 }`. Site-breed geverifieerd: body weer 390px.
+- **Homepage-kaarttekst onleesbaar**: content stak boven kaart/gradient uit op 2-koloms mobiel → kaarten vierkant, alleen titel+CTA in de gradient (.home-product-card).
+- **Deploys geverifieerd**: vercel ls toont alleen eigen geslaagde deploys; "lege beeldvakken" uit audits zijn native lazy-loading (laden wél bij echt scrollen — met stapsgewijze scroll-test bevestigd, 0 kapotte beelden).
+- **ROMA als echte producten LIVE**: components/RomaModellen.tsx — donkere merksectie op /diensten/rolluiken (3 kaarten: .XP, .P geëxtrudeerd, .P gerolvormd) en /diensten/screens (zipSCREEN.2), boek-feiten + vanaf-prijzen uit de centrale engine (bv. .XP €1.049 o.b.v. 100×100 incl montage), CTA naar configurator. Foto's: public/images/roma/.
+
 ## Openstaand / wacht op Daimy
 
 9. **TO DO: onzekerheden website bevestigen (2026-07-09, lijst op Telegram gestuurd, Daimy komt erop terug)**: garantiejaren (site inconsistent: FAQ 5j+7j, over-ons 5j, offertes 3j montage), "12 jaar ervaring", 15%-kortingsbalk (geldig? einddatum?), vacature monteur salaris 2800-3600, openingstijden di-vr 9:30-17/za 9:30-16, "reactie binnen 24 uur", FAQ-antwoorden zonder bron, blogpost-prijzen (AI-onderzoek), portfolio echte fotos?, zakelijk-sectorpaginas onbevestigd, dubbele privacy-paginas (/privacy-beleid + /privacyverklaring), BTW-nummer ontbreekt, levertijden-pagina verwijderd door andere sessie (bevestigen dat dat klopte).

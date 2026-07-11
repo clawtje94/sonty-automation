@@ -108,9 +108,16 @@ sonty-website.vercel.app/visualisatie (header-nav "Op jouw gevel"): klant upload
 - Dashboard-statistiekenbalk: wachtrij, vandaag/totaal verstuurd, herinneringen vandaag, laatste cron-run (OK/fouten), foutenlog (laatste 25 in KV).
 - Herinneringscron `/api/cron/offerte-herinneringen` (Vercel cron, dagelijks 08:00) — staat standaard UIT via settings.herinneringenAan en respecteert testmodus.
 - **WhatsApp-knop in alle mails voorgevuld** (wens Daimy 10 juli): wa.me-link met offertenummer(s), naam en adres voor-ingevuld zodat het team direct ziet wie er appt (`lib/verzendcentrum/mail-templates.ts` waLink, ook in de herinneringscron).
-- **504-fix (10 juli)**: RP backlog-endpoint geeft ALTIJD alle 16,9k items (30-55s, geen filter-params — getest) → route maxDuration 300 + KV-cache 3 min (`?vers=1` forceert vers) + RP-calls parallel (16 workers). Prod-getest: vers 43s, cache-hit 0,4s, 358 items. Branch bevat nu ook main (14 commits gemerged) — deployen vanaf deze branch is veilig.
+- **504-fix (10 juli)**: RP backlog-endpoint geeft ALTIJD alle 16,9k items (30-55s, geen filter-params — getest) → route maxDuration 300 + RP-calls parallel (16 workers) + KV-cache (TTL 6u): cache wordt direct geserveerd en bij >3 min oud NA de response ververst via `after()` + KV-lock; `?vers=1` = synchroon vers. Prod-getest: vers ~48s, cache-hit ~1s, 358 items. Bedragen altijd 2 decimalen. Branch bevat nu ook main (gemerged) — deployen vanaf deze branch is veilig; staat live op prod.
 - LET OP: op 10 juli draaiden er twee Claude-sessies tegelijk in sonty-website (overschreven elkaars bestanden — bron van "er gaat steeds wat mis"). Vraag aan Daimy gesteld om er één te sluiten.
 - Volgende stap: Daimy laten testen op prod, daarna testmodus uit + branch mergen.
+
+## Visualisatie app-look + mobiel menu LIVE (11 juli)
+Branch `feature/visualisatie-mobiel` (worktree .claude/worktrees/visualisatie-mobiel), prod draait op deze branch (bevat ook verzendcentrum + main):
+- App-look visualisatie (10 juli, andere sessie): één foto-knop, swipe, e-mail verplicht. Stond op de branch maar was nooit gedeployed — 11 juli live gezet.
+- Stapkaartjes 1-2-3: cijfer naast de tekst (verticaal gecentreerd) i.p.v. erboven — compacter op iPhone (wens Daimy).
+- **Mobiel menu herbouwd** (wens Daimy "echt kut"): fullscreen overlay met eigen logo+sluitknop, groepen Aanbod/Sonty (secundaire links in 2 kolommen), CTA + bel/WhatsApp-knoppen onderaan. Alles past op één iPhone-scherm zonder scrollen. LES: banner (.top-bar-wrapper---brix) heeft z-index 9999 en header zit in eigen stacking context — fullscreen menu werkt alleen als banner+contactbalk verborgen worden zolang het menu open is (mobileOpen-state). Desktop onaangetast (visueel geverifieerd).
+- Deploy-werkwijze: committen in de worktree, dan in hoofdcheckout `git switch --detach <commit>` → vercel build+deploy → terug naar verzendcentrum (worktree heeft geen node_modules).
 
 ## Openstaand / wacht op Daimy
 

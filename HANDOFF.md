@@ -134,6 +134,15 @@ Alles op branch `feature/visualisatie-mobiel`, prod = deze branch:
    NIEUWE vragen voor Daimy uit de fact-check: (a) onderhoudscontract-tiers (Basis/Comfort/Premium €295-1495/jr) stonden op de site maar bestaan nergens — blog herschreven zonder tiers; echt product van maken? (b) Luxaflex staat op over-ons als raamdecoratie-merk — klopt dat (binnen loopt via Toppoint)? (c) "Somfy Pro Partner"-claim verwijderd — bestaat die certificering? (d) subsidie-blog is nu bewust dun; aparte research-ronde met echte RVO/gemeente-bronnen gewenst?
 - Maandactie-bevestigingen Daimy 11 juli: laatste-week-regel (geldig t/m einde volgende maand) akkoord; v4 niet wijzigen tot volledige overgang.
 
+## Volledige mobiele ronde 2 + subsidie-blog (11 juli, na terechte feedback Daimy "geen volledige check gedaan")
+3 deliverable-reviewers auditeerden alle 20 pagina's op 390px (screenshots in job-tmp), daarna 4 fixers + eigen werk. LIVE op prod:
+- Nummers/pills/iconen overal links naast tekst; 24 verzonnen klantcases (Familie Janssen e.d.) generiek gemaakt; zakelijk-stap3 sticky-knop-bug opgelost (root cause: position sticky binnen kaart); homepage kaarttitels leesbaar (gradient), stats 2x2, maps-iframe → foto; reviews woordgrens-clamp; tabellen sticky eerste kolom + veeg-hint; hub-dubbelsecties ontdubbeld.
+- Paginahoogtes 390px vóór→ná: blog 27,9k→9,6k; portfolio 19,6k→6,8k; horren 18,2k→12,6k; markiezen 24,9k→20,0k; knikarm 25,1k→21,9k; home 13,3k→11,9k.
+- **Footer mobiel herbouwd (wens Daimy)**: inklapbare <details>-kolommen (server component, geen JS), bel/WhatsApp/route-knoppen, compacte merk-sectie, gecentreerde onderbalk — ~2.700px → ~800px. Desktop pixelgelijk.
+- **Oprichter-correctie (Daimy 11 juli)**: Sonty is opgericht door JOEY ENGELEN (2014), Daimy kwam er in 2024 bij — kennisbank zei het verkeerd om en is gecorrigeerd (data/trengo-kennisbank.md), over-ons klopt nu.
+- **Subsidie-blog herschreven op echte bronnen** (RVO/Belastingdienst/6 gemeentesites, checkdatum 11-7): GEEN subsidie voor particulieren op zonwering; BTW 21% (9%-claim was fout); zakelijk alleen EIA-code 210400 (met isolerende beglazing, rolluiken uitgesloten). Bronvermelding per sectie in de blog.
+- Antwoorden Daimy: onderhoudscontracten "misschien later" (blog blijft zonder pakketten), Luxaflex leveren we wel (blijft op over-ons).
+
 ## Openstaand / wacht op Daimy
 
 9. **TO DO: onzekerheden website bevestigen (2026-07-09, lijst op Telegram gestuurd, Daimy komt erop terug)**: garantiejaren (site inconsistent: FAQ 5j+7j, over-ons 5j, offertes 3j montage), "12 jaar ervaring", 15%-kortingsbalk (geldig? einddatum?), vacature monteur salaris 2800-3600, openingstijden di-vr 9:30-17/za 9:30-16, "reactie binnen 24 uur", FAQ-antwoorden zonder bron, blogpost-prijzen (AI-onderzoek), portfolio echte fotos?, zakelijk-sectorpaginas onbevestigd, dubbele privacy-paginas (/privacy-beleid + /privacyverklaring), BTW-nummer ontbreekt, levertijden-pagina verwijderd door andere sessie (bevestigen dat dat klopte).

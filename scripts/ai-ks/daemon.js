@@ -252,19 +252,26 @@ async function verwerkTicket(t, state) {
       teamInstructie: feedback,
       ticketId: t.id,
     });
-    const geenBericht = !res.antwoord || /GEEN_BERICHT/.test(res.antwoord);
+    // Output-protocol: [klanttekst] / GEEN_BERICHT, afgesloten met "NOTITIE: <antwoord team>".
+    // Acties (offerte aanpassen etc.) zijn door de agent al ECHT uitgevoerd via zijn tools.
+    const ruw = res.antwoord || '';
+    const notitieMatch = ruw.match(/NOTITIE:\s*([\s\S]+)$/i);
+    const teamAntwoord = notitieMatch ? notitieMatch[1].trim() : '';
+    const klantTekst = ruw.replace(/NOTITIE:\s*[\s\S]+$/i, '').replace(/GEEN_BERICHT/g, '').trim();
     let verstuurd = false;
-    if (!geenBericht) {
-      const sendRes = isLiveTestContact(t) ? await sendLiveReply(t, res.antwoord) : await sendActiefReply(t, res.antwoord);
+    if (klantTekst) {
+      const sendRes = isLiveTestContact(t) ? await sendLiveReply(t, klantTekst) : await sendActiefReply(t, klantTekst);
       verstuurd = sendRes.ok;
       console.log(`  → FEEDBACK-vervolgbericht naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status}`);
       if (!sendRes.ok) await telegram(`⚠️ Vervolgbericht na feedback bij ticket ${t.id} kon niet verstuurd worden: ${sendRes.status}`);
     }
+    const mutaties = res.acties.filter(a => a.type !== 'escalatie');
+    const actieTekst = mutaties.length ? '\nUitgevoerd: ' + mutaties.map(a => a.samenvatting || a.type).join('; ') : '';
     for (const i of teamInstructies) {
-      await plaatsNotitie(t.id, `${await tagVoor(i.userId)} ✅ Verwerkt als vaste kennis${verstuurd ? ', en ik heb de klant hierop nog een kort bericht gestuurd' : ' (geen extra bericht naar de klant nodig)'}.`);
+      await plaatsNotitie(t.id, `${await tagVoor(i.userId)} ✅ ${teamAntwoord || 'Verwerkt als vaste kennis.'}${actieTekst}${verstuurd ? '\n(De klant heeft hierover een kort bericht gekregen.)' : ''}`);
     }
-    log({ ticket: t.id, kanaal: 'WA', klant: { phone: t.contact?.phone }, teamOpdracht: feedback.slice(0, 300), antwoord: verstuurd ? res.antwoord : '(geen bericht)', acties: res.acties, toolCalls: res.toolCalls, usage: res.usage, actief: true });
-    return; // feedback afgehandeld; normale flow volgt bij het volgende klantbericht
+    log({ ticket: t.id, kanaal: 'WA', klant: { phone: t.contact?.phone }, teamOpdracht: feedback.slice(0, 300), antwoord: verstuurd ? klantTekst : '(geen klantbericht)', teamAntwoord: teamAntwoord.slice(0, 200), acties: res.acties, toolCalls: res.toolCalls, usage: res.usage, actief: true });
+    return; // notitie afgehandeld; normale flow volgt bij het volgende klantbericht
   }
 
   if (!rows.length) return;

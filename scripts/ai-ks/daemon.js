@@ -129,7 +129,9 @@ async function verwerkTicket(t, state) {
   if (isFinite(leeftijdSec) && leeftijdSec < 45) return; // volgende poll-ronde
 
   // SONNY: buiten openingstijden behandelen we WhatsApp-klanten live, eerlijk als AI.
-  const sonnyMode = isWaTicket(t) && sonnyActiefNu();
+  // Whitelist-testnummers krijgen ALTIJD de Sonny-persona (ook overdag, ook vóór de
+  // aan-knop): dat is wat we testen en trainen (Daimy 2026-07-16).
+  const sonnyMode = isWaTicket(t) && (sonnyActiefNu() || isLiveTestContact(t));
   const sonnyState = sonnyMode ? loadSonnyState() : null;
   const sonnyIntroNodig = sonnyMode && !sonnyState.introTickets[t.id];
   if (sonnyMode && sonnyIntroNodig && !isLiveTestContact(t)) {

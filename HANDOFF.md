@@ -30,9 +30,9 @@ Opdracht Daimy: buiten openingstijden reageert de AI live op ALLE WhatsApp-klant
 - Openingstijden di-vr 9:30-17:00, za 9:30-16:00, ma+zo dicht (config.OPENINGSTIJDEN, tz-vast Europe/Amsterdam); daarbuiten is Sonny actief.
 - Vaste intro (config.SONNY.INTRO) wordt door de daemon vóór Sonny's eerste bericht in een gesprek geplakt; prompt-addendum (system-prompt.js sonnyBlok) zorgt dat hij als Sonny ondertekent en niet dubbel groet.
 - Reactievertraging 45-180s (menselijk tempo, bundelt snelle vervolgberichten), max 10 NIEUWE gesprekken per dag (lopende maakt hij af), alleen WhatsApp (geen e-mail in testfase). Escalaties (klacht/foto/korting/twijfel) blijven stil naar Telegram gaan.
-- launchd `nl.sonty.sonny` (elke 5 min `daemon.js --sonny-only`; doet binnen openingstijden NIETS, ook geen schaduwnotities) + `nl.sonty.sonny-rapport` (08:30, ochtendrapport van alle nachtgesprekken naar Telegram).
-- **AAN-KNOP (alleen Daimy)**: `scripts/ai-ks/.sonny-enabled` aanmaken met inhoud `JA ECHT`. Uitzetten = bestand weggooien.
-- **BLOCKER**: Anthropic API-tegoed is OP (16 juli getest) — zonder bijladen (console.anthropic.com/settings/billing) kan Sonny niet antwoorden. Daimy is gevraagd bij te laden + auto-reload.
+- launchd `nl.sonty.sonny` (elke 5 min `daemon.js --sonny-only`): buiten openingstijden Sonny voor iedereen (mits aan-knop), **binnen openingstijden whitelist-nummers live** (trainen overdag, opdracht Daimy 16 juli) — geen schaduwnotities in deze modus. Plus `nl.sonty.sonny-rapport` (08:30, ochtendrapport nachtgesprekken naar Telegram).
+- **AAN-KNOP (alleen Daimy)**: `scripts/ai-ks/.sonny-enabled` aanmaken met inhoud `JA ECHT`. Uitzetten = bestand weggooien. Status 16 juli ~12:45: nog NIET aan; wacht op Daimy's "JA ECHT SONNY AAN".
+- API-tegoed: bijgeladen 16 juli (watchdog bevestigt OK). **Credits-watchdog**: `scripts/check-anthropic-credits.js` (launchd nl.sonty.credits-check, elke 2 uur, mini-ping) → luid Telegram-alarm zodra credits op zijn + herstelmelding; daemon alarmeert óók direct als een klantgesprek stilvalt op credits (dedupe via data/ai-ks/credits-state.json).
 - Nog niet end-to-end getest met een echt gesprek (kan pas met tegoed); eerste avond na aanzetten actief monitoren via logs/sonny.log en data/ai-ks/log.jsonl (entries sonny:true).
 - Garantiebeleid vastgesteld door Daimy (16 juli): 3 jaar montage / 5 jaar product / 7 jaar motor — doorgevoerd in v4-markiezenblok, cron-markiezen.js en trengo-kennisbank.md (zeiden 2/3/5).
 

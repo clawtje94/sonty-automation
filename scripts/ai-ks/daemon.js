@@ -86,6 +86,17 @@ function saveSonnyState(s) {
 function sonnyActiefNu() {
   return CFG.SONNY.enabled && CFG.isBuitenOpeningstijden();
 }
+// Credits op terwijl een klant op antwoord wacht = klantenservice staat stil → luid alarm.
+// Dedupe 1x/uur via hetzelfde state-bestand als de 2-uurlijkse watchdog (check-anthropic-credits.js).
+const CREDITS_STATE = path.join(path.dirname(CFG.SONNY.STATE_FILE), 'credits-state.json');
+async function alertCreditsOp() {
+  let s;
+  try { s = JSON.parse(fs.readFileSync(CREDITS_STATE, 'utf8')); } catch { s = { status: 'ok', laatsteAlert: 0 }; }
+  if (Date.now() - (s.laatsteAlert || 0) < 3600000) return;
+  await telegram('🚨🚨 ANTHROPIC CREDITS OP — er wacht NU een klant op antwoord en de AI-klantenservice staat stil!\n\nBijladen: console.anthropic.com/settings/billing → Buy credits.');
+  fs.writeFileSync(CREDITS_STATE, JSON.stringify({ status: 'op', laatsteAlert: Date.now() }));
+}
+
 async function sendSonnyReply(t, tekst) {
   // Eigen verdedigingslagen (los van de whitelist): alleen WhatsApp, alleen als Sonny
   // aan staat én het buiten openingstijden is, nooit leeg.
@@ -275,12 +286,12 @@ async function verwerkPendingOffertes() {
 }
 
 async function pollRonde(state, { onlyTest, sonnyOnly }) {
-  // --sonny-only (avonddienst-cron): binnen openingstijden helemaal niets doen —
-  // dan is het team er zelf en mag deze cron geen schaduwnotities of antwoorden plaatsen.
-  if (sonnyOnly && !sonnyActiefNu()) {
-    console.log(`[${new Date().toLocaleTimeString()}] Sonny: ${CFG.SONNY.enabled ? 'binnen openingstijden, team is er — niets doen' : '.sonny-enabled ontbreekt — uit'}`);
-    return;
-  }
+  // --sonny-only (AI-dienst-cron): buiten openingstijden bedient Sonny alle WA-klanten
+  // (mits .sonny-enabled). Binnen openingstijden — of zolang Sonny uit staat — alleen de
+  // whitelist-testnummers live, zodat we overdag doortrainen zonder dat klanten iets
+  // merken (opdracht Daimy 2026-07-16). Geen schaduwnotities in deze modus.
+  const sonnyNu = sonnyActiefNu();
+  const effOnlyTest = onlyTest || (sonnyOnly && !sonnyNu);
   try { await verwerkPendingOffertes(); } catch (e) { console.error('pending-offertes FOUT:', e.message); }
   const specificTicket = process.argv.includes('--ticket') ? process.argv[process.argv.indexOf('--ticket') + 1] : null;
 
@@ -298,15 +309,19 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
     }
   }
 
-  // --only-test: ALLEEN whitelist-tickets aanraken; alle andere volledig negeren (ook geen notities)
-  if (onlyTest) tickets = tickets.filter(isLiveTestContact);
+  // whitelist-modus: ALLEEN whitelist-tickets aanraken; alle andere volledig negeren (ook geen notities)
+  if (effOnlyTest) tickets = tickets.filter(isLiveTestContact);
   // --sonny-only: alleen WhatsApp (Sonny doet geen e-mail in de testfase)
   if (sonnyOnly) tickets = tickets.filter(isWaTicket);
 
-  console.log(`[${new Date().toLocaleTimeString()}] AI-KS (${CFG.MODE.toUpperCase()}${onlyTest ? ', ONLY-TEST' : ''}${sonnyActiefNu() ? ', SONNY ACTIEF' : ''}): ${tickets.length} kandidaat-tickets`);
+  console.log(`[${new Date().toLocaleTimeString()}] AI-KS (${CFG.MODE.toUpperCase()}${effOnlyTest ? ', WHITELIST-ONLY' : ''}${sonnyNu ? ', SONNY ACTIEF' : ''}): ${tickets.length} kandidaat-tickets`);
   for (const t of tickets) {
     try { await verwerkTicket(t, state); }
-    catch (e) { console.error(`Ticket ${t.id} FOUT:`, e.message); log({ ticket: t.id, fout: String(e.message || e) }); }
+    catch (e) {
+      console.error(`Ticket ${t.id} FOUT:`, e.message);
+      log({ ticket: t.id, fout: String(e.message || e) });
+      if (/credit balance/i.test(String(e.message || e))) await alertCreditsOp();
+    }
     saveState(state);
   }
   // State beperken tot laatste 2000 entries

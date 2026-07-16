@@ -77,7 +77,7 @@ Meerprijs Trend/RAL: afhankelijk van breedte (p9/p11 tabellen)
 - Uitval 250, 300 en 350cm
 - Min breedte: 315cm, max: 600cm
 - Tabel bevat: Sunea IO motor
-- Opties: Situo 1 handzender +€76, LED-verlichting Somfy IO 2 kanalen +€749, Handzender Situo 5 A/M Var +€119
+- Opties: Situo 1 handzender +€76, LED-verlichting Somfy IO 2 kanalen (kleur en wit) +€749, Handzender Situo 5 A/M Var +€119
 - Minderprijzen: Orea WT -€51
 - Standaardkleuren: RAL 9010 mat, Antraciet structuur (wijkt licht af)
 - Meerprijs Trend/RAL: per breedte (tabel op p31)
@@ -535,7 +535,7 @@ De RP configurator rekent het product + motor + handzender + evt meerprijs kleur
 - Downgrade naar Orea WT: -€51
 - Downgrade naar draaistang: -€300 (SunBasic/SunEye)
 - Handzender toevoegen: +€76
-- LED-verlichting (SunElite): +€749
+- LED-verlichting (SunElite, Somfy IO 2 kanalen: kleur en wit, apart bedienbaar): +€749
 
 **SunCube 150 (standaard = Orea WT):**
 - Upgrade naar Sunea IO: +€60

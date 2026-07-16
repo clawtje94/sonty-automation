@@ -22,7 +22,7 @@ function amsterdamNu() {
 module.exports = {
   get MODE() { return resolveMode(); },
   MODEL: 'claude-opus-4-8',
-  MAX_TOKENS: 4096,
+  MAX_TOKENS: 16000, // ruim plafond per antwoord (alleen technische veiligheidsklep; 4096 was te krap — leeg antwoord bij Joey 17 juli)
 
   // Openingstijden showroom/team (bron: sonty.nl/showroom). zo=0 ... za=6; null = hele dag dicht.
   OPENINGSTIJDEN: { 0: null, 1: null, 2: ['09:30', '17:00'], 3: ['09:30', '17:00'], 4: ['09:30', '17:00'], 5: ['09:30', '17:00'], 6: ['09:30', '16:00'] },
@@ -35,7 +35,7 @@ module.exports = {
     get enabled() {
       try { return fs.readFileSync(path.join(__dirname, '.sonny-enabled'), 'utf8').trim() === 'JA ECHT'; } catch { return false; }
     },
-    MAX_GESPREKKEN_PER_DAG: 10, // nieuwe gesprekken per kalenderdag (testfase); lopende gesprekken tellen niet opnieuw
+    MAX_GESPREKKEN_PER_DAG: 999, // feitelijk uit — Daimy 17 juli: "als iemand geholpen moet worden, moet die geholpen worden"
     STATE_FILE: path.join(__dirname, '..', '..', 'data', 'ai-ks', 'sonny-state.json'),
     // Rustig, menselijk reactietempo (±1-3 min) zodat snelle vervolgberichten gebundeld worden
     DELAY: { baseSec: 60, perCharSec: 1 / 15, minSec: 45, maxSec: 180 },

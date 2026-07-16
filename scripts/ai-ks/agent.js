@@ -114,6 +114,12 @@ async function beantwoord(gesprek) {
     }
 
     let tekst = response.content.filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
+    // LEEG antwoord (bv. output-limiet bereikt na denkwerk) mag nooit stilte worden:
+    // escaleren zodat het team het ziet (Joey kreeg 17 juli niets, zonder enige melding).
+    if (!tekst && !ctx.stil) {
+      ctx.acties.push({ type: 'escalatie', reden: 'Model gaf een leeg antwoord (stop_reason: ' + response.stop_reason + ') — klant wacht op reactie', stil: true, urgentie: 'normaal' });
+      return { antwoord: null, acties: ctx.acties, toolCalls, usage };
+    }
     // Stille escalatie: klant krijgt niets, gesprek blijft open voor een collega
     if (ctx.stil || tekst === '[STIL]' || /^\[STIL\]$/m.test(tekst)) tekst = null;
 

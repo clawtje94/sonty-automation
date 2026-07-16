@@ -11,7 +11,13 @@ const path = require('path');
 const CFG = require('./config.js');
 const { beantwoord } = require('./agent.js');
 
-const TT = fs.readFileSync(path.join(__dirname, '..', '.trengo-api-token.txt'), 'utf8').trim();
+// Versturen gebeurt bij voorkeur vanuit het eigen Sonny-account (opdracht Daimy 2026-07-16:
+// "vanuit Sonny antwoorden, niet meer vanuit mij"). Bestaat het Sonny-token nog niet, dan
+// valt de daemon terug op het gedeelde token (Daimy Boot).
+const SONNY_TOKEN_FILE = path.join(__dirname, '.trengo-sonny-token.txt');
+let TT;
+try { TT = fs.readFileSync(SONNY_TOKEN_FILE, 'utf8').trim(); console.log('Trengo: verstuurt als SONNY-account'); }
+catch { TT = fs.readFileSync(path.join(__dirname, '..', '.trengo-api-token.txt'), 'utf8').trim(); }
 const TH = { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' };
 
 async function tGet(ep) {

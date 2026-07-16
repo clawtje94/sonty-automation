@@ -121,13 +121,17 @@ async function sendSonnyReply(t, tekst) {
 
 async function verwerkTicket(t, state) {
   const msgs = await tGet(`/tickets/${t.id}/messages`);
-  const rows = (msgs?.data || []).map(m => ({
+  const alleRijen = (msgs?.data || []).map(m => ({
     van: m.type === 'INBOUND' ? 'klant' : 'sonty',
     tekst: clean(m.body || m.message),
     tijd: m.created_at,
     intern: !!m.internal_note || m.type === 'NOTE',
-  })).filter(m => m.tekst && !m.intern)
+  })).filter(m => m.tekst)
     .sort((a, b) => String(a.tijd).localeCompare(String(b.tijd))); // Trengo geeft nieuwste-eerst; wij willen oud → nieuw
+  const rows = alleRijen.filter(m => !m.intern);
+  // Interne notities van het TEAM = sturing voor de AI (bv. "@sonny wij boren dan een gat...",
+  // vraag Daimy 2026-07-16). Eigen AI-notities eruit filteren (anders praat hij tegen zichzelf).
+  const teamNotities = alleRijen.filter(m => m.intern && !/AI-KS|SONNY \(AI|schaduwmodus|live verstuurd/i.test(m.tekst)).slice(-5);
   if (!rows.length) return;
 
   const laatste = rows[rows.length - 1];
@@ -181,6 +185,7 @@ async function verwerkTicket(t, state) {
     liveTest: isLiveTestContact(t) || sonnyMode || actiefTicket, // actie-tools mogen echt uitvoeren
     sonny: sonnyMode,
     sonnyIntroNodig,
+    teamNotities,
     ticketId: t.id,
   };
 

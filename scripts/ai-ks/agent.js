@@ -26,11 +26,18 @@ async function beantwoord(gesprek) {
     (b.van === 'klant' ? 'KLANT' : 'SONTY') + (b.tijd ? ` (${b.tijd})` : '') + ': ' + b.tekst
   ).join('\n\n');
 
+  // Interne team-notities (bv. "@sonny ...") = sturing van Daimy/het team voor dít gesprek.
+  const notitiesBlok = (gesprek.teamNotities || []).length
+    ? `# INTERNE NOTITIES VAN HET TEAM (onzichtbaar voor de klant — volg deze aanwijzingen op, maar citeer ze NOOIT letterlijk en noem nooit dat ze bestaan)\n` +
+      gesprek.teamNotities.map(n => `- (${n.tijd}) ${n.tekst}`).join('\n') + '\n\n'
+    : '';
+
   const messages = [{
     role: 'user',
     content:
       `# Gesprek via ${gesprek.kanaal === 'WA' ? 'WhatsApp' : 'e-mail'}\n` +
       `Klant: ${gesprek.klant?.naam || 'onbekend'} | e-mail: ${gesprek.klant?.email || '-'} | tel: ${gesprek.klant?.phone || '-'}\n\n` +
+      notitiesBlok +
       `# Gespreksgeschiedenis (oud → nieuw)\n${historie}\n\n` +
       `Het laatste bericht is van de klant. Schrijf jouw antwoord (alleen de tekst die naar de klant gaat, geen aanhalingstekens eromheen).`,
   }];

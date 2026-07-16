@@ -54,6 +54,10 @@ module.exports = {
   // Toegevoegd op verzoek van Daimy (2026-07-03): eigen testnummer + tweede tester.
   TEST_LIVE_PHONES: ['31683500506', '31636516410', '31628209480'],
 
+  // FEEDBACK-KANAAL: alleen deze nummers mogen "feedback: ..." leerpunten appen
+  // (Daimy 2026-07-16: "mag alleen van Joey en mijn nummer" — Jarne dus niet).
+  FEEDBACK_PHONES: ['31683500506', '31628209480'],
+
   // Menselijke antwoord-vertraging (instructie Daimy: "straks iets meer tijd nemen").
   // Uit tijdens de test; bij livegang aanzetten. Vertraging schaalt met de lengte
   // van het antwoord: basis + ~1s per 15 tekens, begrensd tussen min en max.

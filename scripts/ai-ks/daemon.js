@@ -123,12 +123,12 @@ async function verwerkTicket(t, state) {
   const sleutel = `${t.id}:${laatste.tijd}`;
   if (state.verwerkt[sleutel]) return; // al behandeld
 
-  // FEEDBACK-KANAAL (Daimy 2026-07-16): een whitelist-nummer kan in het WhatsApp-gesprek
-  // zelf "feedback: ..." appen. Dat is geen klantvraag maar een leerpunt: opslaan in
-  // data/ai-ks/leerpunten.md (gaat per direct mee in de systemprompt) en kort bevestigen.
-  // ALLEEN whitelist — anders zouden klanten de bot kunnen herprogrammeren.
+  // FEEDBACK-KANAAL (Daimy 2026-07-16): "feedback: ..." in het WhatsApp-gesprek = leerpunt,
+  // opslaan in data/ai-ks/leerpunten.md (gaat per direct mee in de systemprompt) en kort
+  // bevestigen. ALLEEN de nummers van Daimy en Joey (CFG.FEEDBACK_PHONES) — Jarne en
+  // klanten mogen de bot niet herprogrammeren.
   const feedbackMatch = laatste.tekst.match(/^\s*feedback\s*[:\-]\s*([\s\S]+)/i);
-  if (feedbackMatch && isLiveTestContact(t)) {
+  if (feedbackMatch && CFG.FEEDBACK_PHONES.includes(normPhone(t.contact?.phone))) {
     const punt = feedbackMatch[1].trim();
     fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leerpunten.md'), `- (${new Date().toISOString().slice(0, 10)}) ${punt}\n`);
     log({ ticket: t.id, feedback: punt, klant: t.contact?.full_name || t.contact?.phone });

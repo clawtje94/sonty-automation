@@ -32,6 +32,9 @@ Daimy: "handel de 21 open WA-tickets af, daarna weer uit, maar blijf vervolgvrag
 - Leerpunt toegevoegd: nooit "neef"/straattaal (Jorren kreeg "He neef!").
 - Vervolgvragen-watcher draait (watch 240 min, daarna launchd 5-min). Ochtendrapport telt actieve gesprekken nu mee.
 
+## TRENGO-TOKENS (16 juli ~21:15, LET OP)
+Daimys persoonlijke Trengo-token werd 401 (ongeldig; kopie in scripts/.trengo-api-token-daimy-ongeldig.txt). Alle scripts draaien nu op het SONNY-token (user 747786): scripts/.trengo-api-token.txt = kopie van scripts/ai-ks/.trengo-sonny-token.txt. Gevolg: ook v4's offerte-link-WhatsApps en overige Trengo-acties staan op naam van Sonny Sonty. Wil Daimy team-scripts weer onder eigen naam → nieuwe token van zijn account aanleveren en in scripts/.trengo-api-token.txt zetten. Telegram-intake: webhook was weggevallen; berichten komen via launchd nl.sonty.telegram-poll in telegram-inbox.txt; read-telegram-webhook.js toont nu ALTIJD de laatste 3 regels (leespositie werd door meerdere processen gedeeld waardoor een bericht stil verdween).
+
 ## WERKMODUS KLANTENSERVICE (besluit Daimy 16 juli, avond)
 Doorgaan op de huidige manier: AI antwoordt als JAIMY, géén Sonny-vermelding of intro richting klanten. Sonny-avonddienst (.sonny-enabled) blijft UIT tot Daimy anders zegt. Daimy leest elke ochtend alle antwoorden terug en geeft per chat/notitie feedback; die wordt via leerpunten verwerkt. Ochtendrapport 08:30 dekt actieve gesprekken + kosten.
 

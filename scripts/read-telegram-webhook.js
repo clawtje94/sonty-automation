@@ -34,6 +34,14 @@ if (fs.existsSync(INBOX_FILE)) {
           process.exit(0);
         }
       }
+      // Vangnet (16 juli): meerdere processen delen de leespositie, waardoor berichten
+      // stil 'gelezen' konden raken. Toon daarom altijd de laatste 3 regels als context.
+      const alle = content.split('\n').filter(l => l.trim());
+      if (alle.length) {
+        console.log('(geen nieuwe berichten — laatste 3 uit inbox ter controle:)');
+        alle.slice(-3).forEach(m => console.log('  ' + m.slice(0, 200)));
+        process.exit(0);
+      }
     }
   } catch(e) {}
 }

@@ -10,6 +10,31 @@ const apiKey = process.env.ANTHROPIC_API_KEY ||
   fs.readFileSync(path.join(__dirname, '..', '.anthropic-api-key.txt'), 'utf8').trim();
 const client = new Anthropic({ apiKey });
 
+// KWALITEITSPOORT (opdracht Daimy 2026-07-16: "analyseer zelf of je antwoord wel bijpassend
+// is bij de chat, tot alles 100% goed gaat"). Een aparte, goedkope controleur (Haiku)
+// beoordeelt elk concept-antwoord vóór verzending. Afgekeurd → één verbeterpoging → daarna
+// stil escaleren. Kost ~2-5s en een fractie van een cent per antwoord.
+async function qaCheck(gesprek, historie, concept, nuTekst) {
+  try {
+    const resp = await client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 200,
+      messages: [{ role: 'user', content:
+        `Je bent de kwaliteitscontroleur van de WhatsApp-klantenservicebot van Sonty (zonwering). ${nuTekst}\n\n` +
+        `# Laatste stuk van het gesprek (oud → nieuw)\n${historie.slice(-3000)}\n\n` +
+        `# CONCEPT-ANTWOORD dat de bot wil sturen\n${concept}\n\n` +
+        `BELANGRIJK: prijzen, kortingen en offertegegevens komen uit geverifieerde systemen van de bot — die zijn correct, beoordeel die NIET. Beoordeel ook geen dingen die je niet kunt weten. Beoordeel alléén de pasvorm:\n` +
+        `(1) past het op het laatste klantbericht qua onderwerp en persoon/naam? (2) geen dag-fouten — "fijn weekend" mag alleen als het volgens de opgegeven huidige datum echt vrijdag(middag)/weekend is (berichttijden zijn NL-tijd); (3) geen herhaald/gestapeld afscheid als er al afscheid is genomen; (4) geen opsmuk als "zonnige groet"/"zonnige zomer"; (5) zelfde taal als de klant; (6) geen interne info gelekt (team, notities, systemen); (7) spreekt zichzelf niet tegen t.o.v. eerder in het gesprek; (8) beantwoordt de vraag i.p.v. eromheen te praten.\n` +
+        `Twijfel je of is het randgeval: antwoord OK (alleen afkeuren bij een duidelijke fout).\n` +
+        `Bevat het concept "GEEN_BERICHT" of is het alleen een NOTITIE: voor het team, antwoord dan OK.\n` +
+        `Antwoord met exact "OK" of met "AFGEKEURD: <één korte concrete reden>".` }],
+    });
+    return (resp.content?.[0]?.text || 'OK').trim();
+  } catch (e) {
+    return 'OK'; // QA-storing mag het antwoorden zelf nooit blokkeren
+  }
+}
+
 /**
  * @param {object} gesprek — { kanaal: 'WA'|'EMAIL', klant: {naam, email, phone}, berichten: [{van: 'klant'|'sonty', tekst, tijd}] }
  * @returns {{ antwoord: string, acties: array, toolCalls: array, usage: object }}
@@ -54,8 +79,9 @@ async function beantwoord(gesprek) {
   }];
 
   let usage = { input_tokens: 0, output_tokens: 0 };
+  let qaHerkansing = false;
 
-  for (let iter = 0; iter < 8; iter++) {
+  for (let iter = 0; iter < 9; iter++) {
     const response = await client.messages.create({
       model: CFG.MODEL,
       max_tokens: CFG.MAX_TOKENS,
@@ -90,7 +116,23 @@ async function beantwoord(gesprek) {
     let tekst = response.content.filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
     // Stille escalatie: klant krijgt niets, gesprek blijft open voor een collega
     if (ctx.stil || tekst === '[STIL]' || /^\[STIL\]$/m.test(tekst)) tekst = null;
-    return { antwoord: tekst, acties: ctx.acties, toolCalls, usage };
+
+    // Kwaliteitspoort: past dit antwoord echt bij het gesprek? (max 1 herkansing)
+    if (tekst) {
+      const oordeel = await qaCheck(gesprek, historie, tekst, `Huidige datum/tijd: ${DAGEN[nu.dag]} ${nu.datum}, ${nu.hhmm} uur (Nederland).`);
+      if (!/^OK\b/i.test(oordeel)) {
+        if (!qaHerkansing) {
+          qaHerkansing = true;
+          console.log('  QA keurde concept af: ' + oordeel.slice(0, 120));
+          messages.push({ role: 'assistant', content: response.content });
+          messages.push({ role: 'user', content: `INTERNE KWALITEITSCONTROLE wees je concept af: ${oordeel}\nSchrijf een verbeterd antwoord dat dit oplost (alleen de tekst die naar de klant gaat). Is helemaal geen bericht het beste, antwoord dan [STIL].` });
+          continue;
+        }
+        ctx.acties.push({ type: 'escalatie', reden: 'Kwaliteitscontrole keurde het antwoord tweemaal af: ' + oordeel.slice(0, 200), stil: true, urgentie: 'normaal' });
+        return { antwoord: null, acties: ctx.acties, toolCalls, usage, qa: oordeel };
+      }
+    }
+    return { antwoord: tekst, acties: ctx.acties, toolCalls, usage, qa: 'OK' };
   }
 
   ctx.acties.push({ type: 'escalatie', reden: 'Tool-loop limiet bereikt', urgentie: 'normaal' });

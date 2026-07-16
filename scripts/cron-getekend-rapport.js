@@ -16,7 +16,7 @@ const H = { Authorization: 'Bearer ' + KEY };
 const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
 const TG_CHAT = 1700128390;
 const STATE_FILE = path.join(__dirname, '..', 'data', 'getekend-gemeld.json');
-const MAX_LEEFTIJD_DAGEN = 90; // alleen recente leads scannen
+const MAX_LEEFTIJD_DAGEN = 45; // alleen recente leads scannen (90d = 5500+ leads = ~1 uur; 45d houdt de run behapbaar)
 
 async function rpGet(ep) {
   const r = await fetch(B + ep, { headers: H });

@@ -26,8 +26,20 @@ async function tGet(ep) {
   return res.json();
 }
 async function tPost(ep, body) {
-  const res = await fetch('https://app.trengo.com/api/v2' + ep, { method: 'POST', headers: TH, body: JSON.stringify(body) });
-  return { ok: res.ok, status: res.status, body: await res.text().catch(() => '') };
+  // Trengo geeft af en toe 429 "Too Many Attempts" — zonder retry ging het antwoord dan
+  // verloren (Pieter 20:15, Vruchi 19:20 op 16 juli). 429 = niets verzonden, dus veilig
+  // om opnieuw te proberen: 3 pogingen met 20s/40s wachttijd.
+  let laatste = { ok: false, status: 429, body: 'Too Many Attempts (na 3 pogingen)' };
+  for (let poging = 1; poging <= 3; poging++) {
+    const res = await fetch('https://app.trengo.com/api/v2' + ep, { method: 'POST', headers: TH, body: JSON.stringify(body) });
+    laatste = { ok: res.ok, status: res.status, body: await res.text().catch(() => '') };
+    if (res.status !== 429) return laatste;
+    if (poging < 3) {
+      console.log(`  Trengo 429 — nieuwe poging over ${poging * 20}s...`);
+      await new Promise(r => setTimeout(r, poging * 20000));
+    }
+  }
+  return laatste;
 }
 
 function loadState() {

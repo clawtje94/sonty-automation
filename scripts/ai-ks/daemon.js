@@ -70,6 +70,13 @@ function isWaTicket(t) {
   return t.channel?.id === CFG.WA_CHANNEL_ID || t.channel?.type === 'WA_BUSINESS';
 }
 
+// Interne notitie plaatsen. LET OP: POST /tickets/{id}/notes bestaat niet (405) en het
+// messages-endpoint wil het veld "message" (niet "body") — ontdekt 16 juli: alle eerdere
+// AI-notities faalden stil. Dit is de enige werkende vorm.
+async function plaatsNotitie(ticketId, tekst) {
+  return tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: tekst });
+}
+
 function isRelevantTicket(t) {
   if (isWaTicket(t)) return true;
   return CFG.EMAIL_CHANNEL_NAMES.includes(t.channel?.title);
@@ -126,6 +133,21 @@ async function verwerkSonnyNotities(t, teamNotities) {
     if (st[key]) continue;
     const punt = n.tekst.replace(/@sonny[,:]?\s*/i, '').trim();
     const wie = t.contact?.full_name || t.contact?.phone || t.id;
+    // STOPCOMMANDO: "@sonny stop" / "niet verder (gaan) met dit gesprek" / "neem over" →
+    // gesprek uit de actieve lijst halen; de AI antwoordt daar dan niet meer. Geen leerpunt.
+    // Let op: géén los "stop" matchen — "stopcontact"/"stop contact" in een gewone notitie
+    // is geen stopcommando (ging 16 juli mis bij Hany's kabel-notitie).
+    if (/\b(niet verder|stop met dit gesprek|stop ermee|stoppen met dit gesprek|neem (het |dit )?over|pauzeer|laat dit gesprek)\b/i.test(punt)) {
+      const actief = loadActief();
+      if (actief[t.id]) {
+        delete actief[t.id];
+        fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actief, null, 1));
+      }
+      await telegram(`🛑 Gesprek ${wie} (ticket ${t.id}) is op jouw @sonny-notitie UIT het AI-beheer gehaald. De bot antwoordt daar niet meer; het team neemt het over.`);
+      st[key] = new Date().toISOString();
+      nieuw = true;
+      continue;
+    }
     if (punt) {
       fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leerpunten.md'),
         `- (${new Date().toISOString().slice(0, 10)}) [team-notitie bij gesprek ${wie}] ${punt}\n`);
@@ -236,7 +258,7 @@ async function verwerkTicket(t, state) {
     await new Promise(r => setTimeout(r, d * 1000));
     const sendRes = liveTest ? await sendLiveReply(t, antwoordTekst) : await sendSonnyReply(t, antwoordTekst);
     console.log(`  → SONNY antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status + ' ' + sendRes.body.substring(0, 200)}`);
-    await tPost(`/tickets/${t.id}/notes`, { note: `🌙 SONNY (AI-avonddienst, buiten openingstijden) — live verstuurd${acties}` });
+    await plaatsNotitie(t.id, `🌙 SONNY (AI-avonddienst, buiten openingstijden) — live verstuurd${acties}`);
     if (!sendRes.ok) {
       await telegram(`⚠️ Sonny verzenden MISLUKT op ticket ${t.id}: ${sendRes.status} ${sendRes.body.substring(0, 200)}`);
     } else {
@@ -254,7 +276,7 @@ async function verwerkTicket(t, state) {
     // klant wacht vaak al uren). Escalaties gaan zoals altijd stil naar Telegram.
     const sendRes = await sendActiefReply(t, res.antwoord);
     console.log(`  → ACTIEF antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status + ' ' + sendRes.body.substring(0, 200)}`);
-    await tPost(`/tickets/${t.id}/notes`, { note: `🤖 AI-KS (actief gesprek, door AI beheerd) — live verstuurd${acties}` });
+    await plaatsNotitie(t.id, `🤖 AI-KS (actief gesprek, door AI beheerd) — live verstuurd${acties}`);
     if (!sendRes.ok) await telegram(`⚠️ AI-KS actief-gesprek verzenden MISLUKT op ticket ${t.id}: ${sendRes.status} ${sendRes.body.substring(0, 200)}`);
   } else if (liveTest && res.antwoord) {
     // Menselijke typ-vertraging (config REPLY_DELAY; uit tijdens test, aan bij livegang)
@@ -266,16 +288,12 @@ async function verwerkTicket(t, state) {
     // LIVE-TEST: alleen voor whitelist-nummers (Daimy's testnummer) — écht versturen
     const sendRes = await sendLiveReply(t, res.antwoord);
     console.log(`  → LIVE-TEST antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status + ' ' + sendRes.body.substring(0, 200)}`);
-    await tPost(`/tickets/${t.id}/notes`, { note: `🤖 AI-KS LIVE-TEST (whitelist ${t.contact?.phone})${acties}` });
+    await plaatsNotitie(t.id, `🤖 AI-KS LIVE-TEST (whitelist ${t.contact?.phone})${acties}`);
     if (!sendRes.ok) await telegram(`⚠️ AI-KS live-test verzenden MISLUKT op ticket ${t.id}: ${sendRes.status} ${sendRes.body.substring(0, 200)}`);
   } else if (CFG.MODE === 'shadow') {
     const notitie = `🤖 AI-KLANTENSERVICE (schaduwmodus — NIET verstuurd)\n\nConcept-antwoord:\n${res.antwoord || '(geen antwoord — geëscaleerd)'}${acties}`;
     // Interne notitie op het ticket — team ziet het, klant niet
-    const noteRes = await tPost(`/tickets/${t.id}/notes`, { note: notitie });
-    if (!noteRes.ok) {
-      // Fallback endpoint-vorm
-      await tPost(`/tickets/${t.id}/messages`, { internal_note: true, body: notitie });
-    }
+    await plaatsNotitie(t.id, notitie);
   } else if (CFG.MODE === 'live') {
     // LIVE verzenden — pas actief als Daimy .live-enabled aanmaakt. Nog bewust niet geïmplementeerd.
     console.log('LIVE-modus nog niet vrijgegeven; er is niets verstuurd.');

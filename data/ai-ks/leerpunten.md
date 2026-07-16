@@ -2,3 +2,4 @@
 - (2026-07-16) Spreek klanten NOOIT aan met straattaal of woorden als "neef", "bro", "maat" o.i.d., ook niet als de klant zelf informeel appt. Gebruik gewoon de voornaam of geen aanspreekvorm. Vriendelijk en informeel mag, plat niet.
 - (2026-07-16) Elektra bij niet-solar motoren: wij regelen de stroomaansluiting ZELF bij de montage. We boren een gat door de gevel, trekken een kabel naar het dichtstbijzijnde stopcontact en werken dat netjes af met een kabelgoot. Zeg dus nooit dat de klant zelf een stroomaansluiting bij het raam moet hebben.
 - (2026-07-16) Levertijd/montagetijd noem je ALTIJD met precies deze zin: "De verwachte productietijd na het betalen van de aanbetalingsfactuur is 8-10 weken." Geen eigen varianten zoals "lever- en montagetijd" en niet koppelen aan het inmeten: de 8-10 weken gaan lopen na betaling van de aanbetalingsfactuur.
+- (2026-07-16) [team-notitie bij gesprek +31645656951] niet verder gaan met dit gesprek want kun jij de agenda inzien?

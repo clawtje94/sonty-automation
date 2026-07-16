@@ -32,6 +32,12 @@ Daimy: "handel de 21 open WA-tickets af, daarna weer uit, maar blijf vervolgvrag
 - Leerpunt toegevoegd: nooit "neef"/straattaal (Jorren kreeg "He neef!").
 - Vervolgvragen-watcher draait (watch 240 min, daarna launchd 5-min). Ochtendrapport telt actieve gesprekken nu mee.
 
+## @sonny-NOTITIES & TERUGKOMERS (16 juli, werkwijze Daimy)
+- **@sonny-notities in Trengo-gesprekken** (alleen AI-beheerde tickets + whitelist; sweep elke 5 min): STOP-woorden ("niet verder"/"stop met dit gesprek"/"neem over") = gesprek uit AI-beheer; al het andere = ALTIJD leerpunt (vaste kennis) ÉN de bot beoordeelt ZELF of het lopende gesprek nog een klant-bericht vraagt (agent antwoordt GEEN_BERICHT als niet nodig/verwarrend). Altijd ✅-notitie terug met terug-tag van de auteur (tagVoor: @{voornaam}{userId} via /users API). LET OP: los "stop" is GEEN stopwoord (stopcontact-valkuil).
+- **Terugkomers**: klant belooft terug te komen (TERUGKOM_PATROON) → na ~22u stilte één vriendelijke reminder (tekst Daimy: "kleine reminder vanaf mijn kant..."), nog binnen het 24u-venster; klant al gereageerd = vervalt; venster gemist = Telegram "bellen is enige route". State: data/ai-ks/terugkomers.json. Dit is BEWUST géén bulk-reminderdaemon (die blijven uit).
+- **Trengo-notities plaatsen**: POST /tickets/{id}/notes bestaat NIET (405); enige werkende vorm = POST /tickets/{id}/messages met {internal_note:true, message:...} (plaatsNotitie). Mentions: "@daimy736327"-formaat werkt en geeft echte melding.
+- **Sonny-account**: Trengo-user "Sonny Sonty" (id 747786) uitgenodigd op clawtje94@proton.me (UNVERIFIED). Zodra geaccepteerd + PAT gemaakt → token in scripts/ai-ks/.trengo-sonny-token.txt en de daemon verstuurt als Sonny.
+
 ## SONNY — WhatsApp-AI buiten openingstijden (16 juli, gebouwd, WACHT OP AAN-KNOP)
 Opdracht Daimy: buiten openingstijden reageert de AI live op ALLE WhatsApp-klanten, stelt zich eerlijk voor als digitale medewerker "Sonny" en helpt VOLLEDIG (ook offertes aanmaken/aanpassen, "dat gaan we juist checken"). Gebouwd in `scripts/ai-ks/`:
 - Openingstijden di-vr 9:30-17:00, za 9:30-16:00, ma+zo dicht (config.OPENINGSTIJDEN, tz-vast Europe/Amsterdam); daarbuiten is Sonny actief.

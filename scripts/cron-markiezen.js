@@ -263,8 +263,9 @@ async function main() {
           else if (mk.bediening === 'Draaischakelaar') d += '- Somfy LT motor met draaischakelaar\n';
           else d += '- ' + mk.bediening + '\n';
         }
-        d += '\nGarantie:\n- 2 jaar op de montage\n- 3 jaar op het product\n';
-        if (bedExcl > 0) d += '- 5 jaar op de motor';
+        // Garantiebeleid Daimy 2026-07-16: 3 jaar montage, 5 jaar product, 7 jaar motor
+        d += '\nGarantie:\n- 3 jaar op de montage\n- 5 jaar op het product\n';
+        if (bedExcl > 0) d += '- 7 jaar op de motor';
 
         markiesLines.push({ ...baseLine, units: mk.units, pricePerUnit: totaalIncl, position: 0, description: d });
         totalMontages += mk.units;

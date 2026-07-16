@@ -13,10 +13,41 @@ function resolveMode() {
   return 'shadow';
 }
 
+// Huidige tijd in Europe/Amsterdam (Mac kan in andere tz staan)
+function amsterdamNu() {
+  const s = new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Amsterdam' }); // "2026-07-16 14:23:45"
+  return { datum: s.slice(0, 10), dag: new Date(s.slice(0, 10) + 'T12:00:00').getDay(), hhmm: s.slice(11, 16) };
+}
+
 module.exports = {
   get MODE() { return resolveMode(); },
   MODEL: 'claude-opus-4-8',
   MAX_TOKENS: 4096,
+
+  // Openingstijden showroom/team (bron: sonty.nl/showroom). zo=0 ... za=6; null = hele dag dicht.
+  OPENINGSTIJDEN: { 0: null, 1: null, 2: ['09:30', '17:00'], 3: ['09:30', '17:00'], 4: ['09:30', '17:00'], 5: ['09:30', '17:00'], 6: ['09:30', '16:00'] },
+
+  // SONNY — de AI-medewerker die zich eerlijk als AI voorstelt en buiten openingstijden
+  // ALLE WhatsApp-klanten live helpt, met volledige tools (opdracht Daimy 2026-07-16:
+  // "volledig helpen, ook offertes aanpassen, dat gaan we juist checken").
+  // Aanzetten kan ALLEEN Daimy: bestand scripts/ai-ks/.sonny-enabled met inhoud 'JA ECHT'.
+  SONNY: {
+    get enabled() {
+      try { return fs.readFileSync(path.join(__dirname, '.sonny-enabled'), 'utf8').trim() === 'JA ECHT'; } catch { return false; }
+    },
+    MAX_GESPREKKEN_PER_DAG: 10, // nieuwe gesprekken per kalenderdag (testfase); lopende gesprekken tellen niet opnieuw
+    STATE_FILE: path.join(__dirname, '..', '..', 'data', 'ai-ks', 'sonny-state.json'),
+    // Rustig, menselijk reactietempo (±1-3 min) zodat snelle vervolgberichten gebundeld worden
+    DELAY: { baseSec: 60, perCharSec: 1 / 15, minSec: 45, maxSec: 180 },
+    INTRO: 'Hoi, Sonny hier, de digitale medewerker van Sonty. Buiten openingstijden help ik je alvast op weg. Kom ik er niet uit, dan pakt een collega het morgen voor je op.',
+  },
+
+  amsterdamNu,
+  isBuitenOpeningstijden(nu = amsterdamNu()) {
+    const venster = module.exports.OPENINGSTIJDEN[nu.dag];
+    if (!venster) return true;
+    return nu.hhmm < venster[0] || nu.hhmm >= venster[1];
+  },
 
   // LIVE-TEST WHITELIST: uitsluitend deze nummers krijgen een écht antwoord,
   // ook in schaduwmodus. Genormaliseerd formaat: 31xxxxxxxxx (geen +, geen 06).

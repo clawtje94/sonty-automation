@@ -16,7 +16,7 @@ const client = new Anthropic({ apiKey });
  */
 async function beantwoord(gesprek) {
   const ctx = {
-    acties: [], liveTest: !!gesprek.liveTest, ticketId: gesprek.ticketId || null,
+    acties: [], liveTest: !!gesprek.liveTest, sonny: !!gesprek.sonny, ticketId: gesprek.ticketId || null,
     // Harde eis Daimy: inmeet-doorzetting kan alleen als de offerte-link in dít gesprek gedeeld is
     offerteLinkGedeeld: (gesprek.berichten || []).some(b => b.van === 'sonty' && /document\.reuzenpanda\.nl/.test(b.tekst || '')),
   };
@@ -42,7 +42,7 @@ async function beantwoord(gesprek) {
       model: CFG.MODEL,
       max_tokens: CFG.MAX_TOKENS,
       thinking: { type: 'adaptive' },
-      system: buildSystemPrompt(),
+      system: buildSystemPrompt({ sonny: !!gesprek.sonny, introNodig: !!gesprek.sonnyIntroNodig }),
       tools: TOOL_DEFS,
       messages,
     });

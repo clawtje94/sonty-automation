@@ -25,6 +25,17 @@ Opdracht Daimy: alles bouwen zodat we binnenkort van RP af kunnen. Stand:
 > Dit document is het startpunt voor een nieuwe Claude-sessie (welk Anthropic-account dan ook).
 > Lees dit eerst, daarna de memory-index. Alle code staat in git (beide repos gepusht).
 
+## SONNY — WhatsApp-AI buiten openingstijden (16 juli, gebouwd, WACHT OP AAN-KNOP)
+Opdracht Daimy: buiten openingstijden reageert de AI live op ALLE WhatsApp-klanten, stelt zich eerlijk voor als digitale medewerker "Sonny" en helpt VOLLEDIG (ook offertes aanmaken/aanpassen, "dat gaan we juist checken"). Gebouwd in `scripts/ai-ks/`:
+- Openingstijden di-vr 9:30-17:00, za 9:30-16:00, ma+zo dicht (config.OPENINGSTIJDEN, tz-vast Europe/Amsterdam); daarbuiten is Sonny actief.
+- Vaste intro (config.SONNY.INTRO) wordt door de daemon vóór Sonny's eerste bericht in een gesprek geplakt; prompt-addendum (system-prompt.js sonnyBlok) zorgt dat hij als Sonny ondertekent en niet dubbel groet.
+- Reactievertraging 45-180s (menselijk tempo, bundelt snelle vervolgberichten), max 10 NIEUWE gesprekken per dag (lopende maakt hij af), alleen WhatsApp (geen e-mail in testfase). Escalaties (klacht/foto/korting/twijfel) blijven stil naar Telegram gaan.
+- launchd `nl.sonty.sonny` (elke 5 min `daemon.js --sonny-only`; doet binnen openingstijden NIETS, ook geen schaduwnotities) + `nl.sonty.sonny-rapport` (08:30, ochtendrapport van alle nachtgesprekken naar Telegram).
+- **AAN-KNOP (alleen Daimy)**: `scripts/ai-ks/.sonny-enabled` aanmaken met inhoud `JA ECHT`. Uitzetten = bestand weggooien.
+- **BLOCKER**: Anthropic API-tegoed is OP (16 juli getest) — zonder bijladen (console.anthropic.com/settings/billing) kan Sonny niet antwoorden. Daimy is gevraagd bij te laden + auto-reload.
+- Nog niet end-to-end getest met een echt gesprek (kan pas met tegoed); eerste avond na aanzetten actief monitoren via logs/sonny.log en data/ai-ks/log.jsonl (entries sonny:true).
+- Garantiebeleid vastgesteld door Daimy (16 juli): 3 jaar montage / 5 jaar product / 7 jaar motor — doorgevoerd in v4-markiezenblok, cron-markiezen.js en trengo-kennisbank.md (zeiden 2/3/5).
+
 ## Prijs-steekproef & V4-prijscontrole gefixt (16 juli, commit 404413b)
 Daimy kreeg dagenlang Telegram-alerts "prijzen kloppen niet". Uitkomst onderzoek:
 - 6 van 10 meldingen (7-16 juli) waren VALS: het steekproef-script had een eigen kopie van de kleurlogica zonder trendkleuren (RAL 9007/7021). Fix: steekproef rekent nu via v4's eigen `correctProductPrice` (dry-run), kan niet meer uit de pas lopen.

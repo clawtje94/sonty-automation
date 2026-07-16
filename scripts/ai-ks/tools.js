@@ -201,7 +201,7 @@ async function runTool(name, input, ctx) {
       const { maakLead, registreerPending } = require('./rp-offerte-create.js');
       const res = await maakLead(input);
       if (res.error) return JSON.stringify({ status: 'MISLUKT', fout: res.error, opmerking: 'Zeg dat een collega de offerte zo snel mogelijk maakt en roep escaleren_naar_mens aan.' });
-      registreerPending({ lcId: res.lcId, ticketId: ctx.ticketId, klantNaam: input.naam, producten: input.producten });
+      registreerPending({ lcId: res.lcId, ticketId: ctx.ticketId, klantNaam: input.naam, producten: input.producten, sonny: !!ctx.sonny });
       return JSON.stringify({ status: 'IN_BEHANDELING', opmerking: 'De offerte wordt aangemaakt (±5 minuten). De klant krijgt de link daarna AUTOMATISCH hier op WhatsApp — zeg dat erbij en beloof geen exacte tijd korter dan dat.' });
     }
     return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets aangemaakt. Zeg dat de offerte zo snel mogelijk volgt via een collega.' });

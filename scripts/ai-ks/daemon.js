@@ -66,9 +66,33 @@ async function sendLiveReply(t, tekst) {
   return tPost(`/tickets/${t.id}/messages`, { message: tekst, type: 'OUTBOUND' });
 }
 
+function isWaTicket(t) {
+  return t.channel?.id === CFG.WA_CHANNEL_ID || t.channel?.type === 'WA_BUSINESS';
+}
+
 function isRelevantTicket(t) {
-  if (t.channel?.id === CFG.WA_CHANNEL_ID || t.channel?.type === 'WA_BUSINESS') return true;
+  if (isWaTicket(t)) return true;
   return CFG.EMAIL_CHANNEL_NAMES.includes(t.channel?.title);
+}
+
+// ---- SONNY: buiten openingstijden live voor ALLE WhatsApp-klanten (config.SONNY) ----
+function loadSonnyState() {
+  try { return JSON.parse(fs.readFileSync(CFG.SONNY.STATE_FILE, 'utf8')); } catch { return { introTickets: {}, dagTeller: {}, lastRapport: null }; }
+}
+function saveSonnyState(s) {
+  fs.mkdirSync(path.dirname(CFG.SONNY.STATE_FILE), { recursive: true });
+  fs.writeFileSync(CFG.SONNY.STATE_FILE, JSON.stringify(s));
+}
+function sonnyActiefNu() {
+  return CFG.SONNY.enabled && CFG.isBuitenOpeningstijden();
+}
+async function sendSonnyReply(t, tekst) {
+  // Eigen verdedigingslagen (los van de whitelist): alleen WhatsApp, alleen als Sonny
+  // aan staat én het buiten openingstijden is, nooit leeg.
+  if (!sonnyActiefNu()) throw new Error('sendSonnyReply geblokkeerd: Sonny niet actief (binnen openingstijden of .sonny-enabled ontbreekt)');
+  if (!isWaTicket(t)) throw new Error('sendSonnyReply geblokkeerd: geen WhatsApp-ticket');
+  if (!tekst || !tekst.trim()) throw new Error('sendSonnyReply geblokkeerd: leeg antwoord');
+  return tPost(`/tickets/${t.id}/messages`, { message: tekst, type: 'OUTBOUND' });
 }
 
 async function verwerkTicket(t, state) {
@@ -93,11 +117,27 @@ async function verwerkTicket(t, state) {
   const leeftijdSec = (Date.now() - new Date(String(laatste.tijd).replace(' ', 'T'))) / 1000;
   if (isFinite(leeftijdSec) && leeftijdSec < 45) return; // volgende poll-ronde
 
+  // SONNY: buiten openingstijden behandelen we WhatsApp-klanten live, eerlijk als AI.
+  const sonnyMode = isWaTicket(t) && sonnyActiefNu();
+  const sonnyState = sonnyMode ? loadSonnyState() : null;
+  const sonnyIntroNodig = sonnyMode && !sonnyState.introTickets[t.id];
+  if (sonnyMode && sonnyIntroNodig && !isLiveTestContact(t)) {
+    // Dagcap alleen voor NIEUWE gesprekken (lopende gesprekken maken we altijd af)
+    const dag = CFG.amsterdamNu().datum;
+    if ((sonnyState.dagTeller[dag] || 0) >= CFG.SONNY.MAX_GESPREKKEN_PER_DAG) {
+      log({ ticket: t.id, sonny: true, overgeslagen: 'dagcap bereikt', klant: t.contact?.full_name || t.contact?.phone });
+      state.verwerkt[sleutel] = { tijd: new Date().toISOString(), sonnyCap: true }; // team pakt het 's ochtends op
+      return;
+    }
+  }
+
   const gesprek = {
     kanaal: t.channel?.type === 'WA_BUSINESS' ? 'WA' : 'EMAIL',
     klant: { naam: t.contact?.full_name || null, email: t.contact?.email || null, phone: t.contact?.phone || null },
     berichten: rows.slice(-25),
-    liveTest: isLiveTestContact(t), // whitelist-nummers: actie-tools mogen echt uitvoeren
+    liveTest: isLiveTestContact(t) || sonnyMode, // actie-tools mogen echt uitvoeren
+    sonny: sonnyMode,
+    sonnyIntroNodig,
     ticketId: t.id,
   };
 
@@ -110,7 +150,28 @@ async function verwerkTicket(t, state) {
     : '';
 
   const liveTest = isLiveTestContact(t);
-  if (liveTest && res.antwoord) {
+  if (sonnyMode && res.antwoord) {
+    const antwoordTekst = (sonnyIntroNodig ? CFG.SONNY.INTRO + '\n\n' : '') + res.antwoord;
+    // Rustig, menselijk tempo (±1-3 min)
+    const d = Math.min(CFG.SONNY.DELAY.maxSec, Math.max(CFG.SONNY.DELAY.minSec, CFG.SONNY.DELAY.baseSec + res.antwoord.length * CFG.SONNY.DELAY.perCharSec));
+    console.log(`  Sonny typ-vertraging ${Math.round(d)}s...`);
+    await new Promise(r => setTimeout(r, d * 1000));
+    const sendRes = liveTest ? await sendLiveReply(t, antwoordTekst) : await sendSonnyReply(t, antwoordTekst);
+    console.log(`  → SONNY antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status + ' ' + sendRes.body.substring(0, 200)}`);
+    await tPost(`/tickets/${t.id}/notes`, { note: `🌙 SONNY (AI-avonddienst, buiten openingstijden) — live verstuurd${acties}` });
+    if (!sendRes.ok) {
+      await telegram(`⚠️ Sonny verzenden MISLUKT op ticket ${t.id}: ${sendRes.status} ${sendRes.body.substring(0, 200)}`);
+    } else {
+      if (sonnyIntroNodig) {
+        sonnyState.introTickets[t.id] = new Date().toISOString();
+        if (!liveTest) {
+          const dag = CFG.amsterdamNu().datum;
+          sonnyState.dagTeller[dag] = (sonnyState.dagTeller[dag] || 0) + 1;
+        }
+      }
+      saveSonnyState(sonnyState);
+    }
+  } else if (liveTest && res.antwoord) {
     // Menselijke typ-vertraging (config REPLY_DELAY; uit tijdens test, aan bij livegang)
     if (CFG.REPLY_DELAY?.enabled) {
       const d = Math.min(CFG.REPLY_DELAY.maxSec, Math.max(CFG.REPLY_DELAY.minSec, CFG.REPLY_DELAY.baseSec + res.antwoord.length * CFG.REPLY_DELAY.perCharSec));
@@ -148,7 +209,7 @@ async function verwerkTicket(t, state) {
   }
 
   state.verwerkt[sleutel] = { tijd: new Date().toISOString(), acties: res.acties.length };
-  log({ ticket: t.id, kanaal: gesprek.kanaal, klant: gesprek.klant, laatsteKlantBericht: laatste.tekst.substring(0, 500), antwoord: res.antwoord, acties: res.acties, toolCalls: res.toolCalls, usage: res.usage, mode: CFG.MODE });
+  log({ ticket: t.id, kanaal: gesprek.kanaal, klant: gesprek.klant, laatsteKlantBericht: laatste.tekst.substring(0, 500), antwoord: res.antwoord, acties: res.acties, toolCalls: res.toolCalls, usage: res.usage, mode: CFG.MODE, sonny: sonnyMode });
   console.log(`  → notitie geplaatst (${res.acties.length} acties, ${res.toolCalls.length} tool-calls)`);
 }
 
@@ -196,10 +257,15 @@ async function verwerkPendingOffertes() {
     // Link appen op het oorspronkelijke ticket (met whitelist-check)
     const tRes = await tGet(`/tickets/${p.ticketId}`);
     const ticket = tRes?.data || tRes;
-    if (ticket && isLiveTestContact(ticket)) {
+    // Link mag naar de klant bij: whitelist-test, of een Sonny-gesprek (buiten openingstijden
+    // aangemaakt; de nalevering zelf mag ook net ná opening nog, klant verwacht hem).
+    const magSonnyLeveren = p.sonny && CFG.SONNY.enabled && ticket && isWaTicket(ticket);
+    if (ticket && (isLiveTestContact(ticket) || magSonnyLeveren)) {
       const voornaam = (p.klantNaam || '').split(' ')[0];
       const bericht = `Hi ${voornaam}, je offerte staat klaar. Je bekijkt hem hier: ${res.link}\n\nOffertenummer: ${doc.quotationNumber || ''}\nDe offerte is 7 dagen geldig. Neem hem rustig door en laat maar weten als je vragen hebt!`;
-      const sendRes = await sendLiveReply(ticket, bericht);
+      const sendRes = isLiveTestContact(ticket)
+        ? await sendLiveReply(ticket, bericht)
+        : await tPost(`/tickets/${ticket.id}/messages`, { message: bericht, type: 'OUTBOUND' });
       console.log(`  → pending offerte geleverd aan ${p.klantNaam}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status}`);
     }
     p.status = 'klaar';
@@ -208,7 +274,13 @@ async function verwerkPendingOffertes() {
   savePending(pending);
 }
 
-async function pollRonde(state, { onlyTest }) {
+async function pollRonde(state, { onlyTest, sonnyOnly }) {
+  // --sonny-only (avonddienst-cron): binnen openingstijden helemaal niets doen —
+  // dan is het team er zelf en mag deze cron geen schaduwnotities of antwoorden plaatsen.
+  if (sonnyOnly && !sonnyActiefNu()) {
+    console.log(`[${new Date().toLocaleTimeString()}] Sonny: ${CFG.SONNY.enabled ? 'binnen openingstijden, team is er — niets doen' : '.sonny-enabled ontbreekt — uit'}`);
+    return;
+  }
   try { await verwerkPendingOffertes(); } catch (e) { console.error('pending-offertes FOUT:', e.message); }
   const specificTicket = process.argv.includes('--ticket') ? process.argv[process.argv.indexOf('--ticket') + 1] : null;
 
@@ -228,8 +300,10 @@ async function pollRonde(state, { onlyTest }) {
 
   // --only-test: ALLEEN whitelist-tickets aanraken; alle andere volledig negeren (ook geen notities)
   if (onlyTest) tickets = tickets.filter(isLiveTestContact);
+  // --sonny-only: alleen WhatsApp (Sonny doet geen e-mail in de testfase)
+  if (sonnyOnly) tickets = tickets.filter(isWaTicket);
 
-  console.log(`[${new Date().toLocaleTimeString()}] AI-KS (${CFG.MODE.toUpperCase()}${onlyTest ? ', ONLY-TEST' : ''}): ${tickets.length} kandidaat-tickets`);
+  console.log(`[${new Date().toLocaleTimeString()}] AI-KS (${CFG.MODE.toUpperCase()}${onlyTest ? ', ONLY-TEST' : ''}${sonnyActiefNu() ? ', SONNY ACTIEF' : ''}): ${tickets.length} kandidaat-tickets`);
   for (const t of tickets) {
     try { await verwerkTicket(t, state); }
     catch (e) { console.error(`Ticket ${t.id} FOUT:`, e.message); log({ ticket: t.id, fout: String(e.message || e) }); }
@@ -244,19 +318,20 @@ async function pollRonde(state, { onlyTest }) {
 (async () => {
   const state = loadState();
   const onlyTest = process.argv.includes('--only-test');
+  const sonnyOnly = process.argv.includes('--sonny-only');
   const watchIdx = process.argv.indexOf('--watch');
   const watchMin = watchIdx >= 0 ? parseInt(process.argv[watchIdx + 1] || '60', 10) : 0;
 
   if (watchMin > 0) {
-    console.log(`Watch-modus: elke 30s pollen, ${watchMin} minuten lang${onlyTest ? ' (alleen whitelist-nummers)' : ''}.`);
+    console.log(`Watch-modus: elke 30s pollen, ${watchMin} minuten lang${onlyTest ? ' (alleen whitelist-nummers)' : ''}${sonnyOnly ? ' (alleen Sonny/WA)' : ''}.`);
     const tot = Date.now() + watchMin * 60000;
     while (Date.now() < tot) {
-      await pollRonde(state, { onlyTest });
+      await pollRonde(state, { onlyTest, sonnyOnly });
       await new Promise(r => setTimeout(r, 30000));
     }
     console.log('Watch-venster afgelopen.');
   } else {
-    await pollRonde(state, { onlyTest });
+    await pollRonde(state, { onlyTest, sonnyOnly });
     console.log('Klaar.');
   }
 })();

@@ -544,7 +544,7 @@ Onze prijzen zijn all-in en inclusief:
 ### Standaard garantie
 - **5 jaar op het product** (frame, cassette, armen, geleiders, doek)
 - **7 jaar op de Somfy motor**
-- **2 jaar op de montage**
+- **3 jaar op de montage**
 - Sunmaster is een Nederlands merk met eigen productie in Nijkerk — onderdelen zijn altijd beschikbaar
 
 ### Wat valt onder garantie?

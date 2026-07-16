@@ -36,6 +36,12 @@ Opdracht Daimy: buiten openingstijden reageert de AI live op ALLE WhatsApp-klant
 - Nog niet end-to-end getest met een echt gesprek (kan pas met tegoed); eerste avond na aanzetten actief monitoren via logs/sonny.log en data/ai-ks/log.jsonl (entries sonny:true).
 - Garantiebeleid vastgesteld door Daimy (16 juli): 3 jaar montage / 5 jaar product / 7 jaar motor — doorgevoerd in v4-markiezenblok, cron-markiezen.js en trengo-kennisbank.md (zeiden 2/3/5).
 
+## Visualisatie-tool: stand-keuze open/ingerold (16 juli, live)
+Klacht Daimy: AI koos zelf de stand (dicht knikarmscherm; rolluiken opgerold zonder product voor de ramen). Fix in ~/sonty-website (commit 824ef4e, branch verzendcentrum, gedeployed):
+- Per product (knikarm, screens, rolluiken, uitvalschermen) een expliciete stand-keuze in de UI: "Uitgeklapt/Neergelaten (product zichtbaar)" (standaard) of "Ingerold (alleen cassette/kast)". Pergola en markiezen bewust niet (vaste vorm).
+- Stand = {{stand}}-token in de prompt met keiharde MUST-instructies; bij ingerold geen doekkleur-instructie (verleidde model om toch doek te tekenen).
+- Responsive gecheckt op iPhone 12 (audit OK, screenshot geverifieerd). LET OP: publieke tool draait op sonty-website.vercel.app; sonty.nl wijst nog NIET naar Vercel (bekende open taak).
+
 ## Prijs-steekproef & V4-prijscontrole gefixt (16 juli, commit 404413b)
 Daimy kreeg dagenlang Telegram-alerts "prijzen kloppen niet". Uitkomst onderzoek:
 - 6 van 10 meldingen (7-16 juli) waren VALS: het steekproef-script had een eigen kopie van de kleurlogica zonder trendkleuren (RAL 9007/7021). Fix: steekproef rekent nu via v4's eigen `correctProductPrice` (dry-run), kan niet meer uit de pas lopen.

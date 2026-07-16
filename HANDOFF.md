@@ -32,6 +32,9 @@ Daimy: "handel de 21 open WA-tickets af, daarna weer uit, maar blijf vervolgvrag
 - Leerpunt toegevoegd: nooit "neef"/straattaal (Jorren kreeg "He neef!").
 - Vervolgvragen-watcher draait (watch 240 min, daarna launchd 5-min). Ochtendrapport telt actieve gesprekken nu mee.
 
+## WERKMODUS KLANTENSERVICE (besluit Daimy 16 juli, avond)
+Doorgaan op de huidige manier: AI antwoordt als JAIMY, géén Sonny-vermelding of intro richting klanten. Sonny-avonddienst (.sonny-enabled) blijft UIT tot Daimy anders zegt. Daimy leest elke ochtend alle antwoorden terug en geeft per chat/notitie feedback; die wordt via leerpunten verwerkt. Ochtendrapport 08:30 dekt actieve gesprekken + kosten.
+
 ## @sonny-NOTITIES & TERUGKOMERS (16 juli, werkwijze Daimy)
 - **@sonny-notities in Trengo-gesprekken** (alleen AI-beheerde tickets + whitelist; sweep elke 5 min): STOP-woorden ("niet verder"/"stop met dit gesprek"/"neem over") = gesprek uit AI-beheer; al het andere = ALTIJD leerpunt (vaste kennis) ÉN de bot beoordeelt ZELF of het lopende gesprek nog een klant-bericht vraagt (agent antwoordt GEEN_BERICHT als niet nodig/verwarrend). Altijd ✅-notitie terug met terug-tag van de auteur (tagVoor: @{voornaam}{userId} via /users API). LET OP: los "stop" is GEEN stopwoord (stopcontact-valkuil).
 - **Terugkomers**: klant belooft terug te komen (TERUGKOM_PATROON) → na ~22u stilte één vriendelijke reminder (tekst Daimy: "kleine reminder vanaf mijn kant..."), nog binnen het 24u-venster; klant al gereageerd = vervalt; venster gemist = Telegram "bellen is enige route". State: data/ai-ks/terugkomers.json. Dit is BEWUST géén bulk-reminderdaemon (die blijven uit).

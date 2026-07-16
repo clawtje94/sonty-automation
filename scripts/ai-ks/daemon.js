@@ -317,9 +317,11 @@ async function verwerkTicket(t, state) {
   console.log(`Ticket ${t.id} (${gesprek.kanaal}, ${gesprek.klant.naam || 'onbekend'}): agent draait...`);
   const res = await beantwoord(gesprek);
 
-  // Interne notitie samenstellen
+  // Interne notitie samenstellen. In live-modus zijn de acties ÉCHT uitgevoerd — de oude
+  // formulering "zou uitvoeren" (schaduwmodus) verwarde het team (vraag Daimy 16 juli).
+  const actiesEcht = sonnyMode || actiefTicket || isLiveTestContact(t);
   const acties = res.acties.length
-    ? '\n\nActies die de AI zou uitvoeren:\n' + res.acties.map(a => '- ' + JSON.stringify(a)).join('\n')
+    ? `\n\n${actiesEcht ? 'Uitgevoerde acties:' : 'Acties die de AI zou uitvoeren (schaduwmodus, NIET uitgevoerd):'}\n` + res.acties.map(a => '- ' + JSON.stringify(a)).join('\n')
     : '';
 
   const liveTest = isLiveTestContact(t);

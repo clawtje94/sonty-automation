@@ -53,7 +53,13 @@ const kort = (s, n) => { s = (s || '').replace(/\s+/g, ' ').trim(); return s.len
     blokken.push(`• ${wie} (ticket ${ticket})\n  Vraag: ${kort(e.laatsteKlantBericht, 120)}\n  Sonny: ${kort(e.antwoord, 160) || '(stil geëscaleerd)'}${acts.length ? '\n  Acties: ' + acts.join(', ') : ''}`);
   }
 
-  const kop = `🌙 Sonny-ochtendrapport: ${perTicket.size} gesprek(ken) vannacht, ${offerteActies} offerte-actie(s), ${escalaties} escalatie(s)${capSkips ? `, ${capSkips} overgeslagen (dagcap, team oppakken!)` : ''}.\n\n`;
+  // Kostenschatting (bovengrens): log telt cache-reads als input mee, dus echt is het lager.
+  // Opus 4.8: $5/M input, $25/M output.
+  let inTok = 0, outTok = 0;
+  for (const e of regels) { inTok += e.usage?.input_tokens || 0; outTok += e.usage?.output_tokens || 0; }
+  const kostenMax = (inTok / 1e6) * 5 + (outTok / 1e6) * 25;
+
+  const kop = `🌙 Sonny-ochtendrapport: ${perTicket.size} gesprek(ken) vannacht, ${offerteActies} offerte-actie(s), ${escalaties} escalatie(s)${capSkips ? `, ${capSkips} overgeslagen (dagcap, team oppakken!)` : ''}. API-kosten: hooguit ~$${kostenMax.toFixed(2)}.\n\n`;
   await telegram(kop + blokken.join('\n\n') + '\n\nVolledige teksten: data/ai-ks/log.jsonl. Feedback? App het hier, dan stel ik Sonny bij.');
 
   state.lastRapport = new Date().toISOString();

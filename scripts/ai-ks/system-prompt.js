@@ -7,6 +7,22 @@ const path = require('path');
 
 const KENNISBANK = fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'trengo-kennisbank.md'), 'utf8');
 
+// Volledig Sunmaster-prijsboek 2026 (geverifieerde samenvatting, zelfde bron als de
+// v4-prijsengine). Opdracht Daimy 2026-07-16: alle prijsboek-kennis inleren zodat de AI
+// optie- en accessoireprijzen (LED, handzenders, muursteunen, sensoren, minderprijzen,
+// maatgrenzen) zelf kan beantwoorden i.p.v. escaleren. Bewust het brondocument zelf
+// (geen overgetypte samenvatting = geen overtypfouten).
+const PRIJSBOEK = fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'sunmaster-pricing-2026.md'), 'utf8');
+
+const PRIJSBOEK_REGELS = `# PRIJSBOEK-NASLAG (Sunmaster 2026 — geverifieerd)
+Hieronder staat de volledige samenvatting van het officiële Sunmaster-prijsboek 2026, dezelfde bron als onze prijsengine. Zo gebruik je hem:
+- Bedragen hierin zijn SUNMASTER BOEKPRIJZEN. Klantprijs = boekprijs × 1,10 (onze vaste opslag). Daarna geldt de 15% actiekorting op de offerte zoals altijd (die trek je niet zelf van losse optieprijzen af; noem de optieprijs en zeg dat de actiekorting op het offertetotaal zit).
+- Voor COMPLETE productprijzen (scherm/screen/rolluik met maat, bediening en kleur) gebruik je ALTIJD de tool prijs_berekenen — die verwerkt maatstaffels, bediening en kleurmeerprijzen exact. Dit naslagwerk is voor: losse opties en accessoires (handzenders, LED-verlichting, muursteunen, windsensoren), meer-/minderprijzen van bedieningen, maatgrenzen, standaardkleuren en welke varianten leverbaar zijn.
+- Bekende valkuilen: bij een solar-rolluik hoort ALTIJD de verplichte handzender (boek p37/38). LED-verlichting kan alleen op de SunElite. Roma-prijzen staan hier NIET in (Roma is netto excl. btw × 1,15, een ander systeem — nooit mengen met Sunmaster).
+- Staat iets er niet in of twijfel je over de uitleg: escaleren_naar_mens met leervraag. Nooit een prijs gokken of afronden naar wat "logisch lijkt".
+
+`;
+
 const ROL = `Je bent Jaimy van Sonty (zonwering & raamdecoratie, Rijswijk). "Jaimy" is de vaste klantnaam van het hele team — zo onderteken jij ook. Je beantwoordt klantberichten via WhatsApp en e-mail: vriendelijk, kundig, informeel maar professioneel. Altijd je-vorm, nooit "u" (tenzij de klant zelf consequent "u" gebruikt).
 
 # JOUW DOEL (in deze volgorde)
@@ -222,7 +238,9 @@ function leerpunten() {
 
 function buildSystemPrompt(opts = {}) {
   const blokken = [
-    { type: 'text', text: ROL + '\n\n# KENNISBANK (achtergrond)\n' + KENNISBANK + leerpunten(), cache_control: { type: 'ephemeral' } },
+    // 1-uurs cache i.p.v. 5 min: gesprekken lopen door de avond heen; reads kosten 0,1×.
+    // Elke cache-hit verlengt de TTL, dus tijdens een actieve avond blijft hij warm.
+    { type: 'text', text: ROL + '\n\n' + PRIJSBOEK_REGELS + PRIJSBOEK + '\n\n# KENNISBANK (achtergrond)\n' + KENNISBANK + leerpunten(), cache_control: { type: 'ephemeral', ttl: '1h' } },
   ];
   if (opts.sonny) blokken.push({ type: 'text', text: sonnyBlok(!!opts.introNodig) });
   return blokken;

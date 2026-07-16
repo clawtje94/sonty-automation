@@ -52,7 +52,7 @@ const v4Snippets = [
   src.match(/const MK_UITVAL_COLS[\s\S]*?const MK_BEDIENING = \{[\s\S]*?\};/)[0],
   src.match(/const STANDAARD_KLEUREN_MAP = \{[\s\S]*?\};/)[0],
 ];
-for (const fn of ['findNearest', 'getCategory', 'getProductKey', 'extractField', 'extractMaatFromDesc', 'lookupPrice', 'calculateCorrectPrice', 'isStandaardKleur', 'mkLookupMarkies', 'mkLookupBovenkap', 'mkLookupZijkap', 'mkGetTabel', 'mkTotaalExcl']) {
+for (const fn of ['findNearest', 'getCategory', 'getProductKey', 'extractField', 'extractMaatFromDesc', 'lookupPrice', 'calculateCorrectPrice', 'correctProductPrice', 'isStandaardKleur', 'mkLookupMarkies', 'mkLookupBovenkap', 'mkLookupZijkap', 'mkGetTabel', 'mkTotaalExcl']) {
   v4Snippets.push(grab(fn));
 }
 eval(v4Snippets.join('\n'));
@@ -68,16 +68,6 @@ async function telegram(text) {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ chat_id: TG_CHAT, text }),
   }).catch(() => {});
-}
-
-// Zelfde bedieningsdetectie als v4 correctProductPrice
-function bedTypeFromDesc(desc) {
-  const bedStr = (extractField(desc, 'Bediening') || '').toLowerCase();
-  const motorStr = (extractField(desc, 'Motor') || '').toLowerCase();
-  if (motorStr.includes('solar') || bedStr.includes('solar')) return 'solar';
-  if (bedStr.includes('draaischakelaar') || motorStr.includes(' lt') || motorStr.includes('orea')) return 'draaischakelaar';
-  if (bedStr.includes('handbediend') || bedStr.includes('slingerstang') || bedStr.includes('band')) return 'handbediend';
-  return 'io';
 }
 
 (async () => {
@@ -122,32 +112,31 @@ function bedTypeFromDesc(desc) {
       // Sunmaster-zipscreen prijzen en valse afwijkingen melden. Duo-offertes zijn bovendien
       // machine-gegenereerd uit roma-prices-2025.json, dus buiten scope net als markiezen.
       if (fl.includes('roma')) continue;
+      // Voorraadschermen hebben een handmatige actieprijs; het woord 'voorraad' kan uit de
+      // titel ontbreken (bv. #20269669) — de standaard voorraadzin in de tekst telt ook.
+      if (desc.includes('Direct leverbaar uit voorraad')) continue;
       if (l.pricePerUnit <= 0) continue;
       const pKey = getProductKey(firstLine);
       if (!pKey) continue; // markiezen/onbekende producten: buiten scope van de steekproef
       const maat = extractMaatFromDesc(desc);
       if (!maat.breedte && !maat.hoogte) continue;
       regels++;
-      const bedType = bedTypeFromDesc(desc);
-      let verwacht = calculateCorrectPrice(pKey, maat.breedte, maat.hoogte, maat.uitval, bedType);
-      if (verwacht === null) {
+      // Exact hetzelfde rekenpad als v4 (correctProductPrice, dry-run op een kopie). Een eigen
+      // kopie van de kleur-/bedieningslogica liep uit de pas (kende trendkleuren niet) en gaf
+      // dagenlang valse alerts op offertes die gewoon klopten.
+      const proef = { description: desc, pricePerUnit: l.pricePerUnit };
+      const origLog = console.log;
+      console.log = () => {}; // correctProductPrice logt "Prijs gecorrigeerd" — hier alleen rekenen
+      let pc;
+      try { pc = correctProductPrice(proef, pKey, maat.breedte, maat.hoogte, maat.uitval); }
+      finally { console.log = origLog; }
+      if (pc.priceUnknown) {
         afwijkingen.push('#' + doc.quotationNumber + ' ' + item.summary + ': "' + firstLine.replace(/\*/g, '') + '" — prijs niet bepaalbaar (maat buiten tabel?), staat op €' + l.pricePerUnit);
         continue;
       }
-      // RAL/trend meerprijs zoals v4 (alleen framekleur, zelfde aanname)
-      const kleurStr = (desc.match(/Frame [Kk]leur:\s*([^\n(]+)/)?.[1] || '').trim();
-      if (kleurStr && !isStandaardKleur(pKey, kleurStr)) {
-        const product = SUNMASTER_PRICES[pKey];
-        const pCat = product?.category === 'zipscreen' ? 'screen' : product?.category;
-        if (pCat === 'rolluik') verwacht = Math.round(verwacht * 1.20 * 100) / 100;
-        else if (pCat === 'serre' || pCat === 'pergola') verwacht = Math.round(verwacht * 1.15 * 100) / 100;
-        else if (product?.meerprijsRAL) {
-          const e = findNearest(product.meerprijsRAL, maat.breedte);
-          if (e) verwacht = Math.round((verwacht + e.value * MARKUP) * 100) / 100;
-        }
-      }
-      const verschil = Math.round((l.pricePerUnit - verwacht) * 100) / 100;
-      if (Math.abs(verschil) > 1) {
+      if (pc.changed) {
+        const verwacht = proef.pricePerUnit;
+        const verschil = Math.round((l.pricePerUnit - verwacht) * 100) / 100;
         afwijkingen.push('#' + doc.quotationNumber + ' ' + item.summary + ': "' + firstLine.replace(/\*/g, '') + '" staat op €' + l.pricePerUnit + ', hoort €' + verwacht + ' (' + (verschil > 0 ? '+' : '') + verschil + ')');
       }
     }

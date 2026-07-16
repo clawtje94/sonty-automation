@@ -23,6 +23,10 @@ const SUNMASTER_PRICES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '
 const MARKUP = 1.10;
 
 // Roma duo-offertes (instructie Daimy 2026-07-03): bij rolluik/screen ook een apart Roma-document
+// UITGEZET op instructie Daimy 2026-07-13: klanten kregen de duo verstuurd terwijl de
+// Sunmaster-hoofdofferte op DRAFT bleef (73 gevallen, hersteld via inhaal-sunmaster-mail.js).
+// Weer aanzetten? Eerst de verstuurstap fixen zodat ALTIJD de hoofdofferte verstuurd wordt.
+const ROMA_DUO_AAN = false;
 const { maakRomaDuo, romaEquivalent } = require('./roma-duo-offerte.js');
 const ROMA_DUO_LOG = path.join(__dirname, '..', 'data', 'roma-duo-gemaakt.json');
 let romaDuoLog = {};
@@ -58,12 +62,15 @@ const MK_BOVENKAP_HARDHOUT = [122,127,139,149,157,163,175,188,195,200,205,213,22
 const MK_BOVENKAP_ALU = [185,190,213,229,242,252,268,284,300,307,315,327,340,351,364,379,391,406,418,430,450,465,481,496,507,522,536,547,558,574,588];
 const MK_ZIJKAP_HARDHOUT = [105,110,117,124,134,145,177,197,216];
 const MK_ZIJKAP_ALU = [132,156,165,174,184,199,216,228,242];
+// Markiezen Nederland prijslijst 2026 p29/31: motorprijzen zijn KAAL; zender los
+// (Situo 1 RTS/IO €80, Brel 1-kanaals €55). Zender zit nu in de prijs zodat het
+// label klopt (fix 2026-07-14 n.a.v. offerte 20269441 — gold voor alle e-markiezen).
 const MK_BEDIENING = {
   'Handbediend': { excl: 0, label: 'Handbediend (koord): geen motor nodig' },
   'Draaischakelaar': { excl: 330, label: 'Draaischakelaar (Somfy LT motor): vaste schakelaar aan de muur' },
-  'Motor + afstandsbediening': { excl: 495, label: 'Motor + afstandsbediening (Somfy IO): bedien je markies elektrisch' },
-  'Brel Solar motor': { excl: 565, label: 'Brel Solar motor: draadloze motor op zonne-energie' },
-  'Somfy IO motor Solar': { excl: 665, label: 'Somfy Solar motor: draadloze motor op zonne-energie met afstandsbediening' },
+  'Motor + afstandsbediening': { excl: 575, label: 'Motor + afstandsbediening (Somfy IO, incl. Situo 1 zender): bedien je markies elektrisch' },
+  'Brel Solar motor': { excl: 620, label: 'Brel Solar motor (incl. handzender): draadloze motor op zonne-energie' },
+  'Somfy IO motor Solar': { excl: 745, label: 'Somfy Solar motor (incl. Situo 1 zender): draadloze motor op zonne-energie met afstandsbediening' },
 };
 
 function mkLookupMarkies(tabel, breedteMM, uitvalMM) {
@@ -1242,14 +1249,14 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
     if (isIO) totaal += hz;
     else if (isDraaischakelaar) totaal -= 89; // LT50
     else if (isSolar) totaal += 173 + hz; // Somfy RS 100 IO Solar (excl zender) + handzender
-    else if (bedieningType === 'solarBrel') totaal += 59; // Brel Solar €135 incl zender i.p.v. Sunilus IO
+    else if (bedieningType === 'solarBrel') totaal += 135; // Boek p9/11: Solaruitvoering Brel incl. 1-kanaals handzender = meerprijs t.o.v. tabel (was foutief 59)
     else totaal += hz;
   }
   else if (pCat === 'rolluik') {
     // Tabel = RS 100 IO
     if (isIO) totaal += hz;
     else if (isDraaischakelaar) totaal -= 150; // LT50
-    else if (isSolar) totaal += 239; // Solar RS100IO, handzender apart
+    else if (isSolar) totaal += 239 + hz; // Solar RS100IO + verplichte handzender (boek p37/38: "dient altijd mee besteld te worden")
     else if (bedieningType === 'solarBrel') totaal += 199; // Brel Solar incl zender
     else if (isHandbediend) totaal -= 260; // bandbediening
     else totaal += hz;
@@ -1662,9 +1669,10 @@ async function main() {
         const newDesc = transformProductDesc(lines[i].description, lastCat, lastBed);
         if (newDesc !== lines[i].description) { lines[i].description = newDesc; changed = true; }
         // V4: Prijscorrectie (Sunmaster boekprijs × 1.10)
-        // Voorraadschermen: NIET aanpassen (handmatige prijs)
+        // Voorraadschermen: NIET aanpassen (handmatige actieprijs). Titel kan het woord
+        // 'voorraad' missen (bv. #20269669) — de standaard voorraadzin in de tekst telt ook.
         const pKey = getProductKey(firstLine);
-        if (pKey && !firstLine.toLowerCase().includes('voorraad')) {
+        if (pKey && !firstLine.toLowerCase().includes('voorraad') && !lines[i].description.includes('Direct leverbaar uit voorraad')) {
           const maat = extractMaatFromDesc(lines[i].description);
           if (maat.breedte || maat.hoogte) {
             const pc = correctProductPrice(lines[i], pKey, maat.breedte, maat.hoogte, maat.uitval);
@@ -1774,7 +1782,7 @@ async function main() {
         const t = (l.description || '').split('\n')[0].replace(/\*\*/g, '').trim();
         return !/inmeten|montage|korting|actie/i.test(t) && romaEquivalent(t);
       });
-      if (heeftKandidaat && !romaDuoLog[docInfo.documentId]) {
+      if (ROMA_DUO_AAN && heeftKandidaat && !romaDuoLog[docInfo.documentId]) {
         const duo = await maakRomaDuo(docInfo.documentId);
         if (duo.ok) {
           romaDuoLog[docInfo.documentId] = { romaNummer: duo.romaNummer, romaDocumentId: duo.romaDocumentId, bron: docInfo.quotationNumber, klant: item.summary, tijd: new Date().toISOString() };
@@ -2089,9 +2097,9 @@ if (testName) {
           catBed[cat] = lastBed;
           const newDesc = transformProductDesc(lines[i].description, lastCat, lastBed);
           if (newDesc !== lines[i].description) lines[i].description = newDesc;
-          // Prijscorrectie (niet bij voorraadschermen)
+          // Prijscorrectie (niet bij voorraadschermen — ook herkennen aan voorraadzin in tekst)
           const pKey = getProductKey(firstLine);
-          if (pKey && !firstLine.toLowerCase().includes('voorraad')) {
+          if (pKey && !firstLine.toLowerCase().includes('voorraad') && !lines[i].description.includes('Direct leverbaar uit voorraad')) {
             const maat = extractMaatFromDesc(lines[i].description);
             if (maat.breedte || maat.hoogte) {
               const pc = correctProductPrice(lines[i], pKey, maat.breedte, maat.hoogte, maat.uitval);

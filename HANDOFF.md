@@ -32,6 +32,9 @@ Daimy: "handel de 21 open WA-tickets af, daarna weer uit, maar blijf vervolgvrag
 - Leerpunt toegevoegd: nooit "neef"/straattaal (Jorren kreeg "He neef!").
 - Vervolgvragen-watcher draait (watch 240 min, daarna launchd 5-min). Ochtendrapport telt actieve gesprekken nu mee.
 
+## VOLLEDIGE BOEKEN IN DE BOT (16 juli ~23:30, eis Daimy: "er mag NIKS meer ontbreken")
+Samenvattingen lieten details vallen (bv. LED "(kleur en wit)"). Nu zit de VOLLEDIGE ruwe tekstlaag in de systemprompt: data/prijsboeken/sunmaster-2026-tekst.txt (pdftotext van Downloads/"Sunmaster 2026 goed.pdf"), data/prijsboeken/unilux-2026-tekst.txt (adviesprijslijst) en docs/roma-prijsstructuur-2025.md. Prompt nu ~123k tokens (1h-cache; ±$0,19/antwoord aan reads). Regels: producttotalen ALTIJD via prijs_berekenen (tabellen in ruwe tekst zijn rommelig); details/opties/doeken uit de boektekst; Roma apart systeem. Detailtest OK (LED kleur+wit, Starlight Blue 80% petflessen). Kwaliteitspoort (QA-check elke uitgaande tekst, Haiku) + Trengo-429-retry + claim-early dedupe + datumbesef zitten er ook in sinds vanavond.
+
 ## TRENGO-TOKENS (16 juli ~21:15, LET OP)
 Daimys persoonlijke Trengo-token werd 401 (ongeldig; kopie in scripts/.trengo-api-token-daimy-ongeldig.txt). Alle scripts draaien nu op het SONNY-token (user 747786): scripts/.trengo-api-token.txt = kopie van scripts/ai-ks/.trengo-sonny-token.txt. Gevolg: ook v4's offerte-link-WhatsApps en overige Trengo-acties staan op naam van Sonny Sonty. Wil Daimy team-scripts weer onder eigen naam → nieuwe token van zijn account aanleveren en in scripts/.trengo-api-token.txt zetten. Telegram-intake: webhook was weggevallen; berichten komen via launchd nl.sonty.telegram-poll in telegram-inbox.txt; read-telegram-webhook.js toont nu ALTIJD de laatste 3 regels (leespositie werd door meerdere processen gedeeld waardoor een bericht stil verdween).
 

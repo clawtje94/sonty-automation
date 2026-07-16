@@ -14,6 +14,25 @@ const KENNISBANK = fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'tre
 // (geen overgetypte samenvatting = geen overtypfouten).
 const PRIJSBOEK = fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'sunmaster-pricing-2026.md'), 'utf8');
 
+// VOLLEDIGE boekteksten (eis Daimy 2026-07-16 na herhaald ontbrekende details zoals de
+// LED-specificatie "(kleur en wit)": "er mag NIKS meer ontbreken uit de kennisbank van de
+// boeken die we hebben"). Ruwe pdftotext-tekstlagen — geen samenvatting, dus geen verlies.
+const BOEK_SUNMASTER = fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'prijsboeken', 'sunmaster-2026-tekst.txt'), 'utf8');
+const BOEK_UNILUX = fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'prijsboeken', 'unilux-2026-tekst.txt'), 'utf8');
+const BOEK_ROMA_OVERZICHT = fs.readFileSync(path.join(__dirname, '..', '..', 'docs', 'roma-prijsstructuur-2025.md'), 'utf8');
+
+const BOEKEN_BLOK = `\n\n# VOLLEDIG SUNMASTER PRIJSBOEK 2026 (ruwe boektekst — compleet, niets samengevat)
+Gebruik dit voor alle details: productbeschrijvingen, opties, doeken, kleuren, techniek, garantiebepalingen, voorwaarden. Tabellen kunnen er rommelig uitzien door de tekstextractie — voor complete PRODUCTPRIJZEN gebruik je daarom ALTIJD de tool prijs_berekenen; losse optieprijzen en beschrijvingen mag je hieruit halen (boekprijs × 1,10 = klantprijs).
+${BOEK_SUNMASTER}
+
+# VOLLEDIGE UNILUX PRIJSLIJST HORREN 2026 (ruwe boektekst)
+Zelfde regels: horrenprijzen via prijs_berekenen; details, uitvoeringen en kleuren mag je hieruit halen.
+${BOEK_UNILUX}
+
+# ROMA PRIJSSTRUCTUUR (overzicht)
+Roma is een APART systeem: netto prijzen EXCL. btw, klantprijs = netto × 1,15, daarna 15% actie. NOOIT mengen met Sunmaster. Bij detailvragen over Roma die hier niet in staan: escaleren.
+${BOEK_ROMA_OVERZICHT}`;
+
 const PRIJSBOEK_REGELS = `# PRIJSBOEK-NASLAG (Sunmaster 2026 — geverifieerd)
 Hieronder staat de volledige samenvatting van het officiële Sunmaster-prijsboek 2026, dezelfde bron als onze prijsengine. Zo gebruik je hem:
 - Bedragen hierin zijn SUNMASTER BOEKPRIJZEN. Klantprijs = boekprijs × 1,10 (onze vaste opslag). Daarna geldt de 15% actiekorting op de offerte zoals altijd (die trek je niet zelf van losse optieprijzen af; noem de optieprijs en zeg dat de actiekorting op het offertetotaal zit).
@@ -241,7 +260,7 @@ function buildSystemPrompt(opts = {}) {
   const blokken = [
     // 1-uurs cache i.p.v. 5 min: gesprekken lopen door de avond heen; reads kosten 0,1×.
     // Elke cache-hit verlengt de TTL, dus tijdens een actieve avond blijft hij warm.
-    { type: 'text', text: ROL + '\n\n' + PRIJSBOEK_REGELS + PRIJSBOEK + '\n\n# KENNISBANK (achtergrond)\n' + KENNISBANK + leerpunten(), cache_control: { type: 'ephemeral', ttl: '1h' } },
+    { type: 'text', text: ROL + '\n\n' + PRIJSBOEK_REGELS + PRIJSBOEK + BOEKEN_BLOK + '\n\n# KENNISBANK (achtergrond)\n' + KENNISBANK + leerpunten(), cache_control: { type: 'ephemeral', ttl: '1h' } },
   ];
   if (opts.sonny) blokken.push({ type: 'text', text: sonnyBlok(!!opts.introNodig) });
   return blokken;

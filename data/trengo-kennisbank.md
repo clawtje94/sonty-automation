@@ -190,7 +190,7 @@ Een knikarmscherm (ook wel zonnescherm of markies) is een uitrolbaar doek dat bo
 - Knikarmscherm uit het allerhoogste segment
 - Volledig gesloten cassette met maximale bescherming
 - Zwaardere constructie dan SunEye
-- Optioneel: LED-verlichting in de cassette (sfeerverlichting op je terras)
+- Optioneel: LED-verlichting in de cassette (sfeerverlichting op je terras) — Somfy IO, 2 kanalen, meerprijs EUR 823,90 incl btw (voor de 15% actiekorting)
 - Uitval tot 350cm, maximaal 600cm breed
 - Alleen leverbaar in RAL 9010 mat of Antraciet structuur
 

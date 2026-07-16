@@ -86,6 +86,19 @@ function saveSonnyState(s) {
 function sonnyActiefNu() {
   return CFG.SONNY.enabled && CFG.isBuitenOpeningstijden();
 }
+// ---- ACTIEVE GESPREKKEN: echte klanttickets die de AI beheert (opdracht Daimy 2026-07-16:
+// open tickets afhandelen en daarna alleen déze gesprekken blijven beantwoorden, als Jaimy,
+// zonder Sonny-intro). Nieuwe tickets blijven voor het team tot Sonny's avonddienst aan staat.
+const ACTIEF_FILE = path.join(path.dirname(CFG.POLL_STATE_FILE), 'actieve-tickets.json');
+function loadActief() { try { return JSON.parse(fs.readFileSync(ACTIEF_FILE, 'utf8')); } catch { return {}; } }
+function isActiefTicket(t) { return !!loadActief()[t.id]; }
+async function sendActiefReply(t, tekst) {
+  if (!isActiefTicket(t)) throw new Error('sendActiefReply geblokkeerd: ticket staat niet in actieve-tickets.json');
+  if (!isWaTicket(t)) throw new Error('sendActiefReply geblokkeerd: geen WhatsApp-ticket');
+  if (!tekst || !tekst.trim()) throw new Error('sendActiefReply geblokkeerd: leeg antwoord');
+  return tPost(`/tickets/${t.id}/messages`, { message: tekst, type: 'OUTBOUND' });
+}
+
 // Credits op terwijl een klant op antwoord wacht = klantenservice staat stil → luid alarm.
 // Dedupe 1x/uur via hetzelfde state-bestand als de 2-uurlijkse watchdog (check-anthropic-credits.js).
 const CREDITS_STATE = path.join(path.dirname(CFG.SONNY.STATE_FILE), 'credits-state.json');
@@ -147,6 +160,8 @@ async function verwerkTicket(t, state) {
   // Whitelist-testnummers krijgen ALTIJD de Sonny-persona (ook overdag, ook vóór de
   // aan-knop): dat is wat we testen en trainen (Daimy 2026-07-16).
   const sonnyMode = isWaTicket(t) && (sonnyActiefNu() || isLiveTestContact(t));
+  // ACTIEF: door de AI beheerd klantgesprek → live antwoorden als Jaimy, zonder intro.
+  const actiefTicket = !sonnyMode && isWaTicket(t) && isActiefTicket(t);
   const sonnyState = sonnyMode ? loadSonnyState() : null;
   const sonnyIntroNodig = sonnyMode && !sonnyState.introTickets[t.id];
   if (sonnyMode && sonnyIntroNodig && !isLiveTestContact(t)) {
@@ -163,7 +178,7 @@ async function verwerkTicket(t, state) {
     kanaal: t.channel?.type === 'WA_BUSINESS' ? 'WA' : 'EMAIL',
     klant: { naam: t.contact?.full_name || null, email: t.contact?.email || null, phone: t.contact?.phone || null },
     berichten: rows.slice(-25),
-    liveTest: isLiveTestContact(t) || sonnyMode, // actie-tools mogen echt uitvoeren
+    liveTest: isLiveTestContact(t) || sonnyMode || actiefTicket, // actie-tools mogen echt uitvoeren
     sonny: sonnyMode,
     sonnyIntroNodig,
     ticketId: t.id,
@@ -199,6 +214,13 @@ async function verwerkTicket(t, state) {
       }
       saveSonnyState(sonnyState);
     }
+  } else if (actiefTicket && res.antwoord) {
+    // Actief klantgesprek: direct antwoorden als Jaimy (geen kunstmatige vertraging; de
+    // klant wacht vaak al uren). Escalaties gaan zoals altijd stil naar Telegram.
+    const sendRes = await sendActiefReply(t, res.antwoord);
+    console.log(`  → ACTIEF antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status + ' ' + sendRes.body.substring(0, 200)}`);
+    await tPost(`/tickets/${t.id}/notes`, { note: `🤖 AI-KS (actief gesprek, door AI beheerd) — live verstuurd${acties}` });
+    if (!sendRes.ok) await telegram(`⚠️ AI-KS actief-gesprek verzenden MISLUKT op ticket ${t.id}: ${sendRes.status} ${sendRes.body.substring(0, 200)}`);
   } else if (liveTest && res.antwoord) {
     // Menselijke typ-vertraging (config REPLY_DELAY; uit tijdens test, aan bij livegang)
     if (CFG.REPLY_DELAY?.enabled) {
@@ -237,7 +259,7 @@ async function verwerkTicket(t, state) {
   }
 
   state.verwerkt[sleutel] = { tijd: new Date().toISOString(), acties: res.acties.length };
-  log({ ticket: t.id, kanaal: gesprek.kanaal, klant: gesprek.klant, laatsteKlantBericht: laatste.tekst.substring(0, 500), antwoord: res.antwoord, acties: res.acties, toolCalls: res.toolCalls, usage: res.usage, mode: CFG.MODE, sonny: sonnyMode });
+  log({ ticket: t.id, kanaal: gesprek.kanaal, klant: gesprek.klant, laatsteKlantBericht: laatste.tekst.substring(0, 500), antwoord: res.antwoord, acties: res.acties, toolCalls: res.toolCalls, usage: res.usage, mode: CFG.MODE, sonny: sonnyMode, actief: actiefTicket });
   console.log(`  → notitie geplaatst (${res.acties.length} acties, ${res.toolCalls.length} tool-calls)`);
 }
 
@@ -326,8 +348,12 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
     }
   }
 
-  // whitelist-modus: ALLEEN whitelist-tickets aanraken; alle andere volledig negeren (ook geen notities)
-  if (effOnlyTest) tickets = tickets.filter(isLiveTestContact);
+  // whitelist-modus: alleen whitelist-tickets + actieve (AI-beheerde) gesprekken aanraken;
+  // alle andere volledig negeren (ook geen notities)
+  if (effOnlyTest) {
+    const actief = loadActief();
+    tickets = tickets.filter(tt => isLiveTestContact(tt) || !!actief[tt.id]);
+  }
   // --sonny-only: alleen WhatsApp (Sonny doet geen e-mail in de testfase)
   if (sonnyOnly) tickets = tickets.filter(isWaTicket);
 

@@ -83,6 +83,20 @@ async function plaatsNotitie(ticketId, tekst) {
   return tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: tekst });
 }
 
+// Mention-tag voor een Trengo-gebruiker: "@{voornaam}{user_id}" (zo werkte @daimy736327).
+// Naam wordt éénmalig via de API opgehaald en gecachet; fallback = Daimy.
+const userTagCache = { 736327: '@daimy736327' };
+async function tagVoor(userId) {
+  if (!userId) return '@daimy736327';
+  if (userTagCache[userId]) return userTagCache[userId];
+  try {
+    const u = await tGet(`/users/${userId}`);
+    const naam = (u?.data?.first_name || u?.first_name || '').toLowerCase().replace(/[^a-z]/g, '');
+    userTagCache[userId] = naam ? `@${naam}${userId}` : '@daimy736327';
+  } catch { userTagCache[userId] = '@daimy736327'; }
+  return userTagCache[userId];
+}
+
 function isRelevantTicket(t) {
   if (isWaTicket(t)) return true;
   return CFG.EMAIL_CHANNEL_NAMES.includes(t.channel?.title);
@@ -150,6 +164,8 @@ async function verwerkSonnyNotities(t, teamNotities) {
         fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actief, null, 1));
       }
       await telegram(`🛑 Gesprek ${wie} (ticket ${t.id}) is op jouw @sonny-notitie UIT het AI-beheer gehaald. De bot antwoordt daar niet meer; het team neemt het over.`);
+      // Altijd als opmerking terug reageren en de tagger terugtaggen (werkwijze Daimy)
+      await plaatsNotitie(t.id, `${await tagVoor(n.userId)} ✅ Verwerkt: dit gesprek is uit AI-beheer gehaald. De bot antwoordt hier niet meer, het team neemt het over.`);
       st[key] = new Date().toISOString();
       nieuw = true;
       continue;
@@ -158,6 +174,8 @@ async function verwerkSonnyNotities(t, teamNotities) {
       fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leerpunten.md'),
         `- (${new Date().toISOString().slice(0, 10)}) [team-notitie bij gesprek ${wie}] ${punt}\n`);
       await telegram(`🎓 @sonny-notitie verwerkt als leerpunt (gesprek ${wie}):\n"${punt.substring(0, 300)}"\n\nZit per direct in de kennis van de bot.`);
+      // Altijd als opmerking terug reageren en de tagger terugtaggen (werkwijze Daimy)
+      await plaatsNotitie(t.id, `${await tagVoor(n.userId)} ✅ Verwerkt als vaste kennis: "${punt.substring(0, 220)}". De bot past dit vanaf nu in alle gesprekken toe.`);
     }
     st[key] = new Date().toISOString();
     nieuw = true;
@@ -181,12 +199,13 @@ async function verwerkTicket(t, state) {
     tekst: clean(m.body || m.message),
     tijd: m.created_at,
     intern: !!m.internal_note || m.type === 'NOTE',
+    userId: m.user_id || null,
   })).filter(m => m.tekst)
     .sort((a, b) => String(a.tijd).localeCompare(String(b.tijd))); // Trengo geeft nieuwste-eerst; wij willen oud → nieuw
   const rows = alleRijen.filter(m => !m.intern);
   // Interne notities van het TEAM = sturing voor de AI (bv. "@sonny wij boren dan een gat...",
   // vraag Daimy 2026-07-16). Eigen AI-notities eruit filteren (anders praat hij tegen zichzelf).
-  const teamNotities = alleRijen.filter(m => m.intern && !/AI-KS|SONNY \(AI|schaduwmodus|live verstuurd/i.test(m.tekst)).slice(-5);
+  const teamNotities = alleRijen.filter(m => m.intern && !/AI-KS|SONNY \(AI|schaduwmodus|live verstuurd|✅ Verwerkt/i.test(m.tekst)).slice(-5);
   // @sonny-notities altijd verwerken tot leerpunt, óók als er niets te beantwoorden valt
   // (Daimy plaatst ze vaak nadat het gesprek al beantwoord is).
   try { await verwerkSonnyNotities(t, teamNotities); } catch (e) { console.error('  notitie-leerpunt FOUT:', e.message); }

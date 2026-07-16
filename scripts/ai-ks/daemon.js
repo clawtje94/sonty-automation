@@ -126,6 +126,16 @@ async function sendActiefReply(t, tekst) {
   return tPost(`/tickets/${t.id}/messages`, { message: tekst, type: 'OUTBOUND' });
 }
 
+// NACHTMODUS (Daimy 2026-07-16 avond): tot het tijdstip in .nieuwe-tickets-tot mag de AI
+// ook NIEUWE WhatsApp-tickets helpen (zelfde regels: Jaimy, geen intro). Elk opgepakt
+// ticket wordt actief geregistreerd zodat vervolgvragen ook ná het venster beantwoord worden.
+function nieuweTicketsToegestaan() {
+  try {
+    const tot = fs.readFileSync(path.join(__dirname, '.nieuwe-tickets-tot'), 'utf8').trim();
+    return new Date() < new Date(tot);
+  } catch { return false; }
+}
+
 // Credits op terwijl een klant op antwoord wacht = klantenservice staat stil → luid alarm.
 // Dedupe 1x/uur via hetzelfde state-bestand als de 2-uurlijkse watchdog (check-anthropic-credits.js).
 const CREDITS_STATE = path.join(path.dirname(CFG.SONNY.STATE_FILE), 'credits-state.json');
@@ -289,6 +299,13 @@ async function verwerkTicket(t, state) {
   // Whitelist-testnummers krijgen ALTIJD de Sonny-persona (ook overdag, ook vóór de
   // aan-knop): dat is wat we testen en trainen (Daimy 2026-07-16).
   const sonnyMode = isWaTicket(t) && (sonnyActiefNu() || isLiveTestContact(t));
+  // Nachtmodus: nieuw WA-ticket direct als actief registreren (mag versturen + blijft beheerd)
+  if (!sonnyMode && isWaTicket(t) && !isActiefTicket(t) && !isLiveTestContact(t) && nieuweTicketsToegestaan()) {
+    const a = loadActief();
+    a[t.id] = { sinds: new Date().toISOString(), klant: t.contact?.full_name || t.contact?.phone || null, bron: 'nachtmodus' };
+    fs.writeFileSync(ACTIEF_FILE, JSON.stringify(a, null, 1));
+    console.log(`  nieuw ticket ${t.id} geregistreerd als actief (nachtmodus)`);
+  }
   // ACTIEF: door de AI beheerd klantgesprek → live antwoorden als Jaimy, zonder intro.
   const actiefTicket = !sonnyMode && isWaTicket(t) && isActiefTicket(t);
   const sonnyState = sonnyMode ? loadSonnyState() : null;
@@ -550,7 +567,8 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
   // alle andere volledig negeren (ook geen notities)
   if (effOnlyTest) {
     const actief = loadActief();
-    tickets = tickets.filter(tt => isLiveTestContact(tt) || !!actief[tt.id]);
+    const nachtmodus = nieuweTicketsToegestaan();
+    tickets = tickets.filter(tt => isLiveTestContact(tt) || !!actief[tt.id] || (nachtmodus && isWaTicket(tt)));
   }
   // --sonny-only: alleen WhatsApp (Sonny doet geen e-mail in de testfase)
   if (sonnyOnly) tickets = tickets.filter(isWaTicket);

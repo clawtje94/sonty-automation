@@ -110,6 +110,33 @@ async function alertCreditsOp() {
   fs.writeFileSync(CREDITS_STATE, JSON.stringify({ status: 'op', laatsteAlert: Date.now() }));
 }
 
+// @sonny-notities in een gesprek zijn óók leerpunten voor de kennisbank (werkwijze Daimy
+// 2026-07-16: "ik ga in de gesprekken @sonny zetten met op- en aanmerkingen die in de
+// kennisbank verwerkt moeten worden"). Elke nieuwe @sonny-notitie gaat naar leerpunten.md
+// (per direct in de prompt) + bevestiging op Telegram. Dedupe via notitie-leerpunten.json.
+const NOTITIE_STATE = path.join(path.dirname(CFG.LOG_FILE), 'notitie-leerpunten.json');
+async function verwerkSonnyNotities(t, teamNotities) {
+  const sonnyNotes = teamNotities.filter(n => /@sonny/i.test(n.tekst));
+  if (!sonnyNotes.length) return;
+  let st;
+  try { st = JSON.parse(fs.readFileSync(NOTITIE_STATE, 'utf8')); } catch { st = {}; }
+  let nieuw = false;
+  for (const n of sonnyNotes) {
+    const key = `${t.id}:${n.tijd}`;
+    if (st[key]) continue;
+    const punt = n.tekst.replace(/@sonny[,:]?\s*/i, '').trim();
+    const wie = t.contact?.full_name || t.contact?.phone || t.id;
+    if (punt) {
+      fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leerpunten.md'),
+        `- (${new Date().toISOString().slice(0, 10)}) [team-notitie bij gesprek ${wie}] ${punt}\n`);
+      await telegram(`🎓 @sonny-notitie verwerkt als leerpunt (gesprek ${wie}):\n"${punt.substring(0, 300)}"\n\nZit per direct in de kennis van de bot.`);
+    }
+    st[key] = new Date().toISOString();
+    nieuw = true;
+  }
+  if (nieuw) fs.writeFileSync(NOTITIE_STATE, JSON.stringify(st, null, 1));
+}
+
 async function sendSonnyReply(t, tekst) {
   // Eigen verdedigingslagen (los van de whitelist): alleen WhatsApp, alleen als Sonny
   // aan staat én het buiten openingstijden is, nooit leeg.
@@ -132,6 +159,9 @@ async function verwerkTicket(t, state) {
   // Interne notities van het TEAM = sturing voor de AI (bv. "@sonny wij boren dan een gat...",
   // vraag Daimy 2026-07-16). Eigen AI-notities eruit filteren (anders praat hij tegen zichzelf).
   const teamNotities = alleRijen.filter(m => m.intern && !/AI-KS|SONNY \(AI|schaduwmodus|live verstuurd/i.test(m.tekst)).slice(-5);
+  // @sonny-notities altijd verwerken tot leerpunt, óók als er niets te beantwoorden valt
+  // (Daimy plaatst ze vaak nadat het gesprek al beantwoord is).
+  try { await verwerkSonnyNotities(t, teamNotities); } catch (e) { console.error('  notitie-leerpunt FOUT:', e.message); }
   if (!rows.length) return;
 
   const laatste = rows[rows.length - 1];

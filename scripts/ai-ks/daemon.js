@@ -142,16 +142,20 @@ async function alertCreditsOp() {
 // kennisbank verwerkt moeten worden"). Elke nieuwe @sonny-notitie gaat naar leerpunten.md
 // (per direct in de prompt) + bevestiging op Telegram. Dedupe via notitie-leerpunten.json.
 const NOTITIE_STATE = path.join(path.dirname(CFG.LOG_FILE), 'notitie-leerpunten.json');
+// Verwerkt @sonny-notities. Drie soorten: STOP (gesprek uit AI-beheer), OPDRACHT ("vraag/zeg/
+// stuur ... " → de bot moet NU iets doen in dit gesprek; wordt als lijst teruggegeven zodat
+// verwerkTicket hem uitvoert) en LEERPUNT (al het andere → vaste kennis).
 async function verwerkSonnyNotities(t, teamNotities) {
+  const instructies = [];
   const sonnyNotes = teamNotities.filter(n => /@sonny/i.test(n.tekst));
-  if (!sonnyNotes.length) return;
+  if (!sonnyNotes.length) return instructies;
   let st;
   try { st = JSON.parse(fs.readFileSync(NOTITIE_STATE, 'utf8')); } catch { st = {}; }
   let nieuw = false;
   for (const n of sonnyNotes) {
     const key = `${t.id}:${n.tijd}`;
     if (st[key]) continue;
-    const punt = n.tekst.replace(/@sonny[,:]?\s*/i, '').trim();
+    const punt = n.tekst.replace(/@sonny(747786)?[,:]?\s*/i, '').trim();
     const wie = t.contact?.full_name || t.contact?.phone || t.id;
     // STOPCOMMANDO: "@sonny stop" / "niet verder (gaan) met dit gesprek" / "neem over" →
     // gesprek uit de actieve lijst halen; de AI antwoordt daar dan niet meer. Geen leerpunt.
@@ -170,6 +174,13 @@ async function verwerkSonnyNotities(t, teamNotities) {
       nieuw = true;
       continue;
     }
+    // OPDRACHT: notitie die begint met een werkwoord als "vraag/zeg/stuur/check/meld" =
+    // iets dat de bot NU in dít gesprek moet doen (bv. "vraag even of hij uitval bedoelt").
+    // Geen leerpunt; verwerkTicket voert hem direct uit en plaatst daarna de ✅-notitie.
+    if (/^(vraag|zeg|stuur|meld|check|antwoord|geef|laat.*weten)\b/i.test(punt)) {
+      instructies.push({ key, punt, userId: n.userId });
+      continue; // markeren gebeurt pas ná succesvolle uitvoering
+    }
     if (punt) {
       fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leerpunten.md'),
         `- (${new Date().toISOString().slice(0, 10)}) [team-notitie bij gesprek ${wie}] ${punt}\n`);
@@ -181,6 +192,15 @@ async function verwerkSonnyNotities(t, teamNotities) {
     nieuw = true;
   }
   if (nieuw) fs.writeFileSync(NOTITIE_STATE, JSON.stringify(st, null, 1));
+  return instructies;
+}
+
+// Markeer een notitie als verwerkt (na succesvolle uitvoering van een opdracht)
+function markeerNotitie(key) {
+  let st;
+  try { st = JSON.parse(fs.readFileSync(NOTITIE_STATE, 'utf8')); } catch { st = {}; }
+  st[key] = new Date().toISOString();
+  fs.writeFileSync(NOTITIE_STATE, JSON.stringify(st, null, 1));
 }
 
 async function sendSonnyReply(t, tekst) {
@@ -206,9 +226,45 @@ async function verwerkTicket(t, state) {
   // Interne notities van het TEAM = sturing voor de AI (bv. "@sonny wij boren dan een gat...",
   // vraag Daimy 2026-07-16). Eigen AI-notities eruit filteren (anders praat hij tegen zichzelf).
   const teamNotities = alleRijen.filter(m => m.intern && !/AI-KS|SONNY \(AI|schaduwmodus|live verstuurd|✅ Verwerkt/i.test(m.tekst)).slice(-5);
-  // @sonny-notities altijd verwerken tot leerpunt, óók als er niets te beantwoorden valt
-  // (Daimy plaatst ze vaak nadat het gesprek al beantwoord is).
-  try { await verwerkSonnyNotities(t, teamNotities); } catch (e) { console.error('  notitie-leerpunt FOUT:', e.message); }
+  // @sonny-notities altijd verwerken (leerpunt/stop/opdracht), óók als er niets te
+  // beantwoorden valt (Daimy plaatst ze vaak nadat het gesprek al beantwoord is).
+  let teamInstructies = [];
+  try { teamInstructies = await verwerkSonnyNotities(t, teamNotities); } catch (e) { console.error('  notitie-leerpunt FOUT:', e.message); }
+
+  // OPDRACHT-notities uitvoeren: de bot stuurt nu een bericht in dit gesprek volgens de
+  // aanwijzing van het team, en bevestigt met een ✅-notitie + terug-tag.
+  if (teamInstructies.length && isWaTicket(t) && (isActiefTicket(t) || isLiveTestContact(t))) {
+    const opdracht = teamInstructies.map(i => i.punt).join('\n');
+    console.log(`Ticket ${t.id}: team-opdracht uitvoeren: ${opdracht.slice(0, 80)}...`);
+    const res = await beantwoord({
+      kanaal: 'WA',
+      klant: { naam: t.contact?.full_name || null, email: t.contact?.email || null, phone: t.contact?.phone || null },
+      berichten: rows.slice(-25),
+      liveTest: true,
+      sonny: false,
+      teamNotities,
+      teamInstructie: opdracht,
+      ticketId: t.id,
+    });
+    if (res.antwoord) {
+      const sendRes = isLiveTestContact(t) ? await sendLiveReply(t, res.antwoord) : await sendActiefReply(t, res.antwoord);
+      console.log(`  → OPDRACHT-antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status}`);
+      if (sendRes.ok) {
+        for (const i of teamInstructies) {
+          markeerNotitie(i.key);
+          await plaatsNotitie(t.id, `${await tagVoor(i.userId)} ✅ Verwerkt: je opdracht is uitgevoerd, het bericht aan de klant is verstuurd.`);
+        }
+        log({ ticket: t.id, kanaal: 'WA', klant: { phone: t.contact?.phone }, teamOpdracht: opdracht.slice(0, 300), antwoord: res.antwoord, acties: res.acties, toolCalls: res.toolCalls, usage: res.usage, actief: true });
+      } else {
+        await telegram(`⚠️ Team-opdracht bij ticket ${t.id} kon niet verstuurd worden: ${sendRes.status}`);
+      }
+    } else {
+      await telegram(`⚠️ Team-opdracht bij ticket ${t.id}: de bot kwam niet tot een antwoord (geëscaleerd?). Opdracht: "${opdracht.slice(0, 200)}"`);
+      for (const i of teamInstructies) markeerNotitie(i.key);
+    }
+    return; // opdracht afgehandeld; normale flow volgt bij het volgende klantbericht
+  }
+
   if (!rows.length) return;
 
   const laatste = rows[rows.length - 1];
@@ -402,6 +458,8 @@ async function verwerkPendingOffertes() {
   savePending(pending);
 }
 
+let laatsteActiefSweep = 0;
+
 async function pollRonde(state, { onlyTest, sonnyOnly }) {
   // --sonny-only (AI-dienst-cron): buiten openingstijden bedient Sonny alle WA-klanten
   // (mits .sonny-enabled). Binnen openingstijden — of zolang Sonny uit staat — alleen de
@@ -436,6 +494,23 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
   if (sonnyOnly) tickets = tickets.filter(isWaTicket);
 
   console.log(`[${new Date().toLocaleTimeString()}] AI-KS (${CFG.MODE.toUpperCase()}${effOnlyTest ? ', WHITELIST-ONLY' : ''}${sonnyNu ? ', SONNY ACTIEF' : ''}): ${tickets.length} kandidaat-tickets`);
+
+  // ACTIEF-SWEEP (elke 5 min): actieve gesprekken direct op ID ophalen. De paginascan hierboven
+  // mist tickets die dieper in de lijst staan (notities duwen een ticket niet omhoog), waardoor
+  // @sonny-notities daar bleven liggen — ontdekt 16 juli.
+  if (!specificTicket && Date.now() - laatsteActiefSweep > 5 * 60000) {
+    laatsteActiefSweep = Date.now();
+    const actiefIds = Object.keys(loadActief()).filter(id => !tickets.some(t => String(t.id) === String(id)));
+    if (actiefIds.length) console.log(`  actief-sweep: ${actiefIds.length} gesprekken direct checken`);
+    for (const tid of actiefIds) {
+      try {
+        const res = await tGet(`/tickets/${tid}`);
+        const at = res?.data || res;
+        if (at && at.status === 'OPEN') tickets.push(at);
+      } catch (e) { console.error('  actief-sweep FOUT', tid, e.message); }
+      await new Promise(r => setTimeout(r, 300));
+    }
+  }
   for (const t of tickets) {
     try { await verwerkTicket(t, state); }
     catch (e) {

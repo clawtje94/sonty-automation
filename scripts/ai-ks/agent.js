@@ -32,6 +32,12 @@ async function beantwoord(gesprek) {
       gesprek.teamNotities.map(n => `- (${n.tijd}) ${n.tekst}`).join('\n') + '\n\n'
     : '';
 
+  // Team-opdracht (bv. "@sonny vraag even of hij uitval bedoelt"): de bot moet nu zelf
+  // een bericht sturen, ook als het laatste bericht niet van de klant is.
+  const slotInstructie = gesprek.teamInstructie
+    ? `# OPDRACHT VAN HET TEAM VOOR NU\nHet team wil dat je nú het volgende doet in dit gesprek: ${gesprek.teamInstructie}\nSchrijf het bericht aan de klant dat deze opdracht uitvoert (alleen de tekst die naar de klant gaat). Sluit qua toon aan op het lopende gesprek en noem de opdracht of het team niet.`
+    : `Het laatste bericht is van de klant. Schrijf jouw antwoord (alleen de tekst die naar de klant gaat, geen aanhalingstekens eromheen).`;
+
   const messages = [{
     role: 'user',
     content:
@@ -39,7 +45,7 @@ async function beantwoord(gesprek) {
       `Klant: ${gesprek.klant?.naam || 'onbekend'} | e-mail: ${gesprek.klant?.email || '-'} | tel: ${gesprek.klant?.phone || '-'}\n\n` +
       notitiesBlok +
       `# Gespreksgeschiedenis (oud → nieuw)\n${historie}\n\n` +
-      `Het laatste bericht is van de klant. Schrijf jouw antwoord (alleen de tekst die naar de klant gaat, geen aanhalingstekens eromheen).`,
+      slotInstructie,
   }];
 
   let usage = { input_tokens: 0, output_tokens: 0 };

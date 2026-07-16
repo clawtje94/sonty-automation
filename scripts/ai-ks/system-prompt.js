@@ -210,9 +210,19 @@ Het team is naar huis (openingstijden: di-vr 9:30-17:00, za 9:30-16:00, ma en zo
 - Als de klant naar openingstijden of "kan ik iemand bellen" vraagt: di-vr 9:30-17:00, za 9:30-16:00, telefoon 085 006 9681 tijdens die uren. Jij bent er nu voor de rest.`;
 }
 
+// Leerpunten die Daimy live via WhatsApp geeft ("feedback: ..." vanaf een whitelist-nummer,
+// zie daemon.js) — telkens vers van schijf zodat nieuwe feedback direct meedoet.
+function leerpunten() {
+  try {
+    const txt = fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'ai-ks', 'leerpunten.md'), 'utf8').trim();
+    if (!txt) return '';
+    return '\n\n# LEERPUNTEN VAN DAIMY (live feedback — ALTIJD volgen, gaat vóór alles hierboven bij conflict)\n' + txt;
+  } catch { return ''; }
+}
+
 function buildSystemPrompt(opts = {}) {
   const blokken = [
-    { type: 'text', text: ROL + '\n\n# KENNISBANK (achtergrond)\n' + KENNISBANK, cache_control: { type: 'ephemeral' } },
+    { type: 'text', text: ROL + '\n\n# KENNISBANK (achtergrond)\n' + KENNISBANK + leerpunten(), cache_control: { type: 'ephemeral' } },
   ];
   if (opts.sonny) blokken.push({ type: 'text', text: sonnyBlok(!!opts.introNodig) });
   return blokken;

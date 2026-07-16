@@ -123,6 +123,21 @@ async function verwerkTicket(t, state) {
   const sleutel = `${t.id}:${laatste.tijd}`;
   if (state.verwerkt[sleutel]) return; // al behandeld
 
+  // FEEDBACK-KANAAL (Daimy 2026-07-16): een whitelist-nummer kan in het WhatsApp-gesprek
+  // zelf "feedback: ..." appen. Dat is geen klantvraag maar een leerpunt: opslaan in
+  // data/ai-ks/leerpunten.md (gaat per direct mee in de systemprompt) en kort bevestigen.
+  // ALLEEN whitelist — anders zouden klanten de bot kunnen herprogrammeren.
+  const feedbackMatch = laatste.tekst.match(/^\s*feedback\s*[:\-]\s*([\s\S]+)/i);
+  if (feedbackMatch && isLiveTestContact(t)) {
+    const punt = feedbackMatch[1].trim();
+    fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leerpunten.md'), `- (${new Date().toISOString().slice(0, 10)}) ${punt}\n`);
+    log({ ticket: t.id, feedback: punt, klant: t.contact?.full_name || t.contact?.phone });
+    try { await sendLiveReply(t, 'Feedback opgeslagen en direct actief. Vanaf mijn volgende antwoord doe ik het zo.'); } catch {}
+    await telegram(`🎓 WhatsApp-feedback van ${t.contact?.full_name || t.contact?.phone} opgeslagen als leerpunt:\n"${punt.substring(0, 400)}"\n\n(Staat in data/ai-ks/leerpunten.md en zit per direct in de prompt.)`);
+    state.verwerkt[sleutel] = { tijd: new Date().toISOString(), feedback: true };
+    return;
+  }
+
   // Debounce: wacht tot het laatste klantbericht ±45s oud is. Voorkomt dubbel antwoorden
   // als de klant meerdere berichten kort na elkaar stuurt (die pakken we dan in één keer mee).
   const leeftijdSec = (Date.now() - new Date(String(laatste.tijd).replace(' ', 'T'))) / 1000;

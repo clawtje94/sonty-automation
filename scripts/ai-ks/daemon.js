@@ -174,19 +174,15 @@ async function verwerkSonnyNotities(t, teamNotities) {
       nieuw = true;
       continue;
     }
-    // OPDRACHT: notitie die begint met een werkwoord als "vraag/zeg/stuur/check/meld" =
-    // iets dat de bot NU in dít gesprek moet doen (bv. "vraag even of hij uitval bedoelt").
-    // Geen leerpunt; verwerkTicket voert hem direct uit en plaatst daarna de ✅-notitie.
-    if (/^(vraag|zeg|stuur|meld|check|antwoord|geef|laat.*weten)\b/i.test(punt)) {
-      instructies.push({ key, punt, userId: n.userId });
-      continue; // markeren gebeurt pas ná succesvolle uitvoering
-    }
+    // FEEDBACK (al het andere): altijd opslaan als vaste kennis. De bot beoordeelt daarna
+    // ZELF of het lopende gesprek ook nog een bericht aan de klant vraagt (bv. een
+    // verduidelijkende vraag zoals bij de pergola) — werkwijze Daimy 2026-07-16: "ik geef
+    // alleen feedback; jij schat in of je alsnog iets moet vragen, zonder de klant te verwarren".
     if (punt) {
       fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leerpunten.md'),
         `- (${new Date().toISOString().slice(0, 10)}) [team-notitie bij gesprek ${wie}] ${punt}\n`);
-      await telegram(`🎓 @sonny-notitie verwerkt als leerpunt (gesprek ${wie}):\n"${punt.substring(0, 300)}"\n\nZit per direct in de kennis van de bot.`);
-      // Altijd als opmerking terug reageren en de tagger terugtaggen (werkwijze Daimy)
-      await plaatsNotitie(t.id, `${await tagVoor(n.userId)} ✅ Verwerkt als vaste kennis: "${punt.substring(0, 220)}". De bot past dit vanaf nu in alle gesprekken toe.`);
+      await telegram(`🎓 @sonny-notitie verwerkt als leerpunt (gesprek ${wie}):\n"${punt.substring(0, 300)}"\n\nDe bot beoordeelt nu zelf of dit gesprek ook nog een bericht nodig heeft.`);
+      instructies.push({ key, punt, userId: n.userId }); // caller: beoordeling + ✅-notitie
     }
     st[key] = new Date().toISOString();
     nieuw = true;
@@ -231,11 +227,11 @@ async function verwerkTicket(t, state) {
   let teamInstructies = [];
   try { teamInstructies = await verwerkSonnyNotities(t, teamNotities); } catch (e) { console.error('  notitie-leerpunt FOUT:', e.message); }
 
-  // OPDRACHT-notities uitvoeren: de bot stuurt nu een bericht in dit gesprek volgens de
-  // aanwijzing van het team, en bevestigt met een ✅-notitie + terug-tag.
+  // FEEDBACK-beoordeling: de bot schat zelf in of de team-feedback óók een bericht aan de
+  // klant in dít gesprek vraagt (verduidelijking/aanvulling). Zo niet, dan alleen kennis.
   if (teamInstructies.length && isWaTicket(t) && (isActiefTicket(t) || isLiveTestContact(t))) {
-    const opdracht = teamInstructies.map(i => i.punt).join('\n');
-    console.log(`Ticket ${t.id}: team-opdracht uitvoeren: ${opdracht.slice(0, 80)}...`);
+    const feedback = teamInstructies.map(i => i.punt).join('\n');
+    console.log(`Ticket ${t.id}: team-feedback beoordelen: ${feedback.slice(0, 80)}...`);
     const res = await beantwoord({
       kanaal: 'WA',
       klant: { naam: t.contact?.full_name || null, email: t.contact?.email || null, phone: t.contact?.phone || null },
@@ -243,26 +239,22 @@ async function verwerkTicket(t, state) {
       liveTest: true,
       sonny: false,
       teamNotities,
-      teamInstructie: opdracht,
+      teamInstructie: feedback,
       ticketId: t.id,
     });
-    if (res.antwoord) {
+    const geenBericht = !res.antwoord || /GEEN_BERICHT/.test(res.antwoord);
+    let verstuurd = false;
+    if (!geenBericht) {
       const sendRes = isLiveTestContact(t) ? await sendLiveReply(t, res.antwoord) : await sendActiefReply(t, res.antwoord);
-      console.log(`  → OPDRACHT-antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status}`);
-      if (sendRes.ok) {
-        for (const i of teamInstructies) {
-          markeerNotitie(i.key);
-          await plaatsNotitie(t.id, `${await tagVoor(i.userId)} ✅ Verwerkt: je opdracht is uitgevoerd, het bericht aan de klant is verstuurd.`);
-        }
-        log({ ticket: t.id, kanaal: 'WA', klant: { phone: t.contact?.phone }, teamOpdracht: opdracht.slice(0, 300), antwoord: res.antwoord, acties: res.acties, toolCalls: res.toolCalls, usage: res.usage, actief: true });
-      } else {
-        await telegram(`⚠️ Team-opdracht bij ticket ${t.id} kon niet verstuurd worden: ${sendRes.status}`);
-      }
-    } else {
-      await telegram(`⚠️ Team-opdracht bij ticket ${t.id}: de bot kwam niet tot een antwoord (geëscaleerd?). Opdracht: "${opdracht.slice(0, 200)}"`);
-      for (const i of teamInstructies) markeerNotitie(i.key);
+      verstuurd = sendRes.ok;
+      console.log(`  → FEEDBACK-vervolgbericht naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status}`);
+      if (!sendRes.ok) await telegram(`⚠️ Vervolgbericht na feedback bij ticket ${t.id} kon niet verstuurd worden: ${sendRes.status}`);
     }
-    return; // opdracht afgehandeld; normale flow volgt bij het volgende klantbericht
+    for (const i of teamInstructies) {
+      await plaatsNotitie(t.id, `${await tagVoor(i.userId)} ✅ Verwerkt als vaste kennis${verstuurd ? ', en ik heb de klant hierop nog een kort bericht gestuurd' : ' (geen extra bericht naar de klant nodig)'}.`);
+    }
+    log({ ticket: t.id, kanaal: 'WA', klant: { phone: t.contact?.phone }, teamOpdracht: feedback.slice(0, 300), antwoord: verstuurd ? res.antwoord : '(geen bericht)', acties: res.acties, toolCalls: res.toolCalls, usage: res.usage, actief: true });
+    return; // feedback afgehandeld; normale flow volgt bij het volgende klantbericht
   }
 
   if (!rows.length) return;
@@ -392,6 +384,14 @@ async function verwerkTicket(t, state) {
     }
   }
 
+  // Terugkom-belofte in het zojuist beantwoorde klantbericht? Registreren voor de reminder.
+  if ((sonnyMode || actiefTicket || liveTest) && res.antwoord && TERUGKOM_PATROON.test(laatste.tekst)) {
+    const tk = loadTerugkomers();
+    tk[t.id] = { klantTijd: laatste.tijd, phone: t.contact?.phone || null, naam: t.contact?.full_name || null, geregistreerd: new Date().toISOString() };
+    fs.writeFileSync(TERUGKOMERS_FILE, JSON.stringify(tk, null, 1));
+    console.log('  terugkomer geregistreerd → reminder na ~22u stilte');
+  }
+
   state.verwerkt[sleutel] = { tijd: new Date().toISOString(), acties: res.acties.length };
   log({ ticket: t.id, kanaal: gesprek.kanaal, klant: gesprek.klant, laatsteKlantBericht: laatste.tekst.substring(0, 500), antwoord: res.antwoord, acties: res.acties, toolCalls: res.toolCalls, usage: res.usage, mode: CFG.MODE, sonny: sonnyMode, actief: actiefTicket });
   console.log(`  → notitie geplaatst (${res.acties.length} acties, ${res.toolCalls.length} tool-calls)`);
@@ -458,7 +458,52 @@ async function verwerkPendingOffertes() {
   savePending(pending);
 }
 
+// TERUGKOMERS: klant zegt "ik kom er morgen op terug" (of vergelijkbaar) en blijft stil →
+// na ~22 uur, nog nét binnen het 24-uurs WhatsApp-venster, één vriendelijke reminder
+// (tekst van Daimy, 2026-07-16). Komt de klant zelf eerder terug, dan vervalt hij. Is het
+// venster toch verlopen, dan een Telegram-melding dat bellen de enige route is.
+const TERUGKOMERS_FILE = path.join(path.dirname(CFG.POLL_STATE_FILE), 'terugkomers.json');
+function loadTerugkomers() { try { return JSON.parse(fs.readFileSync(TERUGKOMERS_FILE, 'utf8')); } catch { return {}; } }
+const TERUGKOM_PATROON = /(kom\w*[^.!?]{0,30}op terug|laat\w* (het|je)[^.!?]{0,20}weten|even overleggen|overlegg?\w* met|er[^.!?]{0,20}voor zitten|denk\w* er[^.!?]{0,15}over na|morgen[^.!?]{0,25}(terug|weten|verder|bevestig)|(vanavond|morgen|dit weekend|volgende week)[^.!?]{0,15}op terug)/i;
+
+async function verwerkTerugkomers() {
+  const tk = loadTerugkomers();
+  const ids = Object.keys(tk);
+  if (!ids.length) return;
+  for (const tid of ids) {
+    const info = tk[tid];
+    const uur = (Date.now() - new Date(String(info.klantTijd).replace(' ', 'T')).getTime()) / 3600000;
+    if (!isFinite(uur) || uur < 22) continue;
+    const res = await tGet(`/tickets/${tid}`);
+    const t = res?.data || res;
+    if (!t || t.status !== 'OPEN') { delete tk[tid]; continue; }
+    const msgs = await tGet(`/tickets/${tid}/messages`);
+    const inbound = (msgs?.data || []).filter(m => m.type === 'INBOUND').map(m => String(m.created_at)).sort();
+    if (inbound.length && inbound[inbound.length - 1] > String(info.klantTijd)) { delete tk[tid]; continue; } // klant kwam zelf al terug
+    if (uur >= 23.7) {
+      delete tk[tid];
+      await telegram(`⏰ Terugkomer gemist: ${info.naam || info.phone} beloofde terug te komen maar bleef stil en het WhatsApp-venster is nu dicht. Bellen is de enige route.`);
+      continue;
+    }
+    if (!(isActiefTicket(t) || isLiveTestContact(t))) { delete tk[tid]; continue; }
+    const voornaam = (info.naam || '').split(' ')[0];
+    const tekst = `Hoi${voornaam ? ' ' + voornaam : ''}, kleine reminder vanaf mijn kant: als ik nog ergens bij kan helpen, laat het maar weten!`;
+    const sendRes = isLiveTestContact(t) ? await sendLiveReply(t, tekst) : await sendActiefReply(t, tekst);
+    delete tk[tid];
+    if (sendRes.ok) {
+      await plaatsNotitie(tid, `🤖 AI-KS: vriendelijke reminder gestuurd (klant beloofde terug te komen en bleef ~22 uur stil).`);
+      await telegram(`⏰ Reminder gestuurd aan ${info.naam || info.phone} (beloofde terug te komen, bleef ~22 uur stil).`);
+      log({ ticket: Number(tid), reminder: true, antwoord: tekst, actief: true });
+    } else {
+      await telegram(`⚠️ Reminder aan ${info.naam || info.phone} kon niet verstuurd worden: ${sendRes.status}`);
+    }
+    await new Promise(r => setTimeout(r, 400));
+  }
+  fs.writeFileSync(TERUGKOMERS_FILE, JSON.stringify(tk, null, 1));
+}
+
 let laatsteActiefSweep = 0;
+let laatsteTerugkomerCheck = 0;
 
 async function pollRonde(state, { onlyTest, sonnyOnly }) {
   // --sonny-only (AI-dienst-cron): buiten openingstijden bedient Sonny alle WA-klanten
@@ -468,6 +513,11 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
   const sonnyNu = sonnyActiefNu();
   const effOnlyTest = onlyTest || (sonnyOnly && !sonnyNu);
   try { await verwerkPendingOffertes(); } catch (e) { console.error('pending-offertes FOUT:', e.message); }
+  // Terugkomer-reminders: elke 15 min checken (venster 22u-23,7u na laatste klantbericht)
+  if (Date.now() - laatsteTerugkomerCheck > 15 * 60000) {
+    laatsteTerugkomerCheck = Date.now();
+    try { await verwerkTerugkomers(); } catch (e) { console.error('terugkomers FOUT:', e.message); }
+  }
   const specificTicket = process.argv.includes('--ticket') ? process.argv[process.argv.indexOf('--ticket') + 1] : null;
 
   let tickets = [];

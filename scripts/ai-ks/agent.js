@@ -32,10 +32,10 @@ async function beantwoord(gesprek) {
       gesprek.teamNotities.map(n => `- (${n.tijd}) ${n.tekst}`).join('\n') + '\n\n'
     : '';
 
-  // Team-opdracht (bv. "@sonny vraag even of hij uitval bedoelt"): de bot moet nu zelf
-  // een bericht sturen, ook als het laatste bericht niet van de klant is.
+  // Team-feedback op dit gesprek: de bot beoordeelt ZELF of er nu nog een bericht naar de
+  // klant moet (verduidelijkende vraag, correctie) of dat de feedback alleen kennis is.
   const slotInstructie = gesprek.teamInstructie
-    ? `# OPDRACHT VAN HET TEAM VOOR NU\nHet team wil dat je nú het volgende doet in dit gesprek: ${gesprek.teamInstructie}\nSchrijf het bericht aan de klant dat deze opdracht uitvoert (alleen de tekst die naar de klant gaat). Sluit qua toon aan op het lopende gesprek en noem de opdracht of het team niet.`
+    ? `# FEEDBACK VAN HET TEAM OP DIT GESPREK\nHet team gaf zojuist deze feedback/aanwijzing: ${gesprek.teamInstructie}\n\nDeze feedback is al opgeslagen als vaste kennis voor volgende gesprekken. Beoordeel nu ZELF of dit specifieke gesprek er ook om vraagt dat je de klant NU nog een bericht stuurt — bijvoorbeeld een verduidelijkende vraag (zoals checken wat de klant precies bedoelt) of een korte aanvulling/correctie op je eerdere antwoord als dat onvolledig of onjuist was.\nRegels: stuur alleen iets als het de klant écht verder helpt en NIET verwarrend is; verwijs nooit naar het team, feedback of interne notities; sluit qua toon naadloos aan op het lopende gesprek; herhaal niet wat al gezegd is.\nIs een bericht niet nodig of zou het verwarren, antwoord dan met exact: GEEN_BERICHT\nAnders: schrijf alleen de tekst die naar de klant gaat.`
     : `Het laatste bericht is van de klant. Schrijf jouw antwoord (alleen de tekst die naar de klant gaat, geen aanhalingstekens eromheen).`;
 
   const messages = [{

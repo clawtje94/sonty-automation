@@ -25,6 +25,13 @@ Opdracht Daimy: alles bouwen zodat we binnenkort van RP af kunnen. Stand:
 > Dit document is het startpunt voor een nieuwe Claude-sessie (welk Anthropic-account dan ook).
 > Lees dit eerst, daarna de memory-index. Alle code staat in git (beide repos gepusht).
 
+## ACTIEVE GESPREKKEN — AI beheert 21 klantgesprekken live (16 juli, opdracht Daimy)
+Daimy: "handel de 21 open WA-tickets af, daarna weer uit, maar blijf vervolgvragen van die personen beantwoorden, geen Sonny-intro". Gebouwd + uitgevoerd:
+- `data/ai-ks/actieve-tickets.json` = door AI beheerde klantgesprekken. Daemon beantwoordt overdag: whitelist (Sonny-persona) + actieve tickets (JAIMY-persona, geen intro, geen kunstvertraging). Nieuwe tickets blijven voor het team.
+- Batch `scripts/ai-ks/afhandelen-open-tickets.js` gedraaid 16 juli ~19:15-19:50: 21 tickets, 17 AI-antwoorden live verstuurd (incl. eerste vervolgvragen), 3 stille escalaties naar Telegram (2x Vruchi/Jorren-lead Engels, 1x Gunther mail+10cm-vraag), rest overgeslagen (laatste woord was al aan ons). 1x Trengo-429 (Vruchi) → verwerkt-marker gewist + retry OK. Elk AI-antwoord heeft interne notitie "🤖 AI-KS (actief gesprek)".
+- Leerpunt toegevoegd: nooit "neef"/straattaal (Jorren kreeg "He neef!").
+- Vervolgvragen-watcher draait (watch 240 min, daarna launchd 5-min). Ochtendrapport telt actieve gesprekken nu mee.
+
 ## SONNY — WhatsApp-AI buiten openingstijden (16 juli, gebouwd, WACHT OP AAN-KNOP)
 Opdracht Daimy: buiten openingstijden reageert de AI live op ALLE WhatsApp-klanten, stelt zich eerlijk voor als digitale medewerker "Sonny" en helpt VOLLEDIG (ook offertes aanmaken/aanpassen, "dat gaan we juist checken"). Gebouwd in `scripts/ai-ks/`:
 - Openingstijden di-vr 9:30-17:00, za 9:30-16:00, ma+zo dicht (config.OPENINGSTIJDEN, tz-vast Europe/Amsterdam); daarbuiten is Sonny actief.

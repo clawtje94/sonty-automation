@@ -26,7 +26,7 @@ const kort = (s, n) => { s = (s || '').replace(/\s+/g, ' ').trim(); return s.len
   try {
     regels = fs.readFileSync(CFG.LOG_FILE, 'utf8').trim().split('\n')
       .map(l => { try { return JSON.parse(l); } catch { return null; } })
-      .filter(e => e && e.sonny && new Date(e.tijd) > sinds);
+      .filter(e => e && (e.sonny || e.actief) && new Date(e.tijd) > sinds);
   } catch {}
 
   if (!regels.length) {

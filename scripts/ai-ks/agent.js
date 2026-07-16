@@ -38,10 +38,15 @@ async function beantwoord(gesprek) {
     ? `# NOTITIE VAN HET TEAM BIJ DIT GESPREK\nHet team schreef zojuist deze notitie: ${gesprek.teamInstructie}\n\nBepaal ZELF wat dit vraagt en voer het ook echt uit. Drie mogelijkheden, combineren mag:\n1. Een OPDRACHT of correctie die een actie vraagt (bv. de offerte aanpassen, montage samenvoegen, status zetten): voer die actie NU uit met je tools. Nooit alleen "genoteerd" zeggen terwijl je iets kon doen.\n2. Een bericht aan de KLANT als dat helpt (verduidelijkende vraag, correctie van een eerder antwoord). Alleen als het echt helpt en niet verwart; verwijs nooit naar het team of interne notities; sluit aan op het gesprek.\n3. Een ANTWOORD aan het team: sluit je output af met een regel die begint met NOTITIE: gevolgd door je korte antwoord/bevestiging (bv. wat je hebt aangepast, of het antwoord op hun vraag). Doe dit ALTIJD als de notitie een vraag aan jou is.\nOutputformaat: eventueel eerst de klanttekst; is er géén klantbericht nodig, schrijf dan GEEN_BERICHT; sluit af met de NOTITIE:-regel voor het team.`
     : `Het laatste bericht is van de klant. Schrijf jouw antwoord (alleen de tekst die naar de klant gaat, geen aanhalingstekens eromheen).`;
 
+  // Datumbesef: zonder dit wenste de bot een klant "fijn weekend" op donderdag (16 juli).
+  const nu = CFG.amsterdamNu();
+  const DAGEN = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
+
   const messages = [{
     role: 'user',
     content:
       `# Gesprek via ${gesprek.kanaal === 'WA' ? 'WhatsApp' : 'e-mail'}\n` +
+      `Huidige datum/tijd: ${DAGEN[nu.dag]} ${nu.datum}, ${nu.hhmm} uur (Nederland). Houd hier rekening mee bij groeten (weekend alleen als het echt weekend is), afspraken en "morgen".\n` +
       `Klant: ${gesprek.klant?.naam || 'onbekend'} | e-mail: ${gesprek.klant?.email || '-'} | tel: ${gesprek.klant?.phone || '-'}\n\n` +
       notitiesBlok +
       `# Gespreksgeschiedenis (oud → nieuw)\n${historie}\n\n` +

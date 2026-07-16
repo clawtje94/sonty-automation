@@ -35,6 +35,12 @@ function loadState() {
 }
 function saveState(s) {
   fs.mkdirSync(path.dirname(CFG.POLL_STATE_FILE), { recursive: true });
+  // Merge met disk: meerdere processen delen dit bestand (watcher, --ticket, batch).
+  // Domweg overschrijven wiste elkaars markeringen → dubbel afscheid bij Nout (16 juli).
+  try {
+    const disk = JSON.parse(fs.readFileSync(CFG.POLL_STATE_FILE, 'utf8')).verwerkt || {};
+    s.verwerkt = { ...disk, ...s.verwerkt };
+  } catch {}
   fs.writeFileSync(CFG.POLL_STATE_FILE, JSON.stringify(s));
 }
 function log(entry) {
@@ -301,6 +307,15 @@ async function verwerkTicket(t, state) {
   // als de klant meerdere berichten kort na elkaar stuurt (die pakken we dan in één keer mee).
   const leeftijdSec = (Date.now() - new Date(String(laatste.tijd).replace(' ', 'T'))) / 1000;
   if (isFinite(leeftijdSec) && leeftijdSec < 45) return; // volgende poll-ronde
+
+  // CLAIM het bericht vóór de trage agent-run (30-90s): een tweede proces dat hetzelfde
+  // bericht ziet slaat het dan over. Dit voorkwam-niet-gehad dubbel antwoorden (Nout, 16 juli).
+  {
+    const disk = loadState();
+    if (disk.verwerkt[sleutel]) { state.verwerkt[sleutel] = disk.verwerkt[sleutel]; return; }
+  }
+  state.verwerkt[sleutel] = { tijd: new Date().toISOString(), claim: true };
+  saveState(state);
 
   // SONNY-persona en -intro ALLEEN wanneer de avonddienst expliciet aan staat
   // (.sonny-enabled + buiten openingstijden). Whitelist-nummers krijgen sinds het

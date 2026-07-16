@@ -85,7 +85,7 @@ async function plaatsNotitie(ticketId, tekst) {
 
 // Mention-tag voor een Trengo-gebruiker: "@{voornaam}{user_id}" (zo werkte @daimy736327).
 // Naam wordt éénmalig via de API opgehaald en gecachet; fallback = Daimy.
-const userTagCache = { 736327: '@daimy736327' };
+const userTagCache = { 736327: '@daimy736327', 745487: '@jorren745487', 748440: '@tanya748440', 745486: '@joey745486', 736329: '@nanny736329', 745488: '@jaimy745488', 745489: '@sjoerd745489', 747786: '@sonny747786' };
 async function tagVoor(userId) {
   if (!userId) return '@daimy736327';
   if (userTagCache[userId]) return userTagCache[userId];
@@ -333,7 +333,6 @@ async function verwerkTicket(t, state) {
     await new Promise(r => setTimeout(r, d * 1000));
     const sendRes = liveTest ? await sendLiveReply(t, antwoordTekst) : await sendSonnyReply(t, antwoordTekst);
     console.log(`  → SONNY antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status + ' ' + sendRes.body.substring(0, 200)}`);
-    await plaatsNotitie(t.id, `🌙 SONNY (AI-avonddienst, buiten openingstijden) — live verstuurd${acties}`);
     if (!sendRes.ok) {
       await telegram(`⚠️ Sonny verzenden MISLUKT op ticket ${t.id}: ${sendRes.status} ${sendRes.body.substring(0, 200)}`);
     } else {
@@ -351,7 +350,6 @@ async function verwerkTicket(t, state) {
     // klant wacht vaak al uren). Escalaties gaan zoals altijd stil naar Telegram.
     const sendRes = await sendActiefReply(t, res.antwoord);
     console.log(`  → ACTIEF antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status + ' ' + sendRes.body.substring(0, 200)}`);
-    await plaatsNotitie(t.id, `🤖 AI-KS (actief gesprek, door AI beheerd) — live verstuurd${acties}`);
     if (!sendRes.ok) await telegram(`⚠️ AI-KS actief-gesprek verzenden MISLUKT op ticket ${t.id}: ${sendRes.status} ${sendRes.body.substring(0, 200)}`);
   } else if (liveTest && res.antwoord) {
     // Menselijke typ-vertraging (config REPLY_DELAY; uit tijdens test, aan bij livegang)
@@ -363,7 +361,6 @@ async function verwerkTicket(t, state) {
     // LIVE-TEST: alleen voor whitelist-nummers (Daimy's testnummer) — écht versturen
     const sendRes = await sendLiveReply(t, res.antwoord);
     console.log(`  → LIVE-TEST antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status + ' ' + sendRes.body.substring(0, 200)}`);
-    await plaatsNotitie(t.id, `🤖 AI-KS LIVE-TEST (whitelist ${t.contact?.phone})${acties}`);
     if (!sendRes.ok) await telegram(`⚠️ AI-KS live-test verzenden MISLUKT op ticket ${t.id}: ${sendRes.status} ${sendRes.body.substring(0, 200)}`);
   } else if (CFG.MODE === 'shadow') {
     const notitie = `🤖 AI-KLANTENSERVICE (schaduwmodus — NIET verstuurd)\n\nConcept-antwoord:\n${res.antwoord || '(geen antwoord — geëscaleerd)'}${acties}`;
@@ -372,6 +369,15 @@ async function verwerkTicket(t, state) {
   } else if (CFG.MODE === 'live') {
     // LIVE verzenden — pas actief als Daimy .live-enabled aanmaakt. Nog bewust niet geïmplementeerd.
     console.log('LIVE-modus nog niet vrijgegeven; er is niets verstuurd.');
+  }
+
+  // Notitie-beleid (Daimy 16 juli): alleen een opmerking bij (1) uitgevoerde acties in
+  // Reuzenpanda (offerte aangepast, inmeten doorgezet, offerte aangemaakt), (2) overdracht
+  // aan het team met tag, (3) antwoorden op @sonny-notities (elders). Geen ruis per antwoord.
+  const echtVerstuurd = (sonnyMode || actiefTicket || liveTest) && res.antwoord;
+  const mutaties = res.acties.filter(a => a.type !== 'escalatie');
+  if (echtVerstuurd && mutaties.length) {
+    await plaatsNotitie(t.id, '🤖 Uitgevoerde acties door de AI:\n' + mutaties.map(a => '- ' + JSON.stringify(a)).join('\n'));
   }
 
   const escalatie = res.acties.find(a => a.type === 'escalatie');
@@ -383,6 +389,10 @@ async function verwerkTicket(t, state) {
       await telegram(`🎓 LEERVRAAG van klant ${wie} (ticket ${t.id}):\n\n"${laatste.tekst.substring(0, 400)}"\n\nAI: ${escalatie.reden.substring(0, 400)}\n\nAntwoord hier op Telegram, dan leer ik het de AI aan en ${escalatie.stil ? 'beantwoorden we de klant (gesprek staat nog open)' : 'weet hij het voortaan zelf'}.`);
     } else {
       await telegram(`⚠️ AI-KS escalatie — ticket ${t.id} (${wie}):\n${escalatie.reden}\n\nLaatste klantbericht: ${laatste.tekst.substring(0, 300)}`);
+    }
+    // Overdracht zichtbaar in het gesprek zelf, met tag naar het team (beleid Daimy 16 juli)
+    if (isWaTicket(t)) {
+      await plaatsNotitie(t.id, `@jorren745487 @tanya748440 ⚠️ De AI kan dit niet zelf afhandelen en draagt het over: ${String(escalatie.reden || '').slice(0, 300)}`);
     }
   }
 

@@ -1,9 +1,36 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-10)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-16)
+
+## EIGEN OFFERTE-SYSTEEM / OVERSTAP VAN REUZENPANDA (16 juli, PR #40, live)
+
+Opdracht Daimy: alles bouwen zodat we binnenkort van RP af kunnen. Stand:
+- **Eigen S-nummers** (S26-1001, ...) uit KV-teller, los van RP. Eerste testnummer S26-1001 is gebruikt en verwijderd; reeks loopt door.
+- **Offerte-tool**: knop "Nieuwe offerte in eigen systeem (zonder Reuzenpanda)" = geen RP-lead, geen wachttijd; opslaan = eigen store + Sonty-klantlink. Upsert: opnieuw opslaan houdt hetzelfde S-nummer en dezelfde link (geen duplicaten). Eigen offertes heropenen: zoek op S-nummer (verliesloos via offerte.toolLines).
+- **Klantflow**: /offerte/[token] (bestond al) toont de offerte, klant tekent online (canvas-krabbel + IP + tijdstip), status → akkoord, automation "akkoord-naar-inmeten" verplaatst hem op het bord. E2E getest op iPhone 12 (16 juli): publiceer → upsert → klantpagina → sign → akkoord. Testlead daarna verwijderd; er is toen 1 Telegram-melding "TEST negeren aub" afgegaan.
+- **/admin/offertes**: overzicht eigen offertes (S-nummer, RP-referentie, status, getekend, openen-in-tool).
+- **/api/admin/offertes**: GET lijst/zoek (?nummer=, ?since=, ?q=, ?status=) — dit is de adapter waar sheet-sync/automations na de overstap op moeten; POST bulk-import (max 50/batch) die BEWUST via storeLead gaat, NOOIT via createLead (die vuurt Telegram + Klaviyo-events af = potentieel klantmails bij massa-import!).
+- **Migratie**: `~/sonty/scripts/migreer-rp-offertes.js`. `--archief` gedraaid: alle 18.218 RP-offertes staan in `~/sonty/data/rp-archief/quotations-{jaar}.jsonl`. Bulk-import BEWUST NIET gedraaid: 3.049 open offertes sinds 1 juni zouden het bord onbruikbaar maken. Strategie = migratie-bij-aanraking: RP-offerte openen in de tool + Sonty-link maken → automatisch eigen S-nummer met rpNummer-referentie (dedupe ingebouwd). Bulk kan later alsnog per periode (--import --sinds=... --live).
+
+**Overschakel-runbook (wat er nog moet vóór RP opgezegd kan):**
+1. Team went in de winkel aan "eigen systeem"-knop (parallel draaien, RP blijft vangnet).
+2. Verzendcentrum-mails de Sonty-link laten sturen i.p.v. de RP-link (lib/verzendcentrum), testmodus pas uit na akkoord Daimy.
+3. Automations omhangen: sheet-sync, WA-opvolging en Gripp-facturatie van RP-API naar GET /api/admin/offertes?since= (velden staan klaar).
+4. v4-prijscontrole: draait op RP-documenten; na overstap alleen nog nodig als validatie in de tool zelf (prijzen komen al uit dezelfde engine).
+5. Configurator-embed (Reuzenpanda-widget op de site) vervangen door eigen formulier.
+6. Laatste bulk-import van dan nog open offertes + RP-abonnement opzeggen (archief staat al veilig).
 
 > **REGEL (Daimy 2026-07-10): dit bestand na ELK afgerond werkblok direct bijwerken** — als zijn pc uitvalt moet de laatste stand er altijd in staan.
 
+**PRIJZEN BOEK-GEVERIFIEERD (14 juli):** alle prijsboeken naast v4/offerte-tool/configurator gelegd. Gefixt (alleen nieuwe offertes): markies-motoren zijn in het boek KAAL, zender nu ingeprijsd (IO 575 / Brel Solar 620 / Somfy Solar 745 excl btw); rolluik-solar +239 → +315 (verplichte handzender, boek p37/38); screens Brel-solar +59 → +135 (boek: incl. handzender); knikarm-minima nu per uitval (SunEye uitval+19, XL +49, SunElite +65, SunBasic +30); configurator-bedieningen gelijkgetrokken. Roma klopte (tabelprijs incl. Smoove-zender). Details: memory prijsboek-verificatie-2026-07. Website live via PR #38/#39; v4 lokaal aangepast (draait vanavond met nieuwe bedragen). LET OP: de v4-regressietest (`scripts/tests/verify-fixes.js` + `baseline.json`) bevat verwachte PRIJZEN — bij een bewuste prijswijziging ook de baseline bijwerken, anders draait run-v4-safe.sh stil de oude versie en krijgt Daimy een Telegram-alert (gebeurde 14 juli; opgelost, 124/124 groen). Follow-up WhatsApp definitief uit de health check (Daimy: gaat nooit meer aan).
+
 > Dit document is het startpunt voor een nieuwe Claude-sessie (welk Anthropic-account dan ook).
 > Lees dit eerst, daarna de memory-index. Alle code staat in git (beide repos gepusht).
+
+## Prijs-steekproef & V4-prijscontrole gefixt (16 juli, commit 404413b)
+Daimy kreeg dagenlang Telegram-alerts "prijzen kloppen niet". Uitkomst onderzoek:
+- 6 van 10 meldingen (7-16 juli) waren VALS: het steekproef-script had een eigen kopie van de kleurlogica zonder trendkleuren (RAL 9007/7021). Fix: steekproef rekent nu via v4's eigen `correctProductPrice` (dry-run), kan niet meer uit de pas lopen.
+- Voorraadschermen (handmatige actieprijs) worden nu ook herkend aan de zin "Direct leverbaar uit voorraad" in de tekst (titel mist soms het woord, bv. #20269669) — v4 corrigeert ze niet meer weg, steekproef slaat ze over.
+- Prijsboekfixes van 13/14 juli stonden alleen LOKAAL (nooit gecommit): rolluik solar + verplichte handzender, screen Brel 135, markies-motor incl. zender, Roma duo UIT. Nu gecommit. Offertes van vóór 14 juli zijn dus met oude solar-regel geprijsd (−€83,60, o.a. #20269689, #20269614, #20269631) — Daimy: klanten NIET corrigeren, alleen ons systeem.
+- Echte fouten die verstuurd zijn (geen actie richting klant, besluit Daimy 16 juli): Van Mourik #20268691 +€150 te duur, Dimashi #20269689 −€83,60, Dijkhuizen #20269191 −€7,60. Regressietest: 124/124 groen.
 
 ## Repos (alles gecommit + gepusht)
 - `~/sonty` → GitHub `clawtje94/sonty-platform` (automation, AI-KS, v4 offertecontrole)
@@ -156,6 +183,7 @@ Alles op branch `feature/visualisatie-mobiel`, prod = deze branch:
 0. **WA verkeerde offerte-link (6 juli)**: 13 klanten kregen de Roma duo-link i.p.v. hun hoofdofferte (WA-cron pakte nieuwste SENT offerte; duo-batch van 09:32 was nieuwer). Bug gefixt (duo-docIds uitgesloten, commit dc2fdc0). Lijst: `data/wa-verkeerde-link-2026-07-06.json`. GEEN nieuwe WhatsApp sturen (expliciete opdracht Daimy). Voorstel dat openstaat: inhoud van die 13 Roma-documenten vervangen door de hoofdofferte zodat de al-gedeelde link de juiste offerte toont — wacht op ja/nee.
 0b. **Roma duo solar-bug (6 juli)**: duo-script pakte altijd de bedrade .XP/zipSCREEN-matrix, ook bij solar-hoofdoffertes. Script gefixt én alle bestaande duo-documenten herberekend met `herbereken-roma-duos.js` (69 in-place bijgewerkt, akkoord Daimy). 3 skips: zipscreens 4267-5000mm breed — Roma solar-zipscreen gaat maar tot 4000mm, daar blijft de bedrade duo-variant staan (Gerrit Boogaardt, Ertugrul Selat, marthijn middelkoop).
 0c. **Duo-offerte automatische mail (vraag Daimy 6 juli)**: verzendkanaal = Trengo "Aanvragen" (aanvragen@sonty.nl, kanaal 1363384). Module klaar: `scripts/duo-mail.js` (contact → ticket → mail → ticket sluiten; `--test` stuurt naar daimy@sonty.nl, getest OK). Nog NIET gekoppeld aan v4. Wacht op Daimy: akkoord op de maildtekst (testmail in zijn inbox) + scope: alleen nieuwe duo's of ook inhaalslag bestaande duo-klanten (die inhaalslag zou meteen de 13 verkeerde-link-klanten van punt 0 hun hoofdofferte geven).
+0d. **DUO-AANMAAK UITGEZET + inhaalslag gedaan (13 juli, opdracht Daimy)**: live-check wees uit dat bij 73 klanten alléén de Roma-duo op SENT stond en de Sunmaster-hoofdofferte op DRAFT (klant kreeg dus nooit zijn Sunmaster-offerte; lijst: `data/duo-verzendstatus-2026-07-13.json`). (a) Inhaalslag: `scripts/inhaal-sunmaster-mail.js` mailt die klanten beide offertes naast elkaar via Trengo Aanvragen en zet de Sunmaster daarna op SENT; log in `data/inhaal-sunmaster-log.json`. API-valkuil: status wijzigen vereist ZOWEL quotationStatus ALS documentStatus in de PUT (alleen quotationStatus wordt stil genegeerd); de 35 gemailde offertes zijn achteraf alsnog op SENT gezet en per stuk geverifieerd. STAND: 35 van 72 gemaild, toen door Daimy GESTOPT met nieuwe harde regel: nooit meer klantcontact zonder eerst voorbeeld + expliciet akkoord (zie memory nooit-klantcontact-zonder-akkoord). De overige 37 wachten op zijn akkoord; script is idempotent (log-dedupe), gewoon opnieuw met --live draaien na akkoord. Rina Wenig overgeslagen (had de Roma-duo 20269183 al GEACCEPTEERD — team moet met haar de Sunmaster-vergelijking nog bespreken). (b) Duo-aanmaak staat UIT via `ROMA_DUO_AAN = false` in `cron-offerte-controle-v4-combined.js` (stap 6). Weer aanzetten mag pas als de verstuurstap gefixt is zodat altijd de hoofdofferte verstuurd wordt.
 1. **Garantie-inconsistentie** (belangrijk): mail zegt "5 jaar montage", v4-offertes "3 jaar montage | 5 jaar product | 7 jaar motor", oude v4-regel "2 jaar montage | 3 jaar product", kennisbank "5+7 jaar". MOET één lijn worden — vraag Daimy de juiste cijfers en trek overal gelijk.
 2. **Buitenjaloezie-uitvoering Roma**: welke (Raffstore .P/.XP of MODULO) + lameltype (CDL70/ZL81/DBL70/GL85)? Dan in tool + TRENDO schuine rolluiken (hellingshoek-UI) afmaken.
 3. **RP-automation mail** ("binnen 24u" bij tool-contacten): moet in Reuzenpanda zelf uitgezet worden op herkomst=Winkel (onze API-token heeft geen automation-rechten). Verbeterde prijsvoorstel-mail geleverd in chat, wacht op akkoord + garantie-cijfers.

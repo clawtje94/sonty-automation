@@ -300,7 +300,8 @@ async function verwerkTicket(t, state) {
   if (laatste.van !== 'klant') return; // alleen reageren als het laatste bericht van de klant is
 
   const sleutel = `${t.id}:${laatste.tijd}`;
-  if (state.verwerkt[sleutel]) return; // al behandeld
+  const staleClaim = (m) => m && m.claim && Date.now() - new Date(m.tijd).getTime() > 10 * 60000;
+  if (state.verwerkt[sleutel] && !staleClaim(state.verwerkt[sleutel])) return; // al behandeld (verlopen claim mag opnieuw)
 
   // FEEDBACK-KANAAL (Daimy 2026-07-16): "feedback: ..." in het WhatsApp-gesprek = leerpunt,
   // opslaan in data/ai-ks/leerpunten.md (gaat per direct mee in de systemprompt) en kort
@@ -319,14 +320,17 @@ async function verwerkTicket(t, state) {
 
   // Debounce: wacht tot het laatste klantbericht ±45s oud is. Voorkomt dubbel antwoorden
   // als de klant meerdere berichten kort na elkaar stuurt (die pakken we dan in één keer mee).
+  // Bundel-wachttijd (45s) alleen voor echte klanten; testnummers van het team krijgen
+  // direct antwoord (Daimy 17 juli: "je hoeft niet te wachten").
   const leeftijdSec = (Date.now() - new Date(String(laatste.tijd).replace(' ', 'T'))) / 1000;
-  if (isFinite(leeftijdSec) && leeftijdSec < 45) return; // volgende poll-ronde
+  if (!isLiveTestContact(t) && isFinite(leeftijdSec) && leeftijdSec < 45) return; // volgende poll-ronde
 
   // CLAIM het bericht vóór de trage agent-run (30-90s): een tweede proces dat hetzelfde
   // bericht ziet slaat het dan over. Dit voorkwam-niet-gehad dubbel antwoorden (Nout, 16 juli).
   {
     const disk = loadState();
-    if (disk.verwerkt[sleutel]) { state.verwerkt[sleutel] = disk.verwerkt[sleutel]; return; }
+    const d = disk.verwerkt[sleutel];
+    if (d && !staleClaim(d)) { state.verwerkt[sleutel] = d; return; }
   }
   state.verwerkt[sleutel] = { tijd: new Date().toISOString(), claim: true };
   saveState(state);

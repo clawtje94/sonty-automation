@@ -302,10 +302,11 @@ async function verwerkTicket(t, state) {
   const leeftijdSec = (Date.now() - new Date(String(laatste.tijd).replace(' ', 'T'))) / 1000;
   if (isFinite(leeftijdSec) && leeftijdSec < 45) return; // volgende poll-ronde
 
-  // SONNY: buiten openingstijden behandelen we WhatsApp-klanten live, eerlijk als AI.
-  // Whitelist-testnummers krijgen ALTIJD de Sonny-persona (ook overdag, ook vóór de
-  // aan-knop): dat is wat we testen en trainen (Daimy 2026-07-16).
-  const sonnyMode = isWaTicket(t) && (sonnyActiefNu() || isLiveTestContact(t));
+  // SONNY-persona en -intro ALLEEN wanneer de avonddienst expliciet aan staat
+  // (.sonny-enabled + buiten openingstijden). Whitelist-nummers krijgen sinds het
+  // werkmodus-besluit (Daimy 16 juli avond: "geen vermelding van Sonny") gewoon Jaimy —
+  // de eerdere altijd-Sonny-op-whitelist testinstelling gaf Joey per ongeluk de intro.
+  const sonnyMode = isWaTicket(t) && sonnyActiefNu();
   // Nachtmodus: nieuw WA-ticket direct als actief registreren (mag versturen + blijft beheerd)
   if (!sonnyMode && isWaTicket(t) && !isActiefTicket(t) && !isLiveTestContact(t) && nieuweTicketsToegestaan()) {
     const a = loadActief();

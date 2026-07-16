@@ -103,7 +103,7 @@ async function plaatsNotitie(ticketId, tekst) {
 
 // Mention-tag voor een Trengo-gebruiker: "@{voornaam}{user_id}" (zo werkte @daimy736327).
 // Naam wordt éénmalig via de API opgehaald en gecachet; fallback = Daimy.
-const userTagCache = { 736327: '@daimy736327', 745487: '@jorren745487', 748440: '@tanya748440', 745486: '@joey745486', 736329: '@nanny736329', 745488: '@jaimy745488', 745489: '@sjoerd745489', 747786: '@sonny747786' };
+const userTagCache = { 736327: '@daimy736327', 745487: '@jorren745487', 748440: '@tanya748440', 745486: '@joey745486', 736329: '@nanny736329', 745488: '@jaimy745488', 745489: '@sjoerd745489', 747786: '@daimy736327' /* bot tagt nooit zichzelf */ };
 async function tagVoor(userId) {
   if (!userId) return '@daimy736327';
   if (userTagCache[userId]) return userTagCache[userId];
@@ -175,7 +175,9 @@ const NOTITIE_STATE = path.join(path.dirname(CFG.LOG_FILE), 'notitie-leerpunten.
 // verwerkTicket hem uitvoert) en LEERPUNT (al het andere → vaste kennis).
 async function verwerkSonnyNotities(t, teamNotities) {
   const instructies = [];
-  const sonnyNotes = teamNotities.filter(n => /@sonny/i.test(n.tekst));
+  // Eigen notities van de bot (auteur 747786) en ✅-terugkoppelingen NOOIT opnieuw verwerken —
+  // dat gaf 16 juli ~23:58 een zelf-loop (bot verwerkte zijn eigen ✅ als nieuwe opdracht).
+  const sonnyNotes = teamNotities.filter(n => /@sonny/i.test(n.tekst) && n.userId !== 747786 && !n.tekst.includes('✅'));
   if (!sonnyNotes.length) return instructies;
   let st;
   try { st = JSON.parse(fs.readFileSync(NOTITIE_STATE, 'utf8')); } catch { st = {}; }

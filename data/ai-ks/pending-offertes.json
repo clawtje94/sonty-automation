@@ -47,5 +47,23 @@
   ],
   "status": "klaar",
   "aangemaakt": 1783079860885
+ },
+ {
+  "lcId": "70aeb383-1543-43eb-96ae-e73f0cdf4ce5",
+  "ticketId": 962327914,
+  "klantNaam": "Daimy Boot",
+  "producten": [
+   {
+    "product": "suneye knikarmscherm",
+    "breedteMM": 3500,
+    "uitvalMM": 3000,
+    "bediening": "io",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "status": "klaar",
+  "aangemaakt": 1784225455432
  }
 ]

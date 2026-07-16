@@ -52,7 +52,10 @@ module.exports = {
   // LIVE-TEST WHITELIST: uitsluitend deze nummers krijgen een écht antwoord,
   // ook in schaduwmodus. Genormaliseerd formaat: 31xxxxxxxxx (geen +, geen 06).
   // Toegevoegd op verzoek van Daimy (2026-07-03): eigen testnummer + tweede tester.
-  TEST_LIVE_PHONES: ['31683500506', '31636516410', '31628209480'],
+  TEST_LIVE_PHONES: [
+    '31683500506', '31636516410', '31628209480',
+    '31625503274', // klant Hany (ticket 966213493) — Sonny-pilot op expliciet verzoek Daimy 2026-07-16
+  ],
 
   // FEEDBACK-KANAAL: alleen deze nummers mogen "feedback: ..." leerpunten appen
   // (Daimy 2026-07-16: "mag alleen van Joey en mijn nummer" — Jarne dus niet).

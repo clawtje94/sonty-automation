@@ -622,7 +622,7 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
   // ACTIEF-SWEEP (elke 5 min): actieve gesprekken direct op ID ophalen. De paginascan hierboven
   // mist tickets die dieper in de lijst staan (notities duwen een ticket niet omhoog), waardoor
   // @sonny-notities daar bleven liggen — ontdekt 16 juli.
-  if (!specificTicket && Date.now() - laatsteActiefSweep > 5 * 60000) {
+  if (!specificTicket && Date.now() - laatsteActiefSweep > 2 * 60000) {
     laatsteActiefSweep = Date.now();
     const actiefIds = Object.keys(loadActief()).filter(id => !tickets.some(t => String(t.id) === String(id)));
     if (actiefIds.length) console.log(`  actief-sweep: ${actiefIds.length} gesprekken direct checken`);
@@ -635,15 +635,23 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
       await new Promise(r => setTimeout(r, 300));
     }
   }
-  for (const t of tickets) {
-    try { await verwerkTicket(t, state); }
-    catch (e) {
-      console.error(`Ticket ${t.id} FOUT:`, e.message);
-      log({ ticket: t.id, fout: String(e.message || e) });
-      if (/credit balance/i.test(String(e.message || e))) await alertCreditsOp();
+  // Parallel met 3 werkers i.p.v. één voor één: een agent-run duurt 1-4 min, waardoor
+  // @sonny-notities en klantberichten anders minutenlang in de rij stonden (klacht Daimy
+  // 17 juli: "waarom duurt mijn reactie op de comments steeds zo lang?"). Claim-early +
+  // merge-on-save in de state maken dit veilig; dedupe op id voorkomt dubbele runs.
+  const rij = [...new Map(tickets.map(t => [String(t.id), t])).values()];
+  await Promise.all(Array.from({ length: Math.min(3, rij.length) }, async () => {
+    let t;
+    while ((t = rij.shift())) {
+      try { await verwerkTicket(t, state); }
+      catch (e) {
+        console.error(`Ticket ${t.id} FOUT:`, e.message);
+        log({ ticket: t.id, fout: String(e.message || e) });
+        if (/credit balance/i.test(String(e.message || e))) await alertCreditsOp();
+      }
+      saveState(state);
     }
-    saveState(state);
-  }
+  }));
   // State beperken tot laatste 2000 entries
   const keys = Object.keys(state.verwerkt);
   if (keys.length > 2000) for (const k of keys.slice(0, keys.length - 2000)) delete state.verwerkt[k];

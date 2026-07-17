@@ -78,8 +78,9 @@ const VASTE_POSTEN = {
  *   toevoegen        — [{product, breedteMM, hoogteMM?, uitvalMM?, bediening?, aantal?}] nieuwe productregels (incl. automatische montageregel)
  *   aantalWijzigen   — [{product, aantal}] aantal van een bestaande regel wijzigen
  *   kortingRegel     — {omschrijving, bedrag} zichtbare kortingsregel (negatief bedrag op de offerte)
+ *   sonnyKorting     — {percentage} óf {gratis:'tahoma'|'montage'}: onderhandelmandaat, zichtbaar in de kortingsregel zelf
  */
-async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aantalWijzigen = [], kortingRegel = null, vastePosten = [] }) {
+async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aantalWijzigen = [], kortingRegel = null, sonnyKorting = null, vastePosten = [] }) {
   const doc = await rpGet(`/document-service/v1/${CFG.RP_PID}/quotations/${documentId}`);
   const qd = doc?.quotationData;
   const plg = qd?.segments?.defaultTemplatePriceLineGroup;
@@ -155,6 +156,42 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
     // Eventuele eerdere AI-kortingsregel vervangen (nooit stapelen)
     lines = lines.filter(l => !titel(l).includes('extra korting'));
     lines.push({ ...base, description: `**Extra korting**\n${kortingRegel.omschrijving || 'Eenmalige extra korting'}`, units: 1, pricePerUnit: -Math.abs(kortingRegel.bedrag), position: 0 });
+  }
+
+  // SONNY-KORTING (Daimy 2026-07-17): extra korting die de AI weggeeft moet ALTIJD zichtbaar in
+  // de kortingsregel zelf — 2,5% extra = regel wordt "17,5% kortingsaanbod Sonny"; gratis item
+  // (grote orders) = regel op €0 + vermelding "— Sonny" achter de 15%-regel. Nooit een verstopte
+  // losse minregel, nooit stapelen. Doel blijft: zo min mogelijk korting geven.
+  const gratisTitel = (d, suffix) => String(d || '').replace(/^\*\*([^*\n]+)\*\*/, (_, t) => `**${t} — ${suffix}**`);
+  if (sonnyKorting && (sonnyKorting.percentage || sonnyKorting.gratis)) {
+    const gd = plg.data.groupDiscount;
+    const standaard15 = !gd?.amount || Number(gd.amount) === 15;
+    if (!standaard15) return { error: `Er staat al een afwijkende korting op deze offerte (${gd.amount}% "${gd.name}") — daar blijf je vanaf; escaleer naar een mens` };
+    if (sonnyKorting.percentage && sonnyKorting.gratis) return { error: 'Nooit percentage-verhoging én een gratis item tegelijk (mandaat: één van beide)' };
+    if (sonnyKorting.percentage) {
+      const pct = Number(sonnyKorting.percentage);
+      if (!(pct > 15 && pct <= 17.5)) return { error: 'sonnyKorting.percentage moet boven 15 en maximaal 17,5 zijn (mandaat: max 2,5% extra)' };
+      plg.data.groupDiscount = { type: 'PERCENTAGE', amount: pct, name: `${String(pct).replace('.', ',')}% kortingsaanbod Sonny`, vatPercentage: 21 };
+    } else {
+      if (!['tahoma', 'montage'].includes(sonnyKorting.gratis)) return { error: 'Onbekend gratis-item: alleen "tahoma" of "montage"' };
+      if (sonnyKorting.gratis === 'tahoma') {
+        const th = lines.find(l => titel(l).includes('tahoma'));
+        if (th) { th.pricePerUnit = 0; th.units = 1; th.description = gratisTitel(th.description, 'gratis (aanbod Sonny)'); }
+        else lines.push({ ...base, description: '**Tahoma Switch (Somfy) — gratis (aanbod Sonny)**\nSmart home hub: bedien je zonwering met je telefoon, ook buitenshuis.', units: 1, pricePerUnit: 0, position: 0 });
+      } else {
+        const mont = lines.filter(l => (titel(l).includes('montage') || titel(l).includes('inmeten')) && l.pricePerUnit > 0).sort((a, b) => a.pricePerUnit - b.pricePerUnit)[0];
+        if (!mont) return { error: 'Geen montageregel gevonden om gratis te maken' };
+        if ((mont.units || 1) > 1) {
+          lines.push({ ...mont, units: 1, pricePerUnit: 0, description: gratisTitel(mont.description, '1x gratis (aanbod Sonny)') });
+          mont.units -= 1;
+        } else {
+          mont.pricePerUnit = 0;
+          mont.description = gratisTitel(mont.description, 'gratis (aanbod Sonny)');
+        }
+      }
+      const label = sonnyKorting.gratis === 'tahoma' ? 'gratis Tahoma' : '1x gratis montage';
+      plg.data.groupDiscount = { type: 'PERCENTAGE', amount: 15, name: `15% tijdelijke actie + ${label} — Sonny`, vatPercentage: 21 };
+    }
   }
 
   // Volgorde exact volgens v4-logica: producten → montage → tahoma → opmerkingen

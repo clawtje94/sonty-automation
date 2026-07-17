@@ -53,6 +53,9 @@ async function poll() {
     }
   } catch (err) {
     console.error('Poll error:', err.message);
+    // Hangen op ECONNRESET kostte 2x uren aan gemiste berichten (16-17 juli).
+    // Bij een fout stoppen we; launchd (KeepAlive) start ons direct vers op.
+    process.exit(1);
   }
 }
 

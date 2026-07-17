@@ -101,6 +101,16 @@ async function plaatsNotitie(ticketId, tekst) {
   return tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: tekst });
 }
 
+// Een geplaatst bericht/notitie verwijderen. Werkende route (getest 17 juli):
+// DELETE /tickets/{id}/messages/{msgId}. Gebruikt om een achterhaalde escalatie-comment
+// (met collega-tags) weg te halen zodra de AI de klant tóch zelf heeft geholpen.
+async function verwijderNotitie(ticketId, messageId) {
+  try {
+    const res = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages/${messageId}`, { method: 'DELETE', headers: TH });
+    return res.ok;
+  } catch { return false; }
+}
+
 // Mention-tag voor een Trengo-gebruiker: "@{voornaam}{user_id}" (zo werkte @daimy736327).
 // Naam wordt éénmalig via de API opgehaald en gecachet; fallback = Daimy.
 const userTagCache = { 736327: '@daimy736327', 745487: '@jorren745487', 748440: '@tanya748440', 745486: '@joey745486', 736329: '@nanny736329', 745488: '@jaimy745488', 745489: '@sjoerd745489', 747786: '@daimy736327' /* bot tagt nooit zichzelf */ };
@@ -463,6 +473,18 @@ async function verwerkTicket(t, state) {
     // Overdracht zichtbaar in het gesprek zelf, met tag naar het team (beleid Daimy 16 juli)
     if (isWaTicket(t)) {
       await plaatsNotitie(t.id, `@jorren745487 @tanya748440 ⚠️ De AI kan dit niet zelf afhandelen en draagt het over: ${String(escalatie.reden || '').slice(0, 300)}`);
+    }
+  } else if (echtVerstuurd && isWaTicket(t)) {
+    // TÓCH ZELF GEHOLPEN na een eerdere overdracht (Daimy 2026-07-17: "als je toch iemand kan
+    // helpen maar je hebt al collega's getagd in een comment, verwijder die comment dan ook").
+    // De AI antwoordde nu ZONDER te escaleren → eerdere escalatie-comment(s) van de bot met
+    // collega-tags zijn achterhaald en gaan weg, zodat collega's er geen tijd aan verspillen.
+    const oudeEscalaties = (msgs?.data || []).filter(m =>
+      (m.internal_note || m.type === 'NOTE') && m.user_id === 747786 &&
+      /De AI kan dit niet zelf afhandelen en draagt het over/i.test(m.body || m.message || ''));
+    for (const m of oudeEscalaties) {
+      const weg = await verwijderNotitie(t.id, m.id);
+      console.log(`  ${weg ? '✓ achterhaalde escalatie-notitie ' + m.id + ' verwijderd (klant is alsnog geholpen)' : '⚠️ kon escalatie-notitie ' + m.id + ' niet verwijderen'}`);
     }
   }
 

@@ -30,7 +30,27 @@ const DAEMONS = [
   { label: 'nl.sonty.reviews-sync', log: 'reviews-sync.log', maxLogAgeH: 26, name: 'Reviews-sync' },
   { label: 'nl.sonty.auto-resume', log: null, maxLogAgeH: null, name: 'Auto-resume' },
   { label: 'nl.sonty.feedback-processor', log: null, maxLogAgeH: null, name: 'Feedback processor' },
+  // SONNY (AI-klantenservice) — moet ALTIJD aanstaan (Daimy 2026-07-17). Permanente
+  // launchd-dienst met KeepAlive; log wordt elke 30s bijgeschreven, dus 1u stilte = probleem.
+  { label: 'nl.sonty.sonny', log: 'sonny-watch.log', maxLogAgeH: 1, name: 'SONNY klantenservice (permanent)' },
+  { label: 'nl.sonty.sonny-rapport', log: null, maxLogAgeH: null, name: 'Sonny ochtendrapport 08:30' },
+  { label: 'nl.sonty.getekend-rapport', log: 'getekend-rapport.log', maxLogAgeH: 30, name: 'Dagrapport tekeningen + AI-resultaten 07:45' },
+  { label: 'nl.sonty.credits-check', log: 'credits-check.log', maxLogAgeH: 5, name: 'Anthropic credits-watchdog' },
 ];
+
+// Extra Sonny-check: staat de Telegram-inbox verdacht lang stil? (poller bevroor 2x op 16-17 juli)
+async function checkTelegramInbox() {
+  // Stille inbox is normaal (geen berichten = geen writes). Echte test: houdt de poller de
+  // getUpdates-verbinding vast? Een 409 Conflict bewijst dat hij leeft; een 200 met
+  // WACHTENDE berichten bewijst dat hij dood is (dan zou hij ze opgehaald hebben).
+  try {
+    const r = await fetch('https://api.telegram.org/bot' + TG_TOKEN + '/getUpdates?timeout=0&limit=1', { signal: AbortSignal.timeout(8000) });
+    if (r.status === 409) return []; // poller heeft de verbinding — gezond
+    const j = await r.json().catch(() => ({}));
+    if (j.ok && (j.result || []).length > 0) return ['poller haalt berichten NIET op (er staan er ' + j.result.length + '+ te wachten) — launchctl kickstart -k gui/501/nl.sonty.telegram-poll'];
+    return []; // geen wachtende berichten — onbeslist maar geen alarm
+  } catch { return []; } // netwerkprobleem bij de check zelf ≠ poller kapot
+}
 // NB: nl.sonty.auto-sync is hier bewust weg — de RP→HubSpot-sync draait via crontab,
 // niet via launchd. Die wordt hieronder gecheckt op de mtime van logs/sync.log.
 // De Outlook/Planado-sync uit de oude naam bestaat niet meer als daemon.
@@ -103,6 +123,11 @@ async function main() {
     }
   }
 
+  // Telegram-inbox versheid (Sonny-communicatiekanaal met Daimy)
+  const inboxIssues = await checkTelegramInbox();
+  if (inboxIssues.length) { problems++; results.push('❌ Telegram-inbox: ' + inboxIssues.join(', ')); }
+  else results.push('✅ Telegram-inbox');
+
   // RP→HubSpot sync (crontab, elke 15 min): check dat logs/sync.log vers is
   try {
     const syncLog = path.join(LOGS_DIR, 'sync.log');
@@ -114,14 +139,15 @@ async function main() {
     }
   } catch (e) { results.push('❌ RP→HubSpot sync (cron): check faalde: ' + e.message); problems++; }
 
-  // Sales-bot: staat sinds 20 mei uit (plist bestaat, niet geladen). Waarschuwing, geen alarm.
+  // Sales-bot: op 16 juli 2026 DEFINITIEF uitgezet (vervangen door SONNY/AI-KS; plist in
+  // uitgeschakeld/). Alarm juist als hij per ongeluk WEL geladen zou zijn.
   try {
     let loaded = true;
     try {
       const out = execSync('launchctl print gui/501/nl.sonty.sales-bot 2>&1', { encoding: 'utf8' });
       if (out.includes('Could not find service')) loaded = false;
     } catch { loaded = false; }
-    results.push(loaded ? '✅ Sales-bot (WhatsApp AI)' : '⚠️ Sales-bot (WhatsApp AI): staat uit sinds 20 mei — bewust? (plist bestaat, niet geladen)');
+    if (loaded) { problems++; results.push('❌ OUDE sales-bot draait — hoort UIT te staan (vervangen door Sonny)!'); }
   } catch {}
 
   // Schijfruimte check

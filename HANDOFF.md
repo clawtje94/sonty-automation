@@ -32,6 +32,13 @@ Daimy: "handel de 21 open WA-tickets af, daarna weer uit, maar blijf vervolgvrag
 - Leerpunt toegevoegd: nooit "neef"/straattaal (Jorren kreeg "He neef!").
 - Vervolgvragen-watcher draait (watch 240 min, daarna launchd 5-min). Ochtendrapport telt actieve gesprekken nu mee.
 
+## SONNY PERMANENT + IN DE HEALTH CHECK (17 juli ~08:00, opdracht Daimy: "moet gewoon altijd aanstaan")
+- nl.sonty.sonny is nu een PERMANENTE launchd-dienst: `daemon.js --watch 0 --sonny-only` met KeepAlive (crash of reboot = automatisch herstart binnen 15s). GEEN losse nohup-watches meer starten — de dienst draait altijd; herstart na code-wijziging: `launchctl kickstart -k gui/501/nl.sonty.sonny`.
+- Health check (2x/dag) bewaakt nu ook: SONNY (log max 1u stil), ochtendrapport, dagrapport, credits-watchdog, Telegram-poller (slimme check: 409 op getUpdates = poller leeft; wachtende berichten = poller dood) en alarmeert als de OUDE sales-bot ooit weer aan zou staan.
+- Status opvragen: `node scripts/sonny-status.js` of Daimy vraagt "sonny status". Poller herstart zichzelf nu bij elke fout (exit → KeepAlive).
+- Onderhandel-mandaat compleet in prompt: eerst waarde/15%, dan actief tegenbod max 2,5% (totaal 17,5%), bij 5-10 producten alternatief 1x montage gratis (zichtbare regel), pas daarna escaleren.
+- LED-verlichting SunElite overal kiesbaar: AI (vaste post), v4-optieblok, winkel-offerte-tool (accessoire, deployed).
+
 ## VOLLEDIGE BOEKEN IN DE BOT (16 juli ~23:30, eis Daimy: "er mag NIKS meer ontbreken")
 Samenvattingen lieten details vallen (bv. LED "(kleur en wit)"). Nu zit de VOLLEDIGE ruwe tekstlaag in de systemprompt: data/prijsboeken/sunmaster-2026-tekst.txt (pdftotext van Downloads/"Sunmaster 2026 goed.pdf"), data/prijsboeken/unilux-2026-tekst.txt (adviesprijslijst) en docs/roma-prijsstructuur-2025.md. Prompt nu ~123k tokens (1h-cache; ±$0,19/antwoord aan reads). Regels: producttotalen ALTIJD via prijs_berekenen (tabellen in ruwe tekst zijn rommelig); details/opties/doeken uit de boektekst; Roma apart systeem. Detailtest OK (LED kleur+wit, Starlight Blue 80% petflessen). Kwaliteitspoort (QA-check elke uitgaande tekst, Haiku) + Trengo-429-retry + claim-early dedupe + datumbesef zitten er ook in sinds vanavond.
 

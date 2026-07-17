@@ -654,9 +654,10 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
   const watchIdx = process.argv.indexOf('--watch');
   const watchMin = watchIdx >= 0 ? parseInt(process.argv[watchIdx + 1] || '60', 10) : 0;
 
-  if (watchMin > 0) {
-    console.log(`Watch-modus: elke 30s pollen, ${watchMin} minuten lang${onlyTest ? ' (alleen whitelist-nummers)' : ''}${sonnyOnly ? ' (alleen Sonny/WA)' : ''}.`);
-    const tot = Date.now() + watchMin * 60000;
+  if (watchIdx >= 0) {
+    const oneindig = !watchMin; // --watch 0 = permanent (launchd KeepAlive herstart ons bij crash — "moet gewoon altijd aanstaan", Daimy 17 juli)
+    console.log(`Watch-modus: elke 30s pollen, ${oneindig ? 'PERMANENT' : watchMin + ' minuten'}${onlyTest ? ' (alleen whitelist-nummers)' : ''}${sonnyOnly ? ' (alleen Sonny/WA)' : ''}.`);
+    const tot = oneindig ? Infinity : Date.now() + watchMin * 60000;
     while (Date.now() < tot) {
       await pollRonde(state, { onlyTest, sonnyOnly });
       await new Promise(r => setTimeout(r, 30000));

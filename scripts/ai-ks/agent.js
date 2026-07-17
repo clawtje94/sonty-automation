@@ -14,17 +14,24 @@ const client = new Anthropic({ apiKey });
 // is bij de chat, tot alles 100% goed gaat"). Een aparte, goedkope controleur (Haiku)
 // beoordeelt elk concept-antwoord vóór verzending. Afgekeurd → één verbeterpoging → daarna
 // stil escaleren. Kost ~2-5s en een fractie van een cent per antwoord.
-async function qaCheck(gesprek, historie, concept, nuTekst) {
+async function qaCheck(gesprek, historie, concept, nuTekst, uitgevoerdeActies = []) {
   try {
+    // Als de bot in deze beurt zelf een actie heeft uitgevoerd (bv. offerte aangepast), dan is
+    // een bevestiging die een eerder "een collega doet dit later"-bericht vervangt CORRECT en
+    // geen tegenspraak — anders blokkeerde de poort terecht-uitgevoerde bevestigingen (LED-
+    // offerte Daimy 17 juli: offerte was echt aangepast, maar de bevestiging werd 2x afgekeurd).
+    const actieBlok = uitgevoerdeActies.length
+      ? `\n# LET OP: de bot heeft in deze beurt deze actie(s) ÉCHT uitgevoerd: ${uitgevoerdeActies.join('; ')}. Een bevestiging hiervan die een eerder "een collega pakt dit later op"-bericht vervangt is CORRECT en telt NIET als tegenspraak — keur zo'n bevestiging goed.\n`
+      : '';
     const resp = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 200,
       messages: [{ role: 'user', content:
         `Je bent de kwaliteitscontroleur van de WhatsApp-klantenservicebot van Sonty (zonwering). ${nuTekst}\n\n` +
-        `# Laatste stuk van het gesprek (oud → nieuw)\n${historie.slice(-3000)}\n\n` +
+        `# Laatste stuk van het gesprek (oud → nieuw)\n${historie.slice(-3000)}\n${actieBlok}\n` +
         `# CONCEPT-ANTWOORD dat de bot wil sturen\n${concept}\n\n` +
         `BELANGRIJK: prijzen, kortingen en offertegegevens komen uit geverifieerde systemen van de bot — die zijn correct, beoordeel die NIET. Beoordeel ook geen dingen die je niet kunt weten. Beoordeel alléén de pasvorm:\n` +
-        `(1) past het op het laatste klantbericht qua onderwerp en persoon/naam? (2) geen dag-fouten — "fijn weekend" mag alleen als het volgens de opgegeven huidige datum echt vrijdag(middag)/weekend is (berichttijden zijn NL-tijd); (3) geen herhaald/gestapeld afscheid als er al afscheid is genomen; (4) geen opsmuk als "zonnige groet"/"zonnige zomer"; (5) zelfde taal als de klant; (6) geen interne info gelekt (team, notities, systemen); (7) spreekt zichzelf niet tegen t.o.v. eerder in het gesprek; (8) beantwoordt de vraag i.p.v. eromheen te praten.\n` +
+        `(1) past het op het laatste klantbericht qua onderwerp en persoon/naam? (2) geen dag-fouten — "fijn weekend" mag alleen als het volgens de opgegeven huidige datum echt vrijdag(middag)/weekend is (berichttijden zijn NL-tijd); (3) geen herhaald/gestapeld afscheid als er al afscheid is genomen; (4) geen opsmuk als "zonnige groet"/"zonnige zomer"; (5) zelfde taal als de klant; (6) geen interne info gelekt (team, notities, systemen); (7) spreekt zichzelf niet tegen t.o.v. eerder in het gesprek — MAAR een bevestiging van een zojuist uitgevoerde actie is geen tegenspraak (zie LET OP hierboven); (8) beantwoordt de vraag i.p.v. eromheen te praten.\n` +
         `Twijfel je of is het randgeval: antwoord OK (alleen afkeuren bij een duidelijke fout).\n` +
         `Bevat het concept "GEEN_BERICHT" of is het alleen een NOTITIE: voor het team, antwoord dan OK.\n` +
         `Antwoord met exact "OK" of met "AFGEKEURD: <één korte concrete reden>".` }],
@@ -125,7 +132,8 @@ async function beantwoord(gesprek) {
 
     // Kwaliteitspoort: past dit antwoord echt bij het gesprek? (max 1 herkansing)
     if (tekst) {
-      const oordeel = await qaCheck(gesprek, historie, tekst, `Huidige datum/tijd: ${DAGEN[nu.dag]} ${nu.datum}, ${nu.hhmm} uur (Nederland).`);
+      const gedaan = ctx.acties.filter(a => a.type !== 'escalatie').map(a => a.samenvatting || a.type);
+      const oordeel = await qaCheck(gesprek, historie, tekst, `Huidige datum/tijd: ${DAGEN[nu.dag]} ${nu.datum}, ${nu.hhmm} uur (Nederland).`, gedaan);
       if (!/^OK\b/i.test(oordeel)) {
         if (!qaHerkansing) {
           qaHerkansing = true;

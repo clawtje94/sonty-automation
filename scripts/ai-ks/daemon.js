@@ -242,7 +242,7 @@ async function sendSonnyReply(t, tekst) {
 }
 
 async function verwerkTicket(t, state) {
-  const msgs = await tGet(`/tickets/${t.id}/messages`);
+  const msgs = t._msgs || await tGet(`/tickets/${t.id}/messages`);
   const alleRijen = (msgs?.data || []).map(m => ({
     van: m.type === 'INBOUND' ? 'klant' : 'sonty',
     tekst: clean(m.body || m.message),
@@ -640,6 +640,24 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
   // 17 juli: "waarom duurt mijn reactie op de comments steeds zo lang?"). Claim-early +
   // merge-on-save in de state maken dit veilig; dedupe op id voorkomt dubbele runs.
   const rij = [...new Map(tickets.map(t => [String(t.id), t])).values()];
+  // NOTITIE-VOORRANG (Daimy 17 juli: "notities moet je zien als nieuwe berichten, ik wil daar
+  // gelijk een reactie op"). Berichten één keer per kandidaat ophalen (verwerkTicket hergebruikt
+  // ze via t._msgs) en gesprekken met een verse @sonny-notitie vooraan in de rij zetten.
+  let nStat = {};
+  try { nStat = JSON.parse(fs.readFileSync(NOTITIE_STATE, 'utf8')); } catch {}
+  const fetchRij = [...rij];
+  await Promise.all(Array.from({ length: Math.min(5, fetchRij.length) }, async () => {
+    let t;
+    while ((t = fetchRij.shift())) {
+      try { t._msgs = await tGet(`/tickets/${t.id}/messages`); } catch {}
+    }
+  }));
+  const verseNotitie = (t) => (t._msgs?.data || []).some(m => {
+    const tekst = String(m.body || m.message || '');
+    return (m.internal_note || m.type === 'NOTE') && /@sonny(?!\d)/i.test(tekst) &&
+      !tekst.includes('✅') && !nStat[`${t.id}:${m.created_at}`];
+  });
+  rij.sort((a, b) => verseNotitie(b) - verseNotitie(a));
   await Promise.all(Array.from({ length: Math.min(3, rij.length) }, async () => {
     let t;
     while ((t = rij.shift())) {

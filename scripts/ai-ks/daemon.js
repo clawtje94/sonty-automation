@@ -101,6 +101,20 @@ async function plaatsNotitie(ticketId, tekst) {
   return tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: tekst });
 }
 
+// Trengo-labels die de bot automatisch zet zodat het team in één oogopslag ziet wat de bedoeling
+// is (Daimy 17 juli). IDs uit /labels. AI_BOT = bot handelt het af; MENS_NODIG = overdracht, een
+// mens moet iets doen; de stap-labels markeren wat er concreet is gebeurd.
+const LABEL = { AI_BOT: 1821763, MENS_NODIG: 1821764, OPMETING: 1815410, OFFERTE_VERSTUURD: 1815411, SHOWROOM: 1816444 };
+async function zetLabel(ticketId, labelId) {
+  try {
+    const res = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/labels`, { method: 'POST', headers: TH, body: JSON.stringify({ label_id: labelId }) });
+    return res.ok;
+  } catch { return false; }
+}
+async function haalLabelWeg(ticketId, labelId) {
+  try { await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/labels/${labelId}`, { method: 'DELETE', headers: TH }); } catch {}
+}
+
 // Een geplaatst bericht/notitie verwijderen. Werkende route (getest 17 juli):
 // DELETE /tickets/{id}/messages/{msgId}. Gebruikt om een achterhaalde escalatie-comment
 // (met collega-tags) weg te halen zodra de AI de klant tóch zelf heeft geholpen.
@@ -490,6 +504,15 @@ async function verwerkTicket(t, state) {
     await plaatsNotitie(t.id, '🤖 Door de AI gedaan:\n' + mutaties.map(a => '• ' + leesbaar(a)).join('\n'));
   }
 
+  // LABELS zetten zodat het team ziet wat de bedoeling is (Daimy 17 juli). Bot beantwoordde =
+  // "🤖 AI Bot"; concrete acties krijgen hun stap-label; escalatie (hieronder) zet "👤 Mens nodig".
+  if (isWaTicket(t) && echtVerstuurd) {
+    await zetLabel(t.id, LABEL.AI_BOT);
+    if (mutaties.some(a => a.type === 'inmeet_afspraak')) await zetLabel(t.id, LABEL.OPMETING);
+    if (mutaties.some(a => a.type === 'offerte_aanpassen' || a.type === 'offerte_aanmaken')) await zetLabel(t.id, LABEL.OFFERTE_VERSTUURD);
+    if (/bookings\.cloud\.microsoft/.test(res.antwoord || '')) await zetLabel(t.id, LABEL.SHOWROOM);
+  }
+
   const escalatie = res.acties.find(a => a.type === 'escalatie');
   if (escalatie) {
     const wie = gesprek.klant.naam || gesprek.klant.phone || gesprek.klant.email;
@@ -507,19 +530,28 @@ async function verwerkTicket(t, state) {
       // al compleet (wie, adres, telefoon, wat er mis is, welke actie nodig, context) — een wrapper
       // met kopjes en een extra "laatste bericht"-blok maakt er juist weer meerdere dingen op elkaar van.
       await plaatsNotitie(t.id, `@jorren745487 @tanya748440\n\n${String(escalatie.reden || '').trim()}`);
+      // Label: een mens moet iets doen. "AI Bot" eraf, want de bot handelt dit niet af.
+      await zetLabel(t.id, LABEL.MENS_NODIG);
+      await haalLabelWeg(t.id, LABEL.AI_BOT);
     }
   } else if (echtVerstuurd && isWaTicket(t)) {
     // TÓCH ZELF GEHOLPEN na een eerdere overdracht (Daimy 2026-07-17: "als je toch iemand kan
     // helpen maar je hebt al collega's getagd in een comment, verwijder die comment dan ook").
     // De AI antwoordde nu ZONDER te escaleren → eerdere escalatie-comment(s) van de bot met
     // collega-tags zijn achterhaald en gaan weg, zodat collega's er geen tijd aan verspillen.
-    const oudeEscalaties = (msgs?.data || []).filter(m =>
-      (m.internal_note || m.type === 'NOTE') && m.user_id === 747786 &&
-      /De AI kan dit niet zelf afhandelen en draagt het over/i.test(m.body || m.message || ''));
+    // Herkenning op de overdracht-tagsignatuur (nieuw + oud format): een interne notitie van de
+    // bot die zowel @jorren als @tanya tagt, óf de oude standaardzin bevat.
+    const oudeEscalaties = (msgs?.data || []).filter(m => {
+      const tk = m.body || m.message || '';
+      return (m.internal_note || m.type === 'NOTE') && m.user_id === 747786 &&
+        (/@jorren745487[\s\S]*@tanya748440/.test(tk) || /De AI kan dit niet zelf afhandelen en draagt het over/i.test(tk));
+    });
     for (const m of oudeEscalaties) {
       const weg = await verwijderNotitie(t.id, m.id);
       console.log(`  ${weg ? '✓ achterhaalde escalatie-notitie ' + m.id + ' verwijderd (klant is alsnog geholpen)' : '⚠️ kon escalatie-notitie ' + m.id + ' niet verwijderen'}`);
     }
+    // Labels omzetten: de bot doet het nu zelf → "Mens nodig" eraf, "AI Bot" erop.
+    if (oudeEscalaties.length) { await haalLabelWeg(t.id, LABEL.MENS_NODIG); await zetLabel(t.id, LABEL.AI_BOT); }
   }
 
   // Terugkom-belofte in het zojuist beantwoorde klantbericht? Registreren voor de reminder.

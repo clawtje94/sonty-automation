@@ -190,10 +190,12 @@ async function verwerkSonnyNotities(t, teamNotities) {
   const instructies = [];
   // Eigen notities van de bot (auteur 747786) en ✅-terugkoppelingen NOOIT opnieuw verwerken —
   // dat gaf 16 juli ~23:58 een zelf-loop (bot verwerkte zijn eigen ✅ als nieuwe opdracht).
-  // Commando = "@sonny" NIET gevolgd door cijfers (dat is de mention-tag @sonny747786 in
-  // ✅-terugkoppelingen). Auteur mag ook het Sonny-account zijn: Claude injecteert opdrachten
-  // van Daimy via dat token. ✅-notities blijven altijd uitgesloten (anti-loop).
-  const sonnyNotes = teamNotities.filter(n => /@sonny(?!\d)/i.test(n.tekst) && !n.tekst.includes('✅'));
+  // Commando = een notitie die "@sonny" bevat (MET of ZONDER het user-id, want de Trengo
+  // mention-picker voegt "@sonny747786" toe — dat is juist de correcte manier van taggen; het
+  // eerdere (?!\d)-filter negeerde daardoor Daimy's echte notities, ticket 966969445 17 juli).
+  // Anti-loop komt van: ✅ uitsluiten + de teamNotities-filter die alle eigen bot-notities
+  // (Uitgevoerde acties / ✅ Verwerkt / AI-KS / schaduwmodus) er al uit haalt.
+  const sonnyNotes = teamNotities.filter(n => /@sonny/i.test(n.tekst) && !n.tekst.includes('✅'));
   if (!sonnyNotes.length) return instructies;
   let st;
   try { st = JSON.parse(fs.readFileSync(NOTITIE_STATE, 'utf8')); } catch { st = {}; }

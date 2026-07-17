@@ -135,7 +135,7 @@ const TOOL_DEFS = [
     input_schema: {
       type: 'object',
       properties: {
-        reden: { type: 'string' },
+        reden: { type: 'string', description: 'De volledige overdracht voor de collega — dit is LETTERLIJK de notitie die Jorren/Tanya lezen, dus schrijf hem af. Zet elk onderdeel op een EIGEN REGEL (echte enters), zodat het in één oogopslag te scannen is. Vaste opbouw:\nRegel 1: soort + klantnaam (bv. "Klacht bij klant Lotte" of "Vraag over levertijd — klant Jan de Vries")\nRegel 2: adres (als bekend)\nRegel 3: telefoonnummer (als bekend)\n(lege regel)\nWat er precies aan de hand is, in gewone zinnen.\n(lege regel)\nWelke actie nodig is (bv. "Graag service/montage contact opnemen voor herstel.")\n(lege regel)\nRelevante context uit het gesprek (bv. "Eerder gesprek ging over een knikarmscherm dat wij daar hebben opgehangen.")\nGeen kopjes als "Waarom ik dit niet kan" en niets over de AI zelf — schrijf het zoals een collega het aan een collega doorgeeft.' },
         urgentie: { type: 'string', enum: ['laag', 'normaal', 'hoog'] },
         stil: { type: 'boolean', description: 'true = klant krijgt géén bericht; gesprek blijft open voor een collega' },
         leervraag: { type: 'boolean', description: 'true = je weet het antwoord niet of twijfelt; de vraag gaat naar Daimy op Telegram zodat het antwoord aangeleerd kan worden. Zet de letterlijke klantvraag in reden.' },

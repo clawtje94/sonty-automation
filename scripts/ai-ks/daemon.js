@@ -503,12 +503,10 @@ async function verwerkTicket(t, state) {
     // Overdracht: ÉÉN duidelijk bericht met tag naar het team (beleid Daimy 16+17 juli:
     // "tag de juiste mensen en maak het in 1x duidelijk, niet alles op elkaar geramd").
     if (isWaTicket(t)) {
-      await plaatsNotitie(t.id,
-        `@jorren745487 @tanya748440\n` +
-        `⚠️ Overdracht — ${gesprek.klant.naam || gesprek.klant.phone || 'klant'} wacht op antwoord\n\n` +
-        `Waarom ik het niet zelf kan: ${String(escalatie.reden || '').slice(0, 300)}\n\n` +
-        `Laatste bericht van de klant: "${String(laatste.tekst || '').slice(0, 200)}"`
-      );
+      // ÉÉN tagregel + de reden zelf, verder NIETS (Daimy 17 juli). De reden die de AI schrijft is
+      // al compleet (wie, adres, telefoon, wat er mis is, welke actie nodig, context) — een wrapper
+      // met kopjes en een extra "laatste bericht"-blok maakt er juist weer meerdere dingen op elkaar van.
+      await plaatsNotitie(t.id, `@jorren745487 @tanya748440\n\n${String(escalatie.reden || '').trim()}`);
     }
   } else if (echtVerstuurd && isWaTicket(t)) {
     // TÓCH ZELF GEHOLPEN na een eerdere overdracht (Daimy 2026-07-17: "als je toch iemand kan

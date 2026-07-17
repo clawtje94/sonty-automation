@@ -1158,6 +1158,12 @@ function buildUpgradeDowngradeBlock(productKey, breedteCm, hoogteCm, uitvalCm, h
   }
   if (bedAlts.length > 0) { lines.push('Andere bediening:', ...bedAlts, ''); }
 
+  // LED-optie (alleen SunElite; boek p31: Somfy io 2 kanalen, kleur en wit — opdracht
+  // Daimy 2026-07-17: klanten moeten de LED overal kunnen kiezen)
+  if (productKey === 'sunelite') {
+    lines.push('Extra optie:', '• LED-verlichting in de cassette (Somfy io, kleur en wit apart bedienbaar): +€' + Math.round(749 * MARKUP), '');
+  }
+
   // Tahoma als optie als die niet in de offerte staat (wordt gecheckt via hasIO parameter overload)
   // Tahoma wordt apart toegevoegd in addV4Enhancements
 

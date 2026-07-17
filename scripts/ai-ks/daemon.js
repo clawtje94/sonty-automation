@@ -319,6 +319,25 @@ async function verwerkTicket(t, state) {
   const staleClaim = (m) => m && m.claim && Date.now() - new Date(m.tijd).getTime() > 10 * 60000;
   if (state.verwerkt[sleutel] && !staleClaim(state.verwerkt[sleutel])) return; // al behandeld (verlopen claim mag opnieuw)
 
+  // PURE BEVESTIGING NA AFRONDING (Hany 17 juli: "Ga ik doen 👍" / "👍🤝" liet de bot escaleren
+  // en een verwarrende "schaduwmodus"-notitie plaatsen). Op een duimpje/kort bedankje reageer je
+  // niet — geen agent-run, geen antwoord, geen escalatie, geen notitie. Alleen als het écht een
+  // afsluitend bevestigingsberichtje is (emoji-only of kort "top/bedankt/ga ik doen"), nooit bij
+  // een vraag (?) of een langer bericht.
+  const zonderEmoji = laatste.tekst.replace(/[\p{Extended_Pictographic}‍️\u{1F3FB}-\u{1F3FF}]/gu, '').trim();
+  const BEVESTIG_WOORDEN = new Set(['top','ok','oke','oké','oké','dank','dankje','dankjewel','dankuwel','danku','bedankt','thanks','thx','ga','ik','doen','het','is','goed','prima','super','perfect','helemaal','fijn','duidelijk','je','u','voor','alvast','mooi','gelukt','jullie','jij','ja','yes','klopt','oké','oke','begrepen','snap']);
+  // Bevestiging = geen vraag (?) én na verwijderen van emoji bestaat de tekst alleen uit
+  // bevestigingswoorden (of is leeg = alleen emoji). Zo blijven echte vragen/verzoeken altijd
+  // een antwoord krijgen, maar een "Top! Bedankt, ga ik doen 👍" niet.
+  const woorden = zonderEmoji.toLowerCase().replace(/[!.,;:👍🤝🙏😊🎉'"()-]/g, ' ').split(/\s+/).filter(Boolean);
+  const isBevestiging = !/\?/.test(laatste.tekst) && zonderEmoji.length <= 45 &&
+    (woorden.length === 0 || woorden.every(w => BEVESTIG_WOORDEN.has(w)));
+  if (isBevestiging) {
+    state.verwerkt[sleutel] = { tijd: new Date().toISOString(), bevestiging: true };
+    console.log(`  ticket ${t.id}: pure bevestiging ("${laatste.tekst.slice(0, 20)}") — niet op reageren`);
+    return;
+  }
+
   // FEEDBACK-KANAAL (Daimy 2026-07-16): "feedback: ..." in het WhatsApp-gesprek = leerpunt,
   // opslaan in data/ai-ks/leerpunten.md (gaat per direct mee in de systemprompt) en kort
   // bevestigen. ALLEEN de nummers van Daimy en Joey (CFG.FEEDBACK_PHONES) — Jarne en

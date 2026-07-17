@@ -20,6 +20,14 @@ const PRIJSBOEK = fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'sunm
 const BOEK_SUNMASTER = fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'prijsboeken', 'sunmaster-2026-tekst.txt'), 'utf8');
 const BOEK_UNILUX = fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'prijsboeken', 'unilux-2026-tekst.txt'), 'utf8');
 const BOEK_ROMA_OVERZICHT = fs.readFileSync(path.join(__dirname, '..', '..', 'docs', 'roma-prijsstructuur-2025.md'), 'utf8');
+// Roma-advieskennis: wanneer aanbieden (kust/wind/premium) + verkoopargumenten. Nodig omdat de
+// bot Roma eerder niet aanbood bij een kust/wind-vraag (Daimy 2026-07-17). Volledige Roma-extract
+// (~828 KB) past niet in de prompt; deze advieslaag dekt het advies, prijzen via escalatie.
+const ROMA_ADVIES = fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'prijsboeken', 'roma-advies.md'), 'utf8');
+// Toppoint binnenzonwering/raamdecoratie: alleen laden als het bronbestand bestaat (Daimy levert
+// de lijst nog aan). Zodra data/prijsboeken/toppoint-binnen.md bestaat, zit het automatisch in de bot.
+let BOEK_TOPPOINT = '';
+try { BOEK_TOPPOINT = fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'prijsboeken', 'toppoint-binnen.md'), 'utf8'); } catch { /* nog niet aangeleverd */ }
 
 const BOEKEN_BLOK = `\n\n# VOLLEDIG SUNMASTER PRIJSBOEK 2026 (ruwe boektekst — compleet, niets samengevat)
 Gebruik dit voor alle details: productbeschrijvingen, opties, doeken, kleuren, techniek, garantiebepalingen, voorwaarden. Tabellen kunnen er rommelig uitzien door de tekstextractie — voor complete PRODUCTPRIJZEN gebruik je daarom ALTIJD de tool prijs_berekenen; losse optieprijzen en beschrijvingen mag je hieruit halen (boekprijs × 1,10 = klantprijs).
@@ -29,9 +37,17 @@ ${BOEK_SUNMASTER}
 Zelfde regels: horrenprijzen via prijs_berekenen; details, uitvoeringen en kleuren mag je hieruit halen.
 ${BOEK_UNILUX}
 
+# ROMA — WANNEER AANBIEDEN + VERKOOPARGUMENTEN (advieskennis, actief gebruiken)
+Bied Roma als premium-alternatief actief aan bij kust/zeelucht, veel wind, of topkwaliteit-wensen. Lees dit goed:
+${ROMA_ADVIES}
+
 # ROMA PRIJSSTRUCTUUR (overzicht)
 Roma is een APART systeem: netto prijzen EXCL. btw, klantprijs = netto × 1,15, daarna 15% actie. NOOIT mengen met Sunmaster. Bij detailvragen over Roma die hier niet in staan: escaleren.
-${BOEK_ROMA_OVERZICHT}`;
+${BOEK_ROMA_OVERZICHT}` + (BOEK_TOPPOINT ? `
+
+# TOPPOINT BINNENZONWERING / RAAMDECORATIE (ruwe boektekst)
+Voor binnen: plissé, rolgordijnen, duo-rolgordijnen, jaloezieën, etc. Prijzen via prijs_berekenen indien ondersteund, anders escaleren; details/uitvoeringen/kleuren uit deze tekst.
+${BOEK_TOPPOINT}` : '');
 
 const PRIJSBOEK_REGELS = `# PRIJSBOEK-NASLAG (Sunmaster 2026 — geverifieerd)
 Hieronder staat de volledige samenvatting van het officiële Sunmaster-prijsboek 2026, dezelfde bron als onze prijsengine. Zo gebruik je hem:
@@ -78,6 +94,7 @@ const ROL = `Je bent Jaimy van Sonty (zonwering & raamdecoratie, Rijswijk). "Jai
   · "We kunnen geen Audi verkopen voor de prijs van een Skoda" (alleen op WhatsApp, bij de juiste toon).
   · Wijs op 600+ Google reviews met 4,9/5.
   · Bied een goedkoper alternatief aan (ander model, bv. SunBasic i.p.v. SunEye, of bedraad i.p.v. solar) — reken het door met prijs_berekenen.
+- ALTERNATIEVE MERKEN actief benutten (Daimy 2026-07-17: "je had Roma kunnen noemen bij die kust/wind-vraag"): denk bij elke situatie of een ander merk beter past. ROMA = premium bij kust/zeelucht/veel wind/topkwaliteit (dubbel gepoedercoat, hogere windklasse — zie Roma-advieskennis). UNILUX = ons horrenmerk (maten/uitvoeringen uit de Unilux-lijst, prijzen via prijs_berekenen). Binnen-raamdecoratie (plissé, rolgordijnen, jaloezieën): via Toppoint — noem dat we dat ook doen en zet de vraag door als de details er (nog) niet zijn.
   Dringt de klant door op korting: escaleren_naar_mens (kortingsmandaat ligt bij het team).
 
 # VASTE ANTWOORDEN (letterlijk uit succesvolle teamgesprekken)

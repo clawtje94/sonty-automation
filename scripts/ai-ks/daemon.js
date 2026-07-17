@@ -463,10 +463,12 @@ async function verwerkTicket(t, state) {
     const sendRes = await sendLiveReply(t, res.antwoord);
     console.log(`  → LIVE-TEST antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status + ' ' + sendRes.body.substring(0, 200)}`);
     if (!sendRes.ok) await telegram(`⚠️ AI-KS live-test verzenden MISLUKT op ticket ${t.id}: ${sendRes.status} ${sendRes.body.substring(0, 200)}`);
-  } else if (CFG.MODE === 'shadow') {
-    const notitie = `🤖 AI-KLANTENSERVICE (schaduwmodus — NIET verstuurd)\n\nConcept-antwoord:\n${res.antwoord || '(geen antwoord — geëscaleerd)'}${acties}`;
-    // Interne notitie op het ticket — team ziet het, klant niet
-    await plaatsNotitie(t.id, notitie);
+  } else if (CFG.MODE === 'shadow' && res.antwoord && !res.acties.some(a => a.type === 'escalatie')) {
+    // Schaduwmodus-conceptnotitie ALLEEN als er echt een concept-antwoord te tonen is én er
+    // geen escalatie is. Bij een escalatie kreeg het ticket anders TWEE notities: deze
+    // technische dump én de nette overdracht-notitie (Daimy 17 juli: "weer dubbele notities,
+    // voor onze mensen niet duidelijk"). De overdracht-notitie hieronder is dan genoeg.
+    await plaatsNotitie(t.id, `🤖 AI-KLANTENSERVICE (schaduwmodus — NIET verstuurd)\n\nConcept-antwoord:\n${res.antwoord}${acties}`);
   } else if (CFG.MODE === 'live') {
     // LIVE verzenden — pas actief als Daimy .live-enabled aanmaakt. Nog bewust niet geïmplementeerd.
     console.log('LIVE-modus nog niet vrijgegeven; er is niets verstuurd.');
@@ -478,7 +480,14 @@ async function verwerkTicket(t, state) {
   const echtVerstuurd = (sonnyMode || actiefTicket || liveTest) && res.antwoord;
   const mutaties = res.acties.filter(a => a.type !== 'escalatie');
   if (echtVerstuurd && mutaties.length) {
-    await plaatsNotitie(t.id, '🤖 Uitgevoerde acties door de AI:\n' + mutaties.map(a => '- ' + JSON.stringify(a)).join('\n'));
+    // Leesbaar voor het team, geen JSON-dump (Daimy 17 juli: "voor onze mensen niet duidelijk").
+    const leesbaar = (a) => {
+      if (a.type === 'offerte_aanpassen') return `Offerte aangepast: ${a.samenvatting || 'zie Reuzenpanda'}`;
+      if (a.type === 'inmeet_afspraak') return `Inmeten doorgezet naar de planning voor ${a.klantNaam || 'de klant'} (${a.product || 'product onbekend'})${a.notitie ? ` — notitie voor de planner: ${a.notitie}` : ''}`;
+      if (a.type === 'offerte_aanmaken') return `Nieuwe offerte aangemaakt voor ${a.klant || 'de klant'}`;
+      return a.samenvatting || a.type;
+    };
+    await plaatsNotitie(t.id, '🤖 Door de AI gedaan:\n' + mutaties.map(a => '• ' + leesbaar(a)).join('\n'));
   }
 
   const escalatie = res.acties.find(a => a.type === 'escalatie');
@@ -491,9 +500,15 @@ async function verwerkTicket(t, state) {
     } else {
       await telegram(`⚠️ AI-KS escalatie — ticket ${t.id} (${wie}):\n${escalatie.reden}\n\nLaatste klantbericht: ${laatste.tekst.substring(0, 300)}`);
     }
-    // Overdracht zichtbaar in het gesprek zelf, met tag naar het team (beleid Daimy 16 juli)
+    // Overdracht: ÉÉN duidelijk bericht met tag naar het team (beleid Daimy 16+17 juli:
+    // "tag de juiste mensen en maak het in 1x duidelijk, niet alles op elkaar geramd").
     if (isWaTicket(t)) {
-      await plaatsNotitie(t.id, `@jorren745487 @tanya748440 ⚠️ De AI kan dit niet zelf afhandelen en draagt het over: ${String(escalatie.reden || '').slice(0, 300)}`);
+      await plaatsNotitie(t.id,
+        `@jorren745487 @tanya748440\n` +
+        `⚠️ Overdracht — ${gesprek.klant.naam || gesprek.klant.phone || 'klant'} wacht op antwoord\n\n` +
+        `Waarom ik het niet zelf kan: ${String(escalatie.reden || '').slice(0, 300)}\n\n` +
+        `Laatste bericht van de klant: "${String(laatste.tekst || '').slice(0, 200)}"`
+      );
     }
   } else if (echtVerstuurd && isWaTicket(t)) {
     // TÓCH ZELF GEHOLPEN na een eerdere overdracht (Daimy 2026-07-17: "als je toch iemand kan

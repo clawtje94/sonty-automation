@@ -613,13 +613,26 @@ function reorderAndMerge(lines) {
     if (l.pricePerUnit === 0 && (l.units === 0 || d.length < 5)) { opmerkingen.push(l); continue; }
     producten.push(l);
   }
+  // IDENTIEKE MONTAGEREGELS SAMENVOEGEN tot één regel met opgeteld aantal (harde eis Daimy:
+  // "de 2 zelfde montage's onder 1 regel"). Alleen samenvoegen als titel ÉN prijs per stuk gelijk
+  // zijn — verschillende montages (bv. knikarm €275 vs screen €175) blijven apart. In code afgedwongen
+  // zodat het altijd klopt, ongeacht wat de AI of RP doet.
+  const montageMerged = [];
+  for (const l of montageLines) {
+    const key = (l.description?.split('\n')[0] || '').toLowerCase() + '|' + l.pricePerUnit;
+    const bestaand = montageMerged.find(m => m._key === key);
+    if (bestaand) { bestaand.units += (l.units || 1); changed = true; }
+    else montageMerged.push({ ...l, _key: key });
+  }
+  montageMerged.forEach(m => delete m._key);
+
   // Tahoma: altijd 1 stuk per offerte (RP voegt er meerdere toe per productgroep)
   let tahomaLine = null;
   if (tahomaLines.length > 0) {
     tahomaLine = { ...tahomaLines[0], units: 1 };
     if (tahomaLines.length > 1) changed = true;
   }
-  const newLines = [...producten, ...montageLines];
+  const newLines = [...producten, ...montageMerged];
   if (tahomaLine) newLines.push(tahomaLine);
   newLines.push(...opmerkingen);
   if (newLines.length !== lines.length) changed = true;

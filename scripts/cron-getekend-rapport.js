@@ -89,22 +89,51 @@ async function telegram(text) {
     }
     const digest = [...perTicket.entries()].map(([tid, arr], i) => `## Gesprek ${i + 1} (ticket ${tid})\n${arr.join('\n---\n')}`).join('\n\n').slice(0, 150000);
     const APIKEY = fs.readFileSync(path.join(__dirname, '.anthropic-api-key.txt'), 'utf8').trim();
+    // Harde aantallen die Daimy dagelijks wil (17 juli): hoeveel geholpen, hoeveel wilden akkoord,
+    // hoeveel overtuigd vanuit twijfel, hoeveel afspraken. Haiku classificeert per gesprek en geeft JSON.
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'x-api-key': APIKEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1200,
+        max_tokens: 1500,
         messages: [{ role: 'user', content:
-          `Hieronder staan de AI-klantenservicegesprekken van Sonty (zonwering) van de afgelopen dag. Vat voor de eigenaar kort en puntsgewijs samen, in het Nederlands, ALLEEN op basis van wat er echt staat (niets verzinnen):\n1. Twijfelaars overtuigd of verder geholpen: wie twijfelde (prijs/keuze) en met welke aanpak hielp de AI (goedkoper alternatief/downgrade, productuitleg, vergelijking)?\n2. Showroom/winkel: wie is naar de showroom verwezen of bevestigde een showroombezoek?\n3. Akkoord/inmeten: wie is doorgezet naar inmeten inplannen?\n4. Aangeboden alternatieven of aanpassingen aan offertes.\n5. Opvallend of gemiste kans (max 2).\nGebruik klantnamen als die er staan. Max 15 regels totaal, geen inleiding.\n\n${digest}` }],
+          `Hieronder staan ${perTicket.size} AI-klantenservicegesprekken van Sonty (zonwering) van de afgelopen dag. Beoordeel ALLEEN op basis van wat er echt staat (niets verzinnen) en geef UITSLUITEND geldige JSON terug in dit formaat:\n` +
+          `{\n  "geholpen": <aantal gesprekken waarin de AI de klant echt inhoudelijk verder heeft geholpen>,\n  "wilden_akkoord": <aantal klanten die aangaven akkoord te willen, de offerte te tekenen of door te gaan>,\n  "overtuigd": <aantal twijfelaars die de AI richting akkoord heeft overgehaald (bv. na prijsbezwaar of keuzestress)>,\n  "afspraken": <aantal inmeet- of showroomafspraken die zijn geboekt of doorgezet>,\n  "overtuigd_details": ["Klantnaam — in 1 zin hoe (alternatief/downgrade/uitleg/korting)"],\n  "samenvatting": "max 8 regels kwalitatief: showroom-verwijzingen, aangeboden alternatieven, opvallende punten of gemiste kansen. Gebruik klantnamen als die er staan."\n}\n` +
+          `Tel elk gesprek maximaal één keer per categorie. Geef alleen de JSON, geen tekst eromheen.\n\n${digest}` }],
       }),
     });
     const j = await resp.json();
-    const tekst = j?.content?.[0]?.text;
-    if (tekst) {
-      await telegram(`🤖 AI-resultaten afgelopen dag (${perTicket.size} gesprekken):\n\n${tekst}`);
+    let raw = j?.content?.[0]?.text || '';
+    let stats = null;
+    try { stats = JSON.parse(raw.replace(/```json|```/g, '').trim()); } catch {}
+
+    // Cumulatief totaal bijhouden zodat Daimy ook "totaal tot nu toe" ziet
+    const STATS_FILE = path.join(__dirname, '..', 'data', 'ai-ks', 'conversie-stats.json');
+    let cum = { geholpen: 0, wilden_akkoord: 0, overtuigd: 0, afspraken: 0, dagen: 0 };
+    try { cum = JSON.parse(fs.readFileSync(STATS_FILE, 'utf8')); } catch {}
+
+    if (stats) {
+      cum.geholpen += stats.geholpen || 0;
+      cum.wilden_akkoord += stats.wilden_akkoord || 0;
+      cum.overtuigd += stats.overtuigd || 0;
+      cum.afspraken += stats.afspraken || 0;
+      cum.dagen = (cum.dagen || 0) + 1;
+      fs.writeFileSync(STATS_FILE, JSON.stringify(cum, null, 1));
+
+      const details = (stats.overtuigd_details || []).length ? '\n\nOvertuigd:\n' + stats.overtuigd_details.map(d => '• ' + d).join('\n') : '';
+      await telegram(
+        `🤖 AI-resultaten afgelopen dag (${perTicket.size} gesprekken gevoerd):\n\n` +
+        `• Geholpen: ${stats.geholpen ?? '?'}\n` +
+        `• Wilden akkoord / tekenen: ${stats.wilden_akkoord ?? '?'}\n` +
+        `• Overtuigd vanuit twijfel: ${stats.overtuigd ?? '?'}\n` +
+        `• Afspraken (inmeet/showroom): ${stats.afspraken ?? '?'}\n` +
+        details +
+        (stats.samenvatting ? `\n\n${stats.samenvatting}` : '') +
+        `\n\n📊 Totaal tot nu toe (${cum.dagen} dagen): ${cum.geholpen} geholpen, ${cum.wilden_akkoord} wilden akkoord, ${cum.overtuigd} overtuigd, ${cum.afspraken} afspraken.`
+      );
     } else {
-      await telegram(`🤖 AI-resultaten: samenvatting mislukt (${JSON.stringify(j).slice(0, 120)}). Wel ${perTicket.size} gesprekken gevoerd.`);
+      await telegram(`🤖 AI-resultaten: ${perTicket.size} gesprekken gevoerd (aantallen-classificatie mislukt: ${JSON.stringify(j).slice(0, 100)}).`);
     }
   } catch (e) {
     console.error('samenvatting FOUT:', e.message);

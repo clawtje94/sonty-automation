@@ -180,13 +180,28 @@ async function runTool(name, input, ctx) {
       return JSON.stringify({ status: 'GEBLOKKEERD', opmerking: 'Geen dossier (itemId) bekend voor deze klant — je kunt niets doorzetten naar de planning. Zoek eerst het dossier via klant_opzoeken (vraag zo nodig het e-mailadres of offertenummer), of maak eerst een offerte aan met VOLLEDIGE contactgegevens (naam, e-mail, adres). Beloof de klant nog GEEN inmeetafspraak.' });
     }
     if ((CFG.MODE === 'live' || ctx.liveTest) && input.itemId) {
+      const itemUrl = `https://backend.reuzenpanda.nl/contact-service/${CFG.RP_PID}/backlogs/${CFG.RP_BACKLOG}/items/${input.itemId}`;
+      // De planner-notitie (bv. "pas na 28 juli bereikbaar") MOET in RP staan, want daar werkt
+      // de planner — niet alleen in de Trengo-comment (Daimy 17 juli: "ik zie dat nergens staan").
+      // We voegen de notitie TOE aan de item-description (nooit herbouwen — RP-regel).
+      if (input.notitie) {
+        try {
+          const g = await fetch(itemUrl, { headers: { Authorization: 'Bearer ' + CFG.RP_API_KEY } });
+          const d = await g.json(); const item = d.item || d;
+          const marker = '**Opmerking planning (AI-klantenservice';
+          if (!(item.description || '').includes(input.notitie.slice(0, 40))) {
+            const nieuw = (item.description || '') + `\n\n${marker}, ${CFG.amsterdamNu().datum}):**\n${input.notitie}`;
+            await fetch(itemUrl, { method: 'PATCH', headers: { Authorization: 'Bearer ' + CFG.RP_API_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ item: { description: nieuw } }) });
+          }
+        } catch { /* notitie-append faalt mag de statuswissel niet blokkeren */ }
+      }
       // Item naar RP-kolom "Inmeten inplannen" (zelfde PATCH als v4's setStatus)
-      const res = await fetch(`https://backend.reuzenpanda.nl/contact-service/${CFG.RP_PID}/backlogs/${CFG.RP_BACKLOG}/items/${input.itemId}`, {
+      const res = await fetch(itemUrl, {
         method: 'PATCH', headers: { Authorization: 'Bearer ' + CFG.RP_API_KEY, 'Content-Type': 'application/json' },
         body: JSON.stringify({ item: { status_id: CFG.RP_STATUS_INMETEN_INPLANNEN } }),
       });
       if (!res.ok) return JSON.stringify({ status: 'MISLUKT', opmerking: 'Status verplaatsen lukte niet. Zeg dat een collega het oppakt en roep escaleren_naar_mens aan.' });
-      return JSON.stringify({ status: 'DOORGEVOERD', opmerking: 'Item staat nu op "Inmeten inplannen". Vertel de klant: de planning neemt binnen 3 werkdagen contact op om de inmeetafspraak te maken. GEEN boekingslink sturen.' });
+      return JSON.stringify({ status: 'DOORGEVOERD', opmerking: `Item staat nu op "Inmeten inplannen"${input.notitie ? ' en je notitie voor de planner is in Reuzenpanda bij het dossier gezet' : ''}. Vertel de klant: de planning neemt binnen 3 werkdagen contact op om de inmeetafspraak te maken. GEEN boekingslink sturen.` });
     }
     return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets verplaatst. Vertel de klant dat de planning binnen 3 werkdagen contact opneemt om de afspraak te maken. GEEN boekingslink sturen (die is alleen voor showroombezoek).' });
   }

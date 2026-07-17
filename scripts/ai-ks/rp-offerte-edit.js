@@ -67,6 +67,7 @@ const VASTE_POSTEN = {
   hoogwerker: { naam: 'Hoogwerker (montage boven de 2e verdieping)', prijs: 650, uitleg: 'Per dag. Nodig als montage niet met ladders kan.' },
   demontage_oud_product: { naam: 'Demonteren en afvoeren oud scherm/rolluik', prijs: 75, uitleg: 'Per product, waarvan €25 gedoneerd aan het Prinses Máxima Kinderziekenhuis.' },
   verlengde_muursteunen: { naam: 'Verlengde muursteunen', prijs: 150, uitleg: 'Indien nodig, beoordeling bij het inmeten.' },
+  led_verlichting_sunelite: { naam: 'LED-verlichting SunElite', prijs: 823.90, uitleg: 'Somfy io, 2 kanalen: kleur en wit licht apart bedienbaar. Ingebouwd in de cassette. Alleen mogelijk op de SunElite.' },
 };
 
 /**

@@ -38,7 +38,14 @@ async function poll() {
           maxId = Math.max(maxId, update.update_id + 1);
         }
         if (update.message && update.message.chat.id === CHAT_ID && !update.message.from.is_bot) {
-          const text = update.message.text || '[geen tekst]';
+          let text = update.message.text || '[geen tekst]';
+          // Foto's: bewaar het file_id van de grootste variant zodat een
+          // sessie hem via getFile kan downloaden (anders alleen "[foto]").
+          if (update.message.photo && update.message.photo.length) {
+            const grootste = update.message.photo[update.message.photo.length - 1];
+            text = `[foto file_id:${grootste.file_id}]`;
+            if (update.message.caption) text += ` ${update.message.caption}`;
+          }
           appendMessage(text);
         }
       }

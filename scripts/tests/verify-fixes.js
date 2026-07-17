@@ -164,8 +164,8 @@ console.log('=== B. M4: markies-validatie → issues (→ handmatig) ===');
   // Case-insensitief: veldnamen met hoofdletters + bediening in andere case
   const r5 = api.processMarkiezen('1x Markiezen\nKies_materiaal: aluminium\nBreedte: 3000\nUitval: 1000\nWelk_type_bediening_wil_je?: somfy io motor solar', []);
   check('case-insensitief parsen + bediening genormaliseerd', r5.issues, []);
-  check('solar-bediening prijs meegenomen (665 excl)', r5.lines[0].pricePerUnit,
-    Math.round((api.mkLookupMarkies(api.MK_ALUMINIUM, 3000, 1000) + 665 + api.mkLookupBovenkap(3000, true) + api.mkLookupZijkap(1000, true)) * 1.21 * 100) / 100);
+  check('solar-bediening prijs meegenomen (745 excl, incl Situo-zender per boek 2026)', r5.lines[0].pricePerUnit,
+    Math.round((api.mkLookupMarkies(api.MK_ALUMINIUM, 3000, 1000) + 745 + api.mkLookupBovenkap(3000, true) + api.mkLookupZijkap(1000, true)) * 1.21 * 100) / 100);
   const r6 = api.processMarkiezen('1x Markiezen\nkies_materiaal: Aluminium\nbreedte: 3000\nwelk_type_bediening_wil_je?: Handbediend', []);
   check('uitval ontbreekt → issue', r6.issues.some(i => i.includes('uitval')), true);
 }

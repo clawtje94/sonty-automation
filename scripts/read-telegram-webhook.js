@@ -40,6 +40,10 @@ if (fs.existsSync(INBOX_FILE)) {
       if (alle.length) {
         console.log('(geen nieuwe berichten — laatste 3 uit inbox ter controle:)');
         alle.slice(-3).forEach(m => console.log('  ' + m.slice(0, 200)));
+        // Poller-gezondheid: staat de inbox verdacht lang stil, waarschuw dan luid
+        // (17 juli: poller hing 5+ uur op ECONNRESET en berichten van Daimy bleven onzichtbaar).
+        const stilMin = Math.round((Date.now() - fs.statSync(INBOX_FILE).mtimeMs) / 60000);
+        if (stilMin > 45) console.log('⚠️ LET OP: inbox al ' + stilMin + ' min stil — poller mogelijk vast. Fix: launchctl kickstart -k gui/501/nl.sonty.telegram-poll');
         process.exit(0);
       }
     }

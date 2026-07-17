@@ -25,7 +25,7 @@ const DAEMONS = [
   { label: 'nl.sonty.offerte-v4', log: 'v4.log', maxLogAgeH: 30, name: 'Offerte controle v4' },
   { label: 'nl.sonty.v4-selfcheck', log: 'v4-selfcheck.log', maxLogAgeH: 30, name: 'V4 self-check' },
   { label: 'nl.sonty.gripp-invullen', log: 'gripp-invullen.log', maxLogAgeH: 26, name: 'Gripp invullen' },
-  { label: 'nl.sonty.followup-whatsapp', log: 'followup-whatsapp.log', maxLogAgeH: 26, name: 'Follow-up WhatsApp' },
+  // Follow-up WhatsApp bewust verwijderd uit de check (Daimy 2026-07-14: "gaan we nooit meer aanzetten")
   { label: 'nl.sonty.telegram-poll', log: null, maxLogAgeH: null, name: 'Telegram poll' },
   { label: 'nl.sonty.reviews-sync', log: 'reviews-sync.log', maxLogAgeH: 26, name: 'Reviews-sync' },
   { label: 'nl.sonty.auto-resume', log: null, maxLogAgeH: null, name: 'Auto-resume' },

@@ -177,7 +177,10 @@ async function verwerkSonnyNotities(t, teamNotities) {
   const instructies = [];
   // Eigen notities van de bot (auteur 747786) en ✅-terugkoppelingen NOOIT opnieuw verwerken —
   // dat gaf 16 juli ~23:58 een zelf-loop (bot verwerkte zijn eigen ✅ als nieuwe opdracht).
-  const sonnyNotes = teamNotities.filter(n => /@sonny/i.test(n.tekst) && n.userId !== 747786 && !n.tekst.includes('✅'));
+  // Commando = "@sonny" NIET gevolgd door cijfers (dat is de mention-tag @sonny747786 in
+  // ✅-terugkoppelingen). Auteur mag ook het Sonny-account zijn: Claude injecteert opdrachten
+  // van Daimy via dat token. ✅-notities blijven altijd uitgesloten (anti-loop).
+  const sonnyNotes = teamNotities.filter(n => /@sonny(?!\d)/i.test(n.tekst) && !n.tekst.includes('✅'));
   if (!sonnyNotes.length) return instructies;
   let st;
   try { st = JSON.parse(fs.readFileSync(NOTITIE_STATE, 'utf8')); } catch { st = {}; }
@@ -251,7 +254,7 @@ async function verwerkTicket(t, state) {
   const rows = alleRijen.filter(m => !m.intern);
   // Interne notities van het TEAM = sturing voor de AI (bv. "@sonny wij boren dan een gat...",
   // vraag Daimy 2026-07-16). Eigen AI-notities eruit filteren (anders praat hij tegen zichzelf).
-  const teamNotities = alleRijen.filter(m => m.intern && !/AI-KS|SONNY \(AI|schaduwmodus|live verstuurd|✅ Verwerkt/i.test(m.tekst)).slice(-5);
+  const teamNotities = alleRijen.filter(m => m.intern && !/AI-KS|SONNY \(AI|schaduwmodus|live verstuurd|✅ Verwerkt|Uitgevoerde acties door de AI/i.test(m.tekst)).slice(-5);
   // @sonny-notities altijd verwerken (leerpunt/stop/opdracht), óók als er niets te
   // beantwoorden valt (Daimy plaatst ze vaak nadat het gesprek al beantwoord is).
   let teamInstructies = [];

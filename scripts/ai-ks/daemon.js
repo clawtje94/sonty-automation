@@ -321,12 +321,18 @@ async function verwerkTicket(t, state) {
     return;
   }
 
-  // Debounce: wacht tot het laatste klantbericht ±45s oud is. Voorkomt dubbel antwoorden
-  // als de klant meerdere berichten kort na elkaar stuurt (die pakken we dan in één keer mee).
-  // Bundel-wachttijd (45s) alleen voor echte klanten; testnummers van het team krijgen
-  // direct antwoord (Daimy 17 juli: "je hoeft niet te wachten").
+  // Menselijke reactietijd (Daimy 17 juli: "de bot reageert binnen een minuut, dat is niet
+  // menselijk — alleen op Daimy en Joey direct, de rest 3-5 min aanhouden"). Daimy + Joey
+  // (FEEDBACK_PHONES) krijgen direct antwoord om te kunnen doortrainen; iedere andere klant
+  // wacht 3-5 min. De wachttijd is stabiel per bericht (hash van ticket+tijd) zodat elke
+  // poll-ronde dezelfde drempel gebruikt en het bundelen van snel-na-elkaar-berichten blijft werken.
+  const directAntwoord = CFG.FEEDBACK_PHONES.includes(normPhone(t.contact?.phone));
   const leeftijdSec = (Date.now() - new Date(String(laatste.tijd).replace(' ', 'T'))) / 1000;
-  if (!isLiveTestContact(t) && isFinite(leeftijdSec) && leeftijdSec < 45) return; // volgende poll-ronde
+  if (!directAntwoord && isFinite(leeftijdSec)) {
+    let h = 0; for (const c of sleutel) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+    const wachtSec = 180 + (h % 121); // 180-300s (3-5 min), vast per bericht
+    if (leeftijdSec < wachtSec) return; // volgende poll-ronde
+  }
 
   // CLAIM het bericht vóór de trage agent-run (30-90s): een tweede proces dat hetzelfde
   // bericht ziet slaat het dan over. Dit voorkwam-niet-gehad dubbel antwoorden (Nout, 16 juli).

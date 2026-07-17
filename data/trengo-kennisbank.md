@@ -31,11 +31,10 @@ Sonty is de specialist in zonwering en woninginrichting in de regio Haaglanden e
 - Email: info@sonty.nl / aanvragen@sonty.nl
 - Website: sonty.nl
 
-### Openingstijden showroom
-- Dinsdag t/m vrijdag: 9:30 - 17:00
-- Zaterdag: 9:30 - 16:00
-- Zondag en maandag: gesloten
-- Geen afspraak nodig — je kunt gewoon binnenlopen
+### Showroom bezoeken
+- ALLEEN OP AFSPRAAK — geen vrij binnenlopen
+- Op afspraak te bezoeken op: woensdag, vrijdag en zaterdag
+- Afspraak plannen via de boekingslink (die toont de beschikbare tijden)
 
 ### Het team
 - Daimy Boot — eigenaar, sales

@@ -84,6 +84,7 @@ function isLiveTestContact(t) {
 }
 
 async function sendLiveReply(t, tekst) {
+  tekst = veiligeKlantTekst(tekst);
   // Verdedigingslaag 2: nooit versturen als het nummer niet op de whitelist staat.
   if (!isLiveTestContact(t)) throw new Error('sendLiveReply geblokkeerd: contact staat niet op de live-test whitelist');
   if (!tekst || !tekst.trim()) throw new Error('sendLiveReply geblokkeerd: leeg antwoord');
@@ -162,6 +163,7 @@ const ACTIEF_FILE = path.join(path.dirname(CFG.POLL_STATE_FILE), 'actieve-ticket
 function loadActief() { try { return JSON.parse(fs.readFileSync(ACTIEF_FILE, 'utf8')); } catch { return {}; } }
 function isActiefTicket(t) { return !!loadActief()[t.id]; }
 async function sendActiefReply(t, tekst) {
+  tekst = veiligeKlantTekst(tekst);
   if (!isActiefTicket(t)) throw new Error('sendActiefReply geblokkeerd: ticket staat niet in actieve-tickets.json');
   if (!isWaTicket(t)) throw new Error('sendActiefReply geblokkeerd: geen WhatsApp-ticket');
   if (!tekst || !tekst.trim()) throw new Error('sendActiefReply geblokkeerd: leeg antwoord');
@@ -261,7 +263,26 @@ function markeerNotitie(key) {
   fs.writeFileSync(NOTITIE_STATE, JSON.stringify(st, null, 1));
 }
 
+// Haalt meta-redenering en interne kopjes uit een klantbericht zodat er NOOIT iets naar de klant
+// gaat dat niet voor de klant bedoeld is (Déborah 17 juli). Verwijdert een "Bericht aan (de) klant:"-
+// kop (houdt alleen wat erna komt) en leidende "— ik ..."/"- ik ..."-redeneerregels.
+function schoonKlantTekst(tekst) {
+  let s = String(tekst || '');
+  const kop = s.match(/(?:^|\n)\s*Bericht(?:\s+aan\s+(?:de\s+)?klant)?\s*:\s*\n?([\s\S]*)$/i);
+  if (kop) s = kop[1];
+  // leidende meta-regels (bot vertelt wat hij gaat doen) weghalen
+  s = s.replace(/^(?:\s*[—–-]\s*(?:ik|eerst|dan|hier)\b[^\n]*\n+)+/i, '');
+  return s.trim();
+}
+
+// Laatste verdedigingslinie: elke uitgaande klanttekst gaat hier eerst doorheen.
+function veiligeKlantTekst(tekst) {
+  const s = schoonKlantTekst(tekst);
+  return s;
+}
+
 async function sendSonnyReply(t, tekst) {
+  tekst = veiligeKlantTekst(tekst);
   // Eigen verdedigingslagen (los van de whitelist): alleen WhatsApp, alleen als Sonny
   // aan staat én het buiten openingstijden is, nooit leeg.
   if (!sonnyActiefNu()) throw new Error('sendSonnyReply geblokkeerd: Sonny niet actief (binnen openingstijden of .sonny-enabled ontbreekt)');
@@ -270,7 +291,16 @@ async function sendSonnyReply(t, tekst) {
   return tPost(`/tickets/${t.id}/messages`, { message: tekst, type: 'OUTBOUND' });
 }
 
+// Een ticket dat aan een MENS is toegewezen is van hem/haar — de bot blijft er volledig af
+// (harde regel Daimy: alleen onbehandelde/niet-toegewezen tickets). 747786 = het Sonny/AI-account
+// zelf; die toewijzing telt niet als "een mens heeft het overgenomen".
+function aanMensToegewezen(t) {
+  const u = t.user_id ?? t.assignee?.id ?? null;
+  return !!u && Number(u) !== 747786;
+}
+
 async function verwerkTicket(t, state) {
+  if (aanMensToegewezen(t)) return; // toegewezen aan een collega → nooit aanraken
   const msgs = t._msgs || await tGet(`/tickets/${t.id}/messages`);
   const alleRijen = (msgs?.data || []).map(m => ({
     van: m.type === 'INBOUND' ? 'klant' : 'sonty',
@@ -309,7 +339,11 @@ async function verwerkTicket(t, state) {
     const ruw = res.antwoord || '';
     const notitieMatch = ruw.match(/NOTITIE:\s*([\s\S]+)$/i);
     const teamAntwoord = notitieMatch ? notitieMatch[1].trim() : '';
-    const klantTekst = ruw.replace(/NOTITIE:\s*[\s\S]+$/i, '').replace(/GEEN_BERICHT/g, '').trim();
+    let klantTekst = ruw.replace(/NOTITIE:\s*[\s\S]+$/i, '').replace(/GEEN_BERICHT/g, '').trim();
+    // VANGNET (Déborah 17 juli: bot stuurde zijn eigen redenering + de kop "Bericht aan klant:"
+    // letterlijk naar de klant). Als de bot zo'n kop gebruikt, houd ALLEEN wat erna komt; strip
+    // ook een leidende meta-/redeneerregel (begint met — of - en gaat over wat de bot gaat doen).
+    klantTekst = schoonKlantTekst(klantTekst);
     let verstuurd = false;
     if (klantTekst) {
       const sendRes = isLiveTestContact(t) ? await sendLiveReply(t, klantTekst) : await sendActiefReply(t, klantTekst);

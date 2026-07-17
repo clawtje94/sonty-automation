@@ -281,3 +281,11 @@ Alles in memory: `~/.claude/projects/-Users-clawdboot/memory/reference_sonty_cre
 - Werkroosters + vakantieblokken herbouwd via `scripts/planado-shifts-rebuild-2026-07.js` (292 shift-dagen; geen shift = geblokt).
 - API-lessen: shifts alleen batchgewijs `PATCH /users/{uuid}/shifts` met `{shifts:[...]}`; per-datum endpoint bestaat niet (404, faalde stil). Templates niet via API aan jobs te koppelen.
 - Wacht op Daimy: rooster Jaimy bevestigen; oude auto-sync (dood sinds 30/3) reactiveren ja/nee.
+
+## HANY-ANALYSE + @sonny-TAG FIX + SHOWROOM-AFSPRAAK + 21:00-RAPPORT (17 juli ~15:00)
+- **@sonny-notitie met user-id werd genegeerd (ROOT CAUSE)**: mijn anti-loop-filter `/@sonny(?!\d)/` negeerde elke "@sonny" gevolgd door cijfers — dus juist de correcte Trengo-mention "@sonny747786" die Daimy gebruikt. Daardoor kreeg hij geen ✅-reactie (ticket 966969445). Fix: `/@sonny/i` (met of zonder id); anti-loop blijft via ✅-uitsluiting + teamNotities-markerfilter.
+- **Hany's echte fout**: bot herhaalde "planning neemt binnen 3 werkdagen contact op" en las niet dat het gesprek al verder was (klant al gebeld/getekend). Promptregel toegevoegd: proces-belofte niet herhalen, meegaan met "planning had je al te pakken".
+- **Stijl**: elke "zonnig"-opsmuk ("zonnige zaken" ging fout bij Hany) nu hard verboden in prompt + QA.
+- **Pure bevestiging** (duimpje/"ga ik doen"/bedankt zonder vraag) → geen antwoord/escalatie/ruisnotitie meer (gaf bij Hany schaduwmodus-escalaties).
+- **Showroom-afspraak**: prompt zegt nu — binnenlopen mag, maar afspraak heeft voorkeur; stuur de Bookings-link om te plannen.
+- **Dagrapport**: verplaatst van 07:45 → **21:00** (einde shift, launchd nl.sonty.getekend-rapport). Nieuwe telling: akkoord=inmeten (1 ding), showroom apart, overtuigd als subset. Extra sectie "veelvoorkomende problemen waar klanten hulp bij nodig hadden" (Haiku-thema's + escalaties). Cumulatief in data/ai-ks/conversie-stats.json.

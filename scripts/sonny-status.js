@@ -14,11 +14,15 @@ let launchd = false;
 try { launchd = execSync('launchctl list 2>/dev/null | grep -c "nl.sonty.sonny$" || true').toString().trim() !== '0'; } catch {}
 A('Gesprekken beantwoorden (SONNY)', watcher || launchd, watcher ? 'snelle modus, elke 30s' : (launchd ? 'rustige modus, elke 5 min' : 'NIEMAND antwoordt!'));
 
-// 2. Nachtmodus / nieuwe tickets
+// 2. Nieuwe tickets: vast dagritme (ma-zo 08:00-21:00) + evt. handmatig verlengvenster
+const CFG = require('./ai-ks/config.js');
+const binnenUren = CFG.binnenBotUren();
 let nachtTot = null;
 try { nachtTot = fs.readFileSync(path.join(__dirname, 'ai-ks', '.nieuwe-tickets-tot'), 'utf8').trim(); } catch {}
-const nachtAan = nachtTot && new Date() < new Date(nachtTot);
-A('Nieuwe tickets oppakken', !!nachtAan, nachtAan ? 'tot ' + nachtTot.slice(0, 16).replace('T', ' ') : 'alleen lopende AI-gesprekken + testnummers');
+const verlengAan = nachtTot && new Date() < new Date(nachtTot);
+A('Nieuwe tickets oppakken', binnenUren || !!verlengAan,
+  binnenUren ? `dagritme ${CFG.BOT_UREN.start}-${CFG.BOT_UREN.eind} (ma-zo)` :
+  (verlengAan ? 'handmatig verlengd tot ' + nachtTot.slice(0, 16).replace('T', ' ') : `buiten boturen (${CFG.BOT_UREN.start}-${CFG.BOT_UREN.eind}) — alleen lopende gesprekken + testnummers`));
 
 // 3. Avonddienst met Sonny-intro (aparte functie!)
 let avond = false;

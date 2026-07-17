@@ -27,6 +27,12 @@ module.exports = {
   // Openingstijden showroom/team (bron: sonty.nl/showroom). zo=0 ... za=6; null = hele dag dicht.
   OPENINGSTIJDEN: { 0: null, 1: null, 2: ['09:30', '17:00'], 3: ['09:30', '17:00'], 4: ['09:30', '17:00'], 5: ['09:30', '17:00'], 6: ['09:30', '16:00'] },
 
+  // BOT-BEDRIJFSUREN (Daimy 2026-07-17): de klantenservicebot werkt elke dag, ma t/m zo,
+  // van 08:00 tot 21:00. Binnen dit venster pakt hij 's ochtends de nieuwe berichten op en
+  // werkt hij de hele dag door op alles wat binnenkomt. Buiten dit venster: geen nieuwe
+  // gesprekken oppakken (lopende AI-gesprekken en whitelist blijven wel werken).
+  BOT_UREN: { start: '08:00', eind: '21:00' },
+
   // SONNY — de AI-medewerker die zich eerlijk als AI voorstelt en buiten openingstijden
   // ALLE WhatsApp-klanten live helpt, met volledige tools (opdracht Daimy 2026-07-16:
   // "volledig helpen, ook offertes aanpassen, dat gaan we juist checken").
@@ -47,6 +53,11 @@ module.exports = {
     const venster = module.exports.OPENINGSTIJDEN[nu.dag];
     if (!venster) return true;
     return nu.hhmm < venster[0] || nu.hhmm >= venster[1];
+  },
+  // Draait de bot nu binnen zijn bedrijfsuren (ma-zo 08:00-21:00)? Binnen dit venster pakt hij
+  // nieuwe binnenkomende gesprekken op en werkt de hele dag door.
+  binnenBotUren(nu = amsterdamNu()) {
+    return nu.hhmm >= module.exports.BOT_UREN.start && nu.hhmm < module.exports.BOT_UREN.eind;
   },
 
   // LIVE-TEST WHITELIST: uitsluitend deze nummers krijgen een écht antwoord,

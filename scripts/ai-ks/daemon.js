@@ -148,6 +148,9 @@ async function sendActiefReply(t, tekst) {
 // ook NIEUWE WhatsApp-tickets helpen (zelfde regels: Jaimy, geen intro). Elk opgepakt
 // ticket wordt actief geregistreerd zodat vervolgvragen ook ná het venster beantwoord worden.
 function nieuweTicketsToegestaan() {
+  // Vast dagritme (Daimy 2026-07-17): elke dag 08:00-21:00 pakt de bot nieuwe gesprekken op.
+  if (CFG.binnenBotUren()) return true;
+  // Daarnaast nog een handmatig verlengingsvenster mogelijk (.nieuwe-tickets-tot) voor uitzonderingen.
   try {
     const tot = fs.readFileSync(path.join(__dirname, '.nieuwe-tickets-tot'), 'utf8').trim();
     return new Date() < new Date(tot);

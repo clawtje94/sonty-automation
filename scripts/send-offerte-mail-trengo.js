@@ -57,8 +57,8 @@ async function t(method, ep, body) {
   const ticketId = ticket?.id || ticket?.data?.id;
   const msg = await t('POST', `/tickets/${ticketId}/messages`, { message: html, subject });
 
-  // 4. Ticket sluiten zodat hij niet als open klantvraag in de inbox blijft staan
-  await t('POST', `/tickets/${ticketId}/close`, {}).catch(() => {});
+  // Ticket NIET automatisch sluiten — anders valt het uit de inbox en lijkt het alsof de klant
+  // niet geholpen is (Daimy 18 juli). Het team ziet het gesprek nu gewoon staan en sluit het zelf.
 
   console.log(`Verstuurd vanaf aanvragen@sonty.nl naar ${to} (ticket ${ticketId}, bericht ${msg?.message_id || msg?.id || '?'})`);
 })().catch(e => { console.error('MISLUKT:', e.message); process.exit(1); });

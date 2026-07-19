@@ -39,8 +39,25 @@ function logKS(entry) {
     fs.appendFileSync(CFG.LOG_FILE, JSON.stringify({ tijd: new Date().toISOString(), email: true, ...entry }) + '\n'); } catch {}
 }
 
-async function tGet(ep) { const r = await fetch('https://app.trengo.com/api/v2' + ep, { headers: H }); return r.ok ? r.json() : null; }
-async function tPost(ep, body) { const r = await fetch('https://app.trengo.com/api/v2' + ep, { method: 'POST', headers: H, body: body ? JSON.stringify(body) : undefined }); return r.ok; }
+const _sleep = ms => new Promise(r => setTimeout(r, ms));
+// 429-bestendig: Trengo rate-limit → wachten en opnieuw i.p.v. null teruggeven (anders leek een
+// ticket "niet gevonden" terwijl het er wél was, en werd het onterecht overgeslagen).
+async function tGet(ep) {
+  for (let i = 0; i < 6; i++) {
+    const r = await fetch('https://app.trengo.com/api/v2' + ep, { headers: H });
+    if (r.status === 429) { await _sleep(2000 + i * 1500); continue; }
+    return r.ok ? r.json() : null;
+  }
+  return null;
+}
+async function tPost(ep, body) {
+  for (let i = 0; i < 6; i++) {
+    const r = await fetch('https://app.trengo.com/api/v2' + ep, { method: 'POST', headers: H, body: body ? JSON.stringify(body) : undefined });
+    if (r.status === 429) { await _sleep(2000 + i * 1500); continue; }
+    return r.ok;
+  }
+  return false;
+}
 const zetLabel = (id, l) => tPost(`/tickets/${id}/labels`, { label_id: l });
 
 async function verwerk(ticketId) {

@@ -49,7 +49,7 @@ async function verwerk(ticketId) {
     const veld = (label, eind) => { const m = body.match(new RegExp(label + '\\s*[:]?\\s*([^]*?)(?=' + eind + ')', 'i')); return m ? m[1].trim() : ''; };
     const naam = veld('Naam', 'ik wil|Email|Telefoon');
     const wil = veld('ik wil:?', 'Email|Telefoon');
-    const email = (body.match(/Email\s*:?\s*([\w.+-]+@[\w-]+\.[a-z]{2,6})/i) || [])[1] || '';
+    const email = (body.match(/Email\s*:?\s*([\w.+-]+@[\w-]+\.[a-z]{2,4})(?![a-z])/) || [])[1] || '';
     const tel = (body.match(/Telefoonnummer\s*:?\s*([\d +]{6,15})/i) || [])[1] || '';
     const adres = veld('Adres', 'Huisnummer|postcode|Woonplaats|Field|Bericht');
     const hn = (body.match(/Huisnummer\s*:?\s*([^\s]+)/i) || [])[1] || '';

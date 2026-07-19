@@ -75,7 +75,7 @@ async function telegram(text) {
     const sinds = Date.now() - 24 * 3600000;
     const entries = fs.readFileSync(LOG, 'utf8').trim().split('\n')
       .map(l => { try { return JSON.parse(l); } catch { return null; } })
-      .filter(e => e && e.antwoord && new Date(e.tijd).getTime() > sinds && (e.actief || e.sonny));
+      .filter(e => e && e.antwoord && new Date(e.tijd).getTime() > sinds && (e.actief || e.sonny || e.email));
     if (!entries.length) {
       await telegram('🤖 AI-resultaten: de afgelopen dag geen AI-gesprekken gevoerd.');
       return;

@@ -27,8 +27,9 @@ async function ronde() {
     tickets.push(...rows);
     if (!d?.data?.length) break;
   }
-  // Alleen niet-aan-mens-toegewezen (Sunny of niemand). Human-toegewezen = van hem.
-  const kandidaten = tickets.filter(t => !t.user_id || Number(t.user_id) === SONNY_USER);
+  // Alleen aan Sunny toegewezen, OF echt aan niemand (geen user én geen team). Aan een TEAM
+  // toegewezen (bv. "Mens nodig") = human-wachtrij, daar blijft de daemon vanaf.
+  const kandidaten = tickets.filter(t => Number(t.user_id) === SONNY_USER || (!t.user_id && !t.team_id));
   const teDoen = [];
   for (const t of kandidaten) {
     // laatste bericht van de klant? en nog niet verwerkt op die tijd?

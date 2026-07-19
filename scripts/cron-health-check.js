@@ -33,9 +33,14 @@ const DAEMONS = [
   // SONNY (AI-klantenservice) — moet ALTIJD aanstaan (Daimy 2026-07-17). Permanente
   // launchd-dienst met KeepAlive; log wordt elke 30s bijgeschreven, dus 1u stilte = probleem.
   { label: 'nl.sonty.sonny', log: 'sonny-watch.log', maxLogAgeH: 1, name: 'SONNY klantenservice (permanent)' },
+  // SUNNY e-mail (aanvragen@) — permanente launchd-dienst, pollt elke 90s en schrijft altijd een
+  // regel weg, dus 1u stilte = probleem.
+  { label: 'nl.sonty.email', log: 'email-daemon.log', maxLogAgeH: 1, name: 'SUNNY e-mail (permanent)' },
   { label: 'nl.sonty.sonny-rapport', log: null, maxLogAgeH: null, name: 'Sonny ochtendrapport 08:30' },
   { label: 'nl.sonty.getekend-rapport', log: 'getekend-rapport.log', maxLogAgeH: 30, name: 'Dagrapport tekeningen + AI-resultaten 07:45' },
-  { label: 'nl.sonty.credits-check', log: 'credits-check.log', maxLogAgeH: 5, name: 'Anthropic credits-watchdog' },
+  // 2-uurs watchdog; drempel 14u zodat normale nachtelijke slaap/downtime geen vals alarm geeft
+  // (de watchdog heeft z'n eigen credits-op-alarm, dus een echt creditprobleem meldt hij los).
+  { label: 'nl.sonty.credits-check', log: 'credits-check.log', maxLogAgeH: 14, name: 'Anthropic credits-watchdog' },
 ];
 
 // Extra Sonny-check: staat de Telegram-inbox verdacht lang stil? (poller bevroor 2x op 16-17 juli)

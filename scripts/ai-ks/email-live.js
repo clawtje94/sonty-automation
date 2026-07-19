@@ -75,36 +75,26 @@ async function verwerk(ticketId) {
       return { ticketId, klant: naam || 'onbekend', resultaat: '👤 MENS NODIG (webflow zonder e-mail)', concept: 'reden: geen adres' };
     }
 
-    // Ticket-contact op het klantadres uit het formulier zetten, zodat een antwoord IN DIT TICKET
-    // naar de klant gaat i.p.v. naar no-reply@webflow (Daimy 19 juli).
-    const c = await tPost(`/channels/${AANVRAGEN_KANAAL}/contacts`, { identifier: email, name: naam || email });
-    const cid = c?.id || c?.data?.id;
-    if (cid) await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}`, { method: 'PATCH', headers: H, body: JSON.stringify({ contact_id: cid }) }).catch(() => {});
-
-    // Sunny het formulier laten beantwoorden alsof de klant het zelf stuurde.
-    const gesprek = {
-      kanaal: 'EMAIL',
-      klant: { naam: naam || null, email, phone: tel || null },
-      berichten: [{ van: 'klant', tekst: `Nieuwe aanvraag via ons website-formulier.\nNaam: ${naam}\nAdres: ${adresRegel}\nTelefoon: ${tel}\nVraag: ${wil || body.slice(0, 400)}`, tijd: inb?.created_at }],
-      liveTest: true, sonny: false, ticketId,
-    };
-    const res = await beantwoord(gesprek);
-    const escal = (res.acties || []).find(a => a.type === 'escalatie');
-    const mut = (res.acties || []).filter(a => a.type !== 'escalatie');
-    if (res.antwoord && !escal) {
-      const verstuurd = await tPost(`/tickets/${ticketId}/messages`, { message: naarHtml(res.antwoord) });
-      await tPost(`/tickets/${ticketId}/assign`, { type: 'user', user_id: SONNY_USER });
-      await zetLabel(ticketId, LABEL.AI_BOT);
-      if (mut.some(a => /offerte/.test(a.type))) await zetLabel(ticketId, LABEL.OFFERTE_VERSTUURD);
-      if (mut.some(a => a.type === 'inmeet_afspraak')) await zetLabel(ticketId, LABEL.OPMETING);
-      await tPost(`/tickets/${ticketId}/close`, {});
-      logKS({ ticket: ticketId, laatsteKlantBericht: ('Website-formulier: ' + (wil || '')).slice(0, 200), antwoord: schoonKlantTekst(res.antwoord), acties: mut });
-      return { ticketId, klant: naam || email, resultaat: verstuurd ? '✅ BEANTWOORD + gesloten (webflow → klant)' : '⚠️ versturen mislukt', concept: schoonKlantTekst(res.antwoord).slice(0, 220), acties: mut.map(a => a.type) };
-    }
+    // BELANGRIJK (Daimy 19 juli): in-thread antwoorden op een webflow-ticket gaat naar
+    // no-reply@webflow — Trengo negeert de contact-swap, dus de klant krijgt het NOOIT. Daarom
+    // mailt Sunny hier NIET zelf. Wel: de lead + een kant-en-klaar concept naar team Mens nodig,
+    // zodat een mens het in één keer naar het klantadres stuurt. (Echte eigen aflevering naar het
+    // klantadres = aparte bouwstap, pas aanzetten als de aflevering geverifieerd is.)
+    let conceptDraft = '';
+    try {
+      const res = await beantwoord({
+        kanaal: 'EMAIL',
+        klant: { naam: naam || null, email, phone: tel || null },
+        berichten: [{ van: 'klant', tekst: `Nieuwe aanvraag via ons website-formulier.\nNaam: ${naam}\nAdres: ${adresRegel}\nTelefoon: ${tel}\nVraag: ${wil || body.slice(0, 400)}`, tijd: inb?.created_at }],
+        liveTest: false, sonny: false, ticketId, // schaduwmodus: GEEN tools/offertes uitvoeren
+      });
+      conceptDraft = schoonKlantTekst(res.antwoord || '');
+    } catch {}
+    const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag — stuur dit zelf naar de klant (in-thread antwoord zou naar no-reply@webflow gaan).\n\nKlant: ${naam || '-'}\nMail: ${email}${tel ? '\nTel: ' + tel : ''}\nAdres: ${adresRegel || '-'}\nVraag: ${wil || body.slice(0, 200)}` + (conceptDraft ? `\n\n--- Concept-antwoord van Sunny (controleer en verstuur naar ${email}) ---\n${conceptDraft}` : '');
+    await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: note });
     await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
     await zetLabel(ticketId, LABEL.MENS_NODIG);
-    if (escal?.reden) await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `@jorren745487 @tanya748440\n\n${String(escal.reden).trim()}` });
-    return { ticketId, klant: naam || email, resultaat: '👤 MENS NODIG (webflow-lead)', concept: 'reden: ' + (escal?.reden || 'geen antwoord').slice(0, 150) };
+    return { ticketId, klant: naam || email, resultaat: '👤 MENS NODIG (webflow-lead + concept)', concept: conceptDraft.slice(0, 150) };
   }
 
   const rijen = (msgs?.data || []).map(m => ({ van: m.type === 'INBOUND' ? 'klant' : 'sonty', tekst: clean(m.body || m.message), tijd: m.created_at }))
@@ -119,7 +109,7 @@ async function verwerk(ticketId) {
   const gesprek = {
     kanaal: 'EMAIL',
     klant: { naam: t.contact?.full_name || null, email: t.contact?.email || null, phone: t.contact?.phone || null },
-    berichten: rijen.slice(-20),
+    berichten: rijen.slice(-25),
     teamNotities,
     liveTest: true, // tools + versturen echt uitvoeren
     sonny: false,

@@ -71,9 +71,9 @@ async function maakLead({ naam, email, telefoon, plaats, postcode, straat }) {
 }
 
 // Registreer een aangemaakte lead; de daemon vult de offerte en appt de link zodra RP klaar is
-function registreerPending({ lcId, ticketId, klantNaam, producten, sonny }) {
+function registreerPending({ lcId, ticketId, klantNaam, producten, sonny, kanaal }) {
   const pending = loadPending();
-  pending.push({ lcId, ticketId, klantNaam, producten, sonny: !!sonny, status: 'wachten', aangemaakt: Date.now() });
+  pending.push({ lcId, ticketId, klantNaam, producten, sonny: !!sonny, kanaal: kanaal || 'WA', status: 'wachten', aangemaakt: Date.now() });
   savePending(pending);
 }
 

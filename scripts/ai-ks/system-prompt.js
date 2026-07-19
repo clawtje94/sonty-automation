@@ -284,6 +284,15 @@ function buildSystemPrompt(opts = {}) {
     { type: 'text', text: ROL + '\n\n' + PRIJSBOEK_REGELS + PRIJSBOEK + BOEKEN_BLOK + '\n\n# KENNISBANK (achtergrond)\n' + KENNISBANK + leerpunten(), cache_control: { type: 'ephemeral', ttl: '1h' } },
   ];
   if (opts.sonny) blokken.push({ type: 'text', text: sonnyBlok(!!opts.introNodig) });
+  // Kanaal-bewuste aflevering: bij e-mail belooft en levert Sunny nooit "op WhatsApp".
+  if (opts.kanaal === 'EMAIL') {
+    blokken.push({ type: 'text', text:
+      '# DIT GESPREK LOOPT VIA E-MAIL (belangrijk)\n' +
+      '- Beloof de klant NOOIT iets "op WhatsApp" of "hier op WhatsApp". Dit gaat per e-mail.\n' +
+      '- Nieuwe offerte: zeg "Ik maak de offerte nu voor je in orde — je ontvangt de link over een paar minuten per mail." De link wordt automatisch per mail nagestuurd zodra de offerte klaar is.\n' +
+      '- Deel je een offerte-link zelf in je bericht, dan mag dat gewoon in deze mail; zet het offertenummer op een eigen regel.\n' +
+      '- Verder gelden exact dezelfde schrijfregels als op WhatsApp: geen gedachtestreepjes tussen zinnen, geen emoji, geen opsmuk, kort en menselijk.' });
+  }
   return blokken;
 }
 

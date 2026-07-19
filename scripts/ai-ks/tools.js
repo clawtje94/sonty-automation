@@ -174,7 +174,7 @@ async function runTool(name, input, ctx) {
   if (name === 'inmeet_afspraak_voorstellen') {
     ctx.acties.push({ type: 'inmeet_afspraak', ...input });
     if ((CFG.MODE === 'live' || ctx.liveTest) && !ctx.offerteLinkGedeeld) {
-      return JSON.stringify({ status: 'GEBLOKKEERD', opmerking: 'De klant heeft de offerte-link nog NIET via WhatsApp ontvangen in dit gesprek (harde eis). Volgorde: eerst de offerte(-aanpassing) regelen, de link hier delen, akkoord vragen op die offerte, en dan de keuzevraag (zelf tekenen of ik zet door). Pas daarna kun je doorzetten. Beloof nu nog geen inmeetafspraak.' });
+      return JSON.stringify({ status: 'GEBLOKKEERD', opmerking: `De klant heeft de offerte-link nog NIET via ${ctx.kanaal === 'EMAIL' ? 'de mail' : 'WhatsApp'} ontvangen in dit gesprek (harde eis). Volgorde: eerst de offerte(-aanpassing) regelen, de link hier delen, akkoord vragen op die offerte, en dan de keuzevraag (zelf tekenen of ik zet door). Pas daarna kun je doorzetten. Beloof nu nog geen inmeetafspraak.` });
     }
     if ((CFG.MODE === 'live' || ctx.liveTest) && !input.itemId) {
       return JSON.stringify({ status: 'GEBLOKKEERD', opmerking: 'Geen dossier (itemId) bekend voor deze klant — je kunt niets doorzetten naar de planning. Zoek eerst het dossier via klant_opzoeken (vraag zo nodig het e-mailadres of offertenummer), of maak eerst een offerte aan met VOLLEDIGE contactgegevens (naam, e-mail, adres). Beloof de klant nog GEEN inmeetafspraak.' });
@@ -216,8 +216,8 @@ async function runTool(name, input, ctx) {
       const { maakLead, registreerPending } = require('./rp-offerte-create.js');
       const res = await maakLead(input);
       if (res.error) return JSON.stringify({ status: 'MISLUKT', fout: res.error, opmerking: 'Zeg dat een collega de offerte zo snel mogelijk maakt en roep escaleren_naar_mens aan.' });
-      registreerPending({ lcId: res.lcId, ticketId: ctx.ticketId, klantNaam: input.naam, producten: input.producten, sonny: !!ctx.sonny });
-      return JSON.stringify({ status: 'IN_BEHANDELING', opmerking: 'De offerte wordt aangemaakt (±5 minuten). De klant krijgt de link daarna AUTOMATISCH hier op WhatsApp — zeg dat erbij en beloof geen exacte tijd korter dan dat.' });
+      registreerPending({ lcId: res.lcId, ticketId: ctx.ticketId, klantNaam: input.naam, producten: input.producten, sonny: !!ctx.sonny, kanaal: ctx.kanaal });
+      return JSON.stringify({ status: 'IN_BEHANDELING', opmerking: `De offerte wordt aangemaakt (±5 minuten). De klant krijgt de link daarna AUTOMATISCH ${ctx.kanaal === 'EMAIL' ? 'per mail' : 'hier op WhatsApp'} — zeg dat erbij en beloof geen exacte tijd korter dan dat.` });
     }
     return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets aangemaakt. Zeg dat de offerte zo snel mogelijk volgt via een collega.' });
   }

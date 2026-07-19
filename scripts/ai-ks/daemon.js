@@ -648,8 +648,15 @@ async function verwerkPendingOffertes() {
     // Link mag naar de klant bij: whitelist-test, of een Sonny-gesprek (buiten openingstijden
     // aangemaakt; de nalevering zelf mag ook net ná opening nog, klant verwacht hem).
     const magSonnyLeveren = p.sonny && CFG.SONNY.enabled && ticket && isWaTicket(ticket);
-    if (ticket && (isLiveTestContact(ticket) || magSonnyLeveren)) {
-      const voornaam = (p.klantNaam || '').split(' ')[0];
+    const voornaam = (p.klantNaam || '').split(' ')[0];
+    // E-mail-ticket: de offerte-link per mail in hetzelfde ticket nasturen (het e-mailkanaal is
+    // volledig live). Zonder deze tak zou een via e-mail aangemaakte offerte de klant nooit bereiken.
+    const isEmailLevering = ticket && !isWaTicket(ticket) && (p.kanaal === 'EMAIL' || CFG.EMAIL_CHANNEL_NAMES.includes(ticket.channel?.title));
+    if (isEmailLevering) {
+      const html = `<p>Hi ${voornaam},</p><p>Je offerte staat klaar. Je bekijkt hem hier: <a href="${res.link}">${res.link}</a></p><p>Offertenummer: ${doc.quotationNumber || ''}<br>De offerte is 7 dagen geldig. Neem hem rustig door en laat maar weten als je vragen hebt.</p>`;
+      const sendRes = await tPost(`/tickets/${ticket.id}/messages`, { message: html });
+      console.log(`  → pending offerte per mail geleverd aan ${p.klantNaam}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status}`);
+    } else if (ticket && (isLiveTestContact(ticket) || magSonnyLeveren)) {
       const bericht = `Hi ${voornaam}, je offerte staat klaar. Je bekijkt hem hier: ${res.link}\n\nOffertenummer: ${doc.quotationNumber || ''}\nDe offerte is 7 dagen geldig. Neem hem rustig door en laat maar weten als je vragen hebt!`;
       const sendRes = isLiveTestContact(ticket)
         ? await sendLiveReply(ticket, bericht)

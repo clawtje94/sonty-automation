@@ -100,12 +100,18 @@ async function verwerk(ticketId) {
 
   const rijen = (msgs?.data || []).map(m => ({ van: m.type === 'INBOUND' ? 'klant' : 'sonty', tekst: clean(m.body || m.message), tijd: m.created_at }))
     .filter(m => m.tekst).sort((a, b) => String(a.tijd).localeCompare(String(b.tijd)));
+  // @sonny-notities van Daimy/het team op dit ticket = sturing voor Sunny (net als op WhatsApp).
+  const teamNotities = (msgs?.data || [])
+    .filter(m => (m.type === 'NOTE' || m.internal_note) && /@sonny/i.test(m.body || m.message || ''))
+    .map(m => ({ tijd: m.created_at, tekst: clean(m.body || m.message) }))
+    .sort((a, b) => String(a.tijd).localeCompare(String(b.tijd)));
   if (!rijen.length || rijen[rijen.length - 1].van !== 'klant') return { ticketId, resultaat: 'laatste bericht niet van klant — overgeslagen' };
 
   const gesprek = {
     kanaal: 'EMAIL',
     klant: { naam: t.contact?.full_name || null, email: t.contact?.email || null, phone: t.contact?.phone || null },
     berichten: rijen.slice(-20),
+    teamNotities,
     liveTest: true, // tools + versturen echt uitvoeren
     sonny: false,
     ticketId: t.id,

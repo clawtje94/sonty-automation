@@ -48,7 +48,7 @@ async function qaCheck(gesprek, historie, concept, nuTekst, uitgevoerdeActies = 
  */
 async function beantwoord(gesprek) {
   const ctx = {
-    acties: [], liveTest: !!gesprek.liveTest, sonny: !!gesprek.sonny, ticketId: gesprek.ticketId || null,
+    acties: [], liveTest: !!gesprek.liveTest, sonny: !!gesprek.sonny, ticketId: gesprek.ticketId || null, kanaal: gesprek.kanaal || 'WA',
     // Harde eis Daimy: inmeet-doorzetting kan alleen als de offerte-link in dít gesprek gedeeld is
     offerteLinkGedeeld: (gesprek.berichten || []).some(b => b.van === 'sonty' && /document\.reuzenpanda\.nl/.test(b.tekst || '')),
   };
@@ -93,7 +93,7 @@ async function beantwoord(gesprek) {
       model: CFG.MODEL,
       max_tokens: CFG.MAX_TOKENS,
       thinking: { type: 'adaptive' },
-      system: buildSystemPrompt({ sonny: !!gesprek.sonny, introNodig: !!gesprek.sonnyIntroNodig }),
+      system: buildSystemPrompt({ sonny: !!gesprek.sonny, introNodig: !!gesprek.sonnyIntroNodig, kanaal: gesprek.kanaal }),
       tools: TOOL_DEFS,
       messages,
     });

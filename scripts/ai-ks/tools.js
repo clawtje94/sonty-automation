@@ -143,6 +143,18 @@ const TOOL_DEFS = [
       required: ['reden'],
     },
   },
+  {
+    name: 'geen_herinneringen_meer',
+    description: 'Roep dit aan als de klant duidelijk aangeeft GEEN mails/herinneringen/offerte-opvolging meer te willen ontvangen (uitschrijven, "stop met mailen", "geen herinneringen meer", "haal me uit het systeem"). Het Reuzenpanda-dossier van de klant gaat dan naar de status "geen herinnering meer", zodat de automatische herinneringsmails stoppen. Het itemId haal je uit klant_opzoeken. Bevestig de klant daarna kort en met excuus dat de uitschrijving is verwerkt.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        itemId: { type: 'string', description: 'Reuzenpanda item-id uit klant_opzoeken' },
+        klantNaam: { type: 'string' },
+      },
+      required: ['itemId'],
+    },
+  },
 ];
 
 // ── Uitvoering ──
@@ -228,6 +240,17 @@ async function runTool(name, input, ctx) {
       return JSON.stringify({ status: 'GENOTEERD (stil)', opmerking: 'Het gesprek blijft open staan; een collega antwoordt. Stuur de klant NIETS: geef als eindantwoord uitsluitend de tekst [STIL].' });
     }
     return JSON.stringify({ status: 'GENOTEERD', opmerking: 'Medewerker wordt geïnformeerd. Vertel de klant dat een collega er persoonlijk op terugkomt.' });
+  }
+  if (name === 'geen_herinneringen_meer') {
+    ctx.acties.push({ type: 'geen_herinneringen_meer', ...input });
+    if (CFG.MODE === 'live' || ctx.liveTest) {
+      if (!input.itemId) return JSON.stringify({ status: 'GEBLOKKEERD', opmerking: 'Geen dossier (itemId) bekend — zoek de klant eerst via klant_opzoeken (op e-mail/telefoon/offertenummer). Zonder dossier kan de uitschrijving niet verwerkt worden; vraag zo nodig het e-mailadres of offertenummer.' });
+      const { zetStatus } = require('./rp-offerte-edit.js');
+      const ok = await zetStatus(input.itemId, CFG.RP_STATUS_GEEN_HERINNERING).catch(() => false);
+      if (!ok) return JSON.stringify({ status: 'MISLUKT', opmerking: 'Status zetten mislukte; roep escaleren_naar_mens aan zodat een collega de uitschrijving handmatig verwerkt.' });
+      return JSON.stringify({ status: 'VERWERKT', opmerking: 'De klant staat nu op "geen herinnering meer" — er worden geen herinneringsmails meer gestuurd. Bevestig de klant kort en vriendelijk MET excuus dat de uitschrijving is verwerkt en dat hij geen herinneringen meer ontvangt.' });
+    }
+    return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets gewijzigd. Zeg dat een collega de uitschrijving verwerkt.' });
   }
   return JSON.stringify({ error: 'Onbekende tool' });
 }

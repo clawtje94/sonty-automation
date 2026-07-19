@@ -96,6 +96,7 @@ module.exports = {
   RP_BACKLOG: 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7',
   RP_STATUS_INMETEN_INPLANNEN: '2e9819bd-26f0-4082-8f18-32bb48f87f54', // klant akkoord → planning belt binnen 3 werkdagen
   RP_STATUS_AI_OFFERTE_VERSTUURD: 'dc0efe4f-2cd6-45d8-aeff-7f1c817a0fb2', // AI heeft offerte gemaakt/aangepast en link geappt
+  RP_STATUS_GEEN_HERINNERING: '0055a9bd-f2be-4a9e-ad75-f507543dd43d', // klant wil geen herinneringen/mails meer (opt-out; anker: Gijs Friso, Daimy 19 juli)
 
   BOOKINGS_URL: 'https://bookings.cloud.microsoft/book/SontyMontage1@sontymontage.nl/s/lAKws2wHtEOFjHYzLwjXdQ2?ismsaljsauthenabled=true',
 };

@@ -19,13 +19,15 @@ function saveState(s) { fs.mkdirSync(path.dirname(STATE_FILE), { recursive: true
 
 async function ronde() {
   const state = loadState();
-  // Open Aanvragen-tickets ophalen (eerste paar pagina's; nieuwste eerst is prima)
+  // ALLE open Aanvragen-tickets ophalen — doorpaginaren tot leeg (cap 25 pagina's). Eerder werden
+  // maar 4 pagina's gescand, waardoor OUDERE aan-Sunny/niemand-toegewezen tickets nooit werden
+  // opgepakt en open bleven staan (Daimy 19 juli). Nu vallen die ook binnen.
   let tickets = [];
-  for (let p = 1; p <= 4; p++) {
+  for (let p = 1; p <= 25; p++) {
     const d = await tGet(`/tickets?page=${p}`);
-    const rows = (d?.data || []).filter(t => t.channel?.title === AANVRAGEN_KANAAL && t.status !== 'CLOSED');
-    tickets.push(...rows);
-    if (!d?.data?.length) break;
+    const data = d?.data || [];
+    tickets.push(...data.filter(t => t.channel?.title === AANVRAGEN_KANAAL && t.status !== 'CLOSED'));
+    if (!data.length) break;
   }
   // Alleen aan Sunny toegewezen, OF echt aan niemand (geen user én geen team). Aan een TEAM
   // toegewezen (bv. "Mens nodig") = human-wachtrij, daar blijft de daemon vanaf.

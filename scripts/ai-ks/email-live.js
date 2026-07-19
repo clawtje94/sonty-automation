@@ -38,6 +38,30 @@ async function verwerk(ticketId) {
   const t = (await tGet(`/tickets/${ticketId}`))?.data || await tGet(`/tickets/${ticketId}`);
   if (!t) return { ticketId, resultaat: 'ticket niet gevonden' };
   const msgs = await tGet(`/tickets/${ticketId}/messages`);
+
+  // WEBFLOW-FORMULIER: afzender is no-reply@webflow, dus in-thread antwoorden zou naar webflow
+  // gaan i.p.v. de klant. Voor nu: netjes uitgelezen naar team Mens nodig (een mens pakt de nieuwe
+  // lead op met alle gegevens). Echt zelf beantwoorden = nieuwe mail naar het adres uit het
+  // formulier (aparte bouwstap).
+  if (/no-reply@webflow/i.test(t.contact?.email || '') || /New form submission/i.test(t.subject || '')) {
+    const inb = (msgs?.data || []).find(m => m.type === 'INBOUND');
+    const body = clean(inb?.body || inb?.message);
+    const veld = (label, eind) => { const m = body.match(new RegExp(label + '\\s*[:]?\\s*([^]*?)(?=' + eind + ')', 'i')); return m ? m[1].trim() : ''; };
+    const naam = veld('Naam', 'ik wil|Email|Telefoon');
+    const wil = veld('ik wil:?', 'Email|Telefoon');
+    const email = (body.match(/Email\s*:?\s*([\w.+-]+@[\w-]+\.[a-z]{2,6})/i) || [])[1] || '';
+    const tel = (body.match(/Telefoonnummer\s*:?\s*([\d +]{6,15})/i) || [])[1] || '';
+    const adres = veld('Adres', 'Huisnummer|postcode|Woonplaats|Field|Bericht');
+    const hn = (body.match(/Huisnummer\s*:?\s*([^\s]+)/i) || [])[1] || '';
+    const pc = (body.match(/postcode\s*:?\s*([^\s]+)/i) || [])[1] || '';
+    const plaats = veld('Woonplaats', 'Field|Bericht');
+    const note = `@jorren745487 @tanya748440\n\nNieuwe aanvraag via het website-formulier — Sunny kan hier niet direct op antwoorden (formulier komt van webflow).\n\n${naam || 'Klant'} (${email}${tel ? ' / ' + tel : ''})\n${[adres, hn, pc, plaats].filter(Boolean).join(' ')}\n\nVraag: ${wil || body.slice(0, 200)}`;
+    await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: note });
+    await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
+    await zetLabel(ticketId, LABEL.MENS_NODIG);
+    return { ticketId, klant: naam || email, resultaat: '👤 MENS NODIG (webflow-lead, naar team Mens nodig)', concept: 'reden: nieuwe website-aanvraag ' + (wil || '').slice(0, 90) };
+  }
+
   const rijen = (msgs?.data || []).map(m => ({ van: m.type === 'INBOUND' ? 'klant' : 'sonty', tekst: clean(m.body || m.message), tijd: m.created_at }))
     .filter(m => m.tekst).sort((a, b) => String(a.tijd).localeCompare(String(b.tijd)));
   if (!rijen.length || rijen[rijen.length - 1].van !== 'klant') return { ticketId, resultaat: 'laatste bericht niet van klant — overgeslagen' };
@@ -72,7 +96,9 @@ async function verwerk(ticketId) {
   return { ticketId, klant: gesprek.klant.naam || gesprek.klant.email, resultaat: '👤 MENS NODIG (naar team Mens nodig)', concept: 'reden: ' + (escal?.reden || 'geen antwoord').slice(0, 200) };
 }
 
-(async () => {
+module.exports = { verwerk, tGet, tPost };
+
+if (require.main === module) (async () => {
   const ids = process.argv.slice(2);
   if (!ids.length) { console.log('Geef ticket-ids op.'); return; }
   const beantwoord = [], mensNodig = [], overig = [];

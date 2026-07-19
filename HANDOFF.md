@@ -1,4 +1,14 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-16)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-19)
+
+## E-MAIL-KLANTENSERVICE LIVE (19 juli)
+- **E-mail-daemon draait permanent**: launchd `nl.sonty.email` (KeepAlive, elke 90s) → `scripts/ai-ks/email-daemon.js`. Verwerkt open Aanvragen-tickets die aan Sunny of aan NIEMAND toegewezen zijn; **team-toegewezen tickets (bv. Mens nodig 431872) blijft hij af** (filter: `user===SONNY || (!user && !team)`). Antwoorden → in-thread + toewijzen aan Sunny (747786) + sluiten; kan-niet → team Mens nodig + label. Toegevoegd aan health-check (`nl.sonty.email`, maxLogAgeH 1) en aan het dagrapport (e-mail logt naar log.jsonl met `email:true`).
+- **Kanaal-bewuste offerte-aflevering**: e-mailofferte krijgt de link nu ook echt PER MAIL nagestuurd (daemon `verwerkPendingOffertes`, e-mail-tak); Sunny belooft "per mail" i.p.v. "op WhatsApp" (system-prompt EMAIL-blok + tools kanaal-bewust). `registreerPending` slaat `kanaal` op.
+- **@sonny-notities** worden nu ook op e-mailtickets gelezen (email-live geeft ze door als teamNotities).
+- **Webflow FIX (belangrijk)**: in-thread antwoorden op webflow ging naar `no-reply@webflow` (contact-swap plakt niet in Trengo) → klant kreeg niets. Nu: lead + concept (schaduwmodus) naar team Mens nodig, mens stuurt zelf. Zie memory [[reference-trengo-webflow-noreply]]. 3 fout-gesloten tickets (Ted Kolman/Roosenberg/Henk Smoor) heropend + naar Mens nodig met waarschuwing.
+- **Credits-check**: niet stuk; Mac stond ~2,5 dag uit → 2-uurs-job vuurde niet → health meldde "oud". Gekickstart (groen) + health-drempel 5u→14u.
+- **OPEN**: RP-status-ID voor "geen herinnering meer" (opt-out) nog nodig — wacht op 1 anker-klant van Daimy. Dan opt-out afbouwen (status zetten + klant mailen dat uitschrijving verwerkt is).
+
+
 
 ## EIGEN OFFERTE-SYSTEEM / OVERSTAP VAN REUZENPANDA (16 juli, PR #40, live)
 

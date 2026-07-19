@@ -10,6 +10,7 @@ const { beantwoord } = require('./agent.js');
 
 const SONNY_USER = 747786;
 const TEAM_MENS_NODIG = 431872; // Daimy 19 juli: escalaties naar het team "Mens nodig"
+const AANVRAGEN_KANAAL = 1363384; // e-mailkanaal aanvragen@sonty.nl
 const LABEL = { AI_BOT: 1821763, MENS_NODIG: 1821764, OPMETING: 1815410, OFFERTE_VERSTUURD: 1815411 };
 
 const TT = (() => {
@@ -55,11 +56,46 @@ async function verwerk(ticketId) {
     const hn = (body.match(/Huisnummer\s*:?\s*([^\s]+)/i) || [])[1] || '';
     const pc = (body.match(/postcode\s*:?\s*([^\s]+)/i) || [])[1] || '';
     const plaats = veld('Woonplaats', 'Field|Bericht');
-    const note = `@jorren745487 @tanya748440\n\nNieuwe aanvraag via het website-formulier — Sunny kan hier niet direct op antwoorden (formulier komt van webflow).\n\n${naam || 'Klant'} (${email}${tel ? ' / ' + tel : ''})\n${[adres, hn, pc, plaats].filter(Boolean).join(' ')}\n\nVraag: ${wil || body.slice(0, 200)}`;
-    await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: note });
+    const adresRegel = [adres, hn, pc, plaats].filter(Boolean).join(' ');
+
+    // Geen bruikbaar e-mailadres uit het formulier → naar team Mens nodig (kan niet antwoorden).
+    if (!email) {
+      const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag, maar zonder bruikbaar e-mailadres — pak dit zelf op.\n\n${naam || 'Klant'}${tel ? ' / ' + tel : ''}\n${adresRegel}\n\nVraag: ${wil || body.slice(0, 200)}`;
+      await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: note });
+      await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
+      await zetLabel(ticketId, LABEL.MENS_NODIG);
+      return { ticketId, klant: naam || 'onbekend', resultaat: '👤 MENS NODIG (webflow zonder e-mail)', concept: 'reden: geen adres' };
+    }
+
+    // Ticket-contact op het klantadres uit het formulier zetten, zodat een antwoord IN DIT TICKET
+    // naar de klant gaat i.p.v. naar no-reply@webflow (Daimy 19 juli).
+    const c = await tPost(`/channels/${AANVRAGEN_KANAAL}/contacts`, { identifier: email, name: naam || email });
+    const cid = c?.id || c?.data?.id;
+    if (cid) await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}`, { method: 'PATCH', headers: H, body: JSON.stringify({ contact_id: cid }) }).catch(() => {});
+
+    // Sunny het formulier laten beantwoorden alsof de klant het zelf stuurde.
+    const gesprek = {
+      kanaal: 'EMAIL',
+      klant: { naam: naam || null, email, phone: tel || null },
+      berichten: [{ van: 'klant', tekst: `Nieuwe aanvraag via ons website-formulier.\nNaam: ${naam}\nAdres: ${adresRegel}\nTelefoon: ${tel}\nVraag: ${wil || body.slice(0, 400)}`, tijd: inb?.created_at }],
+      liveTest: true, sonny: false, ticketId,
+    };
+    const res = await beantwoord(gesprek);
+    const escal = (res.acties || []).find(a => a.type === 'escalatie');
+    const mut = (res.acties || []).filter(a => a.type !== 'escalatie');
+    if (res.antwoord && !escal) {
+      const verstuurd = await tPost(`/tickets/${ticketId}/messages`, { message: naarHtml(res.antwoord) });
+      await tPost(`/tickets/${ticketId}/assign`, { type: 'user', user_id: SONNY_USER });
+      await zetLabel(ticketId, LABEL.AI_BOT);
+      if (mut.some(a => /offerte/.test(a.type))) await zetLabel(ticketId, LABEL.OFFERTE_VERSTUURD);
+      if (mut.some(a => a.type === 'inmeet_afspraak')) await zetLabel(ticketId, LABEL.OPMETING);
+      await tPost(`/tickets/${ticketId}/close`, {});
+      return { ticketId, klant: naam || email, resultaat: verstuurd ? '✅ BEANTWOORD + gesloten (webflow → klant)' : '⚠️ versturen mislukt', concept: schoonKlantTekst(res.antwoord).slice(0, 220), acties: mut.map(a => a.type) };
+    }
     await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
     await zetLabel(ticketId, LABEL.MENS_NODIG);
-    return { ticketId, klant: naam || email, resultaat: '👤 MENS NODIG (webflow-lead, naar team Mens nodig)', concept: 'reden: nieuwe website-aanvraag ' + (wil || '').slice(0, 90) };
+    if (escal?.reden) await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `@jorren745487 @tanya748440\n\n${String(escal.reden).trim()}` });
+    return { ticketId, klant: naam || email, resultaat: '👤 MENS NODIG (webflow-lead)', concept: 'reden: ' + (escal?.reden || 'geen antwoord').slice(0, 150) };
   }
 
   const rijen = (msgs?.data || []).map(m => ({ van: m.type === 'INBOUND' ? 'klant' : 'sonty', tekst: clean(m.body || m.message), tijd: m.created_at }))

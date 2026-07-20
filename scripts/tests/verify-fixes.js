@@ -170,12 +170,20 @@ console.log('=== B. M4: markies-validatie → issues (→ handmatig) ===');
   check('uitval ontbreekt → issue', r6.issues.some(i => i.includes('uitval')), true);
 }
 
-console.log('=== B. H1: correctProductPrice → priceUnknown ===');
+console.log('=== B. H1: correctProductPrice → maat-fallback SunEye→XL (Daimy 20 juli) ===');
 {
+  // Sinds 20 juli: SunEye buiten de eigen tabel maar binnen de XL-tabel → automatisch als
+  // SunEye XL offreren met klantuitleg + prijsverschil, i.p.v. naar Handmatige controle.
   const line = { description: 'Suneye\nBreedte: 7250 mm\nUitval: 2000 mm\nBediening: Motor + afstandsbediening', pricePerUnit: 3500, units: 1 };
   const pc = api.correctProductPrice(line, 'suneye', 725, null, 200);
-  check('suneye 725cm → priceUnknown=true', pc.priceUnknown, true);
-  check('prijs NIET aangepast', line.pricePerUnit, 3500);
+  check('suneye 725cm → herrouteerd naar XL (priceUnknown=false)', pc.priceUnknown, false);
+  check('prijs = XL-prijs', line.pricePerUnit, 6813.4);
+  check('titel omgezet naar XL', /suneye\s*xl/i.test(line.description.split('\n')[0]), true);
+  check('uitleg + prijsverschil op de regel', line.description.includes('standaard SunEye gaat tot'), true);
+  // Boven de XL-grens (745cm) blijft het gewoon Handmatige controle.
+  const lineTeGroot = { description: 'Suneye\nBreedte: 8000 mm\nUitval: 2500 mm\nBediening: Motor + afstandsbediening', pricePerUnit: 3500, units: 1 };
+  const pcTeGroot = api.correctProductPrice(lineTeGroot, 'suneye', 800, null, 250);
+  check('suneye 800cm (> XL-max) → priceUnknown=true', pcTeGroot.priceUnknown, true);
   const line2 = { description: 'Zip Design 110\nBreedte: 3000 mm\nHoogte: 2500 mm\nFrame kleur: RAL 7016 structuur\nBediening: Motor + afstandsbediening', pricePerUnit: 2338, units: 1 };
   const pc2 = api.correctProductPrice(line2, 'zipDesign110', 300, 250, null);
   check('normale regel → changed=true, priceUnknown=false', [pc2.changed, pc2.priceUnknown], [true, false]);

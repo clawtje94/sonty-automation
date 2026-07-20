@@ -56,4 +56,30 @@ function romaBeschrijving(r, item) {
   return `**${r.naam}**\nBreedte: ${item.breedteMM} mm\nHoogte: ${item.hoogteMM} mm\nBediening: Elektrisch met afstandsbediening\nMotor: ${r.motor}\nFrame- en pantserkleur: ${item.framekleur || 'naar keuze uit 209 RAL-kleuren (mat/structuur) zonder meerprijs'}\nGarantie: 3 jaar montage | 5 jaar ROMA fabrieksgarantie${r.solar ? ' | 7 jaar op solar-motor' : ''}`;
 }
 
-module.exports = { herkenRoma, romaPrijs, romaBeschrijving };
+// KLOPPEND optieblok voor Roma-regels (Daimy 20 juli: de v4-verrijking zette Sunmaster-
+// up/downgrades op Roma-regels, incl. "RAL +20%" terwijl Roma alle kleuren gratis heeft).
+// prijsIndicatie wordt meegegeven om een circulaire require met v4-pricing te vermijden.
+function romaOptiesBlok(r, item, prijsIndicatie) {
+  const regels = [];
+  const kaalProduct = r.productKey === 'roma:rolluik' ? 'roma rolluik' : 'roma zipscreen';
+  try {
+    const eqNaam = r.productKey === 'roma:rolluik' ? 'Rolluik S-42' : 'Zip Design 110';
+    const eq = prijsIndicatie({ product: r.productKey === 'roma:rolluik' ? 'rolluik s-42' : 'zip design 110', breedteMM: item.breedteMM, hoogteMM: item.hoogteMM, bediening: r.solar ? 'solar' : 'io' });
+    if (eq && !eq.error && eq.productPrijsIncl) {
+      const d = eq.productPrijsIncl - r.prijsIncl;
+      regels.push(`Voordeliger alternatief:\n• Zelfde maat in Sunmaster ${eqNaam}: ${d < 0 ? '-' : '+'}€${Math.abs(Math.round(d))} per stuk (RAL-kleuren buiten standaard hebben daar wél een meerprijs)`);
+    }
+  } catch {}
+  try {
+    const andere = romaPrijs({ product: kaalProduct, breedteMM: item.breedteMM, hoogteMM: item.hoogteMM, bediening: r.solar ? 'io' : 'solar' });
+    if (!andere.error) {
+      const d = andere.prijsIncl - r.prijsIncl;
+      regels.push(`Andere bediening:\n• ${r.solar ? 'Bekabeld i.p.v. solar' : 'Solar (zonne-energie, geen bekabeling nodig) i.p.v. bekabeld'}: ${d < 0 ? '-' : '+'}€${Math.abs(d)} per stuk`);
+    }
+  } catch {}
+  regels.push('Kleur:\n• Alle 209 RAL-kleuren (mat en structuur) zijn bij ROMA gratis, ook voor kast, geleiders en onderlijst');
+  regels.push('Smart home:\n• Tahoma Switch (bedien alles via je telefoon): +€195');
+  return `\n\n**Liever een ander model of bediening?**\n\n${regels.join('\n\n')}\n\nLaat het ons weten, we passen het graag voor je aan.`;
+}
+
+module.exports = { herkenRoma, romaPrijs, romaBeschrijving, romaOptiesBlok };

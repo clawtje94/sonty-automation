@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const CFG = require('./config.js');
 const { prijsIndicatie, v4 } = require('./v4-pricing.js');
-const { herkenRoma, romaPrijs, romaBeschrijving } = require('./roma-pricing.js');
+const { herkenRoma, romaPrijs, romaBeschrijving, romaOptiesBlok } = require('./roma-pricing.js');
 
 const BACKUP_DIR = path.join(__dirname, '..', '..', 'data', 'offerte-backups');
 
@@ -118,7 +118,7 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
     if (herkenRoma(item.product)) {
       const r = romaPrijs(item);
       if (r.error) return { error: r.error };
-      lines.push({ ...base, description: romaBeschrijving(r, item), units: item.aantal || 1, pricePerUnit: r.prijsIncl, position: 0 });
+      lines.push({ ...base, description: romaBeschrijving(r, item) + romaOptiesBlok(r, item, prijsIndicatie), units: item.aantal || 1, pricePerUnit: r.prijsIncl, position: 0 });
       lines.push({
         ...base,
         description: `**Inmeten + montage ${r.montageTitel}**\n- Inmeetafspraak bij je thuis\n- Professionele montage door ons eigen montageteam\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal`,
@@ -175,8 +175,8 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
   }
 
   // SONNY-KORTING (Daimy 2026-07-17): extra korting die de AI weggeeft moet ALTIJD zichtbaar in
-  // de kortingsregel zelf — 2,5% extra = regel wordt "17,5% kortingsaanbod Sonny"; gratis item
-  // (grote orders) = regel op €0 + vermelding "— Sonny" achter de 15%-regel. Nooit een verstopte
+  // de kortingsregel zelf — 2,5% extra = regel wordt "17,5% kortingsaanbod Sunny"; gratis item
+  // (grote orders) = regel op €0 + vermelding "— Sunny" achter de 15%-regel. Nooit een verstopte
   // losse minregel, nooit stapelen. Doel blijft: zo min mogelijk korting geven.
   const gratisTitel = (d, suffix) => String(d || '').replace(/^\*\*([^*\n]+)\*\*/, (_, t) => `**${t} — ${suffix}**`);
   if (sonnyKorting && (sonnyKorting.percentage || sonnyKorting.gratis)) {
@@ -187,26 +187,26 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
     if (sonnyKorting.percentage) {
       const pct = Number(sonnyKorting.percentage);
       if (!(pct > 15 && pct <= 17.5)) return { error: 'sonnyKorting.percentage moet boven 15 en maximaal 17,5 zijn (mandaat: max 2,5% extra)' };
-      plg.data.groupDiscount = { type: 'PERCENTAGE', amount: pct, name: `${String(pct).replace('.', ',')}% kortingsaanbod Sonny`, vatPercentage: 21 };
+      plg.data.groupDiscount = { type: 'PERCENTAGE', amount: pct, name: `${String(pct).replace('.', ',')}% kortingsaanbod Sunny`, vatPercentage: 21 };
     } else {
       if (!['tahoma', 'montage'].includes(sonnyKorting.gratis)) return { error: 'Onbekend gratis-item: alleen "tahoma" of "montage"' };
       if (sonnyKorting.gratis === 'tahoma') {
         const th = lines.find(l => titel(l).includes('tahoma'));
-        if (th) { th.pricePerUnit = 0; th.units = 1; th.description = gratisTitel(th.description, 'gratis (aanbod Sonny)'); }
-        else lines.push({ ...base, description: '**Tahoma Switch (Somfy) — gratis (aanbod Sonny)**\nSmart home hub: bedien je zonwering met je telefoon, ook buitenshuis.', units: 1, pricePerUnit: 0, position: 0 });
+        if (th) { th.pricePerUnit = 0; th.units = 1; th.description = gratisTitel(th.description, 'gratis (aanbod Sunny)'); }
+        else lines.push({ ...base, description: '**Tahoma Switch (Somfy) — gratis (aanbod Sunny)**\nSmart home hub: bedien je zonwering met je telefoon, ook buitenshuis.', units: 1, pricePerUnit: 0, position: 0 });
       } else {
         const mont = lines.filter(l => (titel(l).includes('montage') || titel(l).includes('inmeten')) && l.pricePerUnit > 0).sort((a, b) => a.pricePerUnit - b.pricePerUnit)[0];
         if (!mont) return { error: 'Geen montageregel gevonden om gratis te maken' };
         if ((mont.units || 1) > 1) {
-          lines.push({ ...mont, units: 1, pricePerUnit: 0, description: gratisTitel(mont.description, '1x gratis (aanbod Sonny)') });
+          lines.push({ ...mont, units: 1, pricePerUnit: 0, description: gratisTitel(mont.description, '1x gratis (aanbod Sunny)') });
           mont.units -= 1;
         } else {
           mont.pricePerUnit = 0;
-          mont.description = gratisTitel(mont.description, 'gratis (aanbod Sonny)');
+          mont.description = gratisTitel(mont.description, 'gratis (aanbod Sunny)');
         }
       }
       const label = sonnyKorting.gratis === 'tahoma' ? 'gratis Tahoma' : '1x gratis montage';
-      plg.data.groupDiscount = { type: 'PERCENTAGE', amount: 15, name: `15% tijdelijke actie + ${label} — Sonny`, vatPercentage: 21 };
+      plg.data.groupDiscount = { type: 'PERCENTAGE', amount: 15, name: `15% tijdelijke actie + ${label} — Sunny`, vatPercentage: 21 };
     }
   }
 
@@ -233,6 +233,10 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
   const heeftTahoma = lines.some(l => titel(l).includes('tahoma'));
   for (const l of lines) {
     const first = ((l.description || '').split('\n')[0] || '').replace(/\*\*/g, '');
+    // GEEN Sunmaster-verrijking op Roma-regels (Daimy 20 juli: er kwamen S-37 downgrades en
+    // "RAL +20%" op een Roma-regel terwijl Roma alle RAL-kleuren gratis heeft). Roma-regels
+    // krijgen hun eigen kloppende optieblok al bij het toevoegen (romaOptiesBlok).
+    if (/\bROMA\b/i.test(first)) continue;
     try { l.description = v4.addV4Enhancements(l.description, first, heeftTahoma, l.pricePerUnit); } catch {}
   }
   try { v4.addWaaromSontyBlock(qd); } catch {}

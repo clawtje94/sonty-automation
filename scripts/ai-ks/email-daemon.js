@@ -77,7 +77,10 @@ async function ronde() {
     //    bot-uren-check. Leerpunt + ✅-terugkoppeling + eventuele actie/mail via email-live.
     try { await verwerkNotities(t, rowsAll); } catch (e) { console.error(`  [${t.id}] notitie FOUT: ${e.message}`); }
     // 2) KLANTMAILS: alleen kandidaten, binnen bot-uren, en niet op stopgezette tickets.
-    if (!kandidaat || !binnenUren || stop[t.id]) continue;
+    // Testadressen van Daimy/Joey (TEST_LIVE_EMAILS) krijgen DIRECT antwoord: geen bot-uren,
+    // geen reactietijd (Daimy 20 juli) — het e-mail-equivalent van de WhatsApp-testnummers.
+    const isTest = CFG.TEST_LIVE_EMAILS.includes((t.contact?.email || '').toLowerCase());
+    if (!kandidaat || (!binnenUren && !isTest) || stop[t.id]) continue;
     const rows = rowsAll.filter(m => m.type === 'INBOUND' || m.type === 'OUTBOUND')
       .sort((a, b) => String(b.created_at).localeCompare(a.created_at));
     const laatste = rows[0];
@@ -89,7 +92,7 @@ async function ronde() {
     // voelt als een bot. Webflow-leads slaan dit over: daar gaat alleen een interne notitie naar
     // het team (hoe eerder die de lead ziet, hoe beter), geen mail naar de klant.
     const isWebflow = /no-reply@webflow/i.test(t.contact?.email || '') || /New form submission/i.test(t.subject || '');
-    if (!isWebflow) {
+    if (!isWebflow && !isTest) {
       const oud = leeftijdMin(laatste.created_at);
       const wacht = wachttijdMin(t.id);
       if (oud < wacht) { console.log(`  [${t.id}] wacht op reactietijd: ${Math.round(oud)}/${wacht} min`); continue; }

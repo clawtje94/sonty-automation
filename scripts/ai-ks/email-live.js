@@ -29,7 +29,19 @@ function schoonKlantTekst(tekst) {
   s = s.replace(/^(?:\s*[—–-]\s*(?:ik|eerst|dan|hier)\b[^\n]*\n+)+/i, '');
   return s.trim();
 }
-const naarHtml = (t) => '<p>' + schoonKlantTekst(t).split(/\n\n+/).map(p => p.replace(/\n/g, '<br>')).join('</p><p>') + '</p>';
+// VANGNET MAILOPBOUW (Daimy 20 juli): elke mail heeft dezelfde opbouw — begroeting op een
+// eigen regel, witregel, dan pas de inhoud, en afsluiten met "Met vriendelijke groet," +
+// "Sunny | Sonty" op eigen regels. De prompt schrijft dit al voor; dit dwingt het ook
+// technisch af als het model toch "Hoi Peter, bedankt voor..." aan elkaar plakt.
+function formatteerEmail(tekst) {
+  let s = schoonKlantTekst(tekst);
+  // Begroeting op eigen regel + witregel erna ("Hoi Peter, tekst..." → "Hoi Peter,\n\ntekst...")
+  s = s.replace(/^((?:Hoi|Hallo|Hi|Beste|Goedemorgen|Goedemiddag|Goedenavond|Dag)(?:\s+[^\n,]{1,40})?,)[ \t]*\n?[ \t]*(?=\S)/i, '$1\n\n');
+  // Afsluiting normaliseren: bestaande groet-varianten eraf, dan de vaste afsluiting erop.
+  s = s.replace(/\n*[ \t]*(?:Met vriendelijke groet(?:en)?|Vriendelijke groet(?:en)?|Groet(?:en|jes)?|Hartelijke groet(?:en)?)[,.]?[ \t]*\n*[ \t]*(?:Sunny(?:[ \t]*\|[ \t]*Sonty)?|Sonty)?[ \t]*$/i, '');
+  return s.trim() + '\n\nMet vriendelijke groet,\nSunny | Sonty';
+}
+const naarHtml = (t) => '<p>' + formatteerEmail(t).split(/\n\n+/).map(p => p.replace(/\n/g, '<br>')).join('</p><p>') + '</p>';
 
 // E-mailinteracties naar dezelfde log.jsonl als WhatsApp schrijven (met email:true), zodat ze in
 // het dagrapport meelopen.
@@ -105,7 +117,7 @@ async function verwerk(ticketId) {
         berichten: [{ van: 'klant', tekst: `Nieuwe aanvraag via ons website-formulier.\nNaam: ${naam}\nAdres: ${adresRegel}\nTelefoon: ${tel}\nVraag: ${wil || body.slice(0, 400)}`, tijd: inb?.created_at }],
         liveTest: false, sonny: false, ticketId, // schaduwmodus: GEEN tools/offertes uitvoeren
       });
-      conceptDraft = schoonKlantTekst(res.antwoord || '');
+      conceptDraft = res.antwoord ? formatteerEmail(res.antwoord) : '';
     } catch {}
     const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag — stuur dit zelf naar de klant (in-thread antwoord zou naar no-reply@webflow gaan).\n\nKlant: ${naam || '-'}\nMail: ${email}${tel ? '\nTel: ' + tel : ''}\nAdres: ${adresRegel || '-'}\nVraag: ${wil || body.slice(0, 200)}` + (conceptDraft ? `\n\n--- Concept-antwoord van Sunny (controleer en verstuur naar ${email}) ---\n${conceptDraft}` : '');
     await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: note });
@@ -155,7 +167,7 @@ async function verwerk(ticketId) {
   return { ticketId, klant: gesprek.klant.naam || gesprek.klant.email, resultaat: '👤 MENS NODIG (naar team Mens nodig)', concept: 'reden: ' + (escal?.reden || 'geen antwoord').slice(0, 200) };
 }
 
-module.exports = { verwerk, tGet, tPost };
+module.exports = { verwerk, tGet, tPost, formatteerEmail };
 
 if (require.main === module) (async () => {
   const ids = process.argv.slice(2);

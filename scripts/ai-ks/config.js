@@ -77,6 +77,13 @@ module.exports = {
   // van het antwoord: basis + ~1s per 15 tekens, begrensd tussen min en max.
   REPLY_DELAY: { enabled: false, baseSec: 25, perCharSec: 1 / 15, minSec: 20, maxSec: 180 },
 
+  // E-MAIL-REACTIETIJD (Daimy 20 juli): een mail beantwoorden we pas 1,5 tot 2 uur na het
+  // laatste klantbericht — sneller voelt robotachtig. Per ticket een vast punt in dat venster
+  // (deterministisch op ticket-id), zodat de wachttijd niet elke daemon-ronde verspringt.
+  // Webflow-leads (alleen interne notitie naar het team, geen mail naar de klant) slaan
+  // deze wachttijd over. E-mails buiten bot-uren wachten sowieso tot 08:00.
+  EMAIL_REPLY_DELAY: { minMin: 90, maxMin: 120 },
+
   // Kanalen die de AI behandelt (Trengo channel_ids)
   WA_CHANNEL_ID: 1359857,          // WhatsApp Business +31 85 006 9681
   EMAIL_CHANNEL_NAMES: ['Aanvragen', 'Klantenservice'],

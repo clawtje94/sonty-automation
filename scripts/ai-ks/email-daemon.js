@@ -8,6 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 const { verwerk, tGet } = require('./email-live.js');
+const CFG = require('./config.js');
 
 const AANVRAGEN_KANAAL = 'Aanvragen';
 const SONNY_USER = 747786;
@@ -17,7 +18,25 @@ const INTERVAL_MS = 90 * 1000;
 function loadState() { try { return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch { return {}; } }
 function saveState(s) { fs.mkdirSync(path.dirname(STATE_FILE), { recursive: true }); fs.writeFileSync(STATE_FILE, JSON.stringify(s)); }
 
+// Leeftijd van een Trengo-timestamp in minuten. Trengo geeft Amsterdamse wandkloktijd
+// ("2026-07-20 09:07:04"); vergelijk met "nu" in dezelfde tijdzone-notatie zodat het ook
+// klopt als de Mac zelf in een andere tijdzone staat.
+function leeftijdMin(createdAt) {
+  const nu = new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Amsterdam' });
+  return (Date.parse(nu.replace(' ', 'T')) - Date.parse(String(createdAt).replace(' ', 'T'))) / 60000;
+}
+
+// Wachttijd per ticket: vast punt in het 1,5-2u-venster, deterministisch op ticket-id
+// (verspringt dus niet per ronde). Zie CFG.EMAIL_REPLY_DELAY.
+function wachttijdMin(ticketId) {
+  const { minMin, maxMin } = CFG.EMAIL_REPLY_DELAY;
+  return minMin + (Number(ticketId) % (maxMin - minMin + 1));
+}
+
 async function ronde() {
+  // Zelfde bedrijfsuren als de WhatsApp-bot (Daimy 20 juli): buiten 08:00-21:00 geen
+  // e-mails oppakken. Wat 's nachts binnenkomt, wacht netjes tot de ochtend.
+  if (!CFG.binnenBotUren()) { console.log(`[${new Date().toLocaleTimeString()}] buiten bot-uren (${CFG.BOT_UREN.start}-${CFG.BOT_UREN.eind}) — ronde overgeslagen`); return; }
   const state = loadState();
   // ALLE open Aanvragen-tickets ophalen — doorpaginaren tot leeg (cap 25 pagina's). Eerder werden
   // maar 4 pagina's gescand, waardoor OUDERE aan-Sunny/niemand-toegewezen tickets nooit werden
@@ -43,6 +62,15 @@ async function ronde() {
     // webflow-formulieren worden door verwerk() zelf afgehandeld (→ team Mens nodig met gegevens)
     const sleutel = `${t.id}:${laatste.created_at}`;
     if (state[sleutel]) continue;
+    // REACTIETIJD (Daimy 20 juli): klantmails pas na 1,5-2 uur beantwoorden — direct antwoorden
+    // voelt als een bot. Webflow-leads slaan dit over: daar gaat alleen een interne notitie naar
+    // het team (hoe eerder die de lead ziet, hoe beter), geen mail naar de klant.
+    const isWebflow = /no-reply@webflow/i.test(t.contact?.email || '') || /New form submission/i.test(t.subject || '');
+    if (!isWebflow) {
+      const oud = leeftijdMin(laatste.created_at);
+      const wacht = wachttijdMin(t.id);
+      if (oud < wacht) { console.log(`  [${t.id}] wacht op reactietijd: ${Math.round(oud)}/${wacht} min`); continue; }
+    }
     teDoen.push({ id: t.id, sleutel });
     await new Promise(r => setTimeout(r, 120));
   }

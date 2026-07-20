@@ -131,6 +131,11 @@ async function beantwoord(gesprek) {
     // bot het gesprek afgerond en sluit de daemon het WhatsApp-ticket. Marker nooit meesturen.
     let klaar = false;
     if (/\[KLAAR\]/.test(tekst)) { klaar = true; tekst = tekst.replace(/\s*\[KLAAR\]\s*/g, '\n').trim(); }
+    // [OPGELOST] (Daimy 20 juli, Rom-bug): de agent claimt expliciet dat een EERDER geëscaleerd
+    // probleem nu alsnog zelf volledig is opgelost — alleen dan ruimt de daemon de oude
+    // overdracht-notities op. Marker nooit meesturen naar de klant.
+    let opgelost = false;
+    if (/\[OPGELOST\]/.test(tekst)) { opgelost = true; tekst = tekst.replace(/\s*\[OPGELOST\]\s*/g, '\n').trim(); }
     // Stille escalatie: klant krijgt niets, gesprek blijft open voor een collega
     if (ctx.stil) { tekst = null; klaar = false; }
     // [STIL] zonder escalatie = afsluitend bedankje van de klant → niets sturen én gesprek klaar
@@ -152,7 +157,7 @@ async function beantwoord(gesprek) {
         return { antwoord: null, acties: ctx.acties, toolCalls, usage, qa: oordeel };
       }
     }
-    return { antwoord: tekst, acties: ctx.acties, toolCalls, usage, qa: 'OK', klaar };
+    return { antwoord: tekst, acties: ctx.acties, toolCalls, usage, qa: 'OK', klaar, opgelost };
   }
 
   ctx.acties.push({ type: 'escalatie', reden: 'Tool-loop limiet bereikt', urgentie: 'normaal' });

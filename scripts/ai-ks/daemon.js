@@ -547,6 +547,15 @@ async function verwerkTicket(t, state) {
     if (/bookings\.cloud\.microsoft/.test(res.antwoord || '')) await zetLabel(t.id, LABEL.SHOWROOM);
   }
 
+  // Eerdere overdracht-notities van de bot in dít gesprek (tagsignatuur, nieuw + oud format).
+  // Nodig voor de opruimlogica hieronder én om een gesprek met een nog lopende escalatie
+  // nooit automatisch te sluiten (Rom-bug 20 juli).
+  const eerdereEscalaties = (msgs?.data || []).filter(m => {
+    const tk = m.body || m.message || '';
+    return (m.internal_note || m.type === 'NOTE') && m.user_id === 747786 &&
+      (/@jorren745487[\s\S]*@tanya748440/.test(tk) || /De AI kan dit niet zelf afhandelen en draagt het over/i.test(tk));
+  });
+
   const escalatie = res.acties.find(a => a.type === 'escalatie');
   if (escalatie) {
     const wie = gesprek.klant.naam || gesprek.klant.phone || gesprek.klant.email;
@@ -571,35 +580,28 @@ async function verwerkTicket(t, state) {
       // Mens nodig-map, net als bij e-mail — het label alleen zet hem daar niet in).
       await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
     }
-  } else if (echtVerstuurd && isWaTicket(t)) {
+  } else if (echtVerstuurd && isWaTicket(t) && eerdereEscalaties.length && res.opgelost) {
     // TÓCH ZELF GEHOLPEN na een eerdere overdracht (Daimy 2026-07-17: "als je toch iemand kan
     // helpen maar je hebt al collega's getagd in een comment, verwijder die comment dan ook").
-    // De AI antwoordde nu ZONDER te escaleren → eerdere escalatie-comment(s) van de bot met
-    // collega-tags zijn achterhaald en gaan weg, zodat collega's er geen tijd aan verspillen.
-    // Herkenning op de overdracht-tagsignatuur (nieuw + oud format): een interne notitie van de
-    // bot die zowel @jorren als @tanya tagt, óf de oude standaardzin bevat.
-    const oudeEscalaties = (msgs?.data || []).filter(m => {
-      const tk = m.body || m.message || '';
-      return (m.internal_note || m.type === 'NOTE') && m.user_id === 747786 &&
-        (/@jorren745487[\s\S]*@tanya748440/.test(tk) || /De AI kan dit niet zelf afhandelen en draagt het over/i.test(tk));
-    });
-    for (const m of oudeEscalaties) {
+    // ALLEEN op expliciete [OPGELOST]-claim van de agent (Rom-bug 20 juli: de bot antwoordde
+    // op een bedankje en de opruiming gooide de nog LOPENDE escalatie-notitie weg — "antwoord
+    // zonder escalatie" is geen bewijs dat het geëscaleerde probleem is opgelost).
+    for (const m of eerdereEscalaties) {
       const weg = await verwijderNotitie(t.id, m.id);
-      console.log(`  ${weg ? '✓ achterhaalde escalatie-notitie ' + m.id + ' verwijderd (klant is alsnog geholpen)' : '⚠️ kon escalatie-notitie ' + m.id + ' niet verwijderen'}`);
+      console.log(`  ${weg ? '✓ achterhaalde escalatie-notitie ' + m.id + ' verwijderd (probleem alsnog zelf opgelost)' : '⚠️ kon escalatie-notitie ' + m.id + ' niet verwijderen'}`);
     }
     // Labels omzetten: de bot doet het nu zelf → "Mens nodig" eraf, "AI Bot" erop,
     // en uit de Mens nodig-map: terug naar het Sonny-account (Daimy 20 juli).
-    if (oudeEscalaties.length) {
-      await haalLabelWeg(t.id, LABEL.MENS_NODIG); await zetLabel(t.id, LABEL.AI_BOT);
-      await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 747786 });
-    }
+    await haalLabelWeg(t.id, LABEL.MENS_NODIG); await zetLabel(t.id, LABEL.AI_BOT);
+    await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 747786 });
   }
 
   // GESPREK KLAAR → TICKET SLUITEN (Daimy 20 juli, voorbeeld +31653832879): vindt de bot het
   // gesprek volledig afgerond ([KLAAR]-marker in het antwoord, of [STIL] op een afsluitend
-  // bedankje), dan sluiten we het WhatsApp-ticket in Trengo. Nooit bij een escalatie; stuurt
+  // bedankje), dan sluiten we het WhatsApp-ticket in Trengo. Nooit bij een escalatie in deze
+  // beurt, en ook nooit zolang er een eerdere escalatie loopt die niet is opgelost; stuurt
   // de klant later toch weer iets, dan opent Trengo het ticket vanzelf weer.
-  if (res.klaar && !escalatie && isWaTicket(t) && (sonnyMode || actiefTicket || liveTest)) {
+  if (res.klaar && !escalatie && !(eerdereEscalaties.length && !res.opgelost) && isWaTicket(t) && (sonnyMode || actiefTicket || liveTest)) {
     const dicht = await tPost(`/tickets/${t.id}/close`, {});
     console.log(`  ${dicht.ok ? '✓ gesprek klaar → ticket gesloten' : '⚠️ ticket sluiten mislukte: ' + dicht.status}`);
   }

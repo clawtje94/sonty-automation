@@ -281,9 +281,13 @@ async function verwerkNotities(t, rowsAll) {
       continue;
     }
     if (punt) {
-      // Leerpunt direct vastleggen (zit per direct in de prompt) en direct markeren, zodat een
-      // fout in de beoordeling hieronder nooit tot dubbele leerpunten of dubbele mails leidt.
-      fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leerpunten.md'), `- (${new Date().toISOString().slice(0, 10)}) [team-notitie bij e-mail ${wie}] ${punt}\n`);
+      // VASTE KENNIS alleen bij notities van DAIMY (20 juli: collega's gebruiken @sonny ook —
+      // hun notitie is een eenmalige opdracht voor dít ticket, geen leerpunt). Leerpunt direct
+      // vastleggen en markeren, zodat een fout in de beoordeling nooit tot dubbele leidt.
+      if (Number(n.userId) === 736327) {
+        fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leerpunten.md'), `- (${new Date().toISOString().slice(0, 10)}) [team-notitie bij e-mail ${wie}] ${punt}\n`);
+        await telegram(`🎓 @sonny-notitie op e-mailticket ${wie} verwerkt als leerpunt:\n"${punt.substring(0, 300)}"\n\nSunny beoordeelt nu zelf of dit ticket ook een actie of mail nodig heeft.`);
+      }
       teDoen.push({ key, punt, userId: n.userId });
     }
     st[key] = new Date().toISOString();
@@ -292,7 +296,6 @@ async function verwerkNotities(t, rowsAll) {
   if (!teDoen.length) return;
 
   const feedback = teDoen.map(i => i.punt).join('\n');
-  await telegram(`🎓 @sonny-notitie op e-mailticket ${wie} verwerkt als leerpunt:\n"${feedback.substring(0, 300)}"\n\nSunny beoordeelt nu zelf of dit ticket ook een actie of mail nodig heeft.`);
   // Zelfde feedback-beoordeling als WhatsApp: opdrachten voert de agent NU uit met zijn tools,
   // en hij bepaalt zelf of er nog een mail naar de klant moet (GEEN_BERICHT als dat niet zo is).
   const rijen = (rowsAll || []).map(m => ({ van: m.type === 'INBOUND' ? 'klant' : 'sonty', tekst: clean(m.body || m.message), tijd: m.created_at }))

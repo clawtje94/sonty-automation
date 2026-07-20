@@ -238,14 +238,17 @@ async function verwerkSonnyNotities(t, teamNotities) {
       nieuw = true;
       continue;
     }
-    // FEEDBACK (al het andere): altijd opslaan als vaste kennis. De bot beoordeelt daarna
-    // ZELF of het lopende gesprek ook nog een bericht aan de klant vraagt (bv. een
-    // verduidelijkende vraag zoals bij de pergola) — werkwijze Daimy 2026-07-16: "ik geef
-    // alleen feedback; jij schat in of je alsnog iets moet vragen, zonder de klant te verwarren".
+    // FEEDBACK/OPDRACHT (al het andere): de bot beoordeelt ZELF of het lopende gesprek ook nog
+    // een bericht aan de klant vraagt en voert opdrachten uit (werkwijze Daimy 2026-07-16).
+    // VASTE KENNIS wordt het alleen als de notitie van DAIMY komt (Daimy 20 juli: "collega's
+    // gaan ook @sonny gebruiken — wel uitvoeren wat ze vragen, maar niet standaard in de
+    // kennis zetten"). Een collega-notitie is dus een eenmalige opdracht voor dít gesprek.
     if (punt) {
-      fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leerpunten.md'),
-        `- (${new Date().toISOString().slice(0, 10)}) [team-notitie bij gesprek ${wie}] ${punt}\n`);
-      await telegram(`🎓 @sonny-notitie verwerkt als leerpunt (gesprek ${wie}):\n"${punt.substring(0, 300)}"\n\nDe bot beoordeelt nu zelf of dit gesprek ook nog een bericht nodig heeft.`);
+      if (Number(n.userId) === 736327) {
+        fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leerpunten.md'),
+          `- (${new Date().toISOString().slice(0, 10)}) [team-notitie bij gesprek ${wie}] ${punt}\n`);
+        await telegram(`🎓 @sonny-notitie verwerkt als leerpunt (gesprek ${wie}):\n"${punt.substring(0, 300)}"\n\nDe bot beoordeelt nu zelf of dit gesprek ook nog een bericht nodig heeft.`);
+      }
       instructies.push({ key, punt, userId: n.userId }); // caller: beoordeling + ✅-notitie
     }
     st[key] = new Date().toISOString();

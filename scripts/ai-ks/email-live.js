@@ -112,6 +112,10 @@ async function verwerk(ticketId) {
     const veld = (label, eind) => { const m = body.match(new RegExp(label + '\\s*[:]?\\s*([^]*?)(?=' + eind + ')', 'i')); return m ? m[1].trim() : ''; };
     const naam = veld('Naam', 'ik wil|Email|Telefoon');
     const wil = veld('ik wil:?', 'Email|Telefoon');
+    // Het BERICHT-veld is de eigenlijke vraag van de klant (Daimy 20 juli: parser liet dit weg,
+    // waardoor de bot generieke wedervragen stelde i.p.v. de echte vraag te beantwoorden).
+    const bericht = veld('Bericht', '-{4,}|If you believe|Unsubscribe');
+    const vraag = [wil, bericht].filter(Boolean).join(' — ') || body.slice(0, 400);
     const email = (body.match(/Email\s*:?\s*([\w.+-]+@[\w-]+\.[a-z]{2,4})(?![a-z])/) || [])[1] || '';
     const tel = (body.match(/Telefoonnummer\s*:?\s*([\d +]{6,15})/i) || [])[1] || '';
     const adres = veld('Adres', 'Huisnummer|postcode|Woonplaats|Field|Bericht');
@@ -122,7 +126,7 @@ async function verwerk(ticketId) {
 
     // Geen bruikbaar e-mailadres uit het formulier → naar team Mens nodig (kan niet antwoorden).
     if (!email) {
-      const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag, maar zonder bruikbaar e-mailadres — pak dit zelf op.\n\n${naam || 'Klant'}${tel ? ' / ' + tel : ''}\n${adresRegel}\n\nVraag: ${wil || body.slice(0, 200)}`;
+      const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag, maar zonder bruikbaar e-mailadres — pak dit zelf op.\n\n${naam || 'Klant'}${tel ? ' / ' + tel : ''}\n${adresRegel}\n\nVraag: ${vraag.slice(0, 300)}`;
       await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: note });
       await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
       await zetLabel(ticketId, LABEL.MENS_NODIG);
@@ -139,7 +143,7 @@ async function verwerk(ticketId) {
       const res = await beantwoord({
         kanaal: 'EMAIL',
         klant: { naam: naam || null, email, phone: tel || null },
-        berichten: [{ van: 'klant', tekst: `Nieuwe aanvraag via ons website-formulier.\nNaam: ${naam}\nAdres: ${adresRegel}\nTelefoon: ${tel}\nVraag: ${wil || body.slice(0, 400)}\n\n(LET OP: in deze modus kun je GEEN offertes aanmaken of aanpassen en niets doorzetten — beloof dat dus niet concreet. Beantwoord de vraag inhoudelijk, vraag eventueel de ontbrekende gegevens op, en nodig uit tot een reactie; op een antwoord van de klant kun je daarna wél alles.)`, tijd: inb?.created_at }],
+        berichten: [{ van: 'klant', tekst: `Nieuwe aanvraag via ons website-formulier.\nNaam: ${naam}\nAdres: ${adresRegel}\nTelefoon: ${tel}\nType aanvraag: ${wil || '-'}\nBericht/vraag van de klant: ${bericht || wil || body.slice(0, 400)}\n\n(LET OP: in deze modus kun je GEEN offertes aanmaken of aanpassen en niets doorzetten — beloof dat dus niet concreet. Beantwoord de vraag inhoudelijk, vraag eventueel de ontbrekende gegevens op, en nodig uit tot een reactie; op een antwoord van de klant kun je daarna wél alles.)`, tijd: inb?.created_at }],
         liveTest: false, sonny: false, ticketId, // geen tools/offertes uitvoeren op een formulier-lead
       });
       conceptDraft = res.antwoord ? formatteerEmail(res.antwoord) : '';
@@ -156,7 +160,7 @@ async function verwerk(ticketId) {
         return { ticketId, klant: naam || email, resultaat: '✅ BEANTWOORD (webflow-lead, eigen mail naar klantadres) + gesloten', concept: conceptDraft.slice(0, 220) };
       }
     }
-    const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag — Sunny kon de mail niet zelf versturen, stuur dit zelf naar de klant (in-thread antwoord zou naar no-reply@webflow gaan).\n\nKlant: ${naam || '-'}\nMail: ${email}${tel ? '\nTel: ' + tel : ''}\nAdres: ${adresRegel || '-'}\nVraag: ${wil || body.slice(0, 200)}` + (conceptDraft ? `\n\n--- Concept-antwoord van Sunny (controleer en verstuur naar ${email}) ---\n${conceptDraft}` : '');
+    const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag — Sunny kon de mail niet zelf versturen, stuur dit zelf naar de klant (in-thread antwoord zou naar no-reply@webflow gaan).\n\nKlant: ${naam || '-'}\nMail: ${email}${tel ? '\nTel: ' + tel : ''}\nAdres: ${adresRegel || '-'}\nVraag: ${vraag.slice(0, 300)}` + (conceptDraft ? `\n\n--- Concept-antwoord van Sunny (controleer en verstuur naar ${email}) ---\n${conceptDraft}` : '');
     await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: note });
     await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
     await zetLabel(ticketId, LABEL.MENS_NODIG);

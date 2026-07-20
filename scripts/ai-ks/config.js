@@ -68,6 +68,10 @@ module.exports = {
   // (Jaimy-persona, geen intro — opdracht Daimy 2026-07-16).
   TEST_LIVE_PHONES: ['31683500506', '31636516410', '31628209480'],
 
+  // TEST-MAILADRESSEN (Daimy 2026-07-20): mails van Daimy en Joey krijgen DIRECT antwoord —
+  // zonder de 1,5-2u reactietijd en ook buiten bot-uren (e-mail-equivalent van TEST_LIVE_PHONES).
+  TEST_LIVE_EMAILS: ['daimyboot@gmail.com', 'engelenjoey@hotmail.com'],
+
   // FEEDBACK-KANAAL: alleen deze nummers mogen "feedback: ..." leerpunten appen
   // (Daimy 2026-07-16: "mag alleen van Joey en mijn nummer" — Jarne dus niet).
   FEEDBACK_PHONES: ['31683500506', '31628209480'],

@@ -10,16 +10,20 @@ const ROMA = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data',
 const OPSLAG = 1.15;
 
 const PRODUCTEN = {
-  'roma:rolluik': { naam: 'ROMA geëxtrudeerd voorzetrolluik .XP', tabel: 'voorzetrolluik_xp', solarTabel: 'voorzetrolluik_xp_solar', montageTitel: 'rolluik', montagePrijs: 195 },
+  // STANDAARD = .P (Daimy 20 juli: "niet standaard XP aanhouden maar P — de XP is de variant
+  // met hor-mogelijkheid"). De .XP alleen als de klant een hor(mogelijkheid) op het rolluik wil.
+  'roma:rolluik': { naam: 'ROMA geëxtrudeerd voorzetrolluik .P', tabel: 'voorzetrolluik_p', solarTabel: 'voorzetrolluik_p_solar', montageTitel: 'rolluik', montagePrijs: 195 },
+  'roma:rolluik_xp': { naam: 'ROMA geëxtrudeerd voorzetrolluik .XP (met hor-mogelijkheid)', tabel: 'voorzetrolluik_xp', solarTabel: 'voorzetrolluik_xp_solar', montageTitel: 'rolluik', montagePrijs: 195 },
   'roma:zipscreen': { naam: 'ROMA zipSCREEN.2 (windvast ritsscreen)', tabel: 'zipscreen2', solarTabel: 'zipscreen2_solar', montageTitel: 'screen', montagePrijs: 195 },
 };
 
 // Herken een Roma-product uit de vrije productnaam van de agent ("roma rolluik", "roma
-// voorzetrolluik xp solar", "roma zipscreen", ...). Geen /roma/ in de naam = geen Roma.
+// rolluik xp", "roma zipscreen", ...). Geen /roma/ in de naam = geen Roma.
 function herkenRoma(product) {
   const p = String(product || '').toLowerCase();
   if (!/roma/.test(p)) return null;
-  if (/rolluik|voorzet|\bxp\b/.test(p)) return 'roma:rolluik';
+  if (/\bxp\b|hor/.test(p)) return 'roma:rolluik_xp';
+  if (/rolluik|voorzet/.test(p)) return 'roma:rolluik';
   if (/zip|screen/.test(p)) return 'roma:zipscreen';
   return null;
 }
@@ -61,10 +65,11 @@ function romaBeschrijving(r, item) {
 // prijsIndicatie wordt meegegeven om een circulaire require met v4-pricing te vermijden.
 function romaOptiesBlok(r, item, prijsIndicatie) {
   const regels = [];
-  const kaalProduct = r.productKey === 'roma:rolluik' ? 'roma rolluik' : 'roma zipscreen';
+  const isRolluik = r.productKey.startsWith('roma:rolluik');
+  const kaalProduct = r.productKey === 'roma:rolluik_xp' ? 'roma rolluik xp' : isRolluik ? 'roma rolluik' : 'roma zipscreen';
   try {
-    const eqNaam = r.productKey === 'roma:rolluik' ? 'Rolluik S-42' : 'Zip Design 110';
-    const eq = prijsIndicatie({ product: r.productKey === 'roma:rolluik' ? 'rolluik s-42' : 'zip design 110', breedteMM: item.breedteMM, hoogteMM: item.hoogteMM, bediening: r.solar ? 'solar' : 'io' });
+    const eqNaam = isRolluik ? 'Rolluik S-42' : 'Zip Design 110';
+    const eq = prijsIndicatie({ product: isRolluik ? 'rolluik s-42' : 'zip design 110', breedteMM: item.breedteMM, hoogteMM: item.hoogteMM, bediening: r.solar ? 'solar' : 'io' });
     if (eq && !eq.error && eq.productPrijsIncl) {
       const d = eq.productPrijsIncl - r.prijsIncl;
       regels.push(`Voordeliger alternatief:\n• Zelfde maat in Sunmaster ${eqNaam}: ${d < 0 ? '-' : '+'}€${Math.abs(Math.round(d))} per stuk (RAL-kleuren buiten standaard hebben daar wél een meerprijs)`);
@@ -75,6 +80,16 @@ function romaOptiesBlok(r, item, prijsIndicatie) {
     if (!andere.error) {
       const d = andere.prijsIncl - r.prijsIncl;
       regels.push(`Andere bediening:\n• ${r.solar ? 'Bekabeld i.p.v. solar' : 'Solar (zonne-energie, geen bekabeling nodig) i.p.v. bekabeld'}: ${d < 0 ? '-' : '+'}€${Math.abs(d)} per stuk`);
+    }
+  } catch {}
+  // Hor-wissel binnen Roma: .P (standaard) ↔ .XP (met hor-mogelijkheid)
+  try {
+    if (r.productKey === 'roma:rolluik') {
+      const xp = romaPrijs({ product: 'roma rolluik xp', breedteMM: item.breedteMM, hoogteMM: item.hoogteMM, bediening: r.solar ? 'solar' : 'io' });
+      if (!xp.error) regels.push(`Hor-mogelijkheid:\n• Uitvoering .XP (voorbereid voor een hor in de kast): +€${Math.abs(xp.prijsIncl - r.prijsIncl)} per stuk`);
+    } else if (r.productKey === 'roma:rolluik_xp') {
+      const p = romaPrijs({ product: 'roma rolluik', breedteMM: item.breedteMM, hoogteMM: item.hoogteMM, bediening: r.solar ? 'solar' : 'io' });
+      if (!p.error) regels.push(`Geen hor nodig?\n• Uitvoering .P (zonder hor-mogelijkheid): -€${Math.abs(r.prijsIncl - p.prijsIncl)} per stuk`);
     }
   } catch {}
   regels.push('Kleur:\n• Alle 209 RAL-kleuren (mat en structuur) zijn bij ROMA gratis, ook voor kast, geleiders en onderlijst');

@@ -24,7 +24,7 @@ const HANDMATIG = '6221c9fd-c835-45dc-a494-f81e40a8e184';
 const GECONTROLEERD = 'c860c5ae-7eef-45cc-8e79-3b4bcd285b7a';
 const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
 
-const WAAROM_SONTY = '**Waarom Sonty?**\n\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij u thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 500+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg';
+const WAAROM_SONTY = '**Waarom Sonty?**\n\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij je thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 500+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg';
 
 // ============ API HELPERS ============
 
@@ -272,7 +272,7 @@ async function main() {
       }
 
       // Montage markies
-      markiesLines.push({ ...baseLine, units: totalMontages, pricePerUnit: 275, position: 0, description: '**Inmeten + montage markies**\n- Inmeetafspraak bij u thuis\n- Professionele montage door ons eigen montageteam\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal' });
+      markiesLines.push({ ...baseLine, units: totalMontages, pricePerUnit: 275, position: 0, description: '**Inmeten + montage markies**\n- Inmeetafspraak bij je thuis\n- Professionele montage door ons eigen montageteam\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal' });
 
       // Opties
       const mk0 = markiezen[0];

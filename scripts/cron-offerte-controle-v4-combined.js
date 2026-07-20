@@ -1825,8 +1825,13 @@ async function main() {
   const gcItemsData = { items: await getItemsCached('v4-run sheet') };
   // Tool-leads (pipeline-kolom "Winkel ") horen ook in het offerte-register (instructie Daimy 2026-07-04)
   const WINKEL_SHEET_STATUS = '058e79f8-12fa-4a41-8614-9f7ea2e78b4b';
+  // Offertes die Sunny (AI) zelf aanmaakt horen óók in het register (instructie Daimy 2026-07-20).
+  // "Inmeten inplannen" telt mee voor het geval de klant al akkoord gaf vóór deze cron draaide
+  // (de status is dan al doorgeschoven); de dedupe op offertenummer voorkomt dubbele rijen.
+  const AI_SHEET_STATUS = 'dc0efe4f-2cd6-45d8-aeff-7f1c817a0fb2'; // Ai offerte verstuurd
+  const INMETEN_SHEET_STATUS = '2e9819bd-26f0-4082-8f18-32bb48f87f54'; // Inmeten inplannen
   const gcItems = (gcItemsData?.items || []).filter(i =>
-    (i.status_id === GECONTROLEERD || i.status_id === TEVER_STATUS || i.status_id === GORDIJNEN_STATUS || i.status_id === WINKEL_SHEET_STATUS) && i.timestamp_created > sevenDaysAgo &&
+    (i.status_id === GECONTROLEERD || i.status_id === TEVER_STATUS || i.status_id === GORDIJNEN_STATUS || i.status_id === WINKEL_SHEET_STATUS || i.status_id === AI_SHEET_STATUS || i.status_id === INMETEN_SHEET_STATUS) && i.timestamp_created > sevenDaysAgo &&
     !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
   );
 
@@ -1885,7 +1890,8 @@ async function main() {
       city, phone, bedragStr, offerteNr, '',
       // Kanaal: tool-leads (Winkel-kolom) volgen de gekozen herkomst (Winkel/Online), rest is Online
       item.status_id === WINKEL_SHEET_STATUS ? (afkomstRaw === 'online' ? 'Online' : 'Winkel') : 'Online',
-      afkomst, 'Prive', productCat]);
+      // AI-offertes herkenbaar in het register: afkomst "Sunny" (instructie Daimy 2026-07-20)
+      item.status_id === AI_SHEET_STATUS ? 'Sunny' : afkomst, 'Prive', productCat]);
   }
 
   let sheetRows = 0;

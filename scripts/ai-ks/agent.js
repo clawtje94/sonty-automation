@@ -127,8 +127,14 @@ async function beantwoord(gesprek) {
       ctx.acties.push({ type: 'escalatie', reden: 'Model gaf een leeg antwoord (stop_reason: ' + response.stop_reason + ') — klant wacht op reactie', stil: true, urgentie: 'normaal' });
       return { antwoord: null, acties: ctx.acties, toolCalls, usage };
     }
+    // GESPREK KLAAR (Daimy 20 juli): eindigt het antwoord met de [KLAAR]-marker, dan vindt de
+    // bot het gesprek afgerond en sluit de daemon het WhatsApp-ticket. Marker nooit meesturen.
+    let klaar = false;
+    if (/\[KLAAR\]/.test(tekst)) { klaar = true; tekst = tekst.replace(/\s*\[KLAAR\]\s*/g, '\n').trim(); }
     // Stille escalatie: klant krijgt niets, gesprek blijft open voor een collega
-    if (ctx.stil || tekst === '[STIL]' || /^\[STIL\]$/m.test(tekst)) tekst = null;
+    if (ctx.stil) { tekst = null; klaar = false; }
+    // [STIL] zonder escalatie = afsluitend bedankje van de klant → niets sturen én gesprek klaar
+    else if (tekst === '[STIL]' || /^\[STIL\]$/m.test(tekst)) { tekst = null; klaar = true; }
 
     // Kwaliteitspoort: past dit antwoord echt bij het gesprek? (max 1 herkansing)
     if (tekst) {
@@ -146,7 +152,7 @@ async function beantwoord(gesprek) {
         return { antwoord: null, acties: ctx.acties, toolCalls, usage, qa: oordeel };
       }
     }
-    return { antwoord: tekst, acties: ctx.acties, toolCalls, usage, qa: 'OK' };
+    return { antwoord: tekst, acties: ctx.acties, toolCalls, usage, qa: 'OK', klaar };
   }
 
   ctx.acties.push({ type: 'escalatie', reden: 'Tool-loop limiet bereikt', urgentie: 'normaal' });

@@ -107,7 +107,11 @@ async function verwerk(ticketId) {
   // lead op met alle gegevens). Echt zelf beantwoorden = nieuwe mail naar het adres uit het
   // formulier (aparte bouwstap).
   if (/no-reply@webflow/i.test(t.contact?.email || '') || /New form submission/i.test(t.subject || '')) {
-    const inb = (msgs?.data || []).find(m => m.type === 'INBOUND');
+    // Het FORMULIER-bericht pakken, niet zomaar de nieuwste inbound: op een webflow-ticket kan
+    // ook een bounce ("kan niet worden afgeleverd") als INBOUND binnenkomen (20 juli).
+    const inbounds = (msgs?.data || []).filter(m => m.type === 'INBOUND')
+      .sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)));
+    const inb = inbounds.find(m => /form submission/i.test(m.body || m.message || '')) || inbounds[0];
     const body = clean(inb?.body || inb?.message);
     const veld = (label, eind) => { const m = body.match(new RegExp(label + '\\s*[:]?\\s*([^]*?)(?=' + eind + ')', 'i')); return m ? m[1].trim() : ''; };
     const naam = veld('Naam', 'ik wil|Email|Telefoon');

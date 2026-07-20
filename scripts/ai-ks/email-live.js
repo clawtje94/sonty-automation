@@ -72,6 +72,31 @@ async function tPost(ep, body) {
 }
 const zetLabel = (id, l) => tPost(`/tickets/${id}/labels`, { label_id: l });
 
+// NIEUWE uitgaande mail naar een klantadres via het Aanvragen-kanaal — zelfde bewezen route
+// als de TE VER-mails in cron-offerte-controle-v4 (nieuw ticket op contact_identifier → mail →
+// toewijzen aan Sunny → sluiten). Nodig voor webflow-leads: in-thread antwoorden gaat daar naar
+// no-reply@webflow, dus het echte antwoord moet als nieuwe mail naar het adres uit het formulier.
+async function stuurNieuweMail(naar, subject, html) {
+  for (let i = 0; i < 3; i++) {
+    const r1 = await fetch('https://app.trengo.com/api/v2/tickets', {
+      method: 'POST', headers: H,
+      body: JSON.stringify({ channel_id: AANVRAGEN_KANAAL, contact_identifier: naar, subject }),
+    });
+    if (r1.status === 429) { await _sleep(3000 + i * 2000); continue; }
+    if (!r1.ok) return false;
+    const nieuw = await r1.json().catch(() => null);
+    if (!nieuw?.id) return false;
+    const ok = await tPost(`/tickets/${nieuw.id}/messages`, { message: html, body_type: 'html' });
+    if (ok) {
+      await tPost(`/tickets/${nieuw.id}/assign`, { type: 'user', user_id: SONNY_USER });
+      await zetLabel(nieuw.id, LABEL.AI_BOT);
+      await tPost(`/tickets/${nieuw.id}/close`, {});
+    }
+    return ok;
+  }
+  return false;
+}
+
 async function verwerk(ticketId) {
   const t = (await tGet(`/tickets/${ticketId}`))?.data || await tGet(`/tickets/${ticketId}`);
   if (!t) return { ticketId, resultaat: 'ticket niet gevonden' };
@@ -104,26 +129,38 @@ async function verwerk(ticketId) {
       return { ticketId, klant: naam || 'onbekend', resultaat: '👤 MENS NODIG (webflow zonder e-mail)', concept: 'reden: geen adres' };
     }
 
-    // BELANGRIJK (Daimy 19 juli): in-thread antwoorden op een webflow-ticket gaat naar
-    // no-reply@webflow — Trengo negeert de contact-swap, dus de klant krijgt het NOOIT. Daarom
-    // mailt Sunny hier NIET zelf. Wel: de lead + een kant-en-klaar concept naar team Mens nodig,
-    // zodat een mens het in één keer naar het klantadres stuurt. (Echte eigen aflevering naar het
-    // klantadres = aparte bouwstap, pas aanzetten als de aflevering geverifieerd is.)
+    // In-thread antwoorden op een webflow-ticket gaat naar no-reply@webflow — Trengo negeert de
+    // contact-swap, dus de klant krijgt dat NOOIT (geverifieerd 19 juli). Daarom stuurt Sunny
+    // het antwoord als NIEUWE mail naar het adres uit het formulier, via dezelfde bewezen route
+    // als de TE VER-mails (Daimy 20 juli: webflow-leads nu wél zelf beantwoorden). Lukt het
+    // versturen niet, dan valt hij terug op het oude gedrag: concept + lead naar team Mens nodig.
     let conceptDraft = '';
     try {
       const res = await beantwoord({
         kanaal: 'EMAIL',
         klant: { naam: naam || null, email, phone: tel || null },
-        berichten: [{ van: 'klant', tekst: `Nieuwe aanvraag via ons website-formulier.\nNaam: ${naam}\nAdres: ${adresRegel}\nTelefoon: ${tel}\nVraag: ${wil || body.slice(0, 400)}`, tijd: inb?.created_at }],
-        liveTest: false, sonny: false, ticketId, // schaduwmodus: GEEN tools/offertes uitvoeren
+        berichten: [{ van: 'klant', tekst: `Nieuwe aanvraag via ons website-formulier.\nNaam: ${naam}\nAdres: ${adresRegel}\nTelefoon: ${tel}\nVraag: ${wil || body.slice(0, 400)}\n\n(LET OP: in deze modus kun je GEEN offertes aanmaken of aanpassen en niets doorzetten — beloof dat dus niet concreet. Beantwoord de vraag inhoudelijk, vraag eventueel de ontbrekende gegevens op, en nodig uit tot een reactie; op een antwoord van de klant kun je daarna wél alles.)`, tijd: inb?.created_at }],
+        liveTest: false, sonny: false, ticketId, // geen tools/offertes uitvoeren op een formulier-lead
       });
       conceptDraft = res.antwoord ? formatteerEmail(res.antwoord) : '';
     } catch {}
-    const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag — stuur dit zelf naar de klant (in-thread antwoord zou naar no-reply@webflow gaan).\n\nKlant: ${naam || '-'}\nMail: ${email}${tel ? '\nTel: ' + tel : ''}\nAdres: ${adresRegel || '-'}\nVraag: ${wil || body.slice(0, 200)}` + (conceptDraft ? `\n\n--- Concept-antwoord van Sunny (controleer en verstuur naar ${email}) ---\n${conceptDraft}` : '');
+
+    if (conceptDraft) {
+      const verstuurd = await stuurNieuweMail(email, 'Je aanvraag bij Sonty', naarHtml(conceptDraft));
+      if (verstuurd) {
+        await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `🤖 Sunny heeft deze website-lead zelf per mail beantwoord (naar ${email}).\n\n--- Verstuurde mail ---\n${conceptDraft}` });
+        await tPost(`/tickets/${ticketId}/assign`, { type: 'user', user_id: SONNY_USER });
+        await zetLabel(ticketId, LABEL.AI_BOT);
+        await tPost(`/tickets/${ticketId}/close`, {});
+        logKS({ ticket: ticketId, webflow: true, laatsteKlantBericht: (wil || body).slice(0, 200), antwoord: conceptDraft, acties: [] });
+        return { ticketId, klant: naam || email, resultaat: '✅ BEANTWOORD (webflow-lead, eigen mail naar klantadres) + gesloten', concept: conceptDraft.slice(0, 220) };
+      }
+    }
+    const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag — Sunny kon de mail niet zelf versturen, stuur dit zelf naar de klant (in-thread antwoord zou naar no-reply@webflow gaan).\n\nKlant: ${naam || '-'}\nMail: ${email}${tel ? '\nTel: ' + tel : ''}\nAdres: ${adresRegel || '-'}\nVraag: ${wil || body.slice(0, 200)}` + (conceptDraft ? `\n\n--- Concept-antwoord van Sunny (controleer en verstuur naar ${email}) ---\n${conceptDraft}` : '');
     await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: note });
     await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
     await zetLabel(ticketId, LABEL.MENS_NODIG);
-    return { ticketId, klant: naam || email, resultaat: '👤 MENS NODIG (webflow-lead + concept)', concept: conceptDraft.slice(0, 150) };
+    return { ticketId, klant: naam || email, resultaat: '👤 MENS NODIG (webflow-lead + concept, mail versturen mislukte)', concept: conceptDraft.slice(0, 150) };
   }
 
   const rijen = (msgs?.data || []).map(m => ({ van: m.type === 'INBOUND' ? 'klant' : 'sonty', tekst: clean(m.body || m.message), tijd: m.created_at }))

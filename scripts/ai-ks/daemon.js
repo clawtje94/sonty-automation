@@ -231,7 +231,9 @@ async function verwerkSonnyNotities(t, teamNotities) {
         delete actief[t.id];
         fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actief, null, 1));
       }
-      await telegram(`🛑 Gesprek ${wie} (ticket ${t.id}) is op jouw @sonny-notitie UIT het AI-beheer gehaald. De bot antwoordt daar niet meer; het team neemt het over.`);
+      // Telegram-melding alleen bij Daimy's eigen stopcommando (Daimy 20 juli: collega-gebruik
+      // hoeft niet op Telegram zolang het goed werkt). De ✅-notitie op het ticket komt er altijd.
+      if (Number(n.userId) === 736327) await telegram(`🛑 Gesprek ${wie} (ticket ${t.id}) is op jouw @sonny-notitie UIT het AI-beheer gehaald. De bot antwoordt daar niet meer; het team neemt het over.`);
       // Altijd als opmerking terug reageren en de tagger terugtaggen (werkwijze Daimy)
       await plaatsNotitie(t.id, `${await tagVoor(n.userId)} ✅ Verwerkt: dit gesprek is uit AI-beheer gehaald. De bot antwoordt hier niet meer, het team neemt het over.`);
       st[key] = new Date().toISOString();

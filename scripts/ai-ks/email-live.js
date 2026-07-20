@@ -276,7 +276,8 @@ async function verwerkNotities(t, rowsAll) {
       stop[t.id] = new Date().toISOString();
       fs.writeFileSync(EMAIL_STOP_FILE, JSON.stringify(stop, null, 1));
       await tPost(`/tickets/${t.id}/messages`, { internal_note: true, message: `${await tagVoor(n.userId)} ✅ Verwerkt: dit e-mailticket is uit AI-beheer gehaald. Sunny beantwoordt hier niets meer, het team neemt het over.` });
-      await telegram(`🛑 E-mailticket ${wie} (${t.id}) is op jouw @sonny-notitie UIT het AI-beheer gehaald. Sunny beantwoordt daar niets meer.`);
+      // Alleen Daimy's eigen stopcommando op Telegram melden (collega-gebruik niet — 20 juli).
+      if (Number(n.userId) === 736327) await telegram(`🛑 E-mailticket ${wie} (${t.id}) is op jouw @sonny-notitie UIT het AI-beheer gehaald. Sunny beantwoordt daar niets meer.`);
       st[key] = new Date().toISOString();
       continue;
     }

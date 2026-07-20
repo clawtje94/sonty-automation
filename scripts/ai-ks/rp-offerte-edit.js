@@ -7,6 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const CFG = require('./config.js');
 const { prijsIndicatie, v4 } = require('./v4-pricing.js');
+const { herkenRoma, romaPrijs, romaBeschrijving } = require('./roma-pricing.js');
 
 const BACKUP_DIR = path.join(__dirname, '..', '..', 'data', 'offerte-backups');
 
@@ -68,6 +69,8 @@ const VASTE_POSTEN = {
   demontage_oud_product: { naam: 'Demonteren en afvoeren oud scherm/rolluik', prijs: 75, uitleg: 'Per product, waarvan €25 gedoneerd aan het Prinses Máxima Kinderziekenhuis.' },
   verlengde_muursteunen: { naam: 'Verlengde muursteunen', prijs: 150, uitleg: 'Indien nodig, beoordeling bij het inmeten.' },
   led_verlichting_sunelite: { naam: 'LED-verlichting SunElite', prijs: 823.90, uitleg: 'Somfy io, 2 kanalen: kleur en wit licht apart bedienbaar. Ingebouwd in de cassette. Alleen mogelijk op de SunElite.' },
+  // Prijs conform bestaande offertes (o.a. 202518364/202517868): €195 incl BTW en installatie.
+  tahoma_switch: { naam: 'Tahoma Switch (Somfy)', prijs: 195, uitleg: 'Smart home hub: bedien je zonwering met de Somfy-app, ook buitenshuis, met tijdschema\'s en koppeling met Google Home/Alexa/HomeKit. 1 per woning voldoende. Inclusief installatie en uitleg door onze monteur.' },
 };
 
 /**
@@ -110,6 +113,19 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
   // 2c. Toevoegen (productregel + montageregel), prijzen ALTIJD via de v4-engine
   const base = plg.data.lines[0];
   for (const item of toevoegen) {
+    // ROMA-producten: eigen prijstabellen en regel-opbouw (Daimy 20 juli — Angela's
+    // Roma-omzetting kon eerder niet omdat alleen Sunmaster gekoppeld was).
+    if (herkenRoma(item.product)) {
+      const r = romaPrijs(item);
+      if (r.error) return { error: r.error };
+      lines.push({ ...base, description: romaBeschrijving(r, item), units: item.aantal || 1, pricePerUnit: r.prijsIncl, position: 0 });
+      lines.push({
+        ...base,
+        description: `**Inmeten + montage ${r.montageTitel}**\n- Inmeetafspraak bij je thuis\n- Professionele montage door ons eigen montageteam\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal`,
+        units: item.aantal || 1, pricePerUnit: r.montagePrijs, position: 0,
+      });
+      continue;
+    }
     const p = prijsIndicatie(item);
     if (p.error) return { error: `Prijs niet gevonden voor "${item.product}": ${p.error}` };
     const naam = PRODUCT_LABELS[p.productKey] || HOR_LABELS[p.productKey] || item.product;

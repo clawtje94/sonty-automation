@@ -3,12 +3,13 @@
 // zodat het voorstel in de interne notitie belandt en beoordeeld kan worden.
 const CFG = require('./config.js');
 const { prijsIndicatie } = require('./v4-pricing.js');
+const { herkenRoma, romaPrijs } = require('./roma-pricing.js');
 const { buildKlantContext, getOfferteInhoud } = require('./klant-context.js');
 
 const TOOL_DEFS = [
   {
     name: 'prijs_berekenen',
-    description: 'Bereken de actuele Sonty verkoopprijs (incl. BTW en montage) voor een product. Gebruik dit ALTIJD voordat je een prijs noemt — nooit prijzen uit je hoofd. Werkt voor: knikarmschermen (SunEye/SunEye XL/SunElite/SunBasic open cassette/SunBasic dichte cassette — "SunBasic open" is de goedkopere open-arm variant), screens (Zip Design 110/Zip Square), rolluiken (S-37/S-42), uitvalschermen (SunCube/SunProject), serre zonwering (SunControl), pergola, MARKIEZEN (geef materiaal mee: grenen/hardhout/aluminium) en HORREN van Unilux (geef het type in product: raamrolhor comfort/super+, voorzethor/inklemhor/veerstifthor, raamplissé voorzet/inklem/dubbel, plisséfit hordeur (enkel, voor openslaande deuren) of plisséfit dubbel (dubbele deuren/schuifpui), vaste of schuifhordeur luxe).',
+    description: 'Bereken de actuele Sonty verkoopprijs (incl. BTW en montage) voor een product. Gebruik dit ALTIJD voordat je een prijs noemt — nooit prijzen uit je hoofd. Werkt voor: knikarmschermen (SunEye/SunEye XL/SunElite/SunBasic open cassette/SunBasic dichte cassette — "SunBasic open" is de goedkopere open-arm variant), screens (Zip Design 110/Zip Square), rolluiken (S-37/S-42), uitvalschermen (SunCube/SunProject), serre zonwering (SunControl), pergola, MARKIEZEN (geef materiaal mee: grenen/hardhout/aluminium), HORREN van Unilux (geef het type in product: raamrolhor comfort/super+, voorzethor/inklemhor/veerstifthor, raamplissé voorzet/inklem/dubbel, plisséfit hordeur (enkel, voor openslaande deuren) of plisséfit dubbel (dubbele deuren/schuifpui), vaste of schuifhordeur luxe) en ROMA premium-producten: product "roma rolluik" of "roma zipscreen" met breedteMM+hoogteMM en bediening io (bekabeld) of solar. Bij Roma zijn alle 209 RAL-kleuren gratis (geen framekleur-meerprijs).',
     input_schema: {
       type: 'object',
       properties: {
@@ -109,7 +110,7 @@ const TOOL_DEFS = [
         },
         aantalWijzigen: { type: 'array', items: { type: 'object', properties: { product: { type: 'string' }, aantal: { type: 'integer' } }, required: ['product', 'aantal'] } },
         sonnyKorting: { type: 'object', properties: { percentage: { type: 'number', description: 'Nieuw TOTAALPERCENTAGE van de kortingsregel, maximaal 17.5 (= standaard 15 + jouw mandaat van max 2,5). De kortingsregel op de offerte wordt dan bv. "17,5% kortingsaanbod Sonny".' }, gratis: { type: 'string', enum: ['tahoma', 'montage'], description: 'ALLEEN bij grote orders (±5-10 producten) en in PLAATS van de percentage-verhoging: gratis Tahoma of 1x montage gratis. Komt als €0-regel op de offerte, en de 15%-kortingsregel vermeldt het cadeau met "Sonny" erbij.' } }, description: 'Jouw onderhandelmandaat, altijd zichtbaar op de offerte zelf. Kies percentage ÓF gratis, nooit beide, nooit stapelen. Doel is altijd ZO MIN MOGELIJK korting geven: probeer eerst zonder, en geef nooit meer dan nodig om de deal te sluiten.' },
-        vastePosten: { type: 'array', items: { type: 'object', properties: { soort: { type: 'string', enum: ['hoogwerker', 'demontage_oud_product', 'verlengde_muursteunen', 'led_verlichting_sunelite'] }, aantal: { type: 'integer' } }, required: ['soort'] }, description: 'Vaste posten toevoegen: hoogwerker €650/dag (boven 2e verdieping), demontage+afvoer oud product €75/stuk, verlengde muursteunen €150, LED-verlichting SunElite €823,90 (kleur en wit, 2 kanalen — alleen bij SunElite)' },
+        vastePosten: { type: 'array', items: { type: 'object', properties: { soort: { type: 'string', enum: ['hoogwerker', 'demontage_oud_product', 'verlengde_muursteunen', 'led_verlichting_sunelite', 'tahoma_switch'] }, aantal: { type: 'integer' } }, required: ['soort'] }, description: 'Vaste posten toevoegen: hoogwerker €650/dag (boven 2e verdieping), demontage+afvoer oud product €75/stuk, verlengde muursteunen €150, LED-verlichting SunElite €823,90 (kleur en wit, 2 kanalen — alleen bij SunElite), Tahoma Switch €195 (smart home hub, 1 per woning, alleen bij Somfy io motoren)' },
         samenvatting: { type: 'string', description: 'Korte omschrijving van de wijziging voor het logboek' },
       },
       required: ['documentId', 'samenvatting'],
@@ -160,6 +161,23 @@ const TOOL_DEFS = [
 // ── Uitvoering ──
 async function runTool(name, input, ctx) {
   if (name === 'prijs_berekenen') {
+    // ROMA (premium): eigen prijstabellen, netto boekprijs × 1,15 (Daimy 20 juli).
+    if (herkenRoma(input.product)) {
+      const r = romaPrijs(input);
+      if (r.error) return JSON.stringify(r);
+      const totaal = r.prijsIncl + r.montagePrijs;
+      return JSON.stringify({
+        product: r.naam,
+        productPrijsIncl: r.prijsIncl,
+        montageIncl: r.montagePrijs,
+        totaalInclBtwEnMontage: totaal,
+        metActiekorting15pct: Math.round(totaal * 0.85 * 100) / 100,
+        motor: r.motor,
+        kleuren: 'Alle 209 RAL-kleuren (mat en structuur) ZONDER meerprijs — kast, geleiders én onderlijst. Geen framekleur-meerprijs zoals bij Sunmaster.',
+        staffelmaat: `${r.staffel.breedteMM}×${r.staffel.hoogteMM}mm`,
+        opmerking: 'De 15% actiekorting komt als kortingsregel op de offerte (nooit zelf van de productprijs aftrekken).',
+      });
+    }
     return JSON.stringify(prijsIndicatie(input));
   }
   if (name === 'klant_opzoeken') {

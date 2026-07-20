@@ -45,8 +45,10 @@ function romaPrijs({ product, breedteMM, hoogteMM, bediening }) {
     productKey: key,
     naam: def.naam + (solar ? ' Solar' : ''),
     prijsIncl: Math.round(netto * OPSLAG),
-    montagePrijs: def.montagePrijs,
-    montageTitel: def.montageTitel,
+    // Montagetarief volgt de bediening, zelfde als bij Sunmaster (v4): solar €175 (geen
+    // bekabeling), bekabeld €195. Ging fout bij Angela: alles kreeg €195 (Daimy 20 juli).
+    montagePrijs: solar ? 175 : def.montagePrijs,
+    montageTitel: def.montageTitel + (solar ? ' (solar)' : ''),
     motor: solar
       ? 'Somfy RS100 Solar io (op zonne-energie, geen bekabeling nodig, inclusief ingeleerde handzender)'
       : 'Somfy io (inclusief ingeleerde handzender)',

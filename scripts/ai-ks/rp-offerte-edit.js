@@ -121,7 +121,7 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
       lines.push({ ...base, description: romaBeschrijving(r, item) + romaOptiesBlok(r, item, prijsIndicatie), units: item.aantal || 1, pricePerUnit: r.prijsIncl, position: 0 });
       lines.push({
         ...base,
-        description: `**Inmeten + montage ${r.montageTitel}**\n- Inmeetafspraak bij je thuis\n- Professionele montage door ons eigen montageteam\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal`,
+        description: `**Inmeten + montage ${r.montageTitel}**\n- Inmeetafspraak bij je thuis\n- Professionele montage door ons eigen montageteam${r.solar ? '\n- Geen bekabeling nodig (solar-motor)' : ''}\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal`,
         units: item.aantal || 1, pricePerUnit: r.montagePrijs, position: 0,
       });
       continue;

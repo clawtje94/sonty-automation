@@ -1324,6 +1324,43 @@ function correctProductPrice(line, productKey, breedteCm, hoogteCm, uitvalCm) {
   else if (bedStr.includes('handbediend') || bedStr.includes('slingerstang') || bedStr.includes('band')) bedType = 'handbediend';
 
   let correctPrice = calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedType);
+
+  // MAAT-FALLBACKS (Daimy 20 juli): past de maat niet in de tabel van het gekozen model maar
+  // kan een groter zustermodel het wél, dan dat model offreren met klantuitleg op de regel.
+  // SunEye: tot 600 cm breed, en boven 550 cm alleen met 250 cm uitval → anders SunEye XL.
+  let herrouteerd = false;
+  if (!correctPrice && productKey === 'suneye') {
+    const xlPrice = calculateCorrectPrice('suneyeXL', breedteCm, hoogteCm, uitvalCm, bedType);
+    if (xlPrice) {
+      const p600 = calculateCorrectPrice('suneye', 600, hoogteCm, Math.min(uitvalCm || 250, 250), bedType);
+      const delen = line.description.split('\n');
+      if (!/xl/i.test(delen[0])) { delen[0] = delen[0].replace(/sun\s*eye/i, m => m + ' XL'); line.description = delen.join('\n'); }
+      if (!line.description.includes('standaard SunEye gaat tot')) {
+        line.description += `\n\nLet op: de standaard SunEye gaat tot 600 cm breedte (en boven de 550 cm alleen met 250 cm uitval). Door de gekozen maat is dit scherm uitgevoerd als SunEye XL (tot 745 cm).${p600 ? ` Ter vergelijking: de grootste standaard SunEye (600 cm breed, 250 cm uitval) zou €${Math.round(p600)} per stuk zijn, een verschil van €${Math.round(xlPrice - p600)}.` : ''}`;
+      }
+      console.log('    SunEye ' + breedteCm + 'cm past niet → automatisch SunEye XL (Daimy 20 juli)');
+      productKey = 'suneyeXL';
+      correctPrice = xlPrice;
+      herrouteerd = true;
+    }
+  }
+  // Square-screens: buiten de Square-tabel → windvast Zip Design 110 (tot 500 cm), met uitleg
+  // dat niet-windvast op deze breedte niet kan (casus Gaytrie Rama, Daimy 20 juli).
+  if (!correctPrice && (productKey === 'zipSquare85100' || productKey === 'screenSquare85100')) {
+    const zdPrice = calculateCorrectPrice('zipDesign110', breedteCm, hoogteCm, uitvalCm, bedType);
+    if (zdPrice) {
+      const delen = line.description.split('\n');
+      delen[0] = '**Zip Design 110 (windvast)**';
+      line.description = delen.join('\n');
+      if (!line.description.includes('niet-windvaste uitvoering niet mogelijk')) {
+        line.description += `\n\nLet op: door de breedte van dit screen is een niet-windvaste uitvoering niet mogelijk; daarom is dit screen uitgevoerd als het windvaste Zip Design 110 (ritsgeleiding, tot 500 cm breed).`;
+      }
+      console.log('    Square ' + breedteCm + 'cm past niet → automatisch Zip Design 110 (Daimy 20 juli)');
+      productKey = 'zipDesign110';
+      correctPrice = zdPrice;
+      herrouteerd = true;
+    }
+  }
   if (!correctPrice) return { changed: false, priceUnknown: true };
 
   // RAL kleur meerprijs toevoegen als niet-standaard kleur
@@ -1369,8 +1406,9 @@ function correctProductPrice(line, productKey, breedteCm, hoogteCm, uitvalCm) {
     }
   }
 
-  // Alleen corrigeren als er een significant verschil is (>€1)
-  if (Math.abs(line.pricePerUnit - correctPrice) > 1) {
+  // Alleen corrigeren als er een significant verschil is (>€1) — of als het model is
+  // herrouteerd (SunEye→XL / Square→Zip Design), want dan is de beschrijving sowieso gewijzigd.
+  if (Math.abs(line.pricePerUnit - correctPrice) > 1 || herrouteerd) {
     console.log('    Prijs gecorrigeerd: €' + line.pricePerUnit + ' → €' + correctPrice + ' (' + productKey + (isRAL ? ' +RAL' : '') + ')');
     line.pricePerUnit = correctPrice;
     return { changed: true, priceUnknown: false };

@@ -90,7 +90,7 @@ function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'i
   if (/sunbasic/.test(zoek)) {
     zoek = /\bopen\b/.test(zoek) ? 'sunbasic' : (/cassette|dicht|gesloten/.test(zoek) ? 'sunbasic cassette' : 'sunbasic');
   }
-  const productKey = api.getProductKey(zoek);
+  let productKey = api.getProductKey(zoek);
   if (!productKey) return { error: 'Onbekend product: ' + product + '. Bekende producten: zonneschermen (SunEye/SunBasic/SunElite), screens (Zip Design/Zip Square), rolluiken (S-37/S-42), uitvalschermen (SunCube/SunProject), serre zonwering (SunControl), pergola.' };
 
   const b = breedteMM ? breedteMM / 10 : null;
@@ -99,7 +99,17 @@ function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'i
   if (!b) return { error: 'Breedte ontbreekt' };
 
   const bedType = bediening === 'io' ? 'afstandsbediening' : bediening;
-  const prijs = api.calculateCorrectPrice(productKey, b, h, u, bedType);
+  let prijs = api.calculateCorrectPrice(productKey, b, h, u, bedType);
+  // MAAT-FALLBACKS (Daimy 20 juli): maat past niet in het gekozen model, groter zustermodel wél.
+  let maatNotitie = '';
+  if (!prijs && productKey === 'suneye') {
+    prijs = api.calculateCorrectPrice('suneyeXL', b, h, u, bedType);
+    if (prijs) { productKey = 'suneyeXL'; maatNotitie = 'LET OP: deze maat past niet in de standaard SunEye (tot 600 cm breed; boven de 550 cm alleen 250 cm uitval). Automatisch de SunEye XL (tot 745 cm) gerekend — vertel de klant waarom, en noem desgewenst het prijsverschil met een standaard SunEye (reken die apart door op 6000 breed, 2500 uitval).'; }
+  }
+  if (!prijs && (productKey === 'zipSquare85100' || productKey === 'screenSquare85100')) {
+    prijs = api.calculateCorrectPrice('zipDesign110', b, h, u, bedType);
+    if (prijs) { productKey = 'zipDesign110'; maatNotitie = 'LET OP: op deze breedte is een niet-windvast Square-screen niet leverbaar. Automatisch het windvaste Zip Design 110 (ritsgeleiding, tot 500 cm) gerekend — vertel de klant dat zonder zip deze breedte niet mogelijk is.'; }
+  }
   if (!prijs) return { error: 'Geen prijs gevonden voor deze maten — buiten leverbaar bereik. Geef dit door aan een medewerker.' };
 
   const cat = api.getCategory(productKey.replace(/S37|S42/, ' rolluik').replace(/zip/i, 'zip design').toLowerCase()) ||
@@ -141,6 +151,7 @@ function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'i
     totaalIncl: Math.round(prijs + montage) + kleurSur,
     framekleur: kleur || { keuzeNodig: true, gratisStandaardkleuren: stdKleuren, opmerking: 'FRAMEKLEUR MOET DE KLANT KIEZEN (beïnvloedt de prijs). Noem de gratis standaardkleuren; andere RAL-kleuren hebben een meerprijs (reken door met framekleur-parameter). Doekkleur mag wél wachten tot het inmeten.' },
     toelichting: 'Prijzen incl. BTW, product incl. Somfy motor, montage door eigen monteurs. Indicatie op basis van opgegeven maten; definitief na inmeten.',
+    ...(maatNotitie ? { maatNotitie } : {}),
   });
 }
 

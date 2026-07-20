@@ -89,10 +89,9 @@ async function ronde() {
     const sleutel = `${t.id}:${laatste.created_at}`;
     if (state[sleutel]) continue;
     // REACTIETIJD (Daimy 20 juli): klantmails pas na 1,5-2 uur beantwoorden — direct antwoorden
-    // voelt als een bot. Webflow-leads slaan dit over: daar gaat alleen een interne notitie naar
-    // het team (hoe eerder die de lead ziet, hoe beter), geen mail naar de klant.
-    const isWebflow = /no-reply@webflow/i.test(t.contact?.email || '') || /New form submission/i.test(t.subject || '');
-    if (!isWebflow && !isTest) {
+    // voelt als een bot. Geldt sinds 20 juli ook voor webflow-leads: Sunny mailt die nu zelf
+    // naar het klantadres, dus ook daar hoort het menselijke tempo bij.
+    if (!isTest) {
       const oud = leeftijdMin(laatste.created_at);
       const wacht = wachttijdMin(t.id);
       if (oud < wacht) { console.log(`  [${t.id}] wacht op reactietijd: ${Math.round(oud)}/${wacht} min`); continue; }

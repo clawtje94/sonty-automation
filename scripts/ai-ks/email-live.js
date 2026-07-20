@@ -313,11 +313,28 @@ async function verwerkNotities(t, rowsAll) {
   const teamAntwoord = ((ruw.match(/NOTITIE:\s*([\s\S]+)$/i) || [])[1] || '').trim();
   const klantTekst = schoonKlantTekst(ruw.replace(/NOTITIE:\s*[\s\S]+$/i, '').replace(/GEEN_BERICHT/g, '').trim());
   let verstuurd = false;
-  if (klantTekst) verstuurd = await tPost(`/tickets/${t.id}/messages`, { message: naarHtml(klantTekst) });
+  let klantMail = null;
+  // Op webflow-/bounce-tickets is het ticketcontact GEEN klantadres: in-thread mailen komt dan
+  // bij no-reply@webflow terecht (Winny, 20 juli — Jorrens @sonny-opdracht stuiterde). Dan het
+  // echte klantadres uit het formulier of uit de notitie zelf halen en als NIEUWE mail sturen.
+  const contactOnbruikbaar = /no-reply@webflow|microsoftexchange|mailer-daemon|postmaster/i.test(String(t.contact?.email || ''));
+  if (klantTekst) {
+    if (contactOnbruikbaar) {
+      const formTekst = (rowsAll || []).filter(m => m.type === 'INBOUND').map(m => clean(m.body || m.message)).find(b => /form submission/i.test(b)) || '';
+      klantMail = (formTekst.match(/Email\s*:?\s*([\w.+-]+@[\w-]+\.[a-z]{2,4})(?![a-z])/i) || [])[1]
+        || (feedback.match(/([\w.+-]+@[\w.-]+\.[a-z]{2,})/i) || [])[1] || null;
+      if (klantMail) verstuurd = await stuurNieuweMail(klantMail, 'Je aanvraag bij Sonty', naarHtml(klantTekst));
+    } else {
+      verstuurd = await tPost(`/tickets/${t.id}/messages`, { message: naarHtml(klantTekst) });
+    }
+  }
   const mutaties = (res.acties || []).filter(a => a.type !== 'escalatie');
   const actieTekst = mutaties.length ? '\nUitgevoerd: ' + mutaties.map(a => a.samenvatting || a.type).join('; ') : '';
+  // Eerlijke terugkoppeling over de aflevering: nooit "mail gestuurd" claimen als het niet lukte.
+  const aflevering = verstuurd ? `\n(De klant heeft hierover een mail gekregen${klantMail ? ' op ' + klantMail : ''}.)`
+    : (klantTekst ? '\n(⚠️ LET OP: de mail naar de klant kon NIET verstuurd worden — stuur hem zelf naar het klantadres.)' : '');
   for (const i of teDoen) {
-    await tPost(`/tickets/${t.id}/messages`, { internal_note: true, message: `${await tagVoor(i.userId)} ✅ ${teamAntwoord || 'Verwerkt als vaste kennis.'}${actieTekst}${verstuurd ? '\n(De klant heeft hierover een mail gekregen.)' : ''}` });
+    await tPost(`/tickets/${t.id}/messages`, { internal_note: true, message: `${await tagVoor(i.userId)} ✅ ${teamAntwoord || 'Verwerkt.'}${actieTekst}${aflevering}` });
   }
   logKS({ ticket: t.id, teamOpdracht: feedback.slice(0, 300), antwoord: verstuurd ? klantTekst : '(geen klantmail)', teamAntwoord: teamAntwoord.slice(0, 200), acties: res.acties });
 }

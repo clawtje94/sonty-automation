@@ -119,8 +119,9 @@ async function verwerk(ticketId) {
     const email = (body.match(/Email\s*:?\s*([\w.+-]+@[\w-]+\.[a-z]{2,4})(?![a-z])/) || [])[1] || '';
     const tel = (body.match(/Telefoonnummer\s*:?\s*([\d +]{6,15})/i) || [])[1] || '';
     const adres = veld('Adres', 'Huisnummer|postcode|Woonplaats|Field|Bericht');
-    const hn = (body.match(/Huisnummer\s*:?\s*([^\s]+)/i) || [])[1] || '';
-    const pc = (body.match(/postcode\s*:?\s*([^\s]+)/i) || [])[1] || '';
+    // Lazy match met lookahead: webflow plakt velden zonder spatie aan elkaar ("268postcode: 2583Cp...")
+    const hn = (body.match(/Huisnummer\s*:?\s*(.*?)(?=\s|postcode|Woonplaats|Field|Bericht|$)/i) || [])[1] || '';
+    const pc = (body.match(/postcode\s*:?\s*(.*?)(?=\s|Woonplaats|Field|Bericht|$)/i) || [])[1] || '';
     const plaats = veld('Woonplaats', 'Field|Bericht');
     const adresRegel = [adres, hn, pc, plaats].filter(Boolean).join(' ');
 
@@ -143,7 +144,7 @@ async function verwerk(ticketId) {
       const res = await beantwoord({
         kanaal: 'EMAIL',
         klant: { naam: naam || null, email, phone: tel || null },
-        berichten: [{ van: 'klant', tekst: `Nieuwe aanvraag via ons website-formulier.\nNaam: ${naam}\nAdres: ${adresRegel}\nTelefoon: ${tel}\nType aanvraag: ${wil || '-'}\nBericht/vraag van de klant: ${bericht || wil || body.slice(0, 400)}\n\n(LET OP: in deze modus kun je GEEN offertes aanmaken of aanpassen en niets doorzetten — beloof dat dus niet concreet. Beantwoord de vraag inhoudelijk, vraag eventueel de ontbrekende gegevens op, en nodig uit tot een reactie; op een antwoord van de klant kun je daarna wél alles.)`, tijd: inb?.created_at }],
+        berichten: [{ van: 'klant', tekst: `Nieuwe aanvraag via ons website-formulier.\nNaam: ${naam}\nAdres: ${adresRegel}\nTelefoon: ${tel}\nType aanvraag: ${wil || '-'}\nBericht/vraag van de klant: ${bericht || wil || body.slice(0, 400)}\n\n(LET OP: dit is het EERSTE antwoord op een formulier-aanvraag. Je kunt in deze beurt nog GEEN offerte aanmaken of iets doorzetten, dus zeg niet dat je hem NU maakt of dat er zo een link komt. Wat je WEL doet: de vraag inhoudelijk beantwoorden (prijzen berekenen met prijs_berekenen mag gewoon), de nog ontbrekende keuzes uitvragen (bv. bediening, framekleur), en toezeggen dat je de offerte direct in orde maakt zodra de klant die doorgeeft — als de klant antwoordt kun je daarna wél alles.)`, tijd: inb?.created_at }],
         liveTest: false, sonny: false, ticketId, // geen tools/offertes uitvoeren op een formulier-lead
       });
       conceptDraft = res.antwoord ? formatteerEmail(res.antwoord) : '';

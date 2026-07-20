@@ -671,7 +671,8 @@ async function verwerkPendingOffertes() {
     // volledig live). Zonder deze tak zou een via e-mail aangemaakte offerte de klant nooit bereiken.
     const isEmailLevering = ticket && !isWaTicket(ticket) && (p.kanaal === 'EMAIL' || CFG.EMAIL_CHANNEL_NAMES.includes(ticket.channel?.title));
     if (isEmailLevering) {
-      const html = `<p>Hi ${voornaam},</p><p>Je offerte staat klaar. Je bekijkt hem hier: <a href="${res.link}">${res.link}</a></p><p>Offertenummer: ${doc.quotationNumber || ''}<br>De offerte is 7 dagen geldig. Neem hem rustig door en laat maar weten als je vragen hebt.</p>`;
+      // Nette mailopbouw incl. afsluiting (Daimy 20 juli: "zo'n mail moet wel goed opgesteld, met vriendelijke groet etc.")
+      const html = `<p>Hi ${voornaam},</p><p>Goed nieuws: je offerte staat klaar. Je bekijkt hem hier: <a href="${res.link}">${res.link}</a></p><p>Offertenummer: ${doc.quotationNumber || ''}<br>De offerte is 7 dagen geldig. Neem hem rustig door en laat het gerust weten als je nog vragen hebt of iets aangepast wilt hebben.</p><p>Met vriendelijke groet,<br>Sunny | Sonty</p>`;
       const sendRes = await tPost(`/tickets/${ticket.id}/messages`, { message: html });
       console.log(`  → pending offerte per mail geleverd aan ${p.klantNaam}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status}`);
     } else if (ticket && (isLiveTestContact(ticket) || magSonnyLeveren)) {

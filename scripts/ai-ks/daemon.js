@@ -563,8 +563,10 @@ async function verwerkTicket(t, state) {
       // Leervraag (instructie Daimy): vraag naar Telegram zodat het antwoord aangeleerd kan worden
       fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leervragen.jsonl'), JSON.stringify({ tijd: new Date().toISOString(), ticket: t.id, klant: wie, vraag: laatste.tekst.substring(0, 500), toelichtingAI: escalatie.reden, status: 'open' }) + '\n');
       await telegram(`🎓 LEERVRAAG van klant ${wie} (ticket ${t.id}):\n\n"${laatste.tekst.substring(0, 400)}"\n\nAI: ${escalatie.reden.substring(0, 400)}\n\nAntwoord hier op Telegram, dan leer ik het de AI aan en ${escalatie.stil ? 'beantwoorden we de klant (gesprek staat nog open)' : 'weet hij het voortaan zelf'}.`);
-    } else {
-      await telegram(`⚠️ AI-KS escalatie — ticket ${t.id} (${wie}):\n${escalatie.reden}\n\nLaatste klantbericht: ${laatste.tekst.substring(0, 300)}`);
+    } else if (/hoog/i.test(escalatie.urgentie || '')) {
+      // Alleen nog een Telegram-alarm bij HOGE urgentie (veiligheid). Gewone overdrachten niet
+      // meer melden — het team ziet ze gewoon in de map Mens nodig (Daimy 20 juli).
+      await telegram(`🚨 URGENTE escalatie — ticket ${t.id} (${wie}):\n${escalatie.reden}\n\nLaatste klantbericht: ${laatste.tekst.substring(0, 300)}`);
     }
     // Overdracht: ÉÉN duidelijk bericht met tag naar het team (beleid Daimy 16+17 juli:
     // "tag de juiste mensen en maak het in 1x duidelijk, niet alles op elkaar geramd").

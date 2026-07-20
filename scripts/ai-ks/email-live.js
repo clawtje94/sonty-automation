@@ -167,7 +167,112 @@ async function verwerk(ticketId) {
   return { ticketId, klant: gesprek.klant.naam || gesprek.klant.email, resultaat: '👤 MENS NODIG (naar team Mens nodig)', concept: 'reden: ' + (escal?.reden || 'geen antwoord').slice(0, 200) };
 }
 
-module.exports = { verwerk, tGet, tPost, formatteerEmail };
+// ============================== @SONNY-NOTITIES ==============================
+// (Daimy 20 juli: "reageer je nu ook op mijn @sonny tags? naar mij terug en pas je dat aan
+// in de kennis?") Zelfde werkwijze als verwerkSonnyNotities in de WhatsApp-daemon:
+// - STOPCOMMANDO ("@sonny stop / neem over") → ticket uit AI-beheer (email-stop.json),
+//   ✅-notitie terug naar de tagger + Telegram-melding.
+// - Al het andere = LEERPUNT: naar leerpunten.md (zit per direct in de prompt van BEIDE
+//   kanalen), Telegram-melding, en de bot beoordeelt ZELF of de notitie ook een actie
+//   (tools) of een mail aan de klant vraagt (GEEN_BERICHT / NOTITIE:-protocol, identiek
+//   aan WhatsApp). Er gaat ALTIJD een ✅-notitie terug naar wie tagde.
+// Dedupe via hetzelfde notitie-leerpunten.json als WhatsApp (sleutel "ticket:tijd").
+const NOTITIE_STATE = path.join(path.dirname(CFG.LOG_FILE), 'notitie-leerpunten.json');
+const EMAIL_STOP_FILE = path.join(path.dirname(CFG.LOG_FILE), 'email-stop.json');
+const NOTITIE_MAX_DAGEN = 7; // oudere notities (van vóór deze functie) stil markeren, nooit alsnog mails afvuren
+
+function loadJson(f) { try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch { return {}; } }
+
+async function telegram(tekst) {
+  try {
+    await fetch(`https://api.telegram.org/bot${CFG.TG_TOKEN}/sendMessage`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: CFG.TG_CHAT, text: tekst }),
+    });
+  } catch {}
+}
+
+// Tag voor de auteur van een notitie (zelfde als de WA-daemon; fallback Daimy).
+const userTagCache = {};
+async function tagVoor(userId) {
+  if (!userId) return '@daimy736327';
+  if (userTagCache[userId]) return userTagCache[userId];
+  try {
+    const u = await tGet(`/users/${userId}`);
+    const naam = (u?.first_name || u?.data?.first_name || '').toLowerCase().replace(/[^a-z]/g, '');
+    userTagCache[userId] = naam ? `@${naam}${userId}` : '@daimy736327';
+  } catch { userTagCache[userId] = '@daimy736327'; }
+  return userTagCache[userId];
+}
+
+async function verwerkNotities(t, rowsAll) {
+  const notes = (rowsAll || [])
+    .filter(m => m.type === 'NOTE' || m.internal_note)
+    .map(m => ({ tijd: m.created_at, tekst: clean(m.body || m.message), userId: m.user_id || null }))
+    .filter(n => /@sonny/i.test(n.tekst) && !n.tekst.includes('✅'))
+    .sort((a, b) => String(a.tijd).localeCompare(String(b.tijd)));
+  if (!notes.length) return;
+  const st = loadJson(NOTITIE_STATE);
+  const nieuwe = notes.filter(n => !st[`${t.id}:${n.tijd}`]);
+  if (!nieuwe.length) return;
+  const wie = t.contact?.full_name || t.contact?.email || t.id;
+  const nuAms = () => Date.parse(new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Amsterdam' }).replace(' ', 'T'));
+
+  const teDoen = [];
+  for (const n of nieuwe) {
+    const key = `${t.id}:${n.tijd}`;
+    const punt = n.tekst.replace(/@sonny(747786)?[,:]?\s*/i, '').trim();
+    // Stokoude notities (van vóór deze functie bestond) stil markeren.
+    if ((nuAms() - Date.parse(String(n.tijd).replace(' ', 'T'))) / 86400000 > NOTITIE_MAX_DAGEN) { st[key] = 'te-oud'; continue; }
+    // STOPCOMMANDO — zelfde patronen als WhatsApp (géén los "stop": "stopcontact" is er geen).
+    if (/\b(niet verder|stop met dit gesprek|stop ermee|stoppen met dit gesprek|neem (het |dit )?over|pauzeer|laat dit gesprek)\b/i.test(punt)) {
+      const stop = loadJson(EMAIL_STOP_FILE);
+      stop[t.id] = new Date().toISOString();
+      fs.writeFileSync(EMAIL_STOP_FILE, JSON.stringify(stop, null, 1));
+      await tPost(`/tickets/${t.id}/messages`, { internal_note: true, message: `${await tagVoor(n.userId)} ✅ Verwerkt: dit e-mailticket is uit AI-beheer gehaald. Sunny beantwoordt hier niets meer, het team neemt het over.` });
+      await telegram(`🛑 E-mailticket ${wie} (${t.id}) is op jouw @sonny-notitie UIT het AI-beheer gehaald. Sunny beantwoordt daar niets meer.`);
+      st[key] = new Date().toISOString();
+      continue;
+    }
+    if (punt) {
+      // Leerpunt direct vastleggen (zit per direct in de prompt) en direct markeren, zodat een
+      // fout in de beoordeling hieronder nooit tot dubbele leerpunten of dubbele mails leidt.
+      fs.appendFileSync(path.join(path.dirname(CFG.LOG_FILE), 'leerpunten.md'), `- (${new Date().toISOString().slice(0, 10)}) [team-notitie bij e-mail ${wie}] ${punt}\n`);
+      teDoen.push({ key, punt, userId: n.userId });
+    }
+    st[key] = new Date().toISOString();
+  }
+  fs.writeFileSync(NOTITIE_STATE, JSON.stringify(st, null, 1));
+  if (!teDoen.length) return;
+
+  const feedback = teDoen.map(i => i.punt).join('\n');
+  await telegram(`🎓 @sonny-notitie op e-mailticket ${wie} verwerkt als leerpunt:\n"${feedback.substring(0, 300)}"\n\nSunny beoordeelt nu zelf of dit ticket ook een actie of mail nodig heeft.`);
+  // Zelfde feedback-beoordeling als WhatsApp: opdrachten voert de agent NU uit met zijn tools,
+  // en hij bepaalt zelf of er nog een mail naar de klant moet (GEEN_BERICHT als dat niet zo is).
+  const rijen = (rowsAll || []).map(m => ({ van: m.type === 'INBOUND' ? 'klant' : 'sonty', tekst: clean(m.body || m.message), tijd: m.created_at }))
+    .filter(m => (m.tekst)).sort((a, b) => String(a.tijd).localeCompare(String(b.tijd)));
+  const res = await beantwoord({
+    kanaal: 'EMAIL',
+    klant: { naam: t.contact?.full_name || null, email: t.contact?.email || null, phone: t.contact?.phone || null },
+    berichten: rijen.slice(-25),
+    teamNotities: notes,
+    teamInstructie: feedback,
+    liveTest: true, sonny: false, ticketId: t.id,
+  });
+  const ruw = res.antwoord || '';
+  const teamAntwoord = ((ruw.match(/NOTITIE:\s*([\s\S]+)$/i) || [])[1] || '').trim();
+  const klantTekst = schoonKlantTekst(ruw.replace(/NOTITIE:\s*[\s\S]+$/i, '').replace(/GEEN_BERICHT/g, '').trim());
+  let verstuurd = false;
+  if (klantTekst) verstuurd = await tPost(`/tickets/${t.id}/messages`, { message: naarHtml(klantTekst) });
+  const mutaties = (res.acties || []).filter(a => a.type !== 'escalatie');
+  const actieTekst = mutaties.length ? '\nUitgevoerd: ' + mutaties.map(a => a.samenvatting || a.type).join('; ') : '';
+  for (const i of teDoen) {
+    await tPost(`/tickets/${t.id}/messages`, { internal_note: true, message: `${await tagVoor(i.userId)} ✅ ${teamAntwoord || 'Verwerkt als vaste kennis.'}${actieTekst}${verstuurd ? '\n(De klant heeft hierover een mail gekregen.)' : ''}` });
+  }
+  logKS({ ticket: t.id, teamOpdracht: feedback.slice(0, 300), antwoord: verstuurd ? klantTekst : '(geen klantmail)', teamAntwoord: teamAntwoord.slice(0, 200), acties: res.acties });
+}
+
+module.exports = { verwerk, tGet, tPost, formatteerEmail, verwerkNotities };
 
 if (require.main === module) (async () => {
   const ids = process.argv.slice(2);

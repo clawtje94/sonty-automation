@@ -567,6 +567,9 @@ async function verwerkTicket(t, state) {
       // Label: een mens moet iets doen. "AI Bot" eraf, want de bot handelt dit niet af.
       await zetLabel(t.id, LABEL.MENS_NODIG);
       await haalLabelWeg(t.id, LABEL.AI_BOT);
+      // Ook echt naar team "Mens nodig" toewijzen (Daimy 20 juli: escalaties horen in de
+      // Mens nodig-map, net als bij e-mail — het label alleen zet hem daar niet in).
+      await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
     }
   } else if (echtVerstuurd && isWaTicket(t)) {
     // TÓCH ZELF GEHOLPEN na een eerdere overdracht (Daimy 2026-07-17: "als je toch iemand kan
@@ -584,8 +587,21 @@ async function verwerkTicket(t, state) {
       const weg = await verwijderNotitie(t.id, m.id);
       console.log(`  ${weg ? '✓ achterhaalde escalatie-notitie ' + m.id + ' verwijderd (klant is alsnog geholpen)' : '⚠️ kon escalatie-notitie ' + m.id + ' niet verwijderen'}`);
     }
-    // Labels omzetten: de bot doet het nu zelf → "Mens nodig" eraf, "AI Bot" erop.
-    if (oudeEscalaties.length) { await haalLabelWeg(t.id, LABEL.MENS_NODIG); await zetLabel(t.id, LABEL.AI_BOT); }
+    // Labels omzetten: de bot doet het nu zelf → "Mens nodig" eraf, "AI Bot" erop,
+    // en uit de Mens nodig-map: terug naar het Sonny-account (Daimy 20 juli).
+    if (oudeEscalaties.length) {
+      await haalLabelWeg(t.id, LABEL.MENS_NODIG); await zetLabel(t.id, LABEL.AI_BOT);
+      await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 747786 });
+    }
+  }
+
+  // GESPREK KLAAR → TICKET SLUITEN (Daimy 20 juli, voorbeeld +31653832879): vindt de bot het
+  // gesprek volledig afgerond ([KLAAR]-marker in het antwoord, of [STIL] op een afsluitend
+  // bedankje), dan sluiten we het WhatsApp-ticket in Trengo. Nooit bij een escalatie; stuurt
+  // de klant later toch weer iets, dan opent Trengo het ticket vanzelf weer.
+  if (res.klaar && !escalatie && isWaTicket(t) && (sonnyMode || actiefTicket || liveTest)) {
+    const dicht = await tPost(`/tickets/${t.id}/close`, {});
+    console.log(`  ${dicht.ok ? '✓ gesprek klaar → ticket gesloten' : '⚠️ ticket sluiten mislukte: ' + dicht.status}`);
   }
 
   // Terugkom-belofte in het zojuist beantwoorde klantbericht? Registreren voor de reminder.

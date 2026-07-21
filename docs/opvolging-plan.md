@@ -43,3 +43,8 @@ Kernprincipe: géén massamailing, maar per klant een **individuele afweging doo
 1. opvolging-daemon.js met filters + state + schaduwmodus (1 dag werk).
 2. Ochtendrapport-integratie + kill-switch + health-check.
 3. Schaduwweek → rapport → Daimy beslist → `.opvolging-live`.
+
+## 5. Uitwerking gebouwd (21 juli, schaduw — kan niets versturen)
+- `scripts/ai-ks/opvolging-daemon.js`: scant gesprekken 3-14 dagen stil, zekerheids-checks fail-closed (klant als laatste iets gestuurd? → skip; mens/Mens nodig? → skip; getekend/akkoord/opt-out in RP-context? → skip; check faalt? → skip), daarna agent-oordeel per klant + conceptbericht naar `data/ai-ks/opvolging-voorstellen.jsonl`. Geen verzendcode aanwezig. Kill-switch: `data/ai-ks/OPVOLGING_STOP`. Rustperiode 30 dagen per klant (state-file).
+- Eerste proefrun (5 kandidaten): 2 terecht geblokkeerd, 3 voorstellen (Martine/rolluiken-offerte, Gunther/10cm-vraag, Niki/Tahoma). Leerpunt direct verwerkt: bot mag in een opvolger nooit claimen dat er intern iets besproken/geregeld is als dat niet uit het gesprek blijkt, en volgt niet op als er nog een onbeantwoorde inhoudelijke vraag ligt.
+- Scope-aanscherping Daimy: focus op mensen met wie wij al contact hebben (WA/mail), o.a. "ik kom er op terug"-gevallen; RP-mails blijven zoals ze zijn.

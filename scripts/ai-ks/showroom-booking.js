@@ -1,5 +1,6 @@
 // Showroomafspraken voor de AI-klantenservice via MS Bookings (kalender SontyMontage1).
-// Regels: showroom is ALLEEN op afspraak en alleen op WOENSDAG/VRIJDAG/ZATERDAG (Daimy 17 juli).
+// Regels (Daimy 21 juli): showroom is open DINSDAG t/m ZATERDAG en afspraken mogen op elke
+// open dag geboekt worden; op wo/vr/za is een afspraak verplicht voor bezoekers (drukte).
 // Slots: 45 min op uur-interval binnen de service-uren, minimaal 8 uur vooruit
 // (schedulingPolicy van de Bookings-service: timeSlotInterval PT1H, minimumLeadTime PT8H).
 // Beschikbaarheid = service-uren minus bestaande showroomafspraken (capaciteit 1 tegelijk;
@@ -10,10 +11,10 @@ const BIZ = 'SontyMontage1@sontymontage.nl';
 const SERVICE_ID = 'b3b00294-076c-43b4-858c-76332f08d775'; // "Afspraak showroom Frijdastraat 8F, Rijswijk"
 const DUUR_MIN = 45;
 const ADRES = 'Frijdastraat 8F, 2288 EX Rijswijk';
-const DAGEN = [3, 5, 6]; // wo / vr / za
+const DAGEN = [2, 3, 4, 5, 6]; // di t/m za (Daimy 21 juli: inplannen mag op elke open dag)
 const DAGNAAM = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
 // Laatste starttijd zo dat de afspraak binnen de service-uren past (di-vr tot 17:00, za tot 16:00)
-const UREN = { 3: ['09:30', '16:15'], 5: ['09:30', '16:15'], 6: ['09:30', '15:15'] };
+const UREN = { 2: ['09:30', '16:15'], 3: ['09:30', '16:15'], 4: ['09:30', '16:15'], 5: ['09:30', '16:15'], 6: ['09:30', '15:15'] };
 const MIN_VOORUIT_MS = 8 * 3600 * 1000;
 // Showroom-medewerkers van de service, in toewijs-voorkeursvolgorde (eerste vrije wordt
 // toegewezen; volgorde aanpasbaar na feedback Daimy): Nanny (binnenhuis), Jaimy, Joey.

@@ -132,7 +132,7 @@ const TOOL_DEFS = [
   },
   {
     name: 'showroom_beschikbaarheid',
-    description: 'Haal de vrije tijden op voor een showroomafspraak (Frijdastraat 8F, 2288 EX Rijswijk — 45 minuten, alleen woensdag/vrijdag/zaterdag, uitsluitend op afspraak). Gebruik dit zodra een klant naar de showroom/winkel wil komen: vraag eerst naar welke dag de voorkeur uitgaat, en stel daarna 2-3 concrete tijden uit deze lijst voor. Noem NOOIT tijden uit je hoofd.',
+    description: 'Haal de vrije tijden op voor een showroomafspraak (Frijdastraat 8F, 2288 EX Rijswijk — 45 minuten, dinsdag t/m zaterdag). Gebruik dit zodra een klant naar de showroom/winkel wil komen: vraag eerst naar welke dag de voorkeur uitgaat, en stel daarna 2-3 concrete tijden uit deze lijst voor. Noem NOOIT tijden uit je hoofd.',
     input_schema: {
       type: 'object',
       properties: {
@@ -301,7 +301,7 @@ async function runTool(name, input, ctx) {
     const slots = await vrijeSlots({ dagenVooruit: dagen });
     return JSON.stringify({
       slots: slots.slice(0, 30),
-      opmerking: 'Showroom is uitsluitend op afspraak (wo/vr/za). Stel 2-3 tijden voor die passen bij de voorkeur van de klant; boek pas na expliciete keuze van de klant.',
+      opmerking: 'Afspraken kunnen di t/m za. Stel 2-3 tijden voor die passen bij de voorkeur van de klant; boek pas na expliciete keuze van de klant.',
     });
   }
   if (name === 'showroom_afspraak_boeken') {

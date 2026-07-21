@@ -84,8 +84,23 @@ async function main() {
   for (const [cat, n] of Object.entries(perCat).sort((a, b) => b[1] - a[1])) r.push(`  - ${cat}: ${n}`);
   r.push('');
   r.push(`Referentie zelfde venster vorige maand (${refVan} t/m ${refTot}): ${refCohort.length} leads, ${refAkkoord} akkoord (${pct(refAkkoord, refCohort.length)})`);
+
+  // Weektrend: de 6 voorgaande weken (ma-zo), telkens met de stand van NU — oudere weken
+  // rijpen na (leads converteren later alsnog), dus deze percentages lopen elke week op.
   r.push('');
-  r.push('NB: jonge leads converteren nog door (cijfer stijgt nog); oudere maanden zijn op het bord deels opgeschoond.');
+  r.push('Weektrend (stand van vandaag):');
+  const maandagVan = (d) => { const x = new Date(Date.parse(d)); const wd = (x.getUTCDay() + 6) % 7; return new Date(x.getTime() - wd * 86400000); };
+  let wStart = maandagVan(van);
+  for (let w = 0; w < 6; w++) {
+    wStart = new Date(wStart.getTime() - 7 * 86400000);
+    const wVan = wStart.toISOString().slice(0, 10);
+    const wTot = new Date(wStart.getTime() + 6 * 86400000).toISOString().slice(0, 10);
+    const wc = alle.filter(i => { const d = dagVan(i); return d >= wVan && d <= wTot; });
+    const wa = wc.filter(i => STATUS[i.status_id]).length;
+    r.push(`  wk ${wVan} t/m ${wTot}: ${String(wc.length).padStart(3)} leads, ${String(wa).padStart(2)} akkoord = ${pct(wa, wc.length)}`);
+  }
+  r.push('');
+  r.push('NB: jonge weken converteren nog door (cijfers stijgen elke week); weken ouder dan ±2 maanden zijn op het bord deels opgeschoond en tellen te laag.');
   const tekst = r.join('\n');
   console.log(tekst);
 

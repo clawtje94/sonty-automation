@@ -821,7 +821,10 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
     return (m.internal_note || m.type === 'NOTE') && /@sonny(?!\d)/i.test(tekst) &&
       !tekst.includes('✅') && !nStat[`${t.id}:${m.created_at}`];
   });
-  rij.sort((a, b) => verseNotitie(b) - verseNotitie(a));
+  // WHITELIST-VOORRANG (Daimy 21 juli: "op mij en Joey z'n nummer mag je direct antwoorden"):
+  // testnummers altijd vooraan in de rij, daarna gesprekken met een verse @sonny-notitie.
+  const prioriteit = (t) => (isLiveTestContact(t) ? 2 : 0) + (verseNotitie(t) ? 1 : 0);
+  rij.sort((a, b) => prioriteit(b) - prioriteit(a));
   await Promise.all(Array.from({ length: Math.min(3, rij.length) }, async () => {
     let t;
     while ((t = rij.shift())) {

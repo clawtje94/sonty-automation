@@ -14,6 +14,17 @@ const client = new Anthropic({ apiKey });
 // is bij de chat, tot alles 100% goed gaat"). Een aparte, goedkope controleur (Haiku)
 // beoordeelt elk concept-antwoord vóór verzending. Afgekeurd → één verbeterpoging → daarna
 // stil escaleren. Kost ~2-5s en een fractie van een cent per antwoord.
+// Elke QA-afkeuring bewaren, zodat qa-leren.js er dagelijks terugkerende patronen uit kan
+// destilleren tot leerpunten (vraag Daimy 21 juli: "leert die QA-poort zich ook te verbeteren?").
+function logQaAfkeuring(gesprek, concept, oordeel, definitief) {
+  try {
+    fs.appendFileSync(path.join(__dirname, '..', '..', 'data', 'ai-ks', 'qa-afkeuringen.jsonl'), JSON.stringify({
+      ts: new Date().toISOString(), ticketId: gesprek.ticketId || null, kanaal: gesprek.kanaal || 'WA',
+      klant: gesprek.klant?.naam || gesprek.klant?.phone || null, oordeel, definitief, concept: String(concept).slice(0, 400),
+    }) + '\n');
+  } catch { /* loggen mag het antwoorden nooit blokkeren */ }
+}
+
 async function qaCheck(gesprek, historie, concept, nuTekst, uitgevoerdeActies = []) {
   try {
     // Als de bot in deze beurt zelf een actie heeft uitgevoerd (bv. offerte aangepast), dan is
@@ -146,6 +157,7 @@ async function beantwoord(gesprek) {
       const gedaan = ctx.acties.filter(a => a.type !== 'escalatie').map(a => a.samenvatting || a.type);
       const oordeel = await qaCheck(gesprek, historie, tekst, `Huidige datum/tijd: ${DAGEN[nu.dag]} ${nu.datum}, ${nu.hhmm} uur (Nederland).`, gedaan);
       if (!/^OK\b/i.test(oordeel)) {
+        logQaAfkeuring(gesprek, tekst, oordeel, qaHerkansing);
         if (!qaHerkansing) {
           qaHerkansing = true;
           console.log('  QA keurde concept af: ' + oordeel.slice(0, 120));

@@ -156,6 +156,21 @@ const TOOL_DEFS = [
     },
   },
   {
+    name: 'showroom_afspraak_wijzigen',
+    description: 'Verzet of annuleer een bestaande showroomafspraak van de klant (gezocht op e-mailadres). VERZETTEN: kies eerst samen met de klant een nieuw vrij slot uit showroom_beschikbaarheid en geef dat mee als nieuweStart — de nieuwe wordt geboekt en de oude automatisch geannuleerd (klant krijgt vanzelf een annulerings- én nieuwe bevestigingsmail). ANNULEREN: laat nieuweStart weg, dan wordt de afspraak alleen geannuleerd. Bevestig daarna dag + tijd + adres + routetip zoals bij een nieuwe boeking.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        klantMail: { type: 'string', description: 'E-mailadres waarmee de afspraak geboekt is' },
+        nieuweStart: { type: 'string', description: 'ISO-starttijd (veld "start") van het nieuwe slot uit showroom_beschikbaarheid; weglaten = alleen annuleren' },
+        klantNaam: { type: 'string' },
+        klantTel: { type: 'string' },
+        notitie: { type: 'string', description: 'Waar de klant voor komt (voor het showroomteam)' },
+      },
+      required: ['klantMail'],
+    },
+  },
+  {
     name: 'escaleren_naar_mens',
     description: 'Draag het gesprek over aan een medewerker. Gebruik dit bij: boze/ontevreden klanten, klachten over uitgevoerd werk, complexe technische situaties die je niet zeker weet, kortingsonderhandeling boven je mandaat, juridische dreigingen, of als de klant expliciet om een mens vraagt. Zet stil=true als je het antwoord simpelweg niet weet: dan stuur je de klant NIETS en blijft het gesprek open staan voor een collega (schrijf dan ook geen antwoordtekst meer).',
     input_schema: {
@@ -299,6 +314,18 @@ async function runTool(name, input, ctx) {
       return JSON.stringify({ status: 'GEBOEKT', ...res, opmerking: `De afspraak staat echt in de agenda (${res.geboekt}). Bevestig de klant dag + tijd + adres en dat de bevestiging per mail komt.` });
     }
     return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets geboekt. Zeg dat een collega de afspraak bevestigt, of stuur de boekingslink zodat de klant zelf kan boeken.' });
+  }
+  if (name === 'showroom_afspraak_wijzigen') {
+    ctx.acties.push({ type: 'showroom_wijzigen', ...input });
+    if (!showroomAan()) return JSON.stringify({ status: 'NOG NIET BESCHIKBAAR', opmerking: 'Zelf wijzigen staat nog uit (testfase). Zeg dat een collega de wijziging oppakt en roep escaleren_naar_mens aan.' });
+    if (CFG.MODE === 'live' || ctx.liveTest) {
+      const { wijzigShowroom } = require('./showroom-booking.js');
+      const res = await wijzigShowroom(input).catch(e => ({ error: e.message }));
+      if (res.error) return JSON.stringify({ status: 'MISLUKT', fout: res.error, opmerking: 'Niets gewijzigd. Bied andere tijden aan of laat een collega het oppakken (escaleren_naar_mens).' });
+      if (res.geannuleerd) return JSON.stringify({ status: 'GEANNULEERD', ...res, opmerking: 'De afspraak is geannuleerd; de klant krijgt daarvan automatisch een mail. Bevestig het kort en vriendelijk.' });
+      return JSON.stringify({ status: 'VERZET', ...res, opmerking: `De afspraak is verzet van ${res.oudeTijd} naar ${res.geboekt}. Bevestig dag + tijd + adres + routetip en dat de nieuwe bevestiging per mail komt.` });
+    }
+    return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets gewijzigd. Zeg dat een collega de wijziging bevestigt.' });
   }
   if (name === 'escaleren_naar_mens') {
     ctx.acties.push({ type: 'escalatie', ...input });

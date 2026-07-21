@@ -108,7 +108,28 @@ async function boekShowroom({ start, klantNaam, klantMail, klantTel, notitie }) 
   return { geboekt: slot.omschrijving, afspraakId: res.id, adres: ADRES, medewerker: medewerker ? medewerker.naam : 'nog niet toegewezen (team wijst toe)' };
 }
 
-module.exports = { vrijeSlots, boekShowroom, ADRES, BIZ, SERVICE_ID };
+// ── Verzetten of annuleren (zoekt de eerstvolgende showroomafspraak op klant-e-mail) ──
+async function wijzigShowroom({ klantMail, nieuweStart, klantNaam, klantTel, notitie }) {
+  if (!klantMail) return { error: 'klantMail is verplicht' };
+  const nu = Date.now();
+  const alle = await b.afspraken(BIZ, { start: new Date(nu).toISOString(), end: new Date(nu + 61 * 86400000).toISOString() });
+  const vanKlant = alle.filter(a => a.serviceId === SERVICE_ID && (a.mail || '').toLowerCase() === klantMail.toLowerCase())
+    .sort((x, y) => String(x.start).localeCompare(String(y.start)));
+  if (!vanKlant.length) return { error: 'Geen komende showroomafspraak gevonden op dit e-mailadres. Vraag de klant met welk e-mailadres de afspraak is geboekt.' };
+  const oud = vanKlant[0];
+  const oudLokaal = (() => { const p = nlDelen(new Date(parseUtc(oud.start))); return `${DAGNAAM[p.weekdag]} ${p.datum} om ${p.tijd}`; })();
+  if (!nieuweStart) {
+    await b.annuleer(BIZ, oud.id, 'Je showroomafspraak is op jouw verzoek geannuleerd. Tot snel!');
+    return { geannuleerd: oudLokaal };
+  }
+  // Eerst de nieuwe boeken (mislukt dat, dan blijft de oude gewoon staan), daarna de oude annuleren.
+  const res = await boekShowroom({ start: nieuweStart, klantNaam: klantNaam || oud.klant, klantMail, klantTel: klantTel || oud.tel, notitie: notitie || 'Verzette afspraak.' });
+  if (res.error) return { error: `Nieuwe tijd niet geboekt (${res.error}). De oude afspraak (${oudLokaal}) staat nog gewoon.` };
+  await b.annuleer(BIZ, oud.id, 'Deze afspraak is verzet naar een nieuw tijdstip; je ontvangt daarvoor een aparte bevestiging.');
+  return { verzet: true, oudeTijd: oudLokaal, ...res };
+}
+
+module.exports = { vrijeSlots, boekShowroom, wijzigShowroom, ADRES, BIZ, SERVICE_ID };
 
 // ── CLI: node scripts/ai-ks/showroom-booking.js [dagen] ──
 if (require.main === module) {

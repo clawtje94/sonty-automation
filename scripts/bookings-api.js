@@ -123,6 +123,9 @@ async function boek(biz = SHOWROOM, { serviceId, start, minuten = 30, klantNaam,
     startDateTime: { dateTime: start, timeZone: tijdzone },
     endDateTime: { dateTime: eind, timeZone: tijdzone },
     serviceNotes: notitie || '',
+    // Zonder customerTimeZone rendert de bevestigingsmail de tijd in UTC (klant zag 12:30
+    // i.p.v. 14:30 — test Daimy 21 juli).
+    customerTimeZone: 'Europe/Amsterdam',
     ...(staffIds && staffIds.length ? { staffMemberIds: staffIds } : {}),
     customers: [{
       '@odata.type': '#microsoft.graph.bookingCustomerInformation',

@@ -94,8 +94,15 @@ async function vrijeSlots({ dagenVooruit = 14, binnendecoratie = false } = {}) {
 }
 
 // ── Boeken (alleen op een vrij slot) ──
+// Accepteert zowel ISO-UTC als NL-notatie "YYYY-MM-DD HH:MM" (zoals de beschikbaarheidslijst toont).
+function normaliseerStart(start) {
+  const m = /^(\d{4}-\d{2}-\d{2})[T ](\d{2}:\d{2})$/.exec(String(start).trim());
+  return m ? amsterdamNaarUtc(m[1], m[2]).toISOString() : start;
+}
+
 async function boekShowroom({ start, klantNaam, klantMail, klantTel, notitie, binnendecoratie = false }) {
   if (!start || !klantNaam || !klantMail) return { error: 'start, klantNaam en klantMail zijn verplicht' };
+  start = normaliseerStart(start);
   const slots = await vrijeSlots({ dagenVooruit: 60, binnendecoratie });
   const slot = slots.find(s => parseUtc(s.start) === parseUtc(start));
   if (!slot) return { error: 'Dit tijdstip is geen vrij slot (bezet, buiten wo/vr/za-uren of korter dan 8 uur vooruit). Vraag showroom_beschikbaarheid opnieuw op en kies een slot daaruit.' };

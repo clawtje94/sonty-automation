@@ -302,9 +302,16 @@ async function runTool(name, input, ctx) {
     const { vrijeSlots } = require('./showroom-booking.js');
     const dagen = Math.min(Math.max(input.dagenVooruit || 14, 1), 60);
     const slots = await vrijeSlots({ dagenVooruit: dagen, binnendecoratie: !!input.binnendecoratie });
+    // Per dag gegroepeerd en COMPLEET (een afgekapte top-30 liet de bot eerder denken dat
+    // verderop gelegen dagen vol waren — test Daimy 21 juli, "de 30e is vol" terwijl leeg).
+    const perDag = {};
+    for (const s of slots) { // omschrijving: "donderdag 2026-07-30 om 14:30"
+      const [dag, tijd] = s.omschrijving.split(' om ');
+      (perDag[dag] = perDag[dag] || []).push(tijd);
+    }
     return JSON.stringify({
-      slots: slots.slice(0, 30),
-      opmerking: 'Afspraken kunnen di t/m za. Stel 2-3 tijden voor die passen bij de voorkeur van de klant; boek pas na expliciete keuze van de klant.',
+      dagen: Object.entries(perDag).map(([dag, tijden]) => `${dag}: ${tijden.join(', ')}`),
+      opmerking: `Dit zijn ALLE vrije tijden voor de komende ${dagen} dagen (di t/m za); een dag die ontbreekt is echt vol of gesloten. Stel 2-3 tijden voor die bij de voorkeur van de klant passen; boek pas na expliciete keuze. Geef bij het boeken start door als "JJJJ-MM-DD UU:MM" (NL-tijd) uit deze lijst.`,
     });
   }
   if (name === 'showroom_afspraak_boeken') {

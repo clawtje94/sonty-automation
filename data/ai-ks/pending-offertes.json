@@ -65,5 +65,192 @@
   "sonny": false,
   "status": "klaar",
   "aangemaakt": 1784225455432
+ },
+ {
+  "lcId": "f9edf382-e50c-4287-b0e1-3aa306d368bd",
+  "ticketId": 963502035,
+  "klantNaam": "Joey Engelen",
+  "producten": [
+   {
+    "product": "suneye xl knikarmscherm",
+    "breedteMM": 7100,
+    "uitvalMM": 3500,
+    "bediening": "io",
+    "framekleur": "RAL 7039 structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 1760,
+    "hoogteMM": 2130,
+    "bediening": "solar",
+    "framekleur": "RAL 7039 structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "status": "klaar",
+  "aangemaakt": 1784235076634
+ },
+ {
+  "lcId": "2e2a5381-4ce7-43d6-afb0-3f92138f3486",
+  "ticketId": 963502035,
+  "klantNaam": "Joey Engelen",
+  "producten": [
+   {
+    "product": "suneye xl knikarmscherm",
+    "breedteMM": 7100,
+    "uitvalMM": 3500,
+    "framekleur": "RAL 7039 structuur",
+    "bediening": "io",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 1760,
+    "hoogteMM": 2130,
+    "framekleur": "RAL 7039 structuur",
+    "bediening": "solar",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "status": "klaar",
+  "aangemaakt": 1784235276147
+ },
+ {
+  "lcId": "53b55ef7-b372-48ef-9d94-09a7d09612f1",
+  "ticketId": 966171659,
+  "klantNaam": "Belinda Wildenberg",
+  "producten": [
+   {
+    "product": "pergola",
+    "breedteMM": 3500,
+    "uitvalMM": 4000,
+    "bediening": "io",
+    "framekleur": "standaardkleur n.t.b."
+   }
+  ],
+  "sonny": false,
+  "status": "klaar",
+  "aangemaakt": 1784462098970
+ },
+ {
+  "lcId": "390ccc67-864c-4e46-a378-15bcbc30ce32",
+  "ticketId": 967361001,
+  "klantNaam": "Daimy Boot",
+  "producten": [
+   {
+    "product": "suneye knikarmscherm",
+    "breedteMM": 4000,
+    "uitvalMM": 3000,
+    "bediening": "io",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1784464845369
+ },
+ {
+  "lcId": "71baabee-0cad-43e4-a05e-acf89a1999d7",
+  "ticketId": 966761070,
+  "klantNaam": "Aarnoud de Groen",
+  "producten": [
+   {
+    "product": "plissefit hordeur",
+    "breedteMM": 1200,
+    "hoogteMM": 2500,
+    "framekleur": "RAL 9010 wit",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1784491732020
+ },
+ {
+  "lcId": "9cbb0333-5452-4d66-bae8-9205736e98e2",
+  "ticketId": 967352516,
+  "klantNaam": "Bas van Oosterhout",
+  "producten": [
+   {
+    "product": "zip design 110",
+    "breedteMM": 2000,
+    "hoogteMM": 1500,
+    "bediening": "io",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   },
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 3600,
+    "hoogteMM": 1500,
+    "bediening": "io",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   },
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 3000,
+    "hoogteMM": 900,
+    "bediening": "io",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1784493196694
+ },
+ {
+  "lcId": "45805255-d0f2-44a9-bf16-a28fc1394c49",
+  "ticketId": 967185472,
+  "klantNaam": "Sem van Nieuwkerk",
+  "producten": [
+   {
+    "product": "sunbasic open cassette",
+    "breedteMM": 4500,
+    "uitvalMM": 2500,
+    "bediening": "handbediend",
+    "framekleur": "RAL 7016 structuur",
+    "aantal": 1
+   },
+   {
+    "product": "sunproject uitvalscherm",
+    "breedteMM": 1400,
+    "uitvalMM": 1150,
+    "bediening": "handbediend",
+    "framekleur": "RAL 7016 structuur",
+    "aantal": 2
+   }
+  ],
+  "sonny": false,
+  "kanaal": "WA",
+  "status": "klaar",
+  "aangemaakt": 1784524674123
+ },
+ {
+  "lcId": "a0292da2-18a0-4e28-ac19-185be6b95ef6",
+  "ticketId": 967544063,
+  "klantNaam": "Daimy Boot",
+  "producten": [
+   {
+    "product": "suneye knikarmscherm",
+    "breedteMM": 5000,
+    "uitvalMM": 3000,
+    "bediening": "io",
+    "framekleur": "antraciet structuur",
+    "aantal": 2
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1784542327619
  }
 ]

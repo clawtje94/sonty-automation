@@ -1,0 +1,252 @@
+{
+  "documentId": "fed80bcf-e1bd-4795-b42f-65aebebc0739",
+  "versionId": "309b09a1-0416-457c-90ca-b508f2d2a898",
+  "documentTitle": "Offerte #202610010",
+  "documentStatus": "ACCEPTED",
+  "documentNumber": "202610010",
+  "documentType": "QUOTATION",
+  "title": "Offerte #202610010",
+  "quotationNumber": "202610010",
+  "quotationTitle": "Offerte #202610010",
+  "quotationCreationTimestamp": 1784376365288,
+  "quotationExpirationTimestamp": 1786968365288,
+  "quotationStatus": "ACCEPTED",
+  "isoCurrency": "EUR",
+  "subjects": {
+    "leadConfiguration": "bc02cf3c-2c24-4a12-af5f-1c08d6853ff2",
+    "contactPerson": "e4f953b4-0ffd-4398-9372-76eaf98cb0e2"
+  },
+  "segments": {
+    "defaultTemplateContactPart": {
+      "type": "contactPerson",
+      "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+    },
+    "defaultSignaturePart": {
+      "type": "signature",
+      "data": {
+        "isSignedByCustomer": true,
+        "signingProps": {
+          "FULL_NAME": "Daan Ram",
+          "SIGNATURE_PATH": "document-service/signature/731483fa-ef6b-4aae-afcf-883ec09219dd/fed80bcf-e1bd-4795-b42f-65aebebc0739/309b09a1-0416-457c-90ca-b508f2d2a898/signature-1784383264313.png",
+          "USER_AGENT": "node"
+        },
+        "artifactName": "artifact",
+        "timestamp": 1784383264420
+      }
+    },
+    "defaultTemplateProfileLogo": {
+      "type": "companyProfileLogo",
+      "data": "![|6lh]($companyProfile.logo)"
+    },
+    "defaultTemplateProfileText": {
+      "type": "text",
+      "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+    },
+    "defaultTemplatePriceLineGroup": {
+      "type": "priceLineGroup",
+      "data": {
+        "lines": [
+          {
+            "units": 1,
+            "description": "**Hordeur Dubbele Plisséfit**\nBreedte: 2620 mm\nHoogte: 2278 mm\nFrame Kleur: Ral 7022 (RAL kleur)\nGaas: Standaard gaas",
+            "pricePerUnit": 1350,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Inmeten + montage hor**\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 95,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Raamrolhor Super+**\nBreedte: 550 mm\nHoogte: 1300 mm\nFrame Kleur: Wit (RAL 9010) (standaard)\nGaas: Standaard gaas",
+            "pricePerUnit": 378,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Inmeten + montage hor**\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 35,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": {
+          "name": "Hoogzomer-actie: 15% korting (geldig t/m 31 juli 2026)",
+          "amount": 15,
+          "type": "PERCENTAGE",
+          "vatPercentage": 21
+        }
+      }
+    }
+  },
+  "pricing": {
+    "total": 1579.3
+  },
+  "renderRows": [
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileLogo"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileText"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateContactPart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "quotationData"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "priceLineGroupCombined",
+              "target": "defaultTemplatePriceLineGroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "userDecline"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "signature",
+              "target": "defaultSignaturePart"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

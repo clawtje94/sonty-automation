@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20269223",
+  "documentId": "d436bfa4-5afd-4561-94e6-3aa33a304d39",
+  "name": "Megan de Bondt",
+  "timestamp": "2026-07-10T08:09:57.438Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suneye\nBreedte: 3300 mm\nUitval: 2500 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: NTB\nBediening: Handbediend\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 2618.3,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

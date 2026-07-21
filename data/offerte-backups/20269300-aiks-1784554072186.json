@@ -1,0 +1,331 @@
+{
+  "documentId": "e7a4939c-a494-4c66-8843-0d75aed8e66d",
+  "versionId": "e84b22bf-a277-4497-a056-27440747cbcd",
+  "documentTitle": "Offerte #20269300",
+  "documentStatus": "SENT",
+  "documentNumber": "20269300",
+  "documentType": "QUOTATION",
+  "title": "Offerte #20269300",
+  "quotationNumber": "20269300",
+  "quotationTitle": "Offerte #20269300",
+  "quotationCreationTimestamp": 1783582329551,
+  "quotationExpirationTimestamp": 1785158430222,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "subjects": {
+    "leadConfiguration": "c4d990f9-fa09-45de-9683-d3005c5ff0d6",
+    "contactPerson": "260bf0c8-165b-442a-89fb-a528d2a78c76"
+  },
+  "segments": {
+    "defaultTemplateContactPart": {
+      "type": "contactPerson",
+      "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+    },
+    "defaultSignaturePart": {
+      "type": "signature",
+      "data": {}
+    },
+    "defaultTemplateProfileLogo": {
+      "type": "companyProfileLogo",
+      "data": "![|6lh]($companyProfile.logo)"
+    },
+    "bbddd6bf-e933-4aca-9dc6-4ea8b7deca56": {
+      "type": "text",
+      "data": "**Waarom Sonty?**\n\n- Sunmaster Premium Dealer: wij leveren uitsluitend A-merk zonwering van de hoogste kwaliteit\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij je thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 600+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+    },
+    "defaultTemplateProfileText": {
+      "type": "text",
+      "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+    },
+    "defaultTemplatePriceLineGroup": {
+      "type": "priceLineGroup",
+      "data": {
+        "lines": [
+          {
+            "units": 3,
+            "description": "**ROMA geëxtrudeerd voorzetrolluik .XP**\nBreedte: 1760 mm\nHoogte: 1550 mm\nBediening: Elektrisch met afstandsbediening\nMotor: Somfy io (inclusief ingeleerde handzender)\nFrame- en pantserkleur: RAL 9010 wit (gratis, net als alle 209 RAL-kleuren)\nGarantie: 3 jaar montage | 5 jaar ROMA fabrieksgarantie\n\n**Liever een ander model of bediening?**\n\nVoordeliger alternatief:\n• Zelfde maat in Sunmaster Rolluik S-42: -€206 per stuk (RAL-kleuren buiten standaard hebben daar wél een meerprijs)\n\nAndere bediening:\n• Solar (zonne-energie, geen bekabeling nodig) i.p.v. bekabeld: +€322 per stuk\n\nKleur:\n• Alle 209 RAL-kleuren (mat en structuur) zijn bij ROMA gratis, ook voor kast, geleiders en onderlijst\n\nSmart home:\n• Tahoma Switch (bedien alles via je telefoon): +€195\n\nLaat het ons weten, we passen het graag voor je aan.",
+            "pricePerUnit": 1293,
+            "vatPercentage": 21,
+            "position": 0,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**ROMA geëxtrudeerd voorzetrolluik .XP Solar**\nBreedte: 885 mm\nHoogte: 1550 mm\nBediening: Elektrisch met afstandsbediening\nMotor: Somfy RS100 Solar io (op zonne-energie, geen bekabeling nodig, inclusief ingeleerde handzender)\nFrame- en pantserkleur: RAL 9010 wit (gratis, net als alle 209 RAL-kleuren)\nGarantie: 3 jaar montage | 5 jaar ROMA fabrieksgarantie | 7 jaar op solar-motor\n\n**Liever een ander model of bediening?**\n\nVoordeliger alternatief:\n• Zelfde maat in Sunmaster Rolluik S-42: -€183 per stuk (RAL-kleuren buiten standaard hebben daar wél een meerprijs)\n\nAndere bediening:\n• Bekabeld i.p.v. solar: -€345 per stuk\n\nKleur:\n• Alle 209 RAL-kleuren (mat en structuur) zijn bij ROMA gratis, ook voor kast, geleiders en onderlijst\n\nSmart home:\n• Tahoma Switch (bedien alles via je telefoon): +€195\n\nLaat het ons weten, we passen het graag voor je aan.",
+            "pricePerUnit": 1336,
+            "vatPercentage": 21,
+            "position": 1,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**ROMA geëxtrudeerd voorzetrolluik .XP**\nBreedte: 580 mm\nHoogte: 1560 mm\nBediening: Elektrisch met afstandsbediening\nMotor: Somfy io (inclusief ingeleerde handzender)\nFrame- en pantserkleur: RAL 9010 wit (gratis, net als alle 209 RAL-kleuren)\nGarantie: 3 jaar montage | 5 jaar ROMA fabrieksgarantie\n\n**Liever een ander model of bediening?**\n\nVoordeliger alternatief:\n• Zelfde maat in Sunmaster Rolluik S-42: -€79 per stuk (RAL-kleuren buiten standaard hebben daar wél een meerprijs)\n\nAndere bediening:\n• Solar (zonne-energie, geen bekabeling nodig) i.p.v. bekabeld: +€349 per stuk\n\nKleur:\n• Alle 209 RAL-kleuren (mat en structuur) zijn bij ROMA gratis, ook voor kast, geleiders en onderlijst\n\nSmart home:\n• Tahoma Switch (bedien alles via je telefoon): +€195\n\nLaat het ons weten, we passen het graag voor je aan.",
+            "pricePerUnit": 969,
+            "vatPercentage": 21,
+            "position": 2,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 5,
+            "description": "**Inmeten + montage rolluik**\n- Inmeetafspraak bij je thuis\n- Professionele montage door ons eigen montageteam\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 195,
+            "vatPercentage": 21,
+            "position": 3,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": {
+          "name": "17,5% kortingsaanbod Sunny",
+          "amount": 17.5,
+          "type": "PERCENTAGE",
+          "vatPercentage": 21
+        }
+      }
+    }
+  },
+  "pricing": {
+    "total": 5906.175
+  },
+  "renderRows": [
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileLogo"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileText"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateContactPart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "quotationData"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "priceLineGroupCombined",
+              "target": "defaultTemplatePriceLineGroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "bbddd6bf-e933-4aca-9dc6-4ea8b7deca56"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "userDecline"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "signature",
+              "target": "defaultSignaturePart"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

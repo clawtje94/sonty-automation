@@ -30,3 +30,52 @@
 - (2026-07-17) [team-notitie bij gesprek +31628209480] ga verder met het gesprek
 - (2026-07-17) [team-notitie bij gesprek +31628209480] doe Joey nu alsnog volgens het kortingsmandaat een tegenbod op zijn 8000: eerst kort de waarde benoemen (15% actie zit er al op, Somfy, eigen monteurs, garantie), dan eenmalig maximaal 2,5% extra aanbieden (dus ~8229 op de 8440) als finale tegemoetkoming. 8000 zelf kan echt niet.
 - (2026-07-17) VERBOD (Daimy, hard): NOOIT naar een ander bedrijf, andere partij of extern e-mailadres verwijzen (dus ook NIET naar service-nodi.nl) — ook al deed het team dat vroeger in oude mails. Alleen als het team het in DIT gesprek expliciet opdraagt. Reparatie van een product dat niet bij ons gekocht is: vriendelijk uitleggen dat we die door drukte niet aannemen, GEEN doorverwijzing, en bij twijfel stil escaleren.
+- (2026-07-17) [team-notitie bij gesprek +31624253188] hier vraag je hoe oud een scherm is, de gemiddelde levens duur is 20 jaar +- en met kapot dingen is het reparatie en garantie&#39;s van bestaande klanten ALTIJD naar ons dorosturen want dit antwoord had echt niet gemogen als iemand klant van ons is of is geweest dus dat is eigenlijk altijd je erst vraag.
+- (2026-07-17) [team-notitie bij gesprek Boot] bij een vraag als dit kun je ook roma aanbieden want dat is namelijk dubbel gepoedercoat en beter bestand tegen zeelucht en ook heeft dat product een hogeren windklassa
+- (2026-07-17) [team-notitie bij gesprek +31610981495] waar heb je dit nu genoteerd dan?
+- (2026-07-17) [team-notitie bij gesprek +31642101032] waar heb je dit nu allenmaal aan de planning door gegeven dan want ik zie geen tagg naar @jorren745487 en @tanya748440 ?
+- (2026-07-17) [team-notitie bij gesprek +31642101032] waar heb je dit nu allenmaal aan de planning door gegeven dan want ik zie geen tagg naar @jorren745487 en @tanya748440 ?
+- (2026-07-17) [team-notitie bij gesprek +31618553742] waar heb je genoteerd deze mensen dan te bellen op de 28e?
+- (2026-07-17) [team-notitie bij gesprek +31642101032] waar heb je dit nu allenmaal aan de planning door gegeven dan want ik zie geen tagg naar @jorren745487 en @tanya748440 ?
+- (2026-07-17) [team-notitie bij gesprek +31610871177] waarom is hier geen tagg gestuurd naar @jorren745487 en @tanya748440 want welke offerte is joey mee bezig?
+- (2026-07-17) [team-notitie bij gesprek +31653999027] de openings tijden van de showroom weet je, mensne mogen zonder afspraak binnen lopen maar het liefst wel op afsrpaak want dan weten we zeker dat we kunnen helpen. bookings link sturen om een afspraak in te plannen.
+- (2026-07-17) [team-notitie bij gesprek +31614697758] hij geeft aan een offerte van vorig jaar te hebben je kunt dus gewoon het offerte nummer vragen of op zijn postcode of iets zoeken.
+- (2026-07-17) [team-notitie bij gesprek +31629046575] zeg maar neit dat het een doorlopende actie is, maar gewoon een actie en offerte 7 dagen geldig want anders denken mensen te rustig. sla dit op voor de rest geen antwoord meer nodig aan deze man behalve alv hij weer wat typt natuurlijk
+- (2026-07-17) [team-notitie bij gesprek +31633094950] je kunt hier wel gewoon uitgaan van die hoogwerker mensen dus die keuze geven of die hooger ok is kwa prijs indicatie die dan op de offerte zetten voor ze. of ze moeten gewoon een balkon hebben waar het opgemonteerd moet worden dan is het naturlijk geen probleem
+- (2026-07-17) [team-notitie bij gesprek +31621708517] PAS OP DE LEVERTIJD INDICATIE het is verwachten productie tijd na betaling aanbetaling niet levertijd
+- (2026-07-17) [team-notitie bij gesprek +31614697758] deze klant gewoon zelf helpen zoals ik al heb gezegt???
+- (2026-07-18) [team-notitie bij gesprek +31615403364] vraag altijd even als mensen inmeten willen inplannen en dus akkorrd gaan om ons nummer op te slaan zodat ze weten wie er bellen.
+- (2026-07-18) [team-notitie bij gesprek +31615139538] vraag even of ze een foto sturen want ze vragen om hier geholpen te worden met mee te kijken.
+- (2026-07-18) [team-notitie bij gesprek +31620187756] dinsdag & donderdag kan zonder afspraak gewoon binnen lopen de rest graag door de drukte op afspraak
+- (2026-07-18) [team-notitie bij gesprek +31647966160] !!!!! Je stuurtt het bedrag waar de korting nog vanaf moet deze offerte met korting er af is: 8970,05 ????? Echt extreem belangrijk dat je de juiste prijzen stuurd!!!!!!!
+- (2026-07-20) [team-notitie bij e-mail Diana Sanchez] je hebt hier toch gewoon antwoord op? 1. staat 100% zeker in het sunmaster boek. 2 ja vooruitkosten etc valt allenmaal gewoon onder de garantie en word dus niet gerekend.
+- (2026-07-20) [team-notitie bij e-mail Diana Sanchez] je hebt hier toch gewoon antwoord op? 1. staat 100% zeker in het sunmaster boek. 2 ja vooruitkosten etc valt allenmaal gewoon onder de garantie en word dus niet gerekend.
+- (2026-07-20) [team-notitie bij e-mail Maria Hierck] deze mensen vragen om een montage afspraak, niet om in te meten het is ook al een klant.
+- (2026-07-20) [team-notitie bij e-mail Jan Oliemans] dat waardeer ik zouden we nooit gebruiken in onze reactie’s reaggeer mensenlijk niet chat gpt…
+- (2026-07-20) [team-notitie bij e-mail Daimy Boot | Sonty] dit hoef je niet te versturen, gewoon de offerte doormailen als die klaar is!
+- (2026-07-20) [team-notitie bij e-mail Jan Maris] fijne zondag mag prima als het zondag is..
+- (2026-07-20) [team-notitie bij e-mail Fam. Hilhorst] dit kan je zelf doen door die status van RP te wijzigen naar &quot;geen herinneringen meer&quot; had je al geleerd en dan kun je ze teerug mail met excuus en dat de uitschrijving is verwerkt.
+- (2026-07-20) [team-notitie bij e-mail Maria Hierck] ik zie niet dat die naar de map mens nodig is gegaan en heeft ook geen mens nodig tag?
+- (2026-07-20) [team-notitie bij e-mail Mieke tol] Middelburg te ver, is zonder file bijna 2 uur rijden.
+- (2026-07-20) [team-notitie bij e-mail Sara Surmeli] stuur een mail terug zoals je gewend bent, als een klant reageert dat ze er even over na moet denken
+- (2026-07-20) [team-notitie bij e-mail Remco Wischmann] graag mail terug sturen dat wij niet meer aan reparaties doen wegens drukte. Het scherm is niet door ons geplaatst. Goed dat je hebt gezegd niet meer te gebruiken!
+- (2026-07-20) [team-notitie bij gesprek Mandy] we leveren ze eigenlijk altijd met boven en zij kappen maar je kan in het prijsboek met de 1,1 markup wel! kijken wat het kost en dat kan je er eventueel van afhalen
+- (2026-07-20) [team-notitie bij gesprek Angela] je hebt toch alle data etc om de offerte om te zetten naar roma? en je mag deze mevrouw 17,5% geven in plaats van 15%
+- (2026-07-20) [team-notitie bij e-mail davanwijk136] een tahoma switch is gewoon een tahoma, die kun je dus zelf afhandelen aub en sla maar op in geheugen. goed dat je het voor de zekerheid hebt gevraagd.
+- (2026-07-20) [team-notitie bij gesprek Angela] die montage had je zelf gewoon goed moeten zetten dit zijn fouten die niet mogen gebeuren zet het goed en app dat het goed staan naar de klant
+- (2026-07-20) [team-notitie bij gesprek Angela] ik zie dit nog niet op de offerte goed staan?
+- (2026-07-20) [team-notitie bij gesprek +31613190432] vraag anders alvast naat wat voor producten die allenmaal opzoek is en ook de formaten etc dan kan je daarna miss gewoon zelf helpen en anders je collega ook beter want zonder maten en producten kunnen we sowieso niks
+- (2026-07-20) [team-notitie bij gesprek Angela] vraag even of die zo voor haar rond is etc inmeten?
+- (2026-07-20) [team-notitie bij gesprek +31613297190] natuurlijk alles aan doen om er voor te zorgen dat het toch dit jaar word
+- (2026-07-21) [team-notitie bij gesprek +31633352837] een ticket zoals dit kan je sluiten want zodra je hem heb verplaats en alles staat goed kun je heb sluiten
+- (2026-07-21) [team-notitie bij gesprek +31612655013] dit soort tickets mag je sluiten.
+- (2026-07-21) [team-notitie bij gesprek +31639125929] ed stuurt letterlijk dat die een anderen keuze gaat maken en stuurt een offerte nummer van ons? waarom stuur je dus deze reactie??
+- (2026-07-21) [team-notitie bij gesprek Mark Gaerthé] niet iedereen wil altijd een rolhor voor het raam kan ook goedkoper met bijvoorbeeld een inzet hoor als dat op locatie ook kan. dus je kan dat ook aangeven.
+- (2026-07-21) [team-notitie bij gesprek +31612655013] dit soort tickets mag je sluiten.
+- (2026-07-21) [team-notitie bij gesprek Mark Gaerthé] niet iedereen wil altijd een rolhor voor het raam kan ook goedkoper met bijvoorbeeld een inzet hoor als dat op locatie ook kan. dus je kan dat ook aangeven.
+- (2026-07-21) [team-notitie bij gesprek +31611726967] dit soort dingen is belangrijk dat @jorren745487 en @tanya748440 het weten want anders bellen ze dus voor niks?
+- (2026-07-21) [team-notitie bij gesprek +31612655013] waarom sluit je het ticket niet?
+- (2026-07-21) [team-notitie bij gesprek +31639125929] nee het gaat er om dat ed letterlijk de code van de offerte doorstuurd waar hij wel accoord mee wil gaan, hij stuurt &quot; ik ga een andere keuze maken 202610049 &quot; dat is een anderen offerte die hij bij ons heeft aangevraagd.
+- (2026-07-21) [team-notitie bij gesprek +31623602210] wat gaat hier nou niet goed? lees het gesprek even terug antwoord mij maar niet naar de klant
+- (2026-07-21) [team-notitie bij gesprek +31615586434] het is belangrijk als mensen een voorkeurs datum voor inmeten doorgeven dat jorren en tanya hier ook van op de hoogte zijn!
+- (2026-07-21) [team-notitie bij gesprek +31612655013] waarom sluit je het ticket niet?

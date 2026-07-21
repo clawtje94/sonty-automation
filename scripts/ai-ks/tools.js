@@ -276,7 +276,11 @@ async function runTool(name, input, ctx) {
     }
     return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets aangemaakt. Zeg dat de offerte zo snel mogelijk volgt via een collega.' });
   }
+  // Showroom-boeken staat in testfase (Daimy 21 juli): alleen whitelist-testnummers,
+  // voor alle andere klanten pas na de aan-knop (bestand .showroom-live naast dit script).
+  const showroomAan = () => ctx.liveTest || require('fs').existsSync(require('path').join(__dirname, '.showroom-live'));
   if (name === 'showroom_beschikbaarheid') {
+    if (!showroomAan()) return JSON.stringify({ status: 'NOG NIET BESCHIKBAAR', opmerking: 'Zelf boeken staat nog uit (testfase). Stuur de klant de boekingslink zoals gebruikelijk, zodat hij zelf een moment kiest.' });
     const { vrijeSlots } = require('./showroom-booking.js');
     const dagen = Math.min(Math.max(input.dagenVooruit || 14, 1), 60);
     const slots = await vrijeSlots({ dagenVooruit: dagen });
@@ -287,6 +291,7 @@ async function runTool(name, input, ctx) {
   }
   if (name === 'showroom_afspraak_boeken') {
     ctx.acties.push({ type: 'showroom_afspraak', ...input });
+    if (!showroomAan()) return JSON.stringify({ status: 'NOG NIET BESCHIKBAAR', opmerking: 'Zelf boeken staat nog uit (testfase). Er is niets geboekt: stuur de klant de boekingslink zodat hij zelf een moment kiest.' });
     if (CFG.MODE === 'live' || ctx.liveTest) {
       const { boekShowroom } = require('./showroom-booking.js');
       const res = await boekShowroom(input).catch(e => ({ error: e.message }));

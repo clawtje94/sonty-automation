@@ -1,0 +1,1355 @@
+{
+ "gemeld": {
+  "609f2ddb-f0ca-42bd-ba81-f161b8708718": {
+   "nummer": "20269673",
+   "klant": "will van Jaarsveld",
+   "gemeld": "2026-07-16T16:50:22.865Z"
+  },
+  "b0520913-b1c4-45c1-80e0-01dabfb005a7": {
+   "nummer": "20268911",
+   "klant": "SF de Visser - Nolen",
+   "gemeld": "2026-07-16T16:50:23.100Z"
+  },
+  "5c90d901-9d9c-492a-a30e-26ba132419a4": {
+   "nummer": "20268237",
+   "klant": "Caron Vermijs",
+   "gemeld": "2026-07-16T16:50:23.327Z"
+  },
+  "048cb498-3db7-40fe-ad9e-8c58bc36b1a6": {
+   "nummer": "20269788",
+   "klant": "Eva ter Steege",
+   "gemeld": "2026-07-16T16:50:23.553Z"
+  },
+  "55741579-2451-4fcf-81df-e393fdec458b": {
+   "nummer": "20268390",
+   "klant": "Sofyan El Hajjami",
+   "gemeld": "2026-07-16T16:50:23.781Z"
+  },
+  "28947493-ded4-4092-88de-8ccec394ce1b": {
+   "nummer": "20269805",
+   "klant": "Zoubeir Ouarghi",
+   "gemeld": "2026-07-16T16:50:24.241Z"
+  },
+  "e387dc1c-1cb9-4064-bfdf-879a1a48dca8": {
+   "nummer": "20268440",
+   "klant": "Dino Sehric",
+   "gemeld": "2026-07-16T16:50:30.846Z"
+  },
+  "7dc4cfe0-c66e-42f7-acd3-3d263e76217c": {
+   "nummer": "20269408",
+   "klant": "Jeanette Warmels",
+   "gemeld": "2026-07-16T16:50:37.038Z"
+  },
+  "b397c25e-a77f-4ba2-9fbf-7cf02b693cc1": {
+   "nummer": "20269774",
+   "klant": "Oscar  Jongenotter",
+   "gemeld": "2026-07-16T16:50:37.493Z"
+  },
+  "1e869d27-3efd-4f57-bf95-57d7f7a808a7": {
+   "nummer": "20269183",
+   "klant": "Rina Wenig",
+   "gemeld": "2026-07-16T16:50:37.724Z"
+  },
+  "34025736-eabe-43e1-9c39-655c3f6b6452": {
+   "nummer": "20269621",
+   "klant": "Joan Barneveld",
+   "gemeld": "2026-07-16T16:50:44.650Z"
+  },
+  "c7ec3930-8157-4905-8b3d-f5518cb9a155": {
+   "nummer": "20269441",
+   "klant": "Bart Althuizen",
+   "gemeld": "2026-07-16T16:50:44.883Z"
+  },
+  "ef00a836-93e2-424e-a142-e8689641db6c": {
+   "nummer": "20269444",
+   "klant": "Rutger Meijering",
+   "gemeld": "2026-07-16T16:50:45.119Z"
+  },
+  "69f9e6b7-0a36-47f4-a0b5-eb7fbfbffa89": {
+   "nummer": "20269668",
+   "klant": "Kelvin Vd perk",
+   "gemeld": "2026-07-16T16:50:45.347Z"
+  },
+  "9a820ec5-9fc8-43d6-9ec1-675132a218ec": {
+   "nummer": "20268959",
+   "klant": "Pieteranne  Van der plas",
+   "gemeld": "2026-07-16T16:50:45.583Z"
+  },
+  "fbc7271a-3221-4e31-a500-4b3c9eb1f9b8": {
+   "nummer": "20268671",
+   "klant": "Michael -",
+   "gemeld": "2026-07-16T16:50:45.813Z"
+  },
+  "e686afae-d98c-4876-a716-dae5b0f0cfb2": {
+   "nummer": "20269127",
+   "klant": "E swarts",
+   "gemeld": "2026-07-16T16:50:46.046Z"
+  },
+  "f025bcf1-e400-4202-a76a-a8e819a26bb6": {
+   "nummer": "20267814",
+   "klant": "Erwin  Heuvel",
+   "gemeld": "2026-07-16T16:50:46.279Z"
+  },
+  "24f420df-91a5-40d9-8098-aa83e94f0c13": {
+   "nummer": "20267496",
+   "klant": "Robin Du chatinier",
+   "gemeld": "2026-07-16T16:50:46.511Z"
+  },
+  "2d21d0d1-60b4-4eda-ba74-38581975e1a0": {
+   "nummer": "20268609",
+   "klant": "Michel Gorter",
+   "gemeld": "2026-07-16T16:50:46.742Z"
+  },
+  "dd07a903-92a8-4bb5-bdb0-cc45bb7a4674": {
+   "nummer": "20269351",
+   "klant": "S Van veen",
+   "gemeld": "2026-07-16T16:50:46.968Z"
+  },
+  "78bea01c-840b-41bd-83f5-374d64d0286a": {
+   "nummer": "20269501",
+   "klant": "Alfred Oudshoorn",
+   "gemeld": "2026-07-16T16:50:47.196Z"
+  },
+  "d64efde8-2b8b-484e-9cbd-24e4e1a2a817": {
+   "nummer": "20269028",
+   "klant": "Robin Tol",
+   "gemeld": "2026-07-16T16:50:47.426Z"
+  },
+  "1819a21f-949f-480e-b745-9ed7129d274d": {
+   "nummer": "20266423",
+   "klant": "A.A. Cobelens-Hoed",
+   "gemeld": "2026-07-16T16:50:47.652Z"
+  },
+  "e67b0396-276e-42f9-ae11-f833bf193b50": {
+   "nummer": "20268309",
+   "klant": "Joey van der Klugt",
+   "gemeld": "2026-07-16T16:50:54.344Z"
+  },
+  "7931dff0-e53c-49ba-9a98-3ba138779ea2": {
+   "nummer": "20269569",
+   "klant": "Hans Vos",
+   "gemeld": "2026-07-16T16:50:54.575Z"
+  },
+  "4476de6c-ba14-474a-8688-5c6d590c0a59": {
+   "nummer": "20269516",
+   "klant": "Perry Kleinjan",
+   "gemeld": "2026-07-16T16:50:54.810Z"
+  },
+  "d2bef924-e7d4-4411-bcd6-6b14a4144a2a": {
+   "nummer": "20268463",
+   "klant": "Els Van de veerdonk",
+   "gemeld": "2026-07-16T16:51:01.939Z"
+  },
+  "efba9fbd-0050-4523-be3e-fdd14beefeca": {
+   "nummer": "20269376",
+   "klant": "Nico van Duijvenbode",
+   "gemeld": "2026-07-16T16:51:08.782Z"
+  },
+  "096add45-3c42-472f-9c06-01eb56bc5624": {
+   "nummer": "20268988",
+   "klant": "Waldek Krysiak",
+   "gemeld": "2026-07-16T16:51:09.004Z"
+  },
+  "b1aa18c8-75ae-4a3b-8ce2-dd5c47ee86bc": {
+   "nummer": "20268745",
+   "klant": "Nick Heemskerk",
+   "gemeld": "2026-07-16T16:51:09.232Z"
+  },
+  "0233800e-48df-45ce-af27-958032a406a1": {
+   "nummer": "20266706",
+   "klant": "Frank Wietsma",
+   "gemeld": "2026-07-16T16:51:09.459Z"
+  },
+  "839496ec-01f3-4a88-bb3b-a63937fe7906": {
+   "nummer": "20268797",
+   "klant": "Rinette Hoogwerf",
+   "gemeld": "2026-07-16T16:51:09.931Z"
+  },
+  "4acdd929-4f80-4bb3-9159-8259466f5555": {
+   "nummer": "20269582",
+   "klant": "Bertan Dogan",
+   "gemeld": "2026-07-16T16:51:10.155Z"
+  },
+  "47203887-2cd4-4b0f-bc78-4a91043ad733": {
+   "nummer": "20269598",
+   "klant": "Guida Nunes Guerreiro",
+   "gemeld": "2026-07-16T16:51:10.385Z"
+  },
+  "e7287dcf-6758-417a-acaa-08d79ae6823c": {
+   "nummer": "20269294",
+   "klant": "Max Beije",
+   "gemeld": "2026-07-16T16:51:15.992Z"
+  },
+  "82070c25-9e36-4039-8264-f55ebec933d6": {
+   "nummer": "20268573",
+   "klant": "Andy Postma",
+   "gemeld": "2026-07-16T16:51:16.473Z"
+  },
+  "9ff7ac5c-4d2d-4269-87e9-a671709a1b68": {
+   "nummer": "20269611",
+   "klant": "monique  V Galen",
+   "gemeld": "2026-07-16T16:51:16.709Z"
+  },
+  "eeb20b74-ba72-4f73-82b5-92091059d06e": {
+   "nummer": "20268578",
+   "klant": "Sas De jongh",
+   "gemeld": "2026-07-16T16:51:30.646Z"
+  },
+  "205085b9-4176-4607-a5b0-c62dfba0c383": {
+   "nummer": "20269027",
+   "klant": "Cemile Karakaya-Halici",
+   "gemeld": "2026-07-16T16:51:30.901Z"
+  },
+  "a905fea6-a5db-4528-911d-a5da83951985": {
+   "nummer": "20267876",
+   "klant": "Hugo Mendoza",
+   "gemeld": "2026-07-16T16:51:31.131Z"
+  },
+  "62057724-27a6-4962-a9d8-3aa418ef0e5a": {
+   "nummer": "20268790",
+   "klant": "Zia Ladrak Ladrak",
+   "gemeld": "2026-07-16T16:51:31.369Z"
+  },
+  "e50a72a4-6886-43ac-944b-b84583ea4d20": {
+   "nummer": "20269291",
+   "klant": "Leo van der Meer",
+   "gemeld": "2026-07-16T16:51:31.596Z"
+  },
+  "a1c25cdf-1107-4259-9708-f8de4acd2e92": {
+   "nummer": "20269309",
+   "klant": "Wilma van der Valk",
+   "gemeld": "2026-07-16T16:51:31.836Z"
+  },
+  "dbb8a216-5d2c-46e9-b166-d20fc000dca4": {
+   "nummer": "20269096",
+   "klant": "Robert Gotte",
+   "gemeld": "2026-07-16T16:51:32.061Z"
+  },
+  "c6defedb-4cb0-4604-99f4-bd87343bdfef": {
+   "nummer": "20269368",
+   "klant": "Gertjan den Hollander",
+   "gemeld": "2026-07-16T16:51:32.292Z"
+  },
+  "d3bcd894-45ec-4ed1-a549-ce1380b1213a": {
+   "nummer": "20266406",
+   "klant": "Michael Colijn",
+   "gemeld": "2026-07-16T16:51:32.539Z"
+  },
+  "b3c5c6e5-40b0-4e49-926e-22515645c864": {
+   "nummer": "20269081",
+   "klant": "Thea Damen",
+   "gemeld": "2026-07-16T16:51:32.771Z"
+  },
+  "2cd23bd3-94ff-45f9-8479-b75a4eb7a480": {
+   "nummer": "20268082",
+   "klant": "Marije Daalhuizen",
+   "gemeld": "2026-07-16T16:51:32.997Z"
+  },
+  "437e95c3-0169-4137-9a5a-e76a298ec261": {
+   "nummer": "20269565",
+   "klant": "Geert Timmermans",
+   "gemeld": "2026-07-16T16:51:38.027Z"
+  },
+  "9cc9959f-8257-4623-bfb9-f9f03e532607": {
+   "nummer": "20269203",
+   "klant": "Marcel Sterk",
+   "gemeld": "2026-07-16T16:51:38.447Z"
+  },
+  "d6685be6-fcbf-4cef-b777-4f25840fc764": {
+   "nummer": "20268608",
+   "klant": "Rob Frederiek",
+   "gemeld": "2026-07-16T16:52:05.837Z"
+  },
+  "93bc9b77-e74c-4398-b45a-95442358f3fb": {
+   "nummer": "20267360",
+   "klant": "Saskia Kreuger",
+   "gemeld": "2026-07-16T16:52:17.262Z"
+  },
+  "d1f53a44-3f77-4441-ad27-dc5d8a6bcd62": {
+   "nummer": "20268295",
+   "klant": "Sander Quarles van Ufford",
+   "gemeld": "2026-07-16T16:52:24.825Z"
+  },
+  "a4d6a80b-5b88-4fe5-aef7-6f73e433a077": {
+   "nummer": "20268885",
+   "klant": "Roxana Kroon",
+   "gemeld": "2026-07-16T16:52:25.077Z"
+  },
+  "7551b2c4-84a8-4959-a72c-56dd36150ac0": {
+   "nummer": "20268722",
+   "klant": "Ron Hogenboom",
+   "gemeld": "2026-07-16T16:52:25.349Z"
+  },
+  "e9fd361b-f48f-4678-a779-9e5a234dc580": {
+   "nummer": "20266320",
+   "klant": "Berry Lam",
+   "gemeld": "2026-07-16T16:52:25.579Z"
+  },
+  "275eefcc-12b9-4b59-8a70-2220d4eef923": {
+   "nummer": "20269087",
+   "klant": "Boy Pelgrim",
+   "gemeld": "2026-07-16T16:52:25.811Z"
+  },
+  "37930b04-2370-4a01-97d6-799d06d9cd79": {
+   "nummer": "20268094",
+   "klant": "Tessa Visser",
+   "gemeld": "2026-07-16T16:52:42.776Z"
+  },
+  "90858c3b-ca9a-4f2d-a328-2656b976081c": {
+   "nummer": "20268758",
+   "klant": "Carel van Venetiën",
+   "gemeld": "2026-07-16T16:52:43.004Z"
+  },
+  "f44a7c44-c91c-4245-9e35-812278715203": {
+   "nummer": "20268963",
+   "klant": "Sjaak Deckers",
+   "gemeld": "2026-07-16T16:52:43.232Z"
+  },
+  "5c296fb9-99f4-49c0-ad80-469dc5fa7452": {
+   "nummer": "20268586",
+   "klant": "Rodger Neuschwanger",
+   "gemeld": "2026-07-16T16:52:43.464Z"
+  },
+  "a1aba316-c5b8-4d03-92c9-5261548ae570": {
+   "nummer": "20267846",
+   "klant": "Femke de Wolf",
+   "gemeld": "2026-07-16T16:52:43.693Z"
+  },
+  "3dcdcec0-8bce-4338-b25e-aee660b6ecd8": {
+   "nummer": "20267182",
+   "klant": "Marcel Luckerhoff",
+   "gemeld": "2026-07-16T16:52:43.930Z"
+  },
+  "c93e33a0-d07d-41f2-87cc-05df6a00b58a": {
+   "nummer": "20266074",
+   "klant": "Jimmy Khoesial",
+   "gemeld": "2026-07-16T16:52:44.166Z"
+  },
+  "cdc34557-8216-44b6-b24e-84897797f7e3": {
+   "nummer": "20268865",
+   "klant": "J de Groot",
+   "gemeld": "2026-07-16T16:52:48.821Z"
+  },
+  "985705a1-96d6-4f6c-a76f-7f3e24d53a40": {
+   "nummer": "20268591",
+   "klant": "José van Bemmelen",
+   "gemeld": "2026-07-16T16:53:01.091Z"
+  },
+  "30b6b582-f19a-4d3e-8e1a-b299e5cac3e2": {
+   "nummer": "20269062",
+   "klant": "Marijn den Hartog",
+   "gemeld": "2026-07-16T16:53:01.336Z"
+  },
+  "2e29030a-d673-43f4-aec1-9ad040d9676a": {
+   "nummer": "20266685",
+   "klant": "Stefanie van Nieuwenhoven",
+   "gemeld": "2026-07-16T16:53:01.579Z"
+  },
+  "64c22ac2-6b04-4c2f-9883-6e0ba0b4d595": {
+   "nummer": "20268479",
+   "klant": "Peter Sjouke",
+   "gemeld": "2026-07-16T16:53:01.826Z"
+  },
+  "8a79e9a5-ea67-410f-a8f1-566f06c47711": {
+   "nummer": "20268987",
+   "klant": "Ruud Jansen",
+   "gemeld": "2026-07-16T16:53:02.069Z"
+  },
+  "70f3acb1-d69a-417a-9761-c99573226646": {
+   "nummer": "20268713",
+   "klant": "cilia -",
+   "gemeld": "2026-07-16T16:53:02.300Z"
+  },
+  "922a1b09-b933-483f-95b3-c85e9a582b14": {
+   "nummer": "20268078",
+   "klant": "Shenelva  Bruce",
+   "gemeld": "2026-07-16T16:53:02.539Z"
+  },
+  "d8dee7ef-472e-47c7-8f43-e00878f4b8d7": {
+   "nummer": "20268622",
+   "klant": "Marion Vianen",
+   "gemeld": "2026-07-16T16:53:02.769Z"
+  },
+  "897eac47-4def-477e-8769-473ccd140e03": {
+   "nummer": "20268985",
+   "klant": "René Ladenius",
+   "gemeld": "2026-07-16T16:53:03.000Z"
+  },
+  "5a8fc8f8-b2f9-4d79-bbd8-ee0c034990fc": {
+   "nummer": "20268681",
+   "klant": "MA WIERZBA",
+   "gemeld": "2026-07-16T16:53:03.232Z"
+  },
+  "59a7a1ff-b27b-49e2-bbb8-acccb93966d5": {
+   "nummer": "20269061",
+   "klant": "Emile van der Starre",
+   "gemeld": "2026-07-16T16:53:07.159Z"
+  },
+  "1a35d534-8de9-441d-96b2-e45e5ed99bdc": {
+   "nummer": "20268858",
+   "klant": "leo van leeuwen",
+   "gemeld": "2026-07-16T16:53:21.542Z"
+  },
+  "c31f08a1-1dba-4fe1-8c95-2e17bffae046": {
+   "nummer": "20265166",
+   "klant": "Bas Melman",
+   "gemeld": "2026-07-16T16:53:21.765Z"
+  },
+  "040ea928-b5f2-4497-a7bc-b08c781cd81d": {
+   "nummer": "20267960",
+   "klant": "Rachel Voskuijl",
+   "gemeld": "2026-07-16T16:53:21.990Z"
+  },
+  "bdb6b85a-2415-469f-b1ea-f0bbe1c608ec": {
+   "nummer": "20267981",
+   "klant": "Armando Indrajuana",
+   "gemeld": "2026-07-16T16:53:22.216Z"
+  },
+  "9f2adef1-ce06-48c4-8f4f-b3a609f93b52": {
+   "nummer": "20267988",
+   "klant": "Kathy  Van der Knaap",
+   "gemeld": "2026-07-16T16:53:22.450Z"
+  },
+  "3aa6e655-7703-4563-8557-f57e94f7305d": {
+   "nummer": "20268501",
+   "klant": "Henk van der Burg",
+   "gemeld": "2026-07-16T16:53:22.667Z"
+  },
+  "b2532284-b8d2-48c2-b8cf-04c4eeac331a": {
+   "nummer": "20268961",
+   "klant": "Bo-Jane Pijst",
+   "gemeld": "2026-07-16T16:53:22.902Z"
+  },
+  "249c3768-a5cb-4de3-bf1f-24fbc982a027": {
+   "nummer": "20268714",
+   "klant": "Rem -",
+   "gemeld": "2026-07-16T16:53:23.156Z"
+  },
+  "cfe6df22-c206-4de2-a650-4497889e949d": {
+   "nummer": "20268139",
+   "klant": "C.J. Kleist",
+   "gemeld": "2026-07-16T16:53:23.366Z"
+  },
+  "6af9ad7d-e0a9-4476-8322-1e3294ef4a17": {
+   "nummer": "20268180",
+   "klant": "GM Willemse",
+   "gemeld": "2026-07-16T16:53:23.589Z"
+  },
+  "965f7f03-ba1a-4fb7-bd67-58bdc0128aaa": {
+   "nummer": "20268236",
+   "klant": "Jesus Alcantara",
+   "gemeld": "2026-07-16T16:53:23.814Z"
+  },
+  "5ef82736-29d6-4b54-9a1d-257fdd90605a": {
+   "nummer": "20268580",
+   "klant": "Matthijs Assink",
+   "gemeld": "2026-07-16T16:53:35.372Z"
+  },
+  "cd91c83b-cc3d-44e2-8aa6-7d247b7919ff": {
+   "nummer": "20264288",
+   "klant": "Olaf Groenheijde",
+   "gemeld": "2026-07-16T16:53:35.603Z"
+  },
+  "ccd8030e-55c5-4c85-8201-5723efe9c8dd": {
+   "nummer": "20268680",
+   "klant": "van der ven",
+   "gemeld": "2026-07-16T16:54:04.626Z"
+  },
+  "7b73ed87-417d-4155-9bb0-9f7312f36c17": {
+   "nummer": "20267912",
+   "klant": "Jan  Vellekoop",
+   "gemeld": "2026-07-16T16:54:04.854Z"
+  },
+  "fbdec32f-21de-4c15-91c9-8f6013b76fd6": {
+   "nummer": "20267577",
+   "klant": "Daan Witkop",
+   "gemeld": "2026-07-16T16:54:05.068Z"
+  },
+  "61e38181-a31a-4a74-bd1e-e6497e680df9": {
+   "nummer": "20268604",
+   "klant": "Marja van Dijkhuizen",
+   "gemeld": "2026-07-16T16:54:24.510Z"
+  },
+  "ff650ecc-21df-4acc-b860-d630fc77b510": {
+   "nummer": "20268142",
+   "klant": "Anna Danne",
+   "gemeld": "2026-07-16T16:54:24.742Z"
+  },
+  "678e4a11-9628-4fcf-a545-3261cd81fb09": {
+   "nummer": "20266045",
+   "klant": "Raymond .",
+   "gemeld": "2026-07-16T16:54:41.276Z"
+  },
+  "a04fd229-8ebc-4e40-b1ef-adbf8b81a89f": {
+   "nummer": "20267965",
+   "klant": "Vincent Silvius",
+   "gemeld": "2026-07-16T16:54:41.517Z"
+  },
+  "e80fd9e6-592a-46ac-bfef-f82eb6704efc": {
+   "nummer": "20265008",
+   "klant": "Mark Gotz",
+   "gemeld": "2026-07-16T16:54:41.752Z"
+  },
+  "e1003cdc-8db8-4ac9-8f65-a720c88dd324": {
+   "nummer": "20267645",
+   "klant": "Anouk Mommen",
+   "gemeld": "2026-07-16T16:54:41.977Z"
+  },
+  "b61f429e-7325-4066-a271-f8569720cd17": {
+   "nummer": "20267714",
+   "klant": "Marco Meijer",
+   "gemeld": "2026-07-16T16:54:42.199Z"
+  },
+  "9d6f02ab-4338-4892-8445-938625926253": {
+   "nummer": "20268344",
+   "klant": "Danique van den Berge",
+   "gemeld": "2026-07-16T16:54:42.421Z"
+  },
+  "0370ed9f-710d-4354-b9bb-f341f787a5eb": {
+   "nummer": "20267780",
+   "klant": "Carin Gelpke",
+   "gemeld": "2026-07-16T16:54:42.652Z"
+  },
+  "dda0e35a-2f11-47c4-bba2-c31414abd0b7": {
+   "nummer": "20267943",
+   "klant": "Sander van der Linden",
+   "gemeld": "2026-07-16T16:54:42.876Z"
+  },
+  "b1e681da-a6cd-451a-8c3d-abca1032e911": {
+   "nummer": "20267963",
+   "klant": "R. Rai",
+   "gemeld": "2026-07-16T16:54:43.108Z"
+  },
+  "8c0d1e4c-87b9-410a-9d77-c7e43f2db093": {
+   "nummer": "20268027",
+   "klant": "Koert Kerk",
+   "gemeld": "2026-07-16T16:54:58.991Z"
+  },
+  "55589548-9be7-4030-897c-9e8ecc1740ea": {
+   "nummer": "20268211",
+   "klant": "Djurre Boukes",
+   "gemeld": "2026-07-16T16:54:59.877Z"
+  },
+  "323ce57e-1561-4d6a-b69c-2be0cee41262": {
+   "nummer": "20268054",
+   "klant": "Anne van den Berg-Mulder",
+   "gemeld": "2026-07-16T16:55:00.107Z"
+  },
+  "53988d7f-a408-4db2-9a19-80846de3e748": {
+   "nummer": "20266290",
+   "klant": "Chafik Hachioui",
+   "gemeld": "2026-07-16T16:55:00.334Z"
+  },
+  "f60272ae-13ee-4e4f-8bd6-cc2cf00d3b3b": {
+   "nummer": "20267180",
+   "klant": "Michiel de Kwaasteniet",
+   "gemeld": "2026-07-16T16:55:00.557Z"
+  },
+  "0c9df121-add3-4add-8747-962a6e3c99c7": {
+   "nummer": "20267674",
+   "klant": "Birgul Oktem",
+   "gemeld": "2026-07-16T16:55:00.800Z"
+  },
+  "56f09ccf-9b58-4f4b-accc-8c00f937cec7": {
+   "nummer": "20266948",
+   "klant": "Ben Hooijberg",
+   "gemeld": "2026-07-16T16:55:01.041Z"
+  },
+  "8afbd1b2-5642-48d9-b697-1af0881a7eda": {
+   "nummer": "20266936",
+   "klant": "Richard Groenendijk-Li",
+   "gemeld": "2026-07-16T16:55:01.301Z"
+  },
+  "89f4a912-9f8b-4eaf-b912-025e8a02f038": {
+   "nummer": "20267329",
+   "klant": "Simone Vera Nathalie Ottenbros",
+   "gemeld": "2026-07-16T16:55:01.591Z"
+  },
+  "c505baab-ccca-4b41-855a-109935a814d9": {
+   "nummer": "20268167",
+   "klant": "Monique  Bout",
+   "gemeld": "2026-07-16T16:55:22.641Z"
+  },
+  "39936ed3-3a44-4b0f-a5e4-7844179bd33d": {
+   "nummer": "20265661",
+   "klant": "Saoed Goelam",
+   "gemeld": "2026-07-16T16:55:25.601Z"
+  },
+  "a70bad9b-5466-4d48-8a87-4698bf307a21": {
+   "nummer": "20267945",
+   "klant": "Jack Steur",
+   "gemeld": "2026-07-16T16:55:25.843Z"
+  },
+  "74749464-9548-4739-9e48-6ad8c9c65997": {
+   "nummer": "20267638",
+   "klant": "Suzanne Hoogenes",
+   "gemeld": "2026-07-16T16:55:26.071Z"
+  },
+  "bc1d310f-a95e-437d-b68a-c31e9e22dd7c": {
+   "nummer": "20267461",
+   "klant": "Daisy Van den Berg",
+   "gemeld": "2026-07-16T16:55:26.301Z"
+  },
+  "cf90633c-ed52-4e70-a209-2ec5e4100f88": {
+   "nummer": "20267174",
+   "klant": "Zandelie Badenhorst",
+   "gemeld": "2026-07-16T16:55:45.704Z"
+  },
+  "67c899ba-4fd8-43f4-89e4-89f74889c4f0": {
+   "nummer": "20266026",
+   "klant": "Maarten Sies",
+   "gemeld": "2026-07-16T16:55:45.938Z"
+  },
+  "87d032ef-723b-46cb-b5d4-f1faecf53169": {
+   "nummer": "20267339",
+   "klant": "Van Rees",
+   "gemeld": "2026-07-16T16:55:46.172Z"
+  },
+  "c0dba5e2-6f19-4e44-b706-88854af525c3": {
+   "nummer": "20268032",
+   "klant": "willem de graaf",
+   "gemeld": "2026-07-16T16:55:46.392Z"
+  },
+  "1b3006b7-2914-4603-9994-a4159f0281a6": {
+   "nummer": "20266904",
+   "klant": "Martijn Lancee",
+   "gemeld": "2026-07-16T16:55:46.616Z"
+  },
+  "31745f10-d014-4d55-8bc6-431f0337ae77": {
+   "nummer": "20266935",
+   "klant": "Katinka De Munter",
+   "gemeld": "2026-07-16T16:55:47.076Z"
+  },
+  "a28076d0-7143-4789-8f7c-ea1d009b23f6": {
+   "nummer": "20267754",
+   "klant": "Janine  McCaughey",
+   "gemeld": "2026-07-16T16:55:47.301Z"
+  },
+  "32db6cdf-6ad1-44a3-96f6-127e5a27a3cb": {
+   "nummer": "20267727",
+   "klant": "Sandra Bakker",
+   "gemeld": "2026-07-16T16:55:47.534Z"
+  },
+  "65254ac6-1784-4bd9-be2b-5474d92e9203": {
+   "nummer": "20267838",
+   "klant": "Melanie Kaizer",
+   "gemeld": "2026-07-16T16:55:47.766Z"
+  },
+  "12b06291-d51b-4af5-8768-a5d8be427180": {
+   "nummer": "20267730",
+   "klant": "Pim van Nieuwland",
+   "gemeld": "2026-07-16T16:55:48.225Z"
+  },
+  "95ce62ca-5313-4910-bda2-5e95c8814898": {
+   "nummer": "20267611",
+   "klant": "JOANNA KACZMAREK",
+   "gemeld": "2026-07-16T16:56:03.864Z"
+  },
+  "c1c6754f-81f2-468b-8e82-ccae561220b0": {
+   "nummer": "20265805",
+   "klant": "Wouter Meijers",
+   "gemeld": "2026-07-16T16:57:05.105Z"
+  },
+  "e7077355-ae55-49d3-a6f5-f0e0c318ba13": {
+   "nummer": "20267545",
+   "klant": "Ron Kolkman",
+   "gemeld": "2026-07-16T16:57:07.357Z"
+  },
+  "5906a6de-3ebb-4298-9806-990bfa643741": {
+   "nummer": "20266277",
+   "klant": "Eva Dulaymi",
+   "gemeld": "2026-07-16T16:57:07.591Z"
+  },
+  "36f13d6c-8b86-4887-9648-7c88f0cdbad0": {
+   "nummer": "20266863",
+   "klant": "Ton van Gestel",
+   "gemeld": "2026-07-16T16:57:07.824Z"
+  },
+  "9397c754-d061-41df-a810-5d59e3cc2f7e": {
+   "nummer": "20267188",
+   "klant": "Nick Maas",
+   "gemeld": "2026-07-16T16:57:17.032Z"
+  },
+  "b17db858-7487-4563-aa38-225568faf41a": {
+   "nummer": "20265119",
+   "klant": "Annelies  Akkermans",
+   "gemeld": "2026-07-16T16:57:17.258Z"
+  },
+  "be3d74ac-f4a6-4203-b934-673f1f790d2f": {
+   "nummer": "20266036",
+   "klant": "Jos Westerhuis",
+   "gemeld": "2026-07-16T16:57:21.819Z"
+  },
+  "73118816-8fd6-4931-9818-85dc74af4d62": {
+   "nummer": "20266882",
+   "klant": "Pauline  van der Burg",
+   "gemeld": "2026-07-16T16:57:22.044Z"
+  },
+  "7d0d84f4-d52d-4dcc-8ec6-ec26551303df": {
+   "nummer": "20267369",
+   "klant": "peter zeestraten",
+   "gemeld": "2026-07-16T16:57:22.277Z"
+  },
+  "503dbbe7-5020-41d8-968a-4eb7f0a5387b": {
+   "nummer": "20267585",
+   "klant": "Martijn Sweere",
+   "gemeld": "2026-07-16T16:57:22.508Z"
+  },
+  "1a2047b5-2ba4-44da-9831-40bd840201c9": {
+   "nummer": "20267056",
+   "klant": "Jeffrey Onstein",
+   "gemeld": "2026-07-16T16:57:44.270Z"
+  },
+  "b7d4c0f3-0dda-4dd7-b9f0-a46f14b5dcbb": {
+   "nummer": "20267468",
+   "klant": "Katie van der Klaauw",
+   "gemeld": "2026-07-16T16:58:10.623Z"
+  },
+  "8bcebfa8-997c-401a-b2fd-e6e4eaca6a84": {
+   "nummer": "20266873",
+   "klant": "Arjen Zuijderduijn",
+   "gemeld": "2026-07-16T16:58:10.854Z"
+  },
+  "4108332e-e1c7-415b-8259-36a6044bb523": {
+   "nummer": "20267287",
+   "klant": "Ronald Bouman",
+   "gemeld": "2026-07-16T16:58:11.087Z"
+  },
+  "4254adf3-44f4-4e3c-b17c-1e8b5aa1b916": {
+   "nummer": "20266443",
+   "klant": "Arold Borger",
+   "gemeld": "2026-07-16T16:58:11.325Z"
+  },
+  "d8297968-351a-4d92-9eaa-65182f682393": {
+   "nummer": "20267095",
+   "klant": "Rob Kleijnhans",
+   "gemeld": "2026-07-16T16:58:11.669Z"
+  },
+  "07553cda-2c57-4eaa-81b9-bf5b8fd9bcf1": {
+   "nummer": "20266558",
+   "klant": "Dermot Garry",
+   "gemeld": "2026-07-16T16:58:11.902Z"
+  },
+  "80cd4e6c-ea53-4183-b507-080925354180": {
+   "nummer": "20267453",
+   "klant": "Els Brinkerink",
+   "gemeld": "2026-07-16T16:58:12.119Z"
+  },
+  "6f43248c-49b7-4611-9e6b-d55546eb9d5a": {
+   "nummer": "20266454",
+   "klant": "Marinda Lots",
+   "gemeld": "2026-07-16T16:58:29.921Z"
+  },
+  "9af016eb-a809-4fad-ad4c-5ba3e9ffa59f": {
+   "nummer": "20264557",
+   "klant": "Pim Hajee",
+   "gemeld": "2026-07-16T16:58:30.381Z"
+  },
+  "696ba47e-dd33-4ff5-8920-08f2d0a00d57": {
+   "nummer": "20267354",
+   "klant": "Mark engels",
+   "gemeld": "2026-07-16T16:58:30.620Z"
+  },
+  "b6353abe-c40d-445b-9060-279f7f2292c7": {
+   "nummer": "20267166",
+   "klant": "Isabelle de Geus",
+   "gemeld": "2026-07-16T16:58:30.848Z"
+  },
+  "6165b775-b09c-4d7b-80c4-559023c5ebea": {
+   "nummer": "20267264",
+   "klant": "Nick De ruiter",
+   "gemeld": "2026-07-16T16:58:31.067Z"
+  },
+  "03a42693-7b9b-409f-86a4-89ef5de4730d": {
+   "nummer": "20266958",
+   "klant": "Peter  Kramer",
+   "gemeld": "2026-07-16T16:58:39.772Z"
+  },
+  "f4c78e9e-735b-41f3-bf16-5bfb8fa03ccc": {
+   "nummer": "20266921",
+   "klant": "Kaylee Nieuwland",
+   "gemeld": "2026-07-16T16:58:39.999Z"
+  },
+  "66365790-e0db-437d-b4dd-6d34dec50944": {
+   "nummer": "20267022",
+   "klant": "Samentha Draijer-Warmerdam",
+   "gemeld": "2026-07-16T16:59:32.118Z"
+  },
+  "0d50bd99-d9ca-451c-a304-a5196017f639": {
+   "nummer": "20266812",
+   "klant": "Mairon Hellement",
+   "gemeld": "2026-07-16T16:59:32.337Z"
+  },
+  "24030cb2-fa50-4fcf-9c1b-5dd511119c02": {
+   "nummer": "20266794",
+   "klant": "Alex Meeuws",
+   "gemeld": "2026-07-16T16:59:48.705Z"
+  },
+  "22cc2234-2ac5-41be-8940-4457c3a22f83": {
+   "nummer": "20265351",
+   "klant": "Eva van Schagen",
+   "gemeld": "2026-07-16T16:59:48.931Z"
+  },
+  "a1d65515-c955-4cc0-9473-4ac88fb264c1": {
+   "nummer": "20263931",
+   "klant": "S K  Gidlund",
+   "gemeld": "2026-07-16T16:59:49.155Z"
+  },
+  "ba32239a-3adc-477b-9fb5-cfddafbb822b": {
+   "nummer": "20265735",
+   "klant": "Cornelis Kleibeuker",
+   "gemeld": "2026-07-16T16:59:49.383Z"
+  },
+  "4281fc7b-8ec2-465e-a0fd-8b440a769611": {
+   "nummer": "20265439",
+   "klant": "F. Bergers",
+   "gemeld": "2026-07-16T16:59:49.826Z"
+  },
+  "83d0496b-ab98-4f04-8305-9d15ef49248b": {
+   "nummer": "20267105",
+   "klant": "Rogier Feikema",
+   "gemeld": "2026-07-16T16:59:50.058Z"
+  },
+  "8f2f8226-92f7-4186-a528-5b9400da8586": {
+   "nummer": "20266009",
+   "klant": "Raymond Bosman",
+   "gemeld": "2026-07-16T17:00:30.154Z"
+  },
+  "ac0fac9c-dd82-49e7-8bbb-3670ceb157ec": {
+   "nummer": "20266889",
+   "klant": "Miguel Pereira Calado",
+   "gemeld": "2026-07-16T17:00:43.384Z"
+  },
+  "88f98f0d-f9e6-4ade-9916-0a0769611b43": {
+   "nummer": "20265506",
+   "klant": "Suzanne Cremer",
+   "gemeld": "2026-07-16T17:00:43.615Z"
+  },
+  "259e4120-ccde-432e-b58e-4e43144d2322": {
+   "nummer": "20266879",
+   "klant": "Jordy Tegelaar",
+   "gemeld": "2026-07-16T17:00:44.075Z"
+  },
+  "83f9cb34-9b1a-4e65-8ab2-7f5fe4865b3b": {
+   "nummer": "20265398",
+   "klant": "Mitch Van de wetering",
+   "gemeld": "2026-07-16T17:00:44.321Z"
+  },
+  "4b1a6722-9a6b-408e-819a-fdcf1c215417": {
+   "nummer": "20266768",
+   "klant": "Koen Agahozo-van der Ham",
+   "gemeld": "2026-07-16T17:00:47.399Z"
+  },
+  "dd45a0e7-9ccb-47b9-b6da-52b4cf1dbecd": {
+   "nummer": "20266108",
+   "klant": "Louis Sikkes",
+   "gemeld": "2026-07-16T17:00:47.625Z"
+  },
+  "36e8135c-ab14-4b23-9ad3-3a87b9925dea": {
+   "nummer": "20266667",
+   "klant": "Jaap Bal",
+   "gemeld": "2026-07-16T17:00:47.858Z"
+  },
+  "74a02ec8-d057-45fc-8202-e5bb9ad4d1e9": {
+   "nummer": "20266884",
+   "klant": "Silvia Ark",
+   "gemeld": "2026-07-16T17:00:59.068Z"
+  },
+  "a94fc8ce-f074-4305-946a-3b04cf2dfdb9": {
+   "nummer": "20266613",
+   "klant": "Froukje Udink",
+   "gemeld": "2026-07-16T17:00:59.292Z"
+  },
+  "7eec75a2-f14e-4815-bd78-033c1260abd0": {
+   "nummer": "20266159",
+   "klant": "Kieran Harding",
+   "gemeld": "2026-07-16T17:00:59.523Z"
+  },
+  "42b128a6-322f-4781-bda1-7046ac6f9094": {
+   "nummer": "20266637",
+   "klant": "Oscar Hoogenraad",
+   "gemeld": "2026-07-16T17:00:59.748Z"
+  },
+  "a5091cfb-e896-44bd-9c0e-5bdbe5d0e197": {
+   "nummer": "20266548",
+   "klant": "Henkjan  Heemskerk",
+   "gemeld": "2026-07-16T17:00:59.983Z"
+  },
+  "c97be477-7266-49d5-b32d-7de2fb77f476": {
+   "nummer": "20264899",
+   "klant": "Irma van Veen",
+   "gemeld": "2026-07-16T17:01:00.219Z"
+  },
+  "beaa6f4d-5135-44df-a9bb-140dc60e8191": {
+   "nummer": "20266615",
+   "klant": "Bas Werther",
+   "gemeld": "2026-07-16T17:01:00.462Z"
+  },
+  "3a9509e4-7b05-4600-b342-6f430842b9be": {
+   "nummer": "20266731",
+   "klant": "Nout van Zon",
+   "gemeld": "2026-07-16T17:01:00.929Z"
+  },
+  "b82a248d-c787-4060-9a7e-56c3e5ce902d": {
+   "nummer": "20264282",
+   "klant": "Husain Kapadia",
+   "gemeld": "2026-07-16T17:01:01.191Z"
+  },
+  "738ba77b-e64a-49ed-979d-dc9c25530e9c": {
+   "nummer": "20264281",
+   "klant": "Husain Kapadia",
+   "gemeld": "2026-07-16T17:01:01.191Z"
+  },
+  "7451ea76-7af8-45ae-868d-644fd8cc700a": {
+   "nummer": "20266629",
+   "klant": "Letizia  Bleeker",
+   "gemeld": "2026-07-16T17:01:40.064Z"
+  },
+  "4f8b528a-f5f3-4f52-8692-aac8db71104c": {
+   "nummer": "20266239",
+   "klant": "Wesley Groeneveld",
+   "gemeld": "2026-07-16T17:01:40.293Z"
+  },
+  "c17d8a60-cbd6-48be-a4f5-473bc1abb59e": {
+   "nummer": "20266740",
+   "klant": "Angelique Hartman",
+   "gemeld": "2026-07-16T17:01:40.518Z"
+  },
+  "652cc7c1-96ed-4a3b-a06f-8d5b1cc4b8e0": {
+   "nummer": "20266031",
+   "klant": "Robert Barmentloo",
+   "gemeld": "2026-07-16T17:01:40.989Z"
+  },
+  "310f14f2-3a4a-4c97-81c5-3b5c3ecb97e2": {
+   "nummer": "20265799",
+   "klant": "Lisa Jansen - de Witte",
+   "gemeld": "2026-07-16T17:01:41.711Z"
+  },
+  "b39c3a96-18a9-44f6-96bf-23fb9c28cd55": {
+   "nummer": "20266353",
+   "klant": "Wim van Asperen",
+   "gemeld": "2026-07-16T17:01:41.948Z"
+  },
+  "683ec111-05f6-4f10-a691-1c8764eb5bff": {
+   "nummer": "20264993",
+   "klant": "Thijs Rosenkrands",
+   "gemeld": "2026-07-16T17:01:43.112Z"
+  },
+  "03475ef4-afb2-4465-b0bd-f25368aab53c": {
+   "nummer": "20265843",
+   "klant": "Sander Philipse",
+   "gemeld": "2026-07-16T17:01:43.338Z"
+  },
+  "90f96311-20a4-42c0-b257-13968dfee53f": {
+   "nummer": "20266569",
+   "klant": "Chris Verburg",
+   "gemeld": "2026-07-16T17:01:44.056Z"
+  },
+  "b0858a42-fb2d-4cf4-863d-317840b9d4c2": {
+   "nummer": "20266034",
+   "klant": "R. Kanters",
+   "gemeld": "2026-07-16T17:01:56.246Z"
+  },
+  "f395f82f-4ddc-4a0c-a789-8e5b3b5a5140": {
+   "nummer": "20265558",
+   "klant": "Sophie Tanke",
+   "gemeld": "2026-07-16T17:01:57.633Z"
+  },
+  "5f971a21-164f-4c42-8d27-71e9a55a18ba": {
+   "nummer": "20265487",
+   "klant": "Edwin  van de werken",
+   "gemeld": "2026-07-16T17:01:57.862Z"
+  },
+  "36e1b86a-9c05-4136-84b6-046b0fee6365": {
+   "nummer": "20265417",
+   "klant": "Fam Rec",
+   "gemeld": "2026-07-16T17:01:58.317Z"
+  },
+  "b1146792-b7e7-4dd7-8c1e-3c6245c80eee": {
+   "nummer": "20265334",
+   "klant": "Heleen Kunz",
+   "gemeld": "2026-07-16T17:01:58.786Z"
+  },
+  "db9e5342-faa1-40e1-bd8e-987fd95f2de1": {
+   "nummer": "20264979",
+   "klant": "Diana Nabi",
+   "gemeld": "2026-07-16T17:01:59.007Z"
+  },
+  "f1fe30ea-0ef6-40d2-83a6-2f4147a032f4": {
+   "nummer": "20266153",
+   "klant": "Bas de Jong",
+   "gemeld": "2026-07-16T17:02:08.829Z"
+  },
+  "553b51d1-fbff-49c4-885e-0dcb09eb11cb": {
+   "nummer": "20265731",
+   "klant": "Mathijs te Velthuis",
+   "gemeld": "2026-07-16T17:02:38.667Z"
+  },
+  "2b9d2f3a-ae70-421a-b9de-901131f6ce04": {
+   "nummer": "20265307",
+   "klant": "Desiree Louwerse",
+   "gemeld": "2026-07-16T17:03:26.777Z"
+  },
+  "ffffdee0-9b13-4e77-85c7-85ed1b49c15e": {
+   "nummer": "20266118",
+   "klant": "Thomas Truijens",
+   "gemeld": "2026-07-16T17:03:39.465Z"
+  },
+  "2cc4939b-27de-4124-80bc-9e1c09657b7e": {
+   "nummer": "20265916",
+   "klant": "Robert Boer",
+   "gemeld": "2026-07-16T17:03:48.338Z"
+  },
+  "bd339e9a-fc53-4615-a62b-92beba092ed3": {
+   "nummer": "20265899",
+   "klant": "Jordy  De vendt",
+   "gemeld": "2026-07-16T17:03:49.252Z"
+  },
+  "59c72c65-952d-46c7-9ffd-86070f9cb3af": {
+   "nummer": "20265894",
+   "klant": "Ercan Coban",
+   "gemeld": "2026-07-16T17:03:49.473Z"
+  },
+  "dcddc9cd-dac6-4334-be97-d7e4503e0137": {
+   "nummer": "20265857",
+   "klant": "Sander van der Bie",
+   "gemeld": "2026-07-16T17:03:49.911Z"
+  },
+  "64281c92-1eb4-4567-bfdd-b307d6a244fc": {
+   "nummer": "20265768",
+   "klant": "Fabio Dukker",
+   "gemeld": "2026-07-16T17:03:50.136Z"
+  },
+  "317f19e0-5225-4825-83e9-022cda1cf9f3": {
+   "nummer": "20265610",
+   "klant": "Van Looij",
+   "gemeld": "2026-07-16T17:03:51.515Z"
+  },
+  "c5937540-3755-4630-886f-770ea663b1e1": {
+   "nummer": "20265540",
+   "klant": "Jeroen  Van de. Eijkel",
+   "gemeld": "2026-07-16T17:03:51.976Z"
+  },
+  "3ae4bf07-8af1-4fd7-adc3-81dff12ccca0": {
+   "nummer": "20265529",
+   "klant": "Manoo Kargozar",
+   "gemeld": "2026-07-16T17:03:52.434Z"
+  },
+  "1699393c-c6c3-489b-bc25-8b5b416785f7": {
+   "nummer": "20265323",
+   "klant": "roland vd woude",
+   "gemeld": "2026-07-16T17:03:53.118Z"
+  },
+  "771f74fd-46d3-418f-a78a-251dcd6f0283": {
+   "nummer": "20265318",
+   "klant": "André Kragt",
+   "gemeld": "2026-07-16T17:03:53.353Z"
+  },
+  "6219b733-6fbd-4492-8f62-51059c4707b9": {
+   "nummer": "20264907",
+   "klant": "Roderick Holewijn",
+   "gemeld": "2026-07-16T17:03:54.274Z"
+  },
+  "e8e37ca7-3bf4-497c-911c-e0025f98993d": {
+   "nummer": "20264639",
+   "klant": "Marloes Heemskerk",
+   "gemeld": "2026-07-16T17:03:54.954Z"
+  },
+  "8a7e797b-8f16-47a3-bce2-ef8db5940ad1": {
+   "nummer": "20264567",
+   "klant": "Jeroen Van der",
+   "gemeld": "2026-07-16T17:03:55.192Z"
+  },
+  "b88233b3-1547-4480-95cd-a15fae678b08": {
+   "nummer": "20264293",
+   "klant": "L Bleijenberg",
+   "gemeld": "2026-07-16T17:04:30.151Z"
+  },
+  "844bd014-a896-402b-b056-339f6e604e87": {
+   "nummer": "20264409",
+   "klant": "Bas Wolf",
+   "gemeld": "2026-07-16T17:04:30.377Z"
+  },
+  "de0c4079-65c5-4bbf-98ff-253aa30a160a": {
+   "nummer": "20264659",
+   "klant": "h Eijkelhof",
+   "gemeld": "2026-07-16T17:05:43.650Z"
+  },
+  "a544231c-f3d1-4007-a0d3-ff23096c26df": {
+   "nummer": "20265459",
+   "klant": "Angelique Heringa Spee",
+   "gemeld": "2026-07-16T17:05:53.700Z"
+  },
+  "b37b3f6a-94a5-414d-864c-b8eef9c4cc2a": {
+   "nummer": "20265355",
+   "klant": "Johan  Meuldijk",
+   "gemeld": "2026-07-16T17:05:54.142Z"
+  },
+  "69b834c5-2882-4a1d-a3d2-964d7230378e": {
+   "nummer": "20265078",
+   "klant": "Gertjan Mallant",
+   "gemeld": "2026-07-16T17:06:23.053Z"
+  },
+  "6a9a4dea-3bb0-4d7f-890d-01719dfae5c8": {
+   "nummer": "20264565",
+   "klant": "Arnold Wilson",
+   "gemeld": "2026-07-16T17:06:25.010Z"
+  },
+  "e69910e4-a577-4123-933f-b317b071f27f": {
+   "nummer": "20265022",
+   "klant": "cees endlich",
+   "gemeld": "2026-07-16T17:06:25.532Z"
+  },
+  "69fb07f7-2181-44c1-ada5-6fc3684fc720": {
+   "nummer": "20265085",
+   "klant": "Giovanni  Langerak",
+   "gemeld": "2026-07-16T17:06:26.245Z"
+  },
+  "5c925798-6e2c-409a-b5db-539fdae722ec": {
+   "nummer": "20265402",
+   "klant": "Afke De Groot",
+   "gemeld": "2026-07-16T17:06:26.686Z"
+  },
+  "1841e108-5140-4d3e-887f-95754a2387d1": {
+   "nummer": "20264944",
+   "klant": "Rick van Zadelhoff",
+   "gemeld": "2026-07-16T17:07:31.456Z"
+  },
+  "8e22930e-5d07-46ce-8fab-c8dd28d41ebf": {
+   "nummer": "20264884",
+   "klant": "Joelle  Vink",
+   "gemeld": "2026-07-16T17:08:03.245Z"
+  },
+  "2e4909b4-529a-4d1d-8ba0-91ce89cea893": {
+   "nummer": "20264827",
+   "klant": "Clint Ouwendijk",
+   "gemeld": "2026-07-16T17:08:03.462Z"
+  },
+  "a2c1c390-4397-4124-a1a2-d323d66b1eb2": {
+   "nummer": "20264740",
+   "klant": "Stephen Ozanne",
+   "gemeld": "2026-07-16T17:08:03.693Z"
+  },
+  "998be4e6-f7fc-42e8-94d0-88030f69314d": {
+   "nummer": "20264729",
+   "klant": "Giorgio Mulder",
+   "gemeld": "2026-07-16T17:08:03.925Z"
+  },
+  "8cdcfc5d-2d6d-4d9e-b0e5-00f7f687531c": {
+   "nummer": "20264702",
+   "klant": "Patrick Drogt",
+   "gemeld": "2026-07-16T17:08:04.154Z"
+  },
+  "bae29864-7e92-415a-b76f-4819f5bf7cdc": {
+   "nummer": "20264612",
+   "klant": "Rico Gator",
+   "gemeld": "2026-07-16T17:08:04.396Z"
+  },
+  "21c4a3f1-74c5-4651-ad9e-6d2d230ae318": {
+   "nummer": "20264594",
+   "klant": "Donny van Ekeren",
+   "gemeld": "2026-07-16T17:08:04.882Z"
+  },
+  "c6b14714-a0b3-4832-8778-a9d6cea6a383": {
+   "nummer": "20264556",
+   "klant": "Elwin van der Vet",
+   "gemeld": "2026-07-16T17:08:05.119Z"
+  },
+  "015810b0-3383-402e-b503-ce05dbe4d009": {
+   "nummer": "20264448",
+   "klant": "Daan Rijkhoff",
+   "gemeld": "2026-07-16T17:08:30.868Z"
+  },
+  "029d4558-3930-4d6e-bf0d-e536000ad4fc": {
+   "nummer": "20264504",
+   "klant": "Menno Esser",
+   "gemeld": "2026-07-16T17:09:08.377Z"
+  },
+  "6e9d674b-8a60-4546-9b27-966a1e0e9e33": {
+   "nummer": "20264497",
+   "klant": "Daan Roossien",
+   "gemeld": "2026-07-16T17:09:08.604Z"
+  },
+  "c31394bc-3460-4b6b-8062-f38dad339e05": {
+   "nummer": "20263957",
+   "klant": "Bodey Siegelaar",
+   "gemeld": "2026-07-16T17:09:09.523Z"
+  },
+  "683ee620-e2b6-4dc6-9d15-eb319153b3b5": {
+   "nummer": "20263925",
+   "klant": "Sankar Bose",
+   "gemeld": "2026-07-16T17:09:09.769Z"
+  },
+  "eeb3d92f-056b-479c-b143-8e877c455572": {
+   "nummer": "20264240",
+   "klant": "Daisy Akdeniz",
+   "gemeld": "2026-07-16T17:09:37.031Z"
+  },
+  "9079a61d-64d3-49d8-a4b4-7baf6c91d209": {
+   "nummer": "20264213",
+   "klant": "Harry Koops",
+   "gemeld": "2026-07-16T17:10:09.100Z"
+  },
+  "996cc8b5-bb18-4a91-9942-8b4e317d1d6f": {
+   "nummer": "20264089",
+   "klant": "Frank van den Berg",
+   "gemeld": "2026-07-16T17:10:09.561Z"
+  },
+  "315b3c02-0e28-4b87-a38f-b4f1a949ed96": {
+   "nummer": "20263918",
+   "klant": "Jan Haasnoot",
+   "gemeld": "2026-07-16T17:10:09.803Z"
+  },
+  "59d0b38d-7485-4d59-a1d8-47fcc0ebd360": {
+   "nummer": "20264066",
+   "klant": "Aris Kampourakis",
+   "gemeld": "2026-07-16T17:11:10.784Z"
+  },
+  "1faa6f5a-2c5a-4df5-b55a-01e93b2ba31a": {
+   "nummer": "20264005",
+   "klant": "Jordi Menkhorst",
+   "gemeld": "2026-07-16T17:11:14.913Z"
+  },
+  "0f487144-da00-415f-9139-456482afa098": {
+   "nummer": "20263994",
+   "klant": "Leroy Binken",
+   "gemeld": "2026-07-16T17:11:20.458Z"
+  },
+  "851aacf3-6021-4c89-8c96-593d0ed6f77a": {
+   "nummer": "20263924",
+   "klant": "Jeroen Noordermeer",
+   "gemeld": "2026-07-16T17:11:28.288Z"
+  },
+  "ec8247ae-d291-4b9e-9465-8ad2cffada52": {
+   "nummer": "20269908",
+   "klant": "Ruud Verschoor",
+   "gemeld": "2026-07-17T19:00:11.145Z"
+  },
+  "5f8da666-c026-4266-a5e2-f532f01bbe34": {
+   "nummer": "20269893",
+   "klant": "F.J. westenberg",
+   "gemeld": "2026-07-17T19:00:11.974Z"
+  },
+  "1ccf0006-7b6c-462c-bc1f-138f55f89449": {
+   "nummer": "20269704",
+   "klant": "Marc Spaans",
+   "gemeld": "2026-07-17T19:00:12.689Z"
+  },
+  "def79736-e5f2-4e31-a8be-2fa824c414ff": {
+   "nummer": "20269456",
+   "klant": "Ilse Van den Oever",
+   "gemeld": "2026-07-17T19:00:20.058Z"
+  },
+  "370dcd86-f478-4257-934f-3c2b411ed222": {
+   "nummer": "20269241",
+   "klant": "Scott Lee",
+   "gemeld": "2026-07-17T19:00:21.582Z"
+  },
+  "f32d5455-2552-4d67-9b48-47446ade1f20": {
+   "nummer": "20269752",
+   "klant": "Dennis van Tol",
+   "gemeld": "2026-07-17T19:00:21.832Z"
+  },
+  "1e941f54-92d8-46a9-8823-3c8a4cfdde37": {
+   "nummer": "20269665",
+   "klant": "Hany Youssef",
+   "gemeld": "2026-07-17T19:00:22.079Z"
+  },
+  "1a999c17-a652-4e0b-a693-31f381791964": {
+   "nummer": "20269685",
+   "klant": "Raman Cheloi",
+   "gemeld": "2026-07-17T19:00:26.184Z"
+  },
+  "9f053408-73fb-4059-abeb-2c9b45551fd3": {
+   "nummer": "20269965",
+   "klant": "Bryan Schokking",
+   "gemeld": "2026-07-18T19:00:08.050Z"
+  },
+  "af1342d0-84e4-4ee9-864d-b7fe86a2eafd": {
+   "nummer": "20269845",
+   "klant": "caroline Van Imhoff",
+   "gemeld": "2026-07-18T19:00:09.094Z"
+  },
+  "6a41e95d-3111-4670-b367-b2af6f235e86": {
+   "nummer": "20269899",
+   "klant": "Monique  van den Berg",
+   "gemeld": "2026-07-18T19:00:09.344Z"
+  },
+  "14648262-3053-4355-99e7-a1065f0071a4": {
+   "nummer": "202610008",
+   "klant": "Lisa Terreehorst",
+   "gemeld": "2026-07-18T19:00:09.648Z"
+  },
+  "bbaf6d9d-125c-44c4-8dd1-0bd56bac82b1": {
+   "nummer": "20269725",
+   "klant": "Marcel Andeweg",
+   "gemeld": "2026-07-18T19:00:09.942Z"
+  },
+  "fed80bcf-e1bd-4795-b42f-65aebebc0739": {
+   "nummer": "202610010",
+   "klant": "Ram -",
+   "gemeld": "2026-07-18T19:00:15.854Z"
+  },
+  "850a8963-33db-4671-a796-0cfa6c94e0d7": {
+   "nummer": "20269949",
+   "klant": "Nkem Ilo",
+   "gemeld": "2026-07-18T19:00:16.794Z"
+  },
+  "35d598ba-2bbe-4455-84e9-f226a326ad75": {
+   "nummer": "20269299",
+   "klant": "Angela  Van Spijk",
+   "gemeld": "2026-07-18T19:00:17.824Z"
+  },
+  "5d1ceea9-497d-4110-ab1f-42d5b659b193": {
+   "nummer": "20269995",
+   "klant": "pil -",
+   "gemeld": "2026-07-18T19:00:21.554Z"
+  },
+  "ebd78c24-c319-49ab-bae1-4f66abf2a911": {
+   "nummer": "20269417",
+   "klant": "van leeuwen",
+   "gemeld": "2026-07-19T19:00:12.192Z"
+  },
+  "1a2a6131-b68c-4d1f-998b-2decf90aac68": {
+   "nummer": "20269968",
+   "klant": "Henk Zijlstra",
+   "gemeld": "2026-07-20T19:00:09.771Z"
+  },
+  "bc9f4ecb-d084-4c2a-8a06-855a0671a98b": {
+   "nummer": "20269686",
+   "klant": "Willem Kasteleyn",
+   "gemeld": "2026-07-20T19:00:12.474Z"
+  },
+  "ce7c33f1-3d4e-42af-9292-2995f6e87edd": {
+   "nummer": "202610084",
+   "klant": "Aarnoud de Groen",
+   "gemeld": "2026-07-20T19:00:13.232Z"
+  },
+  "e410c69f-89f8-43a6-8022-4f2f0d11021c": {
+   "nummer": "20268411",
+   "klant": "WIlco Vendrig",
+   "gemeld": "2026-07-20T19:00:13.702Z"
+  },
+  "c7cc798e-c34f-4082-bd96-80c9e69f24f0": {
+   "nummer": "202610064",
+   "klant": "Rox De ruig",
+   "gemeld": "2026-07-20T19:00:15.838Z"
+  },
+  "414d7f39-2a7a-4b7b-9434-2d7d76645bdd": {
+   "nummer": "202610037",
+   "klant": "Deniz Bicak",
+   "gemeld": "2026-07-20T19:00:16.603Z"
+  },
+  "6d241a86-c540-48b3-b8eb-bb46058ad06a": {
+   "nummer": "20269497",
+   "klant": "diana knorr",
+   "gemeld": "2026-07-20T19:00:23.638Z"
+  },
+  "cdbae958-76f9-4bd7-8d5a-ec30fde1da34": {
+   "nummer": "20269822",
+   "klant": "Wilte Zijlstra",
+   "gemeld": "2026-07-20T19:00:28.818Z"
+  }
+ },
+ "nulmeting": true
+}

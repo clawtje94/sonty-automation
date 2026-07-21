@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20269180",
+  "documentId": "f8d29e76-3de7-4b49-bc13-6b16607a0c94",
+  "name": "Ron Matthijsen",
+  "timestamp": "2026-07-09T11:00:55.638Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "SunCube XL\nBreedte: 2300 mm\nUitval: 1150 mm\nFrame Kleur: Technisch aluminium\nKleur doek: NTB\nBediening: Handbediend\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1635.24,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + Montage uitvalscherm\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

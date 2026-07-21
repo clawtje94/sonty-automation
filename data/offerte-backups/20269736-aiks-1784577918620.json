@@ -1,0 +1,236 @@
+{
+  "documentId": "f43bb9e1-d4a0-42e2-a1b2-d9c025d29d7c",
+  "versionId": "0d33eff2-4a9c-4554-8952-b16b8c74085f",
+  "documentTitle": "Offerte #20269736",
+  "documentStatus": "DRAFT",
+  "documentNumber": "20269736",
+  "documentType": "QUOTATION",
+  "title": "Offerte #20269736",
+  "quotationNumber": "20269736",
+  "quotationTitle": "Offerte #20269736",
+  "quotationCreationTimestamp": 1784105650819,
+  "quotationExpirationTimestamp": 1786697650819,
+  "quotationStatus": "DRAFT",
+  "isoCurrency": "EUR",
+  "subjects": {
+    "leadConfiguration": "da574706-3b54-4693-9ab6-52907f9cdb58",
+    "contactPerson": "44e25eab-c9d0-42eb-ab51-75002f4f23b4"
+  },
+  "segments": {
+    "defaultTemplateContactPart": {
+      "type": "contactPerson",
+      "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+    },
+    "defaultSignaturePart": {
+      "type": "signature",
+      "data": {}
+    },
+    "defaultTemplateProfileLogo": {
+      "type": "companyProfileLogo",
+      "data": "![|6lh]($companyProfile.logo)"
+    },
+    "defaultTemplateProfileText": {
+      "type": "text",
+      "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+    },
+    "defaultTemplatePriceLineGroup": {
+      "type": "priceLineGroup",
+      "data": {
+        "lines": [
+          {
+            "units": 1,
+            "description": "**Waarom ROMA?**\nDuitse premiumkwaliteit, geleverd uit de eigen ROMA-fabriek:\n- Dikker, geëxtrudeerd aluminium: stabielere kast en geleiders, ook op grote maten\n- Dubbel gepoedercoat in plaats van natlak: dikkere laklaag die veel langer mooi blijft\n- Hogere windweerstandsklasse: kan meer wind aan en blijft ook bij stevige wind veilig in bedrijf\n- RAL-kleur naar keuze: 209 kleuren (mat en structuur) zonder meerprijs\n- Somfy motor met ingeleerde handzender af fabriek, 5 jaar fabrieksgarantie (7 jaar op solar)",
+            "pricePerUnit": 0,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Roma zipSCREEN.2 (windvast ritsscreen)**\nType: screen solar\nBreedte: 3352 mm\nHoogte: 955 mm\nFrame Kleur: RAL 9010 (uit 209 RAL-kleuren, zonder meerprijs)\nKleur doek: NTB\nBediening: Solar (Somfy RS 100 IO Solar)\nMotor: Somfy RS 100 IO Solar",
+            "pricePerUnit": 2205.7,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Inmeten + montage screen solar**\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 175,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": {
+          "name": "Hoogzomer-actie: 15% korting (geldig t/m 31 juli 2026)",
+          "amount": 15,
+          "type": "PERCENTAGE",
+          "vatPercentage": 21
+        }
+      }
+    }
+  },
+  "pricing": {
+    "total": 2023.5949999999998
+  },
+  "renderRows": [
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileLogo"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileText"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateContactPart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "quotationData"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "priceLineGroupCombined",
+              "target": "defaultTemplatePriceLineGroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "userDecline"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "signature",
+              "target": "defaultSignaturePart"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "quotationNumber": "20269349",
+  "documentId": "fc3a79ee-dd8a-42ea-906f-457b9f082f1c",
+  "name": "İsmail  Altiok",
+  "timestamp": "2026-07-11T07:30:55.188Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 600 mm\nHoogte: 1611 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9001\nKleur doek: NTB\nOnderlat: Design\nBediening: \nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1182.5,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Suncontrol 165 zip\nBreedte: 4850 mm\nUitval: 3500 MM\nFrame Kleur: RAL 9010 structuur\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 5083.3,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage serre zonwering.\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 350,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

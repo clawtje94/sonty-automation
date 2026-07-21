@@ -1,0 +1,299 @@
+{
+  "documentId": "4455c2e1-d5be-4e0c-966d-0787c6a4acf6",
+  "versionId": "50a2529a-9bf7-4897-b9a1-9a7be5bf3575",
+  "documentTitle": "Offerte #20269923",
+  "documentStatus": "SENT",
+  "documentNumber": "20269923",
+  "documentType": "QUOTATION",
+  "title": "Offerte #20269923",
+  "quotationNumber": "20269923",
+  "quotationTitle": "Offerte #20269923",
+  "quotationCreationTimestamp": 1784281842074,
+  "quotationExpirationTimestamp": 1784886642074,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "subjects": {
+    "leadConfiguration": "86da683b-ccbd-4c42-9418-4c4700b461b8",
+    "contactPerson": "44f320c0-e7ab-4c2f-8d82-0d478d7fb037"
+  },
+  "segments": {
+    "defaultTemplateContactPart": {
+      "type": "contactPerson",
+      "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+    },
+    "69248519-6cc6-4d50-a3ef-35ca00d5dd1f": {
+      "type": "text",
+      "data": "**Waarom Sonty?**\n\n- Sunmaster Premium Dealer: wij leveren uitsluitend A-merk zonwering van de hoogste kwaliteit\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij je thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 600+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+    },
+    "defaultSignaturePart": {
+      "type": "signature",
+      "data": {}
+    },
+    "defaultTemplateProfileLogo": {
+      "type": "companyProfileLogo",
+      "data": "![|6lh]($companyProfile.logo)"
+    },
+    "defaultTemplateProfileText": {
+      "type": "text",
+      "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+    },
+    "defaultTemplatePriceLineGroup": {
+      "type": "priceLineGroup",
+      "data": {
+        "lines": [
+          {
+            "units": 3,
+            "description": "**Markies aluminium kap**\nBreedte: 4000 mm\nUitval: 1000 mm\nFrame kleur: Verkeerswit\nKleur doek: Doekkleur naar keuze\nBediening: Elektrisch solar (draadloze motor op zonne-energie)\n\nInclusief:\n- Aluminium bovenkap (recht 25cm diep)\n- Zijkappen (set van 2, aluminium recht 20cm)\n- Koord met RVS katrollen en koordkikker\n- PVC afbiesband in kleur\n- Slijtlat\n- Doek uit de standaard collectie\n- Volant (schulp, recht of recht met inkam)\n- Scharnieren in kleur\n- Somfy IO motor Solar\n\nGarantie: 3 jaar montage | 5 jaar product | 7 jaar motor\n\n**Liever een ander materiaal of bediening?**\n\nAnder materiaal:\n• Grenenhouten kap: klassieke uitstraling: -€219\n• Hardhouten kap (meranti): duurzamer, langere levensduur: -€148\n\nAndere bediening:\n• Handbediend (koord): geen motor nodig: -€901\n• Draaischakelaar (Somfy LT motor): vaste schakelaar aan de muur: -€502\n• Motor + afstandsbediening (Somfy IO, incl. Situo 1 zender): bedien je markies elektrisch: -€206\n• Brel Solar motor (incl. handzender): draadloze motor op zonne-energie: -€151\n\nExtra:\n• Stormstrook: beschermt het raam als markies ingeklapt — +€67\n• Tussenpoot: steunpoot in het midden — +€194\n• Niet-standaard RAL kleur — +10%\n• Koord onderlangs i.p.v. bovenlangs — +€48\n• Spots/verlichting — vanaf €847\n\nLaat het ons weten, we passen het graag voor je aan.",
+            "pricePerUnit": 2985.07,
+            "vatPercentage": 21,
+            "position": 2,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Markies aluminium kap**\nBreedte: 2670 mm\nUitval: 1000 mm\nFrame kleur: Verkeerswit\nKleur doek: Doekkleur naar keuze\nBediening: Elektrisch solar (draadloze motor op zonne-energie)\n\nInclusief:\n- Aluminium bovenkap (recht 25cm diep)\n- Zijkappen (set van 2, aluminium recht 20cm)\n- Koord met RVS katrollen en koordkikker\n- PVC afbiesband in kleur\n- Slijtlat\n- Doek uit de standaard collectie\n- Volant (schulp, recht of recht met inkam)\n- Scharnieren in kleur\n- Somfy IO motor Solar\n\nGarantie: 3 jaar montage | 5 jaar product | 7 jaar motor\n\n**Liever een ander materiaal of bediening?**\n\nAnder materiaal:\n• Grenenhouten kap: klassieke uitstraling: -€186\n• Hardhouten kap (meranti): duurzamer, langere levensduur: -€125\n\nAndere bediening:\n• Handbediend (koord): geen motor nodig: -€901\n• Draaischakelaar (Somfy LT motor): vaste schakelaar aan de muur: -€502\n• Motor + afstandsbediening (Somfy IO, incl. Situo 1 zender): bedien je markies elektrisch: -€206\n• Brel Solar motor (incl. handzender): draadloze motor op zonne-energie: -€151\n\nExtra:\n• Stormstrook: beschermt het raam als markies ingeklapt — +€67\n• Tussenpoot: steunpoot in het midden — +€194\n• Niet-standaard RAL kleur — +10%\n• Koord onderlangs i.p.v. bovenlangs — +€48\n• Spots/verlichting — vanaf €847\n\nLaat het ons weten, we passen het graag voor je aan.",
+            "pricePerUnit": 2666.84,
+            "vatPercentage": 21,
+            "position": 3,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 4,
+            "description": "**Inmeten + montage markies**\n- Inmeetafspraak bij je thuis\n- Professionele montage door ons eigen montageteam\n- Klein materiaal en bevestiging\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 275,
+            "vatPercentage": 21,
+            "position": 4,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Tahoma Switch**\n- Automatiseren van je Somfy producten\n- Producten bedienen waar je ook bent met de telefoon\n- Inclusief installatie en uitleg\n- Al uw smart home producten op 1 app (zoals Philips Hue)",
+            "pricePerUnit": 195,
+            "vatPercentage": 21,
+            "position": 0,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": {
+          "name": "15% tijdelijke actie",
+          "amount": 15,
+          "type": "PERCENTAGE",
+          "vatPercentage": 21
+        }
+      }
+    }
+  },
+  "pricing": {
+    "total": 10979.4925
+  },
+  "renderRows": [
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileLogo"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileText"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateContactPart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "quotationData"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "priceLineGroupCombined",
+              "target": "defaultTemplatePriceLineGroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "69248519-6cc6-4d50-a3ef-35ca00d5dd1f"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "userDecline"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "signature",
+              "target": "defaultSignaturePart"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

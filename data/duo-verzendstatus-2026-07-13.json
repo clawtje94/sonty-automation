@@ -1,0 +1,519 @@
+{
+ "beide": 7,
+ "alleenSun": 147,
+ "geen": 4,
+ "fouten": 0,
+ "alleenRoma": [
+  {
+   "klant": "Gerrit  Boogaardt",
+   "bron": "20268644",
+   "bronS": "DRAFT",
+   "duoNr": "20268656",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Chantal  Droogh",
+   "bron": "20268642",
+   "bronS": "DRAFT",
+   "duoNr": "20268658",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Richard  Eijgenraam",
+   "bron": "20268634",
+   "bronS": "DRAFT",
+   "duoNr": "20268663",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Stefanie Schreuders",
+   "bron": "20268692",
+   "bronS": "DRAFT",
+   "duoNr": "20268694",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Thijmen Alkema",
+   "bron": "20268669",
+   "bronS": "DRAFT",
+   "duoNr": "20268700",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Danielle V wijk",
+   "bron": "20268816",
+   "bronS": "DRAFT",
+   "duoNr": "20268818",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Onno Lookermans",
+   "bron": "20268811",
+   "bronS": "DRAFT",
+   "duoNr": "20268820",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Viktor Vijverberh",
+   "bron": "20268798",
+   "bronS": "DRAFT",
+   "duoNr": "20268827",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Ronald Bouman",
+   "bron": "20268789",
+   "bronS": "DRAFT",
+   "duoNr": "20268832",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Claudia Haakman",
+   "bron": "20268786",
+   "bronS": "DRAFT",
+   "duoNr": "20268834",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Anton Simone",
+   "bron": "20268765",
+   "bronS": "DRAFT",
+   "duoNr": "20268839",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Cees Willigenburg",
+   "bron": "20268761",
+   "bronS": "DRAFT",
+   "duoNr": "20268842",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Teunis de Haas",
+   "bron": "20268760",
+   "bronS": "DRAFT",
+   "duoNr": "20268843",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Wendy Raczewski",
+   "bron": "20268855",
+   "bronS": "DRAFT",
+   "duoNr": "20268871",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Manuela  Burhenne",
+   "bron": "20268853",
+   "bronS": "DRAFT",
+   "duoNr": "20268873",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Bep van der Kooij",
+   "bron": "20268892",
+   "bronS": "DRAFT",
+   "duoNr": "20268900",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Jordy Sluimer",
+   "bron": "20268891",
+   "bronS": "DRAFT",
+   "duoNr": "20268901",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Elgert Verhoef",
+   "bron": "20268889",
+   "bronS": "DRAFT",
+   "duoNr": "20268902",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Jolanda Hofman",
+   "bron": "20268886",
+   "bronS": "DRAFT",
+   "duoNr": "20268903",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Cynthia  de Vries",
+   "bron": "20268882",
+   "bronS": "DRAFT",
+   "duoNr": "20268905",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Rob Vermin",
+   "bron": "20268945",
+   "bronS": "DRAFT",
+   "duoNr": "20268968",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Jamy Karssen",
+   "bron": "20268938",
+   "bronS": "DRAFT",
+   "duoNr": "20268971",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Y Y",
+   "bron": "20268927",
+   "bronS": "DRAFT",
+   "duoNr": "20268972",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Beau Gielbert",
+   "bron": "20268926",
+   "bronS": "DRAFT",
+   "duoNr": "20268973",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Jan Oosterhof",
+   "bron": "20268925",
+   "bronS": "DRAFT",
+   "duoNr": "20268974",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Ilham  Bouzidi",
+   "bron": "20268923",
+   "bronS": "DRAFT",
+   "duoNr": "20268975",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Eline Van Tiggele",
+   "bron": "20268917",
+   "bronS": "DRAFT",
+   "duoNr": "20268978",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Frank Sijbolts",
+   "bron": "20269029",
+   "bronS": "DRAFT",
+   "duoNr": "20269031",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Peter Dame",
+   "bron": "20269026",
+   "bronS": "DRAFT",
+   "duoNr": "20269034",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Daniëlle Visser",
+   "bron": "20269020",
+   "bronS": "DRAFT",
+   "duoNr": "20269037",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Ayse Topal",
+   "bron": "20269018",
+   "bronS": "DRAFT",
+   "duoNr": "20269038",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Wouter Rijkaart",
+   "bron": "20269013",
+   "bronS": "DRAFT",
+   "duoNr": "20269040",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Bart Elstgeest",
+   "bron": "20268993",
+   "bronS": "DRAFT",
+   "duoNr": "20269046",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Wim van Briemen",
+   "bron": "20269070",
+   "bronS": "DRAFT",
+   "duoNr": "20269080",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Febe Schoemaker",
+   "bron": "20269102",
+   "bronS": "DRAFT",
+   "duoNr": "20269103",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Patrick Heijne",
+   "bron": "20269093",
+   "bronS": "DRAFT",
+   "duoNr": "20269105",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Connie In der Maur",
+   "bron": "20269086",
+   "bronS": "DRAFT",
+   "duoNr": "20269107",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Martin Schalkwijk",
+   "bron": "20269146",
+   "bronS": "DRAFT",
+   "duoNr": "20269149",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "A. Timan",
+   "bron": "20269140",
+   "bronS": "DRAFT",
+   "duoNr": "20269152",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Dur Polat",
+   "bron": "20269134",
+   "bronS": "DRAFT",
+   "duoNr": "20269156",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Shelley IJsselstein",
+   "bron": "20269117",
+   "bronS": "DRAFT",
+   "duoNr": "20269163",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Dennis Westhuis",
+   "bron": "20269114",
+   "bronS": "DRAFT",
+   "duoNr": "20269165",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Rina Wenig",
+   "bron": "20269174",
+   "bronS": "DRAFT",
+   "duoNr": "20269183",
+   "duoS": "ACCEPTED"
+  },
+  {
+   "klant": "Erik de Ruiter",
+   "bron": "20269169",
+   "bronS": "DRAFT",
+   "duoNr": "20269185",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Hans Hoksbergen",
+   "bron": "20269206",
+   "bronS": "DRAFT",
+   "duoNr": "20269210",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Demi van der Ven",
+   "bron": "20269198",
+   "bronS": "DRAFT",
+   "duoNr": "20269213",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Martin  Van Baekel",
+   "bron": "20269246",
+   "bronS": "DRAFT",
+   "duoNr": "20269257",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Scott Lee",
+   "bron": "20269241",
+   "bronS": "DRAFT",
+   "duoNr": "20269258",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Jan Oliemans",
+   "bron": "20269234",
+   "bronS": "DRAFT",
+   "duoNr": "20269259",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Carlos George",
+   "bron": "20269230",
+   "bronS": "DRAFT",
+   "duoNr": "20269261",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Berry Lam",
+   "bron": "20269228",
+   "bronS": "DRAFT",
+   "duoNr": "20269262",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Marjan Poel",
+   "bron": "20269313",
+   "bronS": "DRAFT",
+   "duoNr": "20269318",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Bram Bresser",
+   "bron": "20269310",
+   "bronS": "DRAFT",
+   "duoNr": "20269320",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Maarten Bosma",
+   "bron": "20269308",
+   "bronS": "DRAFT",
+   "duoNr": "20269321",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "İsmail  Altiok",
+   "bron": "20269349",
+   "bronS": "DRAFT",
+   "duoNr": "20269355",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Steven Burke",
+   "bron": "20269348",
+   "bronS": "DRAFT",
+   "duoNr": "20269356",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Kees van Duijvenbode",
+   "bron": "20269345",
+   "bronS": "DRAFT",
+   "duoNr": "20269357",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "S Serhani",
+   "bron": "20269344",
+   "bronS": "DRAFT",
+   "duoNr": "20269358",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Alicia van der Heul-Koster",
+   "bron": "20269337",
+   "bronS": "DRAFT",
+   "duoNr": "20269361",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "J.M. van der Hoek",
+   "bron": "20269336",
+   "bronS": "DRAFT",
+   "duoNr": "20269362",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "B van der Linden",
+   "bron": "20269329",
+   "bronS": "DRAFT",
+   "duoNr": "20269365",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Bob Verweij",
+   "bron": "20269325",
+   "bronS": "DRAFT",
+   "duoNr": "20269366",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Charelle  Pieters",
+   "bron": "20269384",
+   "bronS": "DRAFT",
+   "duoNr": "20269391",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Maaike Schaap",
+   "bron": "20269378",
+   "bronS": "DRAFT",
+   "duoNr": "20269394",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Ron Koning",
+   "bron": "20269424",
+   "bronS": "DRAFT",
+   "duoNr": "20269434",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Anita Jutte",
+   "bron": "20269519",
+   "bronS": "DRAFT",
+   "duoNr": "20269537",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Perry Kleinjan",
+   "bron": "20269516",
+   "bronS": "DRAFT",
+   "duoNr": "20269539",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Lichelle Noordijk",
+   "bron": "20269508",
+   "bronS": "DRAFT",
+   "duoNr": "20269542",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Quincy Plas",
+   "bron": "20269506",
+   "bronS": "DRAFT",
+   "duoNr": "20269543",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Remco Smeding",
+   "bron": "20269475",
+   "bronS": "DRAFT",
+   "duoNr": "20269552",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Eric Hilgersom",
+   "bron": "20269468",
+   "bronS": "DRAFT",
+   "duoNr": "20269554",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Brian Baal",
+   "bron": "20269459",
+   "bronS": "DRAFT",
+   "duoNr": "20269557",
+   "duoS": "SENT"
+  },
+  {
+   "klant": "Rutger Meijering",
+   "bron": "20269444",
+   "bronS": "DRAFT",
+   "duoNr": "20269562",
+   "duoS": "SENT"
+  }
+ ]
+}

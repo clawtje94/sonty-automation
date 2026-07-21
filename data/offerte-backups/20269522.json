@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20269522",
+  "documentId": "6dfc96f9-6de2-4df9-a1c0-6f11ce2c17ab",
+  "name": "Corwin  Verhoef",
+  "timestamp": "2026-07-13T07:31:01.140Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suneye\nBreedte: 4791 mm\nUitval: 2500 mm\nFrame kleur: RAL 9001\nKleur doek: NTB\nBediening: Handbediend\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 3104.5,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

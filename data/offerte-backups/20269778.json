@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20269778",
+  "documentId": "02d2b2cd-d0c0-4663-bbb9-ae16772da811",
+  "name": "Barbara Vervoort",
+  "timestamp": "2026-07-15T15:00:58.335Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "SunProject 100\nBreedte: 4400 mm\nUitval: 1150 mm\nFrame Kleur: Technisch aluminium\nKleur doek: NTB\nBediening: Handbediend\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1686.02,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + Montage uitvalscherm\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

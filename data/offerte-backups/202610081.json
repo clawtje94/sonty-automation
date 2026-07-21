@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202610081",
+  "documentId": "9bb7c1ce-6512-44d2-94c9-5c47cf477c5e",
+  "name": "Dennis Hulst",
+  "timestamp": "2026-07-20T07:31:00.598Z",
+  "lines": [
+    {
+      "units": 6,
+      "description": "Rolluik (RollSUPER)\nBreedte: 2100 mm\nHoogte: 1800 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 9010\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Motor + afstandsbediening\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1214.6,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 6,
+      "description": "Inmeten + montage rolluik solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

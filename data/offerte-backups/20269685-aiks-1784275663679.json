@@ -1,0 +1,250 @@
+{
+  "documentId": "1a999c17-a652-4e0b-a693-31f381791964",
+  "versionId": "c735781e-f738-48bd-a15a-16a58e170633",
+  "documentTitle": "Offerte #20269685",
+  "documentStatus": "DRAFT",
+  "documentNumber": "20269685",
+  "documentType": "QUOTATION",
+  "title": "Offerte #20269685",
+  "quotationNumber": "20269685",
+  "quotationTitle": "Offerte #20269685",
+  "quotationCreationTimestamp": 1784032149803,
+  "quotationExpirationTimestamp": 1786624149803,
+  "quotationStatus": "DRAFT",
+  "isoCurrency": "EUR",
+  "subjects": {
+    "leadConfiguration": "052eb909-8aad-43f3-a002-5637e22a4b43",
+    "contactPerson": "81400cb3-bc1f-4eb0-981e-5d6dd868d054"
+  },
+  "segments": {
+    "defaultTemplateContactPart": {
+      "type": "contactPerson",
+      "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+    },
+    "defaultSignaturePart": {
+      "type": "signature",
+      "data": {}
+    },
+    "defaultTemplateProfileLogo": {
+      "type": "companyProfileLogo",
+      "data": "![|6lh]($companyProfile.logo)"
+    },
+    "defaultTemplateProfileText": {
+      "type": "text",
+      "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+    },
+    "defaultTemplatePriceLineGroup": {
+      "type": "priceLineGroup",
+      "data": {
+        "lines": [
+          {
+            "units": 1,
+            "description": "**Waarom ROMA?**\nDuitse premiumkwaliteit, geleverd uit de eigen ROMA-fabriek:\n- Dikker, geëxtrudeerd aluminium: stabielere kast en geleiders, ook op grote maten\n- Dubbel gepoedercoat in plaats van natlak: dikkere laklaag die veel langer mooi blijft\n- Hogere windweerstandsklasse: kan meer wind aan en blijft ook bij stevige wind veilig in bedrijf\n- RAL-kleur naar keuze: 209 kleuren (mat en structuur) zonder meerprijs\n- Somfy motor met ingeleerde handzender af fabriek, 5 jaar fabrieksgarantie (7 jaar op solar)",
+            "pricePerUnit": 0,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 2,
+            "description": "**Roma zipSCREEN.2 (windvast ritsscreen)**\nType: screen afstandsbediening\nBreedte: 1850 mm\nHoogte: 1400 mm\nFrame Kleur: RAL 7016 (uit 209 RAL-kleuren, zonder meerprijs)\nKleur doek: NTB\nBediening: Afstandsbediening (Somfy IO)\nMotor: Somfy RS100 IO",
+            "pricePerUnit": 1552.5,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 2,
+            "description": "**Inmeten + montage screen**\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 195,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Roma zipSCREEN.2 (windvast ritsscreen)**\nType: screen afstandsbediening\nBreedte: 3850 mm\nHoogte: 1400 mm\nFrame Kleur: RAL 7016 (uit 209 RAL-kleuren, zonder meerprijs)\nKleur doek: NTB\nBediening: Afstandsbediening (Somfy IO)\nMotor: Somfy RS100 IO",
+            "pricePerUnit": 2198.8,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Inmeten + montage screen**\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 195,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": {
+          "name": "Hoogzomer-actie: 15% korting (geldig t/m 31 juli 2026)",
+          "amount": 15,
+          "type": "PERCENTAGE",
+          "vatPercentage": 21
+        }
+      }
+    }
+  },
+  "pricing": {
+    "total": 5005.4800000000005
+  },
+  "renderRows": [
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileLogo"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileText"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateContactPart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "quotationData"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "priceLineGroupCombined",
+              "target": "defaultTemplatePriceLineGroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "userDecline"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "signature",
+              "target": "defaultSignaturePart"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

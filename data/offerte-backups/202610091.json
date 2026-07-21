@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202610091",
+  "documentId": "bf7f770f-efb1-4c66-8a5c-3c5cdc3a61c3",
+  "name": "Antoine Emmers",
+  "timestamp": "2026-07-20T08:02:50.969Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Square 85/100\nBreedte: 1215 mm\nHoogte: 1850 mm\nKastmaat 105 mm\nFrame Kleur: RAL 9010\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 849.2,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

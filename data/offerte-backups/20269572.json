@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20269572",
+  "documentId": "1c7b7e4a-ee47-4973-b8bd-769e0342a6ab",
+  "name": "Henny Hoeksma",
+  "timestamp": "2026-07-13T11:01:18.062Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 1509 mm\nHoogte: 1509 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7021 structuur\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening bedraad\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1514.9,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

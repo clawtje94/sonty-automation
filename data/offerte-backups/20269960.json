@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20269960",
+  "documentId": "fb54f065-486d-4374-8522-0c66b015050d",
+  "name": "Rafioddin  SEDIQI",
+  "timestamp": "2026-07-18T07:31:13.892Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Square 85/100\nBreedte: 3114 mm\nHoogte: 1613 mm\nKastmaat 105 mm\nFrame Kleur: RAL 7016 structuur\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1149.5,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

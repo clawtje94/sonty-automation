@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202610073",
+  "documentId": "b3401990-7e43-4018-b243-140bed8cd839",
+  "name": "Henri Coelers",
+  "timestamp": "2026-07-20T07:31:12.629Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Square 85/100\nBreedte: 2701 mm\nHoogte: 1520 mm\nKastmaat 105 mm\nFrame Kleur: RAL 9007\nKleur doek: NTB\nOnderlat: Design\nBediening: Draaischakelaar\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 962.5,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

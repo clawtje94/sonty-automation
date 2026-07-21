@@ -6,6 +6,7 @@
 - **Slot-logica**: `scripts/ai-ks/showroom-booking.js` — alleen wo/vr/za (regel Daimy 17 juli; de Bookings-service staat di-za toe maar wij niet), uurgrid vanaf 09:30 (laatste start di-vr 15:30, za 14:30), min. 8u vooruit (policy PT8H), capaciteit 1 (slot vervalt als er al een showroomafspraak overlapt). Graph `getStaffAvailability` kan NIET met delegated token (403) — daarom zelf berekend uit service-uren minus bestaande afspraken; persoonlijke agenda's van staff zien we dus niet.
 - **bookings-api.js**: `annuleer()` toegevoegd (POST /cancel, mailt klant) + `serviceId` in afspraken(). Boeken zonder staff-toewijzing; Bookings mailt klant bevestiging + eigenaar (sendConfirmationsToOwner). E2E getest 21 juli: geboekt op echt slot → in agenda geverifieerd → geannuleerd (testmails naar clawtje94@proton.me).
 - Beide daemons herstart met de nieuwe tools (nl.sonty.sonny + nl.sonty.email).
+- **TESTFASE (Daimy 21 juli, "voor de rest mag je dit nog niet gebruiken")**: zelf boeken werkt alleen voor whitelist-testnummers; alle andere klanten krijgen de boekingslink-flow. AAN-knop voor iedereen: `touch scripts/ai-ks/.showroom-live` (+ daemons kickstarten) — pas na expliciet akkoord Daimy.
 
 ## CRASH + DAEMON-LES (21 juli)
 - Mac mini kernel-panicked 21 juli 10:06 (zone map exhausted, kalloc.1024 20GB — macOS-geheugenlek na 11 dagen uptime). Auto-reboot 10:07. macOS-update staat sinds 14 juli klaar; Daimy wil later installeren+herstarten.

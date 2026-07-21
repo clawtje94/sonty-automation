@@ -84,7 +84,8 @@ async function poll() {
           }
 
           const timestamp = new Date(msg.date * 1000).toISOString();
-          const text = msg.text || msg.caption || (msg.photo ? '[foto]' : msg.sticker ? '[sticker]' : msg.voice ? '[spraakbericht]' : msg.document ? `[bestand: ${msg.document.file_name || 'onbekend'}]` : '[geen tekst]');
+          const fotoTag = msg.photo ? `[foto file_id:${msg.photo[msg.photo.length - 1].file_id}]` : null;
+          const text = msg.text || (fotoTag ? (msg.caption ? `${fotoTag} ${msg.caption}` : fotoTag) : null) || msg.caption || (msg.sticker ? '[sticker]' : msg.voice ? '[spraakbericht]' : msg.document ? `[bestand: ${msg.document.file_name || 'onbekend'}]` : '[geen tekst]');
           // Reply/quote-context meenemen: als Daimy op een bericht reageert weet
           // Claude anders niet waarop het antwoord slaat.
           let replyCtx = '';

@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20269749",
+  "documentId": "c41fa154-4499-41fb-9e66-fd91d956d90f",
+  "name": "Maroescha  Schaareman",
+  "timestamp": "2026-07-15T11:00:58.500Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "SunElite\nBreedte: 5000 mm\nUitval: 2500 mm\nFrame Kleur: RAL 9007\nKleur doek: NTB\nBediening: Draaischakelaar\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product.\n- 7 jaar op de motor",
+      "pricePerUnit": 4068.5,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

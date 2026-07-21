@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "20269429",
+  "documentId": "e9ccd77f-5d96-475b-824f-3ecab6750705",
+  "name": "Frank Meijer",
+  "timestamp": "2026-07-11T15:00:39.654Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 3100mm\n- Uitval: 1150 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

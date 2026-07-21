@@ -218,8 +218,11 @@ async function main() {
       const desc = item.description || '';
       const opmerking = desc.match(/Opmerking:\s*([\s\S]*?)(?=\n\d+x |\n*$)/i)?.[1]?.trim() || '';
 
-      const firstName = desc.match(/Voornaam:\s*([^\n]+)/i)?.[1]?.trim() || item.summary.split(' ')[0];
-      const lastName = desc.match(/Achternaam:\s*([^\n]+)/i)?.[1]?.trim() || item.summary.split(' ').slice(1).join(' ');
+      let firstName = desc.match(/Voornaam:\s*([^\n]+)/i)?.[1]?.trim() || item.summary.split(' ')[0];
+      let lastName = desc.match(/Achternaam:\s*([^\n]+)/i)?.[1]?.trim() || item.summary.split(' ').slice(1).join(' ');
+      // Eén-woord-namen ("Droog", "Caron"): Gripp EIST lastname — gebruik dan de hele naam
+      // als achternaam en laat de voornaam leeg (4x mislukt op 21 juli).
+      if (!lastName) { lastName = firstName; firstName = ''; }
       const email = item.fields?.email || desc.match(/E-mailadres:\s*([^\n]+)/i)?.[1]?.trim() || '';
       const phone = item.fields?.phone || desc.match(/Telefoonnummer:\s*([^\n]+)/i)?.[1]?.trim() || '';
       const street = desc.match(/Straatnaam:\s*([^\n]+)/i)?.[1]?.trim() || '';

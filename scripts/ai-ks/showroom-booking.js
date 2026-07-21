@@ -76,6 +76,11 @@ async function boekShowroom({ start, klantNaam, klantMail, klantTel, notitie }) 
   const res = await b.boek(BIZ, {
     serviceId: SERVICE_ID, start: slot.start, minuten: DUUR_MIN,
     klantNaam, klantMail, klantTel, notitie, tijdzone: 'UTC',
+    // Verplichte custom vraag van de showroom-service (zichtbaar bij de afspraak in de UI)
+    vragen: klantTel ? [{
+      questionId: '14affa07-0ce8-4ec3-a573-3646acb0dc5d', question: 'Telefoonnummer',
+      answer: klantTel, answerInputType: 'text', isRequired: true,
+    }] : undefined,
   });
   return { geboekt: slot.omschrijving, afspraakId: res.id, adres: ADRES };
 }

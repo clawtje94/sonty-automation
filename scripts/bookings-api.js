@@ -92,18 +92,41 @@ async function afspraken(biz = SHOWROOM, { start, end } = {}) {
   }));
 }
 
+// Klant opzoeken in de klantenlijst van de kalender, of aanmaken als hij er nog niet staat.
+// Zonder echte klantkaart maakt Graph een synthetisch customerId aan: de afspraak oogt dan
+// "blanco" in de Bookings-UI en de klant is niet terugvindbaar (ontdekt 21 juli, test Daimy).
+async function vindOfMaakKlant(biz, { naam, mail, tel }) {
+  let ep = `/solutions/bookingBusinesses/${encodeURIComponent(biz)}/customers`;
+  for (let p = 0; p < 25 && ep; p++) {
+    const d = await graph('GET', ep);
+    const hit = (d.value || []).find(c => (c.emailAddress || '').toLowerCase() === mail.toLowerCase());
+    if (hit) return hit.id;
+    ep = d['@odata.nextLink'] ? d['@odata.nextLink'].replace('https://graph.microsoft.com/v1.0', '') : null;
+  }
+  const nieuw = await graph('POST', `/solutions/bookingBusinesses/${encodeURIComponent(biz)}/customers`, {
+    '@odata.type': '#microsoft.graph.bookingCustomer', displayName: naam, emailAddress: mail,
+    ...(tel ? { phones: [{ number: tel, type: 'mobile' }] } : {}),
+  });
+  return nieuw.id;
+}
+
 // Nieuwe afspraak boeken. Verplicht: serviceId, start (ISO), klantNaam, klantMail.
-async function boek(biz = SHOWROOM, { serviceId, start, minuten = 30, klantNaam, klantMail, klantTel, notitie, tijdzone = 'W. Europe Standard Time' }) {
+// notitie → serviceNotes (interne notitie die het team bij de afspraak ziet);
+// vragen → customQuestionAnswers van de service (bv. de verplichte vraag "Telefoonnummer").
+async function boek(biz = SHOWROOM, { serviceId, start, minuten = 30, klantNaam, klantMail, klantTel, notitie, vragen, tijdzone = 'W. Europe Standard Time' }) {
   if (!serviceId || !start || !klantNaam || !klantMail) throw new Error('boek(): serviceId, start, klantNaam en klantMail zijn verplicht');
+  const customerId = await vindOfMaakKlant(biz, { naam: klantNaam, mail: klantMail, tel: klantTel });
   const eind = new Date(new Date(start).getTime() + minuten * 60000).toISOString();
   return graph('POST', `/solutions/bookingBusinesses/${encodeURIComponent(biz)}/appointments`, {
     serviceId,
     startDateTime: { dateTime: start, timeZone: tijdzone },
     endDateTime: { dateTime: eind, timeZone: tijdzone },
+    serviceNotes: notitie || '',
     customers: [{
       '@odata.type': '#microsoft.graph.bookingCustomerInformation',
-      name: klantNaam, emailAddress: klantMail, phone: klantTel || '',
+      customerId, name: klantNaam, emailAddress: klantMail, phone: klantTel || '',
       notes: notitie || '',
+      ...(vragen ? { customQuestionAnswers: vragen } : {}),
     }],
   });
 }

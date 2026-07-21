@@ -79,3 +79,6 @@
 - (2026-07-21) [team-notitie bij gesprek +31623602210] wat gaat hier nou niet goed? lees het gesprek even terug antwoord mij maar niet naar de klant
 - (2026-07-21) [team-notitie bij gesprek +31615586434] het is belangrijk als mensen een voorkeurs datum voor inmeten doorgeven dat jorren en tanya hier ook van op de hoogte zijn!
 - (2026-07-21) [team-notitie bij gesprek +31612655013] waarom sluit je het ticket niet?
+- (2026-07-21) [team-notitie bij gesprek +31615586434] het is belangrijk als mensen een voorkeurs datum voor inmeten doorgeven dat jorren en tanya hier ook van op de hoogte zijn!
+- (2026-07-21) [team-notitie bij gesprek +31612655013] waarom sluit je het ticket niet?
+- (2026-07-21) [team-notitie bij gesprek +31615586434] het is belangrijk als mensen een voorkeurs datum voor inmeten doorgeven dat jorren en tanya hier ook van op de hoogte zijn!

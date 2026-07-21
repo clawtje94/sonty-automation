@@ -15,6 +15,23 @@ const DAGNAAM = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijd
 // Laatste starttijd zo dat de afspraak binnen de service-uren past (di-vr tot 17:00, za tot 16:00)
 const UREN = { 3: ['09:30', '16:15'], 5: ['09:30', '16:15'], 6: ['09:30', '15:15'] };
 const MIN_VOORUIT_MS = 8 * 3600 * 1000;
+// Showroom-medewerkers van de service, in toewijs-voorkeursvolgorde (eerste vrije wordt
+// toegewezen; volgorde aanpasbaar na feedback Daimy): Nanny (binnenhuis), Jaimy, Joey.
+const MEDEWERKERS = [
+  { id: '2af56e85-3e58-41c3-b050-3c8ede266498', naam: 'Nanny' },
+  { id: 'bf3e490b-8add-4ef8-a590-dd837b11e378', naam: 'Jaimy' },
+  { id: '445fbea9-68c9-46f4-b72a-efa451762ac3', naam: 'Joey' },
+];
+
+// Eerste medewerker die in de Bookings-agenda geen overlappende afspraak heeft.
+function kiesMedewerker(afsprakenDag, startMs, eindMs) {
+  const bezig = new Set();
+  for (const a of afsprakenDag) {
+    const s = parseUtc(a.start), e = parseUtc(a.eind);
+    if (!isNaN(s) && !isNaN(e) && s < eindMs && startMs < e) (a.staffIds || []).forEach(id => bezig.add(id));
+  }
+  return MEDEWERKERS.find(m => !bezig.has(m.id)) || null;
+}
 
 // ── Amsterdamse tijd ↔ UTC ──
 function nlDelen(dt) {
@@ -73,7 +90,13 @@ async function boekShowroom({ start, klantNaam, klantMail, klantTel, notitie }) 
   const slots = await vrijeSlots({ dagenVooruit: 60 });
   const slot = slots.find(s => parseUtc(s.start) === parseUtc(start));
   if (!slot) return { error: 'Dit tijdstip is geen vrij slot (bezet, buiten wo/vr/za-uren of korter dan 8 uur vooruit). Vraag showroom_beschikbaarheid opnieuw op en kies een slot daaruit.' };
+  const startMs = parseUtc(slot.start), eindMs = startMs + DUUR_MIN * 60000;
+  const dagAfspraken = await b.afspraken(BIZ, {
+    start: new Date(startMs - 12 * 3600000).toISOString(), end: new Date(eindMs + 12 * 3600000).toISOString(),
+  });
+  const medewerker = kiesMedewerker(dagAfspraken, startMs, eindMs);
   const res = await b.boek(BIZ, {
+    ...(medewerker ? { staffIds: [medewerker.id] } : {}),
     serviceId: SERVICE_ID, start: slot.start, minuten: DUUR_MIN,
     klantNaam, klantMail, klantTel, notitie, tijdzone: 'UTC',
     // Verplichte custom vraag van de showroom-service (zichtbaar bij de afspraak in de UI)
@@ -82,7 +105,7 @@ async function boekShowroom({ start, klantNaam, klantMail, klantTel, notitie }) 
       answer: klantTel, answerInputType: 'text', isRequired: true,
     }] : undefined,
   });
-  return { geboekt: slot.omschrijving, afspraakId: res.id, adres: ADRES };
+  return { geboekt: slot.omschrijving, afspraakId: res.id, adres: ADRES, medewerker: medewerker ? medewerker.naam : 'nog niet toegewezen (team wijst toe)' };
 }
 
 module.exports = { vrijeSlots, boekShowroom, ADRES, BIZ, SERVICE_ID };

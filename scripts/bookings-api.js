@@ -85,6 +85,7 @@ async function afspraken(biz = SHOWROOM, { start, end } = {}) {
     eind: a.endDateTime?.dateTime,
     dienst: a.serviceName,
     serviceId: a.serviceId,
+    staffIds: a.staffMemberIds || [],
     klant: (a.customers?.[0]?.name) || a.customerName || null,
     mail: (a.customers?.[0]?.emailAddress) || a.customerEmailAddress || null,
     tel: (a.customers?.[0]?.phone) || a.customerPhone || null,
@@ -113,7 +114,7 @@ async function vindOfMaakKlant(biz, { naam, mail, tel }) {
 // Nieuwe afspraak boeken. Verplicht: serviceId, start (ISO), klantNaam, klantMail.
 // notitie → serviceNotes (interne notitie die het team bij de afspraak ziet);
 // vragen → customQuestionAnswers van de service (bv. de verplichte vraag "Telefoonnummer").
-async function boek(biz = SHOWROOM, { serviceId, start, minuten = 30, klantNaam, klantMail, klantTel, notitie, vragen, tijdzone = 'W. Europe Standard Time' }) {
+async function boek(biz = SHOWROOM, { serviceId, start, minuten = 30, klantNaam, klantMail, klantTel, notitie, vragen, staffIds, tijdzone = 'W. Europe Standard Time' }) {
   if (!serviceId || !start || !klantNaam || !klantMail) throw new Error('boek(): serviceId, start, klantNaam en klantMail zijn verplicht');
   const customerId = await vindOfMaakKlant(biz, { naam: klantNaam, mail: klantMail, tel: klantTel });
   const eind = new Date(new Date(start).getTime() + minuten * 60000).toISOString();
@@ -122,6 +123,7 @@ async function boek(biz = SHOWROOM, { serviceId, start, minuten = 30, klantNaam,
     startDateTime: { dateTime: start, timeZone: tijdzone },
     endDateTime: { dateTime: eind, timeZone: tijdzone },
     serviceNotes: notitie || '',
+    ...(staffIds && staffIds.length ? { staffMemberIds: staffIds } : {}),
     customers: [{
       '@odata.type': '#microsoft.graph.bookingCustomerInformation',
       customerId, name: klantNaam, emailAddress: klantMail, phone: klantTel || '',

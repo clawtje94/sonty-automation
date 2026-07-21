@@ -8,6 +8,10 @@
 - Beide daemons herstart met de nieuwe tools (nl.sonty.sonny + nl.sonty.email).
 - **TESTFASE (Daimy 21 juli, "voor de rest mag je dit nog niet gebruiken")**: zelf boeken werkt alleen voor whitelist-testnummers; alle andere klanten krijgen de boekingslink-flow. AAN-knop voor iedereen: `touch scripts/ai-ks/.showroom-live` (+ daemons kickstarten) — pas na expliciet akkoord Daimy.
 
+## WHITELIST-VOORRANG + QA-LEERLUS (21 juli)
+- **Whitelist-voorrang** (Daimy: "op mij en Joey z'n nummer mag je direct antwoorden"): daemon.js sorteert de wachtrij nu op whitelist eerst, dan verse @sonny-notities, dan de rest. Overige klanten ongewijzigd qua tijden/snelheid (REPLY_DELAY blijft uit, e-mail 90-120 min blijft).
+- **QA-leerlus** (Daimy: "leert die QA-poort zich ook te verbeteren?"): agent.js logt elke QA-afkeuring naar data/ai-ks/qa-afkeuringen.jsonl; `qa-leren.js` (launchd nl.sonty.qa-leren, dagelijks 07:45) destilleert met Sonnet terugkerende patronen (≥2x, nog niet gedekt, max 3/dag) tot leerpunten in leerpunten.md (= direct in de system-prompt) + Telegram-melding aan Daimy zodat hij kan schrappen. Drempel: min. 3 afkeuringen/7 dagen.
+
 ## CRASH + DAEMON-LES (21 juli)
 - Mac mini kernel-panicked 21 juli 10:06 (zone map exhausted, kalloc.1024 20GB — macOS-geheugenlek na 11 dagen uptime). Auto-reboot 10:07. macOS-update staat sinds 14 juli klaar; Daimy wil later installeren+herstarten.
 - LES: oude Telegram-berichten ("Mail deamon stoppen", 19 juli) zijn geen actuele opdracht — mail-daemon was bewust weer aan; niet meer stoppen o.b.v. oude inbox-regels (memory feedback_oude_telegram_berichten).

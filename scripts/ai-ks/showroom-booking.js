@@ -94,10 +94,14 @@ async function vrijeSlots({ dagenVooruit = 14, binnendecoratie = false } = {}) {
 }
 
 // ── Boeken (alleen op een vrij slot) ──
-// Accepteert zowel ISO-UTC als NL-notatie "YYYY-MM-DD HH:MM" (zoals de beschikbaarheidslijst toont).
+// Tijd-interpretatie: alles ZONDER expliciete tijdzone (Z of +hh:mm) is Nederlandse tijd,
+// seconden optioneel — het model gaf "2026-07-30T14:30:00" door en bedoelde 14:30 NL
+// (mislukte verzetting 21 juli). Alleen met Z/offset wordt het als ISO-UTC gelezen.
 function normaliseerStart(start) {
-  const m = /^(\d{4}-\d{2}-\d{2})[T ](\d{2}:\d{2})$/.exec(String(start).trim());
-  return m ? amsterdamNaarUtc(m[1], m[2]).toISOString() : start;
+  const s = String(start).trim();
+  if (/Z$|[+-]\d{2}:?\d{2}$/.test(s)) return s;
+  const m = /^(\d{4}-\d{2}-\d{2})[T ](\d{2}:\d{2})(?::\d{2})?$/.exec(s);
+  return m ? amsterdamNaarUtc(m[1], m[2]).toISOString() : s;
 }
 
 async function boekShowroom({ start, klantNaam, klantMail, klantTel, notitie, binnendecoratie = false }) {

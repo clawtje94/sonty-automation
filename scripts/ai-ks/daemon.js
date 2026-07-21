@@ -211,7 +211,7 @@ async function verwerkSonnyNotities(t, teamNotities) {
   // eerdere (?!\d)-filter negeerde daardoor Daimy's echte notities, ticket 966969445 17 juli).
   // Anti-loop komt van: ✅ uitsluiten + de teamNotities-filter die alle eigen bot-notities
   // (Uitgevoerde acties / ✅ Verwerkt / AI-KS / schaduwmodus) er al uit haalt.
-  const sonnyNotes = teamNotities.filter(n => /@sonny/i.test(n.tekst) && !n.tekst.includes('✅'));
+  const sonnyNotes = teamNotities.filter(n => /@s[ou]nny/i.test(n.tekst) && !n.tekst.includes('✅'));
   if (!sonnyNotes.length) return instructies;
   let st;
   try { st = JSON.parse(fs.readFileSync(NOTITIE_STATE, 'utf8')); } catch { st = {}; }
@@ -219,7 +219,7 @@ async function verwerkSonnyNotities(t, teamNotities) {
   for (const n of sonnyNotes) {
     const key = `${t.id}:${n.tijd}`;
     if (st[key]) continue;
-    const punt = n.tekst.replace(/@sonny(747786)?[,:]?\s*/i, '').trim();
+    const punt = n.tekst.replace(/@s[ou]nny(747786)?[,:]?\s*/i, '').trim();
     const wie = t.contact?.full_name || t.contact?.phone || t.id;
     // STOPCOMMANDO: "@sonny stop" / "niet verder (gaan) met dit gesprek" / "neem over" →
     // gesprek uit de actieve lijst halen; de AI antwoordt daar dan niet meer. Geen leerpunt.
@@ -818,7 +818,7 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
   }));
   const verseNotitie = (t) => (t._msgs?.data || []).some(m => {
     const tekst = String(m.body || m.message || '');
-    return (m.internal_note || m.type === 'NOTE') && /@sonny(?!\d)/i.test(tekst) &&
+    return (m.internal_note || m.type === 'NOTE') && /@s[ou]nny(?!\d)/i.test(tekst) &&
       !tekst.includes('✅') && !nStat[`${t.id}:${m.created_at}`];
   });
   // WHITELIST-VOORRANG (Daimy 21 juli: "op mij en Joey z'n nummer mag je direct antwoorden"):

@@ -252,5 +252,48 @@
   "kanaal": "EMAIL",
   "status": "klaar",
   "aangemaakt": 1784542327619
+ },
+ {
+  "lcId": "fd4da343-df09-4b8d-815e-9ee7a8455396",
+  "ticketId": 967907414,
+  "klantNaam": "Jarson Menckeberg",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 2440,
+    "hoogteMM": 1120,
+    "bediening": "solar",
+    "framekleur": "antraciet",
+    "aantal": 1
+   },
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 2730,
+    "hoogteMM": 1120,
+    "bediening": "solar",
+    "framekleur": "antraciet",
+    "aantal": 1
+   },
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 2350,
+    "hoogteMM": 1120,
+    "bediening": "solar",
+    "framekleur": "antraciet",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 3400,
+    "hoogteMM": 1640,
+    "bediening": "solar",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1784641636492
  }
 ]

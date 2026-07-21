@@ -176,7 +176,7 @@ async function verwerk(ticketId) {
     .filter(m => m.tekst).sort((a, b) => String(a.tijd).localeCompare(String(b.tijd)));
   // @sonny-notities van Daimy/het team op dit ticket = sturing voor Sunny (net als op WhatsApp).
   const teamNotities = (msgs?.data || [])
-    .filter(m => (m.type === 'NOTE' || m.internal_note) && /@sonny/i.test(m.body || m.message || ''))
+    .filter(m => (m.type === 'NOTE' || m.internal_note) && /@s[ou]nny/i.test(m.body || m.message || ''))
     .map(m => ({ tijd: m.created_at, tekst: clean(m.body || m.message) }))
     .sort((a, b) => String(a.tijd).localeCompare(String(b.tijd)));
   if (!rijen.length || rijen[rijen.length - 1].van !== 'klant') return { ticketId, resultaat: 'laatste bericht niet van klant — overgeslagen' };
@@ -255,7 +255,7 @@ async function verwerkNotities(t, rowsAll) {
   const notes = (rowsAll || [])
     .filter(m => m.type === 'NOTE' || m.internal_note)
     .map(m => ({ tijd: m.created_at, tekst: clean(m.body || m.message), userId: m.user_id || null }))
-    .filter(n => /@sonny/i.test(n.tekst) && !n.tekst.includes('✅'))
+    .filter(n => /@s[ou]nny/i.test(n.tekst) && !n.tekst.includes('✅'))
     .sort((a, b) => String(a.tijd).localeCompare(String(b.tijd)));
   if (!notes.length) return;
   const st = loadJson(NOTITIE_STATE);
@@ -267,7 +267,7 @@ async function verwerkNotities(t, rowsAll) {
   const teDoen = [];
   for (const n of nieuwe) {
     const key = `${t.id}:${n.tijd}`;
-    const punt = n.tekst.replace(/@sonny(747786)?[,:]?\s*/i, '').trim();
+    const punt = n.tekst.replace(/@s[ou]nny(747786)?[,:]?\s*/i, '').trim();
     // Stokoude notities (van vóór deze functie bestond) stil markeren.
     if ((nuAms() - Date.parse(String(n.tijd).replace(' ', 'T'))) / 86400000 > NOTITIE_MAX_DAGEN) { st[key] = 'te-oud'; continue; }
     // STOPCOMMANDO — zelfde patronen als WhatsApp (géén los "stop": "stopcontact" is er geen).

@@ -84,6 +84,7 @@ async function afspraken(biz = SHOWROOM, { start, end } = {}) {
     start: a.startDateTime?.dateTime,
     eind: a.endDateTime?.dateTime,
     dienst: a.serviceName,
+    serviceId: a.serviceId,
     klant: (a.customers?.[0]?.name) || a.customerName || null,
     mail: (a.customers?.[0]?.emailAddress) || a.customerEmailAddress || null,
     tel: (a.customers?.[0]?.phone) || a.customerPhone || null,
@@ -107,7 +108,11 @@ async function boek(biz = SHOWROOM, { serviceId, start, minuten = 30, klantNaam,
   });
 }
 
-module.exports = { businesses, services, staff, afspraken, boek, SHOWROOM };
+// Afspraak annuleren (stuurt de klant een annuleringsmail via Bookings).
+const annuleer = (biz = SHOWROOM, id, bericht = 'Deze afspraak is geannuleerd.') =>
+  graph('POST', `/solutions/bookingBusinesses/${encodeURIComponent(biz)}/appointments/${encodeURIComponent(id)}/cancel`, { cancellationMessage: bericht });
+
+module.exports = { businesses, services, staff, afspraken, boek, annuleer, SHOWROOM };
 
 // ── CLI ──
 if (require.main === module) {

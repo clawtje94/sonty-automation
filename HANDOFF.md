@@ -1,4 +1,15 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-19)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-21)
+
+## SHOWROOMAFSPRAKEN DOOR DE AI (21 juli)
+- **Nieuwe tools** `showroom_beschikbaarheid` + `showroom_afspraak_boeken` (tools.js) voor WhatsApp- én mail-daemon: bot vraagt dagvoorkeur, stelt 2-3 vrije tijden voor en boekt ECHT in MS Bookings. Boekingslink alleen nog als klant zelf online wil kiezen.
+- **Kalender**: `SontyMontage1@sontymontage.nl` (dé operationele kalender — daar staan ook inmeten/montage), service "Afspraak showroom Frijdastraat" `b3b00294-076c-43b4-858c-76332f08d775`, 45 min. NIET AfspraakshowroomSonty@sonty.nl (vrijwel leeg).
+- **Slot-logica**: `scripts/ai-ks/showroom-booking.js` — alleen wo/vr/za (regel Daimy 17 juli; de Bookings-service staat di-za toe maar wij niet), uurgrid vanaf 09:30 (laatste start di-vr 15:30, za 14:30), min. 8u vooruit (policy PT8H), capaciteit 1 (slot vervalt als er al een showroomafspraak overlapt). Graph `getStaffAvailability` kan NIET met delegated token (403) — daarom zelf berekend uit service-uren minus bestaande afspraken; persoonlijke agenda's van staff zien we dus niet.
+- **bookings-api.js**: `annuleer()` toegevoegd (POST /cancel, mailt klant) + `serviceId` in afspraken(). Boeken zonder staff-toewijzing; Bookings mailt klant bevestiging + eigenaar (sendConfirmationsToOwner). E2E getest 21 juli: geboekt op echt slot → in agenda geverifieerd → geannuleerd (testmails naar clawtje94@proton.me).
+- Beide daemons herstart met de nieuwe tools (nl.sonty.sonny + nl.sonty.email).
+
+## CRASH + DAEMON-LES (21 juli)
+- Mac mini kernel-panicked 21 juli 10:06 (zone map exhausted, kalloc.1024 20GB — macOS-geheugenlek na 11 dagen uptime). Auto-reboot 10:07. macOS-update staat sinds 14 juli klaar; Daimy wil later installeren+herstarten.
+- LES: oude Telegram-berichten ("Mail deamon stoppen", 19 juli) zijn geen actuele opdracht — mail-daemon was bewust weer aan; niet meer stoppen o.b.v. oude inbox-regels (memory feedback_oude_telegram_berichten).
 
 ## E-MAIL-KLANTENSERVICE LIVE (19 juli)
 - **E-mail-daemon draait permanent**: launchd `nl.sonty.email` (KeepAlive, elke 90s) → `scripts/ai-ks/email-daemon.js`. Verwerkt open Aanvragen-tickets die aan Sunny of aan NIEMAND toegewezen zijn; **team-toegewezen tickets (bv. Mens nodig 431872) blijft hij af** (filter: `user===SONNY || (!user && !team)`). Antwoorden → in-thread + toewijzen aan Sunny (747786) + sluiten; kan-niet → team Mens nodig + label. Toegevoegd aan health-check (`nl.sonty.email`, maxLogAgeH 1) en aan het dagrapport (e-mail logt naar log.jsonl met `email:true`).

@@ -131,6 +131,31 @@ const TOOL_DEFS = [
     },
   },
   {
+    name: 'showroom_beschikbaarheid',
+    description: 'Haal de vrije tijden op voor een showroomafspraak (Frijdastraat 8F, 2288 EX Rijswijk — 45 minuten, alleen woensdag/vrijdag/zaterdag, uitsluitend op afspraak). Gebruik dit zodra een klant naar de showroom/winkel wil komen: vraag eerst naar welke dag de voorkeur uitgaat, en stel daarna 2-3 concrete tijden uit deze lijst voor. Noem NOOIT tijden uit je hoofd.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        dagenVooruit: { type: 'integer', description: 'Hoeveel dagen vooruit kijken (standaard 14, max 60)' },
+      },
+    },
+  },
+  {
+    name: 'showroom_afspraak_boeken',
+    description: 'Boek de showroomafspraak ECHT in de agenda. Alleen aanroepen nadat de klant een concreet tijdstip uit showroom_beschikbaarheid heeft gekozen én je naam en e-mailadres hebt (e-mail is verplicht: daar komt de bevestiging binnen). Na het boeken: bevestig dag + tijd + adres (Frijdastraat 8F, 2288 EX Rijswijk) en zeg dat de bevestiging per mail komt. Wil de klant liever zelf een moment kiezen, dan mag je ook de boekingslink sturen.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        start: { type: 'string', description: 'Het ISO-starttijdstip (veld "start") van het gekozen slot uit showroom_beschikbaarheid — nooit zelf construeren' },
+        klantNaam: { type: 'string' },
+        klantMail: { type: 'string', description: 'E-mailadres van de klant (verplicht, voor de bevestigingsmail)' },
+        klantTel: { type: 'string' },
+        notitie: { type: 'string', description: 'Waar komt de klant voor (producten, situatie) — dit ziet het showroomteam vooraf' },
+      },
+      required: ['start', 'klantNaam', 'klantMail'],
+    },
+  },
+  {
     name: 'escaleren_naar_mens',
     description: 'Draag het gesprek over aan een medewerker. Gebruik dit bij: boze/ontevreden klanten, klachten over uitgevoerd werk, complexe technische situaties die je niet zeker weet, kortingsonderhandeling boven je mandaat, juridische dreigingen, of als de klant expliciet om een mens vraagt. Zet stil=true als je het antwoord simpelweg niet weet: dan stuur je de klant NIETS en blijft het gesprek open staan voor een collega (schrijf dan ook geen antwoordtekst meer).',
     input_schema: {
@@ -250,6 +275,25 @@ async function runTool(name, input, ctx) {
       return JSON.stringify({ status: 'IN_BEHANDELING', opmerking: `De offerte wordt aangemaakt (±5 minuten). De klant krijgt de link daarna AUTOMATISCH ${ctx.kanaal === 'EMAIL' ? 'per mail' : 'hier op WhatsApp'} — zeg dat erbij en beloof geen exacte tijd korter dan dat.` });
     }
     return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets aangemaakt. Zeg dat de offerte zo snel mogelijk volgt via een collega.' });
+  }
+  if (name === 'showroom_beschikbaarheid') {
+    const { vrijeSlots } = require('./showroom-booking.js');
+    const dagen = Math.min(Math.max(input.dagenVooruit || 14, 1), 60);
+    const slots = await vrijeSlots({ dagenVooruit: dagen });
+    return JSON.stringify({
+      slots: slots.slice(0, 30),
+      opmerking: 'Showroom is uitsluitend op afspraak (wo/vr/za). Stel 2-3 tijden voor die passen bij de voorkeur van de klant; boek pas na expliciete keuze van de klant.',
+    });
+  }
+  if (name === 'showroom_afspraak_boeken') {
+    ctx.acties.push({ type: 'showroom_afspraak', ...input });
+    if (CFG.MODE === 'live' || ctx.liveTest) {
+      const { boekShowroom } = require('./showroom-booking.js');
+      const res = await boekShowroom(input).catch(e => ({ error: e.message }));
+      if (res.error) return JSON.stringify({ status: 'MISLUKT', fout: res.error, opmerking: 'Niet geboekt. Is het slot net bezet geraakt: bied andere tijden aan uit showroom_beschikbaarheid. Blijft het misgaan: zeg dat een collega de afspraak inplant en roep escaleren_naar_mens aan.' });
+      return JSON.stringify({ status: 'GEBOEKT', ...res, opmerking: `De afspraak staat echt in de agenda (${res.geboekt}). Bevestig de klant dag + tijd + adres en dat de bevestiging per mail komt.` });
+    }
+    return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets geboekt. Zeg dat een collega de afspraak bevestigt, of stuur de boekingslink zodat de klant zelf kan boeken.' });
   }
   if (name === 'escaleren_naar_mens') {
     ctx.acties.push({ type: 'escalatie', ...input });

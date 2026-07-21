@@ -16,22 +16,28 @@ const DAGNAAM = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijd
 // Laatste starttijd zo dat de afspraak binnen de service-uren past (di-vr tot 17:00, za tot 16:00)
 const UREN = { 2: ['09:30', '16:15'], 3: ['09:30', '16:15'], 4: ['09:30', '16:15'], 5: ['09:30', '16:15'], 6: ['09:30', '15:15'] };
 const MIN_VOORUIT_MS = 8 * 3600 * 1000;
-// Showroom-medewerkers van de service, in toewijs-voorkeursvolgorde (eerste vrije wordt
-// toegewezen; volgorde aanpasbaar na feedback Daimy): Nanny (binnenhuis), Jaimy, Joey.
-const MEDEWERKERS = [
-  { id: '2af56e85-3e58-41c3-b050-3c8ede266498', naam: 'Nanny' },
-  { id: 'bf3e490b-8add-4ef8-a590-dd837b11e378', naam: 'Jaimy' },
-  { id: '445fbea9-68c9-46f4-b72a-efa451762ac3', naam: 'Joey' },
-];
+// Medewerker-pools (Daimy 21 juli): BINNENRAAMDECORATIE (gordijnen, vitrage, jaloezieën,
+// plissé, shutters, rolgordijnen binnen e.d.) ALTIJD bij Nanny; al het andere (zonwering,
+// rolluiken, horren enz.) bij Jorren, Joey of Jaimy (eerste vrije, in die volgorde).
+const POOLS = {
+  binnendecoratie: [
+    { id: '2af56e85-3e58-41c3-b050-3c8ede266498', naam: 'Nanny' },
+  ],
+  zonwering: [
+    { id: '0cfadcc6-786c-4597-b128-20efd15d5c07', naam: 'Jorren' },
+    { id: '445fbea9-68c9-46f4-b72a-efa451762ac3', naam: 'Joey' },
+    { id: 'bf3e490b-8add-4ef8-a590-dd837b11e378', naam: 'Jaimy' },
+  ],
+};
 
-// Eerste medewerker die in de Bookings-agenda geen overlappende afspraak heeft.
-function kiesMedewerker(afsprakenDag, startMs, eindMs) {
+// Eerste medewerker uit de juiste pool die geen overlappende afspraak in de Bookings-agenda heeft.
+function kiesMedewerker(afsprakenDag, startMs, eindMs, binnendecoratie) {
   const bezig = new Set();
   for (const a of afsprakenDag) {
     const s = parseUtc(a.start), e = parseUtc(a.eind);
     if (!isNaN(s) && !isNaN(e) && s < eindMs && startMs < e) (a.staffIds || []).forEach(id => bezig.add(id));
   }
-  return MEDEWERKERS.find(m => !bezig.has(m.id)) || null;
+  return (binnendecoratie ? POOLS.binnendecoratie : POOLS.zonwering).find(m => !bezig.has(m.id)) || null;
 }
 
 // ── Amsterdamse tijd ↔ UTC ──
@@ -60,7 +66,7 @@ const fmtMin = (t) => `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t
 const parseUtc = (s) => Date.parse(String(s).replace(/\.\d+Z?$/, 'Z').replace(/([^Z])$/, '$1Z'));
 
 // ── Vrije slots komende `dagenVooruit` dagen ──
-async function vrijeSlots({ dagenVooruit = 14 } = {}) {
+async function vrijeSlots({ dagenVooruit = 14, binnendecoratie = false } = {}) {
   const nu = Date.now();
   const alles = await b.afspraken(BIZ, {
     start: new Date(nu).toISOString(),
@@ -79,6 +85,8 @@ async function vrijeSlots({ dagenVooruit = 14 } = {}) {
       if (start.getTime() - nu < MIN_VOORUIT_MS) continue;
       const eind = start.getTime() + DUUR_MIN * 60000;
       if (bezet.some(([s, e]) => s < eind && start.getTime() < e)) continue;
+      // De juiste medewerker moet ook vrij zijn (binnendecoratie = Nanny; anders Jorren/Joey/Jaimy)
+      if (!kiesMedewerker(alles, start.getTime(), eind, binnendecoratie)) continue;
       slots.push({ start: start.toISOString(), omschrijving: `${DAGNAAM[dag.weekdag]} ${dag.datum} om ${fmtMin(t)}` });
     }
   }
@@ -86,16 +94,16 @@ async function vrijeSlots({ dagenVooruit = 14 } = {}) {
 }
 
 // ── Boeken (alleen op een vrij slot) ──
-async function boekShowroom({ start, klantNaam, klantMail, klantTel, notitie }) {
+async function boekShowroom({ start, klantNaam, klantMail, klantTel, notitie, binnendecoratie = false }) {
   if (!start || !klantNaam || !klantMail) return { error: 'start, klantNaam en klantMail zijn verplicht' };
-  const slots = await vrijeSlots({ dagenVooruit: 60 });
+  const slots = await vrijeSlots({ dagenVooruit: 60, binnendecoratie });
   const slot = slots.find(s => parseUtc(s.start) === parseUtc(start));
   if (!slot) return { error: 'Dit tijdstip is geen vrij slot (bezet, buiten wo/vr/za-uren of korter dan 8 uur vooruit). Vraag showroom_beschikbaarheid opnieuw op en kies een slot daaruit.' };
   const startMs = parseUtc(slot.start), eindMs = startMs + DUUR_MIN * 60000;
   const dagAfspraken = await b.afspraken(BIZ, {
     start: new Date(startMs - 12 * 3600000).toISOString(), end: new Date(eindMs + 12 * 3600000).toISOString(),
   });
-  const medewerker = kiesMedewerker(dagAfspraken, startMs, eindMs);
+  const medewerker = kiesMedewerker(dagAfspraken, startMs, eindMs, binnendecoratie);
   const res = await b.boek(BIZ, {
     ...(medewerker ? { staffIds: [medewerker.id] } : {}),
     serviceId: SERVICE_ID, start: slot.start, minuten: DUUR_MIN,
@@ -110,7 +118,7 @@ async function boekShowroom({ start, klantNaam, klantMail, klantTel, notitie }) 
 }
 
 // ── Verzetten of annuleren (zoekt de eerstvolgende showroomafspraak op klant-e-mail) ──
-async function wijzigShowroom({ klantMail, nieuweStart, klantNaam, klantTel, notitie }) {
+async function wijzigShowroom({ klantMail, nieuweStart, klantNaam, klantTel, notitie, binnendecoratie = false }) {
   if (!klantMail) return { error: 'klantMail is verplicht' };
   const nu = Date.now();
   const alle = await b.afspraken(BIZ, { start: new Date(nu).toISOString(), end: new Date(nu + 61 * 86400000).toISOString() });
@@ -124,7 +132,7 @@ async function wijzigShowroom({ klantMail, nieuweStart, klantNaam, klantTel, not
     return { geannuleerd: oudLokaal };
   }
   // Eerst de nieuwe boeken (mislukt dat, dan blijft de oude gewoon staan), daarna de oude annuleren.
-  const res = await boekShowroom({ start: nieuweStart, klantNaam: klantNaam || oud.klant, klantMail, klantTel: klantTel || oud.tel, notitie: notitie || 'Verzette afspraak.' });
+  const res = await boekShowroom({ start: nieuweStart, klantNaam: klantNaam || oud.klant, klantMail, klantTel: klantTel || oud.tel, notitie: notitie || 'Verzette afspraak.', binnendecoratie });
   if (res.error) return { error: `Nieuwe tijd niet geboekt (${res.error}). De oude afspraak (${oudLokaal}) staat nog gewoon.` };
   await b.annuleer(BIZ, oud.id, 'Deze afspraak is verzet naar een nieuw tijdstip; je ontvangt daarvoor een aparte bevestiging.');
   return { verzet: true, oudeTijd: oudLokaal, ...res };

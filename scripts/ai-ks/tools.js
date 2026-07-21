@@ -137,6 +137,7 @@ const TOOL_DEFS = [
       type: 'object',
       properties: {
         dagenVooruit: { type: 'integer', description: 'Hoeveel dagen vooruit kijken (standaard 14, max 60)' },
+        binnendecoratie: { type: 'boolean', description: 'true als het bezoek om BINNENRAAMDECORATIE gaat (gordijnen, vitrage, jaloezieen, plisse, shutters, rolgordijnen binnen) - dan wordt de binnenhuisspecialist ingepland. false/weglaten bij zonwering, rolluiken, horren enz. Geef dit veld ALTIJD ook mee aan showroom_beschikbaarheid, zodat de juiste specialist vrij is op de voorgestelde tijden.' },
       },
     },
   },
@@ -151,6 +152,7 @@ const TOOL_DEFS = [
         klantMail: { type: 'string', description: 'E-mailadres van de klant (verplicht, voor de bevestigingsmail)' },
         klantTel: { type: 'string' },
         notitie: { type: 'string', description: 'Waar komt de klant voor (producten, situatie) — dit ziet het showroomteam vooraf' },
+        binnendecoratie: { type: 'boolean', description: 'true als het bezoek om BINNENRAAMDECORATIE gaat (gordijnen, vitrage, jaloezieen, plisse, shutters, rolgordijnen binnen) - dan wordt de binnenhuisspecialist ingepland. false/weglaten bij zonwering, rolluiken, horren enz. Geef dit veld ALTIJD ook mee aan showroom_beschikbaarheid, zodat de juiste specialist vrij is op de voorgestelde tijden.' },
       },
       required: ['start', 'klantNaam', 'klantMail'],
     },
@@ -166,6 +168,7 @@ const TOOL_DEFS = [
         klantNaam: { type: 'string' },
         klantTel: { type: 'string' },
         notitie: { type: 'string', description: 'Waar de klant voor komt (voor het showroomteam)' },
+        binnendecoratie: { type: 'boolean', description: 'true als het bezoek om BINNENRAAMDECORATIE gaat (gordijnen, vitrage, jaloezieen, plisse, shutters, rolgordijnen binnen) - dan wordt de binnenhuisspecialist ingepland. false/weglaten bij zonwering, rolluiken, horren enz. Geef dit veld ALTIJD ook mee aan showroom_beschikbaarheid, zodat de juiste specialist vrij is op de voorgestelde tijden.' },
       },
       required: ['klantMail'],
     },
@@ -298,7 +301,7 @@ async function runTool(name, input, ctx) {
     if (!showroomAan()) return JSON.stringify({ status: 'NOG NIET BESCHIKBAAR', opmerking: 'Zelf boeken staat nog uit (testfase). Stuur de klant de boekingslink zoals gebruikelijk, zodat hij zelf een moment kiest.' });
     const { vrijeSlots } = require('./showroom-booking.js');
     const dagen = Math.min(Math.max(input.dagenVooruit || 14, 1), 60);
-    const slots = await vrijeSlots({ dagenVooruit: dagen });
+    const slots = await vrijeSlots({ dagenVooruit: dagen, binnendecoratie: !!input.binnendecoratie });
     return JSON.stringify({
       slots: slots.slice(0, 30),
       opmerking: 'Afspraken kunnen di t/m za. Stel 2-3 tijden voor die passen bij de voorkeur van de klant; boek pas na expliciete keuze van de klant.',

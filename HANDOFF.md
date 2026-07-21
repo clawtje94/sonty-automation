@@ -337,3 +337,14 @@ Alles in memory: `~/.claude/projects/-Users-clawdboot/memory/reference_sonty_cre
 ## OPVOLGING — SCHADUWWEEK LOOPT (21-28 juli)
 - Plan: docs/opvolging-plan.md. Schaduw-daemon `scripts/ai-ks/opvolging-daemon.js` draait dagelijks 10:30 (launchd nl.sonty.opvolging-schaduw, in health-check) — verstuurt NIETS, logt voorstellen in data/ai-ks/opvolging-voorstellen.jsonl en stuurt Daimy dagelijks het zou-sturen-rapport op Telegram.
 - Afspraak Daimy 21 juli: week schaduwdraaien + verbeteren, rond 28 juli SAMEN evalueren; daarna pas beslissen over live (aan-knop .opvolging-live bestaat nog niet). Openstaand onderzoek: hoe komen v4's proactieve offerte-link-WhatsApps door het 24-uursvenster (template of sessie)?
+
+## LINKEDIN PERSOONLIJK (JOEY) — ADMIN-TOOL (21 juli ~14:50)
+- Joey's persoonlijke LinkedIn gescraped (publieke view, geen login nodig): 7 echte posts + stijlregels vastgelegd in `~/sonty-website/data/joey-linkedin-scrape-2026-07.json`. Inzicht: persoonlijke posts (sport/gezin/balans) scoren 64-87 reacties, vacature/bedrijf 25-45.
+- Nieuwe admin-tool `/admin/linkedin-personal` (tegel "LinkedIn persoonlijk 🚀" op dashboard, zakelijke tegel hernoemd naar "LinkedIn zakelijk"): 16 seed-posts in Joey's stijl (`data/linkedin-personal-seed.json`, generator-aanpak met unicode-bold openers), pijlers persoonlijk/ondernemen/team/groei/vacature, 30-dagen flow 2x/week (di zakelijk, do persoonlijk), foto-picker, autosave. KV-key `sonty:linkedin-personal`, lib `lib/linkedin-personal-posts.ts`, API `/api/admin/linkedin-personal`.
+- 6 posts hebben ⚠ [haken]-placeholders (needsRealDetail) — nooit zomaar plaatsen, echt detail eerst.
+- Getest: build groen, iPhone 12 geen overflow, live geverifieerd op sonty-website.vercel.app (16 posts laden na login). Gecommit + gepusht (branch claude/planning-dashboard) + prod-deploy.
+- Let op: sonty.nl wijst nog steeds naar de oude site (Cloudflare), Next.js-site draait op sonty-website.vercel.app. Domein koppelen blijft openstaand punt.
+
+## WEEKRAPPORT CONVERSIE (21 juli)
+- `scripts/weekrapport-conversie.js` — elke maandag 08:15 (launchd nl.sonty.weekrapport, --stuur) naar Daimy's Telegram: nieuwe leads, akkoorden (= Inmeten inplannen/Gripp invullen/Afgerond), conversie %, waarde, per status en per productcategorie (categorie via offerteregels van de lead_configuration), plus referentie zelfde venster vorige maand. Losse runs: --van/--tot. Zie ook scripts/bord-conversie.js (cohorten per maand) en scripts/conversie-rapport.js (digitaal getekend, uit rp-archief).
+- Kanttekening in elk rapport: jonge leads converteren nog door; afgeronde items van oude maanden worden van het bord opgeschoond (oude cohorten dus onderteld).

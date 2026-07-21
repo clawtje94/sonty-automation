@@ -1,5 +1,10 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-21)
 
+## QA-VANGNET + BOOKINGS IN HEALTH-CHECK (21 juli)
+- **QA-vangnet**: keurt de kwaliteitspoort een antwoord 2x af, dan krijgt de klant voortaan een neutraal wachtbericht ("ik leg dit even bij een collega neer") i.p.v. stilte; de stille overdracht naar Mens nodig blijft. Aanleiding: 3x klant-stilte op 21 juli.
+- **Health-check**: cron-health-check.js test nu ook de MS Bookings API (services-call met 30s timeout) — alarm als het refresh-token stuk is.
+- **Open punten uit risico-overzicht 21 juli**: capaciteit per specialist (parallel Nanny + zonwering)? wie leest de Bookings-bevestigingsmailbox? feestdagen/uren staan hardcoded; persoonlijke Outlook-agenda's blijven onzichtbaar zonder admin-consent; herinneringsmails bij API-boekingen nog niet geverifieerd.
+
 ## SHOWROOMAFSPRAKEN DOOR DE AI (21 juli)
 - **Nieuwe tools** `showroom_beschikbaarheid` + `showroom_afspraak_boeken` (tools.js) voor WhatsApp- én mail-daemon: bot vraagt dagvoorkeur, stelt 2-3 vrije tijden voor en boekt ECHT in MS Bookings. Boekingslink alleen nog als klant zelf online wil kiezen.
 - **Kalender**: `SontyMontage1@sontymontage.nl` (dé operationele kalender — daar staan ook inmeten/montage), service "Afspraak showroom Frijdastraat" `b3b00294-076c-43b4-858c-76332f08d775`, 45 min. NIET AfspraakshowroomSonty@sonty.nl (vrijwel leeg).

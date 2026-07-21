@@ -166,7 +166,13 @@ async function beantwoord(gesprek) {
           continue;
         }
         ctx.acties.push({ type: 'escalatie', reden: 'Kwaliteitscontrole keurde het antwoord tweemaal af: ' + oordeel.slice(0, 200), stil: true, urgentie: 'normaal' });
-        return { antwoord: null, acties: ctx.acties, toolCalls, usage, qa: oordeel };
+        // VANGNET (Daimy's test 21 juli, 3x stilte op één dag): na een dubbele afkeuring de
+        // klant nooit meer in stilte laten zitten — een neutraal wachtbericht is vrijwel altijd
+        // veilig, en de overdracht naar het team hierboven blijft gewoon staan.
+        return {
+          antwoord: 'Ik wil je hier geen half antwoord op geven, dus ik leg dit even bij een collega neer. Je hoort zo snel mogelijk van ons!',
+          acties: ctx.acties, toolCalls, usage, qa: oordeel,
+        };
       }
     }
     return { antwoord: tekst, acties: ctx.acties, toolCalls, usage, qa: 'OK', klaar, opgelost };

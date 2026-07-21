@@ -144,6 +144,17 @@ async function main() {
     }
   } catch (e) { results.push('❌ RP→HubSpot sync (cron): check faalde: ' + e.message); problems++; }
 
+  // MS Bookings API (showroomafspraken van de AI-KS, 21 juli): auth/refresh-token nog geldig?
+  try {
+    const b = require('./bookings-api.js');
+    const diensten = await Promise.race([
+      b.services('SontyMontage1@sontymontage.nl'),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('timeout na 30s')), 30000)),
+    ]);
+    if (!Array.isArray(diensten) || !diensten.length) { results.push('❌ MS Bookings API: onverwacht leeg antwoord'); problems++; }
+    else results.push('✅ MS Bookings API (showroom-boeken)');
+  } catch (e) { results.push('❌ MS Bookings API: ' + String(e.message).slice(0, 120) + ' — showroom-boeken werkt mogelijk niet, check scripts/.bookings-refresh-token.txt'); problems++; }
+
   // Sales-bot: op 16 juli 2026 DEFINITIEF uitgezet (vervangen door SONNY/AI-KS; plist in
   // uitgeschakeld/). Alarm juist als hij per ongeluk WEL geladen zou zijn.
   try {

@@ -30,14 +30,21 @@ const POOLS = {
   ],
 };
 
-// Eerste medewerker uit de juiste pool die geen overlappende afspraak in de Bookings-agenda heeft.
+// Eerste medewerker uit de juiste pool die geen overlappende afspraak in de Bookings-agenda
+// heeft. Parallelle afspraken mogen (Daimy 21 juli: "kan zolang ze beschikbaar zijn") — een
+// showroomafspraak ZONDER toegewezen medewerker kan van iedereen zijn en claimt daarom één
+// vrij poollid extra.
 function kiesMedewerker(afsprakenDag, startMs, eindMs, binnendecoratie) {
   const bezig = new Set();
+  let onbekend = 0;
   for (const a of afsprakenDag) {
     const s = parseUtc(a.start), e = parseUtc(a.eind);
-    if (!isNaN(s) && !isNaN(e) && s < eindMs && startMs < e) (a.staffIds || []).forEach(id => bezig.add(id));
+    if (isNaN(s) || isNaN(e) || s >= eindMs || startMs >= e) continue;
+    if ((a.staffIds || []).length) a.staffIds.forEach(id => bezig.add(id));
+    else if (a.serviceId === SERVICE_ID) onbekend++;
   }
-  return (binnendecoratie ? POOLS.binnendecoratie : POOLS.zonwering).find(m => !bezig.has(m.id)) || null;
+  const vrij = (binnendecoratie ? POOLS.binnendecoratie : POOLS.zonwering).filter(m => !bezig.has(m.id));
+  return vrij[onbekend] || null;
 }
 
 // ── Amsterdamse tijd ↔ UTC ──
@@ -72,9 +79,6 @@ async function vrijeSlots({ dagenVooruit = 14, binnendecoratie = false } = {}) {
     start: new Date(nu).toISOString(),
     end: new Date(nu + (dagenVooruit + 1) * 86400000).toISOString(),
   });
-  const bezet = alles.filter(a => a.serviceId === SERVICE_ID)
-    .map(a => [parseUtc(a.start), parseUtc(a.eind)])
-    .filter(([s, e]) => !isNaN(s) && !isNaN(e));
   const slots = [];
   for (let d = 0; d <= dagenVooruit; d++) {
     const dag = nlDelen(new Date(nu + d * 86400000));
@@ -84,8 +88,8 @@ async function vrijeSlots({ dagenVooruit = 14, binnendecoratie = false } = {}) {
       const start = amsterdamNaarUtc(dag.datum, fmtMin(t));
       if (start.getTime() - nu < MIN_VOORUIT_MS) continue;
       const eind = start.getTime() + DUUR_MIN * 60000;
-      if (bezet.some(([s, e]) => s < eind && start.getTime() < e)) continue;
-      // De juiste medewerker moet ook vrij zijn (binnendecoratie = Nanny; anders Jorren/Joey/Jaimy)
+      // Vrij zolang de juiste specialist vrij is (parallelle afspraken mogen — Daimy 21 juli):
+      // binnendecoratie = Nanny; anders Jorren/Joey/Jaimy.
       if (!kiesMedewerker(alles, start.getTime(), eind, binnendecoratie)) continue;
       slots.push({ start: start.toISOString(), omschrijving: `${DAGNAAM[dag.weekdag]} ${dag.datum} om ${fmtMin(t)}` });
     }

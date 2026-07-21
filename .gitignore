@@ -82,3 +82,4 @@ data/unilux/*.zip
 data/prijsboeken/*.pdf
 scripts/.outlook-joey-pass.txt
 scripts/.bookings-refresh-token.txt
+.claude/worktrees/

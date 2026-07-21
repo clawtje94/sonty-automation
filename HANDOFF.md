@@ -333,3 +333,7 @@ Alles in memory: `~/.claude/projects/-Users-clawdboot/memory/reference_sonty_cre
 - **Pure bevestiging** (duimpje/"ga ik doen"/bedankt zonder vraag) → geen antwoord/escalatie/ruisnotitie meer (gaf bij Hany schaduwmodus-escalaties).
 - **Showroom-afspraak**: prompt zegt nu — binnenlopen mag, maar afspraak heeft voorkeur; stuur de Bookings-link om te plannen.
 - **Dagrapport**: verplaatst van 07:45 → **21:00** (einde shift, launchd nl.sonty.getekend-rapport). Nieuwe telling: akkoord=inmeten (1 ding), showroom apart, overtuigd als subset. Extra sectie "veelvoorkomende problemen waar klanten hulp bij nodig hadden" (Haiku-thema's + escalaties). Cumulatief in data/ai-ks/conversie-stats.json.
+
+## OPVOLGING — SCHADUWWEEK LOOPT (21-28 juli)
+- Plan: docs/opvolging-plan.md. Schaduw-daemon `scripts/ai-ks/opvolging-daemon.js` draait dagelijks 10:30 (launchd nl.sonty.opvolging-schaduw, in health-check) — verstuurt NIETS, logt voorstellen in data/ai-ks/opvolging-voorstellen.jsonl en stuurt Daimy dagelijks het zou-sturen-rapport op Telegram.
+- Afspraak Daimy 21 juli: week schaduwdraaien + verbeteren, rond 28 juli SAMEN evalueren; daarna pas beslissen over live (aan-knop .opvolging-live bestaat nog niet). Openstaand onderzoek: hoe komen v4's proactieve offerte-link-WhatsApps door het 24-uursvenster (template of sessie)?

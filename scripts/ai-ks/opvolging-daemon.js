@@ -121,18 +121,34 @@ async function main() {
   const ks = kandidaten(argDagen).slice(0, max);
   console.log(`[SCHADUW] ${ks.length} kandidaat-gesprekken (${MIN_STIL_DAGEN}-${Math.min(argDagen, MAX_STIL_DAGEN)} dagen stil, max ${max})`);
   let voorstellen = 0;
+  const regels = [];
   for (const k of ks) {
     await new Promise(r => setTimeout(r, 3000)); // Trengo-limiet delen met de daemons
     const wie = k.klant?.naam || k.klant?.phone || k.klant?.email || '?';
     const check = await blokkade(k, state);
-    if (check.ok !== true) { console.log(`  − ${wie} (ticket ${k.ticket}): ${check}`); continue; }
+    if (check.ok !== true) { console.log(`  − ${wie} (ticket ${k.ticket}): ${check}`); regels.push(`− ${wie}: ${check}`); continue; }
     const oordeel = await beoordeel(k, check.echte, check.context);
     const rec = { tijd: new Date().toISOString(), ticket: k.ticket, kanaal: k.kanaal || 'WA', klant: wie, ...oordeel, schaduw: true };
     fs.appendFileSync(VOORSTELLEN, JSON.stringify(rec) + '\n');
-    if (oordeel.opvolgen) { voorstellen++; console.log(`  ✓ ${wie}: ZOU STUREN → ${String(oordeel.bericht).slice(0, 120)}`); }
-    else console.log(`  − ${wie}: niet gepast (${String(oordeel.reden).slice(0, 80)})`);
+    if (oordeel.opvolgen) {
+      voorstellen++;
+      console.log(`  ✓ ${wie}: ZOU STUREN → ${String(oordeel.bericht).slice(0, 120)}`);
+      regels.push(`✓ ${wie} (${k.kanaal || 'WA'}): "${String(oordeel.bericht).slice(0, 220)}"`);
+    } else {
+      console.log(`  − ${wie}: niet gepast (${String(oordeel.reden).slice(0, 80)})`);
+      regels.push(`− ${wie}: ${String(oordeel.reden).slice(0, 100)}`);
+    }
   }
   console.log(`[SCHADUW] klaar: ${voorstellen} voorstel(len) gelogd in opvolging-voorstellen.jsonl — er is NIETS verstuurd.`);
+
+  // Dagelijkse schaduwrapportage naar Daimy (schaduwweek 21-28 juli, evaluatie samen daarna).
+  if (regels.length) {
+    const kop = `SCHADUW-OPVOLGING vandaag (er is niets naar klanten gestuurd):\n${voorstellen} voorstel(len), ${regels.length - voorstellen} overgeslagen.\n\n`;
+    await fetch('https://api.telegram.org/bot8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40/sendMessage', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: 1700128390, text: (kop + regels.join('\n')).slice(0, 3900) }),
+    }).catch(() => {});
+  }
 }
 
 main().catch(e => { console.error('FOUT:', e.message); process.exit(1); });

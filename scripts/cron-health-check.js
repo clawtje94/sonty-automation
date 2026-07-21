@@ -41,6 +41,8 @@ const DAEMONS = [
   // 2-uurs watchdog; drempel 14u zodat normale nachtelijke slaap/downtime geen vals alarm geeft
   // (de watchdog heeft z'n eigen credits-op-alarm, dus een echt creditprobleem meldt hij los).
   { label: 'nl.sonty.credits-check', log: 'credits-check.log', maxLogAgeH: 14, name: 'Anthropic credits-watchdog' },
+  // Opvolging draait t/m ±28 juli in SCHADUW (verstuurt niets; dagelijks 10:30 een voorstel-rapport naar Daimy)
+  { label: 'nl.sonty.opvolging-schaduw', log: 'opvolging.log', maxLogAgeH: 26, name: 'Opvolging (schaduwweek)' },
 ];
 
 // Extra Sonny-check: staat de Telegram-inbox verdacht lang stil? (poller bevroor 2x op 16-17 juli)

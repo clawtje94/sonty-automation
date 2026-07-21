@@ -132,6 +132,18 @@ async function boekShowroom({ start, klantNaam, klantMail, klantTel, notitie, bi
   return { geboekt: slot.omschrijving, afspraakId: res.id, adres: ADRES, medewerker: medewerker ? medewerker.naam : 'nog niet toegewezen (team wijst toe)' };
 }
 
+// HARDE EIS DAIMY (21 juli, "extreem belangrijk"): deze module mag UITSLUITEND
+// showroomafspraken aanraken — NOOIT montage, inmeten, vakantie of iets anders in de agenda.
+// Elke annulering gaat daarom door deze poort: verse verificatie bij Bookings zelf dat het
+// item écht de showroom-service is; anders wordt er NIETS geannuleerd (fail-closed).
+async function veiligAnnuleren(id, bericht) {
+  const a = await b.afspraak(BIZ, id);
+  if (!a || a.serviceId !== SERVICE_ID) {
+    throw new Error(`GEBLOKKEERD: afspraak ${String(id).slice(-8)} is geen showroomafspraak (service: ${a?.serviceName || 'onbekend'}) — niet geannuleerd.`);
+  }
+  return b.annuleer(BIZ, id, bericht);
+}
+
 // ── Verzetten of annuleren (zoekt de eerstvolgende showroomafspraak op klant-e-mail) ──
 async function wijzigShowroom({ klantMail, nieuweStart, klantNaam, klantTel, notitie, binnendecoratie = false }) {
   if (!klantMail) return { error: 'klantMail is verplicht' };
@@ -143,13 +155,13 @@ async function wijzigShowroom({ klantMail, nieuweStart, klantNaam, klantTel, not
   const oud = vanKlant[0];
   const oudLokaal = (() => { const p = nlDelen(new Date(parseUtc(oud.start))); return `${DAGNAAM[p.weekdag]} ${p.datum} om ${p.tijd}`; })();
   if (!nieuweStart) {
-    await b.annuleer(BIZ, oud.id, 'Je showroomafspraak is op jouw verzoek geannuleerd. Tot snel!');
+    await veiligAnnuleren(oud.id, 'Je showroomafspraak is op jouw verzoek geannuleerd. Tot snel!');
     return { geannuleerd: oudLokaal };
   }
   // Eerst de nieuwe boeken (mislukt dat, dan blijft de oude gewoon staan), daarna de oude annuleren.
   const res = await boekShowroom({ start: nieuweStart, klantNaam: klantNaam || oud.klant, klantMail, klantTel: klantTel || oud.tel, notitie: notitie || 'Verzette afspraak.', binnendecoratie });
   if (res.error) return { error: `Nieuwe tijd niet geboekt (${res.error}). De oude afspraak (${oudLokaal}) staat nog gewoon.` };
-  await b.annuleer(BIZ, oud.id, 'Deze afspraak is verzet naar een nieuw tijdstip; je ontvangt daarvoor een aparte bevestiging.');
+  await veiligAnnuleren(oud.id, 'Deze afspraak is verzet naar een nieuw tijdstip; je ontvangt daarvoor een aparte bevestiging.');
   return { verzet: true, oudeTijd: oudLokaal, ...res };
 }
 

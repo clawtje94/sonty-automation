@@ -82,3 +82,5 @@
 - (2026-07-21) [team-notitie bij gesprek +31615586434] het is belangrijk als mensen een voorkeurs datum voor inmeten doorgeven dat jorren en tanya hier ook van op de hoogte zijn!
 - (2026-07-21) [team-notitie bij gesprek +31612655013] waarom sluit je het ticket niet?
 - (2026-07-21) [team-notitie bij gesprek +31615586434] het is belangrijk als mensen een voorkeurs datum voor inmeten doorgeven dat jorren en tanya hier ook van op de hoogte zijn!
+- (2026-07-21) [team-notitie bij e-mail Diana Sanchez] probeer bij deze vrouw maar volledig zelf dus een showroom afspraak in te plannen
+- (2026-07-21) [team-notitie bij e-mail ea.t.jong@upcmail.nl] als meneer een offerte heeft kan je die toch gewoon hier sturen en vragen of die mischien in de spam zit? miss was dit nog wel voor de regel dat je de winkel offerte&#39;s zelf moest mailen x

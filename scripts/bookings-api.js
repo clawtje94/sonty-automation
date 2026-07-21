@@ -136,11 +136,15 @@ async function boek(biz = SHOWROOM, { serviceId, start, minuten = 30, klantNaam,
   });
 }
 
+// Eén afspraak ophalen (o.a. om vóór annuleren te verifiëren wat het is).
+const afspraak = (biz = SHOWROOM, id) =>
+  graph('GET', `/solutions/bookingBusinesses/${encodeURIComponent(biz)}/appointments/${encodeURIComponent(id)}`);
+
 // Afspraak annuleren (stuurt de klant een annuleringsmail via Bookings).
 const annuleer = (biz = SHOWROOM, id, bericht = 'Deze afspraak is geannuleerd.') =>
   graph('POST', `/solutions/bookingBusinesses/${encodeURIComponent(biz)}/appointments/${encodeURIComponent(id)}/cancel`, { cancellationMessage: bericht });
 
-module.exports = { businesses, services, staff, afspraken, boek, annuleer, SHOWROOM };
+module.exports = { businesses, services, staff, afspraken, afspraak, boek, annuleer, SHOWROOM };
 
 // ── CLI ──
 if (require.main === module) {

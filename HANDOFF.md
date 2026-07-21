@@ -22,6 +22,9 @@
 - **Whitelist-voorrang** (Daimy: "op mij en Joey z'n nummer mag je direct antwoorden"): daemon.js sorteert de wachtrij nu op whitelist eerst, dan verse @sonny-notities, dan de rest. Overige klanten ongewijzigd qua tijden/snelheid (REPLY_DELAY blijft uit, e-mail 90-120 min blijft).
 - **QA-leerlus** (Daimy: "leert die QA-poort zich ook te verbeteren?"): agent.js logt elke QA-afkeuring naar data/ai-ks/qa-afkeuringen.jsonl; `qa-leren.js` (launchd nl.sonty.qa-leren, dagelijks 07:45) destilleert met Sonnet terugkerende patronen (≥2x, nog niet gedekt, max 3/dag) tot leerpunten in leerpunten.md (= direct in de system-prompt) + Telegram-melding aan Daimy zodat hij kan schrappen. Drempel: min. 3 afkeuringen/7 dagen.
 
+## ABSOLUTE GRENS SHOWROOM-TOOLS (Daimy 21 juli, "extreem belangrijk")
+- De afspraken-tools mogen ALLEEN showroomafspraken plannen/verzetten/annuleren — NOOIT montage/inmeten/vakantie/anders. 3 lagen: (1) boeken kan alleen met het hardcoded showroom-serviceId, (2) wijzigen/annuleren zoekt uitsluitend binnen showroom-service-afspraken, (3) veiligAnnuleren (showroom-booking.js) haalt de afspraak vóór elke annulering vers op bij Bookings en blokkeert als de service niet de showroom-service is (fail-closed). Promptregel: montage/inmeet-verzoeken altijd via escaleren_naar_mens. Getest 21 juli: montage-afspraak → poort blokkeert; showroom → doorlaten.
+
 ## CRASH + DAEMON-LES (21 juli)
 - Mac mini kernel-panicked 21 juli 10:06 (zone map exhausted, kalloc.1024 20GB — macOS-geheugenlek na 11 dagen uptime). Auto-reboot 10:07. macOS-update staat sinds 14 juli klaar; Daimy wil later installeren+herstarten.
 - LES: oude Telegram-berichten ("Mail deamon stoppen", 19 juli) zijn geen actuele opdracht — mail-daemon was bewust weer aan; niet meer stoppen o.b.v. oude inbox-regels (memory feedback_oude_telegram_berichten).

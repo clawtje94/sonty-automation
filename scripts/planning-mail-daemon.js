@@ -16,6 +16,8 @@ const { execFileSync } = require('child_process');
 const { chromium } = require('/Users/clawdboot/sonty/node_modules/playwright');
 const { google } = require('/Users/clawdboot/sonty/node_modules/googleapis');
 const { duidPdf } = require('/Users/clawdboot/sonty/scripts/planning-pdf-parse.js');
+const SECRETS = require('/Users/clawdboot/sonty/scripts/secrets.js');
+const { audit } = require('/Users/clawdboot/sonty/scripts/audit.js');
 
 const SHEET = '1xkQaLKgAgvhP46JtZWRRj2zWpqr5_J5z9xTiiqT9lvs';
 const TAB = 'Claude ai test';
@@ -24,7 +26,7 @@ const BLAUW = { red: 0.812, green: 0.886, blue: 0.953 };
 const MAILBOXEN = ['orders@sonty.nl', 'info@sonty.nl'];
 const STATE_FILE = '/Users/clawdboot/sonty/data/planning-mail-state.json';
 const LEVERANCIERS = /sunmaster\.nl|@ne\.nl|roma\.de|toppoint\.eu|unilux\.nl|velux|fakro|markiezen|somfy|dersimo|peitsman|poedercoat/i;
-const TG = { token: '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40', chat: 1700128390 };
+const TG = { token: SECRETS.TELEGRAM_BOT_TOKEN, chat: SECRETS.TELEGRAM_CHAT_ID };
 const MAANDEN = { januari: 1, februari: 2, maart: 3, april: 4, mei: 5, juni: 6, juli: 7, augustus: 8, september: 9, oktober: 10, november: 11, december: 12 };
 
 const nu = () => new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Amsterdam' });
@@ -40,7 +42,7 @@ async function grippPlaatsen(namen) {
   try {
     const res = await fetch('https://api.gripp.com/public/api3.php', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer WZvM6r0bAGGONGRhrkWTxVrydXq9H2' },
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + SECRETS.GRIPP_API_KEY },
       body: JSON.stringify(namen.map((n, i) => ({ method: 'company.get',
         params: [[{ field: 'company.searchname', operator: 'like', value: '%' + n + '%' }], { paging: { firstresult: 0, maxresults: 10 } }], id: i + 1 }))),
     });
@@ -72,11 +74,11 @@ async function owaSessie() {
   await page.waitForTimeout(2000);
   const emailInput = await page.$('input[type="email"], input[name="loginfmt"]');
   if (emailInput) {
-    await emailInput.fill('joey@sontymontage.nl');
+    await emailInput.fill(SECRETS.OWA_LOGIN.email);
     await page.locator('input[type="submit"]').click();
     await page.waitForTimeout(3000);
     const pw = await page.$('input[type="password"]');
-    if (pw) { await pw.fill('Shja..59'); await page.locator('input[type="submit"]').click(); await page.waitForTimeout(3000); }
+    if (pw) { await pw.fill(SECRETS.OWA_LOGIN.password); await page.locator('input[type="submit"]').click(); await page.waitForTimeout(3000); }
     try {
       const y = page.locator('input[value="Yes"], input[value="Ja"], #idSIButton9');
       if (await y.count()) { await y.first().click(); await page.waitForTimeout(3000); }
@@ -205,6 +207,8 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     const st = fs.statSync(LOCK);
     if (Date.now() - st.mtimeMs < 10 * 60 * 1000) { console.log('lock actief, ronde overgeslagen'); return; }
   } catch {}
+  // Kill-switch: bestand data/kill/nl.sonty.planning-mail = dienst stil (zie SYSTEMEN.md)
+  if (fs.existsSync('/Users/clawdboot/sonty/data/kill/nl.sonty.planning-mail')) { console.log('kill-switch actief, ronde overgeslagen'); return; }
   fs.writeFileSync(LOCK, String(process.pid));
   try {
   const state = loadState();
@@ -339,6 +343,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     await sheets.spreadsheets.batchUpdate({ spreadsheetId: SHEET, requestBody: { requests } });
   }
   saveState(state);
+  if (verslag.length) audit('planning-mail', 'sheet-bijgewerkt', { tab: TAB, wijzigingen: verslag.length, detail: verslag.slice(0, 20) });
   console.log(verslag.length ? verslag.map((v) => '  ' + v).join('\n') : '  geen sheet-wijzigingen');
   if (verslag.length) {
     const tekst = `Planning (Claude ai test) bijgewerkt vanuit orders@/info@:\n` + verslag.slice(0, 15).map((v) => '- ' + v.slice(0, 150)).join('\n') + (verslag.length > 15 ? `\n(+${verslag.length - 15} meer)` : '') + '\nMails blijven ongelezen.';

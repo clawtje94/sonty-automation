@@ -179,7 +179,11 @@ keten meegaan.** Het inmeetformulier ÍS de bestelspecificatie, ÍS de magazijnc
 
 ### 1. Inmeter (het begin van alle kwaliteit)
 - Vooraf automatisch dossier op telefoon: offerteregels, maten uit configurator, foto's/afspraken uit het klantgesprek (Trengo), adres.
-- Digitaal formulier per productregel: definitieve maten, bevestigingsondergrond (steen/hout/isolatie), elektra (waar stroom, bedraad/solar), verdieping + bereikbaarheid (ladder/steiger/hoogwerker), demontage oud, obstakels, verplicht 2-3 foto's van de montagepunten.
+- Digitaal formulier per productregel, MAXIMAAL SIMPEL (Daimy 22-07: geen 10 vragen):
+  maten bevestigen (voorgevuld uit offerte, alleen aanpassen wat afwijkt) + 3 VINKJES per
+  klus: [demontage oud] [bedraad (elektra nodig)] [lastig bereikbaar / verdieping] + 2-3
+  foto's van de montagepunten. De foto's vervangen de overige vragen (ondergrond, obstakels
+  ziet de monteur op de foto). Elk vinkje = vaste tijdtoeslag in het montagetijden-model.
 - Uitkomst = direct de definitieve bestelling (geen overtypen kantoor) + planner-context.
 - Wijkt de inmeting af van de offerte → automatisch herberekenen → klant eerst akkoord, dan pas bestellen.
 - **DEAL TER PLEKKE (Daimy 22-07)**: na het invullen rekent de eigen pricing-engine live de
@@ -224,8 +228,9 @@ V16 factureren bij restpunt (alles, deel, of wachten)?
 - V17 (GECORRIGEERD door Daimy 22-07 avond): **40% aanbetaling**, factuur direct na het
   tekenen bij de inmeter, maar **bestellen PAS NA ONTVANGST van de aanbetaling** — het is
   maatwerk, dus geen bestelling zonder betaling. Betaalbewaking in Gripp wordt daarmee de
-  bestel-trigger: aanbetaling binnen → order vrijgegeven voor bestellen. Niet betaald na
-  X dagen → automatische vriendelijke herinnering (iDEAL-link maakt direct betalen makkelijk).
+  bestel-trigger: aanbetaling binnen → order vrijgegeven voor bestellen. Betaalherinneringen
+  lopen al volledig via Gripp (Daimy 22-07) — wij bouwen NIETS zelf, we lezen alleen de
+  betaalstatus als bestel-trigger.
 - V18: klant betaalt per bank of iDEAL; betaalstatus staat in Gripp → factuur- en
   betaalbewaking via Gripp-koppeling (alleen-lezen checken, zuinig).
 - V19: montagetijden: voorstel-uit-historie wordt als startpunt vastgezet (montagetijden-v1),

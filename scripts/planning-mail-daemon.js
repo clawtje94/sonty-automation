@@ -10,9 +10,12 @@
 //           L Wat is besteld | M weken-formule
 // Alleen leveranciersmail wordt verwerkt; klantmail (bv. op info@) wordt overgeslagen.
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
+const { execFileSync } = require('child_process');
 const { chromium } = require('/Users/clawdboot/sonty/node_modules/playwright');
 const { google } = require('/Users/clawdboot/sonty/node_modules/googleapis');
+const { duidPdf } = require('/Users/clawdboot/sonty/scripts/planning-pdf-parse.js');
 
 const SHEET = '1xkQaLKgAgvhP46JtZWRRj2zWpqr5_J5z9xTiiqT9lvs';
 const TAB = 'Claude ai test';
@@ -20,7 +23,7 @@ const SHEET_ID = 273253041;
 const BLAUW = { red: 0.812, green: 0.886, blue: 0.953 };
 const MAILBOXEN = ['orders@sonty.nl', 'info@sonty.nl'];
 const STATE_FILE = '/Users/clawdboot/sonty/data/planning-mail-state.json';
-const LEVERANCIERS = /sunmaster\.nl|@ne\.nl|roma\.de|toppoint\.eu|unilux\.nl|velux|fakro|markiezen|somfy|dersimo|peitsman/i;
+const LEVERANCIERS = /sunmaster\.nl|@ne\.nl|roma\.de|toppoint\.eu|unilux\.nl|velux|fakro|markiezen|somfy|dersimo|peitsman|poedercoat/i;
 const TG = { token: '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40', chat: 1700128390 };
 const MAANDEN = { januari: 1, februari: 2, maart: 3, april: 4, mei: 5, juni: 6, juli: 7, augustus: 8, september: 9, oktober: 10, november: 11, december: 12 };
 
@@ -62,17 +65,71 @@ async function owaSessie() {
 
 async function haalOngelezen(page, token, mailbox) {
   const H = { Authorization: 'Bearer ' + token, Accept: 'application/json' };
-  const url = `https://outlook.office.com/api/v2.0/users/${mailbox}/MailFolders/Inbox/messages?$filter=IsRead eq false&$top=50&$select=Subject,From,ReceivedDateTime,Body,IsRead&$orderby=ReceivedDateTime asc`;
-  const r = await page.request.get(url, { headers: H });
-  if (!r.ok()) { console.log(`  ${mailbox}: fout ${r.status()}`); return []; }
-  return (((await r.json()).value) || []).map((m) => ({
-    id: m.Id, mailbox,
+  // Doorpaginaren: de inbox kan meer dan 50 ongelezen mails bevatten (de eerste batch
+  // blijft bewust ongelezen staan) — zonder $skip-lus vallen de NIEUWSTE mails buiten beeld.
+  const alle = [];
+  for (let skip = 0; skip < 1000; skip += 50) {
+    const url = `https://outlook.office.com/api/v2.0/users/${mailbox}/MailFolders/Inbox/messages?$filter=IsRead eq false&$top=50&$skip=${skip}&$select=Subject,From,ReceivedDateTime,Body,IsRead,HasAttachments,InternetMessageId&$orderby=ReceivedDateTime asc`;
+    const r = await page.request.get(url, { headers: H });
+    if (!r.ok()) { console.log(`  ${mailbox}: fout ${r.status()}`); break; }
+    const batch = ((await r.json()).value) || [];
+    alle.push(...batch);
+    if (batch.length < 50) break;
+  }
+  return alle.map((m) => ({
+    id: m.Id, imid: m.InternetMessageId || m.Id, mailbox, hasAtt: !!m.HasAttachments,
     subject: (m.Subject || '').replace(/^(FW|RE|Fwd|Antw):\s*/i, '').trim(),
     from: m.From?.EmailAddress?.Address || '',
     received: m.ReceivedDateTime || '',
     body: (m.Body?.Content || '').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ')
       .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim().slice(0, 4000),
   }));
+}
+
+// PDF-bijlagen van een mail ophalen (met het al bemachtigde OWA-token) en de best
+// leesbare parse teruggeven. Mail blijft ongelezen; dit is een losse API-call.
+async function leesPdf(m, token) {
+  try {
+    const r = await fetch(`https://outlook.office.com/api/v2.0/users/${m.mailbox}/messages/${m.id}/attachments`, {
+      headers: { Authorization: 'Bearer ' + token, Accept: 'application/json' } });
+    if (!r.ok) return null;
+    let beste = null;
+    for (const att of (((await r.json()).value) || [])) {
+      if (!/pdf$/i.test(att.Name || '') || !att.ContentBytes) continue;
+      const tmp = path.join(os.tmpdir(), `plm-${Date.now()}-${Math.random().toString(36).slice(2)}.pdf`);
+      try {
+        fs.writeFileSync(tmp, Buffer.from(att.ContentBytes, 'base64'));
+        execFileSync('/opt/homebrew/bin/pdftotext', ['-layout', tmp, tmp + '.txt']);
+        const parse = duidPdf(fs.readFileSync(tmp + '.txt', 'utf8'));
+        // beste = de parse met de meeste inhoud (ordernr + producten wint)
+        const score = (p) => (p?.ordernr ? 2 : 0) + (p?.producten?.length ? 2 : 0) + (p?.leverdatum ? 1 : 0) + (p?.referentie ? 1 : 0);
+        if (score(parse) > score(beste)) beste = parse;
+      } finally { try { fs.unlinkSync(tmp); fs.unlinkSync(tmp + '.txt'); } catch {} }
+    }
+    return beste && beste.leverancier ? beste : null;
+  } catch (e) { console.log(`  [${m.subject}] pdf-fout: ${e.message}`); return null; }
+}
+
+const KORT = (arr, max = 220) => { const s = (arr || []).join(' + '); return s.length > max ? s.slice(0, max - 1) + '…' : s; };
+const refNaarNaam = (ref) => (ref || '').replace(/\s*\((\d+)([^)]*)\)/, ' $1$2').replace(/\s+\/\s*$/, '').replace(/\s+/g, ' ').trim();
+
+// Vult een duiden()-actie aan met wat er echt in de PDF staat (naam, besteld-/leverdatum,
+// productomschrijving). PDF wint van placeholders, nooit van al zekere subject-data.
+function verrijkMetPdf(a, pdf) {
+  if (!a || !pdf) return;
+  if (a.type === 'multi') { a.acties.forEach((sub) => verrijkMetPdf(sub, pdf)); return; }
+  const placeholder = (v) => !v || /^\(/.test(String(v).trim());
+  if (placeholder(a.naam) && pdf.referentie) a.naam = refNaarNaam(pdf.referentie);
+  if ((placeholder(a.ordernr) || !a.ordernr) && pdf.ordernr) a.ordernr = pdf.ordernr;
+  if (pdf.orderdatum) a.besteld = pdf.orderdatum;
+  if (pdf.producten?.length) a.wat = KORT(pdf.producten);
+  if (pdf.leverdatum && !a.geleverdTekst) {
+    a.geleverdTekst = pdf.leverdatum;
+    const [d, mnd, j] = pdf.leverdatum.split('-').map(Number);
+    a.geleverdSerial = serial(d, mnd, j);
+  }
+  a.opm = (a.opm || '').replace(/\s*(Details|Productdetails|Klantnaam|Klantreferentie|Ordernummer en details|Wijziging staat|Bevestigde leverdatum staat)[^.]*in (de )?(PDF-)?bijlage[^.]*\./i, '') +
+    ` PDF gelezen (${pdf.leverancier}): ${KORT(pdf.producten, 160) || 'geen productregels'}${pdf.leverdatum ? ', leverdatum ' + pdf.leverdatum : ''}.`;
 }
 
 // ---- mail -> actie. Geeft {type:'update', ordernr, geleverdSerial, geleverdTekst, opm}
@@ -116,14 +173,30 @@ function duiden(m) {
   return { type: 'skip', reden: 'geen leveranciersmail' };
 }
 
+const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
+
 (async () => {
+  // Lock tegen gelijktijdige runs (launchd + handmatig schreven op 22-07 dubbele rijen).
+  try {
+    const st = fs.statSync(LOCK);
+    if (Date.now() - st.mtimeMs < 10 * 60 * 1000) { console.log('lock actief, ronde overgeslagen'); return; }
+  } catch {}
+  fs.writeFileSync(LOCK, String(process.pid));
+  try {
   const state = loadState();
   console.log(`[${nu()}] planning-mail ronde start`);
   const { browser, page, token } = await owaSessie();
   let mails = [];
   for (const mb of MAILBOXEN) mails.push(...await haalOngelezen(page, token, mb));
   await browser.close();
-  mails = mails.filter((m) => !state.verwerkt[m.id] && !state.overgeslagen[m.id]);
+  // Dedupe op InternetMessageId (zelfde mail kan in orders@ én info@ zitten) + al verwerkt.
+  const inRonde = new Set();
+  mails = mails.filter((m) => {
+    if (state.verwerkt[m.id] || state.overgeslagen[m.id] || state.verwerkt[m.imid] || state.overgeslagen[m.imid]) return false;
+    if (inRonde.has(m.imid)) return false;
+    inRonde.add(m.imid);
+    return true;
+  });
   console.log(`  nieuw te beoordelen: ${mails.length}`);
   if (!mails.length) { console.log('  niets te doen'); return; }
 
@@ -155,46 +228,51 @@ function duiden(m) {
 
   const verwerkActie = (m, a) => {
     if (a.type === 'multi') { a.acties.forEach((sub) => verwerkActie(m, sub)); return true; }
-    if (a.type === 'skip') { state.overgeslagen[m.id] = a.reden; return false; }
-    if (a.type === 'negeer') { state.verwerkt[m.id] = nu(); verslag.push(`genegeerd: ${m.subject} (${a.reden})`); return false; }
+    if (a.type === 'skip') { state.overgeslagen[m.imid] = a.reden; return false; }
+    if (a.type === 'negeer') { state.verwerkt[m.imid] = nu(); verslag.push(`genegeerd: ${m.subject} (${a.reden})`); return false; }
     if (a.type === 'update' || a.type === 'opmerking' || a.type === 'nieuw-of-opmerking') {
       const i = vindRij(a.ordernr);
       if (i >= 0) {
         const rij = i + 1;
-        if (a.type === 'update') {
-          const huidig = (rows[i] || [])[7];
-          if (huidig !== a.geleverdSerial) {
-            waarden.push({ range: `'${TAB}'!H${rij}`, values: [[a.geleverdTekst]] });
-            rows[i][7] = a.geleverdSerial;
-            opm(rij, a.opm); blauw.add(i); verslag.push(`rij ${rij}: ${a.opm}`);
-          } else { verslag.push(`rij ${rij}: leverdatum stond al goed (${a.geleverdTekst})`); }
+        if (a.geleverdSerial && (rows[i] || [])[7] !== a.geleverdSerial) {
+          waarden.push({ range: `'${TAB}'!H${rij}`, values: [[a.geleverdTekst]] });
+          rows[i][7] = a.geleverdSerial;
+          opm(rij, a.opm); blauw.add(i); verslag.push(`rij ${rij}: ${a.opm}`);
+        } else if (a.type === 'update') {
+          verslag.push(`rij ${rij}: leverdatum stond al goed (${a.geleverdTekst})`);
         } else {
           opm(rij, a.opm); blauw.add(i); verslag.push(`rij ${rij}: ${a.opm}`);
         }
-        state.verwerkt[m.id] = nu();
+        state.verwerkt[m.imid] = nu();
         return true;
       }
       if (a.type === 'opmerking' || a.type === 'nieuw-of-opmerking' || a.type === 'update') {
         const n = { naam: a.naam || '(onbekend)', ordernr: a.ordernr, besteld: a.besteld || '', geleverd: a.geleverdTekst || '', wat: a.nieuwWat || a.wat || '', opm: a.opm + (a.type === 'update' ? ' LET OP: ordernummer niet in de sheet gevonden — nieuwe rij gemaakt.' : '') };
-        nieuweRijen.push(n); state.verwerkt[m.id] = nu();
+        nieuweRijen.push(n); state.verwerkt[m.imid] = nu();
         return true;
       }
     }
     if (a.type === 'nieuw') {
-      nieuweRijen.push({ naam: a.naam, ordernr: a.ordernr, besteld: a.besteld || '', geleverd: '', wat: a.wat, opm: a.opm });
-      state.verwerkt[m.id] = nu();
+      nieuweRijen.push({ naam: a.naam, ordernr: a.ordernr, besteld: a.besteld || '', geleverd: a.geleverdTekst || '', wat: a.wat, opm: a.opm });
+      state.verwerkt[m.imid] = nu();
       return true;
     }
     return false;
   };
 
   for (const m of mails) {
-    try { verwerkActie(m, duiden(m)); } catch (e) { console.log(`  [${m.subject}] FOUT: ${e.message}`); }
+    try {
+      const a = duiden(m);
+      if (m.hasAtt && a.type !== 'skip' && a.type !== 'negeer') verrijkMetPdf(a, await leesPdf(m, token));
+      verwerkActie(m, a);
+    } catch (e) { console.log(`  [${m.subject}] FOUT: ${e.message}`); }
   }
 
   // Nieuwe rijen achteraan (dedupe binnen deze ronde op ordernr+naam)
+  // Dedupe alleen op écht ordernummer — rijen zonder ordernr (bv. 2x "handmatig bekijken")
+  // zijn aparte mails en mogen nooit tegen elkaar wegvallen.
   const gezien = new Set();
-  const uniek = nieuweRijen.filter((n) => { const k = n.ordernr + '|' + n.naam; if (gezien.has(k)) return false; gezien.add(k); return true; });
+  const uniek = nieuweRijen.filter((n, i) => { const k = n.ordernr ? n.ordernr + '|' + n.naam : 'mail-' + i; if (gezien.has(k)) return false; gezien.add(k); return true; });
   if (uniek.length) {
     const start = laatste + 1;
     const values = uniek.map((n, i) => {
@@ -226,4 +304,5 @@ function duiden(m) {
     await fetch(`https://api.telegram.org/bot${TG.token}/sendMessage`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: TG.chat, text: tekst.slice(0, 3900) }) }).catch(() => {});
   }
   console.log(`[${nu()}] ronde klaar`);
+  } finally { try { fs.unlinkSync(LOCK); } catch {} }
 })().catch((e) => { console.log('FOUT:', e.message); process.exit(1); });

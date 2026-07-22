@@ -74,6 +74,7 @@ logs/
 docs/*.pdf
 .vercel
 scripts/.anthropic-api-key.txt
+scripts/.tomtom-api-key.txt
 scripts/secrets.js
 .next/
 data/google-service-account.json

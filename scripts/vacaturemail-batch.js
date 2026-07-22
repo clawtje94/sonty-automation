@@ -67,9 +67,15 @@ async function verstuur(adres, groet) {
     if (r2.status === 429) { await wacht(60000); continue; }
     if (!r2.ok) return { ok: false, fout: 'message ' + r2.status };
     // BEWUST NIET aan Daimy toewijzen bij verzending (Daimy 22-07: "ik krijg van alles wat je
-    // verstuurt een toegewezen-mail"). Alleen sluiten. Toewijzen aan Daimy gebeurt pas als er
-    // een ANTWOORD binnenkomt — dat doen de vacature-guards in email-daemon.js en daemon.js.
-    await fetch(`https://app.trengo.com/api/v2/tickets/${t.id}/close`, { method: 'POST', headers: H, body: '{}' }).catch(() => {});
+    // verstuurt een toegewezen-mail"). Alleen sluiten — MET retry: een stil mislukte close
+    // (429) liet tickets open staan. Toewijzen aan Daimy gebeurt pas bij een ECHT antwoord
+    // (vacature-guards in email-daemon.js en daemon.js); de e-maildaemon veegt bovendien
+    // open vacature-tickets zonder antwoord alsnog dicht.
+    for (let c = 0; c < 5; c++) {
+      const rc = await fetch(`https://app.trengo.com/api/v2/tickets/${t.id}/close`, { method: 'POST', headers: H, body: '{}' }).catch(() => null);
+      if (rc && rc.ok) break;
+      await wacht(30000);
+    }
     return { ok: true, ticket: t.id };
   }
   return { ok: false, fout: 'rate-limit bleef' };

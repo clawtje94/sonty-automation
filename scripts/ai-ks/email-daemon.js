@@ -66,11 +66,24 @@ async function ronde() {
     // Beantwoord-kandidaat = open én aan Sunny toegewezen, OF echt aan niemand (geen user én
     // geen team). Aan een TEAM toegewezen (bv. "Mens nodig") = human-wachtrij, daar blijft de
     // daemon qua beantwoorden vanaf (notities scannen mag wel).
-    // VACATURE-reacties (Daimy 22-07): NOOIT door de bot beantwoorden — open reacties op de
-    // wervingsmail worden direct aan Daimy (736327) toegewezen en verder met rust gelaten.
+    // VACATURE-tickets (Daimy 22-07): NOOIT door de bot beantwoorden. Toewijzen aan Daimy
+    // ALLEEN bij een écht menselijk antwoord — open tickets zonder antwoord (mislukte sluiting
+    // na verzending) of met alleen een afwezigheidsbericht/bounce gewoon als Sunny sluiten,
+    // anders krijgt Daimy een toegewezen-mail per verzonden vacaturemail (bug 22-07 ~19:45).
     if (/nieuwe collega|interesse in de vacature/i.test(t.subject || '')) {
-      if (t.status !== 'CLOSED' && Number(t.user_id) !== 736327) {
-        try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 736327 }); console.log(`  [${t.id}] vacature-reactie → toegewezen aan Daimy`); } catch (e) { console.error(`  [${t.id}] vacature-toewijzing FOUT: ${e.message}`); }
+      if (t.status !== 'CLOSED') {
+        try {
+          const vm = await tGet(`/tickets/${t.id}/messages`);
+          const inbound = (vm?.data || []).filter((m) => m.type === 'INBOUND');
+          const echt = inbound.some((m) => !/automatisch antwoord|auto.?reply|out of office|afwezig|vakantie|undeliver|mail delivery|delivery status|postmaster|mailer-daemon/i.test(String(m.body || m.message || '').slice(0, 400)));
+          if (echt && Number(t.user_id) !== 736327) {
+            await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 736327 });
+            console.log(`  [${t.id}] echt vacature-antwoord → toegewezen aan Daimy`);
+          } else if (!echt) {
+            await tPost(`/tickets/${t.id}/close`, {});
+            console.log(`  [${t.id}] vacature-ticket zonder echt antwoord → gesloten (Sunny)`);
+          }
+        } catch (e) { console.error(`  [${t.id}] vacature-afhandeling FOUT: ${e.message}`); }
       }
       scan[t.id] = String(t.updated_at);
       continue;

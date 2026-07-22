@@ -12,7 +12,8 @@
 - **Plan**: docs/montagetijden-overzicht-plan.md (v2: Bookings-bron, leverings-trigger+datumkeuze, netto tijd + expliciete reistijd, smal aankomstvenster, Planado pas als alles staat).
 - **Wacht op Daimy** (gevraagd via Telegram 6889): V11 magazijnadres Berkel; V6 geleverd-signaal; V12 skills bevestigen; werkkaders teams (starttijd/eindtijd/max klussen); V7 vaste regio-dagen; V8/V9 akkoord tijden-lijst + solar-kolom; TomTom-key; akkoord WhatsApp-vangnet meten. Zodra V11 + werkkaders binnen zijn: schaduwplanner bouwen (2 wkn schaduw naast Marijn).
 
-## VACATUREMAIL-LIJST VOORBEREID (22 juli ~16:00, opdracht Daimy — NIETS versturen)
+## VACATUREMAIL-LIJST VOORBEREID (22 juli, opdracht Daimy — NIETS versturen)
+- UPDATE ~16:30: doelgroep gefilterd op wens Daimy (2024-2026 + afgeronde opdrachten): **1.744 adressen** in `data/vacaturemail-doelgroep.csv` (602 met lopende order uitgesloten). Concept-mail + verzendplan in `docs/vacaturemail-plan.md` (vacatures: 1 servicemonteur, 2 monteurs, 2 inmeters, 1 winkelmedewerker wo/vr/za; aanbrengbonus EUR 1.000 na proeftijd). Wacht op: onderwerpregel, tekst-akkoord, afzender, startdatum.
 - Doel: vacaturemail naar alle klanten waar gemonteerd/geleverd is. Bron: Gripp (alleen-lezen) — relaties met >=1 factuur + e-mail = 2.780 unieke adressen (1.005 laatste factuur 2026, 877 uit 2025, 464 uit 2024, rest t/m 2021). Leveranciers/partners/eigen adressen gefilterd.
 - CSV: `data/vacaturemail-lijst.csv` (naam;email;plaats;type;aantal_facturen;laatste_factuur) — staat in .gitignore (persoonsgegevens). Bouwscript: scratchpad (vacature-lijst-bouw.js), zo nodig opnieuw te draaien.
 - WACHT OP DAIMY: doelgroep (alles of 2024-2026 = 2.346), afzender (info@/werving@), verzendwijze (batches/mailtool — 2.780 in 1x vanaf Outlook = spamrisico), en de mailtekst (concept aangeboden). NIETS versturen zonder akkoord.

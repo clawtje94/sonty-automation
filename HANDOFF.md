@@ -1,5 +1,11 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-22)
 
+## PLANNING: TAB "CLAUDE AI TEST" GEVULD (22 juli)
+- Opdracht Daimy: alle mails uit de Inbox van orders@sonty.nl (42 ongelezen) verwerken in de nieuwe tab "Claude ai test" (kopie van tab 2026, rijnummers lopen 1-op-1 gelijk); mails op ONGELEZEN laten, elke aangeraakte rij blauw (#CFE2F3) + celnotitie in kolom A wat er gebeurd is.
+- Gedaan: 11 bestaande rijen bijgewerkt ("Geleverd op" o.b.v. 22 NE-laadmeldingen Unilux/Toppoint -> 22-07 en ROMA-levermelding -> 23-07; Voorraad 2606004 alleen notitie: gewijzigde bevestiging in PDF) + 18 nieuwe rijen op 1383-1400 (13 Sunmaster-portaalbevestigingen, Toppoint 26084369, Toppoint-laadmelding 82605208 NIET in sheet gevonden, Unilux Adriaans, Velux 1090-5031824825, retour-actiepunt SN82606373). Alles blauw + notitie, geverifieerd via API-teruglezing.
+- Beperking: product-/leverdetails van Sunmaster/Toppoint/Unilux/Velux zitten in PDF-bijlagen — niet uitgelezen; staat zo in de notities. Scripts: `scripts/planning-orders-fetch.js` (Inbox ophalen, read-only) + `scripts/planning-orders-verwerk-22-07.js` (eenmalige verwerking, met dubbel-checks tegen dubbele ordernrs).
+- Tab 2026 zelf is NIET aangeraakt.
+
 ## INFO@ IN DE MAIL-DAEMON (22 juli, opdracht Daimy "zelfde regels als de rest")
 - info@sonty.nl is door Daimy aan Trengo gekoppeld: kanaal "info@ mailbox" (id 1364806), ontvangt live mail (geverifieerd 22 juli).
 - `email-daemon.js`: kanaalfilter is nu een lijst `KANALEN = ['Aanvragen', 'info@ mailbox']` — verder identieke regels (alleen open tickets van Sunny/niemand, reactietijd 90-120 min, bot-uren, @sonny-notities, Mens nodig-escalatie). Daemon gekickstart, ziet info@-ticket 968111180 en respecteert de reactietijd.

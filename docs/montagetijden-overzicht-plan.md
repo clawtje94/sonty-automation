@@ -212,3 +212,19 @@ Elke afmelding voedt: facturatie, nabestelling, tijden-database en klantcommunic
 4. Dan pas de schaduwplanner erbovenop — die heeft dan perfecte input.
 Open: V15 wie zet nu de bestelling om naar Sunmaster/Unilux/Roma (kantoor handmatig?);
 V16 factureren bij restpunt (alles, deel, of wachten)?
+
+### Antwoorden Daimy 22 juli avond (V13-V20):
+- V13: inmeters zijn aparte mensen — nu 1 inmeter, verdeeld over de teams. Eis bevestigd:
+  **dashboard om skills aan personeel te koppelen** (personeel/skills-beheer in eigen CRM).
+- V14: nog open (wie doet service-klussen).
+- V15: bestellen gebeurt nu handmatig; **Daimy geeft alle leverancier-logins** zodat per
+  product uitgezocht kan worden hoe de bestelling/meetbonnen in elkaar zitten → basis voor
+  (semi-)automatisch bestellen vanuit het inmeetformulier.
+- V16: eindfactuur pas als de montage volledig is afgerond; bij restpunt nog NIET factureren.
+- V17: **40% aanbetaling**, factuur direct na het accepteren/tekenen van de offerte die de
+  inmeter voorlegt (dus bestellen kan na tekenen, niet wachten op betaling).
+- V18: klant betaalt per bank of iDEAL; betaalstatus staat in Gripp → factuur- en
+  betaalbewaking via Gripp-koppeling (alleen-lezen checken, zuinig).
+- V19: montagetijden: voorstel-uit-historie wordt als startpunt vastgezet (montagetijden-v1),
+  bijstellen zodra de praktijk (Planado-metingen later) anders laat zien.
+- V20: eigen Sonty-bot: nog niet, bewaren voor later.

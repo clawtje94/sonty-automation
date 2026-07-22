@@ -246,6 +246,12 @@ V16 factureren bij restpunt (alles, deel, of wachten)?
 2. Planner biedt geen sloten op niet-complete teamdagen: akkoord.
 3. Half team met solo-klussen (solar/hor/binnen): kan inderdaad af en toe. V22 open:
    welke producten zijn 1-mans werk?
-4. ZIEKTE = GEPARKEERD (Daimy): herverdelen naar andere teams kan niet zomaar, die bussen
-   kunnen er niet ineens meer bij op een dag. Later iets op verzinnen (denk: dagbuffer/
-   flexslot, zzp-achtervang, of klant-eerst-bericht). NIET nu bouwen.
+4. ZIEKTE-PROTOCOL (Daimy 22-07, definitief ontwerp):
+   a. De achtergebleven teamgenoot stapt in bij de DRUKSTE bus van die dag;
+      die bus krijgt er 2 opdrachten van het zieke team bij (3-mans = sneller per klus).
+   b. De overige opdrachten van het zieke team verdeelt de planner over de andere
+      bussen — geoptimaliseerd op reistijd/regio en skills, beslissing bij de planner
+      (Claude) op dat moment.
+   c. Wat vandaag echt niet meer past: klant krijgt automatisch bericht + 2 nieuwe
+      slotopties; kantoor ziet het als uitzondering in het ochtendlijstje.
+   Onderdeel van de schaduwplanner-spec (fase 5b).

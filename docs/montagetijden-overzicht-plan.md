@@ -102,6 +102,17 @@ montagedatum te kiezen:
 > lokaal (V10 akkoord 22 juli), TomTom-API later als verkeerslaag voor de dagplanning.
 
 ## Fase 5b — Zelf plannen, in drie treden (na fase 3/4)
+**Kernprincipe (Daimy 22 juli)**: de oude planning zette klussen rug-aan-rug met de
+reistijd verstopt in de klusblokken (81% had 0 min ertussen). De nieuwe planner splitst
+dat expliciet: NETTO montagetijd per klus (uit metingen, fase 2) + reistijd tussen klussen
+(uit OSRM/TomTom) als aparte blokken. Daardoor: (a) de klant krijgt een smal
+aankomstvenster ("tussen 9:30 en 10:00") in plaats van een dagdeel, met later eventueel
+een "monteur is onderweg"-bericht; (b) wij zien per team de verwachte eindtijd van de dag,
+dus ook wanneer er ruimte is voor een extra (service)klus of eerder naar huis.
+LET OP voor fase 3: de historische medianen uit Bookings zijn dus BRUTO (incl. verstopte
+reistijd); netto montagetijden moeten uit de echte metingen komen, de historie is alleen
+het startpunt.
+
 De planner moet vier dingen tegelijk goed doen:
 - **Duur**: uit het montagetijden-model (fase 3), incl. contextvragen van de klant.
 - **Juiste mensen**: skills per producttype (wie mag pergola's, wie elektra), 1 vs 2

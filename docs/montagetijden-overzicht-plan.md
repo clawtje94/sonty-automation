@@ -237,3 +237,15 @@ V16 factureren bij restpunt (alles, deel, of wachten)?
 - V19: montagetijden: voorstel-uit-historie wordt als startpunt vastgezet (montagetijden-v1),
   bijstellen zodra de praktijk (Planado-metingen later) anders laat zien.
 - V20: eigen Sonty-bot: nog niet, bewaren voor later.
+
+### Vakantie/afwezigheid — besluiten Daimy 22 juli avond:
+1. Afwezigheid uit het personeel-dashboard moet straks AUTOMATISCH naar Planado geladen
+   worden (vakanties worden nu ook al ergens automatisch vandaan gehaald — waarschijnlijk
+   de Outlook→Planado-sync, scripts/outlook-planado-sync.js; uitzoeken bij de bouw).
+   Dit is een geplande uitzondering op "geen Planado-integraties tot alles staat".
+2. Planner biedt geen sloten op niet-complete teamdagen: akkoord.
+3. Half team met solo-klussen (solar/hor/binnen): kan inderdaad af en toe. V22 open:
+   welke producten zijn 1-mans werk?
+4. ZIEKTE = GEPARKEERD (Daimy): herverdelen naar andere teams kan niet zomaar, die bussen
+   kunnen er niet ineens meer bij op een dag. Later iets op verzinnen (denk: dagbuffer/
+   flexslot, zzp-achtervang, of klant-eerst-bericht). NIET nu bouwen.

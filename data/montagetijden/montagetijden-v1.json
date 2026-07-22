@@ -1,0 +1,34 @@
+{
+  "versie": 1,
+  "bron": "Bookings-historie 2024-07 t/m 2026-07 (3850 montageklussen), analyse 2026-07-22",
+  "let_op": "Dit zijn BRUTO geplande tijden (reistijd zat historisch verstopt in de blokken, 81% rug-aan-rug gepland). Netto tijden volgen uit echte metingen (fase 2 plan). Minuten, mediaan.",
+  "status": "wacht op akkoord Daimy (V8) — nog nergens in gebruik",
+  "producten": {
+    "rolluik": { "eerste": 120, "perExtra": 35, "n": 808, "spreiding": "120-210", "staffels": { "1": 120, "2": 150, "3": 180, "4+": 240 } },
+    "screen_rits": { "eerste": 120, "perExtra": 30, "n": 228, "spreiding": "90-180", "staffels": { "1": 120, "2": 150, "3": 180, "4+": 270 } },
+    "knikarmscherm": { "eerste": 150, "perExtra": 90, "n": 393, "spreiding": "120-180", "staffels": { "1": 150, "2": 240 } },
+    "uitvalscherm": { "eerste": 120, "perExtra": 90, "n": 68, "spreiding": "120-180", "staffels": { "1": 120, "2": 210 } },
+    "markies": { "eerste": 120, "perExtra": 120, "n": 70, "spreiding": "90-210", "staffels": { "1": 120, "2": 240 }, "opmerking": "klein aantal metingen" },
+    "binnenzonwering": { "eerste": 90, "perExtra": 20, "n": 137, "spreiding": "60-150", "staffels": { "1": 90, "2": 90, "3": 120, "4+": 180 } },
+    "hor": { "eerste": 60, "perExtra": 15, "n": 21, "spreiding": "60-120", "opmerking": "indicatief, weinig metingen" },
+    "pergola": { "eerste": 360, "perExtra": null, "n": 46, "spreiding": "300-420" }
+  },
+  "overig": {
+    "combi_meerdere_producten": { "mediaan": 210, "n": 365, "spreiding": "150-300" },
+    "service_reparatie": { "mediaan": 90, "n": 851, "spreiding": "60-120" },
+    "inmeten": { "mediaan": 60, "n": 2777 }
+  },
+  "solar": {
+    "bevinding": "historisch bij 1 stuk geen verschil gepland; bij 2+ stuks ~30 min sneller per klus (geen bedrading per element)",
+    "voorstel_V9": "bedraad = solar + elektra-toeslag per element; toeslag kalibreren met echte metingen"
+  },
+  "skills_uit_historie": {
+    "let_op": "afgeleid uit 2 jaar Bookings; door Daimy te bevestigen (V12)",
+    "Sjoerd Hoogduin": "alles (incl. pergola, markies)",
+    "Yudi / Nick": "alles (incl. pergola, markies)",
+    "Marvin / Kevin": "alles (incl. pergola)",
+    "Marvin / Bart (zzp)": "alles (incl. pergola)",
+    "Mick / Tygo": "geen pergola, nauwelijks markies",
+    "Dennis & Frenky": "basis (rolluik/screen/knikarm), incidenteel"
+  }
+}

@@ -18,6 +18,12 @@
 - **Plan**: docs/montagetijden-overzicht-plan.md (v2: Bookings-bron, leverings-trigger+datumkeuze, netto tijd + expliciete reistijd, smal aankomstvenster, Planado pas als alles staat).
 - **Wacht op Daimy** (gevraagd via Telegram 6889): V11 magazijnadres Berkel; V6 geleverd-signaal; V12 skills bevestigen; werkkaders teams (starttijd/eindtijd/max klussen); V7 vaste regio-dagen; V8/V9 akkoord tijden-lijst + solar-kolom; TomTom-key; akkoord WhatsApp-vangnet meten. Zodra V11 + werkkaders binnen zijn: schaduwplanner bouwen (2 wkn schaduw naast Marijn).
 
+## VACATUREMAIL: NOTIFICATIE-FIXES + EIGEN-MAIL-GUARD (22 juli ~20:15)
+- Toegewezen-mails naar Daimy kwamen door: (1) toewijzen bij verzenden (weggehaald), (2) stil mislukte closes (429) waarna de guard open tickets toch aan Daimy toewees. Nu: close met retry, en de e-maildaemon-guard wijst ALLEEN bij een echt menselijk antwoord aan Daimy toe (afwezigheid/bounce herkent hij en sluit stil); vacature-tickets zonder antwoord veegt hij dicht. Bot pakt vacature-tickets nooit op.
+- Eerste opt-out verwerkt (roderick.holewijn@gmail.com, data/vacaturemail-optout.txt) — bij afmeldingen: adres in optout-bestand + state.
+- BOOKINGS-LOOP GEDICHT: Sunny beantwoordde op info@ een Bookings-notificatie van ons eigen adres met zijn interne notitie (2 tickets, gesloten). email-live.js: mail van @sonty.nl/@sontymontage.nl wordt alleen gesloten, nooit beantwoord; en blokhaak-notities ("[...]") kunnen nooit meer als mail verstuurd worden.
+- Batch 1 loopt door (121+ van 1744 op ~20:15); daarna dagelijks 10:30. NB: ADMIN_PASSWORD in secrets.js is gewijzigd (door Daimy/andere sessie) — status-push gebruikt hem, check of Vercel-env meeloopt als dashboard-push 401 geeft.
+
 ## SERVICE-HEROPENING → DIRECT MENS NODIG (22 juli ~19:45, regel Daimy n.a.v. Nele +31648700375)
 - Probleem: bot bleef meepraten op een geëscaleerd servicegesprek (Nele 966428536, kozijn/vensterbank) — klantreacties na overdracht gingen zo bijna verloren.
 - Fix in daemon.js (verwerkTicket, vroege guard): WA-gesprek met een eerdere overdracht-notitie van de bot + NIEUWER klantbericht => direct team Mens nodig (assign + label + tag-notitie), uit actieve-tickets, bot antwoordt NIET. Ligt het al in Mens nodig, dan blijft de bot er stil vanaf. Nele's ticket uit AI-beheer gehaald (ligt bij Tanya, door Daimy toegewezen). Daemon herstart.

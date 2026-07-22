@@ -1,6 +1,6 @@
 # Vacaturemail naar klanten — concept + plan (22-07-2026, WACHT OP AKKOORD DAIMY)
 
-**Status: NIETS naar klanten verstuurd.** HARDE REGEL (Daimy 22-07): pas versturen als Daimy letterlijk "ja stuur maar naar iedereen" zegt. Testmails v1+v2+v3 naar daimyboot@gmail.com + joey@sonty.nl (vanaf info@, Trengo-kanaal 1364806).
+**Status: NIETS naar klanten verstuurd.** HARDE REGEL (Daimy 22-07): pas versturen als Daimy letterlijk "ja stuur maar naar iedereen" zegt. Testmails v1 t/m v4 naar daimyboot@gmail.com + joey@sonty.nl (vanaf info@, Trengo-kanaal 1364806).
 
 ## Doelgroep (staat klaar)
 - `data/vacaturemail-doelgroep.csv` (niet in git): **1.744 unieke adressen**
@@ -36,7 +36,7 @@ Aanbrengbonus: **€1.000** voor wie iemand aandraagt die de proeftijd doorkomt.
 >
 > **En dit maken we graag de moeite waard:** draag jij iemand aan die bij ons aan de slag gaat en de proeftijd doorkomt? Dan krijg jij als bedankje **1.000 euro** van ons.
 >
-> Interesse of iemand in gedachten? Geen sollicitatiegedoe: stuur gewoon even een appje naar 085 006 9681 of mail terug met wie je bent en waarom dit je leuk lijkt. Ook als je eerst meer wilt weten, bijvoorbeeld over het salaris, stuur ons dan gerust een appje.
+> Interesse of iemand in gedachten? Geen sollicitatiegedoe: stuur ons even een appje (WhatsApp-link met voorgevuld bericht "Hoi Sonty! Ik heb interesse in de vacature.") of mail terug met wie je bent en waarom dit je leuk lijkt. Ook voor meer info zoals salaris: app ons gerust (085 006 9681, zelfde voorgevulde link).
 >
 > Hartelijke groet,
 >

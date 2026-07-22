@@ -247,8 +247,9 @@ V16 factureren bij restpunt (alles, deel, of wachten)?
 3. Half team met solo-klussen (solar/hor/binnen): kan inderdaad af en toe. V22 open:
    welke producten zijn 1-mans werk?
 4. ZIEKTE-PROTOCOL (Daimy 22-07, definitief ontwerp):
-   a. De achtergebleven teamgenoot stapt in bij de DRUKSTE bus van die dag;
-      die bus krijgt er 2 opdrachten van het zieke team bij (3-mans = sneller per klus).
+   a. (correctie Daimy 19:57) De achtergebleven teamgenoot stapt in bij de DRUKSTE bus
+      van die dag; die bus krijgt er 1 opdracht bij (plus dus een extra man).
+      De RUSTIGSTE bus krijgt er 2 opdrachten bij.
    b. De overige opdrachten van het zieke team verdeelt de planner over de andere
       bussen — geoptimaliseerd op reistijd/regio en skills, beslissing bij de planner
       (Claude) op dat moment.

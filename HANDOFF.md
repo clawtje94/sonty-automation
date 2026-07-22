@@ -4,7 +4,7 @@
 - **Alle analyses klaar** (read-only, rapporten in sessie-scratchpad `montagetijden-uit-bookings.md` + `reistijden-analyse.md`, kerncijfers ook op Telegram):
   montagetijden per product uit 2 jr Bookings (3850 klussen, bruto incl. verstopte reistijd — 81% rug-aan-rug gepland);
   solar vs bedraad (historisch amper verschil gepland, alleen 2+ stuks ~30 min);
-  reistijd: 16,0 u/wk rijden vanaf Berkel (38% spits) → file-slim herpland binnen 4-weken-blok 11,1 u/wk (11% spits), 31% besparing, ~2,5 extra klussen/wk mogelijk, efficiëntie 77%→83%;
+  reistijd (definitief, exact adres + TomTom-gekalibreerd): 14,3 u/wk rijden → herpland 10,2 u/wk, 29% besparing, ~2,1 extra klussen/wk, efficiëntie 79%→84%; TomTom-key in scripts/.tomtom-api-key.txt (gitignored), echte spitsfactor ~1,15;
   magazijn: Berkel = plek 7-9 van 11, Rijswijk-hoek/Westvlietweg scheelt ~2 u/wk (LET OP: magazijn zit in BERKEL, niet Rijswijk — zie memory);
   skills-matrix per team uit historie (Mick/Tygo nog nooit pergola/markies).
 - **Route-motor**: OSRM 26.7.3 native via Homebrew + NL-kaart verwerkt (scratchpad), server 127.0.0.1:5000 handmatig gestart (max-table 8000). NIET permanent (geen launchd, bewust). VROOM nog niet: Docker/Rosetta kapot op deze Mac → later vanaf source bouwen. TomTom-key nog nodig voor echte file-laag (nu aanname spits ×1,35).

@@ -3,6 +3,11 @@
 > Opdracht Daimy 2026-07-22: "maak een plan hoe we zo goed mogelijk een overzicht kunnen
 > maken van de montagetijden, zodat we uiteindelijk zelf kunnen plannen zonder menselijke
 > hulp. Alleen plan, nog niks doen."
+> Aanvulling Daimy 22 juli: Planado is nog niet echt gebruikt (niets uit te halen; monteurs
+> volgen via Planado komt later). Indicaties nu uit Bookings halen (maar context als
+> verdieping ontbreekt daar). Verder cruciaal: klant automatisch berichten voor datumkeuze
+> zodra geleverd is, planning bij de juiste mensen, files ontwijken en zo min mogelijk
+> reistijd per team.
 > Status: PLAN — er is nog niets gebouwd.
 
 ## Einddoel
@@ -14,41 +19,50 @@ zonder betrouwbare duur per product valt er niets te plannen.
 ## Wat we al hebben (geverifieerd 22 juli)
 - **Invullijst** `docs/montagetijden-per-product.md` + Google Sheet "Montagetijden Sonty"
   (per product: 1e element + per extra element) — staat nog LEEG, wacht op Daimy.
-- **Planado**: jobtypes/templates per productgroep, shifts, skills, monteurs. Eerste
-  100 jobs via API zijn allemaal toekomstig (published/scheduled); geen afgeronde jobs
-  met werkelijke start/eindtijden gevonden. Werkelijke duur-data is er dus (nog) niet of
-  nauwelijks — fase 0 moet dit definitief vaststellen.
-- **Outlook-agenda joey@** (LIVE account): de historische montage-afspraken zoals Marijn
-  ze de afgelopen jaren inplande — planduur per klus zit impliciet in die blokken.
+- **Planado**: jobtypes/templates per productgroep, shifts, skills, monteurs. Bevestigd
+  door Daimy: er is nog niet echt mee gewerkt, dus historisch valt er NIETS uit te halen.
+  Planado is het doelsysteem voor straks (monteurs volgen, check-in/uit), niet de bron nu.
+- **MS Bookings** (`scripts/bookings-api.js`, eigen Azure-app): historische afspraken met
+  duur — dit is volgens Daimy de bron voor eerste indicaties. Beperking: geen context per
+  afspraak (1e of 2e verdieping, bereikbaarheid, demontage) — dus alleen bruikbaar als
+  ruwe basis, te verrijken via koppeling met offerte/inmeetverslag.
+- **Outlook-agenda joey@** (LIVE account): historische montage-afspraken zoals Marijn
+  ze inplande — planduur per klus zit impliciet in die blokken (zelfde beperking: context
+  ontbreekt).
 - **Gripp** (alleen-lezen, zuinig): orders met productregels per klant.
 - **Eigen CRM/offerte-tool**: offertes met producttype, aantallen, afmetingen, motor.
 - `scripts/planado-scrape-all-jobs.js` bevat al grove duur-heuristiek per trefwoord
   (pergola 480, knikarm/markies 240, rolluik 180, screen 150 min) — een startpunt, geen bron.
 
 ## Fase 0 — Data-inventarisatie (½ dag)
-1. Alle Planado-jobs pagineren: hoeveel afgerond, hebben afgeronde jobs werkelijke
-   start/stop (check-in/uit monteursapp) of alleen geplande duur?
-2. Outlook-agenda historie ophalen: hoeveel montage-afspraken staan er (12-24 mnd terug),
-   met duur en omschrijving?
-3. Steekproef van 20 klussen: is de koppeling afspraak → klant → offerte/Gripp-order →
-   producten betrouwbaar te leggen (op naam/adres/ordernummer)?
-Resultaat: feitenrapport "zoveel klussen, zoveel met product-koppeling, zoveel met echte tijden".
+1. Bookings-historie ophalen (12-24 mnd terug): hoeveel montage-afspraken, met welke duur,
+   welk soort omschrijving? Zelfde voor de Outlook-agenda.
+2. Steekproef van 20 klussen: is de koppeling afspraak → klant → offerte/Gripp-order →
+   producten betrouwbaar te leggen (op naam/adres/ordernummer)? En staat in offerte of
+   inmeetverslag iets over verdieping/bereikbaarheid?
+Resultaat: feitenrapport "zoveel klussen, zoveel met product-koppeling, zoveel met context".
 
 ## Fase 1 — Historie oogsten: hoe plande de mens het? (1-2 dagen)
-De menselijke plankennis zit in de agenda. Per historische montage-afspraak:
+De menselijke plankennis zit in Bookings en de agenda. Per historische montage-afspraak:
 duur van het blok + gekoppelde producten uit offerte/Gripp + aantal monteurs.
-Dat levert per producttype een verdeling op: "1 knikarmscherm werd door Marijn gemiddeld
-op X uur gepland, elke extra op Y". Mediaan gebruiken (uitschieters zijn vaak reistijd
-of gecombineerde klussen). Dit is direct het eerste gevulde overzicht — zonder dat er
-iemand iets hoeft in te vullen.
+Dat levert per producttype een verdeling op: "1 knikarmscherm werd gemiddeld op X uur
+gepland, elke extra op Y". Mediaan gebruiken (uitschieters zijn vaak reistijd of
+gecombineerde klussen). Dit is direct het eerste gevulde overzicht — zonder invulwerk.
+Het verdieping-probleem (Daimy): klopt, Bookings weet niet of iets 1e of 2e verdieping
+was. Deels op te lossen door offerte/inmeetverslag erbij te pakken (staat soms in), en
+verder accepteren we dat de historie een GEMIDDELDE over makkelijke en lastige klussen
+is — precies goed als startpunt; de toeslagen komen uit fase 3 en echte metingen.
+Belangrijk: vanaf nu context WEL vastleggen — bij de datumkeuze-flow (fase 5a) stellen we
+de klant 3 korte vragen: welke verdieping, bereikbaarheid achterom, parkeren voor de deur.
+Dan bouwt de context-data zichzelf op.
 
-## Fase 2 — Vanaf nu écht meten (doorlopend, start meteen)
-Geplande tijd ≠ werkelijke tijd. Twee opties, samen te gebruiken:
-1. **Planado check-in/uit**: monteurs starten/stoppen de job in de app. Kost discipline;
-   afspraak met het team nodig (Daimy). Dit is de nette, structurele bron.
-2. **Vangnet**: dagelijkse cron vergelijkt geplande jobs met daadwerkelijke resolutie-tijd
-   (updated_at bij afronden) en/of laat de monteur via een 1-taps WhatsApp-bericht
-   ("klaar? hoe lang?") de echte tijd bevestigen.
+## Fase 2 — Vanaf nu écht meten (zodra het team zover is)
+Daimy: monteurs via Planado volgen moet er komen, maar kan nu nog niet. Daarom:
+1. **Nu al**: WhatsApp-vangnet — na elke montagedag een 1-taps berichtje aan de monteur
+   ("klus bij X klaar? hoe lang echt bezig geweest?"). Laagdrempelig, geen app-discipline
+   nodig, en de metingen-database begint vast te groeien.
+2. **Later** (moment bepaalt Daimy): Planado check-in/uit als structurele bron zodra het
+   team er echt mee gaat werken. Het plan is er klaar voor; dit blokkeert niets.
 Elke gemeten klus gaat in `data/montagetijden/metingen.jsonl`: producten, aantallen,
 monteurs, gepland, werkelijk, bijzonderheden (hoogte, steiger, oude zonwering demonteren).
 
@@ -70,17 +84,37 @@ gekoppelde pergola (12 m), inmeten-combinatie. Kalibratie:
 - Planado jobtype-standaardduren automatisch vanuit deze tabel bijwerken.
 - Elke offerte in de offerte-tool toont vanaf dan de verwachte montageduur.
 
-## Fase 5 — Zelf plannen, in drie treden (na fase 3/4)
-1. **Schaduwplanner** (zoals AI-KS en opvolging): bij elke getekende offerte berekent hij
-   duur + zoekt sloten (Planado shifts, skills per producttype, regio-clustering zodat
-   monteurs niet kriskras rijden, buffer voor uitloop) en logt zijn voorstel NAAST wat
-   Marijn echt plant. Wekelijks verschil-rapport naar Daimy.
-2. **Voorstel-modus**: planner stuurt Daimy/Marijn per klus 1 Telegram-bericht met het
-   voorgestelde slot; 1 tik = akkoord → job in Planado + bevestiging naar klant.
-3. **Autonoom**: na een afgesproken foutmarge (bv. 2 weken lang ≥90% voorstellen
-   ongewijzigd overgenomen) plant hij zelf en meldt alleen uitzonderingen.
-Levertijden leverancier (bestelling binnen?) zijn een harde randvoorwaarde vóór het slot —
-meenemen vanaf trede 1.
+## Fase 5a — Leverings-trigger + datumkeuze door de klant (kernwens Daimy)
+Zodra de bestelling geleverd/binnen is, moet de klant vanzelf bericht krijgen om een
+montagedatum te kiezen:
+1. **Trigger "geleverd"**: detecteren wanneer materiaal binnen is — bron bepalen in fase 0
+   (Gripp-bestelstatus, leveranciersmail Sunmaster/Unilux/Roma, of handmatige "binnen"-tik
+   in ons CRM als start). Zonder betrouwbare trigger valt hier niets te automatiseren,
+   dus dit is een eigen onderzoekspuntje.
+2. **Klantbericht met datumkeuze**: WhatsApp/mail met 2-3 concrete slotvoorstellen (geen
+   open "wanneer schikt het", dat wordt pingpongen) + de 3 contextvragen (verdieping,
+   achterom, parkeren). Kiezen = bevestigd + in de planning.
+3. De aangeboden sloten komen uit de planner (5b) — zo blijven routes en teams kloppen.
+
+## Fase 5b — Zelf plannen, in drie treden (na fase 3/4)
+De planner moet vier dingen tegelijk goed doen:
+- **Duur**: uit het montagetijden-model (fase 3), incl. contextvragen van de klant.
+- **Juiste mensen**: skills per producttype (wie mag pergola's, wie elektra), 1 vs 2
+  monteurs, vaste teams — vastgelegd in Planado skills + eigen regels-tabel.
+- **Zo min mogelijk in de auto**: klussen per dag(deel) clusteren op regio (vaste
+  regio-dagen als basis), nieuwe klus toevoegen aan de dag waar hij qua route het minst
+  extra rijtijd kost.
+- **Files ontwijken**: geen klussen plannen die een team in de spits (7-9 / 16-18) over
+  drukke corridors jagen; rijtijden berekenen met verkeer (Google Routes API met
+  vertrektijd) en de dagvolgorde daarop optimaliseren.
+Treden:
+1. **Schaduwplanner** (zoals AI-KS en opvolging): berekent duur + zoekt sloten en logt
+   zijn voorstel NAAST wat Marijn echt plant. Wekelijks verschil-rapport naar Daimy.
+2. **Voorstel-modus**: per klus 1 Telegram-bericht met het voorgestelde slot;
+   1 tik = akkoord → job in Planado + bevestiging naar klant.
+3. **Autonoom**: na afgesproken foutmarge (bv. 2 weken ≥90% voorstellen ongewijzigd
+   overgenomen) plant hij zelf en meldt alleen uitzonderingen.
+Levertijden leverancier (fase 5a-trigger) zijn een harde randvoorwaarde vóór elk slot.
 
 ## Fase 6 — Zelflerend houden (doorlopend)
 Elke afgeronde job koppelt de werkelijke tijd terug: rolling mediaan per product wordt
@@ -97,13 +131,17 @@ automatisch bijgewerkt (met demping, geen wilde sprongen), wekelijks afwijkingsr
 - **2-monteurs-klussen**: duur per klus ≠ manuren; beide vastleggen.
 
 ## Beslissingen voor Daimy (nog niet beantwoord)
-- V3: akkoord met deze volgorde (eerst historie oogsten, dan meten, dan pas planner)?
-- V4: mogen monteurs verplicht in-/uitchecken in de Planado-app, of liever het
-  WhatsApp-vangnet?
+- V3: akkoord met deze volgorde (eerst historie oogsten uit Bookings, dan meten, dan planner)?
+- V4 (beantwoord 22 juli): Planado-tracking komt later, kan nu nog niet → we starten met
+  het WhatsApp-vangnet. Open deelvraag: wanneer wil Daimy het team echt op Planado hebben?
 - V5: korte gerichte vragenlijst i.p.v. de lege sheet invullen — goed?
+- V6: wat is nu het betrouwbaarste signaal dat een bestelling geleverd is (Gripp-status,
+  leveranciersmail, of handmatige tik)? Bepaalt hoe snel 5a kan.
+- V7: zijn er vaste regio-dagen of vaste teams waar de planner rekening mee moet houden?
 
 ## Inschatting
-Fase 0-1: 2 dagen werk → eerste gevuld overzicht. Fase 2 loopt vanaf dag 1 mee.
-Fase 3-4: 2 dagen. Fase 5 trede 1 (schaduwplanner): 2-3 dagen, daarna wekenlang schaduw
-draaien net als de opvolging. Realistisch: binnen ~2 weken een betrouwbaar
-montagetijden-overzicht, autonoom plannen in schaduw daarna direct te starten.
+Fase 0-1: 2 dagen werk → eerste gevuld overzicht uit Bookings-historie. Fase 2 (vangnet)
+loopt vanaf dag 1 mee. Fase 3-4: 2 dagen. Fase 5a (leverings-trigger + datumkeuze): 2-3
+dagen zodra V6 beantwoord is. Fase 5b trede 1 (schaduwplanner): 2-3 dagen, daarna
+wekenlang schaduw draaien net als de opvolging. Daimy heeft gelijk dat het uitgebreid is —
+maar elke fase levert los al iets bruikbaars op, en niets hoeft in één keer.

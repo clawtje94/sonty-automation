@@ -1,4 +1,9 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-21)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-22)
+
+## INFO@ IN DE MAIL-DAEMON (22 juli, opdracht Daimy "zelfde regels als de rest")
+- info@sonty.nl is door Daimy aan Trengo gekoppeld: kanaal "info@ mailbox" (id 1364806), ontvangt live mail (geverifieerd 22 juli).
+- `email-daemon.js`: kanaalfilter is nu een lijst `KANALEN = ['Aanvragen', 'info@ mailbox']` — verder identieke regels (alleen open tickets van Sunny/niemand, reactietijd 90-120 min, bot-uren, @sonny-notities, Mens nodig-escalatie). Daemon gekickstart, ziet info@-ticket 968111180 en respecteert de reactietijd.
+- LET OP voor scripts: het `channel_id`-filter op Trengo's /tickets-lijst werkt NIET (geeft alle kanalen gemixt terug) — altijd client-side filteren op `t.channel.id`/`t.channel.title`.
 
 ## QA-VANGNET + BOOKINGS IN HEALTH-CHECK (21 juli)
 - **QA-vangnet**: keurt de kwaliteitspoort een antwoord 2x af, dan krijgt de klant voortaan een neutraal wachtbericht ("ik leg dit even bij een collega neer") i.p.v. stilte; de stille overdracht naar Mens nodig blijft. Aanleiding: 3x klant-stilte op 21 juli.

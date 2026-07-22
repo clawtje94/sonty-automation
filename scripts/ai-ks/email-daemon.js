@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// DOORLOPENDE e-mailverwerking voor aanvragen@ (net als de WhatsApp-daemon, maar voor e-mail).
-// Pakt elke ronde de open Aanvragen-tickets op die aan Sunny toegewezen of niet-toegewezen zijn
+// DOORLOPENDE e-mailverwerking voor aanvragen@ en info@ (net als de WhatsApp-daemon, maar voor e-mail).
+// Pakt elke ronde de open tickets van de KANALEN op die aan Sunny toegewezen of niet-toegewezen zijn
 // en waar de klant het laatste bericht stuurde, en verwerkt ze met dezelfde agent-logica:
 // beantwoorden + aan Sunny toewijzen + sluiten, of naar team Mens nodig. Human-toegewezen
 // tickets blijft hij af. State per ticket+laatste-berichttijd voorkomt dubbel verwerken.
@@ -10,7 +10,8 @@ const path = require('path');
 const { verwerk, tGet, verwerkNotities } = require('./email-live.js');
 const CFG = require('./config.js');
 
-const AANVRAGEN_KANAAL = 'Aanvragen';
+// Kanalen die de daemon beheert (Daimy 22 juli: info@ met dezelfde regels als aanvragen@).
+const KANALEN = ['Aanvragen', 'info@ mailbox'];
 const SONNY_USER = 747786;
 const STATE_FILE = path.join(__dirname, '..', '..', 'data', 'ai-ks', 'email-verwerkt.json');
 // Per ticket de laatst geziene updated_at, zodat we berichten alleen ophalen als er iets
@@ -57,7 +58,7 @@ async function ronde() {
   for (let p = 1; p <= 25; p++) {
     const d = await tGet(`/tickets?page=${p}`);
     const data = d?.data || [];
-    tickets.push(...data.filter(t => t.channel?.title === AANVRAGEN_KANAAL));
+    tickets.push(...data.filter(t => KANALEN.includes(t.channel?.title)));
     if (!data.length) break;
   }
   const teDoen = [];

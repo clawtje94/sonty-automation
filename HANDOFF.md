@@ -1,5 +1,11 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-22)
 
+## MONTAGE-DASHBOARDS LIVE IN ADMIN (22 juli avond, opdracht Daimy "alleen dashboards, rest nog niks")
+- sonty-website: `/admin/montage` (hub: orderketen-cirkel 8 stappen + analysecijfers), `/admin/montage/tijden` (beheer basistijden+toeslagen, seed uit historie, solar apart met norm-Daimy 45/10 geel gemarkeerd, lege regels rood), `/admin/montage/personeel` (teams+skills aan/uit, rollen, toevoegen/verwijderen; hoofdinmeter-rij klaar).
+- API: /api/admin/montagetijden + /api/admin/personeel (KV, keys montage:tijden / montage:personeel, seeds in lib/montage/defaults.ts). Backend getest (GET/POST/auth-block), visueel gecheckt met Playwright-screenshots (ook naar Daimy op Telegram), build groen, gepusht → Vercel.
+- Ketenstappen tonen eerlijk "nog niet gekoppeld" — geen verzonnen data. Wacht op feedback Daimy wat er mist.
+- Montage/inmeet-TIJDEN: Daimy komt erop terug (hoofdinmeter vult lijst in, staat klaar op Telegram 6934). NIETS anders bouwen tot akkoord.
+
 ## MONTAGETIJDEN + ROUTE-ANALYSES AF, ROUTE-MOTOR LIVE (22 juli middag/avond, opdracht Daimy)
 - **Alle analyses klaar** (read-only, rapporten in sessie-scratchpad `montagetijden-uit-bookings.md` + `reistijden-analyse.md`, kerncijfers ook op Telegram):
   montagetijden per product uit 2 jr Bookings (3850 klussen, bruto incl. verstopte reistijd — 81% rug-aan-rug gepland);

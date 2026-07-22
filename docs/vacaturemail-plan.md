@@ -1,6 +1,6 @@
 # Vacaturemail naar klanten — concept + plan (22-07-2026, WACHT OP AKKOORD DAIMY)
 
-**Status: NIETS naar klanten verstuurd.** HARDE REGEL (Daimy 22-07): pas versturen als Daimy letterlijk "ja stuur maar naar iedereen" zegt. Testmails v1 t/m v5 naar daimyboot@gmail.com + joey@sonty.nl (vanaf info@, Trengo-kanaal 1364806).
+**Status: NIETS naar klanten verstuurd.** HARDE REGEL (Daimy 22-07): pas versturen als Daimy letterlijk "ja stuur maar naar iedereen" zegt. Testmails v1 t/m v6 naar daimyboot@gmail.com + joey@sonty.nl (vanaf info@, Trengo-kanaal 1364806).
 
 ## Doelgroep (staat klaar)
 - `data/vacaturemail-doelgroep.csv` (niet in git): **1.744 unieke adressen**
@@ -34,7 +34,8 @@ Aanbrengbonus: **€1.000** voor wie iemand aandraagt die de proeftijd doorkomt.
 >
 > Misschien ken jij iemand die dit op het lijf geschreven is. Een buurman met gouden handen, een neef die toe is aan iets nieuws, of misschien ben jij het zelf wel.
 >
-> **En dit maken we graag de moeite waard:** draag jij iemand aan die bij ons aan de slag gaat en de proeftijd doorkomt? Dan krijg jij als bedankje **1.000 euro** van ons.
+> **Bonus (v6-formulering):** komt jouw tip bij ons aan de slag en door de proeftijd, dan krijg jij als bedankje **1.000 euro**. "Zelf houden of delen met degene die je aandraagt, die keuze is helemaal aan jou." Diegene noemt bij het appen alleen jouw naam.
+> **WhatsApp-formulier (v6, akkoord Daimy):** de interesse-knop opent WhatsApp met invulvelden: Functie / Naam / Woonplaats / Ervaring in de zonwering / Huidige baan en werkgever / Waarom dit me leuk lijkt / Ik kom via. De link in het doorstuurbericht opent hetzelfde formulier.
 >
 > **Ben jij het zelf?** WhatsApp-knop (voorgevuld: "Hoi Sonty! Ik heb interesse in de vacature. Ik kom via: ") of mail terug. Ook voor salaris-vragen: app-knop. Geen kaal telefoonnummer meer in de mail (mensen gingen anders bellen).
 > **Ken je iemand?** Doorstuur-knop: opent WhatsApp met kant-en-klaar doorstuurbericht ZONDER de 1.000 euro erin (creatieve oplossing doorstuur-ongemak). De bonus staat alleen in de originele mail: "dat houden we lekker tussen ons, diegene hoeft alleen jouw naam even te noemen" — zo wordt de aanbrenger toch geregistreerd via het "Ik kom via:"-veld van de kandidaat.

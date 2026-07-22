@@ -316,7 +316,8 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     const values = uniek.map((n, i) => {
       const r = start + i;
       const plaats = plaatsVan[zoeknaam(n.naam)] || '';
-      return ['FALSE', n.opm, n.naam, plaats, plaats ? regioVan(plaats) : '', n.ordernr, n.besteld, n.geleverd, '', '', '', n.wat,
+      // Kolom A leeg laten: daar zit een checkbox in die het team zelf doortrekt (Daimy 22-07)
+      return ['', n.opm, n.naam, plaats, plaats ? regioVan(plaats) : '', n.ordernr, n.besteld, n.geleverd, '', '', '', n.wat,
         `=IF(I${r + 1060}=TRUE; ""; IF(ISBLANK(G${r}); ""; DATEDIF(G${r}; TODAY(); "D")))`];
     });
     waarden.push({ range: `'${TAB}'!A${start}:M${start + uniek.length - 1}`, values });

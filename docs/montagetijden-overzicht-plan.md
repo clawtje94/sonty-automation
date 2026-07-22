@@ -96,6 +96,11 @@ montagedatum te kiezen:
    achterom, parkeren). Kiezen = bevestigd + in de planning.
 3. De aangeboden sloten komen uit de planner (5b) — zo blijven routes en teams kloppen.
 
+> **BESLUIT Daimy 22 juli**: Planado blijft het eindsysteem, maar we bouwen er PAS naartoe
+> als alles volledig staat. Tot die tijd: alles lokaal/in eigen tooling ontwikkelen en
+> geen Planado-integraties bouwen of Planado-data aanpassen. Route-motor: OSRM + VROOM
+> lokaal (V10 akkoord 22 juli), TomTom-API later als verkeerslaag voor de dagplanning.
+
 ## Fase 5b — Zelf plannen, in drie treden (na fase 3/4)
 De planner moet vier dingen tegelijk goed doen:
 - **Duur**: uit het montagetijden-model (fase 3), incl. contextvragen van de klant.

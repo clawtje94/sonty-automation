@@ -180,10 +180,11 @@ keten meegaan.** Het inmeetformulier ÍS de bestelspecificatie, ÍS de magazijnc
 ### 1. Inmeter (het begin van alle kwaliteit)
 - Vooraf automatisch dossier op telefoon: offerteregels, maten uit configurator, foto's/afspraken uit het klantgesprek (Trengo), adres.
 - Digitaal formulier per productregel, MAXIMAAL SIMPEL (Daimy 22-07: geen 10 vragen):
-  maten bevestigen (voorgevuld uit offerte, alleen aanpassen wat afwijkt) + 3 VINKJES per
-  klus: [demontage oud] [bedraad (elektra nodig)] [lastig bereikbaar / verdieping] + 2-3
-  foto's van de montagepunten. De foto's vervangen de overige vragen (ondergrond, obstakels
-  ziet de monteur op de foto). Elk vinkje = vaste tijdtoeslag in het montagetijden-model.
+  maten bevestigen (voorgevuld uit offerte, alleen aanpassen wat afwijkt) + ÉÉN VINKJE:
+  [lastig bereikbaar / moeilijke montage] (+30 min) + 2-3 foto's van de montagepunten.
+  Demontage en bedraad staan al op de OFFERTE (Daimy 22-07) → die toeslagen rekent het
+  model automatisch mee vanuit de offerteregels, daar hoeft de inmeter niets voor te doen.
+  De foto's vervangen alle overige vragen (ondergrond, obstakels ziet de monteur op de foto).
 - Uitkomst = direct de definitieve bestelling (geen overtypen kantoor) + planner-context.
 - Wijkt de inmeting af van de offerte → automatisch herberekenen → klant eerst akkoord, dan pas bestellen.
 - **DEAL TER PLEKKE (Daimy 22-07)**: na het invullen rekent de eigen pricing-engine live de

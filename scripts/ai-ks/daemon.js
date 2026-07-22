@@ -314,6 +314,30 @@ async function verwerkTicket(t, state) {
     try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 736327 }); console.log(`  [${t.id}] vacature-appje → toegewezen aan Daimy`); } catch (e) { console.error(`  [${t.id}] vacature-toewijzing FOUT: ${e.message}`); }
     return;
   }
+  // SERVICE-HEROPENING (Daimy 22-07, "anders gaan gesprekken verloren", casus Nele 966428536):
+  // is dit gesprek ooit door de bot overgedragen (escalatie-notitie) en stuurt de klant DAARNA
+  // opnieuw een bericht, dan hoort het DIRECT weer bij team Mens nodig — de bot praat niet mee.
+  {
+    const ruweBerichten = msgs?.data || [];
+    const overdrachten = ruweBerichten.filter(m => (m.internal_note || m.type === 'NOTE') && m.user_id === 747786 &&
+      (/@jorren745487[\s\S]*@tanya748440/.test(String(m.body || m.message || '')) || /De AI kan dit niet zelf afhandelen en draagt het over/i.test(String(m.body || m.message || ''))));
+    if (isWaTicket(t) && overdrachten.length) {
+      if (Number(t.team_id) === 431872) return; // ligt al in de Mens nodig-map — team ziet het
+      const laatsteKlant = ruweBerichten.filter(m => m.type === 'INBOUND').map(m => String(m.created_at)).sort().pop() || '';
+      const laatsteOverdracht = overdrachten.map(m => String(m.created_at)).sort().pop() || '';
+      if (laatsteKlant > laatsteOverdracht) {
+        console.log(`  [${t.id}] klant reageerde opnieuw op overgedragen (service)gesprek → terug naar Mens nodig`);
+        try {
+          await plaatsNotitie(t.id, `@jorren745487 @tanya748440\n\nKlant reageerde opnieuw op dit eerder overgedragen gesprek — direct terug in Mens nodig gezet, de bot blijft eraf.`);
+          await zetLabel(t.id, LABEL.MENS_NODIG);
+          await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
+        } catch (e) { console.error(`  [${t.id}] service-heropening FOUT: ${e.message}`); }
+        const actief = loadActief();
+        if (actief[t.id]) { delete actief[t.id]; fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actief, null, 1)); }
+        return;
+      }
+    }
+  }
   const alleRijen = (msgs?.data || []).map(m => ({
     van: m.type === 'INBOUND' ? 'klant' : 'sonty',
     tekst: clean(m.body || m.message),

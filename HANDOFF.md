@@ -12,6 +12,10 @@
 - **Plan**: docs/montagetijden-overzicht-plan.md (v2: Bookings-bron, leverings-trigger+datumkeuze, netto tijd + expliciete reistijd, smal aankomstvenster, Planado pas als alles staat).
 - **Wacht op Daimy** (gevraagd via Telegram 6889): V11 magazijnadres Berkel; V6 geleverd-signaal; V12 skills bevestigen; werkkaders teams (starttijd/eindtijd/max klussen); V7 vaste regio-dagen; V8/V9 akkoord tijden-lijst + solar-kolom; TomTom-key; akkoord WhatsApp-vangnet meten. Zodra V11 + werkkaders binnen zijn: schaduwplanner bouwen (2 wkn schaduw naast Marijn).
 
+## SERVICE-HEROPENING → DIRECT MENS NODIG (22 juli ~19:45, regel Daimy n.a.v. Nele +31648700375)
+- Probleem: bot bleef meepraten op een geëscaleerd servicegesprek (Nele 966428536, kozijn/vensterbank) — klantreacties na overdracht gingen zo bijna verloren.
+- Fix in daemon.js (verwerkTicket, vroege guard): WA-gesprek met een eerdere overdracht-notitie van de bot + NIEUWER klantbericht => direct team Mens nodig (assign + label + tag-notitie), uit actieve-tickets, bot antwoordt NIET. Ligt het al in Mens nodig, dan blijft de bot er stil vanaf. Nele's ticket uit AI-beheer gehaald (ligt bij Tanya, door Daimy toegewezen). Daemon herstart.
+
 ## VACATUREMAIL LIVE (22 juli ~18:55, akkoord Daimy)
 - Batch 1 (150 van 1.744) draait; daarna dagelijks 10:30 150 stuks via launchd `nl.sonty.vacaturemail` (`scripts/vacaturemail-batch.js`, state data/vacaturemail-verzonden.json, kill-switch data/kill/nl.sonty.vacaturemail). Definitieve mail v7 = zonder handtekening (Outlook plakt zelf), WhatsApp-formulier + doorstuur-knop zonder bonus.
 - Reacties: elk verzonden ticket toegewezen aan Daimy (736327) + gesloten; guards in email-daemon (subject "nieuwe collega"/"interesse in de vacature") en WA-daemon (inbound "interesse in de vacature"/"Ik kom via:") wijzen reacties aan Daimy toe, bot antwoordt NIET. Beide daemons herstart + in health-check/dashboard/SYSTEMEN.md.

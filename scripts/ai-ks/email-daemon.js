@@ -7,7 +7,7 @@
 // Gebruik: node email-daemon.js --watch 0   (permanent; launchd KeepAlive herstart bij crash)
 const fs = require('fs');
 const path = require('path');
-const { verwerk, tGet, verwerkNotities } = require('./email-live.js');
+const { verwerk, tGet, tPost, verwerkNotities } = require('./email-live.js');
 const CFG = require('./config.js');
 
 // Kanalen die de daemon beheert (Daimy 22 juli: info@ met dezelfde regels als aanvragen@).
@@ -66,6 +66,15 @@ async function ronde() {
     // Beantwoord-kandidaat = open én aan Sunny toegewezen, OF echt aan niemand (geen user én
     // geen team). Aan een TEAM toegewezen (bv. "Mens nodig") = human-wachtrij, daar blijft de
     // daemon qua beantwoorden vanaf (notities scannen mag wel).
+    // VACATURE-reacties (Daimy 22-07): NOOIT door de bot beantwoorden — open reacties op de
+    // wervingsmail worden direct aan Daimy (736327) toegewezen en verder met rust gelaten.
+    if (/nieuwe collega|interesse in de vacature/i.test(t.subject || '')) {
+      if (t.status !== 'CLOSED' && Number(t.user_id) !== 736327) {
+        try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 736327 }); console.log(`  [${t.id}] vacature-reactie → toegewezen aan Daimy`); } catch (e) { console.error(`  [${t.id}] vacature-toewijzing FOUT: ${e.message}`); }
+      }
+      scan[t.id] = String(t.updated_at);
+      continue;
+    }
     const kandidaat = t.status !== 'CLOSED' && (Number(t.user_id) === SONNY_USER || (!t.user_id && !t.team_id));
     const gewijzigd = scan[t.id] !== String(t.updated_at);
     // Berichten alleen ophalen als er iets kan spelen: het ticket is gewijzigd (mogelijk een

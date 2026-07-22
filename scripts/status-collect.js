@@ -20,6 +20,7 @@ const INFO = {
   'nl.sonty.opvolging-schaduw': { naam: 'Offerte-opvolging (schaduw)', groep: 'Klantgericht', log: 'opvolging.log', maxUur: 26 },
   'nl.sonty.planning-mail': { naam: 'Planning: orders@/info@ naar sheet', groep: 'Planning & orders', log: 'planning-mail-daemon.log', maxUur: 2 },
   'nl.sonty.markiezen': { naam: 'Markiezen-workflow', groep: 'Planning & orders', log: 'markiezen.log', maxUur: 30 },
+  'nl.sonty.vacaturemail': { naam: 'Vacaturemail-batches (10:30)', groep: 'Rapportage', log: 'vacaturemail.log', maxUur: 30 },
   'nl.sonty.offerte-v4': { naam: 'Offerte-controle v4', groep: 'Offertes & CRM', log: 'v4.log', maxUur: 30 },
   'nl.sonty.v4-selfcheck': { naam: 'V4 self-check', groep: 'Offertes & CRM', log: 'v4-selfcheck.log', maxUur: 30 },
   'nl.sonty.gripp-invullen': { naam: 'Gripp invullen', groep: 'Offertes & CRM', log: 'gripp-invullen.log', maxUur: 26 },

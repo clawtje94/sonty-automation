@@ -23,6 +23,7 @@ Hard stoppen kan altijd met `launchctl bootout gui/501/<label>`; weer aan met
 |---|---|---|---|---|---|
 | `nl.sonty.planning-mail` | Leest ongelezen orders@/info@-mails (blijven ongelezen), PDF-bijlagen uit, schrijft orders/leverdatums in Planning-sheet tab "Claude ai test" (blauw + Ai opmerking) | elke 30 min | planning-mail-daemon.log | sheet loopt achter; mails blijven staan (geen verlies) | ✅ |
 | `nl.sonty.markiezen` | Markiezen-workflow (cron-markiezen.js) | dagelijks (calendar) | markiezen.log | markiezen-taken blijven liggen | – |
+| `nl.sonty.vacaturemail` | Wervingsmail naar klanten in batches van 150/dag (10:30) tot de doelgroep-lijst klaar is; reacties gaan naar Daimy, bots blijven eraf | dagelijks 10:30 | vacaturemail.log | batch schuift een dag op | ✅ |
 
 ## Offertes & CRM
 

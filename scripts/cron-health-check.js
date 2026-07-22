@@ -46,6 +46,8 @@ const DAEMONS = [
   // Planning-mail: verwerkt orders@/info@ in de Planning-sheet (tab Claude ai test), elke 30 min.
   // Logt elke ronde (ook "lock actief"), dus 2u stilte = probleem.
   { label: 'nl.sonty.planning-mail', log: 'planning-mail-daemon.log', maxLogAgeH: 2, name: 'Planning-mail (orders@/info@ -> sheet)' },
+  // Vacaturemail-batches: dagelijks 10:30 tot de lijst klaar is (log blijft daarna vers door 'alles verstuurd'-regel)
+  { label: 'nl.sonty.vacaturemail', log: 'vacaturemail.log', maxLogAgeH: 30, name: 'Vacaturemail-batches' },
 ];
 
 // Extra Sonny-check: staat de Telegram-inbox verdacht lang stil? (poller bevroor 2x op 16-17 juli)

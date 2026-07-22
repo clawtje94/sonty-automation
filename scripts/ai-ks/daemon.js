@@ -307,6 +307,13 @@ function aanMensToegewezen(t) {
 async function verwerkTicket(t, state) {
   if (aanMensToegewezen(t)) return; // toegewezen aan een collega → nooit aanraken
   const msgs = t._msgs || await tGet(`/tickets/${t.id}/messages`);
+  // VACATURE-appjes (Daimy 22-07): sollicitanten via de wervingsmail (voorgevuld bericht
+  // "interesse in de vacature" / "Ik kom via:") NOOIT door de bot beantwoorden —
+  // direct aan Daimy (736327) toewijzen en verder met rust laten.
+  if ((msgs?.data || []).some(m => m.type === 'INBOUND' && /interesse in de vacature|ik kom via:/i.test(String(m.body || m.message || '')))) {
+    try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 736327 }); console.log(`  [${t.id}] vacature-appje → toegewezen aan Daimy`); } catch (e) { console.error(`  [${t.id}] vacature-toewijzing FOUT: ${e.message}`); }
+    return;
+  }
   const alleRijen = (msgs?.data || []).map(m => ({
     van: m.type === 'INBOUND' ? 'klant' : 'sonty',
     tekst: clean(m.body || m.message),

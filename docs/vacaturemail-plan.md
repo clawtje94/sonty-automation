@@ -1,6 +1,9 @@
-# Vacaturemail naar klanten — concept + plan (22-07-2026, WACHT OP AKKOORD DAIMY)
+# Vacaturemail naar klanten — concept + plan (22-07-2026, AKKOORD + LIVE)
 
-**Status: NIETS naar klanten verstuurd.** HARDE REGEL (Daimy 22-07): pas versturen als Daimy letterlijk "ja stuur maar naar iedereen" zegt. Testmails v1 t/m v6 naar daimyboot@gmail.com + joey@sonty.nl (vanaf info@, Trengo-kanaal 1364806).
+**Status: LIVE sinds 22-07 ~18:00.** Akkoord Daimy 22-07 ("daarna klopt alles en mag je beginnen met de batch versturingen") na testmails v1 t/m v7. Definitief: v7 = v6 ZONDER handtekeningblok (Outlook plakt de handtekening er zelf onder).
+- Verzending: `scripts/vacaturemail-batch.js` via launchd `nl.sonty.vacaturemail` (dagelijks 10:30, 150/dag, 15s tussenpauze, 429-backoff, state data/vacaturemail-verzonden.json, kill-switch data/kill/nl.sonty.vacaturemail). Batch 1 handmatig gestart 22-07.
+- Elk verzonden ticket wordt aan DAIMY (736327) toegewezen en gesloten: reacties heropenen bij hem.
+- Bots blijven eraf (Daimy 22-07): email-daemon skipt/verwijst tickets met "nieuwe collega"/"interesse in de vacature" naar Daimy; WhatsApp-daemon wijst appjes met "interesse in de vacature"/"Ik kom via:" direct aan Daimy toe en antwoordt niet.
 
 ## Doelgroep (staat klaar)
 - `data/vacaturemail-doelgroep.csv` (niet in git): **1.744 unieke adressen**

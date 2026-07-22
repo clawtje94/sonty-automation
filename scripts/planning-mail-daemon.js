@@ -28,7 +28,31 @@ const TG = { token: '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40', chat: 1700
 const MAANDEN = { januari: 1, februari: 2, maart: 3, april: 4, mei: 5, juni: 6, juli: 7, augustus: 8, september: 9, oktober: 10, november: 11, december: 12 };
 
 const nu = () => new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Amsterdam' });
-const stempel = () => `[${nu().slice(8, 10)}-${nu().slice(5, 7)} ${nu().slice(11, 16)} Claude]`;
+
+// Plaats opzoeken in Gripp op achternaam (alleen-lezen, zuinig: 1 batch-call per ronde).
+// Alleen invullen als alle matches in dezelfde plaats wonen — anders liever leeg dan fout.
+const SKIP_PLAATS = /handmatig bekijken|RETOUR|niet gevonden|TP aanvulling|^Voorraad|laadmelding/i;
+const zoeknaam = (naam) => String(naam || '')
+  .replace(/\s*\([^)]*\)/g, ' ').replace(/\b\d{3,}\b/g, ' ')
+  .replace(/\b(nabestelling|spoed)\b/gi, ' ').replace(/[,]/g, ' ').replace(/\s+/g, ' ').trim();
+async function grippPlaatsen(namen) {
+  if (!namen.length) return {};
+  try {
+    const res = await fetch('https://api.gripp.com/public/api3.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer WZvM6r0bAGGONGRhrkWTxVrydXq9H2' },
+      body: JSON.stringify(namen.map((n, i) => ({ method: 'company.get',
+        params: [[{ field: 'company.searchname', operator: 'like', value: '%' + n + '%' }], { paging: { firstresult: 0, maxresults: 10 } }], id: i + 1 }))),
+    });
+    const j = await res.json();
+    const uit = {};
+    j.forEach((resp, i) => {
+      const steden = [...new Set((resp.result?.rows || []).map((c) => String(c.visitingaddress_city || '').trim()).filter(Boolean))];
+      if (steden.length === 1) uit[namen[i]] = steden[0];
+    });
+    return uit;
+  } catch (e) { console.log('  gripp-fout:', e.message); return {}; }
+}
 const serial = (d, m, y) => Math.round((Date.UTC(y, m - 1, d) - Date.UTC(1899, 11, 30)) / 86400000);
 const ddmmyyyy = (d, m, y) => `${String(d).padStart(2, '0')}-${String(m).padStart(2, '0')}-${y}`;
 
@@ -220,11 +244,12 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
   for (let i = 0; i < rows.length; i++) if (String((rows[i] || [])[2] ?? '').trim() || String((rows[i] || [])[5] ?? '').trim()) laatste = i + 1;
 
   const waarden = []; // values.batchUpdate data
+  const formatRequests = []; // extra opmaak (datumformat nieuwe rijen)
   const blauw = new Set(); // 0-based rijen
   const opmPerRij = {}; // rij(1-based) -> [teksten]
   const nieuweRijen = []; // {velden C..L, opm}
   const verslag = [];
-  const opm = (rij, tekst) => { (opmPerRij[rij] = opmPerRij[rij] || []).push(`${stempel()} ${tekst}`); };
+  const opm = (rij, tekst) => { (opmPerRij[rij] = opmPerRij[rij] || []).push(tekst); };
 
   const verwerkActie = (m, a) => {
     if (a.type === 'multi') { a.acties.forEach((sub) => verwerkActie(m, sub)); return true; }
@@ -274,15 +299,30 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
   const gezien = new Set();
   const uniek = nieuweRijen.filter((n, i) => { const k = n.ordernr ? n.ordernr + '|' + n.naam : 'mail-' + i; if (gezien.has(k)) return false; gezien.add(k); return true; });
   if (uniek.length) {
+    // Plaats (D) via Gripp + Regio (E) via plaats->regio-mapping uit de bestaande rijen
+    const telling = {};
+    for (const r of rows) {
+      const p = String((r || [])[3] || '').trim().toLowerCase(), rg = String((r || [])[4] || '').trim();
+      if (p && rg) (telling[p] = telling[p] || {})[rg] = (telling[p][rg] || 0) + 1;
+    }
+    const regioVan = (pl) => { const t = telling[String(pl || '').trim().toLowerCase()]; return t ? Object.entries(t).sort((a, b) => b[1] - a[1])[0][0] : ''; };
+    const namen = [...new Set(uniek.filter((n) => !SKIP_PLAATS.test(n.naam)).map((n) => zoeknaam(n.naam)).filter((z) => z.length >= 3))];
+    const plaatsVan = await grippPlaatsen(namen);
     const start = laatste + 1;
     const values = uniek.map((n, i) => {
       const r = start + i;
-      return ['FALSE', `${stempel()} ${n.opm}`, n.naam, '', '', n.ordernr, n.besteld, n.geleverd, '', '', '', n.wat,
+      const plaats = plaatsVan[zoeknaam(n.naam)] || '';
+      return ['FALSE', n.opm, n.naam, plaats, plaats ? regioVan(plaats) : '', n.ordernr, n.besteld, n.geleverd, '', '', '', n.wat,
         `=IF(I${r + 1060}=TRUE; ""; IF(ISBLANK(G${r}); ""; DATEDIF(G${r}; TODAY(); "D")))`];
     });
     waarden.push({ range: `'${TAB}'!A${start}:M${start + uniek.length - 1}`, values });
     for (let i = 0; i < uniek.length; i++) blauw.add(start - 1 + i);
-    uniek.forEach((n, i) => verslag.push(`rij ${start + i} NIEUW: ${n.naam} ${n.ordernr}`));
+    // Datumkolommen van de nieuwe rijen in de sheet-stijl (dd-mm) zetten
+    formatRequests.push({ repeatCell: {
+      range: { sheetId: SHEET_ID, startRowIndex: start - 1, endRowIndex: start - 1 + uniek.length, startColumnIndex: 6, endColumnIndex: 8 },
+      cell: { userEnteredFormat: { numberFormat: { type: 'DATE', pattern: 'dd-mm' } } },
+      fields: 'userEnteredFormat.numberFormat' } });
+    uniek.forEach((n, i) => verslag.push(`rij ${start + i} NIEUW: ${n.naam} ${n.ordernr}${plaatsVan[zoeknaam(n.naam)] ? ' (' + plaatsVan[zoeknaam(n.naam)] + ')' : ''}`));
   }
   // Opmerkingen bij bestaande rijen: bestaande tekst aanvullen
   for (const [rij, teksten] of Object.entries(opmPerRij)) {
@@ -295,6 +335,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     const requests = [...blauw].map((r0) => ({ repeatCell: {
       range: { sheetId: SHEET_ID, startRowIndex: r0, endRowIndex: r0 + 1, startColumnIndex: 0, endColumnIndex: 13 },
       cell: { userEnteredFormat: { backgroundColor: BLAUW } }, fields: 'userEnteredFormat.backgroundColor' } }));
+    requests.push(...formatRequests);
     await sheets.spreadsheets.batchUpdate({ spreadsheetId: SHEET, requestBody: { requests } });
   }
   saveState(state);

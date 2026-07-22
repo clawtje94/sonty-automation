@@ -1,5 +1,10 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-22)
 
+## PLANNING-MAIL-DAEMON: PLAATS/REGIO + OPMERKINGEN ZONDER STEMPEL (22 juli ~13:45, feedback Daimy)
+- **Plaats (D)**: Gripp-naamzoek op achternaam (alleen-lezen, 1 batch-call/ronde); alleen invullen als álle matches dezelfde plaats hebben — liever leeg dan fout. **Regio (E)**: plaats->regio-mapping opgebouwd uit de bestaande sheetrijen (161 plaatsen). Backfill gedaan: 14 van 22 rijen gevuld; 8 blijven leeg (naam te algemeen: Bosman/Meijer/Rai/Kreuger/Wijsman/van der lans/Sjoerd/vd heijden — meerdere Gripp-klanten in verschillende plaatsen). NB: klantnrs (6018 e.d.) zijn NIET Gripp-customernumber en niet in RP-backlog te vinden; als Daimy zegt waar die nummers vandaan komen kan dekking naar 100%.
+- **Opmerkingen (B)**: geen "[22-07 12:46 Claude]"-stempels meer (feedback Daimy); alle bestaande stempels weggepoetst.
+- **Besteldatum-check**: G stond overal als echte datum (behalve bewust leeg bij retour/onbekende laadmelding); alleen de weergave wisselde — G/H van onze rijen nu uniform dd-mm zoals de rest van de sheet.
+
 ## PLANNING-MAIL-DAEMON: PDF-BIJLAGEN WORDEN GELEZEN (22 juli ~13:00)
 - **`scripts/planning-pdf-parse.js`**: leest PDF-bijlagen uit (pdftotext -layout) van Sunmaster (producten, orderdatum, leverdatum uit OB), Toppoint, Unilux (vertrekdatum!), Velux (klantref + afleverdatum), Markiezen Nederland. Daemon verrijkt er nieuwe rijen mee (naam/ordernr/besteld/geleverd/producten in L) — placeholders "zie PDF" zijn verleden tijd waar een leesbare PDF bestaat.
 - Alle bestaande rijen zijn ge-backfilled met echte productdata (o.a. Sjoerd 2607506: besteld 19-06, levering 20-08; Velux = vd heijden 5930, levering 29-07; gewijzigde bevestiging 2606004 = 2x 7 Suneye 5000x3000, aantallen wijken af van sheet-regel — controleren).

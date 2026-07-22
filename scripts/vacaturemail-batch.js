@@ -66,8 +66,9 @@ async function verstuur(adres, groet) {
       body: JSON.stringify({ message: mailHtml(groet), body_type: 'html' }) });
     if (r2.status === 429) { await wacht(60000); continue; }
     if (!r2.ok) return { ok: false, fout: 'message ' + r2.status };
-    // Toewijzen aan Daimy vóór sluiten: reacties heropenen het ticket dan bij hem, bots blijven eraf
-    await fetch(`https://app.trengo.com/api/v2/tickets/${t.id}/assign`, { method: 'POST', headers: H, body: JSON.stringify({ type: 'user', user_id: DAIMY_USER }) }).catch(() => {});
+    // BEWUST NIET aan Daimy toewijzen bij verzending (Daimy 22-07: "ik krijg van alles wat je
+    // verstuurt een toegewezen-mail"). Alleen sluiten. Toewijzen aan Daimy gebeurt pas als er
+    // een ANTWOORD binnenkomt — dat doen de vacature-guards in email-daemon.js en daemon.js.
     await fetch(`https://app.trengo.com/api/v2/tickets/${t.id}/close`, { method: 'POST', headers: H, body: '{}' }).catch(() => {});
     return { ok: true, ticket: t.id };
   }

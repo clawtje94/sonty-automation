@@ -1,5 +1,17 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-22)
 
+## MONTAGETIJDEN + ROUTE-ANALYSES AF, ROUTE-MOTOR LIVE (22 juli middag/avond, opdracht Daimy)
+- **Alle analyses klaar** (read-only, rapporten in sessie-scratchpad `montagetijden-uit-bookings.md` + `reistijden-analyse.md`, kerncijfers ook op Telegram):
+  montagetijden per product uit 2 jr Bookings (3850 klussen, bruto incl. verstopte reistijd — 81% rug-aan-rug gepland);
+  solar vs bedraad (historisch amper verschil gepland, alleen 2+ stuks ~30 min);
+  reistijd: 16,0 u/wk rijden vanaf Berkel (38% spits) → file-slim herpland binnen 4-weken-blok 11,1 u/wk (11% spits), 31% besparing, ~2,5 extra klussen/wk mogelijk, efficiëntie 77%→83%;
+  magazijn: Berkel = plek 7-9 van 11, Rijswijk-hoek/Westvlietweg scheelt ~2 u/wk (LET OP: magazijn zit in BERKEL, niet Rijswijk — zie memory);
+  skills-matrix per team uit historie (Mick/Tygo nog nooit pergola/markies).
+- **Route-motor**: OSRM 26.7.3 native via Homebrew + NL-kaart verwerkt (scratchpad), server 127.0.0.1:5000 handmatig gestart (max-table 8000). NIET permanent (geen launchd, bewust). VROOM nog niet: Docker/Rosetta kapot op deze Mac → later vanaf source bouwen. TomTom-key nog nodig voor echte file-laag (nu aanname spits ×1,35).
+- **`data/montagetijden/montagetijden-v1.json`** in repo: geleerde tijden + staffels + skills, status "wacht op akkoord Daimy", nergens actief.
+- **Plan**: docs/montagetijden-overzicht-plan.md (v2: Bookings-bron, leverings-trigger+datumkeuze, netto tijd + expliciete reistijd, smal aankomstvenster, Planado pas als alles staat).
+- **Wacht op Daimy** (gevraagd via Telegram 6889): V11 magazijnadres Berkel; V6 geleverd-signaal; V12 skills bevestigen; werkkaders teams (starttijd/eindtijd/max klussen); V7 vaste regio-dagen; V8/V9 akkoord tijden-lijst + solar-kolom; TomTom-key; akkoord WhatsApp-vangnet meten. Zodra V11 + werkkaders binnen zijn: schaduwplanner bouwen (2 wkn schaduw naast Marijn).
+
 ## SYSTEMEN-BEHEER FASE 1 LIVE (22 juli ~15:30, opdracht Daimy "veilig managen, niks kapot maken")
 - **SYSTEMEN.md** (repo-root): register van alle 22+ diensten — wat het doet, ritme, log, impact bij uitval, stop/herstart-instructies. Bijwerken bij elke nieuwe dienst.
 - **Dashboard sonty-website.vercel.app/admin/systemen** (admin-wachtwoord): live status per dienst, gegroepeerd (Klantgericht/Planning/CRM/Bewaking/Rapportage/Infra), met laatste logregel en log-leeftijd. Read-only. Data: `scripts/status-collect.js` (launchd `nl.sonty.status-push`, elke 10 min) → POST /api/admin/systemen (KV-snapshot). Geverifieerd met screenshots desktop+mobiel.

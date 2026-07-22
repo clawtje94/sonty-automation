@@ -1,5 +1,7 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-22)
 
+## ADMIN-WACHTWOORD GEWIJZIGD (22 juli avond, opdracht Daimy): nieuw ww bij Daimy bekend; ADMIN_PASSWORD als Vercel-env (prod+dev), hardcoded fallback VERWIJDERD (fail closed), website-scripts lezen secrets.js, secrets.js + scripts/.sonty-admin-pw.txt bijgewerkt, status-push geverifieerd (200).
+
 ## MONTAGE-DASHBOARDS LIVE IN ADMIN (22 juli avond, opdracht Daimy "alleen dashboards, rest nog niks")
 - sonty-website: `/admin/montage` (hub: orderketen-cirkel 8 stappen + analysecijfers), `/admin/montage/tijden` (beheer basistijden+toeslagen, seed uit historie, solar apart met norm-Daimy 45/10 geel gemarkeerd, lege regels rood), `/admin/montage/personeel` (teams+skills aan/uit, rollen, toevoegen/verwijderen; hoofdinmeter-rij klaar).
 - API: /api/admin/montagetijden + /api/admin/personeel (KV, keys montage:tijden / montage:personeel, seeds in lib/montage/defaults.ts). Backend getest (GET/POST/auth-block), visueel gecheckt met Playwright-screenshots (ook naar Daimy op Telegram), build groen, gepusht → Vercel.

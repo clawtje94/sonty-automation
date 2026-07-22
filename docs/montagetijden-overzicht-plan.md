@@ -182,6 +182,14 @@ keten meegaan.** Het inmeetformulier ÍS de bestelspecificatie, ÍS de magazijnc
 - Digitaal formulier per productregel: definitieve maten, bevestigingsondergrond (steen/hout/isolatie), elektra (waar stroom, bedraad/solar), verdieping + bereikbaarheid (ladder/steiger/hoogwerker), demontage oud, obstakels, verplicht 2-3 foto's van de montagepunten.
 - Uitkomst = direct de definitieve bestelling (geen overtypen kantoor) + planner-context.
 - Wijkt de inmeting af van de offerte → automatisch herberekenen → klant eerst akkoord, dan pas bestellen.
+- **DEAL TER PLEKKE (Daimy 22-07)**: na het invullen rekent de eigen pricing-engine live de
+  definitieve offerte uit → PDF op het scherm van de inmeter → klant ondertekent digitaal
+  ter plekke (handtekening op scherm + tijdstempel in het dossier) → aanbetalingsfactuur
+  gaat direct automatisch de deur uit (mail/WhatsApp, met betaallink) → bestelling kan
+  meteen (of na ontvangst aanbetaling, beleid V17). Geen dagen wachttijd meer tussen
+  inmeten en bestellen; klant commit op het moment dat hij het meest enthousiast is.
+  Open: V17 aanbetalingspercentage + wanneer bestellen (na tekenen of na betaling)?
+  V18 betaallink: hoe betalen klanten nu (bankoverschrijving/iDEAL, welke provider)?
 
 ### 2. Magazijn (compleetheid vóór alles)
 - Uit de bestelling rolt per order automatisch een checklist: hoofdproduct, doek, motor, zender, bevestigingsset, kappen, enz.

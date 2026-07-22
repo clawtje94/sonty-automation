@@ -102,6 +102,14 @@ async function verwerk(ticketId) {
   if (!t) return { ticketId, resultaat: 'ticket niet gevonden' };
   const msgs = await tGet(`/tickets/${ticketId}/messages`);
 
+  // EIGEN/SYSTEEMMAIL (22-07, Bookings-loop op info@): mail van onze eigen adressen
+  // (Bookings-notificaties, interne doorstuur) is geen klant — NOOIT beantwoorden, alleen
+  // sluiten. Anders mailt Sunny zijn interne notitie terug naar info@ en ontstaat een lus.
+  if (/@sonty\.nl$|@sontymontage\.nl$/i.test(String(t.contact?.email || '').trim())) {
+    await tPost(`/tickets/${ticketId}/close`, {});
+    return { ticketId, resultaat: 'eigen/systeemmail — gesloten zonder antwoord', klant: t.contact?.email };
+  }
+
   // WEBFLOW-FORMULIER: afzender is no-reply@webflow, dus in-thread antwoorden zou naar webflow
   // gaan i.p.v. de klant. Voor nu: netjes uitgelezen naar team Mens nodig (een mens pakt de nieuwe
   // lead op met alle gegevens). Echt zelf beantwoorden = nieuwe mail naar het adres uit het
@@ -311,7 +319,10 @@ async function verwerkNotities(t, rowsAll) {
   });
   const ruw = res.antwoord || '';
   const teamAntwoord = ((ruw.match(/NOTITIE:\s*([\s\S]+)$/i) || [])[1] || '').trim();
-  const klantTekst = schoonKlantTekst(ruw.replace(/NOTITIE:\s*[\s\S]+$/i, '').replace(/GEEN_BERICHT/g, '').trim());
+  let klantTekst = schoonKlantTekst(ruw.replace(/NOTITIE:\s*[\s\S]+$/i, '').replace(/GEEN_BERICHT/g, '').trim());
+  // Interne agent-notities tussen blokhaken ("[Automatische Bookings-notificatie ... sluiten.]")
+  // zijn GEEN klanttekst — nooit als mail versturen (bug 22-07: als antwoord naar info@ gemaild).
+  if (/^\s*\[[\s\S]*\]\s*$/.test(klantTekst)) klantTekst = '';
   let verstuurd = false;
   let klantMail = null;
   // Op webflow-/bounce-tickets is het ticketcontact GEEN klantadres: in-thread mailen komt dan

@@ -171,3 +171,36 @@ loopt vanaf dag 1 mee. Fase 3-4: 2 dagen. Fase 5a (leverings-trigger + datumkeuz
 dagen zodra V6 beantwoord is. Fase 5b trede 1 (schaduwplanner): 2-3 dagen, daarna
 wekenlang schaduw draaien net als de opvolging. Daimy heeft gelijk dat het uitgebreid is —
 maar elke fase levert los al iets bruikbaars op, en niets hoeft in één keer.
+
+## De cirkel (Daimy 22 juli avond): inmeter → magazijn → monteur → facturatie/nabestelling
+**Bindend ontwerp-idee: één orderdossier per klant, met productregels die door de hele
+keten meegaan.** Het inmeetformulier ÍS de bestelspecificatie, ÍS de magazijnchecklist,
+ÍS de picklijst, ÍS de afmeldlijst. Niets wordt overgetypt.
+
+### 1. Inmeter (het begin van alle kwaliteit)
+- Vooraf automatisch dossier op telefoon: offerteregels, maten uit configurator, foto's/afspraken uit het klantgesprek (Trengo), adres.
+- Digitaal formulier per productregel: definitieve maten, bevestigingsondergrond (steen/hout/isolatie), elektra (waar stroom, bedraad/solar), verdieping + bereikbaarheid (ladder/steiger/hoogwerker), demontage oud, obstakels, verplicht 2-3 foto's van de montagepunten.
+- Uitkomst = direct de definitieve bestelling (geen overtypen kantoor) + planner-context.
+- Wijkt de inmeting af van de offerte → automatisch herberekenen → klant eerst akkoord, dan pas bestellen.
+
+### 2. Magazijn (compleetheid vóór alles)
+- Uit de bestelling rolt per order automatisch een checklist: hoofdproduct, doek, motor, zender, bevestigingsset, kappen, enz.
+- Elke leverbon wordt afgevinkt tegen die checklist (sluit aan op de bestaande planningssheet + Gripp bestel/leverbon-controle).
+- Orderstatus: besteld → deels binnen (met wat mist + verwachte datum) → COMPLEET → klaargezet → mee.
+- Datumkeuze naar de klant gaat PAS bij status compleet — nooit meer een monteur op pad met een halve order.
+- Avond vóór montagedag: picklijst per team, vaste plek/kar per order.
+
+### 3. Monteur + afmelden (het slot van de cirkel)
+Na elke klus één afmeldscherm, drie uitkomsten:
+- **KLAAR**: 2-3 opleverfoto's verplicht → triggert facturatie (Gripp), vult het garantiedossier, klant krijgt bedankje + reviewverzoek.
+- **KLAAR MET RESTPUNT**: onderdeel aanwijzen uit de orderregels → automatische nabestelling + service-afspraak zodra binnen; facturatiebeleid restpunt = beslissing Daimy (V16).
+- **NIET GELUKT**: reden kiezen (niet thuis / maatafwijking / weer) → automatisch herplannen + melding kantoor.
+Elke afmelding voedt: facturatie, nabestelling, tijden-database en klantcommunicatie.
+
+### Bouwvolgorde (bij het begin beginnen)
+1. Orderdossier-datastructuur + digitaal inmeetformulier (mobiel, eigen CRM)
+2. Magazijn-checklist + compleetheids-status (gekoppeld aan planningssheet)
+3. Afmeldflow monteurs (klaar/restpunt/niet gelukt)
+4. Dan pas de schaduwplanner erbovenop — die heeft dan perfecte input.
+Open: V15 wie zet nu de bestelling om naar Sunmaster/Unilux/Roma (kantoor handmatig?);
+V16 factureren bij restpunt (alles, deel, of wachten)?

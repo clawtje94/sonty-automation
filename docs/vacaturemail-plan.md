@@ -1,6 +1,6 @@
 # Vacaturemail naar klanten — concept + plan (22-07-2026, WACHT OP AKKOORD DAIMY)
 
-**Status: NIETS naar klanten verstuurd.** HARDE REGEL (Daimy 22-07): pas versturen als Daimy letterlijk "ja stuur maar naar iedereen" zegt. Testmails v1+v2 naar daimyboot@gmail.com + joey@sonty.nl (vanaf info@, Trengo-kanaal 1364806).
+**Status: NIETS naar klanten verstuurd.** HARDE REGEL (Daimy 22-07): pas versturen als Daimy letterlijk "ja stuur maar naar iedereen" zegt. Testmails v1+v2+v3 naar daimyboot@gmail.com + joey@sonty.nl (vanaf info@, Trengo-kanaal 1364806).
 
 ## Doelgroep (staat klaar)
 - `data/vacaturemail-doelgroep.csv` (niet in git): **1.744 unieke adressen**
@@ -25,16 +25,18 @@ Aanbrengbonus: **€1.000** voor wie iemand aandraagt die de proeftijd doorkomt.
 > Een tijdje terug mochten wij bij jou thuis aan de slag met zonwering of raamdecoratie. Daar denken we nog steeds met plezier aan terug, want klanten zoals jij zijn de reden dat Sonty groeit. En dat groeien gaat hard. Zo hard dat ons team versterking nodig heeft.
 >
 > Daarom zoeken we:
-> - een **servicemonteur**
+> - een **servicemonteur** (ervaring is een pré)
 > - twee **monteurs** (minimaal 2 jaar montage-ervaring)
 > - twee **inmeters** (ervaring is een pré)
 > - een **winkelmedewerker** voor onze showroom in Rijswijk (woensdag, vrijdag en zaterdag, later mogelijk meer dagen), vooral iemand die ergens een passie voor kan ontwikkelen en klanten blij maakt
+>
+> Voor de technische functies zoeken we mensen die de zonweringbranche al kennen. Voor de showroom hoeft dat niet, daar gaat het ons om de juiste persoon.
 >
 > Misschien ken jij iemand die dit op het lijf geschreven is. Een buurman met gouden handen, een neef die toe is aan iets nieuws, of misschien ben jij het zelf wel.
 >
 > **En dit maken we graag de moeite waard:** draag jij iemand aan die bij ons aan de slag gaat en de proeftijd doorkomt? Dan krijg jij als bedankje **1.000 euro** van ons.
 >
-> Interesse of iemand in gedachten? Geen sollicitatiegedoe: stuur gewoon even een appje naar 085 006 9681 of mail terug met wie je bent en waarom dit je leuk lijkt. Meer hoeft het niet te zijn.
+> Interesse of iemand in gedachten? Geen sollicitatiegedoe: stuur gewoon even een appje naar 085 006 9681 of mail terug met wie je bent en waarom dit je leuk lijkt. Ook als je eerst meer wilt weten, bijvoorbeeld over het salaris, stuur ons dan gerust een appje.
 >
 > Hartelijke groet,
 >

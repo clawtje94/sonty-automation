@@ -43,6 +43,9 @@ const DAEMONS = [
   { label: 'nl.sonty.credits-check', log: 'credits-check.log', maxLogAgeH: 14, name: 'Anthropic credits-watchdog' },
   // Opvolging draait t/m ±28 juli in SCHADUW (verstuurt niets; dagelijks 10:30 een voorstel-rapport naar Daimy)
   { label: 'nl.sonty.opvolging-schaduw', log: 'opvolging.log', maxLogAgeH: 26, name: 'Opvolging (schaduwweek)' },
+  // Planning-mail: verwerkt orders@/info@ in de Planning-sheet (tab Claude ai test), elke 30 min.
+  // Logt elke ronde (ook "lock actief"), dus 2u stilte = probleem.
+  { label: 'nl.sonty.planning-mail', log: 'planning-mail-daemon.log', maxLogAgeH: 2, name: 'Planning-mail (orders@/info@ -> sheet)' },
 ];
 
 // Extra Sonny-check: staat de Telegram-inbox verdacht lang stil? (poller bevroor 2x op 16-17 juli)

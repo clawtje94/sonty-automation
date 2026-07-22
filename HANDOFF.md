@@ -1,5 +1,10 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-22)
 
+## PLANNING-MAIL-DAEMON DEFINITIEF + IN HEALTH-CHECK (22 juli, akkoord Daimy "vast inbouwen")
+- Plist `nl.sonty.planning-mail`: RunAtLoad=true (start ook na reboot/crash direct; lockfile voorkomt dubbele runs). In `cron-health-check.js` opgenomen met maxLogAgeH 2 (logt elke 30-min-ronde).
+- Health-run 13:06: alle daemons groen incl. planning-mail; V4 self-check gaf exit 1 door een tijdelijke RP-504 om 11:30 (transient, herstelt zelf).
+- OPEN (idee-fase, NIET uitvoeren zonder akkoord): Daimy vraagt om een plan om alle daemons veilig/overzichtelijk te managen — voorstel gedaan (zie chat 22-07: register + status-dashboard + secrets centraliseren + kill-switches + audit-log + cloud-redundantie).
+
 ## PLANNING-MAIL-DAEMON: PLAATS/REGIO + OPMERKINGEN ZONDER STEMPEL (22 juli ~13:45, feedback Daimy)
 - **Plaats (D)**: Gripp-naamzoek op achternaam (alleen-lezen, 1 batch-call/ronde); alleen invullen als álle matches dezelfde plaats hebben — liever leeg dan fout. **Regio (E)**: plaats->regio-mapping opgebouwd uit de bestaande sheetrijen (161 plaatsen). Backfill gedaan: 14 van 22 rijen gevuld; 8 blijven leeg (naam te algemeen: Bosman/Meijer/Rai/Kreuger/Wijsman/van der lans/Sjoerd/vd heijden — meerdere Gripp-klanten in verschillende plaatsen). NB: klantnrs (6018 e.d.) zijn NIET Gripp-customernumber en niet in RP-backlog te vinden; als Daimy zegt waar die nummers vandaan komen kan dekking naar 100%.
 - **Opmerkingen (B)**: geen "[22-07 12:46 Claude]"-stempels meer (feedback Daimy); alle bestaande stempels weggepoetst.

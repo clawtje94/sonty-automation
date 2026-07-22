@@ -147,13 +147,23 @@ automatisch bijgewerkt (met demping, geen wilde sprongen), wekelijks afwijkingsr
 - **2-monteurs-klussen**: duur per klus ≠ manuren; beide vastleggen.
 
 ## Beslissingen voor Daimy (nog niet beantwoord)
-- V3: akkoord met deze volgorde (eerst historie oogsten uit Bookings, dan meten, dan planner)?
-- V4 (beantwoord 22 juli): Planado-tracking komt later, kan nu nog niet → we starten met
-  het WhatsApp-vangnet. Open deelvraag: wanneer wil Daimy het team echt op Planado hebben?
-- V5: korte gerichte vragenlijst i.p.v. de lege sheet invullen — goed?
-- V6: wat is nu het betrouwbaarste signaal dat een bestelling geleverd is (Gripp-status,
-  leveranciersmail, of handmatige tik)? Bepaalt hoe snel 5a kan.
-- V7: zijn er vaste regio-dagen of vaste teams waar de planner rekening mee moet houden?
+### Antwoorden Daimy 22 juli (via Telegram):
+- Magazijn = **Noordeindseweg 256a, 2651LL Berkel en Rodenrijs** (52.0121, 4.4848).
+- V6 geleverd-signaal: nu nog niets; straks = **leveringsbevestiging in de planningssheet**
+  (order compleet, met controle Gripp bestel- en leveringsbonnen) — daarop bouwt fase 5a.
+- V12 skills: matrix klopt tot nu toe; eis: **makkelijk personeel/skills toevoegen** (beheer).
+- Werktijden: **zoals nu** — eerste klus 8:00-9:30 (mediaan 8:00), klaar uiterlijk ~17:00.
+- V7: geen vaste regio-dagen.
+- V8/tijden: Daimy wil een productenlijst om **samen** de maximale montageduur per product
+  + variabelen te bepalen (lijst gestuurd 22-07).
+- Meten werkelijke tijden: **géén WhatsApp-vangnet — via Planado zodra het team ermee werkt**
+  (fase 2 aangepast: tot die tijd blijven het geplande/bruto tijden).
+- TomTom: Daimy maakt key aan (Routing API) zodra doorgegeven welke.
+- Aparte Sonty-Telegrambot komt er (Daimy maakt aan via BotFather, Claude sluit aan).
+
+### Definitieve efficiëntie-cijfers (exact adres + huidige werktijden):
+15,4 → 10,9 uur rijden/week (30% besparing), spits 38% → 28%, efficiëntie 78% → 83%,
+~2,3 extra klussen/week. Met ruimere starttijd (tot 10:00): 10,5 u/wk en spits 12%.
 
 ## Inschatting
 Fase 0-1: 2 dagen werk → eerste gevuld overzicht uit Bookings-historie. Fase 2 (vangnet)

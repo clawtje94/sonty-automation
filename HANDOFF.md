@@ -1,5 +1,10 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-22)
 
+## PLANNING-MAIL-DAEMON LIVE (22 juli, "blijf die mailbox maar bijwerken")
+- **launchd `nl.sonty.planning-mail`** (elke 30 min): `scripts/planning-mail-daemon.js` verwerkt ongelezen mails uit de Inbox van orders@sonty.nl ÉN info@sonty.nl (via joey's OWA-token, alleen-lezen — mails blijven ONGELEZEN) in tab "Claude ai test". Daimy heeft kolom B "Ai opmerking" toegevoegd (alles 1 kolom opgeschoven: C=naam, F=ordernr, G=besteld, H=geleverd op); opmerkingen gaan als tekst in kolom B (celnotities van de eerste batch zijn daarheen verplaatst), aangeraakte rijen worden blauw.
+- Herkent: Sunmaster portaal-/order-/gewijzigde bevestigingen (subject), NE-laadmeldingen (aankomstdatum -> H), ROMA-levermeldingen (multi-order), Toppoint/Velux/Unilux-bevestigingen, retourmeldingen; overige leveranciersmail -> "handmatig bekijken"-rij; klantmail wordt overgeslagen. Idempotent (state `data/planning-mail-state.json`, geseed met de 42 al verwerkte mails; H-update alleen als datum anders is). Telegram-melding alleen bij wijzigingen.
+- Testrun 11:45 verwerkte direct 3 verse mails (rij 1401-1403). PDF-bijlagen worden nog NIET uitgelezen (productdetails ontbreken dus). Tab 2026 blijft onaangeraakt tot akkoord Daimy.
+
 ## PLANNING: TAB "CLAUDE AI TEST" GEVULD (22 juli)
 - Opdracht Daimy: alle mails uit de Inbox van orders@sonty.nl (42 ongelezen) verwerken in de nieuwe tab "Claude ai test" (kopie van tab 2026, rijnummers lopen 1-op-1 gelijk); mails op ONGELEZEN laten, elke aangeraakte rij blauw (#CFE2F3) + celnotitie in kolom A wat er gebeurd is.
 - Gedaan: 11 bestaande rijen bijgewerkt ("Geleverd op" o.b.v. 22 NE-laadmeldingen Unilux/Toppoint -> 22-07 en ROMA-levermelding -> 23-07; Voorraad 2606004 alleen notitie: gewijzigde bevestiging in PDF) + 18 nieuwe rijen op 1383-1400 (13 Sunmaster-portaalbevestigingen, Toppoint 26084369, Toppoint-laadmelding 82605208 NIET in sheet gevonden, Unilux Adriaans, Velux 1090-5031824825, retour-actiepunt SN82606373). Alles blauw + notitie, geverifieerd via API-teruglezing.

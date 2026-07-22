@@ -1,5 +1,12 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-22)
 
+## SYSTEMEN-BEHEER FASE 1 LIVE (22 juli ~15:30, opdracht Daimy "veilig managen, niks kapot maken")
+- **SYSTEMEN.md** (repo-root): register van alle 22+ diensten — wat het doet, ritme, log, impact bij uitval, stop/herstart-instructies. Bijwerken bij elke nieuwe dienst.
+- **Dashboard sonty-website.vercel.app/admin/systemen** (admin-wachtwoord): live status per dienst, gegroepeerd (Klantgericht/Planning/CRM/Bewaking/Rapportage/Infra), met laatste logregel en log-leeftijd. Read-only. Data: `scripts/status-collect.js` (launchd `nl.sonty.status-push`, elke 10 min) → POST /api/admin/systemen (KV-snapshot). Geverifieerd met screenshots desktop+mobiel.
+- **Kill-switch-patroon**: `touch ~/sonty/data/kill/<label>` = dienst slaat rondes over; eerste drager: planning-mail-daemon. **Audit-log**: `scripts/audit.js` → logs/audit.jsonl; planning-daemon logt er al naartoe. **Secrets**: scripts/secrets.js (gitignored) uitgebreid (Telegram/Gripp/OWA/admin); planning-daemon + status-collect lezen eruit. NIETS aan bestaande daemons veranderd.
+- OPEN vervolgstappen (akkoord Daimy nodig): oude scripts migreren naar secrets.js + keys roteren (historie bevat ze), audit-log in Sonny/e-mail-daemon, dashboard-knoppen voor kill-switches, cloud-migratie kritieke flows.
+- **VANGST dashboard**: `nl.sonty.sonny-rapport` (ochtendrapport 08:30) heeft sinds de reboot van 21-07 niet gedraaid (never exited, log leeg sinds 17-07) — checken of Daimy vanochtend een rapport kreeg; zo nee: kickstart.
+
 ## PLANNING-MAIL-DAEMON DEFINITIEF + IN HEALTH-CHECK (22 juli, akkoord Daimy "vast inbouwen")
 - Plist `nl.sonty.planning-mail`: RunAtLoad=true (start ook na reboot/crash direct; lockfile voorkomt dubbele runs). In `cron-health-check.js` opgenomen met maxLogAgeH 2 (logt elke 30-min-ronde).
 - Health-run 13:06: alle daemons groen incl. planning-mail; V4 self-check gaf exit 1 door een tijdelijke RP-504 om 11:30 (transient, herstelt zelf).

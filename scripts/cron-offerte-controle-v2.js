@@ -36,8 +36,8 @@ const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
 const TRENGO_TOKEN = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
 const TRENGO_EMAIL_CHANNEL = 1359813; // Klantenservice (joey@sontymontage.nl) — TODO: aanvragen@sonty.nl
 const TEVER_SENT_FILE = path.join(__dirname, '.tever-sent.json');
-const SONTY_LAT = 52.0446;
-const SONTY_LON = 4.3188;
+const SONTY_LAT = 52.0116; // GOUDA (Daimy 23-07)
+const SONTY_LON = 4.7104;
 
 async function rpGet(endpoint) {
   const res = await fetch('https://backend.reuzenpanda.nl' + endpoint, {

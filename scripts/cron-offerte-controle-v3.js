@@ -32,7 +32,7 @@ const TRENGO_TOKEN = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt
 const TRENGO_EMAIL_CHANNEL = 1363384; // Aanvragen (aanvragen@sonty.nl)
 const BOOKINGS_URL = 'https://bookings.cloud.microsoft/book/SontyMontage1@sontymontage.nl/s/lAKws2wHtEOFjHYzLwjXdQ2?ismsaljsauthenabled=true';
 const TEVER_SENT_FILE = path.join(__dirname, '.tever-sent.json');
-const SONTY_LAT = 52.0446, SONTY_LON = 4.3188;
+const SONTY_LAT = 52.0116, SONTY_LON = 4.7104; // GOUDA als basislocatie voor het werkgebied (Daimy 23-07, was Rijswijk)
 
 // Verkoopteksten aan/uit — zet op false om alleen technische aanpassingen te doen
 const ENHANCE_DESCRIPTIONS = true; // Goedgekeurde teksten (test offerte #20266838, 2026-06-10)

@@ -23,7 +23,9 @@ const SECRETS = require('/Users/clawdboot/sonty/scripts/secrets.js');
 const { audit } = require('/Users/clawdboot/sonty/scripts/audit.js');
 
 const SHEET = '1xkQaLKgAgvhP46JtZWRRj2zWpqr5_J5z9xTiiqT9lvs';
-const TAB = 'Claude ai test';
+const TAB = '2026 goed';
+const RETOUR_TAB = 'Retouren';
+const RETOUR_SHEET_ID = 111815888;
 const SHEET_ID = 273253041;
 const BLAUW = { red: 0.812, green: 0.886, blue: 0.953 };
 const MAILBOXEN = ['orders@sonty.nl', 'info@sonty.nl'];
@@ -225,7 +227,7 @@ function duiden(m) {
   let x;
   if ((x = s.match(/^Laadmelding (.+?) (\S+)$/))) {
     const d = m.body.match(/Verwachte aankomst\s+\w+\s+(\d{1,2})\s+(\w+)\s+(\d{4})/i);
-    if (!d || !MAANDEN[d[2].toLowerCase()]) return { type: 'nieuw', naam: `(laadmelding ${x[1]})`, ordernr: x[2], lev: x[1], kort: 'Laadmelding zonder leesbare datum, handmatig bekijken', opm: `Laadmelding NE voor ${x[1]} ${x[2]}, maar de aankomstdatum kon niet uit de mail gelezen worden. Handmatig bekijken.`, wat: `${x[1]}, zie laadmelding` };
+    if (!d || !MAANDEN[d[2].toLowerCase()]) return { type: 'melden', reden: `Laadmelding ${x[1]} ${x[2]}: aankomstdatum niet leesbaar` };
     const [dag, mnd, jr] = [+d[1], MAANDEN[d[2].toLowerCase()], +d[3]];
     return { type: 'update', ordernr: x[2], lev: x[1], kort: `Geleverd op → ${ddmmyyyy(dag, mnd, jr)} (laadmelding NE)`, geleverdSerial: serial(dag, mnd, jr), geleverdTekst: ddmmyyyy(dag, mnd, jr), nieuwWat: `${x[1]}, zie laadmelding`, opm: `Laadmelding NE (${x[1]} ${x[2]}): verwachte aankomst ${d[1]} ${d[2]} ${d[3]}. "Geleverd op" bijgewerkt.` };
   }
@@ -248,9 +250,10 @@ function duiden(m) {
   if ((x = s.match(/^Orderbevestiging Unilux (.+)$/i)))
     return { type: 'nieuw', naam: x[1].trim(), ordernr: '(zie PDF)', lev: 'Unilux', kort: 'Nieuw: orderbevestiging', besteld, wat: 'Unilux, orderbevestiging in PDF-bijlage', opm: `Unilux orderbevestiging "${x[1].trim()}" (mail ${besteld}). Ordernummer en details in PDF-bijlage.` };
   if (/^Leveroverzicht Unilux/i.test(s)) return { type: 'negeer', reden: 'leveroverzicht; laadmeldingen dekken dit' };
-  if (/Retourmelding/i.test(s)) {
+  if (/Retourmelding|Retour opdracht/i.test(s)) {
     const ref = (m.body.match(/referentie\s+(\S+?)\s*\(/) || m.body.match(/referentie\s+(\S+)/) || [])[1] || '(onbekend)';
-    return { type: 'nieuw-of-opmerking', ordernr: ref, naam: `RETOUR ${ref}`, lev: 'NE', kort: 'Retour: afhaaldag bevestigen bij NE', besteld: '', wat: 'Retourzending, afhaaldag bevestigen bij NE', opm: `${s} (mail ${besteld}): retouropdracht ${ref} wacht op bevestiging van de afhaaldag bij NE. ACTIE NODIG.` };
+    const lev = (s.match(/Retourmelding\s+(.+)$/i) || [])[1] || 'NE';
+    return { type: 'retour', ref, lev, besteld, opm: `Retouropdracht ${ref} — afhaaldag bevestigen bij NE.` };
   }
   // ROMA OPDRACHTBEVESTIGING (23-07): "ROMA opdrachtbevestiging 8650217 Commissie: Cheloi (6229) Bestel nr. BEST_152"
   if ((x = s.match(/^ROMA opdrachtbevestiging\s+(\d+)\s+Commissie:\s*(.*?)\s*Bestel/i))) {
@@ -285,7 +288,7 @@ function duiden(m) {
     }
   }
   if (LEVERANCIERS.test(m.from) || LEVERANCIERS.test(s))
-    return { type: 'nieuw', naam: '(handmatig bekijken)', ordernr: '', lev: (m.from.match(/@([\w-]+)/) || [])[1] || '', kort: 'Leveranciersmail, handmatig bekijken', besteld, wat: (s || '(geen onderwerp)').slice(0, 90), opm: `Leveranciersmail van ${m.from} niet automatisch te duiden: "${s}". Handmatig bekijken.` };
+    return { type: 'melden', reden: `Leveranciersmail van ${m.from} niet automatisch te verwerken: "${(s || '(geen onderwerp)').slice(0, 90)}"` };
   return { type: 'skip', reden: 'geen leveranciersmail' };
 }
 
@@ -338,6 +341,9 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
   for (let i = 0; i < rows.length; i++) if (String((rows[i] || [])[5] ?? '').trim() || String((rows[i] || [])[9] ?? '').trim() || String((rows[i] || [])[4] ?? '').trim()) laatste = i + 1;
 
   const waarden = []; // values.batchUpdate data
+  const retouren = []; // rijen voor het Retouren-tabblad
+  const teMelden = []; // onverwerkbare mails -> Telegram, mail blijft ongelezen
+  const gelezenMarkeren = []; // goed verwerkte mails -> op gelezen zetten (Daimy 23-07)
   const formatRequests = []; // extra opmaak (datumformat nieuwe rijen)
   const blauw = new Set(); // 0-based rijen
   const opmPerRij = {}; // rij(1-based) -> [teksten]
@@ -353,8 +359,23 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
 
   const verwerkActie = (m, a) => {
     if (a.type === 'multi') { a.acties.forEach((sub) => verwerkActie(m, sub)); return true; }
+    if (a.type === 'retour') {
+      retouren.push({ datum: a.besteld, lev: a.lev, ref: a.ref, opm: a.opm });
+      verslag.push(`RETOUR ${a.ref} → tabblad Retouren`);
+      state.verwerkt[m.imid] = nu();
+      gelezenMarkeren.push(m);
+      return true;
+    }
     if (a.type === 'skip') { state.overgeslagen[m.imid] = a.reden; return false; }
-    if (a.type === 'negeer') { state.verwerkt[m.imid] = nu(); verslag.push(`genegeerd: ${m.subject} (${a.reden})`); return false; }
+    if (a.type === 'negeer') { state.verwerkt[m.imid] = nu(); gelezenMarkeren.push(m); verslag.push(`genegeerd: ${m.subject} (${a.reden})`); return false; }
+    if (a.type === 'melden') {
+      if (!state.gemeld) state.gemeld = {};
+      if (!state.gemeld[m.imid]) {
+        state.gemeld[m.imid] = nu();
+        teMelden.push(`${a.reden} (${m.mailbox}, ${m.received.slice(0, 10)})`);
+      }
+      return false; // mail blijft ONGELEZEN staan (Daimy 23-07)
+    }
     if (a.type === 'update' || a.type === 'opmerking' || a.type === 'nieuw-of-opmerking') {
       const i = vindRij(a.ordernr);
       if (i >= 0) {
@@ -369,17 +390,20 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
           stempelRij(rij, a); opm(rij, a.kort || a.opm); blauw.add(i); verslag.push(`rij ${rij}: ${a.kort || a.opm}`);
         }
         state.verwerkt[m.imid] = nu();
+        gelezenMarkeren.push(m);
         return true;
       }
       if (a.type === 'opmerking' || a.type === 'nieuw-of-opmerking' || a.type === 'update') {
         const n = { naam: a.naam || '(onbekend)', ordernr: a.ordernr, besteld: a.besteld || '', geleverd: a.geleverdTekst || '', wat: a.nieuwWat || a.wat || '', kort: (a.kort || '') + (a.type === 'update' ? ' (ordernr niet in sheet, nieuwe rij)' : ''), lev: a.lev, opm: a.opm + (a.type === 'update' ? ' LET OP: ordernummer niet in de sheet gevonden — nieuwe rij gemaakt.' : '') };
         nieuweRijen.push(n); state.verwerkt[m.imid] = nu();
+        gelezenMarkeren.push(m);
         return true;
       }
     }
     if (a.type === 'nieuw') {
       nieuweRijen.push({ naam: a.naam, ordernr: a.ordernr, besteld: a.besteld || '', geleverd: a.geleverdTekst || '', wat: a.wat, opm: a.opm, kort: a.kort, lev: a.lev });
       state.verwerkt[m.imid] = nu();
+      gelezenMarkeren.push(m);
       return true;
     }
     return false;
@@ -519,6 +543,27 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
       await sheets.spreadsheets.batchUpdate({ spreadsheetId: SHEET, requestBody: { requests: cFormats } });
     }
   } catch (e) { console.log('  compleet-check fout:', e.message); }
+  // RETOUREN naar het eigen tabblad (Daimy 23-07)
+  if (retouren.length) {
+    try {
+      await sheets.spreadsheets.values.append({ spreadsheetId: SHEET, range: `'${RETOUR_TAB}'!A1:F1`, valueInputOption: 'USER_ENTERED', insertDataOption: 'INSERT_ROWS',
+        requestBody: { values: retouren.map((r) => [r.datum || vandaagKort, r.lev, r.ref, '', 'Retourzending, afhaaldag bevestigen bij NE', r.opm]) } });
+    } catch (e) { console.log('  retouren-schrijf-fout:', e.message); }
+  }
+  // GOED VERWERKTE mails op GELEZEN zetten (Daimy 23-07). Onverwerkbare blijven ongelezen.
+  for (const m of gelezenMarkeren) {
+    try {
+      await fetch(`https://outlook.office.com/api/v2.0/users/${m.mailbox}/messages/${m.id}`, {
+        method: 'PATCH', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ IsRead: true }) });
+    } catch (e) { console.log('  gelezen-markeer-fout:', e.message); }
+  }
+  if (gelezenMarkeren.length) console.log(`  ${gelezenMarkeren.length} verwerkte mail(s) op gelezen gezet`);
+  // ONVERWERKBARE mails -> Telegram (mail blijft ongelezen staan)
+  if (teMelden.length) {
+    await fetch(`https://api.telegram.org/bot${TG.token}/sendMessage`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TG.chat, text: 'Planning: ' + teMelden.length + ' mail(s) NIET automatisch te verwerken (blijven ongelezen staan):\n- ' + teMelden.join('\n- ') }) }).catch(() => {});
+  }
   saveState(state);
   if (verslag.length) audit('planning-mail', 'sheet-bijgewerkt', { tab: TAB, wijzigingen: verslag.length, detail: verslag.slice(0, 20) });
   console.log(verslag.length ? verslag.map((v) => '  ' + v).join('\n') : '  geen sheet-wijzigingen');

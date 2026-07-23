@@ -38,21 +38,41 @@ async function findRpOffertes({ email, phone, naam, adres }) {
     return false;
   }).slice(0, 5);
 
+  // V4-CHECK (Daimy 23-07, casus Mehul 20268955): een offerte die nog niet door de
+  // offertecontrole is gegaan (herkenbaar aan niet-dikgedrukte productregels) mag NIET
+  // als link gedeeld worden — de klant zou ongecontroleerde prijzen/opmaak zien.
+  async function isV4Verwerkt(documentId) {
+    try {
+      const d = await rpGet(`/document-service/v1/${CFG.RP_PID}/quotations/${documentId}`);
+      const lines = d?.quotationData?.segments?.defaultTemplatePriceLineGroup?.data?.lines || [];
+      const prijsRegels = lines.filter((l) => (l.pricePerUnit || 0) > 0);
+      if (!prijsRegels.length) return false;
+      return prijsRegels.every((l) => String(l.description || '').startsWith('**'));
+    } catch { return false; }
+  }
   const results = [];
   for (const it of matches) {
     const lcId = it.item_subject?.id;
     let offertes = [];
     if (lcId) {
       const docs = await rpGet(`/document-service/v1/${CFG.RP_PID}/quotations?lead_configuration_id=${lcId}`);
-      offertes = (docs?.quotationDatas || [])
-        .sort((a, b) => String(b.quotationCreationTimestamp || '').localeCompare(String(a.quotationCreationTimestamp || '')))
-        .map((d, idx) => ({
+      const gesorteerd = (docs?.quotationDatas || [])
+        .sort((a, b) => String(b.quotationCreationTimestamp || '').localeCompare(String(a.quotationCreationTimestamp || '')));
+      offertes = [];
+      for (let idx = 0; idx < gesorteerd.length; idx++) {
+        const d = gesorteerd[idx];
+        // Alleen de 2 nieuwste checken (die deelt de bot); scheelt API-calls op oude dossiers
+        const verwerkt = idx < 2 ? await isV4Verwerkt(d.documentId) : true;
+        offertes.push({
           nummer: d.quotationNumber, status: d.quotationStatus,
           aangemaakt: d.quotationCreationTimestamp || null,
           nieuwste: idx === 0, // gesorteerd nieuw → oud
           documentId: d.documentId,
-          link: `https://document.reuzenpanda.nl/nl/${CFG.RP_PID}/${d.documentId}/latest?pdfAction=DOCSIGN`,
-        }));
+          ...(verwerkt
+            ? { link: `https://document.reuzenpanda.nl/nl/${CFG.RP_PID}/${d.documentId}/latest?pdfAction=DOCSIGN` }
+            : { link: null, LET_OP: 'Deze offerte is NOG NIET door de offertecontrole. Deel GEEN link en noem GEEN bedragen eruit — zeg dat de offerte vandaag nog wordt bijgewerkt en automatisch wordt toegestuurd. Bij haast: escaleren_naar_mens.' }),
+        });
+      }
     }
     results.push({
       itemId: it.id,

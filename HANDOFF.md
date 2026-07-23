@@ -1,5 +1,11 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
 
+## TE VER-HERSTEL LOOPT (23 juli ~15:30, akkoord Daimy: optie A + sorry-mail)
+- Sorry-mail naar ALLE 98 verstuurd (98/98, 0 fouten; script scripts/sorry-mail-tever.js, dedupe data/sorry-mail-verzonden.json, tickets direct gesloten). Tekst: excuus "foutje met de locatie-instelling in het nieuwe systeem", offerte wordt doorgeappt, WhatsApp-ons-knop ZONDER nummer, ondertekend Sunny.
+- Batch 1 (50) staat in OC voor de v4-run; batch 2 (48) wordt automatisch teruggezet na de run (wachter draait). Automatische offerte-links gaan daarna vanzelf (keuze A Daimy).
+- NOG TE DOEN: na de runs register-correctie (TE VER -> echte bedragen), steekproef 5 offertes, eindrapport.
+- FEEDBACK-GAP GEFIXT (~15:45): WA-daemon las geen @sonny-notities op mens-toegewezen tickets (dagstand-feedback Daimy gemist) — nu wel (alleen notities, nooit antwoorden). Dagstand-leerpunt geborgd in data/ai-ks/leerpunten.md + ✅-notitie op ticket 968268085.
+
 ## TE VER-HERCHECK JULI: 98 ONTERECHTE AFWIJZINGEN (23 juli ~14:45, alleen gecheckt, NIETS verstuurd)
 - Van de 230 TE VER-mails in juli waren er met Gouda-basis 98 ONTERECHT (allemaal < 60 km van Gouda = altijd-bedienen-zone; 132 wel terecht; 0 onherleidbaar). Volledige lijst: data/tever-hercheck-juli.json (naam, plaats, km, datum, e-mail).
 - Grootste clusters: Almere (14), Tilburg (10), Amersfoort (6), Zeist (6), Purmerend, Kaatsheuvel, Waalwijk, Den Bosch, Bussum. Klanten kregen "buiten ons werkgebied"-mail namens Joey.

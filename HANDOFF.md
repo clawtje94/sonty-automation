@@ -1,5 +1,9 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
 
+## COMPLEET-FIX + HERGROEPEREN (23 juli ~10:45, feedback Daimy)
+- FOUT hersteld: compleet-check telde een TOEKOMSTIGE leverdatum (bv. 27-09) als "binnen". Nieuwe regel: "Geleverd op" telt alleen als echte datum <= vandaag (tekst zoals "week 32" telt niet). 15 onterechte markeringen teruggedraaid; echt compleet nu: 5576 (2 leveringen) + 4 losse orders. 5930 is terecht NIET compleet (3 toekomstige datums).
+- HERGROEPEREN: AI-rijen met zelfde ref worden onder de bestaande groep van dat nummer gezet (5930-Velux naar rij 1378, van-huis-orderbevestiging naast de eerste bevestiging). Daemon doet dit nu elke ronde (max 10 verplaatsingen, alleen AI-rijen).
+
 ## LEVERANCIERSMAILS ECHT LEZEN (23 juli ~10:15, feedback Daimy "alles wordt op ref besteld")
 - Nieuwe parsers in de daemon: (1) **Sunmaster Afleverbon** ("Afleverbon NNN uw referentie X ons ordernr. NNN") = LEVERSIGNAAL -> Geleverd op = maildatum; (2) **webshop-bevestigingen** (Markiezen Nederland + Poedercoating Culemborg, zelfde sjabloon): referentie/orderdatum/bestelling uit de MAILTEKST ("Uw referentie van huis (5859, SPOED)").
 - 4 "handmatig bekijken"-rijen gerepareerd: 1404 (Markiezen van huis 5859 spoed), 1407 (G.F. Development BV spoed, poedercoat), 1408 (Petrovic spoed, poedercoat), 1413 (Sunmaster afleverbon 29240 Versluis nabestelling, order 2609209, geleverd 22-07).

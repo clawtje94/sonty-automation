@@ -305,7 +305,20 @@ function aanMensToegewezen(t) {
 }
 
 async function verwerkTicket(t, state) {
-  if (aanMensToegewezen(t)) return; // toegewezen aan een collega → nooit aanraken
+  if (aanMensToegewezen(t)) {
+    // Toegewezen aan een collega → nooit ANTWOORDEN, maar @sonny-notities WEL verwerken
+    // (Daimy 23-07: dagstand-feedback op een aan hem toegewezen ticket werd gemist).
+    try {
+      const msgsMens = t._msgs || await tGet(`/tickets/${t.id}/messages`);
+      const notitiesMens = (msgsMens?.data || []).map(m => ({
+        van: m.type === 'INBOUND' ? 'klant' : 'sonty',
+        tekst: clean(m.body || m.message), tijd: m.created_at,
+        intern: !!m.internal_note || m.type === 'NOTE', userId: m.user_id || null,
+      })).filter(m => m.tekst && m.intern && !/AI-KS|SONNY \(AI|schaduwmodus|live verstuurd|✅ Verwerkt|Uitgevoerde acties door de AI/i.test(m.tekst)).slice(-5);
+      if (notitiesMens.some(m => /@s[ou]nny(?!\d)/i.test(m.tekst))) await verwerkSonnyNotities(t, notitiesMens);
+    } catch (e) { console.error(`  [${t.id}] notitie-op-menst icket FOUT: ${e.message}`); }
+    return;
+  }
   const msgs = t._msgs || await tGet(`/tickets/${t.id}/messages`);
   // VACATURE-appjes (Daimy 22-07): sollicitanten via de wervingsmail (voorgevuld bericht
   // "interesse in de vacature" / "Ik kom via:") NOOIT door de bot beantwoorden —

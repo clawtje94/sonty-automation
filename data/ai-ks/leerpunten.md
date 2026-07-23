@@ -84,3 +84,12 @@
 - (2026-07-21) [team-notitie bij gesprek +31615586434] het is belangrijk als mensen een voorkeurs datum voor inmeten doorgeven dat jorren en tanya hier ook van op de hoogte zijn!
 - (2026-07-21) [team-notitie bij e-mail Diana Sanchez] probeer bij deze vrouw maar volledig zelf dus een showroom afspraak in te plannen
 - (2026-07-21) [team-notitie bij e-mail ea.t.jong@upcmail.nl] als meneer een offerte heeft kan je die toch gewoon hier sturen en vragen of die mischien in de spam zit? miss was dit nog wel voor de regel dat je de winkel offerte&#39;s zelf moest mailen x
+- (2026-07-21) [team-notitie bij e-mail koos@bink.nl] je kan reageren op zijn mail dat hij een foto kan sturen van het huidige rolluik, met de maten. Vraag hierbij welke gewenste bediening hij wil
+- (2026-07-22) [team-notitie bij gesprek +31625725471] ik wil dat je tickets echt sluit dus &quot;sluit gesprek&quot; na dat het gesprek echt klaar is zoals dit. want anders blijft je inbox vol staan. mensen die je nog moet opvolgen laten staan
+- (2026-07-22) [team-notitie bij gesprek +31625725471] je stuurt een interne taak naar de klant?
+- (2026-07-22) [team-notitie bij gesprek Rachel] er is altijd een koord is, zodat de markies soepel en netjes in en uit kan klappen. Bij handmatige bediening kan de koord onder of bovenlangs. Bij elektrisch standaard onderlangs. deze klant hoeft verder nu geen bericht te ontvangen.
+- (2026-07-22) [team-notitie bij gesprek Gino Kos] stuur even een follow up
+- (2026-07-22) [team-notitie bij gesprek +31623602210] zonde he dit... wat is hier nu gebeurd? zoek die vrouw haar mail op en stuur een follow up want dit is zonde
+- (2026-07-22) [team-notitie bij e-mail wendy Algera] we hebben van voorraad sun eye alleen antreciet casette met beige doek of antreciet casette met grijs doek
+- (2026-07-23) [team-notitie bij e-mail timogoes@hotmail.com] deze meneer graag verder helpen.
+- (2026-07-23) [feedback Daimy, gesprek Elly de Wolf] Dagstand bij rolluiken = de ventilatiestand: kleine gaatjes in de lamellen laten lucht (maar geen directe zon) door; die vallen dicht als het rolluik helemaal gesloten is. Bij elektrische bediening stel je de dagstand in als favoriete stand op de MY-knop van de afstandsbediening: zet het rolluik op de gewenste stand en houd de MY-knop ingedrukt tot het product kort heen en weer beweegt — dan is die stand ingeleerd. Dagstand is dus geen aparte productoptie met meerprijs, elk rolluik kan dit.

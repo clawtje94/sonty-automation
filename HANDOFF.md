@@ -505,3 +505,10 @@ Alles in memory: `~/.claude/projects/-Users-clawdboot/memory/reference_sonty_cre
 ## WEEKRAPPORT CONVERSIE (21 juli)
 - `scripts/weekrapport-conversie.js` — elke maandag 08:15 (launchd nl.sonty.weekrapport, --stuur) naar Daimy's Telegram: nieuwe leads, akkoorden (= Inmeten inplannen/Gripp invullen/Afgerond), conversie %, waarde, per status en per productcategorie (categorie via offerteregels van de lead_configuration), plus referentie zelfde venster vorige maand. Losse runs: --van/--tot. Zie ook scripts/bord-conversie.js (cohorten per maand) en scripts/conversie-rapport.js (digitaal getekend, uit rp-archief).
 - Kanttekening in elk rapport: jonge leads converteren nog door; afgeronde items van oude maanden worden van het bord opgeschoond (oude cohorten dus onderteld).
+
+## 2026-07-23 (avond): follow-ups zelfde ticket + klant-moment-plannen
+- Follow-up-template (24u dicht, hsm 236108) maakte een LOS ticket: gefixt. daemon.js merget het nieuwe template-ticket nu direct in het originele ticket (POST /tickets/{id}/merge, source_ticket_id). Casus Mark Gaerthé (+31634925602) handmatig samengevoegd; hij reageerde al positief op de follow-up.
+- Gedachtestreepjes (—) uit alle uitgaande daemon-teksten (36 stuks, 7 bestanden); verbod ook in de opvolg-prompt.
+- NIEUW in opvolging-daemon.js (akkoord Daimy): noemt de klant zelf een moment ("dit weekend") dan haalt de AI terugkomMoment (YYYY-MM-DD) uit het gesprek en wordt de follow-up GEPLAND i.p.v. direct/te vroeg gestuurd. verwerkGeplande() voert ze uit zodra de datum bereikt is (binnen bot-uren): venster open = vrij bericht, dicht = template 236108 + merge in hetzelfde ticket. Fail-safes: klant reageerde intussen / mens / getekend => plan vervalt; max 21 dagen vooruit; max 5 per run.
+- --scenario flag = dry-run zonder verzenden en zonder state-writes; --ticket <id> forceert een ticket. Scenario-run gedraaid: Mark wordt maandag 2026-07-27 opgevolgd (vanavond plant de echte run hem automatisch).
+- NIEUWE WERKREGEL Daimy: voor nieuw automatisch gedrag altijd eerst scenario-run + rapport, dan pas bouwen/live.

@@ -69,8 +69,15 @@ const apiKey = process.env.ANTHROPIC_API_KEY ||
   fs.readFileSync(path.join(__dirname, '..', '.anthropic-api-key.txt'), 'utf8').trim();
 const client = new Anthropic({ apiKey });
 
+// --scenario = dry-run (Daimy 23-07: eerst scenario-run + rapport, dan pas live): niets
+// versturen en niets in de state schrijven, alleen laten zien wat er zou gebeuren.
+// --ticket <id> (herhaalbaar) dwingt een specifiek ticket de beoordeling in.
+const SCENARIO = process.argv.includes('--scenario');
+const FORCE_TICKETS = process.argv.filter((a, i, arr) => arr[i - 1] === '--ticket');
+
 function laadState() { try { return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch { return {}; } }
-function bewaarState(state) { fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2)); }
+function bewaarState(state) { if (SCENARIO) return; fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2)); }
+const vandaagStr = () => new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Amsterdam' }).slice(0, 10);
 
 // ── Kandidaten: laatste AI-beurt per ticket uit log.jsonl, binnen een van de twee vensters ──
 // Regulier: 3-14 dagen stil. Snel (alleen WA): 4 uur tot 1 dag stil, zodat we binnen het
@@ -85,6 +92,7 @@ function kandidaten(dagen) {
   const nu = Date.now();
   return [...perTicket.values()].map(d => {
     const leeftijdD = (nu - Date.parse(d.tijd)) / 86400000;
+    if (FORCE_TICKETS.includes(String(d.ticket))) return { ...d, forced: true };
     if ((d.kanaal || 'WA') === 'WA' && leeftijdD >= SNEL_MIN_STIL_UREN / 24 && leeftijdD < 1) return { ...d, snel: true };
     if (leeftijdD >= MIN_STIL_DAGEN && leeftijdD <= Math.min(dagen, MAX_STIL_DAGEN)) return d;
     return null;
@@ -95,8 +103,12 @@ function kandidaten(dagen) {
 async function blokkade(k, state) {
   if (fs.existsSync(KILL)) return 'kill-switch actief';
   const st = state[String(k.ticket)];
-  if (st && st.laatst && (Date.now() - Date.parse(st.laatst)) / 86400000 < RUST_DAGEN) return `al opgevolgd op ${st.laatst.slice(0, 10)}`;
-  if (st && st.beoordeeld && (Date.now() - Date.parse(st.beoordeeld)) / 3600000 < HERBEOORDEEL_UREN) return `vandaag al beoordeeld (${st.beoordeeld.slice(11, 16)})`;
+  // Gepland (klant noemde zelf een moment) en scenario-geforceerd: rust- en herbeoordeel-
+  // limieten gelden niet, de veiligheids-checks (klant reageerde, mens, getekend) wel.
+  if (!k.gepland && !k.forced) {
+    if (st && st.laatst && (Date.now() - Date.parse(st.laatst)) / 86400000 < RUST_DAGEN) return `al opgevolgd op ${st.laatst.slice(0, 10)}`;
+    if (st && st.beoordeeld && (Date.now() - Date.parse(st.beoordeeld)) / 3600000 < HERBEOORDEEL_UREN) return `vandaag al beoordeeld (${st.beoordeeld.slice(11, 16)})`;
+  }
 
   const t = await tGet(`/tickets/${k.ticket}`);
   const ticket = t?.data || t;
@@ -112,9 +124,11 @@ async function blokkade(k, state) {
   // 100%-check 1: het laatste échte bericht moet van ONS zijn — anders heeft de klant
   // gereageerd en is dit gewoon een te beantwoorden gesprek, geen opvolging.
   const inbound = laatste.contact_id || laatste.direction === 'inbound' || laatste.type === 'INBOUND';
-  if (inbound) return 'klant heeft als laatste iets gestuurd';
+  if (inbound && !(k.forced && SCENARIO)) return 'klant heeft als laatste iets gestuurd';
   const stilUren = (Date.now() - Date.parse(laatste.created_at)) / 3600000;
-  if (k.snel) {
+  if (k.gepland || k.forced) {
+    // geen stilte-eisen: het moment is door de klant zelf genoemd (of scenario-run)
+  } else if (k.snel) {
     if (stilUren < SNEL_MIN_STIL_UREN) return `nog geen ${SNEL_MIN_STIL_UREN} uur stil`;
     const laatsteKlant = [...echte].reverse().find(m => m.contact_id || m.direction === 'inbound' || m.type === 'INBOUND');
     if (!laatsteKlant) return 'geen klantbericht gevonden (fail-closed)';
@@ -140,16 +154,72 @@ async function beoordeel(k, echte, context) {
     const van = (m.contact_id || m.direction === 'inbound' || m.type === 'INBOUND') ? 'KLANT' : 'SONTY';
     return `${van} (${String(m.created_at).slice(0, 16)}): ${String(m.body || m.message || '').replace(/<[^>]+>/g, ' ').slice(0, 400)}`;
   }).join('\n');
-  const stilTekst = k.snel ? `een paar uur (zelfde-dag snelvenster)` : `minstens ${MIN_STIL_DAGEN} dagen`;
+  const stilTekst = k.gepland ? 'tot het moment dat de klant zelf noemde' : k.snel ? `een paar uur (zelfde-dag snelvenster)` : `minstens ${MIN_STIL_DAGEN} dagen`;
+  const geplandInstructie = k.gepland ? `\nLET OP: de klant zei eerder ZELF dat hij of zij er rond dit moment op terug zou komen (gepland op ${k.geplandDatum}). Dat moment is nu aangebroken en de klant heeft nog niets laten horen. Een korte, vriendelijke check-in is dan vrijwel altijd gepast; verwijs licht naar wat de klant toen zei ("je zou er dit weekend naar kijken").\n` : '';
   const snelInstructie = k.snel ? `\nLET OP: dit is een ZELFDE-DAG opvolging binnen het WhatsApp 24-uursvenster. Alleen gepast als er echt iets kleins openstaat waar de klant op terug zou komen (bv. een maat, kleur of keuze doorgeven, of reactie op een net gestuurde prijs/offerte). Houd het extra kort en luchtig (max 2 zinnen), als een verkoper die dezelfde dag nog even vriendelijk aanhaakt. Bij een gesprek dat gewoon rustig loopt of net vanzelf afrondde: niet doen.\n` : '';
   const resp = await client.messages.create({
     model: CFG.MODEL, max_tokens: 600,
     messages: [{ role: 'user', content:
-      `Je bent Jaimy van Sonty (zonwering, Rijswijk). Vandaag is ${nu.datum}. Hieronder een klantgesprek (${k.kanaal || 'WA'}) dat al ${stilTekst} stil ligt; de klant heeft NIET meer gereageerd op ons laatste bericht en heeft niets getekend.${snelInstructie}\n\n# Gesprek (oud → nieuw)\n${historie}\n\n# Klantcontext (systemen)\n${JSON.stringify(context).slice(0, 1500)}\n\nBeoordeel als verkoper: is een korte, vriendelijke opvolging hier GEPAST? Gepast is bv.: klant zei "ik kom er op terug" / "moet overleggen" / "ik ga meten", of er ligt een concrete offerte of vraag waar de klant op zou terugkomen. NIET gepast: gesprek was al netjes afgerond zonder open eind, klant toonde geen interesse, klacht/service-kwestie, of het voelt pusherig. Twijfel = niet doen.\nZo ja: schrijf het opvolgbericht zoals Jaimy appt/mailt, kort (max 3 zinnen), warm, geen druk, geen korting, geen emoji, geen gedachtestreepjes, sluit aan op wat de klant zei. VERBODEN: beweren dat er intern iets is besproken, uitgezocht of geregeld ("ik heb het met onze adviseur besproken") als dat niet letterlijk uit het gesprek blijkt, je volgt alleen op, je verzint geen nieuwe gebeurtenissen. Lag er nog een onbeantwoorde vraag van de klant die jij niet zeker kunt beantwoorden: dan is opvolgen NIET gepast (opvolgen=false, reden vermelden).\nAntwoord UITSLUITEND met JSON: {"opvolgen": true/false, "reden": "...", "bericht": "..." }` }],
+      `Je bent Jaimy van Sonty (zonwering, Rijswijk). Vandaag is ${nu.datum}. Hieronder een klantgesprek (${k.kanaal || 'WA'}) dat al ${stilTekst} stil ligt; de klant heeft NIET meer gereageerd op ons laatste bericht en heeft niets getekend.${snelInstructie}${geplandInstructie}\n\n# Gesprek (oud → nieuw)\n${historie}\n\n# Klantcontext (systemen)\n${JSON.stringify(context).slice(0, 1500)}\n\nBeoordeel als verkoper: is een korte, vriendelijke opvolging hier GEPAST? Gepast is bv.: klant zei "ik kom er op terug" / "moet overleggen" / "ik ga meten", of er ligt een concrete offerte of vraag waar de klant op zou terugkomen. NIET gepast: gesprek was al netjes afgerond zonder open eind, klant toonde geen interesse, klacht/service-kwestie, of het voelt pusherig. Twijfel = niet doen.\nZo ja: schrijf het opvolgbericht zoals Jaimy appt/mailt, kort (max 3 zinnen), warm, geen druk, geen korting, geen emoji, geen gedachtestreepjes, sluit aan op wat de klant zei. VERBODEN: beweren dat er intern iets is besproken, uitgezocht of geregeld ("ik heb het met onze adviseur besproken") als dat niet letterlijk uit het gesprek blijkt, je volgt alleen op, je verzint geen nieuwe gebeurtenissen. Lag er nog een onbeantwoorde vraag van de klant die jij niet zeker kunt beantwoorden: dan is opvolgen NIET gepast (opvolgen=false, reden vermelden).\nNoemde de klant ZELF een moment waarop hij of zij erop terugkomt ("dit weekend", "volgende week", "morgen", "eind van de maand", "na de vakantie")? Zet dan in terugkomMoment de eerste logische datum NA dat moment als YYYY-MM-DD (na "dit weekend" bijvoorbeeld de maandag erna). Ligt dat moment nog in de toekomst, dan is NU opvolgen niet gepast (opvolgen=false, reden noemt het moment), maar geef terugkomMoment wel. Geen genoemd moment: terugkomMoment null.\nAntwoord UITSLUITEND met JSON: {"opvolgen": true/false, "reden": "...", "bericht": "...", "terugkomMoment": "YYYY-MM-DD of null" }` }],
   });
   const tekst = (resp.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
   try { return JSON.parse(tekst.replace(/^[^{]*/, '').replace(/[^}]*$/, '')); }
   catch { return { opvolgen: false, reden: 'oordeel niet te parsen (fail-closed)' }; }
+}
+
+// ── Geplande follow-ups (klant noemde zelf een moment, Daimy 23-07): uitvoeren zodra de
+// datum bereikt is. Venster open = vrij bericht; dicht (422) = goedgekeurde template 236108,
+// waarna het nieuwe template-ticket direct in het originele ticket wordt gemerged.
+async function verwerkGeplande(state, regels) {
+  const rijp = Object.entries(state).filter(([, st]) => st.gepland && st.gepland.datum <= vandaagStr()).slice(0, 5);
+  for (const [ticket, st] of rijp) {
+    const g = st.gepland;
+    const wie = g.klant?.naam || g.klant?.phone || g.klant?.email || ticket;
+    if (!SCENARIO && !CFG.binnenBotUren()) { console.log(`  ⏰ ${wie}: gepland (${g.datum}) maar buiten bot-uren, volgende run`); continue; }
+    const k = { ticket, kanaal: g.kanaal || 'WA', klant: g.klant, gepland: true, geplandDatum: g.datum };
+    const check = await blokkade(k, state);
+    if (check.ok !== true) {
+      console.log(`  ⏰− ${wie}: gepland maar geblokkeerd: ${check}`);
+      // klant is intussen zelf verder gegaan of het ligt bij een mens: plan vervalt
+      if (/klant heeft als laatste|toegewezen|Mens nodig|getekend|opt-out/i.test(String(check))) { delete st.gepland; bewaarState(state); }
+      regels.push(`⏰− ${wie}: geplande opvolging vervallen (${check})`);
+      continue;
+    }
+    const oordeel = await beoordeel(k, check.echte, check.context);
+    const tm = String(oordeel.terugkomMoment || '');
+    if (/^\d{4}-\d{2}-\d{2}$/.test(tm) && tm > vandaagStr()) { st.gepland.datum = tm; bewaarState(state); console.log(`  ⏰ ${wie}: opnieuw gepland naar ${tm}`); continue; }
+    if (!oordeel.opvolgen || !oordeel.bericht) { delete st.gepland; bewaarState(state); console.log(`  ⏰− ${wie}: bij nader inzien niet gepast (${String(oordeel.reden).slice(0, 80)})`); continue; }
+    if (SCENARIO) { console.log(`  ⏰[SCENARIO] ${wie}: ZOU NU STUREN → ${String(oordeel.bericht).slice(0, 160)}`); regels.push(`⏰ SCENARIO ${wie}: "${String(oordeel.bericht).slice(0, 200)}"`); continue; }
+    const payload = k.kanaal === 'EMAIL' ? { message: naarMailHtml(String(oordeel.bericht)), body_type: 'html' } : { message: String(oordeel.bericht) };
+    let send = await tPost(`/tickets/${ticket}/messages`, payload);
+    let via = 'vrij bericht';
+    if (!send.ok && send.status === 422 && k.kanaal !== 'EMAIL' && g.klant?.phone) {
+      const voornaam = (g.klant?.naam || '').split(' ')[0] || 'daar';
+      const tw = await fetch('https://app.trengo.com/api/v2/wa_sessions', {
+        method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recipient_phone_number: g.klant.phone, hsm_id: 236108, channel_id: 1359857, params: [{ type: 'body', key: '{{1}}', value: voornaam }] }) });
+      if (tw.ok) {
+        try {
+          const nieuwTicket = (await tw.json())?.message?.ticket_id;
+          if (nieuwTicket && Number(nieuwTicket) !== Number(ticket)) {
+            const mr = await fetch(`https://app.trengo.com/api/v2/tickets/${ticket}/merge`, { method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' }, body: JSON.stringify({ source_ticket_id: nieuwTicket }) });
+            if (!mr.ok) regels.push(`⚠️ ${wie}: template-ticket ${nieuwTicket} kon niet gemerged worden (${mr.status})`);
+          }
+        } catch {}
+      }
+      send = { ok: tw.ok, status: tw.status }; via = 'template, 24u-venster was dicht';
+    }
+    if (send.ok) {
+      delete st.gepland; state[ticket] = { ...state[ticket], laatst: new Date().toISOString() }; bewaarState(state);
+      await tPost(`/tickets/${ticket}/messages`, { internal_note: true, message: `✅ Geplande opvolging verstuurd: de klant noemde zelf dit moment om erop terug te komen (via ${via}).` });
+      console.log(`  ⏰✓ ${wie}: VERSTUURD (${via})`);
+      regels.push(`✓ VERSTUURD (gepland, ${via}) ${wie}: "${String(oordeel.bericht).slice(0, 180)}"`);
+    } else {
+      console.log(`  ⏰⚠️ ${wie}: geplande opvolging mislukt (${send.status})`);
+      regels.push(`⚠️ ${wie}: geplande opvolging mislukt (${send.status})`);
+    }
+    await new Promise(r => setTimeout(r, 3000));
+  }
 }
 
 async function main() {
@@ -160,12 +230,14 @@ async function main() {
   const alle = kandidaten(argDagen);
   // Snel apart cappen (nieuwste eerst: meeste venster over), anders drukken de vele
   // 24u-gesprekken de reguliere kandidaten uit de lijst — of andersom.
-  const snel = alle.filter(k => k.snel).sort((a, b) => Date.parse(b.tijd) - Date.parse(a.tijd)).slice(0, maxSnel);
-  const regulier = alle.filter(k => !k.snel).slice(0, max);
-  const ks = [...snel, ...regulier];
+  const forced = alle.filter(k => k.forced);
+  const snel = alle.filter(k => k.snel && !k.forced).sort((a, b) => Date.parse(b.tijd) - Date.parse(a.tijd)).slice(0, maxSnel);
+  const regulier = alle.filter(k => !k.snel && !k.forced).slice(0, max);
+  const ks = [...forced, ...snel, ...regulier];
   console.log(`[SCHADUW] ${ks.length} kandidaat-gesprekken (${snel.length} snel/24u-venster max ${maxSnel}, ${regulier.length} regulier ${MIN_STIL_DAGEN}-${Math.min(argDagen, MAX_STIL_DAGEN)} dagen stil max ${max})`);
   let voorstellen = 0;
   const regels = [];
+  await verwerkGeplande(state, regels);
   for (const k of ks) {
     await new Promise(r => setTimeout(r, 3000)); // Trengo-limiet delen met de daemons
     const wie = k.klant?.naam || k.klant?.phone || k.klant?.email || '?';
@@ -174,16 +246,27 @@ async function main() {
     const oordeel = await beoordeel(k, check.echte, check.context);
     const rec = { tijd: new Date().toISOString(), ticket: k.ticket, kanaal: k.kanaal || 'WA', klant: wie, snel: !!k.snel, ...oordeel, schaduw: true };
     fs.appendFileSync(VOORSTELLEN, JSON.stringify(rec) + '\n');
+    // Klant noemde ZELF een moment ("dit weekend", "volgende week"): nu niets sturen maar
+    // de follow-up plannen; verwerkGeplande pakt hem op zodra de datum bereikt is.
+    const tm = String(oordeel.terugkomMoment || '');
+    const maxPlan = new Date(Date.now() + 21 * 86400000).toISOString().slice(0, 10);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(tm) && tm > vandaagStr() && tm <= maxPlan) {
+      state[String(k.ticket)] = { ...state[String(k.ticket)], beoordeeld: rec.tijd, gepland: { datum: tm, kanaal: k.kanaal || 'WA', klant: k.klant } };
+      bewaarState(state);
+      console.log(`  ⏰ ${wie}: klant komt zelf terug rond ${tm}, follow-up gepland${SCENARIO ? ' [SCENARIO, niet opgeslagen]' : ''}`);
+      regels.push(`⏰ ${wie}: gepland voor ${tm} (klant noemde zelf een moment)`);
+      continue;
+    }
     state[String(k.ticket)] = { ...state[String(k.ticket)], beoordeeld: rec.tijd, ...(oordeel.opvolgen ? { laatst: rec.tijd, schaduw: true } : {}) };
     bewaarState(state);
-    const tag = k.snel ? ' [SNEL/24u]' : '';
+    const tag = k.snel ? ' [SNEL/24u]' : k.forced ? ' [SCENARIO-geforceerd]' : '';
     if (oordeel.opvolgen) {
       voorstellen++;
       // LIVE-MANDAAT (Daimy 23-07): WA-snelvenster + mail dag 3-4,5 echt versturen (binnen bot-uren)
       const stilDagen = (check.stilUren || 0) / 24;
       const liveWa = k.snel && (k.kanaal || 'WA') === 'WA';
       const liveMail = (k.kanaal === 'EMAIL') && stilDagen <= LIVE_MAIL_MAX_DAGEN;
-      const magLive = (liveWa || liveMail) && CFG.binnenBotUren();
+      const magLive = !SCENARIO && !k.forced && (liveWa || liveMail) && CFG.binnenBotUren();
       if (magLive && oordeel.bericht) {
         const payload = k.kanaal === 'EMAIL' ? { message: naarMailHtml(String(oordeel.bericht)), body_type: 'html' } : { message: String(oordeel.bericht) };
         const send = await tPost(`/tickets/${k.ticket}/messages`, payload);

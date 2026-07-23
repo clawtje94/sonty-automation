@@ -1,5 +1,9 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
 
+## OPVOLGING DEELS LIVE (23 juli ~17:00, mandaat Daimy)
+- opvolging-daemon draait nu ELK UUR (was 1x/dag) en verstuurt ECHT binnen mandaat: (1) WA-gesprekken waar klant niet reageerde op ons laatste bericht, niet toegewezen/niet Mens nodig -> follow-up VOOR het 24u-venster sluit (4-20u stilte-check bestond al); (2) e-mail idem na 3 tot 4,5 dagen stilte. Alleen binnen bot-uren; alle andere gevallen blijven SCHADUW-voorstel. Volledig schaduwrapport alleen nog in de 10-uur-run; live-verzendingen worden per run gemeld. Vinkje-notitie op ticket per verzending.
+- Ook vandaag: verse @sonny-opdracht op collega-tickets wordt echt uitgevoerd; bij dicht 24u-venster valt elk bot-vervolgbericht terug op goedgekeurde template 236108.
+
 ## PLANNING-TAB IS NU "2026 goed" + NIEUWE MAILAFHANDELING (23 juli ~16:10, opdracht Daimy)
 - Tab "Claude ai test" heet nu **"2026 goed"** (zelfde sheetId 273253041; oude tab blijft "2026"). Nieuw tabblad **"Retouren"** (sheetId 111815888): retourmeldingen komen daar als rij (datum/leverancier/referentie/omschrijving), niet meer in de hoofdtab; bestaande retour SN82606373 verhuisd.
 - Mailafhandeling: GOED verwerkte mails zet de daemon nu op GELEZEN (PATCH IsRead). Onverwerkbare leveranciersmail: Telegram-melding naar Daimy + mail blijft ONGELEZEN (state.gemeld voorkomt herhaal-meldingen), geen handmatig-bekijken-rijen meer. Ongelezen in de inbox = actie nodig.

@@ -1,5 +1,9 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
 
+## TE VER-BASIS = GOUDA (23 juli ~14:15, correctie Daimy "het is niet Rijswijk, Gouda als basis")
+- SONTY_LAT/LON in v2/v3/v4 stond op RIJSWIJK; nu GOUDA (52.0116, 4.7104). Regels ongewijzigd: >125km te ver; 60-125km alleen bij >= EUR 7.500; <60km altijd. Vanaf Gouda: Bunnik 34km, Utrecht 29km, Amsterdam 42km — allemaal binnen. Regressietest 127/127. Dit was de ECHTE oorzaak van de De Wolf-afwijzing (59km vanaf Rijswijk, 34km vanaf Gouda).
+- MOGELIJK VERVOLG (vraag aan Daimy open): eerdere TE VER-afwijzingen herevalueren met Gouda-basis — er kunnen klanten onterecht afgewezen zijn.
+
 ## V4: TE VER NA VERWERKING + OFFERTE 202610173 AF (23 juli ~13:50, opdracht Daimy)
 - v4-combined aangepast: TE VER-items krijgen nu EERST de volledige verwerking (prijscorrectie + verrijking + opslaan) en gaan daarná pas naar TE VER (mail + status). Regressietest 127/127 groen. Reden: handmatig teruggehaalde te-ver-klanten (casus de Wolf) hebben dan een kloppende offerte.
 - Offerte 202610173 is nu volledig v4-af: Waarom Sonty-blok stond er al (verify keek eerder op de verkeerde plek), kleur-annotaties, profiel-info, upgrade-blokken, correcte prijzen (rolluiken 784,30/1.002,10, SunEye XL 6.459,20), nette regelvolgorde. Wacht bij Tanya op klantoverleg over de XL-maat vóór versturen.

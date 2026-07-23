@@ -28,6 +28,7 @@ const INFO = {
   'nl.sonty.prijs-steekproef': { naam: 'Prijs-steekproef configurator', groep: 'Offertes & CRM', log: 'prijs-steekproef.log', maxUur: 30 },
   'nl.sonty.health-check': { naam: 'Health-check (2x/dag)', groep: 'Bewaking', log: 'health-check.log', maxUur: 14 },
   'nl.sonty.credits-check': { naam: 'Anthropic credits-watchdog', groep: 'Bewaking', log: 'credits-check.log', maxUur: 14 },
+  'nl.sonty.tickets-rapport': { naam: 'Dagrapport tickets AI vs Mens (08:15)', groep: 'Rapportage', log: 'tickets-rapport.log', maxUur: 30 },
   'nl.sonty.sonny-rapport': { naam: 'Ochtendrapport AI-gesprekken (08:30)', groep: 'Rapportage', log: 'sonny-rapport.log', maxUur: 26 },
   'nl.sonty.getekend-rapport': { naam: 'Dagrapport tekeningen (07:45)', groep: 'Rapportage', log: 'getekend-rapport.log', maxUur: 30 },
   'nl.sonty.weekrapport': { naam: 'Weekrapport conversie', groep: 'Rapportage', log: 'weekrapport.log', maxUur: 24 * 8 },

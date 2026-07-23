@@ -46,6 +46,7 @@ const DAEMONS = [
   // Planning-mail: verwerkt orders@/info@ in de Planning-sheet (tab Claude ai test), elke 30 min.
   // Logt elke ronde (ook "lock actief"), dus 2u stilte = probleem.
   { label: 'nl.sonty.planning-mail', log: 'planning-mail-daemon.log', maxLogAgeH: 2, name: 'Planning-mail (orders@/info@ -> sheet)' },
+  { label: 'nl.sonty.tickets-rapport', log: 'tickets-rapport.log', maxLogAgeH: 30, name: 'Dagrapport tickets AI vs Mens nodig (08:15)' },
   // Vacaturemail-batches: dagelijks 10:30 tot de lijst klaar is (log blijft daarna vers door 'alles verstuurd'-regel)
   { label: 'nl.sonty.vacaturemail', log: 'vacaturemail.log', maxLogAgeH: 30, name: 'Vacaturemail-batches' },
 ];

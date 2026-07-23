@@ -309,3 +309,19 @@ tijdmetingen (check-in/uit) terwijl de monteurs nog niet hoeven om te schakelen.
 3. Beschikbaarheid: pilotfase = werktijden van Daimy (V23) + Outlook-blokkades lezen;
    later Planado-shifts als bron.
 4. Testjob eerst (notificaties/tracking checken) → dan 1-2 weken schaduw → dan live.
+
+### Scenario-simulatie inmeet-pilot (23-07, 40 scenario's op de ECHTE agenda)
+Basis: 72 echte inmeet-afspraken komende 10 werkdagen, 2 virtuele inmeters (8:00-17:00,
+vertrek magazijn), 40 nieuwe aanvragen op echte klantadressen, route-motor met spitsfactor.
+- Alle 40 in te plannen; 11 binnen 3 werkdagen, 17 binnen 5 → agenda zit al aardig vol
+  (112 afspraken / 10 dagen / 2 inmeters ≈ 5,6 per inmeter per dag).
+- Extra reistijd per nieuwe afspraak: MEDIAAN 13 MIN (clustering werkt), p75 28 min.
+- Uitschieters: verre klanten (Hoofddorp +108, Aalsmeer +105, Alphen +42/54, Numansdorp
+  +47) → planner-les: verre regio's BUNDELEN op vaste "buitenrand-dagdelen".
+### Planado-verkenning (23-07, ingelogd als Daimy):
+- Klant-SMS: NIET actief — vereist eigen sms-gateway via support. Dus alle klantberichten
+  (slotkeuze, herinnering, onderweg) via Jaimy/WhatsApp: geen dubbele berichten mogelijk.
+- VOLGPAGINA bestaat al ("Standaard", tracking_form.html, 7 dagen geldig): live positie
+  uitvoerder + bestemming; link te delen via API → Jaimy stuurt m in het onderweg-bericht.
+- Werktijden-instelling Planado: elke dag 08:00-20:00. Verder aanwezig: gebieden
+  (territories), vaardigheden, audit-log, klantportaal.

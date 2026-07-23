@@ -1,5 +1,10 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
 
+## TE VER-HERCHECK JULI: 98 ONTERECHTE AFWIJZINGEN (23 juli ~14:45, alleen gecheckt, NIETS verstuurd)
+- Van de 230 TE VER-mails in juli waren er met Gouda-basis 98 ONTERECHT (allemaal < 60 km van Gouda = altijd-bedienen-zone; 132 wel terecht; 0 onherleidbaar). Volledige lijst: data/tever-hercheck-juli.json (naam, plaats, km, datum, e-mail).
+- Grootste clusters: Almere (14), Tilburg (10), Amersfoort (6), Zeist (6), Purmerend, Kaatsheuvel, Waalwijk, Den Bosch, Bussum. Klanten kregen "buiten ons werkgebied"-mail namens Joey.
+- WACHT OP DAIMY: of/hoe deze 98 alsnog benaderd worden (excuus + alsnog offerte?). NB: dedupe in .tever-sent.json voorkomt dat ze bij een nieuwe aanvraag opnieuw gemaild worden, maar hun bord-items staan op TE VER.
+
 ## TE VER-BASIS = GOUDA (23 juli ~14:15, correctie Daimy "het is niet Rijswijk, Gouda als basis")
 - SONTY_LAT/LON in v2/v3/v4 stond op RIJSWIJK; nu GOUDA (52.0116, 4.7104). Regels ongewijzigd: >125km te ver; 60-125km alleen bij >= EUR 7.500; <60km altijd. Vanaf Gouda: Bunnik 34km, Utrecht 29km, Amsterdam 42km — allemaal binnen. Regressietest 127/127. Dit was de ECHTE oorzaak van de De Wolf-afwijzing (59km vanaf Rijswijk, 34km vanaf Gouda).
 - MOGELIJK VERVOLG (vraag aan Daimy open): eerdere TE VER-afwijzingen herevalueren met Gouda-basis — er kunnen klanten onterecht afgewezen zijn.

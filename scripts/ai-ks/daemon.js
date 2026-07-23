@@ -324,7 +324,7 @@ async function verwerkTicket(t, state) {
   // "interesse in de vacature" / "Ik kom via:") NOOIT door de bot beantwoorden —
   // direct aan Daimy (736327) toewijzen en verder met rust laten.
   if ((msgs?.data || []).some(m => m.type === 'INBOUND' && /interesse in de vacature|ik kom via:/i.test(String(m.body || m.message || '')))) {
-    try { await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 }); console.log(`  [${t.id}] vacature-appje → team Mens nodig`); } catch (e) { console.error(`  [${t.id}] vacature-toewijzing FOUT: ${e.message}`); }
+    try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 736327 }); console.log(`  [${t.id}] vacature-appje → toegewezen aan Daimy`); } catch (e) { console.error(`  [${t.id}] vacature-toewijzing FOUT: ${e.message}`); }
     return;
   }
   // MENS-GESPREK (Daimy 23-07, "als Nanny iemand een WhatsApp stuurt"): heeft een COLLEGA

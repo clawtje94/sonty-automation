@@ -76,10 +76,10 @@ async function ronde() {
           const vm = await tGet(`/tickets/${t.id}/messages`);
           const inbound = (vm?.data || []).filter((m) => m.type === 'INBOUND');
           const echt = inbound.some((m) => !/automatisch antwoord|auto.?reply|out of office|afwezig|vakantie|undeliver|mail delivery|delivery status|postmaster|mailer-daemon/i.test(String(m.body || m.message || '').slice(0, 400)));
-          if (echt && Number(t.team_id) !== 431872 && Number(t.user_id) !== 736327) {
-            // naar team Mens nodig — NIET aan Daimy toewijzen (Daimy 23-07: "kap met toewijzen")
-            await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
-            console.log(`  [${t.id}] echt vacature-antwoord → team Mens nodig`);
+          if (echt && Number(t.user_id) !== 736327) {
+            // vacature-antwoorden WEL aan Daimy (Daimy 23-07: "vacature reactie moet gewoon zo blijven")
+            await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 736327 });
+            console.log(`  [${t.id}] echt vacature-antwoord → toegewezen aan Daimy`);
           } else if (!echt) {
             await tPost(`/tickets/${t.id}/close`, {});
             console.log(`  [${t.id}] vacature-ticket zonder echt antwoord → gesloten (Sunny)`);

@@ -330,3 +330,6 @@ vertrek magazijn), 40 nieuwe aanvragen op echte klantadressen, route-motor met s
 - Sjoerd (Hoogduin/Pelle): inmeter, beschikbaar ma t/m do 9:00-15:00, vr+za NIET.
 - Joey (Engelen): inmeter, rooster volgt van Daimy.
 - Rooster-veld toegevoegd aan personeel-dashboard; planner respecteert rooster + afwezigheid.
+- V23 COMPLEET (23-07): Joey Engelen rooster: ma, di, do 9:00-15:00; wo vrij; vr nu vrij
+  (kan later 9:00-15:00 worden). Sjoerd: ma-do 9:00-15:00, vr+za niet.
+  Samen: ma/di/do 2 inmeters, wo alleen Sjoerd, vr geen inmeters (voor nu).

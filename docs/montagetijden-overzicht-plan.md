@@ -256,3 +256,32 @@ V16 factureren bij restpunt (alles, deel, of wachten)?
    c. Wat vandaag echt niet meer past: klant krijgt automatisch bericht + 2 nieuwe
       slotopties; kantoor ziet het als uitzondering in het ochtendlijstje.
    Onderdeel van de schaduwplanner-spec (fase 5b).
+
+## INMEET-PILOT (Daimy 23 juli: "inmeten alvast inplannen, soepel, al in Planado, testen met de 2 inmeters")
+Waarom inmeten de perfecte proeftuin is: vaste duur (60 min), geen magazijn/leverings-
+afhankelijkheid (kan direct na akkoord), laag risico, ~27 afspraken/week volume, en het
+test ALLE planner-onderdelen: slots, datumkeuze, route-clustering, Planado-jobs,
+aankomstvensters. Bovendien: de 2 inmeters in de Planado-app = de allereerste échte
+tijdmetingen (check-in/uit) terwijl de monteurs nog niet hoeven om te schakelen.
+
+### De flow
+1. TRIGGER: klant akkoord op prijsindicatie/offerte → inmeet-aanvraag ontstaat
+   (Jaimy heeft al een inmeet_afspraak_voorstellen-tool in AI-KS; die gaat dit voeden).
+2. SLOTS: de planner stelt 2-3 sloten voor die qua ROUTE passen: nieuwe afspraak wordt
+   geclusterd bij al geplande inmeet-afspraken in dezelfde regio (OSRM + TomTom),
+   reistijd als apart blok, aankomstvenster max 30 min breed.
+3. KLANT kiest via WhatsApp/mail → bevestiging, herinnering avond ervoor,
+   "inmeter is onderweg"-bericht op de dag zelf.
+4. PLANADO: per afspraak automatisch een job (scripts/create-planado-job.js bestaat al),
+   type Inmeten, juiste inmeter, klant+adres, tijden. Inmeters checken in/uit in de app
+   → eerste werkelijke-tijd-metingen komen vanzelf binnen.
+5. TESTFASE: week 1-2 schaduw (planner stelt sloten voor NAAST hoe kantoor het nu doet,
+   verschil-rapport), daarna live voor de 2 inmeters. Uitzondering op "Planado pas als
+   alles staat" — expliciete opdracht Daimy 23-07 voor dit pilot-stuk.
+
+### Nodig van Daimy (V23-V26)
+- V23: wie zijn de 2 inmeters (namen) + hun werkdagen/tijden? (dashboard zegt nu: 1)
+- V24: hebben ze allebei een Planado-account/app? (anders nodig ik ze uit)
+- V25: waar komen inmeet-aanvragen nu binnen (kantoor/Bookings/telefonisch), zodat de
+  pilot naast de bestaande stroom kan meten?
+- V26: akkoord dat de pilot inmeet-jobs in Planado SCHRIJFT (alleen inmeten, niks anders)?

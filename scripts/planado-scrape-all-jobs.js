@@ -8,8 +8,8 @@ const PLANADO_API = 'https://api.planadoapp.com/v2';
 const PLANADO_KEY = 'b9877b84119475b39953cb5dd0c409a7704ef669fe569bc1745c99275cef';
 
 const CAL_WORKER_MAP = {
-  'Sjoerd Hoogduin': 'Sjoerd Pelle',
-  'Sjoerd': 'Sjoerd Pelle',
+  'Sjoerd Hoogduin': 'Sjoerd Hoogduin',
+  'Sjoerd': 'Sjoerd Hoogduin',
   'Nanny van Vliet': 'Nanny van Vliet - Kester',
   'Nanny': 'Nanny van Vliet - Kester',
   'Jaimy de Wit': 'Jaimy de Wit',

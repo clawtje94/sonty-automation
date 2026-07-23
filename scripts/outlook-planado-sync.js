@@ -82,7 +82,7 @@ function shouldSkip(event) {
 function mapWorker(calendarName) {
   const name = calendarName.toLowerCase();
   // Sjoerd Hoogduin (Outlook) = Sjoerd Pelle (Planado)
-  if (name.includes('sjoerd')) return planadoWorkers['Sjoerd Pelle'] || null;
+  if (name.includes('sjoerd')) return planadoWorkers['Sjoerd Hoogduin'] || null;
   if (name.includes('yudi')) return null; // Yudi not in Planado yet
   if (name.includes('jaimy')) return null; // Jaimy is klantenservice, not field worker
   if (name.includes('nanny')) return planadoWorkers['Nanny van Vliet - Kester'] || null;

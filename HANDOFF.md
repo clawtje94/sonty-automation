@@ -1,5 +1,11 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
 
+## DOORBRAAK: KLANTNR = GRIPP-OFFERTENUMMER (23 juli)
+- Het nummer in de sheetnaam ("Hachioui 6018") is het Gripp-OFFERTEnummer; offer.get op number geeft de company (exacte plaats) én de volledige hoofdbestelling-regels (ook combi-orders over meerdere leveranciers).
+- Daemon: plaats/regio nu EERST via offernummer (100% zeker), naam-zoek alleen als fallback; 's-Gravenhage/DenHaag-alias naar Den Haag. 7 eerder-lege rijen exact gevuld (o.a. van der Lans=Wateringen, Meijer=Nootdorp).
+- REGEL Daimy: hoofdbestelling komt altijd uit Gripp; naam + "nabestelling" = nálevering en heeft ALTIJD VOORRANG → daemon zet "VOORRANG (nabestelling) —" voor de Ai-opmerking (5 bestaande rijen gebackfilld).
+- VOLGENDE STAP (voorstel, wacht op vorm-keuze Daimy): compleet-geleverd-check = Gripp-offerteregels (excl. montage/korting) afvinken tegen binnengemelde leveranciersorders/laadmeldingen per klantnr.
+
 ## PLANNING-TAB: NIEUWE KOLOMMEN C+D (23 juli, opdracht Daimy)
 - Daimy voegde kolommen toe; indeling nu: A checkbox | B Ai opmerking (KORT, alleen de wijziging) | C Datum aanpassing | D leverancier | E naam | F Plaats | G Regio | H Ordernummer | I Besteld | J Geleverd op | K gepland | L Teams | M Team opm | N Wat besteld | O formule.
 - Daemon omgebouwd (alle indexen +2, korte B-teksten, C/D automatisch gevuld); alle 42 bestaande AI-rijen geconverteerd (B ingekort, C=22-07, D=leverancier). Testrun groen.

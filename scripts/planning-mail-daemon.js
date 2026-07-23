@@ -5,9 +5,10 @@
 // kolom B "Ai opmerking" met wat er is gebeurd. Draait 1 ronde per aanroep (launchd
 // nl.sonty.planning-mail, elke 30 min).
 //
-// Kolommen: A checkbox | B Ai opmerking | C naam+klantnr | D Plaats | E Regio | F Ordernummer
-//           G Besteld | H Geleverd op | I Datum gepland | J Teams | K Team opmerking
-//           L Wat is besteld | M weken-formule
+// Kolommen (sinds 23-07, Daimy voegde C+D toe): A checkbox | B Ai opmerking (KORT: alleen wat
+//           er veranderd is) | C Datum aanpassing | D leverancier | E naam+klantnr | F Plaats |
+//           G Regio | H Ordernummer | I Besteld | J Geleverd op | K Datum gepland | L Teams |
+//           M Team opmerking | N Wat is besteld | O weken-formule
 // Alleen leveranciersmail wordt verwerkt; klantmail (bv. op info@) wordt overgeslagen.
 const fs = require('fs');
 const os = require('os');
@@ -154,6 +155,7 @@ function verrijkMetPdf(a, pdf) {
     const [d, mnd, j] = pdf.leverdatum.split('-').map(Number);
     a.geleverdSerial = serial(d, mnd, j);
   }
+  if (a.kort && pdf.leverdatum && !/Geleverd op/.test(a.kort)) a.kort += `, levering ${pdf.leverdatum}`;
   a.opm = (a.opm || '').replace(/\s*(Details|Productdetails|Klantnaam|Klantreferentie|Ordernummer en details|Wijziging staat|Bevestigde leverdatum staat)[^.]*in (de )?(PDF-)?bijlage[^.]*\./i, '') +
     ` PDF gelezen (${pdf.leverancier}): ${KORT(pdf.producten, 160) || 'geen productregels'}${pdf.leverdatum ? ', leverdatum ' + pdf.leverdatum : ''}.`;
 }
@@ -167,9 +169,9 @@ function duiden(m) {
   let x;
   if ((x = s.match(/^Laadmelding (.+?) (\S+)$/))) {
     const d = m.body.match(/Verwachte aankomst\s+\w+\s+(\d{1,2})\s+(\w+)\s+(\d{4})/i);
-    if (!d || !MAANDEN[d[2].toLowerCase()]) return { type: 'nieuw', naam: `(laadmelding ${x[1]})`, ordernr: x[2], opm: `Laadmelding NE voor ${x[1]} ${x[2]}, maar de aankomstdatum kon niet uit de mail gelezen worden. Handmatig bekijken.`, wat: `${x[1]}, zie laadmelding` };
+    if (!d || !MAANDEN[d[2].toLowerCase()]) return { type: 'nieuw', naam: `(laadmelding ${x[1]})`, ordernr: x[2], lev: x[1], kort: 'Laadmelding zonder leesbare datum, handmatig bekijken', opm: `Laadmelding NE voor ${x[1]} ${x[2]}, maar de aankomstdatum kon niet uit de mail gelezen worden. Handmatig bekijken.`, wat: `${x[1]}, zie laadmelding` };
     const [dag, mnd, jr] = [+d[1], MAANDEN[d[2].toLowerCase()], +d[3]];
-    return { type: 'update', ordernr: x[2], geleverdSerial: serial(dag, mnd, jr), geleverdTekst: ddmmyyyy(dag, mnd, jr), nieuwWat: `${x[1]}, zie laadmelding`, opm: `Laadmelding NE (${x[1]} ${x[2]}): verwachte aankomst ${d[1]} ${d[2]} ${d[3]}. "Geleverd op" bijgewerkt.` };
+    return { type: 'update', ordernr: x[2], lev: x[1], kort: `Geleverd op → ${ddmmyyyy(dag, mnd, jr)} (laadmelding NE)`, geleverdSerial: serial(dag, mnd, jr), geleverdTekst: ddmmyyyy(dag, mnd, jr), nieuwWat: `${x[1]}, zie laadmelding`, opm: `Laadmelding NE (${x[1]} ${x[2]}): verwachte aankomst ${d[1]} ${d[2]} ${d[3]}. "Geleverd op" bijgewerkt.` };
   }
   if (/^ROMA comes to you/i.test(s)) {
     const d = m.body.match(/between (\d{2})\.(\d{2})\.(\d{4})/);
@@ -180,22 +182,22 @@ function duiden(m) {
   if ((x = s.match(/^(Portaalbevestiging|Orderbevestiging|Gewijzigde orderbevestiging) (\d+) met referentie (.+)$/i))) {
     const soort = x[1].toLowerCase();
     const naam = x[3].replace(/\s*\((\d+)([^)]*)\)/, ' $1$2').trim();
-    if (/^gewijzigde/i.test(soort)) return { type: 'opmerking', ordernr: x[2], naam, opm: `Sunmaster stuurde een GEWIJZIGDE orderbevestiging voor ${x[2]} (${x[3]}). Wijziging staat in de PDF-bijlage — handmatig controleren.`, wat: 'Sunmaster, zie PDF-bijlage' };
-    return { type: 'nieuw-of-opmerking', ordernr: x[2], naam, besteld, wat: 'Sunmaster, productdetails in PDF-bijlage', opm: `Sunmaster ${x[1].toLowerCase()} ${x[2]}, referentie ${x[3]} (mail ${besteld}). Details in PDF-bijlage.` };
+    if (/^gewijzigde/i.test(soort)) return { type: 'opmerking', ordernr: x[2], naam, lev: 'Sunmaster', kort: `Gewijzigde orderbevestiging ontvangen — PDF controleren`, opm: `Sunmaster stuurde een GEWIJZIGDE orderbevestiging voor ${x[2]} (${x[3]}). Wijziging staat in de PDF-bijlage — handmatig controleren.`, wat: 'Sunmaster, zie PDF-bijlage' };
+    return { type: 'nieuw-of-opmerking', ordernr: x[2], naam, lev: 'Sunmaster', kort: `Nieuw: ${soort} ${x[2]}`, besteld, wat: 'Sunmaster, productdetails in PDF-bijlage', opm: `Sunmaster ${x[1].toLowerCase()} ${x[2]}, referentie ${x[3]} (mail ${besteld}). Details in PDF-bijlage.` };
   }
   if ((x = s.match(/^Toppoint orderbevestiging (\d+)/i)))
-    return { type: 'nieuw-of-opmerking', ordernr: x[1], naam: '(naam in PDF)', besteld, wat: 'Toppoint, orderbevestiging in PDF-bijlage', opm: `Toppoint orderbevestiging ${x[1]} (mail ${besteld}, in productie genomen). Klantnaam in PDF-bijlage.` };
+    return { type: 'nieuw-of-opmerking', ordernr: x[1], naam: '(naam in PDF)', lev: 'Toppoint', kort: `Nieuw: orderbevestiging ${x[1]}`, besteld, wat: 'Toppoint, orderbevestiging in PDF-bijlage', opm: `Toppoint orderbevestiging ${x[1]} (mail ${besteld}, in productie genomen). Klantnaam in PDF-bijlage.` };
   if ((x = s.match(/^Orderbevestiging VELUX Nederland ([\d-]+)/i)))
-    return { type: 'nieuw-of-opmerking', ordernr: x[1], naam: '(klant onbekend)', besteld, wat: 'Velux, orderbevestiging in PDF-bijlage', opm: `Velux orderbevestiging ${x[1]} (mail ${besteld}). Klantreferentie in bijlage.` };
+    return { type: 'nieuw-of-opmerking', ordernr: x[1], naam: '(klant onbekend)', lev: 'Velux', kort: `Nieuw: orderbevestiging ${x[1]}`, besteld, wat: 'Velux, orderbevestiging in PDF-bijlage', opm: `Velux orderbevestiging ${x[1]} (mail ${besteld}). Klantreferentie in bijlage.` };
   if ((x = s.match(/^Orderbevestiging Unilux (.+)$/i)))
-    return { type: 'nieuw', naam: x[1].trim(), ordernr: '(zie PDF)', besteld, wat: 'Unilux, orderbevestiging in PDF-bijlage', opm: `Unilux orderbevestiging "${x[1].trim()}" (mail ${besteld}). Ordernummer en details in PDF-bijlage.` };
+    return { type: 'nieuw', naam: x[1].trim(), ordernr: '(zie PDF)', lev: 'Unilux', kort: 'Nieuw: orderbevestiging', besteld, wat: 'Unilux, orderbevestiging in PDF-bijlage', opm: `Unilux orderbevestiging "${x[1].trim()}" (mail ${besteld}). Ordernummer en details in PDF-bijlage.` };
   if (/^Leveroverzicht Unilux/i.test(s)) return { type: 'negeer', reden: 'leveroverzicht; laadmeldingen dekken dit' };
   if (/Retourmelding/i.test(s)) {
     const ref = (m.body.match(/referentie\s+(\S+?)\s*\(/) || m.body.match(/referentie\s+(\S+)/) || [])[1] || '(onbekend)';
-    return { type: 'nieuw-of-opmerking', ordernr: ref, naam: `RETOUR ${ref}`, besteld: '', wat: 'Retourzending, afhaaldag bevestigen bij NE', opm: `${s} (mail ${besteld}): retouropdracht ${ref} wacht op bevestiging van de afhaaldag bij NE. ACTIE NODIG.` };
+    return { type: 'nieuw-of-opmerking', ordernr: ref, naam: `RETOUR ${ref}`, lev: 'NE', kort: 'Retour: afhaaldag bevestigen bij NE', besteld: '', wat: 'Retourzending, afhaaldag bevestigen bij NE', opm: `${s} (mail ${besteld}): retouropdracht ${ref} wacht op bevestiging van de afhaaldag bij NE. ACTIE NODIG.` };
   }
   if (LEVERANCIERS.test(m.from) || LEVERANCIERS.test(s))
-    return { type: 'nieuw', naam: '(handmatig bekijken)', ordernr: '', besteld, wat: (s || '(geen onderwerp)').slice(0, 90), opm: `Leveranciersmail van ${m.from} niet automatisch te duiden: "${s}". Handmatig bekijken.` };
+    return { type: 'nieuw', naam: '(handmatig bekijken)', ordernr: '', lev: (m.from.match(/@([\w-]+)/) || [])[1] || '', kort: 'Leveranciersmail, handmatig bekijken', besteld, wat: (s || '(geen onderwerp)').slice(0, 90), opm: `Leveranciersmail van ${m.from} niet automatisch te duiden: "${s}". Handmatig bekijken.` };
   return { type: 'skip', reden: 'geen leveranciersmail' };
 }
 
@@ -236,7 +238,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     const kaal = String(ordernr).replace(/^CV/i, '').replace(/^SN/i, '');
     if (!kaal) return -1;
     for (let i = 1; i < rows.length; i++) {
-      const f = String((rows[i] || [])[5] ?? '').trim();
+      const f = String((rows[i] || [])[7] ?? '').trim();
       if (!f) continue;
       if (f === String(ordernr) || f === kaal) return i;
       const fd = f.replace(/\D/g, ''), kd = kaal.replace(/\D/g, '');
@@ -245,7 +247,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     return -1;
   };
   let laatste = 0;
-  for (let i = 0; i < rows.length; i++) if (String((rows[i] || [])[2] ?? '').trim() || String((rows[i] || [])[5] ?? '').trim()) laatste = i + 1;
+  for (let i = 0; i < rows.length; i++) if (String((rows[i] || [])[4] ?? '').trim() || String((rows[i] || [])[7] ?? '').trim()) laatste = i + 1;
 
   const waarden = []; // values.batchUpdate data
   const formatRequests = []; // extra opmaak (datumformat nieuwe rijen)
@@ -254,6 +256,12 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
   const nieuweRijen = []; // {velden C..L, opm}
   const verslag = [];
   const opm = (rij, tekst) => { (opmPerRij[rij] = opmPerRij[rij] || []).push(tekst); };
+  const vandaagKort = `${nu().slice(8, 10)}-${nu().slice(5, 7)}`;
+  // C = datum aanpassing, D = leverancier (alleen zetten als D nog leeg is)
+  const stempelRij = (rij, a) => {
+    waarden.push({ range: `'${TAB}'!C${rij}`, values: [[vandaagKort]] });
+    if (a.lev && !String((rows[rij - 1] || [])[3] || '').trim()) waarden.push({ range: `'${TAB}'!D${rij}`, values: [[a.lev]] });
+  };
 
   const verwerkActie = (m, a) => {
     if (a.type === 'multi') { a.acties.forEach((sub) => verwerkActie(m, sub)); return true; }
@@ -263,26 +271,26 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
       const i = vindRij(a.ordernr);
       if (i >= 0) {
         const rij = i + 1;
-        if (a.geleverdSerial && (rows[i] || [])[7] !== a.geleverdSerial) {
-          waarden.push({ range: `'${TAB}'!H${rij}`, values: [[a.geleverdTekst]] });
-          rows[i][7] = a.geleverdSerial;
-          opm(rij, a.opm); blauw.add(i); verslag.push(`rij ${rij}: ${a.opm}`);
+        if (a.geleverdSerial && (rows[i] || [])[9] !== a.geleverdSerial) {
+          waarden.push({ range: `'${TAB}'!J${rij}`, values: [[a.geleverdTekst]] });
+          rows[i][9] = a.geleverdSerial;
+          stempelRij(rij, a); opm(rij, a.kort || a.opm); blauw.add(i); verslag.push(`rij ${rij}: ${a.kort || a.opm}`);
         } else if (a.type === 'update') {
           verslag.push(`rij ${rij}: leverdatum stond al goed (${a.geleverdTekst})`);
         } else {
-          opm(rij, a.opm); blauw.add(i); verslag.push(`rij ${rij}: ${a.opm}`);
+          stempelRij(rij, a); opm(rij, a.kort || a.opm); blauw.add(i); verslag.push(`rij ${rij}: ${a.kort || a.opm}`);
         }
         state.verwerkt[m.imid] = nu();
         return true;
       }
       if (a.type === 'opmerking' || a.type === 'nieuw-of-opmerking' || a.type === 'update') {
-        const n = { naam: a.naam || '(onbekend)', ordernr: a.ordernr, besteld: a.besteld || '', geleverd: a.geleverdTekst || '', wat: a.nieuwWat || a.wat || '', opm: a.opm + (a.type === 'update' ? ' LET OP: ordernummer niet in de sheet gevonden — nieuwe rij gemaakt.' : '') };
+        const n = { naam: a.naam || '(onbekend)', ordernr: a.ordernr, besteld: a.besteld || '', geleverd: a.geleverdTekst || '', wat: a.nieuwWat || a.wat || '', kort: (a.kort || '') + (a.type === 'update' ? ' (ordernr niet in sheet, nieuwe rij)' : ''), lev: a.lev, opm: a.opm + (a.type === 'update' ? ' LET OP: ordernummer niet in de sheet gevonden — nieuwe rij gemaakt.' : '') };
         nieuweRijen.push(n); state.verwerkt[m.imid] = nu();
         return true;
       }
     }
     if (a.type === 'nieuw') {
-      nieuweRijen.push({ naam: a.naam, ordernr: a.ordernr, besteld: a.besteld || '', geleverd: a.geleverdTekst || '', wat: a.wat, opm: a.opm });
+      nieuweRijen.push({ naam: a.naam, ordernr: a.ordernr, besteld: a.besteld || '', geleverd: a.geleverdTekst || '', wat: a.wat, opm: a.opm, kort: a.kort, lev: a.lev });
       state.verwerkt[m.imid] = nu();
       return true;
     }
@@ -306,7 +314,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     // Plaats (D) via Gripp + Regio (E) via plaats->regio-mapping uit de bestaande rijen
     const telling = {};
     for (const r of rows) {
-      const p = String((r || [])[3] || '').trim().toLowerCase(), rg = String((r || [])[4] || '').trim();
+      const p = String((r || [])[5] || '').trim().toLowerCase(), rg = String((r || [])[6] || '').trim();
       if (p && rg) (telling[p] = telling[p] || {})[rg] = (telling[p][rg] || 0) + 1;
     }
     const regioVan = (pl) => { const t = telling[String(pl || '').trim().toLowerCase()]; return t ? Object.entries(t).sort((a, b) => b[1] - a[1])[0][0] : ''; };
@@ -324,7 +332,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     for (let i = 0; i < uniek.length; i++) blauw.add(start - 1 + i);
     // Datumkolommen van de nieuwe rijen in de sheet-stijl (dd-mm) zetten
     formatRequests.push({ repeatCell: {
-      range: { sheetId: SHEET_ID, startRowIndex: start - 1, endRowIndex: start - 1 + uniek.length, startColumnIndex: 6, endColumnIndex: 8 },
+      range: { sheetId: SHEET_ID, startRowIndex: start - 1, endRowIndex: start - 1 + uniek.length, startColumnIndex: 8, endColumnIndex: 10 },
       cell: { userEnteredFormat: { numberFormat: { type: 'DATE', pattern: 'dd-mm' } } },
       fields: 'userEnteredFormat.numberFormat' } });
     uniek.forEach((n, i) => verslag.push(`rij ${start + i} NIEUW: ${n.naam} ${n.ordernr}${plaatsVan[zoeknaam(n.naam)] ? ' (' + plaatsVan[zoeknaam(n.naam)] + ')' : ''}`));
@@ -338,7 +346,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
   if (waarden.length) {
     await sheets.spreadsheets.values.batchUpdate({ spreadsheetId: SHEET, requestBody: { valueInputOption: 'USER_ENTERED', data: waarden } });
     const requests = [...blauw].map((r0) => ({ repeatCell: {
-      range: { sheetId: SHEET_ID, startRowIndex: r0, endRowIndex: r0 + 1, startColumnIndex: 0, endColumnIndex: 13 },
+      range: { sheetId: SHEET_ID, startRowIndex: r0, endRowIndex: r0 + 1, startColumnIndex: 0, endColumnIndex: 15 },
       cell: { userEnteredFormat: { backgroundColor: BLAUW } }, fields: 'userEnteredFormat.backgroundColor' } }));
     requests.push(...formatRequests);
     await sheets.spreadsheets.batchUpdate({ spreadsheetId: SHEET, requestBody: { requests } });

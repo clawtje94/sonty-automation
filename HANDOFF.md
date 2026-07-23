@@ -1,4 +1,8 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-22)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
+
+## PLANNING-TAB: NIEUWE KOLOMMEN C+D (23 juli, opdracht Daimy)
+- Daimy voegde kolommen toe; indeling nu: A checkbox | B Ai opmerking (KORT, alleen de wijziging) | C Datum aanpassing | D leverancier | E naam | F Plaats | G Regio | H Ordernummer | I Besteld | J Geleverd op | K gepland | L Teams | M Team opm | N Wat besteld | O formule.
+- Daemon omgebouwd (alle indexen +2, korte B-teksten, C/D automatisch gevuld); alle 42 bestaande AI-rijen geconverteerd (B ingekort, C=22-07, D=leverancier). Testrun groen.
 
 ## ADMIN-WACHTWOORD GEWIJZIGD (22 juli avond, opdracht Daimy): nieuw ww bij Daimy bekend; ADMIN_PASSWORD als Vercel-env (prod+dev), hardcoded fallback VERWIJDERD (fail closed), website-scripts lezen secrets.js, secrets.js + scripts/.sonty-admin-pw.txt bijgewerkt, status-push geverifieerd (200).
 

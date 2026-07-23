@@ -40,7 +40,7 @@ function saveState(state) {
 
 // Nmbrs rosters (hours per day [ma-vr])
 const ROSTERS = {
-  'Sjoerd Pelle': { hours: [8, 8, 8, 8, 6], start: '07:00' },
+  'Sjoerd Hoogduin': { hours: [8, 8, 8, 8, 6], start: '07:00' },
   'Jorren Plugge': { hours: [7.6, 7.6, 7.6, 7.6, 7.6], start: '07:00' },
   'Marvin Vrij': { hours: [8, 8, 8, 8, 8], start: '07:00' },
   'Mick Mulders': { hours: [7.6, 7.6, 7.6, 7.6, 7.6], start: '07:00' },
@@ -74,7 +74,7 @@ const SYNC_CALENDARS = ['Sonty Montage'];
 
 // Calendars to check for blocked/unavailable events (personal calendars)
 const BLOCKED_CALENDARS = {
-  'Sjoerd Hoogduin | Sonty': 'Sjoerd Pelle',
+  'Sjoerd Hoogduin | Sonty': 'Sjoerd Hoogduin',
   'Nanny van Vliet | Sonty': 'Nanny van Vliet - Kester',
   'Jaimy de Wit | Sonty': 'Jaimy de Wit',
   'Yudi den Heijer  Sonty Montage': 'Yudi den Heijer',

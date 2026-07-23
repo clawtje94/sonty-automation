@@ -81,7 +81,7 @@ function shouldSkip(event) {
 // Map calendar owner to Planado worker
 function mapWorker(calendarName) {
   const name = calendarName.toLowerCase();
-  // Sjoerd Hoogduin (Outlook) = Sjoerd Pelle (Planado)
+  // Sjoerd Hoogduin (Outlook) = Sjoerd Hoogduin (Planado)
   if (name.includes('sjoerd')) return planadoWorkers['Sjoerd Hoogduin'] || null;
   if (name.includes('yudi')) return null; // Yudi not in Planado yet
   if (name.includes('jaimy')) return null; // Jaimy is klantenservice, not field worker

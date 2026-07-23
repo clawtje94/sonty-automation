@@ -10,7 +10,7 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 // Outlook calendar → Planado worker mapping
 const CAL_WORKER_MAP = {
-  'Sjoerd Hoogduin | Sonty': 'Sjoerd Pelle',
+  'Sjoerd Hoogduin | Sonty': 'Sjoerd Hoogduin',
   'Nanny van Vliet | Sonty': 'Nanny van Vliet - Kester',
   // Yudi, Jaimy = not in Planado as field workers
   // Agenda, Sonty Montage = general, no specific worker

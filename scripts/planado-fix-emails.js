@@ -31,7 +31,7 @@ const MONTEURS = [
 
     // First, try to delete/cancel old invitations with @sontymontage.nl
     // Click on each old invitation to see if we can cancel/delete
-    const oldNames = ['Sjoerd Pelle', 'Marvin Vrij', 'Mick Mulders', 'Jorren Plugge', 'Tygo Krikke', 'Kevin Gibson', 'Nick Huizer'];
+    const oldNames = ['Sjoerd Hoogduin', 'Marvin Vrij', 'Mick Mulders', 'Jorren Plugge', 'Tygo Krikke', 'Kevin Gibson', 'Nick Huizer'];
 
     for (const name of oldNames) {
       try {

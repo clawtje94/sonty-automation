@@ -26,7 +26,7 @@ const OUT_FILE = path.join(DATA_DIR, 'agenda-full-sync-plan.json');
 
 const SYNC_CALENDARS = ['Sonty Montage'];
 const BLOCKED_CALENDARS = {
-  'Sjoerd Hoogduin | Sonty': 'Sjoerd Pelle',
+  'Sjoerd Hoogduin | Sonty': 'Sjoerd Hoogduin',
   'Nanny van Vliet | Sonty': 'Nanny van Vliet - Kester',
   'Jaimy de Wit | Sonty': 'Jaimy de Wit',
   'Yudi den Heijer  Sonty Montage': 'Yudi den Heijer',
@@ -56,7 +56,7 @@ const ATTENDEE_TO_USER = {
   'yudi@sonty.nl': 'Yudi den Heijer', 'nick@sonty.nl': 'Nick Huizer',
   'mick@sonty.nl': 'Mick Mulders', 'tygo@sonty.nl': 'Tygo Krikke', 'tygokrikke@hotmail.com': 'Tygo Krikke',
   'marvin@sonty.nl': 'Marvin Vrij', 'kevin@sonty.nl': 'Kevin Gibson', 'gibson.k.j@hotmail.com': 'Kevin Gibson',
-  'sjoerd@sonty.nl': 'Sjoerd Pelle', 'nanny@sonty.nl': 'Nanny van Vliet - Kester',
+  'sjoerd@sonty.nl': 'Sjoerd Hoogduin', 'nanny@sonty.nl': 'Nanny van Vliet - Kester',
   'jaimy@sonty.nl': 'Jaimy de Wit', 'joey@sonty.nl': 'Joey Engelen', 'jorren@sonty.nl': 'Jorren Plugge',
 };
 

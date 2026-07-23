@@ -1,5 +1,9 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
 
+## MENS-GESPREK-GUARD IN BEIDE DAEMONS (23 juli ~11:20, opdracht Daimy)
+- Regel: stuurt een COLLEGA (bv. Nanny, niet het Sonny-account 747786) het laatste uitgaande bericht in een gesprek (WhatsApp of mail), dan wordt het ticket aan die collega toegewezen, gaat het uit AI-beheer en blijft de bot er definitief vanaf — ook als de klant later antwoordt.
+- Zit in daemon.js (verwerkTicket, vroege guard, incl. verwijderen uit actieve-tickets) en email-daemon.js (na notitie-verwerking). Beide herstart; eerste rondes rustig, geen toewijzings-golf.
+
 ## COMPLEET-FIX + HERGROEPEREN (23 juli ~10:45, feedback Daimy)
 - FOUT hersteld: compleet-check telde een TOEKOMSTIGE leverdatum (bv. 27-09) als "binnen". Nieuwe regel: "Geleverd op" telt alleen als echte datum <= vandaag (tekst zoals "week 32" telt niet). 15 onterechte markeringen teruggedraaid; echt compleet nu: 5576 (2 leveringen) + 4 losse orders. 5930 is terecht NIET compleet (3 toekomstige datums).
 - HERGROEPEREN: AI-rijen met zelfde ref worden onder de bestaande groep van dat nummer gezet (5930-Velux naar rij 1378, van-huis-orderbevestiging naast de eerste bevestiging). Daemon doet dit nu elke ronde (max 10 verplaatsingen, alleen AI-rijen).

@@ -99,6 +99,16 @@ async function ronde() {
     // 1) @SONNY-NOTITIES (Daimy 20 juli): altijd en direct verwerken — geen wachttijd, geen
     //    bot-uren-check. Leerpunt + ✅-terugkoppeling + eventuele actie/mail via email-live.
     try { await verwerkNotities(t, rowsAll); } catch (e) { console.error(`  [${t.id}] notitie FOUT: ${e.message}`); }
+    // MENS-GESPREK (Daimy 23-07): stuurde een COLLEGA (niet Sunny) de laatste uitgaande mail,
+    // dan is het gesprek van die collega — toewijzen en de bot blijft eraf.
+    const laatsteUitgaand = rowsAll.filter((m) => m.type === 'OUTBOUND' && !m.internal_note)
+      .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0];
+    if (laatsteUitgaand && laatsteUitgaand.user_id && Number(laatsteUitgaand.user_id) !== SONNY_USER) {
+      if (t.status !== 'CLOSED' && Number(t.user_id) !== Number(laatsteUitgaand.user_id)) {
+        try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: laatsteUitgaand.user_id }); console.log(`  [${t.id}] laatste mail van collega (user ${laatsteUitgaand.user_id}) → aan hen toegewezen`); } catch (e) { console.error(`  [${t.id}] collega-toewijzing FOUT: ${e.message}`); }
+      }
+      continue;
+    }
     // 2) KLANTMAILS: alleen kandidaten, binnen bot-uren, en niet op stopgezette tickets.
     // Testadressen van Daimy/Joey (TEST_LIVE_EMAILS) krijgen DIRECT antwoord: geen bot-uren,
     // geen reactietijd (Daimy 20 juli) — het e-mail-equivalent van de WhatsApp-testnummers.

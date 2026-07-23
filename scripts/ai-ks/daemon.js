@@ -314,6 +314,21 @@ async function verwerkTicket(t, state) {
     try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 736327 }); console.log(`  [${t.id}] vacature-appje → toegewezen aan Daimy`); } catch (e) { console.error(`  [${t.id}] vacature-toewijzing FOUT: ${e.message}`); }
     return;
   }
+  // MENS-GESPREK (Daimy 23-07, "als Nanny iemand een WhatsApp stuurt"): heeft een COLLEGA
+  // (niet het Sonny-account) het laatste uitgaande bericht gestuurd, dan is het gesprek van
+  // die collega — toewijzen aan hen, uit AI-beheer, en de bot blijft er definitief vanaf.
+  {
+    const laatsteUit = (msgs?.data || []).filter(m => m.type === 'OUTBOUND' && !m.internal_note)
+      .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0];
+    if (laatsteUit && laatsteUit.user_id && Number(laatsteUit.user_id) !== 747786) {
+      if (t.status !== 'CLOSED' && Number(t.user_id) !== Number(laatsteUit.user_id)) {
+        try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: laatsteUit.user_id }); console.log(`  [${t.id}] laatste bericht van collega (user ${laatsteUit.user_id}) → aan hen toegewezen, bot eraf`); } catch (e) { console.error(`  [${t.id}] collega-toewijzing FOUT: ${e.message}`); }
+      }
+      const actiefLijst = loadActief();
+      if (actiefLijst[t.id]) { delete actiefLijst[t.id]; fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actiefLijst, null, 1)); }
+      return;
+    }
+  }
   // SERVICE-HEROPENING (Daimy 22-07, "anders gaan gesprekken verloren", casus Nele 966428536):
   // is dit gesprek ooit door de bot overgedragen (escalatie-notitie) en stuurt de klant DAARNA
   // opnieuw een bericht, dan hoort het DIRECT weer bij team Mens nodig — de bot praat niet mee.

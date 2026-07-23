@@ -251,6 +251,28 @@ function duiden(m) {
     const ref = (m.body.match(/referentie\s+(\S+?)\s*\(/) || m.body.match(/referentie\s+(\S+)/) || [])[1] || '(onbekend)';
     return { type: 'nieuw-of-opmerking', ordernr: ref, naam: `RETOUR ${ref}`, lev: 'NE', kort: 'Retour: afhaaldag bevestigen bij NE', besteld: '', wat: 'Retourzending, afhaaldag bevestigen bij NE', opm: `${s} (mail ${besteld}): retouropdracht ${ref} wacht op bevestiging van de afhaaldag bij NE. ACTIE NODIG.` };
   }
+  // SUNMASTER AFLEVERBON (ontdekt 23-07): "Afleverbon 29240 uw referentie Versluis (nabestelling) ons ordernr. 2609xxx"
+  // = de spullen zijn GELEVERD -> Geleverd op = maildatum.
+  if ((x = s.match(/^Afleverbon\s+(\d+)\s+uw referentie\s+(.+?)\s+ons ordernr\.?\s*(\d+)/i))) {
+    const [jr, mnd, dag] = m.received.slice(0, 10).split('-').map(Number);
+    return { type: 'update', ordernr: x[3], naam: x[2].trim(), lev: 'Sunmaster', geleverdSerial: serial(dag, mnd, jr), geleverdTekst: besteld,
+      kort: `Geleverd op → ${besteld} (afleverbon ${x[1]})`, nieuwWat: 'Sunmaster, zie afleverbon', opm: `Sunmaster afleverbon ${x[1]} (${x[2].trim()}, order ${x[3]}): geleverd.` };
+  }
+  // WEBSHOP-BEVESTIGING (Markiezen Nederland / Poedercoating Culemborg, zelfde sjabloon):
+  // referentie + orderdatum + bestelling staan gewoon in de mailtekst — alles wordt op
+  // referentie besteld (Daimy 23-07), dus die lezen we hier uit.
+  if (/^Bevestiging van bestelling/i.test(s) || /Uw referentie\s+\S/.test(m.body)) {
+    const ref = (m.body.match(/Uw referentie\s+(.{2,60}?)\s+(?:Bestelling|Orderdatum|€)/i) || [])[1];
+    if (ref) {
+      const od = m.body.match(/Orderdatum\s+(\d{1,2})-(\d{1,2})-(\d{2,4})/);
+      const besteldDatum = od ? ddmmyyyy(+od[1], +od[2], od[3].length === 2 ? +('20' + od[3]) : +od[3]) : besteld;
+      const bestelDeel = (m.body.match(/Bestelling\s+(.{10,180}?)(?:\s*€|\s*Opties|$)/i) || [])[1] || '';
+      const lev = /markiezen/i.test(m.from) ? 'Markiezen Nederland' : /poedercoat/i.test(m.from) ? 'Poedercoating Culemborg' : ((m.from.match(/@([\w-]+)/) || [])[1] || '');
+      return { type: 'nieuw', naam: ref.trim(), ordernr: '', lev, besteld: besteldDatum,
+        kort: 'Bevestiging van bestelling (definitieve orderbevestiging volgt)', wat: bestelDeel.replace(/\s+/g, ' ').trim().slice(0, 160) || 'zie bevestiging',
+        opm: `Webshop-bevestiging van ${lev}, referentie ${ref.trim()}.` };
+    }
+  }
   if (LEVERANCIERS.test(m.from) || LEVERANCIERS.test(s))
     return { type: 'nieuw', naam: '(handmatig bekijken)', ordernr: '', lev: (m.from.match(/@([\w-]+)/) || [])[1] || '', kort: 'Leveranciersmail, handmatig bekijken', besteld, wat: (s || '(geen onderwerp)').slice(0, 90), opm: `Leveranciersmail van ${m.from} niet automatisch te duiden: "${s}". Handmatig bekijken.` };
   return { type: 'skip', reden: 'geen leveranciersmail' };

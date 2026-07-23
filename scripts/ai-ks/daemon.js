@@ -315,9 +315,21 @@ async function verwerkTicket(t, state) {
         tekst: clean(m.body || m.message), tijd: m.created_at,
         intern: !!m.internal_note || m.type === 'NOTE', userId: m.user_id || null,
       })).filter(m => m.tekst && m.intern && !/AI-KS|SONNY \(AI|schaduwmodus|live verstuurd|✅ Verwerkt|Uitgevoerde acties door de AI/i.test(m.tekst)).slice(-5);
-      if (notitiesMens.some(m => /@s[ou]nny(?!\d)/i.test(m.tekst))) await verwerkSonnyNotities(t, notitiesMens);
-    } catch (e) { console.error(`  [${t.id}] notitie-op-menst icket FOUT: ${e.message}`); }
-    return;
+      // VERSE team-opdracht (bv. "@sunny stuur een follow-up")? Dan het ticket in AI-beheer
+      // nemen en DOORVALLEN naar de normale flow zodat de opdracht ECHT wordt uitgevoerd
+      // (Daimy 23-07: "tickets die ik stuur met geen-follow-up: die follow-up mag je sturen").
+      const alleIntern = (msgsMens?.data || []).filter(m => m.internal_note || m.type === 'NOTE');
+      const laatsteOpdracht = alleIntern.filter(m => /@s[ou]nny(?!\d)/i.test(String(m.body || m.message || '')) && !String(m.body || m.message || '').includes('✅')).map(m => String(m.created_at)).sort().pop();
+      const laatsteVink = alleIntern.filter(m => String(m.body || m.message || '').includes('✅')).map(m => String(m.created_at)).sort().pop();
+      if (laatsteOpdracht && (!laatsteVink || laatsteOpdracht > laatsteVink)) {
+        const a = loadActief();
+        if (!a[t.id]) { a[t.id] = { sinds: new Date().toISOString(), klant: t.contact?.full_name || t.contact?.phone || null, bron: 'team-notitie op collega-ticket' }; fs.writeFileSync(ACTIEF_FILE, JSON.stringify(a, null, 1)); }
+        console.log(`  [${t.id}] verse team-opdracht op collega-ticket → in AI-beheer, opdracht wordt uitgevoerd`);
+      } else {
+        if (notitiesMens.some(m => /@s[ou]nny(?!\d)/i.test(m.tekst))) await verwerkSonnyNotities(t, notitiesMens);
+        return;
+      }
+    } catch (e) { console.error(`  [${t.id}] notitie-op-mensticket FOUT: ${e.message}`); return; }
   }
   const msgs = t._msgs || await tGet(`/tickets/${t.id}/messages`);
   // VACATURE-appjes (Daimy 22-07): sollicitanten via de wervingsmail (voorgevuld bericht

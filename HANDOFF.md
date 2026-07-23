@@ -1,5 +1,9 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
 
+## V4: TE VER NA VERWERKING + OFFERTE 202610173 AF (23 juli ~13:50, opdracht Daimy)
+- v4-combined aangepast: TE VER-items krijgen nu EERST de volledige verwerking (prijscorrectie + verrijking + opslaan) en gaan daarná pas naar TE VER (mail + status). Regressietest 127/127 groen. Reden: handmatig teruggehaalde te-ver-klanten (casus de Wolf) hebben dan een kloppende offerte.
+- Offerte 202610173 is nu volledig v4-af: Waarom Sonty-blok stond er al (verify keek eerder op de verkeerde plek), kleur-annotaties, profiel-info, upgrade-blokken, correcte prijzen (rolluiken 784,30/1.002,10, SunEye XL 6.459,20), nette regelvolgorde. Wacht bij Tanya op klantoverleg over de XL-maat vóór versturen.
+
 ## OFFERTE 202610173: ROOT CAUSE + VOLLEDIGE V4-RUN (23 juli ~13:30)
 - ROOT CAUSE "geen v4-run": V4 routeerde het item op 21-07 17:01 naar TE VER (Bunnik buiten werkgebied) — klant kreeg toen automatisch een afwijzingsmail! Team zette het item 22-07 10:05 handmatig door naar Gecontroleerd → keten verstuurde de ONGECONTROLEERDE offerte. Mijn her-run 23-07 routeerde opnieuw naar TE VER (geen 2e mail dankzij dedupe); status teruggezet naar Offerte verstuurd.
 - Daarna volledige v4-verwerking los op deze offerte gedraaid (scratchpad v4-op-202610173.js, backup gemaakt): rolluiken naar tabelprijs (784,30/1.002,10 met draaischakelaar-minderprijs), Suneye 6098mm > max 6000 -> SunEye XL €6.459,20 (was €3.443). Nieuw totaal met 15%: €7.768,66 (was 5.315,39). Teamnotitie op ticket 968268085: eerst met klant overleggen (6000mm = standaard Suneye ±3.451) vóór versturen; klant kreeg 21-07 ook de TE VER-mail, excuus op zijn plaats.

@@ -149,11 +149,14 @@ async function owaSessie() {
 
 async function haalOngelezen(page, token, mailbox) {
   const H = { Authorization: 'Bearer ' + token, Accept: 'application/json' };
-  // Doorpaginaren: de inbox kan meer dan 50 ongelezen mails bevatten (de eerste batch
-  // blijft bewust ongelezen staan) — zonder $skip-lus vallen de NIEUWSTE mails buiten beeld.
+  // FAILSAFE (Daimy 23-07): NIET op ongelezen filteren — als een collega een mail per ongeluk
+  // opent, moet hij alsnog verwerkt worden. We scannen alles van de laatste 3 dagen; het eigen
+  // verwerkings-geheugen (state op InternetMessageId) voorkomt dubbel werk. De gelezen-status
+  // is puur een signaal voor mensen (verwerkt = gelezen, onverwerkbaar = ongelezen).
+  const vanaf = new Date(Date.now() - 3 * 86400000).toISOString().slice(0, 19) + 'Z';
   const alle = [];
   for (let skip = 0; skip < 1000; skip += 50) {
-    const url = `https://outlook.office.com/api/v2.0/users/${mailbox}/MailFolders/Inbox/messages?$filter=IsRead eq false&$top=50&$skip=${skip}&$select=Subject,From,ReceivedDateTime,Body,IsRead,HasAttachments,InternetMessageId&$orderby=ReceivedDateTime asc`;
+    const url = `https://outlook.office.com/api/v2.0/users/${mailbox}/MailFolders/Inbox/messages?$filter=ReceivedDateTime ge ${vanaf}&$top=50&$skip=${skip}&$select=Subject,From,ReceivedDateTime,Body,IsRead,HasAttachments,InternetMessageId&$orderby=ReceivedDateTime asc`;
     const r = await page.request.get(url, { headers: H });
     if (!r.ok()) { console.log(`  ${mailbox}: fout ${r.status()}`); break; }
     const batch = ((await r.json()).value) || [];

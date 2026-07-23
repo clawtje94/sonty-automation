@@ -1,5 +1,9 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
 
+## OFFERTE 202610173 GEFIXT + FOUTEN-SCAN ALLE OFFERTES (23 juli ~13:00, opdracht Daimy)
+- Offerte F. de Wolf bijgewerkt (backup 202610173-fix-*.json): pantser 2x RAL 7016 -> 9010, montageregel rolluiken 2x EUR 225 toegevoegd; nieuw totaal EUR 5.315,39. NIET naar klant gestuurd; teamnotitie op ticket 968268085 met resterende checks (dagstand bevestigen, Suneye 6098>6000mm, keukendeur).
+- SCAN 3.545 offertes (alleen-lezen, uit offerte-backups): (1) rolluik zonder montageregel: 14; (2) pantser != framekleur: 546 (default-fout automation — configurator vraagt geen pantserkleur); (3) >=3 NTB-velden in klanttekst: 2.686 (structureel opmaakprobleem); (4) maat boven prijstabel-max: 28 (vooral Suneye >6000mm, tot 10.000mm — mogelijk gekoppelde uitvoeringen, prijs dan niet uit tabel). Lijsten in scratchpad-scanoutput/chat 23-07. NIETS aangepast behalve 202610173 (expliciete opdracht).
+
 ## MENS-GESPREK-GUARD IN BEIDE DAEMONS (23 juli ~11:20, opdracht Daimy)
 - Regel: stuurt een COLLEGA (bv. Nanny, niet het Sonny-account 747786) het laatste uitgaande bericht in een gesprek (WhatsApp of mail), dan wordt het ticket aan die collega toegewezen, gaat het uit AI-beheer en blijft de bot er definitief vanaf — ook als de klant later antwoordt.
 - Zit in daemon.js (verwerkTicket, vroege guard, incl. verwijderen uit actieve-tickets) en email-daemon.js (na notitie-verwerking). Beide herstart; eerste rondes rustig, geen toewijzings-golf.

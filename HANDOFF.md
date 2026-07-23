@@ -1,5 +1,10 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
 
+## OFFERTE 202610173: ROOT CAUSE + VOLLEDIGE V4-RUN (23 juli ~13:30)
+- ROOT CAUSE "geen v4-run": V4 routeerde het item op 21-07 17:01 naar TE VER (Bunnik buiten werkgebied) — klant kreeg toen automatisch een afwijzingsmail! Team zette het item 22-07 10:05 handmatig door naar Gecontroleerd → keten verstuurde de ONGECONTROLEERDE offerte. Mijn her-run 23-07 routeerde opnieuw naar TE VER (geen 2e mail dankzij dedupe); status teruggezet naar Offerte verstuurd.
+- Daarna volledige v4-verwerking los op deze offerte gedraaid (scratchpad v4-op-202610173.js, backup gemaakt): rolluiken naar tabelprijs (784,30/1.002,10 met draaischakelaar-minderprijs), Suneye 6098mm > max 6000 -> SunEye XL €6.459,20 (was €3.443). Nieuw totaal met 15%: €7.768,66 (was 5.315,39). Teamnotitie op ticket 968268085: eerst met klant overleggen (6000mm = standaard Suneye ±3.451) vóór versturen; klant kreeg 21-07 ook de TE VER-mail, excuus op zijn plaats.
+- OPEN BESLISPUNTEN Daimy: (a) werkgebied/TE VER-regels (Bunnik?), (b) verzend-gate zodat ongecontroleerde offertes nooit meer verstuurd worden, (c) stil-overslaan altijd loggen. NB: Waarom Sonty-blok faalde stil in de losse run (minor).
+
 ## OFFERTE 202610173 GEFIXT + FOUTEN-SCAN ALLE OFFERTES (23 juli ~13:00, opdracht Daimy)
 - Offerte F. de Wolf bijgewerkt (backup 202610173-fix-*.json): pantser 2x RAL 7016 -> 9010, montageregel rolluiken 2x EUR 225 toegevoegd; nieuw totaal EUR 5.315,39. NIET naar klant gestuurd; teamnotitie op ticket 968268085 met resterende checks (dagstand bevestigen, Suneye 6098>6000mm, keukendeur).
 - SCAN 3.545 offertes (alleen-lezen, uit offerte-backups): (1) rolluik zonder montageregel: 14; (2) pantser != framekleur: 546 (default-fout automation — configurator vraagt geen pantserkleur); (3) >=3 NTB-velden in klanttekst: 2.686 (structureel opmaakprobleem); (4) maat boven prijstabel-max: 28 (vooral Suneye >6000mm, tot 10.000mm — mogelijk gekoppelde uitvoeringen, prijs dan niet uit tabel). Lijsten in scratchpad-scanoutput/chat 23-07. NIETS aangepast behalve 202610173 (expliciete opdracht).

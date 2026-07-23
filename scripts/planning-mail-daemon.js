@@ -431,17 +431,43 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     requests.push(...formatRequests);
     await sheets.spreadsheets.batchUpdate({ spreadsheetId: SHEET, requestBody: { requests } });
   }
-  // COMPLEET-CHECK (Daimy 23-07: "we moeten wat verzinnen zodat we weten dat het compleet is"):
-  // per Gripp-nummer met AI-beheerde rijen: hebben ÁLLE rijen van dat nummer een "Geleverd op",
-  // dan komt er "✔ compleet (N leveringen binnen)" bij in B en worden de E-cellen groen.
+  // HERGROEPEREN (Daimy 23-07): AI-rijen met een ref die eerder in de sheet staat, worden
+  // direct onder die groep gezet — zo staan alle leveringen van één klantnummer bij elkaar.
   try {
-    const vers = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET, range: `'${TAB}'!A1:Q2500` });
+    for (let ronde = 0; ronde < 10; ronde++) {
+      const vg = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET, range: `'${TAB}'!A1:E2500` });
+      const gr = vg.data.values || [];
+      let move = null;
+      const grens = {};
+      for (let i = 2; i < gr.length && !move; i++) {
+        const nr = String((gr[i] || [])[4] || '').trim();
+        if (!nr) continue;
+        if (grens[nr] === undefined) { grens[nr] = i; continue; }
+        if (i === grens[nr] + 1) { grens[nr] = i; continue; }
+        const aiRij = !!String((gr[i] || [])[2] || '').trim();
+        if (aiRij) move = { van: i, naar: grens[nr] + 1, nr };
+        else grens[nr] = i;
+      }
+      if (!move) break;
+      await sheets.spreadsheets.batchUpdate({ spreadsheetId: SHEET, requestBody: { requests: [{ moveDimension: {
+        source: { sheetId: SHEET_ID, dimension: 'ROWS', startIndex: move.van, endIndex: move.van + 1 }, destinationIndex: move.naar } }] } });
+      console.log(`  ref ${move.nr}: rij ${move.van + 1} bij de groep gezet (nu rij ${move.naar + 1})`);
+    }
+  } catch (e) { console.log('  hergroepeer-fout:', e.message); }
+  // COMPLEET-CHECK (Daimy 23-07, aangescherpt): "Geleverd op" telt alleen als het een ECHTE
+  // datum is die vandaag of eerder is — een toekomstige (verwachte) leverdatum of tekst
+  // ("week 32") betekent NIET binnen. Pas als álle rijen van een nummer echt binnen zijn:
+  // "✔ compleet" + groene E-cellen.
+  try {
+    const vandaagSerial = Math.round((Date.now() - Date.UTC(1899, 11, 30)) / 86400000);
+    const vers = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET, range: `'${TAB}'!A1:Q2500`, valueRenderOption: 'UNFORMATTED_VALUE' });
     const vr = vers.data.values || [];
     const perNr = {};
     for (let i = 2; i < vr.length; i++) {
       const nr = String((vr[i] || [])[4] || '').trim();
       if (!nr) continue;
-      (perNr[nr] = perNr[nr] || []).push({ rij: i + 1, geleverd: !!String((vr[i] || [])[11] || '').trim(), b: String((vr[i] || [])[1] || ''), aiRij: !!String((vr[i] || [])[2] || '').trim() });
+      const l = (vr[i] || [])[11];
+      (perNr[nr] = perNr[nr] || []).push({ rij: i + 1, geleverd: typeof l === 'number' && l <= vandaagSerial, b: String((vr[i] || [])[1] || ''), aiRij: !!String((vr[i] || [])[2] || '').trim() });
     }
     const cWaarden = [], cFormats = [];
     for (const [nr, lijst] of Object.entries(perNr)) {

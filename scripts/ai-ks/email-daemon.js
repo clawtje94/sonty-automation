@@ -76,9 +76,10 @@ async function ronde() {
           const vm = await tGet(`/tickets/${t.id}/messages`);
           const inbound = (vm?.data || []).filter((m) => m.type === 'INBOUND');
           const echt = inbound.some((m) => !/automatisch antwoord|auto.?reply|out of office|afwezig|vakantie|undeliver|mail delivery|delivery status|postmaster|mailer-daemon/i.test(String(m.body || m.message || '').slice(0, 400)));
-          if (echt && Number(t.user_id) !== 736327) {
-            await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 736327 });
-            console.log(`  [${t.id}] echt vacature-antwoord → toegewezen aan Daimy`);
+          if (echt && Number(t.team_id) !== 431872 && Number(t.user_id) !== 736327) {
+            // naar team Mens nodig — NIET aan Daimy toewijzen (Daimy 23-07: "kap met toewijzen")
+            await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
+            console.log(`  [${t.id}] echt vacature-antwoord → team Mens nodig`);
           } else if (!echt) {
             await tPost(`/tickets/${t.id}/close`, {});
             console.log(`  [${t.id}] vacature-ticket zonder echt antwoord → gesloten (Sunny)`);
@@ -104,7 +105,8 @@ async function ronde() {
     const laatsteUitgaand = rowsAll.filter((m) => m.type === 'OUTBOUND' && !m.internal_note)
       .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0];
     if (laatsteUitgaand && laatsteUitgaand.user_id && Number(laatsteUitgaand.user_id) !== SONNY_USER) {
-      if (t.status !== 'CLOSED' && Number(t.user_id) !== Number(laatsteUitgaand.user_id)) {
+      // Daimy zelf nooit automatisch toewijzen (Daimy 23-07) — bot blijft er wel vanaf
+      if (t.status !== 'CLOSED' && Number(laatsteUitgaand.user_id) !== 736327 && Number(t.user_id) !== Number(laatsteUitgaand.user_id)) {
         try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: laatsteUitgaand.user_id }); console.log(`  [${t.id}] laatste mail van collega (user ${laatsteUitgaand.user_id}) → aan hen toegewezen`); } catch (e) { console.error(`  [${t.id}] collega-toewijzing FOUT: ${e.message}`); }
       }
       continue;

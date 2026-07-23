@@ -324,7 +324,7 @@ async function verwerkTicket(t, state) {
   // "interesse in de vacature" / "Ik kom via:") NOOIT door de bot beantwoorden —
   // direct aan Daimy (736327) toewijzen en verder met rust laten.
   if ((msgs?.data || []).some(m => m.type === 'INBOUND' && /interesse in de vacature|ik kom via:/i.test(String(m.body || m.message || '')))) {
-    try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 736327 }); console.log(`  [${t.id}] vacature-appje → toegewezen aan Daimy`); } catch (e) { console.error(`  [${t.id}] vacature-toewijzing FOUT: ${e.message}`); }
+    try { await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 }); console.log(`  [${t.id}] vacature-appje → team Mens nodig`); } catch (e) { console.error(`  [${t.id}] vacature-toewijzing FOUT: ${e.message}`); }
     return;
   }
   // MENS-GESPREK (Daimy 23-07, "als Nanny iemand een WhatsApp stuurt"): heeft een COLLEGA
@@ -334,7 +334,8 @@ async function verwerkTicket(t, state) {
     const laatsteUit = (msgs?.data || []).filter(m => m.type === 'OUTBOUND' && !m.internal_note)
       .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0];
     if (laatsteUit && laatsteUit.user_id && Number(laatsteUit.user_id) !== 747786) {
-      if (t.status !== 'CLOSED' && Number(t.user_id) !== Number(laatsteUit.user_id)) {
+      // Daimy zelf nooit automatisch toewijzen (Daimy 23-07) — bot blijft er wel vanaf
+      if (t.status !== 'CLOSED' && Number(laatsteUit.user_id) !== 736327 && Number(t.user_id) !== Number(laatsteUit.user_id)) {
         try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: laatsteUit.user_id }); console.log(`  [${t.id}] laatste bericht van collega (user ${laatsteUit.user_id}) → aan hen toegewezen, bot eraf`); } catch (e) { console.error(`  [${t.id}] collega-toewijzing FOUT: ${e.message}`); }
       }
       const actiefLijst = loadActief();

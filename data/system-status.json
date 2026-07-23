@@ -1,5 +1,5 @@
 {
- "bijgewerkt": "2026-07-23T15:52:14.072Z",
+ "bijgewerkt": "2026-07-23T17:22:19.333Z",
  "host": "mac-mini",
  "systemen": [
   {
@@ -28,7 +28,7 @@
    "laatsteExit": "0",
    "intervalSec": 900,
    "logLeeftijdMin": 3,
-   "logLaatste": "[15:48:57] API-hooks gestart.",
+   "logLaatste": "[17:18:57] API-hooks gestart.",
    "killSwitch": false,
    "status": "groen"
   },
@@ -42,8 +42,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": 7200,
-   "logLeeftijdMin": 93,
-   "logLaatste": "[2026-07-23T14:19:01.166Z] credits OK",
+   "logLeeftijdMin": 63,
+   "logLaatste": "[2026-07-23T16:19:02.306Z] credits OK",
    "killSwitch": false,
    "status": "groen"
   },
@@ -88,7 +88,7 @@
    "laatsteExit": null,
    "intervalSec": null,
    "logLeeftijdMin": 1,
-   "logLaatste": "[5:51:18 PM] 1 te doen — nu 1 verwerken",
+   "logLaatste": "[7:21:08 PM] geen nieuwe e-mail te verwerken",
    "killSwitch": false,
    "status": "groen"
   },
@@ -117,7 +117,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 1240,
+   "logLeeftijdMin": 1330,
    "logLaatste": "Gescand: 3085 leads | nieuw getekend: 7",
    "killSwitch": false,
    "status": "groen"
@@ -132,8 +132,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 1401,
-   "logLaatste": "Verwerkt: 5 | Mislukt: 0",
+   "logLeeftijdMin": 51,
+   "logLaatste": "Verwerkt: 12 | Mislukt: 0",
    "killSwitch": false,
    "status": "groen"
   },
@@ -147,7 +147,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 592,
+   "logLeeftijdMin": 22,
    "logLaatste": "✅ MS Bookings API (showroom-boeken)",
    "killSwitch": false,
    "status": "groen"
@@ -162,7 +162,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 22,
+   "logLeeftijdMin": 112,
    "logLaatste": "Markiezen in Handmatige controle: 0",
    "killSwitch": false,
    "status": "groen"
@@ -177,7 +177,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 46,
+   "logLeeftijdMin": 136,
    "logLaatste": "WhatsApp offerte verstuurd: 8",
    "killSwitch": false,
    "status": "groen"
@@ -190,10 +190,10 @@
    "maxUur": 26,
    "geladen": true,
    "draait": false,
-   "laatsteExit": "(never exited)",
+   "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 200,
-   "logLaatste": "[SCHADUW] klaar: 1 voorstel(len) gelogd in opvolging-voorstellen.jsonl — er is NIETS verstuurd.",
+   "logLeeftijdMin": 49,
+   "logLaatste": "[SCHADUW] klaar: 1 voorstel(len) gelogd in opvolging-voorstellen.jsonl, er is NIETS verstuurd.",
    "killSwitch": false,
    "status": "groen"
   },
@@ -207,8 +207,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": 1800,
-   "logLeeftijdMin": 23,
-   "logLaatste": "[2026-07-23 17:28:51] ronde klaar",
+   "logLeeftijdMin": 22,
+   "logLaatste": "[2026-07-23 19:00:18] ronde klaar",
    "killSwitch": false,
    "status": "groen"
   },
@@ -222,7 +222,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 862,
+   "logLeeftijdMin": 952,
    "logLaatste": "  AFWIJKING: #202610190 Wendy Algera: \"Rolluik (RollSUPER)\" staat op €1627.3, hoort €1851.96 (-224.66)",
    "killSwitch": false,
    "status": "groen"
@@ -237,7 +237,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 607,
+   "logLeeftijdMin": 697,
    "logLaatste": "Geen nieuwe patronen gevonden.",
    "killSwitch": false,
    "status": "groen"
@@ -252,7 +252,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 622,
+   "logLeeftijdMin": 712,
    "logLaatste": "geen API-key — overslaan",
    "killSwitch": false,
    "status": "groen"
@@ -267,7 +267,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 9202,
+   "logLeeftijdMin": 9292,
    "logLaatste": "",
    "killSwitch": false,
    "status": "rood"
@@ -283,7 +283,7 @@
    "laatsteExit": null,
    "intervalSec": null,
    "logLeeftijdMin": 0,
-   "logLaatste": "  actief-sweep: 137 gesprekken direct checken",
+   "logLaatste": "  actief-sweep: 136 gesprekken direct checken",
    "killSwitch": false,
    "status": "groen"
   },
@@ -298,7 +298,7 @@
    "laatsteExit": "0",
    "intervalSec": 600,
    "logLeeftijdMin": 10,
-   "logLaatste": "[5:42:13 PM] 25 diensten, push: 200",
+   "logLaatste": "[7:12:19 PM] 25 diensten, push: 200",
    "killSwitch": false,
    "status": "groen"
   },
@@ -342,7 +342,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 21,
+   "logLeeftijdMin": 112,
    "logLaatste": "[15:30:44] Klaar: 0 gefixt, 2 gerapporteerd",
    "killSwitch": false,
    "status": "groen"
@@ -357,7 +357,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 378,
+   "logLeeftijdMin": 469,
    "logLaatste": "batch klaar: 150 verstuurd, 0 fouten. Totaal 421/1744",
    "killSwitch": false,
    "status": "groen"

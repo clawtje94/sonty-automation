@@ -2848,5 +2848,161 @@
       }
     ],
     "processedAt": "2026-07-22T16:30:57.330Z"
+  },
+  "item:6f3eab06-9e0b-4300-b1bb-dc035d6b5adb": {
+    "summary": "Raymond Cats",
+    "grippCompanyId": 99593,
+    "grippOfferId": 8729,
+    "rpDocNumber": "20269875",
+    "allOffers": [
+      {
+        "grippOfferId": 8729,
+        "rpDocNumber": "20269875"
+      }
+    ],
+    "processedAt": "2026-07-23T16:30:37.796Z"
+  },
+  "item:725a0917-b78a-426c-acf4-35231bc1cdf1": {
+    "summary": "Rob Voorstad",
+    "grippCompanyId": 99594,
+    "grippOfferId": 8730,
+    "rpDocNumber": "20269804",
+    "allOffers": [
+      {
+        "grippOfferId": 8730,
+        "rpDocNumber": "20269804"
+      }
+    ],
+    "processedAt": "2026-07-23T16:30:41.362Z"
+  },
+  "item:a76d9754-0578-4cbc-a576-15baac38e892": {
+    "summary": "Vincenr De Groot",
+    "grippCompanyId": 99595,
+    "grippOfferId": 8731,
+    "rpDocNumber": "202610215",
+    "allOffers": [
+      {
+        "grippOfferId": 8731,
+        "rpDocNumber": "202610215"
+      }
+    ],
+    "processedAt": "2026-07-23T16:30:44.832Z"
+  },
+  "item:2b8aced5-c013-4682-9bc7-1614f3aef02e": {
+    "summary": "Wendy Algera",
+    "grippCompanyId": 99596,
+    "grippOfferId": 8732,
+    "rpDocNumber": "202610191",
+    "allOffers": [
+      {
+        "grippOfferId": 8732,
+        "rpDocNumber": "202610191"
+      }
+    ],
+    "processedAt": "2026-07-23T16:30:48.348Z"
+  },
+  "item:8920deb4-a828-43df-b512-934d23fc0e85": {
+    "summary": "Willem Kasteleyn",
+    "grippCompanyId": 99597,
+    "grippOfferId": 8733,
+    "rpDocNumber": "20269686",
+    "allOffers": [
+      {
+        "grippOfferId": 8733,
+        "rpDocNumber": "20269686"
+      }
+    ],
+    "processedAt": "2026-07-23T16:30:51.856Z"
+  },
+  "item:ec449de6-0067-4920-a4e2-f599ea3cbfad": {
+    "summary": "ton de bruin",
+    "grippCompanyId": 99598,
+    "grippOfferId": 8734,
+    "rpDocNumber": "20268667",
+    "allOffers": [
+      {
+        "grippOfferId": 8734,
+        "rpDocNumber": "20268667"
+      }
+    ],
+    "processedAt": "2026-07-23T16:30:55.430Z"
+  },
+  "item:db58455f-58b7-4575-a961-1f7023db40a9": {
+    "summary": "Geert Timmermans",
+    "grippCompanyId": 99599,
+    "grippOfferId": 8735,
+    "rpDocNumber": "20269565",
+    "allOffers": [
+      {
+        "grippOfferId": 8735,
+        "rpDocNumber": "20269565"
+      }
+    ],
+    "processedAt": "2026-07-23T16:30:58.913Z"
+  },
+  "item:9d995141-2fdf-475b-9b04-6206de582c36": {
+    "summary": "Hany Youssef",
+    "grippCompanyId": 99600,
+    "grippOfferId": 8736,
+    "rpDocNumber": "20269665",
+    "allOffers": [
+      {
+        "grippOfferId": 8736,
+        "rpDocNumber": "20269665"
+      }
+    ],
+    "processedAt": "2026-07-23T16:31:02.469Z"
+  },
+  "item:dc9e7d0e-a4aa-44a6-b354-9e01993f8852": {
+    "summary": "Kitty Kaffa",
+    "grippCompanyId": 99601,
+    "grippOfferId": 8737,
+    "rpDocNumber": "202610130",
+    "allOffers": [
+      {
+        "grippOfferId": 8737,
+        "rpDocNumber": "202610130"
+      }
+    ],
+    "processedAt": "2026-07-23T16:31:06.103Z"
+  },
+  "item:57771462-cbd7-47d6-bd38-588316e1cf12": {
+    "summary": "Victor Ansink",
+    "grippCompanyId": 99602,
+    "grippOfferId": 8738,
+    "rpDocNumber": "20268953",
+    "allOffers": [
+      {
+        "grippOfferId": 8738,
+        "rpDocNumber": "20268953"
+      }
+    ],
+    "processedAt": "2026-07-23T16:31:10.121Z"
+  },
+  "item:3f21a280-1f11-4124-8716-e81e43ca590b": {
+    "summary": "Yvonne de Jong",
+    "grippCompanyId": 99603,
+    "grippOfferId": 8739,
+    "rpDocNumber": "202610259",
+    "allOffers": [
+      {
+        "grippOfferId": 8739,
+        "rpDocNumber": "202610259"
+      }
+    ],
+    "processedAt": "2026-07-23T16:31:13.604Z"
+  },
+  "item:6cc78def-88e3-4f28-8b78-6e89d0aa8256": {
+    "summary": "van Leeuwen",
+    "grippCompanyId": 99604,
+    "grippOfferId": 8740,
+    "rpDocNumber": "202610290",
+    "allOffers": [
+      {
+        "grippOfferId": 8740,
+        "rpDocNumber": "202610290"
+      }
+    ],
+    "processedAt": "2026-07-23T16:31:17.583Z"
   }
 }

@@ -33,7 +33,7 @@ const RUST_DAGEN = 30;      // minimale tijd tussen twee opvolgingen bij dezelfd
 // WA-snelvenster (Daimy 22 juli, n.a.v. Gino Kos): zelfde-dag opvolgen zolang het
 // WhatsApp 24-uursvenster nog open is, dan hoeft er geen betaald template achteraan.
 // Venster telt vanaf het laatste KLANTbericht; 20 uur = marge zodat we niet op de rand sturen.
-const SNEL_MIN_STIL_UREN = 4;    // pas na zoveel uur stilte op ons laatste bericht
+const SNEL_MIN_STIL_UREN = 6;    // pas na zoveel uur stilte op ons laatste bericht (Daimy 23-07: 4 was te snel)
 const SNEL_MAX_KLANT_UREN = 20;  // laatste klantbericht max zo oud, anders venster (bijna) dicht
 const HERBEOORDEEL_UREN = 24;    // zelfde ticket niet vaker dan 1x per dag beoordelen
 const TEAM_MENS_NODIG = 431872;
@@ -92,7 +92,7 @@ function kandidaten(dagen) {
   const nu = Date.now();
   return [...perTicket.values()].map(d => {
     const leeftijdD = (nu - Date.parse(d.tijd)) / 86400000;
-    if (FORCE_TICKETS.includes(String(d.ticket))) return { ...d, forced: true };
+    if (FORCE_TICKETS.includes(String(d.ticket))) return { ...d, forced: true, snel: (d.kanaal || 'WA') === 'WA' && leeftijdD < 1 };
     if ((d.kanaal || 'WA') === 'WA' && leeftijdD >= SNEL_MIN_STIL_UREN / 24 && leeftijdD < 1) return { ...d, snel: true };
     if (leeftijdD >= MIN_STIL_DAGEN && leeftijdD <= Math.min(dagen, MAX_STIL_DAGEN)) return d;
     return null;
@@ -156,7 +156,7 @@ async function beoordeel(k, echte, context) {
   }).join('\n');
   const stilTekst = k.gepland ? 'tot het moment dat de klant zelf noemde' : k.snel ? `een paar uur (zelfde-dag snelvenster)` : `minstens ${MIN_STIL_DAGEN} dagen`;
   const geplandInstructie = k.gepland ? `\nLET OP: de klant zei eerder ZELF dat hij of zij er rond dit moment op terug zou komen (gepland op ${k.geplandDatum}). Dat moment is nu aangebroken en de klant heeft nog niets laten horen. Een korte, vriendelijke check-in is dan vrijwel altijd gepast; verwijs licht naar wat de klant toen zei ("je zou er dit weekend naar kijken").\n` : '';
-  const snelInstructie = k.snel ? `\nLET OP: dit is een ZELFDE-DAG opvolging binnen het WhatsApp 24-uursvenster. Alleen gepast als er echt iets kleins openstaat waar de klant op terug zou komen (bv. een maat, kleur of keuze doorgeven, of reactie op een net gestuurde prijs/offerte). Houd het extra kort en luchtig (max 2 zinnen), als een verkoper die dezelfde dag nog even vriendelijk aanhaakt. Bij een gesprek dat gewoon rustig loopt of net vanzelf afrondde: niet doen.\n` : '';
+  const snelInstructie = k.snel ? `\nLET OP: dit is een ZELFDE-DAG opvolging binnen het WhatsApp 24-uursvenster. Alleen gepast als er echt iets kleins openstaat dat de klant vandaag nog zou doorgeven (bv. een maat, kleur of keuze). NIET gepast (Daimy 23-07): er is vandaag een offerte of prijs gestuurd en de klant is daarna gewoon stil, mensen moeten daar rustig naar kunnen kijken; dat pakt de normale opvolging na een paar dagen op (opvolgen=false). Houd het extra kort en luchtig (max 2 zinnen), als een verkoper die dezelfde dag nog even vriendelijk aanhaakt. Bij een gesprek dat gewoon rustig loopt of net vanzelf afrondde: niet doen.\n` : '';
   const resp = await client.messages.create({
     model: CFG.MODEL, max_tokens: 600,
     messages: [{ role: 'user', content:

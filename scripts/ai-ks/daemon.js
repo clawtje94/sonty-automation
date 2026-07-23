@@ -426,7 +426,22 @@ async function verwerkTicket(t, state) {
       const sendRes = isLiveTestContact(t) ? await sendLiveReply(t, klantTekst) : await sendActiefReply(t, klantTekst);
       verstuurd = sendRes.ok;
       console.log(`  → FEEDBACK-vervolgbericht naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status}`);
-      if (!sendRes.ok) await telegram(`⚠️ Vervolgbericht na feedback bij ticket ${t.id} kon niet verstuurd worden: ${sendRes.status}`);
+      // 24-UURSVENSTER DICHT (422): vrij bericht mag niet meer — stuur dan de goedgekeurde
+      // follow-up-template (236108: "je hebt nog niet gereageerd op de prijsindicatie...").
+      // Eén keer per ticket (marker in state via notitie), daarna klaar.
+      if (!sendRes.ok && sendRes.status === 422 && t.contact?.phone) {
+        const voornaam = (t.contact?.full_name || '').split(' ')[0] || 'daar';
+        const tw = await fetch('https://app.trengo.com/api/v2/wa_sessions', {
+          method: 'POST', headers: { 'Authorization': 'Bearer ' + TT, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ recipient_phone_number: t.contact.phone, hsm_id: 236108, channel_id: 1359857,
+            params: [{ type: 'body', key: '{{1}}', value: voornaam }] }) });
+        console.log(`  → 24u dicht: follow-up-TEMPLATE naar ${t.contact.phone}: ${tw.ok ? 'OK' : 'FOUT ' + tw.status}`);
+        verstuurd = tw.ok;
+        if (tw.ok) await plaatsNotitie(t.id, `✅ 24-uursvenster was dicht — goedgekeurde follow-up-template verstuurd i.p.v. vrij bericht. Zodra de klant reageert is het venster weer open en kan het gesprek verder.`);
+        else await telegram(`⚠️ Follow-up bij ticket ${t.id} kon niet: 24u-venster dicht EN template faalde (${tw.status}).`);
+      } else if (!sendRes.ok) {
+        await telegram(`⚠️ Vervolgbericht na feedback bij ticket ${t.id} kon niet verstuurd worden: ${sendRes.status}`);
+      }
     }
     const mutaties = res.acties.filter(a => a.type !== 'escalatie');
     const actieTekst = mutaties.length ? '\nUitgevoerd: ' + mutaties.map(a => a.samenvatting || a.type).join('; ') : '';

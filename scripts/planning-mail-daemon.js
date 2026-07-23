@@ -476,7 +476,9 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
         if (grens[nr] === undefined) { grens[nr] = i; continue; }
         if (i === grens[nr] + 1) { grens[nr] = i; continue; }
         const aiRij = !!String((gr[i] || [])[2] || '').trim();
-        if (aiRij) move = { van: i, naar: grens[nr] + 1, nr };
+        // Alleen groeperen BINNEN het recente gebied (Daimy 23-07): nabestellingen niet
+        // omhoog verplaatsen naar oude leveringen-blokken, die blijven gewoon onderaan.
+        if (aiRij && grens[nr] + 1 >= 1381) move = { van: i, naar: grens[nr] + 1, nr };
         else grens[nr] = i;
       }
       if (!move) break;

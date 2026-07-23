@@ -325,3 +325,8 @@ vertrek magazijn), 40 nieuwe aanvragen op echte klantadressen, route-motor met s
   uitvoerder + bestemming; link te delen via API → Jaimy stuurt m in het onderweg-bericht.
 - Werktijden-instelling Planado: elke dag 08:00-20:00. Verder aanwezig: gebieden
   (territories), vaardigheden, audit-log, klantportaal.
+
+### V23 (deels beantwoord 23-07): de 2 inmeters
+- Sjoerd (Hoogduin/Pelle): inmeter, beschikbaar ma t/m do 9:00-15:00, vr+za NIET.
+- Joey (Engelen): inmeter, rooster volgt van Daimy.
+- Rooster-veld toegevoegd aan personeel-dashboard; planner respecteert rooster + afwezigheid.

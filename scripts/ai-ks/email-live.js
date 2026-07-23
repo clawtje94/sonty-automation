@@ -19,6 +19,15 @@ const TT = (() => {
 })();
 const H = { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' };
 const clean = (s) => String(s || '').replace(/<style[\s\S]*?<\/style>/gi, '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+// E-mailreplies bevatten onder het nieuwe bericht vaak de hele oude thread als quote. Die
+// NIET weghalen (context blijft leesbaar) maar duidelijk labelen, zodat agent én QA-poort
+// het bovenste deel als hét nieuwe klantbericht zien. (Cor Haakman-case 23-07: de QA las de
+// gequote prijsopmerking als het bericht en keurde het afspraak-antwoord onterecht af.)
+function markeerQuote(tekst) {
+  const i = tekst.search(/-{2,}\s*Oorspronkelijk bericht\s*-{2,}|-{3,}\s*Original Message\s*-{3,}|\bOn .{5,80}? wrote:|\bVan:\s.{2,80}?\s(?:Verzonden|Datum):/i);
+  if (i < 15) return tekst; // geen quote gevonden, of het bericht begint er vrijwel mee
+  return '[NIEUW BERICHT] ' + tekst.slice(0, i).trim() + ' [EINDE NIEUW BERICHT — hieronder staat de eerdere thread als quote, die is al gelezen] ' + tekst.slice(i).trim();
+}
 
 // VANGNET: haal meta-redenering en interne kopjes eruit zodat NOOIT iets naar de klant gaat dat
 // niet voor de klant bedoeld is (identiek aan daemon veiligeKlantTekst).
@@ -180,7 +189,7 @@ async function verwerk(ticketId) {
     return { ticketId, klant: naam || email, resultaat: '👤 MENS NODIG (webflow-lead + concept, mail versturen mislukte)', concept: conceptDraft.slice(0, 150) };
   }
 
-  const rijen = (msgs?.data || []).map(m => ({ van: m.type === 'INBOUND' ? 'klant' : 'sonty', tekst: clean(m.body || m.message), tijd: m.created_at }))
+  const rijen = (msgs?.data || []).map(m => ({ van: m.type === 'INBOUND' ? 'klant' : 'sonty', tekst: m.type === 'INBOUND' ? markeerQuote(clean(m.body || m.message)) : clean(m.body || m.message), tijd: m.created_at }))
     .filter(m => m.tekst).sort((a, b) => String(a.tijd).localeCompare(String(b.tijd)));
   // @sonny-notities van Daimy/het team op dit ticket = sturing voor Sunny (net als op WhatsApp).
   const teamNotities = (msgs?.data || [])
@@ -307,7 +316,7 @@ async function verwerkNotities(t, rowsAll) {
   const feedback = teDoen.map(i => i.punt).join('\n');
   // Zelfde feedback-beoordeling als WhatsApp: opdrachten voert de agent NU uit met zijn tools,
   // en hij bepaalt zelf of er nog een mail naar de klant moet (GEEN_BERICHT als dat niet zo is).
-  const rijen = (rowsAll || []).map(m => ({ van: m.type === 'INBOUND' ? 'klant' : 'sonty', tekst: clean(m.body || m.message), tijd: m.created_at }))
+  const rijen = (rowsAll || []).map(m => ({ van: m.type === 'INBOUND' ? 'klant' : 'sonty', tekst: m.type === 'INBOUND' ? markeerQuote(clean(m.body || m.message)) : clean(m.body || m.message), tijd: m.created_at }))
     .filter(m => (m.tekst)).sort((a, b) => String(a.tijd).localeCompare(String(b.tijd)));
   const res = await beantwoord({
     kanaal: 'EMAIL',

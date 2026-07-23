@@ -56,6 +56,37 @@ async function grippPlaatsen(namen) {
     return uit;
   } catch (e) { console.log('  gripp-fout:', e.message); return {}; }
 }
+// EXACTE plaats-lookup: het klantnr in de sheetnaam ("Hachioui 6018") is het Gripp-OFFERTEnummer
+// (ontdekt 23-07). offer.number -> company -> stad. 100% zeker, dus geen naam-gok nodig.
+async function grippPlaatsViaOffer(nummers) {
+  if (!nummers.length) return {};
+  try {
+    const res = await fetch('https://api.gripp.com/public/api3.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + SECRETS.GRIPP_API_KEY },
+      body: JSON.stringify(nummers.map((nr, i) => ({ method: 'offer.get',
+        params: [[{ field: 'offer.number', operator: 'equals', value: Number(nr) }], { paging: { firstresult: 0, maxresults: 2 } }], id: i + 1 }))),
+    });
+    const j = await res.json();
+    const perNr = {};
+    j.forEach((resp, i) => {
+      const rows = resp.result?.rows || [];
+      if (rows.length === 1 && rows[0].company?.id) perNr[nummers[i]] = rows[0].company.id;
+    });
+    const ids = [...new Set(Object.values(perNr))];
+    if (!ids.length) return {};
+    const res2 = await fetch('https://api.gripp.com/public/api3.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + SECRETS.GRIPP_API_KEY },
+      body: JSON.stringify([{ method: 'company.get', params: [[{ field: 'company.id', operator: 'in', value: ids }], { paging: { firstresult: 0, maxresults: 100 } }], id: 1 }]),
+    });
+    const stadVan = {};
+    for (const c of (((await res2.json())[0] || {}).result?.rows || [])) stadVan[c.id] = String(c.visitingaddress_city || '').trim();
+    const uit = {};
+    for (const [nr, cid] of Object.entries(perNr)) if (stadVan[cid]) uit[nr] = stadVan[cid];
+    return uit;
+  } catch (e) { console.log('  gripp-offer-fout:', e.message); return {}; }
+}
 const serial = (d, m, y) => Math.round((Date.UTC(y, m - 1, d) - Date.UTC(1899, 11, 30)) / 86400000);
 const ddmmyyyy = (d, m, y) => `${String(d).padStart(2, '0')}-${String(m).padStart(2, '0')}-${y}`;
 
@@ -314,11 +345,14 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     // Plaats (D) via Gripp + Regio (E) via plaats->regio-mapping uit de bestaande rijen
     const telling = {};
     for (const r of rows) {
-      const p = String((r || [])[5] || '').trim().toLowerCase(), rg = String((r || [])[6] || '').trim();
+      const p = String((r || [])[5] || '').trim().toLowerCase().replace(/^'s-gravenhage$|^denhaag$/, 'den haag'), rg = String((r || [])[6] || '').trim();
       if (p && rg) (telling[p] = telling[p] || {})[rg] = (telling[p][rg] || 0) + 1;
     }
-    const regioVan = (pl) => { const t = telling[String(pl || '').trim().toLowerCase()]; return t ? Object.entries(t).sort((a, b) => b[1] - a[1])[0][0] : ''; };
-    const namen = [...new Set(uniek.filter((n) => !SKIP_PLAATS.test(n.naam)).map((n) => zoeknaam(n.naam)).filter((z) => z.length >= 3))];
+    const normPlaats = (pl) => String(pl || '').trim().toLowerCase().replace(/^'s-gravenhage$|^denhaag$/, 'den haag');
+    const regioVan = (pl) => { const t = telling[normPlaats(pl)]; return t ? Object.entries(t).sort((a, b) => b[1] - a[1])[0][0] : ''; };
+    const nummers = [...new Set(uniek.map((n) => (String(n.naam).match(/\b(\d{4,6})\b/) || [])[1]).filter(Boolean))];
+    const plaatsViaNr = await grippPlaatsViaOffer(nummers);
+    const namen = [...new Set(uniek.filter((n) => !SKIP_PLAATS.test(n.naam) && !plaatsViaNr[(String(n.naam).match(/\b(\d{4,6})\b/) || [])[1]]).map((n) => zoeknaam(n.naam)).filter((z) => z.length >= 3))];
     const plaatsVan = await grippPlaatsen(namen);
     const start = laatste + 1;
     const values = uniek.map((n, i) => {

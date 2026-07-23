@@ -9,6 +9,11 @@
 // followup-scripts blijven uit), en 100% zeker dat de klant niet al gereageerd of getekend
 // heeft. Alle checks zijn FAIL-CLOSED: bij twijfel of een mislukte check → géén opvolging.
 //
+// LIVE-MANDAAT (Daimy 23-07): twee subsets worden ECHT verstuurd:
+//   1) WA-snelvenster: klant reageerde niet op ons laatste bericht, ticket niet toegewezen
+//      en niet bij Mens nodig -> follow-up VOORDAT het 24u-venster sluit.
+//   2) E-mail: zelfde condities, na 3 tot ~4,5 dagen stilte.
+// Al het overige (oudere WA-gesprekken e.d.) blijft SCHADUW-voorstel.
 // Gebruik: node scripts/ai-ks/opvolging-daemon.js [--dagen 14] [--max 15]
 const fs = require('fs');
 const path = require('path');
@@ -32,6 +37,7 @@ const SNEL_MIN_STIL_UREN = 4;    // pas na zoveel uur stilte op ons laatste beri
 const SNEL_MAX_KLANT_UREN = 20;  // laatste klantbericht max zo oud, anders venster (bijna) dicht
 const HERBEOORDEEL_UREN = 24;    // zelfde ticket niet vaker dan 1x per dag beoordelen
 const TEAM_MENS_NODIG = 431872;
+const LIVE_MAIL_MAX_DAGEN = 4.5; // mail-follow-up live rond dag 3-4 (Daimy 23-07)
 
 let TT;
 try { TT = fs.readFileSync(path.join(__dirname, '.trengo-sonny-token.txt'), 'utf8').trim(); }
@@ -46,6 +52,18 @@ const tGet = async (ep) => {
   }
   return null;
 };
+
+const tPost = async (ep, body) => {
+  for (let poging = 1; poging <= 3; poging++) {
+    const r = await fetch('https://app.trengo.com/api/v2' + ep, { method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    if (r.ok) return { ok: true };
+    if (r.status !== 429) return { ok: false, status: r.status };
+    await new Promise(res => setTimeout(res, poging * 20000));
+  }
+  return { ok: false, status: 429 };
+};
+const { formatteerEmail } = require('./email-live.js');
+const naarMailHtml = (t) => '<p>' + formatteerEmail(t).split(/\n\n+/).map(p2 => p2.replace(/\n/g, '<br>')).join('</p><p>') + '</p>';
 
 const apiKey = process.env.ANTHROPIC_API_KEY ||
   fs.readFileSync(path.join(__dirname, '..', '.anthropic-api-key.txt'), 'utf8').trim();
@@ -112,7 +130,7 @@ async function blokkade(k, state) {
   if (/ACCEPTED|getekend|akkoord-naar-inmeten/i.test(blob)) return 'offerte al getekend/akkoord';
   if (/geen herinnering/i.test(blob)) return 'klant staat op geen-herinnering (opt-out)';
 
-  return { ok: true, ticket, echte, context };
+  return { ok: true, ticket, echte, context, stilUren };
 }
 
 // ── Agent-oordeel: is opvolging hier gepast, en zo ja: welk bericht? ──
@@ -161,8 +179,28 @@ async function main() {
     const tag = k.snel ? ' [SNEL/24u]' : '';
     if (oordeel.opvolgen) {
       voorstellen++;
-      console.log(`  ✓ ${wie}${tag}: ZOU STUREN → ${String(oordeel.bericht).slice(0, 120)}`);
-      regels.push(`✓ ${wie} (${k.kanaal || 'WA'}${tag}): "${String(oordeel.bericht).slice(0, 220)}"`);
+      // LIVE-MANDAAT (Daimy 23-07): WA-snelvenster + mail dag 3-4,5 echt versturen (binnen bot-uren)
+      const stilDagen = (check.stilUren || 0) / 24;
+      const liveWa = k.snel && (k.kanaal || 'WA') === 'WA';
+      const liveMail = (k.kanaal === 'EMAIL') && stilDagen <= LIVE_MAIL_MAX_DAGEN;
+      const magLive = (liveWa || liveMail) && CFG.binnenBotUren();
+      if (magLive && oordeel.bericht) {
+        const payload = k.kanaal === 'EMAIL' ? { message: naarMailHtml(String(oordeel.bericht)), body_type: 'html' } : { message: String(oordeel.bericht) };
+        const send = await tPost(`/tickets/${k.ticket}/messages`, payload);
+        if (send.ok) {
+          rec.schaduw = false; rec.verstuurd = true;
+          fs.appendFileSync(VOORSTELLEN, JSON.stringify({ ...rec, correctie: 'live verstuurd' }) + '\n');
+          await tPost(`/tickets/${k.ticket}/messages`, { internal_note: true, message: '✅ Opvolging automatisch verstuurd (AI, binnen mandaat: ' + (liveWa ? 'WA 24u-venster' : 'mail dag 3-4') + ').' }).catch?.(() => {});
+          console.log(`  ✓ ${wie}${tag}: VERSTUURD → ${String(oordeel.bericht).slice(0, 120)}`);
+          regels.push(`✓ VERSTUURD ${wie} (${k.kanaal || 'WA'}${tag}): "${String(oordeel.bericht).slice(0, 200)}"`);
+        } else {
+          console.log(`  ⚠️ ${wie}${tag}: versturen MISLUKT (${send.status}) — als voorstel gelogd`);
+          regels.push(`⚠️ ${wie}: versturen mislukt (${send.status})`);
+        }
+      } else {
+        console.log(`  ✓ ${wie}${tag}: ZOU STUREN${magLive ? '' : ' (schaduw/buiten mandaat)'} → ${String(oordeel.bericht).slice(0, 120)}`);
+        regels.push(`✓ ${wie} (${k.kanaal || 'WA'}${tag}): "${String(oordeel.bericht).slice(0, 220)}"`);
+      }
     } else {
       console.log(`  − ${wie}: niet gepast (${String(oordeel.reden).slice(0, 80)})`);
       regels.push(`− ${wie}: ${String(oordeel.reden).slice(0, 100)}`);
@@ -170,8 +208,17 @@ async function main() {
   }
   console.log(`[SCHADUW] klaar: ${voorstellen} voorstel(len) gelogd in opvolging-voorstellen.jsonl — er is NIETS verstuurd.`);
 
-  // Dagelijkse schaduwrapportage naar Daimy (schaduwweek 21-28 juli, evaluatie samen daarna).
-  if (regels.length) {
+  // Rapportage: daemon draait nu elk uur — het volledige overzicht alleen in de ochtendrun
+  // (10:00-11:00); live-verzendingen worden altijd gemeld.
+  const uurNu = Number(new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Amsterdam' }).slice(11, 13));
+  const verstuurdRegels = regels.filter((r) => r.includes('VERSTUURD') || r.includes('mislukt'));
+  if (verstuurdRegels.length && !(uurNu === 10)) {
+    await fetch('https://api.telegram.org/bot8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40/sendMessage', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: 1700128390, text: ('Opvolging live verstuurd:\n' + verstuurdRegels.join('\n')).slice(0, 3900) }),
+    }).catch(() => {});
+  }
+  if (regels.length && uurNu === 10) {
     const kop = `SCHADUW-OPVOLGING vandaag (er is niets naar klanten gestuurd):\n${voorstellen} voorstel(len), ${regels.length - voorstellen} overgeslagen.\n\n`;
     await fetch('https://api.telegram.org/bot8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40/sendMessage', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },

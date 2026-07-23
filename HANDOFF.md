@@ -1,5 +1,10 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
 
+## PLANNING-TAB IS NU "2026 goed" + NIEUWE MAILAFHANDELING (23 juli ~16:10, opdracht Daimy)
+- Tab "Claude ai test" heet nu **"2026 goed"** (zelfde sheetId 273253041; oude tab blijft "2026"). Nieuw tabblad **"Retouren"** (sheetId 111815888): retourmeldingen komen daar als rij (datum/leverancier/referentie/omschrijving), niet meer in de hoofdtab; bestaande retour SN82606373 verhuisd.
+- Mailafhandeling: GOED verwerkte mails zet de daemon nu op GELEZEN (PATCH IsRead). Onverwerkbare leveranciersmail: Telegram-melding naar Daimy + mail blijft ONGELEZEN (state.gemeld voorkomt herhaal-meldingen), geen handmatig-bekijken-rijen meer. Ongelezen in de inbox = actie nodig.
+- LET OP incident vandaag: daemon-bestand viel 2x terug naar oudere versie (kruising met parallelle sessie in dezelfde repo); schrijfblok opnieuw opgebouwd (A..Q). Bij daemon-werk: eerst verifieren dat het bestand de verwachte versie is (grep op recente feature).
+
 ## TE VER-HERSTEL LOOPT (23 juli ~15:30, akkoord Daimy: optie A + sorry-mail)
 - Sorry-mail naar ALLE 98 verstuurd (98/98, 0 fouten; script scripts/sorry-mail-tever.js, dedupe data/sorry-mail-verzonden.json, tickets direct gesloten). Tekst: excuus "foutje met de locatie-instelling in het nieuwe systeem", offerte wordt doorgeappt, WhatsApp-ons-knop ZONDER nummer, ondertekend Sunny.
 - Batch 1 (50) staat in OC voor de v4-run; batch 2 (48) wordt automatisch teruggezet na de run (wachter draait). Automatische offerte-links gaan daarna vanzelf (keuze A Daimy).

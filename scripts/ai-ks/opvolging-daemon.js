@@ -145,7 +145,7 @@ async function beoordeel(k, echte, context) {
   const resp = await client.messages.create({
     model: CFG.MODEL, max_tokens: 600,
     messages: [{ role: 'user', content:
-      `Je bent Jaimy van Sonty (zonwering, Rijswijk). Vandaag is ${nu.datum}. Hieronder een klantgesprek (${k.kanaal || 'WA'}) dat al ${stilTekst} stil ligt; de klant heeft NIET meer gereageerd op ons laatste bericht en heeft niets getekend.${snelInstructie}\n\n# Gesprek (oud → nieuw)\n${historie}\n\n# Klantcontext (systemen)\n${JSON.stringify(context).slice(0, 1500)}\n\nBeoordeel als verkoper: is een korte, vriendelijke opvolging hier GEPAST? Gepast is bv.: klant zei "ik kom er op terug" / "moet overleggen" / "ik ga meten", of er ligt een concrete offerte of vraag waar de klant op zou terugkomen. NIET gepast: gesprek was al netjes afgerond zonder open eind, klant toonde geen interesse, klacht/service-kwestie, of het voelt pusherig. Twijfel = niet doen.\nZo ja: schrijf het opvolgbericht zoals Jaimy appt/mailt — kort (max 3 zinnen), warm, geen druk, geen korting, geen emoji, sluit aan op wat de klant zei. VERBODEN: beweren dat er intern iets is besproken, uitgezocht of geregeld ("ik heb het met onze adviseur besproken") als dat niet letterlijk uit het gesprek blijkt — je volgt alleen op, je verzint geen nieuwe gebeurtenissen. Lag er nog een onbeantwoorde vraag van de klant die jij niet zeker kunt beantwoorden: dan is opvolgen NIET gepast (opvolgen=false, reden vermelden).\nAntwoord UITSLUITEND met JSON: {"opvolgen": true/false, "reden": "...", "bericht": "..." }` }],
+      `Je bent Jaimy van Sonty (zonwering, Rijswijk). Vandaag is ${nu.datum}. Hieronder een klantgesprek (${k.kanaal || 'WA'}) dat al ${stilTekst} stil ligt; de klant heeft NIET meer gereageerd op ons laatste bericht en heeft niets getekend.${snelInstructie}\n\n# Gesprek (oud → nieuw)\n${historie}\n\n# Klantcontext (systemen)\n${JSON.stringify(context).slice(0, 1500)}\n\nBeoordeel als verkoper: is een korte, vriendelijke opvolging hier GEPAST? Gepast is bv.: klant zei "ik kom er op terug" / "moet overleggen" / "ik ga meten", of er ligt een concrete offerte of vraag waar de klant op zou terugkomen. NIET gepast: gesprek was al netjes afgerond zonder open eind, klant toonde geen interesse, klacht/service-kwestie, of het voelt pusherig. Twijfel = niet doen.\nZo ja: schrijf het opvolgbericht zoals Jaimy appt/mailt, kort (max 3 zinnen), warm, geen druk, geen korting, geen emoji, geen gedachtestreepjes, sluit aan op wat de klant zei. VERBODEN: beweren dat er intern iets is besproken, uitgezocht of geregeld ("ik heb het met onze adviseur besproken") als dat niet letterlijk uit het gesprek blijkt, je volgt alleen op, je verzint geen nieuwe gebeurtenissen. Lag er nog een onbeantwoorde vraag van de klant die jij niet zeker kunt beantwoorden: dan is opvolgen NIET gepast (opvolgen=false, reden vermelden).\nAntwoord UITSLUITEND met JSON: {"opvolgen": true/false, "reden": "...", "bericht": "..." }` }],
   });
   const tekst = (resp.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
   try { return JSON.parse(tekst.replace(/^[^{]*/, '').replace(/[^}]*$/, '')); }
@@ -194,7 +194,7 @@ async function main() {
           console.log(`  ✓ ${wie}${tag}: VERSTUURD → ${String(oordeel.bericht).slice(0, 120)}`);
           regels.push(`✓ VERSTUURD ${wie} (${k.kanaal || 'WA'}${tag}): "${String(oordeel.bericht).slice(0, 200)}"`);
         } else {
-          console.log(`  ⚠️ ${wie}${tag}: versturen MISLUKT (${send.status}) — als voorstel gelogd`);
+          console.log(`  ⚠️ ${wie}${tag}: versturen MISLUKT (${send.status}), als voorstel gelogd`);
           regels.push(`⚠️ ${wie}: versturen mislukt (${send.status})`);
         }
       } else {
@@ -206,7 +206,7 @@ async function main() {
       regels.push(`− ${wie}: ${String(oordeel.reden).slice(0, 100)}`);
     }
   }
-  console.log(`[SCHADUW] klaar: ${voorstellen} voorstel(len) gelogd in opvolging-voorstellen.jsonl — er is NIETS verstuurd.`);
+  console.log(`[SCHADUW] klaar: ${voorstellen} voorstel(len) gelogd in opvolging-voorstellen.jsonl, er is NIETS verstuurd.`);
 
   // Rapportage: daemon draait nu elk uur — het volledige overzicht alleen in de ochtendrun
   // (10:00-11:00); live-verzendingen worden altijd gemeld.

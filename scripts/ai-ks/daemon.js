@@ -35,7 +35,7 @@ async function tPost(ep, body) {
     laatste = { ok: res.ok, status: res.status, body: await res.text().catch(() => '') };
     if (res.status !== 429) return laatste;
     if (poging < 3) {
-      console.log(`  Trengo 429 — nieuwe poging over ${poging * 20}s...`);
+      console.log(`  Trengo 429, nieuwe poging over ${poging * 20}s...`);
       await new Promise(r => setTimeout(r, poging * 20000));
     }
   }
@@ -190,7 +190,7 @@ async function alertCreditsOp() {
   let s;
   try { s = JSON.parse(fs.readFileSync(CREDITS_STATE, 'utf8')); } catch { s = { status: 'ok', laatsteAlert: 0 }; }
   if (Date.now() - (s.laatsteAlert || 0) < 3600000) return;
-  await telegram('🚨🚨 ANTHROPIC CREDITS OP — er wacht NU een klant op antwoord en de AI-klantenservice staat stil!\n\nBijladen: console.anthropic.com/settings/billing → Buy credits.');
+  await telegram('🚨🚨 ANTHROPIC CREDITS OP, er wacht NU een klant op antwoord en de AI-klantenservice staat stil!\n\nBijladen: console.anthropic.com/settings/billing → Buy credits.');
   fs.writeFileSync(CREDITS_STATE, JSON.stringify({ status: 'op', laatsteAlert: Date.now() }));
 }
 
@@ -363,13 +363,13 @@ async function verwerkTicket(t, state) {
     const overdrachten = ruweBerichten.filter(m => (m.internal_note || m.type === 'NOTE') && m.user_id === 747786 &&
       (/@jorren745487[\s\S]*@tanya748440/.test(String(m.body || m.message || '')) || /De AI kan dit niet zelf afhandelen en draagt het over/i.test(String(m.body || m.message || ''))));
     if (isWaTicket(t) && overdrachten.length) {
-      if (Number(t.team_id) === 431872) return; // ligt al in de Mens nodig-map — team ziet het
+      if (Number(t.team_id) === 431872) return; // ligt al in de Mens nodig-map, team ziet het
       const laatsteKlant = ruweBerichten.filter(m => m.type === 'INBOUND').map(m => String(m.created_at)).sort().pop() || '';
       const laatsteOverdracht = overdrachten.map(m => String(m.created_at)).sort().pop() || '';
       if (laatsteKlant > laatsteOverdracht) {
         console.log(`  [${t.id}] klant reageerde opnieuw op overgedragen (service)gesprek → terug naar Mens nodig`);
         try {
-          await plaatsNotitie(t.id, `@jorren745487 @tanya748440\n\nKlant reageerde opnieuw op dit eerder overgedragen gesprek — direct terug in Mens nodig gezet, de bot blijft eraf.`);
+          await plaatsNotitie(t.id, `@jorren745487 @tanya748440\n\nKlant reageerde opnieuw op dit eerder overgedragen gesprek, direct terug in Mens nodig gezet, de bot blijft eraf.`);
           await zetLabel(t.id, LABEL.MENS_NODIG);
           await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
         } catch (e) { console.error(`  [${t.id}] service-heropening FOUT: ${e.message}`); }
@@ -436,8 +436,23 @@ async function verwerkTicket(t, state) {
           body: JSON.stringify({ recipient_phone_number: t.contact.phone, hsm_id: 236108, channel_id: 1359857,
             params: [{ type: 'body', key: '{{1}}', value: voornaam }] }) });
         console.log(`  → 24u dicht: follow-up-TEMPLATE naar ${t.contact.phone}: ${tw.ok ? 'OK' : 'FOUT ' + tw.status}`);
+        // Template via wa_sessions maakt een NIEUW ticket (Daimy 23-07: gesprek raakt kwijt);
+        // daarom het nieuwe ticket direct mergen in het originele zodat alles in 1 gesprek blijft.
+        if (tw.ok) {
+          try {
+            const twJson = await tw.json();
+            const nieuwTicket = twJson?.message?.ticket_id;
+            if (nieuwTicket && Number(nieuwTicket) !== Number(t.id)) {
+              const mr = await fetch(`https://app.trengo.com/api/v2/tickets/${t.id}/merge`, {
+                method: 'POST', headers: { 'Authorization': 'Bearer ' + TT, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ source_ticket_id: nieuwTicket }) });
+              console.log(`  → template-ticket ${nieuwTicket} samengevoegd met ${t.id}: ${mr.ok ? 'OK' : 'FOUT ' + mr.status}`);
+              if (!mr.ok) await telegram(`⚠️ Follow-up-template bij ticket ${t.id} kwam in los ticket ${nieuwTicket} en samenvoegen lukte niet (${mr.status}). Even handmatig checken.`);
+            }
+          } catch (e) { console.log('  merge na template mislukt:', e.message); }
+        }
         verstuurd = tw.ok;
-        if (tw.ok) await plaatsNotitie(t.id, `✅ 24-uursvenster was dicht — goedgekeurde follow-up-template verstuurd i.p.v. vrij bericht. Zodra de klant reageert is het venster weer open en kan het gesprek verder.`);
+        if (tw.ok) await plaatsNotitie(t.id, `✅ 24-uursvenster was dicht, daarom de goedgekeurde follow-up-template verstuurd (in dit ticket samengevoegd, geen los gesprek). Zodra de klant reageert is het venster weer open en kan het gesprek verder.`);
         else await telegram(`⚠️ Follow-up bij ticket ${t.id} kon niet: 24u-venster dicht EN template faalde (${tw.status}).`);
       } else if (!sendRes.ok) {
         await telegram(`⚠️ Vervolgbericht na feedback bij ticket ${t.id} kon niet verstuurd worden: ${sendRes.status}`);
@@ -476,7 +491,7 @@ async function verwerkTicket(t, state) {
     (woorden.length === 0 || woorden.every(w => BEVESTIG_WOORDEN.has(w)));
   if (isBevestiging) {
     state.verwerkt[sleutel] = { tijd: new Date().toISOString(), bevestiging: true };
-    console.log(`  ticket ${t.id}: pure bevestiging ("${laatste.tekst.slice(0, 20)}") — niet op reageren`);
+    console.log(`  ticket ${t.id}: pure bevestiging ("${laatste.tekst.slice(0, 20)}"), niet op reageren`);
     return;
   }
 
@@ -608,7 +623,7 @@ async function verwerkTicket(t, state) {
     // geen escalatie is. Bij een escalatie kreeg het ticket anders TWEE notities: deze
     // technische dump én de nette overdracht-notitie (Daimy 17 juli: "weer dubbele notities,
     // voor onze mensen niet duidelijk"). De overdracht-notitie hieronder is dan genoeg.
-    await plaatsNotitie(t.id, `🤖 AI-KLANTENSERVICE (schaduwmodus — NIET verstuurd)\n\nConcept-antwoord:\n${res.antwoord}${acties}`);
+    await plaatsNotitie(t.id, `🤖 AI-KLANTENSERVICE (schaduwmodus, NIET verstuurd)\n\nConcept-antwoord:\n${res.antwoord}${acties}`);
   } else if (CFG.MODE === 'live') {
     // LIVE verzenden — pas actief als Daimy .live-enabled aanmaakt. Nog bewust niet geïmplementeerd.
     console.log('LIVE-modus nog niet vrijgegeven; er is niets verstuurd.');
@@ -623,7 +638,7 @@ async function verwerkTicket(t, state) {
     // Leesbaar voor het team, geen JSON-dump (Daimy 17 juli: "voor onze mensen niet duidelijk").
     const leesbaar = (a) => {
       if (a.type === 'offerte_aanpassen') return `Offerte aangepast: ${a.samenvatting || 'zie Reuzenpanda'}`;
-      if (a.type === 'inmeet_afspraak') return `Inmeten doorgezet naar de planning voor ${a.klantNaam || 'de klant'} (${a.product || 'product onbekend'})${a.notitie ? ` — notitie voor de planner: ${a.notitie}` : ''}`;
+      if (a.type === 'inmeet_afspraak') return `Inmeten doorgezet naar de planning voor ${a.klantNaam || 'de klant'} (${a.product || 'product onbekend'})${a.notitie ? `, notitie voor de planner: ${a.notitie}` : ''}`;
       if (a.type === 'offerte_aanmaken') return `Nieuwe offerte aangemaakt voor ${a.klant || 'de klant'}`;
       return a.samenvatting || a.type;
     };
@@ -658,7 +673,7 @@ async function verwerkTicket(t, state) {
     } else if (/hoog/i.test(escalatie.urgentie || '')) {
       // Alleen nog een Telegram-alarm bij HOGE urgentie (veiligheid). Gewone overdrachten niet
       // meer melden — het team ziet ze gewoon in de map Mens nodig (Daimy 20 juli).
-      await telegram(`🚨 URGENTE escalatie — ticket ${t.id} (${wie}):\n${escalatie.reden}\n\nLaatste klantbericht: ${laatste.tekst.substring(0, 300)}`);
+      await telegram(`🚨 URGENTE escalatie, ticket ${t.id} (${wie}):\n${escalatie.reden}\n\nLaatste klantbericht: ${laatste.tekst.substring(0, 300)}`);
     }
     // Overdracht: ÉÉN duidelijk bericht met tag naar het team (beleid Daimy 16+17 juli:
     // "tag de juiste mensen en maak het in 1x duidelijk, niet alles op elkaar geramd").
@@ -938,7 +953,7 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
   const watchMin = watchIdx >= 0 ? parseInt(process.argv[watchIdx + 1] || '60', 10) : 0;
 
   if (watchIdx >= 0) {
-    const oneindig = !watchMin; // --watch 0 = permanent (launchd KeepAlive herstart ons bij crash — "moet gewoon altijd aanstaan", Daimy 17 juli)
+    const oneindig = !watchMin; // --watch 0 = permanent (launchd KeepAlive herstart ons bij crash, "moet gewoon altijd aanstaan", Daimy 17 juli)
     console.log(`Watch-modus: elke 30s pollen, ${oneindig ? 'PERMANENT' : watchMin + ' minuten'}${onlyTest ? ' (alleen whitelist-nummers)' : ''}${sonnyOnly ? ' (alleen Sonny/WA)' : ''}.`);
     const tot = oneindig ? Infinity : Date.now() + watchMin * 60000;
     while (Date.now() < tot) {

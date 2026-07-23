@@ -26,7 +26,7 @@ const clean = (s) => String(s || '').replace(/<style[\s\S]*?<\/style>/gi, '').re
 function markeerQuote(tekst) {
   const i = tekst.search(/-{2,}\s*Oorspronkelijk bericht\s*-{2,}|-{3,}\s*Original Message\s*-{3,}|\bOn .{5,80}? wrote:|\bVan:\s.{2,80}?\s(?:Verzonden|Datum):/i);
   if (i < 15) return tekst; // geen quote gevonden, of het bericht begint er vrijwel mee
-  return '[NIEUW BERICHT] ' + tekst.slice(0, i).trim() + ' [EINDE NIEUW BERICHT — hieronder staat de eerdere thread als quote, die is al gelezen] ' + tekst.slice(i).trim();
+  return '[NIEUW BERICHT] ' + tekst.slice(0, i).trim() + ' [EINDE NIEUW BERICHT, hieronder staat de eerdere thread als quote, die is al gelezen] ' + tekst.slice(i).trim();
 }
 
 // VANGNET: haal meta-redenering en interne kopjes eruit zodat NOOIT iets naar de klant gaat dat
@@ -116,7 +116,7 @@ async function verwerk(ticketId) {
   // sluiten. Anders mailt Sunny zijn interne notitie terug naar info@ en ontstaat een lus.
   if (/@sonty\.nl$|@sontymontage\.nl$/i.test(String(t.contact?.email || '').trim())) {
     await tPost(`/tickets/${ticketId}/close`, {});
-    return { ticketId, resultaat: 'eigen/systeemmail — gesloten zonder antwoord', klant: t.contact?.email };
+    return { ticketId, resultaat: 'eigen/systeemmail, gesloten zonder antwoord', klant: t.contact?.email };
   }
 
   // WEBFLOW-FORMULIER: afzender is no-reply@webflow, dus in-thread antwoorden zou naar webflow
@@ -136,7 +136,7 @@ async function verwerk(ticketId) {
     // Het BERICHT-veld is de eigenlijke vraag van de klant (Daimy 20 juli: parser liet dit weg,
     // waardoor de bot generieke wedervragen stelde i.p.v. de echte vraag te beantwoorden).
     const bericht = veld('Bericht', '-{4,}|If you believe|Unsubscribe');
-    const vraag = [wil, bericht].filter(Boolean).join(' — ') || body.slice(0, 400);
+    const vraag = [wil, bericht].filter(Boolean).join(', ') || body.slice(0, 400);
     const email = (body.match(/Email\s*:?\s*([\w.+-]+@[\w-]+\.[a-z]{2,4})(?![a-z])/) || [])[1] || '';
     const tel = (body.match(/Telefoonnummer\s*:?\s*([\d +]{6,15})/i) || [])[1] || '';
     const adres = veld('Adres', 'Huisnummer|postcode|Woonplaats|Field|Bericht');
@@ -148,7 +148,7 @@ async function verwerk(ticketId) {
 
     // Geen bruikbaar e-mailadres uit het formulier → naar team Mens nodig (kan niet antwoorden).
     if (!email) {
-      const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag, maar zonder bruikbaar e-mailadres — pak dit zelf op.\n\n${naam || 'Klant'}${tel ? ' / ' + tel : ''}\n${adresRegel}\n\nVraag: ${vraag.slice(0, 300)}`;
+      const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag, maar zonder bruikbaar e-mailadres, pak dit zelf op.\n\n${naam || 'Klant'}${tel ? ' / ' + tel : ''}\n${adresRegel}\n\nVraag: ${vraag.slice(0, 300)}`;
       await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: note });
       await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
       await zetLabel(ticketId, LABEL.MENS_NODIG);
@@ -165,7 +165,7 @@ async function verwerk(ticketId) {
       const res = await beantwoord({
         kanaal: 'EMAIL',
         klant: { naam: naam || null, email, phone: tel || null },
-        berichten: [{ van: 'klant', tekst: `Nieuwe aanvraag via ons website-formulier.\nNaam: ${naam}\nAdres: ${adresRegel}\nTelefoon: ${tel}\nType aanvraag: ${wil || '-'}\nBericht/vraag van de klant: ${bericht || wil || body.slice(0, 400)}\n\n(LET OP: dit is het EERSTE antwoord op een formulier-aanvraag. Je kunt in deze beurt nog GEEN offerte aanmaken of iets doorzetten, dus zeg niet dat je hem NU maakt of dat er zo een link komt. Wat je WEL doet: de vraag inhoudelijk beantwoorden (prijzen berekenen met prijs_berekenen mag gewoon), de nog ontbrekende keuzes uitvragen (bv. bediening, framekleur), en toezeggen dat je de offerte direct in orde maakt zodra de klant die doorgeeft — als de klant antwoordt kun je daarna wél alles.)`, tijd: inb?.created_at }],
+        berichten: [{ van: 'klant', tekst: `Nieuwe aanvraag via ons website-formulier.\nNaam: ${naam}\nAdres: ${adresRegel}\nTelefoon: ${tel}\nType aanvraag: ${wil || '-'}\nBericht/vraag van de klant: ${bericht || wil || body.slice(0, 400)}\n\n(LET OP: dit is het EERSTE antwoord op een formulier-aanvraag. Je kunt in deze beurt nog GEEN offerte aanmaken of iets doorzetten, dus zeg niet dat je hem NU maakt of dat er zo een link komt. Wat je WEL doet: de vraag inhoudelijk beantwoorden (prijzen berekenen met prijs_berekenen mag gewoon), de nog ontbrekende keuzes uitvragen (bv. bediening, framekleur), en toezeggen dat je de offerte direct in orde maakt zodra de klant die doorgeeft, als de klant antwoordt kun je daarna wél alles.)`, tijd: inb?.created_at }],
         liveTest: false, sonny: false, ticketId, // geen tools/offertes uitvoeren op een formulier-lead
       });
       conceptDraft = res.antwoord ? formatteerEmail(res.antwoord) : '';
@@ -182,7 +182,7 @@ async function verwerk(ticketId) {
         return { ticketId, klant: naam || email, resultaat: '✅ BEANTWOORD (webflow-lead, eigen mail naar klantadres) + gesloten', concept: conceptDraft.slice(0, 220) };
       }
     }
-    const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag — Sunny kon de mail niet zelf versturen, stuur dit zelf naar de klant (in-thread antwoord zou naar no-reply@webflow gaan).\n\nKlant: ${naam || '-'}\nMail: ${email}${tel ? '\nTel: ' + tel : ''}\nAdres: ${adresRegel || '-'}\nVraag: ${vraag.slice(0, 300)}` + (conceptDraft ? `\n\n--- Concept-antwoord van Sunny (controleer en verstuur naar ${email}) ---\n${conceptDraft}` : '');
+    const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag, Sunny kon de mail niet zelf versturen, stuur dit zelf naar de klant (in-thread antwoord zou naar no-reply@webflow gaan).\n\nKlant: ${naam || '-'}\nMail: ${email}${tel ? '\nTel: ' + tel : ''}\nAdres: ${adresRegel || '-'}\nVraag: ${vraag.slice(0, 300)}` + (conceptDraft ? `\n\n--- Concept-antwoord van Sunny (controleer en verstuur naar ${email}) ---\n${conceptDraft}` : '');
     await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: note });
     await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
     await zetLabel(ticketId, LABEL.MENS_NODIG);
@@ -196,7 +196,7 @@ async function verwerk(ticketId) {
     .filter(m => (m.type === 'NOTE' || m.internal_note) && /@s[ou]nny/i.test(m.body || m.message || ''))
     .map(m => ({ tijd: m.created_at, tekst: clean(m.body || m.message) }))
     .sort((a, b) => String(a.tijd).localeCompare(String(b.tijd)));
-  if (!rijen.length || rijen[rijen.length - 1].van !== 'klant') return { ticketId, resultaat: 'laatste bericht niet van klant — overgeslagen' };
+  if (!rijen.length || rijen[rijen.length - 1].van !== 'klant') return { ticketId, resultaat: 'laatste bericht niet van klant, overgeslagen' };
 
   const gesprek = {
     kanaal: 'EMAIL',
@@ -352,7 +352,7 @@ async function verwerkNotities(t, rowsAll) {
   const actieTekst = mutaties.length ? '\nUitgevoerd: ' + mutaties.map(a => a.samenvatting || a.type).join('; ') : '';
   // Eerlijke terugkoppeling over de aflevering: nooit "mail gestuurd" claimen als het niet lukte.
   const aflevering = verstuurd ? `\n(De klant heeft hierover een mail gekregen${klantMail ? ' op ' + klantMail : ''}.)`
-    : (klantTekst ? '\n(⚠️ LET OP: de mail naar de klant kon NIET verstuurd worden — stuur hem zelf naar het klantadres.)' : '');
+    : (klantTekst ? '\n(⚠️ LET OP: de mail naar de klant kon NIET verstuurd worden, stuur hem zelf naar het klantadres.)' : '');
   for (const i of teDoen) {
     await tPost(`/tickets/${t.id}/messages`, { internal_note: true, message: `${await tagVoor(i.userId)} ✅ ${teamAntwoord || 'Verwerkt.'}${actieTekst}${aflevering}` });
   }
@@ -373,10 +373,10 @@ if (require.main === module) (async () => {
         const r = await verwerk(id);
         const regel = `${r.klant || r.ticketId} (ticket ${r.ticketId})`;
         if (/BEANTWOORD/.test(r.resultaat)) beantwoord.push(regel);
-        else if (/MENS NODIG/.test(r.resultaat)) mensNodig.push(`${regel} — ${(r.concept || '').replace(/^reden:\s*/, '').slice(0, 90)}`);
-        else overig.push(`${regel} — ${r.resultaat}`);
-        console.log(`[${r.ticketId}] ${r.resultaat} — ${r.klant || ''}`);
-      } catch (e) { overig.push(`${id} — FOUT ${e.message}`); console.log(`[${id}] FOUT: ${e.message}`); }
+        else if (/MENS NODIG/.test(r.resultaat)) mensNodig.push(`${regel}, ${(r.concept || '').replace(/^reden:\s*/, '').slice(0, 90)}`);
+        else overig.push(`${regel}, ${r.resultaat}`);
+        console.log(`[${r.ticketId}] ${r.resultaat}, ${r.klant || ''}`);
+      } catch (e) { overig.push(`${id}, FOUT ${e.message}`); console.log(`[${id}] FOUT: ${e.message}`); }
     }
   }));
   console.log('\n\n======== SAMENVATTING ========');

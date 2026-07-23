@@ -1,0 +1,29 @@
+{
+  "quotationNumber": "202610250",
+  "documentId": "a9e36c73-5b36-429c-a8e2-7d2cd8590d94",
+  "name": "Hendrikus C van Westenbrugge",
+  "timestamp": "2026-07-22T15:01:04.810Z",
+  "lines": [
+    {
+      "units": 6,
+      "description": "SunElite\nBreedte: 2950 mm\nUitval: 2500 mm\nFrame Kleur: RAL 7039\nKleur doek: NTB\nBediening: 0\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product.\n- 7 jaar op de motor",
+      "pricePerUnit": 3405,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 6,
+      "description": "Inmeten + montage Knikarmscherm uitgebreid.\n- Inclusief uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 325,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 6,
+      "description": "Eolis 3D windsensor IO\n- Windbeveiliging in de voorlijst\n- De windsensor is een hulp stuk hier kunnen geen garantie rechten aan verleend worden mbt windschade.",
+      "pricePerUnit": 169,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

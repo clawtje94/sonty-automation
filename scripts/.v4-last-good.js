@@ -36,6 +36,12 @@ const RP_API_KEY = 'reuzenpanda_cpat_WMD2KmDRune53bj7.d0_ls8loPpAjb2TrSNOS_Xd_QL
 const PID = '731483fa-ef6b-4aae-afcf-883ec09219dd';
 const BACKLOG_ID = 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7';
 const OC_STATUS = '64788881-632c-4217-8f56-d20732c94b08';
+// TE VER-herstelactie 23-07 (Daimy): deze bord-items zijn ouder dan 7 dagen maar moeten
+// alsnog normaal verwerkt worden. File weghalen of legen = uitzondering vervalt.
+const HERSTEL_IDS = (() => {
+  try { return new Set(JSON.parse(fs.readFileSync(path.join(__dirname, '../data/tever-herstel-backup.json'), 'utf8')).items.map((x) => x.itemId)); }
+  catch { return new Set(); }
+})();
 const GECONTROLEERD = 'c860c5ae-7eef-45cc-8e79-3b4bcd285b7a';
 const HANDMATIG = '6221c9fd-c835-45dc-a494-f81e40a8e184';
 const TEVER_STATUS = '20815fa5-94ce-40a3-8e1f-d36093de006f';
@@ -46,7 +52,7 @@ const TRENGO_TOKEN = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt
 const TRENGO_EMAIL_CHANNEL = 1363384; // Aanvragen (aanvragen@sonty.nl)
 const BOOKINGS_URL = 'https://bookings.cloud.microsoft/book/SontyMontage1@sontymontage.nl/s/lAKws2wHtEOFjHYzLwjXdQ2?ismsaljsauthenabled=true';
 const TEVER_SENT_FILE = path.join(__dirname, '.tever-sent.json');
-const SONTY_LAT = 52.0446, SONTY_LON = 4.3188;
+const SONTY_LAT = 52.0116, SONTY_LON = 4.7104; // GOUDA als basislocatie voor het werkgebied (Daimy 23-07, was Rijswijk)
 
 // Verkoopteksten aan/uit — zet op false om alleen technische aanpassingen te doen
 const ENHANCE_DESCRIPTIONS = true; // Goedgekeurde teksten (test offerte #20266838, 2026-06-10)
@@ -1619,7 +1625,7 @@ async function main() {
   const sevenDaysAgo = Date.now() - 7 * 86400000;
   const itemsData = { items: await getItemsCached('v4-run stap 1') };
   const ocItems = (itemsData?.items || []).filter(i =>
-    i.status_id === OC_STATUS && i.timestamp_created > sevenDaysAgo &&
+    i.status_id === OC_STATUS && (i.timestamp_created > sevenDaysAgo || HERSTEL_IDS.has(i.id)) &&
     !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
   );
 
@@ -1675,12 +1681,10 @@ async function main() {
     const bedrag = total * (1 - discount / 100);
 
     // STAP 1: ROUTING
+    // TE VER routeert NIET meer vóór de verwerking (Daimy 23-07): eerst krijgt de offerte de
+    // volledige v4-verwerking (prijzen + opmaak), en gaat DAARNA pas naar TE VER. Reden: soms
+    // wordt zo'n klant alsnog geholpen (casus de Wolf/Bunnik) en dan moet de offerte kloppen.
     const teVer = await checkTeVer(city, bedrag);
-    if (teVer) {
-      if (email) await sendTeVerEmail(item.summary, email);
-      await setStatus(item.id, TEVER_STATUS);
-      routeCount++; continue;
-    }
     if (isGordijn) {
       if (email) await sendGordijnenEmail(item.summary, email);
       await setStatus(item.id, GORDIJNEN_STATUS);
@@ -1830,6 +1834,14 @@ async function main() {
     } else {
       okCount++;
     }
+    if (teVer) {
+      // Verwerking is klaar — nu alsnog de TE VER-afhandeling (mail + status i.p.v. Gecontroleerd)
+      if (email) await sendTeVerEmail(item.summary, email);
+      await setStatus(item.id, TEVER_STATUS);
+      console.log('  TE VER (na volledige verwerking): ' + item.summary);
+      routeCount++;
+      continue;
+    }
     await setStatus(item.id, GECONTROLEERD);
 
     // STAP 6: ROMA DUO-OFFERTE — apart document met het Roma-alternatief bij rolluiken/screens.
@@ -1869,7 +1881,7 @@ async function main() {
   const AI_SHEET_STATUS = 'dc0efe4f-2cd6-45d8-aeff-7f1c817a0fb2'; // Ai offerte verstuurd
   const INMETEN_SHEET_STATUS = '2e9819bd-26f0-4082-8f18-32bb48f87f54'; // Inmeten inplannen
   const gcItems = (gcItemsData?.items || []).filter(i =>
-    (i.status_id === GECONTROLEERD || i.status_id === TEVER_STATUS || i.status_id === GORDIJNEN_STATUS || i.status_id === WINKEL_SHEET_STATUS || i.status_id === AI_SHEET_STATUS || i.status_id === INMETEN_SHEET_STATUS) && i.timestamp_created > sevenDaysAgo &&
+    (i.status_id === GECONTROLEERD || i.status_id === TEVER_STATUS || i.status_id === GORDIJNEN_STATUS || i.status_id === WINKEL_SHEET_STATUS || i.status_id === AI_SHEET_STATUS || i.status_id === INMETEN_SHEET_STATUS) && (i.timestamp_created > sevenDaysAgo || HERSTEL_IDS.has(i.id)) &&
     !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
   );
 

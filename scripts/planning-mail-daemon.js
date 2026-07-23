@@ -243,7 +243,7 @@ function duiden(m) {
   if ((x = s.match(/^(Portaalbevestiging|Orderbevestiging|Gewijzigde orderbevestiging) (\d+) met referentie (.+)$/i))) {
     const soort = x[1].toLowerCase();
     const naam = x[3].replace(/\s*\((\d+)([^)]*)\)/, ' $1$2').trim();
-    if (/^gewijzigde/i.test(soort)) return { type: 'opmerking', ordernr: x[2], naam, lev: 'Sunmaster', kort: `Gewijzigde orderbevestiging ontvangen — PDF controleren`, opm: `Sunmaster stuurde een GEWIJZIGDE orderbevestiging voor ${x[2]} (${x[3]}). Wijziging staat in de PDF-bijlage — handmatig controleren.`, wat: 'Sunmaster, zie PDF-bijlage' };
+    if (/^gewijzigde/i.test(soort)) return { type: 'opmerking', ordernr: x[2], naam, lev: 'Sunmaster', kort: `Gewijzigde orderbevestiging ontvangen, PDF controleren`, opm: `Sunmaster stuurde een GEWIJZIGDE orderbevestiging voor ${x[2]} (${x[3]}). Wijziging staat in de PDF-bijlage, handmatig controleren.`, wat: 'Sunmaster, zie PDF-bijlage' };
     return { type: 'nieuw-of-opmerking', ordernr: x[2], naam, lev: 'Sunmaster', kort: `Nieuw: ${soort} ${x[2]}`, besteld, wat: 'Sunmaster, productdetails in PDF-bijlage', opm: `Sunmaster ${x[1].toLowerCase()} ${x[2]}, referentie ${x[3]} (mail ${besteld}). Details in PDF-bijlage.` };
   }
   if ((x = s.match(/^Toppoint orderbevestiging (\d+)/i)))
@@ -256,7 +256,7 @@ function duiden(m) {
   if (/Retourmelding|Retour opdracht/i.test(s)) {
     const ref = (m.body.match(/referentie\s+(\S+?)\s*\(/) || m.body.match(/referentie\s+(\S+)/) || [])[1] || '(onbekend)';
     const lev = (s.match(/Retourmelding\s+(.+)$/i) || [])[1] || 'NE';
-    return { type: 'retour', ref, lev, besteld, opm: `Retouropdracht ${ref} — afhaaldag bevestigen bij NE.` };
+    return { type: 'retour', ref, lev, besteld, opm: `Retouropdracht ${ref}, afhaaldag bevestigen bij NE.` };
   }
   // ROMA OPDRACHTBEVESTIGING (23-07): "ROMA opdrachtbevestiging 8650217 Commissie: Cheloi (6229) Bestel nr. BEST_152"
   if ((x = s.match(/^ROMA opdrachtbevestiging\s+(\d+)\s+Commissie:\s*(.*?)\s*Bestel/i))) {
@@ -397,7 +397,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
         return true;
       }
       if (a.type === 'opmerking' || a.type === 'nieuw-of-opmerking' || a.type === 'update') {
-        const n = { naam: a.naam || '(onbekend)', ordernr: a.ordernr, besteld: a.besteld || '', geleverd: a.geleverdTekst || '', wat: a.nieuwWat || a.wat || '', kort: (a.kort || '') + (a.type === 'update' ? ' (ordernr niet in sheet, nieuwe rij)' : ''), lev: a.lev, opm: a.opm + (a.type === 'update' ? ' LET OP: ordernummer niet in de sheet gevonden — nieuwe rij gemaakt.' : '') };
+        const n = { naam: a.naam || '(onbekend)', ordernr: a.ordernr, besteld: a.besteld || '', geleverd: a.geleverdTekst || '', wat: a.nieuwWat || a.wat || '', kort: (a.kort || '') + (a.type === 'update' ? ' (ordernr niet in sheet, nieuwe rij)' : ''), lev: a.lev, opm: a.opm + (a.type === 'update' ? ' LET OP: ordernummer niet in de sheet gevonden, nieuwe rij gemaakt.' : '') };
         nieuweRijen.push(n); state.verwerkt[m.imid] = nu();
         gelezenMarkeren.push(m);
         return true;
@@ -449,7 +449,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
       gesplitst.forEach((x) => { if (x.nr === n.nr && x.lev) alAanwezig.add(x.lev); });
       for (const [lev, producten] of Object.entries(verwacht)) {
         if (alAanwezig.has(lev) || extraRijen.some((e) => e.nr === n.nr && e.lev === lev)) continue;
-        extraRijen.push({ kort: `Verwachte levering uit hoofdbestelling ${n.nr} — nog geen bevestiging van ${lev}`, lev, nr: n.nr, naam: n.naam, toevoeging: n.toevoeging, ordernr: '', besteld: '', geleverd: '', wat: 'verwacht: ' + producten.join(' + ').slice(0, 180) });
+        extraRijen.push({ kort: `Verwachte levering uit hoofdbestelling ${n.nr}, nog geen bevestiging van ${lev}`, lev, nr: n.nr, naam: n.naam, toevoeging: n.toevoeging, ordernr: '', besteld: '', geleverd: '', wat: 'verwacht: ' + producten.join(' + ').slice(0, 180) });
         verslag.push(`verwachte levering: ${n.naam} ${n.nr} bij ${lev}`);
       }
     }
@@ -458,7 +458,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     const values = alleNieuw.map((n, i) => {
       const r = start + i;
       const plaats = (n.nr && offerInfo[n.nr]?.stad) || plaatsVan[zoeknaam(n.naam)] || '';
-      const kortTekst = (/nabestelling/i.test(n.toevoeging || '') ? 'VOORRANG (nabestelling) — ' : '') + (n.kort || n.opm);
+      const kortTekst = (/nabestelling/i.test(n.toevoeging || '') ? 'VOORRANG (nabestelling), ' : '') + (n.kort || n.opm);
       // Kolom A leeg laten: checkbox trekt het team zelf door (Daimy 22-07)
       return ['', kortTekst, vandaagKort, n.lev || '', n.nr || '', n.naam, n.toevoeging || '', plaats, plaats ? regioVan(plaats) : '', n.ordernr, n.besteld, n.geleverd, '', '', '', n.wat,
         `=IF(M${r + 1060}=TRUE; ""; IF(ISBLANK(K${r}); ""; DATEDIF(K${r}; TODAY(); "D")))`];

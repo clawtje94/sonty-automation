@@ -93,3 +93,16 @@
 - (2026-07-22) [team-notitie bij e-mail wendy Algera] we hebben van voorraad sun eye alleen antreciet casette met beige doek of antreciet casette met grijs doek
 - (2026-07-23) [team-notitie bij e-mail timogoes@hotmail.com] deze meneer graag verder helpen.
 - (2026-07-23) [feedback Daimy, gesprek Elly de Wolf] Dagstand bij rolluiken = de ventilatiestand: kleine gaatjes in de lamellen laten lucht (maar geen directe zon) door; die vallen dicht als het rolluik helemaal gesloten is. Bij elektrische bediening stel je de dagstand in als favoriete stand op de MY-knop van de afstandsbediening: zet het rolluik op de gewenste stand en houd de MY-knop ingedrukt tot het product kort heen en weer beweegt — dan is die stand ingeleerd. Dagstand is dus geen aparte productoptie met meerprijs, elk rolluik kan dit.
+- (2026-07-23) [team-notitie bij gesprek +31620034793] er is voor roma 2 mogelijkheden het is of: Quadro is vierkant.Pento is afgeschuind maar bijna alles van roma wat we verkopen is Quadro dus vierkant. hoef je nu niks mee te doen. ik ga meneer zo foto&#39;s sturen.
+- (2026-07-23) [team-notitie bij e-mail vittojordans@hotmail.com] je mag deze enen keer aan de meneer voorstellen dat we hem kunnen helpen als beide offerte&#39;s akkoord gaan maar dan zijn ze wel zonder 15% korting en het inmeten + montage word explesiet vermelddat dit langer duurt omdat het gewoon echt buiten het gebied valt. zelf afhalen doen we op dit moment niet omdat het te druk is.
+- (2026-07-23) [team-notitie bij gesprek Mark Gaerthé] geen follow up verstuurd?
+- (2026-07-23) [team-notitie bij gesprek +31621693639] geen follow up gestuurd?
+- (2026-07-23) [team-notitie bij gesprek +31627332114] geen follow up gestuurd ?
+- (2026-07-23) [team-notitie bij gesprek +31648665544] geen follow up gestuurd
+- (2026-07-23) [team-notitie bij gesprek +31648494494] heeft geenr eactie meer nodig ticket kan je sluiten.
+- (2026-07-23) [team-notitie bij gesprek Mark Gaerthé] geen follow up verstuurd?
+- (2026-07-23) [team-notitie bij gesprek +31621693639] waar heb je die folllow up gestuurd dan?
+- (2026-07-23) [team-notitie bij gesprek +31627332114] geen follow up gestuurd ?
+- (2026-07-23) [team-notitie bij gesprek Mark Gaerthé] geen follow up verstuurd?
+- (2026-07-23) [team-notitie bij gesprek +31621693639] waar heb je die folllow up gestuurd dan?
+- (2026-07-23) [team-notitie bij gesprek Mark Gaerthé] geen follow up verstuurd?

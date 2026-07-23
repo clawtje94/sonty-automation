@@ -1,0 +1,593 @@
+{
+  "gemaakt": "2026-07-23T12:00:45.499Z",
+  "items": [
+    {
+      "email": "nomiss@hotmail.nl",
+      "naam": "Simon Streef",
+      "itemId": "8c9e42da-ad5f-45b5-9251-0440cc716d45",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "celeste2000@hotmail.nl",
+      "naam": "Celeste Vogel",
+      "itemId": "31922309-730b-47cf-a978-76d7e6e88c3a",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "elsclaessens@live.nl",
+      "naam": "Els Claessens",
+      "itemId": "01248ebc-eda5-4d42-8822-0a433de2ba92",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "wolf.veldhuizen@casema.nl",
+      "naam": "F. de Wolf",
+      "itemId": "d112b685-02fb-4483-a32b-dea896b24691",
+      "oudeStatus": "15c4f0be-c6bf-447d-bf5f-a233c482eb53"
+    },
+    {
+      "email": "ansemsvanrooij@casema.nl",
+      "naam": "Joost Ansems",
+      "itemId": "981a62c8-5b6d-4ebb-aee8-61a1e239438f",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "matijn@fastmail.nl",
+      "naam": "Matijn Made",
+      "itemId": "67a18f68-1d4b-486d-a910-6efd2ef39330",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "hagedoorn54@gmail.com",
+      "naam": "Henk Hagedoorn",
+      "itemId": "a01e47c7-fd06-4cd2-8de6-4a77346fd488",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "michiel.oudsen@gmail.com",
+      "naam": "Michiel Oudsen",
+      "itemId": "b2b86ebb-db6f-46c8-a0bf-b9db16269e4e",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "leokroon@kpnmail.nl",
+      "naam": "Leo Kroon",
+      "itemId": "011379fa-32d7-495a-bea8-698824a7303b",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "k.lindhout90@hotmail.com",
+      "naam": "Kevin Lindhout",
+      "itemId": "b02e0687-77f0-4c4d-b492-c0c08e75ecb6",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "martinbakker@duck.com",
+      "naam": "martin bakker",
+      "itemId": "4ba3aec8-32e3-4d12-bde4-40c25b845b20",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "lucasbenjamindemunnik@gmail.com",
+      "naam": "Lucas de Munnik",
+      "itemId": "667e807b-6b28-4fd8-9cc8-a5f202544eab",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "wimhuisman@casema.nl",
+      "naam": "Wim Huisman",
+      "itemId": "52e1e860-e971-4c75-9806-439acb34c966",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "ingedoedens@gmail.com",
+      "naam": "I. Doedens",
+      "itemId": "b24c4ba5-5ee4-4114-8cb4-005e8a361bec",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "ncmast@kpnmail.nl",
+      "naam": "Natalie Mast",
+      "itemId": "1821513d-20dd-411b-8d4f-4014820ef1ab",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "w.lutters@casema.nl",
+      "naam": "Willem Lutters",
+      "itemId": "37a2ced9-fd39-49f7-b803-cc845ae6ff25",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "pvlt@ziggo.nl",
+      "naam": "Peter Van leeuwen",
+      "itemId": "d983318c-d2b9-4571-963c-b2e5db9d04f4",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "melissakus@hotmail.com",
+      "naam": "Appelakker Sijpveld",
+      "itemId": "2a26eed6-a4ba-44b5-92ff-ebdfdf74de4d",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "willemsen.marjan@gmail.com",
+      "naam": "Marjan Willemsen",
+      "itemId": "4856f17f-a704-47c5-a394-94c0b1c5c743",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "pamvoogd@gmail.com",
+      "naam": "Peter Voogd",
+      "itemId": "9b9a9e49-6990-4d13-992c-2cc88eaf3353",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "martinique41@hotmail.com",
+      "naam": "Martin  Wendersteyt",
+      "itemId": "0de9d583-0d23-42c7-ae62-9e8ff1a3aa0c",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "r.treffers.pt@gmail.com",
+      "naam": "Roy Treffers",
+      "itemId": "270a35df-f2e4-415e-81a9-187aa1003d40",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "manou_achten@hotmail.com",
+      "naam": "Manou Achten",
+      "itemId": "e9f9bf89-42ff-4c2d-90f9-f573a331e4a3",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "hjgrdejong@gmail.com",
+      "naam": "D De Jong",
+      "itemId": "84fd399d-7674-484c-b29b-daef5b95fb17",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "malija199@kpnmail.nl",
+      "naam": "Mark Wessels",
+      "itemId": "d06344a3-9921-470d-98e9-f01a83b24115",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "tinekebrouwer91@gmail.com",
+      "naam": "Tineke Aperlo-Brouwer",
+      "itemId": "9f1b9d34-8afc-4c7a-a697-b82b0e7bfb18",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "jobakk2013@gmail.com",
+      "naam": "Jos Bakker",
+      "itemId": "905305ca-4556-41c1-b8df-4ee15dedc502",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "arlettebrouns@live.nl",
+      "naam": "Arlette Brouns",
+      "itemId": "e8687292-9e37-4607-bb8a-fe69d1a7752e",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "mark-caldenhove@live.nl",
+      "naam": "Mark Caldenhove",
+      "itemId": "d92f88cc-176a-42ae-b23e-027a5997f2e9",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "gretvanos@gmail.com",
+      "naam": "M van os",
+      "itemId": "54c3ccfc-b1e4-43f8-af87-f353f25d2afa",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "thomas@tordoir.amsterdam",
+      "naam": "Thomas Tordoir",
+      "itemId": "0e267401-7213-4028-8509-100910c39280",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "martindeweert24@gmail.com",
+      "naam": "Martin  de Weert",
+      "itemId": "7e98a8a9-68de-4316-96cf-e48b8bb2cc93",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "peterfmbos@gmail.com",
+      "naam": "P.F.M. Bos",
+      "itemId": "5bd97fa1-134d-406a-8870-606320860ff2",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "arienieuwenhuizen@home.nl",
+      "naam": "A  Nieuwenhuijzen",
+      "itemId": "bcdaec65-ad96-4992-8f4d-8476162df213",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "info@dialight.nl",
+      "naam": "Charles Langemeijer",
+      "itemId": "573fb02c-e8b2-4a30-9bb0-203b74eb5245",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "pascalkolen@home.nl",
+      "naam": "Pascal Kolen",
+      "itemId": "51051a3a-838c-47b1-bac3-d42325a7b77c",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "hansvanwanrooy@kpnmail.nl",
+      "naam": "Hans Van wanrooy",
+      "itemId": "d8b9f489-0810-480a-875b-74eec855d12e",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "akoksantoinette@gmail.com",
+      "naam": "antoinette koks",
+      "itemId": "858d69a3-c0a9-4f93-80ab-9c3356774340",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "leogaaren@hotmail.com",
+      "naam": "Leo Gaarenstroom",
+      "itemId": "7ccde77d-05b6-4dce-b2a3-34c75c914fc0",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "burgmanmartijn@gmail.com",
+      "naam": "Martijn Burgman",
+      "itemId": "7809e52e-c598-4028-9254-e6cbf040bae0",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "mandylig@delta.nl",
+      "naam": "Mandy Ligtenberg",
+      "itemId": "21000963-10e7-4878-83c7-bd6aa8e58910",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "arjenhoeksma@gmail.com",
+      "naam": "Arjen Hoeksma",
+      "itemId": "db351d7b-7629-4a99-821f-25d6a13392a7",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "info@beijsterveldt.com",
+      "naam": "Theo van Beijsterveldt",
+      "itemId": "ab8be6c5-875d-4263-a2b0-7a9ecdd9de85",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "pieters@checkpoint.com",
+      "naam": "P. Slavenburg",
+      "itemId": "d0f8187d-fe1a-44b7-ac0d-71289257c713",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "info@heuvelrugkozijnen.nl",
+      "naam": "HJ de jong",
+      "itemId": "d6db43ab-f1ba-4141-a5d6-8a8951820889",
+      "oudeStatus": "15c4f0be-c6bf-447d-bf5f-a233c482eb53"
+    },
+    {
+      "email": "stvdenderen@hotmail.com",
+      "naam": "Sheila Veltman",
+      "itemId": "29ec9a89-0650-479c-9e86-604a9fd06cc4",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "rick@vermeulenweb.nl",
+      "naam": "Rick Vermeulen",
+      "itemId": "8e3c0e39-fb57-4821-8ce8-b37bd915b445",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "veld235@gmail.com",
+      "naam": "J van der Velden",
+      "itemId": "26f05427-00c3-4765-8991-a6aac6ed6f73",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "kal2p@hotmail.com",
+      "naam": "Kallin Popov",
+      "itemId": "e303ad00-8c1c-4041-a6dc-9a3a619fdb23",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "tahir.arsalan9@gmail.com",
+      "naam": "Arsalan Arain",
+      "itemId": "a28379ce-9507-4d89-a9fd-c3394a59b4a7",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "rkroon43@gmail.com",
+      "naam": "Robbert  Kroon",
+      "itemId": "96634bc9-f7c3-492b-b612-4653f8ec4f27",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "m_artin_a@hotmail.com",
+      "naam": "Martina Vast",
+      "itemId": "cbfdf673-012a-439c-82ec-e9dc5c933363",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "marcella82@yahoo.com",
+      "naam": "Marcella Lodder",
+      "itemId": "01d8cf7b-b223-4448-81fd-96625163f8a8",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "mielvdhaar@gmail.com",
+      "naam": "Miel Vd haar",
+      "itemId": "d60e2c9d-38b2-4668-8a16-8f1a7a0a4f91",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "machteldvandiermen@hotmail.com",
+      "naam": "Machteld  van Diermen",
+      "itemId": "83453108-9336-4161-9246-b3b72d2a1ced",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "loesvinkenborg@hotmail.com",
+      "naam": "Loes Vinkenborg",
+      "itemId": "9527c99e-755e-49e2-9644-93c95c17cc72",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "karlijnmaas@gmail.com",
+      "naam": "Karlijn Vromans",
+      "itemId": "cebf96ae-266a-4c31-aa20-2ae81a13c891",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "anitahuijbregts@home.nl",
+      "naam": "Anita Huijbregts",
+      "itemId": "ca57d6e9-c784-47d4-9909-21fadc4cbae1",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "ccwdekort@gmail.com",
+      "naam": "patrick de kort",
+      "itemId": "48f300e4-9d35-4ccd-a7cf-766b3c294943",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "mhartveldt@gmail.com",
+      "naam": "Maarten Hartveldt",
+      "itemId": "2c2f7330-b34b-4595-a193-80920af9b53b",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "janetheijsmeijer@gmail.com",
+      "naam": "Jane Theijsmeijer",
+      "itemId": "9510475a-0c9f-46af-a896-65ce251a631d",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "mehul.thathagar@gmail.com",
+      "naam": "Mehul  Thathagar",
+      "itemId": "8b072743-7302-43cd-96d4-01d66708f7b9",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "jwldederde@outlook.com",
+      "naam": "Hans Leseman",
+      "itemId": "eb03e1af-4d7c-4f12-b8d6-22bb9b91cef0",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "mandy.princen@lijbrandt.nl",
+      "naam": "Mandy Princen",
+      "itemId": "836f131d-75e0-415d-89ea-35f96cab0385",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "josstaps@gmail.com",
+      "naam": "Jos Staps",
+      "itemId": "4e6ca06d-fab9-4832-9978-a15ebdfcf1b4",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "samemmers@ziggo.nl",
+      "naam": "Antoine Emmers",
+      "itemId": "b8529e84-6a63-480d-a984-ce74771bf7ac",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "jna.schmidt@hotmail.com",
+      "naam": "Hans Schmidt",
+      "itemId": "78e974d8-5430-46f2-ad24-a193d10f058a",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "laszlo.kondics@gmail.com",
+      "naam": "László kondics",
+      "itemId": "07ac3ac4-3a31-4c3a-9941-284d483a328e",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "bschonberger@hotmail.com",
+      "naam": "Bart Schönberger",
+      "itemId": "f68eb450-274c-4b80-803e-d812aae0b2ac",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "hugotaams@gmail.com",
+      "naam": "Hugo Taams",
+      "itemId": "20858f6b-3a78-46f5-9ed5-154ea43f8d21",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "peter.m.bakker@hotmail.com",
+      "naam": "Peter Bakker",
+      "itemId": "3ded3797-1a61-423e-a16b-9353b84fc1bd",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "roygamecube@hotmail.com",
+      "naam": "Roy Stolzenbach",
+      "itemId": "0d819ebf-365e-4867-8024-31cb87670e39",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "ernabrakel@gmail.com",
+      "naam": "Erna Van Brakel",
+      "itemId": "deeb437b-f0b6-42b7-9aba-b5e3a73a28f5",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "arnevdvoort@gmail.com",
+      "naam": "Arne Van de Voort",
+      "itemId": "7e914047-71a3-4585-82a5-8f162449575c",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "janinederks@yahoo.com",
+      "naam": "Janine Bouwhuis",
+      "itemId": "3f42f9f1-8689-4e22-a612-2b763d047970",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "steftammer@hotmail.com",
+      "naam": "stef tammer",
+      "itemId": "0480c14c-16f4-4047-900e-240eee08eb39",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "dennis.richter@hotmail.nl",
+      "naam": "Dennis Richter",
+      "itemId": "56dac407-2dd8-4523-b114-a68c1c5c9ab4",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "info@karinovinge.nl",
+      "naam": "Karin Ovinge",
+      "itemId": "80ffda7e-24df-4af5-a95c-5e2568e22215",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "hyves_19@hotmail.nl",
+      "naam": "melvin v v",
+      "itemId": "4451e756-e42b-4b19-86e1-99e2ee9969f0",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "og100571@gmail.com",
+      "naam": "Oscar González",
+      "itemId": "5be5b0f5-73d5-464b-9730-72218c59ca0b",
+      "oudeStatus": "15c4f0be-c6bf-447d-bf5f-a233c482eb53"
+    },
+    {
+      "email": "gijsvanloon1997@gmail.com",
+      "naam": "Gijs Van Loon",
+      "itemId": "9d63a19f-e99e-4614-953f-86ed4ea272cc",
+      "oudeStatus": "64788881-632c-4217-8f56-d20732c94b08"
+    },
+    {
+      "email": "rachidelyaakoubi@gmail.com",
+      "naam": "Ra El",
+      "itemId": "07d2f513-893e-4b2d-bf81-8d32286c3454",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "marloeszijlmans@hotmail.com",
+      "naam": "Marloes Zijlmans",
+      "itemId": "b1070ebc-0220-46de-a726-e49824fea18a",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "ayse_dilek@hotmail.com",
+      "naam": "Ayse Dilek",
+      "itemId": "aba89981-7a2e-4546-ad2f-e0d60d84f3da",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "rkloprogge12345@gmail.com",
+      "naam": "Ronald  Kloprogge",
+      "itemId": "29450c5e-65e7-40eb-bfe8-3bc64b202a19",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "freekbregman1@gmail.com",
+      "naam": "Freek Bregman",
+      "itemId": "3b9d88af-0a48-4179-94ae-c3dfcc3ff36a",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "hodge216@outlook.com",
+      "naam": "Lemoiro Hodge",
+      "itemId": "b212b241-e89b-490c-9630-fee717ddda94",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "dijkvrouw101@gmail.com",
+      "naam": "I Dijkman",
+      "itemId": "bbc3ee08-3e88-4e06-8aae-0daca7ccee26",
+      "oudeStatus": "15c4f0be-c6bf-447d-bf5f-a233c482eb53"
+    },
+    {
+      "email": "p.vos2610@gmail.com",
+      "naam": "Peter Vos",
+      "itemId": "52f0905f-d1ce-4973-9f4e-655d4408fd4a",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "dreavos58@gmail.com",
+      "naam": "Drea Vos",
+      "itemId": "8495dbc1-86f7-4075-a0a0-5bf25656fa8e",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "j.vanwijngaarden@hotmail.com",
+      "naam": "J Van Wijngaarden",
+      "itemId": "318a8bea-fc92-46b0-bf30-8dfc8f69583e",
+      "oudeStatus": "15c4f0be-c6bf-447d-bf5f-a233c482eb53"
+    },
+    {
+      "email": "e.h.schakel@gmail.com",
+      "naam": "Eric Schakel",
+      "itemId": "c5313b85-ca64-448c-8367-4b66fcd8e4f3",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "lyonnelanphen@gmail.com",
+      "naam": "Lyonne Lanphen Lyonne Lanphen",
+      "itemId": "a4894901-0968-4f48-98d7-33048a781382",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "abo-ali@outlook.com",
+      "naam": "Med Kor",
+      "itemId": "f09ae728-8f19-49f7-95d7-9580ecb896a3",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "bonapart@gmail.com",
+      "naam": "Lennard Bonapart",
+      "itemId": "3ce1de9e-9617-40f1-bb92-657639a1cd41",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "simranjeet.tank@gmail.com",
+      "naam": "Simranjeet Tank",
+      "itemId": "d18f81b2-982e-4b5e-a4e3-75666b64c1b1",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "jan-dekker@quicknet.nl",
+      "naam": "Jan Veerman",
+      "itemId": "c037e1cf-1b80-4b34-b72a-57a626d44f59",
+      "oudeStatus": "20815fa5-94ce-40a3-8e1f-d36093de006f"
+    },
+    {
+      "email": "petervanhoofxm@gmail.com",
+      "naam": "Peter  Van Hoof",
+      "itemId": "0377e9e2-6548-4743-a556-5bdfa88daf3f",
+      "oudeStatus": "64788881-632c-4217-8f56-d20732c94b08"
+    }
+  ]
+}

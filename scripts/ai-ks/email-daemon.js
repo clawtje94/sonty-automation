@@ -143,14 +143,14 @@ async function ronde() {
   // onterecht overgeslagen tickets). Rustig 1 tegelijk, max 12 per ronde; de rest komt de
   // volgende ronde. Zo blijft de API-belasting en het uitgaande mailvolume beheersbaar.
   const batch = teDoen.slice(0, 12);
-  console.log(`[${new Date().toLocaleTimeString()}] ${teDoen.length} te doen — nu ${batch.length} verwerken`);
+  console.log(`[${new Date().toLocaleTimeString()}] ${teDoen.length} te doen, nu ${batch.length} verwerken`);
   for (const job of batch) {
     try {
       const r = await verwerk(job.id);
       // ALLEEN als verwerkt markeren bij een écht afgehandeld resultaat. Bij "ticket niet
       // gevonden" (bv. transient/verwijderd) NIET markeren, zodat het niet stil verdwijnt.
       if (r && !/niet gevonden/i.test(r.resultaat || '')) { state[job.sleutel] = new Date().toISOString(); saveState(state); }
-      console.log(`  [${job.id}] ${r.resultaat} — ${r.klant || ''}`);
+      console.log(`  [${job.id}] ${r.resultaat}, ${r.klant || ''}`);
     } catch (e) { console.error(`  [${job.id}] FOUT: ${e.message}`); }
     await new Promise(r => setTimeout(r, 800)); // adempauze tussen zware agent-runs
   }

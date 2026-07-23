@@ -295,5 +295,99 @@
   "kanaal": "EMAIL",
   "status": "klaar",
   "aangemaakt": 1784641636492
+ },
+ {
+  "lcId": "a93e4c41-1651-4dbd-bca6-54fd523b129b",
+  "ticketId": 967775026,
+  "klantNaam": "Da-Lou de Bruin",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 2280,
+    "hoogteMM": 1260,
+    "bediening": "solar",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1784700362396
+ },
+ {
+  "lcId": "805eebf6-6723-450f-a225-b453b1722fc0",
+  "ticketId": 965848842,
+  "klantNaam": "Vincenr De Groot",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 2850,
+    "hoogteMM": 1850,
+    "bediening": "draaischakelaar",
+    "framekleur": "RAL 7016 structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "WA",
+  "status": "klaar",
+  "aangemaakt": 1784703540898
+ },
+ {
+  "lcId": "3c3625e0-454b-492e-bf90-c42d67f84056",
+  "ticketId": 967801351,
+  "klantNaam": "Yorenzo Vermeulen",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 2000,
+    "hoogteMM": 1850,
+    "bediening": "draaischakelaar",
+    "framekleur": "RAL 9005 structuur",
+    "aantal": 2
+   }
+  ],
+  "sonny": false,
+  "kanaal": "WA",
+  "status": "klaar",
+  "aangemaakt": 1784737403730
+ },
+ {
+  "lcId": "ed551261-83bf-43f5-9c80-0fca9320659d",
+  "ticketId": 968199777,
+  "klantNaam": "Yvonne de Jong",
+  "producten": [
+   {
+    "product": "zip design 110",
+    "breedteMM": 2500,
+    "hoogteMM": 1500,
+    "bediening": "solar",
+    "framekleur": "RAL 7016 structuur",
+    "aantal": 2
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1784738941497
+ },
+ {
+  "lcId": "a7cdf7bf-b98f-4d69-bcad-a9e3b3d42c81",
+  "ticketId": 967634212,
+  "klantNaam": "Koos Schuurman",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 2250,
+    "hoogteMM": 1800,
+    "bediening": "io",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1784815881567
  }
 ]

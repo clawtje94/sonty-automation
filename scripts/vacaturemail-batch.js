@@ -43,7 +43,7 @@ const mailHtml = (groet) => `
 <li>een <b>servicemonteur</b> (ervaring is een pré)</li>
 <li>twee <b>monteurs</b> (minimaal 2 jaar montage-ervaring)</li>
 <li>twee <b>inmeters</b> (ervaring is een pré)</li>
-<li>een <b>winkelmedewerker</b> voor onze showroom in Rijswijk (woensdag, vrijdag en zaterdag, later mogelijk meer dagen) — vooral iemand die ergens een passie voor kan ontwikkelen en klanten blij maakt</li>
+<li>een <b>winkelmedewerker</b> voor onze showroom in Rijswijk (woensdag, vrijdag en zaterdag, later mogelijk meer dagen), vooral iemand die ergens een passie voor kan ontwikkelen en klanten blij maakt</li>
 </ul>
 <p>Voor de technische functies zoeken we mensen die de zonweringbranche al kennen. Voor de showroom hoeft dat niet, daar gaat het ons om de juiste persoon.</p>
 <p><b>Ben jij het zelf?</b> Geen sollicitatiegedoe: <a href="${WA_INTERESSE}" style="color:#FF6B00;"><b>WhatsApp ons</b></a>, het berichtje staat al voor je klaar en je vult alleen even je gegevens aan. Ook voor vragen over bijvoorbeeld het salaris kun je ons <a href="${WA_INTERESSE}" style="color:#FF6B00;">even appen</a>, of mail gewoon terug.</p>
@@ -95,12 +95,12 @@ async function verstuur(adres, groet) {
   const state = laadState();
   const regels = fs.readFileSync(CSV, 'utf8').trim().split('\n').slice(1).map((r) => r.split(';'));
   const wachtrij = regels.filter((k) => !state[k[1]]);
-  if (!wachtrij.length) { console.log('alles verstuurd — klaar'); return; }
+  if (!wachtrij.length) { console.log('alles verstuurd, klaar'); return; }
   const batch = wachtrij.slice(0, BATCH);
   console.log(`[${new Date().toLocaleString('sv-SE')}] batch start: ${batch.length} van ${wachtrij.length} resterend (totaal ${regels.length})`);
   let ok = 0, fout = 0;
   for (const [naam, email, , type] of batch) {
-    if (fs.existsSync(KILL)) { console.log('kill-switch — batch afgebroken'); break; }
+    if (fs.existsSync(KILL)) { console.log('kill-switch, batch afgebroken'); break; }
     const res = await verstuur(email, aanhef(naam, type));
     if (res.ok) { ok++; state[email] = new Date().toISOString(); fs.writeFileSync(STATE, JSON.stringify(state)); }
     else { fout++; console.log('  FOUT', email, res.fout); }

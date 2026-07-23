@@ -2783,5 +2783,70 @@
       }
     ],
     "processedAt": "2026-07-21T17:15:11.456Z"
+  },
+  "item:c2ff1269-a1df-4713-9336-c66e873ffef5": {
+    "summary": "Martijn  Van Gelder",
+    "grippCompanyId": 99586,
+    "grippOfferId": 8707,
+    "rpDocNumber": "20269770",
+    "allOffers": [
+      {
+        "grippOfferId": 8707,
+        "rpDocNumber": "20269770"
+      }
+    ],
+    "processedAt": "2026-07-22T16:30:43.153Z"
+  },
+  "item:37c1e70c-13b2-4d8c-8ac9-cfd5201d275a": {
+    "summary": "Margreet Steup-Beekman",
+    "grippCompanyId": 99587,
+    "grippOfferId": 8708,
+    "rpDocNumber": "202610094",
+    "allOffers": [
+      {
+        "grippOfferId": 8708,
+        "rpDocNumber": "202610094"
+      }
+    ],
+    "processedAt": "2026-07-22T16:30:46.711Z"
+  },
+  "item:cb75f66e-bafb-4d44-a61c-3e26f25f5701": {
+    "summary": "Da-Lou de Bruin",
+    "grippCompanyId": 99588,
+    "grippOfferId": 8709,
+    "rpDocNumber": "202610212",
+    "allOffers": [
+      {
+        "grippOfferId": 8709,
+        "rpDocNumber": "202610212"
+      }
+    ],
+    "processedAt": "2026-07-22T16:30:50.180Z"
+  },
+  "item:bbc3a8fd-1053-473e-b193-17ff99af28a6": {
+    "summary": "Angela  Van Spijk",
+    "grippCompanyId": 99589,
+    "grippOfferId": 8710,
+    "rpDocNumber": "20269299",
+    "allOffers": [
+      {
+        "grippOfferId": 8710,
+        "rpDocNumber": "20269299"
+      }
+    ],
+    "processedAt": "2026-07-22T16:30:53.717Z"
+  },
+  "item:970ce7fb-8775-4f2f-886f-abb5b374644a": {
+    "summary": "van leeuwen",
+    "grippCompanyId": 99590,
+    "grippOfferId": 8711,
+    "rpDocNumber": "20269417",
+    "allOffers": [
+      {
+        "grippOfferId": 8711,
+        "rpDocNumber": "20269417"
+      }
+    ],
+    "processedAt": "2026-07-22T16:30:57.330Z"
   }
 }

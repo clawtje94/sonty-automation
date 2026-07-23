@@ -36,6 +36,12 @@ const RP_API_KEY = 'reuzenpanda_cpat_WMD2KmDRune53bj7.d0_ls8loPpAjb2TrSNOS_Xd_QL
 const PID = '731483fa-ef6b-4aae-afcf-883ec09219dd';
 const BACKLOG_ID = 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7';
 const OC_STATUS = '64788881-632c-4217-8f56-d20732c94b08';
+// TE VER-herstelactie 23-07 (Daimy): deze bord-items zijn ouder dan 7 dagen maar moeten
+// alsnog normaal verwerkt worden. File weghalen of legen = uitzondering vervalt.
+const HERSTEL_IDS = (() => {
+  try { return new Set(JSON.parse(fs.readFileSync(path.join(__dirname, '../data/tever-herstel-backup.json'), 'utf8')).items.map((x) => x.itemId)); }
+  catch { return new Set(); }
+})();
 const GECONTROLEERD = 'c860c5ae-7eef-45cc-8e79-3b4bcd285b7a';
 const HANDMATIG = '6221c9fd-c835-45dc-a494-f81e40a8e184';
 const TEVER_STATUS = '20815fa5-94ce-40a3-8e1f-d36093de006f';
@@ -1619,7 +1625,7 @@ async function main() {
   const sevenDaysAgo = Date.now() - 7 * 86400000;
   const itemsData = { items: await getItemsCached('v4-run stap 1') };
   const ocItems = (itemsData?.items || []).filter(i =>
-    i.status_id === OC_STATUS && i.timestamp_created > sevenDaysAgo &&
+    i.status_id === OC_STATUS && (i.timestamp_created > sevenDaysAgo || HERSTEL_IDS.has(i.id)) &&
     !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
   );
 
@@ -1875,7 +1881,7 @@ async function main() {
   const AI_SHEET_STATUS = 'dc0efe4f-2cd6-45d8-aeff-7f1c817a0fb2'; // Ai offerte verstuurd
   const INMETEN_SHEET_STATUS = '2e9819bd-26f0-4082-8f18-32bb48f87f54'; // Inmeten inplannen
   const gcItems = (gcItemsData?.items || []).filter(i =>
-    (i.status_id === GECONTROLEERD || i.status_id === TEVER_STATUS || i.status_id === GORDIJNEN_STATUS || i.status_id === WINKEL_SHEET_STATUS || i.status_id === AI_SHEET_STATUS || i.status_id === INMETEN_SHEET_STATUS) && i.timestamp_created > sevenDaysAgo &&
+    (i.status_id === GECONTROLEERD || i.status_id === TEVER_STATUS || i.status_id === GORDIJNEN_STATUS || i.status_id === WINKEL_SHEET_STATUS || i.status_id === AI_SHEET_STATUS || i.status_id === INMETEN_SHEET_STATUS) && (i.timestamp_created > sevenDaysAgo || HERSTEL_IDS.has(i.id)) &&
     !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
   );
 

@@ -285,3 +285,27 @@ tijdmetingen (check-in/uit) terwijl de monteurs nog niet hoeven om te schakelen.
 - V25: waar komen inmeet-aanvragen nu binnen (kantoor/Bookings/telefonisch), zodat de
   pilot naast de bestaande stroom kan meten?
 - V26: akkoord dat de pilot inmeet-jobs in Planado SCHRIJFT (alleen inmeten, niks anders)?
+
+### Inmeet-pilot: hoe het NU werkt (onderzocht 23-07, read-only)
+- Werkvoorraad: RP-bord status "Inmeten inplannen" (2e9819bd-…) — NU 29 leads. Na plannen
+  moet de status naar "Gripp invullen" (f895f76f-…). Status-wijziging in RP = expliciete
+  opdracht Daimy 23-07 (enige toegestane RP-schrijfactie, alleen deze status-stap).
+- Agenda: komende 4 weken staan er al 79 inmeet-afspraken + 100 montages in Outlook/Bookings.
+  Beschikbaarheid inmeters staat nu in Outlook; Daimy kan werktijden ook doorgeven.
+- Bestaande sync: scripts/outlook-planado-sync.js (Outlook→Planado, read-only uit Outlook,
+  dedup op external_id=Outlook-event-id, geen notificaties naar monteurs, dry-run default;
+  laatst gebruikt 8 juli). Dat is de "automatische route" die Daimy bedoelde.
+- Planado herinneringen/locatie-tracking: NIET uit de API te verifiëren met wat we hebben —
+  verifiëren in de web-app instellingen + met een TESTJOB op Daimy's eigen adres/nummer,
+  zodat we zien welke sms/mail de klant krijgt (dubbele berichten met Jaimy voorkomen!).
+
+### Soepel overlopen (migratie-ontwerp)
+1. Bestaande 79 inmeet-afspraken BLIJVEN in Outlook; de bestaande sync spiegelt ze naar
+   Planado (dedup voorkomt dubbels) → inmeters zien vanaf dag 1 hun HELE agenda in de app,
+   nooit twee halve agenda's.
+2. Nieuwe afspraken (pilot): planner → Planado-job + RP-status naar "Gripp invullen";
+   kantoor kijkt mee in Planado-web. Uitzoekpunt: nieuwe afspraken ook terugspiegelen naar
+   Outlook zolang kantoor daar leeft (Graph-scope voor agenda checken).
+3. Beschikbaarheid: pilotfase = werktijden van Daimy (V23) + Outlook-blokkades lezen;
+   later Planado-shifts als bron.
+4. Testjob eerst (notificaties/tracking checken) → dan 1-2 weken schaduw → dan live.

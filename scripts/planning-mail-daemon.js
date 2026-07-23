@@ -5,10 +5,12 @@
 // kolom B "Ai opmerking" met wat er is gebeurd. Draait 1 ronde per aanroep (launchd
 // nl.sonty.planning-mail, elke 30 min).
 //
-// Kolommen (sinds 23-07, Daimy voegde C+D toe): A checkbox | B Ai opmerking (KORT: alleen wat
-//           er veranderd is) | C Datum aanpassing | D leverancier | E naam+klantnr | F Plaats |
-//           G Regio | H Ordernummer | I Besteld | J Geleverd op | K Datum gepland | L Teams |
-//           M Team opmerking | N Wat is besteld | O weken-formule
+// Kolommen (23-07, indeling Daimy): A checkbox | B Ai opmerking (KORT) | C Datum aanpassing |
+//   D leverancier | E Gripp-nummer | F Naam | G Opmerking bestelling (nabestelling=ROOD) |
+//   H Plaats | I Regio | J Ordernummer | K Besteld | L Geleverd op | M gepland | N Teams |
+//   O Team opmerking | P Wat is besteld | Q weken-formule
+// Per levering één rij; zelfde Gripp-nr = zelfde klant. Als álle rijen van een nummer een
+// "Geleverd op" hebben, markeert de daemon ze als compleet (Daimy 23-07).
 // Alleen leveranciersmail wordt verwerkt; klantmail (bv. op info@) wordt overgeslagen.
 const fs = require('fs');
 const os = require('os');
@@ -71,9 +73,9 @@ async function grippPlaatsViaOffer(nummers) {
     const perNr = {};
     j.forEach((resp, i) => {
       const rows = resp.result?.rows || [];
-      if (rows.length === 1 && rows[0].company?.id) perNr[nummers[i]] = rows[0].company.id;
+      if (rows.length === 1 && rows[0].company?.id) perNr[nummers[i]] = { companyId: rows[0].company.id, regels: (rows[0].offerlines || []).map((l) => ({ n: l.amount || 1, product: String(l.product?.searchname || l.description || '').trim() })) };
     });
-    const ids = [...new Set(Object.values(perNr))];
+    const ids = [...new Set(Object.values(perNr).map((x) => x.companyId))];
     if (!ids.length) return {};
     const res2 = await fetch('https://api.gripp.com/public/api3.php', {
       method: 'POST',
@@ -83,9 +85,31 @@ async function grippPlaatsViaOffer(nummers) {
     const stadVan = {};
     for (const c of (((await res2.json())[0] || {}).result?.rows || [])) stadVan[c.id] = String(c.visitingaddress_city || '').trim();
     const uit = {};
-    for (const [nr, cid] of Object.entries(perNr)) if (stadVan[cid]) uit[nr] = stadVan[cid];
+    for (const [nr, info] of Object.entries(perNr)) uit[nr] = { stad: stadVan[info.companyId] || '', regels: info.regels };
     return uit;
   } catch (e) { console.log('  gripp-offer-fout:', e.message); return {}; }
+}
+// Naam "Hachioui 6018 (samenwerking)" -> { nr, naam, toevoeging } voor kolommen E/F/G
+function splitsNaam(vol) {
+  let naam = String(vol || '').trim();
+  const nr = (naam.match(/\b(\d{4,7})\b/) || [])[1] || '';
+  const toevoegingen = [];
+  naam = naam.replace(/\(([^)]*)\)/g, (_, x) => { if (x.trim()) toevoegingen.push(x.trim()); return ' '; });
+  naam = naam.replace(/\b(nabestelling|prive|privé|spoed|samenwerking|winkelklant)\b/gi, (w) => { toevoegingen.push(w.toLowerCase()); return ' '; });
+  if (nr) naam = naam.replace(nr, ' ');
+  naam = naam.replace(/[,]/g, ' ').replace(/\s+/g, ' ').trim();
+  return { nr, naam: naam || String(vol || '').trim(), toevoeging: [...new Set(toevoegingen)].join(', ') };
+}
+// Offerte-regel -> leverancier (conservatief: alleen bij duidelijke productwoorden)
+const REGEL_SKIP = /montage|korting|hoogwerker|tahoma|switch|bezoek|demontage|afvoer|spoedlevering|verzend/i;
+const REGEL_LEV = [[/zip|screen|rolluik|suneye|knikarm|uitval|square|markies|volant/i, 'Sunmaster'], [/hordeur|rolhor|inklem|pliss|\bhor(ren)?\b/i, 'Unilux']];
+function verwachteLeveranciers(regels) {
+  const uit = {};
+  for (const r of (regels || [])) {
+    if (!r.product || REGEL_SKIP.test(r.product)) continue;
+    for (const [re, lev] of REGEL_LEV) if (re.test(r.product)) { (uit[lev] = uit[lev] || []).push(r.n + 'x ' + r.product); break; }
+  }
+  return uit;
 }
 const serial = (d, m, y) => Math.round((Date.UTC(y, m - 1, d) - Date.UTC(1899, 11, 30)) / 86400000);
 const ddmmyyyy = (d, m, y) => `${String(d).padStart(2, '0')}-${String(m).padStart(2, '0')}-${y}`;
@@ -269,7 +293,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     const kaal = String(ordernr).replace(/^CV/i, '').replace(/^SN/i, '');
     if (!kaal) return -1;
     for (let i = 1; i < rows.length; i++) {
-      const f = String((rows[i] || [])[7] ?? '').trim();
+      const f = String((rows[i] || [])[9] ?? '').trim();
       if (!f) continue;
       if (f === String(ordernr) || f === kaal) return i;
       const fd = f.replace(/\D/g, ''), kd = kaal.replace(/\D/g, '');
@@ -278,7 +302,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     return -1;
   };
   let laatste = 0;
-  for (let i = 0; i < rows.length; i++) if (String((rows[i] || [])[4] ?? '').trim() || String((rows[i] || [])[7] ?? '').trim()) laatste = i + 1;
+  for (let i = 0; i < rows.length; i++) if (String((rows[i] || [])[5] ?? '').trim() || String((rows[i] || [])[9] ?? '').trim() || String((rows[i] || [])[4] ?? '').trim()) laatste = i + 1;
 
   const waarden = []; // values.batchUpdate data
   const formatRequests = []; // extra opmaak (datumformat nieuwe rijen)
@@ -302,9 +326,9 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
       const i = vindRij(a.ordernr);
       if (i >= 0) {
         const rij = i + 1;
-        if (a.geleverdSerial && (rows[i] || [])[9] !== a.geleverdSerial) {
-          waarden.push({ range: `'${TAB}'!J${rij}`, values: [[a.geleverdTekst]] });
-          rows[i][9] = a.geleverdSerial;
+        if (a.geleverdSerial && (rows[i] || [])[11] !== a.geleverdSerial) {
+          waarden.push({ range: `'${TAB}'!L${rij}`, values: [[a.geleverdTekst]] });
+          rows[i][11] = a.geleverdSerial;
           stempelRij(rij, a); opm(rij, a.kort || a.opm); blauw.add(i); verslag.push(`rij ${rij}: ${a.kort || a.opm}`);
         } else if (a.type === 'update') {
           verslag.push(`rij ${rij}: leverdatum stond al goed (${a.geleverdTekst})`);
@@ -345,7 +369,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     // Plaats (D) via Gripp + Regio (E) via plaats->regio-mapping uit de bestaande rijen
     const telling = {};
     for (const r of rows) {
-      const p = String((r || [])[5] || '').trim().toLowerCase().replace(/^'s-gravenhage$|^denhaag$/, 'den haag'), rg = String((r || [])[6] || '').trim();
+      const p = String((r || [])[7] || '').trim().toLowerCase().replace(/^'s-gravenhage$|^denhaag$/, 'den haag'), rg = String((r || [])[8] || '').trim();
       if (p && rg) (telling[p] = telling[p] || {})[rg] = (telling[p][rg] || 0) + 1;
     }
     const normPlaats = (pl) => String(pl || '').trim().toLowerCase().replace(/^'s-gravenhage$|^denhaag$/, 'den haag');
@@ -366,10 +390,10 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     for (let i = 0; i < uniek.length; i++) blauw.add(start - 1 + i);
     // Datumkolommen van de nieuwe rijen in de sheet-stijl (dd-mm) zetten
     formatRequests.push({ repeatCell: {
-      range: { sheetId: SHEET_ID, startRowIndex: start - 1, endRowIndex: start - 1 + uniek.length, startColumnIndex: 8, endColumnIndex: 10 },
+      range: { sheetId: SHEET_ID, startRowIndex: start - 1, endRowIndex: start - 1 + uniek.length, startColumnIndex: 10, endColumnIndex: 12 },
       cell: { userEnteredFormat: { numberFormat: { type: 'DATE', pattern: 'dd-mm' } } },
       fields: 'userEnteredFormat.numberFormat' } });
-    uniek.forEach((n, i) => verslag.push(`rij ${start + i} NIEUW: ${n.naam} ${n.ordernr}${plaatsVan[zoeknaam(n.naam)] ? ' (' + plaatsVan[zoeknaam(n.naam)] + ')' : ''}`));
+    alle.forEach((n, i) => verslag.push(`rij ${start + i} NIEUW: ${n.naam} ${n.nr || ''} ${n.ordernr || ''}`));
   }
   // Opmerkingen bij bestaande rijen: bestaande tekst aanvullen
   for (const [rij, teksten] of Object.entries(opmPerRij)) {
@@ -380,11 +404,40 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
   if (waarden.length) {
     await sheets.spreadsheets.values.batchUpdate({ spreadsheetId: SHEET, requestBody: { valueInputOption: 'USER_ENTERED', data: waarden } });
     const requests = [...blauw].map((r0) => ({ repeatCell: {
-      range: { sheetId: SHEET_ID, startRowIndex: r0, endRowIndex: r0 + 1, startColumnIndex: 0, endColumnIndex: 15 },
+      range: { sheetId: SHEET_ID, startRowIndex: r0, endRowIndex: r0 + 1, startColumnIndex: 0, endColumnIndex: 17 },
       cell: { userEnteredFormat: { backgroundColor: BLAUW } }, fields: 'userEnteredFormat.backgroundColor' } }));
     requests.push(...formatRequests);
     await sheets.spreadsheets.batchUpdate({ spreadsheetId: SHEET, requestBody: { requests } });
   }
+  // COMPLEET-CHECK (Daimy 23-07: "we moeten wat verzinnen zodat we weten dat het compleet is"):
+  // per Gripp-nummer met AI-beheerde rijen: hebben ÁLLE rijen van dat nummer een "Geleverd op",
+  // dan komt er "✔ compleet (N leveringen binnen)" bij in B en worden de E-cellen groen.
+  try {
+    const vers = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET, range: `'${TAB}'!A1:Q2500` });
+    const vr = vers.data.values || [];
+    const perNr = {};
+    for (let i = 2; i < vr.length; i++) {
+      const nr = String((vr[i] || [])[4] || '').trim();
+      if (!nr) continue;
+      (perNr[nr] = perNr[nr] || []).push({ rij: i + 1, geleverd: !!String((vr[i] || [])[11] || '').trim(), b: String((vr[i] || [])[1] || ''), aiRij: !!String((vr[i] || [])[2] || '').trim() });
+    }
+    const cWaarden = [], cFormats = [];
+    for (const [nr, lijst] of Object.entries(perNr)) {
+      if (!lijst.some((x) => x.aiRij)) continue;               // alleen nummers waar de AI bij betrokken is
+      if (!lijst.every((x) => x.geleverd)) continue;           // pas compleet als ALLES binnen is
+      for (const x of lijst) {
+        if (/✔ compleet/.test(x.b)) continue;
+        cWaarden.push({ range: `'${TAB}'!B${x.rij}`, values: [[(x.b ? x.b + '\n' : '') + `✔ compleet (${lijst.length} levering${lijst.length > 1 ? 'en' : ''} binnen)`]] });
+        cFormats.push({ repeatCell: { range: { sheetId: SHEET_ID, startRowIndex: x.rij - 1, endRowIndex: x.rij, startColumnIndex: 4, endColumnIndex: 5 },
+          cell: { userEnteredFormat: { backgroundColor: { red: 0.72, green: 0.88, blue: 0.72 } } }, fields: 'userEnteredFormat.backgroundColor' } });
+        verslag.push(`rij ${x.rij}: ✔ compleet (${nr}, ${lijst.length} leveringen)`);
+      }
+    }
+    if (cWaarden.length) {
+      await sheets.spreadsheets.values.batchUpdate({ spreadsheetId: SHEET, requestBody: { valueInputOption: 'USER_ENTERED', data: cWaarden } });
+      await sheets.spreadsheets.batchUpdate({ spreadsheetId: SHEET, requestBody: { requests: cFormats } });
+    }
+  } catch (e) { console.log('  compleet-check fout:', e.message); }
   saveState(state);
   if (verslag.length) audit('planning-mail', 'sheet-bijgewerkt', { tab: TAB, wijzigingen: verslag.length, detail: verslag.slice(0, 20) });
   console.log(verslag.length ? verslag.map((v) => '  ' + v).join('\n') : '  geen sheet-wijzigingen');

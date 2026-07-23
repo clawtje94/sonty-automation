@@ -1,5 +1,11 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
 
+## MAGAZIJN-INDELING + COMPLEET-SIGNAAL (23 juli ~09:50, spec Daimy)
+- Nieuwe kolommen (door Daimy): E=Gripp-nummer, F=Naam, G=Opmerking bestelling. Alle 1.255 rijen gesplitst (nummer/naam/toevoeging), 66 nabestellingen ROOD in G. Daemon volledig omgebouwd (A..Q-indexen) en splitst nieuwe namen zelf.
+- REGEL: nabestelling = VOORRANG (rood in G + prefix in B). Per levering één rij; zelfde Gripp-nr = zelfde klant.
+- VERWACHTE LEVERINGEN: bij een hoofdbestelling kijkt de daemon in de Gripp-offerte; wijzen de productregels op een leverancier (Sunmaster/Unilux-mapping, conservatief) waarvan nog geen rij bestaat, dan maakt hij alvast een rij "verwachte levering — nog geen bevestiging" aan.
+- COMPLEET: hebben álle rijen van een Gripp-nr een "Geleverd op", dan zet de daemon "✔ compleet (N leveringen binnen)" in B + groene E-cel. Eenmalige run markeerde 15 rijen (o.a. 5930 vd heijden = 3 leveringen compleet). Check draait elke ronde mee.
+
 ## DOORBRAAK: KLANTNR = GRIPP-OFFERTENUMMER (23 juli)
 - Het nummer in de sheetnaam ("Hachioui 6018") is het Gripp-OFFERTEnummer; offer.get op number geeft de company (exacte plaats) én de volledige hoofdbestelling-regels (ook combi-orders over meerdere leveranciers).
 - Daemon: plaats/regio nu EERST via offernummer (100% zeker), naam-zoek alleen als fallback; 's-Gravenhage/DenHaag-alias naar Den Haag. 7 eerder-lege rijen exact gevuld (o.a. van der Lans=Wateringen, Meijer=Nootdorp).

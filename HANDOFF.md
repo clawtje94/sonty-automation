@@ -1,5 +1,9 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
 
+## LEVERANCIERSMAILS ECHT LEZEN (23 juli ~10:15, feedback Daimy "alles wordt op ref besteld")
+- Nieuwe parsers in de daemon: (1) **Sunmaster Afleverbon** ("Afleverbon NNN uw referentie X ons ordernr. NNN") = LEVERSIGNAAL -> Geleverd op = maildatum; (2) **webshop-bevestigingen** (Markiezen Nederland + Poedercoating Culemborg, zelfde sjabloon): referentie/orderdatum/bestelling uit de MAILTEKST ("Uw referentie van huis (5859, SPOED)").
+- 4 "handmatig bekijken"-rijen gerepareerd: 1404 (Markiezen van huis 5859 spoed), 1407 (G.F. Development BV spoed, poedercoat), 1408 (Petrovic spoed, poedercoat), 1413 (Sunmaster afleverbon 29240 Versluis nabestelling, order 2609209, geleverd 22-07).
+
 ## MAGAZIJN-INDELING + COMPLEET-SIGNAAL (23 juli ~09:50, spec Daimy)
 - Nieuwe kolommen (door Daimy): E=Gripp-nummer, F=Naam, G=Opmerking bestelling. Alle 1.255 rijen gesplitst (nummer/naam/toevoeging), 66 nabestellingen ROOD in G. Daemon volledig omgebouwd (A..Q-indexen) en splitst nieuwe namen zelf.
 - REGEL: nabestelling = VOORRANG (rood in G + prefix in B). Per levering één rij; zelfde Gripp-nr = zelfde klant.

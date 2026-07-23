@@ -68,6 +68,18 @@ function duidPdf(t) {
       producten: producten.map((p, i) => omschr[i] ? `${p} (${omschr[i]})` : p),
     };
   }
+  // ROMA — opdrachtbevestiging: "Levertermijn: week 38/2026", regels "1,00 pc zipQUADRO ..."
+  if (/ROMA KG|romabenelux/i.test(t)) {
+    const producten = [...t.matchAll(/^\s*\d+\s+([\d,.]+)\s*pc\s+(.+?)\s{2,}[\d.,]+/gm)]
+      .map((m) => Math.round(parseFloat(m[1].replace(',', '.'))) + 'x ' + m[2].replace(/\s+/g, ' ').trim().slice(0, 80));
+    return {
+      leverancier: 'ROMA',
+      ordernr: pak(t, /(?:Opdracht(?:s)?(?:nummer|nr)\.?:?\s*)(\d{6,8})/i),
+      referentie: pak(t, /Commissie:?\s*([^\n]{2,60})/i),
+      leverweek: pak(t, /Levertermijn:?\s*(week\s*[\d/]+)/i),
+      producten,
+    };
+  }
   // MARKIEZEN NEDERLAND / generiek NL — "Order nr. : 49907", "Order referentie : ..."
   if (/Order referentie/i.test(t)) {
     const na = t.split(/Aantal\s+Omschrijving/i)[1] || '';

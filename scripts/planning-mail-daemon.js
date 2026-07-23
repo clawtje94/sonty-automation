@@ -28,7 +28,7 @@ const SHEET_ID = 273253041;
 const BLAUW = { red: 0.812, green: 0.886, blue: 0.953 };
 const MAILBOXEN = ['orders@sonty.nl', 'info@sonty.nl'];
 const STATE_FILE = '/Users/clawdboot/sonty/data/planning-mail-state.json';
-const LEVERANCIERS = /sunmaster\.nl|@ne\.nl|roma\.de|toppoint\.eu|unilux\.nl|velux|fakro|markiezen|somfy|dersimo|peitsman|poedercoat/i;
+const LEVERANCIERS = /sunmaster\.nl|@ne\.nl|roma\.de|romabenelux|toppoint\.eu|unilux\.nl|velux|fakro|markiezen|somfy|dersimo|peitsman|poedercoat/i;
 const TG = { token: SECRETS.TELEGRAM_BOT_TOKEN, chat: SECRETS.TELEGRAM_CHAT_ID };
 const MAANDEN = { januari: 1, februari: 2, maart: 3, april: 4, mei: 5, juni: 6, juli: 7, augustus: 8, september: 9, oktober: 10, november: 11, december: 12 };
 
@@ -211,6 +211,7 @@ function verrijkMetPdf(a, pdf) {
     a.geleverdSerial = serial(d, mnd, j);
   }
   if (a.kort && pdf.leverdatum && !/Geleverd op/.test(a.kort)) a.kort += `, levering ${pdf.leverdatum}`;
+  if (pdf.leverweek && !a.geleverdTekst) { a.geleverdTekst = pdf.leverweek; if (a.kort && !a.kort.includes(pdf.leverweek)) a.kort += `, levertermijn ${pdf.leverweek}`; }
   a.opm = (a.opm || '').replace(/\s*(Details|Productdetails|Klantnaam|Klantreferentie|Ordernummer en details|Wijziging staat|Bevestigde leverdatum staat)[^.]*in (de )?(PDF-)?bijlage[^.]*\./i, '') +
     ` PDF gelezen (${pdf.leverancier}): ${KORT(pdf.producten, 160) || 'geen productregels'}${pdf.leverdatum ? ', leverdatum ' + pdf.leverdatum : ''}.`;
 }
@@ -250,6 +251,13 @@ function duiden(m) {
   if (/Retourmelding/i.test(s)) {
     const ref = (m.body.match(/referentie\s+(\S+?)\s*\(/) || m.body.match(/referentie\s+(\S+)/) || [])[1] || '(onbekend)';
     return { type: 'nieuw-of-opmerking', ordernr: ref, naam: `RETOUR ${ref}`, lev: 'NE', kort: 'Retour: afhaaldag bevestigen bij NE', besteld: '', wat: 'Retourzending, afhaaldag bevestigen bij NE', opm: `${s} (mail ${besteld}): retouropdracht ${ref} wacht op bevestiging van de afhaaldag bij NE. ACTIE NODIG.` };
+  }
+  // ROMA OPDRACHTBEVESTIGING (23-07): "ROMA opdrachtbevestiging 8650217 Commissie: Cheloi (6229) Bestel nr. BEST_152"
+  if ((x = s.match(/^ROMA opdrachtbevestiging\s+(\d+)\s+Commissie:\s*(.*?)\s*Bestel/i))) {
+    const commissie = (x[2] || '').replace(/^\+$/, '').trim();
+    return { type: 'nieuw-of-opmerking', ordernr: x[1], naam: commissie || '(commissie leeg, zie PDF)', lev: 'ROMA',
+      kort: `Nieuw: ROMA opdrachtbevestiging ${x[1]}`, besteld, wat: 'ROMA, details in PDF-bijlage',
+      opm: `ROMA opdrachtbevestiging ${x[1]}, commissie ${commissie || '?'} (mail ${besteld}).` };
   }
   // SUNMASTER AFLEVERBON (ontdekt 23-07): "Afleverbon 29240 uw referentie Versluis (nabestelling) ons ordernr. 2609xxx"
   // = de spullen zijn GELEVERD -> Geleverd op = maildatum.
@@ -391,7 +399,7 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
   const gezien = new Set();
   const uniek = nieuweRijen.filter((n, i) => { const k = n.ordernr ? n.ordernr + '|' + n.naam : 'mail-' + i; if (gezien.has(k)) return false; gezien.add(k); return true; });
   if (uniek.length) {
-    // Plaats (D) via Gripp + Regio (E) via plaats->regio-mapping uit de bestaande rijen
+    // Plaats (H) via Gripp-offertenummer + Regio (I) via plaats->regio-mapping (kolommen H/I)
     const telling = {};
     for (const r of rows) {
       const p = String((r || [])[7] || '').trim().toLowerCase().replace(/^'s-gravenhage$|^denhaag$/, 'den haag'), rg = String((r || [])[8] || '').trim();
@@ -399,26 +407,46 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     }
     const normPlaats = (pl) => String(pl || '').trim().toLowerCase().replace(/^'s-gravenhage$|^denhaag$/, 'den haag');
     const regioVan = (pl) => { const t = telling[normPlaats(pl)]; return t ? Object.entries(t).sort((a, b) => b[1] - a[1])[0][0] : ''; };
-    const nummers = [...new Set(uniek.map((n) => (String(n.naam).match(/\b(\d{4,6})\b/) || [])[1]).filter(Boolean))];
-    const plaatsViaNr = await grippPlaatsViaOffer(nummers);
-    const namen = [...new Set(uniek.filter((n) => !SKIP_PLAATS.test(n.naam) && !plaatsViaNr[(String(n.naam).match(/\b(\d{4,6})\b/) || [])[1]]).map((n) => zoeknaam(n.naam)).filter((z) => z.length >= 3))];
+    const gesplitst = uniek.map((n) => ({ ...n, ...splitsNaam(n.naam) }));
+    const nummers = [...new Set(gesplitst.map((n) => n.nr).filter(Boolean))];
+    const offerInfo = await grippPlaatsViaOffer(nummers);
+    const namen = [...new Set(gesplitst.filter((n) => !SKIP_PLAATS.test(n.naam) && !(n.nr && offerInfo[n.nr]?.stad)).map((n) => zoeknaam(n.naam)).filter((z) => z.length >= 3))];
     const plaatsVan = await grippPlaatsen(namen);
+    // VERWACHTE LEVERINGEN: hoofdbestelling met meerdere leveranciers in de Gripp-offerte
+    const extraRijen = [];
+    for (const n of gesplitst) {
+      if (!n.nr || /nabestelling/i.test(n.toevoeging) || !offerInfo[n.nr]?.regels?.length) continue;
+      const verwacht = verwachteLeveranciers(offerInfo[n.nr].regels);
+      const alAanwezig = new Set(rows.map((r) => (String((r || [])[4] || '').trim() === n.nr ? String((r || [])[3] || '').trim() : null)).filter(Boolean));
+      alAanwezig.add(n.lev || '');
+      gesplitst.forEach((x) => { if (x.nr === n.nr && x.lev) alAanwezig.add(x.lev); });
+      for (const [lev, producten] of Object.entries(verwacht)) {
+        if (alAanwezig.has(lev) || extraRijen.some((e) => e.nr === n.nr && e.lev === lev)) continue;
+        extraRijen.push({ kort: `Verwachte levering uit hoofdbestelling ${n.nr} — nog geen bevestiging van ${lev}`, lev, nr: n.nr, naam: n.naam, toevoeging: n.toevoeging, ordernr: '', besteld: '', geleverd: '', wat: 'verwacht: ' + producten.join(' + ').slice(0, 180) });
+        verslag.push(`verwachte levering: ${n.naam} ${n.nr} bij ${lev}`);
+      }
+    }
+    const alleNieuw = [...gesplitst, ...extraRijen];
     const start = laatste + 1;
-    const values = uniek.map((n, i) => {
+    const values = alleNieuw.map((n, i) => {
       const r = start + i;
-      const plaats = plaatsVan[zoeknaam(n.naam)] || '';
-      // Kolom A leeg laten: daar zit een checkbox in die het team zelf doortrekt (Daimy 22-07)
-      return ['', n.opm, n.naam, plaats, plaats ? regioVan(plaats) : '', n.ordernr, n.besteld, n.geleverd, '', '', '', n.wat,
-        `=IF(I${r + 1060}=TRUE; ""; IF(ISBLANK(G${r}); ""; DATEDIF(G${r}; TODAY(); "D")))`];
+      const plaats = (n.nr && offerInfo[n.nr]?.stad) || plaatsVan[zoeknaam(n.naam)] || '';
+      const kortTekst = (/nabestelling/i.test(n.toevoeging || '') ? 'VOORRANG (nabestelling) — ' : '') + (n.kort || n.opm);
+      // Kolom A leeg laten: checkbox trekt het team zelf door (Daimy 22-07)
+      return ['', kortTekst, vandaagKort, n.lev || '', n.nr || '', n.naam, n.toevoeging || '', plaats, plaats ? regioVan(plaats) : '', n.ordernr, n.besteld, n.geleverd, '', '', '', n.wat,
+        `=IF(M${r + 1060}=TRUE; ""; IF(ISBLANK(K${r}); ""; DATEDIF(K${r}; TODAY(); "D")))`];
     });
-    waarden.push({ range: `'${TAB}'!A${start}:M${start + uniek.length - 1}`, values });
-    for (let i = 0; i < uniek.length; i++) blauw.add(start - 1 + i);
-    // Datumkolommen van de nieuwe rijen in de sheet-stijl (dd-mm) zetten
+    waarden.push({ range: `'${TAB}'!A${start}:Q${start + alleNieuw.length - 1}`, values });
+    for (let i = 0; i < alleNieuw.length; i++) blauw.add(start - 1 + i);
+    // rood op G bij nabestellingen + datumformat K/L
+    alleNieuw.forEach((n, i) => { if (/nabestelling/i.test(n.toevoeging || '')) formatRequests.push({ repeatCell: {
+      range: { sheetId: SHEET_ID, startRowIndex: start - 1 + i, endRowIndex: start + i, startColumnIndex: 6, endColumnIndex: 7 },
+      cell: { userEnteredFormat: { backgroundColor: { red: 0.937, green: 0.42, blue: 0.39 } } }, fields: 'userEnteredFormat.backgroundColor' } }); });
     formatRequests.push({ repeatCell: {
-      range: { sheetId: SHEET_ID, startRowIndex: start - 1, endRowIndex: start - 1 + uniek.length, startColumnIndex: 10, endColumnIndex: 12 },
+      range: { sheetId: SHEET_ID, startRowIndex: start - 1, endRowIndex: start - 1 + alleNieuw.length, startColumnIndex: 10, endColumnIndex: 12 },
       cell: { userEnteredFormat: { numberFormat: { type: 'DATE', pattern: 'dd-mm' } } },
       fields: 'userEnteredFormat.numberFormat' } });
-    alle.forEach((n, i) => verslag.push(`rij ${start + i} NIEUW: ${n.naam} ${n.nr || ''} ${n.ordernr || ''}`));
+    alleNieuw.forEach((n, i) => verslag.push(`rij ${start + i} NIEUW: ${n.naam} ${n.nr || ''} ${n.ordernr || ''}`));
   }
   // Opmerkingen bij bestaande rijen: bestaande tekst aanvullen
   for (const [rij, teksten] of Object.entries(opmPerRij)) {

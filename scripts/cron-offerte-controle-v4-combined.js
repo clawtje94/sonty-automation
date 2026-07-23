@@ -1675,12 +1675,10 @@ async function main() {
     const bedrag = total * (1 - discount / 100);
 
     // STAP 1: ROUTING
+    // TE VER routeert NIET meer vóór de verwerking (Daimy 23-07): eerst krijgt de offerte de
+    // volledige v4-verwerking (prijzen + opmaak), en gaat DAARNA pas naar TE VER. Reden: soms
+    // wordt zo'n klant alsnog geholpen (casus de Wolf/Bunnik) en dan moet de offerte kloppen.
     const teVer = await checkTeVer(city, bedrag);
-    if (teVer) {
-      if (email) await sendTeVerEmail(item.summary, email);
-      await setStatus(item.id, TEVER_STATUS);
-      routeCount++; continue;
-    }
     if (isGordijn) {
       if (email) await sendGordijnenEmail(item.summary, email);
       await setStatus(item.id, GORDIJNEN_STATUS);
@@ -1829,6 +1827,14 @@ async function main() {
       fixCount++;
     } else {
       okCount++;
+    }
+    if (teVer) {
+      // Verwerking is klaar — nu alsnog de TE VER-afhandeling (mail + status i.p.v. Gecontroleerd)
+      if (email) await sendTeVerEmail(item.summary, email);
+      await setStatus(item.id, TEVER_STATUS);
+      console.log('  TE VER (na volledige verwerking): ' + item.summary);
+      routeCount++;
+      continue;
     }
     await setStatus(item.id, GECONTROLEERD);
 

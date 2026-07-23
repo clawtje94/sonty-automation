@@ -334,3 +334,13 @@ vertrek magazijn), 40 nieuwe aanvragen op echte klantadressen, route-motor met s
   (kan later 9:00-15:00 worden). Sjoerd: ma-do 9:00-15:00, vr+za niet.
   Samen: ma/di/do 2 inmeters, wo alleen Sjoerd, vr geen inmeters (voor nu).
 - Correctie werkvenster inmeters (Daimy 23-07 avond): eerste klant 9:00, LAATSTE klant om 16:00 (niet 15:00) — planvenster voor de pilot-planner.
+
+### Inmeet-pilot statusronde 23-07 avond (na feedback Daimy "geen formulier in de app"):
+- OORZAAK gevonden: API-aangemaakte jobs erven de rapportvelden van het sjabloon NIET.
+  Fix: report_fields expliciet meesturen bij POST/PATCH. Geldt voor alle sjablonen.
+- Alle 79 inmeet-taken gerepareerd: formulier (11 velden) op 79/79; offerte-info uit RP op
+  45 taken (34 geen eenduidige match → bewust basis gelaten, fail-closed).
+- Sjoerd hernoemd naar Sjoerd Hoogduin (Planado + alle scripts).
+- 2 testtaken op Daimy (morgen): inmeter 10:00 (11 velden) + monteur 13:00 (10 velden,
+  montage-sjabloon heeft o.a. foto's voor/na, gebruikte materialen, NABESTELLINGEN NODIG
+  = de restpunt-registratie uit de afmeldflow).

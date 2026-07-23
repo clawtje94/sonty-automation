@@ -333,3 +333,4 @@ vertrek magazijn), 40 nieuwe aanvragen op echte klantadressen, route-motor met s
 - V23 COMPLEET (23-07): Joey Engelen rooster: ma, di, do 9:00-15:00; wo vrij; vr nu vrij
   (kan later 9:00-15:00 worden). Sjoerd: ma-do 9:00-15:00, vr+za niet.
   Samen: ma/di/do 2 inmeters, wo alleen Sjoerd, vr geen inmeters (voor nu).
+- Correctie werkvenster inmeters (Daimy 23-07 avond): eerste klant 9:00, LAATSTE klant om 16:00 (niet 15:00) — planvenster voor de pilot-planner.

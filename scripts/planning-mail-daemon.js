@@ -263,6 +263,9 @@ function duiden(m) {
   // referentie besteld (Daimy 23-07), dus die lezen we hier uit.
   if (/^Bevestiging van bestelling/i.test(s) || /Uw referentie\s+\S/.test(m.body)) {
     const ref = (m.body.match(/Uw referentie\s+(.{2,60}?)\s+(?:Bestelling|Orderdatum|€)/i) || [])[1];
+    // MARKIEZEN stuurt na deze webshop-mail ALTIJD de definitieve orderbevestiging (met PDF en
+    // ordernr) — alleen die hebben we nodig (Daimy 23-07, dubbel-rij 1404/1405). Dus negeren.
+    if (ref && /markiezen/i.test(m.from)) return { type: 'negeer', reden: 'webshop-bevestiging Markiezen; definitieve orderbevestiging volgt' };
     if (ref) {
       const od = m.body.match(/Orderdatum\s+(\d{1,2})-(\d{1,2})-(\d{2,4})/);
       const besteldDatum = od ? ddmmyyyy(+od[1], +od[2], od[3].length === 2 ? +('20' + od[3]) : +od[3]) : besteld;

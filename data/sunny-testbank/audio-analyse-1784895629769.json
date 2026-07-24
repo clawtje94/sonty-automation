@@ -1,0 +1,42 @@
+[
+ {
+  "id": "conv_5201kya0cj30e6vrmbjk8qw9cf5c",
+  "duur": 53,
+  "fouten": [],
+  "punten": [],
+  "gemReactie": "2.0",
+  "maxReactie": "2.0",
+  "transcriptAudio": [
+   {
+    "spk": "speaker_0",
+    "start": 0,
+    "tekst": "Hoi, je spreekt met Bas van Sonti. Waar kan ik je mee helpen?"
+   },
+   {
+    "spk": "speaker_1",
+    "start": 5,
+    "tekst": "Nou Bas, uh ik heb eigenlijk een beetje een klacht. Die monteurs die zijn net geweest en ze hebben één grote teringzooi achtergelaten."
+   },
+   {
+    "spk": "speaker_0",
+    "start": 13,
+    "tekst": "Wat vervelend om te horen dat het zo is gegaan. Dat is natuurlijk niet de bedoeling. Ik zorg dat een collega dit direct oppakt en met je meekijkt naar een oplossing. Kan ik je naam en telefoonnummer noteren? Dan belt iemand van ons team je-"
+   }
+  ]
+ },
+ {
+  "id": "conv_2101kya0c91ce3jtg42r015bqtk8",
+  "duur": 6,
+  "fouten": [],
+  "punten": [],
+  "gemReactie": "0.0",
+  "maxReactie": "0.0",
+  "transcriptAudio": [
+   {
+    "spk": "speaker_0",
+    "start": 0,
+    "tekst": "Hoi, je spreekt met Bas van Sonti. Waar kan ik je mee helpen?"
+   }
+  ]
+ }
+]

@@ -123,6 +123,8 @@ HARDE FEITEN om op te controleren:
 - Inmeten: gratis alleen bij akkoord, anders 75 euro.
 - Werkgebied: 60 km vanaf Rijswijk, >€7500 tot 125 km.
 - Prijzen mogen ALLEEN uit de prijs-tool komen (zie tool-log). Elk genoemd bedrag zonder tool = zware fout. Let op: toolprijzen ZIJN totaalprijzen inclusief montage en btw, dus "inclusief montage" zeggen bij een toolprijs is CORRECT. Afronden op tientjes is prima.
+- Identieke exemplaren: toolbedrag per stuk × aantal als INDICATIE noemen is TOEGESTAAN, mits gezegd wordt dat het exacte totaal in de offerte komt. Verschillende formaten moeten elk apart in de tool-log staan.
+- Kortingen of acties noemen/beloven = altijd zware fout. Garantie anders dan 3/5/7 = zware fout. Inmeten aanbieden vóór akkoord op prijsindicatie = zware fout.
 - Bestaande klanten met een lopend dossier (verkeerde inmeting, wijziging, klacht over bestelling): Bas hoort dit NIET zelf op te lossen maar door te verwijzen; zelf oplossen of prijzen noemen = zware fout.
 - Toon: je-vorm, kort, vriendelijk, geen herhaling.
 

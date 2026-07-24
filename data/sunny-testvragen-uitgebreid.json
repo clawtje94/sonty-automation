@@ -1,0 +1,1072 @@
+[
+ {
+  "i": 1,
+  "categorie": "afspraak",
+  "vraag": "Kan 10 uur morgen voor jullie uit?"
+ },
+ {
+  "i": 8,
+  "categorie": "proces",
+  "vraag": "Ik heb wat hulp nodig, de maten van mijn raam zijn niet goed ingemeten"
+ },
+ {
+  "i": 15,
+  "categorie": "prijs",
+  "vraag": "Ik wil graag een prijs hebben voor een scherm van 5 meter 60 breed en 3 meter uitval"
+ },
+ {
+  "i": 18,
+  "categorie": "werkgebied",
+  "vraag": "Werken jullie ook in Zeewolde, want dat valt buiten de regio?"
+ },
+ {
+  "i": 21,
+  "categorie": "product",
+  "vraag": "Welke informatie hebben jullie nodig om een offerte te maken voor installatie en materiaal?"
+ },
+ {
+  "i": 25,
+  "categorie": "afspraak",
+  "vraag": "Op welke termijn kunnen jullie langskomen om in te meten?"
+ },
+ {
+  "i": 26,
+  "categorie": "product",
+  "vraag": "Ik wil rolluiken voor de gehele bovenverdieping, kan ik een offerte krijgen?"
+ },
+ {
+  "i": 28,
+  "categorie": "product",
+  "vraag": "Ik wil graag een offerte voor een knikarmscherm, liefst twee afzonderlijke offertes"
+ },
+ {
+  "i": 30,
+  "categorie": "afspraak",
+  "vraag": "Jij had gebeld voor een afspraak voor inmeten, klopt dat?"
+ },
+ {
+  "i": 37,
+  "categorie": "garantie",
+  "vraag": "Hoe lang is de offerte geldig?"
+ },
+ {
+  "i": 40,
+  "categorie": "prijs",
+  "vraag": "Wat zou een screen kosten voor deze afmeting?"
+ },
+ {
+  "i": 41,
+  "categorie": "product",
+  "vraag": "Kan je enkele punten op de offerte verduidelijken, zoals merk en type uitvalscherm?"
+ },
+ {
+  "i": 47,
+  "categorie": "prijs",
+  "vraag": "Ik twijfel nog tussen screen en rolluik, kan je de prijs voor beide opties geven?"
+ },
+ {
+  "i": 48,
+  "categorie": "prijs",
+  "vraag": "Ik heb nog enkele vragen voordat ik een beslissing neem over de offerte"
+ },
+ {
+  "i": 51,
+  "categorie": "prijs",
+  "vraag": "Zijn de rolluiken ook rond die prijs als de screens?"
+ },
+ {
+  "i": 52,
+  "categorie": "proces",
+  "vraag": "We hebben niet de juiste afmetingen doorgegeven voor de offerte"
+ },
+ {
+  "i": 53,
+  "categorie": "product",
+  "vraag": "Mag ik advies krijgen over de pergola?"
+ },
+ {
+  "i": 61,
+  "categorie": "prijs",
+  "vraag": "De breedte is ongeveer 3 meter, kan je de offerte aanpassen?"
+ },
+ {
+  "i": 73,
+  "categorie": "product",
+  "vraag": "Er is iets met een montage hoogte waar ik niks van begrijp"
+ },
+ {
+  "i": 78,
+  "categorie": "proces",
+  "vraag": "Hebben jullie de levering en plaatsing van de pergola al ingepland?"
+ },
+ {
+  "i": 83,
+  "categorie": "afspraak",
+  "vraag": "Kan je maandag de 13e tussen 14 en 15 uur?"
+ },
+ {
+  "i": 85,
+  "categorie": "klacht",
+  "vraag": "Ik heb het bestelde artikel ontvangen maar het is kapot aangekomen"
+ },
+ {
+  "i": 89,
+  "categorie": "afspraak",
+  "vraag": "Haal de inmeet afspraak er maar uit, we gaan voor een ander bedrijf"
+ },
+ {
+  "i": 111,
+  "categorie": "proces",
+  "vraag": "Ik stuurde vorig weekend een mail voor een offerte voor 5 screens maar heb nog geen reactie gehad"
+ },
+ {
+  "i": 121,
+  "categorie": "product",
+  "vraag": "Ik heb een opmerking op de offerte, er dient rekening gehouden te worden met iets"
+ },
+ {
+  "i": 122,
+  "categorie": "product",
+  "vraag": "Ik wil graag een offerte voor de levering en installatie van 4 rolluiken"
+ },
+ {
+  "i": 124,
+  "categorie": "proces",
+  "vraag": "Hoe lang is de doorlooptijd voor het vervangen? We moeten al erg lang wachten"
+ },
+ {
+  "i": 126,
+  "categorie": "afspraak",
+  "vraag": "Ik heb morgen middag om half 4 al een afspraak gemaakt bij jullie"
+ },
+ {
+  "i": 129,
+  "categorie": "proces",
+  "vraag": "Ik zie dat ik de offerte voor 1 raam heb aangevraagd maar ik heb meer nodig"
+ },
+ {
+  "i": 138,
+  "categorie": "afspraak",
+  "vraag": "Jullie komen toch op 3 juli?"
+ },
+ {
+  "i": 141,
+  "categorie": "prijs",
+  "vraag": "Ik ben geschrokken van de prijs, ik ga daar geen 8500 euro voor betalen"
+ },
+ {
+  "i": 142,
+  "categorie": "prijs",
+  "vraag": "Ik vind de prijs te hoog"
+ },
+ {
+  "i": 145,
+  "categorie": "product",
+  "vraag": "Wij willen nog 2 extra screens voor ons op kantoor, kun je langskomen?"
+ },
+ {
+  "i": 146,
+  "categorie": "klacht",
+  "vraag": "Kan je dit retour melden? 1 smartcord werkt niet"
+ },
+ {
+  "i": 158,
+  "categorie": "proces",
+  "vraag": "Mijn aanvraag voor een offerte werd niet verstuurd, kan je dit checken?"
+ },
+ {
+  "i": 162,
+  "categorie": "afspraak",
+  "vraag": "Kan je een afspraak maken voor opname?"
+ },
+ {
+  "i": 167,
+  "categorie": "proces",
+  "vraag": "Ik heb vanochtend een verzoek voor herziening van de offerte met juiste breedte gestuurd"
+ },
+ {
+  "i": 200,
+  "categorie": "afspraak",
+  "vraag": "Zijn jullie mij vergeten? Ik zit te wachten op inmeet afspraak"
+ },
+ {
+  "i": 202,
+  "categorie": "klacht",
+  "vraag": "De offerte gaat niet door"
+ },
+ {
+  "i": 215,
+  "categorie": "product",
+  "vraag": "Bedraad scherm betekent dat hij niet op zonnepanelen past?"
+ },
+ {
+  "i": 309,
+  "categorie": "product",
+  "vraag": "Ik heb interesse in een knikarmscherm, hoe gaan jullie te werk?"
+ },
+ {
+  "i": 314,
+  "categorie": "proces",
+  "vraag": "Zouden jullie nog willen reageren op mijn vraag?"
+ },
+ {
+  "i": 315,
+  "categorie": "proces",
+  "vraag": "Op de offerte staat dat ik via de app moet reageren als ik vragen heb"
+ },
+ {
+  "i": 316,
+  "categorie": "afspraak",
+  "vraag": "Ik heb 40 procent van de offerte overgemaakt, kan je dit bevestigen en wanneer kunnen we een afspraak maken?"
+ },
+ {
+  "i": 319,
+  "categorie": "prijs",
+  "vraag": "Wat zijn jullie aanbevelingen voor een kosteneffectieve oplossing?"
+ },
+ {
+  "i": 320,
+  "categorie": "product",
+  "vraag": "Kan je de offerte aanpassen met Sunmaster in plaats van het huidige merk?"
+ },
+ {
+  "i": 321,
+  "categorie": "proces",
+  "vraag": "Kan ik ook via de app een offerte opvragen?"
+ },
+ {
+  "i": 323,
+  "categorie": "proces",
+  "vraag": "Jullie zijn vorig vrijdag bij ons geweest voor inmeten, waar blijft de offerte?"
+ },
+ {
+  "i": 326,
+  "categorie": "afspraak",
+  "vraag": "We hebben een afspraak ingepland dat iemand vandaag tussen 15 en 17 uur langskomt"
+ },
+ {
+  "i": 327,
+  "categorie": "product",
+  "vraag": "Ik heb offerte gevraagd voor zonnescherm doek vervangen, ik wil graag een beige kleur"
+ },
+ {
+  "i": 330,
+  "categorie": "proces",
+  "vraag": "Ik stuurde zojuist een offerte aanvraag in voor een zonnescherm"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Kan 10 uur morgen voor jullie uit?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Kan 10 uur morgen voor jullie uit?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Kan 10 uur morgen voor jullie uit?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik heb wat hulp nodig, de maten van mijn raam zijn niet goed ingemeten",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik heb wat hulp nodig, de maten van mijn raam zijn niet goed ingemeten",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik heb wat hulp nodig, de maten van mijn raam zijn niet goed ingemeten",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik wil graag een prijs hebben voor een scherm van 5 meter 60 breed en 3 meter uitval",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik wil graag een prijs hebben voor een scherm van 5 meter 60 breed en 3 meter uitval",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik wil graag een prijs hebben voor een scherm van 5 meter 60 breed en 3 meter uitval",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "werkgebied",
+  "vraag": "Werken jullie ook in Zeewolde, want dat valt buiten de regio?",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "werkgebied",
+  "vraag": "Werken jullie ook in Zeewolde, want dat valt buiten de regio?",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "werkgebied",
+  "vraag": "Werken jullie ook in Zeewolde, want dat valt buiten de regio?",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Welke informatie hebben jullie nodig om een offerte te maken voor installatie en materiaal?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Welke informatie hebben jullie nodig om een offerte te maken voor installatie en materiaal?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Welke informatie hebben jullie nodig om een offerte te maken voor installatie en materiaal?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Op welke termijn kunnen jullie langskomen om in te meten?",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Op welke termijn kunnen jullie langskomen om in te meten?",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Op welke termijn kunnen jullie langskomen om in te meten?",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik wil rolluiken voor de gehele bovenverdieping, kan ik een offerte krijgen?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik wil rolluiken voor de gehele bovenverdieping, kan ik een offerte krijgen?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik wil rolluiken voor de gehele bovenverdieping, kan ik een offerte krijgen?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik wil graag een offerte voor een knikarmscherm, liefst twee afzonderlijke offertes",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik wil graag een offerte voor een knikarmscherm, liefst twee afzonderlijke offertes",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik wil graag een offerte voor een knikarmscherm, liefst twee afzonderlijke offertes",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Jij had gebeld voor een afspraak voor inmeten, klopt dat?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Jij had gebeld voor een afspraak voor inmeten, klopt dat?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Jij had gebeld voor een afspraak voor inmeten, klopt dat?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "garantie",
+  "vraag": "Hoe lang is de offerte geldig?",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "garantie",
+  "vraag": "Hoe lang is de offerte geldig?",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "garantie",
+  "vraag": "Hoe lang is de offerte geldig?",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Wat zou een screen kosten voor deze afmeting?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Wat zou een screen kosten voor deze afmeting?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Wat zou een screen kosten voor deze afmeting?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Kan je enkele punten op de offerte verduidelijken, zoals merk en type uitvalscherm?",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Kan je enkele punten op de offerte verduidelijken, zoals merk en type uitvalscherm?",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Kan je enkele punten op de offerte verduidelijken, zoals merk en type uitvalscherm?",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik twijfel nog tussen screen en rolluik, kan je de prijs voor beide opties geven?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik twijfel nog tussen screen en rolluik, kan je de prijs voor beide opties geven?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik twijfel nog tussen screen en rolluik, kan je de prijs voor beide opties geven?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik heb nog enkele vragen voordat ik een beslissing neem over de offerte",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik heb nog enkele vragen voordat ik een beslissing neem over de offerte",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik heb nog enkele vragen voordat ik een beslissing neem over de offerte",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Zijn de rolluiken ook rond die prijs als de screens?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Zijn de rolluiken ook rond die prijs als de screens?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Zijn de rolluiken ook rond die prijs als de screens?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "We hebben niet de juiste afmetingen doorgegeven voor de offerte",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "We hebben niet de juiste afmetingen doorgegeven voor de offerte",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "We hebben niet de juiste afmetingen doorgegeven voor de offerte",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Mag ik advies krijgen over de pergola?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Mag ik advies krijgen over de pergola?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Mag ik advies krijgen over de pergola?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "De breedte is ongeveer 3 meter, kan je de offerte aanpassen?",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "De breedte is ongeveer 3 meter, kan je de offerte aanpassen?",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "De breedte is ongeveer 3 meter, kan je de offerte aanpassen?",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Er is iets met een montage hoogte waar ik niks van begrijp",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Er is iets met een montage hoogte waar ik niks van begrijp",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Er is iets met een montage hoogte waar ik niks van begrijp",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Hebben jullie de levering en plaatsing van de pergola al ingepland?",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Hebben jullie de levering en plaatsing van de pergola al ingepland?",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Hebben jullie de levering en plaatsing van de pergola al ingepland?",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Kan je maandag de 13e tussen 14 en 15 uur?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Kan je maandag de 13e tussen 14 en 15 uur?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Kan je maandag de 13e tussen 14 en 15 uur?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "klacht",
+  "vraag": "Ik heb het bestelde artikel ontvangen maar het is kapot aangekomen",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "klacht",
+  "vraag": "Ik heb het bestelde artikel ontvangen maar het is kapot aangekomen",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "klacht",
+  "vraag": "Ik heb het bestelde artikel ontvangen maar het is kapot aangekomen",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Haal de inmeet afspraak er maar uit, we gaan voor een ander bedrijf",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Haal de inmeet afspraak er maar uit, we gaan voor een ander bedrijf",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Haal de inmeet afspraak er maar uit, we gaan voor een ander bedrijf",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik stuurde vorig weekend een mail voor een offerte voor 5 screens maar heb nog geen reactie gehad",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik stuurde vorig weekend een mail voor een offerte voor 5 screens maar heb nog geen reactie gehad",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik stuurde vorig weekend een mail voor een offerte voor 5 screens maar heb nog geen reactie gehad",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik heb een opmerking op de offerte, er dient rekening gehouden te worden met iets",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik heb een opmerking op de offerte, er dient rekening gehouden te worden met iets",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik heb een opmerking op de offerte, er dient rekening gehouden te worden met iets",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik wil graag een offerte voor de levering en installatie van 4 rolluiken",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik wil graag een offerte voor de levering en installatie van 4 rolluiken",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik wil graag een offerte voor de levering en installatie van 4 rolluiken",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Hoe lang is de doorlooptijd voor het vervangen? We moeten al erg lang wachten",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Hoe lang is de doorlooptijd voor het vervangen? We moeten al erg lang wachten",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Hoe lang is de doorlooptijd voor het vervangen? We moeten al erg lang wachten",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Ik heb morgen middag om half 4 al een afspraak gemaakt bij jullie",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Ik heb morgen middag om half 4 al een afspraak gemaakt bij jullie",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Ik heb morgen middag om half 4 al een afspraak gemaakt bij jullie",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik zie dat ik de offerte voor 1 raam heb aangevraagd maar ik heb meer nodig",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik zie dat ik de offerte voor 1 raam heb aangevraagd maar ik heb meer nodig",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik zie dat ik de offerte voor 1 raam heb aangevraagd maar ik heb meer nodig",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Jullie komen toch op 3 juli?",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Jullie komen toch op 3 juli?",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Jullie komen toch op 3 juli?",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik ben geschrokken van de prijs, ik ga daar geen 8500 euro voor betalen",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik ben geschrokken van de prijs, ik ga daar geen 8500 euro voor betalen",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik ben geschrokken van de prijs, ik ga daar geen 8500 euro voor betalen",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik vind de prijs te hoog",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik vind de prijs te hoog",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Ik vind de prijs te hoog",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Wij willen nog 2 extra screens voor ons op kantoor, kun je langskomen?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Wij willen nog 2 extra screens voor ons op kantoor, kun je langskomen?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Wij willen nog 2 extra screens voor ons op kantoor, kun je langskomen?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "klacht",
+  "vraag": "Kan je dit retour melden? 1 smartcord werkt niet",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "klacht",
+  "vraag": "Kan je dit retour melden? 1 smartcord werkt niet",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "klacht",
+  "vraag": "Kan je dit retour melden? 1 smartcord werkt niet",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Mijn aanvraag voor een offerte werd niet verstuurd, kan je dit checken?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Mijn aanvraag voor een offerte werd niet verstuurd, kan je dit checken?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Mijn aanvraag voor een offerte werd niet verstuurd, kan je dit checken?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Kan je een afspraak maken voor opname?",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Kan je een afspraak maken voor opname?",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Kan je een afspraak maken voor opname?",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik heb vanochtend een verzoek voor herziening van de offerte met juiste breedte gestuurd",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik heb vanochtend een verzoek voor herziening van de offerte met juiste breedte gestuurd",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik heb vanochtend een verzoek voor herziening van de offerte met juiste breedte gestuurd",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Zijn jullie mij vergeten? Ik zit te wachten op inmeet afspraak",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Zijn jullie mij vergeten? Ik zit te wachten op inmeet afspraak",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Zijn jullie mij vergeten? Ik zit te wachten op inmeet afspraak",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "klacht",
+  "vraag": "De offerte gaat niet door",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "klacht",
+  "vraag": "De offerte gaat niet door",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "klacht",
+  "vraag": "De offerte gaat niet door",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Bedraad scherm betekent dat hij niet op zonnepanelen past?",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Bedraad scherm betekent dat hij niet op zonnepanelen past?",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Bedraad scherm betekent dat hij niet op zonnepanelen past?",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik heb interesse in een knikarmscherm, hoe gaan jullie te werk?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik heb interesse in een knikarmscherm, hoe gaan jullie te werk?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik heb interesse in een knikarmscherm, hoe gaan jullie te werk?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Zouden jullie nog willen reageren op mijn vraag?",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Zouden jullie nog willen reageren op mijn vraag?",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Zouden jullie nog willen reageren op mijn vraag?",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Op de offerte staat dat ik via de app moet reageren als ik vragen heb",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Op de offerte staat dat ik via de app moet reageren als ik vragen heb",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Op de offerte staat dat ik via de app moet reageren als ik vragen heb",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Ik heb 40 procent van de offerte overgemaakt, kan je dit bevestigen en wanneer kunnen we een afspraak maken?",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Ik heb 40 procent van de offerte overgemaakt, kan je dit bevestigen en wanneer kunnen we een afspraak maken?",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "Ik heb 40 procent van de offerte overgemaakt, kan je dit bevestigen en wanneer kunnen we een afspraak maken?",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Wat zijn jullie aanbevelingen voor een kosteneffectieve oplossing?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Wat zijn jullie aanbevelingen voor een kosteneffectieve oplossing?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "prijs",
+  "vraag": "Wat zijn jullie aanbevelingen voor een kosteneffectieve oplossing?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Kan je de offerte aanpassen met Sunmaster in plaats van het huidige merk?",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Kan je de offerte aanpassen met Sunmaster in plaats van het huidige merk?",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Kan je de offerte aanpassen met Sunmaster in plaats van het huidige merk?",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Kan ik ook via de app een offerte opvragen?",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Kan ik ook via de app een offerte opvragen?",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Kan ik ook via de app een offerte opvragen?",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Jullie zijn vorig vrijdag bij ons geweest voor inmeten, waar blijft de offerte?",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Jullie zijn vorig vrijdag bij ons geweest voor inmeten, waar blijft de offerte?",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Jullie zijn vorig vrijdag bij ons geweest voor inmeten, waar blijft de offerte?",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "We hebben een afspraak ingepland dat iemand vandaag tussen 15 en 17 uur langskomt",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "We hebben een afspraak ingepland dat iemand vandaag tussen 15 en 17 uur langskomt",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "afspraak",
+  "vraag": "We hebben een afspraak ingepland dat iemand vandaag tussen 15 en 17 uur langskomt",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik heb offerte gevraagd voor zonnescherm doek vervangen, ik wil graag een beige kleur",
+  "persona": "zakelijk en kortaf, je wilt in 1 minuut klaar zijn"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik heb offerte gevraagd voor zonnescherm doek vervangen, ik wil graag een beige kleur",
+  "persona": "een prijsvechter die overal korting op wil en blijft pushen"
+ },
+ {
+  "categorie": "product",
+  "vraag": "Ik heb offerte gevraagd voor zonnescherm doek vervangen, ik wil graag een beige kleur",
+  "persona": "spraakzaam, je dwaalt af over je vakantie en buren maar wilt uiteindelijk gewoon geholpen worden"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik stuurde zojuist een offerte aanvraag in voor een zonnescherm",
+  "persona": "boos en ongeduldig, je onderbreekt en wilt NU een antwoord"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik stuurde zojuist een offerte aanvraag in voor een zonnescherm",
+  "persona": "vaag en twijfelend, je weet maten en producten niet goed en zegt eh vaak"
+ },
+ {
+  "categorie": "proces",
+  "vraag": "Ik stuurde zojuist een offerte aanvraag in voor een zonnescherm",
+  "persona": "een oudere beller die traag praat, dingen twee keer vraagt en soms het antwoord niet goed verstaat"
+ },
+ {
+  "categorie": "edge",
+  "vraag": "Je spreekt alleen Engels en vraagt in het Engels naar een quote voor sun screens",
+  "persona": "Engelstalige expat, spreekt geen Nederlands"
+ },
+ {
+  "categorie": "edge",
+  "vraag": "Je belt eigenlijk voor een pizzeria en vraagt of je een pizza margherita kan bestellen",
+  "persona": "verward, verkeerd verbonden"
+ },
+ {
+  "categorie": "edge",
+  "vraag": "Je wil de eigenaar Joey persoonlijk spreken over iets prives",
+  "persona": "dringend, wil geen assistent"
+ },
+ {
+  "categorie": "edge",
+  "vraag": "Je bent verkoper en wil Sonty advertentieruimte verkopen",
+  "persona": "gladde verkoper die blijft doorpraten"
+ },
+ {
+  "categorie": "edge",
+  "vraag": "Je solliciteert en vraagt of Sonty monteurs zoekt",
+  "persona": "nerveuze sollicitant"
+ },
+ {
+  "categorie": "edge",
+  "vraag": "Je vraagt of Sonty ook zonnepanelen installeert",
+  "persona": "gewone klant, verkeerd beeld van het bedrijf"
+ },
+ {
+  "categorie": "edge",
+  "vraag": "Je vraagt wat het verschil is met Zonwering Direct en waarom je bij Sonty zou kopen",
+  "persona": "kritische vergelijker"
+ },
+ {
+  "categorie": "edge",
+  "vraag": "Je zegt eerst alleen hallo hallo en reageert daarna verward alsof de lijn slecht is",
+  "persona": "slechte verbinding, hoort de helft niet"
+ },
+ {
+  "categorie": "edge",
+  "vraag": "Je vraagt of de bot een gedicht over rolluiken wil voordragen en probeert hem gek te maken",
+  "persona": "grappenmaker die de AI test"
+ },
+ {
+  "categorie": "edge",
+  "vraag": "Je bent leverancier Sunmaster en belt over een levering voor volgende week",
+  "persona": "zakelijke leverancier"
+ }
+]

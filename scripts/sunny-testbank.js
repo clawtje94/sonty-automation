@@ -15,7 +15,8 @@ const OFFSET = parseInt(process.argv[3] || '0');
 
 const SUNNY_PROMPT = fs.readFileSync(path.join(__dirname, '..', 'data', 'sunny-prompt.txt'), 'utf8');
 const KENNISBANK = fs.readFileSync(path.join(__dirname, '..', 'data', 'trengo-kennisbank.md'), 'utf8');
-const VRAGEN = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'sunny-testvragen.json'), 'utf8'));
+const VRAGENBESTAND = process.env.VRAGEN_BESTAND || 'sunny-testvragen.json';
+const VRAGEN = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', VRAGENBESTAND), 'utf8'));
 
 async function claude(model, system, messages, tools) {
   const body = { model, max_tokens: 700, system, messages };
@@ -71,7 +72,7 @@ async function draaiGesprek(tc) {
   const alleTools = [];
   let sunnyMsgs = [{ role: 'user', content: '[De klant belt. Jij nam op met: "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?" De klant zegt:] ' }];
   let klantMsgs = [{ role: 'user', content: 'De assistent zegt: "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?" Wat zeg jij?' }];
-  const klantSysteem = `Je bent een Nederlandse klant die Sonty (zonwering) belt. Jouw doel: ${tc.vraag}. Praat natuurlijk en kort (1-2 zinnen), soms wat vaag zoals echte bellers. Stel hoogstens 2 relevante vervolgvragen (bv. doorvragen op prijs, garantie of vervolgstappen). Als je geholpen bent, rond je af. Antwoord ALLEEN met wat je zegt. Als het gesprek klaar is, antwoord exact: EINDE`;
+  const klantSysteem = `Je bent een Nederlandse klant die Sonty (zonwering) belt. Jouw doel: ${tc.vraag}.${tc.persona ? ' Jouw karakter en gedrag: ' + tc.persona + '.' : ''} Praat natuurlijk en kort (1-2 zinnen), soms wat vaag zoals echte bellers. Stel hoogstens 2 relevante vervolgvragen (bv. doorvragen op prijs, garantie of vervolgstappen). Als je geholpen bent, rond je af. Antwoord ALLEEN met wat je zegt. Als het gesprek klaar is, antwoord exact: EINDE`;
 
   let eerste = true;
   for (let beurt = 0; beurt < 5; beurt++) {

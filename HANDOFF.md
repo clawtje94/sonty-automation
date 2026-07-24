@@ -1,4 +1,10 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-23)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-24)
+
+## INCIDENT: V4 OFFERTE-WHATSAPP MASSA-VERZENDING — DAEMON GESTOPT (24 juli ~15:15)
+- 102 offerte-WhatsApps verstuurd op 24-07 in twee bursts (V4-runs 9:30 + 13:00). Oorzaak-keten: WA-stap in cron-offerte-controle-v4-combined.js triggert op RP-items met timestamp_updated < 2 dagen; iets (sync/migratie/verrijking) heeft massaal items aangeraakt → honderden matches → per klant de nieuwste SENT/ACCEPTED-offerte geappt, OOK ALS DIE OEROUD IS (klant Ton +31628840611 kreeg offerte 202516635 uit 2025 terwijl gisteren was ingemeten; escalatie liep goed, mens heeft gecorrigeerd).
+- ACTIE: `launchctl bootout gui/501/nl.sonty.offerte-v4` — V4 draait NIET meer (ook prijscontroles niet!) tot fix. Herladen: `launchctl bootstrap gui/501 ~/Library/LaunchAgents/nl.sonty.offerte-v4.plist`.
+- FIX NODIG (waar: Daimy beslist, andere chat werkt aan offerte-flow): (1) WA alleen als de OFFERTE ZELF recent is (quotationCreationTimestamp < X dagen), (2) noodrem max N WhatsApps per run + alert, (3) uitzoeken wat alle RP-items touchte. Verzendlog: scripts/.wa-offerte-sent.json (documentIds+tijd).
+- Ook vandaag: Berner-nieuwsbrief kreeg AI-antwoord (redenering als mail verstuurd; ticket gesloten; fix = nieuwsbrief-filter in email-daemon, andere chat gevraagd) en Bink-offerte aangemaakt zonder gevraagde afwijkende demontageprijs (tool-beperking; handmatig corrigeren vóór maandag).
 
 ## OPVOLGING DEELS LIVE (23 juli ~17:00, mandaat Daimy)
 - opvolging-daemon draait nu ELK UUR (was 1x/dag) en verstuurt ECHT binnen mandaat: (1) WA-gesprekken waar klant niet reageerde op ons laatste bericht, niet toegewezen/niet Mens nodig -> follow-up VOOR het 24u-venster sluit (4-20u stilte-check bestond al); (2) e-mail idem na 3 tot 4,5 dagen stilte. Alleen binnen bot-uren; alle andere gevallen blijven SCHADUW-voorstel. Volledig schaduwrapport alleen nog in de 10-uur-run; live-verzendingen worden per run gemeld. Vinkje-notitie op ticket per verzending.

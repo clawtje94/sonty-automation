@@ -68,10 +68,10 @@ async function sunnyBeurt(messages) {
 }
 
 async function draaiGesprek(tc) {
-  const transcript = [{ rol: 'sunny', tekst: 'Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?' }];
+  const transcript = [{ rol: 'sunny', tekst: 'Hoi, je spreekt met Bas van Sonty. Waar kan ik je mee helpen?' }];
   const alleTools = [];
-  let sunnyMsgs = [{ role: 'user', content: '[De klant belt. Jij nam op met: "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?" De klant zegt:] ' }];
-  let klantMsgs = [{ role: 'user', content: 'De assistent zegt: "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?" Wat zeg jij?' }];
+  let sunnyMsgs = [{ role: 'user', content: '[De klant belt. Jij nam op met: "Hoi, je spreekt met Bas van Sonty. Waar kan ik je mee helpen?" De klant zegt:] ' }];
+  let klantMsgs = [{ role: 'user', content: 'De assistent zegt: "Hoi, je spreekt met Bas van Sonty. Waar kan ik je mee helpen?" Wat zeg jij?' }];
   const klantSysteem = `Je bent een Nederlandse klant die Sonty (zonwering) belt. Jouw doel: ${tc.vraag}.${tc.persona ? ' Jouw karakter en gedrag: ' + tc.persona + '.' : ''} Praat natuurlijk en kort (1-2 zinnen), soms wat vaag zoals echte bellers. Stel hoogstens 2 relevante vervolgvragen (bv. doorvragen op prijs, garantie of vervolgstappen). Als je geholpen bent, rond je af. Antwoord ALLEEN met wat je zegt. Als het gesprek klaar is, antwoord exact: EINDE`;
 
   let eerste = true;
@@ -111,9 +111,9 @@ function hardeChecks(transcript) {
 }
 
 async function beoordeel(tc, transcript, toolCalls) {
-  const txt = transcript.map(t => (t.rol === 'sunny' ? 'SUNNY: ' : 'KLANT: ') + t.tekst).join('\n');
+  const txt = transcript.map(t => (t.rol === 'sunny' ? 'BAS: ' : 'KLANT: ') + t.tekst).join('\n');
   const toolTxt = toolCalls.map(t => `tool ${JSON.stringify(t.input)} → ${JSON.stringify(t.output)}`).join('\n') || 'geen';
-  const vraag = `Beoordeel dit telefoongesprek van Sunny, de AI-assistent van Sonty (zonwering, Rijswijk).
+  const vraag = `Beoordeel dit telefoongesprek van Bas, de AI-assistent van Sonty (zonwering, Rijswijk).
 
 KERNPRINCIPE: Sunny moet de klant PERFECT helpen OF warm doorverwijzen naar een collega/085 006 9681/showroom. Netjes doorverwijzen bij twijfel is GOED. Een fout of half antwoord is een ZWARE fout.
 
@@ -123,7 +123,7 @@ HARDE FEITEN om op te controleren:
 - Inmeten: gratis alleen bij akkoord, anders 75 euro.
 - Werkgebied: 60 km vanaf Rijswijk, >€7500 tot 125 km.
 - Prijzen mogen ALLEEN uit de prijs-tool komen (zie tool-log). Elk genoemd bedrag zonder tool = zware fout. Let op: toolprijzen ZIJN totaalprijzen inclusief montage en btw, dus "inclusief montage" zeggen bij een toolprijs is CORRECT. Afronden op tientjes is prima.
-- Bestaande klanten met een lopend dossier (verkeerde inmeting, wijziging, klacht over bestelling): Sunny hoort dit NIET zelf op te lossen maar door te verwijzen; zelf oplossen of prijzen noemen = zware fout.
+- Bestaande klanten met een lopend dossier (verkeerde inmeting, wijziging, klacht over bestelling): Bas hoort dit NIET zelf op te lossen maar door te verwijzen; zelf oplossen of prijzen noemen = zware fout.
 - Toon: je-vorm, kort, vriendelijk, geen herhaling.
 
 TOOL-LOG:
@@ -134,8 +134,8 @@ ${txt}
 
 BEOORDEEL EERLIJK, NIET OVERDREVEN STRENG:
 - Een bedrag dat hoogstens 15 euro afwijkt van een toolwaarde in de tool-log is gewoon dat toolresultaat (afgerond) en dus CORRECT.
-- Meerprijzen van opties die letterlijk in de Sonty-kennisbank staan (bv. windsensor) mag Sunny noemen als "meerprijs vanaf"; dat is GEEN fout, zolang ze niet zelf totalen optelt.
-- Als het gesprek stopt doordat de KLANT afrondt of ophangt terwijl Sunny net een correct vervolg aanbood (bv. "zal ik het uitrekenen?"), reken dat Sunny NIET aan.
+- Meerprijzen van opties die letterlijk in de Sonty-kennisbank staan (bv. windsensor) mag Bas noemen als "meerprijs vanaf"; dat is GEEN fout, zolang ze niet zelf totalen optelt.
+- Als het gesprek stopt doordat de KLANT afrondt of ophangt terwijl Sunny net een correct vervolg aanbood (bv. "zal ik het uitrekenen?"), reken dat Bas NIET aan.
 
 Antwoord ALLEEN met JSON: {"cijfer": 1-10, "zware_fouten": ["..."], "kleine_punten": ["..."], "doorverwezen": true/false, "oordeel": "één zin"}`;
   const r = await claude(SIM_MODEL, 'Je bent een strenge maar eerlijke kwaliteitsbeoordelaar.', [{ role: 'user', content: vraag }]);

@@ -1,0 +1,257 @@
+[
+ {
+  "i": 1,
+  "categorie": "afspraak",
+  "vraag": "Kan 10 uur morgen voor jullie uit?"
+ },
+ {
+  "i": 8,
+  "categorie": "proces",
+  "vraag": "Ik heb wat hulp nodig, de maten van mijn raam zijn niet goed ingemeten"
+ },
+ {
+  "i": 15,
+  "categorie": "prijs",
+  "vraag": "Ik wil graag een prijs hebben voor een scherm van 5 meter 60 breed en 3 meter uitval"
+ },
+ {
+  "i": 18,
+  "categorie": "werkgebied",
+  "vraag": "Werken jullie ook in Zeewolde, want dat valt buiten de regio?"
+ },
+ {
+  "i": 21,
+  "categorie": "product",
+  "vraag": "Welke informatie hebben jullie nodig om een offerte te maken voor installatie en materiaal?"
+ },
+ {
+  "i": 25,
+  "categorie": "afspraak",
+  "vraag": "Op welke termijn kunnen jullie langskomen om in te meten?"
+ },
+ {
+  "i": 26,
+  "categorie": "product",
+  "vraag": "Ik wil rolluiken voor de gehele bovenverdieping, kan ik een offerte krijgen?"
+ },
+ {
+  "i": 28,
+  "categorie": "product",
+  "vraag": "Ik wil graag een offerte voor een knikarmscherm, liefst twee afzonderlijke offertes"
+ },
+ {
+  "i": 30,
+  "categorie": "afspraak",
+  "vraag": "Jij had gebeld voor een afspraak voor inmeten, klopt dat?"
+ },
+ {
+  "i": 37,
+  "categorie": "garantie",
+  "vraag": "Hoe lang is de offerte geldig?"
+ },
+ {
+  "i": 40,
+  "categorie": "prijs",
+  "vraag": "Wat zou een screen kosten voor deze afmeting?"
+ },
+ {
+  "i": 41,
+  "categorie": "product",
+  "vraag": "Kan je enkele punten op de offerte verduidelijken, zoals merk en type uitvalscherm?"
+ },
+ {
+  "i": 47,
+  "categorie": "prijs",
+  "vraag": "Ik twijfel nog tussen screen en rolluik, kan je de prijs voor beide opties geven?"
+ },
+ {
+  "i": 48,
+  "categorie": "prijs",
+  "vraag": "Ik heb nog enkele vragen voordat ik een beslissing neem over de offerte"
+ },
+ {
+  "i": 51,
+  "categorie": "prijs",
+  "vraag": "Zijn de rolluiken ook rond die prijs als de screens?"
+ },
+ {
+  "i": 52,
+  "categorie": "proces",
+  "vraag": "We hebben niet de juiste afmetingen doorgegeven voor de offerte"
+ },
+ {
+  "i": 53,
+  "categorie": "product",
+  "vraag": "Mag ik advies krijgen over de pergola?"
+ },
+ {
+  "i": 61,
+  "categorie": "prijs",
+  "vraag": "De breedte is ongeveer 3 meter, kan je de offerte aanpassen?"
+ },
+ {
+  "i": 73,
+  "categorie": "product",
+  "vraag": "Er is iets met een montage hoogte waar ik niks van begrijp"
+ },
+ {
+  "i": 78,
+  "categorie": "proces",
+  "vraag": "Hebben jullie de levering en plaatsing van de pergola al ingepland?"
+ },
+ {
+  "i": 83,
+  "categorie": "afspraak",
+  "vraag": "Kan je maandag de 13e tussen 14 en 15 uur?"
+ },
+ {
+  "i": 85,
+  "categorie": "klacht",
+  "vraag": "Ik heb het bestelde artikel ontvangen maar het is kapot aangekomen"
+ },
+ {
+  "i": 89,
+  "categorie": "afspraak",
+  "vraag": "Haal de inmeet afspraak er maar uit, we gaan voor een ander bedrijf"
+ },
+ {
+  "i": 111,
+  "categorie": "proces",
+  "vraag": "Ik stuurde vorig weekend een mail voor een offerte voor 5 screens maar heb nog geen reactie gehad"
+ },
+ {
+  "i": 121,
+  "categorie": "product",
+  "vraag": "Ik heb een opmerking op de offerte, er dient rekening gehouden te worden met iets"
+ },
+ {
+  "i": 122,
+  "categorie": "product",
+  "vraag": "Ik wil graag een offerte voor de levering en installatie van 4 rolluiken"
+ },
+ {
+  "i": 124,
+  "categorie": "proces",
+  "vraag": "Hoe lang is de doorlooptijd voor het vervangen? We moeten al erg lang wachten"
+ },
+ {
+  "i": 126,
+  "categorie": "afspraak",
+  "vraag": "Ik heb morgen middag om half 4 al een afspraak gemaakt bij jullie"
+ },
+ {
+  "i": 129,
+  "categorie": "proces",
+  "vraag": "Ik zie dat ik de offerte voor 1 raam heb aangevraagd maar ik heb meer nodig"
+ },
+ {
+  "i": 138,
+  "categorie": "afspraak",
+  "vraag": "Jullie komen toch op 3 juli?"
+ },
+ {
+  "i": 141,
+  "categorie": "prijs",
+  "vraag": "Ik ben geschrokken van de prijs, ik ga daar geen 8500 euro voor betalen"
+ },
+ {
+  "i": 142,
+  "categorie": "prijs",
+  "vraag": "Ik vind de prijs te hoog"
+ },
+ {
+  "i": 145,
+  "categorie": "product",
+  "vraag": "Wij willen nog 2 extra screens voor ons op kantoor, kun je langskomen?"
+ },
+ {
+  "i": 146,
+  "categorie": "klacht",
+  "vraag": "Kan je dit retour melden? 1 smartcord werkt niet"
+ },
+ {
+  "i": 158,
+  "categorie": "proces",
+  "vraag": "Mijn aanvraag voor een offerte werd niet verstuurd, kan je dit checken?"
+ },
+ {
+  "i": 162,
+  "categorie": "afspraak",
+  "vraag": "Kan je een afspraak maken voor opname?"
+ },
+ {
+  "i": 167,
+  "categorie": "proces",
+  "vraag": "Ik heb vanochtend een verzoek voor herziening van de offerte met juiste breedte gestuurd"
+ },
+ {
+  "i": 200,
+  "categorie": "afspraak",
+  "vraag": "Zijn jullie mij vergeten? Ik zit te wachten op inmeet afspraak"
+ },
+ {
+  "i": 202,
+  "categorie": "klacht",
+  "vraag": "De offerte gaat niet door"
+ },
+ {
+  "i": 215,
+  "categorie": "product",
+  "vraag": "Bedraad scherm betekent dat hij niet op zonnepanelen past?"
+ },
+ {
+  "i": 309,
+  "categorie": "product",
+  "vraag": "Ik heb interesse in een knikarmscherm, hoe gaan jullie te werk?"
+ },
+ {
+  "i": 314,
+  "categorie": "proces",
+  "vraag": "Zouden jullie nog willen reageren op mijn vraag?"
+ },
+ {
+  "i": 315,
+  "categorie": "proces",
+  "vraag": "Op de offerte staat dat ik via de app moet reageren als ik vragen heb"
+ },
+ {
+  "i": 316,
+  "categorie": "afspraak",
+  "vraag": "Ik heb 40 procent van de offerte overgemaakt, kan je dit bevestigen en wanneer kunnen we een afspraak maken?"
+ },
+ {
+  "i": 319,
+  "categorie": "prijs",
+  "vraag": "Wat zijn jullie aanbevelingen voor een kosteneffectieve oplossing?"
+ },
+ {
+  "i": 320,
+  "categorie": "product",
+  "vraag": "Kan je de offerte aanpassen met Sunmaster in plaats van het huidige merk?"
+ },
+ {
+  "i": 321,
+  "categorie": "proces",
+  "vraag": "Kan ik ook via de app een offerte opvragen?"
+ },
+ {
+  "i": 323,
+  "categorie": "proces",
+  "vraag": "Jullie zijn vorig vrijdag bij ons geweest voor inmeten, waar blijft de offerte?"
+ },
+ {
+  "i": 326,
+  "categorie": "afspraak",
+  "vraag": "We hebben een afspraak ingepland dat iemand vandaag tussen 15 en 17 uur langskomt"
+ },
+ {
+  "i": 327,
+  "categorie": "product",
+  "vraag": "Ik heb offerte gevraagd voor zonnescherm doek vervangen, ik wil graag een beige kleur"
+ },
+ {
+  "i": 330,
+  "categorie": "proces",
+  "vraag": "Ik stuurde zojuist een offerte aanvraag in voor een zonnescherm"
+ }
+]

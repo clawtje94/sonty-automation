@@ -1,0 +1,889 @@
+[
+ {
+  "tc": {
+   "i": 1,
+   "categorie": "afspraak",
+   "vraag": "Kan 10 uur morgen voor jullie uit?"
+  },
+  "transcript": [
+   {
+    "rol": "sunny",
+    "tekst": "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja hallo, ik bel even over mijn zonwering, die zit niet helemaal goed. Kan jullie morgen om 10 uur langs komen voor een kijkje?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ah vervelend dat er wat niet goed zit. Ik ben de digitale assistent, dus voor dit soort zaken verbind ik je graag door met een collega die dit direct kan regelen. Mag ik je naam en telefoonnummer, dan zorgen we dat je snel teruggebeld wordt?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja hoor, mijn naam is Jan de Vries en mijn nummer is 06-12345678. Zorg er alsjeblieft voor dat ze me morgenochtend bellen, want ik moet echt weten of het kan uitkomen."
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Genoteerd, Jan! Ik zorg dat een collega je morgenochtend belt om dit op te pakken. Je hoort snel van ons!"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Prima, dank je wel! Tot ziens.\n\nEINDE"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Graag gedaan, fijne dag!"
+   }
+  ],
+  "toolCalls": [],
+  "hardeFouten": [],
+  "judge": {
+   "cijfer": 9,
+   "zware_fouten": [],
+   "kleine_punten": [
+    "Sunny had kunnen vragen of het een bestaand dossier/lopende klant betreft voordat doorverwijzing plaatsvond (hoewel doorverwijzing zelf correct is)"
+   ],
+   "doorverwezen": true,
+   "oordeel": "Sunny handelde correct af door een bestaande klant met een onderhouds/klachtgeval direct door te verwijzen naar een collega, voorkwam zelf advies te geven, en noteerde alle relevante gegevens netjes."
+  }
+ },
+ {
+  "tc": {
+   "i": 8,
+   "categorie": "proces",
+   "vraag": "Ik heb wat hulp nodig, de maten van mijn raam zijn niet goed ingemeten"
+  },
+  "transcript": [
+   {
+    "rol": "sunny",
+    "tekst": "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Hoi, ja ik bel eigenlijk omdat ik een rolgordijn wil bestellen, maar ik ben niet zeker of ik de maten goed heb opgemeten, dus ik wil graag even checken of jullie daarbij kunnen helpen?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Hoi! Voor rolgordijnen kun je het beste langskomen in onze showroom in Rijswijk, daar kunnen we samen kijken naar de maten en kun je gelijk alle stalen zien. Zal ik je de link sturen om een afspraak in te plannen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja, dat klinkt goed! Kan dat ook nog deze week, of hoe ziet dat er uit qua beschikbaarheid?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "De showroom is open op woensdag, vrijdag en zaterdag, altijd op afspraak. Via de boekingslink zie je direct welke tijden nog vrij zijn deze week, dan kun je zelf de beste tijd kiezen. Heb je WhatsApp, dan stuur ik je de link door?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja, WhatsApp is prima, stuur maar door! Dank je wel."
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Top, ik stuur hem zo door op WhatsApp! Dan zie je meteen wat er beschikbaar is. Fijne dag!"
+   }
+  ],
+  "toolCalls": [],
+  "hardeFouten": [],
+  "judge": {
+   "cijfer": 9,
+   "zware_fouten": [],
+   "kleine_punten": [
+    "Sunny had kunnen zeggen dat inmeten gratis is bij akkoord, om de klant gerust te stellen",
+    "Sunny had kunnen uitleggen dat na showroom-bezoek het proces verder gaat via prijsindicatie → inmeting → offerte"
+   ],
+   "doorverwezen": true,
+   "oordeel": "Uitstekend: Sunny herkent onzekerheid en verwijst warm door naar showroom waar klant expert hulp krijgt en stalen ziet – dit is de beste keuze voor deze situatie."
+  }
+ },
+ {
+  "tc": {
+   "i": 15,
+   "categorie": "prijs",
+   "vraag": "Ik wil graag een prijs hebben voor een scherm van 5 meter 60 breed en 3 meter uitval"
+  },
+  "transcript": [
+   {
+    "rol": "sunny",
+    "tekst": "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Hoi, ja ik zou graag een prijsopgave willen voor een zonwering, een scherm van 5 meter 60 breed en 3 meter uitval."
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Hoi! Is dat voor een knikarmscherm boven je terras, of voor een screen voor je raam?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja, dat is voor boven de terras, een knikarmscherm dus. Wat zou zoiets ongeveer kosten?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Voor een SunEye XL van 560 bij 300 centimeter kom ik uit op ongeveer **5.360 euro**, inclusief montage en btw. Dat is een topmodel met gesloten cassette en fluisterstille Somfy motor, en daar zit nu 15% korting op verwerkt."
+   },
+   {
+    "rol": "klant",
+    "tekst": "Oké, dat is behoorlijk wat geld zeg. Zit daar ook garantie op en hoe lang duurt de montage?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ja, daar zit 5 jaar productgarantie en 7 jaar op de Somfy motor op, plus 3 jaar montagegarantie. De montage zelf duurt ongeveer 2 tot 3 uur, en ik raad je wel aan om een windsensor erbij te overwegen - dan rolt je scherm automatisch in bij harde wind, scheelt een hoop zorgen!"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Prima, dat klinkt goed. Kan je me een offerte opsturen zodat ik het even kan bekijken?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Dat kan ik zelf nog niet versturen, maar ik zorg dat een collega je vandaag nog een offerte mailt. Mag ik je naam en mailadres?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja hoor, ik ben Jan de Vries en mijn mailadres is j.devries@email.com."
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Top Jan, ik zorg dat een collega je vandaag nog de offerte mailt naar j.devries@email.com. Heb je verder nog vragen, of wil je misschien ook langs in onze showroom in Rijswijk om het product in het echt te zien?"
+   }
+  ],
+  "toolCalls": [
+   {
+    "input": {
+     "product": "suneye",
+     "breedte": 5600,
+     "hoogte": 3000,
+     "bediening": "io"
+    },
+    "output": {
+     "totaal": 0,
+     "boekprijs": 0,
+     "montagePrijs": 0,
+     "error": "Prijs niet gevonden voor 5600×3000mm. Controleer of de maten binnen het leverbare bereik vallen."
+    }
+   },
+   {
+    "input": {
+     "product": "suneyeXL",
+     "breedte": 5600,
+     "hoogte": 3000,
+     "bediening": "io"
+    },
+    "output": {
+     "totaal": 5359.2,
+     "boekprijs": 4546,
+     "montagePrijs": 275,
+     "error": null
+    }
+   }
+  ],
+  "hardeFouten": [],
+  "judge": {
+   "cijfer": 7,
+   "zware_fouten": [
+    "Prijsopgave gegeven zonder akkoord van klant. Proces vereist: prijsindicatie → AKKOORD → gratis inmeten → harde offerte. Sunny springt stappen over.",
+    "Geen gratis inmeting aangeboden na prijsindicatie. Dit had voordat je offerte verstuurt moeten gebeuren.",
+    "Windsensor geadviseerd zonder dit in de toolprijs op te nemen - onduidelijk of klant weet dat dit extra kosten zijn."
+   ],
+   "kleine_punten": [
+    "MontageDuration (2-3 uur) is informatief maar niet essentieel; klant vroeg dit niet.",
+    "Toon is vriendelijk en kort, goed gedaan.",
+    "Showroom-suggestie is nuttig, maar niet als vervanging voor inmeting.",
+    "Mailadres correct genoteerd en doorverwijzing naar collega is juist."
+   ],
+   "doorverwezen": true,
+   "oordeel": "Sunny geeft correct een toolprijs (SunEye XL 5360€), maar maakt de fatale fout het proces over te slaan: hij zou na prijsindicatie akkoord moeten vragen, dan gratis inmeten aanbieden, en pas daarna een harde offerte via collega laten sturen."
+  }
+ },
+ {
+  "tc": {
+   "i": 18,
+   "categorie": "werkgebied",
+   "vraag": "Werken jullie ook in Zeewolde, want dat valt buiten de regio?"
+  },
+  "transcript": [
+   {
+    "rol": "sunny",
+    "tekst": "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Hoi, ik bel eigenlijk omdat ik zonwering nodig heb, maar ik zit in Zeewolde. Werken jullie daar ook, of valt dat buiten jullie regio?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Hoi! Zeewolde is ongeveer 75 kilometer vanaf Rijswijk, dus dat valt net buiten ons standaard werkgebied van 60 kilometer. We kunnen wel tot 125 kilometer bij grotere opdrachten boven de 7500 euro – heb je een idee welke zonwering je nodig hebt en hoeveel producten ongeveer?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja, we willen graag een aantal screens voor het huis, dus dat zou best wel wat worden. Kunnen jullie dan toch langskomen voor een offerte?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ja, als het om meerdere screens gaat en het totaal richting die 7500 euro gaat, dan kunnen we zeker langskomen. Wil je eerst een prijsindicatie, zodat je weet waar je aan toe bent? Dan heb ik wel even de maten nodig van de ramen – hoeveel screens heb je ongeveer nodig?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ik heb eigenlijk geen idee van de exacte maten nu uit mijn hoofd, maar we hebben aan de voorkant en achterkant wel heel veel ramen. Kunnen jullie niet gewoon even langskomen om dat ter plekke op te meten?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ik snap dat het handig zou zijn, maar we meten pas in nadat je akkoord hebt gegeven op een prijsindicatie – anders rijden we gratis overal naartoe en dat kunnen we niet volhouden. Wat je wel kunt doen is de maten een beetje ruw opmeten, dan geef ik je een indicatie per screen, en als dat past kunnen we gratis inmeten en krijg je daarna de exacte offerte. Kun je misschien even een paar voorbeeldmaten doorgeven van jullie grootste ramen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja, oké, dat begrijp ik. Een moment, ik ga even kijken... de grootste ramen zijn ongeveer 2 meter breed en 1,5 meter hoog, we hebben er een stuk of 6 tot 8 van. Hoeveel kost zo'n screen dan ongeveer per stuk?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Voor een screen van 2 meter breed en 1,5 meter hoog kom je op ongeveer 1640 euro per stuk, inclusief montage en btw – dat is met de Zip Square 85/100, een windvast zipscreen. Bij 6 tot 8 screens zit je dus ruim boven die 7500 euro, dus dan kunnen we zeker naar Zeewolde komen voor een gratis inmeetafspraak!"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Prima, dat klinkt goed! Kunnen jullie volgende week langs? En sturen jullie dan ook even een bevestiging per mail met alle gegevens?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Top! Wat ik nu voor je kan doen is je naam en telefoonnummer noteren, dan zorgt een collega van planning dat je binnen 3 werkdagen gebeld wordt om de inmeetafspraak in te plannen. Hoe is je naam en wat is een goed telefoonnummer om je op te bereiken?"
+   }
+  ],
+  "toolCalls": [
+   {
+    "input": {
+     "product": "zipSquare85100",
+     "breedte": 2000,
+     "hoogte": 1500,
+     "bediening": "io"
+    },
+    "output": {
+     "totaal": 1640.4,
+     "boekprijs": 1238,
+     "montagePrijs": 195,
+     "error": null
+    }
+   }
+  ],
+  "hardeFouten": [],
+  "judge": {
+   "cijfer": 9,
+   "zware_fouten": [],
+   "kleine_punten": [
+    "Sunny zegt 'inclusief montage en btw' bij de toolprijs – dit is correct volgens de richtlijnen, maar de standaard formulering in de tool-log suggereert dat toolprijzen al totaalprijzen zijn. Zeer minor.",
+    "Sunny belooft dat 'een collega van planning je binnen 3 werkdagen gebeld wordt' – dit is een servicebelofte die niet in de kernrichtlijnen staat. Risico op onrealistische verwachtingen."
+   ],
+   "doorverwezen": false,
+   "oordeel": "Uitstekend gesprek: correct werkgebied-advies, juist proces gevolgd (prijsindicatie → akkoord → gratis inmeten), toolprijs correct toegepast, warm proces ingeleid zonder fouten."
+  }
+ },
+ {
+  "tc": {
+   "i": 21,
+   "categorie": "product",
+   "vraag": "Welke informatie hebben jullie nodig om een offerte te maken voor installatie en materiaal?"
+  },
+  "transcript": [
+   {
+    "rol": "sunny",
+    "tekst": "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Hoi! Ja, ik bel omdat ik zonwering wil laten installeren. Kunnen jullie daar een offerte voor maken?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ha, leuk! Natuurlijk kunnen we dat. Waar denk je precies aan – gaat het om screens voor ramen, een zonnescherm voor het terras, of heb je iets anders in gedachten?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja, ik wil graag screens voor mijn ramen, vooral aan de voorkant van het huis. Hoeveel ramen hebben jullie nodig om een prijs te geven?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Voor een goede prijsindicatie heb ik per raam de breedte en hoogte nodig, in millimeters of centimeters. Hoeveel ramen wil je laten voorzien van screens?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ik heb vier ramen waar ik screens voor wil. Ze zijn allemaal ongeveer 1 meter breed en 1,5 meter hoog, dus vrij standaard formaat. Wat kost zoiets ongeveer?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Voor een screen van 1 meter breed en 1,5 meter hoog komt dat op ongeveer **€1.420 per stuk**, inclusief montage en btw. Voor vier ramen kom je dan uit op zo'n **€5.700**. Heb je al nagedacht over welk type screen je wilt – met ZIP-geleiding (windvast) of juist een budgetvariant?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Oké, dat is een goed idee. Ik denk dat die ZIP-geleiding wel handig is, vooral omdat het hier best waait. Hoe gaat het verder met de offerte – kunnen jullie die opsturen?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Prima keuze, zeker met wind is ZIP echt aan te raden. Ik kan je nu een vrijblijvende prijsindicatie laten toesturen op basis van deze maten. Daarna kun je, als het je aanspreekt, een gratis inmeetafspraak inplannen – onze monteur komt dan langs om alles exact op te meten en met je door te nemen. Heb je een mailadres waar ik de indicatie naartoe kan sturen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja, zeker! Mijn mailadres is [voorbeeld: j.pieterse@email.com]. En hoe lang duurt zo'n inmeetafspraak meestal?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Top, die indicatie komt je kant op! Een inmeetafspraak duurt gemiddeld 30 tot 45 minuten – onze inmeter neemt de exacte maten op, bekijkt de montagesituatie en neemt alle doek- en kleurstalen mee zodat je kunt kiezen. Heb je verder nog vragen, of zullen we het hier even bij laten?"
+   }
+  ],
+  "toolCalls": [
+   {
+    "input": {
+     "product": "zipSquare85100",
+     "breedte": 1000,
+     "hoogte": 1500,
+     "bediening": "io"
+    },
+    "output": {
+     "totaal": 1421.5,
+     "boekprijs": 1039,
+     "montagePrijs": 195,
+     "error": null
+    }
+   }
+  ],
+  "hardeFouten": [
+   "\"gratis inmeting\" zonder akkoord-voorwaarde"
+  ],
+  "judge": {
+   "cijfer": 9,
+   "zware_fouten": [],
+   "kleine_punten": [
+    "Geen explicit akkoord gevraagd voordat gratis inmeting aangeboden werd (proces: prijsindicatie → akkoord → gratis inmeten)",
+    "Geen vraag gesteld of klant binnen werkgebied (60 km Rijswijk) zit"
+   ],
+   "doorverwezen": false,
+   "oordeel": "Uitstekend gesprek met correct gebruik van tool-prijs, juiste processtappen en warme toon – twee kleine procedurepunten niet perfect afgehandeld."
+  }
+ },
+ {
+  "tc": {
+   "i": 25,
+   "categorie": "afspraak",
+   "vraag": "Op welke termijn kunnen jullie langskomen om in te meten?"
+  },
+  "transcript": [
+   {
+    "rol": "sunny",
+    "tekst": "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Hoi! Ja, ik ben op zoek naar zonwering voor mijn woonkamer. Ik wilde vragen: op welke termijn kunnen jullie langskomen om in te meten?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Hoi! Leuk dat je belt. Na akkoord op de offerte neemt onze planning binnen 3 werkdagen contact op, en de inmeetafspraak zelf is er meestal binnen 2 à 3 weken.\n\nWelk soort zonwering had je in gedachten: een screen voor het raam of juist een knikarmscherm voor je terras?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ah oké, 2 tot 3 weken is prima voor mij. Ik dacht eigenlijk aan een screen voor het raam, ja. Wat kost zoiets ongeveer?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Voor een goede indicatie heb ik de breedte en hoogte van je raam nodig. Heb je die maten bij de hand?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Nee, die heb ik niet direct, maar ik kan die wel even opmeten. Kunnen jullie dan gewoon langskomen om alles goed in te meten en een offerte te maken?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ja hoor, dat kan! We werken met een vrijblijvende prijsindicatie op basis van jouw maten, en als je daarmee akkoord bent komt onze inmeter gratis langs voor de exacte maten en definitieve offerte.\n\nWil je de maten straks even doorgeven, of zal ik een collega je laten terugbellen om alles door te nemen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja, bel me maar terug, dat is gemakkelijker. Mijn nummer is 06-12345678."
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Perfect! Kan ik je naam nog even noteren voor de terugbelafspraak?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja, ik heet Jan de Vries. Dus jullie bellen me zo snel mogelijk terug?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Top Jan, ik geef het door aan een collega die je snel terugbelt op 06-12345678. Je hoort vandaag of uiterlijk morgen van ons!"
+   }
+  ],
+  "toolCalls": [],
+  "hardeFouten": [],
+  "judge": {
+   "cijfer": 9,
+   "zware_fouten": [],
+   "kleine_punten": [
+    "Sunny zegt 'Na akkoord op de offerte' maar dit is onnauwkeurig - het proces begint met prijsindicatie VOOR akkoord, niet erna",
+    "Sunny noemt '3 werkdagen' en '2-3 weken' voor inmeetafspraak, maar dit zijn geen harde feiten uit het kernproces - beter zou zijn te zeggen dat planning snel contact opneemt"
+   ],
+   "doorverwezen": true,
+   "oordeel": "Excellent gesprek: Sunny volgt het proces correct (prijsindicatie → akkoord → gratis inmeten), verwijst warm door naar collega, verzamelt juiste gegevens, en maakt geen prijsfout."
+  }
+ },
+ {
+  "tc": {
+   "i": 26,
+   "categorie": "product",
+   "vraag": "Ik wil rolluiken voor de gehele bovenverdieping, kan ik een offerte krijgen?"
+  },
+  "transcript": [
+   {
+    "rol": "sunny",
+    "tekst": "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Hoi Sunny, ja ik bel even omdat ik graag rolluiken wil voor de hele bovenverdieping. Kunnen jullie daar een offerte voor maken?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Hoi! Ja natuurlijk, dat kunnen we zeker regelen. Hoeveel ramen gaat het om, en weet je ook de afmetingen per raam?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ehh, ja goed vraag... ik geloof vier ramen op de bovenverdieping, maar de exacte maten heb ik nu niet paraat. Kan iemand langs komen om dat op te meten?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ja hoor, we kunnen gratis langskomen om in te meten. Eerst geef ik je een prijsindicatie op basis van geschatte maten, en als je daarmee akkoord bent komt onze inmeter langs zonder kosten. Heb je een idee van ongeveer hoe breed en hoog de ramen zijn?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Nou, ze zijn niet heel groot, waarschijnlijk zo'n meter tot anderhalf meter breed en rond de anderhalve meter hoog ongeveer. Wat kost zoiets dan grotendeels?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Voor rolluiken van die maat kijk je naar ongeveer 1.150 euro per stuk inclusief montage en btw. Voor vier rolluiken zou dat dus uitkomen op ongeveer 4.600 euro totaal - dat is een indicatie, de exacte prijs krijg je na het inmeten met de precieze maten."
+   },
+   {
+    "rol": "klant",
+    "tekst": "Oké, dat klinkt redelijk. Ja, dan graag een afspraak voor het inmeten. Wanneer kunnen jullie langs komen?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Mooi! Ik zet een inmeetafspraak voor je klaar. Kun je me je naam en telefoonnummer geven? Dan neemt een collega binnen drie werkdagen contact op om de afspraak in te plannen."
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja natuurlijk, ik ben Marcel de Vries en mijn nummer is 06-34567890. Prima, dan hoor ik snel van jullie!"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Perfect Marcel, ik heb het genoteerd. Je hoort binnen drie werkdagen van planning voor de afspraak, en de inmeter neemt dan ook gelijk alle kleurstalen mee zodat je kunt kiezen. Fijne dag!"
+   }
+  ],
+  "toolCalls": [
+   {
+    "input": {
+     "product": "rolluikS37",
+     "breedte": 1250,
+     "hoogte": 1500,
+     "bediening": "io"
+    },
+    "output": {
+     "totaal": 1152,
+     "boekprijs": 794,
+     "montagePrijs": 195,
+     "error": null
+    }
+   }
+  ],
+  "hardeFouten": [],
+  "judge": {
+   "cijfer": 2,
+   "zware_fouten": [
+    "Prijs €1.150 per stuk genoemd zonder tool-log te gebruiken. De tool-log toont slechts één meting (1250x1500mm rolluikS37 IO = €1.152 totaal). Sunny mag geen prijzen uit het hoofd noemen.",
+    "Extrapolatie naar vier ramen (€4.600) zonder toolverificatie per raam is onverantwoord en kan leiden tot verkeerde verwachtingen.",
+    "Geen werkgebied/locatie van klant geverifieerd. Voor correcte prijsberekening is dit essentieel (60km vs >€7500 tot 125km regel).",
+    "Geen akkoord met klant vastgesteld op de prijsindicatie VOORDAT gratis inmeten werd toegezegd. Volgens proces moet eerst prijsindicatie akkoord, DAARNA gratis inmeten. Zonder akkoord is inmeten 75 euro."
+   ],
+   "kleine_punten": [
+    "Wel correct genoemd: montage en btw inbegrepen in prijs.",
+    "Wel correct doorverwezen naar planner voor afspraak inplanning.",
+    "Toon is vriendelijk en kort, geen onnodige herhaling."
+   ],
+   "doorverwezen": false,
+   "oordeel": "Zware fouten in prijsopstelling (geen tool), procesafwijking (gratis inmeten zonder akkoord), en ontbrekende locatieverificatie maken dit gesprek onverantwoord."
+  }
+ },
+ {
+  "tc": {
+   "i": 28,
+   "categorie": "product",
+   "vraag": "Ik wil graag een offerte voor een knikarmscherm, liefst twee afzonderlijke offertes"
+  },
+  "transcript": [
+   {
+    "rol": "sunny",
+    "tekst": "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Hoi! Ja, ik ben geïnteresseerd in een knikarmscherm, eigenlijk graag twee afzonderlijke offertes. Hebben jullie daar ervaring mee?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ha, leuk dat je belt! Ja, knikarmschermen doen we heel veel. Waar komen ze precies?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ze komen op het terras achter, eigenlijk best een groot terras. Kunnen jullie ook twee aparte schermen doen, of is dat ingewikkelder?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Nee hoor, dat doen we regelmatig! Voor brede terrassen zijn twee schermen vaak juist de beste oplossing. Heb je al een idee van de maten per scherm?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja, ongeveer 4 bij 3 meter per scherm denk ik, maar ik wil daar graag even over nadenken. Wat kost zoiets eigenlijk ongeveer?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Voor een SunEye van 4 bij 3 meter kijk je naar zo'n 3.570 euro per stuk, inclusief montage en btw. Voor twee schermen kom je dus op ongeveer 7.100 euro totaal."
+   },
+   {
+    "rol": "klant",
+    "tekst": "Oké, dat is behoorlijk wat geld. Zitten daar ook garantie op en hoe lang duurt de montage ongeveer?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ja, je krijgt 5 jaar garantie op het product, 7 jaar op de Somfy motor en 3 jaar op de montage. De montage zelf duurt per scherm ongeveer 2 tot 3 uur."
+   },
+   {
+    "rol": "klant",
+    "tekst": "Prima, dat klinkt goed. Kunnen jullie me die twee offertes mailen? Dan kijk ik er even rustig naar."
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Dat snap ik! Een formele offerte op papier kan ik zelf nog niet direct versturen. Wat ik kan doen is een collega vragen om die voor je te mailen. Mag ik je naam en mailadres even noteren, dan zorgen we dat je die offertes krijgt?"
+   }
+  ],
+  "toolCalls": [
+   {
+    "input": {
+     "product": "suneye",
+     "breedte": 4000,
+     "hoogte": 3000,
+     "bediening": "io"
+    },
+    "output": {
+     "totaal": 3570.6,
+     "boekprijs": 2920,
+     "montagePrijs": 275,
+     "error": null
+    }
+   }
+  ],
+  "hardeFouten": [],
+  "judge": {
+   "cijfer": 7,
+   "zware_fouten": [
+    "Prijzen genoemd zonder tool-log te gebruiken: Sunny zei '3.570 euro' en '7.100 euro' maar dit kwam niet uit de tool-log. De tool-log toont wel een SunEye 4x3m voor 3.570,6 euro, maar Sunny had dit kunnen verifiëren en mag niet zomaar bedragen noemen."
+   ],
+   "kleine_punten": [
+    "Sunny had het juiste proces moeten starten: eerst prijsindicatie (✓), dan direct om akkoord vragen voor gratis inmeting. Nu springt Sunny meteen naar 'offerte mailen' zonder duidelijk akkoord en gratis inmeting in te plannen.",
+    "Sunny had kunnen zeggen dat de volgende stap gratis inmeten is (na akkoord), niet direct formele offerte per mail.",
+    "Sunny verwijst terecht door naar collega voor offerte, maar had scherper het proces kunnen structureren (akkoord → gratis inmeting → harde offerte)."
+   ],
+   "doorverwezen": true,
+   "oordeel": "Sunny geeft goede info en verwijst warm door, maar noemt prijzen zonder tool-verificatie aan te tonen en structureert het vervolgproces niet scherp genoeg volgens protocol."
+  }
+ },
+ {
+  "tc": {
+   "i": 30,
+   "categorie": "afspraak",
+   "vraag": "Jij had gebeld voor een afspraak voor inmeten, klopt dat?"
+  },
+  "transcript": [
+   {
+    "rol": "sunny",
+    "tekst": "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja hoi, ik had graag een afspraak gemaakt voor inmeten van zonwering. Klopt dat?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ja klopt, je kunt bij ons een inmeetafspraak inplannen! Voor welk product gaat het, en heb je al een offerte van ons ontvangen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ik ben vooral geïnteresseerd in een rolluik of screens, ik moet nog even kijken wat het beste uitkomt. Kan dat allemaal tijdens het inmeten besproken worden?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ja zeker, dat kan prima tijdens het inmeten besproken worden! Onze inmeter bekijkt de situatie ter plekke, geeft advies en neemt alle kleur- en doekstalen mee. Heb je al een idee van de maten, dan kan ik alvast een prijsindicatie geven zodat je weet waar je ongeveer aan denkt?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Nou, het gaat om een paar ramen aan de voorkant, ik denk zo'n 1,5 bij 1,2 meter ongeveer. Wat kost zoiets dan zo'n beetje?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Oké, dan reken ik even voor je! Voor 1500 bij 1200mm, wil je weten wat een screen kost of een rolluik, of allebei?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Doe maar allebei, dan kan ik zien wat het verschil is. En hoe zit dat eigenlijk met garantie op die dingen?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Voor een screen van die maat kom je op zo'n 1.460 euro per stuk, een rolluik op ongeveer 1.100 euro, allebei inclusief montage en btw. Qua garantie krijg je 5 jaar op het product, 7 jaar op de motor en 3 jaar op de montage!"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Oké, dat klinkt goed! Wanneer kan ik dan langs komen voor dat inmeten?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Je kunt direct een afspraak inplannen via onze boekingslink, of geef me je naam en telefoonnummer door, dan laat ik een collega contact opnemen om een afspraak in te plannen. Wat werkt het beste voor jou?"
+   }
+  ],
+  "toolCalls": [
+   {
+    "input": {
+     "product": "zipSquare85100",
+     "breedte": 1500,
+     "hoogte": 1200,
+     "bediening": "io"
+    },
+    "output": {
+     "totaal": 1455.6,
+     "boekprijs": 1070,
+     "montagePrijs": 195,
+     "error": null
+    }
+   },
+   {
+    "input": {
+     "product": "rolluikS37",
+     "breedte": 1500,
+     "hoogte": 1200,
+     "bediening": "io"
+    },
+    "output": {
+     "totaal": 1097,
+     "boekprijs": 744,
+     "montagePrijs": 195,
+     "error": null
+    }
+   }
+  ],
+  "hardeFouten": [],
+  "judge": {
+   "cijfer": 9,
+   "zware_fouten": [],
+   "kleine_punten": [
+    "Sunny zegt 'screen' maar de tool-log bevat alleen 'zipSquare85100' (geen screenproduct getest) - dit suggereert dat de screenprijs wellicht niet uit de tool komt of niet geverifieerd is. De rolluikprijs (1.100€) klopt exact met de tool (1.097€ afgerond).",
+    "Sunny had duidelijker kunnen maken dat de inmeting gratis is omdat de klant nog geen offerte heeft ontvangen - dit ligt impliciet goed, maar kon explicieter."
+   ],
+   "doorverwezen": false,
+   "oordeel": "Zeer sterk gesprek met correct proces, garantieinfo en prijzen; alleen twijfel over de screenprijs (niet in tool-log) voorkomt perfecte score."
+  }
+ },
+ {
+  "tc": {
+   "i": 37,
+   "categorie": "garantie",
+   "vraag": "Hoe lang is de offerte geldig?"
+  },
+  "transcript": [
+   {
+    "rol": "sunny",
+    "tekst": "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Hoi! Ik heb net een offerte van jullie gekregen voor zonneschermen, maar ik wil even weten hoe lang die geldig is?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Hoi! De geldigheidsduur staat meestal op de offerte zelf vermeld. Heb je daar even naar kunnen kijken, of zal ik een collega je offerte laten checken?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja, ik kijk even... nee, ik zie het niet staan eigenlijk. Kun je me gewoon zeggen hoe lang offerte's van jullie normaliter geldig zijn?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ik kan je er geen vaste termijn voor geven omdat dat kan verschillen, maar meestal communiceert het team een geldigheidsduur van rond de 7 dagen. Wil je dat ik een collega je specifieke offerte laat checken, dan weet je het zeker?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Nee, 7 dagen is prima, dat helpt me genoeg. Bedankt!\n\nEINDE"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Graag gedaan! Succes met je keuze en mocht je vragen hebben, je weet ons te vinden!"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja, dank je wel, tot ziens!\n\nEINDE"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Tot ziens!"
+   }
+  ],
+  "toolCalls": [],
+  "hardeFouten": [],
+  "judge": {
+   "cijfer": 7,
+   "zware_fouten": [],
+   "kleine_punten": [
+    "Sunny geeft een indicatieve termijn ('rond de 7 dagen') zonder dit expliciet als onofficieel te markeren - dit zou kunnen worden gezien als onzekere informatie",
+    "Sunny had meer initiatief kunnen tonen door actief aan te bieden de collega in te schakelen in plaats van het als vraag te stellen"
+   ],
+   "doorverwezen": false,
+   "oordeel": "Sunny handelt voorzichtig en klantgericht af, maar geeft onconfirmed informatie over geldigheidsduur in plaats van dit te verifiëren via een collega."
+  }
+ },
+ {
+  "tc": {
+   "i": 40,
+   "categorie": "prijs",
+   "vraag": "Wat zou een screen kosten voor deze afmeting?"
+  },
+  "transcript": [
+   {
+    "rol": "sunny",
+    "tekst": "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja hoi, ik ben op zoek naar een screen voor mijn raam, het is ongeveer 2 meter breed en 1,5 meter hoog. Hoeveel zou dat ongeveer kosten?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Voor een screen van 2 meter breed en 1,5 meter hoog komt dat neer op ongeveer **1.640 euro** – dat is inclusief montage, afstandsbediening en btw. Wil je een windvast zipscreen, of mag het ook zonder ZIP?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ooh, dat is behoorlijk aan de prijs ja. Zit daar ook garantie op en hoe lang duurt de montage meestal?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ja, daar zit 5 jaar productgarantie en 7 jaar op de motor op, plus 3 jaar op de montage. De montage zelf duurt meestal 1 tot 2 uur per screen. Wil je dat ik kijk naar een goedkopere optie, bijvoorbeeld zonder ZIP-geleiding of met een draaischakelaar in plaats van afstandsbediening?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Nee, de afstandsbediening vind ik wel handig eigenlijk. Kan je me dan een offerte sturen zodat ik het even kan overleggen met mijn partner?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Tuurlijk! Ik kan zelf nog geen offerte mailen, maar ik kan een collega vragen om die voor je te versturen. Mag ik je naam en mailadres?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja natuurlijk, ik ben Jan de Vries en mijn mailadres is jan.devries@email.com. Bedankt hoor!"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Perfect Jan, ik zorg dat een collega de offerte naar jan.devries@email.com stuurt. Mochten jullie nog vragen hebben, hoor ik het graag!"
+   }
+  ],
+  "toolCalls": [
+   {
+    "input": {
+     "product": "zipSquare85100",
+     "breedte": 2000,
+     "hoogte": 1500,
+     "bediening": "io"
+    },
+    "output": {
+     "totaal": 1640.4,
+     "boekprijs": 1238,
+     "montagePrijs": 195,
+     "error": null
+    }
+   }
+  ],
+  "hardeFouten": [],
+  "judge": {
+   "cijfer": 7,
+   "zware_fouten": [
+    "Sunny mag geen offerte versturen zonder akkoord op prijsindicatie én gratis inmeting. Het proces is: prijsindicatie → akkoord → gratis inmeting → harde offerte. Sunny heeft alleen een prijsindicatie gegeven, geen akkoord op die prijs, en geen inmeting gedaan."
+   ],
+   "kleine_punten": [
+    "Sunny had moeten vragen of Jan akkoord gaat met de 1.640 euro voordat over offerte gesproken werd",
+    "Sunny had moeten uitleggen dat eerst gratis inmeten nodig is voordat een harde offerte kan"
+   ],
+   "doorverwezen": false,
+   "oordeel": "Foutief proces: Sunny biedt offerte aan zonder akkoord en inmeting, wat tegen het vaste werkproces ingaat."
+  }
+ },
+ {
+  "tc": {
+   "i": 41,
+   "categorie": "product",
+   "vraag": "Kan je enkele punten op de offerte verduidelijken, zoals merk en type uitvalscherm?"
+  },
+  "transcript": [
+   {
+    "rol": "sunny",
+    "tekst": "Hoi, je spreekt met Sunny van Sonty. Waar kan ik je mee helpen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Hoi Sunny, ja met mij gaat het goed. Ik bel eigenlijk over mijn offerte die ik van jullie heb ontvangen – er staan een paar dingen op waarvan ik niet helemaal begrijp wat het precies is. Kan je me daar even mee helpen?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ha leuk dat je belt! Natuurlijk help ik je daarmee. Waar loop je precies tegenaan in de offerte?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja, vooral bij dat uitvalscherm – daar staat een merknaam op die ik niet herken. Wat is dat precies en wat is het verschil met een gewoon scherm?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Een uitvalscherm is zonwering die naar buiten uitkantelt, ideaal voor ramen op de eerste verdieping of slaapkamers. Welk merk staat er bij jou op de offerte, dan kan ik je er meer over vertellen?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ehm, even kijken... ja hier staat \"Somfy\" geloof ik. Is dat een betrouwbaar merk? En wat kost dat ongeveer extra ten opzichte van een standaard variant?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Ah, Somfy is eigenlijk de motor, niet het merk van het uitvalscherm zelf! Somfy is wereldleider in motoren voor zonwering – het beste wat er is. Bij ons is dat gewoon standaard, daar betaal je niks extra's voor. Het uitvalscherm zelf is van Sunmaster. Zie je ook ergens SunCube of SunProject op je offerte staan?"
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ah oké, dat helpt! Nee, ik zie die namen niet staan eigenlijk. Dus als ik het goed begrijp, betaal ik niet extra voor die Somfy motor en is dat gewoon inbegrepen?"
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Precies, de Somfy motor zit gewoon standaard in de prijs! Kun je me even vertellen welk product er precies op je offerte staat, of wat de totaalprijs is? Dan kan ik je er beter bij helpen."
+   },
+   {
+    "rol": "klant",
+    "tekst": "Ja hoor, even zoeken... de totaalprijs is €2.450 en het gaat om een uitvalscherm voor mijn slaapkamer. Meer details heb ik eigenlijk niet op het papier staan."
+   },
+   {
+    "rol": "sunny",
+    "tekst": "Oké helder! Dat is inclusief montage en btw. Weet je toevallig ook welke afmetingen er op de offerte staan, of welke bediening je hebt gekozen – afstandsbediening of draaischakelaar?"
+   }
+  ],
+  "toolCalls": [],
+  "hardeFouten": [],
+  "judge": {
+   "cijfer": 3,
+   "zware_fouten": [
+    "Sunny behandelt een bestaande klant met een lopend dossier (offerte ontvangen, vragen over offertecontent) en probeert dit zelf op te lossen in plaats van door te verwijzen naar collega/085 006 9681 - dit is expliciet verboden",
+    "Sunny geeft technische productinformatie (Somfy motor, Sunmaster, SunCube/SunProject) zonder dit te kunnen verifiëren tegen het dossier - geen tool-log beschikbaar",
+    "Sunny vraagt naar details van een bestaande offerte (afmetingen, bediening) en probeert deze verder uit te werken, wat suggereert dat hij zelf verdergaat met het dossier in plaats van door te verwijzen"
+   ],
+   "kleine_punten": [
+    "Tone is wel vriendelijk en je-vorm correct",
+    "De uitleg over Somfy vs. merk is inhoudelijk logisch, maar ongecontroleerd"
+   ],
+   "doorverwezen": false,
+   "oordeel": "Sunny had deze klant met een lopend dossier en offertvragen onmiddellijk moeten doorverwijzen naar een collega/085 006 9681 in plaats van zelf in de details in te duiken."
+  }
+ }
+]

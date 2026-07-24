@@ -45,3 +45,15 @@ Create API Key → alle permissies aanvinken. Gevraagd aan Daimy via Telegram.
   losse TTS-API geblokkeerd (in de agent-runtime werkt de NL-stem wel).
 - Volgende stap (na akkoord Daimy): betaald plan (Starter $5 / Creator $22 p/mnd) → echt
   telefoonnummer + meer belminuten. Daarna fase 3: custom-LLM koppeling naar eigen KS-brein.
+
+## Update 2026-07-24 (na feedback Daimy: herhaling + geen offerte)
+- Prompt herschreven: harde anti-herhalingsregels (geen vaste slotzinnen, nummer max 1x), max 1-2 zinnen.
+- Webhook-tool `prijs_berekenen` toegevoegd → live prijzen uit onze eigen engine
+  (sonty-website /api/offerte-tool?action=prijs). GETEST in echt kanaal: rolluik 2x2m
+  = "€1.320" (engine zegt 1321,40 → afronding klopt), tool executed zonder error.
+- Doorgetest via WebSocket (echte runtime, tekstmodus): werkgebied Groningen correct,
+  eerlijk over digitale assistent, klacht → doorverwijzen, knikarm vraagt eerst bediening,
+  showroom zaterdag alleen op afspraak (klopt met kennisbank). Geen herhaling meer gezien.
+- Formele offerte MAILEN doet Sunny bewust nog niet (vangt naam+mail voor collega).
+  Fase 2: koppelen aan echte offerte-flow + Bookings.
+- Niet zelf te testen: hoe de STEM in een live call klinkt (latency/intonatie) — oordeel Daimy.

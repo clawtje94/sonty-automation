@@ -1,0 +1,702 @@
+[
+ {
+  "idx": 0,
+  "convId": "conv_2001kya3bbh3e2rba7368c97zdf9",
+  "duurSec": 54,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 1,
+  "convId": "conv_9401kya3bbhjee8b9b7kpjfdbfha",
+  "duurSec": 44,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 2,
+  "convId": "conv_2401kya3bbhqffq8t3s5jtf3r6t0",
+  "duurSec": 43,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 3,
+  "convId": "conv_7201kya3d03af3svhcarg3ek5tn7",
+  "duurSec": 40,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 4,
+  "convId": "conv_3001kya3d03neafvkk675cndtxdm",
+  "duurSec": 48,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 5,
+  "convId": "conv_3001kya3d03pfb09gcfmzpatftw2",
+  "duurSec": 55,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 6,
+  "convId": "conv_2601kya3endmf7w9gnz9sezx94pp",
+  "duurSec": 57,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 7,
+  "convId": "conv_8701kya3endxetqs0c6hpzbbaqzs",
+  "duurSec": 56,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 8,
+  "convId": "conv_1901kya3endqf948n2s3gm47gd5f",
+  "duurSec": 52,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 9,
+  "convId": "conv_8101kya3gd0zfdzrfbx96ep6dk4c",
+  "duurSec": 23,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 10,
+  "convId": "conv_1601kya3gd1kehdaqr908t93gx7c",
+  "duurSec": 48,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 11,
+  "convId": "conv_4401kya3gd1bfqxbjs2ng1xh5zkx",
+  "duurSec": 33,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 12,
+  "convId": "conv_7001kya3hvprey29cm0q4mv271sz",
+  "duurSec": 55,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 13,
+  "convId": "conv_0301kya3hvprfznss6scfkxbbr36",
+  "duurSec": 43,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 14,
+  "convId": "conv_9201kya3hvpqekcaapfqx3hr3dpx",
+  "duurSec": 36,
+  "beurten": 2,
+  "reden": "klaar"
+ },
+ {
+  "idx": 15,
+  "convId": "conv_1101kya3khk4f4vbsyc1qqr3sf9r",
+  "duurSec": 41,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 16,
+  "convId": "conv_9101kya3khk5fcdsm862mw6adsxn",
+  "duurSec": 57,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 17,
+  "convId": "conv_3501kya3khq2f698rp228r7d0dwm",
+  "duurSec": 44,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 18,
+  "convId": "conv_4301kya3n9f4fx2vsxtcpx7gd0xm",
+  "duurSec": 28,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 19,
+  "convId": "conv_4701kya3n9fkfzzv9r1m6c7d09gr",
+  "duurSec": 29,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 20,
+  "convId": "conv_3301kya3n9fgf0yrthfm0m8wdrx2",
+  "duurSec": 47,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 21,
+  "convId": "conv_9001kya3pqe4e6vvgp46seme5phc",
+  "duurSec": 34,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 22,
+  "convId": "conv_1501kya3pqdyfx0vgp59hp9nsf85",
+  "duurSec": 38,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 23,
+  "convId": "conv_0701kya3pqe3e5582wbyjexp95tn",
+  "duurSec": 37,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 24,
+  "convId": "conv_1801kya3qwtzehc9cde2q2nxb148",
+  "duurSec": 37,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 25,
+  "convId": "conv_3301kya3qwv0f1dsn62eey7ytg3s",
+  "duurSec": 55,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 26,
+  "convId": "conv_2801kya3qwv2ehntyy33djk57fkr",
+  "duurSec": 41,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 27,
+  "convId": "conv_5301kya3sjrefvk984g0tk0wr2qc",
+  "duurSec": 44,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 28,
+  "convId": "conv_1901kya3sjrnfy8t3stqgcxxtc80",
+  "duurSec": 56,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 29,
+  "convId": "conv_0301kya3sjrtftb90v1pajeer9yd",
+  "duurSec": 39,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 30,
+  "convId": "conv_7401kya3v9hyf19vc77yv933web3",
+  "duurSec": 55,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 31,
+  "convId": "conv_0201kya3v9jdf24s7ncckmhf9j3j",
+  "duurSec": 55,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 32,
+  "convId": "conv_6201kya3v9jce4282eb7ag9b8pz5",
+  "duurSec": 56,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 33,
+  "convId": "conv_1701kya3wzvsf8a8gyn63hdxjame",
+  "duurSec": 34,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 34,
+  "convId": "conv_0701kya3wzvje3z8jrexvtdrb191",
+  "duurSec": 42,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 35,
+  "convId": "conv_9601kya3wzvpfxxv739v48ty3tvr",
+  "duurSec": 55,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 36,
+  "convId": "conv_4501kya3yntbebp834ytd5zn6wwt",
+  "duurSec": 40,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 37,
+  "convId": "conv_8201kya3ynt8e6vbjzrfbkae0syh",
+  "duurSec": 30,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 38,
+  "convId": "conv_4001kya3ynv6f1qt6jxjjnnsdaez",
+  "duurSec": 28,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 39,
+  "convId": "conv_7401kya3zwdreac90mb75y6kdkx6",
+  "duurSec": 55,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 40,
+  "convId": "conv_3401kya3zwdtf42s5s75jwzz9rn7",
+  "duurSec": 57,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 41,
+  "convId": "conv_9101kya3zwdrfdprg50kqa4t45hd",
+  "duurSec": 28,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 42,
+  "convId": "conv_5401kya41mnwehptek411gg4z4d6",
+  "duurSec": 39,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 43,
+  "convId": "conv_2001kya41m2ceaqsz8hd353sjf93",
+  "duurSec": 29,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 44,
+  "convId": "conv_3201kya41mswfc5a1ptspze7cn09",
+  "duurSec": 48,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 45,
+  "convId": "conv_1901kya432w4eq6901j8kqcw7zx0",
+  "duurSec": 31,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 46,
+  "convId": "conv_0101kya432wnfr3857kwfbpshjt1",
+  "duurSec": 43,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 47,
+  "convId": "conv_8501kya432wmemjb4qg5afy1q6g6",
+  "duurSec": 30,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 48,
+  "convId": "conv_6001kya44d09fsqbwast2574yxw8",
+  "duurSec": 25,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 49,
+  "convId": "conv_9701kya44d09fvqrmnehw33vxxy7",
+  "duurSec": 38,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 50,
+  "convId": "conv_7801kya44d09fhmt9k0srzk4z89q",
+  "duurSec": 45,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 51,
+  "convId": "conv_7301kya45rjjetcak69v882gkvnx",
+  "duurSec": 51,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 52,
+  "convId": "conv_4901kya45rj6exmtcc1215z1y79s",
+  "duurSec": 49,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 53,
+  "convId": "conv_7501kya45rjee63t279eykv3drv2",
+  "duurSec": 50,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 54,
+  "convId": "conv_0501kya47apseyx8nxys29v1jj7x",
+  "duurSec": 30,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 55,
+  "convId": "conv_6301kya47apqfmgvd9vg0k76ahzt",
+  "duurSec": 42,
+  "beurten": 2,
+  "reden": "klaar"
+ },
+ {
+  "idx": 56,
+  "convId": "conv_5001kya47apqfwx9ecteqvbw1zp5",
+  "duurSec": 59,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 57,
+  "convId": "conv_9401kya4946nfjyt3x7empgmwa1p",
+  "duurSec": 61,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 58,
+  "convId": "conv_7801kya4946ef77ttdwyvre2tenx",
+  "duurSec": 49,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 59,
+  "convId": "conv_8101kya49469e70tg5wkcv8v25kz",
+  "duurSec": 54,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 60,
+  "convId": "conv_9201kya4azf4fw7sj5am6gcac646",
+  "duurSec": 27,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 61,
+  "convId": "conv_6401kya4azfne5kachprjspsxe0w",
+  "duurSec": 50,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 62,
+  "convId": "conv_0201kya4azfpfq2s9egkbp6khsbf",
+  "duurSec": 56,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 63,
+  "convId": "conv_2201kya4cnq1ee9936nzjhxdzr6b",
+  "duurSec": 56,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 64,
+  "convId": "conv_9401kya4cnppe0wr27y162qpgsbh",
+  "duurSec": 51,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 65,
+  "convId": "conv_5801kya4cnpwfr886ayd4f342vmc",
+  "duurSec": 42,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 66,
+  "convId": "conv_3801kya4ecbffyr8nqx003w7j9ee",
+  "duurSec": 50,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 67,
+  "convId": "conv_8201kya4ecgmfdf99kqj08vdh1b7",
+  "duurSec": 62,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 68,
+  "convId": "conv_2001kya4ecbaf8jtkv2zmk0m965y",
+  "duurSec": 59,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 69,
+  "convId": "conv_4401kya4g934fsqr1xhd82x5jt1d",
+  "duurSec": 57,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 70,
+  "convId": "conv_6501kya4g93ff30b941rfpgjp06v",
+  "duurSec": 58,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 71,
+  "convId": "conv_4901kya4g939ebhtwtr7p8byhxza",
+  "duurSec": 46,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 72,
+  "convId": "conv_6701kya4j1kvfeh9swbytsfs50e5",
+  "duurSec": 36,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 73,
+  "convId": "conv_3001kya4j1m8f348b3pb7hk16y5f",
+  "duurSec": 55,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 74,
+  "convId": "conv_2101kya4j1m5fzx9xah8tddztp48",
+  "duurSec": 54,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 75,
+  "convId": "conv_9501kya4kpx2fc1sgz7peafw78y3",
+  "duurSec": 51,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 76,
+  "convId": "conv_3201kya4kpxafmjs1n6rhv020ghr",
+  "duurSec": 55,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 77,
+  "convId": "conv_8501kya4kpxafs0sfrj2wckcc8pm",
+  "duurSec": 50,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 78,
+  "convId": "conv_6401kya4ncq0ejaa4w5sy5v9jfn0",
+  "duurSec": 21,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 79,
+  "convId": "conv_1001kya4ncpjehdss62zxxzrmh7k",
+  "duurSec": 50,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 80,
+  "convId": "conv_5801kya4ncq4frrs89wvcgfs17jx",
+  "duurSec": 38,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 81,
+  "convId": "conv_7901kya4pxk2fhntvtkfvzfwwpna",
+  "duurSec": 36,
+  "beurten": 2,
+  "reden": "klaar"
+ },
+ {
+  "idx": 82,
+  "convId": "conv_9001kya4pxq0ff9bknxgex69fndg",
+  "duurSec": 52,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 83,
+  "convId": "conv_4201kya4pxk8ed7aghtwbfygtc69",
+  "duurSec": 53,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 84,
+  "convId": "conv_4201kya4rh6wfdm977tsgvjjpt2z",
+  "duurSec": 35,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 85,
+  "convId": "conv_5601kya4rh6re5h88zaqrdvey5zy",
+  "duurSec": 37,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 86,
+  "convId": "conv_9801kya4rh73fyc82fjqcygym403",
+  "duurSec": 37,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 87,
+  "convId": "conv_4601kya4sn2re738skpjz9mygt7h",
+  "duurSec": 51,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 88,
+  "convId": "conv_1401kya4sn31fk5tq98xy4b2xaz2",
+  "duurSec": 51,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 89,
+  "convId": "conv_0501kya4sn33e08spzhfxxqnyccr",
+  "duurSec": 49,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 90,
+  "convId": "conv_8101kya4v76ted690xwzy24c20c4",
+  "duurSec": 43,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 91,
+  "convId": "conv_3101kya4v76ee8wahjcqywyf84wk",
+  "duurSec": 45,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 92,
+  "convId": "conv_2601kya4v76sf329qnz19g9teysn",
+  "duurSec": 54,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 93,
+  "convId": "conv_2201kya4ww22eb9t6wfsa6cqawgn",
+  "duurSec": 41,
+  "beurten": 2,
+  "reden": "klaar"
+ },
+ {
+  "idx": 94,
+  "convId": "conv_4301kya4ww28f67t1x7sjev5h97b",
+  "duurSec": 29,
+  "beurten": 2,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 95,
+  "convId": "conv_9201kya4ww28e8z8z8p909qdk9c7",
+  "duurSec": 60,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 96,
+  "convId": "conv_8001kya4ypmpecx8nwj1kk7d0t2w",
+  "duurSec": 52,
+  "beurten": 3,
+  "reden": "klaar"
+ },
+ {
+  "idx": 97,
+  "convId": "conv_1201kya4ypn0ea1vk2sxvvn9148d",
+  "duurSec": 38,
+  "beurten": 2,
+  "reden": "klaar"
+ },
+ {
+  "idx": 98,
+  "convId": "conv_2201kya4ypmse7494chnzxwg84g3",
+  "duurSec": 46,
+  "beurten": 3,
+  "reden": "gesloten"
+ },
+ {
+  "idx": 99,
+  "convId": "conv_9401kya50946fzhrycmba3a4a2ye",
+  "duurSec": 50,
+  "beurten": 3,
+  "reden": "klaar"
+ }
+]

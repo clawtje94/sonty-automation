@@ -522,3 +522,12 @@ Alles in memory: `~/.claude/projects/-Users-clawdboot/memory/reference_sonty_cre
 - NIEUWE WERKREGEL Daimy: voor nieuw automatisch gedrag altijd eerst scenario-run + rapport, dan pas bouwen/live.
 - CORRECTIE (Daimy 23-07 avond): zelfde-dag WA-follow-up na net gestuurde offerte was te snel (+31617682103, 5,5u na offerte). Gefixt: "offerte/prijs vandaag gestuurd" is nu expliciet NIET gepast voor zelfde-dag opvolging (die loopt via de normale opvolging na een paar dagen), SNEL_MIN_STIL_UREN 4 -> 6. Scenario-geverifieerd op het misgegane ticket. LET OP: dag-3 WA-follow-up is nog SCHADUW; vraag bij Daimy uit of die live mag via template+merge (V2 open).
 - NACHT 23->24-07: Mark (966941272) werd NIET automatisch ingepland. Twee oorzaken gevonden en gefixt: (1) opvolg-daemon draaide maar 3x/dag (plist StartCalendarInterval), nu echt elk uur (StartInterval 3600); (2) kandidaten-verhongering: 56 snel-kandidaten bij cap 10, geblokkeerde kandidaten kregen geen state en bezetten elke run dezelfde cap-plekken. Fix: state-filter voor de cap + 6u "gecheckt"-cooldown voor geblokkeerden + cap naar 15. Mark staat nu ECHT gepland (state gepland 2026-07-27, geverifieerd). Template-voornaam valt terug op Trengo-contactnaam.
+
+## Voicebot BAS (2026-07-24) — pilot live en zwaar getest
+- ElevenLabs Agents (Creator, daimy@sonty.nl): agent "Bas" (agent_1801ky9nc0fef7c91h0kpc0whmx4),
+  stem Ido, Claude-brein + kennisbank + live prijs-tool naar sonty-website offerte-API.
+  Test-link: https://elevenlabs.io/app/talk-to?agent_id=agent_1801ky9nc0fef7c91h0kpc0whmx4
+- Getest: 51 basis (48 goed) + 163 persona (149 goed) tekstgesprekken + 100 echte gesproken
+  gesprekken, teruggeluisterd via STT-audio-analyse (81 schoon, 0 echte uitspraakfouten).
+- Volledige status en open punten: docs/voicebot-pilot-plan.md. Scripts: scripts/sunny-testbank.js,
+  scripts/bas-voicetest-runner.js, scripts/bas-audio-analyse.js.

@@ -57,3 +57,14 @@ Create API Key → alle permissies aanvinken. Gevraagd aan Daimy via Telegram.
 - Formele offerte MAILEN doet Sunny bewust nog niet (vangt naam+mail voor collega).
   Fase 2: koppelen aan echte offerte-flow + Bookings.
 - Niet zelf te testen: hoe de STEM in een live call klinkt (latency/intonatie) — oordeel Daimy.
+
+## Testdag-resultaat 2026-07-24 (bot heet nu BAS, stem Ido dLPO5AsXc3FZDbTh1IKa)
+- Tekst-testbank: 51 basisvragen 48/51 goed (8,7); 163 persona/randgevallen 149/163 (8,6). 5 fix-rondes.
+- Voicerun: 100 ECHT gesproken gesprekken (75 belminuten), alle opgenomen; terugluister-analyse
+  (STT op audio): 81/100 volledig schoon, 0 echte hoorbare bedrag- of mm-fouten na herclassificatie
+  (stuks-vermenigvuldiging en telefoonnummer-cijfers waren vals alarm; checker daarop verbeterd).
+- Audio-analyse ving eerder WEL echte fouten in Daimys gesprek (prijs verhaspeld, nummer verhaspeld,
+  genegeerde frustratie) → allemaal geregeld via uitspraak/emotie-regels; sindsdien schoon.
+- Scripts: sunny-testbank.js (tekst), bas-voicetest-runner.js (voice), bas-audio-analyse.js (oor).
+- Open punten: offerte-aanmaken-in-RP-tool voor Bas, kennisuitbreiding site-content, echte
+  telefoonnummer-koppeling, stem/latency-eindoordeel Daimy.

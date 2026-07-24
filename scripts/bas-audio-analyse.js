@@ -41,11 +41,16 @@ function analyseer(conv, regels, toolBedragen) {
   if (/\d{4,}/.test(basTekst)) punten.push('Lange cijferreeks hoorbaar: ' + (basTekst.match(/\S*\d{4,}\S*/) || [])[0]);
 
   // bedragen in audio vs toolbedragen
-  const audioBedragen = [...basTekst.matchAll(/€?\s?([\d.]{3,9}),?-?\s*(euro)?/g)].map(m => parseInt(m[1].replace(/\./g, ''))).filter(n => n > 200 && n < 100000);
+  // alleen expliciete geldbedragen (euro ervoor/erna); telefoonnummer-cijfers tellen niet mee
+  const zonderTel = basTekst.replace(/0?85[\s-]?0?06[\s-]?96[\s-]?81|06[\s-]?\d{2}[\s-]?\d{3}[\s-]?\d{3}/g, ' ');
+  const audioBedragen = [...zonderTel.matchAll(/(?:€\s?([\d.]{3,9})|([\d.]{3,9}),?-?\s+euro)/g)].map(m => parseInt((m[1] || m[2]).replace(/\./g, ''))).filter(n => n > 200 && n < 100000);
   for (const b of audioBedragen) {
-    if (toolBedragen.length && !toolBedragen.some(t => Math.abs(t - b) <= Math.max(20, t * 0.02))) {
-      fouten.push(`Hoorbaar bedrag €${b} wijkt af van alle toolbedragen (${toolBedragen.map(t => '€' + Math.round(t)).join(', ')}) — verkeerd uitgesproken of verzonnen`);
-    }
+    if (!toolBedragen.length) continue;
+    const ok = toolBedragen.some(t => {
+      for (let n = 1; n <= 6; n++) if (Math.abs(t * n - b) <= Math.max(25, t * n * 0.03)) return true; // per-stuk × aantal
+      return b % 50 === 0 && Math.abs(t - b) <= t * 0.10; // ruime afronding op rond bedrag
+    });
+    if (!ok) fouten.push(`Hoorbaar bedrag €${b} wijkt af van alle toolbedragen (${toolBedragen.map(t => '€' + Math.round(t)).join(', ')}) — verkeerd uitgesproken of verzonnen`);
   }
 
   // reactietijden

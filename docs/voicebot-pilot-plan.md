@@ -1,11 +1,14 @@
-# Voicebot-pilot: bellen met de Sonty AI (ElevenLabs Agents)
+# Voicebot-pilot "Sunny": bellen met de Sonty AI (ElevenLabs Agents)
 
 Doel (Daimy 2026-07-24): een nummer/plek waar Daimy heen kan bellen en een zo echt
 mogelijke Nederlandse stem krijgt die alle Sonty-info kent en goed antwoordt.
 
 ## Opzet
 1. **Agent** in ElevenLabs Agents platform:
-   - Stem: Sonty voice clone (`cbFatWTfoXkJFHGUWEab`), fallback: beste native NL-stem ter vergelijking
+   - Naam: **Sunny** (Daimy 2026-07-24)
+   - Stem: GEEN Joey-kloon (klinkt robotisch, Daimy 2026-07-24) — zo menselijk mogelijke stem.
+     3 testfragmenten met eleven_v3 naar Daimy (Daniel/Sarah/George premades, NL); keuze open (V2).
+     Met nieuwe key: stemmenbibliotheek doorzoeken op native Nederlandse stemmen.
    - Taal: Nederlands, model met laagste latency dat NL goed doet
    - Kennis: `~/sonty/data/trengo-kennisbank.md` (zelfde brein-inhoud als de mail/WA-bot)
      als knowledge base geüpload; systemprompt met de KS-regels (je-vorm, nooit "u",

@@ -31,3 +31,17 @@ Create API Key → alle permissies aanvinken. Gevraagd aan Daimy via Telegram.
 - Scenario-run eerst (regel): testgesprekken draaien vóór er echte klanten heen bellen
 - Prijzen: alleen vanaf-prijzen uit de kennisbank, nooit rekenen aan de telefoon (pilot)
 - KS-werkmodus: bot presenteert zich als Sonty-medewerker, geen "Sonny"-vermelding
+
+## Status 2026-07-24 — PILOT LIVE (fase 1)
+- Workspace: daimy@sonty.nl (ElevenCreative, FREE tier — 15 gespreksminuten/mnd)
+- Nieuwe API-key "clawtje-sunny" zelf aangemaakt via dashboard (zie memory reference_elevenlabs)
+- Agent: `agent_1801ky9nc0fef7c91h0kpc0whmx4` — naam Sunny, taal nl, LLM claude-sonnet-4-5,
+  stem: Eric Sijbesma (native NL conversational, `AVIlLDn2TVmdaDycgbo3`), kennisbank
+  `trengo-kennisbank.md` als knowledge base (`ENpvB0vWucTROFNyakZk`)
+- Test-link (publiek, geen login): https://elevenlabs.io/app/talk-to?agent_id=agent_1801ky9nc0fef7c91h0kpc0whmx4
+- Scenario-simulatie gedraaid: garanties correct (5 jr product / 7 jr motor), geen verzonnen
+  prijzen, je-vorm, korte antwoorden. Browsertest: call verbindt, agent spreekt, status Listening.
+- Beperkingen free tier: 15 min/mnd gesprekstijd; geen telefoonnummer; library-stemmen via
+  losse TTS-API geblokkeerd (in de agent-runtime werkt de NL-stem wel).
+- Volgende stap (na akkoord Daimy): betaald plan (Starter $5 / Creator $22 p/mnd) → echt
+  telefoonnummer + meer belminuten. Daarna fase 3: custom-LLM koppeling naar eigen KS-brein.

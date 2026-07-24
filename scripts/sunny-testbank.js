@@ -131,6 +131,11 @@ ${toolTxt}
 GESPREK:
 ${txt}
 
+BEOORDEEL EERLIJK, NIET OVERDREVEN STRENG:
+- Een bedrag dat hoogstens 15 euro afwijkt van een toolwaarde in de tool-log is gewoon dat toolresultaat (afgerond) en dus CORRECT.
+- Meerprijzen van opties die letterlijk in de Sonty-kennisbank staan (bv. windsensor) mag Sunny noemen als "meerprijs vanaf"; dat is GEEN fout, zolang ze niet zelf totalen optelt.
+- Als het gesprek stopt doordat de KLANT afrondt of ophangt terwijl Sunny net een correct vervolg aanbood (bv. "zal ik het uitrekenen?"), reken dat Sunny NIET aan.
+
 Antwoord ALLEEN met JSON: {"cijfer": 1-10, "zware_fouten": ["..."], "kleine_punten": ["..."], "doorverwezen": true/false, "oordeel": "één zin"}`;
   const r = await claude(SIM_MODEL, 'Je bent een strenge maar eerlijke kwaliteitsbeoordelaar.', [{ role: 'user', content: vraag }]);
   const t = r.content.filter(c => c.type === 'text').map(c => c.text).join('');

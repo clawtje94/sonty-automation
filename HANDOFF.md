@@ -1,6 +1,8 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-24)
 
-## INCIDENT: V4 OFFERTE-WHATSAPP MASSA-VERZENDING — DAEMON GESTOPT (24 juli ~15:15)
+## GECORRIGEERD (24-07 ~15:45, Daimy): de 102 WhatsApps waren de BEDOELDE te-ver-correctierun van gisteren — GEEN incident. V4 is weer AAN (bootstrap gedaan). Enige echte fout: Ton (+31628840611) — zijn oude 2025-dossier zat in de correctie-batch en de WA-stap checkt de leeftijd van het DOSSIER, niet van de OFFERTE → 2025-offerte geappt. Nieuwe offerte (4 schermen, inmeet 23-07) moet Joey nog maken. FIX-voorstel (1 regel, wacht op Daimy: hier of andere chat): alleen appen als offerte zelf < 14 dagen oud.
+
+## (ACHTERHAALD — zie correctie hierboven) INCIDENT: V4 OFFERTE-WHATSAPP MASSA-VERZENDING — DAEMON GESTOPT (24 juli ~15:15)
 - 102 offerte-WhatsApps verstuurd op 24-07 in twee bursts (V4-runs 9:30 + 13:00). Oorzaak-keten: WA-stap in cron-offerte-controle-v4-combined.js triggert op RP-items met timestamp_updated < 2 dagen; iets (sync/migratie/verrijking) heeft massaal items aangeraakt → honderden matches → per klant de nieuwste SENT/ACCEPTED-offerte geappt, OOK ALS DIE OEROUD IS (klant Ton +31628840611 kreeg offerte 202516635 uit 2025 terwijl gisteren was ingemeten; escalatie liep goed, mens heeft gecorrigeerd).
 - ACTIE: `launchctl bootout gui/501/nl.sonty.offerte-v4` — V4 draait NIET meer (ook prijscontroles niet!) tot fix. Herladen: `launchctl bootstrap gui/501 ~/Library/LaunchAgents/nl.sonty.offerte-v4.plist`.
 - FIX NODIG (waar: Daimy beslist, andere chat werkt aan offerte-flow): (1) WA alleen als de OFFERTE ZELF recent is (quotationCreationTimestamp < X dagen), (2) noodrem max N WhatsApps per run + alert, (3) uitzoeken wat alle RP-items touchte. Verzendlog: scripts/.wa-offerte-sent.json (documentIds+tijd).

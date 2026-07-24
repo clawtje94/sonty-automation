@@ -194,7 +194,7 @@ async function verwerkGeplande(state, regels) {
     let send = await tPost(`/tickets/${ticket}/messages`, payload);
     let via = 'vrij bericht';
     if (!send.ok && send.status === 422 && k.kanaal !== 'EMAIL' && g.klant?.phone) {
-      const voornaam = (g.klant?.naam || '').split(' ')[0] || 'daar';
+      const voornaam = (g.klant?.naam || check.ticket?.contact?.full_name || '').split(' ')[0] || 'daar';
       const tw = await fetch('https://app.trengo.com/api/v2/wa_sessions', {
         method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' },
         body: JSON.stringify({ recipient_phone_number: g.klant.phone, hsm_id: 236108, channel_id: 1359857, params: [{ type: 'body', key: '{{1}}', value: voornaam }] }) });
@@ -225,14 +225,27 @@ async function verwerkGeplande(state, regels) {
 async function main() {
   const argDagen = Number((process.argv.find(a => a.startsWith('--dagen')) || '').split('=')[1] || process.argv[process.argv.indexOf('--dagen') + 1]) || 14;
   const max = Number(process.argv[process.argv.indexOf('--max') + 1]) || 15;
-  const maxSnel = Number(process.argv[process.argv.indexOf('--max-snel') + 1]) || 10;
+  const maxSnel = Number(process.argv[process.argv.indexOf('--max-snel') + 1]) || 15;
   const state = laadState();
   const alle = kandidaten(argDagen);
   // Snel apart cappen (nieuwste eerst: meeste venster over), anders drukken de vele
   // 24u-gesprekken de reguliere kandidaten uit de lijst — of andersom.
-  const forced = alle.filter(k => k.forced);
-  const snel = alle.filter(k => k.snel && !k.forced).sort((a, b) => Date.parse(b.tijd) - Date.parse(a.tijd)).slice(0, maxSnel);
-  const regulier = alle.filter(k => !k.snel && !k.forced).slice(0, max);
+  // Al-beoordeelde/opgevolgde tickets kosten geen werk meer maar drukten wel anderen uit de
+  // cap (Mark-case 24-07: 56 kandidaten, cap 10, plek 18 = nooit aan de beurt). Daarom eerst
+  // goedkoop op state wegfilteren, dan pas cappen; over de uurruns komt zo iedereen aan bod.
+  const vers = alle.filter(k => {
+    if (k.forced) return true;
+    const st = state[String(k.ticket)];
+    if (st && st.laatst && (Date.now() - Date.parse(st.laatst)) / 86400000 < RUST_DAGEN) return false;
+    if (st && st.beoordeeld && (Date.now() - Date.parse(st.beoordeeld)) / 3600000 < HERBEOORDEEL_UREN) return false;
+    // geblokkeerde kandidaten (bv. klant was aan het woord) 6u laten rusten, anders houden
+    // ze elke run dezelfde cap-plekken bezet en komt de rest nooit aan de beurt
+    if (st && st.gecheckt && (Date.now() - Date.parse(st.gecheckt)) / 3600000 < 6) return false;
+    return true;
+  });
+  const forced = vers.filter(k => k.forced);
+  const snel = vers.filter(k => k.snel && !k.forced).sort((a, b) => Date.parse(b.tijd) - Date.parse(a.tijd)).slice(0, maxSnel);
+  const regulier = vers.filter(k => !k.snel && !k.forced).slice(0, max);
   const ks = [...forced, ...snel, ...regulier];
   console.log(`[SCHADUW] ${ks.length} kandidaat-gesprekken (${snel.length} snel/24u-venster max ${maxSnel}, ${regulier.length} regulier ${MIN_STIL_DAGEN}-${Math.min(argDagen, MAX_STIL_DAGEN)} dagen stil max ${max})`);
   let voorstellen = 0;
@@ -242,7 +255,13 @@ async function main() {
     await new Promise(r => setTimeout(r, 3000)); // Trengo-limiet delen met de daemons
     const wie = k.klant?.naam || k.klant?.phone || k.klant?.email || '?';
     const check = await blokkade(k, state);
-    if (check.ok !== true) { console.log(`  − ${wie} (ticket ${k.ticket}): ${check}`); regels.push(`− ${wie}: ${check}`); continue; }
+    if (check.ok !== true) {
+      console.log(`  − ${wie} (ticket ${k.ticket}): ${check}`);
+      regels.push(`− ${wie}: ${check}`);
+      state[String(k.ticket)] = { ...state[String(k.ticket)], gecheckt: new Date().toISOString() };
+      bewaarState(state);
+      continue;
+    }
     const oordeel = await beoordeel(k, check.echte, check.context);
     const rec = { tijd: new Date().toISOString(), ticket: k.ticket, kanaal: k.kanaal || 'WA', klant: wie, snel: !!k.snel, ...oordeel, schaduw: true };
     fs.appendFileSync(VOORSTELLEN, JSON.stringify(rec) + '\n');

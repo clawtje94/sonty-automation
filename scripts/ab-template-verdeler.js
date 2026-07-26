@@ -20,11 +20,12 @@ const STATE = path.join(__dirname, '..', 'data', 'ab-test-state.json');
 
 // Vullen met de echte Trengo-template-id's zodra ze zijn goedgekeurd.
 // naam = alleen voor het rapport, aantalVars = controle dat we de juiste params meesturen.
+// Ingevuld 26 juli, alle vier door Meta goedgekeurd (ACCEPTED).
 const TEMPLATES = [
-  // { id: 0, naam: 'inmeten',    aantalVars: 5 },
-  // { id: 0, naam: 'vertrouwen', aantalVars: 5 },
-  // { id: 0, naam: 'klopt',      aantalVars: 5 },
-  // { id: 0, naam: 'kort',       aantalVars: 5 },
+  { id: 242731, naam: 'inmeten',  aantalVars: 5 },  // offerte_ab1_inmeten
+  { id: 242737, naam: 'garantie', aantalVars: 5 },  // offerte_ab2_garantie
+  { id: 242738, naam: 'check',    aantalVars: 5 },  // offerte_ab3_check
+  { id: 242739, naam: 'kortweg',  aantalVars: 5 },  // offerte_ab4_kortweg
 ];
 
 function laad() {

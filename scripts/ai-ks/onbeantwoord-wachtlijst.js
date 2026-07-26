@@ -146,9 +146,27 @@ function duur(uren) {
   const vrij = wachtend.filter((w) => !w.wie);
   const urgent = wachtend.filter((w) => w.labels.some((l) => /urgent|mens nodig/i.test(l)));
 
-  const regel = (w) => `• ${w.naam} (${w.kanaal}, #${w.id}) wacht ${duur(w.uren)}${w.wie ? ` — bij ${w.wie}` : ''}${w.labels.length ? ` [${w.labels.join(', ')}]` : ''}\n  "${w.tekst.substring(0, 120)}"`;
+  // WhatsApp laat een gewoon bericht alléén toe binnen 24 uur na het laatste klantbericht.
+  // Daarna is het kanaal dicht: je kunt de klant niet meer normaal antwoorden, alleen nog
+  // bellen of een template sturen. Te laat reageren kost dus permanent het kanaal (ontdekt
+  // 26 juli bij Yorenzo, ticket 967801351: HTTP 422 op een link die 4 dagen te laat was).
+  // Daarom apart markeren: DICHT als het al voorbij is, KRAP in de laatste 4 uur.
+  const vensterVlag = (w) => {
+    if (w.kanaal !== 'WA') return '';
+    if (w.uren >= 24) return ' ⛔WA-VENSTER DICHT (alleen bellen/template)';
+    if (w.uren >= 20) return ' ⏰WA-venster verloopt binnen ' + Math.max(1, Math.round(24 - w.uren)) + ' uur';
+    return '';
+  };
+  const regel = (w) => `• ${w.naam} (${w.kanaal}, #${w.id}) wacht ${duur(w.uren)}${w.wie ? ` — bij ${w.wie}` : ''}${w.labels.length ? ` [${w.labels.join(', ')}]` : ''}${vensterVlag(w)}\n  "${w.tekst.substring(0, 120)}"`;
+
+  // Klanten waar het WhatsApp-venster NU aan het verlopen is, gaan bovenaan: daar is de
+  // tijdsdruk echt, want na 24 uur kun je ze niet meer normaal terugappen.
+  const krap = wachtend.filter((w) => w.kanaal === 'WA' && w.uren >= 20 && w.uren < 24);
+  const dicht = wachtend.filter((w) => w.kanaal === 'WA' && w.uren >= 24);
 
   let bericht = `⏳ WACHTLIJST: ${wachtend.length} klanten wachten langer dan ${DREMPEL_UREN} uur op antwoord.\n`;
+  if (krap.length) bericht += `\n⏰ NU HANDELEN, WhatsApp-venster verloopt vandaag (${krap.length}):\n${krap.map(regel).join('\n')}\n`;
+  if (dicht.length) bericht += `\n⛔ ${dicht.length} WhatsApp-klanten zijn al buiten het 24-uurs venster: die kun je niet meer terugappen, alleen bellen.\n`;
   if (urgent.length) bericht += `\nMet Urgent/Mens-nodig-label (${urgent.length}):\n${urgent.slice(0, 10).map(regel).join('\n')}\n`;
   if (toegewezen.length) {
     const perPersoon = {};

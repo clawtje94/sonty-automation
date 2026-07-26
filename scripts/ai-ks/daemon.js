@@ -840,8 +840,15 @@ async function verwerkPendingOffertes() {
         : await tPost(`/tickets/${ticket.id}/messages`, { message: bericht, type: 'OUTBOUND' });
       console.log(`  → pending offerte geleverd aan ${p.klantNaam}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status}`);
       if (!sendRes.ok) {
-        p.status = 'wachten'; // volgende ronde opnieuw proberen, niet stil verliezen
-        await telegram(`⚠️ AI-KS: offerte-link versturen MISLUKT bij ${p.klantNaam} (ticket ${p.ticketId}): ${sendRes.status}. Link: ${res.link}`);
+        // WhatsApp laat een gewoon bericht alleen toe binnen 24 uur na het laatste
+        // klantbericht. Daarbuiten is het kanaal dicht en helpt opnieuw proberen niets meer:
+        // dan moet het via de template of de telefoon (Yorenzo, 26 juli: HTTP 422 "valt buiten
+        // het 24-uurs venster"). Eindeloos herhalen zou alleen de log volspammen.
+        const venster = /24-uurs|24 uur|outside.*window/i.test(String(sendRes.body || ''));
+        p.status = venster ? 'onbezorgd-venster' : 'wachten';
+        await telegram(venster
+          ? `🚫 AI-KS: offerte-link voor ${p.klantNaam} kan NIET meer via WhatsApp (ticket ${p.ticketId}) — het 24-uurs venster is verlopen. Bellen of de template gebruiken. Link:\n${res.link}`
+          : `⚠️ AI-KS: offerte-link versturen MISLUKT bij ${p.klantNaam} (ticket ${p.ticketId}): ${sendRes.status}. Link: ${res.link}`);
         continue;
       }
     } else {

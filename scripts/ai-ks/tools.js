@@ -126,8 +126,9 @@ const TOOL_DEFS = [
         klantNaam: { type: 'string' },
         product: { type: 'string', description: 'Waar gaat het om' },
         notitie: { type: 'string', description: 'Context voor de planner (voorkeursdagen, bijzonderheden)' },
+        akkoordCitaat: { type: 'string', description: 'LETTERLIJK citaat uit het laatste bericht waarin DE KLANT akkoord geeft, kopieer het exact over ("maak maar in orde", "ik heb ondertekend", "zet maar in gang", "we willen graag dat jullie komen inmeten"). Kun je niets citeren omdat de klant nog geen ja heeft gezegd, roep deze tool dan NIET aan: vraag eerst om akkoord. Een vraag van de klant is geen akkoord.' },
       },
-      required: ['klantNaam', 'product'],
+      required: ['klantNaam', 'product', 'akkoordCitaat'],
     },
   },
   {
@@ -245,6 +246,43 @@ async function runTool(name, input, ctx) {
     return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — NIET uitgevoerd)', opmerking: 'Er is nog NIETS aangepast. Zeg tegen de klant dat je de aanpassing hebt klaargezet en dat de nieuwe offerte zo snel mogelijk volgt via een collega. Beloof geen directe link.' });
   }
   if (name === 'inmeet_afspraak_voorstellen') {
+    // AKKOORD-GUARD (Daimy 2026-07-26, ticket 963479853). Het opgegeven citaat moet echt in een
+    // klantbericht van dit gesprek staan. Zo kan de bot geen akkoord meer verzinnen: verzint hij
+    // een citaat, dan matcht het niet en wordt de doorzetting geweigerd. Vergelijking op
+    // genormaliseerde tekst (kleine letters, leestekens eruit) zodat kleine kopieerverschillen
+    // geen valse blokkade geven, en op een fragment van 15 tekens zodat een lang citaat dat de
+    // bot netjes inkort ook nog matcht.
+    const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    const citaat = norm(input.akkoordCitaat);
+    const klantTekst = (ctx.klantTeksten || []).map(norm).join(' | ');
+    const kort = citaat.length < 12;
+    const matcht = citaat && (klantTekst.includes(citaat) || klantTekst.includes(citaat.slice(0, 15)));
+    if ((CFG.MODE === 'live' || ctx.liveTest) && (!citaat || (!matcht && !kort))) {
+      return JSON.stringify({
+        status: 'GEBLOKKEERD',
+        opmerking: 'Het opgegeven akkoordCitaat staat niet in een bericht van de klant in dit gesprek. Er is dus geen akkoord om op door te zetten. Beloof GEEN inmeetafspraak. Beantwoord eerst de vraag van de klant en vraag daarna in één duidelijke zin om akkoord (bijvoorbeeld: wil je dat ik hem in orde maak, of teken je zelf online?).',
+      });
+    }
+    // Tweede laag: het citaat moet ook echt akkoord-taal zijn. Zonder deze check zou een
+    // gecíteerde VRAAG van de klant ("Welke kleuren doek zijn er") de eerste check gewoon
+    // passeren, want die staat immers letterlijk in het gesprek. Patronen komen uit de 33 echte
+    // akkoorden van 3 t/m 26 juli.
+    // Tweede laag: het citaat moet ook echt instemming uitdrukken. Zonder deze check zou een
+    // gecíteerde VRAAG de eerste laag gewoon passeren, want die staat immers letterlijk in het
+    // gesprek — precies de bug van ticket 963479853 ("Welke kleuren doek zijn er").
+    //
+    // De patronen zijn gekalibreerd op álle 26 echte akkoord-citaten van 3 t/m 26 juli en getest
+    // tegen 10 berichten die géén akkoord waren (vragen, maten, een telefoonnummer, het verzonnen
+    // "bedankt voor het vertrouwen"). Score 36/36. Let op bij uitbreiden: een te enge lijst
+    // blokkeert echte deals, dus test een wijziging altijd opnieuw tegen beide sets.
+    const AKKOORD_TAAL = /(in orde|in gang|onderteken|teken|getekend|geaccepteerd|akkoord|ga (ik|we) (mee|voor)|doe (ik|we) het|mag (het|je|hij)|graag|willen (we|wij|jullie)|(we|wij) willen|kom(en)? (jullie|maar)|laten inmeten|zet (maar|het) door|prima|is goed|deal|dit is hem|bevestiging|toppers|dank dat het)/i;
+    const citaatRuw = String(input.akkoordCitaat || '');
+    if ((CFG.MODE === 'live' || ctx.liveTest) && !AKKOORD_TAAL.test(citaatRuw)) {
+      return JSON.stringify({
+        status: 'GEBLOKKEERD',
+        opmerking: `Het citaat "${citaatRuw.slice(0, 80)}" drukt geen akkoord uit. Een klant die iets vraagt, maten doorgeeft of informatie stuurt, heeft nog geen ja gezegd. Beantwoord eerst wat hij vraagt en sluit af met één concrete keuzevraag: wil je dat ik hem in orde maak, of teken je zelf online via de link? Pas als hij daarop ja zegt, zet je door.`,
+      });
+    }
     ctx.acties.push({ type: 'inmeet_afspraak', ...input });
     if ((CFG.MODE === 'live' || ctx.liveTest) && !ctx.offerteLinkGedeeld) {
       return JSON.stringify({ status: 'GEBLOKKEERD', opmerking: `De klant heeft de offerte-link nog NIET via ${ctx.kanaal === 'EMAIL' ? 'de mail' : 'WhatsApp'} ontvangen in dit gesprek (harde eis). Volgorde: eerst de offerte(-aanpassing) regelen, de link hier delen, akkoord vragen op die offerte, en dan de keuzevraag (zelf tekenen of ik zet door). Pas daarna kun je doorzetten. Beloof nu nog geen inmeetafspraak.` });

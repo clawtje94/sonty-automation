@@ -63,6 +63,12 @@ async function beantwoord(gesprek) {
     acties: [], liveTest: !!gesprek.liveTest, sonny: !!gesprek.sonny, ticketId: gesprek.ticketId || null, kanaal: gesprek.kanaal || 'WA',
     // Harde eis Daimy: inmeet-doorzetting kan alleen als de offerte-link in dít gesprek gedeeld is
     offerteLinkGedeeld: (gesprek.berichten || []).some(b => b.van === 'sonty' && /document\.reuzenpanda\.nl/.test(b.tekst || '')),
+    // AKKOORD-CONTROLE (Daimy 2026-07-26). Alle klantberichten uit dít gesprek, zodat
+    // inmeet_afspraak_voorstellen kan náchecken dat de klant écht ja heeft gezegd. Nodig na
+    // ticket 963479853: op de vraag "Welke kleuren doek zijn er" antwoordde de bot "bedankt voor
+    // het vertrouwen, ik heb de inmeetafspraak in gang gezet" en zette de klant door zonder
+    // akkoord, terwijl zijn vraag onbeantwoord bleef.
+    klantTeksten: (gesprek.berichten || []).filter(b => b.van === 'klant').map(b => String(b.tekst || '')),
   };
   const toolCalls = [];
 

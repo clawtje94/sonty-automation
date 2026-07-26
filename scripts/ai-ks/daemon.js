@@ -164,6 +164,7 @@ function loadActief() { try { return JSON.parse(fs.readFileSync(ACTIEF_FILE, 'ut
 function isActiefTicket(t) { return !!loadActief()[t.id]; }
 async function sendActiefReply(t, tekst) {
   tekst = veiligeKlantTekst(tekst);
+  if (buitenVerzendvenster(t)) throw new Error(`sendActiefReply geblokkeerd: buiten verzendvenster ${CFG.BOT_UREN.start}-${CFG.BOT_UREN.eind} (nu ${CFG.amsterdamNu().hhmm})`);
   if (!isActiefTicket(t)) throw new Error('sendActiefReply geblokkeerd: ticket staat niet in actieve-tickets.json');
   if (!isWaTicket(t)) throw new Error('sendActiefReply geblokkeerd: geen WhatsApp-ticket');
   if (!tekst || !tekst.trim()) throw new Error('sendActiefReply geblokkeerd: leeg antwoord');
@@ -286,8 +287,25 @@ function veiligeKlantTekst(tekst) {
   return s;
 }
 
+// HARDE VERZENDPOORT (Daimy 2026-07-26: "altijd binnen de aangegeven tijden"). Laatste
+// verdedigingslaag vóór élk klantbericht: buiten de bot-uren gaat er niets naar een klant.
+// De marge van 15 min is er alleen zodat een agent-run die net vóór 21:00 begon zijn antwoord
+// nog kwijt kan; iets wat daarna nog wil versturen (zoals het 00:22-bericht op ticket 968921413)
+// wordt hier geweigerd. Testnummers van het team mogen altijd door.
+const VENSTER_MARGE_MIN = 15;
+function buitenVerzendvenster(t) {
+  if (isLiveTestContact(t)) return false;
+  if (CFG.binnenBotUren()) return false;
+  const { hhmm } = CFG.amsterdamNu();
+  const [eu, em] = CFG.BOT_UREN.eind.split(':').map(Number);
+  const [nu_u, nu_m] = hhmm.split(':').map(Number);
+  const minutenNa = (nu_u * 60 + nu_m) - (eu * 60 + em);
+  return !(minutenNa >= 0 && minutenNa <= VENSTER_MARGE_MIN);
+}
+
 async function sendSonnyReply(t, tekst) {
   tekst = veiligeKlantTekst(tekst);
+  if (buitenVerzendvenster(t)) throw new Error(`sendSonnyReply geblokkeerd: buiten verzendvenster ${CFG.BOT_UREN.start}-${CFG.BOT_UREN.eind} (nu ${CFG.amsterdamNu().hhmm})`);
   // Eigen verdedigingslagen (los van de whitelist): alleen WhatsApp, alleen als Sonny
   // aan staat én het buiten openingstijden is, nooit leeg.
   if (!sonnyActiefNu()) throw new Error('sendSonnyReply geblokkeerd: Sonny niet actief (binnen openingstijden of .sonny-enabled ontbreekt)');
@@ -521,6 +539,19 @@ async function verwerkTicket(t, state) {
     let h = 0; for (const c of sleutel) h = (h * 31 + c.charCodeAt(0)) >>> 0;
     const wachtSec = 180 + (h % 121); // 180-300s (3-5 min), vast per bericht
     if (leeftijdSec < wachtSec) return; // volgende poll-ronde
+  }
+
+  // VERZENDVENSTER (Daimy 2026-07-26): een klant krijgt NOOIT een bericht buiten de bot-uren
+  // (08:00-21:00 Amsterdam). Aanleiding: ticket 968921413 (+31617722967) kreeg om 00:22 's nachts
+  // antwoord omdat de actief-gesprek-tak het venster helemaal oversloeg. Buiten het venster doen
+  // we niets: geen agent-run (scheelt ook credits), geen claim — het bericht blijft onbehandeld
+  // en wordt de eerste poll-ronde ná 08:00 gewoon opgepakt. Testnummers van het team
+  // (TEST_LIVE_PHONES/FEEDBACK_PHONES) blijven altijd doorgaan zodat Daimy kan blijven testen.
+  if (isWaTicket(t) && !isLiveTestContact(t) && !CFG.binnenBotUren()) {
+    if (isActiefTicket(t) || sonnyActiefNu()) {
+      console.log(`  ticket ${t.id}: buiten verzendvenster (${CFG.BOT_UREN.start}-${CFG.BOT_UREN.eind}), wacht tot ${CFG.BOT_UREN.start}`);
+      return;
+    }
   }
 
   // CLAIM het bericht vóór de trage agent-run (30-90s): een tweede proces dat hetzelfde

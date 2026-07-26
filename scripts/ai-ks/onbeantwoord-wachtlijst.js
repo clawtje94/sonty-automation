@@ -1,0 +1,164 @@
+#!/usr/bin/env node
+/**
+ * ONBEANTWOORDE-KLANT-WACHTLIJST (Daimy 2026-07-26)
+ *
+ * Aanleiding: Herman van Kaam (ticket 965782453) en Pim (964070481) appten op 24 juli een
+ * concrete vraag en kregen 2 dagen lang van niemand antwoord. Niet door een storing, maar door
+ * een gat in het ontwerp: de bot blijft met opzet van tickets af die aan een mens zijn
+ * toegewezen (status ASSIGNED). Doet die mens niets, dan valt het gesprek stil en ziet niemand
+ * het. Precies die gevallen vangt dit script op.
+ *
+ * Werkwijze: Trengo geeft per ticket latest_message_at én latest_received_message_at. Zijn die
+ * gelijk, dan is het laatste bericht in het gesprek van de KLANT en wacht die dus op antwoord.
+ * Dat scheelt een messages-call per ticket (bij 400+ tickets het verschil tussen seconden en
+ * minuten).
+ *
+ * Gebruik:
+ *   node scripts/ai-ks/onbeantwoord-wachtlijst.js            → rapport op Telegram + stdout
+ *   node scripts/ai-ks/onbeantwoord-wachtlijst.js --dry       → alleen stdout, geen Telegram
+ *   node scripts/ai-ks/onbeantwoord-wachtlijst.js --uren 8    → andere drempel (standaard 4)
+ */
+
+const { getToken } = require('../trengo-api.js');
+const CFG = require('./config.js');
+
+const DRY = process.argv.includes('--dry');
+const DREMPEL_UREN = process.argv.includes('--uren')
+  ? Number(process.argv[process.argv.indexOf('--uren') + 1])
+  : 4;
+
+// Trengo-gebruikers, zodat het rapport zegt wie het laat liggen in plaats van een user_id.
+const USERS = {
+  736327: 'Daimy', 736329: 'Nanny', 745486: 'Joey', 745487: 'Jorren',
+  745488: 'Jaimy', 745489: 'Sjoerd', 747786: 'AI (Sunny)', 748440: 'Tanya',
+};
+
+async function telegram(tekst) {
+  if (DRY) return;
+  await fetch(`https://api.telegram.org/bot${CFG.TG_TOKEN}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: CFG.TG_CHAT, text: tekst }),
+  }).catch((e) => console.error('telegram FOUT', e.message));
+}
+
+async function haalAlle(jwt, status) {
+  const H = { Authorization: 'Bearer ' + jwt };
+  const uit = [];
+  for (let p = 1; p <= 400; p++) {
+    const r = await fetch(`https://app.trengo.com/api/v2/tickets?status=${status}&page=${p}`, { headers: H });
+    if (!r.ok) { console.error(`${status} pagina ${p}: HTTP ${r.status}`); break; }
+    const j = await r.json();
+    const d = j.data || [];
+    uit.push(...d);
+    if (d.length < 25) break;
+  }
+  return uit;
+}
+
+// ── RUIS ERUIT ──
+// Zonder filters komen er 429 van de 438 tickets op de lijst en kijkt niemand er meer naar.
+// Wat eraf moet, en waarom:
+//  - eigen scan-/systeemmail (Scan | Sonty Montage, no-reply): geen klant die wacht
+//  - pure bevestigingen ("Top dankuwel", "🙏🏻👌🏻"): daar hoort geen antwoord op, zelfde
+//    regel als de bot zelf gebruikt
+//  - automatische antwoorden (out-of-office): de klant wacht juist niet
+
+const EIGEN_MAIL = /(^|@)(scan|noreply|no-reply|postmaster|mailer-daemon)|@(sonty\.nl|sontymontage\.nl)$/i;
+
+const BEVESTIG_WOORDEN = new Set(['top', 'ok', 'oke', 'oké', 'dank', 'dankje', 'dankjewel', 'dankuwel', 'danku',
+  'bedankt', 'thanks', 'thx', 'ga', 'ik', 'doen', 'het', 'is', 'goed', 'prima', 'super', 'perfect', 'helemaal',
+  'fijn', 'duidelijk', 'je', 'u', 'voor', 'alvast', 'mooi', 'gelukt', 'jullie', 'jij', 'ja', 'yes', 'klopt',
+  'begrepen', 'snap', 'weekend', 'dag', 'avond', 'groet', 'groeten', 'gr']);
+
+function isBevestiging(tekst) {
+  const zonderEmoji = String(tekst).replace(/[\p{Extended_Pictographic}‍️\u{1F3FB}-\u{1F3FF}]/gu, '').trim();
+  if (/\?/.test(tekst) || zonderEmoji.length > 45) return false;
+  const woorden = zonderEmoji.toLowerCase().replace(/[!.,;:*'"()-]/g, ' ').split(/\s+/).filter(Boolean);
+  return woorden.length === 0 || woorden.every((w) => BEVESTIG_WOORDEN.has(w));
+}
+
+const AUTO_ANTWOORD = /(niet aanwezig|afwezig|out of office|automatisch antwoord|automatic reply|mail wordt niet (gelezen|gecontroleerd)|ben ik weer terug|ben er weer|vakantie tot)/i;
+
+function isRuis(w) {
+  const adres = String(w.naam || '');
+  if (EIGEN_MAIL.test(adres)) return 'eigen/systeemmail';
+  if (/^scan\b|sonty montage/i.test(adres)) return 'eigen scanmail';
+  if (!w.tekst) return 'leeg bericht';
+  if (isBevestiging(w.tekst)) return 'pure bevestiging';
+  if (AUTO_ANTWOORD.test(w.tekst)) return 'automatisch antwoord';
+  return null;
+}
+
+// "3 dagen", "5 uur" — leesbaarder dan 76.4 uur.
+function duur(uren) {
+  if (uren < 24) return `${Math.round(uren)} uur`;
+  const d = Math.floor(uren / 24);
+  return `${d} ${d === 1 ? 'dag' : 'dagen'}`;
+}
+
+(async () => {
+  const jwt = await getToken();
+  const tickets = [...await haalAlle(jwt, 'OPEN'), ...await haalAlle(jwt, 'ASSIGNED')];
+
+  const nu = Date.now();
+  const wachtend = [];
+  for (const t of tickets) {
+    // Laatste bericht is van de klant → niemand heeft nog geantwoord.
+    if (!t.latest_received_message_at || t.latest_message_at !== t.latest_received_message_at) continue;
+    const sinds = new Date(String(t.latest_received_message_at).replace(' ', 'T') + 'Z').getTime();
+    if (!isFinite(sinds)) continue;
+    const uren = (nu - sinds) / 3600000;
+    if (uren < DREMPEL_UREN) continue;
+    wachtend.push({
+      id: t.id,
+      uren,
+      wie: t.user_id ? (USERS[t.user_id] || `user ${t.user_id}`) : null,
+      naam: t.contact?.full_name || t.contact?.phone || t.contact?.email || 'onbekend',
+      kanaal: t.channel?.type === 'WA_BUSINESS' ? 'WA' : 'mail',
+      labels: (t.labels || []).map((l) => l.name),
+      tekst: String(t.latest_received_message?.body_plain || t.latest_received_message?.message || '')
+        .replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
+    });
+  }
+  // Ruis eruit, en tellen wát eruit ging — zodat het rapport nooit stil dingen weglaat.
+  const ruisRedenen = {};
+  const echt = wachtend.filter((w) => {
+    const r = isRuis(w);
+    if (r) { ruisRedenen[r] = (ruisRedenen[r] || 0) + 1; return false; }
+    return true;
+  });
+  wachtend.length = 0;
+  wachtend.push(...echt);
+  wachtend.sort((a, b) => b.uren - a.uren);
+
+  const ruisTotaal = Object.values(ruisRedenen).reduce((a, b) => a + b, 0);
+  console.log(`${tickets.length} tickets bekeken, ${wachtend.length} klanten wachten écht langer dan ${DREMPEL_UREN} uur op antwoord`);
+  console.log(`(${ruisTotaal} eruit gefilterd: ${Object.entries(ruisRedenen).map(([k, v]) => `${v} ${k}`).join(', ') || 'niets'})`);
+
+  if (!wachtend.length) {
+    await telegram(`✅ Wachtlijst: geen klant wacht langer dan ${DREMPEL_UREN} uur op antwoord.`);
+    return;
+  }
+
+  // Toegewezen gevallen eerst: daar is iemand verantwoordelijk en gebeurt er tóch niets.
+  const toegewezen = wachtend.filter((w) => w.wie);
+  const vrij = wachtend.filter((w) => !w.wie);
+  const urgent = wachtend.filter((w) => w.labels.some((l) => /urgent|mens nodig/i.test(l)));
+
+  const regel = (w) => `• ${w.naam} (${w.kanaal}, #${w.id}) wacht ${duur(w.uren)}${w.wie ? ` — bij ${w.wie}` : ''}${w.labels.length ? ` [${w.labels.join(', ')}]` : ''}\n  "${w.tekst.substring(0, 120)}"`;
+
+  let bericht = `⏳ WACHTLIJST: ${wachtend.length} klanten wachten langer dan ${DREMPEL_UREN} uur op antwoord.\n`;
+  if (urgent.length) bericht += `\nMet Urgent/Mens-nodig-label (${urgent.length}):\n${urgent.slice(0, 10).map(regel).join('\n')}\n`;
+  if (toegewezen.length) {
+    const perPersoon = {};
+    for (const w of toegewezen) perPersoon[w.wie] = (perPersoon[w.wie] || 0) + 1;
+    bericht += `\nToegewezen aan een mens (${toegewezen.length}): ${Object.entries(perPersoon).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(', ')}\n`;
+    bericht += toegewezen.slice(0, 10).map(regel).join('\n') + '\n';
+  }
+  if (vrij.length) bericht += `\nNiet toegewezen (${vrij.length}), langst wachtend:\n${vrij.slice(0, 8).map(regel).join('\n')}\n`;
+
+  console.log('\n' + bericht);
+  // Telegram kapt af op 4096 tekens; ruim eronder blijven en dat eerlijk melden.
+  await telegram(bericht.length > 3800 ? bericht.substring(0, 3800) + '\n\n(afgekapt, zie volledige lijst met: node scripts/ai-ks/onbeantwoord-wachtlijst.js --dry)' : bericht);
+})().catch((e) => { console.error('FOUT:', e.message); process.exit(1); });

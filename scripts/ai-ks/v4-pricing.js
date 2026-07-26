@@ -126,7 +126,31 @@ function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'i
   let kleur = null;
   if (framekleur && !/n\.?t\.?b|nader te bepalen|weet (ik |het )?niet/i.test(framekleur)) {
     const fk = framekleur.toLowerCase();
-    const isStd = stdKleuren.some(k => fk.includes(k.toLowerCase()) || k.toLowerCase() === fk);
+    // KLEUR-NORMALISATIE (Daimy 2026-07-26: "bij Alexander had gewoon 7016 str gekund").
+    // De match was een pure string-vergelijking, waardoor "7016 str" NIET als standaardkleur
+    // werd herkend en de klant €242 meerprijs kreeg, terwijl "RAL 7016 structuur" wél gratis is.
+    // We vergelijken nu op RAL-nummer + structuur-vlag, zodat elke schrijfwijze ("7016 str",
+    // "ral7016 structuur", "RAL 7016 STR") hetzelfde uitvalt. De structuur-vlag moet kloppen:
+    // vraagt de klant 9005 structuur terwijl alleen glad 9005 standaard is, dan blijft er
+    // terecht een meerprijs staan.
+    const ontleed = (s) => {
+      const t = String(s).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+      const nr = t.match(/(?:^|\s)ral\s*(\d{4})|(?:^|\s)(\d{4})(?:\s|$)/);
+      return {
+        code: nr ? (nr[1] || nr[2]) : null,
+        struct: /\b(str|structuur|structure|struct)\b/.test(t),
+        naam: t.replace(/\bral\b/g, '').replace(/\b(str|structuur|structure|struct)\b/g, '').replace(/\d{4}/g, '').replace(/\s+/g, ' ').trim(),
+      };
+    };
+    const kl = ontleed(framekleur);
+    const isStd = stdKleuren.some(k => {
+      const sk = ontleed(k);
+      // RAL-nummer aanwezig aan beide kanten: nummer én structuur-vlag moeten overeenkomen.
+      if (kl.code && sk.code) return kl.code === sk.code && kl.struct === sk.struct;
+      // Anders op naam (Antraciet, Cremewit, Quarts grijs, DB703): structuur moet ook kloppen.
+      if (kl.naam && sk.naam) return (kl.naam === sk.naam || fk.includes(k.toLowerCase())) && kl.struct === sk.struct;
+      return fk.includes(k.toLowerCase()) || k.toLowerCase() === fk;
+    });
     if (isStd) kleur = { kleur: framekleur, type: 'standaard', meerprijsIncl: 0 };
     else {
       const TREND = ['ral 7039', 'ral 9007', 'ral 9010 structuur', 'db 703', 'db703', 'ral 7021'];

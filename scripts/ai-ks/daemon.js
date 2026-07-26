@@ -281,10 +281,23 @@ function schoonKlantTekst(tekst) {
   return s.trim();
 }
 
+// MARKDOWN ERUIT (Daimy 2026-07-26). WhatsApp kent geen **vet** en geen ## koppen, dus die
+// tekens komen letterlijk bij de klant aan. Bij Dorianna (ticket 968488354, offerte €5.342)
+// stond er "**2. Type geleider.**" in het bericht. WhatsApp gebruikt *enkele* sterretjes voor
+// vet, dus **tekst** wordt *tekst*; koppen en kale sterretjes gaan er helemaal uit.
+function stripMarkdown(s) {
+  return String(s || '')
+    .replace(/\*\*\*(.+?)\*\*\*/gs, '*$1*')   // ***vet cursief*** → *vet*
+    .replace(/\*\*(.+?)\*\*/gs, '*$1*')       // **vet** → *vet* (WhatsApp-vet)
+    .replace(/^#{1,6}\s+/gm, '')              // ## kop → kop
+    .replace(/^\s*\*\*\s*$/gm, '')            // losse sterretjes op een eigen regel
+    .replace(/__(.+?)__/gs, '$1');            // __onderstreept__ bestaat niet in WhatsApp
+}
+
 // Laatste verdedigingslinie: elke uitgaande klanttekst gaat hier eerst doorheen.
 function veiligeKlantTekst(tekst) {
   const s = schoonKlantTekst(tekst);
-  return s;
+  return stripMarkdown(s);
 }
 
 // HARDE VERZENDPOORT (Daimy 2026-07-26: "altijd binnen de aangegeven tijden"). Laatste
@@ -815,12 +828,30 @@ async function verwerkPendingOffertes() {
       const html = `<p>Hi ${voornaam},</p><p>Goed nieuws: je offerte staat klaar. Je bekijkt hem hier: <a href="${res.link}">${res.link}</a></p><p>Offertenummer: ${doc.quotationNumber || ''}<br>De offerte is 7 dagen geldig. Neem hem rustig door en laat het gerust weten als je nog vragen hebt of iets aangepast wilt hebben.</p><p>Met vriendelijke groet,<br>Sunny | Sonty</p>`;
       const sendRes = await tPost(`/tickets/${ticket.id}/messages`, { message: html });
       console.log(`  → pending offerte per mail geleverd aan ${p.klantNaam}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status}`);
-    } else if (ticket && (isLiveTestContact(ticket) || magSonnyLeveren)) {
+    } else if (ticket && (isLiveTestContact(ticket) || magSonnyLeveren || isActiefTicket(ticket))) {
+      // ACTIEF-GESPREK-TAK (Daimy 2026-07-26). Deze ontbrak, waardoor de bot bij een
+      // WhatsApp-klant in een actief gesprek de offerte wél aanmaakte en vulde, "je ontvangt de
+      // link over een paar minuten" beloofde, en de link daarna weggooide. Geraakt: Yorenzo
+      // Vermeulen (ticket 967801351) en Rogier Feis (967185427).
       const bericht = `Hi ${voornaam}, je offerte staat klaar. Je bekijkt hem hier: ${res.link}\n\nOffertenummer: ${doc.quotationNumber || ''}\nDe offerte is 7 dagen geldig. Neem hem rustig door en laat maar weten als je vragen hebt!`;
       const sendRes = isLiveTestContact(ticket)
         ? await sendLiveReply(ticket, bericht)
+        : isActiefTicket(ticket) ? await sendActiefReply(ticket, bericht)
         : await tPost(`/tickets/${ticket.id}/messages`, { message: bericht, type: 'OUTBOUND' });
       console.log(`  → pending offerte geleverd aan ${p.klantNaam}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status}`);
+      if (!sendRes.ok) {
+        p.status = 'wachten'; // volgende ronde opnieuw proberen, niet stil verliezen
+        await telegram(`⚠️ AI-KS: offerte-link versturen MISLUKT bij ${p.klantNaam} (ticket ${p.ticketId}): ${sendRes.status}. Link: ${res.link}`);
+        continue;
+      }
+    } else {
+      // GEEN LEVERPAD (Daimy 2026-07-26): liever luidruchtig falen dan een klant die wacht op
+      // een offerte die klaar ligt. Eerder verdween zo'n geval stil op 'klaar'. Geraakt:
+      // Koos Schuurman (967634212) en Belinda Wildenberg (966171659).
+      p.status = 'onbezorgd';
+      await telegram(`⚠️ AI-KS: offerte voor ${p.klantNaam} is KLAAR maar er is geen leverpad (ticket ${p.ticketId}, kanaal ${ticket?.channel?.type || '?'}). De klant heeft de link NIET. Handmatig sturen:\n${res.link}\nOffertenummer: ${doc.quotationNumber || ''}`);
+      log({ pendingOfferte: p.lcId, klant: p.klantNaam, onbezorgd: true, link: res.link, ticket: p.ticketId });
+      continue;
     }
     p.status = 'klaar';
     log({ pendingOfferte: p.lcId, klant: p.klantNaam, documentId: doc.documentId, regels: res.regelsNa, totaal: res.totaalIndicatie });
@@ -895,8 +926,11 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
     const t = await tGet(`/tickets/${specificTicket}`);
     if (t) tickets = [t.data || t];
   } else {
-    // Open tickets van de relevante kanalen, eerste 3 pagina's (nieuwste eerst)
-    for (let page = 1; page <= 3; page++) {
+    // Open tickets van de relevante kanalen (nieuwste eerst). Was 3 pagina's = 75 tickets,
+    // terwijl er ~406 open staan: alles daaronder werd nooit gezien tenzij het in
+    // actieve-tickets.json stond (Daimy 2026-07-26, aanleiding Herman van Kaam 965782453 en
+    // Pim 964070481 die 2 dagen zonder antwoord bleven).
+    for (let page = 1; page <= 12; page++) {
       const data = await tGet(`/tickets?page=${page}`);
       const rows = (data?.data || []).filter(t => t.status === 'OPEN' && isRelevantTicket(t));
       tickets.push(...rows);

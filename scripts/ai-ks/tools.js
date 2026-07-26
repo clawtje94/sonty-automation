@@ -279,7 +279,11 @@ async function runTool(name, input, ctx) {
     // echte akkoorden anders onterecht geblokkeerd te worden. Ticket 966407154 schreef "So can we
     // schedule a measurement appointment for July 28-31?" en ticket 967572821 "Mis kunnen jullie
     // 24 juli". Wie vraagt of we op een datum kunnen komen inmeten, is akkoord.
-    const AKKOORD_TAAL = /(in orde|in gang|onderteken|teken|getekend|geaccepteerd|akkoord|ga (ik|we) (mee|voor)|doe (ik|we) het|mag (het|je|hij)|graag|willen (we|wij|jullie)|(we|wij) willen|kom(en)? (jullie|maar)|kunnen jullie|langs ?komen|laten inmeten|zet (maar|het) door|prima|is goed|deal|dit is hem|bevestiging|toppers|dank dat het|schedule|appointment|proceed|go ahead|i('| a)?m in|we are in|sounds good|please do|let'?s do)/i;
+    // Let op bij "graag": dat woord alleen is GEEN akkoord. "Oké dan wil ik graag zonwering" is
+    // interesse in een product; pas "graag een afspraak/inmeten/verder" is instemming. Daarom
+    // staat graag hier alleen in combinatie. Getest tegen alle 33 complete Trengo-gesprekken van
+    // klanten die zijn doorgezet (341 klantberichten): alle 33 houden een akkoord over.
+    const AKKOORD_TAAL = /(akkoord|in orde|in gang|onderteken|getekend|tekenen is gelukt|geaccepteerd|ga (ik|we) (mee|voor)|doe (ik|we) het|mag (het|je|hij)|graag (een |het )?(afspraak|inmeet|meting|langskomen|komen|verder)|willen (we|wij) (graag )?(dat|een|verder)|(we|wij) willen graag|kunnen jullie|langs ?komen|laten inmeten|zet (maar|het) door|is goed|is prima|prima|deal|dit is hem|bevestiging|toppers|dank dat het|schedule|appointment|proceed|go ahead|sounds good|please do|let'?s do)/i;
     const citaatRuw = String(input.akkoordCitaat || '');
     if ((CFG.MODE === 'live' || ctx.liveTest) && !AKKOORD_TAAL.test(citaatRuw)) {
       return JSON.stringify({

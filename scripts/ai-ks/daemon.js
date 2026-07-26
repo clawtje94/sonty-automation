@@ -25,6 +25,22 @@ async function tGet(ep) {
   if (!res.ok) return null;
   return res.json();
 }
+// De messages-endpoint van Trengo pagineert met 20 per pagina en geeft de nieuwste eerst.
+// Zonder paginering zag de bot bij een lang gesprek dus maar 20 berichten, terwijl hij er 25
+// wil gebruiken. Bij Sofyan (ticket 963170423, 38 berichten) viel daardoor de helft weg,
+// inclusief zijn oorspronkelijke akkoord. Twee pagina's is genoeg voor de 25 die we snijden.
+// (Daimy 2026-07-26)
+async function haalBerichten(ticketId, paginas = 2) {
+  const data = [];
+  for (let p = 1; p <= paginas; p++) {
+    const res = await tGet(`/tickets/${ticketId}/messages?page=${p}`);
+    if (!res) break;
+    data.push(...(res.data || []));
+    if (!res.links?.next) break;
+  }
+  return { data };
+}
+
 async function tPost(ep, body) {
   // Trengo geeft af en toe 429 "Too Many Attempts" — zonder retry ging het antwoord dan
   // verloren (Pieter 20:15, Vruchi 19:20 op 16 juli). 429 = niets verzonden, dus veilig
@@ -340,7 +356,7 @@ async function verwerkTicket(t, state) {
     // Toegewezen aan een collega → nooit ANTWOORDEN, maar @sonny-notities WEL verwerken
     // (Daimy 23-07: dagstand-feedback op een aan hem toegewezen ticket werd gemist).
     try {
-      const msgsMens = t._msgs || await tGet(`/tickets/${t.id}/messages`);
+      const msgsMens = t._msgs || await haalBerichten(t.id);
       const notitiesMens = (msgsMens?.data || []).map(m => ({
         van: m.type === 'INBOUND' ? 'klant' : 'sonty',
         tekst: clean(m.body || m.message), tijd: m.created_at,
@@ -362,7 +378,7 @@ async function verwerkTicket(t, state) {
       }
     } catch (e) { console.error(`  [${t.id}] notitie-op-mensticket FOUT: ${e.message}`); return; }
   }
-  const msgs = t._msgs || await tGet(`/tickets/${t.id}/messages`);
+  const msgs = t._msgs || await haalBerichten(t.id);
   // VACATURE-appjes (Daimy 22-07): sollicitanten via de wervingsmail (voorgevuld bericht
   // "interesse in de vacature" / "Ik kom via:") NOOIT door de bot beantwoorden —
   // direct aan Daimy (736327) toewijzen en verder met rust laten.
@@ -885,7 +901,7 @@ async function verwerkTerugkomers() {
     const res = await tGet(`/tickets/${tid}`);
     const t = res?.data || res;
     if (!t || t.status !== 'OPEN') { delete tk[tid]; continue; }
-    const msgs = await tGet(`/tickets/${tid}/messages`);
+    const msgs = await haalBerichten(tid);
     const inbound = (msgs?.data || []).filter(m => m.type === 'INBOUND').map(m => String(m.created_at)).sort();
     if (inbound.length && inbound[inbound.length - 1] > String(info.klantTijd)) { delete tk[tid]; continue; } // klant kwam zelf al terug
     if (uur >= 23.7) {
@@ -987,7 +1003,7 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
   await Promise.all(Array.from({ length: Math.min(5, fetchRij.length) }, async () => {
     let t;
     while ((t = fetchRij.shift())) {
-      try { t._msgs = await tGet(`/tickets/${t.id}/messages`); } catch {}
+      try { t._msgs = await haalBerichten(t.id); } catch {}
     }
   }));
   const verseNotitie = (t) => (t._msgs?.data || []).some(m => {

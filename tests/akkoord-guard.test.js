@@ -2,13 +2,24 @@
 /**
  * REGRESSIETEST akkoord-guard (Daimy 2026-07-26).
  *
- * Waarom dit bestand bestaat: de guard is drie keer aangepast en elke versie leek goed tegen
- * zelfbedachte voorbeelden, maar viel door de mand tegen de échte historie. Een eerste versie
- * blokkeerde 6 van de 26 echte akkoorden (dat kost deals), een tweede liet losse maatinfo door,
- * en een derde liet een citaat van 6 berichten terug passeren. Deze test draait de guard over
- * alle werkelijke doorzettingen uit data/ai-ks/log.jsonl en telt BEIDE foutsoorten.
+ * WAAROM DIT BESTAND ER ZO UITZIET
+ * De eerste versie draaide op data/ai-ks/log.jsonl. Dat leek de juiste bron, maar de log bewaart
+ * per ronde alleen het LAATSTE klantbericht: stuurt een klant twee berichten snel na elkaar, dan
+ * verdwijnt het eerste. En berichten die een MENS afhandelde staan helemaal niet in de AI-log.
  *
- * Draai dit na elke wijziging aan AKKOORD_TAAL of aan ctx.klantTeksten:
+ * Daardoor trok ik twee conclusies die niet waar waren:
+ *  - "Ticket 963479853 is doorgezet zonder akkoord." Fout: de bot vroeg om 11:20 "Zal ik een
+ *    inmeetafspraak inplannen?", de klant zei om 11:48 "Is goed" en stuurde om 11:49 nog een
+ *    kleurvraag. In de log bleef alleen die kleurvraag over.
+ *  - "Max Beije (965819789) is doorgezet zonder akkoord." Fout: hij mailde op 13 juli letterlijk
+ *    "Akkoord met de offerte." Joey handelde dat af, dus het kwam nooit in de AI-log.
+ *
+ * Daarom test dit bestand tegen de ECHTE Trengo-gesprekken in
+ * tests/fixtures-akkoord-gesprekken.json. Let op: de Trengo messages-endpoint pagineert met 20 per
+ * pagina. De fixture is mét paginering opgehaald: 341 klantberichten in plaats van de 186 die je
+ * met alleen pagina 1 krijgt.
+ *
+ * Draai na elke wijziging aan AKKOORD_TAAL of aan ctx.klantTeksten:
  *   node tests/akkoord-guard.test.js
  */
 const fs = require('fs');
@@ -21,58 +32,70 @@ const m = src.match(/const AKKOORD_TAAL = (\/.*\/i);/);
 if (!m) { console.error('FOUT: AKKOORD_TAAL niet gevonden in tools.js'); process.exit(1); }
 const AKKOORD_TAAL = eval(m[1]);
 
-// Hoeveel klantberichten de guard mag zien (agent.js: .slice(-3)).
-const VENSTER = Number((src.match(/slice\(-(\d)\)/) || [])[1]) || 3;
+const gesprekken = JSON.parse(fs.readFileSync(path.join(__dirname, 'fixtures-akkoord-gesprekken.json'), 'utf8'));
 
 const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
-function guard(citaat, zichtbaar) {
+
+// Exact de guard uit tools.js: het citaat moet in een klantbericht van dit gesprek staan én
+// instemming uitdrukken.
+function guard(citaat, klantTeksten) {
   const c = norm(citaat);
-  const k = zichtbaar.map(norm).join(' | ');
+  const k = klantTeksten.map(norm).join(' | ');
   if (!c || (!(k.includes(c) || k.includes(c.slice(0, 15))) && c.length >= 12)) return 'BLOK';
   if (!AKKOORD_TAAL.test(citaat)) return 'BLOK';
   return 'DOOR';
 }
 
-// Handmatig vastgesteld na het teruglezen van de gesprekken: deze twee klanten zijn naar de
-// planning gestuurd zonder ooit akkoord te geven. 963479853 vroeg "Welke kleuren doek zijn er",
-// 965819789 (Max) stuurde alleen zijn telefoonnummer en vroeg daarna zelf of hij niet pas ná
-// het inmeten hoefde te ondertekenen.
-const GEEN_ECHT_AKKOORD = new Set([963479853, 965819789]);
-
-const regels = fs.readFileSync(path.join(ROOT, 'data/ai-ks/log.jsonl'), 'utf8').trim().split('\n')
-  .map((l) => { try { return JSON.parse(l); } catch { return null; } })
-  .filter((x) => x && !x.fout);
-
-const perTicket = new Map();
-for (const x of regels) {
-  const arr = perTicket.get(x.ticket) || [];
-  arr.push(x);
-  perTicket.set(x.ticket, arr);
-}
-
-let valsPositief = 0, valsNegatief = 0, okDoor = 0, okBlok = 0;
+let valsPositief = 0, valsNegatief = 0;
 const fouten = [];
-for (const [id, rs] of perTicket) {
-  const i = rs.findIndex((r) => (r.acties || []).some((a) => a.type === 'inmeet_afspraak'));
-  if (i < 0) continue;
-  const klant = rs.slice(0, i + 1).map((r) => String(r.laatsteKlantBericht || '')).filter(Boolean);
-  const zichtbaar = klant.slice(-VENSTER);
-  // Beste zet van het model: het meest recente zichtbare bericht met akkoord-taal.
-  const citaat = [...zichtbaar].reverse().find((t) => AKKOORD_TAAL.test(t)) || zichtbaar[zichtbaar.length - 1] || '';
-  const uitkomst = guard(citaat, zichtbaar);
-  const echtAkkoord = !GEEN_ECHT_AKKOORD.has(id);
-  if (echtAkkoord && uitkomst === 'BLOK') { valsPositief++; fouten.push(`VALS-POSITIEF #${id}: echt akkoord geblokkeerd op "${citaat.slice(0, 70)}"`); }
-  else if (!echtAkkoord && uitkomst === 'DOOR') { valsNegatief++; fouten.push(`VALS-NEGATIEF #${id}: nep akkoord doorgelaten op "${citaat.slice(0, 70)}"`); }
-  else if (uitkomst === 'DOOR') okDoor++;
-  else okBlok++;
+
+// DEEL 1 — alle 33 klanten die daadwerkelijk naar de planning zijn doorgezet. Bij alle 33 is in
+// het complete gesprek een akkoord terug te vinden, dus geen enkele mag geblokkeerd worden:
+// elke blokkade hier is een gemiste deal.
+for (const [id, msgs] of Object.entries(gesprekken)) {
+  const teksten = msgs.map((x) => x.tekst);
+  const citaat = [...teksten].reverse().find((t) => AKKOORD_TAAL.test(t));
+  if (!citaat) {
+    valsPositief++;
+    fouten.push(`VALS-POSITIEF #${id}: geen akkoord herkend, terwijl deze klant wél akkoord gaf`);
+    continue;
+  }
+  if (guard(citaat, teksten) !== 'DOOR') {
+    valsPositief++;
+    fouten.push(`VALS-POSITIEF #${id}: echt akkoord geblokkeerd op "${citaat.slice(0, 70)}"`);
+  }
 }
 
-console.log(`Regressietest akkoord-guard (venster: laatste ${VENSTER} klantberichten)`);
-console.log(`  echte akkoorden correct doorgelaten: ${okDoor}`);
-console.log(`  nep akkoorden correct geblokkeerd:   ${okBlok}`);
-console.log(`  VALS-POSITIEF (kost een deal):       ${valsPositief}`);
-console.log(`  VALS-NEGATIEF (kost planningstijd):  ${valsNegatief}`);
+// DEEL 2 — hallucinaties en niet-akkoorden die geweigerd MOETEN worden. Het eerste geval is de
+// vorm waarin het echt fout kan gaan: een citaat dat de bot zelf verzint.
+const MOET_BLOKKEREN = [
+  ['verzonnen citaat', 'bedankt voor het vertrouwen'],
+  ['citaat bestaat niet in gesprek', 'ja ik ga akkoord met alles wat je voorstelt'],
+  ['leeg citaat', ''],
+  ['losse kleurvraag', 'Welke kleuren doek zijn er'],
+  ['losse maatinfo', '3M breed 2m lang'],
+  ['losse fotovraag', 'Kan je fotos sturen van het product'],
+  ['alleen interesse in een product', 'Oke dan wil ik graag zonwering'],
+  ['alleen een telefoonnummer', 'Mijn telefoonnummer is 0681144674'],
+];
+// De berichten van ticket 963479853 als context: die staan er echt in, dus alleen de
+// akkoord-taal-check kan deze nog weren.
+const CONTEXT = (gesprekken['963479853'] || []).map((x) => x.tekst);
+for (const [naam, citaat] of MOET_BLOKKEREN) {
+  if (guard(citaat, CONTEXT) === 'DOOR') {
+    valsNegatief++;
+    fouten.push(`VALS-NEGATIEF (${naam}): "${citaat.slice(0, 60)}" werd doorgelaten`);
+  }
+}
+
+const n = Object.keys(gesprekken).length;
+console.log('Regressietest akkoord-guard, op de ECHTE Trengo-gesprekken');
+console.log(`  gesprekken in fixture:            ${n}`);
+console.log(`  klantberichten:                   ${Object.values(gesprekken).reduce((a, v) => a + v.length, 0)}`);
+console.log(`  echte akkoorden doorgelaten:      ${n - valsPositief}/${n}`);
+console.log(`  VALS-POSITIEF (kost een deal):    ${valsPositief}`);
+console.log(`  VALS-NEGATIEF (nep doorgelaten):  ${valsNegatief} van ${MOET_BLOKKEREN.length} gecontroleerd`);
 for (const f of fouten) console.log('  ' + f);
 
 if (valsPositief || valsNegatief) { console.error('\nGEFAALD'); process.exit(1); }
-console.log('\nGESLAAGD: geen fouten van beide soorten.');
+console.log('\nGESLAAGD: alle echte akkoorden gaan door, alle hallucinaties en niet-akkoorden worden geweigerd.');

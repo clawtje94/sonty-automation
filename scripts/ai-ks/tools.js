@@ -275,7 +275,11 @@ async function runTool(name, input, ctx) {
     // tegen 10 berichten die géén akkoord waren (vragen, maten, een telefoonnummer, het verzonnen
     // "bedankt voor het vertrouwen"). Score 36/36. Let op bij uitbreiden: een te enge lijst
     // blokkeert echte deals, dus test een wijziging altijd opnieuw tegen beide sets.
-    const AKKOORD_TAAL = /(in orde|in gang|onderteken|teken|getekend|geaccepteerd|akkoord|ga (ik|we) (mee|voor)|doe (ik|we) het|mag (het|je|hij)|graag|willen (we|wij|jullie)|(we|wij) willen|kom(en)? (jullie|maar)|laten inmeten|zet (maar|het) door|prima|is goed|deal|dit is hem|bevestiging|toppers|dank dat het)/i;
+    // Ook Engelse instemming en het vragen om een afspraak/datum: bij de retro-test bleken twee
+    // echte akkoorden anders onterecht geblokkeerd te worden. Ticket 966407154 schreef "So can we
+    // schedule a measurement appointment for July 28-31?" en ticket 967572821 "Mis kunnen jullie
+    // 24 juli". Wie vraagt of we op een datum kunnen komen inmeten, is akkoord.
+    const AKKOORD_TAAL = /(in orde|in gang|onderteken|teken|getekend|geaccepteerd|akkoord|ga (ik|we) (mee|voor)|doe (ik|we) het|mag (het|je|hij)|graag|willen (we|wij|jullie)|(we|wij) willen|kom(en)? (jullie|maar)|kunnen jullie|langs ?komen|laten inmeten|zet (maar|het) door|prima|is goed|deal|dit is hem|bevestiging|toppers|dank dat het|schedule|appointment|proceed|go ahead|i('| a)?m in|we are in|sounds good|please do|let'?s do)/i;
     const citaatRuw = String(input.akkoordCitaat || '');
     if ((CFG.MODE === 'live' || ctx.liveTest) && !AKKOORD_TAAL.test(citaatRuw)) {
       return JSON.stringify({

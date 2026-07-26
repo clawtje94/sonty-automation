@@ -68,7 +68,12 @@ async function beantwoord(gesprek) {
     // ticket 963479853: op de vraag "Welke kleuren doek zijn er" antwoordde de bot "bedankt voor
     // het vertrouwen, ik heb de inmeetafspraak in gang gezet" en zette de klant door zonder
     // akkoord, terwijl zijn vraag onbeantwoord bleef.
-    klantTeksten: (gesprek.berichten || []).filter(b => b.van === 'klant').map(b => String(b.tekst || '')),
+    // Alleen de LAATSTE 3 klantberichten. Een akkoord is per definitie recent: bij 28 van de 33
+    // historische doorzettingen stond het in het laatste klantbericht en bij 29 binnen de laatste
+    // drie. Bij de bug van ticket 963479853 lag het aangehaalde "Oké dan wil ik graag zonwering"
+    // zes berichten terug, en dat is interesse en geen akkoord op een offerte. Deze grens sluit
+    // dat af zonder een echt akkoord te raken.
+    klantTeksten: (gesprek.berichten || []).filter(b => b.van === 'klant').slice(-3).map(b => String(b.tekst || '')),
   };
   const toolCalls = [];
 

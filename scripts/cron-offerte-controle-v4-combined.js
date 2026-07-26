@@ -2070,6 +2070,48 @@ async function main() {
 
     const offerteLink = 'https://document.reuzenpanda.nl/nl/' + PID + '/' + docs[0].documentId + '/latest';
 
+    // A/B-TEST TEMPLATES (Daimy 2026-07-26). Vier goedgekeurde varianten met antwoordknoppen,
+    // strikt om en om verdeeld. De knoppen zijn het doel: een tik erop is een inkomend bericht,
+    // en daarmee gaat het 24-uurs venster open zodat de bot verder mag praten.
+    //
+    // Valt er ook maar iets weg (geen variant beschikbaar, bedragen niet betrouwbaar te bepalen),
+    // dan gaat het bericht gewoon via de oude template de deur uit. Liever het vertrouwde bericht
+    // dan een half nieuw bericht of helemaal geen offerte.
+    let hsmId = WA_OFFERTE_TEMPLATE;
+    let abVariant = null;
+    let params = [
+      { type: 'body', key: '{{1}}', value: voornaam || 'daar' },
+      { type: 'body', key: '{{2}}', value: 'Jaimy' },
+      // Offertenummer los erbij (instructie Daimy): team kan hem direct in RP zoeken.
+      // Spatie-suffix, want WhatsApp-templatevariabelen mogen geen regelovergang bevatten.
+      { type: 'body', key: '{{3}}', value: offerteLink + (docs[0].quotationNumber ? ' — offertenummer: ' + docs[0].quotationNumber : '') },
+    ];
+    try {
+      const { kiesTemplate } = require('./ab-template-verdeler.js');
+      const { bouwParams } = require('./offerte-template-vars.js');
+      const variant = kiesTemplate({ telefoon, ticketId: null, offertenummer: docs[0].quotationNumber });
+      if (variant) {
+        // Losse offerteregels ophalen: die zitten niet in de lijst hierboven, maar zijn nodig om
+        // de waarde vóór korting te bepalen.
+        const detail = await rpGet('/document-service/v1/' + PID + '/quotations/' + docs[0].documentId);
+        const gebouwd = bouwParams({
+          voornaam,
+          quotationLijstItem: docs[0],
+          quotationDetail: detail?.quotationData || detail,
+          offerteLink,
+        });
+        if (gebouwd.ok) {
+          hsmId = variant.id;
+          abVariant = variant.naam;
+          params = gebouwd.params;
+        } else {
+          console.log('  AB: terug naar oude template voor ' + (voornaam || '?') + ' (' + gebouwd.reden + ')');
+        }
+      }
+    } catch (e) {
+      console.log('  AB: verdeler/params faalden, oude template gebruikt: ' + e.message);
+    }
+
     // Stuur WhatsApp via Trengo (zelfde logica als oude cron-sync-rp-hubspot.js)
     try {
       const waRes = await fetchRetry('https://app.trengo.com/api/v2/wa_sessions', {
@@ -2077,15 +2119,9 @@ async function main() {
         headers: { 'Authorization': 'Bearer ' + TRENGO_TOKEN, 'Content-Type': 'application/json' },
         body: JSON.stringify({
           recipient_phone_number: telefoon,
-          hsm_id: WA_OFFERTE_TEMPLATE,
+          hsm_id: hsmId,
           channel_id: 1359857,
-          params: [
-            { type: 'body', key: '{{1}}', value: voornaam || 'daar' },
-            { type: 'body', key: '{{2}}', value: 'Jaimy' },
-            // Offertenummer los erbij (instructie Daimy): team kan hem direct in RP zoeken.
-            // Spatie-suffix, want WhatsApp-templatevariabelen mogen geen regelovergang bevatten.
-            { type: 'body', key: '{{3}}', value: offerteLink + (docs[0].quotationNumber ? ' — offertenummer: ' + docs[0].quotationNumber : '') },
-          ]
+          params,
         })
       });
       if (waRes.ok) {
@@ -2097,6 +2133,7 @@ async function main() {
             headers: { 'Authorization': 'Bearer ' + TRENGO_TOKEN, 'Content-Type': 'application/json' },
           }).catch(() => {});
         }
+        if (abVariant) console.log('  AB: ' + abVariant + ' naar ' + (voornaam || '?') + ' (' + telefoon + ')');
         markWaSent(item.id);
         waCount++;
       }

@@ -64,6 +64,16 @@ async function haalAlle(jwt, status) {
 //    regel als de bot zelf gebruikt
 //  - automatische antwoorden (out-of-office): de klant wacht juist niet
 
+// ALLEEN KLANTENSERVICE-KANALEN (Daimy 2026-07-26: "die 169, zo veel zie ik er niet").
+// Terecht: van de 435 open/toegewezen tickets zitten er 248 in Scans, 101 in Orders en 39 in
+// Werkbon. Dat zijn geen klantgesprekken maar interne stromen, en niemand bekijkt die als
+// klantenservice. Meegerekend gaf dat 169 "wachtende klanten"; alleen op de echte kanalen zijn
+// het 40. Filteren op kanaal, niet alleen op afzender.
+const KS_KANALEN = ['Aanvragen', 'Klantenservice', 'info@ mailbox'];
+function isKlantenserviceKanaal(t) {
+  return t.channel?.type === 'WA_BUSINESS' || KS_KANALEN.includes(t.channel?.title);
+}
+
 const EIGEN_MAIL = /(^|@)(scan|noreply|no-reply|postmaster|mailer-daemon)|@(sonty\.nl|sontymontage\.nl)$/i;
 
 const BEVESTIG_WOORDEN = new Set(['top', 'ok', 'oke', 'oké', 'dank', 'dankje', 'dankjewel', 'dankuwel', 'danku',
@@ -103,7 +113,10 @@ function duur(uren) {
 
   const nu = Date.now();
   const wachtend = [];
+  let buitenKS = 0;
   for (const t of tickets) {
+    // Scans/Orders/Werkbon zijn interne stromen, geen klantenservice — die horen hier niet in.
+    if (!isKlantenserviceKanaal(t)) { buitenKS++; continue; }
     // Laatste bericht is van de klant → niemand heeft nog geantwoord.
     if (!t.latest_received_message_at || t.latest_message_at !== t.latest_received_message_at) continue;
     const sinds = new Date(String(t.latest_received_message_at).replace(' ', 'T') + 'Z').getTime();
@@ -134,6 +147,7 @@ function duur(uren) {
 
   const ruisTotaal = Object.values(ruisRedenen).reduce((a, b) => a + b, 0);
   console.log(`${tickets.length} tickets bekeken, ${wachtend.length} klanten wachten écht langer dan ${DREMPEL_UREN} uur op antwoord`);
+  console.log(`(${buitenKS} buiten de klantenservice-kanalen gelaten: Scans/Orders/Werkbon e.d.)`);
   console.log(`(${ruisTotaal} eruit gefilterd: ${Object.entries(ruisRedenen).map(([k, v]) => `${v} ${k}`).join(', ') || 'niets'})`);
 
   if (!wachtend.length) {

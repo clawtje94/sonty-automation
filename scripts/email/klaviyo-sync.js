@@ -32,6 +32,10 @@ const NAMEN = {
   'sonty-uitnodiging': 'Sonty | Showroom-uitnodiging',
   'sonty-verhaal': 'Sonty | Verhaal',
   'sonty-service': 'Sonty | Service en nazorg',
+  'sonty-weer-hitte': 'Sonty | Weer, hitte op komst',
+  'sonty-weer-lente': 'Sonty | Weer, eerste lentedag',
+  'sonty-weer-donker': 'Sonty | Weer, donkere dagen',
+  'sonty-welkom': 'Sonty | Welkom na aanvraag',
 };
 
 async function api(pad, opties = {}) {

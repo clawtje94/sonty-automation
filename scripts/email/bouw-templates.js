@@ -413,6 +413,106 @@ const SJABLONEN = {
   }),
 };
 
+
+/* ── weer- en seizoensmails ──
+   Deze gaan uit op een moment dat het weer of het seizoen de aanleiding is. De toon is daarom
+   behulpzaam en niet opdringerig: een seintje, geen aanbieding. En we zijn eerlijk over de
+   levertijd, want niemand heeft overmorgen zonwering hangen. Doen alsof dat wel kan is precies
+   het soort belofte waar je een klant mee kwijtraakt. */
+
+SJABLONEN['sonty-weer-hitte'] = mail({
+  naam: 'Sonty weermoment hitte',
+  preheader: 'Even een seintje over het weer van volgende week',
+  kop: 'Het wordt {{ person.sonty_weer_piek|default:"flink" }} graden, {{ first_name|default:"daar" }}',
+  intro: 'Even een seintje: {{ person.sonty_weer_dag|default:"deze week" }} loopt het op naar {{ person.sonty_weer_piek|default:"boven de 29" }} graden. Precies het weer waarvoor je destijds je offerte hebt aangevraagd.',
+  blokken: [
+    offerteKaart(),
+    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid ${M.lijn};border-radius:12px;" class="rand">
+      <tr><td style="padding:20px 22px;${F};">
+        <div style="color:${M.tekst};font-size:15px;font-weight:700;" class="t-donker">Eerlijk over de levertijd</div>
+        <div style="color:${M.grijs};font-size:14px;line-height:1.65;padding-top:8px;" class="t-zacht">
+          Voor deze week red je het niet meer, dat gaan we niet mooier maken dan het is. Reken op
+          een aantal weken tussen akkoord en montage, en in het hoogseizoen loopt dat op. Wie nu
+          beslist, zit er de rest van de zomer warmpjes bij. Of juist niet, dat is het idee.
+        </div>
+      </td></tr>
+    </table>`,
+    review(...REVIEW_ROLLUIK),
+    cijfers(),
+    garantie(),
+    showroom(),
+  ],
+});
+
+SJABLONEN['sonty-weer-lente'] = mail({
+  naam: 'Sonty weermoment eerste lentedag',
+  preheader: 'De eerste mooie dag van het jaar',
+  kop: 'Eerste mooie dag van het jaar',
+  intro: 'Het wordt {{ person.sonty_weer_piek|default:"boven de 20" }} graden, en dan denkt bijna iedereen weer aan buiten zitten. Jij vroeg ooit een offerte bij ons aan. Zal ik hem er weer even bij pakken?',
+  blokken: [
+    beeld('eigen/pergola-tuin-2.webp', 'Een pergola in de tuin, geplaatst door Sonty', 'Een van onze projecten'),
+    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    offerteKaart(),
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
+      <tr><td style="padding:20px 22px;${F};">
+        <div style="color:${M.tekst};font-size:15px;font-weight:700;">Nu is het rustig, straks niet meer</div>
+        <div style="color:${M.grijs};font-size:14px;line-height:1.65;padding-top:8px;">
+          In het voorjaar loopt het bij ons hard. Wie er nu bij is, heeft het voor de zomer hangen.
+          Dat is geen verkooppraatje maar gewoon hoe onze planning loopt.
+        </div>
+      </td></tr>
+    </table>`,
+    review(...REVIEW_TRAJECT),
+    assortiment(),
+    cijfers(),
+    garantie(),
+  ],
+});
+
+SJABLONEN['sonty-weer-donker'] = mail({
+  naam: 'Sonty weermoment donkere dagen',
+  preheader: 'Nu de dagen korter worden',
+  kop: 'Nu de dagen korter worden',
+  intro: 'Het wordt weer vroeg donker. Precies het moment waarop je merkt hoe kaal een raam kan aanvoelen, en hoe veel kou er langs de ruit naar binnen komt.',
+  blokken: [
+    beeld('eigen/showroom-ramen.webp', 'Raamdecoratie in de showroom van Sonty', 'Raamdecoratie in onze showroom in Rijswijk'),
+    knop('{{ person.sonty_verhaal_cta|default:"Bekijk je offerte" }}', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
+      <tr><td style="padding:20px 22px;${F};">
+        <div style="color:${M.tekst};font-size:15px;font-weight:700;">Scheelt echt in de warmte</div>
+        <div style="color:${M.grijs};font-size:14px;line-height:1.65;padding-top:8px;">
+          Duette gordijnen hebben luchtkamers die de kou tegenhouden, en een rolluik doet hetzelfde
+          aan de buitenkant. Je merkt het vooral 's avonds, als het buiten vriest en je bank naast
+          het raam staat.
+        </div>
+      </td></tr>
+    </table>`,
+    offerteKaart(),
+    review(...REVIEW_ALLES),
+    assortiment(),
+    cijfers(),
+    garantie(),
+    showroom(),
+  ],
+});
+
+SJABLONEN['sonty-welkom'] = mail({
+  naam: 'Sonty welkom na aanvraag',
+  preheader: 'Je aanvraag is binnen, dit gaat er nu gebeuren',
+  kop: 'Je aanvraag is binnen, {{ first_name|default:"daar" }}',
+  intro: 'Dank je wel, ik ga er meteen mee aan de slag. Je hoort binnen 24 uur van me met een prijsindicatie. Hieronder vast wat je van ons kunt verwachten.',
+  blokken: [
+    stappen(),
+    knop('Bekijk ons werk', 'https://www.sonty.nl/portfolio'),
+    cijfers(),
+    review(...REVIEW_TRAJECT),
+    assortiment(),
+    garantie(),
+    showroom(),
+  ],
+});
+
 fs.mkdirSync(UIT, { recursive: true });
 for (const [naam, html] of Object.entries(SJABLONEN)) {
   fs.writeFileSync(path.join(UIT, naam + '.html'), html);

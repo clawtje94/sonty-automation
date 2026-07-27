@@ -519,7 +519,20 @@ async function verwerkTicket(t, state) {
   const laatste = rows[rows.length - 1];
   if (laatste.van !== 'klant') return; // alleen reageren als het laatste bericht van de klant is
 
-  const sleutel = `${t.id}:${laatste.tijd}`;
+  // EEN VERSE @sonny-OPDRACHT MOET OOK EEN ANTWOORD OPLEVEREN (Daimy 2026-07-27).
+  // De sleutel hing alleen aan het laatste KLANTbericht. Was dat al beantwoord, dan stopte hij
+  // hier, ook als het team daarna "@sunny antwoord" in het ticket zette. De notitie werd wel
+  // als leerpunt gelezen (hierboven), maar er ging nooit een bericht naar de klant. Daimy:
+  // "ik vind het echt heel irritant dat @sunny niet opgepakt wordt". Voorbeeld: ticket 966697967,
+  // waar om 10:53 "@sunny antwoord" kwam en er twee uur niets gebeurde.
+  // Door de tijd van de nieuwste onafgevinkte @sonny-notitie in de sleutel te zetten wordt het
+  // een nieuwe sleutel, en pakt hij het gesprek opnieuw op.
+  const verseOpdracht = (teamNotities || [])
+    .filter((n) => /@s[ou]nny(?!\d)/i.test(String(n.tekst || '')) && !String(n.tekst || '').includes('✅'))
+    .map((n) => String(n.tijd))
+    .sort()
+    .pop();
+  const sleutel = verseOpdracht ? `${t.id}:${laatste.tijd}:opdracht${verseOpdracht}` : `${t.id}:${laatste.tijd}`;
   const staleClaim = (m) => m && m.claim && Date.now() - new Date(m.tijd).getTime() > 10 * 60000;
   if (state.verwerkt[sleutel] && !staleClaim(state.verwerkt[sleutel])) return; // al behandeld (verlopen claim mag opnieuw)
 

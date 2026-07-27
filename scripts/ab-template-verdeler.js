@@ -22,7 +22,13 @@ const STATE = path.join(__dirname, '..', 'data', 'ab-test-state.json');
 // naam = alleen voor het rapport, aantalVars = controle dat we de juiste params meesturen.
 // Ingevuld 26 juli, alle vier door Meta goedgekeurd (ACCEPTED).
 const TEMPLATES = [
-  { id: 242731, naam: 'inmeten',  aantalVars: 5 },  // offerte_ab1_inmeten
+  // 242731 (offerte_ab1_inmeten) TIJDELIJK ERUIT, 27 juli. Trengo weigert hem met "De template
+  // bestaat niet in de opgegeven taal of de template is niet goedgekeurd", terwijl hij in de
+  // API identiek is aan de andere drie: status ACCEPTED, categorie MARKETING, taal nl, zelfde
+  // kanaal en knoppen. Gevolg: 16 van de 18 verzendingen kwamen niet aan en lieten een leeg
+  // ticket achter. De andere drie varianten kwamen 49 van de 49 keer wel aan. Terugzetten zodra
+  // de template opnieuw is aangemaakt of Meta hem alsnog accepteert.
+  // { id: 242731, naam: 'inmeten',  aantalVars: 5 },  // offerte_ab1_inmeten
   { id: 242737, naam: 'garantie', aantalVars: 5 },  // offerte_ab2_garantie
   { id: 242738, naam: 'check',    aantalVars: 5 },  // offerte_ab3_check
   { id: 242739, naam: 'kortweg',  aantalVars: 5 },  // offerte_ab4_kortweg

@@ -534,7 +534,15 @@ async function verwerkTicket(t, state) {
   // bevestigingswoorden (of is leeg = alleen emoji). Zo blijven echte vragen/verzoeken altijd
   // een antwoord krijgen, maar een "Top! Bedankt, ga ik doen 👍" niet.
   const woorden = zonderEmoji.toLowerCase().replace(/[!.,;:👍🤝🙏😊🎉'"()-]/g, ' ').split(/\s+/).filter(Boolean);
-  const isBevestiging = !/\?/.test(laatste.tekst) && zonderEmoji.length <= 45 &&
+  // MAAR NIET ALS WIJ NET IETS VROEGEN (Daimy 2026-07-27, ticket 968750981). Vraagt de bot
+  // "Zal ik alvast een prijsindicatie klaarzetten?" en antwoordt de klant "Prima", dan is dat
+  // geen afsluitend bedankje maar gewoon JA. Die klant kreeg 2,5 uur niets omdat "prima" in de
+  // bevestigingslijst staat. Gemeten over alle lokale WhatsApp-gesprekken: 9 keer zei een klant
+  // kort ja op een concrete vraag en gebeurde er niets, tegen 142 keer een echt afscheid waar
+  // zwijgen juist goed is. Daarom alleen zwijgen als ons laatste bericht GEEN vraag was.
+  const onsLaatste = [...rows].reverse().find(r => r.van === 'sonty');
+  const wijVroegenIets = /\?/.test(String(onsLaatste?.tekst || '').slice(-200));
+  const isBevestiging = !wijVroegenIets && !/\?/.test(laatste.tekst) && zonderEmoji.length <= 45 &&
     (woorden.length === 0 || woorden.every(w => BEVESTIG_WOORDEN.has(w)));
   if (isBevestiging) {
     state.verwerkt[sleutel] = { tijd: new Date().toISOString(), bevestiging: true };

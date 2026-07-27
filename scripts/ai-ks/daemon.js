@@ -955,7 +955,13 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
     // Pim 964070481 die 2 dagen zonder antwoord bleven).
     for (let page = 1; page <= 12; page++) {
       const data = await tGet(`/tickets?page=${page}`);
-      const rows = (data?.data || []).filter(t => t.status === 'OPEN' && isRelevantTicket(t));
+      // OOK ASSIGNED (Daimy 2026-07-27: "ook al staat die ergens aan toegewezen moet je die
+      // dingen wel oppakken"). De scan pakte alleen OPEN, waardoor een @sonny-notitie op een
+      // ticket dat aan een collega is toegewezen structureel werd gemist. Op 27 juli stonden er
+      // zo vijf opdrachten open, waarvan twee al dagen. Antwoorden naar de klant gebeurt hier
+      // niet: verwerkTicket() ziet aan aanMensToegewezen() dat het ticket van een mens is en
+      // verwerkt dan alleen de notitie, tenzij er een verse @sonny-opdracht ligt.
+      const rows = (data?.data || []).filter(t => (t.status === 'OPEN' || t.status === 'ASSIGNED') && isRelevantTicket(t));
       tickets.push(...rows);
       if (!data?.links?.next) break;
     }

@@ -29,6 +29,7 @@ const TEMPLATES = [
   // ticket achter. De andere drie varianten kwamen 49 van de 49 keer wel aan. Terugzetten zodra
   // de template opnieuw is aangemaakt of Meta hem alsnog accepteert.
   // { id: 242731, naam: 'inmeten',  aantalVars: 5 },  // offerte_ab1_inmeten
+  { id: 242818, naam: 'inmeten', aantalVars: 5 },  // offerte_ab1_inmetenv2
   { id: 242737, naam: 'garantie', aantalVars: 5 },  // offerte_ab2_garantie
   { id: 242738, naam: 'check',    aantalVars: 5 },  // offerte_ab3_check
   { id: 242739, naam: 'kortweg',  aantalVars: 5 },  // offerte_ab4_kortweg

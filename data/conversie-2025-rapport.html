@@ -1,0 +1,405 @@
+<title>Sonty conversie 2025 — per maand, bron en productgroep</title>
+<style>
+:root{
+  --surface:#FAF8F5; --surface-2:#FFFFFF; --surface-3:#F2EEE8;
+  --ink:#1C1815; --ink-2:#554D45; --ink-3:#8A8078;
+  --rule:#E4DDD3; --rule-strong:#CFC5B8;
+  --accent:#D95F02; --accent-soft:#FBEADC;
+  --s1:#D95F02; --s2:#1F6FEB; --s3:#0E8A6A; --s4:#7C3AED; --s5:#B8336A;
+  --goed:#1F7A4C; --slecht:#A8321F;
+  --h0:#FBF3EA; --h1:#F7E2CB; --h2:#F1C79E; --h3:#E7A76B; --h4:#D9853B; --h5:#BC6716; --h6:#944C09;
+  --h0i:#6B6259; --h1i:#4A3B28; --h2i:#3A2C1A; --h3i:#2E2112; --h4i:#FFF6EC; --h5i:#FFF6EC; --h6i:#FFF6EC;
+  --grid:#EAE3D9;
+}
+@media (prefers-color-scheme:dark){:root{
+  --surface:#14110E; --surface-2:#1D1916; --surface-3:#241F1A;
+  --ink:#F5F0EA; --ink-2:#B5ABA1; --ink-3:#7E756C;
+  --rule:#302A24; --rule-strong:#463D34;
+  --accent:#FF8438; --accent-soft:#2A1C11;
+  --s1:#DB7020; --s2:#4C8DFF; --s3:#2AA888; --s4:#A078F5; --s5:#E0578F;
+  --goed:#3FBF7F; --slecht:#F0705A;
+  --h0:#1B1712; --h1:#2C2318; --h2:#42311C; --h3:#5B4220; --h4:#7A5626; --h5:#9C6C2C; --h6:#C08536;
+  --h0i:#7E756C; --h1i:#C0A98C; --h2i:#E5CDA9; --h3i:#F6E3C6; --h4i:#FFF3E2; --h5i:#FFF6EC; --h6i:#1B1712;
+  --grid:#2A241E;
+}}
+:root[data-theme="dark"]{
+  --surface:#14110E; --surface-2:#1D1916; --surface-3:#241F1A;
+  --ink:#F5F0EA; --ink-2:#B5ABA1; --ink-3:#7E756C;
+  --rule:#302A24; --rule-strong:#463D34;
+  --accent:#FF8438; --accent-soft:#2A1C11;
+  --s1:#DB7020; --s2:#4C8DFF; --s3:#2AA888; --s4:#A078F5; --s5:#E0578F;
+  --goed:#3FBF7F; --slecht:#F0705A;
+  --h0:#1B1712; --h1:#2C2318; --h2:#42311C; --h3:#5B4220; --h4:#7A5626; --h5:#9C6C2C; --h6:#C08536;
+  --h0i:#7E756C; --h1i:#C0A98C; --h2i:#E5CDA9; --h3i:#F6E3C6; --h4i:#FFF3E2; --h5i:#FFF6EC; --h6i:#1B1712;
+  --grid:#2A241E;
+}
+:root[data-theme="light"]{
+  --surface:#FAF8F5; --surface-2:#FFFFFF; --surface-3:#F2EEE8;
+  --ink:#1C1815; --ink-2:#554D45; --ink-3:#8A8078;
+  --rule:#E4DDD3; --rule-strong:#CFC5B8;
+  --accent:#D95F02; --accent-soft:#FBEADC;
+  --s1:#D95F02; --s2:#1F6FEB; --s3:#0E8A6A; --s4:#7C3AED; --s5:#B8336A;
+  --goed:#1F7A4C; --slecht:#A8321F;
+  --h0:#FBF3EA; --h1:#F7E2CB; --h2:#F1C79E; --h3:#E7A76B; --h4:#D9853B; --h5:#BC6716; --h6:#944C09;
+  --h0i:#6B6259; --h1i:#4A3B28; --h2i:#3A2C1A; --h3i:#2E2112; --h4i:#FFF6EC; --h5i:#FFF6EC; --h6i:#FFF6EC;
+  --grid:#EAE3D9;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;}
+h1,h2,h3{letter-spacing:-0.022em;text-wrap:balance;margin:0;font-weight:750;line-height:1.14;}
+h1{font-size:clamp(2rem,5.2vw,3.35rem);}
+h2{font-size:clamp(1.4rem,3vw,1.95rem);}
+h3{font-size:1.06rem;letter-spacing:-0.01em;}
+p{margin:0;}
+a{color:var(--accent);}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,2.75rem);}
+
+/* eyebrow: monospace label, de meetinstrument-taal van een sheet-audit */
+.eyebrow{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  font-size:.688rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3);}
+
+header.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--surface) 88%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);}
+header.top .wrap{display:flex;align-items:center;gap:1.5rem;height:52px;}
+.brandmark{display:flex;align-items:center;gap:.55rem;font-weight:750;letter-spacing:-.02em;flex-shrink:0;}
+.brandmark i{width:9px;height:9px;border-radius:2px;background:var(--accent);display:block;}
+nav.jump{display:flex;gap:1.15rem;overflow-x:auto;margin-left:auto;}
+nav.jump a{color:var(--ink-2);text-decoration:none;font-size:.8rem;white-space:nowrap;padding:.2rem 0;border-bottom:1.5px solid transparent;}
+nav.jump a:hover,nav.jump a:focus-visible{color:var(--ink);border-bottom-color:var(--accent);}
+@media(max-width:760px){nav.jump{display:none}}
+
+.hero{padding:clamp(2.75rem,7vw,5rem) 0 clamp(1.75rem,4vw,2.75rem);}
+.hero h1{margin:.7rem 0 0;max-width:24ch;}
+.lede{margin-top:1.15rem;max-width:62ch;font-size:1.075rem;color:var(--ink-2);}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);margin:clamp(1.75rem,4vw,2.5rem) 0 0;}
+.kpi{background:var(--surface-2);padding:1.15rem 1.15rem 1.05rem;}
+.kpi .v{font-size:clamp(1.5rem,3.6vw,2.1rem);font-weight:750;letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;line-height:1.05;margin-top:.4rem;}
+.kpi .n{font-size:.78rem;color:var(--ink-3);margin-top:.35rem;line-height:1.4;}
+
+section{padding:clamp(2.5rem,6vw,4.25rem) 0;border-top:1px solid var(--rule);}
+section > .wrap > .eyebrow{display:block;margin-bottom:.6rem;}
+section h2 + p.intro{margin-top:1rem;max-width:66ch;color:var(--ink-2);}
+
+.note{border-left:2.5px solid var(--accent);background:var(--accent-soft);
+  padding:1.05rem 1.25rem;margin-top:1.6rem;font-size:.925rem;}
+.note strong{color:var(--ink);}
+.note + .note{margin-top:.75rem;}
+
+.scroller{overflow-x:auto;margin-top:1.75rem;border:1px solid var(--rule);background:var(--surface-2);}
+table{border-collapse:collapse;width:100%;font-size:.85rem;}
+caption{text-align:left;padding:.85rem 1rem;font-size:.8rem;color:var(--ink-3);border-bottom:1px solid var(--rule);}
+th,td{padding:.5rem .7rem;text-align:right;border-bottom:1px solid var(--rule);white-space:nowrap;
+  font-variant-numeric:tabular-nums;}
+th{font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);font-weight:600;
+  background:var(--surface-3);position:sticky;top:0;}
+th:first-child,td:first-child{text-align:left;font-variant-numeric:normal;}
+tbody tr:hover td{background:var(--surface-3);}
+tr.tot td{font-weight:700;border-top:2px solid var(--rule-strong);background:var(--surface-3);}
+tr.tot:hover td{background:var(--surface-3);}
+td.h0{background:var(--h0);color:var(--h0i)}td.h1{background:var(--h1);color:var(--h1i)}
+td.h2{background:var(--h2);color:var(--h2i)}td.h3{background:var(--h3);color:var(--h3i)}
+td.h4{background:var(--h4);color:var(--h4i)}td.h5{background:var(--h5);color:var(--h5i)}
+td.h6{background:var(--h6);color:var(--h6i)}
+td.leeg{color:var(--ink-3);}
+tbody tr:hover td[class^="h"]{filter:brightness(1.06)}
+td .sub{color:var(--ink-3);font-size:.75rem;margin-left:.3rem;}
+td.h4 .sub,td.h5 .sub,td.h6 .sub{color:inherit;opacity:.7}
+.pos{color:var(--goed);font-weight:600}.neg{color:var(--slecht);font-weight:600}
+
+.legend{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-top:1rem;font-size:.8rem;color:var(--ink-2);}
+.legend .item{display:flex;align-items:center;gap:.4rem;}
+.legend .sw{width:11px;height:11px;border-radius:2px;flex-shrink:0;}
+.ramp{display:flex;align-items:center;gap:.45rem;font-size:.75rem;color:var(--ink-3);}
+.ramp .cells{display:flex;}
+.ramp .cells i{width:19px;height:11px;display:block;}
+
+figure{margin:1.75rem 0 0;}
+figcaption{font-size:.8rem;color:var(--ink-3);margin-top:.7rem;max-width:62ch;}
+.chart{position:relative;background:var(--surface-2);border:1px solid var(--rule);padding:1.1rem .9rem .6rem;}
+svg{display:block;width:100%;height:auto;overflow:visible;}
+.gridline{stroke:var(--grid);stroke-width:1;}
+.axis{fill:var(--ink-3);font-size:10.5px;font-family:ui-monospace,Menlo,monospace;}
+.axlabel{fill:var(--ink-3);font-size:10px;letter-spacing:.08em;text-transform:uppercase;}
+.dlabel{font-size:10.5px;font-weight:700;font-variant-numeric:tabular-nums;}
+.hit{fill:transparent;cursor:pointer;}
+.tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .1s;
+  background:var(--ink);color:var(--surface);padding:.5rem .65rem;font-size:.75rem;
+  border-radius:4px;white-space:nowrap;z-index:5;line-height:1.45;font-variant-numeric:tabular-nums;}
+.tip b{font-weight:700}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);margin-top:1.75rem;}
+.card{background:var(--surface-2);padding:1.3rem;}
+.card .eyebrow{display:block;margin-bottom:.5rem;}
+.card h3{margin-bottom:.5rem;}
+.card p{font-size:.9rem;color:var(--ink-2);}
+.card .big{font-size:1.65rem;font-weight:750;letter-spacing:-.025em;font-variant-numeric:tabular-nums;margin:.15rem 0 .5rem;}
+
+ol.acties{list-style:none;padding:0;margin:1.75rem 0 0;display:grid;gap:1px;background:var(--rule);
+  border:1px solid var(--rule);}
+ol.acties li{background:var(--surface-2);padding:1.35rem 1.4rem;display:grid;
+  grid-template-columns:auto 1fr;gap:0 1.15rem;align-items:start;}
+ol.acties .when{font-family:ui-monospace,Menlo,monospace;font-size:.7rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);padding-top:.25rem;white-space:nowrap;}
+ol.acties h3{grid-column:2;}
+ol.acties p{grid-column:2;margin-top:.45rem;font-size:.925rem;color:var(--ink-2);}
+ol.acties .bedrag{grid-column:2;margin-top:.6rem;font-size:.8rem;color:var(--ink-3);
+  font-family:ui-monospace,Menlo,monospace;}
+@media(max-width:560px){ol.acties li{grid-template-columns:1fr}ol.acties h3,ol.acties p,ol.acties .bedrag{grid-column:1}
+  ol.acties .when{padding-bottom:.5rem}}
+
+footer{border-top:1px solid var(--rule);padding:2.25rem 0 3.25rem;color:var(--ink-3);font-size:.83rem;}
+footer p{max-width:70ch;}
+footer p + p{margin-top:.65rem;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<header class="top"><div class="wrap">
+<span class="brandmark"><i></i>Sonty&nbsp;data</span>
+<nav class="jump">
+<a href="#maand">Per maand</a><a href="#bron">Per bron</a><a href="#product">Per product</a>
+<a href="#showroom">Showroom</a><a href="#geld">Advertentiegeld</a><a href="#plan">Investeringsplan</a>
+</nav></div></header>
+<div class="wrap hero">
+<span class="eyebrow">Offerteregister 2025 &middot; 9.198 offertes geanalyseerd</span>
+<h1>Het probleem is niet te weinig aanvragen. Het is wat er daarna mee gebeurt.</h1>
+<p class="lede">Sonty haalde in 2025 9.198 offertes op en zette daar 1.089 akkoorden uit: 11,8%. De maanden met de m&eacute;&eacute;ste aanvragen zijn precies de maanden met de sl&eacute;chtste conversie, en het duurste kanaal levert de laagste. Hieronder per maand, per bron en per productgroep, plus waar het geld het beste heen kan.</p>
+<div class="kpis">
+<div class="kpi"><span class="eyebrow">Offertes</span><div class="v">9.198</div><div class="n">in heel 2025</div></div>
+<div class="kpi"><span class="eyebrow">Akkoord</span><div class="v">1.089</div><div class="n">11,8% conversie</div></div>
+<div class="kpi"><span class="eyebrow">Omzet akkoord</span><div class="v">€ 4.071.488</div><div class="n">incl. btw</div></div>
+<div class="kpi"><span class="eyebrow">Productmarge</span><div class="v">€ 1.840.525</div><div class="n">45% &mdash; v&oacute;&oacute;r montage en overhead</div></div>
+<div class="kpi"><span class="eyebrow">Gem. order</span><div class="v">€ 3.739</div><div class="n">€1.690 marge per akkoord</div></div>
+</div>
+</div>
+<section id="data"><div class="wrap">
+<span class="eyebrow">Eerst dit</span>
+<h2>Twee dingen in de sheet die de cijfers anders vertellen dan je denkt</h2>
+<div class="note"><strong>De kolom &ldquo;Akkoord&rdquo; met vinkjes is onbruikbaar.</strong> Die staat op 313 akkoorden voor heel 2025, maar in juni staat hij op 0 terwijl er 1.221 offertes uitgingen, en in mei op 1. Dat kan niet. Het akkoord-blok ernaast &mdash; Gripp-nummer, akkoorddatum en akkoordbedrag &mdash; is w&eacute;l consistent gevuld en komt onderling overeen (1.059 / 1.081 / 1.088 rijen). Alle cijfers hier komen uit dat blok: 1.089 akkoorden. Ter controle naast jouw eigen tab &ldquo;conversie %&rdquo;: maart 625 offertes tegen jouw 627, april 907 tegen 896, mei 1.240 tegen 1.227.</div>
+<div class="note"><strong>Je afkomst-labels zijn medio 2025 omgezet.</strong> Tot en met augustus heette Meta-traffic &ldquo;Facebook&rdquo;, vanaf september &ldquo;Instagram&rdquo;: Facebook zakt van 558 offertes in augustus naar 4 in september, terwijl Instagram in dezelfde stap van 63 naar 345 springt. Los gelezen lijkt Facebook dood en Instagram nieuw. Ze zijn hier samengevoegd als &eacute;&eacute;n kanaal Meta.</div>
+</div></section>
+<section id="maand"><div class="wrap">
+<span class="eyebrow">01 &middot; Seizoen</span>
+<h2>Per maand: de drukste maanden converteren het slechtst</h2>
+<p class="intro">Januari tot mei liep op 15,2% conversie. Juni tot augustus &mdash; ruim m&eacute;&eacute;r aanvragen &mdash; op 9,2%. De correlatie tussen offertevolume en conversie is &minus;0,50: hoe meer er binnenkomt, hoe minder er uitkomt. Dat is geen vraagprobleem, dat is een verwerkingsprobleem.</p>
+<figure><div class="chart"><svg viewBox="0 0 1000 150" role="img" aria-label="Offertevolume per maand 2025"><line class="gridline" x1="46" y1="18.0" x2="984" y2="18.0"/><text class="axis" x="39" y="21.5" text-anchor="end">1500</text><line class="gridline" x1="46" y1="54.7" x2="984" y2="54.7"/><text class="axis" x="39" y="58.2" text-anchor="end">1000</text><line class="gridline" x1="46" y1="91.3" x2="984" y2="91.3"/><text class="axis" x="39" y="94.8" text-anchor="end">500</text><line class="gridline" x1="46" y1="128.0" x2="984" y2="128.0"/><text class="axis" x="39" y="131.5" text-anchor="end">0</text><rect x="59.3" y="106.4" width="51.6" height="21.6" rx="4" fill="var(--s2)"/><text class="axis" x="85.1" y="142" text-anchor="middle">jan</text><rect class="hit" x="46.0" y="0" width="78.2" height="128" data-tip="<b>jan 2025</b><br>295 offertes"/><rect x="137.5" y="101.2" width="51.6" height="26.8" rx="4" fill="var(--s2)"/><text class="axis" x="163.3" y="142" text-anchor="middle">feb</text><rect class="hit" x="124.2" y="0" width="78.2" height="128" data-tip="<b>feb 2025</b><br>365 offertes"/><rect x="215.6" y="82.2" width="51.6" height="45.8" rx="4" fill="var(--s2)"/><text class="axis" x="241.4" y="142" text-anchor="middle">mrt</text><rect class="hit" x="202.3" y="0" width="78.2" height="128" data-tip="<b>mrt 2025</b><br>625 offertes"/><rect x="293.8" y="61.5" width="51.6" height="66.5" rx="4" fill="var(--s2)"/><text class="axis" x="319.6" y="142" text-anchor="middle">apr</text><rect class="hit" x="280.5" y="0" width="78.2" height="128" data-tip="<b>apr 2025</b><br>907 offertes"/><rect x="372.0" y="37.1" width="51.6" height="90.9" rx="4" fill="var(--s2)"/><text class="axis" x="397.8" y="142" text-anchor="middle">mei</text><rect class="hit" x="358.7" y="0" width="78.2" height="128" data-tip="<b>mei 2025</b><br>1.240 offertes"/><rect x="450.1" y="38.5" width="51.6" height="89.5" rx="4" fill="var(--s2)"/><text class="axis" x="475.9" y="142" text-anchor="middle">jun</text><rect class="hit" x="436.8" y="0" width="78.2" height="128" data-tip="<b>jun 2025</b><br>1.221 offertes"/><rect x="528.3" y="18.9" width="51.6" height="109.1" rx="4" fill="var(--s2)"/><text class="axis" x="554.1" y="142" text-anchor="middle">jul</text><rect class="hit" x="515.0" y="0" width="78.2" height="128" data-tip="<b>jul 2025</b><br>1.488 offertes"/><rect x="606.5" y="36.0" width="51.6" height="92.0" rx="4" fill="var(--s2)"/><text class="axis" x="632.3" y="142" text-anchor="middle">aug</text><rect class="hit" x="593.2" y="0" width="78.2" height="128" data-tip="<b>aug 2025</b><br>1.254 offertes"/><rect x="684.6" y="79.5" width="51.6" height="48.5" rx="4" fill="var(--s2)"/><text class="axis" x="710.4" y="142" text-anchor="middle">sep</text><rect class="hit" x="671.3" y="0" width="78.2" height="128" data-tip="<b>sep 2025</b><br>661 offertes"/><rect x="762.8" y="99.4" width="51.6" height="28.6" rx="4" fill="var(--s2)"/><text class="axis" x="788.6" y="142" text-anchor="middle">okt</text><rect class="hit" x="749.5" y="0" width="78.2" height="128" data-tip="<b>okt 2025</b><br>390 offertes"/><rect x="841.0" y="100.5" width="51.6" height="27.5" rx="4" fill="var(--s2)"/><text class="axis" x="866.8" y="142" text-anchor="middle">nov</text><rect class="hit" x="827.7" y="0" width="78.2" height="128" data-tip="<b>nov 2025</b><br>375 offertes"/><rect x="919.1" y="100.4" width="51.6" height="27.6" rx="4" fill="var(--s2)"/><text class="axis" x="944.9" y="142" text-anchor="middle">dec</text><rect class="hit" x="905.8" y="0" width="78.2" height="128" data-tip="<b>dec 2025</b><br>377 offertes"/><text class="axlabel" x="46" y="9">Offertes per maand</text></svg><div class="tip"></div></div>
+<div class="chart" style="border-top:0"><svg viewBox="0 0 1000 165" role="img" aria-label="Conversiepercentage per maand 2025"><line class="gridline" x1="46" y1="18.0" x2="984" y2="18.0"/><text class="axis" x="39" y="21.5" text-anchor="end">24%</text><line class="gridline" x1="46" y1="49.3" x2="984" y2="49.3"/><text class="axis" x="39" y="52.8" text-anchor="end">18%</text><line class="gridline" x1="46" y1="80.5" x2="984" y2="80.5"/><text class="axis" x="39" y="84.0" text-anchor="end">12%</text><line class="gridline" x1="46" y1="111.8" x2="984" y2="111.8"/><text class="axis" x="39" y="115.3" text-anchor="end">6%</text><line class="gridline" x1="46" y1="143.0" x2="984" y2="143.0"/><text class="axis" x="39" y="146.5" text-anchor="end">0%</text><polyline points="85.1,28.2 163.3,67.4 241.4,52.2 319.6,62.6 397.8,78.7 475.9,100.3 554.1,97.5 632.3,87.8 710.4,80.0 788.6,81.6 866.8,79.1 944.9,96.0" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linejoin="round"/><circle cx="85.1" cy="28.2" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><text class="dlabel" x="85.1" y="17.2" text-anchor="middle" fill="var(--s1)">22,0%</text><text class="axis" x="85.1" y="157" text-anchor="middle">jan</text><rect class="hit" x="46.0" y="0" width="78.2" height="143" data-tip="<b>jan 2025</b><br>22,0% conversie<br>65 van 295<br>€214.369 omzet"/><circle cx="163.3" cy="67.4" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><text class="axis" x="163.3" y="157" text-anchor="middle">feb</text><rect class="hit" x="124.2" y="0" width="78.2" height="143" data-tip="<b>feb 2025</b><br>14,5% conversie<br>53 van 365<br>€175.968 omzet"/><circle cx="241.4" cy="52.2" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><text class="axis" x="241.4" y="157" text-anchor="middle">mrt</text><rect class="hit" x="202.3" y="0" width="78.2" height="143" data-tip="<b>mrt 2025</b><br>17,4% conversie<br>109 van 625<br>€408.753 omzet"/><circle cx="319.6" cy="62.6" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><text class="axis" x="319.6" y="157" text-anchor="middle">apr</text><rect class="hit" x="280.5" y="0" width="78.2" height="143" data-tip="<b>apr 2025</b><br>15,4% conversie<br>140 van 907<br>€452.696 omzet"/><circle cx="397.8" cy="78.7" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><text class="axis" x="397.8" y="157" text-anchor="middle">mei</text><rect class="hit" x="358.7" y="0" width="78.2" height="143" data-tip="<b>mei 2025</b><br>12,3% conversie<br>153 van 1.240<br>€527.858 omzet"/><circle cx="475.9" cy="100.3" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><text class="dlabel" x="475.9" y="89.3" text-anchor="middle" fill="var(--s1)">8,2%</text><text class="axis" x="475.9" y="157" text-anchor="middle">jun</text><rect class="hit" x="436.8" y="0" width="78.2" height="143" data-tip="<b>jun 2025</b><br>8,2% conversie<br>100 van 1.221<br>€394.198 omzet"/><circle cx="554.1" cy="97.5" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><text class="dlabel" x="554.1" y="86.5" text-anchor="middle" fill="var(--s1)">8,7%</text><text class="axis" x="554.1" y="157" text-anchor="middle">jul</text><rect class="hit" x="515.0" y="0" width="78.2" height="143" data-tip="<b>jul 2025</b><br>8,7% conversie<br>130 van 1.488<br>€521.132 omzet"/><circle cx="632.3" cy="87.8" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><text class="axis" x="632.3" y="157" text-anchor="middle">aug</text><rect class="hit" x="593.2" y="0" width="78.2" height="143" data-tip="<b>aug 2025</b><br>10,6% conversie<br>133 van 1.254<br>€551.098 omzet"/><circle cx="710.4" cy="80.0" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><text class="axis" x="710.4" y="157" text-anchor="middle">sep</text><rect class="hit" x="671.3" y="0" width="78.2" height="143" data-tip="<b>sep 2025</b><br>12,1% conversie<br>80 van 661<br>€331.896 omzet"/><circle cx="788.6" cy="81.6" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><text class="axis" x="788.6" y="157" text-anchor="middle">okt</text><rect class="hit" x="749.5" y="0" width="78.2" height="143" data-tip="<b>okt 2025</b><br>11,8% conversie<br>46 van 390<br>€175.376 omzet"/><circle cx="866.8" cy="79.1" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><text class="dlabel" x="866.8" y="68.1" text-anchor="middle" fill="var(--s1)">12,3%</text><text class="axis" x="866.8" y="157" text-anchor="middle">nov</text><rect class="hit" x="827.7" y="0" width="78.2" height="143" data-tip="<b>nov 2025</b><br>12,3% conversie<br>46 van 375<br>€196.983 omzet"/><circle cx="944.9" cy="96.0" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><text class="axis" x="944.9" y="157" text-anchor="middle">dec</text><rect class="hit" x="905.8" y="0" width="78.2" height="143" data-tip="<b>dec 2025</b><br>9,0% conversie<br>34 van 377<br>€121.161 omzet"/><text class="axlabel" x="46" y="9">Conversie naar akkoord</text></svg><div class="tip"></div></div>
+<figcaption>Zelfde tijdas, twee losse schalen &mdash; volume in aantallen, conversie in procenten. De piek in aanvragen (mei&ndash;augustus) valt samen met de dip in conversie.</figcaption></figure>
+<div class="scroller"><table><caption>Conversie per maand, 2025. Omzet en marge zijn incl. btw uit de akkoordkolommen.</caption>
+<thead><tr><th>Maand</th><th>Offertes</th><th>Akkoord</th><th>Conversie</th><th>Omzet akkoord</th><th>Productmarge</th><th>Gem. order</th></tr></thead><tbody><tr><td>jan 2025</td><td>295</td><td>65</td>
+<td class="h6">22,0%</td>
+<td>€214.369</td><td>€91.124</td><td>€3.298</td></tr><tr><td>feb 2025</td><td>365</td><td>53</td>
+<td class="h4">14,5%</td>
+<td>€175.968</td><td>€81.249</td><td>€3.320</td></tr><tr><td>mrt 2025</td><td>625</td><td>109</td>
+<td class="h5">17,4%</td>
+<td>€408.753</td><td>€190.187</td><td>€3.750</td></tr><tr><td>apr 2025</td><td>907</td><td>140</td>
+<td class="h4">15,4%</td>
+<td>€452.696</td><td>€198.712</td><td>€3.234</td></tr><tr><td>mei 2025</td><td>1.240</td><td>153</td>
+<td class="h3">12,3%</td>
+<td>€527.858</td><td>€251.343</td><td>€3.450</td></tr><tr><td>jun 2025</td><td>1.221</td><td>100</td>
+<td class="h2">8,2%</td>
+<td>€394.198</td><td>€189.717</td><td>€3.942</td></tr><tr><td>jul 2025</td><td>1.488</td><td>130</td>
+<td class="h2">8,7%</td>
+<td>€521.132</td><td>€243.343</td><td>€4.009</td></tr><tr><td>aug 2025</td><td>1.254</td><td>133</td>
+<td class="h3">10,6%</td>
+<td>€551.098</td><td>€235.969</td><td>€4.144</td></tr><tr><td>sep 2025</td><td>661</td><td>80</td>
+<td class="h3">12,1%</td>
+<td>€331.896</td><td>€140.751</td><td>€4.149</td></tr><tr><td>okt 2025</td><td>390</td><td>46</td>
+<td class="h3">11,8%</td>
+<td>€175.376</td><td>€78.612</td><td>€3.813</td></tr><tr><td>nov 2025</td><td>375</td><td>46</td>
+<td class="h3">12,3%</td>
+<td>€196.983</td><td>€85.321</td><td>€4.282</td></tr><tr><td>dec 2025</td><td>377</td><td>34</td>
+<td class="h2">9,0%</td>
+<td>€121.161</td><td>€54.196</td><td>€3.564</td></tr><tr class="tot"><td>Totaal 2025</td><td>9.198</td><td>1.089</td>
+<td>11,8%</td><td>€4.071.488</td><td>€1.840.525</td><td>€3.739</td></tr>
+</tbody></table></div>
+<div class="note"><strong>Wat de zomerdip kost.</strong> Had juni tot augustus op het niveau van januari&ndash;mei gezeten (15,2%), dan waren dat 237 akkoorden extra geweest: ongeveer €400.555 productmarge. Dat is meer dan het hele Meta-advertentiebudget van die periode. De doorlooptijd van offerte naar akkoord loopt in dezelfde beweging op van 11 dagen in januari naar 24&ndash;27 dagen in juni&ndash;augustus en 32&ndash;38 dagen in het najaar &mdash; dat is de opvolgachterstand die zich opbouwt.</div>
+</div></section>
+<section id="bron"><div class="wrap">
+<span class="eyebrow">02 &middot; Afkomst offerte</span>
+<h2>Per bron: Google converteert twee keer beter dan Meta, elke maand van het jaar</h2>
+<p class="intro">Meta leverde 56% van alle offertes maar 32% van de akkoorden. Google is precies omgekeerd. En dit is geen ruis in &eacute;&eacute;n maand: Google staat in alle twaalf maanden boven Meta, met een verschil van 2 tot 16 procentpunt.</p>
+<div class="scroller"><table><caption>Per afkomst over heel 2025. Facebook en Instagram zijn samengevoegd tot Meta vanwege de labelwissel.</caption>
+<thead><tr><th>Bron</th><th>Offertes</th><th>Aandeel</th><th>Akkoord</th><th>Conversie</th><th>Omzet</th><th>Productmarge</th><th>Gem. order</th></tr></thead><tbody><tr><td>Google</td><td>2.888</td><td>31,4%</td><td>418</td>
+<td class="h1">14,5%</td>
+<td>€1.617.153</td><td>€738.674</td><td>€3.869</td></tr><tr><td>Meta (FB+IG)</td><td>5.192</td><td>56,4%</td><td>352</td>
+<td class="h1">6,8%</td>
+<td>€1.243.350</td><td>€552.945</td><td>€3.532</td></tr><tr><td>Buren &amp; bekenden</td><td>519</td><td>5,6%</td><td>202</td>
+<td class="h4">38,9%</td>
+<td>€721.040</td><td>€321.318</td><td>€3.570</td></tr><tr><td>Anders</td><td>492</td><td>5,3%</td><td>54</td>
+<td class="h1">11,0%</td>
+<td>€232.173</td><td>€104.811</td><td>€4.299</td></tr><tr><td>Niet ingevuld</td><td>106</td><td>1,2%</td><td>63</td>
+<td class="h6">59,4%</td>
+<td>€257.772</td><td>€122.776</td><td>€4.092</td></tr><tr class="tot"><td>Totaal</td><td>9.198</td><td>100%</td><td>1.089</td>
+<td>11,8%</td><td>€4.071.488</td><td>€1.840.525</td><td>€3.739</td></tr>
+</tbody></table></div>
+<figure><div class="chart"><svg viewBox="0 0 1000 200" role="img" aria-label="Conversie Meta versus Google per maand 2025"><line class="gridline" x1="46" y1="22.0" x2="984" y2="22.0"/><text class="axis" x="39" y="25.5" text-anchor="end">24%</text><line class="gridline" x1="46" y1="60.5" x2="984" y2="60.5"/><text class="axis" x="39" y="64.0" text-anchor="end">18%</text><line class="gridline" x1="46" y1="99.0" x2="984" y2="99.0"/><text class="axis" x="39" y="102.5" text-anchor="end">12%</text><line class="gridline" x1="46" y1="137.5" x2="984" y2="137.5"/><text class="axis" x="39" y="141.0" text-anchor="end">6%</text><line class="gridline" x1="46" y1="176.0" x2="984" y2="176.0"/><text class="axis" x="39" y="179.5" text-anchor="end">0%</text><polyline points="85.1,33.4 163.3,27.9 241.4,67.2 319.6,46.7 397.8,67.7 475.9,108.8 554.1,103.3 632.3,93.3 710.4,60.7 788.6,105.7 866.8,84.3 944.9,120.0" fill="none" stroke="var(--s2)" stroke-width="2" stroke-linejoin="round"/><circle cx="85.1" cy="33.4" r="4.5" fill="var(--s2)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="46.0" y="19.4" width="78.2" height="28" data-tip="<b>Google &middot; jan</b><br>22,2% conversie<br>10 van 45 offertes"/><circle cx="163.3" cy="27.9" r="4.5" fill="var(--s2)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="124.2" y="13.9" width="78.2" height="28" data-tip="<b>Google &middot; feb</b><br>23,1% conversie<br>18 van 78 offertes"/><circle cx="241.4" cy="67.2" r="4.5" fill="var(--s2)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="202.3" y="53.2" width="78.2" height="28" data-tip="<b>Google &middot; mrt</b><br>17,0% conversie<br>29 van 171 offertes"/><circle cx="319.6" cy="46.7" r="4.5" fill="var(--s2)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="280.5" y="32.7" width="78.2" height="28" data-tip="<b>Google &middot; apr</b><br>20,1% conversie<br>56 van 278 offertes"/><circle cx="397.8" cy="67.7" r="4.5" fill="var(--s2)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="358.7" y="53.7" width="78.2" height="28" data-tip="<b>Google &middot; mei</b><br>16,9% conversie<br>65 van 385 offertes"/><circle cx="475.9" cy="108.8" r="4.5" fill="var(--s2)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="436.8" y="94.8" width="78.2" height="28" data-tip="<b>Google &middot; jun</b><br>10,5% conversie<br>35 van 334 offertes"/><circle cx="554.1" cy="103.3" r="4.5" fill="var(--s2)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="515.0" y="89.3" width="78.2" height="28" data-tip="<b>Google &middot; jul</b><br>11,3% conversie<br>53 van 468 offertes"/><circle cx="632.3" cy="93.3" r="4.5" fill="var(--s2)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="593.2" y="79.3" width="78.2" height="28" data-tip="<b>Google &middot; aug</b><br>12,9% conversie<br>63 van 489 offertes"/><circle cx="710.4" cy="60.7" r="4.5" fill="var(--s2)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="671.3" y="46.7" width="78.2" height="28" data-tip="<b>Google &middot; sep</b><br>18,0% conversie<br>46 van 256 offertes"/><circle cx="788.6" cy="105.7" r="4.5" fill="var(--s2)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="749.5" y="91.7" width="78.2" height="28" data-tip="<b>Google &middot; okt</b><br>11,0% conversie<br>16 van 146 offertes"/><circle cx="866.8" cy="84.3" r="4.5" fill="var(--s2)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="827.7" y="70.3" width="78.2" height="28" data-tip="<b>Google &middot; nov</b><br>14,3% conversie<br>16 van 112 offertes"/><circle cx="944.9" cy="120.0" r="4.5" fill="var(--s2)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="905.8" y="106.0" width="78.2" height="28" data-tip="<b>Google &middot; dec</b><br>8,7% conversie<br>11 van 126 offertes"/><text class="dlabel" x="953.9" y="123.5" fill="var(--s2)">Google</text><polyline points="85.1,61.5 163.3,129.9 241.4,80.1 319.6,126.3 397.8,134.5 475.9,142.3 554.1,149.0 632.3,136.7 710.4,133.7 788.6,141.4 866.8,141.3 944.9,159.9" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linejoin="round"/><circle cx="85.1" cy="61.5" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="46.0" y="47.5" width="78.2" height="28" data-tip="<b>Meta &middot; jan</b><br>17,8% conversie<br>33 van 185 offertes"/><circle cx="163.3" cy="129.9" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="124.2" y="115.9" width="78.2" height="28" data-tip="<b>Meta &middot; feb</b><br>7,2% conversie<br>15 van 209 offertes"/><circle cx="241.4" cy="80.1" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="202.3" y="66.1" width="78.2" height="28" data-tip="<b>Meta &middot; mrt</b><br>14,9% conversie<br>52 van 348 offertes"/><circle cx="319.6" cy="126.3" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="280.5" y="112.3" width="78.2" height="28" data-tip="<b>Meta &middot; apr</b><br>7,8% conversie<br>40 van 516 offertes"/><circle cx="397.8" cy="134.5" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="358.7" y="120.5" width="78.2" height="28" data-tip="<b>Meta &middot; mei</b><br>6,5% conversie<br>47 van 726 offertes"/><circle cx="475.9" cy="142.3" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="436.8" y="128.3" width="78.2" height="28" data-tip="<b>Meta &middot; jun</b><br>5,3% conversie<br>41 van 780 offertes"/><circle cx="554.1" cy="149.0" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="515.0" y="135.0" width="78.2" height="28" data-tip="<b>Meta &middot; jul</b><br>4,2% conversie<br>35 van 833 offertes"/><circle cx="632.3" cy="136.7" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="593.2" y="122.7" width="78.2" height="28" data-tip="<b>Meta &middot; aug</b><br>6,1% conversie<br>38 van 621 offertes"/><circle cx="710.4" cy="133.7" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="671.3" y="119.7" width="78.2" height="28" data-tip="<b>Meta &middot; sep</b><br>6,6% conversie<br>23 van 349 offertes"/><circle cx="788.6" cy="141.4" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="749.5" y="127.4" width="78.2" height="28" data-tip="<b>Meta &middot; okt</b><br>5,4% conversie<br>11 van 204 offertes"/><circle cx="866.8" cy="141.3" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="827.7" y="127.3" width="78.2" height="28" data-tip="<b>Meta &middot; nov</b><br>5,4% conversie<br>12 van 222 offertes"/><circle cx="944.9" cy="159.9" r="4.5" fill="var(--s1)" stroke="var(--surface-2)" stroke-width="2"/><rect class="hit" x="905.8" y="145.9" width="78.2" height="28" data-tip="<b>Meta &middot; dec</b><br>2,5% conversie<br>5 van 199 offertes"/><text class="dlabel" x="953.9" y="163.4" fill="var(--s1)">Meta</text><text class="axis" x="85.1" y="192" text-anchor="middle">jan</text><text class="axis" x="163.3" y="192" text-anchor="middle">feb</text><text class="axis" x="241.4" y="192" text-anchor="middle">mrt</text><text class="axis" x="319.6" y="192" text-anchor="middle">apr</text><text class="axis" x="397.8" y="192" text-anchor="middle">mei</text><text class="axis" x="475.9" y="192" text-anchor="middle">jun</text><text class="axis" x="554.1" y="192" text-anchor="middle">jul</text><text class="axis" x="632.3" y="192" text-anchor="middle">aug</text><text class="axis" x="710.4" y="192" text-anchor="middle">sep</text><text class="axis" x="788.6" y="192" text-anchor="middle">okt</text><text class="axis" x="866.8" y="192" text-anchor="middle">nov</text><text class="axis" x="944.9" y="192" text-anchor="middle">dec</text><text class="axlabel" x="46" y="11">Conversie per bron per maand</text></svg><div class="tip"></div></div>
+<div class="legend"><div class="item"><span class="sw" style="background:var(--s2)"></span>Google</div>
+<div class="item"><span class="sw" style="background:var(--s1)"></span>Meta (Facebook + Instagram)</div></div>
+<figcaption>Google ligt in elke maand boven Meta. Het gat is het grootst in februari (+16 pp) en april (+12 pp).</figcaption></figure>
+<div class="scroller"><table><caption>Conversie per maand per bron. Kleur = hoogte van het percentage; het kleine getal is het aantal offertes.</caption>
+<thead><tr><th>Maand</th><th>Google</th><th>Meta (FB+IG)</th><th>Buren/Bekenden</th><th>Anders</th><th>Alle bronnen</th></tr></thead><tbody><tr><td>jan</td><td class="h3">22%<span class="sub">45</span></td><td class="h2">18%<span class="sub">185</span></td><td class="h6">68%<span class="sub">22</span></td><td class="h2">16%<span class="sub">43</span></td><td class="h3">22%<span class="sub">295</span></td></tr><tr><td>feb</td><td class="h3">23%<span class="sub">78</span></td><td class="h1">7%<span class="sub">209</span></td><td class="h6">55%<span class="sub">29</span></td><td class="h1">8%<span class="sub">49</span></td><td class="h2">15%<span class="sub">365</span></td></tr><tr><td>mrt</td><td class="h2">17%<span class="sub">171</span></td><td class="h2">15%<span class="sub">348</span></td><td class="h6">42%<span class="sub">52</span></td><td class="h1">11%<span class="sub">54</span></td><td class="h2">17%<span class="sub">625</span></td></tr><tr><td>apr</td><td class="h3">20%<span class="sub">278</span></td><td class="h1">8%<span class="sub">516</span></td><td class="h6">61%<span class="sub">62</span></td><td class="h2">12%<span class="sub">51</span></td><td class="h2">15%<span class="sub">907</span></td></tr><tr><td>mei</td><td class="h2">17%<span class="sub">385</span></td><td class="h1">6%<span class="sub">726</span></td><td class="h5">41%<span class="sub">85</span></td><td class="h2">14%<span class="sub">44</span></td><td class="h2">12%<span class="sub">1240</span></td></tr><tr><td>jun</td><td class="h1">10%<span class="sub">334</span></td><td class="h1">5%<span class="sub">780</span></td><td class="h4">28%<span class="sub">72</span></td><td class="h2">11%<span class="sub">35</span></td><td class="h1">8%<span class="sub">1221</span></td></tr><tr><td>jul</td><td class="h2">11%<span class="sub">468</span></td><td class="h1">4%<span class="sub">833</span></td><td class="h4">31%<span class="sub">78</span></td><td class="h2">17%<span class="sub">109</span></td><td class="h1">9%<span class="sub">1488</span></td></tr><tr><td>aug</td><td class="h2">13%<span class="sub">489</span></td><td class="h1">6%<span class="sub">621</span></td><td class="h3">22%<span class="sub">58</span></td><td class="h3">22%<span class="sub">86</span></td><td class="h1">11%<span class="sub">1254</span></td></tr><tr><td>sep</td><td class="h2">18%<span class="sub">256</span></td><td class="h1">7%<span class="sub">349</span></td><td class="h3">25%<span class="sub">16</span></td><td class="h2">18%<span class="sub">40</span></td><td class="h2">12%<span class="sub">661</span></td></tr><tr><td>okt</td><td class="h1">11%<span class="sub">146</span></td><td class="h1">5%<span class="sub">204</span></td><td class="h4">29%<span class="sub">14</span></td><td class="h6">58%<span class="sub">26</span></td><td class="h2">12%<span class="sub">390</span></td></tr><tr><td>nov</td><td class="h2">14%<span class="sub">112</span></td><td class="h1">5%<span class="sub">222</span></td><td class="h6">43%<span class="sub">14</span></td><td class="h6">46%<span class="sub">26</span></td><td class="h2">12%<span class="sub">375</span></td></tr><tr><td>dec</td><td class="h1">9%<span class="sub">126</span></td><td class="h0">3%<span class="sub">199</span></td><td class="h4">29%<span class="sub">17</span></td><td class="h5">37%<span class="sub">35</span></td><td class="h1">9%<span class="sub">377</span></td></tr><tr class="tot"><td>Jaar</td><td>14,5%<span class="sub">2.888</span></td><td>6,8%<span class="sub">5.192</span></td><td>38,9%<span class="sub">519</span></td><td>19,6%<span class="sub">598</span></td><td>11,8%<span class="sub">9.198</span></td></tr></tbody></table></div>
+<div class="ramp" style="margin-top:1rem"><span>0%</span><span class="cells"><i style="background:var(--h0)"></i><i style="background:var(--h1)"></i><i style="background:var(--h2)"></i><i style="background:var(--h3)"></i><i style="background:var(--h4)"></i><i style="background:var(--h5)"></i><i style="background:var(--h6)"></i></span><span>45%+ conversie</span></div>
+<div class="note"><strong>Buren en bekenden zijn je beste kanaal en je kleinste.</strong> 519 offertes (5,6% van het totaal) met 38,9% conversie en €721.040 omzet, tegen vrijwel geen advertentiekosten. Meta heeft 10x zoveel offertes nodig voor 1,7x de omzet.</div>
+</div></section>
+<section id="product"><div class="wrap">
+<span class="eyebrow">03 &middot; Productgroep</span>
+<h2>Per product: pergola&rsquo;s en voorraadschermen slurpen offertes en leveren niks</h2>
+<p class="intro">Rolluiken zijn de motor: 3.879 offertes, 12,6% conversie, €1.635.612 omzet. Maar pergola en voorraadscherm samen kostten 1.610 offertes &mdash; 18% van alles wat je uitstuurde &mdash; en leverden 38 akkoorden op.</p>
+<div class="scroller"><table><caption>Alle productgroepen uit de kolom &ldquo;Product cat&rdquo;, 2025.</caption>
+<thead><tr><th>Productgroep</th><th>Offertes</th><th>Akkoord</th><th>Conversie</th><th>Omzet</th><th>Gem. order</th><th>Marge %</th></tr></thead><tbody><tr><td>Rolluiken</td><td>3.879</td><td>487</td>
+<td class="h2">12,6%</td><td>€1.635.612</td><td>€3.359</td>
+<td>45%</td></tr><tr><td>Knikarmscherm</td><td>1.630</td><td>220</td>
+<td class="h2">13,5%</td><td>€832.135</td><td>€3.782</td>
+<td>45%</td></tr><tr><td>Screens</td><td>1.154</td><td>122</td>
+<td class="h1">10,6%</td><td>€560.450</td><td>€4.594</td>
+<td>45%</td></tr><tr><td>Pergola</td><td>1.025</td><td>26</td>
+<td class="h0">2,5%</td><td>€235.469</td><td>€9.056</td>
+<td>42%</td></tr><tr><td>Voorraadscherm</td><td>585</td><td>12</td>
+<td class="h0">2,1%</td><td>€56.936</td><td>€4.745</td>
+<td>42%</td></tr><tr><td>Zonwering buiten</td><td>310</td><td>49</td>
+<td class="h2">15,8%</td><td>€236.544</td><td>€4.827</td>
+<td>46%</td></tr><tr><td>Raamdecoratie binnen</td><td>158</td><td>66</td>
+<td class="h6">41,8%</td><td>€159.407</td><td>€2.415</td>
+<td>43%</td></tr><tr><td>Uitvalscherm</td><td>153</td><td>12</td>
+<td class="h1">7,8%</td><td>€77.695</td><td>€6.475</td>
+<td>45%</td></tr><tr><td>Markiezen</td><td>120</td><td>20</td>
+<td class="h2">16,7%</td><td>€78.872</td><td>€3.944</td>
+<td>44%</td></tr><tr><td>Reparatie</td><td>85</td><td>33</td>
+<td class="h5">38,8%</td><td>€39.803</td><td>€1.206</td>
+<td>65%</td></tr><tr><td>Niet ingevuld</td><td>76</td><td>32</td>
+<td class="h6">42,1%</td><td>€126.532</td><td>€3.954</td>
+<td>49%</td></tr><tr><td>Horren</td><td>12</td><td>6</td>
+<td class="h6">50,0%</td><td>€15.026</td><td>€2.504</td>
+<td>37%</td></tr><tr><td>Vloeren</td><td>6</td><td>2</td>
+<td class="h4">33,3%</td><td>€15.437</td><td>€7.719</td>
+<td>39%</td></tr><tr><td>Doek vervangen</td><td>3</td><td>1</td>
+<td class="h4">33,3%</td><td>€578</td><td>€578</td>
+<td>62%</td></tr></tbody></table></div>
+<div class="scroller"><table><caption>Conversie per maand per productgroep (groepen met 100+ offertes). Klein getal = aantal offertes.</caption>
+<thead><tr><th>Maand</th><th>Rolluiken</th><th>Knikarmscherm</th><th>Screens</th><th>Pergola</th><th>Voorraadscherm</th><th>Zonwering buiten</th><th>Raamdecoratie binnen</th><th>Uitvalscherm</th><th>Markiezen</th></tr></thead><tbody><tr><td>jan</td><td class="h2">19%<span class="sub">225</span></td><td class="h4">27%<span class="sub">22</span></td><td class="h4">29%<span class="sub">21</span></td><td class="leeg">&mdash;</td><td class="leeg">&mdash;</td><td class="h0">0%<span class="sub">4</span></td><td class="h6">55%<span class="sub">11</span></td><td class="leeg">&mdash;</td><td class="h6">100%<span class="sub">1</span></td></tr><tr><td>feb</td><td class="h1">10%<span class="sub">254</span></td><td class="h6">41%<span class="sub">29</span></td><td class="h1">7%<span class="sub">30</span></td><td class="leeg">&mdash;</td><td class="leeg">&mdash;</td><td class="h4">28%<span class="sub">18</span></td><td class="h3">22%<span class="sub">18</span></td><td class="leeg">&mdash;</td><td class="h6">100%<span class="sub">1</span></td></tr><tr><td>mrt</td><td class="h2">13%<span class="sub">338</span></td><td class="h2">18%<span class="sub">119</span></td><td class="h3">23%<span class="sub">62</span></td><td class="h3">20%<span class="sub">5</span></td><td class="leeg">&mdash;</td><td class="h5">35%<span class="sub">34</span></td><td class="h4">27%<span class="sub">11</span></td><td class="leeg">&mdash;</td><td class="h3">25%<span class="sub">4</span></td></tr><tr><td>apr</td><td class="h2">13%<span class="sub">390</span></td><td class="h2">15%<span class="sub">278</span></td><td class="h2">16%<span class="sub">131</span></td><td class="h0">0%<span class="sub">8</span></td><td class="leeg">&mdash;</td><td class="h2">16%<span class="sub">64</span></td><td class="h6">67%<span class="sub">15</span></td><td class="leeg">&mdash;</td><td class="h2">13%<span class="sub">8</span></td></tr><tr><td>mei</td><td class="h1">11%<span class="sub">455</span></td><td class="h1">11%<span class="sub">476</span></td><td class="h1">11%<span class="sub">174</span></td><td class="h0">0%<span class="sub">9</span></td><td class="leeg">&mdash;</td><td class="h2">12%<span class="sub">73</span></td><td class="h6">73%<span class="sub">11</span></td><td class="h2">14%<span class="sub">7</span></td><td class="h4">27%<span class="sub">26</span></td></tr><tr><td>jun</td><td class="h1">11%<span class="sub">480</span></td><td class="h1">10%<span class="sub">208</span></td><td class="h1">6%<span class="sub">144</span></td><td class="h0">3%<span class="sub">118</span></td><td class="h0">1%<span class="sub">178</span></td><td class="h1">9%<span class="sub">32</span></td><td class="h6">63%<span class="sub">8</span></td><td class="h1">5%<span class="sub">39</span></td><td class="h2">18%<span class="sub">11</span></td></tr><tr><td>jul</td><td class="h1">10%<span class="sub">488</span></td><td class="h2">13%<span class="sub">229</span></td><td class="h1">9%<span class="sub">199</span></td><td class="h0">3%<span class="sub">197</span></td><td class="h0">2%<span class="sub">234</span></td><td class="h1">10%<span class="sub">29</span></td><td class="h6">46%<span class="sub">26</span></td><td class="h2">13%<span class="sub">48</span></td><td class="h1">8%<span class="sub">24</span></td></tr><tr><td>aug</td><td class="h2">15%<span class="sub">448</span></td><td class="h2">12%<span class="sub">153</span></td><td class="h1">10%<span class="sub">172</span></td><td class="h0">3%<span class="sub">251</span></td><td class="h1">4%<span class="sub">125</span></td><td class="h3">21%<span class="sub">19</span></td><td class="h6">53%<span class="sub">19</span></td><td class="h0">0%<span class="sub">34</span></td><td class="h2">15%<span class="sub">20</span></td></tr><tr><td>sep</td><td class="h2">18%<span class="sub">266</span></td><td class="h2">13%<span class="sub">54</span></td><td class="h1">8%<span class="sub">87</span></td><td class="h0">2%<span class="sub">172</span></td><td class="h1">8%<span class="sub">26</span></td><td class="h1">11%<span class="sub">19</span></td><td class="h6">43%<span class="sub">7</span></td><td class="h1">10%<span class="sub">10</span></td><td class="h0">0%<span class="sub">12</span></td></tr><tr><td>okt</td><td class="h1">11%<span class="sub">174</span></td><td class="h1">11%<span class="sub">19</span></td><td class="h1">9%<span class="sub">43</span></td><td class="h0">3%<span class="sub">100</span></td><td class="h0">0%<span class="sub">9</span></td><td class="h1">10%<span class="sub">10</span></td><td class="h4">30%<span class="sub">10</span></td><td class="h3">25%<span class="sub">8</span></td><td class="h0">0%<span class="sub">2</span></td></tr><tr><td>nov</td><td class="h2">17%<span class="sub">174</span></td><td class="h4">29%<span class="sub">17</span></td><td class="h1">5%<span class="sub">41</span></td><td class="h0">1%<span class="sub">100</span></td><td class="h0">0%<span class="sub">4</span></td><td class="h0">0%<span class="sub">5</span></td><td class="h1">9%<span class="sub">11</span></td><td class="h0">0%<span class="sub">5</span></td><td class="h0">0%<span class="sub">4</span></td></tr><tr><td>dec</td><td class="h1">7%<span class="sub">187</span></td><td class="h2">12%<span class="sub">26</span></td><td class="h1">8%<span class="sub">50</span></td><td class="h0">2%<span class="sub">65</span></td><td class="h0">0%<span class="sub">9</span></td><td class="h0">0%<span class="sub">3</span></td><td class="h1">9%<span class="sub">11</span></td><td class="h0">0%<span class="sub">2</span></td><td class="h4">29%<span class="sub">7</span></td></tr><tr class="tot"><td>Jaar</td><td>12,6%<span class="sub">3.879</span></td><td>13,5%<span class="sub">1.630</span></td><td>10,6%<span class="sub">1.154</span></td><td>2,5%<span class="sub">1.025</span></td><td>2,1%<span class="sub">585</span></td><td>15,8%<span class="sub">310</span></td><td>41,8%<span class="sub">158</span></td><td>7,8%<span class="sub">153</span></td><td>16,7%<span class="sub">120</span></td></tr></tbody></table></div>
+<div class="ramp" style="margin-top:1rem"><span>0%</span><span class="cells"><i style="background:var(--h0)"></i><i style="background:var(--h1)"></i><i style="background:var(--h2)"></i><i style="background:var(--h3)"></i><i style="background:var(--h4)"></i><i style="background:var(--h5)"></i><i style="background:var(--h6)"></i></span><span>45%+ conversie</span></div>
+<div class="cards">
+<div class="card"><span class="eyebrow">Stoppen of repareren</span><h3>Pergola</h3>
+<div class="big">2,5%</div>
+<p>1.025 offertes, 26 akkoord. Wel de hoogste gemiddelde order van allemaal (€9.056), dus de vraag is er &mdash; er sluit alleen bijna niets. Piek juni&ndash;september, precies in de drukste maanden.</p></div>
+<div class="card"><span class="eyebrow">Stoppen of repareren</span><h3>Voorraadscherm</h3>
+<div class="big">2,1%</div>
+<p>585 offertes, 12 akkoord. Bestaat alleen van juni tot december in de sheet, dus dit lijkt een actie die niet is aangeslagen.</p></div>
+<div class="card"><span class="eyebrow">Onderbenut</span><h3>Raamdecoratie binnen</h3>
+<div class="big">41,8%</div>
+<p>Alleen 158 offertes, maar de beste conversie van elke serieuze groep en 43% marge. Hier gaat te weinig verkeer naartoe.</p></div>
+<div class="card"><span class="eyebrow">Onderbenut</span><h3>Reparatie</h3>
+<div class="big">38,8%</div>
+<p>Kleine orders (€1.206 gemiddeld) maar 65% marge en hoge conversie. Reparatieklanten zijn ook de warmste ingang voor vervanging later.</p></div>
+</div>
+</div></section>
+<section id="showroom"><div class="wrap">
+<span class="eyebrow">04 &middot; Showroom</span>
+<h2>De showroom is de grootste hefboom die je hebt, en hij staat bijna stil</h2>
+<p class="intro">Offertes waar &ldquo;Winkel&rdquo; bij staat converteren op 67,1%. Online offertes op 10,0%. Dat geldt v&oacute;&oacute;r elke bron: ook Meta-leads &mdash; je slechtste kanaal online &mdash; springen naar 69,1% zodra ze in de winkel staan. En het raakt maar 301 van 9.198 offertes (3,3%), terwijl het 24% van de omzet oplevert.</p>
+<figure><div class="chart"><svg viewBox="0 0 1000 244" role="img" aria-label="Conversie online versus showroom per bron"><line class="gridline" x1="150.0" y1="26" x2="150.0" y2="224"/><text class="axis" x="150.0" y="238" text-anchor="middle">0%</text><line class="gridline" x1="332.5" y1="26" x2="332.5" y2="224"/><text class="axis" x="332.5" y="238" text-anchor="middle">20%</text><line class="gridline" x1="515.0" y1="26" x2="515.0" y2="224"/><text class="axis" x="515.0" y="238" text-anchor="middle">40%</text><line class="gridline" x1="697.5" y1="26" x2="697.5" y2="224"/><text class="axis" x="697.5" y="238" text-anchor="middle">60%</text><line class="gridline" x1="880.0" y1="26" x2="880.0" y2="224"/><text class="axis" x="880.0" y="238" text-anchor="middle">80%</text><text class="axis" x="140" y="53" text-anchor="end" style="font-size:11.5px;fill:var(--ink)">Meta</text><rect x="150" y="38" width="51.4" height="13" rx="4" fill="var(--s2)"/><rect class="hit" x="150" y="36" width="730" height="15" data-tip="<b>Meta &middot; online</b><br>5,6% conversie<br>287 van 5.098"/><text class="dlabel" x="208.4" y="49" fill="var(--s2)">5,6%</text><rect x="150" y="53" width="631.0" height="13" rx="4" fill="var(--s1)"/><rect class="hit" x="150" y="53" width="730" height="15" data-tip="<b>Meta &middot; showroom</b><br>69,1% conversie<br>65 van 94"/><text class="dlabel" x="788.0" y="64" fill="var(--s1)">69,1% &middot; 12,3x</text><text class="axis" x="140" y="99" text-anchor="end" style="font-size:11.5px;fill:var(--ink)">Google</text><rect x="150" y="84" width="109.7" height="13" rx="4" fill="var(--s2)"/><rect class="hit" x="150" y="82" width="730" height="15" data-tip="<b>Google &middot; online</b><br>12,0% conversie<br>331 van 2.753"/><text class="dlabel" x="266.7" y="95" fill="var(--s2)">12,0%</text><rect x="150" y="99" width="588.1" height="13" rx="4" fill="var(--s1)"/><rect class="hit" x="150" y="99" width="730" height="15" data-tip="<b>Google &middot; showroom</b><br>64,4% conversie<br>87 van 135"/><text class="dlabel" x="745.1" y="110" fill="var(--s1)">64,4% &middot; 5,4x</text><text class="axis" x="140" y="145" text-anchor="end" style="font-size:11.5px;fill:var(--ink)">Buren/Bekenden</text><rect x="150" y="130" width="323.5" height="13" rx="4" fill="var(--s2)"/><rect class="hit" x="150" y="128" width="730" height="15" data-tip="<b>Buren/Bekenden &middot; online</b><br>35,5% conversie<br>167 van 471"/><text class="dlabel" x="480.5" y="141" fill="var(--s2)">35,5%</text><rect x="150" y="145" width="665.4" height="13" rx="4" fill="var(--s1)"/><rect class="hit" x="150" y="145" width="730" height="15" data-tip="<b>Buren/Bekenden &middot; showroom</b><br>72,9% conversie<br>35 van 48"/><text class="dlabel" x="822.4" y="156" fill="var(--s1)">72,9% &middot; 2,1x</text><text class="axis" x="140" y="191" text-anchor="end" style="font-size:11.5px;fill:var(--ink)">Anders</text><rect x="150" y="176" width="161.9" height="13" rx="4" fill="var(--s2)"/><rect class="hit" x="150" y="174" width="730" height="15" data-tip="<b>Anders &middot; online</b><br>17,7% conversie<br>102 van 575"/><text class="dlabel" x="318.9" y="187" fill="var(--s2)">17,7%</text><rect x="150" y="191" width="570.3" height="13" rx="4" fill="var(--s1)"/><rect class="hit" x="150" y="191" width="730" height="15" data-tip="<b>Anders &middot; showroom</b><br>62,5% conversie<br>15 van 24"/><text class="dlabel" x="727.3" y="202" fill="var(--s1)">62,5% &middot; 3,5x</text><text class="axlabel" x="150" y="14">Conversie online tegenover showroom, per bron</text></svg><div class="tip"></div></div>
+<div class="legend"><div class="item"><span class="sw" style="background:var(--s2)"></span>Online</div>
+<div class="item"><span class="sw" style="background:var(--s1)"></span>In de showroom geweest</div></div>
+<figcaption>Elke bron converteert 2 tot 12 keer beter zodra de klant in de showroom is geweest.</figcaption></figure>
+<div class="note"><strong>Pas op met de conclusie.</strong> Dit is geen zuiver experiment. Klanten die naar Berkel en Rodenrijs rijden hebben zichzelf al geselecteerd op koopbereidheid, dus een deel van die 67,1% zit in de klant en niet in de showroom. De eerlijke lezing: de showroom is v&eacute;&eacute;l te klein om zo veel omzet te verklaren en het is het enige punt in je proces waar &aacute;lle bronnen goed converteren. Voordat je hier kapitaal in stopt, meet het: nodig een willekeurige helft van je Meta-leads actief uit voor de showroom en houd de andere helft als controlegroep. Dat is een paar weken werk en beslist over een investering van tienduizenden euro&rsquo;s.</div>
+</div></section>
+<section id="geld"><div class="wrap">
+<span class="eyebrow">05 &middot; Advertentiekosten</span>
+<h2>Wat je advertentiegeld deed in maart, april en mei</h2>
+<p class="intro">Alleen die drie maanden hebben ingevulde kosten in je tab &ldquo;conversie %&rdquo;. Het beeld is er niet minder duidelijk om: Meta&rsquo;s rendement halveerde terwijl het budget omhoog ging, Google bleef stabiel op 6,5 tot 8,2 keer de advertentiekosten terug in productmarge.</p>
+<div class="scroller"><table><caption>Advertentiekosten uit de tab &ldquo;conversie %&rdquo;, gecombineerd met de akkoorden en marges uit het offerteregister. Rendement = productmarge gedeeld door advertentiekosten, v&oacute;&oacute;r montage-uren en overhead.</caption>
+<thead><tr><th>Maand</th><th>Kanaal</th><th>Offertes</th><th>Akkoord</th><th>Conversie</th><th>Advertentiekosten</th><th>Kosten per akkoord</th><th>Productmarge</th><th>Rendement</th></tr></thead><tbody><tr><td>mrt</td><td>Meta</td><td>348</td><td>52</td><td>14,9%</td>
+<td>€19.800</td><td class="neg">€381</td><td>€91.527</td>
+<td class="pos">4,6x</td></tr><tr><td>mrt</td><td>Google</td><td>171</td><td>29</td><td>17,0%</td>
+<td>€6.300</td><td class="pos">€217</td><td>€51.430</td>
+<td class="pos">8,2x</td></tr><tr><td>apr</td><td>Meta</td><td>516</td><td>40</td><td>7,8%</td>
+<td>€22.000</td><td class="neg">€550</td><td>€50.736</td>
+<td class="neg">2,3x</td></tr><tr><td>apr</td><td>Google</td><td>278</td><td>56</td><td>20,1%</td>
+<td>€10.300</td><td class="pos">€184</td><td>€83.831</td>
+<td class="pos">8,1x</td></tr><tr><td>mei</td><td>Meta</td><td>726</td><td>47</td><td>6,5%</td>
+<td>€23.700</td><td class="neg">€504</td><td>€67.503</td>
+<td class="neg">2,8x</td></tr><tr><td>mei</td><td>Google</td><td>385</td><td>65</td><td>16,9%</td>
+<td>€17.100</td><td class="pos">€263</td><td>€111.409</td>
+<td class="pos">6,5x</td></tr></tbody></table></div>
+<div class="cards">
+<div class="card"><span class="eyebrow">Meta &middot; maart naar mei</span><h3>Budget omhoog, rendement omlaag</h3>
+<div class="big neg">4,6x &rarr; 2,8x</div>
+<p>Van €19.800 naar €23.700 per maand, terwijl de kosten per akkoord van €381 naar €504 stegen en de conversie van 14,9% naar 6,5% zakte. Je kocht meer van iets dat steeds minder opleverde.</p></div>
+<div class="card"><span class="eyebrow">Google &middot; maart naar mei</span><h3>Budget bijna verdrievoudigd, rendement bleef</h3>
+<div class="big pos">8,2x &rarr; 6,5x</div>
+<p>Van €6.300 naar €17.100 per maand en de kosten per akkoord bleven tussen €184 en €263. Dit kanaal was in die maanden nog niet verzadigd &mdash; er zat meer ruimte in dan je gebruikte.</p></div>
+</div>
+<div class="note"><strong>Reken het na op je eigen cijfers.</strong> Gemiddelde productmarge per akkoord is €1.690. Meta kostte in mei €504 per akkoord, Google €263. Beide zijn op papier winstgevend, maar uit die €1.690 moeten nog montage-uren, inmeten, garantie en overhead komen. Bij Meta blijft daar veel minder van over dan bij Google, en het gat werd elke maand groter.</div>
+</div></section>
+<section id="plan"><div class="wrap">
+<span class="eyebrow">06 &middot; Advies</span>
+<h2>Wanneer je wat moet investeren</h2>
+<p class="intro">De rode draad: je hoeft in 2026 niet m&eacute;&eacute;r leads te kopen. Je moet ze anders inkopen en beter verwerken. Alles hieronder is gerekend met de gemiddelde productmarge van €1.690 per akkoord.</p>
+
+<ol class="acties">
+<li><span class="when">Nu &middot; voor februari</span><h3>Schuif advertentiebudget van Meta naar Google</h3>
+<p>Google converteerde in elke maand van 2025 beter dan Meta en zat op €263 per akkoord tegen €504 bij Meta. Verplaats om te beginnen €10.000 per maand. Op de cijfers van mei kost dat ongeveer 20 Meta-akkoorden en levert het ongeveer 38 Google-akkoorden op.</p>
+<p class="bedrag">Netto ongeveer +18 akkoorden per maand &asymp; +€30.422 productmarge per maand</p></li>
+
+<li><span class="when">November &ndash; februari</span><h3>Bouw verwerkingscapaciteit v&oacute;&oacute;rdat het seizoen begint</h3>
+<p>Dit is de belangrijkste en de makkelijkst te missen. In januari kwamen er 295 offertes binnen en was de doorlooptijd naar akkoord 11 dagen. In juli waren dat 1.488 offertes en 27 dagen. Wie je in mei aanneemt is in juli nog aan het inwerken; wie je in januari aanneemt draait in april mee. Werf en train dus in het dal, niet in de piek.</p>
+<p class="bedrag">De zomerdip terugbrengen naar het niveau van januari&ndash;mei is 237 akkoorden &asymp; €400.555 productmarge</p></li>
+
+<li><span class="when">Januari &ndash; maart</span><h3>Zet een echte doorverwijsactie op voor buren en bekenden</h3>
+<p>519 offertes uit deze hoek leverden 202 akkoorden en €721.040 omzet op, tegen vrijwel geen advertentiekosten: 38,9% conversie. Het is je beste kanaal en tegelijk je kleinste. Je hebt de Zonradar-tool voor burenacties al staan; die verdient een vast budget en een vaste maandelijkse cadans in plaats van incidenteel gebruik.</p>
+<p class="bedrag">Dit kanaal verdubbelen is ongeveer +202 akkoorden &asymp; +€341.401 productmarge per jaar</p></li>
+
+<li><span class="when">Februari &ndash; april</span><h3>Test de showroom-hefboom voordat je erin investeert</h3>
+<p>Showroombezoekers converteren 6,7x beter dan online, maar dat cijfer is vervuild door zelfselectie. Nodig daarom een willekeurige helft van je Meta-leads actief uit voor de showroom en houd de rest als controlegroep. Valt het verschil ook maar half zo groot uit, dan is een tweede locatie of een mobiele showroom de best onderbouwde investering die je in 2026 kunt doen.</p>
+<p class="bedrag">Kosten van de test: een paar weken opvolgwerk. Wat het beslist: tienduizenden euro&rsquo;s</p></li>
+
+<li><span class="when">Voor het pergolaseizoen</span><h3>Repareer pergola of stop met adverteren erop</h3>
+<p>1.025 pergola-offertes leverden 26 akkoorden op (2,5%), met voorraadscherm erbij 1.610 offertes voor 38 akkoorden. Die offertes vielen precies in juni tot september: ze vraten de capaciteit op in de maanden waarin je conversie instortte. Zoek eerst uit waar het misgaat &mdash; prijs, levertijd of het verkoopgesprek &mdash; en zet tot die tijd geen budget meer op deze groep.</p>
+<p class="bedrag">1.610 offertes = 18% van je capaciteit voor 3,5% van je akkoorden</p></li>
+
+<li><span class="when">Doorlopend</span><h3>Zet verkeer op raamdecoratie en reparatie</h3>
+<p>Raamdecoratie binnen: 158 offertes, 41,8% conversie, 43% marge. Reparatie: 85 offertes, 38,8% conversie, 65% marge. Beide klein in volume en sterk in conversie, en beide binnenwerk &mdash; dus precies wat je in het winterdal kunt verkopen wanneer de buitenmonteurs stilliggen.</p>
+<p class="bedrag">Binnenwerk vult november tot februari, waar je nu 1.412 offertes en je laagste omzet hebt</p></li>
+
+<li><span class="when">Deze week</span><h3>Repareer de akkoordregistratie in de sheet</h3>
+<p>De vinkjeskolom &ldquo;Akkoord&rdquo; staat op 313 voor heel 2025 terwijl het er 1.089 zijn. Wie op die kolom stuurt ziet juni als een maand met nul verkoop. Haal de kolom weg of laat hem automatisch vullen zodra er een Gripp-nummer in de rij staat. Zolang hij er zo in staat, is elk dashboard erop fout.</p>
+<p class="bedrag">Kost niets en voorkomt dat je op een factor 3,5 te lage conversie stuurt</p></li>
+</ol>
+</div></section>
+<footer><div class="wrap">
+<p><strong style="color:var(--ink)">Waar dit op gebaseerd is.</strong> Google Sheet &ldquo;Offerte formulier register 2024/2025/2026&rdquo;, de twaalf maandtabbladen van 2025, uitgelezen op 27 juli 2026. 9.198 offerterijen. De tabbladen &ldquo;2025 alles bij elkaar&rdquo; en &ldquo;Augustus 2025&rdquo; zijn overgeslagen: het eerste is een deelkopie van januari tot 18 maart en zou dubbeltellen, het tweede is leeg.</p>
+<p><strong style="color:var(--ink)">Keuzes die de cijfers be&iuml;nvloeden.</strong> Een offerte geldt als akkoord wanneer het akkoord-blok gevuld is (Gripp-nummer, akkoorddatum of akkoordbedrag), niet op basis van de vinkjeskolom. De maand komt van het tabblad, omdat de datumcel regelmatig onvolledig is (&ldquo;08-01&rdquo;) of een verkeerd jaartal heeft; bij 5 van de 9.198 rijen weken tab en datumcel af. 62 rijen hadden een datum zonder jaar en zijn via het tabblad toegewezen. Facebook en Instagram zijn samengevoegd vanwege de labelwissel in augustus/september.</p>
+<p><strong style="color:var(--ink)">Wat hier niet in zit.</strong> Marge is verkoop min inkoop uit de sheet zelf, dus productmarge v&oacute;&oacute;r montage-uren, inmeten, garantie en overhead &mdash; de echte winst per order is lager. Advertentiekosten zijn alleen bekend voor maart, april en mei; de rest van het jaar staat leeg in je tab &ldquo;conversie %&rdquo;. 3 van de 1.089 akkoorden missen een inkoopprijs (€6.995 omzet). 35 rijen hebben een vinkje maar geen akkoord-blok en tellen hier niet mee. Bij 35 telefoonnummer-en-bedrag-combinaties komt dezelfde regel twee keer voor; dat is 0,4% en is niet ontdubbeld.</p>
+</div></footer>
+<script>
+document.querySelectorAll('.chart').forEach(function(chart){
+  var tip = chart.querySelector('.tip');
+  if(!tip) return;
+  chart.querySelectorAll('.hit').forEach(function(hit){
+    function toon(e){
+      tip.innerHTML = hit.getAttribute('data-tip');
+      tip.style.opacity = '1';
+      var cb = chart.getBoundingClientRect();
+      var hb = hit.getBoundingClientRect();
+      var x = hb.left + hb.width/2 - cb.left;
+      var y = hb.top - cb.top;
+      var tb = tip.getBoundingClientRect();
+      tip.style.left = Math.max(4, Math.min(cb.width - tb.width - 4, x - tb.width/2)) + 'px';
+      tip.style.top  = Math.max(4, y - tb.height - 8) + 'px';
+    }
+    hit.addEventListener('mouseenter', toon);
+    hit.addEventListener('mousemove', toon);
+    hit.addEventListener('focus', toon);
+    hit.addEventListener('mouseleave', function(){ tip.style.opacity='0'; });
+    hit.addEventListener('blur', function(){ tip.style.opacity='0'; });
+    hit.setAttribute('tabindex','0');
+  });
+});
+</script>

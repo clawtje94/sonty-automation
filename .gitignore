@@ -85,3 +85,7 @@ scripts/.outlook-joey-pass.txt
 scripts/.bookings-refresh-token.txt
 .claude/worktrees/
 data/vacaturemail-*.csv
+
+# Ruwe offerte-dump bevat klantnamen/telefoonnummers en is regenereerbaar
+# via scripts/conversie-2025-sheet.js -- niet in git.
+data/conversie-2025-raw.json

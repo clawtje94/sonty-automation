@@ -74,8 +74,38 @@ const datumNL = (ms) => ms
   : null;
 const iso = (ms) => (ms ? new Date(ms).toISOString() : null);
 
+/**
+ * Laatste poort vóór Klaviyo. Klaviyo weigert een heel blok van 1000 profielen zodra er één
+ * ongeldig adres in zit, dus één rotte appel kost je duizend profielen. In de eerste volledige
+ * import gebeurde dat twee keer, door:
+ *   - "kayrawahdat5@gmaıl.com"  een Turkse dotless i (U+0131) in plaats van een gewone i
+ *   - "mailto:marco.kranenburg@eracontour.nl"  met de mailto-prefix er nog aan
+ *   - adressen als "acicek-@live.nl" die op een streepje vóór de @ eindigen
+ * Wat te repareren valt repareren we; de rest gaat eruit met vermelding.
+ */
+function schoonAdres(ruw) {
+  let e = String(ruw || '').trim().toLowerCase();
+  e = e.replace(/^mailto:/, '');            // prefix uit een geplakte link
+  e = e.replace(/[<>(),;:"\s]/g, '');       // resten van "Naam <adres>"
+  if (/[^\x20-\x7e]/.test(e)) return null;  // niet-ascii: gmaıl is niet gmail
+  if ((e.match(/@/g) || []).length !== 1) return null;
+  const [lokaal, domein] = e.split('@');
+  if (!lokaal || !domein) return null;
+  if (/^[.\-]|[.\-]$/.test(lokaal)) return null;   // begint of eindigt op . of -
+  if (/^[.\-]|[.\-]$/.test(domein)) return null;
+  if (/\.\./.test(e)) return null;
+  if (!/^[a-z0-9][a-z0-9.\-]*\.[a-z]{2,}$/.test(domein)) return null;
+  if (e.length > 100) return null;
+  return e;
+}
+
 function bouwProfiel(r) {
   const props = {
+    // OPT-OUT (Daimy 2026-07-27). Klanten met de Reuzenpanda-status "geen herinnering meer"
+    // mogen nooit een campagne krijgen. Elk segment eist sonty_mag_mail = "ja", dus wie dit veld
+    // op "nee" heeft of het veld helemaal mist, valt automatisch buiten alles. Bewust zo:
+    // ontbrekende data leidt tot niet-mailen, niet tot per ongeluk wel mailen.
+    sonty_mag_mail: r.magMail === false ? 'nee' : (r.magMail === true ? 'ja' : 'onbekend'),
     sonty_fase: bepaalFase(r),
     sonty_categorie: categorie(r.product),
     sonty_product: r.product || null,
@@ -106,12 +136,18 @@ function bouwProfiel(r) {
   if (MAX) rijen = rijen.slice(0, MAX);
 
   const telling = {};
-  const profielen = rijen.map((r) => {
-    const p = bouwProfiel(r);
-    const f = p.attributes.properties.sonty_fase;
-    telling[f] = (telling[f] || 0) + 1;
-    return p;
-  });
+  const geweigerd = [];
+  const profielen = [];
+  for (const r of rijen) {
+    const schoon = schoonAdres(r.email);
+    if (!schoon) { geweigerd.push(r.email); continue; }
+    const p = bouwProfiel({ ...r, email: schoon });
+    telling[p.attributes.properties.sonty_fase] = (telling[p.attributes.properties.sonty_fase] || 0) + 1;
+    profielen.push(p);
+  }
+  if (geweigerd.length) {
+    console.log(`${geweigerd.length} adressen geweigerd als onbruikbaar: ${geweigerd.slice(0, 6).map((x) => JSON.stringify(x)).join(', ')}${geweigerd.length > 6 ? ' ...' : ''}`);
+  }
 
   console.log(`${profielen.length} profielen uit de export.`);
   console.log('Verdeling over de fases:');

@@ -45,6 +45,15 @@ const bestaat = (prop) => ({
 });
 
 /**
+ * OPT-OUT, HARDE EIS (Daimy 2026-07-27: "iedereen in geen herinnering meer excluden").
+ * Klanten met de Reuzenpanda-status "geen herinnering meer" mogen in geen enkele campagne
+ * belanden. Die eis staat daarom in ELK segment, niet in de flows: een flow kun je vergeten,
+ * een segment niet. En omdat de eis "moet gelijk zijn aan ja" is, valt iemand zonder dat veld er
+ * ook buiten. Ontbrekende data leidt dus tot niet-mailen.
+ */
+const MAG_MAIL = gelijk('sonty_mag_mail', 'ja');
+
+/**
  * De segmenten. Volgorde volgt de klantreis, zodat de lijst in Klaviyo leesbaar blijft.
  * Elk campagnesegment eist ook een offertelink: zonder die link kunnen we geen persoonlijke mail
  * sturen, en juist het ontbreken daarvan maakte de maartcampagne zo algemeen.
@@ -53,47 +62,47 @@ const SEGMENTEN = [
   {
     naam: 'Sonty | 1. Offerte vers (0-14 dagen)',
     reeks: 'A1 en A2',
-    condities: [gelijk('sonty_fase', 'vers'), bestaat('sonty_offerte_link')],
+    condities: [MAG_MAIL, gelijk('sonty_fase', 'vers'), bestaat('sonty_offerte_link')],
   },
   {
     naam: 'Sonty | 2. Offerte lopend (15-60 dagen)',
     reeks: 'A3, A4 en A5',
-    condities: [gelijk('sonty_fase', 'lopend'), bestaat('sonty_offerte_link')],
+    condities: [MAG_MAIL, gelijk('sonty_fase', 'lopend'), bestaat('sonty_offerte_link')],
   },
   {
     naam: 'Sonty | 3. Offerte koud (60-365 dagen)',
     reeks: 'C, de reactivering',
-    condities: [gelijk('sonty_fase', 'koud'), bestaat('sonty_offerte_link')],
+    condities: [MAG_MAIL, gelijk('sonty_fase', 'koud'), bestaat('sonty_offerte_link')],
   },
   {
     naam: 'Sonty | 4. Offerte zeer koud (1 jaar+)',
     reeks: 'C, maar pas na de eerste resultaten',
-    condities: [gelijk('sonty_fase', 'zeer_koud'), bestaat('sonty_offerte_link')],
+    condities: [MAG_MAIL, gelijk('sonty_fase', 'zeer_koud'), bestaat('sonty_offerte_link')],
   },
   {
     naam: 'Sonty | 5. Klant (akkoord gegeven)',
     reeks: 'D en E',
-    condities: [gelijk('sonty_fase', 'klant')],
+    condities: [MAG_MAIL, gelijk('sonty_fase', 'klant')],
   },
   {
     naam: 'Sonty | 6. Klant met buitenzonwering',
     reeks: 'D, cross-sell naar binnen',
-    condities: [gelijk('sonty_fase', 'klant'), gelijk('sonty_categorie', 'buiten')],
+    condities: [MAG_MAIL, gelijk('sonty_fase', 'klant'), gelijk('sonty_categorie', 'buiten')],
   },
   {
     naam: 'Sonty | 7. Klant met raamdecoratie',
     reeks: 'D, cross-sell naar buiten',
-    condities: [gelijk('sonty_fase', 'klant'), gelijk('sonty_categorie', 'binnen')],
+    condities: [MAG_MAIL, gelijk('sonty_fase', 'klant'), gelijk('sonty_categorie', 'binnen')],
   },
   {
     naam: 'Sonty | 8. Koud, buitenzonwering',
     reeks: 'C, voorjaarscampagne',
-    condities: [gelijk('sonty_fase', 'koud'), gelijk('sonty_categorie', 'buiten'), bestaat('sonty_offerte_link')],
+    condities: [MAG_MAIL, gelijk('sonty_fase', 'koud'), gelijk('sonty_categorie', 'buiten'), bestaat('sonty_offerte_link')],
   },
   {
     naam: 'Sonty | 9. Koud, raamdecoratie',
     reeks: 'C, najaarscampagne',
-    condities: [gelijk('sonty_fase', 'koud'), gelijk('sonty_categorie', 'binnen'), bestaat('sonty_offerte_link')],
+    condities: [MAG_MAIL, gelijk('sonty_fase', 'koud'), gelijk('sonty_categorie', 'binnen'), bestaat('sonty_offerte_link')],
   },
 ];
 
@@ -119,21 +128,24 @@ async function api(pad, opties = {}) {
   console.log(`Klaviyo bevat nu ${opNaam.size} segmenten.\n`);
 
   for (const s of SEGMENTEN) {
-    if (opNaam.has(s.naam)) { console.log(`  bestaat al: ${s.naam}`); continue; }
-    if (!ECHT) { console.log(`  ZOU AANMAKEN: ${s.naam}   (voor reeks ${s.reeks})`); continue; }
+    const bestaatId = opNaam.get(s.naam);
+    if (!ECHT) { console.log(`  ${bestaatId ? 'ZOU BIJWERKEN' : 'ZOU AANMAKEN'}: ${s.naam}   (voor reeks ${s.reeks})`); continue; }
 
-    const body = {
-      data: {
-        type: 'segment',
-        attributes: {
-          name: s.naam,
-          definition: { condition_groups: [{ conditions: s.condities }] },
-        },
-      },
-    };
-    const r = await api('segments/', { method: 'POST', body: JSON.stringify(body) });
+    // ELKE CONDITIE IN EEN EIGEN GROEP. Klaviyo combineert conditions BINNEN een groep met OF,
+    // en groepen onderling met EN. Alle condities in één groep zetten leverde daarom segmenten op
+    // die "mag mail OF fase is vers OF heeft een offertelink" betekenden: segment 1 bevatte
+    // 15.613 profielen in plaats van de 598 die er thuishoren, en de opt-outs zaten er gewoon in.
+    // Gevonden op 27 juli doordat de segmentgroottes niet klopten met de fase-verdeling.
+    const definitie = { condition_groups: s.condities.map((c) => ({ conditions: [c] })) };
+    // Bestaande segmenten worden bijgewerkt, niet overgeslagen. Toen de opt-out-eis erbij kwam
+    // stonden de negen segmenten er al; overslaan zou betekenen dat ze zonder die eis bleven
+    // draaien, en dan zit een klant die geen mail wil alsnog in een campagnesegment.
+    const r = bestaatId
+      ? await api(`segments/${bestaatId}/`, { method: 'PATCH', body: JSON.stringify({ data: { type: 'segment', id: bestaatId, attributes: { name: s.naam, definition: definitie } } }) })
+      : await api('segments/', { method: 'POST', body: JSON.stringify({ data: { type: 'segment', attributes: { name: s.naam, definition: definitie } } }) });
+
     if (!r.ok) { console.error(`  FOUT bij ${s.naam}: ${r.status} ${r.t.slice(0, 300)}`); continue; }
-    console.log(`  aangemaakt: ${s.naam}  (id ${r.j?.data?.id})`);
+    console.log(`  ${bestaatId ? 'bijgewerkt' : 'aangemaakt'}: ${s.naam}  (id ${r.j?.data?.id || bestaatId})`);
     await new Promise((x) => setTimeout(x, 1400));
   }
 

@@ -1,4 +1,14 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-24)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-27)
+
+## CONVERSIEANALYSE 2025 OPGELEVERD + NIEUWE DATA-BOT (27 juli)
+- Rapport: https://claude.ai/code/artifact/4537e5dc-c46c-43da-83f3-789532aab308 (bron: `data/conversie-2025-rapport.html`, gegenereerd door `scripts/bouw-conversie-rapport.js` uit `data/conversie-2025-tabellen.json` — nooit handmatig cijfers overtypen).
+- Pijplijn: `scripts/conversie-2025-sheet.js` (leest de 12 maandtabs 2025) → `data/conversie-2025-raw.json` (NIET in git, bevat namen/telefoonnummers) → `scripts/conversie-2025-analyse.js` en `scripts/conversie-2025-investering.js`.
+- **KRITIEK — de vinkjeskolom "Akkoord" in het offerteregister is onbruikbaar**: 313 akkoorden voor heel 2025, terwijl juni op 0 staat bij 1.221 offertes en mei op 1. Het akkoord-BLOK (Gripp-nummer / akkoorddatum / akkoordbedrag) is wel consistent: 1.089 akkoorden = 11,8%. Gevalideerd tegen Daimy's eigen tab "conversie %" (maart 625 vs 627, april 907 vs 896, mei 1.240 vs 1.227). Elk dashboard dat op de vinkjeskolom stuurt zit een factor 3,5 te laag.
+- **Afkomst-labels zijn medio 2025 omgezet**: t/m aug heette Meta-traffic "Facebook", vanaf sep "Instagram" (FB zakt 558→4, IG springt 63→345). Altijd samenlezen als Meta.
+- Tab "2025 alles bij elkaar" is een deelkopie (jan t/m 18 mrt) → overslaan, anders dubbeltelling. "Augustus 2025" is een lege dubbele tab naast "Aug 2025".
+- Uitkomsten 2025: 9.198 offertes, 1.089 akkoord (11,8%), €4,07 mln omzet, €1,84 mln productmarge. Google 14,5% vs Meta 6,8%. Winkel 67,1% vs online 10,0% (301 offertes = 3,3% maar 24% van de omzet). Zomerdip jun-aug 9,2% vs jan-mei 15,2% = ~€400k gemiste marge. Pergola+voorraadscherm 1.610 offertes voor 38 akkoorden.
+- **Nieuwe data-bot @Sontydatabot** (apart van de gewone bot): poller `tools/sonty-data-poll.js` via launchd `nl.sonty.databot-poll`, inbox `sonty-data-inbox.txt`, lezen met `node scripts/read-sonty-data.js`, sturen met `node scripts/sonty-data-send.js "tekst"`. Chat_id staat NIET hardcoded maar in `.sonty-data-chat.json` (vastgelegd bij Daimy's eerste bericht, id 1700128390). Alle Sonty-datavragen gaan hierlangs.
+- OPEN: advertentiekosten zijn alleen voor maart t/m mei ingevuld in de tab "conversie %" — de rest van 2025 is leeg, dus CPA/rendement is niet voor het hele jaar te berekenen. Zou goed zijn als Daimy die aanvult.
 
 ## GECORRIGEERD (24-07 ~15:45, Daimy): de 102 WhatsApps waren de BEDOELDE te-ver-correctierun van gisteren — GEEN incident. V4 is weer AAN (bootstrap gedaan). Enige echte fout: Ton (+31628840611) — zijn oude 2025-dossier zat in de correctie-batch en de WA-stap checkt de leeftijd van het DOSSIER, niet van de OFFERTE → 2025-offerte geappt. Nieuwe offerte (4 schermen, inmeet 23-07) moet Joey nog maken. FIX-voorstel (1 regel, wacht op Daimy: hier of andere chat): alleen appen als offerte zelf < 14 dagen oud.
 

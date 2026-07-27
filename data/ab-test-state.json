@@ -1,0 +1,575 @@
+{
+ "teller": 79,
+ "toewijzingen": {
+  "316305419": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:27:26.506Z",
+   "ticketId": null,
+   "offertenummer": "202610469"
+  },
+  "3130637154": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T07:08:00.341Z",
+   "ticketId": null,
+   "offertenummer": "202610433"
+  },
+  "3161234567": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:27:31.894Z",
+   "ticketId": null,
+   "offertenummer": "202610473"
+  },
+  "3162170388": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:28:33.544Z",
+   "ticketId": null,
+   "offertenummer": "202610495"
+  },
+  "3164188040": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T07:07:34.238Z",
+   "ticketId": null,
+   "offertenummer": "202610420"
+  },
+  "3164524858": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T07:07:55.544Z",
+   "ticketId": null,
+   "offertenummer": "202610431"
+  },
+  "31636434316": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T10:21:19.602Z",
+   "ticketId": null,
+   "offertenummer": "202610418",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31613604123": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T07:07:37.728Z",
+   "ticketId": null,
+   "offertenummer": "202610421"
+  },
+  "31629538457": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T07:07:41.215Z",
+   "ticketId": null,
+   "offertenummer": "202610422"
+  },
+  "31650671522": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T10:21:25.263Z",
+   "ticketId": null,
+   "offertenummer": "202610423",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31620533733": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T07:07:48.203Z",
+   "ticketId": null,
+   "offertenummer": "202610424"
+  },
+  "31638087077": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T07:07:51.508Z",
+   "ticketId": null,
+   "offertenummer": "202610430"
+  },
+  "31628332776": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T10:21:29.741Z",
+   "ticketId": null,
+   "offertenummer": "202610432",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31628117925": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T07:08:02.906Z",
+   "ticketId": null,
+   "offertenummer": "202610434"
+  },
+  "31621603226": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T07:08:04.768Z",
+   "ticketId": null,
+   "offertenummer": "202610436"
+  },
+  "31643473757": {
+   "naam": "inmeten",
+   "templateId": 242731,
+   "tijd": "2026-07-27T07:08:08.563Z",
+   "ticketId": null,
+   "offertenummer": "202610437"
+  },
+  "31614121780": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T07:08:12.298Z",
+   "ticketId": null,
+   "offertenummer": "202610438"
+  },
+  "31600000000": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T07:08:16.015Z",
+   "ticketId": null,
+   "offertenummer": "202610413"
+  },
+  "31642465548": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T07:08:19.416Z",
+   "ticketId": null,
+   "offertenummer": "202610391"
+  },
+  "31636117227": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T10:21:38.491Z",
+   "ticketId": null,
+   "offertenummer": "202610440",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31626804936": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:26:23.213Z",
+   "ticketId": null,
+   "offertenummer": "202610442"
+  },
+  "31622994282": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:26:26.564Z",
+   "ticketId": null,
+   "offertenummer": "202610443"
+  },
+  "31681711374": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:26:28.321Z",
+   "ticketId": null,
+   "offertenummer": "202610444"
+  },
+  "31624235206": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T10:21:43.595Z",
+   "ticketId": null,
+   "offertenummer": "202610445",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31623549141": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:26:31.826Z",
+   "ticketId": null,
+   "offertenummer": "202610446"
+  },
+  "31625179376": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:26:33.616Z",
+   "ticketId": null,
+   "offertenummer": "202610451"
+  },
+  "31611717762": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:26:35.322Z",
+   "ticketId": null,
+   "offertenummer": "202610452"
+  },
+  "31642021623": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T10:21:50.073Z",
+   "ticketId": null,
+   "offertenummer": "202610453",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31653265647": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:26:38.810Z",
+   "ticketId": null,
+   "offertenummer": "202610454"
+  },
+  "31653717333": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:26:40.538Z",
+   "ticketId": null,
+   "offertenummer": "202610455"
+  },
+  "31623336903": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:26:42.266Z",
+   "ticketId": null,
+   "offertenummer": "202610456"
+  },
+  "31618971671": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T10:21:55.571Z",
+   "ticketId": null,
+   "offertenummer": "202610458",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31683665159": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:26:54.418Z",
+   "ticketId": null,
+   "offertenummer": "202610459"
+  },
+  "31614611616": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:26:58.240Z",
+   "ticketId": null,
+   "offertenummer": "202610461"
+  },
+  "31614196560": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:27:02.015Z",
+   "ticketId": null,
+   "offertenummer": "202610462"
+  },
+  "31628037042": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T10:22:01.194Z",
+   "ticketId": null,
+   "offertenummer": "202610463",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31618401722": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:27:09.202Z",
+   "ticketId": null,
+   "offertenummer": "202610464"
+  },
+  "31621174778": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:27:12.984Z",
+   "ticketId": null,
+   "offertenummer": "202610465"
+  },
+  "31618299697": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:27:16.722Z",
+   "ticketId": null,
+   "offertenummer": "202610466"
+  },
+  "31622808747": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T10:22:07.221Z",
+   "ticketId": null,
+   "offertenummer": "202610467",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31641216900": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:27:24.623Z",
+   "ticketId": null,
+   "offertenummer": "202610468"
+  },
+  "31617972439": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:27:28.361Z",
+   "ticketId": null,
+   "offertenummer": "202610470"
+  },
+  "31628380684": {
+   "naam": "inmeten",
+   "templateId": 242731,
+   "tijd": "2026-07-27T09:27:30.156Z",
+   "ticketId": null,
+   "offertenummer": "202610471"
+  },
+  "31655982149": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:27:33.740Z",
+   "ticketId": null,
+   "offertenummer": "202610474"
+  },
+  "31627423825": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:27:35.953Z",
+   "ticketId": null,
+   "offertenummer": "202610475"
+  },
+  "31615294159": {
+   "naam": "inmeten",
+   "templateId": 242731,
+   "tijd": "2026-07-27T09:27:37.754Z",
+   "ticketId": null,
+   "offertenummer": "202610476"
+  },
+  "31635605550": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:27:39.545Z",
+   "ticketId": null,
+   "offertenummer": "202610477"
+  },
+  "31618853170": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:27:41.279Z",
+   "ticketId": null,
+   "offertenummer": "202610479"
+  },
+  "31623564998": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:27:44.968Z",
+   "ticketId": null,
+   "offertenummer": "202610480"
+  },
+  "31651423220": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T10:22:15.857Z",
+   "ticketId": null,
+   "offertenummer": "202610481",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31610215109": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:27:51.854Z",
+   "ticketId": null,
+   "offertenummer": "202610482"
+  },
+  "31628301223": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:27:56.087Z",
+   "ticketId": null,
+   "offertenummer": "202610483"
+  },
+  "31641118450": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:27:59.629Z",
+   "ticketId": null,
+   "offertenummer": "202610484"
+  },
+  "31622469796": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T10:22:22.076Z",
+   "ticketId": null,
+   "offertenummer": "202610485",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31181485179": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:28:06.730Z",
+   "ticketId": null,
+   "offertenummer": "202610486"
+  },
+  "31651260080": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:28:10.233Z",
+   "ticketId": null,
+   "offertenummer": "202610487"
+  },
+  "31648284636": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:28:13.891Z",
+   "ticketId": null,
+   "offertenummer": "202610488"
+  },
+  "31627202099": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T10:22:29.451Z",
+   "ticketId": null,
+   "offertenummer": "202610489",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31612647988": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:28:20.669Z",
+   "ticketId": null,
+   "offertenummer": "202610490"
+  },
+  "31683539870": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:28:24.206Z",
+   "ticketId": null,
+   "offertenummer": "202610491"
+  },
+  "31624663304": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:28:28.266Z",
+   "ticketId": null,
+   "offertenummer": "202610492"
+  },
+  "31622095055": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T10:22:34.560Z",
+   "ticketId": null,
+   "offertenummer": "202610493",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31611627544": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:28:31.800Z",
+   "ticketId": null,
+   "offertenummer": "202610494"
+  },
+  "31610533486": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:28:37.232Z",
+   "ticketId": null,
+   "offertenummer": "202610498"
+  },
+  "31614266670": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T10:22:39.780Z",
+   "ticketId": null,
+   "offertenummer": "202610499",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31621135613": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:28:40.796Z",
+   "ticketId": null,
+   "offertenummer": "202610501"
+  },
+  "31622334596": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:28:42.523Z",
+   "ticketId": null,
+   "offertenummer": "202610502"
+  },
+  "31630006090": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:28:45.870Z",
+   "ticketId": null,
+   "offertenummer": "202610503"
+  },
+  "31654906680": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T10:22:44.885Z",
+   "ticketId": null,
+   "offertenummer": "202610504",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31624934772": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:28:52.784Z",
+   "ticketId": null,
+   "offertenummer": "202610505"
+  },
+  "31623153841": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:28:56.386Z",
+   "ticketId": null,
+   "offertenummer": "202610506"
+  },
+  "31614352385": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:29:00.460Z",
+   "ticketId": null,
+   "offertenummer": "202610507"
+  },
+  "31628268593": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T10:22:49.872Z",
+   "ticketId": null,
+   "offertenummer": "202610508",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31634006493": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:29:07.338Z",
+   "ticketId": null,
+   "offertenummer": "202610510"
+  },
+  "31628243401": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:29:10.922Z",
+   "ticketId": null,
+   "offertenummer": "202610511"
+  },
+  "31615582372": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-07-27T09:29:14.680Z",
+   "ticketId": null,
+   "offertenummer": "202610512"
+  },
+  "31611051304": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T10:22:55.095Z",
+   "ticketId": null,
+   "offertenummer": "202610513",
+   "herstel": "oorspronkelijk inmeten, niet aangekomen"
+  },
+  "31651088874": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-07-27T09:29:21.830Z",
+   "ticketId": null,
+   "offertenummer": "202610514"
+  },
+  "31642498423": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-07-27T09:29:25.356Z",
+   "ticketId": null,
+   "offertenummer": "202610515"
+  }
+ }
+}

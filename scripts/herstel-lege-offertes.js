@@ -21,7 +21,14 @@ const CFG = require('./ai-ks/config.js');
 const { bouwParams } = require('./offerte-template-vars.js');
 
 const ECHT = process.argv.includes('--echt');
-const WERKENDE_TEMPLATE = 242737; // offerte_ab2_garantie, 16 van de 16 aangekomen
+// Verdelen over de drie werkende varianten in plaats van allemaal dezelfde (Daimy 27 juli),
+// zodat de A/B-test zuiver blijft. De registratie wordt daarna bijgewerkt naar de variant die
+// de klant écht heeft gekregen, anders meet het rapport straks de verkeerde tekst.
+const WERKEND = [
+  { id: 242737, naam: 'garantie' },
+  { id: 242738, naam: 'check' },
+  { id: 242739, naam: 'kortweg' },
+];
 const STATE = path.join(__dirname, '..', 'data', 'ab-test-state.json');
 
 const rpGet = async (ep) => {
@@ -63,13 +70,28 @@ const rpGet = async (ep) => {
     const g = bouwParams({ voornaam, quotationLijstItem: doc, quotationDetail: detail?.quotationData || detail, offerteLink: link });
     if (!g.ok) { console.log(`  ${tel} (${voornaam}): ${g.reden}, overgeslagen`); continue; }
 
-    if (!ECHT) { console.log(`  ${tel} (${voornaam}): zou offerte ${doc.quotationNumber} sturen, ${g.params[2].value}`); continue; }
+    const variant = WERKEND[hersteld % WERKEND.length];
+    if (!ECHT) { console.log(`  ${tel} (${voornaam}): zou offerte ${doc.quotationNumber} sturen via ${variant.naam}, ${g.params[2].value}`); hersteld++; continue; }
 
     const r = await fetch('https://app.trengo.com/api/v2/wa_sessions', {
       method: 'POST', headers: H,
-      body: JSON.stringify({ recipient_phone_number: tel.startsWith('+') ? tel : '+' + tel, hsm_id: WERKENDE_TEMPLATE, channel_id: 1359857, params: g.params }),
+      body: JSON.stringify({ recipient_phone_number: tel.startsWith('+') ? tel : '+' + tel, hsm_id: variant.id, channel_id: 1359857, params: g.params }),
     });
-    if (r.ok) { hersteld++; console.log(`  ${tel} (${voornaam}): VERSTUURD, offerte ${doc.quotationNumber}`); }
+    if (r.ok) {
+      hersteld++;
+      console.log(`  ${tel} (${voornaam}): VERSTUURD via ${variant.naam}, offerte ${doc.quotationNumber}`);
+      // Registratie bijwerken naar wat de klant echt kreeg.
+      try {
+        const st = JSON.parse(fs.readFileSync(STATE, 'utf8'));
+        if (st.toewijzingen[tel]) {
+          st.toewijzingen[tel].naam = variant.naam;
+          st.toewijzingen[tel].templateId = variant.id;
+          st.toewijzingen[tel].tijd = new Date().toISOString();
+          st.toewijzingen[tel].herstel = 'oorspronkelijk inmeten, niet aangekomen';
+          fs.writeFileSync(STATE, JSON.stringify(st, null, 1));
+        }
+      } catch (e) { console.log('     (registratie bijwerken mislukt: ' + e.message + ')'); }
+    }
     else console.log(`  ${tel} (${voornaam}): FOUT ${r.status} ${(await r.text()).slice(0, 120)}`);
     await new Promise((x) => setTimeout(x, 1500));
   }

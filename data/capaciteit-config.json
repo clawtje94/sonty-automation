@@ -1,0 +1,13 @@
+{
+  "_uitleg": "Drempels voor scripts/capaciteitsmonitor.js. Aanpassen mag; de monitor leest dit bestand bij elke run.",
+  "gezondeRatio": 8,
+  "_gezondeRatio": "Offertes per order bij gezonde bezetting. Uit 2025 jan-apr: 7,2 tot 9,1.",
+  "ratioLet": 11,
+  "_ratioLet": "Boven deze ratio loopt het op; in de gaten houden.",
+  "ratioAlarm": 13,
+  "_ratioAlarm": "Boven deze ratio koop je aantoonbaar meer dan je verwerkt.",
+  "rijpingsdagen": 45,
+  "_rijpingsdagen": "86% van de akkoorden is binnen 45 dagen binnen. Jongere offertes tellen te laag en worden uit de ratio gelaten.",
+  "marge": 1690,
+  "_marge": "Gemiddelde productmarge per order over 2025, voor montage en overhead."
+}

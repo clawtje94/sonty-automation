@@ -423,7 +423,7 @@ const SJABLONEN = {
 SJABLONEN['sonty-weer-hitte'] = mail({
   naam: 'Sonty weermoment hitte',
   preheader: 'Even een seintje over het weer van volgende week',
-  kop: 'Het wordt {{ person.sonty_weer_piek|default:"flink" }} graden, {{ first_name|default:"daar" }}',
+  kop: 'Het wordt warm, {{ first_name|default:"daar" }}',
   intro: 'Even een seintje: {{ person.sonty_weer_dag|default:"deze week" }} loopt het op naar {{ person.sonty_weer_piek|default:"boven de 29" }} graden. Precies het weer waarvoor je destijds je offerte hebt aangevraagd.',
   blokken: [
     offerteKaart(),
@@ -449,7 +449,7 @@ SJABLONEN['sonty-weer-lente'] = mail({
   naam: 'Sonty weermoment eerste lentedag',
   preheader: 'De eerste mooie dag van het jaar',
   kop: 'Eerste mooie dag van het jaar',
-  intro: 'Het wordt {{ person.sonty_weer_piek|default:"boven de 20" }} graden, en dan denkt bijna iedereen weer aan buiten zitten. Jij vroeg ooit een offerte bij ons aan. Zal ik hem er weer even bij pakken?',
+  intro: 'Het loopt op naar {{ person.sonty_weer_piek|default:"boven de 20" }} graden, en dan denkt bijna iedereen weer aan buiten zitten. Jij vroeg ooit een offerte bij ons aan. Zal ik hem er weer even bij pakken?',
   blokken: [
     beeld('eigen/pergola-tuin-2.webp', 'Een pergola in de tuin, geplaatst door Sonty', 'Een van onze projecten'),
     knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),

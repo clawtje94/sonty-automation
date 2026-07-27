@@ -171,9 +171,48 @@ const bewaarStaat = (s) => { fs.mkdirSync(path.dirname(STAAT), { recursive: true
     return;
   }
 
-  staat.laatste = { sleutel: gevonden.sleutel, tijd: nu.toISOString(), piek: gevonden.piek, wanneer: gevonden.wanneer };
+  // Markeren in Klaviyo. Dit zet alleen profielvelden; er kan pas post uitgaan zodra de
+  // bijbehorende flow in Klaviyo live wordt gezet, en dat doet Daimy zelf.
+  const { KLAVIYO_API_KEY } = require('../secrets.js');
+  const H = { Authorization: 'Klaviyo-API-Key ' + KLAVIYO_API_KEY, accept: 'application/json',
+              'content-type': 'application/json', revision: '2024-10-15' };
+
+  const rijen = JSON.parse(fs.readFileSync(EXPORT, 'utf8'));
+  const buiten = /screen|zip|knikarm|uitval|markies|rolluik|pergola|zonwering|suneye|serre|windvast|cassette/i;
+  const binnen = /gordijn|plisse|plissé|duette|jaloezie|shutter|rolgordijn|raamdec|vouwgordijn|behang/i;
+  const wilBinnen = gevonden.sleutel === 'donkere_dagen';
+
+  // Oudste offertes eerst: wie het langst wacht, hoort als eerste iets te horen.
+  const kandidaten = rijen
+    .filter((r) => r.magMail !== false && r.offerteLink && !r.heeftAkkoord && (wilBinnen ? binnen : buiten).test(String(r.product || '')))
+    .sort((a, b) => (a.offerteDatum || 0) - (b.offerteDatum || 0))
+    .slice(0, MAX_ONTVANGERS_PER_DAG);
+
+  const vervalt = new Date(nu.getTime() + 3 * DAG).toISOString();
+  const profielen = kandidaten.map((r) => ({ type: 'profile', attributes: { email: r.email, properties: {
+    sonty_weermoment: gevonden.sleutel,
+    sonty_weer_piek: String(gevonden.piek),
+    sonty_weer_dag: new Date(gevonden.wanneer).toLocaleDateString('nl-NL', { weekday: 'long' }),
+    sonty_weermoment_gezet: nu.toISOString(),
+    sonty_weermoment_vervalt: vervalt,
+  } } }));
+
+  let gelukt = 0;
+  for (let i = 0; i < profielen.length; i += 1000) {
+    const blok = profielen.slice(i, i + 1000);
+    const r = await fetch('https://a.klaviyo.com/api/profile-bulk-import-jobs/', { method: 'POST', headers: H,
+      body: JSON.stringify({ data: { type: 'profile-bulk-import-job', attributes: { profiles: { data: blok } } } }) });
+    if (r.ok) gelukt += blok.length;
+    else console.error('  blok mislukt: ' + r.status + ' ' + (await r.text()).slice(0, 200));
+    await new Promise((x) => setTimeout(x, 900));
+  }
+
+  staat.laatste = { sleutel: gevonden.sleutel, tijd: nu.toISOString(), piek: gevonden.piek,
+                    wanneer: gevonden.wanneer, gemarkeerd: gelukt };
   staat.geschiedenis = [...(staat.geschiedenis || []), staat.laatste].slice(-40);
   bewaarStaat(staat);
-  console.log('\nMoment vastgelegd in data/email/weermomenten.json.');
-  console.log('Het markeren van profielen zit in de volgende stap; er is nog niets verstuurd.');
+
+  console.log(`\n${gelukt} profielen gemarkeerd met weermoment "${gevonden.sleutel}".`);
+  console.log(`De markering vervalt vanzelf op ${vervalt.slice(0, 10)}.`);
+  console.log('Er is NIETS verstuurd. Dat gebeurt pas als de weerflow in Klaviyo live staat.');
 })().catch((e) => { console.error('FOUT: ' + (e.message || e)); process.exit(1); });

@@ -100,6 +100,21 @@ const SEGMENTEN = [
     condities: [MAG_MAIL, gelijk('sonty_fase', 'koud'), gelijk('sonty_categorie', 'buiten'), bestaat('sonty_offerte_link')],
   },
   {
+    naam: 'Sonty | W1. Weermoment hitte',
+    reeks: 'F1, gaat af als het 29+ graden wordt',
+    condities: [MAG_MAIL, gelijk('sonty_weermoment', 'hitte'), bestaat('sonty_offerte_link')],
+  },
+  {
+    naam: 'Sonty | W2. Weermoment eerste lentedag',
+    reeks: 'F2, eerste dag boven 20 graden na 1 maart',
+    condities: [MAG_MAIL, gelijk('sonty_weermoment', 'eerste_lentedag'), bestaat('sonty_offerte_link')],
+  },
+  {
+    naam: 'Sonty | W3. Weermoment donkere dagen',
+    reeks: 'F3, vanaf oktober bij weinig zon',
+    condities: [MAG_MAIL, gelijk('sonty_weermoment', 'donkere_dagen'), bestaat('sonty_offerte_link')],
+  },
+  {
     naam: 'Sonty | 9. Koud, raamdecoratie',
     reeks: 'C, najaarscampagne',
     condities: [MAG_MAIL, gelijk('sonty_fase', 'koud'), gelijk('sonty_categorie', 'binnen'), bestaat('sonty_offerte_link')],

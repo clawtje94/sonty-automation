@@ -15,6 +15,47 @@ Er is nog **geen** e-mailmarketing. Wat er wel is:
 | Vacaturemail | 150 per dag in batches naar 1.744 adressen | Eenmalige werving, geen terugkerende flow, geen meting |
 | Trengo-mailkanalen | aanvragen@ en info@ | Klantcontactkanaal; bulk hierover zet het hele domein op spam |
 
+### Wat Reuzenpanda zelf al verstuurt (bekeken 27 juli, alleen gelezen)
+
+Dit stond niet in de eerste versie van dit plan en verandert de volgorde van wat we moeten doen.
+Reuzenpanda heeft een eigen automatiseringsmodule met veertien flows. Stand van zaken:
+
+| Automatisering | Keer uitgevoerd | Status |
+|---|---|---|
+| Bedankt voor je offerte aanvraag mail | 17.771 | **AAN** |
+| Offerte automatisering (versturen) | 16.566 | **AAN** |
+| Offerte versturen | 14.797 | **AAN** |
+| Bij ondertekenen naar inmeting inplannen | 1.053 | **AAN** |
+| Mail en melding na akkoord | 1.052 | **AAN** |
+| Mail en melding na afwijzing | 545 | **AAN** |
+| **Herinnering na 6 en 10 dagen** | **5.084** | **UIT** |
+| WhatsApp bericht na offerte | 6.654 | UIT (doen wij nu zelf via V4) |
+| Lead converteren | 3.413 | UIT |
+| Offerte automatisering (oude versie) | 1.162 | UIT |
+| Offerte automatisering - werkend | 132 | UIT |
+| 25% korting offerte aanpassing / Herinneringen / Naamloze | 118 / 9.058 / 0 | niet af te lezen |
+
+**De belangrijkste vondst: de opvolgherinnering na 6 en 10 dagen staat UIT.** Hij heeft 5.084 keer
+gedraaid, dus hij werkte. Er gaat op dit moment dus geen enkele automatische herinnering per mail
+naar een klant met een openstaande offerte. Dat is precies het gat waar die 9.198 offertes zonder
+akkoord in vallen.
+
+Wat dit betekent voor het plan:
+
+- **Campagne C is deels "weer aanzetten" in plaats van "nieuw bouwen".** Eerst uitzoeken waarom
+  hij uit staat. In de roadmap staat dat de proactieve opvolging op 3 juli is gepauzeerd nadat
+  WhatsApp een spamwaarschuwing gaf, maar dat ging over WhatsApp, niet over mail. Dit moet
+  bevestigd worden voordat er iets aan wordt gezet.
+- **De transactionele mail loopt al via Reuzenpanda** (17.771 bedankmails). Er is dus al een
+  afzenderreputatie die we niet mogen beschadigen; dat versterkt het advies om marketing op een
+  apart subdomein te zetten.
+- **Er staat opruimwerk klaar.** Drie flows heten "Offerte automatisering", er is een naamloze
+  flow en een tweede herinneringsflow. Voor we iets toevoegen moet duidelijk zijn welke flow wat
+  doet, anders krijgt een klant straks twee mails uit twee systemen.
+- **Timing klopt niet met de data.** De bestaande herinnering staat op dag 6 en 10, terwijl de
+  mediane doorlooptijd tot akkoord 24 dagen is en 93% binnen 60 dagen valt. Dag 6 en 10 is te
+  vroeg om de late beslissers te raken; daar hoort dag 21 en 45 bij.
+
 Dat laatste is het belangrijkste risico van "gewoon beginnen": als sonty.nl als spam wordt
 gemarkeerd, komen ook de **offertemails** niet meer aan. Dat raakt direct de omzet.
 
@@ -194,6 +235,10 @@ de deur uit, en dan bewust klein.
 
 Beslissingen die ik niet voor hem kan nemen:
 
+0. **Waarom staat "Herinnering na 6 en 10 dagen" uit?** Bewust uitgezet, of ergens blijven staan?
+   Dit is de snelste winst van allemaal: hij is al gebouwd, heeft 5.084 keer gedraaid, en er gaat
+   nu geen enkele opvolgmail uit. Als er geen reden is om hem uit te houden, kan hij vandaag nog
+   aan terwijl de rest gebouwd wordt.
 1. **Provider**: mag ik een externe verzendprovider kiezen (advies), of wil je dat we ook de
    verzending zelf bouwen? Dit bepaalt alles daarna.
 2. **Subdomein**: akkoord op een apart afzenderdomein zoals mail.sonty.nl, en welke naam.

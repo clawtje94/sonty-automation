@@ -29,10 +29,23 @@ async function findRpOffertes({ email, phone, naam, adres }) {
   const n = norm(naam), a = norm(adres);
   // RP zet contactgegevens als platte tekst in summary/description — daar matchen we op.
   // Gericht zoeken (instructie Daimy): telefoon/e-mail eerst; naam/adres als extra invalshoek.
+  // TELEFOONMATCH OP DE LAATSTE 9 CIJFERS (Daimy 2026-07-27, Markus Naumer / ticket 968814545).
+  // De oude versie plakte alle cijfers van het dossier aan elkaar en zocht daar "31622223964" in.
+  // RP slaat het nummer bij winkel-/showroomdossiers alleen in nationale notatie op ("0622223964"),
+  // en daar zit "31622223964" niet in. Gevolg: het tweede dossier van dezelfde klant werd niet
+  // gevonden, de bot zag maar één offerte en stuurde die — terwijl de klant om een offerte uit het
+  // andere dossier vroeg. Daarom vergelijken we nu het abonnee-deel (laatste 9 cijfers), net zoals
+  // findHubspot dat al deed. Per cijferreeks vergelijken in plaats van in één cijferbrij, anders
+  // ontstaan toevalstreffers over veldgrenzen heen (maten en postcodes staan in dezelfde tekst).
+  const pKort = p.length >= 9 ? p.slice(-9) : '';
+  const matchtTelefoon = (blob) => {
+    if (!pKort) return false;
+    for (const reeks of blob.match(/\d{9,15}/g) || []) if (reeks.slice(-9) === pKort) return true;
+    return false;
+  };
   const matches = items.filter(it => {
     const blob = ((it.summary || '') + '\n' + (it.description || '')).toLowerCase();
-    const digits = blob.replace(/[^0-9]/g, '');
-    if ((e && blob.includes(e)) || (p && p.length >= 10 && digits.includes(p))) return true;
+    if ((e && blob.includes(e)) || matchtTelefoon(blob.replace(/[^0-9\n]/g, ''))) return true;
     if (n && n.length > 5 && blob.includes(n)) return true;
     if (a && a.length > 5 && blob.includes(a)) return true;
     return false;
@@ -41,13 +54,25 @@ async function findRpOffertes({ email, phone, naam, adres }) {
   // V4-CHECK (Daimy 23-07, casus Mehul 20268955): een offerte die nog niet door de
   // offertecontrole is gegaan (herkenbaar aan niet-dikgedrukte productregels) mag NIET
   // als link gedeeld worden — de klant zou ongecontroleerde prijzen/opmaak zien.
+  //
+  // VERFIJND 2026-07-27 (Naumer, offerte 202610354). "Álle regels vet" bleek te streng: op die
+  // offerte waren de vier productregels netjes vet, maar in de winkel was daarna met de hand een
+  // Situo 5 handzender (€115) bijgezet. Die ene niet-vette regel blokkeerde de hele offerte,
+  // terwijl de klant hem vrijdag in de showroom al op papier had. Een offerte die V4 nooit heeft
+  // gezien heeft NUL vette regels (bevestigd op 52 oude dossiers in de steekproef van 27 juli);
+  // een handmatige toevoeging achteraf laat de productregels vet. Daarom kijken we nu of de
+  // dúúrste regel vet is en of de meerderheid vet is: dat onderscheidt "nooit gecontroleerd" van
+  // "gecontroleerd, daarna een accessoire bijgezet" zonder de Mehul-casus terug te breken.
   async function isV4Verwerkt(documentId) {
     try {
       const d = await rpGet(`/document-service/v1/${CFG.RP_PID}/quotations/${documentId}`);
       const lines = d?.quotationData?.segments?.defaultTemplatePriceLineGroup?.data?.lines || [];
       const prijsRegels = lines.filter((l) => (l.pricePerUnit || 0) > 0);
       if (!prijsRegels.length) return false;
-      return prijsRegels.every((l) => String(l.description || '').startsWith('**'));
+      const isVet = (l) => String(l.description || '').startsWith('**');
+      const duurste = prijsRegels.reduce((a, b) => ((b.pricePerUnit || 0) > (a.pricePerUnit || 0) ? b : a));
+      const aantalVet = prijsRegels.filter(isVet).length;
+      return isVet(duurste) && aantalVet * 2 > prijsRegels.length;
     } catch { return false; }
   }
   const results = [];

@@ -181,6 +181,15 @@ dossier op staat: eerst dezelfde controle op naam en adres.
 Praat je met iemand die duidelijk namens de klant belt (partner, ouder, kind), dan gelden dezelfde
 regels: naam en adres van het dossier moeten kloppen, anders eerst overdragen aan een collega.
 
+NOOIT EEN ANDER NUMMER STUREN DAN GEVRAAGD (Daimy 2026-07-27, ticket 968814545). Noemt de klant een
+concreet offertenummer en zit dat nummer NIET tussen de offertes die klant_opzoeken teruggeeft, dan
+stuur je geen enkele andere offerte — ook niet "de nieuwste op het dossier". Bij Markus Naumer ging
+dat mis: hij vroeg om 202610354 uit de showroom en kreeg 20269576 uit een ander dossier. Een klant
+die om een specifiek nummer vraagt weet precies welke offerte hij bedoelt.
+Vind je het nummer niet, zoek dan eerst nog een keer met alles wat je hebt (ook e-mailadres, naam en
+adres, want dezelfde klant kan meerdere dossiers hebben). Blijft het onvindbaar: escaleren_naar_mens,
+en zeg tegen de klant dat een collega hem er even bij pakt. Nooit een vervangende offerte sturen.
+
 # OFFERTENUMMER ALTIJD MEESTUREN (instructie Daimy)
 Als je een offerte-link deelt, zet dan altijd het offertenummer erbij op een eigen regel ("Offertenummer: 20268123"). Zo kan de klant hem makkelijk noemen en kan het team hem direct opzoeken.
 

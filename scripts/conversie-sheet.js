@@ -5,11 +5,19 @@
 const { google } = require('googleapis');
 const fs = require('fs');
 const ID = '1NesKeIKLVOLJjSy-fqo5KXrEVG2VJTYSfjgN7EHY85g';
-const TAB_MAAND = {'Jan 2025':1,'Feb 2025 \u{1F438}':2,'Maart 2025':3,'April 2025':4,'Mei 2025 ':5,'Juni 2025':6,'Juli 2025':7,'Aug 2025':8,'Sep 2025':9,'Okt 2025':10,'Nov 2025':11,'Dec 2025':12};
-const TABS = ['Jan 2025','Feb 2025 🐸','Maart 2025','April 2025','Mei 2025 ','Juni 2025','Juli 2025','Aug 2025','Sep 2025','Okt 2025','Nov 2025','Dec 2025'];
+// Tabnamen zijn per jaar net anders gespeld (emoji, trailing spaces) — exact overnemen.
+const JAREN = {
+  2025: {'Jan 2025':1,'Feb 2025 🐸':2,'Maart 2025':3,'April 2025':4,'Mei 2025 ':5,'Juni 2025':6,
+         'Juli 2025':7,'Aug 2025':8,'Sep 2025':9,'Okt 2025':10,'Nov 2025':11,'Dec 2025':12},
+  2026: {'Jan 2026':1,'Feb 2026':2,'Maart 2026':3,'April 2026':4,'Mei 2026':5,'Juni 2026 ':6,'Juli 2026':7},
+};
+const JAAR = +(process.argv[process.argv.indexOf('--jaar') + 1]) || 2025;
+if (!JAREN[JAAR]) { console.error('geen tabs bekend voor', JAAR); process.exit(1); }
+const TAB_MAAND = JAREN[JAAR];
+const TABS = Object.keys(TAB_MAAND);
 // 'Augustus 2025' (leeg) en '2025 alles bij elkaar' (deel-kopie jan t/m 18 mrt) NIET meenemen:
 // die zouden dubbeltellen. Wel als controle apart te draaien met --controle.
-const EXTRA = process.argv.includes('--controle') ? ['Augustus 2025','2025 alles bij elkaar'] : [];
+const EXTRA = (process.argv.includes('--controle') && JAAR === 2025) ? ['Augustus 2025','2025 alles bij elkaar'] : [];
 
 const norm = s => String(s||'').trim().toLowerCase().replace(/\s+/g,' ');
 const money = s => {
@@ -71,9 +79,9 @@ function parseDatum(v) {
       const tabMaand = TAB_MAAND[tab] || null;
       if (!dt && !tabMaand) { geenDatum.push({tab, rij: i+1, naam, ruw: String(v[cols.datum]||'')}); continue; }
       if (!dt) geenDatum.push({tab, rij: i+1, naam, ruw: String(v[cols.datum]||'')});
-      else if (tabMaand && (dt.maand !== tabMaand || dt.jaar !== 2025)) mismatch.push({tab, rij: i+1, naam, celMaand: `${dt.jaar}-${dt.maand}`});
+      else if (tabMaand && (dt.maand !== tabMaand || dt.jaar !== JAAR)) mismatch.push({tab, rij: i+1, naam, celMaand: `${dt.jaar}-${dt.maand}`});
       rows.push({
-        tab, rij: i+1, jaar: 2025, maand: tabMaand || dt.maand, celDatum: String(v[cols.datum]||''), naam,
+        tab, rij: i+1, jaar: JAAR, maand: tabMaand || dt.maand, celDatum: String(v[cols.datum]||''), naam,
         tel: String(v[cols.tel]||'').replace(/\D/g,'').slice(-9),
         bedrag,
         kanaal: String(v[cols.kanaal]||'').trim() || '(leeg)',
@@ -90,7 +98,7 @@ function parseDatum(v) {
     }
     tabInfo.push({tab, rijen: n});
   }
-  fs.writeFileSync(__dirname+'/../data/conversie-2025-raw.json', JSON.stringify({tabInfo, geenDatum, mismatch, rows}, null, 0));
+  fs.writeFileSync(__dirname+`/../data/conversie-${JAAR}-raw.json`, JSON.stringify({tabInfo, geenDatum, mismatch, rows}, null, 0));
   console.log('TAB-RIJEN:'); tabInfo.forEach(t => console.log(`  ${t.tab.padEnd(24)} ${t.rijen}`));
   console.log('totaal rijen:', rows.length);
   console.log('rijen zonder leesbare datum (overgeslagen):', geenDatum.length);

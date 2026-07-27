@@ -1,4 +1,19 @@
 {
+ "jaar": 2025,
+ "maandenAanwezig": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12
+ ],
  "maand": {
   "1": {
    "off": 295,
@@ -1443,7 +1458,297 @@
    "inkoop": 1700
   }
  },
- "kanaalAfkomst": {
+ "maandGroep": {
+  "1|Meta": {
+   "off": 185,
+   "akk": 33,
+   "omzet": 108662,
+   "inkoop": 63132
+  },
+  "1|Google": {
+   "off": 45,
+   "akk": 10,
+   "omzet": 25484,
+   "inkoop": 14576
+  },
+  "1|Anders": {
+   "off": 43,
+   "akk": 7,
+   "omzet": 24933,
+   "inkoop": 14520
+  },
+  "1|Buren/Bekenden": {
+   "off": 22,
+   "akk": 15,
+   "omzet": 55290,
+   "inkoop": 31017
+  },
+  "2|Google": {
+   "off": 78,
+   "akk": 18,
+   "omzet": 59289,
+   "inkoop": 31483
+  },
+  "2|Meta": {
+   "off": 209,
+   "akk": 15,
+   "omzet": 44328,
+   "inkoop": 24884
+  },
+  "2|Anders": {
+   "off": 49,
+   "akk": 4,
+   "omzet": 14870,
+   "inkoop": 8076
+  },
+  "2|Buren/Bekenden": {
+   "off": 29,
+   "akk": 16,
+   "omzet": 57481,
+   "inkoop": 30276
+  },
+  "3|Meta": {
+   "off": 348,
+   "akk": 52,
+   "omzet": 201029,
+   "inkoop": 109502
+  },
+  "3|Buren/Bekenden": {
+   "off": 52,
+   "akk": 22,
+   "omzet": 73332,
+   "inkoop": 39089
+  },
+  "3|Google": {
+   "off": 171,
+   "akk": 29,
+   "omzet": 108638,
+   "inkoop": 57208
+  },
+  "3|Anders": {
+   "off": 54,
+   "akk": 6,
+   "omzet": 25754,
+   "inkoop": 12767
+  },
+  "4|Google": {
+   "off": 278,
+   "akk": 56,
+   "omzet": 185695.84999999998,
+   "inkoop": 101865.08
+  },
+  "4|Meta": {
+   "off": 516,
+   "akk": 40,
+   "omzet": 118958.38,
+   "inkoop": 68222.08
+  },
+  "4|Anders": {
+   "off": 51,
+   "akk": 6,
+   "omzet": 28034,
+   "inkoop": 15331
+  },
+  "4|Buren/Bekenden": {
+   "off": 62,
+   "akk": 38,
+   "omzet": 120008,
+   "inkoop": 68566
+  },
+  "5|Meta": {
+   "off": 726,
+   "akk": 47,
+   "omzet": 139723.08,
+   "inkoop": 72220
+  },
+  "5|Google": {
+   "off": 385,
+   "akk": 65,
+   "omzet": 228403,
+   "inkoop": 116994
+  },
+  "5|Buren/Bekenden": {
+   "off": 85,
+   "akk": 35,
+   "omzet": 108799,
+   "inkoop": 60415
+  },
+  "5|Anders": {
+   "off": 44,
+   "akk": 6,
+   "omzet": 50933,
+   "inkoop": 26885.7
+  },
+  "6|Meta": {
+   "off": 780,
+   "akk": 41,
+   "omzet": 155589.06999999998,
+   "inkoop": 79612
+  },
+  "6|Google": {
+   "off": 334,
+   "akk": 35,
+   "omzet": 146343.65000000002,
+   "inkoop": 73212.08
+  },
+  "6|Buren/Bekenden": {
+   "off": 72,
+   "akk": 20,
+   "omzet": 81168,
+   "inkoop": 45893.67
+  },
+  "6|Anders": {
+   "off": 35,
+   "akk": 4,
+   "omzet": 11097.01,
+   "inkoop": 5762.57
+  },
+  "7|Buren/Bekenden": {
+   "off": 78,
+   "akk": 24,
+   "omzet": 97369.01,
+   "inkoop": 49206.99
+  },
+  "7|Meta": {
+   "off": 833,
+   "akk": 35,
+   "omzet": 127931.51000000001,
+   "inkoop": 69263.51999999999
+  },
+  "7|Google": {
+   "off": 468,
+   "akk": 53,
+   "omzet": 226090.45,
+   "inkoop": 121282
+  },
+  "7|Anders": {
+   "off": 109,
+   "akk": 18,
+   "omzet": 69740.88,
+   "inkoop": 38036.01
+  },
+  "8|Google": {
+   "off": 489,
+   "akk": 63,
+   "omzet": 253614.64999999997,
+   "inkoop": 144675
+  },
+  "8|Meta": {
+   "off": 621,
+   "akk": 38,
+   "omzet": 171344.90999999997,
+   "inkoop": 99633.06
+  },
+  "8|Anders": {
+   "off": 86,
+   "akk": 19,
+   "omzet": 83589.76,
+   "inkoop": 46442.28
+  },
+  "8|Buren/Bekenden": {
+   "off": 58,
+   "akk": 13,
+   "omzet": 42548.92,
+   "inkoop": 24379
+  },
+  "9|Meta": {
+   "off": 349,
+   "akk": 23,
+   "omzet": 80393.13999999998,
+   "inkoop": 46802.11
+  },
+  "9|Google": {
+   "off": 256,
+   "akk": 46,
+   "omzet": 204663.62999999998,
+   "inkoop": 117746.51000000001
+  },
+  "9|Buren/Bekenden": {
+   "off": 16,
+   "akk": 4,
+   "omzet": 17533.84,
+   "inkoop": 9980
+  },
+  "9|Anders": {
+   "off": 40,
+   "akk": 7,
+   "omzet": 29305.170000000002,
+   "inkoop": 16616
+  },
+  "10|Meta": {
+   "off": 204,
+   "akk": 11,
+   "omzet": 32330.799999999996,
+   "inkoop": 20484
+  },
+  "10|Google": {
+   "off": 146,
+   "akk": 16,
+   "omzet": 54294.65,
+   "inkoop": 31380.010000000002
+  },
+  "10|Anders": {
+   "off": 26,
+   "akk": 15,
+   "omzet": 61807.310000000005,
+   "inkoop": 28190
+  },
+  "10|Buren/Bekenden": {
+   "off": 14,
+   "akk": 4,
+   "omzet": 26943.010000000002,
+   "inkoop": 16710
+  },
+  "11|Meta": {
+   "off": 222,
+   "akk": 12,
+   "omzet": 41115.21,
+   "inkoop": 25025.3
+  },
+  "11|Buren/Bekenden": {
+   "off": 14,
+   "akk": 6,
+   "omzet": 21898.71,
+   "inkoop": 13447
+  },
+  "11|Google": {
+   "off": 112,
+   "akk": 16,
+   "omzet": 71711.39,
+   "inkoop": 39728
+  },
+  "11|Anders": {
+   "off": 27,
+   "akk": 12,
+   "omzet": 62257.68,
+   "inkoop": 33462
+  },
+  "12|Meta": {
+   "off": 199,
+   "akk": 5,
+   "omzet": 21945.14,
+   "inkoop": 11625
+  },
+  "12|Buren/Bekenden": {
+   "off": 17,
+   "akk": 5,
+   "omzet": 18668.35,
+   "inkoop": 10742
+  },
+  "12|Google": {
+   "off": 126,
+   "akk": 11,
+   "omzet": 52924.26999999999,
+   "inkoop": 28329
+  },
+  "12|Anders": {
+   "off": 35,
+   "akk": 13,
+   "omzet": 27623.09,
+   "inkoop": 16269
+  }
+ },
+ "kanaalGroep": {
   "Online|Meta": {
    "off": 5098,
    "akk": 287,
@@ -1493,150 +1798,150 @@
    "inkoop": 46837
   }
  },
- "maandMeta": {
-  "1|Meta": {
-   "off": 185,
-   "akk": 33,
-   "omzet": 108662,
-   "inkoop": 63132
+ "maandKanaal": {
+  "1|Online": {
+   "off": 273,
+   "akk": 50,
+   "omzet": 149697,
+   "inkoop": 86285
   },
-  "1|Google": {
-   "off": 45,
-   "akk": 10,
-   "omzet": 25484,
-   "inkoop": 14576
-  },
-  "2|Google": {
-   "off": 78,
-   "akk": 18,
-   "omzet": 59289,
-   "inkoop": 31483
-  },
-  "2|Meta": {
-   "off": 209,
+  "1|Winkel": {
+   "off": 22,
    "akk": 15,
-   "omzet": 44328,
-   "inkoop": 24884
+   "omzet": 64672,
+   "inkoop": 36960
   },
-  "3|Meta": {
-   "off": 348,
-   "akk": 52,
-   "omzet": 201029,
-   "inkoop": 109502
-  },
-  "3|Google": {
-   "off": 171,
-   "akk": 29,
-   "omzet": 108638,
-   "inkoop": 57208
-  },
-  "4|Google": {
-   "off": 278,
-   "akk": 56,
-   "omzet": 185695.84999999998,
-   "inkoop": 101865.08
-  },
-  "4|Meta": {
-   "off": 516,
-   "akk": 40,
-   "omzet": 118958.38,
-   "inkoop": 68222.08
-  },
-  "5|Meta": {
-   "off": 726,
-   "akk": 47,
-   "omzet": 139723.08,
-   "inkoop": 72220
-  },
-  "5|Google": {
-   "off": 385,
-   "akk": 65,
-   "omzet": 228403,
-   "inkoop": 116994
-  },
-  "6|Meta": {
-   "off": 780,
-   "akk": 41,
-   "omzet": 155589.06999999998,
-   "inkoop": 79612
-  },
-  "6|Google": {
-   "off": 334,
-   "akk": 35,
-   "omzet": 146343.65000000002,
-   "inkoop": 73212.08
-  },
-  "7|Meta": {
-   "off": 833,
-   "akk": 35,
-   "omzet": 127931.51000000001,
-   "inkoop": 69263.51999999999
-  },
-  "7|Google": {
-   "off": 468,
-   "akk": 53,
-   "omzet": 226090.45,
-   "inkoop": 121282
-  },
-  "8|Google": {
-   "off": 489,
-   "akk": 63,
-   "omzet": 253614.64999999997,
-   "inkoop": 144675
-  },
-  "8|Meta": {
-   "off": 621,
+  "2|Online": {
+   "off": 343,
    "akk": 38,
-   "omzet": 171344.90999999997,
-   "inkoop": 99633.06
+   "omzet": 117947,
+   "inkoop": 63689
   },
-  "9|Meta": {
-   "off": 349,
+  "2|Winkel": {
+   "off": 22,
+   "akk": 15,
+   "omzet": 58021,
+   "inkoop": 31030
+  },
+  "3|Online": {
+   "off": 591,
+   "akk": 83,
+   "omzet": 280617,
+   "inkoop": 148892
+  },
+  "3|Winkel": {
+   "off": 34,
+   "akk": 26,
+   "omzet": 128136,
+   "inkoop": 69674
+  },
+  "4|Online": {
+   "off": 875,
+   "akk": 119,
+   "omzet": 362384.23,
+   "inkoop": 198779.99
+  },
+  "4|Winkel": {
+   "off": 32,
+   "akk": 21,
+   "omzet": 90312,
+   "inkoop": 55204.17
+  },
+  "5|Online": {
+   "off": 1211,
+   "akk": 134,
+   "omzet": 450813.29,
+   "inkoop": 239453.7
+  },
+  "5|Winkel": {
+   "off": 29,
+   "akk": 19,
+   "omzet": 77044.79000000001,
+   "inkoop": 37061
+  },
+  "6|Online": {
+   "off": 1193,
+   "akk": 80,
+   "omzet": 276206.26000000007,
+   "inkoop": 140123.32
+  },
+  "6|Winkel": {
+   "off": 28,
+   "akk": 20,
+   "omzet": 117991.47,
+   "inkoop": 64357
+  },
+  "7|Winkel": {
+   "off": 32,
    "akk": 23,
-   "omzet": 80393.13999999998,
-   "inkoop": 46802.11
+   "omzet": 111467.13999999998,
+   "inkoop": 56364
   },
-  "9|Google": {
-   "off": 256,
-   "akk": 46,
-   "omzet": 204663.62999999998,
-   "inkoop": 117746.51000000001
+  "7|Online": {
+   "off": 1456,
+   "akk": 107,
+   "omzet": 409664.70999999996,
+   "inkoop": 221424.52000000002
   },
-  "10|Meta": {
-   "off": 204,
-   "akk": 11,
-   "omzet": 32330.799999999996,
-   "inkoop": 20484
+  "8|Online": {
+   "off": 1211,
+   "akk": 104,
+   "omzet": 387505.41000000003,
+   "inkoop": 222905.34
   },
-  "10|Google": {
-   "off": 146,
-   "akk": 16,
-   "omzet": 54294.65,
-   "inkoop": 31380.010000000002
+  "8|Winkel": {
+   "off": 43,
+   "akk": 29,
+   "omzet": 163592.83,
+   "inkoop": 92224
   },
-  "11|Meta": {
-   "off": 222,
+  "9|Online": {
+   "off": 641,
+   "akk": 68,
+   "omzet": 272368.41,
+   "inkoop": 158809.62
+  },
+  "9|Winkel": {
+   "off": 20,
    "akk": 12,
-   "omzet": 41115.21,
-   "inkoop": 25025.3
+   "omzet": 59527.37,
+   "inkoop": 32335
   },
-  "11|Google": {
-   "off": 112,
-   "akk": 16,
-   "omzet": 71711.39,
-   "inkoop": 39728
+  "10|Online": {
+   "off": 374,
+   "akk": 39,
+   "omzet": 141203.74,
+   "inkoop": 84080.01
   },
-  "12|Meta": {
-   "off": 199,
+  "10|Winkel": {
+   "off": 16,
+   "akk": 7,
+   "omzet": 34172.03,
+   "inkoop": 12684
+  },
+  "11|Winkel": {
+   "off": 15,
+   "akk": 10,
+   "omzet": 41868.51,
+   "inkoop": 23763
+  },
+  "11|Online": {
+   "off": 360,
+   "akk": 36,
+   "omzet": 155114.47999999998,
+   "inkoop": 87899.3
+  },
+  "12|Online": {
+   "off": 369,
+   "akk": 29,
+   "omzet": 79028.82999999999,
+   "inkoop": 44855
+  },
+  "12|Winkel": {
+   "off": 8,
    "akk": 5,
-   "omzet": 21945.14,
-   "inkoop": 11625
-  },
-  "12|Google": {
-   "off": 126,
-   "akk": 11,
-   "omzet": 52924.26999999999,
-   "inkoop": 28329
+   "omzet": 42132.020000000004,
+   "inkoop": 22110
   }
  },
  "kanaal": {

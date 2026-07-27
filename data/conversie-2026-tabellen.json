@@ -1,0 +1,1316 @@
+{
+ "jaar": 2026,
+ "maandenAanwezig": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7
+ ],
+ "maand": {
+  "1": {
+   "off": 646,
+   "akk": 57,
+   "omzet": 222414.55999999997,
+   "inkoop": 129930
+  },
+  "2": {
+   "off": 795,
+   "akk": 71,
+   "omzet": 281298.5800000001,
+   "inkoop": 149289
+  },
+  "3": {
+   "off": 1499,
+   "akk": 165,
+   "omzet": 586453.6799999999,
+   "inkoop": 320047
+  },
+  "4": {
+   "off": 1592,
+   "akk": 124,
+   "omzet": 417384.9799999999,
+   "inkoop": 218534
+  },
+  "5": {
+   "off": 1835,
+   "akk": 102,
+   "omzet": 430233.5999999999,
+   "inkoop": 223293
+  },
+  "6": {
+   "off": 1914,
+   "akk": 109,
+   "omzet": 443615.98000000016,
+   "inkoop": 218762
+  },
+  "7": {
+   "off": 1861,
+   "akk": 8,
+   "omzet": 18167.7,
+   "inkoop": 8939
+  }
+ },
+ "afkomst": {
+  "Instagram": {
+   "off": 5111,
+   "akk": 225,
+   "omzet": 877036.2200000002,
+   "inkoop": 476271
+  },
+  "Google": {
+   "off": 3718,
+   "akk": 206,
+   "omzet": 816824.8600000002,
+   "inkoop": 428451
+  },
+  "Anders": {
+   "off": 446,
+   "akk": 31,
+   "omzet": 115178.26999999999,
+   "inkoop": 61575
+  },
+  "Bekenden": {
+   "off": 307,
+   "akk": 44,
+   "omzet": 161020.52000000002,
+   "inkoop": 85069
+  },
+  "(leeg)": {
+   "off": 307,
+   "akk": 91,
+   "omzet": 308174.9,
+   "inkoop": 152553
+  },
+  "Buren": {
+   "off": 144,
+   "akk": 32,
+   "omzet": 104788.38999999998,
+   "inkoop": 56408
+  },
+  "Facebook": {
+   "off": 21,
+   "akk": 4,
+   "omzet": 9817.949999999999,
+   "inkoop": 5300
+  },
+  "Online": {
+   "off": 1,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "winkel": {
+   "off": 34,
+   "akk": 3,
+   "omzet": 6727.969999999999,
+   "inkoop": 3167
+  },
+  "online": {
+   "off": 1,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "Sunny": {
+   "off": 20,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "Winkel": {
+   "off": 32,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  }
+ },
+ "product": {
+  "Rolluiken": {
+   "off": 3023,
+   "akk": 224,
+   "omzet": 672900.7900000003,
+   "inkoop": 356052
+  },
+  "Zonwering buiten": {
+   "off": 162,
+   "akk": 16,
+   "omzet": 102085.37,
+   "inkoop": 53272
+  },
+  "Screens": {
+   "off": 1918,
+   "akk": 97,
+   "omzet": 495278.0200000001,
+   "inkoop": 269417
+  },
+  "Pergola": {
+   "off": 1363,
+   "akk": 23,
+   "omzet": 208063.26,
+   "inkoop": 109207
+  },
+  "Knikarmscherm": {
+   "off": 1229,
+   "akk": 98,
+   "omzet": 370966.31,
+   "inkoop": 196401
+  },
+  "Markiezen": {
+   "off": 219,
+   "akk": 25,
+   "omzet": 81156.71,
+   "inkoop": 45397
+  },
+  "Voorraadscherm": {
+   "off": 1575,
+   "akk": 37,
+   "omzet": 138235.65999999997,
+   "inkoop": 73102
+  },
+  "Raamdecoratie binnen": {
+   "off": 111,
+   "akk": 33,
+   "omzet": 76941.62000000001,
+   "inkoop": 41926
+  },
+  "(leeg)": {
+   "off": 304,
+   "akk": 46,
+   "omzet": 171527.36999999997,
+   "inkoop": 82278
+  },
+  "Uitvalscherm": {
+   "off": 207,
+   "akk": 23,
+   "omzet": 67479.18,
+   "inkoop": 35491
+  },
+  "Reparatie": {
+   "off": 29,
+   "akk": 13,
+   "omzet": 13698.039999999999,
+   "inkoop": 5582
+  },
+  "Horren": {
+   "off": 1,
+   "akk": 1,
+   "omzet": 1236.75,
+   "inkoop": 669
+  },
+  "Prive": {
+   "off": 1,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  }
+ },
+ "maandAfkomst": {
+  "1|Instagram": {
+   "off": 371,
+   "akk": 18,
+   "omzet": 87422.10999999999,
+   "inkoop": 58841
+  },
+  "1|Google": {
+   "off": 217,
+   "akk": 20,
+   "omzet": 71218.14,
+   "inkoop": 35268
+  },
+  "1|Anders": {
+   "off": 20,
+   "akk": 2,
+   "omzet": 5986.4,
+   "inkoop": 3235
+  },
+  "1|Bekenden": {
+   "off": 15,
+   "akk": 5,
+   "omzet": 18933.29,
+   "inkoop": 10615
+  },
+  "1|(leeg)": {
+   "off": 11,
+   "akk": 10,
+   "omzet": 35266.63,
+   "inkoop": 20036
+  },
+  "1|Buren": {
+   "off": 5,
+   "akk": 2,
+   "omzet": 3587.99,
+   "inkoop": 1935
+  },
+  "1|Facebook": {
+   "off": 7,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "2|Instagram": {
+   "off": 433,
+   "akk": 29,
+   "omzet": 129871.75000000003,
+   "inkoop": 69192
+  },
+  "2|Google": {
+   "off": 283,
+   "akk": 22,
+   "omzet": 84969.16,
+   "inkoop": 46167
+  },
+  "2|Anders": {
+   "off": 39,
+   "akk": 8,
+   "omzet": 28710.130000000005,
+   "inkoop": 15635
+  },
+  "2|Bekenden": {
+   "off": 24,
+   "akk": 7,
+   "omzet": 21184.93,
+   "inkoop": 11259
+  },
+  "2|Buren": {
+   "off": 8,
+   "akk": 4,
+   "omzet": 13778.86,
+   "inkoop": 7035
+  },
+  "2|Facebook": {
+   "off": 5,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "2|(leeg)": {
+   "off": 3,
+   "akk": 1,
+   "omzet": 2783.75,
+   "inkoop": 1
+  },
+  "3|Instagram": {
+   "off": 789,
+   "akk": 71,
+   "omzet": 254063.72000000006,
+   "inkoop": 140205
+  },
+  "3|Anders": {
+   "off": 63,
+   "akk": 3,
+   "omzet": 6984.360000000001,
+   "inkoop": 3874
+  },
+  "3|Google": {
+   "off": 542,
+   "akk": 57,
+   "omzet": 200616.39,
+   "inkoop": 107575
+  },
+  "3|Bekenden": {
+   "off": 41,
+   "akk": 8,
+   "omzet": 21057.24,
+   "inkoop": 10630
+  },
+  "3|(leeg)": {
+   "off": 28,
+   "akk": 14,
+   "omzet": 63951.74999999999,
+   "inkoop": 35560
+  },
+  "3|Buren": {
+   "off": 33,
+   "akk": 10,
+   "omzet": 34573.82000000001,
+   "inkoop": 19423
+  },
+  "3|Facebook": {
+   "off": 3,
+   "akk": 2,
+   "omzet": 5206.4,
+   "inkoop": 2780
+  },
+  "4|Instagram": {
+   "off": 842,
+   "akk": 45,
+   "omzet": 157075.29,
+   "inkoop": 82125
+  },
+  "4|Anders": {
+   "off": 70,
+   "akk": 10,
+   "omzet": 50169.36,
+   "inkoop": 26516
+  },
+  "4|Google": {
+   "off": 567,
+   "akk": 33,
+   "omzet": 112200.94,
+   "inkoop": 57333
+  },
+  "4|Buren": {
+   "off": 29,
+   "akk": 6,
+   "omzet": 16377.22,
+   "inkoop": 8641
+  },
+  "4|Bekenden": {
+   "off": 49,
+   "akk": 9,
+   "omzet": 30550.17,
+   "inkoop": 16113
+  },
+  "4|(leeg)": {
+   "off": 32,
+   "akk": 19,
+   "omzet": 46400.450000000004,
+   "inkoop": 25286
+  },
+  "4|Facebook": {
+   "off": 2,
+   "akk": 2,
+   "omzet": 4611.55,
+   "inkoop": 2520
+  },
+  "4|Online": {
+   "off": 1,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "5|Google": {
+   "off": 669,
+   "akk": 40,
+   "omzet": 174681.19,
+   "inkoop": 92590
+  },
+  "5|Instagram": {
+   "off": 940,
+   "akk": 41,
+   "omzet": 190887.93999999997,
+   "inkoop": 96046
+  },
+  "5|Anders": {
+   "off": 74,
+   "akk": 5,
+   "omzet": 17624.02,
+   "inkoop": 9345
+  },
+  "5|Buren": {
+   "off": 25,
+   "akk": 4,
+   "omzet": 10430.66,
+   "inkoop": 6115
+  },
+  "5|Bekenden": {
+   "off": 49,
+   "akk": 10,
+   "omzet": 29587.79,
+   "inkoop": 15738
+  },
+  "5|Facebook": {
+   "off": 3,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "5|(leeg)": {
+   "off": 75,
+   "akk": 2,
+   "omzet": 7022,
+   "inkoop": 3459
+  },
+  "6|Instagram": {
+   "off": 824,
+   "akk": 19,
+   "omzet": 52929.909999999996,
+   "inkoop": 27503
+  },
+  "6|(leeg)": {
+   "off": 125,
+   "akk": 43,
+   "omzet": 147278.58999999997,
+   "inkoop": 65445
+  },
+  "6|Google": {
+   "off": 777,
+   "akk": 33,
+   "omzet": 171956.54000000004,
+   "inkoop": 88871
+  },
+  "6|Buren": {
+   "off": 24,
+   "akk": 6,
+   "omzet": 26039.84,
+   "inkoop": 13259
+  },
+  "6|Anders": {
+   "off": 97,
+   "akk": 3,
+   "omzet": 5704,
+   "inkoop": 2970
+  },
+  "6|Bekenden": {
+   "off": 66,
+   "akk": 5,
+   "omzet": 39707.1,
+   "inkoop": 20714
+  },
+  "6|Facebook": {
+   "off": 1,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "7|Instagram": {
+   "off": 912,
+   "akk": 2,
+   "omzet": 4785.5,
+   "inkoop": 2359
+  },
+  "7|Google": {
+   "off": 663,
+   "akk": 1,
+   "omzet": 1182.5,
+   "inkoop": 647
+  },
+  "7|Anders": {
+   "off": 83,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "7|Bekenden": {
+   "off": 63,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "7|Buren": {
+   "off": 20,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "7|winkel": {
+   "off": 34,
+   "akk": 3,
+   "omzet": 6727.969999999999,
+   "inkoop": 3167
+  },
+  "7|(leeg)": {
+   "off": 33,
+   "akk": 2,
+   "omzet": 5471.73,
+   "inkoop": 2766
+  },
+  "7|online": {
+   "off": 1,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "7|Sunny": {
+   "off": 20,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "7|Winkel": {
+   "off": 32,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  }
+ },
+ "maandProduct": {
+  "1|Rolluiken": {
+   "off": 298,
+   "akk": 23,
+   "omzet": 68309.96999999999,
+   "inkoop": 39192
+  },
+  "1|Zonwering buiten": {
+   "off": 12,
+   "akk": 1,
+   "omzet": 4465.05,
+   "inkoop": 2553
+  },
+  "1|Screens": {
+   "off": 74,
+   "akk": 9,
+   "omzet": 58197.81999999999,
+   "inkoop": 40206
+  },
+  "1|Pergola": {
+   "off": 130,
+   "akk": 4,
+   "omzet": 23238.42,
+   "inkoop": 9562
+  },
+  "1|Knikarmscherm": {
+   "off": 54,
+   "akk": 5,
+   "omzet": 21396.2,
+   "inkoop": 11866
+  },
+  "1|Markiezen": {
+   "off": 9,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "1|Voorraadscherm": {
+   "off": 27,
+   "akk": 3,
+   "omzet": 12218.48,
+   "inkoop": 6609
+  },
+  "1|Raamdecoratie binnen": {
+   "off": 21,
+   "akk": 3,
+   "omzet": 6599.99,
+   "inkoop": 4514
+  },
+  "1|(leeg)": {
+   "off": 8,
+   "akk": 5,
+   "omzet": 23409.989999999998,
+   "inkoop": 13438
+  },
+  "1|Uitvalscherm": {
+   "off": 9,
+   "akk": 1,
+   "omzet": 1622.65,
+   "inkoop": 900
+  },
+  "1|Reparatie": {
+   "off": 4,
+   "akk": 3,
+   "omzet": 2955.99,
+   "inkoop": 1090
+  },
+  "2|Screens": {
+   "off": 112,
+   "akk": 9,
+   "omzet": 33128.72,
+   "inkoop": 18499
+  },
+  "2|Rolluiken": {
+   "off": 316,
+   "akk": 27,
+   "omzet": 89166.32,
+   "inkoop": 46775
+  },
+  "2|Knikarmscherm": {
+   "off": 90,
+   "akk": 15,
+   "omzet": 68498.14,
+   "inkoop": 36926
+  },
+  "2|Pergola": {
+   "off": 150,
+   "akk": 4,
+   "omzet": 38327.07,
+   "inkoop": 21763
+  },
+  "2|Voorraadscherm": {
+   "off": 49,
+   "akk": 2,
+   "omzet": 6473.7,
+   "inkoop": 3555
+  },
+  "2|Raamdecoratie binnen": {
+   "off": 21,
+   "akk": 6,
+   "omzet": 19151.510000000002,
+   "inkoop": 9634
+  },
+  "2|Markiezen": {
+   "off": 17,
+   "akk": 1,
+   "omzet": 2953.05,
+   "inkoop": 1636
+  },
+  "2|Reparatie": {
+   "off": 8,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "2|Uitvalscherm": {
+   "off": 18,
+   "akk": 4,
+   "omzet": 14369.91,
+   "inkoop": 6994
+  },
+  "2|Zonwering buiten": {
+   "off": 10,
+   "akk": 1,
+   "omzet": 5209.66,
+   "inkoop": 2837
+  },
+  "2|(leeg)": {
+   "off": 3,
+   "akk": 1,
+   "omzet": 2783.75,
+   "inkoop": 1
+  },
+  "2|Horren": {
+   "off": 1,
+   "akk": 1,
+   "omzet": 1236.75,
+   "inkoop": 669
+  },
+  "3|Screens": {
+   "off": 201,
+   "akk": 19,
+   "omzet": 81105.23999999999,
+   "inkoop": 45615
+  },
+  "3|Rolluiken": {
+   "off": 492,
+   "akk": 56,
+   "omzet": 186120.92,
+   "inkoop": 101436
+  },
+  "3|Voorraadscherm": {
+   "off": 168,
+   "akk": 5,
+   "omzet": 15527.5,
+   "inkoop": 7957
+  },
+  "3|Knikarmscherm": {
+   "off": 258,
+   "akk": 34,
+   "omzet": 127129.22000000003,
+   "inkoop": 67856
+  },
+  "3|Pergola": {
+   "off": 218,
+   "akk": 6,
+   "omzet": 36901.079999999994,
+   "inkoop": 18604
+  },
+  "3|Zonwering buiten": {
+   "off": 24,
+   "akk": 3,
+   "omzet": 11496.05,
+   "inkoop": 6415
+  },
+  "3|Uitvalscherm": {
+   "off": 50,
+   "akk": 10,
+   "omzet": 29204.93,
+   "inkoop": 15877
+  },
+  "3|Markiezen": {
+   "off": 35,
+   "akk": 9,
+   "omzet": 24270.22,
+   "inkoop": 14263
+  },
+  "3|(leeg)": {
+   "off": 31,
+   "akk": 13,
+   "omzet": 56785.399999999994,
+   "inkoop": 31906
+  },
+  "3|Raamdecoratie binnen": {
+   "off": 13,
+   "akk": 6,
+   "omzet": 13302.23,
+   "inkoop": 7829
+  },
+  "3|Reparatie": {
+   "off": 9,
+   "akk": 4,
+   "omzet": 4610.889999999999,
+   "inkoop": 2289
+  },
+  "4|Uitvalscherm": {
+   "off": 56,
+   "akk": 7,
+   "omzet": 19090.69,
+   "inkoop": 10163
+  },
+  "4|Knikarmscherm": {
+   "off": 264,
+   "akk": 25,
+   "omzet": 84520.45000000001,
+   "inkoop": 44867
+  },
+  "4|Voorraadscherm": {
+   "off": 234,
+   "akk": 5,
+   "omzet": 16705.33,
+   "inkoop": 8941
+  },
+  "4|Screens": {
+   "off": 254,
+   "akk": 25,
+   "omzet": 107597.85999999999,
+   "inkoop": 56551
+  },
+  "4|Raamdecoratie binnen": {
+   "off": 25,
+   "akk": 3,
+   "omzet": 5282.3,
+   "inkoop": 2850
+  },
+  "4|Markiezen": {
+   "off": 48,
+   "akk": 3,
+   "omzet": 7968.48,
+   "inkoop": 4732
+  },
+  "4|Rolluiken": {
+   "off": 450,
+   "akk": 45,
+   "omzet": 127187.64000000001,
+   "inkoop": 65102
+  },
+  "4|Pergola": {
+   "off": 202,
+   "akk": 3,
+   "omzet": 25726.19,
+   "inkoop": 14528
+  },
+  "4|Zonwering buiten": {
+   "off": 39,
+   "akk": 3,
+   "omzet": 17295.010000000002,
+   "inkoop": 8289
+  },
+  "4|(leeg)": {
+   "off": 14,
+   "akk": 1,
+   "omzet": 1557,
+   "inkoop": 855
+  },
+  "4|Reparatie": {
+   "off": 5,
+   "akk": 4,
+   "omzet": 4454.03,
+   "inkoop": 1656
+  },
+  "4|Prive": {
+   "off": 1,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "5|Screens": {
+   "off": 282,
+   "akk": 13,
+   "omzet": 75243.77,
+   "inkoop": 37324
+  },
+  "5|Knikarmscherm": {
+   "off": 330,
+   "akk": 18,
+   "omzet": 65726.56,
+   "inkoop": 32955
+  },
+  "5|Zonwering buiten": {
+   "off": 64,
+   "akk": 5,
+   "omzet": 39015.600000000006,
+   "inkoop": 20395
+  },
+  "5|Rolluiken": {
+   "off": 504,
+   "akk": 38,
+   "omzet": 106365.99,
+   "inkoop": 55312
+  },
+  "5|Voorraadscherm": {
+   "off": 275,
+   "akk": 8,
+   "omzet": 38442.78,
+   "inkoop": 20183
+  },
+  "5|Uitvalscherm": {
+   "off": 63,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "5|Markiezen": {
+   "off": 34,
+   "akk": 6,
+   "omzet": 17508.77,
+   "inkoop": 9059
+  },
+  "5|Pergola": {
+   "off": 210,
+   "akk": 2,
+   "omzet": 37800.03,
+   "inkoop": 20999
+  },
+  "5|Raamdecoratie binnen": {
+   "off": 19,
+   "akk": 9,
+   "omzet": 22850.09,
+   "inkoop": 12139
+  },
+  "5|Reparatie": {
+   "off": 2,
+   "akk": 1,
+   "omzet": 841,
+   "inkoop": 342
+  },
+  "5|(leeg)": {
+   "off": 52,
+   "akk": 2,
+   "omzet": 26439.01,
+   "inkoop": 14585
+  },
+  "6|Rolluiken": {
+   "off": 457,
+   "akk": 33,
+   "omzet": 93256.74999999997,
+   "inkoop": 46961
+  },
+  "6|Zonwering buiten": {
+   "off": 13,
+   "akk": 3,
+   "omzet": 24604,
+   "inkoop": 12783
+  },
+  "6|(leeg)": {
+   "off": 141,
+   "akk": 20,
+   "omzet": 53152.51000000001,
+   "inkoop": 17572
+  },
+  "6|Knikarmscherm": {
+   "off": 133,
+   "akk": 1,
+   "omzet": 3695.74,
+   "inkoop": 1931
+  },
+  "6|Screens": {
+   "off": 507,
+   "akk": 21,
+   "omzet": 135204.62,
+   "inkoop": 69210
+  },
+  "6|Uitvalscherm": {
+   "off": 11,
+   "akk": 1,
+   "omzet": 3191,
+   "inkoop": 1557
+  },
+  "6|Voorraadscherm": {
+   "off": 406,
+   "akk": 13,
+   "omzet": 45393.07,
+   "inkoop": 24125
+  },
+  "6|Pergola": {
+   "off": 202,
+   "akk": 4,
+   "omzet": 46070.47,
+   "inkoop": 23751
+  },
+  "6|Markiezen": {
+   "off": 32,
+   "akk": 6,
+   "omzet": 28456.19,
+   "inkoop": 15707
+  },
+  "6|Raamdecoratie binnen": {
+   "off": 11,
+   "akk": 6,
+   "omzet": 9755.5,
+   "inkoop": 4960
+  },
+  "6|Reparatie": {
+   "off": 1,
+   "akk": 1,
+   "omzet": 836.13,
+   "inkoop": 205
+  },
+  "7|Pergola": {
+   "off": 251,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "7|Rolluiken": {
+   "off": 506,
+   "akk": 2,
+   "omzet": 2493.2,
+   "inkoop": 1274
+  },
+  "7|Screens": {
+   "off": 488,
+   "akk": 1,
+   "omzet": 4799.99,
+   "inkoop": 2012
+  },
+  "7|Voorraadscherm": {
+   "off": 416,
+   "akk": 1,
+   "omzet": 3474.8,
+   "inkoop": 1732
+  },
+  "7|Markiezen": {
+   "off": 44,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "7|(leeg)": {
+   "off": 55,
+   "akk": 4,
+   "omzet": 7399.709999999999,
+   "inkoop": 3921
+  },
+  "7|Knikarmscherm": {
+   "off": 100,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  },
+  "7|Raamdecoratie binnen": {
+   "off": 1,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  }
+ },
+ "maandGroep": {
+  "1|Meta": {
+   "off": 378,
+   "akk": 18,
+   "omzet": 87422.10999999999,
+   "inkoop": 58841
+  },
+  "1|Google": {
+   "off": 217,
+   "akk": 20,
+   "omzet": 71218.14,
+   "inkoop": 35268
+  },
+  "1|Anders": {
+   "off": 31,
+   "akk": 12,
+   "omzet": 41253.03,
+   "inkoop": 23271
+  },
+  "1|Buren/Bekenden": {
+   "off": 20,
+   "akk": 7,
+   "omzet": 22521.280000000002,
+   "inkoop": 12550
+  },
+  "2|Meta": {
+   "off": 438,
+   "akk": 29,
+   "omzet": 129871.75000000003,
+   "inkoop": 69192
+  },
+  "2|Google": {
+   "off": 283,
+   "akk": 22,
+   "omzet": 84969.16,
+   "inkoop": 46167
+  },
+  "2|Anders": {
+   "off": 42,
+   "akk": 9,
+   "omzet": 31493.880000000005,
+   "inkoop": 15636
+  },
+  "2|Buren/Bekenden": {
+   "off": 32,
+   "akk": 11,
+   "omzet": 34963.79,
+   "inkoop": 18294
+  },
+  "3|Meta": {
+   "off": 792,
+   "akk": 73,
+   "omzet": 259270.12000000002,
+   "inkoop": 142985
+  },
+  "3|Anders": {
+   "off": 91,
+   "akk": 17,
+   "omzet": 70936.11,
+   "inkoop": 39434
+  },
+  "3|Google": {
+   "off": 542,
+   "akk": 57,
+   "omzet": 200616.39,
+   "inkoop": 107575
+  },
+  "3|Buren/Bekenden": {
+   "off": 74,
+   "akk": 18,
+   "omzet": 55631.06,
+   "inkoop": 30053
+  },
+  "4|Meta": {
+   "off": 844,
+   "akk": 47,
+   "omzet": 161686.84,
+   "inkoop": 84645
+  },
+  "4|Anders": {
+   "off": 103,
+   "akk": 29,
+   "omzet": 96569.81,
+   "inkoop": 51802
+  },
+  "4|Google": {
+   "off": 567,
+   "akk": 33,
+   "omzet": 112200.94,
+   "inkoop": 57333
+  },
+  "4|Buren/Bekenden": {
+   "off": 78,
+   "akk": 15,
+   "omzet": 46927.38999999999,
+   "inkoop": 24754
+  },
+  "5|Google": {
+   "off": 669,
+   "akk": 40,
+   "omzet": 174681.19,
+   "inkoop": 92590
+  },
+  "5|Meta": {
+   "off": 943,
+   "akk": 41,
+   "omzet": 190887.93999999997,
+   "inkoop": 96046
+  },
+  "5|Anders": {
+   "off": 149,
+   "akk": 7,
+   "omzet": 24646.02,
+   "inkoop": 12804
+  },
+  "5|Buren/Bekenden": {
+   "off": 74,
+   "akk": 14,
+   "omzet": 40018.450000000004,
+   "inkoop": 21853
+  },
+  "6|Meta": {
+   "off": 825,
+   "akk": 19,
+   "omzet": 52929.909999999996,
+   "inkoop": 27503
+  },
+  "6|Anders": {
+   "off": 222,
+   "akk": 46,
+   "omzet": 152982.58999999997,
+   "inkoop": 68415
+  },
+  "6|Google": {
+   "off": 777,
+   "akk": 33,
+   "omzet": 171956.54000000004,
+   "inkoop": 88871
+  },
+  "6|Buren/Bekenden": {
+   "off": 90,
+   "akk": 11,
+   "omzet": 65746.94,
+   "inkoop": 33973
+  },
+  "7|Meta": {
+   "off": 912,
+   "akk": 2,
+   "omzet": 4785.5,
+   "inkoop": 2359
+  },
+  "7|Google": {
+   "off": 663,
+   "akk": 1,
+   "omzet": 1182.5,
+   "inkoop": 647
+  },
+  "7|Anders": {
+   "off": 203,
+   "akk": 5,
+   "omzet": 12199.699999999999,
+   "inkoop": 5933
+  },
+  "7|Buren/Bekenden": {
+   "off": 83,
+   "akk": 0,
+   "omzet": 0,
+   "inkoop": 0
+  }
+ },
+ "kanaalGroep": {
+  "Online|Meta": {
+   "off": 5024,
+   "akk": 176,
+   "omzet": 632942.9500000002,
+   "inkoop": 344227
+  },
+  "Online|Google": {
+   "off": 3617,
+   "akk": 159,
+   "omzet": 587300.66,
+   "inkoop": 305092
+  },
+  "Online|Anders": {
+   "off": 765,
+   "akk": 117,
+   "omzet": 399720.9400000002,
+   "inkoop": 201813
+  },
+  "Online|Buren/Bekenden": {
+   "off": 418,
+   "akk": 53,
+   "omzet": 178042.58,
+   "inkoop": 95142
+  },
+  "Winkel|Meta": {
+   "off": 108,
+   "akk": 53,
+   "omzet": 253911.22,
+   "inkoop": 137344
+  },
+  "Winkel|Google": {
+   "off": 101,
+   "akk": 47,
+   "omzet": 229524.19999999998,
+   "inkoop": 123359
+  },
+  "Winkel|Buren/Bekenden": {
+   "off": 33,
+   "akk": 23,
+   "omzet": 87766.33,
+   "inkoop": 46335
+  },
+  "Winkel|Anders": {
+   "off": 76,
+   "akk": 8,
+   "omzet": 30360.199999999997,
+   "inkoop": 15482
+  }
+ },
+ "maandKanaal": {
+  "1|Online": {
+   "off": 616,
+   "akk": 46,
+   "omzet": 183892.21,
+   "inkoop": 104608
+  },
+  "1|Winkel": {
+   "off": 30,
+   "akk": 11,
+   "omzet": 38522.35,
+   "inkoop": 25322
+  },
+  "2|Winkel": {
+   "off": 45,
+   "akk": 24,
+   "omzet": 112779.26000000001,
+   "inkoop": 62026
+  },
+  "2|Online": {
+   "off": 750,
+   "akk": 47,
+   "omzet": 168519.32,
+   "inkoop": 87263
+  },
+  "3|Online": {
+   "off": 1438,
+   "akk": 130,
+   "omzet": 451350,
+   "inkoop": 248347
+  },
+  "3|Winkel": {
+   "off": 61,
+   "akk": 35,
+   "omzet": 135103.68,
+   "inkoop": 71700
+  },
+  "4|Online": {
+   "off": 1555,
+   "akk": 104,
+   "omzet": 330595.68999999994,
+   "inkoop": 173554
+  },
+  "4|Winkel": {
+   "off": 37,
+   "akk": 20,
+   "omzet": 86789.29,
+   "inkoop": 44980
+  },
+  "5|Online": {
+   "off": 1795,
+   "akk": 77,
+   "omzet": 294945.58,
+   "inkoop": 151897
+  },
+  "5|Winkel": {
+   "off": 40,
+   "akk": 25,
+   "omzet": 135288.02,
+   "inkoop": 71396
+  },
+  "6|Online": {
+   "off": 1881,
+   "akk": 95,
+   "omzet": 356612.6100000001,
+   "inkoop": 174456
+  },
+  "6|Winkel": {
+   "off": 33,
+   "akk": 14,
+   "omzet": 87003.37000000001,
+   "inkoop": 44306
+  },
+  "7|Online": {
+   "off": 1789,
+   "akk": 6,
+   "omzet": 12091.72,
+   "inkoop": 6149
+  },
+  "7|Winkel": {
+   "off": 72,
+   "akk": 2,
+   "omzet": 6075.98,
+   "inkoop": 2790
+  }
+ },
+ "kanaal": {
+  "Online": {
+   "off": 9824,
+   "akk": 505,
+   "omzet": 1798007.1299999997,
+   "inkoop": 946274
+  },
+  "Winkel": {
+   "off": 318,
+   "akk": 131,
+   "omzet": 601561.95,
+   "inkoop": 322520
+  }
+ },
+ "totaal": {
+  "alles": {
+   "off": 10142,
+   "akk": 636,
+   "omzet": 2399569.080000001,
+   "inkoop": 1268794
+  }
+ }
+}

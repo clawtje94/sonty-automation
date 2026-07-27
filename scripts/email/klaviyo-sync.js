@@ -56,6 +56,20 @@ function tekstversie(html) {
 }
 
 (async () => {
+  // STIJLPOORT (Daimy 2026-07-27: "geen AI-slop, het moet Sonty ademen"). Een sjabloon dat de
+  // schrijfstijl niet haalt gaat niet naar Klaviyo. Zo kan het niet gebeuren dat er ooit een mail
+  // klaarstaat met gedachtestreepjes of kantoortaal erin, ook niet als iemand het even vergeet.
+  if (ECHT) {
+    const { execFileSync } = require('child_process');
+    try {
+      execFileSync(process.execPath, [require('path').join(__dirname, 'stijlcheck.js')], { stdio: 'inherit' });
+    } catch {
+      console.error('\nStijlcontrole niet gehaald. Er gaat niets naar Klaviyo tot de tekst klopt.');
+      process.exit(1);
+    }
+    console.log('');
+  }
+
   const bestaand = await api('templates/');
   if (!bestaand.ok) { console.error('Kan sjablonen niet ophalen: ' + bestaand.status + ' ' + bestaand.t.slice(0, 200)); process.exit(1); }
   const opNaam = new Map((bestaand.j.data || []).map((d) => [d.attributes.name, d.id]));

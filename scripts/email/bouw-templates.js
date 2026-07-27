@@ -122,7 +122,7 @@ const stappen = () => `
  ${[
     ['1', 'Jij geeft akkoord', 'Online ondertekenen met &eacute;&eacute;n klik, of gewoon even terugmailen.'],
     ['2', 'Wij komen inmeten', 'Tot op de millimeter, want maatwerk begint bij goed meten.'],
-    ['3', 'Productie op maat', 'Jouw maten, jouw kleur. Gemaakt in Nijkerk door Sunmaster.'],
+    ['3', 'Productie op maat', 'Jouw maten, jouw kleur. Gemaakt bij onze vaste leveranciers.'],
     ['4', 'Onze monteurs plaatsen', 'Eigen team in dienst, geen onderaannemers. Netjes achtergelaten.'],
   ].map(([n, kop, tekst]) => `
   <tr><td style="padding-bottom:12px;">
@@ -146,7 +146,7 @@ const stappen = () => `
 const garantie = () => `
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid ${M.lijn};border-radius:12px;" class="rand">
  <tr><td style="padding:20px 22px;${F};">
-   <div style="color:${M.tekst};font-size:15px;font-weight:700;" class="t-donker">Je zit nergens aan vast, en daarna ook niet</div>
+   <div style="color:${M.tekst};font-size:15px;font-weight:700;" class="t-donker">En daarna laten we je niet los</div>
    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="padding-top:12px;">
      <tr>
        ${[['3 jaar', 'op de montage'], ['5 jaar', 'op het product'], ['7 jaar', 'op de motor']]
@@ -168,9 +168,8 @@ const showroom = () => `
  <tr><td style="padding:20px 24px 24px;${F};">
    <div style="color:${M.tekst};font-size:17px;font-weight:800;">Liever eerst even zien en voelen?</div>
    <div style="color:${M.grijs};font-size:14px;line-height:1.6;padding-top:8px;">
-     Kleuren en stoffen zien er thuis anders uit dan op een scherm. In Rijswijk staat alles
-     opgesteld en kun je alles vastpakken. We nemen er rustig de tijd voor, ook op zaterdag.
-     Klanten die langskomen weten daarna bijna altijd precies wat ze willen.
+     Op een scherm zie je nooit hoe een kleur er in je eigen huis uitziet. In Rijswijk hangt
+     alles klaar. We nemen er rustig de tijd voor, ook op zaterdag, en je zit nergens aan vast.
    </div>
    <div style="padding-top:12px;">
      <a href="${M.site}/showroom" style="color:${M.oranje};${F};font-size:14px;font-weight:700;text-decoration:none;">Plan je bezoek &rsaquo;</a>
@@ -193,8 +192,8 @@ const assortiment = () => `
  <tr><td style="padding:24px 26px;${F};">
    <div style="font-size:17px;font-weight:800;color:${M.tekst};" class="t-donker">We doen alles onder één dak</div>
    <div style="font-size:14px;color:${M.grijs};line-height:1.6;padding-top:8px;" class="t-zacht">
-     Van zonwering buiten tot raamdecoratie binnen. Alles op maat gemaakt, alles door onze eigen
-     mensen geplaatst.
+     Van zonwering buiten tot raamdecoratie binnen. Alles op maat, en altijd geplaatst door onze
+     eigen mensen.
    </div>
    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="padding-top:16px;">
      <tr>
@@ -344,7 +343,7 @@ const SJABLONEN = {
     naam: 'Sonty - offerte',
     preheader: 'Even kijken of alles klopt, dan help ik je verder',
     kop: 'Hoi {{ first_name|default:"daar" }}, je offerte staat klaar',
-    intro: 'Je hebt sinds {{ person.sonty_offerte_datum_nl|default:"kort geleden" }} een offerte van ons liggen. Ik wil even checken of alles erin staat zoals jij het voor je ziet, en je laten zien wat je van ons kunt verwachten.',
+    intro: 'Je offerte van {{ person.sonty_offerte_datum_nl|default:"kort geleden" }} staat nog voor je klaar. Even checken of alles erin staat zoals jij het voor je ziet?',
     blokken: [
       offerteKaart(),
       knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
@@ -360,7 +359,7 @@ const SJABLONEN = {
     naam: 'Sonty - showroom-uitnodiging',
     preheader: 'Even zien en voelen voordat je beslist',
     kop: 'Wil je het eerst even zien?',
-    intro: 'Kleuren en stoffen zien er thuis anders uit dan op een scherm. In onze showroom in Rijswijk staat alles opgesteld: doeken, kleuren, motoren, alles wat je wilt vastpakken.',
+    intro: 'Op een scherm zie je nooit hoe een doek er echt uitziet. In Rijswijk hangt alles klaar, dus je kunt het gewoon even vastpakken.',
     blokken: [
       beeld('eigen/showroom-opening.webp', 'Klanten in de showroom van Sonty in Rijswijk', 'Onze showroom aan de Frijdastraat, ook op zaterdag open'),
       knop('Kies een moment', '{{ person.sonty_showroom_link|default:"https://www.sonty.nl/showroom" }}'),
@@ -376,7 +375,7 @@ const SJABLONEN = {
     naam: 'Sonty - verhaal',
     preheader: 'Even laten zien wat er mogelijk is',
     kop: '{{ person.sonty_verhaal_kop|default:"Je zocht ooit zonwering" }}',
-    intro: '{{ person.sonty_verhaal_intro|default:"Is het er destijds nooit van gekomen? Dat gebeurt vaker dan je denkt. Even laten zien wat er nu mogelijk is, en wat het tegenwoordig kost." }}',
+    intro: '{{ person.sonty_verhaal_intro|default:"Is het er nooit van gekomen? Gebeurt vaker dan je denkt. Even laten zien wat er nu kan, en wat het kost." }}',
     blokken: [
       beeld('eigen/knikarm-gevel.webp', 'Zonwering van Sonty op een woning', 'Een van onze projecten: zonwering die de warmte buiten houdt'),
       knop('{{ person.sonty_verhaal_cta|default:"Bekijk wat het nu kost" }}', '{{ person.sonty_verhaal_link|default:"https://www.sonty.nl" }}'),
@@ -393,7 +392,7 @@ const SJABLONEN = {
     naam: 'Sonty - service en nazorg',
     preheader: 'Even checken of alles naar wens is',
     kop: 'Alles naar wens, {{ first_name|default:"daar" }}?',
-    intro: 'Je {{ person.sonty_product|default:"zonwering" }} is geplaatst. Ik hoor graag even of alles goed werkt en of je tevreden bent over hoe het is afgewerkt. Is er iets niet goed, laat het dan gewoon weten; dan lossen we het op.',
+    intro: 'Je {{ person.sonty_product|default:"zonwering" }} is geplaatst. Werkt alles naar behoren en ben je tevreden over de afwerking? Is er iets niet goed, laat het gewoon even weten. Dan lossen we het op.',
     blokken: [
       garantie(),
       knop('{{ person.sonty_service_cta|default:"Laat het ons weten" }}', '{{ person.sonty_service_link|default:"https://www.sonty.nl/contact" }}'),
@@ -401,9 +400,9 @@ const SJABLONEN = {
         <tr><td style="padding:20px 22px;${F};">
           <div style="color:${M.tekst};font-size:15px;font-weight:700;">Onderhoud: heel simpel</div>
           <div style="color:${M.grijs};font-size:14px;line-height:1.65;padding-top:8px;">
-            Doek vuil? Even afspoelen met een tuinslang op een droge, zonnige dag en uitgestrekt laten drogen.
-            Haal hem bij harde wind altijd in, ook als er een windsensor op zit. Verder heeft je zonwering
-            nauwelijks aandacht nodig.
+            Doek vuil? Even afspoelen met de tuinslang op een droge dag, en uitgestrekt laten drogen.
+            Haal hem bij harde wind altijd in, ook met een windsensor erop. Verder heeft hij nauwelijks
+            aandacht nodig.
           </div>
         </td></tr>
       </table>`,

@@ -352,7 +352,29 @@ function aanMensToegewezen(t) {
 }
 
 async function verwerkTicket(t, state) {
-  if (aanMensToegewezen(t)) {
+  // VERSE TEAM-OPDRACHT OVERRULET DE BLOKKADES (Daimy 2026-07-27, na drie keer terugkomen op
+  // hetzelfde). Er zitten meerdere terechte redenen in deze functie om van een gesprek af te
+  // blijven: het ligt bij een collega, een collega stuurde het laatste bericht, het ligt in de
+  // Mens nodig-map, of het is eerder geëscaleerd. Maar zet iemand van het team er expliciet
+  // "@sunny antwoord" bij, dan is dat juist een opdracht om het WEL te doen, en hoort geen van
+  // die redenen dat tegen te houden.
+  // Concreet geval: ticket 966697967 (Rob). Het laatste echte uitgaande bericht kwam uit Daimy's
+  // account, waardoor de bot er permanent vanaf bleef, ook nadat Daimy zelf om een antwoord vroeg.
+  t._verseOpdracht = false;
+  try {
+    const vm = t._msgs || await haalBerichten(t.id);
+    t._msgs = vm;
+    const intern = (vm?.data || []).filter((m) => m.internal_note || m.type === 'NOTE');
+    const opdrachten = intern.filter((m) => /@s[ou]nny(?!\d)/i.test(String(m.body || m.message || '')) && !String(m.body || m.message || '').includes('✅'));
+    if (opdrachten.length) {
+      const laatsteOpdracht = opdrachten.map((m) => String(m.created_at)).sort().pop();
+      const laatsteVink = intern.filter((m) => String(m.body || m.message || '').includes('✅')).map((m) => String(m.created_at)).sort().pop();
+      t._verseOpdracht = !laatsteVink || laatsteOpdracht > laatsteVink;
+      if (t._verseOpdracht) console.log(`  [${t.id}] verse team-opdracht (@sonny) → blokkades worden overgeslagen`);
+    }
+  } catch { /* lukt het niet, dan gelden de normale blokkades gewoon */ }
+
+  if (aanMensToegewezen(t) && !t._verseOpdracht) {
     // Toegewezen aan een collega → nooit ANTWOORDEN, maar @sonny-notities WEL verwerken
     // (Daimy 23-07: dagstand-feedback op een aan hem toegewezen ticket werd gemist).
     try {
@@ -392,7 +414,7 @@ async function verwerkTicket(t, state) {
   {
     const laatsteUit = (msgs?.data || []).filter(m => m.type === 'OUTBOUND' && !m.internal_note)
       .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0];
-    if (laatsteUit && laatsteUit.user_id && Number(laatsteUit.user_id) !== 747786) {
+    if (laatsteUit && laatsteUit.user_id && Number(laatsteUit.user_id) !== 747786 && !t._verseOpdracht) {
       // Daimy zelf nooit automatisch toewijzen (Daimy 23-07) — bot blijft er wel vanaf
       if (t.status !== 'CLOSED' && Number(laatsteUit.user_id) !== 736327 && Number(t.user_id) !== Number(laatsteUit.user_id)) {
         try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: laatsteUit.user_id }); console.log(`  [${t.id}] laatste bericht van collega (user ${laatsteUit.user_id}) → aan hen toegewezen, bot eraf`); } catch (e) { console.error(`  [${t.id}] collega-toewijzing FOUT: ${e.message}`); }
@@ -409,8 +431,8 @@ async function verwerkTicket(t, state) {
     const ruweBerichten = msgs?.data || [];
     const overdrachten = ruweBerichten.filter(m => (m.internal_note || m.type === 'NOTE') && m.user_id === 747786 &&
       (/@jorren745487[\s\S]*@tanya748440/.test(String(m.body || m.message || '')) || /De AI kan dit niet zelf afhandelen en draagt het over/i.test(String(m.body || m.message || ''))));
-    if (isWaTicket(t) && overdrachten.length) {
-      if (Number(t.team_id) === 431872) return; // ligt al in de Mens nodig-map, team ziet het
+    if (isWaTicket(t) && overdrachten.length && !t._verseOpdracht) {
+      if (Number(t.team_id) === 431872 && !t._verseOpdracht) return; // ligt al in de Mens nodig-map, team ziet het
       const laatsteKlant = ruweBerichten.filter(m => m.type === 'INBOUND').map(m => String(m.created_at)).sort().pop() || '';
       const laatsteOverdracht = overdrachten.map(m => String(m.created_at)).sort().pop() || '';
       if (laatsteKlant > laatsteOverdracht) {
@@ -948,6 +970,7 @@ async function verwerkTerugkomers() {
 }
 
 let laatsteActiefSweep = 0;
+let laatsteNotitieSweep = 0;
 let laatsteTerugkomerCheck = 0;
 
 async function pollRonde(state, { onlyTest, sonnyOnly }) {
@@ -1016,6 +1039,48 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
       await new Promise(r => setTimeout(r, 300));
     }
   }
+  // NOTITIE-SWEEP (Daimy 2026-07-27, derde poging op dit probleem). Een @sonny-notitie duwt een
+  // ticket NIET omhoog in de ticketlijst: latest_message_at blijft op het laatste echte bericht
+  // staan. Een oud gesprek met een verse opdracht zakt dus weg voorbij de pagina's die we scannen,
+  // en de actief-sweep hierboven pakt alleen gesprekken uit actieve-tickets.json. Precies wat
+  // gebeurde bij ticket 966697967: om 10:53 kwam er "@sunny antwoord" en de bot zag het nooit.
+  //
+  // Daarom hier één keer per 5 minuten álle open en toegewezen WhatsApp-tickets langslopen en per
+  // ticket alleen pagina 1 van de berichten ophalen. Dat is genoeg: Trengo geeft nieuwste eerst,
+  // dus een verse notitie staat er altijd op. Eén call per ticket, met throttle.
+  if (!specificTicket && Date.now() - laatsteNotitieSweep > 5 * 60000) {
+    laatsteNotitieSweep = Date.now();
+    try {
+      const kandidaten = [];
+      for (const status of ['OPEN', 'ASSIGNED']) {
+        for (let p = 1; p <= 40; p++) {
+          const data = await tGet(`/tickets?status=${status}&page=${p}`);
+          const rows = (data?.data || []).filter(isWaTicket);
+          kandidaten.push(...rows);
+          if (!data?.links?.next || (data?.data || []).length < 25) break;
+        }
+      }
+      const alBekend = new Set(tickets.map((t) => String(t.id)));
+      let erbij = 0;
+      for (const kt of kandidaten) {
+        if (alBekend.has(String(kt.id))) continue;
+        const msgs = await tGet(`/tickets/${kt.id}/messages`);
+        const intern = (msgs?.data || []).filter((m) => m.internal_note || m.type === 'NOTE');
+        const opdrachten = intern.filter((m) => /@s[ou]nny(?!\d)/i.test(String(m.body || m.message || '')) && !String(m.body || m.message || '').includes('✅'));
+        if (!opdrachten.length) continue;
+        const laatsteOpdracht = opdrachten.map((m) => String(m.created_at)).sort().pop();
+        const laatsteVink = intern.filter((m) => String(m.body || m.message || '').includes('✅')).map((m) => String(m.created_at)).sort().pop();
+        if (laatsteVink && laatsteVink > laatsteOpdracht) continue; // al afgehandeld
+        kt._msgs = msgs; // hergebruiken, scheelt een tweede call in verwerkTicket
+        tickets.push(kt);
+        erbij++;
+        console.log(`  notitie-sweep: ticket ${kt.id} heeft een openstaande @sonny-opdracht van ${laatsteOpdracht}`);
+        await new Promise((r) => setTimeout(r, 90));
+      }
+      if (erbij) console.log(`  notitie-sweep: ${erbij} gesprek(ken) met een openstaande opdracht toegevoegd`);
+    } catch (e) { console.error('  notitie-sweep FOUT:', e.message); }
+  }
+
   // Parallel met 3 werkers i.p.v. één voor één: een agent-run duurt 1-4 min, waardoor
   // @sonny-notities en klantberichten anders minutenlang in de rij stonden (klacht Daimy
   // 17 juli: "waarom duurt mijn reactie op de comments steeds zo lang?"). Claim-early +

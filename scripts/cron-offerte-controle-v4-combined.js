@@ -2124,6 +2124,29 @@ async function main() {
           params,
         })
       });
+      if (!waRes.ok) {
+        // MISLUKTE VERZENDING LAAT EEN LEEG TICKET ACHTER (Daimy 27 juli). Trengo maakt het
+        // ticket aan zodra de wa_sessions-aanroep binnenkomt, ook als Meta het bericht daarna
+        // weigert. Het sluiten hieronder gebeurde alleen bij succes, dus bleef er een open leeg
+        // ticket op naam van Sunny staan. Op 27 juli waren dat er 22, allemaal van template
+        // 242731 die bij Meta nog in review stond terwijl Trengo hem als goedgekeurd toonde.
+        // Erger nog: de offerte werd wél als verstuurd afgevinkt, terwijl de klant niets kreeg.
+        let fouttekst = ''; try { fouttekst = (await waRes.text()).slice(0, 200); } catch {}
+        console.log(`  VERZENDEN MISLUKT naar ${telefoon} (${waRes.status}): ${fouttekst}`);
+        try {
+          const jj = JSON.parse(fouttekst.startsWith('{') ? fouttekst : '{}');
+          const legeTicket = jj?.message?.ticket_id;
+          if (legeTicket) await fetchRetry(`https://app.trengo.com/api/v2/tickets/${legeTicket}/close`, { method: 'POST', headers: { Authorization: 'Bearer ' + TRENGO_TOKEN, 'Content-Type': 'application/json' } }).catch(() => {});
+        } catch {}
+        // NIET afvinken als verstuurd: dan probeert de volgende ronde het opnieuw en valt de
+        // klant niet stil. Wel melden, want anders merkt niemand het.
+        try {
+          await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: 1700128390, text: `⚠️ Offerte-WhatsApp MISLUKT naar ${voornaam || '?'} (${telefoon}). Template ${hsmId}${abVariant ? ' (' + abVariant + ')' : ''}. Melding: ${fouttekst.slice(0, 150)}\n\nDe klant heeft NIETS ontvangen en is niet afgevinkt, dus de volgende ronde probeert het opnieuw.` }),
+          });
+        } catch {}
+      }
       if (waRes.ok) {
         let waData; try { waData = await waRes.json(); } catch { waData = null; }
         if (waData?.message?.ticket_id) {

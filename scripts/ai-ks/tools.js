@@ -285,6 +285,35 @@ async function runTool(name, input, ctx) {
     // klanten die zijn doorgezet (341 klantberichten): alle 33 houden een akkoord over.
     const AKKOORD_TAAL = /(akkoord|in orde|in gang|onderteken|getekend|tekenen is gelukt|geaccepteerd|ga (ik|we) (mee|voor)|doe (ik|we) het|mag (het|je|hij)|graag (een |het )?(afspraak|inmeet|meting|langskomen|komen|verder)|willen (we|wij) (graag )?(dat|een|verder)|(we|wij) willen graag|kunnen jullie|langs ?komen|laten inmeten|zet (maar|het) door|is goed|is prima|prima|deal|dit is hem|bevestiging|toppers|dank dat het|schedule|appointment|proceed|go ahead|sounds good|please do|let'?s do)/i;
     const citaatRuw = String(input.akkoordCitaat || '');
+
+    // EEN ONDERTEKENDE OFFERTE IS OOK AKKOORD (Daimy 2026-07-27, ging fout bij Tim Remmel).
+    // Tekent een klant online in het document, dan staat er nooit een akkoord-zin in de chat.
+    // De guard hierboven blokkeerde daardoor een klant die alles al had getekend: de bot moest
+    // escaleren en zei tegen hem "zodra jij akkoord geeft op de offerte", waarop Tim terecht
+    // antwoordde "ik heb al getekend". Een offerte met status ACCEPTED is beter bewijs dan een
+    // zin in een chat, dus die telt hier gewoon als akkoord.
+    let getekendeOfferte = null;
+    if ((CFG.MODE === 'live' || ctx.liveTest) && input.itemId) {
+      try {
+        const it = await (await fetch(`https://backend.reuzenpanda.nl/contact-service/${CFG.RP_PID}/backlogs/${CFG.RP_BACKLOG}/items/${input.itemId}`,
+          { headers: { Authorization: 'Bearer ' + CFG.RP_API_KEY } })).json();
+        const lcId = (it.item || it)?.item_subject?.id;
+        if (lcId) {
+          const q = await (await fetch(`https://backend.reuzenpanda.nl/document-service/v1/${CFG.RP_PID}/quotations?lead_configuration_id=${lcId}`,
+            { headers: { Authorization: 'Bearer ' + CFG.RP_API_KEY } })).json();
+          const getekend = (q?.quotationDatas || []).find(d => /ACCEPTED|SIGNED/i.test(String(d.quotationStatus || '')));
+          if (getekend) getekendeOfferte = getekend.quotationNumber || 'ja';
+        }
+      } catch { /* lukt de controle niet, dan valt hij terug op de citaat-eis hieronder */ }
+    }
+    if (getekendeOfferte) {
+      ctx.acties.push({ type: 'inmeet_afspraak', ...input, akkoordBron: `offerte ${getekendeOfferte} is ondertekend` });
+      return JSON.stringify({
+        status: 'DOORGEZET',
+        opmerking: `De klant heeft offerte ${getekendeOfferte} al online ondertekend, dus het akkoord staat vast. Het dossier gaat naar Inmeten inplannen. Zeg NIET meer "zodra je akkoord geeft" — bevestig gewoon dat het geregeld is en dat de planning binnen 3 werkdagen belt.`,
+      });
+    }
+
     if ((CFG.MODE === 'live' || ctx.liveTest) && !AKKOORD_TAAL.test(citaatRuw)) {
       return JSON.stringify({
         status: 'GEBLOKKEERD',

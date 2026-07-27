@@ -99,3 +99,20 @@ for (const f of fouten) console.log('  ' + f);
 
 if (valsPositief || valsNegatief) { console.error('\nGEFAALD'); process.exit(1); }
 console.log('\nGESLAAGD: alle echte akkoorden gaan door, alle hallucinaties en niet-akkoorden worden geweigerd.');
+
+// ── DEEL 3: een ondertekende offerte telt óók als akkoord ──
+// Toegevoegd 27 juli na Tim Remmel (ticket 968210427). Hij tekende online, dus er stond nooit
+// een akkoord-zin in de chat. De guard blokkeerde daardoor, de bot moest escaleren en zei
+// "zodra jij akkoord geeft op de offerte", waarop Tim terecht antwoordde "ik heb al getekend".
+// Deze test bewaakt dat de status-route in tools.js blijft bestaan, want die is de enige
+// uitweg voor klanten die in het document tekenen in plaats van in de chat.
+{
+  const src2 = fs.readFileSync(path.join(ROOT, 'scripts/ai-ks/tools.js'), 'utf8');
+  const heeftStatusRoute = /ACCEPTED\|SIGNED/.test(src2) && /getekendeOfferte/.test(src2);
+  console.log(`\nOndertekende offerte telt als akkoord: ${heeftStatusRoute ? 'ja (goed)' : 'NEE'}`);
+  if (!heeftStatusRoute) {
+    console.error('GEFAALD: de route die een ACCEPTED offerte als akkoord accepteert is weg. Klanten die');
+    console.error('online tekenen worden dan opnieuw geblokkeerd, zoals bij Tim Remmel op 27 juli.');
+    process.exit(1);
+  }
+}

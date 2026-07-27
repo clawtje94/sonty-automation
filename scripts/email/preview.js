@@ -18,22 +18,24 @@ const SHOTS = path.join(__dirname, 'previews');
 
 // Realistische voorbeeldklant. Bewust een echt ogende offerte, want een lege of nette
 // "Test Test"-waarde verbergt juist de problemen (te lange productnaam, groot bedrag).
+// De veldnamen komen exact overeen met wat klaviyo-profielen.js in Klaviyo zet. Wijkt dit af,
+// dan ziet een preview er goed uit terwijl de echte mail lege plekken heeft; dat gebeurde in de
+// ronde van 27 juli, waarin de offertekaart in de preview leeg bleef.
 const VOORBEELD = {
   'first_name': 'Marleen',
-  'person.product': 'Zip Design 110 zipscreens (2x, solar)',
-  'person.offertenummer': '20269576',
-  'person.geldig_tot': '3 augustus 2026',
-  'person.bedrag': '€ 4.500,00',
-  'person.offerte_datum': '21 juli',
-  'person.offerte_link': 'https://document.reuzenpanda.nl/voorbeeld',
-  'person.showroom_link': 'https://www.sonty.nl/showroom',
-  'person.verhaal_kop': 'Je zocht ooit een knikarmscherm',
-  'person.verhaal_intro': 'Is het er destijds nooit van gekomen? Dat gebeurt vaker dan je denkt. Even laten zien wat er nu mogelijk is.',
-  'person.verhaal_tekst': 'Onze eigen montageteams plaatsen alles zelf, en we werken uitsluitend met A-merken. Daardoor weet je vooraf wat je krijgt en bij wie je terechtkunt als er iets is.',
-  'person.verhaal_cta': 'Bekijk wat het nu kost',
-  'person.verhaal_link': 'https://www.sonty.nl',
-  'person.service_cta': 'Laat het ons weten',
-  'person.service_link': 'https://www.sonty.nl/contact',
+  'person.sonty_product': 'Zip Design 110 zipscreens (2x, solar)',
+  'person.sonty_offertenummer': '20269576',
+  'person.sonty_geldig_tot': '3 augustus 2026',
+  'person.sonty_bedrag': '€ 4.500,00',
+  'person.sonty_offerte_datum_nl': '21 juli 2026',
+  'person.sonty_offerte_link': 'https://document.reuzenpanda.nl/voorbeeld',
+  'person.sonty_showroom_link': 'https://www.sonty.nl/showroom',
+  'person.sonty_verhaal_kop': 'Je zocht ooit een knikarmscherm',
+  'person.sonty_verhaal_intro': 'Is het er destijds nooit van gekomen? Dat gebeurt vaker dan je denkt. Even laten zien wat er nu mogelijk is, en wat het tegenwoordig kost.',
+  'person.sonty_verhaal_cta': 'Bekijk wat het nu kost',
+  'person.sonty_verhaal_link': 'https://www.sonty.nl',
+  'person.sonty_service_cta': 'Laat het ons weten',
+  'person.sonty_service_link': 'https://www.sonty.nl/contact',
 };
 
 /** Vervangt {{ x|default:"y" }} en {{ x }} door de voorbeeldwaarde, of anders door de default. */

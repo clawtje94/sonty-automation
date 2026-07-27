@@ -64,7 +64,10 @@ function tekstversie(html) {
   for (const [bestandsnaam, weergavenaam] of Object.entries(NAMEN)) {
     const html = fs.readFileSync(path.join(DIST, bestandsnaam + '.html'), 'utf8');
     const bestaatId = opNaam.get(weergavenaam);
-    const attrs = { name: weergavenaam, editor_type: 'CODE', html, text: tekstversie(html) };
+    // editor_type mag alleen mee bij AANMAKEN. Bij een update weigert Klaviyo het veld met
+    // "'editor_type' is not a valid field for the resource 'template'".
+    const attrs = { name: weergavenaam, html, text: tekstversie(html) };
+    if (!bestaatId) attrs.editor_type = 'CODE';
 
     if (!ECHT) {
       console.log(`${bestaatId ? 'ZOU BIJWERKEN' : 'ZOU AANMAKEN'}: ${weergavenaam} (${(html.length / 1024).toFixed(1)} kB)`);

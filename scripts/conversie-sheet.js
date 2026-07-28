@@ -7,6 +7,8 @@ const fs = require('fs');
 const ID = '1NesKeIKLVOLJjSy-fqo5KXrEVG2VJTYSfjgN7EHY85g';
 // Tabnamen zijn per jaar net anders gespeld (emoji, trailing spaces) — exact overnemen.
 const JAREN = {
+  // 2024 begint pas in mei; de maanden ervoor staan niet als los tabblad in de sheet.
+  2024: {'Mei 2024':5,'Juni 2024':6,'Juli 2024':7,'Aug 2024':8,'Sep 2024':9,'Okt 2024':10,'Nov 2024':11,'Dec 2024':12},
   2025: {'Jan 2025':1,'Feb 2025 🐸':2,'Maart 2025':3,'April 2025':4,'Mei 2025 ':5,'Juni 2025':6,
          'Juli 2025':7,'Aug 2025':8,'Sep 2025':9,'Okt 2025':10,'Nov 2025':11,'Dec 2025':12},
   2026: {'Jan 2026':1,'Feb 2026':2,'Maart 2026':3,'April 2026':4,'Mei 2026':5,'Juni 2026 ':6,'Juli 2026':7},

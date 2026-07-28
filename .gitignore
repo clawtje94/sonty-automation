@@ -94,3 +94,4 @@ data/conversie-2026-raw.json
 # Klantdata-export voor de e-mailcampagnes (persoonsgegevens, hoort niet in git)
 data/email/
 scripts/email/previews/
+data/conversie-2024-raw.json

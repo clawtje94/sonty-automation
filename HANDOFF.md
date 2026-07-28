@@ -9,6 +9,14 @@
 - Uitkomsten 2025: 9.198 offertes, 1.089 akkoord (11,8%), €4,07 mln omzet, €1,84 mln productmarge. Google 14,5% vs Meta 6,8%. Winkel 67,1% vs online 10,0% (301 offertes = 3,3% maar 24% van de omzet). Zomerdip jun-aug 9,2% vs jan-mei 15,2% = ~€400k gemiste marge. Pergola+voorraadscherm 1.610 offertes voor 38 akkoorden.
 - **Nieuwe data-bot @Sontydatabot** (apart van de gewone bot): poller `tools/sonty-data-poll.js` via launchd `nl.sonty.databot-poll`, inbox `sonty-data-inbox.txt`, lezen met `node scripts/read-sonty-data.js`, sturen met `node scripts/sonty-data-send.js "tekst"`. Chat_id staat NIET hardcoded maar in `.sonty-data-chat.json` (vastgelegd bij Daimy's eerste bericht, id 1700128390). Alle Sonty-datavragen gaan hierlangs.
 - **2026 TOEGEVOEGD (27 juli)**: extractie is nu jaar-onafhankelijk (`node scripts/conversie-sheet.js --jaar 2026` → `maak-conversie-tabellen.js --jaar 2026` → `bouw-conversie-rapport.js`; vergelijking los via `conversie-vergelijk.js`). **Jan t/m apr, in beide jaren uitgerijpt: 2.192 → 4.532 offertes (+107%), 367 → 417 akkoorden (+14%), conversie 16,7% → 9,2%.** De daling zit bij ELK kanaal: Google 19,8→8,2%, Meta 11,1→6,8%, buren/bekenden 55,2→25,0%, showroom 70→52%. Dat wijst op verwerkingscapaciteit, niet op leadkwaliteit. Pergola+voorraadscherm 2026: 2.938 offertes (29% van alles) voor 60 akkoorden (9%).
+- **ADVERTEERPLAN AUG-FEB (28 juli)**: https://claude.ai/code/artifact/ed482277-3ca2-477e-9cee-847c4f2b6d16 (bron `data/adverteerplan.html` via `scripts/bouw-adverteerplan.js` uit `scripts/seizoensplan.js` -> `data/seizoensplan.json`). 2024 (mei t/m dec) is toegevoegd aan de extractie, dus aug-dec staat op twee seizoenen.
+  - **Rangschikt op MARGE PER OFFERTE**, niet op conversie of omzet: de schaarse hulpbron is offertecapaciteit (~35 orders/wk), niet advertentiegeld. Pergola levert 3.500 marge per order maar sluit op 2,5% = 89 euro per offerte, de slechtste besteding.
+  - Per kanaal aug-feb: buren/bekenden €634, Anders €357, Google €232, Meta €112 per offerte. Google verslaat Meta in ALLE 7 maanden.
+  - Per product: raamdeco binnen €367, knikarm €307, reparatie €287, zonwering buiten €239, screens €204, rolluiken €186, voorraadscherm €91, pergola €89.
+  - **53,9% van de capaciteit gaat naar combinaties onder €140/offerte (€367k marge); 33,5% naar boven €230 (€678k).** Meta-Rolluiken alleen is 24,7% van de capaciteit à €131; via Google €237.
+  - Seizoen: zonwering buiten = aug t/m okt (51% van najaarsvraag in aug, dood in nov); raamdeco binnen + reparatie = winterwerk; rolluiken enige met volume elke maand. November is de beste maand per offerte (€255) en krijgt nu het minste volume.
+- **NAKOMERS GEKWANTIFICEERD**: op een volledig uitgerijpt cohort (jan-apr 2025) zag je op dag 89 al 97,8% van het eindtotaal. Jan-apr 2026 staat nu op dag 89, dus 9,2% wordt hooguit ~9,4%. Nakomers verklaren 0,2pp van een gat van 7,5pp.
+- **AI-KS EFFECT NOG NIET MEETBAAR**: log start 3 juli 2026, juli-offertes zijn niet uitgerijpt. Eerste eerlijke meting half oktober (augustus op dag 45 = 96,5% rijp), dan aug 2026 tegen aug 2025 op hetzelfde rijpingspunt. AI-KS eigen tellers over 10 dagen: 213 geholpen, 63 akkoord inmeten, 21 showroomafspraken, 34 overtuigd — zit nog in de pijplijn. WACHT OP DAIMY of ik die meting klaarzet.
 - **CAPACITEITSMONITOR LIVE (27 juli)**: `scripts/capaciteitsmonitor.js` draait wekelijks via launchd `nl.sonty.capaciteit` (ma 08:30) en post OPSCHALEN/VASTHOUDEN/AFSCHALEN in de data-bot. Leest de sheet live (huidig + vorig jaar). Drempels in `data/capaciteit-config.json`, laatste stand in `data/capaciteit-laatste.json`. Handmatig: `node scripts/capaciteitsmonitor.js [--stuur]`.
   - **Kerngetal: het team sluit max ~35 orders/week** (beste 4 aaneengesloten weken, 2026-W13..W16). Dat plafond bewoog niet tussen 2025 en 2026 terwijl de instroom verdubbelde. Capaciteit wordt gemeten als beste-4-weken, niet aangenomen.
   - Stand 27-07: instroom 500 offertes/wk, verwerking 25 orders/wk, ratio 15,0 (gezond = 8), verzadiging 177% → AFSCHALEN naar ~282/wk. Output is gezakt (25 vs 35 gehaald) terwijl instroom steeg = te volle wachtrij.
@@ -548,3 +556,25 @@ Alles in memory: `~/.claude/projects/-Users-clawdboot/memory/reference_sonty_cre
   gesprekken, teruggeluisterd via STT-audio-analyse (81 schoon, 0 echte uitspraakfouten).
 - Volledige status en open punten: docs/voicebot-pilot-plan.md. Scripts: scripts/sunny-testbank.js,
   scripts/bas-voicetest-runner.js, scripts/bas-audio-analyse.js.
+
+## 2026-07-28: go-live audit sonty.nl -> Vercel (alles geverifieerd, nog NIETS gefixt)
+Volledige A-tot-Z check gedaan op ~/sonty-website. Geen code gewijzigd, alleen vastgesteld.
+
+WERKT AANTOONBAAR: `npm run build` exit 0; 38/38 smoketests desktop en 38/38 mobiel; alle hoofdpagina's 200; admin-API's 401; configurator 11/11 producten groen + flow handmatig doorlopen zonder console-/HTTP-fouten; configurator-backend maakt echte leads in KV met complete prijsregels (8 stuks); securityheaders, robots, sitemap, schema.org, cookiebanner-met-consent aanwezig.
+
+BLOKKERS (geverifieerd, niet beredeneerd):
+1. `/api/bellijst` publiek open -> 50 KB echte klantnamen/telefoons/mails. HubSpot-token hardcoded in app/api/bellijst/route.ts:3, lib/belscherm.ts:5, scripts/belscherm-sim.mjs:15. Token roteren.
+2. `/api/offerte-tool` GET+POST zonder auth: prijsopbouw, klant-PDF's via ?action=pdf, offertes aanmaken.
+3. CRON_SECRET ontbreekt; UA-fallback "vercel-cron" is spoofbaar (getest: 200 vs 401). Winkelmail + offerte-herinneringen sturen echte klantmails.
+4. HUBSPOT_TOKEN ontbreekt in prod -> leads komen NIET in HubSpot (createHubSpotContact returnt leeg).
+5. KLAVIYO_PRIVATE_KEY ontbreekt -> 0 van 42 leads heeft klaviyoProfileId. Offerte-mail naar klant loopt UITSLUITEND via Klaviyo (shareOfferte -> trackKlaviyoEvent "Offerte Online Verzonden"), dus nooit verstuurd. Tijdlijn schrijft wel `email_triggered` (lib/leads.ts:384) -> admin liegt over verzonden mails bij 12 echte leads.
+6. TELEGRAM_BOT_TOKEN/CHAT_ID ontbreken -> geen leadmelding.
+7. NEXT_PUBLIC_SITE_URL ontbreekt (lib/leads.ts:468 valt terug op vercel.app) + hardcoded stagingslinks lib/notifications.ts:67,79 en lib/lead-store.ts:272.
+
+TRACKING (grootste blinde vlek): huidige Webflow-site draait op SERVER-SIDE tagging via `sst.sonty.nl/hip7aki0th.html?tg=MLLGCPR` (eigen nginx/PHP, 136.144.178.249, eigen A-record) plus HubSpot-script js-eu1.hs-scripts.com/147970649.js. De nieuwe site laadt geen van beide. Nieuwe site heeft alleen client-side gtag G-S480E56ZQE + Meta pixel 1180729206424422 met ALLEEN PageView: nul conversie-events (geen enkele fbq/gtag-call buiten components/Analytics.tsx), geen Consent Mode v2, geen AW-conversie-ID.
+
+DNS: sonty.nl bij Neostrada, nu A @ 198.202.211.1 + www CNAME cdn.webflow.com (Webflow). Alleen die twee wijzigen. MOETEN BLIJVEN: MX Outlook, SPF, DKIM selector1/2, _dmarc, autodiscover, klaviyo-site-verification, A-record sst.sonty.nl. Er is een wildcard *.sonty.nl -> 185.94.230.197. Keuze nog open: www of apex als hoofdadres (code gaat nu uit van apex).
+
+OVERIG: /diensten/vloeren en /aanvraag-transport (staan in live footer) geven 404 -> redirect nodig; sitemap bevat /diensten/pergola-zonwering die 308 redirect; geen reCAPTCHA en geen rate limit op publieke formulieren (oude site had wel reCAPTCHA); reviews vast op 4.9/597 (GOOGLE_PLACES_API_KEY+PLACE_ID ontbreken) terwijl dat aantal in de AggregateRating staat; hardcoded fallbacks MONTEUR_PIN "2288", BELSCHERM_CODE "sonty2288", FINANCIERING_PASSWORD "Daimy2102!"; footer zegt Sunmaster dealer 2022 t/m 2025; tests/configurator-full-flow.spec.ts faalt op een oud knoplabel (site is goed, test is oud).
+
+LET OP: er komen NU AL echte leads binnen op sonty-website.vercel.app. 24 echte leads sinds april, nieuwste 2026-07-25. Die landen alleen in KV, zonder HubSpot, zonder mail, zonder melding. Dat loopt dus al mis, niet pas na de domeinswitch.

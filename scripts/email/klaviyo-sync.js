@@ -28,14 +28,24 @@ const H = {
 };
 
 const NAMEN = {
-  'sonty-offerte': 'Sonty | Offerte',
-  'sonty-uitnodiging': 'Sonty | Showroom-uitnodiging',
-  'sonty-verhaal': 'Sonty | Verhaal',
-  'sonty-service': 'Sonty | Service en nazorg',
-  'sonty-weer-hitte': 'Sonty | Weer, hitte op komst',
-  'sonty-weer-lente': 'Sonty | Weer, eerste lentedag',
-  'sonty-weer-donker': 'Sonty | Weer, donkere dagen',
-  'sonty-welkom': 'Sonty | Welkom na aanvraag',
+  "sonty-offerte": "Sonty | A1 Offerte staat klaar",
+  "sonty-uitnodiging": "Sonty | A3 Showroom-uitnodiging",
+  "sonty-verhaal": "Sonty | Verhaal",
+  "sonty-service": "Sonty | E1 Service en nazorg",
+  "sonty-weer-hitte": "Sonty | W1 Weer, hitte op komst",
+  "sonty-weer-lente": "Sonty | W2 Weer, eerste lentedag",
+  "sonty-weer-donker": "Sonty | W3 Weer, donkere dagen",
+  "sonty-welkom": "Sonty | G1 Welkom na aanvraag",
+  "sonty-rp-offerte": "Sonty | RP1 Offerte verstuurd",
+  "sonty-herinnering-1": "Sonty | RP2 Herinnering dag 6",
+  "sonty-herinnering-2": "Sonty | RP3 Herinnering dag 10",
+  "sonty-akkoord": "Sonty | RP4 Na akkoord",
+  "sonty-afwijzing": "Sonty | RP5 Na afwijzing",
+  "sonty-afsluiter": "Sonty | A5 Laatste mail in de reeks",
+  "sonty-reactivering-1": "Sonty | C1 Reactivering",
+  "sonty-reactivering-2": "Sonty | C2 Wat er veranderd is",
+  "sonty-crosssell-binnen": "Sonty | D1 Cross-sell naar binnen",
+  "sonty-review": "Sonty | E2 Reviewverzoek"
 };
 
 async function api(pad, opties = {}) {

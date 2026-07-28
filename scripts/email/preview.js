@@ -24,6 +24,7 @@ const SHOTS = path.join(__dirname, 'previews');
 const VOORBEELD = {
   'first_name': 'Marleen',
   'person.sonty_product': 'Zip Design 110 zipscreens (2x, solar)',
+  'person.sonty_product_kort': 'screens',
   'person.sonty_offertenummer': '20269576',
   'person.sonty_geldig_tot': '3 augustus 2026',
   'person.sonty_bedrag': '€ 4.500,00',

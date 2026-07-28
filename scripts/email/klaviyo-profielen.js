@@ -56,6 +56,32 @@ function bepaalFase(r) {
   return 'zeer_koud';
 }
 
+/**
+ * Leesbare productnaam voor in een zin. De ruwe naam uit de configurator is technisch
+ * ("Zip Design 110", "Windvast", "Suneye dichte cassette") en leest in een kop als een
+ * artikelnummer: "Je zocht ooit Zip Design 110 zipscreens (2x, solar)". Dit maakt er iets van
+ * dat een mens ook zou zeggen.
+ */
+function leesbaarProduct(product) {
+  const p = String(product || '').toLowerCase();
+  if (!p) return null;
+  if (/zip|screen|windvast/.test(p)) return 'screens';
+  if (/rolluik/.test(p)) return 'rolluiken';
+  if (/knikarm|suneye|cassette/.test(p)) return 'een knikarmscherm';
+  if (/uitval/.test(p)) return 'een uitvalscherm';
+  if (/markies/.test(p)) return 'een markies';
+  if (/pergola/.test(p)) return 'een pergola';
+  if (/serre/.test(p)) return 'serrezonwering';
+  if (/hor/.test(p)) return 'horren';
+  if (/gordijn|inbetween|vouw/.test(p)) return 'gordijnen';
+  if (/plisse|plissé|duette/.test(p)) return 'plissegordijnen';
+  if (/jaloezie/.test(p)) return 'jaloezieën';
+  if (/shutter/.test(p)) return 'shutters';
+  if (/behang|wandbekleding/.test(p)) return 'wandbekleding';
+  if (/rolgordijn/.test(p)) return 'rolgordijnen';
+  return 'zonwering';
+}
+
 /** Grove categorie voor de cross-sell: buiten (zonwering) of binnen (raamdecoratie). */
 function categorie(product) {
   const p = String(product || '').toLowerCase();
@@ -109,6 +135,7 @@ function bouwProfiel(r) {
     sonty_fase: bepaalFase(r),
     sonty_categorie: categorie(r.product),
     sonty_product: r.product || null,
+    sonty_product_kort: leesbaarProduct(r.product),
     sonty_offertenummer: r.offerteNummer || null,
     sonty_offerte_status: r.offerteStatus || null,
     sonty_offerte_link: r.offerteLink || null,

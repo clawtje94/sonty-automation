@@ -25,7 +25,18 @@ const fs = require('fs');
 const path = require('path');
 
 const UIT = path.join(__dirname, 'dist');
-const CDN = 'https://sonty-website.vercel.app/images';
+
+/**
+ * FOTO'S KOMEN VAN DE CDN VAN KLAVIYO, ALS JPEG.
+ * De website levert WebP, en Outlook op Windows rendert WebP niet: die klanten zien dan lege
+ * vlakken waar de foto hoort. Daarom staan alle mailfoto's als JPEG bij Klaviyo.
+ * Opnieuw uploaden: node scripts/email/fotos-uploaden.js
+ */
+const FOTOS = require(path.join(__dirname, '..', '..', 'data', 'email', 'fotos-cdn.json'));
+const foto = (bestand) => {
+  const sleutel = String(bestand).replace(/^eigen\//, '').replace(/\.webp$/, '');
+  return FOTOS[sleutel] || ('https://sonty-website.vercel.app/images/' + bestand);
+};
 
 const M = {
   oranje: '#FF6B00',
@@ -38,7 +49,8 @@ const M = {
   papier: '#ffffff',
   achtergrond: '#eef0f3',
   creme: '#faf7f3',
-  logo: 'https://cdn.prod.website-files.com/666ab30f0f595f63bc4b0971/666ab30f0f595f63bc4b0b6e_Logo_White.webp',
+  // Logo als PNG bij Klaviyo: het origineel op de site is WebP en Outlook toont dat niet.
+  logo: FOTOS['logo-wit'],
   // APPEN, NIET BELLEN (Daimy 2026-07-27): het telefoonnummer mag nergens zichtbaar zijn.
   // Daarom overal een wa.me-link met voorgevulde tekst; het nummer zit in de link, niet in beeld.
   whatsapp: 'https://wa.me/31850069681?text=' + encodeURIComponent('Hoi Sonty! Ik heb een vraag over mijn offerte.'),
@@ -62,7 +74,7 @@ const knop = (tekst, url) => `
 /** Grote sfeerfoto met bijschrift eronder. */
 const beeld = (bestand, alt, bijschrift) => `
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
- <tr><td><img src="${CDN}/${bestand}" width="528" alt="${alt}" class="beeld" style="display:block;width:100%;max-width:528px;height:auto;border-radius:12px;"></td></tr>
+ <tr><td><img src="${foto(bestand)}" width="528" alt="${alt}" class="beeld" style="display:block;width:100%;max-width:528px;height:auto;border-radius:12px;"></td></tr>
  ${bijschrift ? `<tr><td style="${F};font-size:12px;color:${M.zacht};padding-top:8px;" class="t-zacht">${bijschrift}</td></tr>` : ''}
 </table>`;
 
@@ -163,7 +175,7 @@ const garantie = () => `
 const showroom = () => `
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:14px;">
  <tr><td style="padding:0;">
-   <img src="${CDN}/eigen/showroom-tafel.webp" width="528" alt="De adviestafel in onze showroom in Rijswijk" class="beeld" style="display:block;width:100%;max-width:528px;height:auto;border-radius:14px 14px 0 0;">
+   <img src="${foto('eigen/showroom-tafel.webp')}" width="528" alt="De adviestafel in onze showroom in Rijswijk" class="beeld" style="display:block;width:100%;max-width:528px;height:auto;border-radius:14px 14px 0 0;">
  </td></tr>
  <tr><td style="padding:20px 24px 24px;${F};">
    <div style="color:${M.tekst};font-size:17px;font-weight:800;">Liever eerst even zien en voelen?</div>
@@ -251,6 +263,41 @@ const voet = () => `
    <a href="{% unsubscribe %}" style="color:${M.zacht};text-decoration:underline;">Uitschrijven</a>
    &nbsp;&middot;&nbsp;
    <a href="{% manage_preferences %}" style="color:${M.zacht};text-decoration:underline;">Voorkeuren aanpassen</a>
+ </td></tr>
+</table>`;
+
+/**
+ * Veelgestelde vragen. Overgenomen uit de offertemail die Reuzenpanda nu verstuurt, want die
+ * feiten zijn van Sonty zelf en kloppen: levertijden, openingstijden en hoe het traject loopt.
+ * Dit blok neemt vragen weg voordat iemand ze stelt, en dat scheelt de klantenservice werk.
+ */
+const veelgevraagd = (vragen) => `
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid ${M.lijn};border-radius:14px;" class="rand">
+ <tr><td style="padding:24px 26px;${F};">
+   <div style="font-size:17px;font-weight:800;color:${M.tekst};padding-bottom:4px;" class="t-donker">Wat klanten meestal nog vragen</div>
+   ${vragen.map(([v, a], i) => `
+     <div style="padding-top:${i ? 16 : 14}px;">
+       <div style="font-size:14px;font-weight:700;color:${M.tekst};" class="t-donker">${v}</div>
+       <div style="font-size:14px;color:${M.grijs};line-height:1.6;padding-top:4px;" class="t-zacht">${a}</div>
+     </div>`).join('')}
+ </td></tr>
+</table>`;
+
+const FAQ_LEVERTIJD = ['Hoelang duurt het?', 'Voorraadmodellen hangen er vaak binnen 3 weken. Voor de rest is het gemiddeld 8 tot 10 weken na de aanbetaling, omdat alles op maat wordt gemaakt.'];
+const FAQ_PRIJS = ['Is dit de definitieve prijs?', 'Nog niet. Dit is een indicatie op basis van jouw opgave. De echte prijs staat vast na het inmeten, als we alles samen hebben doorgenomen.'];
+const FAQ_VERDER = ['Wat gebeurt er als ik akkoord geef?', 'Dan plannen we een inmeetafspraak. Daarna volgt de definitieve offerte, en pas als je die goedkeurt gaan we bestellen.'];
+const FAQ_INMETEN = ['Wat kost inmeten?', 'Niets, als je daarna met ons in zee gaat. Ga je niet akkoord, dan rekenen we 75 euro voor de gemaakte uren.'];
+const FAQ_SHOWROOM = ['Wanneer kan ik langskomen?', 'Dinsdag tot en met vrijdag van 9:00 tot 17:00, en zaterdag van 9:00 tot 16:00. Een afspraak is fijn, maar hoeft niet.'];
+const FAQ_AANPASSEN = ['Kan er nog iets veranderen?', 'Zeker. Andere kleur, andere maat, ander model: stuur een berichtje en ik pas het aan.'];
+
+/** De drie vragen uit de Reuzenpanda-herinnering. Die aanpak werkt: hij vraagt in plaats van dat
+ *  hij duwt. Alleen de toon is hier van Sonty in plaats van briefpapier. */
+const meedenkblok = (kop, vragen, slot) => `
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
+ <tr><td style="padding:22px 24px;${F};">
+   <div style="color:${M.tekst};font-size:15px;font-weight:700;">${kop}</div>
+   ${vragen.map((v) => `<div style="color:${M.grijs};font-size:14px;line-height:1.7;padding-top:6px;">${v}</div>`).join('')}
+   <div style="color:${M.grijs};font-size:14px;line-height:1.6;padding-top:12px;">${slot}</div>
  </td></tr>
 </table>`;
 
@@ -392,7 +439,7 @@ const SJABLONEN = {
     naam: 'Sonty - service en nazorg',
     preheader: 'Even checken of alles naar wens is',
     kop: 'Alles naar wens, {{ first_name|default:"daar" }}?',
-    intro: 'Je {{ person.sonty_product|default:"zonwering" }} is geplaatst. Werkt alles naar behoren en ben je tevreden over de afwerking? Is er iets niet goed, laat het gewoon even weten. Dan lossen we het op.',
+    intro: 'Je {{ person.sonty_product_kort|default:"zonwering" }} is geplaatst. Werkt alles naar behoren en ben je tevreden over de afwerking? Is er iets niet goed, laat het gewoon even weten. Dan lossen we het op.',
     blokken: [
       garantie(),
       knop('{{ person.sonty_service_cta|default:"Laat het ons weten" }}', '{{ person.sonty_service_link|default:"https://www.sonty.nl/contact" }}'),
@@ -504,12 +551,233 @@ SJABLONEN['sonty-welkom'] = mail({
   intro: 'Dank je wel, ik ga er meteen mee aan de slag. Je hoort binnen 24 uur van me met een prijsindicatie. Hieronder vast wat je van ons kunt verwachten.',
   blokken: [
     stappen(),
-    knop('Bekijk ons werk', 'https://www.sonty.nl/portfolio'),
+    knop('Bekijk ons assortiment', 'https://www.sonty.nl/assortiment'),
     cijfers(),
     review(...REVIEW_TRAJECT),
     assortiment(),
     garantie(),
     showroom(),
+  ],
+});
+
+
+/* ── NAGEBOUWD UIT REUZENPANDA ──
+   Daimy wil dat alles daar uit kan. Deze drie vervangen wat Reuzenpanda nu verstuurt. Wat we
+   overnemen is de inhoud die werkt: de eerlijke uitleg dat dit een indicatie is, de drie
+   meedenkvragen, en de veelgestelde vragen met echte levertijden. Wat we anders doen:
+     - de toon van Sonty in plaats van "Beste" en "Met vriendelijke groet"
+     - één knop in plaats van vier concurrerende links
+     - geen telefoonnummer in beeld, appen dus
+     - geen PDF als bijlage maar een link; bijlagen kosten je de afleverbaarheid
+     - vanaf ons eigen domein in plaats van een reuzenpanda-adres
+   LET OP: de herinneringsflow in Reuzenpanda staat niet bewust uit, hij is KAPOT. In de
+   interface staat "Er is iets misgegaan met de automatisering". Er gaat dus al langer geen
+   enkele opvolgmail uit. */
+
+SJABLONEN['sonty-rp-offerte'] = mail({
+  naam: 'Sonty offerte verstuurd',
+  preheader: 'Je prijsindicatie staat klaar, met alles erbij',
+  kop: 'Je prijsindicatie staat klaar',
+  intro: 'Dank je wel voor je aanvraag. Ik heb op basis van jouw wensen een prijsindicatie gemaakt. Hieronder staat wat het wordt, en wat er daarna gebeurt.',
+  blokken: [
+    offerteKaart(),
+    knop('Bekijk je prijsindicatie', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
+      <tr><td style="padding:20px 22px;${F};">
+        <div style="color:${M.tekst};font-size:15px;font-weight:700;">Dit is nog een indicatie</div>
+        <div style="color:${M.grijs};font-size:14px;line-height:1.65;padding-top:8px;">
+          De prijs staat pas echt vast na het inmeten, als we alles samen hebben doorgenomen.
+          Zo weet je zeker dat je niet voor verrassingen komt te staan.
+        </div>
+      </td></tr>
+    </table>`,
+    stappen(),
+    veelgevraagd([FAQ_PRIJS, FAQ_LEVERTIJD, FAQ_INMETEN, FAQ_AANPASSEN]),
+    cijfers(),
+    review(...REVIEW_TRAJECT),
+    garantie(),
+    showroom(),
+  ],
+});
+
+SJABLONEN['sonty-herinnering-1'] = mail({
+  naam: 'Sonty herinnering dag 6',
+  preheader: 'Kunnen we je ergens mee helpen?',
+  kop: 'Kunnen we je ergens mee helpen, {{ first_name|default:"daar" }}?',
+  intro: 'Je vroeg een tijdje geleden een prijsindicatie bij ons aan. Ik vroeg me af hoe het ervoor staat. Zonwering kiezen is geen kleine beslissing, dus misschien zit je nog met vragen.',
+  blokken: [
+    meedenkblok('Waar loop je tegenaan?', [
+      'Wat is voor jou de belangrijkste reden dat je zonwering wilt?',
+      'Waar twijfel je nog over?',
+      'Heb je alles wat je nodig hebt om te beslissen?',
+    ], 'Stuur gerust even een berichtje terug. We willen vooral dat je de juiste keuze maakt. Of dat nu met ons is of ergens anders, ik denk graag even mee.'),
+    offerteKaart(),
+    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    veelgevraagd([FAQ_PRIJS, FAQ_LEVERTIJD, FAQ_AANPASSEN]),
+    review(...REVIEW_ROLLUIK),
+    cijfers(),
+    showroom(),
+  ],
+});
+
+SJABLONEN['sonty-herinnering-2'] = mail({
+  naam: 'Sonty herinnering dag 10',
+  preheader: 'Twijfel je nog ergens over?',
+  kop: 'Twijfel je nog ergens over?',
+  intro: 'Ik stuurde je een tijdje geleden een prijsindicatie, maar heb nog niets van je gehoord. Misschien ben je er nog niet uit, of is het er gewoon bij ingeschoten. Allebei prima.',
+  blokken: [
+    meedenkblok('Zal ik je ergens mee helpen?', [
+      'Wat houdt je op dit moment tegen?',
+      'Zijn er details waar je over twijfelt?',
+      'Mis je informatie die de keuze makkelijker maakt?',
+    ], 'Eén berichtje is genoeg, dan zoek ik het voor je uit. Zonder verplichting, en ik blijf je er niet mee achtervolgen.'),
+    offerteKaart(),
+    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    beeld('eigen/kantoor-stalen.webp', 'Persoonlijk advies aan de adviestafel bij Sonty', 'Even samen kijken kan ook, gewoon in Rijswijk'),
+    veelgevraagd([FAQ_SHOWROOM, FAQ_INMETEN, FAQ_VERDER]),
+    review(...REVIEW_ALLES),
+    garantie(),
+  ],
+});
+
+SJABLONEN['sonty-akkoord'] = mail({
+  naam: 'Sonty na akkoord',
+  preheader: 'Je akkoord is binnen, dit gaat er nu gebeuren',
+  kop: 'Top, je akkoord is binnen',
+  intro: 'Dank je wel voor het vertrouwen. Ik heb je akkoord doorgegeven aan de planning. Zij nemen binnen drie werkdagen contact op om de inmeetafspraak in te plannen.',
+  blokken: [
+    offerteKaart(),
+    stappen(),
+    veelgevraagd([FAQ_LEVERTIJD, ['Wanneer betaal ik?', 'Pas na het inmeten, als de definitieve offerte klopt. De levertijd begint te lopen vanaf de aanbetaling.'], FAQ_AANPASSEN]),
+    knop('Bekijk je offerte nog eens', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    garantie(),
+    review(...REVIEW_TRAJECT),
+    cijfers(),
+  ],
+});
+
+SJABLONEN['sonty-afwijzing'] = mail({
+  naam: 'Sonty na afwijzing',
+  preheader: 'Jammer, maar helemaal goed',
+  kop: 'Helemaal goed, {{ first_name|default:"daar" }}',
+  intro: 'Je gaf aan dat het voorstel het niet gaat worden. Dat is prima, en dank dat je het even hebt laten weten. Ik hoor wel graag waarom, want daar leren we van.',
+  blokken: [
+    meedenkblok('Mag ik je één ding vragen?', [
+      'Lag het aan de prijs, de levertijd, of iets anders?',
+    ], 'Eén zin terug is genoeg. En mocht je er later toch nog eens over willen praten, dan weet je me te vinden. Ik stuur je verder niets meer over deze offerte.'),
+    beeld('eigen/showroom-tafel.webp', 'De adviestafel in de showroom van Sonty', 'Je bent altijd welkom om vrijblijvend te kijken'),
+    cijfers(),
+  ],
+});
+
+
+/* ── de rest van de reizen ── */
+
+SJABLONEN['sonty-afsluiter'] = mail({
+  naam: 'Sonty laatste mail in de reeks',
+  preheader: 'Zal ik je offerte laten staan of sluiten?',
+  kop: 'Zal ik je offerte laten staan?',
+  intro: 'Dit is mijn laatste berichtje over deze offerte, beloofd. Ik hoor het graag als je nog verder wilt. Zo niet, dan sluit ik hem en heb je er geen omkijken meer naar.',
+  blokken: [
+    offerteKaart(),
+    knop('Ja, ik wil verder', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
+      <tr><td style="padding:20px 22px;${F};">
+        <div style="color:${M.tekst};font-size:15px;font-weight:700;">Of laat gewoon even weten dat het niet doorgaat</div>
+        <div style="color:${M.grijs};font-size:14px;line-height:1.65;padding-top:8px;">
+          Daar word ik niet boos om, en het scheelt jou weer een mailtje. Eén woord terug is genoeg.
+          Prijzen van dit jaar houd ik trouwens niet eeuwig aan, dus als je later toch wilt, maak ik
+          gewoon een nieuwe.
+        </div>
+      </td></tr>
+    </table>`,
+    review(...REVIEW_TRAJECT),
+    garantie(),
+  ],
+});
+
+SJABLONEN['sonty-reactivering-1'] = mail({
+  naam: 'Sonty reactivering 1',
+  preheader: 'Is het er nooit van gekomen?',
+  kop: 'Je zocht ooit {{ person.sonty_product_kort|default:"zonwering" }}',
+  intro: 'Dat is alweer even geleden. Misschien is het er nooit van gekomen, misschien heb je het elders geregeld. Beide prima. Ik wilde alleen even laten weten dat je offerte er nog is.',
+  blokken: [
+    beeld('eigen/knikarm-gevel.webp', 'Zonwering van Sonty op een woning', 'Een van onze projecten'),
+    offerteKaart(),
+    knop('Bekijk wat het nu kost', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
+      <tr><td style="padding:20px 22px;${F};">
+        <div style="color:${M.tekst};font-size:15px;font-weight:700;">Let op: de prijs is van toen</div>
+        <div style="color:${M.grijs};font-size:14px;line-height:1.65;padding-top:8px;">
+          Materiaalprijzen bewegen, dus het bedrag hierboven klopt waarschijnlijk niet meer helemaal.
+          Wil je weten wat het vandaag kost? Eén berichtje en ik reken het opnieuw voor je uit.
+        </div>
+      </td></tr>
+    </table>`,
+    cijfers(),
+    review(...REVIEW_ROLLUIK),
+    assortiment(),
+    showroom(),
+  ],
+});
+
+SJABLONEN['sonty-reactivering-2'] = mail({
+  naam: 'Sonty reactivering 2',
+  preheader: 'Dit is er veranderd sinds toen',
+  kop: 'Er is wel wat veranderd sinds toen',
+  intro: 'Je keek een tijd geleden bij ons rond. Sindsdien is ons assortiment gegroeid en zijn er een paar dingen echt beter geworden.',
+  blokken: [
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr><td style="${F};font-size:16px;line-height:1.7;color:${M.grijs};" class="t-zacht">
+        Zonwering gaat tegenwoordig gewoon met je telefoon, en met een windsensor haalt hij zichzelf
+        in als het gaat waaien. Voor binnen leveren we nu ook shutters en wandbekleding, dus je kunt
+        alles bij dezelfde club regelen. En we plaatsen alles nog steeds met onze eigen mensen.
+      </td></tr>
+    </table>`,
+    knop('Vraag een nieuwe prijs aan', '{{ person.sonty_verhaal_link|default:"https://www.sonty.nl/offerte" }}'),
+    assortiment(),
+    beeld('eigen/montage-team-1.webp', 'Monteurs van Sonty aan het werk', 'Onze monteurs zijn in dienst bij Sonty, geen onderaannemers'),
+    cijfers(),
+    review(...REVIEW_ALLES),
+    garantie(),
+    showroom(),
+  ],
+});
+
+SJABLONEN['sonty-crosssell-binnen'] = mail({
+  naam: 'Sonty cross-sell naar binnen',
+  preheader: 'Buiten is geregeld, en binnen?',
+  kop: 'Buiten is geregeld. En binnen?',
+  intro: 'Je {{ person.sonty_product_kort|default:"zonwering" }} hangt er inmiddels. Veel klanten regelen daarna ook de binnenkant, want dat scheelt gedoe met verschillende partijen en het past dan meteen bij elkaar.',
+  blokken: [
+    beeld('eigen/showroom-ramen.webp', 'Raamdecoratie in de showroom van Sonty', 'Raamdecoratie in onze showroom'),
+    knop('Bekijk de mogelijkheden', 'https://www.sonty.nl/diensten/raamdecoratie'),
+    assortiment(),
+    veelgevraagd([FAQ_SHOWROOM, FAQ_INMETEN, FAQ_LEVERTIJD]),
+    review(...REVIEW_ALLES),
+    cijfers(),
+    garantie(),
+  ],
+});
+
+SJABLONEN['sonty-review'] = mail({
+  naam: 'Sonty reviewverzoek',
+  preheader: 'Zou je ons willen helpen?',
+  kop: 'Zou je ons willen helpen, {{ first_name|default:"daar" }}?',
+  intro: 'Je {{ person.sonty_product_kort|default:"zonwering" }} hangt er nu een paar weken. Als je tevreden bent, zou je ons dan willen helpen met een review op Google? Het kost je twee minuten en het helpt ons enorm.',
+  blokken: [
+    knop('Schrijf een review', 'https://g.page/r/sonty/review'),
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
+      <tr><td style="padding:20px 22px;${F};">
+        <div style="color:${M.tekst};font-size:15px;font-weight:700;">En als je niet tevreden bent?</div>
+        <div style="color:${M.grijs};font-size:14px;line-height:1.65;padding-top:8px;">
+          Dan hoor ik dat liever eerst van jou dan van Google. Stuur een berichtje, dan lossen we het
+          op. Daar zijn die garanties ook voor.
+        </div>
+      </td></tr>
+    </table>`,
+    garantie(),
+    beeld('eigen/team-klant-blij.webp', 'Het team van Sonty met een klant', 'Bedankt dat je voor ons koos'),
   ],
 });
 

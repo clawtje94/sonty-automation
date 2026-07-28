@@ -84,9 +84,17 @@ function tekstversie(html) {
     console.log('');
   }
 
-  const bestaand = await api('templates/');
-  if (!bestaand.ok) { console.error('Kan sjablonen niet ophalen: ' + bestaand.status + ' ' + bestaand.t.slice(0, 200)); process.exit(1); }
-  const opNaam = new Map((bestaand.j.data || []).map((d) => [d.attributes.name, d.id]));
+  // ALLE PAGINA'S OPHALEN. De templates-endpoint geeft er 10 per pagina. Zonder doorbladeren
+  // denkt dit script dat de sjablonen op pagina 2 niet bestaan en maakt het ze opnieuw aan; zo
+  // ontstonden op 28 juli negen duplicaten in een keer.
+  const opNaam = new Map();
+  let pad = 'templates/';
+  for (let i = 0; i < 15 && pad; i++) {
+    const r = await api(pad);
+    if (!r.ok) { console.error('Kan sjablonen niet ophalen: ' + r.status + ' ' + r.t.slice(0, 200)); process.exit(1); }
+    for (const d of (r.j.data || [])) opNaam.set(d.attributes.name, d.id);
+    pad = r.j.links?.next ? r.j.links.next.replace('https://a.klaviyo.com/api/', '') : null;
+  }
   console.log(`Klaviyo bevat nu ${opNaam.size} sjablonen: ${[...opNaam.keys()].join(', ') || '(geen)'}\n`);
 
   for (const [bestandsnaam, weergavenaam] of Object.entries(NAMEN)) {

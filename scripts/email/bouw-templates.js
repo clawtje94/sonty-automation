@@ -87,8 +87,8 @@ const offerteKaart = () => `
    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="padding-top:18px;">
      <tr><td style="${F};color:${M.zacht};font-size:13px;padding:5px 0;">Offertenummer</td>
          <td align="right" style="${F};color:#ffffff;font-size:13px;font-weight:600;padding:5px 0;">{{ person.sonty_offertenummer|default:"-" }}</td></tr>
-     <tr><td style="${F};color:${M.zacht};font-size:13px;padding:5px 0;">Geldig tot</td>
-         <td align="right" style="${F};color:#ffffff;font-size:13px;font-weight:600;padding:5px 0;">{{ person.sonty_geldig_tot|default:"-" }}</td></tr>
+     <tr><td style="${F};color:${M.zacht};font-size:13px;padding:5px 0;">{{ person.sonty_geldigheid_label|default:"Prijs van" }}</td>
+         <td align="right" style="${F};color:#ffffff;font-size:13px;font-weight:600;padding:5px 0;">{{ person.sonty_geldigheid_waarde|default:"-" }}</td></tr>
      <tr><td style="${F};color:${M.zacht};font-size:13px;padding:5px 0;">Inclusief</td>
          <td align="right" style="${F};color:#ffffff;font-size:13px;font-weight:600;padding:5px 0;">montage door ons eigen team</td></tr>
    </table>

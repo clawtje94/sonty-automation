@@ -27,6 +27,8 @@ const VOORBEELD = {
   'person.sonty_product_kort': 'screens',
   'person.sonty_offertenummer': '20269576',
   'person.sonty_geldig_tot': '3 augustus 2026',
+  'person.sonty_geldigheid_label': 'Geldig tot',
+  'person.sonty_geldigheid_waarde': '3 augustus 2026',
   'person.sonty_bedrag': '€ 4.500,00',
   'person.sonty_offerte_datum_nl': '21 juli 2026',
   'person.sonty_offerte_link': 'https://document.reuzenpanda.nl/voorbeeld',

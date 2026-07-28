@@ -62,6 +62,20 @@ function bepaalFase(r) {
  * artikelnummer: "Je zocht ooit Zip Design 110 zipscreens (2x, solar)". Dit maakt er iets van
  * dat een mens ook zou zeggen.
  */
+/**
+ * Sommige productvelden bevatten geen product maar een notitie: "Wit op Tramstraat 109, Katwijk
+ * aan zee", "745x1720mm", "3000 dit zijn geschatte maten". Vier gevallen in de hele export, maar
+ * wel meteen zichtbaar bovenaan de offertekaart. Die vallen terug op een neutrale omschrijving.
+ */
+function netProduct(product) {
+  const p = String(product || '').trim();
+  if (!p) return null;
+  if (/straat|laan|weg\b|plein|kade|dijk|\d{4}\s?[a-z]{2}\b/i.test(p)) return null;
+  if (/^\d/.test(p)) return null;                  // "745x1720mm", "3000 dit zijn geschatte maten"
+  if (/^(wit|zwart|grijs|antraciet|cr[eè]me)\b/i.test(p)) return null;
+  return p;
+}
+
 function leesbaarProduct(product) {
   const p = String(product || '').toLowerCase();
   if (!p) return null;
@@ -80,6 +94,30 @@ function leesbaarProduct(product) {
   if (/behang|wandbekleding/.test(p)) return 'wandbekleding';
   if (/rolgordijn/.test(p)) return 'rolgordijnen';
   return 'zonwering';
+}
+
+/**
+ * Voornaam netjes maken voor de aanhef. Uit de export bleek dat 375 klanten hun naam met een
+ * kleine letter hebben ingevuld ("vjelko", "martijn") en 32 een dubbele voornaam ("Alexandra
+ * Hendrika"). In een mail wordt dat "Hoi vjelko," en "Hoi Alexandra Hendrika,", en dat leest als
+ * een slordig samengevoegd bestand. Daarom: eerste naam pakken, eerste letter een hoofdletter,
+ * en tussenvoegsels binnen de naam met rust laten.
+ */
+function netteVoornaam(ruw) {
+  let n = String(ruw || '').trim().replace(/\s+/g, ' ');
+  if (!n) return null;
+  n = n.split(' ')[0];                       // "Alexandra Hendrika" wordt "Alexandra"
+  if (n.length < 2 || n.length > 20) return null;
+  if (/[0-9@]/.test(n)) return null;         // geen mailadres of nummer als naam
+  // INITIALEN, geen voornaam. 111 klanten hebben "PJC", "F.J." of "G.H.V." in het voornaamveld
+  // staan. "Hoi F.J.," leest als een aanmaning; dan liever helemaal geen naam, want de mail valt
+  // terug op "Hoi daar" en dat is warmer dan een set initialen.
+  if (/\./.test(n)) return null;
+  if (n === n.toUpperCase() && n.length <= 4) return null;
+  // Volledig in hoofdletters geschreven namen worden gewoon netjes: MARIA wordt Maria.
+  if (n === n.toUpperCase() && n.length > 4) n = n.toLowerCase();
+  // Namen met een koppelteken of apostrof houden hun eigen hoofdletters: Jan-Willem, d'Angelo.
+  return n.replace(/(^|[-'])([a-zà-ÿ])/g, (m, sep, letter) => sep + letter.toUpperCase());
 }
 
 /** Grove categorie voor de cross-sell: buiten (zonwering) of binnen (raamdecoratie). */
@@ -134,7 +172,7 @@ function bouwProfiel(r) {
     sonty_mag_mail: r.magMail === false ? 'nee' : (r.magMail === true ? 'ja' : 'onbekend'),
     sonty_fase: bepaalFase(r),
     sonty_categorie: categorie(r.product),
-    sonty_product: r.product || null,
+    sonty_product: netProduct(r.product),
     sonty_product_kort: leesbaarProduct(r.product),
     sonty_offertenummer: r.offerteNummer || null,
     sonty_offerte_status: r.offerteStatus || null,
@@ -143,6 +181,16 @@ function bouwProfiel(r) {
     sonty_bedrag_getal: typeof r.offerteBedrag === 'number' ? Math.round(r.offerteBedrag) : null,
     sonty_offerte_datum: iso(r.offerteDatum),
     sonty_offerte_datum_nl: datumNL(r.offerteDatum),
+    // GELDIGHEID (oplevercheck 28 juli). 94% van de mailbare offertes is al verlopen, sommige
+    // sinds april 2025. "Geldig tot 11 mei 2025" in een mail van vandaag is niet alleen lelijk,
+    // het ondermijnt de hele mail: de klant ziet meteen dat er een automaat aan het werk is.
+    // Daarom twee velden: bij een nog geldige offerte de vervaldatum, en bij een verlopen offerte
+    // eerlijk de datum waarop de prijs is gemaakt.
+    sonty_geldigheid_label: (r.offerteVerlooptOp && r.offerteVerlooptOp > Date.now()) ? 'Geldig tot' : 'Prijs van',
+    sonty_geldigheid_waarde: (r.offerteVerlooptOp && r.offerteVerlooptOp > Date.now())
+      ? datumNL(r.offerteVerlooptOp)
+      : datumNL(r.offerteDatum),
+    sonty_offerte_verlopen: (r.offerteVerlooptOp && r.offerteVerlooptOp > Date.now()) ? 'nee' : 'ja',
     sonty_geldig_tot: datumNL(r.offerteVerlooptOp),
     sonty_aantal_offertes: r.aantalOffertes || 0,
     sonty_bron: r.bron || null,
@@ -151,11 +199,18 @@ function bouwProfiel(r) {
   for (const k of Object.keys(props)) if (props[k] === null) delete props[k];
 
   const attrs = { email: r.email, properties: props };
-  if (r.voornaam) attrs.first_name = r.voornaam;
+  const voornaam = netteVoornaam(r.voornaam);
+  if (voornaam) attrs.first_name = voornaam;
   if (r.achternaam) attrs.last_name = r.achternaam;
   if (r.plaats || r.postcode) attrs.location = { city: r.plaats || undefined, zip: r.postcode || undefined, country: 'Netherlands' };
   return { type: 'profile', attributes: attrs };
 }
+
+// Geexporteerd zodat preview-echt.js exact dezelfde logica gebruikt. Zonder dit heeft de
+// preview zijn eigen kopie en test je uiteindelijk iets anders dan wat de klant krijgt.
+module.exports = { netteVoornaam, leesbaarProduct, netProduct, bepaalFase, categorie, euro, datumNL };
+
+if (require.main !== module) return;
 
 (async () => {
   if (!fs.existsSync(BRON)) { console.error('Geen export gevonden. Draai eerst scripts/email/rp-export.js'); process.exit(1); }

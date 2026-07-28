@@ -19,16 +19,31 @@ const MIN_VOORUIT_MS = 8 * 3600 * 1000;
 // Medewerker-pools (Daimy 21 juli): BINNENRAAMDECORATIE (gordijnen, vitrage, jaloezieën,
 // plissé, shutters, rolgordijnen binnen e.d.) ALTIJD bij Nanny; al het andere (zonwering,
 // rolluiken, horren enz.) bij Jorren, Joey of Jaimy (eerste vrije, in die volgorde).
+// Uitzondering ZATERDAG (Daimy 28 juli): dan staan alleen Joey en Jaimy in de winkel.
+const NANNY = { id: '2af56e85-3e58-41c3-b050-3c8ede266498', naam: 'Nanny' };
+const JORREN = { id: '0cfadcc6-786c-4597-b128-20efd15d5c07', naam: 'Jorren' };
+const JOEY = { id: '445fbea9-68c9-46f4-b72a-efa451762ac3', naam: 'Joey' };
+const JAIMY = { id: 'bf3e490b-8add-4ef8-a590-dd837b11e378', naam: 'Jaimy' };
+
 const POOLS = {
-  binnendecoratie: [
-    { id: '2af56e85-3e58-41c3-b050-3c8ede266498', naam: 'Nanny' },
-  ],
-  zonwering: [
-    { id: '0cfadcc6-786c-4597-b128-20efd15d5c07', naam: 'Jorren' },
-    { id: '445fbea9-68c9-46f4-b72a-efa451762ac3', naam: 'Joey' },
-    { id: 'bf3e490b-8add-4ef8-a590-dd837b11e378', naam: 'Jaimy' },
-  ],
+  binnendecoratie: [NANNY],
+  zonwering: [JORREN, JOEY, JAIMY],
 };
+
+// ZATERDAG (Daimy 28 juli): in de winkel staan op zaterdag alleen Joey en Jaimy, dus maximaal
+// twee afspraken tegelijk. Nanny is er niet, en binnenraamdecoratie gaat altijd via Nanny —
+// die afspraken kunnen op zaterdag dus helemaal niet geboekt worden (lege pool ⇒ geen slots).
+const ZATERDAG_POOLS = {
+  binnendecoratie: [],
+  zonwering: [JOEY, JAIMY],
+};
+
+/** Wie er op het moment van dit slot überhaupt in de winkel staat. */
+function poolVoor(startMs, binnendecoratie) {
+  const soort = binnendecoratie ? 'binnendecoratie' : 'zonwering';
+  const zaterdag = nlDelen(new Date(startMs)).weekdag === 6;
+  return (zaterdag ? ZATERDAG_POOLS : POOLS)[soort];
+}
 
 // Eerste medewerker uit de juiste pool die geen overlappende afspraak in de Bookings-agenda
 // heeft. Parallelle afspraken mogen (Daimy 21 juli: "kan zolang ze beschikbaar zijn") — een
@@ -43,7 +58,7 @@ function kiesMedewerker(afsprakenDag, startMs, eindMs, binnendecoratie) {
     if ((a.staffIds || []).length) a.staffIds.forEach(id => bezig.add(id));
     else if (a.serviceId === SERVICE_ID) onbekend++;
   }
-  const vrij = (binnendecoratie ? POOLS.binnendecoratie : POOLS.zonwering).filter(m => !bezig.has(m.id));
+  const vrij = poolVoor(startMs, binnendecoratie).filter(m => !bezig.has(m.id));
   return vrij[onbekend] || null;
 }
 

@@ -1,5 +1,10 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-27)
 
+## GRIPP-KOPPELING GELEGD (30 juli): openstaand-rapport + opruimlijst (item 14)
+- Gripp offer-API werkt (alleen-lezen key uit secrets.js). **Definitie "openstaand" = Daimy's scherm: status Verzonden (9) + archived=false, bedragen EX btw** (API /1,21). Alleen op status filteren telt gearchiveerde mee (750/€3M vs echte 162/€623k).
+- `gripp-open-offertes.js` (ma 08:35): 162 open = 17 opruimkandidaten (andere offerte zelfde maand geaccepteerd, €45k) + 13 twijfel (€43k) + **9 status-fouten (offerte zélf geaccepteerd maar staat op Verzonden, €31k)** + 123 echt open (€504k). Volledige lijst met nummers is 30 juli naar Daimy gestuurd; team ruimt op (key is read-only).
+- Kruischeck sheet-akkoorden vs Gripp (V2) kan nu — nog niet gedaan.
+
 ## OPSCHONING UITGEVOERD + VERKOOPBELEID HANDBEDIENING (30 juli, "doe wat jij wijs vindt")
 - Nul-meldingen UIT (wachtlijst-ok, A/B-leeg, geen-AI-gesprekken → log-only). Oud weekrapport (nl.sonty.weekrapport) UIT: bron rp-archief bevroor 16 juli. Maandag-script doet nu EERST verse sheet-extractie.
 - Rapporten 5/6/7 LIVE: conversie-per-bron (ma 08:35), openstaande-offertes 14-60 dgn in leeftijdsbuckets (ma; €9,2 mln bruto werkvoorraad!), maandrapport 1e vd maand 08:50 (afgesloten maand vs zelfde maand vorig jaar). Lijst: docs/rapportage-lijst.md.
@@ -621,3 +626,8 @@ LET OP: er komen NU AL echte leads binnen op sonty-website.vercel.app. 24 echte 
 - Doorgevoerd in ~/sonty (06c5d6b) en sonty-website (51b9876, gedeployed + live geverifieerd: API geeft 2126,40). Regressie-baseline bijgewerkt (de 6 falende tests verwachtten oude foute waarden): 128/128 groen, dus v4 draait vanavond gewoon.
 - IMPACT: 903 van 5.120 v4-offertes bevatten een S-42. Van 1.433 S-42-regels met maat bleef 509 gelijk (kleine maten waren goed); mediaan verschil 0, max 363 euro per stuk te laag; opgeteld ~40.150 euro te goedkoop geoffreerd sinds 29 juni. Grote maten (280-400 breed) raakten het hardst. S-37 en ZipSquare kwamen in de praktijk vrijwel niet voor in offertes.
 - Openstaand voor Daimy: (1) Easton tekende 1.559 na korting voor Cremewit terwijl RAL 7047 voor 1.841 was bevestigd; (2) beleid voor reeds verstuurde te-goedkope offertes (prijs staat zwart-op-wit bij de klant).
+
+## 2026-07-30 (avond, deel 2): prijsfix openstaande offertes UITGEVOERD + alles-overal-check
+- Opdracht Daimy: "in die 288 de prijs goedzetten en meer niet doen". Uitgevoerd met scripts/prijsfix-288.js: 281 SENT-offertes (7 intussen van status veranderd) naar boekprijs, delta-methode, samen +27.772,80. 11 stonden iets te hoog en zijn omlaag gezet (goedzetten = boekprijs). Getekende 38 bewust ongemoeid. Backups in data/prijsfix-288-backups/, log in data/prijsfix-288-log.json, steekproef 5/5 vers uit RP geverifieerd.
+- LES: eerste dry-run zonder scope-filter pakte 3.340 documenten (alle SENT S-42 ooit, ook 2025 met ander prijsboek). Scope hard begrensd tot nummers uit de v4-offerte-backups.
+- Alles-overal-check prijsdata: v4 ok (128/128), website offerte-tool live ok (2126,40), configurator ok (+ zipscreen h340-rij gefixt, screens-cel 360x220 aangevuld), AI-bot en e-maildaemon HERSTART (draaiende processen hielden de oude tabel in geheugen: nl.sonty.sonny PID 63609, nl.sonty.email PID 63611), voicebot via website-API ok. RP Sonty-test: rolluik-samples ok, screens-artikelen verouderd maar testprofiel = laten staan (Daimy: verder niets doen).

@@ -171,7 +171,8 @@
     "140": 1029,
     "160": 1070,
     "180": 1105,
-    "200": 1138
+    "200": 1138,
+    "220": 1217
    },
    "380": {
     "100": 1029,
@@ -225,7 +226,8 @@
    "360": 359,
    "380": 359,
    "400": 425
-  }
+  },
+  "_fix": "2026-07-30: cel-voor-cel geverifieerd tegen boekpagina 7; waarden klopten al, alleen 360x220 ontbrak."
  },
  "zipSquare85100": {
   "category": "zipscreen",

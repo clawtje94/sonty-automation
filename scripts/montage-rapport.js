@@ -75,9 +75,13 @@ async function owaToken() {
     const g = soort(sub);
     const uren = e.End?.DateTime ? Math.min(12, Math.max(0, (new Date(e.End.DateTime) - d) / 36e5)) : 2;
     const kw = wk(d), km = start.slice(0, 7);
-    (perWeek[kw] = perWeek[kw] || { montage: 0, mUren: 0, inmeten: 0, service: 0, overig: 0 });
-    (perMaand[km] = perMaand[km] || { montage: 0, mUren: 0, inmeten: 0, service: 0, overig: 0 });
+    (perWeek[kw] = perWeek[kw] || { montage: 0, mUren: 0, inmeten: 0, service: 0, overig: 0, klanten: new Set() });
+    (perMaand[km] = perMaand[km] || { montage: 0, mUren: 0, inmeten: 0, service: 0, overig: 0, klanten: new Set() });
     perWeek[kw][g]++; perMaand[km][g]++;
+    // Uniek op klantnaam BINNEN het venster: een pergola over 2 dagen = 2 afspraken
+    // maar 1 opdracht (audit 30 juli: 15 van 289 juli-afspraken waren een 2e bezoek).
+    if (g === 'montage') { const klant = sub.split(' - ').slice(1).join(' - ').trim().toLowerCase();
+      perWeek[kw].klanten.add(klant); perMaand[km].klanten.add(klant); }
     if (g === 'montage') { perWeek[kw].mUren += uren; perMaand[km].mUren += uren;
       if (kw === huidigeWeek && d <= nu) { dezeWeekMontage++; dezeWeekUren += uren; } }
   }
@@ -94,9 +98,13 @@ async function owaToken() {
     L.push(`${w}${mark} | ${String(m.montage).padStart(7)} (${String(Math.round(m.mUren)).padStart(3)}) | ${String(m.inmeten).padStart(7)} | ${String(m.service).padStart(7)} | ${String(m.overig).padStart(6)}`); }
   L.push('* = lopende week, + = vooruit gepland');
   L.push('');
-  L.push('maand   | montage (uren) | inmeten | service | overig');
+  L.push('maand   | afspraken | UNIEKE OPDRACHTEN | uren | inmeten | overig');
   for (const m of Object.keys(perMaand).sort()) { const x = perMaand[m];
-    L.push(`${m} | ${String(x.montage).padStart(7)} (${String(Math.round(x.mUren)).padStart(4)}) | ${String(x.inmeten).padStart(7)} | ${String(x.service).padStart(7)} | ${String(x.overig).padStart(6)}`); }
+    L.push(`${m} | ${String(x.montage).padStart(9)} | ${String(x.klanten.size).padStart(17)} | ${String(Math.round(x.mUren)).padStart(4)} | ${String(x.inmeten).padStart(7)} | ${String(x.overig).padStart(6)}`); }
+  L.push('');
+  L.push('afspraken = bezoeken; unieke opdrachten = ontdubbeld op klant (meerdaagse');
+  L.push('klussen en terugkombezoeken tellen dan 1x). Service loopt buiten deze agenda.');
+  L.push('"uitgevoerd" = stond gepland en is niet geannuleerd; no-shows ziet de agenda niet.');
   const tekst = L.join('\n');
   console.log(tekst);
   if (process.argv.includes('--stuur'))

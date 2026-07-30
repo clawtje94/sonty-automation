@@ -109,6 +109,26 @@ async function ronde() {
       if (t.status !== 'CLOSED' && Number(laatsteUitgaand.user_id) !== 736327 && Number(t.user_id) !== Number(laatsteUitgaand.user_id)) {
         try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: laatsteUitgaand.user_id }); console.log(`  [${t.id}] laatste mail van collega (user ${laatsteUitgaand.user_id}) → aan hen toegewezen`); } catch (e) { console.error(`  [${t.id}] collega-toewijzing FOUT: ${e.message}`); }
       }
+      // VANGNET (Daimy 30-07, casus Niels Pompe): een klantmail op een mens-gesprek die na
+      // 4 uur nog onbeantwoord is, mag niet onzichtbaar blijven — Niels' "ik overweeg te
+      // cancelen" van 23 juli bleef zo 5 dagen liggen tot hij echt annuleerde. De bot
+      // antwoordt hier nooit; hij maakt het alleen ZICHTBAAR: team Mens nodig + notitie,
+      // en bij annuleer-signalen direct een Telegram-alarm naar Daimy.
+      try {
+        const laatsteEcht = rowsAll.filter((m) => !(m.internal_note || m.type === 'NOTE')).sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0];
+        const isInb = laatsteEcht && (laatsteEcht.contact_id || laatsteEcht.direction === 'inbound' || laatsteEcht.type === 'INBOUND');
+        const stilUur = laatsteEcht ? (Date.now() - Date.parse(laatsteEcht.created_at)) / 3600000 : 0;
+        const alGemeld = String(state[`vangnet:${t.id}`] || '') === String(laatsteEcht?.created_at || '');
+        if (isInb && stilUur >= 4 && !alGemeld) {
+          const tekst = String(laatsteEcht.body || laatsteEcht.message || '');
+          const dreig = /annuleer|cancel|opzeg|terugbetal|geld terug|klacht|te lang|niet meer verder/i.test(tekst);
+          if (Number(t.team_id) !== 431872) await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
+          await tPost(`/tickets/${t.id}/messages`, { internal_note: true, message: `⚠️ Vangnet: klantmail van ${String(laatsteEcht.created_at).slice(0, 16)} is na ${Math.round(stilUur)} uur nog onbeantwoord op dit mens-gesprek → naar Mens nodig gezet zodat hij zichtbaar is.` });
+          if (dreig) await fetch('https://api.telegram.org/bot8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40/sendMessage', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: 1700128390, text: `🚨 Onbeantwoorde klantmail met annuleer/klacht-signaal (${Math.round(stilUur)}u stil) op ticket ${t.id} (${t.contact?.email || t.contact?.full_name || '?'}). Staat nu bij Mens nodig.` }) }).catch(() => {});
+          state[`vangnet:${t.id}`] = String(laatsteEcht.created_at); saveState(state);
+          console.log(`  [${t.id}] VANGNET: onbeantwoorde klantmail (${Math.round(stilUur)}u) → Mens nodig${dreig ? ' + alarm Daimy' : ''}`);
+        }
+      } catch (e) { console.error(`  [${t.id}] vangnet FOUT: ${e.message}`); }
       continue;
     }
     // 2) KLANTMAILS: alleen kandidaten, binnen bot-uren, en niet op stopgezette tickets.

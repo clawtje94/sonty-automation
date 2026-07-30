@@ -48,8 +48,12 @@ async function owaToken() {
 }
 
 (async () => {
-  const token = await owaToken();
-  if (!token) { console.error('geen Outlook-token'); process.exit(1); }
+  let token = null;
+  for (let poging = 1; poging <= 3 && !token; poging++) {
+    token = await owaToken();
+    if (!token && poging < 3) { console.error(`token-poging ${poging} mislukt, opnieuw...`); await new Promise(r => setTimeout(r, 5000)); }
+  }
+  if (!token) { console.error('geen Outlook-token na 3 pogingen'); process.exit(1); }
   const H = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
   const cals = (await (await fetch('https://outlook.office.com/api/v2.0/me/calendars', { headers: H })).json()).value || [];
   const cal = cals.find(c => c.Name === 'Sonty Montage');
@@ -86,11 +90,20 @@ async function owaToken() {
       if (kw === huidigeWeek && d <= nu) { dezeWeekMontage++; dezeWeekUren += uren; } }
   }
 
+  // Kopregels: wat is er vorige week gemonteerd en wat staat er vooruit gepland.
+  const wkVan = offset => { const d = new Date(nu); d.setDate(d.getDate() + 7 * offset); return wk(d); };
+  const vorige = perWeek[wkVan(-1)] || { montage: 0, mUren: 0, inmeten: 0, klanten: new Set() };
   const L = [];
   L.push(`MONTAGES — agenda "Sonty Montage", stand ${nu.toISOString().slice(0, 10)}`);
-  L.push('montage = klantafspraak zonder inmeet/service/reparatie/onderhoud in de titel');
   L.push('');
-  L.push(`DEZE WEEK T/M NU: ${dezeWeekMontage} montages uitgevoerd (${Math.round(dezeWeekUren)} uur)`);
+  L.push(`GEMONTEERD VORIGE WEEK (${wkVan(-1)}): ${vorige.klanten.size} opdrachten (${vorige.montage} afspraken, ${Math.round(vorige.mUren)} uur)`);
+  if (dezeWeekMontage) L.push(`Lopende week t/m nu: ${dezeWeekMontage} afspraken uitgevoerd (${Math.round(dezeWeekUren)} uur)`);
+  const plan = [0, 1, 2].map(o => { const m = perWeek[wkVan(o)] || { montage: 0 }; return `${wkVan(o)}: ${m.montage}`; });
+  L.push(`MONTAGE INGEPLAND: ${plan.join(' | ')}`);
+  L.push('');
+  L.push(`INGEMETEN VORIGE WEEK (${wkVan(-1)}): ${vorige.inmeten || 0} inmeetafspraken`);
+  const planIn = [0, 1, 2].map(o => { const m = perWeek[wkVan(o)] || { inmeten: 0 }; return `${wkVan(o)}: ${m.inmeten}`; });
+  L.push(`INMETEN INGEPLAND: ${planIn.join(' | ')}`);
   L.push('');
   L.push('week      | montage (uren) | inmeten | service | overig');
   for (const w of Object.keys(perWeek).sort()) { const m = perWeek[w];

@@ -14,8 +14,9 @@ memory `sonty-offerte-sheet-structuur`. Jonge weken altijd met rijpheidswaarschu
 | 2 | Conversie per verzendkanaal (mail/WA), 4 weken + vorige maand | ma 08:35 | `conversie-per-kanaal.js` (nl.sonty.maandag-data) |
 | 3 | Conversie per productgroep, laatste 14 dagen | ma 08:35 | `conversie-productgroep-recent.js` (nl.sonty.maandag-data) |
 | 4 | Cohortrapport: uitrijping per offerteweek | ma 08:45 | `weekrapport-cohorten.js` (nl.sonty.cohortrapport) |
+| 13 | Montages per week/maand (agenda "Sonty Montage"), los van inmeten/service | ma 08:35 | `montage-rapport.js` (nl.sonty.maandag-data) |
 
-Bestelde items van 30 juli (#2 en #3) staan erin.
+Bestelde items van 30 juli (#2, #3 en #13 montages) staan erin.
 
 ## Voorgesteld, wacht op akkoord Daimy
 

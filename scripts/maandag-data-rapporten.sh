@@ -4,3 +4,4 @@
 cd /Users/clawdboot/sonty
 /opt/homebrew/bin/node scripts/conversie-per-kanaal.js --stuur
 /opt/homebrew/bin/node scripts/conversie-productgroep-recent.js --stuur
+/opt/homebrew/bin/node scripts/montage-rapport.js --stuur

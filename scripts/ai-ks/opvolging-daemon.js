@@ -259,8 +259,10 @@ async function main() {
     // de ochtendrun hem blokkeerde ("vandaag al beoordeeld") en het bericht nooit ging
     // (zo misten we o.a. Vas en Monique). Overslaan zonder state = ochtendrun pakt hem
     // vers op; de venstergrens (klant max 20u stil) bewaakt de rand vanzelf.
-    if (k.snel && !k.forced && !SCENARIO && !CFG.binnenBotUren()) {
-      console.log(`  ⏸ ${wie} (ticket ${k.ticket}): snel-kandidaat buiten bot-uren — wacht op ochtendrun`);
+    // Geldt ook voor EMAIL: een nachtelijke beoordeling kon een mail-follow-up een dag
+    // opschuiven en zo net buiten het 3-4,5-dagenvenster duwen.
+    if ((k.snel || k.kanaal === 'EMAIL') && !k.forced && !SCENARIO && !CFG.binnenBotUren()) {
+      console.log(`  ⏸ ${wie} (ticket ${k.ticket}): live-kandidaat buiten bot-uren — wacht op eerstvolgende dagrun`);
       continue;
     }
     const check = await blokkade(k, state);

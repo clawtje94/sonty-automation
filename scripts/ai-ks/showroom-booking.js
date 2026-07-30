@@ -123,8 +123,21 @@ function normaliseerStart(start) {
   return m ? amsterdamNaarUtc(m[1], m[2]).toISOString() : s;
 }
 
-async function boekShowroom({ start, klantNaam, klantMail, klantTel, notitie, binnendecoratie = false }) {
+async function boekShowroom({ start, klantNaam, klantMail, klantTel, notitie, binnendecoratie = false, _negeerBestaande = false }) {
   if (!start || !klantNaam || !klantMail) return { error: 'start, klantNaam en klantMail zijn verplicht' };
+  // DUBBELE-AFSPRAAK-CHECK (na casus Sofie van Herpen, 28 juli: klant had zelf al via de
+  // website geboekt, de bot boekte er een tweede bij en Bookings liet dat gewoon toe).
+  // Zelfde zoekactie als wijzigShowroom; alleen een verzetting (via _negeerBestaande) mag erlangs.
+  if (!_negeerBestaande) {
+    const nu0 = Date.now();
+    const alle0 = await b.afspraken(BIZ, { start: new Date(nu0).toISOString(), end: new Date(nu0 + 61 * 86400000).toISOString() });
+    const bestaand = alle0.filter(a => a.serviceId === SERVICE_ID && (a.mail || '').toLowerCase() === String(klantMail).toLowerCase())
+      .sort((x, y) => String(x.start).localeCompare(String(y.start)))[0];
+    if (bestaand) {
+      const p = nlDelen(new Date(parseUtc(bestaand.start)));
+      return { error: `Deze klant HEEFT al een showroomafspraak: ${DAGNAAM[p.weekdag]} ${p.datum} om ${p.tijd}. Er is NIETS geboekt. Bevestig de klant die bestaande afspraak, of gebruik showroom_afspraak_wijzigen als hij wil verzetten. Boek nooit een tweede afspraak naast een bestaande.` };
+    }
+  }
   start = normaliseerStart(start);
   const slots = await vrijeSlots({ dagenVooruit: 60, binnendecoratie });
   const slot = slots.find(s => parseUtc(s.start) === parseUtc(start));
@@ -174,7 +187,7 @@ async function wijzigShowroom({ klantMail, nieuweStart, klantNaam, klantTel, not
     return { geannuleerd: oudLokaal };
   }
   // Eerst de nieuwe boeken (mislukt dat, dan blijft de oude gewoon staan), daarna de oude annuleren.
-  const res = await boekShowroom({ start: nieuweStart, klantNaam: klantNaam || oud.klant, klantMail, klantTel: klantTel || oud.tel, notitie: notitie || 'Verzette afspraak.', binnendecoratie });
+  const res = await boekShowroom({ start: nieuweStart, klantNaam: klantNaam || oud.klant, klantMail, klantTel: klantTel || oud.tel, notitie: notitie || 'Verzette afspraak.', binnendecoratie, _negeerBestaande: true });
   if (res.error) return { error: `Nieuwe tijd niet geboekt (${res.error}). De oude afspraak (${oudLokaal}) staat nog gewoon.` };
   await veiligAnnuleren(oud.id, 'Deze afspraak is verzet naar een nieuw tijdstip; je ontvangt daarvoor een aparte bevestiging.');
   return { verzet: true, oudeTijd: oudLokaal, ...res };

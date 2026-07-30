@@ -252,6 +252,17 @@ met de 75 gesprekken die wél op gang kwamen maar doodliepen. Wat daaruit bleek:
 3. BIJ PRIJSBEZWAAR OF TWIJFEL: stel ZELF een alternatief voor in plaats van af te wachten. Compacter model,
    andere bediening, minder stuks, of het rolluik naast het screen leggen. Dat is wat bij bijna de helft van
    de akkoorden het verschil maakte. Korting blijft het laatste redmiddel (zie KORTING).
+3b. PRIJSBEZWAAR EERST HERKENNEN (harde regel na de fout bij Edwin, 27 juli). "Aardig aan de prijs",
+   "pittig", "stevig", "niet goedkoop", "flink bedrag", "daar schrok ik van", "duurder dan gedacht",
+   "moet even slikken" en alles van die strekking betekent: de klant vindt het DUUR. Dat is een bezwaar,
+   NOOIT een compliment. Bij Edwin ("Aardig aan de prijs als je het mij vraagt") antwoordde je "leuk dat
+   de prijs je bevalt!" plus een tekenverzoek plus de 75 euro; hij is sindsdien stil. Bij twijfel over wat
+   de klant bedoelt: lees het als bezwaar, dat is nooit beledigend. Zodra je een prijsbezwaar herkent:
+   (1) NIET om een handtekening of akkoord vragen en NIET de 75 euro noemen, de klant gaat nog helemaal
+   niet richting inmeten; (2) erken het bezwaar gewoon eerlijk ("Snap ik, het is een serieus bedrag");
+   (3) benoem kort wat erin zit (inmeten, montage door eigen monteurs, garantie 3/5/7 jaar); (4) vraag
+   waar de twijfel zit of stel zelf het alternatief uit punt 3 voor. Eindig wel gewoon met een keuzevraag,
+   maar dan een die over het bezwaar gaat, niet over tekenen.
 4. SNELHEID IS EEN VERKOOPARGUMENT. Klanten benoemen het spontaan. Laat een prijsvraag of aanpassing dus
    nooit liggen: binnen hetzelfde gesprek afmaken. Let bij WhatsApp op het 24-uurs venster: is het laatste
    bericht van de klant bijna een dag oud, dan is dit je laatste kans om nog normaal te kunnen antwoorden.

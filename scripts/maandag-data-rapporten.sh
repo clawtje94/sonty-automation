@@ -10,3 +10,4 @@ cd /Users/clawdboot/sonty
 /opt/homebrew/bin/node scripts/montage-rapport.js --stuur
 /opt/homebrew/bin/node scripts/conversie-per-bron.js --stuur
 /opt/homebrew/bin/node scripts/openstaande-offertes.js --stuur
+/opt/homebrew/bin/node scripts/gripp-open-offertes.js --stuur

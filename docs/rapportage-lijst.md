@@ -18,6 +18,7 @@ memory `sonty-offerte-sheet-structuur`. Jonge weken altijd met rijpheidswaarschu
 | 5 | Conversie per bron (Google/Meta/buren), 4 weken | ma 08:35 | `conversie-per-bron.js` (nl.sonty.maandag-data) |
 | 7 | Geld op de plank: open offertes 14-60 dgn, per leeftijdsbucket | ma 08:35 | `openstaande-offertes.js` (nl.sonty.maandag-data) |
 | 6 | Maandrapport: afgesloten maand vs zelfde maand vorig jaar | 1e vd maand 08:50 | `maandrapport.js` (nl.sonty.maandrapport) |
+| 14 | Gripp openstaand + opruimlijst (oude versies, status-fouten, echt open) | ma 08:35 | `gripp-open-offertes.js` (nl.sonty.maandag-data) |
 
 Bestelde items van 30 juli (#2, #3 en #13 montages) staan erin.
 

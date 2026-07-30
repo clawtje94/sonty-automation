@@ -1,4 +1,15 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-27)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-30)
+
+## VVE-RADAR V1 LIVE (30 juli) — VvE's actief benaderen als vaste zonweringspartner
+- **Strategie (akkoord Daimy)**: eigenaar mag niet zomaar zonwering aan gemeenschappelijke gevel → Sonty stelt gratis zonweringsprotocol + ALV-besluit op met Sonty als vaste leverancier → elke eigenaar loopt daarna de facto via ons. Regio: heel Zuid-Holland. Route naar schaal: VvE-beheerders (raamcontract).
+- **Tool**: sonty-website `/admin/vve-radar` (code sonty2288, PR #47). Scan per plaats/kaartgebied → complexen met score 0-100 (woningen + zon beste gevel uit pand-polygon + CBS-koop% + bouwjaar), luchtfoto, opvolgstatus per gebouw in KV (`vvestatus`), CSV met "Aan het bestuur van de VvE". Delft-test: 668 complexen / 29.842 woningen in ~3 s.
+- **PDOK-lessen**: WFS-URL max ±4 KB (20 ids per Or-filter-batch), elk antwoord max 1000 records → pagineren met startIndex (helper `wfsAll` in de route).
+- **WACHT OP DAIMY**: (1) KvK API-abonnement aanvragen op developers.kvk.nl (tekenbevoegde, €6,40/mnd) → daarna bouwen: VvE-namen, correspondentieadres (=beheerder!) en wekelijkse nieuwe-VvE-check; (2) postbode.nu saldo vóór echte brieven.
+- **Nog te bouwen (afgesproken)**: beheerders-tab (VvE-beheerkantoren + contactinfo + LinkedIn-zoeklinks naar beslissers — GEEN LinkedIn-scraper, ToS/AVG), brief-flow via postbode, KvK-verrijking + cron nieuwe VvE's.
+
+## OPVOLGING 24U-VENSTER AANGEZET (30 juli, opdracht Daimy)
+- Terugblik AI-gesprekken: 6 persoonlijke follow-ups lagen klaar binnen het 24u-venster, 1 verstuurd. Oorzaak gemiste 5: avond-kandidaten kregen buiten bot-uren een beoordeling → state.beoordeeld → ochtendrun blokkeerde ze ("vandaag al beoordeeld").
+- Fix in opvolging-daemon.js: snel-kandidaat buiten bot-uren = overslaan ZONDER state-write, ochtendrun pakt hem vers. Mens-nodig/toegewezen blijft geblokkeerd (grootste groep: 645 blokkades/3 dgn — volume ligt bij het team). Daimy's 23-07-regel (na offerte zelfde dag niet pushen) blijft in de AI-beoordeling staan.
 
 ## GRIPP-KOPPELING GELEGD (30 juli): openstaand-rapport + opruimlijst (item 14)
 - Gripp offer-API werkt (alleen-lezen key uit secrets.js). **Definitie "openstaand" = Daimy's scherm: status Verzonden (9) + archived=false, bedragen EX btw** (API /1,21). Alleen op status filteren telt gearchiveerde mee (750/€3M vs echte 162/€623k).

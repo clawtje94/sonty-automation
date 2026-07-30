@@ -85,7 +85,10 @@ check('zipDesign 180x200 → tableSmall 1355 (was 1484)', api.lookupPrice('zipDe
 check('zipDesign 200x150 → tableLarge 1302 (ongewijzigd)', api.lookupPrice('zipDesign110', 200, 150), 1302);
 check('zipDesign 550cm (>500) → null (was 500-prijs)', api.lookupPrice('zipDesign110', 550, 200), null);
 check('zipDesign 300x300 (hoogte>270) → null (was 270-prijs)', api.lookupPrice('zipDesign110', 300, 300), null);
-check('zipSquare 350cm (>340) → null (was 340-prijs)', api.lookupPrice('zipSquare85100', 350, 200), null);
+// 30-07: boekpagina 9 loopt door tot B=400; de oude tabel miste de kolommen 360-400
+// (zelfde inleesfout als de rolluiken). 350cm valt nu in staffel 360 = boek 1711.
+check('zipSquare 350cm → staffel 360 = 1711 (boek p9)', api.lookupPrice('zipSquare85100', 350, 200), 1711);
+check('zipSquare 450cm (>400) → null', api.lookupPrice('zipSquare85100', 450, 200), null);
 check('rolluikS42 450cm (>400) → null (was 400-prijs)', api.lookupPrice('rolluikS42', 450, 150), null);
 
 console.log('=== B. K4: knikarm minderprijs uitval 150/200 ===');

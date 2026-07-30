@@ -5,7 +5,7 @@
 // en overhead zitten er nog NIET af.
 const fs = require('fs');
 const { rows } = JSON.parse(fs.readFileSync(__dirname+'/../data/conversie-2025-raw.json','utf8'));
-const isAkkoord = r => r.akkoordBedrag > 0 || /^\d{3,6}$/.test(r.nummer||'') || !!r.akkoordDatum;
+const isAkkoord = r => r.inkoop > 0 || r.akkoordBedrag > 0 || /^\d{3,6}$/.test(r.nummer||'') || !!r.akkoordDatum;
 const grp = r => { const t=String(r.afkomst||'').trim().toLowerCase();
   if (t.startsWith('face')||t.startsWith('insta')) return 'Meta';
   if (t.startsWith('goog')) return 'Google';

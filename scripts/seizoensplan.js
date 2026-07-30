@@ -14,7 +14,7 @@ for (const j of [2024, 2025, 2026]) {
   try { rows.push(...JSON.parse(fs.readFileSync(__dirname + `/../data/conversie-${j}-raw.json`, 'utf8')).rows); }
   catch { console.error(`geen data voor ${j}`); }
 }
-const isAkk = r => r.akkoordBedrag > 0 || /^\d{3,6}$/.test(r.nummer||'') || !!r.akkoordDatum;
+const isAkk = r => r.inkoop > 0 || r.akkoordBedrag > 0 || /^\d{3,6}$/.test(r.nummer||'') || !!r.akkoordDatum;
 const eur = n => '€' + Math.round(n).toLocaleString('nl-NL');
 const pc = (a,b) => b ? a/b*100 : 0;
 const f1 = n => n.toFixed(1).replace('.',',');

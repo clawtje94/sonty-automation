@@ -5,7 +5,7 @@
 // Peildatum 27-07-2026: jan t/m apr 2026 zijn rijp, mei bijna, juni/juli nog niet.
 const fs = require('fs');
 const MND = ['','jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
-const isAkk = r => r.akkoordBedrag > 0 || /^\d{3,6}$/.test(r.nummer||'') || !!r.akkoordDatum;
+const isAkk = r => r.inkoop > 0 || r.akkoordBedrag > 0 || /^\d{3,6}$/.test(r.nummer||'') || !!r.akkoordDatum;
 const eur = n => '€' + Math.round(n).toLocaleString('nl-NL');
 const pc = (a,b) => b ? a/b*100 : 0;
 const f1 = n => n.toFixed(1).replace('.',',');

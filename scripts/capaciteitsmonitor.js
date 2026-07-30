@@ -48,7 +48,7 @@ const pd = t => { const s = String(t || '').trim();
   m = s.match(/^(\d{1,2})[-\/](\d{1,2})[-\/](\d{2,4})/);
   if (m) { let y = +m[3]; if (y < 100) y += 2000; return new Date(y, +m[2] - 1, +m[1]); }
   return null; };
-const isAkk = r => r.akkoordBedrag > 0 || /^\d{3,6}$/.test(r.nummer || '') || !!r.akkoordDatum;
+const isAkk = r => r.inkoop > 0 || r.akkoordBedrag > 0 || /^\d{3,6}$/.test(r.nummer || '') || !!r.akkoordDatum;
 const weekSleutel = d => { const t = new Date(d); t.setHours(0, 0, 0, 0);
   t.setDate(t.getDate() + 3 - ((t.getDay() + 6) % 7));
   const j = new Date(t.getFullYear(), 0, 4);
@@ -72,6 +72,7 @@ async function leesJaar(sheets, jaar) {
       akkoordDatum: col('akkoord') >= 0 ? hdr.indexOf('akkoord', col('akkoord') + 1) : -1,
       nummer: col('nummer'),
       akkoordBedrag: hdr.lastIndexOf('akkoord'),
+      inkoop: col('inkooop incl btw'),   // typo staat zo in de sheet; €1 = akkoord-markering
     };
     for (let i = 3; i < vals.length; i++) {
       const v = vals[i]; if (!v) continue;
@@ -82,7 +83,8 @@ async function leesJaar(sheets, jaar) {
         prod: String(v[cols.prod] || '').trim(),
         akkoordDatum: cols.akkoordDatum >= 0 ? String(v[cols.akkoordDatum] || '').trim() : '',
         nummer: cols.nummer >= 0 ? String(v[cols.nummer] || '').trim() : '',
-        akkoordBedrag: cols.akkoordBedrag >= 0 ? money(v[cols.akkoordBedrag]) : 0 });
+        akkoordBedrag: cols.akkoordBedrag >= 0 ? money(v[cols.akkoordBedrag]) : 0,
+        inkoop: cols.inkoop >= 0 ? money(v[cols.inkoop]) : 0 });
     }
   }
   return rows;

@@ -18,7 +18,7 @@
 // Zodra de kostenkolom voor 2026 gevuld is: vul SPEND aan en dit rapport klopt weer.
 const fs=require('fs');
 const rows=JSON.parse(fs.readFileSync(__dirname+'/../data/conversie-2025-raw.json','utf8')).rows;
-const isAkk=r=>r.akkoordBedrag>0||/^\d{3,6}$/.test(r.nummer||'')||!!r.akkoordDatum;
+const isAkk=r=>r.inkoop > 0 || r.akkoordBedrag>0||/^\d{3,6}$/.test(r.nummer||'')||!!r.akkoordDatum;
 const KAN=r=>{const t=String(r.afkomst||'').trim().toLowerCase();
  if(t.startsWith('face')||t.startsWith('insta'))return'Meta';if(t.startsWith('goog'))return'Google';return null;};
 const SPEND={3:{Meta:19800,Google:6300},4:{Meta:22000,Google:10300},5:{Meta:23700,Google:17100}};

@@ -64,6 +64,42 @@ async function checkTelegramInbox() {
     return []; // geen wachtende berichten — onbeslist maar geen alarm
   } catch { return []; } // netwerkprobleem bij de check zelf ≠ poller kapot
 }
+
+// Zelfde 409-test voor de DATA-bot (@Sontydatabot) — die poller stierf op 28 juli.
+const DATABOT_TOKEN = '7775843600:AAHsz7X9ypMXxzQLquoMW1bVf037-WRsEeU';
+async function checkDatabotPoller() {
+  try {
+    const r = await fetch('https://api.telegram.org/bot' + DATABOT_TOKEN + '/getUpdates?timeout=0&limit=1', { signal: AbortSignal.timeout(8000) });
+    if (r.status === 409) return [];
+    const j = await r.json().catch(() => ({}));
+    if (j.ok && (j.result || []).length > 0) return ['databot-poller haalt berichten NIET op (' + j.result.length + '+ wachtend) — launchctl kickstart -k gui/501/nl.sonty.databot-poll'];
+    return [];
+  } catch { return []; }
+}
+
+// De les van 28 juli: de databot-poller VING het bericht van Daimy wel, maar geen enkele
+// sessie las het — twee dagen geen antwoord. Daarom hard alarm zodra een inbox ongelezen
+// regels heeft die ouder zijn dan een uur (leespositie-bestand loopt achter op de inbox).
+function checkOngelezen() {
+  const issues = [];
+  const paren = [
+    ['hoofdbot', __dirname + '/../telegram-inbox.txt', __dirname + '/.telegram-inbox-lastread.txt'],
+    ['databot', __dirname + '/../sonty-data-inbox.txt', __dirname + '/.sonty-data-lastread.txt'],
+  ];
+  for (const [naam, inbox, lastread] of paren) {
+    try {
+      if (!fs.existsSync(inbox)) continue;
+      const regels = fs.readFileSync(inbox, 'utf8').trim().split('\n').filter(l => l.trim());
+      let pos = 0;
+      try { pos = parseInt(fs.readFileSync(lastread, 'utf8').trim()) || 0; } catch {}
+      const ongelezen = regels.length - pos;
+      if (ongelezen <= 0) continue;
+      const ouderdomMin = Math.round((Date.now() - fs.statSync(inbox).mtimeMs) / 60000);
+      if (ouderdomMin > 60) issues.push(`${naam}: ${ongelezen} ONGELEZEN bericht(en) van Daimy, oudste write ${ouderdomMin} min geleden — geen sessie leest mee!`);
+    } catch (e) { issues.push(`${naam}: ongelezen-check faalde: ${e.message}`); }
+  }
+  return issues;
+}
 // NB: nl.sonty.auto-sync is hier bewust weg — de RP→HubSpot-sync draait via crontab,
 // niet via launchd. Die wordt hieronder gecheckt op de mtime van logs/sync.log.
 // De Outlook/Planado-sync uit de oude naam bestaat niet meer als daemon.
@@ -140,6 +176,14 @@ async function main() {
   const inboxIssues = await checkTelegramInbox();
   if (inboxIssues.length) { problems++; results.push('❌ Telegram-inbox: ' + inboxIssues.join(', ')); }
   else results.push('✅ Telegram-inbox');
+
+  const databotIssues = await checkDatabotPoller();
+  if (databotIssues.length) { problems++; results.push('❌ Databot: ' + databotIssues.join(', ')); }
+  else results.push('✅ Databot-poller');
+
+  const ongelezen = checkOngelezen();
+  if (ongelezen.length) { problems++; results.push('❌ ' + ongelezen.join('\n❌ ')); }
+  else results.push('✅ Geen ongelezen Daimy-berichten');
 
   // RP→HubSpot sync (crontab, elke 15 min): check dat logs/sync.log vers is
   try {

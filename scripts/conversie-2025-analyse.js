@@ -8,7 +8,7 @@ const MND = ['','jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov
 // (mei 1, juni 0, aug 2 akkoorden op >1200 offertes = onmogelijk). Het akkoord-BLOK
 // (Gripp-opdrachtnummer, akkoorddatum, akkoordbedrag) is wel consistent gevuld en
 // onderling in overeenstemming (1059 / 1081 / 1088 rijen). Dat is dus de maatstaf.
-const isAkkoord = r => r.akkoordBedrag > 0 || /^\d{3,6}$/.test(r.nummer||'') || !!r.akkoordDatum;
+const isAkkoord = r => r.inkoop > 0 || r.akkoordBedrag > 0 || /^\d{3,6}$/.test(r.nummer||'') || !!r.akkoordDatum;
 
 // Afkomst normaliseren (trailing spaces, spelling)
 const normAfkomst = a => {

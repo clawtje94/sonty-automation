@@ -6,7 +6,7 @@ const JAAR = +(process.argv[process.argv.indexOf('--jaar') + 1]) || 2025;
 const { rows } = JSON.parse(fs.readFileSync(__dirname + `/../data/conversie-${JAAR}-raw.json`, 'utf8'));
 
 // Akkoord volgens het akkoord-BLOK, niet de vinkjeskolom (die is onbruikbaar bijgehouden).
-const isAkk = r => r.akkoordBedrag > 0 || /^\d{3,6}$/.test(r.nummer || '') || !!r.akkoordDatum;
+const isAkk = r => r.inkoop > 0 || r.akkoordBedrag > 0 || /^\d{3,6}$/.test(r.nummer || '') || !!r.akkoordDatum;
 
 const A = a => { const t = String(a || '').trim().toLowerCase(); if (!t) return 'Niet ingevuld';
   if (t.startsWith('face')) return 'Facebook';

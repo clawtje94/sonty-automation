@@ -70,7 +70,7 @@ const SPEND = { 3:{Meta:19800,Google:6300}, 4:{Meta:22000,Google:10300}, 5:{Meta
 const spendTot = Object.values(SPEND).reduce((a,m)=>a+m.Meta+m.Google, 0);
 // orders uit Meta+Google in die maanden
 const raw25 = JSON.parse(fs.readFileSync(path.join(__dirname,'..','data','conversie-2025-raw.json'),'utf8')).rows;
-const isAkk = r => r.akkoordBedrag>0 || /^\d{3,6}$/.test(r.nummer||'') || !!r.akkoordDatum;
+const isAkk = r => r.inkoop > 0 || r.akkoordBedrag>0 || /^\d{3,6}$/.test(r.nummer||'') || !!r.akkoordDatum;
 const betaald = r => { const t=String(r.afkomst||'').trim().toLowerCase();
   return t.startsWith('face')||t.startsWith('insta')||t.startsWith('goog'); };
 let bOff=0, bAkk=0;

@@ -38,5 +38,5 @@ per telefoon na 5 werkdagen. T&T eerst: buurman-verhaal, evt. gewoon langsgaan.
 
 - **AdHoc Data** (adhocdata.nl/branches/vve) — alle ~135.000 VvE's NL (KvK-basis), adres + waar beschikbaar tel/e-mail; markt-indicatie vanaf ~€0,08/record of abo ~€55/mnd.
 - **Infofolio VvE Dataplatform** (infofolio.nl) — platform met alle VvE-complexen + adresscanner.
-- **Wolting Marketing Support** — bestand VvE-beheerkantoren mét contactpersoon-namen en functies (beste voor beheerder-spoor).
+- **Wolting Marketing Support** — GEVERIFIEERD (site, 2026-07-30): bestand van 265 VvE-beheerkantoren NL met 147 contactpersonen (namen+functies), NAW, telefoon, websites; GEEN e-mail (mag wettelijk niet geleverd). €250 ex btw eenmalig, €90/jr updates, Excel, proefbestand op aanvraag. Beste voor beheerder-spoor; mailadressen zoeken we zelf per kantoor via hun site.
 - Verwachting: sterk in postadressen + VvE→beheerder-koppeling; e-mail beperkt (opt-in-regels, vooral info@).

@@ -33,3 +33,10 @@ per telefoon na 5 werkdagen. T&T eerst: buurman-verhaal, evt. gewoon langsgaan.
   duidelijk gerechtvaardigd belang en opt-out.
 - Verzenden vanaf info@sonty.nl (besluit Daimy 2026-07-30, geen aparte mailbox).
 - Kleine batches, persoonlijk opgesteld; geen bulk-spam.
+
+## Koopbare databases (gevonden 2026-07-30, offertes nog aan te vragen)
+
+- **AdHoc Data** (adhocdata.nl/branches/vve) — alle ~135.000 VvE's NL (KvK-basis), adres + waar beschikbaar tel/e-mail; markt-indicatie vanaf ~€0,08/record of abo ~€55/mnd.
+- **Infofolio VvE Dataplatform** (infofolio.nl) — platform met alle VvE-complexen + adresscanner.
+- **Wolting Marketing Support** — bestand VvE-beheerkantoren mét contactpersoon-namen en functies (beste voor beheerder-spoor).
+- Verwachting: sterk in postadressen + VvE→beheerder-koppeling; e-mail beperkt (opt-in-regels, vooral info@).

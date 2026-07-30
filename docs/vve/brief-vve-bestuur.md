@@ -34,7 +34,7 @@ presenteren het protocol in 15 minuten op uw eerstvolgende vergadering.
 Met zonnige groet,
 
 **Sonty** — zonwering en raamdecoratie
-[telefoon] · vve@sonty.nl · sonty.nl/vve
+[telefoon] · info@sonty.nl · sonty.nl/vve
 
 *Sonty werkt vanuit Berkel en Rodenrijs voor heel Zuid-Holland.*
 

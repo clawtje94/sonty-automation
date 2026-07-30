@@ -31,5 +31,5 @@ per telefoon na 5 werkdagen. T&T eerst: buurman-verhaal, evt. gewoon langsgaan.
   adressen (info@) mag; altijd nette afmeldmogelijkheid opnemen.
 - Persoonlijke mailadressen (naam@…) terughoudend gebruiken (AVG): alleen met
   duidelijk gerechtvaardigd belang en opt-out.
-- Verzenden vanaf een eigen adres (voorstel: vve@sonty.nl) — WACHT OP DAIMY.
+- Verzenden vanaf info@sonty.nl (besluit Daimy 2026-07-30, geen aparte mailbox).
 - Kleine batches, persoonlijk opgesteld; geen bulk-spam.

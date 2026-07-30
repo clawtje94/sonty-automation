@@ -23,6 +23,12 @@ const KEY = CFG.RP_API_KEY;
 const LOG = path.join(__dirname, '..', 'data', 'prijsfix-288-log.json');
 const BACKUPDIR = path.join(__dirname, '..', 'data', 'prijsfix-288-backups');
 
+// ALLEEN de offertes die daadwerkelijk met de corrupte tabel zijn gemaakt (v4-periode
+// vanaf 29 juni, uit de offerte-backups). Oudere SENT-offertes (o.a. 2025) zijn met een
+// ander prijsboek gemaakt; daar is een tabel-delta betekenisloos. Eerste dry-run zonder
+// dit filter pakte 3.340 documenten — vandaar deze harde begrenzing.
+const SCOPE = new Set(Object.keys(JSON.parse(fs.readFileSync('/private/tmp/claude-501/-Users-clawdboot/05088cc5-0b16-4a82-8a8f-f244ef58700b/scratchpad/akkoord-fout.json', 'utf8'))));
+
 const NIEUW = require('../data/sunmaster-prices-2026.json').rolluikS42.table;
 // De oude (foute) tabel exact zoals hij was vóór de fix van vandaag.
 const OUD = JSON.parse(execFileSync('git', ['show', '06c5d6b^:data/sunmaster-prices-2026.json'], { cwd: path.join(__dirname, '..'), encoding: 'utf8' })).rolluikS42.table;
@@ -41,7 +47,7 @@ async function main() {
   fs.mkdirSync(BACKUPDIR, { recursive: true });
   const alle = (await get(`/document-service/v1/${PID}/quotations`))?.quotationDatas || [];
   if (!alle.length) throw new Error('RP-lijst leeg, gestopt');
-  const sent = alle.filter((q) => q.documentStatus === 'SENT');
+  const sent = alle.filter((q) => q.documentStatus === 'SENT' && SCOPE.has(String(q.documentNumber)));
   console.log(`RP: ${alle.length} documenten, ${sent.length} op SENT. Modus: ${ECHT ? 'ECHT' : 'dry-run'}\n`);
 
   const log = { gestart: new Date().toISOString(), modus: ECHT ? 'echt' : 'dry-run', offertes: [] };

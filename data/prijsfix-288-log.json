@@ -1,0 +1,5051 @@
+{
+ "gestart": "2026-07-30T10:48:43.446Z",
+ "modus": "echt",
+ "offertes": [
+  {
+   "nummer": "202610703",
+   "docId": "d954bab4-c127-4460-898c-2944c5ba394a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3201x1000",
+     "oud": 1467.4,
+     "nieuw": 1505.9,
+     "delta": 38.5,
+     "units": 1
+    }
+   ],
+   "som": 38.5
+  },
+  {
+   "nummer": "202610688",
+   "docId": "6a382f08-45c6-4153-863d-044c1d5e4a43",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1301",
+     "oud": 1467.4,
+     "nieuw": 1532.3,
+     "delta": 64.9,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1956x1325",
+     "oud": 1333.2,
+     "nieuw": 1338.7,
+     "delta": 5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3195x2003",
+     "oud": 1658.8,
+     "nieuw": 1943.7,
+     "delta": 284.9,
+     "units": 1
+    }
+   ],
+   "som": 355.3
+  },
+  {
+   "nummer": "202610668",
+   "docId": "08c3946b-d782-473d-8ad6-e788de929fc5",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1000",
+     "oud": 1214.4,
+     "nieuw": 1249.6,
+     "delta": 35.2,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2526x1000",
+     "oud": 1316.7,
+     "nieuw": 1351.9,
+     "delta": 35.2,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2518x2011",
+     "oud": 1747.9,
+     "nieuw": 1763.3,
+     "delta": 15.4,
+     "units": 1
+    }
+   ],
+   "som": 85.8
+  },
+  {
+   "nummer": "202610658",
+   "docId": "270a65e7-73b6-413c-835a-2e01793d6998",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2700x1700",
+     "oud": 1651.1,
+     "nieuw": 1647.8,
+     "delta": -3.3,
+     "units": 1
+    }
+   ],
+   "som": -3.3
+  },
+  {
+   "nummer": "202610636",
+   "docId": "a2f6609d-7e97-4fbe-8b15-694e6c45a2c8",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3500x1500",
+     "oud": 1675.0800000000002,
+     "nieuw": 1788.38,
+     "delta": 113.3,
+     "units": 1
+    }
+   ],
+   "som": 113.3
+  },
+  {
+   "nummer": "202610635",
+   "docId": "74b75144-b16d-4699-b8a2-db89dd0f9427",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2800x1700",
+     "oud": 1651.1,
+     "nieuw": 1647.8,
+     "delta": -3.3,
+     "units": 2
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2900x1200",
+     "oud": 1433.3,
+     "nieuw": 1478.4,
+     "delta": 45.1,
+     "units": 1
+    }
+   ],
+   "som": 38.5
+  },
+  {
+   "nummer": "202610633",
+   "docId": "c47bccd3-8e9b-45d0-aba4-40e5d9b460f0",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1500x1742",
+     "oud": 1340.9,
+     "nieuw": 1349.7,
+     "delta": 8.8,
+     "units": 1
+    }
+   ],
+   "som": 8.8
+  },
+  {
+   "nummer": "202610631",
+   "docId": "76355f53-9315-4b61-8cc7-888bbd6e54fa",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x2800",
+     "oud": 1744.44,
+     "nieuw": 2090.94,
+     "delta": 346.5,
+     "units": 1
+    }
+   ],
+   "som": 346.5
+  },
+  {
+   "nummer": "202610630",
+   "docId": "7e8851e2-3615-42f8-a631-1708ffe73bf8",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1605x2004",
+     "oud": 1406.68,
+     "nieuw": 1412.18,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 5.5
+  },
+  {
+   "nummer": "202610614",
+   "docId": "005101bb-d1b6-4912-9218-5f6a348909ed",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1600x1100",
+     "oud": 1452,
+     "nieuw": 1456.4,
+     "delta": 4.4,
+     "units": 3
+    }
+   ],
+   "som": 13.2
+  },
+  {
+   "nummer": "202610606",
+   "docId": "852d99db-8abd-4355-897f-2bd8d2bb1822",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1870x2400",
+     "oud": 1923.24,
+     "nieuw": 1933.14,
+     "delta": 9.9,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2870x1000",
+     "oud": 1664.52,
+     "nieuw": 1710.72,
+     "delta": 46.2,
+     "units": 1
+    }
+   ],
+   "som": 56.1
+  },
+  {
+   "nummer": "202610600",
+   "docId": "e8a35635-39ec-432e-8d10-8d7b33523f37",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3190x1200",
+     "oud": 1467.4,
+     "nieuw": 1515.8,
+     "delta": 48.4,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2660x1200",
+     "oud": 1403.6,
+     "nieuw": 1467.4,
+     "delta": 63.8,
+     "units": 1
+    }
+   ],
+   "som": 112.2
+  },
+  {
+   "nummer": "202610598",
+   "docId": "c7d34d1c-38d9-4ca2-a61e-e73716342c0b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3100x1500",
+     "oud": 1543.3,
+     "nieuw": 1658.8,
+     "delta": 115.5,
+     "units": 1
+    }
+   ],
+   "som": 115.5
+  },
+  {
+   "nummer": "202610591",
+   "docId": "69064e6d-fd0b-4602-881a-0ca4c7818a10",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1100",
+     "oud": 1271.6,
+     "nieuw": 1295.8,
+     "delta": 24.2,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1100",
+     "oud": 1271.6,
+     "nieuw": 1295.8,
+     "delta": 24.2,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2100x1200",
+     "oud": 1327.7,
+     "nieuw": 1338.7,
+     "delta": 11,
+     "units": 1
+    }
+   ],
+   "som": 59.4
+  },
+  {
+   "nummer": "202610563",
+   "docId": "931b277d-9b54-4037-bcd1-131cf3fee782",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2889x1400",
+     "oud": 1467,
+     "nieuw": 1531.9,
+     "delta": 64.9,
+     "units": 1
+    }
+   ],
+   "som": 64.9
+  },
+  {
+   "nummer": "202610557",
+   "docId": "873f1759-ccd3-4812-8007-e51475e5e843",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2120x1060",
+     "oud": 1526.8600000000001,
+     "nieuw": 1537.86,
+     "delta": 11,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1560x1150",
+     "oud": 1391.5,
+     "nieuw": 1395.9,
+     "delta": 4.4,
+     "units": 1
+    }
+   ],
+   "som": 15.4
+  },
+  {
+   "nummer": "202610552",
+   "docId": "1d472084-b825-4be9-9852-ce5e5cdb687c",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3600x2200",
+     "oud": 1865.6,
+     "nieuw": 2116.4,
+     "delta": 250.8,
+     "units": 1
+    }
+   ],
+   "som": 250.8
+  },
+  {
+   "nummer": "202610551",
+   "docId": "395d9cf8-ba64-4c5a-b917-3476bebe3460",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2330x1600",
+     "oud": 961,
+     "nieuw": 955.5,
+     "delta": -5.5,
+     "units": 1
+    }
+   ],
+   "som": -5.5
+  },
+  {
+   "nummer": "202610533",
+   "docId": "217b67f7-2647-4015-9113-2251b62cb528",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2050x1760",
+     "oud": 1229,
+     "nieuw": 1223.5,
+     "delta": -5.5,
+     "units": 2
+    }
+   ],
+   "som": -11
+  },
+  {
+   "nummer": "202610528",
+   "docId": "99a6dfce-934e-4e41-8f7e-2ed9243f2d38",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1000",
+     "oud": 921.8,
+     "nieuw": 955.9,
+     "delta": 34.1,
+     "units": 1
+    }
+   ],
+   "som": 34.1
+  },
+  {
+   "nummer": "202610502",
+   "docId": "93dd4b82-0205-4e6e-99eb-53062ba6fd75",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2290x1084",
+     "oud": 1357.4,
+     "nieuw": 1376.1,
+     "delta": 18.7,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2875x1300",
+     "oud": 1467.4,
+     "nieuw": 1532.3,
+     "delta": 64.9,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3012x2400",
+     "oud": 1768.8,
+     "nieuw": 2021.8,
+     "delta": 253,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1300x2534",
+     "oud": 1454.2,
+     "nieuw": 1446.5,
+     "delta": -7.7,
+     "units": 1
+    }
+   ],
+   "som": 328.9
+  },
+  {
+   "nummer": "202610483",
+   "docId": "a20394ef-c844-4118-b6d6-3a4b1cede571",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1400",
+     "oud": 1143.56,
+     "nieuw": 1212.86,
+     "delta": 69.3,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1807x1403",
+     "oud": 994.29,
+     "nieuw": 1021.79,
+     "delta": 27.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3200x1407",
+     "oud": 1186.57,
+     "nieuw": 1302.07,
+     "delta": 115.5,
+     "units": 1
+    }
+   ],
+   "som": 212.3
+  },
+  {
+   "nummer": "202610439",
+   "docId": "1d631618-f1b7-4de1-8c10-0b03738b2163",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1100x1620",
+     "oud": 1258,
+     "nieuw": 1241.5,
+     "delta": -16.5,
+     "units": 2
+    }
+   ],
+   "som": -33
+  },
+  {
+   "nummer": "202610432",
+   "docId": "9c2bdb87-ff6c-4c56-8fa4-fa4a7574446a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2500x1000",
+     "oud": 1053.8,
+     "nieuw": 1089,
+     "delta": 35.2,
+     "units": 2
+    }
+   ],
+   "som": 70.4
+  },
+  {
+   "nummer": "202610390",
+   "docId": "2a4322bf-d4fd-42d8-9122-c5c8d54d4ad1",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3620x1340",
+     "oud": 1364,
+     "nieuw": 1449.8,
+     "delta": 85.8,
+     "units": 1
+    }
+   ],
+   "som": 85.8
+  },
+  {
+   "nummer": "202610384",
+   "docId": "a3513f5b-d423-4aab-9c63-bedd1aab6452",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x2027",
+     "oud": 1658.8,
+     "nieuw": 1943.7,
+     "delta": 284.9,
+     "units": 1
+    }
+   ],
+   "som": 284.9
+  },
+  {
+   "nummer": "202610382",
+   "docId": "da412e3c-f9ba-4b06-9e3e-9df545da24b1",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1400x1460",
+     "oud": 992.2,
+     "nieuw": 986.7,
+     "delta": -5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1400x1460",
+     "oud": 992.2,
+     "nieuw": 986.7,
+     "delta": -5.5,
+     "units": 1
+    }
+   ],
+   "som": -11
+  },
+  {
+   "nummer": "202610370",
+   "docId": "3d7fe96b-2bcc-4f91-bff3-899125371abc",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2800x1000",
+     "oud": 1083.5,
+     "nieuw": 1124.2,
+     "delta": 40.7,
+     "units": 1
+    }
+   ],
+   "som": 40.7
+  },
+  {
+   "nummer": "202610335",
+   "docId": "cc8c68e7-7327-4738-8c3d-52e4cdf335f6",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2720x2800",
+     "oud": 1491.6,
+     "nieuw": 1545.5,
+     "delta": 53.9,
+     "units": 1
+    }
+   ],
+   "som": 53.9
+  },
+  {
+   "nummer": "202610323",
+   "docId": "8f857110-c2a1-4387-8218-31fb1e33d95d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1000",
+     "oud": 1433.3,
+     "nieuw": 1467.4,
+     "delta": 34.1,
+     "units": 1
+    }
+   ],
+   "som": 34.1
+  },
+  {
+   "nummer": "202610321",
+   "docId": "29f41184-f5f2-4045-9547-f498dcff498d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3640x1340",
+     "oud": 1364,
+     "nieuw": 1449.8,
+     "delta": 85.8,
+     "units": 1
+    }
+   ],
+   "som": 85.8
+  },
+  {
+   "nummer": "202610284",
+   "docId": "13c29fa6-01eb-4e6a-89fc-4c0bde7c6050",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3400x1299",
+     "oud": 1472.46,
+     "nieuw": 1556.06,
+     "delta": 83.6,
+     "units": 1
+    }
+   ],
+   "som": 83.6
+  },
+  {
+   "nummer": "202610280",
+   "docId": "ad2bdd21-177c-4087-932d-aa63233799d4",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2248x1000",
+     "oud": 1290.3,
+     "nieuw": 1314.5,
+     "delta": 24.2,
+     "units": 1
+    }
+   ],
+   "som": 24.2
+  },
+  {
+   "nummer": "202610277",
+   "docId": "b1ba77a8-d1e4-449b-b19c-84ca3a38e5ad",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2756x1967",
+     "oud": 1208.9,
+     "nieuw": 1219.9,
+     "delta": 11,
+     "units": 1
+    }
+   ],
+   "som": 11
+  },
+  {
+   "nummer": "202610275",
+   "docId": "52513a76-8bd1-4f20-beed-5a34786f5469",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1300x1450",
+     "oud": 992.2,
+     "nieuw": 986.7,
+     "delta": -5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1300x1450",
+     "oud": 992.2,
+     "nieuw": 986.7,
+     "delta": -5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1850x1450",
+     "oud": 1376.1,
+     "nieuw": 1403.6,
+     "delta": 27.5,
+     "units": 1
+    }
+   ],
+   "som": 16.5
+  },
+  {
+   "nummer": "202610226",
+   "docId": "cc3045bf-07c6-4b57-84bb-bb8154c802c9",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2541x1195",
+     "oud": 1376.1,
+     "nieuw": 1427.8,
+     "delta": 51.7,
+     "units": 1
+    }
+   ],
+   "som": 51.7
+  },
+  {
+   "nummer": "202610211",
+   "docId": "3a6c6e55-d2f8-40ae-84d6-dc7e6a7a7074",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1240x1500",
+     "oud": 992.2,
+     "nieuw": 986.7,
+     "delta": -5.5,
+     "units": 2
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3500x1080",
+     "oud": 1280.4,
+     "nieuw": 1325.5,
+     "delta": 45.1,
+     "units": 1
+    }
+   ],
+   "som": 34.1
+  },
+  {
+   "nummer": "202610207",
+   "docId": "34539d41-2006-494e-b004-9d747f250e4f",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2895x1485",
+     "oud": 1243,
+     "nieuw": 1353,
+     "delta": 110,
+     "units": 1
+    }
+   ],
+   "som": 110
+  },
+  {
+   "nummer": "202610172",
+   "docId": "1cee05c0-44ac-4a6b-9f14-678843c0925b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1800",
+     "oud": 1430,
+     "nieuw": 1435.5,
+     "delta": 5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2750x1800",
+     "oud": 1651.1,
+     "nieuw": 1647.8,
+     "delta": -3.3,
+     "units": 1
+    }
+   ],
+   "som": 2.2
+  },
+  {
+   "nummer": "202610171",
+   "docId": "6cf2b8be-27f3-4977-bbaf-7f1825f61dc4",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1880x1623",
+     "oud": 1430,
+     "nieuw": 1435.5,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 5.5
+  },
+  {
+   "nummer": "202610166",
+   "docId": "6320565e-2af0-4d1a-8f07-d9f088b008f2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2200x1400",
+     "oud": 864.6,
+     "nieuw": 883.3,
+     "delta": 18.7,
+     "units": 1
+    }
+   ],
+   "som": 18.7
+  },
+  {
+   "nummer": "202610157",
+   "docId": "3380f13c-cf1f-4e74-80b9-daf82d421e2f",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2300x1215",
+     "oud": 1411.3,
+     "nieuw": 1416.8,
+     "delta": 5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2300x1215",
+     "oud": 1411.3,
+     "nieuw": 1416.8,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 11
+  },
+  {
+   "nummer": "202610130",
+   "docId": "71862606-2812-460d-96ba-3543bc19fd75",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1760x1200",
+     "oud": 1242,
+     "nieuw": 1258.5,
+     "delta": 16.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2670x1200",
+     "oud": 1404,
+     "nieuw": 1467.8,
+     "delta": 63.8,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3320x1200",
+     "oud": 1506,
+     "nieuw": 1554.4,
+     "delta": 48.4,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1900x1200",
+     "oud": 1272,
+     "nieuw": 1296.2,
+     "delta": 24.2,
+     "units": 1
+    }
+   ],
+   "som": 152.9
+  },
+  {
+   "nummer": "202610127",
+   "docId": "b5e8c461-c5e4-4d40-af72-359f52515af2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1550x1650",
+     "oud": 829.4,
+     "nieuw": 838.2,
+     "delta": 8.8,
+     "units": 1
+    }
+   ],
+   "som": 8.8
+  },
+  {
+   "nummer": "202610120",
+   "docId": "10ba0708-cf32-4160-b611-23a0c07a85bf",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1600x1700",
+     "oud": 1542.04,
+     "nieuw": 1550.84,
+     "delta": 8.8,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1600x1700",
+     "oud": 1542.04,
+     "nieuw": 1550.84,
+     "delta": 8.8,
+     "units": 1
+    }
+   ],
+   "som": 17.6
+  },
+  {
+   "nummer": "202610111",
+   "docId": "e2066656-db6e-4ac5-ba91-eea5d893b91a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1970x1000",
+     "oud": 1214.4,
+     "nieuw": 1249.6,
+     "delta": 35.2,
+     "units": 1
+    }
+   ],
+   "som": 35.2
+  },
+  {
+   "nummer": "202610075",
+   "docId": "5adbef20-bfe8-4d9f-8d8c-891b9a543966",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1667x2680",
+     "oud": 1592.64,
+     "nieuw": 1595.94,
+     "delta": 3.3,
+     "units": 1
+    }
+   ],
+   "som": 3.3
+  },
+  {
+   "nummer": "202610049",
+   "docId": "084d9ab7-36fa-4f67-835b-079da0cd95ed",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2500x1800",
+     "oud": 1591.7,
+     "nieuw": 1597.2,
+     "delta": 5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1570x1800",
+     "oud": 1340.9,
+     "nieuw": 1349.7,
+     "delta": 8.8,
+     "units": 1
+    }
+   ],
+   "som": 14.3
+  },
+  {
+   "nummer": "202610044",
+   "docId": "4e823d2c-9715-4b75-9045-2e8a96618107",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "3500x1500",
+     "oud": 1740.6,
+     "nieuw": 1853.9,
+     "delta": 113.3,
+     "units": 1
+    }
+   ],
+   "som": 113.3
+  },
+  {
+   "nummer": "202610038",
+   "docId": "44471e84-a767-4447-99b0-a8b17a64d22d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2950x1200",
+     "oud": 921.8,
+     "nieuw": 966.9,
+     "delta": 45.1,
+     "units": 1
+    }
+   ],
+   "som": 45.1
+  },
+  {
+   "nummer": "202610028",
+   "docId": "6b5530fa-f9a4-4cdf-9d3b-616f9b3f148c",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1790x1000",
+     "oud": 674.3,
+     "nieuw": 698.5,
+     "delta": 24.2,
+     "units": 1
+    }
+   ],
+   "som": 24.2
+  },
+  {
+   "nummer": "202610011",
+   "docId": "902571a8-048c-49c5-95b5-89391beeceaf",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2116x1000",
+     "oud": 997.7,
+     "nieuw": 1019.7,
+     "delta": 22,
+     "units": 1
+    }
+   ],
+   "som": 22
+  },
+  {
+   "nummer": "202610007",
+   "docId": "5ad318d5-8b61-4ea1-bee9-baa318565718",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2755x2395",
+     "oud": 1863.4,
+     "nieuw": 1887.6,
+     "delta": 24.2,
+     "units": 1
+    }
+   ],
+   "som": 24.2
+  },
+  {
+   "nummer": "202610006",
+   "docId": "5c10268d-8aae-4b66-b85c-7ec973857f1c",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2755x2395",
+     "oud": 1863.4,
+     "nieuw": 1887.6,
+     "delta": 24.2,
+     "units": 1
+    }
+   ],
+   "som": 24.2
+  },
+  {
+   "nummer": "20269966",
+   "docId": "8b95c33d-fd00-4b9f-a946-ce649fdc7b29",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2617x2360",
+     "oud": 1600.5,
+     "nieuw": 1624.7,
+     "delta": 24.2,
+     "units": 1
+    }
+   ],
+   "som": 24.2
+  },
+  {
+   "nummer": "20269945",
+   "docId": "19807abf-650b-4e1b-a8e8-62d023418d7d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3600x1600",
+     "oud": 1990.56,
+     "nieuw": 2103.86,
+     "delta": 113.3,
+     "units": 1
+    }
+   ],
+   "som": 113.3
+  },
+  {
+   "nummer": "20269915",
+   "docId": "119c14cd-320b-4e4c-b758-97af68ac6640",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x2489",
+     "oud": 1438.8,
+     "nieuw": 1801.8,
+     "delta": 363,
+     "units": 1
+    }
+   ],
+   "som": 363
+  },
+  {
+   "nummer": "20269909",
+   "docId": "a66dd85a-b165-41b2-b01c-488b8f65045e",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2505x1603",
+     "oud": 1080.2,
+     "nieuw": 1085.7,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 5.5
+  },
+  {
+   "nummer": "20269890",
+   "docId": "0ed86135-669f-47a8-812e-66f389e78a2d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1497",
+     "oud": 1505.9,
+     "nieuw": 1615.9,
+     "delta": 110,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2022x1528",
+     "oud": 1433.3,
+     "nieuw": 1424.5,
+     "delta": -8.8,
+     "units": 1
+    }
+   ],
+   "som": 101.2
+  },
+  {
+   "nummer": "20269881",
+   "docId": "7947924b-118f-4525-b260-10a6462dc65e",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2420x1970",
+     "oud": 1633.12,
+     "nieuw": 1629.82,
+     "delta": -3.3,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1200x2640",
+     "oud": 1385.18,
+     "nieuw": 1321.38,
+     "delta": -63.8,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1870x1200",
+     "oud": 1160.01,
+     "nieuw": 1184.21,
+     "delta": 24.2,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1900x1170",
+     "oud": 1160.01,
+     "nieuw": 1184.21,
+     "delta": 24.2,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3300x1120",
+     "oud": 1429.45,
+     "nieuw": 1477.85,
+     "delta": 48.4,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3300x1120",
+     "oud": 1429.45,
+     "nieuw": 1477.85,
+     "delta": 48.4,
+     "units": 1
+    }
+   ],
+   "som": 78.1
+  },
+  {
+   "nummer": "20269867",
+   "docId": "9fc649f8-8367-434b-864f-7b904d295cdb",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2365x1170",
+     "oud": 1561.0100000000002,
+     "nieuw": 1579.71,
+     "delta": 18.7,
+     "units": 1
+    }
+   ],
+   "som": 18.7
+  },
+  {
+   "nummer": "20269836",
+   "docId": "4aabb603-058a-485a-aa7d-e34ac04f5e72",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1990x2380",
+     "oud": 1602.7,
+     "nieuw": 1612.6,
+     "delta": 9.9,
+     "units": 1
+    }
+   ],
+   "som": 9.9
+  },
+  {
+   "nummer": "20269829",
+   "docId": "5024893b-bbfb-4302-ae7e-0c8dc95a103a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2950x1350",
+     "oud": 1467.4,
+     "nieuw": 1532.3,
+     "delta": 64.9,
+     "units": 1
+    }
+   ],
+   "som": 64.9
+  },
+  {
+   "nummer": "20269809",
+   "docId": "c356b8f7-d0b5-4fff-a07b-179fa614c62d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2650x2000",
+     "oud": 1208.9,
+     "nieuw": 1219.9,
+     "delta": 11,
+     "units": 1
+    }
+   ],
+   "som": 11
+  },
+  {
+   "nummer": "20269806",
+   "docId": "280b0fbd-db77-4f20-9049-b0cf647bdef7",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2570x1070",
+     "oud": 864.6,
+     "nieuw": 916.3,
+     "delta": 51.7,
+     "units": 1
+    }
+   ],
+   "som": 51.7
+  },
+  {
+   "nummer": "20269802",
+   "docId": "51931bb8-895f-43fe-a719-f1b96656cfe8",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2011x1000",
+     "oud": 1449.6899999999998,
+     "nieuw": 1471.69,
+     "delta": 22,
+     "units": 2
+    }
+   ],
+   "som": 44
+  },
+  {
+   "nummer": "20269801",
+   "docId": "575bf097-b75d-4591-a101-2cdcb3e73012",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "1800x1200",
+     "oud": 730.4,
+     "nieuw": 746.9,
+     "delta": 16.5,
+     "units": 1
+    }
+   ],
+   "som": 16.5
+  },
+  {
+   "nummer": "20269792",
+   "docId": "6dc060b0-b2d4-49dc-b7e6-48f0dc548d02",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3300x1300",
+     "oud": 1032,
+     "nieuw": 1115.6,
+     "delta": 83.6,
+     "units": 1
+    }
+   ],
+   "som": 83.6
+  },
+  {
+   "nummer": "20269757",
+   "docId": "8da3abd3-030c-41c0-aab1-df850557144a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "2010x1250",
+     "oud": 1376.1,
+     "nieuw": 1394.8,
+     "delta": 18.7,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "3001x1350",
+     "oud": 1505.9,
+     "nieuw": 1575.2,
+     "delta": 69.3,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "3500x1150",
+     "oud": 1459.7,
+     "nieuw": 1504.8,
+     "delta": 45.1,
+     "units": 1
+    }
+   ],
+   "som": 133.1
+  },
+  {
+   "nummer": "20269724",
+   "docId": "b2cb7e1d-c77d-4a26-b99f-5b2ed4dd72b2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1000",
+     "oud": 951.5,
+     "nieuw": 986.7,
+     "delta": 35.2,
+     "units": 1
+    }
+   ],
+   "som": 35.2
+  },
+  {
+   "nummer": "20269723",
+   "docId": "0e347787-f905-4001-b588-573567c88c6d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1200",
+     "oud": 760.1,
+     "nieuw": 784.3,
+     "delta": 24.2,
+     "units": 1
+    }
+   ],
+   "som": 24.2
+  },
+  {
+   "nummer": "20269721",
+   "docId": "83de20b3-5179-4602-936a-9383fb2de9b8",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2700x2144",
+     "oud": 1527.9,
+     "nieuw": 1559.8,
+     "delta": 31.9,
+     "units": 1
+    }
+   ],
+   "som": 31.9
+  },
+  {
+   "nummer": "20269713",
+   "docId": "95dfc074-cf77-4810-968f-8b0cb03e20e9",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1885x1430",
+     "oud": 864.6,
+     "nieuw": 892.1,
+     "delta": 27.5,
+     "units": 4
+    }
+   ],
+   "som": 110
+  },
+  {
+   "nummer": "20269687",
+   "docId": "b3335120-12c8-4d35-ad9c-d2cb31c7d3ba",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2755x1250",
+     "oud": 966.9,
+     "nieuw": 980.1,
+     "delta": 13.2,
+     "units": 1
+    }
+   ],
+   "som": 13.2
+  },
+  {
+   "nummer": "20269679",
+   "docId": "d27fa567-f753-43f9-8746-15ef1646f7c6",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1502x2296",
+     "oud": 1383.8,
+     "nieuw": 1389.3,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 5.5
+  },
+  {
+   "nummer": "20269676",
+   "docId": "7cc94d64-9cf7-48ca-9574-280e21f1452d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2700x2400",
+     "oud": 1351.9,
+     "nieuw": 1376.1,
+     "delta": 24.2,
+     "units": 1
+    }
+   ],
+   "som": 24.2
+  },
+  {
+   "nummer": "20269671",
+   "docId": "775aced3-ac36-487a-ad6d-f159214e93b0",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2851x1505",
+     "oud": 1422.3,
+     "nieuw": 1532.3,
+     "delta": 110,
+     "units": 1
+    }
+   ],
+   "som": 110
+  },
+  {
+   "nummer": "20269645",
+   "docId": "13bea604-c920-46cc-b5dd-704004c0f7cb",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2874x1723",
+     "oud": 1751.64,
+     "nieuw": 1926.54,
+     "delta": 174.9,
+     "units": 1
+    }
+   ],
+   "som": 174.9
+  },
+  {
+   "nummer": "20269640",
+   "docId": "19c6717e-5f71-48b7-912d-bf617f003765",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1200",
+     "oud": 1170.4,
+     "nieuw": 1215.5,
+     "delta": 45.1,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2700x1200",
+     "oud": 1140.7,
+     "nieuw": 1204.5,
+     "delta": 63.8,
+     "units": 1
+    }
+   ],
+   "som": 108.9
+  },
+  {
+   "nummer": "20269624",
+   "docId": "240e964e-efe0-4dc7-8dda-36eb42ba0ee0",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2510x1400",
+     "oud": 1567.3400000000001,
+     "nieuw": 1575.04,
+     "delta": 7.7,
+     "units": 2
+    }
+   ],
+   "som": 15.4
+  },
+  {
+   "nummer": "20269612",
+   "docId": "6588e90e-dfe3-44f9-9416-71230488c6ce",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2422x1000",
+     "oud": 805.2,
+     "nieuw": 840.4,
+     "delta": 35.2,
+     "units": 1
+    }
+   ],
+   "som": 35.2
+  },
+  {
+   "nummer": "20269589",
+   "docId": "afd8b564-4ef1-4301-8c09-0585306035c4",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1000",
+     "oud": 875.6,
+     "nieuw": 921.8,
+     "delta": 46.2,
+     "units": 1
+    }
+   ],
+   "som": 46.2
+  },
+  {
+   "nummer": "20269588",
+   "docId": "b7316645-1505-4360-84f3-962f0358ee5e",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2830x2670",
+     "oud": 1517,
+     "nieuw": 1863.5,
+     "delta": 346.5,
+     "units": 1
+    }
+   ],
+   "som": 346.5
+  },
+  {
+   "nummer": "20269577",
+   "docId": "2c18a127-21be-4f7f-b7a5-ff5fd6f104ba",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2049x1000",
+     "oud": 749.1,
+     "nieuw": 771.1,
+     "delta": 22,
+     "units": 2
+    }
+   ],
+   "som": 44
+  },
+  {
+   "nummer": "20269566",
+   "docId": "6fd369f0-442e-4a24-b447-7ceee65c51bd",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2800x1400",
+     "oud": 966.9,
+     "nieuw": 980.1,
+     "delta": 13.2,
+     "units": 1
+    }
+   ],
+   "som": 13.2
+  },
+  {
+   "nummer": "20269528",
+   "docId": "a3d63f02-6aba-4422-8a2d-e57f80226a5c",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3119x2000",
+     "oud": 1353,
+     "nieuw": 1578.5,
+     "delta": 225.5,
+     "units": 2
+    }
+   ],
+   "som": 451
+  },
+  {
+   "nummer": "20269523",
+   "docId": "3a89dc7c-8297-44d6-b94f-7abc2b3bef33",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2500x1200",
+     "oud": 1486.38,
+     "nieuw": 1538.08,
+     "delta": 51.7,
+     "units": 1
+    }
+   ],
+   "som": 51.7
+  },
+  {
+   "nummer": "20269519",
+   "docId": "e2425f0b-626d-4b68-a851-f909780799a7",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1600",
+     "oud": 994.4,
+     "nieuw": 1104.4,
+     "delta": 110,
+     "units": 1
+    }
+   ],
+   "som": 110
+  },
+  {
+   "nummer": "20269508",
+   "docId": "a31321ce-766e-4644-9d2e-731422e3ec26",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1500",
+     "oud": 1292.5,
+     "nieuw": 1320,
+     "delta": 27.5,
+     "units": 1
+    }
+   ],
+   "som": 27.5
+  },
+  {
+   "nummer": "20269506",
+   "docId": "239bea38-19ae-4596-a10b-94d7d75b620a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1400x1020",
+     "oud": 533.5,
+     "nieuw": 542.3,
+     "delta": 8.8,
+     "units": 1
+    }
+   ],
+   "som": 8.8
+  },
+  {
+   "nummer": "20269496",
+   "docId": "d35dd59f-7725-4d38-b5ec-b1a26362136b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2850x1850",
+     "oud": 1067,
+     "nieuw": 1273.8,
+     "delta": 206.8,
+     "units": 1
+    }
+   ],
+   "som": 206.8
+  },
+  {
+   "nummer": "20269490",
+   "docId": "5f7d8c07-e722-4310-9d27-77188377efc5",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1000",
+     "oud": 1349.7,
+     "nieuw": 1383.8,
+     "delta": 34.1,
+     "units": 1
+    }
+   ],
+   "som": 34.1
+  },
+  {
+   "nummer": "20269484",
+   "docId": "119d042e-9ff4-45c7-b0a8-7e3adea41384",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1500",
+     "oud": 1422.3,
+     "nieuw": 1532.3,
+     "delta": 110,
+     "units": 2
+    }
+   ],
+   "som": 220
+  },
+  {
+   "nummer": "20269477",
+   "docId": "6704e6c3-4b33-4c2f-9711-b48944e73b58",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x2600",
+     "oud": 1501.56,
+     "nieuw": 1813.96,
+     "delta": 312.4,
+     "units": 1
+    }
+   ],
+   "som": 312.4
+  },
+  {
+   "nummer": "20269459",
+   "docId": "f270cef1-b5c8-426c-8ee3-e538b55e519d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x2226",
+     "oud": 1147.3,
+     "nieuw": 1439.9,
+     "delta": 292.6,
+     "units": 1
+    }
+   ],
+   "som": 292.6
+  },
+  {
+   "nummer": "20269447",
+   "docId": "b3c8c3d8-675b-41da-a159-f1a4f4f8effb",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3490x1600",
+     "oud": 1147.3,
+     "nieuw": 1260.6,
+     "delta": 113.3,
+     "units": 2
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1690x1600",
+     "oud": 838.2,
+     "nieuw": 829.4,
+     "delta": -8.8,
+     "units": 1
+    }
+   ],
+   "som": 217.8
+  },
+  {
+   "nummer": "20269438",
+   "docId": "61e52d73-ed31-47da-85fb-33b1ba9f2614",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2500x2100",
+     "oud": 1664.3,
+     "nieuw": 1679.7,
+     "delta": 15.4,
+     "units": 1
+    }
+   ],
+   "som": 15.4
+  },
+  {
+   "nummer": "20269424",
+   "docId": "8475549e-ac0d-449b-bf74-ccf065cb3249",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1000",
+     "oud": 1130.8,
+     "nieuw": 1166,
+     "delta": 35.2,
+     "units": 1
+    }
+   ],
+   "som": 35.2
+  },
+  {
+   "nummer": "20269421",
+   "docId": "6dc346e0-9c40-41e5-89a4-13dfa4bac38f",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1150",
+     "oud": 1467.4,
+     "nieuw": 1515.8,
+     "delta": 48.4,
+     "units": 2
+    }
+   ],
+   "som": 96.8
+  },
+  {
+   "nummer": "20269386",
+   "docId": "4bab7d6e-0e0c-4574-a842-cf44ca67e3fb",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1028",
+     "oud": 1383.8,
+     "nieuw": 1432.2,
+     "delta": 48.4,
+     "units": 1
+    }
+   ],
+   "som": 48.4
+  },
+  {
+   "nummer": "20269378",
+   "docId": "87faa817-a3c9-4c84-be92-fef92bdcb5ad",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1815x1529",
+     "oud": 1292.5,
+     "nieuw": 1320,
+     "delta": 27.5,
+     "units": 2
+    }
+   ],
+   "som": 55
+  },
+  {
+   "nummer": "20269377",
+   "docId": "1e7e3312-298b-416e-85b1-3f4f645d6c0f",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2868x1864",
+     "oud": 1513.8,
+     "nieuw": 1720.6,
+     "delta": 206.8,
+     "units": 1
+    }
+   ],
+   "som": 206.8
+  },
+  {
+   "nummer": "20269371",
+   "docId": "cedffa1c-9591-4d7a-a17d-fe5dfb0c31a4",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2807x1881",
+     "oud": 1494.9,
+     "nieuw": 1701.7,
+     "delta": 206.8,
+     "units": 1
+    }
+   ],
+   "som": 206.8
+  },
+  {
+   "nummer": "20269348",
+   "docId": "1c6639ea-7755-4354-8ec6-299e4aba62e7",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2423x1611",
+     "oud": 1528.12,
+     "nieuw": 1533.62,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 5.5
+  },
+  {
+   "nummer": "20269335",
+   "docId": "b54b2a8c-1aeb-497a-a88f-e970122f2692",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1590x1690",
+     "oud": 1445.8999999999999,
+     "nieuw": 1454.7,
+     "delta": 8.8,
+     "units": 2
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3175x2600",
+     "oud": 1993.6399999999999,
+     "nieuw": 2306.04,
+     "delta": 312.4,
+     "units": 1
+    }
+   ],
+   "som": 330
+  },
+  {
+   "nummer": "20269325",
+   "docId": "9056f088-7978-4af0-ac8f-9c5ea0fce8cd",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3498x2200",
+     "oud": 1782,
+     "nieuw": 2032.8,
+     "delta": 250.8,
+     "units": 1
+    }
+   ],
+   "som": 250.8
+  },
+  {
+   "nummer": "20269316",
+   "docId": "ec683fdc-5543-4092-8596-f3595e2a1402",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1950x1000",
+     "oud": 1094.23,
+     "nieuw": 1129.43,
+     "delta": 35.2,
+     "units": 1
+    }
+   ],
+   "som": 35.2
+  },
+  {
+   "nummer": "20269275",
+   "docId": "6541a03c-ac26-466e-a5f7-45c05679112d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1550",
+     "oud": 1459.7,
+     "nieuw": 1575.2,
+     "delta": 115.5,
+     "units": 1
+    }
+   ],
+   "som": 115.5
+  },
+  {
+   "nummer": "20269247",
+   "docId": "1bb46e8e-9938-4c7d-9aee-ee9ca9d0d43d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2800x1000",
+     "oud": 1246.03,
+     "nieuw": 1286.73,
+     "delta": 40.7,
+     "units": 1
+    }
+   ],
+   "som": 40.7
+  },
+  {
+   "nummer": "20269230",
+   "docId": "03598691-5ea4-4a09-b9bd-888bd0bbbc3a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1950x1310",
+     "oud": 1249.6,
+     "nieuw": 1255.1,
+     "delta": 5.5,
+     "units": 2
+    }
+   ],
+   "som": 11
+  },
+  {
+   "nummer": "20269221",
+   "docId": "21042ad1-1812-4df9-b3e0-ccbd313c2fca",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2750x1000",
+     "oud": 1346.4,
+     "nieuw": 1387.1,
+     "delta": 40.7,
+     "units": 1
+    }
+   ],
+   "som": 40.7
+  },
+  {
+   "nummer": "20269205",
+   "docId": "3dd50a32-6c41-4c0a-87fd-08fc065a4158",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2207x1224",
+     "oud": 1327.7,
+     "nieuw": 1333.2,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 5.5
+  },
+  {
+   "nummer": "20269200",
+   "docId": "0c1387af-dc38-4337-be6c-25305bb295a4",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2550x2100",
+     "oud": 1664.3,
+     "nieuw": 1679.7,
+     "delta": 15.4,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2200x1300",
+     "oud": 1292.5,
+     "nieuw": 1311.2,
+     "delta": 18.7,
+     "units": 1
+    }
+   ],
+   "som": 34.1
+  },
+  {
+   "nummer": "20269168",
+   "docId": "1d2a0746-e8d5-48ce-aff8-0a09dfd8add5",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1500",
+     "oud": 864.6,
+     "nieuw": 892.1,
+     "delta": 27.5,
+     "units": 1
+    }
+   ],
+   "som": 27.5
+  },
+  {
+   "nummer": "20269143",
+   "docId": "5b875ad6-d843-4dfa-a2ad-1a5575df11b3",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2276x1151",
+     "oud": 1273.8,
+     "nieuw": 1292.5,
+     "delta": 18.7,
+     "units": 2
+    }
+   ],
+   "som": 37.4
+  },
+  {
+   "nummer": "20269139",
+   "docId": "e7dd755e-d45c-435f-93d7-3c4a64ac0e97",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "2100x1600",
+     "oud": 1106.16,
+     "nieuw": 1097.36,
+     "delta": -8.8,
+     "units": 2
+    },
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "1500x1200",
+     "oud": 838.2,
+     "nieuw": 842.6,
+     "delta": 4.4,
+     "units": 1
+    }
+   ],
+   "som": -13.2
+  },
+  {
+   "nummer": "20269137",
+   "docId": "b6e0cfd0-c126-402b-9f08-11bbe0a28e54",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3370x2000",
+     "oud": 1206.7,
+     "nieuw": 1387.1,
+     "delta": 180.4,
+     "units": 1
+    }
+   ],
+   "som": 180.4
+  },
+  {
+   "nummer": "20269133",
+   "docId": "24caa2ba-c22c-4e6c-a789-15aa796f261c",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1930x2340",
+     "oud": 1091.2,
+     "nieuw": 1101.1,
+     "delta": 9.9,
+     "units": 1
+    }
+   ],
+   "som": 9.9
+  },
+  {
+   "nummer": "20269123",
+   "docId": "57de9bef-d661-4bbb-acf1-5ead11effb9f",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1018",
+     "oud": 1349.7,
+     "nieuw": 1394.8,
+     "delta": 45.1,
+     "units": 1
+    }
+   ],
+   "som": 45.1
+  },
+  {
+   "nummer": "20269118",
+   "docId": "c6f4c1b1-a877-407f-863b-2289ac20e076",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1900x1100",
+     "oud": 1008.7,
+     "nieuw": 1032.9,
+     "delta": 24.2,
+     "units": 3
+    }
+   ],
+   "som": 72.6
+  },
+  {
+   "nummer": "20269109",
+   "docId": "679bfbf3-df46-4f43-a815-669678d0cc82",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2513x1691",
+     "oud": 1830.46,
+     "nieuw": 1835.96,
+     "delta": 5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2500x1700",
+     "oud": 1830.46,
+     "nieuw": 1835.96,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 11
+  },
+  {
+   "nummer": "20269029",
+   "docId": "fb10f030-a86c-4a46-b37b-7af8d4c989dd",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1250",
+     "oud": 1249.6,
+     "nieuw": 1255.1,
+     "delta": 5.5,
+     "units": 4
+    }
+   ],
+   "som": 22
+  },
+  {
+   "nummer": "20269026",
+   "docId": "1c66eda3-fb47-496d-a822-68dbc5dacd1f",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1800",
+     "oud": 1494.9,
+     "nieuw": 1685.2,
+     "delta": 190.3,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2009x1805",
+     "oud": 1470.7,
+     "nieuw": 1456.4,
+     "delta": -14.3,
+     "units": 1
+    }
+   ],
+   "som": 176
+  },
+  {
+   "nummer": "20269021",
+   "docId": "586c9e0b-77c2-4231-a9f4-6b3068be3ee0",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3014x1408",
+     "oud": 1459.7,
+     "nieuw": 1575.2,
+     "delta": 115.5,
+     "units": 2
+    }
+   ],
+   "som": 231
+  },
+  {
+   "nummer": "20269007",
+   "docId": "c1057c92-e67e-4661-8b73-127cb81a90f0",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1500x1198",
+     "oud": 1126.4,
+     "nieuw": 1130.8,
+     "delta": 4.4,
+     "units": 1
+    }
+   ],
+   "som": 4.4
+  },
+  {
+   "nummer": "20268996",
+   "docId": "48f768a7-0815-43a3-8938-33f362fa88ad",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3030x1570",
+     "oud": 1543,
+     "nieuw": 1658.5,
+     "delta": 115.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3140x1570",
+     "oud": 1543,
+     "nieuw": 1658.5,
+     "delta": 115.5,
+     "units": 1
+    }
+   ],
+   "som": 231
+  },
+  {
+   "nummer": "20268989",
+   "docId": "92cf4114-7fcb-4009-8a8b-f326f776f24a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1844x1000",
+     "oud": 702.9,
+     "nieuw": 738.1,
+     "delta": 35.2,
+     "units": 1
+    }
+   ],
+   "som": 35.2
+  },
+  {
+   "nummer": "20268983",
+   "docId": "6f289f93-70ec-415b-afcc-d4b8f7f0e980",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2865x1524",
+     "oud": 1422.3,
+     "nieuw": 1532.3,
+     "delta": 110,
+     "units": 1
+    }
+   ],
+   "som": 110
+  },
+  {
+   "nummer": "20268921",
+   "docId": "1591f1c9-719e-4a72-877f-d03314cc0db7",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1500x1745",
+     "oud": 1257.3,
+     "nieuw": 1266.1,
+     "delta": 8.8,
+     "units": 2
+    }
+   ],
+   "som": 17.6
+  },
+  {
+   "nummer": "20268862",
+   "docId": "66aeb6d8-9d18-4ff2-9ed0-1687db2675ae",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3748x1400",
+     "oud": 1364,
+     "nieuw": 1449.8,
+     "delta": 85.8,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1140",
+     "oud": 1008.7,
+     "nieuw": 1032.9,
+     "delta": 24.2,
+     "units": 1
+    }
+   ],
+   "som": 110
+  },
+  {
+   "nummer": "20268803",
+   "docId": "e2624630-3e94-446a-ad57-1512b77bdfb6",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2700x1350",
+     "oud": 1215.5,
+     "nieuw": 1228.7,
+     "delta": 13.2,
+     "units": 2
+    }
+   ],
+   "som": 26.4
+  },
+  {
+   "nummer": "20268799",
+   "docId": "3d721271-c163-4eb9-852e-d60a73ac887b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3250x1850",
+     "oud": 1634.6,
+     "nieuw": 1815,
+     "delta": 180.4,
+     "units": 1
+    }
+   ],
+   "som": 180.4
+  },
+  {
+   "nummer": "20268794",
+   "docId": "bd6aeff9-5f5f-486b-88c0-ece20cd50ab6",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "1237x2017",
+     "oud": 883.3,
+     "nieuw": 864.6,
+     "delta": -18.7,
+     "units": 1
+    }
+   ],
+   "som": -18.7
+  },
+  {
+   "nummer": "20268787",
+   "docId": "a59962b7-34a9-40e3-946c-fd3c343216c7",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2660x1588",
+     "oud": 1465.2,
+     "nieuw": 1475.1,
+     "delta": 9.9,
+     "units": 2
+    }
+   ],
+   "som": 19.8
+  },
+  {
+   "nummer": "20268785",
+   "docId": "4f4cf5c7-10f6-46ac-a849-872f5767bc1e",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2503x1765",
+     "oud": 1080.2,
+     "nieuw": 1085.7,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 5.5
+  },
+  {
+   "nummer": "20268775",
+   "docId": "95212862-ae0c-4cf8-8ce5-ac8ba0d895de",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2733x1705",
+     "oud": 1881,
+     "nieuw": 1877.7,
+     "delta": -3.3,
+     "units": 2
+    }
+   ],
+   "som": -6.6
+  },
+  {
+   "nummer": "20268773",
+   "docId": "41755879-6385-4814-8d47-f2f8a0c062f3",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1310x1110",
+     "oud": 654.5,
+     "nieuw": 663.3,
+     "delta": 8.8,
+     "units": 1
+    }
+   ],
+   "som": 8.8
+  },
+  {
+   "nummer": "20268771",
+   "docId": "ea3b26c0-6853-46f6-b387-20d7b55d22e0",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1000",
+     "oud": 1170.4,
+     "nieuw": 1204.5,
+     "delta": 34.1,
+     "units": 1
+    }
+   ],
+   "som": 34.1
+  },
+  {
+   "nummer": "20268705",
+   "docId": "3fb6485c-3a84-4b5e-8091-d9e098c6a1d3",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3200x2300",
+     "oud": 1685.2,
+     "nieuw": 1938.2,
+     "delta": 253,
+     "units": 1
+    }
+   ],
+   "som": 253
+  },
+  {
+   "nummer": "20268686",
+   "docId": "7fc24933-53f2-4aae-95b7-0f206b87c333",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1200",
+     "oud": 1188,
+     "nieuw": 1212.2,
+     "delta": 24.2,
+     "units": 2
+    }
+   ],
+   "som": 48.4
+  },
+  {
+   "nummer": "20268643",
+   "docId": "3e4f36f0-658f-4142-995c-3d9010b0ccce",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3200x2600",
+     "oud": 1733.6,
+     "nieuw": 2046,
+     "delta": 312.4,
+     "units": 1
+    }
+   ],
+   "som": 312.4
+  },
+  {
+   "nummer": "20268629",
+   "docId": "6e8d2fb6-61f7-40ef-b5b2-4a79d7102c70",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1680",
+     "oud": 1644.5,
+     "nieuw": 1650,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 5.5
+  },
+  {
+   "nummer": "20268618",
+   "docId": "8a0a5e65-01e7-4f42-8279-5f95ec883756",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2853x1504",
+     "oud": 1422.3,
+     "nieuw": 1532.3,
+     "delta": 110,
+     "units": 1
+    }
+   ],
+   "som": 110
+  },
+  {
+   "nummer": "20268587",
+   "docId": "e39d2137-b08a-4fb2-9e54-869594b2a504",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x2000",
+     "oud": 1494.9,
+     "nieuw": 1701.7,
+     "delta": 206.8,
+     "units": 1
+    }
+   ],
+   "som": 206.8
+  },
+  {
+   "nummer": "20268577",
+   "docId": "f5433c2e-02f2-4b59-81f3-8cabcf6e11f3",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3400x1561",
+     "oud": 1364,
+     "nieuw": 1438.8,
+     "delta": 74.8,
+     "units": 1
+    }
+   ],
+   "som": 74.8
+  },
+  {
+   "nummer": "20268564",
+   "docId": "8c217cea-fa2c-4098-9757-4b6f9952c5c0",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2697x1198",
+     "oud": 1320,
+     "nieuw": 1383.8,
+     "delta": 63.8,
+     "units": 1
+    }
+   ],
+   "som": 63.8
+  },
+  {
+   "nummer": "20268563",
+   "docId": "b8d73f37-bbe6-4282-b2e3-7b7b493c4023",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3201x1500",
+     "oud": 1636.8,
+     "nieuw": 1711.6,
+     "delta": 74.8,
+     "units": 1
+    }
+   ],
+   "som": 74.8
+  },
+  {
+   "nummer": "20268556",
+   "docId": "c0a05efd-c433-4113-9f94-c095cdb94e09",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2650x2500",
+     "oud": 1723.7,
+     "nieuw": 1740.2,
+     "delta": 16.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2650x2500",
+     "oud": 1723.7,
+     "nieuw": 1740.2,
+     "delta": 16.5,
+     "units": 1
+    }
+   ],
+   "som": 33
+  },
+  {
+   "nummer": "20268549",
+   "docId": "7648876b-0c5d-4418-ac17-936462831c56",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1440x1690",
+     "oud": 1317.2,
+     "nieuw": 1326,
+     "delta": 8.8,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1880x1690",
+     "oud": 1403,
+     "nieuw": 1408.5,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 14.3
+  },
+  {
+   "nummer": "20268543",
+   "docId": "156228a0-9db6-4b70-94db-113a95e5b5cf",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "2440x1174",
+     "oud": 1292.5,
+     "nieuw": 1344.2,
+     "delta": 51.7,
+     "units": 2
+    },
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "1250x1170",
+     "oud": 1082.4,
+     "nieuw": 1091.2,
+     "delta": 8.8,
+     "units": 1
+    }
+   ],
+   "som": 112.2
+  },
+  {
+   "nummer": "20268540",
+   "docId": "0a13ba3a-eb9d-494c-8d9f-a47ed14f5fd3",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1440x1700",
+     "oud": 1257.3,
+     "nieuw": 1266.1,
+     "delta": 8.8,
+     "units": 1
+    }
+   ],
+   "som": 8.8
+  },
+  {
+   "nummer": "20268535",
+   "docId": "11fd473a-bf11-42fa-98f0-60a3531177b3",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2499x1075",
+     "oud": 1486.38,
+     "nieuw": 1538.08,
+     "delta": 51.7,
+     "units": 2
+    }
+   ],
+   "som": 103.4
+  },
+  {
+   "nummer": "20268525",
+   "docId": "8352038a-6060-42c0-b0a6-ff5a58f075c1",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2550x2400",
+     "oud": 1733.6,
+     "nieuw": 1739.1,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 5.5
+  },
+  {
+   "nummer": "20268392",
+   "docId": "495a6416-62cb-4a7e-a34d-b035d5368a53",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2250x1950",
+     "oud": 1594.56,
+     "nieuw": 1605.56,
+     "delta": 11,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2250x1950",
+     "oud": 1594.56,
+     "nieuw": 1605.56,
+     "delta": 11,
+     "units": 1
+    }
+   ],
+   "som": 22
+  },
+  {
+   "nummer": "20268366",
+   "docId": "985dfdba-4d93-4a0b-8899-d151736feedb",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3800x1960",
+     "oud": 1815,
+     "nieuw": 1962.4,
+     "delta": 147.4,
+     "units": 1
+    }
+   ],
+   "som": 147.4
+  },
+  {
+   "nummer": "20268355",
+   "docId": "08befcfb-999c-4301-96b4-fdaff97bfff6",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1000",
+     "oud": 921.8,
+     "nieuw": 955.9,
+     "delta": 34.1,
+     "units": 1
+    }
+   ],
+   "som": 34.1
+  },
+  {
+   "nummer": "20268347",
+   "docId": "46fa121a-9c1a-4e4f-9421-34aa56ec5b3a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1500",
+     "oud": 994.4,
+     "nieuw": 1104.4,
+     "delta": 110,
+     "units": 1
+    }
+   ],
+   "som": 110
+  },
+  {
+   "nummer": "20268312",
+   "docId": "4326b451-320f-4815-9203-bf7184576bf2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1500x1700",
+     "oud": 829.4,
+     "nieuw": 838.2,
+     "delta": 8.8,
+     "units": 1
+    }
+   ],
+   "som": 8.8
+  },
+  {
+   "nummer": "20268311",
+   "docId": "2f1d0f0d-34ba-430d-a3a4-73fca908cd6b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1000",
+     "oud": 921.8,
+     "nieuw": 955.9,
+     "delta": 34.1,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1820x1250",
+     "oud": 821.7,
+     "nieuw": 827.2,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 39.6
+  },
+  {
+   "nummer": "20268304",
+   "docId": "70d067f6-0a83-4e26-8d77-b1371ba330b7",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1910x1505",
+     "oud": 1113.2,
+     "nieuw": 1140.7,
+     "delta": 27.5,
+     "units": 1
+    }
+   ],
+   "som": 27.5
+  },
+  {
+   "nummer": "20268289",
+   "docId": "dc8b7cb3-3749-4d6f-b4ed-1392c32d76e0",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2500x1400",
+     "oud": 935,
+     "nieuw": 942.7,
+     "delta": 7.7,
+     "units": 2
+    }
+   ],
+   "som": 15.4
+  },
+  {
+   "nummer": "20268273",
+   "docId": "138e43bd-e869-4ccb-a225-060f448cb1b2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2270x1320",
+     "oud": 899.8,
+     "nieuw": 905.3,
+     "delta": 5.5,
+     "units": 4
+    }
+   ],
+   "som": 22
+  },
+  {
+   "nummer": "20268271",
+   "docId": "54648123-ad9a-4450-bc6c-bd51c54f55bf",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2270x1320",
+     "oud": 1148.4,
+     "nieuw": 1153.9,
+     "delta": 5.5,
+     "units": 4
+    }
+   ],
+   "som": 22
+  },
+  {
+   "nummer": "20268259",
+   "docId": "14c4e11c-d9a0-4392-9783-fc45342e22c2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2200x1350",
+     "oud": 1292.5,
+     "nieuw": 1311.2,
+     "delta": 18.7,
+     "units": 2
+    }
+   ],
+   "som": 37.4
+  },
+  {
+   "nummer": "20268219",
+   "docId": "e8662875-16d0-4c94-a9e3-cea93436d266",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1000",
+     "oud": 1124.2,
+     "nieuw": 1170.4,
+     "delta": 46.2,
+     "units": 1
+    }
+   ],
+   "som": 46.2
+  },
+  {
+   "nummer": "20268218",
+   "docId": "7131377b-aac3-411a-8b2c-1057ea6b434b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2430x1230",
+     "oud": 1420.32,
+     "nieuw": 1428.02,
+     "delta": 7.7,
+     "units": 1
+    }
+   ],
+   "som": 7.7
+  },
+  {
+   "nummer": "20268186",
+   "docId": "4f117513-f26f-459b-bb07-98061e17593a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1441x1645",
+     "oud": 1257.3,
+     "nieuw": 1266.1,
+     "delta": 8.8,
+     "units": 3
+    }
+   ],
+   "som": 26.4
+  },
+  {
+   "nummer": "20268184",
+   "docId": "8095d8de-fd54-4b77-bc56-45375677436e",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1850x2200",
+     "oud": 1674.8600000000001,
+     "nieuw": 1689.16,
+     "delta": 14.3,
+     "units": 1
+    }
+   ],
+   "som": 14.3
+  },
+  {
+   "nummer": "20268181",
+   "docId": "18336f44-f50c-4ae4-81f9-32be5859253a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1496",
+     "oud": 1486.38,
+     "nieuw": 1513.88,
+     "delta": 27.5,
+     "units": 2
+    }
+   ],
+   "som": 55
+  },
+  {
+   "nummer": "20268176",
+   "docId": "e33759d4-92b9-4f3b-9b29-e7fb52b23a2c",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2700x1400",
+     "oud": 1673.76,
+     "nieuw": 1686.96,
+     "delta": 13.2,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2650x1730",
+     "oud": 1881,
+     "nieuw": 1877.7,
+     "delta": -3.3,
+     "units": 1
+    }
+   ],
+   "som": 9.9
+  },
+  {
+   "nummer": "20268169",
+   "docId": "ba2d9026-a7a4-4735-8062-e992ad3a3c6b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2856x1748",
+     "oud": 1280.4,
+     "nieuw": 1455.3,
+     "delta": 174.9,
+     "units": 1
+    }
+   ],
+   "som": 174.9
+  },
+  {
+   "nummer": "20268138",
+   "docId": "4bb762af-3bb0-4ce8-8265-b1f5ef5c16dc",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2850x1200",
+     "oud": 1170.4,
+     "nieuw": 1215.5,
+     "delta": 45.1,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2900x2100",
+     "oud": 1353,
+     "nieuw": 1619.2,
+     "delta": 266.2,
+     "units": 1
+    }
+   ],
+   "som": 311.3
+  },
+  {
+   "nummer": "20268127",
+   "docId": "b35dba61-95e2-4e7d-b223-3117ff1d31e6",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1530x1030",
+     "oud": 698.5,
+     "nieuw": 702.9,
+     "delta": 4.4,
+     "units": 1
+    }
+   ],
+   "som": 4.4
+  },
+  {
+   "nummer": "20268124",
+   "docId": "577a36a4-b11f-4288-a047-76071e72f1e2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2400x1000",
+     "oud": 778.8,
+     "nieuw": 803,
+     "delta": 24.2,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2400x1400",
+     "oud": 899.8,
+     "nieuw": 905.3,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 29.7
+  },
+  {
+   "nummer": "20268065",
+   "docId": "85780ed9-6afb-41ed-8e3b-68401b9697da",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2200x1308",
+     "oud": 1292.5,
+     "nieuw": 1311.2,
+     "delta": 18.7,
+     "units": 1
+    }
+   ],
+   "som": 18.7
+  },
+  {
+   "nummer": "20268055",
+   "docId": "1a9dc9db-f6e4-492b-83de-3cd3103deeb2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2860x2250",
+     "oud": 1575.2,
+     "nieuw": 1867.8,
+     "delta": 292.6,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3140x1050",
+     "oud": 1245.3,
+     "nieuw": 1293.7,
+     "delta": 48.4,
+     "units": 1
+    }
+   ],
+   "som": 341
+  },
+  {
+   "nummer": "20268049",
+   "docId": "bc66cfa8-1f82-40ed-86d7-7cd4782707fa",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3460x1780",
+     "oud": 1860.81,
+     "nieuw": 2024.71,
+     "delta": 163.9,
+     "units": 2
+    }
+   ],
+   "som": 327.8
+  },
+  {
+   "nummer": "20268041",
+   "docId": "ad92f9d6-8232-4fab-b4d4-7a941d911ef2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1500",
+     "oud": 1113.2,
+     "nieuw": 1140.7,
+     "delta": 27.5,
+     "units": 1
+    }
+   ],
+   "som": 27.5
+  },
+  {
+   "nummer": "20268013",
+   "docId": "451f9e2f-4df5-4d0e-b4f5-fefe7a637048",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3600x1600",
+     "oud": 1395.9,
+     "nieuw": 1509.2,
+     "delta": 113.3,
+     "units": 1
+    }
+   ],
+   "som": 113.3
+  },
+  {
+   "nummer": "20267975",
+   "docId": "acc18716-627f-4af1-a709-af30a3caa2c2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3108x1569",
+     "oud": 1031.8,
+     "nieuw": 1147.3,
+     "delta": 115.5,
+     "units": 1
+    }
+   ],
+   "som": 115.5
+  },
+  {
+   "nummer": "20267956",
+   "docId": "87e10c50-5afe-4efc-8266-4cb2bf4d416b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2600x1160",
+     "oud": 1486.38,
+     "nieuw": 1538.08,
+     "delta": 51.7,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3395x1720",
+     "oud": 1824.13,
+     "nieuw": 1971.53,
+     "delta": 147.4,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3410x1720",
+     "oud": 1860.81,
+     "nieuw": 2024.71,
+     "delta": 163.9,
+     "units": 1
+    }
+   ],
+   "som": 363
+  },
+  {
+   "nummer": "20267954",
+   "docId": "d032a555-ca12-4d89-973d-17d0e2cb657c",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2100x1540",
+     "oud": 1349.7,
+     "nieuw": 1340.9,
+     "delta": -8.8,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1310x1530",
+     "oud": 1171.5,
+     "nieuw": 1166,
+     "delta": -5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2900x1540",
+     "oud": 1422.3,
+     "nieuw": 1532.3,
+     "delta": 110,
+     "units": 1
+    }
+   ],
+   "som": 95.7
+  },
+  {
+   "nummer": "20267946",
+   "docId": "f5e67225-982c-4a32-8dac-0d996fc67623",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1404",
+     "oud": 1243,
+     "nieuw": 1353,
+     "delta": 110,
+     "units": 1
+    }
+   ],
+   "som": 110
+  },
+  {
+   "nummer": "20267914",
+   "docId": "769f3bde-b143-4697-8d12-e80a6300c745",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1550",
+     "oud": 1031.8,
+     "nieuw": 1147.3,
+     "delta": 115.5,
+     "units": 5
+    }
+   ],
+   "som": 577.5
+  },
+  {
+   "nummer": "20267909",
+   "docId": "b063f94e-5a55-4ce6-bd85-e5956902dfda",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3756x2050",
+     "oud": 1432.2,
+     "nieuw": 1666.5,
+     "delta": 234.3,
+     "units": 1
+    }
+   ],
+   "som": 234.3
+  },
+  {
+   "nummer": "20267905",
+   "docId": "fecae7e9-f95e-4144-8447-9ed13e6bafb6",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1800x2500",
+     "oud": 1321.2,
+     "nieuw": 1315.7,
+     "delta": -5.5,
+     "units": 1
+    }
+   ],
+   "som": -5.5
+  },
+  {
+   "nummer": "20267888",
+   "docId": "47ebc474-4e02-4a94-8963-29f93b0e23e5",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1909x1507",
+     "oud": 1113.2,
+     "nieuw": 1140.7,
+     "delta": 27.5,
+     "units": 1
+    }
+   ],
+   "som": 27.5
+  },
+  {
+   "nummer": "20267884",
+   "docId": "37e04f65-df57-43f2-8b92-4981e8332290",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1100x1600",
+     "oud": 1130.8,
+     "nieuw": 1117.6,
+     "delta": -13.2,
+     "units": 3
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3401x2200",
+     "oud": 1782,
+     "nieuw": 2032.8,
+     "delta": 250.8,
+     "units": 1
+    }
+   ],
+   "som": 211.2
+  },
+  {
+   "nummer": "20267880",
+   "docId": "e0af59e1-c668-4506-816f-e08aca05aaf4",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2600x1160",
+     "oud": 1486.38,
+     "nieuw": 1538.08,
+     "delta": 51.7,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3395x1720",
+     "oud": 1824.13,
+     "nieuw": 1971.53,
+     "delta": 147.4,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3410x1720",
+     "oud": 1860.81,
+     "nieuw": 2024.71,
+     "delta": 163.9,
+     "units": 1
+    }
+   ],
+   "som": 363
+  },
+  {
+   "nummer": "20267879",
+   "docId": "8a961579-1885-4768-82cf-d16fee482dbd",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2800x1500",
+     "oud": 1465.2,
+     "nieuw": 1475.1,
+     "delta": 9.9,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2800x1500",
+     "oud": 1465.2,
+     "nieuw": 1475.1,
+     "delta": 9.9,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1500",
+     "oud": 1292.5,
+     "nieuw": 1320,
+     "delta": 27.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1500",
+     "oud": 1292.5,
+     "nieuw": 1320,
+     "delta": 27.5,
+     "units": 1
+    }
+   ],
+   "som": 74.8
+  },
+  {
+   "nummer": "20267872",
+   "docId": "91518f39-c759-496e-9ea1-50e91d5d8a99",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2508x2055",
+     "oud": 1997.1599999999999,
+     "nieuw": 2012.56,
+     "delta": 15.4,
+     "units": 1
+    }
+   ],
+   "som": 15.4
+  },
+  {
+   "nummer": "20267853",
+   "docId": "28d7bf03-2189-44a7-8471-c55e4b56244f",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2490x1800",
+     "oud": 1242.23,
+     "nieuw": 1247.73,
+     "delta": 5.5,
+     "units": 3
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1200",
+     "oud": 874.12,
+     "nieuw": 898.32,
+     "delta": 24.2,
+     "units": 1
+    }
+   ],
+   "som": 40.7
+  },
+  {
+   "nummer": "20267852",
+   "docId": "d652fbd0-7c14-4a9d-a5dd-eb4202568df4",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3400x1500",
+     "oud": 1115.4,
+     "nieuw": 1190.2,
+     "delta": 74.8,
+     "units": 1
+    }
+   ],
+   "som": 74.8
+  },
+  {
+   "nummer": "20267845",
+   "docId": "7be42211-bcd7-4cf6-9122-573ae517e673",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1205",
+     "oud": 1204.5,
+     "nieuw": 1269.4,
+     "delta": 64.9,
+     "units": 2
+    }
+   ],
+   "som": 129.8
+  },
+  {
+   "nummer": "20267840",
+   "docId": "3895602b-553b-40d9-8648-e242847b495e",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2716x2014",
+     "oud": 1963.28,
+     "nieuw": 1995.18,
+     "delta": 31.9,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1505x2307",
+     "oud": 1591.37,
+     "nieuw": 1596.87,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 37.4
+  },
+  {
+   "nummer": "20267839",
+   "docId": "27c4207c-e373-4d2d-bf8f-f76c36694329",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x2004",
+     "oud": 1353,
+     "nieuw": 1619.2,
+     "delta": 266.2,
+     "units": 1
+    }
+   ],
+   "som": 266.2
+  },
+  {
+   "nummer": "20267818",
+   "docId": "6f1bc807-831f-4dcd-a854-f291c4fd77eb",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x2400",
+     "oud": 1519.1,
+     "nieuw": 1529,
+     "delta": 9.9,
+     "units": 1
+    }
+   ],
+   "som": 9.9
+  },
+  {
+   "nummer": "20267815",
+   "docId": "246ddb95-ede9-46b0-ae2e-430ccf164edf",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3496x1350",
+     "oud": 1494.9,
+     "nieuw": 1586.2,
+     "delta": 91.3,
+     "units": 1
+    }
+   ],
+   "som": 91.3
+  },
+  {
+   "nummer": "20267789",
+   "docId": "1692613d-f1cc-4348-a093-794711a950f2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1339x1402",
+     "oud": 743.6,
+     "nieuw": 738.1,
+     "delta": -5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3201x2140",
+     "oud": 1449.6899999999998,
+     "nieuw": 1734.59,
+     "delta": 284.9,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1331x1819",
+     "oud": 951.2800000000001,
+     "nieuw": 945.78,
+     "delta": -5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3334x1204",
+     "oud": 1186.57,
+     "nieuw": 1270.17,
+     "delta": 83.6,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2124x2280",
+     "oud": 1190.2,
+     "nieuw": 1184.7,
+     "delta": -5.5,
+     "units": 1
+    }
+   ],
+   "som": 352
+  },
+  {
+   "nummer": "20267759",
+   "docId": "4fa3eeff-7255-4502-a3b5-60e9e55dff1a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2200x1100",
+     "oud": 1064.8,
+     "nieuw": 1075.8,
+     "delta": 11,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1650x1100",
+     "oud": 730.4,
+     "nieuw": 746.9,
+     "delta": 16.5,
+     "units": 1
+    }
+   ],
+   "som": 27.5
+  },
+  {
+   "nummer": "20267758",
+   "docId": "2eee6b36-6962-4a12-a69f-b017529a6e26",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1840x1500",
+     "oud": 1292.5,
+     "nieuw": 1320,
+     "delta": 27.5,
+     "units": 1
+    }
+   ],
+   "som": 27.5
+  },
+  {
+   "nummer": "20267742",
+   "docId": "22cb5e5c-fe78-404f-bda9-6e64fedd54e4",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1325x1805",
+     "oud": 1075.8,
+     "nieuw": 1070.3,
+     "delta": -5.5,
+     "units": 2
+    }
+   ],
+   "som": -11
+  },
+  {
+   "nummer": "20267741",
+   "docId": "69beb166-c4bf-4bf6-a806-214ac96c75cb",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x2068",
+     "oud": 1104.4,
+     "nieuw": 1370.6,
+     "delta": 266.2,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2050x1923",
+     "oud": 1042.8,
+     "nieuw": 1028.5,
+     "delta": -14.3,
+     "units": 1
+    }
+   ],
+   "som": 251.9
+  },
+  {
+   "nummer": "20267719",
+   "docId": "26b96fed-a128-42bb-a924-b2626c276334",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2200x1100",
+     "oud": 1064.8,
+     "nieuw": 1075.8,
+     "delta": 11,
+     "units": 1
+    }
+   ],
+   "som": 11
+  },
+  {
+   "nummer": "20267684",
+   "docId": "d1f789dc-1486-4f34-a142-aca9de0f43d2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x2300",
+     "oud": 1505.9,
+     "nieuw": 1758.9,
+     "delta": 253,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3400x2300",
+     "oud": 1554.3,
+     "nieuw": 1837,
+     "delta": 282.7,
+     "units": 1
+    }
+   ],
+   "som": 535.7
+  },
+  {
+   "nummer": "20267677",
+   "docId": "92dfb073-98f5-4c2d-ae0e-639603da45dc",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1744",
+     "oud": 1067,
+     "nieuw": 1257.3,
+     "delta": 190.3,
+     "units": 1
+    }
+   ],
+   "som": 190.3
+  },
+  {
+   "nummer": "20267670",
+   "docId": "739260dc-f730-49d1-a116-76a3e2e3cda8",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1552",
+     "oud": 994.4,
+     "nieuw": 1104.4,
+     "delta": 110,
+     "units": 1
+    }
+   ],
+   "som": 110
+  },
+  {
+   "nummer": "20267617",
+   "docId": "ca293ae6-ba58-4865-baf1-89a5a9dc0665",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2605x1505",
+     "oud": 1192.8999999999999,
+     "nieuw": 1202.8,
+     "delta": 9.9,
+     "units": 1
+    }
+   ],
+   "som": 9.9
+  },
+  {
+   "nummer": "20267616",
+   "docId": "8c742b19-8aa1-4b89-8525-1175ddf1c42d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3600x2000",
+     "oud": 1733.6,
+     "nieuw": 1908.5,
+     "delta": 174.9,
+     "units": 1
+    }
+   ],
+   "som": 174.9
+  },
+  {
+   "nummer": "20267603",
+   "docId": "cd1fc5ca-85bb-4214-b704-c8332c6777fc",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2655x2638",
+     "oud": 1919.5,
+     "nieuw": 1973.4,
+     "delta": 53.9,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1550x1697",
+     "oud": 1257.3,
+     "nieuw": 1266.1,
+     "delta": 8.8,
+     "units": 2
+    }
+   ],
+   "som": 71.5
+  },
+  {
+   "nummer": "20267601",
+   "docId": "05a1cd43-7fe0-458f-a14d-da621893d71b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3013x1011",
+     "oud": 1660.56,
+     "nieuw": 1708.96,
+     "delta": 48.4,
+     "units": 5
+    }
+   ],
+   "som": 242
+  },
+  {
+   "nummer": "20267594",
+   "docId": "3ce227a8-2698-4396-b603-9684b9a31f72",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2840x1140",
+     "oud": 921.8,
+     "nieuw": 966.9,
+     "delta": 45.1,
+     "units": 1
+    }
+   ],
+   "som": 45.1
+  },
+  {
+   "nummer": "20267593",
+   "docId": "7003addf-0dc9-4814-8215-d8cc8461228c",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1573",
+     "oud": 1459.7,
+     "nieuw": 1575.2,
+     "delta": 115.5,
+     "units": 1
+    }
+   ],
+   "som": 115.5
+  },
+  {
+   "nummer": "20267584",
+   "docId": "056b2c04-0afd-47e4-92b2-8af890cc48fc",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3400x1246",
+     "oud": 1459.7,
+     "nieuw": 1543.3,
+     "delta": 83.6,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1900x1240",
+     "oud": 1249.6,
+     "nieuw": 1255.1,
+     "delta": 5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2790x1240",
+     "oud": 1394.8,
+     "nieuw": 1408,
+     "delta": 13.2,
+     "units": 1
+    }
+   ],
+   "som": 102.3
+  },
+  {
+   "nummer": "20267580",
+   "docId": "81e25471-d342-4218-9bf3-d837343584fc",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "2350x1140",
+     "oud": 845.9,
+     "nieuw": 864.6,
+     "delta": 18.7,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "1700x1140",
+     "oud": 730.4,
+     "nieuw": 746.9,
+     "delta": 16.5,
+     "units": 1
+    }
+   ],
+   "som": 35.2
+  },
+  {
+   "nummer": "20267578",
+   "docId": "4cfa4f49-7865-43dc-ba78-f6ac9dcb4e17",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3401x1000",
+     "oud": 1143.56,
+     "nieuw": 1180.96,
+     "delta": 37.4,
+     "units": 1
+    }
+   ],
+   "som": 37.4
+  },
+  {
+   "nummer": "20267573",
+   "docId": "b1ae8ad2-fafe-41f5-8178-e4ca7374a89b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x2000",
+     "oud": 1494.9,
+     "nieuw": 1701.7,
+     "delta": 206.8,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1800x1200",
+     "oud": 1158.3,
+     "nieuw": 1174.8,
+     "delta": 16.5,
+     "units": 1
+    }
+   ],
+   "som": 223.3
+  },
+  {
+   "nummer": "20267570",
+   "docId": "35161663-7f97-488f-a04b-bc6fa3513aca",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1802x1507",
+     "oud": 864.6,
+     "nieuw": 892.1,
+     "delta": 27.5,
+     "units": 1
+    }
+   ],
+   "som": 27.5
+  },
+  {
+   "nummer": "20267556",
+   "docId": "df7db015-6707-4640-9c12-22191067001d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3304x1995",
+     "oud": 1206.7,
+     "nieuw": 1387.1,
+     "delta": 180.4,
+     "units": 1
+    }
+   ],
+   "som": 180.4
+  },
+  {
+   "nummer": "20267516",
+   "docId": "985c86ab-7b33-4bab-9f3d-cd1259d64f3b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1350",
+     "oud": 821.7,
+     "nieuw": 827.2,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 5.5
+  },
+  {
+   "nummer": "20267503",
+   "docId": "8d4809be-4e78-4800-9500-313e6f38897c",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1882x1509",
+     "oud": 1113.2,
+     "nieuw": 1140.7,
+     "delta": 27.5,
+     "units": 1
+    }
+   ],
+   "som": 27.5
+  },
+  {
+   "nummer": "20267500",
+   "docId": "1c607cb4-fda5-4d99-b6be-3a1b6a192cd6",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2200x1300",
+     "oud": 1292.5,
+     "nieuw": 1311.2,
+     "delta": 18.7,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1300",
+     "oud": 1249.6,
+     "nieuw": 1255.1,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 24.2
+  },
+  {
+   "nummer": "20267499",
+   "docId": "00b383d0-f76d-4b9a-bee5-bc6529aab06f",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1915x2353",
+     "oud": 1746.96,
+     "nieuw": 1756.86,
+     "delta": 9.9,
+     "units": 1
+    }
+   ],
+   "som": 9.9
+  },
+  {
+   "nummer": "20267474",
+   "docId": "a1f49fb0-a5b3-4878-b403-f4302a260b16",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2050x1350",
+     "oud": 1551,
+     "nieuw": 1569.7,
+     "delta": 18.7,
+     "units": 2
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2800x1350",
+     "oud": 1394.8,
+     "nieuw": 1408,
+     "delta": 13.2,
+     "units": 2
+    }
+   ],
+   "som": 63.8
+  },
+  {
+   "nummer": "20267467",
+   "docId": "69236e20-2221-4d7e-a4ae-5af83df7d848",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1850x1000",
+     "oud": 1300.42,
+     "nieuw": 1335.62,
+     "delta": 35.2,
+     "units": 1
+    }
+   ],
+   "som": 35.2
+  },
+  {
+   "nummer": "20267463",
+   "docId": "c8445b53-747a-462b-b7ef-bdcdfb9c2187",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1330x1150",
+     "oud": 903.3,
+     "nieuw": 912.1,
+     "delta": 8.8,
+     "units": 1
+    }
+   ],
+   "som": 8.8
+  },
+  {
+   "nummer": "20267442",
+   "docId": "712f9bbc-d127-4b60-85b5-1633f8194659",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3800x1800",
+     "oud": 1260.6,
+     "nieuw": 1405.8,
+     "delta": 145.2,
+     "units": 1
+    }
+   ],
+   "som": 145.2
+  },
+  {
+   "nummer": "20267434",
+   "docId": "a04c0a27-387c-4b4b-a37a-61d11a4c5161",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2521x1000",
+     "oud": 1479.7199999999998,
+     "nieuw": 1514.92,
+     "delta": 35.2,
+     "units": 1
+    }
+   ],
+   "som": 35.2
+  },
+  {
+   "nummer": "20267420",
+   "docId": "28de4f32-df63-4fad-824f-7184fb316430",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3303x1607",
+     "oud": 1158.3,
+     "nieuw": 1305.7,
+     "delta": 147.4,
+     "units": 1
+    }
+   ],
+   "som": 147.4
+  },
+  {
+   "nummer": "20267389",
+   "docId": "fc277291-7225-4bd4-9a32-05f66f247215",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1000",
+     "oud": 1619.64,
+     "nieuw": 1653.74,
+     "delta": 34.1,
+     "units": 1
+    }
+   ],
+   "som": 34.1
+  },
+  {
+   "nummer": "20267382",
+   "docId": "5a84dfe4-04b7-48e9-badb-5d24c0f4cc1f",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2757x1411",
+     "oud": 1684.98,
+     "nieuw": 1694.88,
+     "delta": 9.9,
+     "units": 1
+    }
+   ],
+   "som": 9.9
+  },
+  {
+   "nummer": "20267364",
+   "docId": "236a71b9-82a3-4d18-8a28-9eef4f4214b2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1900x1300",
+     "oud": 821.7,
+     "nieuw": 827.2,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 5.5
+  },
+  {
+   "nummer": "20267356",
+   "docId": "eb4ffff1-9ce3-4d87-b4ec-8e0572eea7b7",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3440x1862",
+     "oud": 1305.7,
+     "nieuw": 1480.6,
+     "delta": 174.9,
+     "units": 2
+    }
+   ],
+   "som": 349.8
+  },
+  {
+   "nummer": "20267350",
+   "docId": "a77e4a12-e710-4989-8849-c1a904c5f64d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3040x1970",
+     "oud": 1532.3,
+     "nieuw": 1757.8,
+     "delta": 225.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2160x1280",
+     "oud": 1292.5,
+     "nieuw": 1311.2,
+     "delta": 18.7,
+     "units": 2
+    }
+   ],
+   "som": 262.9
+  },
+  {
+   "nummer": "20267315",
+   "docId": "60c6c58d-cd6f-47b1-b26f-e446503f8bb6",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1380x1500",
+     "oud": 1171.5,
+     "nieuw": 1166,
+     "delta": -5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3150x1500",
+     "oud": 1459.7,
+     "nieuw": 1575.2,
+     "delta": 115.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2580x1030",
+     "oud": 1113.2,
+     "nieuw": 1164.9,
+     "delta": 51.7,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3120x1030",
+     "oud": 1204.5,
+     "nieuw": 1252.9,
+     "delta": 48.4,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3600x1790",
+     "oud": 1618.1,
+     "nieuw": 1782,
+     "delta": 163.9,
+     "units": 1
+    }
+   ],
+   "som": 374
+  },
+  {
+   "nummer": "20267293",
+   "docId": "710b3a40-6d56-4ab1-ac19-16b9fa3e0cea",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1600x1850",
+     "oud": 1320,
+     "nieuw": 1292.5,
+     "delta": -27.5,
+     "units": 4
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1650",
+     "oud": 1494.9,
+     "nieuw": 1685.2,
+     "delta": 190.3,
+     "units": 1
+    }
+   ],
+   "som": 80.3
+  },
+  {
+   "nummer": "20267290",
+   "docId": "aa7dec2e-d053-4ff7-bd7d-ee4a3ccf188b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1900x1450",
+     "oud": 1292.5,
+     "nieuw": 1320,
+     "delta": 27.5,
+     "units": 1
+    }
+   ],
+   "som": 27.5
+  },
+  {
+   "nummer": "20267283",
+   "docId": "8b83c89d-0d2a-4b1b-8fcd-9e6ad23fc943",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1850x1150",
+     "oud": 760.1,
+     "nieuw": 784.3,
+     "delta": 24.2,
+     "units": 1
+    }
+   ],
+   "som": 24.2
+  },
+  {
+   "nummer": "20267235",
+   "docId": "d39f4669-4c99-4c35-9568-459a02ad5c0c",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1530x1695",
+     "oud": 1257.3,
+     "nieuw": 1266.1,
+     "delta": 8.8,
+     "units": 4
+    }
+   ],
+   "som": 35.2
+  },
+  {
+   "nummer": "20267214",
+   "docId": "ff73709e-f955-434a-862b-7e9bae78d315",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1400",
+     "oud": 1249.6,
+     "nieuw": 1255.1,
+     "delta": 5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x1400",
+     "oud": 1070.3,
+     "nieuw": 1075.8,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 11
+  },
+  {
+   "nummer": "20267207",
+   "docId": "3c494d91-ac43-4d62-93c2-a0af51973fed",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2320x1870",
+     "oud": 1594.56,
+     "nieuw": 1605.56,
+     "delta": 11,
+     "units": 1
+    }
+   ],
+   "som": 11
+  },
+  {
+   "nummer": "20267205",
+   "docId": "729d19e9-2a9a-4be2-a160-eb49a89274a5",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2639x1333",
+     "oud": 1394.8,
+     "nieuw": 1408,
+     "delta": 13.2,
+     "units": 1
+    }
+   ],
+   "som": 13.2
+  },
+  {
+   "nummer": "20267200",
+   "docId": "f8615389-6aae-4fb9-8544-86d929309f1a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1500",
+     "oud": 1459.7,
+     "nieuw": 1575.2,
+     "delta": 115.5,
+     "units": 1
+    }
+   ],
+   "som": 115.5
+  },
+  {
+   "nummer": "20267195",
+   "docId": "c1173be6-eeda-4b7f-95c8-8ab18698a20f",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x1400",
+     "oud": 1422.3,
+     "nieuw": 1491.6,
+     "delta": 69.3,
+     "units": 1
+    }
+   ],
+   "som": 69.3
+  },
+  {
+   "nummer": "20267186",
+   "docId": "990f036b-588b-4126-836b-b63b71aa1f7f",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3700x2200",
+     "oud": 1860.1,
+     "nieuw": 2094.4,
+     "delta": 234.3,
+     "units": 3
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1880x1700",
+     "oud": 1346.4,
+     "nieuw": 1351.9,
+     "delta": 5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1880x1700",
+     "oud": 1167.1,
+     "nieuw": 1172.6,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 713.9
+  },
+  {
+   "nummer": "20267181",
+   "docId": "cc3d7376-bb37-4895-919f-90268a0086db",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2698x1813",
+     "oud": 1208.9,
+     "nieuw": 1219.9,
+     "delta": 11,
+     "units": 1
+    }
+   ],
+   "som": 11
+  },
+  {
+   "nummer": "20267179",
+   "docId": "c6b43535-814e-47ef-ad13-a4ea09cc7e2a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2680x2150",
+     "oud": 1707.2,
+     "nieuw": 1739.1,
+     "delta": 31.9,
+     "units": 1
+    }
+   ],
+   "som": 31.9
+  },
+  {
+   "nummer": "20267173",
+   "docId": "e64f9410-9a87-44af-9c7f-1e590b4fc537",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1700x1600",
+     "oud": 838.2,
+     "nieuw": 829.4,
+     "delta": -8.8,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3700x1500",
+     "oud": 1158.3,
+     "nieuw": 1305.7,
+     "delta": 147.4,
+     "units": 1
+    }
+   ],
+   "som": 138.6
+  },
+  {
+   "nummer": "20267152",
+   "docId": "87a53cfd-ab3c-4455-9478-cf1de44e5f30",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3225x2222",
+     "oud": 1554.3,
+     "nieuw": 1837,
+     "delta": 282.7,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3225x2231",
+     "oud": 1554.3,
+     "nieuw": 1837,
+     "delta": 282.7,
+     "units": 1
+    }
+   ],
+   "som": 565.4
+  },
+  {
+   "nummer": "20267139",
+   "docId": "b083033f-23bd-4516-a623-700435b87be0",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1700x1200",
+     "oud": 730.4,
+     "nieuw": 746.9,
+     "delta": 16.5,
+     "units": 1
+    }
+   ],
+   "som": 16.5
+  },
+  {
+   "nummer": "20267123",
+   "docId": "98bce8a4-12b6-4c64-a8a7-415164f176ff",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1800x1200",
+     "oud": 1158.3,
+     "nieuw": 1174.8,
+     "delta": 16.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1800x1200",
+     "oud": 1158.3,
+     "nieuw": 1174.8,
+     "delta": 16.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2600x1200",
+     "oud": 1292.5,
+     "nieuw": 1344.2,
+     "delta": 51.7,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2500x1200",
+     "oud": 1292.5,
+     "nieuw": 1344.2,
+     "delta": 51.7,
+     "units": 1
+    }
+   ],
+   "som": 136.4
+  },
+  {
+   "nummer": "20267102",
+   "docId": "c77da440-c890-4f4b-9c7b-39b151306eb6",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3800x1666",
+     "oud": 1509.2,
+     "nieuw": 1654.4,
+     "delta": 145.2,
+     "units": 1
+    }
+   ],
+   "som": 145.2
+  },
+  {
+   "nummer": "20267087",
+   "docId": "b8b37f52-182b-4f87-89e8-ac961e654599",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3500x1602",
+     "oud": 1654.62,
+     "nieuw": 1818.52,
+     "delta": 163.9,
+     "units": 2
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2100x1600",
+     "oud": 1345.96,
+     "nieuw": 1337.16,
+     "delta": -8.8,
+     "units": 1
+    }
+   ],
+   "som": 319
+  },
+  {
+   "nummer": "20267078",
+   "docId": "bb12a0e9-1c53-4748-8545-2af9958660a7",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3201x1200",
+     "oud": 1429.45,
+     "nieuw": 1477.85,
+     "delta": 48.4,
+     "units": 1
+    }
+   ],
+   "som": 48.4
+  },
+  {
+   "nummer": "20267072",
+   "docId": "f1dc621b-3f94-4ed8-9caa-c41546db3809",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2030x1300",
+     "oud": 1292.5,
+     "nieuw": 1311.2,
+     "delta": 18.7,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2200x1300",
+     "oud": 1292.5,
+     "nieuw": 1311.2,
+     "delta": 18.7,
+     "units": 1
+    }
+   ],
+   "som": 37.4
+  },
+  {
+   "nummer": "20267060",
+   "docId": "a5cf193e-24a0-4b41-bb57-bf1c5722e04b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2329x1000",
+     "oud": 1027.4,
+     "nieuw": 1051.6,
+     "delta": 24.2,
+     "units": 1
+    }
+   ],
+   "som": 24.2
+  },
+  {
+   "nummer": "20267057",
+   "docId": "d86b4d33-5245-4848-8af7-ad38318f5118",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1596",
+     "oud": 994.4,
+     "nieuw": 1104.4,
+     "delta": 110,
+     "units": 1
+    }
+   ],
+   "som": 110
+  },
+  {
+   "nummer": "20267049",
+   "docId": "a56bd632-0e40-47de-9500-7ae0bc5cae69",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2415x1000",
+     "oud": 1233.1,
+     "nieuw": 1268.3,
+     "delta": 35.2,
+     "units": 1
+    }
+   ],
+   "som": 35.2
+  },
+  {
+   "nummer": "20267024",
+   "docId": "6a05fc92-5eb9-4c01-8bd0-d6e6a29bc1f4",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3800x2200",
+     "oud": 1432.2,
+     "nieuw": 1666.5,
+     "delta": 234.3,
+     "units": 1
+    }
+   ],
+   "som": 234.3
+  },
+  {
+   "nummer": "20267018",
+   "docId": "0d258879-42a2-4093-b0c4-a4879a9f7b32",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2830x2800",
+     "oud": 1516.9,
+     "nieuw": 1863.4,
+     "delta": 346.5,
+     "units": 1
+    }
+   ],
+   "som": 346.5
+  },
+  {
+   "nummer": "20266990",
+   "docId": "eb3c838c-55a5-4c9c-b589-8ca19b2ec04d",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3108x1224",
+     "oud": 994.4,
+     "nieuw": 1063.7,
+     "delta": 69.3,
+     "units": 1
+    }
+   ],
+   "som": 69.3
+  },
+  {
+   "nummer": "20266986",
+   "docId": "2e0b705a-3e29-4937-a0c8-3630812d3a64",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1809x1653",
+     "oud": 1346.4,
+     "nieuw": 1351.9,
+     "delta": 5.5,
+     "units": 2
+    }
+   ],
+   "som": 11
+  },
+  {
+   "nummer": "20266983",
+   "docId": "6337543b-4f32-4318-a792-b0a364aef24f",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3020x1650",
+     "oud": 1494.9,
+     "nieuw": 1685.2,
+     "delta": 190.3,
+     "units": 2
+    }
+   ],
+   "som": 380.6
+  },
+  {
+   "nummer": "20266981",
+   "docId": "278bc26b-155b-4548-abed-951057cad23a",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3001x2401",
+     "oud": 1305.7,
+     "nieuw": 1618.1,
+     "delta": 312.4,
+     "units": 1
+    }
+   ],
+   "som": 312.4
+  },
+  {
+   "nummer": "20266951",
+   "docId": "3803f60f-0caa-453c-8302-4ebaf330a440",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "2650x1050",
+     "oud": 1320,
+     "nieuw": 1383.8,
+     "delta": 63.8,
+     "units": 2
+    },
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "2650x1050",
+     "oud": 1320,
+     "nieuw": 1383.8,
+     "delta": 63.8,
+     "units": 2
+    },
+    {
+     "regel": "Rolluik S-42 (RollSUPER)",
+     "maat": "2650x1780",
+     "oud": 1388.2,
+     "nieuw": 1384.9,
+     "delta": -3.3,
+     "units": 2
+    }
+   ],
+   "som": 248.6
+  },
+  {
+   "nummer": "20266945",
+   "docId": "1a0a012d-be95-40b1-bac3-d7ebf8a1125c",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2000x2400",
+     "oud": 1519.1,
+     "nieuw": 1529,
+     "delta": 9.9,
+     "units": 1
+    }
+   ],
+   "som": 9.9
+  },
+  {
+   "nummer": "20266925",
+   "docId": "3829f314-ad4b-4f4c-af57-a8cd66d4c1f0",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3230x1800",
+     "oud": 1824.13,
+     "nieuw": 1971.53,
+     "delta": 147.4,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2100x1400",
+     "oud": 1486.38,
+     "nieuw": 1505.08,
+     "delta": 18.7,
+     "units": 1
+    }
+   ],
+   "som": 166.1
+  },
+  {
+   "nummer": "20266914",
+   "docId": "f56ce257-269e-49e7-b428-8cffe8096d78",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3000x1400",
+     "oud": 1660.56,
+     "nieuw": 1725.46,
+     "delta": 64.9,
+     "units": 1
+    }
+   ],
+   "som": 64.9
+  },
+  {
+   "nummer": "20266895",
+   "docId": "3a9d4767-3251-4bdc-ab6a-e2dfb857ebf0",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2648x1080",
+     "oud": 1140.7,
+     "nieuw": 1204.5,
+     "delta": 63.8,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3740x1285",
+     "oud": 1364,
+     "nieuw": 1449.8,
+     "delta": 85.8,
+     "units": 1
+    }
+   ],
+   "som": 149.6
+  },
+  {
+   "nummer": "20266891",
+   "docId": "300ab5d6-67f5-4976-b273-f79bc3643c14",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2500x1200",
+     "oud": 1292.5,
+     "nieuw": 1344.2,
+     "delta": 51.7,
+     "units": 1
+    }
+   ],
+   "som": 51.7
+  },
+  {
+   "nummer": "20266874",
+   "docId": "9895ad0d-1e8d-4fa3-a279-68c11c7f55b2",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2800x1700",
+     "oud": 1567.5,
+     "nieuw": 1564.2,
+     "delta": -3.3,
+     "units": 1
+    }
+   ],
+   "som": -3.3
+  },
+  {
+   "nummer": "20266868",
+   "docId": "7c593ec8-c9e3-4686-921a-2470ce40104c",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER) — Aluminium rolluik op zonne-energie",
+     "maat": "3300x2350",
+     "oud": 1733.6,
+     "nieuw": 2016.3,
+     "delta": 282.7,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER) — Aluminium rolluik op zonne-energie",
+     "maat": "1950x2500",
+     "oud": 1596.1,
+     "nieuw": 1599.4,
+     "delta": 3.3,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER) — Aluminium rolluik op zonne-energie",
+     "maat": "1950x1450",
+     "oud": 1292.5,
+     "nieuw": 1320,
+     "delta": 27.5,
+     "units": 1
+    }
+   ],
+   "som": 313.5
+  },
+  {
+   "nummer": "202518002",
+   "docId": "2abf3bed-c3a9-4ea6-86c2-12ef5f1c0f86",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3600x1100",
+     "oud": 1543.3,
+     "nieuw": 1588.4,
+     "delta": 45.1,
+     "units": 1
+    }
+   ],
+   "som": 45.1
+  },
+  {
+   "nummer": "202516237",
+   "docId": "50390f8f-a0a4-4db1-9bad-fba65febf77f",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3027x1497",
+     "oud": 1054.04,
+     "nieuw": 1169.54,
+     "delta": 115.5,
+     "units": 2
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2400x1500",
+     "oud": 958.9,
+     "nieuw": 953.4,
+     "delta": -5.5,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2007x1000",
+     "oud": 782.6,
+     "nieuw": 804.6,
+     "delta": 22,
+     "units": 1
+    }
+   ],
+   "som": 247.5
+  },
+  {
+   "nummer": "202516185",
+   "docId": "e99882bd-aa11-4d4d-a91e-b3625b109a63",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3400x2400",
+     "oud": 1831.64,
+     "nieuw": 2114.34,
+     "delta": 282.7,
+     "units": 1
+    },
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2027x2236",
+     "oud": 1538.33,
+     "nieuw": 1532.83,
+     "delta": -5.5,
+     "units": 1
+    }
+   ],
+   "som": 277.2
+  },
+  {
+   "nummer": "202516078",
+   "docId": "406cb6ad-f7d2-484b-8258-c845611aff19",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2700x1200",
+     "oud": 1296,
+     "nieuw": 1359.8,
+     "delta": 63.8,
+     "units": 1
+    }
+   ],
+   "som": 63.8
+  },
+  {
+   "nummer": "202515586",
+   "docId": "e3920b68-6b68-43b1-947f-4a51f9ae1983",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1700x1000",
+     "oud": 1148.1,
+     "nieuw": 1172.3,
+     "delta": 24.2,
+     "units": 2
+    }
+   ],
+   "som": 48.4
+  },
+  {
+   "nummer": "202513797",
+   "docId": "5f12288c-07fe-4b3a-aa84-8ca8cf73ea7c",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1850x1750",
+     "oud": 1114.78,
+     "nieuw": 1120.28,
+     "delta": 5.5,
+     "units": 1
+    }
+   ],
+   "som": 5.5
+  },
+  {
+   "nummer": "202513414",
+   "docId": "232d0dbb-223c-4b0e-acfd-76a39ada27ae",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "2850x2400",
+     "oud": 2150,
+     "nieuw": 2442.6,
+     "delta": 292.6,
+     "units": 1
+    }
+   ],
+   "som": 292.6
+  },
+  {
+   "nummer": "202513365",
+   "docId": "8a4d07ba-2dda-4b65-9db7-308cabb7e42b",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "1800x2700",
+     "oud": 1566.27,
+     "nieuw": 1569.57,
+     "delta": 3.3,
+     "units": 1
+    }
+   ],
+   "som": 3.3
+  },
+  {
+   "nummer": "202510937",
+   "docId": "89a58e6b-453a-45e7-b099-f21c71bc9324",
+   "wijzigingen": [
+    {
+     "regel": "Rolluik (RollSUPER)",
+     "maat": "3300x1965",
+     "oud": 1676,
+     "nieuw": 1856.4,
+     "delta": 180.4,
+     "units": 1
+    }
+   ],
+   "som": 180.4
+  }
+ ],
+ "klaar": "2026-07-30T10:51:21.897Z",
+ "samenvatting": {
+  "gefixt": 281,
+  "mislukt": 0,
+  "totaalDelta": 27772.8
+ }
+}

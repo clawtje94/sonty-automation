@@ -15,6 +15,9 @@ memory `sonty-offerte-sheet-structuur`. Jonge weken altijd met rijpheidswaarschu
 | 3 | Conversie per productgroep, laatste 14 dagen | ma 08:35 | `conversie-productgroep-recent.js` (nl.sonty.maandag-data) |
 | 4 | Cohortrapport: uitrijping per offerteweek | ma 08:45 | `weekrapport-cohorten.js` (nl.sonty.cohortrapport) |
 | 13 | Montage & inmeten: vorige week gedaan + vooruit ingepland, week- en maandtabellen | ma 08:35 | `montage-rapport.js` (nl.sonty.maandag-data) |
+| 5 | Conversie per bron (Google/Meta/buren), 4 weken | ma 08:35 | `conversie-per-bron.js` (nl.sonty.maandag-data) |
+| 7 | Geld op de plank: open offertes 14-60 dgn, per leeftijdsbucket | ma 08:35 | `openstaande-offertes.js` (nl.sonty.maandag-data) |
+| 6 | Maandrapport: afgesloten maand vs zelfde maand vorig jaar | 1e vd maand 08:50 | `maandrapport.js` (nl.sonty.maandrapport) |
 
 Bestelde items van 30 juli (#2, #3 en #13 montages) staan erin.
 
@@ -22,14 +25,16 @@ Bestelde items van 30 juli (#2, #3 en #13 montages) staan erin.
 
 | # | Rapport | Waarom | Frequentie |
 |---|---------|--------|------------|
-| 5 | Conversie per **bron** (Google/Meta/buren), 4 weken | het adverteer-stuurgetal; nu alleen in losse analyses | wekelijks |
-| 6 | **Maandrapport**: afgesloten maand op alle assen (bron × product × kanaal) vs zelfde maand vorig jaar | de uitgerijpte waarheid, 1× per maand rustig lezen | 1e van de maand |
-| 7 | **Openstaande offertes zonder opvolging** ouder dan 14 dagen (aantal + waarde) | direct actielijstje: geld op de plank | wekelijks |
 | 8 | **Showroomafspraken** per week (geboekt via AI-KS + totaal) | sterkste conversiehefboom (52–67%) | wekelijks |
 | 9 | **Doel-tracker**: omzet/marge t.o.v. jaardoel €5 mln (tab "winst verlies") | ligt het bedrijf op koers | maandelijks |
 | 10 | **Kosten per order / break-even** per kanaal | kan pas als de kostenkolom in "conversie %" gevuld wordt of Meta-account "Sonty.nl Creditcard" opengaat | maandelijks |
 | 11 | **AI-KS effectmeting**: aug 2026 vs aug 2025 op gelijk rijpingspunt | eerste zinvolle meting ~15 oktober | eenmalig, dan maandelijks |
 | 12 | **Buren/bekenden-teller** per week (Zonradar-effect) | goedkoopste kanaal, 39–44% conversie | wekelijks |
+
+## Uitgevoerd 30 juli (meldingen-opschoning, "doe wat jij wijs vindt")
+- Nul-meldingen UIT: "geen klant wacht" (wachtlijst), "nog geen A/B-offertes", "geen AI-gesprekken" — alleen nog in de log.
+- Oud weekrapport (nl.sonty.weekrapport) UIT: bron was het rp-archief dat op 16 juli bevroor, dus elke maandag foute cijfers.
+- Maandag-script doet nu EERST een verse sheet-extractie (anders rapporteert alles de stand van vorige week).
 
 ## Bewust NIET (nul-informatie, zie meldingen-opschoning 30 juli)
 

@@ -43,8 +43,8 @@ const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').tr
   const sinds = Date.now() - UREN * 3600000;
   const toew = toewijzingenSinds(sinds);
   if (!toew.length) {
-    const t = `A/B-rapport: in de afgelopen ${UREN} uur zijn er nog geen offertes met de nieuwe templates verstuurd.`;
-    console.log(t); await telegram(t); return;
+    // Nul-melding uitgezet (Daimy 30 juli): alleen loggen.
+    console.log(`geen offertes met nieuwe templates in ${UREN}u — geen Telegram-bericht`); return;
   }
 
   const jwt = await getToken();

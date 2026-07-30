@@ -67,6 +67,7 @@ function parseDatum(v) {
       nummer: findCol(hdr,'nummer'),                       // Gripp-opdrachtnummer = hardste akkoordbewijs
       akkoordBedrag: hdr.map(norm).lastIndexOf('akkoord'),
       inkoop: findCol(hdr,'inkooop incl btw'),
+      gebeld: findCol(hdr,'gebeld?'),
     };
     for (const [k,vv] of Object.entries(cols)) if (vv < 0) console.error(`! ${tab}: kolom "${k}" niet gevonden`);
     let n = 0;
@@ -95,6 +96,7 @@ function parseDatum(v) {
         nummer: String(v[cols.nummer]||'').trim(),
         akkoordBedrag: money(v[cols.akkoordBedrag]),
         inkoop: money(v[cols.inkoop]),
+        gebeld: cols.gebeld >= 0 ? String(v[cols.gebeld]||'').trim() : '',
       });
       n++;
     }

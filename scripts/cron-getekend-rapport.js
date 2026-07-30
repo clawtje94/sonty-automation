@@ -77,7 +77,8 @@ async function telegram(text) {
       .map(l => { try { return JSON.parse(l); } catch { return null; } })
       .filter(e => e && e.antwoord && new Date(e.tijd).getTime() > sinds && (e.actief || e.sonny || e.email));
     if (!entries.length) {
-      await telegram('🤖 AI-resultaten: de afgelopen dag geen AI-gesprekken gevoerd.');
+      // Nul-melding uitgezet (Daimy 30 juli): alleen loggen.
+      console.log('geen AI-gesprekken afgelopen dag — geen Telegram-bericht');
       return;
     }
     // Compacte digest per gesprek voor de samenvatter

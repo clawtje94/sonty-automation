@@ -151,7 +151,8 @@ function duur(uren) {
   console.log(`(${ruisTotaal} eruit gefilterd: ${Object.entries(ruisRedenen).map(([k, v]) => `${v} ${k}`).join(', ') || 'niets'})`);
 
   if (!wachtend.length) {
-    await telegram(`✅ Wachtlijst: geen klant wacht langer dan ${DREMPEL_UREN} uur op antwoord.`);
+    // Nul-melding uitgezet (Daimy 30 juli, meldingen-opschoning): alleen loggen.
+    console.log(`geen klant wacht langer dan ${DREMPEL_UREN} uur — geen Telegram-bericht`);
     return;
   }
 

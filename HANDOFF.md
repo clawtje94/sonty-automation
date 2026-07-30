@@ -6,6 +6,12 @@
 - **PDOK-lessen**: WFS-URL max ±4 KB (20 ids per Or-filter-batch), elk antwoord max 1000 records → pagineren met startIndex (helper `wfsAll` in de route).
 - **WACHT OP DAIMY**: (1) KvK API-abonnement aanvragen op developers.kvk.nl (tekenbevoegde, €6,40/mnd) → daarna bouwen: VvE-namen, correspondentieadres (=beheerder!) en wekelijkse nieuwe-VvE-check; (2) postbode.nu saldo vóór echte brieven.
 - **Nog te bouwen (afgesproken)**: beheerders-tab (VvE-beheerkantoren + contactinfo + LinkedIn-zoeklinks naar beslissers — GEEN LinkedIn-scraper, ToS/AVG), brief-flow via postbode, KvK-verrijking + cron nieuwe VvE's.
+- **Nieuwbouw-detectie LIVE (PR #48/#49)**: knop "Komende VvE's" = BAG-panden vergund/bouw gestart met 10+ won (Zoetermeer: 10 complexen/683 won, o.a. 228-won-toren 2026). BAG-jaartal = GEPLANDE oplevering; verlopen jaar → label "oplevering loopt uit, nu benaderen" (vraag Daimy). Belangen-vraag Daimy beantwoord met VvE-recht-bronnen: bestuur vreest wildgroei maar mag niet totaal verbieden → protocol is hun uitweg, ons aanbod.
+
+## VANGNET ONBEANTWOORDE KLANTMAIL + VVE/ZAKELIJK-FILTER (30 juli)
+- **Casus Niels Pompe**: churn-mail 23-07 op aan-Daimy-toegewezen ticket bleef 5 dagen onzichtbaar (bot blijft terecht van mens-gesprekken af, maar geen vangnet) → klant annuleerde 28-07; die escalatie ging wél goed naar Mens nodig maar lag 2 dagen stil. NIEUW in email-daemon: klantmail op mens-gesprek 4u onbeantwoord → team Mens nodig + notitie; bij annuleer/klacht-signalen direct Telegram-alarm naar Daimy. Bot antwoordt daar nooit zelf.
+- **Zakelijk-filter** (verduidelijking Daimy): mails van zakelijke aanvragers (namens VvE/bestuur/beheer, "VvE <Eigennaam>", vastgoed-/gebouwbeheer, gemeente/school, kantoor-/bedrijfspand, X woningen) → automatisch aan Daimy, bot beantwoordt niet. Particulier die zijn vve alleen noemt blijft bij de bot. 8 testcases groen.
+- Ticket 970211967 (Esther, VvE Weidse Weelde) aan Daimy toegewezen; Sunny had al geantwoord vóór de regel bestond.
 
 ## OPVOLGING 24U-VENSTER AANGEZET (30 juli, opdracht Daimy)
 - Terugblik AI-gesprekken: 6 persoonlijke follow-ups lagen klaar binnen het 24u-venster, 1 verstuurd. Oorzaak gemiste 5: avond-kandidaten kregen buiten bot-uren een beoordeling → state.beoordeeld → ochtendrun blokkeerde ze ("vandaag al beoordeeld").

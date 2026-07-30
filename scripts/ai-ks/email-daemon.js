@@ -123,11 +123,16 @@ async function ronde() {
     // webflow-formulieren worden door verwerk() zelf afgehandeld (→ team Mens nodig met gegevens)
     const sleutel = `${t.id}:${laatste.created_at}`;
     if (state[sleutel]) continue;
-    // VVE-AANVRAGEN (Daimy 30-07): "belangrijk dat Sunny dat soort aanvragen niet oppakt
-    // maar aan mij toewijst". Elke klantmail met een VvE-signaal in onderwerp of tekst gaat
-    // dus naar Daimy (736327) en de bot blijft eraf — dat zijn vaak complexbrede trajecten.
+    // ZAKELIJKE AANVRAGERS (Daimy 30-07, verduidelijkt): het gaat NIET om een particulier
+    // die zegt "ik moet nog met mijn VvE overleggen" — die helpt de bot gewoon. Het gaat om
+    // aanvragen NAMENS een organisatie: een VvE zelf, vastgoed-/gebouwbeheerder, bedrijf,
+    // school of gemeente, of complexbreed (X woningen/appartementen). Die gaan naar Daimy.
     const vveTekst = `${t.subject || ''} ${String(laatste.body || laatste.message || '')}`;
-    if (/\bvve\b|v\.v\.e|vereniging(en)? van eigenaren/i.test(vveTekst)) {
+    // Twee checks: (1) zakelijke termen, hoofdletterongevoelig; (2) "VvE <Eigennaam>"
+    // (hoofdlettergevoelig, anders matcht ook "met mijn vve overleggen").
+    const zakelijkTermen = /namens (de |onze |het )?(vve|vereniging|bestuur|beheer)|vereniging van eigenaren|vastgoedbeheer|gebouwbeheer|vve.?beheer|bewonerscommissie|\bgemeente\b|\bschool\b|kantoorpand|bedrijfspand|appartementencomplex|wooncomplex|\d+\s*(woningen|appartementen|units)\b|offerte voor (ons|onze) (pand|kantoor|complex|vereniging)/i;
+    const vveMetNaam = /\b[Vv]\.?[Vv]\.?[Ee]\.?\s+(?:de\s|het\s)?[A-Z]/;
+    if (zakelijkTermen.test(vveTekst) || vveMetNaam.test(vveTekst)) {
       try {
         if (Number(t.user_id) !== 736327) {
           await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 736327 });

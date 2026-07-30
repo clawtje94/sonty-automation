@@ -254,6 +254,15 @@ async function main() {
   for (const k of ks) {
     await new Promise(r => setTimeout(r, 3000)); // Trengo-limiet delen met de daemons
     const wie = k.klant?.naam || k.klant?.phone || k.klant?.email || '?';
+    // AVONDGAT-FIX (Daimy 30-07: "24u-venster follow-ups aanzetten"): een snel-kandidaat
+    // buiten bot-uren NIET beoordelen — de beoordeling zette state.beoordeeld, waardoor
+    // de ochtendrun hem blokkeerde ("vandaag al beoordeeld") en het bericht nooit ging
+    // (zo misten we o.a. Vas en Monique). Overslaan zonder state = ochtendrun pakt hem
+    // vers op; de venstergrens (klant max 20u stil) bewaakt de rand vanzelf.
+    if (k.snel && !k.forced && !SCENARIO && !CFG.binnenBotUren()) {
+      console.log(`  ⏸ ${wie} (ticket ${k.ticket}): snel-kandidaat buiten bot-uren — wacht op ochtendrun`);
+      continue;
+    }
     const check = await blokkade(k, state);
     if (check.ok !== true) {
       console.log(`  − ${wie} (ticket ${k.ticket}): ${check}`);

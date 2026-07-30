@@ -384,9 +384,24 @@ async function runTool(name, input, ctx) {
       const [dag, tijd] = s.omschrijving.split(' om ');
       (perDag[dag] = perDag[dag] || []).push(tijd);
     }
+    // VANDAAG valt vrijwel altijd weg door de minimale aanlooptijd van 8 uur — dat is een
+    // boekingsregel, GEEN volle agenda. De bot zei daardoor "vanmiddag zit vol" tegen een
+    // klant die gewoon had kunnen binnenlopen (Gary, ticket 970191250, 30 juli). Zeg het er
+    // dus expliciet bij, inclusief de inloop-optie op di/do (afspraak alleen verplicht wo/vr/za).
+    const nuNL = CFG.amsterdamNu();
+    let vandaagNote = '';
+    if ([2, 3, 4, 5, 6].includes(nuNL.dag)) {
+      const sluit = nuNL.dag === 6 ? '16:00' : '17:00';
+      const inloop = [2, 4].includes(nuNL.dag); // di en do: geen afspraak verplicht
+      const dagnaam = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'][nuNL.dag];
+      vandaagNote = ` LET OP VANDAAG: tijden voor vandaag ontbreken meestal door de minimale aanlooptijd van 8 uur voor afspraken. Dat betekent NIET dat vandaag vol is; zeg dus nooit "vandaag zit vol".` +
+        (inloop && nuNL.hhmm < sluit
+          ? ` Vandaag (${dagnaam}) is een afspraak niet verplicht: de klant mag tot ${sluit} gewoon binnenlopen in de showroom. Bied dat actief aan als iemand vandaag nog wil komen.`
+          : ` Wil de klant per se vandaag nog komen, laat het dan een collega oppakken via escaleren_naar_mens.`);
+    }
     return JSON.stringify({
       dagen: Object.entries(perDag).map(([dag, tijden]) => `${dag}: ${tijden.join(', ')}`),
-      opmerking: `Dit zijn ALLE vrije tijden voor de komende ${dagen} dagen (di t/m za); een dag die ontbreekt is echt vol of gesloten. Stel 2-3 tijden voor die bij de voorkeur van de klant passen; boek pas na expliciete keuze. Geef bij het boeken start door als "JJJJ-MM-DD UU:MM" (NL-tijd) uit deze lijst.`,
+      opmerking: `Dit zijn ALLE vrije tijden voor de komende ${dagen} dagen (di t/m za); een dag die ontbreekt (behalve vandaag) is echt vol of gesloten. Stel 2-3 tijden voor die bij de voorkeur van de klant passen; boek pas na expliciete keuze. Geef bij het boeken start door als "JJJJ-MM-DD UU:MM" (NL-tijd) uit deze lijst.${vandaagNote}`,
     });
   }
   if (name === 'showroom_afspraak_boeken') {

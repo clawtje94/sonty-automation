@@ -123,6 +123,21 @@ async function ronde() {
     // webflow-formulieren worden door verwerk() zelf afgehandeld (→ team Mens nodig met gegevens)
     const sleutel = `${t.id}:${laatste.created_at}`;
     if (state[sleutel]) continue;
+    // VVE-AANVRAGEN (Daimy 30-07): "belangrijk dat Sunny dat soort aanvragen niet oppakt
+    // maar aan mij toewijst". Elke klantmail met een VvE-signaal in onderwerp of tekst gaat
+    // dus naar Daimy (736327) en de bot blijft eraf — dat zijn vaak complexbrede trajecten.
+    const vveTekst = `${t.subject || ''} ${String(laatste.body || laatste.message || '')}`;
+    if (/\bvve\b|v\.v\.e|vereniging(en)? van eigenaren/i.test(vveTekst)) {
+      try {
+        if (Number(t.user_id) !== 736327) {
+          await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 736327 });
+          await tPost(`/tickets/${t.id}/messages`, { internal_note: true, message: '🏢 VvE-aanvraag: automatisch aan Daimy toegewezen (regel Daimy 30-07). De bot beantwoordt dit niet.' });
+        }
+        console.log(`  [${t.id}] VvE-signaal → toegewezen aan Daimy, bot blijft eraf`);
+      } catch (e) { console.error(`  [${t.id}] VvE-toewijzing FOUT: ${e.message}`); }
+      state[sleutel] = 'vve->daimy ' + new Date().toISOString(); saveState(state);
+      continue;
+    }
     // REACTIETIJD (Daimy 20 juli): klantmails pas na 1,5-2 uur beantwoorden — direct antwoorden
     // voelt als een bot. Geldt sinds 20 juli ook voor webflow-leads: Sunny mailt die nu zelf
     // naar het klantadres, dus ook daar hoort het menselijke tempo bij.

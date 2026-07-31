@@ -124,7 +124,10 @@ belBtn.onclick = async () => {
     dc = pc.createDataChannel('oai-events');
     window._dc = dc; // testhook voor webrtc-test.js
     dc.onmessage = eventAfhandelen;
-    dc.onopen = () => setStatus('Verbonden — praat maar tegen Bas.');
+    dc.onopen = () => {
+      setStatus('Verbonden, Bas neemt op...');
+      dc.send(JSON.stringify({ type: 'response.create' }));
+    };
 
     const offer = await pc.createOffer();
     await pc.setLocalDescription(offer);

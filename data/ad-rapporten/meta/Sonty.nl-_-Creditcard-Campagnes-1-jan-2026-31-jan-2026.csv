@@ -1,0 +1,11 @@
+"Start rapportage","Einde rapportage",Campagnenaam,Campagneweergave,Resultaten,Resultatenindicator,"Kosten per resultaten","Budget advertentieset","Budgettype advertentieset","Besteed bedrag (EUR)",Weergaven,Bereik,Frequentie,"CPM (kosten per 1000 weergaven) (EUR)","Klikken op links","Eindigt op",Toeschrijvingsinstelling
+2026-01-01,2026-01-31,"01 | Leads campagne - Rolluiken",active,,,,"Advertentiesetbudget wordt gebruikt",0,12236.53,1573410,675244,2.330135,7.777077,8234,Actief,"Meerdere toeschrijvingsinstellingen"
+2026-01-01,2026-01-31,"02 | Retargeting | Leads",inactive,,,,60,Dagelijks,1965.29,88581,12514,7.078552,22.186361,1424,Actief,"Meerdere toeschrijvingsinstellingen"
+2026-01-01,2026-01-31,"03 | Leadscampagne - Zonwering",active,,,,240,Dagelijks,0,0,0,0,0,,Actief,"7 dagen voor klikken, 1 dag voor weergaven of 1 dag voor betrokken weergaven"
+2026-01-01,2026-01-31,"04 | Leadscampagne - Pergola",active,78,actions:offsite_conversion.custom.1038235077923271,23.85384615,78,Dagelijks,1860.6,171883,87318,1.968472,10.824805,1555,Actief,"7 dagen voor klikken, 1 dag voor weergaven of 1 dag voor betrokken weergaven"
+2026-01-01,2026-01-31,"05 | Leads - Screens",active,32,actions:offsite_conversion.custom.1038235077923271,52.3459375,78,Dagelijks,1675.07,152034,64870,2.343672,11.017733,954,Actief,"7 dagen voor klikken, 1 dag voor weergaven of 1 dag voor betrokken weergaven"
+2026-01-01,2026-01-31,"06 | Gordijnen",active,19,actions:offsite_conversion.custom.1038235077923271,81.39052632,40,Dagelijks,1546.42,116086,35074,3.309745,13.321331,2872,Actief,"7 dagen voor klikken, 1 dag voor weergaven of 1 dag voor betrokken weergaven"
+2026-01-01,2026-01-31,"Instagram-bericht: 🎉 WINACTIE! T.W.V €1000,00,-🎉...",archived,,,,15,Dagelijks,0,0,0,0,0,,2025-12-12,"7 dagen na klikken of 1 dag na weergave"
+2026-01-01,2026-01-31,"Bericht: '🎉 WINACTIE! T.W.V €1000,00,-🎉'",inactive,,,,15,Dagelijks,0,0,0,0,0,,2025-12-20,"7 dagen na klikken of 1 dag na weergave"
+2026-01-01,2026-01-31,"Instagram-bericht: 🎉 WINACTIE! T.W.V €1000,00,-🎉...",inactive,,,,15,Dagelijks,0,0,0,0,0,,2025-12-20,"7 dagen na klikken of 1 dag na weergave"
+2026-01-01,2026-01-31,"2 Bericht: '🎉 WINACTIE! T.W.V €1000,00,-🎉' - Kopie",inactive,,,,15,Dagelijks,0,0,0,0,0,,2025-12-19,"7 dagen na klikken of 1 dag na weergave"

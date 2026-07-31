@@ -728,3 +728,8 @@ LET OP: er komen NU AL echte leads binnen op sonty-website.vercel.app. 24 echte 
 - BUG ONDERWEG GEVONDEN: site-brede Permissions-Policy blokkeerde microphone → mic-fix: microphone=(self) alleen op /admin/voicebot (next.config.ts). Ook: responsive-audit gaf eerst VALS OK omdat er nog een oude dev-server op 3123 hing (gekilld, herstart, opnieuw geauditeerd: echt OK).
 - Live geverifieerd op productie: pagina + codegate OK, session-API mint ephemeral key, kennisbank-API zoekt goed, headless Playwright-beltest verbindt echt ("Verbonden"), screenshots gecheckt. Commits c0a72df + header-fix, deploys success.
 - Daimy testen (ook op telefoon): https://sonty-website.vercel.app/admin/voicebot — code sonty2288, stem kiezen, Bel Bas, mic toestaan.
+
+## 2026-07-31 (avond): voicebot-feedback Daimy verwerkt (nam niet op + Engelse stemmen)
+- Bas neemt nu ZELF op bij verbinding (response.create bij dc.open + OPNEMEN-instructie); live geverifieerd op productie: "Goedemiddag, je spreekt met Bas van Sonty. Waar kan ik je vandaag mee helpen?"
+- Harde TAAL/ACCENT-instructie toegevoegd (uitsluitend Nederlands, native accent). EERLIJKE BEPERKING: OpenAI heeft géén native Nederlandse stemmen (marin/cedar/alloy zijn meertalig, accent kan doorklinken); ElevenLabs heeft wel echte NL-stemmen (Ido). Accent-oordeel = Daimy.
+- Zelfde wijzigingen in ~/sonty/voicebot-openai (bas-config.js + index.html) gesynct. Website-commit f34e342, deploy success.

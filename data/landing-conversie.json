@@ -1,0 +1,91 @@
+{
+ "peildatum": "2026-07-31T10:29:26.740Z",
+ "dagen": 45,
+ "labels": {
+  "Rolluik": {
+   "leads": 771,
+   "akk": 80,
+   "waarde": 269629.58999999997
+  },
+  "Windvast": {
+   "leads": 656,
+   "akk": 42,
+   "waarde": 232011.23
+  },
+  "Voorraad scherm - 20% korting": {
+   "leads": 490,
+   "akk": 30,
+   "waarde": 126562.59
+  },
+  "Pergola": {
+   "leads": 403,
+   "akk": 12,
+   "waarde": 82472.36
+  },
+  "Suneye dichte cassette": {
+   "leads": 260,
+   "akk": 26,
+   "waarde": 95555.92
+  },
+  "Suncube XL": {
+   "leads": 130,
+   "akk": 12,
+   "waarde": 42353.81
+  },
+  "Markiezen": {
+   "leads": 88,
+   "akk": 11,
+   "waarde": 51669.43
+  },
+  "Sunbasic dichte cassette": {
+   "leads": 87,
+   "akk": 5,
+   "waarde": 21650.6
+  },
+  "Sunelite dichte cassette": {
+   "leads": 76,
+   "akk": 2,
+   "waarde": 7216
+  },
+  "(geen productregel)": {
+   "leads": 63,
+   "akk": 13,
+   "waarde": 121082
+  },
+  "Winkel offerte": {
+   "leads": 55,
+   "akk": 12,
+   "waarde": 56791.98
+  },
+  "ZIP bovenliggende zonwering": {
+   "leads": 51,
+   "akk": 3,
+   "waarde": 21619.86
+  },
+  "Offerte op maat": {
+   "leads": 27,
+   "akk": 4,
+   "waarde": 6418.99
+  },
+  "Gordijnen": {
+   "leads": 24,
+   "akk": 3,
+   "waarde": 7618.860000000001
+  },
+  "Sunproject": {
+   "leads": 21,
+   "akk": 3,
+   "waarde": 11210.86
+  },
+  "Niet windvast": {
+   "leads": 20,
+   "akk": 2,
+   "waarde": 6284
+  },
+  "Sunbasic open cassette": {
+   "leads": 16,
+   "akk": 1,
+   "waarde": 4121
+  }
+ }
+}

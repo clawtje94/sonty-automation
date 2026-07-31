@@ -21,6 +21,8 @@ const stand = nu.toLocaleString('nl-NL', { day: 'numeric', month: 'long', year: 
 const onrijp = (jaar, maand) => (nu - new Date(jaar, maand, 0)) / 864e5 < 60;
 
 const PLATFORMS = ['Google', 'Meta', 'Buren/Bekenden', 'Anders'];
+// Landing/campagne-proxy (data/landing-conversie.json via scripts/landing-analyse.js).
+let LANDING = null; try { LANDING = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'landing-conversie.json'), 'utf8')); } catch {}
 // Advertentiekosten per maand (data/ad-spend.json via scripts/ad-spend.js).
 let SPEND = {}; try { SPEND = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'ad-spend.json'), 'utf8')); } catch {}
 // Break-even advertentiekosten per order (scripts/breakeven-2026.js, 31 juli):
@@ -160,6 +162,11 @@ footer{color:var(--ink-3);font-size:.75rem;margin-top:1.6rem;max-width:75ch}
 <header><h1>Conversie per product &amp; platform</h1><span class="stand">bijgewerkt ${stand} · ververst elke maandagochtend</span></header>
 <div class="tabs">${JAREN.map((j, i) => `<button class="${i === 0 ? 'actief' : ''}" onclick="kies(${j},this)">${j}</button>`).join('')}</div>
 ${JAREN.map((j, i) => jaarBlok(j)).join('\n')}
+${LANDING ? `<h2>Per landingspagina / actie (campagne-proxy, laatste ${LANDING.dagen} dagen)</h2>
+<div class="scroll"><table><thead><tr><th>landing / actie</th><th>leads</th><th>akkoord</th><th>conv%</th><th>akkoordwaarde</th></tr></thead><tbody>
+${Object.entries(LANDING.labels).map(([k, v]) => `<tr><th>${k}</th><td>${v.leads}</td><td>${v.akk}</td><td class="${heat(pc(v.akk, v.leads))}">${f1(pc(v.akk, v.leads))}%</td><td>&euro;${Math.round(v.waarde).toLocaleString('nl-NL')}</td></tr>`).join('')}
+</tbody></table></div>
+<p class="melding">Elke advertentie landt op een specifieke actie/configuratorpagina; dit is dus per campagne-familie. Voor exacte kosten-per-campagne: rapportmails op campagneniveau (loopt) en UTM-doorsluizing (gepland). Jonge leads rijpen nog na.</p>` : ''}
 <div class="legenda"><span>0%</span><span class="cells">${[0,1,2,3,4,5,6].map(i => `<i style="background:var(--h${i})"></i>`).join('')}</span><span>45%+</span><span>· klein getal = aantal offertes · * = maand jonger dan 60 dagen, rijpt nog na (mediaan 24 dagen tot akkoord)</span></div>
 <footer>Akkoord = inkoopkolom gevuld (ook €1-markering) of akkoord-blok (Gripp-nummer / akkoorddatum / akkoordbedrag) — definitie Daimy 28 juli. Platform Meta = Facebook + Instagram samengevoegd (labelwissel medio 2025). Bron: offerteregister-sheet, automatisch uitgelezen. 2024 begint in mei (eerdere maanden staan niet in de sheet).</footer>
 </div>

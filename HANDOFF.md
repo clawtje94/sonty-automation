@@ -1,5 +1,10 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-31)
 
+## BROCHURE-OFFERTE-PDF LIVE (31 juli avond, react-pdf)
+- Daimy wees de RP "compleet"-PDF aan als voorbeeld (12 pag. brochure). Nagebouwd en verbeterd met react-pdf, server-side op /api/offerte/[token]/pdf: donkere cover met klantnaam/offertenummer, "zo werkt het" (stap 3 = online ondertekenen, HIER STA JE NU), nette offertetabel (regels/korting/totalen/KvK/BTW), pagina met persoonlijke offerte-link, assortiment buiten+binnen, voor wie, over ons, ECHTE Google-reviews (uit het RP-voorbeeldmateriaal), FAQ, showroom, slotpagina. Eigen foto's uit public/images (geconverteerd naar JPG).
+- **Lessen**: (1) react-pdf + Figtree/Satoshi = accent-bug (fontkit zet elk accent 1 glyph naar rechts, "één"→"eéń") → Inter gebruiken; (2) react-pdf kan geen WebP → sips-conversie; (3) dynamisch fs-pad naar public/ laat de Next-tracer heel public/ bundelen (339MB, deploy faalt op 250MB-limiet) → assets in lib/offerte-pdf/assets (functie nu 16MB).
+- Download-knop op de offertepagina wijst nu naar deze route (jsPDF-versie vervangen). Getest lokaal + op productie (S26-1004, 12 pag., 5MB, ±5s).
+
 ## KLANTFLOW COMPLEET + OFFERTEPAGINA UITGEBREID (31 juli eind van de middag)
 - Feedback Daimy: flow moet 100% kloppen (eerst bevestiging zonder prijs, later offerte per mail+WA, dan herinneringen) en de offertepagina miste download/doorsturen.
 - **Gebouwd en live**: (1) bevestigingsmail "Bedankt voor je aanvraag" (zonder prijzen) direct na configurator-aanvraag, automation-toggle `aanvraag-bevestiging`; (2) verstuur-eigen stuurt na de mail ook de WhatsApp-offerte (zelfde goedgekeurde template als V4, 235187 offerte_met_link, kanaal 1359857) met de eigen link — in testmodus bewust overgeslagen (verzonnen 06-nummers); (3) offertepagina: Download PDF (client-side generator, logo-glitch gefixt: WebP→PNG via canvas), doorsturen via WhatsApp/mail/link kopiëren, offertedatum, garantie 3/5/7, KvK 70927618 + BTW NL858524468B01 in de footer.

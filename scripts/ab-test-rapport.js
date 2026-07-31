@@ -89,7 +89,9 @@ const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').tr
   const totaalR = Object.values(per).reduce((a, v) => a + v.gereageerd, 0);
   let uit = `A/B-RAPPORT offerte-templates, afgelopen ${UREN} uur\n\n`;
   uit += `Verstuurd: ${totaalV}. Gereageerd: ${totaalR} (${totaalV ? Math.round(totaalR / totaalV * 100) : 0}%).\n`;
-  uit += `Ter vergelijking: met de oude template reageerde 15%.\n\n`;
+  // GEMETEN baseline (31 juli, steekproef n=82 met identieke methode, 3-dagenvenster):
+  // oude template 26,8%. Het eerdere "15%" was hardcoded zonder vastgelegde meting.
+  uit += `Ter vergelijking: de oude template deed 26,8% (gemeten 31 juli, n=82).\n\n`;
 
   const gesorteerd = Object.entries(per).sort((a, b) => {
     const ra = a[1].verstuurd ? a[1].gereageerd / a[1].verstuurd : 0;

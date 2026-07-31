@@ -1,5 +1,9 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-31)
 
+## AKKOORD-MAIL + TOTAALREGEL-FIX (31 juli, laatste blok)
+- Akkoord-bevestigingsmail gebouwd: na online ondertekenen krijgt de klant direct "Je akkoord is binnen, we gaan voor je aan de slag" via aanvragen@ (template akkoordMail, toggle automation melding-na-akkoord, best-effort in sign-route). End-to-end getest: S26-1005 ondertekend → Trengo-ticket 970646763 naar joey@sonty.nl. NB: Daimy's eerdere akkoord (S26-1004, 13:42) was vóór deze mail bestond, daarom kreeg hij toen niks.
+- Totaalregel brak op mobiel (bedrag wrapte onder het label): kort label + nowrap + schaalbare fontgrootte. Live gecheckt.
+
 ## OFFERTEPAGINA MOBIEL AANGESCHERPT (31 juli laat)
 - Daimy vond mobiel nog niet fijn. Gemeten: 12 schermen lang, totaal op 47%, ondertekenen op 64%. Fixes live: sticky onderbalk (totaal + Onderteken online, IntersectionObserver verbergt hem bij het tekenblok; WhatsAppWidget BAR_SELECTOR uitgebreid met .offerte-sticky-cta), ondertekenen direct na de offerte, hero compacter met "Bekijk je offerte"-anker, productregels met foto+naam+prijs op één kopregel en uitleg full-width eronder.
 

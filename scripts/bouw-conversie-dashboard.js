@@ -179,8 +179,16 @@ ${CAMPAGNES ? (() => {
   const rij = t => t.toe
     ? `<tr><th>${t.plat} · ${t.naam}</th><td>${eurK(t.spend)}</td><td>${t.akk}</td><td>${eurK(t.omzet)}</td><td>${eurK(t.marge)}</td><td class="${t.netto >= 0 ? 'goed' : 'slecht'}"><b>${eurK(t.netto)}</b></td></tr>`
     : `<tr><th>${t.plat} · ${t.naam}</th><td>${eurK(t.spend)}</td><td colspan="4" style="text-align:left;color:var(--ink-3)">niet aan &eacute;&eacute;n product toe te wijzen (generiek) — telt wel mee in het platformtotaal</td></tr>`;
+  const maandRijen = [];
+  const alleMaanden = [...new Set(Object.values(CAMPAGNES.platformen || {}).flatMap(m => Object.keys(m)))].sort();
+  for (const m of alleMaanden) for (const plat of ['Meta', 'Google']) {
+    const v = (CAMPAGNES.platformen[plat] || {})[m]; if (!v) continue;
+    maandRijen.push(`<tr><th>${m.slice(5)} · ${plat}</th><td>${eurK(v.spend)}</td><td>${v.off}</td><td>${v.akk}</td><td>${eurK(v.margeEx)}</td><td>${eurK(v.lasten)}</td><td class="${v.netto >= 0 ? 'goed' : 'slecht'}"><b>${eurK(v.netto)}</b></td></tr>`);
+  }
   return `<h2>Advertenties: wat kost het en wat blijft er over (jan&ndash;jul 2026)</h2>
 <div class="scroll"><table><thead><tr><th>platform</th><th>kosten</th><th>offertes</th><th>orders</th><th>omzet</th><th>productmarge</th><th>netto na ads+montage</th></tr></thead><tbody>${pt}</tbody></table></div>
+<h2>Per maand, Meta naast Google (directe toerekening, ex btw)</h2>
+<div class="scroll"><table><thead><tr><th>maand</th><th>kosten</th><th>offertes</th><th>orders</th><th>marge ex</th><th>lasten-deel</th><th>netto</th></tr></thead><tbody>${maandRijen.join('')}</tbody></table></div>
 <h2>Per campagne (echte marges uit de sheet)</h2>
 <div class="scroll"><table><thead><tr><th>campagne</th><th>kosten</th><th>orders</th><th>omzet</th><th>productmarge</th><th>netto</th></tr></thead><tbody>
 ${Object.entries(tot).map(([k, t]) => ({ ...t, naam: k.split('|')[1] })).sort((a, b) => b.spend - a.spend).map(rij).join('')}

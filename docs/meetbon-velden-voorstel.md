@@ -123,11 +123,13 @@ De omrekening naar bestelmaat (aftrekmaten per leverancier en montagewijze) is e
 vaste regel per leverancier en hoort bij de besteller of later in de automatisering,
 niet bij de inmeter. Zo meet iedereen hetzelfde en zit de leverancierslogica op 1 plek.
 
-## Werking van de flow (na akkoord op de velden)
+## Werking van de flow (Daimy 31-07)
 1. Inmeet-job in Planado bevat de meetbon; verplichte velden per gekozen producttype.
 2. Inmeter rondt af; job kan niet af zonder complete bon.
 3. Webhook job afgerond -> rapportdata ophalen -> nette Sonty-meetbon (PDF) genereren
-   met veldnamen die het leveranciersformulier volgen -> automatisch naar de besteller (V1 open:
-   orders@, persoon of bestel-sheet) met Gripp-nummer.
-4. Afwijking-t.o.v.-offerte ingevuld -> aparte melding, bestellen wacht tot dat is beoordeeld.
-5. Fouten of onvolledig: Telegram-melding, nooit stil falen.
+   met veldnamen die het leveranciersformulier volgen -> koppelen aan de Gripp-order.
+4. Meetbon wacht daarna op de AANBETALINGSFACTUUR: pas als die in Gripp betaald is,
+   gaat de meetbon automatisch door naar bestellen. Waar hij dan precies heen gaat
+   (orders@, persoon of bestel-sheet) beslissen we later.
+5. Afwijking-t.o.v.-offerte ingevuld -> aparte melding, bestellen wacht tot dat is beoordeeld.
+6. Fouten of onvolledig: Telegram-melding, nooit stil falen.

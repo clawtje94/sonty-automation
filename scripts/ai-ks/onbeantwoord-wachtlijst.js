@@ -19,6 +19,8 @@
  *   node scripts/ai-ks/onbeantwoord-wachtlijst.js --uren 8    → andere drempel (standaard 4)
  */
 
+const fs = require('fs');
+const path = require('path');
 const { getToken } = require('../trengo-api.js');
 const CFG = require('./config.js');
 
@@ -154,6 +156,33 @@ function duur(uren) {
     // Nul-melding uitgezet (Daimy 30 juli, meldingen-opschoning): alleen loggen.
     console.log(`geen klant wacht langer dan ${DREMPEL_UREN} uur — geen Telegram-bericht`);
     return;
+  }
+
+  // ── SPOED-ALARM (Daimy 31-07, casus Katie 962345594: klacht van betalende klant met
+  // aanbetaling stond 3 dagen onbeantwoord terwijl ze alleen als regeltje in het
+  // verzamelrapport voorbijkwam). Elke WA-klant die 4+ uur wacht en waar het 24-uurs
+  // venster NOG OPEN is, krijgt een EIGEN Telegram-melding zodat er nog gewoon
+  // geantwoord kan worden. Klacht-signalen krijgen een schreeuwende kop.
+  // Dedupe: max 1 alarm per ticket per 12 uur (data/ai-ks/wachtlijst-alarmen.json).
+  const ALARM_STATE = path.join(__dirname, '..', '..', 'data', 'ai-ks', 'wachtlijst-alarmen.json');
+  let alarmState = {};
+  try { alarmState = JSON.parse(fs.readFileSync(ALARM_STATE, 'utf8')); } catch {}
+  const KLACHT_RE = /aanbetaling|klacht|niets (meer )?(gehoord|vernomen)|geen (reactie|antwoord|bevestiging)|nog steeds niks|belachelijk|teleurgesteld|slechte service|wanneer hoor ik/i;
+  const spoed = wachtend.filter((w) => w.kanaal === 'WA' && w.uren >= DREMPEL_UREN && w.uren < 24);
+  let alarmen = 0;
+  for (const w of spoed) {
+    const vorige = alarmState[w.id];
+    if (vorige && Date.now() - new Date(vorige).getTime() < 12 * 3600000) continue;
+    if (alarmen >= 5) break; // nooit een alarmenregen; de rest staat in het verzamelrapport
+    const isKlacht = KLACHT_RE.test(w.tekst || '');
+    const kop = isKlacht ? '‼️ SPOED, KLACHT ONBEANTWOORD' : '⏰ SPOED, klant wacht op antwoord';
+    await telegram(`${kop}\n${w.naam} (WA, ticket ${w.id}) wacht al ${duur(w.uren)}${w.wie ? `, toegewezen aan ${w.wie}` : ', niet toegewezen'}.\nWhatsApp-venster sluit over ${Math.max(1, Math.round(24 - w.uren))} uur, daarna kan er alleen nog gebeld worden.\n\nLaatste bericht: "${(w.tekst || '').substring(0, 300)}"`);
+    alarmState[w.id] = new Date().toISOString();
+    alarmen++;
+  }
+  if (alarmen) {
+    if (!DRY) fs.writeFileSync(ALARM_STATE, JSON.stringify(alarmState, null, 1));
+    console.log(`${alarmen} spoed-alarm(en) ${DRY ? 'ZOUDEN verstuurd worden (dry)' : 'apart verstuurd'}`);
   }
 
   // Toegewezen gevallen eerst: daar is iemand verantwoordelijk en gebeurt er tóch niets.

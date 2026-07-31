@@ -143,6 +143,27 @@ async function ronde() {
     // webflow-formulieren worden door verwerk() zelf afgehandeld (→ team Mens nodig met gegevens)
     const sleutel = `${t.id}:${laatste.created_at}`;
     if (state[sleutel]) continue;
+    // ADS-RAPPORTMAILS (Daimy 31-07): geplande maandrapporten uit Google Ads / Meta
+    // Ads Manager komen op aanvragen@ binnen. Nooit beantwoorden: veiligstellen in
+    // data/ad-rapporten/ voor de spend-parser, ticket sluiten, klaar.
+    const afz = String(t.contact?.email || '').toLowerCase();
+    const isAdsRapport = /googleads-noreply@google\.com|@facebookmail\.com|adsmanager/.test(afz)
+      || (/rapport|report/i.test(t.subject || '') && /google ads|meta|facebook/i.test(t.subject || ''));
+    if (isAdsRapport) {
+      try {
+        const map = path.join(__dirname, '..', '..', 'data', 'ad-rapporten');
+        fs.mkdirSync(map, { recursive: true });
+        fs.writeFileSync(path.join(map, `${t.id}.json`), JSON.stringify({
+          tijd: new Date().toISOString(), van: afz, onderwerp: t.subject,
+          body: String(laatste.body || laatste.message || '').slice(0, 20000),
+          attachments: (laatste.attachments || []).map(a => ({ naam: a.file_name || a.name, url: a.full_url || a.url })),
+        }, null, 1));
+        await tPost(`/tickets/${t.id}/close`, {});
+        console.log(`  [${t.id}] ads-rapportmail veiliggesteld (${afz}) → data/ad-rapporten/, ticket gesloten`);
+      } catch (e) { console.error(`  [${t.id}] ads-rapport FOUT: ${e.message}`); }
+      state[sleutel] = 'ads-rapport ' + new Date().toISOString(); saveState(state);
+      continue;
+    }
     // ZAKELIJKE AANVRAGERS (Daimy 30-07, verduidelijkt): het gaat NIET om een particulier
     // die zegt "ik moet nog met mijn VvE overleggen" — die helpt de bot gewoon. Het gaat om
     // aanvragen NAMENS een organisatie: een VvE zelf, vastgoed-/gebouwbeheerder, bedrijf,

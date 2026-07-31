@@ -1,4 +1,11 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-30)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-31)
+
+## CONFIGURATOR-AUDIT + PRIJSFIXES LIVE (31 juli, commit 0532ccd)
+- Aanleiding Daimy: windsensor stond als extra bij rolluiken. Volledige audit configurator (sonty-website) gedaan.
+- **Gefixt en live op sonty-website.vercel.app**: (1) windsensor-upsell weg bij rolluik/markies/pergola, blijft bij knikarmschermen mét garantie-uitleg; (2) doekkleur-tekst werd als framekleur geprijsd → onterechte RAL-meerprijs bij screens/knikarm/uitval/markies/pergola/serre (UI + submit-route); (3) submit telde kleurMeerprijs dubbel; (4) hor-standaardkleuren "RAL 7016/9005 structuur" kregen onterecht +€100 (structuur vs STR); (5) keuze-indicaties op knoppen misten ×1,1 markup; (6) LED SunElite stond als bediening-keuze (rekende als io zonder LED-prijs) → nu aparte optie op aanvraag; (7) upsell-uitleg (windsensor/Tahoma/Roma-hor) = echte Sonty-uitleg uit de kennisbank.
+- Verificatie: 9 kleur-regressiecases via engine, build groen, headless Playwright op rolluik+knikarm-flow, live API-check op productie (hor structuur → standaard €0; Suneye doekkleur → standaard €0).
+- **Open**: Roma .XP insectenrolhor-upsell telt in het winkelmandje als €0 (echte meerprijs op maat staat wél in de uitleg + offerte); V1 aan Daimy gesteld of windsensor bij markiezen echt weg moest (gedaan o.b.v. kennisbank, makkelijk terug te zetten).
+
 
 ## VVE-RADAR V1 LIVE (30 juli) — VvE's actief benaderen als vaste zonweringspartner
 - **Strategie (akkoord Daimy)**: eigenaar mag niet zomaar zonwering aan gemeenschappelijke gevel → Sonty stelt gratis zonweringsprotocol + ALV-besluit op met Sonty als vaste leverancier → elke eigenaar loopt daarna de facto via ons. Regio: heel Zuid-Holland. Route naar schaal: VvE-beheerders (raamcontract).
@@ -684,3 +691,8 @@ LET OP: er komen NU AL echte leads binnen op sonty-website.vercel.app. 24 echte 
 - Daimy: "geen spoed-alarmen, heel mijn Telegram is een zooi; tickets moeten gewoon naar het Mens nodig-team". Antwoord op zijn vraag: nee, Katies ticket is bij haar nieuwe bericht NOOIT aan het Mens nodig-team toegewezen; dat deed alleen de bot bij escalatie en die zag het ticket niet, Trengo heropent als kaal OPEN.
 - Ombouw (commit na 06a0f4d): spoed-Telegram-alarmen ERUIT; elke wachtlijst-run (7x/dag) wijst wachtende klanten (4+ uur, geen agent, nog niet in team 431872) automatisch toe aan het Mens nodig-team + label 1821764. Verzamelrapport alleen nog in de 08- en 16-uur-run. Eerste echte run: 14 klanten naar het team gezet.
 - Nog open: scan-diepte bot-daemon (scenario-run), aanbetalingsproces (team), Katie bij Daimy.
+
+## 2026-07-31 (avond): eerst maten + indicatie, dan pas inmeten (casus Sahadet, +31614692562)
+- Sahadet Bakiman (horren Unilux, 2 tuinschuifdeuren + ~10 ramen, Monster, ticket 970530861) vroeg zelf om opmeting aan huis; bot zette het inmeten in gang ZONDER maten te vragen of een prijs te noemen (75-regel noemde hij wel, akkoord was echt). Prompt beschreef de volgorde maar dwong hem niet af bij een directe inmeetvraag.
+- FIX (commit db9e0a2, daemons herstart): harde promptregel "eerst globale maten + prijsindicatie, dan pas inmeten, ook als de klant zelf om inmeting vraagt" (uitzondering service/reparatie) + QA-punt 12 dat inmeten-zonder-indicatie afkeurt.
+- Sahadet zelf staat al in Inmeten inplannen + escalatie naar team; de planning kan bij het belletje alsnog een indicatie afstemmen (of team stuurt vooraf een indicatie via de offerte-tool).

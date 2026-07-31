@@ -133,3 +133,9 @@ niet bij de inmeter. Zo meet iedereen hetzelfde en zit de leverancierslogica op 
    (orders@, persoon of bestel-sheet) beslissen we later.
 5. Afwijking-t.o.v.-offerte ingevuld -> aparte melding, bestellen wacht tot dat is beoordeeld.
 6. Fouten of onvolledig: Telegram-melding, nooit stil falen.
+
+## Status 31-07 (avond): v1 staat in Planado
+- Portalen toegankelijk gemaakt en geoogst: Toppoint (13 infokaarten-PDF's incl. gordijnen/rails, in data/meetinstructies/toppoint/), Markiezen Nederland (bestelwizard-kolommen: aantal, breedte, model, uitval, slijtlat, bovenkap, zijkappen, bediening, bedieningskant, koord, opties), Velux Dealer Extranet (bestellen op productcode typeplaatje, configurator per categorie incl. raamdecoratie), ROMA portal (dashboard bereikt; zelfde veldenlogica als Sunmaster per Daimy).
+- Planado "Inmeet afspraak"-sjabloon uitgebreid: 7 bestaande velden hernoemd naar de Product 1-structuur, 23 velden toegevoegd (algemeen blok met afwijking-offerte, elektra, ondergrond, bereikbaarheid, montagetijd-inschatting + aantal monteurs, opmerkingen besteller/monteur; volledige blokken Product 1 en Product 2; overloopveld extra producten). Opgeslagen en na herladen geverifieerd. Testjob "TEST meetbon check" aangemaakt (1-8 om 09:00) zodat Daimy het in een opdracht kan zien.
+- Bewuste v1-keuzes: keuzes als tekstveld met hints (Keuzelijst-type volgt zodra ALLE dropdown-opties uit de portalen geoogst zijn, opdracht Daimy 31-07); nieuwe velden nog niet verplicht (Product 2 zou 1-productjobs blokkeren); veldvolgorde nog niet herschikt.
+- TE DOEN: dropdown-opties oogsten uit alle portalen (Toppoint orderformulier per producttype, Markiezen wizard-opties, ROMA, Velux) + Sunmaster BESTELlogin volgt nog van Daimy; daarna Keuzelijst-velden met echte opties.

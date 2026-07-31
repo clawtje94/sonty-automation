@@ -1,0 +1,41 @@
+{
+  "quotationNumber": "202610524",
+  "documentId": "274d5d91-04ea-4dd8-b40c-a6003359af0e",
+  "name": "Woudstra",
+  "timestamp": "2026-07-31T15:00:10.785Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "**Zip Design 110**\nType: screen afstandsbediening\nBreedte: 1700 mm\nHoogte: 1650 mm\nFrame Kleur: RAL 9010 (standaard)\nKleur doek: NTB\nBediening: Afstandsbediening (Somfy IO)\nMotor: Somfy RS100 IO",
+      "pricePerUnit": 1512.5,
+      "vatPercentage": 21,
+      "position": 0,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "**Zip Design 110**\nType: screen afstandsbediening\nBreedte: 2300 mm\nHoogte: 2250 mm\nFrame Kleur: RAL 9010 (standaard)\nKleur doek: NTB\nBediening: Afstandsbediening (Somfy IO)\nMotor: Somfy RS100 IO",
+      "pricePerUnit": 1932.7,
+      "vatPercentage": 21,
+      "position": 1,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "**Inmeten + montage screen**\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "position": 2,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Steiger kosten",
+      "pricePerUnit": 420,
+      "imageUri": "",
+      "vatPercentage": 21,
+      "position": 3,
+      "lockTotalPrice": false
+    }
+  ]
+}

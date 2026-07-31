@@ -1,5 +1,5 @@
 {
- "bijgewerkt": "2026-07-31T13:14:36.371Z",
+ "bijgewerkt": "2026-07-31T15:14:47.448Z",
  "host": "mac-mini",
  "systemen": [
   {
@@ -43,7 +43,7 @@
    "laatsteExit": "0",
    "intervalSec": 900,
    "logLeeftijdMin": 9,
-   "logLaatste": "[13:05:27] API-hooks gestart.",
+   "logLaatste": "[15:05:28] API-hooks gestart.",
    "killSwitch": false,
    "status": "groen"
   },
@@ -88,7 +88,7 @@
    "laatsteExit": "0",
    "intervalSec": 7200,
    "logLeeftijdMin": 54,
-   "logLaatste": "[2026-07-31T12:20:56.632Z] check niet gelukt (geen credits-oordeel): 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"You have reached you",
+   "logLaatste": "[2026-07-31T14:20:57.158Z] check niet gelukt (geen credits-oordeel): 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"You have reached you",
    "killSwitch": false,
    "status": "groen"
   },
@@ -177,8 +177,8 @@
    "draait": true,
    "laatsteExit": null,
    "intervalSec": null,
-   "logLeeftijdMin": 0,
-   "logLaatste": "  [970549750] FOUT: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"You have reached your specified API usage limits. You will regain acc",
+   "logLeeftijdMin": 1,
+   "logLaatste": "  [970557070] FOUT: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"You have reached your specified API usage limits. You will regain acc",
    "killSwitch": false,
    "status": "groen"
   },
@@ -207,7 +207,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 1082,
+   "logLeeftijdMin": 1202,
    "logLaatste": "Gescand: 3272 leads | nieuw getekend: 9",
    "killSwitch": false,
    "status": "groen"
@@ -222,7 +222,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 1244,
+   "logLeeftijdMin": 1364,
    "logLaatste": "Verwerkt: 11 | Mislukt: 0",
    "killSwitch": false,
    "status": "groen"
@@ -237,7 +237,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 434,
+   "logLeeftijdMin": 555,
    "logLaatste": "✅ MS Bookings API (showroom-boeken)",
    "killSwitch": false,
    "status": "groen"
@@ -282,8 +282,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 405,
-   "logLaatste": "[06:30:02] Buiten kantooruren, skip",
+   "logLeeftijdMin": 45,
+   "logLaatste": "Klaar: 0 verwerkt, 2 fouten",
    "killSwitch": false,
    "status": "groen"
   },
@@ -297,8 +297,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 365,
-   "logLaatste": "WhatsApp offerte verstuurd: 28",
+   "logLeeftijdMin": 2,
+   "logLaatste": "WhatsApp offerte verstuurd: 29",
    "killSwitch": false,
    "status": "groen"
   },
@@ -312,7 +312,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": 3600,
-   "logLeeftijdMin": 17,
+   "logLeeftijdMin": 11,
    "logLaatste": "[SCHADUW] klaar: 0 voorstel(len) gelogd in opvolging-voorstellen.jsonl, er is NIETS verstuurd.",
    "killSwitch": false,
    "status": "groen"
@@ -327,8 +327,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": 1800,
-   "logLeeftijdMin": 20,
-   "logLaatste": "[2026-07-31 14:54:49] ronde klaar",
+   "logLeeftijdMin": 18,
+   "logLaatste": "[2026-07-31 16:56:45] ronde klaar",
    "killSwitch": false,
    "status": "groen"
   },
@@ -342,7 +342,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 704,
+   "logLeeftijdMin": 825,
    "logLaatste": "Gecheckt: 15 offertes, 19 productregels, 0 afwijkingen",
    "killSwitch": false,
    "status": "groen"
@@ -357,7 +357,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 449,
+   "logLeeftijdMin": 570,
    "logLaatste": "Geen nieuwe patronen gevonden.",
    "killSwitch": false,
    "status": "groen"
@@ -372,7 +372,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 465,
+   "logLeeftijdMin": 585,
    "logLaatste": "geen API-key — overslaan",
    "killSwitch": false,
    "status": "groen"
@@ -387,7 +387,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 20565,
+   "logLeeftijdMin": 20685,
    "logLaatste": "",
    "killSwitch": false,
    "status": "rood"
@@ -402,8 +402,8 @@
    "draait": true,
    "laatsteExit": null,
    "intervalSec": null,
-   "logLeeftijdMin": 2,
-   "logLaatste": "  actief-sweep: 228 gesprekken direct checken",
+   "logLeeftijdMin": 0,
+   "logLaatste": "Ticket 970641275 FOUT: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"You have reached your specified API usage limits. You will regain ",
    "killSwitch": false,
    "status": "groen"
   },
@@ -418,7 +418,7 @@
    "laatsteExit": "0",
    "intervalSec": 600,
    "logLeeftijdMin": 10,
-   "logLaatste": "[3:04:36 PM] 33 diensten, push: 200",
+   "logLaatste": "[5:04:47 PM] 32 diensten, push: 200",
    "killSwitch": false,
    "status": "groen"
   },
@@ -447,7 +447,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 420,
+   "logLeeftijdMin": 540,
    "logLaatste": "telegram: true",
    "killSwitch": false,
    "status": "groen"
@@ -462,7 +462,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 329,
+   "logLeeftijdMin": 450,
    "logLaatste": "[07:45:13] Klaar: 0 gefixt, 3 gerapporteerd",
    "killSwitch": false,
    "status": "groen"
@@ -477,23 +477,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 205,
+   "logLeeftijdMin": 325,
    "logLaatste": "batch klaar: 150 verstuurd, 0 fouten. Totaal 1621/1744",
-   "killSwitch": false,
-   "status": "groen"
-  },
-  {
-   "label": "nl.sonty.wachtlijst",
-   "naam": "nl.sonty.wachtlijst",
-   "groep": "Overig",
-   "log": null,
-   "maxUur": null,
-   "geladen": true,
-   "draait": false,
-   "laatsteExit": "0",
-   "intervalSec": null,
-   "logLeeftijdMin": null,
-   "logLaatste": null,
    "killSwitch": false,
    "status": "groen"
   }

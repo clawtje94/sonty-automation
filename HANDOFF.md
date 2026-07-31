@@ -1,5 +1,11 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-31)
 
+## KLANTFLOW COMPLEET + OFFERTEPAGINA UITGEBREID (31 juli eind van de middag)
+- Feedback Daimy: flow moet 100% kloppen (eerst bevestiging zonder prijs, later offerte per mail+WA, dan herinneringen) en de offertepagina miste download/doorsturen.
+- **Gebouwd en live**: (1) bevestigingsmail "Bedankt voor je aanvraag" (zonder prijzen) direct na configurator-aanvraag, automation-toggle `aanvraag-bevestiging`; (2) verstuur-eigen stuurt na de mail ook de WhatsApp-offerte (zelfde goedgekeurde template als V4, 235187 offerte_met_link, kanaal 1359857) met de eigen link — in testmodus bewust overgeslagen (verzonnen 06-nummers); (3) offertepagina: Download PDF (client-side generator, logo-glitch gefixt: WebP→PNG via canvas), doorsturen via WhatsApp/mail/link kopiëren, offertedatum, garantie 3/5/7, KvK 70927618 + BTW NL858524468B01 in de footer.
+- **Getest op productie**: aanvraag-submit → bevestiging in daimyboot@gmail.com (`bevestiging: true`); offertepagina alle knoppen zichtbaar; PDF echt gedownload en visueel gecheckt (10 pag., cover met logo, KvK/BTW).
+- **Nog te testen door Daimy**: WhatsApp-template end-to-end (testmodus uit + eigen echte 06 op een testlead). Cosmetisch open: kortingregel krijgt eigen productpagina in de PDF; logo op cover is oranje-op-oranje.
+
 ## MAIL-KOPPELING EIGEN WEBSITE / CUTOVER-FUNDAMENT LIVE (31 juli middag)
 - Opdracht Daimy: alle mailstromen alvast aan de nieuwe website koppelen zodat de RP-cutover een kwestie van omschakelen is.
 - **Gebouwd en live**: verzendcentrum (/admin/verzendcentrum) heeft nu naast de RP-lijst een "Eigen offertes"-sectie (offerte-tool-dossiers uit leads-KV) met preview/verstuur: mail via aanvragen@sonty.nl met de EIGEN offerte-link (sonty.nl/offerte/<token>, online ondertekenen bestaat al). Herinneringen-cron (dag 3/6) handelt eigen entries af (stopt op ondertekend/afgewezen/verlopen via de lead). Bron-schakelaar "Reuzenpanda | Eigen website" in settings = de cutover-knop. Zelfde testmodus (mails naar joey@/daimy@) en dubbel-verstuur-beveiliging (409).

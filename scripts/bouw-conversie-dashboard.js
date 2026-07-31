@@ -165,19 +165,27 @@ footer{color:var(--ink-3);font-size:.75rem;margin-top:1.6rem;max-width:75ch}
 <div class="tabs">${JAREN.map((j, i) => `<button class="${i === 0 ? 'actief' : ''}" onclick="kies(${j},this)">${j}</button>`).join('')}</div>
 ${JAREN.map((j, i) => jaarBlok(j)).join('\n')}
 ${CAMPAGNES ? (() => {
+  const eurK = n => '&euro;' + Math.round(n).toLocaleString('nl-NL');
+  // platform-totalen: alle spend vs alle orders van die bron = zuiverste cijfer
+  const pt = Object.entries(CAMPAGNES.platformen || {}).map(([plat, mnd]) => {
+    const t = Object.values(mnd).reduce((a, v) => ({ spend: a.spend + v.spend, off: a.off + v.off, akk: a.akk + v.akk, omzet: a.omzet + v.omzet, marge: a.marge + v.marge, netto: a.netto + v.netto }), { spend: 0, off: 0, akk: 0, omzet: 0, marge: 0, netto: 0 });
+    return `<tr><th>${plat} totaal</th><td>${eurK(t.spend)}</td><td>${t.off}</td><td>${t.akk}</td><td>${eurK(t.omzet)}</td><td>${eurK(t.marge)}</td><td class="${t.netto >= 0 ? 'goed' : 'slecht'}"><b>${eurK(t.netto)}</b></td></tr>`;
+  }).join('');
   const tot = {};
   for (const cs of Object.values(CAMPAGNES.maanden)) for (const c of cs) {
-    const t = (tot[c.campagne] = tot[c.campagne] || { spend: 0, off: 0, akk: 0 });
-    t.spend += c.spend; if (c.offertes !== null) { t.off += c.offertes; t.akk += c.akkoorden; }
+    const t = (tot[c.platform + '|' + c.campagne] = tot[c.platform + '|' + c.campagne] || { plat: c.platform, spend: 0, akk: 0, omzet: 0, marge: 0, netto: 0, toe: c.offertes !== null });
+    t.spend += c.spend; if (c.offertes !== null) { t.akk += c.akkoorden; t.omzet += c.omzet || 0; t.marge += c.marge || 0; t.netto += c.netto || 0; }
   }
-  const rij = ([naam, t]) => { const po = t.akk ? t.spend / t.akk : null;
-    const oordeel = po === null ? '<td>—</td>' : `<td>${po < BREAK_EVEN[0] ? '<b class="goed">winstgevend</b>' : po <= BREAK_EVEN[1] ? 'krap' : '<b class="slecht">VERLIES</b>'}</td>`;
-    return `<tr><th>${naam}</th><td>&euro;${Math.round(t.spend).toLocaleString('nl-NL')}</td><td>${t.off || '—'}</td><td>${t.off ? '&euro;' + Math.round(t.spend / t.off) : '—'}</td><td>${t.akk || '—'}</td><td>${po ? '&euro;' + Math.round(po) : '—'}</td>${oordeel}</tr>`; };
-  return `<h2>Per Meta-campagne (jan&ndash;jul 2026)</h2>
-<div class="scroll"><table><thead><tr><th>campagne</th><th>kosten</th><th>offertes</th><th>&euro;/offerte</th><th>orders</th><th>&euro;/order</th><th>oordeel</th></tr></thead><tbody>
-${Object.entries(tot).sort((a, b) => b[1].spend - a[1].spend).map(rij).join('')}
+  const rij = t => t.toe
+    ? `<tr><th>${t.plat} · ${t.naam}</th><td>${eurK(t.spend)}</td><td>${t.akk}</td><td>${eurK(t.omzet)}</td><td>${eurK(t.marge)}</td><td class="${t.netto >= 0 ? 'goed' : 'slecht'}"><b>${eurK(t.netto)}</b></td></tr>`
+    : `<tr><th>${t.plat} · ${t.naam}</th><td>${eurK(t.spend)}</td><td colspan="4" style="text-align:left;color:var(--ink-3)">niet aan &eacute;&eacute;n product toe te wijzen (generiek) — telt wel mee in het platformtotaal</td></tr>`;
+  return `<h2>Advertenties: wat kost het en wat blijft er over (jan&ndash;jul 2026)</h2>
+<div class="scroll"><table><thead><tr><th>platform</th><th>kosten</th><th>offertes</th><th>orders</th><th>omzet</th><th>productmarge</th><th>netto na ads+montage</th></tr></thead><tbody>${pt}</tbody></table></div>
+<h2>Per campagne (echte marges uit de sheet)</h2>
+<div class="scroll"><table><thead><tr><th>campagne</th><th>kosten</th><th>orders</th><th>omzet</th><th>productmarge</th><th>netto</th></tr></thead><tbody>
+${Object.entries(tot).map(([k, t]) => ({ ...t, naam: k.split('|')[1] })).sort((a, b) => b.spend - a.spend).map(rij).join('')}
 </tbody></table></div>
-<p class="melding">Koppeling: campagnenaam &rarr; productgroep &times; Meta-offertes uit de sheet. Retargeting ondersteunt alle campagnes en is niet aan &eacute;&eacute;n product toe te wijzen. Recente maanden rijpen na (&euro;/order daalt dan nog). Break-even &asymp; &euro;${BREAK_EVEN[0]}&ndash;&euro;${BREAK_EVEN[1]} bij een gemiddelde order; kleinere orders (gordijnen) hebben een lagere lat.</p>`;
+<p class="melding">Netto = productmarge (akkoordbedrag min inkoop; bij &euro;1-placeholder geschat via de inkoopratio van het product) min &euro;${CAMPAGNES.montageOverheadPerOrder} montage/overhead per order min advertentiekosten. Bedragen incl. btw. Jonge maanden rijpen na: netto stijgt nog. Productcampagnes krijgen ook orders die generieke campagnes (PMax, Plaatsen, Retargeting, Branding) mede veroorzaakten — het platformtotaal is daarom het hardste cijfer. Montage/overhead is een gemiddelde: pergola&rsquo;s kosten m&eacute;&eacute;r montage dan gemiddeld (netto daar te rooskleurig), rolluiken minder.</p>`;
 })() : ''}
 ${LANDING ? `<h2>Per landingspagina / actie (campagne-proxy, laatste ${LANDING.dagen} dagen)</h2>
 <div class="scroll"><table><thead><tr><th>landing / actie</th><th>leads</th><th>akkoord</th><th>conv%</th><th>akkoordwaarde</th></tr></thead><tbody>

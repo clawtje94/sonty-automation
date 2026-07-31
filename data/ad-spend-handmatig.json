@@ -1,24 +1,31 @@
 {
  "_uitleg": "Handmatige advertentiekosten per maand per platform. Vul aan als: \"2026-07\": {\"Meta\": 21000, \"Google\": 15000}. Bedragen in euro's excl. btw zoals in Ads Manager. Dit bestand wint van de sheet-tab bij overlap.",
  "2026-04": {
-  "Meta": 24025.71
+  "Meta": 24025.71,
+  "Google": 31543.48
  },
  "2026-02": {
-  "Meta": 21334.29
+  "Meta": 21334.29,
+  "Google": 17861.52
  },
  "2026-05": {
-  "Meta": 25419.08
+  "Meta": 25419.08,
+  "Google": 36766.62
  },
  "2026-03": {
-  "Meta": 29019.83
+  "Meta": 29019.83,
+  "Google": 26258.07
  },
  "2026-01": {
-  "Meta": 19283.91
+  "Meta": 19283.91,
+  "Google": 15043.62
  },
  "2026-07": {
-  "Meta": 25440.68
+  "Meta": 25440.68,
+  "Google": 37597.8
  },
  "2026-06": {
-  "Meta": 25217.63
+  "Meta": 25217.63,
+  "Google": 36807.54
  }
 }

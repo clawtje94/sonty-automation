@@ -23,6 +23,8 @@ const onrijp = (jaar, maand) => (nu - new Date(jaar, maand, 0)) / 864e5 < 60;
 const PLATFORMS = ['Google', 'Meta', 'Buren/Bekenden', 'Anders'];
 // Landing/campagne-proxy (data/landing-conversie.json via scripts/landing-analyse.js).
 let LANDING = null; try { LANDING = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'landing-conversie.json'), 'utf8')); } catch {}
+// Meta-campagnerendement (data/campagne-rendement.json via scripts/campagne-rendement.js).
+let CAMPAGNES = null; try { CAMPAGNES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'campagne-rendement.json'), 'utf8')); } catch {}
 // Advertentiekosten per maand (data/ad-spend.json via scripts/ad-spend.js).
 let SPEND = {}; try { SPEND = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'ad-spend.json'), 'utf8')); } catch {}
 // Break-even advertentiekosten per order (scripts/breakeven-2026.js, 31 juli):
@@ -162,6 +164,21 @@ footer{color:var(--ink-3);font-size:.75rem;margin-top:1.6rem;max-width:75ch}
 <header><h1>Conversie per product &amp; platform</h1><span class="stand">bijgewerkt ${stand} · ververst elke maandagochtend</span></header>
 <div class="tabs">${JAREN.map((j, i) => `<button class="${i === 0 ? 'actief' : ''}" onclick="kies(${j},this)">${j}</button>`).join('')}</div>
 ${JAREN.map((j, i) => jaarBlok(j)).join('\n')}
+${CAMPAGNES ? (() => {
+  const tot = {};
+  for (const cs of Object.values(CAMPAGNES.maanden)) for (const c of cs) {
+    const t = (tot[c.campagne] = tot[c.campagne] || { spend: 0, off: 0, akk: 0 });
+    t.spend += c.spend; if (c.offertes !== null) { t.off += c.offertes; t.akk += c.akkoorden; }
+  }
+  const rij = ([naam, t]) => { const po = t.akk ? t.spend / t.akk : null;
+    const oordeel = po === null ? '<td>—</td>' : `<td>${po < BREAK_EVEN[0] ? '<b class="goed">winstgevend</b>' : po <= BREAK_EVEN[1] ? 'krap' : '<b class="slecht">VERLIES</b>'}</td>`;
+    return `<tr><th>${naam}</th><td>&euro;${Math.round(t.spend).toLocaleString('nl-NL')}</td><td>${t.off || '—'}</td><td>${t.off ? '&euro;' + Math.round(t.spend / t.off) : '—'}</td><td>${t.akk || '—'}</td><td>${po ? '&euro;' + Math.round(po) : '—'}</td>${oordeel}</tr>`; };
+  return `<h2>Per Meta-campagne (jan&ndash;jul 2026)</h2>
+<div class="scroll"><table><thead><tr><th>campagne</th><th>kosten</th><th>offertes</th><th>&euro;/offerte</th><th>orders</th><th>&euro;/order</th><th>oordeel</th></tr></thead><tbody>
+${Object.entries(tot).sort((a, b) => b[1].spend - a[1].spend).map(rij).join('')}
+</tbody></table></div>
+<p class="melding">Koppeling: campagnenaam &rarr; productgroep &times; Meta-offertes uit de sheet. Retargeting ondersteunt alle campagnes en is niet aan &eacute;&eacute;n product toe te wijzen. Recente maanden rijpen na (&euro;/order daalt dan nog). Break-even &asymp; &euro;${BREAK_EVEN[0]}&ndash;&euro;${BREAK_EVEN[1]} bij een gemiddelde order; kleinere orders (gordijnen) hebben een lagere lat.</p>`;
+})() : ''}
 ${LANDING ? `<h2>Per landingspagina / actie (campagne-proxy, laatste ${LANDING.dagen} dagen)</h2>
 <div class="scroll"><table><thead><tr><th>landing / actie</th><th>leads</th><th>akkoord</th><th>conv%</th><th>akkoordwaarde</th></tr></thead><tbody>
 ${Object.entries(LANDING.labels).map(([k, v]) => `<tr><th>${k}</th><td>${v.leads}</td><td>${v.akk}</td><td class="${heat(pc(v.akk, v.leads))}">${f1(pc(v.akk, v.leads))}%</td><td>&euro;${Math.round(v.waarde).toLocaleString('nl-NL')}</td></tr>`).join('')}

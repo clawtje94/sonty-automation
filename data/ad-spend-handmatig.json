@@ -1,3 +1,24 @@
 {
-  "_uitleg": "Handmatige advertentiekosten per maand per platform. Vul aan als: \"2026-07\": {\"Meta\": 21000, \"Google\": 15000}. Bedragen in euro's excl. btw zoals in Ads Manager. Dit bestand wint van de sheet-tab bij overlap."
+ "_uitleg": "Handmatige advertentiekosten per maand per platform. Vul aan als: \"2026-07\": {\"Meta\": 21000, \"Google\": 15000}. Bedragen in euro's excl. btw zoals in Ads Manager. Dit bestand wint van de sheet-tab bij overlap.",
+ "2026-04": {
+  "Meta": 24025.71
+ },
+ "2026-02": {
+  "Meta": 21334.29
+ },
+ "2026-05": {
+  "Meta": 25419.08
+ },
+ "2026-03": {
+  "Meta": 29019.83
+ },
+ "2026-01": {
+  "Meta": 19283.91
+ },
+ "2026-07": {
+  "Meta": 25440.68
+ },
+ "2026-06": {
+  "Meta": 25217.63
+ }
 }

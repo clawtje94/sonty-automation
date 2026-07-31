@@ -9,6 +9,8 @@ VORIG=$((JAAR-1))
 /opt/homebrew/bin/node scripts/conversie-sheet.js --jaar $VORIG
 /opt/homebrew/bin/node scripts/maak-conversie-tabellen.js --jaar $JAAR
 /opt/homebrew/bin/node scripts/maak-conversie-tabellen.js --jaar $VORIG
+python3 scripts/meta-campagne-import.py
+/opt/homebrew/bin/node scripts/campagne-rendement.js
 /opt/homebrew/bin/node scripts/landing-analyse.js
 /opt/homebrew/bin/node scripts/ad-spend.js
 /opt/homebrew/bin/node scripts/bouw-conversie-dashboard.js

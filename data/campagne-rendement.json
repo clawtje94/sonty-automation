@@ -1,0 +1,439 @@
+{
+ "peildatum": "2026-07-31T12:48:13.093Z",
+ "maanden": {
+  "2026-04": [
+   {
+    "campagne": "01 | Leads campagne - Rolluiken",
+    "spend": 12947.65,
+    "kliks": 13502,
+    "product": "Rolluiken",
+    "offertes": 294,
+    "akkoorden": 26,
+    "perOfferte": 44,
+    "perOrder": 498
+   },
+   {
+    "campagne": "03 | Leadscampagne - Zonwering",
+    "spend": 6056.76,
+    "kliks": 5738,
+    "product": "Zonwering",
+    "offertes": 289,
+    "akkoorden": 15,
+    "perOfferte": 21,
+    "perOrder": 404
+   },
+   {
+    "campagne": "04 | Leadscampagne - Pergola",
+    "spend": 1558.41,
+    "kliks": 1583,
+    "product": "Pergola",
+    "offertes": 115,
+    "akkoorden": 2,
+    "perOfferte": 14,
+    "perOrder": 779
+   },
+   {
+    "campagne": "05 | Leads - Screens",
+    "spend": 1551.56,
+    "kliks": 1029,
+    "product": "Screens",
+    "offertes": 114,
+    "akkoorden": 9,
+    "perOfferte": 14,
+    "perOrder": 172
+   },
+   {
+    "campagne": "06 | Gordijnen",
+    "spend": 1202.63,
+    "kliks": 2661,
+    "product": "Gordijnen",
+    "offertes": 15,
+    "akkoorden": 5,
+    "perOfferte": 80,
+    "perOrder": 241
+   },
+   {
+    "campagne": "07 | Leadscampagne - Markiezen",
+    "spend": 708.7,
+    "kliks": 670,
+    "product": "Markiezen",
+    "offertes": 16,
+    "akkoorden": 0,
+    "perOfferte": 44,
+    "perOrder": null
+   }
+  ],
+  "2026-02": [
+   {
+    "campagne": "01 | Leads campagne - Rolluiken",
+    "spend": 13433.08,
+    "kliks": 10256,
+    "product": "Rolluiken",
+    "offertes": 191,
+    "akkoorden": 16,
+    "perOfferte": 70,
+    "perOrder": 840
+   },
+   {
+    "campagne": "02 | Retargeting | Leads",
+    "spend": 1956.87,
+    "kliks": 2225,
+    "product": null,
+    "offertes": null,
+    "akkoorden": null,
+    "perOfferte": null,
+    "perOrder": null
+   },
+   {
+    "campagne": "03 | Leadscampagne - Zonwering",
+    "spend": 1287.68,
+    "kliks": 709,
+    "product": "Zonwering",
+    "offertes": 70,
+    "akkoorden": 8,
+    "perOfferte": 18,
+    "perOrder": 161
+   },
+   {
+    "campagne": "04 | Leadscampagne - Pergola",
+    "spend": 1676.16,
+    "kliks": 1479,
+    "product": "Pergola",
+    "offertes": 102,
+    "akkoorden": 3,
+    "perOfferte": 16,
+    "perOrder": 559
+   },
+   {
+    "campagne": "05 | Leads - Screens",
+    "spend": 1582.66,
+    "kliks": 1016,
+    "product": "Screens",
+    "offertes": 51,
+    "akkoorden": 2,
+    "perOfferte": 31,
+    "perOrder": 791
+   },
+   {
+    "campagne": "06 | Gordijnen",
+    "spend": 1397.84,
+    "kliks": 3661,
+    "product": "Gordijnen",
+    "offertes": 13,
+    "akkoorden": 4,
+    "perOfferte": 108,
+    "perOrder": 349
+   }
+  ],
+  "2026-05": [
+   {
+    "campagne": "01 | Leads campagne - Rolluiken",
+    "spend": 13022.44,
+    "kliks": 13042,
+    "product": "Rolluiken",
+    "offertes": 306,
+    "akkoorden": 23,
+    "perOfferte": 43,
+    "perOrder": 566
+   },
+   {
+    "campagne": "03 | Leadscampagne - Zonwering",
+    "spend": 7383.1,
+    "kliks": 6827,
+    "product": "Zonwering",
+    "offertes": 360,
+    "akkoorden": 13,
+    "perOfferte": 21,
+    "perOrder": 568
+   },
+   {
+    "campagne": "04 | Leadscampagne - Pergola",
+    "spend": 1704.86,
+    "kliks": 1722,
+    "product": "Pergola",
+    "offertes": 136,
+    "akkoorden": 1,
+    "perOfferte": 13,
+    "perOrder": 1705
+   },
+   {
+    "campagne": "05 | Leads - Screens",
+    "spend": 1703.83,
+    "kliks": 1130,
+    "product": "Screens",
+    "offertes": 117,
+    "akkoorden": 10,
+    "perOfferte": 15,
+    "perOrder": 170
+   },
+   {
+    "campagne": "06 | Gordijnen",
+    "spend": 1224.7,
+    "kliks": 1253,
+    "product": "Gordijnen",
+    "offertes": 11,
+    "akkoorden": 3,
+    "perOfferte": 111,
+    "perOrder": 408
+   },
+   {
+    "campagne": "07 | Leadscampagne - Markiezen",
+    "spend": 380.15,
+    "kliks": 289,
+    "product": "Markiezen",
+    "offertes": 11,
+    "akkoorden": 2,
+    "perOfferte": 35,
+    "perOrder": 190
+   }
+  ],
+  "2026-03": [
+   {
+    "campagne": "01 | Leads campagne - Rolluiken",
+    "spend": 17266.22,
+    "kliks": 12604,
+    "product": "Rolluiken",
+    "offertes": 313,
+    "akkoorden": 29,
+    "perOfferte": 55,
+    "perOrder": 595
+   },
+   {
+    "campagne": "02 | Retargeting | Leads",
+    "spend": 2091.35,
+    "kliks": 2547,
+    "product": null,
+    "offertes": null,
+    "akkoorden": null,
+    "perOfferte": null,
+    "perOrder": null
+   },
+   {
+    "campagne": "03 | Leadscampagne - Zonwering",
+    "spend": 4213.13,
+    "kliks": 3412,
+    "product": "Zonwering",
+    "offertes": 229,
+    "akkoorden": 26,
+    "perOfferte": 18,
+    "perOrder": 162
+   },
+   {
+    "campagne": "04 | Leadscampagne - Pergola",
+    "spend": 1786.72,
+    "kliks": 1710,
+    "product": "Pergola",
+    "offertes": 141,
+    "akkoorden": 5,
+    "perOfferte": 13,
+    "perOrder": 357
+   },
+   {
+    "campagne": "05 | Leads - Screens",
+    "spend": 1798.23,
+    "kliks": 1261,
+    "product": "Screens",
+    "offertes": 82,
+    "akkoorden": 10,
+    "perOfferte": 22,
+    "perOrder": 180
+   },
+   {
+    "campagne": "06 | Gordijnen",
+    "spend": 1505.23,
+    "kliks": 3078,
+    "product": "Gordijnen",
+    "offertes": 10,
+    "akkoorden": 5,
+    "perOfferte": 151,
+    "perOrder": 301
+   },
+   {
+    "campagne": "07 | Leadscampagne - Markiezen",
+    "spend": 358.95,
+    "kliks": 336,
+    "product": "Markiezen",
+    "offertes": 10,
+    "akkoorden": 3,
+    "perOfferte": 36,
+    "perOrder": 120
+   }
+  ],
+  "2026-01": [
+   {
+    "campagne": "01 | Leads campagne - Rolluiken",
+    "spend": 12236.53,
+    "kliks": 8234,
+    "product": "Rolluiken",
+    "offertes": 193,
+    "akkoorden": 11,
+    "perOfferte": 63,
+    "perOrder": 1112
+   },
+   {
+    "campagne": "02 | Retargeting | Leads",
+    "spend": 1965.29,
+    "kliks": 1424,
+    "product": null,
+    "offertes": null,
+    "akkoorden": null,
+    "perOfferte": null,
+    "perOrder": null
+   },
+   {
+    "campagne": "04 | Leadscampagne - Pergola",
+    "spend": 1860.6,
+    "kliks": 1555,
+    "product": "Pergola",
+    "offertes": 100,
+    "akkoorden": 3,
+    "perOfferte": 19,
+    "perOrder": 620
+   },
+   {
+    "campagne": "05 | Leads - Screens",
+    "spend": 1675.07,
+    "kliks": 954,
+    "product": "Screens",
+    "offertes": 34,
+    "akkoorden": 2,
+    "perOfferte": 49,
+    "perOrder": 838
+   },
+   {
+    "campagne": "06 | Gordijnen",
+    "spend": 1546.42,
+    "kliks": 2872,
+    "product": "Gordijnen",
+    "offertes": 13,
+    "akkoorden": 1,
+    "perOfferte": 119,
+    "perOrder": 1546
+   }
+  ],
+  "2026-07": [
+   {
+    "campagne": "01 | Leads campagne - Rolluiken",
+    "spend": 11722.74,
+    "kliks": 10071,
+    "product": "Rolluiken",
+    "offertes": 298,
+    "akkoorden": 21,
+    "perOfferte": 39,
+    "perOrder": 558
+   },
+   {
+    "campagne": "03 | Leadscampagne - Zonwering",
+    "spend": 7332.84,
+    "kliks": 7864,
+    "product": "Zonwering",
+    "offertes": 271,
+    "akkoorden": 6,
+    "perOfferte": 27,
+    "perOrder": 1222
+   },
+   {
+    "campagne": "04 | Leadscampagne - Pergola",
+    "spend": 2172.94,
+    "kliks": 2186,
+    "product": "Pergola",
+    "offertes": 185,
+    "akkoorden": 2,
+    "perOfferte": 12,
+    "perOrder": 1086
+   },
+   {
+    "campagne": "05 | Leads - Screens",
+    "spend": 2185.25,
+    "kliks": 2242,
+    "product": "Screens",
+    "offertes": 200,
+    "akkoorden": 5,
+    "perOfferte": 11,
+    "perOrder": 437
+   },
+   {
+    "campagne": "06 | Gordijnen",
+    "spend": 1201.83,
+    "kliks": 842,
+    "product": "Gordijnen",
+    "offertes": 0,
+    "akkoorden": 0,
+    "perOfferte": null,
+    "perOrder": null
+   },
+   {
+    "campagne": "07 | Leadscampagne - Markiezen",
+    "spend": 825.08,
+    "kliks": 646,
+    "product": "Markiezen",
+    "offertes": 19,
+    "akkoorden": 1,
+    "perOfferte": 43,
+    "perOrder": 825
+   }
+  ],
+  "2026-06": [
+   {
+    "campagne": "01 | Leads campagne - Rolluiken",
+    "spend": 12608.17,
+    "kliks": 11749,
+    "product": "Rolluiken",
+    "offertes": 231,
+    "akkoorden": 19,
+    "perOfferte": 55,
+    "perOrder": 664
+   },
+   {
+    "campagne": "03 | Leadscampagne - Zonwering",
+    "spend": 7205.1,
+    "kliks": 6709,
+    "product": "Zonwering",
+    "offertes": 257,
+    "akkoorden": 12,
+    "perOfferte": 28,
+    "perOrder": 600
+   },
+   {
+    "campagne": "04 | Leadscampagne - Pergola",
+    "spend": 1702.73,
+    "kliks": 1602,
+    "product": "Pergola",
+    "offertes": 109,
+    "akkoorden": 1,
+    "perOfferte": 16,
+    "perOrder": 1703
+   },
+   {
+    "campagne": "05 | Leads - Screens",
+    "spend": 1740.73,
+    "kliks": 1461,
+    "product": "Screens",
+    "offertes": 192,
+    "akkoorden": 6,
+    "perOfferte": 9,
+    "perOrder": 290
+   },
+   {
+    "campagne": "06 | Gordijnen",
+    "spend": 1225.37,
+    "kliks": 940,
+    "product": "Gordijnen",
+    "offertes": 2,
+    "akkoorden": 1,
+    "perOfferte": 613,
+    "perOrder": 1225
+   },
+   {
+    "campagne": "07 | Leadscampagne - Markiezen",
+    "spend": 735.53,
+    "kliks": 528,
+    "product": "Markiezen",
+    "offertes": 8,
+    "akkoorden": 0,
+    "perOfferte": 92,
+    "perOrder": null
+   }
+  ]
+ }
+}

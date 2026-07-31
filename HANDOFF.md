@@ -1,5 +1,11 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-31)
 
+## OFFERTEPAGINA IN BROCHURE-STIJL + V4-VERRIJKING INGEBOUWD (31 juli avond)
+- Offertepagina (/offerte/<token>) volgt nu de brochure: donkere cover-hero met stats en categoriebalk, offerte-kaart met productfoto per regel, zo werkt het (HIER STA JE NU), online ondertekenen, zekerheden, echte reviews, FAQ, showroom, donkere slotfooter. Mobiel gecheckt (iPhone 12, geen h-scroll).
+- **V4-logica nu STANDAARD ingebouwd** (lib/offerte-tool/verrijking.ts, eis Daimy): goedgekeurde Waarom-blokken (uit beschrijving.ts), productinfo (kast/profiel/cassette/motor), garantie 3/5/7 per product, montage-specificatie (eigen monteurs/klein materiaal/afstellen/opruimen), accessoire-uitleg, én "Liever een ander model of andere bediening?" met echte engineprijzen. Op pagina (uitklapbaar) en in de PDF.
+- **Gedachtestreepjes overal uit klantteksten** (eis Daimy, geldt voortaan voor al het klantmateriaal; memory bijgewerkt).
+- Daimy heeft S26-1004 zelf online ondertekend (13:42) — de klantflow werkt bij hem.
+
 ## BROCHURE-OFFERTE-PDF LIVE (31 juli avond, react-pdf)
 - Daimy wees de RP "compleet"-PDF aan als voorbeeld (12 pag. brochure). Nagebouwd en verbeterd met react-pdf, server-side op /api/offerte/[token]/pdf: donkere cover met klantnaam/offertenummer, "zo werkt het" (stap 3 = online ondertekenen, HIER STA JE NU), nette offertetabel (regels/korting/totalen/KvK/BTW), pagina met persoonlijke offerte-link, assortiment buiten+binnen, voor wie, over ons, ECHTE Google-reviews (uit het RP-voorbeeldmateriaal), FAQ, showroom, slotpagina. Eigen foto's uit public/images (geconverteerd naar JPG).
 - **Lessen**: (1) react-pdf + Figtree/Satoshi = accent-bug (fontkit zet elk accent 1 glyph naar rechts, "één"→"eéń") → Inter gebruiken; (2) react-pdf kan geen WebP → sips-conversie; (3) dynamisch fs-pad naar public/ laat de Next-tracer heel public/ bundelen (339MB, deploy faalt op 250MB-limiet) → assets in lib/offerte-pdf/assets (functie nu 16MB).

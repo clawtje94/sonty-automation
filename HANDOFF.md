@@ -1,5 +1,8 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-31)
 
+## OFFERTEPAGINA MOBIEL AANGESCHERPT (31 juli laat)
+- Daimy vond mobiel nog niet fijn. Gemeten: 12 schermen lang, totaal op 47%, ondertekenen op 64%. Fixes live: sticky onderbalk (totaal + Onderteken online, IntersectionObserver verbergt hem bij het tekenblok; WhatsAppWidget BAR_SELECTOR uitgebreid met .offerte-sticky-cta), ondertekenen direct na de offerte, hero compacter met "Bekijk je offerte"-anker, productregels met foto+naam+prijs op één kopregel en uitleg full-width eronder.
+
 ## OFFERTEPAGINA IN BROCHURE-STIJL + V4-VERRIJKING INGEBOUWD (31 juli avond)
 - Offertepagina (/offerte/<token>) volgt nu de brochure: donkere cover-hero met stats en categoriebalk, offerte-kaart met productfoto per regel, zo werkt het (HIER STA JE NU), online ondertekenen, zekerheden, echte reviews, FAQ, showroom, donkere slotfooter. Mobiel gecheckt (iPhone 12, geen h-scroll).
 - **V4-logica nu STANDAARD ingebouwd** (lib/offerte-tool/verrijking.ts, eis Daimy): goedgekeurde Waarom-blokken (uit beschrijving.ts), productinfo (kast/profiel/cassette/motor), garantie 3/5/7 per product, montage-specificatie (eigen monteurs/klein materiaal/afstellen/opruimen), accessoire-uitleg, én "Liever een ander model of andere bediening?" met echte engineprijzen. Op pagina (uitklapbaar) en in de PDF.

@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-31)
 
+## MAIL-KOPPELING EIGEN WEBSITE / CUTOVER-FUNDAMENT LIVE (31 juli middag)
+- Opdracht Daimy: alle mailstromen alvast aan de nieuwe website koppelen zodat de RP-cutover een kwestie van omschakelen is.
+- **Gebouwd en live**: verzendcentrum (/admin/verzendcentrum) heeft nu naast de RP-lijst een "Eigen offertes"-sectie (offerte-tool-dossiers uit leads-KV) met preview/verstuur: mail via aanvragen@sonty.nl met de EIGEN offerte-link (sonty.nl/offerte/<token>, online ondertekenen bestaat al). Herinneringen-cron (dag 3/6) handelt eigen entries af (stopt op ondertekend/afgewezen/verlopen via de lead). Bron-schakelaar "Reuzenpanda | Eigen website" in settings = de cutover-knop. Zelfde testmodus (mails naar joey@/daimy@) en dubbel-verstuur-beveiliging (409).
+- **Getest op productie**: test-dossier S26-1003 (Test Mailkoppeling) → mail verstuurd via Trengo (ticket 970608521) naar joey@/daimy@, eigen link in mail, geen RP-verwijzing; klantpagina 200; 409 bij tweede keer; admin-UI visueel gecheckt.
+- **BELANGRIJK gevonden+gefixt**: de TRENGO_TOKEN op Vercel was verlopen (401) — het HELE verzendcentrum (ook RP-pad) kon dus niet meer mailen. Werkend token uit ~/sonty/scripts/.trengo-api-token.txt (AI-KS) op Vercel gezet + redeploy. Bij 401 op mail: token vergelijken met dat bestand.
+- **Dubbel-mail-waarschuwing**: Klaviyo-automation "offerte-mail-bij-delen" moet UIT als je via het verzendcentrum mailt (verzendcentrum onderdrukt zelf de status-mail al bij versturen).
+- **Blijft op RP tot de offerte-flow-cutover**: winkelmail-queue (RP-doclink) en de V4-WhatsApp-flow. Die gaan mee zodra de offerte-tool volledig eigen offertes maakt i.p.v. RP-documenten.
+
+
 ## CONFIGURATOR-AUDIT + PRIJSFIXES LIVE (31 juli, commit 0532ccd)
 - Aanleiding Daimy: windsensor stond als extra bij rolluiken. Volledige audit configurator (sonty-website) gedaan.
 - **Gefixt en live op sonty-website.vercel.app**: (1) windsensor-upsell weg bij rolluik/markies/pergola, blijft bij knikarmschermen mét garantie-uitleg; (2) doekkleur-tekst werd als framekleur geprijsd → onterechte RAL-meerprijs bij screens/knikarm/uitval/markies/pergola/serre (UI + submit-route); (3) submit telde kleurMeerprijs dubbel; (4) hor-standaardkleuren "RAL 7016/9005 structuur" kregen onterecht +€100 (structuur vs STR); (5) keuze-indicaties op knoppen misten ×1,1 markup; (6) LED SunElite stond als bediening-keuze (rekende als io zonder LED-prijs) → nu aparte optie op aanvraag; (7) upsell-uitleg (windsensor/Tahoma/Roma-hor) = echte Sonty-uitleg uit de kennisbank.

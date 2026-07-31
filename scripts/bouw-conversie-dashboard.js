@@ -21,6 +21,11 @@ const stand = nu.toLocaleString('nl-NL', { day: 'numeric', month: 'long', year: 
 const onrijp = (jaar, maand) => (nu - new Date(jaar, maand, 0)) / 864e5 < 60;
 
 const PLATFORMS = ['Google', 'Meta', 'Buren/Bekenden', 'Anders'];
+// Advertentiekosten per maand (data/ad-spend.json via scripts/ad-spend.js).
+let SPEND = {}; try { SPEND = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'ad-spend.json'), 'utf8')); } catch {}
+// Break-even advertentiekosten per order (scripts/breakeven-2026.js, 31 juli):
+// bandbreedte 513 (conservatief, 2026) tot 592 (2025-methode).
+const BREAK_EVEN = [513, 592];
 const prodVolgorde = j => Object.entries(D[j].product)
   .filter(([k, v]) => v.off >= 60 && k !== 'Niet ingevuld')
   .sort((a, b) => b[1].off - a[1].off).map(([k]) => k);
@@ -70,7 +75,29 @@ function jaarBlok(jaar) {
       return celTd(jaar, c.off, c.akk, m); }).join('');
     H.push(`<tr><th>${p}</th>${cellen}<td class="tot">${f1(pc(jt.akk, jt.off))}%<span>${jt.off.toLocaleString('nl-NL')}</span></td></tr>`);
   }
-  H.push(`</tbody></table></div></div>`);
+  H.push(`</tbody></table></div>`);
+
+  // Rendement per platform — alleen maanden van dit jaar waar kostendata voor is.
+  const spendMaanden = Object.keys(SPEND).filter(m => m.startsWith(String(jaar))).sort();
+  H.push('<h2>Rendement advertenties</h2>');
+  if (!spendMaanden.length) {
+    H.push(`<p class="melding">Geen advertentiekosten bekend voor ${jaar}. Zet maandbedragen in de tab &ldquo;conversie %&rdquo; of in data/ad-spend-handmatig.json en dit blok rekent zichzelf uit (kosten per offerte, per order en of je boven of onder break-even zit).</p>`);
+  } else {
+    H.push(`<div class="scroll"><table><thead><tr><th>maand</th><th>platform</th><th>kosten</th><th>offertes</th><th>&euro;/offerte</th><th>orders</th><th>&euro;/order</th><th>oordeel</th></tr></thead><tbody>`);
+    for (const m of spendMaanden) {
+      const mnd = Number(m.slice(5, 7));
+      for (const pf of ['Meta', 'Google']) {
+        const kost = SPEND[m][pf]; if (!kost) continue;
+        const c = d.maandGroep[mnd + '|' + pf] || { off: 0, akk: 0 };
+        const perOff = c.off ? kost / c.off : null;
+        const perOrd = c.akk ? kost / c.akk : null;
+        const oordeel = perOrd === null ? '—' : perOrd < BREAK_EVEN[0] ? '<b class="goed">winstgevend</b>' : perOrd <= BREAK_EVEN[1] ? 'krap (rond break-even)' : '<b class="slecht">VERLIES</b>';
+        H.push(`<tr><th>${MND[mnd]}</th><td style="text-align:left">${pf}</td><td>&euro;${Math.round(kost).toLocaleString('nl-NL')}</td><td>${c.off}</td><td>${perOff ? '&euro;' + Math.round(perOff) : '—'}</td><td>${c.akk}</td><td>${perOrd ? '&euro;' + Math.round(perOrd) : '—'}</td><td>${oordeel}</td></tr>`);
+      }
+    }
+    H.push(`</tbody></table></div><p class="melding">Break-even &asymp; &euro;${BREAK_EVEN[0]}&ndash;&euro;${BREAK_EVEN[1]} advertentiekosten per order (productmarge min montage/overhead). Jonge maanden rijpen na: &euro;/order daalt dan nog.</p>`);
+  }
+  H.push('</div>');
   return H.join('\n');
 }
 
@@ -117,6 +144,9 @@ td.h4{background:var(--h4);color:var(--h4i)}td.h5{background:var(--h5);color:var
 td.h6{background:var(--h6);color:var(--h6i)}
 .legenda{display:flex;gap:.5rem;align-items:center;color:var(--ink-3);font-size:.72rem;margin:.8rem 0 0;flex-wrap:wrap}
 .legenda .cells{display:flex}.legenda .cells i{width:18px;height:10px;display:block}
+.melding{color:var(--ink-3);font-size:.78rem;max-width:80ch;margin:.4rem 0}
+.goed{color:#1F7A4C}.slecht{color:#A8321F}
+@media(prefers-color-scheme:dark){.goed{color:#3FBF7F}.slecht{color:#F0705A}}
 footer{color:var(--ink-3);font-size:.75rem;margin-top:1.6rem;max-width:75ch}
 #poort{position:fixed;inset:0;background:var(--surface);display:flex;align-items:center;justify-content:center;z-index:9}
 #poort form{background:var(--surface-2);border:1px solid var(--rule);padding:2rem;border-radius:8px;text-align:center}

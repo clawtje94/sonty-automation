@@ -9,6 +9,7 @@ VORIG=$((JAAR-1))
 /opt/homebrew/bin/node scripts/conversie-sheet.js --jaar $VORIG
 /opt/homebrew/bin/node scripts/maak-conversie-tabellen.js --jaar $JAAR
 /opt/homebrew/bin/node scripts/maak-conversie-tabellen.js --jaar $VORIG
+/opt/homebrew/bin/node scripts/ad-spend.js
 /opt/homebrew/bin/node scripts/bouw-conversie-dashboard.js
 cd /Users/clawdboot/sonty-website
 git pull --rebase --quiet || true

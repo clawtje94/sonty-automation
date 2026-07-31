@@ -16,7 +16,7 @@ const A = a => { const t = String(a || '').trim().toLowerCase(); if (!t) return 
   if (t.startsWith('buren')) return 'Buren';
   if (t.startsWith('anders')) return 'Anders';
   return a.trim(); };
-const P = p => { const t = String(p || '').trim().toLowerCase(); if (!t) return 'Niet ingevuld';
+const P = p => { const t = String(p || '').trim().toLowerCase(); if (!t || t === '(leeg)') return 'Niet ingevuld';
   if (t.startsWith('rolluik')) return 'Rolluiken';
   if (t.startsWith('screen')) return 'Screens';
   if (t.startsWith('knikarm')) return 'Knikarmscherm';

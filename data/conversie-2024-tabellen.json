@@ -105,7 +105,7 @@
   }
  },
  "product": {
-  "(leeg)": {
+  "Niet ingevuld": {
    "off": 292,
    "akk": 104,
    "omzet": 358342.3,
@@ -457,7 +457,7 @@
   }
  },
  "maandProduct": {
-  "5|(leeg)": {
+  "5|Niet ingevuld": {
    "off": 203,
    "akk": 84,
    "omzet": 300483.3,
@@ -469,7 +469,7 @@
    "omzet": 79545,
    "inkoop": 39235
   },
-  "6|(leeg)": {
+  "6|Niet ingevuld": {
    "off": 82,
    "akk": 19,
    "omzet": 51965,
@@ -505,7 +505,7 @@
    "omzet": 6820,
    "inkoop": 3800
   },
-  "7|(leeg)": {
+  "7|Niet ingevuld": {
    "off": 2,
    "akk": 1,
    "omzet": 5894,
@@ -523,7 +523,7 @@
    "omzet": 239674,
    "inkoop": 123154
   },
-  "8|(leeg)": {
+  "8|Niet ingevuld": {
    "off": 3,
    "akk": 0,
    "omzet": 0,
@@ -553,7 +553,7 @@
    "omzet": 74944,
    "inkoop": 39262
   },
-  "9|(leeg)": {
+  "9|Niet ingevuld": {
    "off": 2,
    "akk": 0,
    "omzet": 0,

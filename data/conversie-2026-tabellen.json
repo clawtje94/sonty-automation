@@ -176,7 +176,7 @@
    "omzet": 92393.66000000002,
    "inkoop": 41937
   },
-  "(leeg)": {
+  "Niet ingevuld": {
    "off": 315,
    "akk": 106,
    "omzet": 367716.0999999999,
@@ -576,7 +576,7 @@
    "omzet": 9455.14,
    "inkoop": 4516
   },
-  "1|(leeg)": {
+  "1|Niet ingevuld": {
    "off": 8,
    "akk": 6,
    "omzet": 23409.989999999998,
@@ -654,7 +654,7 @@
    "omzet": 5209.66,
    "inkoop": 2837
   },
-  "2|(leeg)": {
+  "2|Niet ingevuld": {
    "off": 3,
    "akk": 1,
    "omzet": 2783.75,
@@ -714,7 +714,7 @@
    "omzet": 24270.22,
    "inkoop": 14263
   },
-  "3|(leeg)": {
+  "3|Niet ingevuld": {
    "off": 31,
    "akk": 13,
    "omzet": 56785.399999999994,
@@ -786,7 +786,7 @@
    "omzet": 17295.010000000002,
    "inkoop": 8289
   },
-  "4|(leeg)": {
+  "4|Niet ingevuld": {
    "off": 14,
    "akk": 1,
    "omzet": 1557,
@@ -864,7 +864,7 @@
    "omzet": 841,
    "inkoop": 342
   },
-  "5|(leeg)": {
+  "5|Niet ingevuld": {
    "off": 52,
    "akk": 3,
    "omzet": 30921.739999999998,
@@ -882,7 +882,7 @@
    "omzet": 24604,
    "inkoop": 12783
   },
-  "6|(leeg)": {
+  "6|Niet ingevuld": {
    "off": 141,
    "akk": 42,
    "omzet": 137908.51,
@@ -966,7 +966,7 @@
    "omzet": 22869,
    "inkoop": 5
   },
-  "7|(leeg)": {
+  "7|Niet ingevuld": {
    "off": 66,
    "akk": 40,
    "omzet": 114349.70999999999,

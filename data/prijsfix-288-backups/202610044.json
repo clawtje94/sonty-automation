@@ -1,0 +1,336 @@
+{
+ "message": "OK",
+ "quotationData": {
+  "documentId": "4e823d2c-9715-4b75-9045-2e8a96618107",
+  "versionId": "e06b28c6-df9f-44e1-bd52-fb319b134ed5",
+  "documentTitle": "Offerte #202610044",
+  "documentStatus": "SENT",
+  "documentNumber": "202610044",
+  "documentType": "QUOTATION",
+  "title": "Offerte #202610044",
+  "quotationNumber": "202610044",
+  "quotationTitle": "Offerte #202610044",
+  "quotationCreationTimestamp": 1784444276174,
+  "quotationExpirationTimestamp": 1785049076174,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "subjects": {
+   "leadConfiguration": "170fc085-390d-4aae-b4d6-252020b09e6f",
+   "contactPerson": "71b15a1f-aad3-4544-a3e3-f3a46bb1d693"
+  },
+  "segments": {
+   "032cc873-436a-4e5e-9289-6fb7e87af6b9": {
+    "type": "text",
+    "data": "**Waarom Sonty?**\n\n- Sunmaster Premium Dealer: wij leveren uitsluitend A-merk zonwering van de hoogste kwaliteit\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij je thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 600+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+   },
+   "defaultTemplateContactPart": {
+    "type": "contactPerson",
+    "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+   },
+   "defaultSignaturePart": {
+    "type": "signature",
+    "data": {}
+   },
+   "defaultTemplateProfileLogo": {
+    "type": "companyProfileLogo",
+    "data": "![|6lh]($companyProfile.logo)"
+   },
+   "defaultTemplateProfileText": {
+    "type": "text",
+    "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+   },
+   "defaultTemplatePriceLineGroup": {
+    "type": "priceLineGroup",
+    "data": {
+     "lines": [
+      {
+       "units": 1,
+       "description": "**Zip Design 110**\nType: screen solar\nBreedte: 2833 mm\nHoogte: 1494 mm\nFrame Kleur: RAL 9001 (standaard)\nKleur doek: NTB\nBediening: Solar (Somfy RS 100 IO Solar)\nMotor: Somfy RS 100 IO Solar",
+       "pricePerUnit": 2020,
+       "vatPercentage": 21,
+       "position": 0,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Inmeten + montage screen solar**\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+       "pricePerUnit": 175,
+       "vatPercentage": 21,
+       "position": 1,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Rolluik S-42 (RollSUPER)**\nType: rolluik solar\nBreedte: 4000 mm\nHoogte: 1280 mm\nFrame Kleur: RAL 9001 (standaard)\nKleur doek: NTB\nBediening: Solar (Somfy RS 100 IO Solar)\nMotor: Somfy RS 100 IO Solar",
+       "pricePerUnit": 1748.3,
+       "vatPercentage": 21,
+       "position": 2,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Vals vensterbank**\n- HF geleider\n- Punt waar het rolluik op sluit\n- Breed: 4000 mm",
+       "pricePerUnit": 62,
+       "imageUri": "",
+       "vatPercentage": 21,
+       "position": 3,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Inmeten + montage rolluik solar**\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+       "pricePerUnit": 175,
+       "vatPercentage": 21,
+       "position": 4,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Rolluik S-42 (RollSUPER)**\nType: rolluik solar\nBreedte: 3500 mm\nHoogte: 1500 mm\nFrame Kleur: RAL 9001 (standaard)\nKleur doek: NTB\nBediening: Solar (Somfy RS 100 IO Solar)\nMotor: Somfy RS100 IO",
+       "pricePerUnit": 1853.9,
+       "vatPercentage": 21,
+       "position": 5,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Vals vensterbank**\n- HF geleider\n- Punt waar het rolluik op sluit\n- Breed: 3500 mm",
+       "pricePerUnit": 55,
+       "imageUri": "",
+       "vatPercentage": 21,
+       "position": 6,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Inmeten + montage rolluik solar**\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+       "pricePerUnit": 175,
+       "vatPercentage": 21,
+       "position": 7,
+       "lockTotalPrice": false
+      }
+     ],
+     "vatSetting": "INCL",
+     "groupDiscount": {
+      "name": "15% tijdelijke actie",
+      "amount": 15,
+      "type": "PERCENTAGE",
+      "vatPercentage": 21
+     }
+    }
+   }
+  },
+  "pricing": {
+   "total": 5228.264999999999
+  },
+  "renderRows": [
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileLogo"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileText"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateContactPart"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "quotationData"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "priceLineGroupCombined",
+        "target": "defaultTemplatePriceLineGroup"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "032cc873-436a-4e5e-9289-6fb7e87af6b9"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "userDecline"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "signature",
+        "target": "defaultSignaturePart"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

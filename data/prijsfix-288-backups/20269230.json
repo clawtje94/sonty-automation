@@ -1,0 +1,291 @@
+{
+ "message": "OK",
+ "quotationData": {
+  "documentId": "03598691-5ea4-4a09-b9bd-888bd0bbbc3a",
+  "versionId": "c4d568b0-d5b3-4bbc-a869-b51e7f044f73",
+  "documentTitle": "Offerte #20269230",
+  "documentStatus": "SENT",
+  "documentNumber": "20269230",
+  "documentType": "QUOTATION",
+  "title": "Offerte #20269230",
+  "quotationNumber": "20269230",
+  "quotationTitle": "Offerte #20269230",
+  "quotationCreationTimestamp": 1783621399817,
+  "quotationExpirationTimestamp": 1784226199817,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "subjects": {
+   "leadConfiguration": "808e19bc-f0ef-4dd2-b532-c15d5b9e51ef",
+   "contactPerson": "228ac13b-93c0-4ecc-9ba8-def5d1e15483"
+  },
+  "segments": {
+   "defaultTemplateContactPart": {
+    "type": "contactPerson",
+    "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+   },
+   "fab8190d-fcd9-4ca9-b219-d1170a212df1": {
+    "type": "text",
+    "data": "**Waarom Sonty?**\n\n- Sunmaster Premium Dealer: wij leveren uitsluitend A-merk zonwering van de hoogste kwaliteit\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij je thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 600+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+   },
+   "defaultSignaturePart": {
+    "type": "signature",
+    "data": {}
+   },
+   "defaultTemplateProfileLogo": {
+    "type": "companyProfileLogo",
+    "data": "![|6lh]($companyProfile.logo)"
+   },
+   "defaultTemplateProfileText": {
+    "type": "text",
+    "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+   },
+   "defaultTemplatePriceLineGroup": {
+    "type": "priceLineGroup",
+    "data": {
+     "lines": [
+      {
+       "units": 2,
+       "description": "**Rolluik (RollSUPER)**\nType: rolluik solar\nBreedte: 1950 mm\nHoogte: 1310 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 7016 structuur (standaard)\nKleur Pantser: RAL 7016 structuur\nOnderlat: Standaard\nBediening: afstandsbediening\nMotor: Somfy RS100 IO solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nProfiel: S-42 (42mm lamel, steviger, tot 400cm breed)\nMontage: NTB\n\n**Waarom dit rolluik**\nPremium kwaliteit, Nederlands geproduceerd. Dubbelwandige aluminium lamellen met PU-schuim voor isolatie. Op zonne-energie: geen bekabeling nodig, volledig draadloos. Bescherming tegen inbraak, zon, warmte en kou.\nGarantie: 5 jaar op het product, 7 jaar op de motor.\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• Rolluik S-37 (37mm lamel, compact, tot 300cm): -€77\n\nAndere bediening:\n• Bandbediening (handmatig): -€370\n• LT 50 draaischakelaar (bedraad): -€249\n• Somfy Solar RS 100 IO (premium, excl. handzender): +€263\n• Solar Brel (zonnepaneel, incl. handzender): +€135\n\nKleur:\n• Trendkleur: +15% op productprijs\n• RAL kleur/ronde kast: +20% op productprijs\n\nLaat het ons weten, we passen het graag voor je aan.",
+       "pricePerUnit": 1255.1,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 2,
+       "description": "**Inmeten + montage rolluik solar**\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+       "pricePerUnit": 175,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Tahoma Switch**\n- Automatiseren van je Somfy producten\n- Producten bedienen waar je ook bent met de telefoon\n- Inclusief installatie en uitleg\n- Al uw smart home producten op 1 app (zoals Philips Hue)",
+       "pricePerUnit": 195,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      }
+     ],
+     "vatSetting": "INCL",
+     "groupDiscount": {
+      "name": "15% tijdelijke actie",
+      "amount": 15,
+      "type": "PERCENTAGE",
+      "vatPercentage": 21
+     }
+    }
+   }
+  },
+  "pricing": {
+   "total": 2587.5699999999997
+  },
+  "renderRows": [
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileLogo"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileText"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateContactPart"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "quotationData"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "priceLineGroupCombined",
+        "target": "defaultTemplatePriceLineGroup"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "fab8190d-fcd9-4ca9-b219-d1170a212df1"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "userDecline"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "signature",
+        "target": "defaultSignaturePart"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,305 @@
+{
+ "message": "OK",
+ "quotationData": {
+  "documentId": "3fb6485c-3a84-4b5e-8091-d9e098c6a1d3",
+  "versionId": "156ba334-0c48-44cc-847f-208aa20d0bf2",
+  "documentTitle": "Offerte #20268705",
+  "documentStatus": "SENT",
+  "documentNumber": "20268705",
+  "documentType": "QUOTATION",
+  "title": "Offerte #20268705",
+  "quotationNumber": "20268705",
+  "quotationTitle": "Offerte #20268705",
+  "quotationCreationTimestamp": 1783164367052,
+  "quotationExpirationTimestamp": 1783769167052,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "subjects": {
+   "leadConfiguration": "5bb7ff78-7f54-4003-9c77-772f6db53f65",
+   "contactPerson": "43c1cf5f-a20b-497b-af62-9fa07af87814"
+  },
+  "segments": {
+   "defaultTemplateContactPart": {
+    "type": "contactPerson",
+    "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+   },
+   "defaultSignaturePart": {
+    "type": "signature",
+    "data": {}
+   },
+   "defaultTemplateProfileLogo": {
+    "type": "companyProfileLogo",
+    "data": "![|6lh]($companyProfile.logo)"
+   },
+   "defaultTemplateProfileText": {
+    "type": "text",
+    "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+   },
+   "defaultTemplatePriceLineGroup": {
+    "type": "priceLineGroup",
+    "data": {
+     "lines": [
+      {
+       "units": 1,
+       "description": "**Pergola 165 zip**\nType: pergola bedraad\nBreedte: 3200 mm\nUitval: 4000 mm\nFrame Kleur: RAL 7016 structuur (standaard)\nKleur doek: NTB\nBediening: afstandsbediening\nMotor: somfy IO motor\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\n**Waarom deze pergola**\nTerrasoverkapping met waterdicht doek. Beschermd tegen zon en regen: je terras het hele jaar bruikbaar. Stevig aluminium frame: duurzaam en onderhoudsarm. Gemotoriseerd: doek in- en uitrollen met afstandsbediening.\nGarantie: 5 jaar op het product., 7 jaar op de motor.\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• Knikarmscherm SunEye (wandmontage, geen palen nodig) (3200×3000mm): -€3790\n• Knikarmscherm SunEye XL (extra breed, tot 745cm) (3200×3000mm): -€3164\n\nAndere bediening:\n• Orea WT (bedraad, wandschakelaar): -€139\n\nKleur:\n• RAL kleur naar keuze: +15% op productprijs\n\nLaat het ons weten, we passen je offerte graag aan.",
+       "pricePerUnit": 6964.1,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Rolluik (RollSUPER)**\nType: rolluik solar\nBreedte: 3200 mm\nHoogte: 2300 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 7016 structuur (standaard)\nKleur Pantser: RAL 7016 structuur\nOnderlat: Standaard\nBediening: afstandsbediening\nMotor: Somfy RS100 IO solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nProfiel: S-42 (42mm lamel, steviger, tot 400cm breed)\nMontage: NTB\n\n**Waarom dit rolluik**\nPremium kwaliteit, Nederlands geproduceerd. Dubbelwandige aluminium lamellen met PU-schuim voor isolatie. Op zonne-energie: geen bekabeling nodig, volledig draadloos. Bescherming tegen inbraak, zon, warmte en kou.\nGarantie: 5 jaar op het product, 7 jaar op de motor.\n\n**Liever een ander model of bediening?**\n\nAndere bediening:\n• Bandbediening (handmatig): -€370\n• LT 50 draaischakelaar (bedraad): -€249\n• Somfy Solar RS 100 IO (premium, excl. handzender): +€263\n• Solar Brel (zonnepaneel, incl. handzender): +€135\n\nKleur:\n• Trendkleur: +15% op productprijs\n• RAL kleur/ronde kast: +20% op productprijs\n\nLaat het ons weten, we passen je offerte graag aan.",
+       "pricePerUnit": 1938.2,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Inmeten + montage Pergola**\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+       "pricePerUnit": 650,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Inmeten + montage rolluik solar**\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+       "pricePerUnit": 175,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Tahoma Switch**\n- Automatiseren van je Somfy producten\n- Producten bedienen waar je ook bent met de telefoon\n- Inclusief installatie en uitleg\n- Al uw smart home producten op 1 app (zoals Philips Hue)",
+       "pricePerUnit": 195,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      }
+     ],
+     "vatSetting": "INCL",
+     "groupDiscount": {
+      "name": "15% tijdelijke actie",
+      "amount": 15,
+      "type": "PERCENTAGE",
+      "vatPercentage": 21
+     }
+    }
+   },
+   "6ae99b07-dd5c-4249-bc2b-5769bc082a6f": {
+    "type": "text",
+    "data": "**Waarom Sonty?**\n\n- Sunmaster Premium Dealer: wij leveren uitsluitend A-merk zonwering van de hoogste kwaliteit\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij je thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 600+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+   }
+  },
+  "pricing": {
+   "total": 8218.905
+  },
+  "renderRows": [
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileLogo"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileText"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateContactPart"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "quotationData"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "priceLineGroupCombined",
+        "target": "defaultTemplatePriceLineGroup"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "6ae99b07-dd5c-4249-bc2b-5769bc082a6f"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "userDecline"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "signature",
+        "target": "defaultSignaturePart"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

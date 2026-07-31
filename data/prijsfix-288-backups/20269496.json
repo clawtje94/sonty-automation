@@ -1,0 +1,312 @@
+{
+ "message": "OK",
+ "quotationData": {
+  "documentId": "d35dd59f-7725-4d38-b5ec-b1a26362136b",
+  "versionId": "31d80e64-7cc1-4a18-b80f-6e831994d945",
+  "documentTitle": "Offerte #20269496",
+  "documentStatus": "SENT",
+  "documentNumber": "20269496",
+  "documentType": "QUOTATION",
+  "title": "Offerte #20269496",
+  "quotationNumber": "20269496",
+  "quotationTitle": "Offerte #20269496",
+  "quotationCreationTimestamp": 1783856402080,
+  "quotationExpirationTimestamp": 1784461202080,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "subjects": {
+   "leadConfiguration": "80ff77c6-fd27-42bc-9f11-a9b3241d7557",
+   "contactPerson": "7a1818e3-fdc5-480b-be64-9ec70865a604"
+  },
+  "segments": {
+   "defaultTemplateContactPart": {
+    "type": "contactPerson",
+    "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+   },
+   "defaultSignaturePart": {
+    "type": "signature",
+    "data": {}
+   },
+   "defaultTemplateProfileLogo": {
+    "type": "companyProfileLogo",
+    "data": "![|6lh]($companyProfile.logo)"
+   },
+   "defaultTemplateProfileText": {
+    "type": "text",
+    "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+   },
+   "defaultTemplatePriceLineGroup": {
+    "type": "priceLineGroup",
+    "data": {
+     "lines": [
+      {
+       "units": 1,
+       "description": "**Rolluik (RollSUPER)**\nType: rolluik draaischakelaar\nBreedte: 2850 mm\nHoogte: 1850 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 7016 structuur (standaard)\nKleur Pantser: RAL 7016 structuur\nOnderlat: Standaard\nBediening: vaste draaischakelaar op de muur\nMotor: Somfy LT\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nProfiel: S-42 (42mm lamel, steviger, tot 400cm breed)\nMontage: NTB\n\n**Waarom dit rolluik**\nPremium kwaliteit, Nederlands geproduceerd. Dubbelwandige aluminium lamellen met PU-schuim voor isolatie. Somfy motor met vaste draaischakelaar op de muur. Bescherming tegen inbraak, zon, warmte en kou.\nGarantie: 5 jaar op het product, 7 jaar op de motor.\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• Rolluik S-37 (37mm lamel, compact, tot 300cm): +€85\n\nAndere bediening:\n• Bandbediening (handmatig): -€121\n• Motor + afstandsbediening (RS100 IO + handzender): +€249\n• Somfy Solar RS 100 IO (premium, excl. handzender): +€428\n• Solar Brel (zonnepaneel, incl. handzender): +€384\n\nKleur:\n• Trendkleur: +15% op productprijs\n• RAL kleur/ronde kast: +20% op productprijs\n\nLaat het ons weten, we passen het graag voor je aan.",
+       "pricePerUnit": 1273.8,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Suneye voorraad scherm**\nType: knikarmscherm bedraad\nBreedte: 5000 mm\nUitval: 3000 mm\nFrame kleur: RAL 7016 structuur (standaard)\nKleur doek: Grijs\nBediening: afstandsbediening\nMotor: somfy RS100 IO\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\nCassette: Gesloten, slank design\n\n**Waarom dit knikarmscherm**\nPremium knikarmscherm met gesloten cassette. Doek en mechaniek volledig beschermd. Direct leverbaar uit voorraad: snellere levertijd dan maatwerk. Sterke aluminium armen: lang meegaand en stabiel. Fluisterstille Somfy motor met afstandsbediening.\nGarantie: 5 jaar op het product, 7 jaar op de motor.",
+       "pricePerUnit": 3175,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Eolis 3D windsensor IO**\n- Automatische windbeveiliging\n- Zonwering rolt automatisch in bij harde wind\n- Ingebouwd in de voorlijst\n- Werkt draadloos samen met uw Somfy motor",
+       "pricePerUnit": 169,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Inmeten + montage rolluik solar**\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+       "pricePerUnit": 175,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Inmeten + montage Knikarmscherm.**\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+       "pricePerUnit": 275,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "**Tahoma Switch**\n- Automatiseren van je Somfy producten\n- Producten bedienen waar je ook bent met de telefoon\n- Inclusief installatie en uitleg\n- Al uw smart home producten op 1 app (zoals Philips Hue)",
+       "pricePerUnit": 195,
+       "vatPercentage": 21,
+       "lockTotalPrice": false
+      }
+     ],
+     "vatSetting": "INCL",
+     "groupDiscount": {
+      "name": "20% korting voorraad scherm",
+      "amount": 20,
+      "type": "PERCENTAGE",
+      "vatPercentage": 21
+     }
+    }
+   },
+   "3e6fc999-4950-4d4c-9ce6-d5d138c41b67": {
+    "type": "text",
+    "data": "**Waarom Sonty?**\n\n- Sunmaster Premium Dealer: wij leveren uitsluitend A-merk zonwering van de hoogste kwaliteit\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij je thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 600+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+   }
+  },
+  "pricing": {
+   "total": 4044.8
+  },
+  "renderRows": [
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileLogo"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileText"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateContactPart"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "quotationData"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "priceLineGroupCombined",
+        "target": "defaultTemplatePriceLineGroup"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "3e6fc999-4950-4d4c-9ce6-d5d138c41b67"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "userDecline"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "signature",
+        "target": "defaultSignaturePart"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -106,3 +106,14 @@
 - (2026-07-23) [team-notitie bij gesprek Mark Gaerthé] geen follow up verstuurd?
 - (2026-07-23) [team-notitie bij gesprek +31621693639] waar heb je die folllow up gestuurd dan?
 - (2026-07-23) [team-notitie bij gesprek Mark Gaerthé] geen follow up verstuurd?
+- (2026-07-27) [team-notitie bij gesprek +31620365252] antwoorden
+- (2026-07-27) [team-notitie bij gesprek +31620365252] antwoord
+- (2026-07-27) [team-notitie bij gesprek +31622223964] je kunt toch checken of die offerte die ze vraagt op het zelfde adres of zelfde naam staat en sturen?m
+- (2026-07-27) [team-notitie bij gesprek +31622223964] kun je hem sturen naar haar aub en even verder helpen
+- (2026-07-27) [team-notitie bij gesprek +31622223964] kun je hem sturen naar haar aub en even verder helpen
+- (2026-07-27) [team-notitie bij e-mail Jan van Grimbergen] hij stuurt de oude algemen voorwaarde kun je hem de recente sturen en dat we net tussen een website wissel zitten
+- (2026-07-28) [team-notitie bij gesprek Egbert Muis] waarom heeft hij de offerte hier nog niet gehad terwijl je dat wel zegt? en hij heeft ook geen antwoord op ze vraag want solar is zonnecel met accu dat is gewoon zonnepaneel op de kast en accu + motor
+- (2026-07-28) [team-notitie bij gesprek +31621135613] hij geeft letterlijk aan &quot; ja dat is wat beter qua prijs&quot; dus met anderen worden dit is een beter voorstel als het eerste?
+- (2026-07-31) [team-notitie bij gesprek +31623078300] je had de bedraden offerte alvast kunnen sturen? en dan gewoon kunnen zeggen over het inmeten precies zoals altijd want die persoon zegt dus als eigenlijk akkoord dus je had bedraad kunnen sturen met de vraag of jij of hun hem zelf tekenen etc etc
+- (2026-07-31) [team-notitie bij gesprek +31646408076] waarom hbe je die losse offerte niet gewoon zelf gemaakt?
+- (2026-07-31) [team-notitie bij gesprek +31646408076] verwijder maar alle producten los van het voorraad scherm en de motage etc

@@ -1,0 +1,310 @@
+{
+ "message": "OK",
+ "quotationData": {
+  "documentId": "406cb6ad-f7d2-484b-8258-c845611aff19",
+  "versionId": "0492cc41-d45a-4e4d-b132-ac702ce5a69c",
+  "documentTitle": "Offerte #202516078",
+  "documentStatus": "SENT",
+  "documentNumber": "202516078",
+  "documentType": "QUOTATION",
+  "title": "Offerte #202516078",
+  "quotationNumber": "202516078",
+  "quotationTitle": "Offerte #202516078",
+  "quotationCreationTimestamp": 1755769014984,
+  "quotationExpirationTimestamp": 1758361014984,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "subjects": {
+   "leadConfiguration": "aabd1f52-d1e6-488e-8588-a85d227948b1",
+   "contactPerson": "a3809216-55fb-4c41-abb9-1724913c4766"
+  },
+  "segments": {
+   "defaultTemplateContactPart": {
+    "type": "contactPerson",
+    "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+   },
+   "defaultSignaturePart": {
+    "type": "signature",
+    "data": {}
+   },
+   "defaultTemplateProfileLogo": {
+    "type": "companyProfileLogo",
+    "data": "![|6lh]($companyProfile.logo)"
+   },
+   "defaultTemplateProfileText": {
+    "type": "text",
+    "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+   },
+   "defaultTemplatePriceLineGroup": {
+    "type": "priceLineGroup",
+    "data": {
+     "lines": [
+      {
+       "units": 1,
+       "description": "Markies\n- Breedte: 2700mm\n- Uitval: 1000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Handbediend\n- Montage:",
+       "pricePerUnit": 1820,
+       "vatPercentage": 21,
+       "position": 0,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Rolluik (RollSUPER)\nBreedte: 2700 mm\nHoogte: 1200 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: Wit\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar + afstandsbediening\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+       "pricePerUnit": 1359.8,
+       "vatPercentage": 21,
+       "position": 1,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Somfy Connectivity\n- Telefoon bediening Somfy motoren.",
+       "pricePerUnit": 129.27,
+       "vatPercentage": 21,
+       "position": 2,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Montage markies (Aluminium kappen)\n- montage\n- klein materiaal",
+       "pricePerUnit": 220,
+       "vatPercentage": 21,
+       "position": 3,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Montage rolluik solar ( GRATIS MONTAGE ) \n- Montage\n- Klein materiaal\n- Afstellen motor",
+       "pricePerUnit": 0,
+       "vatPercentage": 21,
+       "position": 4,
+       "lockTotalPrice": false
+      }
+     ],
+     "vatSetting": "INCL",
+     "groupDiscount": {
+      "name": "15% tijdelijke actie",
+      "amount": 15,
+      "type": "PERCENTAGE",
+      "vatPercentage": 0
+     }
+    }
+   },
+   "94f5261f-29fc-40e6-a1ef-41af602b5ab8": {
+    "type": "text",
+    "data": "**Waarom Sonty?**\n\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij u thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 500+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+   }
+  },
+  "pricing": {
+   "total": 2945.4795
+  },
+  "renderRows": [
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileLogo"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileText"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateContactPart"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "quotationData"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "priceLineGroupCombined",
+        "target": "defaultTemplatePriceLineGroup"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "94f5261f-29fc-40e6-a1ef-41af602b5ab8"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "userDecline"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "signature",
+        "target": "defaultSignaturePart"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

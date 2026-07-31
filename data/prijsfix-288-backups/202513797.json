@@ -1,0 +1,326 @@
+{
+ "message": "OK",
+ "quotationData": {
+  "documentId": "5f12288c-07fe-4b3a-aa84-8ca8cf73ea7c",
+  "versionId": "757708d8-fd2f-4c5e-bbe6-695cbb7fbef0",
+  "documentTitle": "Offerte #202513798",
+  "documentStatus": "SENT",
+  "documentNumber": "202513797",
+  "documentType": "QUOTATION",
+  "title": "Offerte #202513798",
+  "quotationNumber": "202513797",
+  "quotationTitle": "Offerte #202513798",
+  "quotationCreationTimestamp": 1751575638021,
+  "quotationExpirationTimestamp": 1754167638021,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "subjects": {
+   "leadConfiguration": "26b8a4b5-1f40-4f83-97a7-7d1767095eb8",
+   "contactPerson": "4cbc9886-a124-4f41-8364-10e49735a2c1"
+  },
+  "segments": {
+   "defaultTemplateContactPart": {
+    "type": "contactPerson",
+    "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+   },
+   "eeee8f34-b31c-48e0-a9d9-1c2bb82a862f": {
+    "type": "text",
+    "data": "**Waarom Sonty?**\n\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij u thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 500+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+   },
+   "defaultSignaturePart": {
+    "type": "signature",
+    "data": {}
+   },
+   "defaultTemplateProfileLogo": {
+    "type": "companyProfileLogo",
+    "data": "![|6lh]($companyProfile.logo)"
+   },
+   "defaultTemplateProfileText": {
+    "type": "text",
+    "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+   },
+   "defaultTemplatePriceLineGroup": {
+    "type": "priceLineGroup",
+    "data": {
+     "lines": [
+      {
+       "units": 1,
+       "description": "Suneye\nBreedte: 3650 mm\nUitval: 3000 mm\nFrame kleur: RAL 9005 structuur\nKleur doek: NTB\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+       "pricePerUnit": 3412.05,
+       "vatPercentage": 21,
+       "position": 0,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Montage Knikarmscherm uitgebreid.\n- Inclusief uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering",
+       "pricePerUnit": 300,
+       "vatPercentage": 21,
+       "position": 1,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Rolluik (RollSUPER)\nBreedte: 1850 mm\nHoogte: 1750 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: Antraciet\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Motor + afstandsbediening\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+       "pricePerUnit": 1120.28,
+       "vatPercentage": 21,
+       "position": 2,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Rolluik (RollSUPER)\nBreedte: 1000 mm\nHoogte: 1002 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: Antraciet\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Motor + afstandsbediening\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+       "pricePerUnit": 790.13,
+       "vatPercentage": 21,
+       "position": 3,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 2,
+       "description": "Montage rolluik solar\n- Montage\n- Klein materiaal\n- Afstellen motor",
+       "pricePerUnit": 150,
+       "vatPercentage": 21,
+       "position": 4,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Markies\n- Breedte: 1067mm\n- Uitval: 2000 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Draaischakelaar\n- Montage: ",
+       "pricePerUnit": 2664,
+       "vatPercentage": 21,
+       "position": 5,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Montage markies (houten kappen)\n- montage\n- klein materiaal",
+       "pricePerUnit": 300,
+       "vatPercentage": 21,
+       "position": 6,
+       "lockTotalPrice": false
+      }
+     ],
+     "vatSetting": "INCL",
+     "groupDiscount": {
+      "name": "15% tijdelijke actie",
+      "amount": 15,
+      "type": "PERCENTAGE",
+      "vatPercentage": 0
+     }
+    }
+   }
+  },
+  "pricing": {
+   "total": 7548.816
+  },
+  "renderRows": [
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileLogo"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileText"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateContactPart"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "quotationData"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "priceLineGroupCombined",
+        "target": "defaultTemplatePriceLineGroup"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "eeee8f34-b31c-48e0-a9d9-1c2bb82a862f"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "userDecline"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "signature",
+        "target": "defaultSignaturePart"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

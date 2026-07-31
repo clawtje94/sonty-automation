@@ -696,3 +696,9 @@ LET OP: er komen NU AL echte leads binnen op sonty-website.vercel.app. 24 echte 
 - Sahadet Bakiman (horren Unilux, 2 tuinschuifdeuren + ~10 ramen, Monster, ticket 970530861) vroeg zelf om opmeting aan huis; bot zette het inmeten in gang ZONDER maten te vragen of een prijs te noemen (75-regel noemde hij wel, akkoord was echt). Prompt beschreef de volgorde maar dwong hem niet af bij een directe inmeetvraag.
 - FIX (commit db9e0a2, daemons herstart): harde promptregel "eerst globale maten + prijsindicatie, dan pas inmeten, ook als de klant zelf om inmeting vraagt" (uitzondering service/reparatie) + QA-punt 12 dat inmeten-zonder-indicatie afkeurt.
 - Sahadet zelf staat al in Inmeten inplannen + escalatie naar team; de planning kan bij het belletje alsnog een indicatie afstemmen (of team stuurt vooraf een indicatie via de offerte-tool).
+
+## 2026-07-31: Bas-testversie op OpenAI Realtime API gebouwd (vergelijking met ElevenLabs)
+- Aanleiding Daimy: ChatGPT-voice klonk super goed; dat is OpenAI's speech-to-speech realtime model (geen STT->LLM->TTS-keten zoals ElevenLabs-Bas). Actuele modellen: gpt-realtime-2.1 en -2.1-mini (juli 2026).
+- Gebouwd: `voicebot-openai/` — server.js (poort 3131: mint ephemeral key via /v1/realtime/client_secrets, prijs-proxy naar sonty-website offerte-API) + index.html (WebRTC-belpagina met transcript-log, stemkeuze marin/cedar/alloy, tool-afhandeling prijs_berekenen + end_call). Zelfde prompt (data/sunny-prompt.txt) + kennisbank (data/trengo-kennisbank.md) als ElevenLabs-Bas.
+- Getest ZONDER key: server start, pagina laadt, prijs-proxy OK (rolluikS42 2000x2000 io = 1416 totaal uit live API). NOG NIET getest: de echte realtime-verbinding — wacht op OpenAI API-key van Daimy (geen key gevonden in memory/.env's). Gevraagd via Telegram 31-07.
+- Na key: .env vullen (zie .env.example), `node server.js`, http://localhost:3131, eerst zelf scenario-run (regel) vóór Daimy-oordeel stem/latency.

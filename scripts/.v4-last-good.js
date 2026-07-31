@@ -2114,16 +2114,27 @@ async function main() {
 
     // Stuur WhatsApp via Trengo (zelfde logica als oude cron-sync-rp-hubspot.js)
     try {
-      const waRes = await fetchRetry('https://app.trengo.com/api/v2/wa_sessions', {
-        method: 'POST',
-        headers: { 'Authorization': 'Bearer ' + TRENGO_TOKEN, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          recipient_phone_number: telefoon,
-          hsm_id: hsmId,
-          channel_id: 1359857,
-          params,
-        })
-      });
+      // 429-BACKOFF (Daimy 30-07): "Too Many Attempts" is de Trengo-rate-limit die we delen
+      // met de e-mail-, Sonny- en opvolg-daemons. fetchRetry retryt alleen netwerkfouten,
+      // dus een 429 viel meteen door naar MISLUKT (74x in de log). Nu: bij 429 wachten en
+      // opnieuw (45/60/90s) voordat we het echt mislukt noemen.
+      let waRes;
+      for (let poging = 1; poging <= 4; poging++) {
+        waRes = await fetchRetry('https://app.trengo.com/api/v2/wa_sessions', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + TRENGO_TOKEN, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            recipient_phone_number: telefoon,
+            hsm_id: hsmId,
+            channel_id: 1359857,
+            params,
+          })
+        });
+        if (waRes.status !== 429 || poging === 4) break;
+        const wacht = [0, 45, 60, 90][poging];
+        console.log(`  (Trengo 429 voor ${telefoon}, poging ${poging + 1}/4 over ${wacht}s)`);
+        await new Promise(r => setTimeout(r, wacht * 1000));
+      }
       if (!waRes.ok) {
         // MISLUKTE VERZENDING LAAT EEN LEEG TICKET ACHTER (Daimy 27 juli). Trengo maakt het
         // ticket aan zodra de wa_sessions-aanroep binnenkomt, ook als Meta het bericht daarna
@@ -2139,12 +2150,21 @@ async function main() {
           if (legeTicket) await fetchRetry(`https://app.trengo.com/api/v2/tickets/${legeTicket}/close`, { method: 'POST', headers: { Authorization: 'Bearer ' + TRENGO_TOKEN, 'Content-Type': 'application/json' } }).catch(() => {});
         } catch {}
         // NIET afvinken als verstuurd: dan probeert de volgende ronde het opnieuw en valt de
-        // klant niet stil. Wel melden, want anders merkt niemand het.
+        // klant niet stil. Melden: rate-limit (429) maximaal 1x per run als samenvatting
+        // (dit spamde Daimy met een melding per klant per ronde); andere fouten direct.
         try {
-          await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: 1700128390, text: `⚠️ Offerte-WhatsApp MISLUKT naar ${voornaam || '?'} (${telefoon}). Template ${hsmId}${abVariant ? ' (' + abVariant + ')' : ''}. Melding: ${fouttekst.slice(0, 150)}\n\nDe klant heeft NIETS ontvangen en is niet afgevinkt, dus de volgende ronde probeert het opnieuw.` }),
-          });
+          if (waRes.status === 429) {
+            global.__wa429 = (global.__wa429 || 0) + 1;
+            if (global.__wa429 === 1) await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+              method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ chat_id: 1700128390, text: `⚠️ Trengo-rate-limit tijdens offerte-WhatsApps (ook na 3x wachten). De getroffen klanten zijn NIET afgevinkt en gaan volgende ronde automatisch opnieuw — geen actie nodig. Details in v4.log.` }),
+            });
+          } else {
+            await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+              method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ chat_id: 1700128390, text: `⚠️ Offerte-WhatsApp MISLUKT naar ${voornaam || '?'} (${telefoon}). Template ${hsmId}${abVariant ? ' (' + abVariant + ')' : ''}. Melding: ${fouttekst.slice(0, 150)}\n\nDe klant heeft NIETS ontvangen en is niet afgevinkt, dus de volgende ronde probeert het opnieuw.` }),
+            });
+          }
         } catch {}
       }
       if (waRes.ok) {
@@ -2164,7 +2184,7 @@ async function main() {
       console.log('  WA fout ' + item.summary + ': ' + (e.message || '').substring(0, 50));
     }
 
-    await new Promise(r => setTimeout(r, 1500)); // rate limit
+    await new Promise(r => setTimeout(r, 5000)); // rate limit (1,5s gaf 429's — limiet gedeeld met 4 daemons)
   }
 
   if (waCount > 0) console.log('WhatsApp offerte verstuurd: ' + waCount);

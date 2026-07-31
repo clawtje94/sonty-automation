@@ -1,0 +1,255 @@
+{
+  "documentId": "385a2ca7-cd22-4ebf-807a-508f0d5cad2d",
+  "versionId": "9d0a2652-74e8-40c7-937b-b552ba26b66e",
+  "documentTitle": "Offerte #20269374",
+  "documentStatus": "SENT",
+  "documentNumber": "20269374",
+  "documentType": "QUOTATION",
+  "title": "Offerte #20269374",
+  "quotationNumber": "20269374",
+  "quotationTitle": "Offerte #20269374",
+  "quotationCreationTimestamp": 1765220613317,
+  "quotationExpirationTimestamp": 1767812613317,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "subjects": {
+    "leadConfiguration": "da5feef3-14d8-4de0-9631-c1562402a2ab",
+    "contactPerson": "a0d1a711-f810-4ecb-a92e-f25363157790"
+  },
+  "segments": {
+    "defaultTemplateContactPart": {
+      "type": "contactPerson",
+      "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+    },
+    "defaultSignaturePart": {
+      "type": "signature",
+      "data": {}
+    },
+    "defaultTemplateProfileLogo": {
+      "type": "companyProfileLogo",
+      "data": "![|6lh]($companyProfile.logo)"
+    },
+    "defaultTemplateProfileText": {
+      "type": "text",
+      "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+    },
+    "defaultTemplatePriceLineGroup": {
+      "type": "priceLineGroup",
+      "data": {
+        "lines": [
+          {
+            "units": 2,
+            "description": "**ROMA Rolluik**\nType: rolluik solar\nBreedte: 950 mm\nHoogte: 1600 mm\nFrame Kleur: RAL 9005 (standaard)\nKleur doek: NTB\nBediening: Solar (Somfy RS 100 IO Solar)\nMotor: Somfy RS 100 IO Solar",
+            "pricePerUnit": 1339,
+            "vatPercentage": 21,
+            "position": 0,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**ROMA Rolluik**\nType: rolluik solar\nBreedte: 1700 mm\nHoogte: 1600 mm\nFrame Kleur: RAL 9005 (standaard)\nKleur doek: NTB\nBediening: Solar (Somfy RS 100 IO Solar)\nMotor: Somfy RS 100 IO Solar",
+            "pricePerUnit": 1568,
+            "vatPercentage": 21,
+            "position": 1,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**ROMA Rolluik**\nType: rolluik solar\nBreedte: 1830 mm\nHoogte: 1600 mm\nFrame Kleur: RAL 9005 (standaard)\nKleur doek: NTB\nBediening: Solar (Somfy RS 100 IO Solar)\nMotor: Somfy RS 100 IO Solar",
+            "pricePerUnit": 1627,
+            "vatPercentage": 21,
+            "position": 2,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 4,
+            "description": "**Inmeten + montage rolluik solar**\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 175,
+            "vatPercentage": 21,
+            "position": 3,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Tahoma Switch**\n- Bedien je zonwering via de Somfy app op je telefoon\n- Tijdschema's instellen: automatisch in- en uitrollen\n- Koppelbaar met Google Home, Alexa, Philips Hue\n- Inclusief installatie en uitleg",
+            "pricePerUnit": 195,
+            "vatPercentage": 21,
+            "position": 4,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": {
+          "name": "15% Korting",
+          "amount": 15,
+          "type": "PERCENTAGE",
+          "vatPercentage": 21
+        }
+      }
+    }
+  },
+  "pricing": {
+    "total": 5752.8
+  },
+  "renderRows": [
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileLogo"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileText"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateContactPart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "quotationData"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "priceLineGroupCombined",
+              "target": "defaultTemplatePriceLineGroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "userDecline"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "signature",
+              "target": "defaultSignaturePart"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

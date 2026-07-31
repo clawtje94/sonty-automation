@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202610571",
+  "documentId": "6c7a88e4-df03-47b5-93be-16c7099f4717",
+  "name": "Arne V gils",
+  "timestamp": "2026-07-28T07:04:07.260Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suneye\nBreedte: 4481 mm\nUitval: 2500 mm\nFrame kleur: DB 703 structuur\nKleur doek: NTB\nBediening: Handbediend\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 3223.3,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

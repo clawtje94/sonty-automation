@@ -1,0 +1,345 @@
+{
+ "message": "OK",
+ "quotationData": {
+  "documentId": "e3920b68-6b68-43b1-947f-4a51f9ae1983",
+  "versionId": "0ec15e3e-c354-4cb7-b10e-c23386c12c25",
+  "documentTitle": "Offerte #202515587",
+  "documentStatus": "SENT",
+  "documentNumber": "202515586",
+  "documentType": "QUOTATION",
+  "title": "Offerte #202515587",
+  "quotationNumber": "202515586",
+  "quotationTitle": "Offerte #202515587",
+  "quotationCreationTimestamp": 1754896718086,
+  "quotationExpirationTimestamp": 1757488718086,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "subjects": {
+   "leadConfiguration": "fb2c72e6-e63d-4765-b20f-e3a0202683e4",
+   "contactPerson": "a78fc740-6656-485a-b3cf-f51a77ab70c5"
+  },
+  "segments": {
+   "defaultTemplateContactPart": {
+    "type": "contactPerson",
+    "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+   },
+   "defaultSignaturePart": {
+    "type": "signature",
+    "data": {}
+   },
+   "defaultTemplateProfileLogo": {
+    "type": "companyProfileLogo",
+    "data": "![|6lh]($companyProfile.logo)"
+   },
+   "23c12116-304e-4990-8d09-7f2d858e9ddf": {
+    "type": "text",
+    "data": "**Waarom Sonty?**\n\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij u thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 500+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+   },
+   "defaultTemplateProfileText": {
+    "type": "text",
+    "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+   },
+   "defaultTemplatePriceLineGroup": {
+    "type": "priceLineGroup",
+    "data": {
+     "lines": [
+      {
+       "units": 2,
+       "description": "Rolluik (RollSUPER)\nBreedte: 1700 mm\nHoogte: 1000 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: Crèmewit\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+       "pricePerUnit": 1172.3,
+       "vatPercentage": 21,
+       "position": 0,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Zip Design 110\nBreedte: 3300 mm\nHoogte: 2600 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9001\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+       "pricePerUnit": 2185.64,
+       "vatPercentage": 21,
+       "position": 1,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 2,
+       "description": "Montage screen solar / rolluik.\n- Montage\n- Klein materiaal\n- Afstellen motor",
+       "pricePerUnit": 150,
+       "vatPercentage": 21,
+       "position": 2,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Markies\n- Breedte: 2000mm\n- Uitval: 1000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Somfy IO motor Solar\n- Montage: ",
+       "pricePerUnit": 2285,
+       "vatPercentage": 21,
+       "position": 3,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Markies\n- Breedte: 1000mm\n- Uitval: 1000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Somfy IO motor Solar\n- Montage: ",
+       "pricePerUnit": 2029,
+       "vatPercentage": 21,
+       "position": 4,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 2,
+       "description": "Montage markies (houten kappen)\n- montage\n- klein materiaal",
+       "pricePerUnit": 220,
+       "vatPercentage": 21,
+       "position": 5,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Inklemhor:\nBreedte: 1000 mm\nHoogte: 1700 mm",
+       "pricePerUnit": 189,
+       "imageUri": "",
+       "vatPercentage": 21,
+       "position": 6,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Inklemhor:\nBreedte: 1000 mm\nHoogte: 2100 mm",
+       "pricePerUnit": 209,
+       "imageUri": "",
+       "vatPercentage": 21,
+       "position": 7,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Plisse Hordeur Dubbe;\nBreedte: 2000 mm\nHoogte: 2400 mm\nInclusief montage",
+       "pricePerUnit": 1119,
+       "imageUri": "",
+       "vatPercentage": 21,
+       "position": 8,
+       "lockTotalPrice": false
+      }
+     ],
+     "vatSetting": "INCL",
+     "groupDiscount": {
+      "name": "15% tijdelijke actie",
+      "amount": 15,
+      "type": "PERCENTAGE",
+      "vatPercentage": 0
+     }
+    }
+   }
+  },
+  "pricing": {
+   "total": 9394.913999999999
+  },
+  "renderRows": [
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileLogo"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileText"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateContactPart"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "quotationData"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "priceLineGroupCombined",
+        "target": "defaultTemplatePriceLineGroup"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "23c12116-304e-4990-8d09-7f2d858e9ddf"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "userDecline"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "signature",
+        "target": "defaultSignaturePart"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

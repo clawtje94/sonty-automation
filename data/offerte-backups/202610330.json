@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202610330",
+  "documentId": "4da91ada-2d52-40e1-a4d0-7efc32999ec0",
+  "name": "Bodhi Maas",
+  "timestamp": "2026-07-24T07:30:45.808Z",
+  "lines": [
+    {
+      "units": 6,
+      "description": "Zip Design 110\nBreedte: 950 mm\nHoogte: 1350 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1357.9,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 6,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

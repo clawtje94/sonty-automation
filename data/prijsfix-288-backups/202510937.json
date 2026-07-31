@@ -1,0 +1,416 @@
+{
+ "message": "OK",
+ "quotationData": {
+  "documentId": "89a58e6b-453a-45e7-b099-f21c71bc9324",
+  "versionId": "5ecbf42b-0303-4dd1-9514-ef8d95bcb615",
+  "documentTitle": "Offerte #202510937",
+  "documentStatus": "SENT",
+  "documentNumber": "202510937",
+  "documentType": "QUOTATION",
+  "title": "Offerte #202510937",
+  "quotationNumber": "202510937",
+  "quotationTitle": "Offerte #202510937",
+  "quotationCreationTimestamp": 1745409692554,
+  "quotationExpirationTimestamp": 1748001692554,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "subjects": {
+   "leadConfiguration": "9064f612-d356-4ac7-880e-4656cc1dea90",
+   "contactPerson": "003a4caf-ee05-437f-82a4-83dc021e43db"
+  },
+  "segments": {
+   "0ee1c6d0-c7d4-4bb7-9a76-97bca66ba3bb": {
+    "type": "text",
+    "data": "**Waarom Sonty?**\n\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij u thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 500+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+   },
+   "defaultSignaturePart": {
+    "type": "signature",
+    "data": {}
+   },
+   "defaultTemplateProfileLogo": {
+    "type": "companyProfileLogo",
+    "data": "![|8lh]($companyProfile.logo)"
+   },
+   "b5458b57-7cc0-4bfd-a00a-e4604c034780": {
+    "type": "text",
+    "data": "Vertrouwende u hiermede een passende aanbieding te hebben gedaan, danken wij u voor de daartoe geboden gelegenheid.\n\nDe geldigheidsduur van deze prijsindicatie bedraagt 14 dagen.\nVoor vragen omtrent deze prijsindicatie staan wij graag tot Uw beschikking."
+   },
+   "e0e8436b-a3a3-40c8-a1b0-b2fb2332c95b": {
+    "type": "img",
+    "data": "![|15lh](https://user-info.reuzenpanda.nl/document-service/images/731483fa-ef6b-4aae-afcf-883ec09219dd/317d8016-4f87-4001-aaaa-94313ce5094c.png)"
+   },
+   "e02960eb-e31c-44e4-9fef-391bca829c3d": {
+    "type": "text",
+    "data": "# Prijsindicatie"
+   },
+   "1c518fff-10f6-409e-a17f-cea1017cc140": {
+    "type": "text",
+    "data": "Voorwaardelijk akkoord:"
+   },
+   "defaultTemplatePriceLineGroup": {
+    "type": "priceLineGroup",
+    "data": {
+     "lines": [
+      {
+       "units": 1,
+       "description": "Zip Design 110\nBreedte: 900 mm\nHoogte: 2500 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9010\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+       "pricePerUnit": 1420,
+       "vatPercentage": 21,
+       "position": 0,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Zip Design 110\nBreedte: 1150 mm\nHoogte: 2500 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9010\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+       "pricePerUnit": 1497,
+       "vatPercentage": 21,
+       "position": 1,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Zip Design 110\nBreedte: 1290 mm\nHoogte: 2680 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9010\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+       "pricePerUnit": 1688,
+       "vatPercentage": 21,
+       "position": 2,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Zip Design 110\nBreedte: 3300 mm\nHoogte: 1965 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9010\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+       "pricePerUnit": 2059,
+       "vatPercentage": 21,
+       "position": 3,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 4,
+       "description": "Montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor",
+       "pricePerUnit": 120,
+       "vatPercentage": 21,
+       "position": 4,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Rolluik (RollSUPER)\nBreedte: 3300 mm\nHoogte: 1965 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: Wit\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+       "pricePerUnit": 1856.4,
+       "vatPercentage": 21,
+       "position": 5,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Montage rolluik solar\n- Montage\n- Klein materiaal\n- Afstellen motor",
+       "pricePerUnit": 150,
+       "vatPercentage": 21,
+       "position": 6,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Markies\n- Breedte: 3420mm\n- Uitval: 1000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Somfy IO motor Solar\n- Montage: ",
+       "pricePerUnit": 1915,
+       "vatPercentage": 21,
+       "position": 7,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Montage markies (houten kappen)\n- montage\n- klein materiaal",
+       "pricePerUnit": 220,
+       "vatPercentage": 21,
+       "position": 8,
+       "lockTotalPrice": false
+      },
+      {
+       "units": 1,
+       "description": "Somfy Connectivity\n- Telefoon bediening Somfy motoren.",
+       "pricePerUnit": 130,
+       "vatPercentage": 21,
+       "position": 9,
+       "lockTotalPrice": false
+      }
+     ],
+     "vatSetting": "INCL",
+     "groupDiscount": {
+      "name": "15% tijdelijke actie",
+      "amount": 15,
+      "type": "PERCENTAGE",
+      "vatPercentage": 0
+     }
+    }
+   },
+   "11035e82-659c-444f-a844-02ac284e206f": {
+    "type": "text"
+   },
+   "fd108533-148d-4844-85a0-a66aecf28331": {
+    "type": "text",
+    "data": "${contactPerson.name} \n${contactPerson.address}"
+   },
+   "f2d33174-60bf-4549-ac72-663b51877f41": {
+    "type": "text",
+    "data": "${companyProfile.addressLine} \n${companyProfile.postalCode} ${companyProfile.city} \nNederland\n\n**Tel:** 085 006 9681\n**Bank:** ${companyProfile.financialIBAN} \n**Btw:** ${companyProfile.financialVatNumber} \n**Kvk:** ${companyProfile.chamberOfCommerceNumber}"
+   }
+  },
+  "pricing": {
+   "total": 9549.75
+  },
+  "renderRows": [
+   {
+    "delegateMargins": false,
+    "widths": [
+     59.759304,
+     40.240696
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "fd108533-148d-4844-85a0-a66aecf28331"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "defaultTemplateProfileLogo"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "1lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     60.093716,
+     39.906284
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "e02960eb-e31c-44e4-9fef-391bca829c3d"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "f2d33174-60bf-4549-ac72-663b51877f41"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "quotationData"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "priceLineGroupCombined",
+        "target": "defaultTemplatePriceLineGroup"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "8lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "b5458b57-7cc0-4bfd-a00a-e4604c034780"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "0ee1c6d0-c7d4-4bb7-9a76-97bca66ba3bb"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     100
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "empty",
+        "target": "2lh"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "delegateMargins": false,
+    "widths": [
+     50,
+     50
+    ],
+    "columns": [
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "e0e8436b-a3a3-40c8-a1b0-b2fb2332c95b"
+       }
+      ]
+     },
+     {
+      "elements": [
+       {
+        "type": "text",
+        "target": "1c518fff-10f6-409e-a17f-cea1017cc140"
+       },
+       {
+        "type": "signature",
+        "target": "defaultSignaturePart"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

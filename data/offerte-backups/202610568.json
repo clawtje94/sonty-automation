@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202610568",
+  "documentId": "ec845764-4022-4bbc-8e30-8c505363c5d6",
+  "name": "Lesley  Planken",
+  "timestamp": "2026-07-28T07:04:12.842Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2000mm\n- Uitval: 800 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

@@ -389,5 +389,277 @@
   "kanaal": "EMAIL",
   "status": "klaar",
   "aangemaakt": 1784815881567
+ },
+ {
+  "lcId": "9aa65e2f-f547-4bc9-8254-8cd2ea505fc4",
+  "ticketId": 968604408,
+  "klantNaam": "Alexander van den Berg",
+  "producten": [
+   {
+    "product": "roma zipscreen",
+    "breedteMM": 2850,
+    "hoogteMM": 2000,
+    "bediening": "solar",
+    "framekleur": "mat antraciet (RAL nader te bepalen bij inmeten)",
+    "aantal": 1
+   },
+   {
+    "product": "roma rolluik",
+    "breedteMM": 2300,
+    "hoogteMM": 1600,
+    "bediening": "solar",
+    "framekleur": "mat antraciet (RAL nader te bepalen bij inmeten)",
+    "aantal": 2
+   },
+   {
+    "product": "roma rolluik",
+    "breedteMM": 1100,
+    "hoogteMM": 1100,
+    "bediening": "solar",
+    "framekleur": "mat antraciet (RAL nader te bepalen bij inmeten)",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1784873176384
+ },
+ {
+  "lcId": "cd129da0-e4c3-4308-8f85-6fda2fcbc59a",
+  "ticketId": 967352231,
+  "klantNaam": "Mirjam Boom-Looij",
+  "producten": [
+   {
+    "product": "suncontrol 165 zip onderdak",
+    "breedteMM": 4000,
+    "uitvalMM": 3000,
+    "bediening": "io",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1784898265915
+ },
+ {
+  "lcId": "eaa8c192-5bf2-4e78-8861-7c86aaffafa3",
+  "ticketId": 967185427,
+  "klantNaam": "Rogier Feis",
+  "producten": [
+   {
+    "product": "suneye knikarmscherm",
+    "breedteMM": 3200,
+    "uitvalMM": 3000,
+    "bediening": "io",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   },
+   {
+    "product": "markies hardhout",
+    "materiaal": "hardhout",
+    "breedteMM": 3200,
+    "uitvalMM": 900,
+    "bediening": "handbediend",
+    "aantal": 2
+   },
+   {
+    "product": "markies hardhout",
+    "materiaal": "hardhout",
+    "breedteMM": 3200,
+    "uitvalMM": 1150,
+    "bediening": "handbediend",
+    "aantal": 1
+   },
+   {
+    "product": "markies hardhout",
+    "materiaal": "hardhout",
+    "breedteMM": 1800,
+    "uitvalMM": 900,
+    "bediening": "handbediend",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "WA",
+  "status": "klaar",
+  "aangemaakt": 1785063306990
+ },
+ {
+  "lcId": "3af47786-6692-410d-94dc-ae98ecbce343",
+  "ticketId": 969319637,
+  "klantNaam": "Bé Wijkstra",
+  "producten": [
+   {
+    "product": "suneye xl knikarmscherm",
+    "breedteMM": 7400,
+    "uitvalMM": 3500,
+    "bediening": "io",
+    "framekleur": "RAL 7016 structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "WA",
+  "status": "klaar",
+  "aangemaakt": 1785156966812
+ },
+ {
+  "lcId": "49e4dffc-8b54-4ee7-ba68-aeb1304cab5e",
+  "ticketId": 968928280,
+  "klantNaam": "Solange Nouwen",
+  "producten": [
+   {
+    "product": "plissefit hordeur",
+    "breedteMM": 670,
+    "hoogteMM": 2050,
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   },
+   {
+    "product": "raamrolhor comfort",
+    "breedteMM": 1050,
+    "hoogteMM": 760,
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   },
+   {
+    "product": "raamrolhor comfort",
+    "breedteMM": 1380,
+    "hoogteMM": 610,
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1785218683263
+ },
+ {
+  "lcId": "2f4baaaa-e981-42df-bcfd-23a51ffb733b",
+  "ticketId": 969376839,
+  "klantNaam": "Timothy Timal",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 890,
+    "hoogteMM": 1597,
+    "bediening": "solar",
+    "framekleur": "RAL 9010",
+    "aantal": 5
+   },
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 2980,
+    "hoogteMM": 1223,
+    "bediening": "io",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   },
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 2430,
+    "hoogteMM": 2660,
+    "bediening": "io",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1785255083046
+ },
+ {
+  "lcId": "3715558a-8203-4e6e-9364-d7ad5f75bb1e",
+  "ticketId": 970054861,
+  "klantNaam": "Taico Aerts en Carolin Brandt",
+  "producten": [
+   {
+    "product": "roma rolluik",
+    "breedteMM": 2080,
+    "hoogteMM": 2020,
+    "bediening": "solar",
+    "framekleur": "RAL 7016",
+    "aantal": 1
+   },
+   {
+    "product": "roma rolluik",
+    "breedteMM": 1580,
+    "hoogteMM": 2020,
+    "bediening": "solar",
+    "framekleur": "RAL 7016",
+    "aantal": 2
+   },
+   {
+    "product": "roma rolluik",
+    "breedteMM": 2740,
+    "hoogteMM": 1440,
+    "bediening": "solar",
+    "framekleur": "RAL 7016",
+    "aantal": 1
+   },
+   {
+    "product": "suneye knikarmscherm",
+    "breedteMM": 4000,
+    "uitvalMM": 2500,
+    "bediening": "io",
+    "framekleur": "RAL 7016 structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1785344331376
+ },
+ {
+  "lcId": "75b468da-f7e5-4df0-8137-387a552cfb84",
+  "ticketId": 969934026,
+  "klantNaam": "Marinella Kramer",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 2120,
+    "hoogteMM": 1650,
+    "bediening": "solar",
+    "framekleur": "antraciet",
+    "aantal": 2
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1785431208573
+ },
+ {
+  "lcId": "054794eb-2976-4d38-b753-101e773e3985",
+  "ticketId": 970404437,
+  "klantNaam": "Jan de Bont",
+  "producten": [
+   {
+    "product": "zip design 110",
+    "breedteMM": 2623,
+    "hoogteMM": 1000,
+    "bediening": "draaischakelaar",
+    "framekleur": "RAL 9005 structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 1021,
+    "hoogteMM": 1153,
+    "bediening": "draaischakelaar",
+    "framekleur": "RAL 9005 structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1785477738219
  }
 ]

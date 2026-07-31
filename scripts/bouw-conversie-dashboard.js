@@ -1,0 +1,150 @@
+#!/usr/bin/env node
+// CONVERSIE-DASHBOARD (opdracht Daimy 31 juli): conversie% per productgroep en per
+// platform, per maand, met jaartabs. Wordt als statische pagina op sonty.nl gezet
+// (public/dashboards/conversie.html) en wekelijks ververst via update-dashboard.sh.
+// Toegang: zelfde code als het belscherm (client-side poort, zoals /admin/belscherm).
+const fs = require('fs');
+const path = require('path');
+
+const JAREN = [2026, 2025, 2024];
+const D = {};
+for (const j of JAREN) D[j] = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', `conversie-${j}-tabellen.json`), 'utf8'));
+
+const MND = ['', 'jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+const pc = (a, b) => b ? a / b * 100 : null;
+const f1 = n => n.toFixed(1).replace('.', ',');
+const heat = v => v === null ? 'leeg' : 'h' + Math.min(6, Math.max(0, Math.round(v / 45 * 6)));
+const nu = new Date();
+const stand = nu.toLocaleString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+// Rijpheid: offertes rijpen ~45-60 dagen na; markeer maanden jonger dan 60 dagen.
+const onrijp = (jaar, maand) => (nu - new Date(jaar, maand, 0)) / 864e5 < 60;
+
+const PLATFORMS = ['Google', 'Meta', 'Buren/Bekenden', 'Anders'];
+const prodVolgorde = j => Object.entries(D[j].product)
+  .filter(([k, v]) => v.off >= 60 && k !== 'Niet ingevuld')
+  .sort((a, b) => b[1].off - a[1].off).map(([k]) => k);
+
+function celTd(jaar, n, akk, m) {
+  if (!n) return '<td class="leeg">—</td>';
+  const v = pc(akk, n);
+  const ster = onrijp(jaar, m) ? '<i>*</i>' : '';
+  return `<td class="${heat(v)}" title="${akk} akkoord op ${n} offertes">${Math.round(v)}%${ster}<span>${n}</span></td>`;
+}
+
+function jaarBlok(jaar) {
+  const d = D[jaar];
+  const maanden = d.maandenAanwezig;
+  const H = [];
+  const t = d.totaal.alles;
+  H.push(`<div class="jaar" id="jaar-${jaar}">`);
+  H.push(`<div class="kpis">
+<div class="kpi"><b>Offertes</b><span>${t.off.toLocaleString('nl-NL')}</span></div>
+<div class="kpi"><b>Akkoord</b><span>${t.akk.toLocaleString('nl-NL')}</span></div>
+<div class="kpi"><b>Conversie</b><span>${f1(pc(t.akk, t.off))}%</span></div>
+<div class="kpi"><b>Omzet akkoord</b><span>€${Math.round(t.omzet / 1000).toLocaleString('nl-NL')}k</span></div>
+</div>`);
+
+  // per platform
+  H.push(`<h2>Per platform</h2><div class="scroll"><table><thead><tr><th></th>${maanden.map(m => `<th>${MND[m]}</th>`).join('')}<th>jaar</th></tr></thead><tbody>`);
+  for (const p of PLATFORMS) {
+    let to = 0, ta = 0;
+    const cellen = maanden.map(m => { const c = d.maandGroep[m + '|' + p] || { off: 0, akk: 0 };
+      to += c.off; ta += c.akk; return celTd(jaar, c.off, c.akk, m); }).join('');
+    H.push(`<tr><th>${p}</th>${cellen}<td class="tot">${to ? f1(pc(ta, to)) + '%' : '—'}<span>${to.toLocaleString('nl-NL')}</span></td></tr>`);
+  }
+  // kanaal-rijen
+  for (const k of ['Winkel', 'Online']) {
+    let to = 0, ta = 0;
+    const cellen = maanden.map(m => { const c = d.maandKanaal[m + '|' + k] || { off: 0, akk: 0 };
+      to += c.off; ta += c.akk; return celTd(jaar, c.off, c.akk, m); }).join('');
+    H.push(`<tr class="kanaal"><th>${k === 'Winkel' ? 'Showroom' : 'Online'}</th>${cellen}<td class="tot">${to ? f1(pc(ta, to)) + '%' : '—'}<span>${to.toLocaleString('nl-NL')}</span></td></tr>`);
+  }
+  H.push(`</tbody></table></div>`);
+
+  // per productgroep
+  H.push(`<h2>Per productgroep</h2><div class="scroll"><table><thead><tr><th></th>${maanden.map(m => `<th>${MND[m]}</th>`).join('')}<th>jaar</th></tr></thead><tbody>`);
+  for (const p of prodVolgorde(jaar)) {
+    const jt = D[jaar].product[p];
+    const cellen = maanden.map(m => { const c = d.maandProduct[m + '|' + p] || { off: 0, akk: 0 };
+      return celTd(jaar, c.off, c.akk, m); }).join('');
+    H.push(`<tr><th>${p}</th>${cellen}<td class="tot">${f1(pc(jt.akk, jt.off))}%<span>${jt.off.toLocaleString('nl-NL')}</span></td></tr>`);
+  }
+  H.push(`</tbody></table></div></div>`);
+  return H.join('\n');
+}
+
+const html = `<!doctype html><html lang="nl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Sonty · Conversie-dashboard</title>
+<style>
+:root{--surface:#FAF8F5;--surface-2:#FFF;--ink:#1C1815;--ink-2:#554D45;--ink-3:#8A8078;
+--rule:#E4DDD3;--accent:#D95F02;
+--h0:#FBF3EA;--h1:#F7E2CB;--h2:#F1C79E;--h3:#E7A76B;--h4:#D9853B;--h5:#BC6716;--h6:#944C09;
+--h0i:#6B6259;--h1i:#4A3B28;--h2i:#3A2C1A;--h3i:#2E2112;--h4i:#FFF6EC;--h5i:#FFF6EC;--h6i:#FFF6EC;}
+@media(prefers-color-scheme:dark){:root{--surface:#14110E;--surface-2:#1D1916;--ink:#F5F0EA;--ink-2:#B5ABA1;--ink-3:#7E756C;--rule:#302A24;--accent:#FF8438;
+--h0:#1B1712;--h1:#2C2318;--h2:#42311C;--h3:#5B4220;--h4:#7A5626;--h5:#9C6C2C;--h6:#C08536;
+--h0i:#7E756C;--h1i:#C0A98C;--h2i:#E5CDA9;--h3i:#F6E3C6;--h4i:#FFF3E2;--h5i:#FFF6EC;--h6i:#1B1712;}}
+*{box-sizing:border-box}body{margin:0;background:var(--surface);color:var(--ink);
+font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:15px;line-height:1.5}
+.wrap{max-width:1150px;margin:0 auto;padding:1.2rem clamp(.8rem,3vw,2rem) 3rem}
+header{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;margin:.6rem 0 1rem}
+header h1{font-size:1.35rem;margin:0;letter-spacing:-.02em}
+header .stand{color:var(--ink-3);font-size:.78rem}
+.tabs{display:flex;gap:.4rem;margin:0 0 1.2rem}
+.tabs button{font:inherit;font-weight:650;padding:.45rem 1rem;border:1px solid var(--rule);
+background:var(--surface-2);color:var(--ink-2);border-radius:6px;cursor:pointer}
+.tabs button.actief{background:var(--accent);border-color:var(--accent);color:#fff}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:1.4rem}
+.kpi{background:var(--surface-2);padding:.7rem .9rem}
+.kpi b{display:block;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.kpi span{font-size:1.35rem;font-weight:750;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+h2{font-size:1.02rem;margin:1.4rem 0 .5rem;letter-spacing:-.01em}
+.scroll{overflow-x:auto;border:1px solid var(--rule);background:var(--surface-2)}
+table{border-collapse:collapse;width:100%;font-size:.8rem}
+th,td{padding:.42rem .5rem;text-align:right;border-bottom:1px solid var(--rule);white-space:nowrap;font-variant-numeric:tabular-nums}
+thead th{font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);position:sticky;top:0;background:var(--surface-2)}
+tbody th{text-align:left;font-weight:600;position:sticky;left:0;background:var(--surface-2)}
+tr.kanaal th{color:var(--ink-3);font-style:italic}
+td span{display:block;font-size:.62rem;opacity:.65;font-weight:400}
+td i{font-style:normal;opacity:.7}
+td.tot{font-weight:700}
+td.leeg{color:var(--ink-3)}
+td.h0{background:var(--h0);color:var(--h0i)}td.h1{background:var(--h1);color:var(--h1i)}
+td.h2{background:var(--h2);color:var(--h2i)}td.h3{background:var(--h3);color:var(--h3i)}
+td.h4{background:var(--h4);color:var(--h4i)}td.h5{background:var(--h5);color:var(--h5i)}
+td.h6{background:var(--h6);color:var(--h6i)}
+.legenda{display:flex;gap:.5rem;align-items:center;color:var(--ink-3);font-size:.72rem;margin:.8rem 0 0;flex-wrap:wrap}
+.legenda .cells{display:flex}.legenda .cells i{width:18px;height:10px;display:block}
+footer{color:var(--ink-3);font-size:.75rem;margin-top:1.6rem;max-width:75ch}
+#poort{position:fixed;inset:0;background:var(--surface);display:flex;align-items:center;justify-content:center;z-index:9}
+#poort form{background:var(--surface-2);border:1px solid var(--rule);padding:2rem;border-radius:8px;text-align:center}
+#poort input{font:inherit;padding:.5rem .8rem;border:1px solid var(--rule);border-radius:6px;background:var(--surface);color:var(--ink);margin-top:.8rem;text-align:center}
+#poort button{font:inherit;font-weight:650;margin-top:.8rem;padding:.5rem 1.4rem;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;display:block;width:100%}
+.verborgen{display:none!important}
+</style></head><body>
+<div id="poort"><form onsubmit="return controleer(event)"><b>Sonty dashboard</b><br>
+<input id="code" type="password" placeholder="toegangscode" autofocus><button>Open</button></form></div>
+<div class="wrap verborgen" id="inhoud">
+<header><h1>Conversie per product &amp; platform</h1><span class="stand">bijgewerkt ${stand} · ververst elke maandagochtend</span></header>
+<div class="tabs">${JAREN.map((j, i) => `<button class="${i === 0 ? 'actief' : ''}" onclick="kies(${j},this)">${j}</button>`).join('')}</div>
+${JAREN.map((j, i) => jaarBlok(j)).join('\n')}
+<div class="legenda"><span>0%</span><span class="cells">${[0,1,2,3,4,5,6].map(i => `<i style="background:var(--h${i})"></i>`).join('')}</span><span>45%+</span><span>· klein getal = aantal offertes · * = maand jonger dan 60 dagen, rijpt nog na (mediaan 24 dagen tot akkoord)</span></div>
+<footer>Akkoord = inkoopkolom gevuld (ook €1-markering) of akkoord-blok (Gripp-nummer / akkoorddatum / akkoordbedrag) — definitie Daimy 28 juli. Platform Meta = Facebook + Instagram samengevoegd (labelwissel medio 2025). Bron: offerteregister-sheet, automatisch uitgelezen. 2024 begint in mei (eerdere maanden staan niet in de sheet).</footer>
+</div>
+<script>
+function kies(j,btn){document.querySelectorAll('.jaar').forEach(e=>e.classList.add('verborgen'));
+document.getElementById('jaar-'+j).classList.remove('verborgen');
+document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('actief'));btn.classList.add('actief');}
+document.querySelectorAll('.jaar').forEach((e,i)=>{if(i>0)e.classList.add('verborgen')});
+function open_(){document.getElementById('poort').classList.add('verborgen');document.getElementById('inhoud').classList.remove('verborgen');}
+function controleer(ev){ev.preventDefault();const c=document.getElementById('code').value.trim();
+if(c==='sonty2288'){localStorage.setItem('sonty-dash','1');open_();}else{document.getElementById('code').value='';document.getElementById('code').placeholder='onjuiste code';}return false;}
+if(localStorage.getItem('sonty-dash')==='1')open_();
+</script></body></html>`;
+
+const uit = path.join(process.env.HOME, 'sonty-website', 'public', 'dashboards', 'conversie.html');
+fs.mkdirSync(path.dirname(uit), { recursive: true });
+fs.writeFileSync(uit, html);
+console.log('geschreven:', uit, (fs.statSync(uit).size / 1024).toFixed(0) + ' kB');

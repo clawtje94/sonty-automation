@@ -128,6 +128,7 @@ function duur(uren) {
     wachtend.push({
       id: t.id,
       uren,
+      teamId: t.team_id || null,
       wie: t.user_id ? (USERS[t.user_id] || `user ${t.user_id}`) : null,
       naam: t.contact?.full_name || t.contact?.phone || t.contact?.email || 'onbekend',
       kanaal: t.channel?.type === 'WA_BUSINESS' ? 'WA' : 'mail',
@@ -158,32 +159,25 @@ function duur(uren) {
     return;
   }
 
-  // ── SPOED-ALARM (Daimy 31-07, casus Katie 962345594: klacht van betalende klant met
-  // aanbetaling stond 3 dagen onbeantwoord terwijl ze alleen als regeltje in het
-  // verzamelrapport voorbijkwam). Elke WA-klant die 4+ uur wacht en waar het 24-uurs
-  // venster NOG OPEN is, krijgt een EIGEN Telegram-melding zodat er nog gewoon
-  // geantwoord kan worden. Klacht-signalen krijgen een schreeuwende kop.
-  // Dedupe: max 1 alarm per ticket per 12 uur (data/ai-ks/wachtlijst-alarmen.json).
-  const ALARM_STATE = path.join(__dirname, '..', '..', 'data', 'ai-ks', 'wachtlijst-alarmen.json');
-  let alarmState = {};
-  try { alarmState = JSON.parse(fs.readFileSync(ALARM_STATE, 'utf8')); } catch {}
-  const KLACHT_RE = /aanbetaling|klacht|niets (meer )?(gehoord|vernomen)|geen (reactie|antwoord|bevestiging)|nog steeds niks|belachelijk|teleurgesteld|slechte service|wanneer hoor ik/i;
-  const spoed = wachtend.filter((w) => w.kanaal === 'WA' && w.uren >= DREMPEL_UREN && w.uren < 24);
-  let alarmen = 0;
-  for (const w of spoed) {
-    const vorige = alarmState[w.id];
-    if (vorige && Date.now() - new Date(vorige).getTime() < 12 * 3600000) continue;
-    if (alarmen >= 5) break; // nooit een alarmenregen; de rest staat in het verzamelrapport
-    const isKlacht = KLACHT_RE.test(w.tekst || '');
-    const kop = isKlacht ? '‼️ SPOED, KLACHT ONBEANTWOORD' : '⏰ SPOED, klant wacht op antwoord';
-    await telegram(`${kop}\n${w.naam} (WA, ticket ${w.id}) wacht al ${duur(w.uren)}${w.wie ? `, toegewezen aan ${w.wie}` : ', niet toegewezen'}.\nWhatsApp-venster sluit over ${Math.max(1, Math.round(24 - w.uren))} uur, daarna kan er alleen nog gebeld worden.\n\nLaatste bericht: "${(w.tekst || '').substring(0, 300)}"`);
-    alarmState[w.id] = new Date().toISOString();
-    alarmen++;
+  // ── NAAR MENS NODIG-TEAM (Daimy 31-07, casus Katie 962345594: "geen spoed-alarmen,
+  // heel mijn Telegram is een zooi — tickets moeten gewoon naar het Mens nodig-team").
+  // Elke wachtende klant zonder toegewezen agent die nog niet in team Mens nodig (431872)
+  // ligt, wordt hier automatisch aan dat team toegewezen + gelabeld. Stil, geen Telegram.
+  const MENS_TEAM = 431872, LABEL_MENS = 1821764;
+  const H2 = { Authorization: 'Bearer ' + jwt, 'Content-Type': 'application/json' };
+  let doorgezet = 0;
+  for (const w of wachtend) {
+    if (w.wie) continue;                       // al bij een mens, die is verantwoordelijk
+    if (Number(w.teamId) === MENS_TEAM) continue; // ligt al in de Mens nodig-map
+    if (DRY) { console.log(`  [dry] zou #${w.id} (${w.naam}) naar Mens nodig-team zetten`); doorgezet++; continue; }
+    try {
+      await fetch(`https://app.trengo.com/api/v2/tickets/${w.id}/assign`, { method: 'POST', headers: H2, body: JSON.stringify({ type: 'team', team_id: MENS_TEAM }) });
+      await fetch(`https://app.trengo.com/api/v2/tickets/${w.id}/labels`, { method: 'POST', headers: H2, body: JSON.stringify({ label_id: LABEL_MENS }) }).catch(() => {});
+      doorgezet++;
+      console.log(`  → #${w.id} (${w.naam}, wacht ${duur(w.uren)}) naar Mens nodig-team gezet`);
+    } catch (e) { console.error(`  toewijzen #${w.id} mislukt:`, e.message); }
   }
-  if (alarmen) {
-    if (!DRY) fs.writeFileSync(ALARM_STATE, JSON.stringify(alarmState, null, 1));
-    console.log(`${alarmen} spoed-alarm(en) ${DRY ? 'ZOUDEN verstuurd worden (dry)' : 'apart verstuurd'}`);
-  }
+  if (doorgezet) console.log(`${doorgezet} wachtende klant(en) ${DRY ? 'zouden' : ''} naar het Mens nodig-team ${DRY ? 'gaan' : 'gezet'}`);
 
   // Toegewezen gevallen eerst: daar is iemand verantwoordelijk en gebeurt er tóch niets.
   const toegewezen = wachtend.filter((w) => w.wie);
@@ -221,6 +215,10 @@ function duur(uren) {
   if (vrij.length) bericht += `\nNiet toegewezen (${vrij.length}), langst wachtend:\n${vrij.slice(0, 8).map(regel).join('\n')}\n`;
 
   console.log('\n' + bericht);
+  // Rapport-Telegram alleen in de ochtend- en middagrun (Daimy wil minder Telegram-ruis);
+  // de team-toewijzing hierboven draait wel elke run.
+  const uurNu = Number(new Intl.DateTimeFormat('nl-NL', { timeZone: 'Europe/Amsterdam', hour: 'numeric', hourCycle: 'h23' }).format(new Date()));
+  if (uurNu !== 8 && uurNu !== 16) { console.log('(geen rapport-Telegram op dit uur, alleen team-toewijzing)'); return; }
   // Telegram kapt af op 4096 tekens; ruim eronder blijven en dat eerlijk melden.
   await telegram(bericht.length > 3800 ? bericht.substring(0, 3800) + '\n\n(afgekapt, zie volledige lijst met: node scripts/ai-ks/onbeantwoord-wachtlijst.js --dry)' : bericht);
 })().catch((e) => { console.error('FOUT:', e.message); process.exit(1); });

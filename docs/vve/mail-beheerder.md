@@ -1,4 +1,36 @@
-# Mail aan VvE-beheerkantoren — DEFINITIEF CONCEPT v2 (2026-07-31, wacht op akkoord Daimy)
+# Mail aan VvE-beheerkantoren
+
+## v3 = ACTUEEL (2026-07-31, na feedback Daimy: "te veel beloften, insteek = op gesprek komen")
+
+Kort, niets claimen, één vraag: half uur langskomen op hún kantoor. De aanpak en
+het protocol komen pas op tafel in het gesprek. Onderwerp: "Zonwering in uw
+VvE-portefeuille, kort kennismaken?"
+
+> Beste team van {{kantoor}},
+>
+> {{persoonlijke openingsregel}}
+>
+> Wij zijn Sonty, zonweringsspecialist uit Berkel en Rodenrijs, en we werken
+> steeds vaker voor VvE's in Zuid-Holland. Daarbij valt ons op dat zonwering
+> voor beheerders vooral gedoe is: eigenaren die iets aan de gevel willen,
+> besturen die twijfelen wat ze moeten toestaan, en niemand die er beleid voor
+> wil schrijven.
+>
+> Wij hebben daar een aanpak voor ontwikkeld en ik ben benieuwd hoe uw kantoor
+> dit nu oplost. Mag ik daarover een half uur bij u langskomen? Ik kom graag
+> naar uw kantoor, op een moment dat het u uitkomt.
+>
+> Met vriendelijke groet,
+> Daimy Boot — Sonty | sonty.nl
+> *Liever geen mail van ons ontvangen? Eén reply met "afmelden" volstaat.*
+
+De 6 kant-en-klare versies zijn 2026-07-31 via Telegram aan Daimy geleverd
+(verstuurt zelf vanaf de nieuwe VvE-mailbox). In het gesprek zelf: v2-inhoud
+hieronder (protocol, één loket, garanties, pilotgebouw).
+
+---
+
+# ARCHIEF: v2 (te veel beloften voor koude mail; inhoud = gespreksmateriaal)
 
 Verzenden vanaf info@sonty.nl, één voor één (geen bulk), persoonlijke openingsregel
 per kantoor. Ondertekening: Daimy Boot (of wie Daimy aanwijst). Opvolgen: bellen

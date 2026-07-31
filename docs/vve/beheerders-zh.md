@@ -54,3 +54,10 @@ sites (7 geverifieerd op dag 1, zie tabel). Wolting (landelijk, geen e-mail),
 Apollo (abo voor ~20 lookups) en AdHoc (postadressen die BAG al gratis geeft)
 zijn de dure omweg. Herzien pas als na ~20 beheerder-gesprekken blijkt dat we
 meer nodig hebben. Zelfstandige VvE's: brief + QR → opt-in mail (enige route).
+
+## Nieuw ontdekt via mail-jacht Voorburg/Leidschendam (2026-07-31)
+
+- Winter Valkenier VvE Beheer B.V. (VvE Prinses Annalaan)
+- BKS Beheer B.V. (Carolina Parc, "waarschijnlijk")
+- Schep Vastgoedmanagers ("mogelijk")
+- K & C Eigendom Management B.V. — Zoetermeer (VvE Dr. J.W. Paltelaan II, info@kencvve.nl)

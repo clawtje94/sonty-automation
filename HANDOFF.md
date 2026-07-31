@@ -746,3 +746,8 @@ LET OP: er komen NU AL echte leads binnen op sonty-website.vercel.app. 24 echte 
 - Harde TAAL/ACCENT-instructie toegevoegd (uitsluitend Nederlands, native accent). EERLIJKE BEPERKING: OpenAI heeft géén native Nederlandse stemmen (marin/cedar/alloy zijn meertalig, accent kan doorklinken); ElevenLabs heeft wel echte NL-stemmen (Ido). Accent-oordeel = Daimy.
 - Zelfde wijzigingen in ~/sonty/voicebot-openai (bas-config.js + index.html) gesynct. Website-commit f34e342, deploy success.
 - Vervolg stemmen: alle 10 API-stemmen in het menu (cedar* default, marin, ash, ballad, coral, echo, sage, shimmer, verse, alloy), live geverifieerd na inlog. Uitleg aan Daimy: ChatGPT-voice = zelfde techniek maar eigen stemmenset + eigen taalsturing; cedar/marin zijn de nieuwste API-stemmen en Daimys eerste test was vóór de accent-instructie. Plan B als accent stoort: OpenAI-brein + ElevenLabs NL-stem combineren.
+
+## 2026-07-31: WACHTLIJST-meldingen uitgezet (verzoek Daimy)
+- Daimy wil de "⏳ WACHTLIJST"-Telegram-rapporten niet meer ontvangen. launchd nl.sonty.wachtlijst uitgezet (bootout), plist hernoemd naar .disabled. Script blijft bestaan; handmatig: node scripts/ai-ks/onbeantwoord-wachtlijst.js --dry.
+- LET OP: dit was het vangnet voor klanten die stilvallen bij toegewezen collega's (aanleiding: Herman van Kaam/Pim, 2 dagen onbeantwoord). Alternatief (bv. 1x per dag kort, of alleen bij WA-venster-verloop) voorgesteld aan Daimy, wacht op antwoord.
+- ✅-commitberichten (olivida keepalive) waren al gestopt per prompt-regel 30-07.

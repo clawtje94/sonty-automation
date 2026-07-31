@@ -711,3 +711,9 @@ LET OP: er komen NU AL echte leads binnen op sonty-website.vercel.app. 24 echte 
 - WebRTC-belflow headless getest (Playwright, nepmicrofoon + testvraag via datakanaal): sessie/SDP/datakanaal/audio-transcript/toolcalls allemaal OK; bug gefixt (2 toolcalls in 1 beurt gaf "active response"-fout, nu 1 response.create na alle tooluitkomsten). Screenshot-check gedaan.
 - Server DRAAIT (nohup, poort 3131). Daimy testen: http://localhost:3131 → stem kiezen (marin/cedar/alloy) → Bel Bas. Kosten ±€0,30/belminuut totaal.
 - Open punten: stem/latency-oordeel Daimy (A/B tegen ElevenLabs-Bas), daarna beslissen over overstap; bij echte uitrol: tier-upgrade of RAG houden, telefonie via SIP, en kennisbank-zoeker evt. slimmer maken.
+
+## 2026-07-31 (later): OpenAI-Bas nu op Vercel — /admin/voicebot (Daimys Mac is remote, localhost ging niet)
+- sonty-website: app/admin/voicebot (client, codegate = belscherm-code via localStorage "belscherm-code"), app/api/voicebot/session + /kennisbank (x-bel-code verplicht, 401 zonder), lib/voicebot/config.ts + data.json (kopie sunny-prompt + trengo-kennisbank; bron blijft ~/sonty/data). Prijs-tool via bestaand /api/offerte-tool (same origin). OPENAI_API_KEY staat als Vercel production-env (via CLI).
+- BUG ONDERWEG GEVONDEN: site-brede Permissions-Policy blokkeerde microphone → mic-fix: microphone=(self) alleen op /admin/voicebot (next.config.ts). Ook: responsive-audit gaf eerst VALS OK omdat er nog een oude dev-server op 3123 hing (gekilld, herstart, opnieuw geauditeerd: echt OK).
+- Live geverifieerd op productie: pagina + codegate OK, session-API mint ephemeral key, kennisbank-API zoekt goed, headless Playwright-beltest verbindt echt ("Verbonden"), screenshots gecheckt. Commits c0a72df + header-fix, deploys success.
+- Daimy testen (ook op telefoon): https://sonty-website.vercel.app/admin/voicebot — code sonty2288, stem kiezen, Bel Bas, mic toestaan.

@@ -40,3 +40,14 @@ per telefoon na 5 werkdagen. T&T eerst: buurman-verhaal, evt. gewoon langsgaan.
 - **Infofolio VvE Dataplatform** (infofolio.nl) — platform met alle VvE-complexen + adresscanner.
 - **Wolting Marketing Support** — GEVERIFIEERD (site, 2026-07-30): bestand van 265 VvE-beheerkantoren NL met 147 contactpersonen (namen+functies), NAW, telefoon, websites; GEEN e-mail (mag wettelijk niet geleverd). €250 ex btw eenmalig, €90/jr updates, Excel, proefbestand op aanvraag. Beste voor beheerder-spoor; mailadressen zoeken we zelf per kantoor via hun site.
 - Verwachting: sterk in postadressen + VvE→beheerder-koppeling; e-mail beperkt (opt-in-regels, vooral info@).
+
+## Definitieve mailadres-strategie (advies 2026-07-31)
+
+1. **Wolting** kopen (€250): 265 beheerkantoren, namen+functies+tel.
+2. **Apollo.io of Hunter.io** (±€0-50/mnd, indicatie): zakelijke e-mailadressen
+   vinden/verifiëren op naam+domein bij de Wolting-contacten → beslissers mailbaar.
+3. **AdHoc Data** (offerte): VvE→beheerder-koppeling per gebouw, matchen met radar.
+4. **Zelfstandige VvE's**: brief + QR → landingspagina → opt-in mailflow
+   (geen register van bestuurs-mailadressen; dit is de enige nette route).
+
+Status: wacht op Daimy — bestelwijze (info@-toegang of zelf bestellen) + Apollo-account.

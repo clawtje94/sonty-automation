@@ -9,8 +9,16 @@ const fs = require('fs');
 const path = require('path');
 const BASIS = path.join(__dirname, '..', 'data');
 const isAkk = r => r.inkoop > 0 || r.akkoordBedrag > 0 || /^\d{3,6}$/.test(r.nummer || '') || !!r.akkoordDatum;
-const BRON = { Meta: r => /^face|^insta/.test(String(r.afkomst || '').trim().toLowerCase()),
-               Google: r => /^goog/.test(String(r.afkomst || '').trim().toLowerCase()) };
+// Alle brongroepen (Daimy 31-07: ook winkel/anders/de rest meenemen). Showroom-orders
+// tellen bij hun afkomst; de niet-betaalde bronnen zijn buren/bekenden, anders, onbekend.
+const groepVan = r => { const t = String(r.afkomst || '').trim().toLowerCase();
+  if (/^face|^insta/.test(t)) return 'Meta';
+  if (/^goog/.test(t)) return 'Google';
+  if (/beken|buren/.test(t)) return 'Buren/bekenden';
+  if (!t || t === '(leeg)') return 'Onbekend';
+  return 'Anders'; };
+const BRON = { Meta: r => groepVan(r) === 'Meta', Google: r => groepVan(r) === 'Google' };
+const ALLE_GROEPEN = ['Meta', 'Google', 'Buren/bekenden', 'Anders', 'Onbekend'];
 // fijne productbuckets
 const PROD = p => { const t = String(p || '').trim().toLowerCase();
   if (t.startsWith('rolluik')) return 'Rolluiken';
@@ -47,19 +55,19 @@ const orderCijfers = r => { const omzet = r.akkoordBedrag || r.bedrag || 0;
   const inkoop = r.inkoop > 1 ? r.inkoop : omzet * ratio(PROD(r.prod) || 'overig');
   return { omzet, marge: omzet - inkoop }; };
 
-const per = {};      // platform|maand|bucket -> {off,akk,omzet,marge}
-const platTot = {};  // platform|maand -> alle offertes/orders van die bron (élk product, ook onbekend)
+const per = {};      // platform|maand|bucket -> {off,akk,omzet,marge} (alleen Meta/Google, voor campagnes)
+const platTot = {};  // groep|maand -> alle offertes/orders van die bron
 for (const r of rows) {
-  for (const [plat, test] of Object.entries(BRON)) { if (!test(r)) continue;
-    const maand = `2026-${String(r.maand).padStart(2, '0')}`;
-    const pt = (platTot[`${plat}|${maand}`] = platTot[`${plat}|${maand}`] || { off: 0, akk: 0, omzet: 0, marge: 0 });
-    pt.off++;
-    const p = PROD(r.prod);
-    const m = p ? (per[`${plat}|${maand}|${p}`] = per[`${plat}|${maand}|${p}`] || { off: 0, akk: 0, omzet: 0, marge: 0 }) : null;
-    if (m) m.off++;
-    if (isAkk(r)) { const c = orderCijfers(r);
-      pt.akk++; pt.omzet += c.omzet; pt.marge += c.marge;
-      if (m) { m.akk++; m.omzet += c.omzet; m.marge += c.marge; } } }
+  const groep = groepVan(r);
+  const maand = `2026-${String(r.maand).padStart(2, '0')}`;
+  const pt = (platTot[`${groep}|${maand}`] = platTot[`${groep}|${maand}`] || { off: 0, akk: 0, omzet: 0, marge: 0 });
+  pt.off++;
+  const p = (groep === 'Meta' || groep === 'Google') ? PROD(r.prod) : null;
+  const m = p ? (per[`${groep}|${maand}|${p}`] = per[`${groep}|${maand}|${p}`] || { off: 0, akk: 0, omzet: 0, marge: 0 }) : null;
+  if (m) m.off++;
+  if (isAkk(r)) { const c = orderCijfers(r);
+    pt.akk++; pt.omzet += c.omzet; pt.marge += c.marge;
+    if (m) { m.akk++; m.omzet += c.omzet; m.marge += c.marge; } }
 }
 // ECHTE MAANDLASTEN (Daimy 31 juli): elk maandtab heeft een lasten-blok = alle
 // bedrijfslasten van die maand behalve ad spend (monteurs, buslease, overhead).
@@ -106,8 +114,10 @@ for (const [plat, bestand] of Object.entries(BRONNEN)) {
 }
 const platformen = {};
 for (const [k, t] of Object.entries(platTot)) {
-  const spend = spendTot[k]; if (spend === undefined) continue;
   const [plat, maand] = k.split('|');
+  // Ad spend alleen bij Meta/Google; gratis bronnen krijgen 0 maar dragen wel lasten.
+  const spend = spendTot[k] !== undefined ? spendTot[k] : ((plat === 'Meta' || plat === 'Google') ? undefined : 0);
+  if (spend === undefined) continue;
   (platformen[plat] = platformen[plat] || {})[maand] = { spend: +spend.toFixed(0), ...t,
     omzet: +t.omzet.toFixed(0), marge: +t.marge.toFixed(0), margeEx: +(t.marge / EX).toFixed(0),
     lasten: +(t.akk * lastenPerOrder(maand)).toFixed(0),

@@ -1,5 +1,5 @@
 {
- "peildatum": "2026-07-31T13:07:39.013Z",
+ "peildatum": "2026-07-31T14:05:31.109Z",
  "lasten": {
   "2026-01": {
    "lasten": 82500,
@@ -1576,6 +1576,222 @@
     "margeEx": 52929,
     "lasten": 31364,
     "netto": -16032
+   }
+  },
+  "Anders": {
+   "2026-01": {
+    "spend": 0,
+    "off": 20,
+    "akk": 3,
+    "omzet": 7913,
+    "marge": 3655,
+    "margeEx": 3021,
+    "lasten": 3640,
+    "netto": -619
+   },
+   "2026-02": {
+    "spend": 0,
+    "off": 39,
+    "akk": 9,
+    "omzet": 31510,
+    "marge": 14378,
+    "margeEx": 11883,
+    "lasten": 9295,
+    "netto": 2588
+   },
+   "2026-03": {
+    "spend": 0,
+    "off": 63,
+    "akk": 4,
+    "omzet": 9479,
+    "marge": 4281,
+    "margeEx": 3538,
+    "lasten": 2294,
+    "netto": 1244
+   },
+   "2026-04": {
+    "spend": 0,
+    "off": 71,
+    "akk": 11,
+    "omzet": 55832,
+    "marge": 26310,
+    "margeEx": 21744,
+    "lasten": 7989,
+    "netto": 13755
+   },
+   "2026-05": {
+    "spend": 0,
+    "off": 74,
+    "akk": 6,
+    "omzet": 18572,
+    "marge": 8724,
+    "margeEx": 7210,
+    "lasten": 4912,
+    "netto": 2298
+   },
+   "2026-06": {
+    "spend": 0,
+    "off": 97,
+    "akk": 9,
+    "omzet": 27299,
+    "marge": 12733,
+    "margeEx": 10523,
+    "lasten": 5299,
+    "netto": 5223
+   },
+   "2026-07": {
+    "spend": 0,
+    "off": 183,
+    "akk": 26,
+    "omzet": 145308,
+    "marge": 67638,
+    "margeEx": 55899,
+    "lasten": 19416,
+    "netto": 36484
+   }
+  },
+  "Buren/bekenden": {
+   "2026-01": {
+    "spend": 0,
+    "off": 20,
+    "akk": 8,
+    "omzet": 22521,
+    "marge": 9971,
+    "margeEx": 8241,
+    "lasten": 9706,
+    "netto": -1465
+   },
+   "2026-02": {
+    "spend": 0,
+    "off": 32,
+    "akk": 14,
+    "omzet": 40385,
+    "marge": 19058,
+    "margeEx": 15751,
+    "lasten": 14458,
+    "netto": 1293
+   },
+   "2026-03": {
+    "spend": 0,
+    "off": 74,
+    "akk": 22,
+    "omzet": 66005,
+    "marge": 30405,
+    "margeEx": 25128,
+    "lasten": 12617,
+    "netto": 12511
+   },
+   "2026-04": {
+    "spend": 0,
+    "off": 78,
+    "akk": 19,
+    "omzet": 53951,
+    "marge": 25464,
+    "margeEx": 21045,
+    "lasten": 13799,
+    "netto": 7246
+   },
+   "2026-05": {
+    "spend": 0,
+    "off": 74,
+    "akk": 16,
+    "omzet": 44501,
+    "marge": 20243,
+    "margeEx": 16730,
+    "lasten": 13099,
+    "netto": 3631
+   },
+   "2026-06": {
+    "spend": 0,
+    "off": 90,
+    "akk": 20,
+    "omzet": 93658,
+    "marge": 44808,
+    "margeEx": 37032,
+    "lasten": 11776,
+    "netto": 25255
+   },
+   "2026-07": {
+    "spend": 0,
+    "off": 87,
+    "akk": 13,
+    "omzet": 52811,
+    "marge": 24239,
+    "margeEx": 20032,
+    "lasten": 9708,
+    "netto": 10325
+   }
+  },
+  "Onbekend": {
+   "2026-01": {
+    "spend": 0,
+    "off": 11,
+    "akk": 10,
+    "omzet": 35267,
+    "marge": 15231,
+    "margeEx": 12587,
+    "lasten": 12132,
+    "netto": 455
+   },
+   "2026-02": {
+    "spend": 0,
+    "off": 3,
+    "akk": 1,
+    "omzet": 2784,
+    "marge": 1290,
+    "margeEx": 1066,
+    "lasten": 1033,
+    "netto": 34
+   },
+   "2026-03": {
+    "spend": 0,
+    "off": 28,
+    "akk": 14,
+    "omzet": 63952,
+    "marge": 28392,
+    "margeEx": 23464,
+    "lasten": 8029,
+    "netto": 15435
+   },
+   "2026-04": {
+    "spend": 0,
+    "off": 32,
+    "akk": 19,
+    "omzet": 46400,
+    "marge": 21114,
+    "margeEx": 17450,
+    "lasten": 13799,
+    "netto": 3651
+   },
+   "2026-05": {
+    "spend": 0,
+    "off": 75,
+    "akk": 2,
+    "omzet": 7022,
+    "marge": 3563,
+    "margeEx": 2945,
+    "lasten": 1637,
+    "netto": 1307
+   },
+   "2026-06": {
+    "spend": 0,
+    "off": 125,
+    "akk": 64,
+    "omzet": 232035,
+    "marge": 109944,
+    "margeEx": 90862,
+    "lasten": 37684,
+    "netto": 53178
+   },
+   "2026-07": {
+    "spend": 0,
+    "off": 43,
+    "akk": 37,
+    "omzet": 136603,
+    "marge": 63378,
+    "margeEx": 52378,
+    "lasten": 27630,
+    "netto": 24748
    }
   }
  }

@@ -166,11 +166,14 @@ footer{color:var(--ink-3);font-size:.75rem;margin-top:1.6rem;max-width:75ch}
 ${JAREN.map((j, i) => jaarBlok(j)).join('\n')}
 ${CAMPAGNES ? (() => {
   const eurK = n => '&euro;' + Math.round(n).toLocaleString('nl-NL');
-  // platform-totalen: alle spend vs alle orders van die bron = zuiverste cijfer
-  const pt = Object.entries(CAMPAGNES.platformen || {}).map(([plat, mnd]) => {
-    const t = Object.values(mnd).reduce((a, v) => ({ spend: a.spend + v.spend, off: a.off + v.off, akk: a.akk + v.akk, omzet: a.omzet + v.omzet, marge: a.marge + (v.margeEx !== undefined ? v.margeEx : v.marge), netto: a.netto + v.netto }), { spend: 0, off: 0, akk: 0, omzet: 0, marge: 0, netto: 0 });
-    return `<tr><th>${plat} totaal</th><td>${eurK(t.spend)}</td><td>${t.off}</td><td>${t.akk}</td><td>${eurK(t.omzet)}</td><td>${eurK(t.marge)}</td><td class="${t.netto >= 0 ? 'goed' : 'slecht'}"><b>${eurK(t.netto)}</b></td></tr>`;
-  }).join('');
+  // alle brongroepen (incl. buren/anders/onbekend zonder ad spend) + bedrijfstotaal
+  const VOLGORDE = ['Meta', 'Google', 'Buren/bekenden', 'Anders', 'Onbekend'];
+  const groepTot = {};
+  for (const [plat, mnd] of Object.entries(CAMPAGNES.platformen || {}))
+    groepTot[plat] = Object.values(mnd).reduce((a, v) => ({ spend: a.spend + v.spend, off: a.off + v.off, akk: a.akk + v.akk, omzet: a.omzet + v.omzet, marge: a.marge + (v.margeEx !== undefined ? v.margeEx : v.marge), lasten: a.lasten + (v.lasten || 0), netto: a.netto + v.netto }), { spend: 0, off: 0, akk: 0, omzet: 0, marge: 0, lasten: 0, netto: 0 });
+  const bedrijf = Object.values(groepTot).reduce((a, t) => ({ spend: a.spend + t.spend, off: a.off + t.off, akk: a.akk + t.akk, omzet: a.omzet + t.omzet, marge: a.marge + t.marge, lasten: a.lasten + t.lasten, netto: a.netto + t.netto }), { spend: 0, off: 0, akk: 0, omzet: 0, marge: 0, lasten: 0, netto: 0 });
+  const ptRij = (naam, t, dik) => `<tr${dik ? ' class="tot"' : ''}><th>${naam}</th><td>${t.spend ? eurK(t.spend) : '—'}</td><td>${t.off}</td><td>${t.akk}</td><td>${eurK(t.marge)}</td><td>${eurK(t.lasten)}</td><td class="${t.netto >= 0 ? 'goed' : 'slecht'}"><b>${eurK(t.netto)}</b></td></tr>`;
+  const pt = VOLGORDE.filter(g => groepTot[g]).map(g => ptRij(g, groepTot[g])).join('') + ptRij('BEDRIJF TOTAAL', bedrijf, true);
   const tot = {};
   for (const cs of Object.values(CAMPAGNES.maanden)) for (const c of cs) {
     const t = (tot[c.platform + '|' + c.campagne] = tot[c.platform + '|' + c.campagne] || { plat: c.platform, spend: 0, akk: 0, omzet: 0, marge: 0, netto: 0, toe: c.offertes !== null });
@@ -179,19 +182,21 @@ ${CAMPAGNES ? (() => {
   const rij = t => t.toe
     ? `<tr><th>${t.plat} · ${t.naam}</th><td>${eurK(t.spend)}</td><td>${t.akk}</td><td>${eurK(t.omzet)}</td><td>${eurK(t.marge)}</td><td class="${t.netto >= 0 ? 'goed' : 'slecht'}"><b>${eurK(t.netto)}</b></td></tr>`
     : `<tr><th>${t.plat} · ${t.naam}</th><td>${eurK(t.spend)}</td><td colspan="4" style="text-align:left;color:var(--ink-3)">niet aan &eacute;&eacute;n product toe te wijzen (generiek) — telt wel mee in het platformtotaal</td></tr>`;
-  const maandRijen = [];
   const alleMaanden = [...new Set(Object.values(CAMPAGNES.platformen || {}).flatMap(m => Object.keys(m)))].sort();
-  for (const m of alleMaanden) for (const plat of ['Meta', 'Google']) {
-    const v = (CAMPAGNES.platformen[plat] || {})[m]; if (!v) continue;
-    maandRijen.push(`<tr><th>${m.slice(5)} · ${plat}</th><td>${eurK(v.spend)}</td><td>${v.off}</td><td>${v.akk}</td><td>${eurK(v.margeEx)}</td><td>${eurK(v.lasten)}</td><td class="${v.netto >= 0 ? 'goed' : 'slecht'}"><b>${eurK(v.netto)}</b></td></tr>`);
-  }
-  return `<h2>Advertenties: wat kost het en wat blijft er over (jan&ndash;jul 2026)</h2>
-<div class="scroll"><table><thead><tr><th>platform</th><th>kosten</th><th>offertes</th><th>orders</th><th>omzet</th><th>productmarge</th><th>netto na ads+montage</th></tr></thead><tbody>${pt}</tbody></table></div>
-<h2>Per maand, Meta naast Google (directe toerekening, ex btw)</h2>
-<div class="scroll"><table><thead><tr><th>maand</th><th>kosten</th><th>offertes</th><th>orders</th><th>marge ex</th><th>lasten-deel</th><th>netto</th></tr></thead><tbody>${maandRijen.join('')}</tbody></table></div>
+  const maandRijen = alleMaanden.map(m => {
+    const cel = g => { const v = (CAMPAGNES.platformen[g] || {})[m];
+      if (!v) return '<td class="leeg">—</td>';
+      return `<td class="${v.netto >= 0 ? 'goed' : 'slecht'}"><b>${eurK(v.netto)}</b><span>${v.akk} ord</span></td>`; };
+    const som = VOLGORDE.reduce((a, g) => { const v = (CAMPAGNES.platformen[g] || {})[m]; return a + (v ? v.netto : 0); }, 0);
+    return `<tr><th>${m.slice(5)}</th>${VOLGORDE.map(cel).join('')}<td class="tot ${som >= 0 ? 'goed' : 'slecht'}"><b>${eurK(som)}</b></td></tr>`;
+  }).join('');
+  return `<h2>Winst per bron (jan&ndash;jul 2026, ex btw: marge min lasten-aandeel min ads)</h2>
+<div class="scroll"><table><thead><tr><th>bron</th><th>ad spend</th><th>offertes</th><th>orders</th><th>productmarge</th><th>lasten-deel</th><th>netto</th></tr></thead><tbody>${pt}</tbody></table></div>
+<h2>Netto per maand per bron</h2>
+<div class="scroll"><table><thead><tr><th>maand</th>${VOLGORDE.map(g => `<th>${g}</th>`).join('')}<th>bedrijf</th></tr></thead><tbody>${maandRijen}</tbody></table></div>
 <h2>Per campagne (echte marges uit de sheet)</h2>
 <div class="scroll"><table><thead><tr><th>campagne</th><th>kosten</th><th>orders</th><th>omzet</th><th>productmarge</th><th>netto</th></tr></thead><tbody>
-${Object.entries(tot).map(([k, t]) => ({ ...t, naam: k.split('|')[1] })).sort((a, b) => b.spend - a.spend).map(rij).join('')}
+${Object.entries(tot).map(([k, t]) => ({ ...t, naam: k.substring(k.indexOf('|') + 1) })).sort((a, b) => b.spend - a.spend).map(rij).join('')}
 </tbody></table></div>
 <p class="melding">Netto = productmarge ex btw (akkoordbedrag min inkoop, /1,21; bij &euro;1-placeholder inkoop geschat via de inkoopratio van het product) min het aandeel in de <b>echte maandlasten</b> uit het lasten-blok in de sheet (alles behalve ad spend, toegerekend naar rato van orders: &euro;573&ndash;&euro;1.213 per order per maand) min advertentiekosten (ex btw). Jonge maanden rijpen na: netto stijgt nog. Productcampagnes krijgen ook orders die generieke campagnes (PMax, Plaatsen, Retargeting, Branding) mede veroorzaakten — het platformtotaal is het hardste cijfer.</p>`;
 })() : ''}

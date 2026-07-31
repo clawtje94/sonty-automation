@@ -3,12 +3,17 @@
 Doel: mail-first benadering van beheerders (1 kantoor = tientallen VvE's).
 Status per rij: GEVERIFIEERD = contactgegevens van hun eigen site gehaald.
 
-## Geverifieerd (klaar om te mailen)
+## Geverifieerd (klaar om te mailen/bellen) — bijgewerkt 2026-07-31
 
 | Kantoor | Plaats | E-mail | Telefoon | Notities |
 |---|---|---|---|---|
-| T&T Vastgoed en VvE Beheer | Bergschenhoek (Lansingerland) | info@tentvvebeheer.nl | 010-223 81 33 | LETTERLIJK naast Sonty-magazijn Berkel; werkgebied Rotterdam, Zoetermeer, Den Haag, Gouda, Leiden, Dordrecht, Westland; ook nieuwbouw | 
+| Twinss VvE beheer | **Berkel en Rodenrijs** (Spoorhaven 50) | (mail nog checken) | 088-304 08 00 | HOOFDKANTOOR IN ONS EIGEN DORP; werkgebied o.a. R'dam, Den Haag, Rijswijk, Haaglanden; SKG-IKOB |
+| T&T Vastgoed en VvE Beheer | Bergschenhoek (Lansingerland) | info@tentvvebeheer.nl | 010-223 81 33 | Naast Sonty-magazijn; werkgebied Rotterdam, Zoetermeer, Den Haag, Gouda, Leiden, Dordrecht, Westland; ook nieuwbouw |
+| Newomij VvE Beheer | Naarden (landelijk, incl. R'dam/Den Haag) | vvebeheer@newomij.nl | 088-639 66 45 | ±380 VvE's / 27.500 appartementsrechten; ook VvE-consultancy nieuwbouw |
+| VvE Diensten Nederland | Rotterdam + Den Haag (5 kantoren NL) | rotterdam@vve-nederland.nl | 010-224 55 77 | ±150 VvE's alleen al Rotterdam; complexen 20+ units |
+| VVEgemak | A'dam-kantoor, actief R'dam/Den Haag/Zoetermeer | info@vvegemak.nl | 020-820 22 73 | Ook bouwkundige tak (MJOP) |
 | Zomer VvE Beheer | Rotterdam + Barendrecht + Nieuwerkerk a/d IJssel | info@zomervve.nl | 088-0246 999 | Meerdere ZH-kantoren, vast aanspreekpunt per VvE |
+| Woonstad Rotterdam VvE Beheer | Rotterdam | via contactformulier | — | ±570 VvE's (corporatietak); groot maar deels huurcomplexen |
 
 ## Gevonden, contactgegevens nog verifiëren
 
@@ -41,13 +46,11 @@ per telefoon na 5 werkdagen. T&T eerst: buurman-verhaal, evt. gewoon langsgaan.
 - **Wolting Marketing Support** — GEVERIFIEERD (site, 2026-07-30): bestand van 265 VvE-beheerkantoren NL met 147 contactpersonen (namen+functies), NAW, telefoon, websites; GEEN e-mail (mag wettelijk niet geleverd). €250 ex btw eenmalig, €90/jr updates, Excel, proefbestand op aanvraag. Beste voor beheerder-spoor; mailadressen zoeken we zelf per kantoor via hun site.
 - Verwachting: sterk in postadressen + VvE→beheerder-koppeling; e-mail beperkt (opt-in-regels, vooral info@).
 
-## Definitieve mailadres-strategie (advies 2026-07-31)
+## BESLUIT mailadres-strategie (2026-07-31, na doordenken)
 
-1. **Wolting** kopen (€250): 265 beheerkantoren, namen+functies+tel.
-2. **Apollo.io of Hunter.io** (±€0-50/mnd, indicatie): zakelijke e-mailadressen
-   vinden/verifiëren op naam+domein bij de Wolting-contacten → beslissers mailbaar.
-3. **AdHoc Data** (offerte): VvE→beheerder-koppeling per gebouw, matchen met radar.
-4. **Zelfstandige VvE's**: brief + QR → landingspagina → opt-in mailflow
-   (geen register van bestuurs-mailadressen; dit is de enige nette route).
-
-Status: wacht op Daimy — bestelwijze (info@-toegang of zelf bestellen) + Apollo-account.
+**Niets kopen.** Doel is deals, geen databases: de top-beheerders in ZH dekken het
+merendeel van beheerd gebied en hun contactgegevens staan gratis op hun eigen
+sites (7 geverifieerd op dag 1, zie tabel). Wolting (landelijk, geen e-mail),
+Apollo (abo voor ~20 lookups) en AdHoc (postadressen die BAG al gratis geeft)
+zijn de dure omweg. Herzien pas als na ~20 beheerder-gesprekken blijkt dat we
+meer nodig hebben. Zelfstandige VvE's: brief + QR → opt-in mail (enige route).

@@ -141,7 +141,9 @@ document.querySelectorAll('.jaar').forEach((e,i)=>{if(i>0)e.classList.add('verbo
 function open_(){document.getElementById('poort').classList.add('verborgen');document.getElementById('inhoud').classList.remove('verborgen');}
 function controleer(ev){ev.preventDefault();const c=document.getElementById('code').value.trim();
 if(c==='sonty2288'){localStorage.setItem('sonty-dash','1');open_();}else{document.getElementById('code').value='';document.getElementById('code').placeholder='onjuiste code';}return false;}
-if(localStorage.getItem('sonty-dash')==='1')open_();
+// Vanuit het admin-dashboard geen tweede code vragen: de admin-login zet sonty-admin
+// in sessionStorage op dezelfde origin.
+if(localStorage.getItem('sonty-dash')==='1'||sessionStorage.getItem('sonty-admin')==='true')open_();
 </script></body></html>`;
 
 const uit = path.join(process.env.HOME, 'sonty-website', 'public', 'dashboards', 'conversie.html');

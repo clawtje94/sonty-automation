@@ -8,6 +8,11 @@
 - **Nog te bouwen (afgesproken)**: beheerders-tab (VvE-beheerkantoren + contactinfo + LinkedIn-zoeklinks naar beslissers — GEEN LinkedIn-scraper, ToS/AVG), brief-flow via postbode, KvK-verrijking + cron nieuwe VvE's.
 - **Nieuwbouw-detectie LIVE (PR #48/#49)**: knop "Komende VvE's" = BAG-panden vergund/bouw gestart met 10+ won (Zoetermeer: 10 complexen/683 won, o.a. 228-won-toren 2026). BAG-jaartal = GEPLANDE oplevering; verlopen jaar → label "oplevering loopt uit, nu benaderen" (vraag Daimy). Belangen-vraag Daimy beantwoord met VvE-recht-bronnen: bestuur vreest wildgroei maar mag niet totaal verbieden → protocol is hun uitweg, ons aanbod.
 
+## AD-SPEND-ADMINISTRATIE + RENDEMENT IN DASHBOARD (31 juli)
+- `scripts/ad-spend.js` -> `data/ad-spend.json`: spend per maand per platform uit (1) `data/ad-spend-handmatig.json` en (2) sheet-tab "conversie %". Draait wekelijks mee in update-dashboard.sh. Dashboard toont rendement-blok: €/offerte, €/order, oordeel tegen break-even €513-592/order.
+- **Meta**: echte account "Sonty.nl | Creditcard" (1633352477464320) staat bij Meta nog op "gradually being rolled out" voor de ads-MCP — PERIODIEK HERCHECKEN in sessies (kan niet via cron, MCP is sessiegebonden). Alternatief: Daimy maakt system-user-token met ads_read → directe Graph-API-collector bouwen.
+- **Google Ads**: geen API-koppeling; beste route = gescheduelde maandrapport-mails uit beide platforms naar facturen@sonty.nl → parser bouwen zodra Daimy ze aanzet (voorstel ligt bij hem). NB: sonty.nl draait nog Webflow; admin/dashboard leven op sonty-website.vercel.app.
+
 ## DASHBOARD LIVE + A/B-BASELINE GECORRIGEERD (31 juli)
 - **Conversie-dashboard**: sonty.nl/dashboards/conversie.html (code = belscherm). Per maand x platform en x productgroep, jaartabs 2024-2026, rijpheidsmarkering. Ververst zichzelf elke ma 07:45 (nl.sonty.dashboard-update: verse extractie -> bouw -> git push -> Vercel). Generator: scripts/bouw-conversie-dashboard.js.
 - **A/B-correctie**: de "15%" baseline in ab-test-rapport.js was hardcoded zonder meting. Echt gemeten (identieke methode, 3-dagenvenster): oude template 26,8% (n=82), nieuwe templates 28,9% (n=235) — GEEN aantoonbaar verschil in reply rate; verdubbel-claim ingetrokken bij Daimy. Baseline in het rapport vervangen door gemeten waarde. Beslismoment = akkoorden per variant, uitgerijpt ~half augustus.

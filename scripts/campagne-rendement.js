@@ -61,9 +61,17 @@ for (const r of rows) {
       pt.akk++; pt.omzet += c.omzet; pt.marge += c.marge;
       if (m) { m.akk++; m.omzet += c.omzet; m.marge += c.marge; } } }
 }
-// Montage+overhead per order (2025-analyse breakeven-2026.js): €854 excl btw ≈ €1033 incl.
-// De sheetbedragen zijn incl btw; we rekenen alles incl en noemen dat expliciet.
-const MONTAGE_OVERHEAD = 1033;
+// ECHTE MAANDLASTEN (Daimy 31 juli): elk maandtab heeft een lasten-blok = alle
+// bedrijfslasten van die maand behalve ad spend (monteurs, buslease, overhead).
+// Toerekening: lasten / alle orders van die maand (elke bron, ook winkel) = lasten
+// per order; een campagne draagt orders x dat bedrag. Alles EX btw: marge wordt
+// gedeeld door 1,21 (sheetbedragen zijn incl), ad spend is al ex (Ads Manager).
+const LASTEN = JSON.parse(fs.readFileSync(path.join(BASIS, 'maand-lasten.json'), 'utf8'));
+const ordersPerMaand = {};
+for (const r of rows) if (isAkk(r)) { const m = `2026-${String(r.maand).padStart(2, '0')}`;
+  ordersPerMaand[m] = (ordersPerMaand[m] || 0) + 1; }
+const lastenPerOrder = m => (LASTEN[m] && ordersPerMaand[m]) ? LASTEN[m] / ordersPerMaand[m] : 0;
+const EX = 1.21;
 const BRONNEN = { Meta: 'campagne-spend-meta.json', Google: 'campagne-spend-google.json' };
 const uit = {};
 for (const [plat, bestand] of Object.entries(BRONNEN)) {
@@ -78,7 +86,7 @@ for (const [plat, bestand] of Object.entries(BRONNEN)) {
       let st2 = null;
       if (buckets) { st2 = { off: 0, akk: 0, omzet: 0, marge: 0 };
         for (const b of buckets) { const c = per[`${plat}|${maand}|${b}`]; if (c) { st2.off += c.off; st2.akk += c.akk; st2.omzet += c.omzet; st2.marge += c.marge; } } }
-      const netto = st2 ? st2.marge - st2.akk * MONTAGE_OVERHEAD - v.spend : null;
+      const netto = st2 ? st2.marge / EX - st2.akk * lastenPerOrder(maand) - v.spend : null;
       (uit[maand] = uit[maand] || []).push({ platform: plat, campagne: naam, spend: v.spend,
         offertes: st2 ? st2.off : null, akkoorden: st2 ? st2.akk : null,
         omzet: st2 ? +st2.omzet.toFixed(0) : null, marge: st2 ? +st2.marge.toFixed(0) : null,
@@ -101,8 +109,10 @@ for (const [k, t] of Object.entries(platTot)) {
   const spend = spendTot[k]; if (spend === undefined) continue;
   const [plat, maand] = k.split('|');
   (platformen[plat] = platformen[plat] || {})[maand] = { spend: +spend.toFixed(0), ...t,
-    omzet: +t.omzet.toFixed(0), marge: +t.marge.toFixed(0),
-    netto: +(t.marge - t.akk * MONTAGE_OVERHEAD - spend).toFixed(0) };
+    omzet: +t.omzet.toFixed(0), marge: +t.marge.toFixed(0), margeEx: +(t.marge / EX).toFixed(0),
+    lasten: +(t.akk * lastenPerOrder(maand)).toFixed(0),
+    netto: +(t.marge / EX - t.akk * lastenPerOrder(maand) - spend).toFixed(0) };
 }
-fs.writeFileSync(path.join(BASIS, 'campagne-rendement.json'), JSON.stringify({ peildatum: new Date().toISOString(), montageOverheadPerOrder: MONTAGE_OVERHEAD, maanden: uit, platformen }, null, 1));
+const lastenInfo = Object.fromEntries(Object.keys(ordersPerMaand).sort().map(m => [m, { lasten: LASTEN[m] || null, orders: ordersPerMaand[m], perOrder: +lastenPerOrder(m).toFixed(0) }]));
+fs.writeFileSync(path.join(BASIS, 'campagne-rendement.json'), JSON.stringify({ peildatum: new Date().toISOString(), lasten: lastenInfo, maanden: uit, platformen }, null, 1));
 console.log('campagne-rendement.json:', Object.keys(uit).sort().join(', '));

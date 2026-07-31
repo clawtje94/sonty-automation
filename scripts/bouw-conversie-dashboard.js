@@ -168,7 +168,7 @@ ${CAMPAGNES ? (() => {
   const eurK = n => '&euro;' + Math.round(n).toLocaleString('nl-NL');
   // platform-totalen: alle spend vs alle orders van die bron = zuiverste cijfer
   const pt = Object.entries(CAMPAGNES.platformen || {}).map(([plat, mnd]) => {
-    const t = Object.values(mnd).reduce((a, v) => ({ spend: a.spend + v.spend, off: a.off + v.off, akk: a.akk + v.akk, omzet: a.omzet + v.omzet, marge: a.marge + v.marge, netto: a.netto + v.netto }), { spend: 0, off: 0, akk: 0, omzet: 0, marge: 0, netto: 0 });
+    const t = Object.values(mnd).reduce((a, v) => ({ spend: a.spend + v.spend, off: a.off + v.off, akk: a.akk + v.akk, omzet: a.omzet + v.omzet, marge: a.marge + (v.margeEx !== undefined ? v.margeEx : v.marge), netto: a.netto + v.netto }), { spend: 0, off: 0, akk: 0, omzet: 0, marge: 0, netto: 0 });
     return `<tr><th>${plat} totaal</th><td>${eurK(t.spend)}</td><td>${t.off}</td><td>${t.akk}</td><td>${eurK(t.omzet)}</td><td>${eurK(t.marge)}</td><td class="${t.netto >= 0 ? 'goed' : 'slecht'}"><b>${eurK(t.netto)}</b></td></tr>`;
   }).join('');
   const tot = {};
@@ -185,7 +185,7 @@ ${CAMPAGNES ? (() => {
 <div class="scroll"><table><thead><tr><th>campagne</th><th>kosten</th><th>orders</th><th>omzet</th><th>productmarge</th><th>netto</th></tr></thead><tbody>
 ${Object.entries(tot).map(([k, t]) => ({ ...t, naam: k.split('|')[1] })).sort((a, b) => b.spend - a.spend).map(rij).join('')}
 </tbody></table></div>
-<p class="melding">Netto = productmarge (akkoordbedrag min inkoop; bij &euro;1-placeholder geschat via de inkoopratio van het product) min &euro;${CAMPAGNES.montageOverheadPerOrder} montage/overhead per order min advertentiekosten. Bedragen incl. btw. Jonge maanden rijpen na: netto stijgt nog. Productcampagnes krijgen ook orders die generieke campagnes (PMax, Plaatsen, Retargeting, Branding) mede veroorzaakten — het platformtotaal is daarom het hardste cijfer. Montage/overhead is een gemiddelde: pergola&rsquo;s kosten m&eacute;&eacute;r montage dan gemiddeld (netto daar te rooskleurig), rolluiken minder.</p>`;
+<p class="melding">Netto = productmarge ex btw (akkoordbedrag min inkoop, /1,21; bij &euro;1-placeholder inkoop geschat via de inkoopratio van het product) min het aandeel in de <b>echte maandlasten</b> uit het lasten-blok in de sheet (alles behalve ad spend, toegerekend naar rato van orders: &euro;573&ndash;&euro;1.213 per order per maand) min advertentiekosten (ex btw). Jonge maanden rijpen na: netto stijgt nog. Productcampagnes krijgen ook orders die generieke campagnes (PMax, Plaatsen, Retargeting, Branding) mede veroorzaakten — het platformtotaal is het hardste cijfer.</p>`;
 })() : ''}
 ${LANDING ? `<h2>Per landingspagina / actie (campagne-proxy, laatste ${LANDING.dagen} dagen)</h2>
 <div class="scroll"><table><thead><tr><th>landing / actie</th><th>leads</th><th>akkoord</th><th>conv%</th><th>akkoordwaarde</th></tr></thead><tbody>

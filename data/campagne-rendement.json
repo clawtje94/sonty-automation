@@ -1,6 +1,42 @@
 {
- "peildatum": "2026-07-31T12:56:40.517Z",
- "montageOverheadPerOrder": 1033,
+ "peildatum": "2026-07-31T13:07:39.013Z",
+ "lasten": {
+  "2026-01": {
+   "lasten": 82500,
+   "orders": 68,
+   "perOrder": 1213
+  },
+  "2026-02": {
+   "lasten": 86749,
+   "orders": 84,
+   "perOrder": 1033
+  },
+  "2026-03": {
+   "lasten": 106096,
+   "orders": 185,
+   "perOrder": 573
+  },
+  "2026-04": {
+   "lasten": 108214,
+   "orders": 149,
+   "perOrder": 726
+  },
+  "2026-05": {
+   "lasten": 107248,
+   "orders": 131,
+   "perOrder": 819
+  },
+  "2026-06": {
+   "lasten": 111287,
+   "orders": 189,
+   "perOrder": 589
+  },
+  "2026-07": {
+   "lasten": 115000,
+   "orders": 154,
+   "perOrder": 747
+  }
+ },
  "maanden": {
   "2026-04": [
    {
@@ -11,7 +47,7 @@
     "akkoorden": 26,
     "omzet": 63906,
     "marge": 31436,
-    "netto": -8370,
+    "netto": -5850,
     "perOfferte": 44,
     "perOrder": 498
    },
@@ -23,7 +59,7 @@
     "akkoorden": 15,
     "omzet": 56571,
     "marge": 26959,
-    "netto": 5407,
+    "netto": 5329,
     "perOfferte": 21,
     "perOrder": 404
    },
@@ -35,7 +71,7 @@
     "akkoorden": 2,
     "omzet": 19203,
     "marge": 8111,
-    "netto": 4487,
+    "netto": 3693,
     "perOfferte": 14,
     "perOrder": 779
    },
@@ -47,7 +83,7 @@
     "akkoorden": 9,
     "omzet": 29716,
     "marge": 14039,
-    "netto": 3190,
+    "netto": 3514,
     "perOfferte": 14,
     "perOrder": 172
    },
@@ -59,7 +95,7 @@
     "akkoorden": 5,
     "omzet": 9857,
     "marge": 4556,
-    "netto": -1811,
+    "netto": -1068,
     "perOfferte": 80,
     "perOrder": 241
    },
@@ -143,7 +179,7 @@
     "akkoorden": 1,
     "omzet": 6523,
     "marge": 3087,
-    "netto": 1153,
+    "netto": 924,
     "perOfferte": 12,
     "perOrder": 901
    },
@@ -155,7 +191,7 @@
     "akkoorden": 9,
     "omzet": 28599,
     "marge": 13088,
-    "netto": 2532,
+    "netto": 3021,
     "perOfferte": 10,
     "perOrder": 140
    },
@@ -167,7 +203,7 @@
     "akkoorden": 1,
     "omzet": 2565,
     "marge": 1150,
-    "netto": -1410,
+    "netto": -1303,
     "perOfferte": 59,
     "perOrder": 1527
    },
@@ -179,7 +215,7 @@
     "akkoorden": 13,
     "omzet": 41143,
     "marge": 20312,
-    "netto": 5309,
+    "netto": 5771,
     "perOfferte": 14,
     "perOrder": 121
    },
@@ -191,7 +227,7 @@
     "akkoorden": 27,
     "omzet": 92412,
     "marge": 44313,
-    "netto": 8733,
+    "netto": 9324,
     "perOfferte": 22,
     "perOrder": 285
    }
@@ -205,7 +241,7 @@
     "akkoorden": 16,
     "omzet": 56997,
     "marge": 27337,
-    "netto": -2624,
+    "netto": -7364,
     "perOfferte": 70,
     "perOrder": 840
    },
@@ -229,7 +265,7 @@
     "akkoorden": 8,
     "omzet": 31101,
     "marge": 14119,
-    "netto": 4567,
+    "netto": 2119,
     "perOfferte": 18,
     "perOrder": 161
    },
@@ -241,7 +277,7 @@
     "akkoorden": 3,
     "omzet": 30968,
     "marge": 13345,
-    "netto": 8570,
+    "netto": 6255,
     "perOfferte": 16,
     "perOrder": 559
    },
@@ -253,7 +289,7 @@
     "akkoorden": 2,
     "omzet": 7939,
     "marge": 3642,
-    "netto": -7,
+    "netto": -638,
     "perOfferte": 31,
     "perOrder": 791
    },
@@ -265,7 +301,7 @@
     "akkoorden": 4,
     "omzet": 15852,
     "marge": 8307,
-    "netto": 2777,
+    "netto": 1336,
     "perOfferte": 108,
     "perOrder": 349
    },
@@ -361,7 +397,7 @@
     "akkoorden": 7,
     "omzet": 32461,
     "marge": 14857,
-    "netto": 7307,
+    "netto": 4730,
     "perOfferte": 6,
     "perOrder": 46
    },
@@ -373,7 +409,7 @@
     "akkoorden": 1,
     "omzet": 2953,
     "marge": 1317,
-    "netto": -133,
+    "netto": -361,
     "perOfferte": 38,
     "perOrder": 417
    },
@@ -385,7 +421,7 @@
     "akkoorden": 8,
     "omzet": 22221,
     "marge": 10302,
-    "netto": 120,
+    "netto": -1666,
     "perOfferte": 20,
     "perOrder": 240
    },
@@ -397,7 +433,7 @@
     "akkoorden": 15,
     "omzet": 65540,
     "marge": 29966,
-    "netto": 12184,
+    "netto": 6987,
     "perOfferte": 17,
     "perOrder": 152
    }
@@ -411,7 +447,7 @@
     "akkoorden": 23,
     "omzet": 71441,
     "marge": 34457,
-    "netto": -2324,
+    "netto": -3375,
     "perOfferte": 43,
     "perOrder": 566
    },
@@ -423,7 +459,7 @@
     "akkoorden": 13,
     "omzet": 69665,
     "marge": 33033,
-    "netto": 12221,
+    "netto": 9274,
     "perOfferte": 21,
     "perOrder": 568
    },
@@ -435,7 +471,7 @@
     "akkoorden": 1,
     "omzet": 13800,
     "marge": 5979,
-    "netto": 3241,
+    "netto": 2418,
     "perOfferte": 13,
     "perOrder": 1705
    },
@@ -447,7 +483,7 @@
     "akkoorden": 10,
     "omzet": 42399,
     "marge": 21665,
-    "netto": 9631,
+    "netto": 8014,
     "perOfferte": 15,
     "perOrder": 170
    },
@@ -459,7 +495,7 @@
     "akkoorden": 3,
     "omzet": 16437,
     "marge": 8011,
-    "netto": 3687,
+    "netto": 2940,
     "perOfferte": 111,
     "perOrder": 408
    },
@@ -471,7 +507,7 @@
     "akkoorden": 2,
     "omzet": 5031,
     "marge": 2593,
-    "netto": 147,
+    "netto": 125,
     "perOfferte": 35,
     "perOrder": 190
    },
@@ -543,7 +579,7 @@
     "akkoorden": 1,
     "omzet": 24000,
     "marge": 10822,
-    "netto": 8877,
+    "netto": 7213,
     "perOfferte": 16,
     "perOrder": 912
    },
@@ -555,7 +591,7 @@
     "akkoorden": 12,
     "omzet": 44105,
     "marge": 20594,
-    "netto": 6373,
+    "netto": 5371,
     "perOfferte": 12,
     "perOrder": 152
    },
@@ -567,7 +603,7 @@
     "akkoorden": 5,
     "omzet": 12478,
     "marge": 5857,
-    "netto": -830,
+    "netto": -775,
     "perOfferte": 76,
     "perOrder": 304
    },
@@ -579,7 +615,7 @@
     "akkoorden": 17,
     "omzet": 40907,
     "marge": 19797,
-    "netto": 715,
+    "netto": 923,
     "perOfferte": 10,
     "perOrder": 89
    },
@@ -591,7 +627,7 @@
     "akkoorden": 26,
     "omzet": 110276,
     "marge": 52202,
-    "netto": 16223,
+    "netto": 12736,
     "perOfferte": 21,
     "perOrder": 351
    }
@@ -605,7 +641,7 @@
     "akkoorden": 29,
     "omzet": 85506,
     "marge": 37450,
-    "netto": -9773,
+    "netto": -2947,
     "perOfferte": 55,
     "perOrder": 595
    },
@@ -629,7 +665,7 @@
     "akkoorden": 26,
     "omzet": 93274,
     "marge": 42216,
-    "netto": 11145,
+    "netto": 15765,
     "perOfferte": 18,
     "perOrder": 162
    },
@@ -641,7 +677,7 @@
     "akkoorden": 5,
     "omzet": 31596,
     "marge": 13795,
-    "netto": 6844,
+    "netto": 6747,
     "perOfferte": 13,
     "perOrder": 357
    },
@@ -653,7 +689,7 @@
     "akkoorden": 10,
     "omzet": 46638,
     "marge": 20091,
-    "netto": 7963,
+    "netto": 9071,
     "perOfferte": 22,
     "perOrder": 180
    },
@@ -665,7 +701,7 @@
     "akkoorden": 5,
     "omzet": 10265,
     "marge": 4419,
-    "netto": -2251,
+    "netto": -720,
     "perOfferte": 151,
     "perOrder": 301
    },
@@ -677,7 +713,7 @@
     "akkoorden": 3,
     "omzet": 10403,
     "marge": 4573,
-    "netto": 1115,
+    "netto": 1700,
     "perOfferte": 36,
     "perOrder": 120
    },
@@ -761,7 +797,7 @@
     "akkoorden": 1,
     "omzet": 5305,
     "marge": 2298,
-    "netto": 353,
+    "netto": 414,
     "perOfferte": 15,
     "perOrder": 912
    },
@@ -773,7 +809,7 @@
     "akkoorden": 18,
     "omzet": 61592,
     "marge": 29070,
-    "netto": 9616,
+    "netto": 12842,
     "perOfferte": 7,
     "perOrder": 48
    },
@@ -785,7 +821,7 @@
     "akkoorden": 5,
     "omzet": 11810,
     "marge": 4797,
-    "netto": -1554,
+    "netto": -89,
     "perOfferte": 54,
     "perOrder": 237
    },
@@ -797,7 +833,7 @@
     "akkoorden": 19,
     "omzet": 78202,
     "marge": 37578,
-    "netto": 15103,
+    "netto": 17312,
     "perOfferte": 21,
     "perOrder": 150
    },
@@ -809,7 +845,7 @@
     "akkoorden": 36,
     "omzet": 122945,
     "marge": 56957,
-    "netto": 14227,
+    "netto": 20884,
     "perOfferte": 18,
     "perOrder": 154
    }
@@ -823,7 +859,7 @@
     "akkoorden": 11,
     "omzet": 32127,
     "marge": 12653,
-    "netto": -10947,
+    "netto": -15125,
     "perOfferte": 63,
     "perOrder": 1112
    },
@@ -847,7 +883,7 @@
     "akkoorden": 3,
     "omzet": 18820,
     "marge": 8320,
-    "netto": 3361,
+    "netto": 1376,
     "perOfferte": 19,
     "perOrder": 620
    },
@@ -859,7 +895,7 @@
     "akkoorden": 2,
     "omzet": 27936,
     "marge": 3825,
-    "netto": 83,
+    "netto": -941,
     "perOfferte": 49,
     "perOrder": 838
    },
@@ -871,7 +907,7 @@
     "akkoorden": 1,
     "omzet": 0,
     "marge": 0,
-    "netto": -2579,
+    "netto": -2760,
     "perOfferte": 119,
     "perOrder": 1546
    },
@@ -955,7 +991,7 @@
     "akkoorden": 1,
     "omzet": 6934,
     "marge": 6554,
-    "netto": 4659,
+    "netto": 3342,
     "perOfferte": 37,
     "perOrder": 861
    },
@@ -967,7 +1003,7 @@
     "akkoorden": 1,
     "omzet": 2600,
     "marge": 1147,
-    "netto": 14,
+    "netto": -366,
     "perOfferte": 3,
     "perOrder": 100
    },
@@ -991,7 +1027,7 @@
     "akkoorden": 12,
     "omzet": 27506,
     "marge": 13178,
-    "netto": -8,
+    "netto": -4458,
     "perOfferte": 9,
     "perOrder": 66
    },
@@ -1003,7 +1039,7 @@
     "akkoorden": 11,
     "omzet": 44710,
     "marge": 20801,
-    "netto": 8914,
+    "netto": 3321,
     "perOfferte": 5,
     "perOrder": 48
    }
@@ -1017,7 +1053,7 @@
     "akkoorden": 21,
     "omzet": 66023,
     "marge": 31043,
-    "netto": -2373,
+    "netto": -1749,
     "perOfferte": 39,
     "perOrder": 558
    },
@@ -1029,7 +1065,7 @@
     "akkoorden": 6,
     "omzet": 17257,
     "marge": 8277,
-    "netto": -5254,
+    "netto": -4973,
     "perOfferte": 27,
     "perOrder": 1222
    },
@@ -1041,7 +1077,7 @@
     "akkoorden": 2,
     "omzet": 16134,
     "marge": 7495,
-    "netto": 3256,
+    "netto": 2528,
     "perOfferte": 12,
     "perOrder": 1086
    },
@@ -1053,7 +1089,7 @@
     "akkoorden": 5,
     "omzet": 10939,
     "marge": 4988,
-    "netto": -2362,
+    "netto": -1796,
     "perOfferte": 11,
     "perOrder": 437
    },
@@ -1077,7 +1113,7 @@
     "akkoorden": 1,
     "omzet": 2297,
     "marge": 1012,
-    "netto": -846,
+    "netto": -735,
     "perOfferte": 43,
     "perOrder": 825
    },
@@ -1149,7 +1185,7 @@
     "akkoorden": 2,
     "omzet": 16038,
     "marge": 7450,
-    "netto": 4183,
+    "netto": 3463,
     "perOfferte": 17,
     "perOrder": 600
    },
@@ -1161,7 +1197,7 @@
     "akkoorden": 4,
     "omzet": 15480,
     "marge": 7203,
-    "netto": 987,
+    "netto": 882,
     "perOfferte": 45,
     "perOrder": 521
    },
@@ -1173,7 +1209,7 @@
     "akkoorden": 2,
     "omzet": 6323,
     "marge": 2786,
-    "netto": -723,
+    "netto": -634,
     "perOfferte": 60,
     "perOrder": 722
    },
@@ -1185,7 +1221,7 @@
     "akkoorden": 18,
     "omzet": 47021,
     "marge": 22040,
-    "netto": 1926,
+    "netto": 3253,
     "perOfferte": 9,
     "perOrder": 84
    },
@@ -1197,7 +1233,7 @@
     "akkoorden": 20,
     "omzet": 68378,
     "marge": 31768,
-    "netto": 1761,
+    "netto": 1972,
     "perOfferte": 20,
     "perOrder": 467
    }
@@ -1211,7 +1247,7 @@
     "akkoorden": 19,
     "omzet": 59851,
     "marge": 28489,
-    "netto": -3746,
+    "netto": -251,
     "perOfferte": 55,
     "perOrder": 664
    },
@@ -1223,7 +1259,7 @@
     "akkoorden": 12,
     "omzet": 35725,
     "marge": 16931,
-    "netto": -2670,
+    "netto": -278,
     "perOfferte": 28,
     "perOrder": 600
    },
@@ -1235,7 +1271,7 @@
     "akkoorden": 1,
     "omzet": 6465,
     "marge": 3003,
-    "netto": 267,
+    "netto": 190,
     "perOfferte": 16,
     "perOrder": 1703
    },
@@ -1247,7 +1283,7 @@
     "akkoorden": 6,
     "omzet": 20346,
     "marge": 9547,
-    "netto": 1608,
+    "netto": 2616,
     "perOfferte": 9,
     "perOrder": 290
    },
@@ -1259,7 +1295,7 @@
     "akkoorden": 1,
     "omzet": 0,
     "marge": 0,
-    "netto": -2258,
+    "netto": -1814,
     "perOfferte": 613,
     "perOrder": 1225
    },
@@ -1343,7 +1379,7 @@
     "akkoorden": 4,
     "omzet": 46070,
     "marge": 22319,
-    "netto": 17275,
+    "netto": 15178,
     "perOfferte": 11,
     "perOrder": 228
    },
@@ -1355,7 +1391,7 @@
     "akkoorden": 2,
     "omzet": 6397,
     "marge": 3021,
-    "netto": -871,
+    "netto": -507,
     "perOfferte": 25,
     "perOrder": 913
    },
@@ -1367,7 +1403,7 @@
     "akkoorden": 5,
     "omzet": 15638,
     "marge": 6927,
-    "netto": 240,
+    "netto": 1259,
     "perOfferte": 85,
     "perOrder": 304
    },
@@ -1379,7 +1415,7 @@
     "akkoorden": 15,
     "omzet": 47151,
     "marge": 22435,
-    "netto": 5420,
+    "netto": 8189,
     "perOfferte": 10,
     "perOrder": 101
    },
@@ -1391,7 +1427,7 @@
     "akkoorden": 31,
     "omzet": 149818,
     "marge": 71648,
-    "netto": 30502,
+    "netto": 31836,
     "perOfferte": 18,
     "perOrder": 294
    }
@@ -1405,7 +1441,9 @@
     "akk": 21,
     "omzet": 95862,
     "marge": 32514,
-    "netto": -8462
+    "margeEx": 26871,
+    "lasten": 25478,
+    "netto": -17890
    },
    "2026-02": {
     "spend": 21334,
@@ -1413,7 +1451,9 @@
     "akk": 35,
     "omzet": 150032,
     "marge": 69935,
-    "netto": 12445
+    "margeEx": 57797,
+    "lasten": 36145,
+    "netto": 318
    },
    "2026-03": {
     "spend": 29020,
@@ -1421,7 +1461,9 @@
     "akk": 80,
     "omzet": 278525,
     "marge": 122981,
-    "netto": 11321
+    "margeEx": 101637,
+    "lasten": 45879,
+    "netto": 26738
    },
    "2026-04": {
     "spend": 24026,
@@ -1429,7 +1471,9 @@
     "akk": 58,
     "omzet": 179724,
     "marge": 85423,
-    "netto": 1484
+    "margeEx": 70598,
+    "lasten": 42124,
+    "netto": 4448
    },
    "2026-05": {
     "spend": 25419,
@@ -1437,7 +1481,9 @@
     "akk": 53,
     "omzet": 219613,
     "marge": 106237,
-    "netto": 26069
+    "margeEx": 87799,
+    "lasten": 43390,
+    "netto": 18990
    },
    "2026-06": {
     "spend": 25218,
@@ -1445,7 +1491,9 @@
     "akk": 39,
     "omzet": 122386,
     "marge": 57971,
-    "netto": -7534
+    "margeEx": 47910,
+    "lasten": 22964,
+    "netto": -272
    },
    "2026-07": {
     "spend": 25441,
@@ -1453,7 +1501,9 @@
     "akk": 36,
     "omzet": 112650,
     "marge": 52816,
-    "netto": -9813
+    "margeEx": 43649,
+    "lasten": 26883,
+    "netto": -8675
    }
   },
   "Google": {
@@ -1463,7 +1513,9 @@
     "akk": 26,
     "omzet": 85205,
     "marge": 42430,
-    "netto": 528
+    "margeEx": 35066,
+    "lasten": 31544,
+    "netto": -11522
    },
    "2026-02": {
     "spend": 17862,
@@ -1471,7 +1523,9 @@
     "akk": 25,
     "omzet": 91472,
     "marge": 41853,
-    "netto": -1834
+    "margeEx": 34589,
+    "lasten": 25818,
+    "netto": -9091
    },
    "2026-03": {
     "spend": 26258,
@@ -1479,7 +1533,9 @@
     "akk": 65,
     "omzet": 228971,
     "marge": 106269,
-    "netto": 12866
+    "margeEx": 87826,
+    "lasten": 37277,
+    "netto": 24291
    },
    "2026-04": {
     "spend": 31543,
@@ -1487,7 +1543,9 @@
     "akk": 42,
     "omzet": 142643,
     "marge": 68862,
-    "netto": -6067
+    "margeEx": 56911,
+    "lasten": 30503,
+    "netto": -5136
    },
    "2026-05": {
     "spend": 36767,
@@ -1495,7 +1553,9 @@
     "akk": 54,
     "omzet": 216482,
     "marge": 101490,
-    "netto": 8942
+    "margeEx": 83876,
+    "lasten": 44209,
+    "netto": 2901
    },
    "2026-06": {
     "spend": 36808,
@@ -1503,7 +1563,9 @@
     "akk": 57,
     "omzet": 259304,
     "marge": 123624,
-    "netto": 27935
+    "margeEx": 102169,
+    "lasten": 33563,
+    "netto": 31798
    },
    "2026-07": {
     "spend": 37598,
@@ -1511,7 +1573,9 @@
     "akk": 42,
     "omzet": 137760,
     "marge": 64045,
-    "netto": -16939
+    "margeEx": 52929,
+    "lasten": 31364,
+    "netto": -16032
    }
   }
  }

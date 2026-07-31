@@ -193,7 +193,21 @@ async function wijzigShowroom({ klantMail, nieuweStart, klantNaam, klantTel, not
   return { verzet: true, oudeTijd: oudLokaal, ...res };
 }
 
-module.exports = { vrijeSlots, boekShowroom, wijzigShowroom, ADRES, BIZ, SERVICE_ID };
+
+// Komende showroomafspraak van een klant (op e-mailadres), voor klant_opzoeken.
+// Casus Eveline 31-07: klant stond bij het pand met een afspraak die de bot niet kon zien.
+async function komendeAfspraak(klantMail) {
+  if (!klantMail) return null;
+  const nu = Date.now();
+  const alle = await b.afspraken(BIZ, { start: new Date(nu - 3 * 3600000).toISOString(), end: new Date(nu + 61 * 86400000).toISOString() });
+  const eigen = alle.filter(a => a.serviceId === SERVICE_ID && (a.mail || '').toLowerCase() === String(klantMail).toLowerCase())
+    .sort((x, y) => String(x.start).localeCompare(String(y.start)))[0];
+  if (!eigen) return null;
+  const p = nlDelen(new Date(parseUtc(eigen.start)));
+  return { wanneer: `${DAGNAAM[p.weekdag]} ${p.datum} om ${p.tijd}`, adres: ADRES };
+}
+
+module.exports = { vrijeSlots, boekShowroom, wijzigShowroom, komendeAfspraak, ADRES, BIZ, SERVICE_ID };
 
 // ── CLI: node scripts/ai-ks/showroom-booking.js [dagen] ──
 if (require.main === module) {

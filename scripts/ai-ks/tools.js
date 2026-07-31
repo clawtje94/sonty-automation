@@ -226,6 +226,20 @@ async function runTool(name, input, ctx) {
   }
   if (name === 'klant_opzoeken') {
     const res = await buildKlantContext(input);
+    // Komende showroomafspraak meegeven (casus Eveline 31-07: klant stond bij het pand met
+    // een afspraak die de bot niet kon zien). Mag klant_opzoeken nooit laten falen.
+    try {
+      const mail = res?.klant?.email || res?.email || (JSON.stringify(res).match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i) || [])[0];
+      if (mail) {
+        const { komendeAfspraak } = require('./showroom-booking.js');
+        const afspraak = await komendeAfspraak(mail);
+        if (afspraak) {
+          // Vooraan zetten: het resultaat wordt op 6000 tekens afgekapt en dit veld mag nooit wegvallen.
+          const metAfspraak = { showroomAfspraak: { ...afspraak, opmerking: 'De klant heeft deze showroomafspraak al staan. Verwijst de klant hiernaar (of staat hij voor de deur), geef dan DIRECT het adres en de routetip: "Navigatie? Stel in op Frijdastraat 6E, rij het hofje in, eerste rechts, wij zitten op de hoek."' }, ...res };
+          return JSON.stringify(metAfspraak).substring(0, 6000);
+        }
+      }
+    } catch { /* afspraak-lookup mag klant_opzoeken nooit breken */ }
     return JSON.stringify(res).substring(0, 6000);
   }
   if (name === 'offerte_bekijken') {

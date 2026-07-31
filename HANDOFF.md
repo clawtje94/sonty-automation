@@ -35,6 +35,12 @@
 - **Nog te bouwen (afgesproken)**: brief-flow via postbode, KvK-verrijking + cron nieuwe VvE's.
 - **Nieuwbouw-detectie LIVE (PR #48/#49)**: knop "Komende VvE's" = BAG-panden vergund/bouw gestart met 10+ won (Zoetermeer: 10 complexen/683 won, o.a. 228-won-toren 2026). BAG-jaartal = GEPLANDE oplevering; verlopen jaar → label "oplevering loopt uit, nu benaderen" (vraag Daimy). Belangen-vraag Daimy beantwoord met VvE-recht-bronnen: bestuur vreest wildgroei maar mag niet totaal verbieden → protocol is hun uitweg, ons aanbod.
 
+## WINST-PER-BRON COMPLEET (31 juli, slot): sheet x ads x lasten in één model
+- `campagne-rendement.js` is het hart: campagne-spend (Meta-CSV's + Google-screenshots, data/campagne-spend-*.json) x sheet-orders (echte akkoordbedragen; €1-inkoop geschat via productratio ~53%) x echte maandlasten (lasten-blok per maandtab via `lasten-import.js`, = alles behalve ad spend). Alles ex btw.
+- Dashboard: "Winst per bron" (Meta 23,7k | Google 17,2k | buren 58,8k | anders 61,0k | onbekend 98,8k | BEDRIJF 259,4k jan-jul), netto per maand per bron, per campagne. Juni-test sloot exact aan op Daimy's eigen blok (verschil = zijn 50% marge-aanname vs gemeten 47,5% + narijping).
+- Kernconclusies: Meta-Rolluiken -36,7k (enige grote lek, 75% Meta-budget); Google Schermen+Screens +87k (topper); pergola-ads netto positief (correctie op eerder advies); "Onbekend" (147 orders zonder afkomst) is grootste winstbron -> afkomst-kolom laten invullen. Advies-5-punten 31-07 in databot.
+- Marketing-mix erkend: directe toerekening is ondergrens voor ads (buren=echo, onbekend deels ads); campagne-vergelijkingen blijven geldig (zelfde meetsysteem). Mix-effect wordt zichtbaar via weekrapporten na de Meta-Rolluiken-afbouw.
+
 ## CAMPAGNE-INZICHT (31 juli, vervolg): landing-proxy live, UTM ontbreekt
 - Daimy wil kosten+opbrengst per CAMPAGNE, niet maandtotalen. Leads hebben GEEN utm/campagne-data (alleen zelfgerapporteerd "hoe komt u bij ons terecht").
 - **Proxy live in dashboard**: `scripts/landing-analyse.js` — productregel uit leadomschrijving = landing/campagne-familie; leads/akkoord/waarde 45 dgn (rolluik 10,4% vs pergola 3,0% vs Sunelite 2,6%). Wekelijks mee in update-dashboard.sh.

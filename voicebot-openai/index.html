@@ -58,29 +58,34 @@ function ophangen() {
   setStatus('Gesprek beëindigd.');
 }
 
-async function toolAfhandelen(item) {
-  const args = JSON.parse(item.arguments || '{}');
-  if (item.name === 'end_call') {
-    log('tool', '[tool] end_call');
-    setTimeout(ophangen, 3000);
-    return;
-  }
-  if (item.name === 'prijs_berekenen') {
+async function toolsAfhandelen(calls) {
+  let moetResponse = false;
+  for (const item of calls) {
+    const args = JSON.parse(item.arguments || '{}');
+    if (item.name === 'end_call') {
+      log('tool', '[tool] end_call');
+      setTimeout(ophangen, 3000);
+      continue;
+    }
+    if (item.name !== 'prijs_berekenen' && item.name !== 'kennisbank_opzoeken') continue;
     const q = new URLSearchParams(args).toString();
-    log('tool', `[tool] prijs_berekenen ${JSON.stringify(args)}`);
+    const pad = item.name === 'prijs_berekenen' ? '/api/prijs?' : '/api/kennisbank?';
+    log('tool', `[tool] ${item.name} ${JSON.stringify(args)}`);
     let uit;
     try {
-      uit = await (await fetch('/api/prijs?' + q)).json();
+      uit = await (await fetch(pad + q)).json();
     } catch (e) {
-      uit = { error: 'prijs-API niet bereikbaar' };
+      uit = { error: 'tool-API niet bereikbaar' };
     }
-    log('tool', `[tool] → ${JSON.stringify(uit)}`);
+    log('tool', `[tool] → ${JSON.stringify(uit).slice(0, 200)}`);
     dc.send(JSON.stringify({
       type: 'conversation.item.create',
       item: { type: 'function_call_output', call_id: item.call_id, output: JSON.stringify(uit) },
     }));
-    dc.send(JSON.stringify({ type: 'response.create' }));
+    moetResponse = true;
   }
+  // Eén response.create voor alle tooluitkomsten samen, anders "active response"-fout
+  if (moetResponse) dc.send(JSON.stringify({ type: 'response.create' }));
 }
 
 function eventAfhandelen(ev) {
@@ -91,9 +96,8 @@ function eventAfhandelen(ev) {
     basRegel.textContent += msg.delta;
   } else if (msg.type === 'response.done') {
     basRegel = null;
-    for (const item of (msg.response && msg.response.output) || []) {
-      if (item.type === 'function_call') toolAfhandelen(item);
-    }
+    const calls = ((msg.response && msg.response.output) || []).filter((i) => i.type === 'function_call');
+    if (calls.length) toolsAfhandelen(calls);
   } else if (msg.type === 'conversation.item.input_audio_transcription.completed') {
     log('klant', 'Jij: ' + (msg.transcript || '').trim());
   } else if (msg.type === 'error') {
@@ -118,6 +122,7 @@ belBtn.onclick = async () => {
     const mic = await navigator.mediaDevices.getUserMedia({ audio: true });
     pc.addTrack(mic.getTracks()[0]);
     dc = pc.createDataChannel('oai-events');
+    window._dc = dc; // testhook voor webrtc-test.js
     dc.onmessage = eventAfhandelen;
     dc.onopen = () => setStatus('Verbonden — praat maar tegen Bas.');
 

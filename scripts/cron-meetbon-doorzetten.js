@@ -65,7 +65,7 @@ function meetbonHtml(bon, factuur) {
     ${(bon.producten || []).map(prod).join('')}
     <h3 style="margin:16px 0 4px">Situatie ter plaatse</h3>
     <table style="font-size:13px;border-collapse:collapse">${algemeen}</table>
-    <p style="font-size:12px;color:#888;margin-top:14px">Volledige bon: https://sonty.nl/admin/meetbon/${esc(bon.gripp)}</p>
+    <p style="font-size:12px;color:#888;margin-top:14px">Volledige bon: https://sonty-website.vercel.app/admin/meetbon/${esc(bon.gripp)}</p>
   </div>`;
 }
 

@@ -661,5 +661,40 @@
   "kanaal": "EMAIL",
   "status": "klaar",
   "aangemaakt": 1785477738219
+ },
+ {
+  "lcId": "a01e19d0-c435-45a5-958d-5be9bd706773",
+  "ticketId": 969171037,
+  "klantNaam": "Manu Raja",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 1960,
+    "hoogteMM": 1720,
+    "bediening": "solar",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   },
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 1030,
+    "hoogteMM": 1600,
+    "bediening": "solar",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   },
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 990,
+    "hoogteMM": 1720,
+    "bediening": "solar",
+    "framekleur": "RAL 9010",
+    "aantal": 2
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1785590020491
  }
 ]

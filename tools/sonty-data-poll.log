@@ -18,3 +18,5 @@ Sonty data-bot poller gestart -> /Users/clawdboot/sonty/sonty-data-inbox.txt
 Sonty data-bot poller gestart -> /Users/clawdboot/sonty/sonty-data-inbox.txt
 poll-fout: read ECONNRESET
 Sonty data-bot poller gestart -> /Users/clawdboot/sonty/sonty-data-inbox.txt
+poll-fout: connect ECONNREFUSED 149.154.167.220:443
+Sonty data-bot poller gestart -> /Users/clawdboot/sonty/sonty-data-inbox.txt

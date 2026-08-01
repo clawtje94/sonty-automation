@@ -1,0 +1,2818 @@
+{
+ "gestart": "2026-08-01T11:30:17.375Z",
+ "modus": "echt",
+ "offertes": [
+  {
+   "nummer": "202610756",
+   "docId": "6fccce26-3623-4dbb-a4c9-dc300ebe63a5",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3750",
+     "oud": 1983.3,
+     "nieuw": 2179.1,
+     "posten": [
+      "banen 195.8"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 195.8
+  },
+  {
+   "nummer": "202610687",
+   "docId": "4a061d32-ec3a-4a4e-aae8-16c4b4591cf4",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "5000",
+     "oud": 4524.3,
+     "nieuw": 4847.7,
+     "posten": [
+      "trend 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 323.4
+  },
+  {
+   "nummer": "202610685",
+   "docId": "68957d8b-615a-4937-b19a-1cff960b793a",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "1800",
+     "oud": 1304.6,
+     "nieuw": 1626.9,
+     "posten": [
+      "banen 126.5",
+      "ral 195.8"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 322.3
+  },
+  {
+   "nummer": "202610646",
+   "docId": "9363e084-7e50-4579-92b6-07b3d9d3ffc1",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "4151",
+     "oud": 4692.6,
+     "nieuw": 4988.5,
+     "posten": [
+      "trend 295.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 295.9
+  },
+  {
+   "nummer": "202610640",
+   "docId": "eeba6567-ec54-4605-ad88-078156f55aa5",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "2500",
+     "oud": 1041.7,
+     "nieuw": 1205.6,
+     "posten": [
+      "banen 163.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 163.9
+  },
+  {
+   "nummer": "202610638",
+   "docId": "de553e58-c069-4707-80b7-ebeaa1ab1b50",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2886",
+     "oud": 1928.3,
+     "nieuw": 2119.7,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 191.4
+  },
+  {
+   "nummer": "202610576",
+   "docId": "077c24d5-866b-4a35-8882-650173093058",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "3400",
+     "oud": 1777.6,
+     "nieuw": 1941.5,
+     "posten": [
+      "banen 163.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 163.9
+  },
+  {
+   "nummer": "202610517",
+   "docId": "23c78b6a-49ef-4aac-a3a7-9e7a87c49c48",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4000",
+     "oud": 2018.5,
+     "nieuw": 2537.7,
+     "posten": [
+      "banen 195.8",
+      "ral 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 519.2
+  },
+  {
+   "nummer": "202610505",
+   "docId": "b28723c6-ed4e-445b-a349-0c5e7b5e6aa8",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5000",
+     "oud": 2739,
+     "nieuw": 3047,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "202610474",
+   "docId": "029ea52a-ff49-4f4b-a766-b82264eaf9b9",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5444",
+     "oud": 2418.9,
+     "nieuw": 2726.9,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "202610467",
+   "docId": "71bc4978-2376-455b-8d12-50077eb03d22",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "800",
+     "oud": 661.1,
+     "nieuw": 722.7,
+     "posten": [
+      "banen 61.6"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 61.6
+  },
+  {
+   "nummer": "202610459",
+   "docId": "66291ab5-d2eb-4383-a61b-9cd4e88cd651",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "5312",
+     "oud": 2219.8,
+     "nieuw": 2990.9,
+     "posten": [
+      "banen 270.6",
+      "ral 500.5"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 771.1
+  },
+  {
+   "nummer": "202610437",
+   "docId": "66d3084f-7bc1-4959-9cf5-c770543889d6",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "3098",
+     "oud": 1107.7,
+     "nieuw": 1254,
+     "posten": [
+      "banen 146.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 146.3
+  },
+  {
+   "nummer": "202610388",
+   "docId": "aebc7c7c-330c-4879-ae57-cbd6cc03122e",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5808",
+     "oud": 2517.9,
+     "nieuw": 3340.7,
+     "posten": [
+      "banen 365.2",
+      "ral 457.6"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 822.8
+  },
+  {
+   "nummer": "202610385",
+   "docId": "a5307ec1-bb3d-4071-95fb-888d430e44d7",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "800",
+     "oud": 661.1,
+     "nieuw": 722.7,
+     "posten": [
+      "banen 61.6"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 61.6
+  },
+  {
+   "nummer": "202610352",
+   "docId": "284050b8-cde7-460a-92e7-b0c84e05f4e9",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5000",
+     "oud": 2260.5,
+     "nieuw": 2568.5,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "202610338",
+   "docId": "2c6fe671-f51c-44eb-a6e1-93bb1ddc2561",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5390",
+     "oud": 2700.5,
+     "nieuw": 2933.7,
+     "posten": [
+      "banen 233.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 233.2
+  },
+  {
+   "nummer": "202610336",
+   "docId": "d4fae7ca-7cb7-4d0f-96ae-9c09820ab5af",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3609",
+     "oud": 2255,
+     "nieuw": 2500.3,
+     "posten": [
+      "banen 245.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 245.3
+  },
+  {
+   "nummer": "202610250",
+   "docId": "a9e36c73-5b36-429c-a8e2-7d2cd8590d94",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "2950",
+     "oud": 3564,
+     "nieuw": 3829.1,
+     "posten": [
+      "trend 265.1"
+     ],
+     "units": 6
+    }
+   ],
+   "som": 1590.6
+  },
+  {
+   "nummer": "202610244",
+   "docId": "1572e60f-a665-45d2-90b2-24566721d57a",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "1400",
+     "oud": 1659.9,
+     "nieuw": 1767.7,
+     "posten": [
+      "banen 107.8"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 107.8
+  },
+  {
+   "nummer": "202610239",
+   "docId": "529f7b22-149c-4896-8422-5462b5f2857a",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3579",
+     "oud": 2167,
+     "nieuw": 2729.1,
+     "posten": [
+      "banen 238.7",
+      "ral 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 562.1
+  },
+  {
+   "nummer": "202610238",
+   "docId": "ca7ef41e-bb3f-4f0f-9e4e-d260437a9706",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3579",
+     "oud": 2167,
+     "nieuw": 2729.1,
+     "posten": [
+      "banen 238.7",
+      "ral 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 562.1
+  },
+  {
+   "nummer": "202610233",
+   "docId": "e95fbfec-e823-4b50-9b11-ff87b4498503",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "1500",
+     "oud": 1740.2,
+     "nieuw": 1866.7,
+     "posten": [
+      "banen 126.5"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 126.5
+  },
+  {
+   "nummer": "202610189",
+   "docId": "0fe31bee-bc00-4700-a7cd-3215a61485e0",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "1400",
+     "oud": 1722.6,
+     "nieuw": 2016.3,
+     "posten": [
+      "banen 134.2",
+      "ral 159.5"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 293.7
+  },
+  {
+   "nummer": "202610175",
+   "docId": "447551d3-70db-4888-b19a-0fa5d1aeabad",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3500",
+     "oud": 2018.5,
+     "nieuw": 2257.2,
+     "posten": [
+      "banen 238.7"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 238.7
+  },
+  {
+   "nummer": "202610144",
+   "docId": "bdee4448-8986-48f7-938f-341c08655701",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2568",
+     "oud": 1955.8,
+     "nieuw": 2396.9,
+     "posten": [
+      "banen 177.1",
+      "ral 264"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 441.1
+  },
+  {
+   "nummer": "202610129",
+   "docId": "c70097bc-782b-4448-aa37-117f6c8bd781",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "4300",
+     "oud": 4552.9,
+     "nieuw": 4848.8,
+     "posten": [
+      "trend 295.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 295.9
+  },
+  {
+   "nummer": "202610033",
+   "docId": "b6d972dd-f0c1-4035-9a69-fb5ecc497cbd",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5450",
+     "oud": 2601.5,
+     "nieuw": 2834.7,
+     "posten": [
+      "banen 233.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 233.2
+  },
+  {
+   "nummer": "202610024",
+   "docId": "a193a56b-980b-4bd4-8117-245cbec58365",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2510",
+     "oud": 1887.6,
+     "nieuw": 2043.8,
+     "posten": [
+      "banen 156.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 156.2
+  },
+  {
+   "nummer": "20269955",
+   "docId": "5360e09c-922e-468f-9a0f-d031532fa1b1",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3140",
+     "oud": 2116.4,
+     "nieuw": 2307.8,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 191.4
+  },
+  {
+   "nummer": "20269952",
+   "docId": "7217d8f3-9c38-404d-8305-6b503cb5d138",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "1400",
+     "oud": 1214.4,
+     "nieuw": 1340.9,
+     "posten": [
+      "banen 126.5"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunCube XL",
+     "breedte": "1400",
+     "oud": 1214.4,
+     "nieuw": 1340.9,
+     "posten": [
+      "banen 126.5"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 253
+  },
+  {
+   "nummer": "20269939",
+   "docId": "e3d01746-6583-4e89-bf07-dc4c8e2f3d24",
+   "wijz": [
+    {
+     "regel": "SunCube 150 uitvalscherm",
+     "breedte": "3000",
+     "oud": 2042,
+     "nieuw": 2219.1,
+     "posten": [
+      "banen 177.1"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 177.1
+  },
+  {
+   "nummer": "20269928",
+   "docId": "2ddece8a-f0ad-4de9-aced-a8036ea9caac",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3400",
+     "oud": 1686.3,
+     "nieuw": 1877.7,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 191.4
+  },
+  {
+   "nummer": "20269880",
+   "docId": "aa2d5ac2-6070-4ca8-9c0b-c669d3b47ce7",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3027",
+     "oud": 2115.3,
+     "nieuw": 2306.7,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 191.4
+  },
+  {
+   "nummer": "20269828",
+   "docId": "f558651e-f167-4ad7-8507-a46e23205ecf",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5000",
+     "oud": 2260.5,
+     "nieuw": 2568.5,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "20269816",
+   "docId": "265b09ff-25b8-42f4-a975-89a642084497",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4572",
+     "oud": 2436.5,
+     "nieuw": 2681.8,
+     "posten": [
+      "banen 245.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 245.3
+  },
+  {
+   "nummer": "20269778",
+   "docId": "02d2b2cd-d0c0-4663-bbb9-ae16772da811",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "4400",
+     "oud": 1432.2,
+     "nieuw": 2086.7,
+     "posten": [
+      "banen 222.2",
+      "ral 432.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 654.5
+  },
+  {
+   "nummer": "20269753",
+   "docId": "ac9b9b10-1fdd-434b-997a-9cd03e9bb709",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "5000",
+     "oud": 4819.1,
+     "nieuw": 5280,
+     "posten": [
+      "ral 460.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 460.9
+  },
+  {
+   "nummer": "20269750",
+   "docId": "b2dea717-e921-45ca-9947-feb05a632a01",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "4151",
+     "oud": 4106.3,
+     "nieuw": 4528.7,
+     "posten": [
+      "ral 422.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 422.4
+  },
+  {
+   "nummer": "20269749",
+   "docId": "c41fa154-4499-41fb-9e66-fd91d956d90f",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "5000",
+     "oud": 4063.4,
+     "nieuw": 4386.8,
+     "posten": [
+      "trend 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 323.4
+  },
+  {
+   "nummer": "20269738",
+   "docId": "bd85829d-dcfa-4a4f-bca4-6f6ec5b50520",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "1501",
+     "oud": 1543.3,
+     "nieuw": 1651.1,
+     "posten": [
+      "banen 107.8"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 107.8
+  },
+  {
+   "nummer": "20269717",
+   "docId": "ccafc9cf-7bce-4f79-b553-164b1acb024a",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "4001",
+     "oud": 4412.1,
+     "nieuw": 4834.5,
+     "posten": [
+      "ral 422.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 422.4
+  },
+  {
+   "nummer": "20269700",
+   "docId": "abfa04a7-f416-41f1-8d84-4a9c6c8b3779",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "4150",
+     "oud": 4412.1,
+     "nieuw": 4708,
+     "posten": [
+      "trend 295.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 295.9
+  },
+  {
+   "nummer": "20269667",
+   "docId": "e3fcf494-11d5-4b0c-a25a-cf9dbde35373",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3000",
+     "oud": 2077.9,
+     "nieuw": 2533.3,
+     "posten": [
+      "banen 191.4",
+      "ral 264"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 455.4
+  },
+  {
+   "nummer": "20269666",
+   "docId": "dda0b3d0-deb2-41d8-a11c-232023c88da2",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3000",
+     "oud": 2077.9,
+     "nieuw": 2533.3,
+     "posten": [
+      "banen 191.4",
+      "ral 264"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 455.4
+  },
+  {
+   "nummer": "20269483",
+   "docId": "ce18fc6e-ffcd-45d6-9a4e-ae043548a178",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "3750",
+     "oud": 3967.7,
+     "nieuw": 4390.1,
+     "posten": [
+      "ral 422.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 422.4
+  },
+  {
+   "nummer": "20269474",
+   "docId": "7efa76a3-85b7-4053-aa3e-c2b96ed75211",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "3500",
+     "oud": 1595,
+     "nieuw": 1817.2,
+     "posten": [
+      "banen 222.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 222.2
+  },
+  {
+   "nummer": "20269448",
+   "docId": "c438a623-1818-453e-8277-a0fb8825d425",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "4700",
+     "oud": 5611.1,
+     "nieuw": 5934.5,
+     "posten": [
+      "trend 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 323.4
+  },
+  {
+   "nummer": "20269387",
+   "docId": "8f6f202c-8ddc-4eac-a903-7d4bb9f3be02",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "4511",
+     "oud": 2040.5,
+     "nieuw": 2695,
+     "posten": [
+      "banen 222.2",
+      "ral 432.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 654.5
+  },
+  {
+   "nummer": "20269350",
+   "docId": "e8acab53-5238-43df-8aee-15df0860a66d",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "6000",
+     "oud": 2956.8,
+     "nieuw": 3741.1,
+     "posten": [
+      "banen 326.7",
+      "ral 457.6"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 784.3
+  },
+  {
+   "nummer": "20269346",
+   "docId": "cfa48249-cf8d-45e9-b8d0-aa082203cf25",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3003",
+     "oud": 1930.5,
+     "nieuw": 2107.6,
+     "posten": [
+      "banen 177.1"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 177.1
+  },
+  {
+   "nummer": "20269338",
+   "docId": "f829e4ef-8409-447f-8338-9a346470b2d8",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2020",
+     "oud": 1867.8,
+     "nieuw": 2218.7,
+     "posten": [
+      "banen 126.5",
+      "ral 224.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 350.9
+  },
+  {
+   "nummer": "20269332",
+   "docId": "d33e04cc-e5d5-4b94-bd24-e17cf8a21dc0",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "6000",
+     "oud": 2846.8,
+     "nieuw": 3669.6,
+     "posten": [
+      "banen 365.2",
+      "ral 457.6"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 822.8
+  },
+  {
+   "nummer": "20269328",
+   "docId": "2c539d2f-3480-4950-bb56-4a5b811660b6",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5000",
+     "oud": 2737.9,
+     "nieuw": 3045.9,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "20269326",
+   "docId": "eb06df64-30bf-4c18-b5d6-e5272467726b",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5000",
+     "oud": 2737.9,
+     "nieuw": 3045.9,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "20269268",
+   "docId": "e11aac95-11bc-4aae-9636-b164f8e20233",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2700",
+     "oud": 1460.8,
+     "nieuw": 1881,
+     "posten": [
+      "banen 156.2",
+      "ral 264"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunCube XL",
+     "breedte": "2700",
+     "oud": 1460.8,
+     "nieuw": 1881,
+     "posten": [
+      "banen 156.2",
+      "ral 264"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 840.4
+  },
+  {
+   "nummer": "20269245",
+   "docId": "d08a749a-602b-46e6-a002-db2026f81ac2",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5209",
+     "oud": 2652.1,
+     "nieuw": 2926,
+     "posten": [
+      "banen 273.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 273.9
+  },
+  {
+   "nummer": "20269209",
+   "docId": "9fe9a395-766e-4561-a87e-869fbeb19743",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3600",
+     "oud": 2059.2,
+     "nieuw": 2304.5,
+     "posten": [
+      "banen 245.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 245.3
+  },
+  {
+   "nummer": "20269181",
+   "docId": "2cd33207-7651-4480-9965-49ee7c11d04e",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4400",
+     "oud": 2392.5,
+     "nieuw": 2637.8,
+     "posten": [
+      "banen 245.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 245.3
+  },
+  {
+   "nummer": "20269135",
+   "docId": "d1f81bc7-fd36-4c81-8ae9-4898c389d438",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2500",
+     "oud": 1983.3,
+     "nieuw": 2174.7,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 191.4
+  },
+  {
+   "nummer": "20269120",
+   "docId": "99ba81b3-98cf-40bc-b80a-311845b4a553",
+   "wijz": [
+    {
+     "regel": "SunCube 150 (Suncube XL)",
+     "breedte": "4700",
+     "oud": 2495.9,
+     "nieuw": 2769.8,
+     "posten": [
+      "banen 273.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 273.9
+  },
+  {
+   "nummer": "20269091",
+   "docId": "4c3f2913-61aa-47c5-b858-c0e6d938c5d2",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4200",
+     "oud": 2147.2,
+     "nieuw": 2743.4,
+     "posten": [
+      "banen 238.7",
+      "ral 357.5"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 596.2
+  },
+  {
+   "nummer": "20269071",
+   "docId": "4205d37b-2656-465f-b6ad-2c84eef02dad",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "5500",
+     "oud": 4633.2,
+     "nieuw": 4956.6,
+     "posten": [
+      "trend 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 323.4
+  },
+  {
+   "nummer": "20269002",
+   "docId": "e3b320a8-4a3a-4ca3-a103-910b17da7581",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2573",
+     "oud": 1983.3,
+     "nieuw": 2438.7,
+     "posten": [
+      "banen 191.4",
+      "ral 264"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 455.4
+  },
+  {
+   "nummer": "20268981",
+   "docId": "580bcfbd-5ed2-4649-a190-9d943626a34e",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "5500",
+     "oud": 4954.4,
+     "nieuw": 5277.8,
+     "posten": [
+      "trend 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 323.4
+  },
+  {
+   "nummer": "20268951",
+   "docId": "14590172-1850-48ba-8f52-48db5e3ab970",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2520",
+     "oud": 1955.8,
+     "nieuw": 2132.9,
+     "posten": [
+      "banen 177.1"
+     ],
+     "units": 2
+    }
+   ],
+   "som": 354.2
+  },
+  {
+   "nummer": "20268950",
+   "docId": "9a3a136c-0289-4cf8-a778-10350092a306",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "6000",
+     "oud": 2808.3,
+     "nieuw": 3592.6,
+     "posten": [
+      "banen 326.7",
+      "ral 457.6"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 784.3
+  },
+  {
+   "nummer": "20268944",
+   "docId": "9652aab6-8f65-4f09-87ce-8710ac5ee007",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4000",
+     "oud": 1776.5,
+     "nieuw": 2015.2,
+     "posten": [
+      "banen 238.7"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 238.7
+  },
+  {
+   "nummer": "20268937",
+   "docId": "3f48440d-2f6f-4bc7-a5b6-e856829deeca",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5000",
+     "oud": 2739,
+     "nieuw": 3322,
+     "posten": [
+      "banen 308",
+      "trend 275"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 583
+  },
+  {
+   "nummer": "20268920",
+   "docId": "0ffb46fd-9bcf-4b33-85db-ee64618aafc0",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3061",
+     "oud": 1966.8,
+     "nieuw": 2158.2,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 191.4
+  },
+  {
+   "nummer": "20268884",
+   "docId": "ce00338e-1dab-49fa-b703-243ab75d03e3",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3000",
+     "oud": 2077.9,
+     "nieuw": 2269.3,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 191.4
+  },
+  {
+   "nummer": "20268804",
+   "docId": "5ce6dc03-1af1-44ee-9a11-85b8c7af14fe",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "6000",
+     "oud": 5375.7,
+     "nieuw": 5883.9,
+     "posten": [
+      "ral 508.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 508.2
+  },
+  {
+   "nummer": "20268768",
+   "docId": "9c4c8c58-95d7-4eda-9f83-cbe7d3b429e0",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "1400",
+     "oud": 1181.4,
+     "nieuw": 1401.4,
+     "posten": [
+      "banen 107.8",
+      "trend 112.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 220
+  },
+  {
+   "nummer": "20268739",
+   "docId": "e87a3de1-9cc2-448f-a871-6692ed5e805e",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "6000",
+     "oud": 2846.8,
+     "nieuw": 3212,
+     "posten": [
+      "banen 365.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 365.2
+  },
+  {
+   "nummer": "20268702",
+   "docId": "b5d0ea89-0fdf-48f1-beb9-eaf208e41c66",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2900",
+     "oud": 2076.8,
+     "nieuw": 2268.2,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunCube XL",
+     "breedte": "3700",
+     "oud": 2253.9,
+     "nieuw": 2499.2,
+     "posten": [
+      "banen 245.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 436.7
+  },
+  {
+   "nummer": "20268683",
+   "docId": "ecff7250-bf30-4147-a1ec-f25d4e745cf4",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "3500",
+     "oud": 3579.4,
+     "nieuw": 3957.8,
+     "posten": [
+      "ral 378.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 378.4
+  },
+  {
+   "nummer": "20268651",
+   "docId": "480d6169-5cb0-4491-bd7e-39420fd0c269",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "4000",
+     "oud": 3967.7,
+     "nieuw": 4390.1,
+     "posten": [
+      "ral 422.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 422.4
+  },
+  {
+   "nummer": "20268627",
+   "docId": "296840f0-075d-4ebb-a4b5-f09f34033783",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "6000",
+     "oud": 2996.4,
+     "nieuw": 3361.6,
+     "posten": [
+      "banen 365.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 365.2
+  },
+  {
+   "nummer": "20268623",
+   "docId": "173983f5-6ebb-4b4f-81e7-9df36efbd8a4",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3100",
+     "oud": 2080.1,
+     "nieuw": 2257.2,
+     "posten": [
+      "banen 177.1"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 177.1
+  },
+  {
+   "nummer": "20268528",
+   "docId": "70b8b46c-7951-4503-b639-fac246c3a532",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3600",
+     "oud": 2168.1,
+     "nieuw": 2730.2,
+     "posten": [
+      "banen 238.7",
+      "ral 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 562.1
+  },
+  {
+   "nummer": "20268520",
+   "docId": "fa842bf7-e26a-4d48-b7ee-073159b77364",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4000",
+     "oud": 2297.9,
+     "nieuw": 2543.2,
+     "posten": [
+      "banen 245.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 245.3
+  },
+  {
+   "nummer": "20268508",
+   "docId": "71e65d5a-2de8-46d8-9ee3-df25d249bfca",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4978",
+     "oud": 2589.4,
+     "nieuw": 2897.4,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "20268494",
+   "docId": "96bbc46b-aeeb-402a-9666-73c2c15b4e4e",
+   "wijz": [
+    {
+     "regel": "SunCube 150 (Suncube XL)",
+     "breedte": "3000",
+     "oud": 2077.9,
+     "nieuw": 2269.3,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 191.4
+  },
+  {
+   "nummer": "20268338",
+   "docId": "d30fafb8-63dd-4628-a500-cc8ddbfb1013",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2800",
+     "oud": 1876.6,
+     "nieuw": 2068,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 191.4
+  },
+  {
+   "nummer": "20268325",
+   "docId": "8dc906ff-73a1-4486-bc2b-b4276b3cb2d6",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "6000",
+     "oud": 2846.8,
+     "nieuw": 3669.6,
+     "posten": [
+      "banen 365.2",
+      "ral 457.6"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 822.8
+  },
+  {
+   "nummer": "20268317",
+   "docId": "4380de16-89fd-4464-b768-fd9c78eb1f58",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "6000",
+     "oud": 2701.6,
+     "nieuw": 2971.1,
+     "posten": [
+      "banen 269.5"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 269.5
+  },
+  {
+   "nummer": "20268305",
+   "docId": "62576743-7fe2-499f-bcd0-8599b09c5b55",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5300",
+     "oud": 2700.5,
+     "nieuw": 2933.7,
+     "posten": [
+      "banen 233.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 233.2
+  },
+  {
+   "nummer": "20268292",
+   "docId": "782dc5bd-f38a-4c6b-8d3a-b766e2bb9830",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "4830",
+     "oud": 4819.1,
+     "nieuw": 5142.5,
+     "posten": [
+      "trend 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 323.4
+  },
+  {
+   "nummer": "20268275",
+   "docId": "283cedbb-763d-48b8-8b20-f747bfb4f44a",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3747",
+     "oud": 2255,
+     "nieuw": 2500.3,
+     "posten": [
+      "banen 245.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 245.3
+  },
+  {
+   "nummer": "20268263",
+   "docId": "fcd67fe9-8935-4aa4-8d76-5892040306a9",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5500",
+     "oud": 2601.5,
+     "nieuw": 2834.7,
+     "posten": [
+      "banen 233.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 233.2
+  },
+  {
+   "nummer": "20268212",
+   "docId": "58d52bed-f09a-4cda-b506-64c10ba91bec",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4800",
+     "oud": 2686.2,
+     "nieuw": 2994.2,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "20268136",
+   "docId": "d05b226a-87bc-4264-8096-a4d717569982",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2007",
+     "oud": 1810.6,
+     "nieuw": 1918.4,
+     "posten": [
+      "banen 107.8"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 107.8
+  },
+  {
+   "nummer": "20268126",
+   "docId": "aa3dffc0-1008-4325-9af1-d9b79a23ea36",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "6000",
+     "oud": 2996.4,
+     "nieuw": 3361.6,
+     "posten": [
+      "banen 365.2"
+     ],
+     "units": 2
+    }
+   ],
+   "som": 730.4
+  },
+  {
+   "nummer": "20268086",
+   "docId": "8b0f57d8-5bc1-43d9-a895-61766684dc59",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "1400",
+     "oud": 1510.3,
+     "nieuw": 1777.6,
+     "posten": [
+      "banen 107.8",
+      "ral 159.5"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunCube XL",
+     "breedte": "5000",
+     "oud": 2737.9,
+     "nieuw": 3045.9,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 575.3
+  },
+  {
+   "nummer": "20268079",
+   "docId": "93c617a4-6684-4fee-a1af-f965828fd276",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2895",
+     "oud": 2042.7,
+     "nieuw": 2219.8,
+     "posten": [
+      "banen 177.1"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 177.1
+  },
+  {
+   "nummer": "20268037",
+   "docId": "8a9ae0e5-81a1-4df3-825c-3b7d2f4e6aad",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "3400",
+     "oud": 1777.6,
+     "nieuw": 1941.5,
+     "posten": [
+      "banen 163.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 163.9
+  },
+  {
+   "nummer": "20267951",
+   "docId": "c19fd5ec-007b-43da-8732-061764f6975d",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4403",
+     "oud": 2435.4,
+     "nieuw": 3038.2,
+     "posten": [
+      "banen 245.3",
+      "ral 357.5"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 602.8
+  },
+  {
+   "nummer": "20267941",
+   "docId": "16c39e5d-2bcc-4726-a461-eeb14580b012",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3500",
+     "oud": 1610.4,
+     "nieuw": 2129.6,
+     "posten": [
+      "banen 195.8",
+      "ral 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 519.2
+  },
+  {
+   "nummer": "20267929",
+   "docId": "0491b1d4-daf6-443e-b9fb-9880b72ca0e9",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3600",
+     "oud": 2168.1,
+     "nieuw": 2730.2,
+     "posten": [
+      "banen 238.7",
+      "ral 323.4"
+     ],
+     "units": 2
+    }
+   ],
+   "som": 1124.2
+  },
+  {
+   "nummer": "20267928",
+   "docId": "62e05df1-72c9-4507-8799-fa0136f00fce",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "1950",
+     "oud": 1853.5,
+     "nieuw": 1987.7,
+     "posten": [
+      "banen 134.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 134.2
+  },
+  {
+   "nummer": "20267921",
+   "docId": "c9fbc513-a18a-4eac-bc79-9a7603c13ab7",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4800",
+     "oud": 2686.2,
+     "nieuw": 2994.2,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "20267899",
+   "docId": "e6b38ebb-119b-48bf-a96c-ba9f4c7f1e45",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4800",
+     "oud": 2686.2,
+     "nieuw": 2994.2,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "20267894",
+   "docId": "593f9c10-1b50-4c12-b916-e7e417d976da",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "2600",
+     "oud": 1589.5,
+     "nieuw": 1753.4,
+     "posten": [
+      "banen 163.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 163.9
+  },
+  {
+   "nummer": "20267865",
+   "docId": "a1730e2c-f077-4d5e-aa9a-150266e77dea",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "5000",
+     "oud": 2299,
+     "nieuw": 2526.7,
+     "posten": [
+      "banen 227.7"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 227.7
+  },
+  {
+   "nummer": "20267841",
+   "docId": "14f954b3-ba66-4f42-85ea-161fabeb2f79",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "2700",
+     "oud": 1579.6,
+     "nieuw": 1725.9,
+     "posten": [
+      "banen 146.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 146.3
+  },
+  {
+   "nummer": "20267795",
+   "docId": "a2174ca2-9f74-4354-ab65-8dda09bb3e8d",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4300",
+     "oud": 2392.5,
+     "nieuw": 2637.8,
+     "posten": [
+      "banen 245.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 245.3
+  },
+  {
+   "nummer": "20267776",
+   "docId": "39fffcb7-93cf-4374-bc97-bf03b1aea05e",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3413",
+     "oud": 2059.2,
+     "nieuw": 2627.9,
+     "posten": [
+      "banen 245.3",
+      "ral 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 568.7
+  },
+  {
+   "nummer": "20267724",
+   "docId": "814b62fe-ac9f-4138-8787-55b918264861",
+   "wijz": [
+    {
+     "regel": "SunCube 150 (Suncube XL)",
+     "breedte": "2753",
+     "oud": 1520.2,
+     "nieuw": 1961.3,
+     "posten": [
+      "banen 177.1",
+      "ral 264"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunCube 150 (Suncube XL)",
+     "breedte": "3360",
+     "oud": 1643.4,
+     "nieuw": 2113.1,
+     "posten": [
+      "banen 177.1",
+      "ral 292.6"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunCube 150 (Suncube XL)",
+     "breedte": "1740",
+     "oud": 1304.6,
+     "nieuw": 1626.9,
+     "posten": [
+      "banen 126.5",
+      "ral 195.8"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 1233.1
+  },
+  {
+   "nummer": "20267710",
+   "docId": "5d1e3e1b-93e0-4304-bc43-c143fdf224b5",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3100",
+     "oud": 2115.3,
+     "nieuw": 2599.3,
+     "posten": [
+      "banen 191.4",
+      "ral 292.6"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunCube XL",
+     "breedte": "1400",
+     "oud": 1721.5,
+     "nieuw": 2015.2,
+     "posten": [
+      "banen 134.2",
+      "ral 159.5"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 777.7
+  },
+  {
+   "nummer": "20267709",
+   "docId": "9eeec839-c699-41e8-8b99-810205446e46",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "3970",
+     "oud": 1268.3,
+     "nieuw": 1766.6,
+     "posten": [
+      "banen 181.5",
+      "ral 316.8"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunProject 100",
+     "breedte": "3970",
+     "oud": 1597.2,
+     "nieuw": 2095.5,
+     "posten": [
+      "banen 181.5",
+      "ral 316.8"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 996.6
+  },
+  {
+   "nummer": "20267701",
+   "docId": "b1ee2e9f-2571-4289-91bb-646e12a7d30a",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5000",
+     "oud": 2739,
+     "nieuw": 3047,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "20267651",
+   "docId": "8b529506-b7cc-43db-a133-cc37d7a5cd99",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "1600",
+     "oud": 794.2,
+     "nieuw": 1085.7,
+     "posten": [
+      "banen 100.1",
+      "ral 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 291.5
+  },
+  {
+   "nummer": "20267650",
+   "docId": "3df2111a-5a62-4778-ad22-fb3a630716ec",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2840",
+     "oud": 1928.3,
+     "nieuw": 2119.7,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 191.4
+  },
+  {
+   "nummer": "20267632",
+   "docId": "765f434f-6500-4a06-8c02-89f4a6466f8f",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5000",
+     "oud": 2739,
+     "nieuw": 3047,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "20267628",
+   "docId": "642edb33-d846-45da-a70b-c775d785558d",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2750",
+     "oud": 1520.2,
+     "nieuw": 1697.3,
+     "posten": [
+      "banen 177.1"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 177.1
+  },
+  {
+   "nummer": "20267624",
+   "docId": "c8db4a29-7a75-48bc-bcf5-7de34083a594",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5148",
+     "oud": 2791.8,
+     "nieuw": 3099.8,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "20267581",
+   "docId": "b3cd5b1a-c5c5-465e-b120-86b128845084",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4060",
+     "oud": 1867.8,
+     "nieuw": 2470.6,
+     "posten": [
+      "banen 245.3",
+      "ral 357.5"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 602.8
+  },
+  {
+   "nummer": "20267541",
+   "docId": "e8c3f560-0a55-4662-af1f-abb7a93c44d9",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2750",
+     "oud": 1939.3,
+     "nieuw": 2095.5,
+     "posten": [
+      "banen 156.2"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunCube XL",
+     "breedte": "1760",
+     "oud": 1739.1,
+     "nieuw": 1846.9,
+     "posten": [
+      "banen 107.8"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunCube XL",
+     "breedte": "1400",
+     "oud": 1659.9,
+     "nieuw": 1767.7,
+     "posten": [
+      "banen 107.8"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 371.8
+  },
+  {
+   "nummer": "20267539",
+   "docId": "dbca8d0f-2789-4ab1-b9f7-2397cf3b55d4",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3650",
+     "oud": 2132.9,
+     "nieuw": 2328.7,
+     "posten": [
+      "banen 195.8"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunCube XL",
+     "breedte": "3350",
+     "oud": 2050.4,
+     "nieuw": 2206.6,
+     "posten": [
+      "banen 156.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 352
+  },
+  {
+   "nummer": "20267527",
+   "docId": "ac2c4fe3-72b9-46cb-8741-3ec9f418cfc4",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3000",
+     "oud": 1971.2,
+     "nieuw": 2391.4,
+     "posten": [
+      "banen 156.2",
+      "ral 264"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 420.2
+  },
+  {
+   "nummer": "20267525",
+   "docId": "a86df9fd-dd4b-409e-84c4-891d1cd7936a",
+   "wijz": [
+    {
+     "regel": "Sunproject&#32;",
+     "breedte": "3000",
+     "oud": 1632.4,
+     "nieuw": 1778.7,
+     "posten": [
+      "banen 146.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 146.3
+  },
+  {
+   "nummer": "20267465",
+   "docId": "f7e2e17a-1b66-47a8-8487-a2ce7c07140c",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4000",
+     "oud": 1820.5,
+     "nieuw": 2389.2,
+     "posten": [
+      "banen 245.3",
+      "ral 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 568.7
+  },
+  {
+   "nummer": "20267447",
+   "docId": "9aa82e94-b429-42ed-b770-2fc230ca5b62",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2600",
+     "oud": 1982.2,
+     "nieuw": 2173.6,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 191.4
+  },
+  {
+   "nummer": "20267444",
+   "docId": "ad935908-711e-4af4-8f6f-074a5ccc8ef0",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "4151",
+     "oud": 4552.9,
+     "nieuw": 4848.8,
+     "posten": [
+      "trend 295.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 295.9
+  },
+  {
+   "nummer": "20267418",
+   "docId": "2646ab8f-a485-4087-ab04-73ee61516e96",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5649",
+     "oud": 2471.7,
+     "nieuw": 3237.3,
+     "posten": [
+      "banen 308",
+      "ral 457.6"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 765.6
+  },
+  {
+   "nummer": "20267417",
+   "docId": "17489de0-c3b5-4ac1-a6c8-e2f9ed7623ca",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5649",
+     "oud": 2471.7,
+     "nieuw": 3237.3,
+     "posten": [
+      "banen 308",
+      "ral 457.6"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 765.6
+  },
+  {
+   "nummer": "20267409",
+   "docId": "fda4a5f1-1fc1-4c1f-9d05-7992947edf6c",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "800",
+     "oud": 1152.43,
+     "nieuw": 1209.63,
+     "posten": [
+      "banen 57.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 57.2
+  },
+  {
+   "nummer": "20267396",
+   "docId": "1211e1bf-bac9-4965-85b7-9135f65acf06",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "4490",
+     "oud": 4692.6,
+     "nieuw": 4988.5,
+     "posten": [
+      "trend 295.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 295.9
+  },
+  {
+   "nummer": "20267391",
+   "docId": "52cc576d-067d-4f41-8adc-7ab0e0c7f215",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "1420",
+     "oud": 1741.3,
+     "nieuw": 2005.3,
+     "posten": [
+      "banen 126.5",
+      "trend 137.5"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 264
+  },
+  {
+   "nummer": "20267388",
+   "docId": "736b93cf-c5c3-4c0c-9c1f-0da6fefd3e86",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "4965",
+     "oud": 2739,
+     "nieuw": 3047,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "20267378",
+   "docId": "595d45db-15fb-493d-a345-3c80a1fbb978",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3100",
+     "oud": 1601.6,
+     "nieuw": 1778.7,
+     "posten": [
+      "banen 177.1"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 177.1
+  },
+  {
+   "nummer": "20267377",
+   "docId": "50e850b6-ad00-4ed8-9a5d-fbf966ffeee8",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "6000",
+     "oud": 5375.7,
+     "nieuw": 5731,
+     "posten": [
+      "trend 355.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 355.3
+  },
+  {
+   "nummer": "20267312",
+   "docId": "1c35c434-f951-4919-93a0-3b2086817d4a",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2811",
+     "oud": 2077.9,
+     "nieuw": 2533.3,
+     "posten": [
+      "banen 191.4",
+      "ral 264"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 455.4
+  },
+  {
+   "nummer": "20267305",
+   "docId": "3f9e03d8-8327-4874-9b4a-7da6445fa242",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2950",
+     "oud": 2042.7,
+     "nieuw": 2219.8,
+     "posten": [
+      "banen 177.1"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 177.1
+  },
+  {
+   "nummer": "20267221",
+   "docId": "fe7b510e-6b7b-43b0-a633-dd818dd86422",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3925",
+     "oud": 2255,
+     "nieuw": 2817.1,
+     "posten": [
+      "banen 238.7",
+      "ral 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 562.1
+  },
+  {
+   "nummer": "20267216",
+   "docId": "bd9e5ad1-964a-4f1c-bf63-7ff85247c54c",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2300",
+     "oud": 1380.5,
+     "nieuw": 1536.7,
+     "posten": [
+      "banen 156.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 156.2
+  },
+  {
+   "nummer": "20267164",
+   "docId": "5df8e5ee-3953-4507-8e17-ae0624a95ddc",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2933",
+     "oud": 1492.7,
+     "nieuw": 1648.9,
+     "posten": [
+      "banen 156.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 156.2
+  },
+  {
+   "nummer": "20267144",
+   "docId": "3d7b8b74-b732-40c2-9f07-72538fca51df",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "5013",
+     "oud": 4954.4,
+     "nieuw": 5277.8,
+     "posten": [
+      "trend 323.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 323.4
+  },
+  {
+   "nummer": "20267125",
+   "docId": "704c87eb-a9d9-4112-9372-5261ce0763aa",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3059",
+     "oud": 1601.6,
+     "nieuw": 1778.7,
+     "posten": [
+      "banen 177.1"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 177.1
+  },
+  {
+   "nummer": "20267050",
+   "docId": "11dbc2d5-d2df-41d6-b2c6-91116e1408a3",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "3730",
+     "oud": 1787.5,
+     "nieuw": 2285.8,
+     "posten": [
+      "banen 181.5",
+      "ral 316.8"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 498.3
+  },
+  {
+   "nummer": "20267046",
+   "docId": "05151af6-8fd8-4d2b-bc59-cf5c0620a27e",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "6000",
+     "oud": 5375.7,
+     "nieuw": 5731,
+     "posten": [
+      "trend 355.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 355.3
+  },
+  {
+   "nummer": "20267037",
+   "docId": "a4344f35-e942-4061-ac71-2294360bece0",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5000",
+     "oud": 2696.1,
+     "nieuw": 2970,
+     "posten": [
+      "banen 273.9"
+     ],
+     "units": 2
+    }
+   ],
+   "som": 547.8
+  },
+  {
+   "nummer": "20267012",
+   "docId": "aec07941-a093-4b86-9879-0fd13cf0ffae",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "1600",
+     "oud": 1591.7,
+     "nieuw": 1718.2,
+     "posten": [
+      "banen 126.5"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 126.5
+  },
+  {
+   "nummer": "20266991",
+   "docId": "f1ae4da0-66f2-4e38-9dba-57cb517df92e",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "6000",
+     "oud": 2851.2,
+     "nieuw": 3120.7,
+     "posten": [
+      "banen 269.5"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 269.5
+  },
+  {
+   "nummer": "20266757",
+   "docId": "b805fe5d-a85a-4932-b4f7-c45030093e09",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "4500",
+     "oud": 4692.6,
+     "nieuw": 5115,
+     "posten": [
+      "ral 422.4"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunCube 150",
+     "breedte": "2000",
+     "oud": 1780.9,
+     "nieuw": 1888.7,
+     "posten": [
+      "banen 107.8"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 530.2
+  },
+  {
+   "nummer": "20266346",
+   "docId": "8086c8d9-5779-4395-8957-e050ee1ccf7c",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "5429",
+     "oud": 2758.04,
+     "nieuw": 3066.04,
+     "posten": [
+      "banen 308"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 308
+  },
+  {
+   "nummer": "20265642",
+   "docId": "f42c30c8-fbc2-477e-bfe3-41afb77af3ec",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2700",
+     "oud": 2104.57,
+     "nieuw": 2260.77,
+     "posten": [
+      "banen 156.2"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 156.2
+  },
+  {
+   "nummer": "20263244",
+   "docId": "4ca93321-33eb-40d4-82dc-42c4cfbb87fc",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3489",
+     "oud": 2380.5,
+     "nieuw": 2625.8,
+     "posten": [
+      "banen 245.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 245.3
+  },
+  {
+   "nummer": "20261172",
+   "docId": "278e3ef5-edb6-408c-943f-427a792a7907",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2500",
+     "oud": 1555.63,
+     "nieuw": 1747.03,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 191.4
+  },
+  {
+   "nummer": "202516185",
+   "docId": "e99882bd-aa11-4d4d-a91e-b3625b109a63",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2841",
+     "oud": 1995.71,
+     "nieuw": 2187.11,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 191.4
+  },
+  {
+   "nummer": "202514887",
+   "docId": "12e39e85-13d0-4c87-9171-6516ff9b0e1b",
+   "wijz": [
+    {
+     "regel": "SunElite",
+     "breedte": "5500",
+     "oud": 5017.62,
+     "nieuw": 5478.52,
+     "posten": [
+      "ral 460.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 460.9
+  },
+  {
+   "nummer": "202514034",
+   "docId": "13b1dd34-e360-4833-8ce2-723443cebb8d",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "3500",
+     "oud": 2331.68,
+     "nieuw": 2576.98,
+     "posten": [
+      "banen 245.3"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 245.3
+  },
+  {
+   "nummer": "202512105",
+   "docId": "2c9f7c9a-15e5-4588-9d50-065def99d3aa",
+   "wijz": [
+    {
+     "regel": "SunProject 100",
+     "breedte": "2800",
+     "oud": 1645.8250061035155,
+     "nieuw": 1809.73,
+     "posten": [
+      "banen 163.9"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 163.9
+  },
+  {
+   "nummer": "202511335",
+   "docId": "23d242a2-7f9b-44af-b9ee-e915a8b7a631",
+   "wijz": [
+    {
+     "regel": "SunCube XL",
+     "breedte": "2700",
+     "oud": 1529,
+     "nieuw": 1720.4,
+     "posten": [
+      "banen 191.4"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunCube XL",
+     "breedte": "1600",
+     "oud": 1652,
+     "nieuw": 1778.5,
+     "posten": [
+      "banen 126.5"
+     ],
+     "units": 1
+    },
+    {
+     "regel": "SunCube XL",
+     "breedte": "1400",
+     "oud": 1609,
+     "nieuw": 1735.5,
+     "posten": [
+      "banen 126.5"
+     ],
+     "units": 1
+    }
+   ],
+   "som": 444.4
+  }
+ ],
+ "klaar": "2026-08-01T11:33:03.733Z",
+ "samenvatting": {
+  "gefixt": 154,
+  "mislukt": 0,
+  "totaal": 55871.2,
+  "banenRegels": 144,
+  "kleurRegels": 70
+ }
+}

@@ -941,10 +941,20 @@ function lookupPrice(productKey, breedteCm, hoogteCm, uitvalCm) {
     // doek 165 = uitval ≤95cm, doek 200 = uitval ≤115cm, anders doek 225.
     // Configurator biedt 950/1150/1350mm. Zonder uitval: 165 (kleinste, huidige data ≤1350mm).
     const doek = (!uitvalCm || uitvalCm <= 0) ? 165 : uitvalCm <= 95 ? 165 : uitvalCm <= 115 ? 200 : 225;
-    const tbl = product.tables[findNearest(product.tables, doek)?.key];
+    const doekKey = findNearest(product.tables, doek)?.key;
+    const tbl = product.tables[doekKey];
     if (!tbl) return null;
     if (breedteCm > Math.max(...Object.keys(tbl).map(Number))) return null; // breder dan tabel → handmatige controle
-    return findNearest(tbl, breedteCm)?.value || null;
+    const scherm = findNearest(tbl, breedteCm)?.value || null;
+    if (scherm === null) return null;
+    // BANEN CONFECTIE (boek p43/p44, aparte kolom naast de schermprijs; bevestigd Daimy
+    // 2026-08-01). Hoort standaard bij de prijs: de configurator rekende hem al mee, v4 en de
+    // bot niet, waardoor uitvalschermen ~108-270 euro te goedkoop werden geoffreerd.
+    // Bij SunProject doek 225 bestaat de post niet ("doek in banen niet mogelijk i.v.m.
+    // oproldiameter"), dan komt er niets bij.
+    const banenTbl = product.banenConfectie?.[String(doekKey)];
+    const banen = banenTbl ? (findNearest(banenTbl, breedteCm)?.value || 0) : 0;
+    return scherm + banen;
   }
   if (product.tables && (pCat === 'serre' || pCat === 'pergola')) {
     // Serre/pergola tabellen: uitval in MM (2500-4500), breedte in CM (300-600)

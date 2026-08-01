@@ -22,16 +22,18 @@ function check(naam, actual, expected) {
 // ============ A. REGRESSIE: baseline-waarden moeten EXACT gelijk blijven ============
 // Uitzondering (M1, bevestigd door Daimy 2026-07-02): uitvalschermen met uitval >95cm krijgen
 // nu de juiste doektabel (200/225) i.p.v. hardcoded 165 — die drie baseline-waarden wijzigen BEWUST.
+// 2026-08-01: banen confectie (boek p43/p44) hoort standaard bij de schermprijs — bevestigd
+// door Daimy. Die post zit nu in lookupPrice, dus deze M1-verwachtingen gaan met de banen mee.
 const M1_OVERRIDES = {
-  'suncube150/350//115': 1835,        // was 1763 (doek 165) → doek 200
-  'suncube150/140//135': 1430,        // was 1373 → doek 225
-  'sunproject100/300//135': 1350,     // was 1274 → doek 225
+  'suncube150/350//115': 1835 + 217,  // doek 200, staffel 360: scherm + banen
+  'suncube150/140//135': 1430 + 122,  // doek 225, staffel 140: scherm + banen
+  'sunproject100/300//135': 1350,     // doek 225 SunProject: banen niet mogelijk (oproldiameter)
 };
 const M1_CC_OVERRIDES = {
-  'suncube150/350//115/handbediend': Math.round((1835 - 299) * 1.10 * 100) / 100,          // 1689.6 (was 1610.4)
-  'suncube150/350//115/afstandsbediening': Math.round((1835 + 60 + 76) * 1.10 * 100) / 100, // 2168.1 (was 2088.9)
-  'sunproject100/300//135/afstandsbediening': Math.round((1350 + 134 + 76) * 1.10 * 100) / 100, // 1716 (was 1632.4)
-  'sunproject100/300//135/draaischakelaar': Math.round(1350 * 1.10 * 100) / 100,            // 1485 (was 1401.4)
+  'suncube150/350//115/handbediend': Math.round((1835 + 217 - 299) * 1.10 * 100) / 100,
+  'suncube150/350//115/afstandsbediening': Math.round((1835 + 217 + 60 + 76) * 1.10 * 100) / 100,
+  'sunproject100/300//135/afstandsbediening': Math.round((1350 + 134 + 76) * 1.10 * 100) / 100,
+  'sunproject100/300//135/draaischakelaar': Math.round(1350 * 1.10 * 100) / 100,
 };
 console.log('=== A. REGRESSIE (binnen tabelbereik → prijs ongewijzigd; M1-cases bewust nieuw) ===');
 for (const [key, expected] of baseline.lookupPrice) {
@@ -104,19 +106,19 @@ check('sunelite 500/uitval200 = als 250-tabel (geen minderprijs in JSON)', api.c
 
 console.log('=== B. M1: uitvalscherm doekmaat volgt uitval (95→165, 115→200, 135→225) ===');
 // suncube150 B=350cm (tabel rondt af naar 360)
-check('suncube 350/uitval95 → doek165 = 1763 (regressie: gelijk aan oud)', api.lookupPrice('suncube150', 350, null, 95), 1763);
-check('suncube 350/uitval115 → doek200 = 1835', api.lookupPrice('suncube150', 350, null, 115), 1835);
-check('suncube 350/uitval135 → doek225 = 1872', api.lookupPrice('suncube150', 350, null, 135), 1872);
+check('suncube 350/uitval95 → doek165 1763+banen178 = 1941', api.lookupPrice('suncube150', 350, null, 95), 1941);
+check('suncube 350/uitval115 → doek200 1835+banen217 = 2052', api.lookupPrice('suncube150', 350, null, 115), 2052);
+check('suncube 350/uitval135 → doek225 1872+banen223 = 2095', api.lookupPrice('suncube150', 350, null, 135), 2095);
 // sunproject100 B=300cm
-check('sunproject 300/uitval95 → doek165 = 1274 (regressie: gelijk aan oud)', api.lookupPrice('sunproject100', 300, null, 95), 1274);
-check('sunproject 300/uitval115 → doek200 = 1329', api.lookupPrice('sunproject100', 300, null, 115), 1329);
+check('sunproject 300/uitval95 → doek165 1274+banen133 = 1407', api.lookupPrice('sunproject100', 300, null, 95), 1407);
+check('sunproject 300/uitval115 → doek200 1329+banen149 = 1478', api.lookupPrice('sunproject100', 300, null, 115), 1478);
 check('sunproject 300/uitval135 → doek225 = 1350', api.lookupPrice('sunproject100', 300, null, 135), 1350);
 // randen
 check('uitval 0/ontbrekend → doek165 (huidig gedrag)', api.lookupPrice('sunproject100', 300, null, null), api.lookupPrice('sunproject100', 300, null, 95));
-check('uitval 96 → doek200 (grens)', api.lookupPrice('suncube150', 350, null, 96), 1835);
-check('uitval 116 → doek225 (grens)', api.lookupPrice('suncube150', 350, null, 116), 1872);
+check('uitval 96 → doek200 (grens, incl banen)', api.lookupPrice('suncube150', 350, null, 96), 2052);
+check('uitval 116 → doek225 (grens, incl banen)', api.lookupPrice('suncube150', 350, null, 116), 2095);
 check('uitvalscherm breder dan tabel (suncube 650>600) → null', api.lookupPrice('suncube150', 650, null, 95), null);
-check('sunproject 800 (=max) blijft werken', api.lookupPrice('sunproject100', 800, null, 95), 2688);
+check('sunproject 800 (=max) blijft werken, incl banen', api.lookupPrice('sunproject100', 800, null, 95), 2969);
 
 console.log('=== B. K5: markies boven tabelbereik → null ===');
 check('mkLookup grenen 4500mm → null (was 420-prijs 1212)', api.mkLookupMarkies(api.MK_GRENEN, 4500, 1000), null);

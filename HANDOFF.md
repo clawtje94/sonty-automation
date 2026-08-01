@@ -53,6 +53,11 @@
 - **Nog te bouwen (afgesproken)**: brief-flow via postbode, KvK-verrijking + cron nieuwe VvE's.
 - **Nieuwbouw-detectie LIVE (PR #48/#49)**: knop "Komende VvE's" = BAG-panden vergund/bouw gestart met 10+ won (Zoetermeer: 10 complexen/683 won, o.a. 228-won-toren 2026). BAG-jaartal = GEPLANDE oplevering; verlopen jaar → label "oplevering loopt uit, nu benaderen" (vraag Daimy). Belangen-vraag Daimy beantwoord met VvE-recht-bronnen: bestuur vreest wildgroei maar mag niet totaal verbieden → protocol is hun uitweg, ons aanbod.
 
+## WINSTPLAN VERSTUURD (1 aug, opdracht Daimy: "onderzoek in 1 terminal, zo veel mogelijk winst")
+- Stand: 259k winst op 2,9M ex (8,9%) jan-jul; lasten groeien even hard als omzet (+43%), geen schaalvoordeel; conversie gehalveerd door overvolume.
+- Keuzes op impact: (1) conversie-herstel: +1pp = 145k/7mnd, naar 12% = ~390k — via instroom terug naar 280-350/wk; (2) ad-herallocatie Meta-Rolluiken → Google S+S/Meta Screens (60-90k/jr); (3) +1 montageteam (77k marge/mnd doorzet vs 9k loon, W33+ leeg); (4) belblok oude plank (~34k/ronde); (5) gratis kanalen opschalen (Zonradar + referral, 50-100k/jr); (6) RP eruit (12k/jr); (7) prijstest 2% = alleen op Daimy's zeggen.
+- Advies: 1+2+3 als één beweging (~400-500k/jr). WACHT OP DAIMY: welke punten → dan per punt draaiboek. Ook open: mix-kolom in dashboard-maandtabel (aangeboden 31-07).
+
 ## WINST-PER-BRON COMPLEET (31 juli, slot): sheet x ads x lasten in één model
 - `campagne-rendement.js` is het hart: campagne-spend (Meta-CSV's + Google-screenshots, data/campagne-spend-*.json) x sheet-orders (echte akkoordbedragen; €1-inkoop geschat via productratio ~53%) x echte maandlasten (lasten-blok per maandtab via `lasten-import.js`, = alles behalve ad spend). Alles ex btw.
 - Dashboard: "Winst per bron" (Meta 23,7k | Google 17,2k | buren 58,8k | anders 61,0k | onbekend 98,8k | BEDRIJF 259,4k jan-jul), netto per maand per bron, per campagne. Juni-test sloot exact aan op Daimy's eigen blok (verschil = zijn 50% marge-aanname vs gemeten 47,5% + narijping).

@@ -69,12 +69,47 @@ function meetbonHtml(bon, factuur) {
   </div>`;
 }
 
+// VANGNET (Daimy 01-08: "krijgt iemand automatisch de juiste meetbon-link?"): afspraken die
+// het team rechtstreeks in Planado aanmaakt hebben geen meetbon-link. Deze stap loopt de
+// komende inmeet-opdrachten na: link ontbreekt + Gripp-nr herkenbaar → link toevoegen aan de
+// beschrijving; geen Gripp-nr herkenbaar → 1x Telegram zodat het via het dashboard kan.
+async function vangnetPlanadoLinks(state) {
+  const KEY_PLANADO = fs.readFileSync(path.join(__dirname, 'planado-api-key.txt'), 'utf8').trim();
+  const H = { Authorization: 'Bearer ' + KEY_PLANADO, 'Content-Type': 'application/json' };
+  const r = await fetch('https://api.planadoapp.com/v2/jobs?limit=100', { headers: H });
+  if (!r.ok) { console.log('vangnet: jobs-lijst faalde', r.status); return; }
+  const jobs = (await r.json()).jobs || [];
+  const nu = Date.now();
+  for (const kandidaat of jobs) {
+    const gepland = kandidaat.scheduled_at ? Date.parse(kandidaat.scheduled_at) : 0;
+    if (!gepland || gepland < nu - 86400000 || gepland > nu + 30 * 86400000) continue;
+    // de lijst bevat geen beschrijving; detail ophalen
+    const dr = await fetch(`https://api.planadoapp.com/v2/jobs/${kandidaat.uuid}`, { headers: H });
+    if (!dr.ok) continue;
+    const j = (await dr.json()).job || {};
+    const desc = String(j.description || '');
+    const isInmeet = /inmeet|inmeten/i.test(desc) || String(j.external_id || '').startsWith('meetbon-');
+    if (!isInmeet || desc.includes('/admin/meetbon/')) continue;
+    const nr = (desc.match(/gripp\s*#?\s*(\d{3,7})/i) || desc.match(/\((\d{3,7})\)/) || [])[1];
+    if (nr) {
+      const nieuw = desc + `\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/${nr}`;
+      const pr = await fetch(`https://api.planadoapp.com/v2/jobs/${j.uuid}`, { method: 'PATCH', headers: { ...H, 'X-Planado-Notify-Assignees': 'false' }, body: JSON.stringify({ description: nieuw }) });
+      console.log(`  vangnet: link toegevoegd aan opdracht #${j.serial_no || j.uuid.slice(0, 8)} (Gripp ${nr}): ${pr.ok ? 'OK' : 'FOUT ' + pr.status}`);
+    } else if (!state.linkGemeld?.[j.uuid]) {
+      state.linkGemeld = state.linkGemeld || {};
+      state.linkGemeld[j.uuid] = new Date().toISOString();
+      await telegram(`📐 Inmeet-afspraak #${j.serial_no || '?'} (${(desc.split('\n')[0] || 'zonder omschrijving').slice(0, 60)}) heeft geen meetbon-link en ik herken geen Gripp-nummer in de omschrijving. Zet "Gripp <nummer>" in de opdracht-omschrijving of plan via het dashboard, dan koppel ik hem automatisch.`);
+    }
+  }
+}
+
 async function main() {
   if (fs.existsSync(KILL)) { console.log('kill-switch actief'); return; }
   if (fs.existsSync(LOCK) && Date.now() - fs.statSync(LOCK).mtimeMs < 50 * 60 * 1000) { console.log('lock actief'); return; }
   fs.writeFileSync(LOCK, String(process.pid));
   const state = fs.existsSync(STATE) ? JSON.parse(fs.readFileSync(STATE, 'utf8')) : { gemeld: {} };
   try {
+    await vangnetPlanadoLinks(state).catch((e) => console.log('vangnet-fout:', e.message.slice(0, 80)));
     const r = await fetch(API, { headers: { Authorization: 'Bearer ' + SECRETS.ADMIN_PASSWORD } });
     if (!r.ok) { console.log('API-fout', r.status); return; }
     const { klaar } = await r.json();

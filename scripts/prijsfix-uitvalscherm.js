@@ -43,7 +43,9 @@ const TREND = ['ral 7039', 'ral 9007', 'ral 9010 structuur', 'db 703', 'db703', 
 function kleurSoort(productKey, kleur) {
   const k = String(kleur || '').toLowerCase().trim();
   // 'TNA'/'NTB'/'naar keuze' = nog te bepalen, geen kleurkeuze -> nooit een meerprijs.
-  if (!k || /n\.?t\.?b|^tna$|naar keuze/.test(k)) return null;
+  // 'NTB'/'naar keuze' = nog te bepalen. 'TNA'/'Technisch (natuur) aluminium' is bij
+  // uitvalschermen de STANDAARDkleur (Daimy 2026-08-01) en staat nu ook in standaardKleuren.
+  if (!k || /n\.?t\.?b|naar keuze/.test(k)) return null;
   const std = (PRICES[productKey]?.standaardKleuren || []).map((x) => x.toLowerCase());
   if (std.some((s) => k.includes(s) || s.includes(k))) return null;
   return TREND.some((t) => k.includes(t)) ? 'trend' : 'ral';

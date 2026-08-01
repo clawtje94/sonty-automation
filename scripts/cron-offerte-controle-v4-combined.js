@@ -1275,6 +1275,9 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
       else if (uitvalCm <= 200 && typeof product.minderprijzen.uitval200 === 'number') totaal += product.minderprijzen.uitval200;
     }
     // Tabel = Sunea IO. IO + handzender is standaard bestelling.
+    // SunEye XL bestaat NIET handbediend (Daimy 01-08; boek p28: minderprijzen alleen
+    // uitval 150/200 en Orea WT, geen draaistang). Geen prijs -> handmatige controle.
+    if (productKey === 'suneyeXL' && isHandbediend) return null;
     if (isIO) totaal += hz;
     else if (isDraaischakelaar) totaal -= 51; // Orea WT als "draaischakelaar" interpretatie
     else if (isHandbediend) totaal -= 300; // draaistang

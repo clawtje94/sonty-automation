@@ -98,6 +98,10 @@ function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'i
   const u = uitvalMM ? uitvalMM / 10 : null;
   if (!b) return { error: 'Breedte ontbreekt' };
 
+  // SunEye XL is alleen elektrisch (Daimy 01-08, boek p28) — geef de bot een bruikbare uitleg.
+  if (productKey === 'suneyeXL' && bediening === 'handbediend') {
+    return { error: 'De SunEye XL bestaat niet handbediend, alleen elektrisch (Sunea io, of Orea WT met draaischakelaar). Wil de klant per se handbediend, dan kan dat alleen bij de standaard SunEye tot 600 cm breed. Adviseer elektrisch en reken die door.' };
+  }
   const bedType = bediening === 'io' ? 'afstandsbediening' : bediening;
   let prijs = api.calculateCorrectPrice(productKey, b, h, u, bedType);
   // MAAT-FALLBACKS (Daimy 20 juli): maat past niet in het gekozen model, groter zustermodel wél.

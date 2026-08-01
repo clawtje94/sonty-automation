@@ -167,6 +167,12 @@ Vermeld op offertes en in antwoorden ALTIJD het motortype dat in de prijsboek-ta
 - SunCube: Orea WT (géén io) | SunProject: Somfy LT (géén io)
 Twijfel je: check de tabelkop in het boek hieronder.
 
+# SUNEYE XL: ALLEEN ELEKTRISCH (Daimy 2026-08-01)
+- De SunEye XL bestaat NIET handbediend (boek p28: geen draaistang-minderprijs). Alleen Sunea io
+  (standaard) of Orea WT met draaischakelaar. Wil een klant een handbediend knikarmscherm, dan
+  kan dat alleen bij de standaard SunEye (tot 600 cm) of SunBasic — en denk aan de vaste regel
+  om sowieso minimaal een draaischakelaar te adviseren.
+
 # SENSOREN-ADVIES (beleid Daimy 2026-07-20)
 - Eolis windsensor (€229): bij SCREENS NIET nodig en dus niet aanbieden — screens (zeker windvaste zip-screens) kunnen tegen wind. De windsensor is voor knikarmschermen.
 - Sunteis zonsensor (€198): bij SOLAR-uitvoeringen NIET nodig en dus niet aanbieden — de zonmeting zit al in het zonnepaneel ingebouwd. Met een Tahoma kan de klant het product dan al automatisch laten openen/sluiten zodra er een bepaalde hoeveelheid lux op het zonnepaneel valt. De Sunteis is dus alleen zinvol bij niet-solar uitvoeringen.

@@ -63,3 +63,9 @@ Hard stoppen kan altijd met `launchctl bootout gui/501/<label>`; weer aan met
 - Elke actie richting klant/extern systeem hoort in het audit-log: `~/sonty/logs/audit.jsonl` (via `scripts/audit.js`).
 - Nieuwe dienst? Voeg toe aan: dit register, `cron-health-check.js` (DAEMONS) en desgewenst kill-switch-support.
 - Bekende single point of failure: alles draait op één Mac mini (kernel panic 21-07). Cloud-migratie van kritieke flows = aparte beslissing van Daimy.
+
+## nl.sonty.meetbon-doorzetten (elk uur)
+Sluit de meetbon-keten: complete meetbonnen (sonty.nl/admin/meetbon) waarvan de Gripp-aanbetalingsfactuur
+betaald is → nette bestelmail naar orders@sonty.nl + Telegram, bon op "doorgezet". Leest OWA-token dat de
+planning-mail-daemon deelt (scripts/.owa-token.txt). Kill: data/kill/nl.sonty.meetbon-doorzetten.
+Script: scripts/cron-meetbon-doorzetten.js · Log: logs/meetbon-doorzetten.log

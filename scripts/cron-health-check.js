@@ -22,6 +22,7 @@ const LOGS_DIR = '/Users/clawdboot/sonty/logs';
 
 // Verwachte actieve daemons + max uren sinds laatste log update
 const DAEMONS = [
+  { label: 'nl.sonty.meetbon-doorzetten', log: 'meetbon-doorzetten.log', maxLogAgeH: 3, name: 'Meetbon doorzetter (aanbetaling -> orders@)' },
   { label: 'nl.sonty.offerte-v4', log: 'v4.log', maxLogAgeH: 30, name: 'Offerte controle v4' },
   { label: 'nl.sonty.v4-selfcheck', log: 'v4-selfcheck.log', maxLogAgeH: 30, name: 'V4 self-check' },
   { label: 'nl.sonty.gripp-invullen', log: 'gripp-invullen.log', maxLogAgeH: 26, name: 'Gripp invullen' },

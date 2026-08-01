@@ -144,6 +144,8 @@ async function owaSessie() {
   }
   await page.waitForTimeout(8000);
   if (!token) { await browser.close(); throw new Error('geen OWA-token'); }
+  // token delen met andere daemons (meetbon-doorzetter mailt ermee naar orders@)
+  try { fs.writeFileSync(path.join(__dirname, '.owa-token.txt'), token); } catch {}
   return { browser, page, token };
 }
 

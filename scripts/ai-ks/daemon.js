@@ -576,9 +576,23 @@ async function verwerkTicket(t, state) {
   // kort ja op een concrete vraag en gebeurde er niets, tegen 142 keer een echt afscheid waar
   // zwijgen juist goed is. Daarom alleen zwijgen als ons laatste bericht GEEN vraag was.
   const onsLaatste = [...rows].reverse().find(r => r.van === 'sonty');
-  const wijVroegenIets = /\?/.test(String(onsLaatste?.tekst || '').slice(-200));
+  // HEEL ons bericht bekijken, niet de laatste 200 tekens (Els, ticket 970642693, 1 aug):
+  // de bot vroeg "zelf ondertekenen of zal ik hem in orde maken?" en zette daar procesuitleg
+  // achter. De vraag viel buiten die 200 tekens, dus gold dit als "wij vroegen niets".
+  const wijVroegenIets = /\?/.test(String(onsLaatste?.tekst || ''));
+  // ALLE onbeantwoorde klantberichten meewegen, niet alleen het laatste. Els stuurde vier
+  // inhoudelijke berichten ("zet het sws maar in gang") en sloot af met een ✅; op dat vinkje
+  // zweeg de bot, waardoor haar akkoord nooit is verwerkt.
+  const onsIdx = rows.map((r, i) => (r.van === 'sonty' ? i : -1)).filter((i) => i >= 0).pop() ?? -1;
+  const naOns = rows.slice(onsIdx + 1).filter((r) => r.van !== 'sonty');
+  const isEnkelBevestiging = (tekst) => {
+    const ze = String(tekst || '').replace(/[\p{Extended_Pictographic}‍️\u{1F3FB}-\u{1F3FF}]/gu, '').trim();
+    const w = ze.toLowerCase().replace(/[!.,;:👍🤝🙏😊🎉'"()-]/g, ' ').split(/\s+/).filter(Boolean);
+    return !/\?/.test(tekst) && ze.length <= 45 && (w.length === 0 || w.every((x) => BEVESTIG_WOORDEN.has(x)));
+  };
   const isBevestiging = !wijVroegenIets && !/\?/.test(laatste.tekst) && zonderEmoji.length <= 45 &&
-    (woorden.length === 0 || woorden.every(w => BEVESTIG_WOORDEN.has(w)));
+    (woorden.length === 0 || woorden.every(w => BEVESTIG_WOORDEN.has(w))) &&
+    (naOns.length <= 1 || naOns.every((r) => isEnkelBevestiging(r.tekst)));
   if (isBevestiging) {
     state.verwerkt[sleutel] = { tijd: new Date().toISOString(), bevestiging: true };
     console.log(`  ticket ${t.id}: pure bevestiging ("${laatste.tekst.slice(0, 20)}"), niet op reageren`);

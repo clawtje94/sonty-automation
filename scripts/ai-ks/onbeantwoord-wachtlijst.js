@@ -97,7 +97,7 @@ function isRuis(w) {
   if (EIGEN_MAIL.test(adres)) return 'eigen/systeemmail';
   if (/^scan\b|sonty montage/i.test(adres)) return 'eigen scanmail';
   if (!w.tekst) return 'leeg bericht';
-  if (isBevestiging(w.tekst)) return 'pure bevestiging';
+  if (isBevestiging(w.tekst) && !w.meerOnbeantwoord) return 'pure bevestiging';
   if (AUTO_ANTWOORD.test(w.tekst)) return 'automatisch antwoord';
   return null;
 }
@@ -137,6 +137,21 @@ function duur(uren) {
         .replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
     });
   }
+  // BEVESTIGING MET INHOUD ERVOOR (Els, ticket 970642693, 1 aug): een klant die vijf berichten
+  // stuurt en afsluit met een duimpje viel als "pure bevestiging" uit het rapport, terwijl haar
+  // akkoord onbeantwoord bleef. Alleen voor die enkele tickets één extra call: staan er ná ons
+  // laatste bericht meerdere klantberichten, dan is het géén afsluitend duimpje.
+  for (const w of wachtend) {
+    if (!isBevestiging(w.tekst)) continue;
+    try {
+      const m = await fetch(`https://app.trengo.com/api/v2/tickets/${w.id}/messages?per_page=10`, { headers: { Authorization: 'Bearer ' + jwt } });
+      const rows = (await m.json())?.data || [];
+      const onsIdx = rows.findIndex((x) => String(x.type).toUpperCase() === 'OUTBOUND'); // nieuwste eerst
+      const naOns = (onsIdx === -1 ? rows : rows.slice(0, onsIdx)).filter((x) => String(x.type).toUpperCase() === 'INBOUND');
+      if (naOns.length > 1) w.meerOnbeantwoord = true;
+    } catch { /* lookup mag het rapport nooit breken */ }
+  }
+
   // Ruis eruit, en tellen wát eruit ging — zodat het rapport nooit stil dingen weglaat.
   const ruisRedenen = {};
   const echt = wachtend.filter((w) => {

@@ -9,6 +9,7 @@ const path = require('path');
 const { beantwoord } = require('./agent.js');
 
 const SONNY_USER = 747786;
+const { magSluiten } = require('./mag-sluiten.js');
 const TEAM_MENS_NODIG = 431872; // Daimy 19 juli: escalaties naar het team "Mens nodig"
 const AANVRAGEN_KANAAL = 1363384; // e-mailkanaal aanvragen@sonty.nl
 const LABEL = { AI_BOT: 1821763, MENS_NODIG: 1821764, OPMETING: 1815410, OFFERTE_VERSTUURD: 1815411 };
@@ -179,14 +180,14 @@ async function verwerk(ticketId) {
         // met je op" en sloot daarna het ticket zonder toewijzing — niemand pakte het op, en
         // gesloten tickets vallen ook buiten de onbeantwoord-wachtlijst). Zo'n belofte hoort
         // bij een mens te liggen tot die is nagekomen.
-        const belooftContact = /(neem|nemen|neemt).{0,40}contact|contact.{0,25}(op|met je)|bel(t|len|len we)? (je|u)|doorgezet naar|doorgegeven aan|collega.{0,30}(neemt|belt|pakt)|plant.{0,20}(in|afspraak)/i.test(conceptDraft);
+        const poort = magSluiten({ klantTekst: `${wil || ''} ${body || ''} ${vraag || ''}`, antwoord: conceptDraft });
         await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `🤖 Sunny heeft deze website-lead zelf per mail beantwoord (naar ${email}).\n\n--- Verstuurde mail ---\n${conceptDraft}` });
-        if (belooftContact) {
+        if (!poort.mag) {
           await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
           await zetLabel(ticketId, LABEL.MENS_NODIG);
-          await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: '👤 In deze mail is de klant BELOOFD dat iemand contact opneemt. Ticket blijft daarom open en staat bij Mens nodig tot die belofte is nagekomen.' });
+          await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `👤 Ticket blijft OPEN bij Mens nodig: ${poort.reden}.` });
           logKS({ ticket: ticketId, webflow: true, laatsteKlantBericht: (wil || body).slice(0, 200), antwoord: conceptDraft, acties: [{ type: 'escalatie', reden: 'belofte van contact in lead-antwoord' }] });
-          return { ticketId, klant: naam || email, resultaat: '✅ BEANTWOORD (webflow-lead) + OPEN bij Mens nodig (belofte van contact)', concept: conceptDraft.slice(0, 220) };
+          return { ticketId, klant: naam || email, resultaat: `✅ BEANTWOORD (webflow-lead) + OPEN bij Mens nodig (${poort.reden})`, concept: conceptDraft.slice(0, 220) };
         }
         await tPost(`/tickets/${ticketId}/assign`, { type: 'user', user_id: SONNY_USER });
         await zetLabel(ticketId, LABEL.AI_BOT);
@@ -232,7 +233,12 @@ async function verwerk(ticketId) {
     await zetLabel(ticketId, LABEL.AI_BOT);
     if (mutaties.some(a => a.type === 'inmeet_afspraak')) await zetLabel(ticketId, LABEL.OPMETING);
     if (mutaties.some(a => /offerte/.test(a.type))) await zetLabel(ticketId, LABEL.OFFERTE_VERSTUURD);
-    await tPost(`/tickets/${ticketId}/close`, {});
+    const poortMail = magSluiten({ klantTekst: rijen.filter(r => r.van === 'klant').map(r => r.tekst).join(' '), antwoord: res.antwoord, acties: res.acties });
+    if (!poortMail.mag) {
+      await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
+      await zetLabel(ticketId, LABEL.MENS_NODIG);
+      await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `👤 Ticket blijft OPEN bij Mens nodig: ${poortMail.reden}.` });
+    } else await tPost(`/tickets/${ticketId}/close`, {});
     logKS({ ticket: ticketId, laatsteKlantBericht: rijen[rijen.length - 1]?.tekst?.slice(0, 200), antwoord: schoonKlantTekst(res.antwoord), acties: mutaties });
     return { ticketId, klant: gesprek.klant.naam || gesprek.klant.email, resultaat: verstuurd ? '✅ BEANTWOORD + gesloten' : '⚠️ versturen mislukt', concept: schoonKlantTekst(res.antwoord).slice(0, 220), acties: mutaties.map(a => a.type) };
   }

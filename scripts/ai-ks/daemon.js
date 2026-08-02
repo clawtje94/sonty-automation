@@ -828,8 +828,22 @@ async function verwerkTicket(t, state) {
   // beurt, en ook nooit zolang er een eerdere escalatie loopt die niet is opgelost; stuurt
   // de klant later toch weer iets, dan opent Trengo het ticket vanzelf weer.
   if (res.klaar && !escalatie && !(eerdereEscalaties.length && !res.opgelost) && isWaTicket(t) && (sonnyMode || actiefTicket || liveTest)) {
-    const dicht = await tPost(`/tickets/${t.id}/close`, {});
-    console.log(`  ${dicht.ok ? '✓ gesprek klaar → ticket gesloten' : '⚠️ ticket sluiten mislukte: ' + dicht.status}`);
+    // Zelfde poort als de e-mailkant: een service-/reparatiemelding of een belofte dat iemand
+    // contact opneemt gaat nooit dicht, maar naar Mens nodig (Daimy 2026-08-02).
+    const { magSluiten } = require('./mag-sluiten.js');
+    const poort = magSluiten({
+      klantTekst: rows.filter(r => r.van !== 'sonty').map(r => r.tekst).join(' '),
+      antwoord: res.antwoord, acties: res.acties,
+    });
+    if (!poort.mag) {
+      await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
+      await zetLabel(t.id, LABEL.MENS_NODIG);
+      await tPost(`/tickets/${t.id}/messages`, { internal_note: true, message: `👤 Ticket blijft OPEN bij Mens nodig: ${poort.reden}.` });
+      console.log(`  ticket ${t.id} NIET gesloten → Mens nodig (${poort.reden})`);
+    } else {
+      const dicht = await tPost(`/tickets/${t.id}/close`, {});
+      console.log(`  ${dicht.ok ? '✓ gesprek klaar → ticket gesloten' : '⚠️ ticket sluiten mislukte: ' + dicht.status}`);
+    }
   }
 
   // Terugkom-belofte in het zojuist beantwoorde klantbericht? Registreren voor de reminder.

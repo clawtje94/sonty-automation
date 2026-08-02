@@ -174,7 +174,20 @@ async function verwerk(ticketId) {
     if (conceptDraft) {
       const verstuurd = await stuurNieuweMail(email, 'Je aanvraag bij Sonty', naarHtml(conceptDraft));
       if (verstuurd) {
+        // BELOOFT HET ANTWOORD DAT IEMAND CONTACT OPNEEMT? Dan NIET sluiten (mevr. Langenberg,
+        // ticket 970863017, 1 aug: Sunny mailde "onze serviceafdeling neemt persoonlijk contact
+        // met je op" en sloot daarna het ticket zonder toewijzing — niemand pakte het op, en
+        // gesloten tickets vallen ook buiten de onbeantwoord-wachtlijst). Zo'n belofte hoort
+        // bij een mens te liggen tot die is nagekomen.
+        const belooftContact = /(neem|nemen|neemt).{0,40}contact|contact.{0,25}(op|met je)|bel(t|len|len we)? (je|u)|doorgezet naar|doorgegeven aan|collega.{0,30}(neemt|belt|pakt)|plant.{0,20}(in|afspraak)/i.test(conceptDraft);
         await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `🤖 Sunny heeft deze website-lead zelf per mail beantwoord (naar ${email}).\n\n--- Verstuurde mail ---\n${conceptDraft}` });
+        if (belooftContact) {
+          await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
+          await zetLabel(ticketId, LABEL.MENS_NODIG);
+          await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: '👤 In deze mail is de klant BELOOFD dat iemand contact opneemt. Ticket blijft daarom open en staat bij Mens nodig tot die belofte is nagekomen.' });
+          logKS({ ticket: ticketId, webflow: true, laatsteKlantBericht: (wil || body).slice(0, 200), antwoord: conceptDraft, acties: [{ type: 'escalatie', reden: 'belofte van contact in lead-antwoord' }] });
+          return { ticketId, klant: naam || email, resultaat: '✅ BEANTWOORD (webflow-lead) + OPEN bij Mens nodig (belofte van contact)', concept: conceptDraft.slice(0, 220) };
+        }
         await tPost(`/tickets/${ticketId}/assign`, { type: 'user', user_id: SONNY_USER });
         await zetLabel(ticketId, LABEL.AI_BOT);
         await tPost(`/tickets/${ticketId}/close`, {});

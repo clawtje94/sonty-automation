@@ -36,16 +36,36 @@ function maatenUitProduct(prod) {
     }
   }
   if (prod.tables) {
+    // De buitenste sleutel betekent per categorie iets anders. Dit is geen detail:
+    // bij uitvalschermen is het het DOEK (165/200/225), niet de uitval. Die sleutel
+    // als uitval doorgeven levert altijd doek 225 op, waardoor doek 165 en 200 nooit
+    // getest worden. Bij serre/pergola staat de uitval in MILLIMETERS (2500-4500).
+    const cat = prod.category;
     for (const sleutel of Object.keys(prod.tables)) {
       const t = prod.tables[sleutel];
       if (!t || typeof t !== 'object') continue;
       const s = Number(sleutel);
+
+      // Welke uitvalwaarden horen bij deze tabel? Bij uitvalschermen de waarden die
+      // v4 op dit doek laten uitkomen, inclusief de grenzen 95/96 en 115/116.
+      let uitvallen;
+      if (cat === 'uitvalscherm') {
+        uitvallen = s === 165 ? [50, 80, 95] : s === 200 ? [96, 105, 115] : [116, 130, 150];
+      } else if (cat === 'serre' || cat === 'pergola') {
+        // De tabelsleutel staat in mm (2500-4500) maar v4 wil de uitval in CM binnen
+        // krijgen en rekent zelf ×10. De sleutel rechtstreeks doorgeven levert 25000mm op,
+        // waardoor élke serre op de duurste uitvalstaffel uitkomt.
+        uitvallen = Number.isNaN(s) ? [null] : [s / 10];
+      } else {
+        uitvallen = [Number.isNaN(s) ? null : s];
+      }
+
       for (const b of num(t)) {
         const cel = t[b];
-        // Bij knikarm/uitval is de buitenste sleutel de uitval of het doek; bij een
-        // geneste tabel is de binnenste de hoogte. Beide varianten meenemen.
-        if (cel && typeof cel === 'object') for (const h of num(cel)) uit.push({ breedte: b, hoogte: h, uitval: Number.isNaN(s) ? null : s });
-        else uit.push({ breedte: b, hoogte: null, uitval: Number.isNaN(s) ? null : s });
+        for (const u of uitvallen) {
+          if (cel && typeof cel === 'object') for (const h of num(cel)) uit.push({ breedte: b, hoogte: h, uitval: u });
+          else uit.push({ breedte: b, hoogte: null, uitval: u });
+        }
       }
     }
   }

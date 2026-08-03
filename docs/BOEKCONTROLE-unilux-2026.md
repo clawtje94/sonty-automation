@@ -10,10 +10,10 @@ geen enkele factor meer overheen (zie `uniluxAlIngerekend` in prijsconfig.json).
 | 3 | COMFORT opties | ✅ 03-08 | ⚠️ RAL-meerprijs **per stuk** ontbrak, zie bevinding 1 |
 | 4 | **Raamhor SUPER+** | ✅ 03-08 | alle 48 cellen exact advies × 1,10. ⚠️ het boek heeft óók een smalle tabel (breedte 300/400/500 met veervertrager) die wij niet hebben |
 | 5 | **Raamhor voorzethor** | ✅ 03-08 | alle 68 cellen exact advies × 1,10. RAL per stuk is hier €50, niet €71 |
-| 6 | Raamhor veerstifthor/softfit | TE DOEN | |
+| 6 | **Veerstifthor/Softfit** | ✅ 03-08 | alle 72 cellen goed. RAL per stuk €50 |
 | 7 | **Raamhor inklemhor** | ✅ 03-08 | tabel identiek aan voorzethor en klopt. RAL per stuk ook €50 |
-| 8 | Raamhor voorzet unit | TE DOEN | |
-| 9 | Raamhor inklem unit | TE DOEN | |
+| 8 | **Voorzet unit + dubbel systeem** | ✅ 03-08 | beide tabellen goed (40 + 48 cellen). RAL per stuk €71 |
+| 9 | **Inklem unit + dubbel systeem** | ✅ 03-08 | identiek aan voorzet unit en klopt |
 | 10 | Hordeur plisséfit | TE DOEN | |
 | 11 | Hordeur dubbele plisséfit | TE DOEN | |
 | 12 | Vaste hordeur luxe | TE DOEN | |
@@ -63,3 +63,11 @@ geen enkele factor meer overheen (zie `uniluxAlIngerekend` in prijsconfig.json).
    hordeuren). Die moeten nog nagekeken en aangevuld worden — p6 en p8 t/m p13.
 9. **Opties die we nergens rekenen:** schuine hoek vanaf montagezijde €117, middenkader
    extra €17 (beide bij voorzet- en inklemhor). Pollengaas €39 hebben we wel (bij ons €43).
+
+10. **RAL-meerprijs per stuk, stand per 03-08:** Comfort €78, Super+ €78, voorzethor €55,
+   inklemhor €55, veerstifthor €55, voorzet unit €78, inklem unit €78, dubbel systeem €78.
+   De plisséfit-deuren en de luxe hordeuren (p10-p13) zijn nog niet gecontroleerd en vallen
+   terug op het generieke tarief van €78.
+11. **Grijs gaas €96** bij de units — Unilux raadt het zelf af (mindere UV-bestendigheid,
+   buiten garantie). Niet opnemen lijkt me juist; ter info.
+12. **Handgreep unit €8** (crème wit, wit, zwart). Rekenen wij niet.

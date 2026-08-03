@@ -1049,7 +1049,11 @@
    "comfort": 78,
    "super_plus": 78,
    "voorzethor": 55,
-   "inklemhor": 55
+   "inklemhor": 55,
+   "veerstifthor": 55,
+   "voorzet_unit": 78,
+   "inklem_unit": 78,
+   "unit_dubbel": 78
   },
   "_ral_per_product": "Boek Unilux: de meerprijs per stuk voor een afwijkende RAL verschilt per product. Comfort (p3) en Super+ (p4) rekenen 71 advies (78 bij ons); voorzethor (p5) en inklemhor (p7) rekenen 50 (55 bij ons). Producten die hier niet in staan zijn nog niet tegen hun boekpagina gecontroleerd en vallen terug op ral_meerprijs_per_stuk. Aanvullen zodra p6 en p8 t/m p13 nagekeken zijn."
  }

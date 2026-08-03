@@ -117,6 +117,24 @@ function meet({ markupOverride } = {}) {
   perSoort['offerte-tool'] = { totaal: Object.keys(web.offerteTool || {}).length, metPrijs: Object.values(web.offerteTool || {}).filter((x) => Array.isArray(x) ? x[0] > 0 : x > 0).length };
   perSoort['configurator'] = { totaal: Object.keys(web.configurator || {}).length, metPrijs: Object.values(web.configurator || {}).filter((x) => x > 0).length };
 
+  // KLEURNAMEN. De meetlat kende wel kleurTYPE (standaard/trend/ral) maar toetste geen
+  // concrete kleurNAMEN. Daardoor gaf hij 0 afwijkingen toen de standaardkleuren van
+  // Zip Design 110 veranderden, terwijl dat 81 echte offerteregels raakte. Nu wordt per
+  // product elke kleur die in de offertes voorkomt door isStandaardKleur gehaald en de
+  // uitkomst vastgelegd, zodat zo'n wijziging wél zichtbaar wordt.
+  const KLEUREN = ['RAL 9010','RAL 9001','RAL 9005 structuur','RAL 9006','RAL 7016','RAL 7016 structuur',
+    'Antraciet structuur','RAL 9010 mat','RAL 7039','RAL 9007','RAL 9010 structuur','DB 703','RAL 7021',
+    'Technisch aluminium','TNA','Creme wit','Zwart','Andere RAL kleur','NTB'];
+  const kleurStatus = {};
+  for (const pk of Object.keys(v4.api.PRODUCT_MAP ? {} : {})) { /* placeholder */ }
+  for (const pk of Object.keys(JSON.parse(require('fs').readFileSync(require('path').join(E.ROOT,'data','sunmaster-prices-2026.json'),'utf8')))) {
+    if (pk.startsWith('_')) continue;
+    for (const kl of KLEUREN) {
+      try { kleurStatus[pk + '|' + kl] = v4.api.isStandaardKleur(pk, kl) ? 'standaard' : 'meerprijs'; }
+      catch { kleurStatus[pk + '|' + kl] = 'fout'; }
+    }
+  }
+
   // Montageprijzen horen er ook bij: die zitten in dezelfde motor en zijn even fout-gevoelig.
   const montage = {};
   for (const c of CATS) for (const b of BEDS) {
@@ -151,6 +169,7 @@ function meet({ markupOverride } = {}) {
       E.ingebakkenMarkup('screen-square85-prijstabel.json', 'screenSquare85100.table'),
     ],
     montage,
+    kleurStatus,
     prijzen,
   };
 }
@@ -159,6 +178,14 @@ function meet({ markupOverride } = {}) {
 function vergelijk(oud, nieuw, factor) {
   const alle = new Set([...Object.keys(oud.prijzen), ...Object.keys(nieuw.prijzen)]);
   const uit = { vergeleken: 0, gelijk: 0, afwijkend: [], verdwenen: [], nieuw: [] };
+
+  // Kleurnamen meenemen: een kleur die van standaard naar meerprijs gaat (of andersom)
+  // verandert de klantprijs, ook al blijft elke tabelprijs gelijk.
+  for (const k of new Set([...Object.keys(oud.kleurStatus || {}), ...Object.keys(nieuw.kleurStatus || {})])) {
+    const a = (oud.kleurStatus || {})[k], b = (nieuw.kleurStatus || {})[k];
+    if (a !== b) uit.afwijkend.push({ k: 'kleur|' + k, soort: 'kleurstatus', oudV4: a, nieuwV4: b });
+  }
+
 
   for (const k of alle) {
     const a = oud.prijzen[k], b = nieuw.prijzen[k];

@@ -412,9 +412,24 @@ async function verwerkTicket(t, state) {
   // (niet het Sonny-account) het laatste uitgaande bericht gestuurd, dan is het gesprek van
   // die collega — toewijzen aan hen, uit AI-beheer, en de bot blijft er definitief vanaf.
   {
-    const laatsteUit = (msgs?.data || []).filter(m => m.type === 'OUTBOUND' && !m.internal_note)
+    const echteBerichten = (msgs?.data || []).filter(m => !(m.internal_note || m.type === 'NOTE'));
+    const laatsteUit = echteBerichten.filter(m => m.type === 'OUTBOUND')
       .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0];
-    if (laatsteUit && laatsteUit.user_id && Number(laatsteUit.user_id) !== 747786 && !t._verseOpdracht) {
+    const laatsteBericht = [...echteBerichten].sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0];
+    // Sloot een mens het ticket (= klaar) en begint de klant DAARNA opnieuw (laatste bericht is van
+    // de klant)? Dan pakt de BOT het vervolg gewoon op, i.p.v. het terug te geven aan die collega
+    // (Daimy 3-08, casus Rox +31633352837: "Jorren had het gesloten dus hij is er klaar mee").
+    // closed_by blijft staan, dus we eisen óók dat de klant als laatste iets stuurde — anders is de
+    // collega gewoon nog bezig en blijft het gesprek van hem.
+    const klantWachtNaSluiting = !!t.closed_by && laatsteBericht && laatsteBericht.type === 'INBOUND';
+    if (klantWachtNaSluiting) {
+      try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 747786 }); await haalLabelWeg(t.id, LABEL.MENS_NODIG); }
+      catch (e) { console.error(`  [${t.id}] heropend-na-sluiting oppakken FOUT: ${e.message}`); }
+      const actiefLijst = loadActief();
+      if (!actiefLijst[t.id]) { actiefLijst[t.id] = { sinds: new Date().toISOString(), bron: 'heropend na sluiting door collega' }; fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actiefLijst, null, 1)); }
+      console.log(`  [${t.id}] collega had gesloten, klant reageert opnieuw → bot pakt het vervolg op`);
+      // niet returnen: de normale flow hieronder beantwoordt de klant
+    } else if (laatsteUit && laatsteUit.user_id && Number(laatsteUit.user_id) !== 747786 && !t._verseOpdracht) {
       // Daimy zelf nooit automatisch toewijzen (Daimy 23-07) — bot blijft er wel vanaf
       if (t.status !== 'CLOSED' && Number(laatsteUit.user_id) !== 736327 && Number(t.user_id) !== Number(laatsteUit.user_id)) {
         try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: laatsteUit.user_id }); console.log(`  [${t.id}] laatste bericht van collega (user ${laatsteUit.user_id}) → aan hen toegewezen, bot eraf`); } catch (e) { console.error(`  [${t.id}] collega-toewijzing FOUT: ${e.message}`); }

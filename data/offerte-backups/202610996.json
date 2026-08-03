@@ -1,0 +1,29 @@
+{
+  "quotationNumber": "202610996",
+  "documentId": "e6dc23fa-d923-4afb-9cf0-3ac30e56422b",
+  "name": "Anna Verkaik",
+  "timestamp": "2026-08-03T15:00:16.200Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 3514 mm\nHoogte: 2066 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9001\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 2412.8,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

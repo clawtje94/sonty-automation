@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202610971",
+  "documentId": "1a8224c8-446b-4afa-b895-6aa44ed5aa43",
+  "name": "Aman Lamba",
+  "timestamp": "2026-08-03T15:00:53.796Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suncontrol 165 zip\nBreedte: 4500 mm\nUitval: 4500 MM\nFrame Kleur: Andere RAL kleur\nBediening: Draaischakelaar\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 5769,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage serre zonwering.\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 350,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

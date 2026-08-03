@@ -173,13 +173,17 @@ function mkBuildOptiesBlok(bediening, materiaal, breedteMM, uitvalMM) {
     }
     lines.push('');
   }
+  // Deze bedragen stonden hardcoded op de oude factor 1,21 en liepen dus niet mee met een
+  // prijswijziging, terwijl ze wél in de offerte aan de klant getoond worden. Nu afgeleid van
+  // de boekbedragen excl BTW (Markiezen Nederland p29/p31) maal MARKIEZEN_FACTOR.
+  const mkOpt = (exclBedrag) => Math.round(exclBedrag * MARKIEZEN_FACTOR);
   lines.push('Extra:');
-  lines.push('• Stormstrook: beschermt het raam als markies ingeklapt — +€67');
+  lines.push('• Stormstrook: beschermt het raam als markies ingeklapt — +€' + mkOpt(55));
   const tussenAanbevolen = (materiaal === 'Aluminium' && breedteMM > 4400) || (materiaal !== 'Aluminium' && breedteMM > 3000);
-  lines.push('• Tussenpoot: steunpoot in het midden' + (tussenAanbevolen ? ' (aanbevolen bij jouw breedte)' : '') + ' — +€194');
+  lines.push('• Tussenpoot: steunpoot in het midden' + (tussenAanbevolen ? ' (aanbevolen bij jouw breedte)' : '') + ' — +€' + mkOpt(160));
   lines.push('• Niet-standaard RAL kleur — +10%');
-  lines.push('• Koord onderlangs i.p.v. bovenlangs — +€48');
-  lines.push('• Spots/verlichting — vanaf €847');
+  lines.push('• Koord onderlangs i.p.v. bovenlangs — +€' + mkOpt(40));
+  lines.push('• Spots/verlichting — vanaf €' + mkOpt(700));
   lines.push('');
   lines.push('Laat het ons weten, we passen het graag voor je aan.');
   return lines.join('\n');

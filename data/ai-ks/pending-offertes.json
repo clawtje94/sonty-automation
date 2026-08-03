@@ -696,5 +696,24 @@
   "kanaal": "EMAIL",
   "status": "klaar",
   "aangemaakt": 1785590020491
+ },
+ {
+  "lcId": "b080c34a-ecc8-473a-bd38-9689a8f3ce13",
+  "ticketId": 970615208,
+  "klantNaam": "René Klinge",
+  "producten": [
+   {
+    "product": "sunbasic dichte cassette",
+    "breedteMM": 5100,
+    "uitvalMM": 2500,
+    "framekleur": "RAL 9001",
+    "bediening": "draaischakelaar",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1785769816276
  }
 ]

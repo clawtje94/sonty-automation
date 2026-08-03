@@ -125,3 +125,4 @@
 - (2026-08-03) [team-notitie bij gesprek +31628677522] vraag even een foto te sturen zodat we het beter kunnen inschatten en na dat je foto hebt ontvangen door mens laten bekijken en beantwoorden
 - (2026-08-03) [team-notitie bij gesprek +31622368116] jij kan gewoon antwoorden
 - (2026-08-03) [team-notitie bij gesprek Nele] tanya plugge is van 4-8-26 tot 31-8-26 op vakantie dus in die tijd geen tickets meer toewijzen aan haar en ook geen vermeldingen doen, daarna kan het wel weer.
+- (2026-08-03) [team-notitie bij gesprek Jeane] als ze de rest van de ramen er bij doet kan je 2,5% extra korting aanbieden, en geef maar aan dat het inmeten over 2-3 weken is en dan daarna pas de aanbetaling komt van 40% en dat 60% pas na 12-14 weken is dus dat ze nog alle tijd heeft om even door te sparen. vraag altijd wel even of dit goed is of wat ze zelf anders in gedachten had.

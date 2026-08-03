@@ -42,3 +42,4 @@ Bestelde items van 30 juli (#2, #3 en #13 montages) staan erin.
 
 - "✅ geen klant wacht"-meldingen, "geen AI-gesprekken", "nog geen A/B-offertes",
   losse ✅ per verstuurde follow-up → worden digest-regels of alleen log.
+- Conversie per week (sheet-methode, akkoord=inkoop ingevuld): scripts/conversie-week-sheet.js --stuur — dit is de STANDAARD conversie-meting (Daimy 03-08). Oude weekrapport-conversie.js meet via RP-bord, niet meer leidend.

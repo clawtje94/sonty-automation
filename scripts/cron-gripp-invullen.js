@@ -69,6 +69,48 @@ async function setStatus(itemId, statusId) {
   return rpPatch('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items/' + itemId, { item: { status_id: statusId } });
 }
 
+
+/**
+ * Heeft deze offerte de prijzen van ná de omzetting van 2026-08-03?
+ *
+ * Niet op datum gokken: een lead van vorige week kan vandaag door v4 opnieuw geprijsd zijn
+ * en heeft dan de nieuwe prijs, terwijl een offerte die gisteren de deur uitging de oude
+ * prijs houdt ook als de klant hem vandaag tekent (Daimy 2026-08-03).
+ * Daarom rekenen we de productregels na met de HUIDIGE motor. Komt alles overeen, dan is de
+ * offerte actueel. Wijkt er iets af, of kunnen we niets toetsen, dan zetten we NIETS neer —
+ * liever geen markering dan een verkeerde.
+ */
+function heeftActuelePrijzen(lines) {
+  let gecontroleerd = 0;
+  const api = require('./ai-ks/v4-pricing.js').v4;
+  // maten zelf uit de omschrijving halen; niet elke hulpfunctie van v4 is geëxporteerd
+  const mm = (desc, naam) => {
+    const m = desc.match(new RegExp(naam + '[:\\s]*(\\d+[.,]?\\d*)\\s*(mm|cm)?', 'i'));
+    if (!m) return null;
+    const n = parseFloat(m[1].replace(',', '.'));
+    return (m[2] || 'mm').toLowerCase() === 'cm' ? n : n / 10;   // altijd cm
+  };
+  for (const l of lines || []) {
+    const desc = l.description || '';
+    const kop = desc.split('\n')[0] || '';
+    if (/roma|markies/i.test(kop)) continue;          // eigen prijsboek, hier niet toetsen
+    if (!(l.pricePerUnit > 0)) continue;
+    if (/voorraad/i.test(kop) || desc.includes('Direct leverbaar uit voorraad')) continue;
+    const pk = api.getProductKey(kop);
+    if (!pk) continue;
+    const b = mm(desc, 'Breedte'), h = mm(desc, 'Hoogte'), u = mm(desc, 'Uitval');
+    if (!b && !h) continue;
+    const bed = api.getBedType(
+      (desc.match(/Bediening:\s*([^\n]+)/i) || [])[1] || '',
+      (desc.match(/Motor:\s*([^\n]+)/i) || [])[1] || '');
+    const nu = api.calculateCorrectPrice(pk, b, h, u, bed);
+    if (nu === null) continue;
+    gecontroleerd++;
+    if (Math.abs(nu - l.pricePerUnit) > 0.02) return false;
+  }
+  return gecontroleerd > 0;
+}
+
 async function gripp(calls) {
   const res = await fetchRetry('https://api.gripp.com/public/api3.php', {
     method: 'POST',
@@ -280,6 +322,9 @@ async function main() {
             visitingaddress_city: city,
             visitingaddress_country: 'Nederland',
             relationtype: { id: 2 },
+            // Nieuwe relaties expliciet op actief zetten (Daimy 2026-08-03). Gripp-veld
+            // geverifieerd op een bestaande relatie: 'active' is een boolean.
+            active: true,
           }
         },
         id: 1,
@@ -347,6 +392,11 @@ async function main() {
         }
 
         const beschrijving = ['Overgenomen uit Reuzenpanda #' + docInfo.quotationNumber];
+        // Markering in het opmerkingenveld van de Gripp-offerte (Daimy 2026-08-03), maar
+        // ALLEEN als deze offerte ook echt de prijzen van na de omzetting heeft. Een klant
+        // die gisteren een offerte kreeg en vandaag tekent houdt de oude prijs; die krijgt
+        // dus geen markering. Vandaar een echte narekening in plaats van een datumgrens.
+        if (heeftActuelePrijzen(lines)) beschrijving.push('prijs actueel 2026');
         if (opmerking) beschrijving.push('\n--- Opmerking klant ---\n' + opmerking);
 
         const mainProduct = [...lines]

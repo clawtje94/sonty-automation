@@ -17,36 +17,36 @@ Nooit de tekstlaag — daar is het de vorige keer op misgegaan.
 | 8 | inhoud zipscreens | n.v.t. | |
 | 9 | Zip Square 85/100 | ✅ 30-07 + 03-08 | max hoogte 340, niet 280 (offerte-tool gefixt) |
 | 10-11 | Zip Design 110 | ✅ 03-08 | prijstabellen 100% goed (50 + 160 cellen). ⚠️ TWEE FOUTEN in de kleurmeerprijs, zie bevinding 5 en 6 |
-| 13 | vervolgtabel | TE DOEN | welk product? |
+| 13 | vervolgtabel Zip Design 110 | ✅ 03-08 | onderdeel van p10-11, meegenomen |
 | 14-15 | Zip Square 130 | ✅ n.v.t. | Daimy 03-08: **verkopen we niet**. Bewust niet in onze data |
-| 16 | meerprijzen bediening screens | TE DOEN | |
-| 17 | profielen per meter, kleuren | TE DOEN | |
+| 16 | opties screens | ✅ 03-08 | motoren t.o.v. standaard per producttype; legde de Screen Square-fout bloot |
+| 17 | profielen + minimale breedte per bediening | ✅ 03-08 | minima 400-810 mm, onze tabellen beginnen bij 1000 mm dus niet van toepassing |
 | 19 | kabeluitvoer | n.v.t. | |
-| 21 | screendoek collectie + los doek | TE DOEN | |
+| 21 | screendoek | ✅ 03-08 | ⚠️ doektoeslag €18/m² buiten standaardcollectie en €29/m² voor 1% doorzicht — rekenen wij NIET |
 | 22-23 | inhoud knikarmen | n.v.t. | |
 | 24-25 | SunBasic + Cassette | ✅ 03-08 | tabellen 100% goed. Cassette heeft GEEN draaistang en 200cm-minderprijs -150 i.p.v. -160 — beide stonden goed. Min. breedte handbediend is uitval+33, wij rekenen +30 |
 | 26-27 | SunEye | ✅ 03-08 | tabellen, minderprijzen en kleurmeerprijzen 100% goed |
 | 28-29 | SunEye XL | ✅ 03-08 | ⚠️ FOUT GEVONDEN: cel breedte 300 bij uitval 300 stond bij ons wel, in het boek is die rij leeg. Verwijderd. Rest 100% goed |
 | 31 | SunElite | ✅ 03-08 | tabellen en kleurmeerprijzen 100% goed. Kent GEEN draaistang |
-| 33 | opties knikarmen | TE DOEN | |
+| 33 | opties knikarmen | ✅ 03-08 | alleen accessoires, geen invloed op de basisberekening |
 | 34-35 | doekinformatie | n.v.t. | |
 | 36 | inhoud rolluiken | n.v.t. | |
 | 37 | Rolluik S-42 | ✅ 30-07 | opnieuw uitgelezen |
 | 38 | Rolluik S-37 | ✅ 30-07 | opnieuw uitgelezen |
-| 39 | opties rolluiken | TE DOEN | |
+| 39 | opties rolluiken | ✅ 03-08 | minimale breedte per bediening (max 785 mm) niet van toepassing |
 | 41-42 | geleiders, inhoud uitval | n.v.t. | |
 | 43 | SunCube 150 | ✅ 03-08 | 192 cellen, 0 fouten |
 | 44 | SunProject 100 | ✅ 03-08 | 81 schermprijzen, 54 banenprijzen en 54 kleurmeerprijzen allemaal goed. ⚠️ draaistang is volgens het boek maar mogelijk tot 460 cm breed; die grens stond nergens |
 | 45 | tekeningen | n.v.t. | |
-| 46 | opties uitvalschermen | TE DOEN | |
+| 46 | opties uitvalschermen | ✅ 03-08 | SunCube +60 io / +135 solar en SunProject +134 io / +199 solar: allemaal gelijk aan onze code |
 | 47-48 | maatvoering, inhoud veranda | n.v.t. | |
 | 49 | SunControl 150 | ✅ 03-08 | alle 35 cellen goed, WT-motor -50 klopt. ⚠️ gekoppeld mag hier maar tot 10.000 mm, wij staan 12.000 toe |
-| 50 | opties SunControl | TE DOEN | |
+| 50 | opties SunControl | ✅ 03-08 | RAL 15% en WT-motor -50 bevestigd |
 | 51 | SunControl 165 ZIP | ✅ 03-08 | alle 35 cellen goed. Gekoppeld tot 12.000 mm klopt hier wél. RAL-meerprijs 15% bevestigd |
-| 52 | standaarduitvoering pergola | TE DOEN | |
+| 52 | standaarduitvoering pergola | ✅ 03-08 | geen prijzen |
 | 53 | SunControl 165 ZIP pergola | ✅ 03-08 | alle 35 cellen goed. Gekoppeld tot 10.000 mm, niet 12.000 |
-| 54-55 | Somfy accessoires | TE DOEN | |
-| 56-60 | projecten, voorwaarden | TE DOEN | p57 prijsvoorwaarden lezen |
+| 54-55 | Somfy + Brel accessoires | ✅ 03-08 | ⚠️ Situo 5 stond bij ons op €226 i.p.v. €129, Eolis 3D op €169 i.p.v. €175 |
+| 56-60 | voorwaarden | ✅ 03-08 | p57 bevestigt: adviesverkoopprijzen INCL btw en EXCL montage. Maten buiten de lijst vallen buiten garantie |
 
 
 ## Bevindingen tot nu toe
@@ -129,3 +129,26 @@ Zelfde methode, pagina voor pagina als afbeelding:
    12 m wél kan bij de pergola, zeg het dan — dan zet ik `maxGekoppeldMM` daar op 12000.
    In de 2026-offertes staat 0 keer een serre of pergola breder dan 10 m, dus dit raakt
    voorlopig niemand.
+
+13. **Screen Square 85/100 rekende met de zipscreen-regels.** Boek p7 heeft TWEE tabellen:
+   draaistangbediening en LT50-12rpm motor. Onze data is de motortabel. v4 paste daar de
+   zipscreen-aanpassingen op toe (-89 draaischakelaar, +76 io). Volgens p7/p16 hoort het te
+   zijn: draaischakelaar +0 (dat ís de tabel), io +199 Sunilus +76 handzender, solar +299
+   Brel, handbediend = de andere tabel (die we niet hebben → handmatige controle).
+   Fout was: draaischakelaar €98 te goedkoop, io €219 te goedkoop, handbediend €330 te duur.
+   Product is in heel 2026 nooit geoffreerd, dus geen klant geraakt. Gefixt via een nieuw
+   veld `bedieningAanpassing` op het product; de zipscreens blijven ongewijzigd.
+14. **Accessoireprijzen die klanten zien.** components/ProductKeuzegids.tsx toont
+   accessoires met prijs. Situo 5-kanaals stond op €226 terwijl het boek €117 zegt (×1,10 =
+   €129) — €97 te hoog. Eolis 3D sensor io stond op €169 terwijl p33/p55 €159 zeggen
+   (×1,10 = €175). Beide gecorrigeerd. Tahoma €195 komt niet in dit boek voor en is dus
+   niet te verifiëren.
+15. **OPEN — doektoeslag wordt niet berekend.** Boek p21: doek buiten de standaardcollectie
+   kost €18/m² extra, Sergé met 1% doorzichtfactor €29/m². Op een screen van 3×2,5 m is dat
+   €135 resp. €218 (excl. onze opslag). Wij rekenen dit nergens. In de offertes staat het
+   doek 2.758 keer als "NTB" — de keuze valt pas bij het inmeten. Vraag aan Daimy: wordt die
+   toeslag dan alsnog doorbelast, of laten we dat geld liggen?
+16. **Niet-geïmplementeerde koppelingen.** Boek kent koppelen van screens (p16: 2 screens
+   min €80) en rolluiken (p38: 2 rolluiken min €160). Wij koppelen alleen serre/pergola;
+   bredere screens en rolluiken gaan naar handmatige controle. Veilig, maar we kunnen die
+   offertes wel automatiseren.

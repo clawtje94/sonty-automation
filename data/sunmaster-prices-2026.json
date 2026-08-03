@@ -227,7 +227,16 @@
    "380": 359,
    "400": 425
   },
-  "_fix": "2026-07-30: cel-voor-cel geverifieerd tegen boekpagina 7; waarden klopten al, alleen 360x220 ontbrak."
+  "_fix": "2026-07-30: cel-voor-cel geverifieerd tegen boekpagina 7; waarden klopten al, alleen 360x220 ontbrak. | 2026-08-03: eigen bedieningsaanpassingen toegevoegd. v4 gebruikte de zipscreen-regels (-89 draaischakelaar, +76 io), maar bij dit product is de tabel al de bedrade motor. Daardoor was draaischakelaar 98 euro te goedkoop, io 219 euro te goedkoop en handbediend 330 euro te duur.",
+  "bedieningAanpassing": {
+   "_bron": "boek p7. De prijstabel is de LT50-12rpm motortabel (bedraad, draaischakelaar), niet de draaistangtabel. Meerprijzen uit Veelgekozen opties p7.",
+   "draaischakelaar": 0,
+   "io": 275,
+   "afstandsbediening": 275,
+   "solar": 299,
+   "solarBrel": 299,
+   "handbediend": null
+  }
  },
  "zipSquare85100": {
   "category": "zipscreen",

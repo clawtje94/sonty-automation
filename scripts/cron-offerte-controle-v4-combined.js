@@ -1338,8 +1338,20 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
     else totaal += hz; // default = IO + handzender
   }
   else if (pCat === 'screen') {
+    // Per product kan de tabel op een ANDERE bediening staan. Zip Square (p9) en Zip Design
+    // (p11) staan op Sunilus io, maar Screen Square 85/100 (p7) staat op de LT50-12rpm
+    // motortabel. Daar gelden dus heel andere meerprijzen; staat dat bij het product, dan
+    // wint dat. Zonder deze uitzondering rekende v4 de zipscreen-regels op alle screens.
+    const bedAanp = product.bedieningAanpassing;
+    if (bedAanp) {
+      const sleutel = isIO ? 'io' : isDraaischakelaar ? 'draaischakelaar' : isSolar ? 'solar'
+        : bedieningType === 'solarBrel' ? 'solarBrel' : isHandbediend ? 'handbediend' : 'io';
+      const aanpassing = bedAanp[sleutel];
+      if (aanpassing === null || aanpassing === undefined) return null; // niet te berekenen → handmatige controle
+      totaal += aanpassing;
+    }
     // Tabel = Sunilus IO
-    if (isIO) totaal += hz;
+    else if (isIO) totaal += hz;
     else if (isDraaischakelaar) totaal -= 89; // LT50
     else if (isSolar) totaal += 173 + hz; // Somfy RS 100 IO Solar (excl zender) + handzender
     else if (bedieningType === 'solarBrel') totaal += 135; // Boek p9/11: Solaruitvoering Brel incl. 1-kanaals handzender = meerprijs t.o.v. tabel (was foutief 59)

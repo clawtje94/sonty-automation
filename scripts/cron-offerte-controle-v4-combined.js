@@ -1451,14 +1451,15 @@ function correctProductPrice(line, productKey, breedteCm, hoogteCm, uitvalCm) {
 
     if (pCatColor === 'rolluik') {
       // Rolluik: percentage-based — trendkleur +15%, RAL +20% op productprijs (= correctPrice vóór kleur)
-      const pct = isTrend ? 0.15 : 0.20;
+      const pct = isTrend ? PRIJSCONFIG.kleurTrendPct : PRIJSCONFIG.kleurRalPct;
       const surcharge = Math.round(correctPrice * pct * 100) / 100;
-      console.log('    Kleur meerprijs rolluik: ' + (isTrend ? 'trend +15%' : 'RAL +20%') + ' = +€' + surcharge);
+      console.log('    Kleur meerprijs rolluik: ' + (isTrend ? 'trend' : 'RAL') + ' +' + Math.round(pct * 100) + '% = +€' + surcharge);
       correctPrice += surcharge;
     } else if (pCatColor === 'serre' || pCatColor === 'pergola') {
-      // Serre/pergola: RAL +15% op productprijs
-      const surcharge = Math.round(correctPrice * 0.15 * 100) / 100;
-      console.log('    Kleur meerprijs serre/pergola: RAL +15% = +€' + surcharge);
+      // Serre/pergola: eigen percentage (boek p51: 15%, dus niet de 20% van de rolluiken)
+      const pctSerre = PRIJSCONFIG.kleurRalPctSerre;
+      const surcharge = Math.round(correctPrice * pctSerre * 100) / 100;
+      console.log('    Kleur meerprijs serre/pergola: RAL +' + Math.round(pctSerre * 100) + '% = +€' + surcharge);
       correctPrice += surcharge;
     } else if (isTrend && product.meerprijsTrend) {
       // Screens/knikarm/uitval met trendkleur: vaste meerprijs uit tabel

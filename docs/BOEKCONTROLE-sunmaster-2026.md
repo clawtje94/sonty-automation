@@ -40,9 +40,9 @@ Nooit de tekstlaag — daar is het de vorige keer op misgegaan.
 | 45 | tekeningen | n.v.t. | |
 | 46 | opties uitvalschermen | TE DOEN | |
 | 47-48 | maatvoering, inhoud veranda | n.v.t. | |
-| 49 | SunControl 150 | TE DOEN | |
+| 49 | SunControl 150 | ✅ 03-08 | alle 35 cellen goed, WT-motor -50 klopt. ⚠️ gekoppeld mag hier maar tot 10.000 mm, wij staan 12.000 toe |
 | 50 | opties SunControl | TE DOEN | |
-| 51 | SunControl 165 ZIP | TE DOEN | |
+| 51 | SunControl 165 ZIP | ✅ 03-08 | alle 35 cellen goed. Gekoppeld tot 12.000 mm klopt hier wél. RAL-meerprijs 15% bevestigd |
 | 52 | standaarduitvoering pergola | TE DOEN | |
 | 53 | SunControl 165 ZIP pergola | TE DOEN | |
 | 54-55 | Somfy accessoires | TE DOEN | |
@@ -103,3 +103,24 @@ verandert. Nog toe te voegen: per product elke standaard- én meerprijskleur doo
 10. **Doek 225 heeft bij SunProject geen banen-confectie** ("doek in banen niet mogelijk
    i.v.m. oproldiameter"). Onze data heeft banenConfectie alleen voor doek 165 en 200 —
    dat klopt dus.
+
+## Daarna ook deze boeken (opdracht Daimy 03-08)
+
+Zelfde methode, pagina voor pagina als afbeelding:
+- **Markiezen NL** — tabellen staan nu hardcoded in v4 (MK_GRENEN / MK_ALUMINIUM / MK_HARDHOUT,
+  bovenkap, zijkap, bediening). Nooit tegen het boek gecontroleerd.
+- **Roma** — Prijslijst 2025; uit de tekstlaag geëxtraheerd, niet visueel. Let op: uitzoeken
+  of de tabellen bruto lijstprijs of netto dealer zijn (het boek noemt "bruto meerprijs" en
+  markeert losse posten als "netto, geen korting toepassen").
+- **Unilux horren** — Adviesprijslijst 2026; opslag zit al in onze bedragen verwerkt.
+
+11. **Kleurpercentages stonden op drie plekken hardcoded** (v4, de bot, de offerte-tool:
+   0.15 / 0.20) terwijl de website ze al uit de config las. Gevonden doordat p51 bevestigt
+   dat serre/pergola 15% RAL-meerprijs heeft en niet de 20% van de rolluiken. Alle drie nu
+   uit `prijsconfig.json`, met een nieuw veld `kleurRalPctSerre`. Het slot let er nu ook op:
+   de regex vangt voortaan óók 0.15 en 0.20.
+12. **OPEN — gekoppelde uitvoering heeft per product een eigen maximum.** Boek p49:
+   SunControl 150 gekoppeld beschikbaar van 4.000 tot **10.000 mm**. Boek p51: SunControl
+   165 ZIP van 4.000 tot **12.000 mm**. Onze code hanteert overal 2× de tabelbreedte
+   (= 12.000 mm), dus bij de 150 offreren we tot 2 meter breder dan leverbaar. Nog te fixen
+   zodra p53 (pergola) is nagekeken, zodat de grens per product klopt.

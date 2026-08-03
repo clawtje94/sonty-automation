@@ -10,6 +10,8 @@
   "_markiezenFactor": "Markiezentabellen staan als VERKOOPPRIJS EXCL BTW in v4 zelf. Vandaag is deze factor puur de BTW (1,21) zonder opslag. Een hogere waarde is dus BTW plus opslag in één getal: 1,31 = 1,21 + 0,10.",
   "kleurTrendPct": 0.15,
   "kleurRalPct": 0.2,
+  "kleurRalPctSerre": 0.15,
+  "_kleurRalPctSerre": "Serre en pergola hebben een eigen percentage voor afwijkende RAL: boek p51 zegt daar 15%, niet de 20% van de rolluiken. Stond hardcoded in v4.",
   "_kleurPct": "Alleen voor producten zonder eigen meerprijstabel in het boek. Waar het boek wél een tabel geeft (uitvalschermen, zipscreen) wordt die gebruikt, met sunmasterMarkup erover.",
   "handzenderPrijs": 76,
   "_handzenderPrijs": "Situo 1 io handzender, boekprijs. Wordt vóór de markup opgeteld, dus hij beweegt mee.",

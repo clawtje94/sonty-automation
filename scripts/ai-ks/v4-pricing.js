@@ -11,7 +11,7 @@ const SUNMASTER_PRICES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '
 // kopie meer: die liep stil uit de pas met v4 en dan noemt dit bestand een andere prijs.
 let MARKUP;
 
-const api = eval(code + `;({MARKUP, lookupPrice, calculateCorrectPrice, getProductKey, getCategory, getBedType, getMontagePrice, mkTotaalExcl, MARKIEZEN_FACTOR, findNearest, reorderAndMerge, addV4Enhancements, addWaaromSontyBlock, mkBuildOptiesBlok, STANDAARD_KLEUREN_MAP, PRODUCT_MAP})`);
+const api = eval(code + `;({MARKUP, lookupPrice, calculateCorrectPrice, getProductKey, getCategory, getBedType, getMontagePrice, mkTotaalExcl, MARKIEZEN_FACTOR, PRIJSCONFIG, findNearest, reorderAndMerge, addV4Enhancements, addWaaromSontyBlock, mkBuildOptiesBlok, STANDAARD_KLEUREN_MAP, PRODUCT_MAP})`);
 MARKUP = api.MARKUP;
 if (!MARKUP) throw new Error('MARKUP niet uit de v4-prijscode gekomen — prijsconfig.json of de slice-grens klopt niet');
 
@@ -168,8 +168,11 @@ function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'i
       const TREND = ['ral 7039', 'ral 9007', 'ral 9010 structuur', 'db 703', 'db703', 'ral 7021'];
       const isTrend = TREND.some(k => fk.includes(k));
       let sur = 0;
-      if (cat === 'rolluik') sur = Math.round(prijs * (isTrend ? 0.15 : 0.20));
-      else if (cat === 'serre' || cat === 'pergola') sur = Math.round(prijs * 0.15);
+      // Percentages uit data/prijsconfig.json via het ingelezen v4-blok. Stonden hier
+      // hardcoded, dus de bot volgde een wijziging in de config niet — gevonden door
+      // scripts/tests/geen-losse-opslagen.js bij de boekcontrole van p51 op 2026-08-03.
+      if (cat === 'rolluik') sur = Math.round(prijs * (isTrend ? api.PRIJSCONFIG.kleurTrendPct : api.PRIJSCONFIG.kleurRalPct));
+      else if (cat === 'serre' || cat === 'pergola') sur = Math.round(prijs * api.PRIJSCONFIG.kleurRalPctSerre);
       else {
         const tbl = isTrend ? pd.meerprijsTrend : pd.meerprijsRAL;
         const e = tbl ? api.findNearest(tbl, b) : null;

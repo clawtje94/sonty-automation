@@ -31,7 +31,9 @@ const BEWAAKT = [
 
 // De getallen die een opslag zíjn. 1.21 staat erbij omdat de markiezenfactor (btw + opslag)
 // anders stilletjes op de kale btw blijft staan als iemand hem terugzet.
-const VERDACHT = /(?<![\d.])1\.(?:1|10|15|20|21|25|30|31)(?![\d])/;
+// Ook de kleurpercentages: die stonden hardcoded in v4 (0.15/0.20) terwijl de website ze
+// al uit de config las. Gevonden 2026-08-03 bij de boekcontrole van p51.
+const VERDACHT = /(?<![\d.])1\.(?:1|10|15|20|21|25|30|31)(?![\d])|(?<![\d.])0\.(?:15|20|2)(?![\d])/;
 
 /** Regels die geen code zijn of waar het getal onschuldig is. */
 function magWel(regel) {

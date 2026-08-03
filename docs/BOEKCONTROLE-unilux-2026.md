@@ -9,9 +9,9 @@ geen enkele factor meer overheen (zie `uniluxAlIngerekend` in prijsconfig.json).
 | 3 | **Raamhor/hordeur COMFORT** | ✅ 03-08 | alle prijzen exact advies × 1,10. Ook de aflopende hoeken (bij grotere maten geen rolhor) kloppen |
 | 3 | COMFORT opties | ✅ 03-08 | ⚠️ RAL-meerprijs **per stuk** ontbrak, zie bevinding 1 |
 | 4 | **Raamhor SUPER+** | ✅ 03-08 | alle 48 cellen exact advies × 1,10. ⚠️ het boek heeft óók een smalle tabel (breedte 300/400/500 met veervertrager) die wij niet hebben |
-| 5 | Raamhor voorzethor | TE DOEN | |
+| 5 | **Raamhor voorzethor** | ✅ 03-08 | alle 68 cellen exact advies × 1,10. RAL per stuk is hier €50, niet €71 |
 | 6 | Raamhor veerstifthor/softfit | TE DOEN | |
-| 7 | Raamhor inklemhor | TE DOEN | |
+| 7 | **Raamhor inklemhor** | ✅ 03-08 | tabel identiek aan voorzethor en klopt. RAL per stuk ook €50 |
 | 8 | Raamhor voorzet unit | TE DOEN | |
 | 9 | Raamhor inklem unit | TE DOEN | |
 | 10 | Hordeur plisséfit | TE DOEN | |
@@ -54,3 +54,12 @@ geen enkele factor meer overheen (zie `uniluxAlIngerekend` in prijsconfig.json).
 7. **Opties per product verschillen.** De geleiderset op maat kost bij Comfort €39/72/84 en
    bij Super+ €69/105/120. Wij hebben één generieke optielijst; als we dat gaan berekenen
    moet het per product.
+
+8. **De RAL-meerprijs per stuk verschilt PER PRODUCT.** Comfort (p3) en Super+ (p4) rekenen
+   €71 advies (€78 bij ons), voorzethor (p5) en inklemhor (p7) rekenen €50 (€55). Mijn eerste
+   fix van vandaag zette één generiek tarief van €78 voor alles; daarmee zat de voorzethor
+   €23 te hoog. Nu per product, met een terugval op het generieke tarief voor de producten
+   die nog niet tegen hun boekpagina zijn gecontroleerd (veerstift, units, plisséfit,
+   hordeuren). Die moeten nog nagekeken en aangevuld worden — p6 en p8 t/m p13.
+9. **Opties die we nergens rekenen:** schuine hoek vanaf montagezijde €117, middenkader
+   extra €17 (beide bij voorzet- en inklemhor). Pollengaas €39 hebben we wel (bij ons €43).

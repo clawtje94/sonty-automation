@@ -14,7 +14,11 @@
 // hebben geen klant die wacht en mogen gewoon dicht — geef daarvoor systeemMail: true mee.
 
 /** Meldingen die per definitie mensenwerk zijn: hier hangt een klant met een probleem aan. */
-const SERVICE_SIGNAAL = /reparat|kapot|defect|storing|garantie|doet het (niet|nog steeds niet)|werkt niet|uit de rails|gaat niet (meer )?(open|dicht|omhoog|omlaag|naar beneden)|vastgelopen|scheur|lekk?|klacht|beschadig|niet meer omhoog|zit vast/i;
+// LET OP (Daimy 2026-08-03, casus JohanMarleen/JoMar): "garantie" verwijderd — klanten noemen dat
+// continu in een normale offerte/prijs-context, dat is geen service/klacht (een échte garantieclaim
+// gaat altijd samen met kapot/defect/werkt niet, die matchen al). En "lekk?" matchte ook "lekker";
+// nu alleen echte lek-woorden met woordgrens.
+const SERVICE_SIGNAAL = /reparat|kapot|defect|storing|doet het (niet|nog steeds niet)|werkt niet|uit de rails|gaat niet (meer )?(open|dicht|omhoog|omlaag|naar beneden)|vastgelopen|scheur|lekkage|\blekt\b|\blek\b|klacht|beschadig|niet meer omhoog|zit vast/i;
 
 /** Beloftes waarna er per definitie nog iemand iets moet doen. */
 const BELOFTE = /(neem|nemen|neemt).{0,40}contact|contact.{0,25}(op|met je|met u)|bel(t|len|len we)? (je|u)\b|doorgezet naar|doorgegeven aan|collega.{0,30}(neemt|belt|pakt|stuurt)|leg dit even bij|plant?.{0,20}(het |de )?(afspraak|herstel|inmeten) in|komt (er )?(zo )?(snel )?(mogelijk )?(op )?terug/i;

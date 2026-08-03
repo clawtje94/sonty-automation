@@ -20,7 +20,8 @@ const fs = require('fs');
 
 // === V4: Sunmaster prijzen + upgrade/downgrade ===
 const SUNMASTER_PRICES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'sunmaster-prices-2026.json'), 'utf8'));
-const MARKUP = 1.10;
+// MARKUP staat bewust NIET hier maar hieronder, binnen het blok dat door
+// ai-ks/v4-pricing.js en tests/verify-fixes.js wordt ingelezen. Zie de uitleg daar.
 
 // Roma duo-offertes (instructie Daimy 2026-07-03): bij rolluik/screen ook een apart Roma-document
 // UITGEZET op instructie Daimy 2026-07-13: klanten kregen de duo verstuurd terwijl de
@@ -60,9 +61,30 @@ const ENHANCE_DESCRIPTIONS = true; // Goedgekeurde teksten (test offerte #202668
 // ============ MARKIEZEN PRIJSTABELLEN (excl BTW = verkoopprijs) ============
 
 const MK_UITVAL_COLS = [80,90,100,115,135,150,165,180,200];
+
+// ============ PRIJSOPSLAGEN — ÉÉN BRON ============
+// Deze regels staan met opzet hier, direct NA MK_UITVAL_COLS. Alles vanaf die regel tot
+// "// ====== MAIN ======" wordt door ai-ks/v4-pricing.js (de WhatsApp- en mailbot), door
+// tests/verify-fixes.js en door cron-prijs-steekproef.js uit dit bestand geknipt en
+// uitgevoerd. Zetten we MARKUP bovenaan het bestand, dan valt hij BUITEN dat stuk en pakt
+// elk van die drie zijn eigen kopie — gemeten 2026-08-03: v4 op 1,20 zetten liet de bot
+// gewoon op 1,10 staan, dus de wijziging kwam nooit bij de klant aan.
+// Nu staat hij erbinnen en krijgt iedereen die deze code inlaadt dezelfde opslag.
+const PRIJSCONFIG = (() => {
+  const _fs = require('fs'), _p = require('path');
+  // __dirname is de map van wie dit inlaadt (scripts/, scripts/ai-ks/, scripts/tests/,
+  // scripts/prijs-meetlat/), dus zoeken in plaats van één vast pad aannemen.
+  for (const k of ['..', '../..', '.'].map(d => _p.join(__dirname, d, 'data', 'prijsconfig.json'))) {
+    if (_fs.existsSync(k)) return JSON.parse(_fs.readFileSync(k, 'utf8'));
+  }
+  throw new Error('prijsconfig.json niet gevonden vanuit ' + __dirname + ' — geen prijzen berekenen zonder config');
+})();
+const MARKUP = PRIJSCONFIG.sunmasterMarkup;
+const MARKIEZEN_FACTOR = PRIJSCONFIG.markiezenFactor;
+if (!MARKUP || !MARKIEZEN_FACTOR) throw new Error('prijsconfig.json onvolledig — geen prijzen berekenen met een halve config');
 const MK_GRENEN = [[100,[593,667,708,805,929,1088,1196,1317,1448]],[120,[619,698,734,837,963,1131,1247,1371,1510]],[140,[642,726,767,864,990,1173,1289,1419,1560]],[160,[665,757,800,901,1029,1214,1332,1466,1614]],[180,[690,777,835,934,1060,1253,1378,1517,1666]],[200,[715,809,860,972,1094,1293,1426,1566,1723]],[220,[738,837,893,999,1127,1332,1466,1614,1773]],[240,[762,864,926,1036,1160,1378,1517,1666,1835]],[260,[785,888,955,1067,1191,1427,1568,1725,1900]],[280,[809,918,988,1098,1224,1458,1602,1763,1941]],[300,[839,949,1021,1131,1260,1499,1651,1817,1995]],[320,[859,972,1050,1168,1293,1543,1694,1864,2051]],[340,[882,1001,1083,1201,1322,1579,1740,1912,2102]],[360,[906,1029,1114,1237,1357,1628,1790,1966,2164]],[380,[932,1040,1150,1268,1392,1651,1817,1998,2199]],[400,[955,1086,1178,1301,1427,1713,1885,2070,2277]],[420,[980,1106,1212,1334,1456,1751,1922,2115,2327]]];
-const MK_ALUMINIUM = [[100,[593,667,708,805,929,1088,1196,1317,1448]],[120,[619,698,734,837,963,1131,1247,1371,1510]],[140,[642,726,767,864,990,1173,1289,1419,1560]],[160,[665,757,800,901,1052,1214,1332,1466,1614]],[180,[690,777,835,934,1071,1253,1378,1525,1666]],[200,[715,809,860,972,1094,1293,1426,1566,1723]],[220,[738,837,893,999,1127,1332,1466,1614,1773]],[240,[762,864,926,1036,1160,1378,1517,1666,1835]],[260,[785,888,955,1067,1191,1427,1568,1725,1900]],[280,[809,918,987,1098,1224,1458,1602,1763,1941]],[300,[839,949,1021,1131,1260,1499,1651,1817,1995]],[320,[859,972,1050,1168,1293,1543,1694,1864,2051]],[340,[882,1001,1083,1201,1322,1579,1740,1912,2102]],[360,[906,1029,1114,1237,1357,1628,1790,1966,2164]],[380,[932,1040,1150,1268,1392,1651,1817,1998,2199]],[400,[955,1086,1178,1301,1427,1713,1885,2070,2277]],[420,[980,1106,1212,1334,1456,1751,1922,2115,2327]],[440,[1001,1127,1243,1368,1491,1790,1966,2164,2380]],[460,[1032,1168,1271,1402,1525,1833,2018,2218,2440]],[480,[1050,1191,1303,1432,1560,1877,2062,2269,2496]],[500,[1074,1217,1339,1469,1591,1902,2094,2303,2532]]];
-const MK_HARDHOUT = [[100,[622,700,743,846,976,1142,1256,1383,1521]],[120,[651,733,772,878,1010,1189,1310,1439,1585]],[140,[674,762,806,908,1041,1232,1353,1490,1639]],[160,[698,794,840,946,1081,1275,1399,1541,1696]],[180,[723,816,875,981,1121,1316,1448,1592,1749]],[200,[752,851,903,1021,1148,1328,1496,1644,1804]],[220,[775,878,937,1049,1183,1399,1541,1696,1864]],[240,[799,908,972,1088,1217,1448,1592,1749,1928]],[260,[825,932,1002,1121,1252,1498,1646,1812,1995]],[280,[851,965,1039,1153,1285,1532,1683,1853,2037]],[300,[882,996,1072,1189,1323,1574,1734,1909,2094]],[320,[902,1021,1103,1225,1357,1620,1779,1958,2154]],[340,[926,1051,1137,1261,1388,1659,1826,2008,2208]],[360,[950,1081,1169,1299,1426,1708,1879,2066,2272]],[380,[979,1091,1206,1332,1461,1734,1909,2098,2308]],[400,[1002,1140,1237,1366,1498,1799,1978,2174,2390]],[420,[1029,1161,1271,1402,1528,1838,2020,2222,2443]]];
+const MK_ALUMINIUM = [[100,[593,667,708,805,929,1088,1196,1317,1448]],[120,[619,698,734,837,963,1131,1247,1371,1510]],[140,[642,726,767,864,990,1173,1289,1419,1560]],[160,[665,757,800,901,1052,1214,1332,1466,1614]],[180,[690,777,835,934,1071,1253,1378,1525,1666]],[200,[715,809,860,972,1094,1293,1426,1566,1723]],[220,[738,837,893,999,1127,1332,1466,1614,1773]],[240,[762,864,926,1036,1160,1378,1517,1666,1835]],[260,[785,888,955,1067,1191,1427,1568,1725,1900]],[280,[809,918,987,1098,1224,1458,1602,1763,1941]],[300,[839,949,1021,1131,1260,1499,1651,1817,1995]],[320,[859,972,1050,1168,1293,1543,1694,1864,2051]],[340,[882,1001,1083,1201,1322,1579,1740,1912,2102]],[360,[906,1029,1114,1237,1357,1628,1790,1966,2164]],[380,[932,1040,1150,1268,1392,1651,1817,1998,2199]],[400,[955,1086,1178,1301,1427,1713,1885,2070,2277]],[420,[980,1106,1212,1334,1456,1751,1922,2115,2327]],[440,[1001,1127,1243,1368,1491,1790,1966,2164,2380]],[460,[1032,1168,1271,1402,1525,1833,2018,2218,2440]],[480,[1050,1191,1303,1432,1560,1877,2062,2269,2496]],[500,[1074,1217,1339,1469,1591,1902,2094,2303,2532]],[520,[1106,1244,1373,1513,1644,2008,2128,2343,2572]],[540,[1137,1274,1400,1527,1674,2041,2167,2379,2607]],[560,[1231,1362,1506,1642,1772,2140,2270,2474,2704]],[580,[1263,1392,1528,1666,1806,2177,2305,2509,2741]],[600,[1295,1426,1565,1701,1830,2192,2336,2540,2772]],[620,[1325,1454,1595,1737,1869,2238,2370,2571,2808]],[640,[1371,1495,1631,1771,1902,2273,2403,2607,2842]],[660,[1405,1535,1678,1817,1949,2311,2441,2638,2875]],[680,[1436,1574,1718,1859,1978,2336,2465,2673,2908]],[700,[1485,1600,1741,1880,2010,2371,2497,2705,2944]]];
+const MK_HARDHOUT = [[100,[622,700,743,846,976,1142,1256,1383,1521]],[120,[651,733,772,878,1010,1189,1310,1439,1585]],[140,[674,762,806,908,1041,1232,1353,1490,1639]],[160,[698,794,840,946,1081,1275,1399,1541,1696]],[180,[723,816,875,981,1121,1316,1448,1592,1749]],[200,[752,851,903,1021,1148,1328,1496,1644,1804]],[220,[775,878,937,1049,1183,1399,1541,1696,1864]],[240,[799,908,972,1088,1217,1448,1592,1749,1928]],[260,[825,932,1002,1121,1252,1498,1646,1812,1995]],[280,[851,965,1039,1153,1285,1532,1683,1853,2037]],[300,[882,996,1072,1189,1323,1574,1734,1909,2094]],[320,[902,1021,1103,1225,1357,1620,1779,1958,2154]],[340,[926,1051,1137,1261,1388,1659,1826,2008,2208]],[360,[950,1081,1169,1299,1426,1708,1879,2066,2272]],[380,[979,1091,1206,1332,1461,1734,1909,2098,2308]],[400,[1002,1140,1237,1366,1498,1799,1978,2174,2390]],[420,[1029,1161,1271,1402,1528,1838,2020,2222,2443]],[440,[1051,1183,1303,1436,1566,1879,2066,2272,2499]],[460,[1083,1225,1336,1472,1602,1924,2119,2328,2561]],[480,[1105,1252,1370,1504,1639,1971,2166,2381,2620]],[500,[1128,1278,1407,1543,1671,1997,2200,2419,2658]]];
 const MK_BOVENKAP_B = [100,120,140,160,180,200,220,240,260,280,300,320,340,360,380,400,420,440,460,480,500,520,540,560,580,600,620,640,660,680,700];
 const MK_BOVENKAP_HARDHOUT = [122,127,139,149,157,163,175,188,195,200,205,213,220,229,236,246,254,264,272,282,293,304,316,330,341,354,367,379,392,403,419];
 const MK_BOVENKAP_ALU = [185,190,213,229,242,252,268,284,300,307,315,327,340,351,364,379,391,406,418,430,450,465,481,496,507,522,536,547,558,574,588];
@@ -108,6 +130,13 @@ function mkGetTabel(mat) { return mat === 'Aluminium' ? MK_ALUMINIUM : mat === '
 function mkGetMatLabel(mat) { return mat === 'Aluminium' ? 'aluminium' : mat === 'Hardhout' ? 'hardhouten' : 'grenenhouten'; }
 function mkTotaalExcl(mat, breedteMM, uitvalMM) {
   const alu = mat === 'Aluminium';
+  // Boek Markiezen Nederland p30: "Markiezen vanaf 440cm breed dienen met tussenpoot of
+  // verzwaard profiel te worden uitgevoerd." Dat is geen optie maar een eis, en welke van
+  // de twee (tussenpoot €160 of verzwaard profiel €350) is een keuze die wij niet kunnen
+  // maken. Dus geen automatische prijs; dit gaat naar handmatige controle.
+  // Gemeten 2026-08-03: 2 markiezen van 440 cm of breder in de 2026-offertes, waarvan er
+  // één (460 cm) een prijs kreeg zónder die verplichte verzwaring.
+  if (breedteMM >= 4400) return null;
   const markies = mkLookupMarkies(mkGetTabel(mat), breedteMM, uitvalMM);
   const bovenkap = mkLookupBovenkap(breedteMM, alu);
   const zijkap = uitvalMM > 0 ? mkLookupZijkap(uitvalMM, alu) : 0;
@@ -128,7 +157,7 @@ function mkBuildOptiesBlok(bediening, materiaal, breedteMM, uitvalMM) {
   for (const opt of matOpties) {
     const altTotaal = mkTotaalExcl(opt.key, breedteMM, uitvalMM);
     if (altTotaal == null) continue; // alternatief buiten tabelbereik: niet tonen
-    const verschil = Math.round((altTotaal - huidigTotaal) * 1.21);
+    const verschil = Math.round((altTotaal - huidigTotaal) * MARKIEZEN_FACTOR);
     matRegels.push('• ' + opt.label + ': ' + (verschil >= 0 ? '+€' : '-€') + Math.abs(verschil));
   }
   if (matRegels.length > 0) {
@@ -139,7 +168,7 @@ function mkBuildOptiesBlok(bediening, materiaal, breedteMM, uitvalMM) {
   if (anderen.length > 0) {
     lines.push('Andere bediening:');
     for (const [, info] of anderen) {
-      const verschil = Math.round((info.excl - huidigBed) * 1.21);
+      const verschil = Math.round((info.excl - huidigBed) * MARKIEZEN_FACTOR);
       lines.push('• ' + info.label + ': ' + (verschil >= 0 ? '+€' : '-€') + Math.abs(verschil));
     }
     lines.push('');
@@ -221,7 +250,7 @@ function processMarkiezen(desc, existingLines) {
     const bedExcl = MK_BEDIENING[mk.bediening]?.excl || 0;
     const bovenkExcl = mkLookupBovenkap(mk.breedte, alu);
     const zijkExcl = mk.uitval > 0 ? mkLookupZijkap(mk.uitval, alu) : 0;
-    const totaalIncl = Math.round((markiesExcl + bedExcl + bovenkExcl + zijkExcl) * 1.21 * 100) / 100;
+    const totaalIncl = Math.round((markiesExcl + bedExcl + bovenkExcl + zijkExcl) * MARKIEZEN_FACTOR * 100) / 100;
 
     let bedDesc = mk.bediening === 'Handbediend' ? 'Handbediend (koord bovenlangs)' :
       mk.bediening === 'Motor + afstandsbediening' ? 'Elektrisch (Somfy IO motor met afstandsbediening)' :
@@ -965,8 +994,14 @@ function lookupPrice(productKey, breedteCm, hoogteCm, uitvalCm) {
     // GEKOPPELD (pergola én serre): breder dan de tabel (>6000mm) = 2 units gekoppeld.
     // Prijs = 2× een unit van de halve breedte (bv. 9000mm = 2× 4500mm). Bevestigd door Daimy 2026-07-02.
     if (breedteCm > maxBreedte) {
+      // Het maximum van de gekoppelde uitvoering verschilt PER PRODUCT en staat in het boek:
+      // SunControl 150 tot 10.000 mm (p49), 165 ZIP tot 12.000 mm (p51), pergola tot
+      // 10.000 mm (p53). Hier stond 2× de tabelbreedte voor alles (= 12.000 mm), waardoor
+      // we bij de 150 en de pergola tot 2 meter breder offreerden dan leverbaar.
+      const maxGekoppeldCm = (product.maxGekoppeldMM || maxBreedte * 2 * 10) / 10;
+      if (breedteCm > maxGekoppeldCm) return null; // breder dan leverbaar → handmatige controle
       const halveBreedte = Math.ceil(breedteCm / 2);
-      if (halveBreedte > maxBreedte) return null; // > 2×6000mm: niet zeker → handmatige controle
+      if (halveBreedte > maxBreedte) return null;
       const half = findNearest(tbl, halveBreedte)?.value;
       return half ? half * 2 : null;
     }
@@ -1255,6 +1290,23 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
   const product = SUNMASTER_PRICES[productKey];
   if (!product) return null;
   const pCat = product.category === 'zipscreen' ? 'screen' : product.category;
+
+  // KNIKARM-MINIMA: de armen moeten naast elkaar in de cassette passen, dus de minimale
+  // breedte hangt af van de uitval. Boekformules: SunEye = uitval+19 (p27), SunEye XL =
+  // uitval+49 maar 401 bij uitval 350 (p29), SunElite = uitval+65 (p31), SunBasic =
+  // uitval+30 (p25). De offerte-tool kende deze regel al, v4 niet — daardoor zijn er
+  // 14 offertes de deur uitgegaan met een scherm dat niet te bouwen is (gemeten
+  // 2026-08-03 over alle 2026-offertes). Geen prijs → handmatige controle, zelfde
+  // aanpak als bij SunEye XL handbediend.
+  if (pCat === 'knikarmscherm' && uitvalCm > 0 && breedteCm > 0) {
+    const KNIKARM_OFFSET = { suneye: 19, suneyeXL: 49, sunelite: 65, sunbasic: 30, sunbasicCassette: 30 };
+    const offset = KNIKARM_OFFSET[productKey];
+    if (offset !== undefined) {
+      const minBreedte = (productKey === 'suneyeXL' && uitvalCm >= 350) ? 401 : uitvalCm + offset;
+      if (breedteCm < minBreedte) return null;
+    }
+  }
+
   const boekprijs = lookupPrice(productKey, breedteCm, hoogteCm, uitvalCm);
   if (!boekprijs) return null;
 
@@ -1277,15 +1329,36 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
     // Tabel = Sunea IO. IO + handzender is standaard bestelling.
     // SunEye XL bestaat NIET handbediend (Daimy 01-08; boek p28: minderprijzen alleen
     // uitval 150/200 en Orea WT, geen draaistang). Geen prijs -> handmatige controle.
-    if (productKey === 'suneyeXL' && isHandbediend) return null;
     if (isIO) totaal += hz;
     else if (isDraaischakelaar) totaal -= 51; // Orea WT als "draaischakelaar" interpretatie
-    else if (isHandbediend) totaal -= 300; // draaistang
+    else if (isHandbediend) {
+      // Draaistang bestaat NIET bij elk model. Boek 2026: SunEye (p27) en SunBasic (p25)
+      // hebben een minderprijs draaistangbediening, SunEye XL (p29), SunBasic Cassette (p25)
+      // en SunElite (p31) niet — daar staat die regel simpelweg niet in de minderprijzen.
+      // Stond hier een vaste -300 voor alles, waardoor we handbediende schermen offreerden
+      // die de fabriek niet levert. Nu: geen draaistang in het boek = geen prijs = handmatige
+      // controle. Gecontroleerd tegen de boekpagina's op 2026-08-03.
+      const draaistang = product.minderprijzen?.draaistang;
+      if (typeof draaistang !== 'number') return null;
+      totaal += draaistang;
+    }
     else totaal += hz; // default = IO + handzender
   }
   else if (pCat === 'screen') {
+    // Per product kan de tabel op een ANDERE bediening staan. Zip Square (p9) en Zip Design
+    // (p11) staan op Sunilus io, maar Screen Square 85/100 (p7) staat op de LT50-12rpm
+    // motortabel. Daar gelden dus heel andere meerprijzen; staat dat bij het product, dan
+    // wint dat. Zonder deze uitzondering rekende v4 de zipscreen-regels op alle screens.
+    const bedAanp = product.bedieningAanpassing;
+    if (bedAanp) {
+      const sleutel = isIO ? 'io' : isDraaischakelaar ? 'draaischakelaar' : isSolar ? 'solar'
+        : bedieningType === 'solarBrel' ? 'solarBrel' : isHandbediend ? 'handbediend' : 'io';
+      const aanpassing = bedAanp[sleutel];
+      if (aanpassing === null || aanpassing === undefined) return null; // niet te berekenen → handmatige controle
+      totaal += aanpassing;
+    }
     // Tabel = Sunilus IO
-    if (isIO) totaal += hz;
+    else if (isIO) totaal += hz;
     else if (isDraaischakelaar) totaal -= 89; // LT50
     else if (isSolar) totaal += 173 + hz; // Somfy RS 100 IO Solar (excl zender) + handzender
     else if (bedieningType === 'solarBrel') totaal += 135; // Boek p9/11: Solaruitvoering Brel incl. 1-kanaals handzender = meerprijs t.o.v. tabel (was foutief 59)
@@ -1305,7 +1378,7 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
       // Tabel = Orea WT
       if (isIO) totaal += 60 + hz; // upgrade naar Sunea IO + handzender
       else if (isDraaischakelaar) { /* Orea WT is al in tabel, geen aanpassing */ }
-      else if (isHandbediend) totaal -= 299; // draaistang
+      else if (isHandbediend) totaal -= 299; // draaistang; boek p43 geeft hier GEEN breedtegrens
       else if (isSolar || bedieningType === 'solarBrel') totaal += 135; // Solar Brel incl handzender
       else totaal += 60 + hz; // default IO
     }
@@ -1313,7 +1386,13 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
       // Tabel = Somfy LT
       if (isIO) totaal += 134 + hz; // upgrade naar Sunea IO + handzender
       else if (isDraaischakelaar) { /* LT is al in tabel */ }
-      else if (isHandbediend) totaal -= 299; // draaistang
+      else if (isHandbediend) {
+        // Boek p44: "Draaistangbediening buiten (mogelijk tot 460 cm breedte) -/- 299,00".
+        // Alleen bij SunProject staat die breedtegrens; bij SunCube (p43) niet. Boven 460 cm
+        // offreerden we een draaistang die niet leverbaar is → handmatige controle.
+        if (breedteCm > 460) return null;
+        totaal -= 299;
+      }
       else if (isSolar || bedieningType === 'solarBrel') totaal += 199; // Solar Brel incl handzender
       else totaal += 134 + hz; // default IO
     }
@@ -1397,14 +1476,15 @@ function correctProductPrice(line, productKey, breedteCm, hoogteCm, uitvalCm) {
 
     if (pCatColor === 'rolluik') {
       // Rolluik: percentage-based — trendkleur +15%, RAL +20% op productprijs (= correctPrice vóór kleur)
-      const pct = isTrend ? 0.15 : 0.20;
+      const pct = isTrend ? PRIJSCONFIG.kleurTrendPct : PRIJSCONFIG.kleurRalPct;
       const surcharge = Math.round(correctPrice * pct * 100) / 100;
-      console.log('    Kleur meerprijs rolluik: ' + (isTrend ? 'trend +15%' : 'RAL +20%') + ' = +€' + surcharge);
+      console.log('    Kleur meerprijs rolluik: ' + (isTrend ? 'trend' : 'RAL') + ' +' + Math.round(pct * 100) + '% = +€' + surcharge);
       correctPrice += surcharge;
     } else if (pCatColor === 'serre' || pCatColor === 'pergola') {
-      // Serre/pergola: RAL +15% op productprijs
-      const surcharge = Math.round(correctPrice * 0.15 * 100) / 100;
-      console.log('    Kleur meerprijs serre/pergola: RAL +15% = +€' + surcharge);
+      // Serre/pergola: eigen percentage (boek p51: 15%, dus niet de 20% van de rolluiken)
+      const pctSerre = PRIJSCONFIG.kleurRalPctSerre;
+      const surcharge = Math.round(correctPrice * pctSerre * 100) / 100;
+      console.log('    Kleur meerprijs serre/pergola: RAL +' + Math.round(pctSerre * 100) + '% = +€' + surcharge);
       correctPrice += surcharge;
     } else if (isTrend && product.meerprijsTrend) {
       // Screens/knikarm/uitval met trendkleur: vaste meerprijs uit tabel
@@ -1967,7 +2047,11 @@ async function main() {
     }
     const sheetTabNaam = tab.title; // echte naam inclusief eventuele spaties
     // Dedup op offerte nummer
-    const existRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: "'" + sheetTabNaam + "'!G4:G2000" });
+    // Leesbereik moet MINSTENS zo ver reiken als waar we schrijven (A4:X3000). Stond op
+    // G4:G2000 terwijl de juli-tab 2997 rijen heeft: alles voorbij rij 2000 werd niet gezien,
+    // dus die offertes werden ELKE RUN opnieuw toegevoegd. Resultaat: 143 dubbele rijen in
+    // juli, 37 in juni, en een oplopende sheet-teller (23 -> 122 per run). Daimy 2026-08-03.
+    const existRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: "'" + sheetTabNaam + "'!G4:G5000" });
     const existingNrs = new Set((existRes.data.values || []).map(r => r[0]).filter(Boolean));
     const newRows = rows.filter(r => !existingNrs.has(r[6]));
     if (newRows.length === 0) continue;

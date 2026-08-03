@@ -9,13 +9,21 @@ const SUNMASTER_PRICES = JSON.parse(fs.readFileSync('/Users/clawdboot/sonty/data
 // MARKUP komt uit het ingelezen v4-blok (data/prijsconfig.json). Bewust GEEN eigen
 // kopie meer: die liep stil uit de pas met v4 en dan noemt dit bestand een andere prijs.
 let MARKUP;
-const api = eval(code + `;({MARKUP, mkLookupMarkies, mkLookupBovenkap, mkLookupZijkap, mkTotaalExcl, mkBuildOptiesBlok, MK_GRENEN, MK_ALUMINIUM, MK_HARDHOUT,
+const api = eval(code + `;({MARKUP, MARKIEZEN_FACTOR, mkLookupMarkies, mkLookupBovenkap, mkLookupZijkap, mkTotaalExcl, mkBuildOptiesBlok, MK_GRENEN, MK_ALUMINIUM, MK_HARDHOUT,
   findNearest, lookupPrice, calculateCorrectPrice, correctProductPrice, getProductKey, getCategory, getBedType, getMontagePrice, getMontageCategory,
   adjustMontageInPlace, extractMaatFromDesc, processMarkiezen, addV4Enhancements})`);
 MARKUP = api.MARKUP;
+const MARKIEZEN_FACTOR = api.MARKIEZEN_FACTOR;
 if (!MARKUP) throw new Error('MARKUP niet uit de v4-prijscode gekomen — prijsconfig.json of de slice-grens klopt niet');
 
 const baseline = JSON.parse(fs.readFileSync(__dirname + '/baseline.json', 'utf8'));
+// De baseline is vastgelegd bij opslag 1,10. Wordt die gewijzigd, dan schuiven alle prijzen
+// die de opslag bevatten evenredig mee; de kale boekprijzen (lookupPrice) niet. Zonder deze
+// schaling viel de hele pre-check om bij de overgang naar 1,20 — en dan draait v4 op de
+// laatste goede versie met een waarschuwing, terwijl er niks mis is.
+const schaal = (v) => (typeof v === 'number' && baseline._markup)
+  ? Math.round((v / baseline._markup) * MARKUP * 100) / 100
+  : v;
 let pass = 0, fail = 0;
 function check(naam, actual, expected) {
   const ok = JSON.stringify(actual) === JSON.stringify(expected);
@@ -34,10 +42,10 @@ const M1_OVERRIDES = {
   'sunproject100/300//135': 1350,     // doek 225 SunProject: banen niet mogelijk (oproldiameter)
 };
 const M1_CC_OVERRIDES = {
-  'suncube150/350//115/handbediend': Math.round((1835 + 217 - 299) * 1.10 * 100) / 100,
-  'suncube150/350//115/afstandsbediening': Math.round((1835 + 217 + 60 + 76) * 1.10 * 100) / 100,
-  'sunproject100/300//135/afstandsbediening': Math.round((1350 + 134 + 76) * 1.10 * 100) / 100,
-  'sunproject100/300//135/draaischakelaar': Math.round(1350 * 1.10 * 100) / 100,
+  'suncube150/350//115/handbediend': Math.round((1835 + 217 - 299) * MARKUP * 100) / 100,
+  'suncube150/350//115/afstandsbediening': Math.round((1835 + 217 + 60 + 76) * MARKUP * 100) / 100,
+  'sunproject100/300//135/afstandsbediening': Math.round((1350 + 134 + 76) * MARKUP * 100) / 100,
+  'sunproject100/300//135/draaischakelaar': Math.round(1350 * MARKUP * 100) / 100,
 };
 console.log('=== A. REGRESSIE (binnen tabelbereik → prijs ongewijzigd; M1-cases bewust nieuw) ===');
 for (const [key, expected] of baseline.lookupPrice) {
@@ -45,7 +53,8 @@ for (const [key, expected] of baseline.lookupPrice) {
   const exp = key in M1_OVERRIDES ? M1_OVERRIDES[key] : expected;
   check('lookupPrice ' + key + (key in M1_OVERRIDES ? ' [M1 bewust gewijzigd]' : ''), api.lookupPrice(args[0], args[1], args[2], args[3]), exp);
 }
-for (const [key, expected] of baseline.calculateCorrectPrice) {
+for (const [key, expectedRaw] of baseline.calculateCorrectPrice) {
+  const expected = schaal(expectedRaw);
   const p = key.split('/');
   const exp = key in M1_CC_OVERRIDES ? M1_CC_OVERRIDES[key] : expected;
   check('calcCorrectPrice ' + key + (key in M1_CC_OVERRIDES ? ' [M1 bewust gewijzigd]' : ''), api.calculateCorrectPrice(p[0], parseFloat(p[1]) || null, parseFloat(p[2]) || null, parseFloat(p[3]) || null, p[4]), exp);
@@ -66,18 +75,18 @@ for (const [key, expected] of baseline.montage) {
 {
   const line = { description: 'Zip Design 110\nBreedte: 3000 mm\nHoogte: 2500 mm\nFrame kleur: RAL 7016 structuur\nBediening: Motor + afstandsbediening', pricePerUnit: 2338, units: 1 };
   api.correctProductPrice(line, 'zipDesign110', 300, 250, null);
-  check('correctProductPrice zipDesign 300x250', line.pricePerUnit, baseline.cppZipDesign);
+  check('correctProductPrice zipDesign 300x250', line.pricePerUnit, schaal(baseline.cppZipDesign));
 }
 {
   const line = { description: 'SunElite\nBreedte: 6000 mm\nUitval: 3000 mm\nFrame Kleur: RAL 7016 structuur\nBediening: Draaischakelaar', pricePerUnit: 4930.9, units: 1 };
   api.correctProductPrice(line, 'sunelite', 600, null, 300);
-  check('correctProductPrice sunelite 600', line.pricePerUnit, baseline.cppSunelite);
+  check('correctProductPrice sunelite 600', line.pricePerUnit, schaal(baseline.cppSunelite));
 }
 {
   const desc = '2x Markiezen\nkies_materiaal: Aluminium\nbreedte: 3000\nuitval: 1000\nwelk_type_bediening_wil_je?: Motor + afstandsbediening\nframekleur: RAL 9001\ndoekkleur: Geel';
   const r = api.processMarkiezen(desc, []);
   check('markies geldige desc: geen issues', r.issues, []);
-  check('markies geldige desc: prijzen gelijk', r.lines.map(l => [l.description.split('\n')[0], l.pricePerUnit, l.units]), baseline.markiesProces);
+  check('markies geldige desc: prijzen gelijk', r.lines.map(l => [l.description.split('\n')[0], l.pricePerUnit, l.units]), baseline.markiesProces.map(([n, p, u]) => [n, /montage/i.test(n) ? p : Math.round(p / 1.21 * MARKIEZEN_FACTOR * 100) / 100, u]));
 }
 
 // ============ B. FIX-GEDRAG ============
@@ -103,14 +112,14 @@ check('rolluikS42 450cm (>400) → null (was 400-prijs)', api.lookupPrice('rollu
 
 console.log('=== B. K4: knikarm minderprijs uitval 150/200 ===');
 // suneye 400cm: tabel-250 = 2778; uitval200 -160; uitval150 -180; IO +76; ×1.10
-check('suneye 400/uitval200 IO = 2963.4 (was 3139.4)', api.calculateCorrectPrice('suneye', 400, null, 200, 'afstandsbediening'), 2963.4);
-check('suneye 400/uitval150 IO = 2941.4 (was 3139.4)', api.calculateCorrectPrice('suneye', 400, null, 150, 'afstandsbediening'), 2941.4);
-check('suneye 400/uitval250 IO ongewijzigd 3139.4', api.calculateCorrectPrice('suneye', 400, null, 250, 'afstandsbediening'), 3139.4);
+check('suneye 400/uitval200 IO = schaal(2963.4) (was schaal(3139.4))', api.calculateCorrectPrice('suneye', 400, null, 200, 'afstandsbediening'), schaal(2963.4));
+check('suneye 400/uitval150 IO = schaal(2941.4) (was schaal(3139.4))', api.calculateCorrectPrice('suneye', 400, null, 150, 'afstandsbediening'), schaal(2941.4));
+check('suneye 400/uitval250 IO ongewijzigd schaal(3139.4)', api.calculateCorrectPrice('suneye', 400, null, 250, 'afstandsbediening'), schaal(3139.4));
 check('sunbasicCassette 400/uitval200 = geen tabel-300 val; 250-tabel -150', api.calculateCorrectPrice('sunbasicCassette', 400, null, 200, 'afstandsbediening'),
-  Math.round(((api.findNearest(SUNMASTER_PRICES.sunbasicCassette.tables['250'], 400).value) - 150 + 76) * 1.10 * 100) / 100);
+  Math.round(((api.findNearest(SUNMASTER_PRICES.sunbasicCassette.tables['250'], 400).value) - 150 + 76) * MARKUP * 100) / 100);
 // sunelite heeft geen uitval-minderprijzen → gedrag ongewijzigd (250-tabel)
 check('sunelite 500/uitval200 = als 250-tabel (geen minderprijs in JSON)', api.calculateCorrectPrice('sunelite', 500, null, 200, 'draaischakelaar'),
-  Math.round(((api.findNearest(SUNMASTER_PRICES.sunelite.tables['250'], 500).value) - 51) * 1.10 * 100) / 100);
+  Math.round(((api.findNearest(SUNMASTER_PRICES.sunelite.tables['250'], 500).value) - 51) * MARKUP * 100) / 100);
 
 console.log('=== B. M1: uitvalscherm doekmaat volgt uitval (95→165, 115→200, 135→225) ===');
 // suncube150 B=350cm (tabel rondt af naar 360)
@@ -180,7 +189,7 @@ console.log('=== B. M4: markies-validatie → issues (→ handmatig) ===');
   const r5 = api.processMarkiezen('1x Markiezen\nKies_materiaal: aluminium\nBreedte: 3000\nUitval: 1000\nWelk_type_bediening_wil_je?: somfy io motor solar', []);
   check('case-insensitief parsen + bediening genormaliseerd', r5.issues, []);
   check('solar-bediening prijs meegenomen (745 excl, incl Situo-zender per boek 2026)', r5.lines[0].pricePerUnit,
-    Math.round((api.mkLookupMarkies(api.MK_ALUMINIUM, 3000, 1000) + 745 + api.mkLookupBovenkap(3000, true) + api.mkLookupZijkap(1000, true)) * 1.21 * 100) / 100);
+    Math.round((api.mkLookupMarkies(api.MK_ALUMINIUM, 3000, 1000) + 745 + api.mkLookupBovenkap(3000, true) + api.mkLookupZijkap(1000, true)) * MARKIEZEN_FACTOR * 100) / 100);
   const r6 = api.processMarkiezen('1x Markiezen\nkies_materiaal: Aluminium\nbreedte: 3000\nwelk_type_bediening_wil_je?: Handbediend', []);
   check('uitval ontbreekt → issue', r6.issues.some(i => i.includes('uitval')), true);
 }
@@ -192,7 +201,7 @@ console.log('=== B. H1: correctProductPrice → maat-fallback SunEye→XL (Daimy
   const line = { description: 'Suneye\nBreedte: 7250 mm\nUitval: 2000 mm\nBediening: Motor + afstandsbediening', pricePerUnit: 3500, units: 1 };
   const pc = api.correctProductPrice(line, 'suneye', 725, null, 200);
   check('suneye 725cm → herrouteerd naar XL (priceUnknown=false)', pc.priceUnknown, false);
-  check('prijs = XL-prijs', line.pricePerUnit, 6813.4);
+  check('prijs = XL-prijs', line.pricePerUnit, schaal(6813.4));
   check('titel omgezet naar XL', /suneye\s*xl/i.test(line.description.split('\n')[0]), true);
   check('uitleg + prijsverschil op de regel', line.description.includes('standaard SunEye gaat tot'), true);
   // Boven de XL-grens (745cm) blijft het gewoon Handmatige controle.

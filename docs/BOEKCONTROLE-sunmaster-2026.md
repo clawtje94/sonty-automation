@@ -11,14 +11,14 @@ Nooit de tekstlaag — daar is het de vorige keer op misgegaan.
 | p | onderwerp | status | bevinding |
 |---|---|---|---|
 | 1-4 | omslag, inhoud, over Sunmaster | n.v.t. | geen prijzen |
-| 5 | **Square 70** | TE DOEN | ⚠️ product staat NIET in onze prijsdata |
+| 5 | Square 70 | ✅ n.v.t. | Daimy 03-08: **verkopen we niet**. Bewust niet in onze data — niet alsnog toevoegen |
 | 6 | Screen Square 85 tekeningen | n.v.t. | |
 | 7 | Screen Square 85/100 | ✅ 30-07 | opnieuw uitgelezen |
 | 8 | inhoud zipscreens | n.v.t. | |
 | 9 | Zip Square 85/100 | ✅ 30-07 + 03-08 | max hoogte 340, niet 280 (offerte-tool gefixt) |
-| 10-11 | Zip Design 110 | TE DOEN | |
+| 10-11 | Zip Design 110 | ✅ 03-08 | prijstabellen 100% goed (50 + 160 cellen). ⚠️ TWEE FOUTEN in de kleurmeerprijs, zie bevinding 5 en 6 |
 | 13 | vervolgtabel | TE DOEN | welk product? |
-| 14-15 | **Zip Square 130** | TE DOEN | ⚠️ product staat NIET in onze prijsdata |
+| 14-15 | Zip Square 130 | ✅ n.v.t. | Daimy 03-08: **verkopen we niet**. Bewust niet in onze data |
 | 16 | meerprijzen bediening screens | TE DOEN | |
 | 17 | profielen per meter, kleuren | TE DOEN | |
 | 19 | kabeluitvoer | n.v.t. | |
@@ -57,14 +57,25 @@ Nooit de tekstlaag — daar is het de vorige keer op misgegaan.
    draaistangbediening alleen bij SunEye (p27) en SunBasic (p25). SunEye XL, SunBasic
    Cassette en SunElite hebben die regel niet. v4 trok overal een vaste -300 af en
    offreerde dus handbediende schermen die de fabriek niet levert. Gefixt 03-08.
-3. **OPEN VRAAG VOOR DAIMY — RAL 7016.** Wij hebben "RAL 7016" en "RAL 7016 structuur" bij
-   alle knikarmen als standaardkleur staan. Het boek noemt als standaard/voorraad alleen:
-   SunEye RAL 9010, RAL 9001, Antraciet structuur, RAL 9005 structuur · SunElite RAL 9010
-   mat, Antraciet structuur · SunBasic RAL 9001, Antraciet structuur.
-   "Antraciet structuur" is vermoedelijk hetzelfde als RAL 7016 structuur, maar gladde
-   RAL 7016 staat nergens. Klopt dat, of laten we daar een kleurmeerprijs liggen van
-   €241–€699 (Trend) of €344–€999 (RAL) per scherm?
+3. **RAL 7016 — BEANTWOORD (Daimy 03-08).** Antraciet structuur *is* RAL 7016 structuur,
+   en RAL 7016 glad is dezelfde kleur in gladde uitvoering. Antraciet is altijd een
+   standaardkleur. Onze standaardKleuren (RAL 7016 én RAL 7016 structuur bij alle
+   knikarmen) kloppen dus; er wordt terecht geen kleurmeerprijs gerekend. NIET wijzigen.
 4. Minimale breedtes uit het boek, nu in v4: SunEye uitval+19, SunEye XL uitval+49 (401 bij
    uitval 350), SunElite uitval+65, SunBasic uitval+30. SunBasic handbediend is +33; dat
    verschil van 3 cm zit nog niet in de code maar heeft geen praktisch effect omdat de
    tabel pas bij 300 begint.
+
+5. **Zip Design 110: kleurmeerprijs bij breedte 280 stond een kolom verschoven.** Wij:
+   Trend 181 / RAL 361. Boek p11: Trend 148 / RAL 295. Klanten met een 280 cm breed
+   scherm in een meerprijs-kleur betaalden €36 (Trend) of €73 (RAL) te veel. Gefixt.
+6. **Zip Design 110: kleurmeerprijs voor breedte 100-180 ontbrak helemaal.** Boek p10 geeft
+   daar Trend 115 / RAL 230; bij ons begon de tabel pas bij 200, dus die maten vielen terug
+   op de staffel 200 (148/295) en betaalden €36 resp. €72 te veel. Gefixt.
+   → 210 offertes uit 2026 hebben een Zip Design ≤280 breed in een meerprijs-kleur. Die zijn
+   dus te duur geoffreerd. Vraag aan Daimy: alleen de nog openstaande (SENT) corrigeren,
+   zoals bij de uitvalschermen in augustus?
+7. **OPEN — standaardkleuren Zip Design 110.** Boek p10 noemt RAL 9010, RAL 9001, Antraciet
+   structuur en **RAL 9006**. Wij hebben RAL 9006 NIET als standaard (dus rekenen we daar
+   ten onrechte meerprijs) en wél **RAL 9005 structuur** (dus rekenen we daar mogelijk
+   ten onrechte géén meerprijs). Beide raken de klantprijs — niet aangepast zonder Daimy.

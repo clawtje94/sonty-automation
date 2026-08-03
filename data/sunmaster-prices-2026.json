@@ -785,11 +785,16 @@
    }
   },
   "meerprijsTrend": {
+   "100": 115,
+   "120": 115,
+   "140": 115,
+   "160": 115,
+   "180": 115,
    "200": 148,
    "220": 148,
    "240": 148,
    "260": 148,
-   "280": 181,
+   "280": 148,
    "300": 181,
    "320": 181,
    "340": 181,
@@ -803,11 +808,16 @@
    "500": 274
   },
   "meerprijsRAL": {
+   "100": 230,
+   "120": 230,
+   "140": 230,
+   "160": 230,
+   "180": 230,
    "200": 295,
    "220": 295,
    "240": 295,
    "260": 295,
-   "280": 361,
+   "280": 295,
    "300": 361,
    "320": 361,
    "340": 361,
@@ -819,7 +829,8 @@
    "460": 482,
    "480": 482,
    "500": 548
-  }
+  },
+  "_fix": "2026-08-03: kleurmeerprijs bij breedte 280 stond een kolom verschoven (trend 181/ral 361 i.p.v. 148/295, boek p11). Klanten met een 280 cm breed Zip Design in Trend of RAL betaalden 36 resp. 73 euro te veel. | 2026-08-03: kleurmeerprijs voor breedte 100-180 ontbrak volledig (boek p10: Trend 115, RAL 230). Die maten vielen terug op de staffel 200 en betaalden 33 resp. 65 euro te veel."
  },
  "sunbasic": {
   "category": "knikarmscherm",

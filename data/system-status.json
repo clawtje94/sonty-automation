@@ -1,5 +1,5 @@
 {
- "bijgewerkt": "2026-08-03T05:59:09.053Z",
+ "bijgewerkt": "2026-08-03T09:59:25.535Z",
  "host": "mac-mini",
  "systemen": [
   {
@@ -43,7 +43,7 @@
    "laatsteExit": "0",
    "intervalSec": 900,
    "logLeeftijdMin": 8,
-   "logLaatste": "[05:50:58] API-hooks gestart.",
+   "logLaatste": "[09:51:00] API-hooks gestart.",
    "killSwitch": false,
    "status": "groen"
   },
@@ -55,7 +55,7 @@
    "maxUur": null,
    "geladen": true,
    "draait": false,
-   "laatsteExit": "(never exited)",
+   "laatsteExit": "0",
    "intervalSec": null,
    "logLeeftijdMin": null,
    "logLaatste": null,
@@ -70,12 +70,12 @@
    "maxUur": null,
    "geladen": true,
    "draait": false,
-   "laatsteExit": "(never exited)",
+   "laatsteExit": "1",
    "intervalSec": null,
    "logLeeftijdMin": null,
    "logLaatste": null,
    "killSwitch": false,
-   "status": "groen"
+   "status": "rood"
   },
   {
    "label": "nl.sonty.credits-check",
@@ -88,7 +88,7 @@
    "laatsteExit": "0",
    "intervalSec": 7200,
    "logLeeftijdMin": 98,
-   "logLaatste": "[2026-08-03T04:21:27.697Z] credits OK",
+   "logLaatste": "[2026-08-03T08:21:29.615Z] credits OK",
    "killSwitch": false,
    "status": "groen"
   },
@@ -99,13 +99,13 @@
    "log": null,
    "maxUur": null,
    "geladen": true,
-   "draait": true,
-   "laatsteExit": "(never exited)",
+   "draait": false,
+   "laatsteExit": "128",
    "intervalSec": null,
    "logLeeftijdMin": null,
    "logLaatste": null,
    "killSwitch": false,
-   "status": "groen"
+   "status": "rood"
   },
   {
    "label": "nl.sonty.databot-poll",
@@ -178,7 +178,7 @@
    "laatsteExit": null,
    "intervalSec": null,
    "logLeeftijdMin": 1,
-   "logLaatste": "[7:58:34 AM] geen nieuwe e-mail te verwerken (buiten bot-uren; alleen notities gescand)",
+   "logLaatste": "  [971177777] 👤 MENS NODIG (naar team Mens nodig), Hanneke.Mulder@wmtc.nl",
    "killSwitch": false,
    "status": "groen"
   },
@@ -207,7 +207,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 646,
+   "logLeeftijdMin": 886,
    "logLaatste": "Gescand: 3282 leads | nieuw getekend: 2",
    "killSwitch": false,
    "status": "groen"
@@ -222,7 +222,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 809,
+   "logLeeftijdMin": 1049,
    "logLaatste": "Niets te doen",
    "killSwitch": false,
    "status": "groen"
@@ -237,7 +237,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 779,
+   "logLeeftijdMin": 239,
    "logLaatste": "✅ MS Bookings API (showroom-boeken)",
    "killSwitch": false,
    "status": "groen"
@@ -250,12 +250,12 @@
    "maxUur": null,
    "geladen": true,
    "draait": false,
-   "laatsteExit": "(never exited)",
+   "laatsteExit": "1",
    "intervalSec": null,
    "logLeeftijdMin": null,
    "logLaatste": null,
    "killSwitch": false,
-   "status": "groen"
+   "status": "rood"
   },
   {
    "label": "nl.sonty.maandrapport",
@@ -282,8 +282,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 929,
-   "logLaatste": "[14:30:04] Buiten kantooruren, skip",
+   "logLeeftijdMin": 209,
+   "logLaatste": "[06:30:02] Buiten kantooruren, skip",
    "killSwitch": false,
    "status": "groen"
   },
@@ -312,8 +312,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 899,
-   "logLaatste": "[15:00:06] Buiten kantooruren, skip",
+   "logLeeftijdMin": 168,
+   "logLaatste": "WhatsApp offerte verstuurd: 20",
    "killSwitch": false,
    "status": "groen"
   },
@@ -327,7 +327,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": 3600,
-   "logLeeftijdMin": 51,
+   "logLeeftijdMin": 43,
    "logLaatste": "[SCHADUW] klaar: 0 voorstel(len) gelogd in opvolging-voorstellen.jsonl, er is NIETS verstuurd.",
    "killSwitch": false,
    "status": "groen"
@@ -342,8 +342,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": 1800,
-   "logLeeftijdMin": 2,
-   "logLaatste": "[2026-08-03 07:56:41] ronde klaar",
+   "logLeeftijdMin": 30,
+   "logLaatste": "[2026-08-03 11:29:40] ronde klaar",
    "killSwitch": false,
    "status": "groen"
   },
@@ -357,7 +357,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 269,
+   "logLeeftijdMin": 509,
    "logLaatste": "  AFWIJKING: #202610804 megan imanse: \"Rolluik (RollSUPER)\" staat op €1384, hoort €1152.8 (+231.2)",
    "killSwitch": false,
    "status": "groen"
@@ -372,7 +372,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 14,
+   "logLeeftijdMin": 254,
    "logLaatste": "Geen nieuwe patronen gevonden.",
    "killSwitch": false,
    "status": "groen"
@@ -387,7 +387,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 29,
+   "logLeeftijdMin": 269,
    "logLaatste": "geen API-key — overslaan",
    "killSwitch": false,
    "status": "groen"
@@ -402,7 +402,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 24449,
+   "logLeeftijdMin": 24689,
    "logLaatste": "",
    "killSwitch": false,
    "status": "rood"
@@ -417,8 +417,8 @@
    "draait": true,
    "laatsteExit": null,
    "intervalSec": null,
-   "logLeeftijdMin": 2,
-   "logLaatste": "  actief-sweep: 240 gesprekken direct checken",
+   "logLeeftijdMin": 0,
+   "logLaatste": "  actief-sweep: 252 gesprekken direct checken",
    "killSwitch": false,
    "status": "groen"
   },
@@ -433,7 +433,7 @@
    "laatsteExit": "0",
    "intervalSec": 600,
    "logLeeftijdMin": 10,
-   "logLaatste": "[7:49:08 AM] 33 diensten, push: 200",
+   "logLaatste": "[11:49:25 AM] 33 diensten, push: 200",
    "killSwitch": false,
    "status": "groen"
   },
@@ -462,7 +462,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 1424,
+   "logLeeftijdMin": 224,
    "logLaatste": "telegram: true",
    "killSwitch": false,
    "status": "groen"
@@ -477,8 +477,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 854,
-   "logLaatste": "[15:45:00] Zondag: V4 draait niet, self-check skip (aanwas wordt maandag 9:30 verwerkt)",
+   "logLeeftijdMin": 134,
+   "logLaatste": "[07:45:09] Klaar: 0 gefixt, 5 gerapporteerd",
    "killSwitch": false,
    "status": "groen"
   },
@@ -492,7 +492,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 1289,
+   "logLeeftijdMin": 89,
    "logLaatste": "alles verstuurd, klaar",
    "killSwitch": false,
    "status": "groen"

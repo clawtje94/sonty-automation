@@ -119,3 +119,7 @@
 - (2026-07-31) [team-notitie bij gesprek +31646408076] verwijder maar alle producten los van het voorraad scherm en de motage etc
 - (2026-08-02) [team-notitie bij gesprek +31620365252] bij onze producten als ze electrisch zijn zit er altijd 1 afstand bedining per product bij dit had je zelf ook kunnen weten want de prijs opbouw reken je een afstandsbediening per product uit?
 - (2026-08-03) [team-notitie bij gesprek +31620430884] regel maar
+- (2026-08-03) [team-notitie bij e-mail koos@bink.nl] heb je hem geen nieuwe prijs indicatie gestuurd?
+- (2026-08-03) [team-notitie bij e-mail kspadiwita@planet.nl] dit hoeft echt niet naar mij antwoord zelf maar...
+- (2026-08-03) [team-notitie bij gesprek +31612933170] waarom is dit ticket toegewezen aan mens nodig?
+- (2026-08-03) [team-notitie bij gesprek +31628677522] vraag even een foto te sturen zodat we het beter kunnen inschatten en na dat je foto hebt ontvangen door mens laten bekijken en beantwoorden

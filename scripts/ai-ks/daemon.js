@@ -432,19 +432,35 @@ async function verwerkTicket(t, state) {
     const overdrachten = ruweBerichten.filter(m => (m.internal_note || m.type === 'NOTE') && m.user_id === 747786 &&
       (/@jorren745487[\s\S]*@tanya748440/.test(String(m.body || m.message || '')) || /De AI kan dit niet zelf afhandelen en draagt het over/i.test(String(m.body || m.message || ''))));
     if (isWaTicket(t) && overdrachten.length && !t._verseOpdracht) {
-      if (Number(t.team_id) === 431872 && !t._verseOpdracht) return; // ligt al in de Mens nodig-map, team ziet het
       const laatsteKlant = ruweBerichten.filter(m => m.type === 'INBOUND').map(m => String(m.created_at)).sort().pop() || '';
       const laatsteOverdracht = overdrachten.map(m => String(m.created_at)).sort().pop() || '';
-      if (laatsteKlant > laatsteOverdracht) {
-        console.log(`  [${t.id}] klant reageerde opnieuw op overgedragen (service)gesprek → terug naar Mens nodig`);
-        try {
-          await plaatsNotitie(t.id, `@jorren745487 @tanya748440\n\nKlant reageerde opnieuw op dit eerder overgedragen gesprek, direct terug in Mens nodig gezet, de bot blijft eraf.`);
-          await zetLabel(t.id, LABEL.MENS_NODIG);
-          await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
-        } catch (e) { console.error(`  [${t.id}] service-heropening FOUT: ${e.message}`); }
+      // Gesloten door een mens = die was klaar (Daimy 3-08, casus Manon +31622368116). Begint de
+      // klant daarna opnieuw, dan pakt de BOT het gewoon op en antwoordt — NIET automatisch terug
+      // naar Mens nodig puur omdat het daar eerder lag. Wie verder wil helpen sluit niet, maar wijst
+      // zichzelf toe (dan blijft user_id gezet en blijft de bot eraf).
+      const werdGesloten = !!t.closed_by;
+      if (werdGesloten && laatsteKlant > laatsteOverdracht) {
+        if (Number(t.team_id) === 431872) {
+          try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 747786 }); await haalLabelWeg(t.id, LABEL.MENS_NODIG); }
+          catch (e) { console.error(`  [${t.id}] heropend-oppakken FOUT: ${e.message}`); }
+        }
         const actief = loadActief();
-        if (actief[t.id]) { delete actief[t.id]; fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actief, null, 1)); }
-        return;
+        if (!actief[t.id]) { actief[t.id] = { sinds: new Date().toISOString(), bron: 'heropend na sluiting' }; fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actief, null, 1)); }
+        console.log(`  [${t.id}] was gesloten en heropend → bot pakt het op i.p.v. terug naar Mens nodig`);
+        // NIET returnen: de normale flow hieronder beantwoordt de klant.
+      } else {
+        if (Number(t.team_id) === 431872 && !t._verseOpdracht) return; // ligt al in de Mens nodig-map, team ziet het
+        if (laatsteKlant > laatsteOverdracht) {
+          console.log(`  [${t.id}] klant reageerde opnieuw op overgedragen (service)gesprek → terug naar Mens nodig`);
+          try {
+            await plaatsNotitie(t.id, `@jorren745487 @tanya748440\n\nKlant reageerde opnieuw op dit eerder overgedragen gesprek, direct terug in Mens nodig gezet, de bot blijft eraf.`);
+            await zetLabel(t.id, LABEL.MENS_NODIG);
+            await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
+          } catch (e) { console.error(`  [${t.id}] service-heropening FOUT: ${e.message}`); }
+          const actief = loadActief();
+          if (actief[t.id]) { delete actief[t.id]; fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actief, null, 1)); }
+          return;
+        }
       }
     }
   }

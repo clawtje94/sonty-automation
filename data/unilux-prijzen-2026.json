@@ -917,15 +917,16 @@
      1431,
      1560,
      1868,
-     2405
+     2406
     ],
     [
      1835,
      2001,
      2400,
-     3100
+     3101
     ]
-   ]
+   ],
+   "_fix": "2026-08-03: twee cellen bij breedte 2x2000 stonden 1 euro te laag (2405 en 3100 i.p.v. 2406 en 3101, boek p11 x1,10)."
   },
   "vaste_hordeur_luxe": {
    "naam": "Vaste hordeur Luxe",
@@ -1052,10 +1053,16 @@
    "veerstifthor": 55,
    "voorzet_unit": 78,
    "inklem_unit": 78,
-   "unit_dubbel": 78
+   "unit_dubbel": 78,
+   "plissefit": 100,
+   "plissefit_dubbel": 200,
+   "vaste_hordeur_luxe": 201,
+   "schuifhordeur_luxe": 201
   },
   "_ral_per_product": "Boek Unilux: de meerprijs per stuk voor een afwijkende RAL verschilt per product. Comfort (p3) en Super+ (p4) rekenen 71 advies (78 bij ons); voorzethor (p5) en inklemhor (p7) rekenen 50 (55 bij ons). Producten die hier niet in staan zijn nog niet tegen hun boekpagina gecontroleerd en vallen terug op ral_meerprijs_per_stuk. Aanvullen zodra p6 en p8 t/m p13 nagekeken zijn.",
   "unit_handgreep": 9,
-  "_unit_handgreep": "Handgreep voor de plisse-units (creme wit, wit of zwart), boek p8/p9: 8 euro advies, 9 bij ons. Daimy 03-08: mag erbij."
+  "_unit_handgreep": "Handgreep voor de plisse-units (creme wit, wit of zwart), boek p8/p9: 8 euro advies, 9 bij ons. Daimy 03-08: mag erbij.",
+  "ral_starttarief_plissefit_dubbel": 98,
+  "_starttarief_afwijkend": "Boek p11 rekent voor de dubbele plissefit een starttarief van 89 i.p.v. 91; bij ons 98 i.p.v. 100."
  }
 }

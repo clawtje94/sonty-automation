@@ -14,10 +14,10 @@ geen enkele factor meer overheen (zie `uniluxAlIngerekend` in prijsconfig.json).
 | 7 | **Raamhor inklemhor** | ✅ 03-08 | tabel identiek aan voorzethor en klopt. RAL per stuk ook €50 |
 | 8 | **Voorzet unit + dubbel systeem** | ✅ 03-08 | beide tabellen goed (40 + 48 cellen). RAL per stuk €71 |
 | 9 | **Inklem unit + dubbel systeem** | ✅ 03-08 | identiek aan voorzet unit en klopt |
-| 10 | Hordeur plisséfit | TE DOEN | |
-| 11 | Hordeur dubbele plisséfit | TE DOEN | |
-| 12 | Vaste hordeur luxe | TE DOEN | |
-| 13 | Schuifhordeur luxe | TE DOEN | |
+| 10 | **Hordeur plisséfit** | ✅ 03-08 | alle 20 cellen goed. RAL per stuk €91 |
+| 11 | **Dubbele plisséfit** | ✅ 03-08 | ⚠️ twee cellen stonden €1 te laag, gefixt. RAL per SET €182, starttarief €89 i.p.v. €91 |
+| 12 | **Vaste hordeur luxe** | ✅ 03-08 | alle 15 cellen goed. RAL per stuk €183 |
+| 13 | **Schuifhordeur luxe** | ✅ 03-08 | alle 30 cellen goed. RAL per stuk €183 |
 | 14 | **Services** | ✅ 03-08 | ⚠️ €28 order/transportkosten per opdracht die wij niet doorberekenen; plus alle reparatietarieven |
 
 ## Bevindingen
@@ -70,3 +70,16 @@ geen enkele factor meer overheen (zie `uniluxAlIngerekend` in prijsconfig.json).
    UV-bestendigheid, levering buiten garantie.
 12. **Handgreep unit: WEL opnemen (Daimy 03-08).** Boek p8/p9 €8 advies, bij ons €9.
    Toegevoegd als `unit_handgreep` in de optielijst.
+
+13. **UNILUX IS AF.** Alle 14 pagina's gezien, alle 12 producttabellen cel voor cel
+   nagerekend. Eén fout gevonden: twee cellen in de dubbele plisséfit stonden €1 te laag.
+   Verder klopte elke prijs exact op advies × 1,10.
+14. **RAL-meerprijs per stuk, definitief:** Comfort 78 · Super+ 78 · voorzethor 55 ·
+   inklemhor 55 · veerstifthor 55 · voorzet unit 78 · inklem unit 78 · dubbel systeem 78 ·
+   plisséfit 100 · dubbele plisséfit 200 (per set) · vaste hordeur luxe 201 ·
+   schuifhordeur luxe 201. Dat loopt dus van €55 tot €201 — één generiek tarief had er
+   flink naast gezeten.
+15. **Starttarief wijkt af bij de dubbele plisséfit:** €89 in plaats van €91 (bij ons €98
+   i.p.v. €100). Vastgelegd in de data, nog niet in de rekenlogica verwerkt — €2 verschil.
+16. **Accessoires die al goed stonden:** petscreen €98, pollengaas deur €83, pollengaas raam
+   €43, sluitpomp €50, kattenluik €152. Allemaal exact advies × 1,10.

@@ -1353,7 +1353,7 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
       // Tabel = Orea WT
       if (isIO) totaal += 60 + hz; // upgrade naar Sunea IO + handzender
       else if (isDraaischakelaar) { /* Orea WT is al in tabel, geen aanpassing */ }
-      else if (isHandbediend) totaal -= 299; // draaistang
+      else if (isHandbediend) totaal -= 299; // draaistang; boek p43 geeft hier GEEN breedtegrens
       else if (isSolar || bedieningType === 'solarBrel') totaal += 135; // Solar Brel incl handzender
       else totaal += 60 + hz; // default IO
     }
@@ -1361,7 +1361,13 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
       // Tabel = Somfy LT
       if (isIO) totaal += 134 + hz; // upgrade naar Sunea IO + handzender
       else if (isDraaischakelaar) { /* LT is al in tabel */ }
-      else if (isHandbediend) totaal -= 299; // draaistang
+      else if (isHandbediend) {
+        // Boek p44: "Draaistangbediening buiten (mogelijk tot 460 cm breedte) -/- 299,00".
+        // Alleen bij SunProject staat die breedtegrens; bij SunCube (p43) niet. Boven 460 cm
+        // offreerden we een draaistang die niet leverbaar is → handmatige controle.
+        if (breedteCm > 460) return null;
+        totaal -= 299;
+      }
       else if (isSolar || bedieningType === 'solarBrel') totaal += 199; // Solar Brel incl handzender
       else totaal += 134 + hz; // default IO
     }

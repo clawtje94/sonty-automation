@@ -36,7 +36,7 @@ Nooit de tekstlaag — daar is het de vorige keer op misgegaan.
 | 39 | opties rolluiken | TE DOEN | |
 | 41-42 | geleiders, inhoud uitval | n.v.t. | |
 | 43 | SunCube 150 | ✅ 03-08 | 192 cellen, 0 fouten |
-| 44 | SunProject 100 | TE DOEN | |
+| 44 | SunProject 100 | ✅ 03-08 | 81 schermprijzen, 54 banenprijzen en 54 kleurmeerprijzen allemaal goed. ⚠️ draaistang is volgens het boek maar mogelijk tot 460 cm breed; die grens stond nergens |
 | 45 | tekeningen | n.v.t. | |
 | 46 | opties uitvalschermen | TE DOEN | |
 | 47-48 | maatvoering, inhoud veranda | n.v.t. | |
@@ -72,9 +72,11 @@ Nooit de tekstlaag — daar is het de vorige keer op misgegaan.
 6. **Zip Design 110: kleurmeerprijs voor breedte 100-180 ontbrak helemaal.** Boek p10 geeft
    daar Trend 115 / RAL 230; bij ons begon de tabel pas bij 200, dus die maten vielen terug
    op de staffel 200 (148/295) en betaalden €36 resp. €72 te veel. Gefixt.
-   → 210 offertes uit 2026 hebben een Zip Design ≤280 breed in een meerprijs-kleur. Die zijn
-   dus te duur geoffreerd. Vraag aan Daimy: alleen de nog openstaande (SENT) corrigeren,
-   zoals bij de uitvalschermen in augustus?
+   → 210 offertes uit 2026 hebben een Zip Design ≤280 breed in een meerprijs-kleur en zijn
+   dus te duur geoffreerd. **BESLISSING DAIMY 03-08: verstuurde offertes met rust laten.**
+   Niet corrigeren, ook de openstaande niet. Alleen nieuwe offertes krijgen de goede prijs.
+   (Let op: dit is anders dan bij de uitvalschermen in augustus, waar de SENT-offertes wél
+   zijn aangepast. Niet automatisch dat precedent volgen.)
 7. **Standaardkleuren Zip Design 110 — OPGELOST.** Daimy 03-08: "hou maar aan zoals het in
    het boek staat". Boek p10 noemt RAL 9010, RAL 9001, Antraciet st. en RAL 9006. Dus RAL
    9006 toegevoegd en RAL 9005 structuur verwijderd. RAL 7016 (glad én structuur) blijft
@@ -93,3 +95,11 @@ Design 110 gaf daardoor 0 afwijkingen in de meetlat, terwijl hij in de praktijk 
 offerteregels raakt. Wie hier alleen op de meetlat afgaat, denkt onterecht dat er niets
 verandert. Nog toe te voegen: per product elke standaard- én meerprijskleur door
 `isStandaardKleur` halen en die uitkomst vastleggen.
+
+9. **SunProject 100 draaistang alleen tot 460 cm** (boek p44). Die breedtegrens stond nergens
+   in onze code, dus boven 460 cm offreerden we een draaistang die niet leverbaar is.
+   Gefixt. Let op: bij SunCube (p43) staat die grens er NIET, dus die blijft ongelimiteerd —
+   ik had de grens eerst per ongeluk bij SunCube gezet en dat teruggedraaid.
+10. **Doek 225 heeft bij SunProject geen banen-confectie** ("doek in banen niet mogelijk
+   i.v.m. oproldiameter"). Onze data heeft banenConfectie alleen voor doek 165 en 200 —
+   dat klopt dus.

@@ -45,6 +45,9 @@ function schoonKlantTekst(tekst) {
 // technisch af als het model toch "Hoi Peter, bedankt voor..." aan elkaar plakt.
 function formatteerEmail(tekst) {
   let s = schoonKlantTekst(tekst);
+  // Markdown-vet weghalen (Daimy 2026-08-03): ** rendert niet in e-mail, klant ziet letterlijk de
+  // sterretjes. *tekst* en **tekst** worden platte tekst, losse sterretjes eruit.
+  s = s.replace(/\*{1,2}([^*\n]+?)\*{1,2}/g, '$1').replace(/\*+/g, '');
   // Begroeting op eigen regel + witregel erna ("Hoi Peter, tekst..." → "Hoi Peter,\n\ntekst...")
   s = s.replace(/^((?:Hoi|Hallo|Hi|Beste|Goedemorgen|Goedemiddag|Goedenavond|Dag)(?:\s+[^\n,]{1,40})?,)[ \t]*\n?[ \t]*(?=\S)/i, '$1\n\n');
   // Afsluiting normaliseren: bestaande groet-varianten eraf, dan de vaste afsluiting erop.

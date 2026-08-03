@@ -306,10 +306,7 @@ async function main() {
       const bedieningType = bedieningMatch?.[1]?.trim() || '';
 
       // Maak Gripp relatie 1x aan
-      const [createComp] = await gripp([{
-        method: 'company.create',
-        params: {
-          fields: {
+      const bedrijfsVelden = {
             companyname: item.summary,
             firstname: firstName,
             lastname: lastName,
@@ -325,11 +322,18 @@ async function main() {
             // Nieuwe relaties expliciet op actief zetten (Daimy 2026-08-03). Gripp-veld
             // geverifieerd op een bestaande relatie: 'active' is een boolean.
             active: true,
-          }
-        },
-        id: 1,
-      }]);
-      const companyId = createComp?.result?.recordid;
+      };
+      const [createComp] = await gripp([{ method: 'company.create', params: { fields: bedrijfsVelden }, id: 1 }]);
+      let companyId = createComp?.result?.recordid;
+      if (!companyId) {
+        // Vangnet: mocht Gripp het veld 'active' bij company.create niet accepteren, dan mag
+        // dat nooit de hele relatie-aanmaak blokkeren. Eén keer opnieuw zonder dat veld.
+        const zonderActive = { ...bedrijfsVelden };
+        delete zonderActive.active;
+        const [retry] = await gripp([{ method: 'company.create', params: { fields: zonderActive }, id: 1 }]);
+        companyId = retry?.result?.recordid;
+        if (companyId) console.log('  LET OP: relatie aangemaakt ZONDER active-vlag; Gripp weigerde dat veld');
+      }
       if (!companyId) {
         console.log('  ERROR: Company aanmaken mislukt:', JSON.stringify(createComp?.error)?.substring(0, 80));
         failed++;

@@ -123,7 +123,10 @@ Zelfde methode, pagina voor pagina als afbeelding:
    10.000 mm (p49), 165 ZIP tot 12.000 mm (p51), pergola tot 10.000 mm (p53). Onze code
    hanteerde overal 2× de tabelbreedte (12.000 mm). Nu staat de grens per product in de data
    als `maxGekoppeldMM`.
-   ⚠️ **LET OP DAIMY:** dit zet de pergola terug van 12 m naar 10 m. In het geheugen staat
+   **BESLIST Daimy 03-08: 12 m aanhouden** ("het is 12m, 2x 6m gekoppeld"). Alle drie staan
+   nu op 12.000 mm. Let op: het boek noemt bij SunControl 150 (p49) en de pergola (p53)
+   10.000 mm; Daimy weet wat Sunmaster levert en houdt 12 m aan.
+   *(oorspronkelijke bevinding)* dit zette de pergola terug van 12 m naar 10 m. In het geheugen staat
    "pergola max 12 m breed, bevestigd door Daimy 2026-07-02". Het boek zegt 10 m. Ik ben van
    het boek uitgegaan omdat dat de afspraak is (03-08), maar als jij van Sunmaster weet dat
    12 m wél kan bij de pergola, zeg het dan — dan zet ik `maxGekoppeldMM` daar op 12000.

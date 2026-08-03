@@ -62,3 +62,18 @@ Methode: pagina als afbeelding, cel voor cel.
    (p32), klapmodel (p33) en bekleden/herstofferen (p34). Petmodel komt 2× voor in de
    2026-offertes en klapmodel 1× in de Gripp-verkoopregels, dus die worden nu met de hand
    geprijsd. Wil Daimy ze automatisch, dan moeten die tabellen erbij.
+
+## Beslissingen Daimy 2026-08-03 (nog te bouwen)
+
+- **b. Kleurtoeslag: JA doorberekenen.** Hout €150 per order buiten RAL 9001/9010.
+  Aluminium +10% buiten de acht standaardkleuren, plus €100 aluminium scharnieren
+  (die zijn dan standaard).
+- **c. Doektoeslag: JA.** Let op — gewone Dickson ís standaard: de standaardcollectie is
+  "uni- en streepdoeken van Tibelly/Sattler/Dickson/Citel" en kost €0. De toeslagen gelden
+  voor de premiumlijnen: Swela en Sunvas +15%, **Dickson MAX** / Soltis PVC / MN 2-kleuren
+  +20%, Sattler Lumera +5%.
+- **d. Zwaardere motor +€44 boven 4,5 m: JA.**
+- **e. Achterpoten rond/afgeschuind €25: JA.**
+- **f. Petmodel (p32), klapmodel (p33) en specials (p26) tabellen erbij: JA.**
+- **g. Kappen:** recht blijft standaard, de andere varianten (sierlijst, golf, modern, en de
+  diepere uitvoeringen) als optie erbij.

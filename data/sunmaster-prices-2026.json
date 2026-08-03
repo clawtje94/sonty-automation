@@ -2000,8 +2000,8 @@
    "oreaWT": -50,
    "handzender": 76
   },
-  "maxGekoppeldMM": 10000,
-  "_fix": "2026-08-03: maxGekoppeldMM 10000 uit het boek (gekoppelde uitvoering 2-delig)."
+  "maxGekoppeldMM": 12000,
+  "_fix": "2026-08-03: maxGekoppeldMM 10000 uit het boek (gekoppelde uitvoering 2-delig). | 2026-08-03: op instructie Daimy terug naar 12000 mm (2x 6 m gekoppeld). LET OP: het boek zegt bij dit product 10.000 mm; Daimy houdt 12 m aan."
  },
  "suncontrol165ZIP": {
   "category": "serre",
@@ -2134,8 +2134,8 @@
    "RAL 9007",
    "Brons structuur"
   ],
-  "maxGekoppeldMM": 10000,
-  "_fix": "2026-08-03: maxGekoppeldMM 10000 uit het boek (gekoppelde uitvoering 2-delig)."
+  "maxGekoppeldMM": 12000,
+  "_fix": "2026-08-03: maxGekoppeldMM 10000 uit het boek (gekoppelde uitvoering 2-delig). | 2026-08-03: op instructie Daimy terug naar 12000 mm (2x 6 m gekoppeld). LET OP: het boek zegt bij dit product 10.000 mm; Daimy houdt 12 m aan."
  },
  "markup": 1.1,
  "handzenderPrijs": 76,

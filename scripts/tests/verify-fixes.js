@@ -53,7 +53,11 @@ for (const [key, expected] of baseline.calculateCorrectPrice) {
 check('mkTotaal alu4000/1000', api.mkTotaalExcl('Aluminium', 4000, 1000), baseline.markies[0][1]);
 check('mkTotaal grenen4200/2000', api.mkTotaalExcl('Grenen', 4200, 2000), baseline.markies[1][1]);
 check('mkTotaal hardhout3000/1500', api.mkTotaalExcl('Hardhout', 3000, 1500), baseline.markies[2][1]);
-check('mkTotaal alu5000/1000', api.mkTotaalExcl('Aluminium', 5000, 1000), baseline.markies[3][1]);
+// 500 cm gaf hier eerst een prijs. Boek Markiezen Nederland p30 zegt dat markiezen vanaf
+// 440 cm breed een tussenpoot of verzwaard profiel MOETEN hebben, en welke van de twee is
+// een keuze. Sinds 2026-08-03 gaat dat dus naar handmatige controle in plaats van een
+// prijs zonder die verplichte verzwaring. Verwachting hier bewust omgezet naar null.
+check('mkTotaal alu5000/1000 -> handmatige controle (verzwaring verplicht vanaf 440 cm)', api.mkTotaalExcl('Aluminium', 5000, 1000), null);
 check('mkLookup grenen3000/1000', api.mkLookupMarkies(api.MK_GRENEN, 3000, 1000), baseline.markies[4][1]);
 for (const [key, expected] of baseline.montage) {
   const p = key.split('/');
@@ -130,7 +134,9 @@ check('mkLookup grenen 5000mm → null', api.mkLookupMarkies(api.MK_GRENEN, 5000
 check('mkLookup alu 5000mm (=max) blijft werken', api.mkLookupMarkies(api.MK_ALUMINIUM, 5000, 1000), 1339);
 check('mkLookup uitval 2100mm → null (was 200-kolom)', api.mkLookupMarkies(api.MK_ALUMINIUM, 3000, 2100), null);
 check('mkTotaal grenen 4500 → null', api.mkTotaalExcl('Grenen', 4500, 1000), null);
-check('mkTotaal alu 5000 werkt nog', typeof api.mkTotaalExcl('Aluminium', 5000, 1000), 'number');
+// idem: boven 440 cm bewust geen automatische prijs meer
+check('mkTotaal alu 5000 -> null (verzwaring verplicht)', api.mkTotaalExcl('Aluminium', 5000, 1000), null);
+check('mkTotaal alu 4200 werkt nog gewoon', typeof api.mkTotaalExcl('Aluminium', 4200, 1000), 'number');
 // optieblok bij alu 4600 (grenen-alternatief valt buiten tabel → regel weggelaten, geen crash/NaN)
 {
   const blok = api.mkBuildOptiesBlok('Handbediend', 'Aluminium', 4600, 1000);

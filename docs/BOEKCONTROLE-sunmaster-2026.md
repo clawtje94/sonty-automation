@@ -143,12 +143,19 @@ Zelfde methode, pagina voor pagina als afbeelding:
    €129) — €97 te hoog. Eolis 3D sensor io stond op €169 terwijl p33/p55 €159 zeggen
    (×1,10 = €175). Beide gecorrigeerd. Tahoma €195 komt niet in dit boek voor en is dus
    niet te verifiëren.
-15. **OPEN — doektoeslag wordt niet berekend.** Boek p21: doek buiten de standaardcollectie
+15. **Doektoeslag — BEANTWOORD (Daimy 03-08): niet nodig.** Wij verkopen standaard
+   **Sergé 5%**, en dat valt in de standaardcollectie met €0,00 meerprijs. Alleen als een
+   klant er expliciet om vraagt wijkt het af, en dat is dan handwerk. Onze berekening zonder
+   doektoeslag klopt dus. Oorspronkelijke bevinding hieronder ter documentatie.
+   *(oud)* Boek p21: doek buiten de standaardcollectie
    kost €18/m² extra, Sergé met 1% doorzichtfactor €29/m². Op een screen van 3×2,5 m is dat
    €135 resp. €218 (excl. onze opslag). Wij rekenen dit nergens. In de offertes staat het
    doek 2.758 keer als "NTB" — de keuze valt pas bij het inmeten. Vraag aan Daimy: wordt die
    toeslag dan alsnog doorbelast, of laten we dat geld liggen?
-16. **Niet-geïmplementeerde koppelingen.** Boek kent koppelen van screens (p16: 2 screens
+16. **Koppelen — BESLISSING Daimy 03-08: NIET automatiseren.** "We weten niet wanneer
+   iemand dat wil of niet", dus bredere screens en rolluiken blijven naar handmatige
+   controle gaan en een mens bepaalt of er gekoppeld wordt. Niet alsnog inbouwen.
+   *(oud)* Boek kent koppelen van screens (p16: 2 screens
    min €80) en rolluiken (p38: 2 rolluiken min €160). Wij koppelen alleen serre/pergola;
    bredere screens en rolluiken gaan naar handmatige controle. Veilig, maar we kunnen die
    offertes wel automatiseren.

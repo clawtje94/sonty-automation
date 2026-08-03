@@ -1,4 +1,16 @@
 #!/usr/bin/env node
+// IJKPUNTEN — momenten die de conversie kunnen verklaren. Worden onder elk rapport gezet
+// zodat een knik in de cijfers meteen te duiden is (wens Daimy 2026-08-03).
+const IJKPUNTEN = [
+  { datum: '2026-07-16', wat: 'AI-bot live op actieve gesprekken' },
+  { datum: '2026-07-27', wat: 'WhatsApp-templates met knoppen' },
+  { datum: '2026-08-03', wat: 'PRIJSVERHOGING: Sunmaster 1,10 -> 1,20, Roma 1,15 -> 1,30, markiezen 1,21 -> 1,31' },
+];
+const ijkpuntenTekst = () => '\n\nIJKPUNTEN\n' + IJKPUNTEN.map(i => '  ' + i.datum + '  ' + i.wat).join('\n') +
+  '\n\nMinimale conversie na de prijsverhoging: met 1.400 euro marge per order die naar circa\n' +
+  '1.650 gaat, mag het aantal orders zakken tot 85% van voorheen bij gelijke totale marge.\n' +
+  'Bij een conversie van 9,4% is de ondergrens dus ongeveer 8,0%.';
+
 /**
  * Wekelijks cohortrapport conversie (opdracht Daimy 28 juli 2026).
  *
@@ -181,9 +193,12 @@ async function main() {
   maanden.forEach((m) => { nieuw.maanden[m.key] = { offertes: m.offertes, akkoord: m.akkoord }; });
   fs.writeFileSync(STATE, JSON.stringify(nieuw, null, 1));
 
+  const tekstMetIjk = tekst + ijkpuntenTekst();
+  console.log(ijkpuntenTekst());
+
   if (process.argv.includes('--stuur')) {
     const tmp = path.join(__dirname, '..', 'data', '.cohorten-rapport.txt');
-    fs.writeFileSync(tmp, tekst);
+    fs.writeFileSync(tmp, tekstMetIjk);
     execFileSync('node', [path.join(__dirname, 'sonty-data-send.js'), '--file', tmp], { stdio: 'inherit' });
   }
 }

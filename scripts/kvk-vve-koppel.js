@@ -19,6 +19,7 @@ const CODE = { "x-bel-code": "sonty2288" };
 
 const args = process.argv.slice(2).filter((a) => !a.startsWith("--"));
 const PROFIEL = process.argv.includes("--profiel");
+const DRY = process.argv.includes("--dry"); // niets opslaan, alleen rapporteren
 const PLAATS = args[0] || "Voorburg";
 const MIN = parseInt(args[1] || "10", 10);
 const MAX = parseInt(args[2] || "400", 10);
@@ -35,17 +36,62 @@ async function kvkGet(path) {
   }
 }
 
-// Alle VvE's in een straat. Zoeken levert max 1000 rijen (10 pagina's x 100).
-async function vvesInStraat(straat, plaats) {
+// KvK kent 's-Gravenhage, de volksmond Den Haag; beide gelden als dezelfde plaats
+function plaatsVarianten(plaats) {
+  const p = (plaats || "").trim().toLowerCase();
+  const paren = [
+    ["'s-gravenhage", "den haag"],
+    ["'s-hertogenbosch", "den bosch"],
+  ];
+  for (const paar of paren) if (paar.includes(p)) return paar;
+  return [p];
+}
+
+// NIET op plaats filteren: een VvE staat ingeschreven op het adres van haar
+// beheerder, en dat kantoor zit vaak in een andere gemeente (gemeten 2026-08-03:
+// het plaatsfilter liet 3 van de 50 complexen over, zonder filter 30+). We halen
+// dus alles op met deze straatnaam en bewijzen de plaats daarna zelf.
+async function vvesInStraat(straat) {
   const out = [];
   for (let p = 1; p <= 10; p++) {
-    const qs = `naam=${encodeURIComponent(straat)}&plaats=${encodeURIComponent(plaats)}&resultatenPerPagina=100&pagina=${p}`;
+    const qs = `naam=${encodeURIComponent(straat)}&resultatenPerPagina=100&pagina=${p}`;
     const d = await kvkGet(`/api/v2/zoeken?${qs}`);
     const res = d?.resultaten || [];
     out.push(...res.filter((r) => r.type === "rechtspersoon" && VVE_RE.test(r.naam)));
     if (res.length < 100) break;
   }
   return out;
+}
+
+// Noemt de naam een plaats ("... te Voorburg")? Zo ja: welke.
+function plaatsUitNaam(naam) {
+  const m = naam.match(/\bte\s+([A-Za-zÀ-ÿ'’.\- ]{3,40}?)\s*("|\)|,|$)/);
+  return m ? m[1].trim().toLowerCase() : null;
+}
+
+// Bestaat deze straatnaam ook in de plaats waar de VvE staat ingeschreven?
+// Zo ja, dan gaat de VvE hoogstwaarschijnlijk over HAAR eigen straat daar en
+// niet over ons complex ("VvE Nieuwe Havenstraat" in Katwijk hoort in Katwijk).
+const LOC = "https://api.pdok.nl/bzk/locatieserver/search/v3_1/free";
+const straatCache = new Map();
+async function straatBestaatIn(straat, plaats) {
+  const sleutel = `${straat}|${plaats}`.toLowerCase();
+  if (straatCache.has(sleutel)) return straatCache.get(sleutel);
+  let hit = false;
+  try {
+    const r = await fetch(
+      `${LOC}?q=${encodeURIComponent(`${straat} ${plaats}`)}&fq=type:weg&rows=8&fl=straatnaam,woonplaatsnaam`
+    );
+    const docs = (await r.json())?.response?.docs || [];
+    const pv = plaatsVarianten(plaats);
+    hit = docs.some(
+      (d) =>
+        String(d.straatnaam || "").toLowerCase() === straat.toLowerCase() &&
+        pv.includes(String(d.woonplaatsnaam || "").toLowerCase())
+    );
+  } catch {}
+  straatCache.set(sleutel, hit);
+  return hit;
 }
 
 // Huisnummers uit een VvE-naam halen (het deel achter de straatnaam).
@@ -83,36 +129,64 @@ const RANG = { zeker: 3, waarschijnlijk: 2, zwak: 1 };
   const complexen = data.rows.slice(0, MAX);
   console.log(`${data.totaal} complexen in ${data.zoek}; ${complexen.length} verwerken (min ${MIN} won)`);
 
-  // per straat groeperen: 1 KvK-zoekopdracht per straat, niet per pand
+  // per straat EN woonplaats groeperen: de radar beslaat een straal van 3 km en
+  // loopt dus over gemeentegrenzen heen. 1 KvK-zoekopdracht per straat, niet per pand.
   const perStraat = new Map();
   for (const c of complexen) {
     const m = String(c.adres || "").match(/^(.+?)\s+(\d+)/);
-    if (!m) continue;
+    if (!m || !c.plaats) continue;
     const straat = m[1].trim();
-    if (!perStraat.has(straat)) perStraat.set(straat, []);
-    perStraat.get(straat).push({ ...c, straat, nr: parseInt(m[2], 10) });
+    const sleutel = `${straat}|${c.plaats}`;
+    if (!perStraat.has(sleutel)) perStraat.set(sleutel, []);
+    perStraat.get(sleutel).push({ ...c, straat, nr: parseInt(m[2], 10) });
   }
-  console.log(`${perStraat.size} unieke straten -> evenveel gratis zoekopdrachten`);
+  console.log(`${perStraat.size} unieke straat+plaats-combinaties -> evenveel gratis zoekopdrachten`);
 
   const uitkomst = [];
   const kantoren = new Map(); // bezoekadres -> {aantal, voorbeeld}
   let straatNr = 0;
 
-  for (const [straat, panden] of perStraat) {
+  for (const [sleutel, panden] of perStraat) {
     straatNr++;
-    let vves = [];
+    const [straat, plaats] = sleutel.split("|");
+    let alle = [];
     try {
-      vves = await vvesInStraat(straat, PLAATS);
+      alle = await vvesInStraat(straat);
     } catch (e) {
-      console.log(`  ! ${straat}: ${e.message}`);
+      console.log(`  ! ${straat} (${plaats}): ${e.message}`);
       continue;
     }
-    // bijvangst: waar staan deze VvE's ingeschreven?
-    for (const v of vves) {
+    // Plaats bewijzen: dezelfde straatnaam bestaat in tientallen gemeenten.
+    // Een VvE hoort hier als de naam deze plaats noemt, of als ze op het
+    // complexadres zelf staat ingeschreven. Noemt de naam een ANDERE plaats,
+    // dan valt ze hard af.
+    const varianten = plaatsVarianten(plaats);
+    const vves = [], afgewezen = [];
+    for (const v of alle) {
+      const a = v.adres?.binnenlandsAdres || {};
+      const genoemd = plaatsUitNaam(v.naam);
+      const opEigenAdres =
+        (a.straatnaam || "").toLowerCase() === straat.toLowerCase() &&
+        varianten.includes((a.plaats || "").toLowerCase());
+      if (genoemd && !varianten.includes(genoemd)) { afgewezen.push(v); continue; }
+      const bewijs = (genoemd && varianten.includes(genoemd)) || opEigenAdres;
+      if (!bewijs && a.plaats && !varianten.includes(String(a.plaats).toLowerCase())) {
+        // geen plaatsbewijs: hoort deze straat bij de vestigingsplaats van de VvE?
+        if (await straatBestaatIn(straat, a.plaats)) { afgewezen.push(v); continue; }
+      }
+      vves.push({ ...v, bewijs });
+    }
+    // Zonder enig plaatsbewijs mogen we alleen doorgaan als deze straatnaam
+    // nergens anders in Nederland een VvE heeft (geen afgewezen kandidaten).
+    const bewezen = vves.filter((v) => v.bewijs);
+    const bruikbaar = bewezen.length ? bewezen : afgewezen.length ? [] : vves;
+
+    // bijvangst: waar staan deze VvE's ingeschreven? (= adres van de beheerder)
+    for (const v of bruikbaar) {
       const a = v.adres?.binnenlandsAdres || {};
       if (!a.straatnaam) continue;
-      const key = `${a.straatnaam}, ${a.plaats}`;
       if (a.straatnaam.toLowerCase() === straat.toLowerCase()) continue; // eigen complex
+      const key = `${a.straatnaam}, ${a.plaats}`;
       const k = kantoren.get(key) || { aantal: 0, voorbeeld: v.naam };
       k.aantal++;
       kantoren.set(key, k);
@@ -120,11 +194,13 @@ const RANG = { zeker: 3, waarschijnlijk: 2, zwak: 1 };
 
     for (const p of panden) {
       const kandidaten = [];
-      for (const v of vves) {
+      for (const v of bruikbaar) {
         const b = beoordeel(v.naam, straat, p.nr);
         if (b) kandidaten.push({ v, ...b });
       }
-      kandidaten.sort((a, b) => RANG[b.zekerheid] - RANG[a.zekerheid] || a.spreiding - b.spreiding);
+      kandidaten.sort(
+        (a, b) => RANG[b.zekerheid] - RANG[a.zekerheid] || Number(b.v.bewijs) - Number(a.v.bewijs) || a.spreiding - b.spreiding
+      );
       const win = kandidaten[0];
       uitkomst.push({
         pandId: p.pandId,
@@ -160,7 +236,13 @@ const RANG = { zeker: 3, waarschijnlijk: 2, zwak: 1 };
 
   // opslaan in batches van 200
   let opgeslagen = 0;
-  for (let i = 0; i < uitkomst.length; i += 200) {
+  if (DRY) {
+    console.log("\n(droogloop, niets opgeslagen) eerste 15 koppelingen:");
+    for (const u of uitkomst.filter((x) => x.vveNaam).slice(0, 15)) {
+      console.log(`  [${u.zekerheid}] ${u.vveNaam.slice(0, 75)} · KvK ${u.kvkNummer} · op ${u.bezoekadres}`);
+    }
+  }
+  for (let i = 0; !DRY && i < uitkomst.length; i += 200) {
     const r = await fetch(`${BASE}/api/vve-radar/kvk`, {
       method: "POST",
       headers: { ...CODE, "content-type": "application/json" },

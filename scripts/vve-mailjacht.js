@@ -11,9 +11,17 @@ const CODE = { "x-bel-code": "sonty2288" };
 const PLAATS = process.argv[2] || "Voorburg";
 const MIN = parseInt(process.argv[3] || "10", 10);
 const MAX = parseInt(process.argv[4] || "250", 10);
+// --hernieuw: complexen die eerder niets opleverden opnieuw proberen, mits er
+// inmiddels een officiele KvK-naam bij staat (daarmee is de zoekvraag sterker)
+const HERNIEUW = process.argv.includes("--hernieuw");
 
 async function zoekMail(g) {
-  const vraag = `Zoek het e-mailadres van de Vereniging van Eigenaars (VvE) van het appartementencomplex aan de ${g.adres} in ${g.plaats} (postcode ${g.postcode}). Ook waardevol: de officiële naam van de VvE en de naam van het beheerkantoor. Alleen gegevens die aantoonbaar bij DIT gebouw/deze VvE horen; corporaties/verhuurders die het hele gebouw bezitten tellen als beheerder, niet als VvE.
+  // Staat de officiele KvK-naam al in de radar? Dan zoeken we daar op: dat is
+  // veel trefzekerder dan een adres, want VvE's publiceren onder hun eigen naam.
+  const kvk = g.kvk?.n
+    ? `\nDe VvE is bij de KvK ingeschreven als "${g.kvk.n}" (KvK-nummer ${g.kvk.k}${g.kvk.c ? `, correspondentieadres ${g.kvk.c}` : ""}). Zoek in de eerste plaats op die exacte naam.`
+    : "";
+  const vraag = `Zoek het e-mailadres van de Vereniging van Eigenaars (VvE) van het appartementencomplex aan de ${g.adres} in ${g.plaats} (postcode ${g.postcode}).${kvk} Ook waardevol: de officiële naam van de VvE en de naam van het beheerkantoor. Alleen gegevens die aantoonbaar bij DIT gebouw/deze VvE horen; corporaties/verhuurders die het hele gebouw bezitten tellen als beheerder, niet als VvE.
 Antwoord UITSLUITEND met JSON: {"gevonden":true|false,"email":"","vve_naam":"","beheerder":"","bron_url":"","toelichting":"1 zin"}`;
   const r = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
@@ -37,7 +45,9 @@ Antwoord UITSLUITEND met JSON: {"gevonden":true|false,"email":"","vve_naam":"","
   const data = await res.json();
   if (data.error) throw new Error(data.error);
   // hoogste score eerst; al doorzochte gebouwen (mail-record aanwezig) overslaan
-  const doelen = data.rows.filter((r) => !r.mail).slice(0, MAX);
+  const doelen = data.rows
+    .filter((r) => !r.mail || (HERNIEUW && !r.mail.e && r.kvk?.n))
+    .slice(0, MAX);
   console.log(`${data.totaal} complexen in ${data.zoek}; ${doelen.length} nog te doorzoeken (min ${MIN} won)`);
 
   let mails = 0, beheerders = 0, klaar = 0;
@@ -53,7 +63,7 @@ Antwoord UITSLUITEND met JSON: {"gevonden":true|false,"email":"","vve_naam":"","
           body: JSON.stringify({
             pandId: g.pandId,
             email: j.email || "",
-            vveNaam: j.vve_naam || "",
+            vveNaam: j.vve_naam || g.kvk?.n || "",
             beheerder: j.beheerder || "",
             bronUrl: j.bron_url || "",
           }),

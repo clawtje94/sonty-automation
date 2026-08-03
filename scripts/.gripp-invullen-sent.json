@@ -3706,5 +3706,161 @@
       }
     ],
     "processedAt": "2026-08-01T16:30:12.832Z"
+  },
+  "item:e5a99a29-d73a-4afe-b532-ad21e4199229": {
+    "summary": "Els Brand",
+    "grippCompanyId": 99669,
+    "grippOfferId": 8884,
+    "rpDocNumber": "202610770",
+    "allOffers": [
+      {
+        "grippOfferId": 8884,
+        "rpDocNumber": "202610770"
+      }
+    ],
+    "processedAt": "2026-08-03T16:30:08.269Z"
+  },
+  "item:2c8a72ac-fe61-4a41-9d0c-84de9f9c1f12": {
+    "summary": "Robin Peeters",
+    "grippCompanyId": 99670,
+    "grippOfferId": 8885,
+    "rpDocNumber": "202610531",
+    "allOffers": [
+      {
+        "grippOfferId": 8885,
+        "rpDocNumber": "202610531"
+      }
+    ],
+    "processedAt": "2026-08-03T16:30:11.960Z"
+  },
+  "item:92dc2a15-3e8b-479d-85ac-a1670a63a368": {
+    "summary": "Esther Roosenbrand",
+    "grippCompanyId": 99671,
+    "grippOfferId": 8886,
+    "rpDocNumber": "202610497",
+    "allOffers": [
+      {
+        "grippOfferId": 8886,
+        "rpDocNumber": "202610497"
+      }
+    ],
+    "processedAt": "2026-08-03T16:30:15.457Z"
+  },
+  "item:2468a938-47af-4278-b71a-ef52d760d9b3": {
+    "summary": "Biki Milenkovic",
+    "grippCompanyId": 99672,
+    "grippOfferId": 8887,
+    "rpDocNumber": "202610822",
+    "allOffers": [
+      {
+        "grippOfferId": 8887,
+        "rpDocNumber": "202610822"
+      }
+    ],
+    "processedAt": "2026-08-03T16:30:18.998Z"
+  },
+  "item:8494ea84-61b0-4541-82cb-576831307f72": {
+    "summary": "Dimashi Sigera",
+    "grippCompanyId": 99673,
+    "grippOfferId": 8888,
+    "rpDocNumber": "20269690",
+    "allOffers": [
+      {
+        "grippOfferId": 8888,
+        "rpDocNumber": "20269690"
+      }
+    ],
+    "processedAt": "2026-08-03T16:30:22.530Z"
+  },
+  "item:e93298f9-0bdc-4076-a132-5f947b3c79d8": {
+    "summary": "BS Shidhar",
+    "grippCompanyId": 99674,
+    "grippOfferId": 8889,
+    "rpDocNumber": "202610477",
+    "allOffers": [
+      {
+        "grippOfferId": 8889,
+        "rpDocNumber": "202610477"
+      }
+    ],
+    "processedAt": "2026-08-03T16:30:26.190Z"
+  },
+  "item:ec667ed5-2621-4cf3-b2c9-f5c66b1218df": {
+    "summary": "Ivo Alserda",
+    "grippCompanyId": 99675,
+    "grippOfferId": 8890,
+    "rpDocNumber": "202610488",
+    "allOffers": [
+      {
+        "grippOfferId": 8890,
+        "rpDocNumber": "202610488"
+      }
+    ],
+    "processedAt": "2026-08-03T16:30:29.665Z"
+  },
+  "item:7740cf87-06db-4d2e-9061-9edfb1ef43dd": {
+    "summary": "Michel Groenendaal",
+    "grippCompanyId": 99676,
+    "grippOfferId": 8891,
+    "rpDocNumber": "202610598",
+    "allOffers": [
+      {
+        "grippOfferId": 8891,
+        "rpDocNumber": "202610598"
+      }
+    ],
+    "processedAt": "2026-08-03T16:30:34.111Z"
+  },
+  "item:9c3c3075-cd09-4130-8275-3b6d9ebb1e17": {
+    "summary": "Savannah  Ceccarelli",
+    "grippCompanyId": 99677,
+    "grippOfferId": 8892,
+    "rpDocNumber": "202610211",
+    "allOffers": [
+      {
+        "grippOfferId": 8892,
+        "rpDocNumber": "202610211"
+      }
+    ],
+    "processedAt": "2026-08-03T16:30:38.398Z"
+  },
+  "item:6a6a1983-7354-42d9-9fb8-1e2d9f8c9c85": {
+    "summary": "Frerick den Haan",
+    "grippCompanyId": 99678,
+    "grippOfferId": 8893,
+    "rpDocNumber": "202610438",
+    "allOffers": [
+      {
+        "grippOfferId": 8893,
+        "rpDocNumber": "202610438"
+      }
+    ],
+    "processedAt": "2026-08-03T16:30:41.928Z"
+  },
+  "item:ec7ee9cc-835f-479b-a117-526239733182": {
+    "summary": "Robbert Winkel",
+    "grippCompanyId": 99679,
+    "grippOfferId": 8894,
+    "rpDocNumber": "202610611",
+    "allOffers": [
+      {
+        "grippOfferId": 8894,
+        "rpDocNumber": "202610611"
+      }
+    ],
+    "processedAt": "2026-08-03T16:30:45.403Z"
+  },
+  "item:e4487feb-c8b4-40ca-ad26-95798ce863cd": {
+    "summary": "Bianca van der Horn",
+    "grippCompanyId": 99680,
+    "grippOfferId": 8895,
+    "rpDocNumber": "202610723",
+    "allOffers": [
+      {
+        "grippOfferId": 8895,
+        "rpDocNumber": "202610723"
+      }
+    ],
+    "processedAt": "2026-08-03T16:30:48.900Z"
   }
 }

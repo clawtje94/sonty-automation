@@ -25,6 +25,10 @@ const STEEKPROEF = 20;
 // Alleen recente offertes: test de HUIDIGE prijsengine, niet de historie
 // (oude offertes van vóór een fix zouden anders wekenlang valse alerts geven)
 const MAX_LEEFTIJD_DAGEN = 4;
+// Offertes van vóór de prijswijziging van 3 augustus 2026 hebben de oude opslag en horen
+// die te houden (regel Daimy: verstuurde offertes blijven zoals ze zijn). Ze zouden anders
+// allemaal als afwijking gemeld worden, en dan schreeuwt dit vangnet zich onbruikbaar.
+const PRIJSWIJZIGING = new Date('2026-08-03T15:49:00+02:00').getTime();
 const GEMELD_FILE = path.join(__dirname, '.steekproef-gemeld.json');
 function getGemeld() { try { return JSON.parse(fs.readFileSync(GEMELD_FILE, 'utf8')); } catch { return {}; } }
 function markGemeld(nrs) {
@@ -57,7 +61,11 @@ const v4Snippets = [
 for (const fn of ['findNearest', 'getCategory', 'getProductKey', 'extractField', 'extractMaatFromDesc', 'lookupPrice', 'calculateCorrectPrice', 'correctProductPrice', 'isStandaardKleur', 'mkLookupMarkies', 'mkLookupBovenkap', 'mkLookupZijkap', 'mkGetTabel', 'mkTotaalExcl']) {
   v4Snippets.push(grab(fn));
 }
-eval(v4Snippets.join('\n') + ';MARKUP = typeof PRIJSCONFIG !== "undefined" ? PRIJSCONFIG.sunmasterMarkup : undefined;');
+// MARKUP is binnen het ge-evalde blok een const, dus je kunt hem daar niet aan toewijzen.
+// Terugvragen als returnwaarde in plaats van toewijzen. Ging op 2026-08-03 mis: de eval
+// gooide 'Assignment to constant variable' en daarmee lag deze hele steekproef stil —
+// juist het vangnet dat stille prijsfouten moet vangen.
+MARKUP = eval(v4Snippets.join('\n') + ';MARKUP;');
 if (!MARKUP) throw new Error('MARKUP niet uit de v4-prijscode gekomen — staat het PRIJSCONFIG-blok nog tussen MK_UITVAL_COLS en MK_BEDIENING?');
 
 async function rpGet(ep) {
@@ -78,7 +86,7 @@ async function telegram(text) {
   const items = (await rpGet(`/contact-service/${PID}/boards/${BOARD}/items`)).items || [];
   const cutoff = Date.now() - MAX_LEEFTIJD_DAGEN * 86400000;
   const kandidaten = items.filter(i =>
-    i.item_subject?.id && i.timestamp_created > cutoff &&
+    i.item_subject?.id && i.timestamp_created > cutoff && i.timestamp_created > PRIJSWIJZIGING &&
     !(i.technical_labels || []).some(l => l.type === 'ITEM_ARCHIVED')
   );
   // Willekeurige steekproef

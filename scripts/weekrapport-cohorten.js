@@ -199,7 +199,9 @@ async function main() {
   if (process.argv.includes('--stuur')) {
     const tmp = path.join(__dirname, '..', 'data', '.cohorten-rapport.txt');
     fs.writeFileSync(tmp, tekstMetIjk);
-    execFileSync('node', [path.join(__dirname, 'sonty-data-send.js'), '--file', tmp], { stdio: 'inherit' });
+    // process.execPath i.p.v. 'node': launchd heeft geen PATH, waardoor het versturen
+    // elke maandag faalde met ENOENT terwijl het rapport zelf gewoon klaar was.
+    execFileSync(process.execPath, [path.join(__dirname, 'sonty-data-send.js'), '--file', tmp], { stdio: 'inherit' });
   }
 }
 

@@ -233,7 +233,10 @@ async function verwerk(ticketId) {
     await zetLabel(ticketId, LABEL.AI_BOT);
     if (mutaties.some(a => a.type === 'inmeet_afspraak')) await zetLabel(ticketId, LABEL.OPMETING);
     if (mutaties.some(a => /offerte/.test(a.type))) await zetLabel(ticketId, LABEL.OFFERTE_VERSTUURD);
-    const poortMail = magSluiten({ klantTekst: rijen.filter(r => r.van === 'klant').map(r => r.tekst).join(' '), antwoord: res.antwoord, acties: res.acties });
+    // Alleen het NIEUWE berichtdeel telt voor het sluit-oordeel, niet de geciteerde thread
+    // (Daimy 2026-08-03, casus Theo/ghosty_buster: onze eigen FAQ-zin "hoe snel lossen jullie een
+    // storing op" stond meegequote en werd als service/klacht gezien → onterecht naar Mens nodig).
+    const poortMail = magSluiten({ klantTekst: rijen.filter(r => r.van === 'klant').map(r => String(r.tekst).split('[EINDE NIEUW BERICHT')[0]).join(' '), antwoord: res.antwoord, acties: res.acties });
     if (!poortMail.mag) {
       await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
       await zetLabel(ticketId, LABEL.MENS_NODIG);

@@ -1967,7 +1967,11 @@ async function main() {
     }
     const sheetTabNaam = tab.title; // echte naam inclusief eventuele spaties
     // Dedup op offerte nummer
-    const existRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: "'" + sheetTabNaam + "'!G4:G2000" });
+    // Leesbereik moet MINSTENS zo ver reiken als waar we schrijven (A4:X3000). Stond op
+    // G4:G2000 terwijl de juli-tab 2997 rijen heeft: alles voorbij rij 2000 werd niet gezien,
+    // dus die offertes werden ELKE RUN opnieuw toegevoegd. Resultaat: 143 dubbele rijen in
+    // juli, 37 in juni, en een oplopende sheet-teller (23 -> 122 per run). Daimy 2026-08-03.
+    const existRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: "'" + sheetTabNaam + "'!G4:G5000" });
     const existingNrs = new Set((existRes.data.values || []).map(r => r[0]).filter(Boolean));
     const newRows = rows.filter(r => !existingNrs.has(r[6]));
     if (newRows.length === 0) continue;

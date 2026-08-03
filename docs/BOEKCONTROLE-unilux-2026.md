@@ -34,13 +34,11 @@ geen enkele factor meer overheen (zie `uniluxAlIngerekend` in prijsconfig.json).
    de geleidermaat horizontaal. Onze `heights` zijn de kastmaat (600-2600) en `widths` de
    geleidermaat (800-1800) — dat staat goed om.
 
-4. **Order- en transportkosten €28 per opdracht — DOORBEREKEND (Daimy 03-08).**
-   "Ja doorberekenen maar stil, dus zonder vermelding in de offerte." Verwerkt in de
-   productprijs van elke hor (€31 met opslag), zowel in de offerte-tool als in de bot.
-   Nergens een aparte regel. **Let op:** Unilux rekent per ORDER, wij verwerken per hor;
-   bij meerdere horren in één offerte dekken we die kosten dus ruim. Dat is bewust, want de
-   offerte-tool rekent per regel en kent het totale order niet.
-   Gemeten: 11.955 horprijzen precies €31 omhoog, verder geen enkele wijziging.
+4. **Order- en transportkosten €28 per opdracht — NIET doorberekenen (Daimy 03-08).**
+   Het boek noemt ze wel, maar wij betalen ze niet omdat we in grotere volumes bestellen.
+   Ze zijn op 03-08 eerst ingebouwd en dezelfde dag op instructie weer verwijderd; de
+   meetlat bevestigde dat alle 11.955 horprijzen precies €31 terug omlaag gingen en verder
+   niets veranderde.
    *(oorspronkelijke bevinding)* Unilux rekent dat bij élke bestelling; wij berekenden het niet. Met onze opslag zou dat €31 zijn. Op elke
    hororder laten we dat dus liggen. Afhaalkosten zijn €32 per opdracht (als we zelf halen)
    en onderzoekskosten €44 als een reparatie niet mogelijk blijkt.
@@ -68,6 +66,7 @@ geen enkele factor meer overheen (zie `uniluxAlIngerekend` in prijsconfig.json).
    inklemhor €55, veerstifthor €55, voorzet unit €78, inklem unit €78, dubbel systeem €78.
    De plisséfit-deuren en de luxe hordeuren (p10-p13) zijn nog niet gecontroleerd en vallen
    terug op het generieke tarief van €78.
-11. **Grijs gaas €96** bij de units — Unilux raadt het zelf af (mindere UV-bestendigheid,
-   buiten garantie). Niet opnemen lijkt me juist; ter info.
-12. **Handgreep unit €8** (crème wit, wit, zwart). Rekenen wij niet.
+11. **Grijs gaas: NIET aanbieden (Daimy 03-08).** Unilux raadt het zelf af — mindere
+   UV-bestendigheid, levering buiten garantie.
+12. **Handgreep unit: WEL opnemen (Daimy 03-08).** Boek p8/p9 €8 advies, bij ons €9.
+   Toegevoegd als `unit_handgreep` in de optielijst.

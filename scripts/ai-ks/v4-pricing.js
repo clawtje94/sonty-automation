@@ -64,11 +64,9 @@ function horPrijs({ type, breedteMM, hoogteMM }) {
   const prijs = p.prices?.[hIdx]?.[wIdx];
   if (typeof prijs !== 'number') return { error: 'Deze maatcombinatie is bij dit model niet leverbaar.' };
   const montage = HOR_MONTAGE[key] ?? 20;
-  // Order- en transportkosten Unilux (boek p14: 28 euro per opdracht, met opslag 31).
-  // Daimy 2026-08-03: wel doorberekenen maar STIL, dus verwerkt in de productprijs en nergens
-  // apart benoemd. De bot moet dezelfde prijs noemen als de offerte-tool.
-  const prijsMetTransport = prijs + (UNILUX.opties?.order_transportkosten || 0);
-  return { productKey: 'hor:' + key, productPrijsIncl: Math.round(prijsMetTransport), montageIncl: montage, totaalIncl: Math.round(prijsMetTransport) + montage, toelichting: 'Unilux hor incl. BTW + montage door eigen monteurs. Indicatie; definitief na inmeten.' };
+  // Geen order-/transportkosten: het boek noemt 28 euro per opdracht, maar die betalen wij
+  // niet omdat we in grotere volumes bestellen (Daimy 2026-08-03).
+  return { productKey: 'hor:' + key, productPrijsIncl: Math.round(prijs), montageIncl: montage, totaalIncl: Math.round(prijs) + montage, toelichting: 'Unilux hor incl. BTW + montage door eigen monteurs. Indicatie; definitief na inmeten.' };
 }
 
 // Nette totaalprijs incl montage voor een productconfiguratie.

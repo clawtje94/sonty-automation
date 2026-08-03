@@ -1043,8 +1043,7 @@
   "ral_meerprijs_per_stuk": 78,
   "ral_str_meerprijs_per_stuk": 100,
   "_ral_uitleg": "Boek Unilux p3: het starttarief geldt EENMALIG per order, daarnaast komt er per hor een meerprijs bij (71 advies = 78 bij ons, of 91 = 100 voor structuurlak). Wij rekenden alleen het starttarief, dus bij meerdere horren in een afwijkende kleur lieten we geld liggen. Gevonden 2026-08-03.",
-  "order_transportkosten": 31,
-  "_order_transportkosten": "Boek Unilux p14: order/transportkosten 28 euro per opdracht (advies), bij ons 31 met de opslag. Daimy 2026-08-03: WEL doorberekenen maar STIL, dus zonder aparte regel op de offerte. Zit daarom verwerkt in de productprijs van de hor en wordt nergens apart benoemd.",
+  "_order_transportkosten": "Boek Unilux p14 noemt 28 euro order/transportkosten per opdracht, maar Daimy 2026-08-03: die betalen wij NIET omdat we in grotere volumes bestellen. Dus niet doorberekenen. Op 03-08 eerst wel ingebouwd en dezelfde dag weer verwijderd.",
   "ral_meerprijs_per_stuk_per_product": {
    "comfort": 78,
    "super_plus": 78,
@@ -1055,6 +1054,8 @@
    "inklem_unit": 78,
    "unit_dubbel": 78
   },
-  "_ral_per_product": "Boek Unilux: de meerprijs per stuk voor een afwijkende RAL verschilt per product. Comfort (p3) en Super+ (p4) rekenen 71 advies (78 bij ons); voorzethor (p5) en inklemhor (p7) rekenen 50 (55 bij ons). Producten die hier niet in staan zijn nog niet tegen hun boekpagina gecontroleerd en vallen terug op ral_meerprijs_per_stuk. Aanvullen zodra p6 en p8 t/m p13 nagekeken zijn."
+  "_ral_per_product": "Boek Unilux: de meerprijs per stuk voor een afwijkende RAL verschilt per product. Comfort (p3) en Super+ (p4) rekenen 71 advies (78 bij ons); voorzethor (p5) en inklemhor (p7) rekenen 50 (55 bij ons). Producten die hier niet in staan zijn nog niet tegen hun boekpagina gecontroleerd en vallen terug op ral_meerprijs_per_stuk. Aanvullen zodra p6 en p8 t/m p13 nagekeken zijn.",
+  "unit_handgreep": 9,
+  "_unit_handgreep": "Handgreep voor de plisse-units (creme wit, wit of zwart), boek p8/p9: 8 euro advies, 9 bij ons. Daimy 03-08: mag erbij."
  }
 }

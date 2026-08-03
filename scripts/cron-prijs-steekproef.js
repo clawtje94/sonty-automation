@@ -37,7 +37,9 @@ function markGemeld(nrs) {
 const V4_PATH = path.join(__dirname, 'cron-offerte-controle-v4-combined.js');
 const src = fs.readFileSync(V4_PATH, 'utf8');
 const SUNMASTER_PRICES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'sunmaster-prices-2026.json'), 'utf8'));
-const MARKUP = 1.10;
+// MARKUP komt uit het ingelezen v4-blok (data/prijsconfig.json). Bewust GEEN eigen
+// kopie meer: die liep stil uit de pas met v4 en dan noemt dit bestand een andere prijs.
+let MARKUP; // wordt hieronder gevuld uit het ge-evalde v4-blok (data/prijsconfig.json)
 function grab(name) {
   const m = src.match(new RegExp('function ' + name + '\\([\\s\\S]*?\\n\\}'));
   if (!m) throw new Error('v4-functie niet gevonden: ' + name);
@@ -55,7 +57,8 @@ const v4Snippets = [
 for (const fn of ['findNearest', 'getCategory', 'getProductKey', 'extractField', 'extractMaatFromDesc', 'lookupPrice', 'calculateCorrectPrice', 'correctProductPrice', 'isStandaardKleur', 'mkLookupMarkies', 'mkLookupBovenkap', 'mkLookupZijkap', 'mkGetTabel', 'mkTotaalExcl']) {
   v4Snippets.push(grab(fn));
 }
-eval(v4Snippets.join('\n'));
+eval(v4Snippets.join('\n') + ';MARKUP = typeof PRIJSCONFIG !== "undefined" ? PRIJSCONFIG.sunmasterMarkup : undefined;');
+if (!MARKUP) throw new Error('MARKUP niet uit de v4-prijscode gekomen — staat het PRIJSCONFIG-blok nog tussen MK_UITVAL_COLS en MK_BEDIENING?');
 
 async function rpGet(ep) {
   const r = await fetch(B + ep, { headers: H });

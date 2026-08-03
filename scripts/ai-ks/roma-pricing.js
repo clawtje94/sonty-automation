@@ -7,7 +7,9 @@ const fs = require('fs');
 const path = require('path');
 
 const ROMA = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'roma-prices-2025.json'), 'utf8'));
-const OPSLAG = 1.15;
+const PRIJSCONFIG = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '../..', 'data', 'prijsconfig.json'), 'utf8'));
+const OPSLAG = PRIJSCONFIG.romaOpslag; // data/prijsconfig.json — nergens anders een getal
+if (!PRIJSCONFIG.romaOpslag) throw new Error('romaOpslag ontbreekt in prijsconfig.json');
 
 const PRODUCTEN = {
   // STANDAARD = .P (Daimy 20 juli: "niet standaard XP aanhouden maar P — de XP is de variant

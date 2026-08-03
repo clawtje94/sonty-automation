@@ -6,10 +6,14 @@ const SRC = '/Users/clawdboot/sonty/scripts/cron-offerte-controle-v4-combined.js
 const src = fs.readFileSync(SRC, 'utf8');
 const code = src.slice(src.indexOf('const MK_UITVAL_COLS'), src.indexOf('// ============ MAIN ============'));
 const SUNMASTER_PRICES = JSON.parse(fs.readFileSync('/Users/clawdboot/sonty/data/sunmaster-prices-2026.json', 'utf8'));
-const MARKUP = 1.10;
-const api = eval(code + `;({mkLookupMarkies, mkLookupBovenkap, mkLookupZijkap, mkTotaalExcl, mkBuildOptiesBlok, MK_GRENEN, MK_ALUMINIUM, MK_HARDHOUT,
+// MARKUP komt uit het ingelezen v4-blok (data/prijsconfig.json). Bewust GEEN eigen
+// kopie meer: die liep stil uit de pas met v4 en dan noemt dit bestand een andere prijs.
+let MARKUP;
+const api = eval(code + `;({MARKUP, mkLookupMarkies, mkLookupBovenkap, mkLookupZijkap, mkTotaalExcl, mkBuildOptiesBlok, MK_GRENEN, MK_ALUMINIUM, MK_HARDHOUT,
   findNearest, lookupPrice, calculateCorrectPrice, correctProductPrice, getProductKey, getCategory, getBedType, getMontagePrice, getMontageCategory,
   adjustMontageInPlace, extractMaatFromDesc, processMarkiezen, addV4Enhancements})`);
+MARKUP = api.MARKUP;
+if (!MARKUP) throw new Error('MARKUP niet uit de v4-prijscode gekomen — prijsconfig.json of de slice-grens klopt niet');
 
 const baseline = JSON.parse(fs.readFileSync(__dirname + '/baseline.json', 'utf8'));
 let pass = 0, fail = 0;

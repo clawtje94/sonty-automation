@@ -51,11 +51,19 @@ function laadV4Api({ markup, prices } = {}) {
   const start = src.indexOf('const MK_UITVAL_COLS');
   const eind = src.indexOf('// ============ MAIN ============');
   if (start < 0 || eind < 0) throw new Error('MEETLAT: kan de prijscode niet uit v4 knippen — is het bestand verbouwd?');
-  const code = src.slice(start, eind);
+  let code = src.slice(start, eind);
 
-  // Deze twee namen worden door de ge-eval'de code gebruikt maar staan buiten de slice.
-  const MARKUP = markup !== undefined ? markup : Number(src.match(/^const MARKUP = ([\d.]+);/m)?.[1]);
-  if (!MARKUP) throw new Error('MEETLAT: geen MARKUP gevonden in v4');
+  // De opslag staat sinds 2026-08-03 BINNEN de slice en komt uit data/prijsconfig.json.
+  // Voor de zelftest vervangen we die ene regel in de tekst, zodat een andere opslag
+  // doorgerekend kan worden zonder ook maar iets op schijf aan te raken.
+  const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'prijsconfig.json'), 'utf8'));
+  const MARKUP = markup !== undefined ? markup : config.sunmasterMarkup;
+  if (!MARKUP) throw new Error('MEETLAT: geen sunmasterMarkup in data/prijsconfig.json');
+  if (markup !== undefined) {
+    const regel = 'const MARKUP = PRIJSCONFIG.sunmasterMarkup;';
+    if (!code.includes(regel)) throw new Error('MEETLAT: kan de opslagregel niet vinden om te overschrijven — is v4 verbouwd?');
+    code = code.replace(regel, 'const MARKUP = ' + markup + ';');
+  }
   const SUNMASTER_PRICES = prices || JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'sunmaster-prices-2026.json'), 'utf8'));
 
   const api = eval(code + ';({lookupPrice, calculateCorrectPrice, getProductKey, getCategory, getBedType, getMontagePrice, findNearest, extractMaatFromDesc, isStandaardKleur, mkTotaalExcl, MK_BEDIENING, STANDAARD_KLEUREN_MAP, PRODUCT_MAP})');
@@ -78,9 +86,14 @@ function motorV4() {
 /** De motor zoals de bot hem draait: via ai-ks/v4-pricing.js, met díens eigen MARKUP. */
 function motorBot() {
   const botSrc = fs.readFileSync(path.join(ROOT, 'scripts', 'ai-ks', 'v4-pricing.js'), 'utf8');
-  const markup = Number(botSrc.match(/^const MARKUP = ([\d.]+);/m)?.[1]);
-  if (!markup) throw new Error('MEETLAT: geen MARKUP gevonden in ai-ks/v4-pricing.js');
-  const api = laadV4Api({ markup });
+  // De bot hoort GEEN eigen opslag meer te hebben; hij erft die uit het ingelezen v4-blok.
+  // Staat er toch weer een eigen kopie, dan is dat precies de fout die we hebben opgelost
+  // en moet de meting daarop stukvallen in plaats van hem te verbergen.
+  if (/^const MARKUP = [\d.]+;/m.test(botSrc)) {
+    throw new Error('MEETLAT: ai-ks/v4-pricing.js heeft weer een eigen MARKUP — die hoort uit prijsconfig.json te komen');
+  }
+  const api = laadV4Api();
+  const markup = api._markup;
   return {
     naam: 'bot',
     markup,

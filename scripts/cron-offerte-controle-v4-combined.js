@@ -20,7 +20,8 @@ const fs = require('fs');
 
 // === V4: Sunmaster prijzen + upgrade/downgrade ===
 const SUNMASTER_PRICES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'sunmaster-prices-2026.json'), 'utf8'));
-const MARKUP = 1.10;
+// MARKUP staat bewust NIET hier maar hieronder, binnen het blok dat door
+// ai-ks/v4-pricing.js en tests/verify-fixes.js wordt ingelezen. Zie de uitleg daar.
 
 // Roma duo-offertes (instructie Daimy 2026-07-03): bij rolluik/screen ook een apart Roma-document
 // UITGEZET op instructie Daimy 2026-07-13: klanten kregen de duo verstuurd terwijl de
@@ -60,6 +61,27 @@ const ENHANCE_DESCRIPTIONS = true; // Goedgekeurde teksten (test offerte #202668
 // ============ MARKIEZEN PRIJSTABELLEN (excl BTW = verkoopprijs) ============
 
 const MK_UITVAL_COLS = [80,90,100,115,135,150,165,180,200];
+
+// ============ PRIJSOPSLAGEN — ÉÉN BRON ============
+// Deze regels staan met opzet hier, direct NA MK_UITVAL_COLS. Alles vanaf die regel tot
+// "// ====== MAIN ======" wordt door ai-ks/v4-pricing.js (de WhatsApp- en mailbot), door
+// tests/verify-fixes.js en door cron-prijs-steekproef.js uit dit bestand geknipt en
+// uitgevoerd. Zetten we MARKUP bovenaan het bestand, dan valt hij BUITEN dat stuk en pakt
+// elk van die drie zijn eigen kopie — gemeten 2026-08-03: v4 op 1,20 zetten liet de bot
+// gewoon op 1,10 staan, dus de wijziging kwam nooit bij de klant aan.
+// Nu staat hij erbinnen en krijgt iedereen die deze code inlaadt dezelfde opslag.
+const PRIJSCONFIG = (() => {
+  const _fs = require('fs'), _p = require('path');
+  // __dirname is de map van wie dit inlaadt (scripts/, scripts/ai-ks/, scripts/tests/,
+  // scripts/prijs-meetlat/), dus zoeken in plaats van één vast pad aannemen.
+  for (const k of ['..', '../..', '.'].map(d => _p.join(__dirname, d, 'data', 'prijsconfig.json'))) {
+    if (_fs.existsSync(k)) return JSON.parse(_fs.readFileSync(k, 'utf8'));
+  }
+  throw new Error('prijsconfig.json niet gevonden vanuit ' + __dirname + ' — geen prijzen berekenen zonder config');
+})();
+const MARKUP = PRIJSCONFIG.sunmasterMarkup;
+const MARKIEZEN_FACTOR = PRIJSCONFIG.markiezenFactor;
+if (!MARKUP || !MARKIEZEN_FACTOR) throw new Error('prijsconfig.json onvolledig — geen prijzen berekenen met een halve config');
 const MK_GRENEN = [[100,[593,667,708,805,929,1088,1196,1317,1448]],[120,[619,698,734,837,963,1131,1247,1371,1510]],[140,[642,726,767,864,990,1173,1289,1419,1560]],[160,[665,757,800,901,1029,1214,1332,1466,1614]],[180,[690,777,835,934,1060,1253,1378,1517,1666]],[200,[715,809,860,972,1094,1293,1426,1566,1723]],[220,[738,837,893,999,1127,1332,1466,1614,1773]],[240,[762,864,926,1036,1160,1378,1517,1666,1835]],[260,[785,888,955,1067,1191,1427,1568,1725,1900]],[280,[809,918,988,1098,1224,1458,1602,1763,1941]],[300,[839,949,1021,1131,1260,1499,1651,1817,1995]],[320,[859,972,1050,1168,1293,1543,1694,1864,2051]],[340,[882,1001,1083,1201,1322,1579,1740,1912,2102]],[360,[906,1029,1114,1237,1357,1628,1790,1966,2164]],[380,[932,1040,1150,1268,1392,1651,1817,1998,2199]],[400,[955,1086,1178,1301,1427,1713,1885,2070,2277]],[420,[980,1106,1212,1334,1456,1751,1922,2115,2327]]];
 const MK_ALUMINIUM = [[100,[593,667,708,805,929,1088,1196,1317,1448]],[120,[619,698,734,837,963,1131,1247,1371,1510]],[140,[642,726,767,864,990,1173,1289,1419,1560]],[160,[665,757,800,901,1052,1214,1332,1466,1614]],[180,[690,777,835,934,1071,1253,1378,1525,1666]],[200,[715,809,860,972,1094,1293,1426,1566,1723]],[220,[738,837,893,999,1127,1332,1466,1614,1773]],[240,[762,864,926,1036,1160,1378,1517,1666,1835]],[260,[785,888,955,1067,1191,1427,1568,1725,1900]],[280,[809,918,987,1098,1224,1458,1602,1763,1941]],[300,[839,949,1021,1131,1260,1499,1651,1817,1995]],[320,[859,972,1050,1168,1293,1543,1694,1864,2051]],[340,[882,1001,1083,1201,1322,1579,1740,1912,2102]],[360,[906,1029,1114,1237,1357,1628,1790,1966,2164]],[380,[932,1040,1150,1268,1392,1651,1817,1998,2199]],[400,[955,1086,1178,1301,1427,1713,1885,2070,2277]],[420,[980,1106,1212,1334,1456,1751,1922,2115,2327]],[440,[1001,1127,1243,1368,1491,1790,1966,2164,2380]],[460,[1032,1168,1271,1402,1525,1833,2018,2218,2440]],[480,[1050,1191,1303,1432,1560,1877,2062,2269,2496]],[500,[1074,1217,1339,1469,1591,1902,2094,2303,2532]]];
 const MK_HARDHOUT = [[100,[622,700,743,846,976,1142,1256,1383,1521]],[120,[651,733,772,878,1010,1189,1310,1439,1585]],[140,[674,762,806,908,1041,1232,1353,1490,1639]],[160,[698,794,840,946,1081,1275,1399,1541,1696]],[180,[723,816,875,981,1121,1316,1448,1592,1749]],[200,[752,851,903,1021,1148,1328,1496,1644,1804]],[220,[775,878,937,1049,1183,1399,1541,1696,1864]],[240,[799,908,972,1088,1217,1448,1592,1749,1928]],[260,[825,932,1002,1121,1252,1498,1646,1812,1995]],[280,[851,965,1039,1153,1285,1532,1683,1853,2037]],[300,[882,996,1072,1189,1323,1574,1734,1909,2094]],[320,[902,1021,1103,1225,1357,1620,1779,1958,2154]],[340,[926,1051,1137,1261,1388,1659,1826,2008,2208]],[360,[950,1081,1169,1299,1426,1708,1879,2066,2272]],[380,[979,1091,1206,1332,1461,1734,1909,2098,2308]],[400,[1002,1140,1237,1366,1498,1799,1978,2174,2390]],[420,[1029,1161,1271,1402,1528,1838,2020,2222,2443]]];
@@ -128,7 +150,7 @@ function mkBuildOptiesBlok(bediening, materiaal, breedteMM, uitvalMM) {
   for (const opt of matOpties) {
     const altTotaal = mkTotaalExcl(opt.key, breedteMM, uitvalMM);
     if (altTotaal == null) continue; // alternatief buiten tabelbereik: niet tonen
-    const verschil = Math.round((altTotaal - huidigTotaal) * 1.21);
+    const verschil = Math.round((altTotaal - huidigTotaal) * MARKIEZEN_FACTOR);
     matRegels.push('• ' + opt.label + ': ' + (verschil >= 0 ? '+€' : '-€') + Math.abs(verschil));
   }
   if (matRegels.length > 0) {
@@ -139,7 +161,7 @@ function mkBuildOptiesBlok(bediening, materiaal, breedteMM, uitvalMM) {
   if (anderen.length > 0) {
     lines.push('Andere bediening:');
     for (const [, info] of anderen) {
-      const verschil = Math.round((info.excl - huidigBed) * 1.21);
+      const verschil = Math.round((info.excl - huidigBed) * MARKIEZEN_FACTOR);
       lines.push('• ' + info.label + ': ' + (verschil >= 0 ? '+€' : '-€') + Math.abs(verschil));
     }
     lines.push('');
@@ -221,7 +243,7 @@ function processMarkiezen(desc, existingLines) {
     const bedExcl = MK_BEDIENING[mk.bediening]?.excl || 0;
     const bovenkExcl = mkLookupBovenkap(mk.breedte, alu);
     const zijkExcl = mk.uitval > 0 ? mkLookupZijkap(mk.uitval, alu) : 0;
-    const totaalIncl = Math.round((markiesExcl + bedExcl + bovenkExcl + zijkExcl) * 1.21 * 100) / 100;
+    const totaalIncl = Math.round((markiesExcl + bedExcl + bovenkExcl + zijkExcl) * MARKIEZEN_FACTOR * 100) / 100;
 
     let bedDesc = mk.bediening === 'Handbediend' ? 'Handbediend (koord bovenlangs)' :
       mk.bediening === 'Motor + afstandsbediening' ? 'Elektrisch (Somfy IO motor met afstandsbediening)' :

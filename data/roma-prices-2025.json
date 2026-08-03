@@ -1,9 +1,9 @@
 {
  "meta": {
   "bron": "Prijslijst 2025 Roma NL",
-  "prijstype": "netto dealer EXCL BTW",
+  "prijstype": "BRUTO LIJSTPRIJS excl BTW",
   "peildatum": "2026-07-03",
-  "waarschuwing": "NOOIT direct als verkoopprijs tonen: verkoopprijs = netto x 1.21 x marge (marge nog te bepalen door Daimy)",
+  "waarschuwing": "NOOIT direct als verkoopprijs tonen. Klantprijs incl BTW = lijstprijs x romaOpslag uit data/prijsconfig.json.",
   "bronbestanden": [
    "data/prijsboeken/roma-extract/roma-10b-zipscreen2-matrix.md (p226-228)",
    "data/prijsboeken/roma-extract/roma-10-screens-zipscreen.md (p214-243)",
@@ -11,7 +11,8 @@
    "data/prijsboeken/roma-extract/roma-05-gerolvormd-trendo.md (p86-101)",
    "data/prijsboeken/roma-extract/roma-10c-zipscreen2-solar-matrix.md (p230-231)"
   ],
-  "conventies": "prices[rijIndex][kolomIndex] = prijs in EUR voor heightsMM[rijIndex] x widthsMM[kolomIndex]; null = niet leverbaar/niet geprijsd in het prijsboek. Tussenmaten altijd afronden naar de eerstvolgende grotere matrixmaat (standaard prijsboek-conventie), nooit interpoleren zonder akkoord Daimy."
+  "conventies": "prices[rijIndex][kolomIndex] = prijs in EUR voor heightsMM[rijIndex] x widthsMM[kolomIndex]; null = niet leverbaar/niet geprijsd in het prijsboek. Tussenmaten altijd afronden naar de eerstvolgende grotere matrixmaat (standaard prijsboek-conventie), nooit interpoleren zonder akkoord Daimy.",
+  "_correctie_2026_08_03": "Stond eerst als \"netto dealer EXCL BTW\". Dat klopt niet. Boek p70 spreekt letterlijk van \"Lijstprijs element\", p328 van fabrieksprijzen, en losse posten worden apart gemarkeerd met \"dit is een netto prijs!\" — die uitzondering bestaat alleen als de tabel zelf bruto is. Er hoort dus een dealerkorting overheen te gaan die NIET in het boek staat. Percentage opvragen bij Daimy; dat bepaalt de werkelijke marge."
  },
  "zipscreen2": {
   "beschrijving": "ROMA zipSCREEN.2 geëxtrudeerd (voorzetscreens/inbouwscreens), hoofdprijsmatrix p226-228. Prijs per element incl. Somfy Maestria+ io motor, Smoove io wandzender en RVS schroeven. Rijen = elementhoogte (mm), kolommen = elementbreedte (mm).",

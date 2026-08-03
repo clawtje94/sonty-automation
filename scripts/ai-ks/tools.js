@@ -2,6 +2,11 @@
 // In shadow-modus voeren actie-tools NIETS uit — ze geven terug wat ze ZOUDEN doen,
 // zodat het voorstel in de interne notitie belandt en beoordeeld kan worden.
 const CFG = require('./config.js');
+
+// Bedragen die uit het Sunmaster-boek komen moeten meebewegen met de opslag, ook in de
+// tekst die de bot leest. Stonden hier hardcoded op de oude opslag.
+const _PC = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', '..', 'data', 'prijsconfig.json'), 'utf8'));
+const _vp = (excl) => String(Math.round(excl * _PC.sunmasterMarkup * 100) / 100).replace('.', ',');
 const { prijsIndicatie } = require('./v4-pricing.js');
 const { herkenRoma, romaPrijs } = require('./roma-pricing.js');
 const { buildKlantContext, getOfferteInhoud } = require('./klant-context.js');
@@ -110,7 +115,7 @@ const TOOL_DEFS = [
         },
         aantalWijzigen: { type: 'array', items: { type: 'object', properties: { product: { type: 'string' }, aantal: { type: 'integer' } }, required: ['product', 'aantal'] } },
         sonnyKorting: { type: 'object', properties: { percentage: { type: 'number', description: 'Nieuw TOTAALPERCENTAGE van de kortingsregel, maximaal 17.5 (= standaard 15 + jouw mandaat van max 2,5). De kortingsregel op de offerte wordt dan bv. "17,5% kortingsaanbod Sunny".' }, gratis: { type: 'string', enum: ['tahoma', 'montage'], description: 'ALLEEN bij grote orders (±5-10 producten) en in PLAATS van de percentage-verhoging: gratis Tahoma of 1x montage gratis. Komt als €0-regel op de offerte, en de 15%-kortingsregel vermeldt het cadeau met "Sunny" erbij.' } }, description: 'Jouw onderhandelmandaat, altijd zichtbaar op de offerte zelf. Kies percentage ÓF gratis, nooit beide, nooit stapelen. Doel is altijd ZO MIN MOGELIJK korting geven: probeer eerst zonder, en geef nooit meer dan nodig om de deal te sluiten.' },
-        vastePosten: { type: 'array', items: { type: 'object', properties: { soort: { type: 'string', enum: ['hoogwerker', 'demontage_oud_product', 'verlengde_muursteunen', 'led_verlichting_sunelite', 'tahoma_switch'] }, aantal: { type: 'integer' } }, required: ['soort'] }, description: 'Vaste posten toevoegen: hoogwerker €650/dag (boven 2e verdieping), demontage+afvoer oud product €75/stuk, verlengde muursteunen €150, LED-verlichting SunElite €823,90 (kleur en wit, 2 kanalen — alleen bij SunElite), Tahoma Switch €195 (smart home hub, 1 per woning, alleen bij Somfy io motoren)' },
+        vastePosten: { type: 'array', items: { type: 'object', properties: { soort: { type: 'string', enum: ['hoogwerker', 'demontage_oud_product', 'verlengde_muursteunen', 'led_verlichting_sunelite', 'tahoma_switch'] }, aantal: { type: 'integer' } }, required: ['soort'] }, description: `Vaste posten toevoegen: hoogwerker €650/dag (boven 2e verdieping), demontage+afvoer oud product €75/stuk, verlengde muursteunen €${_vp(75 * 2)}, LED-verlichting SunElite €${_vp(749)} (kleur en wit, 2 kanalen — alleen bij SunElite), Tahoma Switch €195 (smart home hub, 1 per woning, alleen bij Somfy io motoren)` },
         samenvatting: { type: 'string', description: 'Korte omschrijving van de wijziging voor het logboek' },
       },
       required: ['documentId', 'samenvatting'],

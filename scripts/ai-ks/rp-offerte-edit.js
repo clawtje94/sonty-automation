@@ -64,11 +64,18 @@ function montageTitel(productKey, itemProduct) {
 }
 
 // Vaste posten die aan een offerte toegevoegd kunnen worden (prijzen uit teamgesprekken/beleid)
+const _PC = JSON.parse(require('fs').readFileSync(require('path').join(__dirname,'..','..','data','prijsconfig.json'),'utf8'));
+const _boek = (excl) => Math.round(excl * _PC.sunmasterMarkup * 100) / 100;
+
 const VASTE_POSTEN = {
   hoogwerker: { naam: 'Hoogwerker (montage boven de 2e verdieping)', prijs: 650, uitleg: 'Per dag. Nodig als montage niet met ladders kan.' },
   demontage_oud_product: { naam: 'Demonteren en afvoeren oud scherm/rolluik', prijs: 75, uitleg: 'Per product, waarvan €25 gedoneerd aan het Prinses Máxima Kinderziekenhuis.' },
-  verlengde_muursteunen: { naam: 'Verlengde muursteunen', prijs: 150, uitleg: 'Indien nodig, beoordeling bij het inmeten.' },
-  led_verlichting_sunelite: { naam: 'LED-verlichting SunElite', prijs: 823.90, uitleg: 'Somfy io, 2 kanalen: kleur en wit licht apart bedienbaar. Ingebouwd in de cassette. Alleen mogelijk op de SunElite.' },
+  // Boek Sunmaster p27: verlengde 2-delige muursteun 50 cm = 75 per stuk. Twee stuks is de
+  // gangbare toepassing, vandaar 2x. Beweegt mee met de opslag i.p.v. hardcoded 150.
+  verlengde_muursteunen: { naam: 'Verlengde muursteunen', prijs: _boek(75 * 2), uitleg: 'Indien nodig, beoordeling bij het inmeten.' },
+  // Boek Sunmaster p31: LED-verlichting Somfy io 2 kanalen = 749 excl opslag. Stond hardcoded
+  // op 823,90, wat de oude opslag 1,10 was; liep dus niet mee met de prijswijziging.
+  led_verlichting_sunelite: { naam: 'LED-verlichting SunElite', prijs: _boek(749), uitleg: 'Somfy io, 2 kanalen: kleur en wit licht apart bedienbaar. Ingebouwd in de cassette. Alleen mogelijk op de SunElite.' },
   // Prijs conform bestaande offertes (o.a. 202518364/202517868): €195 incl BTW en installatie.
   tahoma_switch: { naam: 'Tahoma Switch (Somfy)', prijs: 195, uitleg: 'Smart home hub: bedien je zonwering met de Somfy-app, ook buitenshuis, met tijdschema\'s en koppeling met Google Home/Alexa/HomeKit. 1 per woning voldoende. Inclusief installatie en uitleg door onze monteur.' },
 };

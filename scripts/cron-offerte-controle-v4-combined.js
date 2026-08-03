@@ -987,8 +987,14 @@ function lookupPrice(productKey, breedteCm, hoogteCm, uitvalCm) {
     // GEKOPPELD (pergola én serre): breder dan de tabel (>6000mm) = 2 units gekoppeld.
     // Prijs = 2× een unit van de halve breedte (bv. 9000mm = 2× 4500mm). Bevestigd door Daimy 2026-07-02.
     if (breedteCm > maxBreedte) {
+      // Het maximum van de gekoppelde uitvoering verschilt PER PRODUCT en staat in het boek:
+      // SunControl 150 tot 10.000 mm (p49), 165 ZIP tot 12.000 mm (p51), pergola tot
+      // 10.000 mm (p53). Hier stond 2× de tabelbreedte voor alles (= 12.000 mm), waardoor
+      // we bij de 150 en de pergola tot 2 meter breder offreerden dan leverbaar.
+      const maxGekoppeldCm = (product.maxGekoppeldMM || maxBreedte * 2 * 10) / 10;
+      if (breedteCm > maxGekoppeldCm) return null; // breder dan leverbaar → handmatige controle
       const halveBreedte = Math.ceil(breedteCm / 2);
-      if (halveBreedte > maxBreedte) return null; // > 2×6000mm: niet zeker → handmatige controle
+      if (halveBreedte > maxBreedte) return null;
       const half = findNearest(tbl, halveBreedte)?.value;
       return half ? half * 2 : null;
     }

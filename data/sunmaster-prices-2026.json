@@ -1990,7 +1990,9 @@
   "opties": {
    "oreaWT": -50,
    "handzender": 76
-  }
+  },
+  "maxGekoppeldMM": 10000,
+  "_fix": "2026-08-03: maxGekoppeldMM 10000 uit het boek (gekoppelde uitvoering 2-delig)."
  },
  "suncontrol165ZIP": {
   "category": "serre",
@@ -2047,7 +2049,9 @@
   "opties": {
    "oreaWT": -50,
    "handzender": 76
-  }
+  },
+  "maxGekoppeldMM": 12000,
+  "_fix": "2026-08-03: maxGekoppeldMM 12000 uit het boek (gekoppelde uitvoering 2-delig)."
  },
  "suncontrolPergola": {
   "category": "pergola",
@@ -2120,7 +2124,9 @@
    "RAL 9007 structuur",
    "RAL 9007",
    "Brons structuur"
-  ]
+  ],
+  "maxGekoppeldMM": 10000,
+  "_fix": "2026-08-03: maxGekoppeldMM 10000 uit het boek (gekoppelde uitvoering 2-delig)."
  },
  "markup": 1.1,
  "handzenderPrijs": 76,

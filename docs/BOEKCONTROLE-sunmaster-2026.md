@@ -44,7 +44,7 @@ Nooit de tekstlaag — daar is het de vorige keer op misgegaan.
 | 50 | opties SunControl | TE DOEN | |
 | 51 | SunControl 165 ZIP | ✅ 03-08 | alle 35 cellen goed. Gekoppeld tot 12.000 mm klopt hier wél. RAL-meerprijs 15% bevestigd |
 | 52 | standaarduitvoering pergola | TE DOEN | |
-| 53 | SunControl 165 ZIP pergola | TE DOEN | |
+| 53 | SunControl 165 ZIP pergola | ✅ 03-08 | alle 35 cellen goed. Gekoppeld tot 10.000 mm, niet 12.000 |
 | 54-55 | Somfy accessoires | TE DOEN | |
 | 56-60 | projecten, voorwaarden | TE DOEN | p57 prijsvoorwaarden lezen |
 
@@ -119,8 +119,13 @@ Zelfde methode, pagina voor pagina als afbeelding:
    dat serre/pergola 15% RAL-meerprijs heeft en niet de 20% van de rolluiken. Alle drie nu
    uit `prijsconfig.json`, met een nieuw veld `kleurRalPctSerre`. Het slot let er nu ook op:
    de regex vangt voortaan óók 0.15 en 0.20.
-12. **OPEN — gekoppelde uitvoering heeft per product een eigen maximum.** Boek p49:
-   SunControl 150 gekoppeld beschikbaar van 4.000 tot **10.000 mm**. Boek p51: SunControl
-   165 ZIP van 4.000 tot **12.000 mm**. Onze code hanteert overal 2× de tabelbreedte
-   (= 12.000 mm), dus bij de 150 offreren we tot 2 meter breder dan leverbaar. Nog te fixen
-   zodra p53 (pergola) is nagekeken, zodat de grens per product klopt.
+12. **Gekoppelde uitvoering — maximum per product, GEFIXT.** Boek: SunControl 150 tot
+   10.000 mm (p49), 165 ZIP tot 12.000 mm (p51), pergola tot 10.000 mm (p53). Onze code
+   hanteerde overal 2× de tabelbreedte (12.000 mm). Nu staat de grens per product in de data
+   als `maxGekoppeldMM`.
+   ⚠️ **LET OP DAIMY:** dit zet de pergola terug van 12 m naar 10 m. In het geheugen staat
+   "pergola max 12 m breed, bevestigd door Daimy 2026-07-02". Het boek zegt 10 m. Ik ben van
+   het boek uitgegaan omdat dat de afspraak is (03-08), maar als jij van Sunmaster weet dat
+   12 m wél kan bij de pergola, zeg het dan — dan zet ik `maxGekoppeldMM` daar op 12000.
+   In de 2026-offertes staat 0 keer een serre of pergola breder dan 10 m, dus dit raakt
+   voorlopig niemand.

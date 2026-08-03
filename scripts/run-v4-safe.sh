@@ -18,7 +18,8 @@ tg() {
 
 cd /Users/clawdboot/sonty || exit 1
 
-if $NODE --check "$V4" 2>/dev/null && $NODE "$SCRIPTS/tests/verify-fixes.js" > /tmp/v4-pretest.log 2>&1; then
+if $NODE --check "$V4" 2>/dev/null && $NODE "$SCRIPTS/tests/verify-fixes.js" > /tmp/v4-pretest.log 2>&1 \
+   && $NODE "$SCRIPTS/tests/geen-losse-opslagen.js" >> /tmp/v4-pretest.log 2>&1; then
   cp "$V4" "$LASTGOOD"
   exec $NODE "$V4"
 else

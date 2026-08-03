@@ -11,12 +11,16 @@ const SUNMASTER_PRICES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '
 // kopie meer: die liep stil uit de pas met v4 en dan noemt dit bestand een andere prijs.
 let MARKUP;
 
-const api = eval(code + `;({MARKUP, lookupPrice, calculateCorrectPrice, getProductKey, getCategory, getBedType, getMontagePrice, mkTotaalExcl, findNearest, reorderAndMerge, addV4Enhancements, addWaaromSontyBlock, mkBuildOptiesBlok, STANDAARD_KLEUREN_MAP, PRODUCT_MAP})`);
+const api = eval(code + `;({MARKUP, lookupPrice, calculateCorrectPrice, getProductKey, getCategory, getBedType, getMontagePrice, mkTotaalExcl, MARKIEZEN_FACTOR, findNearest, reorderAndMerge, addV4Enhancements, addWaaromSontyBlock, mkBuildOptiesBlok, STANDAARD_KLEUREN_MAP, PRODUCT_MAP})`);
 MARKUP = api.MARKUP;
 if (!MARKUP) throw new Error('MARKUP niet uit de v4-prijscode gekomen — prijsconfig.json of de slice-grens klopt niet');
 
 const UNILUX = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'unilux-prijzen-2026.json'), 'utf8'));
-const BTW = 1.21;
+// Markiezenfactor uit het ingelezen v4-blok (data/prijsconfig.json). Stond hier een eigen
+// 1.21, waardoor de bot markiezen op de kale btw bleef rekenen terwijl v4 en de offerte-tool
+// naar 1,31 gingen. Gevonden door scripts/tests/geen-losse-opslagen.js op 2026-08-03.
+const BTW = api.MARKIEZEN_FACTOR;
+if (!BTW) throw new Error('MARKIEZEN_FACTOR niet uit de v4-prijscode gekomen');
 const STANDAARD_KORTING_PCT = 15; // lopende actiekorting; staat ook op de RP-offerte
 
 // Voegt de actiekorting-weergave toe aan een prijsresultaat (instructie Daimy: laat zien wat mensen nu krijgen)

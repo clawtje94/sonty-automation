@@ -92,7 +92,11 @@ function main() {
       const doel = Math.round(o * vf * 100) / 100;
       // Roma rondt af op hele euro's (Math.round in roma-pricing), dus daar is een
       // cent-tolerantie te streng: round(x*1,30) is niet gelijk aan round(x*1,15)*1,1304.
-      const speling = soort === 'roma' || (soort === 'offerte-tool' && ROMA_PROD.test(String(k).split('|')[2] || '')) ? 1.01
+      // Roma en de configurator ronden af op hele euro's; round(x×1,20) is dan niet gelijk
+      // aan round(x×1,10)×1,0909. Daar mag maximaal een euro tussen zitten, verder niets.
+      const heleEuros = soort === 'roma' || soort === 'configurator'
+        || (soort === 'offerte-tool' && ROMA_PROD.test(String(k).split('|')[2] || ''));
+      const speling = heleEuros ? 1.01
         // Twee keer afronden op centen (eerst bij de oude prijs, dan bij de nieuwe) kan
         // een paar cent schelen. Ruimer dan dat mag niet: dan verstop je echte fouten.
         : 0.03;

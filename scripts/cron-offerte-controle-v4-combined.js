@@ -1255,6 +1255,23 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
   const product = SUNMASTER_PRICES[productKey];
   if (!product) return null;
   const pCat = product.category === 'zipscreen' ? 'screen' : product.category;
+
+  // KNIKARM-MINIMA: de armen moeten naast elkaar in de cassette passen, dus de minimale
+  // breedte hangt af van de uitval. Boekformules: SunEye = uitval+19 (p27), SunEye XL =
+  // uitval+49 maar 401 bij uitval 350 (p29), SunElite = uitval+65 (p31), SunBasic =
+  // uitval+30 (p25). De offerte-tool kende deze regel al, v4 niet — daardoor zijn er
+  // 14 offertes de deur uitgegaan met een scherm dat niet te bouwen is (gemeten
+  // 2026-08-03 over alle 2026-offertes). Geen prijs → handmatige controle, zelfde
+  // aanpak als bij SunEye XL handbediend.
+  if (pCat === 'knikarmscherm' && uitvalCm > 0 && breedteCm > 0) {
+    const KNIKARM_OFFSET = { suneye: 19, suneyeXL: 49, sunelite: 65, sunbasic: 30, sunbasicCassette: 30 };
+    const offset = KNIKARM_OFFSET[productKey];
+    if (offset !== undefined) {
+      const minBreedte = (productKey === 'suneyeXL' && uitvalCm >= 350) ? 401 : uitvalCm + offset;
+      if (breedteCm < minBreedte) return null;
+    }
+  }
+
   const boekprijs = lookupPrice(productKey, breedteCm, hoogteCm, uitvalCm);
   if (!boekprijs) return null;
 

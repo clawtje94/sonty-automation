@@ -8,7 +8,7 @@ geen enkele factor meer overheen (zie `uniluxAlIngerekend` in prijsconfig.json).
 |---|---|---|---|
 | 3 | **Raamhor/hordeur COMFORT** | ✅ 03-08 | alle prijzen exact advies × 1,10. Ook de aflopende hoeken (bij grotere maten geen rolhor) kloppen |
 | 3 | COMFORT opties | ✅ 03-08 | ⚠️ RAL-meerprijs **per stuk** ontbrak, zie bevinding 1 |
-| 4 | Raamhor SUPER+ | TE DOEN | |
+| 4 | **Raamhor SUPER+** | ✅ 03-08 | alle 48 cellen exact advies × 1,10. ⚠️ het boek heeft óók een smalle tabel (breedte 300/400/500 met veervertrager) die wij niet hebben |
 | 5 | Raamhor voorzethor | TE DOEN | |
 | 6 | Raamhor veerstifthor/softfit | TE DOEN | |
 | 7 | Raamhor inklemhor | TE DOEN | |
@@ -18,7 +18,7 @@ geen enkele factor meer overheen (zie `uniluxAlIngerekend` in prijsconfig.json).
 | 11 | Hordeur dubbele plisséfit | TE DOEN | |
 | 12 | Vaste hordeur luxe | TE DOEN | |
 | 13 | Schuifhordeur luxe | TE DOEN | |
-| 14 | Services (afhaalkosten, orderkosten) | TE DOEN | mogelijk kosten die we niet doorberekenen |
+| 14 | **Services** | ✅ 03-08 | ⚠️ €28 order/transportkosten per opdracht die wij niet doorberekenen; plus alle reparatietarieven |
 
 ## Bevindingen
 
@@ -33,3 +33,17 @@ geen enkele factor meer overheen (zie `uniluxAlIngerekend` in prijsconfig.json).
 3. **Maatvoering: kastmaat vs geleidermaat.** Boek p3 heeft de kastmaat op de verticale as en
    de geleidermaat horizontaal. Onze `heights` zijn de kastmaat (600-2600) en `widths` de
    geleidermaat (800-1800) — dat staat goed om.
+
+4. **Order- en transportkosten €28 per opdracht** (p14). Unilux rekent dat bij élke
+   bestelling; wij berekenen het nergens door. Met onze opslag zou dat €31 zijn. Op elke
+   hororder laten we dat dus liggen. Afhaalkosten zijn €32 per opdracht (als we zelf halen)
+   en onderzoekskosten €44 als een reparatie niet mogelijk blijkt.
+5. **Reparatietarieven staan in het boek en wij hebben ze niet.** Bijvoorbeeld gaas
+   vervangen Comfort €87, Super+ €143, plisséfit €228, schuifhordeur €273; veer vervangen
+   €30; scharnieren €44. Servicewerk prijzen we nu met de hand. Deze lijst kan daar zo in.
+6. **SUPER+ smalle maten ontbreken.** Het boek heeft een tweede tabel voor breedte 300, 400
+   en 500 mm (met veervertrager). Onze tabel begint bij 600, dus die smalle horren kunnen
+   we niet offreren.
+7. **Opties per product verschillen.** De geleiderset op maat kost bij Comfort €39/72/84 en
+   bij Super+ €69/105/120. Wij hebben één generieke optielijst; als we dat gaan berekenen
+   moet het per product.

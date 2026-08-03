@@ -84,3 +84,12 @@ Nooit de tekstlaag — daar is het de vorige keer op misgegaan.
    RAL 9006 kwam 0 keer voor.
 8. **p28 SunEye XL standaardkleuren gecontroleerd:** RAL 9010, RAL 9001, Antraciet structuur,
    RAL 9005 structuur — gelijk aan onze data. Goed.
+
+## Blinde vlek in de meetlat (ontdekt 03-08)
+
+De meetlat meet kleurmeerprijzen wél (via kleurType standaard/trend/ral) maar meet NIET of
+een concrete kleurnaam als standaard geldt. De wijziging aan `standaardKleuren` van Zip
+Design 110 gaf daardoor 0 afwijkingen in de meetlat, terwijl hij in de praktijk 81
+offerteregels raakt. Wie hier alleen op de meetlat afgaat, denkt onterecht dat er niets
+verandert. Nog toe te voegen: per product elke standaard- én meerprijskleur door
+`isStandaardKleur` halen en die uitkomst vastleggen.

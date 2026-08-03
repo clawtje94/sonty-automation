@@ -34,11 +34,18 @@ geen enkele factor meer overheen (zie `uniluxAlIngerekend` in prijsconfig.json).
    de geleidermaat horizontaal. Onze `heights` zijn de kastmaat (600-2600) en `widths` de
    geleidermaat (800-1800) — dat staat goed om.
 
-4. **Order- en transportkosten €28 per opdracht** (p14). Unilux rekent dat bij élke
-   bestelling; wij berekenen het nergens door. Met onze opslag zou dat €31 zijn. Op elke
+4. **Order- en transportkosten €28 per opdracht — DOORBEREKEND (Daimy 03-08).**
+   "Ja doorberekenen maar stil, dus zonder vermelding in de offerte." Verwerkt in de
+   productprijs van elke hor (€31 met opslag), zowel in de offerte-tool als in de bot.
+   Nergens een aparte regel. **Let op:** Unilux rekent per ORDER, wij verwerken per hor;
+   bij meerdere horren in één offerte dekken we die kosten dus ruim. Dat is bewust, want de
+   offerte-tool rekent per regel en kent het totale order niet.
+   Gemeten: 11.955 horprijzen precies €31 omhoog, verder geen enkele wijziging.
+   *(oorspronkelijke bevinding)* Unilux rekent dat bij élke bestelling; wij berekenden het niet. Met onze opslag zou dat €31 zijn. Op elke
    hororder laten we dat dus liggen. Afhaalkosten zijn €32 per opdracht (als we zelf halen)
    en onderzoekskosten €44 als een reparatie niet mogelijk blijkt.
-5. **Reparatietarieven staan in het boek en wij hebben ze niet.** Bijvoorbeeld gaas
+5. **Reparatietarieven: NIET opnemen (Daimy 03-08).** Servicewerk blijft handwerk.
+   *(oud)* Reparatietarieven staan in het boek en wij hebben ze niet. Bijvoorbeeld gaas
    vervangen Comfort €87, Super+ €143, plisséfit €228, schuifhordeur €273; veer vervangen
    €30; scharnieren €44. Servicewerk prijzen we nu met de hand. Deze lijst kan daar zo in.
 6. **SUPER+ smalle maten ontbreken.** Het boek heeft een tweede tabel voor breedte 300, 400

@@ -1039,6 +1039,11 @@
   "ral_starttarief": 100,
   "kattenluik_luxe": 152,
   "sluitpomp_luxe": 50,
-  "_let_op": "Petscreen alleen op luxe hordeuren; niet op raamhorren (voorzet/inklem/veerstift)."
+  "_let_op": "Petscreen alleen op luxe hordeuren; niet op raamhorren (voorzet/inklem/veerstift).",
+  "ral_meerprijs_per_stuk": 78,
+  "ral_str_meerprijs_per_stuk": 100,
+  "_ral_uitleg": "Boek Unilux p3: het starttarief geldt EENMALIG per order, daarnaast komt er per hor een meerprijs bij (71 advies = 78 bij ons, of 91 = 100 voor structuurlak). Wij rekenden alleen het starttarief, dus bij meerdere horren in een afwijkende kleur lieten we geld liggen. Gevonden 2026-08-03.",
+  "order_transportkosten": 31,
+  "_order_transportkosten": "Boek Unilux p14: order/transportkosten 28 euro per opdracht (advies), bij ons 31 met de opslag. Daimy 2026-08-03: WEL doorberekenen maar STIL, dus zonder aparte regel op de offerte. Zit daarom verwerkt in de productprijs van de hor en wordt nergens apart benoemd."
  }
 }

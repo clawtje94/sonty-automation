@@ -66,7 +66,7 @@ function laadV4Api({ markup, prices } = {}) {
   }
   const SUNMASTER_PRICES = prices || JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'sunmaster-prices-2026.json'), 'utf8'));
 
-  const api = eval(code + ';({lookupPrice, calculateCorrectPrice, getProductKey, getCategory, getBedType, getMontagePrice, findNearest, extractMaatFromDesc, isStandaardKleur, mkTotaalExcl, MK_BEDIENING, STANDAARD_KLEUREN_MAP, PRODUCT_MAP})');
+  const api = eval(code + ';({lookupPrice, calculateCorrectPrice, getProductKey, getCategory, getBedType, getMontagePrice, findNearest, extractMaatFromDesc, isStandaardKleur, mkTotaalExcl, MK_BEDIENING, MARKIEZEN_FACTOR, STANDAARD_KLEUREN_MAP, PRODUCT_MAP})');
   api._markup = MARKUP;
   return api;
 }
@@ -111,7 +111,11 @@ function motorMarkiezen(api) {
       const excl = api.mkTotaalExcl(v.materiaal, v.breedteMM, v.uitvalMM);
       if (excl == null) return null;
       const bed = api.MK_BEDIENING?.[v.bediening]?.excl || 0;
-      return Math.round((excl + bed) * 1.21 * 100) / 100;
+      // Factor uit prijsconfig.json via de v4-code, NIET hier hardcoden. Stond hier eerst
+      // een eigen 1.21, en toen bewoog de markiezenmeting niet mee met de config — precies
+      // de fout die deze meetlat hoort te vinden, dus die mocht hij niet zelf maken.
+      if (!api.MARKIEZEN_FACTOR) throw new Error('MEETLAT: geen MARKIEZEN_FACTOR uit de v4-code');
+      return Math.round((excl + bed) * api.MARKIEZEN_FACTOR * 100) / 100;
     },
   };
 }

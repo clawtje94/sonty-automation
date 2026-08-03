@@ -336,4 +336,5 @@ function main() {
   process.exit(schoon ? 0 : 1);
 }
 
-main();
+if (require.main === module) main();
+module.exports = { meet, vergelijk };

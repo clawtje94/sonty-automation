@@ -70,7 +70,10 @@ for (const p of lijst) {
         bediening: typeof bed === 'string' ? bed : bed.key,
         quantity: 1,
       });
-      uit.configurator[k] = r?.total ?? r?.totaal ?? (r ? JSON.stringify(Object.keys(r)) : null);
+      // Net als bij de offerte-tool de onderdelen apart vastleggen: het totaal bevat
+      // montage, en die hoort niet mee te bewegen met de opslag. Alleen naar het totaal
+      // kijken maakt elke meting van een prijswijziging onbruikbaar.
+      uit.configurator[k] = r ? [r.total ?? null, r.productPrice ?? null, r.bedieningAdjustment ?? null, r.montagePrice ?? null] : null;
       cfCombis++;
     } catch (e) { uit.configurator[k] = 'FOUT: ' + e.message; }
   }

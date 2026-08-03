@@ -75,7 +75,12 @@ Nooit de tekstlaag — daar is het de vorige keer op misgegaan.
    → 210 offertes uit 2026 hebben een Zip Design ≤280 breed in een meerprijs-kleur. Die zijn
    dus te duur geoffreerd. Vraag aan Daimy: alleen de nog openstaande (SENT) corrigeren,
    zoals bij de uitvalschermen in augustus?
-7. **OPEN — standaardkleuren Zip Design 110.** Boek p10 noemt RAL 9010, RAL 9001, Antraciet
-   structuur en **RAL 9006**. Wij hebben RAL 9006 NIET als standaard (dus rekenen we daar
-   ten onrechte meerprijs) en wél **RAL 9005 structuur** (dus rekenen we daar mogelijk
-   ten onrechte géén meerprijs). Beide raken de klantprijs — niet aangepast zonder Daimy.
+7. **Standaardkleuren Zip Design 110 — OPGELOST.** Daimy 03-08: "hou maar aan zoals het in
+   het boek staat". Boek p10 noemt RAL 9010, RAL 9001, Antraciet st. en RAL 9006. Dus RAL
+   9006 toegevoegd en RAL 9005 structuur verwijderd. RAL 7016 (glad én structuur) blijft
+   staan: antraciet is bij Sunmaster altijd standaard en antraciet structuur ís RAL 7016
+   structuur (Daimy 03-08).
+   → 81 Zip Design-regels in 2026 staan in RAL 9005 structuur en worden hierdoor duurder;
+   RAL 9006 kwam 0 keer voor.
+8. **p28 SunEye XL standaardkleuren gecontroleerd:** RAL 9010, RAL 9001, Antraciet structuur,
+   RAL 9005 structuur — gelijk aan onze data. Goed.

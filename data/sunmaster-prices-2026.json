@@ -524,7 +524,7 @@
    "RAL 9010",
    "RAL 9001",
    "Antraciet structuur",
-   "RAL 9005 structuur",
+   "RAL 9006",
    "RAL 7016",
    "RAL 7016 structuur"
   ],
@@ -830,7 +830,7 @@
    "480": 482,
    "500": 548
   },
-  "_fix": "2026-08-03: kleurmeerprijs bij breedte 280 stond een kolom verschoven (trend 181/ral 361 i.p.v. 148/295, boek p11). Klanten met een 280 cm breed Zip Design in Trend of RAL betaalden 36 resp. 73 euro te veel. | 2026-08-03: kleurmeerprijs voor breedte 100-180 ontbrak volledig (boek p10: Trend 115, RAL 230). Die maten vielen terug op de staffel 200 en betaalden 33 resp. 65 euro te veel."
+  "_fix": "2026-08-03: kleurmeerprijs bij breedte 280 stond een kolom verschoven (trend 181/ral 361 i.p.v. 148/295, boek p11). Klanten met een 280 cm breed Zip Design in Trend of RAL betaalden 36 resp. 73 euro te veel. | 2026-08-03: kleurmeerprijs voor breedte 100-180 ontbrak volledig (boek p10: Trend 115, RAL 230). Die maten vielen terug op de staffel 200 en betaalden 33 resp. 65 euro te veel. | 2026-08-03: standaardkleuren gelijkgetrokken met boek p10 — RAL 9006 toegevoegd (rekenden we ten onrechte meerprijs voor), RAL 9005 structuur verwijderd (staat niet bij dit product, rekenden we ten onrechte geen meerprijs voor)."
  },
  "sunbasic": {
   "category": "knikarmscherm",

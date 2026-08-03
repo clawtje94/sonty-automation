@@ -3680,5 +3680,31 @@
       }
     ],
     "processedAt": "2026-07-31T16:31:37.336Z"
+  },
+  "item:ad30d337-3c06-46aa-96fe-e4fcd8400d23": {
+    "summary": "Horchner",
+    "grippCompanyId": 99665,
+    "grippOfferId": 8877,
+    "rpDocNumber": "202610796",
+    "allOffers": [
+      {
+        "grippOfferId": 8877,
+        "rpDocNumber": "202610796"
+      }
+    ],
+    "processedAt": "2026-08-01T16:30:09.057Z"
+  },
+  "item:a3f247a0-da35-4a21-8bfe-b8b5aceaa4b0": {
+    "summary": "de Vries",
+    "grippCompanyId": 99666,
+    "grippOfferId": 8878,
+    "rpDocNumber": "202610835",
+    "allOffers": [
+      {
+        "grippOfferId": 8878,
+        "rpDocNumber": "202610835"
+      }
+    ],
+    "processedAt": "2026-08-01T16:30:12.832Z"
   }
 }

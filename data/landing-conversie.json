@@ -1,74 +1,74 @@
 {
- "peildatum": "2026-07-31T10:29:26.740Z",
+ "peildatum": "2026-08-03T05:45:28.011Z",
  "dagen": 45,
  "labels": {
   "Rolluik": {
-   "leads": 771,
-   "akk": 80,
-   "waarde": 269629.58999999997
+   "leads": 774,
+   "akk": 77,
+   "waarde": 256282.13
   },
   "Windvast": {
-   "leads": 656,
-   "akk": 42,
-   "waarde": 232011.23
+   "leads": 669,
+   "akk": 41,
+   "waarde": 232208.66999999998
   },
   "Voorraad scherm - 20% korting": {
-   "leads": 490,
-   "akk": 30,
-   "waarde": 126562.59
+   "leads": 473,
+   "akk": 28,
+   "waarde": 125222.08
   },
   "Pergola": {
-   "leads": 403,
-   "akk": 12,
-   "waarde": 82472.36
+   "leads": 417,
+   "akk": 15,
+   "waarde": 98603.36
   },
   "Suneye dichte cassette": {
-   "leads": 260,
-   "akk": 26,
-   "waarde": 95555.92
+   "leads": 263,
+   "akk": 27,
+   "waarde": 100029.92
   },
   "Suncube XL": {
-   "leads": 130,
+   "leads": 125,
    "akk": 12,
-   "waarde": 42353.81
-  },
-  "Markiezen": {
-   "leads": 88,
-   "akk": 11,
-   "waarde": 51669.43
+   "waarde": 36280.95
   },
   "Sunbasic dichte cassette": {
-   "leads": 87,
+   "leads": 85,
    "akk": 5,
    "waarde": 21650.6
   },
+  "Markiezen": {
+   "leads": 83,
+   "akk": 12,
+   "waarde": 54623.43
+  },
   "Sunelite dichte cassette": {
-   "leads": 76,
-   "akk": 2,
-   "waarde": 7216
+   "leads": 82,
+   "akk": 5,
+   "waarde": 17982
   },
   "(geen productregel)": {
-   "leads": 63,
-   "akk": 13,
-   "waarde": 121082
+   "leads": 72,
+   "akk": 18,
+   "waarde": 150553
   },
   "Winkel offerte": {
-   "leads": 55,
+   "leads": 58,
    "akk": 12,
    "waarde": 56791.98
   },
   "ZIP bovenliggende zonwering": {
-   "leads": 51,
+   "leads": 53,
    "akk": 3,
    "waarde": 21619.86
   },
   "Offerte op maat": {
-   "leads": 27,
+   "leads": 28,
    "akk": 4,
    "waarde": 6418.99
   },
   "Gordijnen": {
-   "leads": 24,
+   "leads": 21,
    "akk": 3,
    "waarde": 7618.860000000001
   },
@@ -78,7 +78,7 @@
    "waarde": 11210.86
   },
   "Niet windvast": {
-   "leads": 20,
+   "leads": 19,
    "akk": 2,
    "waarde": 6284
   },

@@ -1,5 +1,5 @@
 {
- "teller": 294,
+ "teller": 306,
  "toewijzingen": {
   "316305419": {
    "naam": "check",
@@ -2075,6 +2075,90 @@
    "tijd": "2026-08-01T07:08:23.126Z",
    "ticketId": null,
    "offertenummer": "202610811"
+  },
+  "31624616531": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-08-01T15:04:12.773Z",
+   "ticketId": null,
+   "offertenummer": "202610861"
+  },
+  "31651660566": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-08-01T15:04:19.982Z",
+   "ticketId": null,
+   "offertenummer": "202610842"
+  },
+  "31634258685": {
+   "naam": "inmeten",
+   "templateId": 242818,
+   "tijd": "2026-08-01T15:05:13.194Z",
+   "ticketId": null,
+   "offertenummer": "202610816"
+  },
+  "31646740662": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-08-01T15:05:20.355Z",
+   "ticketId": null,
+   "offertenummer": "202610818"
+  },
+  "31651468272": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-08-01T15:05:27.421Z",
+   "ticketId": null,
+   "offertenummer": "202610819"
+  },
+  "31619429351": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-08-01T15:06:20.409Z",
+   "ticketId": null,
+   "offertenummer": "202610820"
+  },
+  "31617612370": {
+   "naam": "inmeten",
+   "templateId": 242818,
+   "tijd": "2026-08-01T15:06:27.559Z",
+   "ticketId": null,
+   "offertenummer": "202610823"
+  },
+  "31618856318": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-08-01T15:06:35.018Z",
+   "ticketId": null,
+   "offertenummer": "202610824"
+  },
+  "31621866951": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-08-01T15:06:42.311Z",
+   "ticketId": null,
+   "offertenummer": "202610827"
+  },
+  "31617442030": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-08-01T15:07:35.356Z",
+   "ticketId": null,
+   "offertenummer": "202610828"
+  },
+  "31619150250": {
+   "naam": "inmeten",
+   "templateId": 242818,
+   "tijd": "2026-08-01T15:07:42.554Z",
+   "ticketId": null,
+   "offertenummer": "202610829"
+  },
+  "31643743545": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-08-01T15:07:57.096Z",
+   "ticketId": null,
+   "offertenummer": "202610831"
   }
  }
 }

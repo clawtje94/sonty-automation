@@ -122,6 +122,18 @@ async function telegram(text) {
       cum.dagen = (cum.dagen || 0) + 1;
       fs.writeFileSync(STATS_FILE, JSON.stringify(cum, null, 1));
 
+      // Totaal aantal gevoerde gesprekken (Daimy 3 aug): all-time uniek uit het logbestand,
+      // zelfde filter als de dagtelling. Zelf-corrigerend, geen losse teller nodig.
+      let totaalGesprekken = 0;
+      try {
+        const alleTickets = new Set();
+        for (const l of fs.readFileSync(LOG, 'utf8').trim().split('\n')) {
+          let e; try { e = JSON.parse(l); } catch { continue; }
+          if (e && e.ticket && e.antwoord && (e.actief || e.sonny || e.email)) alleTickets.add(e.ticket);
+        }
+        totaalGesprekken = alleTickets.size;
+      } catch {}
+
       const details = (stats.overtuigd_details || []).length ? '\n\nOvertuigd:\n' + stats.overtuigd_details.map(d => '• ' + d).join('\n') : '';
       await telegram(
         `🤖 AI-resultaten afgelopen dag (${perTicket.size} gesprekken gevoerd):\n\n` +
@@ -131,7 +143,7 @@ async function telegram(text) {
         `• Waarvan overtuigd vanuit twijfel: ${stats.overtuigd ?? '?'}\n` +
         details +
         (stats.samenvatting ? `\n\n${stats.samenvatting}` : '') +
-        `\n\n📊 Totaal tot nu toe (${cum.dagen} dagen): ${cum.geholpen} geholpen, ${cum.akkoord_inmeten} akkoord, ${cum.showroom} showroom, ${cum.overtuigd} overtuigd.`
+        `\n\n📊 Totaal tot nu toe (${cum.dagen} dagen): ${totaalGesprekken} gesprekken gevoerd, ${cum.geholpen} geholpen, ${cum.akkoord_inmeten} akkoord, ${cum.showroom} showroom, ${cum.overtuigd} overtuigd.`
       );
     } else {
       await telegram(`🤖 AI-resultaten: ${perTicket.size} gesprekken gevoerd (aantallen-classificatie mislukt: ${JSON.stringify(j).slice(0, 100)}).`);

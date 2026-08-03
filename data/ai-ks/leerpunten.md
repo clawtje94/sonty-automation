@@ -117,3 +117,5 @@
 - (2026-07-31) [team-notitie bij gesprek +31623078300] je had de bedraden offerte alvast kunnen sturen? en dan gewoon kunnen zeggen over het inmeten precies zoals altijd want die persoon zegt dus als eigenlijk akkoord dus je had bedraad kunnen sturen met de vraag of jij of hun hem zelf tekenen etc etc
 - (2026-07-31) [team-notitie bij gesprek +31646408076] waarom hbe je die losse offerte niet gewoon zelf gemaakt?
 - (2026-07-31) [team-notitie bij gesprek +31646408076] verwijder maar alle producten los van het voorraad scherm en de motage etc
+- (2026-08-02) [team-notitie bij gesprek +31620365252] bij onze producten als ze electrisch zijn zit er altijd 1 afstand bedining per product bij dit had je zelf ook kunnen weten want de prijs opbouw reken je een afstandsbediening per product uit?
+- (2026-08-03) [team-notitie bij gesprek +31620430884] regel maar

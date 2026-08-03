@@ -1316,10 +1316,19 @@ function calculateCorrectPrice(productKey, breedteCm, hoogteCm, uitvalCm, bedien
     // Tabel = Sunea IO. IO + handzender is standaard bestelling.
     // SunEye XL bestaat NIET handbediend (Daimy 01-08; boek p28: minderprijzen alleen
     // uitval 150/200 en Orea WT, geen draaistang). Geen prijs -> handmatige controle.
-    if (productKey === 'suneyeXL' && isHandbediend) return null;
     if (isIO) totaal += hz;
     else if (isDraaischakelaar) totaal -= 51; // Orea WT als "draaischakelaar" interpretatie
-    else if (isHandbediend) totaal -= 300; // draaistang
+    else if (isHandbediend) {
+      // Draaistang bestaat NIET bij elk model. Boek 2026: SunEye (p27) en SunBasic (p25)
+      // hebben een minderprijs draaistangbediening, SunEye XL (p29), SunBasic Cassette (p25)
+      // en SunElite (p31) niet — daar staat die regel simpelweg niet in de minderprijzen.
+      // Stond hier een vaste -300 voor alles, waardoor we handbediende schermen offreerden
+      // die de fabriek niet levert. Nu: geen draaistang in het boek = geen prijs = handmatige
+      // controle. Gecontroleerd tegen de boekpagina's op 2026-08-03.
+      const draaistang = product.minderprijzen?.draaistang;
+      if (typeof draaistang !== 'number') return null;
+      totaal += draaistang;
+    }
     else totaal += hz; // default = IO + handzender
   }
   else if (pCat === 'screen') {

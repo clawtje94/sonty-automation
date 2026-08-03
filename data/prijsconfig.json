@@ -2,29 +2,21 @@
   "_doel": "DE ENIGE PLEK waar prijsopslagen staan. Elk systeem leest dit bestand: v4, de WhatsApp- en mailbot, de offerte-tool en de configurator. Staat er ergens anders nog een getal als 1.10 of 1.15 in de prijscode, dan is dat een fout en faalt scripts/tests/geen-losse-opslagen.js.",
   "_let_op": "De opslagen staan op VERSCHILLENDE bodems. Ze zijn dus niet onderling vergelijkbaar en je kunt ze niet in één keer gelijktrekken. Zie per veld de toelichting.",
   "_gewijzigd": "2026-08-03 — samengevoegd uit 14 losse plekken in de code, waarden nog ONVERANDERD t.o.v. daarvoor",
-
-  "sunmasterMarkup": 1.10,
+  "sunmasterMarkup": 1.1,
   "_sunmasterMarkup": "Boekprijs in de Sunmaster-catalogus is een ADVIES VERKOOPPRIJS INCL BTW. Deze factor gaat daar bovenop en levert direct de klantprijs incl BTW.",
-
   "romaOpslag": 1.15,
   "_romaOpslag": "Roma-tabellen staan EXCL BTW. Deze factor levert direct de klantprijs INCL BTW; er gaat dus geen 1,21 meer overheen. LET OP: ons databestand noemt de tabel 'netto dealer', maar het Roma-boek zelf spreekt van bruto meerprijzen met korting, en markeert losse posten expliciet als 'netto, geen korting toepassen'. Welke van de twee het is bepaalt hoeveel marge hier echt op zit — uit te zoeken met Daimy.",
-
   "markiezenFactor": 1.21,
   "_markiezenFactor": "Markiezentabellen staan als VERKOOPPRIJS EXCL BTW in v4 zelf. Vandaag is deze factor puur de BTW (1,21) zonder opslag. Een hogere waarde is dus BTW plus opslag in één getal: 1,31 = 1,21 + 0,10.",
-
   "kleurTrendPct": 0.15,
-  "kleurRalPct": 0.20,
+  "kleurRalPct": 0.2,
   "_kleurPct": "Alleen voor producten zonder eigen meerprijstabel in het boek. Waar het boek wél een tabel geeft (uitvalschermen, zipscreen) wordt die gebruikt, met sunmasterMarkup erover.",
-
   "handzenderPrijs": 76,
   "_handzenderPrijs": "Situo 1 io handzender, boekprijs. Wordt vóór de markup opgeteld, dus hij beweegt mee.",
-
   "voorraadPrijs": 3175,
   "voorraadMontage": 275,
   "_voorraad": "Vaste actieprijs voor het voorraadscherm, staat los van het boek en beweegt NIET mee met de opslag.",
-
   "btw": 1.21,
-
   "uniluxAlIngerekend": true,
   "_unilux": "De Unilux-horprijzen in data/unilux-horren-2026.json hebben de opslag AL in de opgeslagen bedragen zitten (+10% op de adviesprijs). Er mag dus geen enkele factor meer overheen."
 }

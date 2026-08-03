@@ -123,3 +123,5 @@
 - (2026-08-03) [team-notitie bij e-mail kspadiwita@planet.nl] dit hoeft echt niet naar mij antwoord zelf maar...
 - (2026-08-03) [team-notitie bij gesprek +31612933170] waarom is dit ticket toegewezen aan mens nodig?
 - (2026-08-03) [team-notitie bij gesprek +31628677522] vraag even een foto te sturen zodat we het beter kunnen inschatten en na dat je foto hebt ontvangen door mens laten bekijken en beantwoorden
+- (2026-08-03) [team-notitie bij gesprek +31622368116] jij kan gewoon antwoorden
+- (2026-08-03) [team-notitie bij gesprek Nele] tanya plugge is van 4-8-26 tot 31-8-26 op vakantie dus in die tijd geen tickets meer toewijzen aan haar en ook geen vermeldingen doen, daarna kan het wel weer.

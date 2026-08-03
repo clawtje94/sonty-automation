@@ -979,7 +979,6 @@
     "745": 6278
    },
    "300": {
-    "300": 3096,
     "350": 3379,
     "400": 3653,
     "450": 3768,
@@ -1028,7 +1027,8 @@
    "uitval150": -180,
    "uitval200": -160,
    "oreaWT": -51
-  }
+  },
+  "_fix": "2026-08-03: cel breedte 300 bij uitval 300 verwijderd — die rij is leeg in boek p29 (minimale breedte is daar 349 cm). Stond bij ons wel, met de prijs van uitval 250 (3096), waardoor v4 een onbouwbaar scherm offreerde."
  },
  "sunelite": {
   "category": "knikarmscherm",

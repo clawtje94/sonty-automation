@@ -1,5 +1,12 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-31)
 
+## A/B-EINDRAPPORT INGEPLAND: 8 AUGUSTUS 09:30 (afspraak Daimy 3 aug)
+- Daimy wil op 8 augustus het EINDrapport van de A/B-test offerte-WhatsApp via Telegram, om dan de keuze te maken.
+- Gebouwd: `scripts/ab-test-eindrapport.js` (volledige looptijd i.p.v. 24u, z-toets per variant, betrouwbaarheidsmarges, concreet advies wel/geen winnaar). Verzendingen jonger dan 3 dagen tellen niet mee (reactievenster nog open).
+- Ingepland via launchd `nl.sonty.ab-eindrapport` (eenmalig 8 aug 09:30). **NA VERZENDING OPRUIMEN**: `launchctl bootout gui/501/nl.sonty.ab-eindrapport` (anders draait hij volgend jaar opnieuw).
+- Stand 3 aug (alle 400, incl. verse): totaal 28,5%; inmeten 38,6% (n=83), garantie/check 27,4%, kortweg 22,9%. Alleen rijpe verzendingen (n=269): inmeten 35,3%, check 31,5%, garantie 28,8%, kortweg 25,0%. Nog geen significante winnaar (z inmeten = 2,28, drempel 2,5 bij 4 varianten).
+
+
 ## AKKOORD-MAIL + TOTAALREGEL-FIX (31 juli, laatste blok)
 - Akkoord-bevestigingsmail gebouwd: na online ondertekenen krijgt de klant direct "Je akkoord is binnen, we gaan voor je aan de slag" via aanvragen@ (template akkoordMail, toggle automation melding-na-akkoord, best-effort in sign-route). End-to-end getest: S26-1005 ondertekend → Trengo-ticket 970646763 naar joey@sonty.nl. NB: Daimy's eerdere akkoord (S26-1004, 13:42) was vóór deze mail bestond, daarom kreeg hij toen niks.
 - Totaalregel brak op mobiel (bedrag wrapte onder het label): kort label + nowrap + schaalbare fontgrootte. Live gecheckt.

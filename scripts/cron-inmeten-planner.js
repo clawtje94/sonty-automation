@@ -160,6 +160,106 @@ function werkdagen(aantal = 10) {
   return dagen;
 }
 
+// ── echt boeken ─────────────────────────────────────────────────────────────
+// De volgorde is bewust deze: pas als de afspraak vaststaat gaat de RP-status door,
+// en pas als de Gripp-offerte bestaat hangen we de meetbon-link aan de opdracht.
+// Zo ontstaat er nooit een status "grip invullen" zonder afspraak, of een opdracht
+// die naar een meetbon wijst die niet bestaat.
+const GRIPP_KEY = require('./secrets.js').GRIPP_API_KEY;
+
+async function grippCall(method, params) {
+  const r = await fetch('https://api.gripp.com/public/api3.php', {
+    method: 'POST',
+    headers: { Authorization: 'Bearer ' + GRIPP_KEY, 'Content-Type': 'application/json' },
+    body: JSON.stringify([{ method, params, id: 1 }]),
+  });
+  return (await r.json())?.[0]?.result;
+}
+
+/** Gripp-offertenummer zoeken dat cron-gripp-invullen zojuist heeft aangemaakt. */
+async function zoekGrippNummer(naam) {
+  let log = {};
+  try { log = JSON.parse(fs.readFileSync(path.join(__dirname, '.gripp-invullen-sent.json'), 'utf8')); } catch { return null; }
+  const regel = log[naam];
+  if (!regel?.grippOfferId) return null;
+  // Nooit op naam koppelen in Gripp zelf: we hebben de id, dus we halen het nummer op.
+  const res = await grippCall('offer.get', [
+    [{ field: 'offer.id', operator: 'equals', value: regel.grippOfferId }],
+    { paging: { firstresult: 0, maxresults: 1 } },
+  ]);
+  const nr = res?.rows?.[0]?.number;
+  return nr ? String(nr) : null;
+}
+
+async function planadoPost(ep, body, methode = 'POST') {
+  const r = await fetch('https://api.planadoapp.com/v2' + ep, {
+    method: methode,
+    headers: {
+      Authorization: 'Bearer ' + PLANADO_KEY,
+      'Content-Type': 'application/json',
+      'X-Planado-Notify-Assignees': 'false',
+    },
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) throw new Error(`Planado ${r.status}: ${(await r.text()).slice(0, 120)}`);
+  return r.status === 204 ? {} : r.json();
+}
+
+async function verwerkLead(lead, item, slot, duurMin) {
+  const inmeter = INMETERS.find((i) => i.naam === slot.inmeter);
+
+  // 1. de afspraak zelf
+  const job = await planadoPost('/jobs', {
+    template_uuid: '1f11c802-65cd-6aa0-9d06-7e73cee772e4',
+    description: `Inmeten — ${lead.naam}\n${lead.volledigAdres}\n\n${lead.aantalProducten} product(en): ${lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ')}`,
+    contacts: [{ type: 'phone', name: lead.naam, value: lead.telefoon || '-' }],
+    address: { formatted: lead.volledigAdres },
+    scheduled_at: slot.aankomst.toISOString(),
+    scheduled_duration: { minutes: duurMin },
+    assignee: { uuid: inmeter.uuid },
+    external_id: `rp-${lead.id}`,
+  });
+  const jobUuid = job.job_uuid || job.uuid;
+
+  // 2. RP door naar "grip invullen" — de enige toegestane schrijfactie in RP
+  const statusOk = await rpZetStatus(lead.id, GRIP_INVULLEN);
+  if (!statusOk) throw new Error('afspraak staat, maar RP-status kon niet worden gezet');
+
+  // 3. Gripp-offerte laten aanmaken door het bestaande script
+  await new Promise((klaar, mis) => {
+    require('child_process').execFile(
+      process.execPath, [path.join(__dirname, 'cron-gripp-invullen.js')],
+      { timeout: 5 * 60 * 1000 },
+      (e) => (e && !/timeout/i.test(e.message) ? mis(new Error('gripp-invullen: ' + e.message)) : klaar()),
+    );
+  });
+
+  // 4. meetbon-link pas nu, want nu bestaat het Gripp-nummer
+  const grippNr = await zoekGrippNummer(lead.naam);
+  if (grippNr) {
+    const detail = await (await fetch(`https://api.planadoapp.com/v2/jobs/${jobUuid}`, {
+      headers: { Authorization: 'Bearer ' + PLANADO_KEY },
+    })).json();
+    const huidig = detail.job || detail;
+    await planadoPost(`/jobs/${jobUuid}`, {
+      version: huidig.version,
+      description: `${huidig.description}\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/${grippNr}`,
+      external_id: `gripp-${grippNr}`,
+    }, 'PATCH');
+    // De bon zelf aanmaken en voorvullen uit Gripp.
+    await fetch(`https://sonty-website.vercel.app/api/meetbon/bon/${grippNr}`, {
+      headers: { 'x-meet-code': process.env.BELSCHERM_CODE || 'sonty2288' },
+    }).catch(() => {});
+  }
+
+  const tijd = slot.aankomst.toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+  return {
+    samenvatting: `${slot.inmeter} ${tijd} (${duurMin} min, +${slot.extraRijtijdMin} min rijtijd)` +
+      (grippNr ? ` · Gripp ${grippNr} · meetbon klaar` : ' · LET OP: Gripp-nummer nog niet gevonden, meetbon-link ontbreekt'),
+    grippNr,
+  };
+}
+
 // ── hoofdlus ────────────────────────────────────────────────────────────────
 async function main() {
   const state = laadState();
@@ -211,9 +311,15 @@ async function main() {
     regels.push(`${lead.naam} (${lead.plaats}, ${duur} min): ${aanbod.map((s) => `${s.inmeter} ${s.datum.slice(5)} ${venster(s)} +${s.extraRijtijdMin}min`).join(' | ')}`);
 
     if (LIVE) {
-      // Bewust nog niet ingevuld: boeken en RP-status doorzetten komt pas als de
-      // schaduwrun bevestigt dat de slots kloppen.
-      console.log('    (live boeken nog niet aangezet)');
+      const gekozen = aanbod[0];
+      try {
+        const uitkomst = await verwerkLead(lead, item, gekozen, duur);
+        console.log(`    GEBOEKT: ${uitkomst.samenvatting}`);
+        regels.push(`  → geboekt: ${uitkomst.samenvatting}`);
+      } catch (e) {
+        console.log(`    FOUT bij boeken: ${e.message}`);
+        regels.push(`  → boeken MISLUKT: ${e.message}`);
+      }
     }
     state.aangeboden[lead.id] = { naam: lead.naam, op: new Date().toISOString(), aanbod: aanbod.length };
   }

@@ -11,6 +11,23 @@ const MINUUT = 60 * 1000;
 const MARGE_MIN = 5;
 
 /**
+ * Boven deze extra rijtijd bieden we een slot NIET aan.
+ * Zonder deze grens propt de planner elke klus in het eerstvolgende gaatje, ook als dat
+ * 67 minuten omrijden kost. Dan geef je de besparing die clusteren oplevert direct weer
+ * weg. Past een lead nergens goedkoop, dan is wachten beter: over een paar dagen ligt er
+ * bijna altijd een tweede klus in dezelfde hoek.
+ *
+ * De grens volgt uit de huidige praktijk: 14,3 uur rijden per week op ongeveer 27
+ * inmetingen is ruim 30 minuten reistijd per klus (reistijden-analyse 22 juli). Kost een
+ * invoeging MINDER dan dat, dan is hij per definitie beter dan hoe het nu gaat. Kost hij
+ * meer, dan rijd je de besparing weer weg en is wachten op een buur verstandiger.
+ *
+ * Bewust geen scherpere grens: dan blijven leads liggen zonder dat het iets oplevert.
+ * Wat "goed" is, moet uit de praktijk blijken -- vandaar de wachtteller in de planner.
+ */
+const MAX_EXTRA_RIJTIJD_MIN = 30;
+
+/**
  * @param {Object} opts
  * @param {Array<{start: Date|string, eind: Date|string, adres: string}>} opts.agenda
  *        Bestaande afspraken van deze inmeter (alle dagen door elkaar mag).
@@ -91,6 +108,8 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen }) {
  * verschillende dagen en dagdelen. Drie keer hetzelfde tijdstip aanbieden is geen keuze.
  */
 function kiesAanbod(slots, aantal = 3) {
+  // Alleen slots die de route niet onnodig duur maken.
+  slots = slots.filter((s) => s.extraRijtijdMin <= MAX_EXTRA_RIJTIJD_MIN);
   const gekozen = [];
   const gebruikt = new Set();
   for (const s of slots) {
@@ -116,4 +135,14 @@ function venster(slot) {
   return `${hhmm(slot.aankomst)} - ${hhmm(tot)}`;
 }
 
-module.exports = { zoekSlots, kiesAanbod, venster, MARGE_MIN };
+/**
+ * Waarom een lead (nog) geen aanbod krijgt. Zonder deze uitleg lijkt "geen slot" op een
+ * storing, terwijl het meestal een bewuste keuze is om te wachten op een buur.
+ */
+function waaromGeenAanbod(slots) {
+  if (!slots.length) return 'geen enkel gat groot genoeg in de komende werkdagen';
+  const goedkoopste = Math.min(...slots.map((s) => s.extraRijtijdMin));
+  return `alle plekken kosten te veel omrijden (goedkoopste +${goedkoopste} min, grens is ${MAX_EXTRA_RIJTIJD_MIN}) — beter wachten tot er een klus in dezelfde hoek bijkomt`;
+}
+
+module.exports = { zoekSlots, kiesAanbod, venster, waaromGeenAanbod, MARGE_MIN, MAX_EXTRA_RIJTIJD_MIN };

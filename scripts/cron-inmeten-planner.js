@@ -10,7 +10,7 @@
 // minuten uit. Zie docs/keten-ontwerp.md.
 const fs = require('fs');
 const path = require('path');
-const { zoekSlots, kiesAanbod, venster } = require('./lib/slotzoeker');
+const { zoekSlots, kiesAanbod, venster, waaromGeenAanbod } = require('./lib/slotzoeker');
 const { schatDuur } = require('./lib/inmeetduur');
 
 const RP_API_KEY = 'reuzenpanda_cpat_WMD2KmDRune53bj7.d0_ls8loPpAjb2TrSNOS_Xd_QLdxHq1xwOC9pyyJado';
@@ -35,6 +35,11 @@ const LIVE = process.argv.includes('--live');
 // waarvan de naam die tekst bevat.
 const ALLEEN = (process.argv.find((a) => a.startsWith('--alleen=')) || '').split('=')[1] || null;
 const STATE = path.join(__dirname, '..', 'data', 'inmeten-planner-state.json');
+
+// Wachten op een buur mag, eindeloos wachten niet. Staat een lead langer dan dit te
+// wachten, dan gaat het beste beschikbare slot alsnog naar de klant en krijgt kantoor
+// een seintje. Anders bespaar je kilometers over de rug van je doorlooptijd.
+const MAX_WACHTDAGEN = 5;
 
 // ── kleine helpers ──────────────────────────────────────────────────────────
 const laadState = () => { try { return JSON.parse(fs.readFileSync(STATE, 'utf8')); } catch { return { aangeboden: {} }; } };
@@ -364,10 +369,24 @@ async function main() {
     console.log(`\n  ${lead.naam} — ${lead.volledigAdres}`);
     console.log(`    ${lead.aantalProducten} product(en) uit ${lead.bron}: ${lead.producten.map((p) => `${p.aantal}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).join(', ') || '—'} → ${duur} min`);
     if (!aanbod.length) {
-      console.log('    GEEN slot gevonden in de komende 10 werkdagen');
-      regels.push(`${lead.naam} (${lead.plaats}): geen slot`);
+      const reden = waaromGeenAanbod(beste);
+      const sinds = state.wachtend?.[lead.id] || new Date().toISOString();
+      state.wachtend = { ...(state.wachtend || {}), [lead.id]: sinds };
+      const dagen = Math.floor((Date.now() - new Date(sinds)) / 86400000);
+
+      if (dagen >= MAX_WACHTDAGEN && beste.length) {
+        // Te lang gewacht: de klant gaat voor de route.
+        const noodAanbod = beste.slice(0, 3);
+        console.log(`    NA ${dagen} DAGEN WACHTEN TOCH AANBIEDEN (duurder, maar de klant wacht al te lang)`);
+        for (const s2 of noodAanbod) console.log(`    ${s2.inmeter}: ${s2.datum} ${venster(s2)}  +${s2.extraRijtijdMin} min`);
+        regels.push(`${lead.naam} (${lead.plaats}): ${dagen} dagen gewacht, nu toch aangeboden — ${noodAanbod.map((s2) => `${s2.inmeter} ${s2.datum.slice(5)} ${venster(s2)} +${s2.extraRijtijdMin}min`).join(' | ')}`);
+      } else {
+        console.log(`    NOG GEEN AANBOD (${dagen} dag(en) wachtend): ${reden}`);
+        regels.push(`${lead.naam} (${lead.plaats}): wacht ${dagen}/${MAX_WACHTDAGEN} dagen — ${reden}`);
+      }
       continue;
     }
+    delete state.wachtend?.[lead.id];
     for (const s of aanbod) {
       console.log(`    ${s.inmeter}: ${s.datum} ${venster(s)}  +${s.extraRijtijdMin} min rijtijd (na ${s.naVorige.slice(0, 24)})`);
     }

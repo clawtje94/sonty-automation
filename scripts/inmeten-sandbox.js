@@ -98,13 +98,17 @@ async function main() {
 
   const { evs } = await haalOutlookAgenda(token);
   const levend = evs.filter((e) => !e.IsCancelled);
+
+  // ALLES bezet tijd, niet alleen het inmeten. Een montage, vakantie of vergadering
+  // blokkeert de inmeter net zo goed. Alleen voor de reistijd heb je een adres nodig;
+  // zonder adres telt de afspraak nog steeds als bezet.
   const inmeet = levend.filter((e) => isInmeten(e.Subject));
-  const metAdres = inmeet.filter((e) => (e.Location?.DisplayName || '').trim().length > 5);
+  const metAdres = levend.filter((e) => (e.Location?.DisplayName || '').trim().length > 5);
 
   console.log(`Outlook "Sonty Montage", komende 21 dagen:`);
-  console.log(`  ${levend.length} afspraken totaal`);
+  console.log(`  ${levend.length} afspraken totaal (ALLEMAAL bezettend)`);
   console.log(`  ${inmeet.length} daarvan inmeten`);
-  console.log(`  ${metAdres.length} met een bruikbaar adres (rest kan niet meegerekend worden)\n`);
+  console.log(`  ${metAdres.length} met een adres (die kunnen ook voor reistijd meetellen)\n`);
 
   // De agenda "Sonty Montage" bevat ALLE inmeters door elkaar. Wie de klus doet staat
   // in de deelnemers, niet in het onderwerp. Zonder deze splitsing lijkt de dag
@@ -113,19 +117,28 @@ async function main() {
     .map((a) => a.EmailAddress?.Name || '')
     .find((n) => n && !/^sonty$/i.test(n)) || 'onbekend';
 
-  const alles = metAdres.map((e) => ({
+  const alles = levend.map((e) => ({
     start: e.Start.DateTime + 'Z',
     eind: e.End.DateTime + 'Z',
-    adres: e.Location.DisplayName.trim(),
+    adres: (e.Location?.DisplayName || '').trim(),
     klant: (e.Subject || '').replace(/^inmeten sonty\s*[—-]?\s*/i, '').slice(0, 28),
     wie: wieDoetHet(e),
   })).sort((a, b) => a.start.localeCompare(b.start));
 
+  // Alleen de twee inmeters plannen we in (Daimy: Sjoerd en Joey starten). De rest zijn
+  // monteurs; hun agenda's tellen hier niet mee, anders bied je een montageploeg aan
+  // voor een inmeting.
+  const INMETERS = ['Sjoerd', 'Joey'];
   const perPersoon = {};
-  for (const a of alles) (perPersoon[a.wie] ||= []).push(a);
-  console.log('Inmeetafspraken per persoon:');
+  for (const a of alles) {
+    const voornaam = a.wie.split(' ')[0];
+    if (!INMETERS.includes(voornaam)) continue;
+    (perPersoon[voornaam] ||= []).push(a);
+  }
+  console.log('Afspraken per inmeter (alles wat tijd bezet):');
   for (const [wie, l] of Object.entries(perPersoon).sort((a, b) => b[1].length - a[1].length)) {
-    console.log(`  ${wie.padEnd(22)} ${l.length}`);
+    const meten = l.filter((x) => isInmeten(x.klant) || /inmeet|inmeten/i.test(x.klant)).length;
+    console.log(`  ${wie.padEnd(10)} ${String(l.length).padStart(3)} afspraken`);
   }
 
   // De lead ophalen
@@ -147,17 +160,30 @@ async function main() {
   console.log(`${producten.length} product(en): ${producten.map((p) => `${p.aantal}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).join(', ')}`);
   console.log(`geschatte inmeetduur: ${duur} min\n`);
 
-  const dagen = [];
-  const dd = new Date(); dd.setDate(dd.getDate() + 1);
-  while (dagen.length < 10) {
-    if (dd.getDay() !== 0 && dd.getDay() !== 6) dagen.push({ datum: dd.toISOString().slice(0, 10), van: '08:30', tot: '17:00' });
-    dd.setDate(dd.getDate() + 1);
-  }
+  // Werkdagen NIET verzinnen maar afleiden uit wat iemand werkelijk doet. Joey heeft
+  // 11 afspraken op woensdag tegen 47 op maandag: dat is zijn vrije dag. En hij werkt
+  // wel op zaterdag (16), wat een vaste ma-vr-aanname helemaal zou missen.
+  const werkdagenVan = (eigen) => {
+    const perDag = [0, 0, 0, 0, 0, 0, 0];
+    for (const a of eigen) perDag[new Date(a.start).getDay()]++;
+    const top = Math.max(...perDag);
+    // Minder dan een vijfde van zijn drukste dag telt als niet-werkdag.
+    return perDag.map((n) => n >= top * 0.2);
+  };
 
-  // Per inmeter apart zoeken, en dan pas vergelijken wie het goedkoopst kan.
   const alleSlots = [];
   for (const [wie, eigen] of Object.entries(perPersoon)) {
-    if (wie === 'onbekend' || eigen.length < 2) continue;
+    if (eigen.length < 2) continue;
+    const werkt = werkdagenVan(eigen);
+    const dagen = [];
+    const dd = new Date(); dd.setDate(dd.getDate() + 1);
+    while (dagen.length < 10 && dagen.length < 14) {
+      if (werkt[dd.getDay()]) dagen.push({ datum: dd.toISOString().slice(0, 10), van: '08:30', tot: '17:00' });
+      dd.setDate(dd.getDate() + 1);
+      if (dd > new Date(Date.now() + 21 * 86400000)) break;
+    }
+    const DAGNAAM = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
+    console.log(`  ${wie} werkt op: ${werkt.map((w, i) => (w ? DAGNAAM[i] : null)).filter(Boolean).join(', ')}`);
     const s2 = await zoekSlots({ agenda: eigen, adres, duurMin: duur, werkdagen: dagen, agendaOnbetrouwbaar: true });
     alleSlots.push(...s2.map((x) => ({ ...x, inmeter: wie })));
   }
@@ -167,13 +193,13 @@ async function main() {
   console.log('een berekende meerprijs zou dubbeltelling zijn. Hieronder alleen de plekken');
   console.log('waar de klus ECHT past, op tijd gesorteerd.\n');
   for (const s of slots.slice(0, 8)) {
-    console.log(`  ${s.inmeter.split(' ')[0].padEnd(8)} ${s.datum} ${venster(s)}  | tussen ${String(s.naVorige).slice(0, 26)} en ${String(s.voorVolgende).slice(0, 26)}`);
+    console.log(`  ${s.inmeter.padEnd(8)} ${s.datum} ${venster(s)}  | tussen ${String(s.naVorige).slice(0, 26)} en ${String(s.voorVolgende).slice(0, 26)}`);
   }
 
   const aanbod = kiesAanbod(slots, 3);
   console.log(`\n=== VOORSTEL AAN DE KLANT ===`);
   if (!aanbod.length) console.log('  nog geen aanbod — ' + waaromGeenAanbod(slots));
-  else for (const s of aanbod) console.log(`  ${s.datum} ${venster(s)}  door ${s.inmeter.split(' ')[0]}`);
+  else for (const s of aanbod) console.log(`  ${s.datum} ${venster(s)}  door ${s.inmeter}`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

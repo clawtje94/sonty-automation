@@ -8,6 +8,7 @@
 //          node scripts/ai-ks/daemon.js --ticket 963416960   (één specifiek ticket, voor test)
 const fs = require('fs');
 const { teamTags, OVERDRACHT_HERKENNING } = require(`./team-tags.js`);
+const { terugkomMoment, bruikbareVoornaam } = require('./terugkom-moment.js');
 const path = require('path');
 const CFG = require('./config.js');
 const { beantwoord } = require('./agent.js');
@@ -907,9 +908,21 @@ async function verwerkTicket(t, state) {
   // Terugkom-belofte in het zojuist beantwoorde klantbericht? Registreren voor de reminder.
   if ((sonnyMode || actiefTicket || liveTest) && res.antwoord && TERUGKOM_PATROON.test(laatste.tekst)) {
     const tk = loadTerugkomers();
-    tk[t.id] = { klantTijd: laatste.tijd, phone: t.contact?.phone || null, naam: t.contact?.full_name || null, geregistreerd: new Date().toISOString() };
+    // ONTHOUD WANNEER DE KLANT ZEI TERUG TE KOMEN (Daimy 2026-08-04, Ebru +31616463983).
+    // Zij schreef twee keer "ik laat het weten voor donderdag 6 augustus" en kreeg dinsdagochtend
+    // al een reminder, want die ging altijd na 22 uur. Noemt iemand zelf een moment, dan houden
+    // we ons daaraan; zegt hij niets concreets, dan blijft het 22 uur.
+    const moment = terugkomMoment(laatste.tekst, new Date(String(laatste.tijd).replace(' ', 'T')).getTime());
+    tk[t.id] = {
+      klantTijd: laatste.tijd,
+      phone: t.contact?.phone || null,
+      naam: t.contact?.full_name || null,
+      geregistreerd: new Date().toISOString(),
+      opvolgenVanaf: new Date(moment.tijd).toISOString(),
+      reden: moment.reden,
+    };
     fs.writeFileSync(TERUGKOMERS_FILE, JSON.stringify(tk, null, 1));
-    console.log('  terugkomer geregistreerd → reminder na ~22u stilte');
+    console.log(`  terugkomer geregistreerd → opvolgen vanaf ${new Date(moment.tijd).toLocaleString('nl-NL')} (${moment.reden})`);
   }
 
   state.verwerkt[sleutel] = { tijd: new Date().toISOString(), acties: res.acties.length };
@@ -1016,6 +1029,11 @@ async function verwerkPendingOffertes() {
 // (tekst van Daimy, 2026-07-16). Komt de klant zelf eerder terug, dan vervalt hij. Is het
 // venster toch verlopen, dan een Telegram-melding dat bellen de enige route is.
 const TERUGKOMERS_FILE = path.join(path.dirname(CFG.POLL_STATE_FILE), 'terugkomers.json');
+// Korte remindertemplate voor als het 24-uursvenster dicht is (Daimy 2026-08-04).
+// Tekst: "Hoi {{1}}, even een kort berichtje over ons gesprek. Laat maar weten als ik nog ergens
+// mee kan helpen!" Zet op null zolang Meta hem niet heeft goedgekeurd; dan valt hij terug op een
+// Telegram-melding in plaats van een verzending die toch mislukt.
+const REMINDER_TEMPLATE_ID = Number(process.env.REMINDER_TEMPLATE_ID || 0) || null;
 function loadTerugkomers() { try { return JSON.parse(fs.readFileSync(TERUGKOMERS_FILE, 'utf8')); } catch { return {}; } }
 const TERUGKOM_PATROON = /(kom\w*[^.!?]{0,30}op terug|laat\w* (het|je)[^.!?]{0,20}weten|even overleggen|overlegg?\w* met|er[^.!?]{0,20}voor zitten|denk\w* er[^.!?]{0,15}over na|morgen[^.!?]{0,25}(terug|weten|verder|bevestig)|(vanavond|morgen|dit weekend|volgende week)[^.!?]{0,15}op terug)/i;
 
@@ -1026,20 +1044,46 @@ async function verwerkTerugkomers() {
   for (const tid of ids) {
     const info = tk[tid];
     const uur = (Date.now() - new Date(String(info.klantTijd).replace(' ', 'T')).getTime()) / 3600000;
-    if (!isFinite(uur) || uur < 22) continue;
+    if (!isFinite(uur)) continue;
+    // Wachten tot het moment dat de klant zelf noemde. Oude regels zonder dat veld vallen terug
+    // op de 22 uur van voorheen.
+    const vanaf = info.opvolgenVanaf ? new Date(info.opvolgenVanaf).getTime() : null;
+    if (vanaf ? Date.now() < vanaf : uur < 22) continue;
     const res = await tGet(`/tickets/${tid}`);
     const t = res?.data || res;
     if (!t || t.status !== 'OPEN') { delete tk[tid]; continue; }
     const msgs = await haalBerichten(tid);
     const inbound = (msgs?.data || []).filter(m => m.type === 'INBOUND').map(m => String(m.created_at)).sort();
     if (inbound.length && inbound[inbound.length - 1] > String(info.klantTijd)) { delete tk[tid]; continue; } // klant kwam zelf al terug
+    // VENSTER DICHT: dan mag een vrij bericht niet meer, maar een goedgekeurde template wel
+    // (Daimy 2026-08-04: "maak 1 template aan die je kan sturen, kort en simpel kan altijd").
+    // Dit gebeurt vaak, want wie zegt "ik laat het donderdag weten" is tegen die tijd allang
+    // voorbij de 24 uur. Zonder deze route bleef er alleen een Telegram-melding over.
     if (uur >= 23.7) {
       delete tk[tid];
-      await telegram(`⏰ Terugkomer gemist: ${info.naam || info.phone} beloofde terug te komen maar bleef stil en het WhatsApp-venster is nu dicht. Bellen is de enige route.`);
+      const voornaamT = bruikbareVoornaam(info.naam);
+      const tel = info.phone || null;
+      let gelukt = false;
+      if (tel && REMINDER_TEMPLATE_ID) {
+        const tw = await fetch('https://app.trengo.com/api/v2/wa_sessions', {
+          method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ recipient_phone_number: tel, hsm_id: REMINDER_TEMPLATE_ID, channel_id: 1359857,
+            params: [{ type: 'body', key: '{{1}}', value: voornaamT || 'daar' }] }),
+        });
+        gelukt = tw.ok;
+        if (!tw.ok) console.error(`  [${tid}] remindertemplate mislukt: ${tw.status} ${(await tw.text()).slice(0, 160)}`);
+      }
+      if (gelukt) {
+        await plaatsNotitie(tid, `🤖 AI-KS: het 24-uursvenster was dicht, daarom de korte remindertemplate gestuurd (klant zei terug te komen: ${info.reden || 'geen moment genoemd'}).`);
+        await telegram(`⏰ Remindertemplate gestuurd aan ${info.naam || tel} (venster was dicht, klant beloofde terug te komen).`);
+      } else {
+        await telegram(`⏰ Terugkomer gemist: ${info.naam || info.phone} beloofde terug te komen maar bleef stil en het WhatsApp-venster is nu dicht.${REMINDER_TEMPLATE_ID ? ' De remindertemplate kon niet verstuurd worden.' : ' Er is nog geen goedgekeurde remindertemplate.'} Bellen is de enige route.`);
+      }
       continue;
     }
     if (!(isActiefTicket(t) || isLiveTestContact(t))) { delete tk[tid]; continue; }
-    const voornaam = (info.naam || '').split(' ')[0];
+    // Geen emoji als aanhef: Ebru stond in Trengo als "🤷🏻‍♀️" en kreeg letterlijk "Hoi 🤷🏻‍♀️,".
+    const voornaam = bruikbareVoornaam(info.naam);
     const tekst = `Hoi${voornaam ? ' ' + voornaam : ''}, kleine reminder vanaf mijn kant: als ik nog ergens bij kan helpen, laat het maar weten!`;
     const sendRes = isLiveTestContact(t) ? await sendLiveReply(t, tekst) : await sendActiefReply(t, tekst);
     delete tk[tid];

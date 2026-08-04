@@ -1,4 +1,15 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-07-31)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-04)
+
+## KETENONDERZOEK PLANADO + MEETBON (4 aug, opdracht Daimy "hele keten moet kloppen")
+- **BESLUIT Daimy: Planado BLIJFT** (app + monteur-tracking). Eis: alles moet goed samenwerken vóórdat het live gaat.
+- **Gewenste keten**: RP-status "inmeten inplannen" → planningsbot plant in → inmeter krijgt alle Gripp-info + meetbonnen van gekozen producten (+ product toevoegen) → op locatie eindofferte in Gripp maken én laten ondertekenen → aanbetalingsfactuur automatisch → betaald → meetbonnen naar besteller → alles door naar de monteurs.
+- **Stand (read-only geverifieerd)**: meetbon-app werkt maar NUL productie (log 68x "0 complete meetbonnen"); Planado 82 jobs, allemaal inmeten, 0 ooit afgemeld, **sync staat in geen plist dus Planado loopt 7 aug leeg**; 1 van 82 jobs heeft een meetbon-link; monteur krijgt alleen agenda-afspraak met naam/adres/tijd.
+- **Blokkers**: (1) geen gedeelde sleutel — afspraak draagt RP-nummer 20267876, meetbon staat op Gripp 1008; (2) "advies/weet nog niet" is geldig eindantwoord op beslissende velden, bon geldt dan tóch als compleet; (3) meetbon-data bereikt monteur nooit (Planado-veld "Meetgegevens (van inmeet)" wordt door geen code gevuld); (4) validatie alleen client-side, PUT accepteert lege bon; (5) geen gereedmelding.
+- **GEFIXT + GEPUSHT**: aanbetalingsfactuur werd gezocht op `%Aanbetaling%(<nr>)%` en pakte blind rows[0]; die searchname bevat zowel offerte- als factuurnummer. Scan echte historie: **248 botsingskandidaten, 210x factuur van een ándere klant, 3x ander betaaloordeel** — doorzetter kon bestellen op andermans betaling. Nu: eerste haakjesgroep = offertenummer, creditfacturen uitgesloten, betaalde treffer boven eerste. `lib/meetbon/server.ts`, build groen.
+- **Harde beperkingen**: Planado-rapportvelden alleen via browser (`/v2/custom_fields` bestaat niet) en worden bij aanmaak gekopieerd + losgekoppeld → sjabloon eerst goed, dán jobs aanmaken. `offer.update` bestaat niet: wijzigen = delete+create, wist offertenummer én historie. RP heeft geen webhook → polling 10-15 min (`?limit=200`, clientside filteren). Meetbon werkt niet offline (dirty-vlag wordt gewist vóór versturen).
+- **Wel bewezen mogelijk**: RP uitlezen 0,6s/call; Bookings boeken via `scripts/bookings-api.js` boek(); `offer.create` met `signingenabled:true` draait al in productie; Gripp-viewer heeft echt krabbelformulier; eigen ondertekenflow live sinds 8 juli; betaling staat mediaan binnen 0,5 dag in Gripp.
+- **OPEN V2 bij Daimy**: welke 2 inmeters starten, en vullen zij nog iets in de Planado-app zelf in of is de webbon de enige waarheid (nu vragen bestaande jobs om maten die nergens heen gaan).
+
 
 ## A/B-EINDRAPPORT INGEPLAND: 8 AUGUSTUS 09:30 (afspraak Daimy 3 aug)
 - Daimy wil op 8 augustus het EINDrapport van de A/B-test offerte-WhatsApp via Telegram, om dan de keuze te maken.

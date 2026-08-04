@@ -1029,11 +1029,28 @@ async function verwerkPendingOffertes() {
 // (tekst van Daimy, 2026-07-16). Komt de klant zelf eerder terug, dan vervalt hij. Is het
 // venster toch verlopen, dan een Telegram-melding dat bellen de enige route is.
 const TERUGKOMERS_FILE = path.join(path.dirname(CFG.POLL_STATE_FILE), 'terugkomers.json');
-// Korte remindertemplate voor als het 24-uursvenster dicht is (Daimy 2026-08-04).
+// Korte remindertemplate voor als het 24-uursvenster dicht is (Daimy 2026-08-04, door hem zelf
+// in Meta aangemaakt als "Reminder whatsapp sunny").
 // Tekst: "Hoi {{1}}, even een kort berichtje over ons gesprek. Laat maar weten als ik nog ergens
-// mee kan helpen!" Zet op null zolang Meta hem niet heeft goedgekeurd; dan valt hij terug op een
-// Telegram-melding in plaats van een verzending die toch mislukt.
-const REMINDER_TEMPLATE_ID = Number(process.env.REMINDER_TEMPLATE_ID || 0) || null;
+// mee kan helpen!"
+const REMINDER_TEMPLATE_ID = Number(process.env.REMINDER_TEMPLATE_ID || 0) || 243872;
+
+/**
+ * Is de template op dít moment goedgekeurd door Meta?
+ *
+ * Bewust elke keer live opvragen in plaats van een vlag in de code. Bij AB1 (242731) stond de
+ * template in Trengo op ACCEPTED terwijl Meta hem alsnog weigerde, en toen kwamen 16 van de 18
+ * berichten niet aan en bleven er lege tickets achter. Een status die je niet controleert is een
+ * aanname, en die kost hier klantcontact.
+ */
+async function templateBruikbaar(id) {
+  if (!id) return false;
+  try {
+    const r = await tGet(`/wa_templates/${id}`);
+    const d = r?.data || r;
+    return String(d?.status || d?.state || '').toUpperCase() === 'ACCEPTED';
+  } catch { return false; }
+}
 function loadTerugkomers() { try { return JSON.parse(fs.readFileSync(TERUGKOMERS_FILE, 'utf8')); } catch { return {}; } }
 const TERUGKOM_PATROON = /(kom\w*[^.!?]{0,30}op terug|laat\w* (het|je)[^.!?]{0,20}weten|even overleggen|overlegg?\w* met|er[^.!?]{0,20}voor zitten|denk\w* er[^.!?]{0,15}over na|morgen[^.!?]{0,25}(terug|weten|verder|bevestig)|(vanavond|morgen|dit weekend|volgende week)[^.!?]{0,15}op terug)/i;
 
@@ -1064,7 +1081,7 @@ async function verwerkTerugkomers() {
       const voornaamT = bruikbareVoornaam(info.naam);
       const tel = info.phone || null;
       let gelukt = false;
-      if (tel && REMINDER_TEMPLATE_ID) {
+      if (tel && await templateBruikbaar(REMINDER_TEMPLATE_ID)) {
         const tw = await fetch('https://app.trengo.com/api/v2/wa_sessions', {
           method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' },
           body: JSON.stringify({ recipient_phone_number: tel, hsm_id: REMINDER_TEMPLATE_ID, channel_id: 1359857,
@@ -1077,7 +1094,7 @@ async function verwerkTerugkomers() {
         await plaatsNotitie(tid, `🤖 AI-KS: het 24-uursvenster was dicht, daarom de korte remindertemplate gestuurd (klant zei terug te komen: ${info.reden || 'geen moment genoemd'}).`);
         await telegram(`⏰ Remindertemplate gestuurd aan ${info.naam || tel} (venster was dicht, klant beloofde terug te komen).`);
       } else {
-        await telegram(`⏰ Terugkomer gemist: ${info.naam || info.phone} beloofde terug te komen maar bleef stil en het WhatsApp-venster is nu dicht.${REMINDER_TEMPLATE_ID ? ' De remindertemplate kon niet verstuurd worden.' : ' Er is nog geen goedgekeurde remindertemplate.'} Bellen is de enige route.`);
+        await telegram(`⏰ Terugkomer gemist: ${info.naam || info.phone} beloofde terug te komen maar bleef stil en het WhatsApp-venster is nu dicht.${REMINDER_TEMPLATE_ID ? ' De remindertemplate is nog niet goedgekeurd of kon niet verstuurd worden.' : ''} Bellen is de enige route.`);
       }
       continue;
     }

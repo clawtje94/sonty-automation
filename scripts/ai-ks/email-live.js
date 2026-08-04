@@ -5,6 +5,7 @@
 // Alle uitgaande tekst gaat door het vangnet (geen redenering/kopjes naar de klant — Déborah 18 juli).
 // Gebruik: node email-live.js <ticketId> [ticketId ...]
 const fs = require('fs');
+const { teamTags, OVERDRACHT_HERKENNING } = require(`./team-tags.js`);
 const path = require('path');
 const { beantwoord } = require('./agent.js');
 
@@ -152,7 +153,7 @@ async function verwerk(ticketId) {
 
     // Geen bruikbaar e-mailadres uit het formulier → naar team Mens nodig (kan niet antwoorden).
     if (!email) {
-      const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag, maar zonder bruikbaar e-mailadres, pak dit zelf op.\n\n${naam || 'Klant'}${tel ? ' / ' + tel : ''}\n${adresRegel}\n\nVraag: ${vraag.slice(0, 300)}`;
+      const note = `${teamTags()}\n\nNieuwe website-aanvraag, maar zonder bruikbaar e-mailadres, pak dit zelf op.\n\n${naam || 'Klant'}${tel ? ' / ' + tel : ''}\n${adresRegel}\n\nVraag: ${vraag.slice(0, 300)}`;
       await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: note });
       await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
       await zetLabel(ticketId, LABEL.MENS_NODIG);
@@ -199,7 +200,7 @@ async function verwerk(ticketId) {
         return { ticketId, klant: naam || email, resultaat: '✅ BEANTWOORD (webflow-lead, eigen mail naar klantadres) + gesloten', concept: conceptDraft.slice(0, 220) };
       }
     }
-    const note = `@jorren745487 @tanya748440\n\nNieuwe website-aanvraag, Sunny kon de mail niet zelf versturen, stuur dit zelf naar de klant (in-thread antwoord zou naar no-reply@webflow gaan).\n\nKlant: ${naam || '-'}\nMail: ${email}${tel ? '\nTel: ' + tel : ''}\nAdres: ${adresRegel || '-'}\nVraag: ${vraag.slice(0, 300)}` + (conceptDraft ? `\n\n--- Concept-antwoord van Sunny (controleer en verstuur naar ${email}) ---\n${conceptDraft}` : '');
+    const note = `${teamTags()}\n\nNieuwe website-aanvraag, Sunny kon de mail niet zelf versturen, stuur dit zelf naar de klant (in-thread antwoord zou naar no-reply@webflow gaan).\n\nKlant: ${naam || '-'}\nMail: ${email}${tel ? '\nTel: ' + tel : ''}\nAdres: ${adresRegel || '-'}\nVraag: ${vraag.slice(0, 300)}` + (conceptDraft ? `\n\n--- Concept-antwoord van Sunny (controleer en verstuur naar ${email}) ---\n${conceptDraft}` : '');
     await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: note });
     await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
     await zetLabel(ticketId, LABEL.MENS_NODIG);
@@ -251,7 +252,7 @@ async function verwerk(ticketId) {
   // Escalatie of leeg → naar team Mens nodig, Mens nodig, open laten
   await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
   await zetLabel(ticketId, LABEL.MENS_NODIG);
-  if (escal?.reden) await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `@jorren745487 @tanya748440\n\n${String(escal.reden).trim()}` });
+  if (escal?.reden) await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `${teamTags()}\n\n${String(escal.reden).trim()}` });
   return { ticketId, klant: gesprek.klant.naam || gesprek.klant.email, resultaat: '👤 MENS NODIG (naar team Mens nodig)', concept: 'reden: ' + (escal?.reden || 'geen antwoord').slice(0, 200) };
 }
 

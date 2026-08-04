@@ -7,6 +7,7 @@
 // Draaien: node scripts/ai-ks/daemon.js            (één poll-ronde; zet in cron elke 5 min)
 //          node scripts/ai-ks/daemon.js --ticket 963416960   (één specifiek ticket, voor test)
 const fs = require('fs');
+const { teamTags, OVERDRACHT_HERKENNING } = require(`./team-tags.js`);
 const path = require('path');
 const CFG = require('./config.js');
 const { beantwoord } = require('./agent.js');
@@ -351,6 +352,22 @@ function aanMensToegewezen(t) {
   return !!u && Number(u) !== 747786;
 }
 
+// Woorden waaruit een puur bedankje kan bestaan. Op module-niveau omdat twee plekken hem
+// nodig hebben: de gewone antwoordlus en de service-heropening. Stond die alleen in de
+// antwoordlus, dan zette een simpel 'Dank je wel!' een afgerond gesprek alsnog terug in Mens
+// nodig (Daimy 2026-08-04, Irene +31625002169).
+const BEVESTIG_WOORDEN_GEDEELD = new Set(['top','ok','oke','oké','dank','dankje','dankjewel','dankuwel','danku','bedankt','thanks','thx','ga','ik','doen','het','is','goed','prima','super','perfect','helemaal','fijn','duidelijk','je','u','voor','alvast','mooi','gelukt','jullie','jij','ja','yes','klopt','begrepen','snap','wel','nogmaals','hartelijk','erg','heel','zo','dat','fijne','dag','avond','weekend','ook','hoor','en','nog','maar','even','tot','ziens','groetjes','groet','mvg','oke','okay','akkoord','helder','joe','yes','jup','jep','top','fantastisch','geweldig','netjes','keurig']);
+
+/** Is dit bericht niets meer dan een bedankje of bevestiging? Dan hoeft er geen mens naar. */
+function isPuurBedankje(tekst) {
+  const zonder = String(tekst || '').replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, ' ').trim();
+  if (!zonder) return true;                 // alleen een emoji
+  if (zonder.length > 60) return false;
+  if (/\?/.test(zonder)) return false;       // een vraag is nooit een bedankje
+  const woorden = zonder.toLowerCase().replace(/[!.,;:'"()-]/g, ' ').split(/\s+/).filter(Boolean);
+  return woorden.length > 0 && woorden.every((w) => BEVESTIG_WOORDEN_GEDEELD.has(w));
+}
+
 async function verwerkTicket(t, state) {
   // VERSE TEAM-OPDRACHT OVERRULET DE BLOKKADES (Daimy 2026-07-27, na drie keer terugkomen op
   // hetzelfde). Er zitten meerdere terechte redenen in deze functie om van een gesprek af te
@@ -445,7 +462,7 @@ async function verwerkTicket(t, state) {
   {
     const ruweBerichten = msgs?.data || [];
     const overdrachten = ruweBerichten.filter(m => (m.internal_note || m.type === 'NOTE') && m.user_id === 747786 &&
-      (/@jorren745487[\s\S]*@tanya748440/.test(String(m.body || m.message || '')) || /De AI kan dit niet zelf afhandelen en draagt het over/i.test(String(m.body || m.message || ''))));
+      (OVERDRACHT_HERKENNING.test(String(m.body || m.message || '')) || /De AI kan dit niet zelf afhandelen en draagt het over/i.test(String(m.body || m.message || ''))));
     if (isWaTicket(t) && overdrachten.length && !t._verseOpdracht) {
       const laatsteKlant = ruweBerichten.filter(m => m.type === 'INBOUND').map(m => String(m.created_at)).sort().pop() || '';
       const laatsteOverdracht = overdrachten.map(m => String(m.created_at)).sort().pop() || '';
@@ -465,10 +482,20 @@ async function verwerkTicket(t, state) {
         // NIET returnen: de normale flow hieronder beantwoordt de klant.
       } else {
         if (Number(t.team_id) === 431872 && !t._verseOpdracht) return; // ligt al in de Mens nodig-map, team ziet het
+        // EEN BEDANKJE IS GEEN HEROPENING (Daimy 2026-08-04, Irene +31625002169).
+        // Zij bedankte na een keurig afgerond gesprek met "Dank je wel!", en dat zette het ticket
+        // terug in Mens nodig met een tag naar twee collegas. Dat vervuilt de Mens-nodig-lijst met
+        // gesprekken waar niets meer te doen is. Een puur bedankje laat het gesprek dus met rust.
+        const laatsteInbound = ruweBerichten.filter((m) => m.type === 'INBOUND')
+          .sort((a, b) => String(a.created_at).localeCompare(String(b.created_at))).pop();
+        if (laatsteKlant > laatsteOverdracht && isPuurBedankje(laatsteInbound?.message || laatsteInbound?.body_plain)) {
+          console.log(`  [${t.id}] klant stuurde alleen een bedankje na de overdracht, niet terug naar Mens nodig`);
+          return;
+        }
         if (laatsteKlant > laatsteOverdracht) {
           console.log(`  [${t.id}] klant reageerde opnieuw op overgedragen (service)gesprek → terug naar Mens nodig`);
           try {
-            await plaatsNotitie(t.id, `@jorren745487 @tanya748440\n\nKlant reageerde opnieuw op dit eerder overgedragen gesprek, direct terug in Mens nodig gezet, de bot blijft eraf.`);
+            await plaatsNotitie(t.id, `${teamTags()}\n\nKlant reageerde opnieuw op dit eerder overgedragen gesprek, direct terug in Mens nodig gezet, de bot blijft eraf.`);
             await zetLabel(t.id, LABEL.MENS_NODIG);
             await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
           } catch (e) { console.error(`  [${t.id}] service-heropening FOUT: ${e.message}`); }
@@ -595,7 +622,7 @@ async function verwerkTicket(t, state) {
   // afsluitend bevestigingsberichtje is (emoji-only of kort "top/bedankt/ga ik doen"), nooit bij
   // een vraag (?) of een langer bericht.
   const zonderEmoji = laatste.tekst.replace(/[\p{Extended_Pictographic}‍️\u{1F3FB}-\u{1F3FF}]/gu, '').trim();
-  const BEVESTIG_WOORDEN = new Set(['top','ok','oke','oké','oké','dank','dankje','dankjewel','dankuwel','danku','bedankt','thanks','thx','ga','ik','doen','het','is','goed','prima','super','perfect','helemaal','fijn','duidelijk','je','u','voor','alvast','mooi','gelukt','jullie','jij','ja','yes','klopt','oké','oke','begrepen','snap']);
+  const BEVESTIG_WOORDEN = BEVESTIG_WOORDEN_GEDEELD;
   // Bevestiging = geen vraag (?) én na verwijderen van emoji bestaat de tekst alleen uit
   // bevestigingswoorden (of is leeg = alleen emoji). Zo blijven echte vragen/verzoeken altijd
   // een antwoord krijgen, maar een "Top! Bedankt, ga ik doen 👍" niet.
@@ -808,7 +835,7 @@ async function verwerkTicket(t, state) {
   const eerdereEscalaties = (msgs?.data || []).filter(m => {
     const tk = m.body || m.message || '';
     return (m.internal_note || m.type === 'NOTE') && m.user_id === 747786 &&
-      (/@jorren745487[\s\S]*@tanya748440/.test(tk) || /De AI kan dit niet zelf afhandelen en draagt het over/i.test(tk));
+      (OVERDRACHT_HERKENNING.test(tk) || /De AI kan dit niet zelf afhandelen en draagt het over/i.test(tk));
   });
 
   const escalatie = res.acties.find(a => a.type === 'escalatie');
@@ -829,7 +856,7 @@ async function verwerkTicket(t, state) {
       // ÉÉN tagregel + de reden zelf, verder NIETS (Daimy 17 juli). De reden die de AI schrijft is
       // al compleet (wie, adres, telefoon, wat er mis is, welke actie nodig, context) — een wrapper
       // met kopjes en een extra "laatste bericht"-blok maakt er juist weer meerdere dingen op elkaar van.
-      await plaatsNotitie(t.id, `@jorren745487 @tanya748440\n\n${String(escalatie.reden || '').trim()}`);
+      await plaatsNotitie(t.id, `${teamTags()}\n\n${String(escalatie.reden || '').trim()}`);
       // Label: een mens moet iets doen. "AI Bot" eraf, want de bot handelt dit niet af.
       await zetLabel(t.id, LABEL.MENS_NODIG);
       await haalLabelWeg(t.id, LABEL.AI_BOT);

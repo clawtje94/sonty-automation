@@ -302,7 +302,13 @@ async function runTool(name, input, ctx) {
     // interesse in een product; pas "graag een afspraak/inmeten/verder" is instemming. Daarom
     // staat graag hier alleen in combinatie. Getest tegen alle 33 complete Trengo-gesprekken van
     // klanten die zijn doorgezet (341 klantberichten): alle 33 houden een akkoord over.
-    const AKKOORD_TAAL = /(akkoord|in orde|in gang|onderteken|getekend|tekenen is gelukt|geaccepteerd|ga (ik|we) (mee|voor)|doe (ik|we) het|mag (het|je|hij)|graag (een |het )?(afspraak|inmeet|meting|langskomen|komen|verder)|willen (we|wij) (graag )?(dat|een|verder)|(we|wij) willen graag|kunnen jullie|langs ?komen|laten inmeten|zet (maar|het) door|is goed|is prima|prima|deal|dit is hem|bevestiging|toppers|dank dat het|schedule|appointment|proceed|go ahead|sounds good|please do|let'?s do)/i;
+    // UITGEBREID 2026-08-04 na Marjolein (+31657977507) en Biki (+31642904128). Beiden gingen
+    // duidelijk akkoord, maar de guard blokkeerde ze en hun inmeetverzoek verdween:
+    //   "Inmeten kan klaargezet worden"        geen enkel patroon matchte
+    //   "ben akkord met prijsindicatie"        typo, er stond alleen akkoord met dubbele o
+    //   "Ik teken later vandaag jullie offerte" alleen onderteken en getekend stonden erin
+    // Vandaar akko?ord voor de typo, een los teken-werkwoord, en de klaarzet-formuleringen.
+    const AKKOORD_TAAL = /(akko?ord|in orde|in gang|onderteken|getekend|\bteken\b|tekenen is gelukt|geaccepteerd|ga (ik|we) (mee|voor)|doe (ik|we) het|mag (het|je|hij)|graag (een |het )?(afspraak|inmeet|meting|langskomen|komen|verder)|willen (we|wij) (graag )?(dat|een|verder)|(we|wij) willen graag|kunnen jullie|langs ?komen|laten inmeten|inmeet ?afspraak|inmeten kan|klaar ?ge?zet|klaarzetten|zet (maar|het) door|is goed|is prima|prima|deal|dit is hem|bevestiging|toppers|dank dat het|schedule|appointment|proceed|go ahead|sounds good|please do|let'?s do)/i;
     const citaatRuw = String(input.akkoordCitaat || '');
 
     // EEN ONDERTEKENDE OFFERTE IS OOK AKKOORD (Daimy 2026-07-27, ging fout bij Tim Remmel).

@@ -68,6 +68,22 @@ for (const [id, msgs] of Object.entries(gesprekken)) {
 
 // DEEL 2 — hallucinaties en niet-akkoorden die geweigerd MOETEN worden. Het eerste geval is de
 // vorm waarin het echt fout kan gaan: een citaat dat de bot zelf verzint.
+// ECHTE AKKOORDEN DIE ONTERECHT WERDEN GEBLOKKEERD (Daimy 2026-08-04).
+// Marjolein (+31657977507) en Biki (+31642904128) gingen allebei duidelijk akkoord, maar de guard
+// hield ze tegen en hun inmeetverzoek is nooit bij de planning gekomen. Deze drie moeten dus
+// altijd door blijven komen.
+const MOET_DOORLATEN = [
+  ['Marjolein, klaarzetten', 'Inmeten kan klaargezet worden'],
+  ['Biki, typo in akkoord', 'ben akkord met prijsindicatie en wil graag een inmeten afspraak'],
+  ['Biki, ik teken vandaag', 'Ik teken later vandaag jullie offerte. Tot inmeetafspraak!'],
+];
+for (const [naam, citaat] of MOET_DOORLATEN) {
+  if (!AKKOORD_TAAL.test(citaat)) {
+    valsPositief++;
+    fouten.push(`VALS-POSITIEF (${naam}): "${citaat.slice(0, 60)}" wordt geblokkeerd terwijl het een echt akkoord is`);
+  }
+}
+
 const MOET_BLOKKEREN = [
   ['verzonnen citaat', 'bedankt voor het vertrouwen'],
   ['citaat bestaat niet in gesprek', 'ja ik ga akkoord met alles wat je voorstelt'],
@@ -95,6 +111,7 @@ console.log(`  klantberichten:                   ${Object.values(gesprekken).red
 console.log(`  echte akkoorden doorgelaten:      ${n - valsPositief}/${n}`);
 console.log(`  VALS-POSITIEF (kost een deal):    ${valsPositief}`);
 console.log(`  VALS-NEGATIEF (nep doorgelaten):  ${valsNegatief} van ${MOET_BLOKKEREN.length} gecontroleerd`);
+console.log(`  eerder geblokkeerde echte akkoorden: ${MOET_DOORLATEN.length} gecontroleerd`);
 for (const f of fouten) console.log('  ' + f);
 
 if (valsPositief || valsNegatief) { console.error('\nGEFAALD'); process.exit(1); }

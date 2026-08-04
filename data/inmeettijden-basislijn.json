@@ -1,0 +1,92 @@
+{
+  "bron": "Daimy, echte inmeetdagen juli 2026 (Telegram 2026-08-04)",
+  "let_op": "Tijden zijn werkelijk gemeten aankomst/vertrek. Gaten tussen afspraken = werkelijke reistijd incl. instappen/parkeren.",
+  "dagen": [
+    {
+      "dag": "A",
+      "afspraken": [
+        { "klant": "Alcantara", "plaats": "Nootdorp", "producten": "2x rolluik Solar", "aantal": 2, "start": "09:00", "eind": "09:15" },
+        { "klant": "Waaijer", "plaats": "Den Haag", "producten": "1x screen SM bedraad", "aantal": 1, "start": "09:40", "eind": "10:00" },
+        { "klant": "Linden", "plaats": "Oegstgeest", "producten": "1x suncube", "aantal": 1, "start": "10:30", "eind": "10:55" },
+        { "klant": "Cornelissen", "plaats": "Leiden", "producten": "1x hordeur", "aantal": 1, "start": "11:15", "eind": "11:30" },
+        { "klant": "Melman", "plaats": "Vijfhuizen", "producten": "2x rolluik bedraad", "aantal": 2, "start": "12:00", "eind": "12:30" },
+        { "klant": "Eeden", "plaats": "Zaandam", "producten": "Voorraadscherm", "aantal": 1, "start": "12:55", "eind": "13:20" }
+      ]
+    },
+    {
+      "dag": "B",
+      "afspraken": [
+        { "klant": "Mendoza", "plaats": "Den Haag", "producten": "Knikarmscherm + 9 screens", "aantal": 10, "start": "08:55", "eind": "10:20" },
+        { "klant": "Van Aalst", "plaats": "Ter Aar", "producten": "1x rolluik bedraad omgepraat naar Solar", "aantal": 1, "start": "09:00", "eind": "09:18" },
+        { "klant": "Pijst", "plaats": "Hoofddorp", "producten": "Los screendoek 2x", "aantal": 2, "start": "09:55", "eind": "10:10" },
+        { "klant": "Bentem", "plaats": "Hoofddorp", "producten": "2x Rolluik optie Pergola / PHD", "aantal": 2, "start": "10:20", "eind": "11:00" },
+        { "klant": "Venetien", "plaats": "Leiden", "producten": "1x markies", "aantal": 1, "start": "11:20", "eind": "11:55" },
+        { "klant": "Lippe", "plaats": "Noordwijk", "producten": "Rolluik bedraad", "aantal": 1, "start": "12:20", "eind": "12:35" },
+        { "klant": "Van der Plas", "plaats": "", "producten": "Suncube XL Brel Solar", "aantal": 1, "start": "12:50", "eind": "13:10" }
+      ]
+    },
+    {
+      "dag": "C",
+      "afspraken": [
+        { "klant": "De Jong", "plaats": "Gouda", "producten": "1x rolluik, 2x screen, 1x knikarmscherm", "aantal": 4, "start": "09:00", "eind": "09:40" },
+        { "klant": "Kroon", "plaats": "Waddinxveen", "producten": "4x rolluik Solar", "aantal": 4, "start": "09:50", "eind": "10:05", "uitsluiten": "klant niet thuis" },
+        { "klant": "Brok", "plaats": "Waddinxveen", "producten": "2x rolluik 1x PHD", "aantal": 3, "start": "10:10", "eind": "10:25" },
+        { "klant": "Pelgrim", "plaats": "Rotterdam", "producten": "Knikarmscherm 2x + plisses", "aantal": 3, "start": "11:00", "eind": "11:45" },
+        { "klant": "Van Spijk", "plaats": "Nieuw Beijerland", "producten": "Roma rolluiken bedraad", "aantal": 2, "start": "12:20", "eind": "13:15" }
+      ]
+    },
+    {
+      "dag": "D",
+      "afspraken": [
+        { "klant": "Heins", "plaats": "Voorburg", "producten": "3x screen Solar (knikarmscherm extra ingemeten)", "aantal": 4, "start": "09:05", "eind": "09:45" },
+        { "klant": "Sjoukje", "plaats": "Den Haag", "producten": "2x screen Solar, 1x rolluik Solar met kokers", "aantal": 3, "start": "10:05", "eind": "10:30" },
+        { "klant": "Ufford", "plaats": "Amstelveen", "producten": "Knikarmscherm", "aantal": 1, "start": "11:10", "eind": "11:35" },
+        { "klant": "Visser", "plaats": "Amstelveen", "producten": "Sunproject 4e etage flat", "aantal": 1, "start": "11:45", "eind": "12:05" },
+        { "klant": "Bemmelen", "plaats": "Hoofddorp", "producten": "3x rolluik bedraad, 1x Solar", "aantal": 4, "start": "12:35", "eind": "13:05" },
+        { "klant": "Hogenboom", "plaats": "Kudelstaart", "producten": "1x Voorraadscherm", "aantal": 1, "start": "13:25", "eind": "13:50" }
+      ]
+    },
+    {
+      "dag": "E",
+      "afspraken": [
+        { "klant": "Vianen", "plaats": "Nieuwegein", "producten": "Sunproject handbediend", "aantal": 1, "start": "09:05", "eind": "09:25" },
+        { "klant": "Remmel", "plaats": "Houten", "producten": "Rolluiken kokers Solar", "aantal": 2, "start": "09:35", "eind": "09:55" },
+        { "klant": "Van der Meer", "plaats": "Bleiswijk", "producten": "Knikarmscherm", "aantal": 1, "start": "10:30", "eind": "10:40" },
+        { "klant": "De Wolf", "plaats": "Zoetermeer", "producten": "1x Suncube bedraad", "aantal": 1, "start": "11:20", "eind": "11:40" },
+        { "klant": "Turpijn", "plaats": "", "producten": "1x suncontrole, 2x veranda screen solar, 1x screen solar", "aantal": 4, "start": "11:50", "eind": "12:45" }
+      ]
+    },
+    {
+      "dag": "do 23 juli",
+      "afspraken": [
+        { "klant": "De Bruin", "plaats": "Maassluis", "producten": "Roma 4x screen solar", "aantal": 4, "start": "08:55", "eind": "09:44" },
+        { "klant": "Paliso", "plaats": "Rotterdam", "producten": "Klacht klant", "aantal": 0, "start": "10:09", "eind": "10:20", "uitsluiten": "klacht, geen inmeting" },
+        { "klant": "Schilperoort", "plaats": "Nieuwerkerk", "producten": "1 rolluik solar", "aantal": 1, "start": "10:43", "eind": "10:49" },
+        { "klant": "Willemse", "plaats": "Ouderkerk", "producten": "2x rolluik bedraad", "aantal": 2, "start": "11:19", "eind": "11:34" },
+        { "klant": "Nijland", "plaats": "Zoetermeer", "producten": "1x suneye", "aantal": 1, "start": "12:00", "eind": "12:49" },
+        { "klant": "Van Tol", "plaats": "Zoetermeer", "producten": "1x suneye", "aantal": 1, "start": "13:01", "eind": "13:11" },
+        { "klant": "Imhoff", "plaats": "Den Haag", "producten": "Pergola", "aantal": 1, "start": "13:43", "eind": "14:30" }
+      ]
+    },
+    {
+      "dag": "ma 27 juli",
+      "afspraken": [
+        { "klant": "Serge Roderiques", "plaats": "Den Haag", "producten": "1x rolluik bedraad", "aantal": 1, "start": "09:00", "eind": "09:22" },
+        { "klant": "Leverdingen", "plaats": "Voorburg", "producten": "Suneye bedraad", "aantal": 1, "start": "09:35", "eind": "09:55" },
+        { "klant": "Janssen", "plaats": "Delft", "producten": "2x roma screen solar", "aantal": 2, "start": "10:21", "eind": "11:06" },
+        { "klant": "Wierzba", "plaats": "Delft", "producten": "Suneye", "aantal": 1, "start": "11:26", "eind": "11:46" },
+        { "klant": "Witkop", "plaats": "Den Haag", "producten": "11 solar rolluiken", "aantal": 11, "start": "12:11", "eind": "13:05" }
+      ]
+    },
+    {
+      "dag": "28 juli",
+      "afspraken": [
+        { "klant": "Dogan", "plaats": "Den Haag", "producten": "5 solar rolluiken", "aantal": 5, "start": "09:00", "eind": "09:21" },
+        { "klant": "Smits", "plaats": "Rijswijk", "producten": "1x markies", "aantal": 1, "start": "09:40", "eind": "09:48" },
+        { "klant": "Sijbolts", "plaats": "Delft", "producten": "3x solar screen", "aantal": 3, "start": "10:17", "eind": "10:37" },
+        { "klant": "Simonis", "plaats": "Den Haag", "producten": "4 solar rolluiken", "aantal": 4, "start": "10:50", "eind": "11:34" },
+        { "klant": "Guida", "plaats": "Den Haag", "producten": "1x screen solar", "aantal": 1, "start": "11:42", "eind": null, "uitsluiten": "geen eindtijd" }
+      ]
+    }
+  ]
+}

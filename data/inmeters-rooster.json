@@ -27,6 +27,20 @@
         "zo": null
       },
       "opmerking": "Maandag t/m donderdag 09:00-15:00 (Daimy 2026-08-04)."
+    },
+    "Nieuwe inmeter": {
+      "uuidPlanado": null,
+      "startDatum": "2026-09-01",
+      "dagen": {
+        "ma": { "van": "09:00", "tot": "15:00" },
+        "di": { "van": "09:00", "tot": "15:00" },
+        "wo": { "van": "09:00", "tot": "15:00" },
+        "do": { "van": "09:00", "tot": "15:00" },
+        "vr": null,
+        "za": null,
+        "zo": null
+      },
+      "opmerking": "Start 1 september 2026 (Daimy 2026-08-04). Naam, echte werkdagen en Planado-account nog niet bekend; hier staat voorlopig hetzelfde rooster als Sjoerd. Vervangen zodra bekend."
     }
   }
 }

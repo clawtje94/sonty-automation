@@ -43,17 +43,84 @@ RP heeft geen webhook; `?status_id` wordt genegeerd, dus `?limit=200` + zelf fil
 (0,6 s per call, dekt >24 u historie).
 Dedupe-state in `data/inmeten-planner-state.json`.
 
-### Stap 2 — inplannen als VOORSTEL, niet blind boeken
-De bot berekent inmeter + tijdslot uit de Bookings-agenda en zet het als voorstel
-klaar (Telegram / belscherm). Een mens keurt goed met één klik.
+### Stap 2 — de inmeet-planner (opdracht Daimy 2026-08-04: "een kloppende machine die GOED werkt")
 
-Waarom voorstel en niet direct boeken:
-- de inmeetduur is nog niet vastgesteld (wacht op de hoofdinmeter)
-- de AI-klantenservice belooft de klant letterlijk "de planning neemt binnen
-  3 werkdagen contact op" — een afspraak die de klant nooit bevestigd heeft, botst daarmee
-- vrije-tekstwensen ("liefst zaterdag", "pas na 28 juli bellen") kan een bot nu niet lezen
+De planner plant ZELF. Hij biedt de klant passende tijdsloten aan, rekening houdend
+met de al geplande afspraken, de rijafstanden en de files. De klant kiest binnen
+24 uur, anders vervalt het slot.
 
-Zodra de tijdenlijst er is en het bevalt, kan de goedkeuringsstap eruit.
+#### 2a. Slots berekenen
+Kandidaatdagen: de komende 10 werkdagen, binnen het rooster van de inmeter.
+Per inmeter per dag zijn de al geplande afspraken de **ankerpunten**; de dag begint
+en eindigt bij het magazijn (Noordeindseweg 256a, Berkel en Rodenrijs).
+
+Een nieuwe klus past in een gat tussen A en B als:
+
+    reistijd(A → nieuw) + inmeetduur + reistijd(nieuw → B)  ≤  gat
+
+Reistijd komt uit de TomTom Routing API met `departAt` op het échte tijdstip, dus
+de spits telt mee. **Score = de marginale rijtijd**: hoeveel extra rijtijd kost deze
+klus op deze plek in de dag, vergeleken met de dag zonder hem. De goedkoopste
+invoegingen winnen — dat is precies wat regio-clustering oplevert zonder dat je
+"regio's" hoeft te definiëren.
+
+Uit de analyse van 22 juli: dit scheelt 14,3 → 10,2 uur rijden per week en brengt
+het spitsaandeel van 38% naar 28%.
+
+**Caching is verplicht**, anders loopt het aantal API-calls uit de hand: reistijden
+worden gecachet per (postcode → postcode, uur van de dag, werkdag) in
+`data/reistijden-cache.json`. Dezelfde route op hetzelfde tijdstip wordt één keer
+opgevraagd. Zonder cache is dit tientallen calls per lead per dag.
+
+**Reistijd-provider is pluggable**: TomTom zodra de key er is, tot die tijd een
+afstandsschatting (hemelsbreed × wegfactor × spitsfactor). De planner werkt dus al
+vóór de key er is, alleen minder scherp — en de schatting wordt nooit als exact
+gepresenteerd.
+
+#### 2b. Aanbieden aan de klant
+3 slots, gespreid over verschillende dagen en dagdelen, aankomstvenster max 30 min
+("tussen 9:30 en 10:00", niet "in de ochtend").
+
+Aangeboden slots komen in een **aanbod-register** met vervaltijd. Zolang een slot
+aan iemand is aangeboden, wordt het niet aan een tweede klant aangeboden. Zo kan er
+geen dubbele boeking ontstaan, en komt vrije capaciteit na het verlopen vanzelf terug.
+
+#### 2c. De 24-uurs klok
+- T+0: slots aangeboden (WhatsApp/mail met keuzelink)
+- T+20u: herinnering "je slot vervalt morgen"
+- T+24u: aanbod vervalt, slots komen vrij
+- daarna: automatisch één nieuw aanbod met verse slots
+- reageert de klant daar ook niet op: naar het belscherm voor een telefoontje
+
+Twee keer geen reactie is een signaal dat de klant niet via een link te bereiken is,
+niet dat hij geen afspraak wil. Dan moet er een mens bellen — dat sluit aan op de
+regel dat de AI perfect helpt of warm doorverwijst.
+
+#### 2d. Bevestigen
+Bij de keuze wordt het slot opnieuw gecontroleerd (is er intussen iets veranderd in
+de agenda?) en dan pas vastgelegd. Is het slot toch weg, dan krijgt de klant direct
+nieuwe opties in plaats van een foutmelding.
+
+Daarna: Planado-job + Outlook-afspraak + meetbon (stap 3), en de RP-status gaat naar
+"Gripp invullen" (`f895f76f-…`). Dat is de enige toegestane schrijfactie in RP en
+zorgt dat dezelfde lead nooit twee keer wordt ingepland.
+
+#### 2e. Randvoorwaarden
+- vrije-tekstwensen in de lead ("liefst zaterdag", "pas na 28 juli bellen") worden
+  gelezen en respecteren de aanbieding; kan de planner ze niet plaatsen, dan gaat de
+  lead naar het belscherm in plaats van een verkeerd slot
+- de AI-klantenservice belooft nu "de planning neemt binnen 3 werkdagen contact op" —
+  die tekst moet mee veranderen zodra de planner live gaat, anders belooft hij iets
+  anders dan er gebeurt
+- schaduwweek eerst: de planner stelt slots voor NAAST hoe kantoor het nu doet, met
+  een verschil-rapport. Pas daarna echt aanbieden.
+
+#### 2f. Wat hier nog voor nodig is
+- **TomTom Routing API-key** (staat niet in `scripts/secrets.js`) — zonder key draait
+  de planner op de afstandsschatting
+- **Inmeetduur**: het Planado-sjabloon zegt 120 min, de pilot-spec zegt 60 min.
+  Dat moet één getal worden vóór de planner gaat rekenen.
+- geocoding van klantadressen (kan met dezelfde TomTom-key)
 
 ### Stap 3 — afspraak wegschrijven
 Bij goedkeuring in één transactie:
@@ -91,11 +158,32 @@ Ook nodig vóór live: de bon verliest ingevuld werk zonder bereik (`dirty` word
 false gezet vóór het versturen, geen retry). Eerst try/catch + retry +
 localStorage-mirror; volledige offline-modus daarna.
 
-### Stap 6 — eindofferte naar Gripp (de knop die Daimy vraagt)
-Knop "Eindofferte maken" op de afgeronde bon:
-1. definitieve regels bouwen uit de meetbon (echte maten) + prijs uit de centrale engine
-2. `offer.create` in Gripp (draait al in productie, met `signingenabled: true`)
-3. de offerte openen op de telefoon van de inmeter
+### Stap 6 — bestaande Gripp-offerte AANPASSEN (eis Daimy 2026-08-04)
+
+De offerte bestaat al: hij is vanuit RP aangemaakt bij de stap "Gripp invullen".
+Er wordt dus **geen nieuwe offerte gemaakt** — de bestaande wordt bijgewerkt, zodat
+offertenummer en historie behouden blijven.
+
+**Geverifieerd 2026-08-04** (probe met een niet-bestaand id, dus zonder iets te wijzigen):
+
+| Methode | Bestaat | Signatuur |
+|---|---|---|
+| `offer.update` | ja | `(id, {velden})` |
+| `offerprojectline.update` | ja | `(id, {velden})` |
+| `offerprojectline.delete` | ja | `(id)` |
+| `offerprojectline.create` | ja | via bestaande productiecode |
+
+(`offerline` bestaat niet — de regel-entity heet `offerprojectline`.)
+
+Knop "Offerte bijwerken" op de afgeronde bon:
+1. **snapshot** van de hele offerte wegschrijven vóór er iets verandert
+   (`data/offerte-backups/<nr>-voor-meetbon-<datum>.json`) — bestaande gewoonte, en
+   hier extra belangrijk omdat we een live offerte aanraken
+2. per bestaande regel `offerprojectline.update`: definitieve maten en, waar de
+   maten wijzigen, de bijgewerkte prijs
+3. toegevoegd product → `offerprojectline.create`
+4. vervallen product → `offerprojectline.delete`
+5. de offerte openen op de telefoon van de inmeter
 
 **Rem tegen de duurste fout van de keten** (klant tekent ter plekke een verkeerde prijs):
 - de inmeter ziet eerst het verschil met de oorspronkelijke offerte
@@ -106,10 +194,10 @@ Niet alle 13 typen zijn door de prijsengine te prijzen (horren/gordijnen/velux
 waarschijnlijk niet). Voor die producten: prijs uit de oorspronkelijke offerte
 overnemen en markeren als "controleren", nooit stil een bedrag verzinnen.
 
-**Openstaand: `offer.update` bestaat niet in onze codebase.** Wijzigen kan alleen
-via delete + create, wat offertenummer én historie wist. Daarom wordt de eindofferte
-een NIEUWE offerte die in de omschrijving naar de oorspronkelijke verwijst.
-→ Eén vraag aan Gripp-support maakt dit definitief.
+Omdat we een bestaande, aan de klant getoonde offerte aanpassen, geldt: elke wijziging
+gaat via de snapshot-route hierboven, en het bijwerken gebeurt in één handeling —
+half bijgewerkte offertes mogen niet kunnen ontstaan als de telefoon halverwege
+zijn bereik verliest.
 
 ### Stap 7 — ondertekenen
 Twee routes, allebei technisch aanwezig:
@@ -195,8 +283,10 @@ Stap 1 t/m 5 is de basis; daarna pas is het zinvol om de keten echt te gaan gebr
 ## 5. Nog te beslissen / uit te zoeken
 
 - **V2 (Daimy)**: welke 2 inmeters starten?
-- Bestaat `offer.update` in Gripp API3? (één supportvraag — bepaalt of de eindofferte
-  het offertenummer kan behouden)
+- **V3 (Daimy)**: welk prijsverschil mag de inmeter ter plekke zelf laten tekenen?
+- **V4 (Daimy)**: TomTom Routing API-key aanmaken (nodig voor de files in de planner)
+- **V5 (Daimy)**: inmeetduur — sjabloon zegt 120 min, pilot-spec zegt 60 min
+- `offer.update` — OPGELOST 2026-08-04: bestaat, offerte wordt bijgewerkt i.p.v. nieuw
 - Werkt `invoice.create` op dit abonnement, en kan de factuur via de API gemaild worden?
-- Is een Gripp-offerte in status Concept al ondertekenbaar?
-- Welke prijsdrempel mag de inmeter ter plekke zelf laten tekenen?
+- Is een Gripp-offerte in status Concept al ondertekenbaar? (minder urgent nu de
+  bestaande offerte wordt bijgewerkt — die staat al op Verzonden)

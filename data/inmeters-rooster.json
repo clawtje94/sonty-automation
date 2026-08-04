@@ -1,0 +1,32 @@
+{
+  "bron": "Daimy, 2026-08-04 via Telegram",
+  "let_op": "Dit gaat vóór alles wat uit de agenda afgeleid wordt. De Outlook-agenda is niet netjes bijgehouden, dus een patroon uit die data is geen rooster.",
+  "inmeters": {
+    "Joey": {
+      "uuidPlanado": "1f122cfa-17a2-6580-8257-7e80f004db9c",
+      "dagen": {
+        "ma": { "van": "09:00", "tot": "15:00" },
+        "di": { "van": "09:00", "tot": "15:00" },
+        "wo": null,
+        "do": { "van": "09:00", "tot": "15:00" },
+        "vr": null,
+        "za": null,
+        "zo": null
+      },
+      "opmerking": "Vrijdag is TIJDELIJK vrij; normaal 09:00-15:00. Zet vr terug zodra dat weer ingaat."
+    },
+    "Sjoerd": {
+      "uuidPlanado": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
+      "dagen": {
+        "ma": { "van": "09:00", "tot": "15:00" },
+        "di": { "van": "09:00", "tot": "15:00" },
+        "wo": { "van": "09:00", "tot": "15:00" },
+        "do": { "van": "09:00", "tot": "15:00" },
+        "vr": null,
+        "za": null,
+        "zo": null
+      },
+      "opmerking": "Maandag t/m donderdag 09:00-15:00 (Daimy 2026-08-04)."
+    }
+  }
+}

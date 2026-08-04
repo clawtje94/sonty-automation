@@ -160,30 +160,36 @@ async function main() {
   console.log(`${producten.length} product(en): ${producten.map((p) => `${p.aantal}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).join(', ')}`);
   console.log(`geschatte inmeetduur: ${duur} min\n`);
 
-  // Werkdagen NIET verzinnen maar afleiden uit wat iemand werkelijk doet. Joey heeft
-  // 11 afspraken op woensdag tegen 47 op maandag: dat is zijn vrije dag. En hij werkt
-  // wel op zaterdag (16), wat een vaste ma-vr-aanname helemaal zou missen.
-  const werkdagenVan = (eigen) => {
+  // Het echte rooster gaat vóór alles wat je uit de agenda kunt afleiden. Die agenda is
+  // niet netjes bijgehouden, dus een patroon eruit is geen rooster. Alleen als een
+  // inmeter nog geen rooster heeft, vallen we terug op zijn werkelijke patroon.
+  const ROOSTER = require('../data/inmeters-rooster.json').inmeters;
+  const DAGCODE = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
+
+  const werkdagenVan = (wie, eigen) => {
+    const vast = ROOSTER[wie]?.dagen;
+    if (vast) return (dag) => vast[DAGCODE[dag]] || null;
     const perDag = [0, 0, 0, 0, 0, 0, 0];
     for (const a of eigen) perDag[new Date(a.start).getDay()]++;
     const top = Math.max(...perDag);
-    // Minder dan een vijfde van zijn drukste dag telt als niet-werkdag.
-    return perDag.map((n) => n >= top * 0.2);
+    return (dag) => (perDag[dag] >= top * 0.2 ? { van: '08:30', tot: '17:00' } : null);
   };
 
   const alleSlots = [];
   for (const [wie, eigen] of Object.entries(perPersoon)) {
     if (eigen.length < 2) continue;
-    const werkt = werkdagenVan(eigen);
+    const werkt = werkdagenVan(wie, eigen);
     const dagen = [];
     const dd = new Date(); dd.setDate(dd.getDate() + 1);
-    while (dagen.length < 10 && dagen.length < 14) {
-      if (werkt[dd.getDay()]) dagen.push({ datum: dd.toISOString().slice(0, 10), van: '08:30', tot: '17:00' });
+    while (dagen.length < 10) {
+      const u = werkt(dd.getDay());
+      if (u) dagen.push({ datum: dd.toISOString().slice(0, 10), van: u.van, tot: u.tot });
       dd.setDate(dd.getDate() + 1);
-      if (dd > new Date(Date.now() + 21 * 86400000)) break;
+      if (dd > new Date(Date.now() + 28 * 86400000)) break;
     }
-    const DAGNAAM = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
-    console.log(`  ${wie} werkt op: ${werkt.map((w, i) => (w ? DAGNAAM[i] : null)).filter(Boolean).join(', ')}`);
+    const bron = ROOSTER[wie]?.dagen ? 'rooster' : 'afgeleid uit agenda';
+    const omschrijving = [1, 2, 3, 4, 5, 6].map((i) => { const u = werkt(i); return u ? `${DAGCODE[i]} ${u.van}-${u.tot}` : null; }).filter(Boolean).join(', ');
+    console.log(`  ${wie} (${bron}): ${omschrijving}`);
     const s2 = await zoekSlots({ agenda: eigen, adres, duurMin: duur, werkdagen: dagen, agendaOnbetrouwbaar: true });
     alleSlots.push(...s2.map((x) => ({ ...x, inmeter: wie })));
   }

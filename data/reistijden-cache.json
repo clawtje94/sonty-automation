@@ -1792,5 +1792,23 @@
     "rijtijdTomTom": 32,
     "km": 25.5,
     "fileVertragingMin": 0
+  },
+  "52.012,4.485>52.058,4.333@4-9": {
+    "minuten": 26,
+    "rijtijdTomTom": 21,
+    "km": 19.7,
+    "fileVertragingMin": 0
+  },
+  "52.058,4.333>52.030,4.338@4-17": {
+    "minuten": 15,
+    "rijtijdTomTom": 12,
+    "km": 5.1,
+    "fileVertragingMin": 0
+  },
+  "52.012,4.485>52.094,4.265@4-17": {
+    "minuten": 40,
+    "rijtijdTomTom": 33,
+    "km": 25.9,
+    "fileVertragingMin": 0
   }
 }

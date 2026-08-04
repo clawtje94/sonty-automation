@@ -50,11 +50,31 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
     const dagStart = new Date(`${dag.datum}T${dag.van}:00`);
     const dagEind = new Date(`${dag.datum}T${dag.tot}:00`);
 
-    // Afspraken van deze dag, op tijd gesorteerd.
-    const opDeDag = agenda
+    // Afspraken van deze dag, op tijd gesorteerd. Ook afspraken die vóór de werkdag
+    // beginnen maar erin doorlopen tellen mee (een blok 09:00-17:00 dat om 08:00 begon).
+    const ruw = agenda
       .map((a) => ({ ...a, start: new Date(a.start), eind: new Date(a.eind) }))
-      .filter((a) => a.start >= dagStart && a.start < dagEind)
+      .filter((a) => a.eind > dagStart && a.start < dagEind)
       .sort((a, b) => a.start - b.start);
+
+    // OVERLAPPENDE afspraken samenvoegen. Zonder dit ontstaat er een gat dat er niet is:
+    // staat er 09:00-10:00 inmeten EN 09:00-17:00 winkeldienst, dan zag de oude versie
+    // na dat eerste uur ruimte, terwijl de man de hele dag in de winkel staat.
+    const opDeDag = [];
+    for (const a of ruw) {
+      const laatste = opDeDag[opDeDag.length - 1];
+      if (laatste && a.start < laatste.eind) {
+        // Overlap: één bezet blok van maken. Het adres van de afspraak die het laatst
+        // eindigt bepaalt waar hij daarna vandaan vertrekt.
+        if (a.eind > laatste.eind) {
+          laatste.eind = a.eind;
+          if (a.adres) { laatste.adres = a.adres; laatste.klant = a.klant; }
+        }
+        laatste.samengevoegd = true;
+      } else {
+        opDeDag.push({ ...a });
+      }
+    }
 
     // De dag begint en eindigt bij het magazijn.
     const punten = [

@@ -31,8 +31,24 @@ function laadModel() {
 }
 
 /**
+ * Toeslag voor grote producten. Het model telde alleen aantallen, waardoor een screen
+ * van 1500 mm even zwaar woog als een serre-zonwering van 8000 mm. Meer meetpunten,
+ * meer uitlijnen, vaker met twee man meten.
+ * VOORLOPIG en met opzet bescheiden: de basislijn van juli bevat geen maten, dus dit
+ * rust op redenering en niet op metingen. De leerlus moet dit vervangen zodra de
+ * meetbon per product de echte maat naast de werkelijke tijd zet.
+ */
+function maatToeslag(breedteMm) {
+  if (!breedteMm) return 0;
+  if (breedteMm >= 6000) return 15;
+  if (breedteMm >= 4000) return 10;
+  if (breedteMm >= 3000) return 5;
+  return 0;
+}
+
+/**
  * Geschatte inmeetduur in minuten.
- * @param {Array<{type?: string, aantal?: number}>} producten
+ * @param {Array<{type?: string, aantal?: number, breedte?: number}>} producten
  */
 function schatDuur(producten = []) {
   const m = laadModel();
@@ -40,7 +56,7 @@ function schatDuur(producten = []) {
   for (const p of producten) {
     const aantal = p.aantal || 1;
     const toeslag = m.toeslagPerProduct?.[(p.type || '').toLowerCase()] || 0;
-    duur += aantal * (m.perProductMin + toeslag);
+    duur += aantal * (m.perProductMin + toeslag + maatToeslag(p.breedte));
   }
   // Afronden op 5 minuten, niet op kwartieren: naar boven afronden op een kwartier
   // maakte van 22 minuten 30, en dat kost bij 6 klussen per dag bijna een uur.
@@ -84,4 +100,4 @@ function herijk(metingen) {
   return { bijgewerkt: true, model };
 }
 
-module.exports = { schatDuur, herijk, laadModel, STANDAARD };
+module.exports = { schatDuur, herijk, laadModel, maatToeslag, STANDAARD };

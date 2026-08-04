@@ -81,6 +81,49 @@ const GEEN_PRODUCT = new RegExp([
   'montage', 'transport', 'toeslag', 'garantie',
 ].join('|'), 'i');
 
+// Winkelleads (en alles wat via een RP-offerte loopt) hebben GEEN producten in de
+// leadtekst — daar staat alleen "1x Winkel offerte". De echte producten zitten in het
+// RP-offertedocument. Zonder dit leest de planner 1 product waar er 3 staan, en schat
+// hij de inmeetduur veel te laag.
+const GEEN_PRODUCT_REGEL = /^inmeten \+ montage|^montage\b|^korting|^toeslag|^transport/i;
+
+async function leesProductenUitOfferte(item) {
+  const lcId = item.item_subject?.id;
+  if (!lcId) return [];
+  try {
+    const docs = await rpGet(`/document-service/v1/${PID}/quotations?lead_configuration_id=${lcId}`);
+    const lijst = docs?.quotationDatas || [];
+    if (!lijst.length) return [];
+    // Nieuwste document; een concept telt ook, want de klant is al akkoord op de prijs.
+    const nieuwste = [...lijst].sort((a, b) => (b.quotationCreationTimestamp || 0) - (a.quotationCreationTimestamp || 0))[0];
+    const full = await rpGet(`/document-service/v1/${PID}/quotations/${nieuwste.documentId}`);
+    const segmenten = full?.quotationData?.segments || {};
+    const producten = [];
+    for (const seg of Object.values(segmenten)) {
+      if (seg?.type !== 'priceLineGroup') continue;
+      for (const regel of seg.data?.lines || []) {
+        const tekst = String(regel.description || '');
+        const naam = tekst.split('\n')[0].replace(/\*\*/g, '').trim();
+        if (!naam || GEEN_PRODUCT_REGEL.test(naam)) continue;
+        const maat = (label) => {
+          const m = tekst.match(new RegExp(label + ':\\s*(\\d+)', 'i'));
+          return m ? Number(m[1]) : null;
+        };
+        producten.push({
+          type: naam.toLowerCase(),
+          naam,
+          aantal: Math.max(1, Number(regel.units) || 1),
+          breedte: maat('Breedte'),
+          hoogte: maat('Hoogte') || maat('Uitval'),
+        });
+      }
+    }
+    return producten;
+  } catch {
+    return [];
+  }
+}
+
 function leesLead(item) {
   const d = item.description || '';
   const veld = (naam) => (d.match(new RegExp(`^${naam}:\\s*(.+)$`, 'im')) || [])[1]?.trim() || '';
@@ -111,6 +154,17 @@ function leesLead(item) {
     producten,
     aantalProducten: producten.reduce((a, p) => a + p.aantal, 0),
   };
+}
+
+/** Lead met producten uit de beste bron: leadtekst, anders het RP-offertedocument. */
+async function leesLeadCompleet(item) {
+  const lead = leesLead(item);
+  // "1x Winkel offerte" is geen product maar een placeholder.
+  const bruikbaar = lead.producten.filter((p) => !/winkel offerte|offerte$/i.test(p.naam));
+  if (bruikbaar.length) return { ...lead, producten: bruikbaar, aantalProducten: bruikbaar.reduce((a, p) => a + p.aantal, 0), bron: 'leadtekst' };
+  const uitOfferte = await leesProductenUitOfferte(item);
+  if (!uitOfferte.length) return { ...lead, bron: 'leadtekst (leeg)' };
+  return { ...lead, producten: uitOfferte, aantalProducten: uitOfferte.reduce((a, p) => a + p.aantal, 0), bron: 'RP-offerte' };
 }
 
 // ── agenda per inmeter ──────────────────────────────────────────────────────
@@ -285,7 +339,7 @@ async function main() {
   const regels = [];
 
   for (const item of items) {
-    const lead = leesLead(item);
+    const lead = await leesLeadCompleet(item);
     if (ALLEEN && !`${lead.naam} ${item.id}`.toLowerCase().includes(ALLEEN.toLowerCase())) continue;
     if (!lead.volledigAdres || !lead.plaats) {
       console.log(`  ! ${lead.naam}: geen bruikbaar adres, overslaan`);
@@ -308,7 +362,7 @@ async function main() {
     const aanbod = kiesAanbod(beste, 3);
 
     console.log(`\n  ${lead.naam} — ${lead.volledigAdres}`);
-    console.log(`    ${lead.aantalProducten} product(en): ${lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ') || '—'} → ${duur} min`);
+    console.log(`    ${lead.aantalProducten} product(en) uit ${lead.bron}: ${lead.producten.map((p) => `${p.aantal}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).join(', ') || '—'} → ${duur} min`);
     if (!aanbod.length) {
       console.log('    GEEN slot gevonden in de komende 10 werkdagen');
       regels.push(`${lead.naam} (${lead.plaats}): geen slot`);

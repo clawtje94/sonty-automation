@@ -1,0 +1,20 @@
+{
+  "52.012,4.485>52.080,4.310@2-9": {
+    "minuten": 27,
+    "rijtijdTomTom": 22,
+    "km": 20.3,
+    "fileVertragingMin": 0
+  },
+  "52.012,4.485>52.080,4.310@2-13": {
+    "minuten": 26,
+    "rijtijdTomTom": 21,
+    "km": 20.3,
+    "fileVertragingMin": 0
+  },
+  "51.970,4.605>51.935,4.635@2-11": {
+    "minuten": 32,
+    "rijtijdTomTom": 27,
+    "km": 14.3,
+    "fileVertragingMin": 0
+  }
+}

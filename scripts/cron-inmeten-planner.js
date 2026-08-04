@@ -30,6 +30,10 @@ const INMETERS = [
 ];
 
 const LIVE = process.argv.includes('--live');
+// VEILIGHEIDSKLEP: --live zonder filter zou elke lead op "Inmeten inplannen" boeken,
+// dus ook echte klanten. Met --alleen <tekst> verwerkt hij uitsluitend de leads
+// waarvan de naam die tekst bevat.
+const ALLEEN = (process.argv.find((a) => a.startsWith('--alleen=')) || '').split('=')[1] || null;
 const STATE = path.join(__dirname, '..', 'data', 'inmeten-planner-state.json');
 
 // ── kleine helpers ──────────────────────────────────────────────────────────
@@ -268,6 +272,10 @@ async function main() {
   const data = await rpGet(`/contact-service/${PID}/backlogs/${BACKLOG_ID}/items?limit=200`);
   const items = (data.items || data.data || data || []).filter((i) => i.status_id === INMETEN_INPLANNEN);
   console.log(`${items.length} lead(s) op "Inmeten inplannen"`);
+  if (LIVE && !ALLEEN) {
+    console.log('GEWEIGERD: --live zonder --alleen=<naam> zou alle leads boeken, ook echte klanten.');
+    return;
+  }
   if (!items.length) return;
 
   const agenda = await haalAgenda();
@@ -278,6 +286,7 @@ async function main() {
 
   for (const item of items) {
     const lead = leesLead(item);
+    if (ALLEEN && !`${lead.naam} ${item.id}`.toLowerCase().includes(ALLEEN.toLowerCase())) continue;
     if (!lead.volledigAdres || !lead.plaats) {
       console.log(`  ! ${lead.naam}: geen bruikbaar adres, overslaan`);
       regels.push(`${lead.naam}: GEEN ADRES — handmatig`);

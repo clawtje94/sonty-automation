@@ -63,5 +63,65 @@
     "lat": 52.0118994,
     "lon": 4.3602566,
     "gevonden": "Delft"
+  },
+  "vrijenbansestraat 3 nootdorp, nederland": {
+    "lat": 52.0426545,
+    "lon": 4.3898643,
+    "gevonden": "Vrijenbansestraat 3, 2631 BC Nootdorp"
+  },
+  "schansbaan 185, 2728gj, zoetermeer": {
+    "lat": 52.0727552,
+    "lon": 4.5285773,
+    "gevonden": "Schansbaan 185, 2728 GJ Zoetermeer"
+  },
+  "jupiterstraat 250 250, 3054 wh, rotterdam": {
+    "lat": 51.9660661,
+    "lon": 4.4869217,
+    "gevonden": "Jupiterstraat 250, 3054 WH Rotterdam"
+  },
+  "sytwinde 36, 2631 gt, nootdorp": {
+    "lat": 52.0460518,
+    "lon": 4.397369,
+    "gevonden": "Sytwinde 36, 2631 GT Nootdorp"
+  },
+  "amstelstroom 89 zoetermeer, nederland": {
+    "lat": 52.0636259,
+    "lon": 4.551554,
+    "gevonden": "Amstelstroom 89, 2721 ET Zoetermeer"
+  },
+  "simon van der stellaan 14, 2803ej, gouda": {
+    "lat": 52.0256344,
+    "lon": 4.7009343,
+    "gevonden": "Simon van der Stellaan 14, 2803 EJ Gouda"
+  },
+  "oost-voorstraat 97 97, 3262 jh, oud-beijerland": {
+    "lat": 51.8226755,
+    "lon": 4.4129781,
+    "gevonden": "Oost-Voorstraat 97, 3262 JH Oud-Beijerland"
+  },
+  "zuidplaslaan 119, 2743cw, waddinxveen": {
+    "lat": 52.0388643,
+    "lon": 4.6352369,
+    "gevonden": "Zuidplaslaan 119, 2743 CW Waddinxveen"
+  },
+  "herfsttijloos 10, 2631st, nootdorp": {
+    "lat": 52.0418558,
+    "lon": 4.4022756,
+    "gevonden": "Herfsttijloos 10, 2631 ST Nootdorp"
+  },
+  "hunze 8, 3961jb, wijk bij duurstede": {
+    "lat": 51.9710964,
+    "lon": 5.3210609,
+    "gevonden": "Hunze 8, 3961 JB Wijk bij Duurstede"
+  },
+  "herberg 68, 2264kv, leidschendam": {
+    "lat": 52.0909365,
+    "lon": 4.4023921,
+    "gevonden": "Herberg 68, 2264 KV Leidschendam"
+  },
+  "oude arnhemseweg 240, 3705bj, zeist": {
+    "lat": 52.0935955,
+    "lon": 5.2307996,
+    "gevonden": "Oude Arnhemseweg 240, 3705 BJ Zeist"
   }
 }

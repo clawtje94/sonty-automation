@@ -1,5 +1,38 @@
 # Ketenontwerp: van lead tot gemonteerd
 
+## DOEL (Daimy 2026-08-04)
+**"Hoe beter de voorbereiding van de inmeter, hoe beter en sneller de montage kan
+verlopen. Dat is heel het doel."**
+
+De meetbon is dus geen bestelformulier maar een montagevoorbereiding. Hij wordt
+ontworpen vanaf de monteur terug: elk veld bestaat omdat het anders een tweede
+bezoek, verkeerd gereedschap of stilstand op de stoep oplevert.
+
+### Wat een montage traag maakt, en wat de bon daarom moet vastleggen
+
+| Oorzaak van vertraging | Vast te leggen bij het inmeten |
+|---|---|
+| verkeerd/ontbrekend materiaal | exacte maten + bestelmaat, montagewijze, wat er nu hangt |
+| verkeerd gereedschap | ondergrond (beton/steen/hout/staal), boorbaarheid, lintel, valse vensterbank |
+| geen stroom / geen kabelroute | elektra aanwezig, kabelroute, wie legt aan |
+| er niet bij kunnen | bereikbaarheid, hoogwerker/ladder/steiger, parkeren, hijsroute, trap/lift |
+| te weinig mensen | gewicht, aantal monteurs |
+| niemand thuis | wie doet open, sleutel, huisdieren |
+| tijd verkeerd ingeschat | montagetijd — door het SYSTEEM geschat, door de inmeter alleen gecorrigeerd |
+
+**Montagetijd niet aan de inmeter vragen.** De bon vraagt nu "Inschatting montagetijd
+totaal … uur" met de hand. Het systeem heeft de historie, de inmeter heeft de situatie:
+het systeem zet er een schatting neer, de inmeter corrigeert alleen bij afwijking, en
+juist die correctie is wat het model leert. Zelfde patroon als de inmeetduur
+(`scripts/lib/inmeetduur.js`).
+
+### Wat er uit de bon moet komen
+Eén meting, drie uitgangen — allemaal uit dezelfde bron, nooit overgetypt:
+1. **bestelling** → de besteller, met per leverancier de velden die dat portaal vraagt
+2. **montagebon** → de monteur, op zijn telefoon in Planado
+3. **eindofferte** → de klant, in Gripp bijgewerkt met de definitieve maten
+
+
 Vastgesteld 2026-08-04 met Daimy. Planado blijft (app + monteur-tracking).
 Eis Daimy: alles moet goed samenwerken vóórdat het live gaat.
 

@@ -25,11 +25,39 @@ const clean = (s) => String(s || '').replace(/<style[\s\S]*?<\/style>/gi, '').re
 // NIET weghalen (context blijft leesbaar) maar duidelijk labelen, zodat agent én QA-poort
 // het bovenste deel als hét nieuwe klantbericht zien. (Cor Haakman-case 23-07: de QA las de
 // gequote prijsopmerking als het bericht en keurde het afspraak-antwoord onterecht af.)
+/**
+ * Waar begint de geciteerde oude thread? Elke mailclient schrijft dat anders op, en de
+ * Nederlandse varianten ontbraken hier.
+ *
+ * Daimy 2026-08-04 (Winston Wareman): zijn iPhone zette de oude mail eronder met
+ * "Op 04.08.2026 om 09:03 heeft Aanvragen | Sonty het volgende geschreven:". Die vorm stond er
+ * niet bij, dus de hele geciteerde offertemail telde mee als zijn bericht. Daarin staat onze
+ * eigen FAQ-zin "hoe snel lossen jullie een storing op", en daardoor werd zijn maatwijziging
+ * als storingsmelding gezien en bleef het ticket bij Mens nodig liggen.
+ */
+const QUOTE_START = new RegExp([
+  /-{2,}\s*Oorspronkelijk bericht\s*-{2,}/.source,
+  /-{3,}\s*Original Message\s*-{3,}/.source,
+  /\bOn .{5,80}? wrote:/.source,
+  /\bVan:\s.{2,80}?\s(?:Verzonden|Datum):/.source,
+  // GEEN \b voor "Op": in de echte mail van Winston plakte zijn iPhone het aan de vorige regel
+  // vast als "Verstuurd vanaf mijn iPhoneOp 04.08.2026 om 09:03 heeft ...". Met een woordgrens
+  // matcht dat niet, en dan telt de hele geciteerde thread alsnog mee. Mijn eigen testzin had
+  // netjes een spatie; de echte mail niet. Vandaar deze los van elkaar.
+  /Op \d{1,2}[-./]\d{1,2}[-./]\d{2,4}.{0,90}?het volgende geschreven:/.source,   // iPhone, NL
+  /Op .{5,120}? het volgende geschreven:/.source,                                 // Apple Mail, NL
+  /Op .{5,70}? om \d{1,2}[:.]\d{2}\s.{0,90}?(?:heeft|schreef)\b/.source,          // Gmail, NL
+].join('|'), 'i');
+
 function markeerQuote(tekst) {
-  const i = tekst.search(/-{2,}\s*Oorspronkelijk bericht\s*-{2,}|-{3,}\s*Original Message\s*-{3,}|\bOn .{5,80}? wrote:|\bVan:\s.{2,80}?\s(?:Verzonden|Datum):/i);
-  if (i < 15) return tekst; // geen quote gevonden, of het bericht begint er vrijwel mee
+  const i = tekst.search(QUOTE_START);
+  // Drempel bewust laag: een kort antwoord als "Ja graag." of "Prima, doe maar." is een volwaardig
+  // bericht en moet ook van zijn quote gescheiden worden. Stond op 15, waardoor juist die korte
+  // replies de hele geciteerde thread meekregen in het sluit-oordeel.
+  if (i < 4) return tekst; // geen quote gevonden, of de mail begint er meteen mee
   return '[NIEUW BERICHT] ' + tekst.slice(0, i).trim() + ' [EINDE NIEUW BERICHT, hieronder staat de eerdere thread als quote, die is al gelezen] ' + tekst.slice(i).trim();
 }
+
 
 // VANGNET: haal meta-redenering en interne kopjes eruit zodat NOOIT iets naar de klant gaat dat
 // niet voor de klant bedoeld is (identiek aan daemon veiligeKlantTekst).

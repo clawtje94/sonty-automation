@@ -18,5 +18,50 @@
     "lat": 51.9347007,
     "lon": 4.6351118,
     "gevonden": "Ouderkerk aan den IJssel, Krimpenerwaard"
+  },
+  "via verdi 271 voorburg, nederland": {
+    "lat": 52.0878687,
+    "lon": 4.3775358,
+    "gevonden": "Via Verdi 271, 2272 WG Voorburg"
+  },
+  "leehoeve 48, delft": {
+    "lat": 52.0064677,
+    "lon": 4.3242639,
+    "gevonden": "Leehoeve 48, 2614 MH Delft"
+  },
+  "laan van westmolen 16 mijnsheerenland, nederland": {
+    "lat": 51.7988998,
+    "lon": 4.4813676,
+    "gevonden": "Laan van Westmolen 16, 3271 BK Mijnsheerenland"
+  },
+  "lekdijk 20a nieuw-lekkerland, nederland": {
+    "lat": 51.8945969,
+    "lon": 4.7201984,
+    "gevonden": "Lekdijk 20A, 2957 CA Nieuw-Lekkerland"
+  },
+  "pruimentuin 2 barendrecht, nederland": {
+    "lat": 51.8565796,
+    "lon": 4.5434355,
+    "gevonden": "Pruimentuin 2, 2991 TP Barendrecht"
+  },
+  "punter 80 barendrecht, nederland": {
+    "lat": 51.8469765,
+    "lon": 4.5485745,
+    "gevonden": "Punter 80, 2991 DH Barendrecht"
+  },
+  "hemelsblauw 48 zoetermeer, nederland": {
+    "lat": 52.0387136,
+    "lon": 4.4953963,
+    "gevonden": "Hemelsblauw 48, 2718 JX Zoetermeer"
+  },
+  "biesvaren 9 den haag, nederland": {
+    "lat": 52.0315517,
+    "lon": 4.385072,
+    "gevonden": "Biesvaren 9, 2498 EE Den Haag"
+  },
+  "delft": {
+    "lat": 52.0118994,
+    "lon": 4.3602566,
+    "gevonden": "Delft"
   }
 }

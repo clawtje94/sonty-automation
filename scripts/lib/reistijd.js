@@ -76,8 +76,18 @@ async function reistijd(vanAdres, naarAdres, vertrek) {
 
   const url = `https://api.tomtom.com/routing/1/calculateRoute/${a.lat},${a.lon}:${b.lat},${b.lon}/json`
     + `?key=${key()}&traffic=true&departAt=${departAt}`;
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(`routing: HTTP ${r.status}`);
+
+  // TomTom knijpt af bij te veel verzoeken achter elkaar (429). Een planner die een
+  // hele week doorrekent loopt daar zeker tegenaan, dus rustig opnieuw proberen.
+  let r;
+  for (let poging = 0; poging < 4; poging++) {
+    r = await fetch(url);
+    if (r.ok) break;
+    if (r.status !== 429 && r.status < 500) throw new Error(`routing: HTTP ${r.status}`);
+    await new Promise((k) => setTimeout(k, 700 * 2 ** poging));
+  }
+  if (!r || !r.ok) throw new Error(`routing: HTTP ${r?.status} na 4 pogingen`);
+
   const s = (await r.json())?.routes?.[0]?.summary;
   if (!s) throw new Error('routing: geen route gevonden');
 

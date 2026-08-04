@@ -158,20 +158,22 @@ async function main() {
   const alleSlots = [];
   for (const [wie, eigen] of Object.entries(perPersoon)) {
     if (wie === 'onbekend' || eigen.length < 2) continue;
-    const s2 = await zoekSlots({ agenda: eigen, adres, duurMin: duur, werkdagen: dagen });
+    const s2 = await zoekSlots({ agenda: eigen, adres, duurMin: duur, werkdagen: dagen, agendaOnbetrouwbaar: true });
     alleSlots.push(...s2.map((x) => ({ ...x, inmeter: wie })));
   }
-  const slots = alleSlots.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
+  const slots = alleSlots.sort((a, b) => a.aankomst - b.aankomst);
   console.log(`\n${slots.length} mogelijke plekken tegen de ECHTE agenda.\n`);
-  console.log('De 8 goedkoopste:');
+  console.log('LET OP: de bestaande afspraken hebben de reistijd in het blok zitten, dus');
+  console.log('een berekende meerprijs zou dubbeltelling zijn. Hieronder alleen de plekken');
+  console.log('waar de klus ECHT past, op tijd gesorteerd.\n');
   for (const s of slots.slice(0, 8)) {
-    console.log(`  ${s.inmeter.split(' ')[0].padEnd(8)} ${s.datum} ${venster(s)}  +${String(s.extraRijtijdMin).padStart(3)} min omrijden  | tussen ${String(s.naVorige).slice(0, 24)} en ${String(s.voorVolgende).slice(0, 24)}`);
+    console.log(`  ${s.inmeter.split(' ')[0].padEnd(8)} ${s.datum} ${venster(s)}  | tussen ${String(s.naVorige).slice(0, 26)} en ${String(s.voorVolgende).slice(0, 26)}`);
   }
 
   const aanbod = kiesAanbod(slots, 3);
-  console.log(`\n=== VOORSTEL AAN DE KLANT (grens: max +${MAX_EXTRA_RIJTIJD_MIN} min omrijden) ===`);
+  console.log(`\n=== VOORSTEL AAN DE KLANT ===`);
   if (!aanbod.length) console.log('  nog geen aanbod — ' + waaromGeenAanbod(slots));
-  else for (const s of aanbod) console.log(`  ${s.datum} ${venster(s)}  door ${s.inmeter}  (+${s.extraRijtijdMin} min omrijden)`);
+  else for (const s of aanbod) console.log(`  ${s.datum} ${venster(s)}  door ${s.inmeter.split(' ')[0]}`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

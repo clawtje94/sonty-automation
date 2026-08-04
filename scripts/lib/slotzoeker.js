@@ -37,8 +37,14 @@ const MAX_EXTRA_RIJTIJD_MIN = 30;
  *        Rooster: per dag 'YYYY-MM-DD' met begin- en eindtijd 'HH:MM'.
  * @returns {Promise<Array>} slots, oplopend op extra rijtijd.
  */
-async function zoekSlots({ agenda, adres, duurMin, werkdagen }) {
+async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaar = false }) {
   const slots = [];
+  // De bestaande Outlook-afspraken hebben de reistijd IN het blok zitten (Daimy
+  // 2026-08-04: "het is nu allemaal ingepland met reistijd erin en we denken dat de
+  // jongens er niet netjes mee zijn omgegaan"). Reken je daar reistijd bovenop, dan tel
+  // je dubbel en lijkt elke invoeging peperduur. Zolang de agenda niet schoon is,
+  // beoordelen we alleen op de RUIMTE en niet op een berekende meerprijs.
+  const extraBuffer = agendaOnbetrouwbaar ? 20 : 0;
 
   for (const dag of werkdagen) {
     const dagStart = new Date(`${dag.datum}T${dag.van}:00`);
@@ -77,7 +83,7 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen }) {
         continue; // adres niet te vinden of routing faalt: dit gat overslaan
       }
 
-      const nodigMin = heen.minuten + duurMin + terug.minuten + 2 * MARGE_MIN;
+      const nodigMin = heen.minuten + duurMin + terug.minuten + 2 * MARGE_MIN + extraBuffer;
       if (nodigMin > ruimteMin) continue;
 
       const aankomst = new Date(+vorige.eind + (heen.minuten + MARGE_MIN) * MINUUT);
@@ -89,6 +95,9 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen }) {
         vertrek,
         // Wat deze klus de dag extra kost aan rijtijd. Dit is het getal waarop we kiezen.
         extraRijtijdMin: heen.minuten + terug.minuten - direct.minuten,
+        // Bij een onbetrouwbare agenda is dat getal een indicatie, geen feit: de
+        // buurblokken bevatten zelf al reistijd.
+        kostenBetrouwbaar: !agendaOnbetrouwbaar,
         heenMin: heen.minuten,
         terugMin: terug.minuten,
         kmHeen: heen.km,
@@ -108,8 +117,14 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen }) {
  * verschillende dagen en dagdelen. Drie keer hetzelfde tijdstip aanbieden is geen keuze.
  */
 function kiesAanbod(slots, aantal = 3) {
-  // Alleen slots die de route niet onnodig duur maken.
-  slots = slots.filter((s) => s.extraRijtijdMin <= MAX_EXTRA_RIJTIJD_MIN);
+  // Alleen slots die de route niet onnodig duur maken. Is de kostenberekening niet
+  // betrouwbaar (oude agenda met reistijd in de blokken), dan filteren we er niet op:
+  // dan zou je op een verzonnen getal leads liggen laten.
+  if (slots.some((s) => s.kostenBetrouwbaar === false)) {
+    slots = [...slots].sort((a, b) => a.aankomst - b.aankomst);
+  } else {
+    slots = slots.filter((s) => s.extraRijtijdMin <= MAX_EXTRA_RIJTIJD_MIN);
+  }
   const gekozen = [];
   const gebruikt = new Set();
   for (const s of slots) {

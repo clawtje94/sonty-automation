@@ -141,12 +141,14 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
  * verschillende dagen en dagdelen. Drie keer hetzelfde tijdstip aanbieden is geen keuze.
  */
 function kiesAanbod(slots, aantal = 3) {
-  // Alleen slots die de route niet onnodig duur maken. Is de kostenberekening niet
-  // betrouwbaar (oude agenda met reistijd in de blokken), dan filteren we er niet op:
-  // dan zou je op een verzonnen getal leads liggen laten.
-  if (slots.some((s) => s.kostenBetrouwbaar === false)) {
-    slots = [...slots].sort((a, b) => a.aankomst - b.aankomst);
-  } else {
+  // CLUSTEREN gebeurt hier: altijd rangschikken op marginale rijtijd, zodat een slot
+  // náást een bestaande afspraak in dezelfde buurt wint van een losse lege dag.
+  // De formule heen + terug - direct blijft geldig, ook op een vuile agenda; alleen het
+  // harde MAX-filter is daar niet eerlijk (blokken bevatten zelf al reistijd), dus dat
+  // filter staat alleen aan als de kosten betrouwbaar zijn.
+  const betrouwbaar = !slots.some((s) => s.kostenBetrouwbaar === false);
+  slots = [...slots].sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
+  if (betrouwbaar) {
     slots = slots.filter((s) => s.extraRijtijdMin <= MAX_EXTRA_RIJTIJD_MIN);
   }
   const gekozen = [];

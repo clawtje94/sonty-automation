@@ -3,7 +3,7 @@
 // Elke test hier is een ECHTE bug die op 2026-08-04 gevonden is; deze suite houdt ze weg.
 // Draaien: node tests/keten-regressie.js  (geen netwerk nodig, alles puur)
 const assert = require('assert');
-const { bezetteBlokken } = require('../scripts/lib/slotzoeker');
+const { bezetteBlokken, kiesAanbod, MAX_EXTRA_RIJTIJD_MIN } = require('../scripts/lib/slotzoeker');
 const { schatDuur, maatToeslag } = require('../scripts/lib/inmeetduur');
 
 let ok = 0, fout = 0;
@@ -105,6 +105,46 @@ test('echte producten blijven producten', () => {
   for (const naam of ['Windvast', 'Rolluik', 'Suneye dichte cassette', 'Markiezen', 'Zip Design 110']) {
     assert.ok(!GEEN_PRODUCT.test(naam), `"${naam}" mag niet weggefilterd worden`);
   }
+});
+
+console.log('— clusteren (kiesAanbod) —');
+
+const slotje = (dagStr, uur, extra, betrouwbaar) => ({
+  datum: dagStr, aankomst: new Date(`${dagStr}T${String(uur).padStart(2,'0')}:00:00`),
+  extraRijtijdMin: extra, kostenBetrouwbaar: betrouwbaar,
+});
+
+test('rangschikt op minste extra rijtijd, ook bij vuile agenda', () => {
+  const gekozen = kiesAanbod([
+    slotje('2026-09-01', 9, 40, false),
+    slotje('2026-09-02', 9, 8, false),   // naast een buur: goedkoopst
+    slotje('2026-09-03', 9, 25, false),
+  ], 3);
+  assert.strictEqual(gekozen[0].extraRijtijdMin, 8, 'goedkoopste (buur) moet eerst');
+});
+
+test('vuile agenda: duur slot wordt NIET weggefilterd (wel achteraan)', () => {
+  const gekozen = kiesAanbod([slotje('2026-09-01', 9, 90, false)], 3);
+  assert.strictEqual(gekozen.length, 1, 'op vuile kosten mag je geen leads laten liggen');
+});
+
+test('schone agenda: boven de grens valt af', () => {
+  const gekozen = kiesAanbod([
+    slotje('2026-09-01', 9, MAX_EXTRA_RIJTIJD_MIN + 10, true),
+    slotje('2026-09-02', 9, 5, true),
+  ], 3);
+  assert.strictEqual(gekozen.length, 1);
+  assert.strictEqual(gekozen[0].extraRijtijdMin, 5);
+});
+
+test('spreiding: niet 3x hetzelfde dagdeel op dezelfde dag', () => {
+  const gekozen = kiesAanbod([
+    slotje('2026-09-01', 9, 5, true),
+    slotje('2026-09-01', 10, 6, true),
+    slotje('2026-09-02', 9, 7, true),
+  ], 2);
+  const sleutels = gekozen.map((s) => s.datum + (s.aankomst.getHours() < 12 ? 'o' : 'm'));
+  assert.strictEqual(new Set(sleutels).size, sleutels.length, 'zelfde dag+dagdeel dubbel aangeboden');
 });
 
 console.log('— advies-poort —');

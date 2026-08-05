@@ -183,6 +183,27 @@ async function main() {
     return (dag) => (perDag[dag] >= top * 0.2 ? { van: '08:30', tot: '17:00' } : null);
   };
 
+  // OPENSTAANDE AANBIEDINGEN tellen mee als bezet EN als anker. Zo kan hetzelfde
+  // tijdstip nooit aan twee klanten tegelijk worden aangeboden, en clustert een
+  // nieuwe lead vanzelf naast een aanbod dat al in dezelfde buurt uitstaat.
+  try {
+    const ar = await fetch('https://sonty-website.vercel.app/api/inmeet-aanbod?status=open', {
+      headers: { 'x-meet-code': process.env.BELSCHERM_CODE || 'sonty2288' },
+    });
+    const { aanbiedingen } = await ar.json();
+    let ankers = 0;
+    for (const a of aanbiedingen || []) {
+      if (a.lead?.rpItemId === item.id) continue; // eigen eerdere aanbod telt niet
+      for (const sl of a.slots || []) {
+        (perPersoon[sl.inmeter] = perPersoon[sl.inmeter] || []).push({
+          start: sl.aankomst, eind: sl.vertrek, adres: a.lead.volledigAdres, klant: `aanbod ${a.lead.naam}`,
+        });
+        ankers++;
+      }
+    }
+    if (ankers) console.log(`  (${ankers} openstaand aanbod-slot(s) meegenomen als bezet/anker)`);
+  } catch { console.log('  (aanbod-register niet bereikbaar; plan zonder ankers)'); }
+
   const alleSlots = [];
   for (const [wie, eigen] of Object.entries(perPersoon)) {
     if (eigen.length < 2) continue;
@@ -243,8 +264,15 @@ async function main() {
       }),
     });
     if (!res.ok) throw new Error(`aanbod aanmaken mislukt: HTTP ${res.status}`);
-    const { url } = await res.json();
+    const { url, token: aanbodToken } = await res.json();
     console.log(`\nAANBOD AANGEMAAKT (24u geldig): ${url}`);
+
+    // Direct naar de klant via WhatsApp én mail (zo groot mogelijke kans dat hij het ziet).
+    const { verstuurAanbod } = require('./lib/aanbod-versturen');
+    const aanbodRec = { lead: { naam: item.summary, telefoon: veldUit('Telefoonnummer'), email: veldUit('E-mailadres') }, duurMin: duur };
+    const verzonden = await verstuurAanbod(aanbodRec, url);
+    console.log(`  WhatsApp: ${verzonden.wa.ok ? 'verstuurd' : 'NIET (' + verzonden.wa.reden + ')'}`);
+    console.log(`  Mail:     ${verzonden.mail.ok ? 'verstuurd' : 'NIET (' + verzonden.mail.reden + ')'}`);
     const TG = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
     await fetch(`https://api.telegram.org/bot${TG}/sendMessage`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },

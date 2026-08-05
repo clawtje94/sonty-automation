@@ -115,6 +115,29 @@ async function main() {
     const { klaar } = await r.json();
     console.log(`${klaar.length} complete meetbon(nen)`);
     for (const { bon, aanbetaling } of klaar) {
+      // ADVIES-POORT: "Weet nog niet / advies" is een geldig tussenantwoord voor de
+      // inmeter, maar nooit een eindantwoord om op te BESTELLEN. Zo'n bon gaat niet
+      // automatisch de bestelketen in; kantoor beslist eerst. Eén melding per bon.
+      const adviesPunten = [];
+      for (const p of bon.producten || []) {
+        for (const [veld, waarde] of Object.entries(p.waarden || {})) {
+          if (/weet (nog )?niet|advies/i.test(String(waarde))) adviesPunten.push(`${p.type}: ${veld} = "${waarde}"`);
+        }
+      }
+      if (adviesPunten.length) {
+        state.adviesGemeld = state.adviesGemeld || {};
+        if (!state.adviesGemeld[bon.gripp]) {
+          state.adviesGemeld[bon.gripp] = new Date().toISOString();
+          fs.writeFileSync(STATE, JSON.stringify(state, null, 2));
+          await telegram(`✋ Meetbon ${bon.gripp} (${bon.klant?.naam || '?'}) is compleet en de aanbetaling is binnen, maar er staat nog "advies/weet nog niet" in:\n- ${adviesPunten.join('\n- ')}\n\nNIET automatisch doorgezet naar bestellen. Kantoor moet eerst de keuze maken; daarna zet ik hem door.`);
+        }
+        console.log(`  ✋ ${bon.gripp}: adviespunten open, niet doorgezet`);
+        continue;
+      }
+      // Eerder gemeld maar inmiddels opgelost: melding resetten zodat een nieuwe
+      // advieswaarde later opnieuw gemeld wordt.
+      if (state.adviesGemeld?.[bon.gripp]) { delete state.adviesGemeld[bon.gripp]; fs.writeFileSync(STATE, JSON.stringify(state, null, 2)); }
+
       const wie = `${bon.klant?.naam || '?'} (Gripp ${bon.gripp})`;
       if (!aanbetaling.gevonden) {
         const dagen = (Date.now() - Date.parse(bon.compleetOp || bon.bijgewerkt)) / 86400000;

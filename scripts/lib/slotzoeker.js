@@ -37,6 +37,34 @@ const MAX_EXTRA_RIJTIJD_MIN = 30;
  *        Rooster: per dag 'YYYY-MM-DD' met begin- en eindtijd 'HH:MM'.
  * @returns {Promise<Array>} slots, oplopend op extra rijtijd.
  */
+/**
+ * Bezette blokken van een dag: afspraken die (deels) in de werkdag vallen, met
+ * OVERLAPPENDE afspraken samengevoegd. Pure functie, los getest in tests/keten-regressie.js
+ * — de bug van 2026-08-04 (winkeldienst 09:00-17:00 naast losse inmeet-uren gaf
+ * niet-bestaande gaten) mag nooit terugkomen.
+ */
+function bezetteBlokken(agenda, dagStart, dagEind) {
+  const ruw = agenda
+    .map((a) => ({ ...a, start: new Date(a.start), eind: new Date(a.eind) }))
+    .filter((a) => a.eind > dagStart && a.start < dagEind)
+    .sort((a, b) => a.start - b.start);
+
+  const blokken = [];
+  for (const a of ruw) {
+    const laatste = blokken[blokken.length - 1];
+    if (laatste && a.start < laatste.eind) {
+      if (a.eind > laatste.eind) {
+        laatste.eind = a.eind;
+        if (a.adres) { laatste.adres = a.adres; laatste.klant = a.klant; }
+      }
+      laatste.samengevoegd = true;
+    } else {
+      blokken.push({ ...a });
+    }
+  }
+  return blokken;
+}
+
 async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaar = false }) {
   const slots = [];
   // De bestaande Outlook-afspraken hebben de reistijd IN het blok zitten (Daimy
@@ -50,31 +78,7 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
     const dagStart = new Date(`${dag.datum}T${dag.van}:00`);
     const dagEind = new Date(`${dag.datum}T${dag.tot}:00`);
 
-    // Afspraken van deze dag, op tijd gesorteerd. Ook afspraken die vóór de werkdag
-    // beginnen maar erin doorlopen tellen mee (een blok 09:00-17:00 dat om 08:00 begon).
-    const ruw = agenda
-      .map((a) => ({ ...a, start: new Date(a.start), eind: new Date(a.eind) }))
-      .filter((a) => a.eind > dagStart && a.start < dagEind)
-      .sort((a, b) => a.start - b.start);
-
-    // OVERLAPPENDE afspraken samenvoegen. Zonder dit ontstaat er een gat dat er niet is:
-    // staat er 09:00-10:00 inmeten EN 09:00-17:00 winkeldienst, dan zag de oude versie
-    // na dat eerste uur ruimte, terwijl de man de hele dag in de winkel staat.
-    const opDeDag = [];
-    for (const a of ruw) {
-      const laatste = opDeDag[opDeDag.length - 1];
-      if (laatste && a.start < laatste.eind) {
-        // Overlap: één bezet blok van maken. Het adres van de afspraak die het laatst
-        // eindigt bepaalt waar hij daarna vandaan vertrekt.
-        if (a.eind > laatste.eind) {
-          laatste.eind = a.eind;
-          if (a.adres) { laatste.adres = a.adres; laatste.klant = a.klant; }
-        }
-        laatste.samengevoegd = true;
-      } else {
-        opDeDag.push({ ...a });
-      }
-    }
+    const opDeDag = bezetteBlokken(agenda, dagStart, dagEind);
 
     // De dag begint en eindigt bij het magazijn.
     const punten = [
@@ -180,4 +184,4 @@ function waaromGeenAanbod(slots) {
   return `alle plekken kosten te veel omrijden (goedkoopste +${goedkoopste} min, grens is ${MAX_EXTRA_RIJTIJD_MIN}) — beter wachten tot er een klus in dezelfde hoek bijkomt`;
 }
 
-module.exports = { zoekSlots, kiesAanbod, venster, waaromGeenAanbod, MARGE_MIN, MAX_EXTRA_RIJTIJD_MIN };
+module.exports = { zoekSlots, kiesAanbod, venster, waaromGeenAanbod, bezetteBlokken, MARGE_MIN, MAX_EXTRA_RIJTIJD_MIN };

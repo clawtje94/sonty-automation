@@ -41,7 +41,16 @@ try {
   }
 } catch (e) { problemen.push('kruiscontrole v4/bot kon niet draaien: ' + String(e.message).slice(0, 120)); }
 
-// 4. De Vercel KV-override wint op de live website; die moet gelijk zijn aan het bestand
+// 4. De publieke productpagina's moeten tonen wat de offerte rekent. De meetlat meet
+//    alleen de motoren; op 2026-08-05 bleek de pagina daardoor 9,1% onder de offerte te
+//    staan zonder dat iets alarm sloeg.
+try { execFileSync(process.execPath, [path.join(ROOT, 'scripts/tests/website-toont-offerteprijs.js')], { stdio: 'pipe' }); }
+catch (e) {
+  const uit = String((e.stdout || '') + (e.stderr || '')).split('\n').filter((l) => l.startsWith('❌') || l.startsWith('   ')).join('\n');
+  problemen.push('De website toont andere bedragen dan de offertemotor:\n' + uit);
+}
+
+// 5. De Vercel KV-override wint op de live website; die moet gelijk zijn aan het bestand
 (async () => {
   try {
     const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/prijsconfig.json'), 'utf8'));

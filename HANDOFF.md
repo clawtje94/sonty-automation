@@ -1,5 +1,18 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-05)
 
+## PLAN PRIJSOVERTUIGING KLAAR (5 aug, opdracht Daimy "mentaal voorbereiden vóór de prijsvraag")
+- **`docs/PLAN-prijsovertuiging-2026.md`** — volledige uitwerking, NIETS staat live.
+- Basis: ultracode-workflow (15 agents: 4.163 gesprekken, 89 prijsbezwaren, 281 offertes)
+  + eigen onderzoek neuromarketing/sales (SPIN, Challenger, Cialdini, peer-reviewed papers).
+- Vier principes akkoord Daimy: (1) nooit onszelf duur noemen, Challenger-toon;
+  (2) alle investering vóór het bedrag (70% van bezwaren = eerste inbound bericht);
+  (3) showroom vóór korting; (4) vergelijken nooit zelf uitnodigen — les-vorm.
+- Teksten A t/m J definitief in het plan; invoervolgorde in 6 blokken (blok 1 = onware
+  claims weg, blok 2 = meereken-blok netto laten rekenen); 7 beslispunten voor Daimy
+  (o.a. permanente 15%, openingstijden showroom die op 5 plekken verschillen, levertijd
+  3 versies); meetplan met 5 nieuwe meters naast het weekrapport.
+- Volgende stap: Daimy's go per blok, dan bouwen.
+
 ## WEBSITEPRIJZEN LIEPEN ACHTER OP DE PRIJSVERHOGING (5 aug, vraag Daimy)
 - **De verhoging van 3 aug zat wél in alle prijsmotoren maar niet in de publieke productpagina's.**
   Die rekenen niet, ze lazen `data/sunmaster-prices.json` rechtstreeks, en daar zit de oude

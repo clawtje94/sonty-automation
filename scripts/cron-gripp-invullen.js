@@ -303,6 +303,15 @@ async function main() {
       // ALLE ondertekende (ACCEPTED) offertes verwerken — klant kan er meerdere hebben
       // Geen ACCEPTED? Dan alleen de beste (nieuwste SENT of nieuwste andere)
       const acceptedDocs = fullDocs.filter(d => d.status === 'ACCEPTED');
+      // Meerdere versies zonder één getekende: NIET gokken welke geldt — de klant
+      // moet er zelf één tekenen (Daimy 05-08, geval Wilco Vendrig: SENT 11k naast
+      // ACCEPTED 27,5k met dezelfde timestamp).
+      if (acceptedDocs.length === 0 && fullDocs.length > 1) {
+        console.log('  SKIP: ' + fullDocs.length + ' offerteversies, geen enkele getekend — klant moet eerst tekenen');
+        await sendTelegram('⚠️ Gripp-invullen overgeslagen: "' + (item.summary || '?') + '" heeft ' + fullDocs.length + ' offerteversies in RP en geen enkele is getekend. Klant moet er één tekenen (of kantoor kiest).');
+        failed++;
+        continue;
+      }
       const docsToProcess = acceptedDocs.length > 0 ? acceptedDocs : [fullDocs[0]];
       console.log('  Te verwerken: ' + docsToProcess.map(d => '#' + d.info.quotationNumber + ' [' + d.status + ']').join(', ') + ' (van ' + fullDocs.length + ' versies)');
 

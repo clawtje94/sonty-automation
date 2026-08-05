@@ -21,6 +21,10 @@ const ZOEK = (process.argv.find((a) => a.startsWith('--alleen=')) || '').split('
 // read-only. Werkt alleen samen met --alleen, zodat er nooit per ongeluk voor alle
 // leads tegelijk aanbiedingen ontstaan.
 const MAAK_AANBOD = process.argv.includes('--maak-aanbod');
+// --duur=20: reken met een opgegeven inmeetduur in plaats van de schatting uit de
+// producten. Voor tests ("wat krijgt een mediaan-klant aangeboden?") en later voor
+// handmatige correcties door kantoor.
+const DUUR_OVERRIDE = parseInt((process.argv.find((a) => a.startsWith('--duur=')) || '').split('=')[1], 10) || null;
 
 async function owaToken() {
   const browser = await chromium.launch({ headless: true });
@@ -162,7 +166,8 @@ async function main() {
   const desc = item.description || '';
   const veld = (n) => (desc.match(new RegExp(`^${n}:\\s*(.+)$`, 'im')) || [])[1]?.trim() || '';
   const adres = [[veld('Straatnaam'), veld('Huisnummer')].filter(Boolean).join(' '), veld('Postcode'), veld('Plaats')].filter(Boolean).join(', ');
-  const duur = schatDuur(producten);
+  const duur = DUUR_OVERRIDE || schatDuur(producten);
+  if (DUUR_OVERRIDE) console.log(`(inmeetduur OVERRIDE: ${DUUR_OVERRIDE} min in plaats van geschatte ${schatDuur(producten)} min)`);
 
   console.log(`\n=== ${item.summary} — ${adres} ===`);
   console.log(`${producten.length} product(en): ${producten.map((p) => `${p.aantal}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).join(', ')}`);

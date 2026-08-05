@@ -30,8 +30,13 @@ const nieuwDeelVan = (tekst) =>
 // Letterlijk uit ticket #971468716, inclusief het ontbrekende spatie na "iPhone".
 const WINSTON = 'Beste, Breedte moet 4500 worden mijn excuses.Groet,Winston Wareman Verstuurd vanaf mijn iPhoneOp 04.08.2026 om 09:03 heeft Aanvragen | Sonty <aanvragen@sonty.nl> het volgende geschreven: Beste Winston Wareman , Hartelijk dank voor je aanvraag! We hebben op basis van jouw wensen een prijsvoorstel opgesteld. Binnen hoe snel lossen jullie een storing op? We proberen een storing binnen 5 dagen op te lossen.';
 
+// Letterlijk uit ticket #971369998 (juliaavo@gmail.com): zij vroeg om een inmeetafspraak, maar
+// onder haar bericht stond de hele offertemail met ">" ervoor. Deze vorm heeft geen kopregel.
+const JULIA = 'Geachte heer/mevrouw,\r\n\r\nVeel dank voor de prijsindicatie. Wij zouden graag een inmeetafspraak willen inplannen. Kunt u ons laten weten welke data en tijden nog beschikbaar zijn?\r\n\r\nMet vriendelijke groet,\r\nJulia\r\n\r\n> Beste Julia,\r\n> Hartelijk dank voor je aanvraag!\r\n> -Binnen hoe snel lossen jullie een storing op?\r\n> We proberen een storing binnen 5 dagen op te lossen.';
+
 const GEVALLEN = [
   // [naam, mailtekst, moet als klacht tellen?]
+  ['Julia, quote met > ervoor', JULIA, false],
   ['Winston, iPhone zonder spatie', WINSTON, false],
   ['Apple Mail met spatie', 'Graag aanpassen naar 4500. Op 4 augustus 2026 heeft Sonty het volgende geschreven: Hoe snel lossen jullie een storing op?', false],
   ['Gmail Nederlands', 'Prima, doe maar. Op 4 aug. 2026 om 09:03 schreef Sonty <info@sonty.nl>: Hoe snel lossen jullie een storing op?', false],

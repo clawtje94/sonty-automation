@@ -19,8 +19,15 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const src = fs.readFileSync(path.join(ROOT, 'scripts/ai-ks/daemon.js'), 'utf8');
-const woorden = src.match(/const BEVESTIG_WOORDEN = new Set\(\[([\s\S]*?)\]\)/)[1]
-  .replace(/[\n\s']/g, '').split(',').filter(Boolean);
+// De lijst heet sinds 2026-08-04 BEVESTIG_WOORDEN_GEDEELD en staat op moduleniveau, omdat twee
+// plekken hem nodig hebben (de antwoordlus en de service-heropening). Beide namen accepteren,
+// zodat deze test niet omvalt bij een hernoeming maar wel blijft controleren wat hij moet.
+const woordenMatch = src.match(/const BEVESTIG_WOORDEN(?:_GEDEELD)? = new Set\(\[([\s\S]*?)\]\)/);
+if (!woordenMatch) {
+  console.error('GEFAALD: de lijst met bevestigingswoorden is niet meer te vinden in daemon.js.');
+  process.exit(1);
+}
+const woorden = woordenMatch[1].replace(/[\n\s']/g, '').split(',').filter(Boolean);
 
 // Controleer dat de contextregel er nog in zit; zonder die regel valt de bug terug.
 if (!/wijVroegenIets/.test(src)) {

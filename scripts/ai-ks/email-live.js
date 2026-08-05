@@ -49,8 +49,23 @@ const QUOTE_START = new RegExp([
   /Op .{5,70}? om \d{1,2}[:.]\d{2}\s.{0,90}?(?:heeft|schreef)\b/.source,          // Gmail, NL
 ].join('|'), 'i');
 
+/**
+ * De klassieke quote met een groter-dan aan het begin van de regel. Sommige clients zetten geen
+ * kopregel maar prefixen alleen de oude tekst met ">".
+ *
+ * Daimy 2026-08-05 (juliaavo@gmail.com): zij vroeg netjes om een inmeetafspraak, maar onder haar
+ * bericht stond de hele offertemail met ">" ervoor, inclusief onze eigen FAQ-zin "hoe snel lossen
+ * jullie een storing op". Dat woord telde mee en haar inmeetverzoek belandde bij Mens nodig.
+ */
+const QUOTE_REGELPREFIX = /^[ \t]*>/m;
+
 function markeerQuote(tekst) {
-  const i = tekst.search(QUOTE_START);
+  // De vroegste van de twee vormen wint: een mail kan zowel een kopregel als >-prefixen hebben,
+  // en dan begint de quote bij wat het eerst komt.
+  const iKop = tekst.search(QUOTE_START);
+  const iPrefix = tekst.search(QUOTE_REGELPREFIX);
+  const kandidaten = [iKop, iPrefix].filter((x) => x >= 4);
+  const i = kandidaten.length ? Math.min(...kandidaten) : -1;
   // Drempel bewust laag: een kort antwoord als "Ja graag." of "Prima, doe maar." is een volwaardig
   // bericht en moet ook van zijn quote gescheiden worden. Stond op 15, waardoor juist die korte
   // replies de hele geciteerde thread meekregen in het sluit-oordeel.

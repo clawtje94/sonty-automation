@@ -73,7 +73,7 @@ async function haalOutlookAgenda(token) {
   // 3-4 dagen per week zijn 10 werkdagen bijna 5 weken; alles daarbuiten zou de planner
   // tegen een lege agenda inplannen en dus vrolijk dubbelboeken.
   const van = new Date();
-  const tot = new Date(); tot.setDate(tot.getDate() + 42);
+  const tot = new Date(); tot.setDate(tot.getDate() + 56);
   // Location erbij, want zonder adres kun je geen reistijd rekenen.
   let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView`
     + `?$top=500&$select=Subject,Start,End,IsCancelled,Location,Organizer,Attendees`
@@ -113,7 +113,7 @@ async function main() {
   const inmeet = levend.filter((e) => isInmeten(e.Subject));
   const metAdres = levend.filter((e) => (e.Location?.DisplayName || '').trim().length > 5);
 
-  console.log(`Outlook "Sonty Montage", komende 42 dagen:`);
+  console.log(`Outlook "Sonty Montage", komende 56 dagen:`);
   console.log(`  ${levend.length} afspraken totaal (ALLEMAAL bezettend)`);
   console.log(`  ${inmeet.length} daarvan inmeten`);
   console.log(`  ${metAdres.length} met een adres (die kunnen ook voor reistijd meetellen)\n`);
@@ -212,12 +212,14 @@ async function main() {
     const dd = new Date(); dd.setDate(dd.getDate() + 1);
     // 18 werkdagen vooruit: de agenda is maar ~3-4 weken gevuld, dus de lege weken
     // daarna zijn echte capaciteit. Nooit verder dan het agenda-venster (42 dagen).
-    while (dagen.length < 18) {
+    // Genoeg horizon om ALTIJD minstens 3 keuzes te vinden: de volle weken opsouperen
+    // en door tot in de lege weken erna.
+    while (dagen.length < 24) {
       const u = werkt(dd.getDay());
       if (u) dagen.push({ datum: dd.toISOString().slice(0, 10), van: u.van, tot: u.tot });
       dd.setDate(dd.getDate() + 1);
       // Nooit verder plannen dan waar we agenda van hebben.
-      if (dd > new Date(Date.now() + 42 * 86400000)) break;
+      if (dd > new Date(Date.now() + 56 * 86400000)) break;
     }
     const bron = ROOSTER[wie]?.dagen ? 'rooster' : 'afgeleid uit agenda';
     const omschrijving = [1, 2, 3, 4, 5, 6].map((i) => { const u = werkt(i); return u ? `${DAGCODE[i]} ${u.van}-${u.tot}` : null; }).filter(Boolean).join(', ');

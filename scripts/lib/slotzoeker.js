@@ -113,6 +113,33 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
       const aankomst = new Date(+vorige.eind + (heen.minuten + MARGE_MIN) * MINUUT);
       const vertrek = new Date(+aankomst + duurMin * MINUUT);
 
+      // KEUZE VOOR DE KLANT (Daimy 2026-08-05: altijd meerdere tijden geven, dan
+      // kunnen volgende leads er beter bij aansluiten): is het gat ruim genoeg, dan
+      // bieden we naast de vroege tijd ook een middag-variant in hetzelfde gat aan.
+      // Elke aangeboden tijd wordt een anker in het aanbod-register.
+      const middag = new Date(`${dag.datum}T12:30:00`);
+      const vroegste = +vorige.eind + (heen.minuten + MARGE_MIN) * MINUUT;
+      if (
+        aankomst.getHours() < 11 &&
+        +middag >= vroegste &&
+        +middag + (duurMin + terug.minuten + MARGE_MIN + extraBuffer) * MINUUT <= +volgende.start
+      ) {
+        slots.push({
+          datum: dag.datum,
+          aankomst: middag,
+          vertrek: new Date(+middag + duurMin * MINUUT),
+          extraRijtijdMin: heen.minuten + terug.minuten - direct.minuten,
+          kostenBetrouwbaar: !agendaOnbetrouwbaar,
+          heenMin: heen.minuten,
+          terugMin: terug.minuten,
+          kmHeen: heen.km,
+          fileVertragingMin: heen.fileVertragingMin,
+          naVorige: vorige.magazijn ? 'magazijn' : (vorige.klant || vorige.adres),
+          voorVolgende: volgende.magazijn ? 'magazijn' : (volgende.klant || volgende.adres),
+          ruimteMin: Math.round(ruimteMin),
+        });
+      }
+
       slots.push({
         datum: dag.datum,
         aankomst,

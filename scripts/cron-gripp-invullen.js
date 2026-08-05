@@ -236,10 +236,15 @@ function findGrippProductId(description) {
 async function main() {
   console.log('[' + new Date().toISOString().substring(11, 19) + '] Gripp invullen v2 start');
 
-  const itemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items');
+  // limit=200: zonder limiet geeft RP een standaardpagina en vallen verse items er soms
+  // buiten (testlead 2026-08-05 werd zo overgeslagen: 'items: 2, nieuw: 0').
+  const itemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items?limit=200');
+  // --item=<rp-id>: verwerk gericht één item, ook als het in RP gearchiveerd is
+  // (testlead 2026-08-05 stond gearchiveerd en werd daardoor stil overgeslagen).
+  const ITEM_FILTER = (process.argv.find(a => a.startsWith('--item=')) || '').split('=')[1] || null;
   const items = (itemsData?.items || []).filter(i =>
     i.status_id === GRIP_INVULLEN_STATUS &&
-    !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED')
+    (ITEM_FILTER ? i.id === ITEM_FILTER : !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED'))
   );
 
   const sentLog = getSentLog();

@@ -274,12 +274,16 @@ async function verwerkLead(lead, item, slot, duurMin) {
   // 1. de afspraak zelf
   const job = await planadoPost('/jobs', {
     template_uuid: '1f11c802-65cd-6aa0-9d06-7e73cee772e4',
+    // Zonder type valt de opdracht op "default" en toont de app "Opdracht" i.p.v.
+    // "Inmeting" (Daimy 2026-08-05).
+    type_uuid: '1f11c802-6340-6680-9d06-7e73cee772e4',
     description: `Inmeten — ${lead.naam}\n${lead.volledigAdres}\n\n${lead.aantalProducten} product(en): ${lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ')}`,
     contacts: [{ type: 'phone', name: lead.naam, value: lead.telefoon || '-' }],
     address: { formatted: lead.volledigAdres },
     scheduled_at: slot.aankomst.toISOString(),
     scheduled_duration: { minutes: duurMin },
-    assignee: { uuid: inmeter.uuid },
+    // Planado wil de toewijzing als worker-object (422 'either team or worker must present')
+    assignee: { worker: { uuid: inmeter.uuid } },
     external_id: `rp-${lead.id}`,
   });
   const jobUuid = job.job_uuid || job.uuid;

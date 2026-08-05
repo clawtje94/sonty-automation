@@ -3,7 +3,7 @@
 // Elke test hier is een ECHTE bug die op 2026-08-04 gevonden is; deze suite houdt ze weg.
 // Draaien: node tests/keten-regressie.js  (geen netwerk nodig, alles puur)
 const assert = require('assert');
-const { bezetteBlokken, kiesAanbod, MAX_EXTRA_RIJTIJD_MIN } = require('../scripts/lib/slotzoeker');
+const { bezetteBlokken, kiesAanbod, rondAf5, MAX_EXTRA_RIJTIJD_MIN } = require('../scripts/lib/slotzoeker');
 const { schatDuur, maatToeslag } = require('../scripts/lib/inmeetduur');
 
 let ok = 0, fout = 0;
@@ -145,6 +145,15 @@ test('spreiding: niet 3x hetzelfde dagdeel op dezelfde dag', () => {
   ], 2);
   const sleutels = gekozen.map((s) => s.datum + (s.aankomst.getHours() < 12 ? 'o' : 'm'));
   assert.strictEqual(new Set(sleutels).size, sleutels.length, 'zelfde dag+dagdeel dubbel aangeboden');
+});
+
+console.log('— ronde tijden —');
+
+test('aankomst rondt naar boven af op hele 5 minuten (Daimy 05-08)', () => {
+  assert.strictEqual(rondAf5(new Date('2026-09-15T11:38:00')).getMinutes(), 40);
+  assert.strictEqual(rondAf5(new Date('2026-09-15T11:41:00')).getMinutes(), 45);
+  assert.strictEqual(rondAf5(new Date('2026-09-15T11:40:00')).getMinutes(), 40, 'al rond blijft rond');
+  assert.ok(+rondAf5(new Date('2026-09-15T11:38:00')) >= +new Date('2026-09-15T11:38:00'), 'nooit eerder dan haalbaar');
 });
 
 console.log('— advies-poort —');

@@ -7,6 +7,13 @@ const { reistijd, MAGAZIJN } = require('./reistijd');
 
 const MINUUT = 60 * 1000;
 
+/** Aankomsttijd naar boven afronden op hele 5 minuten (Daimy: ronde getallen —
+ *  "tussen 11:40 en 12:10" leest beter dan "tussen 11:38 en 12:08"). Naar boven,
+ *  zodat we nooit een aankomst beloven die vóór de vroegst haalbare tijd ligt. */
+function rondAf5(datum) {
+  return new Date(Math.ceil(+datum / (5 * MINUUT)) * (5 * MINUUT));
+}
+
 /** Marge tussen twee afspraken: uitloop bij de klant mag de rest van de dag niet omgooien. */
 const MARGE_MIN = 5;
 
@@ -110,8 +117,10 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
       const nodigMin = heen.minuten + duurMin + terug.minuten + 2 * MARGE_MIN + extraBuffer;
       if (nodigMin > ruimteMin) continue;
 
-      const aankomst = new Date(+vorige.eind + (heen.minuten + MARGE_MIN) * MINUUT);
+      const aankomst = rondAf5(new Date(+vorige.eind + (heen.minuten + MARGE_MIN) * MINUUT));
       const vertrek = new Date(+aankomst + duurMin * MINUUT);
+      // Door het afronden schuift de aankomst tot 4 min op; check dat het dan nog past.
+      if (+vertrek + (terug.minuten + MARGE_MIN + extraBuffer) * MINUUT > +volgende.start) continue;
 
       // KEUZE VOOR DE KLANT (Daimy 2026-08-05: altijd meerdere tijden geven, dan
       // kunnen volgende leads er beter bij aansluiten): is het gat ruim genoeg, dan
@@ -213,4 +222,4 @@ function waaromGeenAanbod(slots) {
   return `alle plekken kosten te veel omrijden (goedkoopste +${goedkoopste} min, grens is ${MAX_EXTRA_RIJTIJD_MIN}) — beter wachten tot er een klus in dezelfde hoek bijkomt`;
 }
 
-module.exports = { zoekSlots, kiesAanbod, venster, waaromGeenAanbod, bezetteBlokken, MARGE_MIN, MAX_EXTRA_RIJTIJD_MIN };
+module.exports = { zoekSlots, kiesAanbod, venster, waaromGeenAanbod, bezetteBlokken, rondAf5, MARGE_MIN, MAX_EXTRA_RIJTIJD_MIN };

@@ -3880,5 +3880,47 @@
     "rijtijdTomTom": 37,
     "km": 26.6,
     "fileVertragingMin": 0
+  },
+  "52.116,4.441>52.094,4.265@1-14": {
+    "minuten": 37,
+    "rijtijdTomTom": 30,
+    "km": 19,
+    "fileVertragingMin": 0
+  },
+  "52.116,4.441>52.012,4.485@1-14": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 24.5,
+    "fileVertragingMin": 0
+  },
+  "51.548,5.097>52.094,4.265@2-14": {
+    "minuten": 100,
+    "rijtijdTomTom": 82,
+    "km": 113.2,
+    "fileVertragingMin": 0
+  },
+  "51.548,5.097>52.012,4.485@2-14": {
+    "minuten": 75,
+    "rijtijdTomTom": 62,
+    "km": 89.1,
+    "fileVertragingMin": 0
+  },
+  "52.094,4.265>52.012,4.485@1-12": {
+    "minuten": 35,
+    "rijtijdTomTom": 29,
+    "km": 25.5,
+    "fileVertragingMin": 0
+  },
+  "52.094,4.265>52.091,4.270@2-11": {
+    "minuten": 10,
+    "rijtijdTomTom": 3,
+    "km": 1,
+    "fileVertragingMin": 0
+  },
+  "52.094,4.265>52.022,4.338@4-9": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 11.2,
+    "fileVertragingMin": 0
   }
 }

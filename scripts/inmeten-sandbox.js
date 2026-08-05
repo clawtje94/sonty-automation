@@ -236,9 +236,10 @@ async function main() {
   console.log(`\n${slots.length} mogelijke plekken tegen de ECHTE agenda.\n`);
   console.log('LET OP: de bestaande afspraken hebben de reistijd in het blok zitten, dus');
   console.log('een berekende meerprijs zou dubbeltelling zijn. Hieronder alleen de plekken');
-  console.log('waar de klus ECHT past, op tijd gesorteerd.\n');
-  for (const s of slots.slice(0, 8)) {
-    console.log(`  ${s.inmeter.padEnd(8)} ${s.datum} ${venster(s)}  | tussen ${String(s.naVorige).slice(0, 26)} en ${String(s.voorVolgende).slice(0, 26)}`);
+  console.log('waar de klus ECHT past. Rijtijd-indicatie tussen haakjes (op een vuile');
+  console.log('agenda een rangorde, geen exact getal); goedkoopste eerst:\n');
+  for (const s of [...slots].sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin)) {
+    console.log(`  ${s.inmeter.padEnd(8)} ${s.datum} ${venster(s)}  (±${String(s.extraRijtijdMin).padStart(3)} min om) | tussen ${String(s.naVorige).slice(0, 24)} en ${String(s.voorVolgende).slice(0, 24)}`);
   }
 
   const aanbod = kiesAanbod(slots, 3);

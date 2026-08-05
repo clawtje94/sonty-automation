@@ -8,7 +8,10 @@
 //    degene met de nieuwste offerte.
 // 2. Telefoonnummer als vangnet (laatste 9 cijfers, phone én mobile, LIKE — Gripp
 //    bewaart formaten door elkaar).
-// 3. Twijfel (geen match, of match zonder offerte) = NIET koppelen, wel melden.
+// 3. Naam als laatste vangnet (Daimy 05-08 "alles moet gewoon bij iedereen ingevuld
+//    staan"): achternaam-zoek in Gripp, alleen koppelen bij PRECIES één kandidaat
+//    wiens naam als geheel woord in de opdrachtnaam voorkomt (of andersom).
+// 4. Twijfel (geen match, of match zonder offerte) = NIET koppelen, wel melden.
 //
 // In de opdracht komt: "Gripp: <nr>", de productregels compact, en de meetbon-link.
 // Skipt alles wat al "Gripp:" in de omschrijving heeft. DRY-RUN zonder --execute.
@@ -68,8 +71,32 @@ async function nieuwsteOfferte(companyId) {
   return res?.rows?.[0] || null;
 }
 
-/** Klant zoeken: adres eerst, telefoon als vangnet. Geeft {company, offerte} of null. */
-async function zoekKlant(adres, telefoon) {
+/** Achternaam-vangnet: langste naamwoord zoeken, alleen bij 1 ondubbelzinnige hit. */
+async function zoekOpNaam(klantnaam) {
+  const RUIS = /^(de|den|der|van|het|ten|ter|heer|mevrouw|mevr|dhr|en|winkel|familie|fam)$/i;
+  const woorden = String(klantnaam || '').replace(/[^\p{L} ]/gu, ' ').split(/\s+/)
+    .filter((w) => w.length >= 4 && !RUIS.test(w))
+    .sort((a, b) => b.length - a.length);
+  if (!woorden.length) return null;
+  const res = await gripp('company.get', [
+    [{ field: 'company.searchname', operator: 'like', value: `%${woorden[0]}%` }],
+    { paging: { firstresult: 0, maxresults: 5 } },
+  ]);
+  await wacht(1600);
+  const rows = res?.rows || [];
+  // Ondubbelzinnig = precies één kaart waarvan de volledige naam wederzijds past
+  const past = rows.filter((k) => {
+    const kn = String(k.searchname || '').toLowerCase();
+    const on = String(klantnaam || '').toLowerCase();
+    const kw = kn.replace(/[^\p{L} ]/gu, ' ').split(/\s+/).filter((w) => w.length >= 4 && !RUIS.test(w));
+    const ow = on.replace(/[^\p{L} ]/gu, ' ').split(/\s+/).filter((w) => w.length >= 4 && !RUIS.test(w));
+    return kw.length && ow.length && (kw.every((w) => on.includes(w)) || ow.every((w) => kn.includes(w)));
+  });
+  return past.length === 1 ? past : null;
+}
+
+/** Klant zoeken: adres eerst, telefoon als vangnet, naam als laatste redmiddel. */
+async function zoekKlant(adres, telefoon, klantnaam) {
   let kandidaten = [];
   const sleutel = adresSleutel(adres);
   if (sleutel) {
@@ -97,6 +124,7 @@ async function zoekKlant(adres, telefoon) {
       kandidaten = [...new Map(kandidaten.map((k) => [k.id, k])).values()];
     }
   }
+  if (!kandidaten.length && klantnaam) kandidaten = (await zoekOpNaam(klantnaam)) || [];
   if (!kandidaten.length) return null;
 
   // Meerdere kaarten op één adres (bv. bewoner + BV): degene met de nieuwste offerte wint.
@@ -187,7 +215,8 @@ async function main() {
     if (soort === 'inmeet' && !heeftGripp) {
       const adres = job.address?.formatted || '';
       const tel = (job.contacts || []).find((c) => c.type === 'phone' && c.value && c.value !== '-')?.value;
-      const match = await zoekKlant(adres, tel);
+      const klantnaam = klantregel.replace(/^Inmeten Sonty - /, '').trim();
+      const match = await zoekKlant(adres, tel, /winkel/i.test(klantnaam) ? null : klantnaam);
       if (match) {
         const nr = match.offerte.number;
         const regels = productRegels(match.offerte);

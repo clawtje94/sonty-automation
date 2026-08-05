@@ -42,8 +42,22 @@ function weekStart(d) { const dt = new Date(d); const day = (dt.getDay() + 6) % 
   const wks = Object.keys(perWeek).sort();
   const nuWk = isoWeek(new Date());
   const vorige = new Date(); vorige.setDate(vorige.getDate() - 7); const vorigeWk = isoWeek(vorige);
+  // MIJLPALEN: elke belangrijke wijziging met datum, zodat je bij de cijfers ziet wat er speelde.
+  // Nieuwe wijziging? Voeg hier een regel toe (datum = wanneer het live/actief ging). Datums geverifieerd.
+  const MIJLPALEN = [
+    { datum: '2026-07-03', tekst: 'AI-bot shadow-test gestart (nog niet live)' },
+    { datum: '2026-07-16', tekst: 'AI-bot LIVE op actieve gesprekken' },
+    { datum: '2026-07-27', tekst: 'A/B-test WhatsApp-opvolging gestart' },
+    { datum: '2026-08-03', tekst: 'Prijsverhoging (Sunmaster 1,20 / Roma 1,30 / markiezen 1,31)' },
+  ];
+  const mijlPerWeek = {};
+  for (const m of MIJLPALEN) { const [y, mo, d] = m.datum.split('-').map(Number); const w = isoWeek(new Date(y, mo - 1, d)); (mijlPerWeek[w] = mijlPerWeek[w] || []).push(m.tekst); }
   const regels = ['Conversie per week (akkoord = inkoopbedrag in de sheet):', ''];
-  for (const w of wks) { const x = perWeek[w]; const incompleet = (w === nuWk || w === vorigeWk) ? '  << loopt nog op' : ''; regels.push(`${w} (${x.start}): ${x.leads ? (x.akkoord / x.leads * 100).toFixed(1) : 0}%  (${x.akkoord}/${x.leads})${incompleet}`); }
+  for (const w of wks) {
+    const x = perWeek[w]; const incompleet = (w === nuWk || w === vorigeWk) ? '  << loopt nog op' : '';
+    regels.push(`${w} (${x.start}): ${x.leads ? (x.akkoord / x.leads * 100).toFixed(1) : 0}%  (${x.akkoord}/${x.leads})${incompleet}`);
+    for (const t of (mijlPerWeek[w] || [])) regels.push(`      ⭐ ${t}`);
+  }
   regels.push('', 'De laatste 1-2 weken lopen nog op: die akkoorden staan deels nog in RP inmeten-inplannen en nog niet in de sheet.');
   const tekst = regels.join('\n');
   console.log(tekst);

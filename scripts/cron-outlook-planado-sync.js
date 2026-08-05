@@ -33,6 +33,7 @@ const TYPES = {
   default: '1f11c802-6337-6970-9d06-7e73cee772e4',
 };
 const INMEET_TEMPLATE = '1f11c802-65cd-6aa0-9d06-7e73cee772e4';
+const { zoekKlant, productRegels } = require('./planado-gripp-verrijken.js');
 
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 async function telegram(tekst) {
@@ -161,9 +162,20 @@ async function main() {
     console.log(`  + ${voornaam} ${startISO.slice(0, 16)} [${soort(e.Subject)}] ${(e.Subject || '').slice(0, 40)}`);
     nieuw++;
     if (EXECUTE) {
+      // Voor inmeet-afspraken: Gripp-blok er meteen in (adres eerst, telefoon vangnet).
+      let grippBlok = '';
+      if (soort(e.Subject) === 'inmeet') {
+        try {
+          const match = await zoekKlant(adres, telefoonUit(e.Body));
+          if (match) {
+            const regels = productRegels(match.offerte);
+            grippBlok = `\n\nGripp: ${match.offerte.number}\nIN TE METEN:\n${regels.map((r) => '- ' + r).join('\n') || '- (geen productregels — check offerte)'}\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/${match.offerte.number}`;
+          }
+        } catch { /* Gripp niet bereikbaar: opdracht komt zonder blok, verrijker haalt hem later op */ }
+      }
       const body = {
         type_uuid: TYPES[soort(e.Subject)],
-        description: `${e.Subject || 'Afspraak'}\n(gesynct uit Outlook)`,
+        description: `${e.Subject || 'Afspraak'}\n(gesynct uit Outlook)${grippBlok}`,
         scheduled_at: startISO,
         scheduled_duration: { minutes: minuten },
         assignee: { worker: { uuid: INMETERS[voornaam] } },
@@ -175,6 +187,24 @@ async function main() {
       if (adres && adres.length > 8 && /\d/.test(adres)) body.address = { formatted: adres };
       const r = await fetch('https://api.planadoapp.com/v2/jobs', { method: 'POST', headers: PH, body: JSON.stringify(body) });
       if (!r.ok) { fouten++; console.log(`    FOUT ${r.status}: ${(await r.text()).slice(0, 120)}`); }
+      else {
+        // Planado negeert type_uuid bij POST (stil); daarom direct na aanmaken een PATCH.
+        try {
+          const created = await r.json();
+          const uuid = created.job_uuid || created.uuid;
+          if (uuid) {
+            await wacht(2600);
+            const det = await (await fetch(`https://api.planadoapp.com/v2/jobs/${uuid}`, { headers: PH })).json();
+            const huidig = det.job || det;
+            if (huidig.type_uuid !== body.type_uuid) {
+              await fetch(`https://api.planadoapp.com/v2/jobs/${uuid}`, {
+                method: 'PATCH', headers: PH,
+                body: JSON.stringify({ version: huidig.version, type_uuid: body.type_uuid }),
+              });
+            }
+          }
+        } catch { /* type blijft dan default; wekelijkse verrijker repareert */ }
+      }
       await wacht(2600);
     }
   }

@@ -23,7 +23,21 @@ const INMETERS = {
   '1f122cfa-17a2-6580-8257-7e80f004db9c': 'Joey',
   '1f122d19-e43e-6da0-8ffb-661a4ff9bb36': 'Sjoerd',
 };
-const INMEET_TYPE = '1f11c802-6340-6680-9d06-7e73cee772e4';
+const TYPES = {
+  inmeet: '1f11c802-6340-6680-9d06-7e73cee772e4',
+  montage: '1f11c802-634b-6ef0-9d06-7e73cee772e4',
+  winkel: '1f11c89f-35be-6820-831b-1d2c28c9b53e',
+  default: '1f11c802-6337-6970-9d06-7e73cee772e4',
+};
+// Planado NEGEERT type_uuid bij POST (stil!); alleen PATCH werkt. Daarom repareert
+// deze pas ook meteen de types van alle gesyncte opdrachten.
+function soortUit(description) {
+  const s = String(description || '').toLowerCase();
+  if (/inmeet|inmeten/.test(s)) return 'inmeet';
+  if (/montage/.test(s)) return 'montage';
+  if (/winkel|showroom|telefonisch/.test(s)) return 'winkel';
+  return 'default';
+}
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function gripp(method, params) {
@@ -127,47 +141,56 @@ async function main() {
   }
   const nu = Date.now();
   const doel = jobs.filter((j) =>
-    j.scheduled_at && Date.parse(j.scheduled_at) > nu &&
-    INMETERS[j.assignee?.worker_uuid] && j.type_uuid === INMEET_TYPE,
+    j.scheduled_at && Date.parse(j.scheduled_at) > nu && INMETERS[j.assignee?.worker_uuid],
   );
-  console.log(`${doel.length} toekomstige inmeet-opdrachten van Joey/Sjoerd`);
+  console.log(`${doel.length} toekomstige opdrachten van Joey/Sjoerd (types repareren + inmeet verrijken)`);
 
-  let verrijkt = 0, alGoed = 0, nietGekoppeld = 0, fouten = 0;
+  let verrijkt = 0, typeFix = 0, alGoed = 0, nietGekoppeld = 0, fouten = 0;
   const nietLijst = [];
 
   for (const j of doel) {
     const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
     const job = det.job || det;
     await wacht(2600);
-    if (/Gripp:\s*\d/.test(job.description || '')) { alGoed++; continue; }
 
-    const adres = job.address?.formatted || '';
-    const tel = (job.contacts || []).find((c) => c.type === 'phone' && c.value && c.value !== '-')?.value;
+    const soort = soortUit(job.description);
+    const patch = {};
+    if (job.type_uuid !== TYPES[soort]) { patch.type_uuid = TYPES[soort]; typeFix++; }
+
+    const heeftGripp = /Gripp:\s*\d/.test(job.description || '');
     const klantregel = (job.description || '').split('\n')[0];
 
-    const match = await zoekKlant(adres, tel);
-    if (!match) {
-      nietGekoppeld++;
-      nietLijst.push(`${job.serial_no} ${klantregel.slice(0, 40)}`);
-      continue;
-    }
-    const nr = match.offerte.number;
-    const regels = productRegels(match.offerte);
-    console.log(`  + #${job.serial_no} ${klantregel.slice(0, 34)} -> Gripp ${nr} (${match.company.searchname.slice(0, 24)}): ${regels.length} product(en)`);
-    verrijkt++;
-    if (EXECUTE) {
-      const nieuw = `${job.description || ''}\n\nGripp: ${nr}\nIN TE METEN:\n${regels.map((r) => '- ' + r).join('\n') || '- (geen productregels gevonden — check offerte)'}\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/${nr}`;
+    if (soort === 'inmeet' && !heeftGripp) {
+      const adres = job.address?.formatted || '';
+      const tel = (job.contacts || []).find((c) => c.type === 'phone' && c.value && c.value !== '-')?.value;
+      const match = await zoekKlant(adres, tel);
+      if (match) {
+        const nr = match.offerte.number;
+        const regels = productRegels(match.offerte);
+        console.log(`  + #${job.serial_no} ${klantregel.slice(0, 34)} -> Gripp ${nr} (${match.company.searchname.slice(0, 24)}): ${regels.length} product(en)`);
+        verrijkt++;
+        patch.description = `${job.description || ''}\n\nGripp: ${nr}\nIN TE METEN:\n${regels.map((r) => '- ' + r).join('\n') || '- (geen productregels gevonden — check offerte)'}\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/${nr}`;
+      } else {
+        nietGekoppeld++;
+        nietLijst.push(`${job.serial_no} ${klantregel.slice(0, 40)}`);
+      }
+    } else if (heeftGripp) alGoed++;
+
+    if (EXECUTE && Object.keys(patch).length) {
       const r = await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, {
         method: 'PATCH', headers: PH,
-        body: JSON.stringify({ version: job.version, description: nieuw }),
+        body: JSON.stringify({ version: job.version, ...patch }),
       });
-      if (!r.ok) { fouten++; console.log(`    FOUT ${r.status}`); }
+      if (!r.ok) { fouten++; console.log(`    FOUT ${r.status}: ${(await r.text()).slice(0, 100)}`); }
       await wacht(2600);
     }
   }
 
-  console.log(`\nverrijkt: ${verrijkt} | had al Gripp-info: ${alGoed} | niet te koppelen: ${nietGekoppeld} | fouten: ${fouten}`);
+  console.log(`\nverrijkt: ${verrijkt} | type gefixt: ${typeFix} | had al Gripp-info: ${alGoed} | niet te koppelen: ${nietGekoppeld} | fouten: ${fouten}`);
   if (nietLijst.length) console.log('NIET GEKOPPELD:\n  ' + nietLijst.join('\n  '));
 }
 
-main().catch((e) => { console.error(e.message); process.exit(1); });
+module.exports = { zoekKlant, productRegels, TYPES, soortUit };
+if (require.main === module) {
+  main().catch((e) => { console.error(e.message); process.exit(1); });
+}

@@ -7,7 +7,6 @@
 const { google } = require('googleapis');
 const path = require('path');
 const ID = '1NesKeIKLVOLJjSy-fqo5KXrEVG2VJTYSfjgN7EHY85g';
-const TABS_2026 = ['Jan 2026','Feb 2026','Maart 2026','April 2026','Mei 2026','Juni 2026 ','Juli 2026','Aug 2026','Augustus 2026'];
 const norm = s => String(s || '').trim().toLowerCase().replace(/\s+/g, ' ');
 const money = s => { const t = String(s || '').replace(/[€\s.]/g, '').replace(',', '.'); const n = parseFloat(t); return isFinite(n) ? n : 0; };
 function parseDatum(v) { const t = String(v || '').trim(); let m = t.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/); if (m) return new Date(+m[1], +m[2] - 1, +m[3]); m = t.match(/^(\d{1,2})[-\/](\d{1,2})[-\/](\d{2,4})/); if (m) { let y = +m[3]; if (y < 100) y += 2000; return new Date(y, +m[2] - 1, +m[1]); } return null; }
@@ -19,8 +18,13 @@ function weekStart(d) { const dt = new Date(d); const day = (dt.getDay() + 6) % 
   const auth = new google.auth.GoogleAuth({ keyFile: path.join(__dirname, '..', 'data', 'google-service-account.json'), scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'] });
   const sheets = google.sheets({ version: 'v4', auth });
   const grens = new Date(); grens.setMonth(grens.getMonth() - maanden);
+  // Tabbladen dynamisch uit de sheet halen zodat een trailing space ("Juli 2026 ") het
+  // niet stil breekt. Match op genormaliseerde 2026-maandnamen; nieuwe maanden komen vanzelf mee.
+  const meta = await sheets.spreadsheets.get({ spreadsheetId: ID });
+  const MAAND_RE = /^(jan|feb|maart|april|mei|juni|juli|aug|augustus|sep|sept|okt|nov|dec)\s*2026$/i;
+  const tabs = meta.data.sheets.map(s => s.properties.title).filter(t => MAAND_RE.test(norm(t)));
   const perWeek = {};
-  for (const tab of TABS_2026) {
+  for (const tab of tabs) {
     let r; try { r = await sheets.spreadsheets.values.get({ spreadsheetId: ID, range: `'${tab}'!A1:AR3100` }); } catch { continue; }
     const vals = r.data.values || []; const hdr = vals[2] || []; if (!hdr.length) continue;
     const cName = hdr.findIndex(h => /naam/i.test(h) || /achternaam/i.test(h));

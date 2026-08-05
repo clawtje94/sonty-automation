@@ -199,7 +199,14 @@ async function main() {
             const naPatch = { version: huidig.version };
             // Meetbon als tikbaar linkveld in de details (Daimy 05-08)
             const nr = (grippBlok.match(/Gripp: (\d+)/) || [])[1];
-            if (nr) naPatch.custom_fields = [{ name: 'Meetbon', field_type: 'link', value: `https://sonty-website.vercel.app/admin/meetbon/${nr}` }];
+            if (nr) {
+              const blok = (grippBlok.split('IN TE METEN:')[1] || '').split('MEETBON')[0]
+                .split('\n').map((x) => x.replace(/^\s*-\s*/, '').trim()).filter(Boolean).join(' · ');
+              naPatch.custom_fields = [
+                { name: 'In te meten', field_type: 'input', value: blok || 'zie omschrijving' },
+                { name: 'Meetbon', field_type: 'link', value: `https://sonty-website.vercel.app/admin/meetbon/${nr}` },
+              ];
+            }
             if (Object.keys(naPatch).length > 1) {
               await fetch(`https://api.planadoapp.com/v2/jobs/${uuid}`, {
                 method: 'PATCH', headers: PH, body: JSON.stringify(naPatch),

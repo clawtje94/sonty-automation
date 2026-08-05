@@ -160,13 +160,28 @@ async function main() {
     const heeftGripp = /Gripp:\s*\d/.test(job.description || '');
     const klantregel = (job.description || '').split('\n')[0];
 
-    // Tikbaar Meetbon-linkveld in de details (Daimy 05-08): field_type 'link' maakt
-    // een echte knop in de app. Ook toevoegen bij jobs die al een Gripp-blok in de
-    // omschrijving hebben maar het veld nog missen.
-    const heeftMeetbonVeld = (job.custom_fields || []).some((f) => f.name === 'Meetbon' && f.value);
-    if (heeftGripp && !heeftMeetbonVeld) {
+    // Detailvelden (Daimy 05-08): 'Meetbon' als tikbare link (field_type 'link') en
+    // 'In te meten' als tekstveld (field_type 'input') zodat de producten in één
+    // oogopslag zichtbaar zijn. PATCH vervangt de hele array, dus bestaande velden
+    // altijd meesturen. Ook met terugwerkende kracht op jobs die al een Gripp-blok
+    // in de omschrijving hebben.
+    const veldenVoor = (nr, producten) => {
+      const bestaand = (job.custom_fields || []).map((f) => ({ name: f.name, field_type: f.field_type, value: f.value }));
+      const zet = (naam, field_type, value) => {
+        const i = bestaand.findIndex((f) => f.name === naam);
+        if (i >= 0) bestaand[i] = { name: naam, field_type, value };
+        else bestaand.push({ name: naam, field_type, value });
+      };
+      zet('In te meten', 'input', producten);
+      zet('Meetbon', 'link', `https://sonty-website.vercel.app/admin/meetbon/${nr}`);
+      return bestaand;
+    };
+    if (heeftGripp) {
       const nr = (job.description.match(/Gripp:\s*(\d+)/) || [])[1];
-      if (nr) patch.custom_fields = [{ name: 'Meetbon', field_type: 'link', value: `https://sonty-website.vercel.app/admin/meetbon/${nr}` }];
+      const blok = (job.description.split('IN TE METEN:')[1] || '').split('MEETBON')[0]
+        .split('\n').map((r) => r.replace(/^\s*-\s*/, '').trim()).filter(Boolean).join(' · ');
+      const veldOntbreekt = !['Meetbon', 'In te meten'].every((n) => (job.custom_fields || []).some((f) => f.name === n && f.value));
+      if (nr && veldOntbreekt) patch.custom_fields = veldenVoor(nr, blok || 'zie omschrijving');
     }
 
     if (soort === 'inmeet' && !heeftGripp) {
@@ -179,7 +194,7 @@ async function main() {
         console.log(`  + #${job.serial_no} ${klantregel.slice(0, 34)} -> Gripp ${nr} (${match.company.searchname.slice(0, 24)}): ${regels.length} product(en)`);
         verrijkt++;
         patch.description = `${job.description || ''}\n\nGripp: ${nr}\nIN TE METEN:\n${regels.map((r) => '- ' + r).join('\n') || '- (geen productregels gevonden — check offerte)'}\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/${nr}`;
-        patch.custom_fields = [{ name: 'Meetbon', field_type: 'link', value: `https://sonty-website.vercel.app/admin/meetbon/${nr}` }];
+        patch.custom_fields = veldenVoor(nr, regels.join(' · ') || 'zie omschrijving');
       } else {
         nietGekoppeld++;
         nietLijst.push(`${job.serial_no} ${klantregel.slice(0, 40)}`);

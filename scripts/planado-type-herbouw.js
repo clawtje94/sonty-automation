@@ -48,7 +48,7 @@ async function main() {
   const intern = (methode, pad, body) => page.evaluate(async ({ methode, pad, body }) => {
     const r = await fetch(pad, {
       method: methode,
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json', 'X-Planado-Notify-Assignees': 'false' },
       body: body ? JSON.stringify(body) : undefined,
       credentials: 'same-origin',
     });

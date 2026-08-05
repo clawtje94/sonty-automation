@@ -24,6 +24,7 @@ const PLANADO_KEY = fs.readFileSync(path.join(__dirname, 'planado-api-key.txt'),
 const GRIPP_KEY = require('./secrets.js').GRIPP_API_KEY;
 const PH = { Authorization: 'Bearer ' + PLANADO_KEY, 'Content-Type': 'application/json', 'X-Planado-Notify-Assignees': 'false' };
 const EXECUTE = process.argv.includes('--execute');
+const VERVERS = process.argv.includes('--ververs'); // bestaande In te meten-velden opnieuw uit Gripp opbouwen (bv. na formatwijziging)
 const INMETERS = {
   '1f122cfa-17a2-6580-8257-7e80f004db9c': 'Joey',
   '1f122d19-e43e-6da0-8ffb-661a4ff9bb36': 'Sjoerd',
@@ -185,12 +186,19 @@ function productRegels(offerte) {
   for (const l of offerte.offerlines || []) {
     const naam = String(l.product?.searchname || '').replace(/\s*\(\d+\)\s*$/, '').trim();
     if (!naam || NIET.test(naam)) continue;
-    const tekst = String(l.description || '').replace(/<[^>]+>/g, ' ');
+    const ruw = String(l.description || '');
+    const tekst = ruw.replace(/<[^>]+>/g, ' ');
     const b = (tekst.match(/Breedte:\s*(\d+)/i) || [])[1];
     const h = (tekst.match(/(?:Hoogte|Uitval):\s*(\d+)/i) || [])[1];
-    const kleur = (tekst.match(/Kleur[^:]*:\s*([^\n]{2,25}?)(?:\s+[A-Z][a-z]+:|$)/) || [])[1];
+    // kleur + bediening (Daimy 05-08: "ik wil het product maar ook de bediening
+    // weten en de kleur") — regels per \n lezen, Gripp bewaart de RP-specs zo
+    const perRegel = (label) => (ruw.replace(/<[^>]+>/g, '\n').match(new RegExp(label + ':\\s*([^\\n]{2,40})', 'i')) || [])[1]?.trim();
+    const kleur = [perRegel('Frame Kleur'), perRegel('Kleur Pantser') || perRegel('Doekkleur') || perRegel('Kleur doek') || perRegel('Kleur')]
+      .filter(Boolean).filter((v, i, a) => a.indexOf(v) === i).join(' / ');
+    const bediening = perRegel('Bediening');
     const maat = b && h ? ` ${b}×${h}` : b ? ` ${b} breed` : '';
-    regels.push(`${l.amount || 1}x ${naam}${maat}${kleur ? ` — ${kleur.trim()}` : ''}`);
+    const extra = [kleur, bediening].filter(Boolean).join(' — ');
+    regels.push(`${l.amount || 1}x ${naam}${maat}${extra ? ` — ${extra}` : ''}`);
   }
   return regels;
 }
@@ -248,10 +256,24 @@ async function main() {
     };
     if (heeftGripp) {
       const nr = (job.description.match(/Gripp:\s*(\d+)/) || [])[1];
-      const blok = (job.description.split('IN TE METEN:')[1] || '').split('MEETBON')[0]
-        .split('\n').map((r) => r.replace(/^\s*-\s*/, '').trim()).filter(Boolean).join(' · ');
       const veldOntbreekt = !['Meetbon', 'In te meten'].every((n) => (job.custom_fields || []).some((f) => f.name === n && f.value));
-      if (nr && veldOntbreekt) patch.custom_fields = veldenVoor(nr, blok || 'zie omschrijving');
+      if (nr && (veldOntbreekt || VERVERS)) {
+        let blok = null;
+        if (VERVERS && soort === 'inmeet') {
+          // vers uit Gripp zodat kleur + bediening in het veld komen
+          const res = await gripp('offer.get', [
+            [{ field: 'offer.number', operator: 'equals', value: Number(nr) }],
+            { paging: { firstresult: 0, maxresults: 1 } },
+          ]);
+          await wacht(1600);
+          const off = res?.rows?.[0];
+          if (off) blok = productRegels(off).join(' · ');
+        }
+        if (!blok) blok = (job.description.split('IN TE METEN:')[1] || '').split('MEETBON')[0]
+          .split('\n').map((r) => r.replace(/^\s*-\s*/, '').trim()).filter(Boolean).join(' · ');
+        const huidig = (job.custom_fields || []).find((f) => f.name === 'In te meten')?.value || '';
+        if (veldOntbreekt || (blok && kortVeld(blok) !== huidig)) patch.custom_fields = veldenVoor(nr, blok || 'zie omschrijving');
+      }
     }
 
     if (soort === 'inmeet' && !heeftGripp) {

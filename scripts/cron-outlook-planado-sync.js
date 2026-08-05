@@ -54,7 +54,7 @@ async function outlookEvents() {
   const van = new Date();
   const tot = new Date(); tot.setDate(tot.getDate() + 42);
   let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView`
-    + `?$top=500&$select=Subject,Start,End,IsCancelled,Location,Attendees`
+    + `?$top=500&$select=Subject,Start,End,IsCancelled,Location,Attendees,Body`
     + `&startDateTime=${van.toISOString()}&endDateTime=${tot.toISOString()}`;
   const evs = [];
   while (url) {
@@ -63,6 +63,22 @@ async function outlookEvents() {
     url = j['@odata.nextLink'] || null;
   }
   return evs;
+}
+
+// Telefoonnummer uit het Outlook-opmerkingenveld (Body). Nederlandse nummers:
+// 06..., +31 6..., 010-..., met spaties/streepjes ertussen.
+function telefoonUit(body) {
+  const tekst = String(body?.Content || '').replace(/<[^>]+>/g, ' ');
+  const m = tekst.match(/(?:\+31|0031|0)[\s-]?[1-9](?:[\s-]?\d){8}/);
+  if (!m) return null;
+  let cijfers = m[0].replace(/[^\d+]/g, '');
+  if (cijfers.startsWith('0031')) cijfers = '+31' + cijfers.slice(4);
+  else if (cijfers.startsWith('0')) cijfers = '+31' + cijfers.slice(1);
+  return cijfers;
+}
+
+function klantNaamUit(subject) {
+  return (String(subject || '').split(/ - (.+)/)[1] || '').trim() || 'klant';
 }
 
 function soort(subject) {
@@ -154,6 +170,8 @@ async function main() {
         external_id: extId,
       };
       if (soort(e.Subject) === 'inmeet') body.template_uuid = INMEET_TEMPLATE;
+      const tel = telefoonUit(e.Body);
+      if (tel) body.contacts = [{ type: 'phone', name: klantNaamUit(e.Subject), value: tel }];
       if (adres && adres.length > 8 && /\d/.test(adres)) body.address = { formatted: adres };
       const r = await fetch('https://api.planadoapp.com/v2/jobs', { method: 'POST', headers: PH, body: JSON.stringify(body) });
       if (!r.ok) { fouten++; console.log(`    FOUT ${r.status}: ${(await r.text()).slice(0, 120)}`); }

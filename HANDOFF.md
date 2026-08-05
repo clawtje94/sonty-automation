@@ -1,4 +1,4 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-05)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-05 avond)
 
 ## PLAN PRIJSOVERTUIGING KLAAR (5 aug, opdracht Daimy "mentaal voorbereiden vóór de prijsvraag")
 - **`docs/PLAN-prijsovertuiging-2026.md`** — volledige uitwerking, NIETS staat live.
@@ -58,6 +58,8 @@
 - **OUTLOOK→PLANADO-SYNC LIVE** (nl.sonty.outlook-planado-sync, elke 30 min): alle afspraken Joey+Sjoerd 6 wkn vooruit, juiste type/persoon/duur/adres + TELEFOON uit het Outlook-opmerkingenveld als contact. Dedup op ol-<sha1> én starttijd+inmeter (numeriek!). Verdwenen = melding, nooit auto-delete. Eerste vulling: 160 nieuw, 0 fouten. Reparatie bestaand: 133 nummers gevuld (match op tijd+inmeter — alleen-tijd gaf verkeerde nummers!), 12 echte inmeet-klanten zonder nummer in opmerkingen.
 - **SHIFTS + VAKANTIES** (planado-shifts-rooster.js, launchd nl.sonty.planado-shifts ma 07:45): rooster 09-15 per werkdag, vakanties uit Outlook = niet-werkend. GEVONDEN: Sjoerd 3 wkn vakantie 24 aug-11 sept (+14/21 aug) — inmeten draait dan op alleen Joey 3 dgn/wk; nieuwe inmeter 1 sept precies op tijd.
 - tests/keten-regressie.js: 16 groen. Volgende blok: eindofferte-knop (offerprojectline.update, prijsrem), aanbetaling, montagebon.
+- **GRIPP-VERRIJKING PLANADO (5 aug avond)**: `planado-gripp-verrijken.js` — sleutel-ladder adres (pc+huisnr) → telefoon (laatste 9, LIKE) → NAAM-vangnet (achternaam, alleen bij 1 ondubbelzinnige kandidaat; Daimy: "alles moet bij iedereen ingevuld staan"). In elke inmeet-opdracht: Gripp-nr + productregels in omschrijving ÉN detailvelden **"In te meten" (field_type input)** + **"Meetbon" (field_type link, tikbaar)** — LET OP: PATCH custom_fields VERVANGT de hele array, altijd beide meesturen (helper veldenVoor). Zelfde velden in post-create van de sync. Types: POST én PATCH negeren type_uuid stil — type alleen via browser te zetten.
+- **AUDIT 5 aug**: 100/101 gekoppelde hard bevestigd (adres of telefoon), enige twijfel #71 Jeanette de Jong (kaart zonder adres, door Daimy bevestigd; kantoor moet adres+echt nummer aanvullen). 38 niet-gekoppeld: oorzaak = verrijking draaide VÓÓR de telefoonreparatie, dus tel-vangnet had nooit data; herkoppelronde + naam-vangnet lopen (log /tmp/verrijk-backfill.log). Richard de Mos, Elio, "dhr+mevr de Ha", 4x JOEY WINKEL blijven terecht leeg. Planado-zoekfunctie vindt gesyncte klanten NIET (zoekt op klantveld, naam staat alleen in omschrijving) — serial meegeven aan Daimy.
 
 ## VEILIGHEIDSPOORTEN + PLANNER GEBOUWD (4-5 aug, opdracht Daimy "niks mag fout gaan")
 - **Inmeters**: Sjoerd + Joey starten (V2 beantwoord); 3e inmeter per 1 SEPT (naam onbekend). Roosters in `data/inmeters-rooster.json` (Joey ma/di/do 09-15, wo vrij + vr TIJDELIJK vrij; Sjoerd ma-do 09-15) — LEIDEND boven agenda-patronen.

@@ -72,7 +72,7 @@ function bezetteBlokken(agenda, dagStart, dagEind) {
   return blokken;
 }
 
-async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaar = false, startAdres = MAGAZIJN }) {
+async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaar = false, startAdres = MAGAZIJN, eindAdres = null }) {
   const slots = [];
   // De bestaande Outlook-afspraken hebben de reistijd IN het blok zitten (Daimy
   // 2026-08-04: "het is nu allemaal ingepland met reistijd erin en we denken dat de
@@ -87,12 +87,13 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
 
     const opDeDag = bezetteBlokken(agenda, dagStart, dagEind);
 
-    // De dag begint en eindigt op het startpunt van de inmeter: standaard het
-    // magazijn (Berkel), maar per inmeter instelbaar (thuisadres) via het rooster.
+    // Begin en eind van de dag zijn aparte punten (Daimy 2026-08-05): Joey vertrekt
+    // thuis in Den Haag en eindigt bij de winkel in Rijswijk; Sjoerd vertrekt en
+    // eindigt in Woerden. Standaard allebei het magazijn.
     const punten = [
       { adres: startAdres, eind: dagStart, start: dagStart, magazijn: true },
       ...opDeDag,
-      { adres: startAdres, start: dagEind, eind: dagEind, magazijn: true },
+      { adres: eindAdres || startAdres, start: dagEind, eind: dagEind, magazijn: true },
     ];
 
     for (let i = 0; i < punten.length - 1; i++) {

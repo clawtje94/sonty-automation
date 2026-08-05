@@ -112,7 +112,12 @@ async function main() {
   console.log(EXECUTE ? '=== SYNC (schrijft echt) ===' : '=== DRY-RUN (schrijft niets; --execute om echt te schrijven) ===');
 
   const evs = await outlookEvents();
-  const wie = (e) => (e.Attendees || []).map((a) => a.EmailAddress?.Name || '').find((n) => n && !/^sonty$/i.test(n)) || '';
+  // Voorkeur voor een deelnemer die inmeter is, op WELKE positie ook (05-08: Joey
+  // stond 2e in een showroomafspraak en werd gemist); anders de eerste niet-Sonty.
+  const wie = (e) => {
+    const namen = (e.Attendees || []).map((a) => a.EmailAddress?.Name || '').filter((n) => n && !/^sonty$/i.test(n));
+    return namen.find((n) => INMETERS[n.split(' ')[0]]) || namen[0] || '';
+  };
   const NIET_KLUS = /vrij$|later$|vakantie|ziek|verlof/i;
 
   const items = evs

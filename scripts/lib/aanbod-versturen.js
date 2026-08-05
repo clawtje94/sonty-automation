@@ -42,16 +42,50 @@ function berichtTekst(voornaam, url, duurMin) {
   return `Hoi ${voornaam}, goed nieuws: we kunnen bij je langskomen om in te meten (duurt ongeveer ${duurMin} minuten). Kies hier de tijd die jou het beste uitkomt:\n\n${url}\n\nDe tijden staan 24 uur voor je vast. Lukt kiezen niet, stuur dan gewoon een berichtje terug.\n\nGroetjes, Jaimy van Sonty`;
 }
 
+// Goedgekeurde template "inmeetafspraak_kiezen" (id 243999): voor klanten buiten het
+// 24-uursvenster of zonder bestaand WhatsApp-gesprek. Werkt pas na Meta-goedkeuring.
+const TEMPLATE_HSM = 243999;
+
+const DAGK = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
+const MNDK = ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+function slotTekst(sl) {
+  const d = new Date(sl.aankomst);
+  const t = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+  return `${DAGK[d.getDay()]} ${d.getDate()} ${MNDK[d.getMonth()]} om ${t}`;
+}
+
+async function stuurWhatsAppTemplate(aanbod, url) {
+  const tel = String(aanbod.lead.telefoon || '').replace(/\D/g, '').replace(/^0/, '31');
+  if (tel.length < 11) return { ok: false, reden: 'geen bruikbaar telefoonnummer voor template' };
+  const slots = aanbod.slots || [];
+  const params = [
+    { type: 'body', key: '{{1}}', value: (aanbod.lead.naam || 'daar').split(' ')[0] },
+    { type: 'body', key: '{{2}}', value: slots[0] ? slotTekst(slots[0]) : '-' },
+    { type: 'body', key: '{{3}}', value: slots[1] ? slotTekst(slots[1]) : '-' },
+    { type: 'body', key: '{{4}}', value: slots[2] ? slotTekst(slots[2]) : '-' },
+    { type: 'body', key: '{{5}}', value: url },
+  ];
+  const r = await tFetch('/wa_sessions', {
+    method: 'POST',
+    body: JSON.stringify({ recipient_phone_number: '+' + tel, hsm_id: TEMPLATE_HSM, channel_id: WA_KANAAL, params }),
+  });
+  if (!r.ok) return { ok: false, reden: `template: Trengo ${r.status} (nog niet door Meta goedgekeurd?)` };
+  return { ok: true, via: 'template' };
+}
+
 async function stuurWhatsApp(aanbod, url) {
   const ticket = await zoekWaTicket(aanbod.lead.telefoon);
-  if (!ticket) return { ok: false, reden: 'geen WhatsApp-gesprek gevonden voor dit nummer' };
-  const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
-  const r = await tFetch(`/tickets/${ticket.id}/messages`, {
-    method: 'POST',
-    body: JSON.stringify({ message: berichtTekst(voornaam, url, aanbod.duurMin), type: 'OUTBOUND' }),
-  });
-  if (r.status === 422) return { ok: false, reden: '24-uursvenster dicht (template nodig, nog niet ingericht)', ticket: ticket.id };
-  return { ok: r.ok, reden: r.ok ? undefined : `Trengo ${r.status}`, ticket: ticket.id };
+  if (ticket) {
+    const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
+    const r = await tFetch(`/tickets/${ticket.id}/messages`, {
+      method: 'POST',
+      body: JSON.stringify({ message: berichtTekst(voornaam, url, aanbod.duurMin), type: 'OUTBOUND' }),
+    });
+    if (r.ok) return { ok: true, ticket: ticket.id, via: 'vrij bericht' };
+    if (r.status !== 422) return { ok: false, reden: `Trengo ${r.status}`, ticket: ticket.id };
+    // 422 = 24-uursvenster dicht -> template proberen
+  }
+  return stuurWhatsAppTemplate(aanbod, url);
 }
 
 async function stuurMail(aanbod, url) {

@@ -25,7 +25,11 @@ const { bouwParams } = require('./offerte-template-vars.js');
 const TEMPLATE_ID = 242818;
 const TEMPLATE_NAAM = 'offerte_ab1_inmetenv2';
 const VARIANT_NAAM = 'inmeten';
-const TESTNUMMER = '+31643473757';        // testnummer van Daimy, expliciet door hem aangewezen
+// GEEN TESTNUMMER MEER (2026-08-05). +31643473757 bleek NIET van Daimy maar van Nikki Lutz,
+// een echte klant met een eigen dossier in Reuzenpanda. Er zijn twee testberichten naar haar
+// gegaan, aangesproken als "Daimy" en met een offerte die niet van haar was. Een testnummer moet
+// hier expliciet worden meegegeven, zodat het nooit meer een aanname is.
+const TESTNUMMER = process.env.SONTY_TESTNUMMER || null;
 const KANAAL = 1359857;
 const VERDELER = path.join(__dirname, 'ab-template-verdeler.js');
 const KLAAR = path.join(__dirname, '..', 'data', '.ab1-geactiveerd');
@@ -87,6 +91,13 @@ function activeerInVerdeler() {
   const status = String(template.status || template.state || '').toUpperCase();
   console.log(`${TEMPLATE_NAAM} (${TEMPLATE_ID}): status ${status}`);
   if (status !== 'ACCEPTED') { console.log('Nog niet goedgekeurd, volgende ronde opnieuw.'); return; }
+
+  // Zonder testnummer niet blind versturen. Eerder stond hier een vast nummer dat van een echte
+  // klant bleek te zijn, en die kreeg een testofferte met de verkeerde naam erin.
+  if (!TESTNUMMER) {
+    await telegram(`⚠️ AB1 (${TEMPLATE_NAAM}) is goedgekeurd, maar er staat geen testnummer ingesteld. Geef me een nummer via SONTY_TESTNUMMER, dan test ik en zet ik hem daarna aan.`);
+    return;
+  }
 
   // Goedgekeurd. Nu de echte proef: komt hij ook daadwerkelijk aan?
   const params = await testParams();

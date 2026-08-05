@@ -19,7 +19,9 @@ const CFG = require('./config.js');
 const { getToken } = require('../trengo-api.js');
 
 const TEMPLATE_ID = 243872;
-const TESTNUMMER = '+31643473757';
+// GEEN TESTNUMMER MEER (2026-08-05): +31643473757 bleek van een echte klant, Nikki Lutz.
+// Expliciet meegeven via SONTY_TESTNUMMER, anders wordt er niet getest maar alleen gemeld.
+const TESTNUMMER = process.env.SONTY_TESTNUMMER || null;
 const KANAAL = 1359857;
 const KLAAR = path.join(__dirname, '..', '..', 'data', 'ai-ks', '.reminder-template-getest');
 
@@ -50,6 +52,11 @@ async function telegram(tekst) {
   if (status !== 'ACCEPTED') { console.log('Nog niet goedgekeurd, volgende ronde opnieuw.'); return; }
 
   // Goedgekeurd. Eerst echt uitproberen voordat we hem op klanten loslaten.
+  if (!TESTNUMMER) {
+    await telegram(`✅ "Reminder whatsapp sunny" is door Meta goedgekeurd.\n\nIk heb hem NIET automatisch aangezet, want er staat geen testnummer ingesteld. Geef me een nummer waar ik veilig op mag testen (SONTY_TESTNUMMER), dan doe ik eerst een proefverzending en zet ik hem daarna aan.`);
+    fs.writeFileSync(KLAAR, 'goedgekeurd, wacht op testnummer ' + new Date().toISOString());
+    return;
+  }
   const tw = await fetch('https://app.trengo.com/api/v2/wa_sessions', {
     method: 'POST', headers: H,
     body: JSON.stringify({ recipient_phone_number: TESTNUMMER, hsm_id: TEMPLATE_ID, channel_id: KANAAL,

@@ -3862,5 +3862,31 @@
       }
     ],
     "processedAt": "2026-08-03T16:30:48.900Z"
+  },
+  "item:fa76cd9c-9647-4571-aeef-f03f6714bfa0": {
+    "summary": "loek Linden",
+    "grippCompanyId": 99683,
+    "grippOfferId": 8907,
+    "rpDocNumber": "202610267",
+    "allOffers": [
+      {
+        "grippOfferId": 8907,
+        "rpDocNumber": "202610267"
+      }
+    ],
+    "processedAt": "2026-08-04T16:30:10.527Z"
+  },
+  "item:8a6b3e9f-c6ed-4606-aca9-0294bb8d6a4d": {
+    "summary": "Paul Van den Kolk",
+    "grippCompanyId": 99684,
+    "grippOfferId": 8908,
+    "rpDocNumber": "20269139",
+    "allOffers": [
+      {
+        "grippOfferId": 8908,
+        "rpDocNumber": "20269139"
+      }
+    ],
+    "processedAt": "2026-08-04T16:30:14.226Z"
   }
 }

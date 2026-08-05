@@ -229,7 +229,7 @@ async function main() {
     const bron = ROOSTER[wie]?.dagen ? 'rooster' : 'afgeleid uit agenda';
     const omschrijving = [1, 2, 3, 4, 5, 6].map((i) => { const u = werkt(i); return u ? `${DAGCODE[i]} ${u.van}-${u.tot}` : null; }).filter(Boolean).join(', ');
     console.log(`  ${wie} (${bron}): ${omschrijving}`);
-    const s2 = await zoekSlots({ agenda: eigen, adres, duurMin: duur, werkdagen: dagen, agendaOnbetrouwbaar: true });
+    const s2 = await zoekSlots({ agenda: eigen, adres, duurMin: duur, werkdagen: dagen, agendaOnbetrouwbaar: true, startAdres: ROOSTER[wie]?.startAdres || undefined });
     alleSlots.push(...s2.map((x) => ({ ...x, inmeter: wie })));
   }
   const slots = alleSlots.sort((a, b) => a.aankomst - b.aankomst);

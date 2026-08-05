@@ -1,0 +1,670 @@
+{
+ "number": 6228,
+ "archivedon": null,
+ "clientreference": "",
+ "isbasis": false,
+ "archived": false,
+ "workdeliveraddress": "",
+ "id": 8650,
+ "createdon": {
+  "date": "2026-07-20 18:31:16.000000",
+  "timezone_type": 3,
+  "timezone": "Europe/Amsterdam"
+ },
+ "updatedon": null,
+ "searchname": "Offerte Suneye XL - WIlco Vendrig (6228)",
+ "extendedproperties": null,
+ "isopportunity": false,
+ "name": "Offerte Suneye XL - WIlco Vendrig",
+ "date": null,
+ "deadline": null,
+ "totalexclvat": "27823.35",
+ "totalinclvat": "33666.26",
+ "chance": null,
+ "description": "Overgenomen uit Reuzenpanda #20268411",
+ "filesavailableforclient": true,
+ "signingenabled": true,
+ "salesdistributiondatestart": null,
+ "salesdistributiondatestop": null,
+ "subject": "",
+ "expectedterms": null,
+ "sendmaxtimescheckbox": false,
+ "sendmaxtimes": null,
+ "renewautomatically": false,
+ "renewperiods": null,
+ "acceptedon": null,
+ "discr": "offerte",
+ "template": {
+  "id": 24,
+  "searchname": "Sonty - NL - Offerte kort"
+ },
+ "validity": null,
+ "phase": {
+  "id": 1,
+  "searchname": "Acquisitie"
+ },
+ "acceptancestatus": null,
+ "company": {
+  "id": 99562,
+  "searchname": "WIlco Vendrig",
+  "discr": "bedrijf"
+ },
+ "contact": null,
+ "identity": {
+  "id": 1,
+  "searchname": "Sonty"
+ },
+ "accountmanager": null,
+ "salesassociate": null,
+ "status": {
+  "id": 4,
+  "searchname": "Concept"
+ },
+ "extrapdf1": null,
+ "extrapdf2": null,
+ "frequency": null,
+ "paymentmethod": null,
+ "umbrellaproject": null,
+ "files": [],
+ "tags": [],
+ "employees": [],
+ "employees_starred": [],
+ "offerlines": [
+  {
+   "_ordering": 1,
+   "internalnote": "",
+   "amount": 3,
+   "hidefortimewriting": false,
+   "sellingprice": "1145.25",
+   "discount": 0,
+   "buyingprice": "0.00",
+   "additionalsubject": "",
+   "description": "Breedte: 1260 mm\nHoogte: 1350 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: Antraciet\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+   "hidedetails": false,
+   "id": 47108,
+   "createdon": {
+    "date": "2026-07-20 18:31:16.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
+   },
+   "updatedon": null,
+   "searchname": "Rolluik (RollSUPER)  (Fixed)",
+   "extendedproperties": null,
+   "groupcategory": null,
+   "convertto": {
+    "id": 1,
+    "searchname": "Opdracht of factuur"
+   },
+   "unit": {
+    "id": 3,
+    "searchname": "stuks"
+   },
+   "invoicebasis": {
+    "id": 1,
+    "searchname": "Fixed"
+   },
+   "vat": {
+    "id": 27,
+    "searchname": "BTW 21%"
+   },
+   "rowtype": {
+    "id": 1,
+    "searchname": "NORMAAL"
+   },
+   "offerprojectbase": {
+    "id": 8650,
+    "searchname": "Offerte Suneye XL - WIlco Vendrig (6228)",
+    "discr": "offerte"
+   },
+   "contractline": null,
+   "product": {
+    "id": 76,
+    "searchname": "Rolluik (RollSUPER) (20064)",
+    "discr": "verkoopproduct"
+   },
+   "amountwritten": null
+  },
+  {
+   "_ordering": 2,
+   "internalnote": "",
+   "amount": 5,
+   "hidefortimewriting": false,
+   "sellingprice": "1915.50",
+   "discount": 0,
+   "buyingprice": "0.00",
+   "additionalsubject": "",
+   "description": "Breedte: 1260 mm\nHoogte: 1350 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: Antraciet\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+   "hidedetails": false,
+   "id": 47109,
+   "createdon": {
+    "date": "2026-07-20 18:31:16.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
+   },
+   "updatedon": null,
+   "searchname": "Rolluik (RollSUPER)  (Fixed)",
+   "extendedproperties": null,
+   "groupcategory": null,
+   "convertto": {
+    "id": 1,
+    "searchname": "Opdracht of factuur"
+   },
+   "unit": {
+    "id": 3,
+    "searchname": "stuks"
+   },
+   "invoicebasis": {
+    "id": 1,
+    "searchname": "Fixed"
+   },
+   "vat": {
+    "id": 27,
+    "searchname": "BTW 21%"
+   },
+   "rowtype": {
+    "id": 1,
+    "searchname": "NORMAAL"
+   },
+   "offerprojectbase": {
+    "id": 8650,
+    "searchname": "Offerte Suneye XL - WIlco Vendrig (6228)",
+    "discr": "offerte"
+   },
+   "contractline": null,
+   "product": {
+    "id": 76,
+    "searchname": "Rolluik (RollSUPER) (20064)",
+    "discr": "verkoopproduct"
+   },
+   "amountwritten": null
+  },
+  {
+   "_ordering": 3,
+   "internalnote": "",
+   "amount": 3,
+   "hidefortimewriting": false,
+   "sellingprice": "1358.14",
+   "discount": 0,
+   "buyingprice": "0.00",
+   "additionalsubject": "",
+   "description": "Breedte: 1260 mm\nHoogte: 2450 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: Antraciet\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+   "hidedetails": false,
+   "id": 47110,
+   "createdon": {
+    "date": "2026-07-20 18:31:16.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
+   },
+   "updatedon": null,
+   "searchname": "Rolluik (RollSUPER)  (Fixed)",
+   "extendedproperties": null,
+   "groupcategory": null,
+   "convertto": {
+    "id": 1,
+    "searchname": "Opdracht of factuur"
+   },
+   "unit": {
+    "id": 3,
+    "searchname": "stuks"
+   },
+   "invoicebasis": {
+    "id": 1,
+    "searchname": "Fixed"
+   },
+   "vat": {
+    "id": 27,
+    "searchname": "BTW 21%"
+   },
+   "rowtype": {
+    "id": 1,
+    "searchname": "NORMAAL"
+   },
+   "offerprojectbase": {
+    "id": 8650,
+    "searchname": "Offerte Suneye XL - WIlco Vendrig (6228)",
+    "discr": "offerte"
+   },
+   "contractline": null,
+   "product": {
+    "id": 76,
+    "searchname": "Rolluik (RollSUPER) (20064)",
+    "discr": "verkoopproduct"
+   },
+   "amountwritten": null
+  },
+  {
+   "_ordering": 4,
+   "internalnote": "",
+   "amount": 1,
+   "hidefortimewriting": false,
+   "sellingprice": "2320.12",
+   "discount": 0,
+   "buyingprice": "0.00",
+   "additionalsubject": "",
+   "description": "Breedte: 1260 mm\nHoogte: 2450 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: Antraciet\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+   "hidedetails": false,
+   "id": 47111,
+   "createdon": {
+    "date": "2026-07-20 18:31:16.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
+   },
+   "updatedon": null,
+   "searchname": "Rolluik (RollSUPER)  (Fixed)",
+   "extendedproperties": null,
+   "groupcategory": null,
+   "convertto": {
+    "id": 1,
+    "searchname": "Opdracht of factuur"
+   },
+   "unit": {
+    "id": 3,
+    "searchname": "stuks"
+   },
+   "invoicebasis": {
+    "id": 1,
+    "searchname": "Fixed"
+   },
+   "vat": {
+    "id": 27,
+    "searchname": "BTW 21%"
+   },
+   "rowtype": {
+    "id": 1,
+    "searchname": "NORMAAL"
+   },
+   "offerprojectbase": {
+    "id": 8650,
+    "searchname": "Offerte Suneye XL - WIlco Vendrig (6228)",
+    "discr": "offerte"
+   },
+   "contractline": null,
+   "product": {
+    "id": 76,
+    "searchname": "Rolluik (RollSUPER) (20064)",
+    "discr": "verkoopproduct"
+   },
+   "amountwritten": null
+  },
+  {
+   "_ordering": 5,
+   "internalnote": "",
+   "amount": 1,
+   "hidefortimewriting": false,
+   "sellingprice": "1488.35",
+   "discount": 0,
+   "buyingprice": "0.00",
+   "additionalsubject": "",
+   "description": "Breedte: 1650 mm\nHoogte: 2450 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: Antraciet\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+   "hidedetails": false,
+   "id": 47112,
+   "createdon": {
+    "date": "2026-07-20 18:31:16.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
+   },
+   "updatedon": null,
+   "searchname": "Rolluik (RollSUPER)  (Fixed)",
+   "extendedproperties": null,
+   "groupcategory": null,
+   "convertto": {
+    "id": 1,
+    "searchname": "Opdracht of factuur"
+   },
+   "unit": {
+    "id": 3,
+    "searchname": "stuks"
+   },
+   "invoicebasis": {
+    "id": 1,
+    "searchname": "Fixed"
+   },
+   "vat": {
+    "id": 27,
+    "searchname": "BTW 21%"
+   },
+   "rowtype": {
+    "id": 1,
+    "searchname": "NORMAAL"
+   },
+   "offerprojectbase": {
+    "id": 8650,
+    "searchname": "Offerte Suneye XL - WIlco Vendrig (6228)",
+    "discr": "offerte"
+   },
+   "contractline": null,
+   "product": {
+    "id": 76,
+    "searchname": "Rolluik (RollSUPER) (20064)",
+    "discr": "verkoopproduct"
+   },
+   "amountwritten": null
+  },
+  {
+   "_ordering": 6,
+   "internalnote": "",
+   "amount": 13,
+   "hidefortimewriting": false,
+   "sellingprice": "144.63",
+   "discount": 0,
+   "buyingprice": "0.00",
+   "additionalsubject": "",
+   "description": "- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+   "hidedetails": false,
+   "id": 47113,
+   "createdon": {
+    "date": "2026-07-20 18:31:16.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
+   },
+   "updatedon": null,
+   "searchname": "Montage rolluik solar (vanaf 3 stuks)  (Fixed)",
+   "extendedproperties": null,
+   "groupcategory": null,
+   "convertto": {
+    "id": 1,
+    "searchname": "Opdracht of factuur"
+   },
+   "unit": {
+    "id": 3,
+    "searchname": "stuks"
+   },
+   "invoicebasis": {
+    "id": 1,
+    "searchname": "Fixed"
+   },
+   "vat": {
+    "id": 27,
+    "searchname": "BTW 21%"
+   },
+   "rowtype": {
+    "id": 1,
+    "searchname": "NORMAAL"
+   },
+   "offerprojectbase": {
+    "id": 8650,
+    "searchname": "Offerte Suneye XL - WIlco Vendrig (6228)",
+    "discr": "offerte"
+   },
+   "contractline": null,
+   "product": {
+    "id": 256,
+    "searchname": "Montage rolluik solar (vanaf 3 stuks) (20242)",
+    "discr": "verkoopproduct"
+   },
+   "amountwritten": null
+  },
+  {
+   "_ordering": 7,
+   "internalnote": "",
+   "amount": 1,
+   "hidefortimewriting": false,
+   "sellingprice": "4289.17",
+   "discount": 0,
+   "buyingprice": "0.00",
+   "additionalsubject": "",
+   "description": "Breedte: 6000 mm\nUitval: 3500 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: NTB\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+   "hidedetails": false,
+   "id": 47114,
+   "createdon": {
+    "date": "2026-07-20 18:31:16.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
+   },
+   "updatedon": null,
+   "searchname": "Suneye  (Fixed)",
+   "extendedproperties": null,
+   "groupcategory": null,
+   "convertto": {
+    "id": 1,
+    "searchname": "Opdracht of factuur"
+   },
+   "unit": {
+    "id": 3,
+    "searchname": "stuks"
+   },
+   "invoicebasis": {
+    "id": 1,
+    "searchname": "Fixed"
+   },
+   "vat": {
+    "id": 27,
+    "searchname": "BTW 21%"
+   },
+   "rowtype": {
+    "id": 1,
+    "searchname": "NORMAAL"
+   },
+   "offerprojectbase": {
+    "id": 8650,
+    "searchname": "Offerte Suneye XL - WIlco Vendrig (6228)",
+    "discr": "offerte"
+   },
+   "contractline": null,
+   "product": {
+    "id": 145,
+    "searchname": "Suneye (20131)",
+    "discr": "verkoopproduct"
+   },
+   "amountwritten": null
+  },
+  {
+   "_ordering": 8,
+   "internalnote": "",
+   "amount": 1,
+   "hidefortimewriting": false,
+   "sellingprice": "309.92",
+   "discount": 0,
+   "buyingprice": "0.00",
+   "additionalsubject": "",
+   "description": "- Inclusief uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+   "hidedetails": false,
+   "id": 47115,
+   "createdon": {
+    "date": "2026-07-20 18:31:16.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
+   },
+   "updatedon": null,
+   "searchname": "Montage Knikarmscherm uitgebreid.  (Fixed)",
+   "extendedproperties": null,
+   "groupcategory": null,
+   "convertto": {
+    "id": 1,
+    "searchname": "Opdracht of factuur"
+   },
+   "unit": {
+    "id": 3,
+    "searchname": "stuks"
+   },
+   "invoicebasis": {
+    "id": 1,
+    "searchname": "Fixed"
+   },
+   "vat": {
+    "id": 27,
+    "searchname": "BTW 21%"
+   },
+   "rowtype": {
+    "id": 1,
+    "searchname": "NORMAAL"
+   },
+   "offerprojectbase": {
+    "id": 8650,
+    "searchname": "Offerte Suneye XL - WIlco Vendrig (6228)",
+    "discr": "offerte"
+   },
+   "contractline": null,
+   "product": {
+    "id": 251,
+    "searchname": "Montage Knikarmscherm uitgebreid. (20237)",
+    "discr": "verkoopproduct"
+   },
+   "amountwritten": null
+  },
+  {
+   "_ordering": 9,
+   "internalnote": "",
+   "amount": 2,
+   "hidefortimewriting": false,
+   "sellingprice": "73.55",
+   "discount": 0,
+   "buyingprice": "0.00",
+   "additionalsubject": "",
+   "description": "- 2 stuks\n- Om de krachten op te vangen van het scherm",
+   "hidedetails": false,
+   "id": 47116,
+   "createdon": {
+    "date": "2026-07-20 18:31:16.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
+   },
+   "updatedon": null,
+   "searchname": "Extra info  (Fixed)",
+   "extendedproperties": null,
+   "groupcategory": null,
+   "convertto": {
+    "id": 1,
+    "searchname": "Opdracht of factuur"
+   },
+   "unit": {
+    "id": 3,
+    "searchname": "stuks"
+   },
+   "invoicebasis": {
+    "id": 1,
+    "searchname": "Fixed"
+   },
+   "vat": {
+    "id": 27,
+    "searchname": "BTW 21%"
+   },
+   "rowtype": {
+    "id": 1,
+    "searchname": "NORMAAL"
+   },
+   "offerprojectbase": {
+    "id": 8650,
+    "searchname": "Offerte Suneye XL - WIlco Vendrig (6228)",
+    "discr": "offerte"
+   },
+   "contractline": null,
+   "product": {
+    "id": 345,
+    "searchname": "Extra info (20330)",
+    "discr": "verkoopproduct"
+   },
+   "amountwritten": null
+  },
+  {
+   "_ordering": 10,
+   "internalnote": "",
+   "amount": 1,
+   "hidefortimewriting": false,
+   "sellingprice": "161.16",
+   "discount": 0,
+   "buyingprice": "0.00",
+   "additionalsubject": "",
+   "description": "•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+   "hidedetails": false,
+   "id": 47117,
+   "createdon": {
+    "date": "2026-07-20 18:31:16.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
+   },
+   "updatedon": null,
+   "searchname": "Tahoma switch  (Fixed)",
+   "extendedproperties": null,
+   "groupcategory": null,
+   "convertto": {
+    "id": 1,
+    "searchname": "Opdracht of factuur"
+   },
+   "unit": {
+    "id": 3,
+    "searchname": "stuks"
+   },
+   "invoicebasis": {
+    "id": 1,
+    "searchname": "Fixed"
+   },
+   "vat": {
+    "id": 27,
+    "searchname": "BTW 21%"
+   },
+   "rowtype": {
+    "id": 1,
+    "searchname": "NORMAAL"
+   },
+   "offerprojectbase": {
+    "id": 8650,
+    "searchname": "Offerte Suneye XL - WIlco Vendrig (6228)",
+    "discr": "offerte"
+   },
+   "contractline": null,
+   "product": {
+    "id": 155,
+    "searchname": "Tahoma switch (20141)",
+    "discr": "verkoopproduct"
+   },
+   "amountwritten": null
+  },
+  {
+   "_ordering": 11,
+   "internalnote": "",
+   "amount": 1,
+   "hidefortimewriting": false,
+   "sellingprice": "139.67",
+   "discount": 0,
+   "buyingprice": "0.00",
+   "additionalsubject": "",
+   "description": "- Windbeveiliging in de voorlijst\n- De windsensor is een hulp stuk hier kunnen geen garantie rechten aan verleend worden mbt windschade.",
+   "hidedetails": false,
+   "id": 47118,
+   "createdon": {
+    "date": "2026-07-20 18:31:16.000000",
+    "timezone_type": 3,
+    "timezone": "Europe/Amsterdam"
+   },
+   "updatedon": null,
+   "searchname": "Eolis 3D windsensor IO  (Fixed)",
+   "extendedproperties": null,
+   "groupcategory": null,
+   "convertto": {
+    "id": 1,
+    "searchname": "Opdracht of factuur"
+   },
+   "unit": {
+    "id": 3,
+    "searchname": "stuks"
+   },
+   "invoicebasis": {
+    "id": 1,
+    "searchname": "Fixed"
+   },
+   "vat": {
+    "id": 27,
+    "searchname": "BTW 21%"
+   },
+   "rowtype": {
+    "id": 1,
+    "searchname": "NORMAAL"
+   },
+   "offerprojectbase": {
+    "id": 8650,
+    "searchname": "Offerte Suneye XL - WIlco Vendrig (6228)",
+    "discr": "offerte"
+   },
+   "contractline": null,
+   "product": {
+    "id": 62,
+    "searchname": "Eolis 3D windsensor IO (20050)",
+    "discr": "verkoopproduct"
+   },
+   "amountwritten": null
+  }
+ ],
+ "viewonlineurl": "https://sonty.gripp.com/public/viewer.php?w=MDk2QjFKR1B3QmtjZXdkZllUbTRvdW9DeUMzOUUxdXlNbTd0MkpKTlkwa1hXRFFncHFZdkpyVjNwcy9KeHdFMTQveWxGRFA3WkdFYnhTcnJDUjBsanZCRDYrWnNmY2NqMTh4UFhqc2dmZ2dWcHRFY2hvcVcramEzMUx1UEVFeTJpYkQzbGQyVzdtdWFmeEROVThEL1VRPT0=",
+ "directpdfurl": "https://sonty.gripp.com/public/viewer.php?w=MDk2QjFKR1B3QmtjZXdkZllUbTRvdW9DeUMzOUUxdXlNbTd0MkpKTlkwa1hXRFFncHFZdkpyVjNwcy9KeHdFMTQveWxGRFA3WkdFYnhTcnJDUjBsanZCRDYrWnNmY2NqMTh4UFhqc2dmZ2g3RjNzdHd5KzVkNFZ5ckluMThEWjhaNHRSWkZMZEZmc1k1SSs0M0xpdlNVYmduNjZyZENIRVYzYnBMaHgvU0Q0PQ=="
+}

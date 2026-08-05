@@ -365,6 +365,9 @@ async function main() {
         const lines = plg.data.lines;
         const groupDiscount = plg.data.groupDiscount;
         const discountPct = groupDiscount?.type === 'PERCENTAGE' ? (groupDiscount.amount || 0) : 0;
+        // ABSOLUTE korting (vast bedrag incl. btw) bestaat ook — zonder deze regel viel
+        // die stilletjes weg en stond de Gripp-offerte te hoog (Wilco: 33.666 i.p.v. 27.500).
+        const discountAbs = groupDiscount?.type === 'ABSOLUTE' ? (groupDiscount.amount || 0) : 0;
         const discountName = groupDiscount?.name || '';
 
         // Bouw Gripp offerteregels (volle prijs, korting apart zichtbaar)
@@ -399,6 +402,14 @@ async function main() {
         if (offerlines.length === 0) { console.log('  SKIP #' + docInfo.quotationNumber + ': geen regels'); continue; }
 
         // Korting als aparte zichtbare regel onderaan (product 103 "Korting")
+        if (discountAbs > 0) {
+          offerlines.push({
+            _ordering: ordering++, product: 103, amount: 1,
+            sellingprice: parseFloat((-(discountAbs / 1.21)).toFixed(2)), discount: 0, buyingprice: 0,
+            invoicebasis: 1, vat: 27, unit: 3, convertto: 1, rowtype: 1,
+            description: discountName || ('Korting €' + discountAbs.toFixed(2)),
+          });
+        }
         if (discountPct > 0) {
           const totalExcl = lines.reduce((s, l) => s + l.units * l.pricePerUnit, 0) / 1.21;
           offerlines.push({

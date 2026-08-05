@@ -99,12 +99,18 @@ async function zoekOpNaam(klantnaam) {
     .filter((w) => w.length >= 4 && !RUIS.test(w))
     .sort((a, b) => b.length - a.length);
   if (!woorden.length) return null;
-  const res = await gripp('company.get', [
-    [{ field: 'company.searchname', operator: 'like', value: `%${woorden[0]}%` }],
-    { paging: { firstresult: 0, maxresults: 5 } },
-  ]);
-  await wacht(1600);
-  const rows = res?.rows || [];
+  // Probeer de 2 langste woorden apart: "Arold Borger, Wittgensteinlaan" moet via
+  // Borger matchen, niet stranden op het adresdeel in de naam.
+  let rows = [];
+  for (const woord of woorden.slice(0, 2)) {
+    const res = await gripp('company.get', [
+      [{ field: 'company.searchname', operator: 'like', value: `%${woord}%` }],
+      { paging: { firstresult: 0, maxresults: 5 } },
+    ]);
+    await wacht(1600);
+    rows = res?.rows || [];
+    if (rows.length) break;
+  }
   // Ondubbelzinnig = precies één kaart waarvan de volledige naam wederzijds past
   const past = rows.filter((k) => {
     const kn = String(k.searchname || '').toLowerCase();
@@ -252,7 +258,7 @@ async function main() {
       const adres = job.address?.formatted || '';
       const tel = (job.contacts || []).find((c) => c.type === 'phone' && c.value && c.value !== '-')?.value;
       const klantnaam = klantregel.replace(/^Inmeten Sonty - /, '').trim();
-      const match = await zoekKlant(adres, tel, /winkel/i.test(klantnaam) ? null : klantnaam);
+      const match = await zoekKlant(adres, tel, /joey\s*winkel|^winkel/i.test(klantnaam) ? null : klantnaam);
       if (match) {
         const nr = match.offerte.number;
         const regels = productRegels(match.offerte);

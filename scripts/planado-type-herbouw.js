@@ -101,18 +101,34 @@ async function main() {
       priority: 'normal',
       report_fields: [], custom_fields: [], skill_uuids: [], ordered_services: [], provided_services: [], used_materials: [],
     };
-    const { status: cs, json: nieuw } = await intern('POST', '/jobs', body);
-    await wacht(600);
-    if (cs !== 201 || !nieuw?.uuid) {
-      fouten++;
-      console.log(`    CREATE-fout ${cs}: ${JSON.stringify(nieuw).slice(0, 140)} — oude blijft staan`);
-      continue;
-    }
-
-    // 2. detailvelden (Meetbon/In te meten) overzetten via de publieke API
+    // external_id is uniek en kan ALLEEN bij create gezet worden (publiek én intern
+    // PATCH negeren hem) → oude eerst weg, dan nieuwe mét extId. Reddingsbestand
+    // vooraf zodat een klap halverwege nooit een opdracht kan kosten.
     const oudeVelden = (j.custom_fields || (await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json())?.job?.custom_fields || []);
     await wacht(2600);
     const velden = oudeVelden.filter((f) => f.value).map((f) => ({ name: f.name, field_type: f.field_type, value: f.value }));
+    fs.appendFileSync(path.join(__dirname, '..', 'data', 'herbouw-rescue.jsonl'),
+      JSON.stringify({ serial: j.serial_no, uuid: j.uuid, oud, velden }) + '\n');
+
+    const { status: ds } = await intern('DELETE', '/jobs/' + j.uuid);
+    await wacht(600);
+    if (ds !== 200) { fouten++; console.log(`    DELETE-fout ${ds} op #${j.serial_no} — overslaan`); continue; }
+
+    let nieuw = null;
+    for (let poging = 1; poging <= 3 && !nieuw; poging++) {
+      const { status: cs, json: res } = await intern('POST', '/jobs', body);
+      await wacht(600);
+      if (cs === 201 && res?.uuid) nieuw = res;
+      else console.log(`    CREATE-poging ${poging} fout ${cs}: ${JSON.stringify(res).slice(0, 120)}`);
+    }
+    if (!nieuw) {
+      // laatste redmiddel: terugzetten zonder type zodat de afspraak nooit verdwijnt
+      const { status: hs, json: herstel } = await intern('POST', '/jobs', { ...body, type_uuid: undefined, template_uuid: undefined });
+      fouten++;
+      console.log(`    HERSTEL zonder type: ${hs} ${JSON.stringify(herstel).slice(0, 80)} — zie data/herbouw-rescue.jsonl`);
+      continue;
+    }
+
     if (velden.length) {
       const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + nieuw.uuid, { headers: PH })).json();
       const nh = det.job || det;
@@ -125,23 +141,14 @@ async function main() {
       if (!pr.ok) { console.log(`    veld-PATCH ${pr.status} op nieuwe #${nieuw.serial_no}`); }
     }
 
-    // 3. verifiëren dat de nieuwe klopt vóór we de oude weggooien
     const { json: check } = await intern('GET', '/jobs/' + nieuw.uuid);
     await wacht(600);
     const goed = check && check.type_uuid === TYPES[soort]
       && Date.parse(check.scheduled_at) === Date.parse(oud.scheduled_at)
-      && (check.assignees?.workers || []).length === workers.length;
-    if (!goed) {
-      fouten++;
-      console.log(`    VERIFICATIE FAALT op nieuwe #${nieuw.serial_no} — oude blijft staan, nieuwe verwijderen`);
-      await intern('DELETE', '/jobs/' + nieuw.uuid);
-      continue;
-    }
-
-    // 4. oude weg
-    const { status: ds } = await intern('DELETE', '/jobs/' + j.uuid);
-    await wacht(600);
-    console.log(`    #${j.serial_no} -> #${nieuw.serial_no} (${soort}) ${ds === 200 ? 'OK' : 'DELETE-fout ' + ds + ' — DUBBEL, handmatig nakijken!'}`);
+      && (check.assignees?.workers || []).length === workers.length
+      && check.external_id === oud.external_id;
+    console.log(`    #${j.serial_no} -> #${nieuw.serial_no} (${soort}) ${goed ? 'OK' : 'CHECK-AFWIJKING — nakijken!'}`);
+    if (!goed) fouten++;
   }
   console.log(`\nherbouwd: ${herbouwd} | type was al goed: ${alGoed} | onbekend soort overgeslagen: ${overgeslagen} | fouten: ${fouten}`);
   await browser.close();

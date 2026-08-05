@@ -160,6 +160,15 @@ async function main() {
     const heeftGripp = /Gripp:\s*\d/.test(job.description || '');
     const klantregel = (job.description || '').split('\n')[0];
 
+    // Tikbaar Meetbon-linkveld in de details (Daimy 05-08): field_type 'link' maakt
+    // een echte knop in de app. Ook toevoegen bij jobs die al een Gripp-blok in de
+    // omschrijving hebben maar het veld nog missen.
+    const heeftMeetbonVeld = (job.custom_fields || []).some((f) => f.name === 'Meetbon' && f.value);
+    if (heeftGripp && !heeftMeetbonVeld) {
+      const nr = (job.description.match(/Gripp:\s*(\d+)/) || [])[1];
+      if (nr) patch.custom_fields = [{ name: 'Meetbon', field_type: 'link', value: `https://sonty-website.vercel.app/admin/meetbon/${nr}` }];
+    }
+
     if (soort === 'inmeet' && !heeftGripp) {
       const adres = job.address?.formatted || '';
       const tel = (job.contacts || []).find((c) => c.type === 'phone' && c.value && c.value !== '-')?.value;
@@ -170,6 +179,7 @@ async function main() {
         console.log(`  + #${job.serial_no} ${klantregel.slice(0, 34)} -> Gripp ${nr} (${match.company.searchname.slice(0, 24)}): ${regels.length} product(en)`);
         verrijkt++;
         patch.description = `${job.description || ''}\n\nGripp: ${nr}\nIN TE METEN:\n${regels.map((r) => '- ' + r).join('\n') || '- (geen productregels gevonden — check offerte)'}\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/${nr}`;
+        patch.custom_fields = [{ name: 'Meetbon', field_type: 'link', value: `https://sonty-website.vercel.app/admin/meetbon/${nr}` }];
       } else {
         nietGekoppeld++;
         nietLijst.push(`${job.serial_no} ${klantregel.slice(0, 40)}`);

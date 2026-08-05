@@ -196,10 +196,13 @@ async function main() {
             await wacht(2600);
             const det = await (await fetch(`https://api.planadoapp.com/v2/jobs/${uuid}`, { headers: PH })).json();
             const huidig = det.job || det;
-            if (huidig.type_uuid !== body.type_uuid) {
+            const naPatch = { version: huidig.version };
+            // Meetbon als tikbaar linkveld in de details (Daimy 05-08)
+            const nr = (grippBlok.match(/Gripp: (\d+)/) || [])[1];
+            if (nr) naPatch.custom_fields = [{ name: 'Meetbon', field_type: 'link', value: `https://sonty-website.vercel.app/admin/meetbon/${nr}` }];
+            if (Object.keys(naPatch).length > 1) {
               await fetch(`https://api.planadoapp.com/v2/jobs/${uuid}`, {
-                method: 'PATCH', headers: PH,
-                body: JSON.stringify({ version: huidig.version, type_uuid: body.type_uuid }),
+                method: 'PATCH', headers: PH, body: JSON.stringify(naPatch),
               });
             }
           }

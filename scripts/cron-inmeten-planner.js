@@ -410,4 +410,66 @@ async function main() {
   await telegram(`Inmeet-planner (${LIVE ? 'LIVE' : 'schaduw'}) — ${items.length} lead(s):\n\n` + regels.join('\n'));
 }
 
-main().catch((e) => { console.error(e); process.exit(1); });
+// ── aanbod-verwerker ────────────────────────────────────────────────────────
+// De klant heeft via de keuzepagina een slot gekozen; hier wordt het echt:
+// Planado-opdracht bij de juiste inmeter, RP door naar "grip invullen",
+// Gripp-offerte via het bestaande script, meetbon klaargezet. Daarna pas
+// markeren we het aanbod als verwerkt — mislukt er iets, dan blijft het staan
+// en wordt het de volgende run opnieuw geprobeerd.
+const AANBOD_API = 'https://sonty-website.vercel.app/api/inmeet-aanbod';
+const MEET_CODE = process.env.BELSCHERM_CODE || 'sonty2288';
+
+async function aanbodApi(pad, opties = {}) {
+  const r = await fetch(AANBOD_API + pad, {
+    ...opties,
+    headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE, ...(opties.headers || {}) },
+  });
+  if (!r.ok) throw new Error(`aanbod-api ${pad}: HTTP ${r.status}`);
+  return r.json();
+}
+
+async function verwerkAanbiedingen() {
+  // 1. verlopen aanbiedingen opruimen + melden (de 24-uursklok)
+  const { aanbiedingen: open } = await aanbodApi('?status=open');
+  for (const a of open) {
+    if (Date.now() > Date.parse(a.verlooptOp)) {
+      await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen' }) });
+      await telegram(`⏰ Inmeet-aanbod voor ${a.lead.naam} is na 24 uur verlopen zonder keuze. Volgende stap: nieuw aanbod of bellen (belscherm).`);
+    }
+  }
+
+  // 2. gekozen aanbiedingen boeken
+  const { aanbiedingen: gekozen } = await aanbodApi('?status=gekozen');
+  console.log(`${gekozen.length} gekozen aanbod(en) te verwerken`);
+  for (const a of gekozen) {
+    const slot = a.slots[a.gekozenIndex];
+    const lead = {
+      id: a.lead.rpItemId,
+      naam: a.lead.naam,
+      telefoon: a.lead.telefoon,
+      volledigAdres: a.lead.volledigAdres,
+      producten: (a.lead.producten || []).map((p) => ({ naam: p.naam, aantal: p.aantal })),
+      aantalProducten: (a.lead.producten || []).reduce((n, p) => n + (p.aantal || 1), 0),
+    };
+    const gekozenSlot = {
+      inmeter: slot.inmeter,
+      aankomst: new Date(slot.aankomst),
+      extraRijtijdMin: 0,
+    };
+    try {
+      const uitkomst = await verwerkLead(lead, null, gekozenSlot, a.duurMin);
+      await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verwerkt' }) });
+      console.log(`  ✓ ${a.lead.naam}: ${uitkomst.samenvatting}`);
+      await telegram(`✅ Inmeetafspraak GEBOEKT na klantkeuze:\n${a.lead.naam} — ${slot.datum}, ${slot.inmeter}\n${uitkomst.samenvatting}`);
+    } catch (e) {
+      console.log(`  ✗ ${a.lead.naam}: ${e.message}`);
+      await telegram(`⚠️ Boeken na klantkeuze MISLUKT voor ${a.lead.naam}: ${e.message.slice(0, 160)}\nAanbod blijft op "gekozen" staan; volgende run opnieuw.`);
+    }
+  }
+}
+
+if (process.argv.includes('--verwerk-aanbod')) {
+  verwerkAanbiedingen().catch((e) => { console.error(e); process.exit(1); });
+} else {
+  main().catch((e) => { console.error(e); process.exit(1); });
+}

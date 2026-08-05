@@ -16,6 +16,11 @@ const BACKLOG_ID = 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7';
 const INMETEN_INPLANNEN = '2e9819bd-26f0-4082-8f18-32bb48f87f54';
 
 const ZOEK = (process.argv.find((a) => a.startsWith('--alleen=')) || '').split('=')[1] || 'daimy';
+// --maak-aanbod: zet het berekende voorstel als ECHT aanbod klaar (keuzelink voor de
+// klant, 24u geldig) en stuurt de link naar Telegram. Zonder deze vlag blijft alles
+// read-only. Werkt alleen samen met --alleen, zodat er nooit per ongeluk voor alle
+// leads tegelijk aanbiedingen ontstaan.
+const MAAK_AANBOD = process.argv.includes('--maak-aanbod');
 
 async function owaToken() {
   const browser = await chromium.launch({ headless: true });
@@ -184,7 +189,9 @@ async function main() {
     const werkt = werkdagenVan(wie, eigen);
     const dagen = [];
     const dd = new Date(); dd.setDate(dd.getDate() + 1);
-    while (dagen.length < 10) {
+    // 18 werkdagen vooruit: de agenda is maar ~3-4 weken gevuld, dus de lege weken
+    // daarna zijn echte capaciteit. Nooit verder dan het agenda-venster (42 dagen).
+    while (dagen.length < 18) {
       const u = werkt(dd.getDay());
       if (u) dagen.push({ datum: dd.toISOString().slice(0, 10), van: u.van, tot: u.tot });
       dd.setDate(dd.getDate() + 1);
@@ -210,6 +217,40 @@ async function main() {
   console.log(`\n=== VOORSTEL AAN DE KLANT ===`);
   if (!aanbod.length) console.log('  nog geen aanbod — ' + waaromGeenAanbod(slots));
   else for (const s of aanbod) console.log(`  ${s.datum} ${venster(s)}  door ${s.inmeter}`);
+
+  if (MAAK_AANBOD && aanbod.length) {
+    const veldUit = (n) => (desc.match(new RegExp(`^${n}:\\s*(.+)$`, 'im')) || [])[1]?.trim() || '';
+    const res = await fetch('https://sonty-website.vercel.app/api/inmeet-aanbod', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-meet-code': process.env.BELSCHERM_CODE || 'sonty2288' },
+      body: JSON.stringify({
+        lead: {
+          rpItemId: item.id,
+          naam: item.summary,
+          telefoon: veldUit('Telefoonnummer'),
+          email: veldUit('E-mailadres'),
+          volledigAdres: adres,
+          plaats: veldUit('Plaats'),
+          producten: producten.map((p) => ({ naam: p.naam, aantal: p.aantal })),
+        },
+        duurMin: duur,
+        slots: aanbod.map((sl) => ({
+          datum: sl.datum,
+          aankomst: sl.aankomst.toISOString(),
+          vertrek: sl.vertrek.toISOString(),
+          inmeter: sl.inmeter,
+        })),
+      }),
+    });
+    if (!res.ok) throw new Error(`aanbod aanmaken mislukt: HTTP ${res.status}`);
+    const { url } = await res.json();
+    console.log(`\nAANBOD AANGEMAAKT (24u geldig): ${url}`);
+    const TG = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
+    await fetch(`https://api.telegram.org/bot${TG}/sendMessage`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: 1700128390, text: `Inmeet-aanbod voor ${item.summary} staat klaar (24u geldig). Dit is de link die de klant zou krijgen — kies zelf een tijd om de keten te testen:\n${url}` }),
+    }).catch(() => {});
+  }
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

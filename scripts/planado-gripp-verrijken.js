@@ -66,7 +66,7 @@ function adresSleutel(adres) {
 
 /** Straatnaam + huisnummer uit een adres zonder postcode ("Aalbersestraat 41 Naaldwijk"). */
 function straatSleutel(adres) {
-  const m = String(adres || '').match(/^\s*([\p{L} .'-]{5,}?)\s+(\d{1,4})\b/u);
+  const m = String(adres || '').match(/^\s*([\p{L} .'-]{5,}?)\s+(\d{1,4})(?!\d)/u); // (?!\d) i.p.v. \b: huisletter "12a" telt ook
   if (!m) return null;
   return { straat: m[1].trim(), nr: m[2] };
 }
@@ -267,7 +267,7 @@ async function main() {
   if (nietLijst.length) console.log('NIET GEKOPPELD:\n  ' + nietLijst.join('\n  '));
 }
 
-module.exports = { zoekKlant, productRegels, TYPES, soortUit };
+module.exports = { zoekKlant, productRegels, TYPES, soortUit, adresSleutel, straatSleutel };
 if (require.main === module) {
   main().catch((e) => { console.error(e.message); process.exit(1); });
 }

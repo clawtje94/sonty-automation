@@ -166,5 +166,20 @@ test('advieswaarden worden herkend, echte keuzes niet', () => {
   assert.ok(!ADVIES.test('Somfy IO (RS100)'));
 });
 
+console.log('— Gripp-koppelsleutels —');
+
+const { adresSleutel, straatSleutel } = require('../scripts/planado-gripp-verrijken.js');
+test('adresSleutel pakt postcode + huisnummer, ook zonder spatie in de postcode', () => {
+  assert.deepStrictEqual(adresSleutel('Frijdastraat 8, 2288 EZ Rijswijk'), { pc: '2288EZ', nr: '8' });
+  assert.deepStrictEqual(adresSleutel('Molenbrink 36 2553BC Den Haag'), { pc: '2553BC', nr: '36' });
+  assert.strictEqual(adresSleutel('Aalbersestraat 41 Naaldwijk, Nederland'), null, 'zonder postcode geen pc-sleutel');
+});
+test('straatSleutel vangt adressen zonder postcode (Outlook-locaties, geval Mariska 05-08)', () => {
+  assert.deepStrictEqual(straatSleutel('Aalbersestraat 41 Naaldwijk, Nederland'), { straat: 'Aalbersestraat', nr: '41' });
+  assert.deepStrictEqual(straatSleutel("'s-Gravenzandseweg 12a Wateringen"), { straat: "'s-Gravenzandseweg", nr: '12' });
+  assert.strictEqual(straatSleutel(''), null);
+  assert.strictEqual(straatSleutel('12 34'), null, 'alleen cijfers is geen straat');
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

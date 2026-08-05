@@ -126,3 +126,7 @@
 - (2026-08-03) [team-notitie bij gesprek +31622368116] jij kan gewoon antwoorden
 - (2026-08-03) [team-notitie bij gesprek Nele] tanya plugge is van 4-8-26 tot 31-8-26 op vakantie dus in die tijd geen tickets meer toewijzen aan haar en ook geen vermeldingen doen, daarna kan het wel weer.
 - (2026-08-03) [team-notitie bij gesprek Jeane] als ze de rest van de ramen er bij doet kan je 2,5% extra korting aanbieden, en geef maar aan dat het inmeten over 2-3 weken is en dan daarna pas de aanbetaling komt van 40% en dat 60% pas na 12-14 weken is dus dat ze nog alle tijd heeft om even door te sparen. vraag altijd wel even of dit goed is of wat ze zelf anders in gedachten had.
+- (2026-08-04) [team-notitie bij gesprek +31642055130] bied anders met 5 bij 3 een voorraad scherm aan?
+- (2026-08-05) [team-notitie bij gesprek Jeane] vraag even om een foto
+
+- (2026-08-05) [Silvia +31621557981] LICHTSTRAAT, ZADELDAK, SERRE EN VERANDA gaan ALTIJD naar een mens. Dat werk loopt via een ANDER PRIJSBOEK dan het gewone assortiment, dus de prijzen die de bot kent kloppen daar niet. Bij Silvia werd serre zonwering geoffreerd voor haar lichtstraat, en dat product bleek langer te worden dan de uitbouw zelf. Geen prijs noemen, geen offerte maken of aanpassen, geen toezegging doen over wat past: zeggen dat een collega er met de juiste maatvoering naar kijkt en escaleren. Dit zit nu ook als harde blokkade in offerte_aanmaken en offerte_aanpassen (tools.js), niet alleen als regel in de prompt.

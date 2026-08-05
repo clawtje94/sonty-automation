@@ -251,7 +251,31 @@ async function runTool(name, input, ctx) {
     const res = await getOfferteInhoud(input.documentId);
     return JSON.stringify(res).substring(0, 6000);
   }
+/**
+ * ANDER PRIJSBOEK: LICHTSTRAAT, ZADELDAK, SERRE EN VERANDA (Daimy 2026-08-05).
+ *
+ * Aanleiding: Silvia (+31621557981) kreeg serre zonwering geoffreerd voor haar lichtstraat, en
+ * die bleek langer te worden dan de uitbouw zelf. Dat soort werk loopt via een ander prijsboek
+ * dan het gewone assortiment, dus de prijzen die de bot kent kloppen daar niet.
+ *
+ * Dit is een harde blokkade en niet alleen een regel in de prompt: een instructie kan een model
+ * naast zich neerleggen, een geweigerde tool niet.
+ */
+const ANDER_PRIJSBOEK = /lichtstraat|licht ?straten|zadeldak|zadel ?dak|serre|veranda|glazen ?dak|dakraam|lessenaarsdak/i;
+
+function raaktAnderPrijsboek(ctx, input) {
+  const uitInput = JSON.stringify(input || {});
+  const uitGesprek = (ctx?.klantTeksten || []).join(' ');
+  return ANDER_PRIJSBOEK.test(uitInput) || ANDER_PRIJSBOEK.test(uitGesprek);
+}
+
   if (name === 'offerte_aanpassen') {
+    if (raaktAnderPrijsboek(ctx, input)) {
+      return JSON.stringify({
+        status: 'GEBLOKKEERD',
+        opmerking: 'Dit gaat over een lichtstraat, zadeldak, serre of veranda. Dat loopt via een ander prijsboek, dus jouw prijzen kloppen hier niet en je mag de offerte niet aanpassen. Zeg tegen de klant dat een collega er met de juiste maatvoering naar kijkt, noem GEEN prijs en doe GEEN toezegging over wat past, en roep escaleren_naar_mens aan.',
+      });
+    }
     ctx.acties.push({ type: 'offerte_aanpassen', ...input });
     if (CFG.MODE === 'live' || ctx.liveTest) {
       // ECHT doorvoeren (live-modus, of live-test op whitelist-nummer)
@@ -379,6 +403,12 @@ async function runTool(name, input, ctx) {
     return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets verplaatst. Vertel de klant dat de planning binnen 3 werkdagen contact opneemt om de afspraak te maken. GEEN boekingslink sturen (die is alleen voor showroombezoek).' });
   }
   if (name === 'offerte_aanmaken') {
+    if (raaktAnderPrijsboek(ctx, input)) {
+      return JSON.stringify({
+        status: 'GEBLOKKEERD',
+        opmerking: 'Dit gaat over een lichtstraat, zadeldak, serre of veranda. Dat loopt via een ander prijsboek, dus je kunt hier geen offerte voor maken. Zeg tegen de klant dat een collega het oppakt en roep escaleren_naar_mens aan.',
+      });
+    }
     ctx.acties.push({ type: 'offerte_aanmaken', klant: input.naam, producten: (input.producten || []).length });
     // Producten valideren: prijzen moeten te berekenen zijn vóór we de lead aanmaken
     for (const p of input.producten || []) {

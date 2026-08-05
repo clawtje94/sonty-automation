@@ -45,6 +45,18 @@ function soortUit(description) {
 }
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// Planado-inputvelden zijn max 200 tekens: hele productregels laten staan en de rest
+// als "+N meer" — de volledige lijst staat altijd in de omschrijving.
+function kortVeld(tekst) {
+  if (String(tekst || '').length <= 200) return tekst;
+  const delen = String(tekst).split(' · ');
+  for (let n = delen.length - 1; n >= 1; n--) {
+    const kandidaat = delen.slice(0, n).join(' · ') + ` · +${delen.length - n} meer (zie omschrijving)`;
+    if (kandidaat.length <= 200) return kandidaat;
+  }
+  return String(tekst).slice(0, 170) + '… (zie omschrijving)';
+}
+
 async function gripp(method, params) {
   const r = await fetch('https://api.gripp.com/public/api3.php', {
     method: 'POST',
@@ -217,6 +229,7 @@ async function main() {
     // altijd meesturen. Ook met terugwerkende kracht op jobs die al een Gripp-blok
     // in de omschrijving hebben.
     const veldenVoor = (nr, producten) => {
+      producten = kortVeld(producten);
       const bestaand = (job.custom_fields || []).map((f) => ({ name: f.name, field_type: f.field_type, value: f.value }));
       const zet = (naam, field_type, value) => {
         const i = bestaand.findIndex((f) => f.name === naam);
@@ -267,7 +280,7 @@ async function main() {
   if (nietLijst.length) console.log('NIET GEKOPPELD:\n  ' + nietLijst.join('\n  '));
 }
 
-module.exports = { zoekKlant, productRegels, TYPES, soortUit, adresSleutel, straatSleutel };
+module.exports = { zoekKlant, productRegels, TYPES, soortUit, adresSleutel, straatSleutel, kortVeld };
 if (require.main === module) {
   main().catch((e) => { console.error(e.message); process.exit(1); });
 }

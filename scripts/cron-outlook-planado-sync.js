@@ -36,6 +36,7 @@ const INMEET_TEMPLATE = '1f11c802-65cd-6aa0-9d06-7e73cee772e4';
 const { zoekKlant, productRegels } = require('./planado-gripp-verrijken.js');
 
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
+const { kortVeld } = require('./planado-gripp-verrijken.js');
 async function telegram(tekst) {
   await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -203,7 +204,7 @@ async function main() {
               const blok = (grippBlok.split('IN TE METEN:')[1] || '').split('MEETBON')[0]
                 .split('\n').map((x) => x.replace(/^\s*-\s*/, '').trim()).filter(Boolean).join(' · ');
               naPatch.custom_fields = [
-                { name: 'In te meten', field_type: 'input', value: blok || 'zie omschrijving' },
+                { name: 'In te meten', field_type: 'input', value: kortVeld(blok || 'zie omschrijving') },
                 { name: 'Meetbon', field_type: 'link', value: `https://sonty-website.vercel.app/admin/meetbon/${nr}` },
               ];
             }

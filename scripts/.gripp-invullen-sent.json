@@ -3888,5 +3888,57 @@
       }
     ],
     "processedAt": "2026-08-04T16:30:14.226Z"
+  },
+  "item:b36f98e5-5f78-4ff2-9327-b951b866f9c8": {
+    "summary": "Jolanda van Gelder",
+    "grippCompanyId": 99685,
+    "grippOfferId": 8916,
+    "rpDocNumber": "202611122",
+    "allOffers": [
+      {
+        "grippOfferId": 8916,
+        "rpDocNumber": "202611122"
+      }
+    ],
+    "processedAt": "2026-08-05T14:29:59.614Z"
+  },
+  "item:a3dbcbd7-e88a-4531-84b3-71ee69a312d8": {
+    "summary": "Elvis Remmerswaal",
+    "grippCompanyId": 99686,
+    "grippOfferId": 8917,
+    "rpDocNumber": "20266993",
+    "allOffers": [
+      {
+        "grippOfferId": 8917,
+        "rpDocNumber": "20266993"
+      }
+    ],
+    "processedAt": "2026-08-05T14:30:03.149Z"
+  },
+  "item:eaf995b0-619e-4a83-a1cc-5ceae1c61b2f": {
+    "summary": "Achraf Hajjout",
+    "grippCompanyId": 99687,
+    "grippOfferId": 8918,
+    "rpDocNumber": "202610805",
+    "allOffers": [
+      {
+        "grippOfferId": 8918,
+        "rpDocNumber": "202610805"
+      }
+    ],
+    "processedAt": "2026-08-05T14:30:07.535Z"
+  },
+  "item:2aaa2497-42e5-4314-b46a-84ce38d7aa0a": {
+    "summary": "Daimy TEST GRIP",
+    "grippCompanyId": 99688,
+    "grippOfferId": 8919,
+    "rpDocNumber": "202611049",
+    "allOffers": [
+      {
+        "grippOfferId": 8919,
+        "rpDocNumber": "202611049"
+      }
+    ],
+    "processedAt": "2026-08-05T14:33:10.297Z"
   }
 }

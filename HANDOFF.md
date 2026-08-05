@@ -1,4 +1,32 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-04)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-05)
+
+## WEBSITEPRIJZEN LIEPEN ACHTER OP DE PRIJSVERHOGING (5 aug, vraag Daimy)
+- **De verhoging van 3 aug zat wél in alle prijsmotoren maar niet in de publieke productpagina's.**
+  Die rekenen niet, ze lazen `data/sunmaster-prices.json` rechtstreeks, en daar zit de oude
+  opslag (1,10) in verwerkt. De meetlat mat alleen motoren, dus niets sloeg alarm.
+  **Les: bij een prijswijziging ook de presentatielaag meten, niet alleen wat rekent.**
+- Gefixt en live geverifieerd op sonty-website.vercel.app:
+  1. **9,1% te laag op alle vanaf-prijzen en prijstabellen.** SunEye 269×250 stond op €2.662,
+     de offerte rekent €2.904. De pagina bevraagt nu de prijsmotor in plaats van de JSON.
+     Gemeten: 370 van 370 voorbeeldprijzen gelijk aan de motor.
+  2. **Screen square / zipscreen / rolluik S-37 weken verder af**, tot €341 op één scherm,
+     want daar leest de motor een volledige prijstabel en toonde de pagina een samenvatting.
+     Zipscreen 300×300 stond zelfs €341 te hóóg.
+  3. **Montage uitvalscherm €195 → €220** (v4 factureert 220; de configurator rekende ook 25 te
+     weinig). Daimy bevestigd 5 aug: 220 is juist.
+  4. **Markiezen stonden €480 te laag**: site vanaf €660, v4 factureert €1.074. Kwamen uit een
+     andere bron dan het Markiezen Nederland-boek én gingen door de Sunmaster-opslag terwijl
+     ze de markiezenfactor (1,31) volgen. Nu 30 maten als eindprijs uit dezelfde berekening
+     als v4, grenen als vanaf-materiaal. `markies` is uitgezonderd van `metActueleMarkup`.
+  5. **`interpolateByArea` matchte op oppervlakte in plaats van breedte × hoogte.** Maten met
+     gelijke oppervlakte kregen elkaars prijs: 38 botsingen over 12 producten, ergste SunEye XL
+     700×250 (€6.640) tegen 500×350 (€4.563). Exacte maat-match staat nu vooraan.
+- **Geborgd:** `scripts/tests/website-toont-offerteprijs.js` controleert dat de keuzegids uit de
+  motor leest, dat de montageprijzen gelijk zijn aan v4 en dat de markiezenprijzen kloppen.
+  Draait mee als stap 4 in `kruiscontrole-dagelijks.js` (07:45). Getest tegen de oude situatie:
+  faalt daarop, dus geen lege test.
+- **Nieuw bestand:** `sonty-website/lib/prijspeil.ts` — de enige plek waar de prijspeil-correctie
+  gedefinieerd staat; motor en presentatielaag gebruiken hem allebei.
 
 ## KETENONDERZOEK PLANADO + MEETBON (4 aug, opdracht Daimy "hele keten moet kloppen")
 - **BESLUIT Daimy: Planado BLIJFT** (app + monteur-tracking). Eis: alles moet goed samenwerken vóórdat het live gaat.

@@ -49,12 +49,16 @@ async function main() {
 
   // Indexen: op sync-id en op starttijd
   const opExtId = new Map();
-  const opStart = new Map();
+  // Sleutel = starttijd + VOORNAAM van de inmeter. Alleen op tijd matchen ging fout:
+  // twee inmeters om 09:00 gaf het nummer van de verkeerde klant (dry-run 05-08:
+  // Rinette Hoogwerf kreeg het nummer van Wilco Vendrig).
+  const opStartWie = new Map();
   for (const e of evs) {
     if (e.IsCancelled) continue;
     const extId = 'ol-' + crypto.createHash('sha1').update(e.Id).digest('hex').slice(0, 20);
     opExtId.set(extId, e);
-    opStart.set(Date.parse(e.Start.DateTime + 'Z'), e);
+    const voornaam = (e.Attendees || []).map((a) => (a.EmailAddress?.Name || '').split(' ')[0]).find((n) => ['Joey', 'Sjoerd'].includes(n));
+    if (voornaam) opStartWie.set(`${Date.parse(e.Start.DateTime + 'Z')}|${voornaam}`, e);
   }
 
   // Alle toekomstige jobs van Joey/Sjoerd
@@ -80,7 +84,7 @@ async function main() {
     const heeftTel = (job.contacts || []).some((c) => c.type === 'phone' && c.value && c.value !== '-');
     if (heeftTel) { alGoed++; continue; }
 
-    const ev = opExtId.get(j.external_id) || opStart.get(Date.parse(j.scheduled_at));
+    const ev = opExtId.get(j.external_id) || opStartWie.get(`${Date.parse(j.scheduled_at)}|${INMETERS[j.assignee?.worker_uuid]}`);
     const tel = ev ? telefoonUit(ev.Body?.Content) : null;
     if (!tel) { geenNummer++; continue; }
 

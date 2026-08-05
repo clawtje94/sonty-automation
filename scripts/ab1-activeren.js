@@ -29,7 +29,7 @@ const VARIANT_NAAM = 'inmeten';
 // een echte klant met een eigen dossier in Reuzenpanda. Er zijn twee testberichten naar haar
 // gegaan, aangesproken als "Daimy" en met een offerte die niet van haar was. Een testnummer moet
 // hier expliciet worden meegegeven, zodat het nooit meer een aanname is.
-const TESTNUMMER = process.env.SONTY_TESTNUMMER || null;
+const TESTNUMMER = CFG.TESTNUMMER;
 const KANAAL = 1359857;
 const VERDELER = path.join(__dirname, 'ab-template-verdeler.js');
 const KLAAR = path.join(__dirname, '..', 'data', '.ab1-geactiveerd');

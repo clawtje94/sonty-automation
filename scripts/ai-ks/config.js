@@ -68,6 +68,19 @@ module.exports = {
   // (Jaimy-persona, geen intro — opdracht Daimy 2026-07-16).
   TEST_LIVE_PHONES: ['31683500506', '31636516410', '31628209480'],
 
+  /**
+   * HET ENIGE NUMMER WAAR EEN TESTBERICHT NAARTOE MAG (Daimy 2026-08-05).
+   *
+   * Aanleiding: in twee scripts stond +31643473757 als "testnummer van Daimy". Dat bleek van
+   * Nikki Lutz te zijn, een echte klant met een eigen dossier in Reuzenpanda. Zij kreeg daardoor
+   * een testofferte van 3.496 euro die niet van haar was, aangesproken als "Daimy", en antwoordde
+   * "Ik ga niet akkoord".
+   *
+   * Daarom staat het nu op één plek. Wie een testbericht wil sturen gebruikt DIT nummer en niets
+   * anders; een tweede plek betekent vroeg of laat een tweede vergissing.
+   */
+  TESTNUMMER: '+31683500506',
+
   // TEST-MAILADRESSEN (Daimy 2026-07-20): mails van Daimy en Joey krijgen DIRECT antwoord —
   // zonder de 1,5-2u reactietijd en ook buiten bot-uren (e-mail-equivalent van TEST_LIVE_PHONES).
   TEST_LIVE_EMAILS: ['daimyboot@gmail.com', 'engelenjoey@hotmail.com'],

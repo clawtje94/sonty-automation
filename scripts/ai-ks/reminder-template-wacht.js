@@ -21,7 +21,7 @@ const { getToken } = require('../trengo-api.js');
 const TEMPLATE_ID = 243872;
 // GEEN TESTNUMMER MEER (2026-08-05): +31643473757 bleek van een echte klant, Nikki Lutz.
 // Expliciet meegeven via SONTY_TESTNUMMER, anders wordt er niet getest maar alleen gemeld.
-const TESTNUMMER = process.env.SONTY_TESTNUMMER || null;
+const TESTNUMMER = CFG.TESTNUMMER;
 const KANAAL = 1359857;
 const KLAAR = path.join(__dirname, '..', '..', 'data', 'ai-ks', '.reminder-template-getest');
 

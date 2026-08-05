@@ -6,7 +6,9 @@
 // 1. POSTCODE + HUISNUMMER uit het adres van de opdracht (87% dekking) — dit is
 //    letterlijk waar gemeten wordt. Bij meerdere Gripp-kaarten op één adres wint
 //    degene met de nieuwste offerte.
-// 2. Telefoonnummer als vangnet (laatste 9 cijfers, phone én mobile, LIKE — Gripp
+// 2. STRAAT + HUISNUMMER als de postcode ontbreekt (Outlook-locaties zijn vaak
+//    "Aalbersestraat 41 Naaldwijk" zonder postcode — Daimy 05-08 Mariska Bo(o)gaard).
+// 3. Telefoonnummer als vangnet (laatste 9 cijfers, phone én mobile, LIKE — Gripp
 //    bewaart formaten door elkaar).
 // 3. Naam als laatste vangnet (Daimy 05-08 "alles moet gewoon bij iedereen ingevuld
 //    staan"): achternaam-zoek in Gripp, alleen koppelen bij PRECIES één kandidaat
@@ -62,6 +64,13 @@ function adresSleutel(adres) {
   return { pc: pc.replace(/\s/g, '').toUpperCase(), nr };
 }
 
+/** Straatnaam + huisnummer uit een adres zonder postcode ("Aalbersestraat 41 Naaldwijk"). */
+function straatSleutel(adres) {
+  const m = String(adres || '').match(/^\s*([\p{L} .'-]{5,}?)\s+(\d{1,4})\b/u);
+  if (!m) return null;
+  return { straat: m[1].trim(), nr: m[2] };
+}
+
 /** Nieuwste offerte van een Gripp-klant, of null. */
 async function nieuwsteOfferte(companyId) {
   const res = await gripp('offer.get', [
@@ -109,6 +118,20 @@ async function zoekKlant(adres, telefoon, klantnaam) {
     ]);
     kandidaten = res?.rows || [];
     await wacht(1600);
+  }
+  if (!kandidaten.length) {
+    const st = straatSleutel(adres);
+    if (st) {
+      const res = await gripp('company.get', [
+        [
+          { field: 'company.visitingaddress_street', operator: 'like', value: `%${st.straat}%` },
+          { field: 'company.visitingaddress_streetnumber', operator: 'like', value: `${st.nr}%` },
+        ],
+        { paging: { firstresult: 0, maxresults: 5 } },
+      ]);
+      kandidaten = res?.rows || [];
+      await wacht(1600);
+    }
   }
   if (!kandidaten.length && telefoon) {
     const kaal = String(telefoon).replace(/\D/g, '').slice(-9);

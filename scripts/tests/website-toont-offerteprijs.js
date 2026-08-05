@@ -75,6 +75,25 @@ for (const [sleutel, cat, bed, uitgebreid] of KOPPELING) {
   }
 }
 
+/* ─── 3. Markiezen: de site moet de markiezenfactor volgen, niet de Sunmaster-opslag ─── */
+// Gevonden 2026-08-05: de site toonde markiezen vanaf €660 (later €720 na de opslag-
+// correctie) terwijl v4 er €1.204 voor factureert. De bedragen kwamen uit een andere bron
+// dan het Markiezen Nederland-boek dat v4 gebruikt. Ze staan er nu als eindprijs in.
+const markies = JSON.parse(fs.readFileSync(path.join(WEB, 'data', 'sunmaster-prices.json'), 'utf8')).products.markies;
+if (!markies?.voorbeeldPrijzen) {
+  meld('markies heeft geen voorbeeldPrijzen meer in de website-JSON');
+} else {
+  let mis = 0;
+  for (const [maat, web] of Object.entries(markies.voorbeeldPrijzen)) {
+    const [b, u] = maat.split('x').map(Number);
+    const excl = v4.mkTotaalExcl('Grenen', b * 10, u * 10);
+    if (excl === null || excl === undefined) { meld(`markies ${maat}: v4 geeft geen prijs, dan hoort hij ook niet op de site`); continue; }
+    const echt = Math.round(excl * v4.MARKIEZEN_FACTOR);
+    if (web !== echt) { mis++; if (mis <= 3) meld(`markies ${maat}: site €${web}, v4 factureert €${echt}`); }
+  }
+  if (mis > 3) meld(`…en nog ${mis - 3} markiesmaten die afwijken`);
+}
+
 console.log('\n' + '─'.repeat(64));
 if (fouten) {
   console.log(`❌ ${fouten} plek(ken) waar de website iets anders toont dan de offerte rekent.`);

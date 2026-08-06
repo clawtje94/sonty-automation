@@ -553,7 +553,11 @@ async function main() {
     beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
     // 5-dagen-belofte: kalenderdagen sinds we de lead voor het eerst zagen
     const wachtDagen = Math.floor((Date.now() - Date.parse(state.gezien[item.id])) / 86400000);
-    const aanbod = kiesAanbod(beste, 3, { wachtDagen, deadlineDagen: inst.contactDeadlineDagen, maxOmrijdenMin: inst.maxOmrijdenMin });
+    let aanbod = kiesAanbod(beste, 3, { wachtDagen, deadlineDagen: inst.contactDeadlineDagen, maxOmrijdenMin: inst.maxOmrijdenMin });
+    // het dashboard (en het template) moet ALTIJD 3 tijden hebben — te weinig binnen
+    // de normale horizon? Verder vooruit kijken (Daimy 06-08: "bijna alles met 1 tijd,
+    // het moet 100% goed gaan").
+    if (aanbod.length && aanbod.length < 3) aanbod = await zorgVoorDrieOpties(lead, duur, agenda, aanbod);
 
     console.log(`\n  ${lead.naam} — ${lead.volledigAdres}`);
     console.log(`    ${lead.aantalProducten} product(en) uit ${lead.bron}: ${lead.producten.map((p) => `${p.aantal}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).join(', ') || '—'} → ${duur} min | wacht ${wachtDagen}/${inst.contactDeadlineDagen} dgn`);
@@ -567,7 +571,17 @@ async function main() {
         console.log(`    NOG GEEN AANBOD (dag ${wachtDagen}): ${reden}`);
         regels.push(`${lead.naam} (${lead.plaats}): wacht dag ${wachtDagen}/${inst.contactDeadlineDagen} — ${reden}`);
         wachtenden.push({ lead, item, duur, wachtDagen });
-        dash.leads.push({ rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, duurMin: duur, wachtDagen, status: 'wachtend', reden });
+        // óók wachtende klanten krijgen hun best beschikbare 3 tijden op de kaart
+        // (mét omrij-minuten): de bot wacht zelf op een buurklus, maar de winkel
+        // moet altijd kunnen handelen (Daimy 06-08)
+        let nood = kiesAanbod(beste, 3, { wachtDagen: 999 });
+        if (nood.length < 3) nood = await zorgVoorDrieOpties(lead, duur, agenda, nood);
+        dash.leads.push({
+          rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, duurMin: duur, wachtDagen,
+          status: 'wachtend', reden,
+          producten: lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ').slice(0, 90),
+          top: nood.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin })),
+        });
       }
       continue;
     }

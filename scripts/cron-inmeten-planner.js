@@ -896,7 +896,7 @@ async function verwerkDashboardVerzoek(m) {
 
 /** Eén verzoek uit de wachtrij uitvoeren (daemon-ingang). */
 async function verwerkVerzoek(m) {
-  if (m.type === 'boek' || m.type === 'stuur-aanbod') return verwerkDashboardVerzoek(m);
+  if (m.type === 'boek' || m.type === 'stuur-aanbod') return { afgewezen: false, uitkomst: await verwerkDashboardVerzoek(m) };
   const { vindBoeking, muteerBoeking } = require('./lib/inmeet-mutatie.js');
   const boeking = vindBoeking({ telefoon: m.telefoon, email: m.email, naam: m.naam });
   if (!boeking) {
@@ -912,7 +912,7 @@ async function verwerkVerzoek(m) {
         const TT = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
         await fetch('https://app.trengo.com/api/v2/tickets/' + ticket.id + '/messages', {
           method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: `Hoi ${(boeking.naam || 'daar').split(' ')[0]}, we hebben de inmeetafspraak geannuleerd. Mocht het later toch weer spelen, dan ben je altijd welkom. Groetjes, Jaimy van Sonty`, type: 'OUTBOUND' }),
+          body: JSON.stringify({ message: `Hoi ${(boeking.naam || 'daar').split(' ')[0]}, we hebben de inmeetafspraak geannuleerd. Mocht het later toch weer spelen, dan ben je altijd welkom. Groetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
         });
       }
     } catch { /* melding naar kantoor is al gedaan */ }

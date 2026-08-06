@@ -13,6 +13,9 @@ const path = require('path');
 const TT = fs.readFileSync(path.join(__dirname, '..', '.trengo-api-token.txt'), 'utf8').trim();
 const TH = { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' };
 const WA_KANAAL = 1359857;
+const PLANNING_KANAAL_BESTAND = require('path').join(__dirname, '..', '..', 'data', 'planning-kanaal.txt');
+let PLANNING_KANAAL_OVERRIDE = null;
+try { PLANNING_KANAAL_OVERRIDE = Number(require('fs').readFileSync(PLANNING_KANAAL_BESTAND, 'utf8').trim()) || null; } catch {}
 const AANVRAGEN_KANAAL = 1363384;
 
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -39,7 +42,7 @@ async function zoekWaTicket(telefoon) {
 }
 
 function berichtTekst(voornaam, url, duurMin) {
-  return `Hoi ${voornaam}, goed nieuws: we kunnen bij je langskomen om in te meten (duurt ongeveer ${duurMin} minuten). Kies hier de tijd die jou het beste uitkomt:\n\n${url}\n\nDe tijden staan 24 uur voor je vast. Lukt kiezen niet, stuur dan gewoon een berichtje terug.\n\nGroetjes, Jaimy van Sonty`;
+  return `Hoi ${voornaam}, goed nieuws: we kunnen bij je langskomen om in te meten (duurt ongeveer ${duurMin} minuten). Kies hier de tijd die jou het beste uitkomt:\n\n${url}\n\nDe tijden staan 24 uur voor je vast. Lukt kiezen niet, stuur dan gewoon een berichtje terug.\n\nGroetjes, Nanny van Sonty`;
 }
 
 // Goedgekeurde template "inmeetafspraak_kiezen" (id 243999): voor klanten buiten het
@@ -98,7 +101,7 @@ async function stuurMail(aanbod, url) {
   const r1 = await tFetch('/tickets', {
     method: 'POST',
     body: JSON.stringify({
-      channel_id: AANVRAGEN_KANAAL,
+      channel_id: PLANNING_KANAAL_OVERRIDE || AANVRAGEN_KANAAL,
       contact_identifier: aanbod.lead.email,
       subject: 'Kies je inmeetmoment bij Sonty',
     }),
@@ -111,7 +114,7 @@ async function stuurMail(aanbod, url) {
 <p>Goed nieuws: we kunnen bij je langskomen om in te meten (duurt ongeveer ${aanbod.duurMin} minuten).</p>
 <p><a href="${url}" style="display:inline-block;background:#F97316;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:bold">Kies je inmeetmoment</a></p>
 <p>De tijden staan 24 uur voor je vast. Lukt kiezen niet, beantwoord dan gewoon deze mail.</p>
-<p>Groetjes,<br>Jaimy van Sonty</p>`;
+<p>Groetjes,<br>Nanny van Sonty</p>`;
   const r2 = await tFetch(`/tickets/${nieuw.id}/messages`, {
     method: 'POST',
     body: JSON.stringify({ message: html, body_type: 'html' }),
@@ -149,11 +152,11 @@ async function verstuurBevestiging(aanbod, slot) {
   if (aanbod.lead.email) {
     const r1 = await tFetch('/tickets', {
       method: 'POST',
-      body: JSON.stringify({ channel_id: AANVRAGEN_KANAAL, contact_identifier: aanbod.lead.email, subject: 'Je inmeetafspraak bij Sonty staat vast' }),
+      body: JSON.stringify({ channel_id: PLANNING_KANAAL_OVERRIDE || AANVRAGEN_KANAAL, contact_identifier: aanbod.lead.email, subject: 'Je inmeetafspraak bij Sonty staat vast' }),
     });
     const nieuw = r1.ok ? await r1.json().catch(() => null) : null;
     if (nieuw?.id) {
-      const html = `<p>${tekst.replace(/\. /g, '.</p><p>')}</p><p>Groetjes,<br>Jaimy van Sonty</p>`;
+      const html = `<p>${tekst.replace(/\. /g, '.</p><p>')}</p><p>Groetjes,<br>Nanny van Sonty</p>`;
       const r2 = await tFetch(`/tickets/${nieuw.id}/messages`, { method: 'POST', body: JSON.stringify({ message: html, body_type: 'html' }) });
       if (r2.ok) await tFetch(`/tickets/${nieuw.id}/close`, { method: 'POST', body: '{}' });
       mail = { ok: r2.ok, reden: r2.ok ? undefined : `Trengo ${r2.status}` };

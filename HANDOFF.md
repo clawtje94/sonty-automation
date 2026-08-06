@@ -1,4 +1,45 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-05 avond)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-06 laat)
+
+## INMEET-KETEN: EERSTE VOLLEDIG AUTOMATISCHE BOEKING GELUKT (6 aug 23:15)
+- **Vas Verhage end-to-end zonder handwerk**: WA-template met 3 tijden → klant koos "Optie 1"
+  → monitor las uit + WA-bevestiging (mét inmeternaam) → boeking: Planado #447 als
+  "Inmeet afspraak" bij Joey (di 15 sep 11:25), Outlook, sheet Juli r1593. Gripp-nr volgt via cron.
+- **Eric Van der Meer**: geboekt Joey di 18 aug 11:05 (Planado #432). Jorren belt hem vr 10:00.
+- **Open aanbiedingen** (klant moet kiezen): Julia, Carlo (nieuw WA-ticket 972328089!),
+  Irene (Daimy greep zelf in om 21:12), Sofie. **Hendrik-Jan Colijn**: alle tijden pasten niet,
+  gevraagd welke dagen wél (ticket 972337979) — bij antwoord nieuwe tijden voorstellen.
+- **Vas' mailadres bounced** (vamaja@casema.nl geweigerd door casema) — adres in RP checken.
+
+## GEVONDEN + GEFIXT IN DE AUDIT (6 aug avond, ultracode-verificatie 16 agents)
+1. **Mails gingen NOOIT weg**: ReferenceError `geldigUren` in stuurMail, stil opgeslikt.
+   Gefixt; alle 6 open klanten hebben de keuzelink-mail alsnog (mailTickets in state).
+2. **Keuze-PATCH bewaarde gekozenIndex niet** (server) → verwerker crashte op Eric en de hele
+   wachtrij lag stil. Route gefixt + verwerker-guard (kapot record = melden, niet crashen).
+3. **"onze inmeter undefined"** in klantbericht: publieke GET stripte de naam; met meet-code
+   komt nu het volledige record. Guard: naam alleen tonen als hij bestaat (regressietest 21).
+4. **AI praatte over het aanbod heen** (Irene): guard geldt nu voor ÁLLE berichten op een nummer
+   met lopend aanbod (<48u), óók @sonny-feedbackpad, óók e-mail (email-live.js), match op
+   telefoon én e-mail. TDZ-dode-fallback opgeruimd (helper lopendInmeetAanbod).
+5. **Monitor wiste concurrent state-updates** (schreef stale aanbodTickets terug) → nu alleen
+   eigen opruiming toepassen (merge i.p.v. overschrijven).
+6. **Trengo term-search is onbetrouwbaar per nummer** (Hendrik-Jan/Vas: 0 hits) → wa_sessions
+   ticket_id uit de respons wordt nu vastgelegd; template gaat bovendien in het BESTAANDE
+   gesprek (ticket_id-param) als dat er is — geen onvindbare naamloze tickets meer.
+7. **Planado "Opdracht"**: API negeert platte template_uuid/type_uuid stil; het moet als
+   object (template:{uuid}, job_type:{code}) en KAN ALLEEN BIJ AANMAKEN. Planner + outlook-sync
+   gefixt; 13 toekomstige jobs herbouwd (scripts/planado-herbouw-publiek.js, rescue in
+   data/herbouw-rescue.jsonl). PATCH kan het type nooit wijzigen.
+8. **Daimy Boot testboeking 45aeb252**: Planado-job bleek (handmatig) verwijderd → record op
+   geannuleerd gezet.
+
+## INFRA
+- **GitHub Actions deploy is KAPOT** (runs hangen ~20 min, nieuwe pushes triggeren niets —
+  vermoedelijk minuten op). Deploy nu handmatig: `vercel build --prod` +
+  `vercel deploy --prebuilt --prod --archive=tgz` in ~/sonty-website. Structurele fix open.
+- **Dashboard verduidelijkt + live** (visueel geverifieerd): 4 groepen op "wie is aan zet",
+  tellers bovenaan, tijdlijn per klant (verstuurd/gekozen/geboekt), controlelijst met afvinken.
+- Na ELKE keten-codewijziging: `scripts/herstart-keten-daemons.sh` (nu ook email-daemon).
+
 
 ## PLAN PRIJSOVERTUIGING KLAAR (5 aug, opdracht Daimy "mentaal voorbereiden vóór de prijsvraag")
 - **`docs/PLAN-prijsovertuiging-2026.md`** — volledige uitwerking, NIETS staat live.

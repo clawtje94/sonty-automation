@@ -600,6 +600,25 @@ async function verwerkTicket(t, state) {
   const laatste = rows[rows.length - 1];
   if (laatste.van !== 'klant') return; // alleen reageren als het laatste bericht van de klant is
 
+  // INMEET-KEUZE? DAN IS DE PLANNER DE ENIGE RESPONDER (Daimy 2026-08-06: hij drukte
+  // op een template-knop en kreeg de klantenservice-AI eroverheen). Heeft dit nummer
+  // een lopend inmeet-aanbod en lijkt het bericht op een keuze (knopdruk "Optie 2",
+  // "1"/"2"/"3" of een dagnaam), dan blijft de AI er volledig vanaf — de
+  // aanbod-monitor leest de keuze uit, boekt en bevestigt.
+  try {
+    const stPlanner = JSON.parse(require('fs').readFileSync('/Users/clawdboot/sonty/data/inmeten-planner-state.json', 'utf8'));
+    const tel9 = String(t.contact?.phone || gesprek?.klant?.telefoon || '').replace(/\D/g, '').slice(-9);
+    const lopend = Object.values(stPlanner.aanbodTickets || {}).some((a) =>
+      String(a.telefoon || '').replace(/\D/g, '').slice(-9) === tel9
+      && Date.now() - Date.parse(a.verstuurdOp) < 48 * 3600000);
+    const keuzeachtig = /^(?:optie\s*)?[123][.!)]?$/i.test(String(laatste.tekst || '').trim())
+      || /^(maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag|ma|di|wo|do|vr|za|zo)$/i.test(String(laatste.tekst || '').trim());
+    if (lopend && keuzeachtig && tel9.length === 9) {
+      console.log(`  ticket ${t.id}: inmeet-keuze ("${String(laatste.tekst).slice(0, 20)}") — planner handelt af, AI blijft eraf`);
+      return;
+    }
+  } catch { /* state onleesbaar: normale flow */ }
+
   // EEN VERSE @sonny-OPDRACHT MOET OOK EEN ANTWOORD OPLEVEREN (Daimy 2026-07-27).
   // De sleutel hing alleen aan het laatste KLANTbericht. Was dat al beantwoord, dan stopte hij
   // hier, ook als het team daarna "@sunny antwoord" in het ticket zette. De notitie werd wel

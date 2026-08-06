@@ -110,11 +110,23 @@ async function ronde() {
     // kaart in het dashboard direct bijwerken (Daimy 06-08: "ik weet helemaal niet
     // wat er gebeurt") — niet wachten op de halfuur-ronde
     try {
-      if (m.rpItemId && m.type === 'stuur-aanbod' && (!res.afgewezen || /al een lopend aanbod/.test(res.uitkomst || ''))) {
-        await api(DASH_API, { method: 'POST', body: JSON.stringify({ extraLead: { rpItemId: m.rpItemId, naam: m.naam || 'klant', status: 'aanbod-verstuurd', top: [] } }) });
-      }
-      if (m.rpItemId && m.type === 'boek' && !res.afgewezen) {
-        await api(DASH_API, { method: 'POST', body: JSON.stringify({ extraLead: { rpItemId: m.rpItemId, naam: m.naam || 'klant', status: 'geboekt', top: [] } }) });
+      if (m.rpItemId && ((m.type === 'stuur-aanbod' && (!res.afgewezen || /al een lopend aanbod/.test(res.uitkomst || ''))) || (m.type === 'boek' && !res.afgewezen))) {
+        // naam nooit kwijtraken: uit het verzoek, anders uit de bestaande kaart of de planner-state
+        let naam = m.naam;
+        if (!naam) {
+          try {
+            const dash = await api(DASH_API);
+            naam = (dash.leads || []).find((l) => l.rpItemId === m.rpItemId)?.naam;
+          } catch { /* naamloos is niet fataal */ }
+        }
+        if (!naam) {
+          try {
+            const st = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'inmeten-planner-state.json'), 'utf8'));
+            naam = (st.inmeetLeads || []).find((l) => l.id === m.rpItemId)?.summary;
+          } catch { /* idem */ }
+        }
+        const status = m.type === 'boek' ? 'geboekt' : 'aanbod-verstuurd';
+        await api(DASH_API, { method: 'POST', body: JSON.stringify({ extraLead: { rpItemId: m.rpItemId, naam: naam || 'klant', status, top: [] } }) });
       }
     } catch { /* kaart-update is cosmetisch */ }
     console.log(new Date().toISOString(), m.type, '->', res.uitkomst);

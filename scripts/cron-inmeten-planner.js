@@ -766,7 +766,7 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null) 
   if (!res.ok) throw new Error(`aanbod aanmaken: HTTP ${res.status}`);
   const { url, token } = await res.json();
   const { verstuurAanbod } = require('./lib/aanbod-versturen');
-  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin, ver, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren }, url);
+  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin, ver, slots: aanbod, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren }, url);
   if (!verzonden.wa.ok && !verzonden.mail.ok) throw new Error(`niet bezorgd (wa: ${verzonden.wa.reden}, mail: ${verzonden.mail.reden})`);
   // ticket-ids bewaren zodat de reply-monitor ELK antwoord kan uitlezen (Daimy 06-08:
   // "lees jij dan 100% uit wat ze antwoorden en rapporteer je dat?")

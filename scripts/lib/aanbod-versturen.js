@@ -74,6 +74,11 @@ async function stuurWhatsAppTemplate(aanbod, url) {
 }
 
 async function stuurWhatsApp(aanbod, url) {
+  // TEMPLATE EERST (Daimy 06-08: "die gaan we gewoon altijd gebruiken") — werkt ook
+  // buiten het 24-uursvenster. Zolang Meta het template nog niet heeft goedgekeurd
+  // (PENDING) valt hij automatisch terug op een gewoon bericht in een open gesprek.
+  const viaTemplate = await stuurWhatsAppTemplate(aanbod, url);
+  if (viaTemplate.ok) return viaTemplate;
   const ticket = await zoekWaTicket(aanbod.lead.telefoon);
   if (ticket) {
     const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
@@ -81,11 +86,10 @@ async function stuurWhatsApp(aanbod, url) {
       method: 'POST',
       body: JSON.stringify({ message: berichtTekst(voornaam, url, aanbod.duurMin), type: 'OUTBOUND' }),
     });
-    if (r.ok) return { ok: true, ticket: ticket.id, via: 'vrij bericht' };
-    if (r.status !== 422) return { ok: false, reden: `Trengo ${r.status}`, ticket: ticket.id };
-    // 422 = 24-uursvenster dicht -> template proberen
+    if (r.ok) return { ok: true, ticket: ticket.id, via: 'vrij bericht (template: ' + viaTemplate.reden + ')' };
+    return { ok: false, reden: `Trengo ${r.status} (template: ${viaTemplate.reden})`, ticket: ticket.id };
   }
-  return stuurWhatsAppTemplate(aanbod, url);
+  return { ok: false, reden: `geen WhatsApp-gesprek en ${viaTemplate.reden}` };
 }
 
 async function stuurMail(aanbod, url) {

@@ -97,7 +97,17 @@ async function ronde() {
   for (const m of mutaties || []) {
     let res;
     try {
-      if (m.type === 'ververs') {
+      if (m.type === 'adres') {
+        // adres uit de winkel terugschrijven naar RP (Kenny-geval: RP-kaart zonder
+        // adres) en direct verse tijden rekenen
+        const rA = await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${SALES}/items/${m.rpItemId}`, {
+          method: 'PATCH', headers: { Authorization: 'Bearer ' + RP_API_KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ item: { fields: { address: m.adres } } }),
+        });
+        if (!rA.ok) throw new Error('RP-adres opslaan: HTTP ' + rA.status);
+        res = await verwerkReken({ ...m, naam: m.naam || '' });
+        res.uitkomst = 'adres in RP gezet; ' + (res.uitkomst || '');
+      } else if (m.type === 'ververs') {
         // handmatige verversing vanaf het dashboard (Daimy 06-08: "ik weet niet
         // wanneer die dingen ophaalt") — draait een volledige schaduw-ronde
         await planner.verversRonde();

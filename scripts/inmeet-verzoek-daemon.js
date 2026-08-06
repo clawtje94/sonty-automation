@@ -107,6 +107,16 @@ async function ronde() {
       method: 'PATCH',
       body: JSON.stringify({ id: m.id, status: res.afgewezen ? 'afgewezen' : 'verwerkt', uitkomst: res.uitkomst }),
     });
+    // kaart in het dashboard direct bijwerken (Daimy 06-08: "ik weet helemaal niet
+    // wat er gebeurt") — niet wachten op de halfuur-ronde
+    try {
+      if (m.rpItemId && m.type === 'stuur-aanbod' && (!res.afgewezen || /al een lopend aanbod/.test(res.uitkomst || ''))) {
+        await api(DASH_API, { method: 'POST', body: JSON.stringify({ extraLead: { rpItemId: m.rpItemId, naam: m.naam || 'klant', status: 'aanbod-verstuurd', top: [] } }) });
+      }
+      if (m.rpItemId && m.type === 'boek' && !res.afgewezen) {
+        await api(DASH_API, { method: 'POST', body: JSON.stringify({ extraLead: { rpItemId: m.rpItemId, naam: m.naam || 'klant', status: 'geboekt', top: [] } }) });
+      }
+    } catch { /* kaart-update is cosmetisch */ }
     console.log(new Date().toISOString(), m.type, '->', res.uitkomst);
   }
 }

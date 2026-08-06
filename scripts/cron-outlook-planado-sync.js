@@ -129,7 +129,10 @@ async function main() {
   const jobs = await planadoJobs();
   const nu = new Date();
   const toekomstJobs = jobs.filter((j) => j.scheduled_at && new Date(j.scheduled_at) > nu);
-  const opExtId = new Map(toekomstJobs.map((j) => [j.external_id, j]));
+  // Dedup op ÁLLE jobs, niet alleen toekomstige (Koeleman 06-08: afspraak van eerder
+  // vandaag werd in Outlook naar volgende week verplaatst; de oude job was inmiddels
+  // "verleden" en viel uit de dedup → create-botsing op het external_id).
+  const opExtId = new Map(jobs.map((j) => [j.external_id, j]));
   // Tweede dedup-sleutel: starttijd+inmeter — vangt de eerder gesynchroniseerde
   // bookings-… jobs en de door de planner zelf geboekte opdrachten af.
   // Numeriek vergelijken: Planado geeft tijden zonder milliseconden, toISOString mét.
@@ -227,8 +230,18 @@ async function main() {
 
   // In Planado maar niet meer in Outlook (alleen onze eigen ol-jobs): melden, niet verwijderen.
   const wees = toekomstJobs.filter((j) => (j.external_id || '').startsWith('ol-') && !actieveExtIds.has(j.external_id));
-  if (wees.length && EXECUTE) {
-    await telegram(`🔄 Outlook→Planado-sync: ${wees.length} opdracht(en) staan nog in Planado maar niet meer in Outlook (geannuleerd/verplaatst?). Even nakijken; ik verwijder niet automatisch.`);
+  // Wezen maar ÉÉN keer melden (Daimy 06-08 "best veel meldingen"): dezelfde 4 wezen
+  // kwamen elke 30 minuten opnieuw op Telegram. Dedup per job-uuid, mét naam erbij
+  // zodat de melding ook bruikbaar is.
+  const WEES_PAD = path.join(__dirname, '..', 'data', 'sync-wees-gemeld.json');
+  let weesGemeld = {};
+  try { weesGemeld = JSON.parse(fs.readFileSync(WEES_PAD, 'utf8')); } catch {}
+  const verseWezen = wees.filter((j) => !weesGemeld[j.uuid]);
+  if (verseWezen.length && EXECUTE) {
+    for (const j of verseWezen) weesGemeld[j.uuid] = new Date().toISOString();
+    fs.writeFileSync(WEES_PAD, JSON.stringify(weesGemeld, null, 1));
+    const namen = verseWezen.map((j) => `#${j.serial_no} ${new Date(j.scheduled_at).toLocaleString('nl-NL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' })}`).join(', ');
+    await telegram(`🔄 Outlook→Planado-sync: ${verseWezen.length} opdracht(en) staan nog in Planado maar niet meer in Outlook (geannuleerd/verplaatst?): ${namen}. Even nakijken; ik verwijder niet automatisch. (Deze melding komt per opdracht maar één keer.)`);
   }
 
   console.log(`\nnieuw: ${nieuw} | bijgewerkt: ${bijgewerkt} | al aanwezig: ${overgeslagen} | wees: ${wees.length} | fouten: ${fouten}`);

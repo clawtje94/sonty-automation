@@ -94,7 +94,8 @@ const AUTO_ANTWOORD = /(niet aanwezig|afwezig|out of office|automatisch antwoord
 
 function isRuis(w) {
   const adres = String(w.naam || '');
-  if (EIGEN_MAIL.test(adres)) return 'eigen/systeemmail';
+  if (EIGEN_MAIL.test(adres) || EIGEN_MAIL.test(String(w.email || ''))) return 'eigen/systeemmail';
+  if (/webflow/i.test(String(w.email || '')) || /webflow/i.test(adres)) return 'webflow-lead (apart afgehandeld)';
   if (/^scan\b|sonty montage/i.test(adres)) return 'eigen scanmail';
   if (!w.tekst) return 'leeg bericht';
   if (isBevestiging(w.tekst) && !w.meerOnbeantwoord) return 'pure bevestiging';
@@ -131,6 +132,8 @@ function duur(uren) {
       teamId: t.team_id || null,
       wie: t.user_id ? (USERS[t.user_id] || `user ${t.user_id}`) : null,
       naam: t.contact?.full_name || t.contact?.phone || t.contact?.email || 'onbekend',
+      email: t.contact?.email || '',
+      sindsIso: String(t.latest_received_message_at),
       kanaal: t.channel?.type === 'WA_BUSINESS' ? 'WA' : 'mail',
       labels: (t.labels || []).map((l) => l.name),
       tekst: String(t.latest_received_message?.body_plain || t.latest_received_message?.message || '')
@@ -162,6 +165,40 @@ function duur(uren) {
   wachtend.length = 0;
   wachtend.push(...echt);
   wachtend.sort((a, b) => b.uren - a.uren);
+
+  // OPGEPAKT BUITEN TRENGO OM (Jorren 06-08: "wordt vermeld bij iets dat allang is
+  // opgepakt"): een interne notitie NA het laatste klantbericht = iemand is ermee
+  // bezig (gebeld, afgehandeld). Die hoort niet meer in het rapport.
+  for (let i = wachtend.length - 1; i >= 0; i--) {
+    const w = wachtend[i];
+    try {
+      const m = await fetch(`https://app.trengo.com/api/v2/tickets/${w.id}/messages?per_page=10`, { headers: { Authorization: 'Bearer ' + jwt } });
+      const rows = (await m.json())?.data || [];
+      const klantTijd = new Date(w.sindsIso.replace(' ', 'T') + 'Z').getTime();
+      const notitieNa = rows.some((x) => (x.internal_note || String(x.type).toUpperCase() === 'NOTE')
+        && new Date(String(x.created_at).replace(' ', 'T')).getTime() > klantTijd);
+      if (notitieNa) { wachtend.splice(i, 1); ruisRedenen['al opgepakt (notitie na klantbericht)'] = (ruisRedenen['al opgepakt (notitie na klantbericht)'] || 0) + 1; }
+    } catch { /* lookup mag het rapport nooit breken */ }
+  }
+
+  // EENMAAL MELDEN PER KLANTBERICHT (zelfde klacht): hetzelfde wachtende bericht komt
+  // niet elke run opnieuw in het Telegram-rapport.
+  const GEMELD_PAD = path.join(__dirname, '..', '..', 'data', 'ai-ks', 'wachtlijst-gemeld.json');
+  let gemeld = {};
+  try { gemeld = JSON.parse(fs.readFileSync(GEMELD_PAD, 'utf8')); } catch {}
+  const versGemeld = [];
+  for (let i = wachtend.length - 1; i >= 0; i--) {
+    const w = wachtend[i];
+    const sleutel = w.id + ':' + w.sindsIso;
+    if (gemeld[sleutel]) { wachtend.splice(i, 1); ruisRedenen['al eerder gemeld'] = (ruisRedenen['al eerder gemeld'] || 0) + 1; }
+    else versGemeld.push(sleutel);
+  }
+  if (!DRY) {
+    for (const sl of versGemeld) gemeld[sl] = new Date().toISOString();
+    // oude sleutels (>30 dagen) opruimen zodat het bestand niet eindeloos groeit
+    for (const [k, v] of Object.entries(gemeld)) if (Date.now() - Date.parse(v) > 30 * 86400000) delete gemeld[k];
+    fs.writeFileSync(GEMELD_PAD, JSON.stringify(gemeld, null, 1));
+  }
 
   const ruisTotaal = Object.values(ruisRedenen).reduce((a, b) => a + b, 0);
   console.log(`${tickets.length} tickets bekeken, ${wachtend.length} klanten wachten écht langer dan ${DREMPEL_UREN} uur op antwoord`);

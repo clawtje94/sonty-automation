@@ -316,7 +316,9 @@ async function laadVakanties() {
     throw new Error('vakanties onbekend: niet plannen');
   }
 }
-function werkdagenVoor(inmeterNaam, aantal = 10) {
+function werkdagenVoor(inmeterNaam, aantal = 15) {
+  // 15 roosterdagen (was 10): de agenda's zitten momenteel ~3 weken vol, waardoor
+  // 10 dagen horizon "geen enkel gat" gaf terwijl er eind augustus wél plek is.
   const vast = ROOSTER[inmeterNaam]?.dagen;
   const startDatum = ROOSTER[inmeterNaam]?.startDatum;
   const dagen = [];

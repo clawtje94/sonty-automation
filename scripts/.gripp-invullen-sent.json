@@ -4044,5 +4044,44 @@
       }
     ],
     "processedAt": "2026-08-06T11:02:05.952Z"
+  },
+  "item:7d348eec-2a63-4447-854e-da9b6010f366": {
+    "summary": "Dina Awwad",
+    "grippCompanyId": 99702,
+    "grippOfferId": 8938,
+    "rpDocNumber": "202610476",
+    "allOffers": [
+      {
+        "grippOfferId": 8938,
+        "rpDocNumber": "202610476"
+      }
+    ],
+    "processedAt": "2026-08-06T16:30:07.395Z"
+  },
+  "item:351aa6c1-774c-4171-a210-7e9924202bda": {
+    "summary": "Manu Raja",
+    "grippCompanyId": 99703,
+    "grippOfferId": 8939,
+    "rpDocNumber": "202610860",
+    "allOffers": [
+      {
+        "grippOfferId": 8939,
+        "rpDocNumber": "202610860"
+      }
+    ],
+    "processedAt": "2026-08-06T16:30:11.365Z"
+  },
+  "item:9335cd79-90e8-487f-b446-f669c27886df": {
+    "summary": "Rakesh Soekhoe",
+    "grippCompanyId": 99704,
+    "grippOfferId": 8940,
+    "rpDocNumber": "20269861",
+    "allOffers": [
+      {
+        "grippOfferId": 8940,
+        "rpDocNumber": "20269861"
+      }
+    ],
+    "processedAt": "2026-08-06T16:30:15.011Z"
   }
 }

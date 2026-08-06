@@ -241,11 +241,11 @@ async function verwerk(ticketId) {
         const poort = magSluiten({ klantTekst: `${wil || ''} ${body || ''} ${vraag || ''}`, antwoord: conceptDraft });
         await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `🤖 Sunny heeft deze website-lead zelf per mail beantwoord (naar ${email}).\n\n--- Verstuurde mail ---\n${conceptDraft}` });
         if (!poort.mag) {
-          await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
-          await zetLabel(ticketId, LABEL.MENS_NODIG);
-          await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `👤 Ticket blijft OPEN bij Mens nodig: ${poort.reden}.` });
-          logKS({ ticket: ticketId, webflow: true, laatsteKlantBericht: (wil || body).slice(0, 200), antwoord: conceptDraft, acties: [{ type: 'escalatie', reden: 'belofte van contact in lead-antwoord' }] });
-          return { ticketId, klant: naam || email, resultaat: `✅ BEANTWOORD (webflow-lead) + OPEN bij Mens nodig (${poort.reden})`, concept: conceptDraft.slice(0, 220) };
+          // Webflow-leads NIET naar Mens nodig en geen notitie (Daimy 2026-08-06: "die
+          // webflow-tickets hoeven niet naar mens nodig en elke keer die opmerking is
+          // irritant"). Gewoon open laten; het team ziet hem in de open lijst.
+          logKS({ ticket: ticketId, webflow: true, laatsteKlantBericht: (wil || body).slice(0, 200), antwoord: conceptDraft, acties: [{ type: 'open-laten', reden: poort.reden }] });
+          return { ticketId, klant: naam || email, resultaat: `✅ BEANTWOORD (webflow-lead) + open gelaten (${poort.soort})`, concept: conceptDraft.slice(0, 220) };
         }
         await tPost(`/tickets/${ticketId}/assign`, { type: 'user', user_id: SONNY_USER });
         await zetLabel(ticketId, LABEL.AI_BOT);

@@ -68,20 +68,26 @@ function slotTekst(sl) {
 async function stuurWhatsAppTemplate(aanbod, url) {
   const tel = String(aanbod.lead.telefoon || '').replace(/\D/g, '').replace(/^0/, '31');
   if (tel.length < 11) return { ok: false, reden: 'geen bruikbaar telefoonnummer voor template' };
+  // Twee templates ZONDER link (Daimy 06-08: "gewoon drukken en klaar"): normaal en
+  // ver-weg. ID's in data/wa-templates.json zodra Meta ze goedkeurt; tot die tijd
+  // valt de verzending terug op het (oude) 5-variabelen-template of het vrije bericht.
+  let ids = {};
+  try { ids = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', '..', 'data', 'wa-templates.json'), 'utf8')); } catch {}
+  const hsm = aanbod.ver === true ? (ids.ver || ids.normaal) : ids.normaal;
   const slots = aanbod.slots || [];
-  const params = [
+  const basis = [
     { type: 'body', key: '{{1}}', value: (aanbod.lead.naam || 'daar').split(' ')[0] },
     { type: 'body', key: '{{2}}', value: slots[0] ? slotTekst(slots[0]) : '-' },
     { type: 'body', key: '{{3}}', value: slots[1] ? slotTekst(slots[1]) : '-' },
     { type: 'body', key: '{{4}}', value: slots[2] ? slotTekst(slots[2]) : '-' },
-    { type: 'body', key: '{{5}}', value: url },
   ];
+  const params = hsm ? basis : [...basis, { type: 'body', key: '{{5}}', value: url }];
   const r = await tFetch('/wa_sessions', {
     method: 'POST',
-    body: JSON.stringify({ recipient_phone_number: '+' + tel, hsm_id: TEMPLATE_HSM, channel_id: WA_KANAAL, params }),
+    body: JSON.stringify({ recipient_phone_number: '+' + tel, hsm_id: hsm || TEMPLATE_HSM, channel_id: WA_KANAAL, params }),
   });
   if (!r.ok) return { ok: false, reden: `template: Trengo ${r.status} (nog niet door Meta goedgekeurd?)` };
-  return { ok: true, via: 'template' };
+  return { ok: true, via: hsm ? (aanbod.ver ? 'template-ver' : 'template') : 'template (oud)' };
 }
 
 async function stuurWhatsApp(aanbod, url) {

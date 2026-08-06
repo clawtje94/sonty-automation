@@ -67,6 +67,14 @@
 - **EINDSTAND 5 aug ±23:30 (alles gemeld aan Daimy)**: 164/164 herbouwd met juist type (volgnummers veranderd: testopdracht #83→#398, morgen=#395–#407); sync-controle na herbouw 168/168, 0 dubbel, 0 wees; kruischeck: 34 klopten, 58 velden op RP-versie gezet (38 = alleen naamverschil), **9 echte prijsafwijkingen Gripp vs getekend** (o.a. Alexandra Kassing morgen 11.250 vs 9.250; Max Beije #375 hangt vermoedelijk aan een OUDE Gripp-offerte 4372) en **5 klanten met inmeetafspraak die nog geen enkele offerteversie tekenden** (de Gunst #347, Haakman #290, Burke #287, Morgun #270, van Luxemburg #262) → kantoor. Lijsten in /tmp/prijsafwijkingen.json + /tmp/kruischeck.log.
 - **LET OP herbouw-gevolgen**: rescue-data in data/herbouw-rescue.jsonl; aanbod-register/meetbon verwijzen op Gripp-nr (ongewijzigd), maar alles wat oude Planado-uuid's of serials bewaarde is verouderd.
 
+## BALIE-TEST DAIMY + 3 FIXES (6 aug middag)
+- Race gefixt: reken-kaarten via extraLead-sleutel (TTL 45 min) + server-side merge in GET — de 30-min-ronde overschreef Daimy's kaart.
+- **VAKANTIE-GAT gedicht**: laadVakanties() (Outlook, subject vakantie/verlof/vrij, 70 dgn) blokkeert dagen in werkdagenVoor; vakanties onbekend = NIET plannen (harde stop). Bewezen: Sjoerd-slot 24/8 (vakantie!) verdween bij hertest.
+- **Meet-code was fout**: API verwacht 2288 (MEETBON_CODE), planner stuurde sonty2288 → alle registercalls waren STILLE 401-nullen. Code gefixt + 401 is nu harde stop. Dashboardcode voor winkel = 2288.
+- TG-beleid: schaduwronde meldt alleen nieuwe leads + 🚨; state.gemeld per lead.
+- Capaciteitssignaal: eerste vrije plek nieuwe klant = 31 aug (agenda vol + Sjoerd-vakantie); nieuwe inmeter 1 sep precies op tijd.
+- TODO lab: vakantie-dimensie in planner-aanbod-onderdeel.
+
 ## PLAN-DASHBOARD (6 aug nacht, vraag Daimy "dashboard voor inmeten, later ook montage")
 - **/admin/inmeet-dashboard** (LIVE, zelfde code): wachtende leads met de beste 3 tijden al berekend, één klik = ECHT boeken (klant aan de lijn) of keuzelink sturen; komende inmetingen eronder; link naar verzetten/annuleren. Data uit KV (/api/inmeet-dashboard), gepubliceerd door elke planner-ronde.
 - **Verzoek-flow**: dashboard-klik → /api/inmeet-mutatie (types boek/stuur-aanbod erbij) → verwerker (launchd nl.sonty.inmeet-verwerker, elke 5 min) → verwerkDashboardVerzoek: verse agenda + botsingscontrole → verwerkLead + Outlook + boekingsrecord + bevestiging. stuur-aanbod rekent verse slots (wachtDagen 999: winkel vroeg erom, dus altijd tijden).

@@ -1,12 +1,13 @@
 // Onderdeel: krijgt elke klant (op tijd) een aanbod? — kiesAanbod + de verre-klant-regel.
 // Orakel (beleid, Daimy 06-08 "hoelang wacht je voor je hem toch inplant?"):
 //  - dichtbij (≤30 min omrijden): altijd direct aanbod, gespreid over dagen/dagdelen
-//  - ver weg + betrouwbare kosten: max 5 werkdagen wachten op een buur, DAARNA gewoon
-//    de goedkoopste plekken aanbieden — nooit stil blijven liggen
+//  - ver weg + betrouwbare kosten: wachten op een buur mag, maar uiterlijk dag 4
+//    (belofte: "planning neemt binnen 5 dagen contact op") gewoon de goedkoopste
+//    plekken aanbieden — nooit stil blijven liggen
 //  - vuile agenda (kosten onbetrouwbaar): nooit op kosten weigeren
 //  - geen gaten in de agenda: geen aanbod, maar mét uitleg (zichtbaar)
 const { combinaties } = require('../matrix.js');
-const { kiesAanbod, waaromGeenAanbod, MAX_WACHT_WERKDAGEN } = require('../../scripts/lib/slotzoeker.js');
+const { kiesAanbod, waaromGeenAanbod, MAX_WACHT_DAGEN } = require('../../scripts/lib/slotzoeker.js');
 
 const SLOT = (dag, uur, extra, betrouwbaar = true) => ({
   datum: `2026-09-${String(dag).padStart(2, '0')}`,
@@ -36,9 +37,9 @@ const dimensies = [
     naam: 'wacht',
     waarden: [
       { label: 'nieuw', dagen: 0 },
-      { label: '3-werkdagen', dagen: 3 },
-      { label: '5-werkdagen', dagen: 5 },
-      { label: '10-werkdagen', dagen: 10 },
+      { label: '3-dagen', dagen: 3 },
+      { label: '4-dagen-deadline', dagen: 4 },
+      { label: '10-dagen', dagen: 10 },
     ],
   },
 ];
@@ -46,7 +47,7 @@ const dimensies = [
 function orakel(s) {
   if (s.ligging.label === 'geen-gaten') return { wil: 'blokkeer', reden: 'agenda vol, uitleg verplicht' };
   const ver = s.ligging.label === 'ver-weg' || s.ligging.label === 'randgeval-30min';
-  if (s.ligging.label === 'ver-weg' && s.agenda.betrouwbaar && s.wacht.dagen < MAX_WACHT_WERKDAGEN) {
+  if (s.ligging.label === 'ver-weg' && s.agenda.betrouwbaar && s.wacht.dagen < MAX_WACHT_DAGEN) {
     return { wil: 'blokkeer', reden: 'bewust wachten op buur, met uitleg' };
   }
   // randgeval: 30 is ≤ grens, dus 2 slots blijven over → aanbod
@@ -55,7 +56,7 @@ function orakel(s) {
 
 function voerUit(s) {
   const slots = s.ligging.slots(s.agenda.betrouwbaar);
-  const aanbod = kiesAanbod(slots, 3, { wachtWerkdagen: s.wacht.dagen });
+  const aanbod = kiesAanbod(slots, 3, { wachtDagen: s.wacht.dagen });
   const uitleg = aanbod.length ? null : waaromGeenAanbod(slots);
   return {
     aantal: aanbod.length,

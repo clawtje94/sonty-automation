@@ -8,12 +8,15 @@ const echteSetTimeout = global.setTimeout;
 const snelleKlok = (fn, _ms, ...args) => echteSetTimeout(fn, 0, ...args);
 snelleKlok.__promisify__ = echteSetTimeout.__promisify__;
 
+// nep-reistijd MOET vóór de onderdelen geladen worden (slotzoeker bindt bij require)
+require('./stub-reistijd.js');
 const { draai, printRapport } = require('./runner.js');
 
 const ONDERDELEN = [
   require('./onderdelen/offerte-keuze.js'),
   require('./onderdelen/koppel-ladder.js'),
   require('./onderdelen/planner-aanbod.js'),
+  require('./onderdelen/planner-drukte.js'),
 ];
 // UI-laag draait tegen de echte site in een echte browser: alleen met --ui (of een filter),
 // anders wordt elke logica-run traag van het browsen.

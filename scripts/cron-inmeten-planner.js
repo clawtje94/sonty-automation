@@ -46,10 +46,11 @@ function werkdagenTussen(van, tot) {
   return n;
 }
 
-// Wachten op een buur mag, eindeloos wachten niet. Staat een lead langer dan dit te
-// wachten, dan gaat het beste beschikbare slot alsnog naar de klant en krijgt kantoor
-// een seintje. Anders bespaar je kilometers over de rug van je doorlooptijd.
-const MAX_WACHTDAGEN = 5;
+// BELOFTE aan de klant (Daimy 06-08): "de planning neemt binnen 5 dagen contact op."
+// Wachten op een buur mag dus, maar uiterlijk op dag 4 (1 dag marge) krijgt de klant
+// het beste beschikbare aanbod, ook als dat omrijden kost. Nodig je de tijd niet?
+// Dan gewoon direct plannen — wachten is alleen voor dure routes.
+const MAX_WACHTDAGEN = require('./lib/slotzoeker.js').MAX_WACHT_DAGEN;
 
 // ── kleine helpers ──────────────────────────────────────────────────────────
 const laadState = () => { try { return JSON.parse(fs.readFileSync(STATE, 'utf8')); } catch { return { aangeboden: {} }; } };
@@ -153,7 +154,9 @@ async function leesLeadCompleet(item) {
 // ── agenda per inmeter ──────────────────────────────────────────────────────
 async function haalAgenda() {
   let jobs = [], after = null;
-  for (let i = 0; i < 10; i++) {
+  // ruim genoeg pagineren: na de type-herbouw (05-08) staan de actuele opdrachten
+  // achteraan de cursor — 10 pagina's gaf een vrijwel lege agenda (stil gevaar!)
+  for (let i = 0; i < 40; i++) {
     const d = await planado('/jobs' + (after ? '?after=' + after : ''));
     const lijst = d.jobs || d.data || [];
     if (!lijst.length) break;
@@ -167,22 +170,45 @@ async function haalAgenda() {
   const perInmeter = {};
   for (const inm of INMETERS) perInmeter[inm.naam] = [];
 
+  // dekking bijhouden: hoeveel opdrachten er per inmeter in de LIJST staan, zodat we
+  // kunnen zien of de detail-stap (adressen) stilletjes opdrachten laat vallen
+  const lijstTelling = {};
+  for (const j of gepland) {
+    const inm = INMETERS.find((i) => i.uuid === j.assignee?.worker_uuid);
+    if (inm) lijstTelling[inm.naam] = (lijstTelling[inm.naam] || 0) + 1;
+  }
+
   for (const j of gepland) {
     const inm = INMETERS.find((i) => i.uuid === j.assignee?.worker_uuid);
     if (!inm) continue;
-    // Het adres zit alleen in het job-detail, niet in de lijst.
+    // Het adres zit alleen in het job-detail, niet in de lijst. Rate-limits (429)
+    // met retry afvangen — één gemiste wachttijd liet eerder bijna de hele agenda
+    // stilletjes wegvallen (schaduwrun 06-08: 5 van 167 afspraken over).
     let adres = null;
-    try {
-      const det = await planado('/jobs/' + j.uuid);
-      adres = (det.job || det).address?.formatted || null;
+    for (let poging = 0; poging < 3 && !adres; poging++) {
+      try {
+        const det = await planado('/jobs/' + j.uuid);
+        adres = (det.job || det).address?.formatted || null;
+        if (adres) break;
+      } catch { await wacht(6000); }
       await wacht(2600);
-    } catch { /* detail niet op te halen: job overslaan */ }
+    }
+    await wacht(2600);
     if (!adres) continue;
     perInmeter[inm.naam].push({
       start: j.scheduled_at,
       eind: new Date(+new Date(j.scheduled_at) + ((j.scheduled_duration?.minutes) || 60) * 60000).toISOString(),
       adres,
     });
+  }
+  // dekkinsgcontrole: als de detail-stap >20% van de lijst liet vallen is de agenda
+  // onbetrouwbaar en mag er NIET op gepland worden
+  for (const inm of INMETERS) {
+    const inLijst = lijstTelling[inm.naam] || 0;
+    const opgehaald = perInmeter[inm.naam].length;
+    if (inLijst >= 5 && opgehaald < inLijst * 0.8) {
+      throw new Error(`agenda ${inm.naam} onvolledig: ${opgehaald}/${inLijst} afspraken met adres — niet op plannen`);
+    }
   }
   return perInmeter;
 }
@@ -306,28 +332,80 @@ async function verwerkLead(lead, item, slot, duurMin) {
 }
 
 // ── hoofdlus ────────────────────────────────────────────────────────────────
+// Gebouwd op drukte (Daimy 06-08 "wat als er 20 man in inmeten inplannen staan?"):
+//  - oudste lead eerst (eerlijk, en de 5-dagen-belofte telt per klant)
+//  - openstaande én gekozen aanbiedingen tellen als bezet (geen dubbel aanbod)
+//  - binnen één run worden zojuist aangeboden slots direct gereserveerd voor de rest
+//  - een lead met een lopend aanbod wordt overgeslagen (geen dubbele mails)
+//  - LIVE stuurt een KEUZE-aanbod (mail+WhatsApp); boeken gebeurt pas na klantkeuze
+//    door --verwerk-aanbod. Direct boeken bestaat niet meer.
 async function main() {
   const state = laadState();
-  console.log(LIVE ? '=== LIVE ===' : '=== SCHADUW (er wordt niets geboekt) ===');
+  state.gezien = state.gezien || {};
+  console.log(LIVE ? '=== LIVE (aanbod wordt echt verstuurd) ===' : '=== SCHADUW (er wordt niets verstuurd) ===');
 
   const data = await rpGet(`/contact-service/${PID}/backlogs/${BACKLOG_ID}/items?limit=200`);
   const items = (data.items || data.data || data || []).filter((i) => i.status_id === INMETEN_INPLANNEN);
   console.log(`${items.length} lead(s) op "Inmeten inplannen"`);
   if (LIVE && !ALLEEN) {
-    console.log('GEWEIGERD: --live zonder --alleen=<naam> zou alle leads boeken, ook echte klanten.');
+    console.log('GEWEIGERD: --live zonder --alleen=<naam> zou alle leads aanschrijven, ook echte klanten.');
     return;
   }
   if (!items.length) return;
 
+  // eerste-keer-gezien bijhouden en oudste eerst behandelen
+  const nu = new Date().toISOString();
+  for (const it of items) state.gezien[it.id] = state.gezien[it.id] || nu;
+  items.sort((a, b) => state.gezien[a.id].localeCompare(state.gezien[b.id]));
+
   const agenda = await haalAgenda();
-  for (const inm of INMETERS) console.log(`  agenda ${inm.naam}: ${agenda[inm.naam].length} komende afspraken`);
+
+  // lopende aanbiedingen: slots bezetten + die leads overslaan
+  const lopendeLeads = new Set();
+  try {
+    for (const status of ['open', 'gekozen']) {
+      const { aanbiedingen } = await (await fetch(`${AANBOD_API}?status=${status}`, {
+        headers: { 'x-meet-code': MEET_CODE },
+      })).json();
+      for (const a of aanbiedingen || []) {
+        lopendeLeads.add(a.lead.rpItemId);
+        const slots = status === 'gekozen' ? [a.slots[a.gekozenIndex]] : a.slots;
+        for (const sl of slots) {
+          (agenda[sl.inmeter] || []).push({
+            start: sl.aankomst, eind: sl.vertrek,
+            adres: a.lead.volledigAdres, klant: `aanbod ${a.lead.naam}`,
+          });
+        }
+      }
+    }
+    console.log(`  (${lopendeLeads.size} lead(s) met lopend aanbod: slots bezet, lead overgeslagen)`);
+  } catch (e) {
+    console.log(`  ! aanbod-register niet bereikbaar (${e.message}) — VEILIGHEIDSSTOP, anders dreigt dubbel aanbod`);
+    await telegram(`⚠️ Inmeet-planner gestopt: aanbod-register onbereikbaar, kan dubbel aanbod niet uitsluiten.`);
+    return;
+  }
+  for (const inm of INMETERS) console.log(`  agenda ${inm.naam}: ${agenda[inm.naam].length} afspraken/ankers`);
+  // VEILIGHEIDSSTOP: een inmeter zonder één komende afspraak bestaat in de praktijk
+  // niet — dat betekent dat de agenda-ophaler stuk is. Doorplannen zou dubbel boeken.
+  const leeg = INMETERS.filter((i) => !agenda[i.naam].length);
+  if (leeg.length) {
+    await telegram(`⚠️ Inmeet-planner GESTOPT: agenda van ${leeg.map((i) => i.naam).join(' + ')} kwam LEEG terug — dat kan niet kloppen (ophaler stuk?). Er is niets gepland of verstuurd.`);
+    console.log('VEILIGHEIDSSTOP: lege agenda voor ' + leeg.map((i) => i.naam).join(', '));
+    return;
+  }
 
   const dagen = werkdagen();
   const regels = [];
 
   for (const item of items) {
+    if (lopendeLeads.has(item.id)) continue;
     const lead = await leesLeadCompleet(item);
     if (ALLEEN && !`${lead.naam} ${item.id}`.toLowerCase().includes(ALLEEN.toLowerCase())) continue;
+    if (lead.ambigu) {
+      console.log(`  ! ${lead.naam}: ${lead.aantalDocs} offerteversies, geen enkele getekend — klant moet eerst tekenen`);
+      regels.push(`${lead.naam}: ${lead.aantalDocs} offerteversies, GEEN getekend — klant moet tekenen (Mens nodig)`);
+      continue;
+    }
     if (!lead.volledigAdres || !lead.plaats) {
       console.log(`  ! ${lead.naam}: geen bruikbaar adres, overslaan`);
       regels.push(`${lead.naam}: GEEN ADRES — handmatig`);
@@ -346,53 +424,72 @@ async function main() {
       }
     }
     beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
-    // hoe lang wacht deze lead al? (verre-klant-regel: na 5 werkdagen filter los)
-    const sindsIso = state.wachtend?.[lead.id];
-    const wachtWerkdagen = sindsIso ? werkdagenTussen(new Date(sindsIso), new Date()) : 0;
-    const aanbod = kiesAanbod(beste, 3, { wachtWerkdagen });
+    // 5-dagen-belofte: kalenderdagen sinds we de lead voor het eerst zagen
+    const wachtDagen = Math.floor((Date.now() - Date.parse(state.gezien[item.id])) / 86400000);
+    const aanbod = kiesAanbod(beste, 3, { wachtDagen });
 
     console.log(`\n  ${lead.naam} — ${lead.volledigAdres}`);
-    console.log(`    ${lead.aantalProducten} product(en) uit ${lead.bron}: ${lead.producten.map((p) => `${p.aantal}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).join(', ') || '—'} → ${duur} min`);
+    console.log(`    ${lead.aantalProducten} product(en) uit ${lead.bron}: ${lead.producten.map((p) => `${p.aantal}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).join(', ') || '—'} → ${duur} min | wacht ${wachtDagen}/${MAX_WACHTDAGEN} dgn`);
     if (!aanbod.length) {
       const reden = waaromGeenAanbod(beste);
-      const sinds = state.wachtend?.[lead.id] || new Date().toISOString();
-      state.wachtend = { ...(state.wachtend || {}), [lead.id]: sinds };
-      const dagen = Math.floor((Date.now() - new Date(sinds)) / 86400000);
-
-      if (dagen >= MAX_WACHTDAGEN && beste.length) {
-        // Te lang gewacht: de klant gaat voor de route.
-        const noodAanbod = beste.slice(0, 3);
-        console.log(`    NA ${dagen} DAGEN WACHTEN TOCH AANBIEDEN (duurder, maar de klant wacht al te lang)`);
-        for (const s2 of noodAanbod) console.log(`    ${s2.inmeter}: ${s2.datum} ${venster(s2)}  +${s2.extraRijtijdMin} min`);
-        regels.push(`${lead.naam} (${lead.plaats}): ${dagen} dagen gewacht, nu toch aangeboden — ${noodAanbod.map((s2) => `${s2.inmeter} ${s2.datum.slice(5)} ${venster(s2)} +${s2.extraRijtijdMin}min`).join(' | ')}`);
+      if (wachtDagen >= MAX_WACHTDAGEN && !beste.length) {
+        // agenda echt vol: dit kan de bot niet oplossen, dus hard escaleren
+        console.log(`    DEADLINE VERSTREKEN en geen enkel gat — capaciteitsprobleem`);
+        regels.push(`🚨 ${lead.naam} (${lead.plaats}): dag ${wachtDagen} en GEEN ENKEL gat — belofte "binnen 5 dagen" breekt, handmatig oplossen`);
       } else {
-        console.log(`    NOG GEEN AANBOD (${dagen} dag(en) wachtend): ${reden}`);
-        regels.push(`${lead.naam} (${lead.plaats}): wacht ${dagen}/${MAX_WACHTDAGEN} dagen — ${reden}`);
+        console.log(`    NOG GEEN AANBOD (dag ${wachtDagen}): ${reden}`);
+        regels.push(`${lead.naam} (${lead.plaats}): wacht dag ${wachtDagen}/${MAX_WACHTDAGEN} — ${reden}`);
       }
       continue;
     }
-    delete state.wachtend?.[lead.id];
     for (const s of aanbod) {
       console.log(`    ${s.inmeter}: ${s.datum} ${venster(s)}  +${s.extraRijtijdMin} min rijtijd (na ${s.naVorige.slice(0, 24)})`);
     }
     regels.push(`${lead.naam} (${lead.plaats}, ${duur} min): ${aanbod.map((s) => `${s.inmeter} ${s.datum.slice(5)} ${venster(s)} +${s.extraRijtijdMin}min`).join(' | ')}`);
 
     if (LIVE) {
-      const gekozen = aanbod[0];
       try {
-        const uitkomst = await verwerkLead(lead, item, gekozen, duur);
-        console.log(`    GEBOEKT: ${uitkomst.samenvatting}`);
-        regels.push(`  → geboekt: ${uitkomst.samenvatting}`);
+        const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur);
+        console.log(`    AANBOD VERSTUURD: ${url}`);
+        regels.push(`  → aanbod verstuurd (24u geldig)`);
+        state.aangeboden[item.id] = { naam: lead.naam, op: new Date().toISOString(), aanbod: aanbod.length };
       } catch (e) {
-        console.log(`    FOUT bij boeken: ${e.message}`);
-        regels.push(`  → boeken MISLUKT: ${e.message}`);
+        console.log(`    FOUT bij aanbod versturen: ${e.message}`);
+        regels.push(`  → aanbod versturen MISLUKT: ${e.message}`);
+        continue;
       }
     }
-    state.aangeboden[lead.id] = { naam: lead.naam, op: new Date().toISOString(), aanbod: aanbod.length };
+    // binnen deze run: aangeboden slots zijn bezet voor de volgende leads
+    for (const s of aanbod) {
+      agenda[s.inmeter].push({ start: s.aankomst.toISOString(), eind: s.vertrek.toISOString(), adres: lead.volledigAdres, klant: `aanbod ${lead.naam}` });
+    }
   }
 
   bewaarState(state);
   await telegram(`Inmeet-planner (${LIVE ? 'LIVE' : 'schaduw'}) — ${items.length} lead(s):\n\n` + regels.join('\n'));
+}
+
+/** Aanbod vastleggen in het register en direct naar de klant sturen (mail + WhatsApp). */
+async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin) {
+  const res = await fetch(AANBOD_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+    body: JSON.stringify({
+      lead: {
+        rpItemId: item.id, naam: lead.naam, telefoon: lead.telefoon, email: lead.email,
+        volledigAdres: lead.volledigAdres, plaats: lead.plaats,
+        producten: lead.producten.map((p) => ({ naam: p.naam, aantal: p.aantal })),
+      },
+      duurMin,
+      slots: aanbod.map((sl) => ({ datum: sl.datum, aankomst: sl.aankomst.toISOString(), vertrek: sl.vertrek.toISOString(), inmeter: sl.inmeter })),
+    }),
+  });
+  if (!res.ok) throw new Error(`aanbod aanmaken: HTTP ${res.status}`);
+  const { url } = await res.json();
+  const { verstuurAanbod } = require('./lib/aanbod-versturen');
+  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin }, url);
+  if (!verzonden.wa.ok && !verzonden.mail.ok) throw new Error(`niet bezorgd (wa: ${verzonden.wa.reden}, mail: ${verzonden.mail.reden})`);
+  return url;
 }
 
 // ── aanbod-verwerker ────────────────────────────────────────────────────────
@@ -414,6 +511,7 @@ async function aanbodApi(pad, opties = {}) {
 }
 
 async function verwerkAanbiedingen() {
+  const state = laadState();
   // 1. verlopen aanbiedingen opruimen + melden (de 24-uursklok)
   const { aanbiedingen: open } = await aanbodApi('?status=open');
   for (const a of open) {
@@ -441,7 +539,25 @@ async function verwerkAanbiedingen() {
       aankomst: new Date(slot.aankomst),
       extraRijtijdMin: 0,
     };
+    // HERCONTROLE dubbelboeking (Daimy 06-08 "hoe weet je zeker dat alles goed gaat"):
+    // tussen aanbod en keuze kan het gat vergeven zijn. Verse agenda checken; overlap
+    // = NIET boeken maar melden. Planado zelf weigert overlappende opdrachten niet.
     try {
+      const van = Date.parse(slot.aankomst);
+      const tot = van + a.duurMin * 60000;
+      const agendaNu = await haalAgenda();
+      const botst = (agendaNu[slot.inmeter] || []).some((afspraak) => {
+        if (String(afspraak.klant || '').includes(a.lead.naam)) return false; // eigen aanbod-anker
+        return Date.parse(afspraak.start) < tot && Date.parse(afspraak.eind) > van;
+      });
+      if (botst) {
+        if (!state.conflictGemeld?.[a.token]) {
+          await telegram(`🚨 DUBBELBOEKING VOORKOMEN: ${a.lead.naam} koos ${slot.datum} bij ${slot.inmeter}, maar dat gat is inmiddels bezet. Klant krijgt een nieuw aanbod nodig — handmatig of volgende planner-run.`);
+          state.conflictGemeld = { ...(state.conflictGemeld || {}), [a.token]: true };
+        }
+        console.log(`  ✗ ${a.lead.naam}: gekozen slot is inmiddels bezet — NIET geboekt`);
+        continue;
+      }
       const uitkomst = await verwerkLead(lead, null, gekozenSlot, a.duurMin);
       await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verwerkt' }) });
       console.log(`  ✓ ${a.lead.naam}: ${uitkomst.samenvatting}`);
@@ -451,6 +567,7 @@ async function verwerkAanbiedingen() {
       await telegram(`⚠️ Boeken na klantkeuze MISLUKT voor ${a.lead.naam}: ${e.message.slice(0, 160)}\nAanbod blijft op "gekozen" staan; volgende run opnieuw.`);
     }
   }
+  bewaarState(state);
 }
 
 if (process.argv.includes('--verwerk-aanbod')) {

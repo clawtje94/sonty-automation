@@ -47,6 +47,10 @@ const QUOTE_START = new RegExp([
   /Op \d{1,2}[-./]\d{1,2}[-./]\d{2,4}.{0,90}?het volgende geschreven:/.source,   // iPhone, NL
   /Op .{5,120}? het volgende geschreven:/.source,                                 // Apple Mail, NL
   /Op .{5,70}? om \d{1,2}[:.]\d{2}\s.{0,90}?(?:heeft|schreef)\b/.source,          // Gmail, NL
+  // Gmail zonder "om": "Op wo 5 aug 2026, 09:03 schreef Aanvragen | Sonty <...>". Derde gemiste
+  // vorm op rij (Jan-Henk Tuk, 2026-08-06). De tijd en "schreef" samen zijn onderscheidend
+  // genoeg; een klant die zelf "op woensdag" schrijft gebruikt geen tijdstip plus "schreef".
+  /\bOp [^\n]{2,60}?\d{1,2}[:.]\d{2}[^\n]{0,90}?schreef\b/.source,
 ].join('|'), 'i');
 
 /**
@@ -285,9 +289,15 @@ async function verwerk(ticketId) {
     // storing op" stond meegequote en werd als service/klacht gezien → onterecht naar Mens nodig).
     const poortMail = magSluiten({ klantTekst: rijen.filter(r => r.van === 'klant').map(r => String(r.tekst).split('[EINDE NIEUW BERICHT')[0]).join(' '), antwoord: res.antwoord, acties: res.acties });
     if (!poortMail.mag) {
-      await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
-      await zetLabel(ticketId, LABEL.MENS_NODIG);
-      await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `👤 Ticket blijft OPEN bij Mens nodig: ${poortMail.reden}.` });
+      // Servicemelding: alleen open laten, geen Mens nodig en geen notitie (Daimy 2026-08-06,
+      // "die dingen die doorgezet worden naar service hoeven niet naar mens nodig, en ook die
+      // opmerking niet"). Het team ziet het ticket gewoon in de open lijst. Beloftes en
+      // escalaties gaan nog wel naar Mens nodig, want daar moet echt iemand iets mee.
+      if (poortMail.soort !== 'service') {
+        await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
+        await zetLabel(ticketId, LABEL.MENS_NODIG);
+        await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `👤 Ticket blijft OPEN bij Mens nodig: ${poortMail.reden}.` });
+      }
     } else await tPost(`/tickets/${ticketId}/close`, {});
     logKS({ ticket: ticketId, laatsteKlantBericht: rijen[rijen.length - 1]?.tekst?.slice(0, 200), antwoord: schoonKlantTekst(res.antwoord), acties: mutaties });
     return { ticketId, klant: gesprek.klant.naam || gesprek.klant.email, resultaat: verstuurd ? '✅ BEANTWOORD + gesloten' : '⚠️ versturen mislukt', concept: schoonKlantTekst(res.antwoord).slice(0, 220), acties: mutaties.map(a => a.type) };

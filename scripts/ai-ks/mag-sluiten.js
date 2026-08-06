@@ -29,14 +29,18 @@ const BELOFTE = /(neem|nemen|neemt).{0,40}contact|contact.{0,25}(op|met je|met u
  */
 function magSluiten({ klantTekst = '', antwoord = '', acties = [], systeemMail = false } = {}) {
   if (systeemMail) return { mag: true };
+  // Het veld "soort" laat de aanroeper onderscheid maken. Daimy 2026-08-06: een servicemelding
+  // hoeft NIET meer naar Mens nodig, alleen open blijven; het team pakt hem op via de normale
+  // flow. Mens nodig is voor echte escalaties, anders raakt die lijst vol met werk dat vanzelf
+  // al bij het team ligt.
   if (SERVICE_SIGNAAL.test(String(klantTekst))) {
-    return { mag: false, reden: 'service-, reparatie- of klachtmelding: die hoort altijd bij een mens te liggen' };
+    return { mag: false, soort: 'service', reden: 'service- of reparatiemelding: blijft open voor het team' };
   }
   if (BELOFTE.test(String(antwoord))) {
-    return { mag: false, reden: 'in het antwoord is de klant beloofd dat iemand contact opneemt' };
+    return { mag: false, soort: 'belofte', reden: 'in het antwoord is de klant beloofd dat iemand contact opneemt' };
   }
   if ((acties || []).some((a) => a?.type === 'escalatie')) {
-    return { mag: false, reden: 'er is geëscaleerd naar een mens' };
+    return { mag: false, soort: 'escalatie', reden: 'er is geëscaleerd naar een mens' };
   }
   return { mag: true };
 }

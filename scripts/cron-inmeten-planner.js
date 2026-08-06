@@ -180,25 +180,36 @@ async function haalAgenda() {
     if (inm) lijstTelling[inm.naam] = (lijstTelling[inm.naam] || 0) + 1;
   }
 
+  // Adres-cache: details kosten 2,6s per stuk (rate-limit) — zonder cache duurt elke
+  // run 20 minuten. Adressen wijzigen vrijwel nooit; verzetten maakt een nieuwe job
+  // (nieuw uuid), dus cache op uuid is veilig.
+  const CACHE_PAD = path.join(__dirname, '..', 'data', 'planner-adres-cache.json');
+  let adresCache = {};
+  try { adresCache = JSON.parse(fs.readFileSync(CACHE_PAD, 'utf8')); } catch {}
+
   for (const j of gepland) {
     const inm = INMETERS.find((i) => i.uuid === j.assignee?.worker_uuid);
     if (!inm) continue;
+    let adres = adresCache[j.uuid]?.adres ?? null;
+    let omschrijving = adresCache[j.uuid]?.omschrijving ?? '';
     // Het adres zit alleen in het job-detail, niet in de lijst. Rate-limits (429)
     // met retry afvangen — één gemiste wachttijd liet eerder bijna de hele agenda
     // stilletjes wegvallen (schaduwrun 06-08: 5 van 167 afspraken over).
-    let adres = null;
-    let omschrijving = '';
-    for (let poging = 0; poging < 3 && !adres; poging++) {
-      try {
-        const det = await planado('/jobs/' + j.uuid);
-        const h = det.job || det;
-        adres = h.address?.formatted || null;
-        omschrijving = omschrijving || h.description || '';
-        if (adres) break;
-      } catch { await wacht(6000); }
+    if (!(j.uuid in adresCache)) {
+      for (let poging = 0; poging < 3 && !adres; poging++) {
+        try {
+          const det = await planado('/jobs/' + j.uuid);
+          const h = det.job || det;
+          adres = h.address?.formatted || null;
+          omschrijving = omschrijving || h.description || '';
+          if (adres) break;
+        } catch { await wacht(6000); }
+        await wacht(2600);
+      }
       await wacht(2600);
+      adresCache[j.uuid] = { adres, omschrijving: omschrijving.split('\n')[0].slice(0, 60) };
+      fs.writeFileSync(CACHE_PAD, JSON.stringify(adresCache));
     }
-    await wacht(2600);
     // GEEN adres (winkeldienst, intern overleg): telt WEL als bezette tijd — anders
     // plant de bot dwars door een winkeldienst heen. Als anker-adres nemen we de
     // winkel (Rijswijk) voor winkeldiensten en het magazijn voor de rest.
@@ -435,19 +446,22 @@ async function main() {
 
   const regels = [];
   const wachtenden = []; // leads zonder aanbod: kandidaten voor de combi-pas
+  const dash = { bijgewerkt: new Date().toISOString(), leads: [], boekingen: [] };
 
   for (const item of items) {
-    if (lopendeLeads.has(item.id)) continue;
+    if (lopendeLeads.has(item.id)) { dash.leads.push({ rpItemId: item.id, naam: item.summary, status: 'aanbod-loopt' }); continue; }
     const lead = await leesLeadCompleet(item);
     if (ALLEEN && !`${lead.naam} ${item.id}`.toLowerCase().includes(ALLEEN.toLowerCase())) continue;
     if (lead.ambigu) {
       console.log(`  ! ${lead.naam}: ${lead.aantalDocs} offerteversies, geen enkele getekend — klant moet eerst tekenen`);
       regels.push(`${lead.naam}: ${lead.aantalDocs} offerteversies, GEEN getekend — klant moet tekenen (Mens nodig)`);
+      dash.leads.push({ rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, status: 'klant-moet-tekenen' });
       continue;
     }
     if (!lead.volledigAdres || !lead.plaats) {
       console.log(`  ! ${lead.naam}: geen bruikbaar adres, overslaan`);
       regels.push(`${lead.naam}: GEEN ADRES — handmatig`);
+      dash.leads.push({ rpItemId: item.id, naam: lead.naam, status: 'geen-adres' });
       continue;
     }
     const duur = schatDuur(lead.producten);
@@ -484,6 +498,7 @@ async function main() {
         console.log(`    NOG GEEN AANBOD (dag ${wachtDagen}): ${reden}`);
         regels.push(`${lead.naam} (${lead.plaats}): wacht dag ${wachtDagen}/${MAX_WACHTDAGEN} — ${reden}`);
         wachtenden.push({ lead, item, duur, wachtDagen });
+        dash.leads.push({ rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, duurMin: duur, wachtDagen, status: 'wachtend', reden });
       }
       continue;
     }
@@ -491,6 +506,12 @@ async function main() {
       console.log(`    ${s.inmeter}: ${s.datum} ${venster(s)}  +${s.extraRijtijdMin} min rijtijd (na ${s.naVorige.slice(0, 24)})`);
     }
     regels.push(`${lead.naam} (${lead.plaats}, ${duur} min): ${aanbod.map((s) => `${s.inmeter} ${s.datum.slice(5)} ${venster(s)} +${s.extraRijtijdMin}min`).join(' | ')}`);
+    dash.leads.push({
+      rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, duurMin: duur, wachtDagen,
+      status: LIVE ? 'aanbod-verstuurd' : 'aanbod-mogelijk',
+      producten: lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ').slice(0, 90),
+      top: aanbod.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin })),
+    });
 
     if (LIVE) {
       try {
@@ -517,8 +538,29 @@ async function main() {
   // waardoor de rest er in dezelfde run omheen valt.
   await combiPas(wachtenden, agenda, regels);
 
+  // dashboard vullen: komende boekingen + overzicht naar de site
+  try {
+    const { laadBoekingen } = require('./lib/inmeet-mutatie.js');
+    dash.boekingen = Object.entries(laadBoekingen())
+      .filter(([, b]) => b.status === 'geboekt' && Date.parse(b.aankomst) > Date.now())
+      .map(([id, b]) => ({ rpItemId: id, naam: b.naam, aankomst: b.aankomst, inmeter: b.inmeter, duurMin: b.duurMin }))
+      .sort((a, b) => a.aankomst.localeCompare(b.aankomst));
+    await fetch('https://sonty-website.vercel.app/api/inmeet-dashboard', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+      body: JSON.stringify(dash),
+    });
+  } catch (e) { console.log('dashboard publiceren mislukt: ' + e.message); }
+
   bewaarState(state);
-  await telegram(`Inmeet-planner (${LIVE ? 'LIVE' : 'schaduw'}) — ${items.length} lead(s):\n\n` + regels.join('\n'));
+  // Telegram alleen bij een ECHTE verandering — een dashboard-verversing elke
+  // 30 min mag geen berichtenstroom worden
+  const crypto = require('crypto');
+  const hash = crypto.createHash('sha1').update(regels.join('\n')).digest('hex');
+  if (state.laatsteRapportHash !== hash) {
+    state.laatsteRapportHash = hash;
+    bewaarState(state);
+    await telegram(`Inmeet-planner (${LIVE ? 'LIVE' : 'schaduw'}) — ${items.length} lead(s):\n\n` + regels.join('\n'));
+  }
 }
 
 const MAX_COMBI_RIJTIJD_MIN = 20; // klanten die hooguit dit uit elkaar wonen vormen een combi
@@ -645,6 +687,18 @@ async function verwerkAanbiedingen() {
     const MUTATIE_API = 'https://sonty-website.vercel.app/api/inmeet-mutatie';
     const { mutaties } = await (await fetch(MUTATIE_API + '?status=open', { headers: { 'x-meet-code': MEET_CODE } })).json();
     for (const m of mutaties || []) {
+      // dashboard-verzoeken: direct boeken of keuzelink sturen voor een wachtende lead
+      if (m.type === 'boek' || m.type === 'stuur-aanbod') {
+        try {
+          const uitkomst = await verwerkDashboardVerzoek(m);
+          await fetch(MUTATIE_API, { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE }, body: JSON.stringify({ id: m.id, status: 'verwerkt', uitkomst }) });
+          console.log(`  ${m.type} (${m.bron}): ${uitkomst}`);
+        } catch (e) {
+          await telegram(`⚠️ Dashboard-verzoek ${m.type} mislukt: ${e.message.slice(0, 140)} — verzoek blijft open voor de volgende run.`);
+          console.log(`  ${m.type} MISLUKT: ${e.message}`);
+        }
+        continue;
+      }
       const { vindBoeking, muteerBoeking } = require('./lib/inmeet-mutatie.js');
       const boeking = vindBoeking({ telefoon: m.telefoon, email: m.email, naam: m.naam });
       let uitkomst;
@@ -773,6 +827,70 @@ async function verwerkAanbiedingen() {
     }
   }
   bewaarState(state);
+}
+
+/** Dashboard-verzoek: 'boek' = direct boeken op het gekozen slot (klant zit bv. aan
+ * de telefoon in de winkel); 'stuur-aanbod' = verse tijden berekenen en de keuzelink
+ * naar de klant sturen. Zelfde veiligheid als de klantkeuze-route: verse agenda,
+ * botsingscontrole, alles geregistreerd. */
+async function verwerkDashboardVerzoek(m) {
+  const item = await rpGet(`/contact-service/${PID}/backlogs/${BACKLOG_ID}/items/${m.rpItemId}`).then((d) => d.item || d);
+  if (!item?.id) throw new Error('RP-lead niet gevonden');
+  const lead = await leesLeadCompleet(item);
+  if (lead.ambigu) throw new Error(`${lead.aantalDocs} offerteversies, geen getekend — klant moet eerst tekenen`);
+  const duur = schatDuur(lead.producten);
+  const agenda = await haalAgenda();
+
+  if (m.type === 'stuur-aanbod') {
+    let beste = [];
+    for (const inm of INMETERS) {
+      const sl = await zoekSlots({
+        agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
+        werkdagen: werkdagenVoor(inm.naam),
+        startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
+        eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
+      }).catch(() => []);
+      beste.push(...sl.map((x) => ({ ...x, inmeter: inm.naam })));
+    }
+    beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
+    const aanbod = kiesAanbod(beste, 3, { wachtDagen: 999 }); // winkel vroeg erom: altijd tijden geven
+    if (!aanbod.length) throw new Error('geen enkel gat beschikbaar');
+    const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur);
+    return `keuzelink verstuurd (${aanbod.length} tijden): ${url}`;
+  }
+
+  // boeken op het gekozen slot — eerst verse botsingscontrole
+  const van = Date.parse(m.slot.aankomst);
+  const tot = van + duur * 60000;
+  const botst = (agenda[m.slot.inmeter] || []).some((a) =>
+    !String(a.klant || '').includes(lead.naam) && Date.parse(a.start) < tot && Date.parse(a.eind) > van);
+  if (botst) throw new Error('gekozen tijd is inmiddels bezet — kies een andere');
+
+  const gekozenSlot = { inmeter: m.slot.inmeter, aankomst: new Date(m.slot.aankomst), extraRijtijdMin: 0 };
+  const uitkomst = await verwerkLead(lead, item, gekozenSlot, duur);
+  let outlookEventId = null;
+  try {
+    const { maakDefinitief } = require('./lib/outlook-opties.js');
+    outlookEventId = await maakDefinitief({ slot: { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter }, naam: lead.naam, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur });
+  } catch (e) {
+    await telegram(`⚠️ Outlook-afspraak bij winkel-boeking mislukt voor ${lead.naam}: ${e.message.slice(0, 100)}`);
+  }
+  try {
+    const { registreerBoeking } = require('./lib/inmeet-mutatie.js');
+    registreerBoeking({
+      rpItemId: item.id, naam: lead.naam, telefoon: lead.telefoon, email: lead.email,
+      planadoJobUuid: uitkomst.planadoJobUuid, outlookEventId, grippNr: uitkomst.grippNr,
+      sheet: uitkomst.sheetLocatie, slot: { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter }, duurMin: duur,
+    });
+  } catch (e) {
+    await telegram(`⚠️ Boekingsrecord (winkel-boeking) niet opgeslagen voor ${lead.naam}: ${e.message.slice(0, 100)}`);
+  }
+  try {
+    const { verstuurBevestiging } = require('./lib/aanbod-versturen');
+    await verstuurBevestiging({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin: duur }, { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter });
+  } catch { /* bevestiging is nice-to-have; kantoor boekt met klant aan de lijn */ }
+  await telegram(`✅ Inmeetafspraak GEBOEKT via dashboard (${m.bron}): ${lead.naam} — ${new Date(m.slot.aankomst).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' })} bij ${m.slot.inmeter}.\n${uitkomst.samenvatting}`);
+  return `geboekt: ${uitkomst.samenvatting}`;
 }
 
 if (process.argv.includes('--verwerk-aanbod')) {

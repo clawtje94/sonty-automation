@@ -895,10 +895,14 @@ async function verwerkTicket(t, state) {
       antwoord: res.antwoord, acties: res.acties,
     });
     if (!poort.mag) {
-      await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
-      await zetLabel(t.id, LABEL.MENS_NODIG);
-      await tPost(`/tickets/${t.id}/messages`, { internal_note: true, message: `👤 Ticket blijft OPEN bij Mens nodig: ${poort.reden}.` });
-      console.log(`  ticket ${t.id} NIET gesloten → Mens nodig (${poort.reden})`);
+      // Servicemelding: alleen open laten (Daimy 2026-08-06). Mens nodig blijft voor beloftes
+      // en echte escalaties.
+      if (poort.soort !== 'service') {
+        await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
+        await zetLabel(t.id, LABEL.MENS_NODIG);
+        await tPost(`/tickets/${t.id}/messages`, { internal_note: true, message: `👤 Ticket blijft OPEN bij Mens nodig: ${poort.reden}.` });
+      }
+      console.log(`  ticket ${t.id} NIET gesloten (${poort.soort}: ${poort.reden})`);
     } else {
       const dicht = await tPost(`/tickets/${t.id}/close`, {});
       console.log(`  ${dicht.ok ? '✓ gesprek klaar → ticket gesloten' : '⚠️ ticket sluiten mislukte: ' + dicht.status}`);

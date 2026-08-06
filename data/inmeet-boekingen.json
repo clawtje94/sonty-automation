@@ -1,0 +1,40 @@
+{
+ "45aeb252-2637-46d8-99cb-da46bf66f34e": {
+  "naam": "Daimy Boot",
+  "telefoon": "+31683500506",
+  "email": "daimyboot@gmail.com",
+  "planadoJobUuid": "1f191862-ffa5-67d0-b81c-6e18ed7be61e",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPvlAAA=",
+  "grippNr": null,
+  "sheet": {
+   "tab": "Juni 2026 ",
+   "rij": 357,
+   "kolomInkoop": 23
+  },
+  "aankomst": "2026-08-31T11:35:00.000Z",
+  "inmeter": "Joey",
+  "duurMin": 25,
+  "aanbodToken": "4cc6595cf0ed46de39f7f60a8826c154",
+  "geboektOp": "2026-08-06T11:02:34.527Z",
+  "status": "geboekt"
+ },
+ "2905b04f-0df3-47b7-a6b5-9c4f4200f559": {
+  "naam": "Eric Van der Meer",
+  "telefoon": "+31628266205",
+  "email": "ericievld1983@gmail.com",
+  "planadoJobUuid": "1f191ca0-92c1-6790-ba3a-3e8146a03c45",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwMAAA=",
+  "grippNr": null,
+  "sheet": {
+   "tab": "Aug 2026",
+   "rij": 267,
+   "kolomInkoop": 23
+  },
+  "aankomst": "2026-08-18T09:05:00.000Z",
+  "inmeter": "Joey",
+  "duurMin": 30,
+  "aanbodToken": "4953a9d820c4e37c1bd87ed01ed8707c",
+  "geboektOp": "2026-08-06T18:55:58.161Z",
+  "status": "geboekt"
+ }
+}

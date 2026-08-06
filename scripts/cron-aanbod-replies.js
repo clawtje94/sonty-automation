@@ -114,7 +114,7 @@ async function main() {
             const rA = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': MEET_CODE } });
             const aanbod = rA.ok ? await rA.json() : null;
             const keuze = aanbod ? leesKeuze(tekst, aanbod.slots || []) : null;
-            if (keuze !== null) {
+            if (keuze !== null && aanbod.slots?.[keuze]) {
               const rK = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, {
                 method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
                 body: JSON.stringify({ status: 'gekozen', gekozenIndex: keuze }),

@@ -584,7 +584,7 @@ async function main() {
 
     if (LIVE) {
       try {
-        const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur);
+        const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda);
         console.log(`    AANBOD VERSTUURD: ${url}`);
         regels.push(`  → aanbod verstuurd (24u geldig)`);
         state.aangeboden[item.id] = { naam: lead.naam, op: new Date().toISOString(), aanbod: aanbod.length };
@@ -689,7 +689,7 @@ async function combiPas(wachtenden, agenda, regels) {
       regels.push(`COMBI ${w.lead.naam} (${w.lead.plaats}): ${aanbod.map((x) => `${x.inmeter} ${x.datum.slice(5)} ${venster(x)} +${x.extraRijtijdMin}min`).join(' | ')}`);
       if (LIVE) {
         try {
-          await maakEnVerstuurAanbod(w.lead, w.item, aanbod, w.duur);
+          await maakEnVerstuurAanbod(w.lead, w.item, aanbod, w.duur, agenda);
           regels.push('  → combi-aanbod verstuurd');
         } catch (e) { regels.push(`  → combi-aanbod versturen MISLUKT: ${e.message}`); continue; }
       }
@@ -701,8 +701,31 @@ async function combiPas(wachtenden, agenda, regels) {
   }
 }
 
+/** Minimaal 3 tijden garanderen (Daimy 06-08: "stuur je dan ook altijd 3 opties?" —
+ * het knoppen-template heeft er altijd 3 nodig). Te weinig? Dan verder vooruit
+ * kijken (dubbele horizon). Lukt ook dat niet, dan wordt er NIET verstuurd. */
+async function zorgVoorDrieOpties(lead, duur, agenda, huidigAanbod) {
+  if (huidigAanbod.length >= 3) return huidigAanbod;
+  let beste = [];
+  for (const inm of INMETERS) {
+    try {
+      const sl = await zoekSlots({
+        agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
+        werkdagen: werkdagenVoor(inm.naam, 30),
+        startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
+        eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
+      });
+      beste.push(...sl.map((x) => ({ ...x, inmeter: inm.naam })));
+    } catch { /* inmeter zonder slots */ }
+  }
+  beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
+  return kiesAanbod(beste, 3, { wachtDagen: 999 });
+}
+
 /** Aanbod vastleggen in het register en direct naar de klant sturen (mail + WhatsApp). */
-async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin) {
+async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null) {
+  if (aanbod.length < 3 && agenda) aanbod = await zorgVoorDrieOpties(lead, duurMin, agenda, aanbod);
+  if (aanbod.length < 3) throw new Error(`maar ${aanbod.length} tijd(en) beschikbaar — template heeft er 3 nodig, niet verstuurd (handmatig of wachten op ruimte)`);
   // "ver weg"? — eerlijk benoemen in het bericht (Daimy 06-08). Meetlat: enkele reis
   // vanaf het magazijn is meer dan de omrij-grens uit de instellingen.
   let ver = false;
@@ -942,8 +965,8 @@ async function verwerkDashboardVerzoek(m) {
     beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
     const aanbod = kiesAanbod(beste, 3, { wachtDagen: 999 }); // winkel vroeg erom: altijd tijden geven
     if (!aanbod.length) throw new Error('geen enkel gat beschikbaar');
-    const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur);
-    return `keuzelink verstuurd (${aanbod.length} tijden): ${url}`;
+    const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda);
+    return `keuzelink verstuurd (3 tijden): ${url}`;
   }
 
   // boeken op het gekozen slot — eerst verse botsingscontrole

@@ -59,17 +59,14 @@ async function verwerkReken(m) {
   beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
   const aanbod = kiesAanbod(beste, 3, { wachtDagen: 999 });
   if (!aanbod.length) return { afgewezen: true, uitkomst: 'geen enkel gat beschikbaar' };
-  // kaart direct in het dashboard zetten
-  const dash = await api(DASH_API);
-  dash.leads = (dash.leads || []).filter((l) => l.rpItemId !== item.id);
-  dash.leads.unshift({
+  // kaart als los reken-resultaat naar het dashboard (eigen sleutel, kan niet
+  // overschreven worden door de 30-min-ronde — race gezien 06-08)
+  await api(DASH_API, { method: 'POST', body: JSON.stringify({ extraLead: {
     rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, duurMin: duur, wachtDagen: 0,
     status: 'aanbod-mogelijk',
     producten: lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ').slice(0, 90),
     top: aanbod.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin })),
-  });
-  dash.bijgewerkt = new Date().toISOString();
-  await api(DASH_API, { method: 'POST', body: JSON.stringify(dash) });
+  } }) });
   return { afgewezen: false, uitkomst: `${aanbod.length} tijden berekend, staan in het dashboard` };
 }
 

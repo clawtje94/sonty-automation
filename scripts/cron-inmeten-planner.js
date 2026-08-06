@@ -551,15 +551,19 @@ async function main() {
     });
   } catch (e) { console.log('dashboard publiceren mislukt: ' + e.message); }
 
+  // Telegram-beleid (Daimy 06-08 "niet steeds dezelfde mensen"): de schaduwronde
+  // meldt alleen NIEUWE klanten op de planlijst en 🚨-escalaties. Al het andere
+  // staat gewoon op het dashboard.
+  state.gemeld = state.gemeld || {};
+  const nieuweLeads = dash.leads.filter((l) => !state.gemeld[l.rpItemId]);
+  for (const l of nieuweLeads) state.gemeld[l.rpItemId] = new Date().toISOString();
+  const escalaties = regels.filter((r) => r.includes('🚨'));
   bewaarState(state);
-  // Telegram alleen bij een ECHTE verandering — een dashboard-verversing elke
-  // 30 min mag geen berichtenstroom worden
-  const crypto = require('crypto');
-  const hash = crypto.createHash('sha1').update(regels.join('\n')).digest('hex');
-  if (state.laatsteRapportHash !== hash) {
-    state.laatsteRapportHash = hash;
-    bewaarState(state);
-    await telegram(`Inmeet-planner (${LIVE ? 'LIVE' : 'schaduw'}) — ${items.length} lead(s):\n\n` + regels.join('\n'));
+  if (nieuweLeads.length || escalaties.length) {
+    const stukken = [];
+    if (nieuweLeads.length) stukken.push(`${nieuweLeads.length} nieuwe klant(en) op de planlijst: ${nieuweLeads.map((l) => l.naam).join(', ')} — zie het dashboard.`);
+    if (escalaties.length) stukken.push(escalaties.join('\n'));
+    await telegram(`Inmeet-planner (${LIVE ? 'LIVE' : 'schaduw'}): ` + stukken.join('\n'));
   }
 }
 

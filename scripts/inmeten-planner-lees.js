@@ -11,6 +11,16 @@ const PID = '731483fa-ef6b-4aae-afcf-883ec09219dd';
 
 const GEEN_PRODUCT_REGEL = /^inmeten \+ montage|^montage\b|^korting|^toeslag|^transport/i;
 
+// OFFERTE-CACHE (Daimy 06-08: "ik krijg steeds api-gezeur met RP omdat we te veel
+// gebruiken"): offertedocumenten wijzigen zelden, maar werden elke planner-ronde
+// voor elke lead opnieuw opgehaald (±70 calls per ronde). Cache per lead, 6 uur.
+const fs = require('fs');
+const path = require('path');
+const CACHE_PAD = path.join(__dirname, '..', 'data', 'rp-offerte-cache.json');
+const CACHE_TTL = 6 * 3600000;
+function leesCache() { try { return JSON.parse(fs.readFileSync(CACHE_PAD, 'utf8')); } catch { return {}; } }
+function schrijfCache(c) { try { fs.writeFileSync(CACHE_PAD, JSON.stringify(c)); } catch { /* cache is optioneel */ } }
+
 async function rpGet(ep) {
   const r = await fetch('https://backend.reuzenpanda.nl' + ep, { headers: { Authorization: 'Bearer ' + RP_API_KEY } });
   if (!r.ok) throw new Error(`RP ${r.status}`);
@@ -59,6 +69,9 @@ async function leesOfferte(item) {
   const leeg = { producten: [], status: null, ambigu: false, aantalDocs: 0, nummers: [], datums: [] };
   const lcId = item.item_subject?.id;
   if (!lcId) return leeg;
+  const cache = leesCache();
+  const hit = cache[lcId];
+  if (hit && Date.now() - hit.op < CACHE_TTL) return hit.waarde;
   try {
     const docs = await rpGet(`/document-service/v1/${PID}/quotations?lead_configuration_id=${lcId}`);
     const lijst = docs?.quotationDatas || [];
@@ -76,10 +89,15 @@ async function leesOfferte(item) {
     let keuze = null;
     if (geaccepteerd.length) keuze = geaccepteerd[0];
     else if (lijst.length === 1) keuze = lijst[0];
-    else return { producten: [], status: null, ambigu: true, aantalDocs: lijst.length, nummers, datums };
+    else {
+      const waarde = { producten: [], status: null, ambigu: true, aantalDocs: lijst.length, nummers, datums };
+      cache[lcId] = { op: Date.now(), waarde };
+      schrijfCache(cache);
+      return waarde;
+    }
 
     const full = await rpGet(`/document-service/v1/${PID}/quotations/${keuze.documentId}`);
-    return {
+    const waarde = {
       producten: parseDocument(full),
       status: keuze.quotationStatus || keuze.documentStatus || null,
       ambigu: false,
@@ -87,6 +105,9 @@ async function leesOfferte(item) {
       nummers,
       datums,
     };
+    cache[lcId] = { op: Date.now(), waarde };
+    schrijfCache(cache);
+    return waarde;
   } catch {
     return leeg;
   }

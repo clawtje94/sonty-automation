@@ -31,12 +31,32 @@ async function api(pad, opties = {}) {
  * en als kaart in het dashboard zetten — zonder op de 30-min-ronde te wachten. */
 async function verwerkReken(m) {
   const { zoekSlots, kiesAanbod, venster } = require('./lib/slotzoeker.js');
-  const data = await (await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${SALES}/items?limit=200`, {
+  // API-zuinig zoeken: eerst 1 pagina + de bekende leads uit de planner-state;
+  // alleen als de naam daar niet tussen zit een volledige scan (zeldzaam balie-geval).
+  const n = String(m.naam || '').toLowerCase();
+  let kandidaten = [];
+  const eerste = await (await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${SALES}/items?limit=1000`, {
     headers: { Authorization: 'Bearer ' + RP_API_KEY },
   })).json();
-  const n = String(m.naam || '').toLowerCase();
-  const kandidaten = (data.items || []).filter((i) => i.status_id === INMETEN_INPLANNEN
-    && String(i.summary || '').toLowerCase().includes(n));
+  const past = (i) => i.status_id === INMETEN_INPLANNEN && String(i.summary || '').toLowerCase().includes(n);
+  kandidaten = (eerste.items || []).filter(past);
+  if (!kandidaten.length) {
+    try {
+      const st = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'inmeten-planner-state.json'), 'utf8'));
+      kandidaten = (st.inmeetLeads || []).filter((i) => String(i.summary || '').toLowerCase().includes(n));
+    } catch { /* state optioneel */ }
+  }
+  if (!kandidaten.length) {
+    let offset = 1000;
+    while (true) {
+      const data = await (await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${SALES}/items?limit=1000&offset=${offset}`, {
+        headers: { Authorization: 'Bearer ' + RP_API_KEY },
+      })).json();
+      kandidaten.push(...(data.items || []).filter(past));
+      if (!data.has_more || kandidaten.length) break;
+      offset += 1000;
+    }
+  }
   if (!kandidaten.length) return { afgewezen: true, uitkomst: `geen lead "${m.naam}" op Inmeten inplannen — zet hem eerst op die status in RP` };
   if (kandidaten.length > 1) return { afgewezen: true, uitkomst: `meerdere leads passen op "${m.naam}" — maak de naam specifieker` };
   const item = kandidaten[0];

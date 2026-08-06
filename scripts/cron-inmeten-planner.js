@@ -443,9 +443,38 @@ async function main() {
   state.gezien = state.gezien || {};
   console.log(LIVE ? '=== LIVE (aanbod wordt echt verstuurd) ===' : '=== SCHADUW (er wordt niets verstuurd) ===');
 
-  const data = await rpGet(`/contact-service/${PID}/backlogs/${BACKLOG_ID}/items?limit=200`);
-  const items = (data.items || data.data || data || []).filter((i) => i.status_id === INMETEN_INPLANNEN);
-  console.log(`${items.length} lead(s) op "Inmeten inplannen"`);
+  // ALLE kaarten pagineren (Daimy 06-08: "18 mensen op inmeten inplannen maar veel
+  // minder in de tool" — de eerste 200 kaarten bevatten maar een deel; het echte
+  // aantal stond op 35). Testkaarten filteren we er wel uit.
+  // API-ZUINIG (Daimy 06-08): volle scan (±19 calls) maximaal 1x per 3 uur;
+  // tussenrondes 1 pagina voor verse instroom + de bekende leads uit de vorige scan.
+  const items = [];
+  const gezien = new Set();
+  const volleScanNodig = !state.laatsteVolleScan || Date.now() - Date.parse(state.laatsteVolleScan) > 3 * 3600000;
+  {
+    let offset = 0;
+    while (true) {
+      const data = await rpGet(`/contact-service/${PID}/backlogS/${BACKLOG_ID}/items?limit=1000&offset=${offset}`.replace('backlogS', 'backlogs'));
+      for (const i of data.items || []) {
+        gezien.add(i.id);
+        if (i.status_id === INMETEN_INPLANNEN) items.push(i);
+      }
+      if (!volleScanNodig || !data.has_more) break;
+      offset += 1000;
+    }
+  }
+  if (volleScanNodig) {
+    state.laatsteVolleScan = new Date().toISOString();
+    state.inmeetLeads = items.map((i) => ({ id: i.id, summary: i.summary, item_subject: i.item_subject, description: i.description, fields: i.fields }));
+  } else {
+    // bekende leads van de laatste volle scan toevoegen (voor zover niet net op de pagina gezien)
+    for (const b of state.inmeetLeads || []) if (!gezien.has(b.id)) items.push(b);
+  }
+  bewaarState(state);
+  const TESTKAART = /\btest\b|reuzenpanda|^[\s/|-]+$/i;
+  const testkaarten = items.filter((i) => TESTKAART.test(i.summary || ''));
+  for (const t of testkaarten) items.splice(items.indexOf(t), 1);
+  console.log(`${items.length} lead(s) op "Inmeten inplannen" (${testkaarten.length} testkaart(en) overgeslagen)`);
   if (LIVE && !ALLEEN) {
     console.log('GEWEIGERD: --live zonder --alleen=<naam> zou alle leads aanschrijven, ook echte klanten.');
     return;

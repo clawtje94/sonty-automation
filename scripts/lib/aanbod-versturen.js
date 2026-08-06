@@ -199,6 +199,17 @@ function herinneringTekst(voornaam, slot, duurMin, dagenVooraf = 1) {
 async function verstuurAanbod(aanbod, url) {
   const wa = await stuurWhatsApp(aanbod, url).catch((e) => ({ ok: false, reden: e.message }));
   const mail = await stuurMail(aanbod, url).catch((e) => ({ ok: false, reden: e.message }));
+  // VERZEND-SPIEGEL (les 06-08, lege-tijden-incident): het bericht zoals de klant het
+  // krijgt gaat 1-op-1 mee naar Telegram. Een kapotte verzending is dan binnen een
+  // minuut zichtbaar in plaats van pas als de klant (of Daimy) hem ziet.
+  try {
+    const slots = (aanbod.slots || []).map((sl, i) => `${i + 1}. ${slotTekst(sl)}`).join('\n');
+    const spiegel = `Hoi ${(aanbod.lead.naam || 'daar').split(' ')[0]}, goed nieuws: we kunnen bij je langskomen om in te meten.${aanbod.ver ? ' [ver-weg-versie]' : ''}\n\n${slots || '(GEEN TIJDEN?!)'}\n\nTik op een knop en we zetten hem vast.`;
+    await fetch('https://api.telegram.org/bot8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40/sendMessage', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: 1700128390, text: `📤 Verstuurd naar ${aanbod.lead.naam} (wa: ${wa.ok ? wa.via : 'niet — ' + wa.reden}, mail: ${mail.ok ? 'ok' : 'niet — ' + mail.reden}). Dit kreeg de klant:\n\n${spiegel}` }),
+    });
+  } catch { /* spiegel mag verzending nooit blokkeren */ }
   return { wa, mail, ergensGelukt: wa.ok || mail.ok };
 }
 

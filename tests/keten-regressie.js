@@ -181,5 +181,17 @@ test('straatSleutel vangt adressen zonder postcode (Outlook-locaties, geval Mari
   assert.strictEqual(straatSleutel('12 34'), null, 'alleen cijfers is geen straat');
 });
 
+console.log('— template-verzending —');
+test('template weigert lege tijden (incident 06-08)', async () => {
+  const { stuurWhatsApp } = require('../scripts/lib/aanbod-versturen.js');
+  const echteFetch = global.fetch;
+  let verstuurd = false;
+  global.fetch = async () => { verstuurd = true; return { ok: true, json: async () => ({}) }; };
+  try {
+    const r = await stuurWhatsApp({ lead: { naam: 'Test', telefoon: '0612345678' }, duurMin: 25, slots: [] }, 'x');
+    assert.strictEqual(r.ok, false, 'lege slots mogen nooit verstuurd worden');
+  } finally { global.fetch = echteFetch; }
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

@@ -81,6 +81,11 @@ async function stuurWhatsAppTemplate(aanbod, url) {
     { type: 'body', key: '{{3}}', value: slots[1] ? slotTekst(slots[1]) : '-' },
     { type: 'body', key: '{{4}}', value: slots[2] ? slotTekst(slots[2]) : '-' },
   ];
+  // NOOIT een template met lege tijden versturen (incident 06-08: 4 klanten kregen
+  // streepjes doordat het slots-veld niet was doorgegeven)
+  if (basis.slice(1).some((p) => p.value === '-')) {
+    return { ok: false, reden: 'lege tijden in het template — NIET verstuurd (slots ontbreken)' };
+  }
   const params = hsm ? basis : [...basis, { type: 'body', key: '{{5}}', value: url }];
   const r = await tFetch('/wa_sessions', {
     method: 'POST',

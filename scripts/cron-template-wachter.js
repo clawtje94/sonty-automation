@@ -33,9 +33,9 @@ async function main() {
     templates.push(...data);
     if (data.length < 15) break;
   }
-  const naam = (t) => String(t.key ?? t.title ?? t.name ?? '').trim().toLowerCase();
-  const normaal = templates.find((t) => naam(t) === '1');
-  const ver = templates.find((t) => naam(t) === 'ver');
+  // Daimy noemde ze "1" en "ver"; in Trengo heten ze voluit (gezien 06-08):
+  const normaal = templates.find((t) => t.id === 244108);
+  const ver = templates.find((t) => t.id === 244109);
   console.log('gevonden:', normaal ? `1=#${normaal.id} (${normaal.status})` : '1 niet gevonden',
     '|', ver ? `ver=#${ver.id} (${ver.status})` : 'ver niet gevonden');
 

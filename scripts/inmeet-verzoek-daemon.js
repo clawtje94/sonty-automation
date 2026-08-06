@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const planner = require('./cron-inmeten-planner.js');
 
-const MEET_CODE = process.env.BELSCHERM_CODE || 'sonty2288';
+const MEET_CODE = process.env.MEETBON_CODE || '2288';
 const MUTATIE_API = 'https://sonty-website.vercel.app/api/inmeet-mutatie';
 const DASH_API = 'https://sonty-website.vercel.app/api/inmeet-dashboard';
 const RP_API_KEY = 'reuzenpanda_cpat_WMD2KmDRune53bj7.d0_ls8loPpAjb2TrSNOS_Xd_QLdxHq1xwOC9pyyJado';

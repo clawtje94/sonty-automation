@@ -350,7 +350,7 @@ async function verwerkLead(lead, item, slot, duurMin) {
     }, 'PATCH');
     // De bon zelf aanmaken en voorvullen uit Gripp.
     await fetch(`https://sonty-website.vercel.app/api/meetbon/bon/${grippNr}`, {
-      headers: { 'x-meet-code': process.env.BELSCHERM_CODE || 'sonty2288' },
+      headers: { 'x-meet-code': process.env.MEETBON_CODE || '2288' },
     }).catch(() => {});
   }
 
@@ -414,9 +414,9 @@ async function main() {
   const lopendeLeads = new Set();
   try {
     for (const status of ['open', 'gekozen']) {
-      const { aanbiedingen } = await (await fetch(`${AANBOD_API}?status=${status}`, {
-        headers: { 'x-meet-code': MEET_CODE },
-      })).json();
+      const rAanbod = await fetch(`${AANBOD_API}?status=${status}`, { headers: { 'x-meet-code': MEET_CODE } });
+      if (!rAanbod.ok) throw new Error(`aanbod-register HTTP ${rAanbod.status} — een 401 was eerder een STILLE nul`);
+      const { aanbiedingen } = await rAanbod.json();
       for (const a of aanbiedingen || []) {
         lopendeLeads.add(a.lead.rpItemId);
         const slots = status === 'gekozen' ? [a.slots[a.gekozenIndex]] : a.slots;
@@ -668,7 +668,7 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin) {
 // markeren we het aanbod als verwerkt — mislukt er iets, dan blijft het staan
 // en wordt het de volgende run opnieuw geprobeerd.
 const AANBOD_API = 'https://sonty-website.vercel.app/api/inmeet-aanbod';
-const MEET_CODE = process.env.BELSCHERM_CODE || 'sonty2288';
+const MEET_CODE = process.env.MEETBON_CODE || '2288';
 
 async function aanbodApi(pad, opties = {}) {
   const r = await fetch(AANBOD_API + pad, {

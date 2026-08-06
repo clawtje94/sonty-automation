@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// OPVOLGING — SCHADUW-VERSIE (opdracht Daimy 21 juli: "eerst verzinnen en uitwerken, nog
-// niet aanzetten"). Deze versie bevat BEWUST GEEN verzendcode: hij kan technisch niets naar
-// klanten sturen. Hij loopt het lijstje na zoals een verkoper, en schrijft per kandidaat een
-// VOORSTEL (opvolgen ja/nee + conceptbericht) naar data/ai-ks/opvolging-voorstellen.jsonl.
+// OPVOLGING — LIVE (schaduw uit per Daimy 2026-08-06: "die schaduw opvolging mag uit, de
+// live opvolging is goed genoeg"). De daemon beoordeelt en verstuurt ALLEEN de kandidaten
+// binnen het live-mandaat (WA-snelvenster + mail dag 3-4,5). Schaduw-only kandidaten (oudere
+// WA-gesprekken e.d.) worden overgeslagen: geen AI-beoordeling, geen voorstel, geen rapport.
 //
 // Doelgroep (Daimy): mensen met wie wij al contact hebben via WhatsApp of mail — die zeiden
 // "ik kom er op terug", of die gewoon een opvolger verdienen. GEEN bulk (de oude
@@ -273,6 +273,17 @@ async function main() {
       bewaarState(state);
       continue;
     }
+    // SCHADUW UIT (Daimy 2026-08-06: "die schaduw opvolging mag uit, de live opvolging is
+    // goed genoeg"). Alleen kandidaten die ook ECHT verstuurd mogen worden nog beoordelen:
+    // WA-snelvenster + mail binnen 3-4,5 dagen. De rest (oudere WA-gesprekken e.d.) slaan we
+    // over: geen AI-beoordeling, geen voorstel, geen rapport. Scenario/forced blijven werken.
+    const kanLivePre = (k.snel && (k.kanaal || 'WA') === 'WA') || (k.kanaal === 'EMAIL' && ((check.stilUren || 0) / 24) <= LIVE_MAIL_MAX_DAGEN);
+    if (!kanLivePre && !k.forced && !SCENARIO) {
+      console.log(`  − ${wie} (ticket ${k.ticket}): schaduw-only, overgeslagen (schaduw uit)`);
+      state[String(k.ticket)] = { ...state[String(k.ticket)], gecheckt: new Date().toISOString() };
+      bewaarState(state);
+      continue;
+    }
     const oordeel = await beoordeel(k, check.echte, check.context);
     const rec = { tijd: new Date().toISOString(), ticket: k.ticket, kanaal: k.kanaal || 'WA', klant: wie, snel: !!k.snel, ...oordeel, schaduw: true };
     fs.appendFileSync(VOORSTELLEN, JSON.stringify(rec) + '\n');
@@ -319,23 +330,15 @@ async function main() {
       regels.push(`− ${wie}: ${String(oordeel.reden).slice(0, 100)}`);
     }
   }
-  console.log(`[SCHADUW] klaar: ${voorstellen} voorstel(len) gelogd in opvolging-voorstellen.jsonl, er is NIETS verstuurd.`);
+  console.log(`[opvolging] klaar: ${voorstellen} live-kandidaat(en) beoordeeld; schaduw-only kandidaten overgeslagen.`);
 
-  // Rapportage: daemon draait nu elk uur — het volledige overzicht alleen in de ochtendrun
-  // (10:00-11:00); live-verzendingen worden altijd gemeld.
-  const uurNu = Number(new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Amsterdam' }).slice(11, 13));
+  // SCHADUW UIT (Daimy 2026-08-06): geen dagelijks schaduw-rapport meer. Alleen live
+  // verzendingen worden gemeld, ook in de 10:00-run.
   const verstuurdRegels = regels.filter((r) => r.includes('VERSTUURD') || r.includes('mislukt'));
-  if (verstuurdRegels.length && !(uurNu === 10)) {
+  if (verstuurdRegels.length) {
     await fetch('https://api.telegram.org/bot8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40/sendMessage', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: 1700128390, text: ('Opvolging live verstuurd:\n' + verstuurdRegels.join('\n')).slice(0, 3900) }),
-    }).catch(() => {});
-  }
-  if (regels.length && uurNu === 10) {
-    const kop = `SCHADUW-OPVOLGING vandaag (er is niets naar klanten gestuurd):\n${voorstellen} voorstel(len), ${regels.length - voorstellen} overgeslagen.\n\n`;
-    await fetch('https://api.telegram.org/bot8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40/sendMessage', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: 1700128390, text: (kop + regels.join('\n')).slice(0, 3900) }),
     }).catch(() => {});
   }
 }

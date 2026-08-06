@@ -55,9 +55,16 @@ async function stuurWaBevestiging(ticketId, naam, slot) {
 }
 
 async function ticketBerichten(ticketId) {
-  const r = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages?per_page=15`, { headers: TH });
-  if (!r.ok) return [];
-  return ((await r.json())?.data || []);
+  // 429's niet stil laten wegvallen (miste Eric's antwoord op 06-08): even wachten
+  // en opnieuw; blijft het mislukken dan zichtbaar loggen.
+  for (let poging = 0; poging < 3; poging++) {
+    const r = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages?per_page=15`, { headers: TH });
+    if (r.status === 429) { await new Promise((x) => setTimeout(x, 15000)); continue; }
+    if (!r.ok) { console.log(`ticket ${ticketId}: HTTP ${r.status}`); return []; }
+    return ((await r.json())?.data || []);
+  }
+  console.log(`ticket ${ticketId}: blijft 429 — volgende ronde opnieuw`);
+  return [];
 }
 
 async function zoekWaTicketOpNummer(telefoon) {

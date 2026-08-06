@@ -187,16 +187,25 @@ async function haalAgenda() {
     // met retry afvangen — één gemiste wachttijd liet eerder bijna de hele agenda
     // stilletjes wegvallen (schaduwrun 06-08: 5 van 167 afspraken over).
     let adres = null;
+    let omschrijving = '';
     for (let poging = 0; poging < 3 && !adres; poging++) {
       try {
         const det = await planado('/jobs/' + j.uuid);
-        adres = (det.job || det).address?.formatted || null;
+        const h = det.job || det;
+        adres = h.address?.formatted || null;
+        omschrijving = omschrijving || h.description || '';
         if (adres) break;
       } catch { await wacht(6000); }
       await wacht(2600);
     }
     await wacht(2600);
-    if (!adres) continue;
+    // GEEN adres (winkeldienst, intern overleg): telt WEL als bezette tijd — anders
+    // plant de bot dwars door een winkeldienst heen. Als anker-adres nemen we de
+    // winkel (Rijswijk) voor winkeldiensten en het magazijn voor de rest.
+    if (!adres) {
+      const soort = /winkel|showroom/i.test(omschrijving) ? 'Frijdastraat 8F, 2288 EZ Rijswijk' : null;
+      adres = soort || require('./lib/reistijd').MAGAZIJN;
+    }
     perInmeter[inm.naam].push({
       start: j.scheduled_at,
       eind: new Date(+new Date(j.scheduled_at) + ((j.scheduled_duration?.minutes) || 60) * 60000).toISOString(),
@@ -208,22 +217,31 @@ async function haalAgenda() {
   for (const inm of INMETERS) {
     const inLijst = lijstTelling[inm.naam] || 0;
     const opgehaald = perInmeter[inm.naam].length;
-    if (inLijst >= 5 && opgehaald < inLijst * 0.8) {
+    if (inLijst >= 5 && opgehaald < inLijst * 0.9) {
       throw new Error(`agenda ${inm.naam} onvolledig: ${opgehaald}/${inLijst} afspraken met adres — niet op plannen`);
     }
   }
   return perInmeter;
 }
 
-/** Werkdagen: de komende 10 werkdagen, 08:30-17:00. */
-function werkdagen(aantal = 10) {
+/** Werkdagen PER INMETER uit het echte rooster (data/inmeters-rooster.json is
+ * leidend — Daimy 04-08; generieke 08:30-17:00 bood tijden aan buiten het rooster).
+ * Vrije dagen (Joey wo/vr) vallen weg; startDatum (nieuwe inmeter) wordt gerespecteerd. */
+const ROOSTER = require('../data/inmeters-rooster.json').inmeters;
+const DAGCODE = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
+function werkdagenVoor(inmeterNaam, aantal = 10) {
+  const vast = ROOSTER[inmeterNaam]?.dagen;
+  const startDatum = ROOSTER[inmeterNaam]?.startDatum;
   const dagen = [];
   const d = new Date();
   d.setDate(d.getDate() + 1);
-  while (dagen.length < aantal) {
-    if (d.getDay() !== 0 && d.getDay() !== 6) {
-      dagen.push({ datum: d.toISOString().slice(0, 10), van: '08:30', tot: '17:00' });
-    }
+  let bekeken = 0;
+  while (dagen.length < aantal && bekeken < aantal * 3) {
+    bekeken++;
+    const code = DAGCODE[d.getDay()];
+    const blok = vast?.[code];
+    const naStart = !startDatum || d.toISOString().slice(0, 10) >= startDatum;
+    if (blok && naStart) dagen.push({ datum: d.toISOString().slice(0, 10), van: blok.van, tot: blok.tot });
     d.setDate(d.getDate() + 1);
   }
   return dagen;
@@ -415,7 +433,6 @@ async function main() {
     return;
   }
 
-  const dagen = werkdagen();
   const regels = [];
   const wachtenden = []; // leads zonder aanbod: kandidaten voor de combi-pas
 
@@ -439,7 +456,12 @@ async function main() {
     let beste = [];
     for (const inm of INMETERS) {
       try {
-        const s = await zoekSlots({ agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur, werkdagen: dagen });
+        const s = await zoekSlots({
+          agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
+          werkdagen: werkdagenVoor(inm.naam),
+          startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
+          eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
+        });
         beste.push(...s.map((x) => ({ ...x, inmeter: inm.naam })));
       } catch (e) {
         console.log(`  ! ${lead.naam} (${inm.naam}): ${e.message}`);
@@ -493,7 +515,7 @@ async function main() {
   // omrij-kosten delen ze, dus een rit die voor één klant te duur is kan voor twee
   // of drie samen wél uit. De oudste krijgt eerst aanbod; zijn slots worden ankers
   // waardoor de rest er in dezelfde run omheen valt.
-  await combiPas(wachtenden, agenda, dagen, regels);
+  await combiPas(wachtenden, agenda, regels);
 
   bewaarState(state);
   await telegram(`Inmeet-planner (${LIVE ? 'LIVE' : 'schaduw'}) — ${items.length} lead(s):\n\n` + regels.join('\n'));
@@ -501,7 +523,7 @@ async function main() {
 
 const MAX_COMBI_RIJTIJD_MIN = 20; // klanten die hooguit dit uit elkaar wonen vormen een combi
 
-async function combiPas(wachtenden, agenda, dagen, regels) {
+async function combiPas(wachtenden, agenda, regels) {
   if (wachtenden.length < 2) return;
   const { reistijd } = require('./lib/reistijd');
   const { MAX_EXTRA_RIJTIJD_MIN } = require('./lib/slotzoeker.js');
@@ -532,7 +554,12 @@ async function combiPas(wachtenden, agenda, dagen, regels) {
       let beste = [];
       for (const inm of INMETERS) {
         try {
-          const sl = await zoekSlots({ agenda: agenda[inm.naam], adres: w.lead.volledigAdres, duurMin: w.duur, werkdagen: dagen });
+          const sl = await zoekSlots({
+            agenda: agenda[inm.naam], adres: w.lead.volledigAdres, duurMin: w.duur,
+            werkdagen: werkdagenVoor(inm.naam),
+            startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
+            eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
+          });
           beste.push(...sl.map((x) => ({ ...x, inmeter: inm.naam })));
         } catch { /* geen slots bij deze inmeter */ }
       }

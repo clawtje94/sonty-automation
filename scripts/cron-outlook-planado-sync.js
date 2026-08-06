@@ -183,21 +183,25 @@ async function main() {
         } catch { /* Gripp niet bereikbaar: opdracht komt zonder blok, verrijker haalt hem later op */ }
       }
       const body = {
-        type_uuid: TYPES[soort(e.Subject)],
+        // Planado accepteert type/template alleen als OBJECT bij POST; de platte
+        // *_uuid-velden worden stil genegeerd en de app toont dan "Opdracht"
+        // (bewezen 06-08 tegen API-docs + testjob; PATCH achteraf werkt NIET).
+        job_type: { uuid: TYPES[soort(e.Subject)] },
         description: `${e.Subject || 'Afspraak'}\n(gesynct uit Outlook)${grippBlok}`,
         scheduled_at: startISO,
         scheduled_duration: { minutes: minuten },
         assignee: { worker: { uuid: INMETERS[voornaam] } },
         external_id: extId,
       };
-      if (soort(e.Subject) === 'inmeet') body.template_uuid = INMEET_TEMPLATE;
+      if (soort(e.Subject) === 'inmeet') body.template = { uuid: INMEET_TEMPLATE };
       const tel = telefoonUit(e.Body);
       if (tel) body.contacts = [{ type: 'phone', name: klantNaamUit(e.Subject), value: tel }];
       if (adres && adres.length > 8 && /\d/.test(adres)) body.address = { formatted: adres };
       const r = await fetch('https://api.planadoapp.com/v2/jobs', { method: 'POST', headers: PH, body: JSON.stringify(body) });
       if (!r.ok) { fouten++; console.log(`    FOUT ${r.status}: ${(await r.text()).slice(0, 120)}`); }
       else {
-        // Planado negeert type_uuid bij POST (stil); daarom direct na aanmaken een PATCH.
+        // Na-PATCH is alleen nog voor de meetbon-velden; type/template zitten nu
+        // correct in de POST zelf (als object).
         try {
           const created = await r.json();
           const uuid = created.job_uuid || created.uuid;

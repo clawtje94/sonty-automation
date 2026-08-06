@@ -600,21 +600,20 @@ async function verwerkTicket(t, state) {
   const laatste = rows[rows.length - 1];
   if (laatste.van !== 'klant') return; // alleen reageren als het laatste bericht van de klant is
 
-  // INMEET-KEUZE? DAN IS DE PLANNER DE ENIGE RESPONDER (Daimy 2026-08-06: hij drukte
-  // op een template-knop en kreeg de klantenservice-AI eroverheen). Heeft dit nummer
-  // een lopend inmeet-aanbod en lijkt het bericht op een keuze (knopdruk "Optie 2",
-  // "1"/"2"/"3" of een dagnaam), dan blijft de AI er volledig vanaf — de
-  // aanbod-monitor leest de keuze uit, boekt en bevestigt.
+  // LOPEND INMEET-AANBOD? DAN IS DE PLANNER DE ENIGE RESPONDER — voor ÁLLES op dit
+  // nummer, niet alleen keuze-berichten. Op 06-08 vroeg Irene "over welke dag gaat
+  // het?" en antwoordde de AI "de planning belt binnen 5 werkdagen" bovenop het
+  // keuze-aanbod met 3 tijden: twee tegenstrijdige verhalen bij één klant, Daimy
+  // moest er zelf tussen springen. Elke reactie wordt al door de aanbod-monitor
+  // (elke 3 min) naar Daimy gerapporteerd en keuzes voert die zelf door.
   try {
     const stPlanner = JSON.parse(require('fs').readFileSync('/Users/clawdboot/sonty/data/inmeten-planner-state.json', 'utf8'));
     const tel9 = String(t.contact?.phone || gesprek?.klant?.telefoon || '').replace(/\D/g, '').slice(-9);
     const lopend = Object.values(stPlanner.aanbodTickets || {}).some((a) =>
       String(a.telefoon || '').replace(/\D/g, '').slice(-9) === tel9
       && Date.now() - Date.parse(a.verstuurdOp) < 48 * 3600000);
-    const keuzeachtig = /^(?:optie\s*)?[123][.!)]?$/i.test(String(laatste.tekst || '').trim())
-      || /^(maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag|ma|di|wo|do|vr|za|zo)$/i.test(String(laatste.tekst || '').trim());
-    if (lopend && keuzeachtig && tel9.length === 9) {
-      console.log(`  ticket ${t.id}: inmeet-keuze ("${String(laatste.tekst).slice(0, 20)}") — planner handelt af, AI blijft eraf`);
+    if (lopend && tel9.length === 9) {
+      console.log(`  ticket ${t.id}: lopend inmeet-aanbod op dit nummer — planner/monitor handelen af, AI blijft er volledig af`);
       return;
     }
   } catch { /* state onleesbaar: normale flow */ }

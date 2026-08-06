@@ -308,7 +308,16 @@ async function main() {
       // ACCEPTED 27,5k met dezelfde timestamp).
       if (acceptedDocs.length === 0 && fullDocs.length > 1) {
         console.log('  SKIP: ' + fullDocs.length + ' offerteversies, geen enkele getekend — klant moet eerst tekenen');
-        await sendTelegram('⚠️ Gripp-invullen overgeslagen: "' + (item.summary || '?') + '" heeft ' + fullDocs.length + ' offerteversies in RP en geen enkele is getekend. Klant moet er één tekenen (of kantoor kiest).');
+        // 1x melden per item, niet bij elke run opnieuw (7 runs/dag = 7 dezelfde
+        // meldingen; onderdeel van de meldingen-regen 06-08).
+        const SKIP_GEMELD = path.join(__dirname, '..', 'data', 'gripp-skip-gemeld.json');
+        let skips = {};
+        try { skips = JSON.parse(fs.readFileSync(SKIP_GEMELD, 'utf8')); } catch {}
+        if (!skips['item:' + item.id]) {
+          skips['item:' + item.id] = new Date().toISOString();
+          fs.writeFileSync(SKIP_GEMELD, JSON.stringify(skips, null, 1));
+          await sendTelegram('⚠️ Gripp-invullen overgeslagen: "' + (item.summary || '?') + '" heeft ' + fullDocs.length + ' offerteversies in RP en geen enkele is getekend. Klant moet er één tekenen (of kantoor kiest). Dit meld ik één keer; hij wordt vanzelf verwerkt zodra er een versie getekend is.');
+        }
         failed++;
         continue;
       }

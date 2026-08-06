@@ -324,10 +324,13 @@ async function grippCall(method, params) {
 }
 
 /** Gripp-offertenummer zoeken dat cron-gripp-invullen zojuist heeft aangemaakt. */
-async function zoekGrippNummer(naam) {
+async function zoekGrippNummer(naam, rpItemId) {
   let log = {};
   try { log = JSON.parse(fs.readFileSync(path.join(__dirname, '.gripp-invullen-sent.json'), 'utf8')); } catch { return null; }
-  const regel = log[naam];
+  // Sinds de dedup-migratie zijn de sleutels 'item:<rp-id>'; de naam-sleutel is
+  // legacy. Alleen op naam zoeken vond daardoor NOOIT meer iets (06-08: Eric en
+  // Carlo hadden allang een offerte, maar de boeking bleef "zonder Gripp-nummer").
+  const regel = (rpItemId && log['item:' + rpItemId]) || log[naam];
   if (!regel?.grippOfferId) return null;
   // Nooit op naam koppelen in Gripp zelf: we hebben de id, dus we halen het nummer op.
   const res = await grippCall('offer.get', [
@@ -387,7 +390,7 @@ async function verwerkLead(lead, item, slot, duurMin) {
   });
 
   // 4. meetbon-link pas nu, want nu bestaat het Gripp-nummer
-  const grippNr = await zoekGrippNummer(lead.naam);
+  const grippNr = await zoekGrippNummer(lead.naam, lead.id);
   if (grippNr) {
     const detail = await (await fetch(`https://api.planadoapp.com/v2/jobs/${jobUuid}`, {
       headers: { Authorization: 'Bearer ' + PLANADO_KEY },

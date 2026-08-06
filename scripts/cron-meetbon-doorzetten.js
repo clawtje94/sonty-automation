@@ -95,9 +95,19 @@ async function vangnetPlanadoLinks(state) {
       const nieuw = desc + `\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/${nr}`;
       const pr = await fetch(`https://api.planadoapp.com/v2/jobs/${j.uuid}`, { method: 'PATCH', headers: { ...H, 'X-Planado-Notify-Assignees': 'false' }, body: JSON.stringify({ description: nieuw }) });
       console.log(`  vangnet: link toegevoegd aan opdracht #${j.serial_no || j.uuid.slice(0, 8)} (Gripp ${nr}): ${pr.ok ? 'OK' : 'FOUT ' + pr.status}`);
-    } else if (!state.linkGemeld?.[j.uuid]) {
+    } else {
+      // Keten-boekingen (external_id rp-*) koppelen hun Gripp-nummer ZELF zodra de
+      // Gripp-cron de offerte heeft aangemaakt — daar pas over melden als het na
+      // 24 uur nog ontbreekt (06-08: melding kwam 2 min na de automatische boeking).
+      const eigenKeten = String(j.external_id || '').startsWith('rp-');
+      const jobLeeftijdMs = j.created_at ? nu - Date.parse(j.created_at) : Infinity;
+      if (eigenKeten && jobLeeftijdMs < 24 * 3600000) continue;
+      // Dedup op external_id (stabiel): bij herbouw krijgt een job een nieuwe uuid
+      // en kwam dezelfde melding opnieuw (06-08: 15 meldingen op één avond).
+      const sleutel = j.external_id || j.uuid;
       state.linkGemeld = state.linkGemeld || {};
-      state.linkGemeld[j.uuid] = new Date().toISOString();
+      if (state.linkGemeld[sleutel]) continue;
+      state.linkGemeld[sleutel] = new Date().toISOString();
       await telegram(`📐 Inmeet-afspraak #${j.serial_no || '?'} (${(desc.split('\n')[0] || 'zonder omschrijving').slice(0, 60)}) heeft geen meetbon-link en ik herken geen Gripp-nummer in de omschrijving. Zet "Gripp <nummer>" in de opdracht-omschrijving of plan via het dashboard, dan koppel ik hem automatisch.`);
     }
   }

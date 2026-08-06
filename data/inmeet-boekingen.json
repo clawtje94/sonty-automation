@@ -25,7 +25,7 @@
   "email": "ericievld1983@gmail.com",
   "planadoJobUuid": "1f191ca0-92c1-6790-ba3a-3e8146a03c45",
   "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwMAAA=",
-  "grippNr": null,
+  "grippNr": "6409",
   "sheet": {
    "tab": "Aug 2026",
    "rij": 267,
@@ -44,7 +44,7 @@
   "email": "Carlo.pronk@live.nl",
   "planadoJobUuid": "1f191cf0-b53d-6e40-a240-5ab4fc8be185",
   "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwcAAA=",
-  "grippNr": null,
+  "grippNr": "6410",
   "sheet": {
    "tab": "Aug 2026",
    "rij": 142,
@@ -74,6 +74,25 @@
   "duurMin": 25,
   "aanbodToken": "e078ab7a0115d56aa1fe5410cde939cf",
   "geboektOp": "2026-08-06T19:47:10.624Z",
+  "status": "geboekt"
+ },
+ "b2b4510d-cd2e-4d09-bb1d-dcb29e2ad644": {
+  "naam": "Irene  Kersseboom",
+  "telefoon": "+31625002169",
+  "email": "ericb.irenek@ziggo.nl",
+  "planadoJobUuid": "1f191d09-488b-6890-80df-3ec8c257d2f4",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwrAAA=",
+  "grippNr": null,
+  "sheet": {
+   "tab": "Juli 2026 ",
+   "rij": 2017,
+   "kolomInkoop": 23
+  },
+  "aankomst": "2026-08-18T10:15:00.000Z",
+  "inmeter": "Joey",
+  "duurMin": 20,
+  "aanbodToken": "033ca171a725ffd89c0771d7a3ba079d",
+  "geboektOp": "2026-08-06T19:54:20.328Z",
   "status": "geboekt"
  }
 }

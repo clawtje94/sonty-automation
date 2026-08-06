@@ -39,7 +39,8 @@ const QUOTE_START = new RegExp([
   /-{2,}\s*Oorspronkelijk bericht\s*-{2,}/.source,
   /-{3,}\s*Original Message\s*-{3,}/.source,
   /\bOn .{5,80}? wrote:/.source,
-  /\bVan:\s.{2,80}?\s(?:Verzonden|Datum):/.source,
+  /Van:\s?.{2,80}?(?:Verzonden|Datum):/.source,
+  /From:.{2,120}?Sent:.{2,120}?(?:To|Aan):/.source,      // Engelse Outlook, ook aan elkaar geplakt
   // GEEN \b voor "Op": in de echte mail van Winston plakte zijn iPhone het aan de vorige regel
   // vast als "Verstuurd vanaf mijn iPhoneOp 04.08.2026 om 09:03 heeft ...". Met een woordgrens
   // matcht dat niet, en dan telt de hele geciteerde thread alsnog mee. Mijn eigen testzin had
@@ -50,7 +51,10 @@ const QUOTE_START = new RegExp([
   // Gmail zonder "om": "Op wo 5 aug 2026, 09:03 schreef Aanvragen | Sonty <...>". Derde gemiste
   // vorm op rij (Jan-Henk Tuk, 2026-08-06). De tijd en "schreef" samen zijn onderscheidend
   // genoeg; een klant die zelf "op woensdag" schrijft gebruikt geen tijdstip plus "schreef".
-  /\bOp [^\n]{2,60}?\d{1,2}[:.]\d{2}[^\n]{0,90}?schreef\b/.source,
+  // Zonder \b voor "Op": clients plakken de vorige regel eraan vast ("A vd HeuvelOp di 4 aug",
+  // "TukOp wo 5 aug"), precies zoals eerder bij "iPhoneOp". Tijd plus "schreef" samen zijn
+  // onderscheidend genoeg om valse treffers te voorkomen.
+  /Op [^\n]{2,60}?\d{1,2}[:.]\d{2}[^\n]{0,90}?schreef\b/.source,
 ].join('|'), 'i');
 
 /**

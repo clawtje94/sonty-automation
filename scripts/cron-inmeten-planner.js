@@ -682,55 +682,7 @@ async function aanbodApi(pad, opties = {}) {
 async function verwerkAanbiedingen() {
   const state = laadState();
 
-  // 0. mutatie-verzoeken (winkel-knop, AI, klant-reply) — één motor voor alles
-  try {
-    const MUTATIE_API = 'https://sonty-website.vercel.app/api/inmeet-mutatie';
-    const { mutaties } = await (await fetch(MUTATIE_API + '?status=open', { headers: { 'x-meet-code': MEET_CODE } })).json();
-    for (const m of mutaties || []) {
-      // dashboard-verzoeken: direct boeken of keuzelink sturen voor een wachtende lead
-      if (m.type === 'boek' || m.type === 'stuur-aanbod') {
-        try {
-          const uitkomst = await verwerkDashboardVerzoek(m);
-          await fetch(MUTATIE_API, { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE }, body: JSON.stringify({ id: m.id, status: 'verwerkt', uitkomst }) });
-          console.log(`  ${m.type} (${m.bron}): ${uitkomst}`);
-        } catch (e) {
-          await telegram(`⚠️ Dashboard-verzoek ${m.type} mislukt: ${e.message.slice(0, 140)} — verzoek blijft open voor de volgende run.`);
-          console.log(`  ${m.type} MISLUKT: ${e.message}`);
-        }
-        continue;
-      }
-      const { vindBoeking, muteerBoeking } = require('./lib/inmeet-mutatie.js');
-      const boeking = vindBoeking({ telefoon: m.telefoon, email: m.email, naam: m.naam });
-      let uitkomst;
-      if (!boeking) {
-        uitkomst = 'geen actieve boeking gevonden';
-        await telegram(`⚠️ Mutatie-verzoek (${m.bron}, ${m.type}) voor ${m.naam || m.telefoon || m.email}: geen actieve boeking gevonden — handmatig nakijken.`);
-        await fetch(MUTATIE_API, { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE }, body: JSON.stringify({ id: m.id, status: 'afgewezen', uitkomst }) });
-        continue;
-      }
-      const res = await muteerBoeking(boeking.rpItemId, m.type, { reden: m.reden || '', bron: m.bron });
-      uitkomst = res.gelukt ? 'alle systemen bijgewerkt' : 'deels: ' + res.stappen.filter((s2) => !s2.ok).map((s2) => s2.stap).join(',');
-      // klantbericht: bij verzet volgt het nieuwe aanbod vanzelf uit de planner-run;
-      // bij annuleren een nette afscheidsgroet
-      if (m.type === 'annuleer' && (boeking.telefoon || boeking.email)) {
-        try {
-          const { stuurWhatsApp } = require('./lib/aanbod-versturen');
-          const ticket = await require('./lib/aanbod-versturen').zoekWaTicket(boeking.telefoon).catch(() => null);
-          if (ticket) {
-            const TT = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
-            await fetch('https://app.trengo.com/api/v2/tickets/' + ticket.id + '/messages', {
-              method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' },
-              body: JSON.stringify({ message: `Hoi ${(boeking.naam || 'daar').split(' ')[0]}, we hebben de inmeetafspraak geannuleerd. Mocht het later toch weer spelen, dan ben je altijd welkom. Groetjes, Jaimy van Sonty`, type: 'OUTBOUND' }),
-            });
-          }
-        } catch { /* klantbericht is nice-to-have; kantoor kreeg al een melding */ }
-      }
-      await fetch(MUTATIE_API, { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE }, body: JSON.stringify({ id: m.id, status: 'verwerkt', uitkomst }) });
-      console.log(`  mutatie ${m.type} (${m.bron}) ${boeking.naam}: ${uitkomst}`);
-    }
-  } catch (e) {
-    console.log('mutatie-wachtrij niet bereikbaar: ' + e.message);
-  }
+  // mutatie/boek-verzoeken worden door de SNELLE daemon verwerkt (inmeet-verzoek-daemon.js)
   // 1. verlopen aanbiedingen opruimen + melden (de 24-uursklok)
   const { aanbiedingen: open } = await aanbodApi('?status=open');
   for (const a of open) {
@@ -893,8 +845,38 @@ async function verwerkDashboardVerzoek(m) {
   return `geboekt: ${uitkomst.samenvatting}`;
 }
 
-if (process.argv.includes('--verwerk-aanbod')) {
-  verwerkAanbiedingen().catch((e) => { console.error(e); process.exit(1); });
-} else {
-  main().catch((e) => { console.error(e); process.exit(1); });
+/** Eén verzoek uit de wachtrij uitvoeren (daemon-ingang). */
+async function verwerkVerzoek(m) {
+  if (m.type === 'boek' || m.type === 'stuur-aanbod') return verwerkDashboardVerzoek(m);
+  const { vindBoeking, muteerBoeking } = require('./lib/inmeet-mutatie.js');
+  const boeking = vindBoeking({ telefoon: m.telefoon, email: m.email, naam: m.naam });
+  if (!boeking) {
+    await telegram(`⚠️ Mutatie-verzoek (${m.bron}, ${m.type}) voor ${m.naam || m.telefoon || m.email}: geen actieve boeking gevonden — handmatig nakijken.`);
+    return { afgewezen: true, uitkomst: 'geen actieve boeking gevonden' };
+  }
+  const res = await muteerBoeking(boeking.rpItemId, m.type, { reden: m.reden || '', bron: m.bron });
+  if (m.type === 'annuleer' && boeking.telefoon) {
+    try {
+      const { zoekWaTicket } = require('./lib/aanbod-versturen');
+      const ticket = await zoekWaTicket(boeking.telefoon).catch(() => null);
+      if (ticket) {
+        const TT = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
+        await fetch('https://app.trengo.com/api/v2/tickets/' + ticket.id + '/messages', {
+          method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: `Hoi ${(boeking.naam || 'daar').split(' ')[0]}, we hebben de inmeetafspraak geannuleerd. Mocht het later toch weer spelen, dan ben je altijd welkom. Groetjes, Jaimy van Sonty`, type: 'OUTBOUND' }),
+        });
+      }
+    } catch { /* melding naar kantoor is al gedaan */ }
+  }
+  return { afgewezen: false, uitkomst: res.gelukt ? 'alle systemen bijgewerkt' : 'deels: ' + res.stappen.filter((x) => !x.ok).map((x) => x.stap).join(',') };
+}
+
+module.exports = { verwerkVerzoek, haalAgenda, leesLeadCompleet, werkdagenVoor, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram };
+
+if (require.main === module) {
+  if (process.argv.includes('--verwerk-aanbod')) {
+    verwerkAanbiedingen().catch((e) => { console.error(e); process.exit(1); });
+  } else {
+    main().catch((e) => { console.error(e); process.exit(1); });
+  }
 }

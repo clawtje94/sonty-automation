@@ -45,6 +45,7 @@ async function verwerkReken(m) {
   const { schatDuur } = require('./lib/inmeetduur.js');
   const duur = schatDuur(lead.producten);
   const agenda = await planner.haalAgenda();
+  await planner.laadVakanties();
   let beste = [];
   for (const naam of Object.keys(planner.ROOSTER)) {
     if (!planner.ROOSTER[naam].uuidPlanado) continue;

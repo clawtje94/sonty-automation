@@ -240,6 +240,47 @@ async function haalAgenda() {
  * Vrije dagen (Joey wo/vr) vallen weg; startDatum (nieuwe inmeter) wordt gerespecteerd. */
 const ROOSTER = require('../data/inmeters-rooster.json').inmeters;
 const DAGCODE = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
+
+// Vakanties komen NIET uit het rooster maar uit Outlook ("vakantie/verlof/vrij"-
+// afspraken). De sync slaat die bewust over (geen klus), dus zonder deze stap zag de
+// planner een inmeter met vakantie als beschikbaar (gezien 06-08: slot bij Sjoerd
+// op 24 aug, midden in zijn vakantie).
+const VAKANTIES = {}; // naam -> Set('YYYY-MM-DD')
+async function laadVakanties() {
+  try {
+    const token = fs.readFileSync(path.join(__dirname, '.owa-token.txt'), 'utf8').trim();
+    const OH = { Authorization: 'Bearer ' + token };
+    const cal = (((await (await fetch('https://outlook.office.com/api/v2.0/me/calendars', { headers: OH })).json()).value) || [])
+      .find((c) => c.Name === 'Sonty Montage');
+    const van = new Date();
+    const tot = new Date(); tot.setDate(tot.getDate() + 70);
+    let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView`
+      + `?$top=500&$select=Subject,Start,End,IsCancelled,Attendees&startDateTime=${van.toISOString()}&endDateTime=${tot.toISOString()}`;
+    const evs = [];
+    while (url) {
+      const j = await (await fetch(url, { headers: OH })).json();
+      evs.push(...(j.value || []));
+      url = j['@odata.nextLink'] || null;
+    }
+    for (const naam of Object.keys(ROOSTER)) VAKANTIES[naam] = new Set();
+    for (const e of evs) {
+      if (e.IsCancelled || !/vakantie|verlof|\bvrij\b/i.test(e.Subject || '')) continue;
+      const namen = (e.Attendees || []).map((a) => (a.EmailAddress?.Name || '').split(' ')[0]);
+      const wie = Object.keys(ROOSTER).filter((n) => namen.includes(n.split(' ')[0]));
+      const d = new Date(e.Start.DateTime + 'Z');
+      const eind = new Date(e.End.DateTime + 'Z');
+      while (d < eind) {
+        for (const n of wie) VAKANTIES[n].add(d.toISOString().slice(0, 10));
+        d.setDate(d.getDate() + 1);
+      }
+    }
+    const telling = Object.entries(VAKANTIES).map(([n, v]) => `${n}: ${v.size}`).join(', ');
+    console.log(`  vakantie-dagen geblokkeerd — ${telling}`);
+  } catch (e) {
+    console.log('  ! vakanties niet op te halen (' + e.message.slice(0, 60) + ') — voorzichtigheidshalve GEEN aanbod doen');
+    throw new Error('vakanties onbekend: niet plannen');
+  }
+}
 function werkdagenVoor(inmeterNaam, aantal = 10) {
   const vast = ROOSTER[inmeterNaam]?.dagen;
   const startDatum = ROOSTER[inmeterNaam]?.startDatum;
@@ -251,8 +292,10 @@ function werkdagenVoor(inmeterNaam, aantal = 10) {
     bekeken++;
     const code = DAGCODE[d.getDay()];
     const blok = vast?.[code];
-    const naStart = !startDatum || d.toISOString().slice(0, 10) >= startDatum;
-    if (blok && naStart) dagen.push({ datum: d.toISOString().slice(0, 10), van: blok.van, tot: blok.tot });
+    const datum = d.toISOString().slice(0, 10);
+    const naStart = !startDatum || datum >= startDatum;
+    const vakantie = VAKANTIES[inmeterNaam]?.has(datum);
+    if (blok && naStart && !vakantie) dagen.push({ datum, van: blok.van, tot: blok.tot });
     d.setDate(d.getDate() + 1);
   }
   return dagen;
@@ -409,6 +452,7 @@ async function main() {
   items.sort((a, b) => state.gezien[a.id].localeCompare(state.gezien[b.id]));
 
   const agenda = await haalAgenda();
+  await laadVakanties();
 
   // lopende aanbiedingen: slots bezetten + die leads overslaan
   const lopendeLeads = new Set();
@@ -796,6 +840,7 @@ async function verwerkDashboardVerzoek(m) {
   if (lead.ambigu) throw new Error(`${lead.aantalDocs} offerteversies, geen getekend — klant moet eerst tekenen`);
   const duur = schatDuur(lead.producten);
   const agenda = await haalAgenda();
+  await laadVakanties();
 
   if (m.type === 'stuur-aanbod') {
     let beste = [];
@@ -875,7 +920,7 @@ async function verwerkVerzoek(m) {
   return { afgewezen: false, uitkomst: res.gelukt ? 'alle systemen bijgewerkt' : 'deels: ' + res.stappen.filter((x) => !x.ok).map((x) => x.stap).join(',') };
 }
 
-module.exports = { verwerkVerzoek, haalAgenda, leesLeadCompleet, werkdagenVoor, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram };
+module.exports = { verwerkVerzoek, haalAgenda, leesLeadCompleet, werkdagenVoor, laadVakanties, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram };
 
 if (require.main === module) {
   if (process.argv.includes('--verwerk-aanbod')) {

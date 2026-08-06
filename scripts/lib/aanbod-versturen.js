@@ -87,12 +87,25 @@ async function stuurWhatsAppTemplate(aanbod, url) {
     return { ok: false, reden: 'lege tijden in het template — NIET verstuurd (slots ontbreken)' };
   }
   const params = hsm ? basis : [...basis, { type: 'body', key: '{{5}}', value: url }];
-  const r = await tFetch('/wa_sessions', {
-    method: 'POST',
-    body: JSON.stringify({ recipient_phone_number: '+' + tel, hsm_id: hsm || TEMPLATE_HSM, channel_id: WA_KANAAL, params }),
-  });
+  // In het BESTAANDE gesprek sturen als dat er is (Daimy 06-08: Carlo's template
+  // opende een tweede, naamloos gesprek en was onvindbaar). wa_sessions accepteert
+  // ticket_id i.p.v. recipient_phone_number; dan blijft alles in één thread.
+  let bestaandTicket = null;
+  try {
+    const zoek = await tFetch(`/tickets?term=${tel.slice(-9)}`, { method: 'GET' });
+    if (zoek.ok) {
+      const hit = ((await zoek.json())?.data || []).find(
+        (tk) => tk.channel?.type === 'WA_BUSINESS' && tk.status !== 'CLOSED',
+      );
+      bestaandTicket = hit?.id || null;
+    }
+  } catch { /* zoeken mislukt: dan gewoon op nummer */ }
+  const body = bestaandTicket
+    ? { ticket_id: bestaandTicket, hsm_id: hsm || TEMPLATE_HSM, params }
+    : { recipient_phone_number: '+' + tel, hsm_id: hsm || TEMPLATE_HSM, channel_id: WA_KANAAL, params };
+  const r = await tFetch('/wa_sessions', { method: 'POST', body: JSON.stringify(body) });
   if (!r.ok) return { ok: false, reden: `template: Trengo ${r.status} (nog niet door Meta goedgekeurd?)` };
-  return { ok: true, via: hsm ? (aanbod.ver ? 'template-ver' : 'template') : 'template (oud)' };
+  return { ok: true, via: hsm ? (aanbod.ver ? 'template-ver' : 'template') : 'template (oud)', ticket: bestaandTicket };
 }
 
 async function stuurWhatsApp(aanbod, url) {
@@ -221,7 +234,7 @@ if (require.main === module) {
     const token = process.argv[2];
     if (!token) { console.error('gebruik: node aanbod-versturen.js <token>'); process.exit(1); }
     const r = await fetch('https://sonty-website.vercel.app/api/inmeet-aanbod?status=open', {
-      headers: { 'x-meet-code': process.env.BELSCHERM_CODE || 'sonty2288' },
+      headers: { 'x-meet-code': process.env.BELSCHERM_CODE || '2288' },
     });
     const { aanbiedingen } = await r.json();
     const aanbod = (aanbiedingen || []).find((a) => a.token === token);

@@ -123,7 +123,7 @@ const TOOL_DEFS = [
   },
   {
     name: 'inmeet_afspraak_voorstellen',
-    description: 'Zet het inmeet-traject in gang zodra de klant akkoord geeft: het Reuzenpanda-item wordt verplaatst naar de kolom "Inmeten inplannen", waarna de planning binnen 3 werkdagen contact opneemt om de afspraak te maken. Dit is de closing van elk gesprek. LET OP: klanten kunnen NOOIT zelf een inmeetafspraak plannen, stuur dus nooit een boekingslink voor inmeten. Het itemId haal je uit klant_opzoeken.',
+    description: 'Zet het inmeet-traject in gang zodra de klant akkoord geeft: het Reuzenpanda-item wordt verplaatst naar de kolom "Inmeten inplannen", waarna de planning binnen 5 werkdagen contact opneemt om de afspraak te maken. Dit is de closing van elk gesprek. LET OP: klanten kunnen NOOIT zelf een inmeetafspraak plannen, stuur dus nooit een boekingslink voor inmeten. Het itemId haal je uit klant_opzoeken.',
     input_schema: {
       type: 'object',
       properties: {
@@ -359,7 +359,7 @@ function raaktAnderPrijsboek(ctx, input) {
       ctx.acties.push({ type: 'inmeet_afspraak', ...input, akkoordBron: `offerte ${getekendeOfferte} is ondertekend` });
       return JSON.stringify({
         status: 'DOORGEZET',
-        opmerking: `De klant heeft offerte ${getekendeOfferte} al online ondertekend, dus het akkoord staat vast. Het dossier gaat naar Inmeten inplannen. Zeg NIET meer "zodra je akkoord geeft" — bevestig gewoon dat het geregeld is en dat de planning binnen 3 werkdagen belt.`,
+        opmerking: `De klant heeft offerte ${getekendeOfferte} al online ondertekend, dus het akkoord staat vast. Het dossier gaat naar Inmeten inplannen. Zeg NIET meer "zodra je akkoord geeft" — bevestig gewoon dat het geregeld is en dat de planning binnen 5 werkdagen belt.`,
       });
     }
 
@@ -398,9 +398,9 @@ function raaktAnderPrijsboek(ctx, input) {
         body: JSON.stringify({ item: { status_id: CFG.RP_STATUS_INMETEN_INPLANNEN } }),
       });
       if (!res.ok) return JSON.stringify({ status: 'MISLUKT', opmerking: 'Status verplaatsen lukte niet. Zeg dat een collega het oppakt en roep escaleren_naar_mens aan.' });
-      return JSON.stringify({ status: 'DOORGEVOERD', opmerking: `Item staat nu op "Inmeten inplannen"${input.notitie ? ' en je notitie voor de planner is in Reuzenpanda bij het dossier gezet' : ''}. Vertel de klant: de planning neemt binnen 3 werkdagen contact op om de inmeetafspraak te maken. GEEN boekingslink sturen.` });
+      return JSON.stringify({ status: 'DOORGEVOERD', opmerking: `Item staat nu op "Inmeten inplannen"${input.notitie ? ' en je notitie voor de planner is in Reuzenpanda bij het dossier gezet' : ''}. Vertel de klant: de planning neemt binnen 5 werkdagen contact op om de inmeetafspraak te maken. GEEN boekingslink sturen.` });
     }
-    return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets verplaatst. Vertel de klant dat de planning binnen 3 werkdagen contact opneemt om de afspraak te maken. GEEN boekingslink sturen (die is alleen voor showroombezoek).' });
+    return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets verplaatst. Vertel de klant dat de planning binnen 5 werkdagen contact opneemt om de afspraak te maken. GEEN boekingslink sturen (die is alleen voor showroombezoek).' });
   }
   if (name === 'offerte_aanmaken') {
     if (raaktAnderPrijsboek(ctx, input)) {

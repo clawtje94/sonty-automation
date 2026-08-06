@@ -1,10 +1,12 @@
 #!/usr/bin/env node
-// Reply-monitor voor keuzelink-berichten (Daimy 06-08: "lees jij dan 100% uit wat ze
-// antwoorden en rapporteer je dat naar mij?"). Elke 10 minuten: voor elk verstuurd
-// aanbod de bijbehorende Trengo-gesprekken nalopen (WhatsApp-ticket, mail-ticket, en
-// als vangnet het WhatsApp-gesprek op telefoonnummer). Elk NIEUW klantbericht na het
-// versturen gaat letterlijk naar Daimy op Telegram, mét de aanbod-status erbij.
-// Geen AI-interpretatie: 100% doorgeven, dedup per bericht-id.
+// Reply-monitor voor keuzelink-berichten (Daimy 06-08). Twee taken:
+// 1. KEUZE UITLEZEN op WhatsApp (Daimy: "lees jij gewoon op WhatsApp de keuze uit en
+//    voer je die door en stuur je een bevestiging?"): antwoordt de klant "1", "2" of
+//    "3" (of een dag die precies bij één optie past) op een OPEN aanbod, dan wordt de
+//    keuze vastgelegd (zelfde route als de keuzepagina), boekt de verwerker alles
+//    door, en krijgt de klant direct een WhatsApp-bevestiging in het gesprek.
+// 2. Al het andere gaat letterlijk naar Daimy op Telegram — geen AI-gok, dedup per
+//    bericht. Mail houdt gewoon de keuzelink.
 const fs = require('fs');
 const path = require('path');
 
@@ -19,6 +21,36 @@ async function telegram(tekst) {
   await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ chat_id: 1700128390, text: tekst.slice(0, 3900) }),
+  }).catch(() => {});
+}
+
+const DAGEN = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
+const DAGK = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
+
+/** Welke optie kiest dit bericht? 1/2/3, "optie 2", of een dagnaam die precies één slot matcht. */
+function leesKeuze(tekst, slots) {
+  const t = String(tekst || '').toLowerCase().trim();
+  const num = t.match(/^(?:optie\s*)?([123])\b[.!)]?$/) || t.match(/\boptie\s*([123])\b/);
+  if (num) return Number(num[1]) - 1;
+  // dagnaam ("dinsdag" / "di") die precies bij één van de aangeboden slots past
+  const perDag = slots.map((sl, i) => ({ i, dag: new Date(sl.aankomst).getDay() }));
+  for (let d = 0; d < 7; d++) {
+    if (!new RegExp(`\\b(${DAGEN[d]}|${DAGK[d]})\\b`).test(t)) continue;
+    const passend = perDag.filter((x) => x.dag === d);
+    if (passend.length === 1) return passend[0].i;
+  }
+  return null;
+}
+
+async function stuurWaBevestiging(ticketId, naam, slot) {
+  const d = new Date(slot.aankomst);
+  const dag = d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
+  const van = d.toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  const tot = new Date(+d + 30 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  const tekst = `Top! Genoteerd: ${dag} tussen ${van} en ${tot} komt onze inmeter ${slot.inmeter} bij je langs. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty`;
+  await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages`, {
+    method: 'POST', headers: { ...TH, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: tekst, type: 'OUTBOUND' }),
   }).catch(() => {});
 }
 
@@ -75,6 +107,27 @@ async function main() {
         gemeld[sleutel] = new Date().toISOString();
         meldingen++;
         const tekst = String(m.body_plain || m.message || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 400);
+
+        // WhatsApp-keuze automatisch doorvoeren (alleen op een nog OPEN aanbod)
+        if (statusPer[token] === 'open') {
+          try {
+            const rA = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': MEET_CODE } });
+            const aanbod = rA.ok ? await rA.json() : null;
+            const keuze = aanbod ? leesKeuze(tekst, aanbod.slots || []) : null;
+            if (keuze !== null) {
+              const rK = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, {
+                method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+                body: JSON.stringify({ status: 'gekozen', gekozenIndex: keuze }),
+              });
+              if (rK.ok) {
+                await stuurWaBevestiging(ticketId, info.naam, aanbod.slots[keuze]);
+                await telegram(`✅ ${info.naam} koos via WhatsApp optie ${keuze + 1} ("${tekst.slice(0, 40)}") — wordt automatisch geboekt, bevestiging is al gestuurd.`);
+                statusPer[token] = 'gekozen';
+                continue;
+              }
+            }
+          } catch { /* uitlezen mislukt: dan gewoon rapporteren */ }
+        }
         await telegram(`💬 REACTIE op keuzelink van ${info.naam} (aanbod: ${statusPer[token] || 'onbekend'}, ticket ${ticketId}):\n\n"${tekst || '(leeg/bijlage)'}"`);
       }
     }

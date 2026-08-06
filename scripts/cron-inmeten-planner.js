@@ -826,11 +826,15 @@ async function verwerkAanbiedingen() {
         continue;
       }
       const uitkomst = await verwerkLead(lead, null, gekozenSlot, a.duurMin);
-      // klant krijgt direct een bevestiging (mail + WhatsApp)
+      // bevestiging alleen als de schakelaar aan staat (Daimy 06-08: zolang de
+      // afspraak via Outlook wordt gezet is die uitnodiging al de bevestiging)
       try {
-        const { verstuurBevestiging } = require('./lib/aanbod-versturen');
-        const b = await verstuurBevestiging(a, { aankomst: slot.aankomst, inmeter: slot.inmeter });
-        if (!b.ergensGelukt) await telegram(`⚠️ Bevestiging naar ${a.lead.naam} niet bezorgd (wa: ${b.wa.reden}, mail: ${b.mail.reden}) — even handmatig bevestigen.`);
+        const inst2 = await require('./lib/instellingen.js').haalInstellingen();
+        if (inst2.bevestigingSturen) {
+          const { verstuurBevestiging } = require('./lib/aanbod-versturen');
+          const b = await verstuurBevestiging(a, { aankomst: slot.aankomst, inmeter: slot.inmeter });
+          if (!b.ergensGelukt) await telegram(`⚠️ Bevestiging naar ${a.lead.naam} niet bezorgd (wa: ${b.wa.reden}, mail: ${b.mail.reden}) — even handmatig bevestigen.`);
+        }
       } catch (e) {
         await telegram(`⚠️ Bevestiging naar ${a.lead.naam} mislukt: ${e.message.slice(0, 100)}`);
       }
@@ -935,8 +939,11 @@ async function verwerkDashboardVerzoek(m) {
   }
   await verwijderRekenKaart(item.id);
   try {
-    const { verstuurBevestiging } = require('./lib/aanbod-versturen');
-    await verstuurBevestiging({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin: duur }, { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter });
+    const inst2 = await require('./lib/instellingen.js').haalInstellingen();
+    if (inst2.bevestigingSturen) {
+      const { verstuurBevestiging } = require('./lib/aanbod-versturen');
+      await verstuurBevestiging({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin: duur }, { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter });
+    }
   } catch { /* bevestiging is nice-to-have; kantoor boekt met klant aan de lijn */ }
   await telegram(`✅ Inmeetafspraak GEBOEKT via dashboard (${m.bron}): ${lead.naam} — ${new Date(m.slot.aankomst).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' })} bij ${m.slot.inmeter}.\n${uitkomst.samenvatting}`);
   return `geboekt: ${uitkomst.samenvatting}`;

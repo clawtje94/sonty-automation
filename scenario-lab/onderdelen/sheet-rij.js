@@ -8,10 +8,10 @@
 const { combinaties } = require('../matrix.js');
 const { vindRijEnKolommen } = require('../../scripts/lib/sheet-inplannen.js');
 
-function maakTab(titel, verschuif, klantRij) {
+function maakTab(titel, verschuif, klantRij, zonderRpKolom) {
   const kop = Array(30).fill('');
   kop[2] = 'Naam klant';
-  kop[6 + verschuif] = 'RP offerte';
+  kop[6 + verschuif] = zonderRpKolom ? '€ 2,00' : 'RP offerte'; // Jan 2026 heeft een kapotte kop
   kop[10 + verschuif] = 'Telefoon nummer';
   kop[19 + verschuif] = 'Nummer';
   kop[22 + verschuif] = 'inkooop incl btw';
@@ -47,6 +47,7 @@ const dimensies = [
       { label: 'normale-kolommen', verschuif: 0, titel: 'Aug 2026' },
       { label: 'verschoven-kolommen', verschuif: 1, titel: 'Juli 2026' },
       { label: 'trailing-spatie-titel', verschuif: 0, titel: 'Juni 2026 ' },
+      { label: 'oude-tab-kapotte-rp-kop', verschuif: 0, titel: 'Jan 2026', zonderRp: true },
     ],
   },
 ];
@@ -54,9 +55,19 @@ const dimensies = [
 module.exports = {
   naam: 'sheet-rij (offerte-sheet: rij vinden zonder naam-koppeling)',
   scenarios: () => combinaties(dimensies),
-  orakel: (s) => ({ wil: s['klant-in-sheet'].wil }),
+  orakel: (s) => {
+    const k = s['klant-in-sheet'];
+    if (s.tab.zonderRp && k.wil === 'gevonden') {
+      // zonder RP-kolom telt alleen telefoon of Gripp-nummer als sleutel
+      const telMatch = k.zoek.telefoon && k.rij?.telefoon
+        && String(k.rij.telefoon).replace(/\D/g, '').slice(-9) === String(k.zoek.telefoon).replace(/\D/g, '').slice(-9);
+      const grippMatch = k.zoek.grippNr && k.rij?.nummer && String(k.rij.nummer).replace(/\D/g, '') === String(k.zoek.grippNr);
+      return { wil: telMatch || grippMatch ? 'gevonden' : 'niks' };
+    }
+    return { wil: k.wil };
+  },
   voerUit: async (s) => {
-    const tab = maakTab(s.tab.titel, s.tab.verschuif, s['klant-in-sheet'].rij);
+    const tab = maakTab(s.tab.titel, s.tab.verschuif, s['klant-in-sheet'].rij, s.tab.zonderRp);
     const plek = vindRijEnKolommen([tab], s['klant-in-sheet'].zoek);
     // niet gevonden is zichtbaar: de schrijver maakt dan een nieuwe rij én meldt het
     return { plek, melding: plek === null };

@@ -58,37 +58,48 @@ async function sheetsClient() {
   return google.sheets({ version: 'v4', auth });
 }
 
-/** Recente maandtabs (huidige + 5 vorige — offertes rijpen mediaan ~24 dagen, en oudere leads bestaan), nieuwste eerst. */
-async function recenteTabs(sheets) {
+/**
+ * Maandtabs in zoek-volgorde: eerst de maanden van de OFFERTEDATUMS (daar staat de
+ * rij — les Marjolein Nunnink: offerte 30 jan, rij in "Jan 2026"), dan de recente
+ * 3 maanden, dan ALLE overige maandtabs als vangnet. Dubbelen eruit, volgorde blijft.
+ */
+async function tabsInZoekvolgorde(sheets, docDatums = []) {
   const meta = await sheets.spreadsheets.get({ spreadsheetId: SHEET_ID, fields: 'sheets.properties.title' });
-  const nu = new Date();
-  const doel = [];
-  for (let terug = 0; terug < 6; terug++) {
-    const d = new Date(nu.getFullYear(), nu.getMonth() - terug, 1);
-    doel.push({ maand: MAANDEN[d.getMonth()], jaar: String(d.getFullYear()) });
-  }
   const titels = meta.data.sheets.map((s) => s.properties.title);
-  const gekozen = [];
-  for (const { maand, jaar } of doel) {
-    const titel = titels.find((t) => t.toLowerCase().trim().startsWith(maand) && t.includes(jaar));
-    if (titel) gekozen.push(titel);
+  const isMaandtab = (t) => MAANDEN.some((m) => t.toLowerCase().trim().startsWith(m)) && /20\d\d/.test(t)
+    && !/alles bij elkaar/i.test(t);
+  const vindTab = (d) => titels.find((t) => t.toLowerCase().trim().startsWith(MAANDEN[d.getMonth()]) && t.includes(String(d.getFullYear())));
+  const volgorde = [];
+  for (const ts of docDatums) {
+    const t = vindTab(new Date(ts));
+    if (t) volgorde.push(t);
   }
-  return gekozen;
+  const nu = new Date();
+  for (let terug = 0; terug < 3; terug++) {
+    const t = vindTab(new Date(nu.getFullYear(), nu.getMonth() - terug, 1));
+    if (t) volgorde.push(t);
+  }
+  for (const t of titels) if (isMaandtab(t)) volgorde.push(t);
+  return [...new Set(volgorde)];
 }
 
 /**
  * Schrijf de inplanning. Geeft { gevonden: bool, tab, rij } terug.
  * datum als 'dd-mm-jjjj', inmeter als voornaam.
  */
-async function schrijfInplanning({ rpNummers = [], grippNr, naam, telefoon, inmeetDatum, inmeter }) {
+async function schrijfInplanning({ rpNummers = [], grippNr, naam, telefoon, inmeetDatum, inmeter, docDatums = [] }) {
   const sheets = await sheetsClient();
-  const titels = await recenteTabs(sheets);
+  const titels = await tabsInZoekvolgorde(sheets, docDatums);
+  // tabs lui laden: zodra de rij gevonden is stoppen we met lezen
   const tabs = [];
+  let plek = null;
   for (const titel of titels) {
     const res = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: `'${titel}'!A1:AH6000` });
-    tabs.push({ titel, rijen: res.data.values || [] });
+    const tab = { titel, rijen: res.data.values || [] };
+    tabs.push(tab);
+    plek = vindRijEnKolommen([tab], { rpNummers, grippNr, telefoon });
+    if (plek) break;
   }
-  const plek = vindRijEnKolommen(tabs, { rpNummers, grippNr, telefoon });
 
   if (plek) {
     const rijNr = plek.rijIndex + 1; // sheet is 1-based
@@ -128,4 +139,4 @@ async function schrijfInplanning({ rpNummers = [], grippNr, naam, telefoon, inme
   return { gevonden: false, tab: tab.titel, rij: 'nieuw' };
 }
 
-module.exports = { schrijfInplanning, vindRijEnKolommen };
+module.exports = { schrijfInplanning, vindRijEnKolommen, tabsInZoekvolgorde };

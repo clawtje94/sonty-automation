@@ -56,7 +56,7 @@ function parseDocument(full) {
  * - meerdere documenten, geen ACCEPTED → ambigu=true, producten=[]
  */
 async function leesOfferte(item) {
-  const leeg = { producten: [], status: null, ambigu: false, aantalDocs: 0, nummers: [] };
+  const leeg = { producten: [], status: null, ambigu: false, aantalDocs: 0, nummers: [], datums: [] };
   const lcId = item.item_subject?.id;
   if (!lcId) return leeg;
   try {
@@ -69,12 +69,14 @@ async function leesOfferte(item) {
       String(d.quotationNumber || '').replace(/\D/g, ''),
       String(d.documentTitle || d.title || '').replace(/\D/g, ''),
     ]).filter((n) => n.length >= 6))];
+    // offertedatums: de sheet-rij staat in de maandtab van de OFFERTEDATUM (Daimy 06-08)
+    const datums = lijst.map((d) => d.quotationCreationTimestamp).filter(Boolean);
     const geaccepteerd = lijst.filter((d) => (d.quotationStatus || d.documentStatus) === 'ACCEPTED')
       .sort((a, b) => (b.quotationCreationTimestamp || 0) - (a.quotationCreationTimestamp || 0));
     let keuze = null;
     if (geaccepteerd.length) keuze = geaccepteerd[0];
     else if (lijst.length === 1) keuze = lijst[0];
-    else return { producten: [], status: null, ambigu: true, aantalDocs: lijst.length, nummers };
+    else return { producten: [], status: null, ambigu: true, aantalDocs: lijst.length, nummers, datums };
 
     const full = await rpGet(`/document-service/v1/${PID}/quotations/${keuze.documentId}`);
     return {
@@ -83,6 +85,7 @@ async function leesOfferte(item) {
       ambigu: false,
       aantalDocs: lijst.length,
       nummers,
+      datums,
     };
   } catch {
     return leeg;

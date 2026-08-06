@@ -74,6 +74,14 @@
 - Planning-afzender = Nanny (memory feedback_planning_afzender); planning@-Trengo-kanaal maakt Daimy later aan, id dan in data/planning-kanaal.txt.
 - Boekingsketen E2E met Daimy zelf bewezen: keuzelink, keuze, Planado #420 + Outlook + RP + sheet juni-r357 (telefoon-match op zijn testrij) + boekingsrecord + bevestiging. WA-template 243999 nog PENDING bij Meta; beleid = template eerst, vrij bericht vangnet.
 
+## REPLIES + SAMENLOOP + MELDINGEN-AUDIT (6 aug slot)
+- **Reply-monitor** nl.sonty.aanbod-replies (10 min): elk klantantwoord op een keuzelink letterlijk naar Daimy (ticket-ids per aanbod in state.aanbodTickets + telefoon-vangnet, dedup per bericht). Geen AI ertussen.
+- **Samenloop-fix**: voegAanbiedingenToe() — ook losse stuur-aanbod/boek-routes tellen openstaande aanbiedingen als bezet; 1 aanbod per klant; daemon strikt sequentieel. Massaal keuzelinks sturen is nu veilig.
+- **Showroom-beleid Daimy**: losse Bookings-afspraak blokkeert NIET (winkel vangt op); alleen JOEY WINKEL-dienstblokken blokkeren. Bookings-blok uit haalAgenda verwijderd.
+- Meldingen-audit: wees-dedup (eenmalig, mét naam), wachtlijst opgepakt-detectie (notitie na klantbericht) + eenmaal-per-bericht, webflow niet naar Mens nodig, Koeleman-dedup-fix (opExtId over ALLE jobs — verplaatsing uit het verleden), planhorizon 15 roosterdagen. 3 verouderde JOEY WINKEL-wezen verwijderd; Dimashi Sigera (15/9, uit Outlook verdwenen) wacht op kantoor.
+- Quinten de Bondt #431: RP-lead heet Megan de Bondt en staat nog op Offerte verstuurd → keten kan pas vullen na status-doorzet (kantoor gevraagd); telefoons al op de job.
+- **gripp-invullen van 1x/dag (18:00) naar 7x/dag (08:30-20:00)** — anders duurde keuze→Gripp-offerte tot een dag.
+
 ## INSTELLINGEN-HUB ECHT AANGESLOTEN + ROADMAP (6 aug eind)
 - **3 dode knoppen gerepareerd** (inventaris-agent ving het): maxOmrijdenMin + contactDeadlineDagen (via kiesAanbod-opts), aanbodGeldigUren (aanbod-API verlooptOp + Outlook-optie-vervaltijd + klanttekst "De tijden staan X uur vast" beweegt mee). lib/instellingen.js = centrale lezer (60s cache, defaults). Nieuw veld bevestigingSturen (standaard UIT — Outlook-uitnodiging is de bevestiging; schakelaar op de instellingen-pagina).
 - Admin-menu: 3 planning-tegels bovenaan (dashboard / afspraak wijzigen / instellingen). Keuzepagina /inmeten: cookiebanner onderdrukt → 0 uitgaande links (live gemeten) zolang het vercel-domein is.

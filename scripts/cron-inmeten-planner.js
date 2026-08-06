@@ -223,40 +223,9 @@ async function haalAgenda() {
       adres,
     });
   }
-  // SHOWROOM-BOEKINGEN (Daimy 06-08: "Joey wordt voor de showroom geboekt, kan dubbel
-  // met een inmeting"): MS Bookings staat los van de Sonty Montage-agenda, dus zonder
-  // deze stap ziet de planner die afspraken niet. Zelfde blokken-vorm, winkeladres
-  // als anker. Falen = melding maar geen stop (winkeldienst-blokken dekken veel al).
-  try {
-    const bookings = require('./bookings-api.js');
-    const st = await bookings.staff();
-    const staffNaarInmeter = {};
-    for (const lid of st) {
-      const voornaam = String(lid.naam || lid.displayName || '').split(' ')[0];
-      if (INMETERS.some((i) => i.naam === voornaam)) staffNaarInmeter[lid.id] = voornaam;
-    }
-    const af = await bookings.afspraken(undefined, {
-      start: new Date().toISOString(),
-      end: new Date(Date.now() + 56 * 86400000).toISOString(),
-    });
-    let showroomBlokken = 0;
-    for (const a of af || []) {
-      for (const sid of a.staffIds || []) {
-        const naam = staffNaarInmeter[sid];
-        if (!naam) continue;
-        perInmeter[naam].push({
-          start: a.start, eind: a.eind,
-          adres: a.locatie || 'Frijdastraat 8F, 2288 EZ Rijswijk',
-          klant: 'showroom ' + (a.klant || ''),
-        });
-        showroomBlokken++;
-      }
-    }
-    console.log(`  showroom-boekingen als bezet meegenomen: ${showroomBlokken}`);
-  } catch (e) {
-    console.log('  ! Bookings niet leesbaar (' + e.message.slice(0, 70) + ')');
-    await telegram(`⚠️ Inmeet-planner: showroom-agenda (Bookings) niet leesbaar — dubbelboeking met showroomafspraken is nu niet uitgesloten. Fout: ${e.message.slice(0, 100)}`);
-  }
+  // Losse showroom-boekingen (Bookings) blokkeren BEWUST NIET (Daimy 06-08:
+  // "een losse showroomafspraak van een half uur hoeft niet geblokkeerd te worden" —
+  // de winkel vangt die op; alleen een JOEY WINKEL-dienstblok blokkeert inmetingen).
 
   // dekkinsgcontrole: als de detail-stap >20% van de lijst liet vallen is de agenda
   // onbetrouwbaar en mag er NIET op gepland worden
@@ -493,23 +462,9 @@ async function main() {
   const inst = await require('./lib/instellingen.js').haalInstellingen();
 
   // lopende aanbiedingen: slots bezetten + die leads overslaan
-  const lopendeLeads = new Set();
+  let lopendeLeads;
   try {
-    for (const status of ['open', 'gekozen']) {
-      const rAanbod = await fetch(`${AANBOD_API}?status=${status}`, { headers: { 'x-meet-code': MEET_CODE } });
-      if (!rAanbod.ok) throw new Error(`aanbod-register HTTP ${rAanbod.status} — een 401 was eerder een STILLE nul`);
-      const { aanbiedingen } = await rAanbod.json();
-      for (const a of aanbiedingen || []) {
-        lopendeLeads.add(a.lead.rpItemId);
-        const slots = status === 'gekozen' ? [a.slots[a.gekozenIndex]] : a.slots;
-        for (const sl of slots) {
-          (agenda[sl.inmeter] || []).push({
-            start: sl.aankomst, eind: sl.vertrek,
-            adres: a.lead.volledigAdres, klant: `aanbod ${a.lead.naam}`,
-          });
-        }
-      }
-    }
+    lopendeLeads = await voegAanbiedingenToe(agenda);
     console.log(`  (${lopendeLeads.size} lead(s) met lopend aanbod: slots bezet, lead overgeslagen)`);
   } catch (e) {
     console.log(`  ! aanbod-register niet bereikbaar (${e.message}) — VEILIGHEIDSSTOP, anders dreigt dubbel aanbod`);
@@ -735,6 +690,17 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin) {
   const { verstuurAanbod } = require('./lib/aanbod-versturen');
   const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren }, url);
   if (!verzonden.wa.ok && !verzonden.mail.ok) throw new Error(`niet bezorgd (wa: ${verzonden.wa.reden}, mail: ${verzonden.mail.reden})`);
+  // ticket-ids bewaren zodat de reply-monitor ELK antwoord kan uitlezen (Daimy 06-08:
+  // "lees jij dan 100% uit wat ze antwoorden en rapporteer je dat?")
+  try {
+    const st2 = laadState();
+    st2.aanbodTickets = { ...(st2.aanbodTickets || {}), [token]: {
+      naam: lead.naam, telefoon: lead.telefoon || null,
+      waTicket: verzonden.wa.ticket || null, mailTicket: verzonden.mail.ticket || null,
+      verstuurdOp: new Date().toISOString(),
+    } };
+    bewaarState(st2);
+  } catch { /* monitor valt dan terug op telefoon-zoeken */ }
   // opties zichtbaar maken voor het kantoor (Outlook), zodat niemand erdoorheen plant
   try {
     const { maakOpties } = require('./lib/outlook-opties.js');
@@ -874,6 +840,30 @@ async function verwerkAanbiedingen() {
   bewaarState(state);
 }
 
+/** Openstaande en gekozen aanbiedingen als bezette blokken aan de agenda toevoegen.
+ * Cruciaal voor ELKE route die tijden uitrekent of boekt: zonder dit kunnen twee
+ * klanten dezelfde tijd aangeboden krijgen (Daimy 06-08: "als ik nu iedereen
+ * tegelijk dat bericht stuur, kloppen die tijden dan nog?"). */
+async function voegAanbiedingenToe(agenda) {
+  const lopendeLeads = new Set();
+  for (const status of ['open', 'gekozen']) {
+    const rAanbod = await fetch(`${AANBOD_API}?status=${status}`, { headers: { 'x-meet-code': MEET_CODE } });
+    if (!rAanbod.ok) throw new Error(`aanbod-register HTTP ${rAanbod.status} — een 401 was eerder een STILLE nul`);
+    const { aanbiedingen } = await rAanbod.json();
+    for (const a of aanbiedingen || []) {
+      lopendeLeads.add(a.lead.rpItemId);
+      const slots = status === 'gekozen' ? [a.slots[a.gekozenIndex]] : a.slots;
+      for (const sl of slots) {
+        (agenda[sl.inmeter] || []).push({
+          start: sl.aankomst, eind: sl.vertrek,
+          adres: a.lead.volledigAdres, klant: `aanbod ${a.lead.naam}`,
+        });
+      }
+    }
+  }
+  return lopendeLeads;
+}
+
 /** Reken-kaart van het dashboard halen zodra een lead geboekt is (bleef anders 45 min hangen). */
 async function verwijderRekenKaart(rpItemId) {
   await fetch('https://sonty-website.vercel.app/api/inmeet-dashboard', {
@@ -894,6 +884,8 @@ async function verwerkDashboardVerzoek(m) {
   const duur = schatDuur(lead.producten);
   const agenda = await haalAgenda();
   await laadVakanties();
+  const lopende = await voegAanbiedingenToe(agenda); // andermans aangeboden tijden zijn bezet
+  if (m.type === 'stuur-aanbod' && lopende.has(item.id)) throw new Error('deze klant heeft al een lopend aanbod — geen tweede sturen');
 
   if (m.type === 'stuur-aanbod') {
     let beste = [];

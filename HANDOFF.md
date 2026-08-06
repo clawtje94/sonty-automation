@@ -67,6 +67,13 @@
 - **EINDSTAND 5 aug ±23:30 (alles gemeld aan Daimy)**: 164/164 herbouwd met juist type (volgnummers veranderd: testopdracht #83→#398, morgen=#395–#407); sync-controle na herbouw 168/168, 0 dubbel, 0 wees; kruischeck: 34 klopten, 58 velden op RP-versie gezet (38 = alleen naamverschil), **9 echte prijsafwijkingen Gripp vs getekend** (o.a. Alexandra Kassing morgen 11.250 vs 9.250; Max Beije #375 hangt vermoedelijk aan een OUDE Gripp-offerte 4372) en **5 klanten met inmeetafspraak die nog geen enkele offerteversie tekenden** (de Gunst #347, Haakman #290, Burke #287, Morgun #270, van Luxemburg #262) → kantoor. Lijsten in /tmp/prijsafwijkingen.json + /tmp/kruischeck.log.
 - **LET OP herbouw-gevolgen**: rescue-data in data/herbouw-rescue.jsonl; aanbod-register/meetbon verwijzen op Gripp-nr (ongewijzigd), maar alles wat oude Planado-uuid's of serials bewaarde is verouderd.
 
+## INSTELLINGEN + HERINNERINGEN + SHOWROOM-GAT (6 aug middag)
+- **/admin/inmeet-instellingen** (LIVE): herinneringsmomenten (standaard 7+1 dagen vooraf), keuzelink-geldigheid, contact-deadline, max omrijden — winkel stelt zelf in, crons lezen elke run via /api/inmeet-instellingen (KV, defaults in route).
+- Herinneringen-cron: loopt alle momenten af, dedup per job+moment, week-tekst vs dag-tekst. Dry-run bewezen op echte afspraken.
+- **SHOWROOM-DUBBELBOEKINGSGAT (Daimy)**: MS Bookings staat los van Sonty Montage; Joey kon showroom + inmeting tegelijk krijgen. haalAgenda telt nu Bookings-afspraken van inmeters mee als bezet (staff-naam-mapping, winkeladres als anker); Bookings onleesbaar = waarschuwing maar geen stop. Andersom: definitieve inmeting stuurt Joey een agenda-uitnodiging zodat Bookings hem bezet ziet; optie-vensters gedekt door de keuze-hercontrole (zelfde haalAgenda).
+- Planning-afzender = Nanny (memory feedback_planning_afzender); planning@-Trengo-kanaal maakt Daimy later aan, id dan in data/planning-kanaal.txt.
+- Boekingsketen E2E met Daimy zelf bewezen: keuzelink, keuze, Planado #420 + Outlook + RP + sheet juni-r357 (telefoon-match op zijn testrij) + boekingsrecord + bevestiging. WA-template 243999 nog PENDING bij Meta; beleid = template eerst, vrij bericht vangnet.
+
 ## BALIE-TEST DAIMY + 3 FIXES (6 aug middag)
 - Race gefixt: reken-kaarten via extraLead-sleutel (TTL 45 min) + server-side merge in GET — de 30-min-ronde overschreef Daimy's kaart.
 - **VAKANTIE-GAT gedicht**: laadVakanties() (Outlook, subject vakantie/verlof/vrij, 70 dgn) blokkeert dagen in werkdagenVoor; vakanties onbekend = NIET plannen (harde stop). Bewezen: Sjoerd-slot 24/8 (vakantie!) verdween bij hertest.

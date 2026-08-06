@@ -97,7 +97,14 @@ async function ronde() {
   for (const m of mutaties || []) {
     let res;
     try {
-      res = m.type === 'reken' ? await verwerkReken(m) : await planner.verwerkVerzoek(m);
+      if (m.type === 'ververs') {
+        // handmatige verversing vanaf het dashboard (Daimy 06-08: "ik weet niet
+        // wanneer die dingen ophaalt") — draait een volledige schaduw-ronde
+        await planner.verversRonde();
+        res = { afgewezen: false, uitkomst: 'dashboard ververst' };
+      } else {
+        res = m.type === 'reken' ? await verwerkReken(m) : await planner.verwerkVerzoek(m);
+      }
     } catch (e) {
       // DEFINITIEVE fouten (geen gaten, klant moet tekenen, lead onvindbaar) niet
       // eindeloos herhalen (Daimy 06-08: "ik krijg steeds dit bericht") — verzoek

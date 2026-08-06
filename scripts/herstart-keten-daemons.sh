@@ -4,3 +4,4 @@
 # daardoor kapotte berichten). Herstart alles wat keten-code in het geheugen houdt.
 launchctl kickstart -k gui/501/nl.sonty.inmeet-verzoeken 2>/dev/null && echo "verzoek-daemon herstart"
 launchctl kickstart -k gui/501/nl.sonty.sonny 2>/dev/null && echo "ai-ks-daemon herstart"
+launchctl kickstart -k gui/501/nl.sonty.email 2>/dev/null && echo "email-daemon herstart"

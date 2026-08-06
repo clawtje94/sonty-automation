@@ -775,6 +775,8 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null) 
     const st2 = laadState();
     st2.aanbodTickets = { ...(st2.aanbodTickets || {}), [token]: {
       naam: lead.naam, telefoon: lead.telefoon || null,
+      // e-mail erbij zodat de AI-guard ook mail-tickets herkent (audit 06-08)
+      email: lead.email || null,
       waTicket: verzonden.wa.ticket || null, mailTicket: verzonden.mail.ticket || null,
       verstuurdOp: new Date().toISOString(),
     } };

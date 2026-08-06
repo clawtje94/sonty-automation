@@ -178,6 +178,23 @@ async function verwerk(ticketId) {
     return { ticketId, resultaat: 'eigen/systeemmail, gesloten zonder antwoord', klant: t.contact?.email };
   }
 
+  // LOPEND INMEET-AANBOD op dit mailadres of nummer? Dan is de planner de enige
+  // responder — zelfde regel als in daemon.js (Irene-incident 06-08); het mail-pad
+  // was hier nog onbeschermd (audit 06-08). De aanbod-monitor rapporteert elke
+  // reactie al naar Daimy.
+  try {
+    const stP = JSON.parse(require('fs').readFileSync('/Users/clawdboot/sonty/data/inmeten-planner-state.json', 'utf8'));
+    const mail = String(t.contact?.email || '').trim().toLowerCase();
+    const tel9 = String(t.contact?.phone || '').replace(/\D/g, '').slice(-9);
+    const lopend = Object.values(stP.aanbodTickets || {}).some((a) => {
+      if (Date.now() - Date.parse(a.verstuurdOp) >= 48 * 3600000) return false;
+      const aMail = String(a.email || '').trim().toLowerCase();
+      const aTel = String(a.telefoon || '').replace(/\D/g, '').slice(-9);
+      return (!!mail && aMail === mail) || (tel9.length === 9 && aTel === tel9);
+    });
+    if (lopend) return { ticketId, resultaat: 'lopend inmeet-aanbod — planner/monitor handelen af, AI blijft eraf', klant: t.contact?.email };
+  } catch { /* state onleesbaar: normale flow */ }
+
   // WEBFLOW-FORMULIER: afzender is no-reply@webflow, dus in-thread antwoorden zou naar webflow
   // gaan i.p.v. de klant. Voor nu: netjes uitgelezen naar team Mens nodig (een mens pakt de nieuwe
   // lead op met alle gegevens). Echt zelf beantwoorden = nieuwe mail naar het adres uit het

@@ -369,6 +369,25 @@ function isPuurBedankje(tekst) {
   return woorden.length > 0 && woorden.every((w) => BEVESTIG_WOORDEN_GEDEELD.has(w));
 }
 
+// Heeft dit telefoonnummer of e-mailadres een lopend inmeet-aanbod? Dan is de
+// planner de enige stem richting de klant (Irene-incident 06-08). Venster: 48 uur
+// na versturen — aanbiedingen zelf verlopen na max 24 uur, dus dit dekt de hele
+// actieve periode plus een dag buffer. Match op laatste 9 cijfers én op e-mail,
+// zodat ook mail-tickets (zonder telefoonnummer) beschermd zijn.
+function lopendInmeetAanbod(phone, email) {
+  try {
+    const st = JSON.parse(require('fs').readFileSync('/Users/clawdboot/sonty/data/inmeten-planner-state.json', 'utf8'));
+    const tel9 = String(phone || '').replace(/\D/g, '').slice(-9);
+    const mail = String(email || '').trim().toLowerCase();
+    return Object.values(st.aanbodTickets || {}).some((a) => {
+      if (Date.now() - Date.parse(a.verstuurdOp) >= 48 * 3600000) return false;
+      const aTel = String(a.telefoon || '').replace(/\D/g, '').slice(-9);
+      const aMail = String(a.email || '').trim().toLowerCase();
+      return (tel9.length === 9 && aTel === tel9) || (!!mail && !!aMail && aMail === mail);
+    });
+  } catch { return false; /* state onleesbaar: normale flow */ }
+}
+
 async function verwerkTicket(t, state) {
   // VERSE TEAM-OPDRACHT OVERRULET DE BLOKKADES (Daimy 2026-07-27, na drie keer terugkomen op
   // hetzelfde). Er zitten meerdere terechte redenen in deze functie om van een gesprek af te
@@ -550,6 +569,12 @@ async function verwerkTicket(t, state) {
     // ook een leidende meta-/redeneerregel (begint met — of - en gaat over wat de bot gaat doen).
     klantTekst = schoonKlantTekst(klantTekst);
     let verstuurd = false;
+    // Ook via het @sonny-feedbackpad mag er GEEN klantbericht bovenop een lopend
+    // inmeet-aanbod (dit pad zat vóór de aanbod-guard en omzeilde hem, audit 06-08).
+    if (klantTekst && lopendInmeetAanbod(t.contact?.phone, t.contact?.email)) {
+      console.log(`  ticket ${t.id}: klantbericht uit feedback ONDERDRUKT (lopend inmeet-aanbod)`);
+      klantTekst = '';
+    }
     if (klantTekst) {
       const sendRes = isLiveTestContact(t) ? await sendLiveReply(t, klantTekst) : await sendActiefReply(t, klantTekst);
       verstuurd = sendRes.ok;
@@ -606,17 +631,10 @@ async function verwerkTicket(t, state) {
   // keuze-aanbod met 3 tijden: twee tegenstrijdige verhalen bij één klant, Daimy
   // moest er zelf tussen springen. Elke reactie wordt al door de aanbod-monitor
   // (elke 3 min) naar Daimy gerapporteerd en keuzes voert die zelf door.
-  try {
-    const stPlanner = JSON.parse(require('fs').readFileSync('/Users/clawdboot/sonty/data/inmeten-planner-state.json', 'utf8'));
-    const tel9 = String(t.contact?.phone || gesprek?.klant?.telefoon || '').replace(/\D/g, '').slice(-9);
-    const lopend = Object.values(stPlanner.aanbodTickets || {}).some((a) =>
-      String(a.telefoon || '').replace(/\D/g, '').slice(-9) === tel9
-      && Date.now() - Date.parse(a.verstuurdOp) < 48 * 3600000);
-    if (lopend && tel9.length === 9) {
-      console.log(`  ticket ${t.id}: lopend inmeet-aanbod op dit nummer — planner/monitor handelen af, AI blijft er volledig af`);
-      return;
-    }
-  } catch { /* state onleesbaar: normale flow */ }
+  if (lopendInmeetAanbod(t.contact?.phone, t.contact?.email)) {
+    console.log(`  ticket ${t.id}: lopend inmeet-aanbod op dit nummer/adres — planner/monitor handelen af, AI blijft er volledig af`);
+    return;
+  }
 
   // EEN VERSE @sonny-OPDRACHT MOET OOK EEN ANTWOORD OPLEVEREN (Daimy 2026-07-27).
   // De sleutel hing alleen aan het laatste KLANTbericht. Was dat al beantwoord, dan stopte hij

@@ -105,7 +105,12 @@ async function stuurWhatsAppTemplate(aanbod, url) {
     : { recipient_phone_number: '+' + tel, hsm_id: hsm || TEMPLATE_HSM, channel_id: WA_KANAAL, params };
   const r = await tFetch('/wa_sessions', { method: 'POST', body: JSON.stringify(body) });
   if (!r.ok) return { ok: false, reden: `template: Trengo ${r.status} (nog niet door Meta goedgekeurd?)` };
-  return { ok: true, via: hsm ? (aanbod.ver ? 'template-ver' : 'template') : 'template (oud)', ticket: bestaandTicket };
+  // Het ticket-id komt gewoon terug in de respons (message.ticket_id) — vastleggen,
+  // want de telefoon-zoektocht van de monitor is niet betrouwbaar voor elk nummer
+  // (Hendrik-Jan 06-08: term-search op zijn nummer gaf 0 treffers).
+  let ticket = bestaandTicket;
+  try { ticket = ticket || (await r.json())?.message?.ticket_id || null; } catch {}
+  return { ok: true, via: hsm ? (aanbod.ver ? 'template-ver' : 'template') : 'template (oud)', ticket };
 }
 
 async function stuurWhatsApp(aanbod, url) {
@@ -141,6 +146,13 @@ async function stuurMail(aanbod, url) {
   if (!r1.ok) return { ok: false, reden: `ticket aanmaken: Trengo ${r1.status}` };
   const nieuw = await r1.json().catch(() => null);
   if (!nieuw?.id) return { ok: false, reden: 'geen ticket-id terug' };
+
+  // 06-08: 'geldigUren' bestond hier niet → ReferenceError → GEEN ENKELE mail ging
+  // ooit weg (stil opgeslikt door de catch in verstuurAanbod). Uit het aanbod zelf
+  // afleiden, met 24 uur als vangnet.
+  const geldigUren = aanbod.verlooptOp
+    ? Math.max(1, Math.round((Date.parse(aanbod.verlooptOp) - Date.now()) / 3600000))
+    : 24;
 
   const html = `<p>Hoi ${voornaam},</p>
 <p>Goed nieuws: we kunnen bij je langskomen om in te meten (duurt ongeveer ${aanbod.duurMin} minuten).${verWegRegel(aanbod.ver === true)}</p>

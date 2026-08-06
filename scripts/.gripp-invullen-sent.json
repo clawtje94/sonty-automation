@@ -4083,5 +4083,31 @@
       }
     ],
     "processedAt": "2026-08-06T16:30:15.011Z"
+  },
+  "item:2905b04f-0df3-47b7-a6b5-9c4f4200f559": {
+    "summary": "Eric Van der Meer",
+    "grippCompanyId": 99705,
+    "grippOfferId": 8941,
+    "rpDocNumber": "202611090",
+    "allOffers": [
+      {
+        "grippOfferId": 8941,
+        "rpDocNumber": "202611090"
+      }
+    ],
+    "processedAt": "2026-08-06T18:55:47.217Z"
+  },
+  "item:d3293dd9-8313-4205-94cc-511834c93983": {
+    "summary": "Carlo Pronk",
+    "grippCompanyId": 99706,
+    "grippOfferId": 8942,
+    "rpDocNumber": "202610958",
+    "allOffers": [
+      {
+        "grippOfferId": 8942,
+        "rpDocNumber": "202610958"
+      }
+    ],
+    "processedAt": "2026-08-06T19:43:11.356Z"
   }
 }

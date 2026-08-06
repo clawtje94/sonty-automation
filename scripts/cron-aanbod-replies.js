@@ -87,6 +87,7 @@ async function main() {
   const state = (() => { try { return JSON.parse(fs.readFileSync(STATE_PLANNER, 'utf8')); } catch { return {}; } })();
   const gemeld = (() => { try { return JSON.parse(fs.readFileSync(GEMELD, 'utf8')); } catch { return {}; } })();
   const tickets = state.aanbodTickets || {};
+  const tokensBijStart = new Set(Object.keys(tickets));
   const tokens = Object.keys(tickets);
   if (!tokens.length) { console.log('geen verstuurde aanbiedingen om te volgen'); return; }
 
@@ -148,7 +149,13 @@ async function main() {
   }
   // opgeschoonde tokens + dedup bewaren
   const vers = (() => { try { return JSON.parse(fs.readFileSync(STATE_PLANNER, 'utf8')); } catch { return {}; } })();
-  vers.aanbodTickets = tickets;
+  // ALLEEN de eigen opruiming (>14 dagen) toepassen — nooit de hele lijst
+  // terugschrijven. Op 06-08 wiste de oude write-back concurrent gezette velden
+  // (waTicket/email door planner of handmatig herstel) met een verouderde kopie.
+  vers.aanbodTickets = vers.aanbodTickets || {};
+  for (const tok of tokensBijStart) {
+    if (!(tok in tickets)) delete vers.aanbodTickets[tok];
+  }
   fs.writeFileSync(STATE_PLANNER, JSON.stringify(vers, null, 2));
   for (const [k, v] of Object.entries(gemeld)) if (Date.now() - Date.parse(v) > 30 * 86400000) delete gemeld[k];
   fs.writeFileSync(GEMELD, JSON.stringify(gemeld, null, 1));

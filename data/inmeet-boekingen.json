@@ -16,7 +16,8 @@
   "duurMin": 25,
   "aanbodToken": "4cc6595cf0ed46de39f7f60a8826c154",
   "geboektOp": "2026-08-06T11:02:34.527Z",
-  "status": "geboekt"
+  "status": "geannuleerd",
+  "notitie": "Planado-testjob handmatig verwijderd (audit 06-08); record afgesloten zodat de administratie klopt."
  },
  "2905b04f-0df3-47b7-a6b5-9c4f4200f559": {
   "naam": "Eric Van der Meer",
@@ -35,6 +36,44 @@
   "duurMin": 30,
   "aanbodToken": "4953a9d820c4e37c1bd87ed01ed8707c",
   "geboektOp": "2026-08-06T18:55:58.161Z",
+  "status": "geboekt"
+ },
+ "d3293dd9-8313-4205-94cc-511834c93983": {
+  "naam": "Carlo Pronk",
+  "telefoon": "+31643547555",
+  "email": "Carlo.pronk@live.nl",
+  "planadoJobUuid": "1f191cf0-b53d-6e40-a240-5ab4fc8be185",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwcAAA=",
+  "grippNr": null,
+  "sheet": {
+   "tab": "Aug 2026",
+   "rij": 142,
+   "kolomInkoop": 23
+  },
+  "aankomst": "2026-08-31T09:00:00.000Z",
+  "inmeter": "Joey",
+  "duurMin": 25,
+  "aanbodToken": "62c841ac17b817e122a0b80e527208b3",
+  "geboektOp": "2026-08-06T19:43:24.947Z",
+  "status": "geboekt"
+ },
+ "69d0fc53-df8f-4fad-bd8f-21b5efccaa24": {
+  "naam": "Vas Verhage",
+  "telefoon": "+31615851026",
+  "email": "vamaja@casema.nl",
+  "planadoJobUuid": "1f191cf9-6835-6090-80df-3ec8c257d2f4",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwjAAA=",
+  "grippNr": null,
+  "sheet": {
+   "tab": "Juli 2026 ",
+   "rij": 1593,
+   "kolomInkoop": 23
+  },
+  "aankomst": "2026-09-15T09:25:00.000Z",
+  "inmeter": "Joey",
+  "duurMin": 25,
+  "aanbodToken": "e078ab7a0115d56aa1fe5410cde939cf",
+  "geboektOp": "2026-08-06T19:47:10.624Z",
   "status": "geboekt"
  }
 }

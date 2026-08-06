@@ -457,7 +457,10 @@ async function main() {
       const data = await rpGet(`/contact-service/${PID}/backlogS/${BACKLOG_ID}/items?limit=1000&offset=${offset}`.replace('backlogS', 'backlogs'));
       for (const i of data.items || []) {
         gezien.add(i.id);
-        if (i.status_id === INMETEN_INPLANNEN) items.push(i);
+        // gearchiveerde kaarten staan niet op het bord maar komen wel uit de API
+        // (Daimy 06-08: "er staan er 18, niet 35" — 17 waren ITEM_ARCHIVED)
+        const gearchiveerd = (i.technical_labels || []).some((l) => l?.type === 'ITEM_ARCHIVED');
+        if (i.status_id === INMETEN_INPLANNEN && !gearchiveerd) items.push(i);
       }
       if (!volleScanNodig || !data.has_more) break;
       offset += 1000;

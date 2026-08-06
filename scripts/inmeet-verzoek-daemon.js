@@ -38,7 +38,8 @@ async function verwerkReken(m) {
   const eerste = await (await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${SALES}/items?limit=1000`, {
     headers: { Authorization: 'Bearer ' + RP_API_KEY },
   })).json();
-  const past = (i) => i.status_id === INMETEN_INPLANNEN && String(i.summary || '').toLowerCase().includes(n);
+  const past = (i) => i.status_id === INMETEN_INPLANNEN && String(i.summary || '').toLowerCase().includes(n)
+    && !(i.technical_labels || []).some((l) => l?.type === 'ITEM_ARCHIVED');
   kandidaten = (eerste.items || []).filter(past);
   if (!kandidaten.length) {
     try {

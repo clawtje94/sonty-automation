@@ -193,5 +193,14 @@ test('template weigert lege tijden (incident 06-08)', async () => {
   } finally { global.fetch = echteFetch; }
 });
 
+test('WA-bevestiging bevat nooit "undefined" als de inmeternaam ontbreekt (incident Eric 06-08)', () => {
+  const { bevestigingsTekst } = require('../scripts/cron-aanbod-replies.js');
+  const zonder = bevestigingsTekst({ aankomst: '2026-08-18T09:05:00.000Z' });
+  assert.ok(!/undefined/.test(zonder), `tekst bevat "undefined": ${zonder}`);
+  assert.ok(zonder.includes('dinsdag 18 augustus') && zonder.includes('11:05'), 'dag/tijd moeten kloppen');
+  const met = bevestigingsTekst({ aankomst: '2026-08-18T09:05:00.000Z', inmeter: 'Joey' });
+  assert.ok(met.includes('onze inmeter Joey'), 'met naam moet de naam genoemd worden');
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

@@ -832,6 +832,19 @@ async function verwerkAanbiedingen() {
   console.log(`${gekozen.length} gekozen aanbod(en) te verwerken`);
   for (const a of gekozen) {
     const slot = a.slots[a.gekozenIndex];
+    // Kapot record (bijv. status "gekozen" zonder index) mag nooit de hele wachtrij
+    // platleggen — op 06-08 crashte de verwerker hierop en bleef alles liggen.
+    if (!slot) {
+      state.conflictGemeld = state.conflictGemeld || {};
+      const sleutel = `kapotte-keuze:${a.token}`;
+      if (!state.conflictGemeld[sleutel]) {
+        state.conflictGemeld[sleutel] = new Date().toISOString();
+        bewaarState(state);
+        await telegram(`🚨 Aanbod van ${a.lead.naam} staat op "gekozen" maar zonder geldig gekozen slot (index ${a.gekozenIndex}). Niet geboekt; dit record moet hersteld worden.`);
+      }
+      console.log(`  ✗ ${a.lead.naam}: gekozen zonder geldige slot-index — overgeslagen`);
+      continue;
+    }
     const lead = {
       id: a.lead.rpItemId,
       naam: a.lead.naam,

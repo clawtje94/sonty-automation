@@ -42,12 +42,19 @@ function leesKeuze(tekst, slots) {
   return null;
 }
 
-async function stuurWaBevestiging(ticketId, naam, slot) {
+function bevestigingsTekst(slot) {
   const d = new Date(slot.aankomst);
   const dag = d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
   const van = d.toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const tot = new Date(+d + 30 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
-  const tekst = `Top! Genoteerd: ${dag} tussen ${van} en ${tot} komt onze inmeter ${slot.inmeter} bij je langs. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty`;
+  // Naam alleen noemen als hij er echt is: op 06-08 stond er "onze inmeter undefined"
+  // in een klantbericht omdat de publieke API de naam stripte.
+  const wie = slot.inmeter ? `onze inmeter ${slot.inmeter}` : 'onze inmeter';
+  return `Top! Genoteerd: ${dag} tussen ${van} en ${tot} komt ${wie} bij je langs. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty`;
+}
+
+async function stuurWaBevestiging(ticketId, naam, slot) {
+  const tekst = bevestigingsTekst(slot);
   await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages`, {
     method: 'POST', headers: { ...TH, 'Content-Type': 'application/json' },
     body: JSON.stringify({ message: tekst, type: 'OUTBOUND' }),
@@ -148,4 +155,5 @@ async function main() {
   console.log(`${tokens.length} aanbod(en) gevolgd, ${meldingen} nieuwe reactie(s) gemeld`);
 }
 
-main().catch((e) => { console.error(e.message); process.exit(1); });
+module.exports = { bevestigingsTekst, leesKeuze };
+if (require.main === module) main().catch((e) => { console.error(e.message); process.exit(1); });

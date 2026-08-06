@@ -74,6 +74,11 @@
 - Planning-afzender = Nanny (memory feedback_planning_afzender); planning@-Trengo-kanaal maakt Daimy later aan, id dan in data/planning-kanaal.txt.
 - Boekingsketen E2E met Daimy zelf bewezen: keuzelink, keuze, Planado #420 + Outlook + RP + sheet juni-r357 (telefoon-match op zijn testrij) + boekingsrecord + bevestiging. WA-template 243999 nog PENDING bij Meta; beleid = template eerst, vrij bericht vangnet.
 
+## INSTELLINGEN-HUB ECHT AANGESLOTEN + ROADMAP (6 aug eind)
+- **3 dode knoppen gerepareerd** (inventaris-agent ving het): maxOmrijdenMin + contactDeadlineDagen (via kiesAanbod-opts), aanbodGeldigUren (aanbod-API verlooptOp + Outlook-optie-vervaltijd + klanttekst "De tijden staan X uur vast" beweegt mee). lib/instellingen.js = centrale lezer (60s cache, defaults). Nieuw veld bevestigingSturen (standaard UIT — Outlook-uitnodiging is de bevestiging; schakelaar op de instellingen-pagina).
+- Admin-menu: 3 planning-tegels bovenaan (dashboard / afspraak wijzigen / instellingen). Keuzepagina /inmeten: cookiebanner onderdrukt → 0 uitgaande links (live gemeten) zolang het vercel-domein is.
+- **ROADMAP instellingen-hub** (inventaris 06-08, 40 parameters, zie agent-rapport): grootste kanshebbers = AI-KS reactietijden/werktijden (config.js, HERSTART nodig), showroom-openingstijden (staan op 3 plekken los!), werkgebied-grens offerte-controle (125km/60km+7500), opvolgings-dagen, combi-grens 20 min, aantal keuzetijden, inmeetduur-normen. Regel: elke nieuwe parameter hoort in de hub, niet hardcoded.
+
 ## BALIE-TEST DAIMY + 3 FIXES (6 aug middag)
 - Race gefixt: reken-kaarten via extraLead-sleutel (TTL 45 min) + server-side merge in GET — de 30-min-ronde overschreef Daimy's kaart.
 - **VAKANTIE-GAT gedicht**: laadVakanties() (Outlook, subject vakantie/verlof/vrij, 70 dgn) blokkeert dagen in werkdagenVoor; vakanties onbekend = NIET plannen (harde stop). Bewezen: Sjoerd-slot 24/8 (vakantie!) verdween bij hertest.

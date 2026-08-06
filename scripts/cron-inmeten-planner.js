@@ -665,6 +665,14 @@ async function verwerkAanbiedingen() {
         continue;
       }
       const uitkomst = await verwerkLead(lead, null, gekozenSlot, a.duurMin);
+      // klant krijgt direct een bevestiging (mail + WhatsApp)
+      try {
+        const { verstuurBevestiging } = require('./lib/aanbod-versturen');
+        const b = await verstuurBevestiging(a, { aankomst: slot.aankomst, inmeter: slot.inmeter });
+        if (!b.ergensGelukt) await telegram(`⚠️ Bevestiging naar ${a.lead.naam} niet bezorgd (wa: ${b.wa.reden}, mail: ${b.mail.reden}) — even handmatig bevestigen.`);
+      } catch (e) {
+        await telegram(`⚠️ Bevestiging naar ${a.lead.naam} mislukt: ${e.message.slice(0, 100)}`);
+      }
       // gekozen optie wordt de echte Outlook-afspraak; de andere opties verdwijnen
       try {
         const { maakDefinitief, verwijderOpties } = require('./lib/outlook-opties.js');

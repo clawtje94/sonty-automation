@@ -116,6 +116,56 @@ async function stuurMail(aanbod, url) {
   return { ok: r2.ok, reden: r2.ok ? undefined : `mail versturen: Trengo ${r2.status}`, ticket: nieuw.id };
 }
 
+/** Bevestiging na klantkeuze + herinnering dag ervoor (Daimy 06-08: "krijgen ze dan
+ * een bevestigingsmail en afspraak-herinneringen?"). Zelfde kanalen als het aanbod. */
+function bevestigingTekst(voornaam, slot, duurMin) {
+  const d = new Date(slot.aankomst);
+  const dag = d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
+  const van = d.toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  const tot = new Date(+d + 30 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  return `Hoi ${voornaam}, je inmeetafspraak staat vast: ${dag} tussen ${van} en ${tot}. ` +
+    `Onze inmeter ${slot.inmeter} komt langs en is er ongeveer ${duurMin} minuten mee bezig. ` +
+    `Komt er toch iets tussen? Reageer dan even op dit bericht.`;
+}
+
+async function verstuurBevestiging(aanbod, slot) {
+  const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
+  const tekst = bevestigingTekst(voornaam, slot, aanbod.duurMin);
+  let wa = { ok: false, reden: 'geen telefoon' };
+  if (aanbod.lead.telefoon) {
+    const ticket = await zoekWaTicket(aanbod.lead.telefoon).catch(() => null);
+    if (ticket) {
+      const r = await tFetch(`/tickets/${ticket.id}/messages`, {
+        method: 'POST', body: JSON.stringify({ message: tekst, type: 'OUTBOUND' }),
+      });
+      wa = { ok: r.ok, reden: r.ok ? undefined : `Trengo ${r.status}` };
+    } else wa = { ok: false, reden: 'geen WhatsApp-gesprek' };
+  }
+  let mail = { ok: false, reden: 'geen e-mailadres' };
+  if (aanbod.lead.email) {
+    const r1 = await tFetch('/tickets', {
+      method: 'POST',
+      body: JSON.stringify({ channel_id: AANVRAGEN_KANAAL, contact_identifier: aanbod.lead.email, subject: 'Je inmeetafspraak bij Sonty staat vast' }),
+    });
+    const nieuw = r1.ok ? await r1.json().catch(() => null) : null;
+    if (nieuw?.id) {
+      const html = `<p>${tekst.replace(/\. /g, '.</p><p>')}</p><p>Groetjes,<br>Jaimy van Sonty</p>`;
+      const r2 = await tFetch(`/tickets/${nieuw.id}/messages`, { method: 'POST', body: JSON.stringify({ message: html, body_type: 'html' }) });
+      if (r2.ok) await tFetch(`/tickets/${nieuw.id}/close`, { method: 'POST', body: '{}' });
+      mail = { ok: r2.ok, reden: r2.ok ? undefined : `Trengo ${r2.status}` };
+    } else mail = { ok: false, reden: `ticket: Trengo ${r1.status}` };
+  }
+  return { wa, mail, ergensGelukt: wa.ok || mail.ok };
+}
+
+function herinneringTekst(voornaam, slot, duurMin) {
+  const d = new Date(slot.aankomst);
+  const van = d.toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  const tot = new Date(+d + 30 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  return `Hoi ${voornaam}, een korte herinnering: morgen tussen ${van} en ${tot} komt onze inmeter ${slot.inmeter} ` +
+    `bij je langs voor het inmeten (ongeveer ${duurMin} minuten). Tot morgen!`;
+}
+
 /** Beide kanalen; geeft per kanaal terug wat er gebeurd is. Eén kanaal gelukt = aanbod is onderweg. */
 async function verstuurAanbod(aanbod, url) {
   const wa = await stuurWhatsApp(aanbod, url).catch((e) => ({ ok: false, reden: e.message }));
@@ -123,7 +173,7 @@ async function verstuurAanbod(aanbod, url) {
   return { wa, mail, ergensGelukt: wa.ok || mail.ok };
 }
 
-module.exports = { verstuurAanbod, stuurWhatsApp, stuurMail, zoekWaTicket };
+module.exports = { verstuurAanbod, verstuurBevestiging, herinneringTekst, stuurWhatsApp, stuurMail, zoekWaTicket };
 
 // CLI: node scripts/lib/aanbod-versturen.js <token> — verstuurt een bestaand aanbod.
 if (require.main === module) {

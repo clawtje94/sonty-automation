@@ -3,7 +3,9 @@
 // inmeetdatum en in het vak daarachter wie er gaat inmeten."
 //
 // Sheet-regels (reference_sonty_offerte_sheet_structuur):
-//  - koppelen ALTIJD via Gripp-nummer (kolom "Nummer") of telefoon (laatste 9), NOOIT op naam
+//  - koppelen (Daimy 06-08): eerst RP-OFFERTENUMMER (kolom "RP offerte" — Gripp bestaat
+//    op dit moment in de keten meestal nog niet!), dan telefoon (laatste 9), dan
+//    Gripp-nummer als hij er al is. NOOIT op naam.
 //  - kolomindexen verschillen per tab → altijd de headerrij (rij 3) lezen
 //  - klant niet gevonden → nieuwe rij onderaan de huidige maandtab + melding
 const path = require('path');
@@ -13,23 +15,29 @@ const MAANDEN = ['jan', 'feb', 'maa', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 
 const laatste9 = (t) => String(t || '').replace(/\D/g, '').slice(-9);
 
 /** Pure functie (scenario-lab-baar): vind rij + kolommen in tab-data. */
-function vindRijEnKolommen(tabs, { grippNr, telefoon }) {
+function vindRijEnKolommen(tabs, { rpNummers = [], grippNr, telefoon }) {
+  const rpSet = new Set(rpNummers.map((n) => String(n).replace(/\D/g, '')).filter(Boolean));
   for (const tab of tabs) {
     const kop = (tab.rijen[2] || []).map((h) => String(h || '').toLowerCase());
     const kol = {
       inkoop: kop.findIndex((h) => /inko+p.*incl/.test(h)),
+      rp: kop.findIndex((h) => /rp.*offerte|offerte.*nummer/.test(h)),
       nummer: kop.findIndex((h) => /^nummer/.test(h)),
       telefoon: kop.findIndex((h) => /telefoon/.test(h)),
     };
     if (kol.inkoop < 0) continue; // tab zonder inkoopkolom is geen offertetab
     for (let r = 3; r < tab.rijen.length; r++) {
       const rij = tab.rijen[r] || [];
-      const nrCel = String(rij[kol.nummer] || '').replace(/\D/g, '');
-      if (grippNr && nrCel && nrCel === String(grippNr)) return { tab: tab.titel, rijIndex: r, kol };
+      if (rpSet.size && kol.rp >= 0) {
+        const rpCel = String(rij[kol.rp] || '').replace(/\D/g, '');
+        if (rpCel.length >= 6 && rpSet.has(rpCel)) return { tab: tab.titel, rijIndex: r, kol };
+      }
       if (telefoon && kol.telefoon >= 0) {
         const telCel = laatste9(rij[kol.telefoon]);
         if (telCel.length === 9 && telCel === laatste9(telefoon)) return { tab: tab.titel, rijIndex: r, kol };
       }
+      const nrCel = kol.nummer >= 0 ? String(rij[kol.nummer] || '').replace(/\D/g, '') : '';
+      if (grippNr && nrCel && nrCel === String(grippNr)) return { tab: tab.titel, rijIndex: r, kol };
     }
   }
   return null;
@@ -50,12 +58,12 @@ async function sheetsClient() {
   return google.sheets({ version: 'v4', auth });
 }
 
-/** Recente maandtabs (huidige + 2 vorige), nieuwste eerst. */
+/** Recente maandtabs (huidige + 5 vorige — offertes rijpen mediaan ~24 dagen, en oudere leads bestaan), nieuwste eerst. */
 async function recenteTabs(sheets) {
   const meta = await sheets.spreadsheets.get({ spreadsheetId: SHEET_ID, fields: 'sheets.properties.title' });
   const nu = new Date();
   const doel = [];
-  for (let terug = 0; terug < 3; terug++) {
+  for (let terug = 0; terug < 6; terug++) {
     const d = new Date(nu.getFullYear(), nu.getMonth() - terug, 1);
     doel.push({ maand: MAANDEN[d.getMonth()], jaar: String(d.getFullYear()) });
   }
@@ -72,7 +80,7 @@ async function recenteTabs(sheets) {
  * Schrijf de inplanning. Geeft { gevonden: bool, tab, rij } terug.
  * datum als 'dd-mm-jjjj', inmeter als voornaam.
  */
-async function schrijfInplanning({ grippNr, naam, telefoon, inmeetDatum, inmeter }) {
+async function schrijfInplanning({ rpNummers = [], grippNr, naam, telefoon, inmeetDatum, inmeter }) {
   const sheets = await sheetsClient();
   const titels = await recenteTabs(sheets);
   const tabs = [];
@@ -80,7 +88,7 @@ async function schrijfInplanning({ grippNr, naam, telefoon, inmeetDatum, inmeter
     const res = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: `'${titel}'!A1:AH6000` });
     tabs.push({ titel, rijen: res.data.values || [] });
   }
-  const plek = vindRijEnKolommen(tabs, { grippNr, telefoon });
+  const plek = vindRijEnKolommen(tabs, { rpNummers, grippNr, telefoon });
 
   if (plek) {
     const rijNr = plek.rijIndex + 1; // sheet is 1-based

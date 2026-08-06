@@ -56,19 +56,25 @@ function parseDocument(full) {
  * - meerdere documenten, geen ACCEPTED → ambigu=true, producten=[]
  */
 async function leesOfferte(item) {
-  const leeg = { producten: [], status: null, ambigu: false, aantalDocs: 0 };
+  const leeg = { producten: [], status: null, ambigu: false, aantalDocs: 0, nummers: [] };
   const lcId = item.item_subject?.id;
   if (!lcId) return leeg;
   try {
     const docs = await rpGet(`/document-service/v1/${PID}/quotations?lead_configuration_id=${lcId}`);
     const lijst = docs?.quotationDatas || [];
     if (!lijst.length) return leeg;
+    // alle RP-nummers van deze lead (quotationNumber én het nummer uit de titel) —
+    // de offerte-sheet koppelt hierop, want Gripp bestaat pas ná "Gripp invullen"
+    const nummers = [...new Set(lijst.flatMap((d) => [
+      String(d.quotationNumber || '').replace(/\D/g, ''),
+      String(d.documentTitle || d.title || '').replace(/\D/g, ''),
+    ]).filter((n) => n.length >= 6))];
     const geaccepteerd = lijst.filter((d) => (d.quotationStatus || d.documentStatus) === 'ACCEPTED')
       .sort((a, b) => (b.quotationCreationTimestamp || 0) - (a.quotationCreationTimestamp || 0));
     let keuze = null;
     if (geaccepteerd.length) keuze = geaccepteerd[0];
     else if (lijst.length === 1) keuze = lijst[0];
-    else return { producten: [], status: null, ambigu: true, aantalDocs: lijst.length };
+    else return { producten: [], status: null, ambigu: true, aantalDocs: lijst.length, nummers };
 
     const full = await rpGet(`/document-service/v1/${PID}/quotations/${keuze.documentId}`);
     return {
@@ -76,6 +82,7 @@ async function leesOfferte(item) {
       status: keuze.quotationStatus || keuze.documentStatus || null,
       ambigu: false,
       aantalDocs: lijst.length,
+      nummers,
     };
   } catch {
     return leeg;

@@ -1,16 +1,18 @@
 // Onderdeel: de juiste rij in de offerte-sheet vinden (vindRijEnKolommen).
-// Orakel (sheet-regels uit de memory):
-//  - Gripp-nummer in kolom "Nummer" is de eerste sleutel, telefoon (laatste 9) de tweede
-//  - NOOIT op naam koppelen
-//  - kolomindexen verschillen per tab → headerrij (rij 3) is leidend
-//  - niets gevonden → null (caller maakt dan een nieuwe rij + melding)
+// Orakel (sheet-regels + KETEN-MOMENT-LES van Daimy 06-08: "Gripp wordt daarna pas
+// ingevuld" — de dimensie 'welke data bestaat op dit punt in de keten al?' hoort in
+// elke test):
+//  - RP-offertenummer (kolom "RP offerte") is de EERSTE sleutel — die bestaat altijd
+//  - telefoon (laatste 9) tweede, Gripp-nummer derde (bestaat pas na "Gripp invullen")
+//  - NOOIT op naam koppelen; kolommen altijd via de headerrij; niets = null + melding
 const { combinaties } = require('../matrix.js');
 const { vindRijEnKolommen } = require('../../scripts/lib/sheet-inplannen.js');
 
 function maakTab(titel, verschuif, klantRij) {
   const kop = Array(30).fill('');
   kop[2] = 'Naam klant';
-  kop[10 + verschuif] = 'Telefoon';
+  kop[6 + verschuif] = 'RP offerte';
+  kop[10 + verschuif] = 'Telefoon nummer';
   kop[19 + verschuif] = 'Nummer';
   kop[22 + verschuif] = 'inkooop incl btw';
   const leeg = Array(30).fill('');
@@ -18,6 +20,7 @@ function maakTab(titel, verschuif, klantRij) {
   if (klantRij) {
     const r = Array(30).fill('');
     r[2] = klantRij.naam || '';
+    r[6 + verschuif] = klantRij.rp || '';
     r[10 + verschuif] = klantRij.telefoon || '';
     r[19 + verschuif] = klantRij.nummer || '';
     rijen.push(r);
@@ -29,12 +32,13 @@ const dimensies = [
   {
     naam: 'klant-in-sheet',
     waarden: [
-      { label: 'op-grippnr', rij: { naam: 'jan test', nummer: '6392', telefoon: 'Zie gripp' }, zoek: { grippNr: 6392, telefoon: '+31612345678' }, wil: 'gevonden' },
-      { label: 'grippnr-met-haakjes', rij: { naam: 'jan test', nummer: '(6392)', telefoon: '' }, zoek: { grippNr: 6392, telefoon: null }, wil: 'gevonden' },
-      { label: 'op-telefoon', rij: { naam: 'andere spelling', nummer: '', telefoon: '06 1234 5678' }, zoek: { grippNr: 7777, telefoon: '+31612345678' }, wil: 'gevonden' },
-      { label: 'zelfde-naam-ander-nummer', rij: { naam: 'jan test', nummer: '5555', telefoon: '0699999999' }, zoek: { grippNr: 6392, telefoon: '+31612345678' }, wil: 'niks' },
-      { label: 'staat-er-niet', rij: null, zoek: { grippNr: 6392, telefoon: '+31612345678' }, wil: 'niks' },
-      { label: 'leeg-telefoonveld-geen-vals-match', rij: { naam: 'x', nummer: '', telefoon: '' }, zoek: { grippNr: null, telefoon: '+31612345678' }, wil: 'niks' },
+      { label: 'VROEG-alleen-rp-nummer', rij: { naam: 'jan test', rp: '202610827', telefoon: '31612345678' }, zoek: { rpNummers: ['202610827'], grippNr: null, telefoon: '+31687654321' }, wil: 'gevonden' },
+      { label: 'VROEG-rp-plus-titelnummer', rij: { naam: 'jan test', rp: '202626880', telefoon: '' }, zoek: { rpNummers: ['20268411', '202626880'], grippNr: null, telefoon: null }, wil: 'gevonden' },
+      { label: 'op-telefoon-zonder-rp', rij: { naam: 'andere spelling', rp: '', telefoon: '06 1234 5678' }, zoek: { rpNummers: ['999999999'], grippNr: null, telefoon: '+31612345678' }, wil: 'gevonden' },
+      { label: 'LAAT-op-grippnr', rij: { naam: 'jan test', nummer: '6392', telefoon: 'Zie gripp' }, zoek: { rpNummers: [], grippNr: 6392, telefoon: '+31612345678' }, wil: 'gevonden' },
+      { label: 'zelfde-naam-alles-anders', rij: { naam: 'jan test', rp: '111111111', nummer: '5555', telefoon: '0699999999' }, zoek: { rpNummers: ['202610827'], grippNr: 6392, telefoon: '+31612345678' }, wil: 'niks' },
+      { label: 'staat-er-niet', rij: null, zoek: { rpNummers: ['202610827'], grippNr: 6392, telefoon: '+31612345678' }, wil: 'niks' },
+      { label: 'leeg-telefoonveld-geen-vals-match', rij: { naam: 'x', rp: '', nummer: '', telefoon: '' }, zoek: { rpNummers: [], grippNr: null, telefoon: '+31612345678' }, wil: 'niks' },
     ],
   },
   {

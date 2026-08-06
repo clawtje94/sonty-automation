@@ -140,10 +140,11 @@ function leesLead(item) {
 /** Lead met producten uit de beste bron: leadtekst, anders het RP-offertedocument. */
 async function leesLeadCompleet(item) {
   const lead = leesLead(item);
+  const offerte = await leesOfferte(item); // ook voor de RP-nummers (sheet-sleutel)
+  lead.rpNummers = offerte.nummers || [];
   // "1x Winkel offerte" is geen product maar een placeholder.
   const bruikbaar = lead.producten.filter((p) => !/winkel offerte|offerte$/i.test(p.naam));
   if (bruikbaar.length) return { ...lead, producten: bruikbaar, aantalProducten: bruikbaar.reduce((a, p) => a + p.aantal, 0), bron: 'leadtekst' };
-  const offerte = await leesOfferte(item);
   // Meerdere offertedocumenten zonder één getekende: NIET automatisch verder.
   // De klant moet er echt zelf één tekenen (Daimy 05-08).
   if (offerte.ambigu) return { ...lead, bron: 'AMBIGU', ambigu: true, aantalDocs: offerte.aantalDocs };
@@ -331,7 +332,7 @@ async function verwerkLead(lead, item, slot, duurMin) {
     const { schrijfInplanning } = require('./lib/sheet-inplannen.js');
     const dd = slot.aankomst;
     const inmeetDatum = `${String(dd.getDate()).padStart(2, '0')}-${String(dd.getMonth() + 1).padStart(2, '0')}-${dd.getFullYear()}`;
-    const res = await schrijfInplanning({ grippNr, naam: lead.naam, telefoon: lead.telefoon, inmeetDatum, inmeter: slot.inmeter });
+    const res = await schrijfInplanning({ rpNummers: lead.rpNummers || [], grippNr, naam: lead.naam, telefoon: lead.telefoon, inmeetDatum, inmeter: slot.inmeter });
     sheetNote = res.gevonden ? ` · sheet ${res.tab} r${res.rij}` : ` · sheet: NIEUWE rij in ${res.tab} (klant stond er nog niet)`;
   } catch (e) {
     sheetNote = ' · SHEET NIET BIJGEWERKT: ' + e.message.slice(0, 60);
@@ -561,7 +562,7 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin) {
     body: JSON.stringify({
       lead: {
         rpItemId: item.id, naam: lead.naam, telefoon: lead.telefoon, email: lead.email,
-        volledigAdres: lead.volledigAdres, plaats: lead.plaats,
+        volledigAdres: lead.volledigAdres, plaats: lead.plaats, rpNummers: lead.rpNummers || [],
         producten: lead.producten.map((p) => ({ naam: p.naam, aantal: p.aantal })),
       },
       duurMin,
@@ -613,6 +614,7 @@ async function verwerkAanbiedingen() {
     const lead = {
       id: a.lead.rpItemId,
       naam: a.lead.naam,
+      rpNummers: a.lead.rpNummers || [],
       telefoon: a.lead.telefoon,
       volledigAdres: a.lead.volledigAdres,
       producten: (a.lead.producten || []).map((p) => ({ naam: p.naam, aantal: p.aantal })),

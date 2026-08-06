@@ -165,12 +165,15 @@ async function verstuurBevestiging(aanbod, slot) {
   return { wa, mail, ergensGelukt: wa.ok || mail.ok };
 }
 
-function herinneringTekst(voornaam, slot, duurMin) {
+function herinneringTekst(voornaam, slot, duurMin, dagenVooraf = 1) {
   const d = new Date(slot.aankomst);
   const van = d.toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const tot = new Date(+d + 30 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
-  return `Hoi ${voornaam}, een korte herinnering: morgen tussen ${van} en ${tot} komt onze inmeter ${slot.inmeter} ` +
-    `bij je langs voor het inmeten (ongeveer ${duurMin} minuten). Tot morgen!`;
+  const wanneer = dagenVooraf <= 1 ? 'morgen'
+    : d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
+  const slot2 = dagenVooraf <= 1 ? 'Tot morgen!' : 'Komt het toch niet uit? Stuur dan even een berichtje terug.';
+  return `Hoi ${voornaam}, een herinnering aan je inmeetafspraak: ${wanneer} tussen ${van} en ${tot} komt onze inmeter ${slot.inmeter} ` +
+    `bij je langs (ongeveer ${duurMin} minuten). ${slot2}`;
 }
 
 /** Beide kanalen; geeft per kanaal terug wat er gebeurd is. Eén kanaal gelukt = aanbod is onderweg. */

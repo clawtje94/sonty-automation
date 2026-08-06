@@ -28,11 +28,23 @@ async function tFetch(ep, opties) {
   });
 }
 
+async function haalInstellingen() {
+  try {
+    const r = await fetch('https://sonty-website.vercel.app/api/inmeet-instellingen', {
+      headers: { 'x-meet-code': process.env.MEETBON_CODE || '2288' },
+    });
+    if (r.ok) return await r.json();
+  } catch { /* val terug op standaard */ }
+  return { herinneringDagen: [7, 1] };
+}
+
 async function main() {
   console.log(EXECUTE ? '=== HERINNERINGEN (echt) ===' : '=== DRY-RUN (--execute om echt te sturen) ===');
   const state = (() => { try { return JSON.parse(fs.readFileSync(STATE, 'utf8')); } catch { return { gestuurd: {} }; } })();
-
-  const morgen = new Date(Date.now() + 24 * 3600000).toISOString().slice(0, 10);
+  // instelbaar via /admin/inmeet-instellingen (Daimy 06-08: "1 week ervoor en 1 dag
+  // ervoor, en dit soort dingen zelf kunnen instellen")
+  const { herinneringDagen } = await haalInstellingen();
+  console.log('herinnering-momenten (dagen vooraf):', herinneringDagen.join(', ') || 'geen');
   const jobs = [];
   let after = null;
   for (let i = 0; i < 40; i++) {
@@ -43,12 +55,19 @@ async function main() {
     after = l[l.length - 1].uuid;
     await wacht(2600);
   }
-  const doel = jobs.filter((j) => j.scheduled_at?.startsWith(morgen) && INMETERS[j.assignee?.worker_uuid]);
-  console.log(`${doel.length} afspraken morgen (${morgen})`);
   let gestuurd = 0, overgeslagen = 0, zonderKanaal = 0;
+  const doel = [];
+  for (const dagenVooraf of herinneringDagen) {
+    const doeldatum = new Date(Date.now() + dagenVooraf * 24 * 3600000).toISOString().slice(0, 10);
+    for (const j of jobs) {
+      if (j.scheduled_at?.startsWith(doeldatum) && INMETERS[j.assignee?.worker_uuid]) doel.push({ j, dagenVooraf });
+    }
+  }
+  console.log(`${doel.length} herinnering(en) te beoordelen`);
 
-  for (const j of doel) {
-    if (state.gestuurd[j.uuid]) { overgeslagen++; continue; }
+  for (const { j, dagenVooraf } of doel) {
+    const sleutel = j.uuid + ':' + dagenVooraf;
+    if (state.gestuurd[sleutel]) { overgeslagen++; continue; }
     const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
     const job = det.job || det;
     await wacht(2600);
@@ -57,7 +76,7 @@ async function main() {
     const naam = (tel?.name || (job.description || '').split('\n')[0].replace(/^.*?(—|-)\s*/, '')).trim();
     const slot = { aankomst: job.scheduled_at, inmeter: INMETERS[j.assignee.worker_uuid] };
     const duur = Math.round((job.scheduled_duration || 1800) / 60);
-    const tekst = herinneringTekst(naam.split(' ')[0] || 'daar', slot, duur);
+    const tekst = herinneringTekst(naam.split(' ')[0] || 'daar', slot, duur, dagenVooraf);
     console.log(`  ${naam}: ${tekst.slice(0, 70)}…`);
     if (!EXECUTE) continue;
 
@@ -69,7 +88,7 @@ async function main() {
         bezorgd = r.ok;
       }
     }
-    if (bezorgd) { state.gestuurd[j.uuid] = new Date().toISOString(); gestuurd++; }
+    if (bezorgd) { state.gestuurd[sleutel] = new Date().toISOString(); gestuurd++; }
     else zonderKanaal++;
   }
   fs.writeFileSync(STATE, JSON.stringify(state, null, 2));

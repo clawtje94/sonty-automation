@@ -7,7 +7,8 @@
 //  - elke lead krijgt een aanbod OF een uitleg — nooit stilte
 //  - dichtbije leads blijven nooit onbediend zolang er gaten zijn
 const { combinaties } = require('../matrix.js');
-const { zoekSlots, kiesAanbod, waaromGeenAanbod } = require('../../scripts/lib/slotzoeker.js');
+const { zoekSlots, kiesAanbod, waaromGeenAanbod, MAX_EXTRA_RIJTIJD_MIN } = require('../../scripts/lib/slotzoeker.js');
+const { reistijd } = require('../../scripts/lib/reistijd.js'); // = de lab-stub
 
 const WERKDAGEN = Array.from({ length: 10 }, (_, i) => {
   const d = new Date(2026, 8, 7 + i + (i > 3 ? 2 : 0)); // 2 werkweken, weekend overgeslagen
@@ -82,6 +83,50 @@ async function voerUit(s) {
     }
   }
 
+  // COMBI-PAS (zelfde mechaniek als de planner): wachtende buren delen de omrij-kosten;
+  // de oudste krijgt aanbod, zijn slots worden ankers voor de rest
+  const wachtend = [];
+  for (let i = 0; i < s.drukte.aantal; i++) {
+    const pc = s.mix.pc(i);
+    if (!aangeboden.some((a) => a.lead === i)) wachtend.push({ i, pc, adres: `Leadstraat ${i + 1}, ${pc} AB Plaats` });
+  }
+  let combiAanbod = 0, verreClusterLeden = 0, clustersHaalbaar = 0;
+  if (wachtend.length >= 2) {
+    // groepen op onderlinge rijtijd ≤ 20 min
+    const groep = wachtend.map((_, k) => k);
+    for (let a = 0; a < wachtend.length; a++) for (let b = a + 1; b < wachtend.length; b++) {
+      if ((await reistijd(wachtend[a].adres, wachtend[b].adres)).minuten <= 20) {
+        const doel = groep[a];
+        for (let k = 0; k < groep.length; k++) if (groep[k] === groep[b]) groep[k] = doel;
+      }
+    }
+    const groepen = {};
+    groep.forEach((g, k) => { (groepen[g] = groepen[g] || []).push(wachtend[k]); });
+    for (const leden of Object.values(groepen)) {
+      if (leden.length < 2) continue;
+      verreClusterLeden += leden.length;
+      let clusterHaalbaar = false;
+      for (const w of leden) {
+        let slots = [];
+        for (const naam of ['A', 'B']) {
+          const gevonden = await zoekSlots({ agenda: agenda[naam], adres: w.adres, duurMin: 25, werkdagen: WERKDAGEN });
+          slots.push(...gevonden.map((x) => ({ ...x, inmeter: naam })));
+        }
+        const haalbaar = slots.filter((x) => x.extraRijtijdMin <= MAX_EXTRA_RIJTIJD_MIN * leden.length);
+        if (haalbaar.length) clusterHaalbaar = true;
+        slots = haalbaar.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
+        const aanbod = kiesAanbod(slots, 3, { wachtDagen: 999 });
+        if (!aanbod.length) continue;
+        combiAanbod++;
+        for (const sl of aanbod) {
+          aangeboden.push({ inmeter: sl.inmeter, aankomst: +sl.aankomst, vertrek: +sl.vertrek, lead: w.i });
+          agenda[sl.inmeter].push({ start: sl.aankomst.toISOString(), eind: sl.vertrek.toISOString(), adres: w.adres, klant: `aanbod lead ${w.i}` });
+        }
+      }
+      if (clusterHaalbaar) clustersHaalbaar++;
+    }
+  }
+
   // invariant 1+2: geen dubbel aangeboden tijd, geen overlap per inmeter
   let dubbel = 0;
   for (const naam of ['A', 'B']) {
@@ -90,11 +135,15 @@ async function voerUit(s) {
       if (van[i].aankomst < van[i - 1].vertrek && van[i].lead !== van[i - 1].lead) dubbel++;
     }
   }
-  return { dubbel, zonderUitleg, dichtbijZonderAanbod, metAanbod, melding: true };
+  return { dubbel, zonderUitleg, dichtbijZonderAanbod, metAanbod, combiAanbod, verreClusterLeden, clustersHaalbaar, melding: true };
 }
 
-function vergelijk(_wil, echt) {
-  return echt.dubbel === 0 && echt.zonderUitleg === 0 && echt.dichtbijZonderAanbod === 0;
+function vergelijk(_wil, echt, s) {
+  if (echt.dubbel !== 0 || echt.zonderUitleg !== 0 || echt.dichtbijZonderAanbod !== 0) return false;
+  // combi-invariant: als een combi HAALBAAR was (gedeelde kosten binnen de grens)
+  // moet er ook echt een combi-aanbod uit komen; onhaalbaar cluster = dag-4-regel
+  if (echt.clustersHaalbaar > 0 && echt.combiAanbod === 0) return false;
+  return true;
 }
 
 module.exports = {

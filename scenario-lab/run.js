@@ -17,6 +17,7 @@ const ONDERDELEN = [
   require('./onderdelen/koppel-ladder.js'),
   require('./onderdelen/planner-aanbod.js'),
   require('./onderdelen/planner-drukte.js'),
+  require('./onderdelen/sheet-rij.js'),
 ];
 // UI-laag draait tegen de echte site in een echte browser: alleen met --ui (of een filter),
 // anders wordt elke logica-run traag van het browsen.

@@ -129,16 +129,20 @@ async function main() {
       continue;
     }
 
-    if (velden.length) {
+    {
+      // interne create NEGEERT address stil (ontdekt 06-08: 164 jobs zonder adres!)
+      // → adres én velden altijd via de publieke PATCH nazetten
       const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + nieuw.uuid, { headers: PH })).json();
       const nh = det.job || det;
       await wacht(2600);
+      const patch = { version: nh.version };
+      if (velden.length) patch.custom_fields = velden;
+      if (oud.address?.formatted) patch.address = { formatted: oud.address.formatted, apartment: oud.apartment, floor: oud.floor, entrance_no: oud.entrance_no };
       const pr = await fetch('https://api.planadoapp.com/v2/jobs/' + nieuw.uuid, {
-        method: 'PATCH', headers: PH,
-        body: JSON.stringify({ version: nh.version, custom_fields: velden }),
+        method: 'PATCH', headers: PH, body: JSON.stringify(patch),
       });
       await wacht(2600);
-      if (!pr.ok) { console.log(`    veld-PATCH ${pr.status} op nieuwe #${nieuw.serial_no}`); }
+      if (!pr.ok) { console.log(`    na-PATCH ${pr.status} op nieuwe #${nieuw.serial_no}`); }
     }
 
     const { json: check } = await intern('GET', '/jobs/' + nieuw.uuid);
@@ -146,7 +150,8 @@ async function main() {
     const goed = check && check.type_uuid === TYPES[soort]
       && Date.parse(check.scheduled_at) === Date.parse(oud.scheduled_at)
       && (check.assignees?.workers || []).length === workers.length
-      && check.external_id === oud.external_id;
+      && check.external_id === oud.external_id
+      && (!oud.address?.formatted || !!check.address?.formatted);
     console.log(`    #${j.serial_no} -> #${nieuw.serial_no} (${soort}) ${goed ? 'OK' : 'CHECK-AFWIJKING — nakijken!'}`);
     if (!goed) fouten++;
   }

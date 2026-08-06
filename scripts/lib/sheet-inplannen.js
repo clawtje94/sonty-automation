@@ -1,0 +1,123 @@
+// Inplanning vastleggen in de offerte-sheet (Daimy 06-08): "zodra je iemand ingepland
+// hebt moet je in de sheet bij inkoop een 1tje zetten, in het vak erachter de
+// inmeetdatum en in het vak daarachter wie er gaat inmeten."
+//
+// Sheet-regels (reference_sonty_offerte_sheet_structuur):
+//  - koppelen ALTIJD via Gripp-nummer (kolom "Nummer") of telefoon (laatste 9), NOOIT op naam
+//  - kolomindexen verschillen per tab → altijd de headerrij (rij 3) lezen
+//  - klant niet gevonden → nieuwe rij onderaan de huidige maandtab + melding
+const path = require('path');
+const SHEET_ID = '1NesKeIKLVOLJjSy-fqo5KXrEVG2VJTYSfjgN7EHY85g';
+
+const MAANDEN = ['jan', 'feb', 'maa', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+const laatste9 = (t) => String(t || '').replace(/\D/g, '').slice(-9);
+
+/** Pure functie (scenario-lab-baar): vind rij + kolommen in tab-data. */
+function vindRijEnKolommen(tabs, { grippNr, telefoon }) {
+  for (const tab of tabs) {
+    const kop = (tab.rijen[2] || []).map((h) => String(h || '').toLowerCase());
+    const kol = {
+      inkoop: kop.findIndex((h) => /inko+p.*incl/.test(h)),
+      nummer: kop.findIndex((h) => /^nummer/.test(h)),
+      telefoon: kop.findIndex((h) => /telefoon/.test(h)),
+    };
+    if (kol.inkoop < 0) continue; // tab zonder inkoopkolom is geen offertetab
+    for (let r = 3; r < tab.rijen.length; r++) {
+      const rij = tab.rijen[r] || [];
+      const nrCel = String(rij[kol.nummer] || '').replace(/\D/g, '');
+      if (grippNr && nrCel && nrCel === String(grippNr)) return { tab: tab.titel, rijIndex: r, kol };
+      if (telefoon && kol.telefoon >= 0) {
+        const telCel = laatste9(rij[kol.telefoon]);
+        if (telCel.length === 9 && telCel === laatste9(telefoon)) return { tab: tab.titel, rijIndex: r, kol };
+      }
+    }
+  }
+  return null;
+}
+
+function kolomLetter(i) {
+  let s = '';
+  for (let n = i; n >= 0; n = Math.floor(n / 26) - 1) s = String.fromCharCode(65 + (n % 26)) + s;
+  return s;
+}
+
+async function sheetsClient() {
+  const { google } = require('googleapis');
+  const auth = new google.auth.GoogleAuth({
+    keyFile: path.join(__dirname, '..', '..', 'data', 'google-service-account.json'),
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  });
+  return google.sheets({ version: 'v4', auth });
+}
+
+/** Recente maandtabs (huidige + 2 vorige), nieuwste eerst. */
+async function recenteTabs(sheets) {
+  const meta = await sheets.spreadsheets.get({ spreadsheetId: SHEET_ID, fields: 'sheets.properties.title' });
+  const nu = new Date();
+  const doel = [];
+  for (let terug = 0; terug < 3; terug++) {
+    const d = new Date(nu.getFullYear(), nu.getMonth() - terug, 1);
+    doel.push({ maand: MAANDEN[d.getMonth()], jaar: String(d.getFullYear()) });
+  }
+  const titels = meta.data.sheets.map((s) => s.properties.title);
+  const gekozen = [];
+  for (const { maand, jaar } of doel) {
+    const titel = titels.find((t) => t.toLowerCase().trim().startsWith(maand) && t.includes(jaar));
+    if (titel) gekozen.push(titel);
+  }
+  return gekozen;
+}
+
+/**
+ * Schrijf de inplanning. Geeft { gevonden: bool, tab, rij } terug.
+ * datum als 'dd-mm-jjjj', inmeter als voornaam.
+ */
+async function schrijfInplanning({ grippNr, naam, telefoon, inmeetDatum, inmeter }) {
+  const sheets = await sheetsClient();
+  const titels = await recenteTabs(sheets);
+  const tabs = [];
+  for (const titel of titels) {
+    const res = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: `'${titel}'!A1:AH6000` });
+    tabs.push({ titel, rijen: res.data.values || [] });
+  }
+  const plek = vindRijEnKolommen(tabs, { grippNr, telefoon });
+
+  if (plek) {
+    const rijNr = plek.rijIndex + 1; // sheet is 1-based
+    const van = kolomLetter(plek.kol.inkoop);
+    const tot = kolomLetter(plek.kol.inkoop + 2);
+    await sheets.spreadsheets.values.update({
+      spreadsheetId: SHEET_ID,
+      range: `'${plek.tab}'!${van}${rijNr}:${tot}${rijNr}`,
+      valueInputOption: 'USER_ENTERED',
+      requestBody: { values: [[1, inmeetDatum, inmeter]] },
+    });
+    return { gevonden: true, tab: plek.tab, rij: rijNr };
+  }
+
+  // niet gevonden: nieuwe rij onderaan de huidige maandtab (losse akkoordrij, bestaand patroon)
+  const tab = tabs[0];
+  const kop = (tab.rijen[2] || []).map((h) => String(h || '').toLowerCase());
+  const kol = {
+    naam: kop.findIndex((h) => /naam/.test(h)),
+    nummer: kop.findIndex((h) => /^nummer/.test(h)),
+    telefoon: kop.findIndex((h) => /telefoon/.test(h)),
+    inkoop: kop.findIndex((h) => /inko+p.*incl/.test(h)),
+  };
+  const rij = [];
+  if (kol.naam >= 0) rij[kol.naam] = naam;
+  if (kol.telefoon >= 0) rij[kol.telefoon] = telefoon || 'zie gripp';
+  if (kol.nummer >= 0) rij[kol.nummer] = grippNr;
+  rij[kol.inkoop] = 1;
+  rij[kol.inkoop + 1] = inmeetDatum;
+  rij[kol.inkoop + 2] = inmeter;
+  await sheets.spreadsheets.values.append({
+    spreadsheetId: SHEET_ID,
+    range: `'${tab.titel}'!A:A`,
+    valueInputOption: 'USER_ENTERED',
+    requestBody: { values: [rij.map((c) => c ?? '')] },
+  });
+  return { gevonden: false, tab: tab.titel, rij: 'nieuw' };
+}
+
+module.exports = { schrijfInplanning, vindRijEnKolommen };

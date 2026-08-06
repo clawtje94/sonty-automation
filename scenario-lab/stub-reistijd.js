@@ -13,7 +13,7 @@ require.cache[echtPad] = {
   id: echtPad, filename: echtPad, loaded: true, exports: {
     MAGAZIJN: 'Magazijnweg 1, 2651 AA Berkel en Rodenrijs',
     reistijd: async (van, naar) => {
-      const minuten = Math.max(5, Math.round(Math.abs(pcVan(van) - pcVan(naar)) / 12));
+      const minuten = Math.max(5, Math.round(Math.abs(pcVan(van) - pcVan(naar)) / 25));
       return { minuten, km: minuten * 0.9 };
     },
   },

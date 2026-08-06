@@ -323,10 +323,25 @@ async function verwerkLead(lead, item, slot, duurMin) {
     }).catch(() => {});
   }
 
+  // SHEET (Daimy 06-08): inplanning = akkoord-administratie — inkoop "1",
+  // inmeetdatum, en wie er gaat. Mislukt dit, dan blokkeert het de boeking niet
+  // maar komt er wel een melding: de sheet is de conversie-administratie.
+  let sheetNote = '';
+  try {
+    const { schrijfInplanning } = require('./lib/sheet-inplannen.js');
+    const dd = slot.aankomst;
+    const inmeetDatum = `${String(dd.getDate()).padStart(2, '0')}-${String(dd.getMonth() + 1).padStart(2, '0')}-${dd.getFullYear()}`;
+    const res = await schrijfInplanning({ grippNr, naam: lead.naam, telefoon: lead.telefoon, inmeetDatum, inmeter: slot.inmeter });
+    sheetNote = res.gevonden ? ` · sheet ${res.tab} r${res.rij}` : ` · sheet: NIEUWE rij in ${res.tab} (klant stond er nog niet)`;
+  } catch (e) {
+    sheetNote = ' · SHEET NIET BIJGEWERKT: ' + e.message.slice(0, 60);
+    await telegram(`⚠️ Sheet bijwerken mislukt voor ${lead.naam} (inkoop-1/datum/inmeter): ${e.message.slice(0, 120)} — handmatig zetten.`);
+  }
+
   const tijd = slot.aankomst.toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
   return {
     samenvatting: `${slot.inmeter} ${tijd} (${duurMin} min, +${slot.extraRijtijdMin} min rijtijd)` +
-      (grippNr ? ` · Gripp ${grippNr} · meetbon klaar` : ' · LET OP: Gripp-nummer nog niet gevonden, meetbon-link ontbreekt'),
+      (grippNr ? ` · Gripp ${grippNr} · meetbon klaar` : ' · LET OP: Gripp-nummer nog niet gevonden, meetbon-link ontbreekt') + sheetNote,
     grippNr,
   };
 }
@@ -396,6 +411,7 @@ async function main() {
 
   const dagen = werkdagen();
   const regels = [];
+  const wachtenden = []; // leads zonder aanbod: kandidaten voor de combi-pas
 
   for (const item of items) {
     if (lopendeLeads.has(item.id)) continue;
@@ -439,6 +455,7 @@ async function main() {
       } else {
         console.log(`    NOG GEEN AANBOD (dag ${wachtDagen}): ${reden}`);
         regels.push(`${lead.naam} (${lead.plaats}): wacht dag ${wachtDagen}/${MAX_WACHTDAGEN} — ${reden}`);
+        wachtenden.push({ lead, item, duur, wachtDagen });
       }
       continue;
     }
@@ -465,8 +482,75 @@ async function main() {
     }
   }
 
+  // COMBI-PAS (Daimy 06-08 "kijk of je in de te plannen lijst combi's kan maken"):
+  // wachtende klanten die dicht bij elkaar wonen worden als groep beoordeeld — de
+  // omrij-kosten delen ze, dus een rit die voor één klant te duur is kan voor twee
+  // of drie samen wél uit. De oudste krijgt eerst aanbod; zijn slots worden ankers
+  // waardoor de rest er in dezelfde run omheen valt.
+  await combiPas(wachtenden, agenda, dagen, regels);
+
   bewaarState(state);
   await telegram(`Inmeet-planner (${LIVE ? 'LIVE' : 'schaduw'}) — ${items.length} lead(s):\n\n` + regels.join('\n'));
+}
+
+const MAX_COMBI_RIJTIJD_MIN = 20; // klanten die hooguit dit uit elkaar wonen vormen een combi
+
+async function combiPas(wachtenden, agenda, dagen, regels) {
+  if (wachtenden.length < 2) return;
+  const { reistijd } = require('./lib/reistijd');
+  const { MAX_EXTRA_RIJTIJD_MIN } = require('./lib/slotzoeker.js');
+
+  // groepen bouwen op onderlinge rijtijd (klein aantal, dus paarsgewijs is prima)
+  const groep = wachtenden.map((_, i) => i);
+  for (let a = 0; a < wachtenden.length; a++) {
+    for (let b = a + 1; b < wachtenden.length; b++) {
+      try {
+        const r = await reistijd(wachtenden[a].lead.volledigAdres, wachtenden[b].lead.volledigAdres, new Date());
+        if (r.minuten <= MAX_COMBI_RIJTIJD_MIN) {
+          const doel = groep[a];
+          for (let k = 0; k < groep.length; k++) if (groep[k] === groep[b]) groep[k] = doel;
+        }
+      } catch { /* adres niet routeerbaar: geen combi */ }
+    }
+  }
+  const groepen = {};
+  groep.forEach((g, i) => { (groepen[g] = groepen[g] || []).push(wachtenden[i]); });
+
+  for (const leden of Object.values(groepen)) {
+    if (leden.length < 2) continue;
+    leden.sort((a, b) => b.wachtDagen - a.wachtDagen); // oudste eerst
+    console.log(`\n  COMBI-KANS: ${leden.map((l) => l.lead.naam + ' (' + l.lead.plaats + ')').join(' + ')}`);
+
+    for (let volg = 0; volg < leden.length; volg++) {
+      const w = leden[volg];
+      let beste = [];
+      for (const inm of INMETERS) {
+        try {
+          const sl = await zoekSlots({ agenda: agenda[inm.naam], adres: w.lead.volledigAdres, duurMin: w.duur, werkdagen: dagen });
+          beste.push(...sl.map((x) => ({ ...x, inmeter: inm.naam })));
+        } catch { /* geen slots bij deze inmeter */ }
+      }
+      // gedeelde kosten: de rit telt per klant in de groep
+      const grens = MAX_EXTRA_RIJTIJD_MIN * leden.length;
+      beste = beste.filter((x) => x.extraRijtijdMin <= grens)
+        .sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
+      const aanbod = kiesAanbod(beste, 3, { wachtDagen: 999 }); // filter al gedaan, op groepsniveau
+      if (!aanbod.length) { console.log(`    ${w.lead.naam}: ook als combi geen gat`); continue; }
+
+      console.log(`    ${w.lead.naam}: combi-aanbod ${aanbod.map((x) => `${x.inmeter} ${x.datum.slice(5)} ${venster(x)} +${x.extraRijtijdMin}min`).join(' | ')}`);
+      regels.push(`COMBI ${w.lead.naam} (${w.lead.plaats}): ${aanbod.map((x) => `${x.inmeter} ${x.datum.slice(5)} ${venster(x)} +${x.extraRijtijdMin}min`).join(' | ')}`);
+      if (LIVE) {
+        try {
+          await maakEnVerstuurAanbod(w.lead, w.item, aanbod, w.duur);
+          regels.push('  → combi-aanbod verstuurd');
+        } catch (e) { regels.push(`  → combi-aanbod versturen MISLUKT: ${e.message}`); continue; }
+      }
+      // slots reserveren zodat de rest van de groep ernaast valt
+      for (const x of aanbod) {
+        agenda[x.inmeter].push({ start: x.aankomst.toISOString(), eind: x.vertrek.toISOString(), adres: w.lead.volledigAdres, klant: `aanbod ${w.lead.naam}` });
+      }
+    }
+  }
 }
 
 /** Aanbod vastleggen in het register en direct naar de klant sturen (mail + WhatsApp). */

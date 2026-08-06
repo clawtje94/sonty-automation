@@ -853,6 +853,7 @@ async function verwerkAanbiedingen() {
       } catch (e) {
         await telegram(`⚠️ Boekingsrecord niet opgeslagen voor ${a.lead.naam}: ${e.message.slice(0, 100)} — annuleren/verzetten wordt dan handwerk.`);
       }
+      await verwijderRekenKaart(a.lead.rpItemId);
       await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verwerkt' }) });
       console.log(`  ✓ ${a.lead.naam}: ${uitkomst.samenvatting}`);
       await telegram(`✅ Inmeetafspraak GEBOEKT na klantkeuze:\n${a.lead.naam} — ${slot.datum}, ${slot.inmeter}\n${uitkomst.samenvatting}`);
@@ -862,6 +863,14 @@ async function verwerkAanbiedingen() {
     }
   }
   bewaarState(state);
+}
+
+/** Reken-kaart van het dashboard halen zodra een lead geboekt is (bleef anders 45 min hangen). */
+async function verwijderRekenKaart(rpItemId) {
+  await fetch('https://sonty-website.vercel.app/api/inmeet-dashboard', {
+    method: 'DELETE', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+    body: JSON.stringify({ rpItemId }),
+  }).catch(() => {});
 }
 
 /** Dashboard-verzoek: 'boek' = direct boeken op het gekozen slot (klant zit bv. aan
@@ -921,6 +930,7 @@ async function verwerkDashboardVerzoek(m) {
   } catch (e) {
     await telegram(`⚠️ Boekingsrecord (winkel-boeking) niet opgeslagen voor ${lead.naam}: ${e.message.slice(0, 100)}`);
   }
+  await verwijderRekenKaart(item.id);
   try {
     const { verstuurBevestiging } = require('./lib/aanbod-versturen');
     await verstuurBevestiging({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin: duur }, { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter });

@@ -1,0 +1,142 @@
+// DE mutatie-motor voor geboekte inmeetafspraken (ultracode-verkenning 06-08).
+// Eén functie voor alle aanleidingen (klant-reply, winkel-knop, AI-klantenservice):
+// annuleren of verzetten = alle systemen in één keer, nooit handmatig losse stukken.
+//
+// Beleid (Daimy 06-08): V1 de vraag "afzeggen of verzetten?" stelt de AANLEIDING
+// (AI/winkel) — deze motor voert pas uit bij duidelijke intent. V2 echte annulering
+// is zeldzaam: melding aan kantoor, RP blijft staan zodat een mens over nabellen
+// beslist. V3 bij annuleren gaat het 1-tje bij inkoop in de sheet weg.
+//
+// Volgorde bij annuleren (rollback-analyse): Outlook-event EERST weg (anders ziet de
+// Outlook→Planado-sync een afspraak zonder job en maakt hem opnieuw aan), dan de
+// Planado-job (echt DELETE — de herinnerings-cron filtert alleen op datum), dan
+// sheet-cellen leeg, dan states, dan klantbericht.
+const fs = require('fs');
+const path = require('path');
+
+const BOEKINGEN = process.env.INMEET_BOEKINGEN_PAD || path.join(__dirname, '..', '..', 'data', 'inmeet-boekingen.json');
+const PLANADO_KEY = fs.readFileSync(path.join(__dirname, '..', 'planado-api-key.txt'), 'utf8').trim();
+const PH = { Authorization: 'Bearer ' + PLANADO_KEY, 'Content-Type': 'application/json', 'X-Planado-Notify-Assignees': 'false' };
+const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
+const RP_API_KEY = 'reuzenpanda_cpat_WMD2KmDRune53bj7.d0_ls8loPpAjb2TrSNOS_Xd_QLdxHq1xwOC9pyyJado';
+const PID = '731483fa-ef6b-4aae-afcf-883ec09219dd';
+const BACKLOG_ID = 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7';
+const INMETEN_INPLANNEN = '2e9819bd-26f0-4082-8f18-32bb48f87f54';
+
+const laadBoekingen = () => { try { return JSON.parse(fs.readFileSync(BOEKINGEN, 'utf8')); } catch { return {}; } };
+const bewaarBoekingen = (b) => fs.writeFileSync(BOEKINGEN, JSON.stringify(b, null, 2));
+const laatste9 = (t) => String(t || '').replace(/\D/g, '').slice(-9);
+
+async function telegram(tekst) {
+  await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: 1700128390, text: tekst }),
+  }).catch(() => {});
+}
+
+/** Bij elke boeking aanroepen: bewaart ALLE sleutels die een rollback nodig heeft. */
+function registreerBoeking({ rpItemId, naam, telefoon, email, planadoJobUuid, outlookEventId, grippNr, sheet, slot, duurMin, aanbodToken }) {
+  const boekingen = laadBoekingen();
+  boekingen[rpItemId] = {
+    naam, telefoon, email, planadoJobUuid, outlookEventId: outlookEventId || null,
+    grippNr: grippNr || null, sheet: sheet || null,
+    aankomst: new Date(slot.aankomst).toISOString(), inmeter: slot.inmeter, duurMin,
+    aanbodToken: aanbodToken || null, geboektOp: new Date().toISOString(), status: 'geboekt',
+  };
+  bewaarBoekingen(boekingen);
+}
+
+/** Boeking terugvinden op telefoon (laatste 9), e-mail of naam-deel. */
+function vindBoeking({ telefoon, email, naam }) {
+  const boekingen = laadBoekingen();
+  const actief = Object.entries(boekingen).filter(([, b]) => b.status === 'geboekt');
+  const tel9 = laatste9(telefoon);
+  let hit = tel9.length === 9 ? actief.find(([, b]) => laatste9(b.telefoon) === tel9) : null;
+  if (!hit && email) hit = actief.find(([, b]) => String(b.email || '').toLowerCase() === String(email).toLowerCase());
+  if (!hit && naam && String(naam).trim().length >= 5) {
+    const n = String(naam).toLowerCase();
+    const kandidaten = actief.filter(([, b]) => String(b.naam || '').toLowerCase().includes(n) || n.includes(String(b.naam || '').toLowerCase()));
+    if (kandidaten.length === 1) hit = kandidaten[0]; // alleen bij ondubbelzinnig
+  }
+  return hit ? { rpItemId: hit[0], ...hit[1] } : null;
+}
+
+/**
+ * Annuleer of verzet een geboekte inmeetafspraak.
+ * soort: 'annuleer' (klant wil er definitief vanaf) of 'verzet' (klant wil een
+ * ander moment: alles opruimen + lead terug in de wachtrij → planner stuurt
+ * automatisch een nieuw 3-tijden-aanbod).
+ * Geeft { gelukt, stappen: [{stap, ok, detail}] } — deels mislukt = zichtbaar, nooit stil.
+ */
+async function muteerBoeking(rpItemId, soort, { reden = '', bron = 'onbekend' } = {}) {
+  const boekingen = laadBoekingen();
+  const b = boekingen[rpItemId];
+  if (!b || b.status !== 'geboekt') return { gelukt: false, stappen: [{ stap: 'vinden', ok: false, detail: 'geen actieve boeking' }] };
+  const stappen = [];
+  const stap = (naam, ok, detail = '') => stappen.push({ stap: naam, ok, detail });
+
+  // 1. Outlook-event weg (vóór Planado, anders maakt de sync hem opnieuw aan)
+  if (b.outlookEventId) {
+    try {
+      const { verwijderOpties } = require('./outlook-opties.js');
+      await verwijderOpties([b.outlookEventId]);
+      stap('outlook', true);
+    } catch (e) { stap('outlook', false, e.message.slice(0, 80)); }
+  } else stap('outlook', true, 'geen event-id bekend (oudere boeking)');
+
+  // 2. Planado-job echt verwijderen
+  try {
+    const r = await fetch('https://api.planadoapp.com/v2/jobs/' + b.planadoJobUuid, { method: 'DELETE', headers: PH });
+    stap('planado', r.ok || r.status === 404, 'HTTP ' + r.status);
+  } catch (e) { stap('planado', false, e.message.slice(0, 80)); }
+
+  // 3. Sheet: de drie cellen leeg (V3 Daimy: 1-tje weg bij annuleren; bij verzetten
+  // ook — de nieuwe boeking schrijft ze straks opnieuw met de nieuwe datum)
+  if (b.sheet?.tab && b.sheet?.rij && b.sheet?.kolomInkoop >= 0) {
+    try {
+      const { maakCellenLeeg } = require('./sheet-inplannen.js');
+      await maakCellenLeeg(b.sheet);
+      stap('sheet', true);
+    } catch (e) { stap('sheet', false, e.message.slice(0, 80)); }
+  } else stap('sheet', true, 'geen sheet-locatie bekend');
+
+  // 4. RP + planner-state
+  try {
+    if (soort === 'verzet') {
+      // terug naar "Inmeten inplannen" zodat de planner automatisch nieuw aanbod stuurt;
+      // 5-dagen-klok herstart (dit is een nieuwe belofte aan de klant)
+      const r = await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${BACKLOG_ID}/items/${rpItemId}`, {
+        method: 'PATCH', headers: { Authorization: 'Bearer ' + RP_API_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ item: { status_id: INMETEN_INPLANNEN } }),
+      });
+      stap('rp-status', r.ok, r.ok ? 'terug naar Inmeten inplannen' : 'HTTP ' + r.status);
+      const STATE = process.env.INMEET_PLANNER_STATE_PAD || path.join(__dirname, '..', '..', 'data', 'inmeten-planner-state.json');
+      const st = JSON.parse(fs.readFileSync(STATE, 'utf8'));
+      delete st.aangeboden?.[rpItemId];
+      if (st.gezien) st.gezien[rpItemId] = new Date().toISOString();
+      fs.writeFileSync(STATE, JSON.stringify(st, null, 2));
+      stap('planner-state', true, 'wachtrij + verse 5-dagen-klok');
+    } else {
+      // annuleren: RP bewust LATEN STAAN — kantoor beslist over nabellen (V2)
+      stap('rp-status', true, 'bewust niet aangeraakt (kantoor beslist)');
+    }
+  } catch (e) { stap('rp-status', false, e.message.slice(0, 80)); }
+
+  // 5. boekingsrecord bijwerken
+  b.status = soort === 'verzet' ? 'verzet' : 'geannuleerd';
+  b.mutatie = { soort, reden, bron, op: new Date().toISOString(), stappen };
+  bewaarBoekingen(boekingen);
+
+  // 6. klantbericht + kantoor-melding
+  const alles = stappen.every((s) => s.ok);
+  const datum = new Date(b.aankomst).toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  await telegram(
+    (soort === 'verzet'
+      ? `🔄 Inmeetafspraak VERZET (${bron}): ${b.naam}, was ${datum} bij ${b.inmeter}. Lead staat terug in de wachtrij, nieuw aanbod volgt automatisch.`
+      : `🛑 Inmeetafspraak GEANNULEERD (${bron}): ${b.naam}, was ${datum} bij ${b.inmeter}.${reden ? ` Reden: ${reden}.` : ''} RP staat nog op "Gripp invullen" — kantoor beslist over nabellen.`)
+    + (alles ? '' : `\n⚠️ Niet alles lukte: ${stappen.filter((s) => !s.ok).map((s) => s.stap + ' (' + s.detail + ')').join(', ')} — even nakijken.`),
+  );
+  return { gelukt: alles, stappen, boeking: b };
+}
+
+module.exports = { registreerBoeking, vindBoeking, muteerBoeking, laadBoekingen };

@@ -111,7 +111,7 @@ async function schrijfInplanning({ rpNummers = [], grippNr, naam, telefoon, inme
       valueInputOption: 'USER_ENTERED',
       requestBody: { values: [[1, inmeetDatum, inmeter]] },
     });
-    return { gevonden: true, tab: plek.tab, rij: rijNr };
+    return { gevonden: true, tab: plek.tab, rij: rijNr, kolomInkoop: plek.kol.inkoop };
   }
 
   // niet gevonden: nieuwe rij onderaan de huidige maandtab (losse akkoordrij, bestaand patroon)
@@ -136,7 +136,21 @@ async function schrijfInplanning({ rpNummers = [], grippNr, naam, telefoon, inme
     valueInputOption: 'USER_ENTERED',
     requestBody: { values: [rij.map((c) => c ?? '')] },
   });
-  return { gevonden: false, tab: tab.titel, rij: 'nieuw' };
+  return { gevonden: false, tab: tab.titel, rij: 'nieuw', kolomInkoop: kol.inkoop };
 }
 
-module.exports = { schrijfInplanning, vindRijEnKolommen, tabsInZoekvolgorde };
+/** Rollback (Daimy V3): de drie cellen inkoop/inmeetdatum/inmeter weer leegmaken. */
+async function maakCellenLeeg({ tab, rij, kolomInkoop }) {
+  if (!tab || !Number.isInteger(rij) || !(kolomInkoop >= 0)) throw new Error('sheet-locatie onvolledig');
+  const sheets = await sheetsClient();
+  const van = kolomLetter(kolomInkoop);
+  const tot = kolomLetter(kolomInkoop + 2);
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: SHEET_ID,
+    range: `'${tab}'!${van}${rij}:${tot}${rij}`,
+    valueInputOption: 'USER_ENTERED',
+    requestBody: { values: [['', '', '']] },
+  });
+}
+
+module.exports = { schrijfInplanning, vindRijEnKolommen, tabsInZoekvolgorde, maakCellenLeeg };

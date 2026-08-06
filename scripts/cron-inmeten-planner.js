@@ -329,11 +329,13 @@ async function verwerkLead(lead, item, slot, duurMin) {
   // inmeetdatum, en wie er gaat. Mislukt dit, dan blokkeert het de boeking niet
   // maar komt er wel een melding: de sheet is de conversie-administratie.
   let sheetNote = '';
+  let sheetLocatie = null;
   try {
     const { schrijfInplanning } = require('./lib/sheet-inplannen.js');
     const dd = slot.aankomst;
     const inmeetDatum = `${String(dd.getDate()).padStart(2, '0')}-${String(dd.getMonth() + 1).padStart(2, '0')}-${dd.getFullYear()}`;
     const res = await schrijfInplanning({ rpNummers: lead.rpNummers || [], docDatums: lead.rpDatums || [], grippNr, naam: lead.naam, telefoon: lead.telefoon, inmeetDatum, inmeter: slot.inmeter });
+    if (Number.isInteger(res.rij)) sheetLocatie = { tab: res.tab, rij: res.rij, kolomInkoop: res.kolomInkoop };
     sheetNote = res.gevonden ? ` · sheet ${res.tab} r${res.rij}` : ` · sheet: NIEUWE rij in ${res.tab} (klant stond er nog niet)`;
   } catch (e) {
     sheetNote = ' · SHEET NIET BIJGEWERKT: ' + e.message.slice(0, 60);
@@ -345,6 +347,8 @@ async function verwerkLead(lead, item, slot, duurMin) {
     samenvatting: `${slot.inmeter} ${tijd} (${duurMin} min, +${slot.extraRijtijdMin} min rijtijd)` +
       (grippNr ? ` · Gripp ${grippNr} · meetbon klaar` : ' · LET OP: Gripp-nummer nog niet gevonden, meetbon-link ontbreekt') + sheetNote,
     grippNr,
+    planadoJobUuid: jobUuid,
+    sheetLocatie,
   };
 }
 
@@ -608,6 +612,44 @@ async function aanbodApi(pad, opties = {}) {
 
 async function verwerkAanbiedingen() {
   const state = laadState();
+
+  // 0. mutatie-verzoeken (winkel-knop, AI, klant-reply) — één motor voor alles
+  try {
+    const MUTATIE_API = 'https://sonty-website.vercel.app/api/inmeet-mutatie';
+    const { mutaties } = await (await fetch(MUTATIE_API + '?status=open', { headers: { 'x-meet-code': MEET_CODE } })).json();
+    for (const m of mutaties || []) {
+      const { vindBoeking, muteerBoeking } = require('./lib/inmeet-mutatie.js');
+      const boeking = vindBoeking({ telefoon: m.telefoon, email: m.email, naam: m.naam });
+      let uitkomst;
+      if (!boeking) {
+        uitkomst = 'geen actieve boeking gevonden';
+        await telegram(`⚠️ Mutatie-verzoek (${m.bron}, ${m.type}) voor ${m.naam || m.telefoon || m.email}: geen actieve boeking gevonden — handmatig nakijken.`);
+        await fetch(MUTATIE_API, { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE }, body: JSON.stringify({ id: m.id, status: 'afgewezen', uitkomst }) });
+        continue;
+      }
+      const res = await muteerBoeking(boeking.rpItemId, m.type, { reden: m.reden || '', bron: m.bron });
+      uitkomst = res.gelukt ? 'alle systemen bijgewerkt' : 'deels: ' + res.stappen.filter((s2) => !s2.ok).map((s2) => s2.stap).join(',');
+      // klantbericht: bij verzet volgt het nieuwe aanbod vanzelf uit de planner-run;
+      // bij annuleren een nette afscheidsgroet
+      if (m.type === 'annuleer' && (boeking.telefoon || boeking.email)) {
+        try {
+          const { stuurWhatsApp } = require('./lib/aanbod-versturen');
+          const ticket = await require('./lib/aanbod-versturen').zoekWaTicket(boeking.telefoon).catch(() => null);
+          if (ticket) {
+            const TT = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
+            await fetch('https://app.trengo.com/api/v2/tickets/' + ticket.id + '/messages', {
+              method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ message: `Hoi ${(boeking.naam || 'daar').split(' ')[0]}, we hebben de inmeetafspraak geannuleerd. Mocht het later toch weer spelen, dan ben je altijd welkom. Groetjes, Jaimy van Sonty`, type: 'OUTBOUND' }),
+            });
+          }
+        } catch { /* klantbericht is nice-to-have; kantoor kreeg al een melding */ }
+      }
+      await fetch(MUTATIE_API, { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE }, body: JSON.stringify({ id: m.id, status: 'verwerkt', uitkomst }) });
+      console.log(`  mutatie ${m.type} (${m.bron}) ${boeking.naam}: ${uitkomst}`);
+    }
+  } catch (e) {
+    console.log('mutatie-wachtrij niet bereikbaar: ' + e.message);
+  }
   // 1. verlopen aanbiedingen opruimen + melden (de 24-uursklok)
   const { aanbiedingen: open } = await aanbodApi('?status=open');
   for (const a of open) {
@@ -674,13 +716,26 @@ async function verwerkAanbiedingen() {
         await telegram(`⚠️ Bevestiging naar ${a.lead.naam} mislukt: ${e.message.slice(0, 100)}`);
       }
       // gekozen optie wordt de echte Outlook-afspraak; de andere opties verdwijnen
+      let outlookEventId = null;
       try {
         const { maakDefinitief, verwijderOpties } = require('./lib/outlook-opties.js');
         await verwijderOpties(state.opties?.[a.token]);
         delete state.opties?.[a.token];
-        await maakDefinitief({ slot: gekozenSlot, naam: a.lead.naam, telefoon: a.lead.telefoon, adres: a.lead.volledigAdres, duurMin: a.duurMin });
+        outlookEventId = await maakDefinitief({ slot: gekozenSlot, naam: a.lead.naam, telefoon: a.lead.telefoon, adres: a.lead.volledigAdres, duurMin: a.duurMin });
       } catch (e) {
         await telegram(`⚠️ Outlook-afspraak na boeking mislukt voor ${a.lead.naam}: ${e.message.slice(0, 100)} — Planado is WEL geboekt; agenda handmatig aanvullen.`);
+      }
+      // ALLE rollback-sleutels vastleggen — zonder dit kan niemand netjes annuleren/verzetten
+      try {
+        const { registreerBoeking } = require('./lib/inmeet-mutatie.js');
+        registreerBoeking({
+          rpItemId: a.lead.rpItemId, naam: a.lead.naam, telefoon: a.lead.telefoon, email: a.lead.email,
+          planadoJobUuid: uitkomst.planadoJobUuid, outlookEventId, grippNr: uitkomst.grippNr,
+          sheet: uitkomst.sheetLocatie, slot: { aankomst: slot.aankomst, inmeter: slot.inmeter },
+          duurMin: a.duurMin, aanbodToken: a.token,
+        });
+      } catch (e) {
+        await telegram(`⚠️ Boekingsrecord niet opgeslagen voor ${a.lead.naam}: ${e.message.slice(0, 100)} — annuleren/verzetten wordt dan handwerk.`);
       }
       await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verwerkt' }) });
       console.log(`  ✓ ${a.lead.naam}: ${uitkomst.samenvatting}`);

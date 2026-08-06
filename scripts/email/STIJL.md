@@ -17,7 +17,7 @@ en uit echte verstuurde berichten van het team in Trengo.
    zonwering, geen vakantiegevoel.
 6. **Ik, niet wij.** Er schrijft één iemand. "Ik heb even gekeken", niet "wij hebben geconstateerd".
 7. **Spreektaal.** Schrijf zoals je het zou appen: "even", "gewoon", "hoor", "trouwens".
-8. **Concreet boven vaag.** Niet "op korte termijn" maar "binnen drie werkdagen". Niet "scherp
+8. **Concreet boven vaag.** Niet "op korte termijn" maar "binnen vijf werkdagen". Niet "scherp
    geprijsd" maar het bedrag.
 9. **Aanhef**: "Hoi [voornaam]," Bij oudere doelgroep of formele mail: "Goedemiddag [voornaam],"
 10. **Afsluiting**: "Groet, Jaimy van Sonty". Nooit "Met vriendelijke groet" in een campagnemail;

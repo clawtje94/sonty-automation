@@ -644,7 +644,7 @@ SJABLONEN['sonty-akkoord'] = mail({
   naam: 'Sonty na akkoord',
   preheader: 'Je akkoord is binnen, dit gaat er nu gebeuren',
   kop: 'Top, je akkoord is binnen',
-  intro: 'Dank je wel voor het vertrouwen. Ik heb je akkoord doorgegeven aan de planning. Zij nemen binnen drie werkdagen contact op om de inmeetafspraak in te plannen.',
+  intro: 'Dank je wel voor het vertrouwen. Ik heb je akkoord doorgegeven aan de planning. Zij nemen binnen vijf werkdagen contact op om de inmeetafspraak in te plannen.',
   blokken: [
     offerteKaart(),
     stappen(),

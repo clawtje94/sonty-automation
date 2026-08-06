@@ -570,10 +570,20 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin) {
     }),
   });
   if (!res.ok) throw new Error(`aanbod aanmaken: HTTP ${res.status}`);
-  const { url } = await res.json();
+  const { url, token } = await res.json();
   const { verstuurAanbod } = require('./lib/aanbod-versturen');
   const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin }, url);
   if (!verzonden.wa.ok && !verzonden.mail.ok) throw new Error(`niet bezorgd (wa: ${verzonden.wa.reden}, mail: ${verzonden.mail.reden})`);
+  // opties zichtbaar maken voor het kantoor (Outlook), zodat niemand erdoorheen plant
+  try {
+    const { maakOpties } = require('./lib/outlook-opties.js');
+    const ids = await maakOpties({ slots: aanbod, naam: lead.naam, verlooptOp: Date.now() + 24 * 3600000 });
+    const st = laadState();
+    st.opties = { ...(st.opties || {}), [token]: ids };
+    bewaarState(st);
+  } catch (e) {
+    await telegram(`⚠️ Outlook-opties zetten mislukt voor ${lead.naam}: ${e.message.slice(0, 100)} — aanbod is WEL verstuurd; kantoor ziet de opties alleen niet in de agenda.`);
+  }
   return url;
 }
 
@@ -602,6 +612,9 @@ async function verwerkAanbiedingen() {
   for (const a of open) {
     if (Date.now() > Date.parse(a.verlooptOp)) {
       await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen' }) });
+      const { verwijderOpties } = require('./lib/outlook-opties.js');
+      await verwijderOpties(state.opties?.[a.token]).catch(() => {});
+      delete state.opties?.[a.token];
       await telegram(`⏰ Inmeet-aanbod voor ${a.lead.naam} is na 24 uur verlopen zonder keuze. Volgende stap: nieuw aanbod of bellen (belscherm).`);
     }
   }
@@ -637,14 +650,28 @@ async function verwerkAanbiedingen() {
         return Date.parse(afspraak.start) < tot && Date.parse(afspraak.eind) > van;
       });
       if (botst) {
-        if (!state.conflictGemeld?.[a.token]) {
-          await telegram(`🚨 DUBBELBOEKING VOORKOMEN: ${a.lead.naam} koos ${slot.datum} bij ${slot.inmeter}, maar dat gat is inmiddels bezet. Klant krijgt een nieuw aanbod nodig — handmatig of volgende planner-run.`);
-          state.conflictGemeld = { ...(state.conflictGemeld || {}), [a.token]: true };
-        }
-        console.log(`  ✗ ${a.lead.naam}: gekozen slot is inmiddels bezet — NIET geboekt`);
+        // het kantoor (spoedje/winkelklant) wint altijd van een optie: NIET boeken,
+        // aanbod afsluiten, en de lead komt vanzelf terug in de eerstvolgende
+        // planner-run voor een VERS aanbod (wachttijd telt gewoon door).
+        await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verwerkt' }) });
+        const { verwijderOpties } = require('./lib/outlook-opties.js');
+        await verwijderOpties(state.opties?.[a.token]).catch(() => {});
+        delete state.opties?.[a.token];
+        delete state.aangeboden?.[a.lead.rpItemId];
+        await telegram(`↩️ ${a.lead.naam} koos ${slot.datum} bij ${slot.inmeter}, maar dat gat is inmiddels door het kantoor gevuld. De klant krijgt bij de volgende planner-run automatisch een nieuw aanbod.`);
+        console.log(`  ↩ ${a.lead.naam}: gekozen slot bezet — nieuw aanbod volgt automatisch`);
         continue;
       }
       const uitkomst = await verwerkLead(lead, null, gekozenSlot, a.duurMin);
+      // gekozen optie wordt de echte Outlook-afspraak; de andere opties verdwijnen
+      try {
+        const { maakDefinitief, verwijderOpties } = require('./lib/outlook-opties.js');
+        await verwijderOpties(state.opties?.[a.token]);
+        delete state.opties?.[a.token];
+        await maakDefinitief({ slot: gekozenSlot, naam: a.lead.naam, telefoon: a.lead.telefoon, adres: a.lead.volledigAdres, duurMin: a.duurMin });
+      } catch (e) {
+        await telegram(`⚠️ Outlook-afspraak na boeking mislukt voor ${a.lead.naam}: ${e.message.slice(0, 100)} — Planado is WEL geboekt; agenda handmatig aanvullen.`);
+      }
       await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verwerkt' }) });
       console.log(`  ✓ ${a.lead.naam}: ${uitkomst.samenvatting}`);
       await telegram(`✅ Inmeetafspraak GEBOEKT na klantkeuze:\n${a.lead.naam} — ${slot.datum}, ${slot.inmeter}\n${uitkomst.samenvatting}`);

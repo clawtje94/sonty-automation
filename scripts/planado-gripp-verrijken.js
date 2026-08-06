@@ -120,7 +120,15 @@ async function zoekOpNaam(klantnaam) {
     const ow = on.replace(/[^\p{L} ]/gu, ' ').split(/\s+/).filter((w) => w.length >= 4 && !RUIS.test(w));
     return kw.length && ow.length && (kw.every((w) => on.includes(w)) || ow.every((w) => kn.includes(w)));
   });
-  return past.length === 1 ? past : null;
+  if (past.length === 1) return past;
+  if (past.length > 1) {
+    // Meerdere verwante kaarten ("Jan Testman" + "Testman BV"/"Jan Testmans"): als
+    // precies één kaartnaam letterlijk het begin van de opdrachtnaam is, is dát hem.
+    const plat = (x) => String(x || '').toLowerCase().replace(/[^\p{L} ]/gu, ' ').replace(/\s+/g, ' ').trim();
+    const exactBegin = past.filter((k) => plat(klantnaam).startsWith(plat(k.searchname)));
+    if (exactBegin.length === 1) return exactBegin;
+  }
+  return null;
 }
 
 /** Klant zoeken: adres eerst, telefoon als vangnet, naam als laatste redmiddel. */
@@ -166,7 +174,22 @@ async function zoekKlant(adres, telefoon, klantnaam) {
       kandidaten = [...new Map(kandidaten.map((k) => [k.id, k])).values()];
     }
   }
-  if (!kandidaten.length && klantnaam) kandidaten = (await zoekOpNaam(klantnaam)) || [];
+  if (!kandidaten.length && klantnaam) {
+    let opNaam = (await zoekOpNaam(klantnaam)) || [];
+    // Scenario-lab 06-08: een naam-match mag een TEGENSPREKEND adres nooit overrulen —
+    // zelfde naam op een ander adres is vaker een andere persoon dan een verhuizing.
+    // Kaart zonder adres (zoals Jeanette de Jong) blijft gewoon toegestaan.
+    const pcJob = adresSleutel(adres)?.pc;
+    const stJob = straatSleutel(adres)?.straat?.toLowerCase();
+    opNaam = opNaam.filter((k) => {
+      const pcKaart = String(k.visitingaddress_zipcode || '').replace(/\s/g, '').toUpperCase();
+      if (pcJob && pcKaart) return pcKaart === pcJob;
+      const straatKaart = String(k.visitingaddress_street || '').toLowerCase();
+      if (stJob && straatKaart) return straatKaart.includes(stJob);
+      return true;
+    });
+    kandidaten = opNaam;
+  }
   if (!kandidaten.length) return null;
 
   // Meerdere kaarten op één adres (bv. bewoner + BV): degene met de nieuwste offerte wint.

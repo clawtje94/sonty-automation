@@ -33,6 +33,11 @@ const MARGE_MIN = 5;
  * Wat "goed" is, moet uit de praktijk blijken -- vandaar de wachtteller in de planner.
  */
 const MAX_EXTRA_RIJTIJD_MIN = 30;
+// Verre-klant-regel (Daimy 06-08 "hoelang wacht je voor je hem toch inplant?"):
+// wachten op een klus in dezelfde hoek mag, maar maximaal dit aantal werkdagen.
+// Daarna krijgt de klant gewoon de goedkoopste plekken — een klant kwijtraken
+// kost altijd meer dan een half uur omrijden.
+const MAX_WACHT_WERKDAGEN = 5;
 
 /**
  * @param {Object} opts
@@ -178,7 +183,7 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
  * Kies de slots die je aan de klant voorlegt: de goedkoopste, maar gespreid over
  * verschillende dagen en dagdelen. Drie keer hetzelfde tijdstip aanbieden is geen keuze.
  */
-function kiesAanbod(slots, aantal = 3) {
+function kiesAanbod(slots, aantal = 3, { wachtWerkdagen = 0 } = {}) {
   // CLUSTEREN gebeurt hier: altijd rangschikken op marginale rijtijd, zodat een slot
   // náást een bestaande afspraak in dezelfde buurt wint van een losse lege dag.
   // De formule heen + terug - direct blijft geldig, ook op een vuile agenda; alleen het
@@ -186,8 +191,11 @@ function kiesAanbod(slots, aantal = 3) {
   // filter staat alleen aan als de kosten betrouwbaar zijn.
   const betrouwbaar = !slots.some((s) => s.kostenBetrouwbaar === false);
   slots = [...slots].sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
-  if (betrouwbaar) {
-    slots = slots.filter((s) => s.extraRijtijdMin <= MAX_EXTRA_RIJTIJD_MIN);
+  if (betrouwbaar && wachtWerkdagen < MAX_WACHT_WERKDAGEN) {
+    const gefilterd = slots.filter((s) => s.extraRijtijdMin <= MAX_EXTRA_RIJTIJD_MIN);
+    // verre klant: pas filteren als er iets overblijft; anders wachten we bewust
+    // (tot MAX_WACHT_WERKDAGEN) en dat is een zichtbare keuze, geen stille nul
+    slots = gefilterd;
   }
   const gekozen = [];
   const gebruikt = new Set();
@@ -221,7 +229,7 @@ function venster(slot) {
 function waaromGeenAanbod(slots) {
   if (!slots.length) return 'geen enkel gat groot genoeg in de komende werkdagen';
   const goedkoopste = Math.min(...slots.map((s) => s.extraRijtijdMin));
-  return `alle plekken kosten te veel omrijden (goedkoopste +${goedkoopste} min, grens is ${MAX_EXTRA_RIJTIJD_MIN}) — beter wachten tot er een klus in dezelfde hoek bijkomt`;
+  return `alle plekken kosten te veel omrijden (goedkoopste +${goedkoopste} min, grens is ${MAX_EXTRA_RIJTIJD_MIN}) — we wachten max ${MAX_WACHT_WERKDAGEN} werkdagen op een klus in dezelfde hoek, daarna plannen we gewoon de goedkoopste plek`;
 }
 
-module.exports = { zoekSlots, kiesAanbod, venster, waaromGeenAanbod, bezetteBlokken, rondAf5, MARGE_MIN, MAX_EXTRA_RIJTIJD_MIN };
+module.exports = { zoekSlots, kiesAanbod, venster, waaromGeenAanbod, bezetteBlokken, rondAf5, MARGE_MIN, MAX_EXTRA_RIJTIJD_MIN, MAX_WACHT_WERKDAGEN };

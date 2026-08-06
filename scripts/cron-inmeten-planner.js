@@ -36,6 +36,16 @@ const LIVE = process.argv.includes('--live');
 const ALLEEN = (process.argv.find((a) => a.startsWith('--alleen=')) || '').split('=')[1] || null;
 const STATE = path.join(__dirname, '..', 'data', 'inmeten-planner-state.json');
 
+function werkdagenTussen(van, tot) {
+  let n = 0;
+  const d = new Date(van);
+  while (d < tot) {
+    if (d.getDay() !== 0 && d.getDay() !== 6) n++;
+    d.setDate(d.getDate() + 1);
+  }
+  return n;
+}
+
 // Wachten op een buur mag, eindeloos wachten niet. Staat een lead langer dan dit te
 // wachten, dan gaat het beste beschikbare slot alsnog naar de klant en krijgt kantoor
 // een seintje. Anders bespaar je kilometers over de rug van je doorlooptijd.
@@ -336,7 +346,10 @@ async function main() {
       }
     }
     beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
-    const aanbod = kiesAanbod(beste, 3);
+    // hoe lang wacht deze lead al? (verre-klant-regel: na 5 werkdagen filter los)
+    const sindsIso = state.wachtend?.[lead.id];
+    const wachtWerkdagen = sindsIso ? werkdagenTussen(new Date(sindsIso), new Date()) : 0;
+    const aanbod = kiesAanbod(beste, 3, { wachtWerkdagen });
 
     console.log(`\n  ${lead.naam} — ${lead.volledigAdres}`);
     console.log(`    ${lead.aantalProducten} product(en) uit ${lead.bron}: ${lead.producten.map((p) => `${p.aantal}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).join(', ') || '—'} → ${duur} min`);

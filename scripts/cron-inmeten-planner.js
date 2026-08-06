@@ -488,6 +488,7 @@ async function main() {
 
   const agenda = await haalAgenda();
   await laadVakanties();
+  const inst = await require('./lib/instellingen.js').haalInstellingen();
 
   // lopende aanbiedingen: slots bezetten + die leads overslaan
   const lopendeLeads = new Set();
@@ -563,19 +564,19 @@ async function main() {
     beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
     // 5-dagen-belofte: kalenderdagen sinds we de lead voor het eerst zagen
     const wachtDagen = Math.floor((Date.now() - Date.parse(state.gezien[item.id])) / 86400000);
-    const aanbod = kiesAanbod(beste, 3, { wachtDagen });
+    const aanbod = kiesAanbod(beste, 3, { wachtDagen, deadlineDagen: inst.contactDeadlineDagen, maxOmrijdenMin: inst.maxOmrijdenMin });
 
     console.log(`\n  ${lead.naam} — ${lead.volledigAdres}`);
-    console.log(`    ${lead.aantalProducten} product(en) uit ${lead.bron}: ${lead.producten.map((p) => `${p.aantal}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).join(', ') || '—'} → ${duur} min | wacht ${wachtDagen}/${MAX_WACHTDAGEN} dgn`);
+    console.log(`    ${lead.aantalProducten} product(en) uit ${lead.bron}: ${lead.producten.map((p) => `${p.aantal}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).join(', ') || '—'} → ${duur} min | wacht ${wachtDagen}/${inst.contactDeadlineDagen} dgn`);
     if (!aanbod.length) {
       const reden = waaromGeenAanbod(beste);
-      if (wachtDagen >= MAX_WACHTDAGEN && !beste.length) {
+      if (wachtDagen >= inst.contactDeadlineDagen && !beste.length) {
         // agenda echt vol: dit kan de bot niet oplossen, dus hard escaleren
         console.log(`    DEADLINE VERSTREKEN en geen enkel gat — capaciteitsprobleem`);
         regels.push(`🚨 ${lead.naam} (${lead.plaats}): dag ${wachtDagen} en GEEN ENKEL gat — belofte "binnen 5 dagen" breekt, handmatig oplossen`);
       } else {
         console.log(`    NOG GEEN AANBOD (dag ${wachtDagen}): ${reden}`);
-        regels.push(`${lead.naam} (${lead.plaats}): wacht dag ${wachtDagen}/${MAX_WACHTDAGEN} — ${reden}`);
+        regels.push(`${lead.naam} (${lead.plaats}): wacht dag ${wachtDagen}/${inst.contactDeadlineDagen} — ${reden}`);
         wachtenden.push({ lead, item, duur, wachtDagen });
         dash.leads.push({ rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, duurMin: duur, wachtDagen, status: 'wachtend', reden });
       }
@@ -723,18 +724,20 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin) {
         producten: lead.producten.map((p) => ({ naam: p.naam, aantal: p.aantal })),
       },
       duurMin,
+      geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren,
       slots: aanbod.map((sl) => ({ datum: sl.datum, aankomst: sl.aankomst.toISOString(), vertrek: sl.vertrek.toISOString(), inmeter: sl.inmeter })),
     }),
   });
   if (!res.ok) throw new Error(`aanbod aanmaken: HTTP ${res.status}`);
   const { url, token } = await res.json();
   const { verstuurAanbod } = require('./lib/aanbod-versturen');
-  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin }, url);
+  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren }, url);
   if (!verzonden.wa.ok && !verzonden.mail.ok) throw new Error(`niet bezorgd (wa: ${verzonden.wa.reden}, mail: ${verzonden.mail.reden})`);
   // opties zichtbaar maken voor het kantoor (Outlook), zodat niemand erdoorheen plant
   try {
     const { maakOpties } = require('./lib/outlook-opties.js');
-    const ids = await maakOpties({ slots: aanbod, naam: lead.naam, verlooptOp: Date.now() + 24 * 3600000 });
+    const geldigUren = (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren;
+    const ids = await maakOpties({ slots: aanbod, naam: lead.naam, verlooptOp: Date.now() + geldigUren * 3600000 });
     const st = laadState();
     st.opties = { ...(st.opties || {}), [token]: ids };
     bewaarState(st);

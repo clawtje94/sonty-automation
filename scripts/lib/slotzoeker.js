@@ -183,7 +183,7 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
  * Kies de slots die je aan de klant voorlegt: de goedkoopste, maar gespreid over
  * verschillende dagen en dagdelen. Drie keer hetzelfde tijdstip aanbieden is geen keuze.
  */
-function kiesAanbod(slots, aantal = 3, { wachtDagen = 0 } = {}) {
+function kiesAanbod(slots, aantal = 3, { wachtDagen = 0, deadlineDagen = MAX_WACHT_DAGEN, maxOmrijdenMin = MAX_EXTRA_RIJTIJD_MIN } = {}) {
   // CLUSTEREN gebeurt hier: altijd rangschikken op marginale rijtijd, zodat een slot
   // náást een bestaande afspraak in dezelfde buurt wint van een losse lege dag.
   // De formule heen + terug - direct blijft geldig, ook op een vuile agenda; alleen het
@@ -191,8 +191,8 @@ function kiesAanbod(slots, aantal = 3, { wachtDagen = 0 } = {}) {
   // filter staat alleen aan als de kosten betrouwbaar zijn.
   const betrouwbaar = !slots.some((s) => s.kostenBetrouwbaar === false);
   slots = [...slots].sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
-  if (betrouwbaar && wachtDagen < MAX_WACHT_DAGEN) {
-    const gefilterd = slots.filter((s) => s.extraRijtijdMin <= MAX_EXTRA_RIJTIJD_MIN);
+  if (betrouwbaar && wachtDagen < deadlineDagen) {
+    const gefilterd = slots.filter((s) => s.extraRijtijdMin <= maxOmrijdenMin);
     // verre klant: pas filteren als er iets overblijft; anders wachten we bewust
     // (tot MAX_WACHT_DAGEN) en dat is een zichtbare keuze, geen stille nul
     slots = gefilterd;

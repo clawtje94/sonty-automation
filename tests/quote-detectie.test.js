@@ -37,6 +37,14 @@ const JULIA = 'Geachte heer/mevrouw,\r\n\r\nVeel dank voor de prijsindicatie. Wi
 const GEVALLEN = [
   // [naam, mailtekst, moet als klacht tellen?]
   ['Julia, quote met > ervoor', JULIA, false],
+  // De geplakte vormen. Drie keer op rij bleek een client de naam aan de kopregel vast te
+  // plakken, en drie keer brak een \b-woordgrens de detectie: iPhoneOp (Winston), HeuvelOp en
+  // TukOp (4-5 aug), JuliaOn (6 aug). In kopregelpatronen dus nooit een \b aan het begin.
+  ['geplakt: TukOp (Gmail NL zonder om)', 'Deze prijs is ons veel te hoog. M.vr.gr. J.H TukOp wo 5 aug 2026, 09:03 schreef Aanvragen | Sonty: hoe snel lossen jullie een storing op?', false],
+  ['geplakt: HeuvelOp', 'Wellicht in de toekomst. Groet, A vd HeuvelOp di 4 aug 2026, 17:05 schreef Aanvragen | Sonty: hoe snel lossen jullie een storing op?', false],
+  ['geplakt: JuliaOn (Engels)', 'Ik onderteken de offerte graag. Met vriendelijke groet, JuliaOn Tue, Aug 4, 2026 at 8:08 AM Aanvragen | Sonty wrote: hoe snel lossen jullie een storing op?', false],
+  ['geplakt: KocerVan (Outlook NL)', 'Bedankt! Atakan KocerVan: Aanvragen | Sonty Verzonden: maandag 3 augustus 2026 17:04Aan: Atakan: hoe snel lossen jullie een storing op?', false],
+  ['Engelse Outlook From/Sent', 'Thanks! From: Aanvragen | Sonty Sent: Wednesday, 05 August 2026 17:04:08To: Marcel Subject: prijsvoorstel. hoe snel lossen jullie een storing op?', false],
   ['Winston, iPhone zonder spatie', WINSTON, false],
   ['Apple Mail met spatie', 'Graag aanpassen naar 4500. Op 4 augustus 2026 heeft Sonty het volgende geschreven: Hoe snel lossen jullie een storing op?', false],
   ['Gmail Nederlands', 'Prima, doe maar. Op 4 aug. 2026 om 09:03 schreef Sonty <info@sonty.nl>: Hoe snel lossen jullie een storing op?', false],

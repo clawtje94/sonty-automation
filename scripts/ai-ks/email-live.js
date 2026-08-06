@@ -38,7 +38,10 @@ const clean = (s) => String(s || '').replace(/<style[\s\S]*?<\/style>/gi, '').re
 const QUOTE_START = new RegExp([
   /-{2,}\s*Oorspronkelijk bericht\s*-{2,}/.source,
   /-{3,}\s*Original Message\s*-{3,}/.source,
-  /\bOn .{5,80}? wrote:/.source,
+  // Ook hier geen \b: "JuliaOn Tue, Aug 4" plakt de naam aan de kopregel vast. Dit was de
+  // DERDE keer dat een woordgrens op geplakte tekst stukliep (eerder iPhoneOp en HeuvelOp);
+  // in mail-quotes dus nooit meer \b aan het begin van een kopregelpatroon.
+  /On .{5,80}? wrote:/.source,
   /Van:\s?.{2,80}?(?:Verzonden|Datum):/.source,
   /From:.{2,120}?Sent:.{2,120}?(?:To|Aan):/.source,      // Engelse Outlook, ook aan elkaar geplakt
   // GEEN \b voor "Op": in de echte mail van Winston plakte zijn iPhone het aan de vorige regel

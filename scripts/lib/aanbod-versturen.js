@@ -41,8 +41,16 @@ async function zoekWaTicket(telefoon) {
   return wa[0] || null;
 }
 
-function berichtTekst(voornaam, url, duurMin, geldigUren = 24) {
-  return `Hoi ${voornaam}, goed nieuws: we kunnen bij je langskomen om in te meten (duurt ongeveer ${duurMin} minuten). Kies hier de tijd die jou het beste uitkomt:\n\n${url}\n\nDe tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, stuur dan gewoon een berichtje terug.\n\nGroetjes, Nanny van Sonty`;
+function verWegRegel(ver) {
+  // Eerlijke uitleg voor klanten buiten de vaste route (Daimy 06-08): scheelt
+  // manuren, brandstof en uitstoot — en de klant snapt waarom het iets later kan.
+  return ver
+    ? ' Je woont wat verder bij ons vandaan; we plannen ritten zo slim mogelijk in en combineren klussen bij jou in de buurt. Dat scheelt onnodige kilometers (en uitstoot), maar daardoor kan het soms iets langer duren voor we bij je zijn.'
+    : '';
+}
+
+function berichtTekst(voornaam, url, duurMin, geldigUren = 24, ver = false) {
+  return `Hoi ${voornaam}, goed nieuws: we kunnen bij je langskomen om in te meten (duurt ongeveer ${duurMin} minuten).${verWegRegel(ver)} Kies hier de tijd die jou het beste uitkomt:\n\n${url}\n\nDe tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, stuur dan gewoon een berichtje terug.\n\nGroetjes, Nanny van Sonty`;
 }
 
 // Goedgekeurde template "inmeetafspraak_kiezen" (id 243999): voor klanten buiten het
@@ -87,7 +95,7 @@ async function stuurWhatsApp(aanbod, url) {
     const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
     const r = await tFetch(`/tickets/${ticket.id}/messages`, {
       method: 'POST',
-      body: JSON.stringify({ message: berichtTekst(voornaam, url, aanbod.duurMin, aanbod.geldigUren || 24), type: 'OUTBOUND' }),
+      body: JSON.stringify({ message: berichtTekst(voornaam, url, aanbod.duurMin, aanbod.geldigUren || 24, aanbod.ver === true), type: 'OUTBOUND' }),
     });
     if (r.ok) return { ok: true, ticket: ticket.id, via: 'vrij bericht (template: ' + viaTemplate.reden + ')' };
     return { ok: false, reden: `Trengo ${r.status} (template: ${viaTemplate.reden})`, ticket: ticket.id };
@@ -111,7 +119,7 @@ async function stuurMail(aanbod, url) {
   if (!nieuw?.id) return { ok: false, reden: 'geen ticket-id terug' };
 
   const html = `<p>Hoi ${voornaam},</p>
-<p>Goed nieuws: we kunnen bij je langskomen om in te meten (duurt ongeveer ${aanbod.duurMin} minuten).</p>
+<p>Goed nieuws: we kunnen bij je langskomen om in te meten (duurt ongeveer ${aanbod.duurMin} minuten).${verWegRegel(aanbod.ver === true)}</p>
 <p><a href="${url}" style="display:inline-block;background:#F97316;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:bold">Kies je inmeetmoment</a></p>
 <p>De tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, beantwoord dan gewoon deze mail.</p>
 <p>Groetjes,<br>Nanny van Sonty</p>`;

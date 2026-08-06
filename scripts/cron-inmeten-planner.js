@@ -671,6 +671,15 @@ async function combiPas(wachtenden, agenda, regels) {
 
 /** Aanbod vastleggen in het register en direct naar de klant sturen (mail + WhatsApp). */
 async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin) {
+  // "ver weg"? — eerlijk benoemen in het bericht (Daimy 06-08). Meetlat: enkele reis
+  // vanaf het magazijn is meer dan de omrij-grens uit de instellingen.
+  let ver = false;
+  try {
+    const { reistijd, MAGAZIJN } = require('./lib/reistijd');
+    const inst3 = await require('./lib/instellingen.js').haalInstellingen();
+    const r = await reistijd(MAGAZIJN, lead.volledigAdres, new Date());
+    ver = r.minuten > inst3.maxOmrijdenMin;
+  } catch { /* niet te bepalen: gewone tekst */ }
   const res = await fetch(AANBOD_API, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
@@ -688,7 +697,7 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin) {
   if (!res.ok) throw new Error(`aanbod aanmaken: HTTP ${res.status}`);
   const { url, token } = await res.json();
   const { verstuurAanbod } = require('./lib/aanbod-versturen');
-  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren }, url);
+  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin, ver, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren }, url);
   if (!verzonden.wa.ok && !verzonden.mail.ok) throw new Error(`niet bezorgd (wa: ${verzonden.wa.reden}, mail: ${verzonden.mail.reden})`);
   // ticket-ids bewaren zodat de reply-monitor ELK antwoord kan uitlezen (Daimy 06-08:
   // "lees jij dan 100% uit wat ze antwoorden en rapporteer je dat?")

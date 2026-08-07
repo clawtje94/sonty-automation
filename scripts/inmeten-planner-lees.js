@@ -16,7 +16,9 @@ const GEEN_PRODUCT_REGEL = /^inmeten \+ montage|^montage\b|^korting|^toeslag|^tr
 // voor elke lead opnieuw opgehaald (±70 calls per ronde). Cache per lead, 6 uur.
 const fs = require('fs');
 const path = require('path');
-const CACHE_PAD = path.join(__dirname, '..', 'data', 'rp-offerte-cache.json');
+// Pad injecteerbaar voor het scenario-lab: nepdata mag nooit in de echte cache
+// terechtkomen (en andersom vervuilt de echte cache de scenario's).
+const CACHE_PAD = process.env.RP_OFFERTE_CACHE_PAD || path.join(__dirname, '..', 'data', 'rp-offerte-cache.json');
 const CACHE_TTL = 6 * 3600000;
 function leesCache() { try { return JSON.parse(fs.readFileSync(CACHE_PAD, 'utf8')); } catch { return {}; } }
 function schrijfCache(c) { try { fs.writeFileSync(CACHE_PAD, JSON.stringify(c)); } catch { /* cache is optioneel */ } }

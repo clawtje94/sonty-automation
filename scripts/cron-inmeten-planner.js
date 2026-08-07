@@ -643,7 +643,7 @@ async function main() {
   // omrij-kosten delen ze, dus een rit die voor één klant te duur is kan voor twee
   // of drie samen wél uit. De oudste krijgt eerst aanbod; zijn slots worden ankers
   // waardoor de rest er in dezelfde run omheen valt.
-  await combiPas(wachtenden, agenda, regels);
+  await combiPas(wachtenden, agenda, regels, dash);
 
   // dashboard vullen: komende boekingen + overzicht naar de site
   try {
@@ -676,10 +676,11 @@ async function main() {
 
 const MAX_COMBI_RIJTIJD_MIN = 20; // klanten die hooguit dit uit elkaar wonen vormen een combi
 
-async function combiPas(wachtenden, agenda, regels) {
+async function combiPas(wachtenden, agenda, regels, dash = null) {
   if (wachtenden.length < 2) return;
   const { reistijd } = require('./lib/reistijd');
   const { MAX_EXTRA_RIJTIJD_MIN } = require('./lib/slotzoeker.js');
+  const { zoekCombiDag } = require('./lib/combi-dag.js');
 
   // groepen bouwen op onderlinge rijtijd (klein aantal, dus paarsgewijs is prima)
   const groep = wachtenden.map((_, i) => i);
@@ -701,6 +702,46 @@ async function combiPas(wachtenden, agenda, regels) {
     if (leden.length < 2) continue;
     leden.sort((a, b) => b.wachtDagen - a.wachtDagen); // oudste eerst
     console.log(`\n  COMBI-KANS: ${leden.map((l) => l.lead.naam + ' (' + l.lead.plaats + ')').join(' + ')}`);
+
+    // COMBI-DAG (Daimy 06-08 akkoord): zoek over de verlengde horizon de vroegste
+    // dag waarop de hele groep achter elkaar past. Alle tijden op die ene dag, dus
+    // wat de klanten ook kiezen: ze landen samen en delen de lange rit.
+    const combi = await zoekCombiDag({
+      leden: leden.map((w) => ({ naam: w.lead.naam, adres: w.lead.volledigAdres, duurMin: w.duur, w })),
+      inmeters: INMETERS.map((inm) => ({
+        naam: inm.naam, agenda: agenda[inm.naam], werkdagen: werkdagenVoor(inm.naam, 30),
+        startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
+        eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
+      })),
+    });
+    if (combi) {
+      console.log(`    COMBI-DAG ${combi.datum} bij ${combi.inmeter}: samen +${combi.totaalExtraMin} min`);
+      regels.push(`COMBI-DAG ${combi.datum} (${combi.inmeter}): ${leden.map((l) => l.lead.naam + ' (' + l.lead.plaats + ')').join(' + ')} — samen +${combi.totaalExtraMin} min`);
+      for (const { lid, aanbod } of combi.perLid) {
+        const w = lid.w;
+        const metInmeter = aanbod.map((x) => ({ ...x, inmeter: combi.inmeter }));
+        console.log(`    ${w.lead.naam}: ${metInmeter.map((x) => `${venster(x)} +${x.extraRijtijdMin}min`).join(' | ')}`);
+        regels.push(`  ${w.lead.naam}: ${metInmeter.map((x) => `${x.datum.slice(5)} ${venster(x)} +${x.extraRijtijdMin}min`).join(' | ')}`);
+        if (LIVE) {
+          try {
+            await maakEnVerstuurAanbod(w.lead, w.item, metInmeter, w.duur, agenda);
+            regels.push('  → combi-dag-aanbod verstuurd');
+          } catch (e) { regels.push(`  → combi-dag-aanbod versturen MISLUKT: ${e.message}`); continue; }
+        }
+        for (const x of metInmeter) {
+          agenda[x.inmeter].push({ start: x.aankomst.toISOString(), eind: x.vertrek.toISOString(), adres: w.lead.volledigAdres, klant: `aanbod ${w.lead.naam}` });
+        }
+        // dashboard-kaart bijwerken: de winkel ziet de combi-dag en kan klikken
+        const kaart = dash?.leads?.find((l) => l.rpItemId === w.item.id);
+        if (kaart) {
+          kaart.status = LIVE ? 'aanbod-verstuurd' : 'combi-dag';
+          kaart.reden = `combi-dag ${combi.datum} met ${leden.filter((o) => o !== w).map((o) => o.lead.naam).join(' + ')}`;
+          kaart.top = metInmeter.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin }));
+        }
+      }
+      continue; // groep bediend: de losse per-lid-mechaniek hieronder is niet meer nodig
+    }
+    console.log('    geen combi-dag haalbaar binnen de verlengde horizon — losse combi-mechaniek als vangnet');
 
     for (let volg = 0; volg < leden.length; volg++) {
       const w = leden[volg];

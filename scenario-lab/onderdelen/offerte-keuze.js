@@ -56,6 +56,11 @@ function orakel(s) {
 }
 
 function voerUit(s) {
+  // elk scenario een verse cache: hetzelfde nep-lead-id met andere scenario-data
+  // mag nooit het antwoord van het vorige scenario terugkrijgen (6-uurs cache)
+  if (process.env.RP_OFFERTE_CACHE_PAD) {
+    try { require('fs').rmSync(process.env.RP_OFFERTE_CACHE_PAD, { force: true }); } catch { /* best effort */ }
+  }
   // nep-RP: leesOfferte praat tegen fetch — die vangen we af met scenario-data
   const echteFetch = global.fetch;
   global.fetch = async (url) => {

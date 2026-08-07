@@ -10,6 +10,10 @@ snelleKlok.__promisify__ = echteSetTimeout.__promisify__;
 
 // nep-reistijd MOET vóór de onderdelen geladen worden (slotzoeker bindt bij require)
 require('./stub-reistijd.js');
+// idem voor de offerte-cache: het lab schrijft in een eigen wegwerpbestand,
+// nooit in data/rp-offerte-cache.json (inmeten-planner-lees bindt het pad bij require)
+process.env.RP_OFFERTE_CACHE_PAD = require('path').join(require('os').tmpdir(), 'lab-rp-offerte-cache.json');
+try { require('fs').rmSync(process.env.RP_OFFERTE_CACHE_PAD, { force: true }); } catch { /* schoon beginnen is best effort */ }
 const { draai, printRapport } = require('./runner.js');
 
 const ONDERDELEN = [
@@ -17,6 +21,7 @@ const ONDERDELEN = [
   require('./onderdelen/koppel-ladder.js'),
   require('./onderdelen/planner-aanbod.js'),
   require('./onderdelen/planner-drukte.js'),
+  require('./onderdelen/combi-dag.js'),
   require('./onderdelen/sheet-rij.js'),
   require('./onderdelen/mutatie-motor.js'),
 ];

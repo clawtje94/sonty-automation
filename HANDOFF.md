@@ -4,8 +4,12 @@
 - **ROOT CAUSE van "opties bovenop bestaande afspraken" + "Planado anders dan Outlook"**:
   de Outlook→Planado-sync keek maar 42 dagen vooruit; alles daarna stond alleen in
   Outlook en was onzichtbaar voor de planner (haalAgenda leest ALLEEN Planado).
-  Venster nu 100 dagen; achterstand gesynct (12 jobs t/m 15 okt). 1 fout blijft:
-  Esra Dinckan 18 sep geeft 422 "external_id is used by another entity" — uitzoeken.
+  Venster nu 100 dagen; achterstand gesynct (12 jobs t/m 15 okt).
+- **Esra Dinckan 422 OPGELOST (07-08 ochtend)**: de job die haar external_id vasthield is
+  (handmatig) verwijderd; de sync van 09:20 heeft haar netjes aangemaakt — Planado serial
+  453, Joey 18 sep, 150 min, adres+telefoon+Gripp 6405+meetbon-link compleet geverifieerd.
+  Zelfde run meldde 3 nieuwe wezen (Sjoerd: Vitaal Zorggroep-montage 11/8, 2x Stoffering
+  14/8 uit Outlook verdwenen) — al aan Daimy gemeld, beleid = nooit auto-delete.
 - **Sjoerd is NIET vrij op 21 sep** (Daimy expliciet); mijn tijdelijke blokkade is
   weer verwijderd. Het probleem was de rommel hierboven, niet Sjoerds rooster.
 - **Hendrik-Jan Colijn**: geboekt op zijn geaccepteerde keuze di 8 sep 13:00 (Planado
@@ -19,10 +23,34 @@
   dashboard. Monitor kickstart de verwerker bij een keuze.
 - **1-moment-aanbod**: instelling aantalTijden (1/3) bestaat; templates 244121/244125
   PENDING bij Meta; template-wachter sluit ze aan en zet de instelling om zodra ACCEPTED.
-- **Open**: combi-dagen bouwen (clusters Gouda+Waddinxveen, Utrecht+Zeist; akkoord
-  Daimy); GitHub Actions deploy kapot (handmatig: vercel build --prod + vercel deploy
+- **Open**: GitHub Actions deploy kapot (handmatig: vercel build --prod + vercel deploy
   --prebuilt --prod --archive=tgz in ~/sonty-website); planning@sonty.nl-kanaal;
-  Vas Verhage moet nog een offerteversie tekenen (Gripp-skip).
+  Vas Verhage moet nog een offerteversie tekenen (Gripp-skip); Vas' mailadres bounced
+  (vamaja@casema.nl) — adres in RP checken.
+
+## COMBI-DAGEN GEBOUWD (07-08, akkoord Daimy 06-08)
+- **scripts/lib/combi-dag.js — zoekCombiDag()**: per cluster (onderling ≤20 min) de
+  VROEGSTE dag over de verlengde horizon (30 roosterdagen) waarop de hele groep achter
+  elkaar past; alle aangeboden tijden op DIE ene dag (klantkeuze = tijdstip, niet dag).
+  Kostenregel: duurste lid mag kosten wat hij kost (die klant moet er sowieso heen,
+  dag-4-regel), elk EXTRA lid moet binnen de normale omrij-grens (30 min) ernaast passen.
+  Bij lange klussen eten 3 opties per lid de dag op → terugval naar 2 of 1 tijd per lid.
+- **Integratie combiPas** (cron-inmeten-planner.js): combi-dag eerst, oude losse
+  mechaniek als vangnet; dashboard-kaart krijgt status 'combi-dag' + reden "combi-dag
+  <datum> met <namen>" + de tijden. LIVE-pad stuurt via maakEnVerstuurAanbod.
+- **Lab**: onderdelen/combi-dag.js (24 scenario's, scherpe verwachting: haalbaar ⇒ combi
+  MOET er komen op de vroegste vrije dag — ving 2 echte ontwerpfouten: grens×n verwierp
+  elk echt ver cluster, en 3 opties/lid maakte lange-klus-dagen onhaalbaar). Totaal lab
+  572, 0x stil. keten-regressie 22 groen.
+- **LAB-CACHEBUG GEFIXT**: offerte-cache (639fe48) is per lead-id op schijf; het lab
+  draaide 80 scenario's op hetzelfde nep-id → 33x FOUT-STIL én nepdata in de echte cache.
+  Nu: RP_OFFERTE_CACHE_PAD injecteerbaar, lab gebruikt wegwerpbestand + wist per
+  scenario; nep-key 'lc-1' uit data/rp-offerte-cache.json verwijderd.
+- **15-10-VRAAG DAIMY (07-08)**: dashboard toonde 15 okt bovenaan. Oorzaak dubbel:
+  (1) agenda echt vol t/m eind aug + Sjoerd-vakantie; (2) keuze sorteert puur op minste
+  omrijden zonder datumvoorkeur, en de 100-dagen-sync zette verre ankers neer waar de
+  planner goedkoop naast plakt (Josua 15 okt +9 vs 23 sep +13). **V1 OPEN bij Daimy**:
+  vroegste datum laten winnen binnen de omrij-grens (schuift oktober → half september).
 
 
 ## INMEET-KETEN: EERSTE VOLLEDIG AUTOMATISCHE BOEKING GELUKT (6 aug 23:15)

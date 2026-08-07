@@ -121,24 +121,32 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
         continue; // adres niet te vinden of routing faalt: dit gat overslaan
       }
 
-      const nodigMin = heen.minuten + duurMin + terug.minuten + 2 * MARGE_MIN + extraBuffer;
+      // De werkdag is KLANTTIJD (Daimy 07-08: "plan gerust zo dat ze om 9:00 bij de
+      // eerste klant staan en om 15:00 bij de laatste weggaan"): de aanrit naar de
+      // eerste klus valt vóór de dagstart en de terugrit ná het dageinde. Alleen
+      // ritten tussen klanten kosten dagtijd. De rijtijd telt wél gewoon mee in de
+      // omrij-afweging (extraRijtijdMin) — gratis is hij niet, hij past alleen niet
+      // ín het klantvenster.
+      const heenDagMin = vorige.magazijn ? 0 : heen.minuten + MARGE_MIN;
+      const terugDagMin = volgende.magazijn ? 0 : terug.minuten + MARGE_MIN;
+      const nodigMin = heenDagMin + duurMin + terugDagMin + extraBuffer;
       if (nodigMin > ruimteMin) continue;
 
-      const aankomst = rondAf5(new Date(+vorige.eind + (heen.minuten + MARGE_MIN) * MINUUT));
+      const aankomst = rondAf5(new Date(+vorige.eind + heenDagMin * MINUUT));
       const vertrek = new Date(+aankomst + duurMin * MINUUT);
       // Door het afronden schuift de aankomst tot 4 min op; check dat het dan nog past.
-      if (+vertrek + (terug.minuten + MARGE_MIN + extraBuffer) * MINUUT > +volgende.start) continue;
+      if (+vertrek + (terugDagMin + extraBuffer) * MINUUT > +volgende.start) continue;
 
       // KEUZE VOOR DE KLANT (Daimy 2026-08-05: altijd meerdere tijden geven, dan
       // kunnen volgende leads er beter bij aansluiten): is het gat ruim genoeg, dan
       // bieden we naast de vroege tijd ook een middag-variant in hetzelfde gat aan.
       // Elke aangeboden tijd wordt een anker in het aanbod-register.
       const middag = new Date(`${dag.datum}T12:30:00`);
-      const vroegste = +vorige.eind + (heen.minuten + MARGE_MIN) * MINUUT;
+      const vroegste = +vorige.eind + heenDagMin * MINUUT;
       if (
         aankomst.getHours() < 11 &&
         +middag >= vroegste &&
-        +middag + (duurMin + terug.minuten + MARGE_MIN + extraBuffer) * MINUUT <= +volgende.start
+        +middag + (duurMin + terugDagMin + extraBuffer) * MINUUT <= +volgende.start
       ) {
         slots.push({
           datum: dag.datum,

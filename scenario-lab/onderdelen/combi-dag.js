@@ -52,10 +52,9 @@ const dimensies = [
 function orakel(s) {
   const dagenVol = { leeg: 0, 'vol-dan-leeg': 10, 'helemaal-vol': 20 }[s.agenda.label];
   if (dagenVol >= 20) return { haalbaar: false }; // geen enkele vrije dag
-  // Dagfysica: ver cluster = ~172 min rijden; met lange klussen (2×90 of 3×90) past
-  // dat nooit meer in een dag van 09:00-15:00. Dat MOET dan eerlijk null zijn.
-  if (s.cluster.label === 'ver' && s.duur.label === 'lang') return { haalbaar: false };
-  // Al het andere moet gewoon lukken — desnoods met minder tijden per lid op de dag.
+  // De werkdag is klanttijd (Daimy 07-08): aanrit vóór 09:00, terugrit na 15:00.
+  // Daardoor past óók het verre cluster met lange klussen (3×90 min + tussenritten
+  // < 6 uur) — alles behalve een volle agenda moet gewoon lukken.
   // Dit is de kern van de feature: ook het VERRE cluster (Gouda+Waddinxveen-casus)
   // krijgt een dag; het duurste lid mag kosten wat hij kost, de rest past ernaast.
   return { haalbaar: true, vroegsteDatum: WERKDAGEN[dagenVol].datum };

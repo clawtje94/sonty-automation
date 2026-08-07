@@ -548,13 +548,13 @@ async function main() {
     if (lead.ambigu) {
       console.log(`  ! ${lead.naam}: ${lead.aantalDocs} offerteversies, geen enkele getekend — klant moet eerst tekenen`);
       regels.push(`${lead.naam}: ${lead.aantalDocs} offerteversies, GEEN getekend — klant moet tekenen (Mens nodig)`);
-      dash.leads.push({ rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, status: 'klant-moet-tekenen' });
+      dash.leads.push({ rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, telefoon: lead.telefoon, status: 'klant-moet-tekenen' });
       continue;
     }
     if (!lead.volledigAdres || !lead.plaats) {
       console.log(`  ! ${lead.naam}: geen bruikbaar adres, overslaan`);
       regels.push(`${lead.naam}: GEEN ADRES — handmatig`);
-      dash.leads.push({ rpItemId: item.id, naam: lead.naam, status: 'geen-adres' });
+      dash.leads.push({ rpItemId: item.id, naam: lead.naam, telefoon: lead.telefoon, status: 'geen-adres' });
       continue;
     }
     const duur = schatDuur(lead.producten);
@@ -601,7 +601,7 @@ async function main() {
         let nood = kiesAanbod(beste, 3, { wachtDagen: 999 });
         if (nood.length < 3) nood = await zorgVoorDrieOpties(lead, duur, agenda, nood);
         dash.leads.push({
-          rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, duurMin: duur, wachtDagen,
+          rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur, wachtDagen,
           status: 'wachtend', reden,
           producten: lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ').slice(0, 90),
           top: nood.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin })),
@@ -614,7 +614,7 @@ async function main() {
     }
     regels.push(`${lead.naam} (${lead.plaats}, ${duur} min): ${aanbod.map((s) => `${s.inmeter} ${s.datum.slice(5)} ${venster(s)} +${s.extraRijtijdMin}min`).join(' | ')}`);
     dash.leads.push({
-      rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, duurMin: duur, wachtDagen,
+      rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur, wachtDagen,
       status: LIVE ? 'aanbod-verstuurd' : 'aanbod-mogelijk',
       producten: lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ').slice(0, 90),
       top: aanbod.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin })),
@@ -650,7 +650,7 @@ async function main() {
     const { laadBoekingen } = require('./lib/inmeet-mutatie.js');
     dash.boekingen = Object.entries(laadBoekingen())
       .filter(([, b]) => b.status === 'geboekt' && Date.parse(b.aankomst) > Date.now())
-      .map(([id, b]) => ({ rpItemId: id, naam: b.naam, aankomst: b.aankomst, inmeter: b.inmeter, duurMin: b.duurMin }))
+      .map(([id, b]) => ({ rpItemId: id, naam: b.naam, aankomst: b.aankomst, inmeter: b.inmeter, duurMin: b.duurMin, grippNr: b.grippNr || null, telefoon: b.telefoon || null }))
       .sort((a, b) => a.aankomst.localeCompare(b.aankomst));
     await fetch('https://sonty-website.vercel.app/api/inmeet-dashboard', {
       method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
@@ -1084,21 +1084,41 @@ async function verwerkDashboardVerzoek(m) {
   if (m.type === 'stuur-aanbod' && lopende.has(item.id)) throw new Error('deze klant heeft al een lopend aanbod — geen tweede sturen');
 
   if (m.type === 'stuur-aanbod') {
-    let beste = [];
-    for (const inm of INMETERS) {
-      const sl = await zoekSlots({
-        agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
-        werkdagen: werkdagenVoor(inm.naam),
-        startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
-        eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
-      }).catch(() => []);
-      beste.push(...sl.map((x) => ({ ...x, inmeter: inm.naam })));
+    let aanbod = [];
+    // Dashboard kan de al berekende tijden meegeven (combi-dag!): dan sturen we
+    // precies die, na verse botsingscontrole — opnieuw rekenen zou de combi-dag
+    // weggooien en de klant alsnog een losse dure route geven.
+    if (Array.isArray(m.slots) && m.slots.length) {
+      for (const s of m.slots) {
+        const van = Date.parse(s.aankomst);
+        const tot = van + duur * 60000;
+        const botst = (agenda[s.inmeter] || []).some((a) =>
+          !String(a.klant || '').includes(lead.naam) && Date.parse(a.start) < tot && Date.parse(a.eind) > van);
+        if (botst) continue; // deze tijd is inmiddels bezet: stilletjes overslaan, rest blijft
+        const aankomst = new Date(van);
+        aanbod.push({
+          inmeter: s.inmeter, datum: aankomst.toISOString().slice(0, 10), aankomst,
+          vertrek: new Date(tot), extraRijtijdMin: 0, kostenBetrouwbaar: true, naVorige: 'dashboard',
+        });
+      }
+      if (!aanbod.length) throw new Error('alle voorgestelde tijden zijn inmiddels bezet — ververs het dashboard');
+    } else {
+      let beste = [];
+      for (const inm of INMETERS) {
+        const sl = await zoekSlots({
+          agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
+          werkdagen: werkdagenVoor(inm.naam),
+          startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
+          eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
+        }).catch(() => []);
+        beste.push(...sl.map((x) => ({ ...x, inmeter: inm.naam })));
+      }
+      beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
+      aanbod = kiesAanbod(beste, 3, { wachtDagen: 999 }); // winkel vroeg erom: altijd tijden geven
+      if (!aanbod.length) throw new Error('geen enkel gat beschikbaar');
     }
-    beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
-    const aanbod = kiesAanbod(beste, 3, { wachtDagen: 999 }); // winkel vroeg erom: altijd tijden geven
-    if (!aanbod.length) throw new Error('geen enkel gat beschikbaar');
     const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda);
-    return `keuzelink verstuurd (3 tijden): ${url}`;
+    return `keuzelink verstuurd (${aanbod.length >= 3 ? 3 : aanbod.length} tijd(en)): ${url}`;
   }
 
   // boeken op het gekozen slot — eerst verse botsingscontrole

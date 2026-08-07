@@ -151,9 +151,14 @@ async function main() {
         const wanneer = Date.parse(String(m.created_at || '').replace(' ', 'T'));
         if (!(wanneer > Date.parse(info.verstuurdOp))) continue;
         const sleutel = ticketId + ':' + m.id;
-        if (gemeld[sleutel]) continue;
-        gemeld[sleutel] = new Date().toISOString();
-        meldingen++;
+        const alGemeld = !!gemeld[sleutel];
+        // Een keuze-poging mag NOOIT eenmalig zijn (incident Rene 07-08: de eerste
+        // poging faalde op een netwerkfout en de dedup blokkeerde elke herkansing —
+        // klant zei "Is goed" en er gebeurde niets). Zolang het aanbod open staat
+        // proberen we een herkenbare keuze elke run opnieuw; alleen de
+        // Telegram-MELDING blijft eenmalig.
+        if (alGemeld && statusPer[token] !== 'open') continue;
+        if (!alGemeld) { gemeld[sleutel] = new Date().toISOString(); meldingen++; }
         const tekst = String(m.body_plain || m.message || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 400);
 
         // WhatsApp-keuze automatisch doorvoeren (alleen op een nog OPEN aanbod)
@@ -181,7 +186,7 @@ async function main() {
             }
           } catch { /* uitlezen mislukt: dan gewoon rapporteren */ }
         }
-        await telegram(`💬 REACTIE op keuzelink van ${info.naam} (aanbod: ${statusPer[token] || 'onbekend'}, ticket ${ticketId}):\n\n"${tekst || '(leeg/bijlage)'}"`);
+        if (!alGemeld) await telegram(`💬 REACTIE op keuzelink van ${info.naam} (aanbod: ${statusPer[token] || 'onbekend'}, ticket ${ticketId}):\n\n"${tekst || '(leeg/bijlage)'}"`);
       }
     }
   }

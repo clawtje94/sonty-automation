@@ -1,118 +1,557 @@
 {
- "aangeboden": {
-  "52d61652-9797-4dab-86c8-a4f88aa23dcf": {
-   "naam": "Marjolein Nunnink",
-   "op": "2026-08-05T21:09:40.749Z",
-   "aanbod": 3
+  "aangeboden": {
+    "52d61652-9797-4dab-86c8-a4f88aa23dcf": {
+      "naam": "Marjolein Nunnink",
+      "op": "2026-08-05T21:09:40.749Z",
+      "aanbod": 3
+    },
+    "1c140daf-17a6-4b98-9cf6-ffee88408c87": {
+      "naam": "Edwin Bosman",
+      "op": "2026-08-05T21:09:41.623Z",
+      "aanbod": 3
+    },
+    "b2b4510d-cd2e-4d09-bb1d-dcb29e2ad644": {
+      "naam": "Irene  Kersseboom",
+      "op": "2026-08-05T21:09:41.814Z",
+      "aanbod": 1
+    },
+    "3ad15733-c1d4-44e6-8b00-67340c5006bb": {
+      "naam": "Josua Lausberg",
+      "op": "2026-08-04T10:57:38.326Z",
+      "aanbod": 3
+    },
+    "38c2bec4-125f-4c48-9dcf-28c09c6ef5c0": {
+      "naam": "Kirsten de Koning",
+      "op": "2026-08-04T10:57:42.021Z",
+      "aanbod": 3
+    },
+    "d1f98350-678c-4d91-af6a-e4c99fddcb4f": {
+      "naam": "Jan De Bont",
+      "op": "2026-08-05T21:09:42.387Z",
+      "aanbod": 1
+    },
+    "9335cd79-90e8-487f-b446-f669c27886df": {
+      "naam": "Rakesh Soekhoe",
+      "op": "2026-08-05T21:09:43.299Z",
+      "aanbod": 1
+    },
+    "23e94b41-7856-41c3-8b74-cc4a93a38e76": {
+      "naam": "Marco Klok",
+      "op": "2026-08-04T10:57:53.257Z",
+      "aanbod": 3
+    },
+    "69d0fc53-df8f-4fad-bd8f-21b5efccaa24": {
+      "naam": "Vas Verhage",
+      "op": "2026-08-04T10:57:56.568Z",
+      "aanbod": 3
+    },
+    "67a18f68-1d4b-486d-a910-6efd2ef39330": {
+      "naam": "Matijn Made",
+      "op": "2026-08-04T10:58:01.632Z",
+      "aanbod": 3
+    },
+    "2aaa2497-42e5-4314-b46a-84ce38d7aa0a": {
+      "naam": "Daimy TEST GRIP",
+      "op": "2026-08-04T11:34:52.985Z",
+      "aanbod": 3
+    },
+    "351aa6c1-774c-4171-a210-7e9924202bda": {
+      "naam": "Manu Raja",
+      "op": "2026-08-05T21:09:25.294Z",
+      "aanbod": 1
+    },
+    "8c241c8c-a204-4231-bf7c-23b83094b8dc": {
+      "naam": "Maarten Jansen",
+      "op": "2026-08-05T21:09:35.012Z",
+      "aanbod": 3
+    },
+    "0e43f9b6-5888-4910-a5fa-6ebc9f745538": {
+      "naam": "Julia Arias van Oordt",
+      "op": "2026-08-05T21:09:37.492Z",
+      "aanbod": 1
+    },
+    "d3293dd9-8313-4205-94cc-511834c93983": {
+      "naam": "Carlo Pronk",
+      "op": "2026-08-05T21:09:40.571Z",
+      "aanbod": 3
+    }
   },
-  "1c140daf-17a6-4b98-9cf6-ffee88408c87": {
-   "naam": "Edwin Bosman",
-   "op": "2026-08-05T21:09:41.623Z",
-   "aanbod": 3
+  "wachtend": {
+    "2aaa2497-42e5-4314-b46a-84ce38d7aa0a": "2026-08-04T11:41:03.039Z",
+    "2905b04f-0df3-47b7-a6b5-9c4f4200f559": "2026-08-05T21:09:28.326Z",
+    "3839f123-3daf-4fe2-970e-cd2d6b96cdf4": "2026-08-05T21:09:30.597Z",
+    "3ad15733-c1d4-44e6-8b00-67340c5006bb": "2026-08-05T21:09:41.960Z",
+    "38c2bec4-125f-4c48-9dcf-28c09c6ef5c0": "2026-08-05T21:09:42.225Z",
+    "23e94b41-7856-41c3-8b74-cc4a93a38e76": "2026-08-05T21:09:43.726Z"
   },
-  "b2b4510d-cd2e-4d09-bb1d-dcb29e2ad644": {
-   "naam": "Irene  Kersseboom",
-   "op": "2026-08-05T21:09:41.814Z",
-   "aanbod": 1
+  "gezien": {
+    "351aa6c1-774c-4171-a210-7e9924202bda": "2026-08-06T08:30:26.634Z",
+    "2905b04f-0df3-47b7-a6b5-9c4f4200f559": "2026-08-06T08:30:26.634Z",
+    "3839f123-3daf-4fe2-970e-cd2d6b96cdf4": "2026-08-06T08:30:26.634Z",
+    "8c241c8c-a204-4231-bf7c-23b83094b8dc": "2026-08-06T08:30:26.634Z",
+    "0e43f9b6-5888-4910-a5fa-6ebc9f745538": "2026-08-06T08:30:26.634Z",
+    "d3293dd9-8313-4205-94cc-511834c93983": "2026-08-06T08:30:26.634Z",
+    "52d61652-9797-4dab-86c8-a4f88aa23dcf": "2026-08-06T08:30:26.634Z",
+    "1c140daf-17a6-4b98-9cf6-ffee88408c87": "2026-08-06T08:30:26.634Z",
+    "b2b4510d-cd2e-4d09-bb1d-dcb29e2ad644": "2026-08-06T08:30:26.634Z",
+    "3ad15733-c1d4-44e6-8b00-67340c5006bb": "2026-08-06T08:30:26.634Z",
+    "d1f98350-678c-4d91-af6a-e4c99fddcb4f": "2026-08-06T08:30:26.634Z",
+    "9335cd79-90e8-487f-b446-f669c27886df": "2026-08-06T08:30:26.634Z",
+    "93f58d91-b51d-4002-a442-2c98193fe5d3": "2026-08-06T10:25:47.534Z",
+    "94218872-d152-4c10-8d76-86542ccd9ea7": "2026-08-06T15:39:36.238Z",
+    "14ce3cd6-24c1-4f36-9c82-a77790aedb2f": "2026-08-06T15:39:36.238Z",
+    "c5285198-7539-4dcd-9250-14b354599453": "2026-08-06T16:41:24.784Z",
+    "23e94b41-7856-41c3-8b74-cc4a93a38e76": "2026-08-06T16:58:53.644Z",
+    "69d0fc53-df8f-4fad-bd8f-21b5efccaa24": "2026-08-06T16:58:53.644Z",
+    "67a18f68-1d4b-486d-a910-6efd2ef39330": "2026-08-06T16:58:53.644Z",
+    "5dcd1e31-c8e3-40ca-9ddc-c421a678dddc": "2026-08-06T16:58:53.644Z",
+    "f27da4bd-aa89-4ed1-918c-8a2cff5ea7fc": "2026-08-06T16:58:53.644Z",
+    "14edb591-fa8e-473a-bd08-53b5ab3067cd": "2026-08-06T16:58:53.644Z",
+    "96a328e7-c21d-449e-96d2-da49934a53c9": "2026-08-06T16:58:53.644Z",
+    "11a8a894-e904-449b-96b3-5a703a7be549": "2026-08-06T16:58:53.644Z",
+    "ddfe84a0-4289-46d8-b4ca-e2fc2d79a82a": "2026-08-06T16:58:53.644Z",
+    "5e0c9dc6-4a52-419c-94c1-0cb46c784b4f": "2026-08-06T16:58:53.644Z",
+    "81c86035-8153-4a0f-9170-e220bacf8519": "2026-08-06T16:58:53.644Z",
+    "f1aa4a15-80f8-4f33-84b0-e5d529e7eb6e": "2026-08-06T16:58:53.644Z",
+    "ee64d8ca-64a5-4ae4-bdb4-ff1e810dcd6b": "2026-08-06T16:58:53.644Z",
+    "24a11098-6f81-4987-b47b-80dcf60922d1": "2026-08-06T16:58:53.644Z",
+    "c309ae4c-4582-4b8d-88fc-804409f01fea": "2026-08-06T16:58:53.644Z",
+    "afc65373-3ecf-4044-af57-cc8e333452cb": "2026-08-06T16:58:53.644Z",
+    "c63a0732-1095-431b-9e4c-54ad2f6ae6bb": "2026-08-06T16:58:53.644Z",
+    "eb529c41-14d9-4689-a27e-e6c22d3e5dc1": "2026-08-06T16:58:53.644Z",
+    "871843b7-3df1-4b6b-9924-4cfb8d3046a1": "2026-08-06T16:58:53.644Z",
+    "ff134b38-48ca-46b5-8955-94e082a11d8e": "2026-08-06T16:58:53.644Z"
   },
-  "3ad15733-c1d4-44e6-8b00-67340c5006bb": {
-   "naam": "Josua Lausberg",
-   "op": "2026-08-04T10:57:38.326Z",
-   "aanbod": 3
+  "laatsteRapportHash": "0fe85bb104319c903330ed1cc67fed376372154a",
+  "gemeld": {
+    "351aa6c1-774c-4171-a210-7e9924202bda": "2026-08-06T11:00:00Z",
+    "2905b04f-0df3-47b7-a6b5-9c4f4200f559": "2026-08-06T11:00:00Z",
+    "3839f123-3daf-4fe2-970e-cd2d6b96cdf4": "2026-08-06T11:00:00Z",
+    "8c241c8c-a204-4231-bf7c-23b83094b8dc": "2026-08-06T11:00:00Z",
+    "0e43f9b6-5888-4910-a5fa-6ebc9f745538": "2026-08-06T11:00:00Z",
+    "d3293dd9-8313-4205-94cc-511834c93983": "2026-08-06T11:00:00Z",
+    "52d61652-9797-4dab-86c8-a4f88aa23dcf": "2026-08-06T11:00:00Z",
+    "1c140daf-17a6-4b98-9cf6-ffee88408c87": "2026-08-06T11:00:00Z",
+    "b2b4510d-cd2e-4d09-bb1d-dcb29e2ad644": "2026-08-06T11:00:00Z",
+    "3ad15733-c1d4-44e6-8b00-67340c5006bb": "2026-08-06T11:00:00Z",
+    "d1f98350-678c-4d91-af6a-e4c99fddcb4f": "2026-08-06T11:00:00Z",
+    "9335cd79-90e8-487f-b446-f669c27886df": "2026-08-06T11:00:00Z",
+    "93f58d91-b51d-4002-a442-2c98193fe5d3": "2026-08-06T11:00:00Z",
+    "94218872-d152-4c10-8d76-86542ccd9ea7": "2026-08-06T15:40:32.882Z",
+    "14ce3cd6-24c1-4f36-9c82-a77790aedb2f": "2026-08-06T15:40:32.882Z",
+    "c5285198-7539-4dcd-9250-14b354599453": "2026-08-06T16:42:31.854Z",
+    "23e94b41-7856-41c3-8b74-cc4a93a38e76": "2026-08-06T17:02:27.341Z",
+    "69d0fc53-df8f-4fad-bd8f-21b5efccaa24": "2026-08-06T17:02:27.341Z",
+    "67a18f68-1d4b-486d-a910-6efd2ef39330": "2026-08-06T17:02:27.341Z",
+    "5dcd1e31-c8e3-40ca-9ddc-c421a678dddc": "2026-08-06T17:02:27.341Z",
+    "f27da4bd-aa89-4ed1-918c-8a2cff5ea7fc": "2026-08-06T17:02:27.341Z",
+    "14edb591-fa8e-473a-bd08-53b5ab3067cd": "2026-08-06T17:02:27.341Z",
+    "96a328e7-c21d-449e-96d2-da49934a53c9": "2026-08-06T17:02:27.341Z",
+    "11a8a894-e904-449b-96b3-5a703a7be549": "2026-08-06T17:02:27.341Z",
+    "ddfe84a0-4289-46d8-b4ca-e2fc2d79a82a": "2026-08-06T17:02:27.341Z",
+    "5e0c9dc6-4a52-419c-94c1-0cb46c784b4f": "2026-08-06T17:02:27.341Z",
+    "81c86035-8153-4a0f-9170-e220bacf8519": "2026-08-06T17:02:27.341Z",
+    "f1aa4a15-80f8-4f33-84b0-e5d529e7eb6e": "2026-08-06T17:02:27.341Z",
+    "ee64d8ca-64a5-4ae4-bdb4-ff1e810dcd6b": "2026-08-06T17:02:27.341Z",
+    "24a11098-6f81-4987-b47b-80dcf60922d1": "2026-08-06T17:02:27.341Z",
+    "c309ae4c-4582-4b8d-88fc-804409f01fea": "2026-08-06T17:02:27.341Z",
+    "afc65373-3ecf-4044-af57-cc8e333452cb": "2026-08-06T17:02:27.341Z",
+    "c63a0732-1095-431b-9e4c-54ad2f6ae6bb": "2026-08-06T17:02:27.341Z",
+    "eb529c41-14d9-4689-a27e-e6c22d3e5dc1": "2026-08-06T17:02:27.341Z",
+    "871843b7-3df1-4b6b-9924-4cfb8d3046a1": "2026-08-06T17:02:27.341Z",
+    "ff134b38-48ca-46b5-8955-94e082a11d8e": "2026-08-06T17:02:27.341Z"
   },
-  "38c2bec4-125f-4c48-9dcf-28c09c6ef5c0": {
-   "naam": "Kirsten de Koning",
-   "op": "2026-08-04T10:57:42.021Z",
-   "aanbod": 3
+  "opties": {
+    "0d1fb1f24976bcf09aaf9e23b82799cf": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPv9AAA=",
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPv_AAA=",
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPv-AAA="
+    ],
+    "45587890e078041c66ce9a29c8c34546": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwNAAA=",
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwOAAA=",
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwPAAA="
+    ],
+    "ccb0f0aa2ab466d873faba250a638412": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwTAAA=",
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwUAAA=",
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwVAAA="
+    ],
+    "55bc6b32ba76648efe9b20265ee0ca1b": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwxAAA=",
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwyAAA=",
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPwzAAA="
+    ],
+    "b0d78ab94ea163abe5b6da66be30b3ef": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPxAAAA=",
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPxBAAA=",
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPxCAAA="
+    ]
   },
-  "d1f98350-678c-4d91-af6a-e4c99fddcb4f": {
-   "naam": "Jan De Bont",
-   "op": "2026-08-05T21:09:42.387Z",
-   "aanbod": 1
+  "laatsteVolleScan": "2026-08-07T05:32:21.261Z",
+  "inmeetLeads": [
+    {
+      "id": "c5285198-7539-4dcd-9250-14b354599453",
+      "summary": "Franken",
+      "item_subject": {
+        "id": "bd67f6a8-bb72-4f46-8016-1bdcbc557577",
+        "identifier": "type=LEAD_CONFIGURATION,id=bd67f6a8-bb72-4f46-8016-1bdcbc557577",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Naam: Franken\nTelefoonnummer: 0653638650\nE-mailadres: familiefranken13@gmail.com\n\n**Opmerking planning (AI-klantenservice, 2026-08-06):**\nKlant gaat akkoord (offerte 202610791) en wil graag inmeten.\n\nLET OP adres corrigeren: bezoek/adres moet zijn Houtrijk 10, NIET Haarlemmermeer 10 — graag ook in het dossier aanpassen.\n\nGewenste wijzigingen door te voeren in de definitieve offerte (geen prijseffect, alle kleuren gratis):\n- Roma zipSCREEN.2: framekleur RAL 9010 STRUCTUUR (i.p.v. RAL 9010 glad).\n- Alle 3 de raamrolhorren Super+: framekleur RAL 9010. LET OP: 2x hor (790x1320) MET pollengaas behouden, 1x hor (1470x1320) standaard gaas.\n\nKlant twijfelt of de kokers 40x40 niet te groot zijn — graag bij inmeten beoordelen.",
+      "fields": {
+        "address": "",
+        "phone": "0653638650",
+        "cf_lead_value": {
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "familiefranken13@gmail.com"
+      }
+    },
+    {
+      "id": "94218872-d152-4c10-8d76-86542ccd9ea7",
+      "summary": "Hans Erik Hazelhorst",
+      "item_subject": {
+        "id": "18e45d32-ed72-416c-b7a7-4ca04143ac40",
+        "identifier": "type=LEAD_CONFIGURATION,id=18e45d32-ed72-416c-b7a7-4ca04143ac40",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: hhazelhorst@gmail.com\nTelefoonnummer: +31628157200\nVoornaam: Hans Erik\nAchternaam: Hazelhorst\nPostcode: 3572 NC\nHuisnummer:  24\nPlaats: Utrecht\nStraatnaam: Karel Doormanlaan\nHoe komt u bij ons terecht?: Google\n\n1x Sunproject: \n- doekkleur: Doekkleur naar keuze\n- framekleur: RAL 9001\n- uitval: 1150 mm\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- breedte: 3400.0\n\n1x Inclusief montage  uitvalscherm",
+      "fields": {
+        "address": "Karel Doormanlaan  24, 3572 NC Utrecht, Nederland",
+        "phone": "+31628157200",
+        "cf_lead_value": {
+          "amount": "1756.916",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "hhazelhorst@gmail.com"
+      }
+    },
+    {
+      "id": "14ce3cd6-24c1-4f36-9c82-a77790aedb2f",
+      "summary": "Rene Blauw",
+      "item_subject": {
+        "id": "f86f32e9-26d9-45af-a1af-98916a219343",
+        "identifier": "type=LEAD_CONFIGURATION,id=f86f32e9-26d9-45af-a1af-98916a219343",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: rene@blauw.biz\nTelefoonnummer: +31654927140\nVoornaam: Rene\nAchternaam: Blauw\nPostcode: 1423CT\nHuisnummer: 38\nPlaats: Uithoorn\nStraatnaam: Eems\nHoe komt u bij ons terecht?: Social media\n\n1x Windvast: \n- framekleur: RAL 9010\n- hoogte: 1200.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening bedraad\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 3014.0\n\n1x Inclusief montage screen solar\n1x Windvast: \n- framekleur: RAL 9010\n- hoogte: 1680.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening bedraad\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 3800.0\n\n1x Inclusief montage screen solar\n\n**Opmerking planning (AI-klantenservice, 2026-08-06):**\nKlant akkoord op offerte 202611131, wil inmeten en advies. Adres: Eems 38, 1423CT Uithoorn.",
+      "fields": {
+        "address": "Eems 38, 1423CT Uithoorn, Nederland",
+        "phone": "+31654927140",
+        "cf_lead_value": {
+          "amount": "3674.125",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "rene@blauw.biz"
+      }
+    },
+    {
+      "id": "0e43f9b6-5888-4910-a5fa-6ebc9f745538",
+      "summary": "Julia Arias van Oordt",
+      "item_subject": {
+        "id": "3c57f95b-ff23-4f82-9353-2036041be2d2",
+        "identifier": "type=LEAD_CONFIGURATION,id=3c57f95b-ff23-4f82-9353-2036041be2d2",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: juliaavo@gmail.com\nTelefoonnummer: +31648565175\nVoornaam: Julia\nAchternaam: Arias van Oordt \nPostcode: 2596CA\nHuisnummer: 11D\nPlaats: 's-Gravenhage\nStraatnaam: Nassau Zuilensteinstraat\nHoe komt u bij ons terecht?: Bekende\nOpmerking: Wij komen via Robert Appel\n\n1x Markiezen: \n- doekkleur: Doekkleur naar keuze\n- kies_materiaal: Aluminium\n- framekleur: Verkeerswit\n- uitval: 1350 MM\n- welk_type_bediening_wil_je?: Handbediend\n- breedte: 1840.0\n\n1x Inclusief montage markies (houten kappen)\n1x Markiezen: \n- doekkleur: Doekkleur naar keuze\n- kies_materiaal: Aluminium\n- framekleur: Verkeerswit\n- uitval: 1350 MM\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- breedte: 1840.0\n\n1x Inclusief montage markies (houten kappen)\n1x Windvast: \n- framekleur: RAL 9010\n- hoogte: 1500.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening bedraad\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 2800.0\n\n1x Inclusief montage screen solar\n1x Windvast: \n- framekleur: RAL 9010\n- hoogte: 1500.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening bedraad\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 1200.0\n\n1x Inclusief montage screen solar\n1x Windvast: \n- framekleur: RAL 9010\n- hoogte: 1100.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening bedraad\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 600.0\n\n1x Inclusief montage screen solar\n1x Windvast: \n- framekleur: RAL 9010\n- hoogte: 1100.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening bedraad\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 649.0\n\n1x Inclusief montage screen solar\n1x Windvast: \n- framekleur: RAL 9010\n- hoogte: 1140.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening bedraad\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 1000.0\n\n1x Inclusief montage screen solar\n\n**Opmerking planning (AI-klantenservice, 2026-08-05):**\nKlant tekent zelf online. Let op: een paar ramen op de offerte vervallen mogelijk en bij één raam staan bewust twee varianten (met en zonder motor) om te vergelijken. Graag bij het inmeten samen de definitieve situatie doornemen en de offerte daarop aanpassen. Inmeten mag ook op zaterdag.",
+      "fields": {
+        "address": "Nassau Zuilensteinstraat 11D, 2596CA 's-Gravenhage, Nederland",
+        "phone": "+31648565175",
+        "cf_lead_value": {
+          "amount": "6709.9",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "juliaavo@gmail.com"
+      }
+    },
+    {
+      "id": "93f58d91-b51d-4002-a442-2c98193fe5d3",
+      "summary": "Hendrik-Jan Colijn",
+      "item_subject": {
+        "id": "248febfd-78bf-4053-8e01-88cd3c41f141",
+        "identifier": "type=LEAD_CONFIGURATION,id=248febfd-78bf-4053-8e01-88cd3c41f141",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: hjcolijn73@gmail.com\nTelefoonnummer: +31610641348\nVoornaam: Hendrik-Jan\nAchternaam: Colijn\nPostcode: 2396 XB\nPlaats: Koudekerk aan den Rijn\nStraatnaam: Pr. marijkestraat\nHuisnummer: 16\nHoe komt u bij ons terecht?: Google\n\n1x Rolluik: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 3001 mm - 3200 mm: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1560.0\n- breedte: 3140.0\n\n1x Inclusief montage rolluik solar\n1x Somfy connectivity app bediening\n1x Rolluik: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 3201 mm - 3400 mm: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1000.0\n- breedte: 3201.0\n\n1x Inclusief montage rolluik solar\n1x Somfy connectivity app bediening\n1x Rolluik: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1560.0\n- breedte: 1100.0\n\n1x Inclusief montage rolluik solar\n1x Somfy connectivity app bediening",
+      "fields": {
+        "address": "Pr. marijkestraat 16, 2396 XB Koudekerk aan den Rijn, Nederland",
+        "phone": "+31610641348",
+        "cf_lead_value": {
+          "amount": "4571.64",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "hjcolijn73@gmail.com"
+      }
+    },
+    {
+      "id": "3839f123-3daf-4fe2-970e-cd2d6b96cdf4",
+      "summary": "Ebru Kilinc",
+      "item_subject": {
+        "id": "7e216485-a45d-4f35-877f-7df8225e0d8f",
+        "identifier": "type=LEAD_CONFIGURATION,id=7e216485-a45d-4f35-877f-7df8225e0d8f",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: me_ebru@live.nl\nTelefoonnummer: +31616463983\nVoornaam: Ebru\nAchternaam: Kilinc \nPostcode: 4826CC \nHuisnummer: 1b2\nPlaats: Breda\nStraatnaam: Kaprijkestraat \nHoe komt u bij ons terecht?: Google\n\n1x Rolluik: \n- framekleur: RAL 9001\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 9001\n- welk_type_bediening_wil_je?: Draaischakelaar\n- hoogte: 1700.0\n- breedte: 3000.0\n\n1x Inclusief montage rolluik solar",
+      "fields": {
+        "address": "Kaprijkestraat  1b2, 4826CC  Breda, Nederland",
+        "phone": "+31616463983",
+        "cf_lead_value": {
+          "amount": "1229.6950000000002",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "me_ebru@live.nl"
+      }
+    },
+    {
+      "id": "52d61652-9797-4dab-86c8-a4f88aa23dcf",
+      "summary": "Marjolein Nunnink",
+      "item_subject": {
+        "id": "2c323210-7ab3-47b9-b207-8f8bfdf9f1f9",
+        "identifier": "type=LEAD_CONFIGURATION,id=2c323210-7ab3-47b9-b207-8f8bfdf9f1f9",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: marjoleinpaco@gmail.com\nTelefoonnummer: +31657977507\nVoornaam: Marjolein\nAchternaam: Nunnink\nPostcode: 2728GJ\nHuisnummer: 185\nPlaats: Zoetermeer\nStraatnaam: Schansbaan\nHoe komt u bij ons terecht?: Social media\n\n2x Windvast: \n- framekleur: RAL 9010\n- hoogte: 1000.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 1200.0\n\n2x Inclusief montage screen solar\n1x Somfy connectivity app bediening\n1x Windvast: \n- framekleur: RAL 9010\n- hoogte: 1000.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 3000.0\n\n1x Inclusief montage screen solar\n1x Somfy connectivity app bediening",
+      "fields": {
+        "address": "Schansbaan 185, 2728GJ Zoetermeer, Nederland",
+        "phone": "+31657977507",
+        "cf_lead_value": {
+          "amount": "4434.382",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "marjoleinpaco@gmail.com"
+      }
+    },
+    {
+      "id": "3ad15733-c1d4-44e6-8b00-67340c5006bb",
+      "summary": "Josua Lausberg",
+      "item_subject": {
+        "id": "047e93fb-48fa-421b-aea4-fc9161c085fe",
+        "identifier": "type=LEAD_CONFIGURATION,id=047e93fb-48fa-421b-aea4-fc9161c085fe",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: josualausberg@gmail.com\nTelefoonnummer: +31617395113\nVoornaam: Josua\nAchternaam: Lausberg\nPostcode: 2803ej\nHuisnummer: 14\nPlaats: Gouda\nStraatnaam: Simon van der Stellaan\nHoe komt u bij ons terecht?: Google\nOpmerking: Bestaande scherm moet af\n\n1x Rolluik: \n- framekleur: RAL 9005 structuur\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 9005 structuur\n- welk_type_bediening_wil_je?: Draaischakelaar\n- hoogte: 2000.0\n- breedte: 2650.0\n\n1x Inclusief montage rolluik solar",
+      "fields": {
+        "address": "Simon van der Stellaan 14, 2803ej Gouda, Nederland",
+        "phone": "+31617395113",
+        "cf_lead_value": {
+          "amount": "1240.915",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "josualausberg@gmail.com"
+      }
+    },
+    {
+      "id": "d1f98350-678c-4d91-af6a-e4c99fddcb4f",
+      "summary": "Jan De Bont",
+      "item_subject": {
+        "id": "b030fee3-b86c-47b4-9a23-c1876490cc3b",
+        "identifier": "type=LEAD_CONFIGURATION,id=b030fee3-b86c-47b4-9a23-c1876490cc3b",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: jan.de.bont@casema.nl\nTelefoonnummer: +31651315983\nVoornaam: Jan\nAchternaam: De Bont\nPostcode: 2743CW\nHuisnummer: 119\nPlaats: Waddinxveen\nStraatnaam: Zuidplaslaan\nHoe komt u bij ons terecht?: Google\n\n1x Rolluik: \n- framekleur: RAL 9005 structuur\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 9005 structuur\n- welk_type_bediening_wil_je?: Draaischakelaar\n- hoogte: 1000.0\n- breedte: 2623.0\n\n1x Inclusief montage rolluik solar\n1x Rolluik: \n- framekleur: RAL 9005 structuur\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 9005 structuur\n- welk_type_bediening_wil_je?: Draaischakelaar\n- hoogte: 1153.0\n- breedte: 1021.0\n\n1x Inclusief montage rolluik solar",
+      "fields": {
+        "address": "Zuidplaslaan 119, 2743CW Waddinxveen, Nederland",
+        "phone": "+31651315983",
+        "cf_lead_value": {
+          "amount": "1684.275",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "jan.de.bont@casema.nl"
+      }
+    },
+    {
+      "id": "23e94b41-7856-41c3-8b74-cc4a93a38e76",
+      "summary": "Marco Klok",
+      "item_subject": {
+        "id": "3871f0e8-8a7d-40d8-a742-0307bc402544",
+        "identifier": "type=LEAD_CONFIGURATION,id=3871f0e8-8a7d-40d8-a742-0307bc402544",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: marco_klok@outlook.com\nVoornaam: Marco\nAchternaam: Klok\nPostcode: 3961JB\nHuisnummer: 8\nPlaats: Wijk bij Duurstede\nStraatnaam: Hunze\nTelefoonnummer: +31643484972\nHoe komt u bij ons terecht?: Google\n\n1x Suneye dichte cassette: \n- doekkleur: Doekkleur naar keuze\n- framekleur: RAL 7016 structuur\n- heb_je_een_uitbouw?: Ja\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Breedte tussen 3191 mm - 5500 mm: \n- framekleur: RAL 7016 structuur\n- uitval: 3000 mm\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- breedte: 4500.0\n\n1x Inclusief montage Knikarmscherm: \n- heb_je_een_uitbouw?: Ja\n\n**Opmerking planning (AI-klantenservice, 2026-08-03):**\nKlant tekent offerte 202610867 zelf online. Voorkeur inmeten: liefst een ZATERDAG (dan beiden thuis); anders woensdag of vrijdag (klant regelt dan thuiswerken).",
+      "fields": {
+        "address": "Hunze 8, 3961JB Wijk bij Duurstede, Nederland",
+        "phone": "+31643484972",
+        "cf_lead_value": {
+          "amount": "3207.645",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "marco_klok@outlook.com"
+      }
+    },
+    {
+      "id": "67a18f68-1d4b-486d-a910-6efd2ef39330",
+      "summary": "Matijn Made",
+      "item_subject": {
+        "id": "e6461122-6177-4248-a0a6-0171caff6a95",
+        "identifier": "type=LEAD_CONFIGURATION,id=e6461122-6177-4248-a0a6-0171caff6a95",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: matijn@fastmail.nl\nTelefoonnummer: +31639004283\nVoornaam: Matijn\nAchternaam: Made\nPostcode: 3705bj\nHuisnummer: 240\nPlaats: Zeist\nStraatnaam: Oude Arnhemseweg\nHoe komt u bij ons terecht?: Google\n\n1x Windvast: \n- framekleur: Andere RAL kleur\n- hoogte: 1300.0\n- welk_type_bediening_wil_je?: Draaischakelaar\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 1900.0",
+      "fields": {
+        "address": "Oude Arnhemseweg 240, 3705bj Zeist, Nederland",
+        "phone": "+31639004283",
+        "cf_lead_value": {
+          "amount": "1377.3400000000001",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "matijn@fastmail.nl"
+      }
+    },
+    {
+      "id": "5dcd1e31-c8e3-40ca-9ddc-c421a678dddc",
+      "summary": "Sofie van Herpen",
+      "item_subject": {
+        "id": "7cbdd669-16e2-4db0-a708-a13dd731cfd6",
+        "identifier": "type=LEAD_CONFIGURATION,id=7cbdd669-16e2-4db0-a708-a13dd731cfd6",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: sofievanherpen@gmail.com\nTelefoonnummer: +31623153841\nVoornaam: Sofie\nAchternaam: van Herpen\nPostcode: 2496 WZ\nHuisnummer: 226\nPlaats: Den Haag\nStraatnaam: Guirlande\nHoe komt u bij ons terecht?: Google\n\n1x Windvast: \n- framekleur: RAL 9010\n- hoogte: 2000.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 2540.0\n\n1x Somfy connectivity app bediening\n1x Inclusief montage screen solar\n1x Windvast: \n- framekleur: RAL 9010\n- hoogte: 1500.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 660.0\n\n1x Inclusief montage screen solar\n1x Somfy connectivity app bediening\n1x Windvast: \n- framekleur: RAL 9010\n- hoogte: 1500.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 670.0\n\n1x Inclusief montage screen solar\n1x Somfy connectivity app bediening",
+      "fields": {
+        "address": "Guirlande 226, 2496 WZ Den Haag, Nederland",
+        "phone": "+31623153841",
+        "cf_lead_value": {
+          "amount": "5069.995",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "sofievanherpen@gmail.com"
+      }
+    },
+    {
+      "id": "f27da4bd-aa89-4ed1-918c-8a2cff5ea7fc",
+      "summary": "Kenny van Hooijdonk",
+      "item_subject": {
+        "id": "a0d7408c-de29-4d3f-820c-e51c5edeea99",
+        "identifier": "type=LEAD_CONFIGURATION,id=a0d7408c-de29-4d3f-820c-e51c5edeea99",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Naam: Kenny van Hooijdonk\nTelefoonnummer: 0648086057\nE-mailadres: liu-vanhooijdonk@outlook.com",
+      "fields": {
+        "address": "",
+        "phone": "0648086057",
+        "cf_lead_value": {
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "liu-vanhooijdonk@outlook.com"
+      }
+    },
+    {
+      "id": "14edb591-fa8e-473a-bd08-53b5ab3067cd",
+      "summary": "Johan Bent",
+      "item_subject": {
+        "id": "d1304298-d0aa-4bcb-9dee-1a486fbdd037",
+        "identifier": "type=LEAD_CONFIGURATION,id=d1304298-d0aa-4bcb-9dee-1a486fbdd037",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: joopendoorbent@gmail.com\nTelefoonnummer: +31235614249\nVoornaam: Johan\nAchternaam: Bent \nPostcode: 2135br\nHuisnummer: 118\nPlaats: Hoofddorp\nStraatnaam: Vinkenburg\nHoe komt u bij ons terecht?: Social media\n\n1x Voorraad scherm - 20% korting: \n- doekkleur: Beige\n- heb_je_een_uitbouw?: Nee\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Inclusief montage Knikarmscherm uitgebreid.: \n- heb_je_een_uitbouw?: Nee",
+      "fields": {
+        "address": "Vinkenburg 118, 2135br Hoofddorp, Nederland",
+        "phone": "+31235614249",
+        "cf_lead_value": {
+          "amount": "2932.5",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "joopendoorbent@gmail.com"
+      }
+    }
+  ],
+  "aanbodTickets": {
+    "0d1fb1f24976bcf09aaf9e23b82799cf": {
+      "naam": "Julia Arias van Oordt",
+      "telefoon": "+31648565175",
+      "waTicket": 972325106,
+      "mailTicket": 972338714,
+      "verstuurdOp": "2026-08-06T18:06:38.932Z",
+      "email": "juliaavo@gmail.com"
+    },
+    "4953a9d820c4e37c1bd87ed01ed8707c": {
+      "naam": "Eric Van der Meer",
+      "telefoon": "+31628266205",
+      "waTicket": 972325204,
+      "mailTicket": null,
+      "verstuurdOp": "2026-08-06T18:07:43.675Z",
+      "email": "ericievld1983@gmail.com"
+    },
+    "62c841ac17b817e122a0b80e527208b3": {
+      "naam": "Carlo Pronk",
+      "telefoon": "+31643547555",
+      "waTicket": 972325672,
+      "mailTicket": 972338641,
+      "verstuurdOp": "2026-08-06T18:10:16.733Z",
+      "email": "Carlo.pronk@live.nl"
+    },
+    "033ca171a725ffd89c0771d7a3ba079d": {
+      "naam": "Irene  Kersseboom",
+      "telefoon": "+31625002169",
+      "waTicket": 972326094,
+      "mailTicket": 972338652,
+      "verstuurdOp": "2026-08-06T18:12:43.640Z",
+      "email": "ericb.irenek@ziggo.nl"
+    },
+    "45587890e078041c66ce9a29c8c34546": {
+      "naam": "Sofie van Herpen",
+      "telefoon": "+31623153841",
+      "waTicket": 972337758,
+      "mailTicket": 972338660,
+      "verstuurdOp": "2026-08-06T19:29:15.346Z",
+      "email": "sofievanherpen@gmail.com"
+    },
+    "e078ab7a0115d56aa1fe5410cde939cf": {
+      "naam": "Vas Verhage",
+      "telefoon": "+31615851026",
+      "waTicket": 972337852,
+      "mailTicket": 972338672,
+      "verstuurdOp": "2026-08-06T19:30:14.144Z",
+      "email": "vamaja@casema.nl"
+    },
+    "55bc6b32ba76648efe9b20265ee0ca1b": {
+      "naam": "Rene Blauw",
+      "telefoon": "+31654927140",
+      "email": "rene@blauw.biz",
+      "waTicket": 972405430,
+      "mailTicket": 972405432,
+      "verstuurdOp": "2026-08-07T06:35:56.349Z"
+    },
+    "0d4b36ab532bf90391007358eb3ca80f": {
+      "naam": "Hans Erik Hazelhorst",
+      "telefoon": "+31628157200",
+      "email": "hhazelhorst@gmail.com",
+      "waTicket": null,
+      "mailTicket": 972405641,
+      "verstuurdOp": "2026-08-07T06:37:37.472Z"
+    },
+    "cd46ddea0b90233846838757cb4e5a07": {
+      "naam": "Johan Bent",
+      "telefoon": "+31235614249",
+      "email": "joopendoorbent@gmail.com",
+      "waTicket": 972405878,
+      "mailTicket": 972405879,
+      "verstuurdOp": "2026-08-07T06:38:37.192Z"
+    },
+    "b0d78ab94ea163abe5b6da66be30b3ef": {
+      "naam": "Hendrik-Jan Colijn",
+      "telefoon": "+31610641348",
+      "email": "hjcolijn73@gmail.com",
+      "waTicket": 972337979,
+      "mailTicket": 972411549,
+      "verstuurdOp": "2026-08-07T07:05:43.930Z"
+    }
   },
-  "9335cd79-90e8-487f-b446-f669c27886df": {
-   "naam": "Rakesh Soekhoe",
-   "op": "2026-08-05T21:09:43.299Z",
-   "aanbod": 1
-  },
-  "23e94b41-7856-41c3-8b74-cc4a93a38e76": {
-   "naam": "Marco Klok",
-   "op": "2026-08-04T10:57:53.257Z",
-   "aanbod": 3
-  },
-  "69d0fc53-df8f-4fad-bd8f-21b5efccaa24": {
-   "naam": "Vas Verhage",
-   "op": "2026-08-04T10:57:56.568Z",
-   "aanbod": 3
-  },
-  "67a18f68-1d4b-486d-a910-6efd2ef39330": {
-   "naam": "Matijn Made",
-   "op": "2026-08-04T10:58:01.632Z",
-   "aanbod": 3
-  },
-  "2aaa2497-42e5-4314-b46a-84ce38d7aa0a": {
-   "naam": "Daimy TEST GRIP",
-   "op": "2026-08-04T11:34:52.985Z",
-   "aanbod": 3
-  },
-  "351aa6c1-774c-4171-a210-7e9924202bda": {
-   "naam": "Manu Raja",
-   "op": "2026-08-05T21:09:25.294Z",
-   "aanbod": 1
-  },
-  "8c241c8c-a204-4231-bf7c-23b83094b8dc": {
-   "naam": "Maarten Jansen",
-   "op": "2026-08-05T21:09:35.012Z",
-   "aanbod": 3
-  },
-  "0e43f9b6-5888-4910-a5fa-6ebc9f745538": {
-   "naam": "Julia Arias van Oordt",
-   "op": "2026-08-05T21:09:37.492Z",
-   "aanbod": 1
-  },
-  "d3293dd9-8313-4205-94cc-511834c93983": {
-   "naam": "Carlo Pronk",
-   "op": "2026-08-05T21:09:40.571Z",
-   "aanbod": 3
+  "conflictGemeld": {
+    "kapotte-keuze:4953a9d820c4e37c1bd87ed01ed8707c": "2026-08-06T18:52:20.871Z"
   }
- },
- "wachtend": {
-  "2aaa2497-42e5-4314-b46a-84ce38d7aa0a": "2026-08-04T11:41:03.039Z",
-  "2905b04f-0df3-47b7-a6b5-9c4f4200f559": "2026-08-05T21:09:28.326Z",
-  "3839f123-3daf-4fe2-970e-cd2d6b96cdf4": "2026-08-05T21:09:30.597Z",
-  "3ad15733-c1d4-44e6-8b00-67340c5006bb": "2026-08-05T21:09:41.960Z",
-  "38c2bec4-125f-4c48-9dcf-28c09c6ef5c0": "2026-08-05T21:09:42.225Z",
-  "23e94b41-7856-41c3-8b74-cc4a93a38e76": "2026-08-05T21:09:43.726Z"
- },
- "gezien": {
-  "351aa6c1-774c-4171-a210-7e9924202bda": "2026-08-06T08:30:26.634Z",
-  "2905b04f-0df3-47b7-a6b5-9c4f4200f559": "2026-08-06T08:30:26.634Z",
-  "3839f123-3daf-4fe2-970e-cd2d6b96cdf4": "2026-08-06T08:30:26.634Z",
-  "8c241c8c-a204-4231-bf7c-23b83094b8dc": "2026-08-06T08:30:26.634Z",
-  "0e43f9b6-5888-4910-a5fa-6ebc9f745538": "2026-08-06T08:30:26.634Z",
-  "d3293dd9-8313-4205-94cc-511834c93983": "2026-08-06T08:30:26.634Z",
-  "52d61652-9797-4dab-86c8-a4f88aa23dcf": "2026-08-06T08:30:26.634Z",
-  "1c140daf-17a6-4b98-9cf6-ffee88408c87": "2026-08-06T08:30:26.634Z",
-  "b2b4510d-cd2e-4d09-bb1d-dcb29e2ad644": "2026-08-06T08:30:26.634Z",
-  "3ad15733-c1d4-44e6-8b00-67340c5006bb": "2026-08-06T08:30:26.634Z",
-  "d1f98350-678c-4d91-af6a-e4c99fddcb4f": "2026-08-06T08:30:26.634Z",
-  "9335cd79-90e8-487f-b446-f669c27886df": "2026-08-06T08:30:26.634Z",
-  "93f58d91-b51d-4002-a442-2c98193fe5d3": "2026-08-06T10:25:47.534Z"
- },
- "laatsteRapportHash": "0fe85bb104319c903330ed1cc67fed376372154a",
- "gemeld": {
-  "351aa6c1-774c-4171-a210-7e9924202bda": "2026-08-06T11:00:00Z",
-  "2905b04f-0df3-47b7-a6b5-9c4f4200f559": "2026-08-06T11:00:00Z",
-  "3839f123-3daf-4fe2-970e-cd2d6b96cdf4": "2026-08-06T11:00:00Z",
-  "8c241c8c-a204-4231-bf7c-23b83094b8dc": "2026-08-06T11:00:00Z",
-  "0e43f9b6-5888-4910-a5fa-6ebc9f745538": "2026-08-06T11:00:00Z",
-  "d3293dd9-8313-4205-94cc-511834c93983": "2026-08-06T11:00:00Z",
-  "52d61652-9797-4dab-86c8-a4f88aa23dcf": "2026-08-06T11:00:00Z",
-  "1c140daf-17a6-4b98-9cf6-ffee88408c87": "2026-08-06T11:00:00Z",
-  "b2b4510d-cd2e-4d09-bb1d-dcb29e2ad644": "2026-08-06T11:00:00Z",
-  "3ad15733-c1d4-44e6-8b00-67340c5006bb": "2026-08-06T11:00:00Z",
-  "d1f98350-678c-4d91-af6a-e4c99fddcb4f": "2026-08-06T11:00:00Z",
-  "9335cd79-90e8-487f-b446-f669c27886df": "2026-08-06T11:00:00Z",
-  "93f58d91-b51d-4002-a442-2c98193fe5d3": "2026-08-06T11:00:00Z"
- }
 }

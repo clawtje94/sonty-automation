@@ -61,6 +61,28 @@
   Regressietest 23 = de echte Josua-casus. Bewijs: Marjolein 21 sep → 31 aug bovenaan,
   Matijn 15 okt → 21 sep.
 
+## MIDDAG-ACTIES NA AUDIT (07-08, antwoorden Daimy V1-V6)
+- **RENE**: volgorde-correctie Daimy ("eerst vragen, dan boeken"): 16:00-boeking stil
+  teruggedraaid (motor-verzet, klant merkte niks), wegvaller-VRAAG verstuurd voor
+  MA 10 AUG 15:00 (Daimy checkte bij Joey: kan, ondanks laatste klus Den Haag tot 15:00).
+  1-slot-aanbod 09cf48df in register + monitor gekoppeld (ticket 972405430) + Outlook-
+  optie: zijn "is goed" boekt automatisch exact 15:00. Op annuleringslijst blijven staan.
+- **MARJOLEIN NUNNINK GEBOEKT**: haar "Dat is prima!" van 11:32 was door de strenge
+  regex blijven liggen (audit-gat). Keuze vastgezet → keten boekte ma 31 aug 09:45
+  Joey (Gripp 6422). Haar 2e-offerte-vraag beantwoord (klantlink) + note/taak Jorren.
+  **leesKeuze-fix**: acceptatie mét extra tekst boekt nu (eerste-zinnen-check);
+  afspraak-twijfel (ander moment/andere dag/liever/kan niet) blijft ALTIJD naar mens.
+  Haar echte bericht is regressietestgeval.
+- **MANON VAN DER KNAAP + CHRISTIAN TAMMINGA** (akkoorden, inmeten=mijn domein per
+  Daimy V3; montage-planning NIET): beantwoord als Nanny, RP → Inmeten inplannen,
+  Christians dakkapel-wens als planning-opmerking in de lead, reken-verzoeken gedraaid.
+- **Tickets**: 4 geboekte klanten dicht (alleen als wij het laatst spraken), 7 lege
+  bug-tickets dicht (cron-keten-tickets-sluiten.js herbruikbaar).
+- **Verzoek-daemon**: poort-/mens-nodig-fouten zijn nu DEFINITIEF (geen retry-loop —
+  incident: wilEerder-verzoek herhaalde elke minuut).
+- Daimy V4 (nieuwe inmeter): volgt later. V5 (planning@-kanaal, Vas): doet Daimy. V6
+  (prijsplan): uitleg gegeven, wacht op go.
+
 ## SAMENHANG-AUDIT ULTRACODE (07-08 middag, opdracht Daimy "alles moet samenwerken")
 - **16 agents, alle hoog/middel-bevindingen adversarieel geverifieerd in echte
   tickets+code.** Kerndiagnose: bot-werk functioneert; overdracht aan een MENS was

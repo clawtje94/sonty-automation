@@ -62,11 +62,23 @@ function bevestigingsTekst(slot) {
 }
 
 async function stuurWaBevestiging(ticketId, naam, slot) {
+  // Met retry en zonder stil falen: op 06-08 verdween Carlo's bevestiging in een
+  // Trengo-429 en zei de ✅-melding tóch "bevestiging is al gestuurd".
   const tekst = bevestigingsTekst(slot);
-  await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages`, {
-    method: 'POST', headers: { ...TH, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: tekst, type: 'OUTBOUND' }),
-  }).catch(() => {});
+  for (let i = 0; i < 4; i++) {
+    try {
+      const r = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages`, {
+        method: 'POST', headers: { ...TH, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: tekst, type: 'OUTBOUND' }),
+      });
+      if (r.ok) return true;
+      if (r.status === 429) { await new Promise((x) => setTimeout(x, 20000 + i * 15000)); continue; }
+      await telegram(`⚠️ Bevestiging aan ${naam} kon niet verstuurd worden (Trengo ${r.status}, ticket ${ticketId}) — even handmatig bevestigen: ${tekst}`);
+      return false;
+    } catch { await new Promise((x) => setTimeout(x, 15000)); }
+  }
+  await telegram(`⚠️ Bevestiging aan ${naam} bleef op rate-limits stuklopen (ticket ${ticketId}) — even handmatig bevestigen: ${tekst}`);
+  return false;
 }
 
 async function ticketBerichten(ticketId) {
@@ -143,8 +155,8 @@ async function main() {
                 body: JSON.stringify({ status: 'gekozen', gekozenIndex: keuze }),
               });
               if (rK.ok) {
-                await stuurWaBevestiging(ticketId, info.naam, aanbod.slots[keuze]);
-                await telegram(`✅ ${info.naam} koos via WhatsApp optie ${keuze + 1} ("${tekst.slice(0, 40)}") — wordt automatisch geboekt, bevestiging is al gestuurd.`);
+                const bevestigd = await stuurWaBevestiging(ticketId, info.naam, aanbod.slots[keuze]);
+                await telegram(`✅ ${info.naam} koos via WhatsApp optie ${keuze + 1} ("${tekst.slice(0, 40)}") — wordt automatisch geboekt${bevestigd ? ', bevestiging is al gestuurd' : '; LET OP: bevestiging kon niet verstuurd worden'}.`);
                 statusPer[token] = 'gekozen';
                 continue;
               }

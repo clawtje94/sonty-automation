@@ -30,11 +30,24 @@ const DAGK = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
 /** Welke optie kiest dit bericht? 1/2/3, "optie 2", of een dagnaam die precies één slot matcht. */
 function leesKeuze(tekst, slots) {
   const t = String(tekst || '').toLowerCase().trim();
-  // 1-moment-aanbod: knop "Dat past" (of een kale bevestiging) = akkoord op slot 0.
+  // 1-moment-aanbod: knop "Dat past" (of een bevestiging) = akkoord op slot 0.
   // "Ander moment"/"past niet" is GEEN keuze: conservatief → Telegram-melding.
   if (slots.length === 1) {
+    // TWIJFEL over de AFSPRAAK wint altijd (mens kijkt mee). Bewust specifiek:
+    // een los "maar" in een bijzin over iets anders (Marjolein 07-08: "Dat is
+    // prima! Ik zou de offerte nog krijgen maar heb deze niet gehad") is géén
+    // twijfel over de tijd.
+    const twijfel = /ander(e)? (moment|tijd|dag|datum)|past (mij |ons )?niet|kan (dan |echt )?niet|lukt (dan |echt )?niet|liever|helaas|verzetten|verplaatsen|annuleer/i;
+    if (twijfel.test(t)) return null;
+    // kale bevestiging (knop of kort berichtje)
     if (/^(dat past|past\b.{0,10}|prima|is goed|akkoord|top|ja|jazeker|oke|oké|ok|👍)[!. ]*$/.test(t)
       && !/niet|geen|ander/.test(t)) return 0;
+    // ACCEPTATIE MET EXTRA TEKST (audit 07-08, geval Marjolein: keuze bleef liggen
+    // en niemand boekte): een zin die met een duidelijke bevestiging begint telt,
+    // ook als er daarna nog een vraag of groet volgt. De twijfel-check hierboven
+    // heeft dan al gedraaid.
+    const eersteZinnen = t.split(/[.!?\n]/).slice(0, 2).map((z) => z.trim());
+    if (eersteZinnen.some((z) => /^(hi+|hoi|hey|hallo|goedemorgen|goedemiddag|goedenavond)?[,! ]*(dat (is|past)|past (goed|prima)|prima|is goed|helemaal goed|akkoord|top|ja( hoor| graag| leuk)?|jazeker|oke|oké|ok|perfect|super)\b/.test(z))) return 0;
     if (/^(?:optie\s*)?1[.!)]?$/.test(t)) return 0;
     return null;
   }

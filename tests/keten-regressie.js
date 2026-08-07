@@ -277,6 +277,13 @@ test('leesKeuze bij 1 slot: bevestiging = akkoord, twijfel = mens (Daimy 07-08)'
   assert.strictEqual(leesKeuze('Ander moment', een), null, '"Ander moment" mag nooit boeken');
   assert.strictEqual(leesKeuze('past niet', een), null);
   assert.strictEqual(leesKeuze('ja maar liever een ander moment', een), null, 'gemengd bericht = mens');
+  // acceptatie met extra tekst (audit 07-08, ECHTE bericht van Marjolein: bleef liggen)
+  assert.strictEqual(leesKeuze('Hi! Dat is prima! Ik zou de offerte per mail nog krijgen maar heb deze niet meer gehad. Wij hadden toen 2 offertes laten maken. Het gaat om de hor voor de schuifpui en 1 zonnescherm. Groetjes Marjolein', een), 0, 'acceptatie + losse vraag moet gewoon boeken');
+  assert.strictEqual(leesKeuze('is goed', een), 0);
+  assert.strictEqual(leesKeuze('Ja hoor, tot dan!', een), 0);
+  assert.strictEqual(leesKeuze('Dat past prima, kan de monteur aanbellen bij de buren?', een), 0);
+  assert.strictEqual(leesKeuze('Prima, maar kan het ook een andere dag?', een), null, 'andere dag = mens');
+  assert.strictEqual(leesKeuze('Helaas, dan lukt niet, liever volgende week', een), null);
 });
 test('1-moment-template wordt NIET verstuurd zolang hij niet bestaat', async () => {
   const { stuurWhatsApp } = require('../scripts/lib/aanbod-versturen.js');

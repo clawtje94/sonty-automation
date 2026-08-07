@@ -46,6 +46,12 @@
   draaide 80 scenario's op hetzelfde nep-id → 33x FOUT-STIL én nepdata in de echte cache.
   Nu: RP_OFFERTE_CACHE_PAD injecteerbaar, lab gebruikt wegwerpbestand + wist per
   scenario; nep-key 'lc-1' uit data/rp-offerte-cache.json verwijderd.
+- **WERKDAG = KLANTTIJD (Daimy 07-08, doorgevoerd)**: "plan gerust zo dat ze om 9:00 bij
+  de eerste klant staan en om 15:00 bij de laatste weggaan." Slotzoeker: aanrit naar de
+  eerste klus valt vóór dagstart, terugrit na dageinde; alleen ritten tussen klanten
+  kosten dagtijd. Rijtijd telt WEL mee in de omrij-afweging (extraRijtijdMin) — hij is
+  niet gratis, hij past alleen niet in het klantvenster. Effect: meer capaciteit per dag
+  en verre combi-dagen (eerste klant 09:00 in Gouda) worden veel eerder haalbaar.
 - **15-10-VRAAG DAIMY (07-08)**: dashboard toonde 15 okt bovenaan. Oorzaak dubbel:
   (1) agenda echt vol t/m eind aug + Sjoerd-vakantie; (2) keuze sorteert puur op minste
   omrijden zonder datumvoorkeur, en de 100-dagen-sync zette verre ankers neer waar de

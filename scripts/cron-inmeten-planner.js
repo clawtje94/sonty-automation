@@ -133,15 +133,29 @@ function leesLead(item) {
     producten.push({ type: naam.toLowerCase(), naam, aantal });
   }
 
+  let adres = [straat, nummer].filter(Boolean).join(' ');
+  let pc = postcode;
+  let woonplaats = plaats;
+  // VANGNET fields.address (bug Franken 07-08): het winkel-adresformulier schrijft
+  // naar item.fields.address, maar de lezer keek alleen naar de beschrijvings-
+  // velden — de kaart bleef dus op "geen adres" staan terwijl het adres er wél was.
+  if ((!adres || !woonplaats) && item.fields?.address) {
+    try {
+      const { adresUitTekst } = require('./lib/offerte-adres.js');
+      const gevonden = adresUitTekst(String(item.fields.address));
+      if (gevonden) { adres = gevonden.adres; pc = gevonden.postcode; woonplaats = gevonden.plaats; }
+    } catch { /* vangnet is optioneel */ }
+  }
+
   return {
     id: item.id,
     naam: item.summary || veld('Voornaam') + ' ' + veld('Achternaam'),
     telefoon: veld('Telefoonnummer'),
     email: veld('E-mailadres'),
-    adres: [straat, nummer].filter(Boolean).join(' '),
-    postcode,
-    plaats,
-    volledigAdres: [[straat, nummer].filter(Boolean).join(' '), postcode, plaats].filter(Boolean).join(', '),
+    adres,
+    postcode: pc,
+    plaats: woonplaats,
+    volledigAdres: [adres, pc, woonplaats].filter(Boolean).join(', '),
     producten,
     aantalProducten: producten.reduce((a, p) => a + p.aantal, 0),
   };

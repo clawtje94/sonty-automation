@@ -61,6 +61,16 @@
   Regressietest 23 = de echte Josua-casus. Bewijs: Marjolein 21 sep → 31 aug bovenaan,
   Matijn 15 okt → 21 sep.
 
+## PLANNING-BOT @PlanningSontyBOT LIVE (07-08, opdracht Daimy)
+- Alle planning-/inmeetmeldingen via de nieuwe bot: lib scripts/lib/telegram-planning.js
+  (leest data/telegram-planning.json PER CALL — tokenwissel zonder herstart; config
+  ontbreekt = terugval hoofdbot, nooit stilte). 10 scripts omgezet: planner,
+  outlook-sync, herinneringen, aanbod-replies, inmeet-mutatie, aanbod-versturen,
+  planado-webhook, gripp-invullen, sandbox, trengo-bundel.
+- Lezer: scripts/read-planning-telegram.js → planning-inbox.txt (offset-state in
+  data/planning-tg-offset.json). REGEL: derde lezer bij elk Daimy-bericht (memory).
+- Testbericht verstuurd en config gecommit (chat-id 1700128390, zelfde Joris-chat).
+
 ## TRENGO-VERSNIPPERING (07-08, Daimy "zelfde contact moet onder 1 ticket")
 - **Meting 30 dgn** (data/trengo-dubbel-30dgn.json): 716 tickets, 41 klanten met
   meerdere tickets (Colijn 4x mail, Carlo 3x WA, Rene Blauw 2x WA). Open-only was

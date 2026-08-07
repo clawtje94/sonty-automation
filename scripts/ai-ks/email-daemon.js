@@ -177,7 +177,18 @@ async function ronde() {
       try {
         if (Number(t.user_id) !== 736327) {
           await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 736327 });
-          await tPost(`/tickets/${t.id}/messages`, { internal_note: true, message: '🏢 VvE-aanvraag: automatisch aan Daimy toegewezen (regel Daimy 30-07). De bot beantwoordt dit niet.' });
+          // AUDIT 07-08 (geval Deborah Loocks): de note zei "toegewezen" terwijl de
+          // assignment stil was mislukt (user bleef null) — valse gerustheid. Eerst
+          // verifiëren dat de toewijzing echt staat, dán pas de note.
+          const check = await tGet(`/tickets/${t.id}`).catch(() => null);
+          const echtToegewezen = Number(check?.user_id ?? check?.data?.user_id) === 736327;
+          await tPost(`/tickets/${t.id}/messages`, {
+            internal_note: true,
+            message: echtToegewezen
+              ? '🏢 VvE-aanvraag: automatisch aan Daimy toegewezen (regel Daimy 30-07). De bot beantwoordt dit niet.'
+              : '🏢 VvE-aanvraag: toewijzen aan Daimy MISLUKT — dit ticket heeft nu NIEMAND. Handmatig oppakken.',
+          });
+          if (!echtToegewezen) console.error(`  [${t.id}] VvE-toewijzing NIET bevestigd — note waarschuwt nu i.p.v. gerust te stellen`);
         }
         console.log(`  [${t.id}] VvE-signaal → toegewezen aan Daimy, bot blijft eraf`);
       } catch (e) { console.error(`  [${t.id}] VvE-toewijzing FOUT: ${e.message}`); }

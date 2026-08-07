@@ -202,5 +202,28 @@ test('WA-bevestiging bevat nooit "undefined" als de inmeternaam ontbreekt (incid
   assert.ok(met.includes('onze inmeter Joey'), 'met naam moet de naam genoemd worden');
 });
 
+console.log('— 1-moment-aanbod —');
+test('leesKeuze bij 1 slot: bevestiging = akkoord, twijfel = mens (Daimy 07-08)', () => {
+  const { leesKeuze } = require('../scripts/cron-aanbod-replies.js');
+  const een = [{ aankomst: '2026-08-25T11:00:00.000Z' }];
+  assert.strictEqual(leesKeuze('Dat past', een), 0);
+  assert.strictEqual(leesKeuze('ja', een), 0);
+  assert.strictEqual(leesKeuze('👍', een), 0);
+  assert.strictEqual(leesKeuze('1', een), 0);
+  assert.strictEqual(leesKeuze('Ander moment', een), null, '"Ander moment" mag nooit boeken');
+  assert.strictEqual(leesKeuze('past niet', een), null);
+  assert.strictEqual(leesKeuze('ja maar liever een ander moment', een), null, 'gemengd bericht = mens');
+});
+test('1-moment-template wordt NIET verstuurd zolang hij niet bestaat', async () => {
+  const { stuurWhatsApp } = require('../scripts/lib/aanbod-versturen.js');
+  const echteFetch = global.fetch;
+  global.fetch = async () => ({ ok: true, json: async () => ({ data: [] }) });
+  try {
+    const r = await stuurWhatsApp({ lead: { naam: 'Test', telefoon: '0612345678' }, duurMin: 25, slots: [{ aankomst: '2026-08-25T11:00:00.000Z' }] }, 'x');
+    assert.strictEqual(r.ok, false, 'zonder moment-template mag er niets via WA gaan');
+    assert.ok(/moment-template/.test(r.reden || ''), `reden moet het template noemen: ${r.reden}`);
+  } finally { global.fetch = echteFetch; }
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

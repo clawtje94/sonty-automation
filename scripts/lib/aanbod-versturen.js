@@ -73,8 +73,35 @@ async function stuurWhatsAppTemplate(aanbod, url) {
   // valt de verzending terug op het (oude) 5-variabelen-template of het vrije bericht.
   let ids = {};
   try { ids = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', '..', 'data', 'wa-templates.json'), 'utf8')); } catch {}
-  const hsm = aanbod.ver === true ? (ids.ver || ids.normaal) : ids.normaal;
   const slots = aanbod.slots || [];
+
+  // ÉÉN-MOMENT-AANBOD (Daimy 07-08): eigen template met {{1}} voornaam,
+  // {{2}} moment, {{3}} duur en knoppen "Dat past" / "Ander moment".
+  if (slots.length === 1) {
+    const hsm1 = aanbod.ver === true ? (ids.momentVer || ids.moment) : ids.moment;
+    if (!hsm1) return { ok: false, reden: '1-moment-template nog niet goedgekeurd/aangemaakt' };
+    if (!slots[0]) return { ok: false, reden: 'leeg slot — NIET verstuurd' };
+    const p1 = [
+      { type: 'body', key: '{{1}}', value: (aanbod.lead.naam || 'daar').split(' ')[0] },
+      { type: 'body', key: '{{2}}', value: slotTekst(slots[0]) },
+      { type: 'body', key: '{{3}}', value: String(aanbod.duurMin || 30) },
+    ];
+    let bestaand1 = null;
+    try {
+      const zoek = await tFetch(`/tickets?term=${tel.slice(-9)}`, { method: 'GET' });
+      if (zoek.ok) bestaand1 = (((await zoek.json())?.data || []).find((tk) => tk.channel?.type === 'WA_BUSINESS' && tk.status !== 'CLOSED'))?.id || null;
+    } catch { /* dan op nummer */ }
+    const body1 = bestaand1
+      ? { ticket_id: bestaand1, hsm_id: hsm1, params: p1 }
+      : { recipient_phone_number: '+' + tel, hsm_id: hsm1, channel_id: WA_KANAAL, params: p1 };
+    const r1 = await tFetch('/wa_sessions', { method: 'POST', body: JSON.stringify(body1) });
+    if (!r1.ok) return { ok: false, reden: `moment-template: Trengo ${r1.status}` };
+    let ticket1 = bestaand1;
+    try { ticket1 = ticket1 || (await r1.json())?.message?.ticket_id || null; } catch {}
+    return { ok: true, via: aanbod.ver ? 'moment-template-ver' : 'moment-template', ticket: ticket1 };
+  }
+
+  const hsm = aanbod.ver === true ? (ids.ver || ids.normaal) : ids.normaal;
   const basis = [
     { type: 'body', key: '{{1}}', value: (aanbod.lead.naam || 'daar').split(' ')[0] },
     { type: 'body', key: '{{2}}', value: slots[0] ? slotTekst(slots[0]) : '-' },

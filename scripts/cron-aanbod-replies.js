@@ -30,6 +30,14 @@ const DAGK = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
 /** Welke optie kiest dit bericht? 1/2/3, "optie 2", of een dagnaam die precies één slot matcht. */
 function leesKeuze(tekst, slots) {
   const t = String(tekst || '').toLowerCase().trim();
+  // 1-moment-aanbod: knop "Dat past" (of een kale bevestiging) = akkoord op slot 0.
+  // "Ander moment"/"past niet" is GEEN keuze: conservatief → Telegram-melding.
+  if (slots.length === 1) {
+    if (/^(dat past|past\b.{0,10}|prima|is goed|akkoord|top|ja|jazeker|oke|oké|ok|👍)[!. ]*$/.test(t)
+      && !/niet|geen|ander/.test(t)) return 0;
+    if (/^(?:optie\s*)?1[.!)]?$/.test(t)) return 0;
+    return null;
+  }
   const num = t.match(/^(?:optie\s*)?([123])\b[.!)]?$/) || t.match(/\boptie\s*([123])\b/);
   if (num) return Number(num[1]) - 1;
   // dagnaam ("dinsdag" / "di") die precies bij één van de aangeboden slots past

@@ -335,6 +335,15 @@ async function grippCall(method, params) {
 }
 
 /** Gripp-offertenummer zoeken dat cron-gripp-invullen zojuist heeft aangemaakt. */
+// Is het 1-moment-template al beschikbaar (door Daimy aangemaakt + door Meta
+// goedgekeurd)? Sleutels "moment"/"momentVer" in data/wa-templates.json.
+function heeftMomentTemplate() {
+  try {
+    const ids = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'wa-templates.json'), 'utf8'));
+    return !!ids.moment;
+  } catch { return false; }
+}
+
 async function zoekGrippNummer(naam, rpItemId) {
   let log = {};
   try { log = JSON.parse(fs.readFileSync(path.join(__dirname, '.gripp-invullen-sent.json'), 'utf8')); } catch { return null; }
@@ -753,8 +762,18 @@ async function zorgVoorDrieOpties(lead, duur, agenda, huidigAanbod) {
 
 /** Aanbod vastleggen in het register en direct naar de klant sturen (mail + WhatsApp). */
 async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null) {
-  if (aanbod.length < 3 && agenda) aanbod = await zorgVoorDrieOpties(lead, duurMin, agenda, aanbod);
-  if (aanbod.length < 3) throw new Error(`maar ${aanbod.length} tijd(en) beschikbaar — template heeft er 3 nodig, niet verstuurd (handmatig of wachten op ruimte)`);
+  // Aantal aan te bieden tijden is instelbaar (Daimy 07-08: "gewoon 1 moment
+  // aanbieden, in de winkel maken mensen ook bijna altijd tijd"). Bij 1 sturen we
+  // het beste (goedkoopste) moment; de verzender valt zelf terug op 3 zolang de
+  // 1-moment-templates nog niet door Meta zijn goedgekeurd.
+  const aantalGewenst = (await require('./lib/instellingen.js').haalInstellingen()).aantalTijden === 1 ? 1 : 3;
+  if (aantalGewenst === 1 && !heeftMomentTemplate()) {
+    console.log('  (aantalTijden=1 maar 1-moment-template ontbreekt nog — val terug op 3)');
+  }
+  const aantal = aantalGewenst === 1 && heeftMomentTemplate() ? 1 : 3;
+  if (aanbod.length < aantal && agenda) aanbod = await zorgVoorDrieOpties(lead, duurMin, agenda, aanbod);
+  if (aanbod.length < aantal) throw new Error(`maar ${aanbod.length} tijd(en) beschikbaar — er zijn er ${aantal} nodig, niet verstuurd (handmatig of wachten op ruimte)`);
+  aanbod = aanbod.slice(0, aantal);
   // "ver weg"? — eerlijk benoemen in het bericht (Daimy 06-08). Meetlat: enkele reis
   // vanaf het magazijn is meer dan de omrij-grens uit de instellingen.
   let ver = false;

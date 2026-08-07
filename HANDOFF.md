@@ -62,11 +62,13 @@
   Matijn 15 okt → 21 sep.
 
 ## MIDDAG-ACTIES NA AUDIT (07-08, antwoorden Daimy V1-V6)
-- **RENE**: volgorde-correctie Daimy ("eerst vragen, dan boeken"): 16:00-boeking stil
-  teruggedraaid (motor-verzet, klant merkte niks), wegvaller-VRAAG verstuurd voor
-  MA 10 AUG 15:00 (Daimy checkte bij Joey: kan, ondanks laatste klus Den Haag tot 15:00).
-  1-slot-aanbod 09cf48df in register + monitor gekoppeld (ticket 972405430) + Outlook-
-  optie: zijn "is goed" boekt automatisch exact 15:00. Op annuleringslijst blijven staan.
+- **RENE GEBOEKT ✓ (07-08 ±15:30)**: ma 10 aug 15:00 Joey (Gripp 6421, sheet Aug r309,
+  meetbon, bevestiging automatisch). Route: 16:00-boeking stil teruggedraaid → wegvaller-
+  VRAAG (Daimy checkte 15:00 bij Joey) → "Is goed" → keten boekte. INCIDENT onderweg:
+  eerste keuze-poging faalde op netwerkfout en gemeld-dedup blokkeerde herkansing →
+  monitor-fix: keuze-poging herhaalt elke run zolang aanbod open, melding blijft eenmalig.
+  Rooster-vraag Daimy (wo 12 aug-gaten): wo/vr blijven vrije dagen, zijn eigen regel 04-08
+  bevestigd; sync-cadence uitgelegd (Outlook→Planado 30 min, planner 30 min, kliks vers).
 - **MARJOLEIN NUNNINK GEBOEKT**: haar "Dat is prima!" van 11:32 was door de strenge
   regex blijven liggen (audit-gat). Keuze vastgezet → keten boekte ma 31 aug 09:45
   Joey (Gripp 6422). Haar 2e-offerte-vraag beantwoord (klantlink) + note/taak Jorren.

@@ -137,6 +137,21 @@ test('schone agenda: boven de grens valt af', () => {
   assert.strictEqual(gekozen[0].extraRijtijdMin, 5);
 });
 
+test('vroegste datum wint binnen de omrij-grens (Josua-casus 07-08: 15 okt +9 won van 23 sep +13)', () => {
+  const gekozen = kiesAanbod([
+    slotje('2026-10-15', 9, 9, true),   // goedkoop naast een ver sync-anker
+    slotje('2026-09-23', 11, 13, true), // 3 weken eerder, 4 min duurder
+    slotje('2026-10-05', 10, 15, true),
+  ], 3);
+  assert.strictEqual(gekozen[0].datum, '2026-09-23', 'klant mag niet maanden schuiven om minuten rijtijd');
+  // boven de grens blijft de goedkoopste-eerst-volgorde (dag-4-route)
+  const duur = kiesAanbod([
+    slotje('2026-10-15', 9, 45, true),
+    slotje('2026-09-23', 11, 133, true),
+  ], 3, { wachtDagen: 999 });
+  assert.strictEqual(duur[0].extraRijtijdMin, 45, 'boven de grens beslist rijtijd, niet datum');
+});
+
 test('spreiding: niet 3x hetzelfde dagdeel op dezelfde dag', () => {
   const gekozen = kiesAanbod([
     slotje('2026-09-01', 9, 5, true),

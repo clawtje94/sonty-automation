@@ -199,11 +199,20 @@ function kiesAanbod(slots, aantal = 3, { wachtDagen = 0, deadlineDagen = MAX_WAC
   // filter staat alleen aan als de kosten betrouwbaar zijn.
   const betrouwbaar = !slots.some((s) => s.kostenBetrouwbaar === false);
   slots = [...slots].sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
-  if (betrouwbaar && wachtDagen < deadlineDagen) {
-    const gefilterd = slots.filter((s) => s.extraRijtijdMin <= maxOmrijdenMin);
-    // verre klant: pas filteren als er iets overblijft; anders wachten we bewust
-    // (tot MAX_WACHT_DAGEN) en dat is een zichtbare keuze, geen stille nul
-    slots = gefilterd;
+  if (betrouwbaar) {
+    const binnenGrens = slots.filter((s) => s.extraRijtijdMin <= maxOmrijdenMin);
+    if (binnenGrens.length) {
+      // VROEGSTE DATUM WINT binnen de omrij-grens (Daimy 07-08 akkoord): de
+      // 100-dagen-sync zette verre ankers neer waardoor "15 okt +9 min" won van
+      // "23 sep +13 min" — een klant maanden laten schuiven om 4 minuten rijtijd
+      // is nooit de bedoeling. Binnen de grens is rijtijd alleen nog de
+      // scheidsrechter bij gelijke datum.
+      slots = binnenGrens.sort((a, b) => +a.aankomst - +b.aankomst || a.extraRijtijdMin - b.extraRijtijdMin);
+    } else if (wachtDagen < deadlineDagen) {
+      // niets binnen de grens: wachten op een buurklus is een zichtbare keuze,
+      // geen stille nul — tot de deadline, daarna gewoon de goedkoopste plekken
+      slots = binnenGrens;
+    }
   }
   const gekozen = [];
   const gebruikt = new Set();

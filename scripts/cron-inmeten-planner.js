@@ -54,7 +54,18 @@ const MAX_WACHTDAGEN = require('./lib/slotzoeker.js').MAX_WACHT_DAGEN;
 
 // ── kleine helpers ──────────────────────────────────────────────────────────
 const laadState = () => { try { return JSON.parse(fs.readFileSync(STATE, 'utf8')); } catch { return { aangeboden: {} }; } };
-const bewaarState = (s) => fs.writeFileSync(STATE, JSON.stringify(s, null, 2));
+// aanbodTickets is gedeeld eigendom (planner, monitor, daemon, handmatig herstel):
+// bij het opslaan altijd de unie nemen met wat er NU op disk staat, waarbij disk
+// per token wint. Een lange planner-ronde schreef op 07-08 anders met zijn oude
+// kopie een zojuist toegevoegd/omgezet token weg. Verwijderen doet alleen de
+// reply-monitor (die werkt rechtstreeks op een verse kopie).
+const bewaarState = (s) => {
+  try {
+    const disk = JSON.parse(fs.readFileSync(STATE, 'utf8'));
+    s.aanbodTickets = { ...(s.aanbodTickets || {}), ...(disk.aanbodTickets || {}) };
+  } catch { /* eerste keer: geen disk-versie */ }
+  fs.writeFileSync(STATE, JSON.stringify(s, null, 2));
+};
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function telegram(tekst) {

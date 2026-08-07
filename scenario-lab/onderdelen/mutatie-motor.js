@@ -14,6 +14,7 @@ const { combinaties } = require('../matrix.js');
 const SCRATCH = fs.mkdtempSync(path.join(os.tmpdir(), 'mutatie-lab-'));
 process.env.INMEET_BOEKINGEN_PAD = path.join(SCRATCH, 'boekingen.json');
 process.env.INMEET_PLANNER_STATE_PAD = path.join(SCRATCH, 'state.json');
+process.env.EERDER_WILLEN_PAD = path.join(SCRATCH, 'eerder-willen.json'); // echte annuleringslijst nooit aanraken
 const { registreerBoeking, muteerBoeking, vindBoeking } = require('../../scripts/lib/inmeet-mutatie.js');
 
 const dimensies = [

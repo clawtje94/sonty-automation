@@ -181,6 +181,25 @@ test('adres-correctie in de lead blokkeert het vangnet (Franken: Houtrijk vs Haa
   assert.ok(!heeftAdresCorrectie(''));
 });
 
+console.log('— annuleringslijst (geval Rene 07-08) —');
+test('kandidatenVoor: alleen wie echt eerder geholpen is, langst wachtend eerst', () => {
+  const { kandidatenVoor } = require('../scripts/lib/eerder-willen.js');
+  const morgen = new Date(Date.now() + 86400000).toISOString();
+  const lijst = {
+    rene: { naam: 'Rene', wilEerderDan: '2026-09-17T07:55:00Z', sinds: '2026-08-07T10:00:00Z' },
+    eerder: { naam: 'Al vroeg', wilEerderDan: '2026-08-10T08:00:00Z', sinds: '2026-08-01T10:00:00Z' },
+  };
+  // plek morgen: beide geholpen (morgen < 10 aug < 17 sep), langst wachtend eerst
+  const k1 = kandidatenVoor(morgen, lijst);
+  assert.deepStrictEqual(k1.map((k) => k.naam), ['Al vroeg', 'Rene']);
+  // plek op 1 sep: alleen Rene (Al vroeg staat al op 10 aug, vroeger dan 1 sep)
+  const k2 = kandidatenVoor('2026-09-01T09:00:00Z', lijst);
+  assert.deepStrictEqual(k2.map((k) => k.naam), ['Rene']);
+  // plek in het verleden of ongeldig: niemand
+  assert.deepStrictEqual(kandidatenVoor('2020-01-01T09:00:00Z', lijst), []);
+  assert.deepStrictEqual(kandidatenVoor('nonsens', lijst), []);
+});
+
 console.log('— ronde tijden —');
 
 test('aankomst rondt naar boven af op hele 5 minuten (Daimy 05-08)', () => {

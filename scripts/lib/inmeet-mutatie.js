@@ -44,6 +44,8 @@ function registreerBoeking({ rpItemId, naam, telefoon, email, planadoJobUuid, ou
     aanbodToken: aanbodToken || null, geboektOp: new Date().toISOString(), status: 'geboekt',
   };
   bewaarBoekingen(boekingen);
+  // wie een (nieuwe) boeking krijgt is klaar met de annuleringslijst
+  try { require('./eerder-willen.js').verwijder(rpItemId); } catch { /* lijst is optioneel */ }
 }
 
 /** Boeking terugvinden op telefoon (laatste 9), e-mail of naam-deel. */
@@ -89,6 +91,22 @@ async function muteerBoeking(rpItemId, soort, { reden = '', bron = 'onbekend' } 
     const r = await fetch('https://api.planadoapp.com/v2/jobs/' + b.planadoJobUuid, { method: 'DELETE', headers: PH });
     stap('planado', r.ok || r.status === 404, 'HTTP ' + r.status);
   } catch (e) { stap('planado', false, e.message.slice(0, 80)); }
+
+  // 2b. ANNULERINGSLIJST (Daimy 07-08, geval Rene): er valt een plek vrij — staat er
+  // iemand op de lijst die eerder wil en hier iets aan heeft? Alleen een melding;
+  // de winkel klikt zelf op het dashboard. Zichzelf melden heeft geen zin.
+  try {
+    const { kandidatenVoor, verwijder } = require('./eerder-willen.js');
+    verwijder(rpItemId); // wie zijn eigen afspraak annuleert/verzet is geen kandidaat meer
+    const kandidaten = kandidatenVoor(b.aankomst).filter((k) => k.rpItemId !== rpItemId);
+    if (kandidaten.length) {
+      const wanneer = new Date(b.aankomst).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+      await telegram(`Plek vrijgekomen: ${wanneer} bij ${b.inmeter} (${soort} ${b.naam}).\nWil eerder en kan hier iets aan hebben:\n` +
+        kandidaten.slice(0, 3).map((k) => `- ${k.naam} (staat nu op ${new Date(k.wilEerderDan).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' })})`).join('\n') +
+        '\nBoek of stuur een keuzelink via het inmeet-dashboard.');
+      stap('annuleringslijst', true, `${kandidaten.length} kandidaat/kandidaten gemeld`);
+    }
+  } catch (e) { stap('annuleringslijst', false, e.message.slice(0, 80)); }
 
   // 3. Sheet: de drie cellen leeg (V3 Daimy: 1-tje weg bij annuleren; bij verzetten
   // ook — de nieuwe boeking schrijft ze straks opnieuw met de nieuwe datum)

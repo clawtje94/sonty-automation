@@ -155,8 +155,13 @@ async function main() {
                 body: JSON.stringify({ status: 'gekozen', gekozenIndex: keuze }),
               });
               if (rK.ok) {
-                const bevestigd = await stuurWaBevestiging(ticketId, info.naam, aanbod.slots[keuze]);
-                await telegram(`✅ ${info.naam} koos via WhatsApp optie ${keuze + 1} ("${tekst.slice(0, 40)}") — wordt automatisch geboekt${bevestigd ? ', bevestiging is al gestuurd' : '; LET OP: bevestiging kon niet verstuurd worden'}.`);
+                // GEEN bevestiging hier — die stuurt de verwerker pas NA een
+                // geslaagde boeking (Daimy 08-08: "pas een bericht als het echt
+                // ingeboekt is"; Hendrik-Jan kreeg 07-08 een bevestiging terwijl
+                // de boeking daarna afketste). Verwerker direct wakker maken zodat
+                // de klant binnen een minuut zijn bevestiging krijgt.
+                try { require('child_process').execFile('launchctl', ['kickstart', 'gui/501/nl.sonty.inmeet-verwerker']); } catch { /* volgende 5-min-run pakt hem */ }
+                await telegram(`✅ ${info.naam} koos via WhatsApp optie ${keuze + 1} ("${tekst.slice(0, 40)}") — wordt nu geboekt; de klant krijgt de bevestiging zodra de boeking helemaal rond is.`);
                 statusPer[token] = 'gekozen';
                 continue;
               }

@@ -916,23 +916,24 @@ async function verwerkAanbiedingen() {
         await verwijderOpties(state.opties?.[a.token]).catch(() => {});
         delete state.opties?.[a.token];
         delete state.aangeboden?.[a.lead.rpItemId];
-        await telegram(`↩️ ${a.lead.naam} koos ${slot.datum} bij ${slot.inmeter}, maar dat gat is inmiddels door het kantoor gevuld. De klant krijgt bij de volgende planner-run automatisch een nieuw aanbod.`);
-        console.log(`  ↩ ${a.lead.naam}: gekozen slot bezet — nieuw aanbod volgt automatisch`);
+        // klant eerlijk laten weten dat zijn keuze net vergeven is — anders blijft
+        // hij denken dat het geregeld is (Hendrik-Jan 07-08 hoorde niets)
+        try {
+          const stB = laadState();
+          const tk = stB.aanbodTickets?.[a.token]?.waTicket;
+          if (tk) {
+            const TT3 = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
+            await fetch(`https://app.trengo.com/api/v2/tickets/${tk}/messages`, {
+              method: 'POST', headers: { Authorization: 'Bearer ' + TT3, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ message: `Ai, dat moment is net ingenomen door een andere afspraak, excuus! We sturen je zo een paar nieuwe tijden om uit te kiezen. Groetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
+            });
+          }
+        } catch { /* melding hieronder dekt het */ }
+        await telegram(`↩️ ${a.lead.naam} koos ${slot.datum} bij ${slot.inmeter}, maar dat gat is inmiddels bezet. De klant heeft een excuus-berichtje gehad; de kaart staat weer op het dashboard — stuur daar een nieuwe keuzelink.`);
+        console.log(`  ↩ ${a.lead.naam}: gekozen slot bezet — kaart terug naar dashboard`);
         continue;
       }
       const uitkomst = await verwerkLead(lead, null, gekozenSlot, a.duurMin);
-      // bevestiging alleen als de schakelaar aan staat (Daimy 06-08: zolang de
-      // afspraak via Outlook wordt gezet is die uitnodiging al de bevestiging)
-      try {
-        const inst2 = await require('./lib/instellingen.js').haalInstellingen();
-        if (inst2.bevestigingSturen) {
-          const { verstuurBevestiging } = require('./lib/aanbod-versturen');
-          const b = await verstuurBevestiging(a, { aankomst: slot.aankomst, inmeter: slot.inmeter });
-          if (!b.ergensGelukt) await telegram(`⚠️ Bevestiging naar ${a.lead.naam} niet bezorgd (wa: ${b.wa.reden}, mail: ${b.mail.reden}) — even handmatig bevestigen.`);
-        }
-      } catch (e) {
-        await telegram(`⚠️ Bevestiging naar ${a.lead.naam} mislukt: ${e.message.slice(0, 100)}`);
-      }
       // gekozen optie wordt de echte Outlook-afspraak; de andere opties verdwijnen
       let outlookEventId = null;
       try {
@@ -957,6 +958,33 @@ async function verwerkAanbiedingen() {
       }
       await verwijderRekenKaart(a.lead.rpItemId);
       await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verwerkt' }) });
+      // BEVESTIGING PAS NÁ DE BOEKING (Daimy 08-08: "pas een bericht als het echt
+      // ingeboekt is"). Op 07-08 kreeg Hendrik-Jan bij zijn keuze direct een
+      // bevestiging terwijl de boeking daarna op een botsing afketste. De WhatsApp
+      // gaat naar het ticket dat de reply-monitor al volgt; falen = melding mét tekst.
+      try {
+        const stT = laadState();
+        const ticketInfo = stT.aanbodTickets?.[a.token];
+        const { bevestigingsTekst } = require('./cron-aanbod-replies.js');
+        const tekst = bevestigingsTekst({ aankomst: slot.aankomst, inmeter: slot.inmeter });
+        let bevestigd = false;
+        if (ticketInfo?.waTicket) {
+          const TT2 = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
+          for (let i = 0; i < 4 && !bevestigd; i++) {
+            const rB = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketInfo.waTicket}/messages`, {
+              method: 'POST', headers: { Authorization: 'Bearer ' + TT2, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ message: tekst, type: 'OUTBOUND' }),
+            });
+            if (rB.ok) bevestigd = true;
+            else if (rB.status === 429) await wacht(20000 + i * 15000);
+            else break;
+          }
+        }
+        if (!bevestigd) await telegram(`⚠️ ${a.lead.naam} is geboekt maar de bevestiging kon niet via WhatsApp — even handmatig sturen: ${tekst}`);
+        else await telegram(`📤 Bevestiging naar ${a.lead.naam} (ná geslaagde boeking): ${tekst}`);
+      } catch (e) {
+        await telegram(`⚠️ Bevestiging na boeking mislukt voor ${a.lead.naam}: ${e.message.slice(0, 80)}`);
+      }
       console.log(`  ✓ ${a.lead.naam}: ${uitkomst.samenvatting}`);
       await telegram(`✅ Inmeetafspraak GEBOEKT na klantkeuze:\n${a.lead.naam} — ${slot.datum}, ${slot.inmeter}\n${uitkomst.samenvatting}`);
     } catch (e) {

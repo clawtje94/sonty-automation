@@ -61,6 +61,31 @@
   Regressietest 23 = de echte Josua-casus. Bewijs: Marjolein 21 sep → 31 aug bovenaan,
   Matijn 15 okt → 21 sep.
 
+## SAMENHANG-AUDIT ULTRACODE (07-08 middag, opdracht Daimy "alles moet samenwerken")
+- **16 agents, alle hoog/middel-bevindingen adversarieel geverifieerd in echte
+  tickets+code.** Kerndiagnose: bot-werk functioneert; overdracht aan een MENS was
+  het einde van elke bewaking (note/@tag telde als afgehandeld). 31 klantberichten
+  lagen open, waaronder 2 akkoorden (Manon Prins 971139731, Christian Tamminga
+  971319449), Henk van Weers (8 wkn screens, 971508158) en RENE BLAUW die om 11:08
+  zijn ORDER ON HOLD zette. Acuut geëscaleerd naar Daimy (bellen).
+- **GEFIXT vandaag**: (1) scripts/cron-aan-zet-watchdog.js + launchd
+  nl.sonty.aan-zet-watchdog (elk uur): laatste ECHTE bericht van klant + >4u stil =
+  wij aan zet → lijst naar planning-bot, AKKOORD/KLACHT bovenaan, notes tellen NIET,
+  team Mens nodig telt WEL mee; melding bij lijstwijziging + vaste rondes 9:00/16:00;
+  message-cache op updated_at (state data/aan-zet-state.json). (2) email-daemon
+  VvE-note pas na geverifieerde assignment (geval Deborah Loocks: note zei toegewezen,
+  user was null).
+- **FIXLIJST OPEN (V1 bij Daimy)**: belofte-bewaking ("collega komt terug" max 1x →
+  escalatie met deadline); tickets sluiten na boeking + ~45 ruis/lege tickets opruimen
+  (o.a. 7 lege van de geldigUren-bug); /admin/aan-zet-pagina; reply-monitor 429-zuinig.
+  Overige geverifieerde punten: wachtdagen-teller herstart 06-08 (5-dagen-belofte
+  meet te kort), acceptatie-regex eist exact match (vrije-tekst-akkoord blijft open),
+  bevestiging alleen via WA (mail-klant krijgt niets), status 'verwerkt' dubbelzinnig
+  op dashboard, telegram-poll 46 herstarts + databot-poll crashloop.
+- **Systeemadvies (architect)**: GEEN nieuwe inbox naast Trengo; de watchdog is de
+  bewaker van de uitkomst. Elke overdracht = startpunt van bewaking, niet eindpunt.
+- Volledige data: /tmp taskfile w5ejsmk10 + journal wf_d2ce9d49-06f.
+
 ## PLANNING-BOT @PlanningSontyBOT LIVE (07-08, opdracht Daimy)
 - Alle planning-/inmeetmeldingen via de nieuwe bot: lib scripts/lib/telegram-planning.js
   (leest data/telegram-planning.json PER CALL — tokenwissel zonder herstart; config

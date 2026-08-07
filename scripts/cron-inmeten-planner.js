@@ -1238,7 +1238,7 @@ async function verwerkVerzoek(m) {
   return { afgewezen: false, uitkomst: res.gelukt ? 'alle systemen bijgewerkt' : 'deels: ' + res.stappen.filter((x) => !x.ok).map((x) => x.stap).join(',') };
 }
 
-module.exports = { verwerkVerzoek, verversRonde: main, haalAgenda, leesLeadCompleet, werkdagenVoor, laadVakanties, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram };
+module.exports = { verwerkVerzoek, verversRonde: main, haalAgenda, leesLeadCompleet, werkdagenVoor, laadVakanties, voegAanbiedingenToe, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram };
 
 if (require.main === module) {
   if (process.argv.includes('--verwerk-aanbod')) {

@@ -67,6 +67,9 @@ async function verwerkReken(m) {
   const duur = schatDuur(lead.producten);
   const agenda = await planner.haalAgenda();
   await planner.laadVakanties();
+  // SAMENLOOP-FIX (07-08, geval Manon/Franken/Marco): open aanbiedingen zijn bezet,
+  // anders rekent deze route hetzelfde slot uit dat al bij een andere klant ligt.
+  try { await planner.voegAanbiedingenToe(agenda); } catch { /* register onbereikbaar: kaart is indicatief */ }
   let beste = [];
   for (const naam of Object.keys(planner.ROOSTER)) {
     if (!planner.ROOSTER[naam].uuidPlanado) continue;

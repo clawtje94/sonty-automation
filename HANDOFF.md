@@ -1,4 +1,29 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-06 laat)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-08 middag)
+
+## LEES DIT EERST BIJ EEN VERSE SESSIE (na de zooi-dag 08-08)
+- **ROOT CAUSE van "opties bovenop bestaande afspraken" + "Planado anders dan Outlook"**:
+  de Outlook→Planado-sync keek maar 42 dagen vooruit; alles daarna stond alleen in
+  Outlook en was onzichtbaar voor de planner (haalAgenda leest ALLEEN Planado).
+  Venster nu 100 dagen; achterstand gesynct (12 jobs t/m 15 okt). 1 fout blijft:
+  Esra Dinckan 18 sep geeft 422 "external_id is used by another entity" — uitzoeken.
+- **Sjoerd is NIET vrij op 21 sep** (Daimy expliciet); mijn tijdelijke blokkade is
+  weer verwijderd. Het probleem was de rommel hierboven, niet Sjoerds rooster.
+- **Hendrik-Jan Colijn**: geboekt op zijn geaccepteerde keuze di 8 sep 13:00 (Planado
+  #451, Gripp 6413, sheet Aug r299, meetbon). GEEN berichten meer naar hem sturen.
+  LET OP: overlapt bewust met Mandy Princen 11:30-14:30 (Daimy's aanwijzing) — kantoor
+  schuift zo nodig.
+- **Hans Erik Hazelhorst**: geboekt ma 21 sep 13:55 bij Sjoerd (Gripp 6412) — 13:55 is
+  vrij, alleen 9-11 was al bezet; boeking staat, niets aan doen tenzij Daimy anders zegt.
+- **Vaste regel (memory: bevestiging-na-boeking)**: klant krijgt pas een bericht als de
+  boeking aantoonbaar rond is; afketsen = automatisch excuus-bericht + kaart terug op
+  dashboard. Monitor kickstart de verwerker bij een keuze.
+- **1-moment-aanbod**: instelling aantalTijden (1/3) bestaat; templates 244121/244125
+  PENDING bij Meta; template-wachter sluit ze aan en zet de instelling om zodra ACCEPTED.
+- **Open**: combi-dagen bouwen (clusters Gouda+Waddinxveen, Utrecht+Zeist; akkoord
+  Daimy); GitHub Actions deploy kapot (handmatig: vercel build --prod + vercel deploy
+  --prebuilt --prod --archive=tgz in ~/sonty-website); planning@sonty.nl-kanaal;
+  Vas Verhage moet nog een offerteversie tekenen (Gripp-skip).
+
 
 ## INMEET-KETEN: EERSTE VOLLEDIG AUTOMATISCHE BOEKING GELUKT (6 aug 23:15)
 - **Vas Verhage end-to-end zonder handwerk**: WA-template met 3 tijden → klant koos "Optie 1"

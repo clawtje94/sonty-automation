@@ -4,7 +4,7 @@
 // straks over kunnen voor hun").
 //
 // Wat hij doet, elke run:
-// - leest de agenda "Sonty Montage" (nu t/m +42 dagen) voor Joey en Sjoerd
+// - leest de agenda "Sonty Montage" (nu t/m +100 dagen) voor Joey en Sjoerd
 // - maakt voor elke afspraak een Planado-opdracht bij de juiste inmeter
 //   (type Inmeting/Montage/afspraak op basis van het onderwerp)
 // - dedupliceert dubbel: op eigen sync-id ÉN op zelfde starttijd+inmeter, zodat de
@@ -54,7 +54,7 @@ async function outlookEvents() {
   if (!cal) throw new Error('agenda "Sonty Montage" niet gevonden');
 
   const van = new Date();
-  const tot = new Date(); tot.setDate(tot.getDate() + 42);
+  const tot = new Date(); tot.setDate(tot.getDate() + 100); // was 42: afspraken >6 weken vooruit (Kampherbeek 21 sep) werden nooit gesynct en waren onzichtbaar voor de planner (08-08)
   let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView`
     + `?$top=500&$select=Subject,Start,End,IsCancelled,Location,Attendees,Body`
     + `&startDateTime=${van.toISOString()}&endDateTime=${tot.toISOString()}`;

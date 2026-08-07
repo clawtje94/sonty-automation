@@ -152,6 +152,17 @@ test('vroegste datum wint binnen de omrij-grens (Josua-casus 07-08: 15 okt +9 wo
   assert.strictEqual(duur[0].extraRijtijdMin, 45, 'boven de grens beslist rijtijd, niet datum');
 });
 
+test('eerder-willen: negeerGrens toont vroegste ongeacht omrijden (geval Rene 07-08)', () => {
+  const slots = [
+    slotje('2026-09-17', 9, 12, true),  // binnen grens, laat
+    slotje('2026-08-31', 9, 45, true),  // boven grens, 2,5 week eerder
+  ];
+  // standaardroute verstopt 31 aug (boven de grens)
+  assert.strictEqual(kiesAanbod(slots, 3, { wachtDagen: 999 })[0].datum, '2026-09-17');
+  // eerder-willen-route toont hem gewoon
+  assert.strictEqual(kiesAanbod(slots, 3, { negeerGrens: true })[0].datum, '2026-08-31');
+});
+
 test('spreiding: niet 3x hetzelfde dagdeel op dezelfde dag', () => {
   const gekozen = kiesAanbod([
     slotje('2026-09-01', 9, 5, true),

@@ -191,7 +191,15 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
  * Kies de slots die je aan de klant voorlegt: de goedkoopste, maar gespreid over
  * verschillende dagen en dagdelen. Drie keer hetzelfde tijdstip aanbieden is geen keuze.
  */
-function kiesAanbod(slots, aantal = 3, { wachtDagen = 0, deadlineDagen = MAX_WACHT_DAGEN, maxOmrijdenMin = MAX_EXTRA_RIJTIJD_MIN } = {}) {
+function kiesAanbod(slots, aantal = 3, { wachtDagen = 0, deadlineDagen = MAX_WACHT_DAGEN, maxOmrijdenMin = MAX_EXTRA_RIJTIJD_MIN, negeerGrens = false } = {}) {
+  // EERDER-WILLEN-route (Daimy 07-08, geval Rene: klant vroeg "kan het eerder" en
+  // kreeg dezelfde dag terug omdat eerdere-maar-duurdere plekken buiten de grens
+  // vielen): wil de klant expliciet eerder, dan telt de omrij-grens niet — "een
+  // klant kwijtraken kost altijd meer dan omrijden". Puur vroegste eerst.
+  if (negeerGrens) {
+    const opDatum = [...slots].sort((a, b) => +a.aankomst - +b.aankomst || a.extraRijtijdMin - b.extraRijtijdMin);
+    return opDatum.slice(0, aantal);
+  }
   // CLUSTEREN gebeurt hier: altijd rangschikken op marginale rijtijd, zodat een slot
   // náást een bestaande afspraak in dezelfde buurt wint van een losse lege dag.
   // De formule heen + terug - direct blijft geldig, ook op een vuile agenda; alleen het

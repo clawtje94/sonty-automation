@@ -624,6 +624,13 @@ async function main() {
         // moet altijd kunnen handelen (Daimy 06-08)
         let nood = kiesAanbod(beste, 3, { wachtDagen: 999 });
         if (nood.length < 3) nood = await zorgVoorDrieOpties(lead, duur, agenda, nood);
+        // De absoluut vroegste plek (omrij-grens genegeerd) hoort op de kaart als hij
+        // fors eerder is — de winkel moet "klant wil eerder" direct kunnen bedienen
+        // (geval Rene 07-08: die plek was onzichtbaar geworden door de datumregel).
+        const vroegste = kiesAanbod(beste, 1, { negeerGrens: true })[0];
+        if (vroegste && nood[0] && +vroegste.aankomst < +nood[0].aankomst - 7 * 86400000) {
+          nood = [vroegste, ...nood.filter((s) => s !== vroegste)].slice(0, 3);
+        }
         dash.leads.push({
           rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur, wachtDagen,
           status: 'wachtend', reden,
@@ -1131,15 +1138,24 @@ async function verwerkDashboardVerzoek(m) {
       for (const inm of INMETERS) {
         const sl = await zoekSlots({
           agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
-          werkdagen: werkdagenVoor(inm.naam),
+          werkdagen: werkdagenVoor(inm.naam, m.wilEerder ? 30 : undefined),
           startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
           eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
         }).catch(() => []);
         beste.push(...sl.map((x) => ({ ...x, inmeter: inm.naam })));
       }
       beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
-      aanbod = kiesAanbod(beste, 3, { wachtDagen: 999 }); // winkel vroeg erom: altijd tijden geven
+      // wilEerder (geval Rene 07-08): omrij-grens telt niet, puur vroegste eerst
+      aanbod = kiesAanbod(beste, 3, { wachtDagen: 999, negeerGrens: !!m.wilEerder });
       if (!aanbod.length) throw new Error('geen enkel gat beschikbaar');
+    }
+    // POORT (geval Rene 07-08: klant vroeg eerder en kreeg dezelfde dag terug):
+    // een eerder-verzoek gaat alleen de deur uit als het ook ECHT eerder is.
+    if (m.wilEerder && m.eerderDan) {
+      const grens = Date.parse(m.eerderDan);
+      if (!(+aanbod[0].aankomst < grens - 3600000)) {
+        throw new Error(`vroegst haalbare is ${aanbod[0].datum} — NIET eerder dan wat de klant al had (${m.eerderDan.slice(0, 10)}); niets verstuurd, mens nodig`);
+      }
     }
     const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda);
     return `keuzelink verstuurd (${aanbod.length >= 3 ? 3 : aanbod.length} tijd(en)): ${url}`;

@@ -159,21 +159,23 @@ async function stuurWhatsApp(aanbod, url) {
   return { ok: false, reden: `geen WhatsApp-gesprek en ${viaTemplate.reden}` };
 }
 
-/** Bestaand actief e-mailticket van dit adres op ons kanaal — nieuwe mails horen
- *  dáár in, niet in een vers ticket (Daimy 07-08: "zelfde contact moet gewoon onder
- *  1 ticket"). Term-search is niet 100% betrouwbaar (memory-les), dus niets vinden
- *  is geen fout: dan maken we gewoon een nieuw ticket zoals eerst. */
+/** Bestaand e-mailticket van dit adres op ons kanaal — nieuwe mails horen dáár in,
+ *  niet in een vers ticket (Daimy 07-08: "moet gewoon onder de tickets komen die de
+ *  mensen al hadden, anders wordt het onoverzichtelijk"). Actief ticket wint; is er
+ *  alleen een gesloten, dan gebruiken we dat (bericht heropent het netjes met alle
+ *  historie erbij). Term-search is niet 100% betrouwbaar (memory-les), dus niets
+ *  vinden is geen fout: dan pas een nieuw ticket. */
 async function zoekMailTicket(email) {
   try {
     const r = await tFetch(`/tickets?term=${encodeURIComponent(email)}`);
     if (!r.ok) return null;
     const lijst = (await r.json())?.data || [];
-    const kandidaten = lijst.filter((t) =>
+    const vanKlant = lijst.filter((t) =>
       String(t.contact?.email || '').toLowerCase() === String(email).toLowerCase() &&
-      /email/i.test(t.channel?.name || t.channel?.type || '') &&
-      ['OPEN', 'ASSIGNED'].includes(String(t.status || '').toUpperCase()));
-    kandidaten.sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
-    return kandidaten[0]?.id || null;
+      /email/i.test(t.channel?.name || t.channel?.type || ''));
+    vanKlant.sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+    const actief = vanKlant.find((t) => ['OPEN', 'ASSIGNED'].includes(String(t.status || '').toUpperCase()));
+    return (actief || vanKlant[0])?.id || null;
   } catch { return null; }
 }
 

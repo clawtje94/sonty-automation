@@ -61,6 +61,20 @@
   Regressietest 23 = de echte Josua-casus. Bewijs: Marjolein 21 sep → 31 aug bovenaan,
   Matijn 15 okt → 21 sep.
 
+## ADRES-VANGNET UIT OFFERTE-PDF (07-08, opdracht Daimy "zorg dat je dit zelf kunt")
+- **Geval Franken/Kenny**: winkel-/telefoonleads hebben soms geen adresvelden in de
+  lead-tekst en item.fields.address is leeg. Het adres staat NERGENS in de RP-API
+  (quotation-JSON, lead-endpoints: leeg/400) — alléén in het gerenderde offerte-PDF:
+  `document.reuzenpanda.nl/renderer/v1/{pid}/quotations/{documentId}/artifact.pdf`
+  (publiek, geen auth). **scripts/lib/offerte-adres.js**: PDF → pdftotext → adresregel
+  (Sonty's eigen blok overgeslagen; dubbele komma's en spatie-postcodes getolereerd).
+- leesOfferte geeft nu ook documentId; leesLeadCompleet vult het adres automatisch
+  als de lead er geen heeft. **UITZONDERING**: staat er een adres-CORRECTIE in de
+  lead (Franken: "moet zijn Houtrijk 10, NIET Haarlemmermeer 10" — het offerte-adres
+  is daar dus FOUT), dan blijft de kaart op geen-adres met een duidelijke reden;
+  mens beslist. Regressietests 24/25 op de echte teksten. Kenny (Texellaan 22,
+  Gouda) kan hierdoor mee in het Gouda-combi-cluster.
+
 ## INMEET-DASHBOARD RONDE (07-08, opdracht Daimy "visueel en functies nog kut")
 - **Herbouwd** (app/admin/inmeet-dashboard/page.tsx, live geverifieerd op iPhone 12 +
   desktop, 0 overflow, 0 console-fouten): status-chips i.p.v. zwevende tekst, flex-

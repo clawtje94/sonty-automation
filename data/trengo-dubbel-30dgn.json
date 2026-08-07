@@ -1,0 +1,965 @@
+{
+ "op": "2026-08-07T08:33:37.721Z",
+ "groepen": [
+  {
+   "sleutel": "daimyboot@gmail.com",
+   "naam": "D Boot",
+   "tickets": [
+    {
+     "id": 972338475,
+     "kanaal": "Email",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-06 21:33:44",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 972338580,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 21:34:15",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 972196311,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 13:02:25",
+     "onderwerp": "Je inmeetafspraak bij Sonty staat vast"
+    },
+    {
+     "id": 972194337,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 12:55:54",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 971954527,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-05 16:22:01",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 971953097,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-05 16:16:28",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 971948645,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-05 16:02:27",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 971947614,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-05 15:59:03",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 971601083,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-04 14:30:09",
+     "onderwerp": "Jouw offerte van Sonty"
+    },
+    {
+     "id": 971287152,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 15:26:59",
+     "onderwerp": "Toch goed nieuws over je reparatie (TEST)"
+    },
+    {
+     "id": 971287437,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 15:28:00",
+     "onderwerp": "Toch goed nieuws over je reparatie"
+    },
+    {
+     "id": 971286364,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 15:24:21",
+     "onderwerp": "TEST via Trengo (mag weg)"
+    },
+    {
+     "id": 971286363,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 15:24:20",
+     "onderwerp": "TEST via Trengo (mag weg)"
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:683500506",
+   "naam": "Boot",
+   "tickets": [
+    {
+     "id": 972323074,
+     "kanaal": "Wa_business",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-06 19:56:07",
+     "onderwerp": null
+    },
+    {
+     "id": 972323126,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 19:56:28",
+     "onderwerp": null
+    },
+    {
+     "id": 972312031,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 19:02:39",
+     "onderwerp": null
+    },
+    {
+     "id": 972194310,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 12:55:50",
+     "onderwerp": null
+    },
+    {
+     "id": 971825510,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-05 10:00:34",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "hjcolijn73@gmail.com",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 972337982,
+     "kanaal": "Email",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-06 21:31:20",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 972411549,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-07 09:05:06",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 972396925,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-07 07:36:31",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 972338683,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 21:34:47",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:643547555",
+   "naam": "Carlo Pronk",
+   "tickets": [
+    {
+     "id": 972328089,
+     "kanaal": "Wa_business",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-06 20:24:54",
+     "onderwerp": null
+    },
+    {
+     "id": 972325672,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 20:10:15",
+     "onderwerp": null
+    },
+    {
+     "id": 971465140,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-04 09:03:01",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "juliaavo@gmail.com",
+   "naam": "Julia Arias van Oordt",
+   "tickets": [
+    {
+     "id": 972325108,
+     "kanaal": "Email",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-06 20:06:38",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 972338714,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 21:35:14",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 971369998,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 20:26:20",
+     "onderwerp": "Jouw prijsvoorstel van Sonty – Bekijk de details & volgende stappen."
+    }
+   ]
+  },
+  {
+   "sleutel": "e.weetering86@icloud.com",
+   "naam": "Esther Van de Weetering",
+   "tickets": [
+    {
+     "id": 970211967,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-07-30 10:00:43",
+     "onderwerp": "Screens"
+    },
+    {
+     "id": 971278849,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 15:06:36",
+     "onderwerp": "Jouw prijsvoorstel van Sonty – Bekijk de details & volgende stappen."
+    },
+    {
+     "id": 970648764,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-07-31 17:40:40",
+     "onderwerp": "Jouw offerte van Sonty"
+    }
+   ]
+  },
+  {
+   "sleutel": "jan.de.bont@casema.nl",
+   "naam": "Jan De Bont",
+   "tickets": [
+    {
+     "id": 970404437,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-07-30 21:28:13",
+     "onderwerp": "Jouw prijsvoorstel van Sonty – Bekijk de details & volgende stappen."
+    },
+    {
+     "id": 971202527,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 11:10:22",
+     "onderwerp": "Jouw offerte van Sonty"
+    },
+    {
+     "id": 970406077,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-07-30 21:39:46",
+     "onderwerp": "Jouw prijsvoorstel van Sonty – Bekijk de details & volgende stappen."
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:628266205",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 972325204,
+     "kanaal": "Wa_business",
+     "status": "OPEN",
+     "aangemaakt": "2026-08-06 20:07:42",
+     "onderwerp": null
+    },
+    {
+     "id": 971967394,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-05 17:09:26",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "ericievld1983@gmail.com",
+   "naam": "Eric Van Der Meer",
+   "tickets": [
+    {
+     "id": 972320785,
+     "kanaal": "Email",
+     "status": "OPEN",
+     "aangemaakt": "2026-08-06 19:41:44",
+     "onderwerp": ""
+    },
+    {
+     "id": 972325209,
+     "kanaal": "Email",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-06 20:07:43",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:653516802",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 972287713,
+     "kanaal": "Wa_business",
+     "status": "OPEN",
+     "aangemaakt": "2026-08-06 17:06:24",
+     "onderwerp": null
+    },
+    {
+     "id": 971319962,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 17:14:56",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:654927140",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 972286859,
+     "kanaal": "Wa_business",
+     "status": "OPEN",
+     "aangemaakt": "2026-08-06 17:03:24",
+     "onderwerp": null
+    },
+    {
+     "id": 972405430,
+     "kanaal": "Wa_business",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-07 08:35:52",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:639000955",
+   "naam": "Nagra",
+   "tickets": [
+    {
+     "id": 971532287,
+     "kanaal": "Wa_business",
+     "status": "OPEN",
+     "aangemaakt": "2026-08-04 11:23:16",
+     "onderwerp": null
+    },
+    {
+     "id": 971665668,
+     "kanaal": "Wa_business",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-04 17:05:12",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:629446803",
+   "naam": "Ruud",
+   "tickets": [
+    {
+     "id": 971465445,
+     "kanaal": "Wa_business",
+     "status": "OPEN",
+     "aangemaakt": "2026-08-04 09:03:52",
+     "onderwerp": null
+    },
+    {
+     "id": 971452989,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-04 08:11:25",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "a.ahdidd@hotmail.com",
+   "naam": "Amina Ahdid",
+   "tickets": [
+    {
+     "id": 971555704,
+     "kanaal": "Email",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-04 12:19:35",
+     "onderwerp": "Factuur 3770"
+    },
+    {
+     "id": 971555705,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-04 12:19:35",
+     "onderwerp": "Factuur 3770"
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:615851026",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 972337852,
+     "kanaal": "Wa_business",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-06 21:30:12",
+     "onderwerp": null
+    },
+    {
+     "id": 968692730,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-07-24 09:38:08",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "sofievanherpen@gmail.com",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 972337763,
+     "kanaal": "Email",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-06 21:29:14",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 972338660,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 21:34:37",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    }
+   ]
+  },
+  {
+   "sleutel": "manonprins89@hotmail.com",
+   "naam": "Manon Prins",
+   "tickets": [
+    {
+     "id": 971139731,
+     "kanaal": "Email",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-03 08:02:32",
+     "onderwerp": "Jouw prijsvoorstel van Sonty – Bekijk de details & volgende stappen."
+    },
+    {
+     "id": 971223091,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 12:10:48",
+     "onderwerp": "Jouw offerte van Sonty"
+    }
+   ]
+  },
+  {
+   "sleutel": "ericb.irenek@ziggo.nl",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 972326096,
+     "kanaal": "Email",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-06 20:12:43",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 972338652,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 21:34:33",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    }
+   ]
+  },
+  {
+   "sleutel": "carlo.pronk@live.nl",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 972325675,
+     "kanaal": "Email",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-06 20:10:16",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    },
+    {
+     "id": 972338641,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 21:34:28",
+     "onderwerp": "Kies je inmeetmoment bij Sonty"
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:681453493",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 972109752,
+     "kanaal": "Wa_business",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-06 09:02:22",
+     "onderwerp": null
+    },
+    {
+     "id": 972109717,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 09:02:15",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "ghosty_buster@hotmail.com",
+   "naam": "Ghosty Buster",
+   "tickets": [
+    {
+     "id": 971554517,
+     "kanaal": "Email",
+     "status": "ASSIGNED",
+     "aangemaakt": "2026-08-04 12:15:50",
+     "onderwerp": "rolluiken hertogstraat 19"
+    },
+    {
+     "id": 971239606,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 13:04:03",
+     "onderwerp": "Jouw prijsvoorstel van Sonty – Bekijk de details & volgende stappen."
+    }
+   ]
+  },
+  {
+   "sleutel": "news@newsletter.berner.nl",
+   "naam": "BERNER",
+   "tickets": [
+    {
+     "id": 972399797,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-07 08:01:04",
+     "onderwerp": "🚨 Freaky Friday - alléén vandaag geldig"
+    },
+    {
+     "id": 971468780,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-04 09:15:36",
+     "onderwerp": "Bevestigen zonder gedoe? Ontdek BERNERfix!"
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:625002169",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 972326094,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 20:12:42",
+     "onderwerp": null
+    },
+    {
+     "id": 970484174,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-07-31 09:07:28",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:610641348",
+   "naam": "Hendrik-Jan Colijn",
+   "tickets": [
+    {
+     "id": 972337979,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 21:31:18",
+     "onderwerp": null
+    },
+    {
+     "id": 972111081,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 09:05:58",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:611871818",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 972413456,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-07 09:12:12",
+     "onderwerp": null
+    },
+    {
+     "id": 972110600,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 09:04:43",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:621557981",
+   "naam": "Silvia",
+   "tickets": [
+    {
+     "id": 971155869,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 09:09:39",
+     "onderwerp": null
+    },
+    {
+     "id": 970853133,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-01 17:22:00",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:646223286",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 971465575,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-04 09:04:15",
+     "onderwerp": null
+    },
+    {
+     "id": 971465537,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-04 09:04:08",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:652058798",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 971318673,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 17:09:35",
+     "onderwerp": null
+    },
+    {
+     "id": 971318328,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 17:08:43",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "bsurpb@gmail.com",
+   "naam": "Arie Pronk",
+   "tickets": [
+    {
+     "id": 970574256,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-07-31 13:34:02",
+     "onderwerp": "Jouw prijsvoorstel van Sonty – Bekijk de details & volgende stappen."
+    },
+    {
+     "id": 971510285,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-04 10:43:22",
+     "onderwerp": "Kunnen we je ergens mee helpen, Arie Pronk?"
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:622844461",
+   "naam": "Bianca Koster",
+   "tickets": [
+    {
+     "id": 971885032,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-05 12:43:54",
+     "onderwerp": null
+    },
+    {
+     "id": 972111487,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 09:07:40",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "mikolaj.lyskawka@ekookna.pl",
+   "naam": "Mikolaj Lyskawka",
+   "tickets": [
+    {
+     "id": 972189987,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 12:39:11",
+     "onderwerp": null
+    },
+    {
+     "id": 972173277,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-06 11:42:32",
+     "onderwerp": "voorstel voor een samenwerking met Eko-Okna"
+    }
+   ]
+  },
+  {
+   "sleutel": "w.aarden4@chello.nl",
+   "naam": "w.aarden4",
+   "tickets": [
+    {
+     "id": 971564336,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-04 12:50:29",
+     "onderwerp": "Laatste check – kunnen we voor je aan de slag?"
+    },
+    {
+     "id": 969665035,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-07-28 11:40:25",
+     "onderwerp": "Offerte herinnering – we staan klaar om te bestellen"
+    }
+   ]
+  },
+  {
+   "sleutel": "mr.noest@hotmail.com",
+   "naam": "Ron Noest",
+   "tickets": [
+    {
+     "id": 971810600,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-05 09:20:45",
+     "onderwerp": "Zonnescherm"
+    },
+    {
+     "id": 971482759,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-04 09:42:25",
+     "onderwerp": "Zonnescherm"
+    }
+   ]
+  },
+  {
+   "sleutel": "planning@fakronederland.nl",
+   "naam": "FAKRO Nederland BV",
+   "tickets": [
+    {
+     "id": 971315946,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 17:00:18",
+     "onderwerp": "Jouw serviceafspraak WB-2026-1617 is ingepland"
+    },
+    {
+     "id": 971313617,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 16:51:58",
+     "onderwerp": "Jouw serviceafspraak WB-2026-1617 is ingepland"
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:637290364",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 971808083,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-05 09:12:17",
+     "onderwerp": null
+    },
+    {
+     "id": 971665751,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-04 17:05:34",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "koos@bink.nl",
+   "naam": "koos@bink.nl",
+   "tickets": [
+    {
+     "id": 971287637,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 15:28:52",
+     "onderwerp": "Toch goed nieuws over je reparatie"
+    },
+    {
+     "id": 967634212,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-07-20 16:18:52",
+     "onderwerp": "Je aanvraag bij Sonty"
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:648157877",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 971317525,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 17:05:20",
+     "onderwerp": null
+    },
+    {
+     "id": 971317483,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 17:05:12",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "tel:638311742",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 971317156,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 17:03:55",
+     "onderwerp": null
+    },
+    {
+     "id": 971156428,
+     "kanaal": "Wa_business",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 09:11:18",
+     "onderwerp": null
+    }
+   ]
+  },
+  {
+   "sleutel": "jaapbakker1@kpnmail.nl",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 971288943,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 15:32:46",
+     "onderwerp": "Toch goed nieuws over je reparatie"
+    },
+    {
+     "id": 971207524,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 11:24:57",
+     "onderwerp": "Je aanvraag bij Sonty"
+    }
+   ]
+  },
+  {
+   "sleutel": "marjaherruer59@gmail.com",
+   "naam": null,
+   "tickets": [
+    {
+     "id": 971288863,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 15:32:29",
+     "onderwerp": "Toch goed nieuws over je reparatie"
+    },
+    {
+     "id": 970243953,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-07-30 11:42:52",
+     "onderwerp": "Je aanvraag bij Sonty"
+    }
+   ]
+  },
+  {
+   "sleutel": "bastiaanenmarith@gmail.com",
+   "naam": "Bastiaan Martinu",
+   "tickets": [
+    {
+     "id": 971238540,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 13:00:41",
+     "onderwerp": "Jouw offerte van Sonty"
+    },
+    {
+     "id": 971238523,
+     "kanaal": "Email",
+     "status": "CLOSED",
+     "aangemaakt": "2026-08-03 13:00:38",
+     "onderwerp": "Jouw offerte van Sonty"
+    }
+   ]
+  }
+ ]
+}

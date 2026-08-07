@@ -159,20 +159,42 @@ async function stuurWhatsApp(aanbod, url) {
   return { ok: false, reden: `geen WhatsApp-gesprek en ${viaTemplate.reden}` };
 }
 
+/** Bestaand actief e-mailticket van dit adres op ons kanaal — nieuwe mails horen
+ *  dáár in, niet in een vers ticket (Daimy 07-08: "zelfde contact moet gewoon onder
+ *  1 ticket"). Term-search is niet 100% betrouwbaar (memory-les), dus niets vinden
+ *  is geen fout: dan maken we gewoon een nieuw ticket zoals eerst. */
+async function zoekMailTicket(email) {
+  try {
+    const r = await tFetch(`/tickets?term=${encodeURIComponent(email)}`);
+    if (!r.ok) return null;
+    const lijst = (await r.json())?.data || [];
+    const kandidaten = lijst.filter((t) =>
+      String(t.contact?.email || '').toLowerCase() === String(email).toLowerCase() &&
+      /email/i.test(t.channel?.name || t.channel?.type || '') &&
+      ['OPEN', 'ASSIGNED'].includes(String(t.status || '').toUpperCase()));
+    kandidaten.sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+    return kandidaten[0]?.id || null;
+  } catch { return null; }
+}
+
 async function stuurMail(aanbod, url) {
   if (!aanbod.lead.email) return { ok: false, reden: 'geen e-mailadres bij de lead' };
   const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
-  const r1 = await tFetch('/tickets', {
-    method: 'POST',
-    body: JSON.stringify({
-      channel_id: PLANNING_KANAAL_OVERRIDE || AANVRAGEN_KANAAL,
-      contact_identifier: aanbod.lead.email,
-      subject: 'Kies je inmeetmoment bij Sonty',
-    }),
-  });
-  if (!r1.ok) return { ok: false, reden: `ticket aanmaken: Trengo ${r1.status}` };
-  const nieuw = await r1.json().catch(() => null);
-  if (!nieuw?.id) return { ok: false, reden: 'geen ticket-id terug' };
+  const bestaand = await zoekMailTicket(aanbod.lead.email);
+  let nieuw = bestaand ? { id: bestaand, hergebruikt: true } : null;
+  if (!nieuw) {
+    const r1 = await tFetch('/tickets', {
+      method: 'POST',
+      body: JSON.stringify({
+        channel_id: PLANNING_KANAAL_OVERRIDE || AANVRAGEN_KANAAL,
+        contact_identifier: aanbod.lead.email,
+        subject: 'Kies je inmeetmoment bij Sonty',
+      }),
+    });
+    if (!r1.ok) return { ok: false, reden: `ticket aanmaken: Trengo ${r1.status}` };
+    nieuw = await r1.json().catch(() => null);
+    if (!nieuw?.id) return { ok: false, reden: 'geen ticket-id terug' };
+  }
 
   // 06-08: 'geldigUren' bestond hier niet → ReferenceError → GEEN ENKELE mail ging
   // ooit weg (stil opgeslikt door de catch in verstuurAanbod). Uit het aanbod zelf
@@ -190,8 +212,10 @@ async function stuurMail(aanbod, url) {
     method: 'POST',
     body: JSON.stringify({ message: html, body_type: 'html' }),
   });
-  if (r2.ok) await tFetch(`/tickets/${nieuw.id}/close`, { method: 'POST', body: '{}' });
-  return { ok: r2.ok, reden: r2.ok ? undefined : `mail versturen: Trengo ${r2.status}`, ticket: nieuw.id };
+  // Alleen een ZELF aangemaakt ticket weer sluiten — een hergebruikt actief ticket
+  // is van de klant/collega en moet open blijven.
+  if (r2.ok && !nieuw.hergebruikt) await tFetch(`/tickets/${nieuw.id}/close`, { method: 'POST', body: '{}' });
+  return { ok: r2.ok, reden: r2.ok ? undefined : `mail versturen: Trengo ${r2.status}`, ticket: nieuw.id, hergebruikt: !!nieuw.hergebruikt };
 }
 
 /** Bevestiging na klantkeuze + herinnering dag ervoor (Daimy 06-08: "krijgen ze dan

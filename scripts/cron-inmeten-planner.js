@@ -576,7 +576,7 @@ async function main() {
       dash.leads.push({
         rpItemId: item.id, naam: lead.naam, telefoon: lead.telefoon, status: 'geen-adres',
         reden: lead.adresCorrectie
-          ? 'Er staat een adres-correctie in de lead (zie RP) — check welk adres klopt en vul het hier in.'
+          ? 'Er staat een adres-correctie in de lead (zie RP): check welk adres klopt en vul het hier in.'
           : undefined,
       });
       continue;

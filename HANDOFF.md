@@ -69,15 +69,23 @@
   (en sloot het direct). Nu: eerst zoekMailTicket (actief e-mailticket zelfde adres
   op ons kanaal) → daarin antwoorden; hergebruikt ticket wordt NIET gesloten.
   WA deed dit al sinds 06-08 (ticket_id-param).
-- **WACHT OP DAIMY**: eenmalige opruimronde + samenvoeg-daemon via officiële merge-API
-  (POST /tickets/{id}/merge, ONOMKEERBAAR — daarom eerst akkoord). Voorstel: alleen
-  binnen zelfde kanaal, doel = oudste actieve ticket; systeemmailboxen
-  (sontymontage/no-reply/webflow) uitgesloten. Droogloop: scripts/trengo-dubbele-tickets-rapport.js.
-- **RENE BLAUW (V1 open)**: klant vraagt of inmeten eerder kan dan 17 sep (aanbod was
-  berekend vóór datumfix+klanttijd-regel). Opties a (vers doorrekenen + nieuw aanbod),
-  b (annuleringslijst bouwen), c (bellen) liggen bij Daimy. NIETS naar klant tot keuze.
+- **BUNDELAAR LIVE (V2 akkoord Daimy in chat)**: scripts/trengo-bundel.js + launchd
+  nl.sonty.trengo-bundel (elke 15 min): actieve tickets (OPEN/ASSIGNED) van zelfde
+  contact + zelfde kanaaltype → merge naar keten-ticket (state.aanbodTickets
+  waTicket/mailTicket, LET OP: objecten, geen kale ids) of anders oudste actieve.
+  CLOSED blijft staan. Eerste ronde: 3 merges (Eric, Rene, Nagra). --droog = testen.
+- **RENE BLAUW (V1 = a+b, akkoord Daimy)**: oud aanbod op verlopen gezet, vers
+  stuur-aanbod-verzoek b424b83f5fafb456 in de rij (nieuwe regels). Rene staat op de
+  ANNULERINGSLIJST (scripts/lib/eerder-willen.js + data/eerder-willen.json):
+  muteerBoeking meldt bij elke vrijgekomen plek wie eerder wil (winkel klikt, klant
+  krijgt niets automatisch); registreerBoeking haalt geboekte klanten van de lijst.
+  Lab-pad EERDER_WILLEN_PAD geïnjecteerd; regressietest 26.
 - **Franken**: adres Houtrijk 10, 2151DV Nieuw-Vennep (BAG-bevestigd; offerte had
-  verkeerde straatnaam) via mutatie-API ingevuld — planner rekent zijn tijden.
+  verkeerde straatnaam) staat in RP; tijden volgen bij de volgende planner-ronde
+  (Nieuw-Vennep ligt dicht bij Uithoorn/Rene — mogelijke combi).
+- **DAIMY KLIKTE 4 KEUZELINKS (07-08 10:41-10:44)**: Ebru + Marjolein (31 aug!),
+  Josua + Jan (17 sep, exact de combi-tijden — slots-doorgave werkt live). Aanbiedingen
+  gaan nu met 1 tijd (1-moment-template actief).
 
 ## ADRES-VANGNET UIT OFFERTE-PDF (07-08, opdracht Daimy "zorg dat je dit zelf kunt")
 - **Geval Franken/Kenny**: winkel-/telefoonleads hebben soms geen adresvelden in de

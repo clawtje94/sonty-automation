@@ -106,6 +106,7 @@ async function leesOfferte(item) {
       aantalDocs: lijst.length,
       nummers,
       datums,
+      documentId: keuze.documentId, // voor het adres-vangnet (offerte-PDF)
     };
     cache[lcId] = { op: Date.now(), waarde };
     schrijfCache(cache);

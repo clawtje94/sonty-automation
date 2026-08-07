@@ -162,6 +162,25 @@ test('spreiding: niet 3x hetzelfde dagdeel op dezelfde dag', () => {
   assert.strictEqual(new Set(sleutels).size, sleutels.length, 'zelfde dag+dagdeel dubbel aangeboden');
 });
 
+console.log('— adres uit offerte-PDF (geval Franken/Kenny 07-08) —');
+test('adresUitTekst pakt het klant-adres en slaat Sonty zelf over', () => {
+  const { adresUitTekst } = require('../scripts/lib/offerte-adres.js');
+  const pdfTekst = 'Sonty B.V.\nFrijdastraat 8F\n2288 EX Rijswijk\n\nFranken\nHaarlemmermeer 10, 2151DV, Nieuw-Vennep, Nederland\nfamiliefranken13@gmail.com\n0653638650\n';
+  const a = adresUitTekst(pdfTekst);
+  assert.strictEqual(a.volledigAdres, 'Haarlemmermeer 10, 2151DV, Nieuw-Vennep');
+  assert.strictEqual(a.plaats, 'Nieuw-Vennep');
+  assert.strictEqual(adresUitTekst('Sonty B.V.\nFrijdastraat 8F\n2288 EX Rijswijk\n'), null, 'alleen ons eigen adres = geen klant-adres');
+  // Kenny 07-08: RP rendert een dubbele komma en een spatie in de postcode
+  const k = adresUitTekst('Kenny van Hooijdonk\nTexellaan 22,, 2809 SB, Gouda, Nederland\n');
+  assert.strictEqual(k.volledigAdres, 'Texellaan 22, 2809SB, Gouda');
+});
+test('adres-correctie in de lead blokkeert het vangnet (Franken: Houtrijk vs Haarlemmermeer)', () => {
+  const { heeftAdresCorrectie } = require('../scripts/lib/offerte-adres.js');
+  assert.ok(heeftAdresCorrectie('LET OP adres corrigeren: bezoek/adres moet zijn Houtrijk 10, NIET Haarlemmermeer 10'));
+  assert.ok(!heeftAdresCorrectie('Naam: Kenny van Hooijdonk\nTelefoonnummer: 0648086057'));
+  assert.ok(!heeftAdresCorrectie(''));
+});
+
 console.log('— ronde tijden —');
 
 test('aankomst rondt naar boven af op hele 5 minuten (Daimy 05-08)', () => {

@@ -154,6 +154,25 @@ async function leesLeadCompleet(item) {
   const offerte = await leesOfferte(item); // ook voor de RP-nummers (sheet-sleutel)
   lead.rpNummers = offerte.nummers || [];
   lead.rpDatums = offerte.datums || [];
+  // ADRES-VANGNET (Daimy 07-08, geval Franken/Kenny): winkel-/telefoonleads hebben
+  // vaak geen adresvelden in de lead-tekst, maar het adres staat wél in het
+  // getekende offerte-PDF. Uitzondering: staat er een adres-CORRECTIE in de lead
+  // (Franken: "moet zijn Houtrijk 10, NIET Haarlemmermeer 10"), dan beslist een
+  // mens — blind het offerte-adres pakken zou precies het foute adres geven.
+  if (!lead.volledigAdres || !lead.plaats) {
+    const { adresUitOfferte, heeftAdresCorrectie } = require('./lib/offerte-adres.js');
+    if (heeftAdresCorrectie(item.description)) {
+      lead.adresCorrectie = true;
+    } else if (offerte.documentId) {
+      try {
+        const gevonden = await adresUitOfferte(PID, offerte.documentId);
+        if (gevonden) {
+          Object.assign(lead, gevonden, { adresBron: 'offerte-pdf' });
+          console.log(`  (adres uit offerte-PDF: ${lead.naam} → ${lead.volledigAdres})`);
+        }
+      } catch { /* vangnet mislukt: kaart blijft gewoon op geen-adres */ }
+    }
+  }
   // "1x Winkel offerte" is geen product maar een placeholder.
   const bruikbaar = lead.producten.filter((p) => !/winkel offerte|offerte$/i.test(p.naam));
   if (bruikbaar.length) return { ...lead, producten: bruikbaar, aantalProducten: bruikbaar.reduce((a, p) => a + p.aantal, 0), bron: 'leadtekst' };
@@ -554,7 +573,12 @@ async function main() {
     if (!lead.volledigAdres || !lead.plaats) {
       console.log(`  ! ${lead.naam}: geen bruikbaar adres, overslaan`);
       regels.push(`${lead.naam}: GEEN ADRES — handmatig`);
-      dash.leads.push({ rpItemId: item.id, naam: lead.naam, telefoon: lead.telefoon, status: 'geen-adres' });
+      dash.leads.push({
+        rpItemId: item.id, naam: lead.naam, telefoon: lead.telefoon, status: 'geen-adres',
+        reden: lead.adresCorrectie
+          ? 'Er staat een adres-correctie in de lead (zie RP) — check welk adres klopt en vul het hier in.'
+          : undefined,
+      });
       continue;
     }
     const duur = schatDuur(lead.producten);

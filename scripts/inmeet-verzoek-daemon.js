@@ -119,7 +119,7 @@ async function ronde() {
       // DEFINITIEVE fouten (geen gaten, klant moet tekenen, lead onvindbaar) niet
       // eindeloos herhalen (Daimy 06-08: "ik krijg steeds dit bericht") — verzoek
       // afwijzen met de reden; alleen echte storingen blijven open voor een retry.
-      const definitief = /geen enkel gat|geen 3 tijden|moet.*tekenen|niet gevonden|lopend aanbod|template heeft er 3 nodig/i.test(e.message);
+      const definitief = /geen enkel gat|geen 3 tijden|moet.*tekenen|niet gevonden|lopend aanbod|template heeft er 3 nodig|NIET eerder dan|mens nodig|voorgestelde tijden zijn inmiddels bezet/i.test(e.message);
       if (definitief) {
         await api(MUTATIE_API, { method: 'PATCH', body: JSON.stringify({ id: m.id, status: 'afgewezen', uitkomst: e.message.slice(0, 200) }) }).catch(() => {});
         await planner.telegram(`ℹ️ Verzoek ${m.type} (${m.bron}) kan niet: ${e.message.slice(0, 140)}. Verzoek is gesloten; de kaart staat weer gewoon in het dashboard.`);

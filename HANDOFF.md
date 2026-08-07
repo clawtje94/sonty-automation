@@ -85,7 +85,16 @@
   (Nieuw-Vennep ligt dicht bij Uithoorn/Rene — mogelijke combi).
 - **DAIMY KLIKTE 4 KEUZELINKS (07-08 10:41-10:44)**: Ebru + Marjolein (31 aug!),
   Josua + Jan (17 sep, exact de combi-tijden — slots-doorgave werkt live). Aanbiedingen
-  gaan nu met 1 tijd (1-moment-template actief).
+  gaan nu met 1 tijd (1-moment-template 244121/244125 ACTIEF).
+- **INCIDENT RENE (07-08 ±12u, "dit mag echt niet gebeuren")**: klant vroeg "kan het
+  eerder dan 17 sep", vers aanbod gaf WEER 17 sep (09:00 i.p.v. 09:55) en werd toch
+  verstuurd. Oorzaken: (1) datumfix verstopt eerdere-maar-duurdere plekken (buiten
+  omrij-grens) volledig; (2) geen poort die checkt of een eerder-verzoek ook echt
+  eerder oplevert. GEFIXT: kiesAanbod optie negeerGrens (puur vroegste, grens telt
+  niet — "klant kwijtraken kost meer dan omrijden"); mutatie-API + verwerker kennen
+  wilEerder/eerderDan met harde poort (niet eerder = niets versturen + melding);
+  dashboard-nood-kaart toont de absoluut vroegste plek als die ≥7 dagen eerder is.
+  Regressietest 27. V1 bij Daimy open: persoonlijk bericht naar Rene of winkel belt.
 
 ## ADRES-VANGNET UIT OFFERTE-PDF (07-08, opdracht Daimy "zorg dat je dit zelf kunt")
 - **Geval Franken/Kenny**: winkel-/telefoonleads hebben soms geen adresvelden in de

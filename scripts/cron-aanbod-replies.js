@@ -14,13 +14,13 @@ const STATE_PLANNER = path.join(__dirname, '..', 'data', 'inmeten-planner-state.
 const GEMELD = path.join(__dirname, '..', 'data', 'aanbod-replies-gemeld.json');
 const TT = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
 const TH = { Authorization: 'Bearer ' + TT, Accept: 'application/json' };
-const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
+const { PLANNING_TG_TOKEN: TG_TOKEN, PLANNING_TG_CHAT } = require('./lib/telegram-planning.js');
 const MEET_CODE = process.env.MEETBON_CODE || '2288';
 
 async function telegram(tekst) {
   await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: 1700128390, text: tekst.slice(0, 3900) }),
+    body: JSON.stringify({ chat_id: PLANNING_TG_CHAT, text: tekst.slice(0, 3900) }),
   }).catch(() => {});
 }
 

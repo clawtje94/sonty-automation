@@ -17,7 +17,7 @@ const INMETERS = {
   '1f122d19-e43e-6da0-8ffb-661a4ff9bb36': 'Sjoerd',
 };
 const STATE = path.join(__dirname, '..', 'data', 'inmeet-herinneringen-state.json');
-const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
+const { PLANNING_TG_TOKEN: TG_TOKEN, PLANNING_TG_CHAT } = require('./lib/telegram-planning.js');
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function tFetch(ep, opties) {
@@ -96,7 +96,7 @@ async function main() {
   if (EXECUTE && zonderKanaal) {
     await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: 1700128390, text: `ℹ️ Inmeet-herinneringen: ${zonderKanaal} klant(en) van morgen niet bereikt via WhatsApp (geen open gesprek). Geen actie nodig, de afspraak staat gewoon.` }),
+      body: JSON.stringify({ chat_id: PLANNING_TG_CHAT, text: `ℹ️ Inmeet-herinneringen: ${zonderKanaal} klant(en) van morgen niet bereikt via WhatsApp (geen open gesprek). Geen actie nodig, de afspraak staat gewoon.` }),
     }).catch(() => {});
   }
 }

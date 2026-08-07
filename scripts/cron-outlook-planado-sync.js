@@ -18,8 +18,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const PLANADO_KEY = fs.readFileSync(path.join(__dirname, 'planado-api-key.txt'), 'utf8').trim();
-const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
-const TG_CHAT = 1700128390;
+const { PLANNING_TG_TOKEN: TG_TOKEN, PLANNING_TG_CHAT: TG_CHAT } = require('./lib/telegram-planning.js');
 const EXECUTE = process.argv.includes('--execute');
 
 const INMETERS = {

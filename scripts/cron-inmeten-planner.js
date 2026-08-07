@@ -20,8 +20,7 @@ const INMETEN_INPLANNEN = '2e9819bd-26f0-4082-8f18-32bb48f87f54';
 const GRIP_INVULLEN = 'f895f76f-175e-4ea0-bb7c-6cc2f4e5d846';
 
 const PLANADO_KEY = fs.readFileSync(path.join(__dirname, 'planado-api-key.txt'), 'utf8').trim();
-const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
-const TG_CHAT = 1700128390;
+const { PLANNING_TG_TOKEN: TG_TOKEN, PLANNING_TG_CHAT: TG_CHAT } = require('./lib/telegram-planning.js');
 
 // De twee inmeters waarmee we starten (Daimy 2026-08-04).
 const INMETERS = [

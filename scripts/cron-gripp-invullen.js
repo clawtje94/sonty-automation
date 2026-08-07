@@ -26,7 +26,7 @@ const PID = '731483fa-ef6b-4aae-afcf-883ec09219dd';
 const BACKLOG_ID = 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7';
 const GRIP_INVULLEN_STATUS = 'f895f76f-175e-4ea0-bb7c-6cc2f4e5d846';
 const AFGEROND_STATUS = '2082ad8a-517c-4e24-8c0f-a5be69b1588a'; // echte Afgerond status (913 items)
-const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
+const { PLANNING_TG_TOKEN: TG_TOKEN, PLANNING_TG_CHAT } = require('./lib/telegram-planning.js');
 const SENT_LOG = path.join(__dirname, '.gripp-invullen-sent.json');
 
 function getSentLog() { try { return JSON.parse(fs.readFileSync(SENT_LOG, 'utf8')); } catch { return {}; } }
@@ -124,7 +124,7 @@ async function gripp(calls) {
 async function sendTelegram(text) {
   await fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: 1700128390, text: text.substring(0, 4000) }),
+    body: JSON.stringify({ chat_id: PLANNING_TG_CHAT, text: text.substring(0, 4000) }),
   }).catch(() => {});
 }
 

@@ -281,10 +281,10 @@ async function main() {
     const verzonden = await verstuurAanbod(aanbodRec, url);
     console.log(`  WhatsApp: ${verzonden.wa.ok ? 'verstuurd' : 'NIET (' + verzonden.wa.reden + ')'}`);
     console.log(`  Mail:     ${verzonden.mail.ok ? 'verstuurd' : 'NIET (' + verzonden.mail.reden + ')'}`);
-    const TG = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
+    const { PLANNING_TG_TOKEN: TG, PLANNING_TG_CHAT } = require('./lib/telegram-planning.js');
     await fetch(`https://api.telegram.org/bot${TG}/sendMessage`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: 1700128390, text: `Inmeet-aanbod voor ${item.summary} staat klaar (24u geldig). Dit is de link die de klant zou krijgen — kies zelf een tijd om de keten te testen:\n${url}` }),
+      body: JSON.stringify({ chat_id: PLANNING_TG_CHAT, text: `Inmeet-aanbod voor ${item.summary} staat klaar (24u geldig). Dit is de link die de klant zou krijgen — kies zelf een tijd om de keten te testen:\n${url}` }),
     }).catch(() => {});
   }
 }

@@ -17,7 +17,7 @@ const path = require('path');
 const BOEKINGEN = process.env.INMEET_BOEKINGEN_PAD || path.join(__dirname, '..', '..', 'data', 'inmeet-boekingen.json');
 const PLANADO_KEY = fs.readFileSync(path.join(__dirname, '..', 'planado-api-key.txt'), 'utf8').trim();
 const PH = { Authorization: 'Bearer ' + PLANADO_KEY, 'Content-Type': 'application/json', 'X-Planado-Notify-Assignees': 'false' };
-const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
+const { PLANNING_TG_TOKEN: TG_TOKEN, PLANNING_TG_CHAT } = require('./telegram-planning.js');
 const RP_API_KEY = 'reuzenpanda_cpat_WMD2KmDRune53bj7.d0_ls8loPpAjb2TrSNOS_Xd_QLdxHq1xwOC9pyyJado';
 const PID = '731483fa-ef6b-4aae-afcf-883ec09219dd';
 const BACKLOG_ID = 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7';
@@ -30,7 +30,7 @@ const laatste9 = (t) => String(t || '').replace(/\D/g, '').slice(-9);
 async function telegram(tekst) {
   await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: 1700128390, text: tekst }),
+    body: JSON.stringify({ chat_id: PLANNING_TG_CHAT, text: tekst }),
   }).catch(() => {});
 }
 

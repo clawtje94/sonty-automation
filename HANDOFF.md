@@ -61,6 +61,24 @@
   Regressietest 23 = de echte Josua-casus. Bewijs: Marjolein 21 sep → 31 aug bovenaan,
   Matijn 15 okt → 21 sep.
 
+## TRENGO-VERSNIPPERING (07-08, Daimy "zelfde contact moet onder 1 ticket")
+- **Meting 30 dgn** (data/trengo-dubbel-30dgn.json): 716 tickets, 41 klanten met
+  meerdere tickets (Colijn 4x mail, Carlo 3x WA, Rene Blauw 2x WA). Open-only was
+  maar 1 groep — het probleem zit in de opeenvolging open/closed.
+- **BRON-FIX GEDAAN**: stuurMail maakte ALTIJD een nieuw ticket per keuzelink-mail
+  (en sloot het direct). Nu: eerst zoekMailTicket (actief e-mailticket zelfde adres
+  op ons kanaal) → daarin antwoorden; hergebruikt ticket wordt NIET gesloten.
+  WA deed dit al sinds 06-08 (ticket_id-param).
+- **WACHT OP DAIMY**: eenmalige opruimronde + samenvoeg-daemon via officiële merge-API
+  (POST /tickets/{id}/merge, ONOMKEERBAAR — daarom eerst akkoord). Voorstel: alleen
+  binnen zelfde kanaal, doel = oudste actieve ticket; systeemmailboxen
+  (sontymontage/no-reply/webflow) uitgesloten. Droogloop: scripts/trengo-dubbele-tickets-rapport.js.
+- **RENE BLAUW (V1 open)**: klant vraagt of inmeten eerder kan dan 17 sep (aanbod was
+  berekend vóór datumfix+klanttijd-regel). Opties a (vers doorrekenen + nieuw aanbod),
+  b (annuleringslijst bouwen), c (bellen) liggen bij Daimy. NIETS naar klant tot keuze.
+- **Franken**: adres Houtrijk 10, 2151DV Nieuw-Vennep (BAG-bevestigd; offerte had
+  verkeerde straatnaam) via mutatie-API ingevuld — planner rekent zijn tijden.
+
 ## ADRES-VANGNET UIT OFFERTE-PDF (07-08, opdracht Daimy "zorg dat je dit zelf kunt")
 - **Geval Franken/Kenny**: winkel-/telefoonleads hebben soms geen adresvelden in de
   lead-tekst en item.fields.address is leeg. Het adres staat NERGENS in de RP-API

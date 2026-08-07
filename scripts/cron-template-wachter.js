@@ -20,7 +20,10 @@ async function telegram(t) {
 
 async function main() {
   const ids = (() => { try { return JSON.parse(fs.readFileSync(IDS_PAD, 'utf8')); } catch { return {}; } })();
-  if (ids.gemeld) { console.log('al goedgekeurd en gemeld — niets te doen'); return; }
+  // Fase 2 (07-08): de 1-moment-templates van Daimy (244121 inmeetmoment1optie,
+  // 244125 momentver). Zodra beide ACCEPTED: keys moment/momentVer registreren,
+  // instelling aantalTijden op 1 zetten (Daimy's keuze van vanochtend) en melden.
+  if (ids.momentGemeld) { console.log('moment-templates al goedgekeurd en gemeld — niets te doen'); return; }
 
   let templates = [];
   for (let p = 1; p <= 4; p++) {
@@ -33,24 +36,35 @@ async function main() {
     templates.push(...data);
     if (data.length < 15) break;
   }
-  // Daimy noemde ze "1" en "ver"; in Trengo heten ze voluit (gezien 06-08):
-  const normaal = templates.find((t) => t.id === 244108);
-  const ver = templates.find((t) => t.id === 244109);
-  console.log('gevonden:', normaal ? `1=#${normaal.id} (${normaal.status})` : '1 niet gevonden',
-    '|', ver ? `ver=#${ver.id} (${ver.status})` : 'ver niet gevonden');
+  const moment = templates.find((t) => t.id === 244121);
+  const momentVer = templates.find((t) => t.id === 244125);
+  console.log('gevonden:', moment ? `moment=#${moment.id} (${moment.status})` : 'moment niet gevonden',
+    '|', momentVer ? `momentVer=#${momentVer.id} (${momentVer.status})` : 'momentver niet gevonden');
 
-  const nieuw = {
-    normaal: normaal?.status === 'ACCEPTED' ? normaal.id : null,
-    ver: ver?.status === 'ACCEPTED' ? ver.id : null,
-    gemeld: false,
-  };
-  if (nieuw.normaal && nieuw.ver) {
-    nieuw.gemeld = true;
-    fs.writeFileSync(IDS_PAD, JSON.stringify(nieuw, null, 1));
-    await telegram(`✅ Beide WhatsApp-templates zijn door Meta GOEDGEKEURD (normaal #${nieuw.normaal}, ver-weg #${nieuw.ver}) en staan aangesloten. Je kan nu vanuit het inmeet-dashboard versturen: WhatsApp met knoppen + mail met keuzelink tegelijk. Knopdruk of mailkeuze = automatisch boeken + bevestiging.`);
-  } else if (nieuw.normaal || nieuw.ver) {
-    fs.writeFileSync(IDS_PAD, JSON.stringify(nieuw, null, 1));
-    console.log('één van de twee goedgekeurd — wachten op de ander');
+  if (moment?.status === 'ACCEPTED' && momentVer?.status === 'ACCEPTED') {
+    ids.moment = moment.id;
+    ids.momentVer = momentVer.id;
+    ids.momentGemeld = true;
+    fs.writeFileSync(IDS_PAD, JSON.stringify(ids, null, 1));
+    // instelling omzetten naar 1 voorstel (terugzetten kan altijd in /admin/inmeet-instellingen)
+    let omgezet = false;
+    try {
+      const h = { 'Content-Type': 'application/json', 'x-meet-code': '2288' };
+      const huidige = await (await fetch('https://sonty-website.vercel.app/api/inmeet-instellingen', { headers: h })).json();
+      const rr = await fetch('https://sonty-website.vercel.app/api/inmeet-instellingen', {
+        method: 'POST', headers: h, body: JSON.stringify({ ...huidige, aantalTijden: 1 }),
+      });
+      omgezet = rr.ok;
+    } catch { /* melding zegt het dan */ }
+    await telegram(`✅ De 1-moment-templates zijn door Meta GOEDGEKEURD (#${moment.id} en #${momentVer.id}) en aangesloten. ${omgezet ? 'De instelling staat nu op 1 concreet voorstel: nieuwe keuzelinks sturen één moment met knoppen Dat past / Ander moment.' : 'LET OP: de instelling kon niet automatisch om — zet "Aantal aangeboden tijden" op 1 in de planning-instellingen.'} Terugzetten naar 3 kan altijd in de instellingen.`);
+  } else if (moment?.status === 'REJECTED' || momentVer?.status === 'REJECTED') {
+    if (!ids.momentAfgekeurdGemeld) {
+      ids.momentAfgekeurdGemeld = true;
+      fs.writeFileSync(IDS_PAD, JSON.stringify(ids, null, 1));
+      await telegram(`⚠️ Meta heeft een 1-moment-template AFGEKEURD (moment: ${moment?.status}, momentver: ${momentVer?.status}). De keten blijft gewoon op 3 tijden draaien; check de reden in Trengo bij Instellingen → WhatsApp → Templates.`);
+    }
+  } else {
+    console.log('nog in behandeling bij Meta — wachten');
   }
 }
 

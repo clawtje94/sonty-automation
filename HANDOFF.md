@@ -52,11 +52,28 @@
   kosten dagtijd. Rijtijd telt WEL mee in de omrij-afweging (extraRijtijdMin) — hij is
   niet gratis, hij past alleen niet in het klantvenster. Effect: meer capaciteit per dag
   en verre combi-dagen (eerste klant 09:00 in Gouda) worden veel eerder haalbaar.
-- **15-10-VRAAG DAIMY (07-08)**: dashboard toonde 15 okt bovenaan. Oorzaak dubbel:
-  (1) agenda echt vol t/m eind aug + Sjoerd-vakantie; (2) keuze sorteert puur op minste
-  omrijden zonder datumvoorkeur, en de 100-dagen-sync zette verre ankers neer waar de
-  planner goedkoop naast plakt (Josua 15 okt +9 vs 23 sep +13). **V1 OPEN bij Daimy**:
-  vroegste datum laten winnen binnen de omrij-grens (schuift oktober → half september).
+- **15-10-VRAAG DAIMY (07-08) → V1 AKKOORD + DOORGEVOERD**: dashboard toonde 15 okt
+  bovenaan. Oorzaak dubbel: (1) agenda echt vol t/m eind aug + Sjoerd-vakantie;
+  (2) keuze sorteerde puur op minste omrijden, en de 100-dagen-sync zette verre ankers
+  neer waar de planner goedkoop naast plakt (Josua 15 okt +9 vs 23 sep +13). Fix in
+  kiesAanbod: BINNEN de omrij-grens wint de vroegste datum (rijtijd is scheidsrechter
+  bij gelijke datum); boven de grens blijft goedkoopste-eerst (dag-4-route).
+  Regressietest 23 = de echte Josua-casus. Bewijs: Marjolein 21 sep → 31 aug bovenaan,
+  Matijn 15 okt → 21 sep.
+
+## INMEET-DASHBOARD RONDE (07-08, opdracht Daimy "visueel en functies nog kut")
+- **Herbouwd** (app/admin/inmeet-dashboard/page.tsx, live geverifieerd op iPhone 12 +
+  desktop, 0 overflow, 0 console-fouten): status-chips i.p.v. zwevende tekst, flex-
+  headers, knoppen full-width op mobiel, leesbare datums ("wo 17 sep"), telefoon
+  (tel:-link) + adres op elke kaart, combi-dag-kaarten (paars) met uitleg en gedeelde
+  tijden, keuzelink kopieerbaar (kaart + controlelijst), stale-waarschuwing als de
+  laatste planner-ronde >45 min oud is, meldingkleur-bug gefixt, komende inmetingen
+  met bellen + meetbon-links (grippNr/telefoon nu in dash.boekingen).
+- **stuur-aanbod kan dashboard-tijden meekrijgen** (route + verwerker): combi-dag-klik
+  stuurt exact de voorgestelde tijden (na verse botsingscontrole), anders zou de
+  verwerker opnieuw rekenen en de combi-dag weggooien. Losse kaarten blijven vers rekenen.
+- Deploy handmatig (GH Actions nog kapot): vercel build --prod + vercel deploy
+  --prebuilt --prod --archive=tgz.
 
 
 ## INMEET-KETEN: EERSTE VOLLEDIG AUTOMATISCHE BOEKING GELUKT (6 aug 23:15)

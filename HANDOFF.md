@@ -61,6 +61,25 @@
   Regressietest 23 = de echte Josua-casus. Bewijs: Marjolein 21 sep → 31 aug bovenaan,
   Matijn 15 okt → 21 sep.
 
+## EIND VAN DE MIDDAG 07-08 (Daimy "wat gaat hier weer verkeerd, maak alles kloppend")
+- **DUBBEL-SLOT-BUG GEFIXT**: verwerkReken (snelle reken-route in de verzoek-daemon)
+  riep voegAanbiedingenToe NIET aan → Manon, Franken en Marco kregen alle drie
+  17 sep 09:00 Sjoerd als "beste". Manon (eerst verstuurd) houdt hem; fix zit erin,
+  Franken opnieuw gerekend → ma 31 aug 14:00 Joey, keuzelink met exact dat slot.
+- **EBRU**: mijn fout — wensdag-tijden gestuurd zonder agenda-check; systeem wees ze
+  TERECHT af (20 aug dagvullend blok, 3 sep vol, 7 sep-gaatje was al van Christian).
+  Eerlijk antwoord gestuurd (kan niet op haar dagen; wel 12 okt of alsnog 31 aug
+  14:25) + op eerder-willen-lijst (wilEerderDan 12 okt). LES: nooit slots gokken,
+  altijd eerst reken-route.
+- **CHRISTIAN**: verzending klopte (WA+mail, alles in één ge-merged ticket 972485801;
+  oude 971319449 bestaat niet meer door de bundelaar — bedoeld gedrag). "Mens nodig"-
+  note 13:49 was RUIS: bot-daemon zag samengevoegde oude berichten voor nieuw aan
+  (merge-echo, bekende open ruisbron). Zijn 7 sep 14:40 klopt echt met de agenda.
+- **Mail-threading verbreed**: zoekMailTicket pakt nu ook GESLOTEN tickets (bericht
+  heropent het oude gesprek); bewijs live: Manons keuzelink-mail zit in haar
+  bestaande akkoord-ticket 971139731.
+- **Christian+Manon keuzelinks verstuurd 13:32/13:33** (WA+mail, ticket-ids in state).
+
 ## MIDDAG-ACTIES NA AUDIT (07-08, antwoorden Daimy V1-V6)
 - **RENE GEBOEKT ✓ (07-08 ±15:30)**: ma 10 aug 15:00 Joey (Gripp 6421, sheet Aug r309,
   meetbon, bevestiging automatisch). Route: 16:00-boeking stil teruggedraaid → wegvaller-

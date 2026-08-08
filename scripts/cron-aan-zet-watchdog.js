@@ -18,6 +18,9 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const SYSTEEM = /sontymontage|@sonty\.nl$|no-?reply|webflow|postmaster|mailer-daemon/i;
 const STIL_NA_UREN = 4;
+// Telegram-overzicht staat UIT op verzoek van Daimy (08-08-2026). Aanzetten kan
+// met `TELEGRAM=1 node scripts/cron-aan-zet-watchdog.js` zonder code te wijzigen.
+const STUUR_TELEGRAM = process.env.TELEGRAM === '1';
 const AKKOORD = /akkoord|offerte.{0,30}(goed|prima|doen)|gaan (ermee|ervoor)|bestelling.{0,20}plaats/i;
 const KLACHT = /klacht|kapot|defect|stuk\b|werkt niet|reageert niet|boos|teleurgesteld|on hold|annuleer/i;
 
@@ -102,7 +105,17 @@ async function actieveTickets() {
   console.log(`${tickets.length} actieve tickets, ${aanZet.length} wachten op ONS${veranderd ? ' (lijst veranderd)' : ''}`);
   for (const x of aanZet) console.log(`  [${x.soort}] #${x.id} ${x.naam} — ${x.stilUren}u stil — ${x.tekst}`);
 
-  if (aanZet.length && (veranderd || vasteRonde)) {
+  // Daimy wil dit overzicht niet meer op Telegram (08-08-2026): het veranderde
+  // bijna elk uur en werd daardoor ruis. De bewaking blijft wel draaien; de
+  // samenvatting gaat als eerste logregel naar buiten, zodat /admin/systemen
+  // hem toont en het zicht op wachtende klanten niet verdwijnt.
+  const akkoordOfKlacht = aanZet.filter((x) => x.soort !== 'vraag');
+  console.log(
+    `AAN ZET: ${aanZet.length} klant(en) wachten op ons` +
+      (akkoordOfKlacht.length ? `, waarvan ${akkoordOfKlacht.length} akkoord/klacht` : '') +
+      (aanZet[0] ? ` — langst stil: ${aanZet[0].naam} (${aanZet[0].stilUren}u)` : '')
+  );
+  if (STUUR_TELEGRAM && aanZet.length && (veranderd || vasteRonde)) {
     const regels = aanZet.slice(0, 15).map((x) => `${x.soort === 'vraag' ? '' : '❗'}${x.naam} (${x.stilUren}u stil, ${x.soort}): ${x.tekst}`);
     await planningTelegram(`Wie is aan zet: ${aanZet.length} klant(en) wachten op ONS antwoord.\n` + regels.join('\n') + (aanZet.length > 15 ? `\n… en ${aanZet.length - 15} meer` : ''));
   }

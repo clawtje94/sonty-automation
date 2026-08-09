@@ -61,6 +61,28 @@
   Regressietest 23 = de echte Josua-casus. Bewijs: Marjolein 21 sep → 31 aug bovenaan,
   Matijn 15 okt → 21 sep.
 
+## 09-08 AVOND: SUNNY-TOEWIJZING + DASHBOARD-TIJDEN
+- **SUNNY WEES ALLES AAN JORREN TOE (Daimy)**: de regel "gesloten door een mens =
+  klaar, bot pakt het daarna zelf op" (Daimy 03-08) stond er wél, maar checkte
+  `t.closed_by` — dat veld zit ALLEEN in de detail-call `/tickets/{id}`, niet in de
+  lijst waarmee de daemons werken. Daardoor was de regel altijd uit. GEFIXT: nu
+  `closed_by || closed_at` (closed_at zit wél in de lijst) én de eis dat het
+  klantbericht ná het sluiten kwam. Zelfde regel toegevoegd aan de MAIL-kant
+  (email-daemon.js: `nieuweVraagNaSluiting` blokkeert de collega-toewijzing).
+- **DASHBOARD-TIJDEN (Daimy "dezelfde tijden bij meerdere mensen, en 2 of 4 keuzes")**:
+  (1) zorgVoorDrieOpties haalt slots opnieuw op → hetzelfde moment kwam terug als een
+  ANDER object, filteren op identiteit werkte niet → nu `ontdubbelSlots()` op
+  inmeter+aankomsttijd (regressietest 30);
+  (2) kaarten toonden dezelfde tijd aan verschillende klanten → getoonde opties worden
+  nu binnen de ronde gereserveerd in `agenda`, net als verstuurde aanbiedingen.
+  Geverifieerd op het live dashboard: 0 dubbel, 0 botsend.
+- **GEVOLG (eerlijk, geen bug)**: 3 klanten hebben nu <3 opties (Ashutosh 2, Ana 2,
+  Rita 1 — Ter Aar). De agenda zit tot half oktober vol; vroeger vulden die kaarten
+  zich met momenten die óók aan een andere klant werden getoond. Aanvulling gebouwd:
+  getrapte horizon (30 → 60 roosterdagen) en als laatste redmiddel plekken bóven de
+  omrij-grens (winkel ziet de +minuten op de knop). Blijft er dan te weinig over, dan
+  is dat een capaciteitssignaal.
+
 ## 09-08 LATER: EBRU-GAT, AVONDRIT NA 15:00
 - **EBRU KILINC bijna kwijtgeraakt**: zij appte 07-08 14:32 "laten we ma 12 okt 12:40
   doen" en bleef 2 dagen liggen. Oorzaak: ik had die tijd HANDMATIG voorgesteld,

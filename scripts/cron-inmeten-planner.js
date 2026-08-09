@@ -1123,8 +1123,37 @@ async function verwerkAanbiedingen() {
             });
           }
         } catch { /* melding hieronder dekt het */ }
-        await telegram(`↩️ ${a.lead.naam} koos ${slot.datum} bij ${slot.inmeter}, maar dat gat is inmiddels bezet. De klant heeft een excuus-berichtje gehad; de kaart staat weer op het dashboard — stuur daar een nieuwe keuzelink.`);
-        console.log(`  ↩ ${a.lead.naam}: gekozen slot bezet — kaart terug naar dashboard`);
+        // BELOFTE NAKOMEN (Daimy 09-08, geval Natalie Bavinck): we zeggen tegen de
+        // klant "we sturen je zo een paar nieuwe tijden", maar dat gebeurde alleen als
+        // iemand daarna handmatig op het dashboard klikte. Natalie wachtte daardoor
+        // een etmaal op tijden die nooit kwamen. Nu sturen we ze meteen zelf.
+        let nieuwGestuurd = false;
+        try {
+          const verseAgenda = await haalAgenda();
+          await voegAanbiedingenToe(verseAgenda);
+          let opnieuw = [];
+          for (const inm of INMETERS) {
+            const sl = await zoekSlots({
+              agenda: verseAgenda[inm.naam], adres: a.lead.volledigAdres, duurMin: a.duurMin,
+              werkdagen: werkdagenVoor(inm.naam),
+              startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
+              eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
+            }).catch(() => []);
+            opnieuw.push(...sl.map((x) => ({ ...x, inmeter: inm.naam })));
+          }
+          opnieuw.sort((x, y) => x.extraRijtijdMin - y.extraRijtijdMin || x.aankomst - y.aankomst);
+          const keuze = kiesAanbod(opnieuw, 3, { wachtDagen: 999 });
+          if (keuze.length) {
+            const rpItem = { id: a.lead.rpItemId, summary: a.lead.naam, item_subject: null };
+            await maakEnVerstuurAanbod({ ...a.lead }, rpItem, keuze, a.duurMin, verseAgenda);
+            nieuwGestuurd = true;
+          }
+        } catch (e) { console.log(`  nieuw aanbod na botsing mislukt: ${e.message}`); }
+        await telegram(`↩️ ${a.lead.naam} koos ${slot.datum} bij ${slot.inmeter}, maar dat gat was net bezet. `
+          + (nieuwGestuurd
+            ? 'De klant heeft excuus én meteen nieuwe tijden gekregen.'
+            : 'De klant heeft excuus gehad, maar NIEUWE TIJDEN LUKTEN NIET — die moeten van het dashboard komen.'));
+        console.log(`  ↩ ${a.lead.naam}: gekozen slot bezet — ${nieuwGestuurd ? 'nieuw aanbod verstuurd' : 'kaart terug naar dashboard'}`);
         continue;
       }
       const uitkomst = await verwerkLead(lead, null, gekozenSlot, a.duurMin);

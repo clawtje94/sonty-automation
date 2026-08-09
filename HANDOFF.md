@@ -74,10 +74,17 @@
      Eenmalige vulling via `?migreer=1` op beide routes (staat klaar in een wachter).
   2. Verzoek-daemon pollt adaptief: 10 s zolang er werk is (5-min-venster), anders 60 s.
   3. Reply-monitor: 1 request (`?actief=1`) i.p.v. 4 volledige lijsten per ronde.
-- **WACHT OP DAIMY**: Upstash-plan omzetten naar pay-as-you-go (~$10/mnd).
-  Database = `singular-feline-86557`, via vercel.com/daimy/sonty-website/stores →
-  Open in Upstash. Wachter draait: zodra KV 200 geeft worden beide migraties
-  uitgevoerd en verwerker + verzoek-daemon gekickstart.
+- **OPGELOST 09-08 ±10:30, GRATIS**: geen upgrade nodig — nieuwe gratis Upstash-database
+  `upstash-kv-almond-lens` (store_NWFTKRcUuOXaoFNL). Daimy maakte hem aan; de
+  project-koppeling liep vast op een naamconflict (oude env-vars). Opgelost door:
+  (1) oude resource `upstash-kv-yellow-paddle` loskoppelen via
+  `vercel integration-resource disconnect`, (2) nieuwe koppelen via de Vercel-API:
+  `POST /v1/storage/stores/<storeId>/connections?teamId=<team>` body `{projectId}`
+  (CLI heeft GEEN connect-commando — dit is de werkende route), (3) `vercel env pull`,
+  build + deploy, migraties gedraaid, daemons gekickstart.
+  LET OP: KV was leeg na de wissel → instelling `aantalTijden: 1` handmatig
+  teruggezet (stond alleen in KV). Geverifieerd: dashboard 18 boekingen + 11 leads,
+  API's 200, verwerker schoon.
 - **Stand keten tijdens storing (lokaal geverifieerd)**: 18 boekingen, 0 dubbelboekingen,
   0 wachtende klantberichten. Manon (17 sep 09:00 Sjoerd) en Franken (31 aug 14:00)
   zijn 07-08 's avonds nog automatisch geboekt na klantreactie.

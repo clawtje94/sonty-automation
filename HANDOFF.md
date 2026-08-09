@@ -61,6 +61,29 @@
   Regressietest 23 = de echte Josua-casus. Bewijs: Marjolein 21 sep → 31 aug bovenaan,
   Matijn 15 okt → 21 sep.
 
+## 09-08 LATER: EBRU-GAT, AVONDRIT NA 15:00
+- **EBRU KILINC bijna kwijtgeraakt**: zij appte 07-08 14:32 "laten we ma 12 okt 12:40
+  doen" en bleef 2 dagen liggen. Oorzaak: ik had die tijd HANDMATIG voorgesteld,
+  buiten een aanbod-record om → de reply-monitor kon haar ja nergens aan koppelen.
+  De aan-zet-watchdog zág het wel, maar zijn meldingen stonden uit. Nu geboekt
+  (ma 12 okt 12:40 Joey, Gripp 6442) + op de eerder-willen-lijst.
+  **LES: een tijd voorstellen doe je NOOIT los; altijd via een aanbod-record
+  (POST /api/inmeet-aanbod of stuur-aanbod met slots), anders landt het antwoord nergens.**
+- **WATCHDOG-MELDBELEID**: van "uit" naar één gerichte melding per dag (ochtendronde,
+  naar de DATA-BOT): alleen akkoord/klacht of wie >24u wacht, max 12 regels. Volledige
+  lijst blijft in het logboek. Uitzetten kan met TELEGRAM=0.
+- **AVONDRIT NA 15:00 (Daimy)**: "dicht bij de laatste opdracht of op de weg naar
+  huis mag ná 15:00 bij Sjoerd en Joey." In slotzoeker: extra slot aansluitend op de
+  LAATSTE klus van de dag, alleen als de omweg ≤ AVOND_MAX_EXTRA_MIN (15 min) is
+  t.o.v. de rit die hij toch al naar huis maakt, aankomst ≤ 90 min na dienst, en er
+  die dag al een klus staat. Slot krijgt `naDienst: true`. Lab-onderdeel avondrit.js
+  (24 scenario's): lege dag → nooit, verre klant → nooit, om-de-hoek → 14:40
+  aansluitend. Totaal lab nu 596, 0 stil.
+- **Winkel-keuzelijst nogmaals bevestigd** (Daimy herhaalde het): ALLE dashboard-kaarten
+  3 tijden; 5 keuzes uitsluitend via het vak "Klant net akkoord in de winkel?".
+  Mijn twee testkaarten (Marco, Ashutosh) met DELETE /api/inmeet-dashboard opgeruimd;
+  geverifieerd: 10 kaarten × 3 tijden, geen enkele met meer.
+
 ## 09-08: WINKEL-KEUZELIJST, GRIP-INVULLEN OPGELOST, TELEGRAM GESPLITST
 - **WINKEL-KEUZELIJST (Daimy "gewoon alle beschikbare tijden zien, zeg 5")**:
   `kiesWinkelOpties(slots, 5)` in slotzoeker.js — 5 gevarieerde opties, chronologisch,

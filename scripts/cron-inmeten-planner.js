@@ -67,13 +67,30 @@ const bewaarState = (s) => {
 };
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function telegram(tekst) {
-  await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: TG_CHAT, text: tekst }),
-  }).catch(() => {});
+
+/** Boekingsmelding voor de planning-groep (Daimy 09-08: "stuur alles wat ingeboekt
+ * wordt naar de planning-groep"). Eén vaste opmaak, zodat iedereen in de groep in
+ * één oogopslag ziet wie, wanneer, waar en bij wie — en of alles echt rond is. */
+function boekingsMelding({ naam, aankomst, inmeter, plaats, adres, duurMin, samenvatting, via }) {
+  const wanneer = new Date(aankomst).toLocaleString('nl-NL', {
+    weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam',
+  });
+  const regels = [
+    `✅ INMEETAFSPRAAK GEBOEKT`,
+    `${naam}${plaats ? ` uit ${plaats}` : ''}`,
+    `${wanneer} bij ${inmeter}${duurMin ? ` (${duurMin} min)` : ''}`,
+  ];
+  if (adres) regels.push(adres);
+  if (via) regels.push(`Via: ${via}`);
+  if (samenvatting) regels.push(samenvatting);
+  return regels.join('\n');
 }
+
+// Routering (Daimy 09-08): boekingen naar de planning-groep, al het andere naar de
+// data-bot. Zie lib/telegram-planning.js — de groep is de werklijst van het team en
+// moet schoon blijven.
+const { planningTelegram } = require('./lib/telegram-planning.js');
+async function telegram(tekst, opties) { await planningTelegram(tekst, opties); }
 
 async function rpGet(ep) {
   const r = await fetch('https://backend.reuzenpanda.nl' + ep, { headers: { Authorization: 'Bearer ' + RP_API_KEY } });
@@ -1094,7 +1111,11 @@ async function verwerkAanbiedingen() {
         await telegram(`⚠️ Bevestiging na boeking mislukt voor ${a.lead.naam}: ${e.message.slice(0, 80)}`);
       }
       console.log(`  ✓ ${a.lead.naam}: ${uitkomst.samenvatting}`);
-      await telegram(`✅ Inmeetafspraak GEBOEKT na klantkeuze:\n${a.lead.naam} — ${slot.datum}, ${slot.inmeter}\n${uitkomst.samenvatting}`);
+      await telegram(boekingsMelding({
+        naam: a.lead.naam, aankomst: slot.aankomst, inmeter: slot.inmeter,
+        plaats: a.lead.plaats, adres: a.lead.volledigAdres, duurMin: a.duurMin,
+        samenvatting: uitkomst.samenvatting, via: 'klant koos zelf een tijd',
+      }), { boeking: true });
     } catch (e) {
       console.log(`  ✗ ${a.lead.naam}: ${e.message}`);
       await telegram(`⚠️ Boeken na klantkeuze MISLUKT voor ${a.lead.naam}: ${e.message.slice(0, 160)}\nAanbod blijft op "gekozen" staan; volgende run opnieuw.`);
@@ -1231,7 +1252,11 @@ async function verwerkDashboardVerzoek(m) {
       await verstuurBevestiging({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin: duur }, { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter });
     }
   } catch { /* bevestiging is nice-to-have; kantoor boekt met klant aan de lijn */ }
-  await telegram(`✅ Inmeetafspraak GEBOEKT via dashboard (${m.bron}): ${lead.naam} — ${new Date(m.slot.aankomst).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' })} bij ${m.slot.inmeter}.\n${uitkomst.samenvatting}`);
+  await telegram(boekingsMelding({
+    naam: lead.naam, aankomst: m.slot.aankomst, inmeter: m.slot.inmeter,
+    plaats: lead.plaats, adres: lead.volledigAdres, duurMin: duur,
+    samenvatting: uitkomst.samenvatting, via: `winkel (${m.bron})`,
+  }), { boeking: true });
   return `geboekt: ${uitkomst.samenvatting}`;
 }
 

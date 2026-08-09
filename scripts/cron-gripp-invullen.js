@@ -353,10 +353,28 @@ async function main() {
       // ALLE ondertekende (ACCEPTED) offertes verwerken — klant kan er meerdere hebben
       // Geen ACCEPTED? Dan alleen de beste (nieuwste SENT of nieuwste andere)
       const acceptedDocs = fullDocs.filter(d => d.status === 'ACCEPTED');
+      // KANTOOR-KEUZE (09-08): staat er in data/offerte-keuze-override.json een
+      // offertenummer voor deze klant, dan geldt die versie. Het kantoor wéét soms
+      // welke offerte de klant heeft goedgekeurd (Daimy over Vas Verhage: "zet
+      // 202610307 erin"), en dan hoeft niemand op een handtekening te wachten.
+      let override = null;
+      try {
+        const o = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'offerte-keuze-override.json'), 'utf8'));
+        override = o[item.id] || o[item.item_subject?.id] || null;
+      } catch { /* geen overrides ingesteld */ }
+      const gekozenDoc = override
+        ? fullDocs.find(d => String(d.info?.quotationNumber) === String(override) || d.documentId === override || String(d.rpDocNumber) === String(override))
+        : null;
+      if (override && !gekozenDoc) console.log(`  LET OP: override ${override} hoort niet bij deze klant — gewone regels gelden`);
+      if (gekozenDoc) {
+        console.log(`  Offerteversie door kantoor gekozen: ${override}`);
+        fullDocs.length = 0;
+        fullDocs.push(gekozenDoc);
+      }
       // Meerdere versies zonder één getekende: NIET gokken welke geldt — de klant
       // moet er zelf één tekenen (Daimy 05-08, geval Wilco Vendrig: SENT 11k naast
       // ACCEPTED 27,5k met dezelfde timestamp).
-      if (acceptedDocs.length === 0 && fullDocs.length > 1) {
+      if (!gekozenDoc && acceptedDocs.length === 0 && fullDocs.length > 1) {
         console.log('  SKIP: ' + fullDocs.length + ' offerteversies, geen enkele getekend — klant moet eerst tekenen');
         // 1x melden per item, niet bij elke run opnieuw (7 runs/dag = 7 dezelfde
         // meldingen; onderdeel van de meldingen-regen 06-08).

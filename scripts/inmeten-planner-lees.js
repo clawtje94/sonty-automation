@@ -67,13 +67,30 @@ function parseDocument(full) {
  * - precies 1 document → dat document (ambigu=false)
  * - meerdere documenten, geen ACCEPTED → ambigu=true, producten=[]
  */
+/** Door een mens gekozen offerteversie (data/offerte-keuze-override.json).
+ * Heeft een klant meerdere versies zonder handtekening, dan blokkeert de keten
+ * bewust (de bot mag niet gokken welke geldt). Soms wéét het kantoor het wel —
+ * Daimy 09-08 voor Vas Verhage: "zet 202610307 erin". Zo'n besluit hoort
+ * expliciet en terugleesbaar te zijn, niet als losse handmatige actie.
+ * Sleutel mag het RP-item-id of het lead-configuration-id zijn; waarde is het
+ * offertenummer of documentId. */
+function leesKeuzeOverride(item) {
+  try {
+    const pad = path.join(__dirname, '..', 'data', 'offerte-keuze-override.json');
+    const o = JSON.parse(fs.readFileSync(pad, 'utf8'));
+    return o[item.id] || o[item.item_subject?.id] || null;
+  } catch { return null; }
+}
+
 async function leesOfferte(item) {
   const leeg = { producten: [], status: null, ambigu: false, aantalDocs: 0, nummers: [], datums: [] };
   const lcId = item.item_subject?.id;
   if (!lcId) return leeg;
+  const override = leesKeuzeOverride(item);
   const cache = leesCache();
   const hit = cache[lcId];
-  if (hit && Date.now() - hit.op < CACHE_TTL) return hit.waarde;
+  // Bij een override nooit de cache gebruiken: die kan nog de "ambigu"-uitkomst bevatten.
+  if (!override && hit && Date.now() - hit.op < CACHE_TTL) return hit.waarde;
   try {
     const docs = await rpGet(`/document-service/v1/${PID}/quotations?lead_configuration_id=${lcId}`);
     const lijst = docs?.quotationDatas || [];
@@ -89,7 +106,17 @@ async function leesOfferte(item) {
     const geaccepteerd = lijst.filter((d) => (d.quotationStatus || d.documentStatus) === 'ACCEPTED')
       .sort((a, b) => (b.quotationCreationTimestamp || 0) - (a.quotationCreationTimestamp || 0));
     let keuze = null;
-    if (geaccepteerd.length) keuze = geaccepteerd[0];
+    const handmatig = override
+      ? lijst.find((d) => String(d.quotationNumber) === String(override) || d.documentId === override)
+      : null;
+    if (handmatig) {
+      console.log(`  (offerteversie handmatig gekozen door kantoor: ${override})`);
+      keuze = handmatig;
+    } else if (override) {
+      console.log(`  ! override ${override} niet gevonden bij deze klant — gewone regels gelden`);
+    }
+    if (keuze) { /* handmatige keuze wint */ }
+    else if (geaccepteerd.length) keuze = geaccepteerd[0];
     else if (lijst.length === 1) keuze = lijst[0];
     else {
       const waarde = { producten: [], status: null, ambigu: true, aantalDocs: lijst.length, nummers, datums };
@@ -108,8 +135,7 @@ async function leesOfferte(item) {
       datums,
       documentId: keuze.documentId, // voor het adres-vangnet (offerte-PDF)
     };
-    cache[lcId] = { op: Date.now(), waarde };
-    schrijfCache(cache);
+    if (!override) { cache[lcId] = { op: Date.now(), waarde }; schrijfCache(cache); }
     return waarde;
   } catch {
     return leeg;

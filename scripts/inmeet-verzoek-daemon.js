@@ -81,6 +81,28 @@ async function verwerkReken(m) {
     }).catch(() => []);
     beste.push(...sl.map((x) => ({ ...x, inmeter: naam })));
   }
+  // Te weinig gaten binnen de normale horizon? Dan verder vooruit kijken, want de
+  // winkel wil vijf keuzes zien en niet twee (Marco Klok 09-08: verre klant, 2 opties).
+  if (kiesWinkelOpties(beste, 5).length < 5) {
+    for (const naam of Object.keys(planner.ROOSTER)) {
+      if (!planner.ROOSTER[naam].uuidPlanado) continue;
+      const sl = await zoekSlots({
+        agenda: agenda[naam] || [], adres: lead.volledigAdres, duurMin: duur,
+        werkdagen: planner.werkdagenVoor(naam, 30),
+        startAdres: planner.ROOSTER[naam]?.startAdres || undefined,
+        eindAdres: planner.ROOSTER[naam]?.eindAdres || undefined,
+      }).catch(() => []);
+      beste.push(...sl.map((x) => ({ ...x, inmeter: naam })));
+    }
+    // dubbele slots (zelfde inmeter + tijd) uit de twee rondes ontdubbelen
+    const gezienSlot = new Set();
+    beste = beste.filter((x) => {
+      const k = `${x.inmeter}|${+x.aankomst}`;
+      if (gezienSlot.has(k)) return false;
+      gezienSlot.add(k);
+      return true;
+    });
+  }
   beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
   // Winkelklant staat aan de balie: geef een echte keuzelijst (5 opties met labels
   // vroegste / minste rijtijd) in plaats van het ene "beste" moment — Daimy 09-08.

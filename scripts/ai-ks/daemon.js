@@ -458,7 +458,11 @@ async function verwerkTicket(t, state) {
     // (Daimy 3-08, casus Rox +31633352837: "Jorren had het gesloten dus hij is er klaar mee").
     // closed_by blijft staan, dus we eisen óók dat de klant als laatste iets stuurde — anders is de
     // collega gewoon nog bezig en blijft het gesprek van hem.
-    const klantWachtNaSluiting = !!t.closed_by && laatsteBericht && laatsteBericht.type === 'INBOUND';
+    // closed_by zit NIET in de ticketlijst van Trengo (alleen in de detail-call),
+    // closed_at wél. Daardoor was deze check altijd false en ging elk klantbericht
+    // na een afgerond gesprek tóch terug naar Mens nodig (Daimy 09-08: "Sunny wijst
+    // nog steeds toe aan Jorren"). Beide velden accepteren.
+    const klantWachtNaSluiting = !!(t.closed_by || t.closed_at) && laatsteBericht && laatsteBericht.type === 'INBOUND';
     if (klantWachtNaSluiting) {
       try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 747786 }); await haalLabelWeg(t.id, LABEL.MENS_NODIG); }
       catch (e) { console.error(`  [${t.id}] heropend-na-sluiting oppakken FOUT: ${e.message}`); }
@@ -490,7 +494,11 @@ async function verwerkTicket(t, state) {
       // klant daarna opnieuw, dan pakt de BOT het gewoon op en antwoordt — NIET automatisch terug
       // naar Mens nodig puur omdat het daar eerder lag. Wie verder wil helpen sluit niet, maar wijst
       // zichzelf toe (dan blijft user_id gezet en blijft de bot eraf).
-      const werdGesloten = !!t.closed_by;
+      // Zie hierboven: closed_at is het veld dat de lijst-API wél teruggeeft.
+      // Alleen als de klant ná het sluiten schreef; anders is een oud gesloten-moment
+      // genoeg om elk gesprek als "nieuwe vraag" te zien.
+      const werdGesloten = !!(t.closed_by || t.closed_at)
+        && (!t.closed_at || laatsteKlant > String(t.closed_at));
       if (werdGesloten && laatsteKlant > laatsteOverdracht) {
         if (Number(t.team_id) === 431872) {
           try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 747786 }); await haalLabelWeg(t.id, LABEL.MENS_NODIG); }

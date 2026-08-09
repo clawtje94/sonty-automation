@@ -104,7 +104,19 @@ async function ronde() {
     // dan is het gesprek van die collega — toewijzen en de bot blijft eraf.
     const laatsteUitgaand = rowsAll.filter((m) => m.type === 'OUTBOUND' && !m.internal_note)
       .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0];
-    if (laatsteUitgaand && laatsteUitgaand.user_id && Number(laatsteUitgaand.user_id) !== SONNY_USER) {
+    // AFGEROND GESPREK, NIEUWE VRAAG (Daimy 09-08): heeft de collega geantwoord én het
+    // ticket gesloten, en begint de klant dáárna opnieuw, dan is dat een nieuwe vraag.
+    // Die beantwoordt Sunny gewoon zelf; hem opnieuw aan Jorren hangen levert alleen
+    // een wachtende klant op. (closed_at blijft na heropenen staan, dus we eisen dat
+    // het klantbericht ná het sluiten kwam.)
+    const laatsteEchtBericht = rowsAll.filter((m) => !(m.internal_note || m.type === 'NOTE'))
+      .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0];
+    const nieuweVraagNaSluiting = !!t.closed_at
+      && laatsteEchtBericht?.type === 'INBOUND'
+      && String(laatsteEchtBericht.created_at) > String(t.closed_at);
+    if (nieuweVraagNaSluiting) console.log(`  [${t.id}] gesprek was afgerond en gesloten; klant stelt een nieuwe vraag → Sunny handelt zelf af`);
+
+    if (!nieuweVraagNaSluiting && laatsteUitgaand && laatsteUitgaand.user_id && Number(laatsteUitgaand.user_id) !== SONNY_USER) {
       // Daimy zelf nooit automatisch toewijzen (Daimy 23-07) — bot blijft er wel vanaf
       if (t.status !== 'CLOSED' && Number(laatsteUitgaand.user_id) !== 736327 && Number(t.user_id) !== Number(laatsteUitgaand.user_id)) {
         try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: laatsteUitgaand.user_id }); console.log(`  [${t.id}] laatste mail van collega (user ${laatsteUitgaand.user_id}) → aan hen toegewezen`); } catch (e) { console.error(`  [${t.id}] collega-toewijzing FOUT: ${e.message}`); }

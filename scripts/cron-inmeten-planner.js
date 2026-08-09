@@ -659,14 +659,26 @@ async function main() {
         // (geval Rene 07-08: die plek was onzichtbaar geworden door de datumregel).
         const vroegste = kiesAanbod(beste, 1, { negeerGrens: true })[0];
         if (vroegste && nood[0] && +vroegste.aankomst < +nood[0].aankomst - 7 * 86400000) {
-          nood = [vroegste, ...nood.filter((s) => s !== vroegste)].slice(0, 3);
+          nood = [vroegste, ...nood].slice(0, 4);
         }
+        // ONTDUBBELEN op tijd+inmeter (Daimy 09-08: "ik zie 2 of 4 keuzes"). Filteren
+        // op objectidentiteit werkte niet: zorgVoorDrieOpties haalt slots opnieuw op,
+        // dus hetzelfde moment kwam als een ANDER object terug en stond dan twee keer
+        // op de kaart — wat er als één keuze minder uitziet.
+        nood = ontdubbelSlots(nood).slice(0, 3);
         dash.leads.push({
           rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur, wachtDagen,
           status: 'wachtend', reden,
           producten: lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ').slice(0, 90),
           top: nood.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin, label: x.label || undefined })),
         });
+        // Wat we op de kaart tonen is voor DEZE klant bedoeld: binnen deze ronde
+        // reserveren, anders krijgen twee klanten hetzelfde moment aangeboden en
+        // botst het zodra de winkel ze allebei boekt (Daimy 09-08: "ik zie mensen
+        // met dezelfde tijden en datum").
+        for (const x of nood) {
+          agenda[x.inmeter].push({ start: x.aankomst.toISOString(), eind: x.vertrek.toISOString(), adres: lead.volledigAdres, klant: `kaart ${lead.naam}` });
+        }
       }
       continue;
     }
@@ -734,6 +746,18 @@ async function main() {
     if (escalaties.length) stukken.push(escalaties.join('\n'));
     await telegram(`Inmeet-planner (${LIVE ? 'LIVE' : 'schaduw'}): ` + stukken.join('\n'));
   }
+}
+
+/** Zelfde moment bij dezelfde inmeter = één keuze, ook als het uit twee losse
+ * zoekrondes komt (objecten verschillen dan, de tijd niet). */
+function ontdubbelSlots(slots) {
+  const gezien = new Set();
+  return slots.filter((s) => {
+    const sleutel = `${s.inmeter}|${+s.aankomst}`;
+    if (gezien.has(sleutel)) return false;
+    gezien.add(sleutel);
+    return true;
+  });
 }
 
 const MAX_COMBI_RIJTIJD_MIN = 20; // klanten die hooguit dit uit elkaar wonen vormen een combi
@@ -1264,7 +1288,7 @@ async function verwerkVerzoek(m) {
   return { afgewezen: false, uitkomst: res.gelukt ? 'alle systemen bijgewerkt' : 'deels: ' + res.stappen.filter((x) => !x.ok).map((x) => x.stap).join(',') };
 }
 
-module.exports = { verwerkVerzoek, verversRonde: main, haalAgenda, leesLeadCompleet, werkdagenVoor, laadVakanties, voegAanbiedingenToe, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram };
+module.exports = { verwerkVerzoek, ontdubbelSlots, verversRonde: main, haalAgenda, leesLeadCompleet, werkdagenVoor, laadVakanties, voegAanbiedingenToe, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram };
 
 if (require.main === module) {
   if (process.argv.includes('--verwerk-aanbod')) {

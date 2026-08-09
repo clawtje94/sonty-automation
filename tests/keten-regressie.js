@@ -173,6 +173,20 @@ test('spreiding: niet 3x hetzelfde dagdeel op dezelfde dag', () => {
   assert.strictEqual(new Set(sleutels).size, sleutels.length, 'zelfde dag+dagdeel dubbel aangeboden');
 });
 
+console.log('— dashboard-kaart: geen dubbele of botsende tijden (Daimy 09-08) —');
+test('ontdubbelen op tijd+inmeter, ook bij verschillende objecten', () => {
+  // zorgVoorDrieOpties haalt slots opnieuw op: hetzelfde moment komt terug als een
+  // ANDER object en stond daardoor twee keer op de kaart (Marco Klok, Timo Goes).
+  const { ontdubbelSlots } = require('../scripts/cron-inmeten-planner.js');
+  const maak = (uur, inmeter) => ({ ...slotje('2026-09-22', uur, 10, true), inmeter });
+  const lijst = [maak(14, 'Sjoerd'), maak(14, 'Sjoerd'), maak(14, 'Joey'), maak(15, 'Sjoerd')];
+  const uniek = ontdubbelSlots(lijst);
+  assert.strictEqual(uniek.length, 3, 'zelfde tijd bij dezelfde inmeter is één keuze');
+  assert.strictEqual(uniek.filter((s) => s.inmeter === 'Sjoerd' && s.aankomst.getHours() === 14).length, 1);
+  // zelfde tijd bij een ANDERE inmeter is wél een echte tweede keuze
+  assert.ok(uniek.some((s) => s.inmeter === 'Joey' && s.aankomst.getHours() === 14));
+});
+
 console.log('— winkel-keuzelijst (Daimy 09-08) —');
 test('kiesWinkelOpties: 5 gevarieerde opties met labels vroegste en minste rijtijd', () => {
   const { kiesWinkelOpties } = require('../scripts/lib/slotzoeker');

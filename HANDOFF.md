@@ -61,6 +61,34 @@
   Regressietest 23 = de echte Josua-casus. Bewijs: Marjolein 21 sep → 31 aug bovenaan,
   Matijn 15 okt → 21 sep.
 
+## 09-08 SLOT: DAGVULLING, RITA-LES, DAMSTEEG
+- **LEGE DAGEN BLEVEN LEEG (Daimy "dagen bij die gasten vol krijgen, 100% efficiënt")**:
+  ontwerpfout in de kostenformule. extraRijtijdMin = heen + terug - direct; op een
+  LEGE dag is direct = 0 (magazijn→magazijn), dus telde de hele reis als "extra" en
+  viel élke klant buiten de 30-min-grens. Sjoerd had 24/28/29/30 sep + 1 okt op NUL
+  klussen terwijl 4 klanten wachtten. FIX: slots op een dag zonder klussen krijgen
+  `dagOpener: true` en overleven het grens-filter in kiesAanbod (regressietest 31:
+  dagopener blijft, dure invoeging op een volle dag valt nog steeds af). Dashboard
+  toont "opent een lege dag" i.p.v. een misleidende +175m. Resultaat: Marco,
+  Ashutosh, Connie en Timo hebben nu alle vier tijden.
+- **scripts/dagvulling-analyse.js** (read-only): per dag de vrije minuten + per
+  wachtende klant zijn goedkoopste plek. Gebruik dit bij de vraag "waarom staat die
+  dag leeg".
+- **RITA VAN SCHAGEN — BOEKING DOOR MIJN EIGEN FIX**: zij schreef "Ja doe dat maar.
+  Maar ik had het wel op prijs gesteld dat je dit eerlijk zou zeggen. Sorry maar van
+  3 naar 6 weken vind ik wel veel." Mijn Marjolein-uitbreiding (acceptatie mét extra
+  tekst) las dat als akkoord → geboekt + opgewekte bevestiging. GEFIXT: onvrede-regex
+  (vind ik wel veel / niet blij / sorry maar / op prijs gesteld / dat is wel lang …)
+  blokkeert automatisch boeken; haar echte bericht is regressietest.
+  Ook: bot beloofde standaard "2-3 weken" (stond hard in system-prompt) terwijl het 6
+  werd → leest nu data/actuele-wachttijd.json (planner schrijft de vroegste plek weg).
+  En een aanbod ≥3 weken vooruit opent niet meer met "goed nieuws".
+- **OFFERTE-KEUZE MAG NU MEERDERE NUMMERS ZIJN**: data/offerte-keuze-override.json
+  accepteert een lijst. Damsteeg → beide offertes in Gripp (6447 €5.151 + 6448 €8.422,
+  één klant 99739). LET OP: eerste poging maakte een dubbele company/offerte aan
+  (99738 + 6446) — opgeruimd via company.delete/offer.delete. Waarschuwing blijft:
+  "Product niet gevonden: ROMA buitenjaloezie".
+
 ## 09-08 AVOND: SUNNY-TOEWIJZING + DASHBOARD-TIJDEN
 - **SUNNY WEES ALLES AAN JORREN TOE (Daimy)**: de regel "gesloten door een mens =
   klaar, bot pakt het daarna zelf op" (Daimy 03-08) stond er wél, maar checkte

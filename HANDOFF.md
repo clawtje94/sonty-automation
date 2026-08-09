@@ -61,6 +61,36 @@
   Regressietest 23 = de echte Josua-casus. Bewijs: Marjolein 21 sep → 31 aug bovenaan,
   Matijn 15 okt → 21 sep.
 
+## 09-08: WINKEL-KEUZELIJST, GRIP-INVULLEN OPGELOST, TELEGRAM GESPLITST
+- **WINKEL-KEUZELIJST (Daimy "gewoon alle beschikbare tijden zien, zeg 5")**:
+  `kiesWinkelOpties(slots, 5)` in slotzoeker.js — 5 gevarieerde opties, chronologisch,
+  met labels `vroegste` en `minste rijtijd` (kunnen samenvallen). Omrij-grens filtert
+  hier bewust NIET (winkel moet haast kunnen bedienen). Gebruikt door de reken-route
+  (verzoek-daemon, kijkt 30 dagen vooruit als er <5 gaten zijn) én door de
+  dashboard-kaarten van de planner. UI: gelabelde knoppen groen. Live geverifieerd
+  (Marco Klok 5 opties, iPhone 12, 0 overflow). Regressietests 28-29.
+- **"5 op grip invullen" UITGEZOCHT**: 3 waren allang klaar (Gripp-offerte bestond),
+  alleen de RP-status bleef staan. Twee oorzaken: (1) cron las `?limit=200` van een
+  backlog met 18.752 items → Q Tacken (25-07) en Wilte Zijlstra (21-07) werden nooit
+  gezien; (2) wie al een marker had werd overgeslagen, dus toen Rene ná zijn
+  Gripp-run opnieuw geboekt werd (status terug op grip invullen) bleef hij hangen.
+  FIX: zuinig ophalen (1 pagina van 1000 + gerichte volglijst op id in
+  data/gripp-invullen-volglijst.json — Daimy: "niet de hele RP-database, dat geeft
+  gezeur"), ZELFHERSTEL (marker met grippOfferId → status alsnog Afgerond) en een
+  melding voor iedereen die hier >7 dagen staat.
+- **KANTOOR-KEUZE OFFERTEVERSIE**: `data/offerte-keuze-override.json`
+  ({rpItemId of lcId: offertenummer}) laat het kantoor bepalen welke versie geldt als
+  er meerdere ongetekende zijn. Gebruikt in inmeten-planner-lees.js (cache wordt dan
+  overgeslagen) en cron-gripp-invullen.js. Toegepast op Vas Verhage → 202610307,
+  Gripp-offerte 8984, status Afgerond. Nog open op grip invullen: alleen B Damsteeg.
+- **TELEGRAM GESPLITST (Daimy)**: planning-GROEP (-5131873789 "Planning bot groep") =
+  ALLEEN boekingen; al het andere → data-bot (@Sontydatabot). In
+  lib/telegram-planning.js: `planningTelegram(tekst, { boeking: true })` gaat naar de
+  groep, zonder optie naar de data-bot (veilige default: geen ruis in de groep).
+  Boekingsmelding heeft nu één vaste opmaak (naam, plaats, dag+tijd, inmeter, duur,
+  adres, herkomst, samenvatting). Volledige lijst van 18 boekingen ter controle in de
+  groep gezet.
+
 ## STORING 09-08: UPSTASH-LIMIET BEREIKT (database plat, opgelost in code)
 - **Symptoom**: alles wat KV gebruikt gaf HTTP 500 (aanbod-API, dashboard-API,
   mutatie-API); inmeet-verwerker exit 1; planner meldde "aanbod-register onbereikbaar,

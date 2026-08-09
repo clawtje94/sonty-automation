@@ -130,3 +130,17 @@
 - (2026-08-05) [team-notitie bij gesprek Jeane] vraag even om een foto
 
 - (2026-08-05) [Silvia +31621557981] LICHTSTRAAT, ZADELDAK, SERRE EN VERANDA gaan ALTIJD naar een mens. Dat werk loopt via een ANDER PRIJSBOEK dan het gewone assortiment, dus de prijzen die de bot kent kloppen daar niet. Bij Silvia werd serre zonwering geoffreerd voor haar lichtstraat, en dat product bleek langer te worden dan de uitbouw zelf. Geen prijs noemen, geen offerte maken of aanpassen, geen toezegging doen over wat past: zeggen dat een collega er met de juiste maatvoering naar kijkt en escaleren. Dit zit nu ook als harde blokkade in offerte_aanmaken en offerte_aanpassen (tools.js), niet alleen als regel in de prompt.
+- (2026-08-06) [team-notitie bij gesprek Jeane] kun je deze vrouw een reactie mailen aub want je heb niet gereageerd meer op haar antwoord nu is whatsapp dicht ;)
+- (2026-08-06) [team-notitie bij e-mail Rick van Nieuwkerk] het is niet heel duidelijk of hij het rolluik nou wil laten maken of een nieuwe wil? vraag dat even want anders als hij reparatie wil moetje hem doorzetten naar nodi
+- (2026-08-06) [team-notitie bij e-mail taico@taico.nl] je kunt voor mensen die hun offerte willen aanpassen van voor de verhoging gewoon de oude prijzen aanhouden en voor alles wat de nieuwe prijzen in eerste instantie al heeft gehad de nieuwe prijzen aanhouden
+- (2026-08-06) [team-notitie bij e-mail karelh@live.nl] waarom heb je de prijs indicatie niet gemaakt dan ??????????????????
+- (2026-08-06) [team-notitie bij e-mail Rick van Nieuwkerk] oke dan kan je reageren op hem en de afspraak doorzetten naar inmeten inplannen
+- (2026-08-06) [team-notitie bij e-mail priem@casema.nl] hoe kom je op 4408 incl btw?
+
+## 2026-08-09 — Klant is pas later klaar (nieuwbouw/sleutel/verbouwing)
+FOUT (Fred, +31654641101, 05-08): "De datum op de offerte is puur een richtlijn."
+Dat klopt niet en het laat de klant zweven.
+GOED: de offerte loopt gewoon af, dus wie er gebruik van wil maken tekent nu — dan
+staat de prijs vast. De inmeetafspraak plannen we daarna gewoon later, in overleg
+met de planning (bijvoorbeeld na de sleuteloverdracht). Wat de klant tekent is
+precies de aanbieding die geldt zodra we hebben ingemeten.

@@ -331,6 +331,11 @@ test('leesKeuze bij 1 slot: bevestiging = akkoord, twijfel = mens (Daimy 07-08)'
   assert.strictEqual(leesKeuze('Hi! Dat is prima! Ik zou de offerte per mail nog krijgen maar heb deze niet meer gehad. Wij hadden toen 2 offertes laten maken. Het gaat om de hor voor de schuifpui en 1 zonnescherm. Groetjes Marjolein', een), 0, 'acceptatie + losse vraag moet gewoon boeken');
   assert.strictEqual(leesKeuze('is goed', een), 0);
   assert.strictEqual(leesKeuze('Ja hoor, tot dan!', een), 0);
+  // ONVREDE: instemmen én klagen is geen kale keuze — er hoort een mens bij
+  // (Daimy 09-08, ECHTE bericht van Rita van Schagen; werd toch geboekt + opgewekt bevestigd)
+  assert.strictEqual(leesKeuze('Hoi Ja doe dat maar. Maar ik had het wel op prijs gesteld dat je dit eerlijk zoe zeggen. Sorry maar van 3 naar 6 weken vind ik wel veel', een), null, 'instemming met klacht mag NOOIT automatisch boeken');
+  assert.strictEqual(leesKeuze('Ja hoor maar dat is wel erg lang', een), null);
+  assert.strictEqual(leesKeuze('Ja, maar ik ben er niet blij mee', een), null);
   assert.strictEqual(leesKeuze('Dat past prima, kan de monteur aanbellen bij de buren?', een), 0);
   assert.strictEqual(leesKeuze('Prima, maar kan het ook een andere dag?', een), null, 'andere dag = mens');
   assert.strictEqual(leesKeuze('Helaas, dan lukt niet, liever volgende week', een), null);

@@ -39,6 +39,14 @@ function leesKeuze(tekst, slots) {
     // twijfel over de tijd.
     const twijfel = /ander(e)? (moment|tijd|dag|datum)|past (mij |ons )?niet|kan (dan |echt )?niet|lukt (dan |echt )?niet|liever|helaas|verzetten|verplaatsen|annuleer/i;
     if (twijfel.test(t)) return null;
+    // ONVREDE WINT ALTIJD (Daimy 09-08, geval Rita van Schagen). Zij schreef:
+    // "Ja doe dat maar. Maar ik had het wel op prijs gesteld dat je dit eerlijk zou
+    // zeggen. Sorry maar van 3 naar 6 weken vind ik wel veel." Dat werd als een
+    // gewoon akkoord geboekt, inclusief opgewekte bevestiging — terwijl daar een
+    // mens had moeten meelezen. Een klant die instemt én klaagt is GEEN kale keuze:
+    // melden, niet automatisch afhandelen.
+    const onvrede = /vind ik (wel |het )?(veel|lang|vervelend|jammer)|niet blij|teleurgesteld|balen|sorry maar|had ik (wel )?(anders|eerlijk)|op prijs gesteld|klopt niet|beloofd|toegezegd|(is|dat is)( wel| erg| best)? (lang|veel)|te lang|niet netjes|slecht|\bmaar dat is\b|\bmaar wel\b/i;
+    if (onvrede.test(t)) return null;
     // kale bevestiging (knop of kort berichtje)
     if (/^(dat past|past\b.{0,10}|prima|is goed|akkoord|top|ja|jazeker|oke|oké|ok|👍)[!. ]*$/.test(t)
       && !/niet|geen|ander/.test(t)) return 0;

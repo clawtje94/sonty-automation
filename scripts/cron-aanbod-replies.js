@@ -126,12 +126,14 @@ async function main() {
 
   // aanbod-status erbij (open/gekozen/verwerkt/verlopen) voor context in de melding
   const statusPer = {};
-  for (const status of ['open', 'gekozen', 'verwerkt', 'verlopen']) {
-    try {
-      const r = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod?status=${status}`, { headers: { 'x-meet-code': MEET_CODE } });
-      for (const a of (await r.json())?.aanbiedingen || []) statusPer[a.token] = status;
-    } catch { /* status is context, geen blokkade */ }
-  }
+  // Eén verzoek voor alle LOPENDE aanbiedingen (open + gekozen). Hiervoor werden vier
+  // aparte lijsten opgehaald, elk met de volledige historie erachter — dat was een van
+  // de grootverbruikers achter de Upstash-limietstoring van 08-08. Een token dat hier
+  // niet in staat is klaar (verwerkt/verlopen) en hoeft niet gevolgd te worden.
+  try {
+    const r = await fetch('https://sonty-website.vercel.app/api/inmeet-aanbod?actief=1', { headers: { 'x-meet-code': MEET_CODE } });
+    for (const a of (await r.json())?.aanbiedingen || []) statusPer[a.token] = a.status;
+  } catch { /* status is context, geen blokkade */ }
 
   let meldingen = 0;
   for (const token of tokens) {

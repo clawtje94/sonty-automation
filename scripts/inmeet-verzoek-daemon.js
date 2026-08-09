@@ -97,7 +97,8 @@ async function verwerkReken(m) {
 
 async function ronde() {
   const { mutaties } = await api(MUTATIE_API + '?status=open');
-  for (const m of mutaties || []) {
+  if (!mutaties?.length) return false;
+  for (const m of mutaties) {
     let res;
     try {
       if (m.type === 'adres') {
@@ -160,12 +161,27 @@ async function ronde() {
     } catch { /* kaart-update is cosmetisch */ }
     console.log(new Date().toISOString(), m.type, '->', res.uitkomst);
   }
+  return true; // er was werk: blijf even snel pollen
 }
 
+// ADAPTIEF POLLEN (08-08, na de Upstash-limietstoring): elke 10 seconden pollen kost
+// ~260.000 database-verzoeken per maand terwijl er meestal niets te doen is. Nu:
+// 10 seconden zolang er werk is of net was (de winkel staat aan de balie te wachten),
+// daarna rustig terugzakken naar 60 seconden. Dat scheelt een factor 6 in rust
+// zonder dat een klik ooit traag voelt.
+const SNEL_MS = 10000;
+const RUSTIG_MS = 60000;
+const SNEL_VENSTER_MS = 5 * 60000; // zo lang na het laatste werk blijven we snel pollen
+
 (async () => {
-  console.log('inmeet-verzoek-daemon gestart (poll elke 10s)');
+  console.log(`inmeet-verzoek-daemon gestart (poll ${SNEL_MS / 1000}s bij werk, ${RUSTIG_MS / 1000}s in rust)`);
+  let laatsteWerk = Date.now(); // eerste minuten na een herstart altijd snel
   while (true) {
-    try { await ronde(); } catch (e) { console.log(new Date().toISOString(), 'ronde-fout:', e.message); }
-    await wacht(10000);
+    try {
+      const gedaan = await ronde();
+      if (gedaan) laatsteWerk = Date.now();
+    } catch (e) { console.log(new Date().toISOString(), 'ronde-fout:', e.message); }
+    const snel = Date.now() - laatsteWerk < SNEL_VENSTER_MS;
+    await wacht(snel ? SNEL_MS : RUSTIG_MS);
   }
 })();

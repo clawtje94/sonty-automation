@@ -238,7 +238,29 @@ async function main() {
 
   // limit=200: zonder limiet geeft RP een standaardpagina en vallen verse items er soms
   // buiten (testlead 2026-08-05 werd zo overgeslagen: 'items: 2, nieuw: 0').
-  const itemsData = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items?limit=200');
+  // API-ZUINIG ÉN COMPLEET (09-08). Het probleem was ?limit=200: dat dekt maar een
+  // paar dagen van een backlog met 18.752 items, waardoor Q Tacken (25-07) en Wilte
+  // Zijlstra (16-07) met een GETEKENDE offerte weken bleven liggen. De hele database
+  // ophalen is geen optie (19 calls per ronde = RP-gezeur, Daimy 09-08). Daarom:
+  //  1. één pagina van 1000 (nieuwste eerst = ruwweg de laatste twee weken);
+  //  2. blijvers die daarbuiten vallen volgen we gericht op id (1 call per stuk),
+  //     bijgehouden in data/gripp-invullen-volglijst.json.
+  // Kosten in de praktijk: 1 tot 3 calls per ronde.
+  const VOLGLIJST = path.join(__dirname, '..', 'data', 'gripp-invullen-volglijst.json');
+  const laadVolglijst = () => { try { return JSON.parse(fs.readFileSync(VOLGLIJST, 'utf8')); } catch { return []; } };
+  const eersteBlad = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items?limit=1000');
+  const gezien = eersteBlad?.items || [];
+  const gezienIds = new Set(gezien.map((i) => i.id));
+  const extra = [];
+  for (const id of laadVolglijst()) {
+    if (gezienIds.has(id)) continue;
+    try {
+      const los = await rpGet('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items/' + id);
+      const item = los?.item || los;
+      if (item?.id) extra.push(item);
+    } catch { /* verwijderd item: valt vanzelf van de volglijst */ }
+  }
+  const itemsData = { items: [...gezien, ...extra] };
   // --item=<rp-id>: verwerk gericht één item, ook als het in RP gearchiveerd is
   // (testlead 2026-08-05 stond gearchiveerd en werd daardoor stil overgeslagen).
   const ITEM_FILTER = (process.argv.find(a => a.startsWith('--item=')) || '').split('=')[1] || null;
@@ -247,6 +269,10 @@ async function main() {
     (ITEM_FILTER ? i.id === ITEM_FILTER : !i.technical_labels?.some(l => l.type === 'ITEM_ARCHIVED'))
   );
 
+  // volglijst bijwerken: wie nu op deze status staat blijven we volgen, ook als hij
+  // straks uit het venster van 1000 zakt
+  try { fs.writeFileSync(VOLGLIJST, JSON.stringify(items.map((i) => i.id))); } catch { /* volglijst is een hulpmiddel */ }
+
   const sentLog = getSentLog();
   // Dedup op uniek RP backlog-item-id ('item:<id>'), niet op klantnaam: een tweede
   // order van dezelfde klant (nieuw item, zelfde naam) werd vroeger stil overgeslagen.
@@ -254,7 +280,31 @@ async function main() {
   // = al gedaan), zodat historische items niet opnieuw verwerkt worden.
   const toProcess = items.filter(i => !sentLog[i.summary] && !sentLog['item:' + i.id]);
 
+  // ZELFHERSTEL (09-08): een item dat hier staat maar al een Gripp-offerte heeft, wordt
+  // door de dedup overgeslagen en blijft dus eeuwig op "grip invullen" hangen. Dat
+  // gebeurde bij Rene Blauw (opnieuw geboekt ná zijn Gripp-run, waardoor de status
+  // terugkwam), Q Tacken (25-07) en Wilte Zijlstra (21-07). De offerte bestaat al,
+  // dus alleen de status moet nog door — dat doen we hier alsnog.
+  for (const i of items) {
+    const marker = sentLog['item:' + i.id] || sentLog[i.summary];
+    if (!marker?.grippOfferId) continue;
+    const ok = await setStatus(i.id, AFGEROND_STATUS);
+    console.log(`  ZELFHERSTEL ${i.summary}: Gripp ${marker.grippOfferId} bestond al → status Afgerond: ${ok ? 'OK' : 'FAIL'}`);
+  }
+
   console.log('Gripp invullen items:', items.length, '| Nieuw:', toProcess.length);
+  // BLIJVERS MELDEN (09-08): items die hier al weken staan komen nergens terug —
+  // meestal wacht de klant op iets (offerte tekenen). Stilte is hier het gevaar.
+  const blijvers = items.filter((i) => Date.now() - Number(i.timestamp_created || Date.now()) > 7 * 86400000);
+  if (blijvers.length) {
+    const regels = blijvers.map((i) => `- ${i.summary} (sinds ${new Date(Number(i.timestamp_created)).toLocaleDateString('nl-NL')})`).join('\n');
+    console.log('LET OP, staan hier al >7 dagen:\n' + regels);
+    try {
+      await require('./lib/telegram-planning.js').planningTelegram(
+        `${blijvers.length} klant(en) staan al langer dan een week op "Gripp invullen" en komen niet verder:\n${regels}\n\nMeestal wacht dit op een getekende offerte. Even nabellen of doorzetten?`
+      );
+    } catch { /* melding is extra */ }
+  }
   if (toProcess.length === 0) { console.log('Niets te doen'); return; }
 
   let processed = 0, failed = 0;

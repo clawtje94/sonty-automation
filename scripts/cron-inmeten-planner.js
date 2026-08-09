@@ -665,7 +665,16 @@ async function main() {
         // op objectidentiteit werkte niet: zorgVoorDrieOpties haalt slots opnieuw op,
         // dus hetzelfde moment kwam als een ANDER object terug en stond dan twee keer
         // op de kaart — wat er als één keuze minder uitziet.
-        nood = ontdubbelSlots(nood).slice(0, 3);
+        nood = ontdubbelSlots(nood);
+        // Door het ontdubbelen (en doordat eerdere klanten hun tijden al gereserveerd
+        // hebben) kan de kaart onder de drie zakken. Daimy wil drie ECHTE keuzes, dus
+        // vullen we aan met een verse zoekronde over de dubbele horizon; wat er dan
+        // nog steeds niet is, bestaat gewoon niet.
+        if (nood.length < 3) {
+          const extra = await zorgVoorDrieOpties(lead, duur, agenda, nood);
+          nood = ontdubbelSlots([...nood, ...extra]);
+        }
+        nood = nood.slice(0, 3);
         dash.leads.push({
           rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur, wachtDagen,
           status: 'wachtend', reden,
@@ -871,20 +880,36 @@ async function combiPas(wachtenden, agenda, regels, dash = null) {
  * kijken (dubbele horizon). Lukt ook dat niet, dan wordt er NIET verstuurd. */
 async function zorgVoorDrieOpties(lead, duur, agenda, huidigAanbod) {
   if (huidigAanbod.length >= 3) return huidigAanbod;
-  let beste = [];
-  for (const inm of INMETERS) {
-    try {
-      const sl = await zoekSlots({
-        agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
-        werkdagen: werkdagenVoor(inm.naam, 30),
-        startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
-        eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
-      });
-      beste.push(...sl.map((x) => ({ ...x, inmeter: inm.naam })));
-    } catch { /* inmeter zonder slots */ }
+  // Getrapte horizon (09-08): eerst 30 roosterdagen, en pas als het er dán nog geen
+  // drie zijn verder vooruit. De agenda's zitten nu tot half oktober vol en sinds we
+  // getoonde tijden per klant reserveren, houdt de laatste klant in de rij anders
+  // maar één keuze over — terwijl er verderop wel plek is.
+  for (const horizon of [30, 60]) {
+    let beste = [];
+    for (const inm of INMETERS) {
+      try {
+        const sl = await zoekSlots({
+          agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
+          werkdagen: werkdagenVoor(inm.naam, horizon),
+          startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
+          eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
+        });
+        beste.push(...sl.map((x) => ({ ...x, inmeter: inm.naam })));
+      } catch { /* inmeter zonder slots */ }
+    }
+    beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
+    let gevonden = kiesAanbod(beste, 3, { wachtDagen: 999 });
+    // Laatste redmiddel voor de dashboard-kaart: zitten de agenda's zo vol dat er
+    // binnen de omrij-grens maar één plek is (Rita van Schagen in Ter Aar, 09-08),
+    // vul dan aan met duurdere plekken. De winkel ziet de omrij-minuten op de knop
+    // staan en kan zelf beslissen; één keuze tonen terwijl er plek is, helpt niemand.
+    if (gevonden.length < 3) {
+      const ruim = kiesAanbod(beste, 3, { negeerGrens: true });
+      gevonden = ontdubbelSlots([...gevonden, ...ruim]).slice(0, 3);
+    }
+    if (gevonden.length >= 3 || horizon === 60) return gevonden;
   }
-  beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
-  return kiesAanbod(beste, 3, { wachtDagen: 999 });
+  return huidigAanbod;
 }
 
 /** Aanbod vastleggen in het register en direct naar de klant sturen (mail + WhatsApp). */

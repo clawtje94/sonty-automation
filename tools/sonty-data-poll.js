@@ -88,10 +88,14 @@ async function poll() {
     try {
       await poll();
     } catch (err) {
-      // Zelfde les als de gewone poller: niet blijven hangen op een netwerkfout,
-      // maar afsluiten zodat launchd (KeepAlive) vers opstart.
-      console.error('poll-fout:', err.message);
-      process.exit(1);
+      // Netwerkhikjes horen bij long-polling (Telegram verbreekt de verbinding na
+      // een tijdje). Daar hoefde nooit een herstart voor: de poller lag daardoor
+      // steeds even stil en berichten van Joris kwamen te laat binnen (08-08).
+      // Alleen bij een ECHTE fout afsluiten zodat launchd vers opstart.
+      const netwerk = /ECONNRESET|ETIMEDOUT|EAI_AGAIN|socket hang up|network|timeout/i.test(err.message || '');
+      console.error('poll-fout:', err.message, netwerk ? '(netwerkhikje, gewoon doorgaan)' : '(afsluiten voor herstart)');
+      if (!netwerk) process.exit(1);
+      await new Promise((r) => setTimeout(r, 5000));
     }
     await new Promise(r => setTimeout(r, POLL_INTERVAL));
   }

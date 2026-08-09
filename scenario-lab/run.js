@@ -22,6 +22,7 @@ const ONDERDELEN = [
   require('./onderdelen/planner-aanbod.js'),
   require('./onderdelen/planner-drukte.js'),
   require('./onderdelen/combi-dag.js'),
+  require('./onderdelen/avondrit.js'),
   require('./onderdelen/sheet-rij.js'),
   require('./onderdelen/mutatie-motor.js'),
 ];

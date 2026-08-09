@@ -18,9 +18,14 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const SYSTEEM = /sontymontage|@sonty\.nl$|no-?reply|webflow|postmaster|mailer-daemon/i;
 const STIL_NA_UREN = 4;
-// Telegram-overzicht staat UIT op verzoek van Daimy (08-08-2026). Aanzetten kan
-// met `TELEGRAM=1 node scripts/cron-aan-zet-watchdog.js` zonder code te wijzigen.
-const STUUR_TELEGRAM = process.env.TELEGRAM === '1';
+// MELDBELEID (09-08). De volledige lijst elk uur was ruis en ging er daarom af,
+// maar toen zag niemand meer dat Ebru Kilinc twee dagen op een bevestiging wachtte
+// terwijl ze allang "doe 12 oktober maar" had geappt. Nieuwe balans:
+//  - hoogstens ÉÉN samenvatting per dag (de ochtendronde), naar de data-bot;
+//  - alleen wie er echt toe doet: akkoord/klacht, of iemand die >24 uur wacht;
+//  - de volledige lijst blijft altijd in het logboek staan.
+const STUUR_TELEGRAM = process.env.TELEGRAM !== '0';
+const LANG_STIL_UREN = 24;
 const AKKOORD = /akkoord|offerte.{0,30}(goed|prima|doen)|gaan (ermee|ervoor)|bestelling.{0,20}plaats/i;
 const KLACHT = /klacht|kapot|defect|stuk\b|werkt niet|reageert niet|boos|teleurgesteld|on hold|annuleer/i;
 
@@ -115,9 +120,17 @@ async function actieveTickets() {
       (akkoordOfKlacht.length ? `, waarvan ${akkoordOfKlacht.length} akkoord/klacht` : '') +
       (aanZet[0] ? ` — langst stil: ${aanZet[0].naam} (${aanZet[0].stilUren}u)` : '')
   );
-  if (STUUR_TELEGRAM && aanZet.length && (veranderd || vasteRonde)) {
-    const regels = aanZet.slice(0, 15).map((x) => `${x.soort === 'vraag' ? '' : '❗'}${x.naam} (${x.stilUren}u stil, ${x.soort}): ${x.tekst}`);
-    await planningTelegram(`Wie is aan zet: ${aanZet.length} klant(en) wachten op ONS antwoord.\n` + regels.join('\n') + (aanZet.length > 15 ? `\n… en ${aanZet.length - 15} meer` : ''));
+  const belangrijk = aanZet.filter((x) => x.soort !== 'vraag' || x.stilUren >= LANG_STIL_UREN);
+  const vandaag = new Date().toISOString().slice(0, 10);
+  const alGemeldVandaag = state.laatsteMeldDag === vandaag;
+  if (STUUR_TELEGRAM && belangrijk.length && uur >= 9 && !alGemeldVandaag) {
+    const regels = belangrijk.slice(0, 12).map((x) => `${x.soort === 'vraag' ? '' : '❗'}${x.naam} (${x.stilUren}u stil${x.soort === 'vraag' ? '' : ', ' + x.soort}): ${x.tekst}`);
+    await planningTelegram(
+      `${belangrijk.length} klant(en) wachten al langer op ons antwoord:\n` + regels.join('\n')
+      + (belangrijk.length > 12 ? `\n… en ${belangrijk.length - 12} meer` : '')
+      + `\n\n(Eén keer per dag; korter wachtende vragen staan alleen in het logboek.)`
+    );
+    state.laatsteMeldDag = vandaag;
   }
   state.laatsteHash = hash;
   fs.writeFileSync(STATE_PAD, JSON.stringify(state));

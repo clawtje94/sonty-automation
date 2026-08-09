@@ -38,6 +38,13 @@ const MAX_EXTRA_RIJTIJD_MIN = 30;
 // op dag 4 (kalenderdagen, 1 dag marge op de belofte) krijgt de klant gewoon de
 // goedkoopste plekken — een klant kwijtraken kost altijd meer dan omrijden.
 const MAX_WACHT_DAGEN = 4;
+// AVONDRIT NA 15:00 (Daimy 09-08: "als opdrachten heel dicht bij de laatste opdracht
+// zijn of op de weg naar huis toe, dan mag je ze bij Sjoerd en Joey nog na 15:00
+// inplannen"). Bewust streng: het is overwerk, dus alleen als het praktisch geen
+// omweg is. De maat die we al hebben — heen + terug - direct — is precies "hoeveel
+// kost deze klus extra bovenop de rit die hij tóch al maakt naar huis".
+const AVOND_MAX_EXTRA_MIN = 15;   // meer omrijden dan dit is geen "onderweg" meer
+const AVOND_MAX_NA_MIN = 90;      // uiterlijk anderhalf uur na het einde van de dienst aankomen
 
 /**
  * @param {Object} opts
@@ -100,6 +107,40 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
       ...opDeDag,
       { adres: eindAdres || startAdres, start: dagEind, eind: dagEind, magazijn: true },
     ];
+
+    // AVONDRIT: aansluitend op de LAATSTE klus van de dag, richting huis/winkel.
+    // Alleen zinvol als er die dag al iets staat (anders is het geen aansluitende rit
+    // maar een losse avondrit) en als het nauwelijks omrijden kost.
+    if (opDeDag.length) {
+      const laatste = opDeDag[opDeDag.length - 1];
+      const thuis = eindAdres || startAdres;
+      if (laatste.adres && +laatste.eind >= +dagEind - 90 * MINUUT) {
+        try {
+          const heen = await reistijd(laatste.adres, adres, laatste.eind);
+          const aankomst = rondAf5(new Date(+laatste.eind + (heen.minuten + MARGE_MIN) * MINUUT));
+          const vertrek = new Date(+aankomst + duurMin * MINUUT);
+          const terug = await reistijd(adres, thuis, vertrek);
+          const direct = await reistijd(laatste.adres, thuis, laatste.eind);
+          const extra = heen.minuten + terug.minuten - direct.minuten;
+          const teLaat = +aankomst > +dagEind + AVOND_MAX_NA_MIN * MINUUT;
+          // Ligt de klus vóór het einde van de dienst? Dan pakt de gewone lus hem al.
+          const naDienst = +vertrek > +dagEind;
+          if (naDienst && !teLaat && extra <= AVOND_MAX_EXTRA_MIN) {
+            slots.push({
+              datum: dag.datum, aankomst, vertrek,
+              extraRijtijdMin: extra,
+              kostenBetrouwbaar: !agendaOnbetrouwbaar,
+              heenMin: heen.minuten, terugMin: terug.minuten, kmHeen: heen.km,
+              fileVertragingMin: heen.fileVertragingMin,
+              naVorige: laatste.klant || laatste.adres,
+              voorVolgende: 'naar huis',
+              ruimteMin: AVOND_MAX_NA_MIN,
+              naDienst: true, // dashboard/planner kunnen dit tonen: het is overwerk
+            });
+          }
+        } catch { /* adres niet routeerbaar: geen avondrit */ }
+      }
+    }
 
     for (let i = 0; i < punten.length - 1; i++) {
       const vorige = punten[i];
@@ -311,4 +352,4 @@ function waaromGeenAanbod(slots) {
   return `alle plekken kosten te veel omrijden (goedkoopste +${goedkoopste} min, grens is ${MAX_EXTRA_RIJTIJD_MIN}) — we wachten max ${MAX_WACHT_DAGEN} dagen op een klus in dezelfde hoek, daarna plannen we gewoon de goedkoopste plek`;
 }
 
-module.exports = { zoekSlots, kiesAanbod, kiesWinkelOpties, venster, waaromGeenAanbod, bezetteBlokken, rondAf5, MARGE_MIN, MAX_EXTRA_RIJTIJD_MIN, MAX_WACHT_DAGEN };
+module.exports = { zoekSlots, kiesAanbod, kiesWinkelOpties, venster, waaromGeenAanbod, bezetteBlokken, rondAf5, MARGE_MIN, MAX_EXTRA_RIJTIJD_MIN, MAX_WACHT_DAGEN, AVOND_MAX_EXTRA_MIN, AVOND_MAX_NA_MIN };

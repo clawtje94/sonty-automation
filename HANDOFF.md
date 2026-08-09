@@ -66,9 +66,12 @@
   `kiesWinkelOpties(slots, 5)` in slotzoeker.js — 5 gevarieerde opties, chronologisch,
   met labels `vroegste` en `minste rijtijd` (kunnen samenvallen). Omrij-grens filtert
   hier bewust NIET (winkel moet haast kunnen bedienen). Gebruikt door de reken-route
-  (verzoek-daemon, kijkt 30 dagen vooruit als er <5 gaten zijn) én door de
-  dashboard-kaarten van de planner. UI: gelabelde knoppen groen. Live geverifieerd
-  (Marco Klok 5 opties, iPhone 12, 0 overflow). Regressietests 28-29.
+  (verzoek-daemon, kijkt 30 dagen vooruit als er <5 gaten zijn). **ALLEEN DAAR**:
+  correctie Daimy 09-08 — de gewone dashboard-kaarten blijven op 3 tijden zoals ze
+  waren; 5 keuzes gelden uitsluitend voor een klant die de winkel zelf invult bij
+  "Klant net akkoord in de winkel?". UI: gelabelde knoppen groen. Live geverifieerd
+  (Marco Klok 5 opties via het reken-vak, overige kaarten 3; iPhone 12, 0 overflow).
+  Regressietests 28-29.
 - **"5 op grip invullen" UITGEZOCHT**: 3 waren allang klaar (Gripp-offerte bestond),
   alleen de RP-status bleef staan. Twee oorzaken: (1) cron las `?limit=200` van een
   backlog met 18.752 items → Q Tacken (25-07) en Wilte Zijlstra (21-07) werden nooit

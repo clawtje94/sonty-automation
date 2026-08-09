@@ -61,6 +61,31 @@
   Regressietest 23 = de echte Josua-casus. Bewijs: Marjolein 21 sep → 31 aug bovenaan,
   Matijn 15 okt → 21 sep.
 
+## STORING 09-08: UPSTASH-LIMIET BEREIKT (database plat, opgelost in code)
+- **Symptoom**: alles wat KV gebruikt gaf HTTP 500 (aanbod-API, dashboard-API,
+  mutatie-API); inmeet-verwerker exit 1; planner meldde "aanbod-register onbereikbaar,
+  kan dubbel aanbod niet uitsluiten" (= de veiligheidsstop DEED zijn werk).
+- **Oorzaak**: Upstash-limiet 500.000 requests/maand OP. Grootverbruiker was onze eigen
+  code: `GET /api/inmeet-mutatie?status=open` deed 1 smembers + N gets over ALLE
+  mutaties ooit, en de verzoek-daemon pollde dat elke 10 s (~440k calls/dag).
+- **GEFIXT (code, gedeployd)**:
+  1. `inmeetmutatie:open` set + `inmeetaanbod:actief` set — poll leest alleen lopende
+     items (in rust 1 request). Zelfherstellend: wat niet meer open/actief is valt eruit.
+     Eenmalige vulling via `?migreer=1` op beide routes (staat klaar in een wachter).
+  2. Verzoek-daemon pollt adaptief: 10 s zolang er werk is (5-min-venster), anders 60 s.
+  3. Reply-monitor: 1 request (`?actief=1`) i.p.v. 4 volledige lijsten per ronde.
+- **WACHT OP DAIMY**: Upstash-plan omzetten naar pay-as-you-go (~$10/mnd).
+  Database = `singular-feline-86557`, via vercel.com/daimy/sonty-website/stores →
+  Open in Upstash. Wachter draait: zodra KV 200 geeft worden beide migraties
+  uitgevoerd en verwerker + verzoek-daemon gekickstart.
+- **Stand keten tijdens storing (lokaal geverifieerd)**: 18 boekingen, 0 dubbelboekingen,
+  0 wachtende klantberichten. Manon (17 sep 09:00 Sjoerd) en Franken (31 aug 14:00)
+  zijn 07-08 's avonds nog automatisch geboekt na klantreactie.
+- **Ook gefixt**: databot-poller crashte op elke ECONNRESET (long-poll-hikje) → alleen
+  echte fouten sluiten nu af; aan-zet-watchdog stond volledig UIT (plist .disabled na
+  Daimy's "dit bericht hoef ik niet meer") → weer actief maar STIL (log only, Telegram
+  alleen met TELEGRAM=1).
+
 ## EIND VAN DE MIDDAG 07-08 (Daimy "wat gaat hier weer verkeerd, maak alles kloppend")
 - **DUBBEL-SLOT-BUG GEFIXT**: verwerkReken (snelle reken-route in de verzoek-daemon)
   riep voegAanbiedingenToe NIET aan → Manon, Franken en Marco kregen alle drie

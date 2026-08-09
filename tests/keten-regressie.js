@@ -173,6 +173,16 @@ test('spreiding: niet 3x hetzelfde dagdeel op dezelfde dag', () => {
   assert.strictEqual(new Set(sleutels).size, sleutels.length, 'zelfde dag+dagdeel dubbel aangeboden');
 });
 
+test('lege dag mag altijd geopend worden, ook door een verre klant (Daimy 09-08)', () => {
+  // Sjoerd had eind september hele lege dagen terwijl klanten wachtten: op een lege
+  // dag is er geen rit om op mee te liften, dus telt de hele reis als "extra" en viel
+  // iedereen buiten de omrij-grens.
+  const opener = { ...slotje('2026-09-28', 9, 52, true), dagOpener: true };
+  const duurGeenOpener = { ...slotje('2026-09-29', 9, 52, true), dagOpener: false };
+  assert.strictEqual(kiesAanbod([opener], 3, { wachtDagen: 0 }).length, 1, 'dagopener moet blijven staan');
+  assert.strictEqual(kiesAanbod([duurGeenOpener], 3, { wachtDagen: 0 }).length, 0, 'dure invoeging op een volle dag blijft wél weggefilterd');
+});
+
 console.log('— dashboard-kaart: geen dubbele of botsende tijden (Daimy 09-08) —');
 test('ontdubbelen op tijd+inmeter, ook bij verschillende objecten', () => {
   // zorgVoorDrieOpties haalt slots opnieuw op: hetzelfde moment komt terug als een

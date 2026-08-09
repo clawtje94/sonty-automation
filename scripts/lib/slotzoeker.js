@@ -173,6 +173,14 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
       const nodigMin = heenDagMin + duurMin + terugDagMin + extraBuffer;
       if (nodigMin > ruimteMin) continue;
 
+      // DAG OPENEN (Daimy 09-08: "die dagen moeten we vol krijgen"). Op een dag
+      // zonder klussen is er geen rit om op mee te liften: `direct` is dan 0, dus de
+      // hele heen- en terugreis telt als "extra" en élke klant lijkt te duur. Zo bleef
+      // Sjoerd eind september hele dagen leeg staan terwijl er klanten wachtten.
+      // Een dag openen is geen verspilling maar de voorwaarde om te kunnen werken;
+      // de volgende klanten clusteren er daarna omheen.
+      const dagOpener = opDeDag.length === 0;
+
       const aankomst = rondAf5(new Date(+vorige.eind + heenDagMin * MINUUT));
       const vertrek = new Date(+aankomst + duurMin * MINUUT);
       // Door het afronden schuift de aankomst tot 4 min op; check dat het dan nog past.
@@ -202,6 +210,7 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
           naVorige: vorige.magazijn ? 'magazijn' : (vorige.klant || vorige.adres),
           voorVolgende: volgende.magazijn ? 'magazijn' : (volgende.klant || volgende.adres),
           ruimteMin: Math.round(ruimteMin),
+          dagOpener,
         });
       }
 
@@ -221,6 +230,7 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
         naVorige: vorige.magazijn ? 'magazijn' : (vorige.klant || vorige.adres),
         voorVolgende: volgende.magazijn ? 'magazijn' : (volgende.klant || volgende.adres),
         ruimteMin: Math.round(ruimteMin),
+        dagOpener,
       });
     }
   }
@@ -249,7 +259,9 @@ function kiesAanbod(slots, aantal = 3, { wachtDagen = 0, deadlineDagen = MAX_WAC
   const betrouwbaar = !slots.some((s) => s.kostenBetrouwbaar === false);
   slots = [...slots].sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
   if (betrouwbaar) {
-    const binnenGrens = slots.filter((s) => s.extraRijtijdMin <= maxOmrijdenMin);
+    // Een dag die nog helemaal leeg is mag altijd geopend worden: daar valt niets te
+    // clusteren, en een lege dag kost meer dan een omweg (Daimy 09-08).
+    const binnenGrens = slots.filter((s) => s.extraRijtijdMin <= maxOmrijdenMin || s.dagOpener);
     if (binnenGrens.length) {
       // VROEGSTE DATUM WINT binnen de omrij-grens (Daimy 07-08 akkoord): de
       // 100-dagen-sync zette verre ankers neer waardoor "15 okt +9 min" won van

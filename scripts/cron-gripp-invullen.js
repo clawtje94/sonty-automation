@@ -362,14 +362,20 @@ async function main() {
         const o = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'offerte-keuze-override.json'), 'utf8'));
         override = o[item.id] || o[item.item_subject?.id] || null;
       } catch { /* geen overrides ingesteld */ }
-      const gekozenDoc = override
-        ? fullDocs.find(d => String(d.info?.quotationNumber) === String(override) || d.documentId === override || String(d.rpDocNumber) === String(override))
-        : null;
-      if (override && !gekozenDoc) console.log(`  LET OP: override ${override} hoort niet bij deze klant — gewone regels gelden`);
-      if (gekozenDoc) {
-        console.log(`  Offerteversie door kantoor gekozen: ${override}`);
+      // De keuze mag één nummer zijn of een LIJST: een klant kan twee offertes willen
+      // (Daimy 09-08 over B Damsteeg: "daar moeten beide offertes in Gripp"). Dan
+      // maken we ze allebei aan, net als bij meerdere ondertekende offertes.
+      const gewenst = Array.isArray(override) ? override : (override ? [override] : []);
+      const gekozenDocs = gewenst
+        .map((nr) => fullDocs.find(d => String(d.info?.quotationNumber) === String(nr) || d.documentId === nr || String(d.rpDocNumber) === String(nr)))
+        .filter(Boolean);
+      const nietGevonden = gewenst.filter((nr) => !fullDocs.some(d => String(d.info?.quotationNumber) === String(nr) || d.documentId === nr || String(d.rpDocNumber) === String(nr)));
+      if (nietGevonden.length) console.log(`  LET OP: ${nietGevonden.join(', ')} hoort niet bij deze klant — genegeerd`);
+      const gekozenDoc = gekozenDocs[0] || null;
+      if (gekozenDocs.length) {
+        console.log(`  Offerteversie(s) door kantoor gekozen: ${gekozenDocs.map(d => d.info?.quotationNumber || d.rpDocNumber).join(' + ')}`);
         fullDocs.length = 0;
-        fullDocs.push(gekozenDoc);
+        fullDocs.push(...gekozenDocs);
       }
       // Meerdere versies zonder één getekende: NIET gokken welke geldt — de klant
       // moet er zelf één tekenen (Daimy 05-08, geval Wilco Vendrig: SENT 11k naast
@@ -389,7 +395,10 @@ async function main() {
         failed++;
         continue;
       }
-      const docsToProcess = acceptedDocs.length > 0 ? acceptedDocs : [fullDocs[0]];
+      // Kiest het kantoor expliciet één of meer versies, dan gaan die ALLEMAAL door
+      // (Damsteeg 09-08 wil beide offertes). Anders: alle getekende, of anders de beste.
+      const docsToProcess = gekozenDocs.length ? gekozenDocs
+        : (acceptedDocs.length > 0 ? acceptedDocs : [fullDocs[0]]);
       console.log('  Te verwerken: ' + docsToProcess.map(d => '#' + d.info.quotationNumber + ' [' + d.status + ']').join(', ') + ' (van ' + fullDocs.length + ' versies)');
 
       // Bediening type uit lead description

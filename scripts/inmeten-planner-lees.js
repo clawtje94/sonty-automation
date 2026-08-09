@@ -106,8 +106,11 @@ async function leesOfferte(item) {
     const geaccepteerd = lijst.filter((d) => (d.quotationStatus || d.documentStatus) === 'ACCEPTED')
       .sort((a, b) => (b.quotationCreationTimestamp || 0) - (a.quotationCreationTimestamp || 0));
     let keuze = null;
-    const handmatig = override
-      ? lijst.find((d) => String(d.quotationNumber) === String(override) || d.documentId === override)
+    // Eén nummer of een lijst (klant kan twee offertes willen — Daimy 09-08, Damsteeg).
+    // Voor de planner telt de eerste: die bepaalt de producten en dus de inmeetduur.
+    const gewenst = Array.isArray(override) ? override : (override ? [override] : []);
+    const handmatig = gewenst.length
+      ? lijst.find((d) => gewenst.some((nr) => String(d.quotationNumber) === String(nr) || d.documentId === nr))
       : null;
     if (handmatig) {
       console.log(`  (offerteversie handmatig gekozen door kantoor: ${override})`);

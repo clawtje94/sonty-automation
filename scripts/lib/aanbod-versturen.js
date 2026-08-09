@@ -49,8 +49,22 @@ function verWegRegel(ver) {
     : '';
 }
 
-function berichtTekst(voornaam, url, duurMin, geldigUren = 24, ver = false) {
-  return `Hoi ${voornaam}, goed nieuws: we kunnen bij je langskomen om in te meten (duurt ongeveer ${duurMin} minuten).${verWegRegel(ver)} Kies hier de tijd die jou het beste uitkomt:\n\n${url}\n\nDe tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, stuur dan gewoon een berichtje terug.\n\nGroetjes, Nanny van Sonty`;
+/** Ligt het voorgestelde moment ver weg? Dan is "goed nieuws" de verkeerde toon
+ *  (Daimy 09-08, geval Rita van Schagen: haar was 2-3 weken beloofd, ze kreeg een
+ *  moment 6 weken later te horen als "goed nieuws" en reageerde terecht boos).
+ *  Vanaf drie weken benoemen we het eerlijk in plaats van het te verkopen. */
+function opening(voornaam, slots) {
+  const eerste = slots?.[0]?.aankomst ? Date.parse(slots[0].aankomst) : null;
+  const wekenWeg = eerste ? (eerste - Date.now()) / (7 * 86400000) : 0;
+  if (wekenWeg >= 3) {
+    return `Hoi ${voornaam}, ik ben eerlijk: het is drukker dan we zouden willen (bouwvak en vakanties), `
+      + `dus dit is het eerste moment dat ik je kan aanbieden om in te meten`;
+  }
+  return `Hoi ${voornaam}, goed nieuws: we kunnen bij je langskomen om in te meten`;
+}
+
+function berichtTekst(voornaam, url, duurMin, geldigUren = 24, ver = false, slots = null) {
+  return `${opening(voornaam, slots)} (duurt ongeveer ${duurMin} minuten).${verWegRegel(ver)} Kies hier de tijd die jou het beste uitkomt:\n\n${url}\n\nDe tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, stuur dan gewoon een berichtje terug.\n\nGroetjes, Nanny van Sonty`;
 }
 
 // Goedgekeurde template "inmeetafspraak_kiezen" (id 243999): voor klanten buiten het
@@ -151,7 +165,7 @@ async function stuurWhatsApp(aanbod, url) {
     const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
     const r = await tFetch(`/tickets/${ticket.id}/messages`, {
       method: 'POST',
-      body: JSON.stringify({ message: berichtTekst(voornaam, url, aanbod.duurMin, aanbod.geldigUren || 24, aanbod.ver === true), type: 'OUTBOUND' }),
+      body: JSON.stringify({ message: berichtTekst(voornaam, url, aanbod.duurMin, aanbod.geldigUren || 24, aanbod.ver === true, aanbod.slots), type: 'OUTBOUND' }),
     });
     if (r.ok) return { ok: true, ticket: ticket.id, via: 'vrij bericht (template: ' + viaTemplate.reden + ')' };
     return { ok: false, reden: `Trengo ${r.status} (template: ${viaTemplate.reden})`, ticket: ticket.id };

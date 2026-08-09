@@ -728,6 +728,24 @@ async function main() {
   // waardoor de rest er in dezelfde run omheen valt.
   await combiPas(wachtenden, agenda, regels, dash);
 
+  // ACTUELE WACHTTIJD voor de klantenservice (Daimy 09-08, geval Rita van Schagen):
+  // de bot beloofde standaard "2 tot 3 weken" terwijl de eerste plek zes weken verder
+  // lag. Hier schrijven we de eerstvolgende plek weg die we vandaag zouden aanbieden,
+  // zodat de bot de waarheid vertelt in plaats van een vast getal.
+  try {
+    const vroegsteAankomsten = dash.leads
+      .flatMap((l) => (l.top || []).map((t) => t.aankomst))
+      .filter(Boolean)
+      .sort();
+    if (vroegsteAankomsten.length) {
+      fs.writeFileSync(path.join(__dirname, '..', 'data', 'actuele-wachttijd.json'), JSON.stringify({
+        vroegsteDatum: vroegsteAankomsten[0],
+        bijgewerkt: new Date().toISOString(),
+        bron: 'inmeet-planner: vroegste tijd die vandaag aan een wachtende klant getoond wordt',
+      }, null, 1));
+    }
+  } catch (e) { console.log('wachttijd wegschrijven mislukt: ' + e.message); }
+
   // dashboard vullen: komende boekingen + overzicht naar de site
   try {
     const { laadBoekingen } = require('./lib/inmeet-mutatie.js');

@@ -77,7 +77,7 @@ const ROL = `Je bent Sunny van Sonty (zonwering & raamdecoratie, Rijswijk). "Sun
   stuur je een inmeter op pad naar iemand die geen idee heeft van de prijs, en dat is precies
   waar de 75-euroregel wringt. Enige uitzonderingen: service/reparatie, of een klant die
   expliciet zegt geen prijsindicatie te willen.
-- Prijsindicatie (vrijblijvend) → klant akkoord op indicatie → planning belt binnen 5 werkdagen → inmeten (nu doorgaans binnen 2-3 weken, in het hoogseizoen langer) → definitieve offerte → 40% aanbetaling → levering + montage 8-10 weken na aanbetaling → 60% na montage.
+- Prijsindicatie (vrijblijvend) → klant akkoord op indicatie → planning belt binnen 5 werkdagen → inmeten (ACTUELE wachttijd: zie het blok "Hoe snel kunnen we inmeten" — noem NOOIT een vast aantal weken uit je hoofd) → definitieve offerte → 40% aanbetaling → levering + montage 8-10 weken na aanbetaling → 60% na montage.
 - INMEETAFSPRAAK PLANNEN: klanten kunnen dit NOOIT zelf. Geef je akkoord door via inmeet_afspraak_voorstellen (het dossier gaat dan naar "Inmeten inplannen"), en zeg: "de planning neemt binnen 5 werkdagen contact met je op om de afspraak te maken". Stuur NOOIT een boekings-/agendalink voor inmeten.
 - KLANT NOEMT ZELF EEN DATUM/TIJD (harde regel, Daimy 2026-07-26). Zegt de klant "maandag 11:00 kan" of "graag deze week", dan is "de planning neemt binnen 5 werkdagen contact op" een fout antwoord: die 5 werkdagen kunnen ná het door de klant genoemde moment vallen, en dan wacht hij op iets wat al voorbij is. Doe dan drie dingen: (1) zeg eerlijk dat je zijn voorkeur niet zélf kunt vastzetten, (2) geef die voorkeur mee in de notitie van inmeet_afspraak_voorstellen met de datum letterlijk erin en de opmerking dat het moment KRAP is, en (3) zeg tegen de klant wanneer hij uiterlijk iets hoort, gerelateerd aan zijn eigen datum ("ik zorg dat de planning je nog vandaag/morgenvroeg belt, zodat maandag 11:00 nog kan"). Beloof nooit dat het genoemde moment lukt. Ging fout bij Oksana (ticket 968953435): zij stelde maandag 11:00 voor, kreeg "binnen 5 werkdagen" en niemand bevestigde iets.
 - BEGIN NOOIT KAAL MET DE PROCES-REGEL (Daimy 2026-07-26, ging fout bij Jeroen Lambalgen, ticket 967892593). Een klant die een nette vraag stelt krijgt eerst een begroeting met zijn naam en een antwoord op zijn eigen vraag, en pas daarna het proces. Jeroen vroeg of een chemisch anker kon in een mandelige muur en of daar kosten aan zaten; hij kreeg alleen "De planning neemt binnen 5 werkdagen contact met je op" en geen woord over zijn vraag. Kun je zijn vraag niet hard beantwoorden, zeg dán dat de inmeter dat ter plekke beoordeelt — maar benoem de vraag.
@@ -486,12 +486,45 @@ function leerpunten() {
   } catch { return ''; }
 }
 
+
+/** ACTUELE INMEET-WACHTTIJD (Daimy 09-08, geval Rita van Schagen).
+ * De bot beloofde standaard "2 tot 3 weken" terwijl de eerstvolgende plek zes weken
+ * verderop lag. Rita kreeg dat aanbod als "goed nieuws" en reageerde terecht boos:
+ * "van 3 naar 6 weken vind ik wel veel, ik had het op prijs gesteld dat je dit
+ * eerlijk zou zeggen." Daarom leest de bot nu de ECHTE eerstvolgende plek uit de
+ * planner (data/actuele-wachttijd.json, elke planner-ronde bijgewerkt). */
+function wachttijdBlok() {
+  let info = null;
+  try {
+    info = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', '..', 'data', 'actuele-wachttijd.json'), 'utf8'));
+  } catch { /* nog niet berekend */ }
+  if (!info?.vroegsteDatum) {
+    return '# Hoe snel kunnen we inmeten\n'
+      + '- De actuele wachttijd is nu niet bekend. Noem dan GEEN aantal weken. Zeg: "de planning '
+      + 'neemt binnen 5 werkdagen contact op met de eerste mogelijkheden" en beloof verder niets.';
+  }
+  const dagen = Math.max(0, Math.round((Date.parse(info.vroegsteDatum) - Date.now()) / 86400000));
+  const weken = Math.max(1, Math.round(dagen / 7));
+  const datum = new Date(info.vroegsteDatum).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long' });
+  return '# Hoe snel kunnen we inmeten (ACTUEEL — dit is de waarheid, gebruik dit)\n'
+    + `- Eerstvolgende plek in de agenda: ${datum}, dat is ongeveer ${weken} ${weken === 1 ? 'week' : 'weken'}.\n`
+    + '- Noem dit eerlijk, ook als het lang is. NOOIT een korter getal uit je hoofd noemen: een klant die\n'
+    + '  "2 tot 3 weken" hoort en daarna zes weken moet wachten, voelt zich terecht bedonderd.\n'
+    + '- Is het lang, benoem dan meteen de reden (bouwvak, vakantie van adviseurs, drukte) en bied aan om\n'
+    + '  hem op de lijst te zetten voor als er eerder iets vrijkomt. Doe die belofte alleen als je hem ook\n'
+    + '  doorgeeft aan de planning.\n'
+    + '- Klant dichtbij een bestaande route kan sneller aan de beurt zijn dan dit gemiddelde; de planning\n'
+    + '  rekent dat per adres uit.';
+}
+
 function buildSystemPrompt(opts = {}) {
   const blokken = [
     // 1-uurs cache i.p.v. 5 min: gesprekken lopen door de avond heen; reads kosten 0,1×.
     // Elke cache-hit verlengt de TTL, dus tijdens een actieve avond blijft hij warm.
     { type: 'text', text: ROL + '\n\n' + PRIJSBOEK_REGELS + PRIJSBOEK + BOEKEN_BLOK + '\n\n# KENNISBANK (achtergrond)\n' + KENNISBANK + leerpunten(), cache_control: { type: 'ephemeral', ttl: '1h' } },
   ];
+  // Actuele wachttijd apart (niet gecacht): dit getal verandert met de agenda mee.
+  blokken.push({ type: 'text', text: wachttijdBlok() });
   if (opts.sonny) blokken.push({ type: 'text', text: sonnyBlok(!!opts.introNodig) });
   // Kanaal-bewuste aflevering: bij e-mail belooft en levert Sunny nooit "op WhatsApp".
   if (opts.kanaal === 'EMAIL') {

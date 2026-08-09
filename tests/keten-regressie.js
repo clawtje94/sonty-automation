@@ -173,6 +173,38 @@ test('spreiding: niet 3x hetzelfde dagdeel op dezelfde dag', () => {
   assert.strictEqual(new Set(sleutels).size, sleutels.length, 'zelfde dag+dagdeel dubbel aangeboden');
 });
 
+console.log('— winkel-keuzelijst (Daimy 09-08) —');
+test('kiesWinkelOpties: 5 gevarieerde opties met labels vroegste en minste rijtijd', () => {
+  const { kiesWinkelOpties } = require('../scripts/lib/slotzoeker');
+  const slots = [
+    slotje('2026-09-01', 9, 55, true),   // vroegste, maar duur
+    slotje('2026-09-01', 13, 60, true),  // zelfde dag, middag
+    slotje('2026-09-08', 10, 5, true),   // goedkoopst
+    slotje('2026-09-15', 9, 20, true),
+    slotje('2026-09-22', 11, 25, true),
+    slotje('2026-09-29', 9, 30, true),
+  ];
+  const opties = kiesWinkelOpties(slots, 5);
+  assert.strictEqual(opties.length, 5, 'winkel wil 5 keuzes zien');
+  // chronologisch, zodat de winkel de lijst kan voorlezen
+  for (let i = 1; i < opties.length; i++) {
+    assert.ok(+opties[i].aankomst >= +opties[i - 1].aankomst, 'moet op tijd oplopen');
+  }
+  const vroegste = opties.find((o) => /vroegste/.test(o.label || ''));
+  const goedkoopste = opties.find((o) => /minste rijtijd/.test(o.label || ''));
+  assert.strictEqual(vroegste.datum, '2026-09-01', 'vroegste moet gelabeld zijn');
+  assert.strictEqual(goedkoopste.extraRijtijdMin, 5, 'goedkoopste moet gelabeld zijn');
+  // de dure-maar-snelle plek mag NIET wegvallen (winkel moet haast kunnen bedienen)
+  assert.ok(opties.some((o) => o.extraRijtijdMin === 55), 'vroegste blijft zichtbaar ook al is hij duur');
+});
+
+test('kiesWinkelOpties: één slot dat zowel vroegste als goedkoopste is krijgt beide labels', () => {
+  const { kiesWinkelOpties } = require('../scripts/lib/slotzoeker');
+  const opties = kiesWinkelOpties([slotje('2026-09-01', 9, 5, true), slotje('2026-09-08', 9, 40, true)], 5);
+  assert.strictEqual(opties[0].label, 'vroegste + minste rijtijd');
+  assert.strictEqual(opties.length, 2, 'niet meer opties verzinnen dan er gaten zijn');
+});
+
 console.log('— adres uit offerte-PDF (geval Franken/Kenny 07-08) —');
 test('adresUitTekst pakt het klant-adres en slaat Sonty zelf over', () => {
   const { adresUitTekst } = require('../scripts/lib/offerte-adres.js');
@@ -195,16 +227,20 @@ test('adres-correctie in de lead blokkeert het vangnet (Franken: Houtrijk vs Haa
 console.log('— annuleringslijst (geval Rene 07-08) —');
 test('kandidatenVoor: alleen wie echt eerder geholpen is, langst wachtend eerst', () => {
   const { kandidatenVoor } = require('../scripts/lib/eerder-willen.js');
-  const morgen = new Date(Date.now() + 86400000).toISOString();
+  // Relatief aan vandaag: vaste datums lieten deze test verlopen zodra de dag
+  // voorbij was (gemerkt 09-08) — een test die op de kalender stukgaat verbergt
+  // echte fouten.
+  const dagen = (n) => new Date(Date.now() + n * 86400000).toISOString();
+  const morgen = dagen(1);
   const lijst = {
-    rene: { naam: 'Rene', wilEerderDan: '2026-09-17T07:55:00Z', sinds: '2026-08-07T10:00:00Z' },
-    eerder: { naam: 'Al vroeg', wilEerderDan: '2026-08-10T08:00:00Z', sinds: '2026-08-01T10:00:00Z' },
+    rene: { naam: 'Rene', wilEerderDan: dagen(40), sinds: '2026-08-07T10:00:00Z' },
+    eerder: { naam: 'Al vroeg', wilEerderDan: dagen(10), sinds: '2026-08-01T10:00:00Z' },
   };
-  // plek morgen: beide geholpen (morgen < 10 aug < 17 sep), langst wachtend eerst
+  // plek morgen: beide geholpen (morgen < dag 10 < dag 40), langst wachtend eerst
   const k1 = kandidatenVoor(morgen, lijst);
   assert.deepStrictEqual(k1.map((k) => k.naam), ['Al vroeg', 'Rene']);
-  // plek op 1 sep: alleen Rene (Al vroeg staat al op 10 aug, vroeger dan 1 sep)
-  const k2 = kandidatenVoor('2026-09-01T09:00:00Z', lijst);
+  // plek over 20 dagen: alleen Rene (Al vroeg staat al op dag 10, dus eerder)
+  const k2 = kandidatenVoor(dagen(20), lijst);
   assert.deepStrictEqual(k2.map((k) => k.naam), ['Rene']);
   // plek in het verleden of ongeldig: niemand
   assert.deepStrictEqual(kandidatenVoor('2020-01-01T09:00:00Z', lijst), []);

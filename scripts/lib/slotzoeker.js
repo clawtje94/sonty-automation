@@ -240,6 +240,60 @@ function kiesAanbod(slots, aantal = 3, { wachtDagen = 0, deadlineDagen = MAX_WAC
   return gekozen;
 }
 
+
+/**
+ * WINKEL-KEUZES (Daimy 09-08: "als iemand in de winkel staat wil ik gewoon alle
+ * beschikbare tijden zien, zeg 5, met de snelste maar ook de efficiëntste").
+ *
+ * Aan de balie beslist de klant mee, dus daar hoort een échte keuzelijst bij in
+ * plaats van het ene "beste" moment dat we naar klanten sturen. Deze functie kiest
+ * een gevarieerde set en zegt er per optie bij wáárom hij in de lijst staat:
+ *  - 'vroegste'      : eerste moment dat kan (ongeacht omrijden)
+ *  - 'minste rijtijd': goedkoopste rit (past bij een volle route)
+ *  - rest            : spreiding over andere dagen/dagdelen, oplopend in datum
+ *
+ * Eén slot kan beide labels verdienen; dan staat dat er ook zo bij. Zonder labels
+ * zou de winkel moeten raden wat het verschil is tussen vijf regels met tijden.
+ */
+function kiesWinkelOpties(slots, aantal = 5) {
+  if (!slots.length) return [];
+  const opDatum = [...slots].sort((a, b) => +a.aankomst - +b.aankomst || a.extraRijtijdMin - b.extraRijtijdMin);
+  const opKosten = [...slots].sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || +a.aankomst - +b.aankomst);
+  const vroegste = opDatum[0];
+  const goedkoopste = opKosten[0];
+
+  const gekozen = [];
+  const gebruikt = new Set(); // dag+dagdeel: twee keer dezelfde ochtend is geen keuze
+  const sleutelVan = (s) => `${s.datum}-${s.aankomst.getHours() < 12 ? 'o' : 'm'}`;
+  const voegToe = (s) => {
+    if (!s || gekozen.includes(s)) return;
+    gekozen.push(s);
+    gebruikt.add(sleutelVan(s));
+  };
+  voegToe(vroegste);
+  voegToe(goedkoopste);
+  // aanvullen op datum, maar gespreid: nooit twee keer hetzelfde dagdeel
+  for (const s of opDatum) {
+    if (gekozen.length >= aantal) break;
+    if (gebruikt.has(sleutelVan(s))) continue;
+    voegToe(s);
+  }
+  // nog niet vol (weinig gaten): dan mag spreiding los, anders toont de winkel er 2
+  for (const s of opDatum) {
+    if (gekozen.length >= aantal) break;
+    voegToe(s);
+  }
+
+  return gekozen
+    .sort((a, b) => +a.aankomst - +b.aankomst)
+    .map((s) => {
+      const labels = [];
+      if (s === vroegste) labels.push('vroegste');
+      if (s === goedkoopste) labels.push('minste rijtijd');
+      return { ...s, label: labels.join(' + ') || null };
+    });
+}
+
 /** Aankomstvenster van 30 minuten, zoals afgesproken met de klant. */
 function venster(slot) {
   const tot = new Date(+slot.aankomst + 30 * MINUUT);
@@ -257,4 +311,4 @@ function waaromGeenAanbod(slots) {
   return `alle plekken kosten te veel omrijden (goedkoopste +${goedkoopste} min, grens is ${MAX_EXTRA_RIJTIJD_MIN}) — we wachten max ${MAX_WACHT_DAGEN} dagen op een klus in dezelfde hoek, daarna plannen we gewoon de goedkoopste plek`;
 }
 
-module.exports = { zoekSlots, kiesAanbod, venster, waaromGeenAanbod, bezetteBlokken, rondAf5, MARGE_MIN, MAX_EXTRA_RIJTIJD_MIN, MAX_WACHT_DAGEN };
+module.exports = { zoekSlots, kiesAanbod, kiesWinkelOpties, venster, waaromGeenAanbod, bezetteBlokken, rondAf5, MARGE_MIN, MAX_EXTRA_RIJTIJD_MIN, MAX_WACHT_DAGEN };

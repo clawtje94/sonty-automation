@@ -30,7 +30,7 @@ async function api(pad, opties = {}) {
 /** 'reken': verse akkoord-klant (staat net op Inmeten inplannen) direct tijden geven
  * en als kaart in het dashboard zetten — zonder op de 30-min-ronde te wachten. */
 async function verwerkReken(m) {
-  const { zoekSlots, kiesAanbod, venster } = require('./lib/slotzoeker.js');
+  const { zoekSlots, kiesWinkelOpties, venster } = require('./lib/slotzoeker.js');
   // API-zuinig zoeken: eerst 1 pagina + de bekende leads uit de planner-state;
   // alleen als de naam daar niet tussen zit een volledige scan (zeldzaam balie-geval).
   const n = String(m.naam || '').toLowerCase();
@@ -82,7 +82,9 @@ async function verwerkReken(m) {
     beste.push(...sl.map((x) => ({ ...x, inmeter: naam })));
   }
   beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
-  const aanbod = kiesAanbod(beste, 3, { wachtDagen: 999 });
+  // Winkelklant staat aan de balie: geef een echte keuzelijst (5 opties met labels
+  // vroegste / minste rijtijd) in plaats van het ene "beste" moment — Daimy 09-08.
+  const aanbod = kiesWinkelOpties(beste, 5);
   if (!aanbod.length) return { afgewezen: true, uitkomst: 'geen enkel gat beschikbaar' };
   // kaart als los reken-resultaat naar het dashboard (eigen sleutel, kan niet
   // overschreven worden door de 30-min-ronde — race gezien 06-08)
@@ -90,7 +92,7 @@ async function verwerkReken(m) {
     rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, duurMin: duur, wachtDagen: 0,
     status: 'aanbod-mogelijk',
     producten: lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ').slice(0, 90),
-    top: aanbod.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin })),
+    top: aanbod.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin, label: x.label || undefined })),
   } }) });
   return { afgewezen: false, uitkomst: `${aanbod.length} tijden berekend, staan in het dashboard` };
 }

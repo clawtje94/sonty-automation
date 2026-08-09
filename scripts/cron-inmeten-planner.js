@@ -10,7 +10,7 @@
 // minuten uit. Zie docs/keten-ontwerp.md.
 const fs = require('fs');
 const path = require('path');
-const { zoekSlots, kiesAanbod, kiesWinkelOpties, venster, waaromGeenAanbod } = require('./lib/slotzoeker');
+const { zoekSlots, kiesAanbod, venster, waaromGeenAanbod } = require('./lib/slotzoeker');
 const { schatDuur } = require('./lib/inmeetduur');
 
 const RP_API_KEY = 'reuzenpanda_cpat_WMD2KmDRune53bj7.d0_ls8loPpAjb2TrSNOS_Xd_QLdxHq1xwOC9pyyJado';
@@ -652,15 +652,14 @@ async function main() {
         // óók wachtende klanten krijgen hun best beschikbare 3 tijden op de kaart
         // (mét omrij-minuten): de bot wacht zelf op een buurklus, maar de winkel
         // moet altijd kunnen handelen (Daimy 06-08)
-        // WINKEL-KEUZELIJST (Daimy 09-08): de winkel ziet 5 opties met labels
-        // (vroegste / minste rijtijd), zodat ze aan de balie samen met de klant
-        // kunnen kiezen. De omrij-grens filtert hier bewust NIET: de winkel moet
-        // ook de snelle-maar-duurdere plek kunnen pakken als de klant haast heeft.
-        let nood = kiesWinkelOpties(beste, 5);
-        if (nood.length < 5) {
-          // weinig gaten binnen de normale horizon: verder vooruit kijken
-          const extra = await zoekVerderVooruit(lead, duur, agenda);
-          if (extra.length) nood = kiesWinkelOpties([...beste, ...extra], 5);
+        let nood = kiesAanbod(beste, 3, { wachtDagen: 999 });
+        if (nood.length < 3) nood = await zorgVoorDrieOpties(lead, duur, agenda, nood);
+        // De absoluut vroegste plek (omrij-grens genegeerd) hoort op de kaart als hij
+        // fors eerder is — de winkel moet "klant wil eerder" direct kunnen bedienen
+        // (geval Rene 07-08: die plek was onzichtbaar geworden door de datumregel).
+        const vroegste = kiesAanbod(beste, 1, { negeerGrens: true })[0];
+        if (vroegste && nood[0] && +vroegste.aankomst < +nood[0].aankomst - 7 * 86400000) {
+          nood = [vroegste, ...nood.filter((s) => s !== vroegste)].slice(0, 3);
         }
         dash.leads.push({
           rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur, wachtDagen,
@@ -675,10 +674,7 @@ async function main() {
       console.log(`    ${s.inmeter}: ${s.datum} ${venster(s)}  +${s.extraRijtijdMin} min rijtijd (na ${s.naVorige.slice(0, 24)})`);
     }
     regels.push(`${lead.naam} (${lead.plaats}, ${duur} min): ${aanbod.map((s) => `${s.inmeter} ${s.datum.slice(5)} ${venster(s)} +${s.extraRijtijdMin}min`).join(' | ')}`);
-    // Is er nog NIETS naar de klant gestuurd, dan hoort er een winkel-keuzelijst op
-    // de kaart (5 opties, gelabeld). Is het aanbod wél verstuurd, dan toont de kaart
-    // exact wat de klant kreeg — anders klikt de winkel iets anders dan de klant ziet.
-    const kaartOpties = LIVE ? aanbod : kiesWinkelOpties(beste, 5);
+    const kaartOpties = aanbod;
     dash.leads.push({
       rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur, wachtDagen,
       status: LIVE ? 'aanbod-verstuurd' : 'aanbod-mogelijk',
@@ -844,24 +840,6 @@ async function combiPas(wachtenden, agenda, regels, dash = null) {
       }
     }
   }
-}
-
-/** Ruwe slots over een dubbele horizon — voor de winkel-keuzelijst als er binnen de
- * normale horizon te weinig gaten zijn. */
-async function zoekVerderVooruit(lead, duur, agenda) {
-  const alles = [];
-  for (const inm of INMETERS) {
-    try {
-      const sl = await zoekSlots({
-        agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
-        werkdagen: werkdagenVoor(inm.naam, 30),
-        startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
-        eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
-      });
-      alles.push(...sl.map((x) => ({ ...x, inmeter: inm.naam })));
-    } catch { /* inmeter zonder slots */ }
-  }
-  return alles;
 }
 
 /** Minimaal 3 tijden garanderen (Daimy 06-08: "stuur je dan ook altijd 3 opties?" —

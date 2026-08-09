@@ -930,6 +930,27 @@ async function zorgVoorDrieOpties(lead, duur, agenda, huidigAanbod) {
   return huidigAanbod;
 }
 
+/** Vlak vóór verzending nog één keer checken of de tijden echt vrij zijn.
+ * Tussen het ophalen van de agenda (duurt minuten door de rate limits) en het
+ * daadwerkelijk versturen kan een ander verzoek dezelfde plek pakken. Zo kregen
+ * Rick van Nieuwkerk (15:15) en Katuscha Tellegen (15:20) op 09-08 allebei
+ * maandagmiddag bij Joey aangeboden, terwijl één inmeting 20 minuten duurt.
+ * Deze check kost één API-call en voorkomt dat twee klanten om dezelfde plek
+ * strijden gedurende het 24-uursvenster. */
+async function nogSteedsVrij(aanbod, duurMin, naam) {
+  const vers = {};
+  for (const inm of INMETERS) vers[inm.naam] = [];
+  try { await voegAanbiedingenToe(vers); } catch { return aanbod; } // register onbereikbaar: niet blokkeren
+  return aanbod.filter((s) => {
+    const van = +s.aankomst;
+    const tot = van + duurMin * 60000;
+    const botst = (vers[s.inmeter] || []).some((a) =>
+      !String(a.klant || '').includes(naam) && Date.parse(a.start) < tot && Date.parse(a.eind) > van);
+    if (botst) console.log(`  (slot ${s.datum} ${venster(s)} bij ${s.inmeter} is net vergeven aan een andere klant — valt af)`);
+    return !botst;
+  });
+}
+
 /** Aanbod vastleggen in het register en direct naar de klant sturen (mail + WhatsApp). */
 async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null) {
   // Aantal aan te bieden tijden is instelbaar (Daimy 07-08: "gewoon 1 moment
@@ -941,6 +962,9 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null) 
     console.log('  (aantalTijden=1 maar 1-moment-template ontbreekt nog — val terug op 3)');
   }
   const aantal = aantalGewenst === 1 && heeftMomentTemplate() ? 1 : 3;
+  // laatste botsingscontrole vlak vóór verzending (zie nogSteedsVrij)
+  aanbod = await nogSteedsVrij(aanbod, duurMin, lead.naam);
+  if (!aanbod.length) throw new Error('alle tijden zijn net aan een andere klant aangeboden — opnieuw laten rekenen');
   if (aanbod.length < aantal && agenda) aanbod = await zorgVoorDrieOpties(lead, duurMin, agenda, aanbod);
   if (aanbod.length < aantal) throw new Error(`maar ${aanbod.length} tijd(en) beschikbaar — er zijn er ${aantal} nodig, niet verstuurd (handmatig of wachten op ruimte)`);
   aanbod = aanbod.slice(0, aantal);

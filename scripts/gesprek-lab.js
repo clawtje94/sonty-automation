@@ -152,5 +152,13 @@ async function haalGesprekken(vers) {
   // gevallen die eerder wél de mist in gingen.
   const echt = bevindingen.filter((b) => b.soort !== 'GEBLOKKEERD');
   if (!echt.length) console.log('schoon — geen boeking tegen de klant in, geen onbeantwoorde klant.');
+
+  // Met --melden (de dagelijkse run) gaat een bevinding naar Telegram. Alleen als er
+  // écht iets is: een lab dat elke ochtend "alles goed" roept wordt niet meer gelezen.
+  if (process.argv.includes('--melden') && echt.length) {
+    const { telegram } = require('./cron-inmeten-planner.js');
+    await telegram(`🔬 Gesprek-lab vond ${echt.length} ding(en) over ${Object.keys(cache).length} echte gesprekken:\n\n`
+      + echt.map((b) => `• ${b.soort} — ${b.naam}: ${b.detail}`).join('\n'));
+  }
   process.exitCode = echt.length ? 1 : 0;
 })().catch((e) => { console.error('FOUT:', e.message); process.exit(2); });

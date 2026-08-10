@@ -4412,5 +4412,57 @@
       }
     ],
     "processedAt": "2026-08-10T09:46:39.368Z"
+  },
+  "item:a7f8aa66-30fb-48bb-a04a-6a6317708a7d": {
+    "summary": "Ashutosh Ramparichan",
+    "grippCompanyId": 99741,
+    "grippOfferId": 8993,
+    "rpDocNumber": "202611061",
+    "allOffers": [
+      {
+        "grippOfferId": 8993,
+        "rpDocNumber": "202611061"
+      }
+    ],
+    "processedAt": "2026-08-10T11:10:38.362Z"
+  },
+  "item:81734975-d813-4f7d-8d5d-2c762bdec032": {
+    "summary": "Connie Biermann",
+    "grippCompanyId": 99742,
+    "grippOfferId": 8994,
+    "rpDocNumber": "202610934",
+    "allOffers": [
+      {
+        "grippOfferId": 8994,
+        "rpDocNumber": "202610934"
+      }
+    ],
+    "processedAt": "2026-08-10T11:39:13.876Z"
+  },
+  "item:ee68da22-207f-4d94-b32f-1432d7d05d18": {
+    "summary": "Timo Goes",
+    "grippCompanyId": 99743,
+    "grippOfferId": 8995,
+    "rpDocNumber": "202610281",
+    "allOffers": [
+      {
+        "grippOfferId": 8995,
+        "rpDocNumber": "202610281"
+      }
+    ],
+    "processedAt": "2026-08-10T11:40:20.808Z"
+  },
+  "item:c7b2362c-4181-4a12-ba5c-a5fb18feae5e": {
+    "summary": "Natalie Bavinck",
+    "grippCompanyId": 99745,
+    "grippOfferId": 8997,
+    "rpDocNumber": "202611193",
+    "allOffers": [
+      {
+        "grippOfferId": 8997,
+        "rpDocNumber": "202611193"
+      }
+    ],
+    "processedAt": "2026-08-10T12:44:24.305Z"
   }
 }

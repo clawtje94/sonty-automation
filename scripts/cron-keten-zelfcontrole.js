@@ -126,6 +126,21 @@ async function trengo(pad) {
       const opLijst = Object.values(laad()).some((k) => String(k.telefoon || '').replace(/\D/g, '').slice(-9) === tel9);
       if (opLijst && boeking && /eerder|vrijkom|vrij kom/i.test(tekstLaatste)) continue;
     } catch { /* lijst niet leesbaar: gewoon melden */ }
+    // Het team beantwoordt lang niet alles in Trengo zelf: ze bellen of mailen en leggen
+    // dat vast als interne notitie ("Gebeld en voicemail", "En mail gestuurd" — Marjolein
+    // Nunnink, 10-08). Zonder deze stap bleef de controle om antwoord vragen dat allang
+    // gegeven was, en dan wordt hij ruis en kijkt niemand er meer naar.
+    //
+    // Alleen ECHT contact telt. Een notitie die de vraag doorzet ("@jorren kijk jij hier
+    // even naar") is géén antwoord aan de klant — precies het soort notitie waarachter
+    // eerder vragen zijn blijven liggen.
+    const CONTACT = /\b(gebeld|teruggebeld|voicemail|ingesproken|gemaild|mail (gestuurd|verstuurd)|gesproken|langsgeweest|opgelost|afgehandeld)\b/i;
+    const contactNa = (msgs.data || []).some((m) => {
+      if ((m.message_type || m.type) !== 'NOTE') return false;
+      if (Date.parse(String(m.created_at).replace(' ', 'T')) <= berichtOp) return false;
+      return CONTACT.test(String(m.message || m.body || '').replace(/<[^>]+>/g, ' '));
+    });
+    if (contactNa) continue;
     const stilUren = (Date.now() - berichtOp) / 3600000;
     if (stilUren >= 2) {
       problemen.push(`GEEN ANTWOORD: ${info.naam} reageerde ${Math.round(stilUren)} uur geleden op de planning en kreeg niets terug — "${String(laatste.message || laatste.body || '').replace(/<[^>]+>/g, ' ').slice(0, 70)}"`);

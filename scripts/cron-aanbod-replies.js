@@ -162,7 +162,11 @@ async function main() {
   const gemeld = (() => { try { return JSON.parse(fs.readFileSync(GEMELD, 'utf8')); } catch { return {}; } })();
   const tickets = state.aanbodTickets || {};
   const tokensBijStart = new Set(Object.keys(tickets));
-  const tokens = Object.keys(tickets);
+  // ALLEEN LOPENDE AANBIEDINGEN VOLGEN. De monitor liep over alle 38 bewaarde tokens
+  // en haalde voor elk de berichten op — dat gaf structureel rate-limits bij Trengo,
+  // waardoor verse antwoorden (Natalie's "Ja is goed") pas veel later werden gezien.
+  // Verwerkte en verlopen aanbiedingen hoeven niet gevolgd te worden.
+  let tokens = Object.keys(tickets);
   if (!tokens.length) { console.log('geen verstuurde aanbiedingen om te volgen'); return; }
 
   // aanbod-status erbij (open/gekozen/verwerkt/verlopen) voor context in de melding
@@ -182,6 +186,9 @@ async function main() {
       if (a.lead?.rpItemId) rpItemPer[a.token] = a.lead.rpItemId;
     }
   } catch { /* status is context, geen blokkade */ }
+  const lopendeTokens = tokens.filter((t) => statusPer[t] === 'open' || statusPer[t] === 'gekozen');
+  if (lopendeTokens.length) tokens = lopendeTokens;
+  console.log(`${tokens.length} lopend(e) aanbod(en) om te volgen (van ${Object.keys(tickets).length} bewaarde)`);
 
   let meldingen = 0;
   for (const token of tokens) {

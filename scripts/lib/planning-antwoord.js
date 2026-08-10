@@ -29,13 +29,14 @@ const DAGEN = { maandag: 1, dinsdag: 2, woensdag: 3, donderdag: 4, vrijdag: 5, z
  *   dagdeel: 'ochtend'|'middag'|null, samenvatting: string, antwoordVoorstel: string}>}
  */
 async function leesReactie(tekst, aangebodenTijden) {
-  const veilig = { intent: 'vraag', dagen: [], dagdeel: null, samenvatting: 'niet automatisch te duiden', antwoordVoorstel: '' };
+  const veilig = { intent: 'vraag', dagen: [], dagdeel: null, vanaf: null, samenvatting: 'niet automatisch te duiden', antwoordVoorstel: '' };
   if (!String(tekst || '').trim()) return veilig;
   const aanbod = (aangebodenTijden || []).map((s) => new Date(s.aankomst).toLocaleString('nl-NL', {
     weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam',
   })).join('; ') || 'onbekend';
 
   try {
+    const vandaag = new Date().toISOString().slice(0, 10);
     const resp = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 400,
@@ -52,6 +53,10 @@ Staat er instemming én onvrede in één bericht, dan is het "klacht".
 
 dagen: lijst weekdagnummers die de klant zelf noemt (zo=0, ma=1 … za=6). Niets genoemd = [].
 dagdeel: "ochtend" of "middag" als de klant dat noemt, anders null.
+vanaf: eerste datum (YYYY-MM-DD) waarop de klant WEL kan, als hij een periode uitsluit
+("niet beschikbaar t/m 23 augustus" => "2026-08-24"; "vanaf de week van 24 augustus" =>
+"2026-08-24"; "pas na onze vakantie, we zijn terug op 5 september" => "2026-09-05").
+Geen periode genoemd = null. Vandaag is ${vandaag}.
 samenvatting: één zin, wat de klant wil, in het Nederlands.
 antwoordVoorstel: bij "vraag" of "klacht" een concept-antwoord van maximaal 3 zinnen in de stijl van
 Nanny van de planning (je-vorm, warm, geen beloftes die je niet waar kunt maken). Anders "".`,
@@ -64,6 +69,7 @@ Nanny van de planning (je-vorm, warm, geen beloftes die je niet waar kunt maken)
       intent,
       dagen: Array.isArray(json.dagen) ? json.dagen.filter((d) => Number.isInteger(d) && d >= 0 && d <= 6) : [],
       dagdeel: ['ochtend', 'middag'].includes(json.dagdeel) ? json.dagdeel : null,
+      vanaf: /^\d{4}-\d{2}-\d{2}$/.test(json.vanaf || '') ? json.vanaf : null,
       samenvatting: String(json.samenvatting || '').slice(0, 200),
       antwoordVoorstel: String(json.antwoordVoorstel || '').slice(0, 600),
     };
@@ -75,8 +81,16 @@ Nanny van de planning (je-vorm, warm, geen beloftes die je niet waar kunt maken)
 
 /** Slots filteren op wat de klant zelf noemde. Levert dat niets op, dan geven we
  *  gewoon de beste tijden — een klant zonder opties helpen we niet. */
-function pasBijVoorkeur(slots, { dagen = [], dagdeel = null } = {}) {
+function pasBijVoorkeur(slots, { dagen = [], dagdeel = null, vanaf = null } = {}) {
   let kandidaten = slots;
+  // Een uitgesloten periode is HARD. Dagen en dagdeel zijn voorkeuren en mogen
+  // terugvallen op de beste tijden, maar "wij zijn er niet t/m 23 augustus" betekent dat
+  // een eerder voorstel per definitie fout is — Taico (10-08) kreeg exact hetzelfde
+  // moment terug dat hij net had afgewezen. Levert het filter niets op, dan dus een
+  // LEGE lijst, en dan hoort er een mens naar te kijken.
+  if (vanaf) return kandidaten.filter((s) => new Date(s.aankomst) >= new Date(vanaf + 'T00:00:00+02:00'))
+    .filter((s) => !dagen.length || dagen.includes(new Date(s.aankomst).getDay()))
+    .filter((s) => !dagdeel || (new Date(s.aankomst).getHours() < 12 ? 'ochtend' : 'middag') === dagdeel);
   if (dagen.length) {
     const opDag = kandidaten.filter((s) => dagen.includes(new Date(s.aankomst).getDay()));
     if (opDag.length) kandidaten = opDag;

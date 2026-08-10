@@ -451,5 +451,32 @@ test('annuleren ruimt Outlook, Planado en de administratie op, in die volgorde',
   assert.ok(/OPTIE bot/.test(bron), 'optie-blokjes mogen niet als afspraak worden verwijderd');
 });
 
+// Taico (10-08): "wij zijn niet beschikbaar t/m 23 augustus" — en hij kreeg drie keer
+// 17 augustus terug. Een uitgesloten periode is hard: liever geen voorstel dan een
+// voorstel dat de klant al heeft afgewezen.
+test('vanaf-datum is hard: geen terugval op eerdere tijden', () => {
+  const { pasBijVoorkeur } = require('../scripts/lib/planning-antwoord.js');
+  const slots = [
+    { aankomst: '2026-08-17T13:40:00.000Z' },
+    { aankomst: '2026-08-25T08:00:00.000Z' },
+    { aankomst: '2026-09-08T14:00:00.000Z' },
+  ];
+  const na = pasBijVoorkeur(slots, { vanaf: '2026-08-24' });
+  assert.strictEqual(na.length, 2, 'alles vóór 24 aug moet wegvallen');
+  assert.ok(na.every((s) => new Date(s.aankomst) >= new Date('2026-08-24T00:00:00+02:00')));
+  const leeg = pasBijVoorkeur([slots[0]], { vanaf: '2026-08-24' });
+  assert.strictEqual(leeg.length, 0, 'niets na de datum = LEEG, nooit terugvallen op een afgewezen tijd');
+});
+
+test('planner draagt vanaf/nietDeze door alle codepaden (ook de aanvuller)', () => {
+  const bron = require('fs').readFileSync(__dirname + '/../scripts/cron-inmeten-planner.js', 'utf8');
+  assert.ok(/beperking\?\.vanaf/.test(bron), 'maakEnVerstuurAanbod moet de vanaf-grens na het aanvullen afdwingen');
+  assert.ok(/m\.nietDeze/.test(bron), 'afgewezen tijden moeten uit het nieuwe aanbod worden gefilterd');
+  assert.ok(/ligt vóór de datum die de klant zelf noemde/.test(bron), 'poort op de vanaf-datum ontbreekt');
+  const monitor = require('fs').readFileSync(__dirname + '/../scripts/cron-aanbod-replies.js', 'utf8');
+  assert.ok(/reeksTekst/.test(monitor), 'monitor moet berichten-reeksen als geheel lezen');
+  assert.ok(/nietDeze: \(aanbod\?\.slots/.test(monitor), 'monitor moet de afgewezen tijden meesturen');
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

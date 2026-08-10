@@ -708,7 +708,8 @@ async function main() {
 
     if (LIVE) {
       try {
-        const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda);
+        const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda,
+      (m.vanaf || m.nietDeze?.length) ? { vanaf: m.vanaf || null, nietDeze: m.nietDeze || [] } : null);
         console.log(`    AANBOD VERSTUURD: ${url}`);
         regels.push(`  → aanbod verstuurd (24u geldig)`);
         state.aangeboden[item.id] = { naam: lead.naam, op: new Date().toISOString(), aanbod: aanbod.length };
@@ -955,7 +956,7 @@ async function nogSteedsVrij(aanbod, duurMin, naam) {
 }
 
 /** Aanbod vastleggen in het register en direct naar de klant sturen (mail + WhatsApp). */
-async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null) {
+async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, beperking = null) {
   // HARDE STOP (Daimy 10-08): een klant met een LOPENDE afspraak krijgt NOOIT een nieuw
   // voorstel. Op 10-08 kreeg Eric van der Meer een tweede voorstel terwijl hij al op
   // 18 augustus stond — puur omdat er een verkeerd RP-id werd meegegeven. Dat is
@@ -989,6 +990,15 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null) 
   aanbod = await nogSteedsVrij(aanbod, duurMin, lead.naam);
   if (!aanbod.length) throw new Error('alle tijden zijn net aan een andere klant aangeboden — opnieuw laten rekenen');
   if (aanbod.length < aantal && agenda) aanbod = await zorgVoorDrieOpties(lead, duurMin, agenda, aanbod);
+  // De aanvuller kent de wensen van de klant niet en kan er dus tijden bij leggen die
+  // hij net heeft uitgesloten (Taico 10-08: "vanaf 24 augustus" en tóch 17 aug erbij).
+  // Daarom hier, ná al het aanvullen, de harde grens nogmaals afdwingen.
+  if (beperking?.vanaf) aanbod = aanbod.filter((s) => +s.aankomst >= +new Date(beperking.vanaf + 'T00:00:00+02:00'));
+  if (beperking?.nietDeze?.length) {
+    const afgewezen = new Set(beperking.nietDeze.map((x) => +new Date(x)));
+    aanbod = aanbod.filter((s) => !afgewezen.has(+s.aankomst));
+  }
+  if (beperking?.vanaf && !aanbod.length) throw new Error(`geen plek vanaf ${beperking.vanaf} — niets verstuurd, mens nodig`);
   if (aanbod.length < aantal) throw new Error(`maar ${aanbod.length} tijd(en) beschikbaar — er zijn er ${aantal} nodig, niet verstuurd (handmatig of wachten op ruimte)`);
   aanbod = aanbod.slice(0, aantal);
   // "ver weg"? — eerlijk benoemen in het bericht (Daimy 06-08). Meetlat: enkele reis
@@ -1423,15 +1433,27 @@ async function verwerkDashboardVerzoek(m) {
       // wel opties"). Noemt hij zelf dagen of een dagdeel, dan zoeken we dáár; levert
       // dat niets op, dan vallen we terug op de beste tijden — een klant zonder
       // opties laten zitten is erger dan een andere dag voorstellen.
-      if (m.voorkeurDagen?.length || m.voorkeurDagdeel) {
+      // NOOIT een tijd terugsturen die de klant net heeft afgewezen (Taico 10-08: hij
+      // drukte "Ander moment" en kreeg binnen een minuut exact hetzelfde voorstel).
+      if (m.nietDeze?.length) {
+        const afgewezen = new Set(m.nietDeze.map((x) => +new Date(x)));
+        beste = beste.filter((s) => !afgewezen.has(+new Date(s.aankomst)));
+      }
+      if (m.voorkeurDagen?.length || m.voorkeurDagdeel || m.vanaf) {
         const { pasBijVoorkeur } = require('./lib/planning-antwoord.js');
-        const passend = pasBijVoorkeur(beste, { dagen: m.voorkeurDagen || [], dagdeel: m.voorkeurDagdeel || null });
+        const passend = pasBijVoorkeur(beste, { dagen: m.voorkeurDagen || [], dagdeel: m.voorkeurDagdeel || null, vanaf: m.vanaf || null });
         if (passend.length) beste = passend;
+        else if (m.vanaf) throw new Error(`geen enkele plek vanaf ${m.vanaf} — niets verstuurd, mens nodig`);
         else console.log('  (geen plek op de dagen die de klant noemde — beste tijden gebruikt)');
       }
       // wilEerder (geval Rene 07-08): omrij-grens telt niet, puur vroegste eerst
       aanbod = kiesAanbod(beste, 3, { wachtDagen: 999, negeerGrens: !!m.wilEerder });
       if (!aanbod.length) throw new Error('geen enkel gat beschikbaar');
+    }
+    // POORT vanaf-datum (Taico 10-08): wat de klant heeft uitgesloten mag er nooit
+    // doorheen glippen, ook niet via een ander codepad dan het filter hierboven.
+    if (m.vanaf && aanbod.length && +aanbod[0].aankomst < +new Date(m.vanaf + 'T00:00:00+02:00')) {
+      throw new Error(`voorstel ${aanbod[0].datum} ligt vóór de datum die de klant zelf noemde (${m.vanaf}) — niets verstuurd`);
     }
     // POORT (geval Rene 07-08: klant vroeg eerder en kreeg dezelfde dag terug):
     // een eerder-verzoek gaat alleen de deur uit als het ook ECHT eerder is.

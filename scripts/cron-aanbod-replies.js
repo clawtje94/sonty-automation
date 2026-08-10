@@ -213,11 +213,31 @@ async function main() {
         const vervanger = await vervangDoodTicket(token, info);
         if (vervanger && vervanger !== ticketId) { ticketId = vervanger; rows = await ticketBerichten(ticketId); }
       }
+      // MENSEN SCHRIJVEN IN LOSSE STUKJES (Taico 10-08): eerst de knop "Ander moment",
+      // drie minuten later de uitleg "wij kunnen pas vanaf 24 augustus". Wie elk bericht
+      // los behandelt, handelt de knop af zonder de uitleg en stuurt twee antwoorden.
+      // Daarom per bericht ook de rest van zijn reeks meegeven: alle klantberichten
+      // zonder tussenliggend antwoord van ons vormen SAMEN de boodschap.
+      const isIn = (x) => String(x.type || '').toUpperCase() === 'INBOUND' || x.direction === 'incoming';
+      const reeksVan = (msg) => {
+        const idx = rows.indexOf(msg);
+        const reeks = [msg];
+        for (let k = idx + 1; k < rows.length && isIn(rows[k]); k++) reeks.push(rows[k]);
+        for (let k = idx - 1; k >= 0 && isIn(rows[k]); k--) reeks.unshift(rows[k]);
+        return reeks;
+      };
       for (const m of rows) {
-        const inbound = String(m.type || '').toUpperCase() === 'INBOUND' || m.direction === 'incoming';
+        const inbound = isIn(m);
         if (!inbound) continue;
         const wanneer = Date.parse(String(m.created_at || '').replace(' ', 'T'));
         if (!(wanneer > Date.parse(info.verstuurdOp))) continue;
+        // alleen het LAATSTE bericht van een reeks afhandelen; de eerdere stukjes gaan
+        // als context mee. Zo gaat er per reeks precies één antwoord uit.
+        const reeks = reeksVan(m);
+        if (reeks[reeks.length - 1] !== m && isIn(reeks[reeks.length - 1])) {
+          const laatsteT = Date.parse(String(reeks[reeks.length - 1].created_at || '').replace(' ', 'T'));
+          if (laatsteT > Date.parse(info.verstuurdOp)) continue;
+        }
         const sleutel = ticketId + ':' + m.id;
         const alGemeld = !!gemeld[sleutel];
         // Een keuze-poging mag NOOIT eenmalig zijn (incident Rene 07-08: de eerste
@@ -228,6 +248,9 @@ async function main() {
         if (alGemeld && statusPer[token] !== 'open') continue;
         if (!alGemeld) { gemeld[sleutel] = new Date().toISOString(); meldingen++; }
         const tekst = String(m.body_plain || m.message || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 400);
+        const reeksTekst = reeks
+          .map((x) => String(x.body_plain || x.message || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim())
+          .filter(Boolean).join('\n').slice(0, 800);
 
         // WhatsApp-keuze automatisch doorvoeren (alleen op een nog OPEN aanbod)
         if (statusPer[token] === 'open') {
@@ -269,7 +292,7 @@ async function main() {
             const { leesReactie } = require('./lib/planning-antwoord.js');
             const rA = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': MEET_CODE } });
             const aanbod = rA.ok ? await rA.json() : null;
-            const duiding = await leesReactie(tekst, aanbod?.slots || []);
+            const duiding = await leesReactie(reeksTekst || tekst, aanbod?.slots || []);
             console.log(`  ${info.naam}: intent ${duiding.intent}${duiding.dagen.length ? ' (dagen ' + duiding.dagen.join(',') + ')' : ''}`);
 
             if (duiding.intent === 'ander-moment') {
@@ -288,6 +311,10 @@ async function main() {
                 body: JSON.stringify({
                   type: 'stuur-aanbod', rpItemId: rpItemPer[token] || aanbod?.lead?.rpItemId, naam: info.naam, bron: 'klant-reply',
                   voorkeurDagen: duiding.dagen, voorkeurDagdeel: duiding.dagdeel,
+                  // wat de klant uitsloot en wat hij net afwees gaat mee: het nieuwe
+                  // voorstel mag nooit hetzelfde zijn als wat hij afwees (Taico 10-08)
+                  vanaf: duiding.vanaf || undefined,
+                  nietDeze: (aanbod?.slots || []).map((sl) => sl.aankomst),
                 }),
               });
               await bevestigOntvangst(ticketId, info.naam, duiding.dagen.length
@@ -321,7 +348,7 @@ async function main() {
             const { leesReactie } = require('./lib/planning-antwoord.js');
             const rB = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': MEET_CODE } });
             const aanbodB = rB.ok ? await rB.json() : null;
-            const duidingB = await leesReactie(tekst, aanbodB?.slots || []);
+            const duidingB = await leesReactie(reeksTekst || tekst, aanbodB?.slots || []);
             if (duidingB.intent !== 'akkoord') {
               await bevestigOntvangst(ticketId, info.naam, duidingB.intent === 'klacht'
                 ? 'Dank je voor je eerlijke bericht, dat snap ik goed. Ik pak dit meteen op en je hoort vandaag nog van ons.'

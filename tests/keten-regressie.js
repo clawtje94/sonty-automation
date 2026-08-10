@@ -478,5 +478,16 @@ test('planner draagt vanaf/nietDeze door alle codepaden (ook de aanvuller)', () 
   assert.ok(/nietDeze: \(aanbod\?\.slots/.test(monitor), 'monitor moet de afgewezen tijden meesturen');
 });
 
+// Taico deel 2 (10-08): "Dinsdag 8 september 1600 is prima" — de poort las "1600 is"
+// als postcode 1600IS en blokkeerde zijn eigen akkoord. Een tijd is geen postcode.
+test('boek-poort: tijd als vier cijfers is geen postcode', () => {
+  const { magBoeken } = require('../scripts/lib/boek-poort.js');
+  const adres = 'Breedkapper 1, 2614 SX, Delft';
+  assert.strictEqual(magBoeken({ intent: 'akkoord' }, 'Dinsdag 8 september 1600 is prima', adres).mag, true);
+  assert.strictEqual(magBoeken({ intent: 'akkoord' }, 'Kom om 0900 en dan is het goed', adres).mag, true);
+  assert.strictEqual(magBoeken({ intent: 'akkoord' }, 'Klopt, 2614 SX', adres).mag, true, 'eigen postcode blijft gewoon mogen');
+  assert.strictEqual(magBoeken({ intent: 'vraag' }, 'Het adres is 4822WH Breda he', adres).mag, false, 'echte afwijkende postcode blijft blokkeren');
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

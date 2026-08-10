@@ -4503,5 +4503,18 @@
       }
     ],
     "processedAt": "2026-08-10T16:03:14.118Z"
+  },
+  "item:a95c2097-e120-4486-ad64-ae9a3a5ff664": {
+    "summary": "Taico Aerts en Carolin Brandt",
+    "grippCompanyId": 99749,
+    "grippOfferId": 9001,
+    "rpDocNumber": "202610690",
+    "allOffers": [
+      {
+        "grippOfferId": 9001,
+        "rpDocNumber": "202610690"
+      }
+    ],
+    "processedAt": "2026-08-10T18:03:49.780Z"
   }
 }

@@ -13,7 +13,12 @@
 //   - klant stelt een VRAAG → gewoon boeken, en de vraag beantwoorden. Van de dertien
 //     gevallen in de historie waren er acht van dit type ("dat past, dankjewel, we hebben
 //     een pasgeboren baby"). Die blokkeren zou de afspraak onnodig uitstellen.
-const POSTCODE = /\b(\d{4})\s?([A-Za-z]{2})\b/;
+const POSTCODE = /\b([1-9]\d{3})\s?([A-Za-z]{2})\b/;
+// "Dinsdag 8 september 1600 is prima" (Taico 10-08): vier cijfers gevolgd door een kort
+// woord is meestal een TIJD, geen postcode. Een lettergreep die gewoon een Nederlands
+// woordje is telt daarom niet als postcode-letters, tenzij hij in hoofdletters staat
+// (zoals iemand een postcode schrijft: 4822WH of 4822 WH).
+const GEEN_POSTCODELETTERS = new Set(['is', 'in', 'ik', 'je', 'we', 'de', 'en', 'of', 'om', 'op', 'te', 'na', 'er', 'ze', 'al', 'nu', 'zo', 'ok', 'he', 'ja', 'me', 'mij', 'us', 'un', 'uur']);
 
 /**
  * @param {{intent: string}} duiding  uitkomst van leesReactie op het LAATSTE klantbericht
@@ -27,7 +32,7 @@ function magBoeken(duiding, tekst, adresNu) {
   if (intent === 'klacht') return { mag: false, reden: 'is niet tevreden' };
 
   const m = String(tekst || '').match(POSTCODE);
-  if (m) {
+  if (m && !(GEEN_POSTCODELETTERS.has(m[2].toLowerCase()) && m[2] !== m[2].toUpperCase())) {
     const genoemd = (m[1] + m[2]).toUpperCase();
     const bekend = String(adresNu || '').replace(/\s/g, '').toUpperCase();
     if (bekend && !bekend.includes(genoemd)) return { mag: false, reden: 'noemt een ander adres' };

@@ -424,5 +424,17 @@ test('boek-poort: vraag mag boeken, andere dag/klacht/ander adres niet', () => {
     'eigen postcode bevestigen mag gewoon door');
 });
 
+// Th de Geest (10-08): vroeg op 1 augustus een offerte aan en ging vandaag akkoord. De
+// wachttijd-melding rekende vanaf zijn aanvraag en riep "9 dagen vergeten" over een lead
+// die er twee uur stond. De klok hoort te lopen vanaf het moment dat wij hem kregen.
+test('vergeten-lead rekent vanaf de statusovergang, niet vanaf de offerte-aanvraag', () => {
+  const bron = require('fs').readFileSync(__dirname + '/../scripts/cron-keten-zelfcontrole.js', 'utf8');
+  const regel = bron.match(/const sinds = state\.gezien[\s\S]{0,260}?;/);
+  assert.ok(regel, 'peildatum-regel niet gevonden');
+  assert.ok(/timestamp_updated/.test(regel[0]), 'terugval moet de laatste wijziging zijn');
+  assert.ok(regel[0].indexOf('timestamp_updated') < regel[0].indexOf('timestamp_created'),
+    'de aanmaakdatum mag nooit vóór de statusovergang worden gekozen');
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

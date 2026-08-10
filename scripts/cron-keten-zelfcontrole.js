@@ -157,7 +157,16 @@ async function trengo(pad) {
     const metAanbod = new Set(lopend.map((a) => a.lead?.rpItemId).filter(Boolean));
     for (const i of wachtend) {
       if (metAanbod.has(i.id) || boekingen[i.id]?.status === 'geboekt') continue;
-      const sinds = state.gezien?.[i.id] ? Date.parse(state.gezien[i.id]) : Number(i.timestamp_created);
+      // WAT MEET JE EIGENLIJK (Daimy 10-08: "Th de Geest is vandaag pas akkoord gegaan,
+      // waarom krijg ik daar een melding over?"). De klok moet lopen vanaf het moment dat
+      // de lead bij ONS op de stapel kwam, niet vanaf zijn offerte-aanvraag. Th de Geest
+      // vroeg op 1 augustus een offerte aan en ging vandaag akkoord; met de aanmaakdatum
+      // als peildatum leek hij negen dagen te liggen terwijl hij er twee uur stond.
+      // Volgorde: wanneer wij hem voor het eerst in deze status zagen, anders de laatste
+      // wijziging aan de lead (de statusovergang zelf). De aanmaakdatum nooit.
+      const sinds = state.gezien?.[i.id]
+        ? Date.parse(state.gezien[i.id])
+        : Number(i.timestamp_updated || i.timestamp_created);
       const dagen = (Date.now() - sinds) / 86400000;
       if (dagen > 5) problemen.push(`VERGETEN LEAD: ${i.summary} staat ${Math.round(dagen)} dagen op "Inmeten inplannen" zonder voorstel en zonder afspraak`);
     }

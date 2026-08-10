@@ -33,12 +33,35 @@ async function tFetch(ep, opties = {}) {
 async function zoekWaTicket(telefoon) {
   const cijfers = String(telefoon || '').replace(/\D/g, '').slice(-9);
   if (cijfers.length < 9) return null;
-  const r = await tFetch(`/tickets?term=${cijfers}`);
-  if (!r.ok) return null;
-  const d = await r.json().catch(() => null);
-  const wa = (d?.data || []).filter((t) => t.channel?.id === WA_KANAAL || t.channel?.type === 'WA_BUSINESS');
-  wa.sort((a, b) => String(b.updated_at || '').localeCompare(String(a.updated_at || '')));
-  return wa[0] || null;
+  const id = await zoekWaTicketBreed(telefoon);
+  return id ? { id } : null;
+}
+
+
+/** Trengo's zoekfunctie vindt een WhatsApp-ticket ALLEEN op de notatie waarin het
+ *  nummer is opgeslagen. Zoeken op de laatste 9 cijfers (625583218) gaf nul hits,
+ *  terwijl "+31625583218" het ticket wél vond — daarom opende elke verzending een
+ *  NIEUW gesprek in plaats van door te gaan in het bestaande (Daimy 10-08, geval
+ *  Katuscha). We proberen daarom alle gangbare notaties, meest specifiek eerst.
+ *  @returns {Promise<number|null>} id van het meest recente actieve WA-ticket */
+async function zoekWaTicketBreed(telefoon) {
+  const cijfers = String(telefoon || '').replace(/\D/g, '');
+  if (cijfers.length < 9) return null;
+  const nat = cijfers.slice(-9);                    // 625583218
+  const varianten = [`+31${nat}`, `0031${nat}`, `31${nat}`, `0${nat}`, nat];
+  for (const term of varianten) {
+    try {
+      const r = await tFetch(`/tickets?term=${encodeURIComponent(term)}`);
+      if (!r.ok) continue;
+      const rijen = (await r.json())?.data || [];
+      const wa = rijen.filter((t) => (t.channel?.id === WA_KANAAL || t.channel?.type === 'WA_BUSINESS') && t.status !== 'CLOSED');
+      if (wa.length) {
+        wa.sort((a, b) => String(b.updated_at || b.created_at || '').localeCompare(String(a.updated_at || a.created_at || '')));
+        return wa[0].id;
+      }
+    } catch { /* volgende notatie */ }
+  }
+  return null;
 }
 
 function verWegRegel(ver) {
@@ -100,11 +123,7 @@ async function stuurWhatsAppTemplate(aanbod, url) {
       { type: 'body', key: '{{2}}', value: slotTekst(slots[0]) },
       { type: 'body', key: '{{3}}', value: String(aanbod.duurMin || 30) },
     ];
-    let bestaand1 = null;
-    try {
-      const zoek = await tFetch(`/tickets?term=${tel.slice(-9)}`, { method: 'GET' });
-      if (zoek.ok) bestaand1 = (((await zoek.json())?.data || []).find((tk) => tk.channel?.type === 'WA_BUSINESS' && tk.status !== 'CLOSED'))?.id || null;
-    } catch { /* dan op nummer */ }
+    const bestaand1 = await zoekWaTicketBreed(tel);
     const body1 = bestaand1
       ? { ticket_id: bestaand1, hsm_id: hsm1, params: p1 }
       : { recipient_phone_number: '+' + tel, hsm_id: hsm1, channel_id: WA_KANAAL, params: p1 };
@@ -131,16 +150,7 @@ async function stuurWhatsAppTemplate(aanbod, url) {
   // In het BESTAANDE gesprek sturen als dat er is (Daimy 06-08: Carlo's template
   // opende een tweede, naamloos gesprek en was onvindbaar). wa_sessions accepteert
   // ticket_id i.p.v. recipient_phone_number; dan blijft alles in één thread.
-  let bestaandTicket = null;
-  try {
-    const zoek = await tFetch(`/tickets?term=${tel.slice(-9)}`, { method: 'GET' });
-    if (zoek.ok) {
-      const hit = ((await zoek.json())?.data || []).find(
-        (tk) => tk.channel?.type === 'WA_BUSINESS' && tk.status !== 'CLOSED',
-      );
-      bestaandTicket = hit?.id || null;
-    }
-  } catch { /* zoeken mislukt: dan gewoon op nummer */ }
+  const bestaandTicket = await zoekWaTicketBreed(tel);
   const body = bestaandTicket
     ? { ticket_id: bestaandTicket, hsm_id: hsm || TEMPLATE_HSM, params }
     : { recipient_phone_number: '+' + tel, hsm_id: hsm || TEMPLATE_HSM, channel_id: WA_KANAAL, params };
@@ -297,11 +307,8 @@ async function verstuurAanbod(aanbod, url) {
   try {
     const slots = (aanbod.slots || []).map((sl, i) => `${i + 1}. ${slotTekst(sl)}`).join('\n');
     const spiegel = `Hoi ${(aanbod.lead.naam || 'daar').split(' ')[0]}, goed nieuws: we kunnen bij je langskomen om in te meten.${aanbod.ver ? ' [ver-weg-versie]' : ''}\n\n${slots || '(GEEN TIJDEN?!)'}\n\nTik op een knop en we zetten hem vast.`;
-    const { PLANNING_TG_TOKEN, PLANNING_TG_CHAT } = require('./telegram-planning.js');
-    await fetch(`https://api.telegram.org/bot${PLANNING_TG_TOKEN}/sendMessage`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: PLANNING_TG_CHAT, text: `📤 Verstuurd naar ${aanbod.lead.naam} (wa: ${wa.ok ? wa.via : 'niet — ' + wa.reden}, mail: ${mail.ok ? 'ok' : 'niet — ' + mail.reden}). Dit kreeg de klant:\n\n${spiegel}` }),
-    });
+    const { planningTelegram } = require('./telegram-planning.js');
+    await planningTelegram(`📤 Verstuurd naar ${aanbod.lead.naam} (wa: ${wa.ok ? wa.via : 'niet — ' + wa.reden}, mail: ${mail.ok ? 'ok' : 'niet — ' + mail.reden}). Dit kreeg de klant:\n\n${spiegel}`);
   } catch { /* spiegel mag verzending nooit blokkeren */ }
   return { wa, mail, ergensGelukt: wa.ok || mail.ok };
 }

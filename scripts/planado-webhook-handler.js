@@ -11,7 +11,7 @@ const PORT = 3847;
 const WEBHOOK_SECRET = 'sonty_planado_f84c5c34ba89';
 const HUBSPOT_TOKEN = require('./secrets').HUBSPOT_TOKEN;
 const PIPELINE_ID = '3623322812';
-const { PLANNING_TG_TOKEN: TELEGRAM_TOKEN, PLANNING_TG_CHAT: TELEGRAM_CHAT } = require('./lib/telegram-planning.js');
+const { planningTelegram } = require('./lib/telegram-planning.js');
 
 // HubSpot stage IDs (from Sonty Verkooppijplijn)
 const STAGES = {

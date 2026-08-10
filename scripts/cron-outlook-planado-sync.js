@@ -18,7 +18,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const PLANADO_KEY = fs.readFileSync(path.join(__dirname, 'planado-api-key.txt'), 'utf8').trim();
-const { PLANNING_TG_TOKEN: TG_TOKEN, PLANNING_TG_CHAT: TG_CHAT } = require('./lib/telegram-planning.js');
+const { planningTelegram } = require('./lib/telegram-planning.js');
 const EXECUTE = process.argv.includes('--execute');
 
 const INMETERS = {
@@ -37,10 +37,7 @@ const { zoekKlant, productRegels } = require('./planado-gripp-verrijken.js');
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 const { kortVeld } = require('./planado-gripp-verrijken.js');
 async function telegram(tekst) {
-  await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: TG_CHAT, text: tekst }),
-  }).catch(() => {});
+  await planningTelegram(tekst);
 }
 
 // ── Outlook (gedeeld OWA-token van de planning-mail-daemon) ──

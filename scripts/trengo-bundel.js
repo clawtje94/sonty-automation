@@ -18,7 +18,7 @@ const H = { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' };
 const DROOG = process.argv.includes('--droog');
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 const LOG_PAD = path.join(__dirname, '..', 'data', 'trengo-merge-log.jsonl');
-const { PLANNING_TG_TOKEN: TG_TOKEN, PLANNING_TG_CHAT: TG_CHAT } = require('./lib/telegram-planning.js');
+const { planningTelegram } = require('./lib/telegram-planning.js');
 
 const SYSTEEM = /sontymontage|@sonty\.nl$|no-?reply|webflow|postmaster|mailer-daemon/i;
 const telSleutel = (t) => {
@@ -27,10 +27,7 @@ const telSleutel = (t) => {
 };
 
 async function telegram(tekst) {
-  await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: TG_CHAT, text: tekst }),
-  }).catch(() => {});
+  await planningTelegram(tekst);
 }
 
 async function actieveTickets() {

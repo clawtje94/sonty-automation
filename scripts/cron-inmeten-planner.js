@@ -1067,15 +1067,55 @@ async function verwerkAanbiedingen() {
   // mutatie/boek-verzoeken worden door de SNELLE daemon verwerkt (inmeet-verzoek-daemon.js)
   // 1. verlopen aanbiedingen opruimen + melden (de 24-uursklok)
   const { aanbiedingen: open } = await aanbodApi('?status=open');
+  state.opvolging = state.opvolging || {}; // per rpItemId: hoe vaak al een aanbod gestuurd
   for (const a of open) {
+    const rest = Date.parse(a.verlooptOp) - Date.now();
+
+    // HERINNERING (Daimy 10-08: "wat doen we met mensen die niet reageren?").
+    // Vier uur voor het verlopen één vriendelijk duwtje in hetzelfde gesprek. Eén
+    // keer, nooit vaker: dit is een reminder, geen achtervolging.
+    if (rest > 0 && rest < 4 * 3600000 && !state.opvolging[a.token + ':herinnerd']) {
+      state.opvolging[a.token + ':herinnerd'] = new Date().toISOString();
+      bewaarState(state);
+      try {
+        const tk = laadState().aanbodTickets?.[a.token]?.waTicket;
+        if (tk) {
+          const TT4 = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
+          const wanneer = new Date(a.slots[0].aankomst).toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+          await fetch(`https://app.trengo.com/api/v2/tickets/${tk}/messages`, {
+            method: 'POST', headers: { Authorization: 'Bearer ' + TT4, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: `Hoi ${String(a.lead.naam).split(' ')[0]}, ik hou ${wanneer} nog even voor je vrij. Past het, laat je het dan weten? Komt het niet uit, dan zoek ik met alle plezier een ander moment.\n\nGroetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
+          });
+        }
+      } catch { /* herinnering is extra, geen blokkade */ }
+    }
+
     if (Date.now() > Date.parse(a.verlooptOp)) {
       await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen' }) });
       const { verwijderOpties } = require('./lib/outlook-opties.js');
       await verwijderOpties(state.opties?.[a.token]).catch(() => {});
       delete state.opties?.[a.token];
-      await telegram(`⏰ Inmeet-aanbod voor ${a.lead.naam} is na 24 uur verlopen zonder keuze. Volgende stap: nieuw aanbod of bellen (belscherm).`);
+
+      // NA HET VERLOPEN NIET STIL BLIJVEN. Ronde 1 zonder reactie: verse tijden
+      // sturen (de vorige stonden misschien gewoon niet goed). Ook ronde 2 zonder
+      // reactie: stoppen met sturen en het aan een mens geven om te bellen — dat is
+      // geen automatiseerbaar gesprek meer.
+      const rpId = a.lead.rpItemId;
+      const rondes = (state.opvolging[rpId] || 1);
+      if (rpId && rondes < 2) {
+        state.opvolging[rpId] = rondes + 1;
+        bewaarState(state);
+        const r = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+          body: JSON.stringify({ type: 'stuur-aanbod', rpItemId: rpId, naam: a.lead.naam, bron: 'opvolging' }),
+        }).catch(() => null);
+        await telegram(`⏰ ${a.lead.naam} reageerde niet binnen 24 uur. ${r?.ok ? 'Nieuwe tijden worden nu gestuurd (ronde 2).' : 'Nieuw aanbod aanvragen MISLUKT — handmatig oppakken.'}`);
+      } else {
+        await telegram(`📞 ${a.lead.naam} heeft nu 2x niet gereageerd op een voorstel. Ik stop met sturen; hij staat op het belscherm — even bellen is nu het beste.`);
+      }
     }
   }
+  bewaarState(state);
 
   // 2. gekozen aanbiedingen boeken
   const { aanbiedingen: gekozen } = await aanbodApi('?status=gekozen');

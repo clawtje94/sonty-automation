@@ -1178,8 +1178,13 @@ async function verwerkAanbiedingen() {
           if (tekstK) {
             const { leesReactie } = require('./lib/planning-antwoord.js');
             const duiding = await leesReactie(tekstK, a.slots);
-            if (duiding.intent !== 'akkoord') {
-              console.log(`  ✋ ${a.lead.naam}: laatste bericht is "${duiding.intent}" — NIET boeken (${duiding.samenvatting})`);
+            // De regel zelf staat in lib/boek-poort.js, zodat het gesprek-lab exact
+            // dezelfde beslissing test als die hier valt.
+            const { magBoeken } = require('./lib/boek-poort.js');
+            const poort = magBoeken(duiding, tekstK, a.lead.volledigAdres);
+            if (!poort.mag) {
+
+              console.log(`  ✋ ${a.lead.naam}: ${poort.reden} — NIET boeken (${duiding.samenvatting})`);
               await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen' }) });
               const { verwijderOpties } = require('./lib/outlook-opties.js');
               await verwijderOpties(state.opties?.[a.token]).catch(() => {});
@@ -1190,7 +1195,7 @@ async function verwerkAanbiedingen() {
                 method: 'POST', headers: { Authorization: 'Bearer ' + TTC, 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: `Hoi ${String(a.lead.naam).split(' ')[0]}, dank je wel, ik heb je bericht gezien. Ik zoek dit even goed uit en kom er vandaag nog bij je op terug.\n\nGroetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
               }).catch(() => {});
-              await telegram(`✋ ${a.lead.naam} NIET geboekt: na zijn keuze kwam er nog een bericht — "${tekstK.slice(0, 110)}" (${duiding.intent}: ${duiding.samenvatting}). Aanbod ingetrokken, klant heeft bericht gehad. Actie nodig.`);
+              await telegram(`✋ ${a.lead.naam} NIET geboekt: na zijn keuze kwam er nog een bericht — "${tekstK.slice(0, 110)}" (${poort.reden}: ${duiding.samenvatting}). Aanbod ingetrokken, klant heeft bericht gehad. Actie nodig.`);
               continue;
             }
           }

@@ -401,10 +401,27 @@ test('verwerker checkt het laatste klantbericht, monitor volgt ook geboekte klan
   const fs2 = require('fs');
   const planner = fs2.readFileSync(__dirname + '/../scripts/cron-inmeten-planner.js', 'utf8');
   assert.ok(/laatste-woord-check|LAATSTE WOORD VAN DE KLANT/i.test(planner), 'laatste-woord-bewaker ontbreekt in de verwerker');
-  assert.ok(/duiding\.intent !== 'akkoord'/.test(planner), 'verwerker moet stoppen bij een niet-akkoord laatste bericht');
+  assert.ok(/magBoeken\(duiding, tekstK/.test(planner), 'verwerker moet de boek-poort gebruiken');
   const monitor = fs2.readFileSync(__dirname + '/../scripts/cron-aanbod-replies.js', 'utf8');
   assert.ok(/naboeking:/.test(monitor), 'monitor moet berichten na de boeking oppakken');
   assert.ok(/VERS_MS/.test(monitor), 'monitor moet recent verstuurde aanbiedingen blijven volgen');
+});
+
+// De poort die bepaalt of een keuze echt geboekt mag worden. Deze regel wordt door de
+// verwerker en door het gesprek-lab gebruikt; loopt hij uiteen, dan test het lab iets
+// anders dan er gebeurt.
+test('boek-poort: vraag mag boeken, andere dag/klacht/ander adres niet', () => {
+  const { magBoeken } = require('../scripts/lib/boek-poort.js');
+  const adres = 'Arembergstraat 47, 4761 KG Zevenbergen';
+  assert.strictEqual(magBoeken({ intent: 'akkoord' }, 'Dat past', adres).mag, true);
+  assert.strictEqual(magBoeken({ intent: 'vraag' }, 'Dankjewel! Hoelang duurt het?', adres).mag, true,
+    'een vraag na het akkoord mag de afspraak niet ophouden');
+  assert.strictEqual(magBoeken({ intent: 'ander-moment' }, 'Sorry woensdag kan niet', adres).mag, false);
+  assert.strictEqual(magBoeken({ intent: 'klacht' }, 'Ja doe maar, maar ik ben er niet blij mee', adres).mag, false);
+  assert.strictEqual(magBoeken({ intent: 'vraag' }, 'Jullie hebben wel het goede adres toch... Diderica Mijnssenstraat 22, 4822WH Breda', adres).mag,
+    false, 'afwijkende postcode = eerst adres controleren');
+  assert.strictEqual(magBoeken({ intent: 'vraag' }, 'Klopt, Arembergstraat 47, 4761KG', adres).mag, true,
+    'eigen postcode bevestigen mag gewoon door');
 });
 
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);

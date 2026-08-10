@@ -75,6 +75,7 @@ docs/*.pdf
 .vercel
 scripts/.anthropic-api-key.txt
 scripts/.tomtom-api-key.txt
+scripts/.kvk-api-key.txt
 scripts/secrets.js
 .next/
 data/google-service-account.json
@@ -98,3 +99,7 @@ data/conversie-2024-raw.json
 data/meetinstructies/
 scripts/.owa-token.txt
 data/prijs-meetlat/vergelijking.json
+
+data/.tmp-*
+data/ai-ks/.tmp-*
+scripts/.tmp-*

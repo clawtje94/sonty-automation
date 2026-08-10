@@ -44,24 +44,28 @@ async function zoekWaTicket(telefoon) {
  *  NIEUW gesprek in plaats van door te gaan in het bestaande (Daimy 10-08, geval
  *  Katuscha). We proberen daarom alle gangbare notaties, meest specifiek eerst.
  *  @returns {Promise<number|null>} id van het meest recente actieve WA-ticket */
-async function zoekWaTicketBreed(telefoon) {
+async function zoekWaTicketBreed(telefoon, { ookGesloten = false } = {}) {
   const cijfers = String(telefoon || '').replace(/\D/g, '');
   if (cijfers.length < 9) return null;
   const nat = cijfers.slice(-9);                    // 625583218
   const varianten = [`+31${nat}`, `0031${nat}`, `31${nat}`, `0${nat}`, nat];
+  let gesloten = null;
   for (const term of varianten) {
     try {
       const r = await tFetch(`/tickets?term=${encodeURIComponent(term)}`);
       if (!r.ok) continue;
       const rijen = (await r.json())?.data || [];
-      const wa = rijen.filter((t) => (t.channel?.id === WA_KANAAL || t.channel?.type === 'WA_BUSINESS') && t.status !== 'CLOSED');
-      if (wa.length) {
-        wa.sort((a, b) => String(b.updated_at || b.created_at || '').localeCompare(String(a.updated_at || a.created_at || '')));
-        return wa[0].id;
-      }
+      const wa = rijen.filter((t) => t.channel?.id === WA_KANAAL || t.channel?.type === 'WA_BUSINESS');
+      const nieuwste = (lijst) => [...lijst].sort((a, b) => String(b.updated_at || b.created_at || '').localeCompare(String(a.updated_at || a.created_at || '')))[0];
+      const open = wa.filter((t) => t.status !== 'CLOSED');
+      if (open.length) return nieuwste(open).id;
+      // Een gesloten gesprek is prima om te VOLGEN (een klantreactie heropent het);
+      // voor verzenden willen we het niet, vandaar de schakelaar. Zonder deze terugval
+      // bleef Rene Blauw's gesprek "onvindbaar" terwijl het gewoon gesloten was.
+      if (wa.length && !gesloten) gesloten = nieuwste(wa).id;
     } catch { /* volgende notatie */ }
   }
-  return null;
+  return ookGesloten ? gesloten : null;
 }
 
 function verWegRegel(ver) {

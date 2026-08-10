@@ -123,7 +123,7 @@ async function vervangDoodTicket(token, info) {
   if (!info?.telefoon) return null;
   try {
     const { zoekWaTicketBreed } = require('./lib/aanbod-versturen.js');
-    const nieuwId = await zoekWaTicketBreed(info.telefoon);
+    const nieuwId = await zoekWaTicketBreed(info.telefoon, { ookGesloten: true });
     if (!nieuwId) return null;
     const st = (() => { try { return JSON.parse(fs.readFileSync(STATE_PLANNER, 'utf8')); } catch { return {}; } })();
     if (st.aanbodTickets?.[token]) {

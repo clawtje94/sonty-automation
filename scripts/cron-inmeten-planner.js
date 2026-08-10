@@ -953,6 +953,26 @@ async function nogSteedsVrij(aanbod, duurMin, naam) {
 
 /** Aanbod vastleggen in het register en direct naar de klant sturen (mail + WhatsApp). */
 async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null) {
+  // HARDE STOP (Daimy 10-08): een klant met een LOPENDE afspraak krijgt NOOIT een nieuw
+  // voorstel. Op 10-08 kreeg Eric van der Meer een tweede voorstel terwijl hij al op
+  // 18 augustus stond — puur omdat er een verkeerd RP-id werd meegegeven. Dat is
+  // verwarrend voor een echt mens en volstrekt vermijdbaar: de boeking staat gewoon
+  // in ons eigen bestand. Wie zijn afspraak wil wijzigen gaat via verzetten, niet via
+  // een nieuw aanbod.
+  try {
+    const { laadBoekingen } = require('./lib/inmeet-mutatie.js');
+    const rpId = item?.id || lead?.rpItemId;
+    const bestaande = rpId ? laadBoekingen()[rpId] : null;
+    if (bestaande?.status === 'geboekt' && Date.parse(bestaande.aankomst) > Date.now()) {
+      const wanneer = new Date(bestaande.aankomst).toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+      await telegram(`🛑 GEEN aanbod verstuurd naar ${lead.naam}: hij heeft al een afspraak op ${wanneer} bij ${bestaande.inmeter}. Wil hij verzetten, doe dat via "afspraak verzetten".`);
+      throw new Error(`klant heeft al een afspraak (${wanneer}) — geen tweede voorstel gestuurd`);
+    }
+  } catch (e) {
+    if (/al een afspraak/.test(e.message)) throw e; // bewuste stop
+    // boekingenbestand onleesbaar: dan niet blokkeren, wel loggen
+    console.log('  (boekingscheck overgeslagen: ' + e.message.slice(0, 60) + ')');
+  }
   // Aantal aan te bieden tijden is instelbaar (Daimy 07-08: "gewoon 1 moment
   // aanbieden, in de winkel maken mensen ook bijna altijd tijd"). Bij 1 sturen we
   // het beste (goedkoopste) moment; de verzender valt zelf terug op 3 zolang de

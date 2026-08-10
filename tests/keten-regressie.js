@@ -197,6 +197,25 @@ test('ontdubbelen op tijd+inmeter, ook bij verschillende objecten', () => {
   assert.ok(uniek.some((s) => s.inmeter === 'Joey' && s.aankomst.getHours() === 14));
 });
 
+test('geen tweede voorstel aan een klant die al een afspraak heeft (Daimy 10-08)', async () => {
+  // Eric van der Meer kreeg op 10-08 een nieuw voorstel terwijl hij al op 18 augustus
+  // stond, doordat er een verkeerd RP-id werd meegegeven. Dat mag nooit meer kunnen.
+  const os = require('os');
+  const pad = require('path').join(os.tmpdir(), 'test-boekingen-' + Date.now() + '.json');
+  require('fs').writeFileSync(pad, JSON.stringify({
+    'rp-1': { naam: 'Test', status: 'geboekt', aankomst: new Date(Date.now() + 7 * 86400000).toISOString(), inmeter: 'Joey' },
+  }));
+  const oud = process.env.INMEET_BOEKINGEN_PAD;
+  process.env.INMEET_BOEKINGEN_PAD = pad;
+  delete require.cache[require.resolve('../scripts/lib/inmeet-mutatie.js')];
+  const { laadBoekingen } = require('../scripts/lib/inmeet-mutatie.js');
+  const b = laadBoekingen()['rp-1'];
+  assert.ok(b && b.status === 'geboekt' && Date.parse(b.aankomst) > Date.now(), 'lopende boeking moet vindbaar zijn voor de blokkade');
+  process.env.INMEET_BOEKINGEN_PAD = oud;
+  delete require.cache[require.resolve('../scripts/lib/inmeet-mutatie.js')];
+  require('fs').unlinkSync(pad);
+});
+
 console.log('— winkel-keuzelijst (Daimy 09-08) —');
 test('kiesWinkelOpties: 5 gevarieerde opties met labels vroegste en minste rijtijd', () => {
   const { kiesWinkelOpties } = require('../scripts/lib/slotzoeker');

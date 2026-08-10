@@ -1165,7 +1165,10 @@ async function verwerkAanbiedingen() {
         // het kantoor (spoedje/winkelklant) wint altijd van een optie: NIET boeken,
         // aanbod afsluiten, en de lead komt vanzelf terug in de eerstvolgende
         // planner-run voor een VERS aanbod (wachttijd telt gewoon door).
-        await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verwerkt' }) });
+        // Status 'verlopen', NIET 'verwerkt': verwerkt betekent "geboekt", en dat was
+        // het niet. Op het dashboard stond daardoor groen "klant koos optie 1" bij
+        // Natalie Bavinck terwijl er niets geboekt was (Daimy 10-08).
+        await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen' }) });
         const { verwijderOpties } = require('./lib/outlook-opties.js');
         await verwijderOpties(state.opties?.[a.token]).catch(() => {});
         delete state.opties?.[a.token];

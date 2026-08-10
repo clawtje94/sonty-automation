@@ -132,7 +132,9 @@
     "832da605-d2ae-461d-ba42-76ae3aa44f20": "2026-08-08T08:54:17.858Z",
     "2a75744a-592b-474d-bd97-5de6571da3c2": "2026-08-08T13:02:38.076Z",
     "3b60b8c4-ce55-4f09-aabb-4d32a0fa3fb6": "2026-08-08T14:06:03.520Z",
-    "ce536a66-2ae1-4eb2-800e-75083025efc6": "2026-08-09T08:12:55.453Z"
+    "ce536a66-2ae1-4eb2-800e-75083025efc6": "2026-08-09T08:12:55.453Z",
+    "c7f83bfd-1263-44fb-a340-307888534872": "2026-08-10T11:42:46.653Z",
+    "395ad87e-c66f-447c-84cd-36d654f3f236": "2026-08-10T15:20:08.688Z"
   },
   "laatsteRapportHash": "0fe85bb104319c903330ed1cc67fed376372154a",
   "gemeld": {
@@ -183,7 +185,9 @@
     "832da605-d2ae-461d-ba42-76ae3aa44f20": "2026-08-08T08:55:13.720Z",
     "2a75744a-592b-474d-bd97-5de6571da3c2": "2026-08-08T13:05:06.899Z",
     "3b60b8c4-ce55-4f09-aabb-4d32a0fa3fb6": "2026-08-08T14:07:16.891Z",
-    "ce536a66-2ae1-4eb2-800e-75083025efc6": "2026-08-09T08:14:14.568Z"
+    "ce536a66-2ae1-4eb2-800e-75083025efc6": "2026-08-09T08:14:14.568Z",
+    "c7f83bfd-1263-44fb-a340-307888534872": "2026-08-10T11:44:01.774Z",
+    "395ad87e-c66f-447c-84cd-36d654f3f236": "2026-08-10T15:21:17.878Z"
   },
   "opties": {
     "ccb0f0aa2ab466d873faba250a638412": [
@@ -213,110 +217,39 @@
     "ef283919143e0e6fe517a342f58413d4": [
       "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVhAYpqAAA="
     ],
-    "4447b71ec20591977492958c7bdcb0b0": [
-      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVhAYprAAA="
+    "fac958990e8d7d64e652cc075a11d64d": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVhAYpyAAA="
+    ],
+    "e17fff1e15bcac8126ab7e9ab26cc9d3": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVhAYp0AAA="
+    ],
+    "64d42442cf5441e290379be41e104256": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVhAYp_AAA="
+    ],
+    "3c63d28448f51189cae7e9f9201fbda6": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVhAYqFAAA="
     ]
   },
-  "laatsteVolleScan": "2026-08-10T07:58:12.926Z",
+  "laatsteVolleScan": "2026-08-10T14:18:17.533Z",
   "inmeetLeads": [
     {
-      "id": "3b60b8c4-ce55-4f09-aabb-4d32a0fa3fb6",
-      "summary": "Katuscha  Tellegen",
+      "id": "c7f83bfd-1263-44fb-a340-307888534872",
+      "summary": "Debby van van Haren",
       "item_subject": {
-        "id": "c03b4c0b-317c-4304-afd3-42eb763103fb",
-        "identifier": "type=LEAD_CONFIGURATION,id=c03b4c0b-317c-4304-afd3-42eb763103fb",
+        "id": "04f41a43-8634-45dc-981d-0837024e7bae",
+        "identifier": "type=LEAD_CONFIGURATION,id=04f41a43-8634-45dc-981d-0837024e7bae",
         "type": "LEAD_CONFIGURATION"
       },
-      "description": "Land: Nederland\nE-mailadres: katuscha.tellegen@gmail.com\nVoornaam: Katuscha \nAchternaam: Tellegen\nPostcode: 2596 JG\nHuisnummer: 6\nPlaats: 's-Gravenhage\nStraatnaam: Van Panhuysstraat\nTelefoonnummer: +31625583218\nHoe komt u bij ons terecht?: Bekende\n\n1x Suncube XL: \n- doekkleur: Doekkleur naar keuze\n- framekleur: Technisch aluminium\n- uitval: 950 mm\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- breedte: 3438.0\n\n1x Inclusief montage  uitvalscherm\n1x Somfy connectivity app bediening",
+      "description": "Land: Nederland\nE-mailadres: debbyvanharen@live.nl\nVoornaam: Debby van\nAchternaam: van Haren\nPostcode: 2981 BR\nPlaats: Ridderkerk\nStraatnaam: Kamperfoeliestraat 11/2981br\nTelefoonnummer: +31644655991\nHuisnummer: 11\nHoe komt u bij ons terecht?: Social media\n\n1x Voorraad scherm - 20% korting: \n- doekkleur: Grijs\n- heb_je_een_uitbouw?: Nee\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Inclusief montage Knikarmscherm uitgebreid.: \n- heb_je_een_uitbouw?: Nee\n\n1x Somfy connectivity app bediening\n\n**Opmerking planning (AI-klantenservice, 2026-08-10):**\nKlant akkoord op offerte 202610708. Elektra ter plekke doornemen bij inmeten. Adres: Kamperfoeliestraat 11, 2981 BR Ridderkerk.",
       "fields": {
-        "address": "Van Panhuysstraat 6, 2596 JG 's-Gravenhage, Nederland",
-        "phone": "+31625583218",
+        "address": "Kamperfoeliestraat 11/2981br 11, 2981 BR Ridderkerk, Nederland",
+        "phone": "+31644655991",
         "cf_lead_value": {
-          "amount": "2281.1025",
+          "amount": "3098.25",
           "isoCurrency": "EUR",
           "type": "currency"
         },
-        "email": "katuscha.tellegen@gmail.com"
-      }
-    },
-    {
-      "id": "a7f8aa66-30fb-48bb-a04a-6a6317708a7d",
-      "summary": "Ashutosh Ramparichan",
-      "item_subject": {
-        "id": "344c889d-ca83-4744-a12a-802064644e79",
-        "identifier": "type=LEAD_CONFIGURATION,id=344c889d-ca83-4744-a12a-802064644e79",
-        "type": "LEAD_CONFIGURATION"
-      },
-      "description": "Land: Nederland\nE-mailadres: ashutoshramparichan@hotmail.com\nTelefoonnummer: +31641325754\nVoornaam: Ashutosh\nAchternaam: Ramparichan\nPostcode: 2904VR\nHuisnummer: 83\nPlaats: Capelle aan den IJssel\nStraatnaam: Anna Maria van Cappellenpark\nHoe komt u bij ons terecht?: Bekende\n\n1x Rolluik: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1600.0\n- breedte: 1100.0\n\n1x Inclusief montage rolluik solar\n1x Somfy connectivity app bediening\n1x Rolluik: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1600.0\n- breedte: 2100.0\n\n1x Somfy connectivity app bediening\n1x Inclusief montage rolluik solar\n1x Rolluik: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 2500.0\n- breedte: 1700.0\n\n1x Inclusief montage rolluik solar\n1x Somfy connectivity app bediening",
-      "fields": {
-        "address": "Anna Maria van Cappellenpark 83, 2904VR Capelle aan den IJssel, Nederland",
-        "phone": "+31641325754",
-        "cf_lead_value": {
-          "isoCurrency": "EUR",
-          "amount": "5397.499999999999",
-          "type": "currency"
-        },
-        "email": "ashutoshramparichan@hotmail.com"
-      }
-    },
-    {
-      "id": "ee68da22-207f-4d94-b32f-1432d7d05d18",
-      "summary": "Timo Goes",
-      "item_subject": {
-        "id": "3cb84635-a529-4c16-b35c-2921c240d12a",
-        "identifier": "type=LEAD_CONFIGURATION,id=3cb84635-a529-4c16-b35c-2921c240d12a",
-        "type": "LEAD_CONFIGURATION"
-      },
-      "description": "Naam: Timo Goes\nTelefoonnummer:  0634497754\nE-mailadres:  timogoes@hotmail.com",
-      "fields": {
-        "address": "",
-        "phone": " 0634497754",
-        "cf_lead_value": {
-          "isoCurrency": "EUR",
-          "amount": "7372.05",
-          "type": "currency"
-        },
-        "email": " timogoes@hotmail.com"
-      }
-    },
-    {
-      "id": "c7b2362c-4181-4a12-ba5c-a5fb18feae5e",
-      "summary": "Natalie Bavinck",
-      "item_subject": {
-        "id": "3e195974-2468-497e-b5e8-ff496d6bd3c9",
-        "identifier": "type=LEAD_CONFIGURATION,id=3e195974-2468-497e-b5e8-ff496d6bd3c9",
-        "type": "LEAD_CONFIGURATION"
-      },
-      "description": "Land: Nederland\nE-mailadres: natalievanmoorsel@hotmail.com\nTelefoonnummer: +31647780335\nVoornaam: Natalie\nAchternaam: Bavinck\nPostcode: 2152 TE\nHuisnummer: 42\nPlaats: Nieuw-Vennep\nStraatnaam: Sarabande\nHoe komt u bij ons terecht?: Google\n\n1x Voorraad scherm - 20% korting: \n- doekkleur: Beige\n- heb_je_een_uitbouw?: Ja\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Inclusief montage Knikarmscherm uitgebreid.: \n- heb_je_een_uitbouw?: Ja\n\n**Opmerking planning (AI-klantenservice, 2026-08-07):**\nKlant akkoord op prijsindicatie offerte 202611193. Graag inmeetafspraak inplannen.",
-      "fields": {
-        "address": "Sarabande 42, 2152 TE Nieuw-Vennep, Nederland",
-        "phone": "+31647780335",
-        "cf_lead_value": {
-          "amount": "2975.0",
-          "isoCurrency": "EUR",
-          "type": "currency"
-        },
-        "email": "natalievanmoorsel@hotmail.com"
-      }
-    },
-    {
-      "id": "81734975-d813-4f7d-8d5d-2c762bdec032",
-      "summary": "Connie Biermann",
-      "item_subject": {
-        "id": "57f34e79-b189-4179-a790-c19d9bc44ef5",
-        "identifier": "type=LEAD_CONFIGURATION,id=57f34e79-b189-4179-a790-c19d9bc44ef5",
-        "type": "LEAD_CONFIGURATION"
-      },
-      "description": "Land: Nederland\nE-mailadres: koosje.cb@gmail.com\nVoornaam: Connie\nAchternaam: Biermann\nPostcode: 4761KG\nHuisnummer: 47\nPlaats: Zevenbergen\nStraatnaam: Arembergstraat\nTelefoonnummer: +31653516802\nHoe komt u bij ons terecht?: Google\n\n1x Voorraad scherm - 20% korting: \n- doekkleur: Grijs\n- heb_je_een_uitbouw?: Nee\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Inclusief montage Knikarmscherm uitgebreid.: \n- heb_je_een_uitbouw?: Nee\n\n1x Draadloze windsensor",
-      "fields": {
-        "address": "Arembergstraat 47, 4761KG Zevenbergen, Nederland",
-        "phone": "+31653516802",
-        "cf_lead_value": {
-          "amount": "3076.15",
-          "isoCurrency": "EUR",
-          "type": "currency"
-        },
-        "email": "koosje.cb@gmail.com"
+        "email": "debbyvanharen@live.nl"
       }
     },
     {
@@ -376,14 +309,6 @@
       "mailTicket": null,
       "verstuurdOp": "2026-08-06T18:07:43.675Z",
       "email": "ericievld1983@gmail.com"
-    },
-    "62c841ac17b817e122a0b80e527208b3": {
-      "naam": "Carlo Pronk",
-      "telefoon": "+31643547555",
-      "waTicket": 972325672,
-      "mailTicket": 972338641,
-      "verstuurdOp": "2026-08-06T18:10:16.733Z",
-      "email": "Carlo.pronk@live.nl"
     },
     "033ca171a725ffd89c0771d7a3ba079d": {
       "naam": "Irene  Kersseboom",
@@ -600,6 +525,94 @@
       "waTicket": 972940907,
       "mailTicket": 973100722,
       "verstuurdOp": "2026-08-10T09:34:50.660Z"
+    },
+    "482c0d31b6ffc12756c9ea012a265b48": {
+      "naam": "Marco Klok",
+      "telefoon": "+31643484972",
+      "email": "marco_klok@outlook.com",
+      "waTicket": 973126237,
+      "mailTicket": 970981297,
+      "verstuurdOp": "2026-08-10T10:57:29.799Z"
+    },
+    "fac958990e8d7d64e652cc075a11d64d": {
+      "naam": "Ashutosh Ramparichan",
+      "telefoon": "+31641325754",
+      "email": "ashutoshramparichan@hotmail.com",
+      "waTicket": 973126503,
+      "mailTicket": 973126516,
+      "verstuurdOp": "2026-08-10T10:58:33.142Z"
+    },
+    "74b7d92854a1b204b9d5d40a9b5aa082": {
+      "naam": "Connie Biermann",
+      "telefoon": "+31653516802",
+      "email": "koosje.cb@gmail.com",
+      "waTicket": 973126783,
+      "mailTicket": 973126786,
+      "verstuurdOp": "2026-08-10T10:59:35.971Z"
+    },
+    "e17fff1e15bcac8126ab7e9ab26cc9d3": {
+      "naam": "Natalie Bavinck",
+      "telefoon": "+31647780335",
+      "email": "natalievanmoorsel@hotmail.com",
+      "waTicket": 972940390,
+      "mailTicket": 972940398,
+      "verstuurdOp": "2026-08-10T11:00:36.931Z"
+    },
+    "a5a5b6546edbcc098a1c6e08280ff94e": {
+      "naam": "Timo Goes",
+      "telefoon": "0634497754",
+      "email": "timogoes@hotmail.com",
+      "waTicket": 973127413,
+      "mailTicket": 967928755,
+      "verstuurdOp": "2026-08-10T11:01:40.617Z"
+    },
+    "93ff83819b9a1634e0bf1fce08a7a217": {
+      "naam": "Ashutosh Ramparichan",
+      "telefoon": "+31641325754",
+      "email": "ashutoshramparichan@hotmail.com",
+      "waTicket": 973126503,
+      "mailTicket": 973126516,
+      "verstuurdOp": "2026-08-10T11:04:39.542Z"
+    },
+    "64d42442cf5441e290379be41e104256": {
+      "naam": "Natalie Bavinck",
+      "telefoon": "+31647780335",
+      "email": "natalievanmoorsel@hotmail.com",
+      "waTicket": 972940390,
+      "mailTicket": 972940398,
+      "verstuurdOp": "2026-08-10T12:10:03.947Z"
+    },
+    "9a69d43d5f65414d6bf6f0e2192992f3": {
+      "naam": "Natalie Bavinck",
+      "telefoon": "+31647780335",
+      "email": "natalievanmoorsel@hotmail.com",
+      "waTicket": 972940390,
+      "mailTicket": 972940398,
+      "verstuurdOp": "2026-08-10T12:16:42.210Z"
+    },
+    "3c63d28448f51189cae7e9f9201fbda6": {
+      "naam": "Debby van van Haren",
+      "telefoon": "+31644655991",
+      "email": "debbyvanharen@live.nl",
+      "waTicket": 970483194,
+      "mailTicket": 973188263,
+      "verstuurdOp": "2026-08-10T13:54:29.339Z"
+    },
+    "346894683a4246dab90633741f5ac5ab": {
+      "naam": "Rick van Nieuwkerk",
+      "telefoon": "+31614160441",
+      "email": "rickvannieuwkerk@gmail.com",
+      "waTicket": 972940296,
+      "mailTicket": 972083408,
+      "verstuurdOp": "2026-08-10T15:48:10.354Z"
+    },
+    "60c40ce56640f3a758b69a47ca8e9866": {
+      "naam": "Th De geest",
+      "telefoon": "+31612639678",
+      "email": "ghosty_buster@hotmail.com",
+      "waTicket": 973216133,
+      "mailTicket": 973127197,
+      "verstuurdOp": "2026-08-10T15:49:50.281Z"
     }
   },
   "conflictGemeld": {

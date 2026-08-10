@@ -1,0 +1,36 @@
+{
+  "quotationNumber": "202611390",
+  "documentId": "12b8ce2c-899d-46a9-87c5-416084ef0cd7",
+  "name": "Monique  Vonk",
+  "timestamp": "2026-08-10T15:00:31.843Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 1575 mm\nHoogte: 1490 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1561.4,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 1715 mm\nHoogte: 1710 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1676.9,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

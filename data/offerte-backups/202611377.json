@@ -1,0 +1,29 @@
+{
+  "quotationNumber": "202611377",
+  "documentId": "66dbdf7d-99b4-49c8-a5c0-0a8ff9efe925",
+  "name": "Peter Strik",
+  "timestamp": "2026-08-10T15:00:51.457Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Square 85/100\nBreedte: 1507 mm\nHoogte: 2247 mm\nKastmaat 105 mm\nFrame Kleur: RAL 7016 structuur\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 939.4,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

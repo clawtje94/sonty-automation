@@ -1,0 +1,50 @@
+{
+  "quotationNumber": "202611384",
+  "documentId": "58a9f81c-c6a0-41c4-b5d9-9eb04ba6628b",
+  "name": "Marcel Daman",
+  "timestamp": "2026-08-10T15:00:40.060Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 2830 mm\nHoogte: 1663 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9010\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 2081.7,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 955 mm\nHoogte: 2477 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9010\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1574.6,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Rolluik (RollSUPER)\nBreedte: 3200 mm\nHoogte: 2530 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 9010\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 2097.1,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage rolluik solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

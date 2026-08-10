@@ -1,0 +1,29 @@
+{
+  "quotationNumber": "202611381",
+  "documentId": "b05bff1c-e127-42bf-adb3-f07a302e9c3a",
+  "name": "Rob van der Zwet",
+  "timestamp": "2026-08-10T15:00:44.321Z",
+  "lines": [
+    {
+      "units": 2,
+      "description": "Markies\n- Breedte: 3000mm\n- Uitval: 1150 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Motor + afstandsbediening\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

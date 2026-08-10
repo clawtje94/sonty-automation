@@ -100,7 +100,7 @@ async function telegram(text) {
         max_tokens: 1500,
         messages: [{ role: 'user', content:
           `Hieronder staan ${perTicket.size} AI-klantenservicegesprekken van Sonty (zonwering) van de afgelopen dag. Beoordeel ALLEEN op basis van wat er echt staat (niets verzinnen) en geef UITSLUITEND geldige JSON terug in dit formaat:\n` +
-          `{\n  "geholpen": <aantal gesprekken waarin de AI de klant echt inhoudelijk verder heeft geholpen>,\n  "akkoord_inmeten": <aantal klanten dat AKKOORD is gegaan met de opdracht. LET OP: een klant die doorgezet is naar "inmeten inplannen" is per definitie akkoord — tel akkoord en inmeten dus als ÉÉN ding, elke klant maximaal 1x. NIET dubbeltellen>,\n  "showroom": <aantal klanten dat een SHOWROOMbezoek heeft afgesproken of daarnaar verwezen is. Dit staat LOS van akkoord: iemand komt naar de showroom om nog te beslissen>,\n  "overtuigd": <aantal twijfelaars dat de AI over de streep trok (subset van geholpen; alleen wie eerst duidelijk twijfelde op prijs/keuze)>,\n  "overtuigd_details": ["Klantnaam — in 1 zin hoe (alternatief/downgrade/uitleg/korting)"],\n  "veelvoorkomende_problemen": ["Kort thema waar klanten hulp bij nodig hadden of waar de AI het niet zelf kon oplossen (bv. 'foto-beoordeling', 'levertijd al lopende order', 'maatwerk buiten configurator', 'klacht montage'), met hoe vaak het voorkwam. Sorteer op meest voorkomend. Alleen echte terugkerende thema's, max 6."]\n}\n` +
+          `{\n  "geholpen": <aantal gesprekken waarin de AI de klant echt inhoudelijk verder heeft geholpen>,\n  "akkoord_inmeten": <aantal klanten dat AKKOORD is gegaan met de opdracht. LET OP: een klant die doorgezet is naar "inmeten inplannen" is per definitie akkoord — tel akkoord en inmeten dus als ÉÉN ding, elke klant maximaal 1x. NIET dubbeltellen>,\n  "showroom": <aantal klanten dat een SHOWROOMbezoek heeft afgesproken of daarnaar verwezen is. Dit staat LOS van akkoord: iemand komt naar de showroom om nog te beslissen>,\n  "overtuigd": <aantal twijfelaars dat de AI over de streep trok (subset van geholpen; alleen wie eerst duidelijk twijfelde op prijs/keuze)>,\n  "overtuigd_details": ["Klantnaam — in 1 zin hoe (alternatief/downgrade/uitleg/korting)"],\n  "akkoord_details": ["Klantnaam (ticket) — waaruit het akkoord blijkt, in een paar woorden"],\n  "veelvoorkomende_problemen": ["Kort thema waar klanten hulp bij nodig hadden of waar de AI het niet zelf kon oplossen (bv. 'foto-beoordeling', 'levertijd al lopende order', 'maatwerk buiten configurator', 'klacht montage'), met hoe vaak het voorkwam. Sorteer op meest voorkomend. Alleen echte terugkerende thema's, max 6."]\n}\n` +
           `Belangrijk tegen scheve data: akkoord_inmeten en showroom zijn aparte uitkomsten — tel een klant niet in beide. Geef alleen de JSON, geen tekst eromheen.\n\n${digest}` }],
       }),
     });
@@ -138,7 +138,12 @@ async function telegram(text) {
       await telegram(
         `🤖 AI-resultaten afgelopen dag (${perTicket.size} gesprekken gevoerd):\n\n` +
         `• Geholpen: ${stats.geholpen ?? '?'}\n` +
-        `• Akkoord (= inmeten inplannen): ${stats.akkoord_inmeten ?? '?'}\n` +
+        // Namen erbij (Daimy 10-08: "1 rapport zegt 2, het andere 5 vandaag?"). Dit
+        // cijfer is een gesprek-oordeel van het model; zonder namen is het niet te
+        // controleren en lijkt het te botsen met het tekenrapport, dat handtekeningen
+        // telt. Met namen zie je in een oogopslag wie er wel ja zei maar nog niet tekende.
+        `• Akkoord (= inmeten inplannen): ${stats.akkoord_inmeten ?? '?'}`
+        + ((stats.akkoord_details || []).length ? ' — ' + stats.akkoord_details.join(' | ') : '') + '\n' +
         `• Showroomafspraken (los): ${stats.showroom ?? '?'}\n` +
         `• Waarvan overtuigd vanuit twijfel: ${stats.overtuigd ?? '?'}\n` +
         details +

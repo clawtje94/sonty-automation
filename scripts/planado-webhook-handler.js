@@ -29,17 +29,9 @@ function log(msg) {
 }
 
 function sendTelegram(text) {
-  const data = JSON.stringify({ chat_id: TELEGRAM_CHAT, text });
-  const options = {
-    hostname: 'api.telegram.org',
-    path: `/bot${TELEGRAM_TOKEN}/sendMessage`,
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(data) }
-  };
-  const req = https.request(options);
-  req.on('error', () => {});
-  req.write(data);
-  req.end();
+  // Via de gedeelde routering: deze meldingen horen bij de data-bot, niet in de
+  // planning-groep (Daimy 10-08: daar alleen geboekte afspraken).
+  planningTelegram(text).catch(() => {});
 }
 
 function hubspotRequest(method, path, body) {

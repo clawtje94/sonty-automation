@@ -100,7 +100,13 @@ function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'i
   if (/sunbasic/.test(zoek)) {
     zoek = /\bopen\b/.test(zoek) ? 'sunbasic' : (/cassette|dicht|gesloten/.test(zoek) ? 'sunbasic cassette' : 'sunbasic');
   }
-  let productKey = api.getProductKey(zoek);
+  // VALKUIL 2 (Liz van Driel 10-08): vraagt een klant expliciet om een screen ZONDER
+  // zip (niet-windvast, "basis", "gewoon"), dan moet dat bij het Screen Square 85/100
+  // uitkomen. getProductKey stuurde elke screen-omschrijving naar de zip-variant,
+  // waardoor de bot beweerde dat hij een product uit ons eigen prijsboek niet kon
+  // rekenen en de klant onnodig op een collega moest wachten.
+  const wilZonderZip = /zonder\s*zip|niet[-\s]?windvast|basis|basic|gewoon|kaal|normaal/.test(zoek) && /screen/.test(zoek);
+  let productKey = wilZonderZip ? 'screenSquare85100' : api.getProductKey(zoek);
   if (!productKey) return { error: 'Onbekend product: ' + product + '. Bekende producten: zonneschermen (SunEye/SunBasic/SunElite), screens (Zip Design/Zip Square), rolluiken (S-37/S-42), uitvalschermen (SunCube/SunProject), serre zonwering (SunControl), pergola.' };
 
   const b = breedteMM ? breedteMM / 10 : null;

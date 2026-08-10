@@ -61,6 +61,43 @@
   Regressietest 23 = de echte Josua-casus. Bewijs: Marjolein 21 sep → 31 aug bovenaan,
   Matijn 15 okt → 21 sep.
 
+## 10-08: AUTONOOM WERKEND MAKEN (opdracht Daimy "ik kan er niet op vertrouwen")
+- **PLANNING-RESPONDER** (scripts/lib/planning-antwoord.js): elke klantreactie op een
+  voorstel wordt geduid met Haiku (akkoord / ander-moment / vraag / klacht). Bij
+  ander-moment gaan de door de klant genoemde dagen mee als voorkeurDagen naar de
+  verwerker en krijgt hij binnen minuten nieuwe tijden; bij vraag/klacht krijgt hij
+  meteen een ontvangstbevestiging en Daimy een concept-antwoord. Geen stilte meer.
+  Getest op de echte berichten van Rick, Katuscha, Rita, Natalie.
+- **OPVOLGING BIJ GEEN REACTIE**: 4 uur vóór verlopen één herinnering, na verlopen
+  automatisch verse tijden (ronde 2), daarna stoppen en naar het belscherm
+  (state.opvolging per rpItemId).
+- **HARDE STOP**: nooit een aanbod naar iemand met een lopende afspraak (incident Eric
+  van der Meer, door mijn eigen verkeerde rpItemId).
+- **WA-TICKETZOEKER BREED**: Trengo vindt een nummer alleen op de opgeslagen notatie;
+  zoeken op de laatste 9 cijfers gaf NUL hits → elke verzending opende een nieuw
+  ticket (Katuscha). Nu +31/0031/31/0/laatste-9 geprobeerd, met terugval op gesloten
+  gesprekken voor de monitor. Samengevoegde tickets (404) worden automatisch herzocht.
+- **TELEGRAM-SPLITSING ECHT DICHT**: negen scripts stuurden rechtstreeks naar de
+  planning-groep. Alles loopt nu via planningTelegram(); alleen de boekingsmelding
+  heeft { boeking: true }. Groep = uitsluitend geboekte afspraken.
+- **KETEN-ZELFCONTROLE** (scripts/cron-keten-zelfcontrole.js, launchd elk uur):
+  controleert 7 invarianten die stuk voor stuk uit een echt incident komen — dubbele
+  boeking, botsend aanbod, aanbod naast bestaande afspraak, klant zonder antwoord
+  (>2u), dood gesprek, vergeten lead (>5 dagen), verlopen zonder vervolg. Meldt alleen
+  NIEUWE afwijkingen (12u-dedup) en onderscheidt rate-limits van echte problemen.
+- **KAPOTTE DAEMONS GEREPAREERD**: (1) `node` bestaat niet in het launchd-PATH →
+  process.execPath (8 scripts, maandrapport/maandag-data lagen stil); (2) maandtabs
+  waren hardcoded en braken elke maandwissel — 'Juli 2026 ' heeft een spatie en
+  'Aug 2026' ontbrak → scripts/lib/maandtabs.js leest ze uit de sheet, met
+  uitsluitlijst voor dubbeltellende tabs en retry bij Google-rate-limits;
+  (3) OWA-token atomisch schrijven + terugval op een geldig token bij mislukte
+  browser-login; (4) dashboard-update: eerst committen, dan pullen (stash-beschermd),
+  push mag falen zonder de taak te breken.
+- **EINDSTAND**: alle launchd-daemons exit 0, 32 regressietests groen, 596 lab-scenario's
+  0x stil, 23 komende afspraken met 0 conflicten, zelfcontrole 1 open punt
+  (Marjolein Nunnink: offerte op naam van haar man — ligt bij Jorren en Tanya, WhatsApp
+  buiten 24u-venster dus bellen/mailen).
+
 ## 09-08 SLOT: DAGVULLING, RITA-LES, DAMSTEEG
 - **LEGE DAGEN BLEVEN LEEG (Daimy "dagen bij die gasten vol krijgen, 100% efficiënt")**:
   ontwerpfout in de kostenformule. extraRijtijdMin = heen + terug - direct; op een

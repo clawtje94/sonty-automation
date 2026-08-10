@@ -115,6 +115,26 @@ async function bevestigOntvangst(ticketId, naam, tekst) {
   return false;
 }
 
+/** Bij een samenvoeging verdwijnt het oude ticket-id (Trengo geeft dan 404) en volgde
+ *  de monitor een dood spoor: Katuscha's "Dat past!!!!!" werd zo gemist omdat haar
+ *  ticket net in het bestaande gesprek was gemerged (10-08). Opnieuw opzoeken op het
+ *  telefoonnummer en de state bijwerken, dan loopt het gewoon door. */
+async function vervangDoodTicket(token, info) {
+  if (!info?.telefoon) return null;
+  try {
+    const { zoekWaTicketBreed } = require('./lib/aanbod-versturen.js');
+    const nieuwId = await zoekWaTicketBreed(info.telefoon);
+    if (!nieuwId) return null;
+    const st = (() => { try { return JSON.parse(fs.readFileSync(STATE_PLANNER, 'utf8')); } catch { return {}; } })();
+    if (st.aanbodTickets?.[token]) {
+      st.aanbodTickets[token].waTicket = nieuwId;
+      fs.writeFileSync(STATE_PLANNER, JSON.stringify(st, null, 2));
+    }
+    console.log(`  ticket van ${info.naam} was samengevoegd → nu ${nieuwId}`);
+    return nieuwId;
+  } catch { return null; }
+}
+
 async function ticketBerichten(ticketId) {
   // 429's niet stil laten wegvallen (miste Eric's antwoord op 06-08): even wachten
   // en opnieuw; blijft het mislukken dan zichtbaar loggen.
@@ -173,8 +193,12 @@ async function main() {
       const extra = await zoekWaTicketOpNummer(info.telefoon).catch(() => null);
       if (extra) teVolgen.add(extra);
     }
-    for (const ticketId of teVolgen) {
-      const rows = await ticketBerichten(ticketId);
+    for (let ticketId of teVolgen) {
+      let rows = await ticketBerichten(ticketId);
+      if (!rows.length) {
+        const vervanger = await vervangDoodTicket(token, info);
+        if (vervanger && vervanger !== ticketId) { ticketId = vervanger; rows = await ticketBerichten(ticketId); }
+      }
       for (const m of rows) {
         const inbound = String(m.type || '').toUpperCase() === 'INBOUND' || m.direction === 'incoming';
         if (!inbound) continue;

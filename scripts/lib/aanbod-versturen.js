@@ -313,7 +313,7 @@ async function verstuurAanbod(aanbod, url) {
   return { wa, mail, ergensGelukt: wa.ok || mail.ok };
 }
 
-module.exports = { verstuurAanbod, verstuurBevestiging, herinneringTekst, stuurWhatsApp, stuurMail, zoekWaTicket };
+module.exports = { verstuurAanbod, verstuurBevestiging, herinneringTekst, stuurWhatsApp, stuurMail, zoekWaTicket, zoekWaTicketBreed };
 
 // CLI: node scripts/lib/aanbod-versturen.js <token> — verstuurt een bestaand aanbod.
 if (require.main === module) {

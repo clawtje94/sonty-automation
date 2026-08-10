@@ -39,14 +39,19 @@ async function api(pad) {
   return r.json();
 }
 
+/** @returns {{data?: any[]} | null | 'onbekend'} — 'onbekend' bij drukte (429) of een
+ *  storing: dat is géén verdwenen gesprek. Zonder dit onderscheid meldde de controle
+ *  Josua's gesprek als "dood" terwijl het gewoon bestond en Trengo even druk was —
+ *  en een vals alarm ondermijnt het vertrouwen in deze controle. */
 async function trengo(pad) {
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 4; i++) {
     const r = await fetch('https://app.trengo.com/api/v2' + pad, { headers: { Authorization: 'Bearer ' + TT } });
-    if (r.status === 429) { await wacht(8000); continue; }
-    if (!r.ok) return null;
+    if (r.status === 429) { await wacht(10000); continue; }
+    if (r.status === 404) return null;        // echt weg
+    if (!r.ok) return 'onbekend';             // storing: niet concluderen
     return r.json();
   }
-  return null;
+  return 'onbekend';                          // bleef druk
 }
 
 (async () => {
@@ -90,7 +95,8 @@ async function trengo(pad) {
     if (!info.waTicket) continue;
     const msgs = await trengo(`/tickets/${info.waTicket}/messages?per_page=10`);
     await wacht(700);
-    if (!msgs) { problemen.push(`DOOD GESPREK: ticket ${info.waTicket} van ${info.naam} is niet meer op te halen (samengevoegd?) — reacties worden gemist`); continue; }
+    if (msgs === 'onbekend') continue; // Trengo was druk; volgende ronde opnieuw
+    if (!msgs) { problemen.push(`DOOD GESPREK: ticket ${info.waTicket} van ${info.naam} bestaat niet meer (samengevoegd?) — reacties worden gemist`); continue; }
     const echt = (msgs.data || []).filter((m) => (m.message_type || m.type) !== 'NOTE')
       .sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)));
     const laatste = echt[echt.length - 1];

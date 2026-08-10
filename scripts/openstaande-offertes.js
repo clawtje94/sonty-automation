@@ -31,4 +31,4 @@ L.push('', 'Hoe ouder, hoe kleiner de kans dat hij nog sluit (na 45 dagen is 86%
 const tekst = L.join('\n');
 console.log(tekst);
 if (process.argv.includes('--stuur'))
-  require('child_process').execFileSync('node', [__dirname + '/sonty-data-send.js', tekst], { stdio: 'inherit' });
+  require('child_process').execFileSync(process.execPath, [__dirname + '/sonty-data-send.js', tekst], { stdio: 'inherit' });

@@ -14,9 +14,11 @@ const JAREN = {
   2026: {'Jan 2026':1,'Feb 2026':2,'Maart 2026':3,'April 2026':4,'Mei 2026':5,'Juni 2026 ':6,'Juli 2026':7},
 };
 const JAAR = +(process.argv[process.argv.indexOf('--jaar') + 1]) || 2025;
-if (!JAREN[JAAR]) { console.error('geen tabs bekend voor', JAAR); process.exit(1); }
-const TAB_MAAND = JAREN[JAAR];
-const TABS = Object.keys(TAB_MAAND);
+// TABS worden nu uit de sheet zelf gelezen (lib/maandtabs.js). De handmatige lijst liep
+// elke maandwissel stuk: 'Juli 2026 ' heeft een spatie en 'Aug 2026' ontbrak, waardoor
+// dit rapport crashte met "Unable to parse range" (10-08).
+let TAB_MAAND = {};
+let TABS = [];
 // 'Augustus 2025' (leeg) en '2025 alles bij elkaar' (deel-kopie jan t/m 18 mrt) NIET meenemen:
 // die zouden dubbeltellen. Wel als controle apart te draaien met --controle.
 const EXTRA = (process.argv.includes('--controle') && JAAR === 2025) ? ['Augustus 2025','2025 alles bij elkaar'] : [];
@@ -44,6 +46,10 @@ function parseDatum(v) {
 (async () => {
   const auth = new google.auth.GoogleAuth({keyFile: __dirname+'/../data/google-service-account.json', scopes:['https://www.googleapis.com/auth/spreadsheets.readonly']});
   const sheets = google.sheets({version:'v4', auth});
+  const { maandTabs } = require('./lib/maandtabs.js');
+  for (const t of await maandTabs(sheets, ID, JAAR)) TAB_MAAND[t.titel] = t.maand;
+  TABS = Object.keys(TAB_MAAND);
+  if (!TABS.length) { console.error('geen maandtabbladen gevonden voor', JAAR); process.exit(1); }
   const rows = [];
   const tabInfo = [];
   const geenDatum = [];

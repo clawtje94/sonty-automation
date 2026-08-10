@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202611205",
+  "documentId": "d7b5f031-4e51-45a8-bde7-882f7794cd2e",
+  "name": "Lars in 't Hout",
+  "timestamp": "2026-08-07T07:00:47.256Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suneye\nBreedte: 5200 mm\nUitval: 3000 mm\nFrame kleur: RAL 9005 structuur\nKleur doek: NTB\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 3867.8,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

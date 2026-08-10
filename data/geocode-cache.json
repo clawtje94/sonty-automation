@@ -1508,5 +1508,605 @@
     "lat": 51.5479303,
     "lon": 5.0973802,
     "gevonden": "Vazalstraat 15, 5021 DP Tilburg"
+  },
+  "epicurushof 11, 2493zz, 's-gravenhage": {
+    "lat": 52.0579633,
+    "lon": 4.3953455,
+    "gevonden": "Epicurushof 11, 2493 ZZ Den Haag"
+  },
+  "dr. lelykade 274 a den haag, nederland": {
+    "lat": 52.0937073,
+    "lon": 4.2650427,
+    "gevonden": "Dr. Lelykade 274A, 2583 CP Den Haag"
+  },
+  "eleonorastraat 113, 3135pa, vlaardingen": {
+    "lat": 51.9146398,
+    "lon": 4.357693,
+    "gevonden": "Eleonorastraat 113, 3135 PA Vlaardingen"
+  },
+  "kaprijkestraat 1b2, 4826cc, breda": {
+    "lat": 51.6152916,
+    "lon": 4.7833903,
+    "gevonden": "Kaprijkestraat, 4826 CC Breda"
+  },
+  "hoornbloemerf 2, 2643 hg, pijnacker": {
+    "lat": 52.00682,
+    "lon": 4.4384093,
+    "gevonden": "Hoornbloemerf 2, 2643 HG Pijnacker"
+  },
+  "nassau zuilensteinstraat 11d, 2596ca, 's-gravenhage": {
+    "lat": 52.0891377,
+    "lon": 4.3141081,
+    "gevonden": "Nassau Zuilensteinstraat 11D, 2596 CA Den Haag"
+  },
+  "slootdreef 235, 2724aj, zoetermeer": {
+    "lat": 52.0628803,
+    "lon": 4.513384,
+    "gevonden": "Slootdreef 235, 2724 AJ Zoetermeer"
+  },
+  "oost-voorstraat 97 oud-beijerland, nederland": {
+    "lat": 51.8226755,
+    "lon": 4.4129781,
+    "gevonden": "Oost-Voorstraat 97, 3262 JH Oud-Beijerland"
+  },
+  "frijdastraat 8f, 2288 ez rijswijk": {
+    "lat": 52.0400979,
+    "lon": 4.3293879,
+    "gevonden": "Frijdastraat 8f, 2288 EX Rijswijk"
+  },
+  "ganzenplantsoen 48, 2496hz, 's-gravenhage": {
+    "lat": 52.0510742,
+    "lon": 4.3814569,
+    "gevonden": "Ganzenplantsoen 48, 2496 HZ Den Haag"
+  },
+  "frijdastraat 8f, rijswijk": {
+    "lat": 52.0400979,
+    "lon": 4.3293879,
+    "gevonden": "Frijdastraat 8f, 2288 EX Rijswijk"
+  },
+  "amsteloord 14, 3448 ba, woerden": {
+    "lat": 52.0800111,
+    "lon": 4.8701218,
+    "gevonden": "Amsteloord 14, 3448 BA Woerden"
+  },
+  "pr. marijkestraat 16, 2396 xb, koudekerk aan den rijn": {
+    "lat": 52.1338598,
+    "lon": 4.600626,
+    "gevonden": "Prinses Marijkestraat 16, 2396 XB Koudekerk aan den Rijn"
+  },
+  "ganzenplantsoen 48 den haag, nederland": {
+    "lat": 52.0510742,
+    "lon": 4.3814569,
+    "gevonden": "Ganzenplantsoen 48, 2496 HZ Den Haag"
+  },
+  "karel doormanlaan 24, 3572 nc, utrecht": {
+    "lat": 52.0963702,
+    "lon": 5.1421237,
+    "gevonden": "Karel Doormanlaan 24, 3572 NC Utrecht"
+  },
+  "eems 38, 1423ct, uithoorn": {
+    "lat": 52.234578,
+    "lon": 4.8164992,
+    "gevonden": "Eems 38, 1423 CT Uithoorn"
+  },
+  "brenner 92 amsterdam, nederland": {
+    "lat": 52.3523016,
+    "lon": 4.773564,
+    "gevonden": "Brenner 92, 1060 NV Amsterdam"
+  },
+  "gerard scholtenstraat 47b rotterdam, nederland": {
+    "lat": 51.9338006,
+    "lon": 4.4794319,
+    "gevonden": "Gerard Scholtenstraat 47B, 3035 SE Rotterdam"
+  },
+  "molenbrink 36, den haag": {
+    "lat": 52.049805,
+    "lon": 4.2338601,
+    "gevonden": "Molenbrink 36, 2553 GP Den Haag"
+  },
+  "boekweitakker 13 pijnacker, nederland": {
+    "lat": 52.0016305,
+    "lon": 4.4496941,
+    "gevonden": "Boekweitakker 13, 2642 KL Pijnacker"
+  },
+  "eikenlaan 57 voorschoten, nederland": {
+    "lat": 52.1164696,
+    "lon": 4.4408388,
+    "gevonden": "Eikenlaan 57, 2251 DE Voorschoten"
+  },
+  "vazalstraat 15 tilburg, nederland": {
+    "lat": 51.5479303,
+    "lon": 5.0973802,
+    "gevonden": "Vazalstraat 15, 5021 DP Tilburg"
+  },
+  "guirlande 226, 2496 wz, den haag": {
+    "lat": 52.0506917,
+    "lon": 4.3689494,
+    "gevonden": "Guirlande 226, 2496 WZ Den Haag"
+  },
+  "vinkenburg 118, 2135br, hoofddorp": {
+    "lat": 52.3016252,
+    "lon": 4.6510331,
+    "gevonden": "Vinkenburg 118, 2135 BR Hoofddorp"
+  },
+  "molenbrink 36, 2553gp, 's-gravenhage": {
+    "lat": 52.049805,
+    "lon": 4.2338601,
+    "gevonden": "Molenbrink 36, 2553 GP Den Haag"
+  },
+  "treubstraat 15a, 2288eg, rijswijk": {
+    "lat": 52.0421336,
+    "lon": 4.3310483,
+    "gevonden": "Treubstraat 15, 2288 EG Rijswijk"
+  },
+  "oostertuinen 63, 1944 sc, beverwijk": {
+    "lat": 52.4909604,
+    "lon": 4.6556741,
+    "gevonden": "Oostertuinen 63, 1944 SC Beverwijk"
+  },
+  "regentessestraat 29, 2713em, zoetermeer": {
+    "lat": 52.0518338,
+    "lon": 4.483537,
+    "gevonden": "Regentessestraat 29, 2713 EM Zoetermeer"
+  },
+  "eenhoornstraat 30, 2024rx, haarlem": {
+    "lat": 52.4052581,
+    "lon": 4.6347971,
+    "gevonden": "Eenhoornstraat 30, 2024 RX Haarlem"
+  },
+  "nadezdja mandelstamstraat 47, 1102jh, amsterdam zuidoost": {
+    "lat": 52.3198676,
+    "lon": 4.955311,
+    "gevonden": "Nadezjda Mandelstamstraat 47, 1102 JH Amsterdam"
+  },
+  "titan 47, 2221pr, katwijk": {
+    "lat": 52.2132809,
+    "lon": 4.4132578,
+    "gevonden": "Titan 47, 2221 PR Katwijk"
+  },
+  "zuideind 2, 4921nz, made": {
+    "lat": 51.6750018,
+    "lon": 4.7999769,
+    "gevonden": "Zuideind 2, 4921 NZ Made"
+  },
+  "van halewijnplein 5, 2274vb, voorburg": {
+    "lat": 52.0713135,
+    "lon": 4.3518786,
+    "gevonden": "Van Halewijnplein 5, 2274 VB Voorburg"
+  },
+  "kolenboer 8, 3341hc, hendrik-ido-ambacht": {
+    "lat": 51.8420056,
+    "lon": 4.6511277,
+    "gevonden": "Kolenboer 8, 3341 HC Hendrik-Ido-Ambacht"
+  },
+  "dokter leo van der laanstraat  20 20, 6851 se, huissen": {
+    "lat": 51.9337681,
+    "lon": 5.9294119,
+    "gevonden": "Dokter Leo van der Laanstraat 20, 6851 SE Huissen"
+  },
+  "pieter van der doesstraat 5 5, 3262 jw, oud-beijerland": {
+    "lat": 51.8238657,
+    "lon": 4.409979,
+    "gevonden": "Pieter van der Doesstraat, 3262 Oud-Beijerland"
+  },
+  "rozenburgsestraat 14b, 3114bs, schiedam": {
+    "lat": 51.9069641,
+    "lon": 4.4006739,
+    "gevonden": "Rozenburgsestraat 14B, 3114 BS Schiedam"
+  },
+  "usselincxstraat 124 den haag, nederland": {
+    "lat": 52.0829922,
+    "lon": 4.3458838,
+    "gevonden": "Usselincxstraat 124, 2593 VN Den Haag"
+  },
+  "burgemeester geertsemalaan 64 wassenaar, nederland": {
+    "lat": 52.1450106,
+    "lon": 4.4196612,
+    "gevonden": "Burgemeester Geertsemalaan 64, 2241 WE Wassenaar"
+  },
+  "willem de zwijgerlaan 89 den haag, nederland": {
+    "lat": 52.0910782,
+    "lon": 4.2703405,
+    "gevonden": "Willem de Zwijgerlaan 89, 2582 EK Den Haag"
+  },
+  "keizersmantelstraat 16 rijswijk, nederland": {
+    "lat": 52.0216789,
+    "lon": 4.3375186,
+    "gevonden": "Keizersmantelstraat 16, 2288 HH Rijswijk"
+  },
+  "dr. lelykade 268 den haag, nederland": {
+    "lat": 52.0938466,
+    "lon": 4.2650699,
+    "gevonden": "Dr. Lelykade 268, 2583 CP Den Haag"
+  },
+  "eleonorastraat 113 vlaardingen, nederland": {
+    "lat": 51.9146398,
+    "lon": 4.357693,
+    "gevonden": "Eleonorastraat 113, 3135 PA Vlaardingen"
+  },
+  "slootdreef 235 zoetermeer, nederland": {
+    "lat": 52.0628803,
+    "lon": 4.513384,
+    "gevonden": "Slootdreef 235, 2724 AJ Zoetermeer"
+  },
+  "herberg 68 leidschendam, nederland": {
+    "lat": 52.0909365,
+    "lon": 4.4023921,
+    "gevonden": "Herberg 68, 2264 KV Leidschendam"
+  },
+  "sytwinde 36 nootdorp, nederland": {
+    "lat": 52.0460518,
+    "lon": 4.397369,
+    "gevonden": "Sytwinde 36, 2631 GT Nootdorp"
+  },
+  "hoge morsweg 70 leiden, nederland": {
+    "lat": 52.1534197,
+    "lon": 4.4601689,
+    "gevonden": "Hoge Morsweg 70, 2332 HM Leiden"
+  },
+  "epicurushof 11 den haag, nederland": {
+    "lat": 52.0579633,
+    "lon": 4.3953455,
+    "gevonden": "Epicurushof 11, 2493 ZZ Den Haag"
+  },
+  "herfsttijloos 10 nootdorp, nederland": {
+    "lat": 52.0418558,
+    "lon": 4.4022756,
+    "gevonden": "Herfsttijloos 10, 2631 ST Nootdorp"
+  },
+  "ooievaar 4 berkel en rodenrijs, nederland": {
+    "lat": 51.9882073,
+    "lon": 4.4657425,
+    "gevonden": "Ooievaar 4, 2651 RH Berkel en Rodenrijs"
+  },
+  "anthuriumweg 25, berkel en rodenrijs": {
+    "lat": 52.0069204,
+    "lon": 4.5023756,
+    "gevonden": "Anthuriumweg, 2665 Berkel en Rodenrijs"
+  },
+  "gouda": {
+    "lat": 52.0102707,
+    "lon": 4.7098329,
+    "gevonden": "Gouda"
+  },
+  "waddinxveen": {
+    "lat": 52.045578,
+    "lon": 4.645496,
+    "gevonden": "Waddinxveen"
+  },
+  "utrecht": {
+    "lat": 52.0916837,
+    "lon": 5.1203633,
+    "gevonden": "Utrecht"
+  },
+  "zeist": {
+    "lat": 52.082047,
+    "lon": 5.238717,
+    "gevonden": "Zeist"
+  },
+  "forellendaal 301 den haag, nederland": {
+    "lat": 52.0466397,
+    "lon": 4.2389084,
+    "gevonden": "Forellendaal 301, 2553 JL Den Haag"
+  },
+  "karel doormanlaan 24 utrecht, nederland": {
+    "lat": 52.0963702,
+    "lon": 5.1421237,
+    "gevonden": "Karel Doormanlaan 24, 3572 NC Utrecht"
+  },
+  "nassau zuilensteinstraat 11d den haag, nederland": {
+    "lat": 52.0891377,
+    "lon": 4.3141081,
+    "gevonden": "Nassau Zuilensteinstraat 11D, 2596 CA Den Haag"
+  },
+  "1567 gb assendelft, nederland": {
+    "lat": 52.4875123,
+    "lon": 4.7475743,
+    "gevonden": "J.M. van der Meystraat, 1567 Assendelft"
+  },
+  "caan van necklaan 186 rijswijk, nederland": {
+    "lat": 52.0589942,
+    "lon": 4.3400705,
+    "gevonden": "Caan van Necklaan 186, 2281 BR Rijswijk"
+  },
+  "bleijenburgstraat 32 voorburg, nederland": {
+    "lat": 52.0631999,
+    "lon": 4.354573,
+    "gevonden": "Bleijenburgstraat 32, 2275 CH Voorburg"
+  },
+  "kooipad 27 streefkerk, nederland": {
+    "lat": 51.8982317,
+    "lon": 4.7474565,
+    "gevonden": "Kooipad 27, 2959 CG Streefkerk"
+  },
+  "charentestroom zoetermeer, nederland": {
+    "lat": 52.0621257,
+    "lon": 4.553664,
+    "gevonden": "Charentestroom, 2721 AC Zoetermeer"
+  },
+  "doris lessinglaan 44 den haag, nederland": {
+    "lat": 52.0342174,
+    "lon": 4.2169557,
+    "gevonden": "Doris Lessinglaan, 2553 ZB Den Haag"
+  },
+  "prins bernhardstraat 43 zwijndrecht, nederland": {
+    "lat": 51.8193096,
+    "lon": 4.6469904,
+    "gevonden": "Prins Bernhardstraat 43, 3331 BN Zwijndrecht"
+  },
+  "guirlande 226 den haag, nederland": {
+    "lat": 52.0506917,
+    "lon": 4.3689494,
+    "gevonden": "Guirlande 226, 2496 WZ Den Haag"
+  },
+  "texellaan 22, 2809sb, gouda": {
+    "lat": 52.0020931,
+    "lon": 4.689545,
+    "gevonden": "Texellaan 22, 2809 SB Gouda"
+  },
+  "texellaan 22 gouda, nederland": {
+    "lat": 52.0020931,
+    "lon": 4.689545,
+    "gevonden": "Texellaan 22, 2809 SB Gouda"
+  },
+  "norenburg 97 den haag, nederland": {
+    "lat": 52.0885395,
+    "lon": 4.3566157,
+    "gevonden": "Norenburg 97, 2591 AK Den Haag"
+  },
+  "eems 38, 1423ct uithoorn": {
+    "lat": 52.234578,
+    "lon": 4.8164992,
+    "gevonden": "Eems 38, 1423 CT Uithoorn"
+  },
+  "steltloper 14 's-gravenzande, nederland": {
+    "lat": 52.0001576,
+    "lon": 4.1765185,
+    "gevonden": "Steltloper 14, 2693 AE 's-Gravenzande"
+  },
+  "schansbaan 185 zoetermeer, nederland": {
+    "lat": 52.0727552,
+    "lon": 4.5285773,
+    "gevonden": "Schansbaan 185, 2728 GJ Zoetermeer"
+  },
+  "keulseweg 50, 2641 pk, pijnacker": {
+    "lat": 52.0361421,
+    "lon": 4.4706786,
+    "gevonden": "Keulseweg 50, 2641 PK Pijnacker"
+  },
+  "sterrenzand 36, 2673 ga, naaldwijk": {
+    "lat": 51.9993914,
+    "lon": 4.1979901,
+    "gevonden": "Sterrenzand 36, 2673 GA Naaldwijk"
+  },
+  "houtrijk 10, 2151dv, nieuw-vennep": {
+    "lat": 52.2613416,
+    "lon": 4.6170821,
+    "gevonden": "Houtrijk 10, 2151 DV Nieuw-Vennep"
+  },
+  "burgemeester staatsenlaan 23, 2253 kz, voorschoten": {
+    "lat": 52.1487346,
+    "lon": 4.4637909,
+    "gevonden": "Burgemeester Staatsenlaan 23, 2253 KZ Voorschoten"
+  },
+  "houtrijk 10 nieuw-vennep, nederland": {
+    "lat": 52.2613416,
+    "lon": 4.6170821,
+    "gevonden": "Houtrijk 10, 2151 DV Nieuw-Vennep"
+  },
+  "keulseweg 50 pijnacker, nederland": {
+    "lat": 52.0361421,
+    "lon": 4.4706786,
+    "gevonden": "Keulseweg 50, 2641 PK Pijnacker"
+  },
+  "sterrenzand 36 naaldwijk, nederland": {
+    "lat": 51.9993914,
+    "lon": 4.1979901,
+    "gevonden": "Sterrenzand 36, 2673 GA Naaldwijk"
+  },
+  "vinkenburg 118 hoofddorp, nederland": {
+    "lat": 52.3016252,
+    "lon": 4.6510331,
+    "gevonden": "Vinkenburg 118, 2135 BR Hoofddorp"
+  },
+  "van duvenvoordelaan 120, 2274tc, voorburg": {
+    "lat": 52.0738656,
+    "lon": 4.3496669,
+    "gevonden": "Van Duvenvoordelaan 120, 2274 TB Voorburg"
+  },
+  "anna maria van cappellenpark 83, 2904vr, capelle aan den ijssel": {
+    "lat": 51.9301386,
+    "lon": 4.6008457,
+    "gevonden": "Anna Maria van Cappellenpark 83, 2904 VR Capelle aan den IJssel"
+  },
+  "arembergstraat 47, 4761kg, zevenbergen": {
+    "lat": 51.6477454,
+    "lon": 4.6005883,
+    "gevonden": "Arembergstraat 47, 4761 KG Zevenbergen"
+  },
+  "sarabande 42, 2152 te, nieuw-vennep": {
+    "lat": 52.2809081,
+    "lon": 4.6217856,
+    "gevonden": "Sarabande 42, 2152 TE Nieuw-Vennep"
+  },
+  "rupsklaver 91, 3069dc, rotterdam": {
+    "lat": 51.964871,
+    "lon": 4.5331156,
+    "gevonden": "Rupsklaver 91, 3069 DC Rotterdam"
+  },
+  "oudmunsterhoef 17, 4106dd, culemberg": {
+    "lat": 51.9476756,
+    "lon": 5.1946438,
+    "gevonden": "4106 Culemborg"
+  },
+  "iepenpad 47, 2461cz, ter aar": {
+    "lat": 52.1694093,
+    "lon": 4.7055361,
+    "gevonden": "Iepenpad 47, 2461 CZ Ter Aar"
+  },
+  "van panhuysstraat 6, 2596 jg, 's-gravenhage": {
+    "lat": 52.0918223,
+    "lon": 4.3134179,
+    "gevonden": "Van Panhuysstraat 6, 2596 JG Den Haag"
+  },
+  "hpvanderpoellaan 7, 2375xd, rijpwetering": {
+    "lat": 52.1923467,
+    "lon": 4.5787205,
+    "gevonden": "H.P. van der Poellaan 7, 2375 XD Rijpwetering"
+  },
+  "kaprijkestraat 1c1 breda, nederland": {
+    "lat": 51.6152916,
+    "lon": 4.7833903,
+    "gevonden": "Kaprijkestraat, 4826 CC Breda"
+  },
+  "doctor h. colijnlaan 350 rijswijk, nederland": {
+    "lat": 52.0409786,
+    "lon": 4.320836,
+    "gevonden": "Dr. H. Colijnlaan 350, 2283 ZA Rijswijk"
+  },
+  "lange kleiweg 6 rijswijk, nederland": {
+    "lat": 52.0367955,
+    "lon": 4.3247536,
+    "gevonden": "Lange Kleiweg 6, 2288 GK Rijswijk"
+  },
+  "touwslagerijbaan 42 nieuwegein, nederland": {
+    "lat": 52.0291096,
+    "lon": 5.097425,
+    "gevonden": "Touwslagerijbaan, 3439 Nieuwegein"
+  },
+  "in de wolken 232 amstelveen, nederland": {
+    "lat": 52.2887325,
+    "lon": 4.8737583,
+    "gevonden": "In de Wolken 232B, 1186 BR Amstelveen"
+  },
+  "goejanverwelle 5 hekendorp, nederland": {
+    "lat": 52.0146758,
+    "lon": 4.8046924,
+    "gevonden": "Goejanverwelle 5, 3467 PN Hekendorp"
+  },
+  "nieuwegracht 19-g utrecht, nederland": {
+    "lat": 52.0892698,
+    "lon": 5.123752,
+    "gevonden": "Nieuwegracht 19G, 3512 LC Utrecht"
+  },
+  "de rijkstraat 5 den haag, nederland": {
+    "lat": 52.0383854,
+    "lon": 4.3658429,
+    "gevonden": "De Rijkstraat 5, 2497 DS Den Haag"
+  },
+  "woubrechterf 79 waddinxveen, nederland": {
+    "lat": 52.0375208,
+    "lon": 4.6295377,
+    "gevonden": "Woubrechterf 79, 2743 HL Waddinxveen"
+  },
+  "jan wolkersstraat 17 leiden, nederland": {
+    "lat": 52.1547128,
+    "lon": 4.479217,
+    "gevonden": "Jan Wolkersstraat 17, 2321 VP Leiden"
+  },
+  "kadelaan 87 zoetermeer, nederland": {
+    "lat": 52.0748506,
+    "lon": 4.4942676,
+    "gevonden": "Kadelaan 87, 2725 BD Zoetermeer"
+  },
+  "oude arnhemseweg 240 zeist, nederland": {
+    "lat": 52.0935955,
+    "lon": 5.2307996,
+    "gevonden": "Oude Arnhemseweg 240, 3705 BJ Zeist"
+  },
+  "molenbuurt, volmolen 13 delft, nederland": {
+    "lat": 51.9997253,
+    "lon": 4.3407731,
+    "gevonden": "Volmolen 13, 2614 LS Delft"
+  },
+  "floresstraat 35 delft, nederland": {
+    "lat": 52.0215972,
+    "lon": 4.3546947,
+    "gevonden": "Floresstraat 35, 2612 GH Delft"
+  },
+  "waterleliekade 55 den haag, nederland": {
+    "lat": 52.0597124,
+    "lon": 4.4205989,
+    "gevonden": "Waterleliekade 55, 2492 TJ Den Haag"
+  },
+  "westerdok 364 amsterdam, nederland": {
+    "lat": 52.3849054,
+    "lon": 4.8917375,
+    "gevonden": "Westerdok 364, 1013 BH Amsterdam"
+  },
+  "maurice de vlaminckstraat 5 rotterdam, nederland": {
+    "lat": 51.9714494,
+    "lon": 4.5876488,
+    "gevonden": "Maurice de Vlaminckstraat 5, 3059 VD Rotterdam"
+  },
+  "argentiniëstraat 78 delft, nederland": {
+    "lat": 51.9834691,
+    "lon": 4.3516468,
+    "gevonden": "Argentiniëstraat 78, 2622 AW Delft"
+  },
+  "amsteloord 14, woerden": {
+    "lat": 52.0800111,
+    "lon": 4.8701218,
+    "gevonden": "Amsteloord 14, 3448 BA Woerden"
+  },
+  "sterrenzand 36 naaldwijk": {
+    "lat": 51.9993914,
+    "lon": 4.1979901,
+    "gevonden": "Sterrenzand 36, 2673 GA Naaldwijk"
+  },
+  "vinkenburg 118 hoofddorp": {
+    "lat": 52.3016252,
+    "lon": 4.6510331,
+    "gevonden": "Vinkenburg 118, 2135 BR Hoofddorp"
+  },
+  "brenner 92 amsterdam": {
+    "lat": 52.3523016,
+    "lon": 4.773564,
+    "gevonden": "Brenner 92, 1060 NV Amsterdam"
+  },
+  "handweg 100, 1185 tz amstelveen": {
+    "lat": 52.2964551,
+    "lon": 4.844817,
+    "gevonden": "Handweg, 1182 Amstelveen"
+  },
+  "marktlaan 20, 2132 dc hoofddorp": {
+    "lat": 52.3036558,
+    "lon": 4.6934168,
+    "gevonden": "Marktlaan 20, 2132 DM Hoofddorp"
+  },
+  "ginnekenweg 1, 4818 ja breda": {
+    "lat": 51.578588,
+    "lon": 4.7790647,
+    "gevonden": "Ginnekenweg 1, 4818 JA Breda"
+  },
+  "hoge morsweg 70 leiden": {
+    "lat": 52.1534197,
+    "lon": 4.4601689,
+    "gevonden": "Hoge Morsweg 70, 2332 HM Leiden"
+  },
+  "iepenpad 47, 2461cz ter aar": {
+    "lat": 52.1694093,
+    "lon": 4.7055361,
+    "gevonden": "Iepenpad 47, 2461 CZ Ter Aar"
+  },
+  "epicurushof 11 den haag": {
+    "lat": 52.0579633,
+    "lon": 4.3953455,
+    "gevonden": "Epicurushof 11, 2493 ZZ Den Haag"
+  },
+  "herfsttijloos 10 nootdorp": {
+    "lat": 52.0418558,
+    "lon": 4.4022756,
+    "gevonden": "Herfsttijloos 10, 2631 ST Nootdorp"
+  },
+  "ooievaar 4 berkel en rodenrijs": {
+    "lat": 51.9882073,
+    "lon": 4.4657425,
+    "gevonden": "Ooievaar 4, 2651 RH Berkel en Rodenrijs"
+  },
+  "iepenpad 47 ter aar, nederland": {
+    "lat": 52.1694093,
+    "lon": 4.7055361,
+    "gevonden": "Iepenpad 47, 2461 CZ Ter Aar"
   }
 }

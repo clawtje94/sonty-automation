@@ -30,7 +30,7 @@ const M = vm.getMonth() + 1, JR = vm.getFullYear();
 const naam = vm.toLocaleString('nl-NL', { month: 'long' });
 
 // verse extractie voor beide jaren
-for (const j of [JR - 1, JR]) execFileSync('node', [__dirname + '/conversie-sheet.js', '--jaar', String(j)], { stdio: 'pipe' });
+for (const j of [JR - 1, JR]) execFileSync(process.execPath, [__dirname + '/conversie-sheet.js', '--jaar', String(j)], { stdio: 'pipe' });
 const laad = j => JSON.parse(fs.readFileSync(__dirname + `/../data/conversie-${j}-raw.json`, 'utf8')).rows.filter(r => r.maand === M);
 const dit = laad(JR), vorig = laad(JR - 1);
 
@@ -57,4 +57,4 @@ for (const [kop, fn] of [['PER BRON', BRON], ['PER PRODUCTGROEP', r => PROD(r.pr
 const tekst = L.join('\n');
 console.log(tekst);
 if (process.argv.includes('--stuur'))
-  execFileSync('node', [__dirname + '/sonty-data-send.js', tekst, '--code'], { stdio: 'inherit' });
+  execFileSync(process.execPath, [__dirname + '/sonty-data-send.js', tekst, '--code'], { stdio: 'inherit' });

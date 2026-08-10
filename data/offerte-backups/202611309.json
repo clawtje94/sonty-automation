@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202611309",
+  "documentId": "92864386-3606-4ed5-8571-9aafce2ddd98",
+  "name": "Arthur de Boer",
+  "timestamp": "2026-08-10T07:02:06.492Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2000mm\n- Uitval: 900 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Somfy IO motor Solar\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

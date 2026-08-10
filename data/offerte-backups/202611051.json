@@ -1,0 +1,36 @@
+{
+  "quotationNumber": "202611051",
+  "documentId": "7a39f57b-3523-4e93-accf-51790f1621e9",
+  "name": "Daan Groenendijk",
+  "timestamp": "2026-08-04T15:00:39.421Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "SunCube XL\nBreedte: 2450 mm\nUitval: 1350 mm\nFrame Kleur: RAL 9005 structuur\nKleur doek: NTB\nBediening: Draaischakelaar\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 2023.75,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + Montage uitvalscherm\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 3797 mm\nHoogte: 1750 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7039\nKleur doek: NTB\nOnderlat: Design\nBediening: Draaischakelaar\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 2192.4,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

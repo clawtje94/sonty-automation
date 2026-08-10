@@ -1,10 +1,10 @@
 {
- "peildatum": "2026-08-03T05:45:25.437Z",
+ "peildatum": "2026-08-10T10:27:49.594Z",
  "lasten": {
   "2026-01": {
    "lasten": 82500,
-   "orders": 68,
-   "perOrder": 1213
+   "orders": 69,
+   "perOrder": 1196
   },
   "2026-02": {
    "lasten": 86749,
@@ -23,18 +23,23 @@
   },
   "2026-05": {
    "lasten": 107248,
-   "orders": 131,
-   "perOrder": 819
+   "orders": 132,
+   "perOrder": 812
   },
   "2026-06": {
    "lasten": 111287,
-   "orders": 189,
-   "perOrder": 589
+   "orders": 195,
+   "perOrder": 571
   },
   "2026-07": {
    "lasten": 115000,
-   "orders": 174,
-   "perOrder": 661
+   "orders": 203,
+   "perOrder": 567
+  },
+  "2026-08": {
+   "lasten": 115000,
+   "orders": 20,
+   "perOrder": 5750
   }
  },
  "maanden": {
@@ -46,8 +51,8 @@
     "offertes": 294,
     "akkoorden": 26,
     "omzet": 63906,
-    "marge": 31436,
-    "netto": -5850,
+    "marge": 31437,
+    "netto": -5849,
     "perOfferte": 44,
     "perOrder": 498
    },
@@ -82,8 +87,8 @@
     "offertes": 114,
     "akkoorden": 9,
     "omzet": 29716,
-    "marge": 14039,
-    "netto": 3514,
+    "marge": 14040,
+    "netto": 3516,
     "perOfferte": 14,
     "perOrder": 172
    },
@@ -214,7 +219,7 @@
     "offertes": 111,
     "akkoorden": 13,
     "omzet": 41143,
-    "marge": 20312,
+    "marge": 20313,
     "netto": 5771,
     "perOfferte": 14,
     "perOrder": 121
@@ -226,8 +231,8 @@
     "offertes": 350,
     "akkoorden": 27,
     "omzet": 92412,
-    "marge": 44312,
-    "netto": 9324,
+    "marge": 44328,
+    "netto": 9336,
     "perOfferte": 22,
     "perOrder": 285
    }
@@ -240,8 +245,8 @@
     "offertes": 191,
     "akkoorden": 16,
     "omzet": 56997,
-    "marge": 27337,
-    "netto": -7364,
+    "marge": 27340,
+    "netto": -7361,
     "perOfferte": 70,
     "perOrder": 840
    },
@@ -288,8 +293,8 @@
     "offertes": 51,
     "akkoorden": 2,
     "omzet": 7939,
-    "marge": 3642,
-    "netto": -638,
+    "marge": 3643,
+    "netto": -637,
     "perOfferte": 31,
     "perOrder": 791
    },
@@ -420,8 +425,8 @@
     "offertes": 94,
     "akkoorden": 8,
     "omzet": 22221,
-    "marge": 10302,
-    "netto": -1666,
+    "marge": 10304,
+    "netto": -1665,
     "perOfferte": 20,
     "perOrder": 240
    },
@@ -446,8 +451,8 @@
     "offertes": 306,
     "akkoorden": 23,
     "omzet": 71441,
-    "marge": 34457,
-    "netto": -3375,
+    "marge": 34460,
+    "netto": -3230,
     "perOfferte": 43,
     "perOrder": 566
    },
@@ -459,7 +464,7 @@
     "akkoorden": 13,
     "omzet": 69665,
     "marge": 33032,
-    "netto": 9273,
+    "netto": 9354,
     "perOfferte": 21,
     "perOrder": 568
    },
@@ -471,7 +476,7 @@
     "akkoorden": 1,
     "omzet": 13800,
     "marge": 5979,
-    "netto": 2418,
+    "netto": 2424,
     "perOfferte": 13,
     "perOrder": 1705
    },
@@ -482,8 +487,8 @@
     "offertes": 117,
     "akkoorden": 10,
     "omzet": 42399,
-    "marge": 21665,
-    "netto": 8014,
+    "marge": 21671,
+    "netto": 8081,
     "perOfferte": 15,
     "perOrder": 170
    },
@@ -495,7 +500,7 @@
     "akkoorden": 3,
     "omzet": 16437,
     "marge": 8011,
-    "netto": 2940,
+    "netto": 2959,
     "perOfferte": 111,
     "perOrder": 408
    },
@@ -507,7 +512,7 @@
     "akkoorden": 2,
     "omzet": 5031,
     "marge": 2593,
-    "netto": 125,
+    "netto": 138,
     "perOfferte": 35,
     "perOrder": 190
    },
@@ -579,7 +584,7 @@
     "akkoorden": 1,
     "omzet": 24000,
     "marge": 10822,
-    "netto": 7213,
+    "netto": 7219,
     "perOfferte": 16,
     "perOrder": 912
    },
@@ -591,7 +596,7 @@
     "akkoorden": 12,
     "omzet": 44105,
     "marge": 20594,
-    "netto": 5371,
+    "netto": 5445,
     "perOfferte": 12,
     "perOrder": 152
    },
@@ -603,7 +608,7 @@
     "akkoorden": 5,
     "omzet": 12478,
     "marge": 5857,
-    "netto": -775,
+    "netto": -744,
     "perOfferte": 76,
     "perOrder": 304
    },
@@ -613,9 +618,9 @@
     "spend": 1520.23,
     "offertes": 152,
     "akkoorden": 17,
-    "omzet": 40907,
-    "marge": 19797,
-    "netto": 923,
+    "omzet": 42220,
+    "marge": 20570,
+    "netto": 1667,
     "perOfferte": 10,
     "perOrder": 89
    },
@@ -626,8 +631,8 @@
     "offertes": 435,
     "akkoorden": 26,
     "omzet": 110276,
-    "marge": 52202,
-    "netto": 12736,
+    "marge": 52210,
+    "netto": 12904,
     "perOfferte": 21,
     "perOrder": 351
    }
@@ -640,8 +645,8 @@
     "offertes": 313,
     "akkoorden": 29,
     "omzet": 85506,
-    "marge": 37450,
-    "netto": -2947,
+    "marge": 37451,
+    "netto": -2946,
     "perOfferte": 55,
     "perOrder": 595
    },
@@ -688,8 +693,8 @@
     "offertes": 82,
     "akkoorden": 10,
     "omzet": 46638,
-    "marge": 20091,
-    "netto": 9071,
+    "marge": 20092,
+    "netto": 9072,
     "perOfferte": 22,
     "perOrder": 180
    },
@@ -832,8 +837,8 @@
     "offertes": 134,
     "akkoorden": 19,
     "omzet": 78202,
-    "marge": 37578,
-    "netto": 17312,
+    "marge": 37580,
+    "netto": 17313,
     "perOfferte": 21,
     "perOrder": 150
    },
@@ -844,8 +849,8 @@
     "offertes": 316,
     "akkoorden": 36,
     "omzet": 122945,
-    "marge": 56955,
-    "netto": 20883,
+    "marge": 56958,
+    "netto": 20885,
     "perOfferte": 18,
     "perOrder": 154
    }
@@ -859,7 +864,7 @@
     "akkoorden": 11,
     "omzet": 32127,
     "marge": 12653,
-    "netto": -15125,
+    "netto": -14931,
     "perOfferte": 63,
     "perOrder": 1112
    },
@@ -883,7 +888,7 @@
     "akkoorden": 3,
     "omzet": 18820,
     "marge": 8320,
-    "netto": 1376,
+    "netto": 1429,
     "perOfferte": 19,
     "perOrder": 620
    },
@@ -892,12 +897,12 @@
     "campagne": "05 | Leads - Screens",
     "spend": 1675.07,
     "offertes": 34,
-    "akkoorden": 2,
-    "omzet": 27936,
-    "marge": 3825,
-    "netto": -941,
+    "akkoorden": 3,
+    "omzet": 32199,
+    "marge": 5772,
+    "netto": -492,
     "perOfferte": 49,
-    "perOrder": 838
+    "perOrder": 558
    },
    {
     "platform": "Meta",
@@ -907,7 +912,7 @@
     "akkoorden": 1,
     "omzet": 0,
     "marge": 0,
-    "netto": -2760,
+    "netto": -2742,
     "perOfferte": 119,
     "perOrder": 1546
    },
@@ -991,7 +996,7 @@
     "akkoorden": 1,
     "omzet": 6934,
     "marge": 6554,
-    "netto": 3342,
+    "netto": 3359,
     "perOfferte": 37,
     "perOrder": 861
    },
@@ -1003,7 +1008,7 @@
     "akkoorden": 1,
     "omzet": 2600,
     "marge": 1147,
-    "netto": -366,
+    "netto": -348,
     "perOfferte": 3,
     "perOrder": 100
    },
@@ -1026,8 +1031,8 @@
     "offertes": 86,
     "akkoorden": 12,
     "omzet": 27506,
-    "marge": 13178,
-    "netto": -4458,
+    "marge": 13179,
+    "netto": -4246,
     "perOfferte": 9,
     "perOrder": 66
    },
@@ -1038,8 +1043,8 @@
     "offertes": 97,
     "akkoorden": 11,
     "omzet": 44710,
-    "marge": 20800,
-    "netto": 3321,
+    "marge": 20803,
+    "netto": 3516,
     "perOfferte": 5,
     "perOrder": 48
    }
@@ -1049,49 +1054,49 @@
     "platform": "Meta",
     "campagne": "01 | Leads campagne - Rolluiken",
     "spend": 11722.74,
-    "offertes": 335,
-    "akkoorden": 22,
-    "omzet": 67582,
-    "marge": 31774,
-    "netto": -3,
-    "perOfferte": 35,
-    "perOrder": 533
+    "offertes": 310,
+    "akkoorden": 31,
+    "omzet": 94376,
+    "marge": 44368,
+    "netto": 7384,
+    "perOfferte": 38,
+    "perOrder": 378
    },
    {
     "platform": "Meta",
     "campagne": "03 | Leadscampagne - Zonwering",
     "spend": 7332.84,
-    "offertes": 296,
-    "akkoorden": 7,
-    "omzet": 21731,
-    "marge": 10355,
-    "netto": -3401,
-    "perOfferte": 25,
-    "perOrder": 1048
+    "offertes": 283,
+    "akkoorden": 8,
+    "omzet": 24782,
+    "marge": 11801,
+    "netto": -2112,
+    "perOfferte": 26,
+    "perOrder": 917
    },
    {
     "platform": "Meta",
     "campagne": "04 | Leadscampagne - Pergola",
     "spend": 2172.94,
-    "offertes": 200,
-    "akkoorden": 3,
-    "omzet": 23317,
-    "marge": 10832,
-    "netto": 4796,
+    "offertes": 189,
+    "akkoorden": 4,
+    "omzet": 31070,
+    "marge": 14433,
+    "netto": 7489,
     "perOfferte": 11,
-    "perOrder": 724
+    "perOrder": 543
    },
    {
     "platform": "Meta",
     "campagne": "05 | Leads - Screens",
     "spend": 2185.25,
-    "offertes": 218,
-    "akkoorden": 5,
-    "omzet": 10939,
-    "marge": 4988,
-    "netto": -1367,
+    "offertes": 209,
+    "akkoorden": 6,
+    "omzet": 18403,
+    "marge": 8508,
+    "netto": 1447,
     "perOfferte": 10,
-    "perOrder": 437
+    "perOrder": 364
    },
    {
     "platform": "Meta",
@@ -1109,12 +1114,12 @@
     "platform": "Meta",
     "campagne": "07 | Leadscampagne - Markiezen",
     "spend": 825.08,
-    "offertes": 19,
+    "offertes": 18,
     "akkoorden": 1,
     "omzet": 2297,
     "marge": 1012,
-    "netto": -650,
-    "perOfferte": 43,
+    "netto": -555,
+    "perOfferte": 46,
     "perOrder": 825
    },
    {
@@ -1181,11 +1186,11 @@
     "platform": "Google",
     "campagne": "01 | Zonwering | Pergola",
     "spend": 1200.89,
-    "offertes": 75,
+    "offertes": 74,
     "akkoorden": 2,
     "omzet": 16038,
     "marge": 7450,
-    "netto": 3634,
+    "netto": 3823,
     "perOfferte": 16,
     "perOrder": 600
    },
@@ -1193,12 +1198,12 @@
     "platform": "Google",
     "campagne": "01 | Zonwering | Knikarmschermen",
     "spend": 2084,
-    "offertes": 54,
+    "offertes": 49,
     "akkoorden": 5,
     "omzet": 18781,
     "marge": 8739,
-    "netto": 1833,
-    "perOfferte": 39,
+    "netto": 2305,
+    "perOfferte": 43,
     "perOrder": 417
    },
    {
@@ -1206,36 +1211,36 @@
     "campagne": "01 | Zonwering | Markiezen",
     "spend": 1443.22,
     "offertes": 24,
-    "akkoorden": 3,
-    "omzet": 9277,
-    "marge": 4088,
-    "netto": -48,
+    "akkoorden": 4,
+    "omzet": 11866,
+    "marge": 5228,
+    "netto": 612,
     "perOfferte": 60,
-    "perOrder": 481
+    "perOrder": 361
    },
    {
     "platform": "Google",
     "campagne": "01 | Zonwering | Rolluiken",
     "spend": 1520.26,
-    "offertes": 177,
-    "akkoorden": 20,
-    "omzet": 49708,
-    "marge": 23301,
-    "netto": 4518,
+    "offertes": 176,
+    "akkoorden": 24,
+    "omzet": 56147,
+    "marge": 26335,
+    "netto": 6649,
     "perOfferte": 9,
-    "perOrder": 76
+    "perOrder": 63
    },
    {
     "platform": "Google",
     "campagne": "01 | Zonwering | Schermen + Screens",
     "spend": 9347.59,
-    "offertes": 489,
-    "akkoorden": 24,
-    "omzet": 79387,
-    "marge": 36830,
-    "netto": 5228,
-    "perOfferte": 19,
-    "perOrder": 389
+    "offertes": 463,
+    "akkoorden": 30,
+    "omzet": 93171,
+    "marge": 43148,
+    "netto": 9317,
+    "perOfferte": 20,
+    "perOrder": 312
    }
   ],
   "2026-06": [
@@ -1243,25 +1248,25 @@
     "platform": "Meta",
     "campagne": "01 | Leads campagne - Rolluiken",
     "spend": 12608.17,
-    "offertes": 231,
+    "offertes": 227,
     "akkoorden": 19,
     "omzet": 59851,
-    "marge": 28489,
-    "netto": -251,
-    "perOfferte": 55,
+    "marge": 28498,
+    "netto": 101,
+    "perOfferte": 56,
     "perOrder": 664
    },
    {
     "platform": "Meta",
     "campagne": "03 | Leadscampagne - Zonwering",
     "spend": 7205.1,
-    "offertes": 257,
-    "akkoorden": 12,
-    "omzet": 35725,
-    "marge": 16926,
-    "netto": -282,
-    "perOfferte": 28,
-    "perOrder": 600
+    "offertes": 252,
+    "akkoorden": 15,
+    "omzet": 47508,
+    "marge": 22510,
+    "netto": 2838,
+    "perOfferte": 29,
+    "perOrder": 480
    },
    {
     "platform": "Meta",
@@ -1271,7 +1276,7 @@
     "akkoorden": 1,
     "omzet": 6465,
     "marge": 3003,
-    "netto": 190,
+    "netto": 209,
     "perOfferte": 16,
     "perOrder": 1703
    },
@@ -1279,13 +1284,13 @@
     "platform": "Meta",
     "campagne": "05 | Leads - Screens",
     "spend": 1740.73,
-    "offertes": 192,
-    "akkoorden": 6,
-    "omzet": 20346,
-    "marge": 9547,
-    "netto": 2616,
+    "offertes": 188,
+    "akkoorden": 7,
+    "omzet": 25595,
+    "marge": 11949,
+    "netto": 4140,
     "perOfferte": 9,
-    "perOrder": 290
+    "perOrder": 249
    },
    {
     "platform": "Meta",
@@ -1295,7 +1300,7 @@
     "akkoorden": 1,
     "omzet": 0,
     "marge": 0,
-    "netto": -1814,
+    "netto": -1796,
     "perOfferte": 613,
     "perOrder": 1225
    },
@@ -1375,11 +1380,11 @@
     "platform": "Google",
     "campagne": "01 | Zonwering | Pergola",
     "spend": 912.33,
-    "offertes": 83,
+    "offertes": 81,
     "akkoorden": 4,
     "omzet": 46070,
     "marge": 22319,
-    "netto": 15178,
+    "netto": 15251,
     "perOfferte": 11,
     "perOrder": 228
    },
@@ -1391,7 +1396,7 @@
     "akkoorden": 2,
     "omzet": 6397,
     "marge": 3021,
-    "netto": -507,
+    "netto": -471,
     "perOfferte": 25,
     "perOrder": 913
    },
@@ -1403,7 +1408,7 @@
     "akkoorden": 5,
     "omzet": 15638,
     "marge": 6927,
-    "netto": 1259,
+    "netto": 1350,
     "perOfferte": 85,
     "perOrder": 304
    },
@@ -1414,8 +1419,8 @@
     "offertes": 159,
     "akkoorden": 15,
     "omzet": 47151,
-    "marge": 22435,
-    "netto": 8189,
+    "marge": 22444,
+    "netto": 8468,
     "perOfferte": 10,
     "perOrder": 101
    },
@@ -1423,13 +1428,13 @@
     "platform": "Google",
     "campagne": "01 | Zonwering | Schermen + Screens",
     "spend": 9123.77,
-    "offertes": 501,
-    "akkoorden": 31,
-    "omzet": 149818,
-    "marge": 71645,
-    "netto": 31834,
-    "perOfferte": 18,
-    "perOrder": 294
+    "offertes": 490,
+    "akkoorden": 32,
+    "omzet": 148484,
+    "marge": 71225,
+    "netto": 31478,
+    "perOfferte": 19,
+    "perOrder": 285
    }
   ]
  },
@@ -1438,72 +1443,72 @@
    "2026-01": {
     "spend": 19284,
     "off": 378,
-    "akk": 21,
-    "omzet": 95862,
-    "marge": 32514,
-    "margeEx": 26871,
-    "lasten": 25478,
-    "netto": -17890
+    "akk": 22,
+    "omzet": 100125,
+    "marge": 34462,
+    "margeEx": 28481,
+    "lasten": 26304,
+    "netto": -17107
    },
    "2026-02": {
     "spend": 21334,
     "off": 438,
     "akk": 35,
     "omzet": 150032,
-    "marge": 69935,
-    "margeEx": 57797,
+    "marge": 69939,
+    "margeEx": 57801,
     "lasten": 36145,
-    "netto": 318
+    "netto": 321
    },
    "2026-03": {
     "spend": 29020,
     "off": 792,
     "akk": 80,
     "omzet": 278525,
-    "marge": 122981,
-    "margeEx": 101637,
+    "marge": 122983,
+    "margeEx": 101639,
     "lasten": 45879,
-    "netto": 26738
+    "netto": 26740
    },
    "2026-04": {
     "spend": 24026,
     "off": 844,
     "akk": 58,
     "omzet": 179724,
-    "marge": 85422,
-    "margeEx": 70597,
+    "marge": 85425,
+    "margeEx": 70599,
     "lasten": 42124,
-    "netto": 4447
+    "netto": 4450
    },
    "2026-05": {
     "spend": 25419,
     "off": 943,
     "akk": 53,
     "omzet": 219613,
-    "marge": 106236,
-    "margeEx": 87799,
-    "lasten": 43390,
-    "netto": 18989
+    "marge": 106245,
+    "margeEx": 87806,
+    "lasten": 43062,
+    "netto": 19325
    },
    "2026-06": {
     "spend": 25218,
-    "off": 825,
-    "akk": 39,
-    "omzet": 122386,
-    "marge": 57966,
-    "margeEx": 47906,
-    "lasten": 22964,
-    "netto": -276
+    "off": 805,
+    "akk": 43,
+    "omzet": 139418,
+    "marge": 65960,
+    "margeEx": 54513,
+    "lasten": 24540,
+    "netto": 4755
    },
    "2026-07": {
     "spend": 25441,
-    "off": 1080,
-    "akk": 39,
-    "omzet": 125866,
-    "marge": 58962,
-    "margeEx": 48729,
-    "lasten": 25776,
-    "netto": -2488
+    "off": 1021,
+    "akk": 51,
+    "omzet": 170928,
+    "marge": 80122,
+    "margeEx": 66216,
+    "lasten": 28892,
+    "netto": 11884
    }
   },
   "Google": {
@@ -1512,70 +1517,70 @@
     "off": 217,
     "akk": 26,
     "omzet": 85205,
-    "marge": 42429,
-    "margeEx": 35065,
-    "lasten": 31544,
-    "netto": -11522
+    "marge": 42433,
+    "margeEx": 35069,
+    "lasten": 31087,
+    "netto": -11062
    },
    "2026-02": {
     "spend": 17862,
     "off": 283,
     "akk": 25,
     "omzet": 91472,
-    "marge": 41853,
-    "margeEx": 34589,
+    "marge": 41854,
+    "margeEx": 34590,
     "lasten": 25818,
-    "netto": -9091
+    "netto": -9089
    },
    "2026-03": {
     "spend": 26258,
     "off": 542,
     "akk": 65,
     "omzet": 228971,
-    "marge": 106268,
-    "margeEx": 87825,
+    "marge": 106273,
+    "margeEx": 87829,
     "lasten": 37277,
-    "netto": 24290
+    "netto": 24293
    },
    "2026-04": {
     "spend": 31543,
     "off": 567,
     "akk": 42,
     "omzet": 142643,
-    "marge": 68861,
-    "margeEx": 56910,
+    "marge": 68877,
+    "margeEx": 56923,
     "lasten": 30503,
-    "netto": -5137
+    "netto": -5123
    },
    "2026-05": {
     "spend": 36767,
     "off": 669,
     "akk": 54,
-    "omzet": 216482,
-    "marge": 101490,
-    "margeEx": 83876,
-    "lasten": 44209,
-    "netto": 2901
+    "omzet": 217795,
+    "marge": 102272,
+    "margeEx": 84522,
+    "lasten": 43874,
+    "netto": 3882
    },
    "2026-06": {
     "spend": 36808,
-    "off": 777,
-    "akk": 57,
-    "omzet": 259304,
-    "marge": 123621,
-    "margeEx": 102166,
-    "lasten": 33563,
-    "netto": 31795
+    "off": 764,
+    "akk": 58,
+    "omzet": 257970,
+    "marge": 123210,
+    "margeEx": 101827,
+    "lasten": 33101,
+    "netto": 31918
    },
    "2026-07": {
     "spend": 37598,
-    "off": 772,
-    "akk": 49,
-    "omzet": 154410,
-    "marge": 71668,
-    "margeEx": 59230,
-    "lasten": 32385,
-    "netto": -10753
+    "off": 742,
+    "akk": 60,
+    "omzet": 177222,
+    "marge": 82162,
+    "margeEx": 67903,
+    "lasten": 33990,
+    "netto": -3685
    }
   },
   "Anders": {
@@ -1584,10 +1589,10 @@
     "off": 20,
     "akk": 3,
     "omzet": 7913,
-    "marge": 3655,
+    "marge": 3656,
     "margeEx": 3021,
-    "lasten": 3640,
-    "netto": -619
+    "lasten": 3587,
+    "netto": -566
    },
    "2026-02": {
     "spend": 0,
@@ -1614,10 +1619,10 @@
     "off": 71,
     "akk": 11,
     "omzet": 55832,
-    "marge": 26310,
-    "margeEx": 21744,
+    "marge": 26311,
+    "margeEx": 21745,
     "lasten": 7989,
-    "netto": 13755
+    "netto": 13756
    },
    "2026-05": {
     "spend": 0,
@@ -1626,28 +1631,38 @@
     "omzet": 18572,
     "marge": 8724,
     "margeEx": 7210,
-    "lasten": 4912,
-    "netto": 2298
+    "lasten": 4875,
+    "netto": 2335
    },
    "2026-06": {
     "spend": 0,
     "off": 97,
     "akk": 9,
-    "omzet": 27299,
-    "marge": 12733,
-    "margeEx": 10523,
-    "lasten": 5299,
-    "netto": 5223
+    "omzet": 27601,
+    "marge": 12901,
+    "margeEx": 10662,
+    "lasten": 5136,
+    "netto": 5525
    },
    "2026-07": {
     "spend": 0,
-    "off": 244,
-    "akk": 33,
-    "omzet": 182155,
-    "marge": 84671,
-    "margeEx": 69976,
-    "lasten": 21810,
-    "netto": 48166
+    "off": 203,
+    "akk": 36,
+    "omzet": 196416,
+    "marge": 91484,
+    "margeEx": 75607,
+    "lasten": 20394,
+    "netto": 55213
+   },
+   "2026-08": {
+    "spend": 0,
+    "off": 56,
+    "akk": 4,
+    "omzet": 19630,
+    "marge": 9231,
+    "margeEx": 7629,
+    "lasten": 23000,
+    "netto": -15371
    }
   },
   "Buren/bekenden": {
@@ -1658,8 +1673,8 @@
     "omzet": 22521,
     "marge": 9971,
     "margeEx": 8241,
-    "lasten": 9706,
-    "netto": -1465
+    "lasten": 9565,
+    "netto": -1324
    },
    "2026-02": {
     "spend": 0,
@@ -1686,40 +1701,50 @@
     "off": 78,
     "akk": 19,
     "omzet": 53951,
-    "marge": 25464,
-    "margeEx": 21045,
+    "marge": 25466,
+    "margeEx": 21046,
     "lasten": 13799,
-    "netto": 7246
+    "netto": 7247
    },
    "2026-05": {
     "spend": 0,
     "off": 74,
-    "akk": 16,
-    "omzet": 44501,
-    "marge": 20243,
-    "margeEx": 16730,
-    "lasten": 13099,
-    "netto": 3631
+    "akk": 17,
+    "omzet": 45859,
+    "marge": 20880,
+    "margeEx": 17257,
+    "lasten": 13812,
+    "netto": 3444
    },
    "2026-06": {
     "spend": 0,
-    "off": 90,
-    "akk": 20,
-    "omzet": 93658,
-    "marge": 44807,
-    "margeEx": 37031,
-    "lasten": 11776,
-    "netto": 25255
+    "off": 86,
+    "akk": 21,
+    "omzet": 104647,
+    "marge": 49833,
+    "margeEx": 41184,
+    "lasten": 11985,
+    "netto": 29200
    },
    "2026-07": {
     "spend": 0,
-    "off": 94,
-    "akk": 14,
-    "omzet": 55415,
-    "marge": 25450,
-    "margeEx": 21033,
-    "lasten": 9253,
-    "netto": 11780
+    "off": 90,
+    "akk": 16,
+    "omzet": 60616,
+    "marge": 27897,
+    "margeEx": 23055,
+    "lasten": 9064,
+    "netto": 13991
+   },
+   "2026-08": {
+    "spend": 0,
+    "off": 25,
+    "akk": 3,
+    "omzet": 11297,
+    "marge": 5311,
+    "margeEx": 4389,
+    "lasten": 17250,
+    "netto": -12861
    }
   },
   "Onbekend": {
@@ -1730,8 +1755,8 @@
     "omzet": 35267,
     "marge": 15231,
     "margeEx": 12587,
-    "lasten": 12132,
-    "netto": 455
+    "lasten": 11957,
+    "netto": 631
    },
    "2026-02": {
     "spend": 0,
@@ -1770,8 +1795,8 @@
     "omzet": 7022,
     "marge": 3563,
     "margeEx": 2945,
-    "lasten": 1637,
-    "netto": 1307
+    "lasten": 1625,
+    "netto": 1320
    },
    "2026-06": {
     "spend": 0,
@@ -1779,19 +1804,29 @@
     "akk": 64,
     "omzet": 232035,
     "marge": 109944,
-    "margeEx": 90862,
-    "lasten": 37684,
-    "netto": 53178
+    "margeEx": 90863,
+    "lasten": 36525,
+    "netto": 54338
    },
    "2026-07": {
     "spend": 0,
-    "off": 54,
-    "akk": 39,
-    "omzet": 144899,
-    "marge": 67158,
-    "margeEx": 55503,
-    "lasten": 25776,
-    "netto": 29727
+    "off": 46,
+    "akk": 40,
+    "omzet": 145882,
+    "marge": 67628,
+    "margeEx": 55891,
+    "lasten": 22660,
+    "netto": 33230
+   },
+   "2026-08": {
+    "spend": 0,
+    "off": 4,
+    "akk": 2,
+    "omzet": 6047,
+    "marge": 2803,
+    "margeEx": 2316,
+    "lasten": 11500,
+    "netto": -9184
    }
   }
  }

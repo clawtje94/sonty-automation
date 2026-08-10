@@ -143,9 +143,31 @@ async function owaSessie() {
     } catch {}
   }
   await page.waitForTimeout(8000);
-  if (!token) { await browser.close(); throw new Error('geen OWA-token'); }
+  if (!token) {
+    await browser.close();
+    // De browser-login kan mislukken (Microsoft vraagt om bevestiging, sessie verlopen).
+    // Staat er nog een GELDIG token op schijf, gebruik dat dan gewoon — de daemon
+    // helemaal laten stoppen terwijl er een werkende sleutel ligt, legt de hele
+    // planningsmail plat (gezien 10-08: token was geldig, daemon crashte toch).
+    try {
+      const opSchijf = fs.readFileSync(path.join(__dirname, '.owa-token.txt'), 'utf8').trim();
+      if (opSchijf) {
+        const test = await fetch('https://outlook.office.com/api/v2.0/me', { headers: { Authorization: 'Bearer ' + opSchijf } });
+        if (test.ok) { console.log('browser-login mislukt, maar het opgeslagen token werkt nog — daarmee verder'); return opSchijf; }
+      }
+    } catch { /* geen bruikbaar token op schijf */ }
+    throw new Error('geen OWA-token (browser-login mislukt én geen geldig token op schijf)');
+  }
   // token delen met andere daemons (meetbon-doorzetter mailt ermee naar orders@)
-  try { fs.writeFileSync(path.join(__dirname, '.owa-token.txt'), token); } catch {}
+  // Atomisch schrijven: tijdens een gewone writeFileSync is het bestand héél even leeg,
+  // en precies dan las een andere daemon het uit ("FOUT: geen OWA-token", 10-08).
+  // Schrijven naar een tijdelijk bestand en dan hernoemen is ondeelbaar.
+  try {
+    const doel = path.join(__dirname, '.owa-token.txt');
+    const tmp = doel + '.tmp';
+    fs.writeFileSync(tmp, token);
+    fs.renameSync(tmp, doel);
+  } catch {}
   return { browser, page, token };
 }
 

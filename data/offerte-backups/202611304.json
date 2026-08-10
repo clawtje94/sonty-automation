@@ -1,0 +1,43 @@
+{
+  "quotationNumber": "202611304",
+  "documentId": "00a4a135-f980-4380-897d-4535565b9e8c",
+  "name": "Fenna Spiering",
+  "timestamp": "2026-08-10T07:02:15.570Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Rolluik (RollSUPER)\nBreedte: 2830 mm\nHoogte: 2314 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 9010\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Somfy IO motor solar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1918.9,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage rolluik solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Rolluik (RollSUPER)\nBreedte: 2895 mm\nHoogte: 2349 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 9010\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Draaischakelaar\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1504.9,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage rolluik solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

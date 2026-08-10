@@ -1,0 +1,25 @@
+{
+ "op": "2026-08-07T08:32:23.488Z",
+ "openTickets": 53,
+ "groepen": [
+  {
+   "sleutel": "sontymontage1@sontymontage.nl",
+   "naam": "SontyMontage1@sontymontage.nl",
+   "tickets": [
+    {
+     "id": 972422799,
+     "kanaal": "Email",
+     "aangemaakt": "2026-08-07 09:37:53",
+     "onderwerp": "Bijgewerkte reservering:  voor Service afspraak Sonty"
+    },
+    {
+     "id": 972422862,
+     "kanaal": "Email",
+     "aangemaakt": "2026-08-07 09:38:03",
+     "onderwerp": "Nieuwe reservering: Farah Oehlers voor Afspraak showroom Locatie: Frijdastraat 8F, 2288 EX Rijswijk"
+    }
+   ],
+   "doelTicket": 972422799
+  }
+ ]
+}

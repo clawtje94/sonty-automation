@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202611124",
+  "documentId": "3cd1f155-c20b-424d-a6b0-efdc5f83b4bf",
+  "name": "Mike Vink",
+  "timestamp": "2026-08-05T15:00:26.314Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suneye voorraad scherm\nBreedte: 5000 mm\nUitval: 3000 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: Grijs\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 3175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm uitgebreid.\n- Inclusief uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 325,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

@@ -121,5 +121,5 @@ async function owaToken() {
   const tekst = L.join('\n');
   console.log(tekst);
   if (process.argv.includes('--stuur'))
-    require('child_process').execFileSync('node', [__dirname + '/sonty-data-send.js', tekst, '--code'], { stdio: 'inherit' });
+    require('child_process').execFileSync(process.execPath, [__dirname + '/sonty-data-send.js', tekst, '--code'], { stdio: 'inherit' });
 })();

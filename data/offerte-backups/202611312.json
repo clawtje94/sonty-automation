@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202611312",
+  "documentId": "be46386a-62ba-4177-910c-633054462066",
+  "name": "Nanske Biesma",
+  "timestamp": "2026-08-10T07:02:01.118Z",
+  "lines": [
+    {
+      "units": 2,
+      "description": "Zip Design 110\nBreedte: 2143 mm\nHoogte: 1607 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: NTB\nOnderlat: Design\nBediening: Draaischakelaar\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1535.7,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

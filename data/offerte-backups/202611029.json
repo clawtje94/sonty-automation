@@ -1,0 +1,36 @@
+{
+  "quotationNumber": "202611029",
+  "documentId": "0fbff1d8-8c5a-4c56-acaf-6e82bfcf0fd6",
+  "name": "Rob Loman",
+  "timestamp": "2026-08-04T15:01:23.648Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 1875 mm\nHoogte: 1000 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: NTB\nOnderlat: Design\nBediening: Draaischakelaar\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1249.7,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 1875 mm\nHoogte: 1000 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7016 structuur\nKleur doek: NTB\nOnderlat: Design\nBediening: Draaischakelaar\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1249.7,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

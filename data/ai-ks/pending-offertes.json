@@ -715,5 +715,88 @@
   "kanaal": "EMAIL",
   "status": "klaar",
   "aangemaakt": 1785769816276
+ },
+ {
+  "lcId": "f0b6958c-d02d-4c9d-bbfc-630a29756139",
+  "ticketId": 970615208,
+  "klantNaam": "René Klinge",
+  "producten": [
+   {
+    "product": "sunbasic dichte cassette",
+    "breedteMM": 5100,
+    "uitvalMM": 2500,
+    "bediening": "io",
+    "framekleur": "RAL 9001",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1785823514497
+ },
+ {
+  "lcId": "c085f170-c9d7-41d4-ab2b-16deb369488b",
+  "ticketId": 972157131,
+  "klantNaam": "Martin van Bentem",
+  "producten": [
+   {
+    "product": "suneye knikarmscherm",
+    "breedteMM": 3000,
+    "uitvalMM": 2500,
+    "bediening": "io",
+    "framekleur": "RAL 7016 structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1786013636575
+ },
+ {
+  "lcId": "2d614e9f-7c21-4423-8b04-083382856293",
+  "ticketId": 971319962,
+  "klantNaam": "Rick Baremans",
+  "producten": [
+   {
+    "product": "suneye voorraad scherm",
+    "breedteMM": 5000,
+    "uitvalMM": 3000,
+    "bediening": "io",
+    "framekleur": "RAL 7016 structuur"
+   }
+  ],
+  "sonny": false,
+  "kanaal": "WA",
+  "status": "klaar",
+  "aangemaakt": 1786028742975
+ },
+ {
+  "lcId": "9dbaa45c-f975-4ffe-abb8-23681d89341c",
+  "ticketId": 972437156,
+  "klantNaam": "Tom Daintith",
+  "producten": [
+   {
+    "product": "zip design 110",
+    "breedteMM": 2550,
+    "hoogteMM": 1850,
+    "bediening": "draaischakelaar",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 3350,
+    "hoogteMM": 1950,
+    "bediening": "draaischakelaar",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1786117299185
  }
 ]

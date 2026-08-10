@@ -18,8 +18,15 @@ const geld = s => { const n = parseFloat(String(s || '').replace(/[€\s.]/g, ''
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'] });
   const sheets = google.sheets({ version: 'v4', auth });
   const uit = {};
-  for (const [jaar, tabs] of Object.entries(JAREN)) {
-    for (const [tab, mnd] of Object.entries(tabs)) {
+  // Tabnamen uit de sheet zelf (lib/maandtabs.js): de handmatige lijst brak op
+  // 'Juli 2026 ' (met spatie) en miste 'Aug 2026' — dashboard-update viel daardoor
+  // elke maandag stil met "Unable to parse range" (10-08).
+  const { maandTabs } = require('./lib/maandtabs.js');
+  const alle = await maandTabs(sheets, ID);
+  const perJaar = {};
+  for (const t of alle) (perJaar[t.jaar] = perJaar[t.jaar] || []).push(t);
+  for (const [jaar, tabs] of Object.entries(perJaar)) {
+    for (const { titel: tab, maand: mnd } of tabs) {
       const r = await sheets.spreadsheets.values.get({ spreadsheetId: ID, range: `'${tab}'!AA1:AR60` }).catch(() => null);
       if (!r) continue;
       const vals = r.data.values || [];

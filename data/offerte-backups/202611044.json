@@ -1,0 +1,36 @@
+{
+  "quotationNumber": "202611044",
+  "documentId": "56984c18-fc87-47bd-aa2a-b6ebb160ccf1",
+  "name": "Gert Jan Vulto",
+  "timestamp": "2026-08-04T15:00:52.658Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Rolluik (RollSUPER)\nBreedte: 3470 mm\nHoogte: 1700 mm\nKastmaat: 170 mm (schuin)\nFrame Kleur: RAL 9001\nKleur Pantser: RAL 7016\nOnderlat: Standaard\nBediening: Motor + afstandsbediening\nPaneel zijde: NTB\nLamel: RS 42, 1,0 cm dik.\nMontage: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1594.1,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage rolluik solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 3470mm\n- Uitval: 1000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Motor + afstandsbediening\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

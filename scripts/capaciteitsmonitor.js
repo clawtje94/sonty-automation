@@ -26,11 +26,10 @@ const CONFIG_FILE = path.join(__dirname, '..', 'data', 'capaciteit-config.json')
 const JAAR = +(process.argv[process.argv.indexOf('--jaar') + 1]) || new Date().getFullYear();
 
 // Tabnamen per jaar; spelling verschilt (emoji, trailing spaces) dus exact overnemen.
-const JAREN = {
-  2025: { 'Jan 2025': 1, 'Feb 2025 🐸': 2, 'Maart 2025': 3, 'April 2025': 4, 'Mei 2025 ': 5, 'Juni 2025': 6,
-          'Juli 2025': 7, 'Aug 2025': 8, 'Sep 2025': 9, 'Okt 2025': 10, 'Nov 2025': 11, 'Dec 2025': 12 },
-  2026: { 'Jan 2026': 1, 'Feb 2026': 2, 'Maart 2026': 3, 'April 2026': 4, 'Mei 2026': 5, 'Juni 2026 ': 6, 'Juli 2026': 7 },
-};
+// Tabnamen worden uit de sheet zelf gelezen (lib/maandtabs.js): de handmatige lijst
+// miste 'Aug 2026' en had 'Juli 2026' zonder de spatie die er in de sheet wél staat,
+// waardoor deze monitor stilviel op "Unable to parse range" (gevonden 10-08).
+const JAREN = {};
 
 const STANDAARD = {
   gezondeRatio: 8,          // offertes per order bij gezonde bezetting (2025 jan-apr: 7,2-9,1)
@@ -55,9 +54,11 @@ const weekSleutel = d => { const t = new Date(d); t.setHours(0, 0, 0, 0);
   return `${t.getFullYear()}-W${String(1 + Math.round(((t - j) / 864e5 - 3 + ((j.getDay() + 6) % 7)) / 7)).padStart(2, '0')}`; };
 
 async function leesJaar(sheets, jaar) {
-  const tabs = JAREN[jaar]; if (!tabs) return [];
+  const { maandTabs } = require('./lib/maandtabs.js');
+  const gevonden = await maandTabs(sheets, ID, jaar);
+  if (!gevonden.length) { console.error('geen maandtabbladen gevonden voor', jaar); return []; }
   const rows = [];
-  for (const [tab, maand] of Object.entries(tabs)) {
+  for (const { titel: tab, maand } of gevonden) {
     let res;
     try { res = await sheets.spreadsheets.values.get({ spreadsheetId: ID, range: `'${tab}'!A1:AR3100` }); }
     catch (e) { console.error(`tab "${tab}" niet leesbaar: ${e.message}`); continue; }
@@ -233,7 +234,7 @@ async function leesJaar(sheets, jaar) {
       doorlooptijdRecent: med(lagsRecent), doorlooptijdEerder: med(lagsEerder), oordeel, actie }, null, 1));
 
   if (process.argv.includes('--stuur')) {
-    try { execFileSync('node', [path.join(__dirname, 'sonty-data-send.js'), tekst], { stdio: 'inherit' }); }
+    try { execFileSync(process.execPath, [path.join(__dirname, 'sonty-data-send.js'), tekst], { stdio: 'inherit' }); }
     catch (e) { console.error('versturen mislukt:', e.message); }
   }
 })();

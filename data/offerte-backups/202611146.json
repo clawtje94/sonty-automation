@@ -1,0 +1,50 @@
+{
+  "quotationNumber": "202611146",
+  "documentId": "e59d8a76-5a18-40e9-98ba-79ce3380f454",
+  "name": "Maarten Berden",
+  "timestamp": "2026-08-06T07:00:18.173Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2620mm\n- Uitval: 1000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Motor + afstandsbediening\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2295mm\n- Uitval: 1000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Motor + afstandsbediening\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 1000mm\n- Uitval: 800 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Motor + afstandsbediening\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

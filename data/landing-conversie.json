@@ -1,91 +1,91 @@
 {
- "peildatum": "2026-08-03T05:45:28.011Z",
+ "peildatum": "2026-08-10T10:27:53.431Z",
  "dagen": 45,
  "labels": {
   "Rolluik": {
-   "leads": 774,
-   "akk": 77,
-   "waarde": 256282.13
+   "leads": 713,
+   "akk": 92,
+   "waarde": 289355.14999999997
   },
   "Windvast": {
-   "leads": 669,
-   "akk": 41,
-   "waarde": 232208.66999999998
-  },
-  "Voorraad scherm - 20% korting": {
-   "leads": 473,
-   "akk": 28,
-   "waarde": 125222.08
+   "leads": 604,
+   "akk": 35,
+   "waarde": 158048.46999999997
   },
   "Pergola": {
-   "leads": 417,
-   "akk": 15,
-   "waarde": 98603.36
+   "leads": 421,
+   "akk": 17,
+   "waarde": 110380.75
+  },
+  "Voorraad scherm - 20% korting": {
+   "leads": 411,
+   "akk": 23,
+   "waarde": 87144.64
   },
   "Suneye dichte cassette": {
-   "leads": 263,
-   "akk": 27,
-   "waarde": 100029.92
+   "leads": 246,
+   "akk": 20,
+   "waarde": 83030.24
   },
   "Suncube XL": {
-   "leads": 125,
-   "akk": 12,
-   "waarde": 36280.95
-  },
-  "Sunbasic dichte cassette": {
-   "leads": 85,
-   "akk": 5,
-   "waarde": 21650.6
+   "leads": 109,
+   "akk": 10,
+   "waarde": 24904.86
   },
   "Markiezen": {
-   "leads": 83,
-   "akk": 12,
-   "waarde": 54623.43
+   "leads": 88,
+   "akk": 10,
+   "waarde": 41001.86
   },
   "Sunelite dichte cassette": {
-   "leads": 82,
+   "leads": 77,
    "akk": 5,
-   "waarde": 17982
+   "waarde": 20034
   },
   "(geen productregel)": {
-   "leads": 72,
-   "akk": 18,
-   "waarde": 150553
+   "leads": 76,
+   "akk": 22,
+   "waarde": 170897
+  },
+  "Sunbasic dichte cassette": {
+   "leads": 75,
+   "akk": 3,
+   "waarde": 15253.86
   },
   "Winkel offerte": {
-   "leads": 58,
-   "akk": 12,
-   "waarde": 56791.98
+   "leads": 59,
+   "akk": 14,
+   "waarde": 64676.06
   },
   "ZIP bovenliggende zonwering": {
-   "leads": 53,
-   "akk": 3,
-   "waarde": 21619.86
+   "leads": 49,
+   "akk": 2,
+   "waarde": 9579.630000000001
   },
   "Offerte op maat": {
-   "leads": 28,
-   "akk": 4,
-   "waarde": 6418.99
-  },
-  "Gordijnen": {
-   "leads": 21,
-   "akk": 3,
-   "waarde": 7618.860000000001
-  },
-  "Sunproject": {
-   "leads": 21,
-   "akk": 3,
-   "waarde": 11210.86
+   "leads": 33,
+   "akk": 10,
+   "waarde": 28699.15
   },
   "Niet windvast": {
-   "leads": 19,
+   "leads": 21,
+   "akk": 3,
+   "waarde": 7788.63
+  },
+  "Gordijnen": {
+   "leads": 17,
    "akk": 2,
-   "waarde": 6284
+   "waarde": 7618.860000000001
   },
   "Sunbasic open cassette": {
    "leads": 16,
    "akk": 1,
    "waarde": 4121
+  },
+  "Sunproject": {
+   "leads": 15,
+   "akk": 5,
+   "waarde": 15246.86
   }
  }
 }

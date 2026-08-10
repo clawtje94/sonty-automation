@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202611262",
+  "documentId": "777aa58a-8fe1-4e8b-9603-c9a9f1b5b6d1",
+  "name": "Prash B",
+  "timestamp": "2026-08-08T07:00:19.584Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Zip Design 110\nBreedte: 3500 mm\nHoogte: 1000 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9007\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening bedraad\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 2096.8,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

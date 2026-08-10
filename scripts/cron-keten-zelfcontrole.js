@@ -98,7 +98,12 @@ async function trengo(pad) {
     const tekstLaatste = String(laatste.message || laatste.body || '').replace(/<[^>]+>/g, ' ').trim();
     // Een duimpje of "dat past" ná een geslaagde boeking hoeft geen antwoord — dat is
     // een afsluiter, geen open vraag. Wél melden als de klant iets vraagt of aankaart.
-    const afsluiter = /^(👍|👌|🙏|top|dank(je|u)?( wel)?|thanks|bedankt|prima|oke|oké|ok|dat past|is goed|ja( dat is goed| hoor)?|fijne (avond|dag)|tot dan)[\s!.,👍👌🙏🏻🏼🏽😊]*$/i.test(tekstLaatste);
+    // Een afsluiter kan uit meerdere korte zinnen bestaan ("Bedankt, ik heb de afspraak
+    // geaccepteerd." / "Ja dat is goed. Fijne avond"). Alleen als ÉLKE zin een
+    // bevestiging of bedankje is, hoeft er geen antwoord meer.
+    const zinAfsluiter = /^(👍|👌|🙏|top|dank(je|u)?( wel)?|thanks|bedankt|prima|oke|oké|ok|dat (past|is goed|is prima)|is goed|ja( dat is goed| hoor| graag)?|fijne (avond|dag|weekend)|tot (dan|dinsdag|maandag)|ik heb de afspraak.{0,30}(geaccepteerd|bevestigd)|hoi|hallo|groet(en|jes)?|mvg|met vriendelijke groet)[\s!.,👍👌🙏🏻🏼🏽😊-]*$/i;
+    const zinnen = tekstLaatste.split(/[.!?\n]+/).map((z) => z.trim()).filter(Boolean);
+    const afsluiter = zinnen.length > 0 && zinnen.every((z) => zinAfsluiter.test(z));
     const tel9 = String(info.telefoon || '').replace(/\D/g, '').slice(-9);
     const boeking = Object.values(boekingen).find((b) => b.status === 'geboekt'
       && String(b.telefoon || '').replace(/\D/g, '').slice(-9) === tel9);

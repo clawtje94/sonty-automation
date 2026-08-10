@@ -1,0 +1,29 @@
+{
+  "quotationNumber": "202611258",
+  "documentId": "567abf35-d91f-488b-a56e-c2a29cb33352",
+  "name": "Annika Wulterkens",
+  "timestamp": "2026-08-08T07:00:26.968Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2600mm\n- Uitval: 1150 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Somfy IO motor Solar\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

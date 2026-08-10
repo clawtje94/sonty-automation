@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202611022",
+  "documentId": "e2a00cca-24a2-475f-a670-34f2002f8fdd",
+  "name": "Richard van Elburg",
+  "timestamp": "2026-08-04T07:00:24.600Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 2400mm\n- Uitval: 1000 MM\n\n- Materiaal:  Hout\n- Kleur: \n- Type bediening: Handbediend\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

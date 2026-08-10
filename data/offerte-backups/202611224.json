@@ -1,0 +1,29 @@
+{
+  "quotationNumber": "202611224",
+  "documentId": "f8f1a071-0067-4ad7-8cda-793513042bc5",
+  "name": "D Deelen v Grevenbroek",
+  "timestamp": "2026-08-07T15:00:50.306Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Pergola 165 zip\nBreedte: 8513 mm\nUitval: 4500 mm\nFrame Kleur: Andere RAL kleur\nKleur doek: NTB\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product.\n- 7 jaar op de motor",
+      "pricePerUnit": 17853.31,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Pergola\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 650,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "quotationNumber": "202611140",
+  "documentId": "c0e42dac-16ca-4195-a919-ea64082e96ee",
+  "name": "Wim Noordhoek",
+  "timestamp": "2026-08-06T07:00:27.269Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Markies\n- Breedte: 3200mm\n- Uitval: 1000 MM\n\n- Materiaal:  Aluminium\n- Kleur: \n- Type bediening: Motor + afstandsbediening\n- Montage: ",
+      "pricePerUnit": 0,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage markies (houten kappen)\n- montage\n- klein materiaal\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 220,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Tahoma Switch\n•⁠  ⁠Automatiseren van je Somfy producten.\n•⁠  ⁠⁠Producten bedienen waar je ook bent met de telefoon.\n•⁠  ⁠⁠Inclusief installatie en uitleg.\n•⁠  ⁠Al uw smart home producten op 1 app (zoals Phillips hue)",
+      "pricePerUnit": 195,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

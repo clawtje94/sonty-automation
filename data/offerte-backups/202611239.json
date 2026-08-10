@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202611239",
+  "documentId": "08b0bad9-c184-4698-b0d2-2f5b9e9af5dd",
+  "name": "NL Sadeghi",
+  "timestamp": "2026-08-07T15:00:26.961Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Suneye\nBreedte: 2506 mm\nUitval: 2500 mm\nFrame kleur: RAL 9010\nKleur doek: NTB\nBediening: Handbediend\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 2362,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

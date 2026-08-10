@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202611269",
+  "documentId": "0c022349-7311-4961-9656-e05ba34fe656",
+  "name": "Mel Mast",
+  "timestamp": "2026-08-08T15:00:52.891Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Pergola 165 zip\nBreedte: 10000 mm\nUitval: 4000 mm\nFrame Kleur: Andere RAL kleur\nKleur doek: NTB\nBediening: Draaischakelaar\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product.\n- 7 jaar op de motor",
+      "pricePerUnit": 18246.96,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Pergola\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 650,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

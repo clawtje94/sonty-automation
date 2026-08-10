@@ -154,9 +154,16 @@ async function main() {
   // aparte lijsten opgehaald, elk met de volledige historie erachter — dat was een van
   // de grootverbruikers achter de Upstash-limietstoring van 08-08. Een token dat hier
   // niet in staat is klaar (verwerkt/verlopen) en hoeft niet gevolgd te worden.
+  // rpItemId komt ALLEEN uit de lijst-route; de detail-route stript hem (publieke
+  // pagina hoort geen RP-id te zien). Zonder dat id kon de reply-monitor geen nieuw
+  // aanbod aanvragen — Rick kreeg wel "ik zoek een moment" en daarna niets.
+  const rpItemPer = {};
   try {
     const r = await fetch('https://sonty-website.vercel.app/api/inmeet-aanbod?actief=1', { headers: { 'x-meet-code': MEET_CODE } });
-    for (const a of (await r.json())?.aanbiedingen || []) statusPer[a.token] = a.status;
+    for (const a of (await r.json())?.aanbiedingen || []) {
+      statusPer[a.token] = a.status;
+      if (a.lead?.rpItemId) rpItemPer[a.token] = a.lead.rpItemId;
+    }
   } catch { /* status is context, geen blokkade */ }
 
   let meldingen = 0;
@@ -216,7 +223,13 @@ async function main() {
         // hebben die geen antwoord krijgen"). Tot nu toe bleef het bij een melding en
         // wachtte de klant tot iemand toevallig keek. Rick schreef "woensdag en
         // donderdag zijn wel opties" en hoorde niets meer.
-        if (statusPer[token] === 'open' && !alGemeld && tekst) {
+        // Melden en AFHANDELEN zijn twee dingen. Een reactie die ooit gemeld is maar
+        // nooit is afgehandeld, bleef anders voor eeuwig liggen (Rick van Nieuwkerk:
+        // zijn bericht was gemeld, maar niemand deed er iets mee). Zolang het aanbod
+        // openstaat pakken we hem alsnog op; de eigen vlag voorkomt dubbel werk.
+        const afgehandeldSleutel = 'afgehandeld:' + sleutel;
+        if (statusPer[token] === 'open' && !gemeld[afgehandeldSleutel] && tekst) {
+          gemeld[afgehandeldSleutel] = new Date().toISOString();
           try {
             const { leesReactie } = require('./lib/planning-antwoord.js');
             const rA = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': MEET_CODE } });
@@ -230,10 +243,15 @@ async function main() {
                 method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
                 body: JSON.stringify({ status: 'verlopen' }),
               }).catch(() => {});
+              const rpId = rpItemPer[token] || aanbod?.lead?.rpItemId;
+              if (!rpId) {
+                await telegram(`⚠️ ${info.naam} wil een ander moment, maar ik kan zijn RP-lead niet vinden — nieuw aanbod handmatig sturen via het dashboard.`);
+                continue;
+              }
               const r = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
                 method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
                 body: JSON.stringify({
-                  type: 'stuur-aanbod', rpItemId: aanbod?.lead?.rpItemId, naam: info.naam, bron: 'klant-reply',
+                  type: 'stuur-aanbod', rpItemId: rpItemPer[token] || aanbod?.lead?.rpItemId, naam: info.naam, bron: 'klant-reply',
                   voorkeurDagen: duiding.dagen, voorkeurDagdeel: duiding.dagdeel,
                 }),
               });

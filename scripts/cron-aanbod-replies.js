@@ -102,6 +102,22 @@ async function stuurWaBevestiging(ticketId, naam, slot) {
   return false;
 }
 
+/** Klant meteen laten weten dat zijn bericht is aangekomen. Stilte na een reactie is
+ *  het enige echt foute antwoord; dit koopt de tijd om het goed af te handelen. */
+async function bevestigOntvangst(ticketId, naam, tekst) {
+  for (let i = 0; i < 3; i++) {
+    const r = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages`, {
+      method: 'POST', headers: { ...TH, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: `${tekst}\n\nGroetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
+    });
+    if (r.ok) return true;
+    if (r.status === 429) { await new Promise((x) => setTimeout(x, 15000)); continue; }
+    break;
+  }
+  await telegram(`⚠️ Ontvangstbevestiging aan ${naam} kon niet verstuurd worden (ticket ${ticketId}) — even handmatig laten weten dat we ermee bezig zijn.`);
+  return false;
+}
+
 async function ticketBerichten(ticketId) {
   // 429's niet stil laten wegvallen (miste Eric's antwoord op 06-08): even wachten
   // en opnieuw; blijft het mislukken dan zichtbaar loggen.
@@ -195,6 +211,51 @@ async function main() {
               }
             }
           } catch { /* uitlezen mislukt: dan gewoon rapporteren */ }
+        }
+        // GEEN KALE KEUZE? Dan alsnog echt afhandelen (Daimy 10-08: "ik blijf mensen
+        // hebben die geen antwoord krijgen"). Tot nu toe bleef het bij een melding en
+        // wachtte de klant tot iemand toevallig keek. Rick schreef "woensdag en
+        // donderdag zijn wel opties" en hoorde niets meer.
+        if (statusPer[token] === 'open' && !alGemeld && tekst) {
+          try {
+            const { leesReactie } = require('./lib/planning-antwoord.js');
+            const rA = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': MEET_CODE } });
+            const aanbod = rA.ok ? await rA.json() : null;
+            const duiding = await leesReactie(tekst, aanbod?.slots || []);
+            console.log(`  ${info.naam}: intent ${duiding.intent}${duiding.dagen.length ? ' (dagen ' + duiding.dagen.join(',') + ')' : ''}`);
+
+            if (duiding.intent === 'ander-moment') {
+              // oude aanbod sluiten en meteen nieuwe tijden laten sturen, met zijn voorkeur
+              await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, {
+                method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+                body: JSON.stringify({ status: 'verlopen' }),
+              }).catch(() => {});
+              const r = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
+                method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+                body: JSON.stringify({
+                  type: 'stuur-aanbod', rpItemId: aanbod?.lead?.rpItemId, naam: info.naam, bron: 'klant-reply',
+                  voorkeurDagen: duiding.dagen, voorkeurDagdeel: duiding.dagdeel,
+                }),
+              });
+              await bevestigOntvangst(ticketId, info.naam, duiding.dagen.length
+                ? 'Dank je wel! Ik zoek even een moment op de dagen die je noemt en stuur je zo een nieuw voorstel.'
+                : 'Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel.');
+              await telegram(`🔁 ${info.naam}: ${duiding.samenvatting}\nNieuw aanbod aangevraagd (${r.ok ? 'staat in de rij' : 'AANVRAAG MISLUKT — handmatig'}).`);
+              statusPer[token] = 'verlopen';
+              continue;
+            }
+
+            if (duiding.intent === 'klacht' || duiding.intent === 'vraag') {
+              await bevestigOntvangst(ticketId, info.naam,
+                duiding.intent === 'klacht'
+                  ? 'Dank je voor je eerlijke bericht, dat snap ik goed. Ik leg het even voor aan een collega en je hoort vandaag nog van ons.'
+                  : 'Goede vraag! Ik zoek het even voor je uit en kom er vandaag nog op terug.');
+              await telegram(`${duiding.intent === 'klacht' ? '⚠️' : '❓'} ${info.naam} (ticket ${ticketId}): ${duiding.samenvatting}\n\n"${tekst.slice(0, 200)}"\n\n`
+                + (duiding.antwoordVoorstel ? `Concept-antwoord:\n${duiding.antwoordVoorstel}` : 'Geen concept-antwoord beschikbaar.')
+                + '\n\nDe klant weet dat we ermee bezig zijn; het echte antwoord moet van een mens komen.');
+              continue;
+            }
+          } catch (e) { console.log(`  reactie-afhandeling mislukt: ${e.message.slice(0, 80)}`); }
         }
         if (!alGemeld) await telegram(`💬 REACTIE op keuzelink van ${info.naam} (aanbod: ${statusPer[token] || 'onbekend'}, ticket ${ticketId}):\n\n"${tekst || '(leeg/bijlage)'}"`);
       }

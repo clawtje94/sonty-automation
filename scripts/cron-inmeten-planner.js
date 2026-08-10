@@ -1300,6 +1300,16 @@ async function verwerkDashboardVerzoek(m) {
         beste.push(...sl.map((x) => ({ ...x, inmeter: inm.naam })));
       }
       beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
+      // VOORKEUR VAN DE KLANT (Daimy 10-08, geval Rick: "woensdag en donderdag zijn
+      // wel opties"). Noemt hij zelf dagen of een dagdeel, dan zoeken we dáár; levert
+      // dat niets op, dan vallen we terug op de beste tijden — een klant zonder
+      // opties laten zitten is erger dan een andere dag voorstellen.
+      if (m.voorkeurDagen?.length || m.voorkeurDagdeel) {
+        const { pasBijVoorkeur } = require('./lib/planning-antwoord.js');
+        const passend = pasBijVoorkeur(beste, { dagen: m.voorkeurDagen || [], dagdeel: m.voorkeurDagdeel || null });
+        if (passend.length) beste = passend;
+        else console.log('  (geen plek op de dagen die de klant noemde — beste tijden gebruikt)');
+      }
       // wilEerder (geval Rene 07-08): omrij-grens telt niet, puur vroegste eerst
       aanbod = kiesAanbod(beste, 3, { wachtDagen: 999, negeerGrens: !!m.wilEerder });
       if (!aanbod.length) throw new Error('geen enkel gat beschikbaar');

@@ -434,7 +434,10 @@ async function verwerkLead(lead, item, slot, duurMin) {
     // (Daimy 2026-08-05 én 2026-08-06 — geverifieerd tegen de API-docs en een testjob).
     template: { uuid: '1f11c802-65cd-6aa0-9d06-7e73cee772e4' },
     job_type: { code: 'Inmeet afspraak' },
-    description: `Inmeten — ${lead.naam}\n${lead.volledigAdres}\n\n${lead.aantalProducten} product(en): ${lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ')}`,
+    // Wat de klant onderweg heeft doorgegeven hoort hier te staan: de inmeter leest de
+    // opdracht, niet het WhatsApp-gesprek (Daimy 10-08, contactpersoon van Connie).
+    description: `Inmeten — ${lead.naam}\n${lead.volledigAdres}\n\n${lead.aantalProducten} product(en): ${lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ')}`
+      + require('./lib/inmeet-opmerkingen.js').alsTekst(lead.id),
     contacts: [{ type: 'phone', name: lead.naam, value: lead.telefoon || '-' }],
     address: { formatted: lead.volledigAdres },
     scheduled_at: slot.aankomst.toISOString(),

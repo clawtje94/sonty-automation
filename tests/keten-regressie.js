@@ -436,5 +436,20 @@ test('vergeten-lead rekent vanaf de statusovergang, niet vanaf de offerte-aanvra
     'de aanmaakdatum mag nooit vóór de statusovergang worden gekozen');
 });
 
+// Connie Biermann (10-08): ik gooide alleen de Planado-opdracht weg. De Outlook-afspraak
+// bleef staan, de sync maakte daar een nieuwe naamloze opdracht van, en het dashboard
+// bleef "geboekt" tonen op een datum die de klant had afgezegd. Annuleren moet alle drie
+// de administraties raken, en Outlook eerst — anders zet de sync het terug.
+test('annuleren ruimt Outlook, Planado en de administratie op, in die volgorde', () => {
+  const bron = require('fs').readFileSync(__dirname + '/../scripts/lib/afspraak-annuleren.js', 'utf8');
+  const outlook = bron.indexOf('1. OUTLOOK EERST');
+  const planado = bron.indexOf('2. PLANADO');
+  const admin = bron.indexOf('3. ONZE ADMINISTRATIE');
+  assert.ok(outlook > 0 && planado > outlook && admin > planado,
+    'volgorde moet Outlook -> Planado -> administratie zijn, anders zet de sync de opdracht terug');
+  assert.ok(/status = 'geannuleerd'/.test(bron), 'het dashboard-record moet op geannuleerd');
+  assert.ok(/OPTIE bot/.test(bron), 'optie-blokjes mogen niet als afspraak worden verwijderd');
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

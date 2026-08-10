@@ -185,6 +185,35 @@ async function trengo(pad) {
     }
   }
 
+  // 8. DRIE ADMINISTRATIES, ÉÉN WAARHEID (Daimy 10-08: "Connie staat als geboekt in het
+  //    dashboard maar NIET in de Planado agenda"). Een afspraak leeft op drie plekken:
+  //    ons boekingenbestand (waar het dashboard uit put), de opdracht in Planado, en de
+  //    agenda in Outlook. Ze konden uit elkaar lopen zonder dat iemand het zag: bij
+  //    Connie stond de opdracht in Planado geschrapt, de Outlook-afspraak nog wel, en
+  //    het dashboard meldde vrolijk "geboekt" op een datum die de klant had afgezegd.
+  //    Erger nog: de Outlook→Planado-sync maakte er een naamloze opdracht van terug, dus
+  //    het opruimen draaide zichzelf terug.
+  try {
+    const { haalAgenda } = require('./cron-inmeten-planner.js');
+    const agenda = await haalAgenda();
+    const opdrachten = Object.values(agenda).flat();
+    for (const [rpId, b] of Object.entries(boekingen)) {
+      if (b.status !== 'geboekt' || !b.aankomst) continue;
+      const van = Date.parse(b.aankomst);
+      if (van < Date.now()) continue;
+      const staatErIn = opdrachten.some((o) => Math.abs(Date.parse(o.start) - van) < 60000);
+      if (!staatErIn) {
+        problemen.push(`SCHIJN-BOEKING: ${b.naam} staat bij ons als geboekt op `
+          + `${new Date(van).toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' })}`
+          + ` (${b.inmeter}), maar er is geen opdracht op dat tijdstip. Het dashboard toont dus een afspraak die niet bestaat.`);
+      }
+    }
+    // Andersom vergelijken kan niet: de agenda bevat ook alle montages, en die horen
+    // niet in onze inmeet-administratie. Daarop melden zou puur ruis zijn.
+  } catch (e) {
+    console.log('  agenda-vergelijking overgeslagen: ' + e.message.slice(0, 70));
+  }
+
   console.log(`zelfcontrole: ${problemen.length} probleem(en)`);
   problemen.forEach((p) => console.log('  - ' + p));
 

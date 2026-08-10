@@ -125,9 +125,16 @@ async function plaatsNotitie(ticketId, tekst) {
 // mens moet iets doen; de stap-labels markeren wat er concreet is gebeurd.
 const LABEL = { AI_BOT: 1821763, MENS_NODIG: 1821764, OPMETING: 1815410, OFFERTE_VERSTUURD: 1815411, SHOWROOM: 1816444 };
 async function zetLabel(ticketId, labelId) {
+  // Zelfde 429-geduld als tPost. Zonder retry viel het Mens nodig-label stilletjes weg
+  // tijdens een rate-limit-storm (Liz van Driel 10-08: notitie geplaatst, label en
+  // team-toewijzing mislukt, dus niemand zag de overdracht).
   try {
-    const res = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/labels`, { method: 'POST', headers: TH, body: JSON.stringify({ label_id: labelId }) });
-    return res.ok;
+    for (let poging = 1; poging <= 3; poging++) {
+      const res = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/labels`, { method: 'POST', headers: TH, body: JSON.stringify({ label_id: labelId }) });
+      if (res.status !== 429) return res.ok;
+      if (poging < 3) await new Promise(r => setTimeout(r, poging * 20000));
+    }
+    return false;
   } catch { return false; }
 }
 async function haalLabelWeg(ticketId, labelId) {
@@ -907,7 +914,15 @@ async function verwerkTicket(t, state) {
       await haalLabelWeg(t.id, LABEL.AI_BOT);
       // Ook echt naar team "Mens nodig" toewijzen (Daimy 20 juli: escalaties horen in de
       // Mens nodig-map, net als bij e-mail — het label alleen zet hem daar niet in).
-      await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
+      const toegewezen = await tPost(`/tickets/${t.id}/assign`, { type: 'team', team_id: 431872 });
+      // OVERDRACHT REGISTREREN VOOR ZELFHERSTEL (Liz van Driel 10-08). Mislukt de
+      // toewijzing hier (zelfs na de retries), dan stond het ticket nergens: notitie wel,
+      // map niet, en de belofte "een collega komt erop terug" hing in het luchtledige.
+      // Daarom houden we elke overdracht 48 uur vast en controleert elke cyclus of hij
+      // ook ECHT in de Mens nodig-map staat.
+      state.overdrachten = state.overdrachten || {};
+      state.overdrachten[t.id] = { op: new Date().toISOString(), gelukt: !!toegewezen.ok };
+      if (!toegewezen.ok) console.log(`  ⚠️ [${t.id}] team-toewijzing Mens nodig MISLUKT (${toegewezen.status}) — zelfherstel pakt hem volgende cyclus`);
     }
   } else if (echtVerstuurd && isWaTicket(t) && eerdereEscalaties.length && res.opgelost) {
     // TÓCH ZELF GEHOLPEN na een eerdere overdracht (Daimy 2026-07-17: "als je toch iemand kan
@@ -1176,6 +1191,26 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
   const sonnyNu = sonnyActiefNu();
   const effOnlyTest = onlyTest || (sonnyOnly && !sonnyNu);
   try { await verwerkPendingOffertes(); } catch (e) { console.error('pending-offertes FOUT:', e.message); }
+  // ZELFHERSTEL OVERDRACHTEN (Liz van Driel 10-08): een overdracht is pas een overdracht
+  // als het ticket ook echt in de Mens nodig-map staat. Rate-limits lieten notitie en
+  // toewijzing uit elkaar lopen; hier controleren we elke recente overdracht en zetten we
+  // hem alsnog goed. Verdwenen of gesloten tickets vallen vanzelf van de lijst.
+  try {
+    state.overdrachten = state.overdrachten || {};
+    for (const [tid, info] of Object.entries(state.overdrachten)) {
+      if (Date.now() - Date.parse(info.op) > 48 * 3600000) { delete state.overdrachten[tid]; continue; }
+      const r = await fetch(`https://app.trengo.com/api/v2/tickets/${tid}`, { headers: TH });
+      if (r.status === 429) continue; // druk: volgende cyclus
+      if (!r.ok) { delete state.overdrachten[tid]; continue; }
+      const tk = (await r.json()).data || {};
+      if (String(tk.status).toUpperCase() === 'CLOSED') { delete state.overdrachten[tid]; continue; }
+      if (Number(tk.team_id) === 431872) { delete state.overdrachten[tid]; continue; } // staat goed
+      const her = await tPost(`/tickets/${tid}/assign`, { type: 'team', team_id: 431872 });
+      await zetLabel(tid, LABEL.MENS_NODIG);
+      console.log(`  zelfherstel: overdracht ${tid} ${her.ok ? 'alsnog in de Mens nodig-map gezet' : 'NOG STEEDS niet toe te wijzen (' + her.status + ')'}`);
+      if (her.ok) delete state.overdrachten[tid];
+    }
+  } catch (e) { console.error('zelfherstel-overdrachten FOUT:', e.message); }
   // Terugkomer-reminders: elke 15 min checken (venster 22u-23,7u na laatste klantbericht)
   if (Date.now() - laatsteTerugkomerCheck > 15 * 60000) {
     laatsteTerugkomerCheck = Date.now();

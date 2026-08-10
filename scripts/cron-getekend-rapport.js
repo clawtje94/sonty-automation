@@ -100,8 +100,8 @@ async function telegram(text) {
         max_tokens: 1500,
         messages: [{ role: 'user', content:
           `Hieronder staan ${perTicket.size} AI-klantenservicegesprekken van Sonty (zonwering) van de afgelopen dag. Beoordeel ALLEEN op basis van wat er echt staat (niets verzinnen) en geef UITSLUITEND geldige JSON terug in dit formaat:\n` +
-          `{\n  "geholpen": <aantal gesprekken waarin de AI de klant echt inhoudelijk verder heeft geholpen>,\n  "akkoord_inmeten": <aantal klanten dat AKKOORD is gegaan met de opdracht. LET OP: een klant die doorgezet is naar "inmeten inplannen" is per definitie akkoord — tel akkoord en inmeten dus als ÉÉN ding, elke klant maximaal 1x. NIET dubbeltellen>,\n  "showroom": <aantal klanten dat een SHOWROOMbezoek heeft afgesproken of daarnaar verwezen is. Dit staat LOS van akkoord: iemand komt naar de showroom om nog te beslissen>,\n  "overtuigd": <aantal twijfelaars dat de AI over de streep trok (subset van geholpen; alleen wie eerst duidelijk twijfelde op prijs/keuze)>,\n  "overtuigd_details": ["Klantnaam — in 1 zin hoe (alternatief/downgrade/uitleg/korting)"],\n  "akkoord_details": ["Klantnaam (ticket) — waaruit het akkoord blijkt, in een paar woorden"],\n  "veelvoorkomende_problemen": ["Kort thema waar klanten hulp bij nodig hadden of waar de AI het niet zelf kon oplossen (bv. 'foto-beoordeling', 'levertijd al lopende order', 'maatwerk buiten configurator', 'klacht montage'), met hoe vaak het voorkwam. Sorteer op meest voorkomend. Alleen echte terugkerende thema's, max 6."]\n}\n` +
-          `Belangrijk tegen scheve data: akkoord_inmeten en showroom zijn aparte uitkomsten — tel een klant niet in beide. Geef alleen de JSON, geen tekst eromheen.\n\n${digest}` }],
+          `{\n  "geholpen": <aantal gesprekken waarin de AI de klant echt inhoudelijk verder heeft geholpen>,\n  "akkoord_inmeten": <aantal klanten dat AKKOORD is gegaan met de opdracht. LET OP: een klant die doorgezet is naar "inmeten inplannen" is per definitie akkoord — tel akkoord en inmeten dus als ÉÉN ding, elke klant maximaal 1x. NIET dubbeltellen>,\n  "showroom": <aantal klanten dat een SHOWROOMbezoek heeft afgesproken of daarnaar verwezen is. Dit staat LOS van akkoord: iemand komt naar de showroom om nog te beslissen>,\n  "overtuigd": <aantal twijfelaars dat de AI over de streep trok (subset van geholpen; alleen wie eerst duidelijk twijfelde op prijs/keuze)>,\n  "overtuigd_details": ["Klantnaam — in 1 zin hoe (alternatief/downgrade/uitleg/korting)"],\n  "akkoord_details": ["Klantnaam (ticket) — waaruit het akkoord blijkt, in een paar woorden"],\n  "geholpen_tickets": [<ticketnummers van de gesprekken die je als geholpen telt>],\n  "akkoord_tickets": [<ticketnummers van de klanten die akkoord zijn>],\n  "showroom_tickets": [<ticketnummers met een showroomafspraak>],\n  "overtuigd_tickets": [<ticketnummers van de overtuigde twijfelaars>],\n  "veelvoorkomende_problemen": ["Kort thema waar klanten hulp bij nodig hadden of waar de AI het niet zelf kon oplossen (bv. 'foto-beoordeling', 'levertijd al lopende order', 'maatwerk buiten configurator', 'klacht montage'), met hoe vaak het voorkwam. Sorteer op meest voorkomend. Alleen echte terugkerende thema's, max 6."]\n}\n` +
+          `Belangrijk tegen scheve data: akkoord_inmeten en showroom zijn aparte uitkomsten — tel een klant niet in beide. De ..._tickets-lijsten moeten precies even lang zijn als het bijbehorende aantal; de ticketnummers staan in de kop van elk gesprek. Geef alleen de JSON, geen tekst eromheen.\n\n${digest}` }],
       }),
     });
     const j = await resp.json();
@@ -110,15 +110,32 @@ async function telegram(text) {
     try { stats = JSON.parse(raw.replace(/```json|```/g, '').trim()); } catch {}
 
     // Cumulatief totaal bijhouden zodat Daimy ook "totaal tot nu toe" ziet
+    // Cumulatief bijhouden PER TICKET, niet door dagcijfers op te tellen. 16% van de
+    // gesprekken loopt over meerdere dagen (gemeten 10-08-2026: 168 van 1020), en die
+    // werden elke dag opnieuw meegeteld. Daardoor stond het totaal op 137 akkoord
+    // terwijl er in dezelfde periode 117 offertes zijn getekend — een AI-subtotaal kan
+    // nooit hoger zijn dan het totaal. Met sets is de telling zelf-corrigerend.
     const STATS_FILE = path.join(__dirname, '..', 'data', 'ai-ks', 'conversie-stats.json');
     let cum = { geholpen: 0, akkoord_inmeten: 0, showroom: 0, overtuigd: 0, dagen: 0 };
     try { cum = JSON.parse(fs.readFileSync(STATS_FILE, 'utf8')); } catch {}
 
     if (stats) {
-      cum.geholpen += stats.geholpen || 0;
-      cum.akkoord_inmeten += stats.akkoord_inmeten || 0;
-      cum.showroom += stats.showroom || 0;
-      cum.overtuigd += stats.overtuigd || 0;
+      const CATS = [['geholpen', 'geholpen_tickets'], ['akkoord_inmeten', 'akkoord_tickets'], ['showroom', 'showroom_tickets'], ['overtuigd', 'overtuigd_tickets']];
+      cum.tickets = cum.tickets || {};
+      let perTicketGelukt = true;
+      for (const [veld, lijstveld] of CATS) {
+        const ids = Array.isArray(stats[lijstveld]) ? stats[lijstveld].map(String) : null;
+        // alleen vertrouwen als de lijst even lang is als het gemelde aantal
+        if (!ids || ids.length !== (stats[veld] || 0)) { perTicketGelukt = false; continue; }
+        cum.tickets[veld] = [...new Set([...(cum.tickets[veld] || []), ...ids])];
+      }
+      if (perTicketGelukt) {
+        for (const [veld] of CATS) cum[veld] = (cum.tickets[veld] || []).length;
+      } else {
+        // terugval: oude manier, maar dan wel gemarkeerd zodat het cijfer navolgbaar blijft
+        for (const [veld] of CATS) cum[veld] = (cum[veld] || 0) + (stats[veld] || 0);
+        cum.onzuiver = (cum.onzuiver || 0) + 1;
+      }
       cum.dagen = (cum.dagen || 0) + 1;
       fs.writeFileSync(STATS_FILE, JSON.stringify(cum, null, 1));
 
@@ -148,7 +165,8 @@ async function telegram(text) {
         `• Waarvan overtuigd vanuit twijfel: ${stats.overtuigd ?? '?'}\n` +
         details +
         (stats.samenvatting ? `\n\n${stats.samenvatting}` : '') +
-        `\n\n📊 Totaal tot nu toe (${cum.dagen} dagen): ${totaalGesprekken} gesprekken gevoerd, ${cum.geholpen} geholpen, ${cum.akkoord_inmeten} akkoord, ${cum.showroom} showroom, ${cum.overtuigd} overtuigd.`
+        `\n\n📊 Totaal tot nu toe (${cum.dagen} dagen): ${totaalGesprekken} gesprekken gevoerd, ${cum.geholpen} geholpen, ${cum.akkoord_inmeten} akkoord, ${cum.showroom} showroom, ${cum.overtuigd} overtuigd.` +
+        `\n(akkoord = klant zegt ja in het gesprek, het tekenrapport telt alleen digitaal ondertekende offertes; die twee lopen dus altijd uiteen)`
       );
     } else {
       await telegram(`🤖 AI-resultaten: ${perTicket.size} gesprekken gevoerd (aantallen-classificatie mislukt: ${JSON.stringify(j).slice(0, 100)}).`);

@@ -1,7 +1,16 @@
 {
- "geholpen": 492,
- "akkoord_inmeten": 132,
- "showroom": 50,
- "overtuigd": 77,
- "dagen": 22
+ "geholpen": 0,
+ "akkoord_inmeten": 0,
+ "showroom": 0,
+ "overtuigd": 0,
+ "dagen": 0,
+ "tickets": {},
+ "_toelichting": "Vanaf 2026-08-10 wordt cumulatief per ticket geteld in plaats van dagcijfers optellen. De cijfers hieronder zijn de oude, onzuivere telling: 16% van de gesprekken loopt over meerdere dagen en werd elke dag opnieuw meegeteld (137 akkoord tegen 117 werkelijk getekende offertes in dezelfde 23 dagen).",
+ "_historie_tot_10aug_onzuiver": {
+  "geholpen": 520,
+  "akkoord_inmeten": 137,
+  "showroom": 53,
+  "overtuigd": 82,
+  "dagen": 23
+ }
 }

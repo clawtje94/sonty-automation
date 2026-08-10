@@ -125,7 +125,15 @@ async function zoekSlots({ agenda, adres, duurMin, werkdagen, agendaOnbetrouwbaa
           const teLaat = +aankomst > +dagEind + AVOND_MAX_NA_MIN * MINUUT;
           // Ligt de klus vóór het einde van de dienst? Dan pakt de gewone lus hem al.
           const naDienst = +vertrek > +dagEind;
-          if (naDienst && !teLaat && extra <= AVOND_MAX_EXTRA_MIN) {
+          // BOTST HET MET IETS NA DE DIENST? `opDeDag` bevat alleen afspraken bínnen
+          // de werkdag, dus een klus die ná 15:00 staat was onzichtbaar voor deze
+          // regel. Natalie Bavinck kreeg zo 15:10-15:40 aangeboden terwijl Eric ten
+          // Cate om 15:20 stond (10-08). Hier tellen ALLE afspraken van die dag mee.
+          const botstNaDienst = agenda.some((x) => {
+            const van = Date.parse(x.start); const tot = Date.parse(x.eind);
+            return van < +vertrek && tot > +aankomst;
+          });
+          if (naDienst && !teLaat && !botstNaDienst && extra <= AVOND_MAX_EXTRA_MIN) {
             slots.push({
               datum: dag.datum, aankomst, vertrek,
               extraRijtijdMin: extra,

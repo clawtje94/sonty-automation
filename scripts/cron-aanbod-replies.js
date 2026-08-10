@@ -186,9 +186,16 @@ async function main() {
       if (a.lead?.rpItemId) rpItemPer[a.token] = a.lead.rpItemId;
     }
   } catch { /* status is context, geen blokkade */ }
-  const lopendeTokens = tokens.filter((t) => statusPer[t] === 'open' || statusPer[t] === 'gekozen');
-  if (lopendeTokens.length) tokens = lopendeTokens;
-  console.log(`${tokens.length} lopend(e) aanbod(en) om te volgen (van ${Object.keys(tickets).length} bewaarde)`);
+  // Volgen: alles wat nog loopt, PLUS alles wat de afgelopen vier dagen is verstuurd —
+  // ook als het al geboekt is. Connie Biermann schreef twee keer ná haar bevestiging dat
+  // die dag niet kon (10-08) en kreeg niets terug, omdat een geboekt aanbod niet meer
+  // gevolgd werd. Juist dán moet je luisteren: een afspraak die de klant intrekt is
+  // erger dan een aanbod dat blijft liggen.
+  const VERS_MS = 4 * 86400000;
+  const teVolgen = tokens.filter((t) => statusPer[t] === 'open' || statusPer[t] === 'gekozen'
+    || (Date.now() - Date.parse(tickets[t].verstuurdOp || 0) < VERS_MS));
+  if (teVolgen.length) tokens = teVolgen;
+  console.log(`${tokens.length} aanbod(en) om te volgen (van ${Object.keys(tickets).length} bewaarde)`);
 
   let meldingen = 0;
   for (const token of tokens) {
@@ -302,6 +309,28 @@ async function main() {
               continue;
             }
           } catch (e) { console.log(`  reactie-afhandeling mislukt: ${e.message.slice(0, 80)}`); }
+        }
+        // BERICHT NA DE BOEKING. Het aanbod staat niet meer open, dus de afhandeling
+        // hierboven slaat over — maar de klant mag nooit in stilte blijven staan. Zegt
+        // hij iets anders dan "dank je", dan bevestigen we de ontvangst en gaat er een
+        // duidelijke melding uit: hier staat een afspraak die misschien niet meer klopt.
+        const naBoekingSleutel = 'naboeking:' + sleutel;
+        if (statusPer[token] !== 'open' && !gemeld[naBoekingSleutel] && tekst) {
+          gemeld[naBoekingSleutel] = new Date().toISOString();
+          try {
+            const { leesReactie } = require('./lib/planning-antwoord.js');
+            const rB = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': MEET_CODE } });
+            const aanbodB = rB.ok ? await rB.json() : null;
+            const duidingB = await leesReactie(tekst, aanbodB?.slots || []);
+            if (duidingB.intent !== 'akkoord') {
+              await bevestigOntvangst(ticketId, info.naam, duidingB.intent === 'klacht'
+                ? 'Dank je voor je eerlijke bericht, dat snap ik goed. Ik pak dit meteen op en je hoort vandaag nog van ons.'
+                : 'Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug.');
+              await telegram(`🚨 ${info.naam} schreef NA de boeking iets dat aandacht vraagt (${duidingB.intent}: ${duidingB.samenvatting}).\n\n"${tekst.slice(0, 200)}"\n\nDe afspraak staat al vast — controleer of die nog klopt. Ticket ${ticketId}. De klant weet dat we ermee bezig zijn.`);
+              meldingen++;
+              continue;
+            }
+          } catch (e) { console.log(`  na-boeking-check mislukt: ${e.message.slice(0, 80)}`); }
         }
         if (!alGemeld) await telegram(`💬 REACTIE op keuzelink van ${info.naam} (aanbod: ${statusPer[token] || 'onbekend'}, ticket ${ticketId}):\n\n"${tekst || '(leeg/bijlage)'}"`);
       }

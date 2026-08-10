@@ -1150,6 +1150,54 @@ async function verwerkAanbiedingen() {
       aankomst: new Date(slot.aankomst),
       extraRijtijdMin: 0,
     };
+    // HET LAATSTE WOORD VAN DE KLANT TELT (Daimy 10-08, Connie Biermann).
+    // Zij schreef "Dat past", en vijf minuten later "in Breda kan het inmeten alleen op
+    // dinsdag, donderdag of vrijdag". Zeven seconden ná dat bericht ging onze bevestiging
+    // eruit: de verwerker had alleen de keuze gelezen en niets wat daarna nog binnenkwam.
+    // Ze kreeg een woensdag bevestigd die ze net had afgezegd, op een adres dat ze net
+    // had gecorrigeerd.
+    //
+    // Daarom nu vlak vóór het boeken: wat is het LAATSTE dat de klant heeft geschreven?
+    // Is dat geen kale instemming, dan boeken we niet. Een afspraak vastzetten die de
+    // klant zojuist heeft ingetrokken is erger dan een ronde later boeken.
+    try {
+      const tkC = laadState().aanbodTickets?.[a.token]?.waTicket;
+      if (tkC) {
+        const TTC = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
+        const rC = await fetch(`https://app.trengo.com/api/v2/tickets/${tkC}/messages?per_page=15`, { headers: { Authorization: 'Bearer ' + TTC } });
+        // Trengo druk (429) of stuk: dan weten we het niet en boeken we gewoon door.
+        // Niet boeken op basis van onwetendheid zou elke klant laten wachten zodra
+        // Trengo hikt.
+        if (rC.ok) {
+          const dC = await rC.json();
+          const inbound = (dC.data || [])
+            .filter((m) => (m.message_type || m.type) === 'INBOUND')
+            .sort((x, y) => String(x.created_at).localeCompare(String(y.created_at)));
+          const laatsteKlant = inbound[inbound.length - 1];
+          const tekstK = String(laatsteKlant?.message || laatsteKlant?.body || '').replace(/<[^>]+>/g, ' ').trim();
+          if (tekstK) {
+            const { leesReactie } = require('./lib/planning-antwoord.js');
+            const duiding = await leesReactie(tekstK, a.slots);
+            if (duiding.intent !== 'akkoord') {
+              console.log(`  ✋ ${a.lead.naam}: laatste bericht is "${duiding.intent}" — NIET boeken (${duiding.samenvatting})`);
+              await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen' }) });
+              const { verwijderOpties } = require('./lib/outlook-opties.js');
+              await verwijderOpties(state.opties?.[a.token]).catch(() => {});
+              delete state.opties?.[a.token];
+              delete state.aangeboden?.[a.lead.rpItemId];
+              bewaarState(state);
+              await fetch(`https://app.trengo.com/api/v2/tickets/${tkC}/messages`, {
+                method: 'POST', headers: { Authorization: 'Bearer ' + TTC, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: `Hoi ${String(a.lead.naam).split(' ')[0]}, dank je wel, ik heb je bericht gezien. Ik zoek dit even goed uit en kom er vandaag nog bij je op terug.\n\nGroetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
+              }).catch(() => {});
+              await telegram(`✋ ${a.lead.naam} NIET geboekt: na zijn keuze kwam er nog een bericht — "${tekstK.slice(0, 110)}" (${duiding.intent}: ${duiding.samenvatting}). Aanbod ingetrokken, klant heeft bericht gehad. Actie nodig.`);
+              continue;
+            }
+          }
+        }
+      }
+    } catch (e) { console.log('  laatste-woord-check overgeslagen: ' + e.message.slice(0, 60)); }
+
     // HERCONTROLE dubbelboeking (Daimy 06-08 "hoe weet je zeker dat alles goed gaat"):
     // tussen aanbod en keuze kan het gat vergeven zijn. Verse agenda checken; overlap
     // = NIET boeken maar melden. Planado zelf weigert overlappende opdrachten niet.

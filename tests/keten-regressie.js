@@ -380,5 +380,32 @@ test('1-moment-template wordt NIET verstuurd zolang hij niet bestaat', async () 
   } finally { global.fetch = echteFetch; }
 });
 
+// CONNIE BIERMANN (10-08): "Dat past" om 13:32, en vijf minuten later "in Breda kan het
+// inmeten alleen op dinsdag, donderdag of vrijdag". Zeven seconden na dat laatste bericht
+// ging onze bevestiging eruit. Sindsdien telt het laatste woord van de klant; deze test
+// bewaakt dat de duiding die berichten niet als instemming leest.
+test('bericht na de keuze mag nooit als akkoord gelden', () => {
+  const { leesKeuze } = require('../scripts/cron-aanbod-replies.js');
+  const een = [{ aankomst: '2026-09-23T10:10:00.000Z' }];
+  assert.strictEqual(leesKeuze('En in Breda kan het inmeten alleen op dinsdag, donderdag of vrijdag..', een), null);
+  assert.strictEqual(leesKeuze('Sorry woensdag kan niet helaas', een), null);
+  assert.strictEqual(leesKeuze('Hoi Sonty! De datum kan niet, kan alleen op dinsdag, donderdag of vrijdag in Breda', een), null);
+  assert.strictEqual(leesKeuze('Jullie hebben wel het goede adres toch... Diderica Mijnssenstraat 22, 4822WH Breda', een), null, 'adresvraag is geen keuze');
+  assert.strictEqual(leesKeuze('Wat zijn de kosten van het inmeten dan naast de 2895 van het zonnescherm', een), null, 'vraag is geen keuze');
+});
+
+// De verwerker moet de laatste-woord-check dragen, en de monitor moet ook na een boeking
+// blijven luisteren. Zonder die twee kon een klant een afspraak intrekken zonder dat er
+// iets gebeurde.
+test('verwerker checkt het laatste klantbericht, monitor volgt ook geboekte klanten', () => {
+  const fs2 = require('fs');
+  const planner = fs2.readFileSync(__dirname + '/../scripts/cron-inmeten-planner.js', 'utf8');
+  assert.ok(/laatste-woord-check|LAATSTE WOORD VAN DE KLANT/i.test(planner), 'laatste-woord-bewaker ontbreekt in de verwerker');
+  assert.ok(/duiding\.intent !== 'akkoord'/.test(planner), 'verwerker moet stoppen bij een niet-akkoord laatste bericht');
+  const monitor = fs2.readFileSync(__dirname + '/../scripts/cron-aanbod-replies.js', 'utf8');
+  assert.ok(/naboeking:/.test(monitor), 'monitor moet berichten na de boeking oppakken');
+  assert.ok(/VERS_MS/.test(monitor), 'monitor moet recent verstuurde aanbiedingen blijven volgen');
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

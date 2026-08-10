@@ -60,13 +60,12 @@ async function telegram(text) {
   fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 1));
   console.log(`Gescand: ${gescand} leads | nieuw getekend: ${nieuw.length}${eersteRun ? ' (nulmeting)' : ''}`);
 
+  // GEEN los tekenbericht meer (Daimy 10-08: "mondeling akkoord en doorgezet naar
+  // inmeten, en online ondertekend en doorgezet, is 1 ding — beantwoord dit in 1
+  // terminal"). Twee rapporten met elk een eigen akkoord-getal dwongen hem elke dag
+  // tot vergelijken. De handtekeningen gaan hieronder in HET ENE dagrapport mee.
   if (eersteRun) {
-    await telegram(`✍️ Tekenrapport is ingesteld. Nulmeting gedaan (${Object.keys(state.gemeld).length} eerder getekende offertes gemarkeerd); vanaf morgen zie je hier elke ochtend hoeveel mensen de afgelopen dag hebben getekend.`);
-  } else if (!nieuw.length) {
-    await telegram('✍️ Tekenrapport: de afgelopen dag heeft niemand een offerte ondertekend.');
-  } else {
-    await telegram(`✍️ Tekenrapport: ${nieuw.length} offerte(s) ondertekend de afgelopen dag! 🎉\n\n` +
-      nieuw.map(n => `- ${n.klant} (offerte ${n.nummer})`).join('\n'));
+    await telegram(`✍️ Tekenrapport is ingesteld. Nulmeting gedaan (${Object.keys(state.gemeld).length} eerder getekende offertes gemarkeerd); getekende offertes tellen vanaf morgen mee in het dagrapport.`);
   }
 
   // ---- Deel 2: wat bereikte de AI de afgelopen dag (twijfelaars, showroom, inmeten) ----
@@ -152,6 +151,25 @@ async function telegram(text) {
       } catch {}
 
       const details = (stats.overtuigd_details || []).length ? '\n\nOvertuigd:\n' + stats.overtuigd_details.map(d => '• ' + d).join('\n') : '';
+
+      // EEN AKKOORD-GETAL (Daimy 10-08). Online tekenen en mondeling ja zeggen in de
+      // chat zijn allebei "akkoord, door naar inmeten" en tellen als één ding, elke
+      // klant maximaal één keer. Ontdubbeld op achternaam+voorletter; de bron staat
+      // erbij zodat elk cijfer navolgbaar blijft.
+      // "Taico Aerts" en "Taico Aerts en Carolin Brandt" zijn dezelfde klant: namen
+      // matchen als alle woorden van de korte naam in de lange voorkomen (voegwoorden
+      // tellen niet mee).
+      const woorden = (n) => String(n || '').toLowerCase().replace(/[^a-z ]/g, '').split(' ').filter((w) => w && !['en', 'de', 'van', 'der', 'den', 'het'].includes(w));
+      const zelfde = (a, b) => {
+        const [kort, lang] = [woorden(a), woorden(b)].sort((x, y) => x.length - y.length);
+        return kort.length > 0 && kort.every((w) => lang.includes(w));
+      };
+      const akkoordLijst = [];
+      for (const n of nieuw) akkoordLijst.push({ naam: n.klant, via: `getekend, offerte ${n.nummer}` });
+      for (const d of (stats.akkoord_details || [])) {
+        const naam = String(d).split(/[—(-]/)[0].trim();
+        if (naam && !akkoordLijst.some((a) => zelfde(a.naam, naam))) akkoordLijst.push({ naam, via: 'akkoord in het gesprek' });
+      }
       await telegram(
         `🤖 AI-resultaten afgelopen dag (${perTicket.size} gesprekken gevoerd):\n\n` +
         `• Geholpen: ${stats.geholpen ?? '?'}\n` +
@@ -159,14 +177,14 @@ async function telegram(text) {
         // cijfer is een gesprek-oordeel van het model; zonder namen is het niet te
         // controleren en lijkt het te botsen met het tekenrapport, dat handtekeningen
         // telt. Met namen zie je in een oogopslag wie er wel ja zei maar nog niet tekende.
-        `• Akkoord (= inmeten inplannen): ${stats.akkoord_inmeten ?? '?'}`
-        + ((stats.akkoord_details || []).length ? ' — ' + stats.akkoord_details.join(' | ') : '') + '\n' +
+        `• Akkoord (door naar inmeten): ${akkoordLijst.length}` +
+        (akkoordLijst.length ? '\n' + akkoordLijst.map((a) => `   - ${a.naam} (${a.via})`).join('\n') : '') + '\n' +
         `• Showroomafspraken (los): ${stats.showroom ?? '?'}\n` +
         `• Waarvan overtuigd vanuit twijfel: ${stats.overtuigd ?? '?'}\n` +
         details +
         (stats.samenvatting ? `\n\n${stats.samenvatting}` : '') +
         `\n\n📊 Totaal tot nu toe (${cum.dagen} dagen): ${totaalGesprekken} gesprekken gevoerd, ${cum.geholpen} geholpen, ${cum.akkoord_inmeten} akkoord, ${cum.showroom} showroom, ${cum.overtuigd} overtuigd.` +
-        `\n(akkoord = klant zegt ja in het gesprek, het tekenrapport telt alleen digitaal ondertekende offertes; die twee lopen dus altijd uiteen)`
+''
       );
     } else {
       await telegram(`🤖 AI-resultaten: ${perTicket.size} gesprekken gevoerd (aantallen-classificatie mislukt: ${JSON.stringify(j).slice(0, 100)}).`);

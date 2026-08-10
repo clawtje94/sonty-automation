@@ -119,6 +119,13 @@ async function trengo(pad) {
     // de controle elke geboekte klant die "dat past" schreef, en dan wordt hij ruis.
     if (boeking && Date.parse(boeking.geboektOp || 0) > berichtOp) continue;
     if (afsluiter && boeking) continue;
+    // Vroeg de klant om eerder te mogen en staat hij inmiddels op de wachtlijst, dan is
+    // dat afgehandeld — dan hoeft deze controle er niet elk uur over te blijven zeuren.
+    try {
+      const { laad } = require('./lib/eerder-willen.js');
+      const opLijst = Object.values(laad()).some((k) => String(k.telefoon || '').replace(/\D/g, '').slice(-9) === tel9);
+      if (opLijst && boeking && /eerder|vrijkom|vrij kom/i.test(tekstLaatste)) continue;
+    } catch { /* lijst niet leesbaar: gewoon melden */ }
     const stilUren = (Date.now() - berichtOp) / 3600000;
     if (stilUren >= 2) {
       problemen.push(`GEEN ANTWOORD: ${info.naam} reageerde ${Math.round(stilUren)} uur geleden op de planning en kreeg niets terug — "${String(laatste.message || laatste.body || '').replace(/<[^>]+>/g, ' ').slice(0, 70)}"`);

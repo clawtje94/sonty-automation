@@ -23,6 +23,34 @@ async function main() {
   // Fase 2 (07-08): de 1-moment-templates van Daimy (244121 inmeetmoment1optie,
   // 244125 momentver). Zodra beide ACCEPTED: keys moment/momentVer registreren,
   // instelling aantalTijden op 1 zetten (Daimy's keuze van vanochtend) en melden.
+  // Fase 3 (11-08): de marge-versies (244680/244681) met de zin "kan door de route een
+  // uur eerder of later worden" (Daimy: monteurs stonden te vaak te wachten). Zodra
+  // beide ACCEPTED vervangen ze de oude moment-templates; verder verandert er niets.
+  if (!ids.margeGemeld) {
+    const mt = [];
+    for (let p = 1; p <= 4; p++) {
+      const r = await fetch(`https://app.trengo.com/api/v2/wa_templates?page=${p}`, { headers: { Authorization: 'Bearer ' + TT, Accept: 'application/json' } });
+      if (r.status === 429) { await wacht(30000); p--; continue; }
+      if (!r.ok) break;
+      const data = (await r.json())?.data || [];
+      mt.push(...data);
+      if (data.length < 15) break;
+    }
+    const marge = mt.find((t) => t.id === 244680);
+    const margeVer = mt.find((t) => t.id === 244682); // v1 (244681) werd direct geweigerd, v2 heringediend 11-08
+    console.log('marge-templates:', marge?.status || 'niet gevonden', '|', margeVer?.status || 'niet gevonden');
+    if (marge?.status === 'ACCEPTED' && margeVer?.status === 'ACCEPTED') {
+      ids.moment = marge.id;
+      ids.momentVer = margeVer.id;
+      ids.margeGemeld = true;
+      fs.writeFileSync(IDS_PAD, JSON.stringify(ids, null, 1));
+      await telegram(`✅ De WhatsApp-templates MET aankomstmarge zijn door Meta goedgekeurd (#${marge.id} en #${margeVer.id}) en aangesloten. Elke klant leest de marge nu al bij het eerste tijdvoorstel, en daarna nogmaals in de bevestiging en de herinnering.`);
+    } else if (marge?.status === 'REJECTED' || margeVer?.status === 'REJECTED') {
+      ids.margeGemeld = true;
+      fs.writeFileSync(IDS_PAD, JSON.stringify(ids, null, 1));
+      await telegram(`⚠️ Meta heeft een marge-template AFGEKEURD (#244680: ${marge?.status || '?'} | #244682: ${margeVer?.status || '?'}) — actie nodig: tekst aanpassen en opnieuw indienen. De oude templates blijven gewoon werken.`);
+    }
+  }
   if (ids.momentGemeld) { console.log('moment-templates al goedgekeurd en gemeld — niets te doen'); return; }
 
   let templates = [];

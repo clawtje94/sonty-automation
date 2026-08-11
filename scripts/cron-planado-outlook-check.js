@@ -88,6 +88,34 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
   }
   console.log(`${dubbels.length} nieuwe dubbelboeking(en) gemeld`);
 
+  // WEES-OPTIES VEGEN (Daimy 11-08: "ik heb ook nog veel optie-boekingen in Outlook").
+  // De planner ruimt zijn OPTIE-blokjes op bij boeken of verlopen, maar een 429 of
+  // een verloren state-verwijzing laat er soms een staan — er stonden er 17 van
+  // klanten die allang geboekt of verlopen waren. Hier de bezem: elk OPTIE-blok
+  // waarvan de vervaltijd in de titel voorbij is, gaat weg. Conservatief: blokken
+  // met een toekomstige vervaltijd blijven staan, die horen bij een lopend aanbod.
+  try {
+    const MNDN = { jan: 0, feb: 1, mrt: 2, apr: 3, mei: 4, jun: 5, jul: 6, aug: 7, sep: 8, okt: 9, nov: 10, dec: 11 };
+    let geveegd = 0;
+    for (const e of (await (async () => {
+      let u = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView?$top=200&$select=Subject&startDateTime=${new Date().toISOString()}&endDateTime=${tot.toISOString()}`;
+      const alles = [];
+      while (u) { const j = await (await fetch(u, { headers: OH })).json(); alles.push(...(j.value || [])); u = j['@odata.nextLink'] || null; }
+      return alles;
+    })())) {
+      if (!/^OPTIE bot/i.test(e.Subject || '')) continue;
+      const m = (e.Subject || '').match(/vervalt (\d{1,2}) (\w{3}),? (\d{1,2}):(\d{2})/);
+      if (!m) continue;
+      const jaar = new Date().getFullYear();
+      const verval = new Date(jaar, MNDN[m[2]] ?? 0, +m[1], +m[3], +m[4]);
+      if (verval > new Date()) continue;
+      const del = await fetch(`https://outlook.office.com/api/v2.0/me/events/${e.Id}`, { method: 'DELETE', headers: OH });
+      if (del.ok || del.status === 204) geveegd++;
+      await new Promise((r) => setTimeout(r, 700));
+    }
+    if (geveegd) console.log(`${geveegd} verlopen OPTIE-blok(ken) geveegd`);
+  } catch (e) { console.log('optie-veger overgeslagen: ' + e.message.slice(0, 60)); }
+
   console.log(`${toekomst.length} toekomstige opdrachten, ${mist.length} zonder Outlook-afspraak`);
   if (mist.length) {
     const { planningTelegram } = require('./lib/telegram-planning.js');

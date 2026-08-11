@@ -137,8 +137,14 @@ async function main() {
   const opExtId = new Map(jobs.map((j) => [j.external_id, j]));
   // Tweede dedup-sleutel: starttijd+inmeter — vangt de eerder gesynchroniseerde
   // bookings-… jobs en de door de planner zelf geboekte opdrachten af.
+  // ALLEEN voor niet-ol-jobs (Ed Pannebakker, 11-08): staan er in Outlook ECHT twee
+  // afspraken op dezelfde tijd bij dezelfde inmeter (dubbelboeking), dan moeten die
+  // allebei in Planado komen — anders verzwijgt Planado de dubbelboeking en ziet
+  // niemand hem. Twee ol-jobs botsen nooit per ongeluk: het event-id ontdubbelt al.
   // Numeriek vergelijken: Planado geeft tijden zonder milliseconden, toISOString mét.
-  const opStartWie = new Set(toekomstJobs.map((j) => `${Date.parse(j.scheduled_at)}|${j.assignee?.worker_uuid}`));
+  const opStartWie = new Set(toekomstJobs
+    .filter((j) => !(j.external_id || '').startsWith('ol-'))
+    .map((j) => `${Date.parse(j.scheduled_at)}|${j.assignee?.worker_uuid}`));
 
   let nieuw = 0, bijgewerkt = 0, overgeslagen = 0, fouten = 0;
   const actieveExtIds = new Set();

@@ -45,6 +45,49 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
     }))
     .sort((a, b) => a.wanneer.localeCompare(b.wanneer));
 
+  // DUBBELBOEKINGEN BIJ DE INMETERS (Daimy 11-08, Ed Pannebakker: twee inmetingen op
+  // hetzelfde moment bij Joey en niemand zag het). Elke overlap tussen twee klussen
+  // van dezelfde inmeter wordt gemeld, elk paar één keer. Montage (Yudi) valt buiten
+  // dit rapport: die draait met meerdere teams en is niet mijn planning.
+  const INM = ['Joey', 'Sjoerd'];
+  const wieVan = (e) => {
+    const att = (e.Attendees || []).map((a) => a.EmailAddress?.Name || '').filter((n) => n && !/^sonty$/i.test(n));
+    return att.map((n) => n.split(' ')[0]).find((v) => INM.includes(v)) || null;
+  };
+  let urlA = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView?$top=200&$select=Subject,Start,End,Attendees,IsCancelled&startDateTime=${new Date().toISOString()}&endDateTime=${tot.toISOString()}`;
+  const evsA = [];
+  while (urlA) { const j = await (await fetch(urlA, { headers: OH })).json(); evsA.push(...(j.value || [])); urlA = j['@odata.nextLink'] || null; }
+  const perInm = {};
+  for (const e of evsA) {
+    if (e.IsCancelled || /geannuleerd|cancell?ed|^OPTIE bot|vakantie|verlof|\bvrij\b|ziek/i.test(e.Subject || '')) continue;
+    const n = wieVan(e);
+    if (!n) continue;
+    (perInm[n] = perInm[n] || []).push({ van: Date.parse(e.Start.DateTime + 'Z'), tot: Date.parse(e.End.DateTime + 'Z'), s: e.Subject || '' });
+  }
+  const DEDUP_PAD = path.join(__dirname, '..', 'data', 'dubbelboeking-gemeld.json');
+  let gemeld = {};
+  try { gemeld = JSON.parse(fs.readFileSync(DEDUP_PAD, 'utf8')); } catch { /* eerste run */ }
+  const dubbels = [];
+  const FN = (ms) => new Date(ms).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  for (const [n, lijst] of Object.entries(perInm)) {
+    lijst.sort((a, b) => a.van - b.van);
+    for (let i = 0; i < lijst.length; i++) for (let k = i + 1; k < lijst.length; k++) {
+      const a = lijst[i], b = lijst[k];
+      if (b.van >= a.tot) break;
+      const sleutel = `${n}|${a.van}|${a.s.slice(0, 20)}|${b.s.slice(0, 20)}`;
+      if (gemeld[sleutel]) continue;
+      gemeld[sleutel] = new Date().toISOString();
+      dubbels.push(`• ${n} ${FN(a.van)}: "${a.s.slice(0, 40)}" overlapt met "${b.s.slice(0, 40)}" (${FN(b.van).slice(-5)})`);
+    }
+  }
+  for (const [k, v] of Object.entries(gemeld)) if (Date.now() - Date.parse(v) > 120 * 86400000) delete gemeld[k];
+  fs.writeFileSync(DEDUP_PAD, JSON.stringify(gemeld, null, 1));
+  if (dubbels.length) {
+    const { planningTelegram } = require('./lib/telegram-planning.js');
+    await planningTelegram(`⚠️ DUBBELBOEKING bij de inmeters — actie nodig (verzetten of bewust laten staan):\n\n${dubbels.slice(0, 20).join('\n')}${dubbels.length > 20 ? `\n… en ${dubbels.length - 20} meer` : ''}`);
+  }
+  console.log(`${dubbels.length} nieuwe dubbelboeking(en) gemeld`);
+
   console.log(`${toekomst.length} toekomstige opdrachten, ${mist.length} zonder Outlook-afspraak`);
   if (mist.length) {
     const { planningTelegram } = require('./lib/telegram-planning.js');

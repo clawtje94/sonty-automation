@@ -1,6 +1,32 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-08 middag)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-11 middag)
 
-## LEES DIT EERST BIJ EEN VERSE SESSIE (na de zooi-dag 08-08)
+## STAND 11-08 (agenda-schoonmaakdag): ALLES SYNCHROON, DIT IS DE NIEUWE BASIS
+- **Outlook ↔ Planado is nu TWEE richtingen, elke 10 minuten** (was 30 min, één richting).
+  Nieuw in Outlook → Planado; nieuw in Planado → agenda-afspraak (nieuw, gat-Franken);
+  tijden ÉN duren worden bijgewerkt; geannuleerde Outlook-bron → Planado-kopie weg;
+  optie-blokken van niet-meer-open aanbiedingen worden elke run geveegd (Daimy: tijd
+  moet direct vrijkomen). Geverifieerd 11-08: beide richtingen 100% (189 en 194 items).
+- **Buffertijden**: Daimy heeft alle Bookings-buffers uit Outlook gehaald; sync heeft
+  duren in Planado mee verkort. Overlappingen van 43 → 5, en die 5 zijn door Daimy
+  GEACCEPTEERD (wo 19 aug winkeldag Joey + 3 inmetingen = bewust personeel; Mandy/Colijn
+  8 sep = jongens regelen zelf; Edwin/Max 11 aug = voorbij). Voorgemeld in
+  data/dubbelboeking-gemeld.json zodat de ochtendcontrole er niet over blijft beginnen.
+- **Wachters**: ochtendcontrole 07:45 (cron-planado-outlook-check: beide richtingen +
+  dubbelboekingen + optie-veger), uur-zelfcontrole (schijn-boekingen), gesprek-lab 07:30
+  (beslisketen over echte gesprekken), sync elke 10 min.
+- **Telegram-poortwachter** (lib/telegram-filter.js in planningTelegram): alleen vragen,
+  boekingen, rapporten, leervragen en alarmen (1x/6u per soort) bereiken Daimy; rest naar
+  logs/telegram-onderdrukt.log. Ochtend-/avondrapport samengevoegd: ÉÉN akkoord-getal
+  (handtekeningen + chat-akkoorden, ontdubbeld, met bron) + conversieblok (sheet-methode).
+- **Terminal-claim** (scripts/telegram-claim.js + memory-regel): één sessie antwoordt
+  Daimy op Telegram; check/claim/release vóór je reageert.
+- **Aankomstmarge**: alle klantcommunicatie over inmeten/montage meldt "kan door de route
+  een uur eerder/later worden" (behalve showroom). Marge-templates bij Meta: 244680 +
+  244682 PENDING; template-wachter sluit ze aan.
+- **Nieuwe inmeter start 14 SEPTEMBER** (niet 1 sep); naam/rooster volgt van Daimy.
+- **Nog open van Daimy**: niets. Geen montage plannen (blijft verboden).
+
+## Ouder (08-08), nog relevant
 - **ROOT CAUSE van "opties bovenop bestaande afspraken" + "Planado anders dan Outlook"**:
   de Outlook→Planado-sync keek maar 42 dagen vooruit; alles daarna stond alleen in
   Outlook en was onzichtbaar voor de planner (haalAgenda leest ALLEEN Planado).

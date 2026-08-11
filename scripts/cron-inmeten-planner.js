@@ -501,6 +501,14 @@ async function verwerkLead(lead, item, slot, duurMin) {
     await telegram(`⚠️ Sheet bijwerken mislukt voor ${lead.naam} (inkoop-1/datum/inmeter): ${e.message.slice(0, 120)} — handmatig zetten.`);
   }
 
+  // DASHBOARD DIRECT VERVERSEN (Daimy 11-08: "na elke boeking of sync moet het
+  // dashboard gerefreshd worden"). Fire-and-forget: een mislukte ververs mag een
+  // geslaagde boeking nooit blokkeren; de eerstvolgende planner-run herstelt hem dan.
+  fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
+    method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+    body: JSON.stringify({ type: 'ververs', bron: 'na-boeking' }),
+  }).catch(() => {});
+
   const tijd = slot.aankomst.toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
   return {
     samenvatting: `${slot.inmeter} ${tijd} (${duurMin} min, +${slot.extraRijtijdMin} min rijtijd)` +

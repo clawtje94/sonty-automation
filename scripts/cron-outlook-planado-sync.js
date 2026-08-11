@@ -338,6 +338,15 @@ async function main() {
     }
   } catch (e) { console.log('  optie-veger overgeslagen: ' + e.message.slice(0, 60)); }
 
+  // Dashboard verversen zodra de sync iets heeft veranderd (Daimy 11-08): nieuwe of
+  // bijgewerkte opdrachten, opgeruimde kopieën of geveegde opties horen direct
+  // zichtbaar te zijn, niet pas bij de volgende planner-run.
+  if (EXECUTE && (nieuw || bijgewerkt || teVerwijderen.length)) {
+    await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': process.env.MEETBON_CODE || '2288' },
+      body: JSON.stringify({ type: 'ververs', bron: 'na-sync' }),
+    }).catch(() => {});
+  }
   console.log(`\nnieuw: ${nieuw} | bijgewerkt: ${bijgewerkt} | al aanwezig: ${overgeslagen} | wees: ${wees.length} | fouten: ${fouten}`);
   if (EXECUTE && (nieuw || bijgewerkt || fouten)) {
     await telegram(`🔄 Outlook→Planado-sync (Joey+Sjoerd): ${nieuw} nieuw, ${bijgewerkt} bijgewerkt, ${overgeslagen} al aanwezig${fouten ? `, ${fouten} FOUTEN` : ''}.`);

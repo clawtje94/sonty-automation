@@ -159,8 +159,11 @@ async function main() {
     const bestaand = opExtId.get(extId);
 
     if (bestaand) {
-      // gewijzigd in Outlook? Alleen tijd is betrouwbaar te vergelijken op de lijst.
-      if (Date.parse(bestaand.scheduled_at) !== Date.parse(startISO)) {
+      // gewijzigd in Outlook? Start EN duur vergelijken (11-08: de buffertijden gingen
+      // uit in Bookings, maar de sync keek alleen naar de starttijd — ingekorte
+      // afspraken bleven in Planado 3 uur staan).
+      const duurNu = bestaand.scheduled_duration?.minutes;
+      if (Date.parse(bestaand.scheduled_at) !== Date.parse(startISO) || (duurNu && duurNu !== minuten)) {
         console.log(`  ~ ${voornaam} ${startISO.slice(0, 16)} ${e.Subject?.slice(0, 30)} (tijd gewijzigd)`);
         if (EXECUTE) {
           const det = await (await fetch(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`, { headers: PH })).json();

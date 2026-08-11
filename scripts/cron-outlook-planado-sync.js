@@ -280,6 +280,39 @@ async function main() {
     await telegram(`🔄 Outlook→Planado-sync: ${verseWezen.length} opdracht(en) staan nog in Planado maar niet meer in Outlook (geannuleerd/verplaatst?): ${namen}. Even nakijken; ik verwijder niet automatisch. (Deze melding komt per opdracht maar één keer.)`);
   }
 
+  // RICHTING TERUG: PLANADO -> OUTLOOK (Daimy 11-08: "als er wat nieuws in Outlook
+  // komt of wat nieuws in Planado, dan moet het gelijk met elkaar syncen").
+  // Tot nu toe ging alleen Outlook naar Planado vanzelf; een opdracht die direct in
+  // Planado werd gezet (of waarvan de agenda-afspraak ooit stil mislukte, zoals bij
+  // Franken op 8 aug) kwam nooit in de agenda. Hier de terugweg: elke toekomstige
+  // Joey/Sjoerd-opdracht zonder agenda-afspraak krijgt er een. ol-jobs vallen hier
+  // bewust buiten: hun bron IS Outlook, en als die weg is ruimt de wezen-logica ze op.
+  try {
+    const NAAM_VAN_UUID = Object.fromEntries(Object.entries(INMETERS).map(([k, v]) => [v, k]));
+    const evStarts = new Set(evs.filter((e) => !e.IsCancelled).map((e) => Date.parse(new Date(e.Start.DateTime + 'Z'))));
+    let geheeld = 0;
+    if (evs.length > 10) for (const j of toekomstJobs) {
+      const naam = NAAM_VAN_UUID[j.assignee?.worker_uuid];
+      if (!naam) continue;
+      if ((j.external_id || '').startsWith('ol-')) continue;
+      const van = Date.parse(j.scheduled_at);
+      if ([...evStarts].some((sMs) => Math.abs(sMs - van) < 60000)) continue;
+      if (!EXECUTE) { console.log(`  zou agenda-afspraak maken voor #${j.serial_no} ${j.scheduled_at}`); continue; }
+      const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
+      const job = det.job || det;
+      const { maakDefinitief } = require('./lib/outlook-opties.js');
+      const klant = (job.contacts || [])[0]?.name || String(job.description || '').split('\n')[0].replace(/^Inmeten( Sonty -| —)? /, '') || 'klant';
+      const ev = await maakDefinitief({
+        slot: { aankomst: new Date(van), inmeter: naam },
+        naam: klant, telefoon: (job.contacts || [])[0]?.value || '',
+        adres: job.address?.formatted || '', duurMin: job.scheduled_duration?.minutes || 30,
+      }).catch(() => null);
+      if (ev) { geheeld++; console.log(`  ✓ agenda-afspraak aangemaakt voor #${j.serial_no} (${klant}, ${j.scheduled_at})`); }
+      await wacht(2600);
+    }
+    if (geheeld) await telegram(`🔄 Sync: ${geheeld} Planado-opdracht(en) zonder agenda-afspraak alsnog in Outlook gezet — actie nodig: even controleren of dit klopt.`);
+  } catch (e) { console.log('  terugweg overgeslagen: ' + e.message.slice(0, 60)); }
+
   // OPTIE-VEGER (Daimy 11-08: "een optie-blok moet weg zodra iemand geboekt heeft,
   // dan komt die tijd weer vrij voor nieuwe boekingen, ook op het dashboard").
   // Elke 30 minuten: elk OPTIE-blok waarvan de klant geen OPEN aanbod meer heeft

@@ -76,7 +76,10 @@ function bevestigingsTekst(slot) {
   // Naam alleen noemen als hij er echt is: op 06-08 stond er "onze inmeter undefined"
   // in een klantbericht omdat de publieke API de naam stripte.
   const wie = slot.inmeter ? `onze inmeter ${slot.inmeter}` : 'onze inmeter';
-  return `Top! Genoteerd: ${dag} tussen ${van} en ${tot} komt ${wie} bij je langs. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty`;
+  // AANKOMSTMARGE (Daimy 11-08: "echt belangrijk dat mensen er rekening mee houden dat
+  // we een uur eerder of later aan kunnen komen, we staan nu heel veel te wachten").
+  // Geldt voor alles BEHALVE showroomafspraken; die staan gewoon vast.
+  return `Top! Genoteerd: ${dag} tussen ${van} en ${tot} komt ${wie} bij je langs. Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je even weten. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty`;
 }
 
 async function stuurWaBevestiging(ticketId, naam, slot) {

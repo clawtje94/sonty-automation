@@ -237,6 +237,7 @@ async function stuurMail(aanbod, url) {
 <p>Goed nieuws: we kunnen bij je langskomen om in te meten (duurt ongeveer ${aanbod.duurMin} minuten).${verWegRegel(aanbod.ver === true)}</p>
 <p><a href="${url}" style="display:inline-block;background:#F97316;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:bold">Kies je inmeetmoment</a></p>
 <p>De tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, beantwoord dan gewoon deze mail.</p>
+<p>Goed om te weten: onze inmeter rijdt een route, dus het kan soms een uur eerder of later worden dan het gekozen moment. Als dat zo is laten we het je even weten.</p>
 <p>Groetjes,<br>Nanny van Sonty</p>`;
   const r2 = await tFetch(`/tickets/${nieuw.id}/messages`, {
     method: 'POST',
@@ -257,6 +258,7 @@ function bevestigingTekst(voornaam, slot, duurMin) {
   const tot = new Date(+d + 30 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   return `Hoi ${voornaam}, je inmeetafspraak staat vast: ${dag} tussen ${van} en ${tot}. ` +
     `Onze inmeter ${slot.inmeter} komt langs en is er ongeveer ${duurMin} minuten mee bezig. ` +
+    `Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je weten. ` +
     `Komt er toch iets tussen? Reageer dan even op dit bericht.`;
 }
 
@@ -298,7 +300,7 @@ function herinneringTekst(voornaam, slot, duurMin, dagenVooraf = 1) {
     : d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
   const slot2 = dagenVooraf <= 1 ? 'Tot morgen!' : 'Komt het toch niet uit? Stuur dan even een berichtje terug.';
   return `Hoi ${voornaam}, een herinnering aan je inmeetafspraak: ${wanneer} tussen ${van} en ${tot} komt onze inmeter ${slot.inmeter} ` +
-    `bij je langs (ongeveer ${duurMin} minuten). ${slot2}`;
+    `bij je langs (ongeveer ${duurMin} minuten). Door de route kan het soms een uur eerder of later worden; als dat zo is laten we het je weten. ${slot2}`;
 }
 
 /** Beide kanalen; geeft per kanaal terug wat er gebeurd is. Eén kanaal gelukt = aanbod is onderweg. */

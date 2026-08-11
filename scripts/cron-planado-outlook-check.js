@@ -1,0 +1,60 @@
+#!/usr/bin/env node
+// PLANADO ↔ OUTLOOK-BEWAKING (Daimy 11-08: "kijk of alles wat in Planado is gezet ook in
+// Outlook is geplaatst, want ik mis daar veel dingen — het moet echt allemaal goed gaan").
+//
+// Elke ochtend: elke toekomstige Planado-opdracht moet op hetzelfde tijdstip een
+// Outlook-afspraak hebben in de agenda "Sonty Montage". Klopt alles, dan blijft het
+// stil; ontbreekt er iets, dan één melding met precies wat en wie.
+//
+// De eerste volledige meting (11-08) vond 3 afwijkingen op 198 opdrachten, alle drie
+// restjes (2x een uit Outlook verwijderde showroomafspraak waarvan de Planado-kopie
+// bleef staan, 1x een testboeking). Echte klantafspraken stonden allemaal goed.
+const fs = require('fs');
+const path = require('path');
+
+const KEY = fs.readFileSync(path.join(__dirname, 'planado-api-key.txt'), 'utf8').trim();
+const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
+
+(async () => {
+  console.log(`[${new Date().toISOString()}] planado-outlook-check start`);
+  let after = null; const jobs = [];
+  for (let i = 0; i < 40; i++) {
+    const d = await (await fetch('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''), { headers: { Authorization: 'Bearer ' + KEY } })).json();
+    const l = d.jobs || d.data || [];
+    if (!l.length) break;
+    jobs.push(...l); after = l[l.length - 1].uuid; await wacht(2600);
+  }
+  const toekomst = jobs.filter((j) => j.scheduled_at && new Date(j.scheduled_at) > new Date());
+
+  const OWA = fs.readFileSync(path.join(__dirname, '.owa-token.txt'), 'utf8').trim();
+  const OH = { Authorization: 'Bearer ' + OWA };
+  const cals = (await (await fetch('https://outlook.office.com/api/v2.0/me/calendars', { headers: OH })).json()).value || [];
+  const cal = cals.find((c) => c.Name === 'Sonty Montage');
+  if (!cal) throw new Error('agenda "Sonty Montage" niet gevonden');
+  const tot = new Date(); tot.setDate(tot.getDate() + 120);
+  let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView?$top=200&$select=Subject,Start&startDateTime=${new Date().toISOString()}&endDateTime=${tot.toISOString()}`;
+  const evs = [];
+  while (url) { const j = await (await fetch(url, { headers: OH })).json(); evs.push(...(j.value || [])); url = j['@odata.nextLink'] || null; }
+
+  const rond = (a, b) => Math.abs(new Date(a) - new Date(b)) < 60000;
+  const mist = toekomst.filter((j) => !evs.some((e) => rond(e.Start.DateTime + 'Z', j.scheduled_at)))
+    .map((j) => ({
+      wanneer: new Date(j.scheduled_at).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' }),
+      wat: String(j.description || '(geen omschrijving)').split('\n')[0].slice(0, 70),
+      ext: j.external_id || '',
+    }))
+    .sort((a, b) => a.wanneer.localeCompare(b.wanneer));
+
+  console.log(`${toekomst.length} toekomstige opdrachten, ${mist.length} zonder Outlook-afspraak`);
+  if (mist.length) {
+    const { planningTelegram } = require('./lib/telegram-planning.js');
+    await planningTelegram(`⚠️ Planado-Outlook-controle: ${mist.length} opdracht(en) staan in Planado maar NIET in Outlook — actie nodig (afspraak toevoegen of opdracht opruimen):\n\n`
+      + mist.map((m) => `• ${m.wanneer} — ${m.wat}${m.ext ? ' [' + m.ext + ']' : ''}`).join('\n')
+      + `\n\n(${toekomst.length - mist.length} van de ${toekomst.length} staan goed)`);
+  }
+})().catch(async (e) => {
+  console.error('FOUT:', e.message);
+  const { planningTelegram } = require('./lib/telegram-planning.js');
+  await planningTelegram('⚠️ Planado-Outlook-controle GESTOPT: ' + e.message.slice(0, 150)).catch(() => {});
+  process.exit(1);
+});

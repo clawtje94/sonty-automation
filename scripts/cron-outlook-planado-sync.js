@@ -116,8 +116,14 @@ async function main() {
   };
   const NIET_KLUS = /vrij$|later$|vakantie|ziek|verlof/i;
 
+  const extIdVan = (e) => 'ol-' + crypto.createHash('sha1').update(e.Id).digest('hex').slice(0, 20);
+  // Alle opgehaalde events, OOK de geannuleerde: nodig om hieronder veilig te kunnen
+  // opruimen. Een event dat hier nog in staat maar geannuleerd is, is bewust afgezegd.
+  const alleExtIds = new Set(evs.map(extIdVan));
+  const geannuleerdeExtIds = new Set(evs.filter((e) => e.IsCancelled || /geannuleerd|canceled|cancelled/i.test(e.Subject || '')).map(extIdVan));
+
   const items = evs
-    .filter((e) => !e.IsCancelled && !NIET_KLUS.test(e.Subject || ''))
+    .filter((e) => !e.IsCancelled && !/geannuleerd|canceled|cancelled/i.test(e.Subject || '') && !NIET_KLUS.test(e.Subject || ''))
     .map((e) => ({ e, voornaam: wie(e).split(' ')[0] }))
     .filter((x) => INMETERS[x.voornaam]);
   console.log(`Outlook: ${items.length} afspraken van Joey/Sjoerd in de komende 6 weken`);
@@ -228,8 +234,29 @@ async function main() {
     }
   }
 
-  // In Planado maar niet meer in Outlook (alleen onze eigen ol-jobs): melden, niet verwijderen.
+  // IN PLANADO MAAR NIET MEER IN OUTLOOK (Daimy 11-08: opdracht 328 stond nog in
+  // Planado terwijl de Outlook-afspraak was geannuleerd — "hoe zorgen we dat dit niet
+  // meer gebeurt"). Outlook is de bron van deze ol-jobs, dus als de bron weg of
+  // geannuleerd is gaat de kopie er nu automatisch uit. Harde remmen:
+  //   - alleen onze eigen ol-jobs (nooit rp-boekingen of handwerk),
+  //   - alleen als de bron ECHT weg is (niet in de hele fetch) of expliciet geannuleerd,
+  //   - alleen binnen het fetch-venster van 100 dagen,
+  //   - en alleen als de Outlook-fetch echt events teruggaf — een lege agenda is een
+  //     storing, geen massa-annulering.
+  const fetchGrens = Date.now() + 99 * 86400000;
   const wees = toekomstJobs.filter((j) => (j.external_id || '').startsWith('ol-') && !actieveExtIds.has(j.external_id));
+  const teVerwijderen = evs.length > 10 ? wees.filter((j) =>
+    Date.parse(j.scheduled_at) < fetchGrens
+    && (!alleExtIds.has(j.external_id) || geannuleerdeExtIds.has(j.external_id))) : [];
+  for (const j of teVerwijderen) {
+    if (!EXECUTE) { console.log(`  zou verwijderen: #${j.serial_no} ${j.scheduled_at} (bron weg/geannuleerd)`); continue; }
+    const del = await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { method: 'DELETE', headers: PH });
+    console.log(`  ${del.ok ? '✓' : '⚠️'} #${j.serial_no} ${j.scheduled_at} ${del.ok ? 'verwijderd (Outlook-bron weg/geannuleerd)' : 'verwijderen mislukt ' + del.status}`);
+    await wacht(2600);
+  }
+  if (teVerwijderen.length && EXECUTE) {
+    await telegram(`🔄 Sync: ${teVerwijderen.length} Planado-opdracht(en) verwijderd omdat de Outlook-afspraak is geannuleerd of weggehaald: ${teVerwijderen.map((j) => '#' + j.serial_no + ' ' + new Date(j.scheduled_at).toLocaleString('nl-NL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' })).join(', ')}.`);
+  }
   // Wezen maar ÉÉN keer melden (Daimy 06-08 "best veel meldingen"): dezelfde 4 wezen
   // kwamen elke 30 minuten opnieuw op Telegram. Dedup per job-uuid, mét naam erbij
   // zodat de melding ook bruikbaar is.

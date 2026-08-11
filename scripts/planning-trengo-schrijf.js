@@ -21,7 +21,8 @@ const { google } = require('/Users/clawdboot/sonty/node_modules/googleapis');
     console.log('STOP: rijen 1377-1379 niet leeg:', JSON.stringify(chk.data.values));
     process.exit(1);
   }
-  const F = (n) => `=IF(H${n + 1060}=TRUE; ""; IF(ISBLANK(F${n}); ""; DATEDIF(F${n}; TODAY(); "D")))`;
+  // /7 = weken, want de kolomkop is "Weken sinds bestelling" (Daimy 11-08)
+  const F = (n) => `=IF(H${n + 1060}=TRUE; ""; IF(ISBLANK(F${n}); ""; DATEDIF(F${n}; TODAY(); "D")))/7`;
   const rows = [
     ['FALSE', 'van der Tak 5401', '', '', 'FAKRO26012480', '20-07-2026', '', '', '', '', 'Fakro dakraamproducten, zie bevestiging V2612088', F(1377)],
     ['FALSE', 'de Groot 5919', '', '', 'D26-001239A', '20-07-2026', '', '', '', '', 'Raamdecoratie binnen (ABZ)', F(1378)],

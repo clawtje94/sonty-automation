@@ -91,7 +91,8 @@ const NIEUW = [
   const data = UPDATES.filter(([, g]) => g).map(([rij, g]) => ({ range: `'Claude ai test'!G${rij}`, values: [[g]] }));
   const nieuweValues = NIEUW.map(([row], i) => {
     const n = START_NIEUW + i;
-    return [...row, `=IF(H${n + 1060}=TRUE; ""; IF(ISBLANK(F${n}); ""; DATEDIF(F${n}; TODAY(); "D")))`];
+    // /7 = weken, want de kolomkop is "Weken sinds bestelling" (Daimy 11-08)
+    return [...row, `=IF(H${n + 1060}=TRUE; ""; IF(ISBLANK(F${n}); ""; DATEDIF(F${n}; TODAY(); "D")))/7`];
   });
   data.push({ range: `'Claude ai test'!A${START_NIEUW}:L${START_NIEUW + NIEUW.length - 1}`, values: nieuweValues });
   await sheets.spreadsheets.values.batchUpdate({

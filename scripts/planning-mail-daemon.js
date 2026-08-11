@@ -485,7 +485,8 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
       const kortTekst = (/nabestelling/i.test(n.toevoeging || '') ? 'VOORRANG (nabestelling), ' : '') + (n.kort || n.opm);
       // Kolom A leeg laten: checkbox trekt het team zelf door (Daimy 22-07)
       return ['', kortTekst, vandaagKort, n.lev || '', n.nr || '', n.naam, n.toevoeging || '', plaats, plaats ? regioVan(plaats) : '', n.ordernr, n.besteld, n.geleverd, '', '', '', n.wat,
-        `=IF(M${r + 1060}=TRUE; ""; IF(ISBLANK(K${r}); ""; DATEDIF(K${r}; TODAY(); "D")))`];
+        // /7 = weken, want de kolomkop is "Weken sinds bestelling" (Daimy 11-08)
+        `=IF(M${r + 1060}=TRUE; ""; IF(ISBLANK(K${r}); ""; DATEDIF(K${r}; TODAY(); "D")))/7`];
     });
     waarden.push({ range: `'${TAB}'!A${start}:Q${start + alleNieuw.length - 1}`, values });
     for (let i = 0; i < alleNieuw.length; i++) blauw.add(start - 1 + i);

@@ -49,6 +49,14 @@ const PLANNING_TG_CHAT = huidige.chatId;
  * Config wordt per aanroep gelezen, dus een nieuw token of chat-id werkt zonder herstart.
  */
 async function planningTelegram(tekst, opties = {}) {
+  // POORTWACHTER (Daimy 11-08: "alleen de berichten waar ik om heb gevraagd").
+  // Vragen, boekingen, rapporten en echte alarmen komen door; procesmeldingen gaan
+  // naar logs/telegram-onderdrukt.log. Zie lib/telegram-filter.js voor de regels.
+  try {
+    const { magDoor, legVast } = require('./telegram-filter.js');
+    const oordeel = magDoor(tekst, opties);
+    if (!oordeel.door) { legVast(tekst, oordeel.reden); return; }
+  } catch { /* filter stuk mag verzending nooit blokkeren */ }
   const { token, chatId } = opties.boeking ? config() : databotConfig();
   await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },

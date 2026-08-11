@@ -270,6 +270,11 @@ async function haalAgenda() {
       adresCache[j.uuid] = { adres, omschrijving: omschrijving.split('\n')[0].slice(0, 60) };
       fs.writeFileSync(CACHE_PAD, JSON.stringify(adresCache));
     }
+    // STOFFERING/BEHANGEN BLOKKEERT NIET (Daimy 11-08: "dan is hij gewoon vrij om te
+    // boeken; dat werd door het personeel verkeerd ingepland"). Zo'n blok liet
+    // bijvoorbeeld heel di 18 aug bij Sjoerd vol lijken terwijl hij gewoon kon
+    // inmeten. Vakantie blokkeert uiteraard nog steeds (laadVakanties).
+    if (/stoffering|behangen/i.test(omschrijving)) continue;
     // GEEN adres (winkeldienst, intern overleg): telt WEL als bezette tijd — anders
     // plant de bot dwars door een winkeldienst heen. Als anker-adres nemen we de
     // winkel (Rijswijk) voor winkeldiensten en het magazijn voor de rest.

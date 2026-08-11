@@ -59,7 +59,7 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
   while (urlA) { const j = await (await fetch(urlA, { headers: OH })).json(); evsA.push(...(j.value || [])); urlA = j['@odata.nextLink'] || null; }
   const perInm = {};
   for (const e of evsA) {
-    if (e.IsCancelled || /geannuleerd|cancell?ed|^OPTIE bot|vakantie|verlof|\bvrij\b|ziek/i.test(e.Subject || '')) continue;
+    if (e.IsCancelled || /geannuleerd|cancell?ed|^OPTIE bot|vakantie|verlof|\bvrij\b|ziek|stoffering|behangen/i.test(e.Subject || '')) continue; // stoffering blokkeert niet (Daimy 11-08)
     const n = wieVan(e);
     if (!n) continue;
     (perInm[n] = perInm[n] || []).push({ van: Date.parse(e.Start.DateTime + 'Z'), tot: Date.parse(e.End.DateTime + 'Z'), s: e.Subject || '' });

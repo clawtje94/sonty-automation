@@ -150,6 +150,23 @@ async function telegram(text) {
         totaalGesprekken = alleTickets.size;
       } catch {}
 
+      // CONVERSIE-BLOK IN HETZELFDE BERICHT (Daimy 11-08: "zorg dat mijn conversie-
+      // rapport elke avond en tekenrapport kloppen qua data"). Twee losse berichten met
+      // elk een eigen definitie gaven "verschillende data". Nu: één avondbericht, en de
+      // conversie komt uit DE bron die Daimy zelf als juist heeft aangewezen (03-08):
+      // de sheet, akkoord = inkoopbedrag ingevuld, geteld per maandtab. De akkoorden
+      // van vandaag (hierboven, met namen) stromen daar bij het inplannen vanzelf in —
+      // dat verschil in moment is de enige reden dat de weekcijfers nog kunnen oplopen,
+      // en dat staat er expliciet bij.
+      let conversieBlok = '';
+      try {
+        const uit = require('child_process').execFileSync(process.execPath,
+          [path.join(__dirname, 'conversie-week-sheet.js'), '--maanden', '2'],
+          { timeout: 5 * 60000 }).toString();
+        const regels = uit.trim().split('\n').filter((r) => /^\d{4}-W|^\s+⭐/.test(r));
+        if (regels.length) conversieBlok = '\n\n📊 Conversie per week (sheet, methode Daimy):\n' + regels.slice(-8).join('\n');
+      } catch (e) { conversieBlok = '\n\n📊 Conversieblok niet beschikbaar: ' + e.message.slice(0, 60); }
+
       const details = (stats.overtuigd_details || []).length ? '\n\nOvertuigd:\n' + stats.overtuigd_details.map(d => '• ' + d).join('\n') : '';
 
       // EEN AKKOORD-GETAL (Daimy 10-08). Online tekenen en mondeling ja zeggen in de
@@ -181,7 +198,7 @@ async function telegram(text) {
         (akkoordLijst.length ? '\n' + akkoordLijst.map((a) => `   - ${a.naam} (${a.via})`).join('\n') : '') + '\n' +
         `• Showroomafspraken (los): ${stats.showroom ?? '?'}\n` +
         `• Waarvan overtuigd vanuit twijfel: ${stats.overtuigd ?? '?'}\n` +
-        details +
+        details + conversieBlok +
         (stats.samenvatting ? `\n\n${stats.samenvatting}` : '') +
         `\n\n📊 Totaal tot nu toe (${cum.dagen} dagen): ${totaalGesprekken} gesprekken gevoerd, ${cum.geholpen} geholpen, ${cum.akkoord_inmeten} akkoord, ${cum.showroom} showroom, ${cum.overtuigd} overtuigd.` +
 ''

@@ -280,6 +280,31 @@ async function main() {
     await telegram(`🔄 Outlook→Planado-sync: ${verseWezen.length} opdracht(en) staan nog in Planado maar niet meer in Outlook (geannuleerd/verplaatst?): ${namen}. Even nakijken; ik verwijder niet automatisch. (Deze melding komt per opdracht maar één keer.)`);
   }
 
+  // OPTIE-VEGER (Daimy 11-08: "een optie-blok moet weg zodra iemand geboekt heeft,
+  // dan komt die tijd weer vrij voor nieuwe boekingen, ook op het dashboard").
+  // Elke 30 minuten: elk OPTIE-blok waarvan de klant geen OPEN aanbod meer heeft
+  // (geboekt, gekozen of verlopen) gaat direct uit de agenda. De vervaltijd afwachten
+  // hield tijden onnodig een dag bezet.
+  try {
+    const OHo = { Authorization: fs.readFileSync(path.join(__dirname, '.owa-token.txt'), 'utf8').trim() ? 'Bearer ' + fs.readFileSync(path.join(__dirname, '.owa-token.txt'), 'utf8').trim() : '' };
+    const ro = await fetch('https://sonty-website.vercel.app/api/inmeet-aanbod?actief=1', { headers: { 'x-meet-code': process.env.MEETBON_CODE || '2288' } });
+    if (ro.ok) {
+      const openNamen = (((await ro.json()).aanbiedingen) || []).filter((a) => a.status === 'open')
+        .map((a) => String(a.lead?.naam || '').toLowerCase()).filter(Boolean);
+      let geveegd = 0;
+      for (const e of evs) {
+        if (!/^OPTIE bot/i.test(e.Subject || '')) continue;
+        const klant = (e.Subject || '').replace(/^OPTIE bot \w+ — /, '').replace(/\(vervalt.*$/, '').trim().toLowerCase();
+        if (openNamen.some((o) => o.includes(klant) || klant.includes(o))) continue;
+        if (!EXECUTE) { console.log('  zou optie vegen: ' + e.Subject.slice(0, 60)); continue; }
+        const del = await fetch('https://outlook.office.com/api/v2.0/me/events/' + e.Id, { method: 'DELETE', headers: OHo });
+        if (del.ok || del.status === 204) geveegd++;
+        await wacht(700);
+      }
+      if (geveegd) console.log(`  ${geveegd} OPTIE-blok(ken) geveegd (geen open aanbod meer)`);
+    }
+  } catch (e) { console.log('  optie-veger overgeslagen: ' + e.message.slice(0, 60)); }
+
   console.log(`\nnieuw: ${nieuw} | bijgewerkt: ${bijgewerkt} | al aanwezig: ${overgeslagen} | wees: ${wees.length} | fouten: ${fouten}`);
   if (EXECUTE && (nieuw || bijgewerkt || fouten)) {
     await telegram(`🔄 Outlook→Planado-sync (Joey+Sjoerd): ${nieuw} nieuw, ${bijgewerkt} bijgewerkt, ${overgeslagen} al aanwezig${fouten ? `, ${fouten} FOUTEN` : ''}.`);

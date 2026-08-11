@@ -48,8 +48,17 @@ async function maakOpties({ slots, naam, verlooptOp }) {
 async function verwijderOpties(ids) {
   if (!ids?.length) return;
   const OH = owaHeaders();
+  // Met herkansing (Daimy 11-08): een stil mislukte DELETE liet het OPTIE-blok staan,
+  // en dat blok hield de tijd bezet voor nieuwe boekingen en op het dashboard.
+  // Er stonden 17 van zulke wezen. De sync veegt als vangnet elke 30 min na.
   for (const id of ids) {
-    await fetch('https://outlook.office.com/api/v2.0/me/events/' + id, { method: 'DELETE', headers: OH }).catch(() => {});
+    for (let poging = 0; poging < 3; poging++) {
+      try {
+        const r = await fetch('https://outlook.office.com/api/v2.0/me/events/' + id, { method: 'DELETE', headers: OH });
+        if (r.ok || r.status === 204 || r.status === 404) break;
+      } catch { /* netwerk: opnieuw */ }
+      await new Promise((rs) => setTimeout(rs, 8000 * (poging + 1)));
+    }
   }
 }
 

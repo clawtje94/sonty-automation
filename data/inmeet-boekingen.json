@@ -480,22 +480,23 @@
   "telefoon": "+31653516802",
   "email": "koosje.cb@gmail.com",
   "planadoJobUuid": "1f194dda-b4a2-69b0-8a5e-12585ff33c04",
-  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVhAYqXAAA=",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVjT8caAAA=",
   "grippNr": "6451",
   "sheet": {
    "tab": "Aug 2026",
    "rij": 113,
    "kolomInkoop": 23
   },
-  "aankomst": "2026-09-08T13:10:00.000Z",
+  "aankomst": "2026-08-13T10:55:00.000Z",
   "inmeter": "Joey",
   "duurMin": 20,
   "aanbodToken": "74b7d92854a1b204b9d5d40a9b5aa082",
   "geboektOp": "2026-08-10T17:05:27.307Z",
   "status": "geboekt",
   "adres": "Diderica Mijnssenstraat 22, 4822 WH Breda, Nederland",
-  "verzetVan": "2026-09-23T10:10:00.000Z",
-  "verzetReden": "klant kan alleen di/do/vr, adres gecorrigeerd naar Breda"
+  "verzetVan": "2026-09-08T13:10:00.000Z",
+  "verzetReden": "Disney 7-8 sep, telefonisch akkoord",
+  "geannuleerdOp": "2026-08-12T10:50:20.008Z"
  },
  "ee68da22-207f-4d94-b32f-1432d7d05d18": {
   "naam": "Timo Goes",
@@ -597,18 +598,59 @@
   "telefoon": "0636084696",
   "email": "taico@taico.nl",
   "planadoJobUuid": "1f194e5d-3638-6760-95c2-02e8236f1e79",
-  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVhAYqeAAA=",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVjT8cgAAA=",
   "grippNr": "6458",
   "sheet": {
    "tab": "Juli 2026 ",
    "rij": 1971,
    "kolomInkoop": 23
   },
-  "aankomst": "2026-09-08T14:00:00.000Z",
+  "aankomst": "2026-08-27T13:15:00.000Z",
   "inmeter": "Joey",
   "duurMin": 20,
   "aanbodToken": null,
   "geboektOp": "2026-08-10T18:04:00.310Z",
+  "status": "geboekt",
+  "geannuleerdOp": "2026-08-12T10:52:19.513Z",
+  "verzetVan": "2026-09-08T14:00:00.000Z",
+  "verzetReden": "Disney 7-8 sep, telefonisch akkoord"
+ },
+ "95942749-363d-4a24-a5b4-7c37508d6889": {
+  "naam": "A I de Jong-Korff",
+  "telefoon": "+31652660965",
+  "email": "basket1945@gmail.com",
+  "planadoJobUuid": "1f19589c-405d-6400-b88e-16fec712451f",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVhAYrWAAA=",
+  "grippNr": "6461",
+  "sheet": {
+   "tab": "Juli 2026 ",
+   "rij": 1923,
+   "kolomInkoop": 23
+  },
+  "aankomst": "2026-08-18T11:05:00.000Z",
+  "inmeter": "Joey",
+  "duurMin": 20,
+  "aanbodToken": "db56c64a64d428a807169cf1395c70f2",
+  "geboektOp": "2026-08-11T13:37:33.475Z",
+  "status": "geboekt"
+ },
+ "46c69880-0df0-4b8d-8a49-d4e4f6565084": {
+  "naam": "Ellen van der Mark",
+  "telefoon": "+31643421576",
+  "email": "elmtvandermark@gmail.com",
+  "planadoJobUuid": "1f1958c0-e558-60f0-9a9e-6a716079a622",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVhAYrZAAA=",
+  "grippNr": "6462",
+  "sheet": {
+   "tab": "Aug 2026",
+   "rij": 405,
+   "kolomInkoop": 23
+  },
+  "aankomst": "2026-08-27T07:00:00.000Z",
+  "inmeter": "Joey",
+  "duurMin": 25,
+  "aanbodToken": "feb81742cb121ce42de85da1ec18cdb1",
+  "geboektOp": "2026-08-11T13:53:56.391Z",
   "status": "geboekt"
  }
 }

@@ -64,7 +64,14 @@ async function poll() {
 
   while (true) {
     try {
-      const data = await getUpdates();
+      // HARDE NOODREM (12-08): na een "Request timeout" op 11-08 22:03 bleef het proces
+      // 22 uur hangen in een request die nooit terugkwam — Daimy's berichten kwamen al
+      // die tijd niet binnen. De race garandeert dat de lus ALTIJD binnen 60s verder
+      // gaat, wat de onderliggende socket ook doet.
+      const data = await Promise.race([
+        getUpdates(),
+        new Promise((_, rej) => setTimeout(() => rej(new Error('harde 60s-noodrem')), 60000)),
+      ]);
 
       if (data.ok && data.result.length > 0) {
         for (const update of data.result) {

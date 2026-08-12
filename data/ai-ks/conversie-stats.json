@@ -1,9 +1,9 @@
 {
- "geholpen": 28,
- "akkoord_inmeten": 3,
- "showroom": 3,
- "overtuigd": 5,
- "dagen": 0,
+ "geholpen": 47,
+ "akkoord_inmeten": 5,
+ "showroom": 4,
+ "overtuigd": 10,
+ "dagen": 2,
  "tickets": {
   "geholpen": [
    "972975738",
@@ -33,24 +33,51 @@
    "970483194",
    "972940907",
    "973071768",
-   "973053034"
+   "973053034",
+   "973208719",
+   "973310290",
+   "973208894",
+   "973365548",
+   "973339029",
+   "973210627",
+   "973351974",
+   "973358123",
+   "973326790",
+   "973310449",
+   "973459622",
+   "973406479",
+   "973432436",
+   "973452234",
+   "973445396",
+   "973459398",
+   "972854028",
+   "973355374",
+   "973360117"
   ],
   "akkoord_inmeten": [
    "970483194",
    "972686559",
-   "972940907"
+   "972940907",
+   "973208719",
+   "973459398"
   ],
   "showroom": [
    "973209587",
    "973164708",
-   "973201878"
+   "973201878",
+   "973212628"
   ],
   "overtuigd": [
    "973053890",
    "973143723",
    "973207749",
    "973212628",
-   "973054330"
+   "973054330",
+   "973090126",
+   "973311564",
+   "973208719",
+   "973459622",
+   "972686559"
   ]
  },
  "_toelichting": "Vanaf 2026-08-10 wordt cumulatief per ticket geteld in plaats van dagcijfers optellen. De cijfers hieronder zijn de oude, onzuivere telling: 16% van de gesprekken loopt over meerdere dagen en werd elke dag opnieuw meegeteld (137 akkoord tegen 117 werkelijk getekende offertes in dezelfde 23 dagen).",

@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202611465",
+  "documentId": "e5f69eda-1f9b-4b04-a268-4b46012ebe3b",
+  "name": "Eric Baljet",
+  "timestamp": "2026-08-11T15:00:29.415Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Pergola 165 zip\nBreedte: 5897 mm\nUitval: 2500 mm\nFrame Kleur: RAL 9010 structuur\nKleur doek: NTB\nBediening: Draaischakelaar\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product.\n- 7 jaar op de motor",
+      "pricePerUnit": 7971.2,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Pergola\n- Montage\n- Klein materiaal\n- Afstellen\n- Elektra afwerken\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 650,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

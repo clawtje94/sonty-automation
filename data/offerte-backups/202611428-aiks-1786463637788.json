@@ -1,0 +1,552 @@
+{
+  "documentId": "a31f7f57-0a27-4579-8217-fbbf9dac2fbd",
+  "versionId": "7f452c13-8e78-446d-8eb7-d777d062a3d9",
+  "documentTitle": "Offerte #202611428",
+  "documentStatus": "SENT",
+  "documentNumber": "202611428",
+  "documentType": "QUOTATION",
+  "title": "Offerte #202611428",
+  "quotationNumber": "202611428",
+  "quotationTitle": "Offerte #202611428",
+  "quotationCreationTimestamp": 1786425532711,
+  "quotationExpirationTimestamp": 1787030332711,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "subjects": {
+    "leadConfiguration": "aa28366a-1e45-4e59-abad-e2245984007d",
+    "contactPerson": "351899b1-3246-413b-aac8-53cf1395ea52"
+  },
+  "segments": {
+    "defaultTemplateContactPart": {
+      "type": "contactPerson",
+      "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+    },
+    "defaultSignaturePart": {
+      "type": "signature",
+      "data": {}
+    },
+    "defaultTemplateProfileLogo": {
+      "type": "companyProfileLogo",
+      "data": "![|6lh]($companyProfile.logo)"
+    },
+    "defaultTemplateProfileText": {
+      "type": "text",
+      "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+    },
+    "defaultTemplatePriceLineGroup": {
+      "type": "priceLineGroup",
+      "data": {
+        "lines": [
+          {
+            "units": 1,
+            "description": "**Zip Design 110**\nType: screen bedraad\nBreedte: 2700 mm\nHoogte: 2200 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7016 structuur (standaard)\nKleur doek: NTB\nOnderlat: Design\nBediening: afstandsbediening\nMotor: somfy RS100 IO motor\nMontage: NTB\nType geleider: NTB\nGeleiding: ZIP (windvast)\n\n**Waarom dit screen**\nPremium kwaliteit met zip-technologie. Ritsgeleidingssysteem: doek zit vast in de geleiders, geen klapperen bij wind. Fluisterstille Somfy motor met afstandsbediening. Bescherming tegen zon, warmte en inkijk met behoud van uitzicht. Compacte cassette: doek en motor beschermd tegen weersinvloeden.\nGarantie: 5 jaar op het product, 7 jaar op de motor.\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• Zip Square 85/100 (ZIP, dunner profiel, budget): -€163\n• Screen Square 85/100 (zonder ZIP, niet windvast): -€544\n\nAndere bediening:\n• LT 50 draaischakelaar (bedraad): -€198\n• Solar Brel (zonnepaneel, incl. handzender): +€71\n• Somfy Solar RS 100 IO (premium, excl. handzender): +€208\n\nKleur:\n• Trendkleur: +€178\n• RAL kleur naar keuze: +€354\n\nSmart home:\n• Tahoma Switch (bedien alles via je telefoon): +€195\n\nLaat het ons weten, we passen het graag voor je aan.",
+            "pricePerUnit": 2155.2,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Zip Design 110**\nType: screen bedraad\nBreedte: 1800 mm\nHoogte: 2200 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7016 structuur (standaard)\nKleur doek: NTB\nOnderlat: Design\nBediening: afstandsbediening\nMotor: somfy RS100 IO motor\nMontage: NTB\nType geleider: NTB\nGeleiding: ZIP (windvast)\n\n**Waarom dit screen**\nPremium kwaliteit met zip-technologie. Ritsgeleidingssysteem: doek zit vast in de geleiders, geen klapperen bij wind. Fluisterstille Somfy motor met afstandsbediening. Bescherming tegen zon, warmte en inkijk met behoud van uitzicht. Compacte cassette: doek en motor beschermd tegen weersinvloeden.\nGarantie: 5 jaar op het product, 7 jaar op de motor.\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• Zip Square 85/100 (ZIP, dunner profiel, budget): -€36\n• Screen Square 85/100 (zonder ZIP, niet windvast): -€352\n\nAndere bediening:\n• LT 50 draaischakelaar (bedraad): -€198\n• Solar Brel (zonnepaneel, incl. handzender): +€71\n• Somfy Solar RS 100 IO (premium, excl. handzender): +€208\n\nKleur:\n• Trendkleur: +€138\n• RAL kleur naar keuze: +€276\n\nLaat het ons weten, we passen het graag voor je aan.",
+            "pricePerUnit": 1742.4,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Zip Design 110**\nType: screen bedraad\nBreedte: 4500 mm\nHoogte: 1600 mm\nKastmaat: 105 mm\nFrame kleur: RAL 7016 structuur (standaard)\nKleur doek: NTB\nOnderlat: Design\nBediening: afstandsbediening\nMotor: somfy RS100 IO motor\nMontage: NTB\nType geleider: NTB\nGeleiding: ZIP (windvast)\n\n**Waarom dit screen**\nPremium kwaliteit met zip-technologie. Ritsgeleidingssysteem: doek zit vast in de geleiders, geen klapperen bij wind. Fluisterstille Somfy motor met afstandsbediening. Bescherming tegen zon, warmte en inkijk met behoud van uitzicht. Compacte cassette: doek en motor beschermd tegen weersinvloeden.\nGarantie: 5 jaar op het product, 7 jaar op de motor.\n\n**Liever een ander model of bediening?**\n\nAndere bediening:\n• LT 50 draaischakelaar (bedraad): -€198\n• Solar Brel (zonnepaneel, incl. handzender): +€71\n• Somfy Solar RS 100 IO (premium, excl. handzender): +€208\n\nKleur:\n• Trendkleur: +€289\n• RAL kleur naar keuze: +€578\n\nLaat het ons weten, we passen het graag voor je aan.",
+            "pricePerUnit": 2456.4,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Suneye voorraad scherm**\nType: knikarmscherm bedraad\nBreedte: 5000 mm\nUitval: 3000 mm\nFrame kleur: RAL 7016 structuur (standaard)\nKleur doek: Grijs\nBediening: afstandsbediening\nMotor: somfy RS100 IO\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\nCassette: Gesloten, slank design\n\n**Waarom dit knikarmscherm**\nPremium knikarmscherm met gesloten cassette. Doek en mechaniek volledig beschermd. Direct leverbaar uit voorraad: snellere levertijd dan maatwerk. Sterke aluminium armen: lang meegaand en stabiel. Fluisterstille Somfy motor met afstandsbediening.\nGarantie: 5 jaar op het product, 7 jaar op de motor.",
+            "pricePerUnit": 3175,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Eolis 3D windsensor IO**\n- Automatische windbeveiliging\n- Zonwering rolt automatisch in bij harde wind\n- Ingebouwd in de voorlijst\n- Werkt draadloos samen met uw Somfy motor",
+            "pricePerUnit": 169,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Suneye**\nType: knikarmscherm bedraad\nBreedte: 5500 mm\nUitval: 3000 mm\nFrame kleur: RAL 9005 structuur (standaard)\nKleur doek: NTB\nBediening: afstandsbediening\nMotor: somfy RS100 IO\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\nCassette: Gesloten, slank design\n\n**Waarom dit knikarmscherm**\nPremium knikarmscherm met gesloten cassette. Doek en mechaniek volledig beschermd. Sterke aluminium armen: lang meegaand en stabiel. Fluisterstille Somfy motor met afstandsbediening.\nGarantie: 5 jaar op het product, 7 jaar op de motor.\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• SunBasic (open arm, geen cassette): -€908\n• SunBasic Cassette (gesloten, instap): -€616\n• SunEye XL (extra breed, tot 745cm): +€1015\n• SunElite (topmodel, LED mogelijk): +€1176\n\nAndere bediening:\n• Draaistang (handmatig, geen motor): -€451\n• Orea WT (bedraad, wandschakelaar): -€152\n\nKleur:\n• Trendkleur: +€388\n• RAL kleur naar keuze: +€554\n\nLaat het ons weten, we passen het graag voor je aan.",
+            "pricePerUnit": 4228.8,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Eolis 3D windsensor IO**\n- Automatische windbeveiliging\n- Zonwering rolt automatisch in bij harde wind\n- Ingebouwd in de voorlijst\n- Werkt draadloos samen met uw Somfy motor",
+            "pricePerUnit": 169,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 3,
+            "description": "**Inmeten + montage screen**\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 195,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 2,
+            "description": "**Inmeten + montage Knikarmscherm.**\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 275,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": {
+          "name": "20% korting voorraad scherm",
+          "amount": 20,
+          "type": "PERCENTAGE",
+          "vatPercentage": 21
+        }
+      }
+    },
+    "6f3ae651-4732-4e72-9da2-3aad2393e80f": {
+      "type": "text",
+      "data": "**Waarom Sonty?**\n\n- Sunmaster Premium Dealer: wij leveren uitsluitend A-merk zonwering van de hoogste kwaliteit\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij je thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 600+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+    }
+  },
+  "pricing": {
+    "total": 12184.64
+  },
+  "renderRows": [
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileLogo"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileText"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateContactPart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "quotationData"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "priceLineGroupCombined",
+              "target": "defaultTemplatePriceLineGroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "6f3ae651-4732-4e72-9da2-3aad2393e80f"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "userDecline"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "signature",
+              "target": "defaultSignaturePart"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "artifacts": {
+    "artifact": {
+      "type": "ITEXT_PDF_COLUMN_BASED",
+      "props": {
+        "template": "defaultQuotation",
+        "rows": [
+          {
+            "delegateMargins": false,
+            "widths": [
+              50,
+              50
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "text",
+                    "target": "defaultTemplateProfileLogo"
+                  }
+                ]
+              },
+              {
+                "elements": [
+                  {
+                    "type": "text",
+                    "target": "defaultTemplateProfileText"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "empty"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "text",
+                    "target": "defaultTemplateContactPart"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "empty",
+                    "target": "2lh"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "quotationData"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "empty",
+                    "target": "2lh"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "priceLineGroupCombined",
+                    "target": "defaultTemplatePriceLineGroup"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "empty",
+                    "target": "2lh"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "empty",
+                    "target": "2lh"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "text",
+                    "target": "6f3ae651-4732-4e72-9da2-3aad2393e80f"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "empty",
+                    "target": "2lh"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              50,
+              50
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "userDecline"
+                  }
+                ]
+              },
+              {
+                "elements": [
+                  {
+                    "type": "signature",
+                    "target": "defaultSignaturePart"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "children": [
+        {
+          "type": "DOCUMENT_VERSION_DATA_STEP"
+        }
+      ]
+    }
+  }
+}

@@ -119,19 +119,22 @@
   "telefoon": "+31610641348",
   "email": "hjcolijn73@gmail.com",
   "planadoJobUuid": "1f1922ee-5c32-6fe0-84ef-1a53ba574013",
-  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPxKAAA=",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVjqHZUAAA=",
   "grippNr": "6413",
   "sheet": {
    "tab": "Aug 2026",
    "rij": 299,
    "kolomInkoop": 23
   },
-  "aankomst": "2026-09-08T11:00:00.000Z",
+  "aankomst": "2026-08-25T09:40:00.000Z",
   "inmeter": "Joey",
   "duurMin": 30,
   "aanbodToken": "64dda232ebd56617c2f10179d3043e17",
   "geboektOp": "2026-08-07T07:09:52.006Z",
-  "status": "geboekt"
+  "status": "geboekt",
+  "geannuleerdOp": "2026-08-12T18:45:12.674Z",
+  "verzetVan": "2026-09-08T11:00:00.000Z",
+  "verzetReden": "Disney 7-8 sep, telefonisch akkoord"
  },
  "0e43f9b6-5888-4910-a5fa-6ebc9f745538": {
   "naam": "Julia Arias van Oordt",
@@ -252,19 +255,22 @@
   "telefoon": "+31621281299",
   "email": "christian@tammingasports.nl",
   "planadoJobUuid": "1f1925a1-e14d-6560-92c5-762ef24c56c2",
-  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVfFPySAAA=",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVjqHZXAAA=",
   "grippNr": "6423",
   "sheet": {
    "tab": "Aug 2026",
    "rij": 94,
    "kolomInkoop": 23
   },
-  "aankomst": "2026-09-07T12:40:00.000Z",
-  "inmeter": "Joey",
+  "aankomst": "2026-09-16T13:25:00.000Z",
+  "inmeter": "Sjoerd",
   "duurMin": 20,
   "aanbodToken": "c3f703f784d4678662186f83cf167e39",
   "geboektOp": "2026-08-07T12:18:55.527Z",
-  "status": "geboekt"
+  "status": "geboekt",
+  "geannuleerdOp": "2026-08-12T18:46:11.898Z",
+  "verzetVan": "2026-09-07T12:40:00.000Z",
+  "verzetReden": "Disney 7-8 sep, telefonisch akkoord"
  },
  "d1f98350-678c-4d91-af6a-e4c99fddcb4f": {
   "naam": "Jan De Bont",

@@ -1,0 +1,503 @@
+{
+  "documentId": "343e41bf-1c2e-4894-9afb-165f07f46246",
+  "versionId": "e24a1f9c-2424-465a-814b-c893aab28107",
+  "documentTitle": "Offerte #202611357",
+  "documentStatus": "SENT",
+  "documentNumber": "202611357",
+  "documentType": "QUOTATION",
+  "title": "Offerte #202611357",
+  "quotationNumber": "202611357",
+  "quotationTitle": "Offerte #202611357",
+  "quotationCreationTimestamp": 1786302290490,
+  "quotationExpirationTimestamp": 1786907090490,
+  "quotationStatus": "SENT",
+  "isoCurrency": "EUR",
+  "subjects": {
+    "leadConfiguration": "889879fe-ae4b-4a3d-9a9f-6702790e43bd",
+    "contactPerson": "a0fe4639-b84a-4b2d-924d-9178f72798c7"
+  },
+  "segments": {
+    "defaultTemplateContactPart": {
+      "type": "contactPerson",
+      "data": "**${contactPerson.name}**\n${contactPerson.address}\n${contactPerson.email}\n${contactPerson.phoneNumber}"
+    },
+    "defaultSignaturePart": {
+      "type": "signature",
+      "data": {}
+    },
+    "defaultTemplateProfileLogo": {
+      "type": "companyProfileLogo",
+      "data": "![|6lh]($companyProfile.logo)"
+    },
+    "defaultTemplateProfileText": {
+      "type": "text",
+      "data": "[[right]]**${companyProfile.name}**\n${companyProfile.addressLine}\n${companyProfile.postalCode} ${companyProfile.city}"
+    },
+    "defaultTemplatePriceLineGroup": {
+      "type": "priceLineGroup",
+      "data": {
+        "lines": [
+          {
+            "units": 1,
+            "description": "**SunCube XL**\nBreedte: 2017 mm\nUitval: 1150 mm\nFrame Kleur: Technisch aluminium (standaard)\nKleur doek: NTB\nBediening: Brel Solar motor\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nMontagesteunen: NTB\nOverige: NTB\nCassette: Gesloten, rond design (150mm)\n\n**Waarom dit uitvalscherm**\nCompact en stijlvol uitvalscherm. Fluisterstille Somfy motor met afstandsbediening. Bescherming tegen directe zonnestraling en warmte.\nGarantie: 5 jaar op het product, 7 jaar op de motor.\n\n**Liever een ander model of bediening?**\n\nAnder model:\n• SunProject 100 (rechthoekig, breder leverbaar): -€478\n\nAndere bediening:\n• Motor + afstandsbediening (Sunea IO + handzender): +€163\n\nKleur:\n• Trendkleur: +€172\n• RAL kleur naar keuze: +€245\n\nSmart home:\n• Tahoma Switch (bedien alles via je telefoon, vereist IO motor): +€195 (excl. motor upgrade)\n\nLaat het ons weten, we passen het graag voor je aan.",
+            "pricePerUnit": 2174.4,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          },
+          {
+            "units": 1,
+            "description": "**Inmeten + Montage uitvalscherm**\n- Montage\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+            "pricePerUnit": 220,
+            "vatPercentage": 21,
+            "lockTotalPrice": false
+          }
+        ],
+        "vatSetting": "INCL",
+        "groupDiscount": {
+          "name": "15% tijdelijke actie",
+          "amount": 15,
+          "type": "PERCENTAGE",
+          "vatPercentage": 21
+        }
+      }
+    },
+    "dd5732e0-438a-49e7-add9-85925af424c0": {
+      "type": "text",
+      "data": "**Waarom Sonty?**\n\n- Sunmaster Premium Dealer: wij leveren uitsluitend A-merk zonwering van de hoogste kwaliteit\n- Eigen montageteam: al onze monteurs zijn in dienst, geen onderaannemers\n- Persoonlijk advies: gratis inmeetafspraak bij je thuis\n- 3000+ tevreden klanten\n- 4.9/5.0 op Google met 600+ reviews\n- Alles uit eigen hand: van advies tot montage en nazorg"
+    }
+  },
+  "pricing": {
+    "total": 2035.24
+  },
+  "renderRows": [
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileLogo"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateProfileText"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "defaultTemplateContactPart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "quotationData"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "priceLineGroupCombined",
+              "target": "defaultTemplatePriceLineGroup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "text",
+              "target": "dd5732e0-438a-49e7-add9-85925af424c0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        100
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "empty",
+              "target": "2lh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delegateMargins": false,
+      "widths": [
+        50,
+        50
+      ],
+      "columns": [
+        {
+          "elements": [
+            {
+              "type": "userDecline"
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "signature",
+              "target": "defaultSignaturePart"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "artifacts": {
+    "artifact": {
+      "type": "ITEXT_PDF_COLUMN_BASED",
+      "props": {
+        "template": "defaultQuotation",
+        "rows": [
+          {
+            "delegateMargins": false,
+            "widths": [
+              50,
+              50
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "text",
+                    "target": "defaultTemplateProfileLogo"
+                  }
+                ]
+              },
+              {
+                "elements": [
+                  {
+                    "type": "text",
+                    "target": "defaultTemplateProfileText"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "empty"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "text",
+                    "target": "defaultTemplateContactPart"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "empty",
+                    "target": "2lh"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "quotationData"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "empty",
+                    "target": "2lh"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "priceLineGroupCombined",
+                    "target": "defaultTemplatePriceLineGroup"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "empty",
+                    "target": "2lh"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "empty",
+                    "target": "2lh"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "text",
+                    "target": "dd5732e0-438a-49e7-add9-85925af424c0"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              100
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "empty",
+                    "target": "2lh"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "delegateMargins": false,
+            "widths": [
+              50,
+              50
+            ],
+            "columns": [
+              {
+                "elements": [
+                  {
+                    "type": "userDecline"
+                  }
+                ]
+              },
+              {
+                "elements": [
+                  {
+                    "type": "signature",
+                    "target": "defaultSignaturePart"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "children": [
+        {
+          "type": "DOCUMENT_VERSION_DATA_STEP"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "quotationNumber": "202611498",
+  "documentId": "a0e7724e-a040-473a-80d3-ee39786c6a60",
+  "name": "Bob van Schaick",
+  "timestamp": "2026-08-12T15:01:37.094Z",
+  "lines": [
+    {
+      "units": 2,
+      "description": "Zip Design 110\nBreedte: 880 mm\nHoogte: 1400 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9001\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1357.9,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "Zip Design 110\nBreedte: 880 mm\nHoogte: 1440 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9001\nKleur doek: NTB\nOnderlat: Design\nBediening: Motor + afstandsbediening\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1390.9,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Suneye\nBreedte: 5000 mm\nUitval: 3000 mm\nFrame kleur: RAL 9001\nKleur doek: NTB\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 3699.5,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Suneye\nBreedte: 5000 mm\nUitval: 1500 mm\nFrame kleur: RAL 9001\nKleur doek: NTB\nBediening: Motor + afstandsbediening\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 3281.5,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202611515",
+  "documentId": "65b32636-338e-4aa7-a200-d909f348913a",
+  "name": "Marga Grave",
+  "timestamp": "2026-08-12T15:00:55.957Z",
+  "lines": [
+    {
+      "units": 2,
+      "description": "Zip Design 110\nBreedte: 1500 mm\nHoogte: 1250 mm\nKastmaat: 105 mm\nFrame kleur: RAL 9001\nKleur doek: NTB\nOnderlat: Design\nBediening: Draaischakelaar\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 1182.6,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 2,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

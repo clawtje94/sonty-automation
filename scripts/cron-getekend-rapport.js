@@ -200,7 +200,11 @@ async function telegram(text) {
         `• Waarvan overtuigd vanuit twijfel: ${stats.overtuigd ?? '?'}\n` +
         details + conversieBlok +
         (stats.samenvatting ? `\n\n${stats.samenvatting}` : '') +
-        `\n\n📊 Totaal tot nu toe (${cum.dagen} dagen): ${totaalGesprekken} gesprekken gevoerd, ${cum.geholpen} geholpen, ${cum.akkoord_inmeten} akkoord, ${cum.showroom} showroom, ${cum.overtuigd} overtuigd.` +
+        // "3 dagen en 1111 gesprekken?" (Daimy 12-08): het gesprekstotaal loopt sinds
+        // 16 juli, maar de uitkomsten-teller is op 10-08 opnieuw gestart (de oude telde
+        // meerdaagse gesprekken dubbel). Twee verschillende klokken in een zin lezen
+        // als onzin — daarom nu allebei expliciet benoemd.
+        `\n\n📊 Totaal: ${totaalGesprekken} gesprekken gevoerd sinds de start (16 juli). Uitkomsten geteld sinds de herstart van de teller op 10 aug (${cum.dagen} dag${cum.dagen === 1 ? '' : 'en'}): ${cum.geholpen} geholpen, ${cum.akkoord_inmeten} akkoord, ${cum.showroom} showroom, ${cum.overtuigd} overtuigd.` +
 ''
       );
     } else {

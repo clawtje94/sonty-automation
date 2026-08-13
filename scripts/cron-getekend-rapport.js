@@ -101,8 +101,8 @@ async function telegram(text) {
         max_tokens: 1500,
         messages: [{ role: 'user', content:
           `Hieronder staan ${perTicket.size} AI-klantenservicegesprekken van Sonty (zonwering) van de afgelopen dag. Beoordeel ALLEEN op basis van wat er echt staat (niets verzinnen) en geef UITSLUITEND geldige JSON terug in dit formaat:\n` +
-          `{\n  "geholpen": <aantal gesprekken waarin de AI de klant echt inhoudelijk verder heeft geholpen>,\n  "akkoord_inmeten": <aantal klanten dat AKKOORD is gegaan met de opdracht. LET OP: een klant die doorgezet is naar "inmeten inplannen" is per definitie akkoord — tel akkoord en inmeten dus als ÉÉN ding, elke klant maximaal 1x. NIET dubbeltellen>,\n  "showroom": <aantal klanten dat een SHOWROOMbezoek heeft afgesproken of daarnaar verwezen is. Dit staat LOS van akkoord: iemand komt naar de showroom om nog te beslissen>,\n  "overtuigd": <aantal twijfelaars dat de AI over de streep trok (subset van geholpen; alleen wie eerst duidelijk twijfelde op prijs/keuze)>,\n  "overtuigd_details": ["Klantnaam — in 1 zin hoe (alternatief/downgrade/uitleg/korting)"],\n  "akkoord_details": ["Klantnaam (ticket) — waaruit het akkoord blijkt, in een paar woorden"],\n  "geholpen_tickets": [<ticketnummers van de gesprekken die je als geholpen telt>],\n  "akkoord_tickets": [<ticketnummers van de klanten die akkoord zijn>],\n  "showroom_tickets": [<ticketnummers met een showroomafspraak>],\n  "overtuigd_tickets": [<ticketnummers van de overtuigde twijfelaars>],\n  "veelvoorkomende_problemen": ["Kort thema waar klanten hulp bij nodig hadden of waar de AI het niet zelf kon oplossen (bv. 'foto-beoordeling', 'levertijd al lopende order', 'maatwerk buiten configurator', 'klacht montage'), met hoe vaak het voorkwam. Sorteer op meest voorkomend. Alleen echte terugkerende thema's, max 6."]\n}\n` +
-          `Belangrijk tegen scheve data: akkoord_inmeten en showroom zijn aparte uitkomsten — tel een klant niet in beide. De ..._tickets-lijsten moeten precies even lang zijn als het bijbehorende aantal; de ticketnummers staan in de kop van elk gesprek. Geef alleen de JSON, geen tekst eromheen.\n\n${digest}` }],
+          `{\n  "geholpen": <aantal gesprekken waarin de AI de klant echt inhoudelijk verder heeft geholpen>,\n  "showroom": <aantal klanten dat een SHOWROOMbezoek heeft afgesproken of daarnaar verwezen is. Dit staat LOS van akkoord: iemand komt naar de showroom om nog te beslissen>,\n  "overtuigd": <aantal twijfelaars dat de AI over de streep trok (subset van geholpen; alleen wie eerst duidelijk twijfelde op prijs/keuze)>,\n  "overtuigd_details": ["Klantnaam (ticket) — in 1 zin hoe (alternatief/downgrade/uitleg/korting)"],\n  "geholpen_tickets": [<ticketnummers van de gesprekken die je als geholpen telt>],\n  "showroom_tickets": [<ticketnummers met een showroomafspraak>],\n  "overtuigd_tickets": [<ticketnummers van de overtuigde twijfelaars>],\n  "veelvoorkomende_problemen": ["Kort thema waar klanten hulp bij nodig hadden of waar de AI het niet zelf kon oplossen (bv. 'foto-beoordeling', 'levertijd al lopende order', 'maatwerk buiten configurator', 'klacht montage'), met hoe vaak het voorkwam. Sorteer op meest voorkomend. Alleen echte terugkerende thema's, max 6."]\n}\n` +
+          `Belangrijk tegen scheve data: de ..._tickets-lijsten moeten precies even lang zijn als het bijbehorende aantal; de ticketnummers staan in de kop van elk gesprek. Geef alleen de JSON, geen tekst eromheen.\n\n${digest}` }],
       }),
     });
     const j = await resp.json();
@@ -121,7 +121,21 @@ async function telegram(text) {
     try { cum = JSON.parse(fs.readFileSync(STATS_FILE, 'utf8')); } catch {}
 
     if (stats) {
-      const CATS = [['geholpen', 'geholpen_tickets'], ['akkoord_inmeten', 'akkoord_tickets'], ['showroom', 'showroom_tickets'], ['overtuigd', 'overtuigd_tickets']];
+      const CATS = [['geholpen', 'geholpen_tickets'], ['showroom', 'showroom_tickets'], ['overtuigd', 'overtuigd_tickets']];
+      // akkoord-cumulatief: elke run vers herbouwd uit de harde bronnen sinds 10-08 —
+      // handtekeningen (getekend-gemeld) plus unieke inmeet-actie-tickets uit de log.
+      try {
+        const START = Date.parse('2026-08-10');
+        const namenGetekend = Object.values(state.gemeld).filter((v) => Date.parse(v.gemeld) >= START).map((v) => v.klant);
+        const actieSet = new Set();
+        for (const l of fs.readFileSync(LOG, 'utf8').trim().split('\n')) {
+          let e3; try { e3 = JSON.parse(l); } catch { continue; }
+          if (!e3 || new Date(e3.tijd).getTime() < START) continue;
+          if ((e3.acties || []).some((a) => a.type === 'inmeet_afspraak')) actieSet.add(e3.ticket);
+        }
+        cum.akkoord_inmeten = namenGetekend.length + [...actieSet].length;
+        cum.akkoordBron = `${namenGetekend.length} getekend + ${actieSet.size} doorgezet`;
+      } catch { /* teller blijft dan staan */ }
       cum.tickets = cum.tickets || {};
       let perTicketGelukt = true;
       for (const [veld, lijstveld] of CATS) {
@@ -209,6 +223,25 @@ async function telegram(text) {
       // chat zijn allebei "akkoord, door naar inmeten" en tellen als één ding, elke
       // klant maximaal één keer. Ontdubbeld op achternaam+voorletter; de bron staat
       // erbij zodat elk cijfer navolgbaar blijft.
+      // AKKOORD KOMT NOOIT MEER UIT EEN TAALMODEL (Daimy 13-08: zes "akkoorden in het
+      // gesprek" bleken VERZONNEN — de namen kwamen niet eens in de logs voor). De enige
+      // toegestane bronnen zijn hard: (1) een handtekening in RP, (2) een inmeet_afspraak-
+      // actie die de bot zelf heeft uitgevoerd (staat in log.jsonl, deterministisch).
+      const actieAkkoorden = [];
+      try {
+        const sinds24 = Date.now() - 24 * 3600000;
+        const gezien = new Set();
+        for (const l of fs.readFileSync(LOG, 'utf8').trim().split('\n')) {
+          let e2; try { e2 = JSON.parse(l); } catch { continue; }
+          if (!e2 || new Date(e2.tijd).getTime() < sinds24) continue;
+          if (!(e2.acties || []).some((a) => a.type === 'inmeet_afspraak')) continue;
+          if (gezien.has(e2.ticket)) continue;
+          gezien.add(e2.ticket);
+          const kl = e2.klant || {};
+          actieAkkoorden.push({ naam: (typeof kl === 'string' ? kl : kl.naam) || (typeof kl === 'object' ? kl.phone : '') || 'onbekend', ticket: e2.ticket });
+        }
+      } catch { /* log onleesbaar: dan alleen handtekeningen */ }
+
       // "Taico Aerts" en "Taico Aerts en Carolin Brandt" zijn dezelfde klant: namen
       // matchen als alle woorden van de korte naam in de lange voorkomen (voegwoorden
       // tellen niet mee).
@@ -219,9 +252,8 @@ async function telegram(text) {
       };
       const akkoordLijst = [];
       for (const n of nieuw) akkoordLijst.push({ naam: n.klant, via: `getekend, offerte ${n.nummer}` });
-      for (const d of (stats.akkoord_details || [])) {
-        const naam = String(d).split(/[—(-]/)[0].trim();
-        if (naam && !akkoordLijst.some((a) => zelfde(a.naam, naam))) akkoordLijst.push({ naam, via: 'akkoord in het gesprek' });
+      for (const a2 of actieAkkoorden) {
+        if (a2.naam && !akkoordLijst.some((x) => zelfde(x.naam, a2.naam))) akkoordLijst.push({ naam: a2.naam, via: `doorgezet naar inmeten (ticket ${a2.ticket})` });
       }
       await telegram(
         `🤖 AI-resultaten afgelopen dag (${perTicket.size} gesprekken gevoerd):\n\n` +

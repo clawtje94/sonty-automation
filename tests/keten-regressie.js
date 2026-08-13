@@ -513,5 +513,16 @@ test('verwerker laadt vakanties voordat hij boekt of nieuwe tijden stuurt', () =
   assert.ok(/^[\s\S]{0,600}await laadVakanties\(\)/.test(fn), 'verwerkAanbiedingen moet met laadVakanties beginnen');
 });
 
+// 13-08: het avondrapport meldde zes "akkoorden in het gesprek" met namen die niet
+// eens in de logs voorkwamen — het taalmodel verzon ze. Akkoord mag alleen nog uit
+// harde bronnen komen: RP-handtekeningen en inmeet_afspraak-acties uit de eigen log.
+test('avondrapport: akkoord komt nooit uit het taalmodel', () => {
+  const bron = require('fs').readFileSync(__dirname + '/../scripts/cron-getekend-rapport.js', 'utf8');
+  assert.ok(!/akkoord_details/.test(bron), 'akkoord_details (model-oordeel) mag niet meer bestaan');
+  assert.ok(!/akkoord_tickets/.test(bron), 'akkoord_tickets (model-oordeel) mag niet meer bestaan');
+  assert.ok(/inmeet_afspraak/.test(bron), 'akkoord moet uit de inmeet-acties in de log komen');
+  assert.ok(/AKKOORD KOMT NOOIT MEER UIT EEN TAALMODEL/.test(bron), 'de les moet gedocumenteerd blijven');
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

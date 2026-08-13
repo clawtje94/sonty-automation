@@ -490,5 +490,19 @@ test('boek-poort: tijd als vier cijfers is geen postcode', () => {
   assert.strictEqual(magBoeken({ intent: 'vraag' }, 'Het adres is 4822WH Breda he', adres).mag, false, 'echte afwijkende postcode blijft blokkeren');
 });
 
+// 13-08: kale agenda-afspraken gaven klanten geen bevestigingsmail en geen medewerker-
+// koppeling in Bookings (alles onder "geen medewerker" als Bezet). Boeken loopt nu
+// via lib/inmeet-boeken.js: echte Bookings-afspraak, kale afspraak alleen als vangnet
+// met alarm.
+test('planner boekt via Bookings, kale afspraak alleen als gemeld vangnet', () => {
+  const fs2 = require('fs');
+  const planner = fs2.readFileSync(__dirname + '/../scripts/cron-inmeten-planner.js', 'utf8');
+  assert.ok((planner.match(/boekInmeetAfspraak/g) || []).length >= 2, 'beide boek-routes moeten via boekInmeetAfspraak lopen');
+  assert.ok(!/outlookEventId = await maakDefinitief/.test(planner), 'directe maakDefinitief-boekingen mogen niet meer bestaan in de planner');
+  const lib = fs2.readFileSync(__dirname + '/../scripts/lib/inmeet-boeken.js', 'utf8');
+  assert.ok(/staffIds/.test(lib) && /locatie/.test(lib), 'Bookings-boeking moet medewerker en adres meegeven');
+  assert.ok(/GEEN automatische bevestiging/.test(lib), 'vangnet moet alarmeren dat de klant geen bevestiging kreeg');
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

@@ -210,6 +210,15 @@ async function main() {
   let meldingen = 0;
   for (const token of tokens) {
     const info = tickets[token];
+    // STIL-LIJST (Daimy 13-08, Charles Gevers): staat een nummer hierop, dan doet de
+    // monitor NIETS meer in dat gesprek — geen keuzes doorvoeren, geen bevestigingen,
+    // geen meldingen. Het gesprek is van een mens (Daimy praat er zelf), en de bot die
+    // op een antwoord-aan-Daimy reageert maakt het alleen maar verwarrend.
+    try {
+      const stil = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', 'data', 'monitor-stil.json'), 'utf8'));
+      const t9 = String(info.telefoon || '').replace(/\D/g, '').slice(-9);
+      if (t9 && stil[t9]) continue;
+    } catch { /* geen stil-lijst */ }
     // ouder dan 14 dagen: niet meer volgen (en opruimen)
     if (Date.now() - Date.parse(info.verstuurdOp) > 14 * 86400000) { delete tickets[token]; continue; }
     const teVolgen = new Set([info.waTicket, info.mailTicket].filter(Boolean));

@@ -256,10 +256,9 @@ function bevestigingTekst(voornaam, slot, duurMin) {
   const dag = d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
   const van = d.toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const tot = new Date(+d + 30 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
-  return `Hoi ${voornaam}, je inmeetafspraak staat vast: ${dag} tussen ${van} en ${tot}. ` +
-    `Onze inmeter ${slot.inmeter} komt langs en is er ongeveer ${duurMin} minuten mee bezig. ` +
-    `Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je weten. ` +
-    `Komt er toch iets tussen? Reageer dan even op dit bericht.`;
+  return `Hoi ${voornaam}, hij staat! ${dag.charAt(0).toUpperCase() + dag.slice(1)} tussen ${van} en ${tot} komt ${slot.inmeter} bij je langs om in te meten ` +
+    `(duurt zo'n ${duurMin} minuutjes). Door de route kan het een uurtje eerder of later worden, maar dan laten we het je even weten. ` +
+    `Komt er iets tussen? Stuur gerust een berichtje.`;
 }
 
 async function verstuurBevestiging(aanbod, slot) {
@@ -299,8 +298,8 @@ function herinneringTekst(voornaam, slot, duurMin, dagenVooraf = 1) {
   const wanneer = dagenVooraf <= 1 ? 'morgen'
     : d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
   const slot2 = dagenVooraf <= 1 ? 'Tot morgen!' : 'Komt het toch niet uit? Stuur dan even een berichtje terug.';
-  return `Hoi ${voornaam}, een herinnering aan je inmeetafspraak: ${wanneer} tussen ${van} en ${tot} komt onze inmeter ${slot.inmeter} ` +
-    `bij je langs (ongeveer ${duurMin} minuten). Door de route kan het soms een uur eerder of later worden; als dat zo is laten we het je weten. ${slot2}`;
+  return `Hoi ${voornaam}, kleine herinnering: ${wanneer} tussen ${van} en ${tot} komt ${slot.inmeter} bij je langs om in te meten ` +
+    `(duurt maar zo'n ${duurMin} minuutjes). Door de route kan het een uurtje eerder of later worden, maar dan hoor je dat van ons. ${slot2}`;
 }
 
 /** Beide kanalen; geeft per kanaal terug wat er gebeurd is. Eén kanaal gelukt = aanbod is onderweg. */

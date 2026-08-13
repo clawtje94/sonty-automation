@@ -68,6 +68,13 @@ function leesKeuze(tekst, slots) {
   return null;
 }
 
+// "Ik kom er vandaag nog op terug" om 21:33 's avonds is een belofte die je breekt
+// (Debby 12-08). Buiten kantoortijd beloven we morgen.
+function wanneerTerug() {
+  const uur = Number(new Date().toLocaleString('nl-NL', { hour: 'numeric', hour12: false, timeZone: 'Europe/Amsterdam' }));
+  return (uur >= 18 || uur < 8) ? 'morgenochtend' : 'vandaag nog';
+}
+
 function bevestigingsTekst(slot) {
   const d = new Date(slot.aankomst);
   const dag = d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
@@ -79,7 +86,7 @@ function bevestigingsTekst(slot) {
   // AANKOMSTMARGE (Daimy 11-08: "echt belangrijk dat mensen er rekening mee houden dat
   // we een uur eerder of later aan kunnen komen, we staan nu heel veel te wachten").
   // Geldt voor alles BEHALVE showroomafspraken; die staan gewoon vast.
-  return `Top! Genoteerd: ${dag} tussen ${van} en ${tot} komt ${wie} bij je langs. Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je even weten. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty`;
+  return `Helemaal goed, hij staat! ${dag.charAt(0).toUpperCase() + dag.slice(1)} tussen ${van} en ${tot} komt ${wie} bij je langs. Door de route kan het soms een uurtje eerder of later worden, maar dan laten we het je even weten. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty`;
 }
 
 async function stuurWaBevestiging(ticketId, naam, slot) {
@@ -206,10 +213,14 @@ async function main() {
     // ouder dan 14 dagen: niet meer volgen (en opruimen)
     if (Date.now() - Date.parse(info.verstuurdOp) > 14 * 86400000) { delete tickets[token]; continue; }
     const teVolgen = new Set([info.waTicket, info.mailTicket].filter(Boolean));
-    if (info.telefoon) {
-      const extra = await zoekWaTicketOpNummer(info.telefoon).catch(() => null);
-      if (extra) teVolgen.add(extra);
+    // De nummer-zoektocht was een Trengo-search PER KLANT PER RONDE en de grootste
+    // 429-bron (1170x "blijft 429"; Debby's avond-ja lag daardoor 14 uur). Eén keer
+    // zoeken en het resultaat in de state bewaren is genoeg: een samengevoegd ticket
+    // verandert daarna niet meer.
+    if (info.telefoon && info.extraTicket === undefined) {
+      info.extraTicket = await zoekWaTicketOpNummer(info.telefoon).catch(() => null);
     }
+    if (info.extraTicket) teVolgen.add(info.extraTicket);
     for (let ticketId of teVolgen) {
       let rows = await ticketBerichten(ticketId);
       if (!rows.length) {
@@ -350,8 +361,8 @@ async function main() {
             if (duiding.intent === 'klacht' || duiding.intent === 'vraag') {
               await bevestigOntvangst(ticketId, info.naam,
                 duiding.intent === 'klacht'
-                  ? 'Dank je voor je eerlijke bericht, dat snap ik goed. Ik leg het even voor aan een collega en je hoort vandaag nog van ons.'
-                  : 'Goede vraag! Ik zoek het even voor je uit en kom er vandaag nog op terug.');
+                  ? `Dank je voor je eerlijke bericht, dat snap ik goed. Ik leg het even voor aan een collega en je hoort ${wanneerTerug()} van ons.`
+                  : `Goede vraag! Ik zoek het even voor je uit en kom er ${wanneerTerug()} op terug.`);
               await telegram(`${duiding.intent === 'klacht' ? '⚠️' : '❓'} ${info.naam} (ticket ${ticketId}): ${duiding.samenvatting}\n\n"${tekst.slice(0, 200)}"\n\n`
                 + (duiding.antwoordVoorstel ? `Concept-antwoord:\n${duiding.antwoordVoorstel}` : 'Geen concept-antwoord beschikbaar.')
                 + '\n\nDe klant weet dat we ermee bezig zijn; het echte antwoord moet van een mens komen.');
@@ -373,8 +384,8 @@ async function main() {
             const duidingB = await leesReactie(reeksTekst || tekst, aanbodB?.slots || []);
             if (duidingB.intent !== 'akkoord') {
               await bevestigOntvangst(ticketId, info.naam, duidingB.intent === 'klacht'
-                ? 'Dank je voor je eerlijke bericht, dat snap ik goed. Ik pak dit meteen op en je hoort vandaag nog van ons.'
-                : 'Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug.');
+                ? `Dank je voor je eerlijke bericht, dat snap ik goed. Ik pak dit meteen op en je hoort ${wanneerTerug()} van ons.`
+                : `Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er ${wanneerTerug()} bij je op terug.`);
               await telegram(`🚨 ${info.naam} schreef NA de boeking iets dat aandacht vraagt (${duidingB.intent}: ${duidingB.samenvatting}).\n\n"${tekst.slice(0, 200)}"\n\nDe afspraak staat al vast — controleer of die nog klopt. Ticket ${ticketId}. De klant weet dat we ermee bezig zijn.`);
               meldingen++;
               continue;

@@ -1116,7 +1116,7 @@ async function verwerkAanbiedingen() {
           const wanneer = new Date(a.slots[0].aankomst).toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
           await fetch(`https://app.trengo.com/api/v2/tickets/${tk}/messages`, {
             method: 'POST', headers: { Authorization: 'Bearer ' + TT4, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: `Hoi ${String(a.lead.naam).split(' ')[0]}, ik hou ${wanneer} nog even voor je vrij. Past het, laat je het dan weten? Komt het niet uit, dan zoek ik met alle plezier een ander moment.\n\nGroetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
+            body: JSON.stringify({ message: `Hoi ${String(a.lead.naam).split(' ')[0]}, kleine reminder: ${wanneer} staat nog voor je klaar. Eén berichtje en ik zet hem vast! Past het toch niet, ook prima — dan kijk ik gewoon verder voor je.\n\nGroetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
           });
         }
       } catch { /* herinnering is extra, geen blokkade */ }
@@ -1267,7 +1267,7 @@ async function verwerkAanbiedingen() {
             const TT3 = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
             await fetch(`https://app.trengo.com/api/v2/tickets/${tk}/messages`, {
               method: 'POST', headers: { Authorization: 'Bearer ' + TT3, 'Content-Type': 'application/json' },
-              body: JSON.stringify({ message: `Ai, dat moment is net ingenomen door een andere afspraak, excuus! We sturen je zo een paar nieuwe tijden om uit te kiezen. Groetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
+              body: JSON.stringify({ message: `Balen, die tijd is je nét voor de neus weggekaapt door een andere afspraak, sorry! Ik stuur je meteen een nieuw voorstel, dus je hoeft zelf niks te doen. Groetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
             });
           }
         } catch { /* melding hieronder dekt het */ }

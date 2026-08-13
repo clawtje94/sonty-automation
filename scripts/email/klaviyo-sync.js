@@ -43,6 +43,10 @@ const NAMEN = {
   "sonty-afwijzing": "Sonty | RP5 Na afwijzing",
   "sonty-afsluiter": "Sonty | A5 Laatste mail in de reeks",
   "sonty-reactivering-1": "Sonty | C1 Reactivering",
+  "sonty-reactivering-1-screens": "Sonty | C1 Reactivering (screens)",
+  "sonty-reactivering-1-rolluiken": "Sonty | C1 Reactivering (rolluiken)",
+  "sonty-reactivering-1-binnen": "Sonty | C1 Reactivering (binnen)",
+  "sonty-bouwvak": "Sonty | S1 Na de bouwvak",
   "sonty-reactivering-2": "Sonty | C2 Wat er veranderd is",
   "sonty-crosssell-binnen": "Sonty | D1 Cross-sell naar binnen",
   "sonty-review": "Sonty | E2 Reviewverzoek"

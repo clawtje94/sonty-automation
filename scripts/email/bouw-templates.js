@@ -703,27 +703,80 @@ SJABLONEN['sonty-afsluiter'] = mail({
   ],
 });
 
-SJABLONEN['sonty-reactivering-1'] = mail({
-  naam: 'Sonty reactivering 1',
-  preheader: 'Is het er nooit van gekomen?',
-  kop: 'Je zocht ooit {{ person.sonty_product_kort|default:"zonwering" }}',
-  intro: 'Dat is alweer even geleden. Misschien is het er nooit van gekomen, misschien heb je het elders geregeld. Beide prima. Ik wilde alleen even laten weten dat je offerte er nog is.',
+/* ── PRODUCTRELEVANTIE (Daimy 13-08) ──
+   De koude lijst krijgt niet één generieke mail maar de variant die bij het aangevraagde
+   product past. Foto én review zijn per variant met eigen ogen gecontroleerd (bestandsnamen in
+   de fotomap liegen, dus elke foto is bekeken). De flow kiest de variant met een conditional
+   split op sonty_product_kort / sonty_categorie; de basisvariant is het vangnet. */
+
+const REVIEW_SCREENS = ['Rick Kapper', 'Wat zijn wij heel blij met het bedrijf Sonty uit Rijswijk. Zij hebben bij ons 2 screens aangebracht. Top service.'];
+const REVIEW_ROLLUIK_PLAATSING = ['Sidney van der Zwart', 'Voor en achter op de 2e verdieping rolluiken van Sonty laten plaatsen. Perfecte service, binnen 2,5 uur werden de rolluiken geplaatst. Monteurs super vriendelijk en correct.'];
+
+function maakReactivering1({ foto: fotoBestand, alt, caption, rev }) {
+  return mail({
+    naam: 'Sonty reactivering 1',
+    preheader: 'Is het er nooit van gekomen?',
+    kop: 'Je zocht ooit {{ person.sonty_product_kort|default:"zonwering" }}',
+    intro: 'Dat is alweer even geleden. Misschien is het er nooit van gekomen, misschien heb je het elders geregeld. Beide prima. Ik wilde alleen even laten weten dat je offerte er nog is.',
+    blokken: [
+      beeld(fotoBestand, alt, caption),
+      offerteKaart(),
+      knop('Bekijk je offerte van toen', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+      `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
+        <tr><td style="padding:20px 22px;${F};">
+          <div style="color:${M.tekst};font-size:15px;font-weight:700;">Let op: de prijs is van toen</div>
+          <div style="color:${M.grijs};font-size:14px;line-height:1.65;padding-top:8px;">
+            Materiaalprijzen bewegen, dus het bedrag hierboven klopt waarschijnlijk niet meer helemaal.
+            Wil je weten wat het vandaag kost? Eén berichtje en ik reken het opnieuw voor je uit.
+          </div>
+        </td></tr>
+      </table>`,
+      cijfers(),
+      review(...rev),
+      assortiment(),
+      showroom(),
+    ],
+  });
+}
+
+SJABLONEN['sonty-reactivering-1'] = maakReactivering1({
+  foto: 'eigen/knikarm-resultaat.webp', alt: 'Een knikarmscherm van Sonty boven een terras',
+  caption: 'Een van onze projecten', rev: REVIEW_ROLLUIK });
+SJABLONEN['sonty-reactivering-1-screens'] = maakReactivering1({
+  foto: 'eigen/screen-tuindeuren.webp', alt: 'Screens van Sonty bij tuindeuren',
+  caption: 'Screens bij een van onze klanten', rev: REVIEW_SCREENS });
+SJABLONEN['sonty-reactivering-1-rolluiken'] = maakReactivering1({
+  foto: 'eigen/rolluik-raam.webp', alt: 'Een rolluik van Sonty op een woning',
+  caption: 'Een rolluik bij een van onze klanten', rev: REVIEW_ROLLUIK_PLAATSING });
+SJABLONEN['sonty-reactivering-1-binnen'] = maakReactivering1({
+  foto: 'eigen/showroom-ramen.webp', alt: 'Raamdecoratie in de showroom van Sonty',
+  caption: 'Raamdecoratie in onze showroom in Rijswijk', rev: REVIEW_ALLES });
+
+/* ── S1: na de bouwvak (seizoensmoment, verzoek Daimy 13-08) ──
+   Voor de zomerse offertes die stilvielen: vakantie voorbij, klusplannen worden weer opgepakt.
+   Eerlijk over de planning: 8 tot 10 weken na aanbetaling betekent bij een beslissing begin
+   september montage in het najaar, dus dat beloven we, niet meer. */
+SJABLONEN['sonty-bouwvak'] = mail({
+  naam: 'Sonty na de bouwvak',
+  preheader: 'De vakantie zit erop, je offerte staat er nog',
+  kop: 'De bouwvak zit erop',
+  intro: 'De vakantie is voorbij en de klusplannen komen weer op tafel. Voor de zomer vroeg je een offerte bij ons aan. Die staat er nog, dus ik pak hem er even bij.',
   blokken: [
-    beeld('eigen/knikarm-resultaat.webp', 'Een knikarmscherm van Sonty boven een terras', 'Een van onze projecten'),
     offerteKaart(),
-    knop('Bekijk je offerte van toen', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
       <tr><td style="padding:20px 22px;${F};">
-        <div style="color:${M.tekst};font-size:15px;font-weight:700;">Let op: de prijs is van toen</div>
+        <div style="color:${M.tekst};font-size:15px;font-weight:700;">Waarom september een slim moment is</div>
         <div style="color:${M.grijs};font-size:14px;line-height:1.65;padding-top:8px;">
-          Materiaalprijzen bewegen, dus het bedrag hierboven klopt waarschijnlijk niet meer helemaal.
-          Wil je weten wat het vandaag kost? Eén berichtje en ik reken het opnieuw voor je uit.
+          Na de aanbetaling is de lever- en montagetijd 8 tot 10 weken. Wie nu beslist, heeft het
+          dus nog dit najaar hangen. En rolluiken of raamdecoratie merk je juist in de donkere
+          maanden het hardst.
         </div>
       </td></tr>
     </table>`,
+    review(...REVIEW_TRAJECT),
     cijfers(),
-    review(...REVIEW_ROLLUIK),
-    assortiment(),
+    garantie(),
     showroom(),
   ],
 });

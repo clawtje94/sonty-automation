@@ -34,9 +34,16 @@ Samen bestrijkt dit dag 2 tot 45, wat aansluit op de gemeten doorlooptijd: media
 
 ### C. Reactivering (trigger: segment "3. Offerte koud")
 
+**Productrelevantie (13-08)**: C1 heeft vier varianten; kies in de flow met een conditional
+split op profieleigenschap `sonty_product_kort`:
+- bevat "screens" → Sonty | C1 Reactivering (screens)
+- bevat "rolluiken" → Sonty | C1 Reactivering (rolluiken)
+- `sonty_categorie` = binnen → Sonty | C1 Reactivering (binnen)
+- anders → Sonty | C1 Reactivering (basis, knikarm-beeld)
+
 | Stap | Wacht | Sjabloon | Voorwaarde |
 |---|---|---|---|
-| C1 | direct | Sonty \| C1 Reactivering | |
+| C1 | direct | Sonty \| C1 Reactivering (variant, zie boven) | |
 | C2 | 7 dagen | Sonty \| C2 Wat er veranderd is | alleen als C1 geopend is |
 | C3 | 14 dagen | Sonty \| A3 Showroom-uitnodiging | alleen als er geklikt is |
 
@@ -71,6 +78,12 @@ Deze vier vervangen wat Reuzenpanda nu doet, zodat het daar uit kan:
 **Belangrijk**: de herinneringsflow in Reuzenpanda staat niet bewust uit, hij is stuk. In de
 interface staat "Er is iets misgegaan met de automatisering". Er gaat dus al langere tijd geen
 enkele opvolgmail uit.
+
+### S. Seizoenscampagnes (eenmalig, geen flow)
+
+**S1 Na de bouwvak** (Sonty | S1, klaar in Klaviyo): eind aug/begin sep naar zomerse offertes
+zonder akkoord (fase lopend + koud tot ~120 dagen, engaged, mag_mail=ja). Details eerst met
+Daimy bevestigen (in andere terminal besproken); verzenden in blokken, nooit de hele lijst.
 
 ### W. Weerflows (trigger: segment "W1/W2/W3")
 

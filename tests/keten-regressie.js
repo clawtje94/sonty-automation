@@ -504,5 +504,14 @@ test('planner boekt via Bookings, kale afspraak alleen als gemeld vangnet', () =
   assert.ok(/GEEN automatische bevestiging/.test(lib), 'vangnet moet alarmeren dat de klant geen bevestiging kreeg');
 });
 
+// Debby (13-08): de verwerker stuurde na een afgeketste keuze direct nieuwe tijden,
+// maar dat pad laadde de vakanties niet — ze werd geboekt op Sjoerds eerste
+// vakantiedag. Elk pad dat tijden aanbiedt of boekt moet eerst laadVakanties draaien.
+test('verwerker laadt vakanties voordat hij boekt of nieuwe tijden stuurt', () => {
+  const bron = require('fs').readFileSync(__dirname + '/../scripts/cron-inmeten-planner.js', 'utf8');
+  const fn = bron.slice(bron.indexOf('async function verwerkAanbiedingen'));
+  assert.ok(/^[\s\S]{0,600}await laadVakanties\(\)/.test(fn), 'verwerkAanbiedingen moet met laadVakanties beginnen');
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

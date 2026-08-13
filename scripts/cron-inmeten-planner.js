@@ -1088,6 +1088,12 @@ async function aanbodApi(pad, opties = {}) {
 }
 
 async function verwerkAanbiedingen() {
+  // VAKANTIES OOK HIER (Debby 13-08): dit pad draaide ZONDER laadVakanties. Toen haar
+  // keuze afketste stuurde de botsings-route direct nieuwe tijden, en die rekende
+  // Sjoerds vakantie niet mee — ze werd geboekt op ma 24 aug, Sjoerds eerste
+  // vakantiedag. Kunnen de vakanties niet geladen worden, dan stopt deze run: boeken
+  // zonder vakantie-kennis is bewezen gevaarlijk.
+  await laadVakanties();
   const state = laadState();
 
   // mutatie/boek-verzoeken worden door de SNELLE daemon verwerkt (inmeet-verzoek-daemon.js)

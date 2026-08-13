@@ -44,6 +44,15 @@
   scripts/email/export-mailpreviews.js). Keten: keuzes in KV → haal-fotokeuzes.js →
   foto-keuzes.json → fotos-uploaden.js (zet keuze om naar JPEG op Klaviyo-CDN) →
   bouw-templates.js (slotFoto). 22 templates in Klaviyo, alles nog UIT.
+- **13-08 laat: RELEVANTIE PER CATEGORIE + SONTY-VERHAAL**. C1-reactivering nu 7 varianten
+  (screens/rolluiken/knikarm/pergola/markies/binnen/basis), elk met visueel geverifieerde
+  productfoto en passende echte review; flow-split in scripts/email/FLOWS.md. 25 templates
+  in Klaviyo. LET OP: 'uitvalscherm-balkon.webp' toont een knikarmscherm (naam liegt).
+  Geen schone uitvalscherm/horren-foto's → die groepen krijgen de basisvariant. Het
+  Sonty-verhaal (concept op geverifieerde feiten uit over-ons: Joey Engelen 2013, Daimy
+  erbij 2024, 15 man, 150m2 showroom) staat op Telegram TER VERBETERING bij Daimy; daarna
+  verwerken in verhaal-mail + welkomstmail. Uploader-quirk: /api/images-check pagineert
+  niet → uploadt alles opnieuw bij verse run (duplicaten op CDN, onschuldig).
 - REGEL Daimy 13-08: op deze computer niks meer met Olivida, alleen Sonty. De tijdelijke
   ~/olivida/email-marketing-map is verwijderd; de leestools staan nu in
   ~/sonty/email-marketing/scripts/ met de Sonty-key als default.

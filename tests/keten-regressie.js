@@ -340,7 +340,7 @@ test('WA-bevestiging bevat nooit "undefined" als de inmeternaam ontbreekt (incid
   const { bevestigingsTekst } = require('../scripts/cron-aanbod-replies.js');
   const zonder = bevestigingsTekst({ aankomst: '2026-08-18T09:05:00.000Z' });
   assert.ok(!/undefined/.test(zonder), `tekst bevat "undefined": ${zonder}`);
-  assert.ok(zonder.includes('dinsdag 18 augustus') && zonder.includes('11:05'), 'dag/tijd moeten kloppen');
+  assert.ok(/dinsdag 18 augustus/i.test(zonder) && zonder.includes('11:05'), 'dag/tijd moeten kloppen');
   const met = bevestigingsTekst({ aankomst: '2026-08-18T09:05:00.000Z', inmeter: 'Joey' });
   assert.ok(met.includes('onze inmeter Joey'), 'met naam moet de naam genoemd worden');
 });

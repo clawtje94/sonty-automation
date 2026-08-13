@@ -4594,5 +4594,18 @@
       }
     ],
     "processedAt": "2026-08-13T09:20:45.956Z"
+  },
+  "item:84c5652e-1f05-432e-89ce-459b9649e029": {
+    "summary": "Monique Bijnen",
+    "grippCompanyId": 99760,
+    "grippOfferId": 9038,
+    "rpDocNumber": "202611112",
+    "allOffers": [
+      {
+        "grippOfferId": 9038,
+        "rpDocNumber": "202611112"
+      }
+    ],
+    "processedAt": "2026-08-13T10:53:35.120Z"
   }
 }

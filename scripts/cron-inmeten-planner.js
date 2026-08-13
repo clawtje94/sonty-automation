@@ -774,7 +774,10 @@ async function main() {
       .sort((a, b) => a.aankomst.localeCompare(b.aankomst));
     await fetch('https://sonty-website.vercel.app/api/inmeet-dashboard', {
       method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
-      body: JSON.stringify(dash),
+      // bijgewerkt-stempel op het POST-moment: de run zelf duurt minuten, en met de
+      // startstempel leek een verse publicatie oud én verloor hij de race met een
+      // boeking die tijdens de run binnenkwam (Monique 13-08)
+      body: JSON.stringify({ ...dash, boekingen: (() => { try { return Object.entries(laadBoekingen()).filter(([, b2]) => b2.status === 'geboekt' && b2.aankomst && new Date(b2.aankomst) > new Date()).map(([rpItemId, b2]) => ({ rpItemId, naam: b2.naam, aankomst: b2.aankomst, inmeter: b2.inmeter, duurMin: b2.duurMin, grippNr: b2.grippNr, telefoon: b2.telefoon })); } catch { return dash.boekingen; } })(), bijgewerkt: new Date().toISOString() }),
     });
   } catch (e) { console.log('dashboard publiceren mislukt: ' + e.message); }
 

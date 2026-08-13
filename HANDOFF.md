@@ -12,11 +12,17 @@
 - Scripts (herbruikbaar, alleen-lezen): ~/olivida/email-marketing/scripts/klaviyo-stand.js
   en klaviyo-week-rapport.js (reporting-API per flow/campagne met omzet en spamrate).
 - Klaviyo Create Flow API is GA (revision 2026-07-15): bot kan zelf flows bouwen, 100/dag.
-- **BLOCKERS**: V1 aan Daimy (doel = Sonty, Olivida of allebei?) en V2 (Sonty
-  KLAVIYO_PRIVATE_KEY ontbreekt overal, daardoor kwamen ook nooit events/offerte-mails
-  aan; key nodig uit Klaviyo-dashboard). Olivida-Klaviyo draait al vol (17 flows van
-  Fleur/MIJU, NIET aanraken zonder akkoord); stand in
-  ~/olivida/email-marketing/onderzoek/klaviyo-stand-2026-08-13.txt.
+- **Key gekregen van Daimy (13-08)**: ~/sonty/scripts/.klaviyo-private-key.txt. Daarna
+  ONTDEKT: het systeem bestond al in scripts/email/ (27-28 juli, launchd-sync 06:30,
+  12k profielen in segmenten, 18 templates actueel in Klaviyo, flows bewust UIT, zie
+  scripts/email/FLOWS.md). Memory-index had er geen pointer naar → nu wel
+  (project_sonty_email). Backfill die Daimy vroeg was dus al gedaan.
+- **Opdracht Daimy 13-08**: alles mag ingericht, maar NIETS versturen; eerst controleert
+  Claude elke mail (visueel, UX/UI, spelling, stijl, links), daarna checkt Daimy mail
+  voor mail. Status: 18 templates vers gerenderd (72 previews + 15 randgevallen),
+  stijlcheck/linkcheck/beeldcheck groen, 3 adversariële reviewers gedraaid.
+- Olivida-Klaviyo draait al vol (17 flows van Fleur/MIJU, NIET aanraken zonder akkoord);
+  stand in ~/olivida/email-marketing/onderzoek/klaviyo-stand-2026-08-13.txt.
 
 ## 13-08: BOEKEN LOOPT NU VIA MICROSOFT BOOKINGS — DE ENIGE JUISTE MANIER
 - **Les van vandaag (grote fout hersteld)**: de planner maakte kale agenda-afspraken.

@@ -1,0 +1,72 @@
+=== LIJSTEN ===
+- Offerte aanvraag gedaan (R76XQg) — ? profielen, aangemaakt 2024-05-15
+- Offerte verstuurd (RAKbuf) — ? profielen, aangemaakt 2026-03-06
+- Contact formulier ingevuld (RRWM3w) — ? profielen, aangemaakt 2024-05-15
+- SMS versturen bel afspraak vandaag (S9hhdJ) — ? profielen, aangemaakt 2024-05-27
+- Offerte verstuurd - Maart (TJJ6PU) — ? profielen, aangemaakt 2026-04-08
+- test (USZCuN) — ? profielen, aangemaakt 2024-07-31
+- Reparatie aanvraag gedaan (Vjz3wd) — ? profielen, aangemaakt 2024-05-15
+- Nieuwsbrief inschrijvingen. (X5ckDP) — ? profielen, aangemaakt 2024-05-16
+- Zapier koppeling (XVBgm2) — ? profielen, aangemaakt 2026-05-22
+- Mail juli 15% (Xgsc6U) — ? profielen, aangemaakt 2024-07-24
+
+=== FLOWS ===
+- Contact formulier ingevuld MAIL (TxaDJC) — status: draft, trigger: Added to List, aangemaakt 2024-05-15, bijgewerkt 2024-05-15
+- Browse Abandonment (VAEhEY) — status: draft, trigger: Metric, aangemaakt 2024-05-27, bijgewerkt 2025-02-12
+- Reparatie aanvraag gedaan SMS en mail (VQyjsG) — status: draft, trigger: Added to List, aangemaakt 2024-05-15, bijgewerkt 2024-05-15
+- Offerte aanvraag gedaan SMS en mail (XLytJW) — status: live, trigger: Added to List, aangemaakt 2024-05-15, bijgewerkt 2024-05-15
+
+=== CAMPAGNES (laatste 20, e-mail) ===
+- E-mail - Mooi weer - Offerte verstuurd (maart) (01KNPYXW8W8G8E99MPYYKCESQK) — status: Sent, verstuurd: 2026-04-08
+- [Follow-up] 7-3 | Mooi weer in NL  (01KK4DXWEQK0B0T8AH0ES2NWJ3) — status: Cancelled: No Recipients, verstuurd: 2026-03-09
+- 7-3 | Mooi weer in NL  (01KK1YGK2KHM8RW53N3VNB4YB2) — status: Sent, verstuurd: 2026-03-07
+- Email Campaign - May 16, 2024, 9:19 AM (01HY04AZTM4J10Q6JJ0WM5420P) — status: Sent, verstuurd: 2024-07-24
+
+=== SEGMENTEN ===
+- Sonty | W1. Weermoment hitte (QNq88u)
+- Sonty | W2. Weermoment eerste lentedag (QR2njm)
+- Sonty | 9. Koud, raamdecoratie (RFHsyt)
+- Sonty | 4. Offerte zeer koud (1 jaar+) (RHJsGY)
+- Sonty | 3. Offerte koud (60-365 dagen) (RNmH4n)
+- Sonty | 6. Klant met buitenzonwering (RYztNr)
+- Sonty | 1. Offerte vers (0-14 dagen) (SFzZXP)
+- Sonty | W3. Weermoment donkere dagen (SVAwZt)
+- Sonty | 2. Offerte lopend (15-60 dagen) (T4pNhC)
+- Sonty | 8. Koud, buitenzonwering (Tkp4EZ)
+
+=== METRICS (events die binnenkomen) ===
+- Bounce suppression added [Klaviyo]
+- Active on Site [API]
+- Clicked email to unsubscribe [Klaviyo]
+- Offerte aanvraag [API]
+- Unsubscribed from Text Messaging Marketing [Klaviyo]
+- Received Automated Response Text Message [Klaviyo]
+- Skipped Send [Klaviyo]
+- Marked Email as Spam [Klaviyo]
+- Received Email [Klaviyo]
+- Placed Order [WooCommerce]
+- Received Text Message [Klaviyo]
+- Failed to Deliver Automated Response Text Message [Klaviyo]
+- Subscribed to Text Messaging Marketing [Klaviyo]
+- Bounced Email [Klaviyo]
+- Unsubscribed from Email Marketing [Klaviyo]
+- Subscribed to List [Klaviyo]
+- Clicked Text Message [Klaviyo]
+- Opened Email [Klaviyo]
+- Unsubscribed from Text Messaging Transactional [Klaviyo]
+- Dropped Email [Klaviyo]
+- Relayed Text Message [Klaviyo]
+- Subscribed to Email Marketing [Klaviyo]
+- GravityForm [API]
+- Viewed Product [API]
+- Subscribed to Text Messaging Transactional [Klaviyo]
+- Sent Text Message [Klaviyo]
+- Failed to Deliver Text Message [Klaviyo]
+- Manually Suppressed from Email Marketing [Klaviyo]
+- Clicked Email [Klaviyo]
+- Reparatie aanvraag [API]
+- Started Checkout [WooCommerce]
+- Contactformulier [API]
+- Unsubscribed from List [Klaviyo]
+- unsubscribe_page_submit [Klaviyo]
+- subscribe_page_view [Klaviyo]

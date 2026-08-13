@@ -181,6 +181,8 @@ function leesLead(item) {
 /** Lead met producten uit de beste bron: leadtekst, anders het RP-offertedocument. */
 async function leesLeadCompleet(item) {
   const lead = leesLead(item);
+  // TAALREGEL (Daimy 13-08): Engelstalige klant → alleen Sjoerd, nooit Joey.
+  try { lead.engels = require('./lib/taal-voorkeur.js').isEngels(lead.telefoon, item.id); } catch { lead.engels = false; }
   const offerte = await leesOfferte(item); // ook voor de RP-nummers (sheet-sleutel)
   lead.rpNummers = offerte.nummers || [];
   lead.rpDatums = offerte.datums || [];
@@ -631,7 +633,7 @@ async function main() {
 
     // Beste slot over beide inmeters heen: wie het goedkoopst kan, krijgt hem.
     let beste = [];
-    for (const inm of INMETERS) {
+    for (const inm of inmetersVoor(lead)) {
       try {
         const s = await zoekSlots({
           agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
@@ -876,7 +878,7 @@ async function combiPas(wachtenden, agenda, regels, dash = null) {
     for (let volg = 0; volg < leden.length; volg++) {
       const w = leden[volg];
       let beste = [];
-      for (const inm of INMETERS) {
+      for (const inm of inmetersVoor(lead)) {
         try {
           const sl = await zoekSlots({
             agenda: agenda[inm.naam], adres: w.lead.volledigAdres, duurMin: w.duur,
@@ -913,6 +915,11 @@ async function combiPas(wachtenden, agenda, regels, dash = null) {
 /** Minimaal 3 tijden garanderen (Daimy 06-08: "stuur je dan ook altijd 3 opties?" —
  * het knoppen-template heeft er altijd 3 nodig). Te weinig? Dan verder vooruit
  * kijken (dubbele horizon). Lukt ook dat niet, dan wordt er NIET verstuurd. */
+// Welke inmeters mogen deze lead doen? Engelstalig = alleen Sjoerd (Daimy 13-08).
+function inmetersVoor(lead) {
+  return lead?.engels ? INMETERS.filter((i) => i.naam === 'Sjoerd') : INMETERS;
+}
+
 async function zorgVoorDrieOpties(lead, duur, agenda, huidigAanbod) {
   if (huidigAanbod.length >= 3) return huidigAanbod;
   // Getrapte horizon (09-08): eerst 30 roosterdagen, en pas als het er dán nog geen
@@ -921,7 +928,7 @@ async function zorgVoorDrieOpties(lead, duur, agenda, huidigAanbod) {
   // maar één keuze over — terwijl er verderop wel plek is.
   for (const horizon of [30, 60]) {
     let beste = [];
-    for (const inm of INMETERS) {
+    for (const inm of inmetersVoor(lead)) {
       try {
         const sl = await zoekSlots({
           agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
@@ -1440,7 +1447,7 @@ async function verwerkDashboardVerzoek(m) {
       if (!aanbod.length) throw new Error('alle voorgestelde tijden zijn inmiddels bezet — ververs het dashboard');
     } else {
       let beste = [];
-      for (const inm of INMETERS) {
+      for (const inm of inmetersVoor(lead)) {
         const sl = await zoekSlots({
           agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
           werkdagen: werkdagenVoor(inm.naam, m.wilEerder ? 30 : undefined),

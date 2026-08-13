@@ -262,6 +262,15 @@ async function main() {
         if (alGemeld && statusPer[token] !== 'open') continue;
         if (!alGemeld) { gemeld[sleutel] = new Date().toISOString(); meldingen++; }
         const tekst = String(m.body_plain || m.message || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 400);
+        // TAALREGEL (Daimy 13-08): schrijft de klant Engels, registreer dat — de planner
+        // plant Engelstaligen dan automatisch bij Sjoerd (Joeys Engels is niet goed genoeg).
+        try {
+          const { lijktEngels, zetEngels, isEngels } = require('./lib/taal-voorkeur.js');
+          if (lijktEngels(tekst) && !isEngels(info.telefoon)) {
+            zetEngels(info.telefoon, 'reply-monitor ticket ' + ticketId);
+            await telegram(`🇬🇧 ${info.naam} schrijft Engels — vanaf nu automatisch bij Sjoerd ingepland (regel 13-08). Loopt er al een voorstel bij Joey, kijk daar even naar.`);
+          }
+        } catch { /* taaldetectie is extra */ }
         const reeksTekst = reeks
           .map((x) => String(x.body_plain || x.message || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim())
           .filter(Boolean).join('\n').slice(0, 800);

@@ -18,9 +18,21 @@
   scripts/email/FLOWS.md). Memory-index had er geen pointer naar → nu wel
   (project_sonty_email). Backfill die Daimy vroeg was dus al gedaan.
 - **Opdracht Daimy 13-08**: alles mag ingericht, maar NIETS versturen; eerst controleert
-  Claude elke mail (visueel, UX/UI, spelling, stijl, links), daarna checkt Daimy mail
-  voor mail. Status: 18 templates vers gerenderd (72 previews + 15 randgevallen),
-  stijlcheck/linkcheck/beeldcheck groen, 3 adversariële reviewers gedraaid.
+  Claude elke mail, daarna checkt Daimy mail voor mail. GEDAAN: 3 adversariële reviewers
+  vonden 30+ fouten (o.a. Tanya-notitie als productnaam, dode reviewlink, openingstijden
+  9:00 i.p.v. 9:30, kapotte "daar"-fallback, congruentiefouten, receptiefoto als
+  showroom). Alles gefixt: aanhef nu als sync-veld sonty_aanhef (16.516 profielen
+  bijgewerkt), netProduct filtert notities, echte Google-reviewlink (cid 6570478327481950083),
+  4 nieuwe visueel geverifieerde foto's op CDN, akkoord-stap afgevinkt, routetip in
+  uitnodiging. Herkeuring: GOEDGEKEURD, alle 13 punten opgelost. Templates gesynct naar
+  Klaviyo, flows UIT. Alle 18 mails als screenshot naar Daimy (13-08 ~19:00) met vragen
+  V4-V7 (cijferclaims 3000+/10+jr/24u, 24-uursbelofte welkom, officiële reviewlink,
+  voorraad-3-weken-claim). WACHT OP: akkoord per mail van Daimy, dan flows bouwen in
+  volgorde uit scripts/email/FLOWS.md. LET OP voor de flowbouw: mails met offertekaart
+  die direct na een event triggeren (RP1/G1) kunnen kaartvelden missen tot de nachtsync
+  gedraaid heeft; event-properties gebruiken of verzendmoment na de sync leggen.
+- **Nog te doen (mailmarketing)**: wekelijkse cijferbot (klaviyo-week-rapport.js in
+  email-marketing/scripts werkt al; nog koppelen aan conversiesheet + Telegram + cron).
 - REGEL Daimy 13-08: op deze computer niks meer met Olivida, alleen Sonty. De tijdelijke
   ~/olivida/email-marketing-map is verwijderd; de leestools staan nu in
   ~/sonty/email-marketing/scripts/ met de Sonty-key als default.

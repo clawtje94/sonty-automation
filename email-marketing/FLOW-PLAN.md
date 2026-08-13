@@ -14,4 +14,4 @@ LET OP (2026-08-13): het echte, uitvoerende systeem staat in `~/sonty/scripts/em
 
 ## Wekelijkse datasturing (de bot, nog te bouwen)
 
-Wekelijks rapport (script klaviyo-week-rapport.js in ~/olivida/email-marketing/scripts, werkt op elke key via KLAVIYO_KEY_FILE): per flow-mail en campagne ontvangers, clicks, conversies, omzet, RPR, unsub- en spamrate, afgezet tegen de benchmarks in KENNISBANK.md. Koppelen aan de Sonty-conversiemeting (akkoord = inkoopbedrag in sheet, per tabblad) en de mijlpalen-tijdlijn. Output wekelijks via Telegram met voorstellen; wijzigingen pas na akkoord.
+Wekelijks rapport (script scripts/klaviyo-week-rapport.js in deze map, default Sonty-key): per flow-mail en campagne ontvangers, clicks, conversies, omzet, RPR, unsub- en spamrate, afgezet tegen de benchmarks in KENNISBANK.md. Koppelen aan de Sonty-conversiemeting (akkoord = inkoopbedrag in sheet, per tabblad) en de mijlpalen-tijdlijn. Output wekelijks via Telegram met voorstellen; wijzigingen pas na akkoord.

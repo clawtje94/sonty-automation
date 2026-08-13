@@ -1,4 +1,4 @@
-# Kennisbank e-mailmarketing — Olivida (Klaviyo)
+# Kennisbank e-mailmarketing — Sonty (Klaviyo)
 
 Bijgewerkt: 2026-08-13. Bronnen onderaan per sectie. Dit is de basis waar de mailmarketing-bot op stuurt.
 
@@ -27,7 +27,7 @@ Bijgewerkt: 2026-08-13. Bronnen onderaan per sectie. Dit is de basis waar de mai
 - **Abandoned cart/checkout** (trigger: Checkout Started / Added to Cart): 3 mails op ~1u / 24u / 72u. Korting pas in mail 3, eerst waarde en bezwaren wegnemen.
 - **Browse abandonment** (trigger: Viewed Product, geen order): 1–2 mails, zachter dan cart-flow; hoog volume want veel meer mensen bekijken dan winkelwagenen.
 - **Post-purchase**: 3–7 dagen tussenruimte; orderbevestiging → gebruikstips/routine-educatie → reviewverzoek → cross-sell. GEEN korting nodig, relatie is al warm.
-- **Replenishment/tweede bestelling**: timing op verbruikscyclus van het product (skincare: 30–60–90 dagen afhankelijk van formaat). Voor Olivida deels gedekt door "Tweede bestelling"-flows.
+- **Replenishment/tweede aankoop**: timing op de natuurlijke vervolgcyclus van het product; bij Sonty is dat cross-sell (screens erbij, horren, binnenzonwering) maanden na de montage.
 - **Winback**: 3 mails richting 90+ dagen inactieve kopers; korting hier wél gepast.
 - **Sunset**: laatste poging bij langdurig niet-engaged, daarna onderdrukken. Wie klikt wordt automatisch uit de flow gehaald.
 - Discountstrategie samengevat: korting in cart-mail 3, welcome-mail 4 en winback; nooit standaard in post-purchase/VIP.
@@ -37,12 +37,12 @@ Bijgewerkt: 2026-08-13. Bronnen onderaan per sectie. Dit is de basis waar de mai
 - Gmail/Yahoo bulk-eisen (5000+/dag): SPF + DKIM + DMARC verplicht en correct (SPF max 10 DNS-lookups), one-click unsubscribe (RFC 8058 List-Unsubscribe-Post header), spamklachten < 0,3%. Sinds nov 2025 weigert Gmail non-compliant bulkmail hard (5xx).
 - Werkdoel: spam rate < 0,1%. Bij ≥ 0,3% vervalt Gmails "delivery mitigation" en moet je 7 dagen aaneengesloten onder 0,3% zitten voor herstel.
 - Lijsthygiëne: never-engaged 180+ dagen → onderdrukken; ooit-engaged maar 180 dagen stil → sunset-flow, geen reactie → onderdrukken.
-- Campagnes alleen naar engaged segmenten sturen (Olivida heeft al 90/180/365-dagen engaged segmenten — goed teken).
+- Campagnes alleen naar engaged segmenten sturen (engaged-segmenten opzetten hoort bij de inrichting).
 
 ## 5. Segmentatie
 
 - Top-performers segmenteren op: aankooprecentie (RFM), productcategorie-affiniteit en engagement-tier — nooit één broadcast naar alles.
-- Zero-party data is goud: Olivida's SkinQuiz (events "Completed SkinQuiz" komen al binnen via API) geeft huidtype/behoeften → persoonlijke flows en productaanbevelingen. Dit is Olivida's unieke troef; weinig merken hebben dit.
+- Zero-party data is goud: bij Sonty zijn dat de offerte-properties uit de dagelijkse sync (product, categorie, fase, bedrag) waarmee mails per klant persoonlijk en relevant worden.
 
 ## 6. Klaviyo API — wat de bot kan (revision 2026-07-15)
 
@@ -50,14 +50,6 @@ Bijgewerkt: 2026-08-13. Bronnen onderaan per sectie. Dit is de basis waar de mai
 - **Reporting API** (voor wekelijkse sturing): `POST /api/flow-values-reports/`, `/api/campaign-values-reports/`, plus series-varianten (per dag/week) en form/segment-rapporten. Levert exact de UI-cijfers: opens, clicks, conversies, revenue per flow/campagne.
 - **Query Metric Aggregates**: SQL-achtige aggregatie op events (Placed Order gegroepeerd op flow/campagne etc.).
 - Overige relevante endpoints: lists/segments CRUD, profiles, templates, campaigns CRUD.
-
-## 7. Huidige Olivida-stand (gemeten 2026-08-13, zie klaviyo-stand-2026-08-13.txt)
-
-- 17 flows (NL+EN): welcome, abandoned cart, post-purchase, skinquiz, tweede bestelling, back-in-stock. Gebouwd door Fleur en MIJU; er wordt actief in gewerkt (V2-drafts, vandaag nog updates).
-- Campagneritme: ~2 campagnes/week in NL én EN, contentgedreven (zomer/SPF-thema's), soms kortingsacties.
-- Shopify-integratie levert alle benodigde triggers: Placed Order, Checkout Started, Added to Cart, Viewed Product, Refunded/Cancelled, Delivered Shipment.
-- Engaged-segmenten 90/180/365 dagen bestaan al, ook "unsubscribe rate verlagen"-segmenten.
-- **Gaten t.o.v. best practice**: geen browse abandonment, geen winback, geen sunset-flow, en Delivered Shipment (bezorgmoment!) lijkt onbenut als trigger.
 
 ## Bronnen
 

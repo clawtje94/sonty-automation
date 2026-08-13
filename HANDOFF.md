@@ -21,8 +21,9 @@
   Claude elke mail (visueel, UX/UI, spelling, stijl, links), daarna checkt Daimy mail
   voor mail. Status: 18 templates vers gerenderd (72 previews + 15 randgevallen),
   stijlcheck/linkcheck/beeldcheck groen, 3 adversariële reviewers gedraaid.
-- Olivida-Klaviyo draait al vol (17 flows van Fleur/MIJU, NIET aanraken zonder akkoord);
-  stand in ~/olivida/email-marketing/onderzoek/klaviyo-stand-2026-08-13.txt.
+- REGEL Daimy 13-08: op deze computer niks meer met Olivida, alleen Sonty. De tijdelijke
+  ~/olivida/email-marketing-map is verwijderd; de leestools staan nu in
+  ~/sonty/email-marketing/scripts/ met de Sonty-key als default.
 
 ## 13-08: BOEKEN LOOPT NU VIA MICROSOFT BOOKINGS — DE ENIGE JUISTE MANIER
 - **Les van vandaag (grote fout hersteld)**: de planner maakte kale agenda-afspraken.

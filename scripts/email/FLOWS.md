@@ -38,8 +38,11 @@ Samen bestrijkt dit dag 2 tot 45, wat aansluit op de gemeten doorlooptijd: media
 split op profieleigenschap `sonty_product_kort`:
 - bevat "screens" → Sonty | C1 Reactivering (screens)
 - bevat "rolluiken" → Sonty | C1 Reactivering (rolluiken)
+- bevat "knikarm" → Sonty | C1 Reactivering (knikarm)
+- bevat "pergola" → Sonty | C1 Reactivering (pergola)
+- bevat "markies" → Sonty | C1 Reactivering (markies)
 - `sonty_categorie` = binnen → Sonty | C1 Reactivering (binnen)
-- anders → Sonty | C1 Reactivering (basis, knikarm-beeld)
+- anders (uitvalscherm, horren, overig) → Sonty | C1 Reactivering (basis)
 
 | Stap | Wacht | Sjabloon | Voorwaarde |
 |---|---|---|---|

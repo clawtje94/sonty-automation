@@ -720,6 +720,7 @@ SJABLONEN['sonty-afsluiter'] = mail({
    de fotomap liegen, dus elke foto is bekeken). De flow kiest de variant met een conditional
    split op sonty_product_kort / sonty_categorie; de basisvariant is het vangnet. */
 
+const REVIEW_AANRADER = ['Sharelle Neugebauer', 'Sonty BV is een echte aanrader en wij zullen jullie zeker aanbevelen! Klantgerichtheid en professionaliteit staat hoog in het vaandel. Enthousiast personeel!'];
 const REVIEW_SCREENS = ['Rick Kapper', 'Wat zijn wij heel blij met het bedrijf Sonty uit Rijswijk. Zij hebben bij ons 2 screens aangebracht. Top service.'];
 const REVIEW_ROLLUIK_PLAATSING = ['Sidney van der Zwart', 'Voor en achter op de 2e verdieping rolluiken van Sonty laten plaatsen. Perfecte service, binnen 2,5 uur werden de rolluiken geplaatst. Monteurs super vriendelijk en correct.'];
 
@@ -762,6 +763,17 @@ SJABLONEN['sonty-reactivering-1-rolluiken'] = maakReactivering1({
 SJABLONEN['sonty-reactivering-1-binnen'] = maakReactivering1({
   tpl: 'sonty-reactivering-1-binnen', foto: 'eigen/showroom-ramen.webp', alt: 'Raamdecoratie in de showroom van Sonty',
   caption: 'Raamdecoratie in onze showroom in Rijswijk', rev: REVIEW_ALLES });
+// LET OP: 'uitvalscherm-balkon.webp' toont in werkelijkheid een knikarmscherm boven een terras
+// (bestandsnamen in de fotomap liegen; met eigen ogen gecontroleerd). Zomers beeld, past hier.
+SJABLONEN['sonty-reactivering-1-knikarm'] = maakReactivering1({
+  tpl: 'sonty-reactivering-1-knikarm', foto: 'eigen/uitvalscherm-balkon.webp', alt: 'Een knikarmscherm van Sonty boven een terras',
+  caption: 'Een knikarmscherm bij een van onze klanten', rev: REVIEW_TRAJECT });
+SJABLONEN['sonty-reactivering-1-pergola'] = maakReactivering1({
+  tpl: 'sonty-reactivering-1-pergola', foto: 'eigen/pergola-tuin-1.webp', alt: 'Een pergola van Sonty in de tuin',
+  caption: 'Een pergola bij een van onze klanten', rev: REVIEW_AANRADER });
+SJABLONEN['sonty-reactivering-1-markies'] = maakReactivering1({
+  tpl: 'sonty-reactivering-1-markies', foto: 'eigen/markiezen-woonhuis.webp', alt: 'Markiezen van Sonty op een woonhuis',
+  caption: 'Markiezen bij een van onze klanten', rev: REVIEW_AANRADER });
 
 /* ── S1: na de bouwvak (seizoensmoment, verzoek Daimy 13-08) ──
    Voor de zomerse offertes die stilvielen: vakantie voorbij, klusplannen worden weer opgepakt.

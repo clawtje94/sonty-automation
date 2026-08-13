@@ -111,6 +111,27 @@
    "slot": "showroom-blok",
    "label": "Foto in het vaste showroomblok",
    "standaard": "eigen/showroom-tafel.webp"
+  },
+  {
+   "template": "sonty-reactivering-1-knikarm",
+   "klaviyo": "Sonty | C1 Reactivering (knikarm)",
+   "slot": "hero",
+   "label": "Projectfoto (knikarm)",
+   "standaard": "eigen/uitvalscherm-balkon.webp"
+  },
+  {
+   "template": "sonty-reactivering-1-pergola",
+   "klaviyo": "Sonty | C1 Reactivering (pergola)",
+   "slot": "hero",
+   "label": "Projectfoto (pergola)",
+   "standaard": "eigen/pergola-tuin-1.webp"
+  },
+  {
+   "template": "sonty-reactivering-1-markies",
+   "klaviyo": "Sonty | C1 Reactivering (markies)",
+   "slot": "hero",
+   "label": "Projectfoto (markies)",
+   "standaard": "eigen/markiezen-woonhuis.webp"
   }
  ]
 }

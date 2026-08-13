@@ -29,7 +29,8 @@ const H = { Authorization: 'Klaviyo-API-Key ' + KLAVIYO_API_KEY, accept: 'applic
 const FOTOS = ['kantoor-stalen', 'knikarm-gevel', 'montage-team-1', 'pergola-tuin-2',
                'showroom-opening', 'showroom-ramen', 'showroom-tafel', 'sonty-bus', 'team-klant-blij',
                // 13-08 na visuele QA-ronde: betere beelden, inhoud met eigen ogen gecontroleerd
-               'showroom-overzicht', 'pergola-tuin-1', 'knikarm-resultaat', 'montage-cassette'];
+               'showroom-overzicht', 'pergola-tuin-1', 'knikarm-resultaat', 'montage-cassette',
+               'uitvalscherm-balkon', 'markiezen-woonhuis', 'rolluik-raam', 'screen-tuindeuren'];
 
 async function upload(bestandspad, naam, type) {
   const fd = new FormData();

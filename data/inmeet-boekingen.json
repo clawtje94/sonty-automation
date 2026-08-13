@@ -658,5 +658,103 @@
   "aanbodToken": "feb81742cb121ce42de85da1ec18cdb1",
   "geboektOp": "2026-08-11T13:53:56.391Z",
   "status": "geboekt"
+ },
+ "987fb000-5039-4ba7-a48e-2ac9f12d501e": {
+  "naam": "Deborah Melgerd",
+  "telefoon": "+31638281433",
+  "email": "deborahmelgerd@gmail.com",
+  "planadoJobUuid": "1f196811-a927-6e20-a413-423b3c3553d1",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVjqHZjAAA=",
+  "grippNr": "6468",
+  "sheet": {
+   "tab": "Aug 2026",
+   "rij": 522,
+   "kolomInkoop": 23
+  },
+  "aankomst": "2026-09-15T12:40:00.000Z",
+  "inmeter": "Sjoerd",
+  "duurMin": 20,
+  "aanbodToken": "8a64a7de9422026b0b8a3cebe767981f",
+  "geboektOp": "2026-08-12T19:07:58.747Z",
+  "status": "geboekt"
+ },
+ "77b70ceb-d3f1-4834-82ff-24b7d71e7f81": {
+  "naam": "Koen de Geus",
+  "telefoon": "0638318514",
+  "email": "koentjedegeus@gmail.com",
+  "planadoJobUuid": "1f1968a5-94e0-6c40-a413-423b3c3553d1",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVjwec-AAA=",
+  "grippNr": "6469",
+  "sheet": {
+   "tab": "Aug 2026",
+   "rij": 681,
+   "kolomInkoop": 23
+  },
+  "aankomst": "2026-09-23T09:35:00.000Z",
+  "inmeter": "Sjoerd",
+  "duurMin": 30,
+  "aanbodToken": "9dee8f022dd891b7f749ede07d6f852c",
+  "geboektOp": "2026-08-12T20:14:15.274Z",
+  "status": "geboekt"
+ },
+ "175f10bc-9ea6-4466-b40c-3db829a52558": {
+  "naam": "Verkerk",
+  "telefoon": "0629192189",
+  "email": "sandraverkerk1@hotmail.com",
+  "planadoJobUuid": "1f19693e-662c-60d0-8cdf-4ef0fd8846da",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVjwedCAAA=",
+  "grippNr": "6470",
+  "sheet": {
+   "tab": "Aug 2026",
+   "rij": 604,
+   "kolomInkoop": 23
+  },
+  "aankomst": "2026-08-20T11:15:00.000Z",
+  "inmeter": "Joey",
+  "duurMin": 25,
+  "aanbodToken": "96733ecd6a01e4dba8a33562f5ceb6fe",
+  "geboektOp": "2026-08-12T21:22:40.662Z",
+  "status": "geboekt"
+ },
+ "836f131d-75e0-415d-89ea-35f96cab0385": {
+  "naam": "Mandy Princen",
+  "telefoon": "+31614006814",
+  "email": "mandy.princen@lijbrandt.nl",
+  "planadoJobUuid": "1f196e57-dab3-66e0-ad23-46ca03d2e170",
+  "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVj1x1vAAA=",
+  "grippNr": "6353",
+  "sheet": {
+   "tab": "Juli 2026 ",
+   "rij": 586,
+   "kolomInkoop": 23
+  },
+  "aankomst": "2026-10-12T11:45:00.000Z",
+  "inmeter": "Joey",
+  "duurMin": 20,
+  "aanbodToken": "b440964392f735c7ca556e2244e3e150",
+  "geboektOp": "2026-08-13T07:06:32.918Z",
+  "status": "geboekt"
+ },
+ "c7f83bfd-1263-44fb-a340-307888534872": {
+  "naam": "Debby van van Haren",
+  "telefoon": "+31644655991",
+  "email": "debbyvanharen@live.nl",
+  "planadoJobUuid": "1f196f84-083f-6750-8cdf-4ef0fd8846da",
+  "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEuIc3iwAAAA==",
+  "grippNr": "6471",
+  "sheet": {
+   "tab": "Juli 2026 ",
+   "rij": 1996,
+   "kolomInkoop": 23
+  },
+  "aankomst": "2026-08-20T12:20:00.000Z",
+  "inmeter": "Joey",
+  "duurMin": 35,
+  "aanbodToken": "d928a19dc260c926f281beffce11262c",
+  "geboektOp": "2026-08-13T09:21:02.776Z",
+  "status": "geboekt",
+  "geannuleerdOp": "2026-08-13T10:46:51.551Z",
+  "verzetVan": "2026-08-24T07:00:00.000Z",
+  "verzetReden": "Sjoerd op vakantie; akkoord klant via Daimy 13-08"
  }
 }

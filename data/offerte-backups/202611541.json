@@ -1,0 +1,29 @@
+{
+  "quotationNumber": "202611541",
+  "documentId": "6d9a52a3-9d3d-462e-b389-44e26fb3d4b0",
+  "name": "Leen Koppenol",
+  "timestamp": "2026-08-13T07:00:26.194Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "Square 85/100\nBreedte: 3201 mm\nHoogte: 1000 mm\nKastmaat 105 mm\nFrame Kleur: RAL 9005 structuur\nKleur doek: NTB\nOnderlat: Design\nBediening: Draaischakelaar\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 826.1,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Square 85/100\nBreedte: 3601 mm\nHoogte: 1000 mm\nKastmaat 105 mm\nFrame Kleur: RAL 9005 structuur\nKleur doek: NTB\nOnderlat: Design\nBediening: Draaischakelaar\nMontage: NTB\nType geleider: NTB\n\nGarantie:\n- 5 jaar op het product\n- 7 jaar op de motor",
+      "pricePerUnit": 880,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage screen solar\n- Montage\n- Klein materiaal\n- Afstellen motor\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 175,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

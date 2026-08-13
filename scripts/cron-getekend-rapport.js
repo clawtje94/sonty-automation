@@ -41,6 +41,7 @@ async function telegram(text) {
   const recent = items.filter(i => i.item_subject?.id && i.timestamp_created > cutoff);
 
   const nieuw = [];
+  const cohortRows = []; // {klant, gemaakt, status, documentId} — voor de cohort-meting onderaan
   let gescand = 0;
   for (const item of recent) {
     let docs;
@@ -48,6 +49,7 @@ async function telegram(text) {
       docs = (await rpGet(`/document-service/v1/${PID}/quotations?lead_configuration_id=${item.item_subject.id}`)).quotationDatas || [];
     } catch { continue; }
     gescand++;
+    for (const d of docs) cohortRows.push({ klant: item.summary, gemaakt: d.quotationCreationTimestamp, status: d.quotationStatus, documentId: d.documentId });
     for (const d of docs) {
       if (d.quotationStatus !== 'ACCEPTED') continue;
       if (state.gemeld[d.documentId]) continue;
@@ -167,6 +169,40 @@ async function telegram(text) {
         if (regels.length) conversieBlok = '\n\n📊 Conversie per week (sheet, methode Daimy):\n' + regels.slice(-8).join('\n');
       } catch (e) { conversieBlok = '\n\n📊 Conversieblok niet beschikbaar: ' + e.message.slice(0, 60); }
 
+      // COHORT-METING (Daimy 13-08: "wat merk je aan de conversie na de prijsstijging,
+      // en de gemiddelde akkoord-tijd, gemeten vanaf de bot"). Eerlijke maat: getekend
+      // binnen 3 dagen na de offerte — gelijk voor elk cohort, ongeacht leeftijd.
+      // Tekentijd komt uit het documentdetail (veld "timestamp" bij ACCEPTED).
+      let cohortBlok = '';
+      try {
+        const perKlant = {};
+        for (const r of cohortRows) { if (!perKlant[r.klant] || r.gemaakt > perKlant[r.klant].gemaakt) perKlant[r.klant] = r; }
+        const uniek = Object.values(perKlant);
+        for (const r of uniek.filter((x) => x.status === 'ACCEPTED')) {
+          try {
+            const det = await rpGet(`/document-service/v1/${PID}/quotations/${r.documentId}`);
+            const m2 = JSON.stringify(det).match(/"timestamp":(\d{13})/);
+            if (m2) r.getekend = +m2[1];
+          } catch { /* detail niet op te halen: telt niet mee in tekentijd */ }
+          await new Promise((rr) => setTimeout(rr, 150));
+        }
+        const COHORTEN = [
+          ['vóór bot', (t) => t < Date.parse('2026-07-16')],
+          ['bot live 16/7-2/8', (t) => t >= Date.parse('2026-07-16') && t < Date.parse('2026-08-03')],
+          ['na prijsverhoging 3/8+', (t) => t >= Date.parse('2026-08-03')],
+        ];
+        const regels = [];
+        for (const [naam2, f] of COHORTEN) {
+          const co = uniek.filter((r) => f(r.gemaakt));
+          const oud3 = co.filter((r) => Date.now() - r.gemaakt >= 3 * 86400000);
+          const binnen3 = oud3.filter((r) => r.getekend && r.getekend - r.gemaakt <= 3 * 86400000);
+          const uren = co.filter((r) => r.getekend).map((r) => (r.getekend - r.gemaakt) / 86400000).sort((a, b2) => a - b2);
+          const med = uren.length ? uren[Math.floor(uren.length / 2)] : null;
+          if (oud3.length >= 10) regels.push(`• ${naam2}: ${(100 * binnen3.length / oud3.length).toFixed(1)}% tekent binnen 3 dgn${med != null ? `, mediaan tekentijd ${med.toFixed(1)} dgn` : ''} (n=${oud3.length})`);
+        }
+        if (regels.length) cohortBlok = '\n\n⏱️ Cohort-meting (getekend binnen 3 dagen na offerte):\n' + regels.join('\n');
+      } catch (e) { console.error('cohort-meting overgeslagen:', e.message.slice(0, 60)); }
+
       const details = (stats.overtuigd_details || []).length ? '\n\nOvertuigd:\n' + stats.overtuigd_details.map(d => '• ' + d).join('\n') : '';
 
       // EEN AKKOORD-GETAL (Daimy 10-08). Online tekenen en mondeling ja zeggen in de
@@ -198,7 +234,7 @@ async function telegram(text) {
         (akkoordLijst.length ? '\n' + akkoordLijst.map((a) => `   - ${a.naam} (${a.via})`).join('\n') : '') + '\n' +
         `• Showroomafspraken (los): ${stats.showroom ?? '?'}\n` +
         `• Waarvan overtuigd vanuit twijfel: ${stats.overtuigd ?? '?'}\n` +
-        details + conversieBlok +
+        details + conversieBlok + cohortBlok +
         (stats.samenvatting ? `\n\n${stats.samenvatting}` : '') +
         // "3 dagen en 1111 gesprekken?" (Daimy 12-08): het gesprekstotaal loopt sinds
         // 16 juli, maar de uitkomsten-teller is op 10-08 opnieuw gestart (de oude telde

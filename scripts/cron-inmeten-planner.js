@@ -1305,7 +1305,7 @@ async function verwerkAanbiedingen() {
         const { maakDefinitief, verwijderOpties } = require('./lib/outlook-opties.js');
         await verwijderOpties(state.opties?.[a.token]);
         delete state.opties?.[a.token];
-        outlookEventId = await maakDefinitief({ slot: gekozenSlot, naam: a.lead.naam, telefoon: a.lead.telefoon, adres: a.lead.volledigAdres, duurMin: a.duurMin });
+        outlookEventId = await maakDefinitief({ slot: gekozenSlot, naam: a.lead.naam, telefoon: a.lead.telefoon, adres: a.lead.volledigAdres, duurMin: a.duurMin, email: a.lead.email });
       } catch (e) {
         await telegram(`⚠️ Outlook-afspraak na boeking mislukt voor ${a.lead.naam}: ${e.message.slice(0, 100)} — Planado is WEL geboekt; agenda handmatig aanvullen.`);
       }
@@ -1492,7 +1492,7 @@ async function verwerkDashboardVerzoek(m) {
   let outlookEventId = null;
   try {
     const { maakDefinitief } = require('./lib/outlook-opties.js');
-    outlookEventId = await maakDefinitief({ slot: { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter }, naam: lead.naam, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur });
+    outlookEventId = await maakDefinitief({ slot: { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter }, naam: lead.naam, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur, email: lead.email });
   } catch (e) {
     await telegram(`⚠️ Outlook-afspraak bij winkel-boeking mislukt voor ${lead.naam}: ${e.message.slice(0, 100)}`);
   }

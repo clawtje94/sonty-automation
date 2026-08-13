@@ -62,20 +62,27 @@ async function verwijderOpties(ids) {
   }
 }
 
-/** Zet de definitieve afspraak in Outlook, in het bestaande formaat mét inmeter. */
-async function maakDefinitief({ slot, naam, telefoon, adres, duurMin }) {
+/** Zet de definitieve afspraak in Outlook, in het bestaande formaat mét inmeter.
+ *  DE KLANT STAAT ER ALTIJD BIJ ALS GENODIGDE (Daimy 13-08, hard geleerd: het team
+ *  stuurt de bevestigingen vanuit Outlook, dus een afspraak zonder klant-mailadres
+ *  betekent dat de klant NIETS krijgt — dat is bij tientallen boekingen misgegaan).
+ *  Outlook mailt de genodigde automatisch de uitnodiging, en wijzigingen gaan mee. */
+async function maakDefinitief({ slot, naam, telefoon, adres, duurMin, email }) {
   const OH = owaHeaders();
   const calId = await kalenderId(OH);
   const eind = new Date(+new Date(slot.aankomst) + duurMin * 60000);
   const mail = INMETER_MAIL[slot.inmeter];
+  const attendees = [];
+  if (mail) attendees.push({ EmailAddress: { Address: mail, Name: slot.inmeter }, Type: 'Required' });
+  if (email && /@/.test(email)) attendees.push({ EmailAddress: { Address: email, Name: naam }, Type: 'Required' });
   const r = await fetch(`https://outlook.office.com/api/v2.0/me/calendars/${calId}/events`, {
     method: 'POST', headers: OH,
     body: JSON.stringify({
       Subject: `Inmeten — ${naam}`,
       Start: owaTijd(slot.aankomst), End: owaTijd(eind),
       Location: { DisplayName: adres || '' },
-      Body: { ContentType: 'Text', Content: `Geboekt door de inmeet-planner na klantkeuze.\nTelefoonnummer: ${telefoon || '-'}` },
-      Attendees: mail ? [{ EmailAddress: { Address: mail, Name: slot.inmeter }, Type: 'Required' }] : [],
+      Body: { ContentType: 'Text', Content: `Geboekt door de inmeet-planner na klantkeuze.\nTelefoonnummer: ${telefoon || '-'}\nE-mail: ${email || '-'}` },
+      Attendees: attendees,
     }),
   });
   if (!r.ok) throw new Error('Outlook-afspraak aanmaken: HTTP ' + r.status);

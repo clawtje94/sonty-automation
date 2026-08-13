@@ -475,7 +475,8 @@ test('planner draagt vanaf/nietDeze door alle codepaden (ook de aanvuller)', () 
   assert.ok(/ligt vóór de datum die de klant zelf noemde/.test(bron), 'poort op de vanaf-datum ontbreekt');
   const monitor = require('fs').readFileSync(__dirname + '/../scripts/cron-aanbod-replies.js', 'utf8');
   assert.ok(/reeksTekst/.test(monitor), 'monitor moet berichten-reeksen als geheel lezen');
-  assert.ok(/nietDeze: \(aanbod\?\.slots/.test(monitor), 'monitor moet de afgewezen tijden meesturen');
+  assert.ok(/nietDeze: gemeld\['afgewezen:/.test(monitor), 'monitor moet ALLE ooit-afgewezen tijden meesturen (cumulatief, Mandy 13-08)');
+  assert.ok(/replyrondes:/.test(monitor), 'pingpong-rem: max 2 automatische nieuwe voorstellen per klant per dag');
 });
 
 // Taico deel 2 (10-08): "Dinsdag 8 september 1600 is prima" — de poort las "1600 is"

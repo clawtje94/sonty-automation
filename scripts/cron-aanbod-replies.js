@@ -299,6 +299,25 @@ async function main() {
             console.log(`  ${info.naam}: intent ${duiding.intent}${duiding.dagen.length ? ' (dagen ' + duiding.dagen.join(',') + ')' : ''}`);
 
             if (duiding.intent === 'ander-moment') {
+              // PINGPONG-REM (Mandy 13-08: vier afwijzingen in 25 minuten, en het
+              // systeem stuurde steeds een nieuw voorstel — zelfs 23 sep opnieuw nadat
+              // ze die al had afgewezen, omdat nietDeze alleen het LAATSTE aanbod
+              // uitsloot). Nu: alle ooit-afgewezen tijden stapelen per klant, en na
+              // 2 automatische nieuwe voorstellen per dag stopt de machine en gaat
+              // het naar een mens.
+              const rpIdRem = rpItemPer[token] || aanbod?.lead?.rpItemId || info.telefoon;
+              gemeld['afgewezen:' + rpIdRem] = [...new Set([...(gemeld['afgewezen:' + rpIdRem] || []), ...((aanbod?.slots || []).map((sl) => sl.aankomst))])];
+              const rondeSleutel = 'replyrondes:' + rpIdRem + ':' + new Date().toISOString().slice(0, 10);
+              gemeld[rondeSleutel] = (gemeld[rondeSleutel] || 0) + 1;
+              if (gemeld[rondeSleutel] > 2) {
+                await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, {
+                  method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+                  body: JSON.stringify({ status: 'verlopen' }),
+                }).catch(() => {});
+                await bevestigOntvangst(ticketId, info.naam, 'Dank je wel! Ik laat een collega even persoonlijk meekijken naar een moment dat echt goed past, je hoort snel van ons.');
+                await telegram(`📞 ${info.naam} heeft vandaag al ${gemeld[rondeSleutel] - 1}x een automatisch voorstel afgewezen (${duiding.samenvatting}) — ik stop met automatisch sturen, mens nodig / belscherm.`);
+                continue;
+              }
               // oude aanbod sluiten en meteen nieuwe tijden laten sturen, met zijn voorkeur
               await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, {
                 method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
@@ -317,7 +336,7 @@ async function main() {
                   // wat de klant uitsloot en wat hij net afwees gaat mee: het nieuwe
                   // voorstel mag nooit hetzelfde zijn als wat hij afwees (Taico 10-08)
                   vanaf: duiding.vanaf || undefined,
-                  nietDeze: (aanbod?.slots || []).map((sl) => sl.aankomst),
+                  nietDeze: gemeld['afgewezen:' + rpIdRem] || (aanbod?.slots || []).map((sl) => sl.aankomst),
                 }),
               });
               await bevestigOntvangst(ticketId, info.naam, duiding.dagen.length

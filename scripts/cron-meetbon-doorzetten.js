@@ -108,7 +108,11 @@ async function vangnetPlanadoLinks(state) {
       state.linkGemeld = state.linkGemeld || {};
       if (state.linkGemeld[sleutel]) continue;
       state.linkGemeld[sleutel] = new Date().toISOString();
-      await telegram(`📐 Inmeet-afspraak #${j.serial_no || '?'} (${(desc.split('\n')[0] || 'zonder omschrijving').slice(0, 60)}) heeft geen meetbon-link en ik herken geen Gripp-nummer in de omschrijving. Zet "Gripp <nummer>" in de opdracht-omschrijving of plan via het dashboard, dan koppel ik hem automatisch.`);
+      // Bundelen i.p.v. één bericht per opdracht (13-08: zeven verzette klanten =
+      // zeven losse 📐-berichten in Daimy's ochtend). Verzameld en onderaan als één
+      // melding via de poortwachter verstuurd.
+      global.__meetbonMeldingen = global.__meetbonMeldingen || [];
+      global.__meetbonMeldingen.push(`#${j.serial_no || '?'} ${(desc.split('\n')[0] || 'zonder omschrijving').slice(0, 55)}`);
     }
   }
 }
@@ -139,6 +143,12 @@ async function main() {
         if (!state.adviesGemeld[bon.gripp]) {
           state.adviesGemeld[bon.gripp] = new Date().toISOString();
           fs.writeFileSync(STATE, JSON.stringify(state, null, 2));
+  if ((global.__meetbonMeldingen || []).length) {
+    const { planningTelegram } = require('./lib/telegram-planning.js');
+    await planningTelegram(`📐 ${global.__meetbonMeldingen.length} inmeet-afspraak(en) zonder meetbon-link of Gripp-nummer — actie nodig (Gripp <nummer> in de omschrijving zetten):\n`
+      + global.__meetbonMeldingen.map((m) => '• ' + m).join('\n'));
+    global.__meetbonMeldingen = [];
+  }
           await telegram(`✋ Meetbon ${bon.gripp} (${bon.klant?.naam || '?'}) is compleet en de aanbetaling is binnen, maar er staat nog "advies/weet nog niet" in:\n- ${adviesPunten.join('\n- ')}\n\nNIET automatisch doorgezet naar bestellen. Kantoor moet eerst de keuze maken; daarna zet ik hem door.`);
         }
         console.log(`  ✋ ${bon.gripp}: adviespunten open, niet doorgezet`);

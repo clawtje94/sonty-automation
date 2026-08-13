@@ -268,7 +268,7 @@ async function main() {
           const { lijktEngels, zetEngels, isEngels } = require('./lib/taal-voorkeur.js');
           if (lijktEngels(tekst) && !isEngels(info.telefoon)) {
             zetEngels(info.telefoon, 'reply-monitor ticket ' + ticketId);
-            await telegram(`🇬🇧 ${info.naam} schrijft Engels — vanaf nu automatisch bij Sjoerd ingepland (regel 13-08). Loopt er al een voorstel bij Joey, kijk daar even naar.`);
+            console.log(`  🇬🇧 ${info.naam} als Engelstalig geregistreerd (geen melding — Daimy 13-08)`);
           }
         } catch { /* taaldetectie is extra */ }
         const reeksTekst = reeks

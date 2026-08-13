@@ -1,0 +1,116 @@
+{
+ "slots": [
+  {
+   "template": "sonty-uitnodiging",
+   "klaviyo": "Sonty | A3 Showroom-uitnodiging",
+   "slot": "hero",
+   "label": "Grote foto bovenaan (showroom)",
+   "standaard": "eigen/showroom-overzicht.webp"
+  },
+  {
+   "template": "sonty-uitnodiging",
+   "klaviyo": "Sonty | A3 Showroom-uitnodiging",
+   "slot": "advies",
+   "label": "Adviesgesprek-foto",
+   "standaard": "eigen/kantoor-stalen.webp"
+  },
+  {
+   "template": "sonty-verhaal",
+   "klaviyo": "Sonty | Verhaal",
+   "slot": "hero",
+   "label": "Projectfoto bovenaan",
+   "standaard": "eigen/pergola-tuin-1.webp"
+  },
+  {
+   "template": "sonty-verhaal",
+   "klaviyo": "Sonty | Verhaal",
+   "slot": "monteurs",
+   "label": "Monteursfoto",
+   "standaard": "eigen/montage-cassette.webp"
+  },
+  {
+   "template": "sonty-service",
+   "klaviyo": "Sonty | E1 Service en nazorg",
+   "slot": "bus",
+   "label": "Servicebus-foto",
+   "standaard": "eigen/sonty-bus.webp"
+  },
+  {
+   "template": "sonty-review",
+   "klaviyo": "Sonty | E2 Reviewverzoek",
+   "slot": "team",
+   "label": "Teamfoto onderaan",
+   "standaard": "eigen/team-klant-blij.webp"
+  },
+  {
+   "template": "sonty-afwijzing",
+   "klaviyo": "Sonty | RP5 Na afwijzing",
+   "slot": "showroom",
+   "label": "Showroomfoto",
+   "standaard": "eigen/showroom-tafel.webp"
+  },
+  {
+   "template": "sonty-weer-lente",
+   "klaviyo": "Sonty | W2 Weer, eerste lentedag",
+   "slot": "hero",
+   "label": "Projectfoto bovenaan",
+   "standaard": "eigen/pergola-tuin-1.webp"
+  },
+  {
+   "template": "sonty-weer-donker",
+   "klaviyo": "Sonty | W3 Weer, donkere dagen",
+   "slot": "hero",
+   "label": "Raamdecoratie-foto bovenaan",
+   "standaard": "eigen/showroom-ramen.webp"
+  },
+  {
+   "template": "sonty-crosssell-binnen",
+   "klaviyo": "Sonty | D1 Cross-sell naar binnen",
+   "slot": "hero",
+   "label": "Raamdecoratie-foto bovenaan",
+   "standaard": "eigen/showroom-ramen.webp"
+  },
+  {
+   "template": "sonty-reactivering-1",
+   "klaviyo": "Sonty | C1 Reactivering",
+   "slot": "hero",
+   "label": "Projectfoto (basisvariant)",
+   "standaard": "eigen/knikarm-resultaat.webp"
+  },
+  {
+   "template": "sonty-reactivering-1-screens",
+   "klaviyo": "Sonty | C1 Reactivering (screens)",
+   "slot": "hero",
+   "label": "Projectfoto (screens)",
+   "standaard": "eigen/screen-tuindeuren.webp"
+  },
+  {
+   "template": "sonty-reactivering-1-rolluiken",
+   "klaviyo": "Sonty | C1 Reactivering (rolluiken)",
+   "slot": "hero",
+   "label": "Projectfoto (rolluiken)",
+   "standaard": "eigen/rolluik-raam.webp"
+  },
+  {
+   "template": "sonty-reactivering-1-binnen",
+   "klaviyo": "Sonty | C1 Reactivering (binnen)",
+   "slot": "hero",
+   "label": "Raamdecoratie-foto",
+   "standaard": "eigen/showroom-ramen.webp"
+  },
+  {
+   "template": "sonty-reactivering-2",
+   "klaviyo": "Sonty | C2 Wat er veranderd is",
+   "slot": "monteurs",
+   "label": "Monteursfoto",
+   "standaard": "eigen/montage-cassette.webp"
+  },
+  {
+   "template": "algemeen",
+   "klaviyo": "(alle mails met showroomblok)",
+   "slot": "showroom-blok",
+   "label": "Foto in het vaste showroomblok",
+   "standaard": "eigen/showroom-tafel.webp"
+  }
+ ]
+}

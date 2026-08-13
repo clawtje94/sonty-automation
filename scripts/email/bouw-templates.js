@@ -33,8 +33,19 @@ const UIT = path.join(__dirname, 'dist');
  * Opnieuw uploaden: node scripts/email/fotos-uploaden.js
  */
 const FOTOS = require(path.join(__dirname, '..', '..', 'data', 'email', 'fotos-cdn.json'));
+
+// Fotokeuzes uit het dashboard (/admin/mailfotos op sonty-website), opgehaald met
+// scripts/email/haal-fotokeuzes.js. Ontbreekt het bestand, dan gelden de standaardfoto's.
+let KEUZES = {};
+try { KEUZES = require(path.join(__dirname, '..', '..', 'data', 'email', 'foto-keuzes.json')); } catch { /* geen keuzes = defaults */ }
+const slotFoto = (tpl, slot, standaard) => {
+  const k = (KEUZES[tpl] || {})[slot];
+  return k ? String(k).replace(/^\/images\//, '') : standaard;
+};
 const foto = (bestand) => {
-  const sleutel = String(bestand).replace(/^eigen\//, '').replace(/\.webp$/, '');
+  // Sleutel: bestandsnaam zonder map en extensie, zodat ook gekozen portfolio-foto's
+  // (andere mappen dan eigen/) na uploaden via fotos-uploaden.js gevonden worden.
+  const sleutel = String(bestand).split('/').pop().replace(/\.(webp|jpe?g|png|avif)$/i, '');
   return FOTOS[sleutel] || ('https://sonty-website.vercel.app/images/' + bestand);
 };
 
@@ -175,7 +186,7 @@ const garantie = () => `
 const showroom = () => `
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:14px;">
  <tr><td style="padding:0;">
-   <img src="${foto('eigen/showroom-tafel.webp')}" width="528" alt="De adviestafel in onze showroom in Rijswijk" class="beeld" style="display:block;width:100%;max-width:528px;height:auto;border-radius:14px 14px 0 0;">
+   <img src="${foto(slotFoto('algemeen', 'showroom-blok', 'eigen/showroom-tafel.webp'))}" width="528" alt="De adviestafel in onze showroom in Rijswijk" class="beeld" style="display:block;width:100%;max-width:528px;height:auto;border-radius:14px 14px 0 0;">
  </td></tr>
  <tr><td style="padding:20px 24px 24px;${F};">
    <div style="color:${M.tekst};font-size:17px;font-weight:800;">Liever eerst even zien en voelen?</div>
@@ -410,7 +421,7 @@ const SJABLONEN = {
     kop: 'Wil je het eerst even zien?',
     intro: 'Op een scherm zie je nooit hoe een doek er echt uitziet. In Rijswijk hangt alles klaar, dus je kunt het gewoon even vastpakken.',
     blokken: [
-      beeld('eigen/showroom-overzicht.webp', 'De showroom van Sonty in Rijswijk', 'Onze showroom aan de Frijdastraat, ook op zaterdag (op afspraak)'),
+      beeld(slotFoto('sonty-uitnodiging', 'hero', 'eigen/showroom-overzicht.webp'), 'De showroom van Sonty in Rijswijk', 'Onze showroom aan de Frijdastraat, ook op zaterdag (op afspraak)'),
       knop('Kies een moment', '{{ person.sonty_showroom_link|default:"https://www.sonty.nl/showroom" }}'),
       `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
         <tr><td style="padding:16px 22px;${F};color:${M.grijs};font-size:14px;line-height:1.6;">
@@ -419,7 +430,7 @@ const SJABLONEN = {
       </table>`,
       offerteKaart(),
       review(...REVIEW_ALLES),
-      beeld('eigen/kantoor-stalen.webp', 'Persoonlijk advies aan de adviestafel', 'We nemen rustig de tijd, zonder verkooppraatje'),
+      beeld(slotFoto('sonty-uitnodiging', 'advies', 'eigen/kantoor-stalen.webp'), 'Persoonlijk advies aan de adviestafel', 'We nemen rustig de tijd, zonder verkooppraatje'),
       cijfers(),
       garantie(),
     ],
@@ -431,12 +442,12 @@ const SJABLONEN = {
     kop: '{{ person.sonty_verhaal_kop|default:"Je zocht ooit zonwering" }}',
     intro: '{{ person.sonty_verhaal_intro|default:"Is het er nooit van gekomen? Gebeurt vaker dan je denkt. Even laten zien wat er nu kan, en wat het kost." }}',
     blokken: [
-      beeld('eigen/pergola-tuin-1.webp', 'Een pergola van Sonty in een zomerse tuin', 'Een van onze projecten: zonwering die de warmte buiten houdt'),
+      beeld(slotFoto('sonty-verhaal', 'hero', 'eigen/pergola-tuin-1.webp'), 'Een pergola van Sonty in een zomerse tuin', 'Een van onze projecten: zonwering die de warmte buiten houdt'),
       knop('{{ person.sonty_verhaal_cta|default:"Bekijk wat het nu kost" }}', '{{ person.sonty_verhaal_link|default:"https://www.sonty.nl/offerte" }}'),
       assortiment(),
       review(...REVIEW_ROLLUIK),
       cijfers(),
-      beeld('eigen/montage-cassette.webp', 'Een monteur van Sonty monteert een cassette', 'Onze monteurs zijn in dienst bij Sonty, geen onderaannemers'),
+      beeld(slotFoto('sonty-verhaal', 'monteurs', 'eigen/montage-cassette.webp'), 'Een monteur van Sonty monteert een cassette', 'Onze monteurs zijn in dienst bij Sonty, geen onderaannemers'),
       garantie(),
       showroom(),
     ],
@@ -460,7 +471,7 @@ const SJABLONEN = {
           </div>
         </td></tr>
       </table>`,
-      beeld('eigen/sonty-bus.webp', 'De servicebus van Sonty', 'Service nodig? Ons eigen team komt langs'),
+      beeld(slotFoto('sonty-service', 'bus', 'eigen/sonty-bus.webp'), 'De servicebus van Sonty', 'Service nodig? Ons eigen team komt langs'),
       review(...REVIEW_TRAJECT),
       cijfers(),
     ],
@@ -505,7 +516,7 @@ SJABLONEN['sonty-weer-lente'] = mail({
   kop: 'Eerste mooie dag van het jaar',
   intro: 'Het loopt op naar {{ person.sonty_weer_piek|default:"boven de 20" }} graden, en dan denkt bijna iedereen weer aan buiten zitten. Jij vroeg ooit een offerte bij ons aan. Zal ik hem er weer even bij pakken?',
   blokken: [
-    beeld('eigen/pergola-tuin-1.webp', 'Een pergola in de tuin, geplaatst door Sonty', 'Een van onze projecten'),
+    beeld(slotFoto('sonty-weer-lente', 'hero', 'eigen/pergola-tuin-1.webp'), 'Een pergola in de tuin, geplaatst door Sonty', 'Een van onze projecten'),
     knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
     offerteKaart(),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
@@ -530,7 +541,7 @@ SJABLONEN['sonty-weer-donker'] = mail({
   kop: 'Nu de dagen korter worden',
   intro: 'Het wordt weer vroeg donker. Precies het moment waarop je merkt hoe kaal een raam kan aanvoelen, en hoeveel kou er langs de ruit naar binnen komt.',
   blokken: [
-    beeld('eigen/showroom-ramen.webp', 'Raamdecoratie in de showroom van Sonty', 'Raamdecoratie in onze showroom in Rijswijk'),
+    beeld(slotFoto('sonty-weer-donker', 'hero', 'eigen/showroom-ramen.webp'), 'Raamdecoratie in de showroom van Sonty', 'Raamdecoratie in onze showroom in Rijswijk'),
     knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
       <tr><td style="padding:20px 22px;${F};">
@@ -672,7 +683,7 @@ SJABLONEN['sonty-afwijzing'] = mail({
     meedenkblok('Mag ik je één ding vragen?', [
       'Lag het aan de prijs, de levertijd, of iets anders?',
     ], 'Eén zin terug is genoeg. En mocht je er later toch nog eens over willen praten, dan weet je me te vinden. Ik stuur je verder niets meer over deze offerte.'),
-    beeld('eigen/showroom-tafel.webp', 'De adviestafel in de showroom van Sonty', 'Je bent altijd welkom om vrijblijvend te kijken'),
+    beeld(slotFoto('sonty-afwijzing', 'showroom', 'eigen/showroom-tafel.webp'), 'De adviestafel in de showroom van Sonty', 'Je bent altijd welkom om vrijblijvend te kijken'),
     cijfers(),
   ],
 });
@@ -712,14 +723,14 @@ SJABLONEN['sonty-afsluiter'] = mail({
 const REVIEW_SCREENS = ['Rick Kapper', 'Wat zijn wij heel blij met het bedrijf Sonty uit Rijswijk. Zij hebben bij ons 2 screens aangebracht. Top service.'];
 const REVIEW_ROLLUIK_PLAATSING = ['Sidney van der Zwart', 'Voor en achter op de 2e verdieping rolluiken van Sonty laten plaatsen. Perfecte service, binnen 2,5 uur werden de rolluiken geplaatst. Monteurs super vriendelijk en correct.'];
 
-function maakReactivering1({ foto: fotoBestand, alt, caption, rev }) {
+function maakReactivering1({ tpl, foto: fotoBestand, alt, caption, rev }) {
   return mail({
     naam: 'Sonty reactivering 1',
     preheader: 'Is het er nooit van gekomen?',
     kop: 'Je zocht ooit {{ person.sonty_product_kort|default:"zonwering" }}',
     intro: 'Dat is alweer even geleden. Misschien is het er nooit van gekomen, misschien heb je het elders geregeld. Beide prima. Ik wilde alleen even laten weten dat je offerte er nog is.',
     blokken: [
-      beeld(fotoBestand, alt, caption),
+      beeld(slotFoto(tpl, 'hero', fotoBestand), alt, caption),
       offerteKaart(),
       knop('Bekijk je offerte van toen', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
       `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
@@ -740,16 +751,16 @@ function maakReactivering1({ foto: fotoBestand, alt, caption, rev }) {
 }
 
 SJABLONEN['sonty-reactivering-1'] = maakReactivering1({
-  foto: 'eigen/knikarm-resultaat.webp', alt: 'Een knikarmscherm van Sonty boven een terras',
+  tpl: 'sonty-reactivering-1', foto: 'eigen/knikarm-resultaat.webp', alt: 'Een knikarmscherm van Sonty boven een terras',
   caption: 'Een van onze projecten', rev: REVIEW_ROLLUIK });
 SJABLONEN['sonty-reactivering-1-screens'] = maakReactivering1({
-  foto: 'eigen/screen-tuindeuren.webp', alt: 'Screens van Sonty bij tuindeuren',
+  tpl: 'sonty-reactivering-1-screens', foto: 'eigen/screen-tuindeuren.webp', alt: 'Screens van Sonty bij tuindeuren',
   caption: 'Screens bij een van onze klanten', rev: REVIEW_SCREENS });
 SJABLONEN['sonty-reactivering-1-rolluiken'] = maakReactivering1({
-  foto: 'eigen/rolluik-raam.webp', alt: 'Een rolluik van Sonty op een woning',
+  tpl: 'sonty-reactivering-1-rolluiken', foto: 'eigen/rolluik-raam.webp', alt: 'Een rolluik van Sonty op een woning',
   caption: 'Een rolluik bij een van onze klanten', rev: REVIEW_ROLLUIK_PLAATSING });
 SJABLONEN['sonty-reactivering-1-binnen'] = maakReactivering1({
-  foto: 'eigen/showroom-ramen.webp', alt: 'Raamdecoratie in de showroom van Sonty',
+  tpl: 'sonty-reactivering-1-binnen', foto: 'eigen/showroom-ramen.webp', alt: 'Raamdecoratie in de showroom van Sonty',
   caption: 'Raamdecoratie in onze showroom in Rijswijk', rev: REVIEW_ALLES });
 
 /* ── S1: na de bouwvak (seizoensmoment, verzoek Daimy 13-08) ──
@@ -796,7 +807,7 @@ SJABLONEN['sonty-reactivering-2'] = mail({
     </table>`,
     knop('Vraag een nieuwe prijs aan', '{{ person.sonty_verhaal_link|default:"https://www.sonty.nl/offerte" }}'),
     assortiment(),
-    beeld('eigen/montage-cassette.webp', 'Een monteur van Sonty monteert een cassette', 'Onze monteurs zijn in dienst bij Sonty, geen onderaannemers'),
+    beeld(slotFoto('sonty-reactivering-2', 'monteurs', 'eigen/montage-cassette.webp'), 'Een monteur van Sonty monteert een cassette', 'Onze monteurs zijn in dienst bij Sonty, geen onderaannemers'),
     cijfers(),
     review(...REVIEW_ALLES),
     garantie(),
@@ -810,7 +821,7 @@ SJABLONEN['sonty-crosssell-binnen'] = mail({
   kop: 'Buiten is geregeld. En binnen?',
   intro: 'De buitenkant is inmiddels geregeld. Veel klanten pakken daarna ook de binnenkant aan, want dat scheelt gedoe met verschillende partijen en het past dan meteen bij elkaar.',
   blokken: [
-    beeld('eigen/showroom-ramen.webp', 'Raamdecoratie in de showroom van Sonty', 'Raamdecoratie in onze showroom'),
+    beeld(slotFoto('sonty-crosssell-binnen', 'hero', 'eigen/showroom-ramen.webp'), 'Raamdecoratie in de showroom van Sonty', 'Raamdecoratie in onze showroom'),
     knop('Bekijk de mogelijkheden', 'https://www.sonty.nl/diensten/raamdecoratie'),
     assortiment(),
     veelgevraagd([FAQ_SHOWROOM, FAQ_INMETEN, FAQ_LEVERTIJD]),
@@ -837,7 +848,7 @@ SJABLONEN['sonty-review'] = mail({
       </td></tr>
     </table>`,
     garantie(),
-    beeld('eigen/team-klant-blij.webp', 'Het team van Sonty met een klant', 'Bedankt dat je voor ons koos'),
+    beeld(slotFoto('sonty-review', 'team', 'eigen/team-klant-blij.webp'), 'Het team van Sonty met een klant', 'Bedankt dat je voor ons koos'),
   ],
 });
 

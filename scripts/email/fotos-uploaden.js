@@ -59,6 +59,28 @@ async function upload(bestandspad, naam, type) {
     await new Promise((x) => setTimeout(x, 700));
   }
 
+  // Gekozen dashboard-foto's (/admin/mailfotos): kunnen uit elke portfolio-map komen.
+  // Sleutel = bestandsnaam zonder extensie, zelfde afspraak als foto() in bouw-templates.js.
+  const keuzesPad = path.join(__dirname, '..', '..', 'data', 'email', 'foto-keuzes.json');
+  if (fs.existsSync(keuzesPad)) {
+    const keuzes = JSON.parse(fs.readFileSync(keuzesPad, 'utf8'));
+    const paden = [...new Set(Object.values(keuzes).flatMap((slots) => Object.values(slots)))];
+    for (const src of paden) {
+      const rel = String(src).replace(/^\/images\//, '');
+      const sleutelBasis = path.basename(rel).replace(/\.(webp|jpe?g|png|avif)$/i, '');
+      if (uit[sleutelBasis]) continue;
+      const sleutel = 'sonty-' + sleutelBasis;
+      if (opNaam.has(sleutel)) { uit[sleutelBasis] = opNaam.get(sleutel); continue; }
+      const bronPad = path.join(process.env.HOME, 'sonty-website', 'public', 'images', rel);
+      if (!fs.existsSync(bronPad)) { console.error(`  ONTBREEKT lokaal: ${rel}`); continue; }
+      const jpg = path.join(TIJDELIJK, sleutelBasis + '.jpg');
+      execFileSync('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '55', '--resampleWidth', '800', bronPad, '--out', jpg], { stdio: 'ignore' });
+      const url = await upload(jpg, sleutel, 'image/jpeg');
+      if (url) { uit[sleutelBasis] = url; console.log(`  geupload (keuze): ${sleutelBasis}`); }
+      await new Promise((x) => setTimeout(x, 700));
+    }
+  }
+
   // Logo apart: PNG vanwege de transparantie.
   if (opNaam.has('sonty-logo-wit')) uit['logo-wit'] = opNaam.get('sonty-logo-wit');
   else {

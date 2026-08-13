@@ -1,4 +1,21 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-11 middag)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-13)
+
+## 13-08: BOEKEN LOOPT NU VIA MICROSOFT BOOKINGS — DE ENIGE JUISTE MANIER
+- **Les van vandaag (grote fout hersteld)**: de planner maakte kale agenda-afspraken.
+  Gevolg: klant kreeg GEEN bevestigingsmail (die loopt via Bookings), geen medewerker-
+  koppeling (alles "geen medewerker"/Bezet in de Bookings-weergave), geen adres in het
+  locatieveld. 43 afspraken met terugwerkende kracht gemigreerd naar echte Bookings-
+  afspraken onder Joey/Sjoerd; klanten kregen daarbij de normale Bookings-bevestiging.
+- **Structureel**: alle boekingen via `scripts/lib/inmeet-boeken.js` → Bookings-API
+  (business SontyMontage1, dienst "Inmeten Sonty" fd1a8a20, staff Joey 445fbea9 /
+  Sjoerd 60ebce1b, locatie=klantadres). Kale afspraak alleen nog als vangnet MET alarm.
+- **Disney 7-8 sep**: 12 klanten verplaatst (alle op 13/18/20/24/25/27 aug + 14/16 sep,
+  Mandy keuzelink 12 okt); DISNEY-blokken heten nu "Vakantie - Disney (Joey)" zodat de
+  planner de dagen blokkeert. Pingpong-rem in aanbod-replies: afgewezen tijden stapelen,
+  max 2 auto-voorstellen per klant per dag.
+- **Telegram-poller**: harde 60s-noodrem (hing 22 uur na een dode request).
+- **OPEN**: Connie Biermann wacht op antwoord "plaatsing vóór 26 sep?" — beleidsvraag
+  aan Daimy (V1), inmeten was 13-08 12:55.
 
 ## STAND 11-08 (agenda-schoonmaakdag): ALLES SYNCHROON, DIT IS DE NIEUWE BASIS
 - **Outlook ↔ Planado is nu TWEE richtingen, elke 10 minuten** (was 30 min, één richting).

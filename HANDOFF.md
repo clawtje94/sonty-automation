@@ -1,5 +1,23 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-13)
 
+## 13-08: MAILMARKETING/KLAVIYO GESTART (doel Daimy: alles leren + bot + flows)
+- Doel: extreem goed worden in mailmarketing, Klaviyo volledig inrichten, daarna wekelijks
+  sturen op Klaviyo- plus conversiedata met nieuwe flows. Regel Daimy: ALTIJD Sonty-stijl
+  en regels (product, levertijd, garantie) → memory feedback_mailmarketing_sonty_stijl.
+- Gebouwd in `~/sonty/email-marketing/`: KENNISBANK.md (benchmarks 2026, kernflows,
+  deliverability-eisen Gmail/Yahoo, Klaviyo API-mogelijkheden, lead-gen nurturing),
+  SONTY-MAILSTIJLGIDS.md (alle vaste feiten: 3/5/7 garantie, 8-10 wk, 5 werkdagen, €75,
+  40/60, verboden frasen), FLOW-PLAN.md (5 flows in prioriteit, waarschuwingen dubbele
+  mails), flows/offerte-opvolgflow-copy.md (3 mails concept, wacht op akkoord).
+- Scripts (herbruikbaar, alleen-lezen): ~/olivida/email-marketing/scripts/klaviyo-stand.js
+  en klaviyo-week-rapport.js (reporting-API per flow/campagne met omzet en spamrate).
+- Klaviyo Create Flow API is GA (revision 2026-07-15): bot kan zelf flows bouwen, 100/dag.
+- **BLOCKERS**: V1 aan Daimy (doel = Sonty, Olivida of allebei?) en V2 (Sonty
+  KLAVIYO_PRIVATE_KEY ontbreekt overal, daardoor kwamen ook nooit events/offerte-mails
+  aan; key nodig uit Klaviyo-dashboard). Olivida-Klaviyo draait al vol (17 flows van
+  Fleur/MIJU, NIET aanraken zonder akkoord); stand in
+  ~/olivida/email-marketing/onderzoek/klaviyo-stand-2026-08-13.txt.
+
 ## 13-08: BOEKEN LOOPT NU VIA MICROSOFT BOOKINGS — DE ENIGE JUISTE MANIER
 - **Les van vandaag (grote fout hersteld)**: de planner maakte kale agenda-afspraken.
   Gevolg: klant kreeg GEEN bevestigingsmail (die loopt via Bookings), geen medewerker-

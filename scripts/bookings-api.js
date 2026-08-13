@@ -114,7 +114,7 @@ async function vindOfMaakKlant(biz, { naam, mail, tel }) {
 // Nieuwe afspraak boeken. Verplicht: serviceId, start (ISO), klantNaam, klantMail.
 // notitie → serviceNotes (interne notitie die het team bij de afspraak ziet);
 // vragen → customQuestionAnswers van de service (bv. de verplichte vraag "Telefoonnummer").
-async function boek(biz = SHOWROOM, { serviceId, start, minuten = 30, klantNaam, klantMail, klantTel, notitie, vragen, staffIds, tijdzone = 'W. Europe Standard Time' }) {
+async function boek(biz = SHOWROOM, { serviceId, start, minuten = 30, klantNaam, klantMail, klantTel, notitie, vragen, staffIds, locatie, tijdzone = 'W. Europe Standard Time' }) {
   if (!serviceId || !start || !klantNaam || !klantMail) throw new Error('boek(): serviceId, start, klantNaam en klantMail zijn verplicht');
   const customerId = await vindOfMaakKlant(biz, { naam: klantNaam, mail: klantMail, tel: klantTel });
   const eind = new Date(new Date(start).getTime() + minuten * 60000).toISOString();
@@ -127,6 +127,9 @@ async function boek(biz = SHOWROOM, { serviceId, start, minuten = 30, klantNaam,
     // i.p.v. 14:30 — test Daimy 21 juli).
     customerTimeZone: 'Europe/Amsterdam',
     ...(staffIds && staffIds.length ? { staffMemberIds: staffIds } : {}),
+    // Adres in de afspraak zelf (Daimy 13-08: afspraken zonder klantgegevens): de
+    // inmeter navigeert op het locatie-veld, dus dat mag nooit leeg zijn.
+    ...(locatie ? { serviceLocation: { displayName: locatie, address: { street: String(locatie).split(',')[0], city: String(locatie).split(',').pop().trim() } } } : {}),
     customers: [{
       '@odata.type': '#microsoft.graph.bookingCustomerInformation',
       customerId, name: klantNaam, emailAddress: klantMail, phone: klantTel || '',

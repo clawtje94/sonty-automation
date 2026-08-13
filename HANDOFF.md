@@ -32,7 +32,18 @@
   die direct na een event triggeren (RP1/G1) kunnen kaartvelden missen tot de nachtsync
   gedraaid heeft; event-properties gebruiken of verzendmoment na de sync leggen.
 - **Nog te doen (mailmarketing)**: wekelijkse cijferbot (klaviyo-week-rapport.js in
-  email-marketing/scripts werkt al; nog koppelen aan conversiesheet + Telegram + cron).
+  email-marketing/scripts werkt al op het Sonty-account met terugval zonder conversie-metric
+  en 429-retry; nog koppelen aan conversiesheet + Telegram + launchd maandag).
+- **13-08 avond: PRODUCTRELEVANTIE + FOTOKIEZER + BOUWVAK**. C1-reactivering heeft nu 4
+  varianten (screens/rolluiken/binnen/basis) met productspecifieke echte reviews en visueel
+  geverifieerde foto's; flow kiest via conditional split op sonty_product_kort (zie
+  scripts/email/FLOWS.md). S1 "Na de bouwvak"-mail klaar (details andere terminal → V8 aan
+  Daimy). Masterplan: email-marketing/MASTERPLAN.md. FOTOKIEZER live:
+  /admin/mailfotos (sonty-website) — per mail fotoslots, kiezen uit 897 gecategoriseerde
+  website-foto's, volledige mailpreview per flow (public/mail-previews, export via
+  scripts/email/export-mailpreviews.js). Keten: keuzes in KV → haal-fotokeuzes.js →
+  foto-keuzes.json → fotos-uploaden.js (zet keuze om naar JPEG op Klaviyo-CDN) →
+  bouw-templates.js (slotFoto). 22 templates in Klaviyo, alles nog UIT.
 - REGEL Daimy 13-08: op deze computer niks meer met Olivida, alleen Sonty. De tijdelijke
   ~/olivida/email-marketing-map is verwijderd; de leestools staan nu in
   ~/sonty/email-marketing/scripts/ met de Sonty-key als default.

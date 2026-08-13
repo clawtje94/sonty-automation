@@ -410,7 +410,7 @@ const SJABLONEN = {
     kop: 'Wil je het eerst even zien?',
     intro: 'Op een scherm zie je nooit hoe een doek er echt uitziet. In Rijswijk hangt alles klaar, dus je kunt het gewoon even vastpakken.',
     blokken: [
-      beeld('eigen/showroom-overzicht.webp', 'De showroom van Sonty in Rijswijk', 'Onze showroom aan de Frijdastraat, ook op zaterdag open'),
+      beeld('eigen/showroom-overzicht.webp', 'De showroom van Sonty in Rijswijk', 'Onze showroom aan de Frijdastraat, ook op zaterdag (op afspraak)'),
       knop('Kies een moment', '{{ person.sonty_showroom_link|default:"https://www.sonty.nl/showroom" }}'),
       `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
         <tr><td style="padding:16px 22px;${F};color:${M.grijs};font-size:14px;line-height:1.6;">
@@ -431,7 +431,7 @@ const SJABLONEN = {
     kop: '{{ person.sonty_verhaal_kop|default:"Je zocht ooit zonwering" }}',
     intro: '{{ person.sonty_verhaal_intro|default:"Is het er nooit van gekomen? Gebeurt vaker dan je denkt. Even laten zien wat er nu kan, en wat het kost." }}',
     blokken: [
-      beeld('eigen/knikarm-resultaat.webp', 'Een knikarmscherm van Sonty boven een terras', 'Een van onze projecten: zonwering die de warmte buiten houdt'),
+      beeld('eigen/pergola-tuin-1.webp', 'Een pergola van Sonty in een zomerse tuin', 'Een van onze projecten: zonwering die de warmte buiten houdt'),
       knop('{{ person.sonty_verhaal_cta|default:"Bekijk wat het nu kost" }}', '{{ person.sonty_verhaal_link|default:"https://www.sonty.nl/offerte" }}'),
       assortiment(),
       review(...REVIEW_ROLLUIK),

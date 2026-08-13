@@ -573,7 +573,23 @@ async function main() {
     console.log('GEWEIGERD: --live zonder --alleen=<naam> zou alle leads aanschrijven, ook echte klanten.');
     return;
   }
-  if (!items.length) return;
+  if (!items.length) {
+    // OOK MET NUL WACHTENDE LEADS het dashboard publiceren (Monique 13-08): de vroege
+    // return sloeg de publicatie over, waardoor het dashboard op een oude momentopname
+    // bleef staan waarin haar boeking nog niet bestond — de kaart bleef ten onrechte
+    // "niet geboekt" roepen. Boekingen en agenda veranderen ook zonder wachtenden.
+    try {
+      const { laadBoekingen } = require('./lib/inmeet-mutatie.js');
+      const boekingenNu = Object.entries(laadBoekingen())
+        .filter(([, b2]) => b2.status === 'geboekt' && b2.aankomst && new Date(b2.aankomst) > new Date())
+        .map(([rpItemId, b2]) => ({ rpItemId, naam: b2.naam, aankomst: b2.aankomst, inmeter: b2.inmeter, duurMin: b2.duurMin, grippNr: b2.grippNr, telefoon: b2.telefoon }));
+      await fetch('https://sonty-website.vercel.app/api/inmeet-dashboard', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+        body: JSON.stringify({ bijgewerkt: new Date().toISOString(), leads: [], boekingen: boekingenNu }),
+      });
+    } catch (e) { console.log('dashboard publiceren (leeg) mislukt: ' + e.message.slice(0, 60)); }
+    return;
+  }
 
   // eerste-keer-gezien bijhouden en oudste eerst behandelen
   const nu = new Date().toISOString();

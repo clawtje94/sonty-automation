@@ -27,7 +27,9 @@ const H = { Authorization: 'Klaviyo-API-Key ' + KLAVIYO_API_KEY, accept: 'applic
 // Alleen foto's waarvan ik zelf heb gecontroleerd wat erop staat. De bestandsnamen in die map
 // zijn niet betrouwbaar: "screen-woning" en "screen-rijtjeshuizen" tonen allebei een knikarmscherm.
 const FOTOS = ['kantoor-stalen', 'knikarm-gevel', 'montage-team-1', 'pergola-tuin-2',
-               'showroom-opening', 'showroom-ramen', 'showroom-tafel', 'sonty-bus', 'team-klant-blij'];
+               'showroom-opening', 'showroom-ramen', 'showroom-tafel', 'sonty-bus', 'team-klant-blij',
+               // 13-08 na visuele QA-ronde: betere beelden, inhoud met eigen ogen gecontroleerd
+               'showroom-overzicht', 'pergola-tuin-1', 'knikarm-resultaat', 'montage-cassette'];
 
 async function upload(bestandspad, naam, type) {
   const fd = new FormData();

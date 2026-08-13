@@ -29,6 +29,7 @@ const { netteVoornaam, leesbaarProduct, netProduct } = require('./klaviyo-profie
 function velden(k) {
   return {
     'first_name': netteVoornaam(k.voornaam) || '',
+    'person.sonty_aanhef': netteVoornaam(k.voornaam) ? `Hoi ${netteVoornaam(k.voornaam)},` : 'Hoi,',
     'person.sonty_product': netProduct(k.product) || '',
     'person.sonty_product_kort': leesbaarProduct(k.product) || '',
     'person.sonty_offertenummer': k.offerteNummer || '',

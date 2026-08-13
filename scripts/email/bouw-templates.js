@@ -79,10 +79,10 @@ const beeld = (bestand, alt, bijschrift) => `
 </table>`;
 
 /** De offertekaart: het bewijs dat deze mail over déze klant gaat. */
-const offerteKaart = () => `
+const offerteKaart = (label = 'Jouw offerte') => `
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.kaart};border-radius:14px;">
  <tr><td style="padding:26px 28px;${F};">
-   <div style="color:${M.zacht};font-size:11px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;">Jouw offerte</div>
+   <div style="color:${M.zacht};font-size:11px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;">${label}</div>
    <div style="color:#ffffff;font-size:22px;font-weight:700;padding-top:9px;line-height:1.3;">{{ person.sonty_product|default:"Zonwering op maat" }}</div>
    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="padding-top:18px;">
      <tr><td style="${F};color:${M.zacht};font-size:13px;padding:5px 0;">Offertenummer</td>
@@ -128,12 +128,12 @@ const review = (naam, tekst) => `
 </table>`;
 
 /** Wat er gebeurt nadat de klant ja zegt. Neemt onzekerheid weg, dat is de grootste rem. */
-const stappen = () => `
+const stappen = (stap1) => `
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
  <tr><td style="${F};font-size:17px;font-weight:800;color:${M.tekst};padding-bottom:14px;" class="t-donker">Zo gaat het verder</td></tr>
  ${[
-    ['1', 'Jij geeft akkoord', 'Online ondertekenen met &eacute;&eacute;n klik, of gewoon even terugmailen.'],
-    ['2', 'Wij komen inmeten', 'Tot op de millimeter, want maatwerk begint bij goed meten.'],
+    stap1 || ['1', 'Jij geeft akkoord', 'Online ondertekenen met &eacute;&eacute;n klik, of gewoon even terugmailen.'],
+    ['2', 'We komen inmeten', 'Tot op de millimeter, want maatwerk begint bij goed meten.'],
     ['3', 'Productie op maat', 'Jouw maten, jouw kleur. Gemaakt bij onze vaste leveranciers.'],
     ['4', 'Onze monteurs plaatsen', 'Eigen team in dienst, geen onderaannemers. Netjes achtergelaten.'],
   ].map(([n, kop, tekst]) => `
@@ -216,7 +216,7 @@ const assortiment = () => `
        </td>
        <td width="50%" valign="top" style="${F};">
          <div style="font-size:11px;font-weight:800;color:${M.oranje};letter-spacing:1.4px;text-transform:uppercase;padding-bottom:8px;">Binnen</div>
-         ${['Gordijnen', 'Plissé en duette', 'Jaloezieën', 'Rolgordijnen', 'Shutters', 'Wandbekleding', 'Behang']
+         ${['Gordijnen', 'Plissé en Duette', 'Jaloezieën', 'Rolgordijnen', 'Shutters', 'Wandbekleding', 'Behang']
            .map((x) => `<div style="font-size:14px;color:${M.grijs};line-height:1.9;" class="t-zacht">${x}</div>`).join('')}
        </td>
      </tr>
@@ -241,6 +241,7 @@ const afzender = () => `
        </tr></table>
      </td>
      <td valign="middle" style="${F};">
+       <div class="t-zacht" style="color:${M.grijs};font-size:15px;padding-bottom:2px;">Groet,</div>
        <div class="t-donker" style="color:${M.tekst};font-size:15px;font-weight:700;">Jaimy van Sonty</div>
        <div class="t-zacht" style="color:${M.grijs};font-size:14px;padding-top:3px;">Vraag? <a href="${M.whatsapp}" style="color:${M.oranje};text-decoration:none;font-weight:600;">Stuur me een appje &rsaquo;</a></div>
        <div class="t-zacht" style="color:${M.grijs};font-size:14px;padding-top:2px;">${M.adres}</div>
@@ -250,7 +251,7 @@ const afzender = () => `
  </td></tr>
 </table>`;
 
-const voet = () => `
+const voet = (reden = 'omdat je een offerte bij ons hebt aangevraagd') => `
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
  <tr><td align="center" style="padding:26px 24px 34px;${F};color:${M.zacht};font-size:12px;line-height:1.65;">
    <div style="padding-bottom:8px;">
@@ -259,7 +260,7 @@ const voet = () => `
      <a href="https://www.instagram.com/sonty.nl/" style="color:${M.zacht};text-decoration:none;">Instagram</a>
    </div>
    Sonty B.V. &middot; ${M.adres}<br>
-   Je krijgt deze mail omdat je een offerte bij ons hebt aangevraagd.<br>
+   Je krijgt deze mail ${reden}.<br>
    <a href="{% unsubscribe %}" style="color:${M.zacht};text-decoration:underline;">Uitschrijven</a>
    &nbsp;&middot;&nbsp;
    <a href="{% manage_preferences %}" style="color:${M.zacht};text-decoration:underline;">Voorkeuren aanpassen</a>
@@ -283,11 +284,11 @@ const veelgevraagd = (vragen) => `
  </td></tr>
 </table>`;
 
-const FAQ_LEVERTIJD = ['Hoelang duurt het?', 'Voorraadmodellen hangen er vaak binnen 3 weken. Voor de rest is het gemiddeld 8 tot 10 weken na de aanbetaling, omdat alles op maat wordt gemaakt.'];
+const FAQ_LEVERTIJD = ['Hoelang duurt het?', 'Gemiddeld 8 tot 10 weken na de aanbetaling, omdat alles op maat wordt gemaakt. Alles wat eerder kan, monteren we eerder.'];
 const FAQ_PRIJS = ['Is dit de definitieve prijs?', 'Nog niet. Dit is een indicatie op basis van jouw opgave. De echte prijs staat vast na het inmeten, als we alles samen hebben doorgenomen.'];
 const FAQ_VERDER = ['Wat gebeurt er als ik akkoord geef?', 'Dan plannen we een inmeetafspraak. Daarna volgt de definitieve offerte, en pas als je die goedkeurt gaan we bestellen.'];
 const FAQ_INMETEN = ['Wat kost inmeten?', 'Niets, als je daarna met ons in zee gaat. Ga je niet akkoord, dan rekenen we 75 euro voor de gemaakte uren.'];
-const FAQ_SHOWROOM = ['Wanneer kan ik langskomen?', 'Dinsdag tot en met vrijdag van 9:00 tot 17:00, en zaterdag van 9:00 tot 16:00. Een afspraak is fijn, maar hoeft niet.'];
+const FAQ_SHOWROOM = ['Wanneer kan ik langskomen?', 'Dinsdag tot en met vrijdag van 9:30 tot 17:00, en zaterdag van 9:30 tot 16:00. Op dinsdag en donderdag loop je zo binnen; voor woensdag, vrijdag en zaterdag plannen we even een afspraak.'];
 const FAQ_AANPASSEN = ['Kan er nog iets veranderen?', 'Zeker. Andere kleur, andere maat, ander model: stuur een berichtje en ik pas het aan.'];
 
 /** De drie vragen uit de Reuzenpanda-herinnering. Die aanpak werkt: hij vraagt in plaats van dat
@@ -303,7 +304,7 @@ const meedenkblok = (kop, vragen, slot) => `
 
 /* ─────────────────────────── casco ─────────────────────────── */
 
-function mail({ naam, preheader, kop, intro, blokken }) {
+function mail({ naam, preheader, kop, intro, blokken, reden }) {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
@@ -363,14 +364,15 @@ function mail({ naam, preheader, kop, intro, blokken }) {
      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
        <tr><td class="pad" style="padding:34px 36px 0;">
          <h1 class="kop t-donker" style="margin:0;${F};font-size:30px;line-height:1.2;font-weight:800;color:${M.tekst};letter-spacing:-0.5px;">${kop}</h1>
-         <p class="t-zacht" style="margin:14px 0 0;${F};font-size:16px;line-height:1.65;color:${M.grijs};">${intro}</p>
+         <p class="t-donker" style="margin:18px 0 0;${F};font-size:16px;line-height:1.65;color:${M.tekst};font-weight:600;">{{ person.sonty_aanhef|default:"Hoi," }}</p>
+         <p class="t-zacht" style="margin:6px 0 0;${F};font-size:16px;line-height:1.65;color:${M.grijs};">${intro}</p>
        </td></tr>
        ${blokken.map((b) => `<tr><td class="pad" style="padding:24px 36px 0;">${b}</td></tr>`).join('\n')}
        <tr><td class="pad" style="padding:28px 36px 34px;">${afzender()}</td></tr>
      </table>
    </td></tr>
 
-   <tr><td>${voet()}</td></tr>
+   <tr><td>${voet(reden)}</td></tr>
   </table>
  </td></tr>
 </table>
@@ -389,11 +391,11 @@ const SJABLONEN = {
   'sonty-offerte': mail({
     naam: 'Sonty - offerte',
     preheader: 'Even kijken of alles klopt, dan help ik je verder',
-    kop: 'Hoi {{ first_name|default:"daar" }}, je offerte staat klaar',
+    kop: 'Je offerte staat klaar',
     intro: 'Je offerte van {{ person.sonty_offerte_datum_nl|default:"kort geleden" }} staat nog voor je klaar. Even checken of alles erin staat zoals jij het voor je ziet?',
     blokken: [
       offerteKaart(),
-      knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+      knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
       cijfers(),
       review(...REVIEW_TRAJECT),
       stappen(),
@@ -408,8 +410,13 @@ const SJABLONEN = {
     kop: 'Wil je het eerst even zien?',
     intro: 'Op een scherm zie je nooit hoe een doek er echt uitziet. In Rijswijk hangt alles klaar, dus je kunt het gewoon even vastpakken.',
     blokken: [
-      beeld('eigen/showroom-opening.webp', 'Klanten in de showroom van Sonty in Rijswijk', 'Onze showroom aan de Frijdastraat, ook op zaterdag open'),
+      beeld('eigen/showroom-overzicht.webp', 'De showroom van Sonty in Rijswijk', 'Onze showroom aan de Frijdastraat, ook op zaterdag open'),
       knop('Kies een moment', '{{ person.sonty_showroom_link|default:"https://www.sonty.nl/showroom" }}'),
+      `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
+        <tr><td style="padding:16px 22px;${F};color:${M.grijs};font-size:14px;line-height:1.6;">
+          Navigatie? Stel in op Frijdastraat 6E, rij het hofje in, eerste rechts, wij zitten op de hoek.
+        </td></tr>
+      </table>`,
       offerteKaart(),
       review(...REVIEW_ALLES),
       beeld('eigen/kantoor-stalen.webp', 'Persoonlijk advies aan de adviestafel', 'We nemen rustig de tijd, zonder verkooppraatje'),
@@ -424,22 +431,22 @@ const SJABLONEN = {
     kop: '{{ person.sonty_verhaal_kop|default:"Je zocht ooit zonwering" }}',
     intro: '{{ person.sonty_verhaal_intro|default:"Is het er nooit van gekomen? Gebeurt vaker dan je denkt. Even laten zien wat er nu kan, en wat het kost." }}',
     blokken: [
-      beeld('eigen/knikarm-gevel.webp', 'Zonwering van Sonty op een woning', 'Een van onze projecten: zonwering die de warmte buiten houdt'),
-      knop('{{ person.sonty_verhaal_cta|default:"Bekijk wat het nu kost" }}', '{{ person.sonty_verhaal_link|default:"https://www.sonty.nl" }}'),
+      beeld('eigen/knikarm-resultaat.webp', 'Een knikarmscherm van Sonty boven een terras', 'Een van onze projecten: zonwering die de warmte buiten houdt'),
+      knop('{{ person.sonty_verhaal_cta|default:"Bekijk wat het nu kost" }}', '{{ person.sonty_verhaal_link|default:"https://www.sonty.nl/offerte" }}'),
       assortiment(),
       review(...REVIEW_ROLLUIK),
       cijfers(),
-      beeld('eigen/montage-team-1.webp', 'Onze eigen monteurs aan het werk', 'Onze monteurs zijn in dienst bij Sonty, geen onderaannemers'),
+      beeld('eigen/montage-cassette.webp', 'Een monteur van Sonty monteert een cassette', 'Onze monteurs zijn in dienst bij Sonty, geen onderaannemers'),
       garantie(),
       showroom(),
     ],
   }),
 
   'sonty-service': mail({
-    naam: 'Sonty - service en nazorg',
+    reden: 'omdat je klant bij ons bent', naam: 'Sonty - service en nazorg',
     preheader: 'Even checken of alles naar wens is',
-    kop: 'Alles naar wens, {{ first_name|default:"daar" }}?',
-    intro: 'Je {{ person.sonty_product_kort|default:"zonwering" }} is geplaatst. Werkt alles naar behoren en ben je tevreden over de afwerking? Is er iets niet goed, laat het gewoon even weten. Dan lossen we het op.',
+    kop: 'Alles naar wens?',
+    intro: 'De montage bij je thuis zit erop. Werkt alles naar behoren en ben je tevreden over de afwerking? Is er iets niet goed, laat het gewoon even weten. Dan lossen we het op.',
     blokken: [
       garantie(),
       knop('{{ person.sonty_service_cta|default:"Laat het ons weten" }}', '{{ person.sonty_service_link|default:"https://www.sonty.nl/contact" }}'),
@@ -470,18 +477,18 @@ const SJABLONEN = {
 SJABLONEN['sonty-weer-hitte'] = mail({
   naam: 'Sonty weermoment hitte',
   preheader: 'Even een seintje over het weer van volgende week',
-  kop: 'Het wordt warm, {{ first_name|default:"daar" }}',
+  kop: 'Het wordt warm',
   intro: 'Even een seintje: {{ person.sonty_weer_dag|default:"deze week" }} loopt het op naar {{ person.sonty_weer_piek|default:"boven de 29" }} graden. Precies het weer waarvoor je destijds je offerte hebt aangevraagd.',
   blokken: [
     offerteKaart(),
-    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid ${M.lijn};border-radius:12px;" class="rand">
       <tr><td style="padding:20px 22px;${F};">
         <div style="color:${M.tekst};font-size:15px;font-weight:700;" class="t-donker">Eerlijk over de levertijd</div>
         <div style="color:${M.grijs};font-size:14px;line-height:1.65;padding-top:8px;" class="t-zacht">
           Voor deze week red je het niet meer, dat gaan we niet mooier maken dan het is. Reken op
-          een aantal weken tussen akkoord en montage, en in het hoogseizoen loopt dat op. Wie nu
-          beslist, zit er de rest van de zomer warmpjes bij. Of juist niet, dat is het idee.
+          8 tot 10 weken tussen aanbetaling en montage, en in het hoogseizoen kan dat oplopen.
+          Wie nu beslist, heeft er de rest van de zomer plezier van.
         </div>
       </td></tr>
     </table>`,
@@ -498,8 +505,8 @@ SJABLONEN['sonty-weer-lente'] = mail({
   kop: 'Eerste mooie dag van het jaar',
   intro: 'Het loopt op naar {{ person.sonty_weer_piek|default:"boven de 20" }} graden, en dan denkt bijna iedereen weer aan buiten zitten. Jij vroeg ooit een offerte bij ons aan. Zal ik hem er weer even bij pakken?',
   blokken: [
-    beeld('eigen/pergola-tuin-2.webp', 'Een pergola in de tuin, geplaatst door Sonty', 'Een van onze projecten'),
-    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    beeld('eigen/pergola-tuin-1.webp', 'Een pergola in de tuin, geplaatst door Sonty', 'Een van onze projecten'),
+    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
     offerteKaart(),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
       <tr><td style="padding:20px 22px;${F};">
@@ -521,15 +528,15 @@ SJABLONEN['sonty-weer-donker'] = mail({
   naam: 'Sonty weermoment donkere dagen',
   preheader: 'Nu de dagen korter worden',
   kop: 'Nu de dagen korter worden',
-  intro: 'Het wordt weer vroeg donker. Precies het moment waarop je merkt hoe kaal een raam kan aanvoelen, en hoe veel kou er langs de ruit naar binnen komt.',
+  intro: 'Het wordt weer vroeg donker. Precies het moment waarop je merkt hoe kaal een raam kan aanvoelen, en hoeveel kou er langs de ruit naar binnen komt.',
   blokken: [
     beeld('eigen/showroom-ramen.webp', 'Raamdecoratie in de showroom van Sonty', 'Raamdecoratie in onze showroom in Rijswijk'),
-    knop('{{ person.sonty_verhaal_cta|default:"Bekijk je offerte" }}', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
       <tr><td style="padding:20px 22px;${F};">
         <div style="color:${M.tekst};font-size:15px;font-weight:700;">Scheelt echt in de warmte</div>
         <div style="color:${M.grijs};font-size:14px;line-height:1.65;padding-top:8px;">
-          Duette gordijnen hebben luchtkamers die de kou tegenhouden, en een rolluik doet hetzelfde
+          Duette-gordijnen hebben luchtkamers die de kou tegenhouden, en een rolluik doet hetzelfde
           aan de buitenkant. Je merkt het vooral 's avonds, als het buiten vriest en je bank naast
           het raam staat.
         </div>
@@ -547,8 +554,8 @@ SJABLONEN['sonty-weer-donker'] = mail({
 SJABLONEN['sonty-welkom'] = mail({
   naam: 'Sonty welkom na aanvraag',
   preheader: 'Je aanvraag is binnen, dit gaat er nu gebeuren',
-  kop: 'Je aanvraag is binnen, {{ first_name|default:"daar" }}',
-  intro: 'Dank je wel, ik ga er meteen mee aan de slag. Je hoort binnen 24 uur van me met een prijsindicatie. Hieronder vast wat je van ons kunt verwachten.',
+  kop: 'Je aanvraag is binnen',
+  intro: 'Dank je wel, ik ga er meteen mee aan de slag. Je hoort snel van me met een prijsindicatie. Hieronder vast wat je van ons kunt verwachten.',
   blokken: [
     stappen(),
     knop('Bekijk ons assortiment', 'https://www.sonty.nl/assortiment'),
@@ -580,8 +587,8 @@ SJABLONEN['sonty-rp-offerte'] = mail({
   kop: 'Je prijsindicatie staat klaar',
   intro: 'Dank je wel voor je aanvraag. Ik heb op basis van jouw wensen een prijsindicatie gemaakt. Hieronder staat wat het wordt, en wat er daarna gebeurt.',
   blokken: [
-    offerteKaart(),
-    knop('Bekijk je prijsindicatie', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    offerteKaart('Jouw prijsindicatie'),
+    knop('Bekijk je prijsindicatie', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
       <tr><td style="padding:20px 22px;${F};">
         <div style="color:${M.tekst};font-size:15px;font-weight:700;">Dit is nog een indicatie</div>
@@ -602,17 +609,17 @@ SJABLONEN['sonty-rp-offerte'] = mail({
 
 SJABLONEN['sonty-herinnering-1'] = mail({
   naam: 'Sonty herinnering dag 6',
-  preheader: 'Kunnen we je ergens mee helpen?',
-  kop: 'Kunnen we je ergens mee helpen, {{ first_name|default:"daar" }}?',
+  preheader: 'Kan ik je ergens mee helpen?',
+  kop: 'Kan ik je ergens mee helpen?',
   intro: 'Je vroeg een tijdje geleden een prijsindicatie bij ons aan. Ik vroeg me af hoe het ervoor staat. Zonwering kiezen is geen kleine beslissing, dus misschien zit je nog met vragen.',
   blokken: [
     meedenkblok('Waar loop je tegenaan?', [
       'Wat is voor jou de belangrijkste reden dat je zonwering wilt?',
       'Waar twijfel je nog over?',
       'Heb je alles wat je nodig hebt om te beslissen?',
-    ], 'Stuur gerust even een berichtje terug. We willen vooral dat je de juiste keuze maakt. Of dat nu met ons is of ergens anders, ik denk graag even mee.'),
-    offerteKaart(),
-    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    ], 'Stuur gerust even een berichtje terug. Ik wil vooral dat je de juiste keuze maakt. Of dat nu met ons is of ergens anders, ik denk graag even mee.'),
+    offerteKaart('Jouw prijsindicatie'),
+    knop('Bekijk je prijsindicatie', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
     veelgevraagd([FAQ_PRIJS, FAQ_LEVERTIJD, FAQ_AANPASSEN]),
     review(...REVIEW_ROLLUIK),
     cijfers(),
@@ -631,9 +638,9 @@ SJABLONEN['sonty-herinnering-2'] = mail({
       'Zijn er details waar je over twijfelt?',
       'Mis je informatie die de keuze makkelijker maakt?',
     ], 'Eén berichtje is genoeg, dan zoek ik het voor je uit. Zonder verplichting, en ik blijf je er niet mee achtervolgen.'),
-    offerteKaart(),
-    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
-    beeld('eigen/kantoor-stalen.webp', 'Persoonlijk advies aan de adviestafel bij Sonty', 'Even samen kijken kan ook, gewoon in Rijswijk'),
+    offerteKaart('Jouw prijsindicatie'),
+    knop('Bekijk je prijsindicatie', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+    showroom(),
     veelgevraagd([FAQ_SHOWROOM, FAQ_INMETEN, FAQ_VERDER]),
     review(...REVIEW_ALLES),
     garantie(),
@@ -647,9 +654,9 @@ SJABLONEN['sonty-akkoord'] = mail({
   intro: 'Dank je wel voor het vertrouwen. Ik heb je akkoord doorgegeven aan de planning. Zij nemen binnen vijf werkdagen contact op om de inmeetafspraak in te plannen.',
   blokken: [
     offerteKaart(),
-    stappen(),
+    stappen(['&#10003;', 'Je akkoord is binnen', 'Gedaan. Je hoeft even niets te doen.']),
     veelgevraagd([FAQ_LEVERTIJD, ['Wanneer betaal ik?', 'Pas na het inmeten, als de definitieve offerte klopt. De levertijd begint te lopen vanaf de aanbetaling.'], FAQ_AANPASSEN]),
-    knop('Bekijk je offerte nog eens', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    knop('Bekijk je offerte nog eens', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
     garantie(),
     review(...REVIEW_TRAJECT),
     cijfers(),
@@ -659,7 +666,7 @@ SJABLONEN['sonty-akkoord'] = mail({
 SJABLONEN['sonty-afwijzing'] = mail({
   naam: 'Sonty na afwijzing',
   preheader: 'Jammer, maar helemaal goed',
-  kop: 'Helemaal goed, {{ first_name|default:"daar" }}',
+  kop: 'Helemaal goed',
   intro: 'Je gaf aan dat het voorstel het niet gaat worden. Dat is prima, en dank dat je het even hebt laten weten. Ik hoor wel graag waarom, want daar leren we van.',
   blokken: [
     meedenkblok('Mag ik je één ding vragen?', [
@@ -680,7 +687,7 @@ SJABLONEN['sonty-afsluiter'] = mail({
   intro: 'Dit is mijn laatste berichtje over deze offerte, beloofd. Ik hoor het graag als je nog verder wilt. Zo niet, dan sluit ik hem en heb je er geen omkijken meer naar.',
   blokken: [
     offerteKaart(),
-    knop('Ja, ik wil verder', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    knop('Ja, ik wil verder', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
       <tr><td style="padding:20px 22px;${F};">
         <div style="color:${M.tekst};font-size:15px;font-weight:700;">Of laat gewoon even weten dat het niet doorgaat</div>
@@ -702,9 +709,9 @@ SJABLONEN['sonty-reactivering-1'] = mail({
   kop: 'Je zocht ooit {{ person.sonty_product_kort|default:"zonwering" }}',
   intro: 'Dat is alweer even geleden. Misschien is het er nooit van gekomen, misschien heb je het elders geregeld. Beide prima. Ik wilde alleen even laten weten dat je offerte er nog is.',
   blokken: [
-    beeld('eigen/knikarm-gevel.webp', 'Zonwering van Sonty op een woning', 'Een van onze projecten'),
+    beeld('eigen/knikarm-resultaat.webp', 'Een knikarmscherm van Sonty boven een terras', 'Een van onze projecten'),
     offerteKaart(),
-    knop('Bekijk wat het nu kost', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl" }}'),
+    knop('Bekijk je offerte van toen', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
       <tr><td style="padding:20px 22px;${F};">
         <div style="color:${M.tekst};font-size:15px;font-weight:700;">Let op: de prijs is van toen</div>
@@ -736,7 +743,7 @@ SJABLONEN['sonty-reactivering-2'] = mail({
     </table>`,
     knop('Vraag een nieuwe prijs aan', '{{ person.sonty_verhaal_link|default:"https://www.sonty.nl/offerte" }}'),
     assortiment(),
-    beeld('eigen/montage-team-1.webp', 'Monteurs van Sonty aan het werk', 'Onze monteurs zijn in dienst bij Sonty, geen onderaannemers'),
+    beeld('eigen/montage-cassette.webp', 'Een monteur van Sonty monteert een cassette', 'Onze monteurs zijn in dienst bij Sonty, geen onderaannemers'),
     cijfers(),
     review(...REVIEW_ALLES),
     garantie(),
@@ -745,10 +752,10 @@ SJABLONEN['sonty-reactivering-2'] = mail({
 });
 
 SJABLONEN['sonty-crosssell-binnen'] = mail({
-  naam: 'Sonty cross-sell naar binnen',
+  reden: 'omdat je klant bij ons bent', naam: 'Sonty cross-sell naar binnen',
   preheader: 'Buiten is geregeld, en binnen?',
   kop: 'Buiten is geregeld. En binnen?',
-  intro: 'Je {{ person.sonty_product_kort|default:"zonwering" }} hangt er inmiddels. Veel klanten regelen daarna ook de binnenkant, want dat scheelt gedoe met verschillende partijen en het past dan meteen bij elkaar.',
+  intro: 'De buitenkant is inmiddels geregeld. Veel klanten pakken daarna ook de binnenkant aan, want dat scheelt gedoe met verschillende partijen en het past dan meteen bij elkaar.',
   blokken: [
     beeld('eigen/showroom-ramen.webp', 'Raamdecoratie in de showroom van Sonty', 'Raamdecoratie in onze showroom'),
     knop('Bekijk de mogelijkheden', 'https://www.sonty.nl/diensten/raamdecoratie'),
@@ -761,12 +768,12 @@ SJABLONEN['sonty-crosssell-binnen'] = mail({
 });
 
 SJABLONEN['sonty-review'] = mail({
-  naam: 'Sonty reviewverzoek',
+  reden: 'omdat je klant bij ons bent', naam: 'Sonty reviewverzoek',
   preheader: 'Zou je ons willen helpen?',
-  kop: 'Zou je ons willen helpen, {{ first_name|default:"daar" }}?',
-  intro: 'Je {{ person.sonty_product_kort|default:"zonwering" }} hangt er nu een paar weken. Als je tevreden bent, zou je ons dan willen helpen met een review op Google? Het kost je twee minuten en het helpt ons enorm.',
+  kop: 'Zou je ons willen helpen?',
+  intro: 'De montage is nu een paar weken achter de rug. Als je tevreden bent, zou je ons dan willen helpen met een review op Google? Het kost je twee minuten en het helpt ons enorm.',
   blokken: [
-    knop('Schrijf een review', 'https://g.page/r/sonty/review'),
+    knop('Schrijf een review', 'https://maps.google.com/?cid=6570478327481950083'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
       <tr><td style="padding:20px 22px;${F};">
         <div style="color:${M.tekst};font-size:15px;font-weight:700;">En als je niet tevreden bent?</div>

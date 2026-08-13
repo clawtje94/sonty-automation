@@ -23,6 +23,7 @@ const SHOTS = path.join(__dirname, 'previews');
 // ronde van 27 juli, waarin de offertekaart in de preview leeg bleef.
 const VOORBEELD = {
   'first_name': 'Marleen',
+  'person.sonty_aanhef': 'Hoi Marleen,',
   'person.sonty_product': 'Zip Design 110 zipscreens (2x, solar)',
   'person.sonty_product_kort': 'screens',
   'person.sonty_offertenummer': '20269576',

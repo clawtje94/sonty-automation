@@ -73,6 +73,10 @@ function netProduct(product) {
   if (/straat|laan|weg\b|plein|kade|dijk|\d{4}\s?[a-z]{2}\b/i.test(p)) return null;
   if (/^\d/.test(p)) return null;                  // "745x1720mm", "3000 dit zijn geschatte maten"
   if (/^(wit|zwart|grijs|antraciet|cr[eè]me)\b/i.test(p)) return null;
+  // Notities zijn geen productnamen: "scherm demonteren. Offerte telefonisch aangevraagd bij
+  // Tanya" begon met een kleine letter en bevatte een zin. Zoiets mag nooit in een klantmail.
+  if (/^[a-z]/.test(p)) return null;
+  if (p.length > 60 || /\.\s/.test(p)) return null;
   return p;
 }
 
@@ -171,6 +175,9 @@ function bouwProfiel(r) {
     // ontbrekende data leidt tot niet-mailen, niet tot per ongeluk wel mailen.
     sonty_mag_mail: r.magMail === false ? 'nee' : (r.magMail === true ? 'ja' : 'onbekend'),
     sonty_fase: bepaalFase(r),
+    // Aanhef als kant-en-klaar veld: "Hoi Marleen," of "Hoi," zonder bruikbare voornaam.
+    // In de sync berekend (zelfde filosofie als de fase): geen kapotte fallbacks in Klaviyo.
+    sonty_aanhef: netteVoornaam(r.voornaam) ? `Hoi ${netteVoornaam(r.voornaam)},` : 'Hoi,',
     sonty_categorie: categorie(r.product),
     sonty_product: netProduct(r.product),
     sonty_product_kort: leesbaarProduct(r.product),

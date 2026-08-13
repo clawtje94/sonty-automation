@@ -217,7 +217,26 @@ async function telegram(text) {
         if (regels.length) cohortBlok = '\n\n⏱️ Cohort-meting (getekend binnen 3 dagen na offerte):\n' + regels.join('\n');
       } catch (e) { console.error('cohort-meting overgeslagen:', e.message.slice(0, 60)); }
 
-      const details = (stats.overtuigd_details || []).length ? '\n\nOvertuigd:\n' + stats.overtuigd_details.map(d => '• ' + d).join('\n') : '';
+      // OVERTUIGD BETEKENT: twijfelde eerst EN is daarna ECHT akkoord (Daimy 13-08:
+      // er stonden mensen bij "overtuigd" die afgehaakt waren, zoals Levi). Het model
+      // mag twijfel signaleren, maar de uitkomst verifiëren wij tegen de harde
+      // akkoord-bronnen: alleen tickets met een inmeet-actie of een handtekening
+      // overleven de filter. "Overtuigd maar niet gekocht" bestaat niet.
+      const hardTickets = new Set(actieAkkoorden.map((a) => String(a.ticket)));
+      const hardNamen = nieuw.map((n) => n.klant);
+      const zelfdeNaam = (a3, b3) => {
+        const w = (n) => String(n || '').toLowerCase().replace(/[^a-z ]/g, '').split(' ').filter((x) => x && !['en', 'de', 'van', 'der', 'den', 'het'].includes(x));
+        const [kort, lang] = [w(a3), w(b3)].sort((x, y) => x.length - y.length);
+        return kort.length > 0 && kort.every((x) => lang.includes(x));
+      };
+      const overtuigdEcht = (stats.overtuigd_details || []).filter((d) => {
+        const tk = (String(d).match(/\((\d{6,})\)/) || [])[1];
+        const naam3 = String(d).split(/[—(-]/)[0].trim();
+        return (tk && hardTickets.has(tk)) || hardNamen.some((n) => zelfdeNaam(n, naam3));
+      });
+      stats.overtuigd = overtuigdEcht.length;
+      stats.overtuigd_tickets = overtuigdEcht.map((d) => (String(d).match(/\((\d{6,})\)/) || [])[1]).filter(Boolean);
+      const details = overtuigdEcht.length ? '\n\nOvertuigd (twijfelde eerst, nu echt akkoord):\n' + overtuigdEcht.map(d => '• ' + d).join('\n') : '';
 
       // EEN AKKOORD-GETAL (Daimy 10-08). Online tekenen en mondeling ja zeggen in de
       // chat zijn allebei "akkoord, door naar inmeten" en tellen als één ding, elke

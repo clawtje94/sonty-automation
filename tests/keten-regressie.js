@@ -522,6 +522,7 @@ test('avondrapport: akkoord komt nooit uit het taalmodel', () => {
   assert.ok(!/akkoord_tickets/.test(bron), 'akkoord_tickets (model-oordeel) mag niet meer bestaan');
   assert.ok(/inmeet_afspraak/.test(bron), 'akkoord moet uit de inmeet-acties in de log komen');
   assert.ok(/AKKOORD KOMT NOOIT MEER UIT EEN TAALMODEL/.test(bron), 'de les moet gedocumenteerd blijven');
+  assert.ok(/OVERTUIGD BETEKENT/.test(bron) && /overtuigdEcht/.test(bron), 'overtuigd moet geverifieerd worden tegen harde akkoorden (Levi-les 13-08)');
 });
 
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);

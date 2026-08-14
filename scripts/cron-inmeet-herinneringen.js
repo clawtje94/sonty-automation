@@ -76,6 +76,7 @@ async function main() {
     const naam = (tel?.name || (job.description || '').split('\n')[0].replace(/^.*?(—|-)\s*/, '')).trim();
     const slot = { aankomst: job.scheduled_at, inmeter: INMETERS[j.assignee.worker_uuid] };
     const duur = Math.round((job.scheduled_duration || 1800) / 60);
+    if (require('./lib/klant-stil.js').klantStil(b.telefoon)) { console.log(`  stil-lijst: geen herinnering naar ${naam}`); continue; }
     const tekst = herinneringTekst(naam.split(' ')[0] || 'daar', slot, duur, dagenVooraf);
     console.log(`  ${naam}: ${tekst.slice(0, 70)}…`);
     if (!EXECUTE) continue;

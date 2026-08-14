@@ -1362,6 +1362,10 @@ async function verwerkAanbiedingen() {
       // bevestiging terwijl de boeking daarna op een botsing afketste. De WhatsApp
       // gaat naar het ticket dat de reply-monitor al volgt; falen = melding mét tekst.
       try {
+        // STIL-POORT (Charles 14-08): stond de klant op de stil-lijst, dan ging er
+        // TOCH een bevestiging uit omdat alleen de reply-monitor de lijst kende.
+        // Nu checkt elk klant-verzendpad hem.
+        if (require('./lib/klant-stil.js').klantStil(a.lead.telefoon)) { console.log('  stil-lijst: geen bevestiging naar ' + a.lead.naam); throw { stil: true }; }
         const stT = laadState();
         const ticketInfo = stT.aanbodTickets?.[a.token];
         const { bevestigingsTekst } = require('./cron-aanbod-replies.js');
@@ -1382,7 +1386,7 @@ async function verwerkAanbiedingen() {
         if (!bevestigd) await telegram(`⚠️ ${a.lead.naam} is geboekt maar de bevestiging kon niet via WhatsApp — even handmatig sturen: ${tekst}`);
         else await telegram(`📤 Bevestiging naar ${a.lead.naam} (ná geslaagde boeking): ${tekst}`);
       } catch (e) {
-        await telegram(`⚠️ Bevestiging na boeking mislukt voor ${a.lead.naam}: ${e.message.slice(0, 80)}`);
+        if (!e?.stil) await telegram(`⚠️ Bevestiging na boeking mislukt voor ${a.lead.naam}: ${(e.message || '').slice(0, 80)}`);
       }
       console.log(`  ✓ ${a.lead.naam}: ${uitkomst.samenvatting}`);
       await telegram(boekingsMelding({

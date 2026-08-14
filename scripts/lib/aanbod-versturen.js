@@ -262,6 +262,7 @@ function bevestigingTekst(voornaam, slot, duurMin) {
 }
 
 async function verstuurBevestiging(aanbod, slot) {
+  if (require('./klant-stil.js').klantStil(arguments[0]?.telefoon || arguments[0]?.lead?.telefoon)) { console.log('  stil-lijst: bevestiging NIET verstuurd'); return { ok: false, stil: true }; }
   const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
   const tekst = bevestigingTekst(voornaam, slot, aanbod.duurMin);
   let wa = { ok: false, reden: 'geen telefoon' };
@@ -304,6 +305,10 @@ function herinneringTekst(voornaam, slot, duurMin, dagenVooraf = 1) {
 
 /** Beide kanalen; geeft per kanaal terug wat er gebeurd is. Eén kanaal gelukt = aanbod is onderweg. */
 async function verstuurAanbod(aanbod, url) {
+  // STIL-POORT (Charles 14-08): staat de klant op de stil-lijst, dan gaat er NIETS uit.
+  if (require('./klant-stil.js').klantStil(aanbod?.lead?.telefoon)) {
+    return { wa: { ok: false, reden: 'klant op stil-lijst' }, mail: { ok: false, reden: 'klant op stil-lijst' }, ergensGelukt: false, stil: true };
+  }
   const wa = await stuurWhatsApp(aanbod, url).catch((e) => ({ ok: false, reden: e.message }));
   const mail = await stuurMail(aanbod, url).catch((e) => ({ ok: false, reden: e.message }));
   // VERZEND-SPIEGEL (les 06-08, lege-tijden-incident): het bericht zoals de klant het

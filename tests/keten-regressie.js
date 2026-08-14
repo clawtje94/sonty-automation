@@ -525,5 +525,17 @@ test('avondrapport: akkoord komt nooit uit het taalmodel', () => {
   assert.ok(/OVERTUIGD BETEKENT/.test(bron) && /overtuigdEcht/.test(bron), 'overtuigd moet geverifieerd worden tegen harde akkoorden (Levi-les 13-08)');
 });
 
+// Charles Gevers (14-08): "Dat is zaak omdraaien" matchte "dat is..." en werd geboekt
+// terwijl hij midden in een discussie met Daimy zat. "Dat is" telt alleen met een
+// positief vervolg.
+test('"dat is" zonder positief vervolg is nooit een keuze', () => {
+  const { leesKeuze } = require('../scripts/cron-aanbod-replies.js');
+  const een = [{ aankomst: '2026-09-21T10:25:00.000Z' }];
+  assert.strictEqual(leesKeuze('Dat is zaak omdraaien. Ik verwacht morgen antwoord op evt. andere planning', een), null);
+  assert.strictEqual(leesKeuze('Dat is niet wat ik vroeg', een), null);
+  assert.strictEqual(leesKeuze('Dat is goed', een), 0);
+  assert.strictEqual(leesKeuze('Dat past', een), 0);
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

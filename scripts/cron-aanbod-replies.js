@@ -52,7 +52,10 @@ function leesKeuze(tekst, slots) {
     // ook als er daarna nog een vraag of groet volgt. De twijfel-check hierboven
     // heeft dan al gedraaid.
     const eersteZinnen = t.split(/[.!?\n]/).slice(0, 2).map((z) => z.trim());
-    if (eersteZinnen.some((z) => /^(hi+|hoi|hey|hallo|goedemorgen|goedemiddag|goedenavond)?[,! ]*(dat (is|past)|past (goed|prima)|prima|is goed|helemaal goed|akkoord|top|ja( hoor| graag| leuk)?|jazeker|oke|oké|ok|perfect|super)\b/.test(z))) return 0;
+    // "dat is" alléén met een positief vervolg (Charles 14-08: "Dat is zaak omdraaien.
+    // Ik verwacht morgen antwoord" werd als akkoord gelezen en GEBOEKT terwijl hij
+    // midden in een discussie met Daimy zat). "Dat is" op zichzelf zegt niets.
+    if (eersteZinnen.some((z) => /^(hi+|hoi|hey|hallo|goedemorgen|goedemiddag|goedenavond)?[,! ]*(dat (is (goed|prima|top|akkoord|helemaal goed|ok[eé]?)|past)|past (goed|prima)|prima|is goed|helemaal goed|akkoord|top|ja( hoor| graag| leuk)?|jazeker|oke|oké|ok|perfect|super)\b/.test(z))) return 0;
     if (/^(?:optie\s*)?1[.!)]?$/.test(t)) return 0;
     return null;
   }

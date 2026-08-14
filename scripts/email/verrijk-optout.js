@@ -46,10 +46,15 @@ const GEEN_HERINNERING = CFG.RP_STATUS_GEEN_HERINNERING;
   }
   console.log(`${geblokkeerd.size} e-mailadressen staan in Reuzenpanda op "geen herinnering meer".`);
 
+  // STIL-LIJST (Daimy 14-08, Charles Gevers): staat een klant op de centrale stil-lijst
+  // omdat een mens het gesprek voert, dan mag ook geen enkele MAILFLOW hem benaderen.
+  // Zelfde poort als de planner en de herinneringen gebruiken (lib/klant-stil.js).
+  const { klantStil } = require('../lib/klant-stil.js');
+
   let uit = 0;
   for (const r of rijen) {
     r.statusId = statusVan.get(r.itemId) || null;
-    r.magMail = !(r.statusId === GEEN_HERINNERING || geblokkeerd.has(r.email));
+    r.magMail = !(r.statusId === GEEN_HERINNERING || geblokkeerd.has(r.email) || klantStil(r.telefoon));
     if (!r.magMail) uit++;
   }
 

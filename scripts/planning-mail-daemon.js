@@ -130,13 +130,16 @@ async function owaSessie() {
   await page.goto('https://outlook.office.com/mail/');
   await page.waitForLoadState('networkidle');
   await page.waitForTimeout(2000);
-  const emailInput = await page.$('input[type="email"], input[name="loginfmt"]');
+  // Robuust tegen tussentijdse navigaties (15-08: "Execution context was destroyed" —
+  // Microsofts loginpagina navigeert soms direct door en dan crashte page.$).
+  const veilig = async (fn) => { try { return await fn(); } catch { return null; } };
+  const emailInput = await veilig(() => page.$('input[type="email"], input[name="loginfmt"]'));
   if (emailInput) {
-    await emailInput.fill(SECRETS.OWA_LOGIN.email);
-    await page.locator('input[type="submit"]').click();
-    await page.waitForTimeout(3000);
-    const pw = await page.$('input[type="password"]');
-    if (pw) { await pw.fill(SECRETS.OWA_LOGIN.password); await page.locator('input[type="submit"]').click(); await page.waitForTimeout(3000); }
+    await veilig(() => emailInput.fill(SECRETS.OWA_LOGIN.email));
+    await veilig(() => page.locator('input[type="submit"]').click());
+    await page.waitForTimeout(4000);
+    const pw = await veilig(() => page.$('input[type="password"]'));
+    if (pw) { await veilig(() => pw.fill(SECRETS.OWA_LOGIN.password)); await veilig(() => page.locator('input[type="submit"]').click()); await page.waitForTimeout(3000); }
     try {
       const y = page.locator('input[value="Yes"], input[value="Ja"], #idSIButton9');
       if (await y.count()) { await y.first().click(); await page.waitForTimeout(3000); }

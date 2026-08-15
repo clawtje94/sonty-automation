@@ -127,25 +127,24 @@ async function owaSessie() {
     const a = req.headers()['authorization'];
     if (a && a.startsWith('Bearer ') && req.url().includes('outlook.office.com')) token = a.replace('Bearer ', '');
   });
-  await page.goto('https://outlook.office.com/mail/');
-  await page.waitForLoadState('networkidle');
-  await page.waitForTimeout(2000);
-  // Robuust tegen tussentijdse navigaties (15-08: "Execution context was destroyed" —
-  // Microsofts loginpagina navigeert soms direct door en dan crashte page.$).
-  const veilig = async (fn) => { try { return await fn(); } catch { return null; } };
-  const emailInput = await veilig(() => page.$('input[type="email"], input[name="loginfmt"]'));
-  if (emailInput) {
-    await veilig(() => emailInput.fill(SECRETS.OWA_LOGIN.email));
-    await veilig(() => page.locator('input[type="submit"]').click());
-    await page.waitForTimeout(4000);
-    const pw = await veilig(() => page.$('input[type="password"]'));
-    if (pw) { await veilig(() => pw.fill(SECRETS.OWA_LOGIN.password)); await veilig(() => page.locator('input[type="submit"]').click()); await page.waitForTimeout(3000); }
-    try {
-      const y = page.locator('input[value="Yes"], input[value="Ja"], #idSIButton9');
-      if (await y.count()) { await y.first().click(); await page.waitForTimeout(3000); }
-    } catch {}
+  await page.goto('https://outlook.office.com/mail/', { waitUntil: 'domcontentloaded' }).catch(() => {});
+  // SELECTOR-VRIJE LOGIN (15-08). Microsofts nieuwe loginpagina rendert het formulier in
+  // een gesloten shadow-DOM: page.$('input[type=email]') vindt NIETS meer en fill() kwam
+  // nooit aan ("Enter a valid email address" met leeg veld). Wat wel altijd werkt: het
+  // veld heeft autofocus, dus blind typen met het toetsenbord en Enter. Bewezen met
+  // scripts/.tmp-owa-blind-methode op 15-08; de oude weg brak de hele planningsketen
+  // (geen token -> geen vakanties -> planner weigert -> "laatste ronde 54 min geleden").
+  for (let i = 0; i < 20 && !page.url().includes('login.microsoftonline'); i++) await page.waitForTimeout(1500);
+  await page.waitForTimeout(5000);
+  if (page.url().includes('login.microsoftonline')) {
+    const fases = [SECRETS.OWA_LOGIN.email, SECRETS.OWA_LOGIN.password, null];
+    for (let f = 0; f < fases.length && !token; f++) {
+      if (fases[f]) await page.keyboard.type(fases[f], { delay: 35 }).catch(() => {});
+      await page.keyboard.press('Enter').catch(() => {});
+      await page.waitForTimeout(7000);
+    }
   }
-  await page.waitForTimeout(8000);
+  for (let i = 0; i < 8 && !token; i++) await page.waitForTimeout(3000);
   if (!token) {
     await browser.close();
     // De browser-login kan mislukken (Microsoft vraagt om bevestiging, sessie verlopen).

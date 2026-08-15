@@ -505,6 +505,20 @@ async function verwerkTicket(t, state) {
   // opnieuw een bericht, dan hoort het DIRECT weer bij team Mens nodig — de bot praat niet mee.
   {
     const ruweBerichten = msgs?.data || [];
+    // TAAL VASTLEGGEN (Ganesh 15-08: mailde dagenlang in het Engels met Sunny, maar de
+    // Engels-vlag werd alleen door de reply-monitor gezet — de planner wist van niks en
+    // boekte Joey, tegen de regel "Engelstalig = altijd Sjoerd" in). Elke Engelse
+    // klantzin die hier voorbij komt zet de vlag, vóór er ooit een aanbod uitgaat.
+    try {
+      const { lijktEngels, zetEngels, isEngels } = require('../lib/taal-voorkeur.js');
+      const laatsteInboundTekst = ruweBerichten.filter((m) => m.type === 'INBOUND')
+        .sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)))
+        .map((m) => String(m.body || m.message || '').replace(/<[^>]+>/g, ' ')).pop() || '';
+      if (t.contact?.phone && laatsteInboundTekst && lijktEngels(laatsteInboundTekst) && !isEngels(t.contact.phone)) {
+        zetEngels(t.contact.phone, 'ai-ks ticket ' + t.id);
+        console.log(`  taal: ${t.contact.full_name || t.contact.phone} gemarkeerd als Engelstalig`);
+      }
+    } catch {}
     const overdrachten = ruweBerichten.filter(m => (m.internal_note || m.type === 'NOTE') && m.user_id === 747786 &&
       (OVERDRACHT_HERKENNING.test(String(m.body || m.message || '')) || /De AI kan dit niet zelf afhandelen en draagt het over/i.test(String(m.body || m.message || ''))));
     if (isWaTicket(t) && overdrachten.length && !t._verseOpdracht) {

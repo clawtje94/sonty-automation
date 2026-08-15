@@ -1,5 +1,28 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-15)
 
+## 15-08 (avond): ÉÉN SYSTEMEN-REGISTER + BEWERKBAAR DASHBOARD + ZELFHERSTEL
+- Opdracht Daimy (/goal): "veel te veel losse shit" — alles in kaart, één bewerkbaar
+  systeem, bewaken dat alles blijft samenwerken.
+- Gevonden: 53 nl.sonty.*-diensten draaien, maar SYSTEMEN.md kende er 24,
+  status-collect 24 en health-check 17 — drie losse lijsten die uit elkaar liepen.
+- GEBOUWD (sonty-platform 264f541+, website 8a8e7cd+bf1c9a1):
+  1. `data/systemen-register.json` = DE bron van waarheid (alle 53, met naam, functie,
+     groep, ritme, log, bewaking, kill-switch, heartbeat). status-collect, health-check
+     én SYSTEMEN.md (gegenereerd via scripts/systemen-md-genereer.js) lezen alle drie
+     dit register. Nieuwe dienst zonder registratie → automatisch oranje + Telegram.
+  2. /admin/systemen BEWERKBAAR: functie/naam/bewakingstijd aanpassen + aan/uit-knop.
+     Wijzigingen → KV systemen:config → collector voert ze binnen 10 min door op
+     register + kill-switches (end-to-end getest).
+  3. ZELFHERSTEL: telegram-poll en databot-poll schrijven nu een heartbeat
+     (data/heartbeat/); collector (elke 10 min) kickstart ze automatisch bij >15 min
+     stilte + meldt het. (Poller hing 11-08 en 2x op 15-08 zonder alarm.)
+  4. Nieuw-rood → gebundelde Telegram-melding per collector-ronde (dedupe op vorige
+     status). Exit -15 (SIGTERM/kickstart) telt niet meer als rood.
+- BEVINDINGEN uit de eerste echte ronde (staan op het dashboard, deels nog te fixen):
+  sonny-rapport log al 29 DAGEN stil; planado-shifts + cohortrapport ~5 dagen stil;
+  ab-eindrapport 7 dagen stil; gesprek-lab exit 1. Dode file scripts/telegram-inbox.txt
+  (11 maart) verwijderd uit gebruik — echte inbox is ~/sonty/telegram-inbox.txt.
+
 ## 15-08 (middag): INMEET-DASHBOARD "VERLOPEN"-VERWARRING GEFIXT (geval Jaap v Egmond)
 - Klacht Daimy: kaart "verlopen" bij Jaap v Egmond terwijl hij allang ingepland was.
   Oorzaak: Jaap appte "ander moment" op zijn eerste keuzelink (13:36) → systeem sloot

@@ -355,7 +355,7 @@ async function main() {
               if (gemeld[rondeSleutel] > 2) {
                 await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, {
                   method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
-                  body: JSON.stringify({ status: 'verlopen' }),
+                  body: JSON.stringify({ status: 'verlopen', reden: 'klant wees meerdere voorstellen af, mens nodig' }),
                 }).catch(() => {});
                 if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, 'Dank je wel! Ik laat een collega even persoonlijk meekijken naar een moment dat echt goed past, je hoort snel van ons.');
                 await telegram(`📞 ${info.naam} heeft vandaag al ${gemeld[rondeSleutel] - 1}x een automatisch voorstel afgewezen (${duiding.samenvatting}) — ik stop met automatisch sturen, mens nodig / belscherm.`);
@@ -364,7 +364,7 @@ async function main() {
               // oude aanbod sluiten en meteen nieuwe tijden laten sturen, met zijn voorkeur
               await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, {
                 method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
-                body: JSON.stringify({ status: 'verlopen' }),
+                body: JSON.stringify({ status: 'verlopen', reden: 'klant wilde een ander moment, nieuw voorstel gestuurd' }),
               }).catch(() => {});
               const rpId = rpItemPer[token] || aanbod?.lead?.rpItemId;
               if (!rpId) {

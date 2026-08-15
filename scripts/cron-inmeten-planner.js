@@ -1170,7 +1170,7 @@ async function verwerkAanbiedingen() {
     }
 
     if (Date.now() > Date.parse(a.verlooptOp)) {
-      await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen' }) });
+      await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen', reden: 'klant heeft binnen 24 uur niet gekozen' }) });
       const { verwijderOpties } = require('./lib/outlook-opties.js');
       await verwijderOpties(state.opties?.[a.token]).catch(() => {});
       delete state.opties?.[a.token];
@@ -1264,7 +1264,7 @@ async function verwerkAanbiedingen() {
             if (!poort.mag) {
 
               console.log(`  ✋ ${a.lead.naam}: ${poort.reden} — NIET boeken (${duiding.samenvatting})`);
-              await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen' }) });
+              await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen', reden: 'klant kwam na zijn keuze terug op het bericht, mens kijkt mee' }) });
               const { verwijderOpties } = require('./lib/outlook-opties.js');
               await verwijderOpties(state.opties?.[a.token]).catch(() => {});
               delete state.opties?.[a.token];
@@ -1300,7 +1300,7 @@ async function verwerkAanbiedingen() {
         // Status 'verlopen', NIET 'verwerkt': verwerkt betekent "geboekt", en dat was
         // het niet. Op het dashboard stond daardoor groen "klant koos optie 1" bij
         // Natalie Bavinck terwijl er niets geboekt was (Daimy 10-08).
-        await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen' }) });
+        await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen', reden: 'gekozen tijd was net vergeven, nieuw voorstel volgt' }) });
         const { verwijderOpties } = require('./lib/outlook-opties.js');
         await verwijderOpties(state.opties?.[a.token]).catch(() => {});
         delete state.opties?.[a.token];

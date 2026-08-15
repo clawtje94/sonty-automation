@@ -114,6 +114,17 @@ async function stuurWaBevestiging(ticketId, naam, slot) {
 
 /** Klant meteen laten weten dat zijn bericht is aangekomen. Stilte na een reactie is
  *  het enige echt foute antwoord; dit koopt de tijd om het goed af te handelen. */
+// MAX 1 ONTVANGSTBEVESTIGING PER GESPREK PER 2 UUR (Jan van Wageningen 15-08: drie
+// berichten in 8 minuten = twee identieke "ik zoek het even uit"-teksten, over twee
+// monitor-rondes heen). De cooldown leeft in de gedeelde gemeld-state.
+function magBevestigen(gemeld, ticketId) {
+  const k = 'bevestigd:' + ticketId;
+  const laatst = Date.parse(gemeld[k] || 0);
+  if (Date.now() - laatst < 2 * 3600000) return false;
+  gemeld[k] = new Date().toISOString();
+  return true;
+}
+
 async function bevestigOntvangst(ticketId, naam, tekst) {
   for (let i = 0; i < 3; i++) {
     const r = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages`, {
@@ -346,7 +357,7 @@ async function main() {
                   method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
                   body: JSON.stringify({ status: 'verlopen' }),
                 }).catch(() => {});
-                await bevestigOntvangst(ticketId, info.naam, 'Dank je wel! Ik laat een collega even persoonlijk meekijken naar een moment dat echt goed past, je hoort snel van ons.');
+                if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, 'Dank je wel! Ik laat een collega even persoonlijk meekijken naar een moment dat echt goed past, je hoort snel van ons.');
                 await telegram(`📞 ${info.naam} heeft vandaag al ${gemeld[rondeSleutel] - 1}x een automatisch voorstel afgewezen (${duiding.samenvatting}) — ik stop met automatisch sturen, mens nodig / belscherm.`);
                 continue;
               }
@@ -371,7 +382,7 @@ async function main() {
                   nietDeze: gemeld['afgewezen:' + rpIdRem] || (aanbod?.slots || []).map((sl) => sl.aankomst),
                 }),
               });
-              await bevestigOntvangst(ticketId, info.naam, duiding.dagen.length
+              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, duiding.dagen.length
                 ? 'Dank je wel! Ik zoek even een moment op de dagen die je noemt en stuur je zo een nieuw voorstel.'
                 : 'Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel.');
               await telegram(`🔁 ${info.naam}: ${duiding.samenvatting}\nNieuw aanbod aangevraagd (${r.ok ? 'staat in de rij' : 'AANVRAAG MISLUKT — handmatig'}).`);
@@ -380,7 +391,7 @@ async function main() {
             }
 
             if (duiding.intent === 'klacht' || duiding.intent === 'vraag') {
-              await bevestigOntvangst(ticketId, info.naam,
+              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam,
                 duiding.intent === 'klacht'
                   ? `Dank je voor je eerlijke bericht, dat snap ik goed. Ik leg het even voor aan een collega en je hoort ${wanneerTerug()} van ons.`
                   : `Goede vraag! Ik zoek het even voor je uit en kom er ${wanneerTerug()} op terug.`);
@@ -403,8 +414,26 @@ async function main() {
             const rB = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': MEET_CODE } });
             const aanbodB = rB.ok ? await rB.json() : null;
             const duidingB = await leesReactie(reeksTekst || tekst, aanbodB?.slots || []);
+            if (duidingB.intent === 'annuleren') {
+              // ANNULERING NA BOEKING (Ana Franca 13-08: "ik zie af van de opdracht" kreeg
+              // "ik zoek het even uit en kom er vandaag op terug" — en daarna gebeurde er
+              // NIETS: de afspraak van 10 sep bleef gewoon in Planado en Outlook staan).
+              // Dus: eerlijke reactie zonder loze belofte, alarm, en op de bewakingslijst
+              // tot de afspraak aantoonbaar weg is (keten-zelfcontrole checkt Planado).
+              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam,
+                'Dank je voor je bericht, wat jammer om te lezen! Ik geef je annulering direct door aan onze planning. Zodra de afspraak is verwijderd krijg je daar nog een bevestiging van, dan hoef jij verder niets te doen.');
+              try {
+                const AOPEN = '/Users/clawdboot/sonty/data/annuleringen-open.json';
+                const ao = (() => { try { return JSON.parse(fs.readFileSync(AOPEN, 'utf8')); } catch { return {}; } })();
+                ao[token] = { naam: info.naam, telefoon: info.telefoon || '', ticketId, gemeldOp: new Date().toISOString(), samenvatting: duidingB.samenvatting };
+                fs.writeFileSync(AOPEN, JSON.stringify(ao, null, 1));
+              } catch (e) { console.log(`  annulering-bewaking niet weggeschreven: ${e.message.slice(0, 80)}`); }
+              await telegram(`🚨 ANNULERING van ${info.naam}: ${duidingB.samenvatting}\n\n"${tekst.slice(0, 200)}"\n\nDe geboekte afspraak staat NOG in Planado/Outlook — die moet eruit (en de klant krijgt daarna een bevestiging). De zelfcontrole blijft hierover piepen tot de afspraak weg is. Ticket ${ticketId}.`);
+              meldingen++;
+              continue;
+            }
             if (duidingB.intent !== 'akkoord') {
-              await bevestigOntvangst(ticketId, info.naam, duidingB.intent === 'klacht'
+              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, duidingB.intent === 'klacht'
                 ? `Dank je voor je eerlijke bericht, dat snap ik goed. Ik pak dit meteen op en je hoort ${wanneerTerug()} van ons.`
                 : `Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er ${wanneerTerug()} bij je op terug.`);
               await telegram(`🚨 ${info.naam} schreef NA de boeking iets dat aandacht vraagt (${duidingB.intent}: ${duidingB.samenvatting}).\n\n"${tekst.slice(0, 200)}"\n\nDe afspraak staat al vast — controleer of die nog klopt. Ticket ${ticketId}. De klant weet dat we ermee bezig zijn.`);

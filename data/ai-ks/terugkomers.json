@@ -1,10 +1,18 @@
 {
- "973798496": {
-  "klantTijd": "2026-08-13 10:18:17",
-  "phone": "+31653538616",
+ "974020298": {
+  "klantTijd": "2026-08-14 12:57:15",
+  "phone": "+31622935565",
   "naam": null,
-  "geregistreerd": "2026-08-13T08:25:03.021Z",
-  "opvolgenVanaf": "2026-08-14T06:18:17.000Z",
+  "geregistreerd": "2026-08-14T11:20:04.976Z",
+  "opvolgenVanaf": "2026-08-20T07:00:00.000Z",
+  "reden": "klant noemde donderdag"
+ },
+ "974215965": {
+  "klantTijd": "2026-08-15 09:45:36",
+  "phone": "+31622397084",
+  "naam": null,
+  "geregistreerd": "2026-08-15T07:53:10.501Z",
+  "opvolgenVanaf": "2026-08-16T05:45:36.000Z",
   "reden": "geen moment genoemd, standaard 22 uur"
  }
 }

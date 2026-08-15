@@ -1,0 +1,22 @@
+{
+  "quotationNumber": "202611579",
+  "documentId": "351fdf39-b0bb-4986-bbf4-4eea51e96388",
+  "name": "Arjan Van der Meer",
+  "timestamp": "2026-08-13T15:00:29.094Z",
+  "lines": [
+    {
+      "units": 1,
+      "description": "SunBasic\nBreedte: 3501mm\nUitval: 2000 mm\nFrame Kleur: RAL 7016 structuur\nKleur doek: NTB\nBediening: Draaischakelaar\nMotorzijde: NTB\nKleur/lengte motorkabel: NTB\nOverige: NTB\n\nGarantie:\n- 5 jaar op het product.\n- 7 jaar op de motor",
+      "pricePerUnit": 2341.5,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    },
+    {
+      "units": 1,
+      "description": "Inmeten + montage Knikarmscherm.\n- Zonder uitbouw\n- Montage d.m.v. chemisch anker\n- Afwerken elektra\n- Klein materiaal\n- Afstellen zonwering\n- Verwerken verpakkingsmateriaal",
+      "pricePerUnit": 275,
+      "vatPercentage": 21,
+      "lockTotalPrice": false
+    }
+  ]
+}

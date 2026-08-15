@@ -537,5 +537,35 @@ test('"dat is" zonder positief vervolg is nooit een keuze', () => {
   assert.strictEqual(leesKeuze('Dat past', een), 0);
 });
 
+
+// HERHAAL-BERICHTEN (Jan van Wageningen 15-08): drie klantberichten in 8 minuten
+// leverden twee keer exact dezelfde "ik zoek het even uit"-tekst op, over twee
+// monitor-rondes heen. Elke ontvangstbevestiging moet door de 2-uurs-cooldown.
+test('elke bevestigOntvangst-aanroep zit achter de magBevestigen-cooldown', () => {
+  const bron = require('fs').readFileSync(__dirname + '/../scripts/cron-aanbod-replies.js', 'utf8');
+  const aanroepen = bron.match(/await bevestigOntvangst\(/g) || [];
+  const bewaakt = bron.match(/if \(magBevestigen\(gemeld, ticketId\)\) await bevestigOntvangst\(/g) || [];
+  assert.ok(aanroepen.length > 0, 'geen bevestigOntvangst-aanroepen gevonden');
+  assert.strictEqual(bewaakt.length, aanroepen.length, 'onbewaakte bevestigOntvangst-aanroep gevonden');
+  assert.ok(/2 \* 3600000/.test(bron), 'cooldown van 2 uur ontbreekt');
+});
+
+// ANNULERING NA BOEKING (Ana Franca 13-08): afzegging kreeg een canned "kom er
+// vandaag op terug" en daarna stilte; de afspraak bleef 2 dagen in Planado staan.
+test('annulering na boeking: eigen intent, bewakingslijst en geen loze belofte', () => {
+  const fsx = require('fs');
+  const antwoord = fsx.readFileSync(__dirname + '/../scripts/lib/planning-antwoord.js', 'utf8');
+  assert.ok(antwoord.includes("'annuleren'"), 'intent annuleren ontbreekt in leesReactie');
+  const monitor = fsx.readFileSync(__dirname + '/../scripts/cron-aanbod-replies.js', 'utf8');
+  assert.ok(monitor.includes("duidingB.intent === 'annuleren'"), 'monitor behandelt annuleren niet apart');
+  assert.ok(monitor.includes('annuleringen-open.json'), 'annulering komt niet op de bewakingslijst');
+  const blok = monitor.slice(monitor.indexOf("duidingB.intent === 'annuleren'"), monitor.indexOf("duidingB.intent !== 'akkoord'"));
+  assert.ok(blok.includes('annulering direct door'), 'annulering-antwoord aan de klant ontbreekt');
+  assert.ok(!blok.includes('wanneerTerug()'), 'annulering-tekst bevat nog een terugkom-belofte');
+  const zelf = fsx.readFileSync(__dirname + '/../scripts/cron-keten-zelfcontrole.js', 'utf8');
+  assert.ok(zelf.includes('ANNULERING OPEN'), 'zelfcontrole bewaakt open annuleringen niet');
+  assert.ok(zelf.includes('klantStil'), 'annulerings-bevestiging heeft geen stil-lijst-poort');
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

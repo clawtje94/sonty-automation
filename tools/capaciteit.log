@@ -23,3 +23,54 @@ OMSLAGPUNT UIT JE EIGEN HISTORIE (uitgerijpte maanden):
   350-500 offertes/week -> 10.7 offertes per order  (oplopend, 1 mnd)
   Tot ongeveer 250 offertes per week blijft het gezond. Daarboven loopt het weg.
 versturen mislukt: spawnSync node ENOENT
+tab "Juli 2026" niet leesbaar: Unable to parse range: 'Juli 2026'!A1:AR3100
+CAPACITEITSMONITOR — 2026-W33
+
+INSTROOM      375 offertes/week   (laatste 4 volle weken)
+VERWERKING    16.6 orders/week      (laatste 8 weken)
+CAPACITEIT    35.3 orders/week      (beste 4 weken ooit: 2026-W13 t/m 2026-W16)
+VERZADIGING   133%
+RATIO         12.1 offertes per order   (gezond is ~8)
+DOORLOOPTIJD  28 dagen tot akkoord (was 20)
+
+OORDEEL: AFSCHALEN
+Zet de instroom terug naar ongeveer 282 offertes per week. Dat is 93 per week minder, ongeveer 25% eraf.
+
+Waarom: je hebt nu 12.1 offertes nodig per order, bij gezonde bezetting is dat 8.
+Die 93 extra offertes per week leveren geen orders op, ze kosten alleen inmeet- en opvolgtijd.
+Het plafond van 35 orders per week gaat niet omhoog door meer leads te kopen; daar is meer mensen of een korter verkoopproces voor nodig.
+Let op: je verwerkt nu 17 orders per week terwijl je er 35 hebt gehaald. De output is dus niet alleen gelijk gebleven maar gezakt terwijl de instroom steeg.
+
+OMSLAGPUNT UIT JE EIGEN HISTORIE (uitgerijpte maanden):
+    0-150 offertes/week -> 7.2 offertes per order  (gezond, 7 mnd)
+  150-250 offertes/week -> 7.7 offertes per order  (gezond, 3 mnd)
+  250-300 offertes/week -> 9.6 offertes per order  (oplopend, 3 mnd)
+  300-350 offertes/week -> 9.5 offertes per order  (oplopend, 2 mnd)
+  350-500 offertes/week -> 10.7 offertes per order  (oplopend, 1 mnd)
+  Tot ongeveer 250 offertes per week blijft het gezond. Daarboven loopt het weg.
+versturen mislukt: spawnSync node ENOENT
+CAPACITEITSMONITOR — 2026-W33
+
+INSTROOM      438 offertes/week   (laatste 4 volle weken)
+VERWERKING    18.1 orders/week      (laatste 8 weken)
+CAPACITEIT    35.3 orders/week      (beste 4 weken ooit: 2026-W13 t/m 2026-W16)
+VERZADIGING   155%
+RATIO         12.1 offertes per order   (gezond is ~8)
+DOORLOOPTIJD  27 dagen tot akkoord (was 20)
+
+OORDEEL: AFSCHALEN
+Zet de instroom terug naar ongeveer 282 offertes per week. Dat is 156 per week minder, ongeveer 36% eraf.
+
+Waarom: je hebt nu 12.1 offertes nodig per order, bij gezonde bezetting is dat 8.
+Die 156 extra offertes per week leveren geen orders op, ze kosten alleen inmeet- en opvolgtijd.
+Het plafond van 35 orders per week gaat niet omhoog door meer leads te kopen; daar is meer mensen of een korter verkoopproces voor nodig.
+Let op: je verwerkt nu 18 orders per week terwijl je er 35 hebt gehaald. De output is dus niet alleen gelijk gebleven maar gezakt terwijl de instroom steeg.
+
+OMSLAGPUNT UIT JE EIGEN HISTORIE (uitgerijpte maanden):
+    0-150 offertes/week -> 7.2 offertes per order  (gezond, 7 mnd)
+  150-250 offertes/week -> 7.7 offertes per order  (gezond, 3 mnd)
+  250-300 offertes/week -> 9.6 offertes per order  (oplopend, 3 mnd)
+  300-350 offertes/week -> 9.5 offertes per order  (oplopend, 2 mnd)
+  350-500 offertes/week -> 10.7 offertes per order  (oplopend, 1 mnd)
+  Tot ongeveer 250 offertes per week blijft het gezond. Daarboven loopt het weg.
+verstuurd naar 1700128390 (d2ahsbrb) in 1 deel(en)

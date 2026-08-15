@@ -4659,5 +4659,31 @@
       }
     ],
     "processedAt": "2026-08-14T10:30:10.911Z"
+  },
+  "item:cde87818-8b34-4691-a27c-2136c4fccae3": {
+    "summary": "Jan van Wageningen",
+    "grippCompanyId": 99769,
+    "grippOfferId": 9064,
+    "rpDocNumber": "20269470",
+    "allOffers": [
+      {
+        "grippOfferId": 9064,
+        "rpDocNumber": "20269470"
+      }
+    ],
+    "processedAt": "2026-08-15T11:49:16.203Z"
+  },
+  "item:68114e35-ecde-480f-9be1-9fc4dd7acb67": {
+    "summary": "Jaap v Egmond",
+    "grippCompanyId": 99770,
+    "grippOfferId": 9065,
+    "rpDocNumber": "202611606",
+    "allOffers": [
+      {
+        "grippOfferId": 9065,
+        "rpDocNumber": "202611606"
+      }
+    ],
+    "processedAt": "2026-08-15T11:53:49.327Z"
   }
 }

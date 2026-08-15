@@ -141,7 +141,17 @@
     "987fb000-5039-4ba7-a48e-2ac9f12d501e": "2026-08-12T09:04:39.789Z",
     "175f10bc-9ea6-4466-b40c-3db829a52558": "2026-08-12T11:08:50.457Z",
     "77b70ceb-d3f1-4834-82ff-24b7d71e7f81": "2026-08-12T15:47:49.038Z",
-    "84c5652e-1f05-432e-89ce-459b9649e029": "2026-08-13T08:48:16.115Z"
+    "84c5652e-1f05-432e-89ce-459b9649e029": "2026-08-13T08:48:16.115Z",
+    "0985e553-b65c-404b-b77b-e89d12313a4d": "2026-08-13T13:23:22.967Z",
+    "f7255b41-d1c6-498e-a709-b52a0f090a1a": "2026-08-13T14:25:48.618Z",
+    "2bdf4e84-e689-4439-8389-2ec1be0a6abf": "2026-08-14T09:55:55.667Z",
+    "d508e7ca-4c3a-433e-9ae5-7f09a4bc22fe": "2026-08-14T11:05:31.816Z",
+    "e5c28952-a003-49d0-b06b-53fd33ff3fbf": "2026-08-14T15:48:06.291Z",
+    "2efb27f7-c8e6-47f6-bb61-a15e49c81cfa": "2026-08-14T16:51:08.884Z",
+    "cdacaed6-5f9b-42fd-8c13-8ad3bd417ef7": "2026-08-14T16:51:08.884Z",
+    "cde87818-8b34-4691-a27c-2136c4fccae3": "2026-08-14T17:23:36.060Z",
+    "68114e35-ecde-480f-9be1-9fc4dd7acb67": "2026-08-15T10:48:31.058Z",
+    "cfd6cd87-5369-4364-8e53-59c4484a9d98": "2026-08-15T10:48:31.058Z"
   },
   "laatsteRapportHash": "0fe85bb104319c903330ed1cc67fed376372154a",
   "gemeld": {
@@ -201,7 +211,17 @@
     "987fb000-5039-4ba7-a48e-2ac9f12d501e": "2026-08-12T09:05:59.530Z",
     "175f10bc-9ea6-4466-b40c-3db829a52558": "2026-08-12T11:10:10.935Z",
     "77b70ceb-d3f1-4834-82ff-24b7d71e7f81": "2026-08-12T15:49:05.613Z",
-    "84c5652e-1f05-432e-89ce-459b9649e029": "2026-08-13T08:49:27.821Z"
+    "84c5652e-1f05-432e-89ce-459b9649e029": "2026-08-13T08:49:27.821Z",
+    "0985e553-b65c-404b-b77b-e89d12313a4d": "2026-08-13T13:24:53.577Z",
+    "f7255b41-d1c6-498e-a709-b52a0f090a1a": "2026-08-13T14:27:14.218Z",
+    "2bdf4e84-e689-4439-8389-2ec1be0a6abf": "2026-08-14T09:57:09.451Z",
+    "d508e7ca-4c3a-433e-9ae5-7f09a4bc22fe": "2026-08-14T11:07:58.082Z",
+    "e5c28952-a003-49d0-b06b-53fd33ff3fbf": "2026-08-14T15:49:43.168Z",
+    "2efb27f7-c8e6-47f6-bb61-a15e49c81cfa": "2026-08-14T16:53:23.620Z",
+    "cdacaed6-5f9b-42fd-8c13-8ad3bd417ef7": "2026-08-14T16:53:23.621Z",
+    "cde87818-8b34-4691-a27c-2136c4fccae3": "2026-08-14T17:26:55.443Z",
+    "68114e35-ecde-480f-9be1-9fc4dd7acb67": "2026-08-15T10:50:55.103Z",
+    "cfd6cd87-5369-4364-8e53-59c4484a9d98": "2026-08-15T10:50:55.103Z"
   },
   "opties": {
     "ccb0f0aa2ab466d873faba250a638412": [
@@ -272,27 +292,134 @@
     ],
     "ea1d583ad9910db129e6cf9154870e8e": [
       "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVj1x1jAAA="
+    ],
+    "d65beb3e15e82c84c020e0627d614af4": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVj1x4hAAA="
+    ],
+    "0e3e63df14ed966a4affb912ffb66e2d": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVlgF7BAAA="
+    ],
+    "8e7a487f13fd3c84063b036dbdcbe04a": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVlgF7CAAA="
+    ],
+    "a3c50376481d9acc0e9c23e40063a5d8": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVlgF7DAAA="
+    ],
+    "c57f419d2bb5a25f8b8c8dc85c5718ed": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVlgF7EAAA="
+    ],
+    "0f093be0a157841db96802bc7037dcd4": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVlgF7FAAA="
+    ],
+    "30c185c9db3b6ccce43f91f18ffac02c": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVlgF7GAAA="
+    ],
+    "29b136fd6f36d464006b218842a49abd": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVlgF7HAAA="
+    ],
+    "3563a7c6b86f539be9c4689292b49d24": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVlgF7IAAA="
     ]
   },
-  "laatsteVolleScan": "2026-08-13T10:21:24.102Z",
+  "laatsteVolleScan": "2026-08-15T09:09:45.508Z",
   "inmeetLeads": [
     {
-      "id": "84c5652e-1f05-432e-89ce-459b9649e029",
-      "summary": "Monique Bijnen",
+      "id": "cde87818-8b34-4691-a27c-2136c4fccae3",
+      "summary": "Jan van Wageningen",
       "item_subject": {
-        "id": "9ba3260b-1651-4831-a444-6a017bd3be6b",
-        "identifier": "type=LEAD_CONFIGURATION,id=9ba3260b-1651-4831-a444-6a017bd3be6b",
+        "id": "99e9ebae-8653-4f38-ade2-f84bb0f93b92",
+        "identifier": "type=LEAD_CONFIGURATION,id=99e9ebae-8653-4f38-ade2-f84bb0f93b92",
         "type": "LEAD_CONFIGURATION"
       },
-      "description": "Naam: Monique Bijnen\nTelefoonnummer: 0652546684\nE-mailadres: monique.bijnen@gmail.com",
+      "description": "Land: Nederland\nE-mailadres: v.wageningen.gww@gmail.com\nTelefoonnummer: +31681026324\nVoornaam: Jan\nAchternaam: van Wageningen\nPostcode: 3245TT\nHuisnummer: 8\nPlaats: Sommelsdijk\nStraatnaam: Tuinfluiter\nHoe komt u bij ons terecht?: Social media\n\n1x Rolluik: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n2x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1577.0\n- breedte: 1550.0\n\n2x Inclusief montage rolluik solar\n1x Rolluik: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1493.0\n- breedte: 2157.0\n\n2x Inclusief montage rolluik solar\n1x Voorraad scherm - 20% korting: \n- doekkleur: Grijs\n- heb_je_een_uitbouw?: Nee\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Inclusief montage Knikarmscherm uitgebreid.: \n- heb_je_een_uitbouw?: Nee",
       "fields": {
-        "address": "",
-        "phone": "0652546684",
+        "address": "Tuinfluiter 8, 3245TT Sommelsdijk, Nederland",
+        "phone": "+31681026324",
+        "cf_lead_value": {
+          "amount": "6858.3099999999995",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "v.wageningen.gww@gmail.com"
+      }
+    },
+    {
+      "id": "2efb27f7-c8e6-47f6-bb61-a15e49c81cfa",
+      "summary": "Martin Valentin",
+      "item_subject": {
+        "id": "293292a2-8f8e-49f8-b66c-4ea269b14316",
+        "identifier": "type=LEAD_CONFIGURATION,id=293292a2-8f8e-49f8-b66c-4ea269b14316",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: martin.valentin@gmail.com\nTelefoonnummer: +31614136164\nVoornaam: Martin\nAchternaam: Valentin\nPostcode: 2724GB\nPlaats: Zoetermeer\nStraatnaam: Vaartdreef\nHuisnummer: 47\nHoe komt u bij ons terecht?: Google\nOpmerking: We zouden graag ons huidige zonnescherm door jullie laten demonteren en verwijderen als dat kan.\n\n1x Voorraad scherm - 20% korting: \n- doekkleur: Beige\n- heb_je_een_uitbouw?: Ja\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Inclusief montage Knikarmscherm uitgebreid.: \n- heb_je_een_uitbouw?: Ja\n\n1x Somfy connectivity app bediening",
+      "fields": {
+        "address": "Vaartdreef 47, 2724GB Zoetermeer, Nederland",
+        "phone": "+31614136164",
+        "cf_lead_value": {
+          "amount": "3140.75",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "martin.valentin@gmail.com"
+      }
+    },
+    {
+      "id": "cdacaed6-5f9b-42fd-8c13-8ad3bd417ef7",
+      "summary": "Rene Pecnik",
+      "item_subject": {
+        "id": "986bd2e1-6c38-451c-9b49-c714cb8be10a",
+        "identifier": "type=LEAD_CONFIGURATION,id=986bd2e1-6c38-451c-9b49-c714cb8be10a",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: r.pecnik@tudelft.nl\nVoornaam: Rene\nAchternaam: Pecnik\nPostcode: 2289BX\nHuisnummer: 60\nPlaats: Rijswijk\nStraatnaam: De Ruijt\nHoe komt u bij ons terecht?: Google\nTelefoonnummer: +31614967323\n\n1x Suneye dichte cassette: \n- doekkleur: Doekkleur naar keuze\n- framekleur: RAL 9007\n- heb_je_een_uitbouw?: Nee\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Breedte tussen 3191 mm - 5500 mm: \n- framekleur: RAL 9007\n- uitval: 3000 mm\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- breedte: 4800.0\n\n1x Inclusief montage Knikarmscherm: \n- heb_je_een_uitbouw?: Nee\n\n1x Draadloze windsensor\n1x Somfy connectivity app bediening",
+      "fields": {
+        "address": "De Ruijt 60, 2289BX Rijswijk, Nederland",
+        "phone": "+31614967323",
+        "cf_lead_value": {
+          "amount": "3962.6150000000002",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "r.pecnik@tudelft.nl"
+      }
+    },
+    {
+      "id": "e5c28952-a003-49d0-b06b-53fd33ff3fbf",
+      "summary": "Barbara Weeink",
+      "item_subject": {
+        "id": "062446b1-d592-4aff-8e25-2f958eeb66d7",
+        "identifier": "type=LEAD_CONFIGURATION,id=062446b1-d592-4aff-8e25-2f958eeb66d7",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: bwgweeink@hotmail.com\nTelefoonnummer: +31648342133\nVoornaam: Barbara\nAchternaam: Weeink\nPostcode: 3176TH\nHuisnummer: 43\nPlaats: Poortugaal\nStraatnaam: Statio\nHoe komt u bij ons terecht?: Google\n\n2x ZIP bovenliggende zonwering: \n- doekkleur: Doekkleur naar keuze\n- framekleur: RAL 9010 structuur\n- uitval: 2500 MM\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- breedte: 3000.0\n\n2x Inclusief montage serre zonwering.",
+      "fields": {
+        "address": "Statio 43, 3176TH Poortugaal, Nederland",
+        "phone": "+31648342133",
         "cf_lead_value": {
           "isoCurrency": "EUR",
           "type": "currency"
         },
-        "email": "monique.bijnen@gmail.com"
+        "email": "bwgweeink@hotmail.com"
+      }
+    },
+    {
+      "id": "d508e7ca-4c3a-433e-9ae5-7f09a4bc22fe",
+      "summary": "Laura Idzinga",
+      "item_subject": {
+        "id": "68661180-cc3f-4f77-b5aa-5b77fbe50649",
+        "identifier": "type=LEAD_CONFIGURATION,id=68661180-cc3f-4f77-b5aa-5b77fbe50649",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: idzinga.laura@gmail.com\nTelefoonnummer: +31613889791\nVoornaam: Laura\nAchternaam: Idzinga\nPostcode: 3544MK\nHuisnummer: 79\nPlaats: Utrecht\nStraatnaam: Theo van Doesburgstraat\nHoe komt u bij ons terecht?: Google\n\n1x Voorraad scherm - 20% korting: \n- doekkleur: Beige\n- heb_je_een_uitbouw?: Nee\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Inclusief montage Knikarmscherm uitgebreid.: \n- heb_je_een_uitbouw?: Nee\n\n1x Draadloze windsensor",
+      "fields": {
+        "address": "Theo van Doesburgstraat 79, 3544MK Utrecht, Nederland",
+        "phone": "+31613889791",
+        "cf_lead_value": {
+          "amount": "3076.15",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "idzinga.laura@gmail.com"
       }
     }
   ],
@@ -736,6 +863,102 @@
       "waTicket": 970483194,
       "mailTicket": 973188263,
       "verstuurdOp": "2026-08-13T09:15:33.716Z"
+    },
+    "f7aafb0f5ed1e3fbee1ec9b0ac9feeb5": {
+      "naam": "Monique Bijnen",
+      "telefoon": "0652546684",
+      "email": "monique.bijnen@gmail.com",
+      "waTicket": 971965641,
+      "mailTicket": 973406479,
+      "verstuurdOp": "2026-08-13T10:47:21.199Z"
+    },
+    "de5a58b7f6cf725819faa13825329d46": {
+      "naam": "Charles  Gevers",
+      "telefoon": "+31652860762",
+      "email": "gevers4@xs4all.nl",
+      "waTicket": 973458833,
+      "mailTicket": 973941687,
+      "verstuurdOp": "2026-08-13T16:31:01.416Z"
+    },
+    "9d50cbec1c5c7dfaf6c6562c98dc44f1": {
+      "naam": "Jeffrey Penning",
+      "telefoon": "+31613159801",
+      "email": "jeffreyendaniquepenning@hotmail.com",
+      "waTicket": 973941870,
+      "mailTicket": 973351974,
+      "verstuurdOp": "2026-08-13T16:32:07.567Z"
+    },
+    "d65beb3e15e82c84c020e0627d614af4": {
+      "naam": "Laura Idzinga",
+      "telefoon": "+31613889791",
+      "email": "idzinga.laura@gmail.com",
+      "waTicket": 973210627,
+      "mailTicket": 974148367,
+      "verstuurdOp": "2026-08-14T15:35:07.646Z"
+    },
+    "0e3e63df14ed966a4affb912ffb66e2d": {
+      "naam": "Ganesh",
+      "telefoon": "0644887425",
+      "email": "ganeshmangal020@gmail.com",
+      "waTicket": 974250064,
+      "mailTicket": 973677914,
+      "verstuurdOp": "2026-08-15T11:01:51.256Z"
+    },
+    "8e7a487f13fd3c84063b036dbdcbe04a": {
+      "naam": "Barbara Weeink",
+      "telefoon": "+31648342133",
+      "email": "bwgweeink@hotmail.com",
+      "waTicket": 974250256,
+      "mailTicket": 969954461,
+      "verstuurdOp": "2026-08-15T11:03:23.777Z"
+    },
+    "a3c50376481d9acc0e9c23e40063a5d8": {
+      "naam": "Jaap v Egmond",
+      "telefoon": "+31610487137",
+      "email": "jaapfb@gmail.com",
+      "waTicket": 974144786,
+      "mailTicket": 974253831,
+      "verstuurdOp": "2026-08-15T11:36:49.622Z"
+    },
+    "c57f419d2bb5a25f8b8c8dc85c5718ed": {
+      "naam": "Jan van Wageningen",
+      "telefoon": "+31681026324",
+      "email": "v.wageningen.gww@gmail.com",
+      "waTicket": 974253956,
+      "mailTicket": 973924414,
+      "verstuurdOp": "2026-08-15T11:38:37.233Z"
+    },
+    "0f093be0a157841db96802bc7037dcd4": {
+      "naam": "Rene Pecnik",
+      "telefoon": "+31614967323",
+      "email": "r.pecnik@tudelft.nl",
+      "waTicket": 974144647,
+      "mailTicket": 973955886,
+      "verstuurdOp": "2026-08-15T11:39:53.328Z"
+    },
+    "30c185c9db3b6ccce43f91f18ffac02c": {
+      "naam": "Martin Valentin",
+      "telefoon": "+31614136164",
+      "email": "martin.valentin@gmail.com",
+      "waTicket": 973208719,
+      "mailTicket": 974254308,
+      "verstuurdOp": "2026-08-15T11:41:27.258Z"
+    },
+    "29b136fd6f36d464006b218842a49abd": {
+      "naam": "Laura Idzinga",
+      "telefoon": "+31613889791",
+      "email": "idzinga.laura@gmail.com",
+      "waTicket": 973210627,
+      "mailTicket": 974148367,
+      "verstuurdOp": "2026-08-15T11:42:59.214Z"
+    },
+    "3563a7c6b86f539be9c4689292b49d24": {
+      "naam": "Jaap v Egmond",
+      "telefoon": "+31610487137",
+      "email": "jaapfb@gmail.com",
+      "waTicket": 974144786,
+      "mailTicket": 974253831,
+      "verstuurdOp": "2026-08-15T11:48:46.662Z"
     }
   },
   "conflictGemeld": {

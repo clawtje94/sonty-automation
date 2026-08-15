@@ -25,7 +25,7 @@ const client = new Anthropic({ apiKey });
 const DAGEN = { maandag: 1, dinsdag: 2, woensdag: 3, donderdag: 4, vrijdag: 5, zaterdag: 6, zondag: 0 };
 
 /**
- * @returns {Promise<{intent: 'akkoord'|'ander-moment'|'vraag'|'klacht', dagen: number[],
+ * @returns {Promise<{intent: 'akkoord'|'ander-moment'|'vraag'|'klacht'|'annuleren', dagen: number[],
  *   dagdeel: 'ochtend'|'middag'|null, samenvatting: string, antwoordVoorstel: string}>}
  */
 async function leesReactie(tekst, aangebodenTijden) {
@@ -48,6 +48,8 @@ intent:
 - "ander-moment": het voorstel past niet of de klant wil een andere dag/tijd.
 - "vraag": klant stelt een vraag (over de afspraak, montage, product, factuur).
 - "klacht": klant is ontevreden, verwijt ons iets, of noemt een gebroken belofte.
+- "annuleren": klant ziet af van de opdracht of wil de gemaakte afspraak afzeggen
+  (niet verzetten — dan is het "ander-moment").
 Twijfel je tussen akkoord en iets anders? Kies dan NOOIT akkoord.
 Staat er instemming én onvrede in één bericht, dan is het "klacht".
 
@@ -64,7 +66,7 @@ Nanny van de planning (je-vorm, warm, geen beloftes die je niet waar kunt maken)
     });
     const ruw = resp.content?.[0]?.text || '';
     const json = JSON.parse(ruw.slice(ruw.indexOf('{'), ruw.lastIndexOf('}') + 1));
-    const intent = ['akkoord', 'ander-moment', 'vraag', 'klacht'].includes(json.intent) ? json.intent : 'vraag';
+    const intent = ['akkoord', 'ander-moment', 'vraag', 'klacht', 'annuleren'].includes(json.intent) ? json.intent : 'vraag';
     return {
       intent,
       dagen: Array.isArray(json.dagen) ? json.dagen.filter((d) => Number.isInteger(d) && d >= 0 && d <= 6) : [],

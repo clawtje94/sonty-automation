@@ -214,6 +214,42 @@ async function trengo(pad) {
     console.log('  agenda-vergelijking overgeslagen: ' + e.message.slice(0, 70));
   }
 
+  // OPEN ANNULERINGEN (Ana Franca 13-08: zegde per mail af, kreeg "kom er vandaag op
+  // terug" en daarna stilte — de afspraak van 10 sep bleef twee dagen in Planado en
+  // Outlook staan). De reply-monitor zet een annulering op deze lijst; wij blijven
+  // melden tot de afspraak aantoonbaar weg is, en sturen dan de beloofde bevestiging.
+  try {
+    const APAD = path.join(__dirname, '..', 'data', 'annuleringen-open.json');
+    const openAnn = lees(APAD, {});
+    let aangepast = false;
+    for (const [tok, a] of Object.entries(openAnn)) {
+      const b = Object.values(boekingen).find((x) => x.aanbodToken === tok);
+      if (!b || !b.planadoJobUuid) {
+        problemen.push(`ANNULERING OPEN: ${a.naam} zegde af (${a.samenvatting || 'zie ticket ' + a.ticketId}) maar er is geen boeking terug te vinden — handmatig checken`);
+        continue;
+      }
+      const PK = fs.readFileSync(path.join(__dirname, 'planado-api-key.txt'), 'utf8').trim();
+      const r = await fetch(`https://api.planadoapp.com/api/v2/jobs/${b.planadoJobUuid}`, { headers: { Authorization: 'Bearer ' + PK } });
+      const weg = r.status === 404 || (r.ok && ['canceled', 'cancelled'].includes(((await r.json()).job || {}).status));
+      if (!weg) {
+        problemen.push(`ANNULERING OPEN: ${a.naam} zegde ${Math.round((Date.now() - Date.parse(a.gemeldOp)) / 3600000)} uur geleden af, maar de afspraak van ${uur(b.aankomst)} (${b.inmeter}) staat NOG in Planado/Outlook`);
+        continue;
+      }
+      // Afspraak is weg: belofte inlossen — klant krijgt de annuleringsbevestiging.
+      const { klantStil } = require('./lib/klant-stil.js');
+      if (!klantStil(a.telefoon)) {
+        await fetch(`https://app.trengo.com/api/v2/tickets/${a.ticketId}/messages`, {
+          method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: `Hoi ${String(a.naam || '').split(' ')[0]}, zoals beloofd nog even de bevestiging: je afspraak is geannuleerd en je hoeft verder niets te doen. Mocht je later toch nog eens iets willen, dan ben je natuurlijk altijd welkom!\n\nGroetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
+        });
+      }
+      delete openAnn[tok];
+      aangepast = true;
+      await planningTelegram(`✅ Annulering van ${a.naam} is rond: afspraak is uit de agenda en de klant heeft de bevestiging gekregen.`);
+    }
+    if (aangepast) fs.writeFileSync(APAD, JSON.stringify(openAnn, null, 1));
+  } catch (e) { console.log('  annuleringen-bewaking overgeslagen: ' + e.message.slice(0, 70)); }
+
   console.log(`zelfcontrole: ${problemen.length} probleem(en)`);
   problemen.forEach((p) => console.log('  - ' + p));
 

@@ -46,16 +46,6 @@
   "mailUit": [],
   "msgs": [
    {
-    "op": "2026-08-06 20:07:42",
-    "richting": "OUTBOUND",
-    "tekst": "Hoi Eric, goed nieuws: we kunnen bij je langskomen om in te meten. Kies de tijd die jou het beste uitkomt: 1. - 2. - 3. - Tik op een knop en we zetten hem vast. De tijden staan 24 uur voor je vast. Komt geen van deze uit, stuur dan gewoon een berichtje terug. Groetjes, Nanny van Sonty"
-   },
-   {
-    "op": "2026-08-06 20:08:11",
-    "richting": "INBOUND",
-    "tekst": "Optie 1"
-   },
-   {
     "op": "2026-08-06 20:08:37",
     "richting": "INBOUND",
     "tekst": "Sorry ik zie geen tijden staan. Ik had al gemaild om morgen om 10 uur even te bellen"
@@ -119,6 +109,41 @@
     "op": "2026-08-10 11:36:30",
     "richting": "OUTBOUND",
     "tekst": "Hi Eric, klopt ging iets niet helemaal goed sorry!"
+   },
+   {
+    "op": "2026-08-13 08:04:05",
+    "richting": "INBOUND",
+    "tekst": "Goedemorgen Nanny, Helaas moet ik onze afspraak volledig cancelen. Groet Eric van der Meer"
+   },
+   {
+    "op": "2026-08-13 08:06:38",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:12:33",
+    "richting": "NOTE",
+    "tekst": "@jorren745487 Klant reageerde opnieuw op dit eerder overgedragen gesprek, direct terug in Mens nodig gezet, de bot blijft eraf."
+   },
+   {
+    "op": "2026-08-13 15:31:01",
+    "richting": "OUTBOUND",
+    "tekst": "Hi Eric, mag ik vragen wat precies de reden is van afwijzing?"
+   },
+   {
+    "op": "2026-08-13 16:25:13",
+    "richting": "INBOUND",
+    "tekst": "Ik heb helaas een financiële tegenvaller"
+   },
+   {
+    "op": "2026-08-13 16:29:47",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-14 17:07:32",
+    "richting": "NOTE",
+    "tekst": "afspraak eruit gehaald"
    }
   ]
  },
@@ -1109,7 +1134,8 @@
   "verstuurdOp": "2026-08-09T15:18:14.961Z",
   "mailUit": [
    "2026-08-07 17:46:28",
-   "2026-08-09 17:18:12"
+   "2026-08-09 17:18:12",
+   "2026-08-13 09:26:56"
   ],
   "msgs": [
    {
@@ -1241,19 +1267,10 @@
   "ticket": 972325204,
   "verstuurdOp": "2026-08-10T08:50:57.428Z",
   "mailUit": [
-   "2026-08-10 10:50:54"
+   "2026-08-10 10:50:54",
+   "2026-08-13 10:39:18"
   ],
   "msgs": [
-   {
-    "op": "2026-08-06 20:07:42",
-    "richting": "OUTBOUND",
-    "tekst": "Hoi Eric, goed nieuws: we kunnen bij je langskomen om in te meten. Kies de tijd die jou het beste uitkomt: 1. - 2. - 3. - Tik op een knop en we zetten hem vast. De tijden staan 24 uur voor je vast. Komt geen van deze uit, stuur dan gewoon een berichtje terug. Groetjes, Nanny van Sonty"
-   },
-   {
-    "op": "2026-08-06 20:08:11",
-    "richting": "INBOUND",
-    "tekst": "Optie 1"
-   },
    {
     "op": "2026-08-06 20:08:37",
     "richting": "INBOUND",
@@ -1318,6 +1335,41 @@
     "op": "2026-08-10 11:36:30",
     "richting": "OUTBOUND",
     "tekst": "Hi Eric, klopt ging iets niet helemaal goed sorry!"
+   },
+   {
+    "op": "2026-08-13 08:04:05",
+    "richting": "INBOUND",
+    "tekst": "Goedemorgen Nanny, Helaas moet ik onze afspraak volledig cancelen. Groet Eric van der Meer"
+   },
+   {
+    "op": "2026-08-13 08:06:38",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:12:33",
+    "richting": "NOTE",
+    "tekst": "@jorren745487 Klant reageerde opnieuw op dit eerder overgedragen gesprek, direct terug in Mens nodig gezet, de bot blijft eraf."
+   },
+   {
+    "op": "2026-08-13 15:31:01",
+    "richting": "OUTBOUND",
+    "tekst": "Hi Eric, mag ik vragen wat precies de reden is van afwijzing?"
+   },
+   {
+    "op": "2026-08-13 16:25:13",
+    "richting": "INBOUND",
+    "tekst": "Ik heb helaas een financiële tegenvaller"
+   },
+   {
+    "op": "2026-08-13 16:29:47",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-14 17:07:32",
+    "richting": "NOTE",
+    "tekst": "afspraak eruit gehaald"
    }
   ]
  },
@@ -1507,11 +1559,6 @@
   ],
   "msgs": [
    {
-    "op": "2026-08-10 13:32:40",
-    "richting": "INBOUND",
-    "tekst": "Dat past"
-   },
-   {
     "op": "2026-08-10 13:33:34",
     "richting": "INBOUND",
     "tekst": "Jullie hebben wel het goede adres toch... Diderica Mijnssenstraat 22, 4822WH Breda"
@@ -1605,6 +1652,11 @@
     "op": "2026-08-10 21:19:16",
     "richting": "INBOUND",
     "tekst": "Als hij dinsdag 8 september is ingemeten zouden ze hem dan voor 26 september kunnen hangen ...groetjes Connie"
+   },
+   {
+    "op": "2026-08-13 11:18:46",
+    "richting": "NOTE",
+    "tekst": "Vraag van Connie over plaatsing voor 26 sep is afgehandeld (besluit Daimy 13-08: laten voor wat het is; team pakt dit desgewenst zelf op). Afgehandeld."
    }
   ]
  },
@@ -1964,64 +2016,10 @@
   "mailUit": [
    "2026-08-10 15:54:27",
    "2026-08-11 15:04:15",
-   "2026-08-12 15:07:58"
+   "2026-08-12 15:07:58",
+   "2026-08-13 11:15:31"
   ],
   "msgs": [
-   {
-    "op": "2026-07-31 09:03:47",
-    "richting": "OUTBOUND",
-    "tekst": "Hi Debby van, Jaimy hier van Sonty. Leuk dat ik je mag helpen! Je prijsindicatie staat klaar. Aan producten en montage zit een waarde van 3.645 euro, maar met de actie die nu loopt betaal je 2.916 euro. Daar zit alles in, ook de btw, dus je komt niet voor verrassingen te staan. Deze prijs geldt nog tot donderdag 6 augustus. Bekijk je offerte hier: https://document.reuzenpanda.nl/nl/731483fa-ef6b-4aae-afcf-883ec09219dd/216bb1d0-87c7-4d5b-9f06-ecef6cc52251/latest — offertenummer: 202610708 Onze monteurs zijn bij ons in dienst, dus er komt geen onderaannemer over de vloer. Je krijgt 3 jaar garantie op de montage en 5 jaar op het product."
-   },
-   {
-    "op": "2026-08-08 14:07:30",
-    "richting": "INBOUND",
-    "tekst": "Goedemiddag, zou ik nog gebruik kunnen maken van de actie? En zoja, binnen hoelang zal deze geplaatst kunnen worden?"
-   },
-   {
-    "op": "2026-08-08 14:19:35",
-    "richting": "OUTBOUND",
-    "tekst": "Hoi Debby, zeker! Officieel was de offerte net verlopen, maar voor deze keer maak ik hem gewoon weer even geldig voor je. Niet doorvertellen. De actie geldt dus gewoon nog: je betaalt 2.916 euro in plaats van 3.645 euro, alles inclusief btw en montage. Hij is nu weer 7 dagen geldig: https://document.reuzenpanda.nl/nl/731483fa-ef6b-4aae-afcf-883ec09219dd/216bb1d0-87c7-4d5b-9f06-ecef6cc52251/latest?pdfAction=DOCSIGN Offertenummer: 202610708 Over de planning: als je akkoord geeft, komen we eerst inmeten (op dit moment zo'n 2 tot 3 weken). Daarna is de verwachte productietijd na het betalen van de aanbetalingsfactuur 8 tot 10 weken. Alles wat eerder kan, monteren we met liefde eerder. Zal ik het inmeten voor je in gang zetten, of wil je de offerte zelf online ondertekenen via de link?"
-   },
-   {
-    "op": "2026-08-08 14:19:37",
-    "richting": "NOTE",
-    "tekst": "🤖 Door de AI gedaan: • Offerte aangepast: Offerte 202610708 opnieuw geldig gemaakt voor de klant (was net verlopen op 6 aug), actiekorting behouden."
-   },
-   {
-    "op": "2026-08-10 13:03:46",
-    "richting": "INBOUND",
-    "tekst": "Goedemiddag, ik ga graag akkoord met de offerte, ik heb nog wel een vraagje: het is incl. Montage toch? En komen jullie van te voren kijken hoe het met de electra geregeld kan worden?"
-   },
-   {
-    "op": "2026-08-10 13:13:00",
-    "richting": "OUTBOUND",
-    "tekst": "Wat leuk Debby, daar ben ik blij mee! En ja hoor, de montage zit er volledig bij in, net als de btw. Je komt dus niet voor extra kosten te staan. Over de elektra: dat regelen wij helemaal zelf bij de montage. We boren een gaatje door de gevel, trekken een nette kabel naar het dichtstbijzijnde stopcontact en werken dat af met een strak kabelgootje. Bij het inmeten kijkt onze adviseur meteen ter plekke hoe dat bij jou het handigst kan, dus dat wordt allemaal netjes met je doorgenomen. Eén ding wil ik je eerlijk meegeven: als je na het inmeten toch niet met ons verder zou gaan, brengen we 75 euro in rekening voor het inmeetwerk. Ga je wel met ons door, dan vervalt dat bedrag volledig. Zal ik het inmeten voor je in gang zetten, of teken je de offerte liever zelf online via de link?"
-   },
-   {
-    "op": "2026-08-10 13:21:19",
-    "richting": "INBOUND",
-    "tekst": "Als je het inmeten in gang wilt zetten graag. Is dit nog tussen de 2 en 3 weken?"
-   },
-   {
-    "op": "2026-08-10 13:29:52",
-    "richting": "OUTBOUND",
-    "tekst": "Super Debby, dank je wel voor het vertrouwen, leuk dat we je mogen helpen! Ik heb het inmeten voor je in gang gezet. De planning neemt binnen 5 werkdagen contact met je op om de afspraak in te plannen. Over de wachttijd: ik moet eerlijk zijn, de eerstvolgende plek in de agenda is op dit moment rond 31 augustus, dus reken op ongeveer 3 weken in plaats van 2. Dat komt door de drukte en de vakantieperiode. Kan er tussentijds eerder iets vrijkomen, dan bel ik de planning of ze je op de lijst zetten zodat je eerder aan de beurt kunt zijn. Zal ik dat voor je doorgeven?"
-   },
-   {
-    "op": "2026-08-10 13:29:55",
-    "richting": "NOTE",
-    "tekst": "🤖 Door de AI gedaan: • Inmeten doorgezet naar de planning voor Debby van Haren (Voorraad knikarmscherm (motor + afstandsbediening)), notitie voor de planner: Klant akkoord op offerte 202610708. Elektra ter plekke doornemen bij inmeten. Adres: Kamperfoeliestraat 11, 2981 BR Ridderkerk."
-   },
-   {
-    "op": "2026-08-10 13:32:06",
-    "richting": "INBOUND",
-    "tekst": "Ja graag."
-   },
-   {
-    "op": "2026-08-10 15:54:23",
-    "richting": "OUTBOUND",
-    "tekst": "Hoi Debby, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 10:50. De afspraak duurt ongeveer 35 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
-   },
    {
     "op": "2026-08-10 15:56:09",
     "richting": "INBOUND",
@@ -2066,6 +2064,61 @@
     "op": "2026-08-12 21:34:23",
     "richting": "OUTBOUND",
     "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:11:50",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Debby, ik hou dinsdag 25 augustus om 10:00 nog even voor je vrij. Past het, laat je het dan weten? Komt het niet uit, dan zoek ik met alle plezier een ander moment. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:12:32",
+    "richting": "INBOUND",
+    "tekst": "Ja deze datum en tijd is prima😁"
+   },
+   {
+    "op": "2026-08-13 11:14:35",
+    "richting": "OUTBOUND",
+    "tekst": "Ai, dat moment is net ingenomen door een andere afspraak, excuus! We sturen je zo een paar nieuwe tijden om uit te kiezen. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:15:30",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Debby, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: ma 24 aug om 09:00. De afspraak duurt ongeveer 35 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:15:56",
+    "richting": "INBOUND",
+    "tekst": "Dat past"
+   },
+   {
+    "op": "2026-08-13 11:21:58",
+    "richting": "OUTBOUND",
+    "tekst": "Top! Genoteerd: maandag 24 augustus tussen 09:00 en 09:30 komt onze inmeter Sjoerd bij je langs. Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je even weten. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:24:40",
+    "richting": "INBOUND",
+    "tekst": "Super. Dankjewel!"
+   },
+   {
+    "op": "2026-08-13 11:46:02",
+    "richting": "OUTBOUND",
+    "tekst": "Hi Debby, sorry hoor maar we zitten met een nieuwe bookings systeem heel erg te kutten bij jou. Mijn collega sjoerd is er niet die is met vakantie precies op die dag als eerst. zou je donderdag 24 aug om 14:20 kunnen?"
+   },
+   {
+    "op": "2026-08-13 12:01:10",
+    "richting": "OUTBOUND",
+    "tekst": "20 aug excuus"
+   },
+   {
+    "op": "2026-08-13 12:15:05",
+    "richting": "INBOUND",
+    "tekst": "Dat is goed"
+   },
+   {
+    "op": "2026-08-13 12:45:05",
+    "richting": "OUTBOUND",
+    "tekst": "Toppie bedankt en sorry voor de verwarring hoor!"
    }
   ]
  },
@@ -2361,64 +2414,10 @@
   "mailUit": [
    "2026-08-10 15:54:27",
    "2026-08-11 15:04:15",
-   "2026-08-12 15:07:58"
+   "2026-08-12 15:07:58",
+   "2026-08-13 11:15:31"
   ],
   "msgs": [
-   {
-    "op": "2026-07-31 09:03:47",
-    "richting": "OUTBOUND",
-    "tekst": "Hi Debby van, Jaimy hier van Sonty. Leuk dat ik je mag helpen! Je prijsindicatie staat klaar. Aan producten en montage zit een waarde van 3.645 euro, maar met de actie die nu loopt betaal je 2.916 euro. Daar zit alles in, ook de btw, dus je komt niet voor verrassingen te staan. Deze prijs geldt nog tot donderdag 6 augustus. Bekijk je offerte hier: https://document.reuzenpanda.nl/nl/731483fa-ef6b-4aae-afcf-883ec09219dd/216bb1d0-87c7-4d5b-9f06-ecef6cc52251/latest — offertenummer: 202610708 Onze monteurs zijn bij ons in dienst, dus er komt geen onderaannemer over de vloer. Je krijgt 3 jaar garantie op de montage en 5 jaar op het product."
-   },
-   {
-    "op": "2026-08-08 14:07:30",
-    "richting": "INBOUND",
-    "tekst": "Goedemiddag, zou ik nog gebruik kunnen maken van de actie? En zoja, binnen hoelang zal deze geplaatst kunnen worden?"
-   },
-   {
-    "op": "2026-08-08 14:19:35",
-    "richting": "OUTBOUND",
-    "tekst": "Hoi Debby, zeker! Officieel was de offerte net verlopen, maar voor deze keer maak ik hem gewoon weer even geldig voor je. Niet doorvertellen. De actie geldt dus gewoon nog: je betaalt 2.916 euro in plaats van 3.645 euro, alles inclusief btw en montage. Hij is nu weer 7 dagen geldig: https://document.reuzenpanda.nl/nl/731483fa-ef6b-4aae-afcf-883ec09219dd/216bb1d0-87c7-4d5b-9f06-ecef6cc52251/latest?pdfAction=DOCSIGN Offertenummer: 202610708 Over de planning: als je akkoord geeft, komen we eerst inmeten (op dit moment zo'n 2 tot 3 weken). Daarna is de verwachte productietijd na het betalen van de aanbetalingsfactuur 8 tot 10 weken. Alles wat eerder kan, monteren we met liefde eerder. Zal ik het inmeten voor je in gang zetten, of wil je de offerte zelf online ondertekenen via de link?"
-   },
-   {
-    "op": "2026-08-08 14:19:37",
-    "richting": "NOTE",
-    "tekst": "🤖 Door de AI gedaan: • Offerte aangepast: Offerte 202610708 opnieuw geldig gemaakt voor de klant (was net verlopen op 6 aug), actiekorting behouden."
-   },
-   {
-    "op": "2026-08-10 13:03:46",
-    "richting": "INBOUND",
-    "tekst": "Goedemiddag, ik ga graag akkoord met de offerte, ik heb nog wel een vraagje: het is incl. Montage toch? En komen jullie van te voren kijken hoe het met de electra geregeld kan worden?"
-   },
-   {
-    "op": "2026-08-10 13:13:00",
-    "richting": "OUTBOUND",
-    "tekst": "Wat leuk Debby, daar ben ik blij mee! En ja hoor, de montage zit er volledig bij in, net als de btw. Je komt dus niet voor extra kosten te staan. Over de elektra: dat regelen wij helemaal zelf bij de montage. We boren een gaatje door de gevel, trekken een nette kabel naar het dichtstbijzijnde stopcontact en werken dat af met een strak kabelgootje. Bij het inmeten kijkt onze adviseur meteen ter plekke hoe dat bij jou het handigst kan, dus dat wordt allemaal netjes met je doorgenomen. Eén ding wil ik je eerlijk meegeven: als je na het inmeten toch niet met ons verder zou gaan, brengen we 75 euro in rekening voor het inmeetwerk. Ga je wel met ons door, dan vervalt dat bedrag volledig. Zal ik het inmeten voor je in gang zetten, of teken je de offerte liever zelf online via de link?"
-   },
-   {
-    "op": "2026-08-10 13:21:19",
-    "richting": "INBOUND",
-    "tekst": "Als je het inmeten in gang wilt zetten graag. Is dit nog tussen de 2 en 3 weken?"
-   },
-   {
-    "op": "2026-08-10 13:29:52",
-    "richting": "OUTBOUND",
-    "tekst": "Super Debby, dank je wel voor het vertrouwen, leuk dat we je mogen helpen! Ik heb het inmeten voor je in gang gezet. De planning neemt binnen 5 werkdagen contact met je op om de afspraak in te plannen. Over de wachttijd: ik moet eerlijk zijn, de eerstvolgende plek in de agenda is op dit moment rond 31 augustus, dus reken op ongeveer 3 weken in plaats van 2. Dat komt door de drukte en de vakantieperiode. Kan er tussentijds eerder iets vrijkomen, dan bel ik de planning of ze je op de lijst zetten zodat je eerder aan de beurt kunt zijn. Zal ik dat voor je doorgeven?"
-   },
-   {
-    "op": "2026-08-10 13:29:55",
-    "richting": "NOTE",
-    "tekst": "🤖 Door de AI gedaan: • Inmeten doorgezet naar de planning voor Debby van Haren (Voorraad knikarmscherm (motor + afstandsbediening)), notitie voor de planner: Klant akkoord op offerte 202610708. Elektra ter plekke doornemen bij inmeten. Adres: Kamperfoeliestraat 11, 2981 BR Ridderkerk."
-   },
-   {
-    "op": "2026-08-10 13:32:06",
-    "richting": "INBOUND",
-    "tekst": "Ja graag."
-   },
-   {
-    "op": "2026-08-10 15:54:23",
-    "richting": "OUTBOUND",
-    "tekst": "Hoi Debby, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 10:50. De afspraak duurt ongeveer 35 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
-   },
    {
     "op": "2026-08-10 15:56:09",
     "richting": "INBOUND",
@@ -2463,6 +2462,61 @@
     "op": "2026-08-12 21:34:23",
     "richting": "OUTBOUND",
     "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:11:50",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Debby, ik hou dinsdag 25 augustus om 10:00 nog even voor je vrij. Past het, laat je het dan weten? Komt het niet uit, dan zoek ik met alle plezier een ander moment. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:12:32",
+    "richting": "INBOUND",
+    "tekst": "Ja deze datum en tijd is prima😁"
+   },
+   {
+    "op": "2026-08-13 11:14:35",
+    "richting": "OUTBOUND",
+    "tekst": "Ai, dat moment is net ingenomen door een andere afspraak, excuus! We sturen je zo een paar nieuwe tijden om uit te kiezen. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:15:30",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Debby, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: ma 24 aug om 09:00. De afspraak duurt ongeveer 35 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:15:56",
+    "richting": "INBOUND",
+    "tekst": "Dat past"
+   },
+   {
+    "op": "2026-08-13 11:21:58",
+    "richting": "OUTBOUND",
+    "tekst": "Top! Genoteerd: maandag 24 augustus tussen 09:00 en 09:30 komt onze inmeter Sjoerd bij je langs. Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je even weten. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:24:40",
+    "richting": "INBOUND",
+    "tekst": "Super. Dankjewel!"
+   },
+   {
+    "op": "2026-08-13 11:46:02",
+    "richting": "OUTBOUND",
+    "tekst": "Hi Debby, sorry hoor maar we zitten met een nieuwe bookings systeem heel erg te kutten bij jou. Mijn collega sjoerd is er niet die is met vakantie precies op die dag als eerst. zou je donderdag 24 aug om 14:20 kunnen?"
+   },
+   {
+    "op": "2026-08-13 12:01:10",
+    "richting": "OUTBOUND",
+    "tekst": "20 aug excuus"
+   },
+   {
+    "op": "2026-08-13 12:15:05",
+    "richting": "INBOUND",
+    "tekst": "Dat is goed"
+   },
+   {
+    "op": "2026-08-13 12:45:05",
+    "richting": "OUTBOUND",
+    "tekst": "Toppie bedankt en sorry voor de verwarring hoor!"
    }
   ]
  },
@@ -2585,36 +2639,6 @@
   ],
   "msgs": [
    {
-    "op": "2026-08-10 09:10:44",
-    "richting": "OUTBOUND",
-    "tekst": "Wat leuk dat je meedenkt, dat scheelt vaak een motor en dus ook in de prijs. Alleen zit er hier een addertje onder het gras: op je offerte staan twee screens van 500 cm en 94 cm breed. Samen is dat bijna 6 meter, en de Zip Design 110 gaat tot maximaal 500 cm breed. Die twee specifiek kunnen dus helaas niet één screen worden. Bedoel je misschien twee andere ramen die naast elkaar zitten? Of zijn dit toch de twee die je in gedachten had? Dan denk ik graag even met je mee. Handig om te weten: bij één screen over twee ramen loopt het doek dan wel door over de tussenstijl, en het wordt één hoogte voor allebei."
-   },
-   {
-    "op": "2026-08-10 09:20:19",
-    "richting": "INBOUND",
-    "tekst": "Nee sorry dat zit er een foutje in het meten. Alle ramen zijn gelijk. Elk van de 4 ramen zijn ong 100 cm. breed en 2 ramen samen zijn dus 200 cm."
-   },
-   {
-    "op": "2026-08-10 09:42:39",
-    "richting": "OUTBOUND",
-    "tekst": "Ah, nu snap ik het, dank je! Dan zat die 5 meter er als typefout in. Even meedenken zodat ik het goed voor je zet: je hebt 4 ramen van ongeveer 100 cm, en je wilt er per 2 ramen 1 screen van 200 cm van maken. Dat worden dan dus 2 screens, elk met 1 motor. Klopt dat? Zo'n screen van 200 cm breed (ongeveer 107 cm hoog, met motor en afstandsbediening) komt op 1.772 euro, en met de 15% actiekorting op 1.506 euro. Voor 2 stuks kom je dan rond de 3.012 euro, inclusief montage en btw. Zijn alle 4 de ramen ook even hoog? Dan reken ik het exact door en pas ik de offerte meteen voor je aan."
-   },
-   {
-    "op": "2026-08-10 10:49:56",
-    "richting": "INBOUND",
-    "tekst": "Nee 2 ramen zitten op een hoek dus die apart en 2 ramen samen dus die kunnen wel volstaan met 1 screen en 1 motor."
-   },
-   {
-    "op": "2026-08-10 10:58:31",
-    "richting": "OUTBOUND",
-    "tekst": "Helder, nu heb ik het compleet! Ik heb de offerte aangepast naar 3 screens: 2 losse voor de hoekramen (elk ongeveer 100 cm) en 1 doorlopend screen van 200 cm over de 2 ramen die samen kunnen, dat scheelt daar inderdaad een motor. Het komt nu op een waarde van 4.716 euro, en met de 15% actiekorting betaal je 4.009 euro. Inclusief montage, btw en per screen een Somfy motor met afstandsbediening. De hoogtes heb ik nu op ongeveer 107 cm gezet als indicatie, bij het inmeten wordt alles exact opgemeten (we werken met staffels van 20 cm, dus dat scheelt hooguit een paar tientjes). Hier is de bijgewerkte offerte, nog steeds nummer 202611227: https://document.reuzenpanda.nl/nl/731483fa-ef6b-4aae-afcf-883ec09219dd/c4f443db-c7fa-46e2-9aa6-5483a4a9e21d/latest?pdfAction=DOCSIGN Zit dit zo goed voor je, of wil je nog iets aanpassen?"
-   },
-   {
-    "op": "2026-08-10 10:58:33",
-    "richting": "NOTE",
-    "tekst": "🤖 Door de AI gedaan: • Offerte aangepast: Config gecorrigeerd: 4 ramen ~100cm. 2 hoekramen apart (2x screen 100cm), 2 ramen samen (1x screen 200cm). Was 2 screens (met typo 5000mm)."
-   },
-   {
     "op": "2026-08-10 11:00:15",
     "richting": "INBOUND",
     "tekst": "Keurig. We gaan het bespreken. Dank"
@@ -2683,6 +2707,36 @@
     "op": "2026-08-11 15:53:57",
     "richting": "OUTBOUND",
     "tekst": "Top! Genoteerd: donderdag 27 augustus tussen 09:00 en 09:30 komt onze inmeter Joey bij je langs. Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je even weten. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 10:23:11",
+    "richting": "INBOUND",
+    "tekst": "Nog geen inmeter ontvangen…."
+   },
+   {
+    "op": "2026-08-13 10:26:05",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 10:35:23",
+    "richting": "OUTBOUND",
+    "tekst": "Hi Ellen, de afspraak staat op Donderdag 27 augustus om 9:00"
+   },
+   {
+    "op": "2026-08-13 10:36:11",
+    "richting": "INBOUND",
+    "tekst": "Ohhh sorry heb ik me vergist."
+   },
+   {
+    "op": "2026-08-13 10:36:56",
+    "richting": "OUTBOUND",
+    "tekst": "Geen probleem! en tot de 27e."
+   },
+   {
+    "op": "2026-08-13 10:40:23",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
    }
   ]
  },
@@ -2693,64 +2747,10 @@
   "mailUit": [
    "2026-08-10 15:54:27",
    "2026-08-11 15:04:15",
-   "2026-08-12 15:07:58"
+   "2026-08-12 15:07:58",
+   "2026-08-13 11:15:31"
   ],
   "msgs": [
-   {
-    "op": "2026-07-31 09:03:47",
-    "richting": "OUTBOUND",
-    "tekst": "Hi Debby van, Jaimy hier van Sonty. Leuk dat ik je mag helpen! Je prijsindicatie staat klaar. Aan producten en montage zit een waarde van 3.645 euro, maar met de actie die nu loopt betaal je 2.916 euro. Daar zit alles in, ook de btw, dus je komt niet voor verrassingen te staan. Deze prijs geldt nog tot donderdag 6 augustus. Bekijk je offerte hier: https://document.reuzenpanda.nl/nl/731483fa-ef6b-4aae-afcf-883ec09219dd/216bb1d0-87c7-4d5b-9f06-ecef6cc52251/latest — offertenummer: 202610708 Onze monteurs zijn bij ons in dienst, dus er komt geen onderaannemer over de vloer. Je krijgt 3 jaar garantie op de montage en 5 jaar op het product."
-   },
-   {
-    "op": "2026-08-08 14:07:30",
-    "richting": "INBOUND",
-    "tekst": "Goedemiddag, zou ik nog gebruik kunnen maken van de actie? En zoja, binnen hoelang zal deze geplaatst kunnen worden?"
-   },
-   {
-    "op": "2026-08-08 14:19:35",
-    "richting": "OUTBOUND",
-    "tekst": "Hoi Debby, zeker! Officieel was de offerte net verlopen, maar voor deze keer maak ik hem gewoon weer even geldig voor je. Niet doorvertellen. De actie geldt dus gewoon nog: je betaalt 2.916 euro in plaats van 3.645 euro, alles inclusief btw en montage. Hij is nu weer 7 dagen geldig: https://document.reuzenpanda.nl/nl/731483fa-ef6b-4aae-afcf-883ec09219dd/216bb1d0-87c7-4d5b-9f06-ecef6cc52251/latest?pdfAction=DOCSIGN Offertenummer: 202610708 Over de planning: als je akkoord geeft, komen we eerst inmeten (op dit moment zo'n 2 tot 3 weken). Daarna is de verwachte productietijd na het betalen van de aanbetalingsfactuur 8 tot 10 weken. Alles wat eerder kan, monteren we met liefde eerder. Zal ik het inmeten voor je in gang zetten, of wil je de offerte zelf online ondertekenen via de link?"
-   },
-   {
-    "op": "2026-08-08 14:19:37",
-    "richting": "NOTE",
-    "tekst": "🤖 Door de AI gedaan: • Offerte aangepast: Offerte 202610708 opnieuw geldig gemaakt voor de klant (was net verlopen op 6 aug), actiekorting behouden."
-   },
-   {
-    "op": "2026-08-10 13:03:46",
-    "richting": "INBOUND",
-    "tekst": "Goedemiddag, ik ga graag akkoord met de offerte, ik heb nog wel een vraagje: het is incl. Montage toch? En komen jullie van te voren kijken hoe het met de electra geregeld kan worden?"
-   },
-   {
-    "op": "2026-08-10 13:13:00",
-    "richting": "OUTBOUND",
-    "tekst": "Wat leuk Debby, daar ben ik blij mee! En ja hoor, de montage zit er volledig bij in, net als de btw. Je komt dus niet voor extra kosten te staan. Over de elektra: dat regelen wij helemaal zelf bij de montage. We boren een gaatje door de gevel, trekken een nette kabel naar het dichtstbijzijnde stopcontact en werken dat af met een strak kabelgootje. Bij het inmeten kijkt onze adviseur meteen ter plekke hoe dat bij jou het handigst kan, dus dat wordt allemaal netjes met je doorgenomen. Eén ding wil ik je eerlijk meegeven: als je na het inmeten toch niet met ons verder zou gaan, brengen we 75 euro in rekening voor het inmeetwerk. Ga je wel met ons door, dan vervalt dat bedrag volledig. Zal ik het inmeten voor je in gang zetten, of teken je de offerte liever zelf online via de link?"
-   },
-   {
-    "op": "2026-08-10 13:21:19",
-    "richting": "INBOUND",
-    "tekst": "Als je het inmeten in gang wilt zetten graag. Is dit nog tussen de 2 en 3 weken?"
-   },
-   {
-    "op": "2026-08-10 13:29:52",
-    "richting": "OUTBOUND",
-    "tekst": "Super Debby, dank je wel voor het vertrouwen, leuk dat we je mogen helpen! Ik heb het inmeten voor je in gang gezet. De planning neemt binnen 5 werkdagen contact met je op om de afspraak in te plannen. Over de wachttijd: ik moet eerlijk zijn, de eerstvolgende plek in de agenda is op dit moment rond 31 augustus, dus reken op ongeveer 3 weken in plaats van 2. Dat komt door de drukte en de vakantieperiode. Kan er tussentijds eerder iets vrijkomen, dan bel ik de planning of ze je op de lijst zetten zodat je eerder aan de beurt kunt zijn. Zal ik dat voor je doorgeven?"
-   },
-   {
-    "op": "2026-08-10 13:29:55",
-    "richting": "NOTE",
-    "tekst": "🤖 Door de AI gedaan: • Inmeten doorgezet naar de planning voor Debby van Haren (Voorraad knikarmscherm (motor + afstandsbediening)), notitie voor de planner: Klant akkoord op offerte 202610708. Elektra ter plekke doornemen bij inmeten. Adres: Kamperfoeliestraat 11, 2981 BR Ridderkerk."
-   },
-   {
-    "op": "2026-08-10 13:32:06",
-    "richting": "INBOUND",
-    "tekst": "Ja graag."
-   },
-   {
-    "op": "2026-08-10 15:54:23",
-    "richting": "OUTBOUND",
-    "tekst": "Hoi Debby, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 10:50. De afspraak duurt ongeveer 35 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
-   },
    {
     "op": "2026-08-10 15:56:09",
     "richting": "INBOUND",
@@ -2795,6 +2795,61 @@
     "op": "2026-08-12 21:34:23",
     "richting": "OUTBOUND",
     "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:11:50",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Debby, ik hou dinsdag 25 augustus om 10:00 nog even voor je vrij. Past het, laat je het dan weten? Komt het niet uit, dan zoek ik met alle plezier een ander moment. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:12:32",
+    "richting": "INBOUND",
+    "tekst": "Ja deze datum en tijd is prima😁"
+   },
+   {
+    "op": "2026-08-13 11:14:35",
+    "richting": "OUTBOUND",
+    "tekst": "Ai, dat moment is net ingenomen door een andere afspraak, excuus! We sturen je zo een paar nieuwe tijden om uit te kiezen. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:15:30",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Debby, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: ma 24 aug om 09:00. De afspraak duurt ongeveer 35 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:15:56",
+    "richting": "INBOUND",
+    "tekst": "Dat past"
+   },
+   {
+    "op": "2026-08-13 11:21:58",
+    "richting": "OUTBOUND",
+    "tekst": "Top! Genoteerd: maandag 24 augustus tussen 09:00 en 09:30 komt onze inmeter Sjoerd bij je langs. Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je even weten. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:24:40",
+    "richting": "INBOUND",
+    "tekst": "Super. Dankjewel!"
+   },
+   {
+    "op": "2026-08-13 11:46:02",
+    "richting": "OUTBOUND",
+    "tekst": "Hi Debby, sorry hoor maar we zitten met een nieuwe bookings systeem heel erg te kutten bij jou. Mijn collega sjoerd is er niet die is met vakantie precies op die dag als eerst. zou je donderdag 24 aug om 14:20 kunnen?"
+   },
+   {
+    "op": "2026-08-13 12:01:10",
+    "richting": "OUTBOUND",
+    "tekst": "20 aug excuus"
+   },
+   {
+    "op": "2026-08-13 12:15:05",
+    "richting": "INBOUND",
+    "tekst": "Dat is goed"
+   },
+   {
+    "op": "2026-08-13 12:45:05",
+    "richting": "OUTBOUND",
+    "tekst": "Toppie bedankt en sorry voor de verwarring hoor!"
    }
   ]
  },
@@ -2804,13 +2859,102 @@
   "verstuurdOp": "2026-08-12T18:48:27.559Z",
   "mailUit": [
    "2026-07-23 14:23:55",
-   "2026-08-12 20:48:25"
+   "2026-08-12 20:48:25",
+   "2026-08-13 08:25:07",
+   "2026-08-13 08:28:24",
+   "2026-08-13 08:41:33",
+   "2026-08-13 08:58:28"
   ],
   "msgs": [
    {
     "op": "2026-08-12 20:48:23",
     "richting": "OUTBOUND",
     "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: di 25 aug om 10:40. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:19:44",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:23:21",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:25:05",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 13:05. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:25:42",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:27:15",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:27:20",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:28:22",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: do 24 sep om 13:40. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:31:36",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:35:23",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:41:31",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 13:05. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:42:45",
+    "richting": "INBOUND",
+    "tekst": "Het is ook prima als het pas oktober of november word. De agenda zit met werk gewoon vol tot 2 oktober, dus is lastig plannen"
+   },
+   {
+    "op": "2026-08-13 08:45:18",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:46:12",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:58:26",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: ma 12 okt om 13:45. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 09:00:54",
+    "richting": "INBOUND",
+    "tekst": "Dat past"
+   },
+   {
+    "op": "2026-08-13 09:06:33",
+    "richting": "OUTBOUND",
+    "tekst": "Top! Genoteerd: maandag 12 oktober tussen 13:45 en 14:15 komt onze inmeter Joey bij je langs. Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je even weten. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 09:17:27",
+    "richting": "INBOUND",
+    "tekst": "👍"
    }
   ]
  },
@@ -2937,6 +3081,841 @@
     "op": "2026-08-12 23:14:46",
     "richting": "INBOUND",
     "tekst": "Top! Jullie mogen ook een paar weken eerder komen hoor🤣"
+   },
+   {
+    "op": "2026-08-13 08:56:15",
+    "richting": "OUTBOUND",
+    "tekst": "Haha genoteerd Koen! Je staat op onze lijst: zodra er eerder een plek vrijkomt in jouw buurt hoor je meteen van ons. Tot uiterlijk woensdag 23 september om 11:35. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 09:29:42",
+    "richting": "INBOUND",
+    "tekst": "Dankjewel👍🏽"
+   }
+  ]
+ },
+ "950fb741cdb9f6d7dea6e3f33a0ddfdc": {
+  "naam": "Mandy Princen",
+  "ticket": 973739325,
+  "verstuurdOp": "2026-08-13T06:25:09.221Z",
+  "mailUit": [
+   "2026-07-23 14:23:55",
+   "2026-08-12 20:48:25",
+   "2026-08-13 08:25:07",
+   "2026-08-13 08:28:24",
+   "2026-08-13 08:41:33",
+   "2026-08-13 08:58:28"
+  ],
+  "msgs": [
+   {
+    "op": "2026-08-12 20:48:23",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: di 25 aug om 10:40. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:19:44",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:23:21",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:25:05",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 13:05. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:25:42",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:27:15",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:27:20",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:28:22",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: do 24 sep om 13:40. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:31:36",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:35:23",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:41:31",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 13:05. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:42:45",
+    "richting": "INBOUND",
+    "tekst": "Het is ook prima als het pas oktober of november word. De agenda zit met werk gewoon vol tot 2 oktober, dus is lastig plannen"
+   },
+   {
+    "op": "2026-08-13 08:45:18",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:46:12",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:58:26",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: ma 12 okt om 13:45. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 09:00:54",
+    "richting": "INBOUND",
+    "tekst": "Dat past"
+   },
+   {
+    "op": "2026-08-13 09:06:33",
+    "richting": "OUTBOUND",
+    "tekst": "Top! Genoteerd: maandag 12 oktober tussen 13:45 en 14:15 komt onze inmeter Joey bij je langs. Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je even weten. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 09:17:27",
+    "richting": "INBOUND",
+    "tekst": "👍"
+   }
+  ]
+ },
+ "29c719088f83f194dbe25f5162930075": {
+  "naam": "Mandy Princen",
+  "ticket": 973739325,
+  "verstuurdOp": "2026-08-13T06:28:25.962Z",
+  "mailUit": [
+   "2026-07-23 14:23:55",
+   "2026-08-12 20:48:25",
+   "2026-08-13 08:25:07",
+   "2026-08-13 08:28:24",
+   "2026-08-13 08:41:33",
+   "2026-08-13 08:58:28"
+  ],
+  "msgs": [
+   {
+    "op": "2026-08-12 20:48:23",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: di 25 aug om 10:40. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:19:44",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:23:21",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:25:05",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 13:05. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:25:42",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:27:15",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:27:20",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:28:22",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: do 24 sep om 13:40. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:31:36",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:35:23",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:41:31",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 13:05. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:42:45",
+    "richting": "INBOUND",
+    "tekst": "Het is ook prima als het pas oktober of november word. De agenda zit met werk gewoon vol tot 2 oktober, dus is lastig plannen"
+   },
+   {
+    "op": "2026-08-13 08:45:18",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:46:12",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:58:26",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: ma 12 okt om 13:45. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 09:00:54",
+    "richting": "INBOUND",
+    "tekst": "Dat past"
+   },
+   {
+    "op": "2026-08-13 09:06:33",
+    "richting": "OUTBOUND",
+    "tekst": "Top! Genoteerd: maandag 12 oktober tussen 13:45 en 14:15 komt onze inmeter Joey bij je langs. Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je even weten. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 09:17:27",
+    "richting": "INBOUND",
+    "tekst": "👍"
+   }
+  ]
+ },
+ "ea1d583ad9910db129e6cf9154870e8e": {
+  "naam": "Mandy Princen",
+  "ticket": 973739325,
+  "verstuurdOp": "2026-08-13T06:41:35.049Z",
+  "mailUit": [
+   "2026-07-23 14:23:55",
+   "2026-08-12 20:48:25",
+   "2026-08-13 08:25:07",
+   "2026-08-13 08:28:24",
+   "2026-08-13 08:41:33",
+   "2026-08-13 08:58:28"
+  ],
+  "msgs": [
+   {
+    "op": "2026-08-12 20:48:23",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: di 25 aug om 10:40. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:19:44",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:23:21",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:25:05",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 13:05. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:25:42",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:27:15",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:27:20",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:28:22",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: do 24 sep om 13:40. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:31:36",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:35:23",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:41:31",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 13:05. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:42:45",
+    "richting": "INBOUND",
+    "tekst": "Het is ook prima als het pas oktober of november word. De agenda zit met werk gewoon vol tot 2 oktober, dus is lastig plannen"
+   },
+   {
+    "op": "2026-08-13 08:45:18",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:46:12",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:58:26",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: ma 12 okt om 13:45. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 09:00:54",
+    "richting": "INBOUND",
+    "tekst": "Dat past"
+   },
+   {
+    "op": "2026-08-13 09:06:33",
+    "richting": "OUTBOUND",
+    "tekst": "Top! Genoteerd: maandag 12 oktober tussen 13:45 en 14:15 komt onze inmeter Joey bij je langs. Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je even weten. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 09:17:27",
+    "richting": "INBOUND",
+    "tekst": "👍"
+   }
+  ]
+ },
+ "b440964392f735c7ca556e2244e3e150": {
+  "naam": "Mandy Princen",
+  "ticket": 973739325,
+  "verstuurdOp": "2026-08-13T06:58:30.473Z",
+  "mailUit": [
+   "2026-07-23 14:23:55",
+   "2026-08-12 20:48:25",
+   "2026-08-13 08:25:07",
+   "2026-08-13 08:28:24",
+   "2026-08-13 08:41:33",
+   "2026-08-13 08:58:28"
+  ],
+  "msgs": [
+   {
+    "op": "2026-08-12 20:48:23",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: di 25 aug om 10:40. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:19:44",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:23:21",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:25:05",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 13:05. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:25:42",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:27:15",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:27:20",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:28:22",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: do 24 sep om 13:40. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:31:36",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-13 08:35:23",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:41:31",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 13:05. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:42:45",
+    "richting": "INBOUND",
+    "tekst": "Het is ook prima als het pas oktober of november word. De agenda zit met werk gewoon vol tot 2 oktober, dus is lastig plannen"
+   },
+   {
+    "op": "2026-08-13 08:45:18",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:46:12",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 08:58:26",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mandy, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: ma 12 okt om 13:45. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 09:00:54",
+    "richting": "INBOUND",
+    "tekst": "Dat past"
+   },
+   {
+    "op": "2026-08-13 09:06:33",
+    "richting": "OUTBOUND",
+    "tekst": "Top! Genoteerd: maandag 12 oktober tussen 13:45 en 14:15 komt onze inmeter Joey bij je langs. Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je even weten. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 09:17:27",
+    "richting": "INBOUND",
+    "tekst": "👍"
+   }
+  ]
+ },
+ "d928a19dc260c926f281beffce11262c": {
+  "naam": "Debby van van Haren",
+  "ticket": 970483194,
+  "verstuurdOp": "2026-08-13T09:15:33.716Z",
+  "mailUit": [
+   "2026-08-10 15:54:27",
+   "2026-08-11 15:04:15",
+   "2026-08-12 15:07:58",
+   "2026-08-13 11:15:31"
+  ],
+  "msgs": [
+   {
+    "op": "2026-08-10 15:56:09",
+    "richting": "INBOUND",
+    "tekst": "Hoelang erna kan het scherm geplaatst worden? Omdat je zei 2 a 3 weken en dat is geen 23 september. Dan kunnen we dit jaar er bijna niet meer van genieten."
+   },
+   {
+    "op": "2026-08-10 15:57:08",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je voor je eerlijke bericht, dat snap ik goed. Ik leg het even voor aan een collega en je hoort vandaag nog van ons. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-11 11:56:56",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Debby, ik hou woensdag 23 september om 10:50 nog even voor je vrij. Past het, laat je het dan weten? Komt het niet uit, dan zoek ik met alle plezier een ander moment. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-11 15:04:11",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Debby, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: di 25 aug om 12:30. De afspraak duurt ongeveer 35 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-11 15:33:00",
+    "richting": "OUTBOUND",
+    "tekst": "past dit er beter bij? dit is een plekje die is vrij gekomen!"
+   },
+   {
+    "op": "2026-08-12 15:07:56",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Debby, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: di 25 aug om 10:00. De afspraak duurt ongeveer 35 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-12 21:33:30",
+    "richting": "INBOUND",
+    "tekst": "Goedenavond, sorry was de dagje weg."
+   },
+   {
+    "op": "2026-08-12 21:33:44",
+    "richting": "INBOUND",
+    "tekst": "Di 25 aug is prima."
+   },
+   {
+    "op": "2026-08-12 21:34:23",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er vandaag nog bij je op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:11:50",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Debby, ik hou dinsdag 25 augustus om 10:00 nog even voor je vrij. Past het, laat je het dan weten? Komt het niet uit, dan zoek ik met alle plezier een ander moment. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:12:32",
+    "richting": "INBOUND",
+    "tekst": "Ja deze datum en tijd is prima😁"
+   },
+   {
+    "op": "2026-08-13 11:14:35",
+    "richting": "OUTBOUND",
+    "tekst": "Ai, dat moment is net ingenomen door een andere afspraak, excuus! We sturen je zo een paar nieuwe tijden om uit te kiezen. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:15:30",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Debby, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: ma 24 aug om 09:00. De afspraak duurt ongeveer 35 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:15:56",
+    "richting": "INBOUND",
+    "tekst": "Dat past"
+   },
+   {
+    "op": "2026-08-13 11:21:58",
+    "richting": "OUTBOUND",
+    "tekst": "Top! Genoteerd: maandag 24 augustus tussen 09:00 en 09:30 komt onze inmeter Sjoerd bij je langs. Houd er rekening mee dat het door de route soms een uur eerder of later kan worden; als dat zo is laten we het je even weten. Komt er toch iets tussen? Stuur dan even een berichtje. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 11:24:40",
+    "richting": "INBOUND",
+    "tekst": "Super. Dankjewel!"
+   },
+   {
+    "op": "2026-08-13 11:46:02",
+    "richting": "OUTBOUND",
+    "tekst": "Hi Debby, sorry hoor maar we zitten met een nieuwe bookings systeem heel erg te kutten bij jou. Mijn collega sjoerd is er niet die is met vakantie precies op die dag als eerst. zou je donderdag 24 aug om 14:20 kunnen?"
+   },
+   {
+    "op": "2026-08-13 12:01:10",
+    "richting": "OUTBOUND",
+    "tekst": "20 aug excuus"
+   },
+   {
+    "op": "2026-08-13 12:15:05",
+    "richting": "INBOUND",
+    "tekst": "Dat is goed"
+   },
+   {
+    "op": "2026-08-13 12:45:05",
+    "richting": "OUTBOUND",
+    "tekst": "Toppie bedankt en sorry voor de verwarring hoor!"
+   }
+  ]
+ },
+ "f7aafb0f5ed1e3fbee1ec9b0ac9feeb5": {
+  "naam": "Monique Bijnen",
+  "ticket": 971965641,
+  "verstuurdOp": "2026-08-13T10:47:21.199Z",
+  "mailUit": [
+   "2026-08-11 15:55:48",
+   "2026-08-13 12:47:19"
+  ],
+  "msgs": [
+   {
+    "op": "2026-08-05 17:03:10",
+    "richting": "OUTBOUND",
+    "tekst": "Hi Monique, Jaimy hier van Sonty. Leuk dat ik je mag helpen! Je prijsindicatie staat klaar. Aan producten en montage zit een waarde van 5.018 euro, maar met de actie die nu loopt betaal je 4.265 euro. Daar zit alles in, ook de btw, dus je komt niet voor verrassingen te staan. Deze prijs geldt nog tot woensdag 12 augustus. Bekijk je offerte hier: https://document.reuzenpanda.nl/nl/731483fa-ef6b-4aae-afcf-883ec09219dd/c839d757-4679-4e40-9eaa-07467cfb527f/latest — offertenummer: 202611112 Wil je even kijken of de maten en kleuren kloppen? Die heb je zelf ingeschat bij de aanvraag, dus daar zit vaak nog een verschil in. Ik pas het zo voor je aan."
+   },
+   {
+    "op": "2026-08-13 09:48:38",
+    "richting": "INBOUND",
+    "tekst": "Ik heb een vraag"
+   },
+   {
+    "op": "2026-08-13 09:53:53",
+    "richting": "INBOUND",
+    "tekst": "Hi Jaimy, heb je mijn mail gezien van 11 aug? Meerdere keren gebeld, maar kom er niet doorheen. Anyways - in de mail staat dat ik accoord ga met de offerte en jullie de opdracht graag gun. Qua kleuren - ben ik zeker dat bak en rails in de kleur Ral 9010 moeten, maar weet nog niet zeker of ik beige wil voor de lamellen. Dus mijn vraag is of jullie bij inmeten de voorbeeld kleuren van de lamellen meenemen - zodat ik het in thuis situatie kan beoordelen. Ik hoor graag van jullie - met vriendelijke groet Monique Bijnen"
+   },
+   {
+    "op": "2026-08-13 10:12:09",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Monique! Wat vervelend dat je ons telefonisch niet te pakken kreeg, mijn excuses daarvoor. En superleuk dat je met ons in zee wilt, bedankt voor het vertrouwen! Over je vraag: ja, zeker. De pantserkleur van de lamellen kies je het makkelijkst bij het inmeten. Onze adviseur neemt alle kleurstalen mee, dan zie je beige (en eventuele alternatieven) gewoon in je eigen licht naast je gevel. Je hoeft nu dus nog niets vast te leggen, wisselen kan tot na het inmeten. Je bak en rails staan al goed op RAL 9010. Om het inmeten in gang te zetten: hou er wel even rekening mee dat als je na het inmeten toch niet met ons verder zou gaan, we 75 euro rekenen voor het inmeten. Ga je wel door, dan vervalt die 75 euro volledig. Wil je de offerte zelf online ondertekenen via de link, of zal ik hem voor je in orde maken? In beide gevallen neemt de planning daarna binnen 5 werkdagen contact met je op voor de inmeetafspraak."
+   },
+   {
+    "op": "2026-08-13 10:38:48",
+    "richting": "INBOUND",
+    "tekst": "Super - ik heb offerte zojuist online getekend."
+   },
+   {
+    "op": "2026-08-13 10:48:18",
+    "richting": "OUTBOUND",
+    "tekst": "Wat fijn, Monique, en bedankt voor het tekenen! Superleuk dat we jou mogen gaan helpen. Ik heb het inmeten meteen in gang gezet, en ik heb er een notitie bij gezet dat de adviseur de kleurstalen van de lamellen meeneemt zodat je beige (en de alternatieven) rustig in je eigen licht naast de gevel kunt beoordelen. De planning neemt binnen 5 werkdagen contact met je op om de inmeetafspraak in te plannen. Mocht je voor die tijd nog een vraag hebben, laat maar weten!"
+   },
+   {
+    "op": "2026-08-13 10:48:19",
+    "richting": "NOTE",
+    "tekst": "🤖 Door de AI gedaan: • Inmeten doorgezet naar de planning voor Monique Bijnen (Rolluiken (offerte 202611112)), notitie voor de planner: Klant heeft online getekend. Pantserkleur lamellen nog te bepalen bij inmeten: graag kleurstalen meenemen (twijfelt tussen beige en alternatief). Bak en rails RAL 9010."
+   },
+   {
+    "op": "2026-08-13 12:47:17",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Monique, goed nieuws: we kunnen bij je langskomen om in te meten. Ons voorstel: di 25 aug om 14:25. De afspraak duurt ongeveer 45 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 12:48:13",
+    "richting": "INBOUND",
+    "tekst": "Dat past"
+   },
+   {
+    "op": "2026-08-13 12:53:48",
+    "richting": "OUTBOUND",
+    "tekst": "Helemaal goed, hij staat! Dinsdag 25 augustus tussen 14:25 en 14:55 komt onze inmeter Joey bij je langs. Door de route kan het soms een uurtje eerder of later worden, maar dan laten we het je even weten. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-13 12:54:27",
+    "richting": "INBOUND",
+    "tekst": "Ok"
+   }
+  ]
+ },
+ "de5a58b7f6cf725819faa13825329d46": {
+  "naam": "Charles  Gevers",
+  "ticket": 973458833,
+  "verstuurdOp": "2026-08-13T16:31:01.416Z",
+  "mailUit": [
+   "2026-08-13 18:30:59"
+  ],
+  "msgs": [
+   {
+    "op": "2026-08-13 21:54:35",
+    "richting": "OUTBOUND",
+    "tekst": "Als levertijd het enige was om bij ons te kopen, kijk gerust verder. mochten we je dan nog kunnen helpen omdat het overal het zelfde is ben je van harte welkom"
+   },
+   {
+    "op": "2026-08-13 21:54:38",
+    "richting": "OUTBOUND",
+    "tekst": "fijne avond"
+   },
+   {
+    "op": "2026-08-13 21:54:56",
+    "richting": "INBOUND",
+    "tekst": "Kortom, misleiding? Je belooft 4 en daarna zeg je 14 weken!"
+   },
+   {
+    "op": "2026-08-13 21:56:29",
+    "richting": "INBOUND",
+    "tekst": "Dacht overigens dat ik morgen evt. nog een andere planning zou kunnen krijgen, dus snap de hele discussie niet"
+   },
+   {
+    "op": "2026-08-13 21:56:29",
+    "richting": "OUTBOUND",
+    "tekst": "foutje op de website, je bent de eerste die hier over begint anders was het al aangepast geweest. het is ook al doorgezet naar de webdeveloper."
+   },
+   {
+    "op": "2026-08-13 21:57:13",
+    "richting": "OUTBOUND",
+    "tekst": "Wil je nog geholpen worde met de productie tijd van 8-10 weken na het betalen van de aanbetaling?"
+   },
+   {
+    "op": "2026-08-13 21:57:30",
+    "richting": "OUTBOUND",
+    "tekst": "Dan ga ik morgen met de planning voor je kijken of we eerder een plekje voor je kunnen vinden."
+   },
+   {
+    "op": "2026-08-13 21:58:38",
+    "richting": "INBOUND",
+    "tekst": "Dat is zaak omdraaien. Ik verwacht morgen antwoord op evt. andere planning"
+   },
+   {
+    "op": "2026-08-13 21:59:07",
+    "richting": "OUTBOUND",
+    "tekst": "vriendelijk, fijne avond."
+   },
+   {
+    "op": "2026-08-13 21:59:29",
+    "richting": "INBOUND",
+    "tekst": "Welterusten"
+   },
+   {
+    "op": "2026-08-14 11:09:27",
+    "richting": "OUTBOUND",
+    "tekst": "Helemaal goed, hij staat! Maandag 21 september tussen 12:25 en 12:55 komt onze inmeter Sjoerd bij je langs. Door de route kan het soms een uurtje eerder of later worden, maar dan laten we het je even weten. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-14 11:26:09",
+    "richting": "OUTBOUND",
+    "tekst": "Mamamia…. Sorry hoor. We zijn net gewisseld naar een plannings systeem wat nog niet helemaal soepel werkt"
+   },
+   {
+    "op": "2026-08-14 17:36:13",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Charles, allereerst sorry voor de automatische bevestiging die je kreeg, die had niet verstuurd mogen worden. Ik heb zelf in de planning gedoken om te kijken wat er echt mogelijk is. Eerder dan maandag 21 september lukt helaas niet: onze inmeters zitten tot die tijd vol en deels op vakantie. Die maandag zijn we toevallig al bij een klant bij jou in de buurt, dus dan kunnen we er goed de tijd voor nemen. Zal ik 21 september 12:25 voor je vasthouden?"
+   },
+   {
+    "op": "2026-08-14 17:55:33",
+    "richting": "INBOUND",
+    "tekst": "Dank voor je inspanningen. Graag 21e inplannen"
+   },
+   {
+    "op": "2026-08-14 17:58:10",
+    "richting": "INBOUND",
+    "tekst": "Kun je ook nog antwoord geven op de vraag: waar moet de kabel voor het scherm naar buiten komen, die wordt volgende week nl. opnieuw geboord, dus handig als we dat nu al weten: hoever naast het scherm (kabel komt rechts van het scherm) en hoever naar boven (zodat het wat minder zichtbaar is) En hoe lang moet het stuk kabel nog zijn? Ze gaan maandag boren, zou fijn zijn dit weekend nog iets te horen"
+   },
+   {
+    "op": "2026-08-14 17:58:53",
+    "richting": "OUTBOUND",
+    "tekst": "thanks gaan we doen! en zou je mij een foto kunnen sturen van de situatie zodat ik goed mee kan kijken."
+   },
+   {
+    "op": "2026-08-14 17:59:37",
+    "richting": "OUTBOUND",
+    "tekst": "Het knikarmscherm hangt aan 2 beugels die bij de uiteinde van de casette komen te zitten."
+   },
+   {
+    "op": "2026-08-14 18:00:08",
+    "richting": "OUTBOUND",
+    "tekst": "meestal word bijvoorbeeld de schuifpui ook als midden punt van het knikscherm aangehouden"
+   },
+   {
+    "op": "2026-08-14 18:01:28",
+    "richting": "INBOUND",
+    "tekst": "Image"
+   },
+   {
+    "op": "2026-08-14 18:02:37",
+    "richting": "INBOUND",
+    "tekst": "Rechts moet de kabel nog naar buiten worden geboord, vandaar dat we graag willen weten hoever die rechts van de cassette moet komen"
+   }
+  ]
+ },
+ "9d50cbec1c5c7dfaf6c6562c98dc44f1": {
+  "naam": "Jeffrey Penning",
+  "ticket": 973941870,
+  "verstuurdOp": "2026-08-13T16:32:07.567Z",
+  "mailUit": [
+   "2026-08-11 13:09:34",
+   "2026-08-13 18:32:05"
+  ],
+  "msgs": [
+   {
+    "op": "2026-08-13 18:32:03",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Jeffrey, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: wo 23 sep om 12:35. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-14 10:44:39",
+    "richting": "INBOUND",
+    "tekst": "Dat past"
+   },
+   {
+    "op": "2026-08-14 10:47:04",
+    "richting": "OUTBOUND",
+    "tekst": "Helemaal goed, hij staat! Woensdag 23 september tussen 12:35 en 13:05 komt onze inmeter Sjoerd bij je langs. Door de route kan het soms een uurtje eerder of later worden, maar dan laten we het je even weten. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-14 10:48:05",
+    "richting": "INBOUND",
+    "tekst": "Helemaal prima hoor! Wij zien Sjoerd dan vanzelf verschijnen! Horen wij dezelfde dag nog hoe laat dat ongeveer wordt?"
+   }
+  ]
+ },
+ "d65beb3e15e82c84c020e0627d614af4": {
+  "naam": "Laura Idzinga",
+  "ticket": 973210627,
+  "verstuurdOp": "2026-08-14T15:35:07.646Z",
+  "mailUit": [
+   "2026-08-14 17:35:05"
+  ],
+  "msgs": [
+   {
+    "op": "2026-08-10 17:21:53",
+    "richting": "OUTBOUND",
+    "tekst": "Hi Laura, Jaimy hier van Sonty. Leuk dat ik je mag helpen! Je prijsindicatie staat klaar. Aan producten en montage zit een waarde van 3.619 euro, maar met de actie die nu loopt betaal je 2.895 euro. Daar zit alles in, ook de btw, dus je komt niet voor verrassingen te staan. Deze prijs geldt nog tot zondag 16 augustus. Bekijk je offerte hier: https://document.reuzenpanda.nl/nl/731483fa-ef6b-4aae-afcf-883ec09219dd/ffe77d83-4bd0-4c03-a1dd-07bf1c1d6673/latest — offertenummer: 202611338 Wat wil je doen?"
+   },
+   {
+    "op": "2026-08-11 12:53:38",
+    "richting": "INBOUND",
+    "tekst": "Ik heb een vraag"
+   },
+   {
+    "op": "2026-08-11 12:54:40",
+    "richting": "INBOUND",
+    "tekst": "Hoi Jaimy, Wij hebben momenteel nog een oud (handmatig) zonnescherm hangen. Dit is ook een knikarm constructie. Is het mogelijk dat jullie deze verwijderen en meenemen als een nieuw scherm geplaatst mocht worden?"
+   },
+   {
+    "op": "2026-08-11 13:04:29",
+    "richting": "OUTBOUND",
+    "tekst": "Hi Laura, goede vraag! Dat kunnen we zeker regelen. We demonteren je oude knikarmscherm en voeren het netjes voor je af. Dat kost 75 euro per product, waarvan we 25 euro doneren aan het Prinses Máxima Kinderziekenhuis. Zal ik het meteen op je offerte zetten, of heb je verder nog vragen over het nieuwe scherm?"
+   },
+   {
+    "op": "2026-08-11 13:11:35",
+    "richting": "INBOUND",
+    "tekst": "Zou je het op de offerte willen zetten? Dan nemen we dit mee in onze overweging. Dank je wel!"
+   },
+   {
+    "op": "2026-08-11 13:24:53",
+    "richting": "OUTBOUND",
+    "tekst": "Top, dat heb ik voor je op de offerte gezet! De demontage en afvoer van je oude knikarmscherm staat er nu bij voor 75 euro, waarvan we 25 euro doneren aan het Prinses Máxima Kinderziekenhuis. Met de actie die nu loopt kom je daarmee op zo'n 2.970 euro, alles inclusief. Hier is de bijgewerkte offerte: https://document.reuzenpanda.nl/nl/731483fa-ef6b-4aae-afcf-883ec09219dd/ffe77d83-4bd0-4c03-a1dd-07bf1c1d6673/latest Offertenummer: 202611338 Neem gerust even rustig de tijd om het te overwegen. Zal ik hem voor je klaarzetten voor het inmeten zodra jullie eruit zijn, of heb je nog ergens een vraag over?"
+   },
+   {
+    "op": "2026-08-11 13:24:55",
+    "richting": "NOTE",
+    "tekst": "🤖 Door de AI gedaan: • Offerte aangepast: Demontage + afvoer oud knikarmscherm toegevoegd op verzoek klant"
+   },
+   {
+    "op": "2026-08-14 13:04:30",
+    "richting": "INBOUND",
+    "tekst": "Ik heb de offerte zojuist ondertekend. Hoop dat jullie deze in goede orde ontvangen hebben!"
+   },
+   {
+    "op": "2026-08-14 13:30:54",
+    "richting": "OUTBOUND",
+    "tekst": "Wat leuk Laura, we hebben je ondertekende offerte netjes binnen. Bedankt voor het vertrouwen, super dat we dit voor je mogen gaan verzorgen! Ik heb je dossier meteen doorgezet naar het inmeten. De planning neemt binnen 5 werkdagen contact met je op om een afspraak in te plannen. Zou je ons nummer alvast even willen opslaan, dan weet je dat wij het zijn als ze bellen? Eén ding voor de goede orde: het inmeten is helemaal gratis zolang je met ons verder gaat, wat nu dus het geval is. Mocht je onverhoopt toch afzien van de opdracht, dan brengen we 75 euro inmeetkosten in rekening, maar in jouw geval vervalt dat gewoon. Qua planning: het is momenteel wat drukker dan normaal, de eerstvolgende ruimte om in te meten is rond half september. Ligt jouw adres dicht bij een lopende route, dan kan het sneller. Ik geef aan de planning door dat je graag zo snel mogelijk geholpen wordt. Fijn weekend alvast!"
+   },
+   {
+    "op": "2026-08-14 13:30:57",
+    "richting": "NOTE",
+    "tekst": "🤖 Door de AI gedaan: • Inmeten doorgezet naar de planning voor Laura Idzinga (Voorraad knikarmscherm + windsensor, incl. demontage oud scherm), notitie voor de planner: Klant heeft offerte 202611338 online ondertekend. Oud handmatig knikarmscherm wordt gedemonteerd en afgevoerd (staat op offerte). Graag inplannen voor inmeten."
+   },
+   {
+    "op": "2026-08-14 17:35:02",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Laura, Goed nieuws: we kunnen bij je langskomen om in te meten. Omdat je wat verder bij ons vandaan woont plannen we je slim in de route in, daarom stellen we dit moment voor: di 15 sep om 16:05. De afspraak duurt ongeveer 20 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-08-14 17:42:49",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-08-14 17:43:19",
+    "richting": "INBOUND",
+    "tekst": "Hoi Nanny, wij zouden vanaf 2e week oktober kunnen. Kan jij dan een moment voor ons opzoeken om in te plannen?"
+   },
+   {
+    "op": "2026-08-14 17:43:40",
+    "richting": "INBOUND",
+    "tekst": "Dus vanaf maandag 5 oktober graag. Alvast bedankt!"
+   },
+   {
+    "op": "2026-08-14 17:44:07",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
    }
   ]
  }

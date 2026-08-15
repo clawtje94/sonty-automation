@@ -798,5 +798,32 @@
   "kanaal": "EMAIL",
   "status": "klaar",
   "aangemaakt": 1786117299185
+ },
+ {
+  "lcId": "fb370845-ad53-45af-b4e3-d4f676c7b80f",
+  "ticketId": 973311539,
+  "klantNaam": "P Butteling",
+  "producten": [
+   {
+    "product": "zip design 110",
+    "breedteMM": 1450,
+    "hoogteMM": 1609,
+    "bediening": "io",
+    "framekleur": "andere RAL kleur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 1300,
+    "hoogteMM": 1600,
+    "bediening": "io",
+    "framekleur": "andere RAL kleur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "WA",
+  "status": "onbezorgd",
+  "aangemaakt": 1786704568710
  }
 ]

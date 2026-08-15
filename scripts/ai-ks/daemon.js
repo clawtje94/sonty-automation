@@ -386,11 +386,24 @@ function lopendInmeetAanbod(phone, email) {
     const st = JSON.parse(require('fs').readFileSync('/Users/clawdboot/sonty/data/inmeten-planner-state.json', 'utf8'));
     const tel9 = String(phone || '').replace(/\D/g, '').slice(-9);
     const mail = String(email || '').trim().toLowerCase();
+    // Alleen blokkeren zolang de KEUZE nog loopt (Jan van Wageningen 15-08: hij was al
+    // geboekt en vroeg naar Velux-rolluiken, maar Sunny bleef geblokkeerd — de klant
+    // kreeg twee keer dezelfde lege "ik zoek het uit" van de planner-monitor terwijl
+    // de klantenservice-bot het antwoord gewoon weet). Is de klant geboekt, dan is de
+    // planner klaar en neemt Sunny het gesprek weer over.
+    let geboekt = new Set();
+    try {
+      const bo = JSON.parse(require('fs').readFileSync('/Users/clawdboot/sonty/data/inmeet-boekingen.json', 'utf8'));
+      geboekt = new Set(Object.values(bo).filter((b) => b.status === 'geboekt').map((b) => String(b.telefoon || '').replace(/\D/g, '').slice(-9)));
+    } catch { /* geen administratie */ }
     return Object.values(st.aanbodTickets || {}).some((a) => {
       if (Date.now() - Date.parse(a.verstuurdOp) >= 48 * 3600000) return false;
       const aTel = String(a.telefoon || '').replace(/\D/g, '').slice(-9);
       const aMail = String(a.email || '').trim().toLowerCase();
-      return (tel9.length === 9 && aTel === tel9) || (!!mail && !!aMail && aMail === mail);
+      const match = (tel9.length === 9 && aTel === tel9) || (!!mail && !!aMail && aMail === mail);
+      if (!match) return false;
+      if (aTel && geboekt.has(aTel)) return false; // geboekt = planner klaar, Sunny mag weer
+      return true;
     });
   } catch { return false; /* state onleesbaar: normale flow */ }
 }

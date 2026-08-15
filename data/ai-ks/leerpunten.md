@@ -144,3 +144,4 @@ GOED: de offerte loopt gewoon af, dus wie er gebruik van wil maken tekent nu —
 staat de prijs vast. De inmeetafspraak plannen we daarna gewoon later, in overleg
 met de planning (bijvoorbeeld na de sleuteloverdracht). Wat de klant tekent is
 precies de aanbieding die geldt zodra we hebben ingemeten.
+- (2026-08-14) [team-notitie bij gesprek .] deze miss wel doorwijzen naar team mens nodig toch?

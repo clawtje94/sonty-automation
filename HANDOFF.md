@@ -1,4 +1,20 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-13)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-15)
+
+## 15-08: TWEE PRODUCTIE-INCIDENTEN OPGELOST
+- **OWA-token/planner plat**: Microsoft vernieuwde de loginpagina (formulier in gesloten
+  shadow-DOM) → fill() in owaSessie kwam nooit aan → token verliep 14-08 11:17 → planner
+  weigerde (vakanties onbekend, veiligheidsklep) → winkel zag "laatste ronde 54 min
+  geleden". FIX (commit b057db6): selector-vrije login in planning-mail-daemon.js: wacht
+  tot login.microsoftonline, dan blind keyboard.type(email)/Enter/type(wachtwoord)/Enter
+  (autofocus vangt het op, werkt op oude én nieuwe pagina). Token ververst, daemons
+  herstart, verweesd planning-mail.lock (dode pid) opgeruimd, ronde 12:59 klaar.
+- **KV-maandlimiet vol (14-08)**: Upstash 500k/500k → site traag, offerte-/planningstool
+  haperden in de winkel, leads konden tijdelijk niet opgeslagen. Teller is gereset
+  (15-08 werkt alles, doorgemeten). Verbruik verlaagd: pollers (belscherm/inmeet-
+  dashboard/systemen) pauzeren op onzichtbare tabs, systemen-poll 1→2 min. OPEN: V12
+  bij Daimy (betaald KV-plan ~€10-20/mnd) en evt. audit grootste KV-vreters.
+- Telegram-poller hing 2x (kickstart-fix gebruikt); databot-inbox al 2+ dagen stil
+  (launchctl list | grep databot nog checken).
 
 ## 13-08: MAILMARKETING/KLAVIYO GESTART (doel Daimy: alles leren + bot + flows)
 - Doel: extreem goed worden in mailmarketing, Klaviyo volledig inrichten, daarna wekelijks

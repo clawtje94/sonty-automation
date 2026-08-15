@@ -562,6 +562,9 @@ test('annulering na boeking: eigen intent, bewakingslijst en geen loze belofte',
   const blok = monitor.slice(monitor.indexOf("duidingB.intent === 'annuleren'"), monitor.indexOf("duidingB.intent !== 'akkoord'"));
   assert.ok(blok.includes('annulering direct door'), 'annulering-antwoord aan de klant ontbreekt');
   assert.ok(!blok.includes('wanneerTerug()'), 'annulering-tekst bevat nog een terugkom-belofte');
+  const annBlok = monitor.slice(monitor.indexOf("duidingB.intent === 'annuleren'"), monitor.indexOf("duidingB.intent !== 'akkoord'"));
+  assert.ok(annBlok.includes('1821764'), 'annulering gaat niet naar Mens nodig (label ontbreekt)');
+  assert.ok(annBlok.includes('tag: true'), 'annulering-notitie tagt het team niet');
   const zelf = fsx.readFileSync(__dirname + '/../scripts/cron-keten-zelfcontrole.js', 'utf8');
   assert.ok(zelf.includes('ANNULERING OPEN'), 'zelfcontrole bewaakt open annuleringen niet');
   assert.ok(zelf.includes('klantStil'), 'annulerings-bevestiging heeft geen stil-lijst-poort');

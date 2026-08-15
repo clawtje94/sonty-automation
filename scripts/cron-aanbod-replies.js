@@ -428,6 +428,13 @@ async function main() {
                 ao[token] = { naam: info.naam, telefoon: info.telefoon || '', ticketId, gemeldOp: new Date().toISOString(), samenvatting: duidingB.samenvatting };
                 fs.writeFileSync(AOPEN, JSON.stringify(ao, null, 1));
               } catch (e) { console.log(`  annulering-bewaking niet weggeschreven: ${e.message.slice(0, 80)}`); }
+              // Naar Mens nodig: een annulering is altijd een mensen-moment (Daimy 15-08),
+              // dus label + getagde notitie zodat het team het ziet, niet alleen Telegram.
+              try {
+                const { notitie } = require('./lib/trengo-notitie.js');
+                await notitie(ticketId, `Klant annuleert na boeking: ${duidingB.samenvatting}. Afspraak moet uit Planado/Outlook (zelfcontrole bewaakt dit); klant krijgt daarna automatisch de bevestiging.`, { tag: true });
+                await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/labels`, { method: 'POST', headers: { ...TH, 'Content-Type': 'application/json' }, body: JSON.stringify({ label_id: 1821764 }) });
+              } catch (e) { console.log(`  mens-nodig-overdracht mislukt: ${e.message.slice(0, 80)}`); }
               await telegram(`🚨 ANNULERING van ${info.naam}: ${duidingB.samenvatting}\n\n"${tekst.slice(0, 200)}"\n\nDe geboekte afspraak staat NOG in Planado/Outlook — die moet eruit (en de klant krijgt daarna een bevestiging). De zelfcontrole blijft hierover piepen tot de afspraak weg is. Ticket ${ticketId}.`);
               meldingen++;
               continue;

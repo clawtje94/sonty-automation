@@ -321,26 +321,26 @@
       "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVlgF7IAAA="
     ]
   },
-  "laatsteVolleScan": "2026-08-15T09:09:45.508Z",
+  "laatsteVolleScan": "2026-08-15T12:28:33.198Z",
   "inmeetLeads": [
     {
-      "id": "cde87818-8b34-4691-a27c-2136c4fccae3",
-      "summary": "Jan van Wageningen",
+      "id": "cfd6cd87-5369-4364-8e53-59c4484a9d98",
+      "summary": "Ganesh",
       "item_subject": {
-        "id": "99e9ebae-8653-4f38-ade2-f84bb0f93b92",
-        "identifier": "type=LEAD_CONFIGURATION,id=99e9ebae-8653-4f38-ade2-f84bb0f93b92",
+        "id": "ba8a8c4a-ba4b-449c-819f-fe77385bb1f7",
+        "identifier": "type=LEAD_CONFIGURATION,id=ba8a8c4a-ba4b-449c-819f-fe77385bb1f7",
         "type": "LEAD_CONFIGURATION"
       },
-      "description": "Land: Nederland\nE-mailadres: v.wageningen.gww@gmail.com\nTelefoonnummer: +31681026324\nVoornaam: Jan\nAchternaam: van Wageningen\nPostcode: 3245TT\nHuisnummer: 8\nPlaats: Sommelsdijk\nStraatnaam: Tuinfluiter\nHoe komt u bij ons terecht?: Social media\n\n1x Rolluik: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n2x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1577.0\n- breedte: 1550.0\n\n2x Inclusief montage rolluik solar\n1x Rolluik: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1493.0\n- breedte: 2157.0\n\n2x Inclusief montage rolluik solar\n1x Voorraad scherm - 20% korting: \n- doekkleur: Grijs\n- heb_je_een_uitbouw?: Nee\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Inclusief montage Knikarmscherm uitgebreid.: \n- heb_je_een_uitbouw?: Nee",
+      "description": "Naam: Ganesh\nTelefoonnummer: 0644887425\nE-mailadres: ganeshmangal020@gmail.com",
       "fields": {
-        "address": "Tuinfluiter 8, 3245TT Sommelsdijk, Nederland",
-        "phone": "+31681026324",
+        "address": "",
+        "phone": "0644887425",
         "cf_lead_value": {
-          "amount": "6858.3099999999995",
           "isoCurrency": "EUR",
+          "amount": "9343.370000000003",
           "type": "currency"
         },
-        "email": "v.wageningen.gww@gmail.com"
+        "email": "ganeshmangal020@gmail.com"
       }
     },
     {

@@ -570,5 +570,18 @@ test('annulering na boeking: eigen intent, bewakingslijst en geen loze belofte',
   assert.ok(zelf.includes('klantStil'), 'annulerings-bevestiging heeft geen stil-lijst-poort');
 });
 
+
+// SHEET-WACHTRIJ (Barbara Weeink + Ganesh 15-08): volle maandtab + beveiligde
+// kolommen = append geweigerd, en het 1'tje/datum/inmeter viel stil uit de
+// conversie-administratie. Falen moet in de wachtrij, elke run opnieuw proberen.
+test('gefaalde sheet-schrijfacties gaan in de wachtrij en worden opnieuw geprobeerd', () => {
+  const fsx = require('fs');
+  const planner = fsx.readFileSync(__dirname + '/../scripts/cron-inmeten-planner.js', 'utf8');
+  assert.ok(planner.includes('zetInWachtrij'), 'planner zet gefaalde schrijfactie niet in de wachtrij');
+  assert.ok(planner.includes('verwerkWachtrij'), 'planner probeert de wachtrij niet opnieuw');
+  const lib = fsx.readFileSync(__dirname + '/../scripts/lib/sheet-wachtrij.js', 'utf8');
+  assert.ok(lib.includes('grippNr === payload.grippNr'), 'wachtrij dedupt niet op Gripp-nummer');
+});
+
 console.log(`\n${ok} geslaagd, ${fout} gefaald`);
 process.exit(fout ? 1 : 0);

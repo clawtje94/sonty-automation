@@ -1,5 +1,5 @@
 {
- "bijgewerkt": "2026-08-15T12:25:20.974Z",
+ "bijgewerkt": "2026-08-15T14:15:29.632Z",
  "host": "mac-mini",
  "systemen": [
   {
@@ -87,8 +87,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": 900,
-   "logLeeftijdMin": 2,
-   "logLaatste": "[12:23:14] API-hooks gestart.",
+   "logLeeftijdMin": 0,
+   "logLaatste": "[14:15:00] API-hooks gestart.",
    "killSwitch": false,
    "status": "groen"
   },
@@ -132,7 +132,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": 7200,
-   "logLeeftijdMin": 1,
+   "logLeeftijdMin": 111,
    "logLaatste": "[2026-08-15T12:24:44.899Z] credits OK",
    "killSwitch": false,
    "status": "groen"
@@ -223,7 +223,7 @@
    "laatsteExit": null,
    "intervalSec": null,
    "logLeeftijdMin": 1,
-   "logLaatste": "[2:24:41 PM] 1 te doen, nu 1 verwerken",
+   "logLaatste": "[4:14:11 PM] geen nieuwe e-mail te verwerken",
    "killSwitch": false,
    "status": "groen"
   },
@@ -282,7 +282,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 1020,
+   "logLeeftijdMin": 1130,
    "logLaatste": "samenvatting FOUT: Cannot access 'actieAkkoorden' before initialization",
    "killSwitch": false,
    "status": "groen"
@@ -297,7 +297,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 115,
+   "logLeeftijdMin": 105,
    "logLaatste": "Niets te doen",
    "killSwitch": false,
    "status": "groen"
@@ -327,7 +327,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 385,
+   "logLeeftijdMin": 495,
    "logLaatste": "✅ MS Bookings API (showroom-boeken)",
    "killSwitch": false,
    "status": "groen"
@@ -354,7 +354,7 @@
    "log": null,
    "maxUur": null,
    "geladen": true,
-   "draait": false,
+   "draait": true,
    "laatsteExit": "0",
    "intervalSec": 300,
    "logLeeftijdMin": null,
@@ -432,7 +432,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 355,
+   "logLeeftijdMin": 465,
    "logLaatste": "[06:30:03] Buiten kantooruren, skip",
    "killSwitch": false,
    "status": "groen"
@@ -462,7 +462,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 312,
+   "logLeeftijdMin": 422,
    "logLaatste": "WhatsApp offerte verstuurd: 37",
    "killSwitch": false,
    "status": "groen"
@@ -477,8 +477,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": 3600,
-   "logLeeftijdMin": 50,
-   "logLaatste": "[opvolging] klaar: 0 live-kandidaat(en) beoordeeld; schaduw-only kandidaten overgeslagen.",
+   "logLeeftijdMin": 27,
+   "logLaatste": "[opvolging] klaar: 1 live-kandidaat(en) beoordeeld; schaduw-only kandidaten overgeslagen.",
    "killSwitch": false,
    "status": "groen"
   },
@@ -489,7 +489,7 @@
    "log": null,
    "maxUur": null,
    "geladen": true,
-   "draait": true,
+   "draait": false,
    "laatsteExit": "0",
    "intervalSec": 600,
    "logLeeftijdMin": null,
@@ -537,8 +537,8 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": 1800,
-   "logLeeftijdMin": 24,
-   "logLaatste": "[2026-08-15 14:01:09] ronde klaar",
+   "logLeeftijdMin": 11,
+   "logLaatste": "[2026-08-15 16:04:16] ronde klaar",
    "killSwitch": false,
    "status": "groen"
   },
@@ -567,7 +567,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 655,
+   "logLeeftijdMin": 765,
    "logLaatste": "Gecheckt: 9 offertes, 9 productregels, 0 afwijkingen",
    "killSwitch": false,
    "status": "groen"
@@ -582,7 +582,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 400,
+   "logLeeftijdMin": 510,
    "logLaatste": "Geen nieuwe patronen gevonden.",
    "killSwitch": false,
    "status": "groen"
@@ -612,7 +612,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 415,
+   "logLeeftijdMin": 525,
    "logLaatste": "geen API-key — overslaan",
    "killSwitch": false,
    "status": "groen"
@@ -627,7 +627,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 42115,
+   "logLeeftijdMin": 42225,
    "logLaatste": "",
    "killSwitch": false,
    "status": "rood"
@@ -642,8 +642,8 @@
    "draait": true,
    "laatsteExit": null,
    "intervalSec": null,
-   "logLeeftijdMin": 4,
-   "logLaatste": "  actief-sweep: 485 gesprekken direct checken",
+   "logLeeftijdMin": 1,
+   "logLaatste": "  actief-sweep: 486 gesprekken direct checken",
    "killSwitch": false,
    "status": "groen"
   },
@@ -658,7 +658,7 @@
    "laatsteExit": "0",
    "intervalSec": 600,
    "logLeeftijdMin": 10,
-   "logLaatste": "[2:15:20 PM] 51 diensten, push: 200",
+   "logLaatste": "[4:05:29 PM] 51 diensten, push: 200",
    "killSwitch": false,
    "status": "groen"
   },
@@ -702,7 +702,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 370,
+   "logLeeftijdMin": 480,
    "logLaatste": "telegram: true",
    "killSwitch": false,
    "status": "groen"
@@ -732,7 +732,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 280,
+   "logLeeftijdMin": 390,
    "logLaatste": "[07:45:08] Klaar: 0 gefixt, 4 gerapporteerd",
    "killSwitch": false,
    "status": "groen"
@@ -747,7 +747,7 @@
    "draait": false,
    "laatsteExit": "0",
    "intervalSec": null,
-   "logLeeftijdMin": 235,
+   "logLeeftijdMin": 345,
    "logLaatste": "alles verstuurd, klaar",
    "killSwitch": false,
    "status": "groen"

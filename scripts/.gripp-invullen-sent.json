@@ -4685,5 +4685,57 @@
       }
     ],
     "processedAt": "2026-08-15T11:53:49.327Z"
+  },
+  "item:e5c28952-a003-49d0-b06b-53fd33ff3fbf": {
+    "summary": "Barbara Weeink",
+    "grippCompanyId": 99771,
+    "grippOfferId": 9066,
+    "rpDocNumber": "202611580",
+    "allOffers": [
+      {
+        "grippOfferId": 9066,
+        "rpDocNumber": "202611580"
+      }
+    ],
+    "processedAt": "2026-08-15T12:34:45.964Z"
+  },
+  "item:cdacaed6-5f9b-42fd-8c13-8ad3bd417ef7": {
+    "summary": "Rene Pecnik",
+    "grippCompanyId": 99772,
+    "grippOfferId": 9067,
+    "rpDocNumber": "202611604",
+    "allOffers": [
+      {
+        "grippOfferId": 9067,
+        "rpDocNumber": "202611604"
+      }
+    ],
+    "processedAt": "2026-08-15T12:46:49.160Z"
+  },
+  "item:cfd6cd87-5369-4364-8e53-59c4484a9d98": {
+    "summary": "Ganesh",
+    "grippCompanyId": 99773,
+    "grippOfferId": 9068,
+    "rpDocNumber": "202610225",
+    "allOffers": [
+      {
+        "grippOfferId": 9068,
+        "rpDocNumber": "202610225"
+      }
+    ],
+    "processedAt": "2026-08-15T12:53:01.946Z"
+  },
+  "item:bc97cce0-d3a3-424d-b0b8-bdb39aebe680": {
+    "summary": "Steven Broer",
+    "grippCompanyId": 99774,
+    "grippOfferId": 9069,
+    "rpDocNumber": "202611738",
+    "allOffers": [
+      {
+        "grippOfferId": 9069,
+        "rpDocNumber": "202611738"
+      }
+    ],
+    "processedAt": "2026-08-15T13:57:58.364Z"
   }
 }

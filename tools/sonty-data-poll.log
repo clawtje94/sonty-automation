@@ -90,3 +90,4 @@ poll-fout: read ECONNRESET (netwerkhikje, gewoon doorgaan)
 poll-fout: read ECONNRESET (netwerkhikje, gewoon doorgaan)
 poll-fout: read ECONNRESET (netwerkhikje, gewoon doorgaan)
 Sonty data-bot poller gestart -> /Users/clawdboot/sonty/sonty-data-inbox.txt
+poll-fout: read ETIMEDOUT (netwerkhikje, gewoon doorgaan)

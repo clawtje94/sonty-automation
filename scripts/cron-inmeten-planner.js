@@ -500,7 +500,11 @@ async function verwerkLead(lead, item, slot, duurMin) {
     sheetNote = res.gevonden ? ` · sheet ${res.tab} r${res.rij}` : ` · sheet: NIEUWE rij in ${res.tab} (klant stond er nog niet)`;
   } catch (e) {
     sheetNote = ' · SHEET NIET BIJGEWERKT: ' + e.message.slice(0, 60);
-    await telegram(`⚠️ Sheet bijwerken mislukt voor ${lead.naam} (inkoop-1/datum/inmeter): ${e.message.slice(0, 120)} — handmatig zetten.`);
+    try {
+      const { zetInWachtrij } = require('./lib/sheet-wachtrij.js');
+      zetInWachtrij({ rpNummers: lead.rpNummers || [], docDatums: lead.rpDatums || [], grippNr, naam: lead.naam, telefoon: lead.telefoon, inmeetDatum, inmeter: slot.inmeter });
+    } catch {}
+    await telegram(`⚠️ Sheet bijwerken mislukt voor ${lead.naam} (inkoop-1/datum/inmeter): ${e.message.slice(0, 120)} — staat in de wachtrij en wordt automatisch opnieuw geprobeerd.`);
   }
 
   // DASHBOARD DIRECT VERVERSEN (Daimy 11-08: "na elke boeking of sync moet het
@@ -532,6 +536,23 @@ async function verwerkLead(lead, item, slot, duurMin) {
 async function main() {
   const state = laadState();
   state.gezien = state.gezien || {};
+  // Eerst de sheet-wachtrij: gefaalde akkoord-schrijfacties (beveiligde cellen)
+  // opnieuw proberen zodra de rechten zijn opengezet. Geslaagde rijen krijgen
+  // hun sheet-locatie alsnog in de boekingen-administratie.
+  try {
+    const { verwerkWachtrij } = require('./lib/sheet-wachtrij.js');
+    const gelukt = await verwerkWachtrij();
+    for (const g of gelukt) {
+      try {
+        const bo = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'inmeet-boekingen.json'), 'utf8'));
+        for (const b of Object.values(bo)) {
+          if (String(b.grippNr) === String(g.grippNr) && Number.isInteger(g.res.rij)) b.sheet = { tab: g.res.tab, rij: g.res.rij, kolomInkoop: g.res.kolomInkoop };
+        }
+        fs.writeFileSync(path.join(__dirname, '..', 'data', 'inmeet-boekingen.json'), JSON.stringify(bo, null, 1));
+      } catch {}
+      await telegram(`✅ Sheet alsnog bijgewerkt voor ${g.naam} (stond in de wachtrij): ${g.res.tab} r${g.res.rij}.`);
+    }
+  } catch (e) { console.log('sheet-wachtrij overgeslagen: ' + e.message.slice(0, 60)); }
   console.log(LIVE ? '=== LIVE (aanbod wordt echt verstuurd) ===' : '=== SCHADUW (er wordt niets verstuurd) ===');
 
   // ALLE kaarten pagineren (Daimy 06-08: "18 mensen op inmeten inplannen maar veel

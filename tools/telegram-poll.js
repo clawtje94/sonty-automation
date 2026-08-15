@@ -5,6 +5,20 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
+// Levensteken voor status-collect: zolang dit bestand vers is, leeft de poll-lus echt.
+// De poller hing 11-08 en 15-08 stil zonder alarm; de collector herstart hem nu zodra
+// de klop >15 min wegblijft.
+const HEARTBEAT_PAD = '/Users/clawdboot/sonty/data/heartbeat/telegram-poll';
+let _laatsteKlop = 0;
+function heartbeat() {
+  if (Date.now() - _laatsteKlop < 60000) return;
+  _laatsteKlop = Date.now();
+  try {
+    fs.mkdirSync(path.dirname(HEARTBEAT_PAD), { recursive: true });
+    fs.writeFileSync(HEARTBEAT_PAD, new Date().toISOString());
+  } catch { /* een gemiste klop is geen reden om te stoppen */ }
+}
+
 const TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
 const CHAT_ID = '1700128390';
 const INBOX_FILE = path.join(__dirname, '..', 'telegram-inbox.txt');
@@ -63,6 +77,7 @@ async function poll() {
   console.log(`[telegram-poll] Started. Polling every ${POLL_INTERVAL/1000}s. Inbox: ${INBOX_FILE}`);
 
   while (true) {
+    heartbeat();
     try {
       // HARDE NOODREM (12-08): na een "Request timeout" op 11-08 22:03 bleef het proces
       // 22 uur hangen in een request die nooit terugkwam — Daimy's berichten kwamen al

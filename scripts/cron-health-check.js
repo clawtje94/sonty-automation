@@ -21,36 +21,19 @@ const TG_TOKEN = '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40';
 const LOGS_DIR = '/Users/clawdboot/sonty/logs';
 
 // Verwachte actieve daemons + max uren sinds laatste log update
-const DAEMONS = [
-  { label: 'nl.sonty.meetbon-doorzetten', log: 'meetbon-doorzetten.log', maxLogAgeH: 3, name: 'Meetbon doorzetter (aanbetaling -> orders@)' },
-  { label: 'nl.sonty.offerte-v4', log: 'v4.log', maxLogAgeH: 30, name: 'Offerte controle v4' },
-  { label: 'nl.sonty.v4-selfcheck', log: 'v4-selfcheck.log', maxLogAgeH: 30, name: 'V4 self-check' },
-  { label: 'nl.sonty.gripp-invullen', log: 'gripp-invullen.log', maxLogAgeH: 26, name: 'Gripp invullen' },
-  // Follow-up WhatsApp bewust verwijderd uit de check (Daimy 2026-07-14: "gaan we nooit meer aanzetten")
-  { label: 'nl.sonty.telegram-poll', log: null, maxLogAgeH: null, name: 'Telegram poll' },
-  { label: 'nl.sonty.reviews-sync', log: 'reviews-sync.log', maxLogAgeH: 26, name: 'Reviews-sync' },
-  { label: 'nl.sonty.auto-resume', log: null, maxLogAgeH: null, name: 'Auto-resume' },
-  { label: 'nl.sonty.feedback-processor', log: null, maxLogAgeH: null, name: 'Feedback processor' },
-  // SONNY (AI-klantenservice) — moet ALTIJD aanstaan (Daimy 2026-07-17). Permanente
-  // launchd-dienst met KeepAlive; log wordt elke 30s bijgeschreven, dus 1u stilte = probleem.
-  { label: 'nl.sonty.sonny', log: 'sonny-watch.log', maxLogAgeH: 1, name: 'SONNY klantenservice (permanent)' },
-  // SUNNY e-mail (aanvragen@) — permanente launchd-dienst, pollt elke 90s en schrijft altijd een
-  // regel weg, dus 1u stilte = probleem.
-  { label: 'nl.sonty.email', log: 'email-daemon.log', maxLogAgeH: 1, name: 'SUNNY e-mail (permanent)' },
-  { label: 'nl.sonty.sonny-rapport', log: null, maxLogAgeH: null, name: 'Sonny ochtendrapport 08:30' },
-  { label: 'nl.sonty.getekend-rapport', log: 'getekend-rapport.log', maxLogAgeH: 30, name: 'Dagrapport tekeningen + AI-resultaten 07:45' },
-  // 2-uurs watchdog; drempel 14u zodat normale nachtelijke slaap/downtime geen vals alarm geeft
-  // (de watchdog heeft z'n eigen credits-op-alarm, dus een echt creditprobleem meldt hij los).
-  { label: 'nl.sonty.credits-check', log: 'credits-check.log', maxLogAgeH: 14, name: 'Anthropic credits-watchdog' },
-  // Opvolging draait t/m ±28 juli in SCHADUW (verstuurt niets; dagelijks 10:30 een voorstel-rapport naar Daimy)
-  { label: 'nl.sonty.opvolging-schaduw', log: 'opvolging.log', maxLogAgeH: 26, name: 'Opvolging (schaduwweek)' },
-  // Planning-mail: verwerkt orders@/info@ in de Planning-sheet (tab Claude ai test), elke 30 min.
-  // Logt elke ronde (ook "lock actief"), dus 2u stilte = probleem.
-  { label: 'nl.sonty.planning-mail', log: 'planning-mail-daemon.log', maxLogAgeH: 2, name: 'Planning-mail (orders@/info@ -> sheet)' },
-  { label: 'nl.sonty.tickets-rapport', log: 'tickets-rapport.log', maxLogAgeH: 30, name: 'Dagrapport tickets AI vs Mens nodig (08:15)' },
-  // Vacaturemail-batches: dagelijks 10:30 tot de lijst klaar is (log blijft daarna vers door 'alles verstuurd'-regel)
-  { label: 'nl.sonty.vacaturemail', log: 'vacaturemail.log', maxLogAgeH: 30, name: 'Vacaturemail-batches' },
-];
+// DAEMONS komt sinds 15-08 uit het centrale register (data/systemen-register.json)
+// — één bron van waarheid met het dashboard, geen tweede handmatige lijst meer.
+// Bewaakt: alle niet-uitgeschakelde diensten; log-alarm alleen waar maxUur gezet is.
+const REGISTER = JSON.parse(require('fs').readFileSync('/Users/clawdboot/sonty/data/systemen-register.json', 'utf8'));
+const DAEMONS = Object.entries(REGISTER.diensten)
+  .filter(([, d]) => !d.uitgeschakeld)
+  .map(([label, d]) => ({
+    label,
+    name: d.naam,
+    log: d.log && !d.log.startsWith('/') ? d.log : null,
+    absLog: d.log && d.log.startsWith('/') ? d.log : null,
+    maxLogAgeH: d.maxUur || null,
+  }));
 
 // Extra Sonny-check: staat de Telegram-inbox verdacht lang stil? (poller bevroor 2x op 16-17 juli)
 async function checkTelegramInbox() {
@@ -133,8 +116,8 @@ function checkDaemon(d) {
   }
 
   // Log leeftijd check
-  if (d.log && d.maxLogAgeH) {
-    const logPath = path.join(LOGS_DIR, d.log);
+  if ((d.log || d.absLog) && d.maxLogAgeH) {
+    const logPath = d.absLog || path.join(LOGS_DIR, d.log);
     if (fs.existsSync(logPath)) {
       const ageH = (Date.now() - fs.statSync(logPath).mtimeMs) / 3600000;
       if (ageH > d.maxLogAgeH) {

@@ -9,6 +9,20 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
+// Levensteken voor status-collect: zolang dit bestand vers is, leeft de poll-lus echt.
+// De poller hing 11-08 en 15-08 stil zonder alarm; de collector herstart hem nu zodra
+// de klop >15 min wegblijft.
+const HEARTBEAT_PAD = '/Users/clawdboot/sonty/data/heartbeat/databot-poll';
+let _laatsteKlop = 0;
+function heartbeat() {
+  if (Date.now() - _laatsteKlop < 60000) return;
+  _laatsteKlop = Date.now();
+  try {
+    fs.mkdirSync(path.dirname(HEARTBEAT_PAD), { recursive: true });
+    fs.writeFileSync(HEARTBEAT_PAD, new Date().toISOString());
+  } catch { /* een gemiste klop is geen reden om te stoppen */ }
+}
+
 const TOKEN = '7775843600:AAHsz7X9ypMXxzQLquoMW1bVf037-WRsEeU';
 const INBOX_FILE = path.join(__dirname, '..', 'sonty-data-inbox.txt');
 const STATE_FILE = path.join(__dirname, '..', '.sonty-data-state.json');
@@ -85,6 +99,7 @@ async function poll() {
 (async () => {
   console.log('Sonty data-bot poller gestart ->', INBOX_FILE);
   while (true) {
+    heartbeat();
     try {
       await poll();
     } catch (err) {

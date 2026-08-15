@@ -1527,3 +1527,10 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 - KS-guard (ai-ks/daemon.js lopendInmeetAanbod): geboekte klanten blokkeren Sunny niet meer, productvragen na boeking krijgen weer echt antwoord.
 - Tests: 46 groen (testsamenvatting stond midden in het bestand, nieuwe tests telden niet mee → naar einde verplaatst). Gepusht.
 - AFGEROND 15-08 ~14:30 (Daimy: "ja, overal verwijderen"): Ana's afspraak geannuleerd in Bookings (met MS-annuleringsmail), Planado (404 geverifieerd), Outlook (0 events over), administratie status geannuleerd, sheet Aug 2026 r320 inkoop/datum/inmeter leeg. Klant kreeg Nanny-bevestiging via de nieuwe zelfcontrole-flow (bewees zichzelf op het echte geval). Annuleren-branch zet ticket nu ook op Mens nodig (label 1821764 + teamnotitie), op Daimy's vraag.
+
+## 15-08 namiddag: Ganesh/sheet-vervolg
+- Ganesh ≠ Bansidhar (r861 teruggedraaid). Ganesh: RP-offertes 202610225/202610224 (22 juli, ACCEPTED, cache-key = zijn lead-config), maar V4 maakte destijds geen sheet-rij. Meting: 117/118 AI-offerte-kaarten sinds 1 juli staan WEL in de sheet; alleen Ganesh + Thomas van Dop (19-07) misten. V4 niet aangepast (regel).
+- Ganesh in sheet-wachtrij met echte RP-nummers; Thomas van Dop handmatig als offerte-rij toevoegen zodra rechten open (TODO).
+- Ganesh is Engelstalig (mailt Engels met Sunny) maar geboekt bij Joey — VRAAG aan Daimy: omboeken naar Sjoerd? KS-daemon zet nu zelf de Engels-vlag (taal-voorkeur) bij Engelse klantberichten; vlag voor Ganesh handmatig gezet.
+- WACHT OP DAIMY: (1) sheet-rechten service-account, (2) Ganesh naar Sjoerd ja/nee.
+

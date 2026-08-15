@@ -47,9 +47,13 @@
   volgorde uit scripts/email/FLOWS.md. LET OP voor de flowbouw: mails met offertekaart
   die direct na een event triggeren (RP1/G1) kunnen kaartvelden missen tot de nachtsync
   gedraaid heeft; event-properties gebruiken of verzendmoment na de sync leggen.
-- **Nog te doen (mailmarketing)**: wekelijkse cijferbot (klaviyo-week-rapport.js in
-  email-marketing/scripts werkt al op het Sonty-account met terugval zonder conversie-metric
-  en 429-retry; nog koppelen aan conversiesheet + Telegram + launchd maandag).
+- **Weekbot LIVE (15-08)**: scripts/email/week-bot.js draait elke maandag 08:30 (launchd
+  nl.sonty.email-weekbot): Klaviyo-cijfers per flow/campagne naast de benchmarks,
+  gezondheidsalarmen (spam >0,1% / afmeldingen >0,3%), conversie uit de sheet (methode
+  Daimy), voorstellen alleen ter goedkeuring. Testrun --dry succesvol (conversie W32 3,5%,
+  W33 3,7%). Daarmee is de /goal-keten compleet: kennisbank -> stijlgids -> 25 templates
+  (dubbel gekeurd) -> productvarianten -> fotokiezer -> weekbot. Flows AAN zetten blijft
+  wachten op akkoorden Daimy (per mail + V4-V8).
 - **13-08 avond: PRODUCTRELEVANTIE + FOTOKIEZER + BOUWVAK**. C1-reactivering heeft nu 4
   varianten (screens/rolluiken/binnen/basis) met productspecifieke echte reviews en visueel
   geverifieerde foto's; flow kiest via conditional split op sonty_product_kort (zie

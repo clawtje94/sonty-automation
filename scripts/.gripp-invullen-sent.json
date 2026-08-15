@@ -4646,5 +4646,18 @@
       }
     ],
     "processedAt": "2026-08-14T09:08:59.530Z"
+  },
+  "item:2bdf4e84-e689-4439-8389-2ec1be0a6abf": {
+    "summary": "Lois Witmond",
+    "grippCompanyId": 99766,
+    "grippOfferId": 9061,
+    "rpDocNumber": "202610754",
+    "allOffers": [
+      {
+        "grippOfferId": 9061,
+        "rpDocNumber": "202610754"
+      }
+    ],
+    "processedAt": "2026-08-14T10:30:10.911Z"
   }
 }

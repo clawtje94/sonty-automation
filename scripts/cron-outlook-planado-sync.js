@@ -300,13 +300,23 @@ async function main() {
       if (!EXECUTE) { console.log(`  zou agenda-afspraak maken voor #${j.serial_no} ${j.scheduled_at}`); continue; }
       const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
       const job = det.job || det;
-      const { maakDefinitief } = require('./lib/outlook-opties.js');
+      // Helen via Bookings mét klantgegevens (15-08: de heal maakte kale afspraken
+      // zonder klantmail — Eric en Jeffrey stonden weer "niet toegewezen" en zonder
+      // bevestigingsroute). E-mail komt uit onze eigen boekingen-administratie.
       const klant = (job.contacts || [])[0]?.name || String(job.description || '').split('\n')[0].replace(/^Inmeten( Sonty -| —)? /, '') || 'klant';
-      const ev = await maakDefinitief({
+      const telefoonJ = (job.contacts || [])[0]?.value || '';
+      let emailJ = null;
+      try {
+        const bo = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'inmeet-boekingen.json'), 'utf8'));
+        const t9 = telefoonJ.replace(/\D/g, '').slice(-9);
+        emailJ = Object.values(bo).find((x) => t9 && String(x.telefoon || '').replace(/\D/g, '').slice(-9) === t9)?.email || null;
+      } catch { /* geen administratie */ }
+      const { boekInmeetAfspraak } = require('./lib/inmeet-boeken.js');
+      const ev = (await boekInmeetAfspraak({
         slot: { aankomst: new Date(van), inmeter: naam },
-        naam: klant, telefoon: (job.contacts || [])[0]?.value || '',
+        naam: klant, telefoon: telefoonJ, email: emailJ,
         adres: job.address?.formatted || '', duurMin: job.scheduled_duration?.minutes || 30,
-      }).catch(() => null);
+      }).catch(() => ({ id: null }))).id;
       if (ev) { geheeld++; console.log(`  ✓ agenda-afspraak aangemaakt voor #${j.serial_no} (${klant}, ${j.scheduled_at})`); }
       await wacht(2600);
     }

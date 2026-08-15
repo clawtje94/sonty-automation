@@ -59,7 +59,12 @@ function kiesMedewerker(afsprakenDag, startMs, eindMs, binnendecoratie) {
     else if (a.serviceId === SERVICE_ID) onbekend++;
   }
   const vrij = poolVoor(startMs, binnendecoratie).filter(m => !bezig.has(m.id));
-  return vrij[onbekend] || null;
+  // ALTIJD iemand toewijzen (Daimy 15-08: "showroomafspraken moeten altijd toegewezen
+  // worden" — 14 aug 13:30 stond er zonder medewerker). Is iedereen bezet, dan toch de
+  // eerste van de pool: een dubbele toewijzing die het team kan schuiven is beter dan
+  // een afspraak die in de "geen medewerker"-kolom onzichtbaar blijft.
+  const pool = poolVoor(startMs, binnendecoratie);
+  return vrij[onbekend] || vrij[0] || pool[0] || (binnendecoratie ? NANNY : JORREN);
 }
 
 // ── Amsterdamse tijd ↔ UTC ──
@@ -157,7 +162,7 @@ async function boekShowroom({ start, klantNaam, klantMail, klantTel, notitie, bi
       answer: klantTel, answerInputType: 'text', isRequired: true,
     }] : undefined,
   });
-  return { geboekt: slot.omschrijving, afspraakId: res.id, adres: ADRES, medewerker: medewerker ? medewerker.naam : 'nog niet toegewezen (team wijst toe)' };
+  return { geboekt: slot.omschrijving, afspraakId: res.id, adres: ADRES, medewerker: medewerker.naam };
 }
 
 // HARDE EIS DAIMY (21 juli, "extreem belangrijk"): deze module mag UITSLUITEND

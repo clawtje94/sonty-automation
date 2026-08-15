@@ -317,14 +317,14 @@ const DAGCODE = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
 // planner een inmeter met vakantie als beschikbaar (gezien 06-08: slot bij Sjoerd
 // op 24 aug, midden in zijn vakantie).
 const VAKANTIES = {}; // naam -> Set('YYYY-MM-DD')
-async function laadVakanties() {
+async function laadVakanties(dagenVooruit = 70) {
   try {
     const token = fs.readFileSync(path.join(__dirname, '.owa-token.txt'), 'utf8').trim();
     const OH = { Authorization: 'Bearer ' + token };
     const cal = (((await (await fetch('https://outlook.office.com/api/v2.0/me/calendars', { headers: OH })).json()).value) || [])
       .find((c) => c.Name === 'Sonty Montage');
     const van = new Date();
-    const tot = new Date(); tot.setDate(tot.getDate() + 70);
+    const tot = new Date(); tot.setDate(tot.getDate() + dagenVooruit);
     let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView`
       + `?$top=500&$select=Subject,Start,End,IsCancelled,Attendees&startDateTime=${van.toISOString()}&endDateTime=${tot.toISOString()}`;
     const evs = [];
@@ -352,7 +352,7 @@ async function laadVakanties() {
     throw new Error('vakanties onbekend: niet plannen');
   }
 }
-function werkdagenVoor(inmeterNaam, aantal = 15) {
+function werkdagenVoor(inmeterNaam, aantal = 15, vanafDatum) {
   // 15 roosterdagen (was 10): de agenda's zitten momenteel ~3 weken vol, waardoor
   // 10 dagen horizon "geen enkel gat" gaf terwijl er eind augustus wél plek is.
   const vast = ROOSTER[inmeterNaam]?.dagen;
@@ -360,6 +360,12 @@ function werkdagenVoor(inmeterNaam, aantal = 15) {
   const dagen = [];
   const d = new Date();
   d.setDate(d.getDate() + 1);
+  // Noemt de klant zelf een datum ("pas vanaf 5 oktober"), dan begint de horizon
+  // dáár — anders viel alles voorbij de 15 roosterdagen af en kreeg de klant
+  // "geen enkele plek" terwijl de agenda daar leeg is (Laura Idzinga 15-08).
+  if (vanafDatum && Date.parse(vanafDatum + 'T12:00:00') > +d) {
+    d.setTime(Date.parse(vanafDatum + 'T12:00:00'));
+  }
   let bekeken = 0;
   while (dagen.length < aantal && bekeken < aantal * 3) {
     bekeken++;
@@ -1466,7 +1472,10 @@ async function verwerkDashboardVerzoek(m) {
   if (lead.ambigu) throw new Error(`${lead.aantalDocs} offerteversies, geen getekend — klant moet eerst tekenen`);
   const duur = schatDuur(lead.producten);
   const agenda = await haalAgenda();
-  await laadVakanties();
+  // Vakantievenster meerekken tot voorbij de datum die de klant noemt, anders kan
+  // een voorstel in een niet-geladen vakantieweek vallen.
+  const extraDagen = m.vanaf ? Math.max(0, Math.ceil((Date.parse(m.vanaf) - Date.now()) / 86400000)) : 0;
+  await laadVakanties(70 + extraDagen);
   const lopende = await voegAanbiedingenToe(agenda); // andermans aangeboden tijden zijn bezet
   if (m.type === 'stuur-aanbod' && lopende.has(item.id)) throw new Error('deze klant heeft al een lopend aanbod — geen tweede sturen');
 
@@ -1494,7 +1503,7 @@ async function verwerkDashboardVerzoek(m) {
       for (const inm of inmetersVoor(lead)) {
         const sl = await zoekSlots({
           agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
-          werkdagen: werkdagenVoor(inm.naam, m.wilEerder ? 30 : undefined),
+          werkdagen: werkdagenVoor(inm.naam, m.wilEerder ? 30 : undefined, m.vanaf),
           startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
           eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
         }).catch(() => []);

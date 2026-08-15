@@ -1,5 +1,24 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-15)
 
+## 15-08 (middag): INMEET-DASHBOARD "VERLOPEN"-VERWARRING GEFIXT (geval Jaap v Egmond)
+- Klacht Daimy: kaart "verlopen" bij Jaap v Egmond terwijl hij allang ingepland was.
+  Oorzaak: Jaap appte "ander moment" op zijn eerste keuzelink (13:36) → systeem sloot
+  dat aanbod correct als 'verlopen' en stuurde 13:48 een nieuw voorstel → gekozen →
+  geboekt (29 sep Sjoerd, Gripp 6481, Planado/agenda/sheet OK). Maar het dashboard
+  toonde het oude aanbod als losse kale "verlopen"-kaart naast de boeking.
+- FIX (sonty-website ff78b24 + sonty-platform f36443a):
+  (1) controlelijst dashboard verbergt verlopen aanbiedingen met een nieuwer voorstel
+  of een bestaande boeking (afgehandeld = weg); (2) API bewaart `verlopenReden` bij
+  elke verlopen-markering (PATCH-body `reden`); (3) alle 5 verloopplekken (planner 24u/
+  laatste-woord/botsing, replies ander-moment/pingpong) sturen nu een reden mee;
+  (4) chip toont "verlopen — <reden>" en wrapt op mobiel.
+- Regressie gedraaid op echte KV-historie (49 aanbiedingen, 44 boekingen): controle-
+  lijst 11→9 kaarten, Jaap's oude kaart weg, geen enkele "verlopen" meer naast een
+  boeking. Laura Idzinga blijft terecht zichtbaar (wilde ander moment, geen nieuw
+  voorstel gekomen — mens nodig / nakijken waarom stuur-aanbod niet volgde).
+- Let op: lokale .env-KV zit op maandlimiet (dev/build geeft UpstashError); productie-KV
+  werkt gewoon. Dev-test van dit dashboard kan dus alleen tegen productie.
+
 ## 15-08: TWEE PRODUCTIE-INCIDENTEN OPGELOST
 - **OWA-token/planner plat**: Microsoft vernieuwde de loginpagina (formulier in gesloten
   shadow-DOM) → fill() in owaSessie kwam nooit aan → token verliep 14-08 11:17 → planner

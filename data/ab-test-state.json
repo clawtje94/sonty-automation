@@ -1,5 +1,5 @@
 {
- "teller": 955,
+ "teller": 960,
  "toewijzingen": {
   "31624432": {
    "naam": "check",
@@ -6702,6 +6702,41 @@
    "tijd": "2026-08-15T15:05:28.934Z",
    "ticketId": null,
    "offertenummer": "202611690"
+  },
+  "31636108929": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-08-15T15:07:22.337Z",
+   "ticketId": null,
+   "offertenummer": "202611692"
+  },
+  "31681927088": {
+   "naam": "inmeten",
+   "templateId": 242818,
+   "tijd": "2026-08-15T15:07:29.553Z",
+   "ticketId": null,
+   "offertenummer": "202611694"
+  },
+  "31615548884": {
+   "naam": "garantie",
+   "templateId": 242737,
+   "tijd": "2026-08-15T15:08:21.664Z",
+   "ticketId": null,
+   "offertenummer": "202611695"
+  },
+  "31624289203": {
+   "naam": "check",
+   "templateId": 242738,
+   "tijd": "2026-08-15T15:09:15.041Z",
+   "ticketId": null,
+   "offertenummer": "202611697"
+  },
+  "31634782050": {
+   "naam": "kortweg",
+   "templateId": 242739,
+   "tijd": "2026-08-15T15:09:22.354Z",
+   "ticketId": null,
+   "offertenummer": "202611698"
   }
  }
 }

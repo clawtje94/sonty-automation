@@ -18,6 +18,12 @@
   voorstel gekomen — mens nodig / nakijken waarom stuur-aanbod niet volgde).
 - Let op: lokale .env-KV zit op maandlimiet (dev/build geeft UpstashError); productie-KV
   werkt gewoon. Dev-test van dit dashboard kan dus alleen tegen productie.
+- VERVOLG (Daimy: "je kan toch gewoon in oktober inplannen?"): oorzaak gevonden —
+  werkdagenVoor keek max 15 roosterdagen vooruit (tot ~9-17 sep), dus "vanaf 5 okt"
+  gaf altijd "geen enkele plek". FIX (f361159): horizon begint bij de vanaf-datum die
+  de klant noemt + vakantievenster rekt mee (70 → 70+dagen-tot-vanaf). Daemon
+  nl.sonty.inmeet-verzoeken herstart met nieuwe code; Laura's stuur-aanbod (vanaf
+  2026-10-05, bevestigd in haar WhatsApp 15-08 14:40) opnieuw in de rij gezet.
 
 ## 15-08: TWEE PRODUCTIE-INCIDENTEN OPGELOST
 - **OWA-token/planner plat**: Microsoft vernieuwde de loginpagina (formulier in gesloten

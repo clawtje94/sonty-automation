@@ -17,7 +17,16 @@
   (ads verschuiven, niet korten), teken-nu-campagne nov-dec op prijsstijging 2027,
   binnenlijn via Klaviyo, dec-ads naar 15-20k + dec-lasten kritisch (2025 kon met 64k),
   facturatie-sprint + werkvoorraad in okt-dec plaatsen (cash).
-- V6 aan Daimy open: onderdelen alvast klaarzetten of eerst laten bezinken.
+- MAANDPLAN t/m mrt 2027 opgeleverd (16-08, op verzoek Daimy): AUG oogsten+facturatie-
+  sprint+werkvoorraad inplannen; SEP ads ombouwen naar rolluiken+woonmaand klaarzetten;
+  OKT woonmaand 20%+Klaviyo-binnenlijn aan+VvE-aanschrijving; NOV teken-nu-campagne
+  (prijsstijging jan 2027, prijs vast/inmeten later)+dec-draaiboek; DEC deadline-piek+
+  ads 15-20k+lasten minimaal+jaar schoon factureren; JAN prijsverhoging+rolluiken (jan-
+  conversie 22%)+ads ~35k; FEB vroegboek voorjaar+showroomdagen+team op sterkte; MRT
+  alles aan. Stuur-KPI's per maand: instroom, rolluik-akkoorden, teken-nu-deals,
+  maandwinst. Financiele doelen per maand: okt 0, nov 0, dec ≥-20k, jan 0, feb +10k.
+- V6 aan Daimy open: onderdelen alvast klaarzetten (rolluik-mails, teken-nu-campagne,
+  facturatielijst) of eerst laten bezinken.
 
 ## 16-08: EDWIN KANTERS (+31641223208) UITGEZOCHT — 3 STRUCTURELE GATEN, WACHT OP GO
 - Vraag Daimy: ticket niet in sheet, niet naar Inmeten inplannen; later: offerte door AI

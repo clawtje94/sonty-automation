@@ -44,8 +44,10 @@ const MONTAGE_TEMPLATE = '1f11c802-6613-6d00-9d06-7e73cee772e4';
 // (twee bussen). Daarom hier ALLEEN de eenduidige mappings; de rest wacht op
 // accounts per bus (beslissing Daimy, kost seats).
 const MONTEURS = {
-  Yudi: '1f122f37-76db-68b0-9aad-4269fe2bbe9c',
+  Yudi: '1f122f37-76db-68b0-9aad-4269fe2bbe9c',   // Bus Yudi + Nick
   Nick: '1f122f37-76db-68b0-9aad-4269fe2bbe9c',
+  Kevin: '1f122f72-777f-6e80-8139-6e820cb7b164',  // Bus Kevin + Tygo (hernoemd 16-08)
+  Tygo: '1f122f72-777f-6e80-8139-6e820cb7b164',
   Jorren: '1f122da2-8a5b-6c80-9ca9-72f9240343d3',
   Sjoerd: '1f122d19-e43e-6da0-8ffb-661a4ff9bb36',
 };
@@ -136,10 +138,11 @@ async function main() {
     const namen = (e.Attendees || []).map((a) => a.EmailAddress?.Name || '').filter((n) => n && !/^sonty$/i.test(n));
     return namen.find((n) => INMETERS[n.split(' ')[0]] || (MONTAGE_AAN && MONTEURS[n.split(' ')[0]])) || namen[0] || '';
   };
-  // MEENEMEN-blokken zijn herinneringen voor de inmeter, geen klus. Ze hebben geen
-  // deelnemers en zouden hier dus al afvallen; dit is de tweede sluiting, zodat een
-  // toekomstige "zet de inmeter er als deelnemer bij" geen spook-opdrachten oplevert.
-  const NIET_KLUS = /vrij$|later$|vakantie|ziek|verlof|^MEENEMEN /i;
+  // MEENEMEN- en LET OP-blokken zijn herinneringen voor de inmeter, geen klus. Ze
+  // hebben geen deelnemers en zouden hier dus al afvallen; dit is de tweede sluiting,
+  // zodat een blok mét deelnemer (zoals het voorbeeld voor Daimy) geen spook-opdracht
+  // oplevert.
+  const NIET_KLUS = /vrij$|later$|vakantie|ziek|verlof|^(MEENEMEN|LET OP|VOORBEELD)\b/i;
   const onbekendTeam = {};
 
   const extIdVan = (e) => 'ol-' + crypto.createHash('sha1').update(e.Id).digest('hex').slice(0, 20);

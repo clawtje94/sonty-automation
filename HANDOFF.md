@@ -35,6 +35,16 @@
   dossier Daimy Boot 45aeb252), verstuurd via Outlook-testroute (stuur-testmails-weg).
   Bouwscript+HTML in scratchpad (sessie 410ce2a0). Bij echte inzet eerst: offertes
   verlengen, dag-30-selectie, V9-lagen, A/B-meting. Wacht op oordeel Daimy (V11).
+- DEFINITIEF ONTWERP TEKENBONUS (akkoorden Daimy 16-08 avond): STAFFEL 100 (tot 2.500)
+  / 250 (2.500-7.500) / 500 (boven 7.500) — vast bedrag beloonde verkeerd om (28% van
+  doelgroep zit 1.000-2.500 waar 250 tot halve marge kost; 2.754 open offertes 30-60d,
+  gem 4.173). Volgorde per klant: (1) RP-offerte bijwerken VÓÓR de mail: geldigheid
+  verlengen + zichtbare kortingsregel "Tekenbonus t/m [datum]" via pasOfferteAan
+  (kortingRegel, nooit stapelen), (2) dan mail (link=zelfde bedrag, online tekenen =
+  bonus erin), (3) onder de knop: "Tekenen kan direct online, planning neemt binnen 5
+  werkdagen contact op" (keten bestaat en is 16-08 gefixt), (4) na deadline zonder
+  handtekening kortingsregel automatisch verwijderen + loggen, (5) alles binnen
+  V9-waarborg + A/B. V12 open: go om te bouwen (testmodus, niks naar klanten).
 - V6 aan Daimy open: winteracties alvast klaarzetten (rolluik-mails, teken-nu-campagne,
   facturatielijst) of eerst laten bezinken.
 

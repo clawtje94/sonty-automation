@@ -44,9 +44,15 @@
   Frenky+Dennis. Alleen Yudi+Nick heeft een kloppend Planado-account; "Kevin Gibson
   + Marvin" klopt niet meer. In MONTEURS-mapping staan daarom alleen eenduidige
   namen (Yudi/Nick/Jorren/Sjoerd).
-- WACHT OP DAIMY: V1 accounts per bus aanmaken/hernoemen (betaalde seats) + mail-
-  adressen; V2 hoe onderscheidt de agenda de twee Marvins (Moa vs Bart). Daarna:
-  team informeren → touch ~/sonty/data/montage-sync-aan → 43+ opdrachten gaan erin.
+- GEDAAN 16-08 (middag): Planado-accounts hernoemd naar busnamen — "Bus Kevin +
+  Tygo" (was Kevin Gibson + Marvin) en "Bus Yudi + Nick" (was Nick Huizer + Yudi);
+  sync herkent Kevin/Tygo nu ook (d3dd6fd). Pro-abonnement = per gebruiker, ~$36/mnd
+  (9 users, $324.48). Demo-werkbon-opdracht #562 staat op Daimy's eigen account.
+- WACHT OP DAIMY: V1 = 2 nieuwe busaccounts (Marvin+Bart, Frenky+Dennis, ~$72/mnd)
+  + akkoord om Tygo's losse account om te bouwen tot Bus Marvin + Moa (gratis) +
+  e-mailadressen per bus. Daarna: Nanny bus-namen in agenda laten zetten (twee
+  Marvins!), team informeren → touch ~/sonty/data/montage-sync-aan → opdrachten
+  met werkbon gaan erin.
 
 ## 15-08 (avond): ÉÉN SYSTEMEN-REGISTER + BEWERKBAAR DASHBOARD + ZELFHERSTEL
 - Opdracht Daimy (/goal): "veel te veel losse shit" — alles in kaart, één bewerkbaar

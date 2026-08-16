@@ -87,7 +87,7 @@ async function tabsInZoekvolgorde(sheets, docDatums = []) {
  * Schrijf de inplanning. Geeft { gevonden: bool, tab, rij } terug.
  * datum als 'dd-mm-jjjj', inmeter als voornaam.
  */
-async function schrijfInplanning({ rpNummers = [], grippNr, naam, telefoon, inmeetDatum, inmeter, docDatums = [] }) {
+async function schrijfInplanning({ rpNummers = [], grippNr, naam, telefoon, inmeetDatum, inmeter, docDatums = [], alleenAlsLeeg = false, geenNieuweRij = false }) {
   const sheets = await sheetsClient();
   const titels = await tabsInZoekvolgorde(sheets, docDatums);
   // tabs lui laden: zodra de rij gevonden is stoppen we met lezen
@@ -102,6 +102,15 @@ async function schrijfInplanning({ rpNummers = [], grippNr, naam, telefoon, inme
   }
 
   if (plek) {
+    // alleenAlsLeeg (Outlook-sync, Daimy 16-08): een handmatig geplande afspraak mag
+    // nooit een al ingevulde inkoop (echt bedrag) overschrijven — alleen een lege cel
+    // of de bestaande €1-markering opnieuw zetten is veilig.
+    if (alleenAlsLeeg) {
+      const huidig = String(((tabs[tabs.length - 1].rijen[plek.rijIndex] || [])[plek.kol.inkoop]) ?? '').trim();
+      if (huidig && !/^(€\s*)?1([,.]00?)?$/.test(huidig)) {
+        return { gevonden: true, overgeslagen: 'inkoop al gevuld: ' + huidig, tab: plek.tab, rij: plek.rijIndex + 1, kolomInkoop: plek.kol.inkoop };
+      }
+    }
     const rijNr = plek.rijIndex + 1; // sheet is 1-based
     const van = kolomLetter(plek.kol.inkoop);
     const tot = kolomLetter(plek.kol.inkoop + 2);
@@ -113,6 +122,11 @@ async function schrijfInplanning({ rpNummers = [], grippNr, naam, telefoon, inme
     });
     return { gevonden: true, tab: plek.tab, rij: rijNr, kolomInkoop: plek.kol.inkoop };
   }
+
+  // geenNieuweRij (Outlook-sync): geen losse akkoordrij aanmaken — de aanroeper zet de
+  // schrijfactie in de wachtrij en het sheet-vangnet maakt de offerte-rij; daarna slaagt
+  // een volgende poging alsnog.
+  if (geenNieuweRij) return { gevonden: false, geenRij: true };
 
   // niet gevonden: nieuwe rij onderaan de huidige maandtab (losse akkoordrij, bestaand patroon)
   const tab = tabs[0];

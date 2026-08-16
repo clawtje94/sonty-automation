@@ -12,7 +12,13 @@ const lees = () => { try { return JSON.parse(fs.readFileSync(PAD, 'utf8')); } ca
 
 function zetInWachtrij(payload) {
   const rij = lees();
-  if (rij.some((r) => r.grippNr === payload.grippNr)) return; // niet dubbel
+  // Niet dubbel: op Gripp-nummer als dat er is, anders op de sleutel van de aanroeper
+  // (bv. het Outlook-event-id). Zonder die tweede check zouden twee entries zónder
+  // grippNr elkaar als duplicaat zien (undefined === undefined).
+  const dubbel = rij.some((r) =>
+    (payload.grippNr != null && r.grippNr === payload.grippNr) ||
+    (payload.sleutel && r.sleutel === payload.sleutel));
+  if (dubbel) return;
   rij.push({ ...payload, sinds: new Date().toISOString() });
   fs.writeFileSync(PAD, JSON.stringify(rij, null, 1));
 }

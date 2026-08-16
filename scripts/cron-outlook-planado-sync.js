@@ -224,10 +224,12 @@ async function main() {
     if (EXECUTE) {
       // Voor inmeet-afspraken: Gripp-blok er meteen in (adres eerst, telefoon vangnet).
       let grippBlok = '';
+      let klantMatch = null; // ook nodig voor de sheet-koppeling hieronder
       const isMontage = soort(e.Subject) === 'montage';
       if (soort(e.Subject) === 'inmeet' || isMontage) {
         try {
           const match = await zoekKlant(adres, telefoonUit(e.Body));
+          klantMatch = match;
           if (match) {
             const regels = productRegels(match.offerte);
             grippBlok = `\n\nGripp: ${match.offerte.number}\n${isMontage ? 'TE MONTEREN' : 'IN TE METEN'}:\n${regels.map((r) => '- ' + r).join('\n') || '- (geen productregels — check offerte)'}`
@@ -288,6 +290,35 @@ async function main() {
             }
           }
         } catch { /* type blijft dan default; wekelijkse verrijker repareert */ }
+
+        // SHEET-KOPPELING (Daimy 16-08, V4): een inmeet-afspraak die de planner zelf in
+        // Outlook zet moet ook in de offerte-sheet komen: 1tje in de inkoopkolom +
+        // inmeetdatum + inmeter (zelfde regel als de automatische boekingen). De 7
+        // winkel-akkoorden van de audit 16-08 misten dit allemaal. Rij nog niet
+        // gevonden (offerte-rij bestaat soms pas na het sheet-vangnet van 08:15/20:15)
+        // → wachtrij; de inmeten-planner probeert die elke run opnieuw.
+        if (soort(e.Subject) === 'inmeet') {
+          const payload = {
+            grippNr: klantMatch?.offerte?.number,
+            naam: klantNaamUit(e.Subject),
+            telefoon: tel,
+            inmeetDatum: new Date(startISO).toLocaleDateString('nl-NL', { timeZone: 'Europe/Amsterdam' }),
+            inmeter: voornaam,
+            alleenAlsLeeg: true,
+            geenNieuweRij: true,
+            sleutel: extId,
+          };
+          try {
+            const { schrijfInplanning } = require('./lib/sheet-inplannen.js');
+            const res = await schrijfInplanning(payload);
+            if (res.gevonden && !res.overgeslagen) console.log(`    sheet: 1 + ${payload.inmeetDatum} + ${voornaam} → ${res.tab} rij ${res.rij}`);
+            else if (res.overgeslagen) console.log(`    sheet: rij gevonden, maar ${res.overgeslagen} — niets overschreven`);
+            else { require('./lib/sheet-wachtrij.js').zetInWachtrij(payload); console.log('    sheet: rij nog niet gevonden — in wachtrij gezet'); }
+          } catch (fout) {
+            try { require('./lib/sheet-wachtrij.js').zetInWachtrij(payload); } catch { /* wachtrij-bestand onbereikbaar */ }
+            console.log('    sheet: schrijven faalde (' + (fout.message || fout) + ') — in wachtrij gezet');
+          }
+        }
       }
       await wacht(2600);
     }

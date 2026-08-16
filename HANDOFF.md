@@ -44,6 +44,21 @@
   niet in mail-export = opt-out onbekend = NIET mailen (was: door mét e-mail), (2)
   magBonus-ondergrens: totaal onder 750 of kapot → geen bonus-mail (run.js filtert).
   Steekproef daarna herdraaid: echte kandidaten blijven gewoon mailbaar.
+- LIVE GEZET (GO Daimy 16-08 avond: "morgen de eerste 30+ dagen mensen gaan mailen ok"):
+  run.js volledig live-pad — fase 1 selectie (guard+doc-hercheck+magBonus+dedupe), fase
+  2 per bonus-arm: bereidVoor (backup/verificatie/rollback) → Klaviyo-profiel-properties
+  → verse lijst per arm per dag → campagne met goedgekeurde template SfJgae (afzender
+  Jaimy, reply aanvragen@) → send; campagne-fout = alle geprepte offertes automatisch
+  teruggedraaid. CONTROLE-ARM MAILT NIET (nulmeting) omdat Daimy+Joey het flow-pakket
+  (incl. herinnering-mail) nog samen gaan reviewen. Log data/tekenbonus-log.json (arm,
+  bonus, deadline, origineleGroupDiscount, status) = eenmaligheid + meting.
+  CRONS: nl.sonty.tekenbonus (ma-za 10:30, --execute) + nl.sonty.tekenbonus-opruim
+  (dagelijks 09:45: getekend registreren, verlopen bonus uit offerte + groupDiscount
+  terug; coulance: pas na 23:59 van de deadline-dag). KILL SWITCH: verwijder
+  scripts/tekenbonus/.tekenbonus-live (staat er nu op). CAP 30 klanten/run.
+  Checks vlak voor live: lab 544/0 FOUT-STIL, bulk 343/343 geweigerd, dry-run OK.
+  NOG TE DOEN deze week: reminder op de laatste bonusdag (vóór wo 19-08, eerste
+  2d-deadlines) + wekelijkse meting per arm in het weekrapport.
 
 ## 16-08: WINTERONDERZOEK (doel Daimy: winter winstgevend i.p.v. verlies) — RAPPORT KLAAR
 - Anatomie: okt-dec 2025 marge 108/72/45k vs kosten 118/106/91k (sep-dec samen -121k).

@@ -1,13 +1,18 @@
-// Tekenbonus-runner (A/B-test, besluit Daimy 16-08). Drie armen, round-robin:
-//   controle  : gewone herinnering zonder bonus
-//   bonus-2d  : tekenbonus met deadline verzenddag+2 (weekend schuift naar maandag)
-//   bonus-4d  : tekenbonus met deadline verzenddag+4 (idem)
+// Tekenbonus-runner (A/B-test, GO Daimy 16-08 avond: "morgen de eerste 30+ dagen
+// mensen gaan mailen"). Drie armen, round-robin:
+//   controle  : GEEN mail (zuivere nulmeting; de gewone herinnering-mail wacht op de
+//               review-sessie van Daimy en Joey van het hele flow-pakket)
+//   bonus-2d  : tekenbonus-mail, deadline verzenddag+2 (weekend schuift naar maandag)
+//   bonus-4d  : tekenbonus-mail, deadline verzenddag+4 (idem)
 //
-// TESTMODUS IS DE STANDAARD. Er kan pas iets naar een klant als het bestand
-// scripts/tekenbonus/.tekenbonus-live bestaat EN je --execute meegeeft. Zonder dat:
+// TESTMODUS IS DE STANDAARD. Live vereist het bestand scripts/tekenbonus/.tekenbonus-live
+// ÉN --execute (de cron geeft beide). Bestand weghalen = kill switch.
 //   node run.js            → proeflijst (niets aangepast, niets verstuurd)
-//   node run.js --proef 3  → daarnaast 3 voorbeeldmails naar daimyboot@gmail.com
-//                            (offertes van die klanten worden NIET aangepast)
+//   node run.js --execute  → live: offertes prepareren + mail via Klaviyo + log
+//
+// Live-volgorde per klant (V9-eis): guard → doc-hercheck (niet getekend) → offerte
+// prepareren (backup + totaal-verificatie + rollback) → profiel → campagne per arm.
+// Faalt de campagne, dan worden de zojuist geprepareerde offertes teruggedraaid.
 const fs = require('fs');
 const path = require('path');
 const CFG = require('../ai-ks/config.js');
@@ -20,9 +25,14 @@ const AB_FILE = path.join(__dirname, '..', '..', 'data', 'tekenbonus-ab.json');
 const ARMEN = ['controle', 'bonus-2d', 'bonus-4d'];
 const LIVE = fs.existsSync(path.join(__dirname, '.tekenbonus-live')) && process.argv.includes('--execute');
 const PROEF = process.argv.includes('--proef') ? parseInt(process.argv[process.argv.indexOf('--proef') + 1] || '3', 10) : 0;
-const CAP = 30; // max klanten per run, ook straks live
+const CAP = 30; // max klanten per run
+const TG = { token: '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40', chat: 1700128390 };
 
 const euro = (n) => '€ ' + n.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const telegram = (tekst) => fetch(`https://api.telegram.org/bot${TG.token}/sendMessage`, {
+  method: 'POST', headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ chat_id: TG.chat, text: tekst.substring(0, 4000) }),
+}).catch(() => {});
 
 function volgendeArm() {
   let st = { teller: 0 };
@@ -42,10 +52,11 @@ async function docVan(item) {
   return docs[0] || null;
 }
 
-function bouwMail(w) {
-  let html = fs.readFileSync(path.join(__dirname, 'mail-template.html'), 'utf8');
-  for (const [k, v] of Object.entries(w)) html = html.split('{{' + k + '}}').join(v);
-  return html;
+function productTekst(fullDoc) {
+  const lines = fullDoc?.quotationData?.segments?.defaultTemplatePriceLineGroup?.data?.lines || [];
+  const titels = lines.map((l) => (l.description || '').split('\n')[0].replace(/\*\*/g, '').trim())
+    .filter((t) => t && !/montage|inmeten|korting|tekenbonus|actie/i.test(t));
+  return titels.slice(0, 2).join(' en ') || 'Zonwering op maat';
 }
 
 (async () => {
@@ -53,54 +64,98 @@ function bouwMail(w) {
   const items = (await (await fetch(`https://backend.reuzenpanda.nl/contact-service/${CFG.RP_PID}/backlogs/${CFG.RP_BACKLOG}/items`, { headers: H })).json()).items || [];
   const kand = (await kandidaten(items)).sort((a, b) => a.timestamp_created - b.timestamp_created);
   console.log('kandidaten:', kand.length);
-  const log = fs.existsSync(BONUS_LOG) ? JSON.parse(fs.readFileSync(BONUS_LOG, 'utf8')) : {};
-  let gedaan = 0, proefGedaan = 0;
-  // Eén klant = één mail en één arm, ook als hij meerdere dossiers heeft
-  // (bug gevonden in de eerste proeflijst: zelfde klant in twee armen).
-  const alGezien = new Set();
+
+  // fase 1: selecteren (guard, doc-check, arm, staffel) — nog niets aangepast
+  const selectie = [];
+  const alGezien = new Set(); // één klant = één mail en één arm (bug uit proeflijst 1)
   for (const item of kand) {
-    if (gedaan >= CAP) break;
-    const wieCheck = klantIdentiteit(item);
-    const sleutel = wieCheck.email || wieCheck.tel;
+    if (selectie.length >= CAP) break;
+    const wie = klantIdentiteit(item);
+    const sleutel = wie.email || wie.tel;
     if (!sleutel || alGezien.has(sleutel)) continue;
+    if (LIVE && !wie.email) continue; // mailen vereist een e-mailadres
     const guard = await magBenaderd(item, items);
     if (!guard.mag) continue;
-    alGezien.add(sleutel);
     const doc = await docVan(item);
     if (!doc || /ACCEPTED|SIGNED/i.test(String(doc.quotationStatus || ''))) continue;
-    const wie = klantIdentiteit(item);
-    const arm = volgendeArm();
-    const dagen = arm === 'bonus-2d' ? 2 : 4;
-    const dl = deadline(dagen);
     const full = await (await fetch(`https://backend.reuzenpanda.nl/document-service/v1/${CFG.RP_PID}/quotations/${doc.documentId}`, { headers: H })).json();
     const totaal = Math.round((full?.quotationData?.pricing?.total ?? 0) * 100) / 100;
     if (!magBonus(totaal)) continue; // lab-regel: onder 750 of kapot totaal → geen mail
-    const bonus = staffel(totaal);
-    gedaan++;
-    console.log(`${String(gedaan).padStart(2)} ${arm.padEnd(9)} ${(wie.naam || '?').slice(0, 26).padEnd(26)} ${doc.quotationNumber} ${euro(totaal)}${arm === 'controle' ? '' : ` → bonus ${bonus}, deadline ${datumKort(dl)}`}`);
-
-    if (LIVE) {
-      // Echte flow: offerte prepareren, mail via Klaviyo, log bijwerken. Bewust nog
-      // niet actief: pas nadat Daimy expliciet "aan" heeft gezegd bouwen we de
-      // Klaviyo-verzending hier in en gaat .tekenbonus-live erop.
-      throw new Error('LIVE-pad is nog niet vrijgegeven');
-    }
-    if (PROEF && proefGedaan < PROEF && arm !== 'controle') {
-      proefGedaan++;
-      const html = bouwMail({
-        AANHEF: 'Hoi ' + ((wie.naam || '').split(' ')[0] || 'daar') + ',',
-        PRODUCT: 'Zonwering op maat', NUMMER: String(doc.quotationNumber),
-        GELDIG_TOT: datumKort(dl) + ' 2026', TOTAAL: euro(totaal), TOTAAL_MET_BONUS: euro(totaal - bonus),
-        BONUS: String(bonus), DEADLINE_DAG: datumLang(dl), DEADLINE_KORT: datumKort(dl),
-        LINK: `https://document.reuzenpanda.nl/nl/${CFG.RP_PID}/${doc.documentId}/latest?pdfAction=DOCSIGN`,
-      });
-      const token = fs.readFileSync(path.join(__dirname, '..', '.owa-token.txt'), 'utf8').trim();
-      const r = await fetch('https://outlook.office.com/api/v2.0/me/sendmail', {
-        method: 'POST', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ Message: { Subject: `[PROEF ${arm}] Er kan eenmalig ${bonus} euro van je offerte af`, Body: { ContentType: 'HTML', Content: html }, ToRecipients: [{ EmailAddress: { Address: 'daimyboot@gmail.com' } }] }, SaveToSentItems: false }),
-      });
-      console.log(`   → proefmail (${arm}) naar daimyboot@gmail.com: ${r.status}`);
-    }
+    alGezien.add(sleutel);
+    const arm = volgendeArm();
+    const dagen = arm === 'bonus-2d' ? 2 : 4;
+    const dl = deadline(dagen);
+    selectie.push({ item, wie, doc, totaal, arm, dl, bonus: staffel(totaal), product: productTekst(full) });
+    console.log(`${String(selectie.length).padStart(2)} ${arm.padEnd(9)} ${(wie.naam || '?').slice(0, 26).padEnd(26)} ${doc.quotationNumber} ${euro(totaal)}${arm === 'controle' ? ' (geen mail, nulmeting)' : ` → bonus ${staffel(totaal)}, deadline ${datumKort(dl)}`}`);
   }
-  console.log(`klaar: ${gedaan} in de lijst${PROEF ? `, ${proefGedaan} proefmails` : ''}. Er is niets aan klant-offertes veranderd en niets naar klanten gestuurd.`);
+
+  if (!LIVE) {
+    console.log(`klaar: ${selectie.length} in de lijst. Er is niets aan klant-offertes veranderd en niets naar klanten gestuurd.`);
+    return;
+  }
+
+  // fase 2: live uitvoeren
+  const { zetProfiel, verstuurArm } = require('./klaviyo-verzend.js');
+  const log = fs.existsSync(BONUS_LOG) ? JSON.parse(fs.readFileSync(BONUS_LOG, 'utf8')) : {};
+  const bewaarLog = () => fs.writeFileSync(BONUS_LOG, JSON.stringify(log, null, 1));
+  const rapport = { controle: 0, 'bonus-2d': 0, 'bonus-4d': 0, fouten: [] };
+
+  // controle-arm: alleen registreren (nulmeting, geen mail)
+  for (const s of selectie.filter((x) => x.arm === 'controle')) {
+    log[s.doc.documentId] = { email: s.wie.email, telefoon: s.wie.tel, naam: s.wie.naam, itemId: s.item.id, nummer: String(s.doc.quotationNumber), arm: 'controle', verstuurdOp: new Date().toISOString(), status: 'controle-geen-mail', totaal: s.totaal };
+    rapport.controle++;
+  }
+  bewaarLog();
+
+  for (const armLabel of ['bonus-2d', 'bonus-4d']) {
+    const groep = selectie.filter((x) => x.arm === armLabel);
+    if (!groep.length) continue;
+    const geprept = [];
+    const profielIds = [];
+    for (const s of groep) {
+      try {
+        const prep = await bereidVoor(s.doc.documentId, { deadlineDatum: s.dl });
+        if (prep.fout) { rapport.fouten.push(`${s.wie.naam}: prep ${prep.fout}`); continue; }
+        geprept.push({ s, prep });
+        const voornaam = (s.wie.naam || '').trim().split(/\s+/)[0] || '';
+        const pid = await zetProfiel(s.wie.email, voornaam, {
+          sonty_aanhef: voornaam ? `Hoi ${voornaam},` : 'Hoi,',
+          sonty_product: s.product,
+          sonty_offertenummer: String(s.doc.quotationNumber),
+          sonty_geldigheid_waarde: prep.deadlineKort + ' ' + s.dl.getFullYear(),
+          sonty_bedrag: euro(prep.totaalVoor),
+          sonty_totaal_met_bonus: euro(prep.totaalNa),
+          sonty_bonus: String(prep.bonus),
+          sonty_deadline_dag: prep.deadlineDag,
+          sonty_deadline_kort: prep.deadlineKort,
+          sonty_offerte_link: `https://document.reuzenpanda.nl/nl/${CFG.RP_PID}/${s.doc.documentId}/latest?pdfAction=DOCSIGN`,
+        });
+        profielIds.push(pid);
+        log[s.doc.documentId] = { email: s.wie.email, telefoon: s.wie.tel, naam: s.wie.naam, itemId: s.item.id, nummer: String(s.doc.quotationNumber), arm: armLabel, bonus: prep.bonus, totaalVoor: prep.totaalVoor, totaalNa: prep.totaalNa, deadline: s.dl.toISOString(), origineleGroupDiscount: prep.origineleGroupDiscount, verstuurdOp: new Date().toISOString(), status: 'geprept', };
+      } catch (e) {
+        rapport.fouten.push(`${s.wie.naam}: ${String(e.message).slice(0, 80)}`);
+      }
+    }
+    bewaarLog();
+    if (!profielIds.length) continue;
+    try {
+      const r = await verstuurArm({ armLabel, profielIds,
+        onderwerp: 'Er kan eenmalig {{ person.sonty_bonus|default:"" }} euro van je offerte af',
+        preheader: 'Jouw tekenbonus staat al in je offerte, tot en met {{ person.sonty_deadline_kort|default:"binnenkort" }}.' });
+      for (const { s } of geprept) { if (log[s.doc.documentId]) log[s.doc.documentId].status = 'verstuurd'; }
+      rapport[armLabel] = r.verstuurd;
+    } catch (e) {
+      // campagne faalde: geprepareerde offertes terugdraaien, niets claimen
+      rapport.fouten.push(`campagne ${armLabel}: ${String(e.message).slice(0, 100)} — offertes teruggedraaid`);
+      for (const { s, prep } of geprept) {
+        await ruimOp(s.doc.documentId, prep.origineleGroupDiscount).catch(() => {});
+        if (log[s.doc.documentId]) log[s.doc.documentId].status = 'campagne-mislukt-teruggedraaid';
+      }
+    }
+    bewaarLog();
+  }
+
+  const melding = `📨 Tekenbonus-run: ${rapport['bonus-2d']}x 2-dagen-mail, ${rapport['bonus-4d']}x 4-dagen-mail, ${rapport.controle}x controle (geen mail).${rapport.fouten.length ? '\n⚠️ ' + rapport.fouten.slice(0, 5).join('\n⚠️ ') : ''}`;
+  console.log(melding);
+  await telegram(melding);
 })();

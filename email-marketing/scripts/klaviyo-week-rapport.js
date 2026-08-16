@@ -51,8 +51,11 @@ const regel = (r) => {
   // Placed Order metric-id opzoeken (conversie-metric); reporting-API eist er altijd één,
   // ook als we alleen basisstatistieken opvragen.
   const metrics = await api('GET', 'metrics');
-  const placedOrder = (metrics.data || []).find((m) => m.attributes.name === 'Placed Order');
-  if (!placedOrder) throw new Error('Placed Order metric niet gevonden');
+  // Sonty's echte conversie: het akkoord-event uit scripts/email/akkoord-events.js.
+  // Bestaat die metric nog niet (voor het eerste akkoord), dan Placed Order als vulling.
+  const placedOrder = (metrics.data || []).find((m) => m.attributes.name === 'Offerte Akkoord')
+    || (metrics.data || []).find((m) => m.attributes.name === 'Placed Order');
+  if (!placedOrder) throw new Error('geen conversie-metric gevonden');
 
   const timeframe = { key: `last_${DAGEN === 7 ? '7' : DAGEN === 30 ? '30' : '90'}_days` };
 

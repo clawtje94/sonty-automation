@@ -823,7 +823,27 @@
   ],
   "sonny": false,
   "kanaal": "WA",
-  "status": "onbezorgd",
-  "aangemaakt": 1786704568710
+  "status": "klaar",
+  "aangemaakt": 1786704568710,
+  "opmerking": "klant kreeg de links wel via het gesprek (11-08 en 14-08 12:49); alleen de statusregel bleef op onbezorgd staan"
+ },
+ {
+  "lcId": "555a8ede-c949-484a-9a0f-5afb303b5af8",
+  "ticketId": 974394420,
+  "klantNaam": "Leo Prins",
+  "producten": [
+   {
+    "product": "suneye voorraad scherm",
+    "breedteMM": 5000,
+    "uitvalMM": 3000,
+    "bediening": "draaischakelaar",
+    "framekleur": "RAL 7016 structuur"
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1786905594401,
+  "handmatigGeleverd": "2026-08-16, offerte 202611810 per mail nagestuurd op ticket 974394420 (daemon zag het ticket niet door een Trengo-429)"
  }
 ]

@@ -22,10 +22,22 @@ try { TT = fs.readFileSync(SONNY_TOKEN_FILE, 'utf8').trim(); console.log('Trengo
 catch { TT = fs.readFileSync(path.join(__dirname, '..', '.trengo-api-token.txt'), 'utf8').trim(); }
 const TH = { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' };
 
+// LEZEN MOET NET ZO HARD DOORZETTEN ALS SCHRIJVEN (Daimy 16-08, geval Leo Prins).
+// tPost had al een 429-retry, tGet niet: die gaf bij élke fout null terug. Eén rate limit
+// van Trengo maakte het ticket dus onzichtbaar, waarna de offerte-levering concludeerde
+// "geen leverpad" en de klant zijn link nooit kreeg (ticket 974394420 had gewoon het
+// mailkanaal Aanvragen). 429 en 5xx zijn tijdelijk, dus opnieuw proberen; 401/404 niet.
 async function tGet(ep) {
-  const res = await fetch('https://app.trengo.com/api/v2' + ep, { headers: TH });
-  if (!res.ok) return null;
-  return res.json();
+  for (let poging = 1; poging <= 3; poging++) {
+    const res = await fetch('https://app.trengo.com/api/v2' + ep, { headers: TH });
+    if (res.ok) return res.json();
+    if (res.status !== 429 && res.status < 500) return null;
+    if (poging < 3) {
+      console.log(`  Trengo GET ${res.status} op ${ep}, nieuwe poging over ${poging * 20}s...`);
+      await new Promise(r => setTimeout(r, poging * 20000));
+    }
+  }
+  return null;
 }
 // De messages-endpoint van Trengo pagineert met 20 per pagina en geeft de nieuwste eerst.
 // Zonder paginering zag de bot bij een lang gesprek dus maar 20 berichten, terwijl hij er 25
@@ -1064,6 +1076,15 @@ async function verwerkPendingOffertes() {
     // Link appen op het oorspronkelijke ticket (met whitelist-check)
     const tRes = await tGet(`/tickets/${p.ticketId}`);
     const ticket = tRes?.data || tRes;
+    // TICKET ONBEKEND IS NIET HETZELFDE ALS GEEN LEVERPAD (Daimy 16-08, Leo Prins).
+    // Lukt het ophalen niet, dan weten we niks over het kanaal en mogen we het geval niet
+    // op 'onbezorgd' zetten — dat is eindstation en de klant blijft dan wachten. Op
+    // 'wachten' laten staan betekent: volgende ronde opnieuw proberen.
+    if (!ticket) {
+      console.log(`  ! ticket ${p.ticketId} niet op te halen bij Trengo — volgende ronde opnieuw`);
+      await telegram(`⚠️ AI-KS: ticket ${p.ticketId} (${p.klantNaam}) is even niet op te halen bij Trengo, dus ik weet het kanaal niet. De offerte staat klaar; ik probeer het de volgende ronde opnieuw. Link:\n${res.link}`);
+      continue;
+    }
     // Link mag naar de klant bij: whitelist-test, of een Sonny-gesprek (buiten openingstijden
     // aangemaakt; de nalevering zelf mag ook net ná opening nog, klant verwacht hem).
     const magSonnyLeveren = p.sonny && CFG.SONNY.enabled && ticket && isWaTicket(ticket);
@@ -1104,7 +1125,7 @@ async function verwerkPendingOffertes() {
       // een offerte die klaar ligt. Eerder verdween zo'n geval stil op 'klaar'. Geraakt:
       // Koos Schuurman (967634212) en Belinda Wildenberg (966171659).
       p.status = 'onbezorgd';
-      await telegram(`⚠️ AI-KS: offerte voor ${p.klantNaam} is KLAAR maar er is geen leverpad (ticket ${p.ticketId}, kanaal ${ticket?.channel?.type || '?'}). De klant heeft de link NIET. Handmatig sturen:\n${res.link}\nOffertenummer: ${doc.quotationNumber || ''}`);
+      await telegram(`⚠️ AI-KS: offerte voor ${p.klantNaam} is KLAAR maar er is geen leverpad (ticket ${p.ticketId}, kanaal ${ticket?.channel?.type || '?'}/${ticket?.channel?.title || '?'}). De klant heeft de link NIET. Handmatig sturen:\n${res.link}\nOffertenummer: ${doc.quotationNumber || ''}`);
       log({ pendingOfferte: p.lcId, klant: p.klantNaam, onbezorgd: true, link: res.link, ticket: p.ticketId });
       continue;
     }

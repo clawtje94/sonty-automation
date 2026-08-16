@@ -1,11 +1,20 @@
 # Bouwinstructie flows in Klaviyo
 
 Alle sjablonen staan klaar in Klaviyo. Dit document beschrijft per flow hoe hij in elkaar hoort te
-zitten. De flows zijn bewust NIET via de API aangemaakt: de flow-API wisselt per versie van
-structuur en klopt niet met Klaviyo's eigen documentatie, en elke poging is een schrijfactie op een
-live account. Met een segment van duizenden mensen erachter is dat risico niet nodig.
+zitten.
 
-**Er staat niets aan. Zet een flow pas live als Daimy dat per flow zegt.**
+**UPDATE 16-08 (opdracht Daimy):** alle flows hieronder staan nu als **DRAFT** in Klaviyo,
+via de flows-API aangemaakt (revision 2024-10-15.pre met temporary_id + entry_action_id;
+de aanpak is inmiddels bewezen met de live Tekenbonus-flows). Namen: "Sonty A | Offerte-
+opvolging" t/m "Sonty W3 | Donkere dagen". Onderwerpen/previews zijn nette voorzetten en
+horen bij de review van Daimy+Joey. Twee dingen kunnen alleen in de UI en staan als
+notitie in de flow-naam/mail-naam: de C1-productvarianten-split en de C2/C3-voorwaarden
+(geopend/geklikt).
+
+**Er staat niets aan. Zet een flow pas live als Daimy dat per flow zegt** (volgorde
+onderaan dit document). De triggers voor RP1/RP4/RP5 zijn nieuwe metrics ("RP: offerte
+verstuurd/geaccepteerd/afgewezen") die ons systeem nog moet gaan afvuren zodra deze
+flows de Reuzenpanda-mails overnemen.
 
 ## Vaste instellingen voor elke flow
 

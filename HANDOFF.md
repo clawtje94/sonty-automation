@@ -1,5 +1,19 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-16)
 
+## 16-08 nacht: HEEL FLOW-PAKKET ALS DRAFT IN KLAVIYO + TEKENBONUS-CAP
+- Opdracht Daimy: "rest van de flows alvast bouwen voor overzicht, niet aanzetten".
+  11 flows als DRAFT aangemaakt via de flows-API (0 fouten): A Offerte-opvolging
+  (5 mails, dag 2-45), C Reactivering (3 mails; C1-productsplit + open/klik-voorwaarden
+  moeten in de UI bij review), D Cross-sell (90d), E Service+review (7+7d), G Welkom
+  (lijst R76XQg), RP1/RP4/RP5 (nieuwe metrics "RP: offerte verstuurd/geaccepteerd/
+  afgewezen" — events moeten nog gebouwd), W1/W2/W3 (weersegmenten). Segment-triggers
+  werken gewoon via de API ({type:'segment',id}). FLOWS.md bijgewerkt.
+  Sanity: 3 live (2 Tekenbonus + oude aanvraag-flow), al het nieuwe draft.
+- Tekenbonus-cap (vraag Daimy "meer dan 30 aanvragen/dag"): cap bouwt automatisch op
+  30/dag → +15 per week → plafond 75/dag (warm-up mail-reputatie aanvragen@), en de
+  selectie-leeftijdsgrens is 60→75 dagen zodat niemand uit de wachtrij veroudert
+  (oudste eerst). Doelgroep nu 2.134.
+
 ## 16-08 avond: TEKENBONUS-CAMPAGNE — BESLUITEN + BLOK 1 GEBOUWD
 - Besluiten Daimy: staffel 100/250/500 OK; bonus ONDERAAN de offerte (boven het totaal,
   onder de 15%-actieregel); deadline wordt A/B-GETEST (arm 2 dagen vs arm 4 dagen, plus

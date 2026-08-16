@@ -1,5 +1,33 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-16)
 
+## 16-08: EDWIN KANTERS (+31641223208) UITGEZOCHT — 3 STRUCTURELE GATEN, WACHT OP GO
+- Vraag Daimy: ticket niet in sheet, niet naar Inmeten inplannen; later: offerte door AI
+  gemaakt, kortingsopbouw fout; NIETS aanpassen, alleen uitzoeken.
+- FEITEN: klant vulde 13-08 configurator in met 06-41223508 (WhatsApp is ...208, 1 cijfer
+  anders — daarom onvindbaar op app-nummer). RP maakte 3 offertes in dezelfde ms
+  (202611566/589/590). Dossier (RP-item ad8c60c2) is NOOIT in kolom Offerte controle
+  geweest → V4 heeft de docs nooit genormaliseerd. Getekend za 15-08, dossier stond
+  vóór de bot-reactie al op Inmeten inplannen (RP zelf/handmatig, niet de bot), geboekt
+  zo 16-08 13:45 (Joey di 18-08, Gripp 6487, inmeet-boekingen "sheet": null).
+- GAT 1 (kortingsopbouw): doc 202611566 heeft naamloze korting PER REGEL (20% scherm,
+  20% montage, 15% Tahoma, totaal €3000,75) i.p.v. de vaste opbouw = één groupDiscount
+  "20% korting voorraad scherm" onderaan (vergelijk 202611562 mickael van Es, zelfde dag
+  zelfde product, wél via V4 en wél correct). Herkomst regelpercentages = RP-inrichting,
+  nog niet geverifieerd.
+- GAT 2 (sheet): sheetrijen schrijft alleen V4 (09:00/17:00, zo niet — getDay()==0 skip),
+  en alleen voor items die op dát moment in een register-status staan (GC/TeVer/Gordijnen/
+  Winkel/AI/Inmeten-inplannen; cron-offerte-controle-v4-combined.js:1982). Edwin zat er
+  tijdens geen enkele run in: OC overgeslagen + Inmeten-venster viel precies in
+  za-avond→zo (geen runs). Rij komt dus NOOIT automatisch; 589/590 ook niet.
+- GAT 3 (bot-bug): ai-ks/tools.js inmeet_afspraak_voorstellen, getekende-offerte-pad
+  (regel ~358): early return "DOORGEZET" vóór de RP-PATCH (regel ~396) → verplaatsing én
+  plannernotitie worden NIET uitgevoerd terwijl de bot en de klant "geregeld" te horen
+  krijgen. Hier toevallig geen schade (RP had al verplaatst), structureel wel.
+- VOORSTEL naar Daimy (Telegram V1, wacht op antwoord): (a) tools.js fixen, (b) sheet-
+  vangnet voor doorgeschoven/geboekte dossiers, (c) RP-kant uitzoeken waarom OC werd
+  overgeslagen + kortingen normaliseren; plus evt. rij 566 handmatig in Aug 2026.
+- Telegram-poller stond ~19u stil, herstart met launchctl kickstart.
+
 ## 16-08: WHATSAPP "NIET AFGELEVERD" — OORZAAK GEVONDEN + VANGNET LIVE
 - Daimy: veel offerte-templates in Trengo op "niet afgeleverd" terwijl de nummers echt
   lijken. Gemeten (Trengo delivery-status): 8 van 42 recente offerte-apps FAILED (19%),

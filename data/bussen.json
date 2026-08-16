@@ -1,0 +1,15 @@
+{
+  "_uitleg": "DE bron voor de montagebussen: busnummer = laadvak in het magazijn (Berkel en Rodenrijs). Planning, Planado-accounts en straks de bestelketen (vak-nummer op orders en werkbonnen) gebruiken allemaal dit bestand. Nummering volgt Daimy's opsomming van 16-08; bevestiging gevraagd. planadoUuid null = account bestaat nog niet (wacht op V1-akkoord).",
+  "bijgewerkt": "2026-08-16",
+  "bussen": [
+    { "nr": 1, "laadvak": 1, "bemanning": ["Marvin (Moa)", "Moa"], "outlookNamen": [], "planadoNaam": "Bus 1 - Marvin + Moa", "planadoUuid": null, "plan": "losse account Tygo Krikke ombouwen (voorstel bij Daimy)" },
+    { "nr": 2, "laadvak": 2, "bemanning": ["Kevin", "Tygo"], "outlookNamen": ["Kevin", "Tygo"], "planadoNaam": "Bus 2 - Kevin + Tygo", "planadoUuid": "1f122f72-777f-6e80-8139-6e820cb7b164" },
+    { "nr": 3, "laadvak": 3, "bemanning": ["Yudi", "Nick"], "outlookNamen": ["Yudi", "Nick"], "planadoNaam": "Bus 3 - Yudi + Nick", "planadoUuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c" },
+    { "nr": 4, "laadvak": 4, "bemanning": ["Marvin (Bart)", "Bart"], "outlookNamen": [], "planadoNaam": "Bus 4 - Marvin + Bart", "planadoUuid": null, "plan": "nieuw account (~$36/mnd, wacht op V1)" },
+    { "nr": 5, "laadvak": 5, "bemanning": ["Frenky", "Dennis"], "outlookNamen": ["Dennis"], "planadoNaam": "Bus 5 - Frenky + Dennis", "planadoUuid": null, "plan": "nieuw account (~$36/mnd, wacht op V1)" }
+  ],
+  "openVragen": [
+    "Nummering = volgorde van Daimy's lijstje 16-08 — klopt bus 1 t/m 5 zo?",
+    "Outlook-naam 'Marvin' is ambigu (bus 1 of 4): Nanny gaat bus-naam als deelnemer gebruiken zodra alle accounts bestaan"
+  ]
+}

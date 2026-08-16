@@ -61,24 +61,23 @@ const nlDagNaam = (datum) => new Date(datum + 'T12:00:00Z').toLocaleDateString('
 const dagKort = (datum) => DAGKORT[new Date(datum + 'T12:00:00Z').getUTCDay()];
 
 /**
- * De laatste werkdag van deze inmeter vóór de afspraakdatum, plus het meldmoment.
- * Geeft null als er binnen 10 dagen geen werkdag vóór de afspraak ligt.
+ * Het meldmoment: altijd de dag vóór de afspraak, op de vaste tijd uit de regels
+ * (Daimy 16-08: "wil je het altijd dus de dag ervoor zetten en dan om 18:00").
+ *
+ * Eerder rekende dit de laatste WERKDAG uit, omdat Joey geen woensdag en vrijdag werkt.
+ * Dat is bewust losgelaten: de melding komt nu op zijn telefoon buiten werktijd, dus een
+ * vrije dag is geen probleem meer. Gevolg om te weten: valt de dag ervoor in zijn vrije
+ * dag, dan leest hij het op een dag dat hij niet werkt.
  */
 function meldMoment(inmeter, afspraakDatum) {
-  const dagen = ROOSTER[inmeter]?.dagen;
-  if (!dagen) return null;
+  if (!ROOSTER[inmeter]) return null;
   const d = new Date(afspraakDatum + 'T12:00:00Z');
-  for (let i = 0; i < 10; i++) {
-    d.setUTCDate(d.getUTCDate() - 1);
-    const datum = d.toISOString().slice(0, 10);
-    const blok = dagen[dagKort(datum)];
-    if (!blok) continue;
-    const [u, m] = blok.tot.split(':').map(Number);
-    const start = u * 60 + m - REGELS.meldingMinutenVoorEind;
-    const hhmm = (v) => `${String(Math.floor(v / 60)).padStart(2, '0')}:${String(v % 60).padStart(2, '0')}`;
-    return { datum, van: hhmm(start), tot: hhmm(start + REGELS.duurMin), dagErvoor: i === 0 };
-  }
-  return null;
+  d.setUTCDate(d.getUTCDate() - 1);
+  const datum = d.toISOString().slice(0, 10);
+  const [u, m] = REGELS.meldTijd.split(':').map(Number);
+  const eind = u * 60 + m + REGELS.duurMin;
+  const hhmm = (v) => `${String(Math.floor(v / 60)).padStart(2, '0')}:${String(v % 60).padStart(2, '0')}`;
+  return { datum, van: REGELS.meldTijd, tot: hhmm(eind), dagErvoor: true };
 }
 
 /**
@@ -159,21 +158,72 @@ async function rpLead(itemId) {
       headers: { Authorization: 'Bearer ' + RP_API_KEY },
     });
     if (!r.ok) return null;
-    const item = (await r.json()).item;
-    const d = item?.description || '';
-    const opmerking = (d.match(/^Opmerking:\s*(.+)$/im) || [])[1]?.trim() || '';
-    const uitLead = [...d.matchAll(/^(\d+)x\s+(.+?):?\s*$/gim)]
-      .map((m) => ({ naam: m[2].trim(), regel: `${m[1]}x ${m[2].trim()}` }));
-    let uitOfferte = [];
-    try {
-      const { leesOfferte, productRegel } = require('./inmeten-planner-lees.js');
-      const off = await leesOfferte(item);
-      if (!off.ambigu) uitOfferte = (off.producten || []).map((p) => ({ naam: p.naam, regel: productRegel(p) }));
-    } catch { /* offerte is een bonus, de lead is het vangnet */ }
-    return { opmerking, producten: uitOfferte.length ? uitOfferte : uitLead, bron: uitOfferte.length ? 'offerte' : 'lead' };
+    return await leesUitItem((await r.json()).item);
   } catch {
     return null;
   }
+}
+
+async function leesUitItem(item) {
+  try {
+    const d = item?.description || '';
+    const opmerking = (d.match(/^Opmerking:\s*(.+)$/im) || [])[1]?.trim() || '';
+    // ALLEEN de offerte telt (Daimy 16-08: "natuurlijk wel alleen erin zetten als we daar
+    // ook gaan inmeten hè?"). De leadtekst is de wenslijst uit het aanvraagformulier en
+    // zegt niets over wat we gaan meten: van de 8 leads die op hun leadtekst "raamdeco"
+    // riepen, had GEEN ENKELE raamdeco in de offerte staan (Helene Beek: lead zegt
+    // raamdecoratie, offerte is een rolluik). Geen leesbare offerte = geen melding.
+    let producten = [];
+    let status = null;
+    try {
+      const { leesOfferte, productRegel } = require('./inmeten-planner-lees.js');
+      const off = await leesOfferte(item);
+      status = off.ambigu ? 'ambigu' : (off.status || 'geen offerte');
+      if (!off.ambigu) producten = (off.producten || []).map((p) => ({ naam: p.naam, regel: productRegel(p) }));
+    } catch { status = 'offerte niet te lezen'; }
+    return { opmerking, producten, status };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Afspraken die niet door de bot zijn geboekt (uit Outlook gesynct of met de hand in
+ * Planado gezet) hebben geen external_id "rp-…". Dat is 73% van de agenda, dus zonder
+ * deze terugval zou de melding voor het grootste deel van de inmetingen nooit afgaan.
+ * Daarom: de lead opzoeken op klantnaam, en ALLEEN als er precies één past.
+ */
+let leadIndexCache = null;
+async function leadIndex() {
+  if (leadIndexCache) return leadIndexCache;
+  const alles = [];
+  for (let offset = 0; offset < 5000; offset += 1000) {
+    const r = await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${SALES_BACKLOG}/items?limit=1000&offset=${offset}`, {
+      headers: { Authorization: 'Bearer ' + RP_API_KEY },
+    });
+    if (!r.ok) break;
+    const d = await r.json();
+    alles.push(...(d.items || []));
+    if (!d.has_more) break;
+  }
+  leadIndexCache = alles;
+  return alles;
+}
+
+const sleutelNaam = (s) => String(s || '').toLowerCase()
+  .normalize('NFD').replace(/[̀-ͯ]/g, '')
+  .replace(/[^a-z ]/g, ' ').replace(/\s+/g, ' ').trim();
+
+async function leadOpNaam(naam) {
+  const n = sleutelNaam(naam);
+  if (n.length < 4) return null;
+  const items = await leadIndex();
+  const treffers = items.filter((it) => {
+    const s = sleutelNaam(it.summary);
+    return s === n || (s.length >= 4 && n.length >= 4 && (s.includes(n) || n.includes(s)));
+  });
+  // Twee leads met dezelfde naam: dan weten we het niet, en gokken is erger dan zwijgen.
+  return treffers.length === 1 ? treffers[0] : null;
 }
 
 /** De producten zoals de planner ze in de Planado-opdracht heeft gezet. */
@@ -242,6 +292,7 @@ async function main() {
 
   // 1. per afspraak uitzoeken wat er speelt
   const perDag = {}; // "inmeter|datum" → afspraken
+  const onbekend = []; // afspraken zonder leesbare offerte: daar kunnen we niets over zeggen
   for (const j of jobs) {
     const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
     const job = det.job || det;
@@ -256,8 +307,19 @@ async function main() {
     const adres = job.address?.formatted || omschrijving.split('\n')[1] || '';
     const rpItemId = (job.external_id || '').startsWith('rp-') ? job.external_id.slice(3) : null;
 
-    const lead = rpItemId ? await rpLead(rpItemId) : null;
-    const producten = lead?.producten?.length ? lead.producten : productenUitOmschrijving(omschrijving);
+    let lead = rpItemId ? await rpLead(rpItemId) : null;
+    if (!lead) {
+      const opNaam = await leadOpNaam(naam);
+      if (opNaam) lead = await leesUitItem(opNaam);
+    }
+    const producten = lead?.producten || [];
+    if (!producten.length) {
+      // Zichtbaar houden: hier weten we niet wát er gemeten wordt, dus geen melding.
+      // Stil overslaan zou betekenen dat een raamdeco-inmeting ongemerkt wegvalt.
+      onbekend.push(`${nlDatum(job.scheduled_at)} ${uuidNaarNaam[j.assignee.worker_uuid]}: ${naam} `
+        + `(${!lead ? 'geen lead gevonden' : lead.status || 'geen offerte'})`);
+      continue;
+    }
     const opmerking = lead?.opmerking
       || (omschrijving.match(/OPMERKING BIJ DE OFFERTE:\n(.+)/) || [])[1]?.trim()
       || '';
@@ -333,6 +395,11 @@ async function main() {
 
   if (EXECUTE) fs.writeFileSync(STATE, JSON.stringify(state, null, 2));
   console.log(`\n${gezet.length} meeneem-melding(en) ${EXECUTE ? 'in Planado gezet' : 'zou ik in Planado zetten'}`);
+  if (onbekend.length) {
+    console.log(`\n${onbekend.length} afspraak(en) zonder leesbare offerte — daar kan ik niet zien wat er gemeten wordt:`);
+    for (const r of onbekend.slice(0, 15)) console.log('  ? ' + r);
+    if (onbekend.length > 15) console.log(`  ... en nog ${onbekend.length - 15}`);
+  }
 
   if (EXECUTE && gezet.length && REGELS.ookNaarTelegram) {
     const { planningTelegram } = require('./lib/telegram-planning.js');

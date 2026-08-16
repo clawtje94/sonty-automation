@@ -32,7 +32,7 @@ const VOORBEELD = {
   'person.sonty_geldigheid_waarde': '3 augustus 2026',
   'person.sonty_bedrag': '€ 4.500,00',
   'person.sonty_offerte_datum_nl': '21 juli 2026',
-  'person.sonty_offerte_link': 'https://document.reuzenpanda.nl/voorbeeld',
+  'person.sonty_offerte_link': 'https://www.sonty.nl/offerte',  // klikbaar in testmails; echte klantlink komt uit het profiel
   'person.sonty_showroom_link': 'https://www.sonty.nl/showroom',
   'person.sonty_verhaal_kop': 'Je zocht ooit een knikarmscherm',
   'person.sonty_verhaal_intro': 'Is het er destijds nooit van gekomen? Dat gebeurt vaker dan je denkt. Even laten zien wat er nu mogelijk is, en wat het tegenwoordig kost.',
@@ -47,8 +47,8 @@ function vulIn(html) {
   return html
     .replace(/\{\{\s*([a-z_.]+)\s*\|\s*default:\s*"([^"]*)"\s*\}\}/gi, (_, sleutel, def) => VOORBEELD[sleutel] ?? def)
     .replace(/\{\{\s*([a-z_.]+)\s*\}\}/gi, (_, sleutel) => VOORBEELD[sleutel] ?? '')
-    .replace(/\{%\s*unsubscribe\s*%\}/gi, '#uitschrijven')
-    .replace(/\{%\s*manage_preferences\s*%\}/gi, '#voorkeuren');
+    .replace(/\{%\s*unsubscribe\s*%\}/gi, 'https://www.sonty.nl/#uitschrijven-test')
+    .replace(/\{%\s*manage_preferences\s*%\}/gi, 'https://www.sonty.nl/#voorkeuren-test');
 }
 
 (async () => {

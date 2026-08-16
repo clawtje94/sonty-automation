@@ -5,7 +5,7 @@
  *
  * Verstuurt elke gevulde preview (previews/*.preview.html, voorbeeldklant met echte
  * offertekaart, werkende links en CDN-foto's) als losse mail via de Outlook-API
- * (zelfde weg als de meetbon-doorzetter). Onderwerp krijgt [TEST n/25] + de Klaviyo-naam
+ * (zelfde weg als de meetbon-doorzetter). Onderwerp krijgt [TEST v2 n/25] + de Klaviyo-naam
  * zodat Daimy ze op volgorde kan beoordelen. Gaat UITSLUITEND naar het testadres.
  *
  * Gebruik: node scripts/email/stuur-testmails.js [--dry]
@@ -49,7 +49,7 @@ const NAMEN = (() => {
     n += 1;
     const sleutel = f.replace('.preview.html', '');
     const naam = NAMEN[sleutel] || sleutel;
-    const onderwerp = `[TEST ${n}/${gesorteerd.length}] ${naam}`;
+    const onderwerp = `[TEST v2 ${n}/${gesorteerd.length}] ${naam}`;
     if (DRY) { console.log('DRY:', onderwerp); continue; }
     const html = fs.readFileSync(path.join(PREVIEWS, f), 'utf8');
     const r = await fetch('https://outlook.office.com/api/v2.0/me/sendmail', {

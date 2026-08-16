@@ -272,9 +272,9 @@ const voet = (reden = 'omdat je een offerte bij ons hebt aangevraagd') => `
    </div>
    Sonty B.V. &middot; ${M.adres}<br>
    Je krijgt deze mail ${reden}.<br>
-   <a href="{% unsubscribe %}" style="color:${M.zacht};text-decoration:underline;">Uitschrijven</a>
+   <a href="{% unsubscribe_link %}" style="color:${M.zacht};text-decoration:underline;">Uitschrijven</a>
    &nbsp;&middot;&nbsp;
-   <a href="{% manage_preferences %}" style="color:${M.zacht};text-decoration:underline;">Voorkeuren aanpassen</a>
+   <a href="{% manage_preferences_link %}" style="color:${M.zacht};text-decoration:underline;">Voorkeuren aanpassen</a>
  </td></tr>
 </table>`;
 
@@ -406,7 +406,7 @@ const SJABLONEN = {
     intro: 'Je offerte van {{ person.sonty_offerte_datum_nl|default:"kort geleden" }} staat nog voor je klaar. Even checken of alles erin staat zoals jij het voor je ziet?',
     blokken: [
       offerteKaart(),
-      knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+      knop('Bekijk je offerte', '{{ person.sonty_offerte_link }}'),
       cijfers(),
       review(...REVIEW_TRAJECT),
       stappen(),
@@ -492,7 +492,7 @@ SJABLONEN['sonty-weer-hitte'] = mail({
   intro: 'Even een seintje: {{ person.sonty_weer_dag|default:"deze week" }} loopt het op naar {{ person.sonty_weer_piek|default:"boven de 29" }} graden. Precies het weer waarvoor je destijds je offerte hebt aangevraagd.',
   blokken: [
     offerteKaart(),
-    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+    knop('Bekijk je offerte', '{{ person.sonty_offerte_link }}'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid ${M.lijn};border-radius:12px;" class="rand">
       <tr><td style="padding:20px 22px;${F};">
         <div style="color:${M.tekst};font-size:15px;font-weight:700;" class="t-donker">Eerlijk over de levertijd</div>
@@ -517,7 +517,7 @@ SJABLONEN['sonty-weer-lente'] = mail({
   intro: 'Het loopt op naar {{ person.sonty_weer_piek|default:"boven de 20" }} graden, en dan denkt bijna iedereen weer aan buiten zitten. Jij vroeg ooit een offerte bij ons aan. Zal ik hem er weer even bij pakken?',
   blokken: [
     beeld(slotFoto('sonty-weer-lente', 'hero', 'eigen/pergola-tuin-1.webp'), 'Een pergola in de tuin, geplaatst door Sonty', 'Een van onze projecten'),
-    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+    knop('Bekijk je offerte', '{{ person.sonty_offerte_link }}'),
     offerteKaart(),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
       <tr><td style="padding:20px 22px;${F};">
@@ -542,7 +542,7 @@ SJABLONEN['sonty-weer-donker'] = mail({
   intro: 'Het wordt weer vroeg donker. Precies het moment waarop je merkt hoe kaal een raam kan aanvoelen, en hoeveel kou er langs de ruit naar binnen komt.',
   blokken: [
     beeld(slotFoto('sonty-weer-donker', 'hero', 'eigen/showroom-ramen.webp'), 'Raamdecoratie in de showroom van Sonty', 'Raamdecoratie in onze showroom in Rijswijk'),
-    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+    knop('Bekijk je offerte', '{{ person.sonty_offerte_link }}'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
       <tr><td style="padding:20px 22px;${F};">
         <div style="color:${M.tekst};font-size:15px;font-weight:700;">Scheelt echt in de warmte</div>
@@ -600,7 +600,7 @@ SJABLONEN['sonty-rp-offerte'] = mail({
   intro: 'Dank je wel voor je aanvraag. Ik heb op basis van jouw wensen een prijsindicatie gemaakt. Hieronder staat wat het wordt, en wat er daarna gebeurt.',
   blokken: [
     offerteKaart('Jouw prijsindicatie'),
-    knop('Bekijk je prijsindicatie', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+    knop('Bekijk je prijsindicatie', '{{ person.sonty_offerte_link }}'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
       <tr><td style="padding:20px 22px;${F};">
         <div style="color:${M.tekst};font-size:15px;font-weight:700;">Dit is nog een indicatie</div>
@@ -631,7 +631,7 @@ SJABLONEN['sonty-herinnering-1'] = mail({
       'Heb je alles wat je nodig hebt om te beslissen?',
     ], 'Stuur gerust even een berichtje terug. Ik wil vooral dat je de juiste keuze maakt. Of dat nu met ons is of ergens anders, ik denk graag even mee.'),
     offerteKaart('Jouw prijsindicatie'),
-    knop('Bekijk je prijsindicatie', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+    knop('Bekijk je prijsindicatie', '{{ person.sonty_offerte_link }}'),
     veelgevraagd([FAQ_PRIJS, FAQ_LEVERTIJD, FAQ_AANPASSEN]),
     review(...REVIEW_ROLLUIK),
     cijfers(),
@@ -651,7 +651,7 @@ SJABLONEN['sonty-herinnering-2'] = mail({
       'Mis je informatie die de keuze makkelijker maakt?',
     ], 'Eén berichtje is genoeg, dan zoek ik het voor je uit. Zonder verplichting, en ik blijf je er niet mee achtervolgen.'),
     offerteKaart('Jouw prijsindicatie'),
-    knop('Bekijk je prijsindicatie', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+    knop('Bekijk je prijsindicatie', '{{ person.sonty_offerte_link }}'),
     showroom(),
     veelgevraagd([FAQ_SHOWROOM, FAQ_INMETEN, FAQ_VERDER]),
     review(...REVIEW_ALLES),
@@ -668,7 +668,7 @@ SJABLONEN['sonty-akkoord'] = mail({
     offerteKaart(),
     stappen(['&#10003;', 'Je akkoord is binnen', 'Gedaan. Je hoeft even niets te doen.']),
     veelgevraagd([FAQ_LEVERTIJD, ['Wanneer betaal ik?', 'Pas na het inmeten, als de definitieve offerte klopt. De levertijd begint te lopen vanaf de aanbetaling.'], FAQ_AANPASSEN]),
-    knop('Bekijk je offerte nog eens', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+    knop('Bekijk je offerte nog eens', '{{ person.sonty_offerte_link }}'),
     garantie(),
     review(...REVIEW_TRAJECT),
     cijfers(),
@@ -699,7 +699,7 @@ SJABLONEN['sonty-afsluiter'] = mail({
   intro: 'Dit is mijn laatste berichtje over deze offerte, beloofd. Ik hoor het graag als je nog verder wilt. Zo niet, dan sluit ik hem en heb je er geen omkijken meer naar.',
   blokken: [
     offerteKaart(),
-    knop('Ja, ik wil verder', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+    knop('Ja, ik wil verder', '{{ person.sonty_offerte_link }}'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
       <tr><td style="padding:20px 22px;${F};">
         <div style="color:${M.tekst};font-size:15px;font-weight:700;">Of laat gewoon even weten dat het niet doorgaat</div>
@@ -734,7 +734,7 @@ function maakReactivering1({ tpl, foto: fotoBestand, alt, caption, rev }) {
     blokken: [
       beeld(slotFoto(tpl, 'hero', fotoBestand), alt, caption),
       offerteKaart(),
-      knop('Bekijk je offerte van toen', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+      knop('Bekijk je offerte van toen', '{{ person.sonty_offerte_link }}'),
       `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
         <tr><td style="padding:20px 22px;${F};">
           <div style="color:${M.tekst};font-size:15px;font-weight:700;">Let op: de prijs is van toen</div>
@@ -789,7 +789,7 @@ SJABLONEN['sonty-bouwvak'] = mail({
   intro: 'De vakantie is voorbij en de klusplannen komen weer op tafel. Voor de zomer vroeg je een offerte bij ons aan. Die staat er nog, dus ik pak hem er even bij.',
   blokken: [
     offerteKaart(),
-    knop('Bekijk je offerte', '{{ person.sonty_offerte_link|default:"https://www.sonty.nl/offerte" }}'),
+    knop('Bekijk je offerte', '{{ person.sonty_offerte_link }}'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:12px;">
       <tr><td style="padding:20px 22px;${F};">
         <div style="color:${M.tekst};font-size:15px;font-weight:700;">Waarom september een slim moment is</div>

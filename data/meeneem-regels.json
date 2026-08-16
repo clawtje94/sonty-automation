@@ -77,6 +77,9 @@
     "^(breedte|hoogte|diepte|oppervlakte)\\b",
     "\\btussen\\s+\\d+\\s*mm",
     "^inmeten",
-    "\\?\\s*$"
+    "\\?\\s*$",
+    "extra info",
+    "valse vensterbank",
+    "onderlat"
   ]
 }

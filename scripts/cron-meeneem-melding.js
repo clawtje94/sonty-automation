@@ -230,6 +230,32 @@ function productenUitOmschrijving(omschrijving) {
   return r ? r[1].split(',').map((s) => s.trim()).filter(Boolean) : [];
 }
 
+/**
+ * De Gripp-regels die de Outlook→Planado-sync al in de opdracht heeft gezet:
+ *
+ *   Gripp: 6463
+ *   IN TE METEN:
+ *   - 1x Roma Zipscreen — Onderlat: Design — Somfy IO motor
+ *
+ * Daimy 16-08: "je kunt toch in Gripp kijken, iedereen heeft een Gripp-nummer of
+ * offertenummer, want anders gaan we er niet meten." Klopt, en het staat er al in — dus
+ * geen enkele extra Gripp-call nodig. Dit is de bron voor de 7 op 14 afspraken van
+ * morgen die uit Outlook komen en geen RP-koppeling hebben.
+ */
+function productenUitGripp(omschrijving) {
+  const blok = (omschrijving || '').split(/^IN TE METEN:$/im)[1];
+  if (!blok) return [];
+  return blok.split('\n')
+    .map((r) => r.trim())
+    .filter((r) => r.startsWith('-'))
+    .map((r) => r.replace(/^-\s*/, ''))
+    .filter(Boolean)
+    .map((regel) => ({ naam: regel.split('—')[0].replace(/^\d+x\s*/, '').trim(), regel }));
+}
+
+/** Het Gripp-nummer uit de opdracht, puur om in de log te kunnen zien waar het vandaan komt. */
+const grippNummer = (omschrijving) => ((omschrijving || '').match(/^Gripp:\s*(\d+)/im) || [])[1] || null;
+
 // ── Planado ─────────────────────────────────────────────────────────────────
 // De melding hoort in Planado, niet in Outlook (Daimy 16-08: "het moet in Planado hè,
 // niet in mijn agenda"). Planado is de agenda waar de inmeter in werkt.
@@ -307,17 +333,28 @@ async function main() {
     const adres = job.address?.formatted || omschrijving.split('\n')[1] || '';
     const rpItemId = (job.external_id || '').startsWith('rp-') ? job.external_id.slice(3) : null;
 
-    let lead = rpItemId ? await rpLead(rpItemId) : null;
-    if (!lead) {
-      const opNaam = await leadOpNaam(naam);
-      if (opNaam) lead = await leesUitItem(opNaam);
+    // Volgorde van bronnen, allemaal "wat gaan we daar meten":
+    //  1. de Gripp-regels die al in de opdracht staan (afspraken uit Outlook),
+    //  2. de RP-offerte via de rp-koppeling (afspraken die de bot zelf boekte),
+    //  3. de RP-offerte via de klantnaam.
+    // Nooit de leadtekst: dat is de wenslijst van de klant, niet wat we gaan meten.
+    let producten = productenUitGripp(omschrijving);
+    let bron = producten.length ? 'gripp ' + (grippNummer(omschrijving) || '?') : null;
+    let lead = null;
+    if (!producten.length) {
+      lead = rpItemId ? await rpLead(rpItemId) : null;
+      if (!lead) {
+        const opNaam = await leadOpNaam(naam);
+        if (opNaam) lead = await leesUitItem(opNaam);
+      }
+      producten = lead?.producten || [];
+      if (producten.length) bron = 'rp-offerte';
     }
-    const producten = lead?.producten || [];
     if (!producten.length) {
       // Zichtbaar houden: hier weten we niet wát er gemeten wordt, dus geen melding.
       // Stil overslaan zou betekenen dat een raamdeco-inmeting ongemerkt wegvalt.
       onbekend.push(`${nlDatum(job.scheduled_at)} ${uuidNaarNaam[j.assignee.worker_uuid]}: ${naam} `
-        + `(${!lead ? 'geen lead gevonden' : lead.status || 'geen offerte'})`);
+        + `(geen Gripp-regels in de opdracht en ${!lead ? 'geen lead gevonden' : lead.status || 'geen offerte'})`);
       continue;
     }
     const opmerking = lead?.opmerking
@@ -335,7 +372,7 @@ async function main() {
 
     const sleutel = `${inmeter}|${afspraakDatum}`;
     (perDag[sleutel] = perDag[sleutel] || []).push({
-      naam, adres, aankomst: job.scheduled_at, vanDeZaak, buiten, opmerking, klantOpmerkingen, jobUuid: j.uuid,
+      naam, adres, aankomst: job.scheduled_at, vanDeZaak, buiten, opmerking, klantOpmerkingen, jobUuid: j.uuid, bron,
     });
   }
 
@@ -362,7 +399,7 @@ async function main() {
     if (alGezet && alGezet.vinger === vinger && staatErAl) continue;
 
     console.log(`  ${staatErAl ? '~' : '+'} ${moment.datum} ${moment.van} → ${onderwerp}`);
-    for (const a of afspraken) console.log(`      ${nlTijd(a.aankomst)} ${a.naam}: ${a.vanDeZaak.join(', ') || '(alleen opmerking)'}`);
+    for (const a of afspraken) console.log(`      ${nlTijd(a.aankomst)} ${a.naam} [${a.bron}]: ${a.vanDeZaak.join(', ')}`);
     if (!EXECUTE) { gezet.push({ inmeter, moment, onderwerp }); continue; }
 
     const body = meldingBody({ inmeter, workerUuid: ROOSTER[inmeter].uuidPlanado, start, onderwerp, tekst });
@@ -413,5 +450,5 @@ if (require.main === module) main().catch((e) => { console.error(e.message); pro
 
 module.exports = {
   meldMoment, splitsProducten, bouwDagMelding, nlNaarUtc, nlDatum, nlDagNaam,
-  productenUitOmschrijving, meldingBody, extIdVoor,
+  productenUitOmschrijving, productenUitGripp, grippNummer, meldingBody, extIdVoor, nlTijd,
 };

@@ -7,17 +7,16 @@
 // "als het los van buiten zonwering is, moet hij in ÉÉN opmerking in zijn agenda weten
 // wat er de dag erna ingemeten moet worden, zodat hij dat op de zaak kan halen."
 //
+// De melding staat in PLANADO, niet in Outlook (Daimy 16-08: "het moet in Planado hè,
+// niet in mijn agenda"). Planado is de agenda waar de inmeter zelf in werkt.
+//
 // Drie keuzes die niet vanzelf spreken:
-//  1. Eén blok per dag, niet per klant. Hij haalt in één keer alles op bij de zaak.
+//  1. Eén melding per dag, niet per klant. Hij haalt in één keer alles op bij de zaak.
 //  2. De regel is omgekeerd: we herkennen BUITENzonwering en melden al het andere.
 //     Een lijst met binnen-producten verzinnen loopt altijd achter (de eerste versie
 //     miste "Raamdecoratie", precies het hoofdgeval). Onbekend product = wel melden.
 //  3. "De dag ervoor" bestaat niet altijd: Joey werkt geen woensdag en vrijdag. Dus
 //     zijn LAATSTE WERKDAG vóór de afspraak, 15 min voor het einde van zijn rooster.
-//
-// Het blok krijgt GEEN deelnemers en staat op Vrij: met deelnemer maakt
-// cron-outlook-planado-sync.js er een spook-opdracht van, en op Bezet zou het een
-// plangat opvreten.
 //
 // Standaard DRY-RUN. --execute schrijft echt.
 const fs = require('fs');
@@ -37,12 +36,6 @@ const SALES_BACKLOG = 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7';
 
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 const DAGKORT = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
-// De inmeter komt als genodigde op het blok, precies zoals bij een gewone afspraak
-// (outlook-opties.js maakDefinitief). Dan staat het in ZIJN agenda met ZIJN eigen
-// standaardherinnering; de OWA-API laat IsReminderOn niet zetten (geprobeerd 16-08,
-// blijft false bij zowel Vrij als Bezet), dus dit is de manier om het echt te laten
-// piepen. De sync slaat het blok over op het onderwerp (NIET_KLUS).
-const INMETER_MAIL = { Joey: 'joey@sonty.nl', Sjoerd: 'sjoerd@sonty.nl' };
 const BUITEN = new RegExp(REGELS.buitenzonwering.join('|'), 'i');
 const GEEN_PRODUCT = new RegExp(REGELS.geenProduct.join('|'), 'i');
 
@@ -134,7 +127,7 @@ function bouwDagMelding({ inmeter, afspraakDatum, moment, afspraken }) {
     '',
     blokken.join('\n\n'),
     '',
-    '(automatisch gezet; dit blok staat op Vrij en blokkeert geen planning)',
+    '(automatisch gezet door de meeneem-melding, dit is geen klantafspraak)',
   ].join('\n');
 
   return { onderwerp: kop, tekst };
@@ -189,38 +182,38 @@ function productenUitOmschrijving(omschrijving) {
   return r ? r[1].split(',').map((s) => s.trim()).filter(Boolean) : [];
 }
 
-// ── Outlook ─────────────────────────────────────────────────────────────────
-function owaHeaders() {
-  const token = fs.readFileSync(path.join(__dirname, '.owa-token.txt'), 'utf8').trim();
-  return { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' };
-}
-async function kalenderId(OH) {
-  const cals = (await (await fetch('https://outlook.office.com/api/v2.0/me/calendars', { headers: OH })).json()).value || [];
-  const cal = cals.find((c) => c.Name === 'Sonty Montage');
-  if (!cal) throw new Error('kalender Sonty Montage niet gevonden');
-  return cal.Id;
-}
-async function zetBlok(OH, calId, { onderwerp, start, eind, tekst, deelnemers = [] }) {
-  const owaTijd = (d) => ({ DateTime: new Date(d).toISOString().slice(0, 19), TimeZone: 'UTC' });
-  const r = await fetch(`https://outlook.office.com/api/v2.0/me/calendars/${calId}/events`, {
-    method: 'POST', headers: OH,
-    body: JSON.stringify({
-      Subject: onderwerp,
-      Start: owaTijd(start), End: owaTijd(eind),
-      Body: { ContentType: 'Text', Content: tekst },
-      // Standaard GEEN deelnemers: anders maakt de Outlook→Planado-sync er een klus van.
-      Attendees: deelnemers.map((d) => ({ EmailAddress: { Address: d.mail, Name: d.naam }, Type: 'Required' })),
-      ShowAs: 'Free',
-      IsReminderOn: true,
-      ReminderMinutesBeforeStart: 0,
-      Categories: ['Meenemen'],
-    }),
+// ── Planado ─────────────────────────────────────────────────────────────────
+// De melding hoort in Planado, niet in Outlook (Daimy 16-08: "het moet in Planado hè,
+// niet in mijn agenda"). Planado is de agenda waar de inmeter in werkt.
+//
+// Het is een opdracht van 15 min zonder werkbon-sjabloon, met het type "default" zodat
+// hij niet meetelt als inmeet- of montageafspraak. external_id "meeneem-<wie>-<dag>"
+// maakt hem herkenbaar: cron-outlook-planado-sync.js slaat hem daarop over, anders zou
+// die er een Bookings-afspraak van maken met bevestigingsmail naar een niet-bestaande klant.
+const JOBTYPE_DEFAULT = '1f11c802-6337-6970-9d06-7e73cee772e4';
+const ZAAK_ADRES = 'Frijdastraat 8F, 2288 EX Rijswijk';
+// Melden aan de inmeter mag hier juist wél: dit ís de melding.
+const PH_SCHRIJF = { ...PH, 'Content-Type': 'application/json', 'X-Planado-Notify-Assignees': 'true' };
+
+const extIdVoor = (inmeter, afspraakDatum) => `meeneem-${inmeter.toLowerCase()}-${afspraakDatum}`;
+
+async function planadoSchrijf(ep, body, methode = 'POST') {
+  const r = await fetch('https://api.planadoapp.com/v2' + ep, {
+    method: methode, headers: PH_SCHRIJF, body: body ? JSON.stringify(body) : undefined,
   });
-  if (!r.ok) throw new Error('Outlook-blok aanmaken: HTTP ' + r.status + ' ' + (await r.text()).slice(0, 120));
-  return (await r.json()).Id;
+  if (!r.ok) throw new Error(`Planado ${methode} ${r.status}: ${(await r.text()).slice(0, 140)}`);
+  return r.status === 204 ? {} : r.json();
 }
-async function verwijderBlok(OH, id) {
-  try { await fetch('https://outlook.office.com/api/v2.0/me/events/' + id, { method: 'DELETE', headers: OH }); } catch { /* al weg */ }
+
+function meldingBody({ inmeter, workerUuid, start, onderwerp, tekst }) {
+  return {
+    job_type: { uuid: JOBTYPE_DEFAULT },
+    description: `${onderwerp}\n\n${tekst}`,
+    address: { formatted: ZAAK_ADRES },
+    scheduled_at: new Date(start).toISOString(),
+    scheduled_duration: { minutes: REGELS.duurMin },
+    assignee: { worker: { uuid: workerUuid } },
+  };
 }
 
 // ── hoofdlus ────────────────────────────────────────────────────────────────
@@ -234,12 +227,18 @@ async function main() {
 
   const vandaag = nlDatum(new Date());
   const grens = nlDatum(new Date(Date.now() + REGELS.dagenVooruit * 86400000));
-  const jobs = (await planadoJobs()).filter((j) => {
+  const alleJobs = await planadoJobs();
+  // Meldingen die er al staan, zodat we ze bijwerken in plaats van dubbel zetten.
+  const bestaand = {};
+  for (const j of alleJobs) if ((j.external_id || '').startsWith('meeneem-')) bestaand[j.external_id] = j;
+  const jobs = alleJobs.filter((j) => {
     if (!j.scheduled_at || !uuidNaarNaam[j.assignee?.worker_uuid]) return false;
+    if ((j.external_id || '').startsWith('meeneem-')) return false;
     const d = nlDatum(j.scheduled_at);
     return d > vandaag && d <= grens;
   });
-  console.log(`${jobs.length} opdracht(en) van inmeters in de komende ${REGELS.dagenVooruit} dagen`);
+  console.log(`${jobs.length} opdracht(en) van inmeters in de komende ${REGELS.dagenVooruit} dagen`
+    + `, ${Object.keys(bestaand).length} meeneem-melding(en) staan er al`);
 
   // 1. per afspraak uitzoeken wat er speelt
   const perDag = {}; // "inmeter|datum" → afspraken
@@ -276,7 +275,7 @@ async function main() {
 
   // 2. per inmeter per dag één blok
   const gezet = [];
-  const levendeSleutels = new Set(Object.keys(perDag));
+  const gebruikteExtIds = new Set();
   for (const [sleutel, afspraken] of Object.entries(perDag)) {
     const [inmeter, afspraakDatum] = sleutel.split('|');
     afspraken.sort((a, b) => new Date(a.aankomst) - new Date(b.aankomst));
@@ -289,41 +288,49 @@ async function main() {
 
     const { onderwerp, tekst } = bouwDagMelding({ inmeter, afspraakDatum, moment, afspraken });
     const start = nlNaarUtc(moment.datum, moment.van);
-    const eind = nlNaarUtc(moment.datum, moment.tot);
+    const extId = extIdVoor(inmeter, afspraakDatum);
+    gebruikteExtIds.add(extId);
     const vinger = JSON.stringify({ start: +start, onderwerp, tekst });
-    const bestaand = state.blokken[sleutel];
-    if (bestaand && bestaand.vinger === vinger) continue;
+    const alGezet = state.blokken[sleutel];
+    const staatErAl = bestaand[extId];
+    if (alGezet && alGezet.vinger === vinger && staatErAl) continue;
 
-    console.log(`  ${bestaand ? '~' : '+'} ${moment.datum} ${moment.van} → ${onderwerp}`);
+    console.log(`  ${staatErAl ? '~' : '+'} ${moment.datum} ${moment.van} → ${onderwerp}`);
     for (const a of afspraken) console.log(`      ${nlTijd(a.aankomst)} ${a.naam}: ${a.vanDeZaak.join(', ') || '(alleen opmerking)'}`);
     if (!EXECUTE) { gezet.push({ inmeter, moment, onderwerp }); continue; }
 
-    const OH = owaHeaders();
-    const calId = await kalenderId(OH);
-    if (bestaand?.eventId) await verwijderBlok(OH, bestaand.eventId);
-    const eventId = await zetBlok(OH, calId, {
-      onderwerp, start, eind, tekst,
-      deelnemers: INMETER_MAIL[inmeter] ? [{ mail: INMETER_MAIL[inmeter], naam: inmeter }] : [],
-    });
-    state.blokken[sleutel] = { eventId, vinger, melddag: moment.datum, afspraakDatum, inmeter, gezetOp: new Date().toISOString() };
+    const body = meldingBody({ inmeter, workerUuid: ROOSTER[inmeter].uuidPlanado, start, onderwerp, tekst });
+    let jobUuid;
+    if (staatErAl) {
+      jobUuid = staatErAl.job_uuid || staatErAl.uuid;
+      await planadoSchrijf('/jobs/' + jobUuid, body, 'PATCH');
+    } else {
+      const job = await planadoSchrijf('/jobs', { ...body, external_id: extId });
+      jobUuid = job.job_uuid || job.uuid;
+    }
+    await wacht(2600);
+    state.blokken[sleutel] = { jobUuid, extId, vinger, melddag: moment.datum, afspraakDatum, inmeter, gezetOp: new Date().toISOString() };
     gezet.push({ inmeter, moment, onderwerp });
   }
 
-  // 3. afspraak verzet of afgezegd? Dan hoort het blok ook weg.
-  for (const [sleutel, b] of Object.entries(state.blokken)) {
-    if (levendeSleutels.has(sleutel) || b.afspraakDatum <= vandaag) continue;
-    console.log(`  - blok weg: ${sleutel} (geen afspraken meer die dag)`);
+  // 3. afspraak verzet of afgezegd? Dan hoort de melding ook weg. Bron is Planado zelf,
+  //    niet het state-bestand: een melding die met de hand is aangemaakt of waarvan de
+  //    state kwijt is, wordt zo alsnog opgeruimd.
+  for (const [extId, j] of Object.entries(bestaand)) {
+    if (gebruikteExtIds.has(extId) || !j.scheduled_at || nlDatum(j.scheduled_at) < vandaag) continue;
+    console.log(`  - melding weg: ${extId} (geen afspraken meer die dag)`);
     if (!EXECUTE) continue;
-    await verwijderBlok(owaHeaders(), b.eventId);
-    delete state.blokken[sleutel];
+    await planadoSchrijf('/jobs/' + (j.job_uuid || j.uuid), null, 'DELETE').catch((e) => console.log('    ! ' + e.message));
+    await wacht(2600);
+    for (const [s, b] of Object.entries(state.blokken)) if (b.extId === extId) delete state.blokken[s];
   }
 
   if (EXECUTE) fs.writeFileSync(STATE, JSON.stringify(state, null, 2));
-  console.log(`\n${gezet.length} dagblok(ken) ${EXECUTE ? 'gezet' : 'zou ik zetten'}`);
+  console.log(`\n${gezet.length} meeneem-melding(en) ${EXECUTE ? 'in Planado gezet' : 'zou ik in Planado zetten'}`);
 
   if (EXECUTE && gezet.length && REGELS.ookNaarTelegram) {
     const { planningTelegram } = require('./lib/telegram-planning.js');
-    await planningTelegram('🧰 Meeneem-melding in de agenda gezet:\n'
+    await planningTelegram('🧰 Meeneem-melding in Planado gezet:\n'
       + gezet.map((g) => `- ${g.moment.datum} ${g.moment.van}: ${g.onderwerp}`).join('\n'));
   }
 }
@@ -333,5 +340,5 @@ if (require.main === module) main().catch((e) => { console.error(e.message); pro
 
 module.exports = {
   meldMoment, splitsProducten, bouwDagMelding, nlNaarUtc, nlDatum, nlDagNaam,
-  productenUitOmschrijving, owaHeaders, kalenderId, zetBlok,
+  productenUitOmschrijving, meldingBody, extIdVoor,
 };

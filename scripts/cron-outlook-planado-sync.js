@@ -345,6 +345,10 @@ async function main() {
       const naam = NAAM_VAN_UUID[j.assignee?.worker_uuid];
       if (!naam) continue;
       if ((j.external_id || '').startsWith('ol-')) continue;
+      // Meeneem-meldingen (cron-meeneem-melding.js) zijn herinneringen voor de inmeter
+      // zelf, geen klantafspraak. Zonder deze uitzondering maakt de heal hieronder er
+      // een Bookings-afspraak van, mét bevestigingsmail naar een klant die niet bestaat.
+      if ((j.external_id || '').startsWith('meeneem-')) continue;
       const van = Date.parse(j.scheduled_at);
       if ([...evStarts].some((sMs) => Math.abs(sMs - van) < 60000)) continue;
       if (!EXECUTE) { console.log(`  zou agenda-afspraak maken voor #${j.serial_no} ${j.scheduled_at}`); continue; }

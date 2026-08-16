@@ -1,5 +1,23 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-16)
 
+## 16-08 avond: TEKENBONUS-CAMPAGNE — BESLUITEN + BLOK 1 GEBOUWD
+- Besluiten Daimy: staffel 100/250/500 OK; bonus ONDERAAN de offerte (boven het totaal,
+  onder de 15%-actieregel); deadline wordt A/B-GETEST (arm 2 dagen vs arm 4 dagen, plus
+  controle-arm gewone reminder zonder bonus); testoplevering op zijn eigen offerte
+  20266757 goedgekeurd na 3 iteraties (les: 15% groepskorting ombouwen naar zichtbare
+  euroregel, anders toont de bonus 588 i.p.v. 500; bonusregel exact -500, totaal klopt).
+- BLOK 1 LIVE in scripts/tekenbonus/: mag-benaderd.js (V9-guard, 6 lagen, fail-closed,
+  klant-breed op email/tel/adres) + selectie.js (status Offerte-verstuurd/AI-verstuurd,
+  30-60 dagen, niet gearchiveerd → nu 1.706 kandidaten). GETEST tegen echte dossiers:
+  Edwin/Kirsten/Victor/Barbara/testdossier allemaal geweigerd (test-mag-benaderd.js),
+  steekproef 15 echte kandidaten allemaal terecht groen, laag 6 (eenmaligheid via
+  data/tekenbonus-log.json) geïsoleerd bewezen, lagen 3/5 gedekt door klant-brede match.
+- NOG TE BOUWEN (blok 2): offerte-prep (verlengen + staffelregel + actie→euroregel,
+  idempotent), mail-runner met A/B-verdeling (3 armen, round-robin), opruimen na
+  deadline (bonusregel eruit + actie terug naar groupDiscount — Sunny's guard checkt
+  groupDiscount 15%!), meting per arm, Klaviyo-sjablonen (afzender Jaimy, reply
+  aanvragen@). ALLES in testmodus: niks naar klanten tot Daimy expliciet "aan" zegt.
+
 ## 16-08: WINTERONDERZOEK (doel Daimy: winter winstgevend i.p.v. verlies) — RAPPORT KLAAR
 - Anatomie: okt-dec 2025 marge 108/72/45k vs kosten 118/106/91k (sep-dec samen -121k).
   Oorzaak = volume: instroom zakt van 1.250-1.500 naar 365-380 offertes/mnd (factor 4);

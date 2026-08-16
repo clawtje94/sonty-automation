@@ -50,6 +50,18 @@
   handmatig gepland buiten de aanbod-flow om — Outlook-afspraak Joey ma 11-08 08:00
   (outlook-planado-sync.log r312), inmeten heeft al plaatsgevonden; item daarom
   terecht handmatig op Afgerond gezet op 06-08.
+- AANVULLING 16-08 avond (vraag Daimy "waarom geen datum/inmeter/1tje"): de 7 akkoorden
+  waren winkelklanten die planner Jorren zelf in Outlook inplande, buiten de aanbod-flow
+  om; sheet-koppeling (lib/sheet-inplannen.js: 1tje + inmeetdatum + inmeter) kon nergens
+  heen omdat de rij ontbrak. Nu handmatig ingevuld op basis van Outlook-sync/boekingen:
+  Edwin 18-8 Joey, Jolanda 15-9 Joey, Margreet 27-8 Joey, Droog 12-8 Sjoerd, Ad van
+  Gorkom 17-8 Sjoerd. Barbara ging vandaag al vanzelf goed (rij bestond inmiddels).
+  Lisa Terreehorst: 1tje gezet maar GEEN afspraak vindbaar (Outlook-sync kijkt pas vanaf
+  ~05-08; zij tekende 18-07) — Jorren moet checken of zij ingepland/ingemeten is (V3).
+  Let op: "Afgerond" wordt door gripp-invullen gezet (getekend → Gripp-offerte → Afgerond)
+  en zegt niets over inmeten. Openstaand voorstel V4: outlook-planado-sync na het
+  aanmaken van een inmeet-job ook schrijfInplanning laten aanroepen, dan is Jorrens
+  handmatige route ook gedekt.
 - RESTGAT (klein, bekend): oud item + nieuwe offerte die nooit beweegt komt pas in de
   sheet zodra het dossier beweegt (tekening/boeking). Waarom RP sommige aanvragen met
   3 varianten direct genereert en OC overslaat = RP-kant, niet vast te stellen vanaf hier.

@@ -1,4 +1,27 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-15)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-16)
+
+## 16-08: MONTEURS NAAR PLANADO (fase 1 van "Claude doet de montageplanning")
+- Doel Daimy (/goal): monteurs gaan Planado gebruiken, alles moet er goed in staan
+  mét werkbon. Eindbeeld (Daimy): "nu plant een mens zonder rekening te houden met
+  producten; straks doe jij die planning" — fase 2 = montageduur per producttype
+  leren uit historie, fase 3 = autonome montageplanner zoals de inmeetplanner.
+- ANALYSE (622 montages, 120 dagen Outlook): vaste naamvorm "Montage Sonty - klant",
+  team als attendee, start 08:00, rug-aan-rug (reistijd zit IN de duur), 1-3 klussen
+  per teamdag, gem 7,3u/dag, duur = handmatige inschatting (nergens productgestuurd).
+- GEVONDEN: Planado had NUL montage-opdrachten; werkbon-sjabloon "Montage afspraak
+  particulier" (uuid 1f11c802-6613-6d00-...) bestond al met 10 rapportvelden maar was
+  nooit gebruikt. Sjabloon zakelijk: 1f11c802-6675-6110-...
+- GEBOUWD (6fa6143): cron-outlook-planado-sync.js syncot nu ook montages → juiste
+  team, werkbon-sjabloon, Gripp-productregels (TE MONTEREN), custom fields Product
+  type/Bijzonderheden. ACHTER SCHAKELAAR: pas actief met data/montage-sync-aan (of
+  --montage los). Dry-run 16-08: 43 montages klaar om te maken, 0 fouten.
+- ECHTE BUSSEN (Daimy 16-08): Marvin+Moa, Kevin+Tygo, Yudi+Nick, Marvin+Bart,
+  Frenky+Dennis. Alleen Yudi+Nick heeft een kloppend Planado-account; "Kevin Gibson
+  + Marvin" klopt niet meer. In MONTEURS-mapping staan daarom alleen eenduidige
+  namen (Yudi/Nick/Jorren/Sjoerd).
+- WACHT OP DAIMY: V1 accounts per bus aanmaken/hernoemen (betaalde seats) + mail-
+  adressen; V2 hoe onderscheidt de agenda de twee Marvins (Moa vs Bart). Daarna:
+  team informeren → touch ~/sonty/data/montage-sync-aan → 43+ opdrachten gaan erin.
 
 ## 15-08 (avond): ÉÉN SYSTEMEN-REGISTER + BEWERKBAAR DASHBOARD + ZELFHERSTEL
 - Opdracht Daimy (/goal): "veel te veel losse shit" — alles in kaart, één bewerkbaar

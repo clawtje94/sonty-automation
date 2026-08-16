@@ -27,43 +27,41 @@
 ## 16-08: MEENEEM-MELDING VOOR DE INMETER (gebouwd, staat nog UIT)
 - Opdracht Daimy: "als er opmerkingen in de offerte staan of het is binnen raamdeco wat
   gemeten moet worden, dan moet de inmeter de dag ervoor aan het eind van de dag een
-  melding in zijn agenda krijgen dat hij dat mee moet nemen."
-- Aangescherpt door Daimy: "als het los van buiten zonwering is, moet hij in ÉÉN opmerking
-  in zijn agenda weten wat er de dag erna ingemeten moet worden, zodat hij dat op de zaak
-  kan halen" + "wij zetten in de offerte wat er gemeten moet worden, dus bijvoorbeeld
-  plissé en blend".
+  melding krijgen dat hij dat mee moet nemen", aangescherpt tot: "als het los van buiten
+  zonwering is, in EEN opmerking, zodat hij dat op de zaak kan halen" en "wij zetten in de
+  offerte wat er gemeten moet worden, dus bijvoorbeeld plisse en blend".
+- **De melding staat in PLANADO, niet in Outlook** (Daimy: "het moet in Planado he, niet in
+  mijn agenda"). Eerst als Outlook-agendablok gebouwd, daarna omgezet.
 - GEBOUWD: `scripts/cron-meeneem-melding.js` + `data/meeneem-regels.json` + plist
   `nl.sonty.meeneem-melding` (07:30 en 12:30, NOG NIET GELADEN). Werking: inmeetopdrachten
-  van de komende 14 dagen uit Planado, ÉÉN blok per inmeter per dag met alle adressen van
-  die dag eronder, op de LAATSTE WERKDAG vóór de afspraak (Joey werkt geen wo/vr),
-  14:45-15:00, in de agenda Sonty Montage.
+  van de komende 14 dagen uit Planado, EEN melding per inmeter per dag met alle adressen
+  van die dag eronder, als Planado-opdracht van 15 min om 14:45 op de LAATSTE WERKDAG voor
+  de afspraak (Joey werkt geen wo/vr), type default, adres = zaak Rijswijk,
+  X-Planado-Notify-Assignees: true. external_id `meeneem-<wie>-<dag>` = idempotent
+  (bestaat -> PATCH, dag leeg -> DELETE; opruimen kijkt naar Planado zelf, niet naar state).
 - REGEL IS OMGEKEERD: buitenzonwering herkennen en al het andere melden. Een lijst met
   binnen-producten verzinnen loopt altijd achter (v1 miste "Raamdecoratie"). Onbekend
-  product = wél melden.
-- Producten komen uit het OFFERTEdocument (leesOfferte → "Plissé 1200×1400"), lead is het
+  product = wel melden.
+- Producten komen uit het OFFERTEdocument (leesOfferte -> "Plisse 1200x1400"), lead is het
   vangnet. Er wordt op de product-NAAM getoetst, niet op de hele regel: anders viel
-  "3x Plissé — koordbediening" weg op het woord bediening.
-- De inmeter staat als genodigde op het blok, zodat het in zijn eigen agenda komt met zijn
-  eigen herinnering. De OWA-API weigert IsReminderOn te zetten (getest op Vrij én Bezet,
-  blijft false). Blok staat op Vrij; `NIET_KLUS` in cron-outlook-planado-sync sluit
-  MEENEMEN/LET OP/VOORBEELD uit zodat er geen spookopdracht van komt (getest).
-- VOORBEELD voor Daimy staat in zijn agenda op ma 17-08 14:45 (event via joey-OWA,
-  genodigde daimy@sonty.nl).
-- ONDERWEG GEVONDEN: het veld `Opmerking:` uit de RP-lead ging nergens heen, niet naar de
-  Planado-opdracht en niet naar de agenda. 135 van 1000 leads hebben er een (bijv. "graag
-  ons huidige zonnescherm demonteren"). Staat nu wel in de opdracht-omschrijving.
-- OOK GEVONDEN: "Waarom ROMA?" uit het offertedocument werd als PRODUCT geparsed. Gaf
-  valse meeneem-meldingen (Verkerk, Monique Bijnen) én telde mee in de inmeetduur die de
-  planner rekent. Gefixt in `inmeten-planner-lees.js` (naam die op ? eindigt = kopje);
-  `data/rp-offerte-cache.json` ter plekke opgeschoond, geen RP-burst.
-- GEMETEN: alle 47 productregels uit 1000 RP-leads handmatig nagelopen — alleen
-  "Raamdecoratie", "Shutters" en "Gordijnen" vallen onder van-de-zaak. 14% van de leads
-  zou een melding geven (135 opmerking, 8 product). Dry-run over 82 echte
-  inmeetopdrachten → 3 dagblokken. Roostergevallen Joey/Sjoerd, zomer-/wintertijd en het
-  NIET_KLUS-filter apart getest.
-- OPEN bij Daimy: V3 tellen horren mee als van-de-zaak (plissé-hordeur Barbara Weeink)?
-  En akkoord op het voorbeeld. Daarna plist laden, --execute aanzetten en registreren in
-  data/systemen-register.json.
+  "3x Plisse - koordbediening" weg op het woord bediening.
+- VAL DICHTGEZET: `cron-outlook-planado-sync.js` maakt van elke Planado-opdracht zonder
+  agenda-afspraak een Bookings-afspraak. Zonder uitzondering had dat een bevestigingsmail
+  naar een niet-bestaande klant gestuurd. external_id `meeneem-*` wordt nu overgeslagen;
+  NIET_KLUS sluit ook MEENEMEN/LET OP/VOORBEELD-onderwerpen uit (getest).
+- ONDERWEG GEVONDEN: (1) het veld `Opmerking:` uit de RP-lead ging nergens heen, 135 van
+  1000 leads hebben er een; staat nu in de Planado-opdracht. (2) "Waarom ROMA?" uit het
+  offertedocument werd als PRODUCT geparsed, gaf valse meldingen en telde mee in de
+  inmeetduur; gefixt in `inmeten-planner-lees.js`, cache ter plekke opgeschoond.
+- GEMETEN: alle 47 productregels uit 1000 RP-leads nagelopen (alleen Raamdecoratie,
+  Shutters en Gordijnen vallen onder van-de-zaak), 14% van de leads zou een melding geven,
+  dry-run over 83 echte inmeetopdrachten geeft 3 meldingen. Roostergevallen Joey/Sjoerd,
+  zomer-/wintertijd en het NIET_KLUS-filter apart getest.
+- VOORBEELD: Planado-opdracht #563 (16-08 14:30) op naam van Daimy, external_id
+  `meeneem-voorbeeld-daimy`. WEGGOOIEN bij livegang.
+- OPEN bij Daimy: V3 tellen horren mee als van-de-zaak (plisse-hordeur Barbara Weeink)?
+  V4 Sjoerd start/eindigt in Woerden en kan niet in Rijswijk langs. Daarna plist laden,
+  --execute aanzetten en registreren in data/systemen-register.json.
 
 ## 16-08: MONTEURS NAAR PLANADO (fase 1 van "Claude doet de montageplanning")
 - Doel Daimy (/goal): monteurs gaan Planado gebruiken, alles moet er goed in staan

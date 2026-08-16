@@ -2,7 +2,7 @@
 
 > GEGENEREERD uit `data/systemen-register.json` door `scripts/systemen-md-genereer.js`.
 > NIET hier bewerken: pas het register aan (of via sonty-website.vercel.app/admin/systemen)
-> en draai de generator. Laatst gegenereerd: 2026-08-15.
+> en draai de generator. Laatst gegenereerd: 2026-08-16.
 
 **Snel stoppen (kill-switch):** `touch ~/sonty/data/kill/<label>` — of de "zet uit"-knop op
 /admin/systemen. Hard stoppen: `launchctl bootout gui/501/<label>`; weer aan met
@@ -38,6 +38,7 @@ Telegram. cron-health-check.js (2x/dag) leest hetzelfde register.
 | `nl.sonty.markiezen` | Dagelijkse markiezen-taken (cron-markiezen.js). | 2x per dag | markiezen.log | log < 30u |
 | `nl.sonty.reminder-template` | Verstuurt de inmeet-herinnering zodra het goedgekeurde WhatsApp-template beschikbaar is. | elke 30 min | reminder-template.log | alleen geladen-check |
 | `nl.sonty.template-wachter` | Houdt in de gaten of nieuwe WhatsApp-templates door Meta zijn goedgekeurd en meldt dat. | elke 30 min | template-wachter.log | alleen geladen-check |
+| `nl.sonty.meeneem-melding` | Zet elke dag om 17:00 een Planado-melding klaar voor 18:00 vanavond: wat de inmeter morgen van de zaak mee moet nemen (binnen raamdecoratie, behang). Bron is de offerte, niet de leadtekst. | dagelijks 17:00 | meeneem-melding.log | log < 30u |
 
 ## Offertes & CRM
 
@@ -58,7 +59,7 @@ Telegram. cron-health-check.js (2x/dag) leest hetzelfde register.
 | `nl.sonty.keten-zelfcontrole` | Controleert elk uur 7 invarianten van de inmeet-keten: dubbele boeking, botsend aanbod, aanbod na boeking, stille klant, dood ticket, vergeten lead, verlopen zonder vervolg. | elk uur | keten-zelfcontrole.log | log < 3u |
 | `nl.sonty.aan-zet-watchdog` | Bewaakt of het laatste echte klantbericht onbeantwoord blijft (>2u), meldt dode gesprekken. | elk uur | aan-zet-watchdog.log | log < 3u |
 | `nl.sonty.credits-check` | Bewaakt de API-credits waar de AI-klantenservice op draait. | elke 2 uur | credits-check.log | log < 14u |
-| `nl.sonty.gesprek-lab` | Test dagelijks de gespreksafhandeling tegen scenario's zodat wijzigingen de bot niet slechter maken. | dagelijks 07:30 | gesprek-lab.log | log < 30u |
+| `nl.sonty.gesprek-lab` | Test dagelijks de gespreksafhandeling tegen echte scenario's. Exit 1 betekent: het lab vond gedragsafwijkingen om te beoordelen (rood is dan terecht, geen crash). | dagelijks 07:30 | gesprek-lab.log | log < 30u |
 | `nl.sonty.status-push` | Verzamelt elke 10 min de status van alle diensten uit dit register, herstart stille pollers, en pusht naar /admin/systemen. | elke 10 min | status-push.log | log < 1u |
 
 ## Rapportage
@@ -66,7 +67,7 @@ Telegram. cron-health-check.js (2x/dag) leest hetzelfde register.
 | Dienst | Doet | Ritme | Log | Bewaking |
 |---|---|---|---|---|
 | `nl.sonty.tickets-rapport` | Dagelijks 08:15 rapport hoeveel tickets de AI zelf afhandelde. | dagelijks 08:15 | tickets-rapport.log | log < 30u |
-| `nl.sonty.sonny-rapport` | Dagelijks 08:30 overzicht van de AI-klantenservicegesprekken naar Telegram. | dagelijks 08:30 | sonny-rapport.log | log < 26u |
+| `nl.sonty.sonny-rapport` | Dagelijks 08:30 overzicht van de AI-nachtgesprekken naar Telegram. Stuurt (en logt) alleen iets als de Sonny-avonddienst aan staat; die staat sinds juli UIT, dus een stille log is hier normaal. | dagelijks 08:30 | sonny-rapport.log | alleen geladen-check |
 | `nl.sonty.getekend-rapport` | Dagelijks overzicht getekende offertes + AI-resultaten. | dagelijks 21:00 | getekend-rapport.log | log < 30u |
 | `nl.sonty.qa-leren` | Destilleert dagelijks leerpunten uit QA-afkeuringen zodat de bot bijleert. | dagelijks 07:45 | qa-leren.log | log < 30u |
 | `nl.sonty.reviews-sync` | Haalt Google-reviews op en zet ze op de website. | 2x per dag | reviews-sync.log | log < 26u |
@@ -93,7 +94,7 @@ Telegram. cron-health-check.js (2x/dag) leest hetzelfde register.
 | `nl.sonty.feedback-processor` | Verwerkt de feedback-wachtrij. | elke 5 min | feedback.log | alleen geladen-check |
 | `nl.sonty.dummy4k` | Houdt een virtueel scherm actief voor browserwerk op de headless Mac. | permanent | – | alleen geladen-check |
 | `nl.sonty.dummy4k-resolution` | Zet de virtuele schermresolutie goed na een herstart. | bij boot | – | alleen geladen-check |
-| `nl.sonty.wachtlijst` | Bewust uitgezet (plist heeft .disabled-suffix). Staat hier zodat hij zichtbaar blijft. | uit | – | uitgeschakeld |
+| `nl.sonty.wachtlijst` | Bewust uitgezet (plist .disabled). Testbewerking via dashboard-keten 15-08 geslaagd. | uit | – | uitgeschakeld |
 
 ## Vaste afspraken
 - Nieuwe dienst? Registreer hem in `data/systemen-register.json` — dashboard én health-check

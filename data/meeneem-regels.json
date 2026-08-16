@@ -1,9 +1,9 @@
 {
   "bron": "Daimy 16-08: de melding gaat ALLEEN over spullen die op de zaak liggen — binnen raamdecoratie, behang, dat soort dingen. 'Niet de rest, want dat nemen we al allemaal mee': RAL-waaier, gereedschap en boormateriaal zitten al in de bus, dus een opmerking is geen aanleiding voor een melding. Horren hoeven er ook niet bij.",
-  "let_op": "De regel is OMGEKEERD: niet raden welke binnen-producten er bestaan, maar buitenzonwering en horren herkennen en al het andere melden. Een nieuw product dat niemand hier heeft ingevuld levert dus een melding op, en dat is de veilige kant. De melding staat altijd op de dag VOOR de afspraak om meldTijd (Daimy 16-08). Alleen producten uit de OFFERTE tellen, nooit uit de leadtekst: die is de wenslijst van de klant en zegt niet wat we gaan inmeten.",
+  "let_op": "De regel is OMGEKEERD: niet raden welke binnen-producten er bestaan, maar buitenzonwering en horren herkennen en al het andere melden. Een nieuw product dat niemand hier heeft ingevuld levert dus een melding op, en dat is de veilige kant. De melding staat altijd op de dag VOOR de afspraak om meldTijd (Daimy 16-08). Alleen producten uit de OFFERTE tellen, nooit uit de leadtekst: die is de wenslijst van de klant en zegt niet wat we gaan inmeten. dagenVooruit staat op 1: de melding wordt pas gezet voor de afspraken van de VOLGENDE dag, niet twee weken vooruit (Daimy 16-08: 'voor 18:00 de dag voordat ze het nodig hebben erin zetten').",
   "meldTijd": "18:00",
   "duurMin": 15,
-  "dagenVooruit": 14,
+  "dagenVooruit": 1,
   "ookNaarTelegram": true,
   "geenMeeneem": [
     "hor\\b",

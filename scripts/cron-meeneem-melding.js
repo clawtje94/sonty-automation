@@ -122,11 +122,9 @@ function bouwDagMelding({ inmeter, afspraakDatum, moment, afspraken }) {
   });
 
   const tekst = [
-    `Wat je ${wanneer} nodig hebt, vandaag nog ophalen op de zaak:`,
+    `Ophalen op de zaak, nodig voor ${wanneer}:`,
     '',
     blokken.join('\n\n'),
-    '',
-    '(automatisch gezet door de meeneem-melding, dit is geen klantafspraak)',
   ].join('\n');
 
   return { onderwerp: kop, tekst };
@@ -258,8 +256,10 @@ async function planadoSchrijf(ep, body, methode = 'POST') {
 function meldingBody({ inmeter, workerUuid, start, onderwerp, tekst }) {
   return {
     job_type: { uuid: JOBTYPE_DEFAULT },
-    description: `${onderwerp}\n\n${tekst}`,
-    address: { formatted: ZAAK_ADRES },
+    // De lijst staat ONDER HET ADRES, niet als opmerking in de opdracht (Daimy 16-08).
+    // De omschrijving blijft één regel, dat is wat hij in het overzicht ziet staan.
+    description: onderwerp,
+    address: { formatted: ZAAK_ADRES, description: tekst },
     scheduled_at: new Date(start).toISOString(),
     scheduled_duration: { minutes: REGELS.duurMin },
     assignee: { worker: { uuid: workerUuid } },

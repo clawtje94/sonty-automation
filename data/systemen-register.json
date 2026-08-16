@@ -1,521 +1,531 @@
 {
- "_uitleg": "DE bron van waarheid voor alle Sonty-automatisering. status-collect.js (dashboard), cron-health-check.js (alarm) en systemen-md-genereer.js (SYSTEMEN.md) lezen dit bestand. Bewerken kan hier of via sonty-website.vercel.app/admin/systemen (wijzigingen komen binnen 10 min terug in dit bestand). Velden: naam/functie (wat doet het), groep, ritme (tekst), log (bestandsnaam in logs/ of absoluut pad), maxUur (alarm als log ouder is; null = geen logbewaking), ks (kill-switch via data/kill/<label>), keten (welke keten het bij hoort), heartbeat {bestand, maxStilMin, zelfherstel} voor permanente pollers.",
- "bijgewerkt": "2026-08-15",
- "diensten": {
-  "nl.sonty.sonny": {
-   "naam": "AI-klantenservice WhatsApp",
-   "functie": "Beantwoordt als Jaimy actieve WhatsApp-gesprekken + whitelist, boekt/verzet showroomafspraken, maakt en wijzigt offertes.",
-   "groep": "Klantgericht",
-   "ritme": "permanent (poll ~30s)",
-   "log": "sonny-watch.log",
-   "maxUur": 1,
-   "ks": false,
-   "keten": "klantenservice"
-  },
-  "nl.sonty.email": {
-   "naam": "AI-klantenservice e-mail",
-   "functie": "Beantwoordt als Sunny open tickets op aanvragen@ + info@, escaleert naar Mens nodig.",
-   "groep": "Klantgericht",
-   "ritme": "permanent (elke 90s)",
-   "log": "email-daemon.log",
-   "maxUur": 1,
-   "ks": false,
-   "keten": "klantenservice"
-  },
-  "nl.sonty.trengo-bundel": {
-   "naam": "Trengo ticket-bundelaar",
-   "functie": "Voegt actieve tickets van hetzelfde contact op hetzelfde kanaal samen tot één gesprek.",
-   "groep": "Klantgericht",
-   "ritme": "elke 15 min",
-   "log": "trengo-bundel.log",
-   "maxUur": 2,
-   "ks": false,
-   "keten": "klantenservice"
-  },
-  "nl.sonty.opvolging-schaduw": {
-   "naam": "Offerte-opvolging (schaduw)",
-   "functie": "Berekent welke offerte-opvolging verstuurd zou worden (verstuurt niets), dagelijks 10:30 rapport.",
-   "groep": "Klantgericht",
-   "ritme": "elk uur",
-   "log": "opvolging.log",
-   "maxUur": 26,
-   "ks": false
-  },
-  "nl.sonty.inmeet-dashboard": {
-   "naam": "Inmeet-planner (30-min ronde)",
-   "functie": "Berekent beste inmeettijden per wachtende lead, publiceert het plan-dashboard, bewaakt de 24-uursklok van aanbiedingen.",
-   "groep": "Planning & orders",
-   "ritme": "elke 30 min",
-   "log": "inmeet-dashboard.log",
-   "maxUur": 2,
-   "ks": false,
-   "keten": "inmeten"
-  },
-  "nl.sonty.inmeet-verwerker": {
-   "naam": "Inmeet-verwerker (boeken)",
-   "functie": "Boekt gekozen aanbiedingen echt: Planado-opdracht, Outlook, Gripp, meetbon, sheet, bevestiging naar klant.",
-   "groep": "Planning & orders",
-   "ritme": "elke 5 min",
-   "log": "inmeet-verwerker.log",
-   "maxUur": 2,
-   "ks": false,
-   "keten": "inmeten"
-  },
-  "nl.sonty.inmeet-verzoeken": {
-   "naam": "Inmeet-verzoekdaemon (winkel)",
-   "functie": "Verwerkt dashboard-verzoeken direct: tijden rekenen, direct boeken, keuzelink sturen, verzetten, annuleren.",
-   "groep": "Planning & orders",
-   "ritme": "permanent (wachtrij)",
-   "log": "inmeet-verzoeken.log",
-   "maxUur": null,
-   "ks": false,
-   "keten": "inmeten"
-  },
-  "nl.sonty.aanbod-replies": {
-   "naam": "Aanbod-reactiemonitor",
-   "functie": "Leest klantreacties op keuzelinks (WhatsApp), boekt keuzes, vraagt nieuwe voorstellen aan bij ander-moment, remt pingpong af.",
-   "groep": "Planning & orders",
-   "ritme": "elke 3 min",
-   "log": "aanbod-replies.log",
-   "maxUur": 1,
-   "ks": false,
-   "keten": "inmeten"
-  },
-  "nl.sonty.meetbon-doorzetten": {
-   "naam": "Meetbon-doorzetter",
-   "functie": "Complete meetbon + betaalde aanbetalingsfactuur → bestelmail naar orders@ + Telegram, bon op doorgezet.",
-   "groep": "Planning & orders",
-   "ritme": "elk uur",
-   "log": "meetbon-doorzetten.log",
-   "maxUur": 3,
-   "ks": true,
-   "keten": "inmeten"
-  },
-  "nl.sonty.planning-mail": {
-   "naam": "Planning-mail naar sheet",
-   "functie": "Leest orders@/info@-mails en PDF-bijlagen, schrijft orders en leverdatums in de Planning-sheet; beheert het OWA-token dat meer diensten gebruiken.",
-   "groep": "Planning & orders",
-   "ritme": "elke 30 min",
-   "log": "planning-mail-daemon.log",
-   "maxUur": 2,
-   "ks": true,
-   "keten": "orders"
-  },
-  "nl.sonty.outlook-planado-sync": {
-   "naam": "Outlook → Planado sync",
-   "functie": "Zet nieuwe Outlook-afspraken door naar Planado-opdrachten.",
-   "groep": "Planning & orders",
-   "ritme": "elke 10 min",
-   "log": "outlook-planado-sync.log",
-   "maxUur": 2,
-   "ks": false,
-   "keten": "agenda"
-  },
-  "nl.sonty.planado-outlook": {
-   "naam": "Planado ↔ Outlook bewaking",
-   "functie": "Controleert dagelijks of alles wat in Planado staat ook in Outlook staat (en andersom), meldt gaten.",
-   "groep": "Planning & orders",
-   "ritme": "dagelijks 07:45",
-   "log": "planado-outlook.log",
-   "maxUur": 30,
-   "ks": false,
-   "keten": "agenda"
-  },
-  "nl.sonty.planado-shifts": {
-   "naam": "Planado-rooster zetten",
-   "functie": "Zet de beschikbaarheid van de inmeters in Planado vanuit het echte rooster + vakanties uit Outlook.",
-   "groep": "Planning & orders",
-   "ritme": "dagelijks 07:45",
-   "log": "planado-shifts.log",
-   "maxUur": 30,
-   "ks": false,
-   "keten": "agenda"
-  },
-  "nl.sonty.gripp-verrijken": {
-   "naam": "Planado-opdrachten verrijken",
-   "functie": "Zet Gripp-offerte-informatie in de Planado-inmeetopdrachten zodat de inmeter precies weet wat hij gaat inmeten.",
-   "groep": "Planning & orders",
-   "ritme": "2x per dag",
-   "log": "gripp-verrijken.log",
-   "maxUur": 30,
-   "ks": false,
-   "keten": "inmeten"
-  },
-  "nl.sonty.markiezen": {
-   "naam": "Markiezen-workflow",
-   "functie": "Dagelijkse markiezen-taken (cron-markiezen.js).",
-   "groep": "Planning & orders",
-   "ritme": "2x per dag",
-   "log": "markiezen.log",
-   "maxUur": 30,
-   "ks": false
-  },
-  "nl.sonty.reminder-template": {
-   "naam": "Herinnering-template versturen",
-   "functie": "Verstuurt de inmeet-herinnering zodra het goedgekeurde WhatsApp-template beschikbaar is.",
-   "groep": "Planning & orders",
-   "ritme": "elke 30 min",
-   "log": "reminder-template.log",
-   "maxUur": null,
-   "ks": false,
-   "keten": "inmeten"
-  },
-  "nl.sonty.template-wachter": {
-   "naam": "WhatsApp-template wachter",
-   "functie": "Houdt in de gaten of nieuwe WhatsApp-templates door Meta zijn goedgekeurd en meldt dat.",
-   "groep": "Planning & orders",
-   "ritme": "elke 30 min",
-   "log": "template-wachter.log",
-   "maxUur": null,
-   "ks": false
-  },
-  "nl.sonty.offerte-v4": {
-   "naam": "Offerte-controle V4",
-   "functie": "Controleert RP-offertes op kritieke regels en montageprijzen, maakt AI-offertekaarten.",
-   "groep": "Offertes & CRM",
-   "ritme": "2x per dag (09:00/17:00)",
-   "log": "v4.log",
-   "maxUur": 30,
-   "ks": false,
-   "keten": "offertes"
-  },
-  "nl.sonty.v4-selfcheck": {
-   "naam": "V4 self-check",
-   "functie": "Controleert 30 min na elke V4-run of alles verwerkt is en fixt gemiste items automatisch.",
-   "groep": "Offertes & CRM",
-   "ritme": "2x per dag (09:45/17:45)",
-   "log": "v4-selfcheck.log",
-   "maxUur": 30,
-   "ks": false,
-   "keten": "offertes"
-  },
-  "nl.sonty.gripp-invullen": {
-   "naam": "Gripp invullen",
-   "functie": "Vult Gripp-offertes aan vanuit het offerte-register.",
-   "groep": "Offertes & CRM",
-   "ritme": "7x per dag",
-   "log": "gripp-invullen.log",
-   "maxUur": 5,
-   "ks": false,
-   "keten": "offertes"
-  },
-  "nl.sonty.auto-sync": {
-   "naam": "RP → HubSpot lead-sync",
-   "functie": "Synchroniseert nieuwe Reuzenpanda-leads naar HubSpot.",
-   "groep": "Offertes & CRM",
-   "ritme": "elke 15 min",
-   "log": "sync.log",
-   "maxUur": 2,
-   "ks": false
-  },
-  "nl.sonty.prijs-steekproef": {
-   "naam": "Prijs-steekproef configurator",
-   "functie": "Nachtelijke steekproef: configuratorprijzen vergelijken met leveranciersdata.",
-   "groep": "Offertes & CRM",
-   "ritme": "dagelijks 03:30",
-   "log": "prijs-steekproef.log",
-   "maxUur": 30,
-   "ks": false,
-   "keten": "prijzen"
-  },
-  "nl.sonty.prijs-kruiscontrole": {
-   "naam": "Prijs-kruiscontrole",
-   "functie": "Dagelijkse kruiscontrole van prijzen over de verschillende bronnen heen.",
-   "groep": "Offertes & CRM",
-   "ritme": "dagelijks 07:45",
-   "log": "prijs-kruiscontrole.log",
-   "maxUur": 30,
-   "ks": false,
-   "keten": "prijzen"
-  },
-  "nl.sonty.health-check": {
-   "naam": "Health-check",
-   "functie": "Controleert 2x per dag alle geregistreerde diensten (dit register) en alarmeert via Telegram.",
-   "groep": "Bewaking",
-   "ritme": "2x per dag (08:00/19:00)",
-   "log": "health-check.log",
-   "maxUur": 14,
-   "ks": false,
-   "keten": "bewaking"
-  },
-  "nl.sonty.keten-zelfcontrole": {
-   "naam": "Keten-zelfcontrole inmeten",
-   "functie": "Controleert elk uur 7 invarianten van de inmeet-keten: dubbele boeking, botsend aanbod, aanbod na boeking, stille klant, dood ticket, vergeten lead, verlopen zonder vervolg.",
-   "groep": "Bewaking",
-   "ritme": "elk uur",
-   "log": "keten-zelfcontrole.log",
-   "maxUur": 3,
-   "ks": false,
-   "keten": "bewaking"
-  },
-  "nl.sonty.aan-zet-watchdog": {
-   "naam": "Wie-is-aan-zet watchdog",
-   "functie": "Bewaakt of het laatste echte klantbericht onbeantwoord blijft (>2u), meldt dode gesprekken.",
-   "groep": "Bewaking",
-   "ritme": "elk uur",
-   "log": "aan-zet-watchdog.log",
-   "maxUur": 3,
-   "ks": false,
-   "keten": "bewaking"
-  },
-  "nl.sonty.credits-check": {
-   "naam": "Anthropic credits-watchdog",
-   "functie": "Bewaakt de API-credits waar de AI-klantenservice op draait.",
-   "groep": "Bewaking",
-   "ritme": "elke 2 uur",
-   "log": "credits-check.log",
-   "maxUur": 14,
-   "ks": false,
-   "keten": "bewaking"
-  },
-  "nl.sonty.gesprek-lab": {
-   "naam": "Gesprek-lab",
-   "functie": "Test dagelijks de gespreksafhandeling tegen scenario's zodat wijzigingen de bot niet slechter maken.",
-   "groep": "Bewaking",
-   "ritme": "dagelijks 07:30",
-   "log": "gesprek-lab.log",
-   "maxUur": 30,
-   "ks": false,
-   "keten": "bewaking"
-  },
-  "nl.sonty.status-push": {
-   "naam": "Systemen-dashboard push",
-   "functie": "Verzamelt elke 10 min de status van alle diensten uit dit register, herstart stille pollers, en pusht naar /admin/systemen.",
-   "groep": "Bewaking",
-   "ritme": "elke 10 min",
-   "log": "status-push.log",
-   "maxUur": 1,
-   "ks": false,
-   "keten": "bewaking"
-  },
-  "nl.sonty.tickets-rapport": {
-   "naam": "Dagrapport tickets AI vs Mens",
-   "functie": "Dagelijks 08:15 rapport hoeveel tickets de AI zelf afhandelde.",
-   "groep": "Rapportage",
-   "ritme": "dagelijks 08:15",
-   "log": "tickets-rapport.log",
-   "maxUur": 30,
-   "ks": false
-  },
-  "nl.sonty.sonny-rapport": {
-   "naam": "Ochtendrapport AI-gesprekken",
-   "functie": "Dagelijks 08:30 overzicht van de AI-klantenservicegesprekken naar Telegram.",
-   "groep": "Rapportage",
-   "ritme": "dagelijks 08:30",
-   "log": "sonny-rapport.log",
-   "maxUur": 26,
-   "ks": false
-  },
-  "nl.sonty.getekend-rapport": {
-   "naam": "Dagrapport tekeningen",
-   "functie": "Dagelijks overzicht getekende offertes + AI-resultaten.",
-   "groep": "Rapportage",
-   "ritme": "dagelijks 21:00",
-   "log": "getekend-rapport.log",
-   "maxUur": 30,
-   "ks": false
-  },
-  "nl.sonty.qa-leren": {
-   "naam": "QA-leerpunten",
-   "functie": "Destilleert dagelijks leerpunten uit QA-afkeuringen zodat de bot bijleert.",
-   "groep": "Rapportage",
-   "ritme": "dagelijks 07:45",
-   "log": "qa-leren.log",
-   "maxUur": 30,
-   "ks": false
-  },
-  "nl.sonty.reviews-sync": {
-   "naam": "Google-reviews sync",
-   "functie": "Haalt Google-reviews op en zet ze op de website.",
-   "groep": "Rapportage",
-   "ritme": "2x per dag",
-   "log": "reviews-sync.log",
-   "maxUur": 26,
-   "ks": false
-  },
-  "nl.sonty.ab-rapport": {
-   "naam": "A/B-test dagrapport",
-   "functie": "Dagelijks 09:15 tussenstand van lopende A/B-tests.",
-   "groep": "Rapportage",
-   "ritme": "dagelijks 09:15",
-   "log": "ab-rapport.log",
-   "maxUur": 30,
-   "ks": false
-  },
-  "nl.sonty.ab-eindrapport": {
-   "naam": "A/B-test eindrapport",
-   "functie": "Meldt afgeronde A/B-tests met conclusie.",
-   "groep": "Rapportage",
-   "ritme": "dagelijks 09:30",
-   "log": "ab-eindrapport.log",
-   "maxUur": 30,
-   "ks": false
-  },
-  "nl.sonty.capaciteit": {
-   "naam": "Capaciteitsmonitor",
-   "functie": "Wekelijks op/afschaal-signaal tegen het teamplafond (~35 orders/week).",
-   "groep": "Rapportage",
-   "ritme": "dagelijks 08:30",
-   "log": "/Users/clawdboot/sonty/tools/capaciteit.log",
-   "maxUur": null,
-   "ks": false
-  },
-  "nl.sonty.cohortrapport": {
-   "naam": "Cohort-weekrapport conversie",
-   "functie": "Conversie per week-cohort met ijkpunten (bot live, prijswijzigingen) in de tijdlijn.",
-   "groep": "Rapportage",
-   "ritme": "dagelijks 08:45",
-   "log": "cohortrapport.log",
-   "maxUur": 30,
-   "ks": false
-  },
-  "nl.sonty.maandag-data": {
-   "naam": "Maandagochtend-datarapporten",
-   "functie": "Wekelijks datablok voor Daimy via de databot (na de capaciteitsmonitor).",
-   "groep": "Rapportage",
-   "ritme": "maandag 08:35",
-   "log": "maandag-data.log",
-   "maxUur": 192,
-   "ks": false
-  },
-  "nl.sonty.maandrapport": {
-   "naam": "Maandrapport",
-   "functie": "De afgesloten maand op alle assen tegen dezelfde maand vorig jaar (1e van de maand).",
-   "groep": "Rapportage",
-   "ritme": "maandelijks (1e)",
-   "log": "maandrapport.log",
-   "maxUur": null,
-   "ks": false
-  },
-  "nl.sonty.extrawerk-maandrapport": {
-   "naam": "Extra-werk maandrapport",
-   "functie": "Telt maandelijks de montage-afspraken met extra-werk-vermelding.",
-   "groep": "Rapportage",
-   "ritme": "maandelijks",
-   "log": "extrawerk-maandrapport.log",
-   "maxUur": null,
-   "ks": false
-  },
-  "nl.sonty.email-weekbot": {
-   "naam": "Mailmarketing week-bot",
-   "functie": "Wekelijkse Klaviyo/mailmarketing-ronde (maandag 08:30).",
-   "groep": "Rapportage",
-   "ritme": "maandag 08:30",
-   "log": "email-weekbot.log",
-   "maxUur": 192,
-   "ks": false,
-   "keten": "mail"
-  },
-  "nl.sonty.email-sync": {
-   "naam": "E-mail dagsync (Klaviyo)",
-   "functie": "Dagelijkse sync van klant- en orderdata naar Klaviyo-segmenten.",
-   "groep": "Rapportage",
-   "ritme": "dagelijks 06:30",
-   "log": "email-sync.log",
-   "maxUur": 30,
-   "ks": false,
-   "keten": "mail"
-  },
-  "nl.sonty.dashboard-update": {
-   "naam": "Conversie-dashboard verversing",
-   "functie": "Wekelijks (ma 07:45) verse sheet-extractie → statische conversiepagina → git push.",
-   "groep": "Rapportage",
-   "ritme": "maandag 07:45",
-   "log": "dashboard-update.log",
-   "maxUur": 192,
-   "ks": false
-  },
-  "nl.sonty.vve-signalen": {
-   "naam": "VvE-signaalradar",
-   "functie": "Scant dagelijks welke appartementencomplexen in Zuid-Holland met hun gevel bezig zijn (vergunningen).",
-   "groep": "Rapportage",
-   "ritme": "dagelijks 08:30",
-   "log": "vve-signalen.log",
-   "maxUur": 30,
-   "ks": false
-  },
-  "nl.sonty.vacaturemail": {
-   "naam": "Vacaturemail-batches",
-   "functie": "Wervingsmail naar klanten in batches van 150/dag (10:30).",
-   "groep": "Rapportage",
-   "ritme": "dagelijks 10:30",
-   "log": "vacaturemail.log",
-   "maxUur": 30,
-   "ks": true
-  },
-  "nl.sonty.telegram-poll": {
-   "naam": "Telegram-inbox (hoofdchat Daimy)",
-   "functie": "Haalt Daimy's Telegram-berichten op naar telegram-inbox.txt — de lijn tussen Daimy en Claude.",
-   "groep": "Infrastructuur",
-   "ritme": "permanent (elke 5s)",
-   "log": "/Users/clawdboot/sonty/tools/telegram-poll.log",
-   "maxUur": null,
-   "ks": false,
-   "heartbeat": {
-    "bestand": "/Users/clawdboot/sonty/data/heartbeat/telegram-poll",
-    "maxStilMin": 15,
-    "zelfherstel": true
-   }
-  },
-  "nl.sonty.databot-poll": {
-   "naam": "Telegram databot-inbox",
-   "functie": "Haalt berichten uit de Sonty-databot-chat op (datavragen Daimy).",
-   "groep": "Infrastructuur",
-   "ritme": "permanent",
-   "log": "/Users/clawdboot/sonty/tools/sonty-data-poll.log",
-   "maxUur": null,
-   "ks": false,
-   "heartbeat": {
-    "bestand": "/Users/clawdboot/sonty/data/heartbeat/databot-poll",
-    "maxStilMin": 15,
-    "zelfherstel": true
-   }
-  },
-  "nl.sonty.auto-resume": {
-   "naam": "Auto-resume na crash",
-   "functie": "Hervat werk automatisch na een crash of reboot van de Mac.",
-   "groep": "Infrastructuur",
-   "ritme": "elke 5 min",
-   "log": "auto-resume.log",
-   "maxUur": null,
-   "ks": false
-  },
-  "nl.sonty.feedback-processor": {
-   "naam": "Feedback-verwerker",
-   "functie": "Verwerkt de feedback-wachtrij.",
-   "groep": "Infrastructuur",
-   "ritme": "elke 5 min",
-   "log": "feedback.log",
-   "maxUur": null,
-   "ks": false
-  },
-  "nl.sonty.dummy4k": {
-   "naam": "Virtueel 4K-scherm",
-   "functie": "Houdt een virtueel scherm actief voor browserwerk op de headless Mac.",
-   "groep": "Infrastructuur",
-   "ritme": "permanent",
-   "log": null,
-   "maxUur": null,
-   "ks": false
-  },
-  "nl.sonty.dummy4k-resolution": {
-   "naam": "Schermresolutie bij boot",
-   "functie": "Zet de virtuele schermresolutie goed na een herstart.",
-   "groep": "Infrastructuur",
-   "ritme": "bij boot",
-   "log": null,
-   "maxUur": null,
-   "ks": false
-  },
-  "nl.sonty.wachtlijst": {
-   "naam": "Wachtlijst (uitgeschakeld)",
-   "functie": "Bewust uitgezet (plist .disabled). Testbewerking via dashboard-keten 15-08 geslaagd.",
-   "groep": "Infrastructuur",
-   "ritme": "uit",
-   "log": null,
-   "maxUur": null,
-   "ks": false,
-   "uitgeschakeld": true
+  "_uitleg": "DE bron van waarheid voor alle Sonty-automatisering. status-collect.js (dashboard), cron-health-check.js (alarm) en systemen-md-genereer.js (SYSTEMEN.md) lezen dit bestand. Bewerken kan hier of via sonty-website.vercel.app/admin/systemen (wijzigingen komen binnen 10 min terug in dit bestand). Velden: naam/functie (wat doet het), groep, ritme (tekst), log (bestandsnaam in logs/ of absoluut pad), maxUur (alarm als log ouder is; null = geen logbewaking), ks (kill-switch via data/kill/<label>), keten (welke keten het bij hoort), heartbeat {bestand, maxStilMin, zelfherstel} voor permanente pollers.",
+  "bijgewerkt": "2026-08-15",
+  "diensten": {
+    "nl.sonty.sonny": {
+      "naam": "AI-klantenservice WhatsApp",
+      "functie": "Beantwoordt als Jaimy actieve WhatsApp-gesprekken + whitelist, boekt/verzet showroomafspraken, maakt en wijzigt offertes.",
+      "groep": "Klantgericht",
+      "ritme": "permanent (poll ~30s)",
+      "log": "sonny-watch.log",
+      "maxUur": 1,
+      "ks": false,
+      "keten": "klantenservice"
+    },
+    "nl.sonty.email": {
+      "naam": "AI-klantenservice e-mail",
+      "functie": "Beantwoordt als Sunny open tickets op aanvragen@ + info@, escaleert naar Mens nodig.",
+      "groep": "Klantgericht",
+      "ritme": "permanent (elke 90s)",
+      "log": "email-daemon.log",
+      "maxUur": 1,
+      "ks": false,
+      "keten": "klantenservice"
+    },
+    "nl.sonty.trengo-bundel": {
+      "naam": "Trengo ticket-bundelaar",
+      "functie": "Voegt actieve tickets van hetzelfde contact op hetzelfde kanaal samen tot één gesprek.",
+      "groep": "Klantgericht",
+      "ritme": "elke 15 min",
+      "log": "trengo-bundel.log",
+      "maxUur": 2,
+      "ks": false,
+      "keten": "klantenservice"
+    },
+    "nl.sonty.opvolging-schaduw": {
+      "naam": "Offerte-opvolging (schaduw)",
+      "functie": "Berekent welke offerte-opvolging verstuurd zou worden (verstuurt niets), dagelijks 10:30 rapport.",
+      "groep": "Klantgericht",
+      "ritme": "elk uur",
+      "log": "opvolging.log",
+      "maxUur": 26,
+      "ks": false
+    },
+    "nl.sonty.inmeet-dashboard": {
+      "naam": "Inmeet-planner (30-min ronde)",
+      "functie": "Berekent beste inmeettijden per wachtende lead, publiceert het plan-dashboard, bewaakt de 24-uursklok van aanbiedingen.",
+      "groep": "Planning & orders",
+      "ritme": "elke 30 min",
+      "log": "inmeet-dashboard.log",
+      "maxUur": 2,
+      "ks": false,
+      "keten": "inmeten"
+    },
+    "nl.sonty.inmeet-verwerker": {
+      "naam": "Inmeet-verwerker (boeken)",
+      "functie": "Boekt gekozen aanbiedingen echt: Planado-opdracht, Outlook, Gripp, meetbon, sheet, bevestiging naar klant.",
+      "groep": "Planning & orders",
+      "ritme": "elke 5 min",
+      "log": "inmeet-verwerker.log",
+      "maxUur": 2,
+      "ks": false,
+      "keten": "inmeten"
+    },
+    "nl.sonty.inmeet-verzoeken": {
+      "naam": "Inmeet-verzoekdaemon (winkel)",
+      "functie": "Verwerkt dashboard-verzoeken direct: tijden rekenen, direct boeken, keuzelink sturen, verzetten, annuleren.",
+      "groep": "Planning & orders",
+      "ritme": "permanent (wachtrij)",
+      "log": "inmeet-verzoeken.log",
+      "maxUur": null,
+      "ks": false,
+      "keten": "inmeten"
+    },
+    "nl.sonty.aanbod-replies": {
+      "naam": "Aanbod-reactiemonitor",
+      "functie": "Leest klantreacties op keuzelinks (WhatsApp), boekt keuzes, vraagt nieuwe voorstellen aan bij ander-moment, remt pingpong af.",
+      "groep": "Planning & orders",
+      "ritme": "elke 3 min",
+      "log": "aanbod-replies.log",
+      "maxUur": 1,
+      "ks": false,
+      "keten": "inmeten"
+    },
+    "nl.sonty.meetbon-doorzetten": {
+      "naam": "Meetbon-doorzetter",
+      "functie": "Complete meetbon + betaalde aanbetalingsfactuur → bestelmail naar orders@ + Telegram, bon op doorgezet.",
+      "groep": "Planning & orders",
+      "ritme": "elk uur",
+      "log": "meetbon-doorzetten.log",
+      "maxUur": 3,
+      "ks": true,
+      "keten": "inmeten"
+    },
+    "nl.sonty.planning-mail": {
+      "naam": "Planning-mail naar sheet",
+      "functie": "Leest orders@/info@-mails en PDF-bijlagen, schrijft orders en leverdatums in de Planning-sheet; beheert het OWA-token dat meer diensten gebruiken.",
+      "groep": "Planning & orders",
+      "ritme": "elke 30 min",
+      "log": "planning-mail-daemon.log",
+      "maxUur": 2,
+      "ks": true,
+      "keten": "orders"
+    },
+    "nl.sonty.outlook-planado-sync": {
+      "naam": "Outlook → Planado sync",
+      "functie": "Zet nieuwe Outlook-afspraken door naar Planado-opdrachten.",
+      "groep": "Planning & orders",
+      "ritme": "elke 10 min",
+      "log": "outlook-planado-sync.log",
+      "maxUur": 2,
+      "ks": false,
+      "keten": "agenda"
+    },
+    "nl.sonty.planado-outlook": {
+      "naam": "Planado ↔ Outlook bewaking",
+      "functie": "Controleert dagelijks of alles wat in Planado staat ook in Outlook staat (en andersom), meldt gaten.",
+      "groep": "Planning & orders",
+      "ritme": "dagelijks 07:45",
+      "log": "planado-outlook.log",
+      "maxUur": 30,
+      "ks": false,
+      "keten": "agenda"
+    },
+    "nl.sonty.planado-shifts": {
+      "naam": "Planado-rooster zetten",
+      "functie": "Zet de beschikbaarheid van de inmeters in Planado vanuit het echte rooster + vakanties uit Outlook.",
+      "groep": "Planning & orders",
+      "ritme": "dagelijks 07:45",
+      "log": "planado-shifts.log",
+      "maxUur": 30,
+      "ks": false,
+      "keten": "agenda"
+    },
+    "nl.sonty.gripp-verrijken": {
+      "naam": "Planado-opdrachten verrijken",
+      "functie": "Zet Gripp-offerte-informatie in de Planado-inmeetopdrachten zodat de inmeter precies weet wat hij gaat inmeten.",
+      "groep": "Planning & orders",
+      "ritme": "2x per dag",
+      "log": "gripp-verrijken.log",
+      "maxUur": 30,
+      "ks": false,
+      "keten": "inmeten"
+    },
+    "nl.sonty.markiezen": {
+      "naam": "Markiezen-workflow",
+      "functie": "Dagelijkse markiezen-taken (cron-markiezen.js).",
+      "groep": "Planning & orders",
+      "ritme": "2x per dag",
+      "log": "markiezen.log",
+      "maxUur": 30,
+      "ks": false
+    },
+    "nl.sonty.reminder-template": {
+      "naam": "Herinnering-template versturen",
+      "functie": "Verstuurt de inmeet-herinnering zodra het goedgekeurde WhatsApp-template beschikbaar is.",
+      "groep": "Planning & orders",
+      "ritme": "elke 30 min",
+      "log": "reminder-template.log",
+      "maxUur": null,
+      "ks": false,
+      "keten": "inmeten"
+    },
+    "nl.sonty.template-wachter": {
+      "naam": "WhatsApp-template wachter",
+      "functie": "Houdt in de gaten of nieuwe WhatsApp-templates door Meta zijn goedgekeurd en meldt dat.",
+      "groep": "Planning & orders",
+      "ritme": "elke 30 min",
+      "log": "template-wachter.log",
+      "maxUur": null,
+      "ks": false
+    },
+    "nl.sonty.offerte-v4": {
+      "naam": "Offerte-controle V4",
+      "functie": "Controleert RP-offertes op kritieke regels en montageprijzen, maakt AI-offertekaarten.",
+      "groep": "Offertes & CRM",
+      "ritme": "2x per dag (09:00/17:00)",
+      "log": "v4.log",
+      "maxUur": 30,
+      "ks": false,
+      "keten": "offertes"
+    },
+    "nl.sonty.v4-selfcheck": {
+      "naam": "V4 self-check",
+      "functie": "Controleert 30 min na elke V4-run of alles verwerkt is en fixt gemiste items automatisch.",
+      "groep": "Offertes & CRM",
+      "ritme": "2x per dag (09:45/17:45)",
+      "log": "v4-selfcheck.log",
+      "maxUur": 30,
+      "ks": false,
+      "keten": "offertes"
+    },
+    "nl.sonty.gripp-invullen": {
+      "naam": "Gripp invullen",
+      "functie": "Vult Gripp-offertes aan vanuit het offerte-register.",
+      "groep": "Offertes & CRM",
+      "ritme": "7x per dag",
+      "log": "gripp-invullen.log",
+      "maxUur": 5,
+      "ks": false,
+      "keten": "offertes"
+    },
+    "nl.sonty.auto-sync": {
+      "naam": "RP → HubSpot lead-sync",
+      "functie": "Synchroniseert nieuwe Reuzenpanda-leads naar HubSpot.",
+      "groep": "Offertes & CRM",
+      "ritme": "elke 15 min",
+      "log": "sync.log",
+      "maxUur": 2,
+      "ks": false
+    },
+    "nl.sonty.prijs-steekproef": {
+      "naam": "Prijs-steekproef configurator",
+      "functie": "Nachtelijke steekproef: configuratorprijzen vergelijken met leveranciersdata.",
+      "groep": "Offertes & CRM",
+      "ritme": "dagelijks 03:30",
+      "log": "prijs-steekproef.log",
+      "maxUur": 30,
+      "ks": false,
+      "keten": "prijzen"
+    },
+    "nl.sonty.prijs-kruiscontrole": {
+      "naam": "Prijs-kruiscontrole",
+      "functie": "Dagelijkse kruiscontrole van prijzen over de verschillende bronnen heen.",
+      "groep": "Offertes & CRM",
+      "ritme": "dagelijks 07:45",
+      "log": "prijs-kruiscontrole.log",
+      "maxUur": 30,
+      "ks": false,
+      "keten": "prijzen"
+    },
+    "nl.sonty.health-check": {
+      "naam": "Health-check",
+      "functie": "Controleert 2x per dag alle geregistreerde diensten (dit register) en alarmeert via Telegram.",
+      "groep": "Bewaking",
+      "ritme": "2x per dag (08:00/19:00)",
+      "log": "health-check.log",
+      "maxUur": 14,
+      "ks": false,
+      "keten": "bewaking"
+    },
+    "nl.sonty.keten-zelfcontrole": {
+      "naam": "Keten-zelfcontrole inmeten",
+      "functie": "Controleert elk uur 7 invarianten van de inmeet-keten: dubbele boeking, botsend aanbod, aanbod na boeking, stille klant, dood ticket, vergeten lead, verlopen zonder vervolg.",
+      "groep": "Bewaking",
+      "ritme": "elk uur",
+      "log": "keten-zelfcontrole.log",
+      "maxUur": 3,
+      "ks": false,
+      "keten": "bewaking"
+    },
+    "nl.sonty.aan-zet-watchdog": {
+      "naam": "Wie-is-aan-zet watchdog",
+      "functie": "Bewaakt of het laatste echte klantbericht onbeantwoord blijft (>2u), meldt dode gesprekken.",
+      "groep": "Bewaking",
+      "ritme": "elk uur",
+      "log": "aan-zet-watchdog.log",
+      "maxUur": 3,
+      "ks": false,
+      "keten": "bewaking"
+    },
+    "nl.sonty.credits-check": {
+      "naam": "Anthropic credits-watchdog",
+      "functie": "Bewaakt de API-credits waar de AI-klantenservice op draait.",
+      "groep": "Bewaking",
+      "ritme": "elke 2 uur",
+      "log": "credits-check.log",
+      "maxUur": 14,
+      "ks": false,
+      "keten": "bewaking"
+    },
+    "nl.sonty.gesprek-lab": {
+      "naam": "Gesprek-lab",
+      "functie": "Test dagelijks de gespreksafhandeling tegen echte scenario's. Exit 1 betekent: het lab vond gedragsafwijkingen om te beoordelen (rood is dan terecht, geen crash).",
+      "groep": "Bewaking",
+      "ritme": "dagelijks 07:30",
+      "log": "gesprek-lab.log",
+      "maxUur": 30,
+      "ks": false,
+      "keten": "bewaking"
+    },
+    "nl.sonty.status-push": {
+      "naam": "Systemen-dashboard push",
+      "functie": "Verzamelt elke 10 min de status van alle diensten uit dit register, herstart stille pollers, en pusht naar /admin/systemen.",
+      "groep": "Bewaking",
+      "ritme": "elke 10 min",
+      "log": "status-push.log",
+      "maxUur": 1,
+      "ks": false,
+      "keten": "bewaking"
+    },
+    "nl.sonty.tickets-rapport": {
+      "naam": "Dagrapport tickets AI vs Mens",
+      "functie": "Dagelijks 08:15 rapport hoeveel tickets de AI zelf afhandelde.",
+      "groep": "Rapportage",
+      "ritme": "dagelijks 08:15",
+      "log": "tickets-rapport.log",
+      "maxUur": 30,
+      "ks": false
+    },
+    "nl.sonty.sonny-rapport": {
+      "naam": "Ochtendrapport AI-gesprekken",
+      "functie": "Dagelijks 08:30 overzicht van de AI-nachtgesprekken naar Telegram. Stuurt (en logt) alleen iets als de Sonny-avonddienst aan staat; die staat sinds juli UIT, dus een stille log is hier normaal.",
+      "groep": "Rapportage",
+      "ritme": "dagelijks 08:30",
+      "log": "sonny-rapport.log",
+      "maxUur": null,
+      "ks": false
+    },
+    "nl.sonty.getekend-rapport": {
+      "naam": "Dagrapport tekeningen",
+      "functie": "Dagelijks overzicht getekende offertes + AI-resultaten.",
+      "groep": "Rapportage",
+      "ritme": "dagelijks 21:00",
+      "log": "getekend-rapport.log",
+      "maxUur": 30,
+      "ks": false
+    },
+    "nl.sonty.qa-leren": {
+      "naam": "QA-leerpunten",
+      "functie": "Destilleert dagelijks leerpunten uit QA-afkeuringen zodat de bot bijleert.",
+      "groep": "Rapportage",
+      "ritme": "dagelijks 07:45",
+      "log": "qa-leren.log",
+      "maxUur": 30,
+      "ks": false
+    },
+    "nl.sonty.reviews-sync": {
+      "naam": "Google-reviews sync",
+      "functie": "Haalt Google-reviews op en zet ze op de website.",
+      "groep": "Rapportage",
+      "ritme": "2x per dag",
+      "log": "reviews-sync.log",
+      "maxUur": 26,
+      "ks": false
+    },
+    "nl.sonty.ab-rapport": {
+      "naam": "A/B-test dagrapport",
+      "functie": "Dagelijks 09:15 tussenstand van lopende A/B-tests.",
+      "groep": "Rapportage",
+      "ritme": "dagelijks 09:15",
+      "log": "ab-rapport.log",
+      "maxUur": 30,
+      "ks": false
+    },
+    "nl.sonty.ab-eindrapport": {
+      "naam": "A/B-test eindrapport",
+      "functie": "Meldt afgeronde A/B-tests met conclusie.",
+      "groep": "Rapportage",
+      "ritme": "dagelijks 09:30",
+      "log": "ab-eindrapport.log",
+      "maxUur": 30,
+      "ks": false
+    },
+    "nl.sonty.capaciteit": {
+      "naam": "Capaciteitsmonitor",
+      "functie": "Wekelijks op/afschaal-signaal tegen het teamplafond (~35 orders/week).",
+      "groep": "Rapportage",
+      "ritme": "dagelijks 08:30",
+      "log": "/Users/clawdboot/sonty/tools/capaciteit.log",
+      "maxUur": null,
+      "ks": false
+    },
+    "nl.sonty.cohortrapport": {
+      "naam": "Cohort-weekrapport conversie",
+      "functie": "Conversie per week-cohort met ijkpunten (bot live, prijswijzigingen) in de tijdlijn.",
+      "groep": "Rapportage",
+      "ritme": "dagelijks 08:45",
+      "log": "cohortrapport.log",
+      "maxUur": 30,
+      "ks": false
+    },
+    "nl.sonty.maandag-data": {
+      "naam": "Maandagochtend-datarapporten",
+      "functie": "Wekelijks datablok voor Daimy via de databot (na de capaciteitsmonitor).",
+      "groep": "Rapportage",
+      "ritme": "maandag 08:35",
+      "log": "maandag-data.log",
+      "maxUur": 192,
+      "ks": false
+    },
+    "nl.sonty.maandrapport": {
+      "naam": "Maandrapport",
+      "functie": "De afgesloten maand op alle assen tegen dezelfde maand vorig jaar (1e van de maand).",
+      "groep": "Rapportage",
+      "ritme": "maandelijks (1e)",
+      "log": "maandrapport.log",
+      "maxUur": null,
+      "ks": false
+    },
+    "nl.sonty.extrawerk-maandrapport": {
+      "naam": "Extra-werk maandrapport",
+      "functie": "Telt maandelijks de montage-afspraken met extra-werk-vermelding.",
+      "groep": "Rapportage",
+      "ritme": "maandelijks",
+      "log": "extrawerk-maandrapport.log",
+      "maxUur": null,
+      "ks": false
+    },
+    "nl.sonty.email-weekbot": {
+      "naam": "Mailmarketing week-bot",
+      "functie": "Wekelijkse Klaviyo/mailmarketing-ronde (maandag 08:30).",
+      "groep": "Rapportage",
+      "ritme": "maandag 08:30",
+      "log": "email-weekbot.log",
+      "maxUur": 192,
+      "ks": false,
+      "keten": "mail"
+    },
+    "nl.sonty.email-sync": {
+      "naam": "E-mail dagsync (Klaviyo)",
+      "functie": "Dagelijkse sync van klant- en orderdata naar Klaviyo-segmenten.",
+      "groep": "Rapportage",
+      "ritme": "dagelijks 06:30",
+      "log": "email-sync.log",
+      "maxUur": 30,
+      "ks": false,
+      "keten": "mail"
+    },
+    "nl.sonty.dashboard-update": {
+      "naam": "Conversie-dashboard verversing",
+      "functie": "Wekelijks (ma 07:45) verse sheet-extractie → statische conversiepagina → git push.",
+      "groep": "Rapportage",
+      "ritme": "maandag 07:45",
+      "log": "dashboard-update.log",
+      "maxUur": 192,
+      "ks": false
+    },
+    "nl.sonty.vve-signalen": {
+      "naam": "VvE-signaalradar",
+      "functie": "Scant dagelijks welke appartementencomplexen in Zuid-Holland met hun gevel bezig zijn (vergunningen).",
+      "groep": "Rapportage",
+      "ritme": "dagelijks 08:30",
+      "log": "vve-signalen.log",
+      "maxUur": 30,
+      "ks": false
+    },
+    "nl.sonty.vacaturemail": {
+      "naam": "Vacaturemail-batches",
+      "functie": "Wervingsmail naar klanten in batches van 150/dag (10:30).",
+      "groep": "Rapportage",
+      "ritme": "dagelijks 10:30",
+      "log": "vacaturemail.log",
+      "maxUur": 30,
+      "ks": true
+    },
+    "nl.sonty.telegram-poll": {
+      "naam": "Telegram-inbox (hoofdchat Daimy)",
+      "functie": "Haalt Daimy's Telegram-berichten op naar telegram-inbox.txt — de lijn tussen Daimy en Claude.",
+      "groep": "Infrastructuur",
+      "ritme": "permanent (elke 5s)",
+      "log": "/Users/clawdboot/sonty/tools/telegram-poll.log",
+      "maxUur": null,
+      "ks": false,
+      "heartbeat": {
+        "bestand": "/Users/clawdboot/sonty/data/heartbeat/telegram-poll",
+        "maxStilMin": 15,
+        "zelfherstel": true
+      }
+    },
+    "nl.sonty.databot-poll": {
+      "naam": "Telegram databot-inbox",
+      "functie": "Haalt berichten uit de Sonty-databot-chat op (datavragen Daimy).",
+      "groep": "Infrastructuur",
+      "ritme": "permanent",
+      "log": "/Users/clawdboot/sonty/tools/sonty-data-poll.log",
+      "maxUur": null,
+      "ks": false,
+      "heartbeat": {
+        "bestand": "/Users/clawdboot/sonty/data/heartbeat/databot-poll",
+        "maxStilMin": 15,
+        "zelfherstel": true
+      }
+    },
+    "nl.sonty.auto-resume": {
+      "naam": "Auto-resume na crash",
+      "functie": "Hervat werk automatisch na een crash of reboot van de Mac.",
+      "groep": "Infrastructuur",
+      "ritme": "elke 5 min",
+      "log": "auto-resume.log",
+      "maxUur": null,
+      "ks": false
+    },
+    "nl.sonty.feedback-processor": {
+      "naam": "Feedback-verwerker",
+      "functie": "Verwerkt de feedback-wachtrij.",
+      "groep": "Infrastructuur",
+      "ritme": "elke 5 min",
+      "log": "feedback.log",
+      "maxUur": null,
+      "ks": false
+    },
+    "nl.sonty.dummy4k": {
+      "naam": "Virtueel 4K-scherm",
+      "functie": "Houdt een virtueel scherm actief voor browserwerk op de headless Mac.",
+      "groep": "Infrastructuur",
+      "ritme": "permanent",
+      "log": null,
+      "maxUur": null,
+      "ks": false
+    },
+    "nl.sonty.dummy4k-resolution": {
+      "naam": "Schermresolutie bij boot",
+      "functie": "Zet de virtuele schermresolutie goed na een herstart.",
+      "groep": "Infrastructuur",
+      "ritme": "bij boot",
+      "log": null,
+      "maxUur": null,
+      "ks": false
+    },
+    "nl.sonty.wachtlijst": {
+      "naam": "Wachtlijst (uitgeschakeld)",
+      "functie": "Bewust uitgezet (plist .disabled). Testbewerking via dashboard-keten 15-08 geslaagd.",
+      "groep": "Infrastructuur",
+      "ritme": "uit",
+      "log": null,
+      "maxUur": null,
+      "ks": false,
+      "uitgeschakeld": true
+    },
+    "nl.sonty.meeneem-melding": {
+      "naam": "Meeneem-melding inmeter",
+      "functie": "Zet elke dag om 17:00 een Planado-melding klaar voor 18:00 vanavond: wat de inmeter morgen van de zaak mee moet nemen (binnen raamdecoratie, behang). Bron is de offerte, niet de leadtekst.",
+      "groep": "Planning & orders",
+      "ritme": "dagelijks 17:00",
+      "log": "meeneem-melding.log",
+      "maxUur": 30,
+      "ks": false,
+      "keten": "inmeten"
+    }
   }
- }
 }

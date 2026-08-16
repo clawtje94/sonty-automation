@@ -1,0 +1,46 @@
+{
+  "bron": "Voorstel 2026-08-16 (Daimy: 'als er opmerkingen in de offerte staan of het is binnen raamdeco, dan moet de inmeter de dag ervoor aan het eind van de dag een melding in zijn agenda krijgen dat hij dat mee moet nemen'). De meeneemlijst zelf is nog een VOORSTEL en staat open bij Daimy (V2).",
+  "let_op": "Dit bestand is met opzet los van de code: de lijst mag aangepast worden zonder dat er iets herschreven hoeft te worden. Trefwoorden zijn kleine letters en worden los in de productnaam gezocht.",
+  "meldingMinutenVoorEind": 15,
+  "duurMin": 15,
+  "dagenVooruit": 14,
+  "ookNaarTelegram": true,
+  "altijdMee": [],
+  "categorieen": [
+    {
+      "naam": "raamdecoratie binnen",
+      "trefwoorden": [
+        "raamdecoratie",
+        "raamdeco",
+        "rolgordijn",
+        "duo-rolgordijn",
+        "duo rolgordijn",
+        "plisse",
+        "plissé",
+        "duette",
+        "jaloezie",
+        "jaloezieen",
+        "jaloezieën",
+        "lamellen",
+        "vouwgordijn",
+        "gordijn",
+        "vitrage",
+        "inbetween",
+        "shutter",
+        "gordijnrail",
+        "railsysteem"
+      ],
+      "meenemen": [
+        "stalenboeken raamdecoratie (van de soort die de klant koos)",
+        "kleurenwaaier",
+        "laserafstandsmeter",
+        "waterpas"
+      ]
+    },
+    {
+      "naam": "behang",
+      "trefwoorden": ["behang", "arte"],
+      "meenemen": ["Arte behangboek"]
+    }
+  ]
+}

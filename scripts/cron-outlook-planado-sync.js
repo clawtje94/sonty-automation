@@ -136,7 +136,10 @@ async function main() {
     const namen = (e.Attendees || []).map((a) => a.EmailAddress?.Name || '').filter((n) => n && !/^sonty$/i.test(n));
     return namen.find((n) => INMETERS[n.split(' ')[0]] || (MONTAGE_AAN && MONTEURS[n.split(' ')[0]])) || namen[0] || '';
   };
-  const NIET_KLUS = /vrij$|later$|vakantie|ziek|verlof/i;
+  // MEENEMEN-blokken zijn herinneringen voor de inmeter, geen klus. Ze hebben geen
+  // deelnemers en zouden hier dus al afvallen; dit is de tweede sluiting, zodat een
+  // toekomstige "zet de inmeter er als deelnemer bij" geen spook-opdrachten oplevert.
+  const NIET_KLUS = /vrij$|later$|vakantie|ziek|verlof|^MEENEMEN /i;
   const onbekendTeam = {};
 
   const extIdVan = (e) => 'ol-' + crypto.createHash('sha1').update(e.Id).digest('hex').slice(0, 20);

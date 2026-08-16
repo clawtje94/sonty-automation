@@ -173,6 +173,10 @@ function leesLead(item) {
     postcode: pc,
     plaats: woonplaats,
     volledigAdres: [adres, pc, woonplaats].filter(Boolean).join(', '),
+    // Wat de klant bij de aanvraag zelf heeft ingevuld ("het dakje wordt nog hersteld",
+    // "graag het oude scherm meenemen"). Stond tot 16-08 nergens meer: niet in de
+    // opdracht, niet in de agenda, dus de inmeter las het nooit.
+    opmerking: veld('Opmerking'),
     producten,
     aantalProducten: producten.reduce((a, p) => a + p.aantal, 0),
   };
@@ -450,6 +454,7 @@ async function verwerkLead(lead, item, slot, duurMin) {
     // Wat de klant onderweg heeft doorgegeven hoort hier te staan: de inmeter leest de
     // opdracht, niet het WhatsApp-gesprek (Daimy 10-08, contactpersoon van Connie).
     description: `Inmeten — ${lead.naam}\n${lead.volledigAdres}\n\n${lead.aantalProducten} product(en): ${lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ')}`
+      + (lead.opmerking ? `\n\nOPMERKING BIJ DE OFFERTE:\n${lead.opmerking}` : '')
       + require('./lib/inmeet-opmerkingen.js').alsTekst(lead.id),
     contacts: [{ type: 'phone', name: lead.naam, value: lead.telefoon || '-' }],
     address: { formatted: lead.volledigAdres },

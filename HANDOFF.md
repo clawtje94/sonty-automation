@@ -1,5 +1,30 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-16)
 
+## 16-08: MEENEEM-MELDING VOOR DE INMETER (gebouwd, staat nog UIT)
+- Opdracht Daimy: "als er opmerkingen in de offerte staan of het is binnen raamdeco wat
+  gemeten moet worden, dan moet de inmeter de dag ervoor aan het eind van de dag een
+  melding in zijn agenda krijgen dat hij dat mee moet nemen."
+- GEBOUWD: `scripts/cron-meeneem-melding.js` + `data/meeneem-regels.json` (trefwoorden en
+  meeneemlijst los aanpasbaar) + plist `nl.sonty.meeneem-melding` (07:30 en 12:30,
+  NOG NIET GELADEN). Werking: inmeetopdrachten van de komende 14 dagen uit Planado,
+  trigger = opmerking bij de offerte / doorgegeven door de klant / product valt in
+  raamdecoratie binnen of behang. Blok van 15 min op de LAATSTE WERKDAG vóór de afspraak
+  (Joey werkt geen wo/vr), 14:45-15:00, in de agenda Sonty Montage.
+- Twee vallen dichtgezet: het blok heeft GEEN deelnemers (anders maakt
+  cron-outlook-planado-sync er een spookopdracht van; MEENEMEN staat nu ook in NIET_KLUS)
+  en staat op Vrij (anders vreet het een plangat op).
+- ONDERWEG GEVONDEN: het veld `Opmerking:` uit de RP-lead ging nergens heen, niet naar de
+  Planado-opdracht en niet naar de agenda. 135 van 1000 leads hebben er een (bijv. "graag
+  ons huidige zonnescherm demonteren"). Staat nu wel in de opdracht-omschrijving.
+- OOK GEVONDEN: in RP heet binnen raamdeco gewoon "Raamdecoratie" (en "Shutters"), niet
+  "rolgordijn/plissé/jaloezie". De eerste trefwoordenlijst miste daardoor het hoofdgeval.
+- GEMETEN: 1000 RP-leads → 14% zou een melding krijgen (135 opmerking, 8 categorie).
+  Dry-run over 82 echte inmeetopdrachten van de komende 14 dagen → 2 meldingen.
+  Roostergevallen Joey/Sjoerd en zomer-/wintertijd apart getest.
+- OPEN bij Daimy: V1 alleen agendablok of ook planning-bot, V2 klopt de meeneemlijst
+  (stalenboeken, kleurenwaaier, laser, waterpas). Daarna plist laden, --execute aanzetten
+  en registreren in data/systemen-register.json.
+
 ## 16-08: MONTEURS NAAR PLANADO (fase 1 van "Claude doet de montageplanning")
 - Doel Daimy (/goal): monteurs gaan Planado gebruiken, alles moet er goed in staan
   mét werkbon. Eindbeeld (Daimy): "nu plant een mens zonder rekening te houden met

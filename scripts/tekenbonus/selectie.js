@@ -7,13 +7,19 @@ const H = { Authorization: 'Bearer ' + CFG.RP_API_KEY };
 const OV = '15c4f0be-c6bf-447d-bf5f-a233c482eb53';
 const AI_OV = 'dc0efe4f-2cd6-45d8-aeff-7f1c817a0fb2';
 
+// Testdossiers horen NOOIT in een klantmailing (eindcheck 16-08 ving 5 stuks:
+// 3x Daimy Boot, FGC SONTY, Playwright Testklant). Interne mailadressen ook niet.
+const TESTPATROON = /daimy|playwright|testklant|\btest\b|sonty|proefklant/i;
+
 async function kandidaten(items) {
   const nu = Date.now();
   const MIN = 30 * 86400000, MAX = 60 * 86400000;
   return items.filter((i) =>
     (i.status_id === OV || i.status_id === AI_OV) &&
     nu - i.timestamp_created >= MIN && nu - i.timestamp_created <= MAX &&
-    !(i.technical_labels || []).some((l) => l.type === 'ITEM_ARCHIVED'));
+    !(i.technical_labels || []).some((l) => l.type === 'ITEM_ARCHIVED') &&
+    !TESTPATROON.test(i.summary || '') &&
+    !/@sonty\.nl/i.test(i.description || ''));
 }
 
 if (require.main === module) {

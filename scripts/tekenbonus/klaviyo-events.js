@@ -8,24 +8,31 @@
 const { KLAVIYO_API_KEY } = require('../secrets.js');
 
 const H = { Authorization: 'Klaviyo-API-Key ' + KLAVIYO_API_KEY, accept: 'application/json', 'content-type': 'application/json', revision: '2024-10-15' };
-const METRIC = 'Tekenbonus aangeboden';
+// Per testgroep een eigen metric en eigen flow (Daimy 16-08: "ik zie geen A/B, maar
+// 1 mail" — met twee flows naast elkaar zie je in Klaviyo per groep alle cijfers).
+const METRICS = { 'bonus-2d': 'Tekenbonus aangeboden (2 dagen)', 'bonus-4d': 'Tekenbonus aangeboden (4 dagen)' };
+const FLOW_NAMEN = { 'bonus-2d': 'Tekenbonus 2 dagen', 'bonus-4d': 'Tekenbonus 4 dagen' };
 
 async function flowStatus() {
   const r = await fetch('https://a.klaviyo.com/api/flows?page[size]=50', { headers: H });
   if (!r.ok) return { live: false, reden: 'flows-API niet bereikbaar (' + r.status + ')' };
   const d = await r.json();
-  const flow = (d.data || []).find((f) => /tekenbonus/i.test(f.attributes?.name || ''));
-  if (!flow) return { live: false, reden: 'geen flow met "tekenbonus" in de naam gevonden' };
-  if (flow.attributes.status !== 'live') return { live: false, reden: `flow "${flow.attributes.name}" staat op ${flow.attributes.status}` };
-  return { live: true, naam: flow.attributes.name, id: flow.id };
+  for (const naam of Object.values(FLOW_NAMEN)) {
+    const flow = (d.data || []).find((f) => f.attributes?.name === naam);
+    if (!flow) return { live: false, reden: `flow "${naam}" niet gevonden` };
+    if (flow.attributes.status !== 'live') return { live: false, reden: `flow "${naam}" staat op ${flow.attributes.status}` };
+  }
+  return { live: true, naam: Object.values(FLOW_NAMEN).join(' + ') };
 }
 
-async function stuurEvent(email, properties) {
+async function stuurEvent(email, properties, arm) {
+  const naam = METRICS[arm];
+  if (!naam) throw new Error('onbekende arm ' + arm);
   const r = await fetch('https://a.klaviyo.com/api/events', {
     method: 'POST', headers: H,
     body: JSON.stringify({ data: { type: 'event', attributes: {
       properties,
-      metric: { data: { type: 'metric', attributes: { name: METRIC } } },
+      metric: { data: { type: 'metric', attributes: { name: naam } } },
       profile: { data: { type: 'profile', attributes: { email } } },
     } } }),
   });
@@ -33,4 +40,4 @@ async function stuurEvent(email, properties) {
   return true;
 }
 
-module.exports = { flowStatus, stuurEvent, METRIC };
+module.exports = { flowStatus, stuurEvent, METRICS, FLOW_NAMEN };

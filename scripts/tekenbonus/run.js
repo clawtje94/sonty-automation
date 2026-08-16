@@ -133,7 +133,7 @@ function productTekst(fullDoc) {
           deadline_dag: prep.deadlineDag,
           deadline_kort: prep.deadlineKort,
           offerte_link: `https://document.reuzenpanda.nl/nl/${CFG.RP_PID}/${s.doc.documentId}/latest?pdfAction=DOCSIGN`,
-        });
+        }, s.arm);
       } catch (e) {
         // event faalde: offerte meteen terugdraaien, niets laten hangen
         await ruimOp(s.doc.documentId, prep.origineleGroupDiscount).catch(() => {});

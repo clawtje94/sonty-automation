@@ -36,6 +36,14 @@
   tweede dossier is onherkenbaar voor élk systeem — mitigatie 3 sleutels (mail/tel/
   adres) + Trengo-laag; (2) race met tekenen op verzendmoment — mitigatie in live-pad:
   guard per klant direct vóór de send + ACCEPTED-hercheck in de prep.
+- SCENARIO-LAB GEDRAAID (vraag Daimy "meerdere scenario's getest?"): nieuw onderdeel
+  scenario-lab/onderdelen/tekenbonus.js — 544 scenario's (guard-matrix 500 gesampled
+  uit 4.608 combinaties over identiteit/tweede-dossier/getekend/boeking/opt-out/log,
+  plus staffelranden, deadline-weekmatrix, prep- en opruimpaden incl. rollback), 0x
+  FOUT-STIL, 0 crashes. Twee aanscherpingen uit het orakel direct ingebouwd: (1) klant
+  niet in mail-export = opt-out onbekend = NIET mailen (was: door mét e-mail), (2)
+  magBonus-ondergrens: totaal onder 750 of kapot → geen bonus-mail (run.js filtert).
+  Steekproef daarna herdraaid: echte kandidaten blijven gewoon mailbaar.
 
 ## 16-08: WINTERONDERZOEK (doel Daimy: winter winstgevend i.p.v. verlies) — RAPPORT KLAAR
 - Anatomie: okt-dec 2025 marge 108/72/45k vs kosten 118/106/91k (sep-dec samen -121k).

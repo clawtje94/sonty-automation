@@ -355,23 +355,24 @@ function raaktAnderPrijsboek(ctx, input) {
         }
       } catch { /* lukt de controle niet, dan valt hij terug op de citaat-eis hieronder */ }
     }
+    // BUGFIX 2026-08-16 (casus Edwin Kanters, ticket 974295216): dit pad returnde vroeger
+    // direct "DOORGEZET" zónder de RP-verplaatsing en de plannernotitie hieronder uit te
+    // voeren — klant en bot kregen "geregeld" te horen terwijl er in RP niets gebeurde.
+    // Een ondertekende offerte slaat daarom alleen de akkoord-guards over; de echte
+    // uitvoering (notitie + status naar Inmeten inplannen) loopt gewoon door.
     if (getekendeOfferte) {
       ctx.acties.push({ type: 'inmeet_afspraak', ...input, akkoordBron: `offerte ${getekendeOfferte} is ondertekend` });
-      return JSON.stringify({
-        status: 'DOORGEZET',
-        opmerking: `De klant heeft offerte ${getekendeOfferte} al online ondertekend, dus het akkoord staat vast. Het dossier gaat naar Inmeten inplannen. Zeg NIET meer "zodra je akkoord geeft" — bevestig gewoon dat het geregeld is en dat de planning binnen 5 werkdagen belt.`,
-      });
-    }
-
-    if ((CFG.MODE === 'live' || ctx.liveTest) && !AKKOORD_TAAL.test(citaatRuw)) {
-      return JSON.stringify({
-        status: 'GEBLOKKEERD',
-        opmerking: `Het citaat "${citaatRuw.slice(0, 80)}" drukt geen akkoord uit. Een klant die iets vraagt, maten doorgeeft of informatie stuurt, heeft nog geen ja gezegd. Beantwoord eerst wat hij vraagt en sluit af met één concrete keuzevraag: wil je dat ik hem in orde maak, of teken je zelf online via de link? Pas als hij daarop ja zegt, zet je door.`,
-      });
-    }
-    ctx.acties.push({ type: 'inmeet_afspraak', ...input });
-    if ((CFG.MODE === 'live' || ctx.liveTest) && !ctx.offerteLinkGedeeld) {
-      return JSON.stringify({ status: 'GEBLOKKEERD', opmerking: `De klant heeft de offerte-link nog NIET via ${ctx.kanaal === 'EMAIL' ? 'de mail' : 'WhatsApp'} ontvangen in dit gesprek (harde eis). Volgorde: eerst de offerte(-aanpassing) regelen, de link hier delen, akkoord vragen op die offerte, en dan de keuzevraag (zelf tekenen of ik zet door). Pas daarna kun je doorzetten. Beloof nu nog geen inmeetafspraak.` });
+    } else {
+      if ((CFG.MODE === 'live' || ctx.liveTest) && !AKKOORD_TAAL.test(citaatRuw)) {
+        return JSON.stringify({
+          status: 'GEBLOKKEERD',
+          opmerking: `Het citaat "${citaatRuw.slice(0, 80)}" drukt geen akkoord uit. Een klant die iets vraagt, maten doorgeeft of informatie stuurt, heeft nog geen ja gezegd. Beantwoord eerst wat hij vraagt en sluit af met één concrete keuzevraag: wil je dat ik hem in orde maak, of teken je zelf online via de link? Pas als hij daarop ja zegt, zet je door.`,
+        });
+      }
+      ctx.acties.push({ type: 'inmeet_afspraak', ...input });
+      if ((CFG.MODE === 'live' || ctx.liveTest) && !ctx.offerteLinkGedeeld) {
+        return JSON.stringify({ status: 'GEBLOKKEERD', opmerking: `De klant heeft de offerte-link nog NIET via ${ctx.kanaal === 'EMAIL' ? 'de mail' : 'WhatsApp'} ontvangen in dit gesprek (harde eis). Volgorde: eerst de offerte(-aanpassing) regelen, de link hier delen, akkoord vragen op die offerte, en dan de keuzevraag (zelf tekenen of ik zet door). Pas daarna kun je doorzetten. Beloof nu nog geen inmeetafspraak.` });
+      }
     }
     if ((CFG.MODE === 'live' || ctx.liveTest) && !input.itemId) {
       return JSON.stringify({ status: 'GEBLOKKEERD', opmerking: 'Geen dossier (itemId) bekend voor deze klant — je kunt niets doorzetten naar de planning. Zoek eerst het dossier via klant_opzoeken (vraag zo nodig het e-mailadres of offertenummer), of maak eerst een offerte aan met VOLLEDIGE contactgegevens (naam, e-mail, adres). Beloof de klant nog GEEN inmeetafspraak.' });
@@ -398,7 +399,7 @@ function raaktAnderPrijsboek(ctx, input) {
         body: JSON.stringify({ item: { status_id: CFG.RP_STATUS_INMETEN_INPLANNEN } }),
       });
       if (!res.ok) return JSON.stringify({ status: 'MISLUKT', opmerking: 'Status verplaatsen lukte niet. Zeg dat een collega het oppakt en roep escaleren_naar_mens aan.' });
-      return JSON.stringify({ status: 'DOORGEVOERD', opmerking: `Item staat nu op "Inmeten inplannen"${input.notitie ? ' en je notitie voor de planner is in Reuzenpanda bij het dossier gezet' : ''}. Vertel de klant: de planning neemt binnen 5 werkdagen contact op om de inmeetafspraak te maken. GEEN boekingslink sturen.` });
+      return JSON.stringify({ status: 'DOORGEVOERD', opmerking: `${getekendeOfferte ? `De klant heeft offerte ${getekendeOfferte} al online ondertekend, dus het akkoord staat vast — zeg NIET meer "zodra je akkoord geeft". ` : ''}Item staat nu op "Inmeten inplannen"${input.notitie ? ' en je notitie voor de planner is in Reuzenpanda bij het dossier gezet' : ''}. Vertel de klant: de planning neemt binnen 5 werkdagen contact op om de inmeetafspraak te maken. GEEN boekingslink sturen.` });
     }
     return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets verplaatst. Vertel de klant dat de planning binnen 5 werkdagen contact opneemt om de afspraak te maken. GEEN boekingslink sturen (die is alleen voor showroombezoek).' });
   }

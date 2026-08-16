@@ -23,9 +23,34 @@
   (regel ~358): early return "DOORGEZET" vóór de RP-PATCH (regel ~396) → verplaatsing én
   plannernotitie worden NIET uitgevoerd terwijl de bot en de klant "geregeld" te horen
   krijgen. Hier toevallig geen schade (RP had al verplaatst), structureel wel.
-- VOORSTEL naar Daimy (Telegram V1, wacht op antwoord): (a) tools.js fixen, (b) sheet-
-  vangnet voor doorgeschoven/geboekte dossiers, (c) RP-kant uitzoeken waarom OC werd
-  overgeslagen + kortingen normaliseren; plus evt. rij 566 handmatig in Aug 2026.
+- GO Daimy (16-08 middag): offerte 202611566 NIET meer aanpassen; rij alsnog in sheet;
+  structureel fixen. ALLES GEDAAN, zelfde dag:
+  1. SHEET HERSTELD: Edwin (Aug 2026 rij 894) + 7 audit-gevallen (Barbara Weeink,
+     Jolanda van Gelder, Victor Ansink, Margreet Steup-Beekman, Droog, Ad van Gorkom,
+     Lisa Terreehorst) + 6 extra die het vangnet vond (Peters, Happel, Pluijmers,
+     M. van der Wereld, J. Udo, Sin Yan Leenders) = 14 rijen, geel gemarkeerd,
+     maandtab op offertedatum, bedrag incl. regel- én groepskorting.
+  2. TOOLS.JS GEFIXT (ai-ks): getekende-offerte-pad voert verplaatsing + plannernotitie
+     nu écht uit; regressietest scripts/ai-ks/tests/inmeet-doorzetten-test.js (12 checks,
+     fetch-stub). Keten-daemons herstart via herstart-keten-daemons.sh.
+  3. NIEUW: scripts/cron-sheet-vangnet.js + launchd nl.sonty.sheet-vangnet (08:15 en
+     20:15, óók zondag). Doet twee dingen: (a) ontbrekende offerte-rijen bijschrijven
+     voor recent bewogen dossiers in OV/Inmeten/Gripp/Afgerond (dedupe op ALLE
+     offertenummers van het dossier, state in data/sheet-vangnet-state.json);
+     (b) korting-vangnet: verse ongetekende dossiers met het machinale patroon
+     (>=2 docs zelfde creation-ms, naamloze regel-kortingen) → regel-kortingen strippen
+     en item terug naar Offerte controle zodat V4 normaliseert (NOOIT strippen zonder
+     terugzetten of andersom: V4 haalt regel-kortingen zelf niet weg = dubbele korting).
+     Telegram-melding alleen bij actie. DRY=1 voor proefdraai.
+- AUDIT (vraag Daimy): 200 flow-dossiers gecheckt → 184 stonden goed, 8 NERGENS (nu
+  hersteld), 8 met oude rij zonder offertenummer (Jan/Mei-era, gemeld, niet aangepast).
+  Aanbiedingen: NIEMAND stilzwijgend blijven liggen — 25 verlopen aanbiedingen horen
+  allemaal bij klanten die alsnog boekten; 4 open binnen hun 24u; reminder/ronde-2/
+  belscherm-keten werkt. Eén vlag: Kirsten de Koning staat op Afgerond zonder boeking
+  in de flow — even handmatig nakijken.
+- RESTGAT (klein, bekend): oud item + nieuwe offerte die nooit beweegt komt pas in de
+  sheet zodra het dossier beweegt (tekening/boeking). Waarom RP sommige aanvragen met
+  3 varianten direct genereert en OC overslaat = RP-kant, niet vast te stellen vanaf hier.
 - Telegram-poller stond ~19u stil, herstart met launchctl kickstart.
 
 ## 16-08: WHATSAPP "NIET AFGELEVERD" — OORZAAK GEVONDEN + VANGNET LIVE

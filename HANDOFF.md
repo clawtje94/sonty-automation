@@ -73,7 +73,7 @@
   SONTY-MAILSTIJLGIDS.md (alle vaste feiten: 3/5/7 garantie, 8-10 wk, 5 werkdagen, €75,
   40/60, verboden frasen), FLOW-PLAN.md (5 flows in prioriteit, waarschuwingen dubbele
   mails), flows/offerte-opvolgflow-copy.md (3 mails concept, wacht op akkoord).
-- Scripts (herbruikbaar, alleen-lezen): ~/olivida/email-marketing/scripts/klaviyo-stand.js
+- Scripts (herbruikbaar, alleen-lezen): ~/ander-project/email-marketing/scripts/klaviyo-stand.js
   en klaviyo-week-rapport.js (reporting-API per flow/campagne met omzet en spamrate).
 - Klaviyo Create Flow API is GA (revision 2026-07-15): bot kan zelf flows bouwen, 100/dag.
 - **Key gekregen van Daimy (13-08)**: ~/sonty/scripts/.klaviyo-private-key.txt. Daarna
@@ -121,8 +121,8 @@
   erbij 2024, 15 man, 150m2 showroom) staat op Telegram TER VERBETERING bij Daimy; daarna
   verwerken in verhaal-mail + welkomstmail. Uploader-quirk: /api/images-check pagineert
   niet → uploadt alles opnieuw bij verse run (duplicaten op CDN, onschuldig).
-- REGEL Daimy 13-08: op deze computer niks meer met Olivida, alleen Sonty. De tijdelijke
-  ~/olivida/email-marketing-map is verwijderd; de leestools staan nu in
+- REGEL Daimy 13-08: op deze computer niks meer met ander-project, alleen Sonty. De tijdelijke
+  ~/ander-project/email-marketing-map is verwijderd; de leestools staan nu in
   ~/sonty/email-marketing/scripts/ met de Sonty-key als default.
 
 ## 13-08: BOEKEN LOOPT NU VIA MICROSOFT BOOKINGS — DE ENIGE JUISTE MANIER
@@ -1515,7 +1515,7 @@ LET OP: er komen NU AL echte leads binnen op sonty-website.vercel.app. 24 echte 
 ## 2026-07-31: WACHTLIJST-meldingen uitgezet (verzoek Daimy)
 - Daimy wil de "⏳ WACHTLIJST"-Telegram-rapporten niet meer ontvangen. launchd nl.sonty.wachtlijst uitgezet (bootout), plist hernoemd naar .disabled. Script blijft bestaan; handmatig: node scripts/ai-ks/onbeantwoord-wachtlijst.js --dry.
 - LET OP: dit was het vangnet voor klanten die stilvallen bij toegewezen collega's (aanleiding: Herman van Kaam/Pim, 2 dagen onbeantwoord). Alternatief (bv. 1x per dag kort, of alleen bij WA-venster-verloop) voorgesteld aan Daimy, wacht op antwoord.
-- ✅-commitberichten (olivida keepalive) waren al gestopt per prompt-regel 30-07.
+- ✅-commitberichten (ander-project keepalive) waren al gestopt per prompt-regel 30-07.
 - 31-07 avond: Sunmaster-BESTELportaal (portal.sunmaster.nl, ISP-Vision) ontsloten via zichtbaar CDP-venster (poort 9333, launchd-loze achtergrondtaak, 6u open; Daimy logt in, sessie is memory-only dus venster NIET sluiten). Artikellijst geoogst (18 producten, data/meetinstructies/sunmaster-artikelen.json) + veldstructuur Zipscreen 85-configurator. VOLGENDE: per artikel alle custom-dropdown-OPTIES oogsten (klik-per-veld), zelfde voor Toppoint/Markiezen/ROMA/Velux; daarna Planado-tekstvelden omzetten naar keuzelijsten. NOOIT offerte opslaan/versturen in portalen.
 - Sunmaster dropdown-oogst COMPLEET: alle 18 artikelen, opties per veld in data/meetinstructies/sunmaster-dropdowns.json (o.a. 77-88 doekkleuren, 21-24 kapkleuren, geleiders, bediening, montage). Route per Daimy: raadplegen order > Nieuwe order > artikel; script sun-oogster.js (scratchpad) klikt alleen velden + Annuleren, raakt Ok/Opslaan nooit. Ruis: eerste regel per lijst is soms de productnaam, filteren bij omzetten naar Planado-keuzelijsten. VOLGENDE: zelfde oogst Toppoint/Markiezen/ROMA/Velux, daarna Planado-keuzelijsten.
 - MEETBON 2.0 KLAAR IN PLANADO (opdracht Daimy): 9 keuzelijsten aangemaakt (Producttype, Montage, Bediening, Bedieningszijde, Elektra, Ondergrond, Bereikbaarheid, Kleur kap/frame RAL 45 stuks, Doekkleur Sunmaster/ROMA 173 stuks) en in het Inmeet-sjabloon 10 oude tekstvelden vervangen door 12 gekoppelde keuzelijst-velden + 2 nieuwe tekstvelden (kleuren overig). Visueel geverifieerd na herladen. Testopdracht "TEST MEETBON 2.0" staat voor Daimy klaar. Sunmaster-oogst: def-bestand na 3 rondes (v3 vult maten in voor afhankelijke velden; 24 velden verbeterd; 68 kleine/afhankelijke lijstjes blijven leeg of 1-optie = deels legitiem, deels bestellers-detail). Lijstenbouwer: scratchpad/planado-lijsten-bouw2.js; ombouw: planado-ombouw.js.

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Leest de huidige Klaviyo-stand uit (ALLEEN-LEZEN, alleen GET-calls).
 // Output: compact overzicht van lijsten, flows, campagnes, metrics.
-// Key komt uit ~/olivida/handoff/env-productie-backup.txt
+// Key komt uit ~/ander-project/handoff/env-productie-backup.txt
 
 const fs = require('fs');
 const path = require('path');

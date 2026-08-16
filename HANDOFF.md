@@ -173,7 +173,14 @@
   "Marvin"-gevallen NIET automatisch maar als lijstje naar Nanny; daarna bus-naam als
   agenda-deelnemer. Stappenlijst Daimy staat op Telegram (nummering, accounts,
   Nanny + team informeren, GO).
-- WACHT OP DAIMY: V1 = 2 nieuwe busaccounts (Marvin+Bart, Frenky+Dennis, ~$72/mnd)
+- 16-08 (avond): mapping COMPLEET EENDUIDIG na antwoorden Daimy: Marvin/Moa=Bus 1,
+  Kevin/Tygo=Bus 2, Yudi/Nick=Bus 3, ZZP 1/Bart=Bus 4 (ZZP 1 = Marvin+Bart!),
+  Dennis/Frenky=Bus 5. Mick vervallen (LET OP: 4 komende Mick-klussen in agenda
+  moeten herverdeeld). Arnold = zzp binnen-raamdecoratie, krijgt eigen account.
+  Logins op eigen mailadressen. Nanny hoeft NIETS te veranderen. Alles in
+  data/bussen.json (besloten/openVragen). Pilotweek Bus 3 akkoord.
+- WACHT OP DAIMY: mailadressen bus 1/4/5 + Arnold (laatste blokkade) → dan accounts
+  bouwen; daarna GO voor pilotweek. OUD (deels ingehaald): V1 = 2 nieuwe busaccounts (Marvin+Bart, Frenky+Dennis, ~$72/mnd)
   + akkoord om Tygo's losse account om te bouwen tot Bus Marvin + Moa (gratis) +
   e-mailadressen per bus. Daarna: Nanny bus-namen in agenda laten zetten (twee
   Marvins!), team informeren → touch ~/sonty/data/montage-sync-aan → opdrachten

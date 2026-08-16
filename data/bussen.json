@@ -15,7 +15,8 @@
    ],
    "planadoNaam": "Bus 1 - Marvin + Moa",
    "planadoUuid": null,
-   "plan": "losse account Tygo Krikke ombouwen, login = eigen mailadres (wacht op adres)"
+   "plan": "losse account Tygo Krikke ombouwen, login = eigen mailadres (wacht op adres)",
+   "login": "bus1@sonty.nl (voorstel)"
   },
   {
    "nr": 2,
@@ -29,7 +30,8 @@
     "Tygo"
    ],
    "planadoNaam": "Bus 2 - Kevin + Tygo",
-   "planadoUuid": "1f122f72-777f-6e80-8139-6e820cb7b164"
+   "planadoUuid": "1f122f72-777f-6e80-8139-6e820cb7b164",
+   "login": "bus2@sonty.nl (voorstel)"
   },
   {
    "nr": 3,
@@ -43,7 +45,8 @@
     "Nick"
    ],
    "planadoNaam": "Bus 3 - Yudi + Nick",
-   "planadoUuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c"
+   "planadoUuid": "1f122f37-76db-68b0-9aad-4269fe2bbe9c",
+   "login": "bus3@sonty.nl (voorstel)"
   },
   {
    "nr": 4,
@@ -59,7 +62,8 @@
    ],
    "planadoNaam": "Bus 4 - Marvin + Bart",
    "planadoUuid": null,
-   "plan": "nieuw account, login = eigen mailadres (wacht op adres van Daimy)"
+   "plan": "nieuw account, login = eigen mailadres (wacht op adres van Daimy)",
+   "login": "bus4@sonty.nl (voorstel)"
   },
   {
    "nr": 5,
@@ -74,11 +78,12 @@
    ],
    "planadoNaam": "Bus 5 - Frenky + Dennis",
    "planadoUuid": null,
-   "plan": "nieuw account, login = eigen mailadres (wacht op adres van Daimy)"
+   "plan": "nieuw account, login = eigen mailadres (wacht op adres van Daimy)",
+   "login": "bus5@sonty.nl (voorstel)"
   }
  ],
  "openVragen": [
-  "Mailadressen voor de logins: bus 1, bus 4, bus 5 en Arnold",
+  "Daimy: bus1@sonty.nl t/m bus5@sonty.nl (+ Arnold-login) aanmaken als alias of mailbox — alleen nodig voor wachtwoord-reset, alias op planning@ is gratis en genoeg",
   "Krijgt Arnold ook een laadvak of laadt hij niet in Berkel?",
   "4 komende Mick-klussen in de agenda: naar welke bus?"
  ],
@@ -89,7 +94,8 @@
   "Pilotweek met Bus 3 (Yudi+Nick) akkoord — Daimy 16-08",
   "Nanny hoeft werkwijze NIET aan te passen; mapping volgt haar naamgebruik",
   "'Marvin' in de agenda = ALTIJD Marvin+Moa (Bus 1) — Daimy 16-08; elke agendanaam is nu eenduidig",
-  "Mick vervallen; Arnold (zzp binnen-raamdecoratie) krijgt eigen account — Daimy 16-08"
+  "Mick vervallen; Arnold (zzp binnen-raamdecoratie) krijgt eigen account — Daimy 16-08",
+  "Login per bus (bus1@sonty.nl-stijl), gedeeld op meerdere apparaten — kan: 2 gelijktijdige sessies zelfde account getest 16-08, beide blijven actief"
  ],
  "extraKrachten": [
   {

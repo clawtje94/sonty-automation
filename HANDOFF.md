@@ -70,8 +70,15 @@
   live is (anders run overslaan + melding). klaviyo-verzend.js (campagne-route)
   verwijderd. Alle stats voortaan op één plek: Flows → Tekenbonus. End-to-end bewijs
   verstuurd: echt event → flow → mail naar daimyboot@gmail.com.
+- A/B ZICHTBAAR GEMAAKT (Daimy: "ik zie geen A/B, maar 1 mail"): nu TWEE flows naast
+  elkaar in Klaviyo — "Tekenbonus 2 dagen" (XUFVKT, metric WBskhq) en "Tekenbonus 4
+  dagen" (TUFSZX, metric UP2sLV), elk eigen stats; oude enkelflow QViEvZ verwijderd.
+  run.js stuurt het event naar de metric van de arm. Eindcheck v2: 17/17 PASS.
+  Eindcheck v1 ving nog een echt gat: 5 TESTDOSSIERS in de doelgroep (3x Daimy Boot,
+  FGC SONTY, Playwright Testklant) → testpatroon-filter + @sonty.nl-filter in
+  selectie.js. Twee bewijs-events (2d: 500/di 18, 4d: 250/do 20) naar daimyboot.
   NOG TE DOEN deze week: reminder op de laatste bonusdag (vóór wo 19-08, eerste
-  2d-deadlines) + wekelijkse meting per arm in het weekrapport.
+  2d-deadlines, kan per flow als eigen stap) + wekelijkse meting per arm.
 
 ## 16-08: WINTERONDERZOEK (doel Daimy: winter winstgevend i.p.v. verlies) — RAPPORT KLAAR
 - Anatomie: okt-dec 2025 marge 108/72/45k vs kosten 118/106/91k (sep-dec samen -121k).

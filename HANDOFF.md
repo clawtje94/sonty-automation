@@ -24,6 +24,18 @@
   rond (12.674,49 → 13.174,49 → 12.674,49). NOG TE DOEN vóór live: Klaviyo-verzending
   in het LIVE-pad (afzender Jaimy, reply aanvragen@), meting per arm in weekrapport,
   en Daimy's expliciete "aan".
+- BULK-VERIFICATIE (vraag Daimy "100000% zeker?"): alle 343 bekende akkoord-dossiers
+  (stop-statussen 60d + alle boekingen) als kandidaat door de guard gevoerd → 343/343
+  geweigerd, 0 doorgelaten, ZONDER de Trengo-laag (die is dus nog een extra slot erop).
+  Vaste test: scripts/tekenbonus/test-bulk-verificatie.js — opnieuw draaien vóór elke
+  live-gang. Ook via Klaviyo getest (16-08 laat): 3 arm-mails + 1 variabelen-campagne
+  (template SfJgae, testlijst Wpd5tS — live flow triggert alleen op R76XQg, gecheckt)
+  naar daimyboot@gmail.com + joey@sonty.nl; per profiel eigen offerte/bonus/deadline
+  (Daimy 20266757/500/di-18, Joey 20268628/250/do-20) — variabelen + staffel bewezen.
+  Bekende restrisico's (eerlijk): (1) klant met totaal afwijkende identiteit in een
+  tweede dossier is onherkenbaar voor élk systeem — mitigatie 3 sleutels (mail/tel/
+  adres) + Trengo-laag; (2) race met tekenen op verzendmoment — mitigatie in live-pad:
+  guard per klant direct vóór de send + ACCEPTED-hercheck in de prep.
 
 ## 16-08: WINTERONDERZOEK (doel Daimy: winter winstgevend i.p.v. verlies) — RAPPORT KLAAR
 - Anatomie: okt-dec 2025 marge 108/72/45k vs kosten 118/106/91k (sep-dec samen -121k).

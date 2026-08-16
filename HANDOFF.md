@@ -12,11 +12,18 @@
   Edwin/Kirsten/Victor/Barbara/testdossier allemaal geweigerd (test-mag-benaderd.js),
   steekproef 15 echte kandidaten allemaal terecht groen, laag 6 (eenmaligheid via
   data/tekenbonus-log.json) geïsoleerd bewezen, lagen 3/5 gedekt door klant-brede match.
-- NOG TE BOUWEN (blok 2): offerte-prep (verlengen + staffelregel + actie→euroregel,
-  idempotent), mail-runner met A/B-verdeling (3 armen, round-robin), opruimen na
-  deadline (bonusregel eruit + actie terug naar groupDiscount — Sunny's guard checkt
-  groupDiscount 15%!), meting per arm, Klaviyo-sjablonen (afzender Jaimy, reply
-  aanvragen@). ALLES in testmodus: niks naar klanten tot Daimy expliciet "aan" zegt.
+- BLOK 2 OOK GEBOUWD (16-08 laat): offerte-prep.js (bereidVoor: backup, groupDiscount
+  → euroregel, staffelbonus onderaan, verlengen tot deadline+2, harde totaal-verificatie
+  met automatische rollback; ruimOp: bonus eruit + groupDiscount exact terug — Sunny's
+  guard checkt groupDiscount 15%), mail-template.html (10 tokens), run.js (3 armen
+  round-robin via data/tekenbonus-ab.json, CAP 30/run, één klant = één arm — dedupe-bug
+  gevonden en gefixt in eerste proeflijst; TESTMODUS standaard, LIVE-pad gooit bewust
+  een error tot .tekenbonus-live bestaat én --execute; --proef N stuurt voorbeeldmails
+  naar daimyboot@gmail.com). GETEST: proeflijst 30 echte kandidaten (armen, staffel,
+  weekend-regel kloppen), volledige prep/opruim-cyclus op testofferte 20266757 exact
+  rond (12.674,49 → 13.174,49 → 12.674,49). NOG TE DOEN vóór live: Klaviyo-verzending
+  in het LIVE-pad (afzender Jaimy, reply aanvragen@), meting per arm in weekrapport,
+  en Daimy's expliciete "aan".
 
 ## 16-08: WINTERONDERZOEK (doel Daimy: winter winstgevend i.p.v. verlies) — RAPPORT KLAAR
 - Anatomie: okt-dec 2025 marge 108/72/45k vs kosten 118/106/91k (sep-dec samen -121k).

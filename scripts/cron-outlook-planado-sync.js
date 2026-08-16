@@ -32,6 +32,28 @@ const TYPES = {
   default: '1f11c802-6337-6970-9d06-7e73cee772e4',
 };
 const INMEET_TEMPLATE = '1f11c802-65cd-6aa0-9d06-7e73cee772e4';
+// Werkbon-sjabloon "Montage afspraak particulier": 10 rapportvelden (werkplek, foto's
+// voor/na, product getest, bediening uitgelegd, ...) — bestond al, was nooit gebruikt.
+const MONTAGE_TEMPLATE = '1f11c802-6613-6d00-9d06-7e73cee772e4';
+// Outlook-voornaam → Planado-account van het montageteam. Duo-teams delen één
+// veld-app-account (zo staan ze in Planado). Dennis, Mick en ZZP 1 hebben (nog) geen
+// account: hun montages worden geteld en gemeld, niet gesynct.
+// Echte bussen (Daimy 16-08): Marvin+Moa, Kevin+Tygo, Yudi+Nick, Marvin+Bart,
+// Frenky+Dennis. Alleen bus Yudi+Nick heeft een kloppend Planado-account; "Kevin
+// Gibson + Marvin" klopt niet meer (Kevin rijdt met Tygo) en "Marvin" is ambigu
+// (twee bussen). Daarom hier ALLEEN de eenduidige mappings; de rest wacht op
+// accounts per bus (beslissing Daimy, kost seats).
+const MONTEURS = {
+  Yudi: '1f122f37-76db-68b0-9aad-4269fe2bbe9c',
+  Nick: '1f122f37-76db-68b0-9aad-4269fe2bbe9c',
+  Jorren: '1f122da2-8a5b-6c80-9ca9-72f9240343d3',
+  Sjoerd: '1f122d19-e43e-6da0-8ffb-661a4ff9bb36',
+};
+// Montage-sync staat achter een schakelaar: pas als data/montage-sync-aan bestaat
+// (of --montage bij een losse run) gaan monteurs-opdrachten echt mee. Zo krijgt de
+// 10-min-daemon deze code veilig binnen zonder dat er onaangekondigd ~100 opdrachten
+// in de veld-apps van het montageteam verschijnen.
+const MONTAGE_AAN = process.argv.includes('--montage') || fs.existsSync(path.join(__dirname, '..', 'data', 'montage-sync-aan'));
 const { zoekKlant, productRegels } = require('./planado-gripp-verrijken.js');
 
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -112,9 +134,10 @@ async function main() {
   // stond 2e in een showroomafspraak en werd gemist); anders de eerste niet-Sonty.
   const wie = (e) => {
     const namen = (e.Attendees || []).map((a) => a.EmailAddress?.Name || '').filter((n) => n && !/^sonty$/i.test(n));
-    return namen.find((n) => INMETERS[n.split(' ')[0]]) || namen[0] || '';
+    return namen.find((n) => INMETERS[n.split(' ')[0]] || (MONTAGE_AAN && MONTEURS[n.split(' ')[0]])) || namen[0] || '';
   };
   const NIET_KLUS = /vrij$|later$|vakantie|ziek|verlof/i;
+  const onbekendTeam = {};
 
   const extIdVan = (e) => 'ol-' + crypto.createHash('sha1').update(e.Id).digest('hex').slice(0, 20);
   // Alle opgehaalde events, OOK de geannuleerde: nodig om hieronder veilig te kunnen
@@ -125,8 +148,18 @@ async function main() {
   const items = evs
     .filter((e) => !e.IsCancelled && !/geannuleerd|canceled|cancelled/i.test(e.Subject || '') && !NIET_KLUS.test(e.Subject || ''))
     .map((e) => ({ e, voornaam: wie(e).split(' ')[0] }))
-    .filter((x) => INMETERS[x.voornaam]);
-  console.log(`Outlook: ${items.length} afspraken van Joey/Sjoerd in de komende 6 weken`);
+    .filter((x) => {
+      if (INMETERS[x.voornaam]) return true;
+      if (MONTAGE_AAN && soort(x.e.Subject) === 'montage') {
+        if (MONTEURS[x.voornaam]) return true;
+        onbekendTeam[x.voornaam || '?'] = (onbekendTeam[x.voornaam || '?'] || 0) + 1;
+      }
+      return false;
+    });
+  console.log(`Outlook: ${items.length} afspraken (inmeters${MONTAGE_AAN ? ' + monteurs' : ''}) in het venster`);
+  if (MONTAGE_AAN && Object.keys(onbekendTeam).length) {
+    console.log('  montages ZONDER Planado-account (niet gesynct): ' + Object.entries(onbekendTeam).map(([k, v]) => `${k}: ${v}`).join(', '));
+  }
 
   const jobs = await planadoJobs();
   const nu = new Date();
@@ -177,19 +210,22 @@ async function main() {
       } else overgeslagen++;
       continue;
     }
-    if (opStartWie.has(`${Date.parse(startISO)}|${INMETERS[voornaam]}`)) { overgeslagen++; continue; }
+    const werkerUuid = INMETERS[voornaam] || MONTEURS[voornaam];
+    if (opStartWie.has(`${Date.parse(startISO)}|${werkerUuid}`)) { overgeslagen++; continue; }
 
     console.log(`  + ${voornaam} ${startISO.slice(0, 16)} [${soort(e.Subject)}] ${(e.Subject || '').slice(0, 40)}`);
     nieuw++;
     if (EXECUTE) {
       // Voor inmeet-afspraken: Gripp-blok er meteen in (adres eerst, telefoon vangnet).
       let grippBlok = '';
-      if (soort(e.Subject) === 'inmeet') {
+      const isMontage = soort(e.Subject) === 'montage';
+      if (soort(e.Subject) === 'inmeet' || isMontage) {
         try {
           const match = await zoekKlant(adres, telefoonUit(e.Body));
           if (match) {
             const regels = productRegels(match.offerte);
-            grippBlok = `\n\nGripp: ${match.offerte.number}\nIN TE METEN:\n${regels.map((r) => '- ' + r).join('\n') || '- (geen productregels — check offerte)'}\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/${match.offerte.number}`;
+            grippBlok = `\n\nGripp: ${match.offerte.number}\n${isMontage ? 'TE MONTEREN' : 'IN TE METEN'}:\n${regels.map((r) => '- ' + r).join('\n') || '- (geen productregels — check offerte)'}`
+              + (isMontage ? '' : `\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/${match.offerte.number}`);
           }
         } catch { /* Gripp niet bereikbaar: opdracht komt zonder blok, verrijker haalt hem later op */ }
       }
@@ -201,10 +237,13 @@ async function main() {
         description: `${e.Subject || 'Afspraak'}\n(gesynct uit Outlook)${grippBlok}`,
         scheduled_at: startISO,
         scheduled_duration: { minutes: minuten },
-        assignee: { worker: { uuid: INMETERS[voornaam] } },
+        assignee: { worker: { uuid: werkerUuid } },
         external_id: extId,
       };
       if (soort(e.Subject) === 'inmeet') body.template = { uuid: INMEET_TEMPLATE };
+      // Montage krijgt het werkbon-sjabloon: daarmee ziet de monteur in de veld-app
+      // de checklist (werkplek, foto's voor/na, product getest, bediening uitgelegd).
+      else if (isMontage) body.template = { uuid: MONTAGE_TEMPLATE };
       const tel = telefoonUit(e.Body);
       if (tel) body.contacts = [{ type: 'phone', name: klantNaamUit(e.Subject), value: tel }];
       if (adres && adres.length > 8 && /\d/.test(adres)) body.address = { formatted: adres };
@@ -224,12 +263,17 @@ async function main() {
             // Meetbon als tikbaar linkveld in de details (Daimy 05-08)
             const nr = (grippBlok.match(/Gripp: (\d+)/) || [])[1];
             if (nr) {
-              const blok = (grippBlok.split('IN TE METEN:')[1] || '').split('MEETBON')[0]
+              const blok = (grippBlok.split(/IN TE METEN:|TE MONTEREN:/)[1] || '').split('MEETBON')[0]
                 .split('\n').map((x) => x.replace(/^\s*-\s*/, '').trim()).filter(Boolean).join(' · ');
-              naPatch.custom_fields = [
-                { name: 'In te meten', field_type: 'input', value: kortVeld(blok || 'zie omschrijving') },
-                { name: 'Meetbon', field_type: 'link', value: `https://sonty-website.vercel.app/admin/meetbon/${nr}` },
-              ];
+              naPatch.custom_fields = isMontage
+                ? [
+                  { name: 'Product type', field_type: 'input', value: kortVeld(blok || 'zie omschrijving') },
+                  { name: 'Bijzonderheden', field_type: 'input', value: kortVeld('Gripp ' + nr + ' — gesynct uit Outlook') },
+                ]
+                : [
+                  { name: 'In te meten', field_type: 'input', value: kortVeld(blok || 'zie omschrijving') },
+                  { name: 'Meetbon', field_type: 'link', value: `https://sonty-website.vercel.app/admin/meetbon/${nr}` },
+                ];
             }
             if (Object.keys(naPatch).length > 1) {
               await fetch(`https://api.planadoapp.com/v2/jobs/${uuid}`, {

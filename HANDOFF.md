@@ -49,8 +49,16 @@
   18.993 echte RP-nummers: 94,1% identiek, 524 hersteld (het lek is oud en groot),
   590 kansloze nummers voortaan skip, 0 ooit-werkende nummers geraakt (alle 119
   geslaagde deliveries in de steekproef waren +316).
-- NOG OPEN: weektelling "hoeveel klanten kregen afgelopen 7 dagen geen app" liep nog
-  (scratchpad wa-week-analyse.js); uitslag naar Daimy zodra klaar.
+- WEEKTELLING (uitslag 16-08): 340 offerte-apps in 7 dagen, 46 niet afgeleverd (13,5%).
+  Van die 46: 16 herstelbaar (8-cijfer-lek), 8 vast nummer, 4 onbruikbaar, 18 geldig
+  ogende 06-nummers (typefout/geen WhatsApp, waarvan 3 duidelijk nep zoals 0612345678).
+- INHAALACTIE (Daimy-opdracht 16-08): 13 klanten met hersteld nummer alsnog de
+  offerte-app gestuurd (checks: geen ACCEPTED, nog in Offerte verstuurd, geen
+  mailcontact in Trengo; 3 nepnummers geskipt). Resultaat: 5 aangekomen (2 gelezen),
+  Giel op SENT, 7 alsnog undeliverable (gok fout, ander cijfer mist). Die 7 (Cas
+  Dekker, Teus Bruin, Judith Uwimana, Sel Selim, Thomas Pröpper, Luuk Post, Ana V)
+  zijn via WhatsApp onbereikbaar; alleen mail/bellen kan nog. Daimy wil GEEN extra
+  meldingen/automatiek hiervoor.
 
 ## 16-08: MEENEEM-MELDING VOOR DE INMETER (gebouwd, staat nog UIT)
 - Opdracht Daimy: "als er opmerkingen in de offerte staan of het is binnen raamdeco wat

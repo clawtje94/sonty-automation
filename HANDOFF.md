@@ -48,6 +48,14 @@
   Tygo" (was Kevin Gibson + Marvin) en "Bus Yudi + Nick" (was Nick Huizer + Yudi);
   sync herkent Kevin/Tygo nu ook (d3dd6fd). Pro-abonnement = per gebruiker, ~$36/mnd
   (9 users, $324.48). Demo-werkbon-opdracht #562 staat op Daimy's eigen account.
+- 16-08 (namiddag): Daimy: "nog niks erin zetten, we zijn aan het uitzoeken" —
+  demo-opdracht #562 weer verwijderd, Planado leeg qua montages, schakelaar blijft
+  uit. Bussen genummerd (nr = laadvak, data/bussen.json): 1 Marvin+Moa, 2 Kevin+Tygo,
+  3 Yudi+Nick, 4 Marvin+Bart, 5 Frenky+Dennis; accounts heten nu "Bus 2/3 - ...".
+  Toewijzingsplan oude taken: deelnemer-naam → bussen-register → busaccount; ambigue
+  "Marvin"-gevallen NIET automatisch maar als lijstje naar Nanny; daarna bus-naam als
+  agenda-deelnemer. Stappenlijst Daimy staat op Telegram (nummering, accounts,
+  Nanny + team informeren, GO).
 - WACHT OP DAIMY: V1 = 2 nieuwe busaccounts (Marvin+Bart, Frenky+Dennis, ~$72/mnd)
   + akkoord om Tygo's losse account om te bouwen tot Bus Marvin + Moa (gratis) +
   e-mailadressen per bus. Daarna: Nanny bus-namen in agenda laten zetten (twee

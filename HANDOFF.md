@@ -1,5 +1,24 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-16)
 
+## 16-08: WINTERONDERZOEK (doel Daimy: winter winstgevend i.p.v. verlies) — RAPPORT KLAAR
+- Anatomie: okt-dec 2025 marge 108/72/45k vs kosten 118/106/91k (sep-dec samen -121k).
+  Oorzaak = volume: instroom zakt van 1.250-1.500 naar 365-380 offertes/mnd (factor 4);
+  conversie blijft ~10% (dec 6,6%). Prognose okt-dec 2026 bij ongewijzigd beleid: -222k.
+- Datakansen: (1) rolluiken = winterproduct (tot 74% van winterakkoorden, jan-conversie
+  22%); (2) winter-ads renderen in okt/nov net zo goed als aug (omzet/ad-euro 7,5 vs
+  6,5), alleen dec slecht (3,8) — afschalen was te grof; (3) pergola-oriënteerders
+  (65-100 off/mnd winter, ~0 conversie) = teken-nu-doelgroep voor prijsstijging jan
+  2027 (prijs vast, inmeten later); (4) raamdeco/behang amper aangeboden in winter,
+  Klaviyo+18 templates liggen klaar (flows UIT); (5) berg betaald winterwerk in tab
+  "Geplaatst niet gefactureerd": 66k direct factureerbaar (36 opdrachten), 670k
+  verkocht-nog-niet-geplaatst (288 = winterwerk team), 346k status onduidelijk;
+  (6) jan/feb 2026: 2x instroom van 2025, feb al +6k → volume werkt.
+- Plan (doorgerekend, +165 à 190k → winter rond break-even): rolluik-offensief okt/nov
+  (ads verschuiven, niet korten), teken-nu-campagne nov-dec op prijsstijging 2027,
+  binnenlijn via Klaviyo, dec-ads naar 15-20k + dec-lasten kritisch (2025 kon met 64k),
+  facturatie-sprint + werkvoorraad in okt-dec plaatsen (cash).
+- V6 aan Daimy open: onderdelen alvast klaarzetten of eerst laten bezinken.
+
 ## 16-08: EDWIN KANTERS (+31641223208) UITGEZOCHT — 3 STRUCTURELE GATEN, WACHT OP GO
 - Vraag Daimy: ticket niet in sheet, niet naar Inmeten inplannen; later: offerte door AI
   gemaakt, kortingsopbouw fout; NIETS aanpassen, alleen uitzoeken.

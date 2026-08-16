@@ -46,8 +46,10 @@
   hersteld), 8 met oude rij zonder offertenummer (Jan/Mei-era, gemeld, niet aangepast).
   Aanbiedingen: NIEMAND stilzwijgend blijven liggen — 25 verlopen aanbiedingen horen
   allemaal bij klanten die alsnog boekten; 4 open binnen hun 24u; reminder/ronde-2/
-  belscherm-keten werkt. Eén vlag: Kirsten de Koning staat op Afgerond zonder boeking
-  in de flow — even handmatig nakijken.
+  belscherm-keten werkt. Vlag Kirsten de Koning OPGELOST (16-08): zij is
+  handmatig gepland buiten de aanbod-flow om — Outlook-afspraak Joey ma 11-08 08:00
+  (outlook-planado-sync.log r312), inmeten heeft al plaatsgevonden; item daarom
+  terecht handmatig op Afgerond gezet op 06-08.
 - RESTGAT (klein, bekend): oud item + nieuwe offerte die nooit beweegt komt pas in de
   sheet zodra het dossier beweegt (tekening/boeking). Waarom RP sommige aanvragen met
   3 varianten direct genereert en OC overslaat = RP-kant, niet vast te stellen vanaf hier.

@@ -60,44 +60,43 @@
   zijn via WhatsApp onbereikbaar; alleen mail/bellen kan nog. Daimy wil GEEN extra
   meldingen/automatiek hiervoor.
 
-## 16-08: MEENEEM-MELDING VOOR DE INMETER (gebouwd, staat nog UIT)
-- Opdracht Daimy: "als er opmerkingen in de offerte staan of het is binnen raamdeco wat
-  gemeten moet worden, dan moet de inmeter de dag ervoor aan het eind van de dag een
-  melding krijgen dat hij dat mee moet nemen", aangescherpt tot: "als het los van buiten
-  zonwering is, in EEN opmerking, zodat hij dat op de zaak kan halen" en "wij zetten in de
-  offerte wat er gemeten moet worden, dus bijvoorbeeld plisse en blend".
-- **De melding staat in PLANADO, niet in Outlook** (Daimy: "het moet in Planado he, niet in
-  mijn agenda"). Eerst als Outlook-agendablok gebouwd, daarna omgezet.
-- GEBOUWD: `scripts/cron-meeneem-melding.js` + `data/meeneem-regels.json` + plist
-  `nl.sonty.meeneem-melding` (07:30 en 12:30, NOG NIET GELADEN). Werking: inmeetopdrachten
-  van de komende 14 dagen uit Planado, EEN melding per inmeter per dag met alle adressen
-  van die dag eronder, als Planado-opdracht van 15 min om 14:45 op de LAATSTE WERKDAG voor
-  de afspraak (Joey werkt geen wo/vr), type default, adres = zaak Rijswijk,
-  X-Planado-Notify-Assignees: true. external_id `meeneem-<wie>-<dag>` = idempotent
-  (bestaat -> PATCH, dag leeg -> DELETE; opruimen kijkt naar Planado zelf, niet naar state).
-- REGEL IS OMGEKEERD: buitenzonwering herkennen en al het andere melden. Een lijst met
-  binnen-producten verzinnen loopt altijd achter (v1 miste "Raamdecoratie"). Onbekend
-  product = wel melden.
-- Producten komen uit het OFFERTEdocument (leesOfferte -> "Plisse 1200x1400"), lead is het
-  vangnet. Er wordt op de product-NAAM getoetst, niet op de hele regel: anders viel
-  "3x Plisse - koordbediening" weg op het woord bediening.
+## 16-08: MEENEEM-MELDING VOOR DE INMETER — LIVE
+- Opdracht Daimy: de inmeter moet de avond voor de afspraak in Planado zien wat hij van de
+  zaak mee moet nemen. Na een paar rondes aangescherpt tot: ALLEEN binnen raamdecoratie en
+  behang ("niet de rest, want dat nemen we al allemaal mee"), alleen als we daar ook echt
+  gaan inmeten, altijd de dag ervoor om 18:00, en de lijst ONDER HET ADRES, niet als
+  opmerking in de opdracht.
+- LIVE: `scripts/cron-meeneem-melding.js` + `data/meeneem-regels.json`, plist
+  `nl.sonty.meeneem-melding` geladen (1 ronde per dag, 17:00), geregistreerd in
+  data/systemen-register.json (54 diensten).
+- Werking: 17:00 kijkt hij naar de inmeetopdrachten van MORGEN (dagenVooruit 1), leest per
+  afspraak de offerte, en zet per inmeter EEN Planado-opdracht van 15 min op vandaag 18:00.
+  Omschrijving = een regel, de hele lijst in `address.description`. type default, geen
+  template, X-Planado-Notify-Assignees true. external_id `meeneem-<wie>-<dag>` = idempotent
+  (bestaat -> PATCH, dag leeg -> DELETE; `meeneem-voorbeeld*` wordt met rust gelaten).
+- BRON IS ALLEEN DE OFFERTE. De leadtekst is bewezen onbruikbaar: van de 8 leads die op hun
+  leadtekst "raamdecoratie" riepen had GEEN ENKELE raamdeco in de offerte (Helene Beek: lead
+  zegt raamdecoratie, offerte is een rolluik). Geen leesbare offerte = geen melding, maar
+  wel in de log met reden.
+- 73% van de inmeetopdrachten heeft geen rp-koppeling (uit Outlook gesynct of handwerk).
+  Die worden op klantnaam aan de lead gekoppeld, alleen bij een unieke treffer. Onbepaalbaar
+  ging van 61 naar 31 van de 84.
+- REGEL IS OMGEKEERD: buitenzonwering + horren + bijregels herkennen, al het andere melden.
+  Lijsten gebouwd op alle 51 productnamen die echt in de offertes voorkomen; er blijven er 2
+  over die melden: "Raamplissé Inklem Unit" (Daimy: mag blijven staan) en "Blend prijzen en
+  spullen mee nemen mogelijk keukenraam".
 - VAL DICHTGEZET: `cron-outlook-planado-sync.js` maakt van elke Planado-opdracht zonder
-  agenda-afspraak een Bookings-afspraak. Zonder uitzondering had dat een bevestigingsmail
-  naar een niet-bestaande klant gestuurd. external_id `meeneem-*` wordt nu overgeslagen;
-  NIET_KLUS sluit ook MEENEMEN/LET OP/VOORBEELD-onderwerpen uit (getest).
-- ONDERWEG GEVONDEN: (1) het veld `Opmerking:` uit de RP-lead ging nergens heen, 135 van
-  1000 leads hebben er een; staat nu in de Planado-opdracht. (2) "Waarom ROMA?" uit het
-  offertedocument werd als PRODUCT geparsed, gaf valse meldingen en telde mee in de
-  inmeetduur; gefixt in `inmeten-planner-lees.js`, cache ter plekke opgeschoond.
-- GEMETEN: alle 47 productregels uit 1000 RP-leads nagelopen (alleen Raamdecoratie,
-  Shutters en Gordijnen vallen onder van-de-zaak), 14% van de leads zou een melding geven,
-  dry-run over 83 echte inmeetopdrachten geeft 3 meldingen. Roostergevallen Joey/Sjoerd,
-  zomer-/wintertijd en het NIET_KLUS-filter apart getest.
-- VOORBEELD: Planado-opdracht #563 (16-08 14:30) op naam van Daimy, external_id
-  `meeneem-voorbeeld-daimy`. WEGGOOIEN bij livegang.
-- OPEN bij Daimy: V3 tellen horren mee als van-de-zaak (plisse-hordeur Barbara Weeink)?
-  V4 Sjoerd start/eindigt in Woerden en kan niet in Rijswijk langs. Daarna plist laden,
-  --execute aanzetten en registreren in data/systemen-register.json.
+  agenda-afspraak een Bookings-afspraak met bevestigingsmail. external_id `meeneem-*` wordt
+  daar nu overgeslagen; NIET_KLUS sluit ook MEENEMEN/LET OP/VOORBEELD-onderwerpen uit.
+- ONDERWEG GEFIXT: (1) het veld `Opmerking:` uit de RP-lead ging nergens heen (135 van 1000
+  leads hebben er een), staat nu in de Planado-opdracht. (2) "Waarom ROMA?" werd als PRODUCT
+  geparsed, gaf valse meldingen en telde mee in de inmeetduur; gefixt in
+  `inmeten-planner-lees.js`, cache ter plekke opgeschoond.
+- ZICHTBAARHEID GETEST: Joey ziet opdracht #565 in zijn app, dus type default zonder template
+  is genoeg. Testopdrachten met/zonder sjabloon zijn opgeruimd.
+- OPEN: voorbeeld #565 (zo 16-08 18:00 bij Joey) staat er nog, weggooien zodra Joey heeft
+  gezegd wat hij ervan vindt. Eerste echte ronde: 14 afspraken voor morgen, 0 meldingen
+  (geen raamdeco ingepland), 7 zonder leesbare offerte.
 
 ## 16-08: MONTEURS NAAR PLANADO (fase 1 van "Claude doet de montageplanning")
 - Doel Daimy (/goal): monteurs gaan Planado gebruiken, alles moet er goed in staan

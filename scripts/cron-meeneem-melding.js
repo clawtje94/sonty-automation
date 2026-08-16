@@ -38,6 +38,23 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 const DAGKORT = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
 const BUITEN = new RegExp(REGELS.buitenzonwering.join('|'), 'i');
 const GEEN_PRODUCT = new RegExp(REGELS.geenProduct.join('|'), 'i');
+// Horren vallen er bewust buiten (Daimy 16-08: "horren hoeven er niet bij").
+const GEEN_MEENEEM = new RegExp((REGELS.geenMeeneem || ['\\bnooit\\b']).join('|'), 'i');
+const SIGNALEN = Object.entries(REGELS.opmerkingSignalen || {})
+  .filter(([k]) => !k.startsWith('_'))
+  .map(([soort, woorden]) => ({ soort, regex: new RegExp(woorden.join('|'), 'i') }));
+
+/**
+ * Hoort deze opmerking in de meeneem-melding? Alleen als hij ergens over gáát wat je
+ * mee moet nemen (Daimy 16-08: "alleen opmerkingen wat mee te nemen, niet als iemand
+ * aan moet bellen of moet bellen"). Geeft het soort terug, of null.
+ */
+function meeneemSignaal(opmerking) {
+  const t = String(opmerking || '');
+  if (!t.trim()) return null;
+  const raak = SIGNALEN.filter((s) => s.regex.test(t)).map((s) => s.soort);
+  return raak.length ? raak.join(' + ') : null;
+}
 
 // ── tijd in Nederland ───────────────────────────────────────────────────────
 // Outlook krijgt alles in UTC (zoals de rest van de keten), het rooster staat in
@@ -98,7 +115,7 @@ function splitsProducten(producten) {
     const naam = String((typeof p === 'string' ? p : p?.naam) || '').trim();
     const regel = (typeof p === 'string' ? p : p?.regel || p?.naam) || '';
     if (!naam) continue;
-    if (BUITEN.test(naam)) { buiten.push(regel); continue; }
+    if (GEEN_MEENEEM.test(naam) || BUITEN.test(naam)) { buiten.push(regel); continue; }
     if (GEEN_PRODUCT.test(naam)) continue;
     vanDeZaak.push(regel);
   }
@@ -340,5 +357,5 @@ if (require.main === module) main().catch((e) => { console.error(e.message); pro
 
 module.exports = {
   meldMoment, splitsProducten, bouwDagMelding, nlNaarUtc, nlDatum, nlDagNaam,
-  productenUitOmschrijving, meldingBody, extIdVoor,
+  productenUitOmschrijving, meldingBody, extIdVoor, meeneemSignaal,
 };

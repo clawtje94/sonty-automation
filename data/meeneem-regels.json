@@ -5,6 +5,23 @@
   "duurMin": 15,
   "dagenVooruit": 14,
   "ookNaarTelegram": true,
+  "geenMeeneem": [
+    "hor\\b",
+    "horren",
+    "hordeur",
+    "hordeuren",
+    "horraam",
+    "gaas",
+    "unilux"
+  ],
+  "opmerkingSignalen": {
+    "_uitleg": "Daimy 16-08: 'het hoeft echt alleen opmerkingen wat mee te nemen, niet als iemand aan moet bellen bijvoorbeeld of moet bellen.' Alleen een opmerking die een signaal hieronder raakt komt in de melding; de rest (prijsvragen, mailen ipv bellen, oriënteren) blijft eruit.",
+    "kleurstalen": ["kleur", "ral ?\\d", "ral\\b", "doek", "stalen", "staal\\b", "kleurcode", "waaier", "monster", "boek"],
+    "oude weg": ["demonter", "verwijder", "afvoer", "moet af\\b", "afgebroken", "weghalen", "slopen"],
+    "montagemateriaal": ["koker", "boren", "geboord", "beton", "prefab", "plafond", "wandmontage", "montage op de muur", "stroom", "bedrading", "elektra", "tussen de muren"],
+    "merkstalen": ["brustor", "roma\\b", "sunmaster", "velux", "dakraam", "douglas", "arte\\b"],
+    "klimmateriaal": ["ladder", "hoogwerker", "steiger"]
+  },
   "buitenzonwering": [
     "rolluik",
     "screen",

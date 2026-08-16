@@ -9,7 +9,10 @@
 const RP_API_KEY = 'reuzenpanda_cpat_WMD2KmDRune53bj7.d0_ls8loPpAjb2TrSNOS_Xd_QLdxHq1xwOC9pyyJado';
 const PID = '731483fa-ef6b-4aae-afcf-883ec09219dd';
 
-const GEEN_PRODUCT_REGEL = /^inmeten \+ montage|^montage\b|^korting|^toeslag|^transport/i;
+// Een regel die op een vraagteken eindigt is een kopje uit het offertedocument
+// ("Waarom ROMA?"), geen product. Stond als product in de opdracht en telde mee in de
+// inmeetduur (Daimy 16-08, gevonden bij Verkerk en Monique Bijnen).
+const GEEN_PRODUCT_REGEL = /^inmeten \+ montage|^montage\b|^korting|^toeslag|^transport|\?\s*$/i;
 
 // OFFERTE-CACHE (Daimy 06-08: "ik krijg steeds api-gezeur met RP omdat we te veel
 // gebruiken"): offertedocumenten wijzigen zelden, maar werden elke planner-ronde

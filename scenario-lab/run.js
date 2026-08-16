@@ -25,6 +25,7 @@ const ONDERDELEN = [
   require('./onderdelen/avondrit.js'),
   require('./onderdelen/sheet-rij.js'),
   require('./onderdelen/mutatie-motor.js'),
+  require('./onderdelen/telefoon-normalisatie.js'),
 ];
 // UI-laag draait tegen de echte site in een echte browser: alleen met --ui (of een filter),
 // anders wordt elke logica-run traag van het browsen.

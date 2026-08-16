@@ -57,6 +57,19 @@
   terug; coulance: pas na 23:59 van de deadline-dag). KILL SWITCH: verwijder
   scripts/tekenbonus/.tekenbonus-live (staat er nu op). CAP 30 klanten/run.
   Checks vlak voor live: lab 544/0 FOUT-STIL, bulk 343/343 geweigerd, dry-run OK.
+- OMGEBOUWD NAAR FLOW (16-08 zeer laat, Daimy: "flows, anders alleen losse data" +
+  "doe wat jij het beste vindt"): geen campagnes/lijsten-per-dag meer. run.js stuurt
+  per bonus-klant een Klaviyo-EVENT "Tekenbonus aangeboden" (metric RMRu9T) met alle
+  gegevens als event-properties (snapshot, geen property-races met de daily sync);
+  Flow "Tekenbonus" (QViEvZ, via de flows-API .pre-revision aangemaakt ONDANKS de
+  FLOWS.md-waarschuwing — gelukt met temporary_id + entry_action_id; definition
+  geverifieerd) triggert daarop en verstuurt template "Sonty | Tekenbonus (flow,
+  event-data)" (flow-kopie UwarwX, 0 hardcoded waarden, 16 event-vars, unsubscribe ok),
+  afzender Jaimy/aanvragen@, smart sending BEWUST UIT (offerte is al klaargezet, mail
+  mag nooit stil geskipt). Flow staat LIVE. run.js checkt vóór het preppen of de flow
+  live is (anders run overslaan + melding). klaviyo-verzend.js (campagne-route)
+  verwijderd. Alle stats voortaan op één plek: Flows → Tekenbonus. End-to-end bewijs
+  verstuurd: echt event → flow → mail naar daimyboot@gmail.com.
   NOG TE DOEN deze week: reminder op de laatste bonusdag (vóór wo 19-08, eerste
   2d-deadlines) + wekelijkse meting per arm in het weekrapport.
 

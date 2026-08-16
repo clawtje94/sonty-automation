@@ -94,8 +94,16 @@ function productTekst(fullDoc) {
     return;
   }
 
-  // fase 2: live uitvoeren
-  const { zetProfiel, verstuurArm } = require('./klaviyo-verzend.js');
+  // fase 2: live uitvoeren via de FLOW-route (events; besluit Daimy 16-08: flows,
+  // geen losse campagnes). Eerst checken of de flow live staat — anders zouden we
+  // offertes prepareren terwijl er nooit een mail volgt.
+  const { flowStatus, stuurEvent } = require('./klaviyo-events.js');
+  const flow = await flowStatus();
+  if (!flow.live) {
+    const m = `⏸ Tekenbonus-run overgeslagen: ${flow.reden}. Zet de flow live in Klaviyo (Flows → Tekenbonus), dan gaat de volgende run vanzelf.`;
+    console.log(m); await telegram(m); return;
+  }
+
   const log = fs.existsSync(BONUS_LOG) ? JSON.parse(fs.readFileSync(BONUS_LOG, 'utf8')) : {};
   const bewaarLog = () => fs.writeFileSync(BONUS_LOG, JSON.stringify(log, null, 1));
   const rapport = { controle: 0, 'bonus-2d': 0, 'bonus-4d': 0, fouten: [] };
@@ -107,55 +115,41 @@ function productTekst(fullDoc) {
   }
   bewaarLog();
 
-  for (const armLabel of ['bonus-2d', 'bonus-4d']) {
-    const groep = selectie.filter((x) => x.arm === armLabel);
-    if (!groep.length) continue;
-    const geprept = [];
-    const profielIds = [];
-    for (const s of groep) {
-      try {
-        const prep = await bereidVoor(s.doc.documentId, { deadlineDatum: s.dl });
-        if (prep.fout) { rapport.fouten.push(`${s.wie.naam}: prep ${prep.fout}`); continue; }
-        geprept.push({ s, prep });
-        const voornaam = (s.wie.naam || '').trim().split(/\s+/)[0] || '';
-        const pid = await zetProfiel(s.wie.email, voornaam, {
-          sonty_aanhef: voornaam ? `Hoi ${voornaam},` : 'Hoi,',
-          sonty_product: s.product,
-          sonty_offertenummer: String(s.doc.quotationNumber),
-          sonty_geldigheid_waarde: prep.deadlineKort + ' ' + s.dl.getFullYear(),
-          sonty_bedrag: euro(prep.totaalVoor),
-          sonty_totaal_met_bonus: euro(prep.totaalNa),
-          sonty_bonus: String(prep.bonus),
-          sonty_deadline_dag: prep.deadlineDag,
-          sonty_deadline_kort: prep.deadlineKort,
-          sonty_offerte_link: `https://document.reuzenpanda.nl/nl/${CFG.RP_PID}/${s.doc.documentId}/latest?pdfAction=DOCSIGN`,
-        });
-        profielIds.push(pid);
-        log[s.doc.documentId] = { email: s.wie.email, telefoon: s.wie.tel, naam: s.wie.naam, itemId: s.item.id, nummer: String(s.doc.quotationNumber), arm: armLabel, bonus: prep.bonus, totaalVoor: prep.totaalVoor, totaalNa: prep.totaalNa, deadline: s.dl.toISOString(), origineleGroupDiscount: prep.origineleGroupDiscount, verstuurdOp: new Date().toISOString(), status: 'geprept', };
-      } catch (e) {
-        rapport.fouten.push(`${s.wie.naam}: ${String(e.message).slice(0, 80)}`);
-      }
-    }
-    bewaarLog();
-    if (!profielIds.length) continue;
+  for (const s of selectie.filter((x) => x.arm !== 'controle')) {
     try {
-      const r = await verstuurArm({ armLabel, profielIds,
-        onderwerp: 'Er kan eenmalig {{ person.sonty_bonus|default:"" }} euro van je offerte af',
-        preheader: 'Jouw tekenbonus staat al in je offerte, tot en met {{ person.sonty_deadline_kort|default:"binnenkort" }}.' });
-      for (const { s } of geprept) { if (log[s.doc.documentId]) log[s.doc.documentId].status = 'verstuurd'; }
-      rapport[armLabel] = r.verstuurd;
-    } catch (e) {
-      // campagne faalde: geprepareerde offertes terugdraaien, niets claimen
-      rapport.fouten.push(`campagne ${armLabel}: ${String(e.message).slice(0, 100)} — offertes teruggedraaid`);
-      for (const { s, prep } of geprept) {
+      const prep = await bereidVoor(s.doc.documentId, { deadlineDatum: s.dl });
+      if (prep.fout) { rapport.fouten.push(`${s.wie.naam}: prep ${prep.fout}`); continue; }
+      const voornaam = (s.wie.naam || '').trim().split(/\s+/)[0] || '';
+      try {
+        await stuurEvent(s.wie.email, {
+          arm: s.arm,
+          aanhef: voornaam ? `Hoi ${voornaam},` : 'Hoi,',
+          product: s.product,
+          offertenummer: String(s.doc.quotationNumber),
+          geldig_tot: prep.deadlineKort + ' ' + s.dl.getFullYear(),
+          totaal: euro(prep.totaalVoor),
+          totaal_met_bonus: euro(prep.totaalNa),
+          bonus: String(prep.bonus),
+          deadline_dag: prep.deadlineDag,
+          deadline_kort: prep.deadlineKort,
+          offerte_link: `https://document.reuzenpanda.nl/nl/${CFG.RP_PID}/${s.doc.documentId}/latest?pdfAction=DOCSIGN`,
+        });
+      } catch (e) {
+        // event faalde: offerte meteen terugdraaien, niets laten hangen
         await ruimOp(s.doc.documentId, prep.origineleGroupDiscount).catch(() => {});
-        if (log[s.doc.documentId]) log[s.doc.documentId].status = 'campagne-mislukt-teruggedraaid';
+        rapport.fouten.push(`${s.wie.naam}: event ${String(e.message).slice(0, 80)} — offerte teruggedraaid`);
+        continue;
       }
+      log[s.doc.documentId] = { email: s.wie.email, telefoon: s.wie.tel, naam: s.wie.naam, itemId: s.item.id, nummer: String(s.doc.quotationNumber), arm: s.arm, bonus: prep.bonus, totaalVoor: prep.totaalVoor, totaalNa: prep.totaalNa, deadline: s.dl.toISOString(), origineleGroupDiscount: prep.origineleGroupDiscount, verstuurdOp: new Date().toISOString(), status: 'verstuurd' };
+      rapport[s.arm]++;
+      bewaarLog();
+    } catch (e) {
+      rapport.fouten.push(`${s.wie.naam}: ${String(e.message).slice(0, 80)}`);
     }
-    bewaarLog();
   }
+  bewaarLog();
 
-  const melding = `📨 Tekenbonus-run: ${rapport['bonus-2d']}x 2-dagen-mail, ${rapport['bonus-4d']}x 4-dagen-mail, ${rapport.controle}x controle (geen mail).${rapport.fouten.length ? '\n⚠️ ' + rapport.fouten.slice(0, 5).join('\n⚠️ ') : ''}`;
+  const melding = `📨 Tekenbonus-run (flow "${flow.naam}"): ${rapport['bonus-2d']}x 2-dagen, ${rapport['bonus-4d']}x 4-dagen, ${rapport.controle}x controle (geen mail).${rapport.fouten.length ? '\n⚠️ ' + rapport.fouten.slice(0, 5).join('\n⚠️ ') : ''}`;
   console.log(melding);
   await telegram(melding);
 })();

@@ -105,7 +105,9 @@ async function magBenaderd(kandidaatItem, items, opties = {}) {
     const rijen = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'email', 'rp-export.json'), 'utf8'));
     const rij = rijen.find((r) => (wie.email && normMail(r.email) === wie.email) || (wie.tel && laatste9(r.telefoon) === wie.tel));
     if (rij && rij.magMail === false) return { mag: false, reden: 'opt-out (geen herinnering meer)' };
-    if (!rij && !wie.email) return { mag: false, reden: 'niet in mail-export en geen e-mail (fail-closed)' };
+    // Niet in de export = opt-out-status onbekend (export verouderd of klant nét binnen).
+    // Fail-closed, aangescherpt via het scenario-lab 17-08: eerst mocht dit door mét e-mail.
+    if (!rij) return { mag: false, reden: 'niet in mail-export, opt-out onbekend (fail-closed)' };
   } catch { return { mag: false, reden: 'mail-export niet leesbaar (fail-closed)' }; }
 
   // laag 6: eenmaligheid

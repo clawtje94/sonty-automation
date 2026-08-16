@@ -13,7 +13,7 @@ const path = require('path');
 const CFG = require('../ai-ks/config.js');
 const { magBenaderd, klantIdentiteit, BONUS_LOG } = require('./mag-benaderd.js');
 const { kandidaten } = require('./selectie.js');
-const { bereidVoor, ruimOp, staffel, deadline, datumLang, datumKort } = require('./offerte-prep.js');
+const { bereidVoor, ruimOp, staffel, magBonus, deadline, datumLang, datumKort } = require('./offerte-prep.js');
 
 const H = { Authorization: 'Bearer ' + CFG.RP_API_KEY };
 const AB_FILE = path.join(__dirname, '..', '..', 'data', 'tekenbonus-ab.json');
@@ -74,6 +74,7 @@ function bouwMail(w) {
     const dl = deadline(dagen);
     const full = await (await fetch(`https://backend.reuzenpanda.nl/document-service/v1/${CFG.RP_PID}/quotations/${doc.documentId}`, { headers: H })).json();
     const totaal = Math.round((full?.quotationData?.pricing?.total ?? 0) * 100) / 100;
+    if (!magBonus(totaal)) continue; // lab-regel: onder 750 of kapot totaal → geen mail
     const bonus = staffel(totaal);
     gedaan++;
     console.log(`${String(gedaan).padStart(2)} ${arm.padEnd(9)} ${(wie.naam || '?').slice(0, 26).padEnd(26)} ${doc.quotationNumber} ${euro(totaal)}${arm === 'controle' ? '' : ` → bonus ${bonus}, deadline ${datumKort(dl)}`}`);

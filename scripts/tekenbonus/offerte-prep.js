@@ -20,6 +20,13 @@ function staffel(totaalIncl) {
   return 500;
 }
 
+// Ondergrens uit het scenario-lab (17-08): op een offerte van 0, een negatief bedrag of
+// een mini-bedrag slaat een bonus nergens op (100 eraf bij 300 totaal is een derde van
+// de prijs) en wijst het bedrag op een kapotte of lege offerte. Onder de 750 geen mail.
+function magBonus(totaalIncl) {
+  return Number.isFinite(totaalIncl) && totaalIncl >= 750;
+}
+
 /** Deadline: verzenddag + dagen; valt hij in het weekend, dan maandag. */
 function deadline(dagen, vanaf = new Date()) {
   const d = new Date(vanaf.getTime() + dagen * 86400000);
@@ -84,4 +91,4 @@ async function ruimOp(documentId, origineleGroupDiscount) {
   return put.ok ? { opgeruimd: true } : { fout: 'opslaan mislukte (' + put.status + ')' };
 }
 
-module.exports = { bereidVoor, ruimOp, staffel, deadline, datumLang, datumKort };
+module.exports = { bereidVoor, ruimOp, staffel, magBonus, deadline, datumLang, datumKort };

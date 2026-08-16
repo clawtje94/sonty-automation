@@ -25,7 +25,13 @@ const AB_FILE = path.join(__dirname, '..', '..', 'data', 'tekenbonus-ab.json');
 const ARMEN = ['controle', 'bonus-2d', 'bonus-4d'];
 const LIVE = fs.existsSync(path.join(__dirname, '.tekenbonus-live')) && process.argv.includes('--execute');
 const PROEF = process.argv.includes('--proef') ? parseInt(process.argv[process.argv.indexOf('--proef') + 1] || '3', 10) : 0;
-const CAP = 30; // max klanten per run
+// Cap bouwt automatisch op (vraag Daimy 16-08: "wat als het er meer dan 30 zijn?"):
+// week 1 = 30/dag (rustige start + mail-reputatie van aanvragen@ opwarmen), daarna
+// +15 per week tot 75/dag. Bij ~55-70 nieuwe kandidaten per dag dekt 75 de instroom
+// en wordt de wachtrij (oudste eerst) vanzelf ingehaald.
+const START = new Date('2026-08-17').getTime();
+const weken = Math.max(0, Math.floor((Date.now() - START) / (7 * 86400000)));
+const CAP = Math.min(75, 30 + 15 * weken);
 const TG = { token: '8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40', chat: 1700128390 };
 
 const euro = (n) => '€ ' + n.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 });

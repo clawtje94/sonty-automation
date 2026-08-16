@@ -13,7 +13,9 @@ const TESTPATROON = /daimy|playwright|testklant|\btest\b|sonty|proefklant/i;
 
 async function kandidaten(items) {
   const nu = Date.now();
-  const MIN = 30 * 86400000, MAX = 60 * 86400000;
+  // MAX op 75 dagen (was 60): de cap bouwt de eerste weken op (warm-up), en zolang
+  // de wachtrij wordt ingehaald mag niemand stilletjes uit de selectie verouderen.
+  const MIN = 30 * 86400000, MAX = 75 * 86400000;
   return items.filter((i) =>
     (i.status_id === OV || i.status_id === AI_OV) &&
     nu - i.timestamp_created >= MIN && nu - i.timestamp_created <= MAX &&

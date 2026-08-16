@@ -25,7 +25,17 @@
   conversie 22%)+ads ~35k; FEB vroegboek voorjaar+showroomdagen+team op sterkte; MRT
   alles aan. Stuur-KPI's per maand: instroom, rolluik-akkoorden, teken-nu-deals,
   maandwinst. Financiele doelen per maand: okt 0, nov 0, dec ≥-20k, jan 0, feb +10k.
-- V6 aan Daimy open: onderdelen alvast klaarzetten (rolluik-mails, teken-nu-campagne,
+- BESLUITEN Daimy 16-08 avond: V9 (6-lagen uitsluit-waarborg op klantniveau) JA en is
+  harde eis voor alles onder V6/V7; V10 NEE (mail-afmelding hoeft niet naar RP);
+  Klaviyo-sync blijft 1x/dag; NIKS naar klanten sturen.
+- TEKENBONUS-TESTMAIL verstuurd naar daimyboot@gmail.com (16-08): opzet = waarheid
+  eerst ("jouw offerte staat nog op de oude prijs, nu opnieuw = ruim 1.100 duurder",
+  klopt voor alle offertes van voor 3 aug) + eenmalige tekenbonus 250 euro vast bedrag
+  met deadline. Basis dist/sonty-herinnering-2, echte offerte 20266757 (13.174,49,
+  dossier Daimy Boot 45aeb252), verstuurd via Outlook-testroute (stuur-testmails-weg).
+  Bouwscript+HTML in scratchpad (sessie 410ce2a0). Bij echte inzet eerst: offertes
+  verlengen, dag-30-selectie, V9-lagen, A/B-meting. Wacht op oordeel Daimy (V11).
+- V6 aan Daimy open: winteracties alvast klaarzetten (rolluik-mails, teken-nu-campagne,
   facturatielijst) of eerst laten bezinken.
 
 ## 16-08: EDWIN KANTERS (+31641223208) UITGEZOCHT — 3 STRUCTURELE GATEN, WACHT OP GO

@@ -1,6 +1,6 @@
 # Mailmarketing-tijdlijn aug 2026 t/m maart 2027
 
-Opgesteld 15-08 op input Daimy: prijzen stijgen in januari (nieuwe leverancierstarieven), woonmaand oktober = 20% (i.p.v. 15%), seizoenswissel herfst/winter. Rode draad Q4: **nu kopen = de normale prijs van dit jaar én volgend jaar het hele jaar plezier; in januari liggen de prijzen weer hoger.**
+Opgesteld 15-08, bijgesteld 16-08 op input Daimy: woonmaand oktober = 20% (i.p.v. 15%), seizoenswissel herfst/winter. **De prijsstijging van januari noemen we NIET in klantmails (Daimy 16-08: dat schrikt af); het blijft alleen interne kennis.** De positieve draad: wie nu beslist, heeft er dit najaar al plezier van.
 
 Niets gaat uit vóór: teksten door Daimy gecontroleerd, foto's door Daimy gezet, akkoord per flow. Elke stap hieronder: alleen naar engaged + passend segment, in blokken, weekbot bewaakt spam/afmeldingen.
 
@@ -16,7 +16,7 @@ Niets gaat uit vóór: teksten door Daimy gecontroleerd, foto's door Daimy gezet
 
 ## Fase 2 — september: reactivering met productvarianten (C1, klaar)
 - Doelgroep: koude offertes (60-365 dgn, 5.373 profielen) in blokken van 200, productvariant per klant (screens/rolluiken/knikarm/pergola/markies/binnen).
-- Boodschap: offerte staat er nog; prijs is van toen, één berichtje en we rekenen hem opnieuw uit. Vanaf hier de rode draad starten: dit zijn nog de prijzen van dit jaar.
+- Boodschap: offerte staat er nog; prijs is van toen, één berichtje en we rekenen hem opnieuw uit.
 
 ## Fase 3 — oktober: WOONMAAND, 20% (was 15%) — de grote actie
 - Opzet zoals een goede actiereeks hoort: teaser ("er komt iets aan") → actiemail 20% → herinnering halverwege → laatste kans. Vier mails over de maand, nooit de hele lijst in één keer.
@@ -28,14 +28,13 @@ Niets gaat uit vóór: teksten door Daimy gecontroleerd, foto's door Daimy gezet
 - W3 donkere-dagen-flow aan (weermotor triggert vanzelf) + campagne met isolatie-insteek: rolluiken en Duette houden de kou buiten, merkbaar op de energierekening, veilig gevoel in donkere maanden.
 - Doelgroep: koud-raamdecoratie (segment 9) + klanten met alleen buitenzonwering (segment 6, cross-sell D1).
 
-## Fase 5 — december: laatste kans prijzen van dit jaar
-- Boodschap (eerlijk, sluit aan op bestaande regel "nu tekenen zet de prijs vast"): in januari komen de nieuwe leverancierstarieven; wie in december tekent, houdt de prijs van dit jaar én heeft er volgend jaar het hele jaar plezier van.
+## Fase 5 — december: eindejaarsmoment
+- Boodschap zonder prijsdreiging (Daimy 16-08): rustig eindejaarshaakje, bijvoorbeeld "begin het nieuwe jaar met je huis op orde" en de bestaande regel dat tekenen de prijs vastzet voor wie later klaar is. GEEN verwijzing naar duurder worden.
 - Doelgroep: alle open offertes + engaged; twee mails (begin december + laatste week).
 - Nieuwe template nodig → bouw in november.
 
-## Fase 6 — januari: prijsstijging is een feit + vroegboek lente
-- Geen kunstmatige druk meer; nieuwe insteek: wie er in januari/februari bij is, heeft het hangen vóór de eerste mooie dag (8-10 weken doorlooptijd maakt dat waar).
-- Prijsstijging alleen benoemen als hij echt is doorgevoerd (geen verzonnen bedragen).
+## Fase 6 — januari: vroegboek lente
+- Insteek: wie er in januari/februari bij is, heeft het hangen vóór de eerste mooie dag (8-10 weken doorlooptijd maakt dat waar). Over prijzen zwijgen we.
 
 ## Fase 7 — maart: eerste lentedag (W2, klaar) + hitte adhoc (W1, klaar)
 - Weermotor vuurt vanzelf; het fundament doet de rest.

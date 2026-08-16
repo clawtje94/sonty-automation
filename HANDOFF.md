@@ -1,5 +1,29 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-16)
 
+## 16-08: WHATSAPP "NIET AFGELEVERD" — OORZAAK GEVONDEN + VANGNET LIVE
+- Daimy: veel offerte-templates in Trengo op "niet afgeleverd" terwijl de nummers echt
+  lijken. Gemeten (Trengo delivery-status): 8 van 42 recente offerte-apps FAILED (19%),
+  allemaal "Message undeliverable". Niet Meta, niet de templates, niet de verzendcode.
+- OORZAAK (zelf headless gereproduceerd, POSTs geblokkeerd dus geen echte lead): het
+  RP-formulier toont het telefoonveld in +31-opmaak; klanten die daardoor de 06 weglaten
+  komen als +31 + 8 cijfers in RP en de formulier-check houdt dat NIET tegen. Typ
+  "22422242" → veld maakt er exact +3122422242 van (= kapotte nummer van Cas Dekker
+  15-08). Praktijkbewijs: Giel Kooi kapot +3144536548 vs goed (Tiny en Giel) +31644536548.
+- BESLUIT DAIMY: (1) hij meldt het formulier-lek zelf bij Reuzenpanda; (2) vangnet
+  gebouwd (zie hieronder); (3) GEEN aflever-wachter — hij krijgt al te veel meldingen.
+- VANGNET LIVE (commit 427a95f): `scripts/lib/telefoon-normalisatie.js` — één
+  normalisatie voor WhatsApp-nummers. 8 cijfers na +31 = weggelaten 6 terugzetten
+  (hersteld), vaste/onvolledige nummers = skip (markWaSent zodat er geen retry-loop
+  komt). V4 gebruikt hem; herstellingen en skips staan in de bestaande run-samenvatting
+  op Telegram (geen extra berichten). Followup-scripts staan in uitgeschakeld/ en zijn
+  bewust niet aangepast.
+- GETEST: scenario-lab `telefoon-normalisatie` 154 scenario's 0x FOUT-STIL; regressie op
+  18.993 echte RP-nummers: 94,1% identiek, 524 hersteld (het lek is oud en groot),
+  590 kansloze nummers voortaan skip, 0 ooit-werkende nummers geraakt (alle 119
+  geslaagde deliveries in de steekproef waren +316).
+- NOG OPEN: weektelling "hoeveel klanten kregen afgelopen 7 dagen geen app" liep nog
+  (scratchpad wa-week-analyse.js); uitslag naar Daimy zodra klaar.
+
 ## 16-08: MEENEEM-MELDING VOOR DE INMETER (gebouwd, staat nog UIT)
 - Opdracht Daimy: "als er opmerkingen in de offerte staan of het is binnen raamdeco wat
   gemeten moet worden, dan moet de inmeter de dag ervoor aan het eind van de dag een

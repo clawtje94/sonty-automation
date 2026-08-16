@@ -30,7 +30,9 @@ const FOTOS = ['kantoor-stalen', 'knikarm-gevel', 'montage-team-1', 'pergola-tui
                'showroom-opening', 'showroom-ramen', 'showroom-tafel', 'sonty-bus', 'team-klant-blij',
                // 13-08 na visuele QA-ronde: betere beelden, inhoud met eigen ogen gecontroleerd
                'showroom-overzicht', 'pergola-tuin-1', 'knikarm-resultaat', 'montage-cassette',
-               'uitvalscherm-balkon', 'markiezen-woonhuis', 'rolluik-raam', 'screen-tuindeuren'];
+               'uitvalscherm-balkon', 'markiezen-woonhuis', 'rolluik-raam', 'screen-tuindeuren',
+               // 16-08 emotie-ronde: alle 30 foto's visueel beoordeeld, dit zijn de sterkste
+               'screen-woning', 'screen-dakkapel', 'markies-flat', 'montage-afstellen'];
 
 async function upload(bestandspad, naam, type) {
   const fd = new FormData();

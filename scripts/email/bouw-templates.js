@@ -447,7 +447,7 @@ const SJABLONEN = {
       assortiment(),
       review(...REVIEW_ROLLUIK),
       cijfers(),
-      beeld(slotFoto('sonty-verhaal', 'monteurs', 'eigen/montage-cassette.webp'), 'Een monteur van Sonty monteert een cassette', 'Onze monteurs zijn in dienst bij Sonty, geen onderaannemers'),
+      beeld(slotFoto('sonty-verhaal', 'monteurs', 'eigen/montage-afstellen.webp'), 'Een monteur van Sonty stelt zonwering af', 'Onze monteurs zijn in dienst bij Sonty, geen onderaannemers'),
       garantie(),
       showroom(),
     ],
@@ -568,6 +568,7 @@ SJABLONEN['sonty-welkom'] = mail({
   kop: 'Je aanvraag is binnen',
   intro: 'Dank je wel, ik ga er meteen mee aan de slag. Je hoort snel van me met een prijsindicatie. Hieronder vast wat je van ons kunt verwachten.',
   blokken: [
+    beeld(slotFoto('sonty-welkom', 'team', 'eigen/team-klant-blij.webp'), 'Een blije klant met twee monteurs van Sonty', 'Ons team met een blije klant, daar doen we het voor'),
     stappen(),
     knop('Bekijk ons assortiment', 'https://www.sonty.nl/assortiment'),
     cijfers(),
@@ -752,13 +753,15 @@ function maakReactivering1({ tpl, foto: fotoBestand, alt, caption, rev }) {
 }
 
 SJABLONEN['sonty-reactivering-1'] = maakReactivering1({
-  tpl: 'sonty-reactivering-1', foto: 'eigen/knikarm-resultaat.webp', alt: 'Een knikarmscherm van Sonty boven een terras',
+  // 'screen-woning.webp' toont een knikarmscherm boven een gedekt terras: zomers, je ziet
+  // jezelf er zitten. Beste emotie van de projectfoto's (alle 30 visueel beoordeeld 16-08).
+  tpl: 'sonty-reactivering-1', foto: 'eigen/screen-woning.webp', alt: 'Zonwering van Sonty boven een terras',
   caption: 'Een van onze projecten', rev: REVIEW_ROLLUIK });
 SJABLONEN['sonty-reactivering-1-screens'] = maakReactivering1({
   tpl: 'sonty-reactivering-1-screens', foto: 'eigen/screen-tuindeuren.webp', alt: 'Screens van Sonty bij tuindeuren',
   caption: 'Screens bij een van onze klanten', rev: REVIEW_SCREENS });
 SJABLONEN['sonty-reactivering-1-rolluiken'] = maakReactivering1({
-  tpl: 'sonty-reactivering-1-rolluiken', foto: 'eigen/rolluik-raam.webp', alt: 'Een rolluik van Sonty op een woning',
+  tpl: 'sonty-reactivering-1-rolluiken', foto: 'eigen/screen-dakkapel.webp', alt: 'Een rolluik van Sonty op een woning',
   caption: 'Een rolluik bij een van onze klanten', rev: REVIEW_ROLLUIK_PLAATSING });
 SJABLONEN['sonty-reactivering-1-binnen'] = maakReactivering1({
   tpl: 'sonty-reactivering-1-binnen', foto: 'eigen/showroom-ramen.webp', alt: 'Raamdecoratie in de showroom van Sonty',
@@ -772,7 +775,7 @@ SJABLONEN['sonty-reactivering-1-pergola'] = maakReactivering1({
   tpl: 'sonty-reactivering-1-pergola', foto: 'eigen/pergola-tuin-1.webp', alt: 'Een pergola van Sonty in de tuin',
   caption: 'Een pergola bij een van onze klanten', rev: REVIEW_AANRADER });
 SJABLONEN['sonty-reactivering-1-markies'] = maakReactivering1({
-  tpl: 'sonty-reactivering-1-markies', foto: 'eigen/markiezen-woonhuis.webp', alt: 'Markiezen van Sonty op een woonhuis',
+  tpl: 'sonty-reactivering-1-markies', foto: 'eigen/markies-flat.webp', alt: 'Markiezen van Sonty op een woonhuis',
   caption: 'Markiezen bij een van onze klanten', rev: REVIEW_AANRADER });
 
 /* ── S1: na de bouwvak (seizoensmoment, verzoek Daimy 13-08) ──
@@ -819,7 +822,7 @@ SJABLONEN['sonty-reactivering-2'] = mail({
     </table>`,
     knop('Vraag een nieuwe prijs aan', '{{ person.sonty_verhaal_link|default:"https://www.sonty.nl/offerte" }}'),
     assortiment(),
-    beeld(slotFoto('sonty-reactivering-2', 'monteurs', 'eigen/montage-cassette.webp'), 'Een monteur van Sonty monteert een cassette', 'Onze monteurs zijn in dienst bij Sonty, geen onderaannemers'),
+    beeld(slotFoto('sonty-reactivering-2', 'monteurs', 'eigen/montage-afstellen.webp'), 'Een monteur van Sonty stelt zonwering af', 'Onze monteurs zijn in dienst bij Sonty, geen onderaannemers'),
     cijfers(),
     review(...REVIEW_ALLES),
     garantie(),

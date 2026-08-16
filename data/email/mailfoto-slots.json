@@ -1,6 +1,13 @@
 {
  "slots": [
   {
+   "template": "sonty-welkom",
+   "klaviyo": "Sonty | G1 Welkom na aanvraag",
+   "slot": "team",
+   "label": "Teamfoto bovenaan",
+   "standaard": "eigen/team-klant-blij.webp"
+  },
+  {
    "template": "sonty-uitnodiging",
    "klaviyo": "Sonty | A3 Showroom-uitnodiging",
    "slot": "hero",
@@ -26,7 +33,7 @@
    "klaviyo": "Sonty | Verhaal",
    "slot": "monteurs",
    "label": "Monteursfoto",
-   "standaard": "eigen/montage-cassette.webp"
+   "standaard": "eigen/montage-afstellen.webp"
   },
   {
    "template": "sonty-service",
@@ -75,7 +82,7 @@
    "klaviyo": "Sonty | C1 Reactivering",
    "slot": "hero",
    "label": "Projectfoto (basisvariant)",
-   "standaard": "eigen/knikarm-resultaat.webp"
+   "standaard": "eigen/screen-woning.webp"
   },
   {
    "template": "sonty-reactivering-1-screens",
@@ -89,7 +96,7 @@
    "klaviyo": "Sonty | C1 Reactivering (rolluiken)",
    "slot": "hero",
    "label": "Projectfoto (rolluiken)",
-   "standaard": "eigen/rolluik-raam.webp"
+   "standaard": "eigen/screen-dakkapel.webp"
   },
   {
    "template": "sonty-reactivering-1-binnen",
@@ -103,7 +110,7 @@
    "klaviyo": "Sonty | C2 Wat er veranderd is",
    "slot": "monteurs",
    "label": "Monteursfoto",
-   "standaard": "eigen/montage-cassette.webp"
+   "standaard": "eigen/montage-afstellen.webp"
   },
   {
    "template": "algemeen",
@@ -131,7 +138,7 @@
    "klaviyo": "Sonty | C1 Reactivering (markies)",
    "slot": "hero",
    "label": "Projectfoto (markies)",
-   "standaard": "eigen/markiezen-woonhuis.webp"
+   "standaard": "eigen/markies-flat.webp"
   }
  ]
 }

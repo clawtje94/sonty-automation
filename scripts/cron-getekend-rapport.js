@@ -217,6 +217,25 @@ async function telegram(text) {
         if (regels.length) cohortBlok = '\n\n⏱️ Cohort-meting (getekend binnen 3 dagen na offerte):\n' + regels.join('\n');
       } catch (e) { console.error('cohort-meting overgeslagen:', e.message.slice(0, 60)); }
 
+      // AKKOORD KOMT NOOIT MEER UIT EEN TAALMODEL (Daimy 13-08: zes "akkoorden in het
+      // gesprek" bleken VERZONNEN — de namen kwamen niet eens in de logs voor). De enige
+      // toegestane bronnen zijn hard: (1) een handtekening in RP, (2) een inmeet_afspraak-
+      // actie die de bot zelf heeft uitgevoerd (staat in log.jsonl, deterministisch).
+      const actieAkkoorden = [];
+      try {
+        const sinds24 = Date.now() - 24 * 3600000;
+        const gezien = new Set();
+        for (const l of fs.readFileSync(LOG, 'utf8').trim().split('\n')) {
+          let e2; try { e2 = JSON.parse(l); } catch { continue; }
+          if (!e2 || new Date(e2.tijd).getTime() < sinds24) continue;
+          if (!(e2.acties || []).some((a) => a.type === 'inmeet_afspraak')) continue;
+          if (gezien.has(e2.ticket)) continue;
+          gezien.add(e2.ticket);
+          const kl = e2.klant || {};
+          actieAkkoorden.push({ naam: (typeof kl === 'string' ? kl : kl.naam) || (typeof kl === 'object' ? kl.phone : '') || 'onbekend', ticket: e2.ticket });
+        }
+      } catch { /* log onleesbaar: dan alleen handtekeningen */ }
+
       // OVERTUIGD BETEKENT: twijfelde eerst EN is daarna ECHT akkoord (Daimy 13-08:
       // er stonden mensen bij "overtuigd" die afgehaakt waren, zoals Levi). Het model
       // mag twijfel signaleren, maar de uitkomst verifiëren wij tegen de harde
@@ -242,24 +261,6 @@ async function telegram(text) {
       // chat zijn allebei "akkoord, door naar inmeten" en tellen als één ding, elke
       // klant maximaal één keer. Ontdubbeld op achternaam+voorletter; de bron staat
       // erbij zodat elk cijfer navolgbaar blijft.
-      // AKKOORD KOMT NOOIT MEER UIT EEN TAALMODEL (Daimy 13-08: zes "akkoorden in het
-      // gesprek" bleken VERZONNEN — de namen kwamen niet eens in de logs voor). De enige
-      // toegestane bronnen zijn hard: (1) een handtekening in RP, (2) een inmeet_afspraak-
-      // actie die de bot zelf heeft uitgevoerd (staat in log.jsonl, deterministisch).
-      const actieAkkoorden = [];
-      try {
-        const sinds24 = Date.now() - 24 * 3600000;
-        const gezien = new Set();
-        for (const l of fs.readFileSync(LOG, 'utf8').trim().split('\n')) {
-          let e2; try { e2 = JSON.parse(l); } catch { continue; }
-          if (!e2 || new Date(e2.tijd).getTime() < sinds24) continue;
-          if (!(e2.acties || []).some((a) => a.type === 'inmeet_afspraak')) continue;
-          if (gezien.has(e2.ticket)) continue;
-          gezien.add(e2.ticket);
-          const kl = e2.klant || {};
-          actieAkkoorden.push({ naam: (typeof kl === 'string' ? kl : kl.naam) || (typeof kl === 'object' ? kl.phone : '') || 'onbekend', ticket: e2.ticket });
-        }
-      } catch { /* log onleesbaar: dan alleen handtekeningen */ }
 
       // "Taico Aerts" en "Taico Aerts en Carolin Brandt" zijn dezelfde klant: namen
       // matchen als alle woorden van de korte naam in de lange voorkomen (voegwoorden

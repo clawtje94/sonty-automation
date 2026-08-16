@@ -40,21 +40,6 @@ const BUITEN = new RegExp(REGELS.buitenzonwering.join('|'), 'i');
 const GEEN_PRODUCT = new RegExp(REGELS.geenProduct.join('|'), 'i');
 // Horren vallen er bewust buiten (Daimy 16-08: "horren hoeven er niet bij").
 const GEEN_MEENEEM = new RegExp((REGELS.geenMeeneem || ['\\bnooit\\b']).join('|'), 'i');
-const SIGNALEN = Object.entries(REGELS.opmerkingSignalen || {})
-  .filter(([k]) => !k.startsWith('_'))
-  .map(([soort, woorden]) => ({ soort, regex: new RegExp(woorden.join('|'), 'i') }));
-
-/**
- * Hoort deze opmerking in de meeneem-melding? Alleen als hij ergens over gáát wat je
- * mee moet nemen (Daimy 16-08: "alleen opmerkingen wat mee te nemen, niet als iemand
- * aan moet bellen of moet bellen"). Geeft het soort terug, of null.
- */
-function meeneemSignaal(opmerking) {
-  const t = String(opmerking || '');
-  if (!t.trim()) return null;
-  const raak = SIGNALEN.filter((s) => s.regex.test(t)).map((s) => s.soort);
-  return raak.length ? raak.join(' + ') : null;
-}
 
 // ── tijd in Nederland ───────────────────────────────────────────────────────
 // Outlook krijgt alles in UTC (zoals de rest van de keten), het rooster staat in
@@ -124,23 +109,21 @@ function splitsProducten(producten) {
 
 /** Onderwerp en tekst van het dagblok. Los gehouden zodat de test hem kan draaien. */
 function bouwDagMelding({ inmeter, afspraakDatum, moment, afspraken }) {
-  const metZaak = afspraken.filter((a) => a.vanDeZaak.length);
   const wanneer = moment.dagErvoor ? 'morgen' : nlDagNaam(afspraakDatum);
-  const kop = metZaak.length
-    ? `MEENEMEN VAN DE ZAAK — ${wanneer} (${inmeter}): ${metZaak.length} adres${metZaak.length > 1 ? 'sen' : ''}`
-    : `LET OP ${wanneer} (${inmeter}): opmerking bij ${afspraken.length} afspraak${afspraken.length > 1 ? 'en' : ''}`;
+  const kop = `MEENEMEN VAN DE ZAAK — ${wanneer} (${inmeter}): ${afspraken.length} adres${afspraken.length > 1 ? 'sen' : ''}`;
 
   const blokken = afspraken.map((a) => {
     const regels = [`${nlTijd(a.aankomst)}  ${a.naam} — ${a.adres || 'adres onbekend'}`];
-    if (a.vanDeZaak.length) regels.push('   MEENEMEN: ' + a.vanDeZaak.join(', '));
-    else if (a.buiten.length) regels.push('   buitenzonwering (' + a.buiten.join(', ') + ') — niets van de zaak nodig');
+    regels.push('   MEENEMEN: ' + a.vanDeZaak.join(', '));
+    // De opmerking is geen aanleiding meer (Daimy 16-08: "niet de rest, want dat nemen
+    // we al allemaal mee"), maar als de melding er tóch staat is het handig hem te lezen.
     if (a.opmerking) regels.push('   opmerking bij de offerte: ' + a.opmerking);
     for (const k of a.klantOpmerkingen) regels.push('   doorgegeven door de klant: ' + k);
     return regels.join('\n');
   });
 
   const tekst = [
-    `Wat je ${wanneer} nodig hebt, ${metZaak.length ? 'vandaag nog ophalen op de zaak' : 'even lezen voor je gaat'}:`,
+    `Wat je ${wanneer} nodig hebt, vandaag nog ophalen op de zaak:`,
     '',
     blokken.join('\n\n'),
     '',
@@ -281,8 +264,12 @@ async function main() {
     const klantOpmerkingen = (omschrijving.match(/LET OP \(doorgegeven door de klant\):\n([\s\S]*)$/) || [])[1]
       ?.split('\n').filter((r) => r.trim().startsWith('-')).map((r) => r.replace(/^-\s*/, '').trim()) || [];
 
+    // ALLEEN spullen die op de zaak liggen (Daimy 16-08: "echt alleen binnen
+    // raamdecoratie of behang, dat soort dingen, niet de rest want dat nemen we al
+    // allemaal mee"). Een opmerking is dus géén aanleiding meer, hij rijdt met waaier,
+    // gereedschap en boormateriaal al rond.
     const { vanDeZaak, buiten } = splitsProducten(producten);
-    if (!vanDeZaak.length && !opmerking && !klantOpmerkingen.length) continue;
+    if (!vanDeZaak.length) continue;
 
     const sleutel = `${inmeter}|${afspraakDatum}`;
     (perDag[sleutel] = perDag[sleutel] || []).push({
@@ -334,6 +321,8 @@ async function main() {
   //    niet het state-bestand: een melding die met de hand is aangemaakt of waarvan de
   //    state kwijt is, wordt zo alsnog opgeruimd.
   for (const [extId, j] of Object.entries(bestaand)) {
+    // meeneem-voorbeeld-* zijn met de hand gezette demo's, die ruimt de eigenaar zelf op.
+    if (extId.startsWith('meeneem-voorbeeld')) continue;
     if (gebruikteExtIds.has(extId) || !j.scheduled_at || nlDatum(j.scheduled_at) < vandaag) continue;
     console.log(`  - melding weg: ${extId} (geen afspraken meer die dag)`);
     if (!EXECUTE) continue;
@@ -357,5 +346,5 @@ if (require.main === module) main().catch((e) => { console.error(e.message); pro
 
 module.exports = {
   meldMoment, splitsProducten, bouwDagMelding, nlNaarUtc, nlDatum, nlDagNaam,
-  productenUitOmschrijving, meldingBody, extIdVoor, meeneemSignaal,
+  productenUitOmschrijving, meldingBody, extIdVoor,
 };

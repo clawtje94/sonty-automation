@@ -1,6 +1,6 @@
 {
-  "bron": "Daimy 16-08: 'als het los van buiten zonwering is, moet de inmeter de dag ervoor in 1 opmerking in zijn agenda weten wat er de dag erna ingemeten moet worden, zodat hij dat op de zaak kan halen' + 'wij zetten in de offerte wat er gemeten moet worden, dus bijvoorbeeld plisse en blend'.",
-  "let_op": "De regel is OMGEKEERD: niet raden welke binnen-producten er bestaan, maar buitenzonwering herkennen en al het andere melden. Een nieuw product dat niemand hier heeft ingevuld levert dus een melding op, en dat is de veilige kant.",
+  "bron": "Daimy 16-08: de melding gaat ALLEEN over spullen die op de zaak liggen — binnen raamdecoratie, behang, dat soort dingen. 'Niet de rest, want dat nemen we al allemaal mee': RAL-waaier, gereedschap en boormateriaal zitten al in de bus, dus een opmerking is geen aanleiding voor een melding. Horren hoeven er ook niet bij.",
+  "let_op": "De regel is OMGEKEERD: niet raden welke binnen-producten er bestaan, maar buitenzonwering en horren herkennen en al het andere melden. Een nieuw product dat niemand hier heeft ingevuld levert dus een melding op, en dat is de veilige kant.",
   "meldingMinutenVoorEind": 15,
   "duurMin": 15,
   "dagenVooruit": 14,
@@ -14,14 +14,6 @@
     "gaas",
     "unilux"
   ],
-  "opmerkingSignalen": {
-    "_uitleg": "Daimy 16-08: 'het hoeft echt alleen opmerkingen wat mee te nemen, niet als iemand aan moet bellen bijvoorbeeld of moet bellen.' Alleen een opmerking die een signaal hieronder raakt komt in de melding; de rest (prijsvragen, mailen ipv bellen, oriënteren) blijft eruit.",
-    "kleurstalen": ["kleur", "ral ?\\d", "ral\\b", "doek", "stalen", "staal\\b", "kleurcode", "waaier", "monster", "boek"],
-    "oude weg": ["demonter", "verwijder", "afvoer", "moet af\\b", "afgebroken", "weghalen", "slopen"],
-    "montagemateriaal": ["koker", "boren", "geboord", "beton", "prefab", "plafond", "wandmontage", "montage op de muur", "stroom", "bedrading", "elektra", "tussen de muren"],
-    "merkstalen": ["brustor", "roma\\b", "sunmaster", "velux", "dakraam", "douglas", "arte\\b"],
-    "klimmateriaal": ["ladder", "hoogwerker", "steiger"]
-  },
   "buitenzonwering": [
     "rolluik",
     "screen",

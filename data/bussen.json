@@ -10,6 +10,7 @@
     "Moa"
    ],
    "outlookNamen": [
+    "Marvin",
     "Moa"
    ],
    "planadoNaam": "Bus 1 - Marvin + Moa",
@@ -77,15 +78,37 @@
   }
  ],
  "openVragen": [
-  "Is 'Marvin' in de agenda ALTIJD Marvin+Moa (Bus 1)? (ZZP 1 = Marvin+Bart is bevestigd 16-08)",
-  "Mick (4 komende klussen) en Arnold (4): nog actief of vervallen?",
-  "Mailadressen bemanning bus 1, 4 en 5 voor de logins"
+  "Mailadressen voor de logins: bus 1, bus 4, bus 5 en Arnold",
+  "Krijgt Arnold ook een laadvak of laadt hij niet in Berkel?",
+  "4 komende Mick-klussen in de agenda: naar welke bus?"
  ],
  "besloten": [
   "Nummering bus 1-5 bevestigd door Daimy 16-08 (nummer = laadvak)",
   "ZZP 1 in de agenda = Marvin + Bart (Bus 4) — Daimy 16-08",
   "Logins gekoppeld aan eigen mailadressen van de monteurs — Daimy 16-08",
   "Pilotweek met Bus 3 (Yudi+Nick) akkoord — Daimy 16-08",
-  "Nanny hoeft werkwijze NIET aan te passen; mapping volgt haar naamgebruik"
+  "Nanny hoeft werkwijze NIET aan te passen; mapping volgt haar naamgebruik",
+  "'Marvin' in de agenda = ALTIJD Marvin+Moa (Bus 1) — Daimy 16-08; elke agendanaam is nu eenduidig",
+  "Mick vervallen; Arnold (zzp binnen-raamdecoratie) krijgt eigen account — Daimy 16-08"
+ ],
+ "extraKrachten": [
+  {
+   "naam": "Arnold (zzp)",
+   "doet": "binnen-raamdecoratie",
+   "outlookNamen": [
+    "Arnold"
+   ],
+   "planadoNaam": "Arnold (zzp binnen)",
+   "planadoUuid": null,
+   "laadvak": null,
+   "plan": "eigen account (Daimy 16-08), mailadres nodig; laadvak n.t.b."
+  }
+ ],
+ "vervallen": [
+  {
+   "naam": "Mick",
+   "status": "werkt er niet meer (Daimy 16-08)",
+   "letOp": "er staan nog 4 komende klussen op 'Mick' in de agenda — herverdelen door Nanny"
+  }
  ]
 }

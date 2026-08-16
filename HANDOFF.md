@@ -59,9 +59,14 @@
   Lisa Terreehorst: 1tje gezet maar GEEN afspraak vindbaar (Outlook-sync kijkt pas vanaf
   ~05-08; zij tekende 18-07) — Jorren moet checken of zij ingepland/ingemeten is (V3).
   Let op: "Afgerond" wordt door gripp-invullen gezet (getekend → Gripp-offerte → Afgerond)
-  en zegt niets over inmeten. Openstaand voorstel V4: outlook-planado-sync na het
-  aanmaken van een inmeet-job ook schrijfInplanning laten aanroepen, dan is Jorrens
-  handmatige route ook gedekt.
+  en zegt niets over inmeten.
+  V4 GEBOUWD (16-08 avond, GO Daimy; V3/Lisa laten rusten van Daimy): de Outlook-sync
+  roept bij elke NIEUWE inmeet-afspraak nu schrijfInplanning aan (alleenAlsLeeg:
+  overschrijft nooit een echt inkoopbedrag; geenNieuweRij: rij niet gevonden →
+  sheet-schrijf-wachtrij, planner-runs proberen opnieuw, sheet-vangnet maakt intussen
+  de offerte-rij). zetInWachtrij dedupet nu ook op sleutel (event-id) voor entries
+  zonder grippNr. Getest: guard-regex, idempotente herschrijf (Edwin), geen-nieuwe-
+  rij-pad, dry-run sync schoon (181 events, 0 fouten). Keten-daemons herstart.
 - RESTGAT (klein, bekend): oud item + nieuwe offerte die nooit beweegt komt pas in de
   sheet zodra het dossier beweegt (tekening/boeking). Waarom RP sommige aanvragen met
   3 varianten direct genereert en OC overslaat = RP-kant, niet vast te stellen vanaf hier.

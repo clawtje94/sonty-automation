@@ -79,6 +79,39 @@ function zonderOptiesBlok(tekst) {
   return String(tekst || '').split(/\n?Liever een ander model of bediening\??/i)[0].trimEnd();
 }
 
+// Opmaak voor het Gripp-omschrijvingsveld (Daimy 2026-08-17, voorbeeld offerte 6494):
+// het veld accepteert HTML. Specs als blok, witregel, "Waarom dit ..." dikgedrukt met
+// streepjes-punten, witregel, "Garantie:" dikgedrukt met de termijnen als punten.
+// Tekst zonder zo'n structuur wordt alleen netjes op regels gezet, nooit weggelaten.
+function alsGrippHtml(tekst) {
+  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const regels = String(tekst || '').split('\n').map((r) => r.trim()).filter(Boolean);
+  if (!regels.length) return '';
+  const iWaarom = regels.findIndex((r) => /^Waarom dit /i.test(r));
+  const iGarantie = regels.findIndex((r) => /^Garantie\b/i.test(r));
+  if (iWaarom === -1 && iGarantie === -1) return '<p>' + regels.map(esc).join('<br>') + '</p>';
+
+  const blokken = [];
+  const specs = regels.slice(0, iWaarom !== -1 ? iWaarom : iGarantie);
+  if (specs.length) blokken.push('<p>' + specs.map(esc).join('<br>') + '</p>');
+
+  if (iWaarom !== -1) {
+    const kop = regels[iWaarom].replace(/:?\s*$/, ':');
+    const body = regels.slice(iWaarom + 1, iGarantie !== -1 ? iGarantie : undefined).join(' ');
+    // v4 schrijft het waarom-blok als doorlopende zinnen; als punten oogt het als 6494
+    const punten = body.split(/(?<=\.)\s+/).map((z) => z.trim()).filter(Boolean)
+      .map((z) => (z.startsWith('-') ? z : '- ' + z));
+    blokken.push('<p><b>' + esc(kop) + '</b><br>' + punten.map(esc).join('<br>') + '</p>');
+  }
+  if (iGarantie !== -1) {
+    // "Garantie: 5 jaar op het product, 7 jaar op de motor." of "3 jaar montage | 5 jaar ..."
+    const inhoud = regels.slice(iGarantie).join(' ').replace(/^Garantie:?\s*/i, '').replace(/\.\s*$/, '');
+    const punten = inhoud.split(/\s*[|,]\s*/).map((z) => z.trim()).filter(Boolean).map((z) => '- ' + z);
+    blokken.push('<p><b>Garantie:</b><br>' + punten.map(esc).join('<br>') + '</p>');
+  }
+  return blokken.join('<p><br></p>');
+}
+
 // Moment waarop de prijsverhoging live ging (3 aug 2026 ±16:19 NL, commit 396bdb1):
 // RP-offertes die op of ná dit moment zijn AANGEMAAKT hebben de nieuwe prijzen en
 // krijgen de markering "prijs actueel 2026" in Gripp; alles van daarvóór niet,
@@ -439,7 +472,7 @@ async function main() {
             offerlines.push({
               _ordering: ordering++, product: 345, amount: 1, sellingprice: 0, discount: 0, buyingprice: 0,
               invoicebasis: 1, vat: 27, unit: 3, convertto: 1, rowtype: 1,
-              description: fullDesc.replace(/^\*\*|\*\*$/gm, '').trim(),
+              description: alsGrippHtml(fullDesc.replace(/^\*\*|\*\*$/gm, '').trim()),
             });
             continue;
           }
@@ -453,7 +486,7 @@ async function main() {
             _ordering: ordering++, product: productId, amount: line.units,
             sellingprice: parseFloat(priceExcl.toFixed(2)), discount: 0, buyingprice: 0,
             invoicebasis: 1, vat: 27, unit: 3, convertto: 1, rowtype: 1,
-            description: specLines || lineDesc,
+            description: alsGrippHtml(specLines || lineDesc),
           });
         }
         if (offerlines.length === 0) { console.log('  SKIP #' + docInfo.quotationNumber + ': geen regels'); continue; }

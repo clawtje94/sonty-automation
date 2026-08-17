@@ -51,9 +51,19 @@ function vulIn(html) {
     .replace(/\{%\s*manage_preferences\s*%\}/gi, 'https://www.sonty.nl/#voorkeuren-test');
 }
 
+const ALLEEN_HTML = process.argv.includes('--alleen-html');
+
 (async () => {
   fs.mkdirSync(SHOTS, { recursive: true });
   const bestanden = fs.readdirSync(DIST).filter((f) => f.endsWith('.html'));
+  if (ALLEEN_HTML) {
+    for (const bestand of bestanden) {
+      const gevuld = vulIn(fs.readFileSync(path.join(DIST, bestand), 'utf8'));
+      fs.writeFileSync(path.join(SHOTS, bestand.replace('.html', '.preview.html')), gevuld);
+    }
+    console.log(bestanden.length + ' preview-htmls ververst (zonder screenshots)');
+    process.exit(0);
+  }
   const browser = await chromium.launch({ headless: true });
 
   const varianten = [

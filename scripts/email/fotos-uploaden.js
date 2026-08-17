@@ -69,15 +69,24 @@ async function upload(bestandspad, naam, type) {
     const keuzes = JSON.parse(fs.readFileSync(keuzesPad, 'utf8'));
     const paden = [...new Set(Object.values(keuzes).flatMap((slots) => Object.values(slots)))];
     for (const src of paden) {
+      const isExtern = /^https?:\/\//.test(String(src));
       const rel = String(src).replace(/^\/images\//, '');
-      const sleutelBasis = path.basename(rel).replace(/\.(webp|jpe?g|png|avif)$/i, '');
+      const sleutelBasis = decodeURIComponent(path.basename(isExtern ? new URL(src).pathname : rel)).replace(/\.(webp|jpe?g|png|avif|mp4|mov)$/i, '').replace(/[^\w.-]/g, '-');
       if (uit[sleutelBasis]) continue;
       const sleutel = 'sonty-' + sleutelBasis;
       if (opNaam.has(sleutel)) { uit[sleutelBasis] = opNaam.get(sleutel); continue; }
-      const bronPad = path.join(process.env.HOME, 'sonty-website', 'public', 'images', rel);
-      if (!fs.existsSync(bronPad)) { console.error(`  ONTBREEKT lokaal: ${rel}`); continue; }
+      let bronPad;
+      if (isExtern) {
+        // Dashboard-upload (Vercel Blob): eerst lokaal halen, dan als JPEG doorzetten.
+        bronPad = path.join(TIJDELIJK, 'dl-' + sleutelBasis);
+        try { execFileSync('curl', ['-sf', '-o', bronPad, src], { timeout: 120000 }); } catch { console.error(`  DOWNLOAD MISLUKT: ${src.slice(0, 80)}`); continue; }
+      } else {
+        bronPad = path.join(process.env.HOME, 'sonty-website', 'public', 'images', rel);
+        if (!fs.existsSync(bronPad)) { console.error(`  ONTBREEKT lokaal: ${rel}`); continue; }
+      }
       const jpg = path.join(TIJDELIJK, sleutelBasis + '.jpg');
-      execFileSync('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '55', '--resampleWidth', '800', bronPad, '--out', jpg], { stdio: 'ignore' });
+      try { execFileSync('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '55', '--resampleWidth', '800', bronPad, '--out', jpg], { stdio: 'ignore' }); }
+      catch { console.error(`  CONVERSIE MISLUKT (geen afbeelding?): ${sleutelBasis}`); continue; }
       const url = await upload(jpg, sleutel, 'image/jpeg');
       if (url) { uit[sleutelBasis] = url; console.log(`  geupload (keuze): ${sleutelBasis}`); }
       await new Promise((x) => setTimeout(x, 700));

@@ -43,10 +43,13 @@ const slotFoto = (tpl, slot, standaard) => {
   return k ? String(k).replace(/^\/images\//, '') : standaard;
 };
 const foto = (bestand) => {
-  // Sleutel: bestandsnaam zonder map en extensie, zodat ook gekozen portfolio-foto's
-  // (andere mappen dan eigen/) na uploaden via fotos-uploaden.js gevonden worden.
-  const sleutel = String(bestand).split('/').pop().replace(/\.(webp|jpe?g|png|avif)$/i, '');
-  return FOTOS[sleutel] || ('https://sonty-website.vercel.app/images/' + bestand);
+  // Sleutel: bestandsnaam zonder map en extensie, zodat ook gekozen portfolio-foto's en
+  // dashboard-uploads (volledige URL) na doorzetten via fotos-uploaden.js gevonden worden.
+  const b = String(bestand);
+  const naam = decodeURIComponent(b.split('/').pop().split('?')[0]);
+  const sleutel = naam.replace(/\.(webp|jpe?g|png|avif|mp4|mov)$/i, '').replace(/[^\w.-]/g, '-');
+  if (FOTOS[sleutel]) return FOTOS[sleutel];
+  return /^https?:\/\//.test(b) ? b : ('https://sonty-website.vercel.app/images/' + b);
 };
 
 const M = {

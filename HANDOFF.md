@@ -1,5 +1,15 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-17)
 
+## 17-08 (2): GRIPP-OMSCHRIJVING IN 6494-OPMAAK + GEEN TERUGWERKENDE KRACHT
+- Up/downgrade-blok ("Liever een ander model of bediening?") zat sinds 7 juli in 11
+  Gripp-offertes (kwam 1-op-1 mee uit de v4-offertetekst). Invuller knipt het nu weg.
+- Opmaak goedgekeurd door Daimy (voorbeeld 6494 A Bertrams): specs-blok, witregel,
+  "Waarom dit ..." bold met punten, witregel, "Garantie:" bold met punten. Zit nu in
+  cron-gripp-invullen.js (alsGrippHtml); regressietest 200 echte regels, 0 verlies.
+- REGEL Daimy: bestaande Gripp-offertes NOOIT herbouwen (nummer staat overal vermeld;
+  A Bertrams schoof 6490→6493→6494, dat mag niet meer). De overige 10 met het oude
+  blok blijven dus staan. Vastgelegd in memory (gripp-niet-herbouwen, eerst-1-dan-rest).
+
 ## 17-08: GRIPP-MARKERING "prijs actueel 2026" GEFIXT (datumregel)
 - Daimy meldde: Helma Blokzijl (RP-offerte 13 aug, dus nieuwe prijzen) had geen
   markering in Gripp. Oorzaak: de narekening in cron-gripp-invullen.js kende

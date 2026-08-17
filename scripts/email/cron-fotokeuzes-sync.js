@@ -29,6 +29,10 @@ async function telegram(tekst) {
 }
 
 (async () => {
+  // Stap 0: nieuwe dashboard-uploads beoordelen (AI-voorstel, Daimy akkordeert in de UI)
+  try { execFileSync(process.execPath, [path.join(__dirname, 'upload-triage.js')], { stdio: 'inherit', timeout: 10 * 60000 }); }
+  catch (e) { console.error('triage overgeslagen:', String(e.message).slice(0, 60)); }
+
   const r = await fetch('https://sonty-website.vercel.app/api/admin/mailfotos', {
     headers: { Authorization: 'Bearer ' + ADMIN_PASSWORD },
   });

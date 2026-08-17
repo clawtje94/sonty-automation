@@ -43,8 +43,9 @@ function run(argv) {
     if (p.windows().length === 0) throw new Error('WhatsApp-venster wil niet openen');
     const pid = p.unixId();
     const TYPER = ($.NSHomeDirectory().js) + '/sonty/scripts/bin/wa-type';
-    function typ(t) {
-      ca.doShellScript(`'${TYPER.replace(/'/g, `'\\''`)}' ${pid} '${t.replace(/'/g, `'\\''`)}'`);
+    function typ(...args) {
+      const q = (s) => `'${String(s).replace(/'/g, `'\\''`)}'`;
+      ca.doShellScript(`${q(TYPER)} ${pid} ${args.map(q).join(' ')}`);
     }
 
     const INTERESSANT = ['AXButton', 'AXGenericElement', 'AXTextArea', 'AXGroup'];
@@ -115,12 +116,25 @@ function run(argv) {
         if (!getypt) { se.click(vak.el); delay(0.8); }
       }
       if (!getypt) throw new Error('tekst komt niet aan in het berichtvak');
-      const na = verzamel();
-      const stuur = na.find((e) => e.r === 'AXButton' && norm(e.desc) === 'stuur');
-      if (!stuur) throw new Error('Stuur-knop niet gevonden terwijl er tekst staat');
-      se.click(stuur.el);
-      delay(2);
-      if (norm(vakWaarde()).includes(kern)) throw new Error('Stuur-knop verstuurde het bericht niet');
+      // versturen: liefst via de echte Stuur-knop; is die even niet vindbaar (trage
+      // scan, UI net ververst), dan Enter naar het proces — dat is hier veilig omdat
+      // de chat-header en de vak-inhoud allebei al geverifieerd zijn
+      let verstuurd = false;
+      for (let poging = 0; poging < 2 && !verstuurd; poging += 1) {
+        const na = verzamel();
+        const stuur = na.find((e) => e.r === 'AXButton' && norm(e.desc) === 'stuur');
+        if (stuur) {
+          se.click(stuur.el);
+          delay(2);
+          verstuurd = !norm(vakWaarde()).includes(kern);
+        }
+      }
+      if (!verstuurd) {
+        typ('--keycode', '36');
+        delay(2);
+        verstuurd = !norm(vakWaarde()).includes(kern);
+      }
+      if (!verstuurd) throw new Error('bericht wil niet versturen (knop noch Enter)');
     }
     herstel();
     return 'OK: ' + msgs.length + ' bericht(en) naar ' + argv[0];

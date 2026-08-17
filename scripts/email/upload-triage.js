@@ -55,7 +55,7 @@ async function telegram(tekst) {
           max_tokens: 300,
           messages: [{ role: 'user', content: [
             { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: b64 } },
-            { type: 'text', text: `Dit is een foto voor Sonty (zonwering/raamdecoratie, Rijswijk). Kies de best passende categorie uit: ${CATS.join(', ')} (werk = montage in actie, showroom = winkelinterieur, zakelijk = bedrijfspand/projecten, raamdeco = binnenraamdecoratie). Geef ook een marketingscore 1-10 (scherpte, licht, emotie, bruikbaarheid in een klantmail) en één korte zin in het Nederlands over wat erop staat en of hij bruikbaar is. UITSLUITEND JSON: {"cat":"...","score":7,"oordeel":"..."}` },
+            { type: 'text', text: `Dit is een foto voor Sonty (zonwering/raamdecoratie, Rijswijk). Kies de best passende categorie uit: ${CATS.join(', ')} (werk = montage in actie, showroom = winkelinterieur, zakelijk = bedrijfspand/projecten, raamdeco = binnenraamdecoratie). Let op: een knikarm(scherm) hangt AAN DE GEVEL zonder palen; een pergola of veranda staat op PALEN boven een terras. Geef ook een marketingscore 1-10 (scherpte, licht, emotie, bruikbaarheid in een klantmail) en één korte zin in het Nederlands over wat erop staat en of hij bruikbaar is. UITSLUITEND JSON: {"cat":"...","score":7,"oordeel":"..."}` },
           ] }],
         }),
       });

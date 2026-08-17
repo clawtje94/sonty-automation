@@ -21,6 +21,14 @@ const HIST = path.join(__dirname, '..', 'data', 'sunny-weetjes.json');
 const TEAMINFO = path.join(__dirname, '..', 'data', 'sunny-medewerkers.txt');
 const GROEP_ZOEK = 'Sonty toppers';
 
+const OCHTEND_OPENERS = [
+  'GOEIEMORGEN BEESTENNNN 💪☀️',
+  'OPSTAAN LEGENDESSSS 🔥',
+  'RISE AND SHINE TOPPERSSSS ☀️',
+  'WAKKER WORDEN KANJERSSSS 📢💪',
+  'GOEDEMORGEN MACHINESSSS 🚐💨',
+  'DAAR IS DE ZON WEER BIKKELSSS ☀️😎',
+];
 const OPENERS = [
   'HEEEEEE MOTHERFUCKERSSSSS 🍻 WISTEN JULLIE DATTTTT',
   'JAAAAA BIKKELS DAAR IS IE WEER 🔥 WISTEN JULLIE DATTTTT',
@@ -51,9 +59,9 @@ function idleSeconden() {
   } catch (e) { return 0; }
 }
 
-function wachtTotRust() {
+function wachtTotRust(uur, minuut) {
   const deadline = new Date();
-  deadline.setHours(22, 30, 0, 0);
+  deadline.setHours(uur, minuut, 0, 0);
   while (new Date() < deadline) {
     const idle = idleSeconden();
     if (idle >= 180) return true;
@@ -108,6 +116,44 @@ function grapVerzoeken() {
   } catch { return ''; }
 }
 
+/**
+ * Morning motivation (Daimy 17-08, akkoord op voorbeelden, tijd 07:30): opzwepend
+ * ochtendbericht met een luchtige knipoog naar het nieuws van vandaag/gisteren.
+ * Nieuws uit de NOS-feeds; nooit politiek, misdaad, dood of ellende. Niks leuks
+ * in het nieuws? Dan gewoon pure motivatie.
+ */
+async function haalNieuws() {
+  const titels = [];
+  for (const feed of ['nosnieuwsalgemeen', 'nossportalgemeen', 'nosnieuwsopmerkelijk']) {
+    try {
+      const xml = await (await fetch(`https://feeds.nos.nl/${feed}`, { signal: AbortSignal.timeout(15000) })).text();
+      const items = [...xml.matchAll(/<item>[\s\S]*?<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/title>/g)].map((m) => m[1]);
+      titels.push(...items.slice(0, 8));
+    } catch (e) { /* feed even niet bereikbaar, dan de rest */ }
+  }
+  return titels;
+}
+
+async function maakOchtend(hist) {
+  const APIKEY = fs.readFileSync(path.join(__dirname, '.anthropic-api-key.txt'), 'utf8').trim();
+  const team = fs.existsSync(TEAMINFO) ? fs.readFileSync(TEAMINFO, 'utf8').trim() : '';
+  const nieuws = await haalNieuws();
+  const eerder = hist.filter((h) => h.type === 'ochtend').slice(-15).map((h) => h.weetje).join('\n');
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': APIKEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-haiku-4-5-20251001', max_tokens: 350,
+      messages: [{ role: 'user', content: `Schrijf de morning motivation voor de interne WhatsApp-groep van Sonty (zonweringbedrijf, stoere monteurs, ze stappen zo de bus in). Het komt direct na een schreeuwerige opener, dus begin lopend in kleine letters. Eisen: 2 a 3 zinnen spreektaal, opzwepend en grappig, eindig met 1-2 emoji. Verwerk als het kan EEN actueel nieuwtje van vandaag of gisteren met een luchtige knipoog naar het werk (regen = overkappingen verkopen, sport = wij maken de klus wel af, enz). Kies ALLEEN iets luchtigs: sport, weer, verkeer, dieren, opmerkelijk. NOOIT politiek, oorlog, misdaad, dood, ziekte of ander leed. Staat er niks luchtigs tussen, verzin dan GEEN nieuws maar maak pure motivatie.\nHet nieuws van nu (koppen):\n${nieuws.join('\n') || '(geen nieuws beschikbaar, dus pure motivatie)'}${team ? `\nTeam-weetjes die je af en toe mag gebruiken voor een grap:\n${team}` : ''}${eerder ? `\nDeze berichten zijn al gebruikt, kom met iets anders:\n${eerder}` : ''}\nGeef UITSLUITEND de berichttekst, niets eromheen.` }],
+    }),
+  });
+  const j = await r.json();
+  let tekst = (j?.content?.[0]?.text || '').trim().replace(/^"|"$/g, '');
+  tekst = tekst.charAt(0).toLowerCase() + tekst.slice(1);
+  if (!tekst || tekst.length < 20) throw new Error('ochtend-generatie mislukt');
+  return { thema: 'ochtend', tekst };
+}
+
 async function maakWeetje(hist) {
   const APIKEY = fs.readFileSync(path.join(__dirname, '.anthropic-api-key.txt'), 'utf8').trim();
   const team = fs.existsSync(TEAMINFO) ? fs.readFileSync(TEAMINFO, 'utf8').trim() : '';
@@ -150,24 +196,30 @@ async function telegram(t) {
   const vandaag = new Date().toISOString().slice(0, 10);
   const dag = new Date().getDay();
   const forceer = process.argv.includes('--nu');
+  const soort = process.argv.includes('--ochtend') ? 'ochtend' : 'weetje';
   const hist = fs.existsSync(HIST) ? JSON.parse(fs.readFileSync(HIST, 'utf8')) : [];
+  const vanSoort = hist.filter((h) => (h.type || 'weetje') === soort);
   if (!forceer && (dag === 0 || dag === 6)) { console.log('weekend, niks sturen'); return; }
-  if (!forceer && hist.some((h) => h.datum === vandaag)) { console.log('vandaag al gestuurd'); return; }
+  if (!forceer && vanSoort.some((h) => h.datum === vandaag)) { console.log(`${soort} vandaag al gestuurd`); return; }
 
-  const opener = OPENERS[hist.length % OPENERS.length];
-  const { thema, tekst } = await maakWeetje(hist);
-  if (!forceer && !wachtTotRust()) {
-    console.log('geen rustig moment gevonden voor 22:30, weetje overgeslagen');
-    await telegram('☀️ Sunny-weetje vanavond overgeslagen: je was tot 22:30 aan de computer aan het werk en ik wilde je niet storen. Morgen weer een kans.');
+  const openers = soort === 'ochtend' ? OCHTEND_OPENERS : OPENERS;
+  const opener = openers[vanSoort.length % openers.length];
+  const { thema, tekst } = soort === 'ochtend' ? await maakOchtend(hist) : await maakWeetje(vanSoort);
+  if (process.argv.includes('--proef')) { console.log(`PROEF (niet verstuurd):\n${opener}\n${tekst}`); return; }
+  // ochtend: uiterlijk 09:30 (daarna is de lol eraf), avond: uiterlijk 22:30
+  const [dlU, dlM] = soort === 'ochtend' ? [9, 30] : [22, 30];
+  if (!forceer && !wachtTotRust(dlU, dlM)) {
+    console.log(`geen rustig moment gevonden, ${soort} overgeslagen`);
+    await telegram(`☀️ Sunny-${soort} vandaag overgeslagen: je was aan de computer aan het werk en ik wilde je niet storen. Volgende keer beter.`);
     return;
   }
   stuurWhatsApp(GROEP_ZOEK, [opener, tekst]);
-  hist.push({ datum: vandaag, thema, opener, weetje: tekst });
+  hist.push({ datum: vandaag, type: soort, thema, opener, weetje: tekst });
   fs.writeFileSync(HIST, JSON.stringify(hist, null, 1));
   console.log(`gestuurd: ${opener} / ${tekst}`);
-  await telegram(`☀️ Sunny heeft het weetje van vandaag in de toppers-groep gezet:\n\n${opener}\n${tekst}`);
+  await telegram(`☀️ Sunny heeft de ${soort === 'ochtend' ? 'morning motivation' : 'weetje'} van vandaag in de toppers-groep gezet:\n\n${opener}\n${tekst}`);
 })().catch(async (e) => {
   console.error('FOUT:', e.message);
-  await telegram(`⚠️ Sunny-weetje vanavond mislukt: ${String(e.message).slice(0, 120)}. Ik kijk ernaar.`);
+  await telegram(`⚠️ Sunny-bericht mislukt: ${String(e.message).slice(0, 120)}. Ik kijk ernaar.`);
   process.exit(1);
 });

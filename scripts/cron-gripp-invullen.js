@@ -70,6 +70,15 @@ async function setStatus(itemId, statusId) {
 }
 
 
+// Het up/downgrade-blok ("Liever een ander model of bediening?" met ander model,
+// andere bediening, kleur, smart home) hoort bij de KLANT-offerte in RP, niet in
+// Gripp: de inmeters lezen daar alleen de specs van wat er gekocht is (Daimy
+// 2026-08-17, screenshot Raymond Cats: specs + waarom + garantie, verder niks).
+// Alles vanaf die kopregel wordt dus weggeknipt bij het overzetten.
+function zonderOptiesBlok(tekst) {
+  return String(tekst || '').split(/\n?Liever een ander model of bediening\??/i)[0].trimEnd();
+}
+
 // Moment waarop de prijsverhoging live ging (3 aug 2026 ±16:19 NL, commit 396bdb1):
 // RP-offertes die op of ná dit moment zijn AANGEMAAKT hebben de nieuwe prijzen en
 // krijgen de markering "prijs actueel 2026" in Gripp; alles van daarvóór niet,
@@ -423,7 +432,7 @@ async function main() {
         let ordering = 1;
         for (const line of lines) {
           const lineDesc = line.description?.split('\n')[0]?.replace(/^\*\*|\*\*$/g, '') || '';
-          const fullDesc = line.description || '';
+          const fullDesc = zonderOptiesBlok(line.description);
           const priceExcl = line.pricePerUnit / 1.21;
 
           if ((line.pricePerUnit === 0 || line.units === 0) && lineDesc.length > 3) {

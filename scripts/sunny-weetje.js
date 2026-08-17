@@ -69,12 +69,23 @@ function stuurWhatsApp(doel, berichten) {
   // verifieer in de lokale WhatsApp-database dat het laatste bericht er echt staat
   const db = path.join(process.env.HOME, 'Library', 'Group Containers', 'group.net.whatsapp.WhatsApp.shared', 'ChatStorage.sqlite');
   const zoek = berichten[berichten.length - 1].slice(0, 25).replace(/'/g, "''");
+  let dbFout = 0;
   for (let i = 0; i < 6; i += 1) {
     execFileSync('sleep', ['5']);
-    const r = execFileSync('sqlite3', ['-readonly', `file:${db}?mode=ro`,
-      `SELECT count(*) FROM ZWAMESSAGE WHERE ZISFROMME = 1 AND ZTEXT LIKE '%${zoek}%' AND ZMESSAGEDATE > (strftime('%s','now') - 978307200 - 300);`],
-      { timeout: 15000 }).toString().trim();
-    if (Number(r) > 0) return;
+    try {
+      const r = execFileSync('sqlite3', ['-readonly', `file:${db}?mode=ro`,
+        `SELECT count(*) FROM ZWAMESSAGE WHERE ZISFROMME = 1 AND ZTEXT LIKE '%${zoek}%' AND ZMESSAGEDATE > (strftime('%s','now') - 978307200 - 300);`],
+        { timeout: 15000 }).toString().trim();
+      if (Number(r) > 0) return;
+    } catch (e) { dbFout += 1; }
+  }
+  if (dbFout >= 3) {
+    // database niet leesbaar (macOS-toestemmingspopup "node wil toegang tot gegevens uit
+    // andere apps" nog niet op Sta toe): de JXA-laag heeft al geverifieerd dat het vak
+    // leeg is na de Stuur-knop, dus behandel als verzonden. NIET falen, anders zou de
+    // aanroeper opnieuw sturen en krijgt de groep het bericht dubbel.
+    console.warn('let op: WhatsApp-database niet leesbaar voor verificatie, verzending aangenomen op basis van UI-controle');
+    return;
   }
   throw new Error('bericht niet teruggevonden in WhatsApp-database, mogelijk niet verzonden');
 }

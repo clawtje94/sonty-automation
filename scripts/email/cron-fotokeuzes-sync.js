@@ -37,6 +37,10 @@ async function telegram(tekst) {
   try { execFileSync(process.execPath, [path.join(__dirname, 'wa-groep-wachter.js')], { stdio: 'inherit', timeout: 10 * 60000 }); }
   catch (e) { console.error('wa-wachter overgeslagen:', String(e.message).slice(0, 60)); }
 
+  // Stap 0c: herkansing voor fotos die op de Klaviyo-uploadlimiet strandden
+  try { execFileSync(process.execPath, [path.join(__dirname, 'wa-retry.js')], { stdio: 'inherit', timeout: 10 * 60000 }); }
+  catch (e) { console.error('wa-retry overgeslagen:', String(e.message).slice(0, 60)); }
+
   const r = await fetch('https://sonty-website.vercel.app/api/admin/mailfotos', {
     headers: { Authorization: 'Bearer ' + ADMIN_PASSWORD },
   });

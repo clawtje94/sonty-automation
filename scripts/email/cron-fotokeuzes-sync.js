@@ -33,6 +33,10 @@ async function telegram(tekst) {
   try { execFileSync(process.execPath, [path.join(__dirname, 'upload-triage.js')], { stdio: 'inherit', timeout: 10 * 60000 }); }
   catch (e) { console.error('triage overgeslagen:', String(e.message).slice(0, 60)); }
 
+  // Stap 0b: nieuwe fotos uit de Sonty toppers-WhatsAppgroep (Sunny-nummer op deze Mac)
+  try { execFileSync(process.execPath, [path.join(__dirname, 'wa-groep-wachter.js')], { stdio: 'inherit', timeout: 10 * 60000 }); }
+  catch (e) { console.error('wa-wachter overgeslagen:', String(e.message).slice(0, 60)); }
+
   const r = await fetch('https://sonty-website.vercel.app/api/admin/mailfotos', {
     headers: { Authorization: 'Bearer ' + ADMIN_PASSWORD },
   });

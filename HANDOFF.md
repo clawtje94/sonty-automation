@@ -1,4 +1,22 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-16)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-17)
+
+## 17-08: GRIPP-MARKERING "prijs actueel 2026" GEFIXT (datumregel)
+- Daimy meldde: Helma Blokzijl (RP-offerte 13 aug, dus nieuwe prijzen) had geen
+  markering in Gripp. Oorzaak: de narekening in cron-gripp-invullen.js kende
+  RAL-kleurtoeslagen, voorraadschermen en Roma niet → 13 nieuwe-prijs-offertes
+  zonder markering doorgelaten (gemeten over alle 80 RP-offertes in Gripp sinds 3 aug).
+- Nieuwe regel (afspraak Daimy 17-08): puur RP-AANMAAKDATUM. Op/ná 3 aug 16:19
+  (verhogingsmoment, commit 396bdb1) = markering; ervoor = niet, ook als klant later
+  tekent. Geen narekening meer. Commit 69b03fc, gepusht.
+- Alle 15 gemiste offertes handmatig in Gripp bijgewerkt (13 gemeten + 2 met
+  onbekende exportdatum maar RP-nummer aantoonbaar ná verhoging: 9036, 9071).
+  Eindcontrole over 80: 0 echte mismatches. Carlo Pronk (RP 3 aug 09:08, vóór
+  verhoging, markering al aanwezig én destijds bewezen actueel) bewust laten staan.
+- Los daarvan onderzocht (13-17 aug): annulering inmeetafspraak Raymond van der Ent
+  (13 aug 18:46) — geen bot, geen Claude; handmatig vanaf ander account. Klant heeft
+  getekende offerte (€3.330) maar géén inmeetafspraak meer. Daimy weet ervan ("niks
+  mee doen"). Ook: ab-eindrapport-plist stond op eenmalig 8 aug → dagelijks 09:30
+  gezet; telegram-poll + databot-poll gekickstart na netwerkstoring 16 aug.
 
 ## 16-08 nacht: HEEL FLOW-PAKKET ALS DRAFT IN KLAVIYO + TEKENBONUS-CAP
 - Opdracht Daimy: "rest van de flows alvast bouwen voor overzicht, niet aanzetten".

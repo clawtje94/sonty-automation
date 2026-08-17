@@ -63,7 +63,7 @@ function vindGroepsMedia() {
           max_tokens: 250,
           messages: [{ role: 'user', content: [
             { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: b64 } },
-            { type: 'text', text: `Foto uit de interne WhatsApp-groep van Sonty (zonwering/raamdecoratie). Beoordeel voor marketinggebruik. Categorie uit: ${CATS.join(', ')}. Marketingscore 1-10: alleen 6+ bij scherp, goed belicht en representatief (mooi geplaatst product, showroom, monteur netjes aan het werk, blije klant). Screenshots, memes, documenten en privefotos altijd 1-4. Eén korte NL-zin. UITSLUITEND JSON: {"cat":"...","score":7,"oordeel":"..."}` },
+            { type: 'text', text: `Foto uit de interne WhatsApp-groep van Sonty (zonwering/raamdecoratie). Beoordeel voor marketinggebruik. Categorie uit: ${CATS.join(', ')}. Let op het verschil: een knikarm(scherm) hangt AAN DE GEVEL zonder palen; een pergola of veranda staat op PALEN boven een terras. Marketingscore 1-10: alleen 6+ bij scherp, goed belicht en representatief (mooi geplaatst product, showroom, monteur netjes aan het werk, blije klant). Screenshots, memes, documenten en privefotos altijd 1-4. Eén korte NL-zin. UITSLUITEND JSON: {"cat":"...","score":7,"oordeel":"..."}` },
           ] }],
         }),
       });

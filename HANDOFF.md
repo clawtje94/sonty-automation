@@ -1938,3 +1938,11 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 - Ganesh is Engelstalig (mailt Engels met Sunny) maar geboekt bij Joey — VRAAG aan Daimy: omboeken naar Sjoerd? KS-daemon zet nu zelf de Engels-vlag (taal-voorkeur) bij Engelse klantberichten; vlag voor Ganesh handmatig gezet.
 - WACHT OP DAIMY: (1) sheet-rechten service-account, (2) Ganesh naar Sjoerd ja/nee.
 
+
+## 17-08 avond: Sunny-weetjesbot gebouwd (akkoord V16)
+- NIEUW `scripts/sunny-weetje.js` + launchd `nl.sonty.sunny-weetje` (ma-vr 20:00): Sunny stuurt dagelijks een weetje in de Sonty toppers-groep. 2 berichten: stoere opener (8 rouleren) + weetje via Haiku (thema rouleert: zonwering/dieren/bier/lichaam/techniek, historie in data/sunny-weetjes.json tegen herhaling en dubbel sturen). Grapverzoeken: DMs aan het Sunny-nummer van de laatste 24u gaan als inspiratie mee (Daimy 17-08), filter: nooit discriminerend/seksueel/politiek/gemeen.
+- Eerste weetje staat in de groep (17-08, slijpschijf-weetje; had nog dubbel "WISTEN JULLIE DATTTTT" — gefixt met harde strip).
+- VERZENDING `scripts/wa-stuur.jxa.js` + `scripts/bin/wa-type` (gecompileerd, bron wa-type.m): WhatsApp Catalyst accepteert chatwissels alleen frontmost. Achtergrond-AXPress, CGEvent-muisklik naar pid en verborgen vensters bleken allemaal wankel (Catalyst gooit verborgen vensters weg). Dus: idle-wacht (>=3 min geen input, checken tot 22:30, anders overslaan + melding), dan ~1 min overnemen, daarna WhatsApp verbergen + vorige app focus terug. Veiligheid: chatrij-klik + header-verificatie vóór er iets getypt wordt, typen via unicode-CGEvents naar pid (geen klembord), versturen via echte Stuur-knop, teruglezen dat vak leeg is, daarna nog DB-check in sunny-weetje.js.
+- wa-type modi: tekst, --enter, --wis (cmd+A+delete), --klik x y, --keycode N [cmd].
+- data/sunny-medewerkers.txt (nog niet aangemaakt) = team-weetjes voer voor grappen; Daimy bood aan die te leveren (V17 uitstaand).
+- WACHT OP DAIMY: V17 team-weetjes; verzendtest naar +31683500506 draait zodra hij van de computer wegloopt (achtergrondjob b80w4g51b).

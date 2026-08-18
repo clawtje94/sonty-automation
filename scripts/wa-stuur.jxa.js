@@ -39,8 +39,14 @@ function run(argv) {
   try {
     ca.doShellScript('open -a WhatsApp');
     delay(4);
+    // vers gestarte app (na Cmd+Q): wachten tot het proces scriptbaar is en er een
+    // venster staat; direct opvragen gaf "Object kan niet worden opgevraagd" (-1728)
+    function vensters() {
+      try { return se.processes['WhatsApp'].windows().length; } catch (e) { return -1; }
+    }
+    for (let i = 0; i < 15 && vensters() < 1; i += 1) delay(2);
+    if (vensters() < 1) throw new Error('WhatsApp-venster wil niet openen');
     const p = se.processes['WhatsApp'];
-    if (p.windows().length === 0) throw new Error('WhatsApp-venster wil niet openen');
     const pid = p.unixId();
     const TYPER = ($.NSHomeDirectory().js) + '/sonty/scripts/bin/wa-type';
     function typ(...args) {

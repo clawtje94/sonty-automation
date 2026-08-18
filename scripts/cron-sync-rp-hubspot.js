@@ -51,18 +51,8 @@ function main() {
   spawnLogged('hubspot-sync-trengo-wa.js', ['recent'], 'trengo-wa-sync.log');
   spawnLogged('hubspot-trengo-summary.js', ['recent'], 'trengo-summary.log');
 
-  // Dagelijks sales-monitoring rapport naar Telegram (1x per dag, na 18:00)
-  try {
-    const mark = path.join(__dirname, '.sales-report-date.txt');
-    const today = new Date().toISOString().slice(0, 10);
-    let last = ''; try { last = fs.readFileSync(mark, 'utf8').trim(); } catch (e) {}
-    if (new Date().getHours() >= 18 && last !== today) {
-      spawnLogged('sales-report.js', ['dag'], 'sales-report.log');
-      fs.writeFileSync(mark, today);
-    }
-  } catch (e) {
-    console.log(ts() + 'sales-report check mislukt: ' + e.message);
-  }
+  // Dagelijks sales-monitoring rapport: UITGEZET op verzoek Daimy 2026-08-18
+  // ("dit bericht kan uit"). Handmatig blijft mogelijk: node scripts/sales-report.js dag
 
   console.log(ts() + 'API-hooks gestart.');
 }

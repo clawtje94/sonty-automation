@@ -42,11 +42,28 @@ const VOORBEELD = {
   'person.sonty_service_link': 'https://www.sonty.nl/contact',
 };
 
+// Per productvariant een passende voorbeeldklant (Daimy 18-08: previews toonden overal
+// "screens" omdat de vaste voorbeeldklant dat product had; dat wekte de indruk dat de
+// variabelen fout stonden terwijl Klaviyo per klant het echte product invult).
+const VARIANT_VOORBEELD = {
+  knikarm: { 'person.sonty_product': 'Suneye 500 knikarmscherm (1x, motor)', 'person.sonty_product_kort': 'een knikarmscherm' },
+  rolluiken: { 'person.sonty_product': 'Roma voorzetrolluiken (3x, solar)', 'person.sonty_product_kort': 'rolluiken' },
+  pergola: { 'person.sonty_product': 'Pergola 4x3m met zijscreens', 'person.sonty_product_kort': 'een pergola' },
+  markies: { 'person.sonty_product': 'Markies 180cm (2x)', 'person.sonty_product_kort': 'een markies' },
+  binnen: { 'person.sonty_product': 'Plisse en duo-rolgordijnen (5x)', 'person.sonty_product_kort': 'raamdecoratie' },
+};
+function voorbeeldVoor(naam) {
+  for (const [kern, extra] of Object.entries(VARIANT_VOORBEELD)) {
+    if (naam.includes(kern)) return { ...VOORBEELD, ...extra };
+  }
+  return VOORBEELD;
+}
+
 /** Vervangt {{ x|default:"y" }} en {{ x }} door de voorbeeldwaarde, of anders door de default. */
-function vulIn(html) {
+function vulIn(html, waarden = VOORBEELD) {
   return html
-    .replace(/\{\{\s*([a-z_.]+)\s*\|\s*default:\s*"([^"]*)"\s*\}\}/gi, (_, sleutel, def) => VOORBEELD[sleutel] ?? def)
-    .replace(/\{\{\s*([a-z_.]+)\s*\}\}/gi, (_, sleutel) => VOORBEELD[sleutel] ?? '')
+    .replace(/\{\{\s*([a-z_.]+)\s*\|\s*default:\s*"([^"]*)"\s*\}\}/gi, (_, sleutel, def) => waarden[sleutel] ?? def)
+    .replace(/\{\{\s*([a-z_.]+)\s*\}\}/gi, (_, sleutel) => waarden[sleutel] ?? '')
     .replace(/\{%\s*unsubscribe\s*%\}/gi, 'https://www.sonty.nl/#uitschrijven-test')
     .replace(/\{%\s*manage_preferences\s*%\}/gi, 'https://www.sonty.nl/#voorkeuren-test');
 }
@@ -58,7 +75,7 @@ const ALLEEN_HTML = process.argv.includes('--alleen-html');
   const bestanden = fs.readdirSync(DIST).filter((f) => f.endsWith('.html'));
   if (ALLEEN_HTML) {
     for (const bestand of bestanden) {
-      const gevuld = vulIn(fs.readFileSync(path.join(DIST, bestand), 'utf8'));
+      const gevuld = vulIn(fs.readFileSync(path.join(DIST, bestand), 'utf8'), voorbeeldVoor(bestand));
       fs.writeFileSync(path.join(SHOTS, bestand.replace('.html', '.preview.html')), gevuld);
     }
     console.log(bestanden.length + ' preview-htmls ververst (zonder screenshots)');
@@ -75,7 +92,7 @@ const ALLEEN_HTML = process.argv.includes('--alleen-html');
 
   for (const bestand of bestanden) {
     const naam = bestand.replace('.html', '');
-    const gevuld = vulIn(fs.readFileSync(path.join(DIST, bestand), 'utf8'));
+    const gevuld = vulIn(fs.readFileSync(path.join(DIST, bestand), 'utf8'), voorbeeldVoor(bestand));
     const tijdelijk = path.join(SHOTS, naam + '.preview.html');
     fs.writeFileSync(tijdelijk, gevuld);
 

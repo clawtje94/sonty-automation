@@ -260,8 +260,8 @@ function bevestigingTekst(voornaam, slot, duurMin) {
   // moet er gewoon zijn van een uur vóór tot een uur ná het geplande blok.
   const vensterVan = new Date(+d - 60 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const vensterTot = new Date(+d + 90 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
-  return `Hoi ${voornaam}, hij staat! ${dag.charAt(0).toUpperCase() + dag.slice(1)} komt ${slot.inmeter} bij je langs om in te meten ` +
-    `(duurt zo'n ${duurMin} minuutjes). We rijden die dag een route, dus zorg dat je tussen ${vensterVan} en ${vensterTot} thuis bent — meestal zijn we er rond ${van}. ` +
+  return `Hoi ${voornaam}, goed nieuws, hij staat! ${dag.charAt(0).toUpperCase() + dag.slice(1)} komt ${slot.inmeter} bij je langs om in te meten, dat duurt zo'n ${duurMin} minuutjes. ` +
+    `We verwachten rond ${van} bij je te zijn. Omdat we die dag een route rijden kan het iets schuiven, dus fijn als je tussen ${vensterVan} en ${vensterTot} thuis bent. ` +
     `Komt er iets tussen? Stuur gerust een berichtje.`;
 }
 
@@ -314,8 +314,8 @@ function herinneringTekst(voornaam, slot, duurMin, dagenVooraf = 1) {
   const slot2 = dagenVooraf <= 1 ? 'Tot morgen!' : 'Komt het toch niet uit? Stuur dan even een berichtje terug.';
   const vensterVan = new Date(+d - 60 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const vensterTot = new Date(+d + 90 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
-  return `Hoi ${voornaam}, kleine herinnering: ${wanneer} komt ${slot.inmeter} bij je langs om in te meten ` +
-    `(duurt maar zo'n ${duurMin} minuutjes). We rijden die dag een route, dus zorg dat je tussen ${vensterVan} en ${vensterTot} thuis bent — meestal zijn we er rond ${van}. ${slot2}`;
+  return `Hoi ${voornaam}, kleine herinnering: ${wanneer} komt ${slot.inmeter} bij je langs om in te meten, dat duurt maar zo'n ${duurMin} minuutjes. ` +
+    `We verwachten rond ${van} bij je te zijn. Omdat we een route rijden kan het iets schuiven, dus fijn als je tussen ${vensterVan} en ${vensterTot} thuis bent. ${slot2}`;
 }
 
 /** Beide kanalen; geeft per kanaal terug wat er gebeurd is. Eén kanaal gelukt = aanbod is onderweg. */

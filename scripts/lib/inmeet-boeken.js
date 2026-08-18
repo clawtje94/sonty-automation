@@ -32,7 +32,7 @@ async function boekInmeetAfspraak({ slot, naam, telefoon, adres, duurMin, email 
       // uur vóór tot een uur ná het blok moet zijn.
       const dAan = new Date(slot.aankomst);
       const fmt = (ms) => new Date(ms).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
-      const venster = `Let op: we rijden een route, dus wees a.u.b. thuis tussen ${fmt(+dAan - 60 * 60000)} en ${fmt(+dAan + (duurMin + 60) * 60000)}.`;
+      const venster = `We rijden die dag een route, dus fijn als u tussen ${fmt(+dAan - 60 * 60000)} en ${fmt(+dAan + (duurMin + 60) * 60000)} thuis bent.`;
       const r = await b.boek(BIZ, {
         serviceId: DIENST_INMETEN,
         start: new Date(slot.aankomst).toISOString(),

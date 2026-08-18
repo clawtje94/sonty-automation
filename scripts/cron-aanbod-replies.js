@@ -91,7 +91,7 @@ function bevestigingsTekst(slot) {
   // betekent gewoon thuis zijn van 08:00 tot 10:30, een uur voor tot een uur na).
   const vensterVan = new Date(+d - 60 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const vensterTot = new Date(+d + 90 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
-  return `Helemaal goed, hij staat! ${dag.charAt(0).toUpperCase() + dag.slice(1)} komt ${wie} bij je langs om in te meten. We rijden die dag een route, dus zorg dat je tussen ${vensterVan} en ${vensterTot} thuis bent — meestal zijn we er rond ${van}. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty`;
+  return `Helemaal goed, hij staat! ${dag.charAt(0).toUpperCase() + dag.slice(1)} komt ${wie} bij je langs om in te meten. We verwachten rond ${van} bij je te zijn. Omdat we die dag een route rijden kan het iets schuiven, dus fijn als je tussen ${vensterVan} en ${vensterTot} thuis bent. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty`;
 }
 
 async function stuurWaBevestiging(ticketId, naam, slot) {

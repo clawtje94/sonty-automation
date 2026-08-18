@@ -450,12 +450,21 @@ async function main() {
               meldingen++;
               continue;
             }
-            if (duidingB.intent !== 'akkoord') {
-              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, duidingB.intent === 'klacht'
-                ? `Dank je voor je eerlijke bericht, dat snap ik goed. Ik pak dit meteen op en je hoort ${wanneerTerug()} van ons.`
-                : `Dank je wel voor je bericht! Ik zoek dit even goed uit en kom er ${wanneerTerug()} bij je op terug.`);
-              await telegram(`🚨 ${info.naam} schreef NA de boeking iets dat aandacht vraagt (${duidingB.intent}: ${duidingB.samenvatting}).\n\n"${tekst.slice(0, 200)}"\n\nDe afspraak staat al vast — controleer of die nog klopt. Ticket ${ticketId}. De klant weet dat we ermee bezig zijn.`);
+            if (duidingB.intent === 'ander-moment') {
+              // Verzetten ná boeking blijft planner-terrein: bevestigen + alarm.
+              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam,
+                `Dank je wel voor het laten weten! Ik kijk meteen naar een ander moment voor je en kom er ${wanneerTerug()} op terug.`);
+              await telegram(`🚨 ${info.naam} wil zijn GEBOEKTE afspraak verzetten (${duidingB.samenvatting}).\n\n"${tekst.slice(0, 200)}"\n\nDe afspraak staat nog vast — verzetten via dashboard of motor. Ticket ${ticketId}.`);
               meldingen++;
+              continue;
+            }
+            if (duidingB.intent !== 'akkoord') {
+              // VRAGEN EN AL HET ANDERE NA BOEKING ZIJN VAN SUNNY (Daimy 18-08, Barbara
+              // Galante: haar aanbetalingsvraag kreeg "ik zoek dit even goed uit" van de
+              // monitor, waardoor Sunny — die het antwoord gewoon weet — nooit meer aan
+              // de beurt kwam. De planner is na de boeking klaar; de monitor zwijgt hier
+              // volledig zodat er nooit dubbele of lege berichten ontstaan).
+              console.log(`  ${info.naam}: inhoudelijk bericht na boeking (${duidingB.intent}) — Sunny antwoordt, monitor zwijgt`);
               continue;
             }
           } catch (e) { console.log(`  na-boeking-check mislukt: ${e.message.slice(0, 80)}`); }

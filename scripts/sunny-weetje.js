@@ -67,10 +67,29 @@ function idleSeconden() {
   } catch (e) { return 0; }
 }
 
+/**
+ * Vergrendeld scherm = geen UI-events mogelijk; dat was de oorzaak van de gemiste
+ * ochtend-app op 18-08 (osascript hing 4 min en liep stuk om 07:30, Mac stond op slot).
+ * Dus: wachten tot het scherm ontgrendeld is EN de gebruiker idle is.
+ */
+function schermVergrendeld() {
+  try {
+    const uit = execFileSync('osascript', ['-l', 'JavaScript', '-e',
+      'ObjC.import("CoreGraphics"); const d = ObjC.deepUnwrap($.CGSessionCopyCurrentDictionary()); (d && d.CGSSessionScreenIsLocked) ? "1" : "0"'],
+      { timeout: 20000 }).toString().trim();
+    return uit === '1';
+  } catch (e) { return false; }
+}
+
 function wachtTotRust(uur, minuut) {
   const deadline = new Date();
   deadline.setHours(uur, minuut, 0, 0);
   while (new Date() < deadline) {
+    if (schermVergrendeld()) {
+      console.log('scherm vergrendeld, wachten op ontgrendeling...');
+      execFileSync('sleep', ['60']);
+      continue;
+    }
     const idle = idleSeconden();
     if (idle >= 180) return true;
     console.log(`Daimy is aan het werk (idle ${Math.round(idle)}s), wachten...`);
@@ -80,6 +99,7 @@ function wachtTotRust(uur, minuut) {
 }
 
 function stuurWhatsApp(doel, berichten) {
+  if (schermVergrendeld()) throw new Error('scherm vergrendeld, UI-events onmogelijk');
   const uit = execFileSync('osascript', ['-l', 'JavaScript', path.join(__dirname, 'wa-stuur.jxa.js'), doel, ...berichten], { timeout: 240000 }).toString().trim();
   console.log(uit);
   // verifieer in de lokale WhatsApp-database dat het laatste bericht er echt staat
@@ -214,8 +234,8 @@ async function telegram(t) {
   const opener = openers[vanSoort.length % openers.length];
   const { thema, tekst } = soort === 'ochtend' ? await maakOchtend(hist) : await maakWeetje(vanSoort);
   if (process.argv.includes('--proef')) { console.log(`PROEF (niet verstuurd):\n${opener}\n${tekst}`); return; }
-  // ochtend: uiterlijk 09:30 (daarna is de lol eraf), avond: uiterlijk 22:30
-  const [dlU, dlM] = soort === 'ochtend' ? [9, 30] : [22, 30];
+  // ochtend: uiterlijk 10:00 (marge voor laat ontgrendelen), avond: uiterlijk 22:30
+  const [dlU, dlM] = soort === 'ochtend' ? [10, 0] : [22, 30];
   if (!forceer && !wachtTotRust(dlU, dlM)) {
     console.log(`geen rustig moment gevonden, ${soort} overgeslagen`);
     await telegram(`☀️ Sunny-${soort} vandaag overgeslagen: je was aan de computer aan het werk en ik wilde je niet storen. Volgende keer beter.`);

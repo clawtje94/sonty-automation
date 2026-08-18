@@ -1,19 +1,18 @@
 // WhatsApp-verzender via Accessibility (JXA). Gebruik:
 //   osascript -l JavaScript wa-stuur.jxa.js <doel> <bericht1> [bericht2 ...]
 //
-// WhatsApp (Catalyst) accepteert chatwissels alleen betrouwbaar als de app vooraan staat;
-// achtergrond-AXPress, proces-muiskliks en verborgen vensters bleken allemaal wankel
-// (Catalyst gooit verborgen vensters ook nog eens weg). Daarom: kort en netjes overnemen
-// en alles terugzetten. De aanroeper (sunny-weetje.js) wacht eerst tot Daimy idle is,
-// zodat dit nooit gebeurt terwijl hij aan het werk is (Daimy 17-08).
-//  - onthoud welke app vooraan stond, activeer WhatsApp (maakt een dicht venster ook
-//    opnieuw aan), doe het werk, verberg WhatsApp en geef de vorige app de focus terug
-//  - chatrij aanklikken en de header van de geopende chat controleren tegen <doel>
-//    voordat er ook maar iets getypt wordt (nooit blind Enter op zoekresultaten)
-//  - tekst typen met scripts/bin/wa-type (unicode-events naar het proces, geen klembord)
-//  - versturen via de echte "Stuur"-knop en teruglezen dat het vak leeg is
-// Het berichtenpaneel wordt bij het scannen overgeslagen (honderden elementen, elke
-// property-call is een los Apple Event; anders loopt het uit de tijd).
+// LESSEN 17/18-08 (alle eerdere fouten zitten hierin verwerkt):
+//  - WhatsApp (Catalyst) accepteert chatwissels alleen frontmost; daarom kort overnemen
+//    en daarna alles herstellen. De aanroeper wacht eerst tot Daimy idle is.
+//  - Element-referenties zijn index-paden die verlopen zodra WhatsApp opnieuw rendert
+//    ("Ongeldige index" -1719). Daarom: GERICHT zoeken (stoppen bij de eerste match,
+//    seconden i.p.v. halve minuut volle scan) en direct klikken op een verse referentie,
+//    met per stap een eigen retry. Nooit een referentie van een eerdere scan hergebruiken.
+//  - Na Cmd+Q is het proces even niet scriptbaar ("Object kan niet worden opgevraagd"),
+//    dus wachten tot het venster er echt staat.
+//  - Typen via scripts/bin/wa-type (unicode-events naar het proces, geen klembord),
+//    versturen via de echte Stuur-knop met Enter-fallback, en na afloop teruglezen.
+//  - Er wordt pas iets getypt als de header van de geopende chat aantoonbaar het doel is.
 ObjC.import('Cocoa');
 
 function norm(s) {
@@ -39,8 +38,6 @@ function run(argv) {
   try {
     ca.doShellScript('open -a WhatsApp');
     delay(4);
-    // vers gestarte app (na Cmd+Q): wachten tot het proces scriptbaar is en er een
-    // venster staat; direct opvragen gaf "Object kan niet worden opgevraagd" (-1728)
     function vensters() {
       try { return se.processes['WhatsApp'].windows().length; } catch (e) { return -1; }
     }
@@ -53,87 +50,83 @@ function run(argv) {
       const q = (s) => `'${String(s).replace(/'/g, `'\\''`)}'`;
       ca.doShellScript(`${q(TYPER)} ${pid} ${args.map(q).join(' ')}`);
     }
+    typ('--keycode', '53'); // Escape: oud zoekfilter weg zodat alle chatrijen zichtbaar zijn
+    delay(0.8);
 
-    const INTERESSANT = ['AXButton', 'AXGenericElement', 'AXTextArea', 'AXGroup'];
-    function verzamel() {
-      const alles = [];
+    // Gericht zoeken: loop de boom af en stop bij de eerste match. Berichtenpaneel
+    // overslaan (honderden elementen). Geeft een verse referentie of null.
+    function vind(pred) {
+      let res = null;
       function walk(el, d) {
-        if (d > 25) return;
+        if (d > 25 || res) return;
         let kids = [];
         try { kids = el.uiElements(); } catch (e) { return; }
         for (const k of kids) {
-          let r = '';
+          if (res) return;
+          let r = '', desc = '';
           try { r = k.role(); } catch (e) {}
-          if (INTERESSANT.includes(r)) {
-            let desc = '';
-            try { desc = String(k.description() || ''); } catch (e) {}
-            if (r === 'AXGroup' && norm(desc).startsWith('berichteninchat')) {
-              alles.push({ el: k, r, desc, vl: '', x: 0, y: 0, w: 0, h: 0, paneel: true });
-              continue; // berichtenpaneel niet in afdalen
-            }
-            let vl = '', pos = [0, 0], sz = [0, 0];
-            try { vl = String(k.value() || ''); } catch (e) {}
-            try { pos = k.position(); } catch (e) {}
-            try { sz = k.size(); } catch (e) {}
-            alles.push({ el: k, r, desc, vl, x: pos[0], y: pos[1], w: sz[0], h: sz[1] });
-          }
+          try { desc = String(k.description() || ''); } catch (e) {}
+          if (r === 'AXGroup' && norm(desc).startsWith('berichteninchat')) continue;
+          let vl = '';
+          if (r === 'AXButton' || r === 'AXGenericElement') { try { vl = String(k.value() || ''); } catch (e) {} }
+          if (pred(r, desc, vl, k)) { res = k; return; }
           walk(k, d + 1);
         }
       }
-      walk(p.windows[0], 1);
-      return alles;
+      try { walk(p.windows[0], 1); } catch (e) { /* venster net ververst; caller retryt */ }
+      return res;
     }
+    function positie(k) { try { return k.position(); } catch (e) { return [0, 0]; } }
+    function maat(k) { try { return k.size(); } catch (e) { return [0, 0]; } }
 
-    // 1. chatrij zoeken in de linkerlijst (links van het berichtenpaneel) en openen
-    let alles = verzamel();
-    let paneel = alles.find((e) => e.paneel);
-    let grens = 100000;
-    if (paneel) { try { grens = paneel.el.position()[0]; } catch (e) {} }
-    const rij = alles.find((e) => (e.r === 'AXButton' || e.r === 'AXGenericElement')
-      && e.x < grens && e.w > 250 && e.h > 40 && norm(e.desc + e.vl).includes(doel));
-    if (!rij) throw new Error('chatrij niet gevonden voor: ' + argv[0]);
-    se.click(rij.el);
-    delay(2);
+    // Stap 1+2 met retry: verse chatrij zoeken, klikken, header verifieren.
+    let open = false;
+    for (let poging = 0; poging < 4 && !open; poging += 1) {
+      const rij = vind((r, desc, vl, k) => (r === 'AXButton' || r === 'AXGenericElement')
+        && norm(desc + vl).includes(doel) && maat(k)[0] > 250 && maat(k)[1] > 40 && positie(k)[1] > 200);
+      if (rij) {
+        try { se.click(rij); } catch (e) { delay(1.5); continue; }
+        delay(2);
+      } else { delay(1.5); }
+      const header = vind((r, desc, vl, k) => (r === 'AXButton' || r === 'AXHeading')
+        && norm(desc).includes(doel) && positie(k)[1] < 200);
+      // header mag niet de chatrij zelf zijn: rijen zijn hoog (>40px) en staan in de lijst;
+      // de maat- en positie-eisen hierboven filteren dat
+      open = !!header;
+    }
+    if (!open) throw new Error('chat wil niet openen op het doel, gestopt zonder te sturen');
 
-    // 2. header van de geopende chat controleren (bovenin, rechts van de lijst)
-    alles = verzamel();
-    paneel = alles.find((e) => e.paneel);
-    if (paneel) { try { grens = paneel.el.position()[0]; } catch (e) {} }
-    const header = alles.find((e) => !e.paneel && e.x >= grens - 80 && e.y < 300 && norm(e.desc).includes(doel));
-    if (!header) throw new Error('geopende chat matcht het doel niet, gestopt zonder te sturen');
-
-    // 3. per bericht: vak leegmaken, typen, controleren, met de Stuur-knop versturen
-    const vak = alles.find((e) => e.r === 'AXTextArea' && norm(e.desc).includes('stelberichtop'));
-    if (!vak) throw new Error('berichtvak niet gevonden');
+    function vakVers() {
+      return vind((r, desc) => r === 'AXTextArea' && norm(desc).includes('stelberichtop'));
+    }
     function vakWaarde() {
-      try { return String(vak.el.value() || ''); } catch (e) { return ''; }
+      const v = vakVers();
+      try { return v ? String(v.value() || '') : ''; } catch (e) { return ''; }
     }
-    se.click(vak.el);
-    delay(0.8);
+
     for (const m of msgs) {
       const kern = norm(m).slice(0, 15);
       let getypt = false;
       for (let poging = 0; poging < 4 && !getypt; poging += 1) {
+        const vak = vakVers();
+        if (!vak) { delay(1.5); continue; }
+        try { se.click(vak); } catch (e) { delay(1); continue; }
+        delay(0.8);
         typ('--wis');
         delay(0.5);
         typ(m);
-        delay(1.2);
+        delay(1.5);
         getypt = norm(vakWaarde()).includes(kern);
-        if (!getypt) { se.click(vak.el); delay(0.8); }
       }
       if (!getypt) throw new Error('tekst komt niet aan in het berichtvak');
-      // versturen: liefst via de echte Stuur-knop; is die even niet vindbaar (trage
-      // scan, UI net ververst), dan Enter naar het proces — dat is hier veilig omdat
-      // de chat-header en de vak-inhoud allebei al geverifieerd zijn
       let verstuurd = false;
       for (let poging = 0; poging < 2 && !verstuurd; poging += 1) {
-        const na = verzamel();
-        const stuur = na.find((e) => e.r === 'AXButton' && norm(e.desc) === 'stuur');
+        const stuur = vind((r, desc) => r === 'AXButton' && norm(desc) === 'stuur');
         if (stuur) {
-          se.click(stuur.el);
+          try { se.click(stuur); } catch (e) { delay(1); continue; }
           delay(2);
           verstuurd = !norm(vakWaarde()).includes(kern);
-        }
+        } else { delay(1); }
       }
       if (!verstuurd) {
         typ('--keycode', '36');

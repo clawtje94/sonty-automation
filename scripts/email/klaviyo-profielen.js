@@ -175,6 +175,9 @@ function bouwProfiel(r) {
     // ontbrekende data leidt tot niet-mailen, niet tot per ongeluk wel mailen.
     sonty_mag_mail: r.magMail === false ? 'nee' : (r.magMail === true ? 'ja' : 'onbekend'),
     sonty_fase: bepaalFase(r),
+    // Dagteller voor de C-instap (Daimy 18-08: alleen mensen die de 30-dagengrens NET
+    // passeren mailen, nooit de hele 30+-backlog). Het instap-segment pakt 30-31.
+    sonty_offerte_dagen: r.offerteDatum ? Math.floor((Date.now() - r.offerteDatum) / DAG) : null,
     // Aanhef als kant-en-klaar veld: "Hoi Marleen," of "Hoi," zonder bruikbare voornaam.
     // In de sync berekend (zelfde filosofie als de fase): geen kapotte fallbacks in Klaviyo.
     sonty_aanhef: netteVoornaam(r.voornaam) ? `Hoi ${netteVoornaam(r.voornaam)},` : 'Hoi,',

@@ -103,3 +103,6 @@ data/prijs-meetlat/vergelijking.json
 data/.tmp-*
 data/ai-ks/.tmp-*
 scripts/.tmp-*
+
+# WhatsApp-sessie van Sunny, nooit in git
+data/wa-auth/

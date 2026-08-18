@@ -19,7 +19,8 @@ const { execFileSync } = require('child_process');
 
 const HIST = path.join(__dirname, '..', 'data', 'sunny-weetjes.json');
 const TEAMINFO = path.join(__dirname, '..', 'data', 'sunny-medewerkers.txt');
-const GROEP_ZOEK = 'Sonty toppers';
+// De groep 'Sonty toppers'; zelfde id als de groepswachter in email/wa-groep-wachter.js.
+const GROEP_JID = '31628209480-1583527515@g.us';
 
 // juiste Sonty-termen in elke grap (Daimy 17-08: "we verkopen pergola's geen overkappingen")
 const PRODUCTKENNIS = 'Productkennis Sonty (gebruik ALTIJD deze termen): wij verkopen knikarmschermen, uitvalschermen, screens/zipscreens, rolluiken, pergola\'s (hoogwaardig aluminium, op palen), markiezen, horren en raamdecoratie. Zeg NOOIT overkapping, veranda, carport of houten pergola; het heet bij ons een pergola. Doeken zijn waterafstotend, niet waterdicht. Een knikarmscherm hangt aan de gevel zonder palen.';
@@ -55,92 +56,18 @@ const THEMAS = [
   'techniek, machines of wereldrecords',
 ];
 
-/**
- * De verzending neemt het scherm ~1 minuut over (WhatsApp accepteert chatwissels alleen
- * frontmost); daarom sturen we alleen als Daimy niet aan de computer zit (Daimy 17-08:
- * "kan dus alleen als ik niet aan het werk ben"). We wachten tot toetsenbord en muis
- * minstens 3 minuten stil zijn, tot uiterlijk 22:30; anders slaat de bot de dag over.
- */
-function idleSeconden() {
-  try {
-    return Number(execFileSync('sh', ['-c', "ioreg -c IOHIDSystem | awk '/HIDIdleTime/ {print $NF/1000000000; exit}'"], { timeout: 15000 }).toString().trim()) || 0;
-  } catch (e) { return 0; }
-}
-
-/**
- * Vergrendeld scherm = geen UI-events mogelijk; dat was de oorzaak van de gemiste
- * ochtend-app op 18-08 (osascript hing 4 min en liep stuk om 07:30, Mac stond op slot).
- * Dus: wachten tot het scherm ontgrendeld is EN de gebruiker idle is.
- */
-function schermVergrendeld() {
-  try {
-    const uit = execFileSync('osascript', ['-l', 'JavaScript', '-e',
-      'ObjC.import("CoreGraphics"); const d = ObjC.deepUnwrap($.CGSessionCopyCurrentDictionary()); (d && d.CGSSessionScreenIsLocked) ? "1" : "0"'],
-      { timeout: 20000 }).toString().trim();
-    return uit === '1';
-  } catch (e) { return false; }
-}
-
-function wachtTotRust(uur, minuut) {
-  const deadline = new Date();
-  deadline.setHours(uur, minuut, 0, 0);
-  while (new Date() < deadline) {
-    if (schermVergrendeld()) {
-      console.log('scherm vergrendeld, wachten op ontgrendeling...');
-      execFileSync('sleep', ['60']);
-      continue;
-    }
-    const idle = idleSeconden();
-    if (idle >= 180) return true;
-    console.log(`Daimy is aan het werk (idle ${Math.round(idle)}s), wachten...`);
-    execFileSync('sleep', ['60']);
-  }
-  return false;
-}
-
-function stuurWhatsApp(doel, berichten) {
-  if (schermVergrendeld()) throw new Error('scherm vergrendeld, UI-events onmogelijk');
-  // UI-scripting is flaky (stale element-referenties als WhatsApp net ververst):
-  // tot 3 pogingen met pauze; de JXA-laag verstuurt pas na header-verificatie, dus
-  // een mislukte poging heeft gegarandeerd niets gestuurd
-  let uit = '';
-  for (let poging = 1; ; poging += 1) {
-    try {
-      uit = execFileSync('osascript', ['-l', 'JavaScript', path.join(__dirname, 'wa-stuur.jxa.js'), doel, ...berichten], { timeout: 240000 }).toString().trim();
-      break;
-    } catch (e) {
-      // alleen herkansen bij fouten die AANTOONBAAR voor het eerste versturen optreden
-      // (chat openen/vinden); fouten tijdens het typen/sturen niet, want dan kan
-      // bericht 1 al in de groep staan en zou een retry hem dubbel zetten
-      const veiligOmTeHerkansen = /chatrij niet gevonden|matcht het doel niet|venster wil niet openen/i.test(String(e.message)); // 18-08: 'Ongeldige index' bleek OOK na bericht 1 te kunnen (opener stond al in de groep), dus alles rond typen/sturen nooit herkansen
-      if (poging >= 3 || !veiligOmTeHerkansen) throw e;
-      console.log(`verzendpoging ${poging} mislukt (${String(e.message).split('\n')[0].slice(0, 80)}), opnieuw...`);
-      execFileSync('sleep', ['20']);
-    }
-  }
-  console.log(uit);
-  // verifieer in de lokale WhatsApp-database dat het laatste bericht er echt staat
-  const db = path.join(process.env.HOME, 'Library', 'Group Containers', 'group.net.whatsapp.WhatsApp.shared', 'ChatStorage.sqlite');
-  const zoek = berichten[berichten.length - 1].slice(0, 25).replace(/'/g, "''");
-  let dbFout = 0;
-  for (let i = 0; i < 6; i += 1) {
-    execFileSync('sleep', ['5']);
-    try {
-      const r = execFileSync('sqlite3', ['-readonly', `file:${db}?mode=ro`,
-        `SELECT count(*) FROM ZWAMESSAGE WHERE ZISFROMME = 1 AND ZTEXT LIKE '%${zoek}%' AND ZMESSAGEDATE > (strftime('%s','now') - 978307200 - 300);`],
-        { timeout: 15000 }).toString().trim();
-      if (Number(r) > 0) return;
-    } catch (e) { dbFout += 1; }
-  }
-  if (dbFout >= 3) {
-    // database niet leesbaar (macOS-toestemmingspopup "node wil toegang tot gegevens uit
-    // andere apps" nog niet op Sta toe): de JXA-laag heeft al geverifieerd dat het vak
-    // leeg is na de Stuur-knop, dus behandel als verzonden. NIET falen, anders zou de
-    // aanroeper opnieuw sturen en krijgt de groep het bericht dubbel.
-    console.warn('let op: WhatsApp-database niet leesbaar voor verificatie, verzending aangenomen op basis van UI-controle');
-    return;
-  }
-  throw new Error('bericht niet teruggevonden in WhatsApp-database, mogelijk niet verzonden');
+// VERSTUREN ALS GEKOPPELD APPARAAT (Daimy 18-08). Was: WhatsApp Desktop bedienen via
+// AppleScript. Dat eiste een ontgrendeld scherm, nam een minuut lang muis en toetsenbord
+// over, vroeg telkens opnieuw toestemming voor node en liep stuk zodra de Mac op slot
+// stond ("FOUT: spawnSync osascript ETIMEDOUT"). Nu gaat het rechtstreeks via de
+// WhatsApp-verbinding: geen venster, geen toestemming, werkt ook met het scherm op slot.
+// Eenmalig koppelen met: node scripts/wa-koppel.js
+async function stuurWhatsApp(doel, berichten) {
+  const { stuurWhatsApp: stuur } = require('./lib/wa-verstuur.js');
+  const jid = doel.includes('@') ? doel : `${doel.replace(/\D/g, '')}@s.whatsapp.net`;
+  const n = await stuur(jid, berichten);
+  console.log(`${n} bericht(en) verstuurd naar ${jid}`);
+  return n;
 }
 
 /**
@@ -236,8 +163,8 @@ async function telegram(t) {
 
 (async () => {
   if (process.argv.includes('--test')) {
-    stuurWhatsApp('31683500506', ['Testje van de weetjesbot, negeer mij 🤖🍻']);
-    console.log('testbericht gestuurd en geverifieerd in database');
+    await stuurWhatsApp('31683500506', ['Testje van de weetjesbot, negeer mij 🤖🍻']);
+    console.log('testbericht gestuurd');
     return;
   }
   const vandaag = new Date().toISOString().slice(0, 10);
@@ -253,14 +180,8 @@ async function telegram(t) {
   const opener = openers[vanSoort.length % openers.length];
   const { thema, tekst } = soort === 'ochtend' ? await maakOchtend(hist) : await maakWeetje(vanSoort);
   if (process.argv.includes('--proef')) { console.log(`PROEF (niet verstuurd):\n${opener}\n${tekst}`); return; }
-  // ochtend: uiterlijk 10:00 (marge voor laat ontgrendelen), avond: uiterlijk 22:30
-  const [dlU, dlM] = soort === 'ochtend' ? [10, 0] : [22, 30];
-  if (!forceer && !wachtTotRust(dlU, dlM)) {
-    console.log(`geen rustig moment gevonden, ${soort} overgeslagen`);
-    await telegram(`☀️ Sunny-${soort} vandaag overgeslagen: je was aan de computer aan het werk en ik wilde je niet storen. Volgende keer beter.`);
-    return;
-  }
-  stuurWhatsApp(GROEP_ZOEK, [opener, tekst]);
+  // Wachten tot Daimy weg is hoeft niet meer: er wordt geen scherm meer overgenomen.
+  await stuurWhatsApp(GROEP_JID, [opener, tekst]);
   hist.push({ datum: vandaag, type: soort, thema, opener, weetje: tekst });
   fs.writeFileSync(HIST, JSON.stringify(hist, null, 1));
   console.log(`gestuurd: ${opener} / ${tekst}`);

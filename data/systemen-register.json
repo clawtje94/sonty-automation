@@ -125,9 +125,9 @@
       "naam": "Planado-rooster zetten",
       "functie": "Zet de beschikbaarheid van de inmeters in Planado vanuit het echte rooster + vakanties uit Outlook.",
       "groep": "Planning & orders",
-      "ritme": "dagelijks 07:45",
+      "ritme": "wekelijks ma 07:45",
       "log": "planado-shifts.log",
-      "maxUur": 30,
+      "maxUur": 172,
       "ks": false,
       "keten": "agenda"
     },
@@ -242,11 +242,12 @@
       "naam": "Keten-zelfcontrole inmeten",
       "functie": "Controleert elk uur 7 invarianten van de inmeet-keten: dubbele boeking, botsend aanbod, aanbod na boeking, stille klant, dood ticket, vergeten lead, verlopen zonder vervolg.",
       "groep": "Bewaking",
-      "ritme": "elk uur",
+      "ritme": "UIT (verzoek Daimy 17-08)",
       "log": "keten-zelfcontrole.log",
       "maxUur": 3,
       "ks": false,
-      "keten": "bewaking"
+      "keten": "bewaking",
+      "uitgeschakeld": true
     },
     "nl.sonty.aan-zet-watchdog": {
       "naam": "Wie-is-aan-zet watchdog",
@@ -364,9 +365,9 @@
       "naam": "Cohort-weekrapport conversie",
       "functie": "Conversie per week-cohort met ijkpunten (bot live, prijswijzigingen) in de tijdlijn.",
       "groep": "Rapportage",
-      "ritme": "dagelijks 08:45",
+      "ritme": "wekelijks ma 08:45",
       "log": "cohortrapport.log",
-      "maxUur": 30,
+      "maxUur": 172,
       "ks": false
     },
     "nl.sonty.maandag-data": {

@@ -1,5 +1,12 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-18)
 
+## 18-08 (3): FOTO-DASHBOARD — GOEDGEKEURDE UPLOADS UIT HOOFDLIJST
+- Klacht Daimy: foto's die akkoord waren bleven in de uploadlijst staan.
+- Fix (commit b6da2bd, live + mobiel gecheckt): /admin/fotos tab Uploaden toont
+  alleen nog items die iets van Daimy nodig hebben; status "ok" gaat naar
+  inklapbare knop "Verwerkt (N)" onderaan (op prod nu 43). Afgewezen blijft
+  onzichtbaar zoals eerst. Ter info: 424 foto's wachten nog op akkoord.
+
 ## 18-08 (2): OUTLOOK-ANNULERING LEIDEND (sync annuleert mee, heelt nooit terug)
 - Eric-geval deel 2: de terugweg-heler had de handmatige Outlook-annulering van
   15-08 ongedaan gemaakt (afspraak stond er vandaag dus weer; Joey reed terecht,

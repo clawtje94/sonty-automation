@@ -231,12 +231,7 @@ async function leesLeadCompleet(item) {
     // haar offerte is alleen een rolluik). De inmeter weet dan dat er nog iets speelt zonder
     // dat het als "te meten" wordt gepresenteerd. Formulier-ruis (Windvast, windsensor,
     // Somfy/Tahoma, "Offerte op maat") blijft eruit; dat zijn geen losse producten.
-    const RUIS = /^(niet )?windvast$|windsensor|^offerte op maat$|^winkel offerte$|^somfy|^tahoma|^situo|^eolis/i;
-    const offerteNamen = offerte.producten.map((p) => String(p.naam).toLowerCase());
-    const restant = [...new Set(bruikbaar
-      .map((p) => p.naam)
-      .filter((n) => !RUIS.test(n))
-      .filter((n) => !offerteNamen.some((o) => o.includes(n.toLowerCase()) || n.toLowerCase().includes(o))))];
+    const restant = require('./lib/lead-restant.js').leadRestant(bruikbaar, offerte.producten);
     return {
       ...lead,
       producten: offerte.producten,

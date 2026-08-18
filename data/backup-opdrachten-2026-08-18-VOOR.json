@@ -1,0 +1,1728 @@
+[
+ {
+  "uuid": "1f19adeb-7f1b-64a0-bbf9-02f244d06060",
+  "serial_no": 582,
+  "description": "Inmeten — Gerda  Van Osch\nJonker aartendam 1, 4207 gj, Brakel\n\n1 product(en): 1x Rolluik\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6500",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   }
+  ],
+  "scheduled_at": "2026-09-30T07:00:00Z"
+ },
+ {
+  "uuid": "1f19adb5-4537-6ec0-ae0b-3a4dd87a7671",
+  "serial_no": 581,
+  "description": "Inmeten — Hans de Lamboij\nDouglaslaan 4 4, 2497 cr, Den Haag\n\n2 product(en): 1x Sunbasic dichte cassette, 1x Draadloze windsensor\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6499",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   }
+  ],
+  "scheduled_at": "2026-08-27T13:45:00Z"
+ },
+ {
+  "uuid": "1f19adb1-7760-6080-ac14-4eb069369159",
+  "serial_no": 580,
+  "description": "Inmeten — Bartho de Jong\nBerkenweg 23, 2771 VR, Boskoop\n\n1 product(en): 1x Suneye dichte cassette\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6498",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   }
+  ],
+  "scheduled_at": "2026-10-07T07:00:00Z"
+ },
+ {
+  "uuid": "1f19a734-e628-6990-ba62-0e0222c48ea3",
+  "serial_no": 576,
+  "description": "Inmeten — Barbara Galante\nTroelstralaan 7, 2104VM, Heemstede\n\n1 product(en): 1x Windvast\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6497\n\nGripp: 6497\nIN TE METEN:\n- 1x Zip Design 2950×1300 — RAL 7016 structuur (standaard) / n.t.b. (alle doekstalen bekijk je bij he — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6497",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Zip Design 2950×1300 — RAL 7016 structuur (standaard) / n.t.b. (alle doekstalen bekijk je bij he — afstandsbediening"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6497"
+   }
+  ],
+  "scheduled_at": "2026-10-01T09:55:00Z"
+ },
+ {
+  "uuid": "1f19a720-39f1-65d0-9523-76b2673b2a91",
+  "serial_no": 575,
+  "description": "Inmeten — Thijs Buijs\nDirk Costerstraat 34, 3069WE, Rotterdam\n\n1 product(en): 1x Rolluik (RollSUPER)\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6496\n\nGripp: 6496\nIN TE METEN:\n- 1x Rolluik (RollSUPER) 1400×1600 — Antraciet / RAL 7016 — Motor + afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6496",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Rolluik (RollSUPER) 1400×1600 — Antraciet / RAL 7016 — Motor + afstandsbediening"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6496"
+   }
+  ],
+  "scheduled_at": "2026-08-25T11:00:00Z"
+ },
+ {
+  "uuid": "1f19a0f3-3d99-61f0-9ab8-4ede0615efed",
+  "serial_no": 569,
+  "description": "Inmeten — A Bertrams\nDrossaardslag 46, 2805DC, Gouda\n\n2 product(en): 1x Suneye dichte cassette, 1x Draadloze windsensor\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6490\n\nGripp: 6490\nIN TE METEN:\n- 1x Suneye 4000×2500 — RAL 9001 (standaard) / NTB — afstandsbediening\n- 1x Eolis 3D windsensor IO\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6490",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Suneye 4000×2500 — RAL 9001 (standaard) / NTB — afstandsbediening · 1x Eolis 3D windsensor IO"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6490"
+   }
+  ],
+  "scheduled_at": "2026-09-23T11:55:00Z"
+ },
+ {
+  "uuid": "1f19a07c-7e88-6e50-9900-126f05b7162e",
+  "serial_no": 568,
+  "description": "Inmeten — Martin Valentin\nVaartdreef 47, 2724GB, Zoetermeer\n\n2 product(en): 1x Suneye knikarmscherm, 1x Demonteren en afvoeren oud scherm/rolluik\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6489\n\nGripp: 6489\nIN TE METEN:\n- 1x Suneye 4350×3000 — RAL 7016 structuur (standaard) / n.t.b. (alle doekstalen bekijk je bij he — draaischakelaar\n- 1x Rolluik (RollSUPER)\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6489",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Suneye 4350×3000 — RAL 7016 structuur (standaard) / n.t.b. (alle doekstalen bekijk je bij he — draaischakelaar · 1x Rolluik (RollSUPER)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6489"
+   }
+  ],
+  "scheduled_at": "2026-08-25T13:40:00Z"
+ },
+ {
+  "uuid": "1f1996ee-5d2d-6260-9797-4e47b3e1ef4e",
+  "serial_no": 567,
+  "description": "Inmeten — Laura Idzinga\nTheo van Doesburgstraat 79, 3544MK, Utrecht\n\n1 product(en): 1x Draadloze windsensor\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6488\n\nGripp: 6488\nIN TE METEN:\n- 1x Suneye Voorraadscherm 5000×3000 — RAL 7016 structuur (standaard) / Beige — afstandsbediening\n- 1x Rolluik (RollSUPER)\n- 1x Eolis 3D windsensor IO\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6488",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Suneye Voorraadscherm 5000×3000 — RAL 7016 structuur (standaard) / Beige — afstandsbediening · 1x Rolluik (RollSUPER) · 1x Eolis 3D windsensor IO"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6488"
+   }
+  ],
+  "scheduled_at": "2026-10-05T07:00:00Z"
+ },
+ {
+  "uuid": "1f19967d-acfe-6d10-861e-0a07d64c9562",
+  "serial_no": 564,
+  "description": "Inmeten — Edwin Kanters\nMolensingel 109, 2614lc, Delft\n\n3 product(en): 1x Suneye voorraad scherm, 1x Tahoma Switch, 1x Demontage oude scherm\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6487\n\nGripp: 6487\nIN TE METEN:\n- 1x Suneye Voorraadscherm 5000×3000 — RAL 7016 structuur / Beige — Motor + afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6487",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Suneye Voorraadscherm 5000×3000 — RAL 7016 structuur / Beige — Motor + afstandsbediening"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6487"
+   }
+  ],
+  "scheduled_at": "2026-08-18T13:15:00Z"
+ },
+ {
+  "uuid": "1f198c0d-69a4-6300-9797-4e47b3e1ef4e",
+  "serial_no": 561,
+  "description": "Inmeten — Helma  Blokzijl\nClaes de Vrieselaan 36a, 3021JP, Rotterdam\n\n2 product(en): 1x Suneye dichte cassette, 1x Suneye dichte cassette\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6486\n\nGripp: 6486\nIN TE METEN:\n- 1x Suneye 3300×2500 — Andere RAL kleur (RAL kleur) / Graag Rood meenemen — Afstandsbediening (Somfy IO)\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6486",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Suneye 3300×2500 — Andere RAL kleur (RAL kleur) / Graag Rood meenemen — Afstandsbediening (Somfy IO)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6486"
+   }
+  ],
+  "scheduled_at": "2026-09-22T08:40:00Z"
+ },
+ {
+  "uuid": "1f198b14-f0b7-6750-a143-56854c97de63",
+  "serial_no": 560,
+  "description": "Inmeten — Steven Broer\nWaalstroom 13, 2721DE, Zoetermeer\n\n9 product(en): 1x Rolluik S-42 (RollSUPER), 1x Rolluik S-42 (RollSUPER), 1x Rolluik S-42 (RollSUPER), 2x Rolluik S-42 (RollSUPER), 1x Rolluik S-42 (RollSUPER), 1x Tahoma Switch, 1x Tahoma kado daimy, 1x Blend prijzen en spullen mee nemen mogelijk keukenraam.\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6485\n\nGripp: 6485\nIN TE METEN:\n- 1x Rolluik (RollSUPER) 3300×1300 — Cremewit (standaard) / NTB — Solar (Somfy RS 100 IO Solar)\n- 1x Rolluik (RollSUPER) 2200×1400 — Cremewit (standaard) / NTB — Solar (Somfy RS 100 IO Solar)\n- 1x Rolluik (RollSUPER) 1100×1400 — Cremewit (standaard) / NTB — Solar (Somfy RS 100 IO Solar)\n- 2x Rolluik (RollSUPER) 1700×1300 — Cremewit (standaard) / NTB — Solar (Somfy RS 100 IO Solar)\n- 1x Rolluik (RollSUPER) 3900×1200 — RAL 7016 structuur (standaard) / NTB — Solar (Somfy RS 100 IO Solar)\n- 1x Extra info\n- 1x Extra info\n- 1x Extra info\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6485",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Rolluik (RollSUPER) 3300×1300 — Cremewit (standaard) / NTB — Solar (Somfy RS 100 IO Solar) · +7 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6485"
+   }
+  ],
+  "scheduled_at": "2026-09-24T10:55:00Z"
+ },
+ {
+  "uuid": "1f198a83-cbb8-6840-b424-5eb5c34501d6",
+  "serial_no": 559,
+  "description": "Inmeten — Ganesh\nTibetstraat 56, 2622JV, Delft\n\n8 product(en): 1x SunBasic Cassette, 1x Plisséfit hordeur (Unilux), 1x Screen design 110&#32;, 1x Rolluik (RollSUPER), 2x Rolluik (RollSUPER), 1x Eolis 3D windsensor IO, 1x Oude product mee nemen gratis x daimy\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6484\n\nGripp: 6484\nIN TE METEN:\n- 1x Sunbasic Cassette 4600×3000 — RAL 7016 structuur (standaard) / NTB — motor + afstandbediening\n- 1x Plissé 1220×2050 — RAL 7016 structuur — Elektrisch met afstandsbediening (Somfy\n- 1x Extra info 2800×1900 — Elektrisch met afstandsbediening Solar i\n- 1x Rolluik (RollSUPER) 2800×1200 — RAL 7016 structuur (standaard) / RAL 7016 structuur — afstandsbediening\n- 2x Rolluik (RollSUPER) 1700×1450 — RAL 7016 structuur (standaard) / RAL 7016 structuur — afstandsbediening\n- 1x Eolis 3D windsensor IO\n- 1x Extra info\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6484",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Sunbasic Cassette 4600×3000 — RAL 7016 structuur (standaard) / NTB — motor + afstandbediening · +6 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6484"
+   }
+  ],
+  "scheduled_at": "2026-09-14T10:15:00Z"
+ },
+ {
+  "uuid": "1f198a75-e6b6-6230-b424-5eb5c34501d6",
+  "serial_no": 558,
+  "description": "Inmeten — Rene Pecnik\nDe Ruijt 60, 2289BX, Rijswijk\n\n2 product(en): 1x Suneye dichte cassette, 1x Draadloze windsensor\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6483\n\nGripp: 6483\nIN TE METEN:\n- 1x Suneye 4800×3000 — RAL 9007 (+€353 trendkleur) / NTB — afstandsbediening\n- 1x Eolis 3D windsensor IO\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6483",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Suneye 4800×3000 — RAL 9007 (+€353 trendkleur) / NTB — afstandsbediening · 1x Eolis 3D windsensor IO"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6483"
+   }
+  ],
+  "scheduled_at": "2026-08-24T13:25:00Z"
+ },
+ {
+  "uuid": "1f198a5a-f745-66f0-8a83-1e6efdb2cede",
+  "serial_no": 556,
+  "description": "Inmeten — Barbara Weeink\nStatio 43, 3176TH, Poortugaal\n\n2 product(en): 2x ZIP bovenliggende zonwering\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6482\n\nGripp: 6482\nIN TE METEN:\n- 1x Plissé 2000×2300\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6482",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Plissé 2000×2300"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6482"
+   }
+  ],
+  "scheduled_at": "2026-08-20T13:25:00Z"
+ },
+ {
+  "uuid": "1f1989ff-3b7f-6640-9c52-627698a74208",
+  "serial_no": 555,
+  "description": "Inmeten — Jaap v Egmond\nKortenaerstraat 7, 2231 RZ, RIJNSBURG\n\n1 product(en): 1x Rolluik\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6481\n\nGripp: 6481\nIN TE METEN:\n- 1x Rolluik (RollSUPER) 2403×1711 — RAL 9010 (standaard) / RAL 9010 — vaste draaischakelaar op de muur\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6481",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Rolluik (RollSUPER) 2403×1711 — RAL 9010 (standaard) / RAL 9010 — vaste draaischakelaar op de muur"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6481"
+   }
+  ],
+  "scheduled_at": "2026-09-29T07:00:00Z"
+ },
+ {
+  "uuid": "1f1989f5-1f03-6240-b764-1a0d9b86c3c0",
+  "serial_no": 554,
+  "description": "Inmeten — Jan van Wageningen\nTuinfluiter 8, 3245TT, Sommelsdijk\n\n2 product(en): 1x Rolluik, 1x Rolluik\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6480\n\nGripp: 6480\nIN TE METEN:\n- 2x Rolluik (RollSUPER) 1550×1577 — RAL 7016 structuur (standaard) / RAL 7016 structuur — afstandsbediening\n- 1x Rolluik (RollSUPER) 2157×1493 — RAL 7016 structuur (standaard) / RAL 7016 structuur — afstandsbediening\n- 1x Suneye Voorraadscherm 5000×3000 — RAL 7016 structuur (standaard) / Grijs — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6480",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "2x Rolluik (RollSUPER) 1550×1577 — RAL 7016 structuur (standaard) / RAL 7016 structuur — afstandsbediening · +2 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6480"
+   }
+  ],
+  "scheduled_at": "2026-09-28T07:00:00Z"
+ },
+ {
+  "uuid": "1f197bca-198c-6010-b18a-62620fd21f06",
+  "serial_no": 544,
+  "description": "Inmeten — Jeffrey Penning\nBurg Henryplantsoen 14, 3286VB, Klaaswaal\n\n1 product(en): 1x Rolluik\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6475\n\nGripp: 6475\nIN TE METEN:\n- 3x Rolluik (RollSUPER) 2070×1060 — RAL 9005 structuur (standaard) / RAL 9005 structuur — vaste draaischakelaar op de muur\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6475",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "3x Rolluik (RollSUPER) 2070×1060 — RAL 9005 structuur (standaard) / RAL 9005 structuur — vaste draaischakelaar op de muur"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6475"
+   }
+  ],
+  "scheduled_at": "2026-09-23T10:35:00Z"
+ },
+ {
+  "uuid": "1f197053-7c97-6700-9a36-02517168cf8f",
+  "serial_no": 538,
+  "description": "Inmeten — Monique Bijnen\nGerrit Voorenkade 20, 3059VE, Rotterdam\n\n4 product(en): 1x Waarom ROMA?, 1x Gekoppeld Roma rolluik .P geëxtrudeerd&#32;, 1x Roma rolluik .P geëxtrudeerd&#32;, 1x Tahoma Switch\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6472\n\nGripp: 6472\nIN TE METEN:\n- 1x Extra info\n- 1x Rolluik (RollSUPER) 5000×2200 — RAL 9010 (uit 209 RAL-kleuren, zonder me / 110 Beige — Afstandsbediening (Somfy IO)\n- 1x Roma geëxrudeerd rolluik 770×2200 — RAL 9010 (uit 209 RAL-kleuren, zonder me / 110 Beige — Afstandsbediening (Somfy IO)\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6472",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Extra info · 1x Rolluik (RollSUPER) 5000×2200 — RAL 9010 (uit 209 RAL-kleuren, zonder me / 110 Beige — Afstandsbediening (Somfy IO) · +1 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6472"
+   }
+  ],
+  "scheduled_at": "2026-08-25T12:25:00Z"
+ },
+ {
+  "uuid": "1f196e57-dab3-66e0-ad23-46ca03d2e170",
+  "serial_no": 533,
+  "description": "Inmeten — Mandy Princen\nVazalstraat 15, 5021 DP, Tilburg\n\n1 product(en): 1x Rolluik\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6353\n\nGripp: 6353\nIN TE METEN:\n- 1x Rolluik (RollSUPER) 1008×1030 — RAL 9010 (standaard) / RAL 9010 — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6353",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Rolluik (RollSUPER) 1008×1030 — RAL 9010 (standaard) / RAL 9010 — afstandsbediening"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6353"
+   }
+  ],
+  "scheduled_at": "2026-10-12T11:45:00Z"
+ },
+ {
+  "uuid": "1f19693e-662c-60d0-8cdf-4ef0fd8846da",
+  "serial_no": 532,
+  "description": "Inmeten — Verkerk\nBizetstraat 22, 2625AX, Delft\n\n2 product(en): 1x Waarom ROMA?, 1x Roma rolluik .P geëxtrudeerd (standaard)\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6470\n\nGripp: 6470\nIN TE METEN:\n- 1x Extra info\n- 1x Roma geëxrudeerd rolluik 1900×1600 — RAL 9010 (uit 209 RAL-kleuren, zonder me / NTB — Solar (Somfy RS 100 IO Solar)\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6470",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Extra info · 1x Roma geëxrudeerd rolluik 1900×1600 — RAL 9010 (uit 209 RAL-kleuren, zonder me / NTB — Solar (Somfy RS 100 IO Solar)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6470"
+   }
+  ],
+  "scheduled_at": "2026-08-20T11:15:00Z"
+ },
+ {
+  "uuid": "1f1968a5-94e0-6c40-a413-423b3c3553d1",
+  "serial_no": 531,
+  "description": "Inmeten — Koen de Geus\nStrijenseweg 140 140, 3295 KS, 'S-GRAVENDEEL\n\n3 product(en): 1x Rolluik, 1x Rolluik, 1x Rolluik\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6469\n\nGripp: 6469\nIN TE METEN:\n- 1x Rolluik (RollSUPER) 2700×1580 — RAL 7016 structuur (standaard) / RAL 7016 structuur — afstandsbediening\n- 1x Rolluik (RollSUPER) 2660×1580 — RAL 7016 structuur (standaard) / RAL 7016 structuur — afstandsbediening\n- 1x Rolluik (RollSUPER) 2560×1580 — RAL 7016 structuur (standaard) / RAL 7016 structuur — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6469",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Rolluik (RollSUPER) 2700×1580 — RAL 7016 structuur (standaard) / RAL 7016 structuur — afstandsbediening · +2 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6469"
+   }
+  ],
+  "scheduled_at": "2026-09-23T09:35:00Z"
+ },
+ {
+  "uuid": "1f196811-a927-6e20-a413-423b3c3553d1",
+  "serial_no": 530,
+  "description": "Inmeten — Deborah Melgerd\nAkere 8, 1566 AZ, Assendelft\n\n1 product(en): 1x Suncube XL\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6468\n\nGripp: 6468\nIN TE METEN:\n- 1x Suncube 150 5000 breed — RAL 9005 structuur (standaard) / NTB — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6468",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Suncube 150 5000 breed — RAL 9005 structuur (standaard) / NTB — afstandsbediening"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6468"
+   }
+  ],
+  "scheduled_at": "2026-09-15T12:40:00Z"
+ },
+ {
+  "uuid": "1f1958c0-e558-60f0-9a9e-6a716079a622",
+  "serial_no": 509,
+  "description": "Inmeten — Ellen van der Mark\nVeldhuyzen van Zantenpark 85, 2163GC, Lisse\n\n2 product(en): 1x Windvast, 1x Windvast\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6462\n\nGripp: 6462\nIN TE METEN:\n- 1x Zip Design 2000×1070 — RAL 9010 (standaard) / n.t.b. (alle doekstalen bekijk je bij he — afstandsbediening\n- 2x Zip Design 1000×1070 — RAL 9010 (standaard) / n.t.b. (alle doekstalen bekijk je bij he — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6462",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Zip Design 2000×1070 — RAL 9010 (standaard) / n.t.b. (alle doekstalen bekijk je bij he — afstandsbediening · +1 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6462"
+   }
+  ],
+  "scheduled_at": "2026-08-27T07:00:00Z"
+ },
+ {
+  "uuid": "1f19589c-405d-6400-b88e-16fec712451f",
+  "serial_no": 508,
+  "description": "Inmeten — A I de Jong-Korff\nZwedenburg 58, 2591BH, Den Haag\n\n1 product(en): 1x Suncube XL\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6461\n\nGripp: 6461\nIN TE METEN:\n- 1x Suncube 150 2886×1350 — RAL 9001 (standaard) / NTB — vaste draaischakelaar op de muur\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6461",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Suncube 150 2886×1350 — RAL 9001 (standaard) / NTB — vaste draaischakelaar op de muur"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6461"
+   }
+  ],
+  "scheduled_at": "2026-08-18T11:05:00Z"
+ },
+ {
+  "uuid": "1f194d4f-a4d1-6e20-8521-1a2f25d18233",
+  "serial_no": 497,
+  "description": "Inmeten — Th De geest\nHertogstraat 19, 2405ZG, Alphen aan den Rijn\n\n1 product(en): 1x Rolluik\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6457\n\nGripp: 6457\nIN TE METEN:\n- 1x Extra info\n- 1x Roma geëxrudeerd rolluik 550×1420 — RAL 9016 (uit 209 RAL-kleuren, zonder me / NTB — Afstandsbediening (Somfy IO)\n- 1x Roma geëxrudeerd rolluik 1560×1420 — RAL 9016 (uit 209 RAL-kleuren, zonder me / NTB — Afstandsbediening (Somfy IO)\n- 1x Roma geëxrudeerd rolluik 2200×1420 — RAL 9016 (uit 209 RAL-kleuren, zonder me / NTB — Afstandsbediening (Somfy IO)\n- 1x Roma geëxrudeerd rolluik 1560×1420 — RAL 9016 (uit 209 RAL-kleuren, zonder me / NTB — Afstandsbediening (Somfy IO)\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6457",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Extra info · 1x Roma geëxrudeerd rolluik 550×1420 — RAL 9016 (uit 209 RAL-kleuren, zonder me / NTB — Afstandsbediening (Somfy IO) · +3 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6457"
+   }
+  ],
+  "scheduled_at": "2026-09-22T12:55:00Z"
+ },
+ {
+  "uuid": "1f194d42-117a-64c0-8a5e-12585ff33c04",
+  "serial_no": 496,
+  "description": "Inmeten — Marco Klok\nHunze 8, 3961JB, Wijk bij Duurstede\n\n1 product(en): 1x Suneye dichte cassette\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6456\n\nGripp: 6456\nIN TE METEN:\n- 1x Suneye 4500×3000 — RAL 7016 structuur (standaard) / NTB — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6456",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Suneye 4500×3000 — RAL 7016 structuur (standaard) / NTB — afstandsbediening"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6456"
+   }
+  ],
+  "scheduled_at": "2026-09-24T07:00:00Z"
+ },
+ {
+  "uuid": "1f194d3f-a560-6e30-a04b-02b42a32ff64",
+  "serial_no": 495,
+  "description": "Inmeten — Rick van Nieuwkerk\nvan Duvenvoordelaan 120, 2274TC, Voorburg\n\n1 product(en): 1x Rolluik\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6455\n\nGripp: 6455\nIN TE METEN:\n- 1x Rolluik (RollSUPER) 2800×1000 — RAL 9010 (standaard) / RAL 9010 — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6455",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Rolluik (RollSUPER) 2800×1000 — RAL 9010 (standaard) / RAL 9010 — afstandsbediening"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6455"
+   }
+  ],
+  "scheduled_at": "2026-08-20T13:25:00Z"
+ },
+ {
+  "uuid": "1f194b93-2dda-61d0-9cd1-16c1c5bede5d",
+  "serial_no": 491,
+  "description": "Inmeten — Natalie Bavinck\nSarabande 42, 2152 TE, Nieuw-Vennep\n\n1 product(en): 1x Suneye voorraad scherm\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6454\n\nGripp: 6454\nIN TE METEN:\n- 1x Suneye Voorraadscherm 5000×3000 — RAL 7016 structuur (standaard) / Beige — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6454",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Suneye Voorraadscherm 5000×3000 — RAL 7016 structuur (standaard) / Beige — afstandsbediening"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6454"
+   }
+  ],
+  "scheduled_at": "2026-09-17T09:55:00Z"
+ },
+ {
+  "uuid": "1f194b04-0163-6d00-958e-6e321c7505a9",
+  "serial_no": 490,
+  "description": "Inmeten — Timo Goes\nOudmunsterhoef 17, 4106DD, Culemberg\n\n1 product(en): 1x SunControl Pergola\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6452\n\nGripp: 6452\nIN TE METEN:\n- 1x Pergola Zip P350 5500×3000 — Ral 9010 ST / ORC U810 120 — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6452",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Pergola Zip P350 5500×3000 — Ral 9010 ST / ORC U810 120 — afstandsbediening"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6452"
+   }
+  ],
+  "scheduled_at": "2026-09-24T08:05:00Z"
+ },
+ {
+  "uuid": "1f194ac1-a26c-6d50-adcf-5edf34c3e081",
+  "serial_no": 488,
+  "description": "Inmeten — Ashutosh Ramparichan\nAnna Maria van Cappellenpark 83, 2904VR, Capelle aan den IJssel\n\n3 product(en): 1x Rolluik, 1x Rolluik, 1x Rolluik\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6450\n\nGripp: 6450\nIN TE METEN:\n- 1x Rolluik (RollSUPER) 1100×1600 — RAL 7016 structuur (standaard) / RAL 7016 structuur — afstandsbediening\n- 1x Rolluik (RollSUPER) 2100×1600 — RAL 7016 structuur (standaard) / RAL 7016 structuur — afstandsbediening\n- 1x Rolluik (RollSUPER) 1700×2500 — RAL 7016 structuur (standaard) / RAL 7016 structuur — afstandsbediening\n- 1x Extra info\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6450",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Rolluik (RollSUPER) 1100×1600 — RAL 7016 structuur (standaard) / RAL 7016 structuur — afstandsbediening · +3 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6450"
+   }
+  ],
+  "scheduled_at": "2026-09-24T09:45:00Z"
+ },
+ {
+  "uuid": "1f194073-8631-6280-b5fd-7e4549da4507",
+  "serial_no": 485,
+  "description": "Inmeten — Rita Van Schagen\nIepenpad 47, 2461CZ, Ter Aar\n\n1 product(en): 1x Suneye voorraad scherm\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6445\n\nGripp: 6445\nIN TE METEN:\n- 1x Suneye Voorraadscherm 5000×3000 — RAL 7016 structuur (standaard) / Grijs — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6445",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Suneye Voorraadscherm 5000×3000 — RAL 7016 structuur (standaard) / Grijs — afstandsbediening"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6445"
+   }
+  ],
+  "scheduled_at": "2026-09-22T12:00:00Z"
+ },
+ {
+  "uuid": "1f194071-450f-6a90-bbfe-6a2ee48f9e40",
+  "serial_no": 484,
+  "description": "Inmeten — Eric  ten Cate\nHpvanderpoellaan 7, 2375xd, Rijpwetering\n\n2 product(en): 1x Windvast, 1x Windvast\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6444\n\nGripp: 6444\nIN TE METEN:\n- 1x Square 85/100 (half afgeschuind) 1680×2000 — RAL 7016 structuur (standaard) / NTB — trekband\n- 1x Square 85/100 (half afgeschuind) 900×1500 — RAL 701 structuur (standaard) / NTB — trekband\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6444",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Square 85/100 (half afgeschuind) 1680×2000 — RAL 7016 structuur (standaard) / NTB — trekband · 1x Square 85/100 (half afgeschuind) 900×1500 — RAL 701 structuur (standaard) / NTB — trekband"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6444"
+   }
+  ],
+  "scheduled_at": "2026-08-31T13:20:00Z"
+ },
+ {
+  "uuid": "1f193cf0-4562-6810-b5fd-7e4549da4507",
+  "serial_no": 482,
+  "description": "Inmeten — Ebru Kilinc\nKaprijkestraat 1b2, 4826CC, Breda\n\n1 product(en): 1x Rolluik\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6442\n\nGripp: 6442\nIN TE METEN:\n- 1x Rolluik (RollSUPER) 3125×2110 — RAL 9001 (standaard) / RAL 9001 — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6442",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Rolluik (RollSUPER) 3125×2110 — RAL 9001 (standaard) / RAL 9001 — afstandsbediening"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6442"
+   }
+  ],
+  "scheduled_at": "2026-10-12T10:40:00Z"
+ },
+ {
+  "uuid": "1f192f90-89a7-6730-8eab-7a60a9794dd2",
+  "serial_no": 478,
+  "description": "Inmeten — Franken\nHoutrijk 10, 2151DV, Nieuw-Vennep\n\n7 product(en): 1x Waarom ROMA?, 1x Roma zipSCREEN.2 (windvast ritsscreen), 2x Kokers, 2x Raamrolhor Super+, 1x Raamrolhor Super+\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6430\n\nGripp: 6430\nIN TE METEN:\n- 1x Extra info\n- 1x Roma Zipscreen 3000×1600 — RAL 9010 (uit 209 RAL-kleuren, zonder me / NTB Meerprijs 0% sergé — Solar (Somfy RS 100 IO Solar)\n- 2x Kokers\n- 2x Extra info 790×1320 — Wit (standaard)\n- 1x Extra info 1470×1320 — Wit (standaard)\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6430",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Extra info · 1x Roma Zipscreen 3000×1600 — RAL 9010 (uit 209 RAL-kleuren, zonder me / NTB Meerprijs 0% sergé — Solar (Somfy RS 100 IO Solar) · 2x Kokers · +2 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6430"
+   }
+  ],
+  "scheduled_at": "2026-08-31T12:00:00Z"
+ },
+ {
+  "uuid": "1f1928bb-3ee2-6dc0-8c5a-1a723e29cf42",
+  "serial_no": 477,
+  "description": "Inmeten — Manon  Van der Knaap\nSterrenzand 36, 2673 GA, Naaldwijk\n\n2 product(en): 1x Draadloze windsensor, 1x Draadloze windsensor\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6428\n\nGripp: 6428\nIN TE METEN:\n- 1x Suneye Voorraadscherm 5000×3000 — RAL 7016 structuur (standaard) / Grijs — Motor + afstandsbediening\n- 1x Zip Design 1880×1415 — RAL 9010 (standaard) / n.t.b. (alle doekstalen bekijk je bij he — afstandsbediening\n- 1x Eolis 3D windsensor IO\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6428",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Suneye Voorraadscherm 5000×3000 — RAL 7016 structuur (standaard) / Grijs — Motor + afstandsbediening · +2 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6428"
+   }
+  ],
+  "scheduled_at": "2026-09-17T07:00:00Z"
+ },
+ {
+  "uuid": "1f19262f-add2-66e0-bdc4-66869c3cd62b",
+  "serial_no": 476,
+  "description": "Inmeten — Matijn Made\nOude Arnhemseweg 240, 3705bj, Zeist\n\n1 product(en): 1x Windvast\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6427\n\nGripp: 6427\nIN TE METEN:\n- 1x Zip Design 1900×1300 — Andere RAL kleur (+€325 andere RAL kleur / NTB — vaste draaischakelaar op de muur\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6427",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Zip Design 1900×1300 — Andere RAL kleur (+€325 andere RAL kleur / NTB — vaste draaischakelaar op de muur"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6427"
+   }
+  ],
+  "scheduled_at": "2026-09-21T12:35:00Z"
+ },
+ {
+  "uuid": "1f192622-4444-6220-9fa0-62ff36333e0d",
+  "serial_no": 475,
+  "description": "Inmeten — Johan Bent\nVinkenburg 118, 2135br, Hoofddorp\n\n1 product(en): 1x Suneye voorraad scherm\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6426\n\nGripp: 6426\nIN TE METEN:\n- 1x Suneye Voorraadscherm 5000×3000 — RAL 7016 structuur (standaard) / Beige — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6426",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Suneye Voorraadscherm 5000×3000 — RAL 7016 structuur (standaard) / Beige — afstandsbediening"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6426"
+   }
+  ],
+  "scheduled_at": "2026-09-17T09:05:00Z"
+ },
+ {
+  "uuid": "1f1925ba-9606-6060-80ac-6aeb6101c3ed",
+  "serial_no": 474,
+  "description": "Inmeten — Jan De Bont\nZuidplaslaan 119, 2743CW, Waddinxveen\n\n2 product(en): 1x Rolluik, 1x Rolluik\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6424\n\nGripp: 6424\nIN TE METEN:\n- 1x Rolluik (RollSUPER) 2623×1000 — RAL 9005 structuur (standaard) / RAL 9005 structuur — vaste draaischakelaar op de muur\n- 1x Rolluik (RollSUPER) 1021×1153 — RAL 9005 structuur (standaard) / RAL 9005 structuur — vaste draaischakelaar op de muur\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6424",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Rolluik (RollSUPER) 2623×1000 — RAL 9005 structuur (standaard) / RAL 9005 structuur — vaste draaischakelaar op de muur · +1 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6424"
+   }
+  ],
+  "scheduled_at": "2026-09-17T07:45:00Z"
+ },
+ {
+  "uuid": "1f1924fa-d5c0-6310-8578-5667b9b0e24b",
+  "serial_no": 470,
+  "description": "Inmeten — Marjolein Nunnink\nSchansbaan 185, 2728GJ, Zoetermeer\n\n3 product(en): 2x Windvast, 1x Windvast\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6422\n\nGripp: 6422\nIN TE METEN:\n- 2x Zip Design 1200×1000 — RAL 9010 / NTB — Motor + afstandsbediening\n- 1x Zip Design 3000×1000 — RAL 9010 / NTB — Motor + afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6422",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "2x Zip Design 1200×1000 — RAL 9010 / NTB — Motor + afstandsbediening · 1x Zip Design 3000×1000 — RAL 9010 / NTB — Motor + afstandsbediening"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6422"
+   }
+  ],
+  "scheduled_at": "2026-08-31T07:45:00Z"
+ },
+ {
+  "uuid": "1f192465-998e-6b70-bea0-2e6e15d94a13",
+  "serial_no": 469,
+  "description": "Inmeten — Kenny van Hooijdonk\nTexellaan 22, 2809SB, Gouda\n\n9 product(en): 1x Vaste hordeur Luxe, 1x SunEye, 1x Vaste hordeur Luxe, 2x Raamplissé Inklem Unit, 2x Zip Design 110, 2x Raamplissé Inklem Unit\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6419\n\nGripp: 6419\nIN TE METEN:\n- 1x Extra info 860×2350 — Wit (RAL 9010) (standaard)\n- 1x Suneye 5000×3000 — Antraciet structuur (standaard) / NTB — Afstandsbediening (Somfy IO)\n- 1x Extra info 900×2350 — RAL 9010 (standaard)\n- 2x Plissé 730×1545 — Wit (RAL 9010) (standaard)\n- 2x Zip Design 1675×1600 — RAL 9010 (standaard) / NTB — Afstandsbediening (Somfy IO)\n- 2x Plissé 730×1410 — Wit (RAL 9010) (standaard)\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6419",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Extra info 860×2350 — Wit (RAL 9010) (standaard) · 1x Suneye 5000×3000 — Antraciet structuur (standaard) / NTB — Afstandsbediening (Somfy IO) · +4 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6419"
+   }
+  ],
+  "scheduled_at": "2026-09-17T08:35:00Z"
+ },
+ {
+  "uuid": "1f1923e6-2865-6c10-a244-228e5f3ed507",
+  "serial_no": 468,
+  "description": "Inmeten — Josua Lausberg\nSimon van der Stellaan 14, 2803ej, Gouda\n\n1 product(en): 1x Rolluik\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6418\n\nGripp: 6418\nIN TE METEN:\n- 1x Rolluik (RollSUPER) 2650×2000 — RAL 9005 structuur (standaard) / RAL 9005 structuur — vaste draaischakelaar op de muur\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6418",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Rolluik (RollSUPER) 2650×2000 — RAL 9005 structuur (standaard) / RAL 9005 structuur — vaste draaischakelaar op de muur"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6418"
+   }
+  ],
+  "scheduled_at": "2026-09-17T07:00:00Z"
+ },
+ {
+  "uuid": "1f19233b-e30f-6bd0-a244-228e5f3ed507",
+  "serial_no": 465,
+  "description": "Inmeten — Sofie van Herpen\nGuirlande 226, 2496 WZ, Den Haag\n\n3 product(en): 1x Windvast, 1x Windvast, 1x Windvast\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6415\n\nGripp: 6415\nIN TE METEN:\n- 1x Zip Design 2540×2000 — RAL 9010 (standaard) / NTB — afstandsbediening\n- 1x Zip Design 660×1500 — RAL 9010 (standaard) / NTB — afstandsbediening\n- 1x Zip Design 670×1500 — RAL 9010 (standaard) / NTB — afstandsbediening\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6415",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Zip Design 2540×2000 — RAL 9010 (standaard) / NTB — afstandsbediening · 1x Zip Design 660×1500 — RAL 9010 (standaard) / NTB — afstandsbediening · +1 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6415"
+   }
+  ],
+  "scheduled_at": "2026-09-14T12:00:00Z"
+ },
+ {
+  "uuid": "1f1922e9-64ed-6f00-a240-5ab4fc8be185",
+  "serial_no": 450,
+  "description": "Inmeten — Hans Erik Hazelhorst\nKarel Doormanlaan 24, 3572 NC, Utrecht\n\n1 product(en): 1x Sunproject\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6412\n\nGripp: 6412\nIN TE METEN:\n- 1x SunProject 100 3400×1150 — RAL 9001 (standaard) / NTB — draaistang\n- 1x Kokers\n- 1x Extra info\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6412",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x SunProject 100 3400×1150 — RAL 9001 (standaard) / NTB — draaistang · 1x Kokers · 1x Extra info"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6412"
+   }
+  ],
+  "scheduled_at": "2026-09-21T11:55:00Z"
+ },
+ {
+  "uuid": "1f191d09-488b-6890-80df-3ec8c257d2f4",
+  "serial_no": 448,
+  "description": "Inmeten — Irene  Kersseboom\nSytwinde 36, 2631 GT, Nootdorp\n\n1 product(en): 1x Windvast\n\nGripp: 6411\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6411",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "zie omschrijving"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6411"
+   }
+  ],
+  "scheduled_at": "2026-08-18T10:15:00Z"
+ },
+ {
+  "uuid": "1f191cf9-6835-6090-80df-3ec8c257d2f4",
+  "serial_no": 447,
+  "description": "Inmeten — Vas Verhage\nHerberg 68, 2264KV, Leidschendam\n\n2 product(en): 1x Rolluik, 1x Rolluik\n\nGripp: 6441\nIN TE METEN:\n- 1x Rolluik (RollSUPER) 1110×1565 — RAL 9010 (standaard) / RAL 9010 — vaste draaischakelaar op de muur\n- 1x Rolluik (RollSUPER) 1910×1965 — RAL 9010 (standaard) / RAL 9010 — vaste draaischakelaar op de muur\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6441",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "1x Rolluik (RollSUPER) 1110×1565 — RAL 9010 (standaard) / RAL 9010 — vaste draaischakelaar op de muur · +1 meer (zie omschrijving)"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6441"
+   }
+  ],
+  "scheduled_at": "2026-09-15T09:25:00Z"
+ },
+ {
+  "uuid": "1f191cf0-b53d-6e40-a240-5ab4fc8be185",
+  "serial_no": 446,
+  "description": "Inmeten — Carlo Pronk\nSlootdreef 235, 2724aj, Zoetermeer\n\n2 product(en): 1x Rolluik, 1x Rolluik\n\nGripp: 6410\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6410",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "zie omschrijving"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6410"
+   }
+  ],
+  "scheduled_at": "2026-08-31T09:00:00Z"
+ },
+ {
+  "uuid": "1f191ca0-92c1-6790-ba3a-3e8146a03c45",
+  "serial_no": 432,
+  "description": "Inmeten — Eric Van der Meer\nEleonorastraat 113, 3135pa, Vlaardingen\n\n1 product(en): 1x Suneye voorraad scherm\n\nGripp: 6409\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/6409",
+  "custom_fields": [
+   {
+    "uuid": "1f11f1b3-8a2b-64a0-a93e-46264be483ca",
+    "name": "Bijzonderheden voor monteur",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": null
+   },
+   {
+    "uuid": "1f190fe0-1da5-6330-8142-562ffe2ee4a3",
+    "name": "In te meten",
+    "field_type": "input",
+    "data_type": "string",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "zie omschrijving"
+   },
+   {
+    "uuid": "1f190fa9-23f9-6e10-9e5d-76c9820f3a32",
+    "name": "Meetbon",
+    "field_type": "link",
+    "data_type": "url",
+    "required": false,
+    "hidden": false,
+    "read_only": false,
+    "value": "https://sonty-website.vercel.app/admin/meetbon/6409"
+   }
+  ],
+  "scheduled_at": "2026-08-18T09:05:00Z"
+ }
+]

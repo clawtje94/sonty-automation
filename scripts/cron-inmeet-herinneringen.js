@@ -85,6 +85,9 @@ async function main() {
     if (tel) {
       const ticket = await zoekWaTicket(tel.value).catch(() => null);
       if (ticket) {
+        // Verzendpoort (18-08): mens in het gesprek → herinnering overslaan
+        const poort = await require('./lib/verzend-poort.js').magSturen({ telefoon: tel.value, ticketId: ticket.id, soort: 'herinnering' }).catch(() => ({ ok: true }));
+        if (!poort.ok) { console.log(`  verzendpoort: herinnering ${naam} overgeslagen (${poort.reden})`); continue; }
         const r = await tFetch(`/tickets/${ticket.id}/messages`, { method: 'POST', body: JSON.stringify({ message: tekst, type: 'OUTBOUND' }) });
         bezorgd = r.ok;
       }

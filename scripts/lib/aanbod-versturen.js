@@ -262,7 +262,16 @@ function bevestigingTekst(voornaam, slot, duurMin) {
 }
 
 async function verstuurBevestiging(aanbod, slot) {
-  if (require('./klant-stil.js').klantStil(arguments[0]?.telefoon || arguments[0]?.lead?.telefoon)) { console.log('  stil-lijst: bevestiging NIET verstuurd'); return { ok: false, stil: true }; }
+  // Verzendpoort: bevestiging na boeking is fail-open (mag door bij storing en
+  // mens-actief — stilte na een boeking is de enige echt foute uitkomst), maar
+  // de stil-lijst wint altijd.
+  {
+    const { magSturen } = require('./verzend-poort.js');
+    const tel = aanbod?.telefoon || aanbod?.lead?.telefoon;
+    const ticket = tel ? await zoekWaTicket(tel).catch(() => null) : null;
+    const poort = await magSturen({ telefoon: tel, ticketId: ticket?.id, soort: 'bevestiging' });
+    if (!poort.ok) { console.log('  verzendpoort: bevestiging NIET verstuurd (' + poort.reden + ')'); return { ok: false, stil: true, poort: poort.reden }; }
+  }
   const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
   const tekst = bevestigingTekst(voornaam, slot, aanbod.duurMin);
   let wa = { ok: false, reden: 'geen telefoon' };
@@ -305,9 +314,17 @@ function herinneringTekst(voornaam, slot, duurMin, dagenVooraf = 1) {
 
 /** Beide kanalen; geeft per kanaal terug wat er gebeurd is. Eén kanaal gelukt = aanbod is onderweg. */
 async function verstuurAanbod(aanbod, url) {
-  // STIL-POORT (Charles 14-08): staat de klant op de stil-lijst, dan gaat er NIETS uit.
-  if (require('./klant-stil.js').klantStil(aanbod?.lead?.telefoon)) {
-    return { wa: { ok: false, reden: 'klant op stil-lijst' }, mail: { ok: false, reden: 'klant op stil-lijst' }, ergensGelukt: false, stil: true };
+  // VERZENDPOORT (18-08, Hans de Lamboij): stil-lijst + mens-actief + max 2
+  // voorstellen per week — alles in één toets vóór er iets de deur uit gaat.
+  {
+    const { magSturen, meldMensNodig } = require('./verzend-poort.js');
+    const ticket = aanbod?.lead?.telefoon ? await zoekWaTicket(aanbod.lead.telefoon).catch(() => null) : null;
+    const poort = await magSturen({ telefoon: aanbod?.lead?.telefoon, ticketId: ticket?.id, soort: 'voorstel' });
+    if (!poort.ok) {
+      if (poort.mensNodig) await meldMensNodig(aanbod?.lead?.naam || aanbod?.lead?.telefoon || '?', poort.reden);
+      console.log('  verzendpoort: aanbod NIET verstuurd (' + poort.reden + ')');
+      return { wa: { ok: false, reden: poort.reden }, mail: { ok: false, reden: poort.reden }, ergensGelukt: false, stil: true, poort: poort.reden };
+    }
   }
   const wa = await stuurWhatsApp(aanbod, url).catch((e) => ({ ok: false, reden: e.message }));
   const mail = await stuurMail(aanbod, url).catch((e) => ({ ok: false, reden: e.message }));

@@ -37,7 +37,31 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
   while (url) { const j = await (await fetch(url, { headers: OH })).json(); evs.push(...(j.value || [])); url = j['@odata.nextLink'] || null; }
 
   const rond = (a, b) => Math.abs(new Date(a) - new Date(b)) < 60000;
-  const mist = toekomst.filter((j) => !evs.some((e) => rond(e.Start.DateTime + 'Z', j.scheduled_at)))
+  // MATCH OP KLANT, NIET ALLEEN TIJD (18-08, Eric van der Meer: zijn Outlook-afspraak
+  // was 15-08 handmatig verwijderd maar de opdracht telde 3 dagen als "gedekt" omdat
+  // er toevallig een ANDERE afspraak rond hetzelfde tijdstip stond — Joey reed er
+  // bijna voor niks heen). Een opdracht is nu pas gedekt als er een event is dat op
+  // tijd matcht ÉN (waar een klantnaam te herleiden is) die naam in het onderwerp
+  // draagt. Geen naam te herleiden → alleen tijd, zoals voorheen.
+  const normaliseer = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const klantVanJob = (j) => {
+    const kop = String(j.description || '').split('\n')[0];
+    const m = kop.match(/(?:Inmeten|Montage|Service afspraak)?\s*(?:Sonty)?\s*[—-]\s*(.+)$/i);
+    const naam = normaliseer(m ? m[1] : '');
+    // te korte of generieke restjes niet als naam gebruiken
+    return naam.length >= 4 && !/^(sonty|inmeten|montage)$/.test(naam) ? naam : null;
+  };
+  const dekt = (e, j) => {
+    if (!rond(e.Start.DateTime + 'Z', j.scheduled_at)) return false;
+    const naam = klantVanJob(j);
+    if (!naam) return true;                      // geen naam bekend: tijd is het beste dat we hebben
+    const onderwerp = normaliseer(e.Subject);
+    const delen = naam.split(' ').filter((d) => d.length >= 3);
+    // gedekt als het onderwerp minstens de helft van de naamdelen bevat (spellingsruis)
+    const raak = delen.filter((d) => onderwerp.includes(d)).length;
+    return delen.length === 0 ? true : raak >= Math.ceil(delen.length / 2);
+  };
+  const mist = toekomst.filter((j) => !evs.some((e) => dekt(e, j)))
     .map((j) => ({
       wanneer: new Date(j.scheduled_at).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' }),
       wat: String(j.description || '(geen omschrijving)').split('\n')[0].slice(0, 70),

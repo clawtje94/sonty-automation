@@ -126,6 +126,13 @@ function magBevestigen(gemeld, ticketId) {
 }
 
 async function bevestigOntvangst(ticketId, naam, tekst) {
+  // Verzendpoort (18-08): geen automatische ontvangstbevestiging als een mens in
+  // het gesprek zit of de klant op stil staat — precies het Hans-incident.
+  try {
+    const { magSturen } = require('./lib/verzend-poort.js');
+    const poort = await magSturen({ telefoon: null, ticketId, soort: 'ontvangst' });
+    if (!poort.ok) { console.log(`  verzendpoort: ontvangstbevestiging ${naam} NIET verstuurd (${poort.reden})`); return false; }
+  } catch { /* poort-fout mag de bestaande flow niet breken */ }
   for (let i = 0; i < 3; i++) {
     const r = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages`, {
       method: 'POST', headers: { ...TH, 'Content-Type': 'application/json' },
@@ -160,11 +167,13 @@ async function vervangDoodTicket(token, info) {
 }
 
 async function ticketBerichten(ticketId) {
-  // 429's niet stil laten wegvallen (miste Eric's antwoord op 06-08): even wachten
-  // en opnieuw; blijft het mislukken dan zichtbaar loggen.
-  for (let poging = 0; poging < 3; poging++) {
+  // 429's niet stil laten wegvallen (miste Eric's antwoord op 06-08 en Hans' "ja"
+  // op 17/18-08): oplopend wachten (15/30/60s) en tussen tickets sowieso even
+  // ademen zodat we de limiet niet zelf blijven raken.
+  await new Promise((x) => setTimeout(x, 1200));
+  for (let poging = 0; poging < 4; poging++) {
     const r = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages?per_page=15`, { headers: TH });
-    if (r.status === 429) { await new Promise((x) => setTimeout(x, 15000)); continue; }
+    if (r.status === 429) { await new Promise((x) => setTimeout(x, 15000 * Math.pow(2, poging))); continue; }
     if (!r.ok) { console.log(`ticket ${ticketId}: HTTP ${r.status}`); return []; }
     return ((await r.json())?.data || []);
   }

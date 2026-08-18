@@ -163,8 +163,13 @@ async function telegram(t) {
 
 (async () => {
   if (process.argv.includes('--test')) {
-    await stuurWhatsApp('31683500506', ['Testje van de weetjesbot, negeer mij 🤖🍻']);
-    console.log('testbericht gestuurd');
+    // Test gaat naar Daimy zelf (Daimy 18-08: "whatsapp mij daarna met sunny even een
+    // test dan?"). Twee berichten, want zo gaat het in de groep ook: opener + tekst.
+    await stuurWhatsApp('31683500506', [
+      'YOOO DAIMY 💪',
+      'Sunny hier. Dit is een test vanaf de Mac, verstuurd zonder dat er een scherm is overgenomen. Als je dit leest werkt het en kan ik de ochtend van 07:30 en het weetje van 20:00 weer aanzetten 🔧☀️',
+    ]);
+    console.log('testbericht naar Daimy gestuurd');
     return;
   }
   const vandaag = new Date().toISOString().slice(0, 10);

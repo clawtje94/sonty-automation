@@ -67,7 +67,16 @@ async function upload(bestandspad, naam, type) {
   const keuzesPad = path.join(__dirname, '..', '..', 'data', 'email', 'foto-keuzes.json');
   if (fs.existsSync(keuzesPad)) {
     const keuzes = JSON.parse(fs.readFileSync(keuzesPad, 'utf8'));
-    const paden = [...new Set(Object.values(keuzes).flatMap((slots) => Object.values(slots)))];
+    // Waarde kan "src::formaat" zijn (uitsnede); dan maken we naast het origineel ook een
+    // echt bijgesneden variant (center-crop, sleutel naam--formaat) voor in de mail.
+    const MATEN = { '16x9': [1056, 594], '4x3': [1056, 792], '1x1': [1056, 1056], '4x5': [1056, 1320] };
+    const ruwePaden = [...new Set(Object.values(keuzes).flatMap((slots) => Object.values(slots)))];
+    const paden = [...new Set(ruwePaden.map((v) => String(v).split('::')[0]))];
+    const cropWens = new Map();
+    for (const v of ruwePaden) {
+      const [src, formaat] = String(v).split('::');
+      if (formaat && MATEN[formaat]) cropWens.set(src + '::' + formaat, { src, formaat });
+    }
     for (const src of paden) {
       const isExtern = /^https?:\/\//.test(String(src));
       const rel = String(src).replace(/^\/images\//, '');
@@ -89,6 +98,39 @@ async function upload(bestandspad, naam, type) {
       catch { console.error(`  CONVERSIE MISLUKT (geen afbeelding?): ${sleutelBasis}`); continue; }
       const url = await upload(jpg, sleutel, 'image/jpeg');
       if (url) { uit[sleutelBasis] = url; console.log(`  geupload (keuze): ${sleutelBasis}`); }
+      await new Promise((x) => setTimeout(x, 700));
+    }
+
+    // Uitsnede-varianten: schalen tot de doelmaat gedekt is en dan center-croppen.
+    for (const { src, formaat } of cropWens.values()) {
+      const isExtern = /^https?:\/\//.test(String(src));
+      const rel = String(src).replace(/^\/images\//, '');
+      const sleutelBasis = decodeURIComponent(path.basename(isExtern ? new URL(src).pathname : rel)).replace(/\.(webp|jpe?g|png|avif|mp4|mov)$/i, '').replace(/[^\w.-]/g, '-');
+      const cropSleutel = sleutelBasis + '--' + formaat;
+      if (uit[cropSleutel]) continue;
+      const klaviyoNaam = 'sonty-' + cropSleutel;
+      if (opNaam.has(klaviyoNaam)) { uit[cropSleutel] = opNaam.get(klaviyoNaam); continue; }
+      let bronPad;
+      if (isExtern) {
+        bronPad = path.join(TIJDELIJK, 'dl-' + sleutelBasis);
+        if (!fs.existsSync(bronPad)) { try { execFileSync('curl', ['-sf', '-o', bronPad, src], { timeout: 120000 }); } catch { console.error(`  DOWNLOAD MISLUKT: ${src.slice(0, 80)}`); continue; } }
+      } else {
+        bronPad = path.join(process.env.HOME, 'sonty-website', 'public', 'images', rel);
+        if (!fs.existsSync(bronPad)) { console.error(`  ONTBREEKT lokaal: ${rel}`); continue; }
+      }
+      const [tw, th] = MATEN[formaat];
+      const jpg = path.join(TIJDELIJK, cropSleutel + '.jpg');
+      try {
+        const info = execFileSync('sips', ['-g', 'pixelWidth', '-g', 'pixelHeight', bronPad]).toString();
+        const w = Number((info.match(/pixelWidth: (\d+)/) || [])[1]);
+        const h = Number((info.match(/pixelHeight: (\d+)/) || [])[1]);
+        if (!w || !h) throw new Error('maat onbekend');
+        const schaal = Math.max(tw / w, th / h);
+        execFileSync('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '60', '--resampleWidth', String(Math.ceil(w * schaal)), bronPad, '--out', jpg], { stdio: 'ignore' });
+        execFileSync('sips', ['-c', String(th), String(tw), jpg], { stdio: 'ignore' });
+      } catch (e) { console.error(`  CROP MISLUKT ${cropSleutel}: ${String(e.message).slice(0, 60)}`); continue; }
+      const url = await upload(jpg, klaviyoNaam, 'image/jpeg');
+      if (url) { uit[cropSleutel] = url; console.log(`  geupload (uitsnede): ${cropSleutel}`); }
       await new Promise((x) => setTimeout(x, 700));
     }
   }

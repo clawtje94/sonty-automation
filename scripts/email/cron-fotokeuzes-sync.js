@@ -33,9 +33,13 @@ async function telegram(tekst) {
   try { execFileSync(process.execPath, [path.join(__dirname, 'upload-triage.js')], { stdio: 'inherit', timeout: 10 * 60000 }); }
   catch (e) { console.error('triage overgeslagen:', String(e.message).slice(0, 60)); }
 
-  // Stap 0b: nieuwe fotos uit de Sonty toppers-WhatsAppgroep (Sunny-nummer op deze Mac)
-  try { execFileSync(process.execPath, [path.join(__dirname, 'wa-groep-wachter.js')], { stdio: 'inherit', timeout: 10 * 60000 }); }
-  catch (e) { console.error('wa-wachter overgeslagen:', String(e.message).slice(0, 60)); }
+  // Stap 0b: nieuwe fotos uit de Sonty toppers-WhatsAppgroep (Sunny-nummer op deze Mac).
+  // Uitgeschakeld zolang data/email/wa-lezen-uit.txt bestaat: elke leespoging triggert
+  // de macOS-popup bij Daimy zolang de toestemming er niet is (18-08).
+  if (!fs.existsSync(path.join(__dirname, '..', '..', 'data', 'email', 'wa-lezen-uit.txt'))) {
+    try { execFileSync(process.execPath, [path.join(__dirname, 'wa-groep-wachter.js')], { stdio: 'inherit', timeout: 10 * 60000 }); }
+    catch (e) { console.error('wa-wachter overgeslagen:', String(e.message).slice(0, 60)); }
+  }
 
   // Stap 0c: herkansing voor fotos die op de Klaviyo-uploadlimiet strandden
   try { execFileSync(process.execPath, [path.join(__dirname, 'wa-retry.js')], { stdio: 'inherit', timeout: 10 * 60000 }); }

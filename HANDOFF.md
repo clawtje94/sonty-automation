@@ -1,4 +1,18 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-17)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-18)
+
+## 18-08: VERZENDPOORT PLANNINGSKETEN + VANGNET-FIX (na Hans/Eric-incidenten)
+- Incidenten: Hans de Lamboij kreeg 4 voorstellen in 13u (1 over kantoor heen);
+  Eric v.d. Meer: Outlook 15-08 handmatig geannuleerd, Planado wist van niks,
+  Joey bijna voor niks gereden; vangnet zweeg (matchte alleen op tijdstip).
+- Audit 56 planner-klanten: 51 OK, 5x voorstel-spam (allen wel geboekt). Hans
+  geboekt do 27 aug 15:45 Joey + op stil-lijst. Charles Gevers geannuleerd via
+  motor (RP staat, kantoor belt na). Keten-zelfcontrole UIT op verzoek Daimy.
+- GEBOUWD (commit gepusht): lib/verzend-poort.js (stil + mens-actief 24u +
+  max 2 voorstellen/week; voorstel fail-closed, boekingsbevestiging fail-open),
+  ingebouwd in aanbod-versturen/aanbod-replies/herinneringen; vangnet matcht nu
+  op klantnaam; reply-volger 429-backoff. 13 scenario-tests op echte gevallen groen.
+- OPEN: was Eric echt geannuleerd? (dan restanten via motor opruimen); Lotte Vos
+  handmatig checken (vraag levertijd); montageplanning-voorstel v7 wacht op go.
 
 ## 17-08 (2): GRIPP-OMSCHRIJVING IN 6494-OPMAAK + GEEN TERUGWERKENDE KRACHT
 - Up/downgrade-blok ("Liever een ander model of bediening?") zat sinds 7 juli in 11

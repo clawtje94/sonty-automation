@@ -100,7 +100,24 @@ function wachtTotRust(uur, minuut) {
 
 function stuurWhatsApp(doel, berichten) {
   if (schermVergrendeld()) throw new Error('scherm vergrendeld, UI-events onmogelijk');
-  const uit = execFileSync('osascript', ['-l', 'JavaScript', path.join(__dirname, 'wa-stuur.jxa.js'), doel, ...berichten], { timeout: 240000 }).toString().trim();
+  // UI-scripting is flaky (stale element-referenties als WhatsApp net ververst):
+  // tot 3 pogingen met pauze; de JXA-laag verstuurt pas na header-verificatie, dus
+  // een mislukte poging heeft gegarandeerd niets gestuurd
+  let uit = '';
+  for (let poging = 1; ; poging += 1) {
+    try {
+      uit = execFileSync('osascript', ['-l', 'JavaScript', path.join(__dirname, 'wa-stuur.jxa.js'), doel, ...berichten], { timeout: 240000 }).toString().trim();
+      break;
+    } catch (e) {
+      // alleen herkansen bij fouten die AANTOONBAAR voor het eerste versturen optreden
+      // (chat openen/vinden); fouten tijdens het typen/sturen niet, want dan kan
+      // bericht 1 al in de groep staan en zou een retry hem dubbel zetten
+      const veiligOmTeHerkansen = /chatrij niet gevonden|matcht het doel niet|berichtvak niet gevonden|venster wil niet openen|Ongeldige index|Object kan niet worden opgevraagd/i.test(String(e.message));
+      if (poging >= 3 || !veiligOmTeHerkansen) throw e;
+      console.log(`verzendpoging ${poging} mislukt (${String(e.message).split('\n')[0].slice(0, 80)}), opnieuw...`);
+      execFileSync('sleep', ['20']);
+    }
+  }
   console.log(uit);
   // verifieer in de lokale WhatsApp-database dat het laatste bericht er echt staat
   const db = path.join(process.env.HOME, 'Library', 'Group Containers', 'group.net.whatsapp.WhatsApp.shared', 'ChatStorage.sqlite');

@@ -86,10 +86,12 @@ function bevestigingsTekst(slot) {
   // Naam alleen noemen als hij er echt is: op 06-08 stond er "onze inmeter undefined"
   // in een klantbericht omdat de publieke API de naam stripte.
   const wie = slot.inmeter ? `onze inmeter ${slot.inmeter}` : 'onze inmeter';
-  // AANKOMSTMARGE (Daimy 11-08: "echt belangrijk dat mensen er rekening mee houden dat
-  // we een uur eerder of later aan kunnen komen, we staan nu heel veel te wachten").
-  // Geldt voor alles BEHALVE showroomafspraken; die staan gewoon vast.
-  return `Helemaal goed, hij staat! ${dag.charAt(0).toUpperCase() + dag.slice(1)} tussen ${van} en ${tot} komt ${wie} bij je langs. Door de route kan het soms een uurtje eerder of later worden, maar dan laten we het je even weten. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty`;
+  // THUISBLIJF-VENSTER (Daimy 18-08: "het gaat er juist om dat mensen thuis zijn
+  // als we komen" — geen belofte meer dat wij het laten weten; boeking 09:00-09:30
+  // betekent gewoon thuis zijn van 08:00 tot 10:30, een uur voor tot een uur na).
+  const vensterVan = new Date(+d - 60 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  const vensterTot = new Date(+d + 90 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  return `Helemaal goed, hij staat! ${dag.charAt(0).toUpperCase() + dag.slice(1)} komt ${wie} bij je langs om in te meten. We rijden die dag een route, dus zorg dat je tussen ${vensterVan} en ${vensterTot} thuis bent — meestal zijn we er rond ${van}. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty`;
 }
 
 async function stuurWaBevestiging(ticketId, naam, slot) {

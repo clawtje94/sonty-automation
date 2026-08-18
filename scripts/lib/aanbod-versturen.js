@@ -256,8 +256,12 @@ function bevestigingTekst(voornaam, slot, duurMin) {
   const dag = d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
   const van = d.toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const tot = new Date(+d + 30 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
-  return `Hoi ${voornaam}, hij staat! ${dag.charAt(0).toUpperCase() + dag.slice(1)} tussen ${van} en ${tot} komt ${slot.inmeter} bij je langs om in te meten ` +
-    `(duurt zo'n ${duurMin} minuutjes). Door de route kan het een uurtje eerder of later worden, maar dan laten we het je even weten. ` +
+  // Thuisblijf-venster (Daimy 18-08): geen "wij laten het weten"-belofte, de klant
+  // moet er gewoon zijn van een uur vóór tot een uur ná het geplande blok.
+  const vensterVan = new Date(+d - 60 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  const vensterTot = new Date(+d + 90 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  return `Hoi ${voornaam}, hij staat! ${dag.charAt(0).toUpperCase() + dag.slice(1)} komt ${slot.inmeter} bij je langs om in te meten ` +
+    `(duurt zo'n ${duurMin} minuutjes). We rijden die dag een route, dus zorg dat je tussen ${vensterVan} en ${vensterTot} thuis bent — meestal zijn we er rond ${van}. ` +
     `Komt er iets tussen? Stuur gerust een berichtje.`;
 }
 
@@ -308,8 +312,10 @@ function herinneringTekst(voornaam, slot, duurMin, dagenVooraf = 1) {
   const wanneer = dagenVooraf <= 1 ? 'morgen'
     : d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
   const slot2 = dagenVooraf <= 1 ? 'Tot morgen!' : 'Komt het toch niet uit? Stuur dan even een berichtje terug.';
-  return `Hoi ${voornaam}, kleine herinnering: ${wanneer} tussen ${van} en ${tot} komt ${slot.inmeter} bij je langs om in te meten ` +
-    `(duurt maar zo'n ${duurMin} minuutjes). Door de route kan het een uurtje eerder of later worden, maar dan hoor je dat van ons. ${slot2}`;
+  const vensterVan = new Date(+d - 60 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  const vensterTot = new Date(+d + 90 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  return `Hoi ${voornaam}, kleine herinnering: ${wanneer} komt ${slot.inmeter} bij je langs om in te meten ` +
+    `(duurt maar zo'n ${duurMin} minuutjes). We rijden die dag een route, dus zorg dat je tussen ${vensterVan} en ${vensterTot} thuis bent — meestal zijn we er rond ${van}. ${slot2}`;
 }
 
 /** Beide kanalen; geeft per kanaal terug wat er gebeurd is. Eén kanaal gelukt = aanbod is onderweg. */

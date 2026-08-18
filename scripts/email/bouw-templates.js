@@ -40,7 +40,11 @@ let KEUZES = {};
 try { KEUZES = require(path.join(__dirname, '..', '..', 'data', 'email', 'foto-keuzes.json')); } catch { /* geen keuzes = defaults */ }
 const slotFoto = (tpl, slot, standaard) => {
   const k = (KEUZES[tpl] || {})[slot];
-  return k ? String(k).replace(/^\/images\//, '') : standaard;
+  // String-object met slotKey erop: beeld() zet daarmee data-slot op de <img>, zodat de
+  // fotokiezer een nieuwe keuze DIRECT in het mailvoorbeeld kan tonen (Daimy 18-08).
+  const s = new String(k ? String(k).replace(/^\/images\//, '') : standaard);
+  s.slotKey = tpl + '|' + slot;
+  return s;
 };
 const foto = (bestand) => {
   // Sleutel: bestandsnaam zonder map en extensie, zodat ook gekozen portfolio-foto's en
@@ -88,7 +92,7 @@ const knop = (tekst, url) => `
 /** Grote sfeerfoto met bijschrift eronder. */
 const beeld = (bestand, alt, bijschrift) => `
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
- <tr><td><img src="${foto(bestand)}" width="528" alt="${alt}" class="beeld" style="display:block;width:100%;max-width:528px;height:auto;border-radius:12px;"></td></tr>
+ <tr><td><img${bestand && bestand.slotKey ? ` data-slot="${bestand.slotKey}"` : ''} src="${foto(bestand)}" width="528" alt="${alt}" class="beeld" style="display:block;width:100%;max-width:528px;height:auto;border-radius:12px;"></td></tr>
  ${bijschrift ? `<tr><td style="${F};font-size:12px;color:${M.zacht};padding-top:8px;" class="t-zacht">${bijschrift}</td></tr>` : ''}
 </table>`;
 
@@ -189,7 +193,7 @@ const garantie = () => `
 const showroom = () => `
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${M.creme};border-radius:14px;">
  <tr><td style="padding:0;">
-   <img src="${foto(slotFoto('algemeen', 'showroom-blok', 'eigen/showroom-tafel.webp'))}" width="528" alt="De adviestafel in onze showroom in Rijswijk" class="beeld" style="display:block;width:100%;max-width:528px;height:auto;border-radius:14px 14px 0 0;">
+   <img data-slot="algemeen|showroom-blok" src="${foto(slotFoto('algemeen', 'showroom-blok', 'eigen/showroom-tafel.webp'))}" width="528" alt="De adviestafel in onze showroom in Rijswijk" class="beeld" style="display:block;width:100%;max-width:528px;height:auto;border-radius:14px 14px 0 0;">
  </td></tr>
  <tr><td style="padding:20px 24px 24px;${F};">
    <div style="color:${M.tekst};font-size:17px;font-weight:800;">Liever eerst even zien en voelen?</div>

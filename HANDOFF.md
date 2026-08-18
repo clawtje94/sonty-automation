@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-18)
 
+## 18-08 (2): OUTLOOK-ANNULERING LEIDEND (sync annuleert mee, heelt nooit terug)
+- Eric-geval deel 2: de terugweg-heler had de handmatige Outlook-annulering van
+  15-08 ongedaan gemaakt (afspraak stond er vandaag dus weer; Joey reed terecht,
+  maar niemand wist of de klant nog rekende op bezoek — kantoor moest bellen).
+- REGEL Daimy: wie in Outlook annuleert, annuleert ook Planado. Sync houdt nu
+  data/sync-event-gezien.json bij: event ooit gezien en nu weg = annulering (via
+  motor of directe delete + melding); naam elders in agenda = verplaatst-melding;
+  nooit gezien = helen (bestond al). Werkt vanaf run 2 (run 1 bouwt administratie).
+
 ## 18-08: VERZENDPOORT PLANNINGSKETEN + VANGNET-FIX (na Hans/Eric-incidenten)
 - Incidenten: Hans de Lamboij kreeg 4 voorstellen in 13u (1 over kantoor heen);
   Eric v.d. Meer: Outlook 15-08 handmatig geannuleerd, Planado wist van niks,

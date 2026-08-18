@@ -294,6 +294,15 @@ async function main() {
         }
         if (!blok) blok = (job.description.split('IN TE METEN:')[1] || '').split('MEETBON')[0]
           .split('\n').map((r) => r.replace(/^\s*-\s*/, '').trim()).filter(Boolean).join(' · ');
+        // Opdrachten die de inmeet-planner zelf boekt hebben GEEN "IN TE METEN:"-blok — dat
+        // zet alleen de Outlook-sync erin. Daar staat de productregel als
+        // "2 product(en): 1x Zip Design 110 2500x2100 — ...". Zonder deze tweede lezing viel
+        // het veld terug op "zie omschrijving" en zag de inmeter nergens wat hij ging meten
+        // (Daimy 18-08, geval Irene Kersseboom, opdracht #448).
+        if (!blok) {
+          const mProd = (job.description || '').match(/^\d+ product\(en\):\s*(.+)$/im);
+          if (mProd) blok = mProd[1].split(',').map((r) => r.trim()).filter(Boolean).join(' · ');
+        }
         const huidig = (job.custom_fields || []).find((f) => f.name === 'In te meten')?.value || '';
         if (veldOntbreekt || (blok && kortVeld(blok) !== huidig)) patch.custom_fields = veldenVoor(nr, blok || 'zie omschrijving');
       }

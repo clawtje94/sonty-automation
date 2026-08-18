@@ -209,14 +209,48 @@ async function leesLeadCompleet(item) {
       } catch { /* vangnet mislukt: kaart blijft gewoon op geen-adres */ }
     }
   }
+  // DE OFFERTE WINT VAN DE LEADTEKST (Daimy 18-08, geval Irene Kersseboom).
+  //
+  // Tot nu toe stond het andersom: leverde de leadtekst ook maar één regel op, dan werd
+  // de offerte niet eens opengeslagen. De leadtekst is het aanvraagformulier, en daarin
+  // heet een screen gewoon "Windvast" met de maten als sub-regels eronder die we niet
+  // lezen. Irene kreeg daardoor een opdracht met "1 product(en): 1x Windvast" terwijl
+  // haar getekende offerte 202610734 een Zip Design 110 van 2500×2100 bevat. Dat raakt
+  // 243 van 1000 leads: die hebben in de leadtekst alleen zo'n bijzaakregel staan.
+  //
+  // De commit van 05-08 heette al "Getekende RP-offerte is leidend", maar regelde alleen
+  // wélk offertedocument je pakt (ACCEPTED wint van concept), niet of je er überhaupt
+  // naar kijkt. Dit zet dat recht. Het kost geen extra RP-verkeer: leesOfferte werd
+  // hierboven toch al aangeroepen voor de offertenummers.
+  //
   // "1x Winkel offerte" is geen product maar een placeholder.
   const bruikbaar = lead.producten.filter((p) => !/winkel offerte|offerte$/i.test(p.naam));
-  if (bruikbaar.length) return { ...lead, producten: bruikbaar, aantalProducten: bruikbaar.reduce((a, p) => a + p.aantal, 0), bron: 'leadtekst' };
+  if (offerte.producten.length) {
+    // Wat de klant in de AANVRAAG noemde maar niet in de offerte staat, gaat niet verloren:
+    // dat komt als losse regel in de opdracht (Helene Beek 18-08 — lead noemt raamdecoratie,
+    // haar offerte is alleen een rolluik). De inmeter weet dan dat er nog iets speelt zonder
+    // dat het als "te meten" wordt gepresenteerd. Formulier-ruis (Windvast, windsensor,
+    // Somfy/Tahoma, "Offerte op maat") blijft eruit; dat zijn geen losse producten.
+    const RUIS = /^(niet )?windvast$|windsensor|^offerte op maat$|^winkel offerte$|^somfy|^tahoma|^situo|^eolis/i;
+    const offerteNamen = offerte.producten.map((p) => String(p.naam).toLowerCase());
+    const restant = [...new Set(bruikbaar
+      .map((p) => p.naam)
+      .filter((n) => !RUIS.test(n))
+      .filter((n) => !offerteNamen.some((o) => o.includes(n.toLowerCase()) || n.toLowerCase().includes(o))))];
+    return {
+      ...lead,
+      producten: offerte.producten,
+      aantalProducten: offerte.producten.reduce((a, p) => a + p.aantal, 0),
+      bron: 'RP-offerte (' + (offerte.status || '?') + ')',
+      leadRestant: restant,
+    };
+  }
+  // Geen leesbare offerte? Dan is de leadtekst nog altijd beter dan niets.
+  if (bruikbaar.length) return { ...lead, producten: bruikbaar, aantalProducten: bruikbaar.reduce((a, p) => a + p.aantal, 0), bron: 'leadtekst (geen offerteregels)' };
   // Meerdere offertedocumenten zonder één getekende: NIET automatisch verder.
   // De klant moet er echt zelf één tekenen (Daimy 05-08).
   if (offerte.ambigu) return { ...lead, bron: 'AMBIGU', ambigu: true, aantalDocs: offerte.aantalDocs };
-  if (!offerte.producten.length) return { ...lead, bron: 'leadtekst (leeg)' };
-  return { ...lead, producten: offerte.producten, aantalProducten: offerte.producten.reduce((a, p) => a + p.aantal, 0), bron: 'RP-offerte (' + (offerte.status || '?') + ')' };
+  return { ...lead, bron: 'leadtekst (leeg)' };
 }
 
 // ── agenda per inmeter ──────────────────────────────────────────────────────
@@ -454,6 +488,7 @@ async function verwerkLead(lead, item, slot, duurMin) {
     // Wat de klant onderweg heeft doorgegeven hoort hier te staan: de inmeter leest de
     // opdracht, niet het WhatsApp-gesprek (Daimy 10-08, contactpersoon van Connie).
     description: `Inmeten — ${lead.naam}\n${lead.volledigAdres}\n\n${lead.aantalProducten} product(en): ${lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ')}`
+      + (lead.leadRestant?.length ? `\n\nKlant vroeg in de aanvraag ook naar: ${lead.leadRestant.join(', ')} (staat NIET in de offerte)` : '')
       + (lead.opmerking ? `\n\nOPMERKING BIJ DE OFFERTE:\n${lead.opmerking}` : '')
       + require('./lib/inmeet-opmerkingen.js').alsTekst(lead.id),
     contacts: [{ type: 'phone', name: lead.naam, value: lead.telefoon || '-' }],

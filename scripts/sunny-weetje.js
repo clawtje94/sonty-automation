@@ -77,6 +77,7 @@ async function stuurWhatsApp(doel, berichten) {
  */
 function grapVerzoeken() {
   try {
+    if (fs.existsSync(path.join(__dirname, '..', 'data', 'email', 'wa-lezen-uit.txt'))) return '';
     const db = path.join(process.env.HOME, 'Library', 'Group Containers', 'group.net.whatsapp.WhatsApp.shared', 'ChatStorage.sqlite');
     if (!fs.existsSync(db)) return '';
     const q = `SELECT COALESCE(s.ZPARTNERNAME, s.ZCONTACTJID), m.ZTEXT FROM ZWAMESSAGE m

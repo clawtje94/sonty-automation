@@ -371,6 +371,30 @@ async function main() {
   try {
     const NAAM_VAN_UUID = Object.fromEntries(Object.entries(INMETERS).map(([k, v]) => [v, k]));
     const evStarts = new Set(evs.filter((e) => !e.IsCancelled).map((e) => Date.parse(new Date(e.Start.DateTime + 'Z'))));
+
+    // OUTLOOK-ANNULERING IS LEIDEND (Daimy 18-08, geval Eric van der Meer: iemand
+    // verwijderde de afspraak in Outlook en de heler zette hem doodleuk terug).
+    // We onthouden per opdracht of we zijn agenda-afspraak ooit gezien hebben:
+    //   - ooit gezien en nu weg → ANNULERING: opdracht mee-annuleren (via de motor
+    //     als er een boeking is, anders de job direct verwijderen), nooit helen;
+    //   - klantnaam staat elders in de agenda → VERPLAATST in Outlook: melden,
+    //     niet annuleren en niet helen (mens beslist);
+    //   - nooit gezien → HELEN zoals voorheen (opdracht zonder afspraak).
+    const GEZIEN_PAD = path.join(__dirname, '..', 'data', 'sync-event-gezien.json');
+    let eventGezien = {};
+    try { eventGezien = JSON.parse(fs.readFileSync(GEZIEN_PAD, 'utf8')); } catch { /* eerste run */ }
+    const normNaam = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    const klantVanJobKop = (j) => normNaam(String(j.description || '').split('\n')[0].replace(/^(Inmeten|Montage|Service afspraak)?\s*(Sonty)?\s*[—-]\s*/i, ''));
+    const naamElders = (j) => {
+      const naam = klantVanJobKop(j);
+      const delen = naam.split(' ').filter((d) => d.length >= 4);   // 'van'/'der' tellen niet mee
+      if (!delen.length) return false;
+      return evs.some((e) => {
+        const s = normNaam(e.Subject);
+        return delen.filter((d) => s.includes(d)).length >= Math.ceil(delen.length / 2);
+      });
+    };
+
     let geheeld = 0;
     if (evs.length > 10) for (const j of toekomstJobs) {
       const naam = NAAM_VAN_UUID[j.assignee?.worker_uuid];
@@ -381,7 +405,38 @@ async function main() {
       // een Bookings-afspraak van, mét bevestigingsmail naar een klant die niet bestaat.
       if ((j.external_id || '').startsWith('meeneem-')) continue;
       const van = Date.parse(j.scheduled_at);
-      if ([...evStarts].some((sMs) => Math.abs(sMs - van) < 60000)) continue;
+      if ([...evStarts].some((sMs) => Math.abs(sMs - van) < 60000)) {
+        // afspraak staat er: onthouden dat deze opdracht zijn event heeft (gehad)
+        eventGezien[j.uuid] = { op: new Date().toISOString(), klant: klantVanJobKop(j) || null };
+        continue;
+      }
+
+      // Geen afspraak op dit tijdstip. Eerst: is dit een annulering of verplaatsing?
+      if (eventGezien[j.uuid]) {
+        if (naamElders(j)) {
+          if (EXECUTE) await telegram(`↔️ #${j.serial_no} (${klantVanJobKop(j) || 'klant'}): de agenda-afspraak is in Outlook VERPLAATST maar de Planado-opdracht staat nog op ${new Date(van).toLocaleString('nl-NL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' })} — even gelijktrekken (dashboard of motor), ik raak hem niet aan.`);
+          console.log(`  ↔️ #${j.serial_no} verplaatst in Outlook — melding gestuurd, niets gedaan`);
+          continue;
+        }
+        // ANNULERING: Outlook is leidend, opdracht gaat mee weg — nooit terug-helen.
+        if (!EXECUTE) { console.log(`  zou ANNULEREN: #${j.serial_no} (event was er en is weg)`); continue; }
+        let viaMotor = false;
+        try {
+          const { vindBoeking, muteerBoeking } = require('./lib/inmeet-mutatie.js');
+          const alleB = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'inmeet-boekingen.json'), 'utf8'));
+          const hit = Object.entries(alleB).find(([, b]) => b.planadoJobUuid === j.uuid && b.status === 'geboekt');
+          if (hit) { await muteerBoeking(hit[0], 'annuleer', { reden: 'agenda-afspraak in Outlook verwijderd', bron: 'outlook-annulering' }); viaMotor = true; }
+        } catch (e) { console.log('  motor-annulering faalde: ' + e.message.slice(0, 60)); }
+        if (!viaMotor) {
+          const del = await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { method: 'DELETE', headers: PH });
+          await telegram(`🛑 #${j.serial_no} (${klantVanJobKop(j) || 'klant'}): agenda-afspraak in Outlook verwijderd → Planado-opdracht ${del.ok ? 'mee-geannuleerd' : 'KON NIET verwijderd worden (HTTP ' + del.status + ')'}. Outlook-annulering is leidend (regel Daimy 18-08).`);
+        }
+        delete eventGezien[j.uuid];
+        console.log(`  🛑 #${j.serial_no} geannuleerd (Outlook-afspraak was verwijderd${viaMotor ? ', via motor' : ''})`);
+        await wacht(2600);
+        continue;
+      }
+
       if (!EXECUTE) { console.log(`  zou agenda-afspraak maken voor #${j.serial_no} ${j.scheduled_at}`); continue; }
       const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
       const job = det.job || det;
@@ -406,6 +461,10 @@ async function main() {
       await wacht(2600);
     }
     if (geheeld) await telegram(`🔄 Sync: ${geheeld} Planado-opdracht(en) zonder agenda-afspraak alsnog in Outlook gezet — actie nodig: even controleren of dit klopt.`);
+    // gezien-administratie bijhouden; alleen toekomstige opdrachten zijn relevant
+    const actueleUuids = new Set(toekomstJobs.map((j) => j.uuid));
+    for (const uuid of Object.keys(eventGezien)) if (!actueleUuids.has(uuid)) delete eventGezien[uuid];
+    fs.writeFileSync(GEZIEN_PAD, JSON.stringify(eventGezien, null, 1));
   } catch (e) { console.log('  terugweg overgeslagen: ' + e.message.slice(0, 60)); }
 
   // OPTIE-VEGER (Daimy 11-08: "een optie-blok moet weg zodra iemand geboekt heeft,

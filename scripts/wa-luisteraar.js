@@ -23,6 +23,9 @@ const { AUTH, isGekoppeld } = require('./lib/wa-verstuur.js');
 const { ADMIN_PASSWORD, KLAVIYO_API_KEY } = require('./secrets.js');
 
 const GROEP = '31628209480-1583527515@g.us';
+// Read-only assistent (Daimy 19-08): ALLEEN deze twee nummers krijgen antwoord op
+// opzoekvragen; alle andere prive-berichten worden alleen als grapverzoek gelogd.
+const COLLEGAS = { '31628209480@s.whatsapp.net': 'Joey', '31641102319@s.whatsapp.net': 'Sjoerd' };
 const DATA = path.join(__dirname, '..', 'data');
 const OUTBOX = path.join(DATA, 'wa-outbox');
 const PIDBESTAND = path.join(DATA, 'wa-luisteraar.pid');
@@ -113,15 +116,29 @@ async function naarBeoordeling(jpgPad, naam, uit) {
     if (m.key?.fromMe) return;
     const id = m.key?.id;
     if (!id || verwerkt[id]) return;
-    // grapverzoeken: prive-tekstberichten aan Sunny
+    // prive-berichten aan Sunny
     if (jid.endsWith('@s.whatsapp.net')) {
       const tekst = m.message?.conversation || m.message?.extendedTextMessage?.text;
-      if (tekst) {
-        verwerkt[id] = 1;
-        fs.appendFileSync(GRAPPEN, JSON.stringify({ tijd: Date.now(), van: m.pushName || jid.split('@')[0], tekst: String(tekst).slice(0, 300) }) + '\n');
-        console.log('grapverzoek van', m.pushName || jid);
-      }
+      if (!tekst) { fs.writeFileSync(VERWERKT, JSON.stringify(verwerkt)); return; }
+      verwerkt[id] = 1;
       fs.writeFileSync(VERWERKT, JSON.stringify(verwerkt));
+      if (COLLEGAS[jid]) {
+        // read-only opzoekvraag van Joey of Sjoerd
+        const naam = COLLEGAS[jid];
+        console.log(`vraag van ${naam}:`, String(tekst).slice(0, 80));
+        try {
+          const { antwoordCollega } = require('./lib/collega-antwoord.js');
+          const antwoord = await antwoordCollega(naam, String(tekst).slice(0, 500));
+          await sock.sendMessage(jid, { text: antwoord });
+          await telegram(`💬 ${naam} vroeg Sunny: "${String(tekst).slice(0, 120)}"\nSunny antwoordde: ${antwoord.slice(0, 300)}`);
+        } catch (e) {
+          console.error('collega-antwoord-fout:', String(e.message).slice(0, 100));
+          await sock.sendMessage(jid, { text: 'Sorry, het opzoeken lukt me nu even niet. Probeer het zo nog eens of vraag Daimy.' });
+        }
+        return;
+      }
+      fs.appendFileSync(GRAPPEN, JSON.stringify({ tijd: Date.now(), van: m.pushName || jid.split('@')[0], tekst: String(tekst).slice(0, 300) }) + '\n');
+      console.log('grapverzoek van', m.pushName || jid);
       return;
     }
     // groepsfotos

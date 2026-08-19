@@ -19,8 +19,12 @@ const AUTH = path.join(__dirname, '..', '..', 'data', 'wa-auth');
 
 /** Is dit apparaat al gekoppeld? */
 function isGekoppeld() {
-  try { return JSON.parse(fs.readFileSync(path.join(AUTH, 'creds.json'), 'utf8')).registered === true; }
-  catch { return false; }
+  // Bij koppelen met een koppelcode zet Baileys registered=true, maar bij een QR-koppeling
+  // blijft dat veld false; het bestaan van creds.me (het eigen account) is dan het bewijs.
+  try {
+    const c = JSON.parse(fs.readFileSync(path.join(AUTH, 'creds.json'), 'utf8'));
+    return c.registered === true || Boolean(c.me && c.me.id);
+  } catch { return false; }
 }
 
 /**

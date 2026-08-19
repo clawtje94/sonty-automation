@@ -1995,3 +1995,9 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 
 ## 19-08 ochtend: fotokeuzes-verlies verklaard + naar Blob
 - Daimy's fotokeuzes "verdwenen": KV-maandlimiet -> lees-misser gaf lege keuzes; kiezer toonde leeg EN kwartier-bouw kon met lege keuzes de mails naar standaard terugzetten. FIX: keuzes-opslag van KV naar Vercel Blob (admin/mailfoto-keuzes.json, allowOverwrite, cache 60s), KV alleen nog als eenmalig migratie-vangnet. Gemigreerd en geverifieerd: 12 keuzes identiek na schrijf/teruglees. Uploads-route (sonty:media-uploads, 473 beoordelingen) gecheckt: throw-gebaseerd, geen wipe-gevaar, alleen mogelijke hapering tot V12 betaald plan.
+
+## 19-08 middag: flows toonden oude fotos -> kloon-probleem opgelost
+- OORZAAK (Daimy zag het goed): Klaviyo KLOONT de template in de flow-mail bij aanmaken; de kloon staat niet in /api/templates (404) en flow-messages zijn onwijzigbaar (PATCH 405). Fotokeuzes bereikten dus wel de master-templates maar nooit de live flows.
+- FIX: scripts/email/flows-verversen.js (herbruikbaar): elke live Sonty-flow -> nieuwe versie [vMMDD] met verse klonen van de actuele masters, oude naar concept. Alle 10 ververst; klaviyo-sync werkt nu ook alle naamgenoten bij (flow-klonen blijven onbereikbaar, vandaar het verversen).
+- IN-FLIGHT netjes geregeld: inhaal-flow TVqSmQ (segment U248He op sonty_c_inhaal=ja): C2 na 6 dgn (25-08) en C3 +14 dgn (08-09) voor het C1-cohort van 18-08; herinstroom.js (scratchpad) stempelt het cohort en laat A-instroom sinds 18-08 15:30 en 18-08-akkoorden opnieuw instromen via fase-flip met membership-polling.
+- LET OP VOORTAAN: fotowijziging in flow-mails = flows-verversen.js draaien (kwartier-cron doet dat NIET automatisch; bewuste keuze, in-flight vergt oordeel).

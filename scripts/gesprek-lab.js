@@ -123,9 +123,27 @@ async function haalGesprekken(vers) {
       // Een duimpje of "dat is goed, fijne avond" hoeft geen antwoord; dat is een
       // afsluiter. Zou het lab die melden, dan verdrinkt het echte geval (Ebru, die
       // 12 oktober voorstelde en nooit iets hoorde) in de ruis.
-      const AFSLUITER = /^(👍|👌|🙏|top|dank(je|u)?( wel)?|thanks|bedankt|prima|oke|oké|ok|dat (past|is goed|is prima)|is goed|ja( dat is goed| hoor| graag)?|fijne (avond|dag|weekend)|tot (dan|dinsdag|maandag)|hoi|hallo|groet(en|jes)?)[\s!.,👍👌🙏🏻🏼🏽😊-]*$/i;
-      const zinnen = m.tekst.split(/[.!?\n]+/).map((z) => z.trim()).filter(Boolean);
-      if (zinnen.length && zinnen.every((z) => AFSLUITER.test(z))) continue;
+      // Woordgebaseerd (19-08): de oude regex faalde op "Dankjewel👍🏽" (aan elkaar),
+      // namen ("Is goed Nanny, dankjewel!") en "Dank je, hetzelfde!" — 8 van de 9
+      // meldingen in het dagrapport waren zulke afsluiters. Werkwijze: emoji's en
+      // leestekens weg, namen (hoofdletterwoorden midden in de zin) weg, en dan
+      // moet elk overgebleven woord een afsluit-woord zijn. Een vraagteken maakt
+      // het nooit een afsluiter.
+      const AFSLUIT_WOORDEN = new Set(['dank', 'dankje', 'dankjewel', 'danku', 'dankuwel', 'bedankt', 'thanks', 'thnx', 'top', 'prima', 'oke', 'oké', 'ok', 'okay', 'is', 'goed', 'dat', 'past', 'helemaal', 'hoor', 'ja', 'graag', 'fijn', 'fijne', 'avond', 'dag', 'weekend', 'tot', 'dan', 'ziens', 'snel', 'ook', 'je', 'jij', 'u', 'jullie', 'wel', 'hetzelfde', 'insgelijks', 'gelijk', 'doei', 'doeg', 'groetjes', 'groeten', 'super', 'perfect', 'duidelijk', 'begrepen', 'komt', 'voor', 'elkaar', 'we', 'zien', 'het', 'de', 'een']);
+      const isAfsluiter = (tekst) => {
+        if (/\?/.test(tekst)) return false;
+        const kaal = String(tekst)
+          .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{1F3FB}-\u{1F3FF}]/gu, ' ')
+          .replace(/(?<=\S)\s+([A-Z][a-zà-ü]+)/g, (vol, w) => (AFSLUIT_WOORDEN.has(w.toLowerCase()) ? ' ' + w : ' '))
+          .toLowerCase().replace(/[^a-zà-ü]+/g, ' ').trim();
+        const woorden = kaal.split(/\s+/).filter(Boolean);
+        return woorden.length > 0 && woorden.every((w) => AFSLUIT_WOORDEN.has(w));
+      };
+      if (isAfsluiter(m.tekst)) continue;
+      // Verjaring (19-08): het lab draait dagelijks; alles ouder dan 7 dagen is al
+      // eerder gemeld of allang afgehandeld (Colijn: "20 aug lukt niet" was in
+      // werkelijkheid beantwoord met een nieuwe boeking op 25 aug).
+      if ((Date.now() - Date.parse(String(m.op).replace(' ', 'T'))) > 7 * 24 * 3600000) continue;
       // Het team beantwoordt ook buiten Trengo om (bellen, mailen) en legt dat vast als
       // interne notitie. Dat is een antwoord, ook al staat het niet in de tijdlijn.
       const CONTACT = /\b(gebeld|teruggebeld|voicemail|ingesproken|gemaild|mail (gestuurd|verstuurd)|gesproken|langsgeweest|opgelost|afgehandeld)\b/i;
@@ -140,8 +158,17 @@ async function haalGesprekken(vers) {
   }
 
   console.log(`=== GESPREK-LAB: ${Object.keys(cache).length} gesprekken, ${klantberichten} klantberichten ===\n`);
+  // Dedupe (19-08): hetzelfde bericht dook via samengevoegde tickets dubbel op
+  // (Valentin en Galante stonden 2x in het dagrapport).
+  const gezien = new Set();
+  const uniek = bevindingen.filter((b) => {
+    const sleutel = b.soort + '|' + b.naam + '|' + b.detail;
+    if (gezien.has(sleutel)) return false;
+    gezien.add(sleutel);
+    return true;
+  });
   const perSoort = {};
-  for (const b of bevindingen) (perSoort[b.soort] = perSoort[b.soort] || []).push(b);
+  for (const b of uniek) (perSoort[b.soort] = perSoort[b.soort] || []).push(b);
   for (const soort of ['FOUT-BOEKING', 'FOUT-STIL', 'GEBLOKKEERD']) {
     const lijst = perSoort[soort] || [];
     console.log(`${soort}: ${lijst.length}`);

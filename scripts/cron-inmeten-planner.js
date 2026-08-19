@@ -1221,6 +1221,16 @@ async function verwerkAanbiedingen() {
       // reactie: stoppen met sturen en het aan een mens geven om te bellen — dat is
       // geen automatiseerbaar gesprek meer.
       const rpId = a.lead.rpItemId;
+      // AL GEBOEKT? Dan is opvolging klaar (19-08, Hans: zijn oude aanbod verliep
+      // terwijl hij allang een afspraak had; de opvolging vroeg een nieuw aanbod aan
+      // en dat verzoek bleef eindeloos hangen op "klant heeft al een afspraak").
+      try {
+        const bo = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'inmeet-boekingen.json'), 'utf8'));
+        if (rpId && bo[rpId]?.status === 'geboekt') {
+          console.log(`  opvolging overgeslagen: ${a.lead.naam} is al geboekt`);
+          continue;
+        }
+      } catch { /* administratie onleesbaar: gewone route */ }
       const rondes = (state.opvolging[rpId] || 1);
       if (rpId && rondes < 2) {
         state.opvolging[rpId] = rondes + 1;

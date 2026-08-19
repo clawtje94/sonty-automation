@@ -87,9 +87,26 @@ async function haalBerichten(ticketId) {
  * DE poort. Aanroepen vóór elk automatisch klantbericht uit de planningsketen.
  * @returns {Promise<{ok:boolean, reden:string, mensNodig?:boolean}>}
  */
-async function magSturen({ telefoon, ticketId, soort }) {
+async function magSturen({ telefoon, email, ticketId, soort }) {
   if (klantStil(telefoon)) return { ok: false, reden: 'stil-lijst' };
-  if (!ticketId) return { ok: true, reden: 'geen ticket bekend — alleen stil-lijst getoetst' };
+  // MAX-2 GELDT OOK ZONDER WHATSAPP (19-08, Melchior Blok: mail-only klant met een
+  // onbruikbaar telefoonnummer kreeg 3 aanbod-mails op één ochtend omdat de telling
+  // alleen naar het WhatsApp-gesprek keek). Eigen verzendadministratie telt mee.
+  if (soort === 'voorstel') {
+    try {
+      const st = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'inmeten-planner-state.json'), 'utf8'));
+      const t9 = String(telefoon || '').replace(/\D/g, '').slice(-9);
+      const mail = String(email || '').trim().toLowerCase();
+      const WEEK = 7 * 24 * 3600 * 1000;
+      const eerder = Object.values(st.aanbodTickets || {}).filter((a) => {
+        const zelfde = (t9 && String(a.telefoon || '').replace(/\D/g, '').slice(-9) === t9)
+          || (mail && String(a.email || '').trim().toLowerCase() === mail);
+        return zelfde && a.verstuurdOp && (Date.now() - Date.parse(a.verstuurdOp)) < WEEK;
+      }).length;
+      if (eerder >= 2) return { ok: false, reden: 'max-voorstellen (' + eerder + ' al gestuurd deze week, administratie)', mensNodig: true };
+    } catch { /* administratie onleesbaar: dan telt alleen het gesprek */ }
+  }
+  if (!ticketId) return { ok: true, reden: 'geen ticket bekend — stil-lijst en verzendadministratie getoetst' };
   const berichten = await haalBerichten(ticketId);
   if (berichten === null) {
     // Trengo onbereikbaar: voorstellen dicht, bevestigingen open (zie kop).

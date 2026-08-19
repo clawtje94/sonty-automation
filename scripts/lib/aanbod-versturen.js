@@ -325,7 +325,7 @@ async function verstuurAanbod(aanbod, url) {
   {
     const { magSturen, meldMensNodig } = require('./verzend-poort.js');
     const ticket = aanbod?.lead?.telefoon ? await zoekWaTicket(aanbod.lead.telefoon).catch(() => null) : null;
-    const poort = await magSturen({ telefoon: aanbod?.lead?.telefoon, ticketId: ticket?.id, soort: 'voorstel' });
+    const poort = await magSturen({ telefoon: aanbod?.lead?.telefoon, email: aanbod?.lead?.email, ticketId: ticket?.id, soort: 'voorstel' });
     if (!poort.ok) {
       if (poort.mensNodig) await meldMensNodig(aanbod?.lead?.naam || aanbod?.lead?.telefoon || '?', poort.reden);
       console.log('  verzendpoort: aanbod NIET verstuurd (' + poort.reden + ')');

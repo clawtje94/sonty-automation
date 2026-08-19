@@ -112,10 +112,18 @@ async function naarBeoordeling(jpgPad, naam, uit) {
   }
 
   async function verwerkBericht(m) {
-    const jid = m.key?.remoteJid || '';
+    let jid = m.key?.remoteJid || '';
     if (m.key?.fromMe) return;
     const id = m.key?.id;
     if (!id || verwerkt[id]) return;
+    // WhatsApp gebruikt sinds de privacy-update vaak een geanonimiseerd @lid-adres als
+    // remoteJid; het echte nummer zit dan in remoteJidAlt/senderPn. Zonder deze vertaling
+    // zag de daemon prive-berichten helemaal niet (Daimy's eerste test, 19-08).
+    if (jid.endsWith('@lid')) {
+      const alt = m.key?.remoteJidAlt || m.key?.senderPn || m.key?.participantAlt || '';
+      console.log('lid-bericht, alt:', alt || 'ONBEKEND', '| key:', JSON.stringify(m.key).slice(0, 200));
+      if (alt.endsWith('@s.whatsapp.net')) jid = alt;
+    }
     // prive-berichten aan Sunny
     if (jid.endsWith('@s.whatsapp.net')) {
       const tekst = m.message?.conversation || m.message?.extendedTextMessage?.text;
@@ -123,17 +131,19 @@ async function naarBeoordeling(jpgPad, naam, uit) {
       verwerkt[id] = 1;
       fs.writeFileSync(VERWERKT, JSON.stringify(verwerkt));
       if (COLLEGAS[jid]) {
-        // read-only opzoekvraag van Joey of Sjoerd
+        // read-only opzoekvraag; antwoord naar het adres waar het bericht vandaan kwam
+        const antwoordJid = m.key.remoteJid;
         const naam = COLLEGAS[jid];
         console.log(`vraag van ${naam}:`, String(tekst).slice(0, 80));
         try {
           const { antwoordCollega } = require('./lib/collega-antwoord.js');
           const antwoord = await antwoordCollega(naam, String(tekst).slice(0, 500));
-          await sock.sendMessage(jid, { text: antwoord });
+          await sock.sendMessage(antwoordJid, { text: antwoord });
+          console.log('antwoord verstuurd aan', naam);
           await telegram(`💬 ${naam} vroeg Sunny: "${String(tekst).slice(0, 120)}"\nSunny antwoordde: ${antwoord.slice(0, 300)}`);
         } catch (e) {
           console.error('collega-antwoord-fout:', String(e.message).slice(0, 100));
-          await sock.sendMessage(jid, { text: 'Sorry, het opzoeken lukt me nu even niet. Probeer het zo nog eens of vraag Daimy.' });
+          await sock.sendMessage(antwoordJid, { text: 'Sorry, het opzoeken lukt me nu even niet. Probeer het zo nog eens of vraag Daimy.' });
         }
         return;
       }

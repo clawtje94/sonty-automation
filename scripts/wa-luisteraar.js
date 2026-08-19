@@ -25,7 +25,7 @@ const { ADMIN_PASSWORD, KLAVIYO_API_KEY } = require('./secrets.js');
 const GROEP = '31628209480-1583527515@g.us';
 // Read-only assistent (Daimy 19-08): ALLEEN deze twee nummers krijgen antwoord op
 // opzoekvragen; alle andere prive-berichten worden alleen als grapverzoek gelogd.
-const COLLEGAS = { '31628209480@s.whatsapp.net': 'Joey', '31641102319@s.whatsapp.net': 'Sjoerd' };
+const COLLEGAS = { '31628209480@s.whatsapp.net': 'Joey', '31641102319@s.whatsapp.net': 'Sjoerd', '31683500506@s.whatsapp.net': 'Daimy' };
 const DATA = path.join(__dirname, '..', 'data');
 const OUTBOX = path.join(DATA, 'wa-outbox');
 const PIDBESTAND = path.join(DATA, 'wa-luisteraar.pid');

@@ -302,10 +302,11 @@
       "naam": "Ochtendrapport AI-gesprekken",
       "functie": "Dagelijks 08:30 overzicht van de AI-nachtgesprekken naar Telegram. Stuurt (en logt) alleen iets als de Sonny-avonddienst aan staat; die staat sinds juli UIT, dus een stille log is hier normaal.",
       "groep": "Rapportage",
-      "ritme": "dagelijks 08:30",
+      "ritme": "UIT (verzoek Daimy 19-08)",
       "log": "sonny-rapport.log",
       "maxUur": null,
-      "ks": false
+      "ks": false,
+      "uitgeschakeld": true
     },
     "nl.sonty.getekend-rapport": {
       "naam": "Dagrapport tekeningen",

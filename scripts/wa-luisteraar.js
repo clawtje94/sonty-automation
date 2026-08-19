@@ -131,8 +131,9 @@ async function naarBeoordeling(jpgPad, naam, uit) {
       verwerkt[id] = 1;
       fs.writeFileSync(VERWERKT, JSON.stringify(verwerkt));
       if (COLLEGAS[jid]) {
-        // read-only opzoekvraag; antwoord naar het adres waar het bericht vandaan kwam
-        const antwoordJid = m.key.remoteJid;
+        // Antwoord ALTIJD naar het vertaalde echte nummer: sturen naar het @lid-adres
+        // wordt door WhatsApp stil niet bezorgd (Daimy's 4684-test, 19-08).
+        const antwoordJid = jid;
         const naam = COLLEGAS[jid];
         console.log(`vraag van ${naam}:`, String(tekst).slice(0, 80));
         try {

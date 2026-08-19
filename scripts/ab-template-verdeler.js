@@ -29,10 +29,16 @@ const TEMPLATES = [
   // ticket achter. De andere drie varianten kwamen 49 van de 49 keer wel aan. Terugzetten zodra
   // de template opnieuw is aangemaakt of Meta hem alsnog accepteert.
   // { id: 242731, naam: 'inmeten',  aantalVars: 5 },  // offerte_ab1_inmeten
+  //
+  // ALLEEN NOG 'INMETEN' (Daimy 2026-08-19: "gebruik vanaf nu alleen nog maar die
+  // inmeten template"): de andere drie varianten staan uit. Doordat de lijst nu één
+  // variant heeft krijgt iedereen — ook klanten die eerder garantie/check/kortweg
+  // kregen — voortaan de inmeten-variant. De toewijzingen-administratie blijft
+  // bestaan, dus het A/B-rapport over de oude test blijft kloppen.
   { id: 242818, naam: 'inmeten', aantalVars: 5 },  // offerte_ab1_inmetenv2
-  { id: 242737, naam: 'garantie', aantalVars: 5 },  // offerte_ab2_garantie
-  { id: 242738, naam: 'check',    aantalVars: 5 },  // offerte_ab3_check
-  { id: 242739, naam: 'kortweg',  aantalVars: 5 },  // offerte_ab4_kortweg
+  // { id: 242737, naam: 'garantie', aantalVars: 5 },  // offerte_ab2_garantie — uit 19-08
+  // { id: 242738, naam: 'check',    aantalVars: 5 },  // offerte_ab3_check — uit 19-08
+  // { id: 242739, naam: 'kortweg',  aantalVars: 5 },  // offerte_ab4_kortweg — uit 19-08
 ];
 
 function laad() {

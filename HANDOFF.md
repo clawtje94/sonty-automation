@@ -2001,3 +2001,8 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 - FIX: scripts/email/flows-verversen.js (herbruikbaar): elke live Sonty-flow -> nieuwe versie [vMMDD] met verse klonen van de actuele masters, oude naar concept. Alle 10 ververst; klaviyo-sync werkt nu ook alle naamgenoten bij (flow-klonen blijven onbereikbaar, vandaar het verversen).
 - IN-FLIGHT netjes geregeld: inhaal-flow TVqSmQ (segment U248He op sonty_c_inhaal=ja): C2 na 6 dgn (25-08) en C3 +14 dgn (08-09) voor het C1-cohort van 18-08; herinstroom.js (scratchpad) stempelt het cohort en laat A-instroom sinds 18-08 15:30 en 18-08-akkoorden opnieuw instromen via fase-flip met membership-polling.
 - LET OP VOORTAAN: fotowijziging in flow-mails = flows-verversen.js draaien (kwartier-cron doet dat NIET automatisch; bewuste keuze, in-flight vergt oordeel).
+
+## 19-08 middag: Sunny volledig op de directe WhatsApp-koppeling
+- QR-koppeling gelukt (code-route faalde; QR via Telegram-fotos, scan met Sunny's tel, 515-herstart afgehandeld; nummer bevestigd +31657141132). isGekoppeld herkent nu ook QR-koppeling (creds.me).
+- NIEUW scripts/wa-luisteraar.js + launchd nl.sonty.wa-luisteraar (KeepAlive): permanente verbinding; groepsfotos -> triage -> Klaviyo-CDN -> Uploaden-tab; DMs -> data/email/wa-grapverzoeken.jsonl (weetjesbot leest daar); versturen via outbox data/wa-outbox (wa-verstuur.js kiest die route automatisch als de daemon draait, pid-check; nooit 2 sockets op 1 sessie). Twee verzendtests geslaagd (direct + via wachtrij).
+- ChatStorage-lezen definitief uit (macOS-popups voorbij); weetje 20:00 en morning motivation 07:30 lopen via de verbinding, schermvergrendeling niet meer relevant voor versturen.

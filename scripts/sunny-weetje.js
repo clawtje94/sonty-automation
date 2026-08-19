@@ -76,16 +76,18 @@ async function stuurWhatsApp(doel, berichten) {
  * Alleen lezen uit de lokale WhatsApp-database, alleen losse chats (nooit de groep zelf).
  */
 function grapVerzoeken() {
+  // Sinds 19-08 vult de luisteraar-daemon (wa-luisteraar.js) dit bestand via de directe
+  // WhatsApp-koppeling; geen ChatStorage-lezen en dus geen macOS-popups meer.
   try {
-    if (fs.existsSync(path.join(__dirname, '..', 'data', 'email', 'wa-lezen-uit.txt'))) return '';
-    const db = path.join(process.env.HOME, 'Library', 'Group Containers', 'group.net.whatsapp.WhatsApp.shared', 'ChatStorage.sqlite');
-    if (!fs.existsSync(db)) return '';
-    const q = `SELECT COALESCE(s.ZPARTNERNAME, s.ZCONTACTJID), m.ZTEXT FROM ZWAMESSAGE m
-      JOIN ZWACHATSESSION s ON m.ZCHATSESSION = s.Z_PK
-      WHERE s.ZCONTACTJID NOT LIKE '%@g.us' AND m.ZISFROMME = 0 AND m.ZTEXT IS NOT NULL
-      AND m.ZMESSAGEDATE > (strftime('%s','now') - 978307200 - 86400) ORDER BY m.ZMESSAGEDATE LIMIT 15;`;
-    return execFileSync('sqlite3', ['-readonly', '-separator', ': ', `file:${db}?mode=ro`, q], { timeout: 15000 })
-      .toString().trim();
+    const p = path.join(__dirname, '..', 'data', 'email', 'wa-grapverzoeken.jsonl');
+    if (!fs.existsSync(p)) return '';
+    const grens = Date.now() - 86400000;
+    return fs.readFileSync(p, 'utf8').trim().split('\n').filter(Boolean)
+      .map((r) => { try { return JSON.parse(r); } catch { return null; } })
+      .filter((g) => g && g.tijd > grens)
+      .slice(-15)
+      .map((g) => `${g.van}: ${g.tekst}`)
+      .join('\n');
   } catch { return ''; }
 }
 

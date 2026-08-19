@@ -35,6 +35,10 @@ function isGekoppeld() {
  */
 async function stuurWhatsApp(jid, berichten, { timeoutMs = 90000 } = {}) {
   if (!isGekoppeld()) throw new Error('WhatsApp is nog niet gekoppeld — draai eerst: node scripts/wa-koppel.js');
+  // Draait de luisteraar-daemon (wa-luisteraar.js), dan MOET het versturen via zijn
+  // wachtrij: twee verbindingen tegelijk op dezelfde sessie schoppen elkaar eruit.
+  const daemonUit = await viaOutbox(jid, berichten, timeoutMs);
+  if (daemonUit !== null) return daemonUit;
   const baileys = require('@whiskeysockets/baileys');
   const makeWASocket = baileys.default || baileys.makeWASocket;
   const { useMultiFileAuthState, fetchLatestBaileysVersion, DisconnectReason } = baileys;
@@ -81,6 +85,28 @@ async function stuurWhatsApp(jid, berichten, { timeoutMs = 90000 } = {}) {
     try { sock.end(); } catch { /* al dicht */ }
   }
   return verstuurd.length;
+}
+
+/** Verstuurt via de daemon-wachtrij; null = daemon draait niet, val terug op eigen socket. */
+async function viaOutbox(jid, berichten, timeoutMs) {
+  const OUTBOX = path.join(__dirname, '..', '..', 'data', 'wa-outbox');
+  const PIDBESTAND = path.join(__dirname, '..', '..', 'data', 'wa-luisteraar.pid');
+  try {
+    const pid = Number(fs.readFileSync(PIDBESTAND, 'utf8').trim());
+    process.kill(pid, 0); // bestaat het proces?
+  } catch { return null; }
+  fs.mkdirSync(OUTBOX, { recursive: true });
+  const id = Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+  fs.writeFileSync(path.join(OUTBOX, id + '.json'), JSON.stringify({ jid, berichten }));
+  const tot = Date.now() + timeoutMs;
+  while (Date.now() < tot) {
+    await new Promise((r) => setTimeout(r, 1000));
+    const done = path.join(OUTBOX, id + '.done.json');
+    const err = path.join(OUTBOX, id + '.err.json');
+    if (fs.existsSync(done)) { const n = JSON.parse(fs.readFileSync(done, 'utf8')).verstuurd; fs.unlinkSync(done); return n; }
+    if (fs.existsSync(err)) { const f = JSON.parse(fs.readFileSync(err, 'utf8')).fout; fs.unlinkSync(err); throw new Error(f); }
+  }
+  throw new Error('daemon-wachtrij gaf geen antwoord binnen ' + Math.round(timeoutMs / 1000) + 's');
 }
 
 module.exports = { stuurWhatsApp, isGekoppeld, AUTH };

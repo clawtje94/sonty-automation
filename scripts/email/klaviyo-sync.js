@@ -99,31 +99,78 @@ function tekstversie(html) {
   for (let i = 0; i < 15 && pad; i++) {
     const r = await api(pad);
     if (!r.ok) { console.error('Kan sjablonen niet ophalen: ' + r.status + ' ' + r.t.slice(0, 200)); process.exit(1); }
-    for (const d of (r.j.data || [])) opNaam.set(d.attributes.name, d.id);
+    // 19-08: per naam ALLE ids bewaren. Klaviyo kloont een template zodra hij in een
+    // flow-mail wordt gebruikt (zelfde naam, ander id); werkten we alleen het origineel
+    // bij, dan hielden de flows de oude fotos (Daimy zag dat in de flows).
+    for (const d of (r.j.data || [])) {
+      const l = opNaam.get(d.attributes.name) || [];
+      l.push(d.id);
+      opNaam.set(d.attributes.name, l);
+    }
     pad = r.j.links?.next ? r.j.links.next.replace('https://a.klaviyo.com/api/', '') : null;
   }
   console.log(`Klaviyo bevat nu ${opNaam.size} sjablonen: ${[...opNaam.keys()].join(', ') || '(geen)'}\n`);
 
   for (const [bestandsnaam, weergavenaam] of Object.entries(NAMEN)) {
     const html = fs.readFileSync(path.join(DIST, bestandsnaam + '.html'), 'utf8');
-    const bestaatId = opNaam.get(weergavenaam);
+    const bestaatIds = opNaam.get(weergavenaam) || [];
     // editor_type mag alleen mee bij AANMAKEN. Bij een update weigert Klaviyo het veld met
     // "'editor_type' is not a valid field for the resource 'template'".
     const attrs = { name: weergavenaam, html, text: tekstversie(html) };
-    if (!bestaatId) attrs.editor_type = 'CODE';
+    if (!bestaatIds.length) attrs.editor_type = 'CODE';
 
     if (!ECHT) {
-      console.log(`${bestaatId ? 'ZOU BIJWERKEN' : 'ZOU AANMAKEN'}: ${weergavenaam} (${(html.length / 1024).toFixed(1)} kB)`);
+      console.log(`${bestaatIds.length ? `ZOU BIJWERKEN (${bestaatIds.length}x)` : 'ZOU AANMAKEN'}: ${weergavenaam} (${(html.length / 1024).toFixed(1)} kB)`);
       continue;
     }
 
-    const res = bestaatId
-      ? await api(`templates/${bestaatId}/`, { method: 'PATCH', body: JSON.stringify({ data: { type: 'template', id: bestaatId, attributes: attrs } }) })
-      : await api('templates/', { method: 'POST', body: JSON.stringify({ data: { type: 'template', attributes: attrs } }) });
-
-    if (!res.ok) { console.error(`  FOUT bij ${weergavenaam}: ${res.status} ${res.t.slice(0, 260)}`); continue; }
-    console.log(`  ${bestaatId ? 'bijgewerkt' : 'aangemaakt'}: ${weergavenaam}  (id ${res.j?.data?.id || bestaatId})`);
+    if (!bestaatIds.length) {
+      const res = await api('templates/', { method: 'POST', body: JSON.stringify({ data: { type: 'template', attributes: attrs } }) });
+      if (!res.ok) { console.error(`  FOUT bij ${weergavenaam}: ${res.status} ${res.t.slice(0, 260)}`); continue; }
+      console.log(`  aangemaakt: ${weergavenaam}  (id ${res.j?.data?.id})`);
+    } else {
+      for (const id of bestaatIds) {
+        const res = await api(`templates/${id}/`, { method: 'PATCH', body: JSON.stringify({ data: { type: 'template', id, attributes: attrs } }) });
+        if (!res.ok) { console.error(`  FOUT bij ${weergavenaam} (${id}): ${res.status} ${res.t.slice(0, 260)}`); continue; }
+        await new Promise((r) => setTimeout(r, 300));
+      }
+      console.log(`  bijgewerkt: ${weergavenaam}  (${bestaatIds.length}x: ${bestaatIds.join(', ')})`);
+    }
     await new Promise((r) => setTimeout(r, 400));
+  }
+
+  // FLOW-KLONEN (19-08): zodra een template in een flow-mail wordt gebruikt maakt Klaviyo
+  // een kloon met dezelfde naam maar een ander id, en die kloon staat NIET in de gewone
+  // templates-lijst. Zonder deze stap houden de live flows dus oude fotos/teksten.
+  if (ECHT) {
+    const naarBestand = new Map(Object.entries(NAMEN).map(([b, n]) => [n, b]));
+    const fl = await api('flows/?page%5Bsize%5D=50');
+    const liveSonty = (fl.j?.data || []).filter((f) => f.attributes.status === 'live' && f.attributes.name.startsWith('Sonty'));
+    const gedaan = new Set();
+    let bijgewerkt = 0;
+    for (const f of liveSonty) {
+      const acts = await api(`flows/${f.id}/flow-actions/`);
+      for (const a of acts.j?.data || []) {
+        const msgs = await api(`flow-actions/${a.id}/flow-messages/`);
+        for (const m of msgs.j?.data || []) {
+          // include=template werkt alleen op het detail-endpoint, niet op de lijst
+          const det = await api(`flow-messages/${m.id}/?include=template`);
+          const t = (det.j?.included || [])[0];
+          if (!t || t.type !== 'template' || gedaan.has(t.id)) continue;
+          gedaan.add(t.id);
+          const bestand = naarBestand.get(t.attributes.name);
+          if (!bestand) continue;
+          const html = fs.readFileSync(path.join(DIST, bestand + '.html'), 'utf8');
+          if (t.attributes.html === html) continue; // al actueel
+          const res = await api(`templates/${t.id}/`, { method: 'PATCH', body: JSON.stringify({ data: { type: 'template', id: t.id, attributes: { name: t.attributes.name, html, text: tekstversie(html) } } }) });
+          if (res.ok) { bijgewerkt += 1; console.log(`  flow-kloon bijgewerkt: ${t.attributes.name} (${t.id}) in flow ${f.attributes.name}`); }
+          else console.error(`  FOUT flow-kloon ${t.attributes.name} (${t.id}): ${res.status} ${res.t.slice(0, 160)}`);
+          await new Promise((r) => setTimeout(r, 300));
+        }
+        await new Promise((r) => setTimeout(r, 200));
+      }
+    }
+    console.log(`${bijgewerkt} flow-klonen bijgewerkt over ${liveSonty.length} live flows.`);
   }
 
   if (!ECHT) console.log('\nProefronde. Draai met --doe-het om het echt te doen.');

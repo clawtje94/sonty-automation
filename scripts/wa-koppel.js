@@ -19,7 +19,7 @@ const { AUTH, isGekoppeld } = require('./lib/wa-verstuur.js');
     console.log('Al gekoppeld. Opnieuw koppelen? Verwijder data/wa-auth of draai met --opnieuw.');
     return;
   }
-  const baileys = require('@whiskeysockets/baileys');
+  const baileys = require('baileys');
   const makeWASocket = baileys.default || baileys.makeWASocket;
   const { useMultiFileAuthState, fetchLatestBaileysVersion } = baileys;
   const qr = require('qrcode-terminal');

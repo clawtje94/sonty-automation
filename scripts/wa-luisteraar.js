@@ -31,6 +31,11 @@ const OUTBOX = path.join(DATA, 'wa-outbox');
 const PIDBESTAND = path.join(DATA, 'wa-luisteraar.pid');
 const VERWERKT = path.join(DATA, 'email', 'wa-luisteraar-verwerkt.json');
 const GRAPPEN = path.join(DATA, 'email', 'wa-grapverzoeken.jsonl');
+const DMVLAG = path.join(DATA, 'wa-dm-uit.txt');
+const DESKTOPQ = path.join(DATA, 'wa-desktop-queue');
+// Weergavenamen zoals de contacten op Sunny's telefoon zijn opgeslagen (19-08): de
+// reserve-route zoekt de chat in WhatsApp Desktop op naam.
+const DESKTOPNAAM = { Daimy: 'Daimy Boot', Joey: 'Joey Engelen', Sjoerd: 'Sjoerd' };
 const CATS = ['knikarm', 'uitvalscherm', 'screen', 'rolluik', 'pergola', 'veranda', 'markies', 'raamdeco', 'behang', 'horren', 'vloeren', 'showroom', 'werk', 'zakelijk'];
 const SITE = { Authorization: 'Bearer ' + ADMIN_PASSWORD, 'Content-Type': 'application/json' };
 const MIN_SCORE = 6;
@@ -79,12 +84,15 @@ async function naarBeoordeling(jpgPad, naam, uit) {
   fs.writeFileSync(PIDBESTAND, String(process.pid));
   const verwerkt = fs.existsSync(VERWERKT) ? JSON.parse(fs.readFileSync(VERWERKT, 'utf8')) : {};
 
-  const baileys = require('@whiskeysockets/baileys');
+  const baileys = require('baileys');
   const makeWASocket = baileys.default || baileys.makeWASocket;
   const { useMultiFileAuthState, fetchLatestBaileysVersion, downloadMediaMessage, DisconnectReason } = baileys;
 
   let sock = null;
   let open = false;
+  const bewaakt = new Map();
+  function bewaak(id, info) { if (id) bewaakt.set(id, info); }
+  let probeDag = '';
 
   async function verbind() {
     const { state, saveCreds } = await useMultiFileAuthState(AUTH);
@@ -102,6 +110,26 @@ async function naarBeoordeling(jpgPad, naam, uit) {
           process.exit(1);
         }
         setTimeout(verbind, code === 515 ? 2000 : 15000);
+      }
+    });
+    sock.ev.on('messages.update', async (ups) => {
+      for (const u of ups) {
+        const w = bewaakt.get(u.key?.id);
+        if (!w) continue;
+        const st = u.update?.status;
+        if (st === 0 && w.type === 'antwoord') {
+          // WhatsApp weigert de directe 1-op-1 alsnog: vlag aan en via de reserve-route
+          bewaakt.delete(u.key.id);
+          fs.writeFileSync(DMVLAG, 'automatisch gezet: status 0 op antwoord, ' + new Date().toISOString());
+          fs.mkdirSync(DESKTOPQ, { recursive: true });
+          fs.writeFileSync(path.join(DESKTOPQ, Date.now() + '.json'), JSON.stringify({ doel: w.doel, tekst: w.tekst }));
+          await telegram('⚠️ WhatsApp weigerde het directe antwoord aan ' + w.naam + '; het gaat nu via de reserve-route. Directe 1-op-1 staat weer uit tot de dagelijkse check slaagt.');
+        }
+        if (st >= 3 && w.type === 'probe') {
+          bewaakt.delete(u.key.id);
+          if (fs.existsSync(DMVLAG)) fs.unlinkSync(DMVLAG);
+          await telegram('✅ Goed nieuws: WhatsApp bezorgt 1-op-1-berichten van Sunny weer (dagelijkse check kwam aan). De directe route staat weer aan.');
+        }
       }
     });
     sock.ev.on('messages.upsert', async ({ messages }) => {
@@ -139,9 +167,18 @@ async function naarBeoordeling(jpgPad, naam, uit) {
         try {
           const { antwoordCollega } = require('./lib/collega-antwoord.js');
           const antwoord = await antwoordCollega(naam, String(tekst).slice(0, 500));
-          await sock.sendMessage(antwoordJid, { text: antwoord });
-          console.log('antwoord verstuurd aan', naam);
-          await telegram(`💬 ${naam} vroeg Sunny: "${String(tekst).slice(0, 120)}"\nSunny antwoordde: ${antwoord.slice(0, 300)}`);
+          if (fs.existsSync(DMVLAG)) {
+            // directe 1-op-1 wordt door WhatsApp geweigerd (status 0, 19-08):
+            // antwoord via de Desktop-wachtrij zodra het scherm vrij is
+            fs.mkdirSync(DESKTOPQ, { recursive: true });
+            fs.writeFileSync(path.join(DESKTOPQ, Date.now() + '.json'), JSON.stringify({ doel: DESKTOPNAAM[naam] || naam, tekst: antwoord }));
+            await telegram(`💬 ${naam} vroeg Sunny: "${String(tekst).slice(0, 120)}"\nAntwoord: ${antwoord.slice(0, 300)}\n(gaat via de reserve-route naar WhatsApp zodra het scherm vrij is)`);
+          } else {
+            const r = await sock.sendMessage(antwoordJid, { text: antwoord });
+            bewaak(r?.key?.id, { type: 'antwoord', doel: DESKTOPNAAM[naam] || naam, tekst: antwoord, naam });
+            console.log('antwoord verstuurd aan', naam);
+            await telegram(`💬 ${naam} vroeg Sunny: "${String(tekst).slice(0, 120)}"\nSunny antwoordde: ${antwoord.slice(0, 300)}`);
+          }
         } catch (e) {
           console.error('collega-antwoord-fout:', String(e.message).slice(0, 100));
           await sock.sendMessage(antwoordJid, { text: 'Sorry, het opzoeken lukt me nu even niet. Probeer het zo nog eens of vraag Daimy.' });
@@ -166,6 +203,21 @@ async function naarBeoordeling(jpgPad, naam, uit) {
     console.log('foto geplaatst:', naam, uit.cat, uit.score);
     await telegram(`📸 Nieuwe foto uit de toppers-groep beoordeeld (${uit.cat} ${uit.score}/10) en klaargezet in de Uploaden-tab voor jouw akkoord.`);
   }
+
+  // dagelijkse herstel-probe (na 08:15): 1 proefbericht aan Daimy; komt de bezorg-ack
+  // binnen, dan gaat de dm-uit-vlag eraf en meldt de bot dat de directe route terug is
+  setInterval(async () => {
+    if (!open || !fs.existsSync(DMVLAG)) return;
+    const nu = new Date();
+    const dag = nu.toISOString().slice(0, 10);
+    if (probeDag === dag || nu.getHours() < 8 || (nu.getHours() === 8 && nu.getMinutes() < 15)) return;
+    probeDag = dag;
+    try {
+      const r = await sock.sendMessage('31683500506@s.whatsapp.net', { text: 'dagelijkse verbindingscheck van Sunny, negeer mij 🤖' });
+      bewaak(r?.key?.id, { type: 'probe' });
+      console.log('herstel-probe verstuurd');
+    } catch (e) { console.error('probe-fout:', String(e.message).slice(0, 60)); }
+  }, 60000);
 
   // outbox: bestanden {jid, berichten[]} versturen en het resultaat terugschrijven
   setInterval(async () => {

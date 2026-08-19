@@ -30,7 +30,7 @@ async function stuurTekst(t) {
 
 (async () => {
   fs.rmSync(AUTH, { recursive: true, force: true });
-  const baileys = require('@whiskeysockets/baileys');
+  const baileys = require('baileys');
   const makeWASocket = baileys.default || baileys.makeWASocket;
   const { useMultiFileAuthState, fetchLatestBaileysVersion } = baileys;
   const qrcode = require('qrcode');

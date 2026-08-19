@@ -39,7 +39,7 @@ async function stuurWhatsApp(jid, berichten, { timeoutMs = 90000 } = {}) {
   // wachtrij: twee verbindingen tegelijk op dezelfde sessie schoppen elkaar eruit.
   const daemonUit = await viaOutbox(jid, berichten, timeoutMs);
   if (daemonUit !== null) return daemonUit;
-  const baileys = require('@whiskeysockets/baileys');
+  const baileys = require('baileys');
   const makeWASocket = baileys.default || baileys.makeWASocket;
   const { useMultiFileAuthState, fetchLatestBaileysVersion, DisconnectReason } = baileys;
 

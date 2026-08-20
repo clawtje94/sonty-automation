@@ -45,12 +45,12 @@ const ctx = {
   // foto's insluiten zodat de preview los van internet werkt
   const web = path.join(process.env.HOME, 'sonty-website', 'public', 'images');
   const tmp = fs.mkdtempSync('/tmp/sonty-shot-');
-  const namen = [...new Set([...s.matchAll(/images\/eigen\/([\w-]+)\.webp/g)].map(m => m[1]))];
+  const namen = [...new Set([...s.matchAll(/images\/([\w\/-]+)\.webp/g)].map(m => m[1]))].filter(n => n !== 'logo-sonty');
   for (const naam of namen) {
-    const src = path.join(web, 'eigen', naam + '.webp'), jpg = path.join(tmp, naam + '.jpg');
+    const src = path.join(web, naam + '.webp'), jpg = path.join(tmp, naam.replace(/\//g,'_') + '.jpg');
     try {
       cp.execFileSync('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '62', '-Z', '900', src, '--out', jpg], { stdio: 'ignore' });
-      s = s.split('https://sonty-website.vercel.app/images/eigen/' + naam + '.webp')
+      s = s.split('https://sonty-website.vercel.app/images/' + naam + '.webp')
            .join('data:image/jpeg;base64,' + fs.readFileSync(jpg).toString('base64'));
     } catch { console.warn('foto overslaan:', naam); }
   }

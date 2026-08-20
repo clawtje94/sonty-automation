@@ -81,7 +81,7 @@
     position:relative; margin:0 16px; border-radius:20px; overflow:hidden;
     background:#0d0d0e; box-shadow:var(--shadow); isolation:isolate;
   }
-  .hero__foto{width:100%; height:300px; object-fit:cover; object-position:center 30%; opacity:.9}
+  .hero__foto{width:100%; height:300px; object-fit:cover; object-position:center 38%; opacity:.92}
   .hero__laag{
     position:absolute; inset:0;
     background:linear-gradient(to top, rgba(8,8,9,.95) 30%, rgba(8,8,9,.62) 62%, rgba(8,8,9,.08) 100%);
@@ -116,7 +116,7 @@
 
   /* bus-strip */
   .strip{display:flex; gap:0; align-items:stretch}
-  .strip img{width:132px; height:auto; object-fit:cover; object-position:64% center; flex:0 0 auto}
+  .strip img{width:132px; height:auto; object-fit:cover; object-position:38% 72%; flex:0 0 auto}
   .strip__tekst{padding:15px 17px; display:flex; flex-direction:column; justify-content:center; gap:4px}
   .strip__tekst b{font-size:15.5px}
   .strip__tekst span{font-size:14px; color:var(--ink-soft); line-height:1.45}
@@ -232,7 +232,7 @@
 
   <!-- HERO: de tekst verandert mee met de stand van de opdracht -->
   <section class="hero op">
-    <img class="hero__foto" src="https://sonty-website.vercel.app/images/eigen/montage-afstellen.webp" alt="Monteur van Sonty aan het werk bij een gevel">
+    <img class="hero__foto" src="https://sonty-website.vercel.app/images/portfolio/werk/wa-1477.webp" alt="Monteur van Sonty aan het werk aan een zonwering" onerror="this.style.display='none'">
     <div class="hero__laag"></div>
     <div class="hero__tekst">
       {% if job.finished_at %}
@@ -276,7 +276,7 @@
   {% if job.finished_at %}{% else %}
   <section class="kaart op">
     <div class="strip">
-      <img src="https://sonty-website.vercel.app/images/eigen/sonty-bus.webp" alt="De witte bus van Sonty voor een woning">
+      <img src="https://sonty-website.vercel.app/images/portfolio/werk/wa-0878.webp" alt="De bus van Sonty met ladders op het dak" onerror="this.style.display='none'">
       <div class="strip__tekst">
         <b>Hier let je op</b>
         <span>Deze bus komt straks de straat in. {{ worker.name }} belt je zodra hij er bijna is, en heeft alles al ingeladen.</span>
@@ -353,7 +353,7 @@
 
   <!-- WERKWIJZE -->
   <section class="kaart op">
-    <img class="product__foto" src="https://sonty-website.vercel.app/images/eigen/montage-team-2.webp" alt="Monteur van Sonty met gereedschap aan het werk">
+    <img class="product__foto" src="https://sonty-website.vercel.app/images/eigen/montage-afstellen.webp" alt="Monteur van Sonty schroeft een bevestiging vast aan de gevel" onerror="this.style.display='none'">
     <div class="kaart__body">
       <h2 class="titel">Zo gaan we te werk</h2>
       <ol class="stappen">
@@ -394,7 +394,7 @@
 
   <!-- NA AFLOOP -->
   <section class="kaart op">
-    <img class="product__foto" src="https://sonty-website.vercel.app/images/eigen/team-klant-blij.webp" alt="Sonty-monteurs met een tevreden klant">
+    <img class="product__foto" src="https://sonty-website.vercel.app/images/eigen/team-klant-blij.webp" alt="Sonty-monteurs met een tevreden klant" onerror="this.style.display='none'">
     <div class="kaart__body">
       {% if job.finished_at %}
         <h2 class="titel">Bedankt voor je vertrouwen</h2>

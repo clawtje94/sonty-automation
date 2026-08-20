@@ -115,11 +115,11 @@
   p + p{margin-top:9px}
 
   /* bus-strip */
-  .strip{display:flex; gap:0; align-items:stretch}
-  .strip img{width:132px; height:auto; object-fit:cover; object-position:44% 78%; flex:0 0 auto}
-  .strip__tekst{padding:15px 17px; display:flex; flex-direction:column; justify-content:center; gap:4px}
+  .strip{display:flex; gap:0; align-items:stretch; height:104px}
+  .strip img{width:118px; height:100%; object-fit:cover; object-position:44% 78%; flex:0 0 auto}
+  .strip__tekst{padding:12px 16px; display:flex; flex-direction:column; justify-content:center; gap:3px; min-width:0}
   .strip__tekst b{font-size:15.5px}
-  .strip__tekst span{font-size:14px; color:var(--ink-soft); line-height:1.45}
+  .strip__tekst span{font-size:13.5px; color:var(--ink-soft); line-height:1.4}
 
   /* tijdlijn */
   .lijn{list-style:none; margin:0; padding:0}
@@ -279,7 +279,7 @@
       <img src="https://sonty-website.vercel.app/images/portfolio/werk/wa-0957.webp" alt="De grijze bus van Sonty met ladders op het dak" onerror="this.style.display='none'">
       <div class="strip__tekst">
         <b>Hier let je op</b>
-        <span>Deze bus komt straks de straat in. {{ worker.name }} belt je zodra hij er bijna is.</span>
+        <span>Deze grijze bus komt straks de straat in. {{ worker.name }} belt je als hij er bijna is.</span>
       </div>
     </div>
   </section>

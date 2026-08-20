@@ -59,6 +59,11 @@ const ctx = {
     .join('data:image/webp;base64,' + fs.readFileSync(logo).toString('base64'));
   fs.rmSync(tmp, { recursive: true, force: true });
 
+  // waarschuwingsbalk: dit bestand is een voorbeeld met verzonnen gegevens
+  s = s.replace('<div class="wrap">', `<div style="background:#B00020;color:#fff;font:600 13px/1.4 sans-serif;padding:10px 14px;text-align:center">
+    VOORBEELD met verzonnen gegevens (${'\u0022'}Marvin${'\u0022'}, ${'\u0022'}Familie de Groot${'\u0022'}). NIET in Planado plakken.<br>
+    Voor Planado gebruik je templates/planado-tracking-sonty.html
+  </div>\n<div class="wrap">`);
   fs.writeFileSync(uit, s);
   const rest = (s.match(/\{[{%]/g) || []).length;
   console.log('preview:', uit, '(' + Math.round(s.length / 1024) + ' KB, stand ' + STAND + ', ' + rest + ' liquid-resten)');

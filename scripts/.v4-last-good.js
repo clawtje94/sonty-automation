@@ -29,6 +29,7 @@ const SUNMASTER_PRICES = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '
 // Weer aanzetten? Eerst de verstuurstap fixen zodat ALTIJD de hoofdofferte verstuurd wordt.
 const ROMA_DUO_AAN = false;
 const { maakRomaDuo, romaEquivalent } = require('./roma-duo-offerte.js');
+const { normaliseerTelefoon } = require('./lib/telefoon-normalisatie.js');
 const ROMA_DUO_LOG = path.join(__dirname, '..', 'data', 'roma-duo-gemaakt.json');
 let romaDuoLog = {};
 try { romaDuoLog = JSON.parse(fs.readFileSync(ROMA_DUO_LOG, 'utf8')); } catch {}
@@ -2131,6 +2132,8 @@ async function main() {
 
   const waSent = getWaSent();
   let waCount = 0;
+  const waHersteld = [];    // nummers waar de weggelaten 06 is teruggezet (RP-formulier-lek)
+  const waOvergeslagen = []; // kansloze nummers (vast/te kort): geen WhatsApp geprobeerd
 
   for (const item of ovItems) {
     const lcId = item.item_subject?.id;
@@ -2144,13 +2147,23 @@ async function main() {
     let telefoon = desc.match(/Telefoonnummer:\s*([^\n]+)/i)?.[1]?.trim() || item.fields?.phone || '';
     if (!telefoon || telefoon.length < 8) continue;
 
-    // Format telefoon
-    telefoon = telefoon.replace(/[\s()\-\.]/g, '');
-    telefoon = telefoon.replace(/^(\+31)0/, '$1');
-    if (telefoon.startsWith('06')) telefoon = '+31' + telefoon.substring(1);
-    if (telefoon.startsWith('0031')) telefoon = '+' + telefoon.substring(2);
-    if (telefoon.startsWith('31') && !telefoon.startsWith('+')) telefoon = '+' + telefoon;
-    if (!telefoon.startsWith('+')) telefoon = '+31' + telefoon;
+    // Nummercheck + herstel (Daimy 16-08, "niet afgeleverd"-onderzoek): het
+    // RP-formulier laat +31 met 8 cijfers door wanneer de klant de 06 weglaat
+    // (bewijs: Giel Kooi kapot +3144536548 vs goed +31644536548). Vaste en
+    // onvolledige nummers zijn kansloos op WhatsApp: overslaan en in de
+    // run-samenvatting melden, niet elke ronde opnieuw proberen.
+    const telCheck = normaliseerTelefoon(telefoon);
+    if (!telCheck.ok) {
+      console.log('  WA overgeslagen voor ' + (voornaam || item.summary || '?') + ': ' + telefoon + ' (' + telCheck.reden + ')');
+      waOvergeslagen.push((voornaam || item.summary || '?') + ' ' + telefoon + ' (' + telCheck.reden + ')');
+      markWaSent(qNum);
+      continue;
+    }
+    if (telCheck.actie === 'hersteld') {
+      console.log('  WA-nummer hersteld voor ' + (voornaam || '?') + ': ' + telefoon + ' → ' + telCheck.nummer);
+      waHersteld.push((voornaam || '?') + ' ' + telefoon + ' → ' + telCheck.nummer);
+    }
+    telefoon = telCheck.nummer;
 
     // Haal offerte-link op
     const docData = await rpGet('/document-service/v1/' + PID + '/quotations?lead_configuration_id=' + lcId);
@@ -2290,8 +2303,11 @@ async function main() {
 
   if (waCount > 0) console.log('WhatsApp offerte verstuurd: ' + waCount);
 
-  if (ocItems.length > 0 || ovCount > 0 || waCount > 0) {
-    await sendTelegram('Offerte controle v4: ' + okCount + ' OK, ' + fixCount + ' aangepast, ' + routeCount + ' gerouted, ' + errorCount + ' errors\nSheet: ' + sheetRows + ' rijen' + (waCount > 0 ? '\nWhatsApp offerte: ' + waCount + ' verstuurd' : ''));
+  if (ocItems.length > 0 || ovCount > 0 || waCount > 0 || waOvergeslagen.length > 0) {
+    await sendTelegram('Offerte controle v4: ' + okCount + ' OK, ' + fixCount + ' aangepast, ' + routeCount + ' gerouted, ' + errorCount + ' errors\nSheet: ' + sheetRows + ' rijen'
+      + (waCount > 0 ? '\nWhatsApp offerte: ' + waCount + ' verstuurd' : '')
+      + (waHersteld.length ? '\nWA-nummer hersteld (06 was weggelaten): ' + waHersteld.join('; ') : '')
+      + (waOvergeslagen.length ? '\nWA overgeslagen, klant kreeg GEEN app: ' + waOvergeslagen.join('; ') : ''));
   }
 }
 

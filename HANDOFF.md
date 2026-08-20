@@ -28,6 +28,27 @@
   motor of directe delete + melding); naam elders in agenda = verplaatst-melding;
   nooit gezien = helen (bestond al). Werkt vanaf run 2 (run 1 bouwt administratie).
 
+## 20-08: BUSSEN IN PLANADO + MONTAGE-SYNC + WERKBON (grote dag)
+- 6 busaccounts in Planado (bus1-6@sonty.nl, ww direct gezet, alleen mobiele app);
+  losse monteurs + 3 oude uitnodigingen weg; Joey/Sjoerd/kantoor onaangeroerd.
+  Licenties 12/12 vol. Logins in memory reference_sonty_credentials.
+- Outlook→Planado sync compleet: montage/service/stoffering naar de juiste bus
+  (attendee-voornaam→bus-map in cron-outlook-planado-sync.js), toewijzing volgt
+  Bookings-verplaatsingen, TIJDEN uit Bookings-afspraak (buffertijd-fix Daimy;
+  Graph-datums 7 decimalen strippen!). Verificatie: 216 opdrachten, 0 tijdfouten.
+- NOODREM data/outlook-schrijf-uit staat AAN: sync schrijft niets richting
+  Outlook (terugweg-heler + optie-veger uit) tot Daimy anders zegt.
+- 17 verouderde team-opdrachten bij Joey/Sjoerd verwijderd (elk met bewezen
+  bus-vervanger); #466/#276 bewust laten staan.
+- Werkbon: 19 rapportvelden op montage-sjabloon (werk gereed ja/nee verplicht,
+  waarom niet, wie fout, herstel, kleur, producten gebleven, uren, foto
+  niet-gereed, uitleg volgende afspraak). Alle 119 teamopdrachten herbouwd met
+  volledige werkbon (eindtelling 119/119). cron-werkbon-afhandeling elke 30 min:
+  gereed=ja → eindfactuur-melding (Gripp-nr), nee → mail werkbonnen@sonty.nl.
+  Eindfactuur AUTOMATISCH versturen: bewust NIET gebouwd zonder expliciet akkoord.
+- Tracking-SMS: spatie-fix in onderweg-template + volgpagina 3 dagen geldig;
+  testjob geslaagd. Montage-voorstellen sheet (S-V) dagelijks 07:10.
+
 ## 18-08: VERZENDPOORT PLANNINGSKETEN + VANGNET-FIX (na Hans/Eric-incidenten)
 - Incidenten: Hans de Lamboij kreeg 4 voorstellen in 13u (1 over kantoor heen);
   Eric v.d. Meer: Outlook 15-08 handmatig geannuleerd, Planado wist van niks,

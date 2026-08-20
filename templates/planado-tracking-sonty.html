@@ -237,7 +237,7 @@
     <div class="hero__tekst">
       {% if job.finished_at %}
         <span class="pill"><span class="dot"></span> Klaar</span>
-        <h1>Het werk bij je is <em>afgerond</em></h1>
+        <h1>Alles is <em>afgerond</em></h1>
         <div class="hero__eta">
           <b>{{ job.finished_at | datetime }}</b>
           <span>opgeleverd</span>
@@ -309,7 +309,7 @@
   {% if worker %}
   <section class="kaart op">
     <div class="kaart__body">
-      <h2 class="kop">Wie er langskomt</h2>
+      <h2 class="kop">Je aanspreekpunt</h2>
       <div class="monteur">
         <div class="avatar" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
@@ -318,7 +318,7 @@
         </div>
         <div>
           <div class="monteur__naam">{{ worker.name }}</div>
-          <div class="monteur__rol">Je aanspreekpunt voor deze afspraak</div>
+          <div class="monteur__rol">Van Sonty, voor deze afspraak</div>
         </div>
       </div>
     </div>
@@ -333,15 +333,15 @@
       <ul class="checks">
         <li>
           <span class="vink"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>
-          <span><b>Parkeerplek dicht bij de gevel</b><span>De bus is 6 meter lang. Komen we monteren, dan moet het materiaal er ook nog uit gedragen worden.</span></span>
+          <span><b>Parkeerplek dicht bij de gevel</b><span>De bus is 6 meter lang. Komen we monteren, dan moeten we het materiaal er ook nog uit dragen.</span></span>
         </li>
         <li>
           <span class="vink"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>
-          <span><b>Ruimte vrij bij de ramen of de gevel</b><span>Meubels, planten en spullen even opzij, dan kunnen we er goed bij met de ladder en het meetgereedschap.</span></span>
+          <span><b>Ruimte vrij bij de ramen of aan de gevel</b><span>Meubels, planten en spullen even opzij, dan kunnen we er goed bij met de ladder en het meetgereedschap.</span></span>
         </li>
         <li>
           <span class="vink"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>
-          <span><b>Iemand thuis die knopen mag doorhakken</b><span>We overleggen ter plekke over maten en plek. Wat we samen afspreken, ligt daarna vast.</span></span>
+          <span><b>Iemand thuis die knopen mag doorhakken</b><span>De maten en de precieze plaats spreken we ter plekke met je af. Wat we samen besluiten, ligt daarna vast.</span></span>
         </li>
       </ul>
     </div>
@@ -354,8 +354,8 @@
       <h2 class="titel">Hoe zo'n bezoek gaat</h2>
       <ol class="stappen">
         <li><span><b>We bellen aan en stellen ons voor</b><span>Je weet meteen wie er voor de deur staat en wat we komen doen.</span></span></li>
-        <li><span><b>Samen langs het werk</b><span>We lopen met je langs wat er moet gebeuren, meten na en overleggen de precieze plek en maten.</span></span></li>
-        <li><span><b>Aan de slag</b><span>Bij een inmeetafspraak meten we alles op en nemen we de mogelijkheden met je door. Bij een montage bevestigen, plaatsen en stellen we af, tot alles hangt en werkt.</span></span></li>
+        <li><span><b>Samen langs het werk</b><span>We lopen met je langs wat er moet gebeuren en bespreken hoe we het aanpakken.</span></span></li>
+        <li><span><b>Aan de slag</b><span>Bij een inmeetafspraak meten we alles op en nemen we de mogelijkheden met je door. Bij een montage hangen we alles op en stellen we het af, tot het werkt zoals het hoort.</span></span></li>
         <li><span><b>Netjes achterlaten</b><span>Boorstof zuigen we weg en verpakkingsmateriaal gaat mee terug in de bus.</span></span></li>
       </ol>
     </div>
@@ -393,10 +393,10 @@
     <div class="kaart__body">
       {% if job.finished_at %}
         <h2 class="titel">Bedankt voor je vertrouwen</h2>
-        <p>De afspraak is afgerond op {{ job.finished_at | datetime }}. Je hoort van ons wat er verder gebeurt, of dat nu een offerte of een factuur is. Klopt er iets niet, of heb je nog een vraag? Stuur ons een WhatsApp, dan lossen we het op.</p>
+        <p>Bedankt dat we langs mochten komen. Je hoort van ons wat er verder gebeurt, of dat nu een offerte of een factuur is. Klopt er iets niet, of heb je nog een vraag? Stuur ons een WhatsApp, dan lossen we het op.</p>
       {% else %}
         <h2 class="titel">Als we klaar zijn</h2>
-        <p>Voordat we weggaan nemen we samen door wat er is gebeurd. Kwamen we inmeten, dan hoor je van ons wanneer de offerte klaarstaat. Kwamen we monteren, dan doen we de bediening voor en teken je digitaal af, de factuur volgt per mail.</p>
+        <p>Voordat we weggaan nemen we samen door wat er is gebeurd. Kwamen we inmeten, dan hoor je van ons wanneer de offerte klaarstaat. Kwamen we monteren, dan doen we de bediening voor en teken je digitaal af. De factuur volgt per mail.</p>
         <p>Twijfel je later ergens over? Stuur ons een WhatsApp, dan helpen we je er zo doorheen.</p>
       {% endif %}
       <p style="margin-top:15px; margin-bottom:-2px; font-size:13.5px; color:var(--ink-faint)">Waar je op kunt rekenen bij alles wat we plaatsen:</p>

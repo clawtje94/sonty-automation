@@ -7,6 +7,7 @@ const fs = require('fs'), path = require('path'), cp = require('child_process');
 const { Liquid } = require('liquidjs');
 
 const STAND = process.env.STAND || 'onderweg';
+const SOORT = process.env.SOORT || 'montage';   // montage | inmeten | onbekend
 const bron = path.join(__dirname, '..', 'templates', 'planado-tracking-sonty.html');
 const uit = process.argv[2] || path.join(__dirname, '..', 'screenshots', 'tracking-preview.html');
 
@@ -22,6 +23,7 @@ engine.registerFilter('map', (v, dest) =>
 const ctx = {
   style_variables: '',
   job: {
+    template_name: SOORT === 'montage' ? 'Montage afspraak particulier' : SOORT === 'inmeten' ? 'Inmeten particulier' : '',
     serial_no: '5533',
     scheduled_at: 'donderdag 20 augustus, 09:00 – 12:00',
     scheduled_duration: '2 uur',

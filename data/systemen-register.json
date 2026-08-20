@@ -528,6 +528,14 @@
       "maxUur": 30,
       "ks": false,
       "keten": "inmeten"
+    },
+    "nl.sonty.montage-voorstellen": {
+      "naam": "Montage-voorstellen planning-sheet",
+      "functie": "Vult dagelijks kolommen S-V (AI voorstel: datum/tijd, duur, bus) voor complete, ongeplande orders vanaf rij 1142. Leest alleen de agenda, schrijft nooit in Outlook.",
+      "groep": "Planning",
+      "ritme": "dagelijks 07:10",
+      "log": "montage-voorstellen.log",
+      "maxUur": 30
     }
   }
 }

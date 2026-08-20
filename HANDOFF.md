@@ -2047,3 +2047,11 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 - Reserve-route: dm-uit-vlag data/wa-dm-uit.txt; collega-antwoorden gaan dan naar data/wa-desktop-queue/ en worden door scripts/wa-desktop-queue.js (launchd elke 5 min) via WhatsApp DESKTOP verstuurd zodra scherm ontgrendeld + 2,5 min idle (wa-stuur.jxa.js, doel = contactnaam: Daimy Boot/Joey Engelen/Sjoerd).
 - Zelfherstel in daemon: bezorg-acks bewaakt (messages.update); status 0 op een direct antwoord -> vlag automatisch aan + via reserve; dagelijkse probe (na 08:15) aan Daimy -> ack status 3 = vlag eraf + melding "directe route werkt weer".
 - LES: 1-op-1-bezorging ALTIJD via ack-status verifieren, "verstuurd" zonder ack zegt niks.
+
+## 20-08 avond: Planado-opdrachten compleet gemaakt (852/855, omschrijving, adres)
+- #852 (naamloos "Montage Sonty"-blok, morgen Mick): stond nog op eventtijd 07:00 want naam-matching kon niks; sync heeft nu TWEEDE koppelstap: naamloze blokken matchen op staff-mail (event-attendee = Bookings-staffmail) binnen het eventvenster, alleen bij precies 1 kandidaat. #852 nu 08:00 NL, plus Marvin 09-09 ook gefixt.
+- Omschrijvingen: Planado negeert description/contacts in POST met template -> na-PATCH bij aanmaak; eenmalige backfill (scratchpad/backfill-teamjobs.js) heeft ALLE 119 toekomstige team-opdrachten de Outlook-kern gegeven (onderwerp + klantnaam + reserveringsgegevens uit de body, boilerplate eruit, Gripp-blok behouden).
+- Adressen (Daimy: "hard adres, geen coordinaten"): sync zet adres altijd als tekst (event-Location, anders Bookings-locatie, alleen mits er een cijfer/huisnummer in zit). Eindstand: 100 klantopdrachten met echt straatadres, 19 zonder (interne magazijn/vrij-blokken of nergens adresdata); 10 onzin-adressen ("Niets plannen", "Tygo magazijn", plaats-zonder-straat) geschoond naar leeg. 0 coordinaten aangetroffen.
+- Tel-normalisatie: Bookings levert "106 22750496" (verdwaalde 1 voor 06) -> normTel in sync + backfill, contacten staan als 06/+316.
+- LES: Planado LIST-endpoint geeft GEEN address terug, alleen het detail-endpoint — nooit op de lijst concluderen dat adressen leeg zijn.
+- Noodrem data/outlook-schrijf-uit staat NOG AAN (wacht op Daimy). Sync gepusht (34e362f).

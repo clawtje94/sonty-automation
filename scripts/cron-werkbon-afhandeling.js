@@ -21,7 +21,8 @@ const BUSSEN = {
   '1f122cfa-4eba': 'Nanny',
 };
 const VELDEN = ['Werk gereed', 'Waarom niet gereed', 'Wie heeft deze fout gemaakt',
-  'Wat is er nodig om te herstellen', 'Welke kleur', 'producten bij de klant', 'Hoeveel uur'];
+  'Wat is er nodig om te herstellen', 'Welke kleur', 'producten bij de klant', 'Hoeveel uur',
+  'Uitleg voor de volgende service-afspraak', 'Foto NIET-GEREED'];
 
 const laadState = () => { try { return JSON.parse(fs.readFileSync(STATE_PAD, 'utf8')); } catch { return { vanaf: new Date().toISOString(), verwerkt: {} }; } };
 
@@ -118,6 +119,8 @@ const jaNee = (v) => v === true || /^(ja|yes|true|1)$/i.test(String(v ?? '').tri
         `Welke kleur: ${rapport['Welke kleur'] ?? '-'}`,
         `Producten bij de klant gebleven: ${jaNee(rapport['producten bij de klant']) ? 'ja' : 'nee'}`,
         `Uren nodig voor herstel: ${rapport['Hoeveel uur'] ?? '-'}`,
+        `Uitleg voor de volgende service-afspraak: ${rapport['Uitleg voor de volgende service-afspraak'] ?? '-'}`,
+        `Foto van de niet-gerede situatie: ${rapport['Foto NIET-GEREED'] ? 'toegevoegd — zie het rapport van opdracht #' + job.serial_no + ' in Planado' : 'niet toegevoegd'}`,
       ].filter((x) => x !== null).join('\n');
       const ok = await mailWerkbon(`Werkbon NIET GEREED — #${job.serial_no} ${kop}`, regels);
       await planningTelegram(`⚠️ NIET GEREED: #${job.serial_no} ${kop} (${busNaam}). Werkbon ${ok ? 'gemaild naar werkbonnen@sonty.nl' : 'MAILEN MISLUKT — handmatig doorsturen'}.\nReden: ${rapport['Waarom niet gereed'] ?? '-'}`);

@@ -4,7 +4,8 @@
 // data/ad-spend.json. Bronnen, in volgorde van voorkeur:
 //   1. data/ad-spend-handmatig.json  — handmatig/geparste rapporten {"2026-07":{"Meta":123,"Google":456}}
 //   2. De tab "conversie %" in het offerteregister (kolom kosten; mrt-mei 2025 staat er al)
-//   3. (zodra Meta het Creditcard-account openzet of er een system-user-token is: API-collector)
+//   3. data/ad-spend-meta-api.json    — Meta Marketing API (scripts/meta-ads-api.js, sinds 20-08-2026);
+//                                        wint voor Meta van alle andere bronnen (completer dan CSV)
 // Alles wat ontbreekt blijft eerlijk leeg — het dashboard toont dan "geen kostendata".
 const fs = require('fs');
 const path = require('path');
@@ -44,6 +45,15 @@ const geld = s => { const n = parseFloat(String(s||'').replace(/[€\s.]/g,'').r
     for (const [m, v] of Object.entries(h)) {
       if (m.startsWith('_')) continue;
       spend[m] = { ...(spend[m]||{}), ...v, bron: ((spend[m]||{}).bron ? spend[m].bron + ' + ' : '') + 'handmatig' };
+    }
+  }
+  // 3. Meta API-totalen winnen voor Meta (Google blijft uit handmatig/sheet tot de Google-API er is)
+  const API = path.join(__dirname, '..', 'data', 'ad-spend-meta-api.json');
+  if (fs.existsSync(API)) {
+    const a = JSON.parse(fs.readFileSync(API,'utf8'));
+    for (const [m, v] of Object.entries(a)) {
+      if (m.startsWith('_') || typeof v !== 'number') continue;
+      spend[m] = { ...(spend[m]||{}), Meta: v, bron: ((spend[m]||{}).bron ? spend[m].bron + ' + ' : '') + 'Meta API' };
     }
   }
   fs.writeFileSync(UIT, JSON.stringify(spend, null, 1));

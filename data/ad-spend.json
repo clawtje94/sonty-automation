@@ -1,52 +1,92 @@
 {
  "2025-03": {
-  "bron": "sheet conversie %",
-  "Meta": 19800,
+  "bron": "sheet conversie % + Meta API",
+  "Meta": 19884.12,
   "Google": 6300
  },
  "2025-04": {
-  "bron": "sheet conversie %",
-  "Meta": 22000,
+  "bron": "sheet conversie % + Meta API",
+  "Meta": 22147.19,
   "Google": 10300
  },
  "2025-05": {
-  "bron": "sheet conversie %",
-  "Meta": 23700,
+  "bron": "sheet conversie % + Meta API",
+  "Meta": 23689.66,
   "Google": 17100
  },
  "2026-04": {
   "Meta": 24025.71,
   "Google": 31543.48,
-  "bron": "handmatig"
+  "bron": "handmatig + Meta API"
  },
  "2026-02": {
   "Meta": 21334.29,
   "Google": 17861.52,
-  "bron": "handmatig"
+  "bron": "handmatig + Meta API"
  },
  "2026-05": {
   "Meta": 25419.08,
   "Google": 36766.62,
-  "bron": "handmatig"
+  "bron": "handmatig + Meta API"
  },
  "2026-03": {
   "Meta": 29019.83,
   "Google": 26258.07,
-  "bron": "handmatig"
+  "bron": "handmatig + Meta API"
  },
  "2026-01": {
   "Meta": 19283.91,
   "Google": 15043.62,
-  "bron": "handmatig"
+  "bron": "handmatig + Meta API"
  },
  "2026-07": {
-  "Meta": 25440.68,
+  "Meta": 25821.49,
   "Google": 37597.8,
-  "bron": "handmatig"
+  "bron": "handmatig + Meta API"
  },
  "2026-06": {
   "Meta": 25217.63,
   "Google": 36807.54,
-  "bron": "handmatig"
+  "bron": "handmatig + Meta API"
+ },
+ "2025-01": {
+  "Meta": 9877.6,
+  "bron": "Meta API"
+ },
+ "2025-02": {
+  "Meta": 14936.03,
+  "bron": "Meta API"
+ },
+ "2025-06": {
+  "Meta": 23727.6,
+  "bron": "Meta API"
+ },
+ "2025-07": {
+  "Meta": 25045.97,
+  "bron": "Meta API"
+ },
+ "2025-08": {
+  "Meta": 23976.49,
+  "bron": "Meta API"
+ },
+ "2025-09": {
+  "Meta": 19778.03,
+  "bron": "Meta API"
+ },
+ "2025-10": {
+  "Meta": 14651.41,
+  "bron": "Meta API"
+ },
+ "2025-11": {
+  "Meta": 14562.07,
+  "bron": "Meta API"
+ },
+ "2025-12": {
+  "Meta": 17314.64,
+  "bron": "Meta API"
+ },
+ "2026-08": {
+  "Meta": 15104.8,
+  "bron": "Meta API"
  }
 }

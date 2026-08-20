@@ -96,6 +96,7 @@ for (const [plat, bestand] of Object.entries(BRONNEN)) {
         for (const b of buckets) { const c = per[`${plat}|${maand}|${b}`]; if (c) { st2.off += c.off; st2.akk += c.akk; st2.omzet += c.omzet; st2.marge += c.marge; } } }
       const netto = st2 ? st2.marge / EX - st2.akk * lastenPerOrder(maand) - v.spend : null;
       (uit[maand] = uit[maand] || []).push({ platform: plat, campagne: naam, spend: v.spend,
+        kliks: v.kliks ?? null, metaLeads: v.leads ?? null, cpl: v.cpl ?? null,
         offertes: st2 ? st2.off : null, akkoorden: st2 ? st2.akk : null,
         omzet: st2 ? +st2.omzet.toFixed(0) : null, marge: st2 ? +st2.marge.toFixed(0) : null,
         netto: netto !== null ? +netto.toFixed(0) : null,

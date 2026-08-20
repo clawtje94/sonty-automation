@@ -95,7 +95,9 @@ function jaarBlok(jaar) {
         const c = d.maandGroep[mnd + '|' + pf] || { off: 0, akk: 0 };
         const perOff = c.off ? kost / c.off : null;
         const perOrd = c.akk ? kost / c.akk : null;
-        const oordeel = perOrd === null ? '—' : perOrd < BREAK_EVEN[0] ? '<b class="goed">winstgevend</b>' : perOrd <= BREAK_EVEN[1] ? 'krap (rond break-even)' : '<b class="slecht">VERLIES</b>';
+        // Lopende maand (Meta API levert t/m vandaag): nog geen oordeel, orders rijpen na.
+        const loopt = m === new Date().toISOString().slice(0, 7);
+        const oordeel = loopt ? '<span class="melding">loopt nog (t/m vandaag)</span>' : perOrd === null ? '—' : perOrd < BREAK_EVEN[0] ? '<b class="goed">winstgevend</b>' : perOrd <= BREAK_EVEN[1] ? 'krap (rond break-even)' : '<b class="slecht">VERLIES</b>';
         H.push(`<tr><th>${MND[mnd]}</th><td style="text-align:left">${pf}</td><td>&euro;${Math.round(kost).toLocaleString('nl-NL')}</td><td>${c.off}</td><td>${perOff ? '&euro;' + Math.round(perOff) : '—'}</td><td>${c.akk}</td><td>${perOrd ? '&euro;' + Math.round(perOrd) : '—'}</td><td>${oordeel}</td></tr>`);
       }
     }

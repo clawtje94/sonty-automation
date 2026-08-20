@@ -11,6 +11,8 @@ VORIG=$((JAAR-1))
 /opt/homebrew/bin/node scripts/maak-conversie-tabellen.js --jaar $VORIG
 /opt/homebrew/bin/node scripts/lasten-import.js
 python3 scripts/meta-campagne-import.py
+# Meta API (20-08-2026) overschrijft de CSV-maanden die hij kan leveren; faalt de API, dan blijft de CSV-stand staan.
+/opt/homebrew/bin/node scripts/meta-ads-api.js || echo "meta-ads-api mislukt, CSV-stand blijft staan"
 /opt/homebrew/bin/node scripts/campagne-rendement.js
 /opt/homebrew/bin/node scripts/landing-analyse.js
 /opt/homebrew/bin/node scripts/ad-spend.js

@@ -149,7 +149,7 @@ function eersteSlot(busNaam, duurMin, agenda, rooster, bezetExtra, evenWeekWoens
   const perGripp = {};
   rows.forEach((row, i) => {
     const nr = String(row[4] || '').trim();
-    if (nr) (perGripp[nr] = perGripp[nr] || []).push({ rij: i + 1, geleverd: !!String(row[11] || '').trim(), gepland: !!String(row[12] || '').trim(), wat: row[15] || '' });
+    if (nr) (perGripp[nr] = perGripp[nr] || []).push({ rij: i + 1, B: row[1] || '', gepland: !!String(row[12] || '').trim(), wat: row[15] || '' });
   });
 
   const vandaag = nl(new Date(), { day: '2-digit', month: '2-digit' });
@@ -169,9 +169,13 @@ function eersteSlot(busNaam, duurMin, agenda, rooster, bezetExtra, evenWeekWoens
     if (behandeld.has(sleutel)) continue;
     behandeld.add(sleutel);
 
-    // compleetheid: alle regels van dit Gripp-nummer geleverd
-    const groep = gripNr ? perGripp[gripNr] : [{ rij: i + 1, geleverd: !!String(row[11] || '').trim(), gepland: false, wat: row[15] || '' }];
-    if (!groep.every((g) => g.geleverd)) { overgeslagen++; continue; }
+    // COMPLEETHEID = kolom B "Ai opmerking" zegt compleet (Daimy 20-08: "je kan
+    // in ai opmerking zien of iets compleet is" — de mail-daemon zet dat woord
+    // pas als álle leveringen van de order binnen zijn). Gripp-groepering bleek
+    // niet betrouwbaar (deelleveringen op aparte rijen zonder nummer).
+    const groep = gripNr ? perGripp[gripNr] : [{ rij: i + 1, B: row[1] || '', gepland: false, wat: row[15] || '' }];
+    const compleet = groep.some((g) => /compleet/i.test(String(g.B || '')) && !/niet\s*compleet|incompleet/i.test(String(g.B || '')));
+    if (!compleet) { overgeslagen++; continue; }
     const teplannen = groep.filter((g) => !g.gepland && g.rij >= VANAF_RIJ);
     if (!teplannen.length) continue;
 
@@ -200,8 +204,21 @@ function eersteSlot(busNaam, duurMin, agenda, rooster, bezetExtra, evenWeekWoens
     voorstellen++;
   }
 
+  // ZELF-OPRUIMEND: een eerder AI-voorstel op een rij die nu niet meer
+  // kwalificeert (M ingevuld, of toch niet compleet) wordt leeggemaakt —
+  // alleen onze eigen S-markering wordt ooit aangeraakt.
+  const geraakt = new Set(updates.map((u) => Number((u.range.match(/S(\d+)/) || [])[1])));
+  let opgeruimd = 0;
+  rows.forEach((row, i) => {
+    const rij = i + 1;
+    if (rij < VANAF_RIJ || geraakt.has(rij)) return;
+    if (String(row[18] || '').startsWith('AI voorstel')) {
+      updates.push({ range: `'${TAB}'!S${rij}:V${rij}`, values: [['', '', '', '']] });
+      opgeruimd++;
+    }
+  });
   for (let i = 0; i < updates.length; i += 80) {
     await sheets.spreadsheets.values.batchUpdate({ spreadsheetId: SHEET, requestBody: { valueInputOption: 'RAW', data: updates.slice(i, i + 80) } });
   }
-  console.log(`[${new Date().toISOString()}] montage-voorstellen: ${voorstellen} order(s) voorgesteld (${updates.length} rijen), ${overgeslagen} niet compleet — overgeslagen`);
+  console.log(`[${new Date().toISOString()}] montage-voorstellen: ${voorstellen} order(s) voorgesteld, ${opgeruimd} oud voorstel opgeruimd, ${overgeslagen} niet compleet — overgeslagen`);
 })().catch((e) => { console.error('FOUT:', e.message); process.exit(1); });

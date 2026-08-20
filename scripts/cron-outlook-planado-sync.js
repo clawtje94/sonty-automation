@@ -128,6 +128,44 @@ function soort(subject) {
 // Alles wat een bus rijdt telt als team-klus voor de montage-sync.
 const TEAM_SOORTEN = new Set(['montage', 'service', 'stoffering']);
 
+// ── Bookings: de ECHTE klanttijden (Daimy 20-08: Bookings-buffertijd zit mee in
+// het Outlook-event, waardoor opdrachten een uur te vroeg in Planado kwamen).
+// De afspraak in Bookings heeft de tijd zoals de klant hem kent; het Outlook-blok
+// is die tijd plus buffer. We matchen op klantnaam + venster en gebruiken dan de
+// Bookings-tijd; geen match (handmatig kaal blok) = terugvallen op de event-tijd.
+async function bookingsAfspraken(vanISO, totISO) {
+  try {
+    // via de bewezen bookings-api-module (eigen token-verversing mét
+    // wachtwoord-terugval) in vensters van 14 dagen
+    const b = require(path.join(__dirname, 'bookings-api.js'));
+    const uit = [];
+    let van = new Date(vanISO);
+    const tot = new Date(totISO);
+    while (van < tot) {
+      const stuk = new Date(Math.min(+van + 14 * 86400000, +tot));
+      const l = await b.afspraken('SontyMontage1@sontymontage.nl', { start: van.toISOString(), end: stuk.toISOString() });
+      uit.push(...(Array.isArray(l) ? l : []));
+      van = stuk;
+    }
+    // Graph geeft 7 decimalen ('.0000000') — Date.parse kan dat niet aan, dus strippen.
+    const p = (dt) => Date.parse(String(dt || '').replace(/\.\d+/, '').replace(/Z?$/, 'Z'));
+    return uit.map((a) => ({
+      klant: String(a.klant || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(),
+      start: p(a.start),
+      eind: p(a.eind),
+    })).filter((a) => a.klant && a.start && a.eind);
+  } catch (e) { console.log('  LET OP bookings-tijden niet beschikbaar (' + e.message.slice(0, 60) + ') — event-tijden gebruikt'); return []; }
+}
+function echteTijd(bookAppts, e) {
+  const evStart = Date.parse(new Date(e.Start.DateTime + 'Z'));
+  const evEind = Date.parse(new Date(e.End.DateTime + 'Z'));
+  const onderwerp = String(e.Subject || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ');
+  // afspraak waarvan de klantnaam in het onderwerp zit en die binnen het blok valt
+  const hit = bookAppts.find((a) => a.klant.length >= 4 && onderwerp.includes(a.klant)
+    && a.start >= evStart && a.eind <= evEind && (a.start !== evStart || a.eind !== evEind));
+  return hit || null;
+}
+
 // ── Planado ──
 const PH = { Authorization: 'Bearer ' + PLANADO_KEY, 'Content-Type': 'application/json', 'X-Planado-Notify-Assignees': 'false' };
 async function planadoJobs() {
@@ -202,12 +240,20 @@ async function main() {
     .filter((j) => !(j.external_id || '').startsWith('ol-'))
     .map((j) => `${Date.parse(j.scheduled_at)}|${j.assignee?.worker_uuid}`));
 
+  // echte klanttijden uit Bookings voor het hele venster (één keer per run)
+  const totB = new Date(); totB.setDate(totB.getDate() + 100);
+  const bookAppts = await bookingsAfspraken(new Date().toISOString(), totB.toISOString());
+  console.log(`  bookings-tijden geladen: ${bookAppts.length} afspraken`);
+
   let nieuw = 0, bijgewerkt = 0, overgeslagen = 0, fouten = 0;
   const actieveExtIds = new Set();
 
   for (const { e, voornaam } of items) {
-    const startISO = new Date(e.Start.DateTime + 'Z').toISOString();
-    const eindISO = new Date(e.End.DateTime + 'Z').toISOString();
+    // Bookings-tijd wint van de event-tijd: het event bevat de buffer, de
+    // afspraak de echte klanttijd (Daimy 20-08).
+    const echt = echteTijd(bookAppts, e);
+    const startISO = echt ? new Date(echt.start).toISOString() : new Date(e.Start.DateTime + 'Z').toISOString();
+    const eindISO = echt ? new Date(echt.eind).toISOString() : new Date(e.End.DateTime + 'Z').toISOString();
     const minuten = Math.max(15, Math.round((Date.parse(eindISO) - Date.parse(startISO)) / 60000));
     const extId = 'ol-' + crypto.createHash('sha1').update(e.Id).digest('hex').slice(0, 20);
     actieveExtIds.add(extId);

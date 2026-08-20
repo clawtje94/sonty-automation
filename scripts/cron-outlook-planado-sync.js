@@ -244,6 +244,12 @@ async function main() {
   const totB = new Date(); totB.setDate(totB.getDate() + 100);
   const bookAppts = await bookingsAfspraken(new Date().toISOString(), totB.toISOString());
   console.log(`  bookings-tijden geladen: ${bookAppts.length} afspraken`);
+  // GUARD (20-08, #852): zonder Bookings-tijden zou de sync teamopdrachten op de
+  // gebufferde bloktijd aanmaken én eerder gecorrigeerde tijden TERUGdraaien.
+  // Dus: lader leeg → deze ronde geen tijd-wijzigingen en geen nieuwe team-
+  // opdrachten; de volgende ronde (10 min later) haalt het in.
+  const bookingsOk = bookAppts.length > 0;
+  if (!bookingsOk) console.log('  LET OP: geen bookings-tijden — teamopdrachten en tijd-updates overgeslagen deze ronde');
 
   let nieuw = 0, bijgewerkt = 0, overgeslagen = 0, fouten = 0;
   const actieveExtIds = new Set();
@@ -271,13 +277,16 @@ async function main() {
       const hoortBij = INMETERS[voornaam] || MONTEURS[voornaam] || null;
       const staatOp = bestaand.assignee?.worker_uuid || null;
       const anderTeam = hoortBij && staatOp && hoortBij !== staatOp;
-      if (Date.parse(bestaand.scheduled_at) !== Date.parse(startISO) || (duurNu && duurNu !== minuten) || anderTeam) {
+      // tijd-updates alleen mét geladen Bookings-tijden (guard #852): anders zou
+      // een storing gecorrigeerde tijden terugzetten naar de gebufferde bloktijd
+      const tijdAnders = bookingsOk && (Date.parse(bestaand.scheduled_at) !== Date.parse(startISO) || (duurNu && duurNu !== minuten));
+      if (tijdAnders || anderTeam) {
         console.log(`  ~ ${voornaam} ${startISO.slice(0, 16)} ${e.Subject?.slice(0, 30)} (${anderTeam ? 'toewijzing' : 'tijd'} gewijzigd)`);
         if (EXECUTE) {
           const det = await (await fetch(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`, { headers: PH })).json();
           const r = await fetch(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`, {
             method: 'PATCH', headers: PH,
-            body: JSON.stringify({ version: (det.job || det).version, scheduled_at: startISO, scheduled_duration: { minutes: minuten }, ...(anderTeam ? { assignee: { worker: { uuid: hoortBij } } } : {}) }),
+            body: JSON.stringify({ version: (det.job || det).version, ...(tijdAnders ? { scheduled_at: startISO, scheduled_duration: { minutes: minuten } } : {}), ...(anderTeam ? { assignee: { worker: { uuid: hoortBij } } } : {}) }),
           });
           r.ok ? bijgewerkt++ : fouten++;
           await wacht(2600);
@@ -295,6 +304,9 @@ async function main() {
       let grippBlok = '';
       let klantMatch = null; // ook nodig voor de sheet-koppeling hieronder
       const isMontage = TEAM_SOORTEN.has(soort(e.Subject));
+      // guard #852: teamopdrachten alleen aanmaken als de Bookings-tijden geladen
+      // zijn — anders krijgt de opdracht de gebufferde bloktijd (uur te vroeg)
+      if (isMontage && !bookingsOk) { overgeslagen++; continue; }
       if (soort(e.Subject) === 'inmeet' || isMontage) {
         try {
           const match = await zoekKlant(adres, telefoonUit(e.Body));
@@ -337,6 +349,11 @@ async function main() {
             const det = await (await fetch(`https://api.planadoapp.com/v2/jobs/${uuid}`, { headers: PH })).json();
             const huidig = det.job || det;
             const naPatch = { version: huidig.version };
+            // Planado NEGEERT description en contacts in de POST wanneer er een
+            // template meegaat (Daimy 20-08: "in de opdracht staat 0 informatie";
+            // zelfde les als de testopdracht van vanmiddag) — dus alsnog via PATCH.
+            if (!huidig.description) naPatch.description = `${e.Subject || 'Afspraak'}\n(gesynct uit Outlook)${grippBlok}`;
+            if (tel && !(huidig.contacts || []).length) naPatch.contacts = [{ type: 'phone', name: klantNaamUit(e.Subject), value: tel }];
             // Meetbon als tikbaar linkveld in de details (Daimy 05-08)
             const nr = (grippBlok.match(/Gripp: (\d+)/) || [])[1];
             if (nr) {

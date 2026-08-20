@@ -279,7 +279,7 @@
       <img src="https://sonty-website.vercel.app/images/portfolio/werk/wa-0957.webp" alt="De grijze bus van Sonty met ladders op het dak" onerror="this.style.display='none'">
       <div class="strip__tekst">
         <b>Hier let je op</b>
-        <span>Deze bus komt straks de straat in. {{ worker.name }} belt je zodra hij er bijna is, en heeft alles al ingeladen.</span>
+        <span>Deze bus komt straks de straat in. {{ worker.name }} belt je zodra hij er bijna is.</span>
       </div>
     </div>
   </section>
@@ -309,7 +309,7 @@
   {% if worker %}
   <section class="kaart op">
     <div class="kaart__body">
-      <h2 class="kop">Je monteur</h2>
+      <h2 class="kop">Wie er langskomt</h2>
       <div class="monteur">
         <div class="avatar" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
@@ -318,7 +318,7 @@
         </div>
         <div>
           <div class="monteur__naam">{{ worker.name }}</div>
-          <div class="monteur__rol">Je vaste monteur voor deze afspraak</div>
+          <div class="monteur__rol">Je aanspreekpunt voor deze afspraak</div>
         </div>
       </div>
     </div>
@@ -333,19 +333,15 @@
       <ul class="checks">
         <li>
           <span class="vink"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>
-          <span><b>Parkeerplek dicht bij de gevel</b><span>De bus is 6 meter lang en het materiaal moet er zo uit gedragen worden.</span></span>
+          <span><b>Parkeerplek dicht bij de gevel</b><span>De bus is 6 meter lang, en bij een montage moet het materiaal er zo uit gedragen worden.</span></span>
         </li>
         <li>
           <span class="vink"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>
-          <span><b>Werkruimte vrij op de plek waar we werken</b><span>Meubels, planten en spullen bij de ramen of tegen de gevel even opzij, dan kunnen we er goed bij.</span></span>
+          <span><b>Ruimte vrij bij de ramen of de gevel</b><span>Meubels, planten en spullen even opzij, dan kunnen we er goed bij met de ladder en het meetgereedschap.</span></span>
         </li>
         <li>
           <span class="vink"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>
-          <span><b>Een stopcontact in de buurt</b><span>Voor het gereedschap, en voor elektra die aangesloten moet worden.</span></span>
-        </li>
-        <li>
-          <span class="vink"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>
-          <span><b>Iemand thuis die beslissingen mag nemen</b><span>We overleggen de precieze plek voordat we gaan boren. Dat ligt daarna vast.</span></span>
+          <span><b>Iemand thuis die knopen mag doorhakken</b><span>We overleggen ter plekke over maten en plek. Wat we samen afspreken, ligt daarna vast.</span></span>
         </li>
       </ul>
     </div>
@@ -355,13 +351,12 @@
   <section class="kaart op">
     <img class="product__foto" src="https://sonty-website.vercel.app/images/eigen/montage-afstellen.webp" alt="Monteur van Sonty schroeft een bevestiging vast aan de gevel" onerror="this.style.display='none'">
     <div class="kaart__body">
-      <h2 class="titel">Zo gaan we te werk</h2>
+      <h2 class="titel">Hoe zo'n bezoek gaat</h2>
       <ol class="stappen">
-        <li><span><b>Opmeten en aftekenen</b><span>Samen met jou de precieze plek bepalen, dan uitlijnen en aftekenen.</span></span></li>
-        <li><span><b>Bevestiging aanbrengen</b><span>Boren, verankeren waar dat nodig is, en alles waterpas zetten.</span></span></li>
-        <li><span><b>Plaatsen</b><span>Het product ophangen of inzetten, vastzetten en waar nodig de motor aansluiten.</span></span></li>
-        <li><span><b>Afstellen en testen</b><span>Eindstanden instellen, bediening koppelen en een paar keer proefdraaien.</span></span></li>
-        <li><span><b>Opruimen</b><span>Boorstof wegzuigen en het verpakkingsmateriaal gaat mee terug in de bus.</span></span></li>
+        <li><span><b>We bellen aan en stellen ons voor</b><span>Je weet meteen wie er voor de deur staat en wat we komen doen.</span></span></li>
+        <li><span><b>Samen langs het werk</b><span>We lopen met je langs wat er moet gebeuren, meten na en overleggen de precieze plek en maten.</span></span></li>
+        <li><span><b>Aan de slag</b><span>Inmeten, monteren of afstellen, net wat er die dag nodig is. We werken door tot het af is.</span></span></li>
+        <li><span><b>Netjes achterlaten</b><span>Boorstof zuigen we weg en verpakkingsmateriaal gaat mee terug in de bus.</span></span></li>
       </ol>
     </div>
   </section>
@@ -379,7 +374,7 @@
             <path d="M17 10h1.6a2.4 2.4 0 0 1 0 4.8H17"/>
             <path d="M8 3v2.5M11.5 3v2.5"/>
           </svg>
-          <span><b>Koffie</b><span>Onze monteurs draaien erop. Thee of een glas water mag ook. We vragen er nooit om, maar we hebben ook nog nooit nee gezegd.</span></span>
+          <span><b>Koffie</b><span>Onze mensen draaien erop. Thee of een glas water mag ook. We vragen er nooit om, maar we hebben ook nog nooit nee gezegd.</span></span>
         </li>
         <li>
           <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -398,12 +393,13 @@
     <div class="kaart__body">
       {% if job.finished_at %}
         <h2 class="titel">Bedankt voor je vertrouwen</h2>
-        <p>Het werk is afgerond op {{ job.finished_at | datetime }}. De factuur ontvang je per mail. Klopt er iets niet of heb je nog een vraag over de bediening? Stuur ons een WhatsApp, dan lossen we het op.</p>
+        <p>De afspraak is afgerond op {{ job.finished_at | datetime }}. Je hoort van ons wat er verder gebeurt, of dat nu een offerte of een factuur is. Klopt er iets niet, of heb je nog een vraag? Stuur ons een WhatsApp, dan lossen we het op.</p>
       {% else %}
-        <h2 class="titel">En daarna</h2>
-        <p>Voordat we weggaan doen we de bediening voor en leggen we uit waar je op moet letten in het gebruik. Je tekent digitaal af en de factuur volgt per mail.</p>
-        <p>Twijfel je later over de bediening of het onderhoud? Stuur ons een WhatsApp, dan helpen we je er zo doorheen.</p>
+        <h2 class="titel">Als we klaar zijn</h2>
+        <p>Voordat we weggaan nemen we samen door wat er is gebeurd en wat de volgende stap is. Kwamen we monteren, dan doen we de bediening voor en teken je digitaal af. Kwamen we inmeten, dan hoor je van ons wanneer de offerte klaarstaat.</p>
+        <p>Twijfel je later ergens over? Stuur ons een WhatsApp, dan helpen we je er zo doorheen.</p>
       {% endif %}
+      <p style="margin-top:15px; margin-bottom:-2px; font-size:13.5px; color:var(--ink-faint)">Waar je op kunt rekenen bij alles wat we plaatsen:</p>
       <div class="garantie">
         <div><b>3 jaar</b><span>op de montage</span></div>
         <div><b>5 jaar</b><span>op het product</span></div>

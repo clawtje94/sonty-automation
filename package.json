@@ -27,6 +27,7 @@
     "@whiskeysockets/baileys": "^6.7.24",
     "baileys": "^7.0.0-rc14",
     "googleapis": "^173.0.0",
+    "liquidjs": "^10.29.0",
     "nodemailer": "^8.0.2",
     "playwright": "^1.58.2",
     "qrcode": "^1.5.4",

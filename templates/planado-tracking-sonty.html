@@ -164,6 +164,15 @@
   ol.stappen b{display:block; font-size:15px; font-weight:600}
   ol.stappen span{display:block; color:var(--ink-soft); font-size:14px; line-height:1.45}
 
+  /* het knipoog-blok */
+  .kaart--knipoog{background:var(--accent-wash); border-color:var(--accent); border-style:dashed}
+  .kaart--knipoog .kop{color:var(--accent)}
+  .knipoog{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px}
+  .knipoog li{display:flex; gap:12px; align-items:flex-start}
+  .knipoog .ic{flex:0 0 auto; width:26px; height:26px; color:var(--accent); margin-top:1px}
+  .knipoog b{display:block; font-size:15.5px; font-weight:700}
+  .knipoog span{display:block; color:var(--ink-soft); font-size:14.5px; line-height:1.5}
+
   /* garantie */
   .garantie{display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:14px}
   .garantie div{
@@ -348,6 +357,31 @@
         <li><span><b>Afstellen en testen</b><span>Eindstanden instellen, bediening koppelen en een paar keer proefdraaien.</span></span></li>
         <li><span><b>Opruimen</b><span>Boorstof wegzuigen en het verpakkingsmateriaal gaat mee terug in de bus.</span></span></li>
       </ol>
+    </div>
+  </section>
+  {% endunless %}
+
+  <!-- MET EEN KNIPOOG -->
+  {% unless job.finished_at %}
+  <section class="kaart kaart--knipoog op">
+    <div class="kaart__body">
+      <h2 class="kop">Twee dingen die echt niet hoeven</h2>
+      <ul class="knipoog">
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 9h13v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V9z"/>
+            <path d="M17 10h1.6a2.4 2.4 0 0 1 0 4.8H17"/>
+            <path d="M8 3v2.5M11.5 3v2.5"/>
+          </svg>
+          <span><b>Koffie</b><span>Onze monteurs draaien erop. Thee of een glas water mag ook. We vragen er nooit om, maar we hebben ook nog nooit nee gezegd.</span></span>
+        </li>
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 20.2S4.5 15.8 4.5 10.4A3.9 3.9 0 0 1 12 8.6a3.9 3.9 0 0 1 7.5 1.8c0 5.4-7.5 9.8-7.5 9.8z"/>
+          </svg>
+          <span><b>Een fooi</b><span>Hoeft nergens voor. Maar als ze netjes hebben gewerkt en alles keurig achterlaten, dan wordt het altijd gewaardeerd. U ziet het meteen aan hun gezicht.</span></span>
+        </li>
+      </ul>
     </div>
   </section>
   {% endunless %}

@@ -44,10 +44,23 @@ const MONTAGE_TEMPLATE = '1f11c802-6613-6d00-9d06-7e73cee772e4';
 // (twee bussen). Daarom hier ALLEEN de eenduidige mappings; de rest wacht op
 // accounts per bus (beslissing Daimy, kost seats).
 const MONTEURS = {
-  Yudi: '1f122f37-76db-68b0-9aad-4269fe2bbe9c',   // Bus Yudi + Nick
-  Nick: '1f122f37-76db-68b0-9aad-4269fe2bbe9c',
-  Kevin: '1f122f72-777f-6e80-8139-6e820cb7b164',  // Bus Kevin + Tygo (hernoemd 16-08)
+  // COMPLEET sinds 20-08: elk team heeft een eigen Planado-busaccount (Daimy's
+  // bus-logins). De sleutel is de VOORNAAM van de Bookings-deelnemer op het
+  // Outlook-event ("Dennis | Sonty" → Dennis, "ZZP 1" → ZZP, "Yudi den Heijer" → Yudi).
+  Dennis: '1f19ca1a-5a2d-66c0-8759-4e9ffeb6d4ca',  // Bus 1 | Frenk & Dennis
+  Frenky: '1f19ca1a-5a2d-66c0-8759-4e9ffeb6d4ca',
+  Frenk: '1f19ca1a-5a2d-66c0-8759-4e9ffeb6d4ca',
+  Mick: '1f122f72-777f-6e80-8139-6e820cb7b164',    // Bus 2 | Tygo & Kevin (was Mick/Tygo)
+  Kevin: '1f122f72-777f-6e80-8139-6e820cb7b164',
   Tygo: '1f122f72-777f-6e80-8139-6e820cb7b164',
+  Yudi: '1f122f37-76db-68b0-9aad-4269fe2bbe9c',    // Bus 3 | Yudi & Nick
+  Nick: '1f122f37-76db-68b0-9aad-4269fe2bbe9c',
+  ZZP: '1f19ca1c-8ecb-6b90-8759-4e9ffeb6d4ca',     // Bus 4 | Marvin & Bart (Bookings-resource "ZZP 1")
+  Bart: '1f19ca1c-8ecb-6b90-8759-4e9ffeb6d4ca',
+  Marvin: '1f19ca1d-fec8-6e40-afc6-3674195d7c3f',  // Bus 5 | Marvin & Moa (Bookings-resource "Marvin")
+  Moa: '1f19ca1d-fec8-6e40-afc6-3674195d7c3f',
+  Arnold: '1f19ca28-ce10-6130-8d3e-1253432d7d62',  // Bus 6 | Arnold Service & Binnenhuis
+  Nanny: '1f122cfa-4eba-6810-9aad-4269fe2bbe9c',   // eigen account (binnenhuis/stoffering)
   Jorren: '1f122da2-8a5b-6c80-9ca9-72f9240343d3',
   Sjoerd: '1f122d19-e43e-6da0-8ffb-661a4ff9bb36',
 };
@@ -107,9 +120,13 @@ function soort(subject) {
   const s = (subject || '').toLowerCase();
   if (/inmeet|inmeten/.test(s)) return 'inmeet';
   if (/montage/.test(s)) return 'montage';
+  if (/service/.test(s)) return 'service';           // service-afspraken mee (Daimy 20-08)
+  if (/stoffering|behangen/.test(s)) return 'stoffering';
   if (/winkel|showroom|telefonisch/.test(s)) return 'winkel';
   return 'default';
 }
+// Alles wat een bus rijdt telt als team-klus voor de montage-sync.
+const TEAM_SOORTEN = new Set(['montage', 'service', 'stoffering']);
 
 // ── Planado ──
 const PH = { Authorization: 'Bearer ' + PLANADO_KEY, 'Content-Type': 'application/json', 'X-Planado-Notify-Assignees': 'false' };
@@ -156,7 +173,7 @@ async function main() {
     .map((e) => ({ e, voornaam: wie(e).split(' ')[0] }))
     .filter((x) => {
       if (INMETERS[x.voornaam]) return true;
-      if (MONTAGE_AAN && soort(x.e.Subject) === 'montage') {
+      if (MONTAGE_AAN && TEAM_SOORTEN.has(soort(x.e.Subject))) {
         if (MONTEURS[x.voornaam]) return true;
         onbekendTeam[x.voornaam || '?'] = (onbekendTeam[x.voornaam || '?'] || 0) + 1;
       }
@@ -225,7 +242,7 @@ async function main() {
       // Voor inmeet-afspraken: Gripp-blok er meteen in (adres eerst, telefoon vangnet).
       let grippBlok = '';
       let klantMatch = null; // ook nodig voor de sheet-koppeling hieronder
-      const isMontage = soort(e.Subject) === 'montage';
+      const isMontage = TEAM_SOORTEN.has(soort(e.Subject));
       if (soort(e.Subject) === 'inmeet' || isMontage) {
         try {
           const match = await zoekKlant(adres, telefoonUit(e.Body));
@@ -241,7 +258,7 @@ async function main() {
         // Planado accepteert type/template alleen als OBJECT bij POST; de platte
         // *_uuid-velden worden stil genegeerd en de app toont dan "Opdracht"
         // (bewezen 06-08 tegen API-docs + testjob; PATCH achteraf werkt NIET).
-        job_type: { uuid: TYPES[soort(e.Subject)] },
+        job_type: { uuid: TYPES[soort(e.Subject)] || TYPES.default },
         description: `${e.Subject || 'Afspraak'}\n(gesynct uit Outlook)${grippBlok}`,
         scheduled_at: startISO,
         scheduled_duration: { minutes: minuten },

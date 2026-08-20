@@ -69,8 +69,9 @@ const nl = (d, opts) => new Date(d).toLocaleString('nl-NL', { timeZone: 'Europe/
 
 /** Eerste blok van `duurMin` in de agenda van deze bus, binnen het eigen rooster.
  *  `bezetExtra` = slots die deze run al aan eerdere rijen zijn voorgesteld. */
-function eersteSlot(busNaam, duurMin, agenda, rooster, bezetExtra, evenWeekWoensdagDicht) {
+function eersteSlot(busNaam, duurMin, agenda, rooster, bezetExtra, evenWeekWoensdagDicht, vanafOverride) {
   const start = new Date(); start.setUTCDate(start.getUTCDate() + 1); start.setUTCHours(0, 0, 0, 0);
+  if (vanafOverride && +vanafOverride > +start) start.setTime(+vanafOverride);
   for (let dag = 0; dag < 30; dag++) {
     const d = new Date(+start + dag * 86400000);
     const dagNamen = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
@@ -187,7 +188,12 @@ function eersteSlot(busNaam, duurMin, agenda, rooster, bezetExtra, evenWeekWoens
     for (const busNaam of Object.keys(perBus)) {
       const info = perBus[busNaam];
       const evenDicht = busNaam === 'Yudi / Nick';   // even weken: woensdag geen Yudi-bus
-      const slot = eersteSlot(busNaam, min, info.agenda, info.rooster, bezetExtra[busNaam] = bezetExtra[busNaam] || {}, evenDicht);
+      // Yudi's vakantie 17 t/m 28 aug 2026 staat NIET als blok in Bookings
+      // (les 18-08); harde datumgrens zodat het script hem niet kan inplannen.
+      if (busNaam === 'Yudi / Nick' && new Date() < new Date('2026-08-29')) {
+        info.vanafOverride = new Date('2026-08-31T00:00:00Z');
+      }
+      const slot = eersteSlot(busNaam, min, info.agenda, info.rooster, bezetExtra[busNaam] = bezetExtra[busNaam] || {}, evenDicht, info.vanafOverride);
       if (slot && (!keuze || +slot.van < +keuze.slot.van)) keuze = { busNaam, slot };
     }
     if (!keuze) {

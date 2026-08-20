@@ -30,6 +30,7 @@ const DAEMONS = Object.entries(REGISTER.diensten)
   .map(([label, d]) => ({
     label,
     name: d.naam,
+    functie: d.functie || '',
     log: d.log && !d.log.startsWith('/') ? d.log : null,
     absLog: d.log && d.log.startsWith('/') ? d.log : null,
     maxLogAgeH: d.maxUur || null,
@@ -109,9 +110,17 @@ function checkDaemon(d) {
     return issues;
   }
 
-  // Exit code check
+  // Exit code check (20-08, Daimy: "ik krijg nog steeds dit terwijl het gewoon
+  // werkt"). launchd onthoudt de laatste exitcode voor eeuwig, ook als de dienst
+  // daarna gewoon weer draait. Drie verfijningen:
+  //   - draait hij NU (pid aanwezig)? Dan is een oude exitcode geschiedenis, geen storing;
+  //   - exit -15 = door ons herstart (kickstart), geen storing;
+  //   - het gesprek-lab gebruikt exit 1 bewust als "afwijkingen gevonden" — dat is
+  //     zijn rapport, geen crash (staat zo in het register beschreven).
   const exitMatch = out.match(/last exit code = (\S+)/);
-  if (exitMatch && exitMatch[1] !== '0' && exitMatch[1] !== '(never') {
+  const draaitNu = /\bpid = \d+/.test(out);
+  const exitIsRapport = /gesprek-lab/i.test(d.label || '') || /exit 1 betekent/i.test(d.functie || '');
+  if (exitMatch && !['0', '(never', '-15'].includes(exitMatch[1]) && !draaitNu && !exitIsRapport) {
     issues.push('laatste exit code: ' + exitMatch[1]);
   }
 

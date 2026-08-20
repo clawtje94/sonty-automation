@@ -147,7 +147,9 @@ async function pasConfigToe(register) {
     let status = 'groen';
     if (isDisabled) status = 'uit';
     else if (!ls.geladen) status = 'rood';
-    else if (ls.laatsteExit && ls.laatsteExit !== '0' && ls.laatsteExit !== '(never exited)' && ls.laatsteExit !== '-15') status = 'rood';
+    else if (ls.laatsteExit && ls.laatsteExit !== '0' && ls.laatsteExit !== '(never exited)' && ls.laatsteExit !== '-15'
+      && !ls.draait /* draait hij nu, dan is een oude exitcode geschiedenis (Daimy 20-08) */
+      && !/exit 1 betekent/i.test(info.functie || '') /* gesprek-lab: exit 1 is zijn rapport */) status = 'rood';
     else if (info.maxUur && logLeeftijdMin !== null && logLeeftijdMin > info.maxUur * 60) status = 'rood';
     else if (info.log && logLeeftijdMin === null) status = 'oranje';
 

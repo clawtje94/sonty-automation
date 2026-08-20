@@ -504,6 +504,11 @@ async function verwerkTicket(t, state) {
       // niet returnen: de normale flow hieronder beantwoordt de klant
     } else if (laatsteUit && laatsteUit.user_id && Number(laatsteUit.user_id) !== 747786 && !t._verseOpdracht) {
       // Daimy zelf nooit automatisch toewijzen (Daimy 23-07) — bot blijft er wel vanaf
+      // MENS-NODIG WINT (Daimy 20-08: hij zette een ticket van Nanny naar Mens nodig
+      // en de bot wees hem terug aan Nanny toe — die is nota bene met vakantie).
+      // Ligt het ticket in het Mens nodig-team, dan is dat een bewuste keuze van een
+      // mens: NOOIT terug-toewijzen aan wie toevallig het laatste antwoord stuurde.
+      if (Number(t.team_id) === 431872) return;
       if (t.status !== 'CLOSED' && Number(laatsteUit.user_id) !== 736327 && Number(t.user_id) !== Number(laatsteUit.user_id)) {
         try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: laatsteUit.user_id }); console.log(`  [${t.id}] laatste bericht van collega (user ${laatsteUit.user_id}) → aan hen toegewezen, bot eraf`); } catch (e) { console.error(`  [${t.id}] collega-toewijzing FOUT: ${e.message}`); }
       }

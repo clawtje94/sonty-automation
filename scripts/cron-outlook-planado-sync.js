@@ -147,23 +147,52 @@ async function bookingsAfspraken(vanISO, totISO) {
       uit.push(...(Array.isArray(l) ? l : []));
       van = stuk;
     }
+    // staff-id → e-mail zodat we een afspraak ook zonder klantnaam kunnen koppelen
+    // aan het event (het event-attendee-adres is het staff-adres, bv. dennis@sonty.nl)
+    const staff = await b.staff('SontyMontage1@sontymontage.nl');
+    const staffMail = new Map((Array.isArray(staff) ? staff : staff.value || []).map((m) => [m.id, String(m.mail || '').toLowerCase()]));
     // Graph geeft 7 decimalen ('.0000000') — Date.parse kan dat niet aan, dus strippen.
     const p = (dt) => Date.parse(String(dt || '').replace(/\.\d+/, '').replace(/Z?$/, 'Z'));
+    // Bookings levert nummers soms als '106 22750496' (verdwaalde 1 voor 06) — herstellen.
+    const normTel = (t) => {
+      const d = String(t || '').replace(/\D/g, '');
+      if (/^1?06\d{8}$/.test(d)) return d.slice(-10);
+      if (/^31\d{9}$/.test(d)) return '+' + d;
+      return d || null;
+    };
     return uit.map((a) => ({
       klant: String(a.klant || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(),
+      klantNaam: a.klant || null, tel: normTel(a.tel), locatie: a.locatie || null,
+      mails: (a.staffIds || []).map((id) => staffMail.get(id)).filter(Boolean),
       start: p(a.start),
       eind: p(a.eind),
-    })).filter((a) => a.klant && a.start && a.eind);
+    })).filter((a) => a.start && a.eind);
   } catch (e) { console.log('  LET OP bookings-tijden niet beschikbaar (' + e.message.slice(0, 60) + ') — event-tijden gebruikt'); return []; }
 }
 function echteTijd(bookAppts, e) {
   const evStart = Date.parse(new Date(e.Start.DateTime + 'Z'));
   const evEind = Date.parse(new Date(e.End.DateTime + 'Z'));
   const onderwerp = String(e.Subject || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ');
-  // afspraak waarvan de klantnaam in het onderwerp zit en die binnen het blok valt
-  const hit = bookAppts.find((a) => a.klant.length >= 4 && onderwerp.includes(a.klant)
-    && a.start >= evStart && a.eind <= evEind && (a.start !== evStart || a.eind !== evEind));
-  return hit || null;
+  // 1. klantnaam in het onderwerp + binnen het blok
+  const opNaam = bookAppts.find((a) => a.klant && a.klant.length >= 4 && onderwerp.includes(a.klant)
+    && a.start >= evStart && a.eind <= evEind);
+  if (opNaam) return opNaam;
+  // 2. naamloos blok ("Montage Sonty"): koppel via het staff-mailadres van de
+  //    event-deelnemer + venster (geval #852, 20-08)
+  const attMails = (e.Attendees || []).map((a) => String(a.EmailAddress?.Address || '').toLowerCase()).filter(Boolean);
+  const opStaff = bookAppts.filter((a) => a.start >= evStart && a.eind <= evEind
+    && a.mails.some((m) => attMails.includes(m)));
+  if (opStaff.length === 1) return opStaff[0];
+  return null;
+}
+// Bruikbare kern uit de Outlook-body (Bookings-reservering): klantgegevens en
+// eventuele notities, zonder de vaste boilerplate (Daimy 20-08, #855: "waarom
+// staat de omschrijving van Outlook er niet in?").
+function bodyKern(e) {
+  const ruw = String(e.Body?.Content || '').replace(/<[^>]+>/g, '\n');
+  return ruw.split('\n').map((r) => r.trim())
+    .filter((r) => r && !/^\*+$/.test(r) && !/OPMERKING: Dit is een alleen-lezen|Gebruik Microsoft Bookings|Eventuele wijzigingen gaan verloren|^-{3,}$|Lokale tijdzone|^Reserveringsgegevens|Met vriendelijke groet/i.test(r))
+    .join('\n').replace(/\n{3,}/g, '\n\n').trim().slice(0, 700);
 }
 
 // ── Planado ──
@@ -335,7 +364,11 @@ async function main() {
       else if (isMontage) body.template = { uuid: MONTAGE_TEMPLATE };
       const tel = telefoonUit(e.Body);
       if (tel) body.contacts = [{ type: 'phone', name: klantNaamUit(e.Subject), value: tel }];
-      if (adres && adres.length > 8 && /\d/.test(adres)) body.address = { formatted: adres };
+      // Adres altijd als leesbare tekst, nooit als coördinaten (Daimy 20-08):
+      // eerst de event-locatie, anders het klantadres uit de Bookings-afspraak.
+      const hardAdres = (adres && adres.length > 8 && /\d/.test(adres)) ? adres
+        : (echt?.locatie && /\d/.test(echt.locatie) ? echt.locatie : null);
+      if (hardAdres) body.address = { formatted: hardAdres };
       const r = await fetch('https://api.planadoapp.com/v2/jobs', { method: 'POST', headers: PH, body: JSON.stringify(body) });
       if (!r.ok) { fouten++; console.log(`    FOUT ${r.status}: ${(await r.text()).slice(0, 120)}`); }
       else {
@@ -352,8 +385,16 @@ async function main() {
             // Planado NEGEERT description en contacts in de POST wanneer er een
             // template meegaat (Daimy 20-08: "in de opdracht staat 0 informatie";
             // zelfde les als de testopdracht van vanmiddag) — dus alsnog via PATCH.
-            if (!huidig.description) naPatch.description = `${e.Subject || 'Afspraak'}\n(gesynct uit Outlook)${grippBlok}`;
-            if (tel && !(huidig.contacts || []).length) naPatch.contacts = [{ type: 'phone', name: klantNaamUit(e.Subject), value: tel }];
+            // Mét de kern van de Outlook-omschrijving en Bookings-klantdata (#855).
+            const kern = bodyKern(e);
+            const wieKlant = echt?.klantNaam || klantNaamUit(e.Subject) || '';
+            if (!huidig.description) naPatch.description = [
+              e.Subject || 'Afspraak', wieKlant && !String(e.Subject || '').includes(wieKlant) ? 'Klant: ' + wieKlant : null,
+              '(gesynct uit Outlook)', kern ? '\n' + kern : null, grippBlok || null,
+            ].filter(Boolean).join('\n');
+            const telNr = tel || echt?.tel || null;
+            if (telNr && !(huidig.contacts || []).length) naPatch.contacts = [{ type: 'phone', name: wieKlant || klantNaamUit(e.Subject), value: telNr }];
+            if (hardAdres && !huidig.address?.formatted) naPatch.address = { formatted: hardAdres };
             // Meetbon als tikbaar linkveld in de details (Daimy 05-08)
             const nr = (grippBlok.match(/Gripp: (\d+)/) || [])[1];
             if (nr) {

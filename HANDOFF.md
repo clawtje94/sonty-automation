@@ -1,4 +1,16 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-18)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-20)
+
+## 20-08: META ADS API-COLLECTOR (vervangt CSV-exports)
+- Daimy gaf system-user-token "Sonty Dashboard API" (ads_read, verloopt niet) voor
+  act_1633352477464320. Staat in ~/sonty/.env (META_ADS_TOKEN, META_AD_ACCOUNT_ID).
+- scripts/meta-ads-api.js: per maand per campagne spend/kliks(link_click)/leads ->
+  data/campagne-spend-meta.json (zelfde vorm als CSV-import) + data/ad-spend-meta-api.json.
+  ad-spend.js pakt API als hoogste Meta-bron; campagne-rendement geeft kliks/metaLeads/cpl door.
+- Controle: jan-jun 2026 = CSV op de euro; juli API 25.821 vs CSV 25.441 (CSV te vroeg
+  geexporteerd). 2025 nu volledig gevuld (was mrt-mei uit sheet). Aug live (15.105 t/m 20-08).
+- update-dashboard.sh: API-stap na de CSV-import; faalt API -> CSV-stand blijft staan.
+- Dashboard: lopende maand toont "loopt nog" i.p.v. VERLIES. Commits sonty b39ab12, website aee7ded.
+- OPEN: Google Ads API volgt (Daimy); dan zelfde patroon -> data/ad-spend-google-api.json.
 
 ## 18-08 (3): FOTO-DASHBOARD — GOEDGEKEURDE UPLOADS UIT HOOFDLIJST
 - Klacht Daimy: foto's die akkoord waren bleven in de uploadlijst staan.

@@ -536,6 +536,14 @@
       "ritme": "dagelijks 07:10",
       "log": "montage-voorstellen.log",
       "maxUur": 30
+    },
+    "nl.sonty.werkbon-afhandeling": {
+      "naam": "Werkbon-afhandeling montage",
+      "functie": "Bij afgeronde bus-opdrachten: gereed=ja → eindfactuur-melding (Gripp), gereed=nee → werkbon mailen naar werkbonnen@sonty.nl.",
+      "groep": "Planning",
+      "ritme": "elke 30 min",
+      "log": "werkbon-afhandeling.log",
+      "maxUur": 2
     }
   }
 }

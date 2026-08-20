@@ -20,9 +20,10 @@ const BUSSEN = {
   '1f19ca1d-fec8': 'Bus 5 | Marvin & Moa', '1f19ca28-ce10': 'Bus 6 | Arnold',
   '1f122cfa-4eba': 'Nanny',
 };
-const VELDEN = ['Werk gereed', 'Waarom niet gereed', 'Wie heeft deze fout gemaakt',
+const VELDEN = ['Werk gereed', 'Waarom niet gereed',
   'Wat is er nodig om te herstellen', 'Welke kleur', 'producten bij de klant', 'Hoeveel uur',
   'Uitleg voor de volgende service-afspraak', 'Foto NIET-GEREED'];
+// 'Wie heeft deze fout gemaakt' verwijderd op verzoek Daimy 20-08 ("daar hebben we niks aan")
 
 const laadState = () => { try { return JSON.parse(fs.readFileSync(STATE_PAD, 'utf8')); } catch { return { vanaf: new Date().toISOString(), verwerkt: {} }; } };
 

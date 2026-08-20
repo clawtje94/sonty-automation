@@ -45,7 +45,8 @@ const ctx = {
   // foto's insluiten zodat de preview los van internet werkt
   const web = path.join(process.env.HOME, 'sonty-website', 'public', 'images');
   const tmp = fs.mkdtempSync('/tmp/sonty-shot-');
-  for (const naam of ['knikarm-resultaat', 'sonty-bus', 'montage-afstellen', 'team-klant-blij']) {
+  const namen = [...new Set([...s.matchAll(/images\/eigen\/([\w-]+)\.webp/g)].map(m => m[1]))];
+  for (const naam of namen) {
     const src = path.join(web, 'eigen', naam + '.webp'), jpg = path.join(tmp, naam + '.jpg');
     try {
       cp.execFileSync('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '62', '-Z', '900', src, '--out', jpg], { stdio: 'ignore' });

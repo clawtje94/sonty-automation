@@ -11,7 +11,9 @@
   Vervangt de standaard template. Gebruikt dezelfde Liquid-variabelen als het origineel:
     job.serial_no, job.scheduled_at, job.scheduled_duration, job.finished_at,
     job.client.name, job.site.name, job.address.full, job.address.geolocation,
-    worker.name, worker.phone, worker.geolocation, style_variables
+    worker.name, worker.geolocation, style_variables
+  (worker.phone en het vaste nummer van de zaak staan er bewust NIET op: klanten
+   moeten via WhatsApp contact opnemen, niet bellen)
   De kaart komt uit dezelfde map-tag als het origineel (zie de sectie LIVE KAART) en is gestyled via #map.
   Ververst zichzelf elke 60 seconden, net als het origineel.
   Foto's staan op sonty-website.vercel.app; vervang dat door sonty.nl zodra de nieuwe site daar live is.
@@ -79,7 +81,7 @@
     position:relative; margin:0 16px; border-radius:20px; overflow:hidden;
     background:#0d0d0e; box-shadow:var(--shadow); isolation:isolate;
   }
-  .hero__foto{width:100%; height:300px; object-fit:cover; object-position:center 42%; opacity:.9}
+  .hero__foto{width:100%; height:300px; object-fit:cover; object-position:center 30%; opacity:.9}
   .hero__laag{
     position:absolute; inset:0;
     background:linear-gradient(to top, rgba(8,8,9,.95) 30%, rgba(8,8,9,.62) 62%, rgba(8,8,9,.08) 100%);
@@ -221,7 +223,7 @@
 
   <!-- HERO: de tekst verandert mee met de stand van de opdracht -->
   <section class="hero op">
-    <img class="hero__foto" src="https://sonty-website.vercel.app/images/eigen/knikarm-resultaat.webp" alt="Uitgeklapt knikarmscherm van Sonty boven een terras">
+    <img class="hero__foto" src="https://sonty-website.vercel.app/images/eigen/montage-afstellen.webp" alt="Monteur van Sonty aan het werk bij een gevel">
     <div class="hero__laag"></div>
     <div class="hero__tekst">
       {% if job.finished_at %}
@@ -301,14 +303,9 @@
         <div class="avatar" aria-hidden="true">{{ worker.name | slice: 0, 1 }}</div>
         <div>
           <div class="monteur__naam">{{ worker.name }}</div>
-          <div class="monteur__rol">{% if worker.phone %}Direct bereikbaar op {{ worker.phone }}{% else %}Uw vaste monteur voor vandaag{% endif %}</div>
+          <div class="monteur__rol">Uw vaste monteur voor deze afspraak</div>
         </div>
       </div>
-      {% if worker.phone %}
-        <div style="margin-top:14px">
-          <a class="knop knop--tweede" style="width:100%" href="tel:{{ worker.phone }}">Bel {{ worker.name }}</a>
-        </div>
-      {% endif %}
     </div>
   </section>
   {% endif %}
@@ -325,15 +322,15 @@
         </li>
         <li>
           <span class="vink"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>
-          <span><b>Twee meter werkruimte onder het raam</b><span>Tuinmeubels, plantenbakken en de barbecue even opzij, dan kan de ladder recht staan.</span></span>
+          <span><b>Werkruimte vrij op de plek waar we werken</b><span>Meubels, planten en spullen bij de ramen of tegen de gevel even opzij, dan kunnen we er goed bij.</span></span>
         </li>
         <li>
           <span class="vink"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>
-          <span><b>Een stopcontact in de buurt</b><span>Voor het gereedschap, en voor een motor die aangesloten moet worden.</span></span>
+          <span><b>Een stopcontact in de buurt</b><span>Voor het gereedschap, en voor elektra die aangesloten moet worden.</span></span>
         </li>
         <li>
           <span class="vink"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span>
-          <span><b>Iemand thuis die beslissingen mag nemen</b><span>We overleggen de exacte hoogte voordat we gaan boren. Dat ligt daarna vast.</span></span>
+          <span><b>Iemand thuis die beslissingen mag nemen</b><span>We overleggen de precieze plek voordat we gaan boren. Dat ligt daarna vast.</span></span>
         </li>
       </ul>
     </div>
@@ -341,14 +338,14 @@
 
   <!-- WERKWIJZE -->
   <section class="kaart op">
-    <img class="product__foto" src="https://sonty-website.vercel.app/images/eigen/montage-afstellen.webp" alt="Monteur van Sonty werkt aan een gevel">
+    <img class="product__foto" src="https://sonty-website.vercel.app/images/eigen/montage-team-2.webp" alt="Monteur van Sonty met gereedschap aan het werk">
     <div class="kaart__body">
-      <h2 class="titel">Hoe wij te werk gaan</h2>
+      <h2 class="titel">Zo gaan we te werk</h2>
       <ol class="stappen">
-        <li><span><b>Aftekenen en meten</b><span>Samen met u de hoogte bepalen, dan uitlijnen en aftekenen op de gevel.</span></span></li>
-        <li><span><b>Steunen monteren</b><span>Boren in het metselwerk, chemisch verankeren waar dat nodig is, en de steunen waterpas zetten.</span></span></li>
-        <li><span><b>Plaatsen</b><span>Het scherm erin tillen, vastzetten en waar nodig de motor aansluiten.</span></span></li>
-        <li><span><b>Afstellen en testen</b><span>Helling, eindstanden en de bediening koppelen, daarna een paar keer proefdraaien.</span></span></li>
+        <li><span><b>Opmeten en aftekenen</b><span>Samen met u de precieze plek bepalen, dan uitlijnen en aftekenen.</span></span></li>
+        <li><span><b>Bevestiging aanbrengen</b><span>Boren, verankeren waar dat nodig is, en alles waterpas zetten.</span></span></li>
+        <li><span><b>Plaatsen</b><span>Het product ophangen of inzetten, vastzetten en waar nodig de motor aansluiten.</span></span></li>
+        <li><span><b>Afstellen en testen</b><span>Eindstanden instellen, bediening koppelen en een paar keer proefdraaien.</span></span></li>
         <li><span><b>Opruimen</b><span>Boorstof wegzuigen en het verpakkingsmateriaal gaat mee terug in de bus.</span></span></li>
       </ol>
     </div>
@@ -361,12 +358,12 @@
     <div class="kaart__body">
       {% if job.finished_at %}
         <h2 class="titel">Bedankt voor uw vertrouwen</h2>
-        <p>Het werk is afgerond op {{ job.finished_at | datetime }}. De factuur ontvangt u per mail. Klopt er iets niet of heeft u nog een vraag over de bediening? Bel ons gerust, dan lossen we het op.</p>
+        <p>Het werk is afgerond op {{ job.finished_at | datetime }}. De factuur ontvangt u per mail. Klopt er iets niet of heeft u nog een vraag over de bediening? Stuur ons een WhatsApp, dan lossen we het op.</p>
       {% else %}
         <h2 class="titel">En daarna</h2>
-        <p>Voordat we weggaan doen we de bediening voor en laten we zien hoe u het scherm het beste in en uit laat lopen. U tekent digitaal af en de factuur volgt per mail.</p>
+        <p>Voordat we weggaan doen we de bediening voor en leggen we uit waar u op moet letten in het gebruik. U tekent digitaal af en de factuur volgt per mail.</p>
+        <p>Twijfelt u later over de bediening of het onderhoud? Stuur ons een WhatsApp, we helpen u er zo doorheen.</p>
       {% endif %}
-      <p>Waait het hard? Haal het scherm dan binnen. Een doek dat nat is geworden laat u uitgerold drogen, dan blijft het mooi.</p>
       <div class="garantie">
         <div><b>3 jaar</b><span>op de montage</span></div>
         <div><b>5 jaar</b><span>op het product</span></div>
@@ -376,8 +373,7 @@
   </section>
 
   <div class="acties">
-    <a class="knop knop--primair" href="tel:+31850069681">Bel ons: 085 006 9681</a>
-    <a class="knop knop--tweede" href="https://wa.me/31850069681">WhatsApp</a>
+    <a class="knop knop--primair" href="https://wa.me/31850069681">Stuur ons een WhatsApp</a>
   </div>
 
   <footer>

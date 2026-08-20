@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="refresh" content="60">
 <link rel="icon" href="https://planadoapp.com/favicon.ico" type="image/x-icon">
-<title>Uw afspraak met Sonty ({{ job.serial_no }})</title>
+<title>Je afspraak met Sonty ({{ job.serial_no }})</title>
 <!--
   SONTY TRACKINGPAGINA voor Planado.
   Vervangt de standaard template. Gebruikt dezelfde Liquid-variabelen als het origineel:
@@ -237,57 +237,59 @@
     <div class="hero__tekst">
       {% if job.finished_at %}
         <span class="pill"><span class="dot"></span> Klaar</span>
-        <h1>Het werk bij u is <em>afgerond</em></h1>
+        <h1>Het werk bij je is <em>afgerond</em></h1>
         <div class="hero__eta">
           <b>{{ job.finished_at | datetime }}</b>
           <span>opgeleverd</span>
         </div>
-      {% elsif worker.geolocation %}
-        <span class="pill"><span class="dot"></span> Onderweg naar u</span>
-        <h1><em>{{ worker.name }}</em> is onderweg naar u</h1>
+      {% else %}
+      {% if worker.geolocation %}
+        <span class="pill"><span class="dot"></span> Onderweg naar je</span>
+        <h1><em>{{ worker.name }}</em> is onderweg naar je</h1>
         <div class="hero__eta">
           <b>{{ job.scheduled_at | datetime }}</b>
           <span>afgesproken tijd</span>
         </div>
       {% else %}
         <span class="pill"><span class="dot"></span> Ingepland</span>
-        <h1>Wij komen bij u langs</h1>
+        <h1>Wij komen bij je langs</h1>
         <div class="hero__eta">
           <b>{{ job.scheduled_at | datetime }}</b>
           <span>{% if job.scheduled_duration %}duurt ongeveer {{ job.scheduled_duration }}{% else %}afgesproken tijd{% endif %}</span>
         </div>
       {% endif %}
+      {% endif %}
     </div>
   </section>
 
   <!-- LIVE KAART: alleen zolang het werk nog niet klaar is -->
-  {% unless job.finished_at %}
+  {% if job.finished_at %}{% else %}
     {% if worker.geolocation %}
       <section class="kaart kaart--map op">
         {{ worker.geolocation | map: destination: job.address.geolocation }}
-        <div class="maptekst">{{ worker.name }} rijdt nu richting uw adres. Deze pagina ververst zichzelf, u hoeft niets te doen.</div>
+        <div class="maptekst">{{ worker.name }} rijdt nu richting jouw adres. Deze pagina ververst zichzelf, je hoeft niets te doen.</div>
       </section>
     {% endif %}
-  {% endunless %}
+  {% endif %}
 
   <!-- DE BUS: alleen zolang we nog moeten komen -->
-  {% unless job.finished_at %}
+  {% if job.finished_at %}{% else %}
   <section class="kaart op">
     <div class="strip">
       <img src="https://sonty-website.vercel.app/images/eigen/sonty-bus.webp" alt="De witte bus van Sonty voor een woning">
       <div class="strip__tekst">
-        <b>Hier let u op</b>
-        <span>Deze bus komt straks de straat in. {{ worker.name }} belt u zodra hij er bijna is, en heeft alles al ingeladen.</span>
+        <b>Hier let je op</b>
+        <span>Deze bus komt straks de straat in. {{ worker.name }} belt je zodra hij er bijna is, en heeft alles al ingeladen.</span>
       </div>
     </div>
   </section>
 
-  {% endunless %}
+  {% endif %}
 
   <!-- AFSPRAAK -->
   <section class="kaart op">
     <div class="kaart__body">
-      <h2 class="kop">Uw afspraak</h2>
+      <h2 class="kop">Je afspraak</h2>
       <dl>
         {% if job.scheduled_at %}<dt>Wanneer</dt><dd>{{ job.scheduled_at | datetime }}</dd>{% endif %}
         {% if job.scheduled_duration %}<dt>Duur</dt><dd>{{ job.scheduled_duration }}</dd>{% endif %}
@@ -307,12 +309,16 @@
   {% if worker %}
   <section class="kaart op">
     <div class="kaart__body">
-      <h2 class="kop">Uw monteur</h2>
+      <h2 class="kop">Je monteur</h2>
       <div class="monteur">
-        <div class="avatar" aria-hidden="true">{{ worker.name | slice: 0, 1 }}</div>
+        <div class="avatar" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/>
+          </svg>
+        </div>
         <div>
           <div class="monteur__naam">{{ worker.name }}</div>
-          <div class="monteur__rol">Uw vaste monteur voor deze afspraak</div>
+          <div class="monteur__rol">Je vaste monteur voor deze afspraak</div>
         </div>
       </div>
     </div>
@@ -320,7 +326,7 @@
   {% endif %}
 
   <!-- VOORBEREIDING: alleen relevant zolang we nog moeten komen -->
-  {% unless job.finished_at %}
+  {% if job.finished_at %}{% else %}
   <section class="kaart op">
     <div class="kaart__body">
       <h2 class="kop">Fijn als dit klaarstaat</h2>
@@ -351,7 +357,7 @@
     <div class="kaart__body">
       <h2 class="titel">Zo gaan we te werk</h2>
       <ol class="stappen">
-        <li><span><b>Opmeten en aftekenen</b><span>Samen met u de precieze plek bepalen, dan uitlijnen en aftekenen.</span></span></li>
+        <li><span><b>Opmeten en aftekenen</b><span>Samen met jou de precieze plek bepalen, dan uitlijnen en aftekenen.</span></span></li>
         <li><span><b>Bevestiging aanbrengen</b><span>Boren, verankeren waar dat nodig is, en alles waterpas zetten.</span></span></li>
         <li><span><b>Plaatsen</b><span>Het product ophangen of inzetten, vastzetten en waar nodig de motor aansluiten.</span></span></li>
         <li><span><b>Afstellen en testen</b><span>Eindstanden instellen, bediening koppelen en een paar keer proefdraaien.</span></span></li>
@@ -359,10 +365,10 @@
       </ol>
     </div>
   </section>
-  {% endunless %}
+  {% endif %}
 
   <!-- MET EEN KNIPOOG -->
-  {% unless job.finished_at %}
+  {% if job.finished_at %}{% else %}
   <section class="kaart kaart--knipoog op">
     <div class="kaart__body">
       <h2 class="kop">Twee dingen die echt niet hoeven</h2>
@@ -379,24 +385,24 @@
           <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M12 20.2S4.5 15.8 4.5 10.4A3.9 3.9 0 0 1 12 8.6a3.9 3.9 0 0 1 7.5 1.8c0 5.4-7.5 9.8-7.5 9.8z"/>
           </svg>
-          <span><b>Een fooi</b><span>Hoeft nergens voor. Maar als ze netjes hebben gewerkt en alles keurig achterlaten, dan wordt het altijd gewaardeerd. U ziet het meteen aan hun gezicht.</span></span>
+          <span><b>Een fooitje</b><span>Hoeft nergens voor. Maar als ze netjes hebben gewerkt en alles keurig achterlaten, dan wordt het altijd gewaardeerd. Je ziet het meteen aan hun gezicht.</span></span>
         </li>
       </ul>
     </div>
   </section>
-  {% endunless %}
+  {% endif %}
 
   <!-- NA AFLOOP -->
   <section class="kaart op">
     <img class="product__foto" src="https://sonty-website.vercel.app/images/eigen/team-klant-blij.webp" alt="Sonty-monteurs met een tevreden klant">
     <div class="kaart__body">
       {% if job.finished_at %}
-        <h2 class="titel">Bedankt voor uw vertrouwen</h2>
-        <p>Het werk is afgerond op {{ job.finished_at | datetime }}. De factuur ontvangt u per mail. Klopt er iets niet of heeft u nog een vraag over de bediening? Stuur ons een WhatsApp, dan lossen we het op.</p>
+        <h2 class="titel">Bedankt voor je vertrouwen</h2>
+        <p>Het werk is afgerond op {{ job.finished_at | datetime }}. De factuur ontvang je per mail. Klopt er iets niet of heb je nog een vraag over de bediening? Stuur ons een WhatsApp, dan lossen we het op.</p>
       {% else %}
         <h2 class="titel">En daarna</h2>
-        <p>Voordat we weggaan doen we de bediening voor en leggen we uit waar u op moet letten in het gebruik. U tekent digitaal af en de factuur volgt per mail.</p>
-        <p>Twijfelt u later over de bediening of het onderhoud? Stuur ons een WhatsApp, we helpen u er zo doorheen.</p>
+        <p>Voordat we weggaan doen we de bediening voor en leggen we uit waar je op moet letten in het gebruik. Je tekent digitaal af en de factuur volgt per mail.</p>
+        <p>Twijfel je later over de bediening of het onderhoud? Stuur ons een WhatsApp, dan helpen we je er zo doorheen.</p>
       {% endif %}
       <div class="garantie">
         <div><b>3 jaar</b><span>op de montage</span></div>

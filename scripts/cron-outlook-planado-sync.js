@@ -392,6 +392,10 @@ async function main() {
   // Joey/Sjoerd-opdracht zonder agenda-afspraak krijgt er een. ol-jobs vallen hier
   // bewust buiten: hun bron IS Outlook, en als die weg is ruimt de wezen-logica ze op.
   try {
+    // NOODREM (Daimy 20-08: "stop even de sync naar Outlook toe"): zolang het
+    // bestand data/outlook-schrijf-uit bestaat, schrijft de sync NIETS in Outlook
+    // (geen terugweg-heler, geen optie-veger). Outlook → Planado blijft draaien.
+    if (fs.existsSync(path.join(__dirname, '..', 'data', 'outlook-schrijf-uit'))) throw new Error('outlook-schrijven staat uit (data/outlook-schrijf-uit)');
     const NAAM_VAN_UUID = Object.fromEntries(Object.entries(INMETERS).map(([k, v]) => [v, k]));
     const evStarts = new Set(evs.filter((e) => !e.IsCancelled).map((e) => Date.parse(new Date(e.Start.DateTime + 'Z'))));
 
@@ -496,6 +500,8 @@ async function main() {
   // (geboekt, gekozen of verlopen) gaat direct uit de agenda. De vervaltijd afwachten
   // hield tijden onnodig een dag bezet.
   try {
+    // Noodrem (Daimy 20-08): geen Outlook-schrijfacties zolang de vlag bestaat.
+    if (fs.existsSync(path.join(__dirname, '..', 'data', 'outlook-schrijf-uit'))) throw new Error('outlook-schrijven staat uit');
     const OHo = { Authorization: fs.readFileSync(path.join(__dirname, '.owa-token.txt'), 'utf8').trim() ? 'Bearer ' + fs.readFileSync(path.join(__dirname, '.owa-token.txt'), 'utf8').trim() : '' };
     const ro = await fetch('https://sonty-website.vercel.app/api/inmeet-aanbod?actief=1', { headers: { 'x-meet-code': process.env.MEETBON_CODE || '2288' } });
     if (ro.ok) {

@@ -219,13 +219,19 @@ async function main() {
       // uit in Bookings, maar de sync keek alleen naar de starttijd — ingekorte
       // afspraken bleven in Planado 3 uur staan).
       const duurNu = bestaand.scheduled_duration?.minutes;
-      if (Date.parse(bestaand.scheduled_at) !== Date.parse(startISO) || (duurNu && duurNu !== minuten)) {
-        console.log(`  ~ ${voornaam} ${startISO.slice(0, 16)} ${e.Subject?.slice(0, 30)} (tijd gewijzigd)`);
+      // TOEWIJZING VOLGT OUTLOOK (Daimy 20-08, #434 Jason Slingerland: kantoor zette
+      // de afspraak in Bookings naar bus ZZP, maar de Planado-opdracht bleef op
+      // Sjoerd staan — de sync patchte alleen de tijd, nooit de uitvoerder).
+      const hoortBij = INMETERS[voornaam] || MONTEURS[voornaam] || null;
+      const staatOp = bestaand.assignee?.worker_uuid || null;
+      const anderTeam = hoortBij && staatOp && hoortBij !== staatOp;
+      if (Date.parse(bestaand.scheduled_at) !== Date.parse(startISO) || (duurNu && duurNu !== minuten) || anderTeam) {
+        console.log(`  ~ ${voornaam} ${startISO.slice(0, 16)} ${e.Subject?.slice(0, 30)} (${anderTeam ? 'toewijzing' : 'tijd'} gewijzigd)`);
         if (EXECUTE) {
           const det = await (await fetch(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`, { headers: PH })).json();
           const r = await fetch(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`, {
             method: 'PATCH', headers: PH,
-            body: JSON.stringify({ version: (det.job || det).version, scheduled_at: startISO, scheduled_duration: { minutes: minuten } }),
+            body: JSON.stringify({ version: (det.job || det).version, scheduled_at: startISO, scheduled_duration: { minutes: minuten }, ...(anderTeam ? { assignee: { worker: { uuid: hoortBij } } } : {}) }),
           });
           r.ok ? bijgewerkt++ : fouten++;
           await wacht(2600);

@@ -183,7 +183,7 @@ async function naarBeoordeling(jpgPad, naam, uit) {
             // antwoord via de Desktop-wachtrij zodra het scherm vrij is
             fs.mkdirSync(DESKTOPQ, { recursive: true });
             fs.writeFileSync(path.join(DESKTOPQ, Date.now() + '.json'), JSON.stringify({ doel: DESKTOPNAAM[naam] || naam, tekst: antwoord + (bijlagen.length ? '\n(De PDF kan via deze reserve-route niet mee; vraag hem straks nog eens.)' : '') }));
-            await telegram(`💬 ${naam} vroeg Sunny: "${String(tekst).slice(0, 120)}"\nAntwoord: ${antwoord.slice(0, 300)}\n(gaat via de reserve-route naar WhatsApp zodra het scherm vrij is)`);
+            // geen Telegram per vraag (Daimy 21-08: "ik hoef niet elke keer een bericht")
           } else {
             const r = await sock.sendMessage(antwoordJid, { text: antwoord });
             bewaak(r?.key?.id, { type: 'antwoord', doel: DESKTOPNAAM[naam] || naam, tekst: antwoord, naam });
@@ -195,7 +195,7 @@ async function naarBeoordeling(jpgPad, naam, uit) {
               } catch (e) { console.error('bijlage-fout:', String(e.message).slice(0, 80)); await sock.sendMessage(antwoordJid, { text: 'De PDF kon ik net niet meesturen, probeer het zo nog eens.' }); }
             }
             console.log('antwoord verstuurd aan', naam);
-            await telegram(`💬 ${naam} vroeg Sunny: "${String(tekst).slice(0, 120)}"\nSunny antwoordde: ${antwoord.slice(0, 300)}${bijlagen.length ? '\n(+ ' + bijlagen.map((b) => b.naam).join(', ') + ')' : ''}`);
+            // geen Telegram per vraag (Daimy 21-08); alleen fouten worden gemeld
           }
         } catch (e) {
           console.error('collega-antwoord-fout:', String(e.message).slice(0, 100));
@@ -250,7 +250,7 @@ async function naarBeoordeling(jpgPad, naam, uit) {
     const vandaag = new Date().toISOString().slice(0, 10);
     let vandaagN = 0;
     try { vandaagN = fs.readFileSync(GROEP_LOG, 'utf8').split('\n').filter((r) => r.includes(`"dag":"${vandaag}"`)).length; } catch { /* nog geen log */ }
-    if (vandaagN >= GROEP_MAX_PER_DAG) { console.log('groep-antwoord: dagmax bereikt'); await telegram('ℹ️ Sunny heeft vandaag al ' + vandaagN + 'x in de toppers-groep geantwoord; rest van de dag zwijgt hij (dagmax).'); return; }
+    if (vandaagN >= GROEP_MAX_PER_DAG) { console.log('groep-antwoord: dagmax bereikt'); return; }
     const sinds = Date.now() - laatsteGroepAntwoord;
     if (sinds < GROEP_MIN_TUSSEN_MS) await new Promise((r) => setTimeout(r, GROEP_MIN_TUSSEN_MS - sinds));
     const { maakGroepAntwoord } = require('./lib/groep-antwoord.js');

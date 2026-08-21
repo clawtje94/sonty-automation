@@ -40,6 +40,12 @@
   gesprekken: FOUT-STIL 12 → 0 (Marco kreeg afsluitend antwoord).
 - Vragen open bij Daimy: V1 voorraadscherm Marius vastleggen? V2 dag-ervoor-herinneringen
   inschakelen (script staat nergens in launchd)?
+- SUNNY OCHTEND/AVOND IN SONTY TOPPERS-GROEP WEER AAN (Daimy 21-08: "graag opzetten"):
+  plists nl.sonty.sunny-ochtend (ma-vr 07:30) en nl.sonty.sunny-weetje (ma-vr 20:00) stonden
+  op .disabled → hernoemd + bootstrap. Verzending via wa-luisteraar-outbox (test-DM aan Daimy
+  geslaagd 21-08). sunny-weetje.js: model naar claude-sonnet-5 (grappiger), herhalingsvanger
+  (Haiku gaf de 18-08-tekst letterlijk terug). Eerste weetje: vr 21-08 20:00; ochtend ma 24-08 07:30.
+- Sonty toppers-groep: Sunny stuurt verder NIETS in de groep; luisteraar leest foto's, 08:15 proef-DM aan Daimy.
 
 
 

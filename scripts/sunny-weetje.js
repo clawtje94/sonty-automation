@@ -109,16 +109,31 @@ async function haalNieuws() {
   return titels;
 }
 
-async function maakOchtend(hist) {
+/** Herhaling vangen (21-08: Haiku gaf de ochtendtekst van 18-08 letterlijk terug, ondanks
+ *  de "al gebruikt"-lijst). Deelt de nieuwe tekst een stuk van 30+ tekens met een eerder
+ *  bericht, dan is het een herhaling en genereren we opnieuw met een hardere instructie. */
+function lijktOpEerder(tekst, eerderLijst) {
+  const norm = (t) => String(t || '').toLowerCase().replace(/[^a-z0-9à-ü ]+/g, ' ').replace(/\s+/g, ' ').trim();
+  const n = norm(tekst);
+  if (n.length < 30) return false;
+  for (const e of eerderLijst) {
+    const m = norm(e);
+    for (let i = 0; i + 30 <= n.length; i += 10) if (m.includes(n.slice(i, i + 30))) return true;
+  }
+  return false;
+}
+
+async function maakOchtend(hist, poging = 0) {
   const APIKEY = fs.readFileSync(path.join(__dirname, '.anthropic-api-key.txt'), 'utf8').trim();
   const team = fs.existsSync(TEAMINFO) ? fs.readFileSync(TEAMINFO, 'utf8').trim() : '';
   const nieuws = await haalNieuws();
-  const eerder = hist.filter((h) => h.type === 'ochtend').slice(-15).map((h) => h.weetje).join('\n');
+  const eerderLijst = hist.filter((h) => h.type === 'ochtend').slice(-15).map((h) => h.weetje);
+  const eerder = eerderLijst.join('\n') + (poging ? '\nLET OP: je vorige poging leek te veel op een eerder bericht. Kies een ANDER onderwerp en andere woorden.' : '');
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'x-api-key': APIKEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
     body: JSON.stringify({
-      model: 'claude-haiku-4-5-20251001', max_tokens: 350,
+      model: 'claude-sonnet-5', max_tokens: 350, // Sonnet: grappiger dan Haiku (Daimy 21-08 wil echt leuke berichten), 2x per dag dus goedkoop
       messages: [{ role: 'user', content: `Schrijf de morning motivation voor de interne WhatsApp-groep van Sonty (zonweringbedrijf, stoere monteurs, ze stappen zo de bus in). Het komt direct na een schreeuwerige opener, dus begin lopend in kleine letters. Eisen: MAXIMAAL 2 korte zinnen spreektaal (dit is een appje, geen speech), opzwepend en ECHT GRAPPIG: er moet een echte grap of droge punchline in zitten waar een monteur om 7 uur s ochtends om grinnikt, niet alleen "gassen mannen". Overdrijven mag flink, plagen mag (nooit gemeen), kleedkamerhumor die net netjes blijft. NOOIT een gedachtestreepje gebruiken, gewoon komma's en punten. Eindig met 1-2 emoji. Verwerk als het kan EEN actueel nieuwtje van vandaag of gisteren met een luchtige knipoog naar het werk (regen = overkappingen verkopen, sport = wij maken de klus wel af, enz). Kies ALLEEN iets luchtigs: sport, weer, verkeer, dieren, opmerkelijk. NOOIT politiek, oorlog, misdaad, dood, ziekte of ander leed. Staat er niks luchtigs tussen, verzin dan GEEN nieuws maar maak pure motivatie.\n${PRODUCTKENNIS}\nDe echte Sonty-kennisbank als feitenbron; alles wat je over producten, garanties of het bedrijf zegt moet hiermee kloppen:\n${leesKennisbank()}\nHet nieuws van nu (koppen):\n${nieuws.join('\n') || '(geen nieuws beschikbaar, dus pure motivatie)'}${team ? `\nTeam-weetjes die je af en toe mag gebruiken voor een grap:\n${team}` : ''}${eerder ? `\nDeze berichten zijn al gebruikt, kom met iets anders:\n${eerder}` : ''}\nGeef UITSLUITEND de berichttekst, niets eromheen.` }],
     }),
   });
@@ -127,6 +142,7 @@ async function maakOchtend(hist) {
   tekst = tekst.replace(/\s*\u2014+\s*/g, ', ');
   tekst = tekst.charAt(0).toLowerCase() + tekst.slice(1);
   if (!tekst || tekst.length < 20) throw new Error('ochtend-generatie mislukt');
+  if (lijktOpEerder(tekst, eerderLijst) && poging < 2) return maakOchtend(hist, poging + 1);
   return { thema: 'ochtend', tekst };
 }
 
@@ -140,7 +156,7 @@ async function maakWeetje(hist) {
     method: 'POST',
     headers: { 'x-api-key': APIKEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
     body: JSON.stringify({
-      model: 'claude-haiku-4-5-20251001', max_tokens: 300,
+      model: 'claude-sonnet-5', max_tokens: 300,
       messages: [{ role: 'user', content: `Schrijf het dagelijkse weetje voor de interne WhatsApp-groep van Sonty (zonweringbedrijf, allemaal stoere monteurs/mannen onder elkaar). Het komt direct na de openingszin "WISTEN JULLIE DATTTTT", dus begin lopend in kleine letters (bijv. "een garnaal zijn hart in zijn kop heeft? ..."). Thema vandaag: ${thema}. Eisen: echt waar (geen verzonnen feiten), verrassend, 1 a 3 zinnen, spreektaal, stoer en grappig, nooit een gedachtestreepje, eindig met 1-2 passende emoji. Maak er als het past een luchtige knipoog bij naar het vak of het team, nooit gemeen, nooit politiek, geen klanten.\n${PRODUCTKENNIS}\nDe echte Sonty-kennisbank als feitenbron; alles wat je over producten, garanties of het bedrijf zegt moet hiermee kloppen:\n${leesKennisbank()}${team ? ` Team-weetjes die je af en toe (niet elke dag) mag gebruiken voor een grap:\n${team}` : ''}${verzoeken ? `\nDeze berichtjes stuurden de mannen vandaag naar Sunny (verzoekjes/gein); verwerk het leukste met een knipoog in het weetje van vandaag ALS het binnen de lijnen kan (nooit discriminerend, seksueel, politiek of gemeen naar een persoon; anders gewoon negeren):\n${verzoeken}` : ''}${eerder ? `\nDeze weetjes zijn al gebruikt, kom met iets anders:\n${eerder}` : ''}\nGeef UITSLUITEND de weetje-tekst, niets eromheen.` }],
     }),
   });

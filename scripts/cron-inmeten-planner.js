@@ -1193,6 +1193,29 @@ async function aanbodApi(pad, opties = {}) {
   return r.json();
 }
 
+/** Mag de aanbod-reminder NU? Pure functie (lab-testbaar). rest = ms tot verloop,
+ *  uurNu = uur in Amsterdam. Nooit 's nachts (Fatih 20-08, 03:49); kort vóór verloop
+ *  overdag, of 's avonds als het aanbod de volgende ochtend vroeg verloopt. */
+function reminderNu(rest, uurNu) {
+  if (!(rest > 0)) return false;
+  const overdag = uurNu >= 8 && uurNu < 21;
+  if (!overdag) return false;
+  const kortVoorVerloop = rest < 4 * 3600000;
+  const avondVoorOchtendverloop = rest < 14 * 3600000 && uurNu >= 18;
+  return kortVoorVerloop || avondVoorOchtendverloop;
+}
+
+/** Reminder-tekst in de taal van de klant. */
+function reminderTekst(lead, slot) {
+  const { taalVan, GROET } = require('./lib/aanbod-versturen');
+  const taalR = taalVan(lead);
+  const voornaamR = String(lead?.naam || 'daar').split(' ')[0];
+  const wanneer = new Date(slot.aankomst).toLocaleString(taalR === 'en' ? 'en-GB' : 'nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+  return taalR === 'en'
+    ? `Hi ${voornaamR}, a quick reminder: ${wanneer} is still held for you. One message and I'll lock it in! Doesn't suit after all? No problem, then I'll keep looking for you.\n\n${GROET.en}`
+    : `Hoi ${voornaamR}, kleine reminder: ${wanneer} staat nog voor je klaar. Eén berichtje en ik zet hem vast! Past het toch niet, ook prima, dan kijk ik gewoon verder voor je.\n\n${GROET.nl}`;
+}
+
 async function verwerkAanbiedingen() {
   // VAKANTIES OOK HIER (Debby 13-08): dit pad draaide ZONDER laadVakanties. Toen haar
   // keuze afketste stuurde de botsings-route direct nieuwe tijden, en die rekende
@@ -1216,10 +1239,7 @@ async function verwerkAanbiedingen() {
     // Verloopt het aanbod in de vroege ochtend (aanbod om 07:49 gestuurd → verloopt
     // 07:49), dan gaat de herinnering de avond ervoor (vanaf 18:00) in plaats van nooit.
     const uurNu = Number(new Date().toLocaleString('nl-NL', { hour: 'numeric', hour12: false, timeZone: 'Europe/Amsterdam' }));
-    const overdag = uurNu >= 8 && uurNu < 21;
-    const kortVoorVerloop = rest < 4 * 3600000;
-    const avondVoorOchtendverloop = rest < 14 * 3600000 && uurNu >= 18;
-    if (rest > 0 && overdag && (kortVoorVerloop || avondVoorOchtendverloop) && !state.opvolging[a.token + ':herinnerd']) {
+    if (reminderNu(rest, uurNu) && !state.opvolging[a.token + ':herinnerd']) {
       state.opvolging[a.token + ':herinnerd'] = new Date().toISOString();
       bewaarState(state);
       try {
@@ -1230,13 +1250,7 @@ async function verwerkAanbiedingen() {
           if (!poortH.ok) { console.log(`  reminder ${a.lead.naam} overgeslagen (${poortH.reden})`); }
           else {
             const TT4 = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
-            const { taalVan, GROET } = require('./lib/aanbod-versturen');
-            const taalR = taalVan(a.lead);
-            const voornaamR = String(a.lead.naam || 'daar').split(' ')[0];
-            const wanneer = new Date(a.slots[0].aankomst).toLocaleString(taalR === 'en' ? 'en-GB' : 'nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
-            const tekstR = taalR === 'en'
-              ? `Hi ${voornaamR}, a quick reminder: ${wanneer} is still held for you. One message and I'll lock it in! Doesn't suit after all? No problem, then I'll keep looking for you.\n\n${GROET.en}`
-              : `Hoi ${voornaamR}, kleine reminder: ${wanneer} staat nog voor je klaar. Eén berichtje en ik zet hem vast! Past het toch niet, ook prima, dan kijk ik gewoon verder voor je.\n\n${GROET.nl}`;
+            const tekstR = reminderTekst(a.lead, a.slots[0]);
             await fetch(`https://app.trengo.com/api/v2/tickets/${tk}/messages`, {
               method: 'POST', headers: { Authorization: 'Bearer ' + TT4, 'Content-Type': 'application/json' },
               body: JSON.stringify({ message: tekstR, type: 'OUTBOUND' }),
@@ -1479,7 +1493,8 @@ async function verwerkAanbiedingen() {
         const stT = laadState();
         const ticketInfo = stT.aanbodTickets?.[a.token];
         const { bevestigingsTekst } = require('./cron-aanbod-replies.js');
-        const tekst = bevestigingsTekst({ aankomst: slot.aankomst, inmeter: slot.inmeter });
+        const { taalVan } = require('./lib/aanbod-versturen');
+        const tekst = bevestigingsTekst({ aankomst: slot.aankomst, inmeter: slot.inmeter }, taalVan({ telefoon: a.lead.telefoon, email: a.lead.email, rpItemId: a.lead.rpItemId }));
         let bevestigd = false;
         if (ticketInfo?.waTicket) {
           const TT2 = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
@@ -1730,7 +1745,7 @@ async function verwerkVerzoek(m) {
   return { afgewezen: false, uitkomst: res.gelukt ? 'alle systemen bijgewerkt' : 'deels: ' + res.stappen.filter((x) => !x.ok).map((x) => x.stap).join(',') };
 }
 
-module.exports = { verwerkVerzoek, ontdubbelSlots, verversRonde: main, haalAgenda, leesLeadCompleet, werkdagenVoor, laadVakanties, voegAanbiedingenToe, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram };
+module.exports = { verwerkVerzoek, ontdubbelSlots, verversRonde: main, haalAgenda, leesLeadCompleet, werkdagenVoor, laadVakanties, voegAanbiedingenToe, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram, reminderNu, reminderTekst };
 
 if (require.main === module) {
   if (process.argv.includes('--verwerk-aanbod')) {

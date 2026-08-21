@@ -79,8 +79,17 @@ function wanneerTerug() {
   return (uur >= 18 || uur < 8) ? 'morgenochtend' : 'vandaag nog';
 }
 
-function bevestigingsTekst(slot) {
+function bevestigingsTekst(slot, taal = 'nl') {
   const d = new Date(slot.aankomst);
+  if (taal === 'en') {
+    // Engelstalige klant (Fatih 21-08 kreeg zijn boekingsbevestiging in het Nederlands)
+    const dagEn = d.toLocaleString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
+    const vanEn = d.toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+    const vVan = new Date(+d - 60 * 60000).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+    const vTot = new Date(+d + 90 * 60000).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+    const wieEn = slot.inmeter ? `our surveyor ${slot.inmeter}` : 'our surveyor';
+    return `All set, it's booked! On ${dagEn} ${wieEn} will come by to measure. We expect to be with you around ${vanEn}. As we drive a route that day it can shift a little, so please be home between ${vVan} and ${vTot}. Something come up? Just send us a message. Kind regards, Nanny from Sonty`;
+  }
   const dag = d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
   const van = d.toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const tot = new Date(+d + 30 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
@@ -142,11 +151,17 @@ function isAfsluiter(tekst) {
   if (/\?/.test(t)) return false;
   const kaal = t.replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{1F3FB}-\u{1F3FF}]/gu, ' ').toLowerCase().replace(/[^a-zà-ü]+/g, ' ').trim();
   if (!kaal) return true; // alleen emoji
-  const W = new Set(['dank', 'dankje', 'dankjewel', 'danku', 'dankuwel', 'bedankt', 'thanks', 'thank', 'you', 'thnx', 'top', 'prima', 'oke', 'oké', 'ok', 'okay', 'is', 'goed', 'dat', 'past', 'helemaal', 'hoor', 'ja', 'graag', 'fijn', 'fijne', 'avond', 'dag', 'weekend', 'tot', 'dan', 'ziens', 'snel', 'ook', 'je', 'jij', 'u', 'jullie', 'wel', 'hetzelfde', 'insgelijks', 'gelijk', 'doei', 'doeg', 'groetjes', 'groeten', 'super', 'perfect', 'duidelijk', 'begrepen', 'komt', 'voor', 'elkaar', 'we', 'zien', 'het', 'de', 'een', 'nakijken', 'reactie', 'bericht', 'info', 'informatie', 'moeite', 'uitleg', 'hulp', 'even', 'heel', 'erg', 'alvast', 'in', 'ieder', 'geval', 'great', 'perfect', 'fine', 'good', 'see', 'then', 'bye', 'cheers']);
+  const W = new Set(['dank', 'dankje', 'dankjewel', 'danku', 'dankuwel', 'bedankt', 'thanks', 'thank', 'you', 'thnx', 'top', 'prima', 'oke', 'oké', 'ok', 'okay', 'is', 'goed', 'dat', 'past', 'helemaal', 'hoor', 'ja', 'graag', 'fijn', 'fijne', 'avond', 'dag', 'weekend', 'tot', 'dan', 'ziens', 'snel', 'ook', 'je', 'jij', 'u', 'jullie', 'wel', 'hetzelfde', 'insgelijks', 'gelijk', 'doei', 'doeg', 'groetjes', 'groeten', 'super', 'perfect', 'duidelijk', 'begrepen', 'komt', 'voor', 'elkaar', 'we', 'zien', 'het', 'de', 'een', 'zo', 'yes', 'yep', 'works', 'me', 'that', 'for', 'it', 'sounds', 'nakijken', 'reactie', 'bericht', 'info', 'informatie', 'moeite', 'uitleg', 'hulp', 'even', 'heel', 'erg', 'alvast', 'in', 'ieder', 'geval', 'great', 'perfect', 'fine', 'good', 'see', 'then', 'bye', 'cheers']);
   return kaal.split(/\s+/).every((w) => W.has(w));
 }
 
+const ACK_GESTUURD = new Set(); // tickets die deze procesrun een ontvangstbericht kregen
 async function bevestigOntvangst(ticketId, naam, tekst, taal = 'nl') {
+  const ok = await bevestigOntvangstRuw(ticketId, naam, tekst, taal);
+  if (ok) ACK_GESTUURD.add(ticketId);
+  return ok;
+}
+async function bevestigOntvangstRuw(ticketId, naam, tekst, taal = 'nl') {
   // Verzendpoort (18-08): geen automatische ontvangstbevestiging als een mens in
   // het gesprek zit of de klant op stil staat — precies het Hans-incident.
   try {
@@ -212,6 +227,7 @@ async function zoekWaTicketOpNummer(telefoon) {
 }
 
 async function main() {
+  ACK_GESTUURD.clear(); // per run (cron start altijd vers; lab draait main() vaker)
   const state = (() => { try { return JSON.parse(fs.readFileSync(STATE_PLANNER, 'utf8')); } catch { return {}; } })();
   const gemeld = (() => { try { return JSON.parse(fs.readFileSync(GEMELD, 'utf8')); } catch { return {}; } })();
   const tickets = state.aanbodTickets || {};
@@ -266,6 +282,9 @@ async function main() {
   console.log(`${tokens.length} aanbod(en) om te volgen (van ${Object.keys(tickets).length} bewaarde)`);
 
   let meldingen = 0;
+  // wat deze run al een bericht/actie kreeg (keuze doorgevoerd, ack gestuurd, nieuw
+  // voorstel aangevraagd) hoeft de wachthond niet ook nog te "redden"
+  const afgehandeldDezeRun = new Set();
   for (const token of tokens) {
     const info = tickets[token];
     // STIL-LIJST (Daimy 13-08, Charles Gevers): staat een nummer hierop, dan doet de
@@ -330,7 +349,15 @@ async function main() {
         // status van het register onbekend (storing)? Dan NIET als gemeld afvinken: de
         // keuze moet de volgende ronde alsnog doorgevoerd kunnen worden.
         if (!alGemeld && !statusOnbekend) { gemeld[sleutel] = new Date().toISOString(); meldingen++; }
-        else if (!alGemeld) { console.log(`  ${info.naam}: reactie gezien maar register onbekend — volgende ronde opnieuw`); continue; }
+        else if (!alGemeld) {
+          // REGISTER ONBEREIKBAAR terwijl er een verse reactie ligt (lab 21-08): niet stil
+          // wachten — alarm (de filter ontdubbelt per 6 uur), zodat iemand het ziet als de
+          // storing aanhoudt en "Dat past" van een klant blijft liggen.
+          console.log(`  ${info.naam}: reactie gezien maar register onbekend — volgende ronde opnieuw`);
+          const oudU = (Date.now() - wanneer) / 3600000;
+          if (oudU >= 1) await telegram(`🚨 Aanbod-register onbereikbaar terwijl ${info.naam} al ${Math.floor(oudU)} uur geleden reageerde ("${String(m.body_plain || m.message || '').replace(/<[^>]+>/g, ' ').trim().slice(0, 80)}") — keuze kan niet verwerkt worden; actie nodig als dit aanhoudt (ticket ${ticketId}).`);
+          continue;
+        }
         const tekst = String(m.body_plain || m.message || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 400);
         // TAALREGEL (Daimy 13-08): schrijft de klant Engels, registreer dat — de planner
         // plant Engelstaligen dan automatisch bij Sjoerd (Joeys Engels is niet goed genoeg).
@@ -365,6 +392,7 @@ async function main() {
                 try { require('child_process').execFile('launchctl', ['kickstart', 'gui/501/nl.sonty.inmeet-verwerker']); } catch { /* volgende 5-min-run pakt hem */ }
                 await telegram(`✅ ${info.naam} koos via WhatsApp optie ${keuze + 1} ("${tekst.slice(0, 40)}") — wordt nu geboekt; de klant krijgt de bevestiging zodra de boeking helemaal rond is.`);
                 statusPer[token] = 'gekozen';
+                afgehandeldDezeRun.add(ticketId);
                 continue;
               }
             }
@@ -419,6 +447,7 @@ async function main() {
                 await telegram(`⚠️ ${info.naam} wil een ander moment, maar ik kan zijn RP-lead niet vinden — nieuw aanbod handmatig sturen via het dashboard.`);
                 continue;
               }
+              afgehandeldDezeRun.add(ticketId);
               const r = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
                 method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
                 body: JSON.stringify({
@@ -447,6 +476,40 @@ async function main() {
               await telegram(`🚨 KLACHT ${info.naam} (ticket ${ticketId}): ${duiding.samenvatting}\n\n"${tekst.slice(0, 200)}"\n\n`
                 + (duiding.antwoordVoorstel ? `Concept-antwoord:\n${duiding.antwoordVoorstel}` : 'Geen concept-antwoord beschikbaar.')
                 + '\n\nDe klant weet dat we ermee bezig zijn; het echte antwoord moet van een mens komen.');
+              continue;
+            }
+            if (duiding.intent === 'annuleren') {
+              // ANNULEREN OP EEN OPEN AANBOD viel tussen wal en schip (lab 21-08): alleen een
+              // onderdrukte 💬-procesmelding. Nu: aanbod sluiten, klant bevestigen, alarm.
+              await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, {
+                method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+                body: JSON.stringify({ status: 'verlopen', reden: 'klant annuleert (reply-monitor)' }),
+              }).catch(() => {});
+              statusPer[token] = 'verlopen';
+              const taalX = taalVoor(info);
+              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, T(taalX,
+                'Dank je voor je bericht, wat jammer om te lezen! Ik geef het direct door aan een collega; die neemt het persoonlijk met je op.',
+                "Thank you for your message, sorry to read that! I'm passing it straight on to a colleague, who will take it up with you personally."), taalX);
+              await telegram(`🚨 ANNULERING/afzegging van ${info.naam} op een open inmeet-aanbod: ${duiding.samenvatting}\n\n"${tekst.slice(0, 200)}"\n\nAanbod is gesloten; mens nodig (ticket ${ticketId}).`);
+              continue;
+            }
+            if (duiding.intent === 'akkoord') {
+              // AKKOORD IN WOORDEN DIE DE REGEX NIET KENT ("Ja hoor, maandag is prima zo") op
+              // een open aanbod met één tijd: gewoon doorvoeren — de klant zegt ja.
+              if ((aanbod?.slots || []).length === 1) {
+                const rK2 = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, {
+                  method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+                  body: JSON.stringify({ status: 'gekozen', gekozenIndex: 0 }),
+                }).catch(() => null);
+                if (rK2?.ok) {
+                  try { require('child_process').execFile('launchctl', ['kickstart', 'gui/501/nl.sonty.inmeet-verwerker']); } catch { /* volgende run */ }
+                  await telegram(`✅ ${info.naam} ging akkoord (AI-duiding: "${tekst.slice(0, 40)}") — wordt nu geboekt; bevestiging volgt na de boeking.`);
+                  statusPer[token] = 'gekozen';
+                  afgehandeldDezeRun.add(ticketId);
+                  continue;
+                }
+              }
+              await telegram(`🚨 ${info.naam} lijkt akkoord te gaan ("${tekst.slice(0, 80)}") maar ik kon de keuze niet automatisch doorvoeren (meerdere tijden of register-fout) — actie nodig: handmatig boeken (ticket ${ticketId}).`);
               continue;
             }
             if (duiding.intent === 'vraag') {
@@ -511,6 +574,24 @@ async function main() {
               meldingen++;
               continue;
             }
+            if (duidingB.intent === 'akkoord' && statusPer[token] === 'verlopen' && (aanbodB?.slots || []).length === 1) {
+              // JA NA HET VERLOPEN (Fatih 21-08: "Yes" 25 uur na het voorstel). De tijd is
+              // misschien nog vrij: keuze alsnog doorzetten, de verwerker doet de
+              // botsingscontrole en meldt het als het niet meer past.
+              const rL = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, {
+                method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+                body: JSON.stringify({ status: 'gekozen', gekozenIndex: 0 }),
+              }).catch(() => null);
+              if (rL?.ok) {
+                try { require('child_process').execFile('launchctl', ['kickstart', 'gui/501/nl.sonty.inmeet-verwerker']); } catch { /* volgende run */ }
+                await telegram(`✅ ${info.naam} ging alsnog akkoord na het verlopen van het aanbod ("${tekst.slice(0, 40)}") — wordt nu geboekt als de tijd nog vrij is; anders volgt een melding.`);
+                statusPer[token] = 'gekozen';
+                afgehandeldDezeRun.add(ticketId);
+                continue;
+              }
+              await telegram(`🚨 ${info.naam} zegt ja op een verlopen aanbod maar doorzetten lukte niet — actie nodig: handmatig boeken (ticket ${ticketId}).`);
+              continue;
+            }
             if (duidingB.intent !== 'akkoord') {
               // VRAGEN EN AL HET ANDERE NA BOEKING ZIJN VAN SUNNY (Daimy 18-08, Barbara
               // Galante: haar aanbetalingsvraag kreeg "ik zoek dit even goed uit" van de
@@ -540,7 +621,8 @@ async function main() {
         const wSleutel = 'stil-gemeld:' + ticketId + ':' + (laatsteIn?.id || 0);
         const tekstIn = String(laatsteIn?.body_plain || laatsteIn?.message || '').replace(/<[^>]+>/g, ' ').trim();
         if (laatsteIn && laatsteInT > Date.parse(info.verstuurdOp) && !naLaatsteIn && oudUur >= 2 && oudUur < 72
-            && uurNu >= 8 && uurNu < 21 && !gemeld[wSleutel] && !isAfsluiter(tekstIn)) {
+            && uurNu >= 8 && uurNu < 21 && !gemeld[wSleutel] && !isAfsluiter(tekstIn)
+            && !afgehandeldDezeRun.has(ticketId) && !ACK_GESTUURD.has(ticketId)) {
           gemeld[wSleutel] = new Date().toISOString();
           const taalW = taalVoor(info);
           const gestuurd = await bevestigOntvangst(ticketId, info.naam, T(taalW,
@@ -567,5 +649,5 @@ async function main() {
   console.log(`${tokens.length} aanbod(en) gevolgd, ${meldingen} nieuwe reactie(s) gemeld`);
 }
 
-module.exports = { bevestigingsTekst, leesKeuze, isAfsluiter };
+module.exports = { bevestigingsTekst, leesKeuze, isAfsluiter, main };
 if (require.main === module) main().catch((e) => { console.error(e.message); process.exit(1); });

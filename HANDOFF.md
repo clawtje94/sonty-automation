@@ -30,6 +30,16 @@
   geen vrijdag, andere dag noemen; dubbel token uit administratie), Jeffrey (antwoord per mail,
   WA-venster dicht). Marco/Michel: afsluiters, geen actie.
 - Daemons herstart: nl.sonty.sonny, nl.sonty.inmeet-verzoeken.
+- SCENARIO-LAB (Daimy: "minimaal 500"): twee nieuwe onderdelen in scenario-lab/onderdelen/:
+  planner-berichten.js (1680: taal × 24u-venster × soort bericht × moment × gesprek ×
+  eerdere voorstellen × uur; nep-Trengo, nep-bestanden) en klantreactie.js (960: échte
+  monitor-main + Sunny's planningRolVoor met nep-Haiku/register). Stand: 3390 scenario's,
+  0x FOUT-STIL. Lab vond en fixte: annuleren/akkoord-in-woorden op open aanbod was stil,
+  "ja" ná verlopen aanbod werd niet geboekt, wachthond dubbel met ack, register-storing
+  met liggende keuze zonder alarm, monitor-ACK-set per run. Gesprek-lab over 101 echte
+  gesprekken: FOUT-STIL 12 → 0 (Marco kreeg afsluitend antwoord).
+- Vragen open bij Daimy: V1 voorraadscherm Marius vastleggen? V2 dag-ervoor-herinneringen
+  inschakelen (script staat nergens in launchd)?
 
 
 

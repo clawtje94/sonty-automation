@@ -141,7 +141,7 @@ async function maakOchtend(hist, poging = 0) {
   let tekst = (j?.content?.[0]?.text || '').trim().replace(/^"|"$/g, '');
   tekst = tekst.replace(/\s*\u2014+\s*/g, ', ');
   tekst = tekst.charAt(0).toLowerCase() + tekst.slice(1);
-  if (!tekst || tekst.length < 20) throw new Error('ochtend-generatie mislukt');
+  if (!tekst || tekst.length < 20) { console.error('API-antwoord:', JSON.stringify(j).slice(0, 400)); throw new Error('ochtend-generatie mislukt'); }
   if (lijktOpEerder(tekst, eerderLijst) && poging < 2) return maakOchtend(hist, poging + 1);
   return { thema: 'ochtend', tekst };
 }
@@ -167,7 +167,7 @@ async function maakWeetje(hist) {
   tekst = tekst.replace(/^wisten?\s+jull?ie\s+dat+\s*/i, '');
   tekst = tekst.replace(/\s*\u2014+\s*/g, ', ');
   tekst = tekst.charAt(0).toLowerCase() + tekst.slice(1);
-  if (!tekst || tekst.length < 20) throw new Error('weetje-generatie mislukt');
+  if (!tekst || tekst.length < 20) { console.error('API-antwoord:', JSON.stringify(j).slice(0, 400)); throw new Error('weetje-generatie mislukt'); }
   return { thema, tekst };
 }
 

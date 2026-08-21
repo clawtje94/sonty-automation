@@ -175,18 +175,27 @@ async function naarBeoordeling(jpgPad, naam, uit) {
         console.log(`vraag van ${naam}:`, String(tekst).slice(0, 80));
         try {
           const { antwoordCollega } = require('./lib/collega-antwoord.js');
-          const antwoord = await antwoordCollega(naam, String(tekst).slice(0, 500));
+          const uitA = await antwoordCollega(naam, String(tekst).slice(0, 500));
+          const antwoord = typeof uitA === 'string' ? uitA : uitA.tekst;
+          const bijlagen = (typeof uitA === 'string' ? [] : uitA.bijlagen) || [];
           if (fs.existsSync(DMVLAG)) {
             // directe 1-op-1 wordt door WhatsApp geweigerd (status 0, 19-08):
             // antwoord via de Desktop-wachtrij zodra het scherm vrij is
             fs.mkdirSync(DESKTOPQ, { recursive: true });
-            fs.writeFileSync(path.join(DESKTOPQ, Date.now() + '.json'), JSON.stringify({ doel: DESKTOPNAAM[naam] || naam, tekst: antwoord }));
+            fs.writeFileSync(path.join(DESKTOPQ, Date.now() + '.json'), JSON.stringify({ doel: DESKTOPNAAM[naam] || naam, tekst: antwoord + (bijlagen.length ? '\n(De PDF kan via deze reserve-route niet mee; vraag hem straks nog eens.)' : '') }));
             await telegram(`💬 ${naam} vroeg Sunny: "${String(tekst).slice(0, 120)}"\nAntwoord: ${antwoord.slice(0, 300)}\n(gaat via de reserve-route naar WhatsApp zodra het scherm vrij is)`);
           } else {
             const r = await sock.sendMessage(antwoordJid, { text: antwoord });
             bewaak(r?.key?.id, { type: 'antwoord', doel: DESKTOPNAAM[naam] || naam, tekst: antwoord, naam });
+            // (concept)offerte-PDF's als document erachteraan (Daimy 21-08)
+            for (const b of bijlagen) {
+              try {
+                await sock.sendMessage(antwoordJid, { document: fs.readFileSync(b.bestand), mimetype: 'application/pdf', fileName: b.naam });
+                console.log('bijlage verstuurd aan', naam, b.naam);
+              } catch (e) { console.error('bijlage-fout:', String(e.message).slice(0, 80)); await sock.sendMessage(antwoordJid, { text: 'De PDF kon ik net niet meesturen, probeer het zo nog eens.' }); }
+            }
             console.log('antwoord verstuurd aan', naam);
-            await telegram(`💬 ${naam} vroeg Sunny: "${String(tekst).slice(0, 120)}"\nSunny antwoordde: ${antwoord.slice(0, 300)}`);
+            await telegram(`💬 ${naam} vroeg Sunny: "${String(tekst).slice(0, 120)}"\nSunny antwoordde: ${antwoord.slice(0, 300)}${bijlagen.length ? '\n(+ ' + bijlagen.map((b) => b.naam).join(', ') + ')' : ''}`);
           }
         } catch (e) {
           console.error('collega-antwoord-fout:', String(e.message).slice(0, 100));

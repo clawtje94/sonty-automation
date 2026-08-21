@@ -53,6 +53,12 @@
   groepsberichten (data/wa-groep-recent.json). Killswitch: data/wa-groep-antwoord-uit.txt
   aanmaken. Log: data/wa-groep-antwoorden.jsonl. Proef: node scripts/lib/groep-antwoord.js --proef "Naam: tekst".
 - Sunny's profielfoto met blauw oog: data/sunny-profiel/ (origineel + 2 varianten), naar Daimy gestuurd 21-08.
+- COLLEGA-ASSISTENT (DM Joey/Sjoerd/Daimy aan Sunny, lib/collega-antwoord.js) UITGEBREID (Daimy 21-08):
+  gripp_offerte geeft nu ook productregels (product, maten, kleur, bediening, motor, prijs excl.);
+  nieuwe tool gripp_offerte_pdf downloadt de (concept)offerte via Gripp directpdfurl (read-only)
+  en de luisteraar stuurt die als PDF-document mee in de DM. antwoordCollega geeft nu
+  {tekst, bijlagen}. Getest op Gripp 6521 (175 KB PDF). Reserve-route (DM-uit) kan geen PDF.
+- Groepspersona grover gemaakt (Daimy: "zelfs inmeten kan je niet" mag): roasts over werk expliciet toegestaan.
 
 
 

@@ -240,6 +240,20 @@ async function main() {
       if (a.lead?.rpItemId) rpItemPer[a.token] = a.lead.rpItemId;
     }
   } catch { /* status is context, geen blokkade */ }
+  // VANGNET (Fatih 21-08 10:13: zijn "Yes" kwam binnen terwijl de actief-lijst even niet
+  // te lezen was → status "onbekend" → keuze niet doorgevoerd én als gemeld afgevinkt,
+  // dus nooit meer geprobeerd). Lijst leeg terwijl we wél tokens volgen? Dan per token
+  // de status ophalen; blijft ook dát onbekend, dan markeren we niets als afgehandeld.
+  if (!Object.keys(statusPer).length && tokens.length) {
+    for (const tok of tokens.slice(0, 40)) {
+      try {
+        const rT = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${tok}`, { headers: { 'x-meet-code': MEET_CODE } });
+        if (rT.ok) { const a = await rT.json(); statusPer[tok] = a.status; if (a.lead?.rpItemId) rpItemPer[tok] = a.lead.rpItemId; }
+      } catch { /* volgende */ }
+      await new Promise((x) => setTimeout(x, 300));
+    }
+  }
+  const statusOnbekend = !Object.keys(statusPer).length;
   // Volgen: alles wat nog loopt, PLUS alles wat de afgelopen vier dagen is verstuurd —
   // ook als het al geboekt is. Connie Biermann schreef twee keer ná haar bevestiging dat
   // die dag niet kon (10-08) en kreeg niets terug, omdat een geboekt aanbod niet meer
@@ -313,7 +327,10 @@ async function main() {
         // proberen we een herkenbare keuze elke run opnieuw; alleen de
         // Telegram-MELDING blijft eenmalig.
         if (alGemeld && statusPer[token] !== 'open') continue;
-        if (!alGemeld) { gemeld[sleutel] = new Date().toISOString(); meldingen++; }
+        // status van het register onbekend (storing)? Dan NIET als gemeld afvinken: de
+        // keuze moet de volgende ronde alsnog doorgevoerd kunnen worden.
+        if (!alGemeld && !statusOnbekend) { gemeld[sleutel] = new Date().toISOString(); meldingen++; }
+        else if (!alGemeld) { console.log(`  ${info.naam}: reactie gezien maar register onbekend — volgende ronde opnieuw`); continue; }
         const tekst = String(m.body_plain || m.message || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 400);
         // TAALREGEL (Daimy 13-08): schrijft de klant Engels, registreer dat — de planner
         // plant Engelstaligen dan automatisch bij Sjoerd (Joeys Engels is niet goed genoeg).

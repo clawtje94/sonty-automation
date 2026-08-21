@@ -29,7 +29,7 @@ const DAGEN = { maandag: 1, dinsdag: 2, woensdag: 3, donderdag: 4, vrijdag: 5, z
  *   dagdeel: 'ochtend'|'middag'|null, samenvatting: string, antwoordVoorstel: string}>}
  */
 async function leesReactie(tekst, aangebodenTijden) {
-  const veilig = { intent: 'vraag', dagen: [], dagdeel: null, vanaf: null, samenvatting: 'niet automatisch te duiden', antwoordVoorstel: '' };
+  const veilig = { intent: 'vraag', dagen: [], dagdeel: null, vanaf: null, samenvatting: 'niet automatisch te duiden', antwoordVoorstel: '', overigeVraag: '' };
   if (!String(tekst || '').trim()) return veilig;
   const aanbod = (aangebodenTijden || []).map((s) => new Date(s.aankomst).toLocaleString('nl-NL', {
     weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam',
@@ -41,7 +41,7 @@ async function leesReactie(tekst, aangebodenTijden) {
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 400,
       system: `Je leest antwoorden van klanten van een zonweringbedrijf op een voorgesteld inmeetmoment.
-Geef ALLEEN JSON terug: {"intent","dagen","dagdeel","samenvatting","antwoordVoorstel"}.
+Geef ALLEEN JSON terug: {"intent","dagen","dagdeel","samenvatting","antwoordVoorstel","overigeVraag"}.
 
 intent:
 - "akkoord": klant gaat akkoord met een voorgesteld moment, zonder klacht of voorbehoud.
@@ -61,7 +61,10 @@ vanaf: eerste datum (YYYY-MM-DD) waarop de klant WEL kan, als hij een periode ui
 Geen periode genoemd = null. Vandaag is ${vandaag}.
 samenvatting: één zin, wat de klant wil, in het Nederlands.
 antwoordVoorstel: bij "vraag" of "klacht" een concept-antwoord van maximaal 3 zinnen in de stijl van
-Nanny van de planning (je-vorm, warm, geen beloftes die je niet waar kunt maken). Anders "".`,
+Nanny van de planning (je-vorm, warm, geen beloftes die je niet waar kunt maken). Anders "".
+overigeVraag: staat er NAAST de tijdkeuze nog een vraag of zorg die niet over de datum/tijd gaat
+(levertijd, voorraad/op=op, product, prijs, montage, "kan ik een mens spreken")? Vat die dan in
+één zin samen; anders "". Bij intent "vraag" is dit de vraag zelf.`,
       messages: [{ role: 'user', content: `Aangeboden moment(en): ${aanbod}\n\nKlant schreef:\n"""${String(tekst).slice(0, 1200)}"""` }],
     });
     const ruw = resp.content?.[0]?.text || '';
@@ -74,6 +77,7 @@ Nanny van de planning (je-vorm, warm, geen beloftes die je niet waar kunt maken)
       vanaf: /^\d{4}-\d{2}-\d{2}$/.test(json.vanaf || '') ? json.vanaf : null,
       samenvatting: String(json.samenvatting || '').slice(0, 200),
       antwoordVoorstel: String(json.antwoordVoorstel || '').slice(0, 600),
+      overigeVraag: String(json.overigeVraag || '').slice(0, 300),
     };
   } catch (e) {
     console.log('  reactie-lezer faalde (' + e.message.slice(0, 60) + ') — behandeld als vraag voor een mens');

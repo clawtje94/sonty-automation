@@ -218,9 +218,19 @@ async function stuurWhatsAppTemplate(aanbod, url) {
 async function stuurWhatsApp(aanbod, url) {
   const taal = taalVan(aanbod.lead);
   const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
-  const vrijeTekst = aanbod.herhaling
+  let vrijeTekst = aanbod.herhaling
     ? herhalingTekst(voornaam, aanbod.slots, taal)
     : berichtTekst(voornaam, url, aanbod.duurMin, aanbod.geldigUren || 24, aanbod.ver === true, aanbod.slots, taal);
+  if (aanbod.klantReply && !aanbod.herhaling) {
+    // antwoord op wat de klant vroeg: aanhef ervoor, "Hoi X," uit de hoofdtekst halen
+    const DAGNL = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
+    const DAGEN_ = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const dagen = (aanbod.klantReply.dagen || []).map((d) => (taal === 'en' ? DAGEN_[d] : DAGNL[d])).filter(Boolean).join(taal === 'en' ? ' or ' : ' of ');
+    const aanhef = taal === 'en'
+      ? `Hi ${voornaam}, thanks for your message${dagen ? ` and sorry for the wait. You asked about ${dagen}: that is possible` : " and sorry for the wait. I have looked again"}. `
+      : `Hoi ${voornaam}, dank voor je bericht${dagen ? ` en sorry dat je even moest wachten. Je vroeg naar ${dagen}: dat kan` : ' en sorry dat je even moest wachten. Ik heb opnieuw gekeken'}. `;
+    vrijeTekst = aanhef + vrijeTekst.replace(/^(Hoi|Hi) [^,]+, /, '').replace(/^(goed nieuws|good news): /i, '');
+  }
   const stuurVrij = async () => {
     const ticket = await zoekWaTicket(aanbod.lead.telefoon);
     if (!ticket) return { ok: false, reden: 'geen WhatsApp-gesprek' };
@@ -234,7 +244,12 @@ async function stuurWhatsApp(aanbod, url) {
   // "goed nieuws". Dan eerst het vrije bericht proberen (lukt binnen het 24-uursvenster,
   // en dat staat bijna altijd open omdat de klant net met ons appte); pas als dat niet
   // kan het template als vangnet — liever een Nederlands voorstel dan geen voorstel.
-  if (taal === 'en' || aanbod.herhaling) {
+  // Ook bij een moment ≥3 weken weg (template zegt altijd "goed nieuws" — Marius 21-08 kreeg
+  // "goed nieuws: di 29 sep" na twee dagen stilte) en bij een antwoord op een klantreactie
+  // (dan hoort er "dank voor je bericht, je vroeg naar dinsdag" boven te staan).
+  const eerste = aanbod.slots?.[0]?.aankomst ? Date.parse(aanbod.slots[0].aankomst) : 0;
+  const verWeg = eerste && (eerste - Date.now()) / (7 * 86400000) >= 3;
+  if (taal === 'en' || aanbod.herhaling || verWeg || aanbod.klantReply) {
     const vrij = await stuurVrij();
     if (vrij.ok) return vrij;
     const viaTemplate = await stuurWhatsAppTemplate(aanbod, url);

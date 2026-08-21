@@ -421,15 +421,21 @@ async function planningRolVoor(t, rows) {
   for (let i = rows.length - 1; i >= 0 && rows[i].van === 'klant'; i--) reeks.unshift(rows[i].tekst);
   const tekst = reeks.join('\n').trim();
   const lopend = lopendInmeetAanbod(t.contact?.phone, t.contact?.email);
-  let blijfWeg = false, reden = '';
+  let blijfWeg = false, reden = '', alleenDeel = '';
   if (lopend && tekst) {
     const { leesKeuze } = require('../cron-aanbod-replies.js');
     if (leesKeuze(tekst, slots.length ? slots : [{ aankomst: info.verstuurdOp }]) !== null) { blijfWeg = true; reden = 'keuze'; }
     else {
       const { leesReactie } = require('../lib/planning-antwoord.js');
       const d = await leesReactie(tekst, slots);
-      if (['akkoord', 'ander-moment', 'annuleren'].includes(d.intent)) { blijfWeg = true; reden = d.intent; }
-      else reden = d.intent;
+      if (['akkoord', 'ander-moment', 'annuleren'].includes(d.intent) && !d.overigeVraag) { blijfWeg = true; reden = d.intent; }
+      else if (['akkoord', 'ander-moment', 'annuleren'].includes(d.intent)) {
+        // Marius 19-08: "kan het op dinsdag?" + "op=op wil ik voorkomen" — de planner
+        // regelt de dinsdag, maar niemand ging in op de voorraad-zorg. Sunny beantwoordt
+        // dan ALLEEN het deel buiten de planning.
+        reden = d.intent + '+vraag';
+        alleenDeel = d.overigeVraag;
+      } else reden = d.intent;
     }
   }
   const fmt = (sl) => new Date(sl.aankomst).toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' }) + (sl.inmeter ? ` (inmeter ${sl.inmeter})` : '');
@@ -447,7 +453,8 @@ async function planningRolVoor(t, rows) {
     '- Dit is het EERSTE beschikbare moment; eerder kan op dit moment NIET (het is drukker dan we willen door vakanties en de bouwvak; de inmeters werken maandag t/m donderdag 09:00-15:00; Engelstalige klanten meet alleen Sjoerd). Zeg dat eerlijk, beloof geen eerdere datum.',
     '- Jij boekt, verzet of belooft ZELF GEEN inmeetmoment. Wil de klant het voorgestelde moment vastzetten, dan kan hij simpelweg "dat past" (EN: "that works") antwoorden; wil hij een andere dag, dan noemt hij die dag en zoekt de planning opnieuw. Zeg dat zo.',
     '- Beantwoord zijn inhoudelijke vraag volledig (levertijd 8-10 weken na definitieve offerte + aanbetaling, proces, product, waarom niet eerder). Vraagt hij expliciet om een mens: beantwoord éérst zelf wat je kunt, zeg dat een collega is ingelicht, en escaleer daarnaast — nooit alleen "een collega komt erop terug".',
-  ].join('\n');
+    alleenDeel ? `- LET OP: de klant koos/vroeg ook iets over de TIJD; dat handelt de planning zelf af (die stuurt een nieuw voorstel of bevestigt). Ga daar niet op in en herhaal geen tijden. Beantwoord ALLEEN dit deel: "${alleenDeel}". Weet je het antwoord niet zeker (bv. of een voorraadproduct gereserveerd kan worden): zeg dat eerlijk, escaleer, en beloof geen uitkomst.` : '',
+  ].filter(Boolean).join('\n');
   return { blijfWeg, reden, context };
 }
 

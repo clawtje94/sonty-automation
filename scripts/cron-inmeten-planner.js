@@ -1137,7 +1137,7 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, 
   if (!res.ok) throw new Error(`aanbod aanmaken: HTTP ${res.status}`);
   const { url, token } = await res.json();
   const { verstuurAanbod } = require('./lib/aanbod-versturen');
-  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email, rpItemId: item.id }, duurMin, ver, slots: aanbod, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren, herhaling: !!opties.herhaling }, url);
+  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email, rpItemId: item.id }, duurMin, ver, slots: aanbod, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren, herhaling: !!opties.herhaling, klantReply: opties.klantReply || null }, url);
   if (!verzonden.wa.ok && !verzonden.mail.ok) {
     // NIET BEZORGD = GEEN AANBOD. Het record stond al "open" in het register terwijl de
     // klant niets had gekregen (Fatih/Marius 20-08: spook-aanbiedingen die elke ochtend
@@ -1656,7 +1656,7 @@ async function verwerkDashboardVerzoek(m) {
         throw new Error(`vroegst haalbare is ${aanbod[0].datum} — NIET eerder dan wat de klant al had (${m.eerderDan.slice(0, 10)}); niets verstuurd, mens nodig`);
       }
     }
-    const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda, null, { herhaling: !!m.herhaling });
+    const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda, null, { herhaling: !!m.herhaling, klantReply: m.bron === 'klant-reply' ? { dagen: m.voorkeurDagen || [] } : null });
     return `keuzelink verstuurd (${aanbod.length >= 3 ? 3 : aanbod.length} tijd(en)): ${url}`;
    } catch (e) { await meldGeenAlternatiefBijFout(lead, m, e); throw e; }
   }

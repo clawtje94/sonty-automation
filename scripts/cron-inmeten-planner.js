@@ -810,13 +810,16 @@ async function main() {
 
     if (LIVE) {
       try {
-        const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda,
-      (m.vanaf || m.nietDeze?.length) ? { vanaf: m.vanaf || null, nietDeze: m.nietDeze || [] } : null);
+        // Geen beperking meegeven: dit is het EERSTE aanbod, er is nog geen klantwens.
+        // (10-08 sloop hier per ongeluk `m` in — dat bestaat alleen in het antwoord-pad —
+        // waardoor elk vers aanbod sindsdien stil crashte op "m is not defined".)
+        const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda, null);
         console.log(`    AANBOD VERSTUURD: ${url}`);
         regels.push(`  → aanbod verstuurd (24u geldig)`);
         state.aangeboden[item.id] = { naam: lead.naam, op: new Date().toISOString(), aanbod: aanbod.length };
       } catch (e) {
         console.log(`    FOUT bij aanbod versturen: ${e.message}`);
+        if (process.env.POORT_OVERRIDE === '1') console.log(e.stack);
         regels.push(`  → aanbod versturen MISLUKT: ${e.message}`);
         continue;
       }
@@ -1144,8 +1147,21 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, 
     // opnieuw "verliepen" en een nieuwe ronde startten). Meteen sluiten, en het kantoor
     // krijgt een alarm mét de tijden zodat iemand het zelf kan sturen.
     try { await aanbodApi('/' + token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen', reden: `niet bezorgd: wa ${verzonden.wa.reden}; mail ${verzonden.mail.reden}` }) }); } catch { /* register onbereikbaar */ }
-    const tijden = aanbod.map((sl) => `${sl.datum} ${sl.aankomst.toISOString().slice(11, 16)}Z ${sl.inmeter}`).join(', ');
-    await telegram(`🚨 Aanbod voor ${lead.naam} NIET verstuurd (wa: ${verzonden.wa.reden}; mail: ${verzonden.mail.reden}) — actie nodig: stuur de tijden zelf in het gesprek of zet de klant op stil. Berekende tijden: ${tijden}. Keuzelink: ${url}`);
+    // ALARM MAX 1x PER 24 UUR PER KLANT (Daimy 21-08: "ik heb echt 35 dezelfde
+    // berichten"): elke planner-run probeerde het opnieuw en stuurde wéér hetzelfde
+    // alarm. De poging zelf mag blijven (zodra de blokkade wegvalt gaat het aanbod
+    // alsnog vanzelf), maar het alarm niet. Zonder keuzelink: die is hierboven net
+    // op "verlopen" gezet en dus altijd dood (Daimy: "die link klopt niet").
+    const stAl = laadState();
+    stAl.nietBezorgdAlarm = stAl.nietBezorgdAlarm || {};
+    for (const [id, iso] of Object.entries(stAl.nietBezorgdAlarm)) if (Date.now() - Date.parse(iso) > 7 * 86400000) delete stAl.nietBezorgdAlarm[id];
+    const eerder = stAl.nietBezorgdAlarm[item.id];
+    if (!eerder || Date.now() - Date.parse(eerder) > 24 * 3600000) {
+      const tijden = aanbod.map((sl) => `${sl.datum} ${sl.aankomst.toISOString().slice(11, 16)}Z ${sl.inmeter}`).join(', ');
+      await telegram(`🚨 Aanbod voor ${lead.naam} NIET verstuurd (wa: ${verzonden.wa.reden}; mail: ${verzonden.mail.reden}) — actie nodig: stuur de tijden zelf in het gesprek of zet de klant op stil. Berekende tijden: ${tijden}. (Deze melding komt max 1x per dag per klant.)`);
+      stAl.nietBezorgdAlarm[item.id] = new Date().toISOString();
+      bewaarState(stAl);
+    }
     throw new Error(`niet bezorgd (wa: ${verzonden.wa.reden}, mail: ${verzonden.mail.reden})`);
   }
   // ticket-ids bewaren zodat de reply-monitor ELK antwoord kan uitlezen (Daimy 06-08:

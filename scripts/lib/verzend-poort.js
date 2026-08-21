@@ -113,6 +113,13 @@ async function haalBerichten(ticketId) {
  * @returns {Promise<{ok:boolean, reden:string, mensNodig?:boolean}>}
  */
 async function magSturen({ telefoon, email, ticketId, soort }) {
+  // Handmatige override (alleen voor een bewuste, eenmalige run op verzoek van
+  // Daimy, bv. POORT_OVERRIDE=1 node cron-inmeten-planner.js --live --alleen=...).
+  // De daemons zetten deze variabele nooit. De stil-lijst blijft ALTIJD gelden.
+  if (process.env.POORT_OVERRIDE === '1' && !klantStil(telefoon)) {
+    console.log('  verzendpoort: OVERRIDE actief (handmatige run) — poort doorgelaten');
+    return { ok: true, reden: 'handmatige override' };
+  }
   if (klantStil(telefoon)) return { ok: false, reden: 'stil-lijst' };
   // MAX-2 GELDT OOK ZONDER WHATSAPP (19-08, Melchior Blok: mail-only klant met een
   // onbruikbaar telefoonnummer kreeg 3 aanbod-mails op één ochtend omdat de telling

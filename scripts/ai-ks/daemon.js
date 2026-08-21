@@ -393,6 +393,64 @@ function isPuurBedankje(tekst) {
 // na versturen — aanbiedingen zelf verlopen na max 24 uur, dus dit dekt de hele
 // actieve periode plus een dag buffer. Match op laatste 9 cijfers én op e-mail,
 // zodat ook mail-tickets (zonder telefoonnummer) beschermd zijn.
+/** Welke rol heeft Sunny bij dit gesprek als er een inmeet-aanbod loopt of net liep?
+ *  @returns {Promise<{blijfWeg:boolean, reden?:string, context:string}>} */
+async function planningRolVoor(t, rows) {
+  const fs2 = require('fs');
+  const st = JSON.parse(fs2.readFileSync('/Users/clawdboot/sonty/data/inmeten-planner-state.json', 'utf8'));
+  const tel9 = String(t.contact?.phone || '').replace(/\D/g, '').slice(-9);
+  const mail = String(t.contact?.email || '').trim().toLowerCase();
+  const recent = Object.entries(st.aanbodTickets || {})
+    .filter(([, a]) => {
+      const aTel = String(a.telefoon || '').replace(/\D/g, '').slice(-9);
+      const aMail = String(a.email || '').trim().toLowerCase();
+      return ((tel9.length === 9 && aTel === tel9) || (!!mail && !!aMail && aMail === mail))
+        && Date.now() - Date.parse(a.verstuurdOp) < 14 * 86400000;
+    })
+    .sort((x, y) => String(y[1].verstuurdOp).localeCompare(String(x[1].verstuurdOp)));
+  if (!recent.length) return { blijfWeg: false, context: '' };
+  const [token, info] = recent[0];
+  let aanbod = null;
+  try {
+    const r = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': process.env.MEETBON_CODE || '2288' } });
+    aanbod = r.ok ? await r.json() : null;
+  } catch { /* context zonder details */ }
+  const slots = aanbod?.slots || [];
+  // laatste reeks klantberichten (zonder tussenliggend antwoord van ons) = de boodschap
+  const reeks = [];
+  for (let i = rows.length - 1; i >= 0 && rows[i].van === 'klant'; i--) reeks.unshift(rows[i].tekst);
+  const tekst = reeks.join('\n').trim();
+  const lopend = lopendInmeetAanbod(t.contact?.phone, t.contact?.email);
+  let blijfWeg = false, reden = '';
+  if (lopend && tekst) {
+    const { leesKeuze } = require('../cron-aanbod-replies.js');
+    if (leesKeuze(tekst, slots.length ? slots : [{ aankomst: info.verstuurdOp }]) !== null) { blijfWeg = true; reden = 'keuze'; }
+    else {
+      const { leesReactie } = require('../lib/planning-antwoord.js');
+      const d = await leesReactie(tekst, slots);
+      if (['akkoord', 'ander-moment', 'annuleren'].includes(d.intent)) { blijfWeg = true; reden = d.intent; }
+      else reden = d.intent;
+    }
+  }
+  const fmt = (sl) => new Date(sl.aankomst).toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' }) + (sl.inmeter ? ` (inmeter ${sl.inmeter})` : '');
+  const status = aanbod?.status || 'onbekend';
+  let geboekt = null;
+  try {
+    const bo = JSON.parse(fs2.readFileSync('/Users/clawdboot/sonty/data/inmeet-boekingen.json', 'utf8'));
+    geboekt = Object.values(bo).find((b) => b.status === 'geboekt' && String(b.telefoon || '').replace(/\D/g, '').slice(-9) === tel9 && tel9.length === 9) || null;
+  } catch { /* geen administratie */ }
+  const context = [
+    'PLANNING-CONTEXT (intern, niet letterlijk citeren):',
+    geboekt
+      ? `- De inmeetafspraak van deze klant is GEBOEKT: ${geboekt.slot?.aankomst ? fmt({ aankomst: geboekt.slot.aankomst, inmeter: geboekt.slot.inmeter || geboekt.inmeter }) : (geboekt.datum || 'datum onbekend')}. Thuisblijf-venster: een uur vóór tot anderhalf uur ná de genoemde tijd; verschuift het door de route, dan laten we het weten.`
+      : `- Onze planning (Nanny) heeft deze klant een inmeetmoment voorgesteld: ${slots.length ? slots.map(fmt).join(' of ') : 'tijd onbekend'} (status aanbod: ${status}${aanbod?.verlooptOp ? ', vast tot ' + new Date(aanbod.verlooptOp).toLocaleString('nl-NL', { timeZone: 'Europe/Amsterdam' }) : ''}).`,
+    '- Dit is het EERSTE beschikbare moment; eerder kan op dit moment NIET (het is drukker dan we willen door vakanties en de bouwvak; de inmeters werken maandag t/m donderdag 09:00-15:00; Engelstalige klanten meet alleen Sjoerd). Zeg dat eerlijk, beloof geen eerdere datum.',
+    '- Jij boekt, verzet of belooft ZELF GEEN inmeetmoment. Wil de klant het voorgestelde moment vastzetten, dan kan hij simpelweg "dat past" (EN: "that works") antwoorden; wil hij een andere dag, dan noemt hij die dag en zoekt de planning opnieuw. Zeg dat zo.',
+    '- Beantwoord zijn inhoudelijke vraag volledig (levertijd 8-10 weken na definitieve offerte + aanbetaling, proces, product, waarom niet eerder). Vraagt hij expliciet om een mens: beantwoord éérst zelf wat je kunt, zeg dat een collega is ingelicht, en escaleer daarnaast — nooit alleen "een collega komt erop terug".',
+  ].join('\n');
+  return { blijfWeg, reden, context };
+}
+
 function lopendInmeetAanbod(phone, email) {
   try {
     const st = JSON.parse(require('fs').readFileSync('/Users/clawdboot/sonty/data/inmeten-planner-state.json', 'utf8'));
@@ -690,9 +748,26 @@ async function verwerkTicket(t, state) {
   // keuze-aanbod met 3 tijden: twee tegenstrijdige verhalen bij één klant, Daimy
   // moest er zelf tussen springen. Elke reactie wordt al door de aanbod-monitor
   // (elke 3 min) naar Daimy gerapporteerd en keuzes voert die zelf door.
-  if (lopendInmeetAanbod(t.contact?.phone, t.contact?.email)) {
-    console.log(`  ticket ${t.id}: lopend inmeet-aanbod op dit nummer/adres — planner/monitor handelen af, AI blijft er volledig af`);
-    return;
+  // BIJGESTELD (Daimy 21-08, Fatih): de planner/monitor blijven eigenaar van KEUZES
+  // ("dat past", "ander moment", "dinsdag kan ook", annuleren) — daar blijft Sunny af.
+  // Maar een VRAAG tijdens een lopend aanbod ("kan het sneller? hoe lang is de levertijd?",
+  // "mag ik een mens?") beantwoordt Sunny gewoon, met de planning-context erbij. De monitor
+  // stuurde daar "ik zoek het uit" op en daarna kwam er niets meer: twee dagen stilte.
+  let planningContext = '';
+  try {
+    const rol = await planningRolVoor(t, rows);
+    planningContext = rol.context || '';
+    if (rol.blijfWeg) {
+      console.log(`  ticket ${t.id}: lopend inmeet-aanbod en klant reageert op het voorstel (${rol.reden}) — planner/monitor handelen af, AI blijft eraf`);
+      return;
+    }
+    if (rol.context) console.log(`  ticket ${t.id}: lopend/recent inmeet-aanbod, klant stelt een vraag — Sunny antwoordt mét planning-context`);
+  } catch (e) {
+    // Twijfel = oude gedrag (planner is de enige stem) zolang het aanbod loopt.
+    if (lopendInmeetAanbod(t.contact?.phone, t.contact?.email)) {
+      console.log(`  ticket ${t.id}: lopend inmeet-aanbod, duiding mislukt (${String(e.message).slice(0, 60)}) — AI blijft eraf`);
+      return;
+    }
   }
 
   // EEN VERSE @sonny-OPDRACHT MOET OOK EEN ANTWOORD OPLEVEREN (Daimy 2026-07-27).
@@ -839,6 +914,7 @@ async function verwerkTicket(t, state) {
     sonnyIntroNodig,
     teamNotities,
     ticketId: t.id,
+    planningContext,
   };
 
   console.log(`Ticket ${t.id} (${gesprek.kanaal}, ${gesprek.klant.naam || 'onbekend'}): agent draait...`);

@@ -1,4 +1,37 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-20)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-21)
+
+## 21-08: STILTE-FIXES PLANNINGSKETEN (Fatih/Marius/Mirjam/Jeffrey kregen geen antwoord)
+- OORZAAK 1 (bug): lib/verzend-poort.js filterde "onze" berichten op `!m.contact_id`, maar de
+  Trengo messages-API geeft geen contact_id → ÉLK bericht (ook van de klant) telde als
+  handmatig bericht van ons → "mens-actief" → hele keten 24u stil na elke klantreactie.
+  FIX: outbound = `type === 'OUTBOUND'`; mens = outbound van een user_id ≠ 747786 (Sunny
+  Sonty = API-account) zonder bot-handtekening. Getest op Fatihs echte historie.
+- OORZAAK 2: Sunny (ai-ks) bleef 48u volledig weg bij een lopend inmeet-aanbod, de
+  monitor zei "Sunny antwoordt" → niemand. FIX: ai-ks/daemon.js planningRolVoor():
+  keuze/akkoord/ander-moment/annuleren = planner/monitor (Sunny weg); VRAAG/klacht =
+  Sunny antwoordt mét PLANNING-CONTEXT (voorgesteld moment, waarom niet eerder, "dat past"
+  = vastzetten). system-prompt: bij "ik wil een mens" eerst zelf de vraag beantwoorden.
+- Monitor (cron-aanbod-replies.js): intent vraag → geen "ik zoek het uit" meer, wachthond aan.
+  STILTE-WACHTHOND: laatste klantbericht ≥2u onbeantwoord (geen afsluiter, overdag, <72u)
+  → excuus/ontvangstbericht via poort + 🚨 alarm (komt door telegram-filter). Alle acks
+  tweetalig; leesKeuze herkent Engels ("yes", "that works", "another day").
+- TAAL: lib/aanbod-versturen.js taalVan(lead) (taal-voorkeur.json): aanbod/mail/bevestiging/
+  herinnering/reminder in het Engels; bij EN of herhaling eerst vrij bericht, template als vangnet.
+- Planner: reminder alleen 08-21u (was 03:49 's nachts), avond-herinnering bij ochtend-verloop,
+  via poort; opvolging ronde 2 = herhaling-tekst i.p.v. kopie "goed nieuws"; niet-bezorgd aanbod
+  → meteen 'verlopen' + 🚨 met tijden (geen spook-aanbiedingen meer); bewaarState voegt
+  opvolging-tellers samen (dubbele "ronde 2"); meldGeenAlternatiefBijFout: klant-reply zonder
+  alternatief → eerlijk bericht (ma-do 09-15, drukte) i.p.v. stilte.
+- cron-inmeet-herinneringen.js: ReferenceError (b.telefoon) gefixt; LET OP: dit script staat
+  in GEEN launchd-plist → dag-ervoor-herinneringen zijn nooit verstuurd. Vraag aan Daimy open.
+- gesprek-lab: emoji-only/"dank voor het nakijken"/Image geen FOUT-STIL meer.
+- KLANTEN AFGEHANDELD 21-08: Fatih (EN antwoord Sunny: niet eerder dan 28 sep, 8-10 wk, token
+  5b752780 aan monitor gekoppeld), Marius (di 29 sep 09:00 voorstel via motor), Mirjam (bericht:
+  geen vrijdag, andere dag noemen; dubbel token uit administratie), Jeffrey (antwoord per mail,
+  WA-venster dicht). Marco/Michel: afsluiters, geen actie.
+- Daemons herstart: nl.sonty.sonny, nl.sonty.inmeet-verzoeken.
+
+
 
 ## 20-08: META ADS API-COLLECTOR (vervangt CSV-exports)
 - Daimy gaf system-user-token "Sonty Dashboard API" (ads_read, verloopt niet) voor

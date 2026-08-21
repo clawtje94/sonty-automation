@@ -62,6 +62,15 @@ const bewaarState = (s) => {
   try {
     const disk = JSON.parse(fs.readFileSync(STATE, 'utf8'));
     s.aanbodTickets = { ...(s.aanbodTickets || {}), ...(disk.aanbodTickets || {}) };
+    // OPVOLGING OOK SAMENVOEGEN (Fatih 20/21-08: twee ochtenden achter elkaar "ronde 2",
+    // omdat een lange ronde met zijn oude kopie de teller van de daemon overschreef).
+    // Tellers: hoogste wint; tijdstempels: wat er is blijft staan.
+    const op = { ...(disk.opvolging || {}) };
+    for (const [k, v] of Object.entries(s.opvolging || {})) {
+      if (typeof v === 'number' && typeof op[k] === 'number') op[k] = Math.max(v, op[k]);
+      else if (op[k] === undefined) op[k] = v;
+    }
+    s.opvolging = op;
   } catch { /* eerste keer: geen disk-versie */ }
   fs.writeFileSync(STATE, JSON.stringify(s, null, 2));
 };
@@ -1057,7 +1066,7 @@ async function nogSteedsVrij(aanbod, duurMin, naam) {
 }
 
 /** Aanbod vastleggen in het register en direct naar de klant sturen (mail + WhatsApp). */
-async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, beperking = null) {
+async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, beperking = null, opties = {}) {
   // HARDE STOP (Daimy 10-08): een klant met een LOPENDE afspraak krijgt NOOIT een nieuw
   // voorstel. Op 10-08 kreeg Eric van der Meer een tweede voorstel terwijl hij al op
   // 18 augustus stond — puur omdat er een verkeerd RP-id werd meegegeven. Dat is
@@ -1128,8 +1137,17 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, 
   if (!res.ok) throw new Error(`aanbod aanmaken: HTTP ${res.status}`);
   const { url, token } = await res.json();
   const { verstuurAanbod } = require('./lib/aanbod-versturen');
-  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin, ver, slots: aanbod, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren }, url);
-  if (!verzonden.wa.ok && !verzonden.mail.ok) throw new Error(`niet bezorgd (wa: ${verzonden.wa.reden}, mail: ${verzonden.mail.reden})`);
+  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email, rpItemId: item.id }, duurMin, ver, slots: aanbod, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren, herhaling: !!opties.herhaling }, url);
+  if (!verzonden.wa.ok && !verzonden.mail.ok) {
+    // NIET BEZORGD = GEEN AANBOD. Het record stond al "open" in het register terwijl de
+    // klant niets had gekregen (Fatih/Marius 20-08: spook-aanbiedingen die elke ochtend
+    // opnieuw "verliepen" en een nieuwe ronde startten). Meteen sluiten, en het kantoor
+    // krijgt een alarm mét de tijden zodat iemand het zelf kan sturen.
+    try { await aanbodApi('/' + token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen', reden: `niet bezorgd: wa ${verzonden.wa.reden}; mail ${verzonden.mail.reden}` }) }); } catch { /* register onbereikbaar */ }
+    const tijden = aanbod.map((sl) => `${sl.datum} ${sl.aankomst.toISOString().slice(11, 16)}Z ${sl.inmeter}`).join(', ');
+    await telegram(`🚨 Aanbod voor ${lead.naam} NIET verstuurd (wa: ${verzonden.wa.reden}; mail: ${verzonden.mail.reden}) — actie nodig: stuur de tijden zelf in het gesprek of zet de klant op stil. Berekende tijden: ${tijden}. Keuzelink: ${url}`);
+    throw new Error(`niet bezorgd (wa: ${verzonden.wa.reden}, mail: ${verzonden.mail.reden})`);
+  }
   // ticket-ids bewaren zodat de reply-monitor ELK antwoord kan uitlezen (Daimy 06-08:
   // "lees jij dan 100% uit wat ze antwoorden en rapporteer je dat?")
   try {
@@ -1194,18 +1212,36 @@ async function verwerkAanbiedingen() {
     // HERINNERING (Daimy 10-08: "wat doen we met mensen die niet reageren?").
     // Vier uur voor het verlopen één vriendelijk duwtje in hetzelfde gesprek. Eén
     // keer, nooit vaker: dit is een reminder, geen achtervolging.
-    if (rest > 0 && rest < 4 * 3600000 && !state.opvolging[a.token + ':herinnerd']) {
+    // NOOIT 'S NACHTS (Fatih 20-08: reminder om 03:49). Alleen tussen 08:00 en 21:00.
+    // Verloopt het aanbod in de vroege ochtend (aanbod om 07:49 gestuurd → verloopt
+    // 07:49), dan gaat de herinnering de avond ervoor (vanaf 18:00) in plaats van nooit.
+    const uurNu = Number(new Date().toLocaleString('nl-NL', { hour: 'numeric', hour12: false, timeZone: 'Europe/Amsterdam' }));
+    const overdag = uurNu >= 8 && uurNu < 21;
+    const kortVoorVerloop = rest < 4 * 3600000;
+    const avondVoorOchtendverloop = rest < 14 * 3600000 && uurNu >= 18;
+    if (rest > 0 && overdag && (kortVoorVerloop || avondVoorOchtendverloop) && !state.opvolging[a.token + ':herinnerd']) {
       state.opvolging[a.token + ':herinnerd'] = new Date().toISOString();
       bewaarState(state);
       try {
         const tk = laadState().aanbodTickets?.[a.token]?.waTicket;
         if (tk) {
-          const TT4 = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
-          const wanneer = new Date(a.slots[0].aankomst).toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
-          await fetch(`https://app.trengo.com/api/v2/tickets/${tk}/messages`, {
-            method: 'POST', headers: { Authorization: 'Bearer ' + TT4, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: `Hoi ${String(a.lead.naam).split(' ')[0]}, kleine reminder: ${wanneer} staat nog voor je klaar. Eén berichtje en ik zet hem vast! Past het toch niet, ook prima — dan kijk ik gewoon verder voor je.\n\nGroetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
-          });
+          // verzendpoort: mens in het gesprek → geen automatische reminder
+          const poortH = await require('./lib/verzend-poort.js').magSturen({ telefoon: a.lead.telefoon, ticketId: tk, soort: 'herinnering' }).catch(() => ({ ok: true }));
+          if (!poortH.ok) { console.log(`  reminder ${a.lead.naam} overgeslagen (${poortH.reden})`); }
+          else {
+            const TT4 = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
+            const { taalVan, GROET } = require('./lib/aanbod-versturen');
+            const taalR = taalVan(a.lead);
+            const voornaamR = String(a.lead.naam || 'daar').split(' ')[0];
+            const wanneer = new Date(a.slots[0].aankomst).toLocaleString(taalR === 'en' ? 'en-GB' : 'nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+            const tekstR = taalR === 'en'
+              ? `Hi ${voornaamR}, a quick reminder: ${wanneer} is still held for you. One message and I'll lock it in! Doesn't suit after all? No problem, then I'll keep looking for you.\n\n${GROET.en}`
+              : `Hoi ${voornaamR}, kleine reminder: ${wanneer} staat nog voor je klaar. Eén berichtje en ik zet hem vast! Past het toch niet, ook prima, dan kijk ik gewoon verder voor je.\n\n${GROET.nl}`;
+            await fetch(`https://app.trengo.com/api/v2/tickets/${tk}/messages`, {
+              method: 'POST', headers: { Authorization: 'Bearer ' + TT4, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ message: tekstR, type: 'OUTBOUND' }),
+            });
+          }
         }
       } catch { /* herinnering is extra, geen blokkade */ }
     }
@@ -1237,9 +1273,11 @@ async function verwerkAanbiedingen() {
         bewaarState(state);
         const r = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
           method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
-          body: JSON.stringify({ type: 'stuur-aanbod', rpItemId: rpId, naam: a.lead.naam, bron: 'opvolging' }),
+          // herhaling: zelfde tijden mogen, maar dan als "even een berichtje van de
+          // planning", niet nog eens letterlijk "goed nieuws" (Mirjam 19/20-08)
+          body: JSON.stringify({ type: 'stuur-aanbod', rpItemId: rpId, naam: a.lead.naam, bron: 'opvolging', herhaling: true }),
         }).catch(() => null);
-        await telegram(`⏰ ${a.lead.naam} reageerde niet binnen 24 uur. ${r?.ok ? 'Nieuwe tijden worden nu gestuurd (ronde 2).' : 'Nieuw aanbod aanvragen MISLUKT — handmatig oppakken.'}`);
+        await telegram(`⏰ ${a.lead.naam} reageerde niet binnen 24 uur. ${r?.ok ? 'Herhaald voorstel wordt nu gestuurd (ronde 2).' : 'Nieuw aanbod aanvragen MISLUKT — handmatig oppakken.'}`);
       } else {
         await telegram(`📞 ${a.lead.naam} heeft nu 2x niet gereageerd op een voorstel. Ik stop met sturen; hij staat op het belscherm — even bellen is nu het beste.`);
       }
@@ -1506,6 +1544,34 @@ async function verwijderRekenKaart(rpItemId) {
   }).catch(() => {});
 }
 
+/** DE KLANT MAG NOOIT STIL BLIJVEN STAAN ALS DE MOTOR NIETS VINDT (Fatih 19-08 vroeg
+ *  "faster?", Marius "dinsdag?": de motor kon niets (of niets bezorgen) en de klant hoorde
+ *  niets meer). Reageerde de klant zelf (bron klant-reply) en kan de motor geen
+ *  alternatief bieden, dan krijgt hij een eerlijk bericht: wat wél kan en dat het oude
+ *  voorstel blijft staan. Storingen (429, register onbereikbaar) krijgen dit niet: die
+ *  worden opnieuw geprobeerd. */
+async function meldGeenAlternatiefBijFout(lead, m, e) {
+  try {
+    const msg = String(e?.message || '');
+    const definitief = /geen enkel gat|geen 3 tijden|geen plek vanaf|NIET eerder dan|geen enkele plek|maar \d+ tijd\(en\) beschikbaar|ligt vóór de datum/i.test(msg);
+    if (!definitief || m.bron !== 'klant-reply') return;
+    const { geenAlternatiefTekst, taalVan, zoekWaTicket } = require('./lib/aanbod-versturen');
+    const taal = taalVan({ telefoon: lead.telefoon, email: lead.email, rpItemId: m.rpItemId });
+    const slots = (m.nietDeze || []).length ? [] : []; // het afgewezen voorstel noemen we niet opnieuw als "nog beschikbaar"
+    const tekst = geenAlternatiefTekst(String(lead.naam || 'daar').split(' ')[0], { slots, wilEerder: !!m.wilEerder, dagen: m.voorkeurDagen || [], taal });
+    const ticket = lead.telefoon ? await zoekWaTicket(lead.telefoon).catch(() => null) : null;
+    if (!ticket) return;
+    const poort = await require('./lib/verzend-poort.js').magSturen({ telefoon: lead.telefoon, ticketId: ticket.id, soort: 'ontvangst' }).catch(() => ({ ok: true }));
+    if (!poort.ok) return;
+    const TTg = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
+    await fetch(`https://app.trengo.com/api/v2/tickets/${ticket.id}/messages`, {
+      method: 'POST', headers: { Authorization: 'Bearer ' + TTg, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: tekst, type: 'OUTBOUND' }),
+    });
+    await telegram(`🚨 ${lead.naam}: geen alternatief te vinden (${msg.slice(0, 100)}). Klant heeft een eerlijk bericht gekregen; mens nodig om handmatig een moment te zoeken.`);
+  } catch { /* melding is extra */ }
+}
+
 /** Dashboard-verzoek: 'boek' = direct boeken op het gekozen slot (klant zit bv. aan
  * de telefoon in de winkel); 'stuur-aanbod' = verse tijden berekenen en de keuzelink
  * naar de klant sturen. Zelfde veiligheid als de klantkeuze-route: verse agenda,
@@ -1525,6 +1591,7 @@ async function verwerkDashboardVerzoek(m) {
   if (m.type === 'stuur-aanbod' && lopende.has(item.id)) throw new Error('deze klant heeft al een lopend aanbod — geen tweede sturen');
 
   if (m.type === 'stuur-aanbod') {
+   try {
     let aanbod = [];
     // Dashboard kan de al berekende tijden meegeven (combi-dag!): dan sturen we
     // precies die, na verse botsingscontrole — opnieuw rekenen zou de combi-dag
@@ -1589,8 +1656,9 @@ async function verwerkDashboardVerzoek(m) {
         throw new Error(`vroegst haalbare is ${aanbod[0].datum} — NIET eerder dan wat de klant al had (${m.eerderDan.slice(0, 10)}); niets verstuurd, mens nodig`);
       }
     }
-    const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda);
+    const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda, null, { herhaling: !!m.herhaling });
     return `keuzelink verstuurd (${aanbod.length >= 3 ? 3 : aanbod.length} tijd(en)): ${url}`;
+   } catch (e) { await meldGeenAlternatiefBijFout(lead, m, e); throw e; }
   }
 
   // boeken op het gekozen slot — eerst verse botsingscontrole

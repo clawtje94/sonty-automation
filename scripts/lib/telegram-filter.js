@@ -24,7 +24,7 @@ const VRAAG = /(^|\n)\s*(VRAAG|V\d+[:\s])/m;
 const BOEKING = /GEBOEKT/;
 const RAPPORT = /AI-resultaten|Tekenrapport|onversie|apaciteit|Gesprek-lab|dagrapport|weekrapport|maandrapport|📊|✍️|🔬/;
 const LEERVRAAG_URGENT = /🎓|🚨|LEERVRAAG|URGENT/i;
-const ALARM = /actie nodig|handmatig|mens nodig|NIET geboekt|MISLUKT|GESTOPT|gecrasht|onbereikbaar|niet op te halen|SCHIJN-BOEKING|zelfcontrole|dood gesprek|dubbel/i;
+const ALARM = /actie nodig|handmatig|mens nodig|NIET geboekt|NIET verstuurd|MISLUKT|GESTOPT|gecrasht|onbereikbaar|niet op te halen|SCHIJN-BOEKING|zelfcontrole|dood gesprek|dubbel|wacht al \d+ uur|KLACHT|geen alternatief/i;
 
 /**
  * @param {string} tekst

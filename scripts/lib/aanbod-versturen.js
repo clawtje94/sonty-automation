@@ -68,30 +68,74 @@ async function zoekWaTicketBreed(telefoon, { ookGesloten = false } = {}) {
   return ookGesloten ? gesloten : null;
 }
 
-function verWegRegel(ver) {
+/** TAAL (Daimy 21-08, Fatih: Engelstalige klant kreeg aanbod, reminder én mail in het
+ *  Nederlands terwijl de taalvlag al stond). Alle planningsteksten gaan via deze toets. */
+function taalVan(lead) {
+  try {
+    const { isEngels } = require('./taal-voorkeur.js');
+    return isEngels(lead?.telefoon, lead?.email, lead?.rpItemId) ? 'en' : 'nl';
+  } catch { return 'nl'; }
+}
+const GROET = { nl: 'Groetjes, Nanny van Sonty', en: 'Kind regards, Nanny from Sonty' };
+
+function verWegRegel(ver, taal = 'nl') {
   // Eerlijke uitleg voor klanten buiten de vaste route (Daimy 06-08): scheelt
   // manuren, brandstof en uitstoot — en de klant snapt waarom het iets later kan.
-  return ver
-    ? ' Je woont wat verder bij ons vandaan; we plannen ritten zo slim mogelijk in en combineren klussen bij jou in de buurt. Dat scheelt onnodige kilometers (en uitstoot), maar daardoor kan het soms iets langer duren voor we bij je zijn.'
-    : '';
+  if (!ver) return '';
+  return taal === 'en'
+    ? ' You live a bit further away from us; we plan our routes as smartly as possible and combine jobs in your area. That saves unnecessary kilometres (and emissions), but it can mean it takes a little longer before we get to you.'
+    : ' Je woont wat verder bij ons vandaan; we plannen ritten zo slim mogelijk in en combineren klussen bij jou in de buurt. Dat scheelt onnodige kilometers (en uitstoot), maar daardoor kan het soms iets langer duren voor we bij je zijn.';
 }
 
 /** Ligt het voorgestelde moment ver weg? Dan is "goed nieuws" de verkeerde toon
  *  (Daimy 09-08, geval Rita van Schagen: haar was 2-3 weken beloofd, ze kreeg een
  *  moment 6 weken later te horen als "goed nieuws" en reageerde terecht boos).
  *  Vanaf drie weken benoemen we het eerlijk in plaats van het te verkopen. */
-function opening(voornaam, slots) {
+function opening(voornaam, slots, taal = 'nl') {
   const eerste = slots?.[0]?.aankomst ? Date.parse(slots[0].aankomst) : null;
   const wekenWeg = eerste ? (eerste - Date.now()) / (7 * 86400000) : 0;
   if (wekenWeg >= 3) {
-    return `Hoi ${voornaam}, ik ben eerlijk: het is drukker dan we zouden willen (bouwvak en vakanties), `
-      + `dus dit is het eerste moment dat ik je kan aanbieden om in te meten`;
+    return taal === 'en'
+      ? `Hi ${voornaam}, I'll be honest: it's busier than we'd like (summer holidays and the construction break), so this is the first moment I can offer you for the measuring`
+      : `Hoi ${voornaam}, ik ben eerlijk: het is drukker dan we zouden willen (bouwvak en vakanties), dus dit is het eerste moment dat ik je kan aanbieden om in te meten`;
   }
-  return `Hoi ${voornaam}, goed nieuws: we kunnen bij je langskomen om in te meten`;
+  return taal === 'en'
+    ? `Hi ${voornaam}, good news: we can come by to measure`
+    : `Hoi ${voornaam}, goed nieuws: we kunnen bij je langskomen om in te meten`;
 }
 
-function berichtTekst(voornaam, url, duurMin, geldigUren = 24, ver = false, slots = null) {
-  return `${opening(voornaam, slots)} (duurt ongeveer ${duurMin} minuten).${verWegRegel(ver)} Kies hier de tijd die jou het beste uitkomt:\n\n${url}\n\nDe tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, stuur dan gewoon een berichtje terug.\n\nGroetjes, Nanny van Sonty`;
+function berichtTekst(voornaam, url, duurMin, geldigUren = 24, ver = false, slots = null, taal = 'nl') {
+  if (taal === 'en') {
+    return `${opening(voornaam, slots, 'en')} (takes about ${duurMin} minutes).${verWegRegel(ver, 'en')} Pick the time that suits you best here:\n\n${url}\n\nThe times are held for you for ${geldigUren} hours. If choosing doesn't work, just reply to this message.\n\n${GROET.en}`;
+  }
+  return `${opening(voornaam, slots)} (duurt ongeveer ${duurMin} minuten).${verWegRegel(ver)} Kies hier de tijd die jou het beste uitkomt:\n\n${url}\n\nDe tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, stuur dan gewoon een berichtje terug.\n\n${GROET.nl}`;
+}
+
+/** HERHAALD VOORSTEL (opvolging ronde 2). Mirjam kreeg 19-08 en 20-08 twee keer exact
+ *  hetzelfde "goed nieuws"-bericht; dat leest als een bot die hapert. Een tweede ronde
+ *  met dezelfde tijd zegt gewoon dat het een herinnering is. */
+function herhalingTekst(voornaam, slots, taal = 'nl') {
+  const wanneer = (slots || []).map((x) => slotTekst(x, taal)).join(taal === 'en' ? ' or ' : ' of ');
+  if (taal === 'en') {
+    return `Hi ${voornaam}, a quick follow-up from the planning team. I had suggested ${wanneer} for the measuring and would love to hear whether that works for you. If it does, just reply "that works" and I'll lock it in. If not, name a day that suits you and I'll look again.\n\n${GROET.en}`;
+  }
+  return `Hoi ${voornaam}, even een berichtje van de planning. Ik had je ${wanneer} voorgesteld om in te meten en hoor graag of dat past. Past het, antwoord dan gewoon "dat past" en ik zet hem vast. Past het niet, noem dan gerust een dag die jou wel uitkomt, dan kijk ik opnieuw.\n\n${GROET.nl}`;
+}
+
+/** GEEN ALTERNATIEF GEVONDEN. De klant vroeg een andere dag of eerder, en de motor kan
+ *  niets bieden. Dan mag het niet stil blijven (Fatih 19-08 vroeg "faster?", de motor vond
+ *  niets en niemand zei dat). Eerlijk zeggen wat wél kan en het oude voorstel laten staan. */
+function geenAlternatiefTekst(voornaam, { slots = [], wilEerder = false, dagen = [], taal = 'nl' } = {}) {
+  const oud = (slots || []).map((x) => slotTekst(x, taal)).join(taal === 'en' ? ' or ' : ' of ');
+  const DAGNL = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
+  const DAGEN_ = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const gevraagd = (dagen || []).map((d) => (taal === 'en' ? DAGEN_[d] : DAGNL[d])).filter(Boolean).join(taal === 'en' ? ' or ' : ' of ');
+  if (taal === 'en') {
+    const wat = wilEerder ? 'earlier' : (gevraagd ? `on ${gevraagd}` : 'on another day');
+    return `Hi ${voornaam}, I've had a good look, but unfortunately I can't offer you anything ${wat} at the moment. It's busier than we'd like (holidays and the construction break) and our surveyors only measure Monday to Thursday between 09:00 and 15:00.${oud ? ` ${oud.charAt(0).toUpperCase() + oud.slice(1)} is still available for you; reply "that works" and I'll lock it in.` : ''} Would a different day work for you? Then I'll look again. A colleague is also keeping an eye on this.\n\n${GROET.en}`;
+  }
+  const wat = wilEerder ? 'eerder' : (gevraagd ? `op ${gevraagd}` : 'op een andere dag');
+  return `Hoi ${voornaam}, ik heb goed gekeken, maar ik kan je op dit moment helaas niets ${wat} aanbieden. Het is drukker dan we zouden willen (vakanties en bouwvak) en onze inmeters meten alleen van maandag tot en met donderdag tussen 09:00 en 15:00.${oud ? ` ${oud.charAt(0).toUpperCase() + oud.slice(1)} staat nog voor je klaar; antwoord "dat past" en ik zet hem vast.` : ''} Zou een andere dag je wel uitkomen? Dan kijk ik opnieuw. Een collega kijkt hier ook even mee.\n\n${GROET.nl}`;
 }
 
 // Goedgekeurde template "inmeetafspraak_kiezen" (id 243999): voor klanten buiten het
@@ -100,9 +144,12 @@ const TEMPLATE_HSM = 243999;
 
 const DAGK = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
 const MNDK = ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
-function slotTekst(sl) {
+const DAGK_EN = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const MNDK_EN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+function slotTekst(sl, taal = 'nl') {
   const d = new Date(sl.aankomst);
   const t = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+  if (taal === 'en') return `${DAGK_EN[d.getDay()]} ${d.getDate()} ${MNDK_EN[d.getMonth()]} at ${t}`;
   return `${DAGK[d.getDay()]} ${d.getDate()} ${MNDK[d.getMonth()]} om ${t}`;
 }
 
@@ -169,22 +216,39 @@ async function stuurWhatsAppTemplate(aanbod, url) {
 }
 
 async function stuurWhatsApp(aanbod, url) {
+  const taal = taalVan(aanbod.lead);
+  const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
+  const vrijeTekst = aanbod.herhaling
+    ? herhalingTekst(voornaam, aanbod.slots, taal)
+    : berichtTekst(voornaam, url, aanbod.duurMin, aanbod.geldigUren || 24, aanbod.ver === true, aanbod.slots, taal);
+  const stuurVrij = async () => {
+    const ticket = await zoekWaTicket(aanbod.lead.telefoon);
+    if (!ticket) return { ok: false, reden: 'geen WhatsApp-gesprek' };
+    const r = await tFetch(`/tickets/${ticket.id}/messages`, {
+      method: 'POST', body: JSON.stringify({ message: vrijeTekst, type: 'OUTBOUND' }),
+    });
+    return r.ok ? { ok: true, ticket: ticket.id, via: 'vrij bericht' + (taal === 'en' ? ' (EN)' : '') + (aanbod.herhaling ? ' (herhaling)' : '') }
+      : { ok: false, reden: `Trengo ${r.status}`, ticket: ticket.id };
+  };
+  // ENGELS of HERHALING: de goedgekeurde templates zijn Nederlands en zeggen altijd
+  // "goed nieuws". Dan eerst het vrije bericht proberen (lukt binnen het 24-uursvenster,
+  // en dat staat bijna altijd open omdat de klant net met ons appte); pas als dat niet
+  // kan het template als vangnet — liever een Nederlands voorstel dan geen voorstel.
+  if (taal === 'en' || aanbod.herhaling) {
+    const vrij = await stuurVrij();
+    if (vrij.ok) return vrij;
+    const viaTemplate = await stuurWhatsAppTemplate(aanbod, url);
+    if (viaTemplate.ok) return { ...viaTemplate, via: viaTemplate.via + ' (vrij bericht lukte niet: ' + vrij.reden + ')' };
+    return { ok: false, reden: `${vrij.reden}; template: ${viaTemplate.reden}` };
+  }
   // TEMPLATE EERST (Daimy 06-08: "die gaan we gewoon altijd gebruiken") — werkt ook
   // buiten het 24-uursvenster. Zolang Meta het template nog niet heeft goedgekeurd
   // (PENDING) valt hij automatisch terug op een gewoon bericht in een open gesprek.
   const viaTemplate = await stuurWhatsAppTemplate(aanbod, url);
   if (viaTemplate.ok) return viaTemplate;
-  const ticket = await zoekWaTicket(aanbod.lead.telefoon);
-  if (ticket) {
-    const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
-    const r = await tFetch(`/tickets/${ticket.id}/messages`, {
-      method: 'POST',
-      body: JSON.stringify({ message: berichtTekst(voornaam, url, aanbod.duurMin, aanbod.geldigUren || 24, aanbod.ver === true, aanbod.slots), type: 'OUTBOUND' }),
-    });
-    if (r.ok) return { ok: true, ticket: ticket.id, via: 'vrij bericht (template: ' + viaTemplate.reden + ')' };
-    return { ok: false, reden: `Trengo ${r.status} (template: ${viaTemplate.reden})`, ticket: ticket.id };
-  }
-  return { ok: false, reden: `geen WhatsApp-gesprek en ${viaTemplate.reden}` };
+  const vrij = await stuurVrij();
+  if (vrij.ok) return { ...vrij, via: 'vrij bericht (template: ' + viaTemplate.reden + ')' };
+  return { ok: false, reden: `${vrij.reden} (template: ${viaTemplate.reden})`, ticket: vrij.ticket };
 }
 
 /** Bestaand e-mailticket van dit adres op ons kanaal — nieuwe mails horen dáár in,
@@ -218,7 +282,7 @@ async function stuurMail(aanbod, url) {
       body: JSON.stringify({
         channel_id: PLANNING_KANAAL_OVERRIDE || AANVRAGEN_KANAAL,
         contact_identifier: aanbod.lead.email,
-        subject: 'Kies je inmeetmoment bij Sonty',
+        subject: taalVan(aanbod.lead) === 'en' ? 'Choose your measuring slot at Sonty' : 'Kies je inmeetmoment bij Sonty',
       }),
     });
     if (!r1.ok) return { ok: false, reden: `ticket aanmaken: Trengo ${r1.status}` };
@@ -233,8 +297,18 @@ async function stuurMail(aanbod, url) {
     ? Math.max(1, Math.round((Date.parse(aanbod.verlooptOp) - Date.now()) / 3600000))
     : 24;
 
-  const html = `<p>Hoi ${voornaam},</p>
-<p>Goed nieuws: we kunnen bij je langskomen om in te meten (duurt ongeveer ${aanbod.duurMin} minuten).${verWegRegel(aanbod.ver === true)}</p>
+  const taal = taalVan(aanbod.lead);
+  // zelfde eerlijke opening als WhatsApp: vanaf 3 weken geen "goed nieuws" meer
+  const kop = opening(voornaam, aanbod.slots, taal).replace(/^(Hoi|Hi) [^,]+, /, '');
+  const html = taal === 'en'
+    ? `<p>Hi ${voornaam},</p>
+<p>${kop.charAt(0).toUpperCase() + kop.slice(1)} (takes about ${aanbod.duurMin} minutes).${verWegRegel(aanbod.ver === true, 'en')}</p>
+<p><a href="${url}" style="display:inline-block;background:#F97316;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:bold">Choose your measuring slot</a></p>
+<p>The times are held for you for ${geldigUren} hours. If choosing doesn't work, simply reply to this e-mail.</p>
+<p>Good to know: our surveyor drives a route, so it can sometimes be an hour earlier or later than the chosen time. If so, we'll let you know.</p>
+<p>Kind regards,<br>Nanny from Sonty</p>`
+    : `<p>Hoi ${voornaam},</p>
+<p>${kop.charAt(0).toUpperCase() + kop.slice(1)} (duurt ongeveer ${aanbod.duurMin} minuten).${verWegRegel(aanbod.ver === true)}</p>
 <p><a href="${url}" style="display:inline-block;background:#F97316;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:bold">Kies je inmeetmoment</a></p>
 <p>De tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, beantwoord dan gewoon deze mail.</p>
 <p>Goed om te weten: onze inmeter rijdt een route, dus het kan soms een uur eerder of later worden dan het gekozen moment. Als dat zo is laten we het je even weten.</p>
@@ -251,8 +325,17 @@ async function stuurMail(aanbod, url) {
 
 /** Bevestiging na klantkeuze + herinnering dag ervoor (Daimy 06-08: "krijgen ze dan
  * een bevestigingsmail en afspraak-herinneringen?"). Zelfde kanalen als het aanbod. */
-function bevestigingTekst(voornaam, slot, duurMin) {
+function bevestigingTekst(voornaam, slot, duurMin, taal = 'nl') {
   const d = new Date(slot.aankomst);
+  if (taal === 'en') {
+    const dagEn = d.toLocaleString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
+    const vanEn = d.toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+    const vVan = new Date(+d - 60 * 60000).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+    const vTot = new Date(+d + 90 * 60000).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+    return `Hi ${voornaam}, good news, it's booked! On ${dagEn} ${slot.inmeter} will come by to measure, which takes about ${duurMin} minutes. ` +
+      `We expect to be with you around ${vanEn}. As we drive a route that day it can shift a little, so please be home between ${vVan} and ${vTot}. ` +
+      `Something come up? Just send us a message.`;
+  }
   const dag = d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
   const van = d.toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const tot = new Date(+d + 30 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
@@ -277,7 +360,8 @@ async function verstuurBevestiging(aanbod, slot) {
     if (!poort.ok) { console.log('  verzendpoort: bevestiging NIET verstuurd (' + poort.reden + ')'); return { ok: false, stil: true, poort: poort.reden }; }
   }
   const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
-  const tekst = bevestigingTekst(voornaam, slot, aanbod.duurMin);
+  const taalB = taalVan(aanbod.lead);
+  const tekst = bevestigingTekst(voornaam, slot, aanbod.duurMin, taalB);
   let wa = { ok: false, reden: 'geen telefoon' };
   if (aanbod.lead.telefoon) {
     const ticket = await zoekWaTicket(aanbod.lead.telefoon).catch(() => null);
@@ -292,11 +376,11 @@ async function verstuurBevestiging(aanbod, slot) {
   if (aanbod.lead.email) {
     const r1 = await tFetch('/tickets', {
       method: 'POST',
-      body: JSON.stringify({ channel_id: PLANNING_KANAAL_OVERRIDE || AANVRAGEN_KANAAL, contact_identifier: aanbod.lead.email, subject: 'Je inmeetafspraak bij Sonty staat vast' }),
+      body: JSON.stringify({ channel_id: PLANNING_KANAAL_OVERRIDE || AANVRAGEN_KANAAL, contact_identifier: aanbod.lead.email, subject: taalB === 'en' ? 'Your measuring appointment at Sonty is confirmed' : 'Je inmeetafspraak bij Sonty staat vast' }),
     });
     const nieuw = r1.ok ? await r1.json().catch(() => null) : null;
     if (nieuw?.id) {
-      const html = `<p>${tekst.replace(/\. /g, '.</p><p>')}</p><p>Groetjes,<br>Nanny van Sonty</p>`;
+      const html = `<p>${tekst.replace(/\. /g, '.</p><p>')}</p><p>${taalB === 'en' ? 'Kind regards,<br>Nanny from Sonty' : 'Groetjes,<br>Nanny van Sonty'}</p>`;
       const r2 = await tFetch(`/tickets/${nieuw.id}/messages`, { method: 'POST', body: JSON.stringify({ message: html, body_type: 'html' }) });
       if (r2.ok) await tFetch(`/tickets/${nieuw.id}/close`, { method: 'POST', body: '{}' });
       mail = { ok: r2.ok, reden: r2.ok ? undefined : `Trengo ${r2.status}` };
@@ -305,8 +389,17 @@ async function verstuurBevestiging(aanbod, slot) {
   return { wa, mail, ergensGelukt: wa.ok || mail.ok };
 }
 
-function herinneringTekst(voornaam, slot, duurMin, dagenVooraf = 1) {
+function herinneringTekst(voornaam, slot, duurMin, dagenVooraf = 1, taal = 'nl') {
   const d = new Date(slot.aankomst);
+  if (taal === 'en') {
+    const vanEn = d.toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+    const wanneerEn = dagenVooraf <= 1 ? 'tomorrow' : `on ${d.toLocaleString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' })}`;
+    const slot2En = dagenVooraf <= 1 ? 'See you tomorrow!' : "Doesn't suit after all? Just send us a message.";
+    const vVan = new Date(+d - 60 * 60000).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+    const vTot = new Date(+d + 90 * 60000).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+    return `Hi ${voornaam}, a quick reminder: ${wanneerEn} ${slot.inmeter} will come by to measure, which only takes about ${duurMin} minutes. ` +
+      `We expect to be with you around ${vanEn}. As we drive a route it can shift a little, so please be home between ${vVan} and ${vTot}. ${slot2En}`;
+  }
   const van = d.toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const tot = new Date(+d + 30 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const wanneer = dagenVooraf <= 1 ? 'morgen'
@@ -346,7 +439,7 @@ async function verstuurAanbod(aanbod, url) {
   return { wa, mail, ergensGelukt: wa.ok || mail.ok };
 }
 
-module.exports = { verstuurAanbod, verstuurBevestiging, herinneringTekst, stuurWhatsApp, stuurMail, zoekWaTicket, zoekWaTicketBreed };
+module.exports = { verstuurAanbod, verstuurBevestiging, herinneringTekst, bevestigingTekst, herhalingTekst, geenAlternatiefTekst, taalVan, GROET, slotTekst, stuurWhatsApp, stuurMail, zoekWaTicket, zoekWaTicketBreed };
 
 // CLI: node scripts/lib/aanbod-versturen.js <token> — verstuurt een bestaand aanbod.
 if (require.main === module) {

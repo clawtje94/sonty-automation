@@ -42,18 +42,43 @@ function isBotBericht(tekst) {
   return BOT_PATRONEN.some((p) => p.test(tekst || ''));
 }
 
+// Trengo-gebruikers die ONZE AUTOMATIEK zijn (Sunny/Nanny/Jaimy-bot posten allemaal
+// via het API-account "Sunny Sonty", id 747786). Een OUTBOUND van een ander user-id
+// is een echt mens (Daimy, Jorren, Joey, Jaimy, Sjoerd, Tanya, Nanny van Vliet).
+const BOT_USER_IDS = new Set([747786]);
+
+/** Is dit bericht van ONS naar de klant? De Trengo messages-API geeft GEEN contact_id
+ *  terug (wel `type` INBOUND/OUTBOUND/NOTE en `contact`). De oude toets `!m.contact_id`
+ *  was daardoor voor ÉLK bericht waar — ook voor dat van de klant zelf — zodat elke
+ *  klantreactie 24 uur "mens-actief" gaf en de hele keten zweeg (Fatih, Marius,
+ *  Mirjam 19/20-08: vragen en "ander moment" kregen niets terug). */
+function isOutbound(m) {
+  const type = String(m?.type || m?.message_type || '').toUpperCase();
+  if (type) return type === 'OUTBOUND';
+  if (m?.direction) return m.direction === 'outgoing';
+  return !m?.contact_id && !m?.contact; // oude/onbekende vorm: terugvallen op contact-velden
+}
+
+/** Een mens aan onze kant typte dit: outbound, niet van het bot-account, en zonder
+ *  bot-handtekening in de tekst (vangnet voor berichten die via een ander token gaan). */
+function isMensBericht(m) {
+  if (!isOutbound(m)) return false;
+  if (m?.user_id != null && BOT_USER_IDS.has(Number(m.user_id))) return false;
+  return !isBotBericht(m?.message || m?.body || '');
+}
+
 /**
  * Pure beoordelingskern — geen IO, dus testbaar op echte gesprekshistorie.
- * @param {Array<{message:string, contact_id:any, created_at:string}>} berichten
+ * @param {Array<{message:string, type?:string, user_id?:number, contact_id?:any, created_at:string}>} berichten
  * @param {{soort:string, nu?:number}} opties  soort: 'voorstel'|'bevestiging'|'herinnering'|'ontvangst'
  */
 function beoordeel(berichten, { soort, nu = Date.now() }) {
   const DAG = 24 * 3600 * 1000, WEEK = 7 * DAG;
-  const uit = (berichten || []).filter((m) => !m.contact_id);
+  const uit = (berichten || []).filter(isOutbound);
 
   const mensActief = uit.some((m) => {
-    const t = m.created_at ? nu - new Date(m.created_at).getTime() : Infinity;
-    return t >= 0 && t < DAG && !isBotBericht(m.message);
+    const t = m.created_at ? nu - new Date(String(m.created_at).replace(' ', 'T')).getTime() : Infinity;
+    return t >= 0 && t < DAG && isMensBericht(m);
   });
   // Een mens in het gesprek blokkeert alles behalve de boekingsbevestiging:
   // die hoort bij een zojuist gemaakte afspraak en mag nooit stil wegvallen.
@@ -63,7 +88,7 @@ function beoordeel(berichten, { soort, nu = Date.now() }) {
 
   if (soort === 'voorstel') {
     const voorstellen = uit.filter((m) => {
-      const t = m.created_at ? nu - new Date(m.created_at).getTime() : Infinity;
+      const t = m.created_at ? nu - new Date(String(m.created_at).replace(' ', 'T')).getTime() : Infinity;
       return t >= 0 && t < WEEK && VOORSTEL_PATROON.test(m.message || '');
     }).length;
     if (voorstellen >= 2) return { ok: false, reden: 'max-voorstellen (' + voorstellen + ' al gestuurd)', mensNodig: true };
@@ -125,4 +150,4 @@ async function meldMensNodig(naam, reden) {
   } catch { /* melding is extra */ }
 }
 
-module.exports = { magSturen, beoordeel, isBotBericht, meldMensNodig };
+module.exports = { magSturen, beoordeel, isBotBericht, isOutbound, isMensBericht, meldMensNodig, BOT_USER_IDS };

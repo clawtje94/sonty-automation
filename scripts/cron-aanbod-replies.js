@@ -34,7 +34,8 @@ function leesKeuze(tekst, slots) {
     // een los "maar" in een bijzin over iets anders (Marjolein 07-08: "Dat is
     // prima! Ik zou de offerte nog krijgen maar heb deze niet gehad") is géén
     // twijfel over de tijd.
-    const twijfel = /ander(e)? (moment|tijd|dag|datum)|past (mij |ons )?niet|kan (dan |echt )?niet|lukt (dan |echt )?niet|liever|helaas|verzetten|verplaatsen|annuleer/i;
+    // ook Engels (Fatih 21-08: Engelstalige klanten antwoorden "that works"/"yes")
+    const twijfel = /ander(e)? (moment|tijd|dag|datum)|past (mij |ons )?niet|kan (dan |echt )?niet|lukt (dan |echt )?niet|liever|helaas|verzetten|verplaatsen|annuleer|another (moment|time|day|date|slot)|different (day|time|date)|doesn'?t (work|suit)|does not (work|suit)|can'?t (make|do)|cannot (make|do)|rather|prefer|cancel|reschedule|not possible|unfortunately/i;
     if (twijfel.test(t)) return null;
     // ONVREDE WINT ALTIJD (Daimy 09-08, geval Rita van Schagen). Zij schreef:
     // "Ja doe dat maar. Maar ik had het wel op prijs gesteld dat je dit eerlijk zou
@@ -42,11 +43,11 @@ function leesKeuze(tekst, slots) {
     // gewoon akkoord geboekt, inclusief opgewekte bevestiging — terwijl daar een
     // mens had moeten meelezen. Een klant die instemt én klaagt is GEEN kale keuze:
     // melden, niet automatisch afhandelen.
-    const onvrede = /vind ik (wel |het )?(veel|lang|vervelend|jammer)|niet blij|teleurgesteld|balen|sorry maar|had ik (wel )?(anders|eerlijk)|op prijs gesteld|klopt niet|beloofd|toegezegd|(is|dat is)( wel| erg| best)? (lang|veel)|te lang|niet netjes|slecht|\bmaar dat is\b|\bmaar wel\b/i;
+    const onvrede = /vind ik (wel |het )?(veel|lang|vervelend|jammer)|niet blij|teleurgesteld|balen|sorry maar|had ik (wel )?(anders|eerlijk)|op prijs gesteld|klopt niet|beloofd|toegezegd|(is|dat is)( wel| erg| best)? (lang|veel)|te lang|niet netjes|slecht|\bmaar dat is\b|\bmaar wel\b|too long|disappoint|not happy|unacceptable|promised|\bbut that'?s\b/i;
     if (onvrede.test(t)) return null;
     // kale bevestiging (knop of kort berichtje)
-    if (/^(dat past|past\b.{0,10}|prima|is goed|akkoord|top|ja|jazeker|oke|oké|ok|👍)[!. ]*$/.test(t)
-      && !/niet|geen|ander/.test(t)) return 0;
+    if (/^(dat past|past\b.{0,10}|prima|is goed|akkoord|top|ja|jazeker|oke|oké|ok|👍|yes|yes please|yep|that works|works for me|that'?s fine|sounds good|sure|perfect|great|fine|okay|deal|confirmed?)[!. ]*$/.test(t)
+      && !/niet|geen|ander|not\b|no\b|another/.test(t)) return 0;
     // ACCEPTATIE MET EXTRA TEKST (audit 07-08, geval Marjolein: keuze bleef liggen
     // en niemand boekte): een zin die met een duidelijke bevestiging begint telt,
     // ook als er daarna nog een vraag of groet volgt. De twijfel-check hierboven
@@ -55,7 +56,7 @@ function leesKeuze(tekst, slots) {
     // "dat is" alléén met een positief vervolg (Charles 14-08: "Dat is zaak omdraaien.
     // Ik verwacht morgen antwoord" werd als akkoord gelezen en GEBOEKT terwijl hij
     // midden in een discussie met Daimy zat). "Dat is" op zichzelf zegt niets.
-    if (eersteZinnen.some((z) => /^(hi+|hoi|hey|hallo|goedemorgen|goedemiddag|goedenavond)?[,! ]*(dat (is (goed|prima|top|akkoord|helemaal goed|ok[eé]?)|past)|past (goed|prima)|prima|is goed|helemaal goed|akkoord|top|ja( hoor| graag| leuk)?|jazeker|oke|oké|ok|perfect|super)\b/.test(z))) return 0;
+    if (eersteZinnen.some((z) => /^(hi+|hoi|hey|hallo|hello|goedemorgen|goedemiddag|goedenavond|good (morning|afternoon|evening))?[,! ]*(dat (is (goed|prima|top|akkoord|helemaal goed|ok[eé]?)|past)|past (goed|prima)|prima|is goed|helemaal goed|akkoord|top|ja( hoor| graag| leuk)?|jazeker|oke|oké|ok|perfect|super|yes( please)?|yep|that works|works for me|that'?s (fine|great|perfect|ok)|sounds good|sure|great|okay|confirmed?)\b/.test(z))) return 0;
     if (/^(?:optie\s*)?1[.!)]?$/.test(t)) return 0;
     return null;
   }
@@ -127,7 +128,25 @@ function magBevestigen(gemeld, ticketId) {
   return true;
 }
 
-async function bevestigOntvangst(ticketId, naam, tekst) {
+/** Taal van de klant (Daimy 21-08, Fatih): Engelstalig = Engelse planningsteksten. */
+function taalVoor(info) {
+  try { return require('./lib/aanbod-versturen.js').taalVan({ telefoon: info?.telefoon, email: info?.email }); } catch { return 'nl'; }
+}
+const T = (taal, nl, en) => (taal === 'en' ? en : nl);
+const GROET_NL = 'Groetjes, Nanny van Sonty';
+const GROET_EN = 'Kind regards, Nanny from Sonty';
+
+/** Afsluiter/bevestiging zonder vraag ("👍", "dank je", "top, tot dan") hoeft geen antwoord. */
+function isAfsluiter(tekst) {
+  const t = String(tekst || '');
+  if (/\?/.test(t)) return false;
+  const kaal = t.replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{1F3FB}-\u{1F3FF}]/gu, ' ').toLowerCase().replace(/[^a-zà-ü]+/g, ' ').trim();
+  if (!kaal) return true; // alleen emoji
+  const W = new Set(['dank', 'dankje', 'dankjewel', 'danku', 'dankuwel', 'bedankt', 'thanks', 'thank', 'you', 'thnx', 'top', 'prima', 'oke', 'oké', 'ok', 'okay', 'is', 'goed', 'dat', 'past', 'helemaal', 'hoor', 'ja', 'graag', 'fijn', 'fijne', 'avond', 'dag', 'weekend', 'tot', 'dan', 'ziens', 'snel', 'ook', 'je', 'jij', 'u', 'jullie', 'wel', 'hetzelfde', 'insgelijks', 'gelijk', 'doei', 'doeg', 'groetjes', 'groeten', 'super', 'perfect', 'duidelijk', 'begrepen', 'komt', 'voor', 'elkaar', 'we', 'zien', 'het', 'de', 'een', 'nakijken', 'reactie', 'bericht', 'info', 'informatie', 'moeite', 'uitleg', 'hulp', 'even', 'heel', 'erg', 'alvast', 'in', 'ieder', 'geval', 'great', 'perfect', 'fine', 'good', 'see', 'then', 'bye', 'cheers']);
+  return kaal.split(/\s+/).every((w) => W.has(w));
+}
+
+async function bevestigOntvangst(ticketId, naam, tekst, taal = 'nl') {
   // Verzendpoort (18-08): geen automatische ontvangstbevestiging als een mens in
   // het gesprek zit of de klant op stil staat — precies het Hans-incident.
   try {
@@ -138,7 +157,7 @@ async function bevestigOntvangst(ticketId, naam, tekst) {
   for (let i = 0; i < 3; i++) {
     const r = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages`, {
       method: 'POST', headers: { ...TH, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: `${tekst}\n\nGroetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
+      body: JSON.stringify({ message: `${tekst}\n\n${taal === 'en' ? GROET_EN : GROET_NL}`, type: 'OUTBOUND' }),
     });
     if (r.ok) return true;
     if (r.status === 429) { await new Promise((x) => setTimeout(x, 15000)); continue; }
@@ -368,7 +387,8 @@ async function main() {
                   method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
                   body: JSON.stringify({ status: 'verlopen', reden: 'klant wees meerdere voorstellen af, mens nodig' }),
                 }).catch(() => {});
-                if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, 'Dank je wel! Ik laat een collega even persoonlijk meekijken naar een moment dat echt goed past, je hoort snel van ons.');
+                { const taalS = taalVoor(info);
+                if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, T(taalS, 'Dank je wel! Ik laat een collega even persoonlijk meekijken naar een moment dat echt goed past, je hoort snel van ons.', "Thank you! I'll have a colleague personally look for a moment that really suits you; you'll hear from us soon."), taalS); }
                 await telegram(`📞 ${info.naam} heeft vandaag al ${gemeld[rondeSleutel] - 1}x een automatisch voorstel afgewezen (${duiding.samenvatting}) — ik stop met automatisch sturen, mens nodig / belscherm.`);
                 continue;
               }
@@ -393,22 +413,34 @@ async function main() {
                   nietDeze: gemeld['afgewezen:' + rpIdRem] || (aanbod?.slots || []).map((sl) => sl.aankomst),
                 }),
               });
+              { const taalA = taalVoor(info);
               if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, duiding.dagen.length
-                ? 'Dank je wel! Ik zoek even een moment op de dagen die je noemt en stuur je zo een nieuw voorstel.'
-                : 'Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel.');
+                ? T(taalA, 'Dank je wel! Ik zoek even een moment op de dagen die je noemt en stuur je zo een nieuw voorstel.', "Thank you! I'll look for a moment on the days you mention and send you a new proposal shortly.")
+                : T(taalA, 'Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel.', "Thanks for letting me know! I'll look for another moment and send you a new proposal shortly."), taalA); }
               await telegram(`🔁 ${info.naam}: ${duiding.samenvatting}\nNieuw aanbod aangevraagd (${r.ok ? 'staat in de rij' : 'AANVRAAG MISLUKT — handmatig'}).`);
               statusPer[token] = 'verlopen';
               continue;
             }
 
-            if (duiding.intent === 'klacht' || duiding.intent === 'vraag') {
-              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam,
-                duiding.intent === 'klacht'
-                  ? `Dank je voor je eerlijke bericht, dat snap ik goed. Ik leg het even voor aan een collega en je hoort ${wanneerTerug()} van ons.`
-                  : `Goede vraag! Ik zoek het even voor je uit en kom er ${wanneerTerug()} op terug.`);
-              await telegram(`${duiding.intent === 'klacht' ? '⚠️' : '❓'} ${info.naam} (ticket ${ticketId}): ${duiding.samenvatting}\n\n"${tekst.slice(0, 200)}"\n\n`
+            if (duiding.intent === 'klacht') {
+              const taalK = taalVoor(info);
+              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, T(taalK,
+                `Dank je voor je eerlijke bericht, dat snap ik goed. Ik leg het even voor aan een collega en je hoort ${wanneerTerug()} van ons.`,
+                `Thank you for your honest message, I understand. I'm passing it on to a colleague and you'll hear from us ${wanneerTerug() === 'morgenochtend' ? 'tomorrow morning' : 'later today'}.`), taalK);
+              await telegram(`🚨 KLACHT ${info.naam} (ticket ${ticketId}): ${duiding.samenvatting}\n\n"${tekst.slice(0, 200)}"\n\n`
                 + (duiding.antwoordVoorstel ? `Concept-antwoord:\n${duiding.antwoordVoorstel}` : 'Geen concept-antwoord beschikbaar.')
                 + '\n\nDe klant weet dat we ermee bezig zijn; het echte antwoord moet van een mens komen.');
+              continue;
+            }
+            if (duiding.intent === 'vraag') {
+              // VRAGEN ZIJN VAN SUNNY (Daimy 21-08, Fatih: "is it possible faster? how long
+              // until delivery?" kreeg van de monitor "ik zoek het uit" en daarna niets,
+              // want Sunny was geblokkeerd op het lopende aanbod). Nu: de klantenservice-bot
+              // beantwoordt inhoudelijke vragen ook tijdens een aanbod (met de planning-
+              // context erbij); de monitor zwijgt en zet alleen de stilte-wachthond: komt er
+              // binnen 2 uur geen antwoord, dan alsnog een bericht + alarm (zie onder).
+              console.log(`  ${info.naam}: vraag tijdens aanbod — Sunny antwoordt, wachthond aan`);
+              gemeld['wachthond:' + ticketId + ':' + m.id] = new Date().toISOString();
               continue;
             }
           } catch (e) { console.log(`  reactie-afhandeling mislukt: ${e.message.slice(0, 80)}`); }
@@ -431,8 +463,10 @@ async function main() {
               // NIETS: de afspraak van 10 sep bleef gewoon in Planado en Outlook staan).
               // Dus: eerlijke reactie zonder loze belofte, alarm, en op de bewakingslijst
               // tot de afspraak aantoonbaar weg is (keten-zelfcontrole checkt Planado).
-              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam,
-                'Dank je voor je bericht, wat jammer om te lezen! Ik geef je annulering direct door aan onze planning. Zodra de afspraak is verwijderd krijg je daar nog een bevestiging van, dan hoef jij verder niets te doen.');
+              { const taalAn = taalVoor(info);
+              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, T(taalAn,
+                'Dank je voor je bericht, wat jammer om te lezen! Ik geef je annulering direct door aan onze planning. Zodra de afspraak is verwijderd krijg je daar nog een bevestiging van, dan hoef jij verder niets te doen.',
+                "Thank you for your message, sorry to read that! I'm passing your cancellation straight on to our planning team. As soon as the appointment has been removed you'll receive a confirmation; you don't need to do anything else."), taalAn); }
               try {
                 const AOPEN = '/Users/clawdboot/sonty/data/annuleringen-open.json';
                 const ao = (() => { try { return JSON.parse(fs.readFileSync(AOPEN, 'utf8')); } catch { return {}; } })();
@@ -452,8 +486,10 @@ async function main() {
             }
             if (duidingB.intent === 'ander-moment') {
               // Verzetten ná boeking blijft planner-terrein: bevestigen + alarm.
-              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam,
-                `Dank je wel voor het laten weten! Ik kijk meteen naar een ander moment voor je en kom er ${wanneerTerug()} op terug.`);
+              { const taalV = taalVoor(info);
+              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, T(taalV,
+                `Dank je wel voor het laten weten! Ik kijk meteen naar een ander moment voor je en kom er ${wanneerTerug()} op terug.`,
+                `Thanks for letting me know! I'll look for another moment straight away and get back to you ${wanneerTerug() === 'morgenochtend' ? 'tomorrow morning' : 'later today'}.`), taalV); }
               await telegram(`🚨 ${info.naam} wil zijn GEBOEKTE afspraak verzetten (${duidingB.samenvatting}).\n\n"${tekst.slice(0, 200)}"\n\nDe afspraak staat nog vast — verzetten via dashboard of motor. Ticket ${ticketId}.`);
               meldingen++;
               continue;
@@ -471,6 +507,32 @@ async function main() {
         }
         if (!alGemeld) await telegram(`💬 REACTIE op keuzelink van ${info.naam} (aanbod: ${statusPer[token] || 'onbekend'}, ticket ${ticketId}):\n\n"${tekst || '(leeg/bijlage)'}"`);
       }
+
+      // STILTE-WACHTHOND (Daimy 21-08: "zorg dat dit nooit meer verkeerd kan gaan").
+      // Ongeacht wie aan zet was (Sunny, monitor, planner, mens): staat het laatste
+      // bericht van de klant al 2 uur onbeantwoord en is het geen afsluiter, dan krijgt
+      // de klant alsnog een kort bericht (via de verzendpoort) en gaat er een alarm uit.
+      // Eén keer per klantbericht. Alleen overdag (08-21), en niet ouder dan 3 dagen.
+      try {
+        // volgorde van de API niet vertrouwen: expliciet het NIEUWSTE klantbericht pakken
+        const laatsteIn = rows.filter(isIn).sort((a, b) => Date.parse(String(b.created_at || '').replace(' ', 'T')) - Date.parse(String(a.created_at || '').replace(' ', 'T')))[0];
+        const laatsteInT = laatsteIn ? Date.parse(String(laatsteIn.created_at || '').replace(' ', 'T')) : 0;
+        const naLaatsteIn = rows.some((x) => !isIn(x) && String(x.type || '').toUpperCase() === 'OUTBOUND' && Date.parse(String(x.created_at || '').replace(' ', 'T')) > laatsteInT);
+        const uurNu = Number(new Date().toLocaleString('nl-NL', { hour: 'numeric', hour12: false, timeZone: 'Europe/Amsterdam' }));
+        const oudUur = (Date.now() - laatsteInT) / 3600000;
+        const wSleutel = 'stil-gemeld:' + ticketId + ':' + (laatsteIn?.id || 0);
+        const tekstIn = String(laatsteIn?.body_plain || laatsteIn?.message || '').replace(/<[^>]+>/g, ' ').trim();
+        if (laatsteIn && laatsteInT > Date.parse(info.verstuurdOp) && !naLaatsteIn && oudUur >= 2 && oudUur < 72
+            && uurNu >= 8 && uurNu < 21 && !gemeld[wSleutel] && !isAfsluiter(tekstIn)) {
+          gemeld[wSleutel] = new Date().toISOString();
+          const taalW = taalVoor(info);
+          const gestuurd = await bevestigOntvangst(ticketId, info.naam, T(taalW,
+            'Sorry dat je nog niets van ons hoorde! Je bericht is binnen, een collega pakt het nu persoonlijk op en je hoort zo snel mogelijk van ons.',
+            "Sorry you haven't heard from us yet! Your message has arrived, a colleague is picking it up personally now and you'll hear from us as soon as possible."), taalW);
+          await telegram(`🚨 ${info.naam} wacht al ${Math.floor(oudUur)} uur op antwoord (ticket ${ticketId}): "${tekstIn.slice(0, 160)}" — actie nodig, mens moet dit beantwoorden.${gestuurd ? ' Klant heeft net een excuus/ontvangstbericht gekregen.' : ' (Geen automatisch bericht gestuurd: mens in gesprek of stil-lijst.)'}`);
+          meldingen++;
+        }
+      } catch (e) { console.log(`  wachthond-fout ticket ${ticketId}: ${String(e.message).slice(0, 80)}`); }
     }
   }
   // opgeschoonde tokens + dedup bewaren
@@ -488,5 +550,5 @@ async function main() {
   console.log(`${tokens.length} aanbod(en) gevolgd, ${meldingen} nieuwe reactie(s) gemeld`);
 }
 
-module.exports = { bevestigingsTekst, leesKeuze };
+module.exports = { bevestigingsTekst, leesKeuze, isAfsluiter };
 if (require.main === module) main().catch((e) => { console.error(e.message); process.exit(1); });

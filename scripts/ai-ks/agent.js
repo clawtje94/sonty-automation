@@ -107,6 +107,7 @@ async function beantwoord(gesprek) {
       `Huidige datum/tijd: ${DAGEN[nu.dag]} ${nu.datum}, ${nu.hhmm} uur (Nederland). Houd hier rekening mee bij groeten (weekend alleen als het echt weekend is), afspraken en "morgen".\n` +
       `Klant: ${gesprek.klant?.naam || 'onbekend'} | e-mail: ${gesprek.klant?.email || '-'} | tel: ${gesprek.klant?.phone || '-'}\n\n` +
       notitiesBlok +
+      (gesprek.planningContext ? `# ${gesprek.planningContext}\n\n` : '') +
       `# Gespreksgeschiedenis (oud → nieuw)\n${historie}\n\n` +
       slotInstructie,
   }];

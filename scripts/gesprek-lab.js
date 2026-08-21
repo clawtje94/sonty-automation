@@ -129,7 +129,9 @@ async function haalGesprekken(vers) {
       // leestekens weg, namen (hoofdletterwoorden midden in de zin) weg, en dan
       // moet elk overgebleven woord een afsluit-woord zijn. Een vraagteken maakt
       // het nooit een afsluiter.
-      const AFSLUIT_WOORDEN = new Set(['dank', 'dankje', 'dankjewel', 'danku', 'dankuwel', 'bedankt', 'thanks', 'thnx', 'top', 'prima', 'oke', 'oké', 'ok', 'okay', 'is', 'goed', 'dat', 'past', 'helemaal', 'hoor', 'ja', 'graag', 'fijn', 'fijne', 'avond', 'dag', 'weekend', 'tot', 'dan', 'ziens', 'snel', 'ook', 'je', 'jij', 'u', 'jullie', 'wel', 'hetzelfde', 'insgelijks', 'gelijk', 'doei', 'doeg', 'groetjes', 'groeten', 'super', 'perfect', 'duidelijk', 'begrepen', 'komt', 'voor', 'elkaar', 'we', 'zien', 'het', 'de', 'een']);
+      // Bijlage-placeholders ("Image", "Video") zijn geen vraag; de tekst eromheen wel.
+      if (/^(image|video|audio|document|sticker|bijlage)$/i.test(m.tekst.trim())) continue;
+      const AFSLUIT_WOORDEN = new Set(['nakijken', 'reactie', 'bericht', 'info', 'informatie', 'moeite', 'uitleg', 'hulp', 'even', 'heel', 'erg', 'alvast', 'in', 'ieder', 'geval', 'thank', 'you', 'great', 'fine', 'good', 'see', 'then', 'bye', 'cheers', 'dank', 'dankje', 'dankjewel', 'danku', 'dankuwel', 'bedankt', 'thanks', 'thnx', 'top', 'prima', 'oke', 'oké', 'ok', 'okay', 'is', 'goed', 'dat', 'past', 'helemaal', 'hoor', 'ja', 'graag', 'fijn', 'fijne', 'avond', 'dag', 'weekend', 'tot', 'dan', 'ziens', 'snel', 'ook', 'je', 'jij', 'u', 'jullie', 'wel', 'hetzelfde', 'insgelijks', 'gelijk', 'doei', 'doeg', 'groetjes', 'groeten', 'super', 'perfect', 'duidelijk', 'begrepen', 'komt', 'voor', 'elkaar', 'we', 'zien', 'het', 'de', 'een']);
       const isAfsluiter = (tekst) => {
         if (/\?/.test(tekst)) return false;
         const kaal = String(tekst)
@@ -137,7 +139,8 @@ async function haalGesprekken(vers) {
           .replace(/(?<=\S)\s+([A-Z][a-zà-ü]+)/g, (vol, w) => (AFSLUIT_WOORDEN.has(w.toLowerCase()) ? ' ' + w : ' '))
           .toLowerCase().replace(/[^a-zà-ü]+/g, ' ').trim();
         const woorden = kaal.split(/\s+/).filter(Boolean);
-        return woorden.length > 0 && woorden.every((w) => AFSLUIT_WOORDEN.has(w));
+        if (!woorden.length) return true; // alleen emoji ("👍") = afsluiter (Michel 19-08)
+        return woorden.every((w) => AFSLUIT_WOORDEN.has(w));
       };
       if (isAfsluiter(m.tekst)) continue;
       // Verjaring (19-08): het lab draait dagelijks; alles ouder dan 7 dagen is al

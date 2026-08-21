@@ -45,7 +45,14 @@
   op .disabled → hernoemd + bootstrap. Verzending via wa-luisteraar-outbox (test-DM aan Daimy
   geslaagd 21-08). sunny-weetje.js: model naar claude-sonnet-5 (grappiger), herhalingsvanger
   (Haiku gaf de 18-08-tekst letterlijk terug). Eerste weetje: vr 21-08 20:00; ochtend ma 24-08 07:30.
-- Sonty toppers-groep: Sunny stuurt verder NIETS in de groep; luisteraar leest foto's, 08:15 proef-DM aan Daimy.
+- @SUNNY IN DE TOPPERS-GROEP (Daimy 21-08): wa-luisteraar antwoordt als Sunny wordt aangesproken
+  (@-mention, "sunny" in tekst, of reactie op een Sunny-bericht) via lib/groep-antwoord.js:
+  Sonnet-5, Grok/Tesla-"unhinged"-toon (sarcastisch, roast, vloeken mag behalve kanker), harde
+  grenzen (politiek/religie/seks/discriminatie/klantgegevens), woordfilter, max 15/dag, 40 s
+  tussen antwoorden, "typt..." + 8-25 s vertraging, quote + mention. Context = laatste 20
+  groepsberichten (data/wa-groep-recent.json). Killswitch: data/wa-groep-antwoord-uit.txt
+  aanmaken. Log: data/wa-groep-antwoorden.jsonl. Proef: node scripts/lib/groep-antwoord.js --proef "Naam: tekst".
+- Sunny's profielfoto met blauw oog: data/sunny-profiel/ (origineel + 2 varianten), naar Daimy gestuurd 21-08.
 
 
 

@@ -33,6 +33,15 @@ const VERWERKT = path.join(DATA, 'email', 'wa-luisteraar-verwerkt.json');
 const GRAPPEN = path.join(DATA, 'email', 'wa-grapverzoeken.jsonl');
 const DMVLAG = path.join(DATA, 'wa-dm-uit.txt');
 const DESKTOPQ = path.join(DATA, 'wa-desktop-queue');
+// @SUNNY IN DE GROEP (Daimy 21-08): antwoorden als iemand Sunny aanspreekt, Grok-achtige
+// aso-toon (lib/groep-antwoord.js). Killswitch = bestand hieronder aanmaken.
+const GROEP_UIT = path.join(DATA, 'wa-groep-antwoord-uit.txt');
+const GROEP_LOG = path.join(DATA, 'wa-groep-antwoorden.jsonl');
+const GROEP_RECENT = path.join(DATA, 'wa-groep-recent.json');
+const GROEP_MAX_PER_DAG = 15;
+const GROEP_MIN_TUSSEN_MS = 40000;
+let groepBuffer = (() => { try { return JSON.parse(fs.readFileSync(GROEP_RECENT, 'utf8')); } catch { return []; } })();
+let laatsteGroepAntwoord = 0;
 // Weergavenamen zoals de contacten op Sunny's telefoon zijn opgeslagen (19-08): de
 // reserve-route zoekt de chat in WhatsApp Desktop op naam.
 const DESKTOPNAAM = { Daimy: 'Daimy Boot', Joey: 'Joey Engelen', Sjoerd: 'Sjoerd' };
@@ -189,6 +198,29 @@ async function naarBeoordeling(jpgPad, naam, uit) {
       console.log('grapverzoek van', m.pushName || jid);
       return;
     }
+    // groepsberichten: context bijhouden en antwoorden als Sunny wordt aangesproken
+    if (jid === GROEP) {
+      const tekstG = m.message?.conversation || m.message?.extendedTextMessage?.text || m.message?.imageMessage?.caption || '';
+      const deelnemer = m.key?.participantAlt || m.key?.participant || '';
+      const vanG = m.pushName || COLLEGAS[deelnemer] || (deelnemer.split('@')[0] || 'iemand');
+      if (tekstG) {
+        groepBuffer.push({ tijd: Date.now(), van: vanG, tekst: String(tekstG).slice(0, 400) });
+        groepBuffer = groepBuffer.slice(-40);
+        try { fs.writeFileSync(GROEP_RECENT, JSON.stringify(groepBuffer)); } catch { /* cache */ }
+        try {
+          const { isAanSunny } = require('./lib/groep-antwoord.js');
+          const ctx = m.message?.extendedTextMessage?.contextInfo || m.message?.imageMessage?.contextInfo || {};
+          const eigen = [sock?.user?.id, sock?.user?.lid].filter(Boolean);
+          if (isAanSunny({ tekst: tekstG, mentionedJids: ctx.mentionedJid || [], quotedVan: ctx.participant || null, eigen })) {
+            if (!verwerkt[id + ':g']) {
+              verwerkt[id + ':g'] = 1;
+              fs.writeFileSync(VERWERKT, JSON.stringify(verwerkt));
+              await beantwoordInGroep(m, vanG, String(tekstG), deelnemer);
+            }
+          }
+        } catch (e) { console.error('groep-antwoord-fout:', String(e.message).slice(0, 100)); }
+      }
+    }
     // groepsfotos
     if (jid !== GROEP || !m.message?.imageMessage) return;
     verwerkt[id] = 1;
@@ -202,6 +234,29 @@ async function naarBeoordeling(jpgPad, naam, uit) {
     await naarBeoordeling(jpg, naam, uit);
     console.log('foto geplaatst:', naam, uit.cat, uit.score);
     await telegram(`📸 Nieuwe foto uit de toppers-groep beoordeeld (${uit.cat} ${uit.score}/10) en klaargezet in de Uploaden-tab voor jouw akkoord.`);
+  }
+
+  async function beantwoordInGroep(m, van, tekst, deelnemer) {
+    if (fs.existsSync(GROEP_UIT)) { console.log('groep-antwoord uit (killswitch)'); return; }
+    const vandaag = new Date().toISOString().slice(0, 10);
+    let vandaagN = 0;
+    try { vandaagN = fs.readFileSync(GROEP_LOG, 'utf8').split('\n').filter((r) => r.includes(`"dag":"${vandaag}"`)).length; } catch { /* nog geen log */ }
+    if (vandaagN >= GROEP_MAX_PER_DAG) { console.log('groep-antwoord: dagmax bereikt'); await telegram('ℹ️ Sunny heeft vandaag al ' + vandaagN + 'x in de toppers-groep geantwoord; rest van de dag zwijgt hij (dagmax).'); return; }
+    const sinds = Date.now() - laatsteGroepAntwoord;
+    if (sinds < GROEP_MIN_TUSSEN_MS) await new Promise((r) => setTimeout(r, GROEP_MIN_TUSSEN_MS - sinds));
+    const { maakGroepAntwoord } = require('./lib/groep-antwoord.js');
+    const context = groepBuffer.slice(0, -1).slice(-20);
+    const antwoord = await maakGroepAntwoord({ van, tekst, context });
+    if (!antwoord) { console.log('groep-antwoord: Sunny zwijgt (filter/leeg)'); return; }
+    // menselijk tempo: eerst "typt...", dan 8-25 s later het bericht
+    try { await sock.sendPresenceUpdate('composing', GROEP); } catch { /* optioneel */ }
+    await new Promise((r) => setTimeout(r, 8000 + Math.floor(Math.random() * 17000)));
+    const mentions = deelnemer && deelnemer.endsWith('@s.whatsapp.net') ? [deelnemer] : [];
+    await sock.sendMessage(GROEP, { text: antwoord, mentions }, { quoted: m });
+    laatsteGroepAntwoord = Date.now();
+    groepBuffer.push({ tijd: Date.now(), van: 'Sunny', tekst: antwoord });
+    try { fs.appendFileSync(GROEP_LOG, JSON.stringify({ dag: vandaag, tijd: new Date().toISOString(), van, vraag: tekst.slice(0, 300), antwoord }) + '\n'); } catch { /* log */ }
+    console.log(`groep-antwoord aan ${van}: ${antwoord.slice(0, 80)}`);
   }
 
   // dagelijkse herstel-probe (na 08:15): 1 proefbericht aan Daimy; komt de bezorg-ack

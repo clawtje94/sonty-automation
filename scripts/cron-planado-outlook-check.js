@@ -32,9 +32,15 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
   const cal = cals.find((c) => c.Name === 'Sonty Montage');
   if (!cal) throw new Error('agenda "Sonty Montage" niet gevonden');
   const tot = new Date(); tot.setDate(tot.getDate() + 120);
-  let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView?$top=200&$select=Subject,Start&startDateTime=${new Date().toISOString()}&endDateTime=${tot.toISOString()}`;
+  let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView?$top=200&$select=Id,Subject,Start&startDateTime=${new Date().toISOString()}&endDateTime=${tot.toISOString()}`;
   const evs = [];
   while (url) { const j = await (await fetch(url, { headers: OH })).json(); evs.push(...(j.value || [])); url = j['@odata.nextLink'] || null; }
+  // Gesyncte opdrachten dragen ol-<hash(event.Id)> als external_id. Bestaat dat event
+  // nog, dan is de opdracht per definitie gedekt — de TIJD mag namelijk afwijken:
+  // sinds de buffertijd-fix (20-08) staat de opdracht op de echte Bookings-klanttijd,
+  // het event op de gebufferde bloktijd. Alleen op tijd matchen gaf 7 valse alarmen.
+  const crypto = require('crypto');
+  const extIds = new Set(evs.map((e) => 'ol-' + crypto.createHash('sha1').update(e.Id).digest('hex').slice(0, 20)));
 
   const rond = (a, b) => Math.abs(new Date(a) - new Date(b)) < 60000;
   // MATCH OP KLANT, NIET ALLEEN TIJD (18-08, Eric van der Meer: zijn Outlook-afspraak
@@ -61,13 +67,26 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
     const raak = delen.filter((d) => onderwerp.includes(d)).length;
     return delen.length === 0 ? true : raak >= Math.ceil(delen.length / 2);
   };
-  const mist = toekomst.filter((j) => !evs.some((e) => dekt(e, j)))
-    .map((j) => ({
+  const mistJobs = toekomst.filter((j) => !(j.external_id && extIds.has(j.external_id)) && !evs.some((e) => dekt(e, j)));
+  const mist = [];
+  for (const j of mistJobs) {
+    // de lijst-endpoint geeft geen description terug ("(geen omschrijving)"-meldingen
+    // van 21-08) — voor de paar afwijkers is een detail-call de moeite waard
+    let omschrijving = j.description;
+    if (!omschrijving) {
+      try {
+        const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: { Authorization: 'Bearer ' + KEY } })).json();
+        omschrijving = (det.job || det).description;
+      } catch { /* detail niet op te halen: val terug op (geen omschrijving) */ }
+      await wacht(1100);
+    }
+    mist.push({
       wanneer: new Date(j.scheduled_at).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' }),
-      wat: String(j.description || '(geen omschrijving)').split('\n')[0].slice(0, 70),
+      wat: String(omschrijving || '(geen omschrijving)').split('\n')[0].slice(0, 70),
       ext: j.external_id || '',
-    }))
-    .sort((a, b) => a.wanneer.localeCompare(b.wanneer));
+    });
+  }
+  mist.sort((a, b) => a.wanneer.localeCompare(b.wanneer));
 
   // DUBBELBOEKINGEN BIJ DE INMETERS (Daimy 11-08, Ed Pannebakker: twee inmetingen op
   // hetzelfde moment bij Joey en niemand zag het). Elke overlap tussen twee klussen

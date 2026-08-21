@@ -202,7 +202,14 @@ async function telegram(t) {
 
   const openers = soort === 'ochtend' ? OCHTEND_OPENERS : OPENERS;
   const opener = openers[vanSoort.length % openers.length];
-  const { thema, tekst } = soort === 'ochtend' ? await maakOchtend(hist) : await maakWeetje(vanSoort);
+  // API hapert soms (21-08: eerste poging "weetje-generatie mislukt", tweede lukte): 3x proberen
+  let gen = null, laatsteFout = null;
+  for (let poging = 0; poging < 3 && !gen; poging++) {
+    try { gen = soort === 'ochtend' ? await maakOchtend(hist) : await maakWeetje(vanSoort); }
+    catch (e) { laatsteFout = e; await new Promise((r) => setTimeout(r, 30000)); }
+  }
+  if (!gen) throw laatsteFout || new Error('generatie mislukt');
+  const { thema, tekst } = gen;
   if (process.argv.includes('--proef')) { console.log(`PROEF (niet verstuurd):\n${opener}\n${tekst}`); return; }
   // Wachten tot Daimy weg is hoeft niet meer: er wordt geen scherm meer overgenomen.
   await stuurWhatsApp(GROEP_JID, [opener, tekst]);

@@ -363,7 +363,12 @@ async function main() {
       // de checklist (werkplek, foto's voor/na, product getest, bediening uitgelegd).
       else if (isMontage) body.template = { uuid: MONTAGE_TEMPLATE };
       const tel = telefoonUit(e.Body);
-      if (tel) body.contacts = [{ type: 'phone', name: klantNaamUit(e.Subject), value: tel }];
+      // GEEN telefooncontact op winkel/showroom/telefonisch (Daimy 22-08: "die smsjes
+      // worden nu ook gestuurd naar showroom afspraken"). Planado's klant-sms
+      // (herinnering + volg-link) is een GLOBALE instelling zonder type-filter en
+      // pakt elke opdracht met een nummer — de klant komt zelf naar de showroom,
+      // dus geen nummer erop = geen sms. Inmeet en montage houden hem bewust.
+      if (tel && soort(e.Subject) !== 'winkel') body.contacts = [{ type: 'phone', name: klantNaamUit(e.Subject), value: tel }];
       // Adres altijd als leesbare tekst, nooit als coördinaten (Daimy 20-08):
       // eerst de event-locatie, anders het klantadres uit de Bookings-afspraak.
       const hardAdres = (adres && adres.length > 8 && /\d/.test(adres)) ? adres
@@ -393,7 +398,8 @@ async function main() {
               '(gesynct uit Outlook)', kern ? '\n' + kern : null, grippBlok || null,
             ].filter(Boolean).join('\n');
             const telNr = tel || echt?.tel || null;
-            if (telNr && !(huidig.contacts || []).length) naPatch.contacts = [{ type: 'phone', name: wieKlant || klantNaamUit(e.Subject), value: telNr }];
+            // zelfde winkel-uitzondering als bij de POST: geen nummer = geen klant-sms
+            if (telNr && soort(e.Subject) !== 'winkel' && !(huidig.contacts || []).length) naPatch.contacts = [{ type: 'phone', name: wieKlant || klantNaamUit(e.Subject), value: telNr }];
             if (hardAdres && !huidig.address?.formatted) naPatch.address = { formatted: hardAdres };
             // Meetbon als tikbaar linkveld in de details (Daimy 05-08)
             const nr = (grippBlok.match(/Gripp: (\d+)/) || [])[1];

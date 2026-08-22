@@ -83,9 +83,11 @@ async function reistijd(vanAdres, naarAdres, vertrek) {
   for (let poging = 0; poging < 4; poging++) {
     r = await fetch(url);
     if (r.ok) break;
-    // 403 InsufficientFunds (22-08: TomTom-tegoed op, hele planner viel op 0 slots
-    // terug omdat elk niet-gecacht gat werd overgeslagen) → gratis OSRM-terugval.
-    if (r.status === 403) return osrmReistijd(a, b, sleutel);
+    // 403 = InsufficientFunds: TomTom-tegoed is op. GEEN stille terugval (Daimy
+    // 22-08: "niet een fallback, ik wil een melding dat die niet kan plannen") —
+    // één duidelijk alarm (max 1x per 6 uur) en dan hard falen, zodat leads
+    // zichtbaar op "kan niet plannen" blijven staan tot er tegoed gekocht is.
+    if (r.status === 403) { await meldTegoedOp(); throw new Error('TomTom-tegoed OP — plannen kan niet tot er tegoed is gekocht (developer.tomtom.com)'); }
     if (r.status !== 429 && r.status < 500) throw new Error(`routing: HTTP ${r.status}`);
     await new Promise((k) => setTimeout(k, 700 * 2 ** poging));
   }
@@ -106,32 +108,25 @@ async function reistijd(vanAdres, naarAdres, vertrek) {
   return resultaat;
 }
 
-/** Terugval zonder TomTom-tegoed: OSRM (gratis, geen key, géén file-informatie).
- *  Zelfde vorm als het TomTom-resultaat zodat de rest van de keten niets merkt;
- *  fileVertragingMin is 0 want OSRM kent geen verkeer. Resultaat wordt net zo
- *  gecachet — komt er weer TomTom-tegoed, dan verversen nieuwe routes vanzelf
- *  (cache-sleutel bevat de vertrektijd-bucket). */
-async function osrmReistijd(a, b, sleutel) {
-  let r;
-  for (let poging = 0; poging < 3; poging++) {
-    r = await fetch(`https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=false`);
-    if (r.ok) break;
-    await new Promise((k) => setTimeout(k, 1000 * (poging + 1)));
-  }
-  if (!r || !r.ok) throw new Error(`routing: TomTom-tegoed op en OSRM HTTP ${r?.status}`);
-  const route = (await r.json())?.routes?.[0];
-  if (!route) throw new Error('routing: OSRM geen route');
-  const rijtijd = route.duration / 60;
-  const resultaat = {
-    minuten: Math.max(ONDERGRENS_MIN, Math.round(rijtijd * DEUR_TOT_DEUR)),
-    rijtijdTomTom: Math.round(rijtijd),
-    km: +(route.distance / 1000).toFixed(1),
-    fileVertragingMin: 0,
-    bron: 'osrm',
-  };
-  reisCache[sleutel] = resultaat;
-  bewaar(CACHE_BESTAND, reisCache);
-  return resultaat;
+/** Tegoed-op-alarm: naar Daimy's hoofdchat, max 1x per 6 uur (elke planner-run
+ *  raakt tientallen routes — zonder rem zou dit alarm net zo spammen als de
+ *  aanbod-alarmen van 21-08). */
+const MELDING_BESTAND = path.join(__dirname, '..', '..', 'data', 'tomtom-tegoed-melding.txt');
+async function meldTegoedOp() {
+  try {
+    const laatst = Date.parse(fs.readFileSync(MELDING_BESTAND, 'utf8').trim());
+    if (laatst && Date.now() - laatst < 6 * 3600 * 1000) return;
+  } catch { /* nog nooit gemeld */ }
+  try {
+    fs.writeFileSync(MELDING_BESTAND, new Date().toISOString());
+    await fetch('https://api.telegram.org/bot8638107367:AAGZMmR_e6JJRkneZAJgBdGNEM8BVQFma40/sendMessage', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: 1700128390,
+        text: '🚨 TomTom-tegoed is OP: de planner kan geen rijtijden berekenen en dus NIET plannen (inmeet-aanbiedingen en montage-voorstellen liggen stil, bestaande afspraken blijven gewoon staan). Tegoed kopen: developer.tomtom.com, inloggen met het account van de key, dan Dashboard, Billing, credits bijkopen. Deze melding komt max 1x per 6 uur.',
+      }),
+    });
+  } catch { /* melding mag routing nooit verder breken */ }
 }
 
 module.exports = { reistijd, geocode, MAGAZIJN, DEUR_TOT_DEUR, ONDERGRENS_MIN };

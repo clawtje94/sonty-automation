@@ -96,12 +96,31 @@ async function bouwGeheugen() {
   // in blokken van ~400 berichten samenvatten, daarna één eindsamenvatting
   const blokken = [];
   for (let i = 0; i < alles.length; i += 400) blokken.push(alles.slice(i, i + 400));
-  const deel = [];
-  for (const [i, b] of blokken.entries()) {
-    const tekst = b.map((r) => `${new Date(r.tijd).toISOString().slice(0, 10)} ${r.van}: ${String(r.tekst).replace(/\s+/g, ' ').slice(0, 300)}`).join('\n');
-    deel.push(await sonnet(`Dit is blok ${i + 1}/${blokken.length} uit de interne WhatsApp-groep "Sonty toppers" van zonweringbedrijf Sonty. Maak er een compacte samenvatting van (max 500 woorden) voor het geheugen van Sunny, de AI-collega die in deze groep meepraat: wie zijn de mensen en wat is hun rol/stijl, running gags en bijnamen, opvallende gebeurtenissen (klussen, blunders, feestjes, vakanties, personeelswissels), terugkerende discussies, en dingen waarmee Sunny later persoonlijk en raak kan plagen. GEEN klantnamen, adressen of telefoonnummers overnemen. Gewone tekst met kopjes, geen gedachtestreepjes.\n\n${tekst}`));
-    console.log(`blok ${i + 1}/${blokken.length} samengevat`);
+  // deelsamenvattingen in een cache (herstart = verder waar het bleef) en 6 tegelijk
+  const CACHE = path.join(DATA, 'wa-groep-teamgeheugen-delen.json');
+  let cache = {}; try { cache = JSON.parse(fs.readFileSync(CACHE, 'utf8')); } catch { /* leeg */ }
+  const sleutelVan = (b) => `${b[0].tijd}-${b[b.length - 1].tijd}-${b.length}`;
+  const deel = new Array(blokken.length);
+  let volgende = 0, klaar = 0;
+  async function werker() {
+    while (volgende < blokken.length) {
+      const i = volgende++;
+      const b = blokken[i];
+      const k = sleutelVan(b);
+      if (cache[k]) { deel[i] = cache[k]; klaar += 1; continue; }
+      const tekst = b.map((r) => `${new Date(r.tijd).toISOString().slice(0, 10)} ${r.van}: ${String(r.tekst).replace(/\s+/g, ' ').slice(0, 300)}`).join('\n');
+      let uit = null;
+      for (let poging = 0; poging < 3 && !uit; poging++) {
+        try { uit = await sonnet(`Dit is blok ${i + 1}/${blokken.length} uit de interne WhatsApp-groep "Sonty toppers" van zonweringbedrijf Sonty. Maak er een compacte samenvatting van (max 500 woorden) voor het geheugen van Sunny, de AI-collega die in deze groep meepraat: wie zijn de mensen en wat is hun rol/stijl, running gags en bijnamen, opvallende gebeurtenissen (klussen, blunders, feestjes, vakanties, personeelswissels), terugkerende discussies, en dingen waarmee Sunny later persoonlijk en raak kan plagen. GEEN klantnamen, adressen of telefoonnummers overnemen. Gewone tekst met kopjes, geen gedachtestreepjes.\n\n${tekst}`); }
+        catch (e) { console.error(`blok ${i + 1} poging ${poging + 1} mislukt: ${String(e.message).slice(0, 80)}`); await new Promise((r) => setTimeout(r, 15000)); }
+      }
+      if (!uit) throw new Error(`blok ${i + 1} bleef mislukken`);
+      deel[i] = uit; cache[k] = uit; klaar += 1;
+      fs.writeFileSync(CACHE, JSON.stringify(cache));
+      console.log(`blok ${i + 1}/${blokken.length} samengevat (${klaar} klaar)`);
+    }
   }
+  await Promise.all(Array.from({ length: 6 }, werker));
   const eind = deel.length === 1 ? deel[0] : await sonnet(`Voeg deze deelsamenvattingen van de WhatsApp-groep "Sonty toppers" samen tot één teamgeheugen (max 1500 woorden) voor Sunny, de AI-collega in de groep. Structuur: 1) Wie is wie (naam, rol, stijl, bijnaam, typische dingen), 2) Running gags en inside jokes, 3) Tijdlijn van memorabele gebeurtenissen, 4) Gevoeligheden om NIET op te grappen. GEEN klantnamen/adressen/telefoonnummers. Gewone tekst met kopjes, geen gedachtestreepjes.\n\n${deel.map((d, i) => `--- deel ${i + 1} ---\n${d}`).join('\n\n')}`, 2500);
   fs.writeFileSync(GEHEUGEN, `# Teamgeheugen Sonty toppers (gebouwd ${new Date().toISOString().slice(0, 10)} uit ${alles.length} berichten, ${new Date(alles[0].tijd).toISOString().slice(0, 10)} t/m ${new Date(alles[alles.length - 1].tijd).toISOString().slice(0, 10)})\n\n${eind}\n`);
   console.log('teamgeheugen geschreven:', GEHEUGEN, eind.length, 'tekens');

@@ -59,6 +59,14 @@
   en de luisteraar stuurt die als PDF-document mee in de DM. antwoordCollega geeft nu
   {tekst, bijlagen}. Getest op Gripp 6521 (175 KB PDF). Reserve-route (DM-uit) kan geen PDF.
 - Groepspersona grover gemaakt (Daimy: "zelfs inmeten kan je niet" mag): roasts over werk expliciet toegestaan.
+- GROEPSGESCHIEDENIS (Daimy 22-08 "kan je de hele geschiedenis teruglezen?"): Sunny's nummer zit pas
+  sinds 17-08 in de groep, dus via WhatsApp geen oude berichten. Exports van Daimy stonden op de Mac
+  (~/Downloads/"WhatsApp Chat - Sonty toppers☀❤ (1).zip", _chat.txt t/m 17-08-2026) → scripts/
+  wa-groep-geschiedenis.js import → data/wa-groep-geschiedenis.jsonl (35.053 berichten, jan 2025-aug
+  2026; NIET in git, .gitignore). Luisteraar slaat nu ALLES live op (+ history-sync aan). `geheugen`
+  bouwt data/wa-groep-teamgeheugen.md (Sonnet, 88 blokken parallel, cache -delen.json); groep-antwoord
+  gebruikt teamgeheugen + woordmatch-retrieval van oude berichten (ALIAS export-namen → live namen).
+- Sonnet-5 kan een thinking-blok vooraan zetten: overal het tekstblok pakken (was oorzaak "weetje-generatie mislukt").
 
 
 

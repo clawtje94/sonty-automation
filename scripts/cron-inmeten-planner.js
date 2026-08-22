@@ -1157,16 +1157,25 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, 
     // alarm. De poging zelf mag blijven (zodra de blokkade wegvalt gaat het aanbod
     // alsnog vanzelf), maar het alarm niet. Zonder keuzelink: die is hierboven net
     // op "verlopen" gezet en dus altijd dood (Daimy: "die link klopt niet").
+    // MAX 1 MELDING PER KLANT OOIT + BUNDELING (Daimy 22-08: "1x is genoeg om me
+    // dit te sturen" — hij kreeg 3 losse alarmen op één middag). Elke klant komt
+    // maar één keer in het alarm (opschoning na 30 dagen), en meerdere klanten
+    // binnen 6 uur gaan als één gebundeld bericht.
     const stAl = laadState();
     stAl.nietBezorgdAlarm = stAl.nietBezorgdAlarm || {};
-    for (const [id, iso] of Object.entries(stAl.nietBezorgdAlarm)) if (Date.now() - Date.parse(iso) > 7 * 86400000) delete stAl.nietBezorgdAlarm[id];
-    const eerder = stAl.nietBezorgdAlarm[item.id];
-    if (!eerder || Date.now() - Date.parse(eerder) > 24 * 3600000) {
-      const tijden = aanbod.map((sl) => `${sl.datum} ${sl.aankomst.toISOString().slice(11, 16)}Z ${sl.inmeter}`).join(', ');
-      await telegram(`🚨 Aanbod voor ${lead.naam} NIET verstuurd (wa: ${verzonden.wa.reden}; mail: ${verzonden.mail.reden}) — actie nodig: stuur de tijden zelf in het gesprek of zet de klant op stil. Berekende tijden: ${tijden}. (Deze melding komt max 1x per dag per klant.)`);
+    for (const [id, iso] of Object.entries(stAl.nietBezorgdAlarm)) if (Date.now() - Date.parse(iso) > 30 * 86400000) delete stAl.nietBezorgdAlarm[id];
+    if (!stAl.nietBezorgdAlarm[item.id]) {
       stAl.nietBezorgdAlarm[item.id] = new Date().toISOString();
-      bewaarState(stAl);
+      const tijden = aanbod.map((sl) => `${sl.datum} ${sl.aankomst.toISOString().slice(11, 16)}Z ${sl.inmeter}`).join(', ');
+      stAl.alarmWachtrij = stAl.alarmWachtrij || [];
+      stAl.alarmWachtrij.push(`• ${lead.naam} (wa: ${verzonden.wa.reden.split(' (')[0]}; mail: ${verzonden.mail.reden.split(' (')[0]}) — tijden: ${tijden}`);
     }
+    if (stAl.alarmWachtrij?.length && (!stAl.alarmDigestOp || Date.now() - Date.parse(stAl.alarmDigestOp) > 6 * 3600000)) {
+      await telegram(`🚨 Aanbod niet verstuurd bij ${stAl.alarmWachtrij.length} klant(en) — stuur de tijden zelf in het gesprek of zet de klant op stil:\n${stAl.alarmWachtrij.join('\n')}\n(Per klant hoor je dit maar 1x; nieuwe gevallen worden gebundeld, max 1 bericht per 6 uur.)`);
+      stAl.alarmDigestOp = new Date().toISOString();
+      stAl.alarmWachtrij = [];
+    }
+    bewaarState(stAl);
     throw new Error(`niet bezorgd (wa: ${verzonden.wa.reden}, mail: ${verzonden.mail.reden})`);
   }
   // ticket-ids bewaren zodat de reply-monitor ELK antwoord kan uitlezen (Daimy 06-08:

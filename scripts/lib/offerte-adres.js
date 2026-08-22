@@ -18,7 +18,10 @@ function adresUitTekst(tekst) {
     // komma's tolerant: RP rendert soms "Texellaan 22,, 2809 SB, Gouda" (dubbele komma)
     const m = regel.match(/^(.+?\d[^,]*)\s*,+\s*(\d{4}\s?[A-Za-z]{2})\s*,+\s*([^,]+?)(?:\s*,+\s*Nederland)?$/);
     if (!m) continue;
-    if (/frijdastraat|rijswijk/i.test(regel)) continue; // Sonty zelf
+    // Alleen Sonty's EIGEN adres overslaan. Eerder stond hier ook |rijswijk, maar
+    // dan valt elke KLANT uit Rijswijk weg (Daimy 22-08, geval van Beek: adres
+    // stond gewoon in de PDF en het dashboard bleef toch op "geen adres" staan).
+    if (/frijdastraat/i.test(regel)) continue; // Sonty zelf
     const [, straat, postcode, plaats] = m;
     return {
       adres: straat.trim(),
@@ -28,6 +31,45 @@ function adresUitTekst(tekst) {
     };
   }
   return null;
+}
+
+/** De klant-adresregel in het PDF-kopblok: de niet-lege regel direct boven het
+ *  e-mailadres van de klant (layout: naam / adres / e-mail / telefoon). Nodig voor
+ *  winkel-offertes waar het adres zonder postcode of komma is ingevoerd
+ *  ("Coba ritsemastraat 14 Woerden" — Daimy 22-08, 3 van de 4 geen-adres-gevallen). */
+function klantAdresregelUitTekst(tekst) {
+  const regels = tekst.split('\n').map((r) => r.trim());
+  const mailIdx = regels.findIndex((r) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(r));
+  if (mailIdx < 1) return null;
+  for (let i = mailIdx - 1; i >= Math.max(0, mailIdx - 3); i--) {
+    const r = regels[i];
+    if (!r) continue;
+    if (/frijdastraat|^sonty\b/i.test(r)) return null; // in Sonty's eigen blok beland
+    if (!/\d/.test(r)) return null;                    // regel boven mail is de naam: geen adres te vinden
+    return r;
+  }
+  return null;
+}
+
+/** Vrije adrestekst → volledig adres via PDOK (postcode en plaats aangevuld).
+ *  Alleen geaccepteerd als straat-eerste-woord én huisnummer echt in de invoer
+ *  staan, anders kan PDOK fuzzy een heel ander adres teruggeven. */
+async function pdokAdres(regel) {
+  if (!regel) return null;
+  try {
+    const r = await fetch('https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?q=' + encodeURIComponent(regel) + '&fq=type:adres&rows=1');
+    if (!r.ok) return null;
+    const d = (await r.json()).response?.docs?.[0];
+    if (!d?.straatnaam || !d.huis_nlt || !d.postcode || !d.woonplaatsnaam) return null;
+    const eersteWoord = d.straatnaam.split(/\s+/)[0].toLowerCase();
+    const nummers = (regel.match(/\d+/g) || []);
+    if (!regel.toLowerCase().includes(eersteWoord) || !nummers.includes(String(d.huis_nlt).match(/\d+/)?.[0])) return null;
+    const straat = `${d.straatnaam} ${d.huis_nlt}`;
+    return {
+      adres: straat, postcode: d.postcode, plaats: d.woonplaatsnaam,
+      volledigAdres: `${straat}, ${d.postcode}, ${d.woonplaatsnaam}`,
+    };
+  } catch { return null; }
 }
 
 /** Detecteer een adres-correctie in de lead-tekst (geval Franken 07-08: "LET OP
@@ -47,10 +89,11 @@ async function adresUitOfferte(pid, documentId) {
   try {
     fs.writeFileSync(tmp, buf);
     const tekst = execFileSync(PDFTOTEXT, [tmp, '-'], { encoding: 'utf8', timeout: 20000 });
-    return adresUitTekst(tekst);
+    // 1. strak patroon (straat, postcode, plaats); 2. losse klantregel via PDOK
+    return adresUitTekst(tekst) || await pdokAdres(klantAdresregelUitTekst(tekst));
   } catch { return null; } finally {
     try { fs.unlinkSync(tmp); } catch { /* opruimen is best effort */ }
   }
 }
 
-module.exports = { adresUitOfferte, adresUitTekst, heeftAdresCorrectie };
+module.exports = { adresUitOfferte, adresUitTekst, heeftAdresCorrectie, klantAdresregelUitTekst, pdokAdres };

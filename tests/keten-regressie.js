@@ -259,6 +259,17 @@ test('adresUitTekst pakt het klant-adres en slaat Sonty zelf over', () => {
   // Kenny 07-08: RP rendert een dubbele komma en een spatie in de postcode
   const k = adresUitTekst('Kenny van Hooijdonk\nTexellaan 22,, 2809 SB, Gouda, Nederland\n');
   assert.strictEqual(k.volledigAdres, 'Texellaan 22, 2809SB, Gouda');
+  // van Beek 22-08: klant woont zelf in Rijswijk — het oude |rijswijk-filter
+  // (bedoeld voor Sonty's eigen blok) gooide elke Rijswijkse klant weg
+  const vb = adresUitTekst('Sonty B.V.\nFrijdastraat 8F\n2288 EX Rijswijk\n\nvan Beek\nBrantingstraat 20, 2286 GH, Rijswijk, Nederland\nwildcart@me.com\n');
+  assert.strictEqual(vb.volledigAdres, 'Brantingstraat 20, 2286GH, Rijswijk');
+});
+test('klantAdresregelUitTekst vindt de losse adresregel boven het mailadres (Hoogeveen 22-08)', () => {
+  const { klantAdresregelUitTekst } = require('../scripts/lib/offerte-adres.js');
+  const pdf = 'Sonty B.V.\nFrijdastraat 8F\n2288 EX Rijswijk\n\nHoogeveen\nCoba ritsemastraat 14 Woerden\nnonhoogeveen@gmail.com\n0640058879\n';
+  assert.strictEqual(klantAdresregelUitTekst(pdf), 'Coba ritsemastraat 14 Woerden');
+  // geen mailadres of alleen Sonty-blok = niets terug
+  assert.strictEqual(klantAdresregelUitTekst('Sonty B.V.\nFrijdastraat 8F\n2288 EX Rijswijk\n'), null);
 });
 test('adres-correctie in de lead blokkeert het vangnet (Franken: Houtrijk vs Haarlemmermeer)', () => {
   const { heeftAdresCorrectie } = require('../scripts/lib/offerte-adres.js');

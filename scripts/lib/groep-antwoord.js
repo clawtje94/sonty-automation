@@ -19,7 +19,8 @@ const path = require('path');
 const ANTHROPIC_KEY = fs.readFileSync(path.join(__dirname, '..', '.anthropic-api-key.txt'), 'utf8').trim();
 const KENNISBANK = path.join(__dirname, '..', '..', 'data', 'trengo-kennisbank.md');
 const TEAMINFO = path.join(__dirname, '..', '..', 'data', 'sunny-medewerkers.txt');
-const TEAMGEHEUGEN = path.join(__dirname, '..', '..', 'data', 'wa-groep-teamgeheugen.md'); // samenvatting van de groepsgeschiedenis (wa-groep-geschiedenis.js)
+const TEAMGEHEUGEN = path.join(__dirname, '..', '..', 'data', 'wa-groep-teamgeheugen.md');
+const TEAMROLLEN = path.join(__dirname, '..', '..', 'data', 'sonty-team-rollen.md'); // harde feiten van Daimy, gaan vóór de afgeleide chatkennis // samenvatting van de groepsgeschiedenis (wa-groep-geschiedenis.js)
 const GESCHIEDENIS = path.join(__dirname, '..', '..', 'data', 'wa-groep-geschiedenis.jsonl');
 
 /** Namen uit de export ("Boot", "Sjoerd Sonty", "Yudi Joey") koppelen aan de live pushName ("Daimy Boot", "Sjoerd Hoogduin", "~Yudi den Heijer"). */
@@ -100,6 +101,7 @@ function isAanSunny({ tekst, mentionedJids = [], quotedVan = null, eigen = [] })
  */
 async function maakGroepAntwoord({ van, tekst, context = [] }) {
   const team = fs.existsSync(TEAMINFO) ? fs.readFileSync(TEAMINFO, 'utf8').trim() : '';
+  const rollen = fs.existsSync(TEAMROLLEN) ? fs.readFileSync(TEAMROLLEN, 'utf8').trim() : '';
   const geheugen = fs.existsSync(TEAMGEHEUGEN) ? fs.readFileSync(TEAMGEHEUGEN, 'utf8').trim().slice(0, 12000) : '';
   const oud = relevanteGeschiedenis(tekst, van);
   const historie = context.slice(-20).map((c) => `${c.van}: ${c.tekst}`).join('\n');
@@ -108,7 +110,7 @@ async function maakGroepAntwoord({ van, tekst, context = [] }) {
     headers: { 'x-api-key': ANTHROPIC_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
     body: JSON.stringify({
       model: 'claude-sonnet-5', max_tokens: 250,
-      system: `${PERSONA}\n\n${PRODUCTKENNIS}${team ? `\n\nTeam-weetjes (voor een plagerige knipoog, nooit gemeen):\n${team}` : ''}${geheugen ? `\n\nTEAMGEHEUGEN (wat er door de jaren heen in deze groep is besproken, wie wie is, running gags; gebruik dit om het persoonlijk en raak te maken):\n${geheugen}` : ''}\n\nDe echte Sonty-kennisbank (feitenbron voor inhoudelijke vragen):\n${leesKennisbank()}`,
+      system: `${PERSONA}\n\n${PRODUCTKENNIS}${team ? `\n\nTeam-weetjes (voor een plagerige knipoog, nooit gemeen):\n${team}` : ''}${rollen ? `\n\nWIE DOET WAT (harde feiten van Daimy, dit klopt altijd, ook als de chatgeschiedenis iets anders suggereert):\n${rollen}` : ''}${geheugen ? `\n\nTEAMGEHEUGEN (wat er door de jaren heen in deze groep is besproken, wie wie is, running gags; gebruik dit om het persoonlijk en raak te maken):\n${geheugen}` : ''}\n\nDe echte Sonty-kennisbank (feitenbron voor inhoudelijke vragen):\n${leesKennisbank()}`,
       messages: [{ role: 'user', content: `${oud.length ? `Oudere groepsberichten die hierbij passen (voor een persoonlijke verwijzing):\n${oud.join('\n')}\n\n` : ''}Laatste berichten in de groep (oud naar nieuw):\n${historie || '(geen)'}\n\nHet bericht waarin jij wordt aangesproken, van ${van}:\n"""${String(tekst).slice(0, 600)}"""\n\nSchrijf Sunny's antwoord in de groep.` }],
     }),
   });

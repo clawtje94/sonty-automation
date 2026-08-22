@@ -125,7 +125,7 @@ function lijktOpEerder(tekst, eerderLijst) {
 
 async function maakOchtend(hist, poging = 0) {
   const APIKEY = fs.readFileSync(path.join(__dirname, '.anthropic-api-key.txt'), 'utf8').trim();
-  const team = fs.existsSync(TEAMINFO) ? fs.readFileSync(TEAMINFO, 'utf8').trim() : '';
+  const team = [fs.existsSync(path.join(__dirname, '..', 'data', 'sonty-team-rollen.md')) ? fs.readFileSync(path.join(__dirname, '..', 'data', 'sonty-team-rollen.md'), 'utf8').trim() : '', fs.existsSync(TEAMINFO) ? fs.readFileSync(TEAMINFO, 'utf8').trim() : ''].filter(Boolean).join('\n');
   const nieuws = await haalNieuws();
   const eerderLijst = hist.filter((h) => h.type === 'ochtend').slice(-15).map((h) => h.weetje);
   const eerder = eerderLijst.join('\n') + (poging ? '\nLET OP: je vorige poging leek te veel op een eerder bericht. Kies een ANDER onderwerp en andere woorden.' : '');

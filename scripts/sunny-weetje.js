@@ -138,7 +138,7 @@ async function maakOchtend(hist, poging = 0) {
     }),
   });
   const j = await r.json();
-  let tekst = (j?.content?.[0]?.text || '').trim().replace(/^"|"$/g, '');
+  let tekst = ((j?.content || []).find((c) => c.type === 'text')?.text || '').trim().replace(/^"|"$/g, '');
   tekst = tekst.replace(/\s*\u2014+\s*/g, ', ');
   tekst = tekst.charAt(0).toLowerCase() + tekst.slice(1);
   if (!tekst || tekst.length < 20) { console.error('API-antwoord:', JSON.stringify(j).slice(0, 400)); throw new Error('ochtend-generatie mislukt'); }
@@ -161,7 +161,7 @@ async function maakWeetje(hist) {
     }),
   });
   const j = await r.json();
-  let tekst = (j?.content?.[0]?.text || '').trim().replace(/^"|"$/g, '');
+  let tekst = ((j?.content || []).find((c) => c.type === 'text')?.text || '').trim().replace(/^"|"$/g, '');
   // de opener zegt al "WISTEN JULLIE DATTTTT"; als het model dat toch herhaalt, strippen
   // (Daimy 17-08) en de eerste letter klein houden zodat de zin lopend aansluit
   tekst = tekst.replace(/^wisten?\s+jull?ie\s+dat+\s*/i, '');

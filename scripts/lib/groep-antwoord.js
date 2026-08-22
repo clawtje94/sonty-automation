@@ -100,7 +100,7 @@ async function maakGroepAntwoord({ van, tekst, context = [] }) {
     }),
   });
   const j = await r.json();
-  const ruw = (j?.content?.[0]?.text || '').trim();
+  const ruw = ((j?.content || []).find((c) => c.type === 'text')?.text || '').trim();
   if (!ruw) { console.error('groep-antwoord API:', JSON.stringify(j).slice(0, 300)); return null; }
   return veilig(ruw);
 }

@@ -85,8 +85,9 @@ async function sonnet(prompt, maxTokens = 1800) {
     body: JSON.stringify({ model: 'claude-sonnet-5', max_tokens: maxTokens, messages: [{ role: 'user', content: prompt }] }),
   });
   const j = await r.json();
-  if (!j?.content?.[0]?.text) throw new Error('API: ' + JSON.stringify(j).slice(0, 200));
-  return j.content[0].text.trim();
+  const tekst = (j?.content || []).find((c) => c.type === 'text')?.text;
+  if (!tekst) throw new Error('API: ' + JSON.stringify(j).slice(0, 200));
+  return tekst.trim();
 }
 
 async function bouwGeheugen() {

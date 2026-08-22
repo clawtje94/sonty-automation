@@ -19,6 +19,34 @@ const path = require('path');
 const ANTHROPIC_KEY = fs.readFileSync(path.join(__dirname, '..', '.anthropic-api-key.txt'), 'utf8').trim();
 const KENNISBANK = path.join(__dirname, '..', '..', 'data', 'trengo-kennisbank.md');
 const TEAMINFO = path.join(__dirname, '..', '..', 'data', 'sunny-medewerkers.txt');
+const TEAMGEHEUGEN = path.join(__dirname, '..', '..', 'data', 'wa-groep-teamgeheugen.md'); // samenvatting van de groepsgeschiedenis (wa-groep-geschiedenis.js)
+const GESCHIEDENIS = path.join(__dirname, '..', '..', 'data', 'wa-groep-geschiedenis.jsonl');
+
+/** Namen uit de export ("Boot", "Sjoerd Sonty", "Yudi Joey") koppelen aan de live pushName ("Daimy Boot", "Sjoerd Hoogduin", "~Yudi den Heijer"). */
+const ALIAS = { boot: 'daimy', 'sjoerd sonty': 'sjoerd', 'yudi joey': 'yudi', 'jaimy sonty': 'jaimy', 'nanny sonty': 'nanny', 'marvin sonty zzp': 'marvin', 'nick monteur sonty': 'nick', 'tycho sonty': 'tycho' };
+function persoonSleutel(naam) {
+  const n = String(naam || '').toLowerCase().replace(/^[~\s]+/, '').trim();
+  if (ALIAS[n]) return ALIAS[n];
+  return n.split(/\s+/)[0] || n;
+}
+function zelfdePersoon(a, b) { return persoonSleutel(a) && persoonSleutel(a) === persoonSleutel(b); }
+
+/** Oude groepsberichten die bij dit onderwerp/deze persoon passen (simpele woordmatch). */
+function relevanteGeschiedenis(tekst, van, max = 12) {
+  let regels = [];
+  try { regels = fs.readFileSync(GESCHIEDENIS, 'utf8').split('\n').filter(Boolean).map((r) => { try { return JSON.parse(r); } catch { return null; } }).filter(Boolean); } catch { return []; }
+  if (regels.length < 50) return [];
+  const woorden = String(tekst || '').toLowerCase().replace(/[^a-zà-ü0-9 ]+/g, ' ').split(/\s+/).filter((w) => w.length >= 4 && !/^(sunny|sonny|deze|maar|toch|niet|wel|weer|even|gaat|heeft|jullie|zijn|ook|ofzo|joh)$/.test(w));
+  const recentGrens = Date.now() - 2 * 86400000;
+  const gescoord = regels.filter((r) => r.tijd < recentGrens).map((r) => {
+    const t = String(r.tekst || '').toLowerCase();
+    let score = 0;
+    for (const w of woorden) if (t.includes(w)) score += 2;
+    if (van && zelfdePersoon(r.van, van)) score += 1;
+    return { r, score };
+  }).filter((x) => x.score >= 2).sort((a, b) => b.score - a.score || b.r.tijd - a.r.tijd).slice(0, max);
+  return gescoord.map((x) => `${new Date(x.r.tijd).toISOString().slice(0, 10)} ${x.r.van}: ${String(x.r.tekst).slice(0, 200)}`);
+}
 
 const PRODUCTKENNIS = 'Productkennis Sonty (gebruik ALTIJD deze termen): wij verkopen knikarmschermen, uitvalschermen, screens/zipscreens, rolluiken, pergola\'s (hoogwaardig aluminium, op palen), markiezen, horren en raamdecoratie. Zeg NOOIT overkapping, veranda, carport of houten pergola; het heet bij ons een pergola. Doeken zijn waterafstotend, niet waterdicht. Een knikarmscherm hangt aan de gevel zonder palen. Garantie: 3 jaar montage, 5 jaar product, 7 jaar motor. Levertijd na inmeten en aanbetaling: 8 tot 10 weken.';
 
@@ -59,14 +87,16 @@ function isAanSunny({ tekst, mentionedJids = [], quotedVan = null, eigen = [] })
  */
 async function maakGroepAntwoord({ van, tekst, context = [] }) {
   const team = fs.existsSync(TEAMINFO) ? fs.readFileSync(TEAMINFO, 'utf8').trim() : '';
+  const geheugen = fs.existsSync(TEAMGEHEUGEN) ? fs.readFileSync(TEAMGEHEUGEN, 'utf8').trim().slice(0, 12000) : '';
+  const oud = relevanteGeschiedenis(tekst, van);
   const historie = context.slice(-20).map((c) => `${c.van}: ${c.tekst}`).join('\n');
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'x-api-key': ANTHROPIC_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
     body: JSON.stringify({
       model: 'claude-sonnet-5', max_tokens: 250,
-      system: `${PERSONA}\n\n${PRODUCTKENNIS}${team ? `\n\nTeam-weetjes (voor een plagerige knipoog, nooit gemeen):\n${team}` : ''}\n\nDe echte Sonty-kennisbank (feitenbron voor inhoudelijke vragen):\n${leesKennisbank()}`,
-      messages: [{ role: 'user', content: `Laatste berichten in de groep (oud naar nieuw):\n${historie || '(geen)'}\n\nHet bericht waarin jij wordt aangesproken, van ${van}:\n"""${String(tekst).slice(0, 600)}"""\n\nSchrijf Sunny's antwoord in de groep.` }],
+      system: `${PERSONA}\n\n${PRODUCTKENNIS}${team ? `\n\nTeam-weetjes (voor een plagerige knipoog, nooit gemeen):\n${team}` : ''}${geheugen ? `\n\nTEAMGEHEUGEN (wat er door de jaren heen in deze groep is besproken, wie wie is, running gags; gebruik dit om het persoonlijk en raak te maken):\n${geheugen}` : ''}\n\nDe echte Sonty-kennisbank (feitenbron voor inhoudelijke vragen):\n${leesKennisbank()}`,
+      messages: [{ role: 'user', content: `${oud.length ? `Oudere groepsberichten die hierbij passen (voor een persoonlijke verwijzing):\n${oud.join('\n')}\n\n` : ''}Laatste berichten in de groep (oud naar nieuw):\n${historie || '(geen)'}\n\nHet bericht waarin jij wordt aangesproken, van ${van}:\n"""${String(tekst).slice(0, 600)}"""\n\nSchrijf Sunny's antwoord in de groep.` }],
     }),
   });
   const j = await r.json();
@@ -75,7 +105,7 @@ async function maakGroepAntwoord({ van, tekst, context = [] }) {
   return veilig(ruw);
 }
 
-module.exports = { maakGroepAntwoord, isAanSunny, veilig, PERSONA };
+module.exports = { maakGroepAntwoord, isAanSunny, veilig, relevanteGeschiedenis, PERSONA };
 
 if (require.main === module) {
   (async () => {

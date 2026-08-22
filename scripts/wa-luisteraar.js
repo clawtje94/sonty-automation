@@ -38,10 +38,19 @@ const DESKTOPQ = path.join(DATA, 'wa-desktop-queue');
 const GROEP_UIT = path.join(DATA, 'wa-groep-antwoord-uit.txt');
 const GROEP_LOG = path.join(DATA, 'wa-groep-antwoorden.jsonl');
 const GROEP_RECENT = path.join(DATA, 'wa-groep-recent.json');
+const GROEP_GESCHIEDENIS = path.join(DATA, 'wa-groep-geschiedenis.jsonl'); // ALLES uit de groep, voorgoed (Daimy 22-08: persoonlijk maken)
 const GROEP_MAX_PER_DAG = 15;
 const GROEP_MIN_TUSSEN_MS = 40000;
 let groepBuffer = (() => { try { return JSON.parse(fs.readFileSync(GROEP_RECENT, 'utf8')); } catch { return []; } })();
 let laatsteGroepAntwoord = 0;
+const geschiedenisIds = new Set();
+try { for (const r of fs.readFileSync(GROEP_GESCHIEDENIS, 'utf8').split('\n')) { if (r) { try { const o = JSON.parse(r); if (o.id) geschiedenisIds.add(o.id); } catch { /* regel overslaan */ } } } } catch { /* nog geen bestand */ }
+function bewaarGeschiedenis(rec) {
+  if (rec.id && geschiedenisIds.has(rec.id)) return false;
+  if (rec.id) geschiedenisIds.add(rec.id);
+  try { fs.appendFileSync(GROEP_GESCHIEDENIS, JSON.stringify(rec) + '\n'); } catch { /* log */ }
+  return true;
+}
 // Weergavenamen zoals de contacten op Sunny's telefoon zijn opgeslagen (19-08): de
 // reserve-route zoekt de chat in WhatsApp Desktop op naam.
 const DESKTOPNAAM = { Daimy: 'Daimy Boot', Joey: 'Joey Engelen', Sjoerd: 'Sjoerd' };
@@ -106,7 +115,20 @@ async function naarBeoordeling(jpgPad, naam, uit) {
   async function verbind() {
     const { state, saveCreds } = await useMultiFileAuthState(AUTH);
     const { version } = await fetchLatestBaileysVersion();
-    sock = makeWASocket({ version, auth: state, printQRInTerminal: false, syncFullHistory: false, browser: ['Sonty Sunny', 'Chrome', '1.0.0'] });
+    sock = makeWASocket({ version, auth: state, printQRInTerminal: false, syncFullHistory: true, browser: ['Sonty Sunny', 'Chrome', '1.0.0'] });
+    // geschiedenis die de telefoon nog heeft (sinds Sunny in de groep zit) één keer binnenhalen
+    sock.ev.on('messaging-history.set', ({ messages }) => {
+      let n = 0;
+      for (const m of messages || []) {
+        if (m.key?.remoteJid !== GROEP) continue;
+        const tekst = m.message?.conversation || m.message?.extendedTextMessage?.text || m.message?.imageMessage?.caption || '';
+        if (!tekst) continue;
+        const tijd = Number(m.messageTimestamp) * 1000 || Date.now();
+        const van = m.key?.fromMe ? 'Sunny' : (m.pushName || COLLEGAS[m.key?.participantAlt || m.key?.participant || ''] || String(m.key?.participantAlt || m.key?.participant || '').split('@')[0] || 'iemand');
+        if (bewaarGeschiedenis({ tijd, van, tekst: String(tekst).slice(0, 1000), id: m.key?.id, bron: 'history-sync' })) n += 1;
+      }
+      if (n) console.log('history-sync: ' + n + ' groepsberichten bewaard');
+    });
     sock.ev.on('creds.update', saveCreds);
     sock.ev.on('connection.update', (u) => {
       if (u.connection === 'open') { open = true; console.log(new Date().toISOString(), 'verbonden'); }
@@ -214,6 +236,7 @@ async function naarBeoordeling(jpgPad, naam, uit) {
       const vanG = m.pushName || COLLEGAS[deelnemer] || (deelnemer.split('@')[0] || 'iemand');
       if (tekstG) {
         groepBuffer.push({ tijd: Date.now(), van: vanG, tekst: String(tekstG).slice(0, 400) });
+        bewaarGeschiedenis({ tijd: Date.now(), van: vanG, tekst: String(tekstG).slice(0, 1000), id, bron: 'live' });
         groepBuffer = groepBuffer.slice(-40);
         try { fs.writeFileSync(GROEP_RECENT, JSON.stringify(groepBuffer)); } catch { /* cache */ }
         try {
@@ -264,6 +287,7 @@ async function naarBeoordeling(jpgPad, naam, uit) {
     await sock.sendMessage(GROEP, { text: antwoord, mentions }, { quoted: m });
     laatsteGroepAntwoord = Date.now();
     groepBuffer.push({ tijd: Date.now(), van: 'Sunny', tekst: antwoord });
+    bewaarGeschiedenis({ tijd: Date.now(), van: 'Sunny', tekst: antwoord, bron: 'live' });
     try { fs.appendFileSync(GROEP_LOG, JSON.stringify({ dag: vandaag, tijd: new Date().toISOString(), van, vraag: tekst.slice(0, 300), antwoord }) + '\n'); } catch { /* log */ }
     console.log(`groep-antwoord aan ${van}: ${antwoord.slice(0, 80)}`);
   }

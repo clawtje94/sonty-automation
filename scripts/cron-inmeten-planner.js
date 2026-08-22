@@ -740,7 +740,12 @@ async function main() {
     // het dashboard (en het template) moet ALTIJD 3 tijden hebben — te weinig binnen
     // de normale horizon? Verder vooruit kijken (Daimy 06-08: "bijna alles met 1 tijd,
     // het moet 100% goed gaan").
-    if (aanbod.length && aanbod.length < 3) aanbod = await zorgVoorDrieOpties(lead, duur, agenda, aanbod);
+    // OOK BIJ NUL (Daimy 22-08: "heel veel zonder ook maar 1 tijd"): met Sjoerd op
+    // vakantie t/m 11 sep zat er in de 15-werkdagen-horizon voor 9 leads geen enkel
+    // gat, en de verlenging trad alleen in werking als er al minstens 1 tijd was.
+    // Alleen als er wél gaten zijn maar de omrij-wachtlogica bewust wacht op een
+    // klus in de buurt (beste.length > 0, aanbod leeg) blijven we gewoon wachten.
+    if (aanbod.length < 3 && (aanbod.length || !beste.length)) aanbod = await zorgVoorDrieOpties(lead, duur, agenda, aanbod);
 
     console.log(`\n  ${lead.naam} — ${lead.volledigAdres}`);
     console.log(`    ${lead.aantalProducten} product(en) uit ${lead.bron}: ${lead.producten.map((p) => `${p.aantal}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).join(', ') || '—'} → ${duur} min | wacht ${wachtDagen}/${inst.contactDeadlineDagen} dgn`);

@@ -67,6 +67,7 @@
   bouwt data/wa-groep-teamgeheugen.md (Sonnet, 88 blokken parallel, cache -delen.json); groep-antwoord
   gebruikt teamgeheugen + woordmatch-retrieval van oude berichten (ALIAS export-namen → live namen).
 - Sonnet-5 kan een thinking-blok vooraan zetten: overal het tekstblok pakken (was oorzaak "weetje-generatie mislukt").
+- Teamgeheugen GEBOUWD 22-08 (data/wa-groep-teamgeheugen.md, ~1050 woorden, + delen/tussen-json): wie is wie, bijnamen, running gags, tijdlijn, gevoeligheden. Opnieuw bouwen na nieuwe import: node scripts/wa-groep-geschiedenis.js geheugen (cache per blok).
 
 
 

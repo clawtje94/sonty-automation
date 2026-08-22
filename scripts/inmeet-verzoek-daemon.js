@@ -152,7 +152,16 @@ async function ronde() {
         await api(MUTATIE_API, { method: 'PATCH', body: JSON.stringify({ id: m.id, status: 'afgewezen', uitkomst: e.message.slice(0, 200) }) }).catch(() => {});
         await planner.telegram(`ℹ️ Verzoek ${m.type} (${m.bron}) kan niet: ${e.message.slice(0, 140)}. Verzoek is gesloten; de kaart staat weer gewoon in het dashboard.`);
       } else {
-        await planner.telegram(`⚠️ Verzoek ${m.type} (${m.bron}) mislukt: ${e.message.slice(0, 140)} — blijft open voor een nieuwe poging.`);
+        // STORINGS-MELDING MAX 1x PER UUR PER VERZOEK+FOUT (Daimy 22-08, Planado-
+        // onderhoud 19-21 UTC: elke poll-cyclus een nieuw bericht = spam terwijl
+        // dezelfde storing gewoon nog loopt). Daemon leeft lang, dus in-memory.
+        globalThis.__storingGemeld = globalThis.__storingGemeld || new Map();
+        const sleutel = `${m.id}:${e.message.slice(0, 60)}`;
+        const eerder = globalThis.__storingGemeld.get(sleutel) || 0;
+        if (Date.now() - eerder > 3600000) {
+          globalThis.__storingGemeld.set(sleutel, Date.now());
+          await planner.telegram(`⚠️ Verzoek ${m.type} (${m.bron}) mislukt: ${e.message.slice(0, 140)} — blijft open voor een nieuwe poging. (Zelfde storing meld ik max 1x per uur.)`);
+        }
       }
       console.log(new Date().toISOString(), m.type, 'FOUT:', e.message);
       continue;

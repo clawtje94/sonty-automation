@@ -151,6 +151,14 @@ async function muteerBoeking(rpItemId, soort, { reden = '', bron = 'onbekend' } 
       : `🛑 Inmeetafspraak GEANNULEERD (${bron}): ${b.naam}, was ${datum} bij ${b.inmeter}.${reden ? ` Reden: ${reden}.` : ''} RP staat nog op "Gripp invullen" — kantoor beslist over nabellen.`)
     + (alles ? '' : `\n⚠️ Niet alles lukte: ${stappen.filter((s) => !s.ok).map((s) => s.stap + ' (' + s.detail + ')').join(', ')} — even nakijken.`),
   );
+  // Ook in de planning-bot-groep (Daimy 22-08: "als een inmeet afspraak word
+  // geanuleerd moet dit ook verteld worden in de planning bot groep").
+  try {
+    const { planningTelegram } = require('./telegram-planning.js');
+    await planningTelegram(soort === 'verzet'
+      ? `🔄 Inmeetafspraak verzet: ${b.naam}, was ${datum} bij ${b.inmeter}. Nieuw aanbod volgt automatisch.`
+      : `🛑 Inmeetafspraak geannuleerd: ${b.naam}, was ${datum} bij ${b.inmeter}.${reden ? ` Reden: ${reden}.` : ''}`);
+  } catch { /* planning-melding mag de mutatie nooit blokkeren */ }
   return { gelukt: alles, stappen, boeking: b };
 }
 

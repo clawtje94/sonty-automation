@@ -155,12 +155,15 @@ async function ronde() {
         // STORINGS-MELDING MAX 1x PER UUR PER VERZOEK+FOUT (Daimy 22-08, Planado-
         // onderhoud 19-21 UTC: elke poll-cyclus een nieuw bericht = spam terwijl
         // dezelfde storing gewoon nog loopt). Daemon leeft lang, dus in-memory.
+        // Daimy 22-08 (aanscherping): "stuur alleen even als die is opgelost, niet
+        // elke keer als het niet werkt" — storing per verzoek max 1x per 12 uur
+        // melden, en bij succes daarna een ✅ (zie onder bij de succes-afhandeling).
         globalThis.__storingGemeld = globalThis.__storingGemeld || new Map();
         const sleutel = `${m.id}:${e.message.slice(0, 60)}`;
         const eerder = globalThis.__storingGemeld.get(sleutel) || 0;
-        if (Date.now() - eerder > 3600000) {
+        if (Date.now() - eerder > 12 * 3600000) {
           globalThis.__storingGemeld.set(sleutel, Date.now());
-          await planner.telegram(`⚠️ Verzoek ${m.type} (${m.bron}) mislukt: ${e.message.slice(0, 140)} — blijft open voor een nieuwe poging. (Zelfde storing meld ik max 1x per uur.)`);
+          await planner.telegram(`⚠️ Verzoek ${m.type} (${m.bron}) mislukt: ${e.message.slice(0, 140)} — blijft open en wordt automatisch opnieuw geprobeerd; je hoort het als het gelukt is.`);
         }
       }
       console.log(new Date().toISOString(), m.type, 'FOUT:', e.message);
@@ -170,6 +173,14 @@ async function ronde() {
       method: 'PATCH',
       body: JSON.stringify({ id: m.id, status: res.afgewezen ? 'afgewezen' : 'verwerkt', uitkomst: res.uitkomst }),
     });
+    // Was hier eerder een storing over gemeld? Dan nu het beloofde ✅ (Daimy 22-08).
+    if (globalThis.__storingGemeld) {
+      const hadStoring = [...globalThis.__storingGemeld.keys()].some((k) => k.startsWith(m.id + ':'));
+      if (hadStoring) {
+        for (const k of [...globalThis.__storingGemeld.keys()]) if (k.startsWith(m.id + ':')) globalThis.__storingGemeld.delete(k);
+        await planner.telegram(`✅ Verzoek ${m.type}${m.naam ? ` (${m.naam})` : ''} dat eerder faalde is alsnog gelukt: ${String(res.uitkomst || 'verwerkt').slice(0, 120)}`);
+      }
+    }
     // kaart in het dashboard direct bijwerken (Daimy 06-08: "ik weet helemaal niet
     // wat er gebeurt") — niet wachten op de halfuur-ronde
     try {

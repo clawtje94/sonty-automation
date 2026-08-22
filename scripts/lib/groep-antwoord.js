@@ -45,7 +45,20 @@ function relevanteGeschiedenis(tekst, van, max = 12) {
     if (van && zelfdePersoon(r.van, van)) score += 1;
     return { r, score };
   }).filter((x) => x.score >= 2).sort((a, b) => b.score - a.score || b.r.tijd - a.r.tijd).slice(0, max);
-  return gescoord.map((x) => `${new Date(x.r.tijd).toISOString().slice(0, 10)} ${x.r.van}: ${String(x.r.tekst).slice(0, 200)}`);
+  const losse = gescoord.map((x) => `${new Date(x.r.tijd).toISOString().slice(0, 10)} ${x.r.van}: ${String(x.r.tekst).slice(0, 200)}`);
+  // ook de periode-samenvattingen doorzoeken (rijker dan losse regels): beste 2 passages
+  try {
+    const delen = Object.values(JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'wa-groep-teamgeheugen-delen.json'), 'utf8')));
+    const sl = persoonSleutel(van);
+    const best = delen.map((d) => {
+      const t = String(d).toLowerCase(); let score = 0;
+      for (const w of woorden) if (t.includes(w)) score += 2;
+      if (sl && t.includes(sl)) score += 1;
+      return { d, score };
+    }).filter((x) => x.score >= 3).sort((a, b) => b.score - a.score).slice(0, 2);
+    for (const x of best) losse.push(`[samenvatting van een periode] ${String(x.d).replace(/\s+/g, ' ').slice(0, 1200)}`);
+  } catch { /* nog geen delen */ }
+  return losse;
 }
 
 const PRODUCTKENNIS = 'Productkennis Sonty (gebruik ALTIJD deze termen): wij verkopen knikarmschermen, uitvalschermen, screens/zipscreens, rolluiken, pergola\'s (hoogwaardig aluminium, op palen), markiezen, horren en raamdecoratie. Zeg NOOIT overkapping, veranda, carport of houten pergola; het heet bij ons een pergola. Doeken zijn waterafstotend, niet waterdicht. Een knikarmscherm hangt aan de gevel zonder palen. Garantie: 3 jaar montage, 5 jaar product, 7 jaar motor. Levertijd na inmeten en aanbetaling: 8 tot 10 weken.';

@@ -121,7 +121,12 @@ async function bouwGeheugen() {
     }
   }
   await Promise.all(Array.from({ length: 6 }, werker));
-  const eind = deel.length === 1 ? deel[0] : await sonnet(`Voeg deze deelsamenvattingen van de WhatsApp-groep "Sonty toppers" samen tot één teamgeheugen (max 1500 woorden) voor Sunny, de AI-collega in de groep. Structuur: 1) Wie is wie (naam, rol, stijl, bijnaam, typische dingen), 2) Running gags en inside jokes, 3) Tijdlijn van memorabele gebeurtenissen, 4) Gevoeligheden om NIET op te grappen. GEEN klantnamen/adressen/telefoonnummers. Gewone tekst met kopjes, geen gedachtestreepjes.\n\n${deel.map((d, i) => `--- deel ${i + 1} ---\n${d}`).join('\n\n')}`, 2500);
+  // hiërarchisch samenvoegen: groepjes van 12 delen → tussenstand → eindgeheugen (rijk en concreet)
+  const groepen = [];
+  for (let i = 0; i < deel.length; i += 12) groepen.push(deel.slice(i, i + 12));
+  const tussen = groepen.length === 1 ? groepen[0] : await Promise.all(groepen.map((g, gi) => sonnet(`Voeg deze ${g.length} deelsamenvattingen (periode-blok ${gi + 1}/${groepen.length}) van de WhatsApp-groep "Sonty toppers" samen tot één rijke tussensamenvatting van maximaal 1200 woorden. Bewaar CONCRETE details: namen, bijnamen, running gags met hun oorsprong, specifieke blunders en anekdotes met maand/jaar, gewoontes en stokpaardjes per persoon. GEEN klantnamen/adressen/telefoonnummers. Gewone tekst met kopjes, geen gedachtestreepjes.\n\n${g.map((d, i) => `--- deel ${gi * 12 + i + 1} ---\n${d}`).join('\n\n')}`, 2200)));
+  const eind = await sonnet(`Maak uit deze tussensamenvattingen het teamgeheugen van de WhatsApp-groep "Sonty toppers" voor Sunny, de AI-collega die in de groep meepraat en collega's plaagt. Lengte: 2000 tot 2800 woorden, zo concreet mogelijk (anekdotes met maand/jaar, letterlijke bijnamen en uitspraken). Structuur: 1) Wie is wie (per persoon: rol, stijl, bijnamen, typische uitspraken, waar je hem mee kunt plagen), 2) Running gags en inside jokes (met oorsprong), 3) Tijdlijn van memorabele gebeurtenissen per kwartaal, 4) Gevoeligheden om NIET op te grappen (privéleed, gezondheid, relaties, ontslagen). GEEN klantnamen/adressen/telefoonnummers. Gewone tekst met kopjes, geen gedachtestreepjes.\n\n${tussen.map((d, i) => `--- periode-blok ${i + 1} ---\n${d}`).join('\n\n')}`, 4500);
+  fs.writeFileSync(path.join(DATA, 'wa-groep-teamgeheugen-tussen.json'), JSON.stringify(tussen));
   fs.writeFileSync(GEHEUGEN, `# Teamgeheugen Sonty toppers (gebouwd ${new Date().toISOString().slice(0, 10)} uit ${alles.length} berichten, ${new Date(alles[0].tijd).toISOString().slice(0, 10)} t/m ${new Date(alles[alles.length - 1].tijd).toISOString().slice(0, 10)})\n\n${eind}\n`);
   console.log('teamgeheugen geschreven:', GEHEUGEN, eind.length, 'tekens');
 }

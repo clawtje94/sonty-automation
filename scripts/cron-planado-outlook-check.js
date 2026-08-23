@@ -24,7 +24,11 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
     if (!l.length) break;
     jobs.push(...l); after = l[l.length - 1].uuid; await wacht(2600);
   }
-  const toekomst = jobs.filter((j) => j.scheduled_at && new Date(j.scheduled_at) > new Date());
+  // meeneem-* zijn ophaal-herinneringen voor de inmeter en horen BEWUST alleen in
+  // Planado (Daimy 16-08: "het moet in Planado he, niet in mijn agenda") — geen
+  // Outlook-afspraak is daar dus goed, niet fout (vals alarm 23-08).
+  const toekomst = jobs.filter((j) => j.scheduled_at && new Date(j.scheduled_at) > new Date()
+    && !(j.external_id || '').startsWith('meeneem-'));
 
   const OWA = fs.readFileSync(path.join(__dirname, '.owa-token.txt'), 'utf8').trim();
   const OH = { Authorization: 'Bearer ' + OWA };

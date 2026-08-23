@@ -335,24 +335,6 @@
       "maxUur": 26,
       "ks": false
     },
-    "nl.sonty.ab-rapport": {
-      "naam": "A/B-test dagrapport",
-      "functie": "Dagelijks 09:15 tussenstand van lopende A/B-tests.",
-      "groep": "Rapportage",
-      "ritme": "dagelijks 09:15",
-      "log": "ab-rapport.log",
-      "maxUur": 30,
-      "ks": false
-    },
-    "nl.sonty.ab-eindrapport": {
-      "naam": "A/B-test eindrapport",
-      "functie": "Meldt afgeronde A/B-tests met conclusie.",
-      "groep": "Rapportage",
-      "ritme": "dagelijks 09:30",
-      "log": "ab-eindrapport.log",
-      "maxUur": 30,
-      "ks": false
-    },
     "nl.sonty.capaciteit": {
       "naam": "Capaciteitsmonitor",
       "functie": "Wekelijks op/afschaal-signaal tegen het teamplafond (~35 orders/week).",

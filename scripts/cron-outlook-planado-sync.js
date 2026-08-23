@@ -197,12 +197,25 @@ function bodyKern(e) {
 
 // ── Planado ──
 const PH = { Authorization: 'Bearer ' + PLANADO_KEY, 'Content-Type': 'application/json', 'X-Planado-Notify-Assignees': 'false' };
+// Planado geeft bij te veel verzoeken de kale TEKST "Rate Limit Exceeded" terug
+// (geen JSON). Een directe .json() crasht daar hard op (SYSTEMEN-rood 23-08).
+// Dus: tekst lezen, JSON proberen, en anders rustig opnieuw.
+async function planadoJson(url, opties = undefined) {
+  for (let poging = 0; poging < 5; poging++) {
+    const r = await fetch(url, { headers: PH, ...(opties || {}) });
+    const tekst = await r.text();
+    try { return JSON.parse(tekst); } catch { /* rate limit of storing */ }
+    await wacht(15000 * (poging + 1));
+  }
+  throw new Error('Planado blijft niet-JSON geven (rate limit?) voor ' + url.split('/v2')[1]);
+}
+
 async function planadoJobs() {
   const alles = [];
   let after = null;
   for (let i = 0; i < 30; i++) {
     const u = 'https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : '');
-    const d = await (await fetch(u, { headers: PH })).json();
+    const d = await planadoJson(u);
     const l = d.jobs || [];
     if (!l.length) break;
     alles.push(...l);
@@ -312,7 +325,7 @@ async function main() {
       if (tijdAnders || anderTeam) {
         console.log(`  ~ ${voornaam} ${startISO.slice(0, 16)} ${e.Subject?.slice(0, 30)} (${anderTeam ? 'toewijzing' : 'tijd'} gewijzigd)`);
         if (EXECUTE) {
-          const det = await (await fetch(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`, { headers: PH })).json();
+          const det = await planadoJson(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`);
           const r = await fetch(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`, {
             method: 'PATCH', headers: PH,
             body: JSON.stringify({ version: (det.job || det).version, ...(tijdAnders ? { scheduled_at: startISO, scheduled_duration: { minutes: minuten } } : {}), ...(anderTeam ? { assignee: { worker: { uuid: hoortBij } } } : {}) }),
@@ -384,7 +397,7 @@ async function main() {
           const uuid = created.job_uuid || created.uuid;
           if (uuid) {
             await wacht(2600);
-            const det = await (await fetch(`https://api.planadoapp.com/v2/jobs/${uuid}`, { headers: PH })).json();
+            const det = await planadoJson(`https://api.planadoapp.com/v2/jobs/${uuid}`);
             const huidig = det.job || det;
             const naPatch = { version: huidig.version };
             // Planado NEGEERT description en contacts in de POST wanneer er een
@@ -575,7 +588,7 @@ async function main() {
       }
 
       if (!EXECUTE) { console.log(`  zou agenda-afspraak maken voor #${j.serial_no} ${j.scheduled_at}`); continue; }
-      const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
+      const det = await planadoJson('https://api.planadoapp.com/v2/jobs/' + j.uuid);
       const job = det.job || det;
       // Helen via Bookings mét klantgegevens (15-08: de heal maakte kale afspraken
       // zonder klantmail — Eric en Jeffrey stonden weer "niet toegewezen" en zonder

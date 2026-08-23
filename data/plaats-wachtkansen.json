@@ -1,0 +1,3044 @@
+{
+ "gemaakt": "2026-08-23T13:39:21.193Z",
+ "periodeDagen": 180,
+ "uitleg": "kans4 = kans dat er binnen 4 dagen nog een aanvraag/akkoord uit dezelfde plaats komt (analyse Daimy 23-08); akkoorden zijn leidend voor de wachtlogica",
+ "akkoorden": {
+  "totaal": 491,
+  "perPlaats": {
+   "de lier": {
+    "aantal": 4,
+    "kans4": 33
+   },
+   "den haag": {
+    "aantal": 50,
+    "kans4": 76
+   },
+   "rotterdam": {
+    "aantal": 34,
+    "kans4": 55
+   },
+   "katwijk": {
+    "aantal": 6,
+    "kans4": 40
+   },
+   "waddinxveen": {
+    "aantal": 9,
+    "kans4": 38
+   },
+   "abcoude": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "amsterdam": {
+    "aantal": 10,
+    "kans4": 22
+   },
+   "utrecht": {
+    "aantal": 9,
+    "kans4": 0
+   },
+   "hoofddorp": {
+    "aantal": 9,
+    "kans4": 13
+   },
+   "voorburg": {
+    "aantal": 6,
+    "kans4": 20
+   },
+   "vierpolders": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "haarlem": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "bergschenhoek": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "leidschendam": {
+    "aantal": 4,
+    "kans4": 33
+   },
+   "zoetermeer": {
+    "aantal": 30,
+    "kans4": 59
+   },
+   "pijnacker": {
+    "aantal": 12,
+    "kans4": 27
+   },
+   "rijswijk": {
+    "aantal": 17,
+    "kans4": 31
+   },
+   "hoogvliet": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "fijnaart": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "delft": {
+    "aantal": 16,
+    "kans4": 47
+   },
+   "rijnsburg": {
+    "aantal": 6,
+    "kans4": 20
+   },
+   "valkenburg": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nieuw-vennep": {
+    "aantal": 6,
+    "kans4": 20
+   },
+   "nb": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "noordwijkerhout": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "heemstede": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "gorinchem": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "maassluis": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "hilversum": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zevenhuizen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "katwijk zh": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zierikzee": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "blaricum": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "ridderkerk": {
+    "aantal": 4,
+    "kans4": 33
+   },
+   "aerdenhout": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "delfgauw": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "wassenaar": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "nootdorp": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "monster": {
+    "aantal": 7,
+    "kans4": 17
+   },
+   "sliedrecht": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "barendrecht": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "vleuten": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "woerden": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "oegstgeest": {
+    "aantal": 4,
+    "kans4": 33
+   },
+   "poortugaal": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "oude wetering": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zwijndrecht": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "assendelft": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "bunnik": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "den dolder": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "maasland": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "leiden": {
+    "aantal": 10,
+    "kans4": 33
+   },
+   "rhoon": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "amersfoort": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "krimpen aan de lek": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "berkel en rodenrijs": {
+    "aantal": 7,
+    "kans4": 33
+   },
+   "reeuwijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "bavel": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "oud-beijerland": {
+    "aantal": 5,
+    "kans4": 25
+   },
+   "dordrecht": {
+    "aantal": 6,
+    "kans4": 40
+   },
+   "koudekerk aan den rijn": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   ".": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "vlaardingen": {
+    "aantal": 4,
+    "kans4": 33
+   },
+   "vijfhuizen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "noordwijk zh": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "leiderdorp": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "amstelveen": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "uithoorn": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "boskoop": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "hillegom": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "alphen aan den rijn": {
+    "aantal": 5,
+    "kans4": 25
+   },
+   "maarssen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "dorst": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "gouda": {
+    "aantal": 8,
+    "kans4": 29
+   },
+   "naaldwijk": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "ijsselstein": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "krimpen aan den ijssel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "kudelstaart": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "buitenkaag": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "werkendam": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "brielle": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "pernis": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "heemskerk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "lisse": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "spijkenisse": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "hendrik-ido-ambacht": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "zwartewaal": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zevenaar": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hellevoetsluis": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "waarder": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hazerswoude-rijndijk": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "ulvenhout": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "breda": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "oosterhout": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "voorhout": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "alblasserdam": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoogmade": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "capelle aan den ijssel": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "beverwijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "strijen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "wateringen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "oosterhout nb": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "schiedam": {
+    "aantal": 4,
+    "kans4": 33
+   },
+   "zandvoort": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "houten": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "aalsmeer": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "'s-gravenzande": {
+    "aantal": 3,
+    "kans4": 50
+   },
+   "hardinxveld-giessendam": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "leusden": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "almere": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoogvliet rotterdam": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "prinsenbeek": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "the hague": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "ouderkerk aan den ijssel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nieuwegein": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "poeldijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "sassenheim": {
+    "aantal": 2,
+    "kans4": 100
+   },
+   "heinenoord": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "bleiswijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "bruinisse": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nieuwkoop": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "mijnsheerenland": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "papendrecht": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "katwijk aan zee": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zuid-beijerland": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nieuw-beijerland": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "oostvoorne": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hekendorp": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "bennebroek": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoogvliet , rotterdam": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "maasdijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "streefkerk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "voorschoten": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "uitgeest": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "vinkeveen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "rozenburg": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zeist": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "spaarndam": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "ter aar": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "rijpwetering": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "wijk bij duurstede": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "'s-gravendeel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "tilburg": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "klaaswaal": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "bilthoven": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "sommelsdijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "castricum": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "roelofarendsveen": {
+    "aantal": 1,
+    "kans4": 0
+   }
+  }
+ },
+ "aanvragen": {
+  "totaal": 6977,
+  "perPlaats": {
+   "den haag": {
+    "aantal": 449,
+    "kans4": 100
+   },
+   "ridderkerk": {
+    "aantal": 56,
+    "kans4": 78
+   },
+   "amstelveen": {
+    "aantal": 84,
+    "kans4": 88
+   },
+   "lepelstraat": {
+    "aantal": 2,
+    "kans4": 100
+   },
+   "heemstede": {
+    "aantal": 36,
+    "kans4": 63
+   },
+   "monster": {
+    "aantal": 31,
+    "kans4": 53
+   },
+   "de lier": {
+    "aantal": 27,
+    "kans4": 62
+   },
+   "papendrecht": {
+    "aantal": 48,
+    "kans4": 68
+   },
+   "nootdorp": {
+    "aantal": 35,
+    "kans4": 50
+   },
+   "hendrik-ido-ambacht": {
+    "aantal": 45,
+    "kans4": 70
+   },
+   "rotterdam": {
+    "aantal": 410,
+    "kans4": 100
+   },
+   "spijkenisse": {
+    "aantal": 108,
+    "kans4": 90
+   },
+   "velserbroek": {
+    "aantal": 20,
+    "kans4": 37
+   },
+   "zuidland": {
+    "aantal": 14,
+    "kans4": 38
+   },
+   "katwijk": {
+    "aantal": 64,
+    "kans4": 78
+   },
+   "hellevoetsluis": {
+    "aantal": 61,
+    "kans4": 82
+   },
+   "capelle aan den ijssel": {
+    "aantal": 79,
+    "kans4": 88
+   },
+   "haarlem": {
+    "aantal": 126,
+    "kans4": 92
+   },
+   "gouderak": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "waddinxveen": {
+    "aantal": 82,
+    "kans4": 85
+   },
+   "zoetermeer": {
+    "aantal": 205,
+    "kans4": 99
+   },
+   "leiden": {
+    "aantal": 88,
+    "kans4": 86
+   },
+   "delfgauw": {
+    "aantal": 12,
+    "kans4": 27
+   },
+   "maassluis": {
+    "aantal": 53,
+    "kans4": 69
+   },
+   "ouddorp": {
+    "aantal": 6,
+    "kans4": 20
+   },
+   "alphen aan den rijn": {
+    "aantal": 102,
+    "kans4": 91
+   },
+   "ooltgensplaat": {
+    "aantal": 4,
+    "kans4": 33
+   },
+   "hoofddorp": {
+    "aantal": 117,
+    "kans4": 92
+   },
+   "zwanenburg": {
+    "aantal": 16,
+    "kans4": 47
+   },
+   "schiedam": {
+    "aantal": 75,
+    "kans4": 82
+   },
+   "'s-gravenzande": {
+    "aantal": 35,
+    "kans4": 59
+   },
+   "hillegom": {
+    "aantal": 36,
+    "kans4": 57
+   },
+   "oud-beijerland": {
+    "aantal": 38,
+    "kans4": 59
+   },
+   "rhoon": {
+    "aantal": 29,
+    "kans4": 54
+   },
+   "lage zwaluwe": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "utrecht": {
+    "aantal": 119,
+    "kans4": 89
+   },
+   "leidschendam": {
+    "aantal": 43,
+    "kans4": 69
+   },
+   "linschoten": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "berkel en rodenrijs": {
+    "aantal": 84,
+    "kans4": 86
+   },
+   "-": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "abcoude": {
+    "aantal": 9,
+    "kans4": 13
+   },
+   "bodegraven": {
+    "aantal": 24,
+    "kans4": 39
+   },
+   "driebergen-rijsenburg": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "amsterdam": {
+    "aantal": 196,
+    "kans4": 98
+   },
+   "tilburg": {
+    "aantal": 49,
+    "kans4": 77
+   },
+   "ouderkerk aan den ijssel": {
+    "aantal": 11,
+    "kans4": 10
+   },
+   "benthuizen": {
+    "aantal": 13,
+    "kans4": 17
+   },
+   "rijnsburg": {
+    "aantal": 38,
+    "kans4": 57
+   },
+   "lisse": {
+    "aantal": 29,
+    "kans4": 46
+   },
+   "brielle": {
+    "aantal": 30,
+    "kans4": 52
+   },
+   "vleuten": {
+    "aantal": 26,
+    "kans4": 56
+   },
+   "krimpen aan den ijssel": {
+    "aantal": 25,
+    "kans4": 38
+   },
+   "3335 vh": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "barendrecht": {
+    "aantal": 79,
+    "kans4": 83
+   },
+   "rozenburg": {
+    "aantal": 9,
+    "kans4": 0
+   },
+   "zwijndrecht": {
+    "aantal": 39,
+    "kans4": 53
+   },
+   "moordrecht": {
+    "aantal": 16,
+    "kans4": 27
+   },
+   "s-gravenzande": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "krommenie": {
+    "aantal": 6,
+    "kans4": 20
+   },
+   "philippine": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "vogelenzang": {
+    "aantal": 6,
+    "kans4": 20
+   },
+   "ouderkerk aan de amstel": {
+    "aantal": 9,
+    "kans4": 25
+   },
+   "santpoort-noord": {
+    "aantal": 7,
+    "kans4": 17
+   },
+   "roelofarendsveen": {
+    "aantal": 16,
+    "kans4": 27
+   },
+   "poortugaal": {
+    "aantal": 13,
+    "kans4": 25
+   },
+   "monnickendam": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "valkenburg zh": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "bergschenhoek": {
+    "aantal": 44,
+    "kans4": 65
+   },
+   "delft": {
+    "aantal": 112,
+    "kans4": 89
+   },
+   "dordrecht": {
+    "aantal": 156,
+    "kans4": 99
+   },
+   "reeuwijk": {
+    "aantal": 7,
+    "kans4": 17
+   },
+   "wateringen": {
+    "aantal": 21,
+    "kans4": 50
+   },
+   "puttershoek": {
+    "aantal": 11,
+    "kans4": 10
+   },
+   "de kwakel": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "nieuwpoort": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "rockanje": {
+    "aantal": 18,
+    "kans4": 41
+   },
+   "ulvenhout": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "voorburg": {
+    "aantal": 77,
+    "kans4": 86
+   },
+   "vierpolders": {
+    "aantal": 4,
+    "kans4": 33
+   },
+   "maasdam": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "gouda": {
+    "aantal": 81,
+    "kans4": 83
+   },
+   "heemskerk": {
+    "aantal": 25,
+    "kans4": 54
+   },
+   "zwaanshoek": {
+    "aantal": 7,
+    "kans4": 0
+   },
+   "pijnacker": {
+    "aantal": 53,
+    "kans4": 71
+   },
+   "mijdrecht": {
+    "aantal": 16,
+    "kans4": 40
+   },
+   "nieuw vennep": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "schoonhoven": {
+    "aantal": 13,
+    "kans4": 33
+   },
+   "oud ade": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "zuid-beijerland": {
+    "aantal": 6,
+    "kans4": 20
+   },
+   "vlaardingen": {
+    "aantal": 99,
+    "kans4": 89
+   },
+   "maarssen": {
+    "aantal": 30,
+    "kans4": 59
+   },
+   "rijswijk": {
+    "aantal": 115,
+    "kans4": 93
+   },
+   "uithoorn": {
+    "aantal": 40,
+    "kans4": 59
+   },
+   "rijswijkij": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "badhoevedorp": {
+    "aantal": 30,
+    "kans4": 48
+   },
+   "sgravenzande": {
+    "aantal": 3,
+    "kans4": 50
+   },
+   "kudelstaart": {
+    "aantal": 9,
+    "kans4": 13
+   },
+   "bleiswijk": {
+    "aantal": 23,
+    "kans4": 55
+   },
+   "naarden": {
+    "aantal": 11,
+    "kans4": 10
+   },
+   "amersfoort": {
+    "aantal": 37,
+    "kans4": 56
+   },
+   "harmelen": {
+    "aantal": 8,
+    "kans4": 0
+   },
+   "assendelft": {
+    "aantal": 20,
+    "kans4": 21
+   },
+   "eemnes": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "voorhout": {
+    "aantal": 32,
+    "kans4": 42
+   },
+   "teteringen": {
+    "aantal": 8,
+    "kans4": 0
+   },
+   "woerden": {
+    "aantal": 33,
+    "kans4": 56
+   },
+   "breda": {
+    "aantal": 67,
+    "kans4": 80
+   },
+   "alblasserdam": {
+    "aantal": 26,
+    "kans4": 48
+   },
+   "heinenoord": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "zeist": {
+    "aantal": 16,
+    "kans4": 47
+   },
+   "maasdijk": {
+    "aantal": 7,
+    "kans4": 33
+   },
+   "beverwijk": {
+    "aantal": 17,
+    "kans4": 38
+   },
+   "voorschoten": {
+    "aantal": 25,
+    "kans4": 54
+   },
+   "veenendaal": {
+    "aantal": 9,
+    "kans4": 13
+   },
+   "oostzaan": {
+    "aantal": 7,
+    "kans4": 0
+   },
+   "uitgeest": {
+    "aantal": 5,
+    "kans4": 75
+   },
+   "hoogvliet": {
+    "aantal": 12,
+    "kans4": 45
+   },
+   "fijnaart": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "wassenaar": {
+    "aantal": 32,
+    "kans4": 55
+   },
+   "busdum": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "'s‑hertogenbosch": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "waverveen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "de hoef": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "purmerend": {
+    "aantal": 35,
+    "kans4": 59
+   },
+   "honselersdijk": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "huizen": {
+    "aantal": 7,
+    "kans4": 17
+   },
+   "sassenheim": {
+    "aantal": 18,
+    "kans4": 29
+   },
+   "kaatsheuvel": {
+    "aantal": 11,
+    "kans4": 40
+   },
+   "tholen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hazerswoude-rijndijk": {
+    "aantal": 15,
+    "kans4": 29
+   },
+   "3027gk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "almere": {
+    "aantal": 104,
+    "kans4": 92
+   },
+   "nieuwerkerk aan den ijssel": {
+    "aantal": 28,
+    "kans4": 44
+   },
+   "giessenburg": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "hoogvliet rotterdam": {
+    "aantal": 40,
+    "kans4": 67
+   },
+   "vijfhuizen": {
+    "aantal": 15,
+    "kans4": 29
+   },
+   "oud-alblas": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "castricum": {
+    "aantal": 10,
+    "kans4": 11
+   },
+   "oostvoorne": {
+    "aantal": 13,
+    "kans4": 33
+   },
+   "roosendaal": {
+    "aantal": 21,
+    "kans4": 40
+   },
+   "ijsselstein": {
+    "aantal": 21,
+    "kans4": 35
+   },
+   "schipluiden": {
+    "aantal": 9,
+    "kans4": 25
+   },
+   "oudenhoorn": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "aarlanderveen": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "drimmelen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "waardenburg": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "oude-tonge": {
+    "aantal": 7,
+    "kans4": 33
+   },
+   "koudekerk aan den rijn": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "bunschoten-spakenburg": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "waalwijk": {
+    "aantal": 13,
+    "kans4": 33
+   },
+   "oegstgeest": {
+    "aantal": 27,
+    "kans4": 38
+   },
+   "sleeuwijk": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "houten": {
+    "aantal": 22,
+    "kans4": 24
+   },
+   "valkenburg": {
+    "aantal": 7,
+    "kans4": 0
+   },
+   "bruchem": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "woudrichem": {
+    "aantal": 3,
+    "kans4": 50
+   },
+   "katwijk aan zee": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "culemborg": {
+    "aantal": 17,
+    "kans4": 19
+   },
+   "halsteren": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "leiderdorp": {
+    "aantal": 30,
+    "kans4": 59
+   },
+   "bilthoven": {
+    "aantal": 8,
+    "kans4": 0
+   },
+   "loon op zand": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "zoeterwoude": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "wilnis": {
+    "aantal": 10,
+    "kans4": 11
+   },
+   "weesp": {
+    "aantal": 11,
+    "kans4": 10
+   },
+   "noordwijk": {
+    "aantal": 30,
+    "kans4": 52
+   },
+   "vianen": {
+    "aantal": 9,
+    "kans4": 0
+   },
+   "aalsmeer": {
+    "aantal": 27,
+    "kans4": 46
+   },
+   "geldermalsen": {
+    "aantal": 5,
+    "kans4": 25
+   },
+   "baarn": {
+    "aantal": 12,
+    "kans4": 18
+   },
+   "landsmeer": {
+    "aantal": 4,
+    "kans4": 33
+   },
+   "oosterwijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nieuwkuijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "sprang-capelle": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "straatnaam: prins hendrikstraat": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "gorinchem": {
+    "aantal": 26,
+    "kans4": 44
+   },
+   "sss": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "winterswijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "sgravendeel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "dongen": {
+    "aantal": 5,
+    "kans4": 25
+   },
+   "hilversum": {
+    "aantal": 20,
+    "kans4": 37
+   },
+   "rosmalen": {
+    "aantal": 11,
+    "kans4": 20
+   },
+   "herwijnen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nieuw-vennep": {
+    "aantal": 53,
+    "kans4": 67
+   },
+   "nb": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "den hoorn": {
+    "aantal": 7,
+    "kans4": 0
+   },
+   "zwolle": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoevelaken": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "pijnacker (zuid-holland)": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "noordwijkerhout": {
+    "aantal": 29,
+    "kans4": 50
+   },
+   "nieuwegein": {
+    "aantal": 35,
+    "kans4": 59
+   },
+   "krimpen aan de lek": {
+    "aantal": 7,
+    "kans4": 0
+   },
+   "bosschenhoofd": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "schelluinen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "zevenhuizen": {
+    "aantal": 14,
+    "kans4": 46
+   },
+   "loosdrecht": {
+    "aantal": 8,
+    "kans4": 14
+   },
+   "rijswijk zh": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "hoofvliet": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "naaldwijk": {
+    "aantal": 24,
+    "kans4": 39
+   },
+   "rijen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "borssele": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "ter aar": {
+    "aantal": 8,
+    "kans4": 14
+   },
+   "eefde": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "prinsenbeek": {
+    "aantal": 7,
+    "kans4": 0
+   },
+   "nieuwe-tonge": {
+    "aantal": 6,
+    "kans4": 20
+   },
+   "boskoop": {
+    "aantal": 23,
+    "kans4": 36
+   },
+   "zwartewaal": {
+    "aantal": 6,
+    "kans4": 20
+   },
+   "stolwijk": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "klaaswaal": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "zaandam": {
+    "aantal": 36,
+    "kans4": 63
+   },
+   "dalem": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nijkerk": {
+    "aantal": 7,
+    "kans4": 17
+   },
+   "kedichem": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoogmade": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "maasland": {
+    "aantal": 15,
+    "kans4": 29
+   },
+   "woerdense verlaat": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "numansdorp": {
+    "aantal": 7,
+    "kans4": 0
+   },
+   "strijen": {
+    "aantal": 6,
+    "kans4": 20
+   },
+   "oudewater": {
+    "aantal": 8,
+    "kans4": 0
+   },
+   "diemen": {
+    "aantal": 19,
+    "kans4": 44
+   },
+   "goirle": {
+    "aantal": 5,
+    "kans4": 25
+   },
+   "etten leur": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "soest": {
+    "aantal": 11,
+    "kans4": 10
+   },
+   "werkendam": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "chaam": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "driehuis": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "katwijk zh": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "zierikzee": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "blaricum": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "aerdenhout": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "heerjansdam": {
+    "aantal": 7,
+    "kans4": 17
+   },
+   "muiden": {
+    "aantal": 12,
+    "kans4": 27
+   },
+   "nieuwveen": {
+    "aantal": 3,
+    "kans4": 50
+   },
+   "zevenbergschen hoek": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "pernis rotterdam": {
+    "aantal": 7,
+    "kans4": 50
+   },
+   "moerkapelle": {
+    "aantal": 14,
+    "kans4": 23
+   },
+   "oosterland": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "oosterhout": {
+    "aantal": 23,
+    "kans4": 23
+   },
+   "zandvoort": {
+    "aantal": 19,
+    "kans4": 50
+   },
+   "tiel": {
+    "aantal": 9,
+    "kans4": 50
+   },
+   "ijmuiden": {
+    "aantal": 13,
+    "kans4": 33
+   },
+   "'s‑gravenzande": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "bergambacht": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "nieuwkoop": {
+    "aantal": 12,
+    "kans4": 9
+   },
+   "wouw": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "st. willebrord": {
+    "aantal": 4,
+    "kans4": 67
+   },
+   "pernis": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "bunnik": {
+    "aantal": 5,
+    "kans4": 25
+   },
+   "leusden": {
+    "aantal": 5,
+    "kans4": 25
+   },
+   "kamerik": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "hardinxveld": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "leimuiden": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "noorden": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "hardinxveld-giessendam": {
+    "aantal": 15,
+    "kans4": 36
+   },
+   "almere-buiten": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "sliedrecht": {
+    "aantal": 26,
+    "kans4": 48
+   },
+   "westmaas": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "cruquius": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "dinteloord": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "bavel": {
+    "aantal": 6,
+    "kans4": 60
+   },
+   "mijnsheerenland": {
+    "aantal": 7,
+    "kans4": 17
+   },
+   "klundert": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "hoogland": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "wormer": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "oude wetering": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "'s-hertogenbosch": {
+    "aantal": 13,
+    "kans4": 42
+   },
+   "alphen ad rijn": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "poeldijk": {
+    "aantal": 15,
+    "kans4": 36
+   },
+   "middelharnis": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "leiderdorpleiderdorp": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hazerswoude-dorp": {
+    "aantal": 9,
+    "kans4": 25
+   },
+   "westzaan": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "woudenberg": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "made": {
+    "aantal": 9,
+    "kans4": 25
+   },
+   "langerak": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "leerdam": {
+    "aantal": 10,
+    "kans4": 11
+   },
+   "nieuw-lekkerland": {
+    "aantal": 5,
+    "kans4": 25
+   },
+   "middenbeemster": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "meteren": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "waarder": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "koog aan de zaan": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "gilze": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "den dolder": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "breukelen": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "lisserbroek": {
+    "aantal": 3,
+    "kans4": 50
+   },
+   "rijnsaterwoude": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "capelle ad ijssel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoef en haag": {
+    "aantal": 7,
+    "kans4": 50
+   },
+   "overveen": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "benschop": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "capelle aan den y": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hazerswoude rd": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   ".": {
+    "aantal": 5,
+    "kans4": 0
+   },
+   "bloemendaal": {
+    "aantal": 4,
+    "kans4": 33
+   },
+   "leidschendam-voorburg": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "oud beijerland": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "nieuwe wetering": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "roermond": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nijkerkerveen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "rijsenhout": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "steenbergen": {
+    "aantal": 7,
+    "kans4": 17
+   },
+   "oss": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "de meern": {
+    "aantal": 12,
+    "kans4": 27
+   },
+   "hoofdorp": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "bussum": {
+    "aantal": 10,
+    "kans4": 22
+   },
+   "bleskensgraaf ca": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "kampen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "denhaag": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "raamsdonksveer": {
+    "aantal": 8,
+    "kans4": 29
+   },
+   "volendam": {
+    "aantal": 5,
+    "kans4": 25
+   },
+   "rhenen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "etten-leur": {
+    "aantal": 11,
+    "kans4": 30
+   },
+   "zaaandam": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "duivendrecht": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "maarssrn": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "polderhof": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoek van holland": {
+    "aantal": 15,
+    "kans4": 36
+   },
+   "zevenbergen": {
+    "aantal": 15,
+    "kans4": 36
+   },
+   "zeistzeist": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "woubrugge": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "vreeland": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "den bosch": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "nieuw-vossemeer": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "vught": {
+    "aantal": 4,
+    "kans4": 33
+   },
+   "velsen-noord": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "noordwijk zh": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "groot-ammers": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "edam": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "driehuis nh": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "vlissingen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zoelen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "zuilichem": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "loenen aan de vecht": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "scheveningen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "haastrecht": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "terheijden": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "vinkeveen": {
+    "aantal": 13,
+    "kans4": 33
+   },
+   "zegveld": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "montfoort": {
+    "aantal": 6,
+    "kans4": 0
+   },
+   "geertruidenberg": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "oisterweijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "burgh-haamstede": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "oisterwijk": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "denbosch": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "lekkerkerk": {
+    "aantal": 6,
+    "kans4": 20
+   },
+   "velsen noord": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hekelingen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "gravenzande": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "muiderberg": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "sommelsdijk": {
+    "aantal": 10,
+    "kans4": 33
+   },
+   "barneveld": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "asperen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "ammerzoden": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zwammerdam": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "dorst": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "arkel": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "heukelum": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "drunen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "lunteren": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zaandijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "a": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "alkmaar": {
+    "aantal": 5,
+    "kans4": 25
+   },
+   "hank": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "den bommel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "herkingen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "brandwijk": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "zwijndrecht, zuid-holland": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nieuwe tonge": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "te noordwijk zh": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoornaar": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "buitenkaag": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "loenersloot": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "udenhout": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "lexmond": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "berkel-enschot": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "r dam": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "wijk bij duurstede": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "noordwijk aan zee": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "oudenbosch": {
+    "aantal": 7,
+    "kans4": 33
+   },
+   "akersloot": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "rozenburg-zh": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "best": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nieuwerkerk ad ijssel": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "koudekerk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "bennebroek": {
+    "aantal": 8,
+    "kans4": 14
+   },
+   "warmond": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "ede gld": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "rossum": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "wormerveer": {
+    "aantal": 4,
+    "kans4": 33
+   },
+   "rhenoy": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "stad aan 't haringvliet": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "odijk": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "oud gastel": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "zevenaar": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "haaften": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "blokker": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "maartensdijk": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "beusichem": {
+    "aantal": 3,
+    "kans4": 50
+   },
+   "2691vs": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "kerkwerve": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "milsbeek": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoogvliet-rotterdam": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "koedijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "goudswaard": {
+    "aantal": 3,
+    "kans4": 50
+   },
+   "'s-graveland": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoeven": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "slinge": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "achthuizen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "spaarndam": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "arnhem": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "velsen-zuid": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "heerhugowaard": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "duiven": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "beinsdorp": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nieuwerkerk a/d ijssel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "de rijp": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "‘s gravenzande": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "rijpwetering": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "dirksland": {
+    "aantal": 4,
+    "kans4": 33
+   },
+   "s hertogenbosch": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "e": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "apeldoorn": {
+    "aantal": 2,
+    "kans4": 100
+   },
+   "scherpenisse": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "oldenzaal": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "beneden-leeuwen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "amstelveenlveen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zoeterwoude-rijndijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "halfweg": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "goua": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "ewijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "heteren": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "lierderholthuis": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "weert": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hilvarenbeek": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "heesch": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "‘s-hertogenbosch": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "rijsoord": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoorn": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "utrcht": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "breezand": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "goes": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "ottoland": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "hoekvanholland": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "petten": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "lopikerkapel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hendrik ido ambacht": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "nvt": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zevenhoven": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "hazerswoude": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "boesingheliede": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "gemeente ridderkerk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "noordeloos": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "rozenburg zh": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "ter heijde": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "de zilk": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "julianadorp": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "'s-gravendeel": {
+    "aantal": 6,
+    "kans4": 20
+   },
+   "haarzuilens": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "kortenhoef": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "nijmegen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "bergen (nh)": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nieugein": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "groenekan": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoogblokland": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "westbroek": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "veldhoven": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "lopik": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "bunschoten": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "oosterhout nb": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "wagenberg": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "someren": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "waspik": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "de bilt": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "nieuwland": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "helmond": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "‘s-s‑gravenzande": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "driebruggen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "sprundel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "the hague": {
+    "aantal": 4,
+    "kans4": 0
+   },
+   "goudriaan": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "stavenisse": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nieuwe vennep": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "st.willebrord": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zijderveld": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "ossendrecht": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "wijk en aalburg": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "kockengen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "stekelbrem": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "meerkerk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "oosthuizen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "andel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "goedereede": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "deil": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "'s gravenzande": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "culemborgculemborg": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "kootwijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "ridderkerkse": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "melissant": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "ysselsteyn": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nieuw-beijerland": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "xxx": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "ouderkerkerk a/d amstel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "weelde": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "langbroek": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "den haab": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "numansdorp.": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "‘s-gravenzande": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "lelystad": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "amberley": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "knegsel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "middelburg": {
+    "aantal": 3,
+    "kans4": 0
+   },
+   "loenen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "waalre": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "moerstraten": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "urk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "buren": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "h i.ambacht": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "spijkennise": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "4822 pk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "velsen zuid": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "bruinisse": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "emmeloord": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "oost west en middelbeers": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "gemert": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "honslersdijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "heenvliet": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "molenhoek": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoofddorp - niederlande": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "vuren": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "sdfsdf": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "eindhoven": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "leende": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "2133 cc": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "biezenmortel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "leersum": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "kerkwijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "laren": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "cothen": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "achterveld": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "schijf": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "2643 kt": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "brummen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hekendorp": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "ameide": {
+    "aantal": 2,
+    "kans4": 100
+   },
+   "schalkwijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "elst utelst": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "xb": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "vierpolders.": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "driebergen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "dreumel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "spaarndam gem. haarlem": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hoogvliet , rotterdam": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "harderwijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "streefkerk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "vlijmen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "rotterdam hoogvliet": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nijkerk gld": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "malden": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "'s-gravenpolder": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "bijlaanslaan": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "oude tonge": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "kwintsheul": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "atlas": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "reuver": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zaltbommel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "langeweg": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "bennekom": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "piershil": {
+    "aantal": 2,
+    "kans4": 0
+   },
+   "noordhoek": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "kloosterzande": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "mill": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "lienden": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "velddriel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "oostburg": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "westknollendam": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "genderen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "giessen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "rucphen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "heerle": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "st. veit im pongau": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "deurne": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "hollandsche rading": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "wervershoof": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "son": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "warmenhuizen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "biervliet": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "zeewolde": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "mijdrexht": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "oosterhout/netherlands": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "'s-gravenhagehaag": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "'s-gravenhageag": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "pijnackerp": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "prins bernhardstraat": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "vlaardingenvlaardingen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "'s-gravenhageden haag": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "purmerendrend": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "giessenburgessen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "amsterdammst": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "katwijkijk": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "brakel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "rijswijkjs": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "helvoirt": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "eck en wiel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "nootdorpotdorp": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "budel": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "maarssensen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "heumen": {
+    "aantal": 1,
+    "kans4": 0
+   },
+   "etten-leuren": {
+    "aantal": 1,
+    "kans4": 0
+   }
+  }
+ },
+ "wachtenLoont": [
+  "den haag",
+  "rotterdam",
+  "zoetermeer"
+ ]
+}

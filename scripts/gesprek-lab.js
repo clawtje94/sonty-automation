@@ -131,7 +131,9 @@ async function haalGesprekken(vers) {
       // het nooit een afsluiter.
       // Bijlage-placeholders ("Image", "Video") zijn geen vraag; de tekst eromheen wel.
       if (/^(image|video|audio|document|sticker|bijlage)$/i.test(m.tekst.trim())) continue;
-      const AFSLUIT_WOORDEN = new Set(['nakijken', 'reactie', 'bericht', 'info', 'informatie', 'moeite', 'uitleg', 'hulp', 'even', 'heel', 'erg', 'alvast', 'in', 'ieder', 'geval', 'thank', 'you', 'great', 'fine', 'good', 'see', 'then', 'bye', 'cheers', 'dank', 'dankje', 'dankjewel', 'danku', 'dankuwel', 'bedankt', 'thanks', 'thnx', 'top', 'prima', 'oke', 'oké', 'ok', 'okay', 'is', 'goed', 'dat', 'past', 'helemaal', 'hoor', 'ja', 'graag', 'fijn', 'fijne', 'avond', 'dag', 'weekend', 'tot', 'dan', 'ziens', 'snel', 'ook', 'je', 'jij', 'u', 'jullie', 'wel', 'hetzelfde', 'insgelijks', 'gelijk', 'doei', 'doeg', 'groetjes', 'groeten', 'super', 'perfect', 'duidelijk', 'begrepen', 'komt', 'voor', 'elkaar', 'we', 'zien', 'het', 'de', 'een']);
+      const AFSLUIT_WOORDEN = new Set(['nakijken', 'reactie', 'bericht', 'info', 'informatie', 'moeite', 'uitleg', 'hulp', 'even', 'heel', 'erg', 'alvast', 'in', 'ieder', 'geval', 'thank', 'you', 'great', 'fine', 'good', 'see', 'then', 'bye', 'cheers', 'dank', 'dankje', 'dankjewel', 'danku', 'dankuwel', 'bedankt', 'thanks', 'thnx', 'top', 'prima', 'oke', 'oké', 'ok', 'okay', 'is', 'goed', 'dat', 'past', 'helemaal', 'hoor', 'ja', 'graag', 'fijn', 'fijne', 'avond', 'dag', 'weekend', 'tot', 'dan', 'ziens', 'snel', 'ook', 'je', 'jij', 'u', 'jullie', 'wel', 'hetzelfde', 'insgelijks', 'gelijk', 'doei', 'doeg', 'groetjes', 'groeten', 'super', 'perfect', 'duidelijk', 'begrepen', 'komt', 'voor', 'elkaar', 'we', 'zien', 'het', 'de', 'een',
+        // Van leeuwen 23-08: "Ja ben ik ook blij mee, ik wacht het af hoor heel hartelijk dank."
+        'blij', 'mee', 'ben', 'ik', 'wacht', 'af', 'hartelijk']);
       const isAfsluiter = (tekst) => {
         if (/\?/.test(tekst)) return false;
         const kaal = String(tekst)
@@ -164,12 +166,37 @@ async function haalGesprekken(vers) {
   // Dedupe (19-08): hetzelfde bericht dook via samengevoegde tickets dubbel op
   // (Valentin en Galante stonden 2x in het dagrapport).
   const gezien = new Set();
-  const uniek = bevindingen.filter((b) => {
+  let uniek = bevindingen.filter((b) => {
     const sleutel = b.soort + '|' + b.naam + '|' + b.detail;
     if (gezien.has(sleutel)) return false;
     gezien.add(sleutel);
     return true;
   });
+  // BIJ "MENS NODIG" NIET MELDEN (Daimy 23-08: "deze berichten hoeft niet meer,
+  // alleen als het NIET bij team mens nodig ligt"): ligt het ticket bij team
+  // Mens nodig (431872), dan kijkt er al een mens naar en is een FOUT-STIL-melding
+  // dubbel gepiep. Team per ticket één keer opvragen.
+  const MENS_NODIG = 431872;
+  const teamVan = {};
+  for (const b of uniek) {
+    if (b.soort !== 'FOUT-STIL') continue;
+    const tid = cache[b.token]?.ticket;
+    if (!tid) continue;
+    if (!(tid in teamVan)) {
+      try {
+        const TT = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
+        const rT = await fetch(`https://app.trengo.com/api/v2/tickets/${tid}`, { headers: { Authorization: 'Bearer ' + TT } });
+        const jT = rT.ok ? await rT.json() : null;
+        const teamId = jT?.team_id ?? jT?.team?.id ?? jT?.ticket?.team_id ?? null;
+        teamVan[tid] = teamId == null ? null : Number(teamId);
+      } catch { teamVan[tid] = null; }
+      await new Promise((r) => setTimeout(r, 700));
+    }
+    if (teamVan[tid] === MENS_NODIG) b.bijMens = true;
+  }
+  const bijMens = uniek.filter((b) => b.bijMens).length;
+  if (bijMens) console.log(`${bijMens} FOUT-STIL-geval(len) bij team Mens nodig — niet gemeld (Daimy 23-08)`);
+  uniek = uniek.filter((b) => !b.bijMens);
   const perSoort = {};
   for (const b of uniek) (perSoort[b.soort] = perSoort[b.soort] || []).push(b);
   for (const soort of ['FOUT-BOEKING', 'FOUT-STIL', 'GEBLOKKEERD']) {
@@ -180,7 +207,10 @@ async function haalGesprekken(vers) {
   }
   // GEBLOKKEERD is geen fout maar bewijs dat de poort werkt: dit zijn precies de
   // gevallen die eerder wél de mist in gingen.
-  const echt = bevindingen.filter((b) => b.soort !== 'GEBLOKKEERD');
+  // Uit UNIEK, niet uit de ruwe lijst (23-08): het Telegram-rapport pakte de
+  // ongededupliceerde bevindingen, waardoor Van leeuwen er 2x in stond en de
+  // Mens-nodig-filtering er niet op werkte.
+  const echt = uniek.filter((b) => b.soort !== 'GEBLOKKEERD');
   if (!echt.length) console.log('schoon — geen boeking tegen de klant in, geen onbeantwoorde klant.');
 
   // Met --melden (de dagelijkse run) gaat een bevinding naar Telegram. Alleen als er

@@ -48,14 +48,21 @@ async function wieBijKlant(zoekterm) {
     const token = fs.readFileSync(path.join(__dirname, '..', '.owa-token.txt'), 'utf8').trim();
     const OH = { Authorization: 'Bearer ' + token };
     const cal = (((await (await fetch('https://outlook.office.com/api/v2.0/me/calendars', { headers: OH })).json()).value) || []).find((c) => c.Name === 'Sonty Montage');
-    const van = new Date(Date.now() - 365 * 86400000), tot = new Date(Date.now() + 92 * 86400000);
-    let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView?$top=500&$select=Subject,Start,End,IsCancelled&startDateTime=${van.toISOString()}&endDateTime=${tot.toISOString()}`;
+    // 2 jaar terug: Planado bewaart maar ~1 maand historie, de agenda is het archief
+    const van = new Date(Date.now() - 730 * 86400000), tot = new Date(Date.now() + 92 * 86400000);
+    let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView?$top=500&$select=Subject,Start,End,IsCancelled,Attendees&startDateTime=${van.toISOString()}&endDateTime=${tot.toISOString()}`;
     while (url) {
       const j = await (await fetch(url, { headers: OH })).json();
       for (const e of (j.value || [])) {
         if (e.IsCancelled) continue;
         if (!String(e.Subject || '').toLowerCase().includes(z)) continue;
-        uit.agenda.push({ wanneer: String(e.Start?.DateTime || '').slice(0, 16), wat: e.Subject });
+        // Outlook is het leidende systeem (Daimy 24-08): de monteur/inmeter staat als
+        // Sonty-deelnemer op het event ("Yudi den Heijer | Sonty", "Dennis | Sonty").
+        const wie = (e.Attendees || [])
+          .filter((a) => /@(sonty\.nl|sontymontage\.nl)$/i.test(String(a.EmailAddress?.Address || '')))
+          .map((a) => String(a.EmailAddress?.Name || '').replace(/\s*\|\s*Sonty.*$/i, '').trim())
+          .filter(Boolean);
+        uit.agenda.push({ wanneer: String(e.Start?.DateTime || '').slice(0, 16), wat: e.Subject, wie: wie.join(' + ') || null });
       }
       url = j['@odata.nextLink'] || null;
     }
@@ -188,7 +195,7 @@ async function antwoordCollega(naam, vraag) {
       method: 'POST', headers: { 'x-api-key': ANTHROPIC_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-5', max_tokens: 700, tools: TOOLS,
-        system: `Je bent Sunny, de interne assistent van Sonty (zonwering, Rijswijk). Je appt met collega ${naam}.\n${(() => { try { return 'Wie doet wat bij Sonty:\n' + fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'sonty-team-rollen.md'), 'utf8').trim(); } catch { return ''; } })()}\n Beantwoord zijn vraag kort en direct in het Nederlands met feiten uit je opzoek-tools (Gripp en de offerte-administratie). Je mag (Daimy 24-08) ook opzoeken wie er bij een klant gemonteerd/ingemeten heeft of ingepland staat (tool wie_bij_klant; noem de bus-namen en datum; staat cacheVerversen op true, zeg dan dat de opdrachten-administratie net ververst wordt en het antwoord over een paar minuten completer kan zijn). Je mag (Daimy 21-08) ook vertellen welke producten met maten, kleur en bediening er in een Gripp-offerte staan, en je kunt de (concept)offerte-PDF ophalen met gripp_offerte_pdf: die wordt dan automatisch als bijlage meegestuurd, zeg dan kort "hier is de PDF". Regels: verder ben je STRIKT alleen-lezen, je kunt niks aanpassen, boeken of naar klanten versturen en belooft dat ook nooit; als een vraag om zo'n actie vraagt zeg je dat een mens dat moet doen. Vind je niks of twijfel je, zeg dat eerlijk. Geen gedachtestreepjes. Dit is een intern gesprek, klantgegevens delen mag.`,
+        system: `Je bent Sunny, de interne assistent van Sonty (zonwering, Rijswijk). Je appt met collega ${naam}.\n${(() => { try { return 'Wie doet wat bij Sonty:\n' + fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'sonty-team-rollen.md'), 'utf8').trim(); } catch { return ''; } })()}\n Beantwoord zijn vraag kort en direct in het Nederlands met feiten uit je opzoek-tools (Gripp en de offerte-administratie). Je mag (Daimy 24-08) ook opzoeken wie er bij een klant gemonteerd/ingemeten heeft of ingepland staat (tool wie_bij_klant; Outlook/agenda is het leidende systeem: het veld "wie" bij agenda-regels is wie er echt stond/staat, de Planado-regels zijn aanvulling; noem naam/bus en datum; staat cacheVerversen op true, zeg dan dat de opdrachten-administratie net ververst wordt en het antwoord over een paar minuten completer kan zijn). Je mag (Daimy 21-08) ook vertellen welke producten met maten, kleur en bediening er in een Gripp-offerte staan, en je kunt de (concept)offerte-PDF ophalen met gripp_offerte_pdf: die wordt dan automatisch als bijlage meegestuurd, zeg dan kort "hier is de PDF". Regels: verder ben je STRIKT alleen-lezen, je kunt niks aanpassen, boeken of naar klanten versturen en belooft dat ook nooit; als een vraag om zo'n actie vraagt zeg je dat een mens dat moet doen. Vind je niks of twijfel je, zeg dat eerlijk. Geen gedachtestreepjes. Dit is een intern gesprek, klantgegevens delen mag.`,
         messages: berichten,
       }),
     });

@@ -115,10 +115,21 @@ async function rpZetStatus(itemId, statusId) {
   return r.ok;
 }
 async function planado(ep) {
-  const r = await fetch('https://api.planadoapp.com/v2' + ep, { headers: { Authorization: 'Bearer ' + PLANADO_KEY } });
-  if (!r.ok) throw new Error(`Planado ${r.status}`);
-  return r.json();
+  // Drukte-rem van Planado (429, of kale tekst "Rate Limit Exceeded") mag de ronde
+  // niet laten crashen (SYSTEMEN-rood 24-08) — rustig opnieuw proberen.
+  for (let poging = 0; poging < 5; poging++) {
+    const r = await fetch('https://api.planadoapp.com/v2' + ep, { headers: { Authorization: 'Bearer ' + PLANADO_KEY } });
+    if (r.ok) {
+      const tekst = await r.text();
+      try { return JSON.parse(tekst); } catch { /* toch rate-limit-tekst */ }
+    } else if (r.status !== 429 && r.status < 500) {
+      throw new Error(`Planado ${r.status}`);
+    }
+    await wachtEven(15000 * (poging + 1));
+  }
+  throw new Error('Planado blijft weigeren (rate limit?) voor ' + ep);
 }
+const wachtEven = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // ── lead uitlezen ───────────────────────────────────────────────────────────
 // Regels die geen meetbaar product zijn. Naast montage en accessoires staan er ook

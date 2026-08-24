@@ -30,7 +30,7 @@ const SHEET_ID = 273253041;
 const BLAUW = { red: 0.812, green: 0.886, blue: 0.953 };
 const MAILBOXEN = ['orders@sonty.nl', 'info@sonty.nl'];
 const STATE_FILE = '/Users/clawdboot/sonty/data/planning-mail-state.json';
-const LEVERANCIERS = /sunmaster\.nl|@ne\.nl|roma\.de|romabenelux|toppoint\.eu|unilux\.nl|velux|fakro|markiezen|somfy|dersimo|peitsman|poedercoat/i;
+const LEVERANCIERS = /sunmaster\.nl|@ne\.nl|roma\.de|romabenelux|toppoint\.eu|unilux\.nl|velux|fakro|markiezen|somfy|dersimo|peitsman|poedercoat|abzraamdecoratie/i;
 const TG = { token: SECRETS.TELEGRAM_BOT_TOKEN, chat: SECRETS.TELEGRAM_CHAT_ID };
 const MAANDEN = { januari: 1, februari: 2, maart: 3, april: 4, mei: 5, juni: 6, juli: 7, augustus: 8, september: 9, oktober: 10, november: 11, december: 12 };
 
@@ -285,7 +285,8 @@ function duiden(m) {
     return { type: 'retour', ref, lev, besteld, opm: `Retouropdracht ${ref}, afhaaldag bevestigen bij NE.` };
   }
   // ROMA OPDRACHTBEVESTIGING (23-07): "ROMA opdrachtbevestiging 8650217 Commissie: Cheloi (6229) Bestel nr. BEST_152"
-  if ((x = s.match(/^ROMA opdrachtbevestiging\s+(\d+)\s+Commissie:\s*(.*?)\s*Bestel/i))) {
+  // Voorraadorders hebben GEEN "Bestel nr." in het onderwerp (24-08: "... Commissie: voorraad"), dus dat stuk is optioneel.
+  if ((x = s.match(/^ROMA opdrachtbevestiging\s+(\d+)\s+Commissie:\s*(.*?)\s*(?:Bestel|$)/i))) {
     const commissie = (x[2] || '').replace(/^\+$/, '').trim();
     return { type: 'nieuw-of-opmerking', ordernr: x[1], naam: commissie || '(commissie leeg, zie PDF)', lev: 'ROMA',
       kort: `Nieuw: ROMA opdrachtbevestiging ${x[1]}`, besteld, wat: 'ROMA, details in PDF-bijlage',
@@ -297,6 +298,23 @@ function duiden(m) {
     const [jr, mnd, dag] = m.received.slice(0, 10).split('-').map(Number);
     return { type: 'update', ordernr: x[3], naam: x[2].trim(), lev: 'Sunmaster', geleverdSerial: serial(dag, mnd, jr), geleverdTekst: besteld,
       kort: `Geleverd op → ${besteld} (afleverbon ${x[1]})`, nieuwWat: 'Sunmaster, zie afleverbon', opm: `Sunmaster afleverbon ${x[1]} (${x[2].trim()}, order ${x[3]}): geleverd.` };
+  }
+  // ABZ RAAMDECORATIE (24-08): "DealerSalesOrder D26-001431A (Den Dikken (6517))" — details in PDF
+  // (parser in planning-pdf-parse.js vult besteld/leverdatum/producten aan).
+  if ((x = s.match(/^DealerSalesOrder\s+(D\d{2}-\d+[A-Z]?)\s*\((.+)\)\s*$/i))) {
+    return { type: 'nieuw', ordernr: x[1], naam: refNaarNaam(x[2]), lev: 'ABZ', besteld,
+      kort: `Nieuw: ABZ orderbevestiging ${x[1]}`, wat: 'ABZ, details in PDF-bijlage',
+      opm: `ABZ orderbevestiging ${x[1]} (${x[2]}, mail ${besteld}). Details in PDF-bijlage.` };
+  }
+  // DEFINITIEVE ORDERBEVESTIGING Markiezen NL / Poedercoating Culemborg (nieuw sjabloon 24-08):
+  // "Orderbevestiging referentie: de Bruin (6267)" — ordernr staat in de PDF. Poedercoat-orders
+  // hebben meestal al een webshop-rij met leeg ordernummer (J): die wordt dan ingevuld.
+  if (/^Orderbevestiging referentie:/i.test(s) && /markiezen|poedercoat/i.test(m.from)) {
+    const ref = s.replace(/^Orderbevestiging referentie:\s*/i, '').trim();
+    const lev = /markiezen/i.test(m.from) ? 'Markiezen Nederland' : 'Poedercoating Culemborg';
+    return { type: 'orderbev-ref', naam: refNaarNaam(ref), ref, lev, ordernr: '(zie PDF)', besteld,
+      kort: `Definitieve orderbevestiging ${lev}`, wat: 'zie bevestiging',
+      opm: `Definitieve orderbevestiging van ${lev}, referentie ${ref} (mail ${besteld}). Ordernummer in PDF-bijlage.` };
   }
   // WEBSHOP-BEVESTIGING (Markiezen Nederland / Poedercoating Culemborg, zelfde sjabloon):
   // referentie + orderdatum + bestelling staan gewoon in de mailtekst — alles wordt op
@@ -431,6 +449,41 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
     }
     if (a.type === 'nieuw') {
       nieuweRijen.push({ naam: a.naam, ordernr: a.ordernr, besteld: a.besteld || '', geleverd: a.geleverdTekst || '', wat: a.wat, opm: a.opm, kort: a.kort, lev: a.lev });
+      state.verwerkt[m.imid] = nu();
+      gelezenMarkeren.push(m);
+      return true;
+    }
+    // Definitieve orderbevestiging (Markiezen/Poedercoat, 24-08): eerst proberen het ordernr
+    // in te vullen op de bestaande webshop-rij (zelfde klantnr E + leverancier D, lege J).
+    if (a.type === 'orderbev-ref') {
+      const { nr } = splitsNaam(a.naam);
+      const ordernr = String(a.ordernr || '').trim();
+      if (!/^\d{3,}$/.test(ordernr))
+        return verwerkActie(m, { type: 'melden', reden: `Definitieve orderbevestiging ${a.lev} (${a.ref}): geen ordernummer uit PDF kunnen lezen` });
+      const kandidaten = [];
+      for (let i = 1; i < rows.length; i++) {
+        const r = rows[i] || [];
+        if (nr && String(r[4] || '').trim() === nr && String(r[3] || '').trim() === a.lev) kandidaten.push(i);
+      }
+      if (kandidaten.some((i) => String((rows[i] || [])[9] || '').trim() === ordernr)) {
+        verslag.push(`ordernr ${ordernr} (${a.naam}) stond al in de sheet`);
+        state.verwerkt[m.imid] = nu(); gelezenMarkeren.push(m);
+        return true;
+      }
+      const leeg = kandidaten.filter((i) => !String((rows[i] || [])[9] || '').trim());
+      if (leeg.length === 1) {
+        const rij = leeg[0] + 1;
+        waarden.push({ range: `'${TAB}'!J${rij}`, values: [[ordernr]] });
+        rows[leeg[0]][9] = ordernr;
+        stempelRij(rij, a); opm(rij, `Definitieve orderbevestiging ${a.lev}: ordernr ${ordernr} ingevuld`); blauw.add(leeg[0]);
+        verslag.push(`rij ${rij}: J=${ordernr} ingevuld (${a.naam}, ${a.lev})`);
+        state.verwerkt[m.imid] = nu(); gelezenMarkeren.push(m);
+        return true;
+      }
+      if (leeg.length > 1)
+        return verwerkActie(m, { type: 'melden', reden: `Definitieve orderbevestiging ${a.lev} (${a.ref}): ${leeg.length} rijen zonder ordernr voor klantnr ${nr}, handmatig invullen (ordernr ${ordernr})` });
+      // Geen bestaande rij (Markiezen heeft geen webshop-rij) -> gewone nieuwe rij
+      nieuweRijen.push({ naam: a.naam, ordernr, besteld: a.besteld || '', geleverd: a.geleverdTekst || '', wat: a.wat, opm: a.opm, kort: a.kort, lev: a.lev });
       state.verwerkt[m.imid] = nu();
       gelezenMarkeren.push(m);
       return true;

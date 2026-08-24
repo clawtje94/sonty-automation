@@ -80,6 +80,21 @@ function duidPdf(t) {
       producten,
     };
   }
+  // ABZ RAAMDECORATIE — DealerSalesOrder-pdf: "Ordernummer D26-001425A", "Referentie 1 Zwijnenberg 5594",
+  // "Geschatte leverdatum af fabriek 16-9-2026", regels "1  3830-1006 ABZ Blocker Cosiflor 2024  1 ST € ..."
+  if (/Geschatte leverdatum af fabriek/i.test(t) || /Ordernummer\s+D\d{2}-\d+/.test(t)) {
+    const maten = [...t.matchAll(/Breedte x Hoogte:\s*(\d+)mm x (\d+)mm/gi)].map((m) => `${m[1]} x ${m[2]}`);
+    const producten = [...t.matchAll(/^\s*\d+\s+[\d-]+\s+(.+?)\s{2,}(\d+)\s+ST\b/gm)]
+      .map((m, i) => `${m[2]}x ${m[1].replace(/\s+/g, ' ').trim()}${maten[i] ? ' ' + maten[i] : ''}`);
+    return {
+      leverancier: 'ABZ',
+      ordernr: pak(t, /Ordernummer\s+(D\d{2}-\d+[A-Z]?)/),
+      referentie: pak(t, /Referentie 1\s+(.+?)(?:\s{2,}|$)/m),
+      orderdatum: dmy(pak(t, /Orderdatum\s+(\d{1,2}-\d{1,2}-\d{4})/)),
+      leverdatum: dmy(pak(t, /Geschatte leverdatum af fabriek\s+(\d{1,2}-\d{1,2}-\d{4})/i)),
+      producten,
+    };
+  }
   // MARKIEZEN NEDERLAND / generiek NL — "Order nr. : 49907", "Order referentie : ..."
   if (/Order referentie/i.test(t)) {
     const na = t.split(/Aantal\s+Omschrijving/i)[1] || '';

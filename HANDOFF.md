@@ -67,6 +67,11 @@
   bouwt data/wa-groep-teamgeheugen.md (Sonnet, 88 blokken parallel, cache -delen.json); groep-antwoord
   gebruikt teamgeheugen + woordmatch-retrieval van oude berichten (ALIAS export-namen → live namen).
 - Sonnet-5 kan een thinking-blok vooraan zetten: overal het tekstblok pakken (was oorzaak "weetje-generatie mislukt").
+- WIE-MONTEERDE-WAAR (Daimy 24-08, "Joey wil weten wie bij Daan Ram de plisse heeft opgehangen"):
+  collega-DM-tool wie_bij_klant: Outlook "Sonty Montage" (-1 jr..+3 mnd, wanneer/wat) + Planado-
+  opdrachtencache (welke bus: BUS_NAMEN-map) → data/planado-jobs-cache.json via scripts/
+  planado-jobs-cache.js (Planado kent GEEN datum/zoekfilters; volledige paging, 3,5 s/pagina,
+  rate-limit-backoff; cache >12u oud → automatisch verse achtergrond-run). Alleen-lezen.
 - Teamgeheugen GEBOUWD 22-08 (data/wa-groep-teamgeheugen.md, ~1050 woorden, + delen/tussen-json): wie is wie, bijnamen, running gags, tijdlijn, gevoeligheden. Opnieuw bouwen na nieuwe import: node scripts/wa-groep-geschiedenis.js geheugen (cache per blok).
 
 

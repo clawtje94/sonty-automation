@@ -1,4 +1,30 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-21)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-24)
+
+## 24-08: ORDERMAILS-INHAALSLAG + DAEMON HERKENT ABZ/DEFINITIEVE BEVESTIGINGEN (akkoord Daimy)
+- Vraag Daimy: waarom blijven ordermails liggen / staan ze al in de sheet? Analyse: 12 mails
+  bleven hangen. 3 oorzaken: (a) ABZ ontbrak in leveranciersfilter (stil overgeslagen),
+  (b) nieuw onderwerpsjabloon "Orderbevestiging referentie: X" van Markiezen NL én
+  Poedercoating Culemborg (gemeld, bleef ongelezen), (c) ROMA-voorraadorder zonder
+  "Bestel nr." in onderwerp + FAKRO gewijzigde-leverdatum buiten het 3-dagen-venster.
+- INHAALRUN (eenmalig script, dry-run eerst, daemon-lock gerespecteerd): 7 nieuwe rijen in
+  tab "2026 goed": Zwijnenberg 5594 ABZ D26-001425A (lev 16-09), Den Dikken 6517 ABZ
+  D26-001431A (lev 16-09, bij 6517-groep rij ~1708), Speelman 6515 ABZ D26-001434A (lev
+  09-09), Althuizen 6201 Markiezen 50292, Verschoor 6473 Markiezen 50293, Voorraad ROMA
+  8690360 (stelschroeven, week 36/2026), Oldenburger 6270 FAKRO26012524 (V2612507, nieuwe
+  leverdatum 25-08; klantnr 6270 via Gripp — FAKRO kapt referentie af op "(627").
+  Plus 5 J-updates op bestaande Poedercoating-rijen (ordernr ingevuld): Lambalgen 6318=5302,
+  Leeuwen 6269=5301, de Bruin 6267=5320, van den BERG 6003=5321, de Kroon 5271=5322.
+  Alle 12 mails op gelezen gezet, state bijgewerkt (imids in verwerkt, uit overgeslagen/gemeld),
+  geverifieerd: 0 ongelezen in orders@ (5 dgn), rijen teruggelezen en kloppen incl. plaats/regio.
+- DAEMON-FIX (commit 3902245, getest 16/17 + regressie op alle bestaande formaten, 1 "fout"
+  was te strenge testverwachting): ABZ in LEVERANCIERS + DealerSalesOrder-branch + ABZ-sectie
+  in planning-pdf-parse.js (ordernr/referentie/orderdatum/geschatte leverdatum/producten+maten);
+  "Orderbevestiging referentie:"-branch → type orderbev-ref: vult ordernr in op bestaande
+  webshop-rij (zelfde E-klantnr + D-leverancier, lege J), anders nieuwe rij, bij ambiguïteit
+  melden; ROMA-onderwerpregex accepteert nu ook commissies zonder "Bestel nr." (voorraad).
+- NIET gedaan (bewust): FAKRO "Gewijzigde leverdatum"-mails blijven type melden (zeldzaam,
+  handmatig). Let op: mails ouder dan 3 dagen vallen buiten het daemon-venster — die worden
+  nooit meer automatisch opgepakt, alleen via melding/handmatig.
 
 ## 21-08: STILTE-FIXES PLANNINGSKETEN (Fatih/Marius/Mirjam/Jeffrey kregen geen antwoord)
 - OORZAAK 1 (bug): lib/verzend-poort.js filterde "onze" berichten op `!m.contact_id`, maar de

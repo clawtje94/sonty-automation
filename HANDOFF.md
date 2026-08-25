@@ -1,4 +1,43 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-24)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-25)
+
+## 25-08 (3): OUTLOOK-SYNC MAAKTE DUPLICAAT-JOBS NA AFMELDEN — GEFIXT (melding Daimy via dashboard)
+- Symptoom (Daimy): elke keer als Joey een opdracht voltooide kwam hij opnieuw in Planado.
+- Oorzaak: in cron-outlook-planado-sync.js liep de dedup op starttijd+inmeter alleen over TOEKOMSTIGE
+  jobs; zodra de starttijd van een rp-/planner-job verstreek viel hij eruit en maakte de volgende run
+  (10 min-cyclus) een ol-duplicaat aan. Verklaart ook de historische dupes (Pecnik #1190, Julia #578,
+  Eric #583/#432) die het personeelsdashboard als "afgevinkt-elders" toonde.
+- Fix: dedup over ÁLLE jobs (zelfde keuze als de extId-dedup sinds Koeleman 06-08). Bewijs: dry-run
+  278 events → 0 nieuw; execute-run maakt alleen echt nieuwe afspraken (per stuk geverifieerd).
+- Opgeruimd: 6 duplicaten van vandaag (#1196/1200/1204/1207/1208/1211) na controle dat het origineel
+  op dezelfde tijd bestond; proefgeval eerst, daarna de rest; originelen ongemoeid. Oudere afgevinkte
+  dupes laten staan (historie). Joeys dag staat weer op precies 7 echte afspraken.
+- Dashboard-effect: "vandaag" wordt altijd vers berekend, dus de dupes zijn daar vanzelf weg; de rode
+  afwijkingen van eerdere dagen blijven kloppen (het is echt gebeurd).
+
+## 25-08: PERSONEELSDASHBOARD /admin/personeel LIVE (uren + GPS-locatiecheck + tempo)
+- Vraag Daimy: kan Planado uren/locatie bijhouden + zien of monteurs echt op locatie afmelden?
+  Antwoord: ja — gebouwd als dashboard, live op sonty-website.vercel.app/admin/personeel (link in AdminRail).
+- Data: `lib/personeel/planado.ts` haalt per NL-dag alle Planado-jobs (scheduled_at-filter, after-paginering),
+  per job detail (timestamps onderweg/gestart/klaar) + GPS-punten (`/jobs/{uuid}/locations`), producttypes
+  uit de omschrijving. Afstand GPS-punt↔klantadres bij start én afmelden; ≤250 m = op locatie.
+- API `/api/admin/personeel-dashboard?dagen=7|14|30`: per monteur uren (eerste actie→laatste afmelding),
+  klanturen, tempo vs gepland (mediaan) en per product (vs teamgemiddelde), klokdiscipline-%, op-locatie-%.
+  Afwijkingen met ernst: ROOD = afgevinkt-elders zonder geklokte werktijd / geen-gps; ORANJE = afgemeld-na-vertrek,
+  vergeten-afmelden (klok pas latere dag gestopt → werktijd telt niet mee, anders 1197-min-jobs in gemiddelden),
+  niet-echt-geklokt (start/af <3 min uit elkaar), niet-gelukt.
+- Infra-lessen: Planado rate limit is streng → alle calls door één poortje (250 ms tussenruimte) + 429-backoff;
+  KV zit op maandlimiet (500k, Upstash) → dagcache in **Blob** (`personeel/dagcache-v2/`, zelfde patroon als
+  offerte-index) + in-memory laag; route geeft deelresultaat + `nogTeLaden` en de pagina vraagt door (maxDuration 300).
+- Eerste bevindingen 14 dagen: Joey/Sjoerd klokken ~70-75% van de jobs echt, inmeten is structureel ~70% sneller
+  dan gepland (60 min gepland, 15-25 min echt), 7 rode afgevinkt-elders-gevallen (o.a. dubbele Outlook-sync-jobs
+  die administratief worden weggevinkt), montagebussen (Bus 1-6) klokken NIET in de app (0 afmeldingen).
+- Let op: montagebussen aan de app krijgen = grootste winst voor dit dashboard; duplicaat-jobs uit de
+  Outlook-sync vervuilen de afwijkingenlijst (opruimen = minder valse rode meldingen).
+- Aanvulling 25-08 (2): over-/minuren per week erbij. Contracturen per monteur instelbaar op de pagina
+  (Blob `personeel/contracturen-v1.json`), startwaarden uit roosters defaults.ts: Joey 21 u, Sjoerd 28 u.
+  Saldo alleen over volledige, volledig geladen weken; lege geladen week = minuren; lopende week geen oordeel.
+  Kanttekening voor interpretatie: minuren in oudere weken kunnen ook betekenen dat er toen nog niet
+  (goed) geklokt werd in de app — pas vanaf ~half aug wordt er consequent geklokt.
 
 ## 24-08: ORDERMAILS-INHAALSLAG + DAEMON HERKENT ABZ/DEFINITIEVE BEVESTIGINGEN (akkoord Daimy)
 - Vraag Daimy: waarom blijven ordermails liggen / staan ze al in de sheet? Analyse: 12 mails

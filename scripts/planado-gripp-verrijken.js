@@ -226,13 +226,61 @@ function productRegels(offerte) {
   return regels;
 }
 
+// ── RP-terugval: klant zonder Gripp-offerte → producten uit zijn RP-offerte ──
+// Match via de dagelijkse rp-export (telefoon eerst, dan naam), daarna de
+// productregels mét maten via de planner-lezer (zelfde bron als het dashboard).
+let rpItemsCache = null;
+async function rpTerugval(klantnaam, tel) {
+  try {
+    const exportPad = path.join(__dirname, '..', 'data', 'email', 'rp-export.json');
+    const d = JSON.parse(fs.readFileSync(exportPad, 'utf8'));
+    const alle = Array.isArray(d) ? d : (d.leads || d.items || Object.values(d)[0]);
+    const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    const t9 = String(tel || '').replace(/\D/g, '').slice(-9);
+    let hit = t9.length === 9 ? alle.find((x) => String(x.telefoon || '').replace(/\D/g, '').slice(-9) === t9) : null;
+    if (!hit && klantnaam && norm(klantnaam).length >= 6) {
+      const doel = norm(klantnaam);
+      hit = alle.find((x) => {
+        const n = norm(`${x.voornaam || ''} ${x.achternaam || ''}`);
+        return n.length >= 6 && (n === doel || n.includes(doel) || doel.includes(n));
+      });
+    }
+    if (!hit?.itemId) return null;
+    // board-item erbij zoeken (één keer laden per run) voor de planner-lezer
+    if (!rpItemsCache) {
+      const RP_KEY = 'reuzenpanda_cpat_WMD2KmDRune53bj7.d0_ls8loPpAjb2TrSNOS_Xd_QLdxHq1xwOC9pyyJado';
+      const B = 'edb9b0b7-b70e-4064-95b5-ec0d03357c0a';
+      const r = await fetch(`https://backend.reuzenpanda.nl/contact-service/731483fa-ef6b-4aae-afcf-883ec09219dd/boards/${B}/items`, { headers: { Authorization: 'Bearer ' + RP_KEY } });
+      rpItemsCache = (await r.json()).items || [];
+    }
+    const item = rpItemsCache.find((i) => i.id === hit.itemId);
+    if (!item) return null;
+    const planner = require('./cron-inmeten-planner.js'); // lazy: geen import-cirkel
+    const lead = await planner.leesLeadCompleet(item);
+    const regels = (lead.producten || []).map((p) => `${p.aantal || 1}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).filter(Boolean);
+    if (!regels.length) return null;
+    return { nummer: hit.offerteNummer || (lead.rpNummers || [])[0] || '?', regels };
+  } catch (e) { console.log('  rp-terugval faalde: ' + String(e.message).slice(0, 60)); return null; }
+}
+
+// Planado geeft bij drukte kale tekst ("Rate Limit Exceeded") — voorzichtig lezen.
+async function planadoJson(url) {
+  for (let poging = 0; poging < 5; poging++) {
+    const r = await fetch(url, { headers: PH });
+    const tekst = await r.text();
+    try { return JSON.parse(tekst); } catch { /* rate limit */ }
+    await wacht(15000 * (poging + 1));
+  }
+  throw new Error('Planado blijft niet-JSON geven voor ' + url.split('/v2')[1]);
+}
+
 async function main() {
   console.log(EXECUTE ? '=== VERRIJKEN (echt) ===' : '=== DRY-RUN (--execute om echt te schrijven) ===');
 
   const jobs = [];
   let after = null;
   for (let i = 0; i < 30; i++) {
-    const d = await (await fetch('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''), { headers: PH })).json();
+    const d = await planadoJson('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''));
     const l = d.jobs || [];
     if (!l.length) break;
     jobs.push(...l);
@@ -249,7 +297,7 @@ async function main() {
   const nietLijst = [];
 
   for (const j of doel) {
-    const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
+    const det = await planadoJson('https://api.planadoapp.com/v2/jobs/' + j.uuid);
     const job = det.job || det;
     await wacht(2600);
 
@@ -318,11 +366,32 @@ async function main() {
         const regels = productRegels(match.offerte);
         console.log(`  + #${job.serial_no} ${klantregel.slice(0, 34)} -> Gripp ${nr} (${match.company.searchname.slice(0, 24)}): ${regels.length} product(en)`);
         verrijkt++;
-        patch.description = `${job.description || ''}\n\nGripp: ${nr}\nIN TE METEN:\n${regels.map((r) => '- ' + r).join('\n') || '- (geen productregels gevonden — check offerte)'}\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/${nr}`;
+        // een eerder gezet RP-terugvalblok vervalt zodra de echte Gripp-offerte er is
+        const basis = String(job.description || '').split('\n\nRP-offerte:')[0];
+        patch.description = `${basis}\n\nGripp: ${nr}\nIN TE METEN:\n${regels.map((r) => '- ' + r).join('\n') || '- (geen productregels gevonden — check offerte)'}\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/${nr}`;
         patch.custom_fields = veldenVoor(nr, regels.join(' · ') || 'zie omschrijving');
+      } else if (!/\n\nRP-offerte:/.test(job.description || '')) {
+        // RP-TERUGVAL (Daimy 25-08: "in de omschrijving moet de offerte-data staan,
+        // nu staat er te vaak alleen 'motor + afstandbediening'"): winkel- en
+        // nog-niet-getekende klanten hebben nog geen Gripp-offerte, maar hun
+        // RP-offerte kent de producten mét maten wél. Beter dat dan niks.
+        const rpBlok = await rpTerugval(klantnaam, tel);
+        if (rpBlok) {
+          verrijkt++;
+          console.log(`  + #${job.serial_no} ${klantregel.slice(0, 34)} -> RP ${rpBlok.nummer}: ${rpBlok.regels.length} product(en) (nog geen Gripp)`);
+          patch.description = `${job.description || ''}\n\nRP-offerte: ${rpBlok.nummer} (nog geen Gripp-offerte)\nIN TE METEN:\n${rpBlok.regels.map((r) => '- ' + r).join('\n')}`;
+          const bestaand2 = (job.custom_fields || []).map((f) => ({ name: f.name, field_type: f.field_type, value: f.value }));
+          const i2 = bestaand2.findIndex((f) => f.name === 'In te meten');
+          const veld2 = { name: 'In te meten', field_type: 'input', value: kortVeld(rpBlok.regels.join(' · ')) };
+          if (i2 >= 0) bestaand2[i2] = veld2; else bestaand2.push(veld2);
+          patch.custom_fields = bestaand2;
+        } else {
+          nietGekoppeld++;
+          nietLijst.push(`${job.serial_no} ${klantregel.slice(0, 40)}`);
+        }
       } else {
         nietGekoppeld++;
-        nietLijst.push(`${job.serial_no} ${klantregel.slice(0, 40)}`);
+        nietLijst.push(`${job.serial_no} ${klantregel.slice(0, 40)} (RP-blok staat er al)`);
       }
     } else if (heeftGripp) alGoed++;
 

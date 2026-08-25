@@ -229,6 +229,27 @@ function productRegels(offerte) {
 // ── RP-terugval: klant zonder Gripp-offerte → producten uit zijn RP-offerte ──
 // Match via de dagelijkse rp-export (telefoon eerst, dan naam), daarna de
 // productregels mét maten via de planner-lezer (zelfde bron als het dashboard).
+// RP-leadtekst heeft specs als subregels ("1x Rolluik:\n- framekleur: RAL 7016\n- hoogte:
+// 1501.0\n- breedte: 1500.0") — zonder deze lezing bleef er alleen "1x Rolluik" over
+// en dat was precies Daimy's klacht ("motor + afstandbediening zegt niks").
+function regelsUitLeadTekst(tekst) {
+  const uit = [];
+  for (const b of String(tekst || '').split(/\n(?=\d+x )/)) {
+    const m = b.match(/^(\d+)x ([^:\n]+):?/);
+    if (!m) continue;
+    const naam = m[2].trim();
+    if (/inclusief montage|^montage\b|bezorging|transport/i.test(naam)) continue;
+    const br = (b.match(/breedte[^:\n]*:\s*([\d.]+)/i) || [])[1];
+    const ho = (b.match(/hoogte[^:\n]*:\s*([\d.]+)/i) || [])[1];
+    const kleur = (b.match(/(?:frame)?kleur[^:\n]*:\s*([^\n]{2,40})/i) || [])[1]?.trim();
+    const bed = (b.match(/bediening[^:\n]*:\s*([^\n]{2,40})/i) || [])[1]?.trim();
+    const maat = br && ho ? ` ${Math.round(br)}×${Math.round(ho)}` : br ? ` ${Math.round(br)} breed` : '';
+    const extra = [kleur, bed].filter(Boolean).join(' — ');
+    uit.push(`${m[1]}x ${naam}${maat}${extra ? ` — ${extra}` : ''}`);
+  }
+  return uit;
+}
+
 let rpItemsCache = null;
 async function rpTerugval(klantnaam, tel) {
   try {
@@ -255,11 +276,19 @@ async function rpTerugval(klantnaam, tel) {
     }
     const item = rpItemsCache.find((i) => i.id === hit.itemId);
     if (!item) return null;
-    const planner = require('./cron-inmeten-planner.js'); // lazy: geen import-cirkel
-    const lead = await planner.leesLeadCompleet(item);
-    const regels = (lead.producten || []).map((p) => `${p.aantal || 1}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).filter(Boolean);
+    // eerst de leadtekst-lezing (heeft maten/kleur/bediening in subregels), anders
+    // de planner-lezer als vangnet
+    let regels = regelsUitLeadTekst(item.description);
+    let nummer = hit.offerteNummer || '?';
+    if (!regels.some((r) => /\d{3,4}/.test(r))) {
+      const planner = require('./cron-inmeten-planner.js'); // lazy: geen import-cirkel
+      const lead = await planner.leesLeadCompleet(item);
+      const viaPlanner = (lead.producten || []).map((p) => `${p.aantal || 1}x ${p.naam}${p.breedte ? ` ${p.breedte}mm` : ''}`).filter(Boolean);
+      if (viaPlanner.some((r) => /\d{3,4}/.test(r)) || !regels.length) regels = viaPlanner;
+      nummer = hit.offerteNummer || (lead.rpNummers || [])[0] || '?';
+    }
     if (!regels.length) return null;
-    return { nummer: hit.offerteNummer || (lead.rpNummers || [])[0] || '?', regels };
+    return { nummer, regels };
   } catch (e) { console.log('  rp-terugval faalde: ' + String(e.message).slice(0, 60)); return null; }
 }
 

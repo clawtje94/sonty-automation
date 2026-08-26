@@ -1,5 +1,20 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26)
 
+## 26-08 (namiddag): HERPLAN-LUS NA KLANTKEUZE (Daimy: "bot moet dit zelf afhandelen")
+- Gat gevonden: de reply-route (aanbod OPEN) herplande al automatisch bij "ander moment",
+  maar wie via de KEUZELINK koos en daarna nog iets appte werd altijd geparkeerd — ook als
+  het bericht precies zei wanneer het wél kon (Janos/Rick/Reinhard/Jacqueline).
+- Gebouwd: naKeuzeBesluit in lib/boek-poort.js (pure beslislaag boeken/herplan/mens);
+  planner trekt bij "ander moment" het aanbod in en vraagt zelf nieuw aanbod aan met de
+  klantvoorkeur (dagen/dagdeel/vanaf + nietDeze), klant krijgt netjes bericht (NL/EN);
+  pingpong-rem 2 herplans/dag (state.herplanTeller); klacht/annuleren/ander adres → mens.
+- Annuleren-gat gedicht: intent "annuleren" gleed vóór deze fix als akkoord door magBoeken
+  (klant die na keuze afzegt zou geboekt worden). Verzendpoort: weekbudget 4 i.p.v. 2 als
+  de klant zelf om een ander moment vraagt (opVerzoek). Haiku-dagenmapping expliciet.
+- Scenario-lab: nieuw onderdeel herplan-na-keuze; totaal 4308 scenario's 0x FOUT-STIL;
+  6 echte-historie-replays allemaal juist. Commit gepusht; verzoek-daemon herstart.
+- Janos: nieuw aanbod vanaf 4 sep in de wachtrij gezet (verzoek 24b00b2c27244cc8).
+
 ## 26-08 (middag): PLANADO-BACKOFF OVERAL + MENS-NODIG PARKEREN + WERKBON-STATE (commit f1b5177)
 - Aanleiding: databot-triage 23–26/08. Planado 429 brak boeken/aanbod/syncs; werkbon-verwerker crashte
   in 93 van 186 runs; klanten op "max-voorstellen" bleven eeuwig in de retry-wachtrij (Scholten: 587

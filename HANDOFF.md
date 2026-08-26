@@ -1,5 +1,23 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26)
 
+## 26-08 (avond): SUNNY PLANT INMEETAFSPRAKEN + BOEKING-NACONTROLE (LIVE, vlag aan)
+- Daimy: "Sunny moet tijdens het gesprek gelijk kunnen inplannen en overleggen zonder templates,
+  en iedereen die geboekt wordt moet worden nagelopen; fouten wil ik weten mét oplossing."
+- Fase 1: Sunny-tool `inmeet_tijden` (lib/inmeet-tijden.js op de echte slotmotor; live getest op
+  Janos). Fase 2: `inmeet_boeken` via de mutatie-boek-route mét akkoord-citaat-guard; directe
+  boeking trekt een lopend keuzelink-aanbod automatisch in. Fase 3: bij "ander moment" neemt
+  Sunny het gesprek over (vlag `scripts/ai-ks/.inmeet-plannen-live` staat AAN); gesprek-claims
+  (lib/gesprek-claims.js, data/gesprek-claims.json, 30 min) houden aanbod-replies en de
+  laatste-woord-check van een geclaimd ticket af. Env-override INMEET_PLANNEN_LIVE=0/1 voor tests.
+- Nacontrole: cron-boeking-nacontrole.js (launchd nl.sonty.boeking-nacontrole, 30 min) checkt per
+  boeking Planado + Sonty Montage-agenda + verstuurde bevestiging; herstelt ontbrekende
+  bevestiging zelf (van Bergen + Chebon Ong meteen gevangen en hersteld); 🚨 bij echte fouten;
+  dagelijkse samenvatting via de ochtend-digest (08:20). LES: Bookings-ID ≠ Outlook-event-ID —
+  eerste run gaf 9 valse alarmen (gecorrigeerd op Telegram), agenda-check kijkt nu naar de
+  kalender zelf. Lab: 4308 scenario's 0x FOUT-STIL. Daemons sonny + inmeet-verzoeken herstart.
+- Volgende stap als er geknaagd wordt: klantreactie-lab uitbreiden met plannen-aan-scenario's
+  en de eerste echte Sunny-boekingen via de nacontrole in de gaten houden.
+
 ## 26-08 (namiddag): HERPLAN-LUS NA KLANTKEUZE (Daimy: "bot moet dit zelf afhandelen")
 - Gat gevonden: de reply-route (aanbod OPEN) herplande al automatisch bij "ander moment",
   maar wie via de KEUZELINK koos en daarna nog iets appte werd altijd geparkeerd — ook als

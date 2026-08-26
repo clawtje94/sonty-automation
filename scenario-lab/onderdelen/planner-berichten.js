@@ -139,7 +139,10 @@ async function voerUit(s) {
         const tekst = vang.wa[0] || '';
         uit.taalOk = uit.via === 'vrij' ? taalOk(tekst, taal) : true;
         uit.mailOk = r.mail.ok ? taalOk(vang.mail[0] || '', taal) : false;
-        uit.eerlijk = /eerlijk|honest/.test(tekst) || (uit.via !== 'vrij' && /eerlijk|honest/.test(vang.mail[0] || ''));
+        // "eerlijk" = de drukte benoemen i.p.v. "goed nieuws" (formulering 26-08
+        // herschreven zonder het woord eerlijk, Daimy: "kut geschreven")
+        const EERLIJK = /eerste moment|first moment|extra druk|extra busy/;
+        uit.eerlijk = EERLIJK.test(tekst) || (uit.via !== 'vrij' && EERLIJK.test(vang.mail[0] || ''));
         uit.herhaling = /even een berichtje|quick follow-up/.test(tekst);
         uit.aanhef = /dank voor je bericht|thanks for your message/i.test(tekst);
       } else if (soort === 'bevestiging-boeking') {

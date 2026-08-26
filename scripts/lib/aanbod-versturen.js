@@ -100,8 +100,8 @@ function opening(voornaam, slots, taal = 'nl') {
   const wekenWeg = eerste ? (eerste - Date.now()) / (7 * 86400000) : 0;
   if (wekenWeg >= 3) {
     return taal === 'en'
-      ? `Hi ${voornaam}, I'll be honest: it's busier than we'd like (summer holidays and the construction break), so this is the first moment I can offer you for the measuring`
-      : `Hoi ${voornaam}, ik ben eerlijk: het is drukker dan we zouden willen (bouwvak en vakanties), dus dit is het eerste moment dat ik je kan aanbieden om in te meten`;
+      ? `Hi ${voornaam}, we'd love to come by and measure. It's extra busy at the moment (summer holidays and the construction break), so this is the first moment we can offer you`
+      : `Hoi ${voornaam}, we komen graag bij je langs om in te meten. Het is op dit moment extra druk (bouwvak en vakanties), dus dit is het eerste moment dat we je kunnen aanbieden`;
   }
   return taal === 'en'
     ? `Hi ${voornaam}, good news: we can come by to measure`
@@ -329,19 +329,27 @@ async function stuurMail(aanbod, url) {
     : 24;
 
   const taal = taalVan(aanbod.lead);
-  // zelfde eerlijke opening als WhatsApp: vanaf 3 weken geen "goed nieuws" meer
+  // zelfde opening als WhatsApp: vanaf 3 weken geen "goed nieuws" meer
   const kop = opening(voornaam, aanbod.slots, taal).replace(/^(Hoi|Hi) [^,]+, /, '');
+  // DE TIJD HOORT OOK IN DE MAIL (Daimy 26-08: "de tijd wanneer we willen komen
+  // staat er niet in, niks"): het concrete moment staat in de tekst zelf, de knop
+  // is alleen nog het bevestig-/kiesmiddel.
+  const slotLijst = (aanbod.slots || []).filter((sl) => sl && sl.aankomst);
+  const een = slotLijst.length === 1;
+  const wanneerMail = slotLijst.map((sl) => `<b>${slotTekst(sl, taal)}</b>`).join(taal === 'en' ? ' or ' : ' of ');
   const html = taal === 'en'
     ? `<p>Hi ${voornaam},</p>
-<p>${kop.charAt(0).toUpperCase() + kop.slice(1)} (takes about ${aanbod.duurMin} minutes).${verWegRegel(aanbod.ver === true, 'en')}</p>
-<p><a href="${url}" style="display:inline-block;background:#F97316;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:bold">Choose your measuring slot</a></p>
-<p>The times are held for you for ${geldigUren} hours. If choosing doesn't work, simply reply to this e-mail.</p>
+<p>${kop.charAt(0).toUpperCase() + kop.slice(1)}.${verWegRegel(aanbod.ver === true, 'en')}</p>
+<p>${een ? 'Our proposal' : 'These moments are available'}: ${wanneerMail} (takes about ${aanbod.duurMin} minutes).</p>
+<p><a href="${url}" style="display:inline-block;background:#F97316;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:bold">${een ? 'Confirm this moment' : 'Choose your measuring slot'}</a></p>
+<p>${een ? `Does it suit you? Simply replying "yes" to this e-mail works too. The time is held for you for ${geldigUren} hours.` : `The times are held for you for ${geldigUren} hours. If choosing doesn't work, simply reply to this e-mail.`}</p>
 <p>Good to know: our surveyor drives a route, so it can sometimes be an hour earlier or later than the chosen time. If so, we'll let you know.</p>
 <p>Kind regards,<br>Nanny from Sonty</p>`
     : `<p>Hoi ${voornaam},</p>
-<p>${kop.charAt(0).toUpperCase() + kop.slice(1)} (duurt ongeveer ${aanbod.duurMin} minuten).${verWegRegel(aanbod.ver === true)}</p>
-<p><a href="${url}" style="display:inline-block;background:#F97316;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:bold">Kies je inmeetmoment</a></p>
-<p>De tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, beantwoord dan gewoon deze mail.</p>
+<p>${kop.charAt(0).toUpperCase() + kop.slice(1)}.${verWegRegel(aanbod.ver === true)}</p>
+<p>${een ? 'Ons voorstel' : 'Deze momenten kunnen we aanbieden'}: ${wanneerMail} (duurt ongeveer ${aanbod.duurMin} minuten).</p>
+<p><a href="${url}" style="display:inline-block;background:#F97316;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:bold">${een ? 'Zet dit moment vast' : 'Kies je inmeetmoment'}</a></p>
+<p>${een ? `Past het? Gewoon "ja" terugmailen werkt ook. De tijd staat ${geldigUren} uur voor je vast.` : `De tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, beantwoord dan gewoon deze mail.`}</p>
 <p>Goed om te weten: onze inmeter rijdt een route, dus het kan soms een uur eerder of later worden dan het gekozen moment. Als dat zo is laten we het je even weten.</p>
 <p>Groetjes,<br>Nanny van Sonty</p>`;
   const r2 = await tFetch(`/tickets/${nieuw.id}/messages`, {

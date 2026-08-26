@@ -1,5 +1,34 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-25)
 
+## 26-08: MEETBON-KETEN LIVE — OFFERTE IN GRIPP BIJWERKEN → PDF → TEKENEN → AANBETALING 40% (opdracht Daimy /goal)
+- Doel Daimy: meetbon klaar → Gripp-offerte aanpassen naar de meetbon (incl. prijs) → PDF in de
+  app → klant tekent vanuit de app, of versturen → na handtekening direct aanbetalingsfactuur 40%.
+- GEBOUWD (sonty-website, commit ec39efe, live op sonty-website.vercel.app):
+  lib/meetbon/prijs.ts (meetbon-product → prijsmotor + Gripp-productnr + omschrijving),
+  lib/meetbon/gripp-sync.ts (regels IN PLAATS via offerprojectline.*, nummer blijft; status;
+  aanbetaling), lib/meetbon/keten.ts (handtekening → factuur definitief + mail, idempotent),
+  API /api/meetbon/bon/[nr]/offerte (GET voorstel, POST bijwerken|versturen|check),
+  /pdf (Gripp-PDF doorgeven), /keten (daemon). UI: paneel "Offerte in Gripp" in de meetbon
+  na "Meetbon afronden" (stap 1 prijzen/regels met handmatige prijs voor onprijsbare producten,
+  stap 2 PDF, stap 3 tekenen in Gripp-viewer (iframe/nieuw tabblad) of mailen, stap 4 getekend +
+  aanbetaling). Dashboard toont de ketenstand.
+- Daemon: scripts/cron-meetbon-keten.js, launchd nl.sonty.meetbon-keten elke 5 min → POST
+  /api/meetbon/keten → getekend? → factuur 40% (invoice.create status 1 → update status 3) + mail
+  via Trengo aanvragen@ → Telegram. Bestaande doorzet-daemon (aanbetaling betaald → orders@) blijft.
+- Gripp-API feiten (memory gripp-api-schrijven): offer.update met offerlines-array werkt NIET,
+  offerprojectline.create/update/delete wel; invoice.create eist templateset 2 + status; GEEN
+  mail-API en project.number readonly (offerte→opdracht blijft handwerk in Gripp).
+- GETEST: scenario-lab scripts/tests/meetbon-keten-lab.ts 4040 scenario's 0x fout-stil (motorprijs
+  per prijsbaar product echt vergeleken); E2E op productie tegen testofferte 6556 (Daimy TEST GRIP):
+  regel 51035 in plaats bijgewerkt €800→€1047,27 excl, montage opnieuw, marker in opmerkingen,
+  PDF 175 KB, mail naar daimyboot@gmail.com, status Verzonden; iPhone 12 screenshot OK.
+- NIET GETEST (wacht op Daimy, V2 op Telegram): handtekening → definitieve aanbetalingsfactuur
+  (maakt een écht factuurnummer in de boekhouding, ook op de testklant). Eerste echte geval samen
+  doen (regel eerst-1-dan-rest). Ook nog niet: mail-pad van de factuur in het echt.
+- Open: testbon 6556 staat in het meetbon-dashboard (Daimy TEST GRIP), testofferte 6556/id 9207
+  in Gripp mag weg na de tekentest. Producten zonder prijsmotor (binnenzonwering, gordijnen, velux,
+  maatwerk, Zipscreen 130, gekoppeld uitvalscherm) → prijs handmatig in de app (incl. btw).
+
 ## 25-08 (3): OUTLOOK-SYNC MAAKTE DUPLICAAT-JOBS NA AFMELDEN — GEFIXT (melding Daimy via dashboard)
 - Symptoom (Daimy): elke keer als Joey een opdracht voltooide kwam hij opnieuw in Planado.
 - Oorzaak: in cron-outlook-planado-sync.js liep de dedup op starttijd+inmeter alleen over TOEKOMSTIGE

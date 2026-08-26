@@ -19,7 +19,11 @@
 - OOK GEFIXT (sonty-website 669bbdd): fallback-mapping "ZIP Pergola zonwering"/"ZIP bovenliggende" kreeg
   via "zip" de zipscreen-tabel (resolve.ts + configurator/submit). offerte-tool-parity-test.mts is een
   verouderde v4-kopie (62.133 schijn-mismatches) → gemarkeerd; nieuwe scripts/configurator-motor-pariteit.mts.
-- OPEN, WACHT OP DAIMY (Telegram V1/V2): productpagina's/keuzegids (configurator-motor) ≠ offerte-motor op
+- V1 LIVE (27-08, Daimy in chat: "kun je alles naar de juiste prijzen gaan zetten"): branch prijs-gelijk-aan-offerte
+  gemerged (0ddadd2): calculatePrice() rekent eerst via berekenPrijs; productpagina/keuzegids = offerte (matrix 171/198,
+  rest = Windvast/V2). Live-meetlat 8/8, keuzegids rolluiken toont €757/€195/€175 = motor. V2 (Windvast Square 85 vs
+  Design 110) nog open.
+- (was) OPEN, WACHT OP DAIMY (Telegram V1/V2): productpagina's/keuzegids (configurator-motor) ≠ offerte-motor op
   tussenmaten (bilineair vs volgende tabelmaat; S-37 150×250 site €1.260 / offerte €1.314), markies montage
   €195 vs €275 en motor +696 vs +753, uitvalschermen tot 17% (Sunproject 250×100 €1.568 vs €1.926).
   V2: "Windvast" = Zip Square 85 (pagina) of Zip Design 110 (offerte/VARIANT_MAP)? Pas na akkoord aanpassen

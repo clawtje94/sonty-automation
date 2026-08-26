@@ -105,10 +105,22 @@ function opening(voornaam, slots, taal = 'nl') {
 }
 
 function berichtTekst(voornaam, url, duurMin, geldigUren = 24, ver = false, slots = null, taal = 'nl') {
+  // DE TIJD HOORT IN HET BERICHT (Daimy 26-08: "in het bericht staat helemaal niet
+  // wanneer het is en hoe laat"). Wie op zijn telefoon een appje krijgt wil meteen zien
+  // welk moment het is, niet eerst een link openen. Bij één moment vragen we gewoon of
+  // het past; bij meer noemen we ze en dient de link om te kiezen.
+  const lijst = (slots || []).filter((sl) => sl && sl.aankomst);
+  const wanneer = lijst.map((sl) => slotTekst(sl, taal)).join(taal === 'en' ? ' or ' : ' of ');
   if (taal === 'en') {
-    return `${opening(voornaam, slots, 'en')} (takes about ${duurMin} minutes).${verWegRegel(ver, 'en')} Pick the time that suits you best here:\n\n${url}\n\nThe times are held for you for ${geldigUren} hours. If choosing doesn't work, just reply to this message.\n\n${GROET.en}`;
+    if (lijst.length === 1) {
+      return `${opening(voornaam, slots, 'en')}: ${wanneer} (takes about ${duurMin} minutes).${verWegRegel(ver, 'en')} Does that work for you? Reply "yes" and I'll lock it in, or pick another time here:\n\n${url}\n\nThe time is held for you for ${geldigUren} hours.\n\n${GROET.en}`;
+    }
+    return `${opening(voornaam, slots, 'en')}${wanneer ? `: ${wanneer}` : ''} (takes about ${duurMin} minutes).${verWegRegel(ver, 'en')} Pick the time that suits you best here:\n\n${url}\n\nThe times are held for you for ${geldigUren} hours. If choosing doesn't work, just reply to this message.\n\n${GROET.en}`;
   }
-  return `${opening(voornaam, slots)} (duurt ongeveer ${duurMin} minuten).${verWegRegel(ver)} Kies hier de tijd die jou het beste uitkomt:\n\n${url}\n\nDe tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, stuur dan gewoon een berichtje terug.\n\n${GROET.nl}`;
+  if (lijst.length === 1) {
+    return `${opening(voornaam, slots)}: ${wanneer} (duurt ongeveer ${duurMin} minuten).${verWegRegel(ver)} Past dat bij je? Antwoord dan gewoon "ja", dan zet ik het vast. Past het niet, kies hier een andere tijd:\n\n${url}\n\nDe tijd staat ${geldigUren} uur voor je vast.\n\n${GROET.nl}`;
+  }
+  return `${opening(voornaam, slots)}${wanneer ? `: ${wanneer}` : ''} (duurt ongeveer ${duurMin} minuten).${verWegRegel(ver)} Kies hier de tijd die jou het beste uitkomt:\n\n${url}\n\nDe tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, stuur dan gewoon een berichtje terug.\n\n${GROET.nl}`;
 }
 
 /** HERHAALD VOORSTEL (opvolging ronde 2). Mirjam kreeg 19-08 en 20-08 twee keer exact

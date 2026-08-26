@@ -1,4 +1,19 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26, prijsreview)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26, prijsreview + planner)
+
+## 26-08 (avond 2, planner): TEMPLATE ROUTE-V3 + MENS-ACTIEF 1,5U + HENSING-LES + LAATSTE-WOORD-FIX
+- Hensing-zaak: keuzelink-klik is geen appje → oud "Ander moment" werd als afwijzing van de
+  NIEUWE keuze gelezen; haar gekozen 28 sep 11:10 (Joey) alsnog geboekt + bevestigd, en
+  structureel gefixt met laatsteWoordNa() (alleen berichten ná verstuurdOp tellen; lab-dimensie).
+- Ver-weg-tekst neutraal gemaakt (zegt niets meer over waar de klant woont); nieuwe WhatsApp-
+  template #248773 "inmeetmomentver route v3" ingediend bij Meta, template-wachter fase 4 sluit
+  hem aan bij goedkeuring (oude marge-ver 244682 mag hem daarna niet overschrijven).
+- Verzendpoort: voorstellen mogen 1,5 uur na het laatste MENS-bericht (Daimy, geval Sem);
+  rest blijft 24u. Parallel gebouwde "luistert"-parameter (voorstel-volgt-klantwens telt niet
+  voor weeklimiet) crashte op elk voorstel — door lab gevangen (480 crashes) en gefixt.
+- 1-voorstel-met-beste-tijd: stond al aan (aantalTijden=1); misleidend "(3 tijd(en))"-log gefixt.
+- Aanbod verstuurd: Scholten (13:17), Hensing herstel-boeking, Janos (12:42), daimy-testkaart
+  (15:33, mail-only). Sem: 1e poging mens-actief; 2e in de rij na de 1,5u-regel.
+- OPEN: V7 (eerste aanbod automatisch bij nieuwe kaart — wacht op Daimy). Lab-totaal 4890.
 
 ## 26-08 (avond, laat): PRIJSREVIEW SONTY-WEBSITE — LIVE API REKENDE 23 DAGEN MET HET OUDE PEIL (gefixt)
 - Opdracht Daimy (/goal): volledige review van het systeem achter Vercel/sonty-website, alle prijzen op het

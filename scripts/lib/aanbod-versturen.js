@@ -242,10 +242,22 @@ async function stuurWhatsApp(aanbod, url) {
     const DAGNL = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
     const DAGEN_ = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const dagen = (aanbod.klantReply.dagen || []).map((d) => (taal === 'en' ? DAGEN_[d] : DAGNL[d])).filter(Boolean).join(taal === 'en' ? ' or ' : ' of ');
+    // GEEN "Hoi naam" midden in een lopend gesprek (Daimy 26-08: "je hoeft niet te
+    // openen met diegene zijn naam, zeg gewoon: geen probleem, ik heb even gekeken").
+    // Ligt het moment 3+ weken weg, dan blijft de drukte-uitleg staan (Rita-les),
+    // alleen zonder de naam-opening.
+    const druk = /eerste moment dat we je kunnen aanbieden|first moment we can offer you/i.test(vrijeTekst);
+    const drukZin = !druk ? '' : (taal === 'en'
+      ? `It's extra busy at the moment (summer holidays and the construction break), so this is the first moment I can offer you: `
+      : `Het is wel extra druk (bouwvak en vakanties), dus dit is het eerste moment dat ik je kan aanbieden: `);
     const aanhef = taal === 'en'
-      ? `Hi ${voornaam}, thanks for your message${dagen ? ` and sorry for the wait. You asked about ${dagen}: that is possible` : " and sorry for the wait. I have looked again"}. `
-      : `Hoi ${voornaam}, dank voor je bericht${dagen ? ` en sorry dat je even moest wachten. Je vroeg naar ${dagen}: dat kan` : ' en sorry dat je even moest wachten. Ik heb opnieuw gekeken'}. `;
-    vrijeTekst = aanhef + vrijeTekst.replace(/^(Hoi|Hi) [^,]+, /, '').replace(/^(goed nieuws|good news): /i, '');
+      ? `No problem, I had a look${dagen ? `. You asked about ${dagen} and that works` : ''}${druk ? '. ' : ': '}`
+      : `Geen probleem, ik heb even gekeken${dagen ? `. Je vroeg naar ${dagen} en dat kan` : ''}${druk ? '. ' : ': '}`;
+    vrijeTekst = aanhef + drukZin + vrijeTekst
+      .replace(/^(Hoi|Hi) [^,]+, /, '')
+      .replace(/^(goed nieuws: we kunnen bij je langskomen om in te meten|good news: we can come by to measure): /i, '')
+      .replace(/^(we komen graag bij je langs om in te meten\..*?eerste moment dat we je kunnen aanbieden|we'd love to come by and measure\..*?first moment we can offer you): /i, '')
+      .replace(/^(goed nieuws|good news): /i, '');
   }
   const stuurVrij = async () => {
     const ticket = await zoekWaTicket(aanbod.lead.telefoon);

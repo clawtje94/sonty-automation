@@ -109,8 +109,8 @@ function metNepBestanden(s, fn) {
   return fn().finally(() => { fs.readFileSync = origRead; fs.writeFileSync = origWrite; });
 }
 
-const isEN = (t) => /^(Hi |All set|In English)/.test(String(t).replace(/^<p>/, ''));
-const isNL = (t) => /^(Hoi |Helemaal goed)/.test(String(t).replace(/^<p>/, ''));
+const isEN = (t) => /^(Hi |All set|In English|No problem)/.test(String(t).replace(/^<p>/, ''));
+const isNL = (t) => /^(Hoi |Helemaal goed|Geen probleem)/.test(String(t).replace(/^<p>/, ''));
 const taalOk = (t, taal) => (taal === 'en' ? isEN(t) && !isNL(t) : isNL(t) && !isEN(t));
 
 // ── uitvoeren ────────────────────────────────────────────────────────────────
@@ -144,7 +144,8 @@ async function voerUit(s) {
         const EERLIJK = /eerste moment|first moment|extra druk|extra busy/;
         uit.eerlijk = EERLIJK.test(tekst) || (uit.via !== 'vrij' && EERLIJK.test(vang.mail[0] || ''));
         uit.herhaling = /even een berichtje|quick follow-up/.test(tekst);
-        uit.aanhef = /dank voor je bericht|thanks for your message/i.test(tekst);
+        // nieuwe gespreks-aanhef 26-08: geen naam, gewoon "geen probleem, ik heb even gekeken"
+        uit.aanhef = /geen probleem, ik heb even gekeken|no problem, i had a look/i.test(tekst);
       } else if (soort === 'bevestiging-boeking') {
         // pad 1: planner (na klantkeuze) → bevestigingsTekst uit de monitor, taal uit taalVan
         const t1 = monitor.bevestigingsTekst(slot, av.taalVan(l));

@@ -1,5 +1,34 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-25)
 
+## 26-08 (2): MEETBON-KETEN FIXES NA TEST DAIMY (2 aanbetalingsmails, "concept"-factuur, opmaak)
+- Daimy tekende testofferte 6556 en kreeg 2 aanbetalingsmails ("factuur ?" 13:05:09 en "factuur
+  concept" 13:05:12): de 20s-poll in de app en zijn klik liepen tegelijk (Trengo-tickets bewijzen
+  het). Maar één factuur (7446) in Gripp — zonder nummer: `invoice.update status 3` maakt NIET
+  definitief (searchname "(concept)", klant ziet factuur zonder nummer). Geen finalize-methode in de
+  API (12 namen geprobeerd). WEL: `number` is schrijfbaar → nu number = hoogste+1 + datum + status 3;
+  7446 kreeg zo 4179. Nummerreeks gecheckt: 120 laatste facturen sequentieel, geen dubbelen.
+  LET OP: Daimy laten checken dat de eerstvolgende kantoorfactuur 4180 wordt (geen botsing).
+- FIX (commit na ec39efe): vergrendeling per bon (KV set nx, 120 s) in lib/meetbon/keten.ts;
+  bedankt-mail direct na handtekening, daarna pas de factuurmail en alleen mét nummer; app polt
+  elke 20 s zolang de offerte op tekenen wacht; daemon nl.sonty.meetbon-keten elke 60 s.
+- OPMAAK: Gripp-regel nu in 6494-opmaak (Type/Breedte/Hoogte of Uitval/Montage/Bediening/Motor/
+  Motorzijde/kleuren/Overige, witregel, "Waarom dit …"-blok uit de bestaande regel behouden,
+  Garantie 3/5/7 als punten); montageregel in plaats bijgewerkt met de gangbare tekst per
+  montageproduct; plek + opmerking inmeter → interne notitie (niet op de offerte).
+- 26-08 (3, na 2e feedback Daimy): Gripp-PDF negeert <br> (ook bij 6494!) → omschrijving nu één <p>
+  per regel (PDF 6560 geverifieerd: regels, witregels, vette koppen); validity 1 (14 dagen) gezet.
+  Bedankt-mail direct na handtekening mét getekende PDF (Trengo upload/messages/multipart →
+  attachment_ids) + Gripp-link; daarna de factuurmail. Klant tekent niet meteen → offerte-mail
+  ALLEEN uit naam van de inmeter (lib/meetbon/inmeters.ts, Trengo-kanaal per inmeter via env
+  MEETBON_INMETER_KANALEN); joey@sonty.nl/sjoerd@sonty.nl zijn nog GEEN Trengo-kanalen (V3 aan
+  Daimy). Inmeter is nu een keuzelijst (Joey/Sjoerd). KV-wachtlijst meetbon:wacht zodat de
+  1-minuut-daemon niet alle bonnen leest (Vercel KV meldde 500k/500k in de build-omgeving!).
+  Test-meetbon voor Daimy: 6561 (Gripp id 9212), stap voor stap. 6560 (id 9211) staat op
+  "verstuurd", niet getekend, op de wachtlijst.
+
+- Testfacturen om te crediteren/verwijderen: 4179 (id 7446, Daimy TEST GRIP) + de factuur van
+  testofferte 6560 (E2E 2, id 9211) zodra die gedraaid is.
+
 ## 26-08: MEETBON-KETEN LIVE — OFFERTE IN GRIPP BIJWERKEN → PDF → TEKENEN → AANBETALING 40% (opdracht Daimy /goal)
 - Doel Daimy: meetbon klaar → Gripp-offerte aanpassen naar de meetbon (incl. prijs) → PDF in de
   app → klant tekent vanuit de app, of versturen → na handtekening direct aanbetalingsfactuur 40%.

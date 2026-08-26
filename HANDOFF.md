@@ -1,4 +1,30 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26, prijsreview)
+
+## 26-08 (avond, laat): PRIJSREVIEW SONTY-WEBSITE — LIVE API REKENDE 23 DAGEN MET HET OUDE PEIL (gefixt)
+- Opdracht Daimy (/goal): volledige review van het systeem achter Vercel/sonty-website, alle prijzen op het
+  nieuwe peil, ook de eigen configurator; checklist A-G in sonty-website/docs/REVIEW-prijzen-2026-08-26.md.
+- HOOFDBEVINDING: productie-KV `crm:prijsconfig` is leeg → laadPrijsConfig() gaf PRIJS_DEFAULTS
+  (lib/offerte-tool/prijsconfig.ts) met losse getallen 1,10/1,15 → zetRekenConfig() overschreef de juiste
+  JSON-waarden in de live API. Klantconfigurator (API-calls) en winkel-offertetool rekenden sinds 3 aug het
+  oude peil (Zip Design 110 300×250: €1.147 i.p.v. €1.252; SunEye 500×300: €3.983 i.p.v. €4.320; Roma zip
+  €1.994 i.p.v. €2.228). v4, Sunny, productpagina's (calculatePrice) en beide motoren-in-code stonden goed;
+  alle dagelijkse controles waren groen omdat geen enkele de productie-API aanriep.
+- FIX (sonty-website 6608720, live ±23:00, gemeten 8/8 gelijk): PRIJS_DEFAULTS leest prijsconfig.json;
+  KV-sleutel markiesBtwFactor → markiezenFactor vertaald. Impact: productie-KV "leads" bevat 1 lead (geen
+  offertes via tool/configurator sinds 3 aug), dus geen klantoffertes op het oude peil verstuurd.
+- BORGING (sonty d07bade): scripts/tests/live-api-prijspeil.js meet de productie-API (prijs +
+  configurator-prijs) tegen de motor, faalt aantoonbaar op de oude situatie (16 verschillen); stap 5 in
+  prijs-meetlat/kruiscontrole-dagelijks.js; geen-losse-opslagen.js bewaakt nu ook prijsconfig.ts.
+  Memory: feedback_live_api_meten.md.
+- OOK GEFIXT (sonty-website 669bbdd): fallback-mapping "ZIP Pergola zonwering"/"ZIP bovenliggende" kreeg
+  via "zip" de zipscreen-tabel (resolve.ts + configurator/submit). offerte-tool-parity-test.mts is een
+  verouderde v4-kopie (62.133 schijn-mismatches) → gemarkeerd; nieuwe scripts/configurator-motor-pariteit.mts.
+- OPEN, WACHT OP DAIMY (Telegram V1/V2): productpagina's/keuzegids (configurator-motor) ≠ offerte-motor op
+  tussenmaten (bilineair vs volgende tabelmaat; S-37 150×250 site €1.260 / offerte €1.314), markies montage
+  €195 vs €275 en motor +696 vs +753, uitvalschermen tot 17% (Sunproject 250×100 €1.568 vs €1.926).
+  V2: "Windvast" = Zip Square 85 (pagina) of Zip Design 110 (offerte/VARIANT_MAP)? Pas na akkoord aanpassen
+  (regel prijzen-alleen-op-verzoek). Bedieningsindicaties gridmaten SunEye/Sunbasic/Sunelite/serre kloppen.
+- Let op: gh run list toonde een parallelle deploy "Inmeetaanbod: hele dagen…" van een andere sessie.
 
 ## 26-08 (avond): SUNNY PLANT INMEETAFSPRAKEN + BOEKING-NACONTROLE (LIVE, vlag aan)
 - Daimy: "Sunny moet tijdens het gesprek gelijk kunnen inplannen en overleggen zonder templates,

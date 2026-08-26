@@ -1,5 +1,24 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26)
 
+## 26-08 (middag): PLANADO-BACKOFF OVERAL + MENS-NODIG PARKEREN + WERKBON-STATE (commit f1b5177)
+- Aanleiding: databot-triage 23–26/08. Planado 429 brak boeken/aanbod/syncs; werkbon-verwerker crashte
+  in 93 van 186 runs; klanten op "max-voorstellen" bleven eeuwig in de retry-wachtrij (Scholten: 587
+  stille retries/dag + herhaalmelding elke 6 uur, Daimy's "1x is genoeg"-klacht).
+- Gebouwd: (1) lib/planado-fetch.js — centrale fetch met 429/"Rate Limit Exceeded"-backoff, ingeplugd in
+  9 crons/libs (werkbon, planado-outlook-check, outlook-planado-sync, herinneringen, keten-zelfcontrole,
+  meetbon-doorzetten, meeneem-melding, afspraak-annuleren, inmeet-mutatie); planner had al eigen backoff.
+  (2) verzoek-daemon: max-voorstellen/stil-lijst/mens-actief zijn nu DEFINITIEF → verzoek sluit met reden,
+  geen retry-spam meer. (3) verzend-poort logt mens-nodig naar data/mens-nodig-log.jsonl;
+  cron-mens-nodig-digest.js bundelt dagelijks 08:20 (launchd nl.sonty.mens-nodig-digest, geladen).
+  (4) data/werkbon-verwerkt.json aangemaakt met vanaf=2026-08-20 (ontbrak → reset per run → eerder
+  geplande klussen werden stil overgeslagen). Werkbon-testrun draait weer foutloos.
+- Daemon nl.sonty.inmeet-verzoeken herstart voor de nieuwe code.
+- LET OP / openstaand: (a) montageteams ronden opdrachten in Planado NIET af — 16 bus-opdrachten van
+  21-08 stonden op 24-08 (cachedatum) nog op "published"; hele werkbon-flow blijft leeg tot de monteurs
+  op afronden drukken → menselijke actie/instructie nodig. (b) Handmatig oppakken: Scholten, Boom-Looij,
+  Van Leeuwen, Hensing, Kranenburg (max-voorstellen) + Fazekas/Hensing (niet geboekt na keuze) + bevestiging
+  checken van Bergen. (c) Luuk Post hangt sinds 13-08 op "Gripp invullen" (dagelijks "1 mislukt"-melding).
+
 ## 26-08: BOEK-CASCADE GEFIXT (Astrid Verkaaik + Chebon Ong) — halve boekingen, vals "bezet", 3 hangende klanten
 - Melding Daimy: "Inmeetafspraak Astrid Verkaaik kon NIET via Bookings (geen mailadres)". Werkelijke keten:
   verwerker crashte halverwege op Planado 429 (mede door dashboard-cacheverkeer 25-08) → halve boeking bleef

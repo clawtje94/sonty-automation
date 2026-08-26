@@ -26,6 +26,7 @@ const BEWAAKT = [
   [ROOT, 'scripts/roma-duo-offerte.js'],
   [ROOT, 'scripts/cron-prijs-steekproef.js'],
   [WEBSITE, 'lib/offerte-tool/pricing.ts'],
+  [WEBSITE, 'lib/offerte-tool/prijsconfig.ts'],   // KV-defaults: stonden 2026-08-26 nog op 1,10/1,15 en wonnen live van de JSON
   [WEBSITE, 'lib/configurator/pricing.ts'],
 ];
 

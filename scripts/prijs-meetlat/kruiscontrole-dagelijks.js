@@ -52,6 +52,14 @@ catch (e) {
 
 // 5. De Vercel KV-override wint op de live website; die moet gelijk zijn aan het bestand
 (async () => {
+  // Stap 5 (sinds 2026-08-26): de PRODUCTIE-API zelf meten. De KV-check hieronder leest de lokale
+  // .env-KV (niet de productie-KV) en nam aan dat een lege KV betekent dat het bestand wint. Dat
+  // klopte niet: PRIJS_DEFAULTS in prijsconfig.ts won, en die stond 23 dagen op het oude peil.
+  try { execFileSync(process.execPath, [path.join(ROOT, "scripts/tests/live-api-prijspeil.js")], { stdio: "pipe", timeout: 180000 }); }
+  catch (e) {
+    const uit = String((e.stdout || "") + (e.stderr || "")).split("\n").filter((l) => l.startsWith("❌")).slice(0, 8).join("\n");
+    problemen.push("De live site rekent andere bedragen dan de motor in de code:\n" + uit);
+  }
   try {
     const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/prijsconfig.json'), 'utf8'));
     const env = Object.fromEntries(fs.readFileSync(path.join(WEB, '.env.local'), 'utf8')

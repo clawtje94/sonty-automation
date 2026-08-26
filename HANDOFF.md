@@ -14,6 +14,9 @@
 - Aanbod verstuurd: Scholten (13:17), Hensing herstel-boeking, Janos (12:42), daimy-testkaart
   (15:33, mail-only). Sem: 1e poging mens-actief; 2e in de rij na de 1,5u-regel.
 - OPEN: V7 (eerste aanbod automatisch bij nieuwe kaart — wacht op Daimy). Lab-totaal 4890.
+- NIEUW: cron-planning-overzicht.js — dagelijks 17:30 bundel op de data-bot (aanbiedingen,
+  boekingen met bron, herplanningen, wachtlijst met ❗ bij 3+ dagen zonder lopend aanbod);
+  launchd nl.sonty.planning-overzicht. Eerste editie 26-08: 12 aanbiedingen, 9 boekingen.
 
 ## 26-08 (avond, laat): PRIJSREVIEW SONTY-WEBSITE — LIVE API REKENDE 23 DAGEN MET HET OUDE PEIL (gefixt)
 - Opdracht Daimy (/goal): volledige review van het systeem achter Vercel/sonty-website, alle prijzen op het

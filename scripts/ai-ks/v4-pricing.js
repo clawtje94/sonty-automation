@@ -107,6 +107,10 @@ function prijsIndicatie({ product, breedteMM, hoogteMM, uitvalMM, bediening = 'i
   // rekenen en de klant onnodig op een collega moest wachten.
   const wilZonderZip = /zonder\s*zip|niet[-\s]?windvast|basis|basic|gewoon|kaal|normaal/.test(zoek) && /screen/.test(zoek);
   let productKey = wilZonderZip ? 'screenSquare85100' : api.getProductKey(zoek);
+  // REGEL Daimy 2026-08-27: een windvast/zip-screen ALTIJD als Zip Design 110 aanprijzen (zoals de
+  // configurator, de offerte en de productpagina). getProductKey stuurde een kale "zipscreen" naar
+  // Zip Square 85/100, waardoor de bot een lagere indicatie gaf dan de offerte die daarna volgt.
+  if (!wilZonderZip && /zip/.test(zoek) && !/square|carr/.test(zoek)) productKey = 'zipDesign110';
   if (!productKey) return { error: 'Onbekend product: ' + product + '. Bekende producten: zonneschermen (SunEye/SunBasic/SunElite), screens (Zip Design/Zip Square), rolluiken (S-37/S-42), uitvalschermen (SunCube/SunProject), serre zonwering (SunControl), pergola.' };
 
   const b = breedteMM ? breedteMM / 10 : null;

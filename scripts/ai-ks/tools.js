@@ -166,6 +166,19 @@ const TOOL_DEFS = [
     },
   },
   {
+    name: 'inmeet_annuleren',
+    description: 'Annuleert de GEBOEKTE inmeetafspraak van deze klant definitief, over alle systemen (agenda, Planado, administratie). Alleen gebruiken als de klant in dit gesprek EXPLICIET zegt dat hij de afspraak wil annuleren (niet verzetten — wil hij een ander moment, gebruik dan inmeet_tijden). De klant krijgt automatisch een nette annuleringsbevestiging uit de keten; zeg zelf alleen dat je het nu regelt.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        klantNaam: { type: 'string' },
+        telefoon: { type: 'string', description: 'Telefoonnummer van de klant (uit het gesprek/klant_opzoeken)' },
+        annuleerCitaat: { type: 'string', description: 'LETTERLIJK citaat uit het laatste klantbericht waarin hij annuleert ("annuleer mijn afspraak maar", "ik zie er vanaf"). Geen citaat = niet annuleren: vraag eerst of hij echt wil annuleren of liever een ander moment wil.' },
+      },
+      required: ['klantNaam', 'telefoon', 'annuleerCitaat'],
+    },
+  },
+  {
     name: 'showroom_beschikbaarheid',
     description: 'Haal de vrije tijden op voor een showroomafspraak (Frijdastraat 8F, 2288 EX Rijswijk — 45 minuten, dinsdag t/m zaterdag). Gebruik dit zodra een klant naar de showroom/winkel wil komen: vraag eerst naar welke dag de voorkeur uitgaat, en stel daarna 2-3 concrete tijden uit deze lijst voor. Noem NOOIT tijden uit je hoofd.',
     input_schema: {
@@ -473,6 +486,29 @@ function raaktAnderPrijsboek(ctx, input) {
       });
     } catch (e) {
       return JSON.stringify({ status: 'FOUT', opmerking: 'Tijden zoeken lukte niet (' + String(e.message).slice(0, 100) + '). Beloof geen tijden; zeg dat je het uitzoekt en roep escaleren_naar_mens aan.' });
+    }
+  }
+  if (name === 'inmeet_annuleren') {
+    if (!inmeetPlannenAan()) return JSON.stringify({ status: 'NOG NIET BESCHIKBAAR', opmerking: 'Zeg dat een collega de annulering oppakt en roep escaleren_naar_mens aan.' });
+    const normA = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    const citA = normA(input.annuleerCitaat);
+    const klantTekstA = (ctx.klantTeksten || []).map(normA).join(' | ');
+    const matchtA = citA && (klantTekstA.includes(citA) || klantTekstA.includes(citA.slice(0, 15)));
+    if ((CFG.MODE === 'live' || ctx.liveTest) && (!citA || (!matchtA && citA.length >= 12))) {
+      return JSON.stringify({ status: 'GEBLOKKEERD', opmerking: 'Het annuleerCitaat staat niet in een klantbericht van dit gesprek. Annuleer NIETS; vraag eerst duidelijk of hij echt wil annuleren.' });
+    }
+    if (CFG.MODE !== 'live' && !ctx.liveTest) {
+      return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — NIET geannuleerd)', opmerking: 'Er is niets geannuleerd. Zeg dat een collega het oppakt.' });
+    }
+    try {
+      const rA2 = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': process.env.MEETBON_CODE || '2288' },
+        body: JSON.stringify({ type: 'annuleer', naam: input.klantNaam, telefoon: input.telefoon, bron: 'sunny', reden: 'klant annuleerde in het gesprek: ' + String(input.annuleerCitaat).slice(0, 120) }),
+      });
+      if (!rA2.ok) throw new Error('wachtrij HTTP ' + rA2.status);
+      return JSON.stringify({ status: 'IN UITVOERING', opmerking: 'De annulering loopt nu over alle systemen; de klant krijgt automatisch de annuleringsbevestiging. Zeg: "geen probleem, ik annuleer hem nu voor je — je krijgt zo de bevestiging". Beloof verder niets.' });
+    } catch (e) {
+      return JSON.stringify({ status: 'FOUT', opmerking: 'Annuleren in de wachtrij zetten lukte niet (' + String(e.message).slice(0, 80) + '). Zeg dat een collega het direct oppakt en roep escaleren_naar_mens aan.' });
     }
   }
   if (name === 'inmeet_boeken') {

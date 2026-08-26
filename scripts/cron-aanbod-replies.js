@@ -37,6 +37,15 @@ function leesKeuze(tekst, slots) {
     // ook Engels (Fatih 21-08: Engelstalige klanten antwoorden "that works"/"yes")
     const twijfel = /ander(e)? (moment|tijd|dag|datum)|past (mij |ons )?niet|kan (dan |echt )?niet|lukt (dan |echt )?niet|liever|helaas|verzetten|verplaatsen|annuleer|another (moment|time|day|date|slot)|different (day|time|date)|doesn'?t (work|suit)|does not (work|suit)|can'?t (make|do)|cannot (make|do)|rather|prefer|cancel|reschedule|not possible|unfortunately/i;
     if (twijfel.test(t)) return null;
+    // "oke doe dan maar dinsdag" op een donderdag-aanbod is GEEN akkoord op donderdag
+    // (Daimy's test 26-08: de verwerker boekte de verkeerde dag). Noemt het bericht
+    // een weekdag die niet bij dit ene slot past, dan is dit geen keuze voor dit slot.
+    const EN_DAGEN = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const slotDag = new Date(slots[0].aankomst).getDay();
+    for (let d2 = 0; d2 < 7; d2++) {
+      if (d2 === slotDag) continue;
+      if (new RegExp(`\\b(${DAGEN[d2]}|${DAGK[d2]}|${EN_DAGEN[d2]})\\b`, 'i').test(t)) return null;
+    }
     // ONVREDE WINT ALTIJD (Daimy 09-08, geval Rita van Schagen). Zij schreef:
     // "Ja doe dat maar. Maar ik had het wel op prijs gesteld dat je dit eerlijk zou
     // zeggen. Sorry maar van 3 naar 6 weken vind ik wel veel." Dat werd als een
@@ -372,6 +381,13 @@ async function main() {
           .map((x) => String(x.body_plain || x.message || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim())
           .filter(Boolean).join('\n').slice(0, 800);
 
+        // Fase 3 (26-08): heeft Sunny dit gesprek geclaimd (hij overlegt zelf over
+        // tijden en boekt), dan blijft deze route er HELEMAAL vanaf — ook van de
+        // keuze-uitlezing. Daimy's test: zijn "oke doe dan maar dinsdag" (antwoord
+        // op Sunny's tijden) werd hier als keuze op het oude aanbod gelezen en hij
+        // werd op de verkeerde donderdag geboekt. Niet markeren: claim verlopen
+        // zonder resultaat = volgende run pakt het gewoon op.
+        if (require('./lib/gesprek-claims.js').geclaimd(ticketId, 30)) continue;
         // WhatsApp-keuze automatisch doorvoeren (alleen op een nog OPEN aanbod)
         if (statusPer[token] === 'open') {
           try {
@@ -407,11 +423,6 @@ async function main() {
         // zijn bericht was gemeld, maar niemand deed er iets mee). Zolang het aanbod
         // openstaat pakken we hem alsnog op; de eigen vlag voorkomt dubbel werk.
         const afgehandeldSleutel = 'afgehandeld:' + sleutel;
-        // Fase 3 (26-08): heeft Sunny dit gesprek net geclaimd (hij overlegt zelf over
-        // tijden en boekt), dan blijft deze route eraf — nooit twee botten door elkaar.
-        // We markeren NIET als afgehandeld: verloopt de claim zonder resultaat, dan
-        // pakt de volgende run het gewoon weer op.
-        if (require('./lib/gesprek-claims.js').geclaimd(ticketId, 30)) continue;
         if (statusPer[token] === 'open' && !gemeld[afgehandeldSleutel] && tekst) {
           gemeld[afgehandeldSleutel] = new Date().toISOString();
           try {

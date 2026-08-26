@@ -1906,7 +1906,11 @@ async function verwerkDashboardVerzoek(m) {
   await verwijderRekenKaart(item.id);
   try {
     const inst2 = await require('./lib/instellingen.js').haalInstellingen();
-    if (inst2.bevestigingSturen) {
+    // Bot-boekingen (sunny/klant-reply/herstel) bevestigen ALTIJD direct — de klant
+    // staat niet aan de balie en stilte na een boeking is de foute uitkomst. De
+    // instelling bevestigingSturen blijft alleen de winkel-kliks besturen (26-08:
+    // daimy's boeking kreeg pas 20 min later via de nacontrole een bevestiging).
+    if (inst2.bevestigingSturen || ['sunny', 'klant-reply', 'herstel-keuze'].includes(m.bron)) {
       const { verstuurBevestiging } = require('./lib/aanbod-versturen');
       await verstuurBevestiging({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin: duur }, { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter });
     }

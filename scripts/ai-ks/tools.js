@@ -174,8 +174,9 @@ const TOOL_DEFS = [
         klantNaam: { type: 'string' },
         telefoon: { type: 'string', description: 'Telefoonnummer van de klant (uit het gesprek/klant_opzoeken)' },
         annuleerCitaat: { type: 'string', description: 'LETTERLIJK citaat uit het laatste klantbericht waarin hij annuleert ("annuleer mijn afspraak maar", "ik zie er vanaf"). Geen citaat = niet annuleren: vraag eerst of hij echt wil annuleren of liever een ander moment wil.' },
+        reden: { type: 'string', description: 'Waarom de klant annuleert, in de woorden van de klant (vraag dit eerst als hij het nog niet zei). Weigert hij een reden te geven, vul dan "geen reden gegeven" in.' },
       },
-      required: ['klantNaam', 'telefoon', 'annuleerCitaat'],
+      required: ['klantNaam', 'telefoon', 'annuleerCitaat', 'reden'],
     },
   },
   {
@@ -503,7 +504,7 @@ function raaktAnderPrijsboek(ctx, input) {
     try {
       const rA2 = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
         method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': process.env.MEETBON_CODE || '2288' },
-        body: JSON.stringify({ type: 'annuleer', naam: input.klantNaam, telefoon: input.telefoon, bron: 'sunny', reden: 'klant annuleerde in het gesprek: ' + String(input.annuleerCitaat).slice(0, 120) }),
+        body: JSON.stringify({ type: 'annuleer', naam: input.klantNaam, telefoon: input.telefoon, bron: 'sunny', reden: 'klant annuleerde in het gesprek. Reden: ' + String(input.reden || 'geen reden gegeven').slice(0, 150) + ' — citaat: ' + String(input.annuleerCitaat).slice(0, 100) }),
       });
       if (!rA2.ok) throw new Error('wachtrij HTTP ' + rA2.status);
       return JSON.stringify({ status: 'IN UITVOERING', opmerking: 'De annulering loopt nu over alle systemen; de klant krijgt automatisch de annuleringsbevestiging. Zeg: "geen probleem, ik annuleer hem nu voor je — je krijgt zo de bevestiging". Beloof verder niets.' });

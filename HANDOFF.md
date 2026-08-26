@@ -38,6 +38,9 @@
   gemerged (0ddadd2): calculatePrice() rekent eerst via berekenPrijs; productpagina/keuzegids = offerte (matrix 171/198,
   rest = Windvast/V2). Live-meetlat 8/8, keuzegids rolluiken toont €757/€195/€175 = motor. V2 (Windvast Square 85 vs
   Design 110) nog open.
+- 27-08 ±18:20 AFGEROND: markies-motor site 696→753 (× markiezenFactor, da2aa9c); eindmeting alle dienstenpagina's =
+  motor (rest = montage/accessoires v4-eindbedragen, ROMA via vanafPrijs). LET OP: pushes naar main triggerden 3x geen
+  deploy-run → `gh workflow run deploy.yml --ref main` + `gh run watch`. Alleen V2 (Windvast Square 85 vs Design 110) open.
 - (was) OPEN, WACHT OP DAIMY (Telegram V1/V2): productpagina's/keuzegids (configurator-motor) ≠ offerte-motor op
   tussenmaten (bilineair vs volgende tabelmaat; S-37 150×250 site €1.260 / offerte €1.314), markies montage
   €195 vs €275 en motor +696 vs +753, uitvalschermen tot 17% (Sunproject 250×100 €1.568 vs €1.926).

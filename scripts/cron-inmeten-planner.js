@@ -1415,13 +1415,51 @@ async function verwerkAanbiedingen() {
           if (tekstK) {
             const { leesReactie } = require('./lib/planning-antwoord.js');
             const duiding = await leesReactie(tekstK, a.slots);
-            // De regel zelf staat in lib/boek-poort.js, zodat het gesprek-lab exact
-            // dezelfde beslissing test als die hier valt.
-            const { magBoeken } = require('./lib/boek-poort.js');
-            const poort = magBoeken(duiding, tekstK, a.lead.volledigAdres);
-            if (!poort.mag) {
+            // De regel zelf staat in lib/boek-poort.js, zodat het scenario-lab exact
+            // dezelfde beslissing test als die hier valt (onderdeel herplan-na-keuze).
+            const { naKeuzeBesluit } = require('./lib/boek-poort.js');
+            const vandaagStr = new Date().toISOString().slice(0, 10);
+            const teller = (state.herplanTeller || {})[a.lead.rpItemId];
+            const herplansVandaag = teller?.datum === vandaagStr ? teller.n : 0;
+            const besluit = naKeuzeBesluit(duiding, tekstK, a.lead.volledigAdres, { herplansVandaag });
 
-              console.log(`  ✋ ${a.lead.naam}: ${poort.reden} — NIET boeken (${duiding.samenvatting})`);
+            if (besluit.actie === 'herplan') {
+              // HERPLAN-LUS (Daimy 26-08: "waarom handelt de bot dit niet zelf af tot er
+              // wél een datum wordt gekozen?"). De klant vertelt wanneer het wel kan —
+              // dan sturen we zelf nieuwe tijden met die beperking, via de bestaande
+              // stuur-aanbod-route (die filtert op voorkeur en weigert afgewezen tijden).
+              console.log(`  🔁 ${a.lead.naam}: ander moment — automatisch herplannen (${duiding.samenvatting})`);
+              await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen', reden: 'klant wil een ander moment — automatisch nieuw voorstel' }) });
+              const { verwijderOpties } = require('./lib/outlook-opties.js');
+              await verwijderOpties(state.opties?.[a.token]).catch(() => {});
+              delete state.opties?.[a.token];
+              delete state.aangeboden?.[a.lead.rpItemId];
+              state.herplanTeller = state.herplanTeller || {};
+              state.herplanTeller[a.lead.rpItemId] = { datum: vandaagStr, n: herplansVandaag + 1 };
+              bewaarState(state);
+              const { taalVan } = require('./lib/aanbod-versturen');
+              const engelsH = taalVan(a.lead) === 'en';
+              await fetch(`https://app.trengo.com/api/v2/tickets/${tkC}/messages`, {
+                method: 'POST', headers: { Authorization: 'Bearer ' + TTC, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: engelsH
+                  ? `Hi ${String(a.lead.naam).split(' ')[0]}, thanks for letting me know! I won't lock in that time — I'm looking for a moment that does work for you and will send you a few new options shortly.\n\nBest, Nanny from Sonty`
+                  : `Hoi ${String(a.lead.naam).split(' ')[0]}, dank je wel voor het laten weten! Dat moment zet ik niet vast — ik zoek een tijd die wél past en stuur je zo een paar nieuwe opties.\n\nGroetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
+              }).catch(() => {});
+              const rH = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
+                method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+                body: JSON.stringify({
+                  type: 'stuur-aanbod', rpItemId: a.lead.rpItemId, naam: a.lead.naam, bron: 'klant-reply',
+                  voorkeurDagen: besluit.voorkeur.dagen, voorkeurDagdeel: besluit.voorkeur.dagdeel,
+                  vanaf: besluit.voorkeur.vanaf || undefined,
+                  nietDeze: (a.slots || []).map((sl) => sl.aankomst),
+                }),
+              }).catch(() => null);
+              await telegram(`🔁 ${a.lead.naam} koos een tijd maar wil toch anders: ${duiding.samenvatting} Nieuw aanbod met zijn voorkeur ${rH?.ok ? 'staat in de rij' : 'AANVRAGEN MISLUKT — handmatig via het dashboard'}.`);
+              continue;
+            }
+
+            if (besluit.actie === 'mens') {
+              console.log(`  ✋ ${a.lead.naam}: ${besluit.reden} — NIET boeken (${duiding.samenvatting})`);
               await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen', reden: 'klant kwam na zijn keuze terug op het bericht, mens kijkt mee' }) });
               const { verwijderOpties } = require('./lib/outlook-opties.js');
               await verwijderOpties(state.opties?.[a.token]).catch(() => {});
@@ -1432,7 +1470,7 @@ async function verwerkAanbiedingen() {
                 method: 'POST', headers: { Authorization: 'Bearer ' + TTC, 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: `Hoi ${String(a.lead.naam).split(' ')[0]}, dank je wel, ik heb je bericht gezien. Ik zoek dit even goed uit en kom er vandaag nog bij je op terug.\n\nGroetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
               }).catch(() => {});
-              await telegram(`✋ ${a.lead.naam} NIET geboekt: na zijn keuze kwam er nog een bericht — "${tekstK.slice(0, 110)}" (${poort.reden}: ${duiding.samenvatting}). Aanbod ingetrokken, klant heeft bericht gehad. Actie nodig.`);
+              await telegram(`✋ ${a.lead.naam} NIET geboekt: na zijn keuze kwam er nog een bericht — "${tekstK.slice(0, 110)}" (${besluit.reden}: ${duiding.samenvatting}). Aanbod ingetrokken, klant heeft bericht gehad. Actie nodig.`);
               continue;
             }
           }

@@ -53,7 +53,8 @@ intent:
 Twijfel je tussen akkoord en iets anders? Kies dan NOOIT akkoord.
 Staat er instemming én onvrede in één bericht, dan is het "klacht".
 
-dagen: lijst weekdagnummers die de klant zelf noemt (zo=0, ma=1 … za=6). Niets genoemd = [].
+dagen: lijst weekdagnummers die de klant zelf noemt. Gebruik exact deze nummers:
+zondag=0, maandag=1, dinsdag=2, woensdag=3, donderdag=4, vrijdag=5, zaterdag=6. Niets genoemd = [].
 dagdeel: "ochtend" of "middag" als de klant dat noemt, anders null.
 vanaf: eerste datum (YYYY-MM-DD) waarop de klant WEL kan, als hij een periode uitsluit
 ("niet beschikbaar t/m 23 augustus" => "2026-08-24"; "vanaf de week van 24 augustus" =>

@@ -49,7 +49,7 @@ const dimensies = [
     { label: 'mens-schreef-gisteren', extra: [{ type: 'OUTBOUND', user_id: MENS, created_at: ts(uur(30)), message: 'Hi, ik kijk er even naar. Daimy' }] },
     { label: 'notitie-daimy', extra: [{ type: 'NOTE', user_id: MENS, created_at: ts(uur(1)), message: '@jorren even checken' }] },
   ] },
-  { naam: 'eerder', waarden: [{ label: '0-voorstellen', n: 0 }, { label: '2-voorstellen', n: 2 }] },
+  { naam: 'eerder', waarden: [{ label: '0-voorstellen', n: 0 }, { label: '2-voorstellen', n: 2 }, { label: '4-voorstellen', n: 4 }] },
   { naam: 'uur', waarden: [{ label: '03u', h: 3 }, { label: '09u', h: 9 }, { label: '19u', h: 19 }] },
 ];
 
@@ -183,7 +183,12 @@ function orakel(s) {
   const mens = s.gesprek.label === 'mens-schreef-net';
   if (soort.startsWith('voorstel')) {
     if (mens) return { wil: 'blokkeer', waarom: 'mens in gesprek' };
-    if (s.eerder.n >= 2) return { wil: 'blokkeer', waarom: 'max 2 voorstellen/week', melding: true };
+    // Beleid 26-08 (Daimy: "bot moet dit zelf afhandelen tot er een datum is"):
+    // vraagt de klant zelf om een ander moment (klant-reply/herplan), dan is het
+    // weekbudget 4; ongevraagde voorstellen blijven op 2. Pingpong-rem (2/dag) staat
+    // daar los van en wordt in herplan-na-keuze getest.
+    const maxVoorstellen = soort === 'voorstel-klant-reply' ? 4 : 2;
+    if (s.eerder.n >= maxVoorstellen) return { wil: 'blokkeer', waarom: 'max ' + maxVoorstellen + ' voorstellen/week', melding: true };
     const persoonlijk = taal === 'en' || s.moment.label === '5wk' || soort !== 'voorstel';
     const via = s.venster.label === 'open' && persoonlijk ? 'vrij' : 'template';
     return {

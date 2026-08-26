@@ -72,7 +72,7 @@ function isMensBericht(m) {
  * @param {Array<{message:string, type?:string, user_id?:number, contact_id?:any, created_at:string}>} berichten
  * @param {{soort:string, nu?:number}} opties  soort: 'voorstel'|'bevestiging'|'herinnering'|'ontvangst'
  */
-function beoordeel(berichten, { soort, nu = Date.now() }) {
+function beoordeel(berichten, { soort, nu = Date.now(), opVerzoek = false }) {
   const DAG = 24 * 3600 * 1000, WEEK = 7 * DAG;
   const uit = (berichten || []).filter(isOutbound);
 
@@ -91,7 +91,11 @@ function beoordeel(berichten, { soort, nu = Date.now() }) {
       const t = m.created_at ? nu - new Date(String(m.created_at).replace(' ', 'T')).getTime() : Infinity;
       return t >= 0 && t < WEEK && VOORSTEL_PATROON.test(m.message || '');
     }).length;
-    if (voorstellen >= 2) return { ok: false, reden: 'max-voorstellen (' + voorstellen + ' al gestuurd)', mensNodig: true };
+    // Vraagt de klant er zelf om (herplan na "ander moment"), dan is een extra
+    // voorstel geen spam: budget 4 per week in plaats van 2 (Daimy 26-08). De
+    // pingpong-rem (max 2 automatische herplanningen per dag) blijft ernaast staan.
+    const maxV = opVerzoek ? 4 : 2;
+    if (voorstellen >= maxV) return { ok: false, reden: 'max-voorstellen (' + voorstellen + ' al gestuurd)', mensNodig: true };
   }
   return { ok: true, reden: 'ok' };
 }
@@ -112,7 +116,7 @@ async function haalBerichten(ticketId) {
  * DE poort. Aanroepen vóór elk automatisch klantbericht uit de planningsketen.
  * @returns {Promise<{ok:boolean, reden:string, mensNodig?:boolean}>}
  */
-async function magSturen({ telefoon, email, ticketId, soort }) {
+async function magSturen({ telefoon, email, ticketId, soort, opVerzoek = false }) {
   // Handmatige override (alleen voor een bewuste, eenmalige run op verzoek van
   // Daimy, bv. POORT_OVERRIDE=1 node cron-inmeten-planner.js --live --alleen=...).
   // De daemons zetten deze variabele nooit. De stil-lijst blijft ALTIJD gelden.
@@ -135,7 +139,8 @@ async function magSturen({ telefoon, email, ticketId, soort }) {
           || (mail && String(a.email || '').trim().toLowerCase() === mail);
         return zelfde && a.verstuurdOp && (Date.now() - Date.parse(a.verstuurdOp)) < WEEK;
       }).length;
-      if (eerder >= 2) return { ok: false, reden: 'max-voorstellen (' + eerder + ' al gestuurd deze week, administratie)', mensNodig: true };
+      const maxA = opVerzoek ? 4 : 2;
+      if (eerder >= maxA) return { ok: false, reden: 'max-voorstellen (' + eerder + ' al gestuurd deze week, administratie)', mensNodig: true };
     } catch { /* administratie onleesbaar: dan telt alleen het gesprek */ }
   }
   if (!ticketId) return { ok: true, reden: 'geen ticket bekend — stil-lijst en verzendadministratie getoetst' };
@@ -146,7 +151,7 @@ async function magSturen({ telefoon, email, ticketId, soort }) {
       ? { ok: true, reden: 'trengo-storing — bevestiging mag door (fail-open)' }
       : { ok: false, reden: 'trengo-storing — ' + soort + ' tegengehouden (fail-closed)' };
   }
-  return beoordeel(berichten, { soort });
+  return beoordeel(berichten, { soort, opVerzoek });
 }
 
 /** Eén nette kantoor-melding als de poort "mens nodig" zegt. */

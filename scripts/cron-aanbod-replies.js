@@ -430,6 +430,13 @@ async function main() {
               // het naar een mens.
               const rpIdRem = rpItemPer[token] || aanbod?.lead?.rpItemId || info.telefoon;
               gemeld['afgewezen:' + rpIdRem] = [...new Set([...(gemeld['afgewezen:' + rpIdRem] || []), ...((aanbod?.slots || []).map((sl) => sl.aankomst))])];
+              // Noemt de klant een hele dag waarop hij niet kan ("elke dag behalve 28 sept"),
+              // dan sluiten we die dag helemaal uit. Anders boden we later diezelfde dag een
+              // ander tijdstip aan, want de tijdstip-uitsluiting kende alleen het slot dat hij
+              // net had afgewezen (het geval Theo Hoffman, 26-08).
+              if ((duiding.nietDatums || []).length) {
+                gemeld['nietdagen:' + rpIdRem] = [...new Set([...(gemeld['nietdagen:' + rpIdRem] || []), ...duiding.nietDatums])];
+              }
               const rondeSleutel = 'replyrondes:' + rpIdRem + ':' + new Date().toISOString().slice(0, 10);
               gemeld[rondeSleutel] = (gemeld[rondeSleutel] || 0) + 1;
               if (gemeld[rondeSleutel] > 2) {
@@ -462,6 +469,7 @@ async function main() {
                   // voorstel mag nooit hetzelfde zijn als wat hij afwees (Taico 10-08)
                   vanaf: duiding.vanaf || undefined,
                   nietDeze: gemeld['afgewezen:' + rpIdRem] || (aanbod?.slots || []).map((sl) => sl.aankomst),
+                  nietDagen: gemeld['nietdagen:' + rpIdRem] || [],
                 }),
               });
               { const taalA = taalVoor(info);

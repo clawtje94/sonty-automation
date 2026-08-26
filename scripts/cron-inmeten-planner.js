@@ -35,6 +35,13 @@ const LIVE = process.argv.includes('--live');
 const ALLEEN = (process.argv.find((a) => a.startsWith('--alleen=')) || '').split('=')[1] || null;
 const STATE = path.join(__dirname, '..', 'data', 'inmeten-planner-state.json');
 
+// Datum van een moment als YYYY-MM-DD in Nederlandse tijd, om hele dagen te kunnen
+// uitsluiten zonder dat een tijdstip 's ochtends vroeg op de vorige dag valt.
+function dagSleutel(moment) {
+  const d = new Date(moment);
+  return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Amsterdam' }).format(d);
+}
+
 function werkdagenTussen(van, tot) {
   let n = 0;
   const d = new Date(van);
@@ -1141,6 +1148,13 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, 
     const afgewezen = new Set(beperking.nietDeze.map((x) => +new Date(x)));
     aanbod = aanbod.filter((s) => !afgewezen.has(+s.aankomst));
   }
+  // Hele dagen die de klant uitsloot ("elke dag behalve 28 sept"): ook geen ander
+  // tijdstip op die dag (Theo Hoffman 26-08 kreeg 28 sept 12:30 nadat hij 28 sept
+  // 10:50 had afgewezen met "elke dag is goed behalve 28 sept").
+  if (beperking?.nietDagen?.length) {
+    const dagenUit = new Set(beperking.nietDagen);
+    aanbod = aanbod.filter((s) => !dagenUit.has(dagSleutel(s.aankomst)));
+  }
   if (beperking?.vanaf && !aanbod.length) throw new Error(`geen plek vanaf ${beperking.vanaf} — niets verstuurd, mens nodig`);
   if (aanbod.length < aantal) throw new Error(`maar ${aanbod.length} tijd(en) beschikbaar — er zijn er ${aantal} nodig, niet verstuurd (handmatig of wachten op ruimte)`);
   aanbod = aanbod.slice(0, aantal);
@@ -1746,6 +1760,10 @@ async function verwerkDashboardVerzoek(m) {
       if (m.nietDeze?.length) {
         const afgewezen = new Set(m.nietDeze.map((x) => +new Date(x)));
         beste = beste.filter((s) => !afgewezen.has(+new Date(s.aankomst)));
+      }
+      if (m.nietDagen?.length) {
+        const dagenUit = new Set(m.nietDagen);
+        beste = beste.filter((s) => !dagenUit.has(dagSleutel(s.aankomst)));
       }
       if (m.voorkeurDagen?.length || m.voorkeurDagdeel || m.vanaf) {
         const { pasBijVoorkeur } = require('./lib/planning-antwoord.js');

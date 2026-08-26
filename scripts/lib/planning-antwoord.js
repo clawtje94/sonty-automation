@@ -29,7 +29,7 @@ const DAGEN = { maandag: 1, dinsdag: 2, woensdag: 3, donderdag: 4, vrijdag: 5, z
  *   dagdeel: 'ochtend'|'middag'|null, samenvatting: string, antwoordVoorstel: string}>}
  */
 async function leesReactie(tekst, aangebodenTijden) {
-  const veilig = { intent: 'vraag', dagen: [], dagdeel: null, vanaf: null, samenvatting: 'niet automatisch te duiden', antwoordVoorstel: '', overigeVraag: '' };
+  const veilig = { intent: 'vraag', dagen: [], nietDatums: [], dagdeel: null, vanaf: null, samenvatting: 'niet automatisch te duiden', antwoordVoorstel: '', overigeVraag: '' };
   if (!String(tekst || '').trim()) return veilig;
   const aanbod = (aangebodenTijden || []).map((s) => new Date(s.aankomst).toLocaleString('nl-NL', {
     weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam',
@@ -41,7 +41,7 @@ async function leesReactie(tekst, aangebodenTijden) {
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 400,
       system: `Je leest antwoorden van klanten van een zonweringbedrijf op een voorgesteld inmeetmoment.
-Geef ALLEEN JSON terug: {"intent","dagen","dagdeel","samenvatting","antwoordVoorstel","overigeVraag"}.
+Geef ALLEEN JSON terug: {"intent","dagen","nietDatums","dagdeel","samenvatting","antwoordVoorstel","overigeVraag"}.
 
 intent:
 - "akkoord": klant gaat akkoord met een voorgesteld moment, zonder klacht of voorbehoud.
@@ -55,6 +55,11 @@ Staat er instemming én onvrede in één bericht, dan is het "klacht".
 
 dagen: lijst weekdagnummers die de klant zelf noemt. Gebruik exact deze nummers:
 zondag=0, maandag=1, dinsdag=2, woensdag=3, donderdag=4, vrijdag=5, zaterdag=6. Niets genoemd = [].
+nietDatums: lijst losse datums (YYYY-MM-DD) die de klant juist UITSLUIT, ook als hij verder
+overal kan ("elke dag is goed behalve 28 sept" => ["2026-09-28"]; "dinsdag de 2e kan ik niet"
+=> ["2026-09-02"]). Dit gaat over hele dagen, niet over tijdstippen: noemt de klant een dag
+waarop hij niet kan, dan hoort die dag er hier in, zodat we hem niet later op diezelfde dag
+opnieuw voorstellen. Niets uitgesloten = [].
 dagdeel: "ochtend" of "middag" als de klant dat noemt, anders null.
 vanaf: eerste datum (YYYY-MM-DD) waarop de klant WEL kan, als hij een periode uitsluit
 ("niet beschikbaar t/m 23 augustus" => "2026-08-24"; "vanaf de week van 24 augustus" =>
@@ -74,6 +79,7 @@ overigeVraag: staat er NAAST de tijdkeuze nog een vraag of zorg die niet over de
     return {
       intent,
       dagen: Array.isArray(json.dagen) ? json.dagen.filter((d) => Number.isInteger(d) && d >= 0 && d <= 6) : [],
+      nietDatums: Array.isArray(json.nietDatums) ? json.nietDatums.filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d)) : [],
       dagdeel: ['ochtend', 'middag'].includes(json.dagdeel) ? json.dagdeel : null,
       vanaf: /^\d{4}-\d{2}-\d{2}$/.test(json.vanaf || '') ? json.vanaf : null,
       samenvatting: String(json.samenvatting || '').slice(0, 200),

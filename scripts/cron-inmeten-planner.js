@@ -1424,7 +1424,12 @@ async function verwerkAanbiedingen() {
           const inbound = (dC.data || [])
             .filter((m) => (m.message_type || m.type) === 'INBOUND')
             .sort((x, y) => String(x.created_at).localeCompare(String(y.created_at)));
-          const laatsteKlant = inbound[inbound.length - 1];
+          // Alleen berichten van NA dit aanbod tellen (Hensing 26-08: keuzelink-keuze
+          // is geen appje, dus het oude "Ander moment" over het vórige voorstel stond
+          // nog als laatste bericht en werd als afwijzing van de nieuwe keuze gelezen).
+          const { laatsteWoordNa } = require('./lib/boek-poort.js');
+          const verstuurdOpA = laadState().aanbodTickets?.[a.token]?.verstuurdOp;
+          const laatsteKlant = laatsteWoordNa(inbound, verstuurdOpA);
           const tekstK = String(laatsteKlant?.message || laatsteKlant?.body || '').replace(/<[^>]+>/g, ' ').trim();
           // Fase 3 (26-08): Sunny heeft dit gesprek geclaimd (hij overlegt zelf en
           // boekt straks; de oude keuze wordt dan automatisch ingetrokken). Deze ronde

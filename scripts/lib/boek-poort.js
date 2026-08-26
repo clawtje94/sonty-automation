@@ -79,4 +79,23 @@ function naKeuzeBesluit(duiding, tekst, adresNu, ctx = {}) {
   return { actie: 'mens', reden: poort.reden };
 }
 
-module.exports = { magBoeken, naKeuzeBesluit };
+/**
+ * Alleen wat de klant NA het versturen van dít aanbod schreef telt als laatste woord.
+ * (Hensing 26-08: zij accepteerde het nieuwe voorstel via de keuzelink — dat is geen
+ * WhatsApp-bericht — waardoor haar oude "Ander moment" over het VORIGE voorstel nog
+ * het laatste appje was. Dat werd gelezen als afwijzing van de nieuwe keuze en haar
+ * gekozen afspraak werd onterecht ingetrokken.)
+ * Trengo geeft created_at als Amsterdamse lokale tijd zonder zone; verstuurdOp is ISO.
+ * Daarom vergelijken we allebei als Amsterdamse 'YYYY-MM-DD HH:mm:ss'-strings.
+ * @param {Array<{created_at:string}>} inbound  klantberichten, oud → nieuw
+ * @param {string} verstuurdOp  ISO-tijd waarop het aanbod verstuurd is
+ * @returns {object|null}  het jongste klantbericht ná het aanbod, of null
+ */
+function laatsteWoordNa(inbound, verstuurdOp) {
+  if (!verstuurdOp) return (inbound || [])[inbound.length - 1] || null;
+  const grens = new Date(verstuurdOp).toLocaleString('sv-SE', { timeZone: 'Europe/Amsterdam' });
+  const na = (inbound || []).filter((m) => String(m.created_at || '') > grens);
+  return na.length ? na[na.length - 1] : null;
+}
+
+module.exports = { magBoeken, naKeuzeBesluit, laatsteWoordNa };

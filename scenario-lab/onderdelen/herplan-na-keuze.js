@@ -24,7 +24,7 @@
 //    want de fallback-duiding is 'vraag' en de vraag-route is veilig (mens leest mee)
 const { combinaties } = require('../matrix.js');
 const path = require('path');
-const { naKeuzeBesluit } = require(path.join(__dirname, '..', '..', 'scripts', 'lib', 'boek-poort.js'));
+const { naKeuzeBesluit, laatsteWoordNa } = require(path.join(__dirname, '..', '..', 'scripts', 'lib', 'boek-poort.js'));
 
 const ADRES = 'Buitensingel 103, 2286KZ, Rijswijk';
 
@@ -52,6 +52,10 @@ const dimensies = [
   // keten-moment: de duiding kan óók voorkeuren bevatten die er niet toe doen
   // (bv. dagen genoemd in een klacht) — het besluit mag daar nooit op herplannen
   { naam: 'ruis', waarden: [{ label: 'schoon' }, { label: 'dagen-in-duiding', extra: { dagen: [2] } }] },
+  // keten-moment 2 (Hensing 26-08): is het klantbericht van NA dit aanbod, of is het
+  // een OUD bericht over het vorige voorstel (keuzelink-keuze is geen appje)? Een oud
+  // bericht mag NOOIT als laatste woord tellen: dan gewoon boeken.
+  { naam: 'moment', waarden: [{ label: 'na-aanbod', voorAanbod: false }, { label: 'voor-aanbod', voorAanbod: true }] },
 ];
 
 function scenarios() {
@@ -59,6 +63,8 @@ function scenarios() {
 }
 
 function orakel(s) {
+  // Een bericht van vóór het aanbod telt niet als laatste woord: gewoon boeken.
+  if (s.moment.voorAanbod) return { wil: 'boeken' };
   const r = REACTIE[s.reactie.label];
   // pingpong-rem geldt alleen voor herplan-gevallen
   if (r.wil === 'herplan' && s.herplans.n >= 2) return { wil: 'mens' };
@@ -67,6 +73,14 @@ function orakel(s) {
 
 function voerUit(s) {
   const r = REACTIE[s.reactie.label];
+  // eerst de berichtselectie zoals de verwerker die doet: telt dit bericht überhaupt?
+  const verstuurdOp = '2026-08-25T08:38:08.420Z'; // aanbod verstuurd (echte Hensing-tijd)
+  const berichtTijd = s.moment.voorAanbod ? '2026-08-25 10:30:59' : '2026-08-25 10:43:00'; // Amsterdamse tijd, zoals Trengo
+  const relevant = laatsteWoordNa([{ created_at: berichtTijd, message: r.tekst }], verstuurdOp);
+  if (!relevant) {
+    // geen bericht ná het aanbod → geen laatste-woord-bezwaar → boeken
+    return { uitkomst: 'boeken', melding: false };
+  }
   const duiding = { ...r.duiding, ...(s.ruis.extra && r.duiding.intent !== 'ander-moment' ? s.ruis.extra : {}) };
   const besluit = naKeuzeBesluit(duiding, r.tekst, ADRES, { herplansVandaag: s.herplans.n });
   // melding: herplan stuurt 🔁 + klantbericht, mens stuurt ✋ + klantbericht — beide

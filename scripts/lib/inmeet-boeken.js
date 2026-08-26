@@ -12,8 +12,27 @@
 //   2. Lukt Bookings niet (auth stuk, API-storing), dan de oude kale afspraak als
 //      vangnet MET een alarm — een afspraak zonder bevestiging is een bekende fout.
 const b = require('../bookings-api.js');
+const fs = require('fs');
+const path = require('path');
 
 const BIZ = 'SontyMontage1@sontymontage.nl';
+
+// Vangnet (Astrid Verkaaik 26-08): de lead kwam zonder mailadres binnen terwijl het
+// aanbod-systeem haar mail allang kende (er was zelfs al een mailticket). Bij een
+// ontbrekend mailadres eerst in de planner-state kijken vóór we terugvallen op een
+// kale afspraak zonder bevestiging.
+function emailUitState(naam, telefoon) {
+  try {
+    const st = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'inmeten-planner-state.json'), 'utf8'));
+    const tel = String(telefoon || '').replace(/\D/g, '').slice(-9);
+    for (const t of Object.values(st.aanbodTickets || {})) {
+      const tTel = String(t.telefoon || '').replace(/\D/g, '').slice(-9);
+      const match = (tel && tTel && tTel === tel) || (naam && t.naam && t.naam.toLowerCase() === String(naam).toLowerCase());
+      if (match && t.email && /@/.test(t.email)) return t.email;
+    }
+  } catch { /* geen state = geen fallback */ }
+  return null;
+}
 const DIENST_INMETEN = 'fd1a8a20-57f6-42f1-8d4d-c18bc3c5ddce';
 const STAFF = {
   Joey: '445fbea9-68c9-46f4-b72a-efa451762ac3',
@@ -24,6 +43,10 @@ const STAFF = {
  * @returns {Promise<{via: 'bookings'|'kale-afspraak', id: string}>}
  */
 async function boekInmeetAfspraak({ slot, naam, telefoon, adres, duurMin, email }) {
+  if (!email || !/@/.test(email)) {
+    const gevonden = emailUitState(naam, telefoon);
+    if (gevonden) { console.log(`  mailadres uit planner-state gehaald voor ${naam}`); email = gevonden; }
+  }
   const staffId = STAFF[slot.inmeter];
   if (staffId && email && /@/.test(email)) {
     try {

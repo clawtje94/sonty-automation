@@ -341,6 +341,12 @@ async function haalAgenda() {
       start: j.scheduled_at,
       eind: new Date(+new Date(j.scheduled_at) + ((j.scheduled_duration?.minutes) || 60) * 60000).toISOString(),
       adres,
+      // Eerste regel van de omschrijving ("Inmeten — Astrid Verkaaik") als klant-veld:
+      // de botst-checks filteren hierop om een EIGEN (halve) boeking niet als bezetting
+      // te zien. Zonder dit veld matchte dat filter nooit en kreeg een klant wiens
+      // boeking half was blijven hangen een onterecht "tijd is net vergeven"-excuus
+      // plus een nieuw aanbod (Astrid Verkaaik 26-08).
+      klant: (adresCache[j.uuid]?.omschrijving || omschrijving || '').split('\n')[0],
     });
   }
   // Losse showroom-boekingen (Bookings) blokkeren BEWUST NIET (Daimy 06-08:
@@ -477,17 +483,25 @@ async function zoekGrippNummer(naam, rpItemId) {
 }
 
 async function planadoPost(ep, body, methode = 'POST') {
-  const r = await fetch('https://api.planadoapp.com/v2' + ep, {
-    method: methode,
-    headers: {
-      Authorization: 'Bearer ' + PLANADO_KEY,
-      'Content-Type': 'application/json',
-      'X-Planado-Notify-Assignees': 'false',
-    },
-    body: JSON.stringify(body),
-  });
-  if (!r.ok) throw new Error(`Planado ${r.status}: ${(await r.text()).slice(0, 120)}`);
-  return r.status === 204 ? {} : r.json();
+  // Zelfde 429-geduld als de planado()-leeshelper (fix 24-08): een boeking mag niet
+  // stranden omdat Planado even "Rate Limit Exceeded" zegt (Astrid/Chebon 26-08).
+  let laatste = '';
+  for (let poging = 0; poging < 5; poging++) {
+    const r = await fetch('https://api.planadoapp.com/v2' + ep, {
+      method: methode,
+      headers: {
+        Authorization: 'Bearer ' + PLANADO_KEY,
+        'Content-Type': 'application/json',
+        'X-Planado-Notify-Assignees': 'false',
+      },
+      body: JSON.stringify(body),
+    });
+    if (r.ok) return r.status === 204 ? {} : r.json();
+    laatste = `Planado ${r.status}: ${(await r.text()).slice(0, 120)}`;
+    if (r.status !== 429 && r.status < 500) break;
+    await wacht(3000 * (poging + 1));
+  }
+  throw new Error(laatste);
 }
 
 async function verwerkLead(lead, item, slot, duurMin) {
@@ -532,9 +546,9 @@ async function verwerkLead(lead, item, slot, duurMin) {
   // 4. meetbon-link pas nu, want nu bestaat het Gripp-nummer
   const grippNr = await zoekGrippNummer(lead.naam, lead.id);
   if (grippNr) {
-    const detail = await (await fetch(`https://api.planadoapp.com/v2/jobs/${jobUuid}`, {
-      headers: { Authorization: 'Bearer ' + PLANADO_KEY },
-    })).json();
+    // via de retry-helper: een 429 gaf hier "Unexpected token 'R'" omdat de kale
+    // tekst "Rate Limit Exceeded" als JSON werd gelezen (Astrid/Chebon 26-08)
+    const detail = await planado(`/jobs/${jobUuid}`);
     const huidig = detail.job || detail;
     await planadoPost(`/jobs/${jobUuid}`, {
       version: huidig.version,

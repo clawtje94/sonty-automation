@@ -511,11 +511,28 @@ async function planadoPost(ep, body, methode = 'POST') {
   throw new Error(laatste);
 }
 
+/** Planado weigert een job als de external_id nog "bezet" is door een restant van een
+ *  eerdere (halve) boekingspoging (Kranenburg 26-08: 422 "is used by another entity"
+ *  na de rate-limit-cascade van die ochtend). De external_id wordt verderop toch
+ *  overschreven naar gripp-{nr}, dus bij precies dít conflict proberen we één keer
+ *  opnieuw zonder external_id in plaats van de klant te laten stranden. */
+async function maakJobMetIdVangnet(maak, body) {
+  try {
+    return await maak(body);
+  } catch (e) {
+    if (!/external_id.*(used|another entity)/i.test(e.message)) throw e;
+    console.log('  external_id bezet door restant — opnieuw zonder external_id (wordt later gripp-nr)');
+    const { external_id, ...zonder } = body;
+    return maak(zonder);
+  }
+}
+
 async function verwerkLead(lead, item, slot, duurMin) {
   const inmeter = INMETERS.find((i) => i.naam === slot.inmeter);
 
   // 1. de afspraak zelf
-  const job = await planadoPost('/jobs', {
+  const maakJob = (body) => planadoPost('/jobs', body);
+  const job = await maakJobMetIdVangnet(maakJob, {
     // Planado wil template/job_type als OBJECT ({uuid}/{code}); de platte *_uuid-velden
     // worden stil genegeerd en dan toont de app "Opdracht" i.p.v. "Inmeet afspraak"
     // (Daimy 2026-08-05 én 2026-08-06 — geverifieerd tegen de API-docs en een testjob).

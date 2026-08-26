@@ -1795,7 +1795,11 @@ async function verwerkDashboardVerzoek(m) {
       }
     }
     const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda, null, { herhaling: !!m.herhaling, klantReply: m.bron === 'klant-reply' ? { dagen: m.voorkeurDagen || [] } : null });
-    return `keuzelink verstuurd (${aanbod.length >= 3 ? 3 : aanbod.length} tijd(en)): ${url}`;
+    // Werkelijk verstuurde aantal rapporteren: bij aantalTijden=1 krijgt de klant één
+    // moment, ook al lagen er hier 3 kandidaten (het oude "(3 tijd(en))" zette ons
+    // 26-08 op het verkeerde been bij het uitzoeken van de Hensing-zaak).
+    const aantalIns = (await require('./lib/instellingen.js').haalInstellingen()).aantalTijden === 1 ? 1 : Math.min(3, aanbod.length);
+    return `keuzelink verstuurd (${aantalIns} moment(en)): ${url}`;
    } catch (e) { await meldGeenAlternatiefBijFout(lead, m, e); throw e; }
   }
 

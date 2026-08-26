@@ -81,10 +81,14 @@ const GROET = { nl: 'Groetjes, Nanny van Sonty', en: 'Kind regards, Nanny from S
 function verWegRegel(ver, taal = 'nl') {
   // Eerlijke uitleg voor klanten buiten de vaste route (Daimy 06-08): scheelt
   // manuren, brandstof en uitstoot — en de klant snapt waarom het iets later kan.
+  // HERSCHREVEN 26-08 (Daimy, eigen testkaart Scheveningen): "je woont wat verder
+  // bij ons vandaan" slaat nergens op voor een klant om de hoek — de meetlat is
+  // omrijtijd vanaf het magazijn, niet hoe ver de klant van Sonty woont. De uitleg
+  // gaat nu over ónze routeplanning en zegt niets over waar de klant woont.
   if (!ver) return '';
   return taal === 'en'
-    ? ' You live a bit further away from us; we plan our routes as smartly as possible and combine jobs in your area. That saves unnecessary kilometres (and emissions), but it can mean it takes a little longer before we get to you.'
-    : ' Je woont wat verder bij ons vandaan; we plannen ritten zo slim mogelijk in en combineren klussen bij jou in de buurt. Dat scheelt onnodige kilometers (en uitstoot), maar daardoor kan het soms iets langer duren voor we bij je zijn.';
+    ? ' We plan our measuring routes as smartly as possible and combine jobs in your area. That saves unnecessary kilometres (and emissions), but it can mean it takes a little longer before we get to you.'
+    : ' We plannen onze inmeetroutes zo slim mogelijk en combineren klussen bij jou in de buurt. Dat scheelt onnodige kilometers (en uitstoot), maar daardoor kan het soms iets langer duren voor we bij je zijn.';
 }
 
 /** Ligt het voorgestelde moment ver weg? Dan is "goed nieuws" de verkeerde toon

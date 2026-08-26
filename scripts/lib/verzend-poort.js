@@ -86,7 +86,7 @@ function beoordeel(berichten, { soort, nu = Date.now(), opVerzoek = false }) {
     return { ok: false, reden: 'mens-actief', mensNodig: false };
   }
 
-  if (soort === 'voorstel') {
+  if (soort === 'voorstel' && !luistert) {
     const voorstellen = uit.filter((m) => {
       const t = m.created_at ? nu - new Date(String(m.created_at).replace(' ', 'T')).getTime() : Infinity;
       return t >= 0 && t < WEEK && VOORSTEL_PATROON.test(m.message || '');
@@ -116,7 +116,13 @@ async function haalBerichten(ticketId) {
  * DE poort. Aanroepen vóór elk automatisch klantbericht uit de planningsketen.
  * @returns {Promise<{ok:boolean, reden:string, mensNodig?:boolean}>}
  */
-async function magSturen({ telefoon, email, ticketId, soort, opVerzoek = false }) {
+async function magSturen({ telefoon, email, ticketId, soort, opVerzoek = false, luistert = false }) {
+  // WAAR DE LIMIET VOOR IS (Daimy 26-08): "dat limiet is als er domme voorstellen
+  // worden gedaan en niet naar de klant wordt geluisterd. Als dat wel wordt gedaan
+  // hoeft dat limiet niet." Een voorstel dat aantoonbaar op de wens van de klant is
+  // gebouwd (zijn uitgesloten dagen, zijn voorkeur, zijn vanaf-datum, en geen tijd die
+  // hij al afwees) telt dus niet mee. De stil-lijst en mens-actief blijven wél gelden:
+  // die gaan niet over kwaliteit maar over wie er aan zet is.
   // Handmatige override (alleen voor een bewuste, eenmalige run op verzoek van
   // Daimy, bv. POORT_OVERRIDE=1 node cron-inmeten-planner.js --live --alleen=...).
   // De daemons zetten deze variabele nooit. De stil-lijst blijft ALTIJD gelden.
@@ -128,7 +134,7 @@ async function magSturen({ telefoon, email, ticketId, soort, opVerzoek = false }
   // MAX-2 GELDT OOK ZONDER WHATSAPP (19-08, Melchior Blok: mail-only klant met een
   // onbruikbaar telefoonnummer kreeg 3 aanbod-mails op één ochtend omdat de telling
   // alleen naar het WhatsApp-gesprek keek). Eigen verzendadministratie telt mee.
-  if (soort === 'voorstel') {
+  if (soort === 'voorstel' && !luistert) {
     try {
       const st = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'inmeten-planner-state.json'), 'utf8'));
       const t9 = String(telefoon || '').replace(/\D/g, '').slice(-9);

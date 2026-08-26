@@ -1184,7 +1184,7 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, 
   if (!res.ok) throw new Error(`aanbod aanmaken: HTTP ${res.status}`);
   const { url, token } = await res.json();
   const { verstuurAanbod } = require('./lib/aanbod-versturen');
-  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email, rpItemId: item.id }, duurMin, ver, slots: aanbod, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren, herhaling: !!opties.herhaling, klantReply: opties.klantReply || null }, url);
+  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email, rpItemId: item.id }, duurMin, ver, slots: aanbod, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren, herhaling: !!opties.herhaling, klantReply: opties.klantReply || null, wens: beperking || null }, url);
   if (!verzonden.wa.ok && !verzonden.mail.ok) {
     // NIET BEZORGD = GEEN AANBOD. Het record stond al "open" in het register terwijl de
     // klant niets had gekregen (Fatih/Marius 20-08: spook-aanbiedingen die elke ochtend

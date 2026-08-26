@@ -445,7 +445,18 @@ async function verstuurAanbod(aanbod, url) {
   {
     const { magSturen, meldMensNodig } = require('./verzend-poort.js');
     const ticket = aanbod?.lead?.telefoon ? await zoekWaTicket(aanbod.lead.telefoon).catch(() => null) : null;
-    const poort = await magSturen({ telefoon: aanbod?.lead?.telefoon, email: aanbod?.lead?.email, ticketId: ticket?.id, soort: 'voorstel', opVerzoek: !!aanbod?.klantReply });
+    // Luisteren we echt naar deze klant? Dan is dit geen spam maar service, en telt
+    // de weeklimiet niet (Daimy 26-08). Voorwaarde: het voorstel is gebouwd op een
+    // concrete wens die hij zelf noemde, én er zit geen tijd in die hij al afwees.
+    const w = aanbod?.wens || {};
+    const wensGenoemd = !!(w.nietDagen?.length || w.nietDeze?.length || w.dagen?.length || w.dagdeel || w.vanaf);
+    const afgewezenTijden = new Set((w.nietDeze || []).map((x) => +new Date(x)));
+    const uitgeslotenDagen = new Set(w.nietDagen || []);
+    const herhaaltAfgewezen = (aanbod?.slots || []).some((sl) => afgewezenTijden.has(+new Date(sl.aankomst))
+      || uitgeslotenDagen.has(new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Amsterdam' }).format(new Date(sl.aankomst))));
+    const luistert = wensGenoemd && !herhaaltAfgewezen;
+    if (luistert) console.log('  verzendpoort: voorstel volgt de wens van de klant — weeklimiet telt niet');
+    const poort = await magSturen({ telefoon: aanbod?.lead?.telefoon, email: aanbod?.lead?.email, ticketId: ticket?.id, soort: 'voorstel', opVerzoek: !!aanbod?.klantReply, luistert });
     if (!poort.ok) {
       if (poort.mensNodig) await meldMensNodig(aanbod?.lead?.naam || aanbod?.lead?.telefoon || '?', poort.reden);
       console.log('  verzendpoort: aanbod NIET verstuurd (' + poort.reden + ')');

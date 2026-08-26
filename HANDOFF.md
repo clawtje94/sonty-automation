@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26, prijsreview + planner)
 
+## 27-08 (avond): LEADS-DASHBOARD LICHT (RP-stijl)
+- Daimy: "dashboard voor lead gewoon in lichte kleuren zoals bij Reuzenpanda, niet dat donkere". /admin/leads
+  (app/admin/leads/page.tsx) had inline donkere kleuren; omgezet naar het admin.css-palet (bg #f9fafb, witte
+  panelen, randen #e5e7eb, tekst #1a1a1a, grijzen gray-400..700, statuskleuren verzadigd, uitgeschakelde knoppen
+  leesbaar). Headless gecheckt desktop/detailpaneel/iPhone 12; live (7f46b68, deploy-run liep dit keer wél automatisch).
+- Observatie: productie toont 1 lead (demo) + 1 visualisatie: de KV "leads"-hash is vrijwel leeg (zie prijsreview F1).
+  Admin-layout zelf (layout.tsx) is nog #0a0a0a; andere admin-pagina's staan deels nog donker (25 bestanden).
+  Vraag aan Daimy gesteld of die ook licht moeten.
+
 ## 26-08 (avond 3): TESTRIT-LESSEN — verkeerde-dag-boeking, dubbele bevestigingen, annuleren
 - Daimy's testrit ving 3 echte fouten: (1) "oke doe dan maar dinsdag" op Sunny's tijden werd door de
   keuze-route als akkoord op het OUDE donderdag-aanbod gelezen (claim-guard zat te laat) → dubbele

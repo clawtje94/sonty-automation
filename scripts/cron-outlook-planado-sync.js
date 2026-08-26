@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { planadoFetch } = require('./lib/planado-fetch.js');
 // Outlook → Planado-sync voor de inmeters (Daimy 2026-08-05: "planning van Joey en
 // Sjoerd in Planado bijwerken met wat nu in Outlook staat en bijhouden, zodat we
 // straks over kunnen voor hun").
@@ -330,7 +331,7 @@ async function main() {
         console.log(`  ~ ${voornaam} ${startISO.slice(0, 16)} ${e.Subject?.slice(0, 30)} (${anderTeam ? 'toewijzing' : 'tijd'} gewijzigd)`);
         if (EXECUTE) {
           const det = await planadoJson(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`);
-          const r = await fetch(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`, {
+          const r = await planadoFetch(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`, {
             method: 'PATCH', headers: PH,
             body: JSON.stringify({ version: (det.job || det).version, ...(tijdAnders ? { scheduled_at: startISO, scheduled_duration: { minutes: minuten } } : {}), ...(anderTeam ? { assignee: { worker: { uuid: hoortBij } } } : {}) }),
           });
@@ -391,7 +392,7 @@ async function main() {
       const hardAdres = (adres && adres.length > 8 && /\d/.test(adres)) ? adres
         : (echt?.locatie && /\d/.test(echt.locatie) ? echt.locatie : null);
       if (hardAdres) body.address = { formatted: hardAdres };
-      const r = await fetch('https://api.planadoapp.com/v2/jobs', { method: 'POST', headers: PH, body: JSON.stringify(body) });
+      const r = await planadoFetch('https://api.planadoapp.com/v2/jobs', { method: 'POST', headers: PH, body: JSON.stringify(body) });
       if (!r.ok) { fouten++; console.log(`    FOUT ${r.status}: ${(await r.text()).slice(0, 120)}`); }
       else {
         // Na-PATCH is alleen nog voor de meetbon-velden; type/template zitten nu
@@ -434,7 +435,7 @@ async function main() {
                 ];
             }
             if (Object.keys(naPatch).length > 1) {
-              await fetch(`https://api.planadoapp.com/v2/jobs/${uuid}`, {
+              await planadoFetch(`https://api.planadoapp.com/v2/jobs/${uuid}`, {
                 method: 'PATCH', headers: PH, body: JSON.stringify(naPatch),
               });
             }
@@ -490,7 +491,7 @@ async function main() {
     && (!alleExtIds.has(j.external_id) || geannuleerdeExtIds.has(j.external_id))) : [];
   for (const j of teVerwijderen) {
     if (!EXECUTE) { console.log(`  zou verwijderen: #${j.serial_no} ${j.scheduled_at} (bron weg/geannuleerd)`); continue; }
-    const del = await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { method: 'DELETE', headers: PH });
+    const del = await planadoFetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { method: 'DELETE', headers: PH });
     console.log(`  ${del.ok ? '✓' : '⚠️'} #${j.serial_no} ${j.scheduled_at} ${del.ok ? 'verwijderd (Outlook-bron weg/geannuleerd)' : 'verwijderen mislukt ' + del.status}`);
     await wacht(2600);
   }
@@ -582,7 +583,7 @@ async function main() {
           if (hit) { await muteerBoeking(hit[0], 'annuleer', { reden: 'agenda-afspraak in Outlook verwijderd', bron: 'outlook-annulering' }); viaMotor = true; }
         } catch (e) { console.log('  motor-annulering faalde: ' + e.message.slice(0, 60)); }
         if (!viaMotor) {
-          const del = await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { method: 'DELETE', headers: PH });
+          const del = await planadoFetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { method: 'DELETE', headers: PH });
           await telegram(`🛑 #${j.serial_no} (${klantVanJobKop(j) || 'klant'}): agenda-afspraak in Outlook verwijderd → Planado-opdracht ${del.ok ? 'mee-geannuleerd' : 'KON NIET verwijderd worden (HTTP ' + del.status + ')'}. Outlook-annulering is leidend (regel Daimy 18-08).`);
         }
         delete eventGezien[j.uuid];

@@ -1,3 +1,4 @@
+const { planadoFetch } = require('./planado-fetch.js');
 // EEN AFSPRAAK ANNULEREN (Daimy 10-08: "Connie staat als geboekt in het dashboard maar
 // NIET in de Planado agenda????????").
 //
@@ -59,7 +60,7 @@ async function annuleer({ naam, aankomst, rpItemId }) {
   try {
     let after = null; const jobs = [];
     for (let i = 0; i < 40; i++) {
-      const r = await fetch('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''), {
+      const r = await planadoFetch('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''), {
         headers: { Authorization: 'Bearer ' + PLANADO_KEY },
       });
       const d = await r.json();
@@ -72,7 +73,7 @@ async function annuleer({ naam, aankomst, rpItemId }) {
       const zelfdeTijd = j.scheduled_at && rond(j.scheduled_at, van);
       const eigenId = rpItemId && j.external_id === `rp-${rpItemId}`;
       if (!zelfdeTijd && !eigenId) continue;
-      const del = await fetch('https://api.planadoapp.com/v2/jobs/' + (j.job_uuid || j.uuid), {
+      const del = await planadoFetch('https://api.planadoapp.com/v2/jobs/' + (j.job_uuid || j.uuid), {
         method: 'DELETE', headers: { Authorization: 'Bearer ' + PLANADO_KEY },
       });
       if (del.ok) uitkomst.planado++;

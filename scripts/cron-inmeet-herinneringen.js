@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { planadoFetch } = require('./lib/planado-fetch.js');
 // Afspraak-herinneringen (Daimy 06-08): elke werkdag rond 17:00 krijgt elke klant met
 // MORGEN een inmeetafspraak een herinnering via WhatsApp (en mail als er geen
 // WhatsApp-gesprek is). Bron = Planado (type Inmeet afspraak, morgen, Joey/Sjoerd);
@@ -48,7 +49,7 @@ async function main() {
   const jobs = [];
   let after = null;
   for (let i = 0; i < 40; i++) {
-    const d = await (await fetch('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''), { headers: PH })).json();
+    const d = await (await planadoFetch('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''), { headers: PH })).json();
     const l = d.jobs || [];
     if (!l.length) break;
     jobs.push(...l);
@@ -68,7 +69,7 @@ async function main() {
   for (const { j, dagenVooraf } of doel) {
     const sleutel = j.uuid + ':' + dagenVooraf;
     if (state.gestuurd[sleutel]) { overgeslagen++; continue; }
-    const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
+    const det = await (await planadoFetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
     const job = det.job || det;
     await wacht(2600);
     if (!/inmeet|inmeten/i.test((job.description || '').split('\n')[0])) continue;

@@ -1,3 +1,4 @@
+const { planadoFetch } = require('./planado-fetch.js');
 // DE mutatie-motor voor geboekte inmeetafspraken (ultracode-verkenning 06-08).
 // Eén functie voor alle aanleidingen (klant-reply, winkel-knop, AI-klantenservice):
 // annuleren of verzetten = alle systemen in één keer, nooit handmatig losse stukken.
@@ -85,7 +86,7 @@ async function muteerBoeking(rpItemId, soort, { reden = '', bron = 'onbekend' } 
 
   // 2. Planado-job echt verwijderen
   try {
-    const r = await fetch('https://api.planadoapp.com/v2/jobs/' + b.planadoJobUuid, { method: 'DELETE', headers: PH });
+    const r = await planadoFetch('https://api.planadoapp.com/v2/jobs/' + b.planadoJobUuid, { method: 'DELETE', headers: PH });
     stap('planado', r.ok || r.status === 404, 'HTTP ' + r.status);
   } catch (e) { stap('planado', false, e.message.slice(0, 80)); }
 

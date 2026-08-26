@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { planadoFetch } = require('./lib/planado-fetch.js');
 // PLANADO ↔ OUTLOOK-BEWAKING (Daimy 11-08: "kijk of alles wat in Planado is gezet ook in
 // Outlook is geplaatst, want ik mis daar veel dingen — het moet echt allemaal goed gaan").
 //
@@ -19,7 +20,7 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
   console.log(`[${new Date().toISOString()}] planado-outlook-check start`);
   let after = null; const jobs = [];
   for (let i = 0; i < 40; i++) {
-    const d = await (await fetch('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''), { headers: { Authorization: 'Bearer ' + KEY } })).json();
+    const d = await (await planadoFetch('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''), { headers: { Authorization: 'Bearer ' + KEY } })).json();
     const l = d.jobs || d.data || [];
     if (!l.length) break;
     jobs.push(...l); after = l[l.length - 1].uuid; await wacht(2600);
@@ -79,7 +80,7 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
     let omschrijving = j.description;
     if (!omschrijving) {
       try {
-        const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: { Authorization: 'Bearer ' + KEY } })).json();
+        const det = await (await planadoFetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: { Authorization: 'Bearer ' + KEY } })).json();
         omschrijving = (det.job || det).description;
       } catch { /* detail niet op te halen: val terug op (geen omschrijving) */ }
       await wacht(1100);

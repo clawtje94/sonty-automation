@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { planadoFetch } = require('./lib/planado-fetch.js');
 // MEETBON-DOORZETTER (keten-sluitstuk, opdracht Daimy 01-08): complete meetbonnen waarvan de
 // Gripp-AANBETALINGSFACTUUR betaald is, automatisch als nette bestelmail naar orders@sonty.nl
 // sturen en in het systeem op "doorgezet" zetten. Fail-safes:
@@ -76,7 +77,7 @@ function meetbonHtml(bon, factuur) {
 async function vangnetPlanadoLinks(state) {
   const KEY_PLANADO = fs.readFileSync(path.join(__dirname, 'planado-api-key.txt'), 'utf8').trim();
   const H = { Authorization: 'Bearer ' + KEY_PLANADO, 'Content-Type': 'application/json' };
-  const r = await fetch('https://api.planadoapp.com/v2/jobs?limit=100', { headers: H });
+  const r = await planadoFetch('https://api.planadoapp.com/v2/jobs?limit=100', { headers: H });
   if (!r.ok) { console.log('vangnet: jobs-lijst faalde', r.status); return; }
   const jobs = (await r.json()).jobs || [];
   const nu = Date.now();
@@ -84,7 +85,7 @@ async function vangnetPlanadoLinks(state) {
     const gepland = kandidaat.scheduled_at ? Date.parse(kandidaat.scheduled_at) : 0;
     if (!gepland || gepland < nu - 86400000 || gepland > nu + 30 * 86400000) continue;
     // de lijst bevat geen beschrijving; detail ophalen
-    const dr = await fetch(`https://api.planadoapp.com/v2/jobs/${kandidaat.uuid}`, { headers: H });
+    const dr = await planadoFetch(`https://api.planadoapp.com/v2/jobs/${kandidaat.uuid}`, { headers: H });
     if (!dr.ok) continue;
     const j = (await dr.json()).job || {};
     const desc = String(j.description || '');
@@ -93,7 +94,7 @@ async function vangnetPlanadoLinks(state) {
     const nr = (desc.match(/gripp\s*#?\s*(\d{3,7})/i) || desc.match(/\((\d{3,7})\)/) || [])[1];
     if (nr) {
       const nieuw = desc + `\n\nMEETBON (invullen op telefoon):\nhttps://sonty-website.vercel.app/admin/meetbon/${nr}`;
-      const pr = await fetch(`https://api.planadoapp.com/v2/jobs/${j.uuid}`, { method: 'PATCH', headers: { ...H, 'X-Planado-Notify-Assignees': 'false' }, body: JSON.stringify({ description: nieuw }) });
+      const pr = await planadoFetch(`https://api.planadoapp.com/v2/jobs/${j.uuid}`, { method: 'PATCH', headers: { ...H, 'X-Planado-Notify-Assignees': 'false' }, body: JSON.stringify({ description: nieuw }) });
       console.log(`  vangnet: link toegevoegd aan opdracht #${j.serial_no || j.uuid.slice(0, 8)} (Gripp ${nr}): ${pr.ok ? 'OK' : 'FOUT ' + pr.status}`);
     } else {
       // Keten-boekingen (external_id rp-*) koppelen hun Gripp-nummer ZELF zodra de

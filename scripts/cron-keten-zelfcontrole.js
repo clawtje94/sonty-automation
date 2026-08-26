@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { planadoFetch } = require('./lib/planado-fetch.js');
 // KETEN-ZELFCONTROLE (Daimy 10-08: "ik blijf dingen herhalen en corrigeren en kan er
 // niet op vertrouwen dat dit autonoom werkt").
 //
@@ -229,7 +230,7 @@ async function trengo(pad) {
         continue;
       }
       const PK = fs.readFileSync(path.join(__dirname, 'planado-api-key.txt'), 'utf8').trim();
-      const r = await fetch(`https://api.planadoapp.com/api/v2/jobs/${b.planadoJobUuid}`, { headers: { Authorization: 'Bearer ' + PK } });
+      const r = await planadoFetch(`https://api.planadoapp.com/api/v2/jobs/${b.planadoJobUuid}`, { headers: { Authorization: 'Bearer ' + PK } });
       const weg = r.status === 404 || (r.ok && ['canceled', 'cancelled'].includes(((await r.json()).job || {}).status));
       if (!weg) {
         problemen.push(`ANNULERING OPEN: ${a.naam} zegde ${Math.round((Date.now() - Date.parse(a.gemeldOp)) / 3600000)} uur geleden af, maar de afspraak van ${uur(b.aankomst)} (${b.inmeter}) staat NOG in Planado/Outlook`);

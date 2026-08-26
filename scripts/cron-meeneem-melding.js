@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { planadoFetch } = require('./lib/planado-fetch.js');
 // MEENEEM-MELDING VOOR DE INMETER (Daimy 16-08).
 //
 // "Als er opmerkingen in de offerte staan, of het is bijvoorbeeld binnen raamdeco wat
@@ -135,7 +136,7 @@ async function planadoJobs() {
   const jobs = [];
   let after = null;
   for (let i = 0; i < 40; i++) {
-    const d = await (await fetch('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''), { headers: PH })).json();
+    const d = await (await planadoFetch('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''), { headers: PH })).json();
     const l = d.jobs || [];
     if (!l.length) break;
     jobs.push(...l);
@@ -272,7 +273,7 @@ const PH_SCHRIJF = { ...PH, 'Content-Type': 'application/json', 'X-Planado-Notif
 const extIdVoor = (inmeter, afspraakDatum) => `meeneem-${inmeter.toLowerCase()}-${afspraakDatum}`;
 
 async function planadoSchrijf(ep, body, methode = 'POST') {
-  const r = await fetch('https://api.planadoapp.com/v2' + ep, {
+  const r = await planadoFetch('https://api.planadoapp.com/v2' + ep, {
     method: methode, headers: PH_SCHRIJF, body: body ? JSON.stringify(body) : undefined,
   });
   if (!r.ok) throw new Error(`Planado ${methode} ${r.status}: ${(await r.text()).slice(0, 140)}`);
@@ -320,7 +321,7 @@ async function main() {
   const perDag = {}; // "inmeter|datum" → afspraken
   const onbekend = []; // afspraken zonder leesbare offerte: daar kunnen we niets over zeggen
   for (const j of jobs) {
-    const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
+    const det = await (await planadoFetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
     const job = det.job || det;
     await wacht(2600);
     const omschrijving = job.description || '';

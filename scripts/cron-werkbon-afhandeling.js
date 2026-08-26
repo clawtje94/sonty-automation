@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { planadoFetch } = require('./lib/planado-fetch.js');
 // WERKBON-AFHANDELING (Daimy 2026-08-20): zodra een bus-opdracht (montage/service)
 // in Planado is AFGEROND, kijkt deze verwerker naar het werkbon-rapport:
 //   - "Werk gereed?" = JA  → melding op de planning-bot dat de EINDFACTUUR via
@@ -67,7 +68,7 @@ const jaNee = (v) => v === true || /^(ja|yes|true|1)$/i.test(String(v ?? '').tri
   const state = laadState();
   let after = null; const klaarStaand = [];
   for (let i = 0; i < 20; i++) {
-    const d = await (await fetch('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''), { headers: PH })).json();
+    const d = await (await planadoFetch('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''), { headers: PH })).json();
     const l = d.jobs || []; if (!l.length) break;
     for (const j of l) {
       const bus = Object.keys(BUSSEN).find((p) => (j.assignee?.worker_uuid || '').startsWith(p));
@@ -84,7 +85,7 @@ const jaNee = (v) => v === true || /^(ja|yes|true|1)$/i.test(String(v ?? '').tri
   console.log(`[${new Date().toISOString()}] werkbon-afhandeling: ${klaarStaand.length} nieuw afgeronde bus-opdracht(en)`);
 
   for (const { j, busNaam } of klaarStaand) {
-    const det = await (await fetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
+    const det = await (await planadoFetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json();
     const job = det.job || det;
     const rapport = rapportUit(job);
     const kop = String(job.description || '').split('\n')[0].slice(0, 60) || ('#' + job.serial_no);

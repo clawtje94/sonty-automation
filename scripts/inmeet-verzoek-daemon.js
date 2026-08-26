@@ -147,7 +147,10 @@ async function ronde() {
       // DEFINITIEVE fouten (geen gaten, klant moet tekenen, lead onvindbaar) niet
       // eindeloos herhalen (Daimy 06-08: "ik krijg steeds dit bericht") — verzoek
       // afwijzen met de reden; alleen echte storingen blijven open voor een retry.
-      const definitief = /geen enkel gat|geen 3 tijden|moet.*tekenen|niet gevonden|lopend aanbod|template heeft er 3 nodig|NIET eerder dan|mens nodig|voorgestelde tijden zijn inmiddels bezet|heeft al een afspraak/i.test(e.message);
+      // max-voorstellen/stil-lijst/mens-actief zijn ook definitief (Daimy 26-08:
+      // Scholten kreeg 587 stille retries per dag en elke 6 uur een herhaalmelding;
+      // de poort zegt "mens nodig" en dan moet de wachtrij stoppen, niet blijven duwen)
+      const definitief = /geen enkel gat|geen 3 tijden|moet.*tekenen|niet gevonden|lopend aanbod|template heeft er 3 nodig|NIET eerder dan|mens nodig|voorgestelde tijden zijn inmiddels bezet|heeft al een afspraak|max-voorstellen|stil-lijst|mens-actief/i.test(e.message);
       if (definitief) {
         await api(MUTATIE_API, { method: 'PATCH', body: JSON.stringify({ id: m.id, status: 'afgewezen', uitkomst: e.message.slice(0, 200) }) }).catch(() => {});
         await planner.telegram(`ℹ️ Verzoek ${m.type} (${m.bron}) kan niet: ${e.message.slice(0, 140)}. Verzoek is gesloten; de kaart staat weer gewoon in het dashboard.`);

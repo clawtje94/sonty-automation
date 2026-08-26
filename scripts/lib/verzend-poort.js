@@ -151,6 +151,12 @@ async function magSturen({ telefoon, email, ticketId, soort }) {
 
 /** Eén nette kantoor-melding als de poort "mens nodig" zegt. */
 async function meldMensNodig(naam, reden) {
+  // Vastleggen voor de dagelijkse mens-nodig-digest (26-08): geparkeerde klanten
+  // mogen niet uit beeld raken nu de wachtrij ze niet meer eindeloos herhaalt.
+  try {
+    fs.appendFileSync(path.join(__dirname, '..', '..', 'data', 'mens-nodig-log.jsonl'),
+      JSON.stringify({ op: new Date().toISOString(), naam, reden }) + '\n');
+  } catch { /* log is extra */ }
   try {
     const { planningTelegram } = require('./telegram-planning.js');
     await planningTelegram(`✋ ${naam}: automatiek gestopt (${reden}). Mens nodig — pak het gesprek handmatig op via het inmeet-dashboard of Trengo.`);

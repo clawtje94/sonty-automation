@@ -11,7 +11,27 @@ const { planningTelegram } = require('./lib/telegram-planning.js');
 
 const LOG = path.join(__dirname, '..', 'data', 'mens-nodig-log.jsonl');
 
+/** Dagelijkse samenvatting van de boeking-nacontrole (Daimy 26-08: "iedereen die
+ *  wordt gepland moet worden nagelopen … en ik wil weten wat er misging en hoe
+ *  het is opgelost"). Fouten zijn al direct gemeld; dit is het totaalbeeld. */
+function nacontroleRegel() {
+  try {
+    const st = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'nacontrole-state.json'), 'utf8'));
+    const recent = Object.values(st).filter((r) => Date.now() - Date.parse(r.op) < 24 * 3600000);
+    if (!recent.length) return null;
+    const per = { ok: 0, hersteld: 0, fout: 0 };
+    recent.forEach((r) => { per[r.uitkomst] = (per[r.uitkomst] || 0) + 1; });
+    const detail = recent.filter((r) => r.uitkomst !== 'ok')
+      .map((r) => `  • ${r.naam}: ${(r.fouten || []).concat((r.herstel || []).map((h) => 'hersteld: ' + h)).join('; ')}`);
+    return [`📋 Boeking-nacontrole (24u): ${recent.length} gecontroleerd — ${per.ok} in orde, ${per.hersteld} hersteld, ${per.fout} met open fouten.`]
+      .concat(detail).join('\n');
+  } catch { return null; }
+}
+
 (async () => {
+  const nacontrole = nacontroleRegel();
+  if (nacontrole) await planningTelegram(nacontrole);
+
   let regels = [];
   try { regels = fs.readFileSync(LOG, 'utf8').trim().split('\n').filter(Boolean).map((r) => JSON.parse(r)); }
   catch { console.log('geen mens-nodig-log, niets te melden'); return; }

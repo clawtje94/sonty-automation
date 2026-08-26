@@ -407,6 +407,11 @@ async function main() {
         // zijn bericht was gemeld, maar niemand deed er iets mee). Zolang het aanbod
         // openstaat pakken we hem alsnog op; de eigen vlag voorkomt dubbel werk.
         const afgehandeldSleutel = 'afgehandeld:' + sleutel;
+        // Fase 3 (26-08): heeft Sunny dit gesprek net geclaimd (hij overlegt zelf over
+        // tijden en boekt), dan blijft deze route eraf — nooit twee botten door elkaar.
+        // We markeren NIET als afgehandeld: verloopt de claim zonder resultaat, dan
+        // pakt de volgende run het gewoon weer op.
+        if (require('./lib/gesprek-claims.js').geclaimd(ticketId, 30)) continue;
         if (statusPer[token] === 'open' && !gemeld[afgehandeldSleutel] && tekst) {
           gemeld[afgehandeldSleutel] = new Date().toISOString();
           try {

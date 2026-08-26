@@ -137,6 +137,35 @@ const TOOL_DEFS = [
     },
   },
   {
+    name: 'inmeet_tijden',
+    description: 'Zoekt ECHTE beschikbare inmeet-tijden voor deze klant (zelfde motor als de planning: agenda\'s, rijtijden, roosters, vakanties). Gebruik dit zodra een klant met een getekende offerte over de inmeetafspraak wil overleggen: een datum wil, een voorgestelde tijd niet kan, of vraagt wat er mogelijk is. Geef de voorkeur van de klant mee (dagen/dagdeel/vanaf). Noem NOOIT tijden die niet uit deze tool komen. Het itemId haal je uit klant_opzoeken.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        itemId: { type: 'string', description: 'Reuzenpanda item-id uit klant_opzoeken' },
+        dagen: { type: 'array', items: { type: 'integer' }, description: 'Weekdagen die de klant noemt: zondag=0, maandag=1, dinsdag=2, woensdag=3, donderdag=4, vrijdag=5, zaterdag=6. Leeg = geen voorkeur.' },
+        dagdeel: { type: 'string', enum: ['ochtend', 'middag'], description: 'Alleen als de klant dit noemt' },
+        vanaf: { type: 'string', description: 'YYYY-MM-DD: eerste dag waarop de klant WEL kan (bv. na vakantie). Alleen als de klant een periode uitsluit.' },
+      },
+      required: ['itemId'],
+    },
+  },
+  {
+    name: 'inmeet_boeken',
+    description: 'Boekt een inmeetafspraak DEFINITIEF op een tijd die uit inmeet_tijden kwam en waar de klant in dit gesprek expliciet mee instemde. De boeking loopt via de volledige keten (dubbelboek-controle, agenda, Planado, bevestiging) en kan daar alsnog geweigerd worden. BELANGRIJK: zeg na deze tool tegen de klant dat je de afspraak NU vastzet en dat hij zo de definitieve bevestiging krijgt — beloof nooit dat hij al definitief staat, de bevestiging komt automatisch uit de keten (regel: pas bevestigen als de boeking aantoonbaar rond is).',
+    input_schema: {
+      type: 'object',
+      properties: {
+        itemId: { type: 'string', description: 'Reuzenpanda item-id uit klant_opzoeken' },
+        klantNaam: { type: 'string' },
+        aankomst: { type: 'string', description: 'De aankomst-ISO-tijd EXACT zoals inmeet_tijden hem teruggaf' },
+        inmeter: { type: 'string', description: 'De inmeter EXACT zoals inmeet_tijden hem teruggaf' },
+        akkoordCitaat: { type: 'string', description: 'LETTERLIJK citaat uit het laatste klantbericht waarin de klant DIT concrete moment kiest ("donderdag 9:30 is prima", "doe de eerste maar"). Geen citaat = niet boeken: vraag eerst welke tijd hij wil.' },
+      },
+      required: ['itemId', 'klantNaam', 'aankomst', 'inmeter', 'akkoordCitaat'],
+    },
+  },
+  {
     name: 'showroom_beschikbaarheid',
     description: 'Haal de vrije tijden op voor een showroomafspraak (Frijdastraat 8F, 2288 EX Rijswijk — 45 minuten, dinsdag t/m zaterdag). Gebruik dit zodra een klant naar de showroom/winkel wil komen: vraag eerst naar welke dag de voorkeur uitgaat, en stel daarna 2-3 concrete tijden uit deze lijst voor. Noem NOOIT tijden uit je hoofd.',
     input_schema: {
@@ -426,6 +455,57 @@ function raaktAnderPrijsboek(ctx, input) {
     return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets aangemaakt. Zeg dat de offerte zo snel mogelijk volgt via een collega.' });
   }
   // Showroom-boeken staat in testfase (Daimy 21 juli): alleen whitelist-testnummers,
+  // DIRECT INMEET-PLANNEN (Daimy 26-08: Sunny moet in het gesprek kunnen overleggen en
+  // boeken). Aan-knop: bestand .inmeet-plannen-live naast dit script — zelfde patroon
+  // als de showroom-uitrol, zodat we per fase live kunnen.
+  const inmeetPlannenAan = () => ctx.liveTest || require('fs').existsSync(require('path').join(__dirname, '.inmeet-plannen-live'));
+  if (name === 'inmeet_tijden') {
+    if (!inmeetPlannenAan()) return JSON.stringify({ status: 'NOG NIET BESCHIKBAAR', opmerking: 'Direct plannen staat nog uit. Gebruik inmeet_afspraak_voorstellen zodra de klant akkoord is; de planning stuurt dan een voorstel.' });
+    try {
+      const { zoekInmeetTijden } = require('../lib/inmeet-tijden.js');
+      const r = await zoekInmeetTijden({ itemId: input.itemId, dagen: input.dagen || [], dagdeel: input.dagdeel || null, vanaf: input.vanaf || null, max: 5 });
+      if (!r.slots.length) {
+        return JSON.stringify({ status: 'GEEN TIJDEN', opmerking: 'Geen beschikbare tijden gevonden' + (input.vanaf ? ' vanaf ' + input.vanaf : '') + ' binnen de planhorizon. Beloof GEEN tijd, zeg dat je het laat uitzoeken, en roep escaleren_naar_mens aan.' });
+      }
+      return JSON.stringify({
+        status: 'OK', duurMin: r.duurMin, tijden: r.slots,
+        opmerking: 'Dit zijn ECHTE vrije tijden (momentopname, nog niet gereserveerd). Noem er 2-3 in gewone taal, sluit aan op wat de klant vroeg. Kiest de klant expliciet één moment, boek dan met inmeet_boeken. Noem nooit tijden buiten deze lijst.',
+      });
+    } catch (e) {
+      return JSON.stringify({ status: 'FOUT', opmerking: 'Tijden zoeken lukte niet (' + String(e.message).slice(0, 100) + '). Beloof geen tijden; zeg dat je het uitzoekt en roep escaleren_naar_mens aan.' });
+    }
+  }
+  if (name === 'inmeet_boeken') {
+    if (!inmeetPlannenAan()) return JSON.stringify({ status: 'NOG NIET BESCHIKBAAR', opmerking: 'Direct boeken staat nog uit. Er is niets geboekt. Zeg dat de planning het moment vastlegt en zet het traject in gang via inmeet_afspraak_voorstellen.' });
+    // Zelfde akkoord-guard als inmeet_afspraak_voorstellen: het citaat moet echt in dit
+    // gesprek staan, anders kan de bot een keuze verzinnen.
+    const normB = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    const citaatB = normB(input.akkoordCitaat);
+    const klantTekstB = (ctx.klantTeksten || []).map(normB).join(' | ');
+    const matchtB = citaatB && (klantTekstB.includes(citaatB) || klantTekstB.includes(citaatB.slice(0, 15)));
+    if ((CFG.MODE === 'live' || ctx.liveTest) && (!citaatB || (!matchtB && citaatB.length >= 12))) {
+      return JSON.stringify({ status: 'GEBLOKKEERD', opmerking: 'Het akkoordCitaat staat niet in een klantbericht van dit gesprek — er is geen keuze om te boeken. Vraag de klant eerst duidelijk welk moment hij wil.' });
+    }
+    if (CFG.MODE !== 'live' && !ctx.liveTest) {
+      return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — NIET geboekt)', opmerking: 'Er is niets geboekt. Zeg dat je de afspraak klaarzet en dat de bevestiging volgt.' });
+    }
+    try {
+      const rB = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': process.env.MEETBON_CODE || '2288' },
+        body: JSON.stringify({
+          type: 'boek', rpItemId: input.itemId, naam: input.klantNaam, bron: 'sunny',
+          slot: { aankomst: input.aankomst, inmeter: input.inmeter },
+        }),
+      });
+      if (!rB.ok) throw new Error('wachtrij HTTP ' + rB.status);
+      return JSON.stringify({
+        status: 'IN UITVOERING',
+        opmerking: 'De boeking loopt nu via de volledige keten (dubbelboek-controle, agenda, Planado). Zeg tegen de klant: "ik zet hem nu voor je vast, je krijgt zo vanzelf de definitieve bevestiging". Zeg NIET dat hij al definitief staat. Blijkt de tijd net vergeven, dan krijgt de klant automatisch bericht met nieuwe opties.',
+      });
+    } catch (e) {
+      return JSON.stringify({ status: 'FOUT', opmerking: 'Boeken in de wachtrij zetten lukte niet (' + String(e.message).slice(0, 80) + '). Zeg dat een collega het moment vastlegt en roep escaleren_naar_mens aan.' });
+    }
+  }
   // voor alle andere klanten pas na de aan-knop (bestand .showroom-live naast dit script).
   const showroomAan = () => ctx.liveTest || require('fs').existsSync(require('path').join(__dirname, '.showroom-live'));
   if (name === 'showroom_beschikbaarheid') {

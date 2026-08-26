@@ -1412,6 +1412,13 @@ async function verwerkAanbiedingen() {
             .sort((x, y) => String(x.created_at).localeCompare(String(y.created_at)));
           const laatsteKlant = inbound[inbound.length - 1];
           const tekstK = String(laatsteKlant?.message || laatsteKlant?.body || '').replace(/<[^>]+>/g, ' ').trim();
+          // Fase 3 (26-08): Sunny heeft dit gesprek geclaimd (hij overlegt zelf en
+          // boekt straks; de oude keuze wordt dan automatisch ingetrokken). Deze ronde
+          // niets doen; verloopt de claim, dan loopt de normale route gewoon weer.
+          if (require('./lib/gesprek-claims.js').geclaimd(tkC, 30)) {
+            console.log(`  ⏸ ${a.lead.naam}: gesprek geclaimd door Sunny — verwerker blijft eraf`);
+            continue;
+          }
           if (tekstK) {
             const { leesReactie } = require('./lib/planning-antwoord.js');
             const duiding = await leesReactie(tekstK, a.slots);
@@ -1767,6 +1774,28 @@ async function verwerkDashboardVerzoek(m) {
     const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda, null, { herhaling: !!m.herhaling, klantReply: m.bron === 'klant-reply' ? { dagen: m.voorkeurDagen || [] } : null });
     return `keuzelink verstuurd (${aanbod.length >= 3 ? 3 : aanbod.length} tijd(en)): ${url}`;
    } catch (e) { await meldGeenAlternatiefBijFout(lead, m, e); throw e; }
+  }
+
+  // DIRECTE BOEKING VERVANGT EEN LOPEND AANBOD (Sunny-fase 26-08): boekt de winkel of
+  // Sunny terwijl er nog een keuzelink open/gekozen staat, dan moet die keuzelink dicht —
+  // anders kan de oude keuze later alsnog geboekt worden en staat de klant dubbel.
+  if (lopende.has(item.id)) {
+    try {
+      for (const statusA of ['open', 'gekozen']) {
+        const rA = await fetch(`${AANBOD_API}?status=${statusA}`, { headers: { 'x-meet-code': MEET_CODE } });
+        const { aanbiedingen } = rA.ok ? await rA.json() : { aanbiedingen: [] };
+        for (const a of aanbiedingen || []) {
+          if (a.lead?.rpItemId !== item.id) continue;
+          await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen', reden: 'vervangen door directe boeking (' + (m.bron || 'dashboard') + ')' }) }).catch(() => {});
+          const stX = laadState();
+          const { verwijderOpties } = require('./lib/outlook-opties.js');
+          await verwijderOpties(stX.opties?.[a.token]).catch(() => {});
+          delete stX.opties?.[a.token];
+          delete stX.aangeboden?.[item.id];
+          bewaarState(stX);
+        }
+      }
+    } catch (e) { console.log('  lopend aanbod intrekken bij directe boeking mislukt: ' + e.message.slice(0, 60)); }
   }
 
   // boeken op het gekozen slot — eerst verse botsingscontrole

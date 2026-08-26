@@ -421,14 +421,29 @@ async function planningRolVoor(t, rows) {
   for (let i = rows.length - 1; i >= 0 && rows[i].van === 'klant'; i--) reeks.unshift(rows[i].tekst);
   const tekst = reeks.join('\n').trim();
   const lopend = lopendInmeetAanbod(t.contact?.phone, t.contact?.email);
-  let blijfWeg = false, reden = '', alleenDeel = '';
+  // Fase 3 (Daimy 26-08): met de aan-knop .inmeet-plannen-live neemt Sunny het
+  // planningsoverleg over — hij zoekt zelf echte tijden en boekt. Zonder de knop
+  // geldt het oude gedrag (planner regelt alles, Sunny blijft weg).
+  // Pad hardcoded (geen __dirname): het scenario-lab knipt deze functie los uit het
+  // bestand; INMEET_PLANNEN_LIVE=0/1 dwingt de stand af voor tests.
+  const plannenAan = process.env.INMEET_PLANNEN_LIVE
+    ? process.env.INMEET_PLANNEN_LIVE === '1'
+    : fs2.existsSync('/Users/clawdboot/sonty/scripts/ai-ks/.inmeet-plannen-live');
+  let blijfWeg = false, reden = '', alleenDeel = '', sunnyPlant = null;
   if (lopend && tekst) {
     const { leesKeuze } = require('../cron-aanbod-replies.js');
     if (leesKeuze(tekst, slots.length ? slots : [{ aankomst: info.verstuurdOp }]) !== null) { blijfWeg = true; reden = 'keuze'; }
     else {
       const { leesReactie } = require('../lib/planning-antwoord.js');
       const d = await leesReactie(tekst, slots);
-      if (['akkoord', 'ander-moment', 'annuleren'].includes(d.intent) && !d.overigeVraag) { blijfWeg = true; reden = d.intent; }
+      if (plannenAan && d.intent === 'ander-moment') {
+        // Sunny neemt dit gesprek over: ticket claimen zodat de planner-routes
+        // (aanbod-replies, laatste-woord-check) er vanaf blijven — nooit twee botten.
+        try { require('../lib/gesprek-claims.js').claim(t.id, 'sunny'); } catch { /* claim is vangnet */ }
+        reden = 'sunny-plant';
+        sunnyPlant = d;
+        alleenDeel = d.overigeVraag || '';
+      } else if (['akkoord', 'ander-moment', 'annuleren'].includes(d.intent) && !d.overigeVraag) { blijfWeg = true; reden = d.intent; }
       else if (['akkoord', 'ander-moment', 'annuleren'].includes(d.intent)) {
         // Marius 19-08: "kan het op dinsdag?" + "op=op wil ik voorkomen" — de planner
         // regelt de dinsdag, maar niemand ging in op de voorraad-zorg. Sunny beantwoordt
@@ -451,7 +466,9 @@ async function planningRolVoor(t, rows) {
       ? `- De inmeetafspraak van deze klant is GEBOEKT: ${geboekt.slot?.aankomst ? fmt({ aankomst: geboekt.slot.aankomst, inmeter: geboekt.slot.inmeter || geboekt.inmeter }) : (geboekt.datum || 'datum onbekend')}. Thuisblijf-venster: een uur vóór tot anderhalf uur ná de genoemde tijd; verschuift het door de route, dan laten we het weten.`
       : `- Onze planning (Nanny) heeft deze klant een inmeetmoment voorgesteld: ${slots.length ? slots.map(fmt).join(' of ') : 'tijd onbekend'} (status aanbod: ${status}${aanbod?.verlooptOp ? ', vast tot ' + new Date(aanbod.verlooptOp).toLocaleString('nl-NL', { timeZone: 'Europe/Amsterdam' }) : ''}).`,
     '- Dit is het EERSTE beschikbare moment; eerder kan op dit moment NIET (het is drukker dan we willen door vakanties en de bouwvak; de inmeters werken maandag t/m donderdag 09:00-15:00; Engelstalige klanten meet alleen Sjoerd). Zeg dat eerlijk, beloof geen eerdere datum.',
-    '- Jij boekt, verzet of belooft ZELF GEEN inmeetmoment. Wil de klant het voorgestelde moment vastzetten, dan kan hij simpelweg "dat past" (EN: "that works") antwoorden; wil hij een andere dag, dan noemt hij die dag en zoekt de planning opnieuw. Zeg dat zo.',
+    sunnyPlant
+      ? `- DE KLANT WIL EEN ANDER MOMENT en JIJ handelt dit nu volledig af (${sunnyPlant.samenvatting || 'zie zijn bericht'}). Roep inmeet_tijden aan met zijn voorkeur${sunnyPlant.vanaf ? ` (vanaf: ${sunnyPlant.vanaf})` : ''}${(sunnyPlant.dagen || []).length ? ` (dagen: ${sunnyPlant.dagen.join(',')})` : ''}${sunnyPlant.dagdeel ? ` (dagdeel: ${sunnyPlant.dagdeel})` : ''}, stel 2-3 opties voor in gewone taal (geen opsomming met nummers als het niet nodig is), en boek met inmeet_boeken zodra de klant expliciet één moment kiest. Kiest hij in dit bericht al duidelijk een van de tijden die je eerder noemde, boek dan direct. Het oude voorstel wordt automatisch ingetrokken zodra je boekt; verwijs er niet meer naar.`
+      : '- Jij boekt, verzet of belooft ZELF GEEN inmeetmoment. Wil de klant het voorgestelde moment vastzetten, dan kan hij simpelweg "dat past" (EN: "that works") antwoorden; wil hij een andere dag, dan noemt hij die dag en zoekt de planning opnieuw. Zeg dat zo.',
     '- Beantwoord zijn inhoudelijke vraag volledig (levertijd 8-10 weken na definitieve offerte + aanbetaling, proces, product, waarom niet eerder). Vraagt hij expliciet om een mens: beantwoord éérst zelf wat je kunt, zeg dat een collega is ingelicht, en escaleer daarnaast — nooit alleen "een collega komt erop terug".',
     alleenDeel ? `- LET OP: de klant koos/vroeg ook iets over de TIJD; dat handelt de planning zelf af (die stuurt een nieuw voorstel of bevestigt). Ga daar niet op in en herhaal geen tijden. Beantwoord ALLEEN dit deel: "${alleenDeel}". Weet je het antwoord niet zeker (bv. of een voorraadproduct gereserveerd kan worden): zeg dat eerlijk, escaleer, en beloof geen uitkomst.` : '',
   ].filter(Boolean).join('\n');

@@ -19,6 +19,10 @@
 const { combinaties } = require('../matrix.js');
 const fs = require('fs');
 const path = require('path');
+// Dit onderdeel test de klassieke rolverdeling (planner is eigenaar van keuzes).
+// De Sunny-plant-stand (fase 3, 26-08) heeft zijn eigen beslislaag-test in
+// herplan-na-keuze; hier pinnen we de vlag uit zodat het orakel deterministisch is.
+process.env.INMEET_PLANNEN_LIVE = '0';
 const ROOT = path.join(__dirname, '..', '..');
 const NU = Date.now();
 const uur = (h) => h * 3600000;

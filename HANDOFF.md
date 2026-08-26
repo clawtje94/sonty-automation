@@ -1,5 +1,17 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26, prijsreview + planner)
 
+## 26-08 (avond 3): TESTRIT-LESSEN — verkeerde-dag-boeking, dubbele bevestigingen, annuleren
+- Daimy's testrit ving 3 echte fouten: (1) "oke doe dan maar dinsdag" op Sunny's tijden werd door de
+  keuze-route als akkoord op het OUDE donderdag-aanbod gelezen (claim-guard zat te laat) → dubbele
+  boeking + dubbele bevestigingen op WA/mail/Telegram; (2) bot-boekingen kregen pas 20 min later via
+  de nacontrole een bevestiging (bevestigingSturen=false gold ook voor bot-bronnen); (3) zijn
+  annulering bleef bij "een collega" liggen.
+- Fixes (gepusht): claim-guard vóór de keuze-uitlezing; leesKeuze weigert een bericht dat een ANDERE
+  weekdag noemt dan het ene slot (NL+EN); Sunny-tool inmeet_annuleren + daemon-route (annuleren gaat
+  direct via muteerBoeking over alle systemen); bot-boekingen bevestigen altijd direct. Lab 4890 groen.
+- Opgeruimd: dubbele donderdag-job #1246 en beide test-agenda-blokken weg; Daimy's testafspraak
+  volledig geannuleerd ("alle systemen bijgewerkt", Planado 404-check gedaan).
+
 ## 26-08 (avond 2, planner): TEMPLATE ROUTE-V3 + MENS-ACTIEF 1,5U + HENSING-LES + LAATSTE-WOORD-FIX
 - Hensing-zaak: keuzelink-klik is geen appje → oud "Ander moment" werd als afwijzing van de
   NIEUWE keuze gelezen; haar gekozen 28 sep 11:10 (Joey) alsnog geboekt + bevestigd, en

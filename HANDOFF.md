@@ -12,6 +12,13 @@
 - Opgeruimd: dubbele donderdag-job #1246 en beide test-agenda-blokken weg; Daimy's testafspraak
   volledig geannuleerd ("alle systemen bijgewerkt", Planado 404-check gedaan).
 
+- NAGEKOMEN (Daimy: "loop nou echt scenario's door"): nieuw lab-onderdeel testrit-keten speelt het
+  VOLLEDIGE gesprek na door de echte code (claim actief/verlopen × keuzevarianten). Ving direct:
+  annuleren-na-boeking ging nooit naar Sunny (gedicht, incl. waarom+ander-moment-flow) en
+  "doe donderdag maar" op een 1-slot-donderdag was geen keuze (gedicht). Dubbelboek-poort naar
+  lib-helper heeftGeboekteAfspraak. Lab 4896 scenario's groen. REGEL: elke planning-wijziging moet
+  voortaan óók door testrit-keten.
+
 ## 26-08 (avond 2, planner): TEMPLATE ROUTE-V3 + MENS-ACTIEF 1,5U + HENSING-LES + LAATSTE-WOORD-FIX
 - Hensing-zaak: keuzelink-klik is geen appje → oud "Ander moment" werd als afwijzing van de
   NIEUWE keuze gelezen; haar gekozen 28 sep 11:10 (Joey) alsnog geboekt + bevestigd, en

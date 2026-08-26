@@ -87,7 +87,7 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 /** Boekingsmelding voor de planning-groep (Daimy 09-08: "stuur alles wat ingeboekt
  * wordt naar de planning-groep"). Eén vaste opmaak, zodat iedereen in de groep in
  * één oogopslag ziet wie, wanneer, waar en bij wie — en of alles echt rond is. */
-function boekingsMelding({ naam, aankomst, inmeter, plaats, adres, duurMin, samenvatting, via }) {
+function boekingsMelding({ naam, aankomst, inmeter, plaats, adres, duurMin, samenvatting, via, automatisch }) {
   const wanneer = new Date(aankomst).toLocaleString('nl-NL', {
     weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam',
   });
@@ -99,7 +99,22 @@ function boekingsMelding({ naam, aankomst, inmeter, plaats, adres, duurMin, same
   if (adres) regels.push(adres);
   if (via) regels.push(`Via: ${via}`);
   if (samenvatting) regels.push(samenvatting);
+  // Daimy 26-08: "onder het bericht dat jij volledig zelf inboekt dat ook even zetten"
+  if (automatisch) regels.push('🤖 Volledig door de bot geregeld: gekozen tijd gecontroleerd, geboekt en bevestigd.');
   return regels.join('\n');
+}
+
+/** Max één GEBOEKT-melding per persoon per afspraak (Daimy 26-08: hij kreeg
+ *  Alexander twee keer — een retry mag nooit een tweede melding opleveren). */
+function magBoekingMelden(sleutel) {
+  const p = path.join(__dirname, '..', 'data', 'boeking-meldingen.json');
+  let d = {};
+  try { d = JSON.parse(fs.readFileSync(p, 'utf8')); } catch { /* eerste keer */ }
+  if (d[sleutel]) return false;
+  d[sleutel] = new Date().toISOString();
+  for (const [k, v] of Object.entries(d)) if (Date.now() - Date.parse(v) > 14 * 86400000) delete d[k];
+  try { fs.writeFileSync(p, JSON.stringify(d, null, 1)); } catch { /* melding is belangrijker dan dedup */ }
+  return true;
 }
 
 // Routering (Daimy 09-08): boekingen naar de planning-groep, al het andere naar de
@@ -1650,11 +1665,13 @@ async function verwerkAanbiedingen() {
         if (!e?.stil) await telegram(`⚠️ Bevestiging na boeking mislukt voor ${a.lead.naam}: ${(e.message || '').slice(0, 80)}`);
       }
       console.log(`  ✓ ${a.lead.naam}: ${uitkomst.samenvatting}`);
-      await telegram(boekingsMelding({
-        naam: a.lead.naam, aankomst: slot.aankomst, inmeter: slot.inmeter,
-        plaats: a.lead.plaats, adres: a.lead.volledigAdres, duurMin: a.duurMin,
-        samenvatting: uitkomst.samenvatting, via: 'klant koos zelf een tijd',
-      }), { boeking: true });
+      if (magBoekingMelden(`${a.lead.naam}|${new Date(slot.aankomst).toISOString()}`)) {
+        await telegram(boekingsMelding({
+          naam: a.lead.naam, aankomst: slot.aankomst, inmeter: slot.inmeter,
+          plaats: a.lead.plaats, adres: a.lead.volledigAdres, duurMin: a.duurMin,
+          samenvatting: uitkomst.samenvatting, via: 'klant koos zelf een tijd', automatisch: true,
+        }), { boeking: true });
+      }
     } catch (e) {
       console.log(`  ✗ ${a.lead.naam}: ${e.message}`);
       await telegram(`⚠️ Boeken na klantkeuze MISLUKT voor ${a.lead.naam}: ${e.message.slice(0, 160)}\nAanbod blijft op "gekozen" staan; volgende run opnieuw.`);
@@ -1728,6 +1745,23 @@ async function meldGeenAlternatiefBijFout(lead, m, e) {
  * naar de klant sturen. Zelfde veiligheid als de klantkeuze-route: verse agenda,
  * botsingscontrole, alles geregistreerd. */
 async function verwerkDashboardVerzoek(m) {
+  // NOOIT DUBBEL BOEKEN (Daimy 26-08: Kranenburg kreeg twee opdrachten en twee
+  // meldingen doordat twee herstel-verzoeken allebei doorliepen). Staat er al een
+  // geboekte afspraak voor deze lead, dan kaatst een tweede boek-verzoek hier af —
+  // "heeft al een afspraak" is een definitieve uitkomst voor de wachtrij.
+  if (m.type === 'boek') {
+    try {
+      const bo = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'inmeet-boekingen.json'), 'utf8'));
+      const al = bo[m.rpItemId];
+      if (al?.status === 'geboekt') {
+        const wanneer = new Date(al.aankomst).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+        throw new Error(`deze klant heeft al een afspraak (${wanneer} bij ${al.inmeter}) — niets dubbel geboekt`);
+      }
+    } catch (e) {
+      if (/heeft al een afspraak/.test(e.message)) throw e;
+      /* register onleesbaar: dan beschermt de botsingscontrole verderop */
+    }
+  }
   const item = await rpGet(`/contact-service/${PID}/backlogs/${BACKLOG_ID}/items/${m.rpItemId}`).then((d) => d.item || d);
   if (!item?.id) throw new Error('RP-lead niet gevonden');
   const lead = await leesLeadCompleet(item);
@@ -1877,11 +1911,17 @@ async function verwerkDashboardVerzoek(m) {
       await verstuurBevestiging({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin: duur }, { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter });
     }
   } catch { /* bevestiging is nice-to-have; kantoor boekt met klant aan de lijn */ }
-  await telegram(boekingsMelding({
-    naam: lead.naam, aankomst: m.slot.aankomst, inmeter: m.slot.inmeter,
-    plaats: lead.plaats, adres: lead.volledigAdres, duurMin: duur,
-    samenvatting: uitkomst.samenvatting, via: `winkel (${m.bron})`,
-  }), { boeking: true });
+  if (magBoekingMelden(`${lead.naam}|${new Date(m.slot.aankomst).toISOString()}`)) {
+    // sunny/klant-reply/herstel = de bot deed het hele traject zelf; een klik in het
+    // dashboard is mensenwerk en krijgt de bot-regel dus niet.
+    const bronNaam = { sunny: 'Sunny (in het gesprek)', 'klant-reply': 'klantreactie', 'herstel-keuze': 'herstel door de bot' }[m.bron] || `winkel (${m.bron})`;
+    await telegram(boekingsMelding({
+      naam: lead.naam, aankomst: m.slot.aankomst, inmeter: m.slot.inmeter,
+      plaats: lead.plaats, adres: lead.volledigAdres, duurMin: duur,
+      samenvatting: uitkomst.samenvatting, via: bronNaam,
+      automatisch: ['sunny', 'klant-reply', 'herstel-keuze'].includes(m.bron),
+    }), { boeking: true });
+  }
   return `geboekt: ${uitkomst.samenvatting}`;
 }
 

@@ -421,6 +421,22 @@ async function main() {
             const duiding = await leesReactie(reeksTekst || tekst, aanbod?.slots || []);
             console.log(`  ${info.naam}: intent ${duiding.intent}${duiding.dagen.length ? ' (dagen ' + duiding.dagen.join(',') + ')' : ''}`);
 
+            // SUNNY PLANT (26-08): staat de planning-knop aan, dan voert Sunny het
+            // gesprek over tijden. Deze route stuurt dan geen eigen bericht en geen
+            // eigen nieuw voorstel, ook niet als de duiding hier 'ander-moment' zegt.
+            // Anders hoort de klant twee botten door elkaar: Theo Hoffman antwoordde
+            // 26-08 "Nee 1 okt is prima", Sunny boekte terecht, en deze route stuurde
+            // in dezelfde minuut "ik kijk naar een ander moment voor je".
+            const sunnyPlant = (() => {
+              if (process.env.INMEET_PLANNEN_LIVE) return process.env.INMEET_PLANNEN_LIVE === '1';
+              try { return fs.existsSync(path.join(__dirname, 'ai-ks', '.inmeet-plannen-live')); } catch { return false; }
+            })();
+            if (sunnyPlant && ['ander-moment', 'akkoord'].includes(duiding.intent)) {
+              delete gemeld[afgehandeldSleutel];   // Sunny is aan zet; verloopt dat, dan pakt de volgende run het op
+              console.log(`  ${info.naam}: ${duiding.intent} — Sunny doet de planning, deze route blijft eraf`);
+              continue;
+            }
+
             if (duiding.intent === 'ander-moment') {
               // PINGPONG-REM (Mandy 13-08: vier afwijzingen in 25 minuten, en het
               // systeem stuurde steeds een nieuw voorstel — zelfs 23 sep opnieuw nadat

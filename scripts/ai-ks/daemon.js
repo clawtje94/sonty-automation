@@ -461,6 +461,27 @@ async function planningRolVoor(t, rows) {
       } else reden = d.intent;
     }
   }
+  // NA BOEKING (fase 3, 26-08 — het lab-onderdeel testrit-keten ving dit): een klant
+  // die zijn GEBOEKTE afspraak wil annuleren handelde niemand af — de planner is na
+  // de boeking klaar en Sunny kreeg geen annuleer-instructie. Daimy's regel: altijd
+  // eerst vragen waarom en een ander moment proberen; wil hij echt annuleren, dan
+  // gaat de afspraak overal weg. Dus: geboekte klant + annuleren → Sunny.
+  if (plannenAan && !blijfWeg && !sunnyPlant && tekst) {
+    try {
+      const bo2 = JSON.parse(fs2.readFileSync('/Users/clawdboot/sonty/data/inmeet-boekingen.json', 'utf8'));
+      const geboektNu = Object.values(bo2).some((b) => b.status === 'geboekt' && tel9.length === 9 && String(b.telefoon || '').replace(/\D/g, '').slice(-9) === tel9);
+      if (geboektNu) {
+        const { leesReactie } = require('../lib/planning-antwoord.js');
+        const d3 = await leesReactie(tekst, []);
+        if (d3.intent === 'annuleren') {
+          try { require('../lib/gesprek-claims.js').claim(t.id, 'sunny'); } catch { /* vangnet */ }
+          reden = 'sunny-plant';
+          sunnyPlant = d3;
+          alleenDeel = d3.overigeVraag || '';
+        }
+      }
+    } catch { /* administratie onleesbaar: bestaande route */ }
+  }
   const fmt = (sl) => new Date(sl.aankomst).toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' }) + (sl.inmeter ? ` (inmeter ${sl.inmeter})` : '');
   const status = aanbod?.status || 'onbekend';
   let geboekt = null;

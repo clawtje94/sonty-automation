@@ -163,4 +163,16 @@ async function muteerBoeking(rpItemId, soort, { reden = '', bron = 'onbekend' } 
   return { gelukt: alles, stappen, boeking: b };
 }
 
-module.exports = { registreerBoeking, vindBoeking, muteerBoeking, laadBoekingen };
+
+/** Staat er al een geboekte afspraak voor deze lead? (dubbelboek-poort, 26-08) */
+function heeftGeboekteAfspraak(rpItemId) {
+  try {
+    const fs2 = require('fs');
+    const path2 = require('path');
+    const bo = JSON.parse(fs2.readFileSync(path2.join(__dirname, '..', '..', 'data', 'inmeet-boekingen.json'), 'utf8'));
+    const al = bo[rpItemId];
+    return al?.status === 'geboekt' ? al : null;
+  } catch { return null; }
+}
+
+module.exports = { heeftGeboekteAfspraak,  registreerBoeking, vindBoeking, muteerBoeking, laadBoekingen };

@@ -1750,16 +1750,10 @@ async function verwerkDashboardVerzoek(m) {
   // geboekte afspraak voor deze lead, dan kaatst een tweede boek-verzoek hier af —
   // "heeft al een afspraak" is een definitieve uitkomst voor de wachtrij.
   if (m.type === 'boek') {
-    try {
-      const bo = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'inmeet-boekingen.json'), 'utf8'));
-      const al = bo[m.rpItemId];
-      if (al?.status === 'geboekt') {
-        const wanneer = new Date(al.aankomst).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
-        throw new Error(`deze klant heeft al een afspraak (${wanneer} bij ${al.inmeter}) — niets dubbel geboekt`);
-      }
-    } catch (e) {
-      if (/heeft al een afspraak/.test(e.message)) throw e;
-      /* register onleesbaar: dan beschermt de botsingscontrole verderop */
+    const al = require('./lib/inmeet-mutatie.js').heeftGeboekteAfspraak(m.rpItemId);
+    if (al) {
+      const wanneer = new Date(al.aankomst).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+      throw new Error(`deze klant heeft al een afspraak (${wanneer} bij ${al.inmeter}) — niets dubbel geboekt`);
     }
   }
   const item = await rpGet(`/contact-service/${PID}/backlogs/${BACKLOG_ID}/items/${m.rpItemId}`).then((d) => d.item || d);

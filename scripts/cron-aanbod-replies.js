@@ -67,6 +67,10 @@ function leesKeuze(tekst, slots) {
     // midden in een discussie met Daimy zat). "Dat is" op zichzelf zegt niets.
     if (eersteZinnen.some((z) => /^(hi+|hoi|hey|hallo|hello|goedemorgen|goedemiddag|goedenavond|good (morning|afternoon|evening))?[,! ]*(dat (is (goed|prima|top|akkoord|helemaal goed|ok[eé]?)|past)|past (goed|prima)|prima|is goed|helemaal goed|akkoord|top|ja( hoor| graag| leuk)?|jazeker|oke|oké|ok|perfect|super|yes( please)?|yep|that works|works for me|that'?s (fine|great|perfect|ok)|sounds good|sure|great|okay|confirmed?)\b/.test(z))) return 0;
     if (/^(?:optie\s*)?1[.!)]?$/.test(t)) return 0;
+    // Noemt de klant exact de dag van het ene slot ("doe donderdag maar") zonder
+    // twijfel of onvrede, dan is dat een keuze (testrit-keten 26-08: bleef liggen).
+    const dagVanSlot = new Date(slots[0].aankomst).getDay();
+    if (new RegExp(`\\b(${DAGEN[dagVanSlot]}|${DAGK[dagVanSlot]})\\b`).test(t)) return 0;
     return null;
   }
   const num = t.match(/^(?:optie\s*)?([123])\b[.!)]?$/) || t.match(/\boptie\s*([123])\b/);

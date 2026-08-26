@@ -29,6 +29,7 @@ const ONDERDELEN = [
   require('./onderdelen/planner-berichten.js'),
   require('./onderdelen/klantreactie.js'),
   require('./onderdelen/herplan-na-keuze.js'),
+  require('./onderdelen/testrit-keten.js'),
 ];
 // UI-laag draait tegen de echte site in een echte browser: alleen met --ui (of een filter),
 // anders wordt elke logica-run traag van het browsen.

@@ -26,6 +26,27 @@ async function main() {
   // Fase 3 (11-08): de marge-versies (244680/244681) met de zin "kan door de route een
   // uur eerder of later worden" (Daimy: monteurs stonden te vaak te wachten). Zodra
   // beide ACCEPTED vervangen ze de oude moment-templates; verder verandert er niets.
+  // Fase 4 (26-08): de neutrale ver-weg-template #248773 "inmeetmomentver route v3"
+  // (Daimy's testkaart Scheveningen kreeg "je woont wat verder bij ons vandaan" —
+  // de nieuwe tekst gaat over onze routeplanning en zegt niets over de klant).
+  // Zodra ACCEPTED vervangt hij de ver-versie definitief; een eventuele latere
+  // goedkeuring van de oude marge-ver (244682) mag hem daarna niet meer overschrijven.
+  if (!ids.routeVerGemeld) {
+    const r4 = await fetch('https://app.trengo.com/api/v2/wa_templates?page=1', { headers: { Authorization: 'Bearer ' + TT, Accept: 'application/json' } });
+    const lijst4 = r4.ok ? ((await r4.json())?.data || []) : [];
+    const routeVer = lijst4.find((t) => t.id === 248773);
+    console.log('route-ver-template:', routeVer?.status || 'niet gevonden');
+    if (routeVer?.status === 'ACCEPTED') {
+      ids.momentVer = 248773;
+      ids.routeVerGemeld = true;
+      fs.writeFileSync(IDS_PAD, JSON.stringify(ids, null, 1));
+      await telegram('✅ De neutrale ver-weg-template (#248773, "slimme routes"-tekst zonder "je woont ver weg") is door Meta goedgekeurd en staat nu aan voor alle WhatsApp-voorstellen.');
+    } else if (routeVer?.status === 'REJECTED') {
+      ids.routeVerGemeld = true;
+      fs.writeFileSync(IDS_PAD, JSON.stringify(ids, null, 1));
+      await telegram('⚠️ Meta heeft de neutrale ver-weg-template (#248773) AFGEKEURD — actie nodig: tekst aanpassen en opnieuw indienen. Tot die tijd blijft de oude ver-template in gebruik.');
+    }
+  }
   if (!ids.margeGemeld) {
     const mt = [];
     for (let p = 1; p <= 4; p++) {
@@ -41,7 +62,8 @@ async function main() {
     console.log('marge-templates:', marge?.status || 'niet gevonden', '|', margeVer?.status || 'niet gevonden');
     if (marge?.status === 'ACCEPTED' && margeVer?.status === 'ACCEPTED') {
       ids.moment = marge.id;
-      ids.momentVer = margeVer.id;
+      // de neutrale route-v3 (#248773) wint van de oude marge-ver-tekst (26-08)
+      if (!ids.routeVerGemeld) ids.momentVer = margeVer.id;
       ids.margeGemeld = true;
       fs.writeFileSync(IDS_PAD, JSON.stringify(ids, null, 1));
       await telegram(`✅ De WhatsApp-templates MET aankomstmarge zijn door Meta goedgekeurd (#${marge.id} en #${margeVer.id}) en aangesloten. Elke klant leest de marge nu al bij het eerste tijdvoorstel, en daarna nogmaals in de bevestiging en de herinnering.`);

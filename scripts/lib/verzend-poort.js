@@ -72,17 +72,23 @@ function isMensBericht(m) {
  * @param {Array<{message:string, type?:string, user_id?:number, contact_id?:any, created_at:string}>} berichten
  * @param {{soort:string, nu?:number}} opties  soort: 'voorstel'|'bevestiging'|'herinnering'|'ontvangst'
  */
-function beoordeel(berichten, { soort, nu = Date.now(), opVerzoek = false }) {
+function beoordeel(berichten, { soort, nu = Date.now(), opVerzoek = false, luistert = false }) {
   const DAG = 24 * 3600 * 1000, WEEK = 7 * DAG;
   const uit = (berichten || []).filter(isOutbound);
 
-  const mensActief = uit.some((m) => {
+  // Wanneer schreef er voor het laatst een MENS van ons in dit gesprek?
+  const sindsMens = uit.reduce((kortst, m) => {
+    if (!isMensBericht(m)) return kortst;
     const t = m.created_at ? nu - new Date(String(m.created_at).replace(' ', 'T')).getTime() : Infinity;
-    return t >= 0 && t < DAG && isMensBericht(m);
-  });
-  // Een mens in het gesprek blokkeert alles behalve de boekingsbevestiging:
-  // die hoort bij een zojuist gemaakte afspraak en mag nooit stil wegvallen.
-  if (mensActief && soort !== 'bevestiging') {
+    return t >= 0 && t < kortst ? t : kortst;
+  }, Infinity);
+  // Een mens in het gesprek blokkeert alles behalve de boekingsbevestiging.
+  // VOORSTELLEN mogen sinds 26-08 (Daimy, geval Sem) al na 1,5 uur: het gesprek met
+  // de collega ging meestal juist over het akkoord, en dan is het inmeetvoorstel het
+  // logische vervolg — 24 uur wachten is dan onnodig traag. De rest blijft 24 uur
+  // dicht (Hans de Lamboij-les: nooit een bot over een lopend mensgesprek heen).
+  const mensVenster = soort === 'voorstel' ? 1.5 * 3600000 : DAG;
+  if (sindsMens < mensVenster && soort !== 'bevestiging') {
     return { ok: false, reden: 'mens-actief', mensNodig: false };
   }
 
@@ -157,7 +163,7 @@ async function magSturen({ telefoon, email, ticketId, soort, opVerzoek = false, 
       ? { ok: true, reden: 'trengo-storing — bevestiging mag door (fail-open)' }
       : { ok: false, reden: 'trengo-storing — ' + soort + ' tegengehouden (fail-closed)' };
   }
-  return beoordeel(berichten, { soort, opVerzoek });
+  return beoordeel(berichten, { soort, opVerzoek, luistert });
 }
 
 /** Eén nette kantoor-melding als de poort "mens nodig" zegt. */

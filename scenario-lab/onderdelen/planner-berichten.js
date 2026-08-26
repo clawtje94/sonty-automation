@@ -45,7 +45,8 @@ const dimensies = [
   { naam: 'gesprek', waarden: [
     { label: 'schoon', extra: [] },
     { label: 'sunny-schreef-net', extra: [{ type: 'OUTBOUND', user_id: BOT, created_at: ts(uur(1)), message: 'Sure, happy to help with that question.' }] },
-    { label: 'mens-schreef-net', extra: [{ type: 'OUTBOUND', user_id: MENS, created_at: ts(uur(2)), message: 'Hi, ik kijk er even naar. Daimy' }] },
+    { label: 'mens-schreef-net', extra: [{ type: 'OUTBOUND', user_id: MENS, created_at: ts(30 * 60000), message: 'Hi, ik kijk er even naar. Daimy' }] },
+    { label: 'mens-schreef-2u', extra: [{ type: 'OUTBOUND', user_id: MENS, created_at: ts(uur(2)), message: 'Hi, ik kijk er even naar. Daimy' }] },
     { label: 'mens-schreef-gisteren', extra: [{ type: 'OUTBOUND', user_id: MENS, created_at: ts(uur(30)), message: 'Hi, ik kijk er even naar. Daimy' }] },
     { label: 'notitie-daimy', extra: [{ type: 'NOTE', user_id: MENS, created_at: ts(uur(1)), message: '@jorren even checken' }] },
   ] },
@@ -180,9 +181,13 @@ async function voerUit(s) {
 
 function orakel(s) {
   const taal = s.taal.label, soort = s.soort.label;
-  const mens = s.gesprek.label === 'mens-schreef-net';
+  // Beleid 26-08 (Daimy, geval Sem): een VOORSTEL mag al 1,5 uur na het laatste
+  // mens-bericht (het gesprek ging meestal juist over het akkoord); al het andere
+  // blijft 24 uur dicht bij een mens in het gesprek.
+  const mensVers = s.gesprek.label === 'mens-schreef-net';   // 30 min geleden
+  const mens = mensVers || s.gesprek.label === 'mens-schreef-2u'; // binnen 24 uur
   if (soort.startsWith('voorstel')) {
-    if (mens) return { wil: 'blokkeer', waarom: 'mens in gesprek' };
+    if (mensVers) return { wil: 'blokkeer', waarom: 'mens in gesprek (net)' };
     // Beleid 26-08 (Daimy: "bot moet dit zelf afhandelen tot er een datum is"):
     // vraagt de klant zelf om een ander moment (klant-reply/herplan), dan is het
     // weekbudget 4; ongevraagde voorstellen blijven op 2. Pingpong-rem (2/dag) staat

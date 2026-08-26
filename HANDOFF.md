@@ -1,4 +1,24 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-25)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26)
+
+## 26-08: BOEK-CASCADE GEFIXT (Astrid Verkaaik + Chebon Ong) — halve boekingen, vals "bezet", 3 hangende klanten
+- Melding Daimy: "Inmeetafspraak Astrid Verkaaik kon NIET via Bookings (geen mailadres)". Werkelijke keten:
+  verwerker crashte halverwege op Planado 429 (mede door dashboard-cacheverkeer 25-08) → halve boeking bleef
+  achter (Planado-job + kale Outlook-afspraak) → volgende run zag die als "bezet slot" (het eigen-afspraak-
+  filter was DOOD: agenda-items uit haalAgenda hadden geen klant-veld) → klant kreeg onterecht excuus
+  ("tijd net vergeven") + nieuw aanbod. Zelfde cascade bij Chebon Ong. "Geen mailadres" was een rode haring:
+  de mail stond gewoon in aanbodTickets.
+- Fixes (gecommit sonty-platform): (1) haalAgenda geeft klant-veld mee (eerste regel omschrijving) zodat de
+  botst-checks een eigen boeking herkennen; (2) planadoPost 429/5xx-retry; (3) meetbon-detail-fetch via
+  retry-helper (429-tekst crashte als "Unexpected token R"); (4) inmeet-boeken haalt ontbrekend mailadres
+  uit planner-state vóór het kale-afspraak-vangnet.
+- Herstel klanten: halve boekingen opgeruimd (Planado #1229/#1230 + kale/optie-events), verwarrende nieuwe
+  aanbiedingen ingetrokken, keuzes terug op "gekozen" → verwerker boekte beiden schoon: Astrid ma 28 sep
+  13:40 Sjoerd (Gripp 6558), Chebon di 6 okt 14:05 Sjoerd (Gripp 6559), beiden met echte Bookings-afspraak
+  (bevestigingsmail automatisch) + herstelbericht (Astrid wa, Chebon mail; zijn wa-venster was dicht).
+- LET OP: PATCH terug naar "gekozen" zet een token NIET terug in de KV-actieve-set — verwerker ziet hem dan
+  niet ("0 gekozen"). Herstel: GET /api/inmeet-aanbod?migreer=1 herbouwt de set. Daarbij kwam ook Katuscha
+  Tellegen (10-08) boven: gekozen-status hing nog terwijl de inmeting 18-08 al gedaan was → administratief
+  op "verwerkt" gezet. Structureel puntje voor later: PATCH-route zelf de actieve-set laten bijwerken.
 
 ## 26-08 (2): MEETBON-KETEN FIXES NA TEST DAIMY (2 aanbetalingsmails, "concept"-factuur, opmaak)
 - Daimy tekende testofferte 6556 en kreeg 2 aanbetalingsmails ("factuur ?" 13:05:09 en "factuur

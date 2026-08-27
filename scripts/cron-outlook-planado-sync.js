@@ -196,6 +196,22 @@ function bodyKern(e) {
     .join('\n').replace(/\n{3,}/g, '\n\n').trim().slice(0, 700);
 }
 
+// Sectie "Interne notities" uit de Bookings-body: dát is de uitleg van kantoor voor de
+// monteur (Daimy 27-08: "de uitleg klopt totaal niet met wat in Outlook staat"). Stond
+// nergens in Planado: bij alle 121 bus-opdrachten ontbrak hij (scripts/planado-outlook-verrijk.js).
+function notitiesUit(e) {
+  const t = String(e.Body?.Content || '').replace(/<style[\s\S]*?<\/style>/gi, '').replace(/<[^>]+>/g, '\n').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+    .split('\n').map((r) => r.trim()).filter(Boolean).join('\n');
+  const m = t.match(/Interne notities\n([\s\S]*?)(?:\nOPMERKING: Dit is een alleen-lezen|\nGebruik Microsoft Bookings|$)/i);
+  return m ? m[1].split('\n').filter((r) => !/^\*+$/.test(r) && !/Eventuele wijzigingen gaan verloren|^-{3,}/.test(r)).join('\n').trim().slice(0, 900) : '';
+}
+// Adres als tekst uit de body ("Adres:"/"Locatie:") als de event-locatie geen huisnummer heeft.
+function adresUitBody(e) {
+  const t = String(e.Body?.Content || '').replace(/<[^>]+>/g, '\n').replace(/&nbsp;/g, ' ');
+  const m = t.match(/^\s*(?:Adres|Locatie):\s*(.+)$/im);
+  return m && /\d/.test(m[1]) ? m[1].trim() : '';
+}
+
 // ── Planado ──
 const PH = { Authorization: 'Bearer ' + PLANADO_KEY, 'Content-Type': 'application/json', 'X-Planado-Notify-Assignees': 'false' };
 // Planado geeft bij te veel verzoeken de kale TEKST "Rate Limit Exceeded" terug
@@ -415,6 +431,18 @@ async function main() {
               e.Subject || 'Afspraak', wieKlant && !String(e.Subject || '').includes(wieKlant) ? 'Klant: ' + wieKlant : null,
               '(gesynct uit Outlook)', kern ? '\n' + kern : null, grippBlok || null,
             ].filter(Boolean).join('\n');
+            // Interne notities + adres uit Outlook er ALTIJD bij (27-08): Planado hield de
+            // POST-omschrijving wél (met template), dus de tak hierboven sloeg de kern over.
+            {
+              const notities = notitiesUit(e);
+              const adresTekst = hardAdres || adresUitBody(e) || adres || '';
+              const basis = naPatch.description || huidig.description || '';
+              const blokken = [];
+              if (notities && !basis.includes('Interne notities (Outlook):')) blokken.push('Interne notities (Outlook):\n' + notities);
+              if (adresTekst && !basis.includes('Adres (Outlook):')) blokken.push('Adres (Outlook): ' + adresTekst);
+              if (blokken.length) naPatch.description = basis.trimEnd() + '\n\n' + blokken.join('\n\n');
+              if (!hardAdres && /\d/.test(adresTekst) && !huidig.address?.formatted) naPatch.address = { formatted: adresTekst };
+            }
             const telNr = tel || echt?.tel || null;
             // zelfde winkel-uitzondering als bij de POST: geen nummer = geen klant-sms
             if (telNr && soort(e.Subject) !== 'winkel' && !(huidig.contacts || []).length) naPatch.contacts = [{ type: 'phone', name: wieKlant || klantNaamUit(e.Subject), value: telNr }];

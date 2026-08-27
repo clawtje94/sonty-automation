@@ -1,5 +1,23 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26, prijsreview + planner)
 
+## 27-08 (ochtend): WERKBON ALTIJD VOLLEDIG MAILEN + DAGELIJKSE NIET-AFGEROND-MELDING (c0b478c)
+- Vraag Daimy "wat gebeurt er met de werkbonnen": gemeten in Planado: 176 bus-opdrachten sinds 20-08, 175 gepland,
+  1 onderweg, 0 afgerond → verwerker vond terecht niets (state leeg). Teams drukken niet op Afronden.
+- Daimy: "elke werkbon moet gemaild worden naar werkbon@sonty.nl, klaar of niet, in z'n geheel" + "oke doe het maar"
+  (instructie + dagmelding). Gebouwd:
+  (1) scripts/lib/werkbon-mail.js: complete HTML-mail per afgeronde opdracht (klant, contact, adres, team, gepland/
+      gestart/afgerond, Gripp-nr, Planado-status, ALLE rapportvelden incl. leeg + ingevuld-op, foto-links, materialen,
+      volledige omschrijving). Ontvangers: data/werkbon-mail-adressen.txt = werkbon@sonty.nl + werkbonnen@sonty.nl
+      (Daimy schreef werkbon@; 20-08 was het werkbonnen@ → beide tot hij bevestigt, V1 op Telegram).
+  (2) cron-werkbon-afhandeling.js: mailt ALTIJD (gereed/niet gereed/leeg/zonder velden); planning-bot krijgt kort
+      bericht (✅ factuur kan / ⚠️ niet gereed / 📋 velden leeg). Mock-test 4 gevallen ok.
+  (3) cron-werkbon-niet-afgerond.js + launchd nl.sonty.werkbon-niet-afgerond (dagelijks 08:10): per bus de open
+      klussen van gisteren (+ ouder sinds 20-08) op de planning-bot. Dry-run 27-08: 15 van gisteren, 56 totaal.
+  (4) docs/werkbon-instructie-monteurs.md (korte instructie, Daimy deelt met de teams).
+  (5) Voorbeeld gemaild naar daimy@sonty.nl: "VOORBEELD — Werkbon GEREED — #1067 Trudie Erades (Bus 1)" met
+      verzonnen antwoorden; script scripts/werkbon-voorbeeld-mail.js (--nee voor de niet-gereed-variant).
+- Eindfactuur automatisch versturen blijft bewust NIET gebouwd.
+
 ## 27-08 (avond): LEADS-DASHBOARD LICHT (RP-stijl)
 - Daimy: "dashboard voor lead gewoon in lichte kleuren zoals bij Reuzenpanda, niet dat donkere". /admin/leads
   (app/admin/leads/page.tsx) had inline donkere kleuren; omgezet naar het admin.css-palet (bg #f9fafb, witte

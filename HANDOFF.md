@@ -1,5 +1,21 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26, prijsreview + planner)
 
+## 27-08 (ochtend, vervolg): WERKBON VIA PLANADO-WEBHOOK DIRECT NAAR werkbon@sonty.nl (LIVE)
+- Daimy: "als een werkbon wel of niet is afgerond moet die via die webhook verstuurd worden naar werkbon@sonty.nl".
+  Planado heeft GEEN eigen e-mail-rapport-instelling (gecheckt: docs + Instellingen; alleen klant-SMS), wél webhooks.
+- Gebouwd (sonty-website 5156a0e + fixes): app/api/planado/werkbon (POST: X-Planado-Secret, job_finished → 200
+  direct, mailwerk in after(); GET ?uuid= admin) + lib/werkbon/mail.ts (zelfde mail als de Mac-lib). Mail via Trengo
+  stuurMail (aanvragen@ → werkbon@sonty.nl, ticket direct gesloten). KV: werkbon:bezig/gemaild:<uuid>, log
+  werkbon:webhook-log. Env PLANADO_WEBHOOK_SECRET (Vercel prod) = scripts/.planado-webhook-secret.txt.
+  LES: alles in één request gaf FUNCTION_INVOCATION_TIMEOUT → after() + slot pas na succes.
+- Webhook in Planado aangemaakt via UI (Playwright, /admin/integrations/webhooks/new; API kent geen create):
+  "Sonty werkbon-mail (werkbon@sonty.nl)", event "Opdracht voltooid", enabled. De 2 oude Zapier-webhooks staan op "locked".
+- Mac-verwerker (cron-werkbon-afhandeling, 30 min) blijft vangnet: vraagt eerst GET ?uuid (token scripts/.website-admin.txt)
+  en mailt alleen als de webhook het niet deed; planning-bot-melding komt altijd van de Mac.
+- Eerste echte werkbon: #1067 Erades (Bus 1) GEREED, 10:04 gemaild door de Mac-verwerker; 10:33 nogmaals als
+  webhook-test (Trengo-ticket 976720113) — bewust duplicaat, gemeld.
+- Werkbon-adres: alleen werkbon@sonty.nl (gedeelde mailbox bestaat; werkbonnen@ weggehaald).
+
 ## 27-08 (ochtend): WERKBON ALTIJD VOLLEDIG MAILEN + DAGELIJKSE NIET-AFGEROND-MELDING (c0b478c)
 - Vraag Daimy "wat gebeurt er met de werkbonnen": gemeten in Planado: 176 bus-opdrachten sinds 20-08, 175 gepland,
   1 onderweg, 0 afgerond → verwerker vond terecht niets (state leeg). Teams drukken niet op Afronden.

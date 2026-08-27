@@ -56,11 +56,19 @@ const jaNee = (v) => v === true || /^(ja|yes|true|1)$/i.test(String(v ?? '').tri
     // ook als de velden leeg zijn). De planning-bot krijgt daarnaast de korte melding.
     const mail = bouwWerkbonMail(job, busNaam);
     const adressen = werkbonAdressen();
-    let ok = false;
-    try { ok = await verstuurWerkbonMail(mail, adressen); } catch (e) { console.error('mail-fout #' + job.serial_no + ':', e.message); }
+    // Sinds 27-08 mailt de Planado-webhook (sonty-website /api/planado/werkbon) de werkbon direct.
+    // Deze verwerker is het vangnet: alleen mailen als de webhook dat niet al deed.
+    let ok = false, viaWebhook = false;
+    try {
+      const tok = fs.readFileSync(path.join(__dirname, '.website-admin.txt'), 'utf8').trim();
+      const r = await fetch('https://sonty-website.vercel.app/api/planado/werkbon?uuid=' + j.uuid, { headers: { Authorization: 'Bearer ' + tok } });
+      if (r.ok) viaWebhook = !!(await r.json()).gemaild;
+    } catch { /* website niet bereikbaar: gewoon zelf mailen */ }
+    if (viaWebhook) ok = true;
+    else { try { ok = await verstuurWerkbonMail(mail, adressen); } catch (e) { console.error('mail-fout #' + job.serial_no + ':', e.message); } }
     const adres = job.address?.formatted || '';
     const kop = mail.kop, grippNr = mail.grippNr;
-    const mailNoot = ok ? `Werkbon gemaild naar ${adressen.join(', ')}.` : 'WERKBON MAILEN MISLUKT — handmatig doorsturen vanuit Planado.';
+    const mailNoot = ok ? `Werkbon ${viaWebhook ? 'direct (webhook) ' : ''}gemaild naar ${adressen.join(', ')}.` : 'WERKBON MAILEN MISLUKT — handmatig doorsturen vanuit Planado.';
 
     if (mail.gereed.status === 'ja') {
       await planningTelegram(`✅ WERK GEREED: #${job.serial_no} ${kop} (${busNaam})${adres ? ' — ' + adres : ''}.\n` +

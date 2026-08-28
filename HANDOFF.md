@@ -71,6 +71,11 @@
   (6e3590d): claim 'sunny-tijden' — na Sunny's eigen tijden is een kale keuze van Sunny (planningRolVoor) en blijft de
   reply-route 24u van het oude aanbod af (Daimy's keuze bleef 12 min liggen; zonder fix zou na 30 min de oude
   1-okt-tijd zijn geboekt). Vertraging Sunny = Trengo-429 accountbreed (ook losse curl krijgt 429).
+- Daimy-feedback na de boeking (gefixt, 88a3bc8 + 050ef3a): (1) "2 bevestigingsberichten op WhatsApp, 1 is genoeg" → bij
+  bron sunny is Sunny's eigen antwoord de WA-bevestiging, keten stuurt alleen mail (alleenMail), register wa:true via
+  'sunny-gesprek' zodat nacontrole niets extra's stuurt; afgeketste Sunny-boeking → eerlijk WA-bericht aan klant.
+  (2) "mail is niet als mail opgesteld" → bevestigingMailHtml: aanhef, korte opening, Wanneer/Wie/Duur/Adres in regels,
+  thuisblijfvenster, wijziging via mail/WA, groet; onderwerp "Je inmeetafspraak staat: <dag>".
 - OPEN: V3 aan Daimy (proefgeval goed → vlag leegmaken = alle klanten); WA-template tekent nog Nanny (Sunny-variant
   bij Meta indienen via template-wachter); beleidsvraag WA+mail beide (bestaand) of alleen WA bij WA-gesprek.
   Daemons sonny/inmeet-verzoeken/aanbod-replies herstart 12:47.

@@ -179,9 +179,10 @@ async function muteerBoeking(rpItemId, soort, { reden = '', bron = 'onbekend' } 
   // geanuleerd moet dit ook verteld worden in de planning bot groep").
   try {
     const { planningTelegram } = require('./telegram-planning.js');
+    // { boeking: true } = de groep; zonder die vlag landt het in de data-bot (Daimy 28-08: "niet in de sonty data bot")
     await planningTelegram(soort === 'verzet'
       ? `🔄 Inmeetafspraak verzet: ${b.naam}, was ${datum} bij ${b.inmeter}. Nieuw aanbod volgt automatisch.`
-      : `🛑 Inmeetafspraak geannuleerd: ${b.naam}, was ${datum} bij ${b.inmeter}.${reden ? ` Reden: ${reden}.` : ''}`);
+      : `🛑 Inmeetafspraak geannuleerd: ${b.naam}, was ${datum} bij ${b.inmeter}.${reden ? ` Reden: ${reden}.` : ''}`, { boeking: true });
   } catch { /* planning-melding mag de mutatie nooit blokkeren */ }
   return { gelukt: alles, stappen, boeking: b };
 }

@@ -597,29 +597,40 @@ async function main() {
             const aanbodB = rB.ok ? await rB.json() : null;
             const duidingB = await leesReactie(reeksTekst || tekst, aanbodB?.slots || []);
             if (duidingB.intent === 'annuleren') {
-              // ANNULERING NA BOEKING (Ana Franca 13-08: "ik zie af van de opdracht" kreeg
-              // "ik zoek het even uit en kom er vandaag op terug" — en daarna gebeurde er
-              // NIETS: de afspraak van 10 sep bleef gewoon in Planado en Outlook staan).
-              // Dus: eerlijke reactie zonder loze belofte, alarm, en op de bewakingslijst
-              // tot de afspraak aantoonbaar weg is (keten-zelfcontrole checkt Planado).
-              { const taalAn = taalVoor(info);
-              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, T(taalAn,
-                'Dank je voor je bericht, wat jammer om te lezen! Ik geef je annulering direct door aan onze planning. Zodra de afspraak is verwijderd krijg je daar nog een bevestiging van, dan hoef jij verder niets te doen.',
-                "Thank you for your message, sorry to read that! I'm passing your cancellation straight on to our planning team. As soon as the appointment has been removed you'll receive a confirmation; you don't need to do anything else."), taalAn); }
+              // ANNULERING NA BOEKING = ZELF UITVOEREN (Daimy 28-08: "ik wil dat je die volledig
+              // zelf uitvoert en daarna in de planning-bot-groep een bericht stuurt"; was: notitie
+              // voor een collega + alarm, en de afspraak bleef staan). De mutatie-motor haalt de
+              // afspraak uit Outlook/Planado/sheet, zet RP terug, stuurt de klant ÉÉN
+              // annuleringsbevestiging (planner, na muteerBoeking) en meldt het in de groep.
+              // Hier dus GEEN eigen klantbericht — anders krijgt de klant er twee.
               try {
-                const AOPEN = '/Users/clawdboot/sonty/data/annuleringen-open.json';
-                const ao = (() => { try { return JSON.parse(fs.readFileSync(AOPEN, 'utf8')); } catch { return {}; } })();
-                ao[token] = { naam: info.naam, telefoon: info.telefoon || '', ticketId, gemeldOp: new Date().toISOString(), samenvatting: duidingB.samenvatting };
-                fs.writeFileSync(AOPEN, JSON.stringify(ao, null, 1));
-              } catch (e) { console.log(`  annulering-bewaking niet weggeschreven: ${e.message.slice(0, 80)}`); }
-              // Naar Mens nodig: een annulering is altijd een mensen-moment (Daimy 15-08),
-              // dus label + getagde notitie zodat het team het ziet, niet alleen Telegram.
-              try {
-                const { notitie } = require('./lib/trengo-notitie.js');
-                await notitie(ticketId, `Klant annuleert na boeking: ${duidingB.samenvatting}. Afspraak moet uit Planado/Outlook (zelfcontrole bewaakt dit); klant krijgt daarna automatisch de bevestiging.`, { tag: true });
-                await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/labels`, { method: 'POST', headers: { ...TH, 'Content-Type': 'application/json' }, body: JSON.stringify({ label_id: 1821764 }) });
-              } catch (e) { console.log(`  mens-nodig-overdracht mislukt: ${e.message.slice(0, 80)}`); }
-              await telegram(`🚨 ANNULERING van ${info.naam}: ${duidingB.samenvatting}\n\n"${tekst.slice(0, 200)}"\n\nDe geboekte afspraak staat NOG in Planado/Outlook — die moet eruit (en de klant krijgt daarna een bevestiging). De zelfcontrole blijft hierover piepen tot de afspraak weg is. Ticket ${ticketId}.`);
+                const rAn = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
+                  method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+                  body: JSON.stringify({ type: 'annuleer', naam: info.naam, telefoon: info.telefoon || undefined, email: info.email || undefined, bron: 'klant-reply', reden: 'klant annuleerde via WhatsApp/mail: ' + String(duidingB.samenvatting || tekst.slice(0, 120)) }),
+                });
+                if (!rAn.ok) throw new Error('wachtrij HTTP ' + rAn.status);
+                // Sunny blijft er 2 uur vanaf (anders stelt hij de waarom-vraag bovenop de bevestiging)
+                try { require('./lib/gesprek-claims.js').claim(ticketId, 'annulering-loopt'); } catch { /* vangnet */ }
+                try {
+                  const AOPEN = '/Users/clawdboot/sonty/data/annuleringen-open.json';
+                  const ao = (() => { try { return JSON.parse(fs.readFileSync(AOPEN, 'utf8')); } catch { return {}; } })();
+                  ao[token] = { naam: info.naam, telefoon: info.telefoon || '', ticketId, gemeldOp: new Date().toISOString(), samenvatting: duidingB.samenvatting, automatisch: true };
+                  fs.writeFileSync(AOPEN, JSON.stringify(ao, null, 1));
+                } catch (e) { console.log(`  annulering-bewaking niet weggeschreven: ${e.message.slice(0, 80)}`); }
+                try {
+                  const { notitie } = require('./lib/trengo-notitie.js');
+                  await notitie(ticketId, `Klant annuleert na boeking (${duidingB.samenvatting}). Annulering wordt automatisch uitgevoerd (Outlook, Planado, sheet, RP terug naar Inmeten inplannen); klant krijgt automatisch de bevestiging; melding volgt in de planning-bot-groep. Geen actie nodig.`, { tag: false });
+                } catch (e) { console.log(`  notitie annulering mislukt: ${e.message.slice(0, 80)}`); }
+                await telegram(`🛑 Annulering van ${info.naam} (${duidingB.samenvatting}) wordt nu automatisch uitgevoerd; de groep krijgt de melding zodra hij rond is.`);
+                console.log(`  ${info.naam}: annulering na boeking → mutatie annuleer (klant-reply)`);
+              } catch (e) {
+                // wachtrij onbereikbaar: dan wél eerlijk bericht + alarm, zoals voorheen
+                { const taalAn = taalVoor(info);
+                if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, T(taalAn,
+                  'Dank je voor je bericht, wat jammer om te lezen! Ik geef je annulering direct door aan onze planning. Zodra de afspraak is verwijderd krijg je daar nog een bevestiging van.',
+                  "Thank you for your message, sorry to read that! I'm passing your cancellation straight on to our planning team. As soon as the appointment has been removed you'll receive a confirmation.")); }
+                await telegram(`🚨 ANNULERING van ${info.naam}: ${duidingB.samenvatting} — automatisch annuleren LUKTE NIET (${String(e.message).slice(0, 80)}). De afspraak staat NOG in Planado/Outlook — handmatig annuleren.`);
+              }
               meldingen++;
               continue;
             }

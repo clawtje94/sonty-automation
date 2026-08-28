@@ -11,7 +11,12 @@
   zoals HANDOFF 20-08 zei; "Werk gereed?" is required:false.
 - FOUT gevonden: Interne notities (Outlook) ontbraken bij 82/91 → `planado-outlook-verrijk.js` (27-08) is
   nooit met --execute gedraaid (Mac viel 27-08 12:59 uit; state-bestand leeg). Proefgeval #1083 Schrooten
-  uitgevoerd en goed; V1 aan Daimy op Telegram: mag de rest (81)? [regel eerst-1-dan-de-rest]
+  uitgevoerd en goed; Daimy akkoord (chat) → verrijker gedraaid: 106 bus-opdrachten + 92 inmeet/Nanny-
+  opdrachten (Daimy: "ook in de inmeet opdrachten"; verrijker kent nu ook Joey/Sjoerd/Nanny) bijgewerkt,
+  0 fouten, log logs/outlook-planado-verrijk.log. Nameting: 76/91 volledig in orde; de 15 rest zijn
+  kantoor-input (9 blanco blokken zonder klant/adres, 2 vandaag al afgerond, 3 adres-spelling/onbekende
+  straat, 1 Joey-blok) — geen sync-fouten. De verrijker draait NIET automatisch; nieuwe opdrachten krijgen
+  notities+adres al via de sync zelf (post-PATCH sinds 27-08). Bij twijfel: node scripts/planado-outlook-verrijk.js --execute
 - Overige bevindingen (kantoor/planning, geen sync-fout): 3 adressen zonder straat in Planado (Ritmeester
   #1100 Brielle, Bleijenberg #1106 Gouda, M. Jansen #1111 IJsselstein) → verrijker zet "Adres (Outlook)"
   als tekst; blanco blokken "Montage Sonty" zonder klant/adres staan als opdracht in de bus-app

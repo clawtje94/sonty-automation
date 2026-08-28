@@ -1,4 +1,26 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26, prijsreview + planner)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
+
+## 28-08 (middag): REKENTOOL INMETERS LIVE — /admin/rekentool (website 27297bb)
+- Daimy (/goal): inmeters moeten in de admin een rekentool hebben om na het inmeten de productprijs uit te
+  rekenen, zodat bij de eindofferte geen prijsboek meer nodig is en bediening/kleur/maat niet fout gaan.
+  Aanvullingen: "alles moet in de btw zijn", "zorg dat je de juiste prijzen aanhoudt".
+- GEBOUWD: lib/rekentool/index.ts = strenge laag over de centrale prijsmotor (lib/offerte-tool/pricing.ts,
+  dezelfde als meetbon-keten/configurator/bots + KV-prijsconfig). Per product alleen de bedieningen die
+  bestaan (Roma io/solar, SunEye XL zonder handbediend, hor = gaaskeuze), kleur alleen uit de echte lijsten
+  (standaard/trend/RAL; Roma alles gratis), maat in cm of buiten bereik = zichtbare fout, nooit stil terug-
+  vallen op io-tarief of €0-meerprijs. Prijs per stuk incl. btw + montage, aantal, extra's (Tahoma, wind-
+  sensor), maandactie-korting over alles (aan/uit), totaal incl. btw + "waarvan btw", samenvatting kopiëren.
+  API /api/rekentool (x-meet-code 2288 zoals de meetbon, of admin-Bearer). Pagina mobiel-eerst, staat in
+  localStorage. Links: admin-rail, admin-dashboard, meetbon-dashboard.
+- LAB: scripts/rekentool-lab.mts (npx tsx) 6.373 scenario's, 0x FOUT-STIL, 0 crashes, 1 FOUT-ZICHTBAAR
+  (Roma zipscreen solar 3600x3600 niet leverbaar, klopt met boek en wordt zo gemeld). Pariteit met motor/
+  keten over alle geldige combinaties (1.530 OK).
+- LIVE GEMETEN (regel 26-08): productie-API rekentool == productie /api/offerte-tool (S-42 2000x2000 io:
+  1332 + 195 = 1527; SunEye XL 5000x3000 RAL: 5746,80 + 275; Comfort-hor montage 35; handbediend geeft
+  waarschuwing). Playwright iPhone 12 op productie: login → regel → cm-fout → SunEye XL zonder handbediend →
+  totaal €6.416,48, 0 overflow (scripts/rekentool-visueel.mjs <url> <code>, shots /tmp/rekentool-shots).
+- NIET gedaan (bewust): geen koppeling naar Gripp vanuit de rekentool; de meetbon-keten (lib/meetbon/prijs.ts)
+  blijft de weg naar de offerte. Mogelijke vervolgstap: prijs live tonen ín de meetbon per product.
 
 ## 28-08 (middag): PLANADO RIJKLAAR-CHECK VOOR MAANDAG (bussen rijden vanaf 31-08 op Planado)
 - Vraag Daimy: volledige check of alles goed in Planado staat (notities uit Outlook, tijden zonder buffer,

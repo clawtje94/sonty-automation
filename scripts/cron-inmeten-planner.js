@@ -1706,14 +1706,14 @@ async function verwerkAanbiedingen() {
       }
       const uitkomst = await verwerkLead(lead, null, gekozenSlot, a.duurMin);
       // gekozen optie wordt de echte Outlook-afspraak; de andere opties verdwijnen
-      let outlookEventId = null;
+      let outlookEventId = null, agendaRes = null, agendaVia = null;
       try {
         const { maakDefinitief, verwijderOpties } = require('./lib/outlook-opties.js');
         await verwijderOpties(state.opties?.[a.token]);
         delete state.opties?.[a.token];
         // Via Bookings (13-08): medewerker-koppeling + automatische bevestigingsmail.
         const { boekInmeetAfspraak } = require('./lib/inmeet-boeken.js');
-        outlookEventId = (await boekInmeetAfspraak({ slot: gekozenSlot, naam: a.lead.naam, telefoon: a.lead.telefoon, adres: a.lead.volledigAdres, duurMin: a.duurMin, email: a.lead.email })).id;
+        agendaRes = await boekInmeetAfspraak({ slot: gekozenSlot, naam: a.lead.naam, telefoon: a.lead.telefoon, adres: a.lead.volledigAdres, duurMin: a.duurMin, email: a.lead.email }); outlookEventId = agendaRes.id; agendaVia = agendaRes.via;
       } catch (e) {
         await telegram(`⚠️ Outlook-afspraak na boeking mislukt voor ${a.lead.naam}: ${e.message.slice(0, 100)} — Planado is WEL geboekt; agenda handmatig aanvullen.`);
       }
@@ -1722,7 +1722,7 @@ async function verwerkAanbiedingen() {
         const { registreerBoeking } = require('./lib/inmeet-mutatie.js');
         registreerBoeking({
           rpItemId: a.lead.rpItemId, naam: a.lead.naam, telefoon: a.lead.telefoon, email: a.lead.email,
-          planadoJobUuid: uitkomst.planadoJobUuid, outlookEventId, grippNr: uitkomst.grippNr,
+          planadoJobUuid: uitkomst.planadoJobUuid, outlookEventId, agendaVia, grippNr: uitkomst.grippNr,
           sheet: uitkomst.sheetLocatie, slot: { aankomst: slot.aankomst, inmeter: slot.inmeter },
           duurMin: a.duurMin, aanbodToken: a.token,
         });
@@ -2016,11 +2016,11 @@ async function verwerkDashboardVerzoek(m) {
 
   const gekozenSlot = { inmeter: m.slot.inmeter, aankomst: new Date(m.slot.aankomst), extraRijtijdMin: 0 };
   const uitkomst = await verwerkLead(lead, item, gekozenSlot, duur);
-  let outlookEventId = null;
+  let outlookEventId = null, agendaRes = null, agendaVia = null;
   try {
     const { maakDefinitief } = require('./lib/outlook-opties.js');
     const { boekInmeetAfspraak } = require('./lib/inmeet-boeken.js');
-    outlookEventId = (await boekInmeetAfspraak({ slot: { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter }, naam: lead.naam, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur, email: lead.email })).id;
+    agendaRes = await boekInmeetAfspraak({ slot: { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter }, naam: lead.naam, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur, email: lead.email }); outlookEventId = agendaRes.id; agendaVia = agendaRes.via;
   } catch (e) {
     await telegram(`⚠️ Outlook-afspraak bij winkel-boeking mislukt voor ${lead.naam}: ${e.message.slice(0, 100)}`);
   }
@@ -2028,7 +2028,7 @@ async function verwerkDashboardVerzoek(m) {
     const { registreerBoeking } = require('./lib/inmeet-mutatie.js');
     registreerBoeking({
       rpItemId: item.id, naam: lead.naam, telefoon: lead.telefoon, email: lead.email,
-      planadoJobUuid: uitkomst.planadoJobUuid, outlookEventId, grippNr: uitkomst.grippNr,
+      planadoJobUuid: uitkomst.planadoJobUuid, outlookEventId, agendaVia, grippNr: uitkomst.grippNr,
       sheet: uitkomst.sheetLocatie, slot: { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter }, duurMin: duur,
       bron: m.bron || null,
     });

@@ -147,7 +147,18 @@ const afspraak = (biz = SHOWROOM, id) =>
 const annuleer = (biz = SHOWROOM, id, bericht = 'Deze afspraak is geannuleerd.') =>
   graph('POST', `/solutions/bookingBusinesses/${encodeURIComponent(biz)}/appointments/${encodeURIComponent(id)}/cancel`, { cancellationMessage: bericht });
 
-module.exports = { businesses, services, staff, afspraken, afspraak, boek, annuleer, SHOWROOM };
+// Afspraak VERWIJDEREN (geen Bookings-annuleringsmail naar de klant; onze keten stuurt zelf één bericht — Daimy 28-08).
+async function verwijder(biz = SHOWROOM, id) {
+  const tok = await getToken();
+  const r = await fetch(`https://graph.microsoft.com/v1.0/solutions/bookingBusinesses/${encodeURIComponent(biz)}/appointments/${encodeURIComponent(id)}`, {
+    method: 'DELETE', headers: { Authorization: 'Bearer ' + tok },
+  });
+  if (r.status === 404) return { ok: true, status: 404, detail: 'bestond al niet meer' };
+  if (!r.ok) throw new Error(`DELETE appointment → ${r.status}: ${(await r.text()).slice(0, 200)}`);
+  return { ok: true, status: r.status };
+}
+
+module.exports = { businesses, services, staff, afspraken, afspraak, boek, annuleer, verwijder, SHOWROOM };
 
 // ── CLI ──
 if (require.main === module) {

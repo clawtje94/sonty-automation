@@ -166,7 +166,8 @@ const dimD = [
 ];
 function orakelD(s) {
   const voorstel = s.soort.label === 'voorstel';
-  const claimBlok = voorstel && s.claim.min !== null && s.claim.min < 120;
+  // claim-guard geldt niet als de klant er zelf om vroeg (review 28-08, punt 3)
+  const claimBlok = voorstel && s.claim.min !== null && s.claim.min < 120 && !s.opVerzoek.v;
   const dagBlok = voorstel && s.vorige.uur !== null && s.vorige.uur < 24 && !s.herhaling.v && !s.opVerzoek.v;
   const blok = claimBlok || dagBlok;
   return { wil: blok ? 'blokkeer' : 'sturen', reden: claimBlok ? 'sunny-in-gesprek' : (dagBlok ? '24u' : 'ok') };

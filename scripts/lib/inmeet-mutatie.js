@@ -33,10 +33,10 @@ async function telegram(tekst) {
 }
 
 /** Bij elke boeking aanroepen: bewaart ALLE sleutels die een rollback nodig heeft. */
-function registreerBoeking({ rpItemId, naam, telefoon, email, planadoJobUuid, outlookEventId, grippNr, sheet, slot, duurMin, aanbodToken, bron }) {
+function registreerBoeking({ rpItemId, naam, telefoon, email, planadoJobUuid, outlookEventId, agendaVia, grippNr, sheet, slot, duurMin, aanbodToken, bron }) {
   const boekingen = laadBoekingen();
   boekingen[rpItemId] = {
-    naam, telefoon, email, planadoJobUuid, outlookEventId: outlookEventId || null,
+    naam, telefoon, email, planadoJobUuid, outlookEventId: outlookEventId || null, agendaVia: agendaVia || null,
     grippNr: grippNr || null, sheet: sheet || null,
     aankomst: new Date(slot.aankomst).toISOString(), inmeter: slot.inmeter, duurMin,
     aanbodToken: aanbodToken || null, geboektOp: new Date().toISOString(), status: 'geboekt',
@@ -98,14 +98,31 @@ async function muteerBoeking(rpItemId, soort, { reden = '', bron = 'onbekend' } 
   const stappen = [];
   const stap = (naam, ok, detail = '') => stappen.push({ stap: naam, ok, detail });
 
-  // 1. Outlook-event weg (vóór Planado, anders maakt de sync hem opnieuw aan)
+  // 1. Agenda weg (vóór Planado, anders maakt de sync hem opnieuw aan). De afspraak is
+  //    sinds inmeet-boeken.js een MICROSOFT BOOKINGS-afspraak (id = Bookings-id, niet een
+  //    Outlook-event); die moet in Bookings zelf weg, anders blijft de spiegel-regel
+  //    "Inmeten Sonty - <naam>" in de agenda staan (Daimy's test 28-08). Kale afspraak
+  //    (vangnet-route) = gewoon Outlook-event verwijderen.
   if (b.outlookEventId) {
-    try {
-      const { verwijderOpties } = require('./outlook-opties.js');
-      await verwijderOpties([b.outlookEventId]);
-      stap('outlook', true);
-    } catch (e) { stap('outlook', false, e.message.slice(0, 80)); }
-  } else stap('outlook', true, 'geen event-id bekend (oudere boeking)');
+    const viaBookings = b.agendaVia ? b.agendaVia === 'bookings' : true; // onbekend = eerst Bookings proberen
+    let gelukt = false, detail = '';
+    if (viaBookings) {
+      try {
+        const bk = require('../bookings-api.js');
+        const BIZ = require('./inmeet-boeken.js').BIZ;
+        const r = await bk.verwijder(BIZ, b.outlookEventId);
+        gelukt = true; detail = 'Bookings ' + (r.detail || r.status);
+      } catch (e) { detail = 'Bookings: ' + e.message.slice(0, 60); }
+    }
+    if (!gelukt) {
+      try {
+        const { verwijderOpties } = require('./outlook-opties.js');
+        await verwijderOpties([b.outlookEventId]);
+        gelukt = true; detail = (detail ? detail + '; ' : '') + 'Outlook-event verwijderd';
+      } catch (e) { detail = (detail ? detail + '; ' : '') + 'Outlook: ' + e.message.slice(0, 60); }
+    }
+    stap('agenda', gelukt, detail);
+  } else stap('agenda', true, 'geen event-id bekend (oudere boeking)');
 
   // 2. Planado-job echt verwijderen
   try {

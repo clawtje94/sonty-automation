@@ -101,7 +101,7 @@ function bevestigingsTekst(slot, taal = 'nl') {
     const vVan = new Date(+d - 60 * 60000).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
     const vTot = new Date(+d + 90 * 60000).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
     const wieEn = slot.inmeter ? `our surveyor ${slot.inmeter}` : 'our surveyor';
-    return `All set, it's booked! On ${dagEn} ${wieEn} will come by to measure. We expect to be with you around ${vanEn}. As we drive a route that day it can shift a little, so please be home between ${vVan} and ${vTot}. Something come up? Just send us a message. Kind regards, Nanny from Sonty`;
+    return `All set, it's booked! On ${dagEn} ${wieEn} will come by to measure. We expect to be with you around ${vanEn}. As we drive a route that day it can be up to an hour earlier or later, so please be home between ${vVan} and ${vTot}. Something come up? Just send us a message. Kind regards, Nanny from Sonty As soon as we're on our way you'll get a text message with a link to follow us live.`;
   }
   const dag = d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
   const van = d.toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
@@ -114,7 +114,7 @@ function bevestigingsTekst(slot, taal = 'nl') {
   // betekent gewoon thuis zijn van 08:00 tot 10:30, een uur voor tot een uur na).
   const vensterVan = new Date(+d - 60 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const vensterTot = new Date(+d + 90 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
-  return `Helemaal goed, hij staat! ${dag.charAt(0).toUpperCase() + dag.slice(1)} komt ${wie} bij je langs om in te meten. We verwachten rond ${van} bij je te zijn. Omdat we die dag een route rijden kan het iets schuiven, dus fijn als je tussen ${vensterVan} en ${vensterTot} thuis bent. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty`;
+  return `Helemaal goed, hij staat! ${dag.charAt(0).toUpperCase() + dag.slice(1)} komt ${wie} bij je langs om in te meten. We verwachten rond ${van} bij je te zijn. Omdat we die dag een route rijden kan het een uur eerder of later worden, dus fijn als je tussen ${vensterVan} en ${vensterTot} thuis bent. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty Zodra we onderweg zijn krijg je een sms met een link waarmee je ons live kunt volgen.`;
 }
 
 async function stuurWaBevestiging(ticketId, naam, slot) {

@@ -398,7 +398,7 @@ function bevestigingTekst(voornaam, slot, duurMin, taal = 'nl') {
     const vVan = new Date(+d - 60 * 60000).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
     const vTot = new Date(+d + 90 * 60000).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
     return `Hi ${voornaam}, good news, it's booked! On ${dagEn} ${slot.inmeter} will come by to measure, which takes about ${duurMin} minutes. ` +
-      `We expect to be with you around ${vanEn}. As we drive a route that day it can shift a little, so please be home between ${vVan} and ${vTot}. ` +
+      `We expect to be with you around ${vanEn}. As we drive a route that day it can be up to an hour earlier or later, so please be home between ${vVan} and ${vTot}. As soon as we're on our way you'll get a text message with a link to follow us live. ` +
       `Something come up? Just send us a message.`;
   }
   const dag = d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
@@ -409,7 +409,7 @@ function bevestigingTekst(voornaam, slot, duurMin, taal = 'nl') {
   const vensterVan = new Date(+d - 60 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const vensterTot = new Date(+d + 90 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   return `Hoi ${voornaam}, goed nieuws, hij staat! ${dag.charAt(0).toUpperCase() + dag.slice(1)} komt ${slot.inmeter} bij je langs om in te meten, dat duurt zo'n ${duurMin} minuutjes. ` +
-    `We verwachten rond ${van} bij je te zijn. Omdat we die dag een route rijden kan het iets schuiven, dus fijn als je tussen ${vensterVan} en ${vensterTot} thuis bent. ` +
+    `We verwachten rond ${van} bij je te zijn. Omdat we die dag een route rijden kan het een uur eerder of later worden, dus fijn als je tussen ${vensterVan} en ${vensterTot} thuis bent. Zodra we onderweg zijn krijg je een sms met een link waarmee je ons live kunt volgen. ` +
     `Komt er iets tussen? Stuur gerust een berichtje.`;
 }
 
@@ -434,7 +434,7 @@ ${rij('Who', `${slot.inmeter} (Sonty surveyor)`)}
 ${rij('Duration', `about ${duurMin} minutes`)}
 ${adres ? rij('Address', adres) : ''}
 </table>
-<p>As we drive a route that day the arrival can shift a little, so please be home between ${vVan} and ${vTot}. If we're running late we'll let you know in time.</p>
+<p>As we drive a route that day we can be up to an hour earlier or later, so please be home between ${vVan} and ${vTot}. As soon as we're on our way you'll get a text message with a link to follow us live.</p>
 <p>Something come up? Just reply to this e-mail or send us a WhatsApp message and we'll find another moment.</p>
 <p>Kind regards,<br>${afzender} from Sonty</p>`;
   }
@@ -446,7 +446,7 @@ ${rij('Wie', `${slot.inmeter} (inmeter van Sonty)`)}
 ${rij('Duur', `ongeveer ${duurMin} minuten`)}
 ${adres ? rij('Adres', adres) : ''}
 </table>
-<p>Omdat we die dag een route rijden kan de aankomst iets schuiven; fijn als je tussen ${vVan} en ${vTot} thuis bent. Wordt het later, dan laten we het je op tijd weten.</p>
+<p>Omdat we die dag een route rijden kunnen we een uur eerder of later zijn; fijn als je tussen ${vVan} en ${vTot} thuis bent. Zodra we onderweg zijn krijg je een sms met een link waarmee je ons live kunt volgen.</p>
 <p>Komt er iets tussen? Antwoord op deze mail of stuur een berichtje via WhatsApp, dan plannen we een ander moment.</p>
 <p>Groetjes,<br>${afzender} van Sonty</p>`;
 }
@@ -538,7 +538,7 @@ function herinneringTekst(voornaam, slot, duurMin, dagenVooraf = 1, taal = 'nl')
     const vVan = new Date(+d - 60 * 60000).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
     const vTot = new Date(+d + 90 * 60000).toLocaleString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
     return `Hi ${voornaam}, a quick reminder: ${wanneerEn} ${slot.inmeter} will come by to measure, which only takes about ${duurMin} minutes. ` +
-      `We expect to be with you around ${vanEn}. As we drive a route it can shift a little, so please be home between ${vVan} and ${vTot}. ${slot2En}`;
+      `We expect to be with you around ${vanEn}. As we drive a route it can be up to an hour earlier or later, so please be home between ${vVan} and ${vTot}. As soon as we're on our way you'll get a text message with a link to follow us live. ${slot2En}`;
   }
   const van = d.toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const tot = new Date(+d + 30 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
@@ -548,7 +548,7 @@ function herinneringTekst(voornaam, slot, duurMin, dagenVooraf = 1, taal = 'nl')
   const vensterVan = new Date(+d - 60 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   const vensterTot = new Date(+d + 90 * 60000).toLocaleString('nl-NL', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
   return `Hoi ${voornaam}, kleine herinnering: ${wanneer} komt ${slot.inmeter} bij je langs om in te meten, dat duurt maar zo'n ${duurMin} minuutjes. ` +
-    `We verwachten rond ${van} bij je te zijn. Omdat we een route rijden kan het iets schuiven, dus fijn als je tussen ${vensterVan} en ${vensterTot} thuis bent. ${slot2}`;
+    `We verwachten rond ${van} bij je te zijn. Omdat we een route rijden kan het een uur eerder of later worden, dus fijn als je tussen ${vensterVan} en ${vensterTot} thuis bent. Zodra we onderweg zijn krijg je een sms met een link waarmee je ons live kunt volgen. ${slot2}`;
 }
 
 /** Beide kanalen; geeft per kanaal terug wat er gebeurd is. Eén kanaal gelukt = aanbod is onderweg. */

@@ -182,7 +182,7 @@ function voorstelTekst({ voornaam = 'daar', slots = [], duurMin = 30, ver = fals
       ? `Hi ${voornaam}, I'd love to get the measuring scheduled for you. It's extra busy at the moment (summer holidays and the construction break), so this is the first moment I can offer`
       : `Hi ${voornaam}, good news: I can schedule the measuring for you`;
     const ver_ = ver ? ' We plan our measuring routes as efficiently as possible and combine jobs in your area: that saves unnecessary kilometres, emissions and fuel, but it can mean it takes a little longer before we get to you.' : '';
-    const marge = ' As we drive a route that day it can be up to an hour earlier or later; we\'ll let you know if so.';
+    const marge = ' As we drive a route that day we can be up to an hour earlier or later; as soon as we\'re on our way you\'ll get a text message with a link to follow us live.';
     const vraag = lijst.length === 1
       ? ' Does that work for you? Just reply "yes" and I\'ll lock it in. If not, let me know from when it suits you (or which days/parts of the day), and I\'ll have another look.'
       : ' Which one suits you best? Just reply with the day and I\'ll lock it in. None of them work? Let me know from when it suits you and I\'ll have another look.';
@@ -193,7 +193,7 @@ function voorstelTekst({ voornaam = 'daar', slots = [], duurMin = 30, ver = fals
     ? `Hoi ${voornaam}, ik plan het inmeten graag voor je in. Het is op dit moment extra druk (bouwvak en vakanties), dus dit is het eerste moment dat ik je kan aanbieden`
     : `Hoi ${voornaam}, goed nieuws: ik kan het inmeten voor je inplannen`;
   const ver_ = ver ? ' We plannen onze inmeetroutes zo efficiënt mogelijk en combineren klussen bij jou in de buurt: dat scheelt onnodige kilometers, uitstoot en brandstof, maar daardoor kan het soms iets langer duren voor we bij je zijn.' : '';
-  const marge = ' Omdat we die dag een route rijden kan het een uurtje eerder of later worden, dat laten we je dan even weten.';
+  const marge = ' Omdat we die dag een route rijden kunnen we een uur eerder of later zijn; zodra we onderweg zijn krijg je een sms met een link waarmee je ons live kunt volgen.';
   const vraag = lijst.length === 1
     ? ' Past dat? Antwoord dan gewoon "ja", dan zet ik hem voor je vast. Komt het niet uit, laat dan even weten vanaf wanneer het jou wél uitkomt (of welke dagen/dagdelen), dan kijk ik verder.'
     : ' Welke past jou het beste? Antwoord gewoon met de dag, dan zet ik hem voor je vast. Past geen van beide, laat dan even weten vanaf wanneer het jou wél uitkomt, dan kijk ik verder.';

@@ -117,7 +117,7 @@ function voerUitB(s) {
     taalOk: en ? !/\b(Hoi|Groetjes|inmeten)\b/.test(plat) && /Hi Kim/.test(plat) : !/\b(Hi Kim|Kind regards|measure)\b/.test(plat) && /Hoi Kim/.test(plat),
     handtekening: /Sunny/.test(plat) && !/Nanny|Jaimy/.test(plat) ? 'Sunny' : 'ANDERS',
     tijdGenoemd: en ? /around \d\d:\d\d/.test(plat) : /rond \d\d:\d\d/.test(plat),
-    marge: en ? /hour earlier or later/.test(plat) : /uurtje eerder of later/.test(plat),
+    marge: en ? /hour earlier or later/.test(plat) && /text message/.test(plat) : /een uur eerder of later/.test(plat) && /sms/.test(plat),
     vraag: /\?/.test(plat),
     geenGoedNieuwsBijDrukte: !/goed nieuws|good news/i.test(plat),
     verWegUitleg: en ? /combine jobs/.test(plat) : /combineren klussen/.test(plat),

@@ -1,5 +1,31 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 28-08 (eind middag): REKENTOOL + GRIPP-KOPPELING LIVE (website d6b0d8e), volledige review
+- Daimy: "alles nog een keer goed nakijken, als hier een fout in zit gaan ze het fout doen; handig als ze een
+  Gripp-nummer kunnen invullen en de originele prijzen zien".
+- GEBOUWD: lib/rekentool/gripp.ts (ALLEEN LEZEN, 1 offer.get): Gripp-nummer → regels gesorteerd product/montage/
+  korting/extra/anders, per productregel een voorstel (productKey via GRIPP_PRODUCT-omkering + naam, maat uit
+  "Breedte:/Uitval:/Hoogte:", bediening via mapBediening maar altijd uit de keuzelijst, kleur via mapKleurType tegen
+  de echte lijsten; NTB/NNB = standaard + opmerking; "bedraad" + afstandsbediening = opmerking; montage "uitgebreid/
+  uitbouw" → uitbouw aan). Losse Situo-regel = vast bedrag + opmerking (zit al in de nieuwe io-prijs). Korting-%
+  uit de offerte overgenomen. Pagina: Gripp-blok bovenaan (originele regels + prijzen incl. btw), "Regels overnemen
+  en herberekenen", per regel "In offerte € X → verschil", voettekst "Offerte N was € … / verschil".
+- LAB-VONDST (echte stille fout, gefixt vóór live): lege "Frame kleur:" in een omschrijving las het volgende label
+  ("Kleur") als kleurnaam en rekende RAL-meerprijs zonder opmerking → echte label:waarde-ontleding (velden()).
+- Review-fixes: resultaat op regel-id gekoppeld (geen index-verschuiving bij verwijderen), aantal vrij typbaar,
+  kleurlabel per categorie (rolluik: kast/lamellen, duurste telt), voorraadscherm zet 20% over alles.
+- BEWIJS: lab 7.310 scenario's 0x FOUT-STIL (incl. 900 Gripp-omschrijvingen in 3 stijlen × lelijke waarden);
+  echte offerte 6494 (Suneye 4000x2500 io, windsensor, montage uitgebreid, 15%) volledig herberekend:
+  €3.330,98 vs €3.330,99 in Gripp (1 cent afronding). Productie-API + Playwright iPhone 12 op productie met de
+  Gripp-flow: identiek.
+- TWEE BELEIDSPUNTEN (niet zelf veranderd, aan Daimy gemeld):
+  1. Unilux hor afwijkende RAL: motor rekent starttarief (€ per order) PER HOR en de tool/keten ×aantal → bij 3 horren
+     2× starttarief te veel. Zit ook zo in de meetbon-keten en de winkeltool (zelfde motor).
+  2. Montage op uitbouw (€325 knikarm) bestaat in de rekentool en winkeltool, maar de meetbon heeft geen uitbouw-veld
+     en de keten geeft dan €275 in Gripp. Voorstel: uitbouw-keuze in de meetbon (producten.ts knikarm) + doorgeven.
+- Oude offertes (bv. 1083 uit 2025, Suncube €1.850) laten grote verschillen zien door de prijsverhoging van 3-8:
+  de tool toont dat eerlijk, de keten zet ook de nieuwe prijs. Beleid daarvoor is aan Daimy.
+
 ## 28-08 (middag): REKENTOOL INMETERS LIVE — /admin/rekentool (website 27297bb)
 - Daimy (/goal): inmeters moeten in de admin een rekentool hebben om na het inmeten de productprijs uit te
   rekenen, zodat bij de eindofferte geen prijsboek meer nodig is en bediening/kleur/maat niet fout gaan.

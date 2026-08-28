@@ -451,6 +451,18 @@ async function main() {
               console.log(`  ${info.naam}: ${duiding.intent} — Sunny doet de planning, deze route blijft eraf`);
               continue;
             }
+            // SUNNY'S EIGEN VOORSTEL (Daimy 28-08): alles wat geen kale keuze is, is van Sunny —
+            // zolang hij aantoonbaar draait en het bericht vers is (max 20 min). Daarna neemt
+            // deze route het over, want stilte is erger dan een minder persoonlijk antwoord.
+            {
+              const SS = require('./lib/sunny-start.js');
+              const ouderdomMin = (Date.now() - wanneer) / 60000;
+              if (SS.eigenaarVanReactie({ bron: info.bron, geclaimd: false, leeft: SS.sunnyLeeft(), plannenAan: sunnyPlant, ouderdomMin, kaleKeuze: false }) === 'sunny') {
+                delete gemeld[afgehandeldSleutel];
+                console.log(`  ${info.naam}: ${duiding.intent} op Sunny's eigen voorstel — Sunny antwoordt (${Math.round(ouderdomMin)} min oud)`);
+                continue;
+              }
+            }
 
             if (duiding.intent === 'ander-moment') {
               // PINGPONG-REM (Mandy 13-08: vier afwijzingen in 25 minuten, en het

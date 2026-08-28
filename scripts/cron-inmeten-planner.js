@@ -29,6 +29,9 @@ const INMETERS = [
 ];
 
 const LIVE = process.argv.includes('--live');
+// SUNNY PLANT ZELF (Daimy 28-08): eerste voorstel automatisch, door dezelfde poorten. Zie lib/sunny-start.js.
+const sunnyStart = require('./lib/sunny-start.js');
+const SUNNY_MAX_PER_RUN = 5;
 // VEILIGHEIDSKLEP: --live zonder filter zou elke lead op "Inmeten inplannen" boeken,
 // dus ook echte klanten. Met --alleen <tekst> verwerkt hij uitsluitend de leads
 // waarvan de naam die tekst bevat.
@@ -740,6 +743,7 @@ async function main() {
   try {
     lopendeLeads = await voegAanbiedingenToe(agenda);
     console.log(`  (${lopendeLeads.size} lead(s) met lopend aanbod: slots bezet, lead overgeslagen)`);
+    await herbezorgSpookAanbiedingen(state);
   } catch (e) {
     console.log(`  ! aanbod-register niet bereikbaar (${e.message}) — VEILIGHEIDSSTOP, anders dreigt dubbel aanbod`);
     await telegram(`⚠️ Inmeet-planner gestopt: aanbod-register onbereikbaar, kan dubbel aanbod niet uitsluiten.`);
@@ -758,6 +762,7 @@ async function main() {
   const regels = [];
   const wachtenden = []; // leads zonder aanbod: kandidaten voor de combi-pas
   const dash = { bijgewerkt: new Date().toISOString(), leads: [], boekingen: [] };
+  let sunnyVerstuurd = 0;
 
   for (const item of items) {
     if (lopendeLeads.has(item.id)) { dash.leads.push({ rpItemId: item.id, naam: item.summary, status: 'aanbod-loopt' }); continue; }
@@ -870,12 +875,13 @@ async function main() {
     }
     regels.push(`${lead.naam} (${lead.plaats}, ${duur} min): ${aanbod.map((s) => `${s.inmeter} ${s.datum.slice(5)} ${venster(s)} +${s.extraRijtijdMin}min`).join(' | ')}`);
     const kaartOpties = aanbod;
-    dash.leads.push({
+    const kaart = {
       rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur, wachtDagen,
       status: LIVE ? 'aanbod-verstuurd' : 'aanbod-mogelijk',
       producten: lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ').slice(0, 90),
       top: kaartOpties.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin, label: x.label || undefined, dagOpener: x.dagOpener || undefined })),
-    });
+    };
+    dash.leads.push(kaart);
 
     if (LIVE) {
       try {
@@ -891,6 +897,40 @@ async function main() {
         if (process.env.POORT_OVERRIDE === '1') console.log(e.stack);
         regels.push(`  → aanbod versturen MISLUKT: ${e.message}`);
         continue;
+      }
+    }
+    // SUNNY PLANT ZELF (Daimy 28-08): zonder --live stuurt Sunny het eerste voorstel
+    // automatisch, door dezelfde poorten (lopend aanbod, bestaande boeking, verzendpoort
+    // met stil-lijst/mens-actief/weeklimiet/24u-regel, verzendvenster). Aan-knop:
+    // scripts/ai-ks/.sunny-start-live; inhoud "alleen:<naam>" = proefstand voor één klant
+    // (eerst 1, dan de rest). Wat niet verstuurd wordt, staat mét reden op de kaart.
+    if (!LIVE && sunnyStart.aan()) {
+      const beperkTot = sunnyStart.alleenNaam();
+      const gate = sunnyStart.magStarten({ lead: { ...lead, rpItemId: item.id }, slots: aanbod, lopend: false, geboekt: false, state });
+      if (beperkTot && !`${lead.naam} ${item.id}`.toLowerCase().includes(beperkTot)) {
+        kaart.reden = `Sunny wacht: proefstand, alleen "${beperkTot}"`;
+      } else if (!gate.ok) {
+        kaart.reden = 'Sunny wacht: ' + gate.reden;
+        if (gate.mensNodig) regels.push(`${lead.naam}: ${gate.reden}`);
+        console.log(`    Sunny stuurt niet: ${gate.reden}`);
+      } else if (sunnyVerstuurd >= SUNNY_MAX_PER_RUN) {
+        kaart.reden = `Sunny wacht: max ${SUNNY_MAX_PER_RUN} voorstellen per ronde, volgende ronde`;
+        console.log(`    Sunny: rondeplafond bereikt, ${lead.naam} volgende ronde`);
+      } else {
+        try {
+          const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda, null, { bron: 'sunny', stijl: 'sunny' });
+          sunnyVerstuurd++;
+          kaart.status = 'aanbod-verstuurd';
+          kaart.reden = `Sunny stuurde voorstel: ${sunnyStart.slotZin(aanbod[0])}`;
+          console.log(`    SUNNY-VOORSTEL VERSTUURD: ${url}`);
+          regels.push(`  → Sunny stuurde het voorstel (${sunnyStart.slotZin(aanbod[0])})`);
+          state.aangeboden[item.id] = { naam: lead.naam, op: new Date().toISOString(), aanbod: aanbod.length, bron: 'sunny' };
+        } catch (e) {
+          kaart.reden = 'Sunny: niet verstuurd — ' + String(e.message).slice(0, 90);
+          console.log(`    Sunny: voorstel NIET verstuurd: ${e.message}`);
+          regels.push(`  → Sunny-voorstel MISLUKT: ${e.message}`);
+          continue;
+        }
       }
     }
     // binnen deze run: aangeboden slots zijn bezet voor de volgende leads
@@ -1167,7 +1207,8 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, 
   if (aantalGewenst === 1 && !heeftMomentTemplate()) {
     console.log('  (aantalTijden=1 maar 1-moment-template ontbreekt nog — val terug op 3)');
   }
-  const aantal = aantalGewenst === 1 && heeftMomentTemplate() ? 1 : 3;
+  // Sunny-stijl: altijd precies één beste tijd (Daimy 28-08), template of niet.
+  const aantal = opties.stijl === 'sunny' ? 1 : (aantalGewenst === 1 && heeftMomentTemplate() ? 1 : 3);
   // laatste botsingscontrole vlak vóór verzending (zie nogSteedsVrij)
   aanbod = await nogSteedsVrij(aanbod, duurMin, lead.naam);
   if (!aanbod.length) throw new Error('alle tijden zijn net aan een andere klant aangeboden — opnieuw laten rekenen');
@@ -1216,7 +1257,7 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, 
   if (!res.ok) throw new Error(`aanbod aanmaken: HTTP ${res.status}`);
   const { url, token } = await res.json();
   const { verstuurAanbod } = require('./lib/aanbod-versturen');
-  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email, rpItemId: item.id }, duurMin, ver, slots: aanbod, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren, herhaling: !!opties.herhaling, klantReply: opties.klantReply || null, wens: beperking || null }, url);
+  const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email, rpItemId: item.id }, duurMin, ver, slots: aanbod, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren, stijl: opties.stijl || null, bron: opties.bron || null, herhaling: !!opties.herhaling, klantReply: opties.klantReply || null, wens: beperking || null }, url);
   if (!verzonden.wa.ok && !verzonden.mail.ok) {
     // NIET BEZORGD = GEEN AANBOD. Het record stond al "open" in het register terwijl de
     // klant niets had gekregen (Fatih/Marius 20-08: spook-aanbiedingen die elke ochtend
@@ -1259,9 +1300,18 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, 
       email: lead.email || null,
       waTicket: verzonden.wa.ticket || null, mailTicket: verzonden.mail.ticket || null,
       verstuurdOp: new Date().toISOString(),
+      // 28-08: rpItemId + bron erbij (24u-regel per klant, Sunny als eigenaar van zijn eigen voorstel)
+      rpItemId: item.id, bron: opties.bron || 'planner', stijl: opties.stijl || null,
     } };
     bewaarState(st2);
   } catch { /* monitor valt dan terug op telefoon-zoeken */ }
+  if (opties.bron === 'sunny' && verzonden.wa.ok && verzonden.wa.ticket) {
+    // Sunny is eigenaar van zijn eigen voorstel: gesprek claimen (reply-route blijft van
+    // vragen/ander-moment af) en als actief gesprek registreren zodat de actief-sweep het
+    // antwoord van de klant ziet, ook buiten de kandidaat-lijst.
+    try { require('./lib/gesprek-claims.js').claim(verzonden.wa.ticket, 'sunny'); } catch { /* vangnet */ }
+    try { sunnyStart.registreerActiefTicket(verzonden.wa.ticket, lead.naam); } catch { /* vangnet */ }
+  }
   // opties zichtbaar maken voor het kantoor (Outlook), zodat niemand erdoorheen plant
   try {
     const { maakOpties } = require('./lib/outlook-opties.js');
@@ -1684,6 +1734,39 @@ async function verwerkAanbiedingen() {
  * Cruciaal voor ELKE route die tijden uitrekent of boekt: zonder dit kunnen twee
  * klanten dezelfde tijd aangeboden krijgen (Daimy 06-08: "als ik nu iedereen
  * tegelijk dat bericht stuur, kloppen die tijden dan nog?"). */
+/** O15 (Daimy 28-08): crash tussen aanmaken en versturen = record open, klant kreeg niets
+ *  ("spook-aanbod"). Zo'n record wordt hier ÉÉN keer alsnog bezorgd (zelfde token, zelfde
+ *  tijden); lukt dat niet, dan gaat het dicht met een melding. Nooit 0x, nooit 2x. */
+async function herbezorgSpookAanbiedingen(state) {
+  try {
+    const r = await fetch(`${AANBOD_API}?status=open`, { headers: { 'x-meet-code': MEET_CODE } });
+    if (!r.ok) return;
+    const { aanbiedingen } = await r.json();
+    for (const a of aanbiedingen || []) {
+      const leeftijd = Date.now() - Date.parse(a.aangemaakt || 0);
+      if (state.aanbodTickets?.[a.token] || !(leeftijd > 3 * 60000) || leeftijd > 24 * 3600000) continue;
+      if (state.spookGeprobeerd?.[a.token]) continue;
+      state.spookGeprobeerd = { ...(state.spookGeprobeerd || {}), [a.token]: new Date().toISOString() };
+      bewaarState(state);
+      const { verstuurAanbod } = require('./lib/aanbod-versturen');
+      const uit = await verstuurAanbod({ ...a, stijl: a.stijl || null, bron: a.bron || null }, `https://sonty-website.vercel.app/inmeten/${a.token}`);
+      console.log(`  spook-aanbod ${String(a.token).slice(0, 8)} (${a.lead?.naam}) alsnog bezorgd: wa ${uit.wa.ok ? 'ok' : uit.wa.reden}, mail ${uit.mail.ok ? 'ok' : uit.mail.reden}`);
+      if (uit.ergensGelukt) {
+        const st2 = laadState();
+        st2.aanbodTickets = { ...(st2.aanbodTickets || {}), [a.token]: {
+          rpItemId: a.lead?.rpItemId, naam: a.lead?.naam, telefoon: a.lead?.telefoon || null, email: a.lead?.email || null,
+          waTicket: uit.wa.ticket || null, mailTicket: uit.mail.ticket || null, verstuurdOp: new Date().toISOString(),
+          bron: a.bron || 'planner', herbezorgd: true,
+        } };
+        bewaarState(st2);
+      } else {
+        await aanbodApi('/' + a.token, { method: 'PATCH', body: JSON.stringify({ status: 'verlopen', reden: 'spook-aanbod niet bezorgd: ' + uit.wa.reden }) }).catch(() => {});
+        await telegram(`⚠️ Aanbod voor ${a.lead?.naam} was aangemaakt maar nooit bezorgd (crash?); alsnog bezorgen lukte ook niet (wa: ${uit.wa.reden}; mail: ${uit.mail.reden}) — record gesloten, volgende ronde nieuw voorstel.`);
+      }
+    }
+  } catch (e) { console.log('  spook-controle overgeslagen: ' + String(e.message).slice(0, 60)); }
+}
+
 async function voegAanbiedingenToe(agenda) {
   const lopendeLeads = new Set();
   for (const status of ['open', 'gekozen']) {
@@ -1893,6 +1976,7 @@ async function verwerkDashboardVerzoek(m) {
       rpItemId: item.id, naam: lead.naam, telefoon: lead.telefoon, email: lead.email,
       planadoJobUuid: uitkomst.planadoJobUuid, outlookEventId, grippNr: uitkomst.grippNr,
       sheet: uitkomst.sheetLocatie, slot: { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter }, duurMin: duur,
+      bron: m.bron || null,
     });
   } catch (e) {
     await telegram(`⚠️ Boekingsrecord (winkel-boeking) niet opgeslagen voor ${lead.naam}: ${e.message.slice(0, 100)}`);
@@ -1949,7 +2033,7 @@ async function verwerkVerzoek(m) {
   return { afgewezen: false, uitkomst: res.gelukt ? 'alle systemen bijgewerkt' : 'deels: ' + res.stappen.filter((x) => !x.ok).map((x) => x.stap).join(',') };
 }
 
-module.exports = { verwerkVerzoek, ontdubbelSlots, verversRonde: main, haalAgenda, leesLeadCompleet, werkdagenVoor, laadVakanties, voegAanbiedingenToe, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram, reminderNu, reminderTekst };
+module.exports = { verwerkVerzoek, ontdubbelSlots, verversRonde: main, maakEnVerstuurAanbod, haalAgenda, leesLeadCompleet, werkdagenVoor, laadVakanties, voegAanbiedingenToe, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram, reminderNu, reminderTekst };
 
 if (require.main === module) {
   if (process.argv.includes('--verwerk-aanbod')) {

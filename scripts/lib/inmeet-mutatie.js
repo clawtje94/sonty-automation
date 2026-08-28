@@ -33,13 +33,15 @@ async function telegram(tekst) {
 }
 
 /** Bij elke boeking aanroepen: bewaart ALLE sleutels die een rollback nodig heeft. */
-function registreerBoeking({ rpItemId, naam, telefoon, email, planadoJobUuid, outlookEventId, grippNr, sheet, slot, duurMin, aanbodToken }) {
+function registreerBoeking({ rpItemId, naam, telefoon, email, planadoJobUuid, outlookEventId, grippNr, sheet, slot, duurMin, aanbodToken, bron }) {
   const boekingen = laadBoekingen();
   boekingen[rpItemId] = {
     naam, telefoon, email, planadoJobUuid, outlookEventId: outlookEventId || null,
     grippNr: grippNr || null, sheet: sheet || null,
     aankomst: new Date(slot.aankomst).toISOString(), inmeter: slot.inmeter, duurMin,
     aanbodToken: aanbodToken || null, geboektOp: new Date().toISOString(), status: 'geboekt',
+    // 28-08: bron erbij (sunny / klant-reply / winkel / dashboard) — Daimy wil kunnen zien wie boekte
+    bron: bron || null,
   };
   bewaarBoekingen(boekingen);
   // wie een (nieuwe) boeking krijgt is klaar met de annuleringslijst

@@ -29,6 +29,8 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 const BOT_PATRONEN = [
   /Groetjes,\s*Nanny van Sonty/i,
   /Groetjes,\s*Jaimy/i,
+  /Groetjes,\s*Sunny/i,
+  /Kind regards,\s*Sunny/i,
   /Ons voorstel:/i,
   /Tik op een knop/i,
   /goed nieuws: we kunnen bij je langskomen/i,
@@ -122,7 +124,7 @@ async function haalBerichten(ticketId) {
  * DE poort. Aanroepen vóór elk automatisch klantbericht uit de planningsketen.
  * @returns {Promise<{ok:boolean, reden:string, mensNodig?:boolean}>}
  */
-async function magSturen({ telefoon, email, ticketId, soort, opVerzoek = false, luistert = false }) {
+async function magSturen({ telefoon, email, ticketId, soort, opVerzoek = false, luistert = false, herhaling = false }) {
   // WAAR DE LIMIET VOOR IS (Daimy 26-08): "dat limiet is als er domme voorstellen
   // worden gedaan en niet naar de klant wordt geluisterd. Als dat wel wordt gedaan
   // hoeft dat limiet niet." Een voorstel dat aantoonbaar op de wens van de klant is
@@ -154,6 +156,28 @@ async function magSturen({ telefoon, email, ticketId, soort, opVerzoek = false, 
       const maxA = opVerzoek ? 4 : 2;
       if (eerder >= maxA) return { ok: false, reden: 'max-voorstellen (' + eerder + ' al gestuurd deze week, administratie)', mensNodig: true };
     } catch { /* administratie onleesbaar: dan telt alleen het gesprek */ }
+  }
+  // O1 (Daimy 28-08, Sunny plant zelf): nooit een TWEEDE voorstel binnen 24 uur aan
+  // dezelfde klant, uit welke route dan ook (planner, dashboard-klik, Sunny) — tenzij de
+  // klant er zelf om vroeg (opVerzoek/luistert) of het een herinnering aan hetzelfde
+  // voorstel is. Bron: de eigen verzendadministratie (aanbodTickets).
+  if (soort === 'voorstel' && !opVerzoek && !luistert && !herhaling) {
+    try {
+      const st = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'inmeten-planner-state.json'), 'utf8'));
+      const laatste = require('./sunny-start.js').laatsteVoorstelOp(st, { telefoon, email });
+      if (laatste && Date.now() - laatste < 24 * 3600000) {
+        const wanneer = new Date(laatste).toLocaleString('nl-NL', { timeZone: 'Europe/Amsterdam', weekday: 'short', hour: '2-digit', minute: '2-digit' });
+        return { ok: false, reden: 'al een voorstel <24u geleden (' + wanneer + ') — geen tweede', mensNodig: false };
+      }
+    } catch { /* administratie onleesbaar: dan telt alleen het gesprek */ }
+  }
+  // SUNNY IS AL IN GESPREK (28-08): heeft Sunny dit ticket geclaimd (hij noemde zelf net
+  // tijden of handelt een ander-moment af), dan stuurt de planningsketen géén voorstel
+  // overheen — twee stemmen in één gesprek is precies wat Daimy niet wil.
+  if (soort === 'voorstel' && ticketId) {
+    try {
+      if (require('./gesprek-claims.js').geclaimd(ticketId, 120)) return { ok: false, reden: 'sunny-in-gesprek (ticket geclaimd door Sunny)', mensNodig: false };
+    } catch { /* geen claims-administratie: gewoon door */ }
   }
   if (!ticketId) return { ok: true, reden: 'geen ticket bekend — stil-lijst en verzendadministratie getoetst' };
   const berichten = await haalBerichten(ticketId);

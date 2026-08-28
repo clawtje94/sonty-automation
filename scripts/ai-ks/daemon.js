@@ -443,6 +443,8 @@ async function planningRolVoor(t, rows) {
       // helemaal niet kent. Klant kreeg 8+ minuten niets.
       let sunnyClaim = false;
       try { sunnyClaim = require('../lib/gesprek-claims.js').geclaimd(t.id, 45); } catch { /* geen claim */ }
+      // Sunny's EIGEN voorstel (bron 'sunny', Daimy 28-08): het vervolg is altijd van hem, ook na 45 min.
+      if (info.bron === 'sunny') sunnyClaim = true;
       if (plannenAan && (['ander-moment', 'annuleren'].includes(d.intent) || (sunnyClaim && ['akkoord', 'ander-moment', 'vraag', 'annuleren'].includes(d.intent)))) {
         // Sunny neemt (of houdt) dit gesprek: ticket claimen zodat de planner-routes
         // (aanbod-replies, laatste-woord-check) er vanaf blijven — nooit twee botten.
@@ -493,7 +495,7 @@ async function planningRolVoor(t, rows) {
     'PLANNING-CONTEXT (intern, niet letterlijk citeren):',
     geboekt
       ? `- De inmeetafspraak van deze klant is GEBOEKT: ${geboekt.slot?.aankomst ? fmt({ aankomst: geboekt.slot.aankomst, inmeter: geboekt.slot.inmeter || geboekt.inmeter }) : (geboekt.datum || 'datum onbekend')}. Thuisblijf-venster: een uur vóór tot anderhalf uur ná de genoemde tijd; verschuift het door de route, dan laten we het weten.`
-      : `- Onze planning (Nanny) heeft deze klant een inmeetmoment voorgesteld: ${slots.length ? slots.map(fmt).join(' of ') : 'tijd onbekend'} (status aanbod: ${status}${aanbod?.verlooptOp ? ', vast tot ' + new Date(aanbod.verlooptOp).toLocaleString('nl-NL', { timeZone: 'Europe/Amsterdam' }) : ''}).`,
+      : `- ${info.bron === 'sunny' ? 'JIJ (Sunny) hebt deze klant zelf een inmeetmoment voorgesteld' : 'Onze planning (Nanny) heeft deze klant een inmeetmoment voorgesteld'}: ${slots.length ? slots.map(fmt).join(' of ') : 'tijd onbekend'} (status aanbod: ${status}${aanbod?.verlooptOp ? ', vast tot ' + new Date(aanbod.verlooptOp).toLocaleString('nl-NL', { timeZone: 'Europe/Amsterdam' }) : ''}).`,
     '- Dit is het EERSTE beschikbare moment; eerder kan op dit moment NIET (het is drukker dan we willen door vakanties en de bouwvak; de inmeters werken maandag t/m donderdag 09:00-15:00; Engelstalige klanten meet alleen Sjoerd). Zeg dat eerlijk, beloof geen eerdere datum.',
     sunnyPlant && sunnyPlant.intent === 'annuleren'
       ? `- DE KLANT WIL ZIJN INMEETAFSPRAAK ANNULEREN en JIJ handelt dit volledig af (${sunnyPlant.samenvatting || 'zie zijn bericht'}). Vaste werkwijze (Daimy 26-08): NIET meteen annuleren. Vraag éérst in één kort, vriendelijk bericht (a) waarom hij annuleert en (b) of een ander moment misschien beter uitkomt ("mag ik vragen waarom? Komt het moment gewoon niet uit, dan plan ik zo een andere tijd voor je in"). Wil hij een ander moment: gebruik inmeet_tijden en boek gewoon. Zegt hij (nu of in zijn vorige bericht al) duidelijk dat hij écht wil annuleren, of heeft hij de waarom-vraag al beantwoord: roep dan inmeet_annuleren aan met zijn letterlijke zin als citaat én de reden — de afspraak wordt dan overal netjes verwijderd en hij krijgt automatisch de bevestiging. Nooit twee keer om de reden vragen, nooit pushen. Dit is een lopend gesprek: begin niet met "Hoi naam".`
@@ -1368,6 +1370,8 @@ let laatsteNotitieSweep = 0;
 let laatsteTerugkomerCheck = 0;
 
 async function pollRonde(state, { onlyTest, sonnyOnly }) {
+  // hartslag: aanbod-replies laat Sunny's eigen voorstellen aan Sunny zolang hij aantoonbaar draait
+  try { require('../lib/sunny-start.js').schrijfHeartbeat(); } catch { /* best effort */ }
   // --sonny-only (AI-dienst-cron): buiten openingstijden bedient Sonny alle WA-klanten
   // (mits .sonny-enabled). Binnen openingstijden — of zolang Sonny uit staat — alleen de
   // whitelist-testnummers live, zodat we overdag doortrainen zonder dat klanten iets

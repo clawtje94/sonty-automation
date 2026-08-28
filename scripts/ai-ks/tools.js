@@ -481,6 +481,9 @@ function raaktAnderPrijsboek(ctx, input) {
       if (!r.slots.length) {
         return JSON.stringify({ status: 'GEEN TIJDEN', opmerking: 'Geen beschikbare tijden gevonden' + (input.vanaf ? ' vanaf ' + input.vanaf : '') + ' binnen de planhorizon. Beloof GEEN tijd, zeg dat je het laat uitzoeken, en roep escaleren_naar_mens aan.' });
       }
+      // Sunny noemt zo zelf tijden: gesprek claimen zodat de planningsketen (planner-ronde,
+      // dashboard-klik, reply-route) hier geen tweede voorstel overheen stuurt (28-08).
+      try { if (ctx.ticketId) require('../lib/gesprek-claims.js').claim(ctx.ticketId, 'sunny'); } catch { /* vangnet */ }
       return JSON.stringify({
         status: 'OK', duurMin: r.duurMin, tijden: r.slots,
         opmerking: 'Dit zijn ECHTE vrije tijden (momentopname, nog niet gereserveerd). Noem er 2-3 in gewone taal, sluit aan op wat de klant vroeg. Kiest de klant expliciet één moment, boek dan met inmeet_boeken. Noem nooit tijden buiten deze lijst.',

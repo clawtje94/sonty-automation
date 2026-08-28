@@ -237,6 +237,12 @@ async function stuurWhatsApp(aanbod, url) {
   let vrijeTekst = aanbod.herhaling
     ? herhalingTekst(voornaam, aanbod.slots, taal)
     : berichtTekst(voornaam, url, aanbod.duurMin, aanbod.geldigUren || 24, aanbod.ver === true, aanbod.slots, taal);
+  // SUNNY-STIJL (Daimy 28-08): Sunny's eigen eerste voorstel — één beste tijd, menselijk,
+  // met aankomstmarge en wens-vraag, ondertekend als Sunny. Het goedgekeurde template
+  // blijft het vangnet buiten het 24-uursvenster.
+  if (aanbod.stijl === 'sunny' && !aanbod.herhaling && !aanbod.klantReply) {
+    vrijeTekst = require('./sunny-start.js').voorstelTekst({ voornaam, slots: aanbod.slots, duurMin: aanbod.duurMin, ver: aanbod.ver === true, taal });
+  }
   if (aanbod.klantReply && !aanbod.herhaling) {
     // antwoord op wat de klant vroeg: aanhef ervoor, "Hoi X," uit de hoofdtekst halen
     const DAGNL = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
@@ -277,7 +283,7 @@ async function stuurWhatsApp(aanbod, url) {
   // (dan hoort er "dank voor je bericht, je vroeg naar dinsdag" boven te staan).
   const eerste = aanbod.slots?.[0]?.aankomst ? Date.parse(aanbod.slots[0].aankomst) : 0;
   const verWeg = eerste && (eerste - Date.now()) / (7 * 86400000) >= 3;
-  if (taal === 'en' || aanbod.herhaling || verWeg || aanbod.klantReply) {
+  if (taal === 'en' || aanbod.herhaling || verWeg || aanbod.klantReply || aanbod.stijl === 'sunny') {
     const vrij = await stuurVrij();
     if (vrij.ok) return vrij;
     const viaTemplate = await stuurWhatsAppTemplate(aanbod, url);
@@ -325,7 +331,9 @@ async function stuurMail(aanbod, url) {
       body: JSON.stringify({
         channel_id: PLANNING_KANAAL_OVERRIDE || AANVRAGEN_KANAAL,
         contact_identifier: aanbod.lead.email,
-        subject: taalVan(aanbod.lead) === 'en' ? 'Choose your measuring slot at Sonty' : 'Kies je inmeetmoment bij Sonty',
+        subject: aanbod.stijl === 'sunny'
+          ? (taalVan(aanbod.lead) === 'en' ? 'Your measuring appointment at Sonty' : 'Je inmeetafspraak bij Sonty')
+          : (taalVan(aanbod.lead) === 'en' ? 'Choose your measuring slot at Sonty' : 'Kies je inmeetmoment bij Sonty'),
       }),
     });
     if (!r1.ok) return { ok: false, reden: `ticket aanmaken: Trengo ${r1.status}` };
@@ -364,9 +372,12 @@ async function stuurMail(aanbod, url) {
 <p>${een ? `Past het? Gewoon "ja" terugmailen werkt ook. De tijd staat ${geldigUren} uur voor je vast.` : `De tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, beantwoord dan gewoon deze mail.`}</p>
 <p>Goed om te weten: onze inmeter rijdt een route, dus het kan soms een uur eerder of later worden dan het gekozen moment. Als dat zo is laten we het je even weten.</p>
 <p>Groetjes,<br>Nanny van Sonty</p>`;
+  const htmlUit = aanbod.stijl === 'sunny'
+    ? require('./sunny-start.js').voorstelMailHtml({ voornaam, slots: aanbod.slots, duurMin: aanbod.duurMin, ver: aanbod.ver === true, taal, url, geldigUren })
+    : html;
   const r2 = await tFetch(`/tickets/${nieuw.id}/messages`, {
     method: 'POST',
-    body: JSON.stringify({ message: html, body_type: 'html' }),
+    body: JSON.stringify({ message: htmlUit, body_type: 'html' }),
   });
   // Alleen een ZELF aangemaakt ticket weer sluiten — een hergebruikt actief ticket
   // is van de klant/collega en moet open blijven.
@@ -413,6 +424,19 @@ async function verstuurBevestiging(aanbod, slot) {
   const voornaam = (aanbod.lead.naam || 'daar').split(' ')[0];
   const taalB = taalVan(aanbod.lead);
   const tekst = bevestigingTekst(voornaam, slot, aanbod.duurMin, taalB);
+  // Ondertekening (Daimy 28-08): kwam het voorstel van Sunny, dan bevestigt Sunny; anders Nanny.
+  const bronSunny = aanbod.bron === 'sunny' || (() => {
+    try {
+      const st = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', '..', 'data', 'inmeten-planner-state.json'), 'utf8'));
+      const t9 = String(aanbod.lead.telefoon || '').replace(/\D/g, '').slice(-9);
+      const em = String(aanbod.lead.email || '').trim().toLowerCase();
+      const recent = Object.values(st.aanbodTickets || {})
+        .filter((a) => (t9.length === 9 && String(a.telefoon || '').replace(/\D/g, '').slice(-9) === t9) || (em && String(a.email || '').trim().toLowerCase() === em))
+        .sort((x, y) => String(y.verstuurdOp).localeCompare(String(x.verstuurdOp)));
+      return recent[0]?.bron === 'sunny';
+    } catch { return false; }
+  })();
+  const afzender = bronSunny ? 'Sunny' : 'Nanny';
   let wa = { ok: false, reden: 'geen telefoon' };
   if (aanbod.lead.telefoon) {
     const ticket = await zoekWaTicket(aanbod.lead.telefoon).catch(() => null);
@@ -431,7 +455,7 @@ async function verstuurBevestiging(aanbod, slot) {
     });
     const nieuw = r1.ok ? await r1.json().catch(() => null) : null;
     if (nieuw?.id) {
-      const html = `<p>${tekst.replace(/\. /g, '.</p><p>')}</p><p>${taalB === 'en' ? 'Kind regards,<br>Nanny from Sonty' : 'Groetjes,<br>Nanny van Sonty'}</p>`;
+      const html = `<p>${tekst.replace(/\. /g, '.</p><p>')}</p><p>${taalB === 'en' ? `Kind regards,<br>${afzender} from Sonty` : `Groetjes,<br>${afzender} van Sonty`}</p>`;
       const r2 = await tFetch(`/tickets/${nieuw.id}/messages`, { method: 'POST', body: JSON.stringify({ message: html, body_type: 'html' }) });
       if (r2.ok) await tFetch(`/tickets/${nieuw.id}/close`, { method: 'POST', body: '{}' });
       mail = { ok: r2.ok, reden: r2.ok ? undefined : `Trengo ${r2.status}` };
@@ -480,7 +504,7 @@ async function verstuurAanbod(aanbod, url) {
       || uitgeslotenDagen.has(new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Amsterdam' }).format(new Date(sl.aankomst))));
     const luistert = wensGenoemd && !herhaaltAfgewezen;
     if (luistert) console.log('  verzendpoort: voorstel volgt de wens van de klant — weeklimiet telt niet');
-    const poort = await magSturen({ telefoon: aanbod?.lead?.telefoon, email: aanbod?.lead?.email, ticketId: ticket?.id, soort: 'voorstel', opVerzoek: !!aanbod?.klantReply, luistert });
+    const poort = await magSturen({ telefoon: aanbod?.lead?.telefoon, email: aanbod?.lead?.email, ticketId: ticket?.id, soort: 'voorstel', herhaling: !!aanbod?.herhaling, opVerzoek: !!aanbod?.klantReply, luistert });
     if (!poort.ok) {
       if (poort.mensNodig) await meldMensNodig(aanbod?.lead?.naam || aanbod?.lead?.telefoon || '?', poort.reden);
       console.log('  verzendpoort: aanbod NIET verstuurd (' + poort.reden + ')');

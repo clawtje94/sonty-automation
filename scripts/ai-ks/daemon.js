@@ -1470,8 +1470,10 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
       .map(([id]) => id);
     const nieuwste = actiefAlles.slice(0, 30);
     const rest = actiefAlles.slice(30);
-    const blok = rest.length ? rest.slice(sweepOffset % rest.length).concat(rest.slice(0, sweepOffset % rest.length)).slice(0, 120) : [];
-    sweepOffset += 120;
+    // blok van 40: de 12-pagina-scan dekt de actieve OPEN/ASSIGNED-tickets al; de sweep is
+    // alleen het vangnet voor diepere tickets — 40 per 2 min = alles binnen ~25 min gezien
+    const blok = rest.length ? rest.slice(sweepOffset % rest.length).concat(rest.slice(0, sweepOffset % rest.length)).slice(0, 40) : [];
+    sweepOffset += 40;
     const actiefIds = [...new Set([...nieuwste, ...blok])];
     if (actiefIds.length) console.log(`  actief-sweep: ${actiefIds.length} van ${actiefAlles.length} gesprekken direct checken`);
     let opgeruimd = 0;

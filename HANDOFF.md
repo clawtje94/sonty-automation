@@ -1,5 +1,26 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26, prijsreview + planner)
 
+## 28-08 (middag): PLANADO RIJKLAAR-CHECK VOOR MAANDAG (bussen rijden vanaf 31-08 op Planado)
+- Vraag Daimy: volledige check of alles goed in Planado staat (notities uit Outlook, tijden zonder buffer,
+  werkbonnen, sync). Gebouwd: `scripts/planado-rijklaar-check.js` (ALLEEN LEZEN, --dagen 14 --json pad):
+  per Outlook-teamafspraak → Planado-opdracht, bus, Bookings-tijd (zonder buffer), adres, Interne notities,
+  werkbon-sjabloon, telefooncontact, Gripp-blok, status; plus wezen + overlap per bus + dagoverzicht.
+- Gemeten (91 team-afspraken 27-08 t/m 10-09): tijden 91/91 goed (0 buffer-fouten), bus 91/91 goed,
+  0 ontbrekende opdrachten, 0 wezen, werkbon overal compleet.
+  LET OP: sjabloon "Montage afspraak particulier" heeft 8 rapportvelden (gemeten /v2/templates), niet 19
+  zoals HANDOFF 20-08 zei; "Werk gereed?" is required:false.
+- FOUT gevonden: Interne notities (Outlook) ontbraken bij 82/91 → `planado-outlook-verrijk.js` (27-08) is
+  nooit met --execute gedraaid (Mac viel 27-08 12:59 uit; state-bestand leeg). Proefgeval #1083 Schrooten
+  uitgevoerd en goed; V1 aan Daimy op Telegram: mag de rest (81)? [regel eerst-1-dan-de-rest]
+- Overige bevindingen (kantoor/planning, geen sync-fout): 3 adressen zonder straat in Planado (Ritmeester
+  #1100 Brielle, Bleijenberg #1106 Gouda, M. Jansen #1111 IJsselstein) → verrijker zet "Adres (Outlook)"
+  als tekst; blanco blokken "Montage Sonty" zonder klant/adres staan als opdracht in de bus-app
+  (#1080/#1082/#1103/#1113/#1118/#1125/#1158 = "Yudi vrij", "Niets plannen", magazijn); 4 overlappen op
+  dezelfde bus (Bus 4 wo 2-9 11:30/12:30, Bus 5 di 8-9 2x 08:00-14:00, Bus 3 di 8-9 en do 10-9).
+- Sync-status: nl.sonty.outlook-planado-sync elke 10 min (--execute, montage-sync-aan), laatste run 13:16
+  zonder fouten; planado-outlook-check dagelijks 07:45. data/outlook-schrijf-uit bestaat NIET meer (terugweg
+  Planado→Outlook dus aan). Planado-webhook werkbon → werkbon@sonty.nl live sinds 27-08.
+
 ## 28-08 (middag): SUNNY PLANT INMETEN ZELF — automatisch eerste voorstel (LIVE in proefstand, 1 klant)
 - Daimy (/goal): "Sunny zelf zodra iemand op Inmeten inplannen komt op een menselijke manier de beste tijd
   aanbieden en inboeken, zoals nu met het dashboard; geen dubbele mails/berichten." = V7 + V8 in één.

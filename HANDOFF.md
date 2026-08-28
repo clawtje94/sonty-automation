@@ -16,6 +16,11 @@
   nadeel: schijf onversleuteld bij fysieke diefstal) + tip UPS. Antwoord open.
 - Niet geladen (bewust): nl.sonty.keten-zelfcontrole (UIT op verzoek Daimy), nl.sonty.sonny-rapport (Sonny UIT).
   com.winterstapel.tick: last exit 1, err-log leeg — nog niet onderzocht (paper trading, laag prio).
+- Tijdens de inhaalrun gevonden en gefixt: (1) nl.sonty.prijs-kruiscontrole faalde al sinds 27-08 07:45 met
+  "spawnSync npx ENOENT" (live-API-meetlat van 26-08 gebruikt npx, plist had geen PATH) → EnvironmentVariables PATH
+  toegevoegd, herladen, run ✅ exit 0. (2) planning-mail eerste ronde na start = bekende hapering ("browser-login
+  mislukt" → Cannot read 'request'), tweede ronde herstelt vanzelf (3 nieuwe orderrijen). (3) werkbon-afhandeling
+  gekickstart: 4 afgeronde bus-opdrachten van 27-08 alsnog gemaild. Interval-jobs met runs=0 ook gekickstart.
 - Memory: project_mac_mini_filevault_stroomuitval.md.
 
 ## 27-08 (ochtend, vervolg): WERKBON VIA PLANADO-WEBHOOK DIRECT NAAR werkbon@sonty.nl (LIVE)

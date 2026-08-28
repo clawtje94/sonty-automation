@@ -26,6 +26,19 @@
 - PROEFSTAND (Daimy-regel eerst 1): vlag `scripts/ai-ks/.sunny-start-live` = "alleen:sem van nieuwkerk"; ronde
   12:52 → Sem: geen WA-gesprek → Meta-template (tekent Nanny) + mail in Sunny-stijl (token b6eac3a5…, WA-ticket
   977017918, mail 977017927), claim + actief gezet, kaart "Sunny stuurde voorstel: maandag 14 september rond 15:45".
+- 13:00-13:45 LIVE-TEST DAIMY (eigen kaart, proefstand "alleen:daimy", commits 74b7df5 + volgend): voorstel 13:02 (do 1 okt
+  13:10) → WA via moment-template-VER met "omdat je wat verder bij ons vandaan woont" (oude Meta-tekst 244125; route-v3
+  #248773 nog PENDING) + mail Sunny-stijl. Daimy: (1) die tekst nooit meer; lijn = zo efficiënt mogelijk plannen,
+  uitstoot én brandstofkosten → teksten aangepast (sunny-start + verWegRegel), ver-weg-templates UIT tot routeVerGemeld;
+  (2) "WA komt van Nanny, mail van Sunny" → mail volgt nu het WA-kanaal (template = Nanny-mail, vrij bericht = Sunny).
+  Zijn "ander moement" 13:07: reply-route stapte terecht opzij, Sunny antwoordde pas 13:19 (429-storm + ticket stond
+  ASSIGNED op bot-account en telde niet mee in de actief-sweep). FIXES daemon.js: sweep neemt ASSIGNED-bij-bot mee,
+  30 nieuwste + roterend blok van 120 i.p.v. alle 609, gesloten tickets uit actieve lijst; verwerkTicket haalt berichten
+  alleen op als updated_at|messages_count veranderde (20-min TTL). NOOIT-DUBBEL-verharding: halve Planado-boeking
+  (register status 'bezig') wordt hergebruikt i.p.v. tweede opdracht; external_id-vangnet meldt op Telegram; bevestiging
+  per kanaal in register (noteerBevestiging); nacontrole herstelt alleen het ontbrekende kanaal en nooit als het
+  register WA al als verstuurd heeft. Lab 6888 groen. Antwoord op Daimy's vraag "meerdere boekingen/bevestigingen?":
+  register 84 geboekt, 0 telefoons met >1 boeking; gekozen-pad markeert 'verwerkt', boek-tak heeftGeboekteAfspraak.
 - OPEN: V3 aan Daimy (proefgeval goed → vlag leegmaken = alle klanten); WA-template tekent nog Nanny (Sunny-variant
   bij Meta indienen via template-wachter); beleidsvraag WA+mail beide (bestaand) of alleen WA bij WA-gesprek.
   Daemons sonny/inmeet-verzoeken/aanbod-replies herstart 12:47.

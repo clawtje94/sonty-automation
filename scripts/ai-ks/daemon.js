@@ -546,6 +546,18 @@ async function verwerkTicket(t, state) {
   // account, waardoor de bot er permanent vanaf bleef, ook nadat Daimy zelf om een antwoord vroeg.
   t._verseOpdracht = false;
   try {
+    // 28-08 (Trengo-429-storm, Daimy's test lag 12 min): berichten alleen ophalen als het
+    // ticket sinds de vorige ronde veranderd is. Stand = updated_at|messages_count; zelfde
+    // stand binnen 20 min = niets nieuws → overslaan. Na 20 min altijd opnieuw kijken, zodat
+    // tijdgebonden beslissingen (verzendvenster, verlopen claims) nooit blijven hangen.
+    const stand = t.updated_at ? `${t.updated_at}|${t.messages_count ?? ''}` : null;
+    state.ticketStand = state.ticketStand || {};
+    const vorigeStand = stand ? state.ticketStand[t.id] : null;
+    if (vorigeStand && vorigeStand.stand === stand && Date.now() - Date.parse(vorigeStand.op) < 20 * 60000 && !t._msgs) return;
+    if (stand) state.ticketStand[t.id] = { stand, op: new Date().toISOString() };
+    if (Object.keys(state.ticketStand).length > 2000) {
+      for (const [id, v] of Object.entries(state.ticketStand)) if (Date.now() - Date.parse(v.op) > 86400000) delete state.ticketStand[id];
+    }
     const vm = t._msgs || await haalBerichten(t.id);
     t._msgs = vm;
     const intern = (vm?.data || []).filter((m) => m.internal_note || m.type === 'NOTE');

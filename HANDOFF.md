@@ -121,6 +121,18 @@
 - 16:25 LIVE VOOR IEDEREEN (Daimy: "daarna mag je die mensen zelf altijd gaan plannen"): vlag .sunny-start-live leeg.
   Ronde 16:28: 5 voorstellen (Tim v.d. Lans, Keus, Jhingur, Bronts, Hoogerdijk), Sem lopend, Scholten/Anoek "mens nodig
   (bellen)" op de kaart. Lab9 6888 groen. V3 daarmee afgehandeld.
+- 16:30-16:50 SCHOLTEN/ANOEK (Daimy: "ook dat soort dingen moeten door jou opgelost worden"): nieuwe stap NAVRAGEN NA 2
+  VOORSTELLEN (lib/sunny-start navraagBesluit/navraagTekst, planner-tak): geen derde template maar één persoonlijk
+  navraagbericht van Sunny (WA als venster open, anders mail; soort 'navraag' in de verzendpoort = stil-lijst + mens-
+  actief), kaart "Sunny vroeg persoonlijk na"; na 5 dagen stilte → "Mens nodig (bellen)" + 1x melding in de planning-
+  groep. Ronde 16:37: Scholten (3 voorstellen, WA-venster dicht) en Anoek (mail-only, 015-nummer) allebei per mail
+  nagevraagd. Lab-laag E (48). Commit + volgend.
+- DAIMY'S ANNULERING HARD GEVERIFIEERD: Planado-opdracht weg (Not found), Outlook-event-id 404, register geannuleerd —
+  MAAR de agenda toonde nog "Inmeten Sonty - Daimy Boot 29-09": de afspraak is een MICROSOFT BOOKINGS-afspraak
+  (inmeet-boeken.js boekt via Bookings; register-id = Bookings-id) en de motor verwijderde alleen een Outlook-event.
+  GEFIXT: bookings-api verwijder() (DELETE, geen Bookings-annuleringsmail), muteerBoeking probeert eerst Bookings,
+  registreerBoeking bewaart agendaVia. Daimy's Bookings-afspraak 16:48 verwijderd (204), agenda 29-09 schoon.
+  Gripp 6572/meetbon blijven staan (kantoor beslist, RP bewust niet aangeraakt).
 - OPEN: WA-template tekent nog Nanny (route-v3 #248773 PENDING bij Meta; Sunny-variant indienen); beleidsvraag WA+mail
   beide (bestaand) of alleen WA bij WA-gesprek; Trengo-429 accountbreed (gedeelde ophaler met cache = aparte klus).
   Daemons sonny/inmeet-verzoeken/aanbod-replies herstart 12:47.

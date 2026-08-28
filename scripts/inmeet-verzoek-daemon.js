@@ -153,6 +153,22 @@ async function ronde() {
       const definitief = /geen enkel gat|geen 3 tijden|moet.*tekenen|niet gevonden|lopend aanbod|template heeft er 3 nodig|NIET eerder dan|mens nodig|voorgestelde tijden zijn inmiddels bezet|heeft al een afspraak|max-voorstellen|stil-lijst|mens-actief/i.test(e.message);
       if (definitief) {
         await api(MUTATIE_API, { method: 'PATCH', body: JSON.stringify({ id: m.id, status: 'afgewezen', uitkomst: e.message.slice(0, 200) }) }).catch(() => {});
+        // STILTE NOOIT (28-08): Sunny zei net "dan zet ik hem voor je vast" — ketst de boeking
+        // definitief af, dan krijgt de klant dat eerlijk te horen, niet alleen het kantoor.
+        if (m.type === 'boek' && m.bron === 'sunny') {
+          try {
+            const st = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', 'data', 'inmeten-planner-state.json'), 'utf8'));
+            const t9 = String(m.telefoon || '').replace(/\D/g, '').slice(-9);
+            const ent = Object.values(st.aanbodTickets || {}).filter((a) => a.waTicket && ((m.rpItemId && a.rpItemId === m.rpItemId) || (t9.length === 9 && String(a.telefoon || '').replace(/\D/g, '').slice(-9) === t9)))
+              .sort((x, y) => String(y.verstuurdOp).localeCompare(String(x.verstuurdOp)))[0];
+            if (ent?.waTicket) {
+              const TT = require('fs').readFileSync(require('path').join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
+              const tekst = `Sorry, het vastzetten van de afspraak lukte net toch niet aan onze kant. Een collega pakt dit vandaag nog op en laat je weten hoe het zit. Excuus voor het ongemak!\n\nGroetjes, Sunny van Sonty`;
+              await fetch(`https://app.trengo.com/api/v2/tickets/${ent.waTicket}/messages`, { method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' }, body: JSON.stringify({ message: tekst, type: 'OUTBOUND' }) });
+              console.log(new Date().toISOString(), 'boek (sunny) afgeketst — klant eerlijk gemeld via WA-ticket', ent.waTicket);
+            }
+          } catch (e2) { console.log('  klantmelding bij afgeketste Sunny-boeking mislukt: ' + String(e2.message).slice(0, 80)); }
+        }
         await planner.telegram(`ℹ️ Verzoek ${m.type} (${m.bron}) kan niet: ${e.message.slice(0, 140)}. Verzoek is gesloten; de kaart staat weer gewoon in het dashboard.`);
       } else {
         // STORINGS-MELDING MAX 1x PER UUR PER VERZOEK+FOUT (Daimy 22-08, Planado-

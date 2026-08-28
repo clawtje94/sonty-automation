@@ -2002,8 +2002,12 @@ async function verwerkDashboardVerzoek(m) {
     // daimy's boeking kreeg pas 20 min later via de nacontrole een bevestiging).
     if (inst2.bevestigingSturen || ['sunny', 'klant-reply', 'herstel-keuze'].includes(m.bron)) {
       const { verstuurBevestiging } = require('./lib/aanbod-versturen');
-      const bevRes = await verstuurBevestiging({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin: duur, bron: m.bron }, { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter });
-      try { require('./lib/inmeet-mutatie.js').noteerBevestiging(item.id, bevRes); } catch { /* register is extra */ }
+      // ÉÉN WHATSAPP-BEVESTIGING (Daimy 28-08: "ik krijg 2 bevestigingsberichten, 1 is genoeg"):
+      // bij een Sunny-boeking is Sunny's eigen antwoord in het gesprek ("dan zet ik ... vast")
+      // de WhatsApp-bevestiging; de keten stuurt dan alleen nog de mail met alle details.
+      const sunnyBoekt = m.bron === 'sunny';
+      const bevRes = await verstuurBevestiging({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin: duur, bron: m.bron }, { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter }, { alleenMail: sunnyBoekt });
+      try { require('./lib/inmeet-mutatie.js').noteerBevestiging(item.id, sunnyBoekt ? { wa: { ok: true, via: 'sunny-gesprek' }, mail: bevRes.mail } : bevRes); } catch { /* register is extra */ }
     }
   } catch { /* bevestiging is nice-to-have; kantoor boekt met klant aan de lijn */ }
   if (magBoekingMelden(`${lead.naam}|${new Date(m.slot.aankomst).toISOString()}`)) {

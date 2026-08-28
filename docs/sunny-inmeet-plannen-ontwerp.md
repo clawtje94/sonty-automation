@@ -44,8 +44,10 @@ O2  Eén open voorstel per klant over ALLE routes (Sunny, dashboard-klik, schadu
     gelogd, niet stil).
 O3  Eén bevestiging per boeking. Nacontrole stuurt alleen als er aantoonbaar géén is.
 O4  Nooit een tweede bericht in hetzelfde gesprek binnen 60 s (race-slot: write-ahead sleutel).
-O5  Kanaalkeuze: WA-gesprek < 24u → vrij Sunny-bericht; WA > 24u → template; geen WA → mail.
-    Nooit WA én mail tegelijk voor hetzelfde voorstel (Daimy: "dubbele mails en berichten").
+O5  Kanaalkeuze: WA-gesprek < 24u → vrij Sunny-bericht; WA > 24u of geen WA-gesprek → goedgekeurd
+    Meta-template (tekent als Nanny, vaste tekst); mail gaat ALTIJD mee in Sunny-stijl (bestaand
+    gedrag sinds 06-08: WA + mail zijn twee kanalen voor hetzelfde ene voorstel, geen dubbel
+    voorstel). Open beleidsvraag aan Daimy (28-08): alleen WA als er een WA-gesprek is?
 O6  Mens-actief (collega schreef < 1,5 u geleden) → Sunny stuurt niets, kaart blijft staan met
     reden. Stil-lijst → nooit. Max 2 voorstellen/week → mens nodig, geen retry-spam.
 O7  Verzendvenster 08:30–20:00 NL-tijd, ma–za. Daarbuiten wachten, niet vergeten.
@@ -76,3 +78,19 @@ O16 Alles wat NIET verstuurd wordt, is zichtbaar (dashboard-reden + planning-ove
 - keten-moment: kaart net nieuw | kaart 3 dgn | RP-status weer weg
 
 Rapportvorm: totaal, per bak (OK / TERECHT-GEBLOKKEERD / FOUT-ZICHTBAAR / FOUT-STIL), alleen afwijkingen.
+
+## Stand 28-08 (gebouwd, lab 6888 scenario's 0x FOUT-STIL, live in proefstand)
+- Aan-knop: `scripts/ai-ks/.sunny-start-live` (leeg = alle klanten; `alleen:<naam>` = proefstand).
+- Ronde: `nl.sonty.inmeet-dashboard` (30 min) → per verse lead `magStarten` → `maakEnVerstuurAanbod`
+  met `{bron:'sunny', stijl:'sunny'}` → verzendpoort (stil-lijst, mens-actief, weeklimiet, 24u-regel,
+  Sunny-claim) → WA vrij/template + mail → aanbodTickets{rpItemId, bron} → claim + actief-ticket.
+- Poorten nieuw: 24u-regel (geen tweede voorstel <24u tenzij op verzoek/herhaling), max 2 eerdere
+  voorstellen zonder boeking → mens nodig, verzendvenster ma–za 08:30–20:00, max 5 per ronde,
+  claim-guard (Sunny in gesprek = planner stuurt niet), spook-aanbod herbezorging (1x).
+- Antwoorden: kale keuze → boekroute (bevestiging tekent Sunny bij bron sunny); vraag/ander
+  moment/annuleren → Sunny (eigenaar van zijn eigen voorstel, max 20 min wachten als hij leeft,
+  anders reply-route). Register `inmeet-boekingen.json` krijgt `bron`.
+- Proefgeval 28-08 12:52: Sem Van Nieuwkerk — geen WA-gesprek → Meta-template (Nanny) + mail in
+  Sunny-stijl; dashboard "Sunny stuurde voorstel: maandag 14 september rond 15:45".
+- Nog te doen: Sunny-variant van het WA-template bij Meta indienen (nu tekent het template Nanny);
+  beleidsvraag WA+mail; na Daimy's check de proefstand openzetten.

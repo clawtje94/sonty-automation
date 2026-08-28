@@ -1,5 +1,35 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26, prijsreview + planner)
 
+## 28-08 (middag): SUNNY PLANT INMETEN ZELF — automatisch eerste voorstel (LIVE in proefstand, 1 klant)
+- Daimy (/goal): "Sunny zelf zodra iemand op Inmeten inplannen komt op een menselijke manier de beste tijd
+  aanbieden en inboeken, zoals nu met het dashboard; geen dubbele mails/berichten." = V7 + V8 in één.
+- Ontwerp + orakel (16 regels) + lab-dimensies: docs/sunny-inmeet-plannen-ontwerp.md. Code-map vooraf gemaakt.
+- GEBOUWD (sonty 42fa148): lib/sunny-start.js (beslislaag magStarten, Sunny-tekst NL/EN + mail-HTML, eigenaar-
+  regel, heartbeat, vlag); planner: zonder --live stuurt de 30-min-ronde per verse lead het eerste voorstel via
+  maakEnVerstuurAanbod {bron:'sunny', stijl:'sunny'} (altijd 1 beste tijd), kaart-reden zichtbaar ("Sunny stuurde
+  voorstel …" / "Sunny wacht: …"), max 5 per ronde, spook-aanbod-herbezorging (crash tussen aanmaken en sturen =
+  1x alsnog, nooit 2x); aanbodTickets krijgt rpItemId+bron+stijl; na WA-verzending claim(sunny) + actieve-tickets.
+  Verzendpoort: 24u-regel (geen tweede voorstel <24u, tenzij opVerzoek/luistert/herhaling), claim-guard (Sunny in
+  gesprek → planner stuurt niet), BOT_PATRONEN kent "Groetjes, Sunny" (anders telde Sunny als mens-actief!).
+  magStarten: max 2 eerdere voorstellen zonder boeking → mens nodig (Scholten 3, Anoek 2 → niet nóg een bot-
+  bericht), venster ma–za 08:30–20:00. aanbod-versturen: Sunny-stijl WA vrij bericht + mail (onderwerp "Je
+  inmeetafspraak bij Sonty"), bevestiging tekent Sunny bij bron sunny. daemon.js: bron sunny = Sunny eigenaar
+  (ook na 45 min), context "JIJ (Sunny) hebt … voorgesteld", heartbeat per pollRonde. tools.js: inmeet_tijden
+  claimt het gesprek. aanbod-replies: kale keuze → boekroute; rest van Sunny (max 20 min, dan reply-route).
+  inmeet-mutatie: register krijgt bron. system-prompt: SUNNY-VOORSTEL-regel. Dashboard (website 67328ef, live):
+  reden op de kaart.
+- LAB: nieuw onderdeel sunny-start (A poort 1344 / B tekst 32 / C eigenaar 96 / D echte verzendpoort 72 =
+  1992); totaal 6888 scenario's 0x FOUT-STIL (klantreactie: 4 fout-zichtbaar bestonden al). Regressie echte
+  historie: 24u-regel had 47/152 verzendingen geblokkeerd (alle bekende spam/cascade-paren), 36/152 vielen
+  buiten het venster (06:25–08:30-verzendingen → nu 08:30). Dry-run 7 wachtenden: Scholten/Anoek → mens nodig,
+  5 → sturen.
+- PROEFSTAND (Daimy-regel eerst 1): vlag `scripts/ai-ks/.sunny-start-live` = "alleen:sem van nieuwkerk"; ronde
+  12:52 → Sem: geen WA-gesprek → Meta-template (tekent Nanny) + mail in Sunny-stijl (token b6eac3a5…, WA-ticket
+  977017918, mail 977017927), claim + actief gezet, kaart "Sunny stuurde voorstel: maandag 14 september rond 15:45".
+- OPEN: V3 aan Daimy (proefgeval goed → vlag leegmaken = alle klanten); WA-template tekent nog Nanny (Sunny-variant
+  bij Meta indienen via template-wachter); beleidsvraag WA+mail beide (bestaand) of alleen WA bij WA-gesprek.
+  Daemons sonny/inmeet-verzoeken/aanbod-replies herstart 12:47.
+
 ## 28-08 (ochtend): MAC 21 UUR STIL DOOR STROOMUITVAL + FILEVAULT — inhaalrun gemiste jobs
 - 27-08 12:59 viel de Mac uit (geen shutdown-record = stroom/hard uit; pmset autorestart=1 → zelf herstart).
   FileVault AAN → 21 uur op het wachtwoordscherm: geen gui/501-sessie = GEEN launchd-agents (Telegram-poller,

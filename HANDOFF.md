@@ -83,6 +83,19 @@
   tool: direct inmeet_annuleren, geen waarom-vraag; muteerBoeking-groepsmelding kreeg {boeking:true} (stond zonder →
   data-bot). Daimy's annulering 16:08 uitgevoerd: Outlook ✓ Planado ✓ sheet ✓ annuleringslijst ✓, RP bewust niet
   aangeraakt (kantoor beslist over vervolg). Memory: feedback_annuleringen_automatisch.md.
+- 16:15-16:25 REVIEWRONDE (Daimy: "doe zelf 1 reviewronde, daarna mag je die mensen zelf altijd gaan plannen"):
+  onafhankelijke code-review (opus) op de dag-diff → 14 bevindingen, alle verwerkt in 0092c8a: (1) annuleringsbevestiging
+  altijd bezorgd (WA → mail → alarm; lib stuurVrijBericht) en alleen "geannuleerd" als muteerBoeking overal slaagde;
+  (2) planner claimt 'sunny-voorstel' en de reply-route negeert die claim voor de keuze-verwerking → kale "ja" wordt direct
+  geboekt (was: 30 min niemand); (3) claim-guard in verzendpoort niet bij opVerzoek/luistert (klantgevraagd her-voorstel
+  werd geblokkeerd); (4) annulering-loopt-claim vóór de POST (race met Sunny-daemon); (5) max-2-poort telt herinneringen/
+  opVerzoek niet mee (vlaggen nu in aanbodTickets) en kijkt 14 dagen; (6) sunnyNoemdeTijden blokkeert alleen de keuze op
+  het oude aanbod, rest van de reply-route loopt door (na-boeking, stilte) tenzij Sunny leeft; (7) spook-herbezorging op
+  verse state + voorstelIntent (stijl/bron/ver write-ahead), registratiefout zichtbaar; (8) WA-bevestiging alleen overslaan
+  bij aantoonbare Sunny-verzending (data/ai-ks/sunny-verstuurd.json), anders formele WA + alarm bij nul kanalen; (9) taal
+  bij ack-berichten; (10) klantmelding bij afgeketste Sunny-boeking via ticketId/String-rpItemId; (11) data-bot alleen bij
+  storing, inhoudelijke annuleer-melding uitsluitend in de groep; (12) versheid-skip 8 min; (13) halve boeking merge +
+  'bezig' (<2u) telt als bezet behalve voor hetzelfde slot (hergebruik). Lab: zie lab9.
 - OPEN: V3 aan Daimy (proefgeval goed → vlag leegmaken = alle klanten); WA-template tekent nog Nanny (Sunny-variant
   bij Meta indienen via template-wachter); beleidsvraag WA+mail beide (bestaand) of alleen WA bij WA-gesprek.
   Daemons sonny/inmeet-verzoeken/aanbod-replies herstart 12:47.

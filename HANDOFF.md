@@ -1,5 +1,21 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 28-08 (avond): REKENTOOL SCHRIJFT NAAR GRIPP (website 9ba8da4) — nog GEEN echte offerte bijgewerkt
+- Daimy: "ik wil het ook gelijk kunnen aanpassen in Gripp zodat die het doorzet". Gebouwd via de bewezen keten-weg:
+  lib/rekentool/gripp-schrijven.ts maakt een Voorstel in keten-vorm (bijwerken op lijnId uit "origineel", anders
+  nieuw; niet-overgenomen productregels vervallen; vaste regels blijven; montage per product samengevoegd; korting-%
+  → bestaande kortingregel bijwerken of nieuwe regel (gripp-sync pasVoorstelToe kent nu lijnId 0 = aanmaken); korting
+  uit + oude kortingregel → die vervalt). Schrijven = pasVoorstelToe (zelfde code als meetbon-keten), daarna
+  bon.offerte=bijgewerkt + wachtlijst (geen meetbon? dan minimale bon met klantnaam), zodat tekenen → aanbetaling
+  via cron-meetbon-keten doorloopt; knop "Verder: tekenen / mailen" → /admin/meetbon/<nr>.
+- UI: blok "Naar Gripp" verschijnt na "overnemen": inmeter kiezen (Joey/Sjoerd, verplicht: mail gaat later uit
+  zijn naam) → "1. Laat zien wat er verandert" (dry-run, lijst acties + was/wordt) → "2. Bijwerken in Gripp"
+  (confirm). Poorten: getekende offerte, regel zonder prijs, geen inmeter, vaste regel die niet meer bestaat.
+- BEWIJS: lab 7.958 scenario's 0x FOUT-STIL (648 voorstel-scenario's: acties/verwijderen/behouden/korting/
+  totaal == rekentool-totaal); dry-run 6494 lokaal én op productie: 0 blokkades, excl 2.752,88 → 2.752,88;
+  Playwright op iPhone 12 t/m het voorstel (bijwerk-knop NIET geklikt). Testofferte 6560 bestaat niet meer, dus
+  het echte schrijven is nog niet gedraaid → regel "eerst 1, dan de rest": Daimy wijst het eerste geval aan.
+
 ## 28-08 (eind middag): REKENTOOL + GRIPP-KOPPELING LIVE (website d6b0d8e), volledige review
 - Daimy: "alles nog een keer goed nakijken, als hier een fout in zit gaan ze het fout doen; handig als ze een
   Gripp-nummer kunnen invullen en de originele prijzen zien".

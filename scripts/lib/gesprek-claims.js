@@ -33,4 +33,17 @@ function geclaimd(ticketId, binnenMin = 30, behalve = null) {
   return Date.now() - Date.parse(v.op) < binnenMin * 60000;
 }
 
-module.exports = { claim, geclaimd };
+/** De claim zelf (door + op), of null. */
+function claimVan(ticketId) {
+  if (!ticketId) return null;
+  return lees()[String(ticketId)] || null;
+}
+/** Heeft Sunny in dit gesprek ZELF tijden genoemd (claim 'sunny-tijden', < binnenUur)? Dan is
+ *  een kale keuze ("ja", "de 10:40") altijd van Sunny en mag de reply-route NOOIT meer een
+ *  keuze op het oude planner-aanbod registreren (Daimy's test 28-08: keuze bleef liggen en zou
+ *  na 30 min op de verkeerde dag zijn geboekt). */
+function sunnyNoemdeTijden(ticketId, binnenUur = 24) {
+  const v = claimVan(ticketId);
+  return !!v && v.door === 'sunny-tijden' && Date.now() - Date.parse(v.op) < binnenUur * 3600000;
+}
+module.exports = { claim, geclaimd, claimVan, sunnyNoemdeTijden };

@@ -392,6 +392,9 @@ async function main() {
         // werd op de verkeerde donderdag geboekt. Niet markeren: claim verlopen
         // zonder resultaat = volgende run pakt het gewoon op.
         if (require('./lib/gesprek-claims.js').geclaimd(ticketId, 30)) continue;
+        // Sunny noemde zelf tijden (28-08): een kale keuze hoort bij Sunny's tijden, nooit bij
+        // het oude planner-aanbod — deze route blijft er dan 24 uur helemaal vanaf.
+        if (require('./lib/gesprek-claims.js').sunnyNoemdeTijden(ticketId)) { console.log(`  ${info.naam}: Sunny noemde zelf tijden — reply-route blijft eraf`); continue; }
         // WhatsApp-keuze automatisch doorvoeren (alleen op een nog OPEN aanbod)
         if (statusPer[token] === 'open') {
           try {

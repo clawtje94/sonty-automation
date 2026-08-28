@@ -96,8 +96,11 @@
   bij ack-berichten; (10) klantmelding bij afgeketste Sunny-boeking via ticketId/String-rpItemId; (11) data-bot alleen bij
   storing, inhoudelijke annuleer-melding uitsluitend in de groep; (12) versheid-skip 8 min; (13) halve boeking merge +
   'bezig' (<2u) telt als bezet behalve voor hetzelfde slot (hergebruik). Lab: zie lab9.
-- OPEN: V3 aan Daimy (proefgeval goed → vlag leegmaken = alle klanten); WA-template tekent nog Nanny (Sunny-variant
-  bij Meta indienen via template-wachter); beleidsvraag WA+mail beide (bestaand) of alleen WA bij WA-gesprek.
+- 16:25 LIVE VOOR IEDEREEN (Daimy: "daarna mag je die mensen zelf altijd gaan plannen"): vlag .sunny-start-live leeg.
+  Ronde 16:28: 5 voorstellen (Tim v.d. Lans, Keus, Jhingur, Bronts, Hoogerdijk), Sem lopend, Scholten/Anoek "mens nodig
+  (bellen)" op de kaart. Lab9 6888 groen. V3 daarmee afgehandeld.
+- OPEN: WA-template tekent nog Nanny (route-v3 #248773 PENDING bij Meta; Sunny-variant indienen); beleidsvraag WA+mail
+  beide (bestaand) of alleen WA bij WA-gesprek; Trengo-429 accountbreed (gedeelde ophaler met cache = aparte klus).
   Daemons sonny/inmeet-verzoeken/aanbod-replies herstart 12:47.
 
 ## 28-08 (ochtend): MAC 21 UUR STIL DOOR STROOMUITVAL + FILEVAULT — inhaalrun gemiste jobs

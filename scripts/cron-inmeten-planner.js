@@ -839,10 +839,12 @@ async function main() {
         console.log(`    NOG GEEN AANBOD (dag ${wachtDagen}): ${reden}`);
         regels.push(`${lead.naam} (${lead.plaats}): wacht dag ${wachtDagen}/${inst.contactDeadlineDagen} — ${reden}`);
         wachtenden.push({ lead, item, duur, wachtDagen });
+        let sunnyWachtTekst = '';
         // VERRE KLANT NIET IN STILTE LATEN WACHTEN (Daimy 28-08, Mickey): Sunny meldt één keer
         // dat hij zo efficiënt mogelijk inplant en vraagt meteen de voorkeur.
         if (!LIVE && sunnyStart.aan() && !(sunnyStart.alleenNaam() && !`${lead.naam} ${item.id}`.toLowerCase().includes(sunnyStart.alleenNaam()))) {
           const wb = sunnyStart.wachtmeldingBesluit({ lead: { ...lead, rpItemId: item.id }, state, wachtDagen, maxWachtDagen: MAX_WACHTDAGEN });
+          sunnyWachtTekst = wb.reden;
           if (wb.actie === 'melden') {
             try {
               const { taalVan, stuurVrijBericht } = require('./lib/aanbod-versturen');
@@ -886,7 +888,7 @@ async function main() {
         nood = nood.slice(0, 3);
         dash.leads.push({
           rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur, wachtDagen,
-          status: 'wachtend', reden: reden + (state.sunnyWachtmelding?.[item.id] ? ` · Sunny meldde de wachttijd op ${state.sunnyWachtmelding[item.id].op.slice(0, 10)}` : ''),
+          status: 'wachtend', reden: reden + (sunnyWachtTekst ? ` · Sunny: ${sunnyWachtTekst}` : ''),
           producten: lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ').slice(0, 90),
           top: nood.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin, label: x.label || undefined, dagOpener: x.dagOpener || undefined })),
         });

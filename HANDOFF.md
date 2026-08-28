@@ -21,6 +21,8 @@
   toegevoegd, herladen, run ✅ exit 0. (2) planning-mail eerste ronde na start = bekende hapering ("browser-login
   mislukt" → Cannot read 'request'), tweede ronde herstelt vanzelf (3 nieuwe orderrijen). (3) werkbon-afhandeling
   gekickstart: 4 afgeronde bus-opdrachten van 27-08 alsnog gemaild. Interval-jobs met runs=0 ook gekickstart.
+- Inhaalrun KLAAR 11:12: 23 jobs, alle exit 0 (offerte-v4: 16 WA-offertes; v4-selfcheck: 1 stuck Linda Kramer
+  #202612242 gerapporteerd). gesprek-lab exit 1 = chronisch (staat al weken zo in health-check), niet uitval-gerelateerd.
 - Memory: project_mac_mini_filevault_stroomuitval.md.
 
 ## 27-08 (ochtend, vervolg): WERKBON VIA PLANADO-WEBHOOK DIRECT NAAR werkbon@sonty.nl (LIVE)

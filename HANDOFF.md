@@ -178,6 +178,13 @@
 - 16:55 REGEL Daimy: aankomstmarge altijd letterlijk "een uur eerder of later" (niet "iets"/"uurtje") + sms-volglink zodra
   onderweg; doorgevoerd in WA/mail-bevestiging, herinnering, gekozen-pad-bevestiging, Sunny-voorstel en system-prompt
   (memory feedback_aankomstmarge_uur_sms). Labs groen.
+- 21:00-21:30 MICKEY KALRA (Badhoevedorp, "waarom is Mickey niks gestuurd"): planner wacht bewust max 4 werkdagen op een
+  buurklus (omrijgrens 30 min, goedkoopste +36) — bestaand beleid Daimy 06-08 — maar deed dat in stilte. NIEUW (00ae7f4):
+  Sunny meldt 1x de wachttijd (efficiënte route, uiterlijk 4 werkdagen, vraagt voorkeur; soort 'wachtmelding'), kaart
+  toont de Sunny-status. Mickey krijgt hem in de eerste ronde na 08:30 (za 29-08): het is nu ná 20:00 (verzendvenster).
+  Na de wachttijd (of eerder bij een buurklus) stuurt de gewone Sunny-tak het voorstel. Lab-laag F; totaal 6960 groen.
+- STAND 21:25: Tim v.d. Lans (Sunny, 29-09), Cecil Jhingur (keuzelink, 31-08) en Ivo Bronts (Sunny, 12-10) GEBOEKT binnen
+  een uur na de eerste live-ronde. Open: Sem, Keus, Hoogerdijk (aanbod-loopt); Scholten/Anoek navraag per mail 16:37.
 - OPEN: WA-template tekent nog Nanny (route-v3 #248773 PENDING bij Meta; Sunny-variant indienen); beleidsvraag WA+mail
   beide (bestaand) of alleen WA bij WA-gesprek; Trengo-429 accountbreed (gedeelde ophaler met cache = aparte klus).
   Daemons sonny/inmeet-verzoeken/aanbod-replies herstart 12:47.

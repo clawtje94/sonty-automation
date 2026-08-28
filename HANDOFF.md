@@ -76,6 +76,13 @@
   'sunny-gesprek' zodat nacontrole niets extra's stuurt; afgeketste Sunny-boeking → eerlijk WA-bericht aan klant.
   (2) "mail is niet als mail opgesteld" → bevestigingMailHtml: aanhef, korte opening, Wanneer/Wie/Duur/Adres in regels,
   thuisblijfvenster, wijziging via mail/WA, groet; onderwerp "Je inmeetafspraak staat: <dag>".
+- 16:03 ANNULERING-TEST: Daimy "wil je hem annuleren" → Sunny stelde de waarom-vraag (26-08-regel); "ik wil er liever
+  vanaf zien" → reply-route maakte er een mens-nodig-notitie voor Jorren van (afspraak bleef staan). NIEUWE REGEL Daimy:
+  annuleringen volledig automatisch + melding in de planning-groep, niet de data-bot. GEBOUWD (1222061): reply-route
+  zet mutatie annuleer (bron klant-reply) en claimt 'annulering-loopt' (Sunny blijft 2u weg); Sunny's instructie +
+  tool: direct inmeet_annuleren, geen waarom-vraag; muteerBoeking-groepsmelding kreeg {boeking:true} (stond zonder →
+  data-bot). Daimy's annulering 16:08 uitgevoerd: Outlook ✓ Planado ✓ sheet ✓ annuleringslijst ✓, RP bewust niet
+  aangeraakt (kantoor beslist over vervolg). Memory: feedback_annuleringen_automatisch.md.
 - OPEN: V3 aan Daimy (proefgeval goed → vlag leegmaken = alle klanten); WA-template tekent nog Nanny (Sunny-variant
   bij Meta indienen via template-wachter); beleidsvraag WA+mail beide (bestaand) of alleen WA bij WA-gesprek.
   Daemons sonny/inmeet-verzoeken/aanbod-replies herstart 12:47.

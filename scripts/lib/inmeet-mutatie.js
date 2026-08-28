@@ -48,6 +48,27 @@ function registreerBoeking({ rpItemId, naam, telefoon, email, planadoJobUuid, ou
   try { require('./eerder-willen.js').verwijder(rpItemId); } catch { /* lijst is optioneel */ }
 }
 
+/** HALVE BOEKING (Daimy 28-08, "geen meerdere boekingen"): zodra de Planado-opdracht bestaat
+ *  leggen we dat meteen vast, vóór RP/Gripp/Outlook/sheet. Crasht de keten daarna, dan
+ *  hergebruikt de volgende poging dezelfde opdracht in plaats van een tweede te maken. */
+function noteerHalveBoeking(rpItemId, { naam, telefoon, planadoJobUuid, aankomst, inmeter }) {
+  const boekingen = laadBoekingen();
+  if (boekingen[rpItemId]?.status === 'geboekt') return; // echte boeking wint altijd
+  boekingen[rpItemId] = { naam, telefoon, planadoJobUuid, aankomst, inmeter, status: 'bezig', sinds: new Date().toISOString() };
+  bewaarBoekingen(boekingen);
+}
+function halveBoeking(rpItemId) {
+  const b = laadBoekingen()[rpItemId];
+  return b?.status === 'bezig' && b.planadoJobUuid ? b : null;
+}
+/** Welke bevestigingskanalen zijn aantoonbaar gelukt? De nacontrole herstelt alleen wat ontbreekt. */
+function noteerBevestiging(rpItemId, res) {
+  const boekingen = laadBoekingen();
+  if (!boekingen[rpItemId]) return;
+  boekingen[rpItemId].bevestiging = { wa: !!res?.wa?.ok, mail: !!res?.mail?.ok, op: new Date().toISOString() };
+  bewaarBoekingen(boekingen);
+}
+
 /** Boeking terugvinden op telefoon (laatste 9), e-mail of naam-deel. */
 function vindBoeking({ telefoon, email, naam }) {
   const boekingen = laadBoekingen();
@@ -177,4 +198,4 @@ function heeftGeboekteAfspraak(rpItemId) {
   } catch { return null; }
 }
 
-module.exports = { heeftGeboekteAfspraak,  registreerBoeking, vindBoeking, muteerBoeking, laadBoekingen };
+module.exports = { heeftGeboekteAfspraak, noteerHalveBoeking, halveBoeking, noteerBevestiging, registreerBoeking, vindBoeking, muteerBoeking, laadBoekingen };

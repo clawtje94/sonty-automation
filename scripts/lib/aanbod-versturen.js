@@ -87,8 +87,8 @@ function verWegRegel(ver, taal = 'nl') {
   // gaat nu over ónze routeplanning en zegt niets over waar de klant woont.
   if (!ver) return '';
   return taal === 'en'
-    ? ' We plan our measuring routes as smartly as possible and combine jobs in your area. That saves unnecessary kilometres (and emissions), but it can mean it takes a little longer before we get to you.'
-    : ' We plannen onze inmeetroutes zo slim mogelijk en combineren klussen bij jou in de buurt. Dat scheelt onnodige kilometers (en uitstoot), maar daardoor kan het soms iets langer duren voor we bij je zijn.';
+    ? ' We plan our measuring routes as efficiently as possible and combine jobs in your area: that saves unnecessary kilometres, emissions and fuel, but it can mean it takes a little longer before we get to you.'
+    : ' We plannen onze inmeetroutes zo efficiënt mogelijk en combineren klussen bij jou in de buurt: dat scheelt onnodige kilometers, uitstoot en brandstof, maar daardoor kan het soms iets langer duren voor we bij je zijn.';
 }
 
 /** Ligt het voorgestelde moment ver weg? Dan is "goed nieuws" de verkeerde toon
@@ -182,7 +182,10 @@ async function stuurWhatsAppTemplate(aanbod, url) {
   // ÉÉN-MOMENT-AANBOD (Daimy 07-08): eigen template met {{1}} voornaam,
   // {{2}} moment, {{3}} duur en knoppen "Dat past" / "Ander moment".
   if (slots.length === 1) {
-    const hsm1 = aanbod.ver === true ? (ids.momentVer || ids.moment) : ids.moment;
+    // Daimy 28-08: de oude ver-weg-template zegt "je woont verder bij ons weg" — dat mag nooit
+    // meer. Alleen de neutrale route-v3-versie (#248773; na Meta-goedkeuring zet de wachter
+    // ids.routeVerGemeld) mag als ver-variant; tot die tijd het gewone moment-template.
+    const hsm1 = aanbod.ver === true && ids.routeVerGemeld ? (ids.momentVer || ids.moment) : ids.moment;
     if (!hsm1) return { ok: false, reden: '1-moment-template nog niet goedgekeurd/aangemaakt' };
     if (!slots[0]) return { ok: false, reden: 'leeg slot — NIET verstuurd' };
     const p1 = [
@@ -198,10 +201,10 @@ async function stuurWhatsAppTemplate(aanbod, url) {
     if (!r1.ok) return { ok: false, reden: `moment-template: Trengo ${r1.status}` };
     let ticket1 = bestaand1;
     try { ticket1 = ticket1 || (await r1.json())?.message?.ticket_id || null; } catch {}
-    return { ok: true, via: aanbod.ver ? 'moment-template-ver' : 'moment-template', ticket: ticket1 };
+    return { ok: true, via: aanbod.ver && hsm1 === ids.momentVer ? 'moment-template-ver' : 'moment-template', ticket: ticket1 };
   }
 
-  const hsm = aanbod.ver === true ? (ids.ver || ids.normaal) : ids.normaal;
+  const hsm = ids.normaal; // 3-tijden-variant: geen ver-weg-template (oude tekst over 'ver weg wonen')
   const basis = [
     { type: 'body', key: '{{1}}', value: (aanbod.lead.naam || 'daar').split(' ')[0] },
     { type: 'body', key: '{{2}}', value: slots[0] ? slotTekst(slots[0]) : '-' },
@@ -410,7 +413,7 @@ function bevestigingTekst(voornaam, slot, duurMin, taal = 'nl') {
     `Komt er iets tussen? Stuur gerust een berichtje.`;
 }
 
-async function verstuurBevestiging(aanbod, slot) {
+async function verstuurBevestiging(aanbod, slot, opties = {}) {
   // Verzendpoort: bevestiging na boeking is fail-open (mag door bij storing en
   // mens-actief — stilte na een boeking is de enige echt foute uitkomst), maar
   // de stil-lijst wint altijd.
@@ -438,7 +441,8 @@ async function verstuurBevestiging(aanbod, slot) {
   })();
   const afzender = bronSunny ? 'Sunny' : 'Nanny';
   let wa = { ok: false, reden: 'geen telefoon' };
-  if (aanbod.lead.telefoon) {
+  if (opties.alleenMail) wa = { ok: false, reden: 'overgeslagen (alleen mail gevraagd)' };
+  else if (aanbod.lead.telefoon) {
     const ticket = await zoekWaTicket(aanbod.lead.telefoon).catch(() => null);
     if (ticket) {
       const r = await tFetch(`/tickets/${ticket.id}/messages`, {
@@ -448,7 +452,8 @@ async function verstuurBevestiging(aanbod, slot) {
     } else wa = { ok: false, reden: 'geen WhatsApp-gesprek' };
   }
   let mail = { ok: false, reden: 'geen e-mailadres' };
-  if (aanbod.lead.email) {
+  if (opties.alleenWa) mail = { ok: false, reden: 'overgeslagen (mail al eerder verstuurd)' };
+  else if (aanbod.lead.email) {
     const r1 = await tFetch('/tickets', {
       method: 'POST',
       body: JSON.stringify({ channel_id: PLANNING_KANAAL_OVERRIDE || AANVRAGEN_KANAAL, contact_identifier: aanbod.lead.email, subject: taalB === 'en' ? 'Your measuring appointment at Sonty is confirmed' : 'Je inmeetafspraak bij Sonty staat vast' }),
@@ -512,7 +517,12 @@ async function verstuurAanbod(aanbod, url) {
     }
   }
   const wa = await stuurWhatsApp(aanbod, url).catch((e) => ({ ok: false, reden: e.message }));
-  const mail = await stuurMail(aanbod, url).catch((e) => ({ ok: false, reden: e.message }));
+  // ÉÉN AFZENDER PER KLANT (Daimy 28-08: "WhatsApp komt van Nanny, mail van Sunny"): ging
+  // WhatsApp via het Meta-template (dat tekent Nanny), dan tekent de mail óók Nanny.
+  // Alleen als Sunny zelf het vrije WhatsApp-bericht kon sturen (of er geen WhatsApp is)
+  // gaat de mail in Sunny-stijl.
+  const waViaTemplate = wa.ok && /template/i.test(String(wa.via || ''));
+  const mail = await stuurMail(waViaTemplate ? { ...aanbod, stijl: null } : aanbod, url).catch((e) => ({ ok: false, reden: e.message }));
   // VERZEND-SPIEGEL (les 06-08, lege-tijden-incident): het bericht zoals de klant het
   // krijgt gaat 1-op-1 mee naar Telegram. Een kapotte verzending is dan binnen een
   // minuut zichtbaar in plaats van pas als de klant (of Daimy) hem ziet.

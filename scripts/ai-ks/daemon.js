@@ -1369,6 +1369,7 @@ let laatsteActiefSweep = 0;
 let laatsteNotitieSweep = 0;
 let laatsteTerugkomerCheck = 0;
 
+let sweepOffset = 0;
 async function pollRonde(state, { onlyTest, sonnyOnly }) {
   // hartslag: aanbod-replies laat Sunny's eigen voorstellen aan Sunny zolang hij aantoonbaar draait
   try { require('../lib/sunny-start.js').schrijfHeartbeat(); } catch { /* best effort */ }
@@ -1446,16 +1447,35 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
   // @sonny-notities daar bleven liggen — ontdekt 16 juli.
   if (!specificTicket && Date.now() - laatsteActiefSweep > 2 * 60000) {
     laatsteActiefSweep = Date.now();
-    const actiefIds = Object.keys(loadActief()).filter(id => !tickets.some(t => String(t.id) === String(id)));
-    if (actiefIds.length) console.log(`  actief-sweep: ${actiefIds.length} gesprekken direct checken`);
+    // 28-08 (Daimy's test "ander moement" bleef liggen): (1) 609 actieve gesprekken één voor
+    // één ophalen = Trengo-429-storm van minuten; nu per sweep de 30 nieuwste + een roterend
+    // blok van 120, zodat verse gesprekken altijd binnen 2 min aan de beurt zijn. (2) Een
+    // ticket dat via een WhatsApp-template is geopend staat ASSIGNED op het bot-account,
+    // niet OPEN — dat telde niet mee. (3) Gesloten tickets gaan uit de actieve lijst.
+    const actiefAlles = Object.entries(loadActief())
+      .filter(([id]) => !tickets.some(t => String(t.id) === String(id)))
+      .sort((a, b) => String(b[1]?.sinds || '').localeCompare(String(a[1]?.sinds || '')))
+      .map(([id]) => id);
+    const nieuwste = actiefAlles.slice(0, 30);
+    const rest = actiefAlles.slice(30);
+    const blok = rest.length ? rest.slice(sweepOffset % rest.length).concat(rest.slice(0, sweepOffset % rest.length)).slice(0, 120) : [];
+    sweepOffset += 120;
+    const actiefIds = [...new Set([...nieuwste, ...blok])];
+    if (actiefIds.length) console.log(`  actief-sweep: ${actiefIds.length} van ${actiefAlles.length} gesprekken direct checken`);
+    let opgeruimd = 0;
     for (const tid of actiefIds) {
       try {
         const res = await tGet(`/tickets/${tid}`);
         const at = res?.data || res;
-        if (at && at.status === 'OPEN') tickets.push(at);
+        const bijBot = Number(at?.assigned_user_id ?? at?.user_id) === 747786;
+        if (at && (at.status === 'OPEN' || (at.status === 'ASSIGNED' && bijBot))) tickets.push(at);
+        else if (at && at.status === 'CLOSED') {
+          try { const a = loadActief(); if (a[tid]) { delete a[tid]; fs.writeFileSync(ACTIEF_FILE, JSON.stringify(a, null, 1)); opgeruimd++; } } catch { /* opruimen is extra */ }
+        }
       } catch (e) { console.error('  actief-sweep FOUT', tid, e.message); }
       await new Promise(r => setTimeout(r, 300));
     }
+    if (opgeruimd) console.log(`  actief-sweep: ${opgeruimd} gesloten gesprek(ken) uit de actieve lijst gehaald`);
   }
   // NOTITIE-SWEEP (Daimy 2026-07-27, derde poging op dit probleem). Een @sonny-notitie duwt een
   // ticket NIET omhoog in de ticketlijst: latest_message_at blijft op het laatste echte bericht

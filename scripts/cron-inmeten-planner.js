@@ -540,6 +540,8 @@ async function maakJobMetIdVangnet(maak, body) {
   } catch (e) {
     if (!/external_id.*(used|another entity)/i.test(e.message)) throw e;
     console.log('  external_id bezet door restant — opnieuw zonder external_id (wordt later gripp-nr)');
+    // ZICHTBAAR (28-08): dit betekent bijna altijd dat er al een (halve) opdracht staat — kantoor moet even kijken.
+    try { await telegram(`⚠️ Planado weigerde external_id ${body.external_id} (al in gebruik) — nieuwe opdracht zonder id aangemaakt; controleer op een dubbele/oude opdracht voor deze klant.`); } catch { /* melding is extra */ }
     const { external_id, ...zonder } = body;
     return maak(zonder);
   }
@@ -550,7 +552,15 @@ async function verwerkLead(lead, item, slot, duurMin) {
 
   // 1. de afspraak zelf
   const maakJob = (body) => planadoPost('/jobs', body);
-  const job = await maakJobMetIdVangnet(maakJob, {
+  // HALVE BOEKING HERGEBRUIKEN (Daimy 28-08): crashte een eerdere poging ná het aanmaken
+  // van de Planado-opdracht, dan staat die in het register als 'bezig' — dezelfde tijd bij
+  // dezelfde inmeter = die opdracht hergebruiken, nooit een tweede maken.
+  const mut = require('./lib/inmeet-mutatie.js');
+  const half = mut.halveBoeking(lead.id);
+  const zelfdeSlot = !!(half && half.inmeter === slot.inmeter && Math.abs(Date.parse(half.aankomst) - +slot.aankomst) < 60000);
+  if (half && !zelfdeSlot) await telegram(`⚠️ ${lead.naam}: er staat nog een halve Planado-opdracht (${half.planadoJobUuid}, ${half.aankomst}) van een eerdere poging op een ÁNDER moment — nieuwe boeking gaat door, die oude opdracht handmatig verwijderen.`);
+  if (zelfdeSlot) console.log(`  halve boeking hergebruikt: Planado-opdracht ${half.planadoJobUuid} bestond al`);
+  const job = zelfdeSlot ? { uuid: half.planadoJobUuid } : await maakJobMetIdVangnet(maakJob, {
     // Planado wil template/job_type als OBJECT ({uuid}/{code}); de platte *_uuid-velden
     // worden stil genegeerd en dan toont de app "Opdracht" i.p.v. "Inmeet afspraak"
     // (Daimy 2026-08-05 én 2026-08-06 — geverifieerd tegen de API-docs en een testjob).
@@ -571,6 +581,7 @@ async function verwerkLead(lead, item, slot, duurMin) {
     external_id: `rp-${lead.id}`,
   });
   const jobUuid = job.job_uuid || job.uuid;
+  try { mut.noteerHalveBoeking(lead.id, { naam: lead.naam, telefoon: lead.telefoon, planadoJobUuid: jobUuid, aankomst: slot.aankomst.toISOString(), inmeter: slot.inmeter }); } catch { /* register is vangnet */ }
 
   // 2. RP door naar "grip invullen" — de enige toegestane schrijfactie in RP
   const statusOk = await rpZetStatus(lead.id, GRIP_INVULLEN);
@@ -1709,6 +1720,7 @@ async function verwerkAanbiedingen() {
             else break;
           }
         }
+        try { require('./lib/inmeet-mutatie.js').noteerBevestiging(a.lead.rpItemId, { wa: { ok: bevestigd }, mail: { ok: false } }); } catch { /* register is extra */ }
         if (!bevestigd) await telegram(`⚠️ ${a.lead.naam} is geboekt maar de bevestiging kon niet via WhatsApp — even handmatig sturen: ${tekst}`);
         else await telegram(`📤 Bevestiging naar ${a.lead.naam} (ná geslaagde boeking): ${tekst}`);
       } catch (e) {
@@ -1990,7 +2002,8 @@ async function verwerkDashboardVerzoek(m) {
     // daimy's boeking kreeg pas 20 min later via de nacontrole een bevestiging).
     if (inst2.bevestigingSturen || ['sunny', 'klant-reply', 'herstel-keuze'].includes(m.bron)) {
       const { verstuurBevestiging } = require('./lib/aanbod-versturen');
-      await verstuurBevestiging({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin: duur }, { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter });
+      const bevRes = await verstuurBevestiging({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email }, duurMin: duur, bron: m.bron }, { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter });
+      try { require('./lib/inmeet-mutatie.js').noteerBevestiging(item.id, bevRes); } catch { /* register is extra */ }
     }
   } catch { /* bevestiging is nice-to-have; kantoor boekt met klant aan de lijn */ }
   if (magBoekingMelden(`${lead.naam}|${new Date(m.slot.aankomst).toISOString()}`)) {

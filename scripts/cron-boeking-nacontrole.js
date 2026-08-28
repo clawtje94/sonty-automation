@@ -79,7 +79,8 @@ async function checkBevestiging(b) {
 async function herstelBevestiging(b) {
   const { verstuurBevestiging } = require('./lib/aanbod-versturen');
   const aanbod = { lead: { naam: b.naam, telefoon: b.telefoon, email: b.email }, duurMin: b.duurMin || 30 };
-  const r = await verstuurBevestiging(aanbod, { aankomst: b.aankomst, inmeter: b.inmeter });
+  // Alleen wat ontbreekt: is de mail volgens het register al gelukt, dan geen tweede mail (28-08).
+  const r = await verstuurBevestiging(aanbod, { aankomst: b.aankomst, inmeter: b.inmeter }, { alleenWa: !!b.bevestiging?.mail });
   return r?.ergensGelukt !== false;
 }
 
@@ -102,7 +103,10 @@ async function herstelBevestiging(b) {
       if (ol.ok === false) fouten.push(ol.wat);
       if (ol.ok === null) nietTeChecken.push(ol.wat);
       if (bev.ok === null) nietTeChecken.push(bev.wat);
-      if (bev.ok === false) {
+      if (bev.ok === false && b.bevestiging?.wa) {
+        // register zegt: WA-bevestiging is verstuurd (patroon herkende hem alleen niet) — nooit dubbel (28-08)
+        nietTeChecken.push('WA-bevestiging staat in het register als verstuurd — niet opnieuw gestuurd');
+      } else if (bev.ok === false) {
         // Bevestiging ontbreekt: dat is het ene dat we altijd zelf mogen herstellen
         // (regel bevestiging-na-boeking: stilte na een boeking is de foute uitkomst).
         const gelukt = await herstelBevestiging(b).catch(() => false);

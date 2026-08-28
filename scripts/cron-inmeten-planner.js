@@ -839,6 +839,25 @@ async function main() {
         console.log(`    NOG GEEN AANBOD (dag ${wachtDagen}): ${reden}`);
         regels.push(`${lead.naam} (${lead.plaats}): wacht dag ${wachtDagen}/${inst.contactDeadlineDagen} — ${reden}`);
         wachtenden.push({ lead, item, duur, wachtDagen });
+        // VERRE KLANT NIET IN STILTE LATEN WACHTEN (Daimy 28-08, Mickey): Sunny meldt één keer
+        // dat hij zo efficiënt mogelijk inplant en vraagt meteen de voorkeur.
+        if (!LIVE && sunnyStart.aan() && !(sunnyStart.alleenNaam() && !`${lead.naam} ${item.id}`.toLowerCase().includes(sunnyStart.alleenNaam()))) {
+          const wb = sunnyStart.wachtmeldingBesluit({ lead: { ...lead, rpItemId: item.id }, state, wachtDagen, maxWachtDagen: MAX_WACHTDAGEN });
+          if (wb.actie === 'melden') {
+            try {
+              const { taalVan, stuurVrijBericht } = require('./lib/aanbod-versturen');
+              const taalW = taalVan({ telefoon: lead.telefoon, email: lead.email, rpItemId: item.id });
+              const poortW = await require('./lib/verzend-poort.js').magSturen({ telefoon: lead.telefoon, email: lead.email, ticketId: null, soort: 'wachtmelding' });
+              if (!poortW.ok) throw new Error('verzendpoort: ' + poortW.reden);
+              const uitW = await stuurVrijBericht({ telefoon: lead.telefoon, email: lead.email, naam: lead.naam, tekst: sunnyStart.wachtmeldingTekst({ voornaam: (lead.naam || 'daar').split(' ')[0], taal: taalW, maxWachtDagen: MAX_WACHTDAGEN }), onderwerp: taalW === 'en' ? 'Your measuring appointment at Sonty' : 'Je inmeetafspraak bij Sonty', afzender: 'Sunny' });
+              if (!uitW.ok) throw new Error(uitW.reden);
+              state.sunnyWachtmelding = { ...(state.sunnyWachtmelding || {}), [item.id]: { op: new Date().toISOString(), via: uitW.via } };
+              if (uitW.via === 'wa' && uitW.ticket) { try { require('./lib/gesprek-claims.js').claim(uitW.ticket, 'sunny-voorstel'); sunnyStart.registreerActiefTicket(uitW.ticket, lead.naam); } catch { /* vangnet */ } }
+              regels.push(`  → Sunny meldde de wachttijd via ${uitW.via}`);
+              console.log(`    SUNNY MELDDE WACHTTIJD via ${uitW.via}`);
+            } catch (e) { console.log(`    Sunny wachtmelding mislukt: ${e.message}`); }
+          }
+        }
         // óók wachtende klanten krijgen hun best beschikbare 3 tijden op de kaart
         // (mét omrij-minuten): de bot wacht zelf op een buurklus, maar de winkel
         // moet altijd kunnen handelen (Daimy 06-08)
@@ -867,7 +886,7 @@ async function main() {
         nood = nood.slice(0, 3);
         dash.leads.push({
           rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, telefoon: lead.telefoon, adres: lead.volledigAdres, duurMin: duur, wachtDagen,
-          status: 'wachtend', reden,
+          status: 'wachtend', reden: reden + (state.sunnyWachtmelding?.[item.id] ? ` · Sunny meldde de wachttijd op ${state.sunnyWachtmelding[item.id].op.slice(0, 10)}` : ''),
           producten: lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ').slice(0, 90),
           top: nood.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin, label: x.label || undefined, dagOpener: x.dagOpener || undefined })),
         });

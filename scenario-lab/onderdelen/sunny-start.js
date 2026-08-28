@@ -230,6 +230,28 @@ function voerUitE(s) {
 }
 function vergelijkE(w, e) { return w.actie === e.actie && e.tekstOk; }
 
+
+// ── F. wachtmelding verre klant (echte wachtmeldingBesluit + tekst) ──
+const dimF = [
+  { naam: 'gemeld', waarden: [{ label: 'nee', al: false }, { label: 'ja', al: true }] },
+  { naam: 'contact', waarden: [{ label: 'wa', tel: '+31612345678', email: '' }, { label: 'mail', tel: '', email: 'k@lab.test' }, { label: 'geen', tel: '', email: '' }] },
+  { naam: 'tijd', waarden: [{ label: 'di-13:00', nu: T(DI, 13, 0), open: true }, { label: 'di-21:00', nu: T(DI, 21, 0), open: false }] },
+  { naam: 'taal', waarden: [{ label: 'nl' }, { label: 'en' }] },
+];
+function orakelF(s) {
+  const melden = !s.gemeld.al && !!(s.contact.tel || s.contact.email) && s.tijd.open;
+  return { wil: melden ? 'melden' : 'blokkeer', actie: melden ? 'melden' : 'wachten' };
+}
+function voerUitF(s) {
+  const state = { sunnyWachtmelding: s.gemeld.al ? { 'rp-f': { op: new Date(s.tijd.nu - 3600000).toISOString() } } : {} };
+  const r = S.wachtmeldingBesluit({ nu: s.tijd.nu, lead: { rpItemId: 'rp-f', telefoon: s.contact.tel, email: s.contact.email }, state, wachtDagen: 0 });
+  const t = S.wachtmeldingTekst({ voornaam: 'Kim', taal: s.taal.label });
+  const en = s.taal.label === 'en';
+  const tekstOk = /Sunny/.test(t) && /\?/.test(t) && (en ? /within 4 working days/.test(t) && /emissions and fuel/.test(t) : /binnen 4 werkdagen/.test(t) && /uitstoot en brandstof/.test(t));
+  return { uitkomst: r.actie === 'melden' ? 'melden' : 'blokkeer', actie: r.actie, tekstOk, melding: true };
+}
+function vergelijkF(w, e) { return w.actie === e.actie && e.tekstOk; }
+
 // ── samengesteld onderdeel ───────────────────────────────────────────────────
 function scenarios() {
   return [
@@ -238,10 +260,11 @@ function scenarios() {
     ...combinaties(dimC).map((s) => ({ ...s, _laag: 'C', _label: 'C ' + s._label })),
     ...combinaties(dimD).map((s) => ({ ...s, _laag: 'D', _label: 'D ' + s._label })),
     ...combinaties(dimE).map((s) => ({ ...s, _laag: 'E', _label: 'E ' + s._label })),
+    ...combinaties(dimF).map((s) => ({ ...s, _laag: 'F', _label: 'F ' + s._label })),
   ].map((s, i) => ({ ...s, _nr: i + 1 }));
 }
-function orakel(s) { return s._laag === 'A' ? orakelA(s) : s._laag === 'B' ? orakelB(s) : s._laag === 'C' ? orakelC(s) : s._laag === 'D' ? orakelD(s) : orakelE(s); }
-async function voerUit(s) { return s._laag === 'A' ? voerUitA(s) : s._laag === 'B' ? voerUitB(s) : s._laag === 'C' ? voerUitC(s) : s._laag === 'D' ? voerUitD(s) : voerUitE(s); }
-function vergelijk(w, e, s) { return s._laag === 'A' ? vergelijkA(w, e, s) : s._laag === 'B' ? vergelijkB(w, e) : s._laag === 'C' ? vergelijkC(w, e) : s._laag === 'D' ? vergelijkD(w, e) : vergelijkE(w, e); }
+function orakel(s) { return s._laag === 'A' ? orakelA(s) : s._laag === 'B' ? orakelB(s) : s._laag === 'C' ? orakelC(s) : s._laag === 'D' ? orakelD(s) : s._laag === 'E' ? orakelE(s) : orakelF(s); }
+async function voerUit(s) { return s._laag === 'A' ? voerUitA(s) : s._laag === 'B' ? voerUitB(s) : s._laag === 'C' ? voerUitC(s) : s._laag === 'D' ? voerUitD(s) : s._laag === 'E' ? voerUitE(s) : voerUitF(s); }
+function vergelijk(w, e, s) { return s._laag === 'A' ? vergelijkA(w, e, s) : s._laag === 'B' ? vergelijkB(w, e) : s._laag === 'C' ? vergelijkC(w, e) : s._laag === 'D' ? vergelijkD(w, e) : s._laag === 'E' ? vergelijkE(w, e) : vergelijkF(w, e); }
 
 module.exports = { naam: 'sunny-start (eerste voorstel door Sunny: poort, tekst, eigenaar, verzendpoort)', scenarios, orakel, voerUit, vergelijk };

@@ -143,6 +143,27 @@ function navraagTekst({ voornaam = 'daar', taal = 'nl' } = {}) {
   return `Hoi ${voornaam}, ik heb je eerder een paar momenten voorgesteld voor het inmeten, maar nog niets van je gehoord. Wil je nog steeds dat we langskomen? Laat even weten welke dagen of dagdelen jou uitkomen (of vanaf wanneer), dan plan ik het meteen voor je in. Wil je er toch vanaf zien, dan hoor ik dat ook graag.\n\nGroetjes, Sunny van Sonty`;
 }
 
+/**
+ * VERRE KLANT WACHT OP EEN COMBI (Daimy 28-08, Mickey Kalra: "waarom is Mickey niks gestuurd?").
+ * De planner wacht bewust max MAX_WACHT_DAGEN op een klus in de buurt; dat mag, maar niet in
+ * stilte. Sunny meldt één keer wat er gebeurt en vraagt meteen de voorkeur (V8).
+ * @returns {{actie:'melden'|'wachten', reden:string}}
+ */
+function wachtmeldingBesluit({ nu = Date.now(), lead = {}, state = {}, wachtDagen = 0, maxWachtDagen = 4 } = {}) {
+  const id = String(lead.rpItemId || '');
+  const al = (state.sunnyWachtmelding || {})[id];
+  if (al?.op) return { actie: 'wachten', reden: `Sunny meldde de wachttijd op ${al.op.slice(0, 10)}; voorstel volgt zodra er een buurklus is (uiterlijk dag ${maxWachtDagen})` };
+  if (!lead.telefoon && !lead.email) return { actie: 'wachten', reden: 'geen telefoon en geen e-mail — mens nodig' };
+  if (!binnenVenster(nu)) return { actie: 'wachten', reden: `wachtmelding gepland (buiten verzendvenster, gaat ${volgendeVensterTekst(nu)})` };
+  return { actie: 'melden', reden: `dag ${wachtDagen}/${maxWachtDagen}: Sunny meldt de wachttijd en vraagt de voorkeur` };
+}
+function wachtmeldingTekst({ voornaam = 'daar', taal = 'nl', maxWachtDagen = 4 } = {}) {
+  if (taal === 'en') {
+    return `Hi ${voornaam}, thanks for your go-ahead! I'm scheduling the measuring appointment for you. We plan our measuring routes as efficiently as possible and combine jobs in your area (that saves unnecessary kilometres, emissions and fuel), so it can take a few days before I can offer you a concrete moment; you'll hear from me within ${maxWachtDagen} working days at the latest. Do you already have a preference for certain days or parts of the day? Let me know and I'll take it into account.\n\nKind regards, Sunny from Sonty`;
+  }
+  return `Hoi ${voornaam}, bedankt voor je akkoord! Ik ga de inmeetafspraak voor je inplannen. We plannen onze inmeetroutes zo efficiënt mogelijk en combineren klussen bij jou in de buurt (dat scheelt onnodige kilometers, uitstoot en brandstof), daardoor kan het een paar dagen duren voor ik je een concreet moment kan geven; uiterlijk binnen ${maxWachtDagen} werkdagen hoor je van mij. Heb je zelf al voorkeur voor bepaalde dagen of dagdelen? Laat het weten, dan houd ik daar rekening mee.\n\nGroetjes, Sunny van Sonty`;
+}
+
 // ── Sunny's tekst ─────────────────────────────────────────────────────────────
 const DAG_NL = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
 const DAG_EN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -279,4 +300,4 @@ function registreerActiefTicket(ticketId, klant) {
   }
 }
 
-module.exports = { navraagBesluit, navraagTekst, aan, alleenNaam, registreerActiefTicket, noteerSunnyVerstuurd, sunnyStuurdeNet, binnenVenster, volgendeVensterTekst, magStarten, laatsteVoorstelOp, aantalEerdereVoorstellen, voorstelTekst, voorstelMailHtml, slotZin, schrijfHeartbeat, sunnyLeeft, eigenaarVanReactie, VLAG, HEARTBEAT, VENSTER };
+module.exports = { wachtmeldingBesluit, wachtmeldingTekst, navraagBesluit, navraagTekst, aan, alleenNaam, registreerActiefTicket, noteerSunnyVerstuurd, sunnyStuurdeNet, binnenVenster, volgendeVensterTekst, magStarten, laatsteVoorstelOp, aantalEerdereVoorstellen, voorstelTekst, voorstelMailHtml, slotZin, schrijfHeartbeat, sunnyLeeft, eigenaarVanReactie, VLAG, HEARTBEAT, VENSTER };

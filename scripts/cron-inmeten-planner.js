@@ -920,6 +920,40 @@ async function main() {
       const gate = sunnyStart.magStarten({ lead: { ...lead, rpItemId: item.id }, slots: aanbod, lopend: false, geboekt: false, state });
       if (beperkTot && !`${lead.naam} ${item.id}`.toLowerCase().includes(beperkTot)) {
         kaart.reden = `Sunny wacht: proefstand, alleen "${beperkTot}"`;
+      } else if (!gate.ok && /voorstellen gestuurd zonder boeking/.test(gate.reden)) {
+        // NA 2 VOORSTELLEN ZONDER REACTIE (Daimy 28-08): geen derde template, maar één persoonlijk
+        // navraag-berichtje van Sunny (WA als het venster open is, anders mail); daarna pas bellen.
+        const eerder = sunnyStart.aantalEerdereVoorstellen(state, { ...lead, rpItemId: item.id });
+        const besluit = sunnyStart.navraagBesluit({ lead: { ...lead, rpItemId: item.id }, state, eerder });
+        if (besluit.actie === 'navragen') {
+          try {
+            const { taalVan, stuurVrijBericht } = require('./lib/aanbod-versturen');
+            const taalN = taalVan({ telefoon: lead.telefoon, email: lead.email, rpItemId: item.id });
+            const tekst = sunnyStart.navraagTekst({ voornaam: (lead.naam || 'daar').split(' ')[0], taal: taalN });
+            const poort = await require('./lib/verzend-poort.js').magSturen({ telefoon: lead.telefoon, email: lead.email, ticketId: null, soort: 'navraag' });
+            if (!poort.ok) throw new Error('verzendpoort: ' + poort.reden);
+            const uit = await stuurVrijBericht({ telefoon: lead.telefoon, email: lead.email, naam: lead.naam, tekst, onderwerp: taalN === 'en' ? 'Your measuring appointment at Sonty' : 'Je inmeetafspraak bij Sonty', afzender: 'Sunny' });
+            if (!uit.ok) throw new Error(uit.reden);
+            state.sunnyNavraag = { ...(state.sunnyNavraag || {}), [item.id]: { op: new Date().toISOString(), via: uit.via, naVoorstellen: eerder } };
+            if (uit.via === 'wa' && uit.ticket) { try { require('./lib/gesprek-claims.js').claim(uit.ticket, 'sunny-voorstel'); sunnyStart.registreerActiefTicket(uit.ticket, lead.naam); } catch { /* vangnet */ } }
+            kaart.reden = `Sunny vroeg persoonlijk na (${uit.via}, na ${eerder} voorstellen zonder reactie)`;
+            regels.push(`${lead.naam}: Sunny vroeg na via ${uit.via}`);
+            console.log(`    SUNNY VROEG NA via ${uit.via} (na ${eerder} voorstellen)`);
+          } catch (e) {
+            kaart.reden = `Sunny wacht: navragen mislukt — ${String(e.message).slice(0, 80)}`;
+            console.log(`    Sunny navragen mislukt: ${e.message}`);
+          }
+        } else if (besluit.actie === 'bellen') {
+          kaart.reden = 'Mens nodig (bellen): ' + besluit.reden;
+          regels.push(`${lead.naam}: ${besluit.reden}`);
+          state.belMelding = state.belMelding || {};
+          if (!state.belMelding[item.id]) {
+            state.belMelding[item.id] = new Date().toISOString();
+            await telegram(`📞 ${lead.naam} (${lead.plaats || ''}): ${besluit.reden}. Tel ${lead.telefoon || '-'}.`, { boeking: true });
+          }
+        } else {
+          kaart.reden = 'Sunny wacht: ' + besluit.reden;
+        }
       } else if (!gate.ok) {
         kaart.reden = 'Sunny wacht: ' + gate.reden;
         if (gate.mensNodig) regels.push(`${lead.naam}: ${gate.reden}`);

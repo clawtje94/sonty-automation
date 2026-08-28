@@ -115,6 +115,34 @@ function magStarten({ nu = Date.now(), lead = {}, slots = [], lopend = false, ge
   return { ok: true, reden: 'ok' };
 }
 
+/**
+ * NAVRAGEN NA 2 VOORSTELLEN (Daimy 28-08: "ook dat soort dingen moeten door jou opgelost worden").
+ * Geen derde/vierde bot-voorstel, maar één persoonlijk berichtje van Sunny: wil je nog dat we
+ * komen, en wanneer komt het uit? Antwoordt de klant, dan plant Sunny/de keten gewoon verder.
+ * Blijft het daarna `belNaDagen` dagen stil, dan pas "bellen" (kantoor), met één melding.
+ * @returns {{actie:'navragen'|'bellen'|'wachten', reden:string}}
+ */
+function navraagBesluit({ nu = Date.now(), lead = {}, state = {}, eerder = 0, minDagenNaVoorstel = 2, belNaDagen = 5 } = {}) {
+  const id = String(lead.rpItemId || '');
+  const nav = (state.sunnyNavraag || {})[id];
+  const laatste = laatsteVoorstelOp(state, lead);
+  if (nav?.op) {
+    const dagen = (nu - Date.parse(nav.op)) / DAG_MS;
+    if (dagen >= belNaDagen) return { actie: 'bellen', reden: `Sunny vroeg na op ${nav.op.slice(0, 10)} (na ${eerder} voorstellen), ${Math.floor(dagen)} dagen geen reactie — bellen` };
+    return { actie: 'wachten', reden: `Sunny vroeg na op ${nav.op.slice(0, 10)} (na ${eerder} voorstellen) — wacht op reactie` };
+  }
+  if (laatste && nu - laatste < minDagenNaVoorstel * DAG_MS) return { actie: 'wachten', reden: `al ${eerder} voorstellen, laatste <${minDagenNaVoorstel} dgn geleden — even afwachten` };
+  if (!binnenVenster(nu)) return { actie: 'wachten', reden: `navragen gepland (buiten verzendvenster, gaat ${volgendeVensterTekst(nu)})` };
+  return { actie: 'navragen', reden: `${eerder} voorstellen zonder reactie — Sunny vraagt persoonlijk na` };
+}
+
+function navraagTekst({ voornaam = 'daar', taal = 'nl' } = {}) {
+  if (taal === 'en') {
+    return `Hi ${voornaam}, I suggested a couple of moments for the measuring appointment earlier, but haven't heard back from you yet. Would you still like us to come by? Just let me know which days or parts of the day suit you (or from when), and I'll schedule it right away. If you'd rather not go ahead, I'd like to hear that too.\n\nKind regards, Sunny from Sonty`;
+  }
+  return `Hoi ${voornaam}, ik heb je eerder een paar momenten voorgesteld voor het inmeten, maar nog niets van je gehoord. Wil je nog steeds dat we langskomen? Laat even weten welke dagen of dagdelen jou uitkomen (of vanaf wanneer), dan plan ik het meteen voor je in. Wil je er toch vanaf zien, dan hoor ik dat ook graag.\n\nGroetjes, Sunny van Sonty`;
+}
+
 // ── Sunny's tekst ─────────────────────────────────────────────────────────────
 const DAG_NL = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
 const DAG_EN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -251,4 +279,4 @@ function registreerActiefTicket(ticketId, klant) {
   }
 }
 
-module.exports = { aan, alleenNaam, registreerActiefTicket, noteerSunnyVerstuurd, sunnyStuurdeNet, binnenVenster, volgendeVensterTekst, magStarten, laatsteVoorstelOp, aantalEerdereVoorstellen, voorstelTekst, voorstelMailHtml, slotZin, schrijfHeartbeat, sunnyLeeft, eigenaarVanReactie, VLAG, HEARTBEAT, VENSTER };
+module.exports = { navraagBesluit, navraagTekst, aan, alleenNaam, registreerActiefTicket, noteerSunnyVerstuurd, sunnyStuurdeNet, binnenVenster, volgendeVensterTekst, magStarten, laatsteVoorstelOp, aantalEerdereVoorstellen, voorstelTekst, voorstelMailHtml, slotZin, schrijfHeartbeat, sunnyLeeft, eigenaarVanReactie, VLAG, HEARTBEAT, VENSTER };

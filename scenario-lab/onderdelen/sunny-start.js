@@ -198,6 +198,37 @@ function vergelijkD(w, e) {
   return true;
 }
 
+
+// ── E. navragen na 2 voorstellen (echte navraagBesluit + navraagTekst) ──
+const dimE = [
+  { naam: 'eerder', waarden: [{ label: '2', n: 2 }, { label: '3', n: 3 }] },
+  { naam: 'laatsteVoorstel', waarden: [{ label: '1d', d: 1 }, { label: '3d', d: 3 }] },
+  { naam: 'navraag', waarden: [{ label: 'nog-niet', op: null }, { label: '1d-geleden', op: 1 }, { label: '6d-geleden', op: 6 }] },
+  { naam: 'tijd', waarden: [{ label: 'di-13:00', nu: T(DI, 13, 0), open: true }, { label: 'zo-12:00', nu: T(ZO, 12, 0), open: false }] },
+  { naam: 'taal', waarden: [{ label: 'nl' }, { label: 'en' }] },
+];
+function orakelE(s) {
+  let actie;
+  if (s.navraag.op !== null) actie = s.navraag.op >= 5 ? 'bellen' : 'wachten';
+  else if (s.laatsteVoorstel.d < 2) actie = 'wachten';
+  else if (!s.tijd.open) actie = 'wachten';
+  else actie = 'navragen';
+  return { wil: actie === 'navragen' ? 'navragen' : 'blokkeer', actie, tekstOk: true };
+}
+function voerUitE(s) {
+  const nu = s.tijd.nu;
+  const lead = { rpItemId: 'rp-e', naam: 'Kim Lab', telefoon: '+31611111111', email: 'kim@lab.test' };
+  const state = { aanbodTickets: {}, sunnyNavraag: {} };
+  for (let i = 0; i < s.eerder.n; i++) state.aanbodTickets['e' + i] = { rpItemId: 'rp-e', naam: lead.naam, telefoon: lead.telefoon, email: lead.email, verstuurdOp: new Date(nu - (s.laatsteVoorstel.d + i) * 86400000).toISOString() };
+  if (s.navraag.op !== null) state.sunnyNavraag['rp-e'] = { op: new Date(nu - s.navraag.op * 86400000).toISOString() };
+  const r = S.navraagBesluit({ nu, lead, state, eerder: s.eerder.n });
+  const t = S.navraagTekst({ voornaam: 'Kim', taal: s.taal.label });
+  const en = s.taal.label === 'en';
+  const tekstOk = /Sunny/.test(t) && /\?/.test(t) && (en ? /Hi Kim/.test(t) && !/Hoi/.test(t) : /Hoi Kim/.test(t) && !/\bHi\b/.test(t));
+  return { uitkomst: r.actie === 'navragen' ? 'navragen' : 'blokkeer', actie: r.actie, tekstOk, reden: r.reden, melding: true };
+}
+function vergelijkE(w, e) { return w.actie === e.actie && e.tekstOk; }
+
 // ── samengesteld onderdeel ───────────────────────────────────────────────────
 function scenarios() {
   return [
@@ -205,10 +236,11 @@ function scenarios() {
     ...combinaties(dimB).map((s) => ({ ...s, _laag: 'B', _label: 'B ' + s._label })),
     ...combinaties(dimC).map((s) => ({ ...s, _laag: 'C', _label: 'C ' + s._label })),
     ...combinaties(dimD).map((s) => ({ ...s, _laag: 'D', _label: 'D ' + s._label })),
+    ...combinaties(dimE).map((s) => ({ ...s, _laag: 'E', _label: 'E ' + s._label })),
   ].map((s, i) => ({ ...s, _nr: i + 1 }));
 }
-function orakel(s) { return s._laag === 'A' ? orakelA(s) : s._laag === 'B' ? orakelB(s) : s._laag === 'C' ? orakelC(s) : orakelD(s); }
-async function voerUit(s) { return s._laag === 'A' ? voerUitA(s) : s._laag === 'B' ? voerUitB(s) : s._laag === 'C' ? voerUitC(s) : voerUitD(s); }
-function vergelijk(w, e, s) { return s._laag === 'A' ? vergelijkA(w, e, s) : s._laag === 'B' ? vergelijkB(w, e) : s._laag === 'C' ? vergelijkC(w, e) : vergelijkD(w, e); }
+function orakel(s) { return s._laag === 'A' ? orakelA(s) : s._laag === 'B' ? orakelB(s) : s._laag === 'C' ? orakelC(s) : s._laag === 'D' ? orakelD(s) : orakelE(s); }
+async function voerUit(s) { return s._laag === 'A' ? voerUitA(s) : s._laag === 'B' ? voerUitB(s) : s._laag === 'C' ? voerUitC(s) : s._laag === 'D' ? voerUitD(s) : voerUitE(s); }
+function vergelijk(w, e, s) { return s._laag === 'A' ? vergelijkA(w, e, s) : s._laag === 'B' ? vergelijkB(w, e) : s._laag === 'C' ? vergelijkC(w, e) : s._laag === 'D' ? vergelijkD(w, e) : vergelijkE(w, e); }
 
 module.exports = { naam: 'sunny-start (eerste voorstel door Sunny: poort, tekst, eigenaar, verzendpoort)', scenarios, orakel, voerUit, vergelijk };

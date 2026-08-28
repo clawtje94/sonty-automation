@@ -1,5 +1,23 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-26, prijsreview + planner)
 
+## 28-08 (ochtend): MAC 21 UUR STIL DOOR STROOMUITVAL + FILEVAULT — inhaalrun gemiste jobs
+- 27-08 12:59 viel de Mac uit (geen shutdown-record = stroom/hard uit; pmset autorestart=1 → zelf herstart).
+  FileVault AAN → 21 uur op het wachtwoordscherm: geen gui/501-sessie = GEEN launchd-agents (Telegram-poller,
+  Sonny, email-daemon, WA-luisteraar, alle crons). Pas na Daimy's inlog 28-08 10:22 startte alles (10:23).
+- Gemist: alle kalender-jobs 27-08 na 13:00 (V4 17:00, gripp-invullen 4x, health-check 19:00, getekend-rapport,
+  planning-overzicht, sunny-weetje) + 28-08 tot 10:22 (V4 09:00, markiezen, planado-outlook, montage-voorstellen,
+  email-sync, health-check, sunny-ochtend, digests, grond-radar, ...).
+- Inhaalrun gestart 10:30 (scratchpad inhaal.sh, sequentieel via launchctl kickstart, log logs/inhaal-28-08.log):
+  offerte-v4 → markiezen → planado-outlook → montage-voorstellen → email-sync → health-check → sync-waakhond →
+  werkbon-niet-afgerond → mens-nodig-digest → tickets-rapport → sunny-ochtend → gesprek-lab → prijs-kruiscontrole →
+  gripp-verrijken → qa-leren → reviews-sync → sheet-vangnet → vve-signalen → c-backfill → tekenbonus-opruim →
+  prijs-steekproef → grond.radar → v4-selfcheck. Avond-jobs van gisteren bewust NIET ingehaald (draaien vanavond).
+- V1 aan Daimy (Telegram 10:29): FileVault uit + auto-login aanzetten (dan start alles na stroomuitval vanzelf;
+  nadeel: schijf onversleuteld bij fysieke diefstal) + tip UPS. Antwoord open.
+- Niet geladen (bewust): nl.sonty.keten-zelfcontrole (UIT op verzoek Daimy), nl.sonty.sonny-rapport (Sonny UIT).
+  com.winterstapel.tick: last exit 1, err-log leeg — nog niet onderzocht (paper trading, laag prio).
+- Memory: project_mac_mini_filevault_stroomuitval.md.
+
 ## 27-08 (ochtend, vervolg): WERKBON VIA PLANADO-WEBHOOK DIRECT NAAR werkbon@sonty.nl (LIVE)
 - Daimy: "als een werkbon wel of niet is afgerond moet die via die webhook verstuurd worden naar werkbon@sonty.nl".
   Planado heeft GEEN eigen e-mail-rapport-instelling (gecheckt: docs + Instellingen; alleen klant-SMS), wél webhooks.

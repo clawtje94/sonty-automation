@@ -8,6 +8,7 @@
 // en probeert het adres zelf te zetten als Planado er geen huisnummer van heeft.
 // Idempotent: markering in de omschrijving + state data/outlook-planado-verrijkt.json (hash per
 // opdracht), dus alleen PATCH bij nieuwe of gewijzigde notities. Standaard DRY-RUN.
+// Sinds 28-08 ook inmeet-opdrachten (Joey/Sjoerd) en Nanny.
 // Gebruik: node scripts/planado-outlook-verrijk.js [--execute] [--alleen 1067] [--dagen 100]
 const fs = require('fs');
 const path = require('path');
@@ -25,6 +26,8 @@ const BUSSEN = {
   '1f19ca1a-5a2d': 'Bus 1 | Frenk & Dennis', '1f122f72-777f': 'Bus 2 | Tygo & Kevin',
   '1f122f37-76db': 'Bus 3 | Yudi & Nick', '1f19ca1c-8ecb': 'Bus 4 | Marvin & Bart',
   '1f19ca1d-fec8': 'Bus 5 | Marvin & Moa', '1f19ca28-ce10': 'Bus 6 | Arnold',
+  // Inmeters + binnenhuis ook (Daimy 28-08: "ook in de inmeet opdrachten")
+  '1f122cfa-17a2': 'Joey | inmeten', '1f122d19-e43e': 'Sjoerd | inmeten', '1f122cfa-4eba': 'Nanny | binnenhuis',
 };
 const MARK_NOT = 'Interne notities (Outlook):';
 const MARK_ADR = 'Adres (Outlook):';

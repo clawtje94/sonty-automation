@@ -596,7 +596,12 @@ async function main() {
             const rB = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': MEET_CODE } });
             const aanbodB = rB.ok ? await rB.json() : null;
             const duidingB = await leesReactie(reeksTekst || tekst, aanbodB?.slots || []);
-            if (duidingB.intent === 'annuleren') {
+            // Alleen ZELF annuleren als er echt een geboekte afspraak staat; een lead zonder boeking
+            // die "ervan afziet" is een kantoor-beslissing (lead verloren) — ack + alarm, zoals voorheen.
+            const geboektNu = duidingB.intent === 'annuleren'
+              ? (() => { try { return require('./lib/inmeet-mutatie.js').vindBoeking({ telefoon: info.telefoon, email: info.email, naam: info.naam }); } catch { return null; } })()
+              : null;
+            if (duidingB.intent === 'annuleren' && geboektNu) {
               // ANNULERING NA BOEKING = ZELF UITVOEREN (Daimy 28-08: "ik wil dat je die volledig
               // zelf uitvoert en daarna in de planning-bot-groep een bericht stuurt"; was: notitie
               // voor een collega + alarm, en de afspraak bleef staan). De mutatie-motor haalt de
@@ -631,6 +636,20 @@ async function main() {
                   "Thank you for your message, sorry to read that! I'm passing your cancellation straight on to our planning team. As soon as the appointment has been removed you'll receive a confirmation.")); }
                 await telegram(`🚨 ANNULERING van ${info.naam}: ${duidingB.samenvatting} — automatisch annuleren LUKTE NIET (${String(e.message).slice(0, 80)}). De afspraak staat NOG in Planado/Outlook — handmatig annuleren.`);
               }
+              meldingen++;
+              continue;
+            }
+            if (duidingB.intent === 'annuleren') {
+              // geen geboekte afspraak: eerlijk bevestigen + kantoor alarmeren (lead-beslissing is mensenwerk)
+              { const taalAn = taalVoor(info);
+              if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, T(taalAn,
+                'Dank je voor je bericht, wat jammer om te lezen! Ik geef het direct door aan mijn collega\'s; zij nemen het verder met je op.',
+                "Thank you for your message, sorry to read that! I'm passing it straight on to my colleagues; they will follow up with you.")); }
+              try {
+                const { notitie } = require('./lib/trengo-notitie.js');
+                await notitie(ticketId, `Klant ziet af van de inmeetafspraak/opdracht (geen geboekte afspraak): ${duidingB.samenvatting}. Kantoor beslist over vervolg.`, { tag: true });
+              } catch (e) { console.log(`  notitie annulering mislukt: ${e.message.slice(0, 80)}`); }
+              await telegram(`🚨 ANNULERING (zonder boeking) van ${info.naam}: ${duidingB.samenvatting}\n\n"${tekst.slice(0, 200)}"\n\nGeen geboekte afspraak gevonden — kantoor beslist over de lead.`);
               meldingen++;
               continue;
             }

@@ -2042,7 +2042,7 @@ async function verwerkVerzoek(m) {
         const TT = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
         await fetch('https://app.trengo.com/api/v2/tickets/' + ticket.id + '/messages', {
           method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: `Hoi ${(boeking.naam || 'daar').split(' ')[0]}, we hebben de inmeetafspraak geannuleerd. Mocht het later toch weer spelen, dan ben je altijd welkom. Groetjes, Nanny van Sonty`, type: 'OUTBOUND' }),
+          body: JSON.stringify({ message: `Hoi ${(boeking.naam || 'daar').split(' ')[0]}, we hebben de inmeetafspraak geannuleerd. Mocht het later toch weer spelen, dan ben je altijd welkom. Groetjes, ${boeking.bron === 'sunny' ? 'Sunny' : 'Nanny'} van Sonty`, type: 'OUTBOUND' }),
         });
       }
     } catch { /* melding naar kantoor is al gedaan */ }

@@ -505,12 +505,12 @@ function raaktAnderPrijsboek(ctx, input) {
       return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — NIET geannuleerd)', opmerking: 'Er is niets geannuleerd. Zeg dat een collega het oppakt.' });
     }
     try {
+      try { if (ctx.ticketId) require('../lib/gesprek-claims.js').claim(ctx.ticketId, 'annulering-loopt'); } catch { /* vangnet */ }
       const rA2 = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
         method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': process.env.MEETBON_CODE || '2288' },
         body: JSON.stringify({ type: 'annuleer', naam: input.klantNaam, telefoon: input.telefoon, bron: 'sunny', reden: 'klant annuleerde in het gesprek. Reden: ' + String(input.reden || 'geen reden gegeven').slice(0, 150) + ' — citaat: ' + String(input.annuleerCitaat).slice(0, 100) }),
       });
       if (!rA2.ok) throw new Error('wachtrij HTTP ' + rA2.status);
-      try { if (ctx.ticketId) require('../lib/gesprek-claims.js').claim(ctx.ticketId, 'annulering-loopt'); } catch { /* vangnet */ }
       return JSON.stringify({ status: 'IN UITVOERING', opmerking: 'De annulering loopt nu over alle systemen; de klant krijgt automatisch de annuleringsbevestiging. Zeg: "geen probleem, ik annuleer hem nu voor je — je krijgt zo de bevestiging". Beloof verder niets.' });
     } catch (e) {
       return JSON.stringify({ status: 'FOUT', opmerking: 'Annuleren in de wachtrij zetten lukte niet (' + String(e.message).slice(0, 80) + '). Zeg dat een collega het direct oppakt en roep escaleren_naar_mens aan.' });
@@ -534,7 +534,7 @@ function raaktAnderPrijsboek(ctx, input) {
       const rB = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
         method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': process.env.MEETBON_CODE || '2288' },
         body: JSON.stringify({
-          type: 'boek', rpItemId: input.itemId, naam: input.klantNaam, bron: 'sunny',
+          type: 'boek', rpItemId: input.itemId, naam: input.klantNaam, bron: 'sunny', telefoon: input.telefoon || ctx.telefoon || null, ticketId: ctx.ticketId || null,
           slot: { aankomst: input.aankomst, inmeter: input.inmeter },
         }),
       });

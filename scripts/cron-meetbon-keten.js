@@ -1,8 +1,8 @@
-// Meetbon-keten: elke 5 min kijken of een klant de (via de meetbon-app bijgewerkte)
+// Meetbon-keten: elke minuut kijken of een klant de (via de meetbon-app bijgewerkte)
 // Gripp-offerte heeft getekend. Zo ja, dan maakt de website direct de aanbetalingsfactuur
 // van 40% (definitief in Gripp) en mailt die. Dit script roept alleen het endpoint aan en
 // meldt de uitkomst op Telegram; de logica zit in sonty-website/lib/meetbon/keten.ts.
-// launchd: nl.sonty.meetbon-keten (StartInterval 300). Kill: data/kill/nl.sonty.meetbon-keten
+// launchd: nl.sonty.meetbon-keten (StartInterval 60). Kill: data/kill/nl.sonty.meetbon-keten
 const fs = require('fs');
 const path = require('path');
 const SECRETS = require('/Users/clawdboot/sonty/scripts/secrets.js');

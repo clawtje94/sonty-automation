@@ -451,6 +451,28 @@ ${adres ? rij('Adres', adres) : ''}
 <p>Groetjes,<br>${afzender} van Sonty</p>`;
 }
 
+/** VRIJ BERICHT NAAR DE KLANT, ALTIJD ERGENS BEZORGD (review 28-08): WhatsApp als er een gesprek
+ *  is, anders mail (nieuw ticket op aanvragen@). Voor annuleringsbevestigingen e.d. */
+async function stuurVrijBericht({ telefoon, email, naam, tekst, onderwerp = 'Bericht van Sonty', afzender = 'Nanny' } = {}) {
+  if (telefoon) {
+    const ticket = await zoekWaTicket(telefoon).catch(() => null);
+    if (ticket) {
+      const r = await tFetch(`/tickets/${ticket.id}/messages`, { method: 'POST', body: JSON.stringify({ message: tekst, type: 'OUTBOUND' }) });
+      if (r.ok) return { ok: true, via: 'wa', ticket: ticket.id };
+    }
+  }
+  if (email) {
+    const r1 = await tFetch('/tickets', { method: 'POST', body: JSON.stringify({ channel_id: PLANNING_KANAAL_OVERRIDE || AANVRAGEN_KANAAL, contact_identifier: email, subject: onderwerp }) });
+    const nieuw = r1.ok ? await r1.json().catch(() => null) : null;
+    if (nieuw?.id) {
+      const html = `<p>${tekst.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')}</p>`;
+      const r2 = await tFetch(`/tickets/${nieuw.id}/messages`, { method: 'POST', body: JSON.stringify({ message: html, body_type: 'html' }) });
+      if (r2.ok) { await tFetch(`/tickets/${nieuw.id}/close`, { method: 'POST', body: '{}' }); return { ok: true, via: 'mail', ticket: nieuw.id }; }
+    }
+  }
+  return { ok: false, reden: telefoon || email ? 'geen WhatsApp-gesprek en mail mislukt' : 'geen telefoon en geen e-mail' };
+}
+
 async function verstuurBevestiging(aanbod, slot, opties = {}) {
   // Verzendpoort: bevestiging na boeking is fail-open (mag door bij storing en
   // mens-actief — stilte na een boeking is de enige echt foute uitkomst), maar
@@ -573,7 +595,7 @@ async function verstuurAanbod(aanbod, url) {
   return { wa, mail, ergensGelukt: wa.ok || mail.ok };
 }
 
-module.exports = { verstuurAanbod, verstuurBevestiging, bevestigingMailHtml, herinneringTekst, bevestigingTekst, herhalingTekst, geenAlternatiefTekst, taalVan, GROET, slotTekst, stuurWhatsApp, stuurMail, zoekWaTicket, zoekWaTicketBreed };
+module.exports = { verstuurAanbod, verstuurBevestiging, bevestigingMailHtml, stuurVrijBericht, herinneringTekst, bevestigingTekst, herhalingTekst, geenAlternatiefTekst, taalVan, GROET, slotTekst, stuurWhatsApp, stuurMail, zoekWaTicket, zoekWaTicketBreed };
 
 // CLI: node scripts/lib/aanbod-versturen.js <token> — verstuurt een bestaand aanbod.
 if (require.main === module) {

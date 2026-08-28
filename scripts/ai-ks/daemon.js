@@ -563,7 +563,7 @@ async function verwerkTicket(t, state) {
     const stand = t.updated_at ? `${t.updated_at}|${t.messages_count ?? ''}` : null;
     state.ticketStand = state.ticketStand || {};
     const vorigeStand = stand ? state.ticketStand[t.id] : null;
-    if (vorigeStand && vorigeStand.stand === stand && Date.now() - Date.parse(vorigeStand.op) < 20 * 60000 && !t._msgs) return;
+    if (vorigeStand && vorigeStand.stand === stand && Date.now() - Date.parse(vorigeStand.op) < 8 * 60000 && !t._msgs) return;
     if (stand) state.ticketStand[t.id] = { stand, op: new Date().toISOString() };
     if (Object.keys(state.ticketStand).length > 2000) {
       for (const [id, v] of Object.entries(state.ticketStand)) if (Date.now() - Date.parse(v.op) > 86400000) delete state.ticketStand[id];
@@ -1033,6 +1033,7 @@ async function verwerkTicket(t, state) {
     const sendRes = await sendActiefReply(t, res.antwoord);
     console.log(`  → ACTIEF antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status + ' ' + sendRes.body.substring(0, 200)}`);
     if (!sendRes.ok) await telegram(`⚠️ AI-KS actief-gesprek verzenden MISLUKT op ticket ${t.id}: ${sendRes.status} ${sendRes.body.substring(0, 200)}`);
+    if (sendRes.ok) { try { require('../lib/sunny-start.js').noteerSunnyVerstuurd(t.id); } catch { /* best effort */ } }
   } else if (liveTest && res.antwoord) {
     // Menselijke typ-vertraging (config REPLY_DELAY; uit tijdens test, aan bij livegang)
     if (CFG.REPLY_DELAY?.enabled) {

@@ -159,7 +159,7 @@ async function ronde() {
           try {
             const st = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, '..', 'data', 'inmeten-planner-state.json'), 'utf8'));
             const t9 = String(m.telefoon || '').replace(/\D/g, '').slice(-9);
-            const ent = Object.values(st.aanbodTickets || {}).filter((a) => a.waTicket && ((m.rpItemId && a.rpItemId === m.rpItemId) || (t9.length === 9 && String(a.telefoon || '').replace(/\D/g, '').slice(-9) === t9)))
+            const ent = m.ticketId ? { waTicket: m.ticketId } : Object.values(st.aanbodTickets || {}).filter((a) => a.waTicket && ((m.rpItemId && String(a.rpItemId) === String(m.rpItemId)) || (t9.length === 9 && String(a.telefoon || '').replace(/\D/g, '').slice(-9) === t9)))
               .sort((x, y) => String(y.verstuurdOp).localeCompare(String(x.verstuurdOp)))[0];
             if (ent?.waTicket) {
               const TT = require('fs').readFileSync(require('path').join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();

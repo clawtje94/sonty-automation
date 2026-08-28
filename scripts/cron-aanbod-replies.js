@@ -391,17 +391,21 @@ async function main() {
         // op Sunny's tijden) werd hier als keuze op het oude aanbod gelezen en hij
         // werd op de verkeerde donderdag geboekt. Niet markeren: claim verlopen
         // zonder resultaat = volgende run pakt het gewoon op.
-        if (require('./lib/gesprek-claims.js').geclaimd(ticketId, 30)) continue;
+        // een 'sunny-voorstel'-claim (planner stuurde Sunny's voorstel) blokkeert de keuze-verwerking NIET:
+        // een kale "ja" moet direct geboekt worden (review 28-08)
+        if (require('./lib/gesprek-claims.js').geclaimd(ticketId, 30, 'sunny-voorstel')) continue;
         // Sunny noemde zelf tijden (28-08): een kale keuze hoort bij Sunny's tijden, nooit bij
         // het oude planner-aanbod — deze route blijft er dan 24 uur helemaal vanaf.
-        if (require('./lib/gesprek-claims.js').sunnyNoemdeTijden(ticketId)) { console.log(`  ${info.naam}: Sunny noemde zelf tijden — reply-route blijft eraf`); continue; }
+        // Sunny noemde zelf tijden: dan nooit een keuze op het OUDE aanbod registreren; de rest van
+        // deze route (na-boeking, stilte) loopt gewoon door (review 28-08)
+        const sunnyTijden = require('./lib/gesprek-claims.js').sunnyNoemdeTijden(ticketId);
         // WhatsApp-keuze automatisch doorvoeren (alleen op een nog OPEN aanbod)
         if (statusPer[token] === 'open') {
           try {
             const rA = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': MEET_CODE } });
             const aanbod = rA.ok ? await rA.json() : null;
             const keuze = aanbod ? leesKeuze(tekst, aanbod.slots || []) : null;
-            if (keuze !== null && aanbod.slots?.[keuze]) {
+            if (keuze !== null && aanbod.slots?.[keuze] && !sunnyTijden) {
               const rK = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, {
                 method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
                 body: JSON.stringify({ status: 'gekozen', gekozenIndex: keuze }),
@@ -432,6 +436,7 @@ async function main() {
         const afgehandeldSleutel = 'afgehandeld:' + sleutel;
         if (statusPer[token] === 'open' && !gemeld[afgehandeldSleutel] && tekst) {
           gemeld[afgehandeldSleutel] = new Date().toISOString();
+          if (sunnyTijden && require('./lib/sunny-start.js').sunnyLeeft()) { delete gemeld[afgehandeldSleutel]; console.log(`  ${info.naam}: Sunny noemde zelf tijden en draait — Sunny handelt het af`); continue; }
           try {
             const { leesReactie } = require('./lib/planning-antwoord.js');
             const rA = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': MEET_CODE } });
@@ -609,13 +614,13 @@ async function main() {
               // annuleringsbevestiging (planner, na muteerBoeking) en meldt het in de groep.
               // Hier dus GEEN eigen klantbericht — anders krijgt de klant er twee.
               try {
+                // claim VÓÓR de POST (review 28-08): anders kan de Sunny-daemon in het venster hetzelfde bericht ook oppakken
+                try { require('./lib/gesprek-claims.js').claim(ticketId, 'annulering-loopt'); } catch { /* vangnet */ }
                 const rAn = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
                   method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
                   body: JSON.stringify({ type: 'annuleer', naam: info.naam, telefoon: info.telefoon || undefined, email: info.email || undefined, bron: 'klant-reply', reden: 'klant annuleerde via WhatsApp/mail: ' + String(duidingB.samenvatting || tekst.slice(0, 120)) }),
                 });
                 if (!rAn.ok) throw new Error('wachtrij HTTP ' + rAn.status);
-                // Sunny blijft er 2 uur vanaf (anders stelt hij de waarom-vraag bovenop de bevestiging)
-                try { require('./lib/gesprek-claims.js').claim(ticketId, 'annulering-loopt'); } catch { /* vangnet */ }
                 try {
                   const AOPEN = '/Users/clawdboot/sonty/data/annuleringen-open.json';
                   const ao = (() => { try { return JSON.parse(fs.readFileSync(AOPEN, 'utf8')); } catch { return {}; } })();
@@ -633,7 +638,7 @@ async function main() {
                 { const taalAn = taalVoor(info);
                 if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, T(taalAn,
                   'Dank je voor je bericht, wat jammer om te lezen! Ik geef je annulering direct door aan onze planning. Zodra de afspraak is verwijderd krijg je daar nog een bevestiging van.',
-                  "Thank you for your message, sorry to read that! I'm passing your cancellation straight on to our planning team. As soon as the appointment has been removed you'll receive a confirmation.")); }
+                  "Thank you for your message, sorry to read that! I'm passing your cancellation straight on to our planning team. As soon as the appointment has been removed you'll receive a confirmation."), taalAn); }
                 await telegram(`🚨 ANNULERING van ${info.naam}: ${duidingB.samenvatting} — automatisch annuleren LUKTE NIET (${String(e.message).slice(0, 80)}). De afspraak staat NOG in Planado/Outlook — handmatig annuleren.`);
               }
               meldingen++;
@@ -644,7 +649,7 @@ async function main() {
               { const taalAn = taalVoor(info);
               if (magBevestigen(gemeld, ticketId)) await bevestigOntvangst(ticketId, info.naam, T(taalAn,
                 'Dank je voor je bericht, wat jammer om te lezen! Ik geef het direct door aan mijn collega\'s; zij nemen het verder met je op.',
-                "Thank you for your message, sorry to read that! I'm passing it straight on to my colleagues; they will follow up with you.")); }
+                "Thank you for your message, sorry to read that! I'm passing it straight on to my colleagues; they will follow up with you."), taalAn); }
               try {
                 const { notitie } = require('./lib/trengo-notitie.js');
                 await notitie(ticketId, `Klant ziet af van de inmeetafspraak/opdracht (geen geboekte afspraak): ${duidingB.samenvatting}. Kantoor beslist over vervolg.`, { tag: true });

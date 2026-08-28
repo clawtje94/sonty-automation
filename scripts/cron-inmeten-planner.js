@@ -1267,6 +1267,9 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, 
   });
   if (!res.ok) throw new Error(`aanbod aanmaken: HTTP ${res.status}`);
   const { url, token } = await res.json();
+  // write-ahead (review 28-08): stijl/bron/ver van dit voorstel vastleggen vóór het versturen, zodat een
+  // herbezorging na een crash dezelfde stem en tekst gebruikt
+  try { const stW = laadState(); stW.voorstelIntent = { ...(stW.voorstelIntent || {}), [token]: { stijl: opties.stijl || null, bron: opties.bron || 'planner', ver, op: new Date().toISOString() } }; bewaarState(stW); } catch { /* best effort */ }
   const { verstuurAanbod } = require('./lib/aanbod-versturen');
   const verzonden = await verstuurAanbod({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email, rpItemId: item.id }, duurMin, ver, slots: aanbod, geldigUren: (await require('./lib/instellingen.js').haalInstellingen()).aanbodGeldigUren, stijl: opties.stijl || null, bron: opties.bron || null, herhaling: !!opties.herhaling, klantReply: opties.klantReply || null, wens: beperking || null }, url);
   if (!verzonden.wa.ok && !verzonden.mail.ok) {
@@ -1313,14 +1316,15 @@ async function maakEnVerstuurAanbod(lead, item, aanbod, duurMin, agenda = null, 
       verstuurdOp: new Date().toISOString(),
       // 28-08: rpItemId + bron erbij (24u-regel per klant, Sunny als eigenaar van zijn eigen voorstel)
       rpItemId: item.id, bron: opties.bron || 'planner', stijl: opties.stijl || null,
+      herhaling: !!opties.herhaling, opVerzoek: !!(opties.klantReply || beperking),
     } };
     bewaarState(st2);
-  } catch { /* monitor valt dan terug op telefoon-zoeken */ }
+  } catch (eReg) { await telegram(`⚠️ Verzendadministratie niet bijgewerkt voor ${lead.naam} (${String(eReg.message).slice(0, 60)}) — aanbod is WEL verstuurd; let op dubbel bij de volgende ronde.`); }
   if (opties.bron === 'sunny' && verzonden.wa.ok && verzonden.wa.ticket) {
     // Sunny is eigenaar van zijn eigen voorstel: gesprek claimen (reply-route blijft van
     // vragen/ander-moment af) en als actief gesprek registreren zodat de actief-sweep het
     // antwoord van de klant ziet, ook buiten de kandidaat-lijst.
-    try { require('./lib/gesprek-claims.js').claim(verzonden.wa.ticket, 'sunny'); } catch { /* vangnet */ }
+    try { require('./lib/gesprek-claims.js').claim(verzonden.wa.ticket, 'sunny-voorstel'); } catch { /* vangnet */ }
     try { sunnyStart.registreerActiefTicket(verzonden.wa.ticket, lead.naam); } catch { /* vangnet */ }
   }
   // opties zichtbaar maken voor het kantoor (Outlook), zodat niemand erdoorheen plant
@@ -1756,19 +1760,21 @@ async function herbezorgSpookAanbiedingen(state) {
     const { aanbiedingen } = await r.json();
     for (const a of aanbiedingen || []) {
       const leeftijd = Date.now() - Date.parse(a.aangemaakt || 0);
-      if (state.aanbodTickets?.[a.token] || !(leeftijd > 3 * 60000) || leeftijd > 24 * 3600000) continue;
+      const vers = laadState(); // verse stand: een parallel proces kan net geregistreerd hebben
+      if (vers.aanbodTickets?.[a.token] || !(leeftijd > 3 * 60000) || leeftijd > 24 * 3600000) continue;
+      const intent = vers.voorstelIntent?.[a.token] || {};
       if (state.spookGeprobeerd?.[a.token]) continue;
       state.spookGeprobeerd = { ...(state.spookGeprobeerd || {}), [a.token]: new Date().toISOString() };
       bewaarState(state);
       const { verstuurAanbod } = require('./lib/aanbod-versturen');
-      const uit = await verstuurAanbod({ ...a, stijl: a.stijl || null, bron: a.bron || null }, `https://sonty-website.vercel.app/inmeten/${a.token}`);
+      const uit = await verstuurAanbod({ ...a, stijl: intent.stijl || null, bron: intent.bron || null, ver: intent.ver === true }, `https://sonty-website.vercel.app/inmeten/${a.token}`);
       console.log(`  spook-aanbod ${String(a.token).slice(0, 8)} (${a.lead?.naam}) alsnog bezorgd: wa ${uit.wa.ok ? 'ok' : uit.wa.reden}, mail ${uit.mail.ok ? 'ok' : uit.mail.reden}`);
       if (uit.ergensGelukt) {
         const st2 = laadState();
         st2.aanbodTickets = { ...(st2.aanbodTickets || {}), [a.token]: {
           rpItemId: a.lead?.rpItemId, naam: a.lead?.naam, telefoon: a.lead?.telefoon || null, email: a.lead?.email || null,
           waTicket: uit.wa.ticket || null, mailTicket: uit.mail.ticket || null, verstuurdOp: new Date().toISOString(),
-          bron: a.bron || 'planner', herbezorgd: true,
+          bron: intent.bron || 'planner', stijl: intent.stijl || null, herbezorgd: true,
         } };
         bewaarState(st2);
       } else {
@@ -1846,7 +1852,9 @@ async function verwerkDashboardVerzoek(m) {
   // "heeft al een afspraak" is een definitieve uitkomst voor de wachtrij.
   if (m.type === 'boek') {
     const al = require('./lib/inmeet-mutatie.js').heeftGeboekteAfspraak(m.rpItemId);
-    if (al) {
+    // een HALVE boeking op precies dit slot mag door: verwerkLead hergebruikt dan de bestaande Planado-opdracht
+    const zelfdeHalve = al?.halveBoeking && al.inmeter === m.slot?.inmeter && Math.abs(Date.parse(al.aankomst) - Date.parse(m.slot?.aankomst)) < 60000;
+    if (al && !zelfdeHalve) {
       const wanneer = new Date(al.aankomst).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
       throw new Error(`deze klant heeft al een afspraak (${wanneer} bij ${al.inmeter}) — niets dubbel geboekt`);
     }
@@ -2005,9 +2013,14 @@ async function verwerkDashboardVerzoek(m) {
       // ÉÉN WHATSAPP-BEVESTIGING (Daimy 28-08: "ik krijg 2 bevestigingsberichten, 1 is genoeg"):
       // bij een Sunny-boeking is Sunny's eigen antwoord in het gesprek ("dan zet ik ... vast")
       // de WhatsApp-bevestiging; de keten stuurt dan alleen nog de mail met alle details.
-      const sunnyBoekt = m.bron === 'sunny';
+      // Sunny's eigen antwoord telt alleen als WA-bevestiging als hij AANTOONBAAR net iets verstuurde
+      // in dit gesprek (review 28-08); anders gaat de formele WA-bevestiging gewoon mee.
+      const stB = laadState();
+      const waTicketB = Object.values(stB.aanbodTickets || {}).filter((a) => String(a.rpItemId) === String(item.id) && a.waTicket).sort((x, y) => String(y.verstuurdOp).localeCompare(String(x.verstuurdOp)))[0]?.waTicket || null;
+      const sunnyBoekt = m.bron === 'sunny' && !!(m.ticketId || waTicketB) && sunnyStart.sunnyStuurdeNet(m.ticketId || waTicketB, 30);
       const bevRes = await verstuurBevestiging({ lead: { naam: lead.naam, telefoon: lead.telefoon, email: lead.email, adres: lead.volledigAdres || null }, duurMin: duur, bron: m.bron }, { aankomst: m.slot.aankomst, inmeter: m.slot.inmeter }, { alleenMail: sunnyBoekt });
       try { require('./lib/inmeet-mutatie.js').noteerBevestiging(item.id, sunnyBoekt ? { wa: { ok: true, via: 'sunny-gesprek' }, mail: bevRes.mail } : bevRes); } catch { /* register is extra */ }
+      if (!sunnyBoekt && !bevRes.wa?.ok && !bevRes.mail?.ok) await telegram(`🚨 ${lead.naam} is geboekt maar kreeg GEEN bevestiging (wa: ${bevRes.wa?.reden}; mail: ${bevRes.mail?.reden}) — even zelf sturen.`);
     }
   } catch { /* bevestiging is nice-to-have; kantoor boekt met klant aan de lijn */ }
   if (magBoekingMelden(`${lead.naam}|${new Date(m.slot.aankomst).toISOString()}`)) {
@@ -2034,18 +2047,16 @@ async function verwerkVerzoek(m) {
     return { afgewezen: true, uitkomst: 'geen actieve boeking gevonden' };
   }
   const res = await muteerBoeking(boeking.rpItemId, m.type, { reden: m.reden || '', bron: m.bron });
-  if (m.type === 'annuleer' && boeking.telefoon) {
-    try {
-      const { zoekWaTicket } = require('./lib/aanbod-versturen');
-      const ticket = await zoekWaTicket(boeking.telefoon).catch(() => null);
-      if (ticket) {
-        const TT = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
-        await fetch('https://app.trengo.com/api/v2/tickets/' + ticket.id + '/messages', {
-          method: 'POST', headers: { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: `Hoi ${(boeking.naam || 'daar').split(' ')[0]}, we hebben de inmeetafspraak geannuleerd. Mocht het later toch weer spelen, dan ben je altijd welkom. Groetjes, ${boeking.bron === 'sunny' ? 'Sunny' : 'Nanny'} van Sonty`, type: 'OUTBOUND' }),
-        });
-      }
-    } catch { /* melding naar kantoor is al gedaan */ }
+  if (m.type === 'annuleer') {
+    // KLANT HOORT ALTIJD IETS (review 28-08): WhatsApp als er een gesprek is, anders mail; lukt
+    // geen van beide, dan alarm. En alleen "geannuleerd" zeggen als het écht overal is gelukt.
+    const afz = boeking.bron === 'sunny' ? 'Sunny' : 'Nanny';
+    const vn = (boeking.naam || 'daar').split(' ')[0];
+    const tekst = res.gelukt
+      ? `Hoi ${vn}, we hebben de inmeetafspraak geannuleerd. Mocht het later toch weer spelen, dan ben je altijd welkom.\n\nGroetjes, ${afz} van Sonty`
+      : `Hoi ${vn}, we zijn je inmeetafspraak aan het annuleren; een collega rondt het vandaag af en je hoort het zodra het rond is.\n\nGroetjes, ${afz} van Sonty`;
+    const uit = await require('./lib/aanbod-versturen').stuurVrijBericht({ telefoon: boeking.telefoon, email: boeking.email, naam: boeking.naam, tekst, onderwerp: 'Je inmeetafspraak is geannuleerd', afzender: afz }).catch((e) => ({ ok: false, reden: e.message }));
+    if (!uit.ok) await telegram(`🚨 ${boeking.naam}: afspraak geannuleerd maar de klant kon NIET bereikt worden (${uit.reden}) — even zelf laten weten.`);
   }
   return { afgewezen: false, uitkomst: res.gelukt ? 'alle systemen bijgewerkt' : 'deels: ' + res.stappen.filter((x) => !x.ok).map((x) => x.stap).join(',') };
 }

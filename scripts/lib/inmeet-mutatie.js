@@ -54,7 +54,7 @@ function registreerBoeking({ rpItemId, naam, telefoon, email, planadoJobUuid, ou
 function noteerHalveBoeking(rpItemId, { naam, telefoon, planadoJobUuid, aankomst, inmeter }) {
   const boekingen = laadBoekingen();
   if (boekingen[rpItemId]?.status === 'geboekt') return; // echte boeking wint altijd
-  boekingen[rpItemId] = { naam, telefoon, planadoJobUuid, aankomst, inmeter, status: 'bezig', sinds: new Date().toISOString() };
+  boekingen[rpItemId] = { ...(boekingen[rpItemId] || {}), naam, telefoon, planadoJobUuid, aankomst, inmeter, status: 'bezig', sinds: new Date().toISOString() };
   bewaarBoekingen(boekingen);
 }
 function halveBoeking(rpItemId) {
@@ -169,12 +169,8 @@ async function muteerBoeking(rpItemId, soort, { reden = '', bron = 'onbekend' } 
   // 6. klantbericht + kantoor-melding
   const alles = stappen.every((s) => s.ok);
   const datum = new Date(b.aankomst).toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
-  await telegram(
-    (soort === 'verzet'
-      ? `🔄 Inmeetafspraak VERZET (${bron}): ${b.naam}, was ${datum} bij ${b.inmeter}. Lead staat terug in de wachtrij, nieuw aanbod volgt automatisch.`
-      : `🛑 Inmeetafspraak GEANNULEERD (${bron}): ${b.naam}, was ${datum} bij ${b.inmeter}.${reden ? ` Reden: ${reden}.` : ''} RP staat nog op "Gripp invullen" — kantoor beslist over nabellen.`)
-    + (alles ? '' : `\n⚠️ Niet alles lukte: ${stappen.filter((s) => !s.ok).map((s) => s.stap + ' (' + s.detail + ')').join(', ')} — even nakijken.`),
-  );
+  // Data-bot alleen bij een storing (Daimy 28-08: de inhoudelijke melding hoort in de planning-groep, niet de data-bot)
+  if (!alles) await telegram(`⚠️ ${soort === 'verzet' ? 'Verzetten' : 'Annuleren'} van ${b.naam} (${bron}) niet volledig gelukt: ${stappen.filter((s) => !s.ok).map((s) => s.stap + ' (' + s.detail + ')').join(', ')} — even nakijken.`);
   // Ook in de planning-bot-groep (Daimy 22-08: "als een inmeet afspraak word
   // geanuleerd moet dit ook verteld worden in de planning bot groep").
   try {
@@ -182,7 +178,7 @@ async function muteerBoeking(rpItemId, soort, { reden = '', bron = 'onbekend' } 
     // { boeking: true } = de groep; zonder die vlag landt het in de data-bot (Daimy 28-08: "niet in de sonty data bot")
     await planningTelegram(soort === 'verzet'
       ? `🔄 Inmeetafspraak verzet: ${b.naam}, was ${datum} bij ${b.inmeter}. Nieuw aanbod volgt automatisch.`
-      : `🛑 Inmeetafspraak geannuleerd: ${b.naam}, was ${datum} bij ${b.inmeter}.${reden ? ` Reden: ${reden}.` : ''}`, { boeking: true });
+      : `🛑 Inmeetafspraak geannuleerd: ${b.naam}, was ${datum} bij ${b.inmeter}.${reden ? ` Reden: ${reden}.` : ''}${alles ? '' : ' ⚠️ niet alles lukte, kantoor kijkt na.'}`, { boeking: true });
   } catch { /* planning-melding mag de mutatie nooit blokkeren */ }
   return { gelukt: alles, stappen, boeking: b };
 }
@@ -195,7 +191,10 @@ function heeftGeboekteAfspraak(rpItemId) {
     const path2 = require('path');
     const bo = JSON.parse(fs2.readFileSync(path2.join(__dirname, '..', '..', 'data', 'inmeet-boekingen.json'), 'utf8'));
     const al = bo[rpItemId];
-    return al?.status === 'geboekt' ? al : null;
+    if (al?.status === 'geboekt') return al;
+    // halve boeking (<2u) telt ook als bezet: een tweede poging mag niet naast de eerste lopen
+    if (al?.status === 'bezig' && al.sinds && Date.now() - Date.parse(al.sinds) < 2 * 3600000) return { ...al, halveBoeking: true };
+    return null;
   } catch { return null; }
 }
 

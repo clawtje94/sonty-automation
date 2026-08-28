@@ -70,7 +70,8 @@ function aantalEerdereVoorstellen(state, lead) {
     const zelfde = (lead?.rpItemId && a.rpItemId && String(a.rpItemId) === String(lead.rpItemId))
       || (tel9(lead?.telefoon).length === 9 && tel9(a.telefoon) === tel9(lead?.telefoon))
       || (!!mailNorm(lead?.email) && mailNorm(a.email) === mailNorm(lead?.email));
-    if (zelfde && a.verstuurdOp && !a.herhaling) n++;
+    // herinneringen en door de klant gevraagde her-voorstellen tellen niet; ouder dan 14 dagen ook niet
+    if (zelfde && a.verstuurdOp && !a.herhaling && !a.opVerzoek && Date.now() - Date.parse(a.verstuurdOp) < 14 * DAG_MS) n++;
   }
   return n;
 }
@@ -186,6 +187,22 @@ function voorstelMailHtml({ voornaam = 'daar', slots = [], duurMin = 30, ver = f
   return `${alinea}\n${knop}\n${vast}\n${groet}`;
 }
 
+/** Heeft Sunny in dit WhatsApp-gesprek de afgelopen maxMin minuten aantoonbaar een bericht
+ *  verstuurd? (daemon schrijft data/ai-ks/sunny-verstuurd.json bij een geslaagde verzending) */
+const VERSTUURD_PAD = path.join(__dirname, '..', '..', 'data', 'ai-ks', 'sunny-verstuurd.json');
+function noteerSunnyVerstuurd(ticketId) {
+  try {
+    let v = {}; try { v = JSON.parse(fs.readFileSync(VERSTUURD_PAD, 'utf8')); } catch { v = {}; }
+    v[String(ticketId)] = new Date().toISOString();
+    for (const [k, op] of Object.entries(v)) if (Date.now() - Date.parse(op) > DAG_MS) delete v[k];
+    fs.mkdirSync(path.dirname(VERSTUURD_PAD), { recursive: true });
+    fs.writeFileSync(VERSTUURD_PAD, JSON.stringify(v, null, 1));
+  } catch { /* best effort */ }
+}
+function sunnyStuurdeNet(ticketId, maxMin = 30) {
+  try { const v = JSON.parse(fs.readFileSync(VERSTUURD_PAD, 'utf8')); const op = v[String(ticketId)]; return !!op && Date.now() - Date.parse(op) < maxMin * 60000; } catch { return false; }
+}
+
 // ── Sunny leeft? (aanbod-replies laat Sunny's eigen voorstellen aan Sunny zolang hij draait)
 function schrijfHeartbeat() {
   try { fs.mkdirSync(path.dirname(HEARTBEAT), { recursive: true }); fs.writeFileSync(HEARTBEAT, new Date().toISOString()); } catch { /* best effort */ }
@@ -234,4 +251,4 @@ function registreerActiefTicket(ticketId, klant) {
   }
 }
 
-module.exports = { aan, alleenNaam, registreerActiefTicket, binnenVenster, volgendeVensterTekst, magStarten, laatsteVoorstelOp, aantalEerdereVoorstellen, voorstelTekst, voorstelMailHtml, slotZin, schrijfHeartbeat, sunnyLeeft, eigenaarVanReactie, VLAG, HEARTBEAT, VENSTER };
+module.exports = { aan, alleenNaam, registreerActiefTicket, noteerSunnyVerstuurd, sunnyStuurdeNet, binnenVenster, volgendeVensterTekst, magStarten, laatsteVoorstelOp, aantalEerdereVoorstellen, voorstelTekst, voorstelMailHtml, slotZin, schrijfHeartbeat, sunnyLeeft, eigenaarVanReactie, VLAG, HEARTBEAT, VENSTER };

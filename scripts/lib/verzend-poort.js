@@ -174,7 +174,7 @@ async function magSturen({ telefoon, email, ticketId, soort, opVerzoek = false, 
   // SUNNY IS AL IN GESPREK (28-08): heeft Sunny dit ticket geclaimd (hij noemde zelf net
   // tijden of handelt een ander-moment af), dan stuurt de planningsketen géén voorstel
   // overheen — twee stemmen in één gesprek is precies wat Daimy niet wil.
-  if (soort === 'voorstel' && ticketId) {
+  if (soort === 'voorstel' && ticketId && !opVerzoek && !luistert) {
     try {
       if (require('./gesprek-claims.js').geclaimd(ticketId, 120)) return { ok: false, reden: 'sunny-in-gesprek (ticket geclaimd door Sunny)', mensNodig: false };
     } catch { /* geen claims-administratie: gewoon door */ }

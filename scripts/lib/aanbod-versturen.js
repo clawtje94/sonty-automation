@@ -413,6 +413,44 @@ function bevestigingTekst(voornaam, slot, duurMin, taal = 'nl') {
     `Komt er iets tussen? Stuur gerust een berichtje.`;
 }
 
+/** BEVESTIGINGSMAIL ALS ECHTE MAIL (Daimy 28-08: "niet als mail opgesteld, één lange eerste zin").
+ *  Korte opening, dan de feiten in losse regels, het thuisblijfvenster, en wat te doen bij
+ *  wijziging. Ondertekening volgt de afzender (Sunny bij een Sunny-boeking, anders Nanny). */
+function bevestigingMailHtml({ voornaam = 'daar', slot, duurMin = 30, taal = 'nl', afzender = 'Nanny', adres = null } = {}) {
+  const d = new Date(slot.aankomst);
+  const tz = { timeZone: 'Europe/Amsterdam' };
+  const loc = taal === 'en' ? 'en-GB' : 'nl-NL';
+  const dag = d.toLocaleString(loc, { weekday: 'long', day: 'numeric', month: 'long', ...tz });
+  const tijd = d.toLocaleString(loc, { hour: '2-digit', minute: '2-digit', ...tz });
+  const vVan = new Date(+d - 60 * 60000).toLocaleString(loc, { hour: '2-digit', minute: '2-digit', ...tz });
+  const vTot = new Date(+d + 90 * 60000).toLocaleString(loc, { hour: '2-digit', minute: '2-digit', ...tz });
+  const rij = (k, v) => `<tr><td style="padding:2px 14px 2px 0;color:#666">${k}</td><td style="padding:2px 0"><b>${v}</b></td></tr>`;
+  if (taal === 'en') {
+    return `<p>Hi ${voornaam},</p>
+<p>Good news: your measuring appointment is booked.</p>
+<table style="border-collapse:collapse;margin:6px 0 10px 0">
+${rij('When', `${dag}, around ${tijd}`)}
+${rij('Who', `${slot.inmeter} (Sonty surveyor)`)}
+${rij('Duration', `about ${duurMin} minutes`)}
+${adres ? rij('Address', adres) : ''}
+</table>
+<p>As we drive a route that day the arrival can shift a little, so please be home between ${vVan} and ${vTot}. If we're running late we'll let you know in time.</p>
+<p>Something come up? Just reply to this e-mail or send us a WhatsApp message and we'll find another moment.</p>
+<p>Kind regards,<br>${afzender} from Sonty</p>`;
+  }
+  return `<p>Hoi ${voornaam},</p>
+<p>Goed nieuws: je inmeetafspraak staat.</p>
+<table style="border-collapse:collapse;margin:6px 0 10px 0">
+${rij('Wanneer', `${dag}, rond ${tijd}`)}
+${rij('Wie', `${slot.inmeter} (inmeter van Sonty)`)}
+${rij('Duur', `ongeveer ${duurMin} minuten`)}
+${adres ? rij('Adres', adres) : ''}
+</table>
+<p>Omdat we die dag een route rijden kan de aankomst iets schuiven; fijn als je tussen ${vVan} en ${vTot} thuis bent. Wordt het later, dan laten we het je op tijd weten.</p>
+<p>Komt er iets tussen? Antwoord op deze mail of stuur een berichtje via WhatsApp, dan plannen we een ander moment.</p>
+<p>Groetjes,<br>${afzender} van Sonty</p>`;
+}
+
 async function verstuurBevestiging(aanbod, slot, opties = {}) {
   // Verzendpoort: bevestiging na boeking is fail-open (mag door bij storing en
   // mens-actief — stilte na een boeking is de enige echt foute uitkomst), maar
@@ -456,11 +494,11 @@ async function verstuurBevestiging(aanbod, slot, opties = {}) {
   else if (aanbod.lead.email) {
     const r1 = await tFetch('/tickets', {
       method: 'POST',
-      body: JSON.stringify({ channel_id: PLANNING_KANAAL_OVERRIDE || AANVRAGEN_KANAAL, contact_identifier: aanbod.lead.email, subject: taalB === 'en' ? 'Your measuring appointment at Sonty is confirmed' : 'Je inmeetafspraak bij Sonty staat vast' }),
+      body: JSON.stringify({ channel_id: PLANNING_KANAAL_OVERRIDE || AANVRAGEN_KANAAL, contact_identifier: aanbod.lead.email, subject: taalB === 'en' ? `Your measuring appointment is booked: ${new Date(slot.aankomst).toLocaleString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' })}` : `Je inmeetafspraak staat: ${new Date(slot.aankomst).toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' })}` }),
     });
     const nieuw = r1.ok ? await r1.json().catch(() => null) : null;
     if (nieuw?.id) {
-      const html = `<p>${tekst.replace(/\. /g, '.</p><p>')}</p><p>${taalB === 'en' ? `Kind regards,<br>${afzender} from Sonty` : `Groetjes,<br>${afzender} van Sonty`}</p>`;
+      const html = bevestigingMailHtml({ voornaam, slot, duurMin: aanbod.duurMin, taal: taalB, afzender, adres: aanbod.lead.adres || aanbod.adres || null });
       const r2 = await tFetch(`/tickets/${nieuw.id}/messages`, { method: 'POST', body: JSON.stringify({ message: html, body_type: 'html' }) });
       if (r2.ok) await tFetch(`/tickets/${nieuw.id}/close`, { method: 'POST', body: '{}' });
       mail = { ok: r2.ok, reden: r2.ok ? undefined : `Trengo ${r2.status}` };
@@ -535,7 +573,7 @@ async function verstuurAanbod(aanbod, url) {
   return { wa, mail, ergensGelukt: wa.ok || mail.ok };
 }
 
-module.exports = { verstuurAanbod, verstuurBevestiging, herinneringTekst, bevestigingTekst, herhalingTekst, geenAlternatiefTekst, taalVan, GROET, slotTekst, stuurWhatsApp, stuurMail, zoekWaTicket, zoekWaTicketBreed };
+module.exports = { verstuurAanbod, verstuurBevestiging, bevestigingMailHtml, herinneringTekst, bevestigingTekst, herhalingTekst, geenAlternatiefTekst, taalVan, GROET, slotTekst, stuurWhatsApp, stuurMail, zoekWaTicket, zoekWaTicketBreed };
 
 // CLI: node scripts/lib/aanbod-versturen.js <token> — verstuurt een bestaand aanbod.
 if (require.main === module) {

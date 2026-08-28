@@ -133,6 +133,9 @@
   GEFIXT: bookings-api verwijder() (DELETE, geen Bookings-annuleringsmail), muteerBoeking probeert eerst Bookings,
   registreerBoeking bewaart agendaVia. Daimy's Bookings-afspraak 16:48 verwijderd (204), agenda 29-09 schoon.
   Gripp 6572/meetbon blijven staan (kantoor beslist, RP bewust niet aangeraakt).
+- 16:55 REGEL Daimy: aankomstmarge altijd letterlijk "een uur eerder of later" (niet "iets"/"uurtje") + sms-volglink zodra
+  onderweg; doorgevoerd in WA/mail-bevestiging, herinnering, gekozen-pad-bevestiging, Sunny-voorstel en system-prompt
+  (memory feedback_aankomstmarge_uur_sms). Labs groen.
 - OPEN: WA-template tekent nog Nanny (route-v3 #248773 PENDING bij Meta; Sunny-variant indienen); beleidsvraag WA+mail
   beide (bestaand) of alleen WA bij WA-gesprek; Trengo-429 accountbreed (gedeelde ophaler met cache = aparte klus).
   Daemons sonny/inmeet-verzoeken/aanbod-replies herstart 12:47.

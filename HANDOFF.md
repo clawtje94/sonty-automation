@@ -65,6 +65,12 @@
   per kanaal in register (noteerBevestiging); nacontrole herstelt alleen het ontbrekende kanaal en nooit als het
   register WA al als verstuurd heeft. Lab 6888 groen. Antwoord op Daimy's vraag "meerdere boekingen/bevestigingen?":
   register 84 geboekt, 0 telefoons met >1 boeking; gekozen-pad markeert 'verwerkt', boek-tak heeftGeboekteAfspraak.
+- 14:14 TEST GESLAAGD: Daimy "oke doe dan maar bij sjoerd" → Sunny inmeet_boeken (citaat) → mutatie bron sunny → verzoek-
+  daemon 14:17 geboekt: Sjoerd di 29 sep 10:10, Gripp 6572, meetbon, sheet r357, Outlook + Planado 1f1a2da4…, oud
+  aanbod 7a5f… op verlopen, register {bron:sunny, bevestiging:{wa,mail}}, dashboard "geboekt". Onderweg gedicht
+  (6e3590d): claim 'sunny-tijden' — na Sunny's eigen tijden is een kale keuze van Sunny (planningRolVoor) en blijft de
+  reply-route 24u van het oude aanbod af (Daimy's keuze bleef 12 min liggen; zonder fix zou na 30 min de oude
+  1-okt-tijd zijn geboekt). Vertraging Sunny = Trengo-429 accountbreed (ook losse curl krijgt 429).
 - OPEN: V3 aan Daimy (proefgeval goed → vlag leegmaken = alle klanten); WA-template tekent nog Nanny (Sunny-variant
   bij Meta indienen via template-wachter); beleidsvraag WA+mail beide (bestaand) of alleen WA bij WA-gesprek.
   Daemons sonny/inmeet-verzoeken/aanbod-replies herstart 12:47.

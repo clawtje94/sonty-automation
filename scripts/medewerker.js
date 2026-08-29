@@ -88,7 +88,7 @@ function draai(prof, opdracht, { soort = 'dienst', opdrachtId = null } = {}) {
 }
 
 const [, , cmd, a, b, c] = process.argv;
-(async () => {
+if (require.main === module) (async () => {
   if (cmd === 'lijst') {
     for (const m of team()) console.log(m.fout ? `!! ${m.slug}: ${m.fout}` : `${m.slug.padEnd(18)} ${m.naam.padEnd(10)} ${String(m.functie).padEnd(34)} ${m.afdeling || ''} · model ${m.model} · dienst ${m.dienst || '-'} · jobs ${m.jobs.length}`);
   } else if (cmd === 'dienst' && a) {
@@ -99,7 +99,8 @@ const [, , cmd, a, b, c] = process.argv;
   } else if (cmd === 'diensten') {
     // alleen wie nu aan de beurt is: dienst-tijd (HH:MM) is verstreken en vandaag nog niet gedraaid
     const nu = new Date(); const nuMin = nu.getHours() * 60 + nu.getMinutes(); const s = stand();
-    for (const prof of team().filter((m) => m.dienst && !m.fout)) {
+    // volgorde = diensttijd: medewerkers eerst, dan de hoofden (07:45), dan Bram (08:00)
+    for (const prof of team().filter((m) => m.dienst && !m.fout).sort((x, y) => String(x.dienst).localeCompare(String(y.dienst)))) {
       const [h, mi] = String(prof.dienst).split(':').map(Number);
       const vandaagGedaan = s[prof.slug]?.laatsteDienst && datumNL(new Date(s[prof.slug].laatsteDienst)) === datumNL();
       const weekend = nu.getDay() === 0 || nu.getDay() === 6;

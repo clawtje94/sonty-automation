@@ -1,5 +1,15 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 29-08 (nacht): AUDIT DOOR HET TEAM ZELF (Ori, Mats, Bram) — 21 bevindingen, 17 doorgevoerd
+- Motor: Write/Edit alleen in eigen medewerkersmap (`Write(//…/medewerkers/<slug>/**)`), herkansing-vlag per dag, stand atomisch,
+  mislukte dienst + run >40 min = alarm in het Brein, opdrachten twee-fasen (server 'opgehaald' pas na bevestiging), delegatie
+  max 3/dag per medewerker (BREIN_VAN), Bram: alleen verstuurde V-nummers onder VRAGEN. RAAMWERK.md (generiek, verkoopbaar)
+  los van BEDRIJF.md (Sonty-feiten); runner laadt beide. Jobs één eigenaar (reviews-sync → Bo, seo-agent-week → Jules).
+- Pagina: V-nummer voorgevuld bij "antwoord", beantwoorde V's (opdracht met dat nummer) verdwijnen, cijfers van de dag bovenaan
+  (uit Bram, anders Fenna), kaarten standaard ingeklapt (schakelaar), "bewust uit"-jobs apart en ingeklapt.
+- Medewerker Claude (levende sessie, inbox-claude.txt, rapport in medewerkers/claude/dagrapport) en schaduwstand (.schaduw).
+- Niet gedaan: automatische kill van hangende runs (alleen alarm), label "bouw/systeem" voor Claude/Ori.
+
 ## 29-08 (laat): BREIN v2 afgerond voor vanavond — gezichten, Dagstart, Bo, Ori, blauwdruk
 - Eerste volledige ronde 29-08 20:05–20:31: 15 diensten, alle rapporten volledig, kosten $3,93 (haiku 0,14–0,27; sonnet 0,66).
   Bram stuurde de eerste Telegram-dagstart (V100 Sjoerd weg t/m 11-09, V101 prijs-kruiscontrole ENOENT, V102 reviews-API-key).

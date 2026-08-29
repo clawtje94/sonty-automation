@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+// Enige Telegram-zender voor medewerker-agents (alleen wie het in zijn profiel heeft, nu: Bram).
+// Gebruik: node scripts/brein-telegram.js "<tekst>"  — kort, telefoon-leesbaar, max ~12 regels.
+const fs = require('fs');
+const path = require('path');
+const env = fs.readFileSync(path.join(__dirname, '..', '.env'), 'utf8');
+const tok = (env.match(/^TELEGRAM_BOT_TOKEN=(.+)$/m) || [])[1];
+const chat = (env.match(/^TELEGRAM_CHAT_ID=(.+)$/m) || [])[1] || '1700128390';
+const tekst = process.argv.slice(2).join(' ').trim();
+if (!tok || !tekst) { console.error('token of tekst ontbreekt'); process.exit(1); }
+(async () => {
+  for (let poging = 1; poging <= 3; poging++) {
+    try {
+      const r = await fetch(`https://api.telegram.org/bot${tok}/sendMessage`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: chat, text: tekst.slice(0, 3900) }), signal: AbortSignal.timeout(15000) });
+      const d = await r.json(); if (d.ok) { console.log('verstuurd'); require('./lib/brein.js').gebeurtenis('Bram', 'Telegram-bericht aan Daimy: ' + tekst.slice(0, 80)); return; }
+      throw new Error(JSON.stringify(d).slice(0, 120));
+    } catch (e) { if (poging === 3) { console.error('mislukt: ' + e.message); process.exit(1); } await new Promise((r) => setTimeout(r, 3000 * poging)); }
+  }
+})();

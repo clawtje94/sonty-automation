@@ -1,5 +1,17 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 29-08 (middag): MICKEY KALRA — akkoord bleef 2 uur liggen (split-brain Sunny ↔ reply-route), gefixt
+- Daimy: "check dit gesprek +31618600992". Feiten: Engelstalige klant, Sunny-voorstel 09:00 (EN, do 1 okt 12:50 Sjoerd);
+  10:10 "1 October is ok no problem / bit earlier would be great"; Sunny: blijfWeg 'keuze' (planner-route doet het);
+  reply-route: "akkoord — Sunny doet de planning"; 12:16 stilte-vangnet stuurde "a colleague is picking it up".
+  NIEMAND boekte. Oorzaak: twee routes met eigen parsers die elkaar de eigenaar noemden.
+- FIX (01d9d9d): bron 'sunny' → keuze/akkoord is van Sunny (planningRolVoor: geen blijfWeg, sunny-plant met eigen-
+  voorstel-instructie); reply-route wacht max 20 min en alleen als Sunny leeft, daarna handelt hij zelf af (keuze én
+  akkoord/ander-moment). Lab 10.544+ groen.
+- Mickey alsnog geboekt 12:34 (mutatie bron sunny): Sjoerd do 1 okt 12:50, Gripp 6578, meetbon, sheet r1397, WA+mail-
+  bevestiging (EN). Op de eerder-willen-lijst gezet (wil eerder dan 1 okt) → krijgt bericht als er een plek vrijkomt.
+  Sheet T (akkoord 28-08) handmatig gevuld.
+
 ## 29-08 (middag): ADMIN LICHT/DONKER-KEUZE + /admin/pipeline LICHT (website)
 - Daimy: "je zou dit in een lichte kleur maken toch, of een keuzeknop dat mensen zelf kunnen kiezen?" (/admin/pipeline).
   Gebouwd: thema-variabelen in app/admin/admin.css (--adm-page-bg/panel/card/border/text/muted…, licht standaard, donker

@@ -704,6 +704,23 @@ async function verwerkTicket(t, state) {
         console.log(`  [${t.id}] was gesloten en heropend → bot pakt het op i.p.v. terug naar Mens nodig`);
         // NIET returnen: de normale flow hieronder beantwoordt de klant.
       } else {
+        // OVERDRACHT VERJAART (Daimy 29-08, zijn eigen test "ik zit toch te twijfelen" na een annulering): een
+        // overdracht is geen eeuwige blokkade. Heeft GEEN mens (ander user-id dan de bot) sinds de overdracht in
+        // het gesprek geschreven en schrijft de klant ≥90 min na de overdracht opnieuw, dan pakt de bot het gewoon
+        // weer op (met de volledige context) in plaats van "terug naar Mens nodig" + stilte. Wil een collega het
+        // zelf doen, dan wijst die zichzelf toe (dan blijft de bot eraf, zie aanMensToegewezen).
+        const mensSindsOverdracht = ruweBerichten.some((m) => String(m.type || '').toUpperCase() === 'OUTBOUND' && Number(m.user_id) && Number(m.user_id) !== 747786 && String(m.created_at) > laatsteOverdracht);
+        const overdrachtOud = laatsteOverdracht && (Date.now() - Date.parse(String(laatsteOverdracht).replace(' ', 'T')) > 90 * 60000);
+        if (laatsteKlant > laatsteOverdracht && !mensSindsOverdracht && overdrachtOud && !t.user_id) {
+          if (Number(t.team_id) === 431872) {
+            try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 747786 }); await haalLabelWeg(t.id, LABEL.MENS_NODIG); }
+            catch (e) { console.error(`  [${t.id}] overdracht-verjaring oppakken FOUT: ${e.message}`); }
+          }
+          const actief = loadActief();
+          if (!actief[t.id]) { actief[t.id] = { sinds: new Date().toISOString(), bron: 'overdracht verjaard (geen mens reageerde)' }; fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actief, null, 1)); }
+          console.log(`  [${t.id}] overdracht bleef ${Math.round((Date.now() - Date.parse(String(laatsteOverdracht).replace(' ', 'T'))) / 60000)} min onbeantwoord door een mens → bot pakt het weer op`);
+          // NIET returnen: de normale flow hieronder beantwoordt de klant.
+        } else {
         if (Number(t.team_id) === 431872 && !t._verseOpdracht) return; // ligt al in de Mens nodig-map, team ziet het
         // EEN BEDANKJE IS GEEN HEROPENING (Daimy 2026-08-04, Irene +31625002169).
         // Zij bedankte na een keurig afgerond gesprek met "Dank je wel!", en dat zette het ticket
@@ -725,6 +742,7 @@ async function verwerkTicket(t, state) {
           const actief = loadActief();
           if (actief[t.id]) { delete actief[t.id]; fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actief, null, 1)); }
           return;
+        }
         }
       }
     }

@@ -324,6 +324,17 @@ function startLokaleDelegaties() {
   return n;
 }
 
+/** V7 (Daimy: "ja, zoals voorgesteld" = pas aan na een week live): vlag .werknemer-aan-vanaf (datum) → op die dag gaat .werknemer-aan aan. */
+function werknemerKnopPlanning() {
+  const p = path.join(B.DIR, '.werknemer-aan-vanaf');
+  if (!fs.existsSync(p) || fs.existsSync(path.join(B.DIR, '.werknemer-aan'))) return;
+  const vanaf = (fs.readFileSync(p, 'utf8').match(/\d{4}-\d{2}-\d{2}/) || [])[0];
+  if (vanaf && new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Amsterdam' }) >= vanaf) {
+    fs.writeFileSync(path.join(B.DIR, '.werknemer-aan'), 'aan sinds ' + new Date().toISOString());
+    B.gebeurtenis('Brein', `knop "nieuwe werknemer" automatisch aangezet (V7, gepland vanaf ${vanaf})`);
+  }
+}
+
 // ── main ──
 (async () => {
   const t0 = Date.now();
@@ -351,6 +362,7 @@ function startLokaleDelegaties() {
   fs.writeFileSync(path.join(B.DIR, 'snapshot.json'), JSON.stringify(snapshot));
   let nieuw = 0, fout = null;
   try { nieuw = await pushEnHaalOp(snapshot); } catch (e) { fout = e.message; }
+  werknemerKnopPlanning();
   const gedelegeerd = startLokaleDelegaties();
   if (gedelegeerd) console.log(`  ${gedelegeerd} gedelegeerde opdracht(en) gestart`);
   console.log(`${snapshot.bijgewerkt} brein: ${jobLijst.length} jobs (${alarmen.length} alarm), ${col.sessies.length} sessies, ${nieuw} nieuwe opdrachten, ${Date.now() - t0} ms${fout ? ' — PUSH FOUT: ' + fout : ''}`);

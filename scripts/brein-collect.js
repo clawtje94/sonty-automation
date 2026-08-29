@@ -295,6 +295,18 @@ function laatsteBriefing() {
   } catch { return null; }
 }
 
+/** Schaduwstand: bestand .schaduw; bevat het een datum (YYYY-MM-DD), dan vervalt hij vanzelf ná die dag (V9: t/m 4 sept). */
+function schaduwStand() {
+  const p = path.join(B.DIR, '.schaduw');
+  if (!fs.existsSync(p)) return false;
+  const tot = (fs.readFileSync(p, 'utf8').match(/\d{4}-\d{2}-\d{2}/) || [])[0];
+  if (tot && new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Amsterdam' }) > tot) {
+    try { fs.unlinkSync(p); B.gebeurtenis('Brein', `schaduwstand automatisch beëindigd (liep t/m ${tot}); Bram stuurt de dagstart weer naar Telegram`); } catch { /* best effort */ }
+    return false;
+  }
+  return true;
+}
+
 // ── main ──
 (async () => {
   const t0 = Date.now();
@@ -314,7 +326,7 @@ function laatsteBriefing() {
   const snapshot = {
     bijgewerkt: new Date().toISOString(), host: os.hostname(), uptimeUur: Math.round(os.uptime() / 360) / 10, load: os.loadavg()[0].toFixed(2),
     alarmen, jobs: jobLijst, collegas: col, wachtrijen: wr, tijdlijn: tijdlijn(), medewerkers: mw,
-    briefing: laatsteBriefing(), schaduw: fs.existsSync(path.join(B.DIR, '.schaduw')),
+    briefing: laatsteBriefing(), schaduw: schaduwStand(),
     postvak: B.postvak().slice(-100).reverse(), werknemerAan: fs.existsSync(path.join(B.DIR, '.werknemer-aan')),
     collegaNamen: [...new Set([...mw.lijst.map((m) => m.slug), ...col.sessies.filter((s) => s.status !== 'klaar' && s.status !== 'verlopen').map((s) => s.naam), 'nieuwe werknemer'])],
   };

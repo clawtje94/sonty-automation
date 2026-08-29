@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 29-08 (middag): ADMIN LICHT/DONKER-KEUZE + /admin/pipeline LICHT (website)
+- Daimy: "je zou dit in een lichte kleur maken toch, of een keuzeknop dat mensen zelf kunnen kiezen?" (/admin/pipeline).
+  Gebouwd: thema-variabelen in app/admin/admin.css (--adm-page-bg/panel/card/border/text/muted…, licht standaard, donker
+  onder [data-adm-theme=dark]), knop components/admin/AdminTheme.tsx rechtsboven in de admin-layout (keuze per browser
+  in localStorage 'adm-theme'), layout-achtergrond op de variabele. /admin/pipeline: 95 inline kleuren omgezet naar de
+  variabelen (data-kleuren van fases/uitvoerders ongemoeid). Headless gecheckt licht én donker.
+- LET OP: alleen pipeline (en leads, dat al licht was) volgen de knop; de ~24 andere admin-pagina's hebben nog vaste
+  donkere inline kleuren — per pagina om te zetten met dezelfde mapping (regex in dit werkblok).
+
 ## 29-08 (middag): AKKOORDDATUM IN DE SHEET (kolom T) + ONDERZOEK WINKEL-LATER-AKKOORD
 - Daimy: "vanaf nu ook de datum van akkoord in kolom T, zodat we weten hoelang het duurde en of winkelmensen
   uiteindelijk toch akkoord gingen; regel 1 voor 1". Kolom T = "Akkoord → Datum" (rij 2 "Datum", rij 3 "Akkoord"); index

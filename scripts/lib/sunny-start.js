@@ -219,7 +219,7 @@ function voorstelTekst({ voornaam = 'daar', slots = [], duurMin = 30, ver = fals
 /** Mailversie (HTML) van hetzelfde voorstel; de knop is een gemak, "ja" terugmailen werkt ook. */
 function voorstelMailHtml({ voornaam = 'daar', slots = [], duurMin = 30, ver = false, taal = 'nl', url = '', geldigUren = 24, nu = Date.now() } = {}) {
   const plat = voorstelTekst({ voornaam, slots, duurMin, ver, taal, nu })
-    .replace(/\n\n(Groetjes, Sunny van Sonty|Kind regards, Sunny from Sonty)$/, '');
+    .replace(/\n\n(Groetjes, )?(Sunny van Sonty|Sunny, Sonty|Kind regards, Sunny from Sonty)$/, '');
   const alinea = plat.split(/(?<=[.!?])\s+(?=[A-Z"])/).map((z) => `<p>${z}</p>`).join('\n');
   const knop = url
     ? `<p><a href="${url}" style="display:inline-block;background:#F97316;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:bold">${taal === 'en' ? 'Yes, that works' : 'Ja, dit past'}</a></p>`

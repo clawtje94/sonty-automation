@@ -110,7 +110,7 @@ const dimB = [
 ];
 const NU_B = T(DI, 10, 0);
 function orakelB(s) {
-  return { wil: 'tekst', taalOk: true, handtekening: 'Sunny', tijdGenoemd: true, marge: true, vraag: true, geenGoedNieuwsBijDrukte: s.weken.w >= 3, verWegUitleg: false, /* KORT (29-08): geen route-uitleg in het voorstel */ jaAntwoord: s.aantal.n === 1, knop: s.vorm.label === 'mail' };
+  return { wil: 'tekst', taalOk: true, handtekening: 'Sunny', tijdGenoemd: true, marge: true, vraag: true, geenGoedNieuwsBijDrukte: true /* KORT 29-08: geen 'goed nieuws'-opener meer */, verWegUitleg: false, /* KORT (29-08): geen route-uitleg in het voorstel */ jaAntwoord: s.aantal.n === 1, knop: s.vorm.label === 'mail' };
 }
 function voerUitB(s) {
   const slots = Array.from({ length: s.aantal.n }, (_, i) => ({ aankomst: new Date(NU_B + s.weken.w * 7 * 86400000 + i * 86400000 + 2 * 3600000).toISOString(), inmeter: 'Joey' }));

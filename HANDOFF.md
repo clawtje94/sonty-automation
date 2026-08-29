@@ -2814,3 +2814,67 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 - 24-08: SYSTEMEN-rood inmeet-dashboard = Planado 429 in planner's planado()-helper (crashte zonder retry). Zelfde fix als de sync: 5 pogingen met oplopende wachttijd + tekst-parse. Bewijsrun schoon, verzoek-daemon gekickstart.
 - 25-08: Planado-omschrijvingen inmeters (Daimy: "te vaak alleen motor + afstandbediening"): scan 90 inmeet-jobs -> 10 echte zonder productblok = klanten ZONDER Gripp-offerte (winkel/nog niet getekend). Fix in planado-gripp-verrijken: (1) RP-terugval (rp-export match op tel/naam -> board-item -> productregels; blok "RP-offerte: nr (nog geen Gripp)"), wordt automatisch vervangen zodra Gripp-offerte bestaat; (2) regelsUitLeadTekst leest subregels (hoogte/breedte/framekleur/bediening) - "1x Rolluik" werd "1x Rolluik 1400x1470 RAL 7016 Somfy IO solar"; (3) rate-limit-bestendige planadoJson ook hier. Gevuld: Michiel van Andel, Cas Voskuyl (9 regels), Luuk Post, Steven Burke + Tass Kop alsnog Gripp-koppeling. Handwerk blijft: DISNEY, "Inmeten - klant", Charentestroom, Roland Sars (niet in RP-export), JOEY WINKEL-blokken (intern, ok). Daemon draait dit voortaan automatisch.
 - 29-08 middag: VAKANTIE-OVERZICHT in admin (Daimy: "overzicht van vakanties zoals ze in Outlook staan, wie/wanneer, denk zelf na"). LIVE op sonty-website.vercel.app/admin/vakanties (commits dc60dab, a2e2871; rail + tegel). Bron = Outlook-agenda "Sonty Montage", persoon = genodigde (zelfde regel als inmeet-planner/Planado-rooster), ALLEEN-LEZEN. Mac mini: scripts/vakanties-collect.js (launchd nl.sonty.vakanties-collect, elke 30 min, log vakanties-collect.log, in systemen-register) -> KV vakanties:overzicht via POST /api/admin/vakanties (Bearer ADMIN_PASSWORD). Pagina: nu afwezig (+ eerstvolgende werkdag), Let op (alle inmeters tegelijk weg / 2+ montagemensen tegelijk / items zonder genodigde of met afwijkende naam in onderwerp), tijdlijn 14 weken per persoon, lijst nu+komend, voorbij inklapbaar, uitleg conventie. Gemeten op echte agenda: 1156 items -> 31 periodes, 2 controlepunten (Vakantie 3-28 aug ZONDER genodigde = niemand geblokkeerd; "Vakantie - TYGO MAGAZIJN" met Mick als genodigde). Bezetting: 7-8 sep GEEN inmeter (Sjoerd t/m 11 sep + Joey Disney). Scenario-lab scenario-lab/vakanties/lab.js: 700 gegenereerde events, 10 bakken, 0 fout/0 crash. Screenshots desktop+iPhone12, licht+donker OK. Gevonden bug: oranje thema-variabele onzichtbaar in licht thema -> vaste kleuren. OPEN: (1) inmeet-planner regex kent "ziek" niet (rooster wel) -> zieke inmeter lijkt beschikbaar; (2) KV-maandlimiet blijft risico (V12 betaald plan), route geeft nu 503 + melding i.p.v. lege lijst.
+
+## 29-08 (middag): KLANTCONFIGURATOR-METING "klopt 100%?" — NEE, bevindingen (nog niets aangepast)
+- Vraag Daimy: klopt /configurator op Vercel nu echt 100% (vanaf-prijzen, mogelijke formaten)?
+- GEMETEN: live productie-API == motor (8/8, live-api-prijspeil.js); 31 vanaf-prijzen live opgehaald.
+  Rasterscan ~20k cellen: sonty-website/scripts/configurator-maatgrenzen-scan.mts (nieuw, alleen-lezen).
+- [A] FOUT-STIL: configurator laat maten toe waar de prijstabel geen prijs voor heeft (hoogte hangt af van
+  breedte, configurator kent alleen 1 vaste min/max): Rolluik S-37 131/750 cellen (bv 3000×2500, tabel bij
+  300 cm breed max 200 cm hoog), S-42 52/805, ROMA rolluik .XP/.P/.P-gerolvormd 22-25 elk, ROMA zipSCREEN.2
+  18/1326, horren Comfort 2/Voorzet 8/Inklem 8/Veerstift 20 (Unilux-tabel). In die cellen valt
+  app/api/configurator/submit stil terug op de OUDE Sunmaster-motor (calculatePrice): S-37 3000×2500 →
+  offerte €1.691 voor een niet-leverbare maat; ROMA .XP 2800×2700 → S-37-prijs €1.691 (i.p.v. ROMA-niveau);
+  ROMA zipSCREEN.2 5500×3300 → Square-85-prijs €1.225. Horren → "op aanvraag" (engine null, oké).
+- [B] TE STRENG (configurator blokkeert wat de motor kan): ROMA zipSCREEN hoogte 3500 vs tabel 6000; Suncube
+  uitval 1350 vs 1500; Sunproject uitval 1150 vs 1500; markiezen 4000 vs 4200 (hout) / 5000 (alu); serre
+  (ZIP bovenliggend/Onderdak) min 3000 vs 2000; Sunbasic 2800/2770–5500 vs tabel 300–600 cm.
+- [C] VANAF: Sunbasic open + dichte cassette hebben LIVE GEEN vanaf-prijs (vanafPrijs probeert 2000 mm =
+  def.minBreedte 200 cm, tabel begint bij 300 cm → null). Overige vanaf-prijzen staan op de uniforme
+  referentiemaat (100 cm, regel Daimy 09-07) en zijn daardoor bij 20 varianten hoger dan de goedkoopste
+  configureerbare maat (bv hor Comfort vanaf €305, 30×44 cm = €250); kaart vermeldt de basis-maat, dus
+  transparant, geen fout t.o.v. de regel. Schermen/rolluiken 600–999 mm = prijs kleinste staffel (regel).
+- VOORSTEL (wacht op Daimy, V1 op Telegram): maatgrenzen in de configurator uit de prijstabellen laten komen
+  (per breedte de leverbare hoogte/uitval, één bron) + geen stille fallback naar de oude motor bij
+  "geen prijs" (→ "op aanvraag"/Mens nodig) + Sunbasic-vanaf fixen. [B]-verruimingen alleen na akkoord.
+- 29-08 vervolg (Daimy: "belangrijk is dat de prijzen aan de frontend kloppen"): headless-browser gemeten op de
+  LIVE configurator (S-37 2000×2000, Windvast 3000×2500, Suneye 5000×2500 + 3000×2500). Consument ziet: vanaf-prijs
+  per variant (= live API = motor, 31/31) en per keuze een +/−bedrag; géén totalen (beleid). Alle getoonde
+  +/−bedragen == live server-API: draaischakelaar −241/−168/−152, solar +267/+188, handbediend −476, RAL +433/+503/+413,
+  uitbouw +50 (motor montage 275→325). Enige afwijking: S-37 RAL scherm +256 vs API +257 (afronding per kant).
+  Accessoires TaHoma €195 / windsensor €169 = offerte-tool. Prijzen zijn vóór de 15% maandactie-korting (banner
+  "Nazomeractie"); die komt als groupDiscount op de offerte. Opgemerkt: "Handbediend" is kiesbaar voor Suneye
+  (regel geen-handbediening?). Screenshots in scratchpad cfg-*.png. Conclusie: GETOONDE prijzen kloppen;
+  de maatgrenzen-fout (bak A hierboven) blijft het enige echte lek → V1 open.
+
+## 29-08 (middag/avond): KLANTCONFIGURATOR MAATGRENZEN UIT DE MOTOR — LIVE (website 8b09d05 + resolve-fix)
+- Daimy: "het gaat me erom dat alles klopt" → gebouwd, oplevercheck doorlopen.
+- GEBOUWD: lib/configurator/grenzen.ts (gedeelde controle checkMaat/filterKeuzes), configurator-map.maatgrenzen()
+  (motor aftasten op 10 mm, banden per breedte; lookups ronden omhoog → tussenmaat hoort bij de band rechts),
+  API action configurator-grenzen (cache 1 u), frontend: ondergrens productdata, bovengrens = strengste van
+  productdata en motor; uitval-keuzes gefilterd; validatie met tekst ("Bij 3000 mm breed is de hoogte maximaal
+  2000 mm"); submit-route: gekoppelde variant zonder prijs = opAanvraag + maatFout (geen oude-motor-fallback);
+  resolve.ts: geen oude-motor-keuzebedragen meer bij zo'n maat; vanafPrijs zoekt ook in breedte (SunBasic open
+  €2.818 / dicht €3.015 nu live op de kaarten, stond eerst leeg).
+- NIET verruimd (wacht op Daimy): markies 4000→4200/5000, ROMA zipSCREEN hoogte 3500→6000, Suncube uitval
+  1350→1500, Sunproject 1150→1500, serre min 3000→2000. Ook open: "Handbediend" bij Suneye.
+- LAB: scripts/configurator-grenzen-lab.mts 3.200 scenario's: 2.601 OK, 600 terecht geblokkeerd, 0 FOUT-STIL,
+  0 FOUT-ZICHTBAAR (eerste run met 50 mm/links-toewijzing gaf 17 FOUT-STIL → gefixt). Rasterscan
+  configurator-maatgrenzen-scan.mts bak A nu leeg.
+- REGRESSIE echte historie (data/offerte-backups, 5.198 unieke RP-offertes, 2.235 productregels met maat):
+  oude configurator liet 1.882 toe, daarvan 1 zonder motorprijs (Sunbasic dichte 2770×2500, SENT) = enige
+  nieuw-geblokkeerde regel; 0 vals-positieven. 345 regels die buiten de productdata vielen (Windvast >5000
+  breed etc.) blokkeerde de oude configurator ook al.
+- LIVE GEMETEN (sonty-website.vercel.app, deploy-runs 33259109437 + 33259353986 success): API-banden S-37
+  = tabel; S-37 @3000 breed: hint "600 – 2000 mm", 2500 ingevuld → "Maximaal 2000 mm" bij Verder; keuze-
+  bedragen bij 3000×2500 leeg, bij 2000×2000 −241/+267/+256 (= server); Suneye @2690 uitval 1500/2000/2500,
+  @4000 ook 3000; iPhone 12 geen h-scroll (screenshots scratchpad live-s37-*.png). Publieke site heeft geen
+  donker thema.
+- NIET gecontroleerd: echte aanvraag via /api/configurator/submit (maakt een lead + meldingen; route-logica
+  in lab nagebootst), npm run build lokaal niet gedraaid (deploy-workflow bouwt en slaagde 2×).
+- Checklist RP → eigen systeem gepubliceerd als artifact "Sonty zonder Reuzenpanda"
+  (https://claude.ai/code/artifact/3ea5ab26-a537-4231-94cf-2c5034f4eee2): 4 fases F0-F3, 14 processen, 12
+  RP-lezende scripts/zaps, 8 besluiten voor Daimy. Bron: subagent-inventaris over masterplan/keten-ontwerp/
+  HANDOFF/launchd (69 nl.sonty-jobs). Feiten gecheckt: /offerte-aanvragen op Vercel linkt al naar /configurator
+  (RP-widget alleen nog op oude sonty.nl), verzendcentrum-bron staat op "rp".
+- Memory: project_sonty_configurator_grenzen.md.

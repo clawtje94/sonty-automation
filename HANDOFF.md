@@ -1,5 +1,18 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 29-08 (avond): STADSPAGINA'S UNIEK MET ECHTE DATA (website 4350801) — Daimy: "uniek maar niet met bullshit"
+- Bron per plaats: Outlook-agenda Sonty Montage (data/outlook-all-events.json, feb-apr 2026): montages/inmetingen per maand;
+  PDOK locatieserver v3_1 (CBS-buurten met ≥2 klussen, adressen niet gepubliceerd); OSRM rijtijd vanaf magazijn Berkel én
+  showroom Rijswijk; reviewscore live uit de Google-koppeling (was hardcoded 4.9/500). Data: ~/sonty/data/stad-historie-2026.json
+  (kopie in website/data). Script om te verversen: zie python-blokken in deze sessie → TODO als script vastleggen.
+- 12 pagina's (≥7 klussen): rijswijk, den-haag, zoetermeer, rotterdam, delft, voorburg, nootdorp, pijnacker, wateringen,
+  berkel-en-rodenrijs, leiden, alphen-aan-den-rijn. Gouda/Wassenaar/Leidschendam: 301. 5 stadsblogs → content/blog-archief + 301.
+- Oude claims verwijderd ("60+ projecten per jaar", "wij kennen elke wijk", huistypes, testimonial); intro's handgeschreven op feiten.
+- LAB scripts/stadspagina-overlap.mjs (hoofdinhoud in <main>): 71-74% → gem. 24%, max 31%, 0x FOUT-STIL; live identiek.
+- Ads-zoekwoordrapport (data/google-ads-zoekwoordrapport-2026-08.xlsx, mei-jul): €53.167, 1.358 conv, merk €6/conv; grootste
+  posten zonnescherm-algemeen €20k, screens €12k (elektrisch/prijs), rolluiken €7k → in SEO-rapport 3.4.
+- REGEL: nooit concurrentnamen (memory feedback_geen_concurrentnamen); april-rapport geanonimiseerd.
+
 ## 29-08 (avond): SEO-ONDERZOEK NIEUWE SITE (website: content/seo-onderzoek-2026-08.md, artifact voor Daimy)
 - CORRECTIE Daimy: het gaat om de vercel-site, niet sonty.nl; en NOOIT namen van andere zonweringbedrijven noemen (memory
   feedback_geen_concurrentnamen; april-rapport en dit rapport geanonimiseerd). Audit nieuwe site (103 URL's): meta/canonical/

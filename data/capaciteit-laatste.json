@@ -1,12 +1,12 @@
 {
- "week": "2026-W33",
- "instroom": 438,
- "verwerking": 18.125,
+ "week": "2026-W35",
+ "instroom": 377.5,
+ "verwerking": 25.625,
  "capaciteit": 35.25,
- "verzadiging": 155.3191489361702,
- "ratio": 12.068027210884354,
+ "verzadiging": 133.86524822695037,
+ "ratio": 11.789634146341463,
  "doorlooptijdRecent": 27,
- "doorlooptijdEerder": 20,
+ "doorlooptijdEerder": 21,
  "oordeel": "AFSCHALEN",
- "actie": "Zet de instroom terug naar ongeveer 282 offertes per week. Dat is 156 per week minder, ongeveer 36% eraf."
+ "actie": "Zet de instroom terug naar ongeveer 282 offertes per week. Dat is 96 per week minder, ongeveer 25% eraf."
 }

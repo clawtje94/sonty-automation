@@ -845,5 +845,176 @@
   "status": "klaar",
   "aangemaakt": 1786905594401,
   "handmatigGeleverd": "2026-08-16, offerte 202611810 per mail nagestuurd op ticket 974394420 (daemon zag het ticket niet door een Trengo-429)"
+ },
+ {
+  "lcId": "f5d215f9-47d3-48f6-b538-de92b423ef13",
+  "ticketId": 974501773,
+  "klantNaam": "Arjan Sanders",
+  "producten": [
+   {
+    "product": "plisséfit hordeur enkel",
+    "breedteMM": 1400,
+    "hoogteMM": 2006,
+    "framekleur": "antraciet",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1787033458577
+ },
+ {
+  "lcId": "95c8e4fc-8c27-4a74-bd5d-7682c3234ec0",
+  "ticketId": 974974212,
+  "klantNaam": "Teun Jager",
+  "producten": [
+   {
+    "product": "suneye knikarmscherm",
+    "breedteMM": 4500,
+    "uitvalMM": 2500,
+    "bediening": "io",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "WA",
+  "status": "klaar",
+  "aangemaakt": 1787127848412
+ },
+ {
+  "lcId": "c63138c3-067b-495c-9c74-fdd275742da6",
+  "ticketId": 974839629,
+  "klantNaam": "Sis Scheffer",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 2000,
+    "hoogteMM": 2000,
+    "bediening": "io",
+    "framekleur": "cremewit",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1787128261491
+ },
+ {
+  "lcId": "6365f567-4f79-41ee-aefd-a37c03a75026",
+  "ticketId": 974342312,
+  "klantNaam": "Rodger Schirmer",
+  "producten": [
+   {
+    "product": "zip design 110",
+    "breedteMM": 4000,
+    "hoogteMM": 1260,
+    "bediening": "solar",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1787142520083
+ },
+ {
+  "lcId": "26e62e1f-603b-4da3-838a-8664d3d4cb8b",
+  "ticketId": 974342312,
+  "klantNaam": "Rodger Schirmer",
+  "producten": [
+   {
+    "product": "zip design 110",
+    "breedteMM": 900,
+    "hoogteMM": 1260,
+    "bediening": "solar",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 3000,
+    "hoogteMM": 1260,
+    "bediening": "solar",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1787142520190
+ },
+ {
+  "lcId": "3c7c74fa-8082-4089-983e-f825da2eb285",
+  "ticketId": 972818054,
+  "klantNaam": "Maran Verweij",
+  "producten": [
+   {
+    "product": "roma rolluik xp",
+    "breedteMM": 1900,
+    "hoogteMM": 1500,
+    "bediening": "solar",
+    "framekleur": "wit",
+    "aantal": 2
+   },
+   {
+    "product": "roma rolluik xp",
+    "breedteMM": 930,
+    "hoogteMM": 1500,
+    "bediening": "solar",
+    "framekleur": "wit",
+    "aantal": 2
+   },
+   {
+    "product": "roma rolluik xp",
+    "breedteMM": 1350,
+    "hoogteMM": 1500,
+    "bediening": "solar",
+    "framekleur": "wit",
+    "aantal": 1
+   },
+   {
+    "product": "plissefit dubbel hordeur",
+    "breedteMM": 1800,
+    "hoogteMM": 2300,
+    "framekleur": "wit",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1787425400939
+ },
+ {
+  "lcId": "18795c13-d935-4dd4-b0c9-2a0d1497935a",
+  "ticketId": 976968711,
+  "klantNaam": "Martijn Landman",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 3155,
+    "hoogteMM": 1690,
+    "bediening": "io",
+    "framekleur": "RAL 7016 structuur",
+    "aantal": 1
+   },
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 665,
+    "hoogteMM": 1613,
+    "bediening": "solar",
+    "framekleur": "RAL 7016 structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1787920771733
  }
 ]

@@ -1,39 +1,39 @@
 {
- "peildatum": "2026-08-10T06:45:11.793Z",
+ "peildatum": "2026-08-24T06:45:15.434Z",
  "weken": {
-  "w28": {
-   "offertes": 437,
-   "akkoord": 39
-  },
-  "w29": {
-   "offertes": 423,
-   "akkoord": 56
-  },
   "w30": {
-   "offertes": 342,
-   "akkoord": 42
+   "offertes": 343,
+   "akkoord": 44
   },
   "w31": {
    "offertes": 374,
-   "akkoord": 34
+   "akkoord": 41
   },
   "w32": {
-   "offertes": 281,
-   "akkoord": 12
+   "offertes": 343,
+   "akkoord": 22
   },
   "w33": {
+   "offertes": 364,
+   "akkoord": 22
+  },
+  "w34": {
+   "offertes": 183,
+   "akkoord": 12
+  },
+  "w35": {
    "offertes": 0,
    "akkoord": 0
   }
  },
  "maanden": {
   "2026-07": {
-   "offertes": 1800,
-   "akkoord": 184
+   "offertes": 1801,
+   "akkoord": 191
   },
   "2026-08": {
-   "offertes": 391,
-   "akkoord": 22
+   "offertes": 1000,
+   "akkoord": 68
   }
  }
 }

@@ -145,3 +145,18 @@ staat de prijs vast. De inmeetafspraak plannen we daarna gewoon later, in overle
 met de planning (bijvoorbeeld na de sleuteloverdracht). Wat de klant tekent is
 precies de aanbieding die geldt zodra we hebben ingemeten.
 - (2026-08-14) [team-notitie bij gesprek .] deze miss wel doorwijzen naar team mens nodig toch?
+- (2026-08-16) [team-notitie bij e-mail Leon Koster] zelf oppakken heeft NIKS met vve te maken
+- (2026-08-18) [team-notitie bij e-mail ADITYA SINGH] jij gewoon antwoorden?
+- (2026-08-18) [team-notitie bij e-mail jan van wageningen] waarom word hier niet op geantwoord? we zijn ook dealer van Velux maar dat doen we dan op locatie met de anderen producten dan even inmeten en checken. en levertijd weet je dus hadje al op kunnen antwoorden
+- (2026-08-18) [team-notitie bij e-mail Alexander van Loenen] je kan deze klant gewoon vertellen als ze in de showroom zijn geweest krijgen ze ene prijs indicatie als ze die hebben getekend neemt de planning contact op voro het maken van een inmeet afspraak. sla op
+- (2026-08-18) [team-notitie bij e-mail Elize van Veen] klant stuurd is akkoord en graag in orde maken?
+- (2026-08-18) [team-notitie bij e-mail Corne Hoppenbrouwers] jij kan toch excuus aanbieden en de offerte versturen?
+- (2026-08-18) [team-notitie bij e-mail Elize van Veen] je stuurt weer een bericht naar haar wat nergens op slaat?
+- (2026-08-19) [team-notitie bij gesprek Nur] waarom is deze offerte nooit doorgezet in RP naar inmeten inplannen?
+- (2026-08-19) [team-notitie bij gesprek Nur] waarom is deze offerte nooit doorgezet in RP naar inmeten inplannen?
+- (2026-08-19) [team-notitie bij e-mail Maran Verweij] kan je. dit niet uit het prijsboek halen? en die vrouw antwoorden?
+- (2026-08-21) [team-notitie bij e-mail Maran Verweij] kun je in reuzenpanda haar offerte maken met de prijzen die je haar dus al hier in de chat heb aangeboden zodat het kloppend is wat je zegt en haar die toesturen, pas 1 bericht sturen als die ook echt is gemaakt niet dat je het later stuurd
+- (2026-08-22) [team-notitie bij e-mail Maran Verweij] heb je nou de offerte voor haar gemaakt met haar gegeven en prijzen etc?
+- (2026-08-24) [team-notitie bij e-mail Maran Verweij] je kan haar beantwoorden opbeide mails in 1 antwoord aub
+- (2026-08-27) [team-notitie bij e-mail Marcel van Beek] is marcel nou al ingeboekt? niks naar de klant sturen alleen even hier laten weten
+- (2026-08-29) [team-notitie bij e-mail edwin maclennan] oppakken aub, jorren is tot 6 september op vakantie dus iedereen die aan hem word toegewezen zelf oppakken of in mens nodig team zetten.

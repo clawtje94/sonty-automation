@@ -307,415 +307,48 @@
    "cpl": 19.36
   }
  },
- "2025-01": {
-  "01 | Leads campagne - Rolluiken": {
-   "spend": 9263.89,
-   "kliks": 6789,
-   "leads": 203,
-   "impressies": 1171787,
-   "cpl": 45.63
-  },
-  "02 | Retargeting | Leads": {
-   "spend": 613.71,
-   "kliks": 302,
-   "leads": 10,
-   "impressies": 56062,
-   "cpl": 61.37
-  }
- },
- "2025-02": {
-  "01 | Leads campagne - Rolluiken": {
-   "spend": 14380.76,
-   "kliks": 8834,
-   "leads": 319,
-   "impressies": 1653400,
-   "cpl": 45.08
-  },
-  "02 | Retargeting | Leads": {
-   "spend": 555.27,
-   "kliks": 310,
-   "leads": 16,
-   "impressies": 38572,
-   "cpl": 34.7
-  }
- },
- "2025-03": {
-  "01 | Leads campagne - Rolluiken": {
-   "spend": 18746.82,
-   "kliks": 9999,
-   "leads": 335,
-   "impressies": 1872621,
-   "cpl": 55.96
-  },
-  "02 | Retargeting | Leads": {
-   "spend": 605.29,
-   "kliks": 251,
-   "leads": 10,
-   "impressies": 37196,
-   "cpl": 60.53
-  },
-  "03 | Leadscampagne - Zonwering": {
-   "spend": 532.01,
-   "kliks": 368,
-   "leads": 23,
-   "impressies": 50002,
-   "cpl": 23.13
-  }
- },
- "2025-04": {
-  "01 | Leads campagne - Rolluiken": {
-   "spend": 19342.02,
-   "kliks": 10964,
-   "leads": 427,
-   "impressies": 2019903,
-   "cpl": 45.3
-  },
-  "02 | Retargeting | Leads": {
-   "spend": 594.67,
-   "kliks": 290,
-   "leads": 11,
-   "impressies": 32507,
-   "cpl": 54.06
-  },
-  "03 | Leadscampagne - Zonwering": {
-   "spend": 2210.5,
-   "kliks": 1708,
-   "leads": 116,
-   "impressies": 236703,
-   "cpl": 19.06
-  }
- },
- "2025-05": {
-  "01 | Leads campagne - Rolluiken": {
-   "spend": 19897.27,
-   "kliks": 12638,
-   "leads": 645,
-   "impressies": 2133795,
-   "cpl": 30.85
-  },
-  "02 | Retargeting | Leads": {
-   "spend": 617.4,
-   "kliks": 300,
-   "leads": 24,
-   "impressies": 31163,
-   "cpl": 25.72
-  },
-  "03 | Leadscampagne - Zonwering": {
-   "spend": 3174.99,
-   "kliks": 2027,
-   "leads": 129,
-   "impressies": 345584,
-   "cpl": 24.61
-  }
- },
- "2025-06": {
-  "01 | Leads campagne - Rolluiken": {
-   "spend": 18937.64,
-   "kliks": 12939,
-   "leads": 599,
-   "impressies": 2227614,
-   "cpl": 31.62
-  },
-  "02 | Retargeting | Leads": {
-   "spend": 602.58,
-   "kliks": 398,
-   "leads": 30,
-   "impressies": 34768,
-   "cpl": 20.09
-  },
-  "03 | Leadscampagne - Zonwering": {
-   "spend": 3504.77,
-   "kliks": 2185,
-   "leads": 147,
-   "impressies": 344188,
-   "cpl": 23.84
-  },
-  "04 | Leadscampagne - Pergola": {
-   "spend": 682.61,
-   "kliks": 927,
-   "leads": 89,
-   "impressies": 62162,
-   "cpl": 7.67
-  }
- },
- "2025-07": {
-  "01 | Leads campagne - Rolluiken": {
-   "spend": 19052.28,
-   "kliks": 14764,
-   "leads": 617,
-   "impressies": 2568018,
-   "cpl": 30.88
-  },
-  "02 | Retargeting | Leads": {
-   "spend": 615.63,
-   "kliks": 386,
-   "leads": 19,
-   "impressies": 39427,
-   "cpl": 32.4
-  },
-  "03 | Leadscampagne - Zonwering": {
-   "spend": 3831.44,
-   "kliks": 2680,
-   "leads": 171,
-   "impressies": 402396,
-   "cpl": 22.41
-  },
-  "04 | Leadscampagne - Pergola": {
-   "spend": 1546.62,
-   "kliks": 2077,
-   "leads": 146,
-   "impressies": 135874,
-   "cpl": 10.59
-  }
- },
- "2025-08": {
-  "01 | Leads campagne - Rolluiken": {
-   "spend": 17485.79,
-   "kliks": 12226,
-   "leads": 410,
-   "impressies": 2157321,
-   "cpl": 42.65
-  },
-  "02 | Retargeting | Leads": {
-   "spend": 619.71,
-   "kliks": 570,
-   "leads": 13,
-   "impressies": 40976,
-   "cpl": 47.67
-  },
-  "03 | Leadscampagne - Zonwering": {
-   "spend": 3858.87,
-   "kliks": 2394,
-   "leads": 94,
-   "impressies": 383339,
-   "cpl": 41.05
-  },
-  "04 | Leadscampagne - Pergola": {
-   "spend": 1858.49,
-   "kliks": 2058,
-   "leads": 149,
-   "impressies": 165280,
-   "cpl": 12.47
-  },
-  "05 | Leads - Screens": {
-   "spend": 153.63,
-   "kliks": 68,
-   "leads": 1,
-   "impressies": 12558,
-   "cpl": 153.63
-  }
- },
- "2025-09": {
-  "01 | Leads campagne - Rolluiken": {
-   "spend": 14428.75,
-   "kliks": 8521,
-   "leads": 189,
-   "impressies": 1458069,
-   "cpl": 76.34
-  },
-  "02 | Retargeting | Leads": {
-   "spend": 599.52,
-   "kliks": 471,
-   "leads": 16,
-   "impressies": 36824,
-   "cpl": 37.47
-  },
-  "03 | Leadscampagne - Zonwering": {
-   "spend": 1387.97,
-   "kliks": 728,
-   "leads": 20,
-   "impressies": 105092,
-   "cpl": 69.4
-  },
-  "04 | Leadscampagne - Pergola": {
-   "spend": 1792.98,
-   "kliks": 1665,
-   "leads": 77,
-   "impressies": 133554,
-   "cpl": 23.29
-  },
-  "05 | Leads - Screens": {
-   "spend": 1568.81,
-   "kliks": 741,
-   "leads": 38,
-   "impressies": 131532,
-   "cpl": 41.28
-  }
- },
- "2025-10": {
-  "01 | Leads campagne - Rolluiken": {
-   "spend": 10228.91,
-   "kliks": 5905,
-   "leads": 130,
-   "impressies": 972347,
-   "cpl": 78.68
-  },
-  "02 | Retargeting | Leads": {
-   "spend": 617.15,
-   "kliks": 410,
-   "leads": 12,
-   "impressies": 33853,
-   "cpl": 51.43
-  },
-  "04 | Leadscampagne - Pergola": {
-   "spend": 1857.07,
-   "kliks": 1427,
-   "leads": 68,
-   "impressies": 136330,
-   "cpl": 27.31
-  },
-  "05 | Leads - Screens": {
-   "spend": 1668.45,
-   "kliks": 729,
-   "leads": 19,
-   "impressies": 125964,
-   "cpl": 87.81
-  },
-  "06 | Gordijnen": {
-   "spend": 279.83,
-   "kliks": 266,
-   "leads": 2,
-   "impressies": 14861,
-   "cpl": 139.91
-  }
- },
- "2025-11": {
-  "01 | Leads campagne - Rolluiken": {
-   "spend": 8921.32,
-   "kliks": 4366,
-   "leads": 101,
-   "impressies": 718521,
-   "cpl": 88.33
-  },
-  "02 | Retargeting | Leads": {
-   "spend": 861,
-   "kliks": 487,
-   "leads": 10,
-   "impressies": 40348,
-   "cpl": 86.1
-  },
-  "04 | Leadscampagne - Pergola": {
-   "spend": 1797.78,
-   "kliks": 1318,
-   "leads": 66,
-   "impressies": 118470,
-   "cpl": 27.24
-  },
-  "05 | Leads - Screens": {
-   "spend": 1621.4,
-   "kliks": 843,
-   "leads": 17,
-   "impressies": 116703,
-   "cpl": 95.38
-  },
-  "06 | Gordijnen": {
-   "spend": 1360.57,
-   "kliks": 1204,
-   "leads": 7,
-   "impressies": 66281,
-   "cpl": 194.37
-  }
- },
- "2025-12": {
-  "01 | Leads campagne - Rolluiken": {
-   "spend": 9296.76,
-   "kliks": 5161,
-   "leads": 118,
-   "impressies": 933675,
-   "cpl": 78.79
-  },
-  "02 | Retargeting | Leads": {
-   "spend": 2744.01,
-   "kliks": 2310,
-   "leads": 16,
-   "impressies": 125826,
-   "cpl": 171.5
-  },
-  "04 | Leadscampagne - Pergola": {
-   "spend": 1847.88,
-   "kliks": 1199,
-   "leads": 48,
-   "impressies": 146796,
-   "cpl": 38.5
-  },
-  "05 | Leads - Screens": {
-   "spend": 1663.82,
-   "kliks": 639,
-   "leads": 31,
-   "impressies": 130820,
-   "cpl": 53.67
-  },
-  "06 | Gordijnen": {
-   "spend": 1548.39,
-   "kliks": 2035,
-   "leads": 16,
-   "impressies": 88727,
-   "cpl": 96.77
-  },
-  "Instagram-bericht: 🎉 WINACTIE! T.W.V €1000,00,-🎉...": {
-   "spend": 103.4,
-   "kliks": 212,
-   "leads": 0,
-   "impressies": 5416,
-   "cpl": null
-  },
-  "Bericht: '🎉 WINACTIE! T.W.V €1000,00,-🎉'": {
-   "spend": 72.81,
-   "kliks": 0,
-   "leads": 0,
-   "impressies": 10154,
-   "cpl": null
-  },
-  "2 Bericht: '🎉 WINACTIE! T.W.V €1000,00,-🎉' - Kopie": {
-   "spend": 37.57,
-   "kliks": 0,
-   "leads": 0,
-   "impressies": 9185,
-   "cpl": null
-  }
- },
  "2026-08": {
   "01 | Leads campagne - Rolluiken": {
-   "spend": 6038.29,
-   "kliks": 5214,
-   "leads": 307,
-   "impressies": 633827,
-   "cpl": 19.67
+   "spend": 7191.12,
+   "kliks": 6079,
+   "leads": 347,
+   "impressies": 737240,
+   "cpl": 20.72
   },
   "03 | Leadscampagne - Zonwering": {
-   "spend": 4677.54,
-   "kliks": 4469,
-   "leads": 292,
-   "impressies": 452126,
-   "cpl": 16.02
+   "spend": 5592.43,
+   "kliks": 5136,
+   "leads": 326,
+   "impressies": 527377,
+   "cpl": 17.15
   },
   "04 | Leadscampagne - Pergola": {
-   "spend": 1642.09,
-   "kliks": 1731,
-   "leads": 196,
-   "impressies": 116922,
-   "cpl": 8.38
+   "spend": 1955.8,
+   "kliks": 1995,
+   "leads": 223,
+   "impressies": 135794,
+   "cpl": 8.77
   },
   "05 | Leads - Screens": {
-   "spend": 1611.11,
-   "kliks": 1561,
-   "leads": 124,
-   "impressies": 131496,
-   "cpl": 12.99
+   "spend": 1937.07,
+   "kliks": 1836,
+   "leads": 138,
+   "impressies": 154987,
+   "cpl": 14.04
   },
   "06 | Gordijnen": {
-   "spend": 626.91,
-   "kliks": 429,
+   "spend": 737.74,
+   "kliks": 500,
    "leads": 15,
-   "impressies": 40879,
-   "cpl": 41.79
+   "impressies": 46335,
+   "cpl": 49.18
   },
   "07 | Leadscampagne - Markiezen": {
-   "spend": 508.86,
-   "kliks": 500,
-   "leads": 25,
-   "impressies": 37630,
-   "cpl": 20.35
+   "spend": 604.9,
+   "kliks": 598,
+   "leads": 29,
+   "impressies": 45654,
+   "cpl": 20.86
   }
  }
 }

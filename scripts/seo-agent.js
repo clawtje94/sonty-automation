@@ -204,7 +204,9 @@ async function tenders(state) {
       const ZONW = /\b(zonwering|zonweringen|buitenzonwering|binnenzonwering|zonneschermen?|screens?|rolluiken?|zonwerend|markiezen|lamellen)\b/i; // heel woord: geen touchscreens/screening
       const inRegio = new RegExp('\\b(' + [...CFG.regio, 'Zuid-Holland', 'Haaglanden', 'Rijnmond'].map((x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')\\b', 'i').test((p.opdrachtgeverNaam || '') + ' ' + besch);
       if (!(ZONW.test(titel) || (ZONW.test(besch) && inRegio))) continue; // zonwering in de titel, of in de tekst én in onze regio
-      if (p.sluitingsDatum && new Date(p.sluitingsDatum) < new Date()) { state.tenders.gezien.push(id); continue; } // al gesloten
+      const gesloten = p.sluitingsDatum && new Date(p.sluitingsDatum) < new Date();
+      const oud = p.publicatieDatum && (new Date() - new Date(p.publicatieDatum)) > 120 * 86400000; // eerste run gaf 2021-2024-publicaties
+      if (gesloten || oud) { state.tenders.gezien.push(id); continue; }
       state.tenders.gezien.push(id);
       nieuw.push({ id, titel: titel.slice(0, 120), ag: p.opdrachtgeverNaam || '', plaats: '', sluit: (p.sluitingsDatum || '').slice(0, 10), term, url: `https://www.tenderned.nl/aankondigingen/overzicht/${id}` });
     }

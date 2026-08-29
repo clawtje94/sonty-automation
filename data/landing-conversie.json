@@ -1,91 +1,81 @@
 {
- "peildatum": "2026-08-10T10:27:53.431Z",
+ "peildatum": "2026-08-24T05:45:33.714Z",
  "dagen": 45,
  "labels": {
   "Rolluik": {
-   "leads": 713,
-   "akk": 92,
-   "waarde": 289355.14999999997
+   "leads": 620,
+   "akk": 79,
+   "waarde": 275219.56
   },
   "Windvast": {
-   "leads": 604,
-   "akk": 35,
-   "waarde": 158048.46999999997
+   "leads": 471,
+   "akk": 28,
+   "waarde": 133469.71
   },
   "Pergola": {
-   "leads": 421,
-   "akk": 17,
-   "waarde": 110380.75
+   "leads": 415,
+   "akk": 16,
+   "waarde": 128174.73999999999
   },
   "Voorraad scherm - 20% korting": {
-   "leads": 411,
-   "akk": 23,
-   "waarde": 87144.64
+   "leads": 358,
+   "akk": 24,
+   "waarde": 81702.11
   },
   "Suneye dichte cassette": {
-   "leads": 246,
-   "akk": 20,
-   "waarde": 83030.24
-  },
-  "Suncube XL": {
-   "leads": 109,
-   "akk": 10,
-   "waarde": 24904.86
-  },
-  "Markiezen": {
-   "leads": 88,
-   "akk": 10,
-   "waarde": 41001.86
-  },
-  "Sunelite dichte cassette": {
-   "leads": 77,
-   "akk": 5,
-   "waarde": 20034
+   "leads": 196,
+   "akk": 25,
+   "waarde": 105177.88
   },
   "(geen productregel)": {
-   "leads": 76,
-   "akk": 22,
-   "waarde": 170897
+   "leads": 87,
+   "akk": 37,
+   "waarde": 205933.16
+  },
+  "Suncube XL": {
+   "leads": 73,
+   "akk": 5,
+   "waarde": 10203
+  },
+  "Markiezen": {
+   "leads": 67,
+   "akk": 6,
+   "waarde": 26594.52
+  },
+  "Sunelite dichte cassette": {
+   "leads": 66,
+   "akk": 4,
+   "waarde": 17328.86
   },
   "Sunbasic dichte cassette": {
-   "leads": 75,
+   "leads": 62,
    "akk": 3,
-   "waarde": 15253.86
+   "waarde": 17807
   },
   "Winkel offerte": {
-   "leads": 59,
-   "akk": 14,
-   "waarde": 64676.06
-  },
-  "ZIP bovenliggende zonwering": {
-   "leads": 49,
-   "akk": 2,
-   "waarde": 9579.630000000001
+   "leads": 43,
+   "akk": 13,
+   "waarde": 58417.03
   },
   "Offerte op maat": {
-   "leads": 33,
+   "leads": 38,
    "akk": 10,
-   "waarde": 28699.15
+   "waarde": 34070.05
   },
-  "Niet windvast": {
-   "leads": 21,
-   "akk": 3,
-   "waarde": 7788.63
-  },
-  "Gordijnen": {
-   "leads": 17,
-   "akk": 2,
-   "waarde": 7618.860000000001
+  "ZIP bovenliggende zonwering": {
+   "leads": 36,
+   "akk": 1,
+   "waarde": 1504.63
   },
   "Sunbasic open cassette": {
-   "leads": 16,
-   "akk": 1,
-   "waarde": 4121
+   "leads": 20,
+   "akk": 0,
+   "waarde": 0
   },
-  "Sunproject": {
-   "leads": 15,
-   "akk": 5,
-   "waarde": 15246.86
+  "Niet windvast": {
+   "leads": 19,
+   "akk": 2,
+   "waarde": 3142.46
   }
  }
 }

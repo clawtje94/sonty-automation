@@ -23,6 +23,14 @@ async function haalRpItem(itemId) {
  * @param {{itemId: string, dagen?: number[], dagdeel?: 'ochtend'|'middag'|null, vanaf?: string|null, max?: number}} p
  * @returns {Promise<{slots: Array<{tekst:string, aankomst:string, inmeter:string}>, duurMin: number, naam: string}>}
  */
+/** Harde variant van pasBijVoorkeur: alleen slots die ÉCHT aan dag/dagdeel/vanaf voldoen (geen terugval). */
+function striktBijVoorkeur(slots, { dagen = [], dagdeel = null, vanaf = null } = {}) {
+  return slots
+    .filter((s) => !vanaf || new Date(s.aankomst) >= new Date(vanaf + 'T00:00:00+02:00'))
+    .filter((s) => !dagen.length || dagen.includes(new Date(s.aankomst).getDay()))
+    .filter((s) => !dagdeel || (new Date(s.aankomst).getHours() < 12 ? 'ochtend' : 'middag') === dagdeel);
+}
+
 async function zoekInmeetTijden({ itemId, dagen = [], dagdeel = null, vanaf = null, max = 5 }) {
   const planner = require('../cron-inmeten-planner.js');
   const { zoekSlots, kiesWinkelOpties, venster } = require('./slotzoeker.js');
@@ -59,8 +67,9 @@ async function zoekInmeetTijden({ itemId, dagen = [], dagdeel = null, vanaf = nu
       }).catch(() => []);
       beste.push(...sl.map((x) => ({ ...x, inmeter: naam })));
     }
+    // STRIKT tellen (pasBijVoorkeur valt zacht terug op alle dagen en zou hier altijd "genoeg" zeggen)
     const genoeg = heeftVoorkeur
-      ? kiesWinkelOpties(pasBijVoorkeur(beste, { dagen, dagdeel, vanaf }), max).length >= Math.min(max, 3)
+      ? kiesWinkelOpties(striktBijVoorkeur(beste, { dagen, dagdeel, vanaf }), max).length >= Math.min(max, 3)
       : kiesWinkelOpties(beste, max).length >= max;
     if (genoeg) break; // genoeg (passende) opties, niet verder kijken
   }
@@ -73,10 +82,11 @@ async function zoekInmeetTijden({ itemId, dagen = [], dagdeel = null, vanaf = nu
     return true;
   });
   // voorkeur van de klant: "vanaf" is hard, dagen/dagdeel zacht (zelfde regels als de planner)
+  const strikt = striktBijVoorkeur(beste, { dagen, dagdeel, vanaf });
   const passend = pasBijVoorkeur(beste, { dagen, dagdeel, vanaf });
-  if (vanaf && !passend.length) return { slots: [], duurMin: duur, naam: lead.naam };
-  const voorkeurGehonoreerd = !heeftVoorkeur || passend.length > 0;
-  beste = passend.length ? passend : beste;
+  if (vanaf && !passend.length) return { slots: [], duurMin: duur, naam: lead.naam, voorkeurGehonoreerd: false };
+  const voorkeurGehonoreerd = !heeftVoorkeur || strikt.length > 0;
+  beste = strikt.length ? strikt : (passend.length ? passend : beste);
   beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
 
   const keuze = kiesWinkelOpties(beste, max);

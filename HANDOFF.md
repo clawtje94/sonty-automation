@@ -1,5 +1,19 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 29-08 (namiddag): CHRISTIAN KEUS (+31622008261) — "waarom geen planning aangeboden?" (horizon-gat gefixt)
+- Feiten: onderwijsgezin, wil maandag/vrijdag. 10:07 Sunny bood ma 28 sep 12:30 (niet vastgehouden); 15:07 was die plek
+  weg; Sunny bood di/do; 17:09 "maandag ben ik vrij, hele dag" → Sunny: "geen enkele maandag vrij" + escalatie. ONJUIST:
+  er waren maandagen (12/19/26 okt), maar inmeet_tijden keek alleen verder dan de standaardhorizon als het TOTAAL <5
+  opties had, en de dagvoorkeur werd pas daarna (zacht) toegepast → nooit verder gekeken, stil teruggevallen op di/do.
+- FIX (5e3e8a4, 7dfa92f, + planner-commit): inmeet_tijden telt de voorkeur STRIKT en kijkt tot ~3 maanden vooruit tot
+  ≥3 passende opties; geeft voorkeurGehonoreerd + letOp-tekst aan Sunny. Stuur-aanbod-route (verzoek-daemon) idem:
+  bij dagvoorkeur zonder strikte match → horizon 60 werkdagen. bron/stijl/wens gaan nu mee (luistert → klantwens wint
+  van claim-guard en weeklimiet; stijl sunny bij bron sunny; Sunny-handtekening in klantReply/mail).
+- Christian alsnog geholpen 17:32: stuur-aanbod (bron sunny, voorkeurDagen [1]) → ma 12 okt 09:00 Sjoerd, vrij WA-bericht
+  + mail, plek vastgehouden (token 2de29926…). Oude opvolging-mutatie (herhaling do 24 sep) afgewezen.
+- OPEN/ZWAKTE: tijden die Sunny in het gesprek noemt (inmeet_tijden) worden NIET vastgehouden; de 28-sep-plek was 5 uur
+  later weg. Voorstel: bij inmeet_tijden de beste optie 24u vasthouden als echt aanbod (zoals de planner doet).
+
 ## 29-08 (avond): ADMIN LICHT/DONKER — contrast overal gemeten en gefixt (website 8f2d9f5)
 - Daimy: "je hebt net die kleuren gedaan, overal licht of donker kiezen is leuk maar de contrasten kloppen niet
   overal." Oorzaak: thema-knop (c96fad4, andere sessie) stond op elke admin-pagina, maar alleen /admin/pipeline was

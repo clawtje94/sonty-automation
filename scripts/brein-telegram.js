@@ -12,7 +12,15 @@ if (!tok || !tekst) { console.error('token of tekst ontbreekt'); process.exit(1)
   for (let poging = 1; poging <= 3; poging++) {
     try {
       const r = await fetch(`https://api.telegram.org/bot${tok}/sendMessage`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: chat, text: tekst.slice(0, 3900) }), signal: AbortSignal.timeout(15000) });
-      const d = await r.json(); if (d.ok) { console.log('verstuurd'); require('./lib/brein.js').gebeurtenis('Bram', 'Telegram-bericht aan Daimy: ' + tekst.slice(0, 80)); return; }
+      const d = await r.json();
+      if (d.ok) {
+        console.log('verstuurd');
+        const B = require('./lib/brein.js');
+        B.gebeurtenis('Bram', 'Telegram-bericht aan Daimy: ' + tekst.slice(0, 80));
+        // briefing bewaren voor de Dagstart-tab in het Brein
+        try { const dir = path.join(B.DIR, 'briefings'); fs.mkdirSync(dir, { recursive: true }); fs.writeFileSync(path.join(dir, new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Amsterdam' }) + '.txt'), tekst); } catch { /* best effort */ }
+        return;
+      }
       throw new Error(JSON.stringify(d).slice(0, 120));
     } catch (e) { if (poging === 3) { console.error('mislukt: ' + e.message); process.exit(1); } await new Promise((r) => setTimeout(r, 3000 * poging)); }
   }

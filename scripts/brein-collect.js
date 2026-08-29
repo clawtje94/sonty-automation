@@ -263,6 +263,14 @@ function medewerkers(jobLijst) {
   }) };
 }
 
+function laatsteBriefing() {
+  try {
+    const dir = path.join(B.DIR, 'briefings'); const fs2 = fs.readdirSync(dir).filter((f) => f.endsWith('.txt')).sort();
+    if (!fs2.length) return null; const f = fs2[fs2.length - 1];
+    return { datum: f.replace('.txt', ''), tekst: fs.readFileSync(path.join(dir, f), 'utf8').slice(0, 4000), op: fs.statSync(path.join(dir, f)).mtime.toISOString() };
+  } catch { return null; }
+}
+
 // ── main ──
 (async () => {
   const t0 = Date.now();
@@ -278,6 +286,7 @@ function medewerkers(jobLijst) {
   const snapshot = {
     bijgewerkt: new Date().toISOString(), host: os.hostname(), uptimeUur: Math.round(os.uptime() / 360) / 10, load: os.loadavg()[0].toFixed(2),
     alarmen, jobs: jobLijst, collegas: col, wachtrijen: wr, tijdlijn: tijdlijn(), medewerkers: medewerkers(jobLijst),
+    briefing: laatsteBriefing(),
     postvak: B.postvak().slice(-100).reverse(), werknemerAan: fs.existsSync(path.join(B.DIR, '.werknemer-aan')),
     collegaNamen: [...new Set([...medewerkers(jobLijst).lijst.map((m) => m.slug), ...col.sessies.filter((s) => s.status !== 'klaar' && s.status !== 'verlopen').map((s) => s.naam), 'nieuwe werknemer'])],
   };

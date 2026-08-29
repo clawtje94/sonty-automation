@@ -26,6 +26,26 @@
 - Fase 3 "nieuwe werknemer" (opdracht → `claude -p` sessie) is gebouwd maar UIT: vlag `data/brein/.werknemer-aan` ontbreekt (V7 aan Daimy).
 - Bekende ruis: alarmen voor bewust uitgezette jobs (wa-desktop-queue, keten-zelfcontrole, sonny-rapport niet geladen) staan als 'laag'.
 
+## 29-08 (avond): DOORTEST MET SCHERMOPNAMES + ORANJE RANDEN WEG + UPLOADS IN FOTOKIEZER (website)
+- Daimy: "screen records maken en de website helemaal doortesten, ook de configurator, scrollen, klikken, of het scherm op de
+  juiste plek blijft staan". Script: sonty-website/scripts/doortest.js (Playwright, video per apparaat, desktop + iPhone 12).
+  Flows: home (cookies, scrollen, menu), dienstpagina + FAQ, configurator t/m gegevens-stap (ingevuld, NIET verzonden: zou echte
+  lead + Trengo-mail maken), offerte-aanvragen (extern Reuzenpanda-iframe, niet invulbaar), contact (ingevuld, niet verzonden),
+  portfolio filter + lightbox, reviews, visualisatie, showroom/over-ons/blog/stad/zakelijk/categorie. Plus crawl van alle 100
+  sitemap-pagina's per apparaat en linkcheck (68 interne links).
+- Uitslag run 3 (18:13, na fixes): 0 overflow, 0 CLS>0,1, 0 kapotte foto's, 0 kapotte links, 0 JS-fouten, alle pagina's 200,
+  laadtijd gem 1,4 s desktop / 1,3 s mobiel (max 5,1 s /zakelijk/zorg). Enige console-404 is googlesyndication dfp.min.js
+  (extern, adblock-achtig). "Scrollsprong" bij optie-klik in configurator = bewust (scrollIntoView naar volgende vraag, r. 619).
+  Configurator toont geen totaalprijs, alleen optie-meerprijzen: bewust (prijsindicatie per mail).
+- Gevonden en gefixt: WhatsApp-knop lag op mobiel over de sticky Verder-knop in de configurator (globals.css body:has(.cfg-sticky-bottom)).
+- Oranje rand-accenten (borderTop/borderLeft 4px) op kaarten: showroom, over-ons, vacatures, assortiment, categorie, diensten
+  weggehaald na Daimy's melding "op de showroom staan die oranje dingen nog" (7 regels). Live 0.
+- Fotokiezer: Daimy "mist uploads". Feit: 234 eigen uploads staan onder knop Eigen uploads (KV sonty:media-uploads, veel op
+  Klaviyo-CDN d3k81ch9hvuctc.cloudfront.net uit de WhatsApp-groep). Twee echte gebreken gefixt: (1) POST weigerde andere hosts,
+  dus zo'n upload kiezen werd stil niet bewaard -> toegestaan als url in de uploadlijst staat; (2) KV-maandlimiet vol -> lijst
+  leeg; nu Blob-kopie admin/websitefotos/uploads-snapshot.json als vangnet. V2 open: mist hij nog specifieke foto's?
+- Video's (mp4, 81-83 s) naar Daimy gestuurd via Telegram; bron in test-results/doortest-2026-08-29-18-13/ (webm+mp4+screenshots+rapport.json).
+
 ## 29-08 (avond): WEBSITEFOTO-TOOL /admin/websitefotos + ORANJE STREEPJES WEG (website e91488c + vervolg)
 - Daimy: "overal op het vercel-domein dat oranje streepje voor/onder de blokken weg" + "website foto tool: foto's per blok
   kiezen en zien waar ze allemaal getoond worden". Streepje = 60x4 balkje (#BF5317/#FFCC01) onder sectiekoppen: 43 stuks

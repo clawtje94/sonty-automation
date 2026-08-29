@@ -12,6 +12,11 @@
   ging eerst de deur uit. Klant per mail gecorrigeerd (29 sep staat, 1 okt vervalt; ticket 977195501). winkelPlant-vlag
   en winkel-claims weer weggehaald (boeking staat). V4 daarmee overbodig.
 - Nog te bouwen: knop op het dashboard "winkel plant zelf" (zet vlag + claims) i.p.v. handmatig via state.
+- OPVOLGING NA NIET-KIEZEN (Daimy-vraag 29-08, bevestigd in code): 24u-klok op het aanbod; 4u vóór verlopen (of de avond
+  ervoor bij vroege verval) één herinnering in het gesprek (08-21u, verzendpoort 'herinnering'); bij verlopen → ronde 2:
+  herhaald voorstel als "berichtje van de planning" (bron opvolging, herhaling); ronde 2 ook onbeantwoord → geen derde
+  template: Sunny vraagt 1x persoonlijk na (dag ≥3, navraagBesluit) → 5 dagen stilte → belscherm + planning-groep.
+  Aangepast: herhaling telt mee als onbeantwoord voorstel; herinnering tekent Sunny bij Sunny-voorstel.
 
 ## 29-08 (ochtend): OFFERTETOOL — VRIJE REGEL (zelf typen + eigen prijs) LIVE (website ccaeb1b)
 - Daimy: "in de offertetool ook een product zelf kunnen toevoegen door zelf te typen, zoals een lasmontagebeugel of

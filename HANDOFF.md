@@ -1,5 +1,20 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 29-08 (middag): DAIMY'S TESTGESPREK +31683500506 — "waarom wordt dit niet zelf opgepakt?" (3 gaten gedicht)
+- Feiten: 10:36 "hoi, ik zit toch een beetje te twijfelen nog" (na zijn annulering van gisteren). 10:40 daemon: "klant
+  reageerde opnieuw op overgedragen gesprek → terug naar Mens nodig" (de oude annuleer-notitie "@jorren …" van 28-08 gold
+  als overdracht). 12:41 stilte-vangnet "collega pakt het op" (Nanny). Niemand antwoordde.
+- GAT 1 — overdracht was eeuwig: nu verjaart hij. Staat het laatste klantbericht ≥90 min onbeantwoord (geen mens, geen
+  inhoudelijk bot-antwoord; vangnet telt niet) en is het ticket niet aan een mens toegewezen, dan pakt de bot het weer op
+  (assign bot, label Mens nodig eraf, actief). Collega die het zelf wil doen wijst zichzelf toe.
+- GAT 2 — vangnet-bericht telde als "ons laatste bericht": Sunny reageerde daarna nooit meer ("laatste bericht niet van de
+  klant"). Nu worden trailing vangnet-berichten overgeslagen; het laatste ECHTE bericht telt.
+- GAT 3 — escaleren zonder klantbericht: het model koos escaleren_naar_mens met leeg antwoord = stilte. Nu krijgt de
+  klant altijd een warm standaardbericht mét open vraag (NL/EN); prompt-regel: twijfel na annulering = verkoopmoment,
+  escaleren alleen ernaast. Daimy's test kreeg 13:23 het antwoord (met "Boot!" — voornaam-heuristiek daarna gefixt:
+  alleen bij echte voor+achternaam).
+- Ook: Mickey Kalra alsnog geboekt (zie blok hierboven). Lab 10.832 groen. Commits 4502b72, fdb15ad + volgend.
+
 ## 29-08 (middag): WINKEL-DIRECT — inmeetafspraak op offertenummer, nieuwe klanten automatisch (sonty 12bfc67+, website f77ca34)
 - Daimy: "we zitten in de showroom te wachten tot we een moment krijgen aangeboden" → "in het inmeet-dashboard een
   winkelafspraak gelijk kunnen inplannen, op offertenummer". Oorzaak gemeten: 30-min-ronde + ververs = volledige ronde

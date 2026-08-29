@@ -19,11 +19,14 @@ function vindRijEnKolommen(tabs, { rpNummers = [], grippNr, telefoon }) {
   const rpSet = new Set(rpNummers.map((n) => String(n).replace(/\D/g, '')).filter(Boolean));
   for (const tab of tabs) {
     const kop = (tab.rijen[2] || []).map((h) => String(h || '').toLowerCase());
+    const kop2 = (tab.rijen[1] || []).map((h) => String(h || '').toLowerCase().trim());
     const kol = {
       inkoop: kop.findIndex((h) => /inko+p.*incl/.test(h)),
       rp: kop.findIndex((h) => /rp.*offerte|offerte.*nummer/.test(h)),
       nummer: kop.findIndex((h) => /^nummer/.test(h)),
       telefoon: kop.findIndex((h) => /telefoon/.test(h)),
+      // "Akkoord → Datum" (kolom T in de 2026-tabs): rij 3 = "Akkoord" met rij 2 = "Datum" erboven (Daimy 29-08)
+      akkoordDatum: kop.findIndex((h, i) => h.trim() === 'akkoord' && kop2[i] === 'datum'),
     };
     if (kol.inkoop < 0) continue; // tab zonder inkoopkolom is geen offertetab
     for (let r = 3; r < tab.rijen.length; r++) {
@@ -154,6 +157,31 @@ async function schrijfInplanning({ rpNummers = [], grippNr, naam, telefoon, inme
 }
 
 /** Rollback (Daimy V3): de drie cellen inkoop/inmeetdatum/inmeter weer leegmaken. */
+/** AKKOORDDATUM IN DE SHEET (Daimy 29-08: "vanaf nu ook de datum van akkoord in kolom T, zodat we
+ *  weten hoelang het duurde en of winkelmensen uiteindelijk toch nog akkoord gingen").
+ *  Vult de "Akkoord → Datum"-kolom van de bestaande offerterij (gevonden op RP-nummer / telefoon /
+ *  Gripp-nummer), alleen als die cel leeg is; maakt nooit een nieuwe rij. Datum als d-m-jj (sheet-stijl). */
+async function schrijfAkkoordDatum({ rpNummers = [], grippNr, telefoon, datum = new Date(), docDatums = [] }) {
+  const sheets = await sheetsClient();
+  const titels = await tabsInZoekvolgorde(sheets, docDatums);
+  let plek = null, tabData = null;
+  for (const titel of titels) {
+    const res = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: `'${titel}'!A1:AH6000` });
+    const tab = { titel, rijen: res.data.values || [] };
+    plek = vindRijEnKolommen([tab], { rpNummers, grippNr, telefoon });
+    if (plek) { tabData = tab; break; }
+  }
+  if (!plek) return { gevonden: false };
+  if (plek.kol.akkoordDatum < 0) return { gevonden: true, overgeslagen: 'tab heeft geen Akkoord/Datum-kolom', tab: plek.tab, rij: plek.rijIndex + 1 };
+  const huidig = String(((tabData.rijen[plek.rijIndex] || [])[plek.kol.akkoordDatum]) ?? '').trim();
+  if (huidig) return { gevonden: true, overgeslagen: 'akkoorddatum al gevuld: ' + huidig, tab: plek.tab, rij: plek.rijIndex + 1 };
+  const d = new Date(datum);
+  const tekst = `${d.getDate()}-${d.getMonth() + 1}-${String(d.getFullYear()).slice(-2)}`;
+  const cel = `'${plek.tab}'!${kolomLetter(plek.kol.akkoordDatum)}${plek.rijIndex + 1}`;
+  await sheets.spreadsheets.values.update({ spreadsheetId: SHEET_ID, range: cel, valueInputOption: 'USER_ENTERED', requestBody: { values: [[tekst]] } });
+  return { gevonden: true, geschreven: tekst, tab: plek.tab, rij: plek.rijIndex + 1, cel };
+}
+
 async function maakCellenLeeg({ tab, rij, kolomInkoop }) {
   if (!tab || !Number.isInteger(rij) || !(kolomInkoop >= 0)) throw new Error('sheet-locatie onvolledig');
   const sheets = await sheetsClient();
@@ -167,4 +195,4 @@ async function maakCellenLeeg({ tab, rij, kolomInkoop }) {
   });
 }
 
-module.exports = { schrijfInplanning, vindRijEnKolommen, tabsInZoekvolgorde, maakCellenLeeg };
+module.exports = { schrijfInplanning, schrijfAkkoordDatum, vindRijEnKolommen, tabsInZoekvolgorde, maakCellenLeeg };

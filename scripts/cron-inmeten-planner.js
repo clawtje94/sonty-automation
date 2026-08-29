@@ -779,6 +779,23 @@ async function main() {
     if (lopendeLeads.has(item.id)) { dash.leads.push({ rpItemId: item.id, naam: item.summary, status: 'aanbod-loopt' }); continue; }
     const lead = await leesLeadCompleet(item);
     if (ALLEEN && !`${lead.naam} ${item.id}`.toLowerCase().includes(ALLEEN.toLowerCase())) continue;
+    // AKKOORDDATUM IN DE SHEET (Daimy 29-08): zodra een klant op "Inmeten inplannen" komt, de datum in de
+    // "Akkoord → Datum"-kolom (T) van zijn offerterij zetten — 1x, alleen als leeg, alleen voor leads die
+    // vanaf 29-08-2026 binnenkwamen (geen stille backfill). Mislukt = volgende ronde opnieuw.
+    try {
+      const gezienOp = state.gezien?.[item.id];
+      state.akkoordDatumSheet = state.akkoordDatumSheet || {};
+      if (gezienOp && Date.parse(gezienOp) >= Date.parse('2026-08-29T00:00:00+02:00') && !state.akkoordDatumSheet[item.id]) {
+        const { schrijfAkkoordDatum } = require('./lib/sheet-inplannen.js');
+        const rA = await schrijfAkkoordDatum({ rpNummers: lead.rpNummers || [], telefoon: lead.telefoon, datum: new Date(gezienOp), docDatums: lead.rpDatums || [] });
+        if (rA.gevonden) {
+          state.akkoordDatumSheet[item.id] = { op: new Date().toISOString(), tab: rA.tab, rij: rA.rij, geschreven: rA.geschreven || null, overgeslagen: rA.overgeslagen || null };
+          console.log(`    akkoorddatum sheet: ${rA.geschreven ? 'geschreven ' + rA.geschreven : rA.overgeslagen} (${rA.tab} r${rA.rij})`);
+        } else {
+          console.log('    akkoorddatum sheet: offerterij niet gevonden — volgende ronde opnieuw');
+        }
+      }
+    } catch (e) { console.log('    akkoorddatum sheet mislukt: ' + String(e.message).slice(0, 80)); }
     if (lead.ambigu) {
       console.log(`  ! ${lead.naam}: ${lead.aantalDocs} offerteversies, geen enkele getekend — klant moet eerst tekenen`);
       regels.push(`${lead.naam}: ${lead.aantalDocs} offerteversies, GEEN getekend — klant moet tekenen (Mens nodig)`);

@@ -1,5 +1,21 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 29-08 (ochtend): OFFERTETOOL — VRIJE REGEL (zelf typen + eigen prijs) LIVE (website ccaeb1b)
+- Daimy: "in de offertetool ook een product zelf kunnen toevoegen door zelf te typen, zoals een lasmontagebeugel of
+  demontage, waar we zelf de prijs aan geven". Gebouwd in app/admin/offerte-tool: knop "+ Vrije regel (zelf typen)" →
+  kaart met omschrijving, prijs per stuk incl. btw (komma/punt/€ toegestaan, nooit negatief), aantal 1-50; telt mee in
+  subtotaal/korting/totaal; gaat als gewone RP-tekstregel (**naam**, pricePerUnit, units) mee bij opslaan/publiceren;
+  PDF/mail/verrijking werken ongewijzigd. Ongeldige regel = rode rand + reden, opslaan geblokkeerd.
+- BIJVANGST GEFIXT: bij heropenen van een offerte gooide de tool elke regel die hij niet als bekend product herkende
+  STIL weg (en "opslaan" verwijderde hem dan uit RP). Nu worden onbekende regels als vrije regel bewaard; alleen echte
+  keten-regels (Inmeten + montage…, Montage op uitbouw, Waarom-blokken) worden bij opslaan opnieuw opgebouwd;
+  "demontage"/"montagebeugel" tellen niet als keten-montageregel (ook in verrijking.ts). Server-vangnet (route.ts
+  opslaan + publiceer): lege omschrijving / negatieve of NaN-prijs / aantal buiten 1-50 → 400 met reden.
+- Lab: sonty-website/scripts/vrije-regel-lab.mts (npx tsx) — 580 scenario's 0x FOUT-STIL (invoer-matrix, roundtrip,
+  keten-herkenning, server-vangnet, prijsparser). Headless screenshot lokaal: 2 geldige regels + 1 lege met foutmelding,
+  subtotaal €150 → 15% korting → €127,50 klopt. Let op: de groupDiscount (%) geldt in RP over ALLE regels, dus ook over
+  vrije regels; wil Daimy demontage e.d. buiten de korting houden, dan is dat een aparte RP-regeloptie (nog niet).
+
 ## 28-08 (avond): REKENTOOL SCHRIJFT NAAR GRIPP (website 9ba8da4) — nog GEEN echte offerte bijgewerkt
 - Daimy: "ik wil het ook gelijk kunnen aanpassen in Gripp zodat die het doorzet". Gebouwd via de bewezen keten-weg:
   lib/rekentool/gripp-schrijven.ts maakt een Voorstel in keten-vorm (bijwerken op lijnId uit "origineel", anders

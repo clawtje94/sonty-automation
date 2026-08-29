@@ -709,16 +709,21 @@ async function verwerkTicket(t, state) {
         // het gesprek geschreven en schrijft de klant ≥90 min na de overdracht opnieuw, dan pakt de bot het gewoon
         // weer op (met de volledige context) in plaats van "terug naar Mens nodig" + stilte. Wil een collega het
         // zelf doen, dan wijst die zichzelf toe (dan blijft de bot eraf, zie aanMensToegewezen).
-        const mensSindsOverdracht = ruweBerichten.some((m) => String(m.type || '').toUpperCase() === 'OUTBOUND' && Number(m.user_id) && Number(m.user_id) !== 747786 && String(m.created_at) > laatsteOverdracht);
-        const overdrachtOud = laatsteOverdracht && (Date.now() - Date.parse(String(laatsteOverdracht).replace(' ', 'T')) > 90 * 60000);
-        if (laatsteKlant > laatsteOverdracht && !mensSindsOverdracht && overdrachtOud && !t.user_id) {
+        // Maatstaf: het laatste KLANTbericht staat ≥90 min onbeantwoord (geen mens, geen inhoudelijk bot-
+        // antwoord erna — een vangnet-berichtje telt niet), ongeacht of de overdracht-notitie ervoor of erna kwam.
+        const VANGNET_RE2 = /nog niets van ons hoorde|haven't heard from us yet|collega pakt het nu persoonlijk op|colleague is picking it up|ik geef (je annulering|het) direct door aan/i;
+        const naKlant = ruweBerichten.filter((m) => String(m.type || '').toUpperCase() === 'OUTBOUND' && String(m.created_at) > laatsteKlant);
+        const mensNaKlant = naKlant.some((m) => Number(m.user_id) && Number(m.user_id) !== 747786);
+        const botAntwoordNaKlant = naKlant.some((m) => (!Number(m.user_id) || Number(m.user_id) === 747786) && !VANGNET_RE2.test(String(m.message || m.body || m.body_plain || '')));
+        const klantOud = laatsteKlant && (Date.now() - Date.parse(String(laatsteKlant).replace(' ', 'T')) > 90 * 60000);
+        if (laatsteKlant && !mensNaKlant && !botAntwoordNaKlant && klantOud && !t.user_id) {
           if (Number(t.team_id) === 431872) {
             try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 747786 }); await haalLabelWeg(t.id, LABEL.MENS_NODIG); }
             catch (e) { console.error(`  [${t.id}] overdracht-verjaring oppakken FOUT: ${e.message}`); }
           }
           const actief = loadActief();
           if (!actief[t.id]) { actief[t.id] = { sinds: new Date().toISOString(), bron: 'overdracht verjaard (geen mens reageerde)' }; fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actief, null, 1)); }
-          console.log(`  [${t.id}] overdracht bleef ${Math.round((Date.now() - Date.parse(String(laatsteOverdracht).replace(' ', 'T'))) / 60000)} min onbeantwoord door een mens → bot pakt het weer op`);
+          console.log(`  [${t.id}] klantbericht staat ${Math.round((Date.now() - Date.parse(String(laatsteKlant).replace(' ', 'T'))) / 60000)} min onbeantwoord na overdracht (geen mens reageerde) → bot pakt het weer op`);
           // NIET returnen: de normale flow hieronder beantwoordt de klant.
         } else {
         if (Number(t.team_id) === 431872 && !t._verseOpdracht) return; // ligt al in de Mens nodig-map, team ziet het
@@ -843,8 +848,15 @@ async function verwerkTicket(t, state) {
 
   if (!rows.length) return;
 
-  const laatste = rows[rows.length - 1];
-  if (laatste.van !== 'klant') return; // alleen reageren als het laatste bericht van de klant is
+  // VANGNET-BERICHTEN TELLEN NIET ALS ANTWOORD (Daimy 29-08, zijn test "ik zit toch te twijfelen"): het
+  // stilte-vangnet ("Sorry dat je nog niets van ons hoorde, een collega pakt het op") is een uitgaand
+  // bot-bericht en maakte het laatste bericht "van ons", waardoor Sunny de klant daarna NOOIT meer
+  // beantwoordde. Trailing vangnet-berichten overslaan: het laatste ECHTE bericht telt.
+  const VANGNET_RE = /nog niets van ons hoorde|haven't heard from us yet|collega pakt het nu persoonlijk op|colleague is picking it up|ik geef (je annulering|het) direct door aan/i;
+  let li = rows.length - 1;
+  while (li >= 0 && rows[li].van !== 'klant' && VANGNET_RE.test(String(rows[li].tekst || ''))) li--;
+  const laatste = rows[Math.max(0, li)];
+  if (!laatste || laatste.van !== 'klant') return; // alleen reageren als het laatste echte bericht van de klant is
 
   // LOPEND INMEET-AANBOD? DAN IS DE PLANNER DE ENIGE RESPONDER — voor ÁLLES op dit
   // nummer, niet alleen keuze-berichten. Op 06-08 vroeg Irene "over welke dag gaat
@@ -1032,6 +1044,18 @@ async function verwerkTicket(t, state) {
     : '';
 
   const liveTest = isLiveTestContact(t);
+  // ESCALATIE NOOIT ZONDER KLANTBERICHT (Daimy 29-08: "waarom wordt dit niet gewoon zelf opgepakt"): kiest
+  // het model voor escaleren_naar_mens zonder eigen antwoord, dan krijgt de klant tóch een warm bericht
+  // (regel: perfect helpen of warm doorverwijzen — stilte is nooit een optie) mét een open vraag, zodat
+  // Sunny het gesprek gewoon verder kan voeren als de klant reageert.
+  if ((!res.antwoord || !String(res.antwoord).trim()) && Array.isArray(res.acties) && res.acties.some((a) => a.type === 'escalatie')) {
+    let en = false; try { en = require('../lib/taal-voorkeur.js').isEngels(t.contact?.phone, t.contact?.email); } catch { /* nl */ }
+    const vn = String(t.contact?.full_name || '').trim().split(' ')[0];
+    res.antwoord = en
+      ? `Thanks for your message${vn ? ', ' + vn : ''}! I've passed it on to my colleague, who will get back to you personally. If you tell me what you're still unsure about, I can probably already help you right now.`
+      : `Dank je voor je bericht${vn ? ', ' + vn : ''}! Ik heb het doorgezet naar mijn collega, die neemt persoonlijk contact met je op. Vertel je me alvast waar je nog over twijfelt? Dan kan ik je waarschijnlijk nu al verder helpen.`;
+    console.log(`  [${t.id}] escalatie zonder antwoord → standaard warm bericht toegevoegd`);
+  }
   if (sonnyMode && res.antwoord) {
     const antwoordTekst = (sonnyIntroNodig ? CFG.SONNY.INTRO + '\n\n' : '') + res.antwoord;
     // Rustig, menselijk tempo (±1-3 min)

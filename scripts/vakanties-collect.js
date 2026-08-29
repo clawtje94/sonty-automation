@@ -6,7 +6,9 @@
 // sinds 22-08, zelfde regel als de inmeet-planner en het Planado-rooster gebruiken).
 // Dit script LEEST alleen. Toevoegen/wijzigen gebeurt in Outlook zelf.
 //
-// Elke 30 min (launchd nl.sonty.vakanties-collect):
+// Elke 5 min (launchd nl.sonty.vakanties-collect):
+//   0. wachtrij uit het dashboard verwerken: nieuwe vakantie als echte Outlook-afspraak
+//      aanmaken (agenda Sonty Montage, persoon als genodigde) en uitkomst terugmelden
 //   1. calendarView -45 dagen .. +400 dagen ophalen
 //   2. per item: wie, van/tot in NL-tijd, hele dag of deel, werkdagen (ma-vr, feestdagen
 //      eruit), soort, controlepunten (geen genodigde / naam in onderwerp wijkt af)
@@ -41,6 +43,58 @@ const ROL = {
   frenky: 'montage', zzp: 'montage',
 };
 const ALIAS = { djo: 'Joey Engelen', jor: 'Jorren Plugge' };
+// Keuzelijst voor het dashboard-formulier (adressen zoals ze als genodigde in Outlook staan).
+const PERSONEN = [
+  { naam: 'Sjoerd Hoogduin', email: 'sjoerd@sonty.nl', rol: 'inmeter' },
+  { naam: 'Joey Engelen', email: 'joey@sonty.nl', rol: 'inmeter' },
+  { naam: 'Yudi den Heijer', email: 'yudi@sonty.nl', rol: 'montage' },
+  { naam: 'Mick', email: 'mick@sonty.nl', rol: 'montage' },
+  { naam: 'Marvin', email: 'marvin@sonty.nl', rol: 'montage' },
+  { naam: 'Jorren Plugge', email: 'jorren@sonty.nl', rol: 'montage' },
+  { naam: 'Dennis', email: 'dennis@sonty.nl', rol: 'montage' },
+  { naam: 'ZZP 1', email: 'zzp1@sonty.nl', rol: 'montage' },
+  { naam: 'Nanny van Vliet', email: 'nanny@sonty.nl', rol: 'kantoor' },
+  { naam: 'Jaimy de Wit', email: 'jaimy@sonty.nl', rol: 'kantoor' },
+];
+const AH = () => ({ 'Content-Type': 'application/json', Authorization: 'Bearer ' + SECRETS.ADMIN_PASSWORD });
+
+// Wachtrij uit het dashboard → echte Outlook-afspraken. Per opdracht één poging per ronde;
+// mislukt = status "fout" met reden (zichtbaar op de pagina), nooit stil overslaan.
+async function verwerkOpdrachten(OH, calId) {
+  let lijst = [];
+  try { lijst = ((await (await fetch(API + '?opdrachten=1', { headers: AH() })).json()).opdrachten) || []; }
+  catch (e) { console.log('  wachtrij niet leesbaar: ' + e.message.slice(0, 80)); return 0; }
+  let n = 0;
+  for (const o of lijst.filter((x) => x.status === 'wacht')) {
+    let uitkomst;
+    try {
+      const kop = { vakantie: 'Vakantie', verlof: 'Verlof', ziek: 'Ziek', 'vrije dag': 'Vrij' }[o.soort] || 'Vakantie';
+      const subject = kop + (o.opmerking ? ` - ${o.opmerking}` : '');
+      const body = {
+        Subject: subject,
+        Body: { ContentType: 'Text', Content: `${o.wie} ${o.soort} ${o.van}${o.tot !== o.van ? ' t/m ' + o.tot : ''}${o.heleDag ? '' : ' ' + o.tijdVan + '-' + o.tijdTot}. Aangemaakt via admin-dashboard (${o.aangemaakt.slice(0, 16)}).` },
+        Attendees: [{ EmailAddress: { Address: o.email, Name: o.wie }, Type: 'Required' }],
+        IsAllDay: !!o.heleDag,
+        Start: { DateTime: o.heleDag ? o.van + 'T00:00:00' : `${o.van}T${o.tijdVan}:00`, TimeZone: 'Europe/Amsterdam' },
+        End: { DateTime: o.heleDag ? dagPlus(o.tot, 1) + 'T00:00:00' : `${o.tot}T${o.tijdTot}:00`, TimeZone: 'Europe/Amsterdam' },
+        ShowAs: 'Oof',
+      };
+      if (DRY) { console.log('  DRY opdracht:', JSON.stringify(body).slice(0, 200)); continue; }
+      const r = await fetch(`https://outlook.office.com/api/v2.0/me/calendars/${calId}/events`, { method: 'POST', headers: { ...OH, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || !j.Id) throw new Error(`Outlook ${r.status}: ${(j.error?.message || JSON.stringify(j)).slice(0, 120)}`);
+      uitkomst = { id: o.id, status: 'klaar', eventId: j.Id };
+      console.log(`  Outlook-afspraak gemaakt: ${subject} ${o.wie} ${o.van}..${o.tot}`);
+      n++;
+    } catch (e) {
+      uitkomst = { id: o.id, status: 'fout', fout: e.message.slice(0, 200) };
+      console.log(`  ! opdracht ${o.id} mislukt: ${e.message.slice(0, 120)}`);
+    }
+    try { await fetch(API, { method: 'PATCH', headers: AH(), body: JSON.stringify(uitkomst) }); }
+    catch (e) { console.log('  terugmelding mislukt: ' + e.message.slice(0, 80)); }
+  }
+  return n;
+}
 
 // ---- NL-tijd helpers (Outlook v2.0 geeft UTC terug zonder Prefer-header) ----
 const NL = new Intl.DateTimeFormat('nl-NL', {
@@ -200,6 +254,7 @@ async function main() {
     const cal = cals.find((c) => c.Name === 'Sonty Montage');
     if (!cal) throw new Error('agenda "Sonty Montage" niet gevonden');
     const feestCal = cals.find((c) => /feestdagen in nederland/i.test(c.Name));
+    await verwerkOpdrachten(OH, cal.Id);
     const van = new Date(); van.setDate(van.getDate() - DAGEN_TERUG);
     const tot = new Date(); tot.setDate(tot.getDate() + DAGEN_VOORUIT);
     const evs = await haalItems(cal, OH, van, tot, 'Subject,Start,End,IsAllDay,IsCancelled,Attendees');
@@ -220,6 +275,7 @@ async function main() {
       venster: { van: nl(van).datum, tot: nl(tot).datum },
       agendaItems: evs.length,
       feestdagen,
+      personen: PERSONEN,
       items,
       fout: null,
     };

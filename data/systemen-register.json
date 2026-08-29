@@ -529,11 +529,11 @@
     },
     "nl.sonty.vakanties-collect": {
       "naam": "Vakantie-overzicht dashboard",
-      "functie": "Leest vakanties/vrije dagen uit Outlook-agenda Sonty Montage en pusht het overzicht naar /admin/vakanties (alleen-lezen).",
+      "functie": "Leest vakanties/vrije dagen uit Outlook-agenda Sonty Montage en pusht het overzicht naar /admin/vakanties; zet nieuwe vakanties uit het dashboard-formulier als echte Outlook-afspraak.",
       "groep": "Rapportage",
-      "ritme": "elke 30 min",
+      "ritme": "elke 5 min",
       "log": "vakanties-collect.log",
-      "maxUur": 2,
+      "maxUur": 1,
       "ks": false,
       "keten": "agenda"
     }

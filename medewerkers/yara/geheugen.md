@@ -1,18 +1,22 @@
 # Yara — geheugen (service & nazorg)
 
-## Lopende meldingen (actief in tracking)
-- Ticket 971967749 (+31611737246): Service/klacht melding, sinds 2026-08-05, wacht op mens (nog geen actie)
-- Ticket 972415418 (+31621142048): Service/reparatie melding, sinds begin augustus, wacht op mens
-- Ticket 965923606 (+31628677522): Openstaande @sonny-opdracht van 2026-08-03 (26 dagen oud!)
+## Lopende meldingen (GEEN actieve service-tickets meer)
+✓ Ticket 965923606: Stille offerte-conversatie (Aranka, 26 dagen, klant reageerde niet).
+✓ Ticket 971967749: Afgerond, doorverwezen naar Service Nodi (externe reparatie).
+✓ Ticket 972415418: Normale inmeting Barbara Galante (20-8 gedaan, wacht op volgende stap).
+→ Sonty heeft gelijk nu geen echte klacht/reparatie-tickets!
 
 ## Leerpunten
-- Service/klacht tags niet prominent in huidige log-structure; moet via Trengo-tickets en snapshot gaan.
-- actieve-tickets.json is ALLe tickets, niet gefilterd op service/klacht.
-- reviews-sync werkt niet (geen API-key in secrets).
+- Deze 3 tickets waren NIET servicetickets (offertes/normale flow). Agent-onderzoek (29-8) toont:
+  - 965923606: Offerteconversatie, verloren lead, kan administratief dicht.
+  - 971967749: Service-vraag maar extern bedrijf, correct aan Service Nodi gegeven.
+  - 972415418: Normale order-flow, niet een probleem.
+- Service/klacht tags moeten beter: AI-KS markeert correct, maar naming in Yara's dagrapport was verwarrend.
 
-## Bijscholing 2026-08-29
+## Bijscholing & leerpsunten 2026-08-29
 - Vakkennis.md geschreven: FCR-benchmarks (klachten ~48-61%, topbedrijven 80-85% algemeen), oorzaakcode-tracking,
   reviewreactie binnen 24-48u, geen coulance zonder ruggespraak.
-- Vanaf nu: oorzaakcode per melding labelen, >5 werkdagen "wacht op mens" apart als vraag aan Daimy, reviews
-  zonder tijdige reactie apart tonen in dagrapport.
+- Opdracht 3 servicetickets: agent-onderzoek toonde aan dat ALLE 3 eigenlijk afgerond waren. Fout was in de taakopstelling
+  (Yara's eerdere scan in 2026-08-29.md noemde ze "openstaand", maar ze waren al klaar).
+- **Aandachtspunt:** Onderscheid tussen "ticket in AI-KS-log" ≠ "openstaand serviceprobleem". Moet beter taggen.
 

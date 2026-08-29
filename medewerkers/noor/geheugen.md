@@ -2,7 +2,7 @@
 
 ## Lopende zaken
 - Sjoerd (inmeter) op vakantie t/m 11 sept 2026. Alleen Joey meet in. Capaciteitsrisico t.o.v. 25 orders/dag voorstel-tempo en teamplafond 35/week — ligt bij Daimy (29-08).
-- Prijs-kruiscontrole (Ruben) technisch kapot: live-site check faalt (ENOENT via npx). Risico prijsverschil site vs bot — gemeld aan Daimy 29-08.
+- Prijs-kruiscontrole (Ruben) technisch kapot: live-site check faalt (ENOENT via npx). Daimy antwoord 29-08 op V101: ja, prioriteit voor Techniek (Mats), MAAR huidige prijzen na laatste prijsverhoging niet aanpassen, fix moet die respecteren. Delegatie naar Ruben (niet zelf prijzen wijzigen) via brein-sessie.js geblokkeerd ("requires approval") — morgen opnieuw proberen. Techniek/Mats valt buiten mijn team, kan ik niet direct aansturen.
 - Werkbonnen stagnatie: 72 open, 0 afgerond op 29-08. Volgen of dit een trend is of eenmalig.
 - Wachtrij inmeten: 6 klanten 23-24 dagen zonder reactie (3x sinds 4 aug, 3x sinds 5 aug). Voorstel nabellen/verlopen ligt bij Daimy.
 - Gedelegeerd 29-08: Tess (Luuk Post nabellen offerte), Ruben (aanbetaling 6489/6556 morgen checken).

@@ -10,6 +10,9 @@
 - 2026-08-29: Luuk Post (offerte niet getekend, sinds 13-8) → opdracht gedelegeerd aan Milan om te bellen/mailen. Checken of gereageerd.
 - 2026-08-29: seo-agent-dag/-week nooit gedraaid → geen leads/CPL-inzicht. Gevraagd aan Daimy om te activeren.
 - 2026-08-29: reviews-sync mist API-key → geen reviewcijfers. Gevraagd aan Daimy om Techniek te laten regelen.
+  V102 BEANTWOORD: Daimy akkoord, Techniek bouwt API en reviews gaan gelijk live op de website.
+  Nog te doen: Jules informeren zodra live (reviewcijfers dan actief KPI), en reviewritme/week nog
+  steeds los navragen bij Daimy zodra dit loopt.
 - 2026-08-29: Google Ads data in data/ is verouderd (mei-juli). Jules gaat voorlopig door met wat er is.
 
 ## Leerpunten

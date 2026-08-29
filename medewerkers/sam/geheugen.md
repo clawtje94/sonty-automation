@@ -3,11 +3,11 @@
 ## Lopende zaaken
 
 ### Aanbetaling-blokkade (4 orders, 2026-08-29)
-- Gripp 6561 (Daimy TEST GRIP): geen aanbetalingsfactuur
-- Gripp 6560 (Daimy TEST GRIP): geen aanbetalingsfactuur
-- Gripp 6556 (Daimy TEST GRIP): aanbetaling niet betaald
-- Gripp 6489 (Martin Valentin): aanbetaling niet betaald
-→ Ruben monitort dit al via meetbon-doorzetten.log (herhaald elke uur)
+**STATUS AFGEREKEND (29-08):**
+- Gripp 6561/6560 (Daimy TEST GRIP): **TESTCASES** — geen aanbetalingsfactuur nodig (testdata).
+- Gripp 6556 (Daimy TEST GRIP): **TESTCASE** — aanbetaling niet betaald (verwacht voor testlead).
+- Gripp 6489 (Martin Valentin): **ECHTE KLANT** — aanbetaling niet betaald. Daimy-opdracht aan Ruben: morgen (30-8) bellen voor status.
+→ Ruben monitort 6489/6556 via meetbon-doorzetten.log (herhaald elke uur)
 
 ### Luuk Post in Gripp invullen (16 dagen)
 - Sinds 13 aug, 2 offerteversies niet getekend

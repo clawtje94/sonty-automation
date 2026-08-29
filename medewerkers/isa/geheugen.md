@@ -3,7 +3,7 @@
 ## Lopende zaken
 - 29-8: Yara opdracht gegeven: 3 servicetickets oppakken (971967749, 972415418, 965923606 - 26 dagen stil). Check morgen terugkoppeling.
 - 29-8: Sunny moet 5 stille klanten (>2u onbeantwoord) zelf afhandelen. Check morgen of gelukt.
-- 29-8: Reviews-sync mist API-key, feedback.log ontbreekt bij Yara. Vraag aan Daimy uitstaand.
+- 29-8: Reviews-sync mist API-key, feedback.log ontbreekt bij Yara. V102 beantwoord door Daimy: API mag gebouwd worden, reviews gelijk live op website. Nog navragen wie het bouwt en wanneer live; dan Yara's nazorg/reviews-proces eraan koppelen.
 - 29-8: dit was de eerste dag dat Sunny/Yara/ik dagrapporten schreven, dus geen week-vergelijking mogelijk. Vanaf 30-8 wel.
 
 ## Leerpunten

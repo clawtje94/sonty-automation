@@ -16,7 +16,13 @@
 - Waar zonder reactie >3 dagen: aan-zet watchdog log (klanten die op onze acties wachten).
 - Open aanbod: snapshot wachtrijen.
 
-## Next: Daimy volgen op Luuk Post-vraag, dan morgen routine herhalen.
+## Next: Conflict opgelost in rapport V1 (29-8 22:53). Wacht op Daimy: zelf bellen of via kantoor?
+
+## Incident 29-8-2026 22:53
+- Baas gaf ad-hoc opdracht: "bel of mail Luuk Post zelf"
+- Profiel zegt: "kantoor belt, jij maakt bellijst"
+- Rapport geschreven met vraag, niet voortgegaan met zelf bellen
+- Status: V1 ingediend, wacht op Daimy-antwoord
 
 ## Bijscholing 29-8-2026
 - Vakkennis ververst: /Users/clawdboot/sonty/medewerkers/milan/vakkennis.md (research: opvolgsnelheid, cadans 5-12 contacten, 48-uurs opvolgnorm, bezwaren wegnemen zonder korting).

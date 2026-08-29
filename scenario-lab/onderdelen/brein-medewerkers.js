@@ -4,7 +4,7 @@
 //  O2 "geen"/"niets"/"-" onder VRAGEN AAN DAIMY telt als 0 vragen; echte regels tellen elk als 1 (nummering/bullets weg).
 //  O3 Status: fout → 'fout'; vragen > 0 → 'wacht op Daimy'; anders 'klaar'.
 //  O4 Scheduler: een dienst draait pas als de diensttijd is verstreken, nog niet vandaag draaide en (weekend) alleen bij
-//     weekend: ja. Volgorde = diensttijd: medewerkers vóór hoofden vóór Bram.
+//     weekend: ja. Volgorde = diensttijd: medewerkers vóór hun hoofd, Bram ná alle hoofden (Ori mag na Bram).
 //  O5 Profiel: lijstvelden zijn arrays, model bekend, dienst HH:MM, ## Regels aanwezig; zonder frontmatter = zichtbare fout.
 //  O6 Piramide: hoofden/directie rapporteren aan daimy, medewerkers aan een hoofd, niemand aan zichzelf; alleen Bram
 //     mag Telegram sturen; niemand heeft muterende tools (launchctl kickstart/bootout, rm, git push).
@@ -92,7 +92,8 @@ function voerUitC(s) {
       const eigen = team.filter((m) => m.rapporteertAan === h.slug).map((m) => idx(m.slug));
       if (eigen.length && Math.max(...eigen) > idx(h.slug)) p.push(`${h.slug} draait vóór een eigen medewerker`);
     }
-    if (idx('bram') !== team.length - 1) p.push('Bram is niet de laatste');
+    const laatsteHoofd = Math.max(...team.filter((m) => m.niveau === 'hoofd').map((m) => idx(m.slug)));
+    if (idx('bram') < laatsteHoofd) p.push('Bram draait vóór een hoofd');
     return { problemen: p.join('; '), melding: false };
   }
   const m = alle.find((x) => x.slug === s.slug);

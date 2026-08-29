@@ -406,7 +406,9 @@ async function main() {
             const rA = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': MEET_CODE } });
             const aanbod = rA.ok ? await rA.json() : null;
             const keuze = aanbod ? leesKeuze(tekst, aanbod.slots || []) : null;
-            if (keuze !== null && aanbod.slots?.[keuze] && !sunnyTijden) {
+            const SSk = require('./lib/sunny-start.js');
+            const keuzeVoorSunny = info.bron === 'sunny' && SSk.sunnyLeeft() && (Date.now() - wanneer) / 60000 < 20; // Sunny krijgt 20 min op zijn eigen voorstel
+            if (keuze !== null && aanbod.slots?.[keuze] && !sunnyTijden && !keuzeVoorSunny) {
               const rK = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, {
                 method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
                 body: JSON.stringify({ status: 'gekozen', gekozenIndex: keuze }),
@@ -455,10 +457,18 @@ async function main() {
               if (process.env.INMEET_PLANNEN_LIVE) return process.env.INMEET_PLANNEN_LIVE === '1';
               try { return fs.existsSync(path.join(__dirname, 'ai-ks', '.inmeet-plannen-live')); } catch { return false; }
             })();
+            // Sunny is aan zet voor ander-moment/akkoord — maar EINDIG (29-08, Mickey: beide routes lieten het aan
+            // de ander): alleen zolang Sunny aantoonbaar draait en het bericht jonger is dan 20 min. Daarna
+            // handelt deze route het zelf af (herplan / keuze), zodat de klant nooit in stilte blijft staan.
             if (sunnyPlant && ['ander-moment', 'akkoord'].includes(duiding.intent)) {
-              delete gemeld[afgehandeldSleutel];   // Sunny is aan zet; verloopt dat, dan pakt de volgende run het op
-              console.log(`  ${info.naam}: ${duiding.intent} — Sunny doet de planning, deze route blijft eraf`);
-              continue;
+              const SSx = require('./lib/sunny-start.js');
+              const ouderdomMinX = (Date.now() - wanneer) / 60000;
+              if (SSx.sunnyLeeft() && ouderdomMinX < 20) {
+                delete gemeld[afgehandeldSleutel];   // Sunny is aan zet; blijft het liggen, dan pakt deze route het na 20 min op
+                console.log(`  ${info.naam}: ${duiding.intent} — Sunny doet de planning (${Math.round(ouderdomMinX)} min), deze route wacht`);
+                continue;
+              }
+              console.log(`  ${info.naam}: ${duiding.intent} — Sunny reageerde niet binnen 20 min (of draait niet), deze route handelt af`);
             }
             // SUNNY'S EIGEN VOORSTEL (Daimy 28-08): alles wat geen kale keuze is, is van Sunny —
             // zolang hij aantoonbaar draait en het bericht vers is (max 20 min). Daarna neemt

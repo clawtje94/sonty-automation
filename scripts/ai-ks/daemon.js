@@ -444,7 +444,12 @@ async function planningRolVoor(t, rows) {
     // een keuze uit Sunny's tijden, niet uit het oude planner-aanbod — Sunny handelt af.
     let eigenTijden = false;
     try { eigenTijden = require('../lib/gesprek-claims.js').sunnyNoemdeTijden(t.id); } catch { /* geen claims */ }
-    if (!eigenTijden && leesKeuze(tekst, slots.length ? slots : [{ aankomst: info.verstuurdOp }]) !== null) { blijfWeg = true; reden = 'keuze'; }
+    // Sunny's eigen voorstel (bron 'sunny', 29-08 Mickey-les): een keuze/akkoord op dát voorstel handelt Sunny
+    // zelf af (verifiëren met inmeet_tijden, boeken met inmeet_boeken) — de reply-route en Sunny lazen elkaars
+    // "ik laat het aan de ander" en de klant kreeg 2 uur niets. Alleen bij een Nanny/planner-voorstel blijft
+    // de klassieke keuze-route eigenaar.
+    const eigenVoorstel = plannenAan && info.bron === 'sunny';
+    if (!eigenTijden && !eigenVoorstel && leesKeuze(tekst, slots.length ? slots : [{ aankomst: info.verstuurdOp }]) !== null) { blijfWeg = true; reden = 'keuze'; }
     else {
       const { leesReactie } = require('../lib/planning-antwoord.js');
       const d = await leesReactie(tekst, slots);
@@ -454,7 +459,7 @@ async function planningRolVoor(t, rows) {
       // en Sunny gaf het stokje terug aan de klassieke route — die Sunny's tijden
       // helemaal niet kent. Klant kreeg 8+ minuten niets.
       let sunnyClaim = false;
-      try { sunnyClaim = require('../lib/gesprek-claims.js').geclaimd(t.id, 45) || eigenTijden; } catch { /* geen claim */ }
+      try { sunnyClaim = require('../lib/gesprek-claims.js').geclaimd(t.id, 45) || eigenTijden || eigenVoorstel; } catch { /* geen claim */ }
       // Sunny's EIGEN voorstel (bron 'sunny', Daimy 28-08): het vervolg is altijd van hem, ook na 45 min.
       if (info.bron === 'sunny') sunnyClaim = true;
       if (plannenAan && (['ander-moment', 'annuleren'].includes(d.intent) || (sunnyClaim && ['akkoord', 'ander-moment', 'vraag', 'annuleren'].includes(d.intent)))) {

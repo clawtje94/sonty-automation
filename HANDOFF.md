@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (nacht): DAIMY STUURT VIA HET BREIN — V1/V5/V8/V9 beantwoord op mijn kaart, inline invoer, Ja/Nee, live
+- Daimy antwoordde via mijn Brein-kaart (inbox-claude → Monitor → deze sessie): V1 ja (FileVault/auto-login: stappen voor hem op de kaart,
+  ik controleer na "V1 gedaan"), V5 ja (kolom T backfill: scripts/akkoord-datum-backfill.js, dry-run 88 rijen kolom T; ronde 1 ~30 geschreven,
+  ronde 2 met tempo loopt), V8 1 week zo laten en meten, V9 herzien: schaduw UIT, team draait live; alle echte aanpassingen blijven
+  voorstellen; goedkeuren = Ja/Nee-knop bij elke beslissing (stuurt "V<n>: ja/nee" als opdracht).
+- Team-tab: op elke kaart inline "opdracht geven" (tekstvak + Cmd+Enter), laatste opdracht+antwoord onder de kaart; Postvak-tab niet meer nodig.
+- Kai (AI-innovatie & R&D, onder Mats, 07:40) toegevoegd; Mats 07:50. Eerste Kai-bevindingen: Trengo webhooks i.p.v. polling (429's),
+  EU AI Act art. 50 disclosure bij Sunny (nog te verifiëren).
+
 ## 30-08 (nacht): BIJSCHOLING — "altijd voorop lopen, de besten zijn in hun vak" (Daimy)
 - `medewerker.js bijscholing <slug>` / `bijscholingen` (launchd nl.sonty.medewerkers-bijscholing, ma 05:30, wie >6 dagen geleden):
   sonnet + WebSearch/WebFetch, schrijft `medewerkers/<slug>/vakkennis.md` in vaste vorm (werkregels, routine, KPI-normen, valkuilen,

@@ -44,7 +44,12 @@ async function zoekInmeetTijden({ itemId, dagen = [], dagdeel = null, vanaf = nu
     .filter((n) => !lead.engels || n === 'Sjoerd');
 
   let beste = [];
-  for (const horizonDagen of [undefined, 30]) {
+  // HORIZON UITBREIDEN ZOLANG DE VOORKEUR NIET GEHAALD IS (Daimy 29-08, Christian Keus: "kan het op een
+  // maandag?" → genoeg di/do-opties in de eerste horizon, dus er werd nooit verder gekeken en Sunny zei
+  // "geen enkele maandag vrij" terwijl die er verderop wél waren). Met een dag/dagdeel/vanaf-voorkeur telt
+  // alleen het PASSENDE aantal; en dan kijken we tot ~3 maanden vooruit.
+  const heeftVoorkeur = !!((dagen && dagen.length) || dagdeel || vanaf);
+  for (const horizonDagen of (heeftVoorkeur ? [undefined, 30, 60] : [undefined, 30])) {
     for (const naam of inmeters) {
       const sl = await zoekSlots({
         agenda: agenda[naam] || [], adres: lead.volledigAdres, duurMin: duur,
@@ -54,7 +59,10 @@ async function zoekInmeetTijden({ itemId, dagen = [], dagdeel = null, vanaf = nu
       }).catch(() => []);
       beste.push(...sl.map((x) => ({ ...x, inmeter: naam })));
     }
-    if (kiesWinkelOpties(beste, max).length >= max) break; // genoeg opties, niet verder kijken
+    const genoeg = heeftVoorkeur
+      ? kiesWinkelOpties(pasBijVoorkeur(beste, { dagen, dagdeel, vanaf }), max).length >= Math.min(max, 3)
+      : kiesWinkelOpties(beste, max).length >= max;
+    if (genoeg) break; // genoeg (passende) opties, niet verder kijken
   }
   // ontdubbelen (zelfde inmeter + tijd uit de twee horizon-rondes)
   const gezien = new Set();
@@ -67,6 +75,7 @@ async function zoekInmeetTijden({ itemId, dagen = [], dagdeel = null, vanaf = nu
   // voorkeur van de klant: "vanaf" is hard, dagen/dagdeel zacht (zelfde regels als de planner)
   const passend = pasBijVoorkeur(beste, { dagen, dagdeel, vanaf });
   if (vanaf && !passend.length) return { slots: [], duurMin: duur, naam: lead.naam };
+  const voorkeurGehonoreerd = !heeftVoorkeur || passend.length > 0;
   beste = passend.length ? passend : beste;
   beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
 
@@ -75,7 +84,8 @@ async function zoekInmeetTijden({ itemId, dagen = [], dagdeel = null, vanaf = nu
     weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam',
   });
   return {
-    naam: lead.naam, duurMin: duur,
+    naam: lead.naam, duurMin: duur, voorkeurGehonoreerd,
+    opmerkingVoorkeur: voorkeurGehonoreerd ? null : 'Geen enkele plek gevonden die aan de voorkeur van de klant voldoet (tot ~3 maanden vooruit gekeken); onderstaande tijden zijn de dichtstbijzijnde alternatieven. Zeg dat eerlijk.',
     slots: keuze.map((s) => ({
       tekst: `${fmt(s)} (inmeter ${s.inmeter}, thuisblijfvenster ${venster(s)})`,
       aankomst: (s.aankomst instanceof Date ? s.aankomst : new Date(s.aankomst)).toISOString(),

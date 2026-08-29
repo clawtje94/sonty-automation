@@ -72,13 +72,17 @@ function draai(prof, opdracht, { soort = 'dienst', opdrachtId = null } = {}) {
     '\n# BEDRIJFSHANDVEST (dit bedrijf)\n' + lees(path.join(MAP, 'BEDRIJF.md')),
     '\n# JOUW PROFIEL\n' + prof.tekst,
     '\n# JOUW GEHEUGEN (door jou bijgehouden, pad: ' + geheugenPad + ')\n' + (lees(geheugenPad) || '(nog leeg)'),
+    // coaching-lus: Ori (kwaliteit) schrijft per medewerker feedback; die krijgt de medewerker elke dienst mee
+    ...(lees(path.join(MAP, 'ori', 'feedback', `${prof.slug}.md`)) ? ['\n# FEEDBACK VAN ORI (kwaliteit) — pas dit toe\n' + lees(path.join(MAP, 'ori', 'feedback', `${prof.slug}.md`)).slice(0, 2500)] : []),
     `\n# OPLEVERING\nSchrijf je rapport ALS BESTAND naar ${rapportPad} met precies de kopjes ## GEDAAN, ## CIJFERS, ## VRAGEN AAN DAIMY, ## MORGEN (in die volgorde) en werk ${geheugenPad} bij. Je laatste tekstantwoord is een kopie van dat rapport. Kort, telefoon-leesbaar, geen gedachtestreepjes.`,
   ].join('\n');
   // M1 (Mats-audit 29-08): schrijven/bewerken ALLEEN in de eigen medewerkersmap; lezen mag overal (Read zonder pad).
   const eigenMap = `//Users/clawdboot/sonty/medewerkers/${prof.slug}/**`;
   const tools = ['Read', `Write(${eigenMap})`, `Edit(${eigenMap})`, 'Grep', 'Glob', ...prof.tools];
   // markering zodat het Brein deze run niet als 'Claude-terminal' telt (collector slaat '[medewerker:…]'-transcripten over)
-  const args = ['-p', `[medewerker:${prof.slug}] ${opdracht}`, '--model', prof.model, '--system-prompt', systeem, '--allowedTools', ...tools, '--permission-mode', 'default', '--output-format', 'json'];
+  // '--setting-sources project': de gebruikersinstellingen van Daimy (bypassPermissions, Edit(*)) gelden NIET voor
+  // medewerkers; alleen de whitelist hieronder. Bewezen 29-08: eigen map schrijfbaar, BEDRIJF.md geweigerd.
+  const args = ['-p', `[medewerker:${prof.slug}] ${opdracht}`, '--model', prof.model, '--setting-sources', 'project', '--system-prompt', systeem, '--allowedTools', ...tools, '--permission-mode', 'default', '--output-format', 'json'];
   const t0 = Date.now();
   const s = stand(); s[prof.slug] = { ...(s[prof.slug] || {}), naam: prof.naam, status: soort === 'dienst' ? 'in dienst' : 'aan een opdracht', bezigSinds: new Date().toISOString(), bezigMet: opdracht.slice(0, 160) }; bewaarStand(s);
   B.gebeurtenis(prof.naam, `${soort === 'dienst' ? 'begint dienst' : 'pakt opdracht op'}: ${opdracht.slice(0, 100)}`);

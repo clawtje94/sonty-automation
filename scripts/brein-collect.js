@@ -254,7 +254,7 @@ function startWerknemer(o) {
   const logPad = path.join(B.DIR, `werk-${o.id}.log`);
   const prompt = `Je bent een nieuwe werknemer in het Sonty-bedrijf op deze Mac mini. Meld je eerst aan: node ~/sonty/scripts/brein-sessie.js meld "${naam}" "<korte taakomschrijving>". Voer daarna deze opdracht van ${o.van} uit:\n\n${o.tekst}\n\nRond af met: node ~/sonty/scripts/brein-sessie.js antwoord ${o.id} "<wat je gedaan hebt, kort>" en daarna node ~/sonty/scripts/brein-sessie.js klaar "${naam}". Lees ~/sonty/HANDOFF.md en de memory-regels; werk token-zuinig; stuur GEEN Telegram-berichten behalve als de opdracht dat vraagt.`;
   const uit = fs.openSync(logPad, 'a');
-  const kind = spawn('/opt/homebrew/bin/claude', ['-p', prompt, '--permission-mode', 'acceptEdits'], { cwd: SONTY, detached: true, stdio: ['ignore', uit, uit], env: { ...process.env, PATH: '/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin' } });
+  const kind = spawn('/opt/homebrew/bin/claude', ['-p', prompt, '--setting-sources', 'project', '--permission-mode', 'acceptEdits'], { cwd: SONTY, detached: true, stdio: ['ignore', uit, uit], env: { ...process.env, PATH: '/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin' } });
   kind.unref();
   B.meld(naam, { taak: o.tekst.slice(0, 140), status: 'gestart', rol: 'werknemer (claude -p)', pid: kind.pid });
   B.markeer(o.id, 'gestart', `gestart als ${naam} (pid ${kind.pid}), log data/brein/werk-${o.id}.log`);

@@ -78,7 +78,9 @@ function jobs() {
       const lc = launchctlPrint(pl.label);
       const st = pl.log ? logStaart(pl.log) : { mtime: null, regels: [] };
       const draait = !!lc.pid;
-      const laatst = st.mtime;
+      // laatste levensteken = log-wijziging of hartslagbestand (jobs die stil zijn als er niets te doen is)
+      let hart = null; try { hart = fs.statSync(path.join(B.DIR, 'hartslag', pl.label.replace('nl.sonty.', ''))).mtimeMs; } catch { /* geen hartslag */ }
+      const laatst = Math.max(st.mtime || 0, hart || 0) || null;
       let alarm = null;
       const exitSlecht = lc.exit && lc.exit !== '0' && lc.exit !== '(never exited)';
       if (lc.state === 'niet geladen') alarm = 'niet geladen in launchd (plist staat er wel)';

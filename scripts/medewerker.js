@@ -114,6 +114,8 @@ if (require.main === module) (async () => {
     console.log(r.fout ? 'FOUT: ' + r.fout : r.tekst.slice(0, 1500));
     process.exit(r.fout ? 1 : 0);
   } else if (cmd === 'diensten') {
+    // hartslag voor het Brein: de scheduler leeft ook als er niemand aan de beurt is (log blijft dan leeg)
+    try { const h = path.join(B.DIR, 'hartslag'); fs.mkdirSync(h, { recursive: true }); fs.writeFileSync(path.join(h, 'medewerkers-dienst'), new Date().toISOString()); } catch { /* best effort */ }
     // alleen wie nu aan de beurt is: dienst-tijd (HH:MM) is verstreken en vandaag nog niet gedraaid
     const nu = new Date(); const nuMin = nu.getHours() * 60 + nu.getMinutes(); const s = stand();
     // volgorde = diensttijd: medewerkers eerst, dan de hoofden (07:45), dan Bram (08:00)

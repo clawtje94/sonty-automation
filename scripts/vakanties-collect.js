@@ -251,4 +251,5 @@ async function main() {
   if (!r.ok) process.exitCode = 1;
 }
 
-main().catch((e) => { console.error('vakanties-collect fout:', e.message); process.exitCode = 1; });
+module.exports = { verwerk, samenvoegen, nl, dagPlus, werkdagen };
+if (require.main === module) main().catch((e) => { console.error('vakanties-collect fout:', e.message); process.exitCode = 1; });

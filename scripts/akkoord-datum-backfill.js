@@ -17,7 +17,9 @@ const max = schrijf && /^\d+$/.test(process.argv[process.argv.indexOf('--schrijf
   const ids = Object.entries(state.gezien || {}).filter(([, d]) => d < '2026-08-29T00:00:00').sort((a, b) => a[1].localeCompare(b[1]));
   const telling = { geschreven: 0, zouSchrijven: 0, alGevuld: 0, geenKolom: 0, nietGevonden: 0, rpFout: 0 };
   let n = 0;
+  const pauze = +(process.env.PAUZE_MS || 1500); // tempo tegen het Google-leeslimiet (60 reads/min per gebruiker)
   for (const [id, gezien] of ids) {
+    await new Promise((r) => setTimeout(r, pauze));
     let item, lead;
     try { item = await P.rpGet(`/contact-service/${P.PID}/backlogs/${P.BACKLOG_ID}/items/${id}`).then((d) => d.item || d); lead = await P.leesLeadCompleet(item); }
     catch (e) { telling.rpFout++; console.log(`RP-FOUT ${id.slice(0, 8)} ${gezien.slice(0, 10)}: ${e.message.slice(0, 60)}`); continue; }

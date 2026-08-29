@@ -1050,7 +1050,9 @@ async function verwerkTicket(t, state) {
   // Sunny het gesprek gewoon verder kan voeren als de klant reageert.
   if ((!res.antwoord || !String(res.antwoord).trim()) && Array.isArray(res.acties) && res.acties.some((a) => a.type === 'escalatie')) {
     let en = false; try { en = require('../lib/taal-voorkeur.js').isEngels(t.contact?.phone, t.contact?.email); } catch { /* nl */ }
-    const vn = String(t.contact?.full_name || '').trim().split(' ')[0];
+    // voornaam alleen als er echt een voor- én achternaam staat (WhatsApp-profielnaam "Boot" → geen "Dank je, Boot!")
+    const delen = String(t.contact?.full_name || '').trim().split(/\s+/).filter(Boolean);
+    const vn = delen.length >= 2 && /^[A-Za-zÀ-ÿ'-]{2,}$/.test(delen[0]) ? delen[0] : '';
     res.antwoord = en
       ? `Thanks for your message${vn ? ', ' + vn : ''}! I've passed it on to my colleague, who will get back to you personally. If you tell me what you're still unsure about, I can probably already help you right now.`
       : `Dank je voor je bericht${vn ? ', ' + vn : ''}! Ik heb het doorgezet naar mijn collega, die neemt persoonlijk contact met je op. Vertel je me alvast waar je nog over twijfelt? Dan kan ik je waarschijnlijk nu al verder helpen.`;

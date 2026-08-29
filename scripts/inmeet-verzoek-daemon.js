@@ -59,8 +59,10 @@ async function detecteerNieuweKlanten() {
   try { gezien = JSON.parse(fs.readFileSync(GEZIEN_PAD, 'utf8')); } catch { gezien = null; }
   const items = await haalInmeetItems();
   if (gezien === null) {
-    // eerste keer: alles wat er nu staat is "bekend" (die krijgen tijden via de gewone ronde)
-    fs.writeFileSync(GEZIEN_PAD, JSON.stringify(items.map((i) => i.id)));
+    // eerste keer: alleen wat NU op "Inmeten inplannen" staat is "bekend" (die krijgen tijden via
+    // de gewone ronde). Andere statussen niet opslaan: een kaart die later naar deze status
+    // schuift moet dan wél als nieuw gelden.
+    fs.writeFileSync(GEZIEN_PAD, JSON.stringify(nieuweItems(items, [], INMETEN_INPLANNEN).map((i) => i.id)));
     return false;
   }
   const nieuw = nieuweItems(items, gezien, INMETEN_INPLANNEN);
@@ -103,9 +105,10 @@ async function verwerkReken(m) {
     let nummersPerItem = {};
     let grippKlant = null;
     if (term.soort === 'offerte') {
-      // RP-offertenummers per kaart (leesOfferte cachet 6 uur per lead, dus RP-zuinig)
+      // RP-offertenummers ALLEEN van de kaarten op "Inmeten inplannen" (4-10 stuks; leesOfferte
+      // cachet 6 uur per lead). Niet over de hele RP-pagina: dat waren 1000 kaarten = minuten (29-08).
       const { leesOfferte } = require('./inmeten-planner-lees.js');
-      for (const i of items) {
+      for (const i of nieuweItems(items, [], INMETEN_INPLANNEN)) {
         try { nummersPerItem[i.id] = (await leesOfferte(i)).nummers || []; } catch { nummersPerItem[i.id] = []; }
       }
     } else if (term.soort === 'gripp') {

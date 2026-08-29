@@ -1,5 +1,26 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 29-08 (middag): WINKEL-DIRECT — inmeetafspraak op offertenummer, nieuwe klanten automatisch (sonty 12bfc67+, website f77ca34)
+- Daimy: "we zitten in de showroom te wachten tot we een moment krijgen aangeboden" → "in het inmeet-dashboard een
+  winkelafspraak gelijk kunnen inplannen, op offertenummer". Oorzaak gemeten: 30-min-ronde + ververs = volledige ronde
+  (2-4 min) + daemon zakte na 5 min rust naar 60 s + dashboard ververst elke 60 s.
+- GEBOUWD (sonty): scripts/lib/winkel-direct.js (puur): zoekTerm (RP-offerte 20…/9 cijfers, Gripp 3-5 cijfers, naam),
+  matchItems (0 of 2+ treffers = afwijzen mét reden, nooit stil de eerste), isWinkeluur (ma-za 08:30-18:00), nieuweItems.
+  inmeet-verzoek-daemon.js: reken op offerte/naam/rpItemId; leesOfferte ALLEEN over de kaarten op "Inmeten inplannen"
+  (eerste versie liep over de hele RP-pagina van 1000 kaarten = minuten, gezien en gefixt); agenda-cache 5 min (kopie,
+  leeg na boek/verzet/annuleer); in winkeluren elke 60 s 1 RP-pagina → nieuwe kaart op de status direct doorrekenen
+  (bron 'auto', gezien-bestand data/inmeet-daemon-gezien.json, alleen ids op de status); polling 10 s in winkeluren,
+  daarbuiten adaptief zoals 08-08. Kaart krijgt offertes (RP-nummers) mee. Planner exporteert grippCall.
+- GEBOUWD (website): mutatie 'reken' accepteert offerte/naam/rpItemId; GET ?id= (1 KV-read) om één verzoek te volgen;
+  dashboard-vak "Tijden nu": offertenummer of naam, 5 s-pollen met teller, afwijsreden op het scherm; offertenummer
+  oranje op de kaart. Script scripts/inmeet-dashboard-visueel.mjs (iPhone 12, 0 overflow).
+- LAB: scenario-lab onderdeel winkel-direct 288 scenario's 0x FOUT-STIL.
+- LIVE GEMETEN: naam "Westerneng" → 6 s afgewezen met reden (net geboekt, klopt); offerte 202611175 (Scholten) →
+  kaart met 5 tijden + "offerte 202611175"; offerte 202611008 (anoek) met warme daemon: 10 s van klik tot 5 tijden;
+  202612222 (Kalra) terecht afgewezen (geboekt).
+- OPEN: kop "Inmeet-dashboard" is wit-op-wit in het lichte admin-thema (AdminTheme.tsx, andere sessie 29-08) — niet
+  aangeraakt, gemeld. Sunny's 60-min-wacht en de 30-min-ronde ongewijzigd.
+
 ## 29-08 (middag): MICKEY KALRA — akkoord bleef 2 uur liggen (split-brain Sunny ↔ reply-route), gefixt
 - Daimy: "check dit gesprek +31618600992". Feiten: Engelstalige klant, Sunny-voorstel 09:00 (EN, do 1 okt 12:50 Sjoerd);
   10:10 "1 October is ok no problem / bit earlier would be great"; Sunny: blijfWeg 'keuze' (planner-route doet het);

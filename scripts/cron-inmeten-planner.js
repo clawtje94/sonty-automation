@@ -2157,7 +2157,7 @@ async function verwerkVerzoek(m) {
   return { afgewezen: false, uitkomst: res.gelukt ? 'alle systemen bijgewerkt' : 'deels: ' + res.stappen.filter((x) => !x.ok).map((x) => x.stap).join(',') };
 }
 
-module.exports = { grippCall, verwerkVerzoek, ontdubbelSlots, verversRonde: main, maakEnVerstuurAanbod, haalAgenda, leesLeadCompleet, werkdagenVoor, laadVakanties, voegAanbiedingenToe, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram, reminderNu, reminderTekst };
+module.exports = { rpGet, PID, BACKLOG_ID, grippCall, verwerkVerzoek, ontdubbelSlots, verversRonde: main, maakEnVerstuurAanbod, haalAgenda, leesLeadCompleet, werkdagenVoor, laadVakanties, voegAanbiedingenToe, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram, reminderNu, reminderTekst };
 
 if (require.main === module) {
   if (process.argv.includes('--verwerk-aanbod')) {

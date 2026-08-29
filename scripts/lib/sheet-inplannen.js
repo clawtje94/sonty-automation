@@ -161,13 +161,19 @@ async function schrijfInplanning({ rpNummers = [], grippNr, naam, telefoon, inme
  *  weten hoelang het duurde en of winkelmensen uiteindelijk toch nog akkoord gingen").
  *  Vult de "Akkoord → Datum"-kolom van de bestaande offerterij (gevonden op RP-nummer / telefoon /
  *  Gripp-nummer), alleen als die cel leeg is; maakt nooit een nieuwe rij. Datum als d-m-jj (sheet-stijl). */
-async function schrijfAkkoordDatum({ rpNummers = [], grippNr, telefoon, datum = new Date(), docDatums = [] }) {
+const akkoordTabCache = new Map();
+async function schrijfAkkoordDatum({ rpNummers = [], grippNr, telefoon, datum = new Date(), docDatums = [], dryRun = false }) {
   const sheets = await sheetsClient();
   const titels = await tabsInZoekvolgorde(sheets, docDatums);
   let plek = null, tabData = null;
   for (const titel of titels) {
-    const res = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: `'${titel}'!A1:AH6000` });
-    const tab = { titel, rijen: res.data.values || [] };
+    // tab-cache (90 s) tegen het Google-leeslimiet bij bulk-runs; na een schrijfactie wordt de tab ververst
+    const nuMs = Date.now();
+    let tab = akkoordTabCache.get(titel);
+    if (!tab || nuMs - tab.op > 90000) {
+      const res = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: `'${titel}'!A1:AH6000` });
+      tab = { titel, rijen: res.data.values || [], op: nuMs }; akkoordTabCache.set(titel, tab);
+    }
     plek = vindRijEnKolommen([tab], { rpNummers, grippNr, telefoon });
     if (plek) { tabData = tab; break; }
   }
@@ -178,7 +184,9 @@ async function schrijfAkkoordDatum({ rpNummers = [], grippNr, telefoon, datum = 
   const d = new Date(datum);
   const tekst = `${d.getDate()}-${d.getMonth() + 1}-${String(d.getFullYear()).slice(-2)}`;
   const cel = `'${plek.tab}'!${kolomLetter(plek.kol.akkoordDatum)}${plek.rijIndex + 1}`;
+  if (dryRun) return { gevonden: true, zouSchrijven: tekst, tab: plek.tab, rij: plek.rijIndex + 1, cel, kolomKop: kolomLetter(plek.kol.akkoordDatum) };
   await sheets.spreadsheets.values.update({ spreadsheetId: SHEET_ID, range: cel, valueInputOption: 'USER_ENTERED', requestBody: { values: [[tekst]] } });
+  try { (tabData.rijen[plek.rijIndex] = tabData.rijen[plek.rijIndex] || [])[plek.kol.akkoordDatum] = tekst; } catch { /* cache-bijwerking is best effort */ }
   return { gevonden: true, geschreven: tekst, tab: plek.tab, rij: plek.rijIndex + 1, cel };
 }
 

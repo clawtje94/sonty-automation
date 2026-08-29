@@ -1,11 +1,17 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
-## 29-08 (avond): SEO-ONDERZOEK (website: content/seo-onderzoek-2026-08.md, artifact voor Daimy)
+## 29-08 (avond): SEO-ONDERZOEK NIEUWE SITE (website: content/seo-onderzoek-2026-08.md, artifact voor Daimy)
+- CORRECTIE Daimy: het gaat om de vercel-site, niet sonty.nl; en NOOIT namen van andere zonweringbedrijven noemen (memory
+  feedback_geen_concurrentnamen; april-rapport en dit rapport geanonimiseerd). Audit nieuwe site (103 URL's): meta/canonical/
+  H1/alt/JSON-LD overal goed; RISICO: 15 stadspagina's delen 71-74% van hun tekst (scaled content/doorway-patroon), dienst-
+  pagina's 53%, 3 stadsblogs kannibaliseren; 24 titels >65, 30 meta's >160, 2 dubbele titels, 8 pagina's zonder JSON-LD,
+  2,4-3,1 MB per pagina. Blogs (44, gem. 1.202 woorden, auteur/datum/Article) zijn goed. Ads: alleen maanduitgaven lokaal,
+  geen zoektermenrapport; Daimy mailt iets naar proton (daar kan ik niet bij; Gmail of ~/sonty/data wel).
 - Daimy (/goal): "zo veel mogelijk onderzoek hoe SEO werkt, zoekwoorden voor Sonty, wat we het best kunnen doen".
 - GEMETEN 29-08: live sonty.nl (Webflow) heeft op ALLE stadspagina's de titel "Rijswijk | Kwaliteitstuinen, geleverd
   met een glimlach" (tuinbedrijf-template), geen meta description, geen canonical, 0 JSON-LD, sitemap met template-rommel;
-  Sonty staat NIET in de top voor "zonwering rijswijk" en "zonwering den haag" (Eyelux, JS, REM, Marino, Zwamon, Van Rijn,
-  Trustoo wel). Trustpilot 4,2 (6 reviews, nodigt niet uit). Nieuwe site (vercel): 103 URL's, titels + JSON-LD goed,
+  Sonty staat NIET in de top voor "zonwering rijswijk" en "zonwering den haag" (regionale specialisten en
+  bedrijvengidsen wel; REGEL Daimy 29-08: namen van andere zonweringbedrijven nooit noemen). Trustpilot 4,2 (6 reviews, nodigt niet uit). Nieuwe site (vercel): 103 URL's, titels + JSON-LD goed,
   niet geïndexeerd, wel index,follow (dubbel-content-risico tot domeinswitch); 3,1 MB per pagina door foto's 220-367 KB.
   Marktdata Marktmonitor 31-03-2026: 106.030 zoekopdrachten/mnd, zonnescherm ~100k, rolluik ~96k, screens 18% (groei).
   Google-autocomplete NL: prijsvragen per breedte ("wat kost een knikarmscherm van 5 meter breed"), vergelijk ("screens

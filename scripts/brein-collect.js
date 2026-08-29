@@ -116,12 +116,13 @@ function transcriptSessies() {
     for (const f of files) {
       const p = path.join(root, map, f); let st; try { st = fs.statSync(p); } catch { continue; }
       if (NU - st.mtimeMs > 3 * 3600000) continue;
-      let eerste = '', laatsteRol = null, cwd = null;
+      let eerste = '', laatsteRol = null, cwd = null, medewerkerRun = false;
       try {
         const kop = fs.readFileSync(p, { encoding: 'utf8', flag: 'r' }).slice(0, 200000).split('\n');
         for (const regel of kop) {
           if (!regel) continue; let r; try { r = JSON.parse(regel); } catch { continue; }
           if (!cwd && r.cwd) cwd = r.cwd;
+          if (r.type === 'user' && r.message && (typeof r.message.content === 'string' ? r.message.content : (Array.isArray(r.message.content) && r.message.content.find((c) => c.type === 'text') || {}).text || '').startsWith('[medewerker:')) { medewerkerRun = true; break; }
           if (!eerste && r.type === 'user' && r.message && typeof r.message.content === 'string' && !r.message.content.startsWith('<') && !/^(A session-scoped|Stop hook|Caveat:|This session is being continued)/.test(r.message.content)) eerste = r.message.content.slice(0, 140);
           if (!eerste && r.type === 'user' && r.message && Array.isArray(r.message.content)) { const t = r.message.content.find((c) => c.type === 'text'); if (t && !t.text.startsWith('<') && !/^(A session-scoped|Stop hook|Caveat:|This session is being continued)/.test(t.text)) eerste = t.text.slice(0, 140); }
           if (eerste && cwd) break;
@@ -129,6 +130,7 @@ function transcriptSessies() {
         const staart = logStaart(p, 2).regels;
         for (const regel of staart) { try { const r = JSON.parse(regel); if (r.type === 'user' || r.type === 'assistant') laatsteRol = r.type; } catch { /* half geschreven regel */ } }
       } catch { /* transcript onleesbaar */ }
+      if (medewerkerRun || /^(Doe je (dagelijkse )?dienst|PROEF:)/.test(eerste)) continue; // dienst/opdracht van een medewerker-agent, geen terminal
       uit.push({ sessionId: f.replace('.jsonl', ''), map: map.replace(/^-Users-clawdboot-?/, '~/'), cwd: cwd ? cwd.replace(HOME, '~') : null, eerste, laatst: new Date(st.mtimeMs).toISOString(), wachtOpMens: laatsteRol === 'assistant' && NU - st.mtimeMs > 90000 });
     }
   }

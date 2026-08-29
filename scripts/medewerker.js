@@ -74,7 +74,8 @@ function draai(prof, opdracht, { soort = 'dienst', opdrachtId = null } = {}) {
     `\n# OPLEVERING\nSchrijf je rapport ALS BESTAND naar ${rapportPad} met precies de kopjes ## GEDAAN, ## CIJFERS, ## VRAGEN AAN DAIMY, ## MORGEN (in die volgorde) en werk ${geheugenPad} bij. Je laatste tekstantwoord is een kopie van dat rapport. Kort, telefoon-leesbaar, geen gedachtestreepjes.`,
   ].join('\n');
   const tools = ['Read', 'Write', 'Edit', 'Grep', 'Glob', ...prof.tools];
-  const args = ['-p', opdracht, '--model', prof.model, '--system-prompt', systeem, '--allowedTools', ...tools, '--permission-mode', 'default', '--output-format', 'json'];
+  // markering zodat het Brein deze run niet als 'Claude-terminal' telt (collector slaat '[medewerker:…]'-transcripten over)
+  const args = ['-p', `[medewerker:${prof.slug}] ${opdracht}`, '--model', prof.model, '--system-prompt', systeem, '--allowedTools', ...tools, '--permission-mode', 'default', '--output-format', 'json'];
   const t0 = Date.now();
   const s = stand(); s[prof.slug] = { ...(s[prof.slug] || {}), naam: prof.naam, status: soort === 'dienst' ? 'in dienst' : 'aan een opdracht', bezigSinds: new Date().toISOString(), bezigMet: opdracht.slice(0, 160) }; bewaarStand(s);
   B.gebeurtenis(prof.naam, `${soort === 'dienst' ? 'begint dienst' : 'pakt opdracht op'}: ${opdracht.slice(0, 100)}`);

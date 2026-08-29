@@ -3056,3 +3056,15 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
   (cosmetisch), breadcrumb auto-scroll op mobiel (bewust: actieve stap in beeld). Live hermeten: tabs 4/4,
   banner static, fab none (mobiel), teksten aanwezig; screenshots scratchpad/flow2. Let op: `tsc` meldt 2
   fouten buiten de configurator (bestaand, build slaagt).
+- 29-08 (avond, laat) Daimy: "en de kosten voor een uitbouw? en de lange tekst bij afstandsbediening inbegrepen…
+  valt je niet op?" → volledige tekstpas over alle vragen/keuzes/uitleg (dump uit productdata + keuzehulp):
+  (1) uitbouw-vraag (knikarm, +€50) had geen uitleg → optieUitleg(): "Komt het scherm op een uitbouw of aanbouw?
+  Dan rekenen we €50 extra montage (€325 i.p.v. €275)"; (2) ROMA-bedieningsknop was een zin ("Somfy io motor
+  met ingeleerde afstandsbediening (inbegrepen in de prijs)") → toonKeuze(): weergavenaam "Motor +
+  afstandsbediening (standaard)" / "Solar + afstandsbediening (Somfy|Brel)", ook in samenvatting en overzicht;
+  echte naam blijft de waarde (mapBediening); (3) bedieningUitleg 6 teksten van 3 zinnen → 1-2 korte zinnen,
+  beleid handbediening-ontmoedigen blijft; (4) extra's-teksten (TaHoma, windsensor, volant, LED, insectenrolhor)
+  ingekort in configurator-products-v2.json (36 plekken); (5) doekkleur-samenvatting "Kies je bij de inmeting
+  (200+ kleuren)"; (6) startmaat nu ook bij directBreedte/directHoogte (ROMA/horren/markiezen stonden leeg).
+  Live gemeten (deploys success): uitbouw-uitleg, ROMA-knoppen, korte uitleg, extra's-teksten, ROMA 2400×2400.
+  Lab 3.200 groen. Screenshots scratchpad/flow2/desk-suneye-uitbouw.png, desk-roma-bediening.png.

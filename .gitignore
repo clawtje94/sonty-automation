@@ -107,3 +107,9 @@ scripts/.tmp-*
 # WhatsApp-sessie van Sunny, nooit in git
 data/wa-auth/
 data/wa-groep-geschiedenis.jsonl
+
+# brein: lokale werkbestanden
+data/brein/*.json
+data/brein/*.jsonl
+data/brein/*.txt
+data/brein/*.log

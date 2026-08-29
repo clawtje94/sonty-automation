@@ -1,0 +1,110 @@
+{
+  "_uitleg": "Linkbronnen voor de SEO-agent. Alleen plekken waar Sonty inhoudelijk thuishoort; nooit betaalde links of linkruil (regel R2). Soorten: gemeentegids, branchegids, dealerpagina, partner, lokale-organisatie, pers, sponsoring, reviewplatform, kaart. Namen van andere zonweringbedrijven horen hier niet in.",
+  "bronnen": [
+    {
+      "id": "L1",
+      "naam": "Sunmaster dealerlocator",
+      "url": "https://www.sunmaster.nl/",
+      "soort": "dealerpagina",
+      "toelichting": "Sonty is Sunmaster premium dealer (footer site). Geen openbare dealerzoeker gevonden (29-08, dealer.sunmaster.nl is het dealerportaal); vermelding met link vragen via de Sunmaster-accountmanager."
+    },
+    {
+      "id": "L2",
+      "naam": "Somfy Expert / dealer zoeken",
+      "url": "https://www.somfy.nl/vind-een-dealer",
+      "soort": "dealerpagina",
+      "toelichting": "Somfy-motoren in elk elektrisch product; dealervermelding met link (URL gecheckt 29-08)."
+    },
+    {
+      "id": "L3",
+      "naam": "Unilux dealers",
+      "url": "https://www.unilux.nl/dealers",
+      "soort": "dealerpagina",
+      "toelichting": "Horren-leverancier; dealervermelding."
+    },
+    {
+      "id": "L4",
+      "naam": "ROMA dealer zoeken",
+      "url": "https://www.roma.de/haendlerfinden",
+      "soort": "dealerpagina",
+      "toelichting": "ROMA rolluiken en zipscreens; Händlerfinder op de Duitse hoofdsite (NL-site heeft geen eigen dealerzoeker, gecheckt 29-08)."
+    },
+    {
+      "id": "L5",
+      "naam": "Groot Den Haag bedrijvengids",
+      "url": "https://grootdenhaag.nl/bedrijven/zonwering/rijswijk/",
+      "soort": "branchegids",
+      "toelichting": "Sonty staat er al (gezien 29-08); controleren op link, adres en telefoon."
+    },
+    {
+      "id": "L6",
+      "naam": "Gemeente Rijswijk ondernemersloket / bedrijvenregister",
+      "url": "https://www.rijswijk.nl/ondernemen",
+      "soort": "gemeentegids",
+      "toelichting": "Lokale ondernemersvermelding; alleen als er een openbare lijst is."
+    },
+    {
+      "id": "L7",
+      "naam": "Plaspoelpolder (gemeente Rijswijk bedrijventerrein-pagina)",
+      "url": "https://www.plaspoelpolder.nl/",
+      "soort": "gemeentegids",
+      "toelichting": "Showroom staat in de Plaspoelpolder; ledenlijst/bedrijvenoverzicht met link (domein gecheckt 29-08, bbp-rijswijk.nl bestaat niet)."
+    },
+    {
+      "id": "L8",
+      "naam": "Telefoongids / Detelefoongids",
+      "url": "https://www.detelefoongids.nl/",
+      "soort": "branchegids",
+      "toelichting": "Consistente NAP-vermelding (naam, adres, telefoon)."
+    },
+    {
+      "id": "L9",
+      "naam": "Openingstijden.com",
+      "url": "https://www.openingstijden.com/",
+      "soort": "branchegids",
+      "toelichting": "NAP-vermelding met website-link."
+    },
+    {
+      "id": "L10",
+      "naam": "Cylex Nederland",
+      "url": "https://www.cylex.nl/",
+      "soort": "branchegids",
+      "toelichting": "NAP-vermelding; site blokkeert bots (403), handmatig aanmelden."
+    },
+    {
+      "id": "L11",
+      "naam": "Bing Places",
+      "url": "https://www.bingplaces.com/",
+      "soort": "kaart",
+      "toelichting": "Bedrijfsvermelding op Bing Maps (naast Google Bedrijfsprofiel)."
+    },
+    {
+      "id": "L12",
+      "naam": "Apple Business Connect",
+      "url": "https://businessconnect.apple.com/",
+      "soort": "kaart",
+      "toelichting": "Apple Kaarten-vermelding."
+    },
+    {
+      "id": "L13",
+      "naam": "Trustpilot Sonty",
+      "url": "https://nl.trustpilot.com/review/sonty.nl",
+      "soort": "reviewplatform",
+      "toelichting": "Bestaat; profiel claimen en klanten uitnodigen (nu 6 reviews)."
+    },
+    {
+      "id": "L14",
+      "naam": "Service Nodi (reparatiepartner)",
+      "url": "",
+      "soort": "partner",
+      "toelichting": "Wederzijdse vermelding: Sonty verwijst niet-Sonty-reparaties door; vraag om een link terug. URL nog invullen."
+    },
+    {
+      "id": "L15",
+      "naam": "Arte behang (dealer)",
+      "url": "https://www.arte-international.com/nl/dealers",
+      "soort": "dealerpagina",
+      "toelichting": "Sonty voert Arte-wandbekleding; dealervermelding."
+    }
+  ]
+}

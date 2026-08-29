@@ -1,0 +1,248 @@
+{
+ "live": false,
+ "techniek": {
+  "op": "2026-08-29T17:21:27.863Z",
+  "base": "https://sonty-website.vercel.app",
+  "paginas": 100,
+  "problemen": [
+   {
+    "pad": "/",
+    "probleem": "titel te lang (69)"
+   },
+   {
+    "pad": "/",
+    "probleem": "omschrijving te lang (183)"
+   },
+   {
+    "pad": "/over-ons",
+    "probleem": "titel te lang (69)"
+   },
+   {
+    "pad": "/over-ons",
+    "probleem": "omschrijving te lang (164)"
+   },
+   {
+    "pad": "/contact",
+    "probleem": "omschrijving te lang (176)"
+   },
+   {
+    "pad": "/showroom",
+    "probleem": "omschrijving te lang (169)"
+   },
+   {
+    "pad": "/assortiment",
+    "probleem": "omschrijving te lang (174)"
+   },
+   {
+    "pad": "/zakelijk",
+    "probleem": "titel te lang (80)"
+   },
+   {
+    "pad": "/zakelijk",
+    "probleem": "omschrijving te lang (187)"
+   },
+   {
+    "pad": "/reparatie",
+    "probleem": "omschrijving te lang (172)"
+   },
+   {
+    "pad": "/offerte-aanvragen",
+    "probleem": "titel te lang (67)"
+   },
+   {
+    "pad": "/visualisatie",
+    "probleem": "omschrijving te lang (162)"
+   },
+   {
+    "pad": "/blog",
+    "probleem": "titel te lang (75)"
+   },
+   {
+    "pad": "/portfolio",
+    "probleem": "omschrijving te lang (187)"
+   },
+   {
+    "pad": "/vacatures",
+    "probleem": "titel te lang (67)"
+   },
+   {
+    "pad": "/vacatures",
+    "probleem": "omschrijving te lang (200)"
+   },
+   {
+    "pad": "/vacatures/monteur",
+    "probleem": "titel te lang (68)"
+   },
+   {
+    "pad": "/diensten/markiezen",
+    "probleem": "omschrijving te lang (200)"
+   },
+   {
+    "pad": "/diensten/horren",
+    "probleem": "omschrijving te lang (176)"
+   },
+   {
+    "pad": "/categorie/zonwering",
+    "probleem": "titel te lang (72)"
+   },
+   {
+    "pad": "/categorie/zonwering",
+    "probleem": "omschrijving te lang (257)"
+   },
+   {
+    "pad": "/categorie/raamdecoratie",
+    "probleem": "titel te lang (72)"
+   },
+   {
+    "pad": "/categorie/raamdecoratie",
+    "probleem": "omschrijving te lang (235)"
+   },
+   {
+    "pad": "/categorie/horren",
+    "probleem": "omschrijving te lang (170)"
+   },
+   {
+    "pad": "/categorie/woninginrichting",
+    "probleem": "titel te lang (80)"
+   },
+   {
+    "pad": "/categorie/woninginrichting",
+    "probleem": "omschrijving te lang (180)"
+   },
+   {
+    "pad": "/zakelijk/vve",
+    "probleem": "titel te lang (71)"
+   },
+   {
+    "pad": "/zakelijk/kantoor",
+    "probleem": "omschrijving te lang (163)"
+   },
+   {
+    "pad": "/zakelijk/onderwijs",
+    "probleem": "omschrijving te lang (170)"
+   },
+   {
+    "pad": "/zakelijk/retail-horeca",
+    "probleem": "omschrijving te lang (187)"
+   },
+   {
+    "pad": "/zakelijk/zorg",
+    "probleem": "omschrijving te lang (179)"
+   },
+   {
+    "pad": "/blog/serre-zonwering-suncontrol-kiezen",
+    "probleem": "omschrijving te lang (167)"
+   },
+   {
+    "pad": "/blog/zonwering-slim-bedienen-somfy",
+    "probleem": "omschrijving te lang (163)"
+   },
+   {
+    "pad": "/blog/zonwering-westland",
+    "probleem": "titel te lang (67)"
+   },
+   {
+    "pad": "/blog/zonwering-westland",
+    "probleem": "omschrijving te lang (161)"
+   },
+   {
+    "pad": "/blog/screens-windvast-of-niet",
+    "probleem": "titel te lang (69)"
+   },
+   {
+    "pad": "/blog/knikarmscherm-cassette-kiezen",
+    "probleem": "titel te lang (66)"
+   },
+   {
+    "pad": "/blog/zonwering-solar-zonder-stroom",
+    "probleem": "omschrijving te lang (163)"
+   },
+   {
+    "pad": "/blog/shutters-binnenshutters-gids",
+    "probleem": "titel te lang (66)"
+   },
+   {
+    "pad": "/blog/shutters-binnenshutters-gids",
+    "probleem": "omschrijving te lang (165)"
+   },
+   {
+    "pad": "/blog/rolluiken-kopen-complete-gids",
+    "probleem": "titel te lang (69)"
+   },
+   {
+    "pad": "/blog/pergola-kopen-terras",
+    "probleem": "titel te lang (74)"
+   },
+   {
+    "pad": "/blog/pergola-kopen-terras",
+    "probleem": "omschrijving te lang (174)"
+   },
+   {
+    "pad": "/blog/zonwering-nieuwbouw",
+    "probleem": "omschrijving te lang (164)"
+   },
+   {
+    "pad": "/blog/welke-zonwering-past-bij-mijn-huis",
+    "probleem": "titel te lang (67)"
+   },
+   {
+    "pad": "/blog/screens-kosten-2026",
+    "probleem": "titel te lang (68)"
+   },
+   {
+    "pad": "/blog/energierekening-verlagen-zonwering",
+    "probleem": "titel te lang (66)"
+   },
+   {
+    "pad": "/blog/onderhoudscontract-zonwering",
+    "probleem": "titel te lang (69)"
+   },
+   {
+    "pad": "/blog/elektrische-zonwering-motor-bediening",
+    "probleem": "titel te lang (70)"
+   },
+   {
+    "pad": "/blog/zonwering-school-onderwijs",
+    "probleem": "omschrijving te lang (176)"
+   }
+  ],
+  "laatsteNieuw": 50,
+  "laatsteOpgelost": 0
+ },
+ "links": {},
+ "voorstellen": [],
+ "briefs": [],
+ "tenders": {
+  "gezien": [
+   "421703",
+   "402530",
+   "373846",
+   "369077",
+   "363900",
+   "363316",
+   "347123",
+   "329868",
+   "304706",
+   "290667",
+   "261019",
+   "238907",
+   "345641",
+   "341112",
+   "320016",
+   "253022",
+   "253025",
+   "253023",
+   "238166",
+   "237937",
+   "233609",
+   "232937",
+   "225358"
+  ]
+ },
+ "rapporten": [],
+ "goedkeuringenTot": "2026-08-29T17:21:21.721",
+ "laatsteRonde": {
+  "mode": "dag",
+  "op": "2026-08-29T17:21:28.712Z"
+ }
+}

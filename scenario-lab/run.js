@@ -32,6 +32,7 @@ const ONDERDELEN = [
   require('./onderdelen/testrit-keten.js'),
   require('./onderdelen/sunny-start.js'),
   require('./onderdelen/winkel-direct.js'),
+  require('./onderdelen/seo-agent.js'),
 ];
 // UI-laag draait tegen de echte site in een echte browser: alleen met --ui (of een filter),
 // anders wordt elke logica-run traag van het browsen.

@@ -1,0 +1,15 @@
+{
+  "_uitleg": "Instellingen SEO-agent (scripts/seo-agent.js). verzendenAan = mag de agent goedgekeurde linkverzoeken echt mailen (pas na het eerste proefgeval dat Daimy heeft gezien). Alles wat naar buiten gaat vraagt altijd eerst 'ja L<nr>' op Telegram.",
+  "siteLive": "https://sonty.nl",
+  "siteNieuw": "https://sonty-website.vercel.app",
+  "verzendenAan": false,
+  "proefgevalKlaar": false,
+  "afzenderMail": "aanvragen@sonty.nl (Trengo kanaal 1363384)",
+  "maxVoorstellenPerWeek": 3,
+  "regio": ["Rijswijk", "Den Haag", "Zoetermeer", "Delft", "Voorburg", "Leidschendam", "Nootdorp", "Pijnacker", "Berkel en Rodenrijs", "Wateringen", "Westland", "Rotterdam", "Leiden", "Alphen aan den Rijn"],
+  "zakelijkeSeeds": ["zonwering vve", "zonwering appartementencomplex", "zonwering kantoor", "zonwering kantoorpand", "zonwering bedrijfspand", "zonwering school", "zonwering gemeente", "zonwering zorginstelling", "zonwering aanbesteding", "buitenzonwering utiliteitsbouw", "screens kantoor", "zonwering bedrijven", "zonwering vve offerte", "zonwering vve subsidie"],
+  "betaaldeZoekwoordenBron": "data/google-ads-zoekwoorden-samenvatting-2026-08.json",
+  "tenderned": { "aan": true, "zoektermen": ["zonwering", "screens", "rolluiken", "zonneschermen", "buitenzonwering"], "provincie": "Zuid-Holland" },
+  "searchConsole": { "sleutel": "data/seo-agent/gsc-service-account.json", "property": "sc-domain:sonty.nl" },
+  "websiteRepo": "/Users/clawdboot/sonty-website"
+}

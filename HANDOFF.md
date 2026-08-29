@@ -1,5 +1,19 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 29-08 (middag): AKKOORDDATUM IN DE SHEET (kolom T) + ONDERZOEK WINKEL-LATER-AKKOORD
+- Daimy: "vanaf nu ook de datum van akkoord in kolom T, zodat we weten hoelang het duurde en of winkelmensen
+  uiteindelijk toch akkoord gingen; regel 1 voor 1". Kolom T = "Akkoord → Datum" (rij 2 "Datum", rij 3 "Akkoord"); index
+  verschilt per tab, dus detectie op die twee koppen (oude tabs zonder die kop → overslaan, nooit verkeerde kolom).
+- GEBOUWD (sonty): lib/sheet-inplannen.js schrijfAkkoordDatum (rij op RP-nummer/telefoon/Gripp, alleen als leeg, d-m-jj);
+  planner-ronde vult hem 1x zodra een lead op Inmeten inplannen komt (state.gezien ≥ 29-08, state.akkoordDatumSheet).
+  PROEF 1 RIJ: Stefan v.d. Spek → 'Aug 2026'!T1462 = 29-8-26. Daimy checkt; backfill van eerdere 2026-leads (state.gezien
+  kent 118 datums) alleen op zijn verzoek.
+- ONDERZOEK (sheet 2025-2026, 720 winkel-offerterijen, koppeling op telefoon, kolom I/J = Winkel): 221 akkoord op dezelfde
+  rij (direct/≤1 dag of datum onbekend), 338 LATER akkoord (mediaan 18 dgn, p90 45; 2-7d 67, 8-30d 186, 31-90d 79, >90d 6),
+  127 nooit, 34 zonder telefoon. Per jaar: 2025 296→291 (98%, vertekend: toen werden vooral winkel-ORDERS gelogd), 2026
+  423→267 (63%). Data: scratchpad winkel-later.json. Kanttekening: vóór juli 2026 werden winkeloffertes niet altijd als
+  "Winkel" gelabeld; T-datum ontbreekt historisch (T was in oude tabs het Gripp-nummer).
+
 ## 29-08 (middag): UUR-VERTRAGING VÓÓR SUNNY'S VOORSTEL + WINKEL-PLANT-OVERRIDE (Stefan v.d. Spek)
 - Daimy: winkel gaf Stefan een datum, Sunny stuurde 10:46 een ander voorstel (do 1 okt 09:00 Joey). Voorstel ingetrokken
   (verlopen), state.winkelPlant[rpItemId] gezet, claims 'winkel' op WA 977193905 + mail 977193909; Sunny (planningRolVoor)

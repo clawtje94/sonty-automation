@@ -76,7 +76,7 @@ function jobs() {
     try {
       const pl = leesPlist(path.join(dir, f));
       const lc = launchctlPrint(pl.label);
-      const st = pl.log ? logStaart(pl.log) : { mtime: null, regels: [] };
+      const st = pl.log ? logStaart(pl.log, 2) : { mtime: null, regels: [] };
       const draait = !!lc.pid;
       // laatste levensteken = log-wijziging of hartslagbestand (jobs die stil zijn als er niets te doen is)
       let hart = null; try { hart = fs.statSync(path.join(B.DIR, 'hartslag', pl.label.replace('nl.sonty.', ''))).mtimeMs; } catch { /* geen hartslag */ }
@@ -209,7 +209,7 @@ function tijdlijn() {
     if (eerder) continue;
     gezien.push({ s: sleutel, t: g.t }); uniek.push(g);
   }
-  return uniek.slice(0, 250);
+  return uniek.slice(0, 120);
 }
 
 // ── 5. postvak-uitwisseling met de pagina ──
@@ -307,6 +307,23 @@ function schaduwStand() {
   return true;
 }
 
+/** Delegaties die lokaal ontstonden (hoofd → medewerker via brein-sessie.js) staan alleen in het postvak; hier worden ze gestart. */
+function startLokaleDelegaties() {
+  let n = 0;
+  for (const o of B.postvak().filter((x) => x.status === 'nieuw')) {
+    const pf = path.join(SONTY, 'medewerkers', o.aan, 'profiel.md');
+    if (!fs.existsSync(pf)) continue;
+    let sessieProfiel = false; try { sessieProfiel = /^sessie:\s*ja/m.test(fs.readFileSync(pf, 'utf8')); } catch { continue; }
+    if (sessieProfiel) continue; // levende sessie leest haar inbox zelf
+    if (n >= 2) break; // max 2 nieuwe runs per minuut, anders stapelt het op
+    B.markeer(o.id, 'gestart', `${o.aan} is ermee bezig (medewerker.js opdracht, gedelegeerd door ${o.van})`);
+    const uit = fs.openSync(path.join(B.DIR, `opdracht-${o.id}.log`), 'a');
+    const kind = spawn('/opt/homebrew/bin/node', [path.join(SONTY, 'scripts', 'medewerker.js'), 'opdracht', o.aan, o.tekst, o.id], { cwd: SONTY, detached: true, stdio: ['ignore', uit, uit], env: { ...process.env, PATH: '/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin' } });
+    kind.unref(); n++;
+  }
+  return n;
+}
+
 // ── main ──
 (async () => {
   const t0 = Date.now();
@@ -334,6 +351,8 @@ function schaduwStand() {
   fs.writeFileSync(path.join(B.DIR, 'snapshot.json'), JSON.stringify(snapshot));
   let nieuw = 0, fout = null;
   try { nieuw = await pushEnHaalOp(snapshot); } catch (e) { fout = e.message; }
+  const gedelegeerd = startLokaleDelegaties();
+  if (gedelegeerd) console.log(`  ${gedelegeerd} gedelegeerde opdracht(en) gestart`);
   console.log(`${snapshot.bijgewerkt} brein: ${jobLijst.length} jobs (${alarmen.length} alarm), ${col.sessies.length} sessies, ${nieuw} nieuwe opdrachten, ${Date.now() - t0} ms${fout ? ' — PUSH FOUT: ' + fout : ''}`);
   if (fout) process.exit(1);
 })();

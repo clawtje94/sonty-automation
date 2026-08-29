@@ -1,5 +1,17 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 29-08 (laat): BREIN v2 afgerond voor vanavond — gezichten, Dagstart, Bo, Ori, blauwdruk
+- Eerste volledige ronde 29-08 20:05–20:31: 15 diensten, alle rapporten volledig, kosten $3,93 (haiku 0,14–0,27; sonnet 0,66).
+  Bram stuurde de eerste Telegram-dagstart (V100 Sjoerd weg t/m 11-09, V101 prijs-kruiscontrole ENOENT, V102 reviews-API-key).
+  LET OP: claude -p draait op Daimy's abonnement; 16 diensten/dag ≈ $4–5/dag aan verbruik. V8 aan Daimy: zo laten of alles haiku.
+- Gezichten: public/brein/avatars/<slug>.jpg (17, één stijl, oranje achtergrond, Higgsfield soul_2; prompt "one single portrait…").
+- Nieuw: Bo (brand & media, onder Lars, 07:12), Ori (onboarding & raamwerk-kwaliteit, directie, 08:15). Dagstart-tab toont Brams
+  briefing (data/brein/briefings/<datum>.txt, vanaf morgen). Beslissingenlijst = V-nummers van Bram (trechter).
+- Blauwdruk verkoopbaar raamwerk: docs/brein-raamwerk.md (lagen generiek/per bedrijf, wireframe per medewerker, onboarding met Ori,
+  audit per run in data/brein/audit/<slug>/, zelfherstel herkansing, hartslag voor stille jobs).
+- Collector telt medewerker-runs niet als terminal ('[medewerker:slug]'-marker in de prompt).
+- OPEN: V7 (nieuwe-werknemer-knop), V8 (kosten/model), Daimy's antwoorden op V100–V102 via Postvak aan Bram.
+
 ## 29-08 (avond): BREIN v2 — het bedrijf als piramide van AI-medewerkers (Daimy: "CEO-board dat aan mij rapporteert")
 - Onderzoek functies top-bedrijven: docs/brein-medewerkers-onderzoek.md (15 functies; welke agent, welke mens).
 - medewerkers/: BEDRIJF.md (handvest), ORGANISATIE.md (piramide), 15 profielen: Bram (directiesecretaris, dagstart-Telegram 08:00,

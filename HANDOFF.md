@@ -6,6 +6,10 @@
   onder [data-adm-theme=dark]), knop components/admin/AdminTheme.tsx rechtsboven in de admin-layout (keuze per browser
   in localStorage 'adm-theme'), layout-achtergrond op de variabele. /admin/pipeline: 95 inline kleuren omgezet naar de
   variabelen (data-kleuren van fases/uitvoerders ongemoeid). Headless gecheckt licht én donker.
+- Bijvangst: lokale build meldde Upstash "max requests limit exceeded (500000)" — dat is de OUDE KV-store uit
+  ~/sonty-website/.env.local (singular-feline-86557); productie draait op curious-colt-156637 en antwoordt gewoon (aanbod,
+  dashboard, mutaties, prijspeil-meetlat 8/8 groen). Lokale .env.local KV-waarden zijn dus verouderd; alleen relevant voor
+  lokale tests die KV raken.
 - LET OP: alleen pipeline (en leads, dat al licht was) volgen de knop; de ~24 andere admin-pagina's hebben nog vaste
   donkere inline kleuren — per pagina om te zetten met dezelfde mapping (regex in dit werkblok).
 

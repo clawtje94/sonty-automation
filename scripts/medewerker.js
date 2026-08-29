@@ -60,17 +60,19 @@ function parseRapport(txt) {
   return { gedaan: pak('GEDAAN'), cijfers: pak('CIJFERS'), vragen, morgen: pak('MORGEN'), volledig: ['GEDAAN', 'CIJFERS', 'VRAGEN AAN DAIMY', 'MORGEN'].every((k) => new RegExp(`##\\s*${k}`, 'i').test(txt)) };
 }
 
-function draai(prof, opdracht, { soort = 'dienst', opdrachtId = null } = {}) {
+function draai(prof, opdracht, { soort = 'dienst', opdrachtId = null, extraTools = [] } = {}) {
   const dir = path.join(MAP, prof.slug);
   const geheugenPad = path.join(dir, 'geheugen.md');
   const vandaag = datumNL();
-  const rapportPad = path.join(dir, 'dagrapport', `${vandaag}${soort === 'opdracht' ? '-opdracht-' + (opdrachtId || Date.now().toString(36)) : ''}.md`);
+  const rapportPad = path.join(dir, 'dagrapport', `${vandaag}${soort === 'opdracht' ? '-opdracht-' + (opdrachtId || Date.now().toString(36)) : soort === 'bijscholing' ? '-bijscholing' : ''}.md`);
   fs.mkdirSync(path.dirname(rapportPad), { recursive: true });
   const systeem = [
     `Je bent ${prof.naam}, ${prof.functie} bij Sonty. Vandaag is ${vandaag}.`,
     '\n# RAAMWERK-REGELS (gelden in elk bedrijf)\n' + lees(path.join(MAP, 'RAAMWERK.md')),
     '\n# BEDRIJFSHANDVEST (dit bedrijf)\n' + lees(path.join(MAP, 'BEDRIJF.md')),
     '\n# JOUW PROFIEL\n' + prof.tekst,
+    // vakkennis (Daimy 29-08: "altijd voorop lopen, de besten zijn in wat ze doen"): eigen playbook uit wekelijkse bijscholing
+    ...(lees(path.join(dir, 'vakkennis.md')) ? ['\n# JOUW VAKKENNIS (hoe de besten dit vak doen; door jou bijgehouden via bijscholing)\n' + lees(path.join(dir, 'vakkennis.md')).slice(0, 6000)] : []),
     '\n# JOUW GEHEUGEN (door jou bijgehouden, pad: ' + geheugenPad + ')\n' + (lees(geheugenPad) || '(nog leeg)'),
     // coaching-lus: Ori (kwaliteit) schrijft per medewerker feedback; die krijgt de medewerker elke dienst mee
     ...(lees(path.join(MAP, 'ori', 'feedback', `${prof.slug}.md`)) ? ['\n# FEEDBACK VAN ORI (kwaliteit) — pas dit toe\n' + lees(path.join(MAP, 'ori', 'feedback', `${prof.slug}.md`)).slice(0, 2500)] : []),
@@ -78,7 +80,7 @@ function draai(prof, opdracht, { soort = 'dienst', opdrachtId = null } = {}) {
   ].join('\n');
   // M1 (Mats-audit 29-08): schrijven/bewerken ALLEEN in de eigen medewerkersmap; lezen mag overal (Read zonder pad).
   const eigenMap = `//Users/clawdboot/sonty/medewerkers/${prof.slug}/**`;
-  const tools = ['Read', `Write(${eigenMap})`, `Edit(${eigenMap})`, 'Grep', 'Glob', ...prof.tools];
+  const tools = ['Read', `Write(${eigenMap})`, `Edit(${eigenMap})`, 'Grep', 'Glob', ...prof.tools, ...extraTools];
   // markering zodat het Brein deze run niet als 'Claude-terminal' telt (collector slaat '[medewerker:…]'-transcripten over)
   // '--setting-sources project': de gebruikersinstellingen van Daimy (bypassPermissions, Edit(*)) gelden NIET voor
   // medewerkers; alleen de whitelist hieronder. Bewezen 29-08: eigen map schrijfbaar, BEDRIJF.md geweigerd.
@@ -109,13 +111,28 @@ function draai(prof, opdracht, { soort = 'dienst', opdrachtId = null } = {}) {
   // de kaart toont het DIENST-rapport; een ad-hoc opdracht overschrijft dat niet (antwoord staat in het postvak)
   s2[prof.slug] = { herkansing: oud.herkansing || false, naam: prof.naam, functie: prof.functie, afdeling: prof.afdeling || '',
     status: fout ? 'fout' : soort === 'dienst' ? (rapport.vragen.length ? 'wacht op Daimy' : 'klaar') : (oud.status && oud.status !== 'aan een opdracht' && oud.status !== 'in dienst' ? oud.status : 'klaar'),
-    laatsteDienst: soort === 'dienst' ? new Date().toISOString() : oud.laatsteDienst || null, laatsteActie: new Date().toISOString(), soort, duurMin, kostenUsd: kosten, fout,
+    laatsteDienst: soort === 'dienst' ? new Date().toISOString() : oud.laatsteDienst || null, laatsteBijscholing: soort === 'bijscholing' && !fout ? new Date().toISOString() : oud.laatsteBijscholing || null, laatsteActie: new Date().toISOString(), soort, duurMin, kostenUsd: kosten, fout,
     rapport: soort === 'dienst' ? ditRapport : oud.rapport || ditRapport, laatsteOpdracht: soort === 'opdracht' ? { id: opdrachtId, op: new Date().toISOString(), rapport: ditRapport } : oud.laatsteOpdracht || null,
     bezigMet: null, bezigSinds: null };
   bewaarStand(s2);
   B.gebeurtenis(prof.naam, fout ? `FOUT in ${soort}: ${fout.slice(0, 120)}` : `${soort} klaar (${duurMin} min${kosten ? ', $' + kosten.toFixed(2) : ''}): ${rapport.gedaan.split('\n')[0].slice(0, 100)}${rapport.vragen.length ? ` · ${rapport.vragen.length} vraag/vragen aan Daimy` : ''}`);
   if (opdrachtId) B.markeer(opdrachtId, fout ? 'fout' : 'klaar', fout ? 'Mislukt: ' + fout : (opBestand || tekst).slice(0, 3500));
   return { fout, rapport, duurMin, kosten, tekst: opBestand || tekst };
+}
+
+function bijscholingOpdracht(prof) {
+  const vk = path.join(MAP, prof.slug, 'vakkennis.md');
+  return `BIJSCHOLING (wekelijks). Jouw functie: ${prof.functie}. Onderzoek online hoe de allerbesten in dit vak werken en schrijf/ververs jouw vakkennis-bestand ${vk} (max 90 regels).
+Gebruik WebSearch en WebFetch (max 12 zoekopdrachten/pagina's, token-zuinig): recente vakartikelen en blogs, samenvattingen van de beste boeken over dit vak, vacatureteksten van topbedrijven (wat vragen zij van deze functie), transcripten of beschrijvingen van YouTube-video's van vakmensen (je kunt video's niet kijken, wel de tekst erbij lezen), brancheorganisaties en cursussen.
+Vaste vorm van ${vk}:
+# Vakkennis <naam> — <functie> (bijgewerkt <datum>)
+## Zo werken de besten (10-15 concrete regels, elk toepasbaar in jouw dagelijkse dienst bij Sonty)
+## Dagelijkse routine van een topper (kort, in volgorde)
+## Cijfers waarop de besten sturen (KPI's en normen, met bron)
+## Valkuilen die de besten vermijden
+## Wat ik hiervan vanaf morgen anders doe (3 punten, concreet)
+## Bronnen (minimaal 4, met URL en één zin waarom deze bron)
+Regels: NOOIT namen van andere zonweringbedrijven (schrijf "een groot zonweringbedrijf"); geen verzonnen bronnen; vervang verouderde punten uit je vorige versie in plaats van eindeloos aan te vullen; Nederlands. Lever daarna je rapport in de vaste vier kopjes: onder GEDAAN welke bronnen je las en wat je veranderde in je vakkennis, onder MORGEN wat je vanaf morgen anders doet.`;
 }
 
 const [, , cmd, a, b, c] = process.argv;
@@ -151,13 +168,29 @@ if (require.main === module) (async () => {
       const r = draai(prof, prof.dienstOpdracht || 'Doe je dagelijkse dienst zoals in je profiel beschreven en lever het rapport op.', { soort: 'dienst' });
       console.log(r.fout ? '   FOUT: ' + r.fout : `   klaar in ${r.duurMin} min, ${r.rapport.vragen.length} vragen`);
     }
+  } else if (cmd === 'bijscholing' && a) {
+    const prof = leesProfiel(a);
+    if (prof.sessie === 'ja') { console.error('levende sessie heeft geen bijscholing-run'); process.exit(2); }
+    const r = draai({ ...prof, model: prof.bijscholingModel || 'sonnet' }, bijscholingOpdracht(prof), { soort: 'bijscholing', extraTools: ['WebSearch', 'WebFetch'] });
+    console.log(r.fout ? 'FOUT: ' + r.fout : r.tekst.slice(0, 1200));
+    process.exit(r.fout ? 1 : 0);
+  } else if (cmd === 'bijscholingen') {
+    // wekelijks (launchd, maandag 06:00): iedereen die langer dan 6 dagen geleden bijgeschoold is, op volgorde
+    const s = stand();
+    for (const prof of team().filter((m) => !m.fout && m.sessie !== 'ja')) {
+      const lb = s[prof.slug]?.laatsteBijscholing;
+      if (lb && Date.now() - Date.parse(lb) < 6 * 86400000) continue;
+      console.log(`→ bijscholing ${prof.slug}`);
+      const r = draai({ ...prof, model: prof.bijscholingModel || 'sonnet' }, bijscholingOpdracht(prof), { soort: 'bijscholing', extraTools: ['WebSearch', 'WebFetch'] });
+      console.log(r.fout ? '   FOUT: ' + r.fout : `   klaar in ${r.duurMin} min${r.kosten ? ', $' + r.kosten.toFixed(2) : ''}`);
+    }
   } else if (cmd === 'opdracht' && a && b) {
     const prof = leesProfiel(a);
     if (prof.sessie === 'ja') { console.error(`${a} is een levende sessie: opdracht gaat via het postvak/inbox, niet via claude -p`); process.exit(2); }
     const r = draai(prof, b, { soort: 'opdracht', opdrachtId: c || null });
     console.log(r.fout ? 'FOUT: ' + r.fout : r.tekst.slice(0, 1500));
     process.exit(r.fout ? 1 : 0);
-  } else { console.error('gebruik: lijst | dienst <slug> | diensten | opdracht <slug> "<tekst>" [id]'); process.exit(1); }
+  } else { console.error('gebruik: lijst | dienst <slug> | diensten | bijscholing <slug> | bijscholingen | opdracht <slug> "<tekst>" [id]'); process.exit(1); }
 })();
 
 module.exports = { team, leesProfiel, stand, parseRapport };

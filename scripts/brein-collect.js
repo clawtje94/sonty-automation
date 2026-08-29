@@ -282,7 +282,7 @@ function medewerkers(jobLijst) {
     }
     const mijnJobs = jobLijst.filter((j) => m.jobs.includes(j.kort));
     return { slug: m.slug, naam: m.naam, functie: m.functie, afdeling: m.afdeling || '', niveau: m.niveau || 'medewerker', rapporteertAan: m.rapporteertAan || 'daimy', model: m.model, sessie: m.sessie === 'ja', dienst: m.dienst || null, kpis: m.kpis, magZelf: m.magZelf, fout: m.fout || s.fout || null,
-      status: s.status || 'nog nooit gedraaid', laatsteDienst: s.laatsteDienst || null, laatsteActie: s.laatsteActie || null, bezigMet: s.bezigMet || null, bezigSinds: s.bezigSinds || null, duurMin: s.duurMin ?? null, kostenUsd: s.kostenUsd ?? null,
+      status: s.status || 'nog nooit gedraaid', laatsteDienst: s.laatsteDienst || null, laatsteBijscholing: s.laatsteBijscholing || null, vakkennis: fs.existsSync(path.join(SONTY, 'medewerkers', m.slug, 'vakkennis.md')), laatsteActie: s.laatsteActie || null, bezigMet: s.bezigMet || null, bezigSinds: s.bezigSinds || null, duurMin: s.duurMin ?? null, kostenUsd: s.kostenUsd ?? null,
       rapport: s.rapport || null, jobs: mijnJobs.map((j) => ({ kort: j.kort, schema: j.schema, draait: j.draait, laatst: j.laatst, alarm: j.alarm })), openOpdrachten: B.opdrachtenVoor(m.slug).length };
   }) };
 }

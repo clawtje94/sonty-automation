@@ -17,6 +17,65 @@ const PID = '731483fa-ef6b-4aae-afcf-883ec09219dd';
 const SALES = 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7';
 const INMETEN_INPLANNEN = '2e9819bd-26f0-4082-8f18-32bb48f87f54';
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
+const { zoekTerm, matchItems, isWinkeluur, nieuweItems } = require('./lib/winkel-direct.js');
+const GEZIEN_PAD = path.join(__dirname, '..', 'data', 'inmeet-daemon-gezien.json');
+
+/** Kaarten op "Inmeten inplannen": 1 RP-pagina (verse instroom) + bekende leads uit de planner-state. */
+async function haalInmeetItems() {
+  const eerste = await (await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${SALES}/items?limit=1000`, {
+    headers: { Authorization: 'Bearer ' + RP_API_KEY },
+  })).json();
+  const items = [...(eerste.items || [])];
+  const gezien = new Set(items.map((i) => i.id));
+  try {
+    const st = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'inmeten-planner-state.json'), 'utf8'));
+    for (const b of st.inmeetLeads || []) if (!gezien.has(b.id)) items.push({ status_id: INMETEN_INPLANNEN, technical_labels: [], ...b });
+  } catch { /* state optioneel */ }
+  return items;
+}
+
+// AGENDA-CACHE (29-08): de agenda's van Joey en Sjoerd ophalen is het langzaamste stuk van een
+// berekening. Twee klanten in hetzelfde kwartier delen dezelfde agenda; na een boeking/verzet
+// wordt de cache geleegd zodat het net geboekte slot nooit nog eens aangeboden wordt.
+const AGENDA_TTL_MS = 5 * 60000;
+let agendaCache = { op: 0, waarde: null };
+async function agendaMetCache() {
+  // altijd een kopie: voegAanbiedingenToe() vult de agenda aan, en dat mag de cache niet raken
+  if (agendaCache.waarde && Date.now() - agendaCache.op < AGENDA_TTL_MS) return structuredClone(agendaCache.waarde);
+  const agenda = await planner.haalAgenda();
+  agendaCache = { op: Date.now(), waarde: structuredClone(agenda) };
+  return agenda;
+}
+const leegAgendaCache = () => { agendaCache = { op: 0, waarde: null }; };
+
+// AUTOMATISCH REKENEN IN WINKELUREN (Daimy 29-08: niet meer wachten tot de 30-min-ronde).
+// Elke minuut één RP-pagina: nieuwe kaart op "Inmeten inplannen" → direct tijden (alleen deze
+// klant), kaart op het dashboard. Buiten winkeluren doet de 30-min-ronde het zoals altijd.
+let laatsteDetectie = 0;
+async function detecteerNieuweKlanten() {
+  if (!isWinkeluur() || Date.now() - laatsteDetectie < 60000) return false;
+  laatsteDetectie = Date.now();
+  let gezien = [];
+  try { gezien = JSON.parse(fs.readFileSync(GEZIEN_PAD, 'utf8')); } catch { gezien = null; }
+  const items = await haalInmeetItems();
+  if (gezien === null) {
+    // eerste keer: alles wat er nu staat is "bekend" (die krijgen tijden via de gewone ronde)
+    fs.writeFileSync(GEZIEN_PAD, JSON.stringify(items.map((i) => i.id)));
+    return false;
+  }
+  const nieuw = nieuweItems(items, gezien, INMETEN_INPLANNEN);
+  if (!nieuw.length) return false;
+  fs.writeFileSync(GEZIEN_PAD, JSON.stringify([...gezien, ...nieuw.map((i) => i.id)].slice(-2000)));
+  for (const i of nieuw) {
+    try {
+      const res = await verwerkReken({ rpItemId: i.id, bron: 'auto' });
+      console.log(new Date().toISOString(), `auto-reken ${i.summary}: ${res.uitkomst}`);
+    } catch (e) {
+      console.log(new Date().toISOString(), `auto-reken ${i.summary} FOUT: ${e.message}`);
+    }
+  }
+  return true;
+}
 
 async function api(pad, opties = {}) {
   const r = await fetch(pad, {
@@ -31,41 +90,39 @@ async function api(pad, opties = {}) {
  * en als kaart in het dashboard zetten — zonder op de 30-min-ronde te wachten. */
 async function verwerkReken(m) {
   const { zoekSlots, kiesWinkelOpties, venster } = require('./lib/slotzoeker.js');
-  // API-zuinig zoeken: eerst 1 pagina + de bekende leads uit de planner-state;
-  // alleen als de naam daar niet tussen zit een volledige scan (zeldzaam balie-geval).
-  const n = String(m.naam || '').toLowerCase();
-  let kandidaten = [];
-  const eerste = await (await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${SALES}/items?limit=1000`, {
-    headers: { Authorization: 'Bearer ' + RP_API_KEY },
-  })).json();
-  const past = (i) => i.status_id === INMETEN_INPLANNEN && String(i.summary || '').toLowerCase().includes(n)
-    && !(i.technical_labels || []).some((l) => l?.type === 'ITEM_ARCHIVED');
-  kandidaten = (eerste.items || []).filter(past);
-  if (!kandidaten.length) {
-    try {
-      const st = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'inmeten-planner-state.json'), 'utf8'));
-      kandidaten = (st.inmeetLeads || []).filter((i) => String(i.summary || '').toLowerCase().includes(n));
-    } catch { /* state optioneel */ }
-  }
-  if (!kandidaten.length) {
-    let offset = 1000;
-    while (true) {
-      const data = await (await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${SALES}/items?limit=1000&offset=${offset}`, {
-        headers: { Authorization: 'Bearer ' + RP_API_KEY },
-      })).json();
-      kandidaten.push(...(data.items || []).filter(past));
-      if (!data.has_more || kandidaten.length) break;
-      offset += 1000;
+  // WINKEL-DIRECT (Daimy 29-08): zoeken op RP-offertenummer (20…), Gripp-nummer of naam, of
+  // direct op rpItemId (automatische detectie). Matching is puur (lib/winkel-direct.js, lab-
+  // gedekt): 0 of 2+ treffers = afwijzen met reden, nooit stil de eerste kaart pakken.
+  let item = null;
+  if (m.rpItemId) {
+    item = (await haalInmeetItems()).find((i) => i.id === m.rpItemId) || null;
+    if (!item) return { afgewezen: true, uitkomst: `kaart ${m.rpItemId} staat niet (meer) op Inmeten inplannen` };
+  } else {
+    const term = zoekTerm(m.offerte || m.naam || '');
+    const items = await haalInmeetItems();
+    let nummersPerItem = {};
+    let grippKlant = null;
+    if (term.soort === 'offerte') {
+      // RP-offertenummers per kaart (leesOfferte cachet 6 uur per lead, dus RP-zuinig)
+      const { leesOfferte } = require('./inmeten-planner-lees.js');
+      for (const i of items) {
+        try { nummersPerItem[i.id] = (await leesOfferte(i)).nummers || []; } catch { nummersPerItem[i.id] = []; }
+      }
+    } else if (term.soort === 'gripp') {
+      try {
+        const res = await planner.grippCall('offer.get', [[{ field: 'offer.number', operator: 'equals', value: Number(term.waarde) }], { paging: { firstresult: 0, maxresults: 1 } }]);
+        grippKlant = res?.rows?.[0]?.company?.searchname || null;
+      } catch { grippKlant = null; }
     }
+    const { kandidaten, reden } = matchItems(items, term, INMETEN_INPLANNEN, nummersPerItem, grippKlant);
+    if (reden) return { afgewezen: true, uitkomst: reden };
+    item = kandidaten[0];
   }
-  if (!kandidaten.length) return { afgewezen: true, uitkomst: `geen lead "${m.naam}" op Inmeten inplannen — zet hem eerst op die status in RP` };
-  if (kandidaten.length > 1) return { afgewezen: true, uitkomst: `meerdere leads passen op "${m.naam}" — maak de naam specifieker` };
-  const item = kandidaten[0];
   const lead = await planner.leesLeadCompleet(item);
   if (lead.ambigu) return { afgewezen: true, uitkomst: 'meerdere offerteversies, geen getekend — klant moet eerst tekenen' };
   const { schatDuur } = require('./lib/inmeetduur.js');
   const duur = schatDuur(lead.producten);
-  const agenda = await planner.haalAgenda();
+  const agenda = await agendaMetCache();
   await planner.laadVakanties();
   // SAMENLOOP-FIX (07-08, geval Manon/Franken/Marco): open aanbiedingen zijn bezet,
   // anders rekent deze route hetzelfde slot uit dat al bij een andere klant ligt.
@@ -112,7 +169,7 @@ async function verwerkReken(m) {
   // overschreven worden door de 30-min-ronde — race gezien 06-08)
   await api(DASH_API, { method: 'POST', body: JSON.stringify({ extraLead: {
     rpItemId: item.id, naam: lead.naam, plaats: lead.plaats, duurMin: duur, wachtDagen: 0,
-    status: 'aanbod-mogelijk',
+    status: 'aanbod-mogelijk', offertes: lead.rpNummers || [], bron: m.bron || 'winkel',
     producten: lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ').slice(0, 90),
     top: aanbod.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin, label: x.label || undefined })),
   } }) });
@@ -142,6 +199,7 @@ async function ronde() {
         res = { afgewezen: false, uitkomst: 'dashboard ververst' };
       } else {
         res = m.type === 'reken' ? await verwerkReken(m) : await planner.verwerkVerzoek(m);
+        if (m.type !== 'reken') leegAgendaCache();
       }
     } catch (e) {
       // DEFINITIEVE fouten (geen gaten, klant moet tekenen, lead onvindbaar) niet
@@ -244,7 +302,9 @@ const SNEL_VENSTER_MS = 5 * 60000; // zo lang na het laatste werk blijven we sne
       const gedaan = await ronde();
       if (gedaan) laatsteWerk = Date.now();
     } catch (e) { console.log(new Date().toISOString(), 'ronde-fout:', e.message); }
-    const snel = Date.now() - laatsteWerk < SNEL_VENSTER_MS;
+    try { await detecteerNieuweKlanten(); } catch (e) { console.log(new Date().toISOString(), 'detectie-fout:', e.message); }
+    // In winkeluren altijd snel (de balie wacht); daarbuiten adaptief (KV-limiet-les 08-08)
+    const snel = isWinkeluur() || Date.now() - laatsteWerk < SNEL_VENSTER_MS;
     await wacht(snel ? SNEL_MS : RUSTIG_MS);
   }
 })();

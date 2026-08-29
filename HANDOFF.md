@@ -1,5 +1,18 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 29-08 (avond): CONCURRENTIEONDERZOEK BETAALDE ZOEKWOORDEN (website content/concurrentie-zoekwoorden-2026-08.md)
+- Daimy (/goal): concurrentieonderzoek op de zoekwoorden waar we voor betalen, rapport hoe we nummer 1 worden; kloppend,
+  niet gekopieerd, Sonty-stijl. Artifact https://claude.ai/code/artifact/b117c282-f264-4ac1-8d35-05d0aac74c61
+- Methode: 15 zoekwoordgroepen uit het Ads-rapport → Google-toppagina's (74) opgehaald en gemeten met
+  scripts/serp-concurrentie-analyse.mjs (woorden, H2's, prijzen, tabel, FAQ, schema, foto's, CTA, reviews) naast Sonty's
+  pagina's; originaliteit met scripts/originaliteit-check.mjs (0% gedeelde 8-woordreeksen). URL's/analyse intern in
+  ~/sonty/data/serp/ (NIET publiceren; regel geen concurrentnamen).
+- Uitkomst: dienstpagina's screens/knikarm/rolluiken/markiezen/pergola/uitvalscherm zijn op of boven topniveau (vanaf-prijs
+  uit prijsmotor, tabel, FAQ, configurator). Gaten: screens-prijspagina (blog 3 prijzen, geen tabel; top 80% prijs/60% tabel),
+  /reparatie (704 w, geen prijs; top 2.118 w), stadspagina's (5 foto's; top 14-58). Nummer 1 hangt aan domeinswitch, gezag
+  (links/vermeldingen), Bedrijfsprofiel+reviews; daarna 3 gaten dichten en per zoekwoord Ads-bod verlagen bij top-3.
+- Briefs per groep in het rapport (4.1 t/m 4.8), alle cijfers uit prijsmotor/prijsconfig/agenda.
+
 ## 29-08 (avond): STADSPAGINA'S UNIEK MET ECHTE DATA (website 4350801) — Daimy: "uniek maar niet met bullshit"
 - Bron per plaats: Outlook-agenda Sonty Montage (data/outlook-all-events.json, feb-apr 2026): montages/inmetingen per maand;
   PDOK locatieserver v3_1 (CBS-buurten met ≥2 klussen, adressen niet gepubliceerd); OSRM rijtijd vanaf magazijn Berkel én

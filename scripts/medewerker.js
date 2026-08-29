@@ -104,7 +104,14 @@ function draai(prof, opdracht, { soort = 'dienst', opdrachtId = null } = {}) {
     const oud = fs.readdirSync(auditDir).sort(); for (const f of oud.slice(0, Math.max(0, oud.length - 60))) fs.unlinkSync(path.join(auditDir, f));
   } catch (e) { B.gebeurtenis('Mats', `audit-log mislukt voor ${prof.slug}: ${e.message.slice(0, 80)}`); }
   const s2 = stand();
-  s2[prof.slug] = { herkansing: (s2[prof.slug] || {}).herkansing || false, naam: prof.naam, functie: prof.functie, afdeling: prof.afdeling || '', status: fout ? 'fout' : rapport.vragen.length ? 'wacht op Daimy' : 'klaar', laatsteDienst: soort === 'dienst' ? new Date().toISOString() : (s2[prof.slug] || {}).laatsteDienst || null, laatsteActie: new Date().toISOString(), soort, duurMin, kostenUsd: kosten, fout, rapport: { ...rapport, pad: rapportPad.replace(ROOT, '~/sonty') }, bezigMet: null, bezigSinds: null };
+  const oud = s2[prof.slug] || {};
+  const ditRapport = { ...rapport, pad: rapportPad.replace(ROOT, '~/sonty') };
+  // de kaart toont het DIENST-rapport; een ad-hoc opdracht overschrijft dat niet (antwoord staat in het postvak)
+  s2[prof.slug] = { herkansing: oud.herkansing || false, naam: prof.naam, functie: prof.functie, afdeling: prof.afdeling || '',
+    status: fout ? 'fout' : soort === 'dienst' ? (rapport.vragen.length ? 'wacht op Daimy' : 'klaar') : (oud.status && oud.status !== 'aan een opdracht' && oud.status !== 'in dienst' ? oud.status : 'klaar'),
+    laatsteDienst: soort === 'dienst' ? new Date().toISOString() : oud.laatsteDienst || null, laatsteActie: new Date().toISOString(), soort, duurMin, kostenUsd: kosten, fout,
+    rapport: soort === 'dienst' ? ditRapport : oud.rapport || ditRapport, laatsteOpdracht: soort === 'opdracht' ? { id: opdrachtId, op: new Date().toISOString(), rapport: ditRapport } : oud.laatsteOpdracht || null,
+    bezigMet: null, bezigSinds: null };
   bewaarStand(s2);
   B.gebeurtenis(prof.naam, fout ? `FOUT in ${soort}: ${fout.slice(0, 120)}` : `${soort} klaar (${duurMin} min${kosten ? ', $' + kosten.toFixed(2) : ''}): ${rapport.gedaan.split('\n')[0].slice(0, 100)}${rapport.vragen.length ? ` · ${rapport.vragen.length} vraag/vragen aan Daimy` : ''}`);
   if (opdrachtId) B.markeer(opdrachtId, fout ? 'fout' : 'klaar', fout ? 'Mislukt: ' + fout : (opBestand || tekst).slice(0, 3500));

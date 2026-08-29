@@ -526,6 +526,16 @@
       "ritme": "elke 30 min",
       "log": "werkbon-afhandeling.log",
       "maxUur": 2
+    },
+    "nl.sonty.vakanties-collect": {
+      "naam": "Vakantie-overzicht dashboard",
+      "functie": "Leest vakanties/vrije dagen uit Outlook-agenda Sonty Montage en pusht het overzicht naar /admin/vakanties (alleen-lezen).",
+      "groep": "Rapportage",
+      "ritme": "elke 30 min",
+      "log": "vakanties-collect.log",
+      "maxUur": 2,
+      "ks": false,
+      "keten": "agenda"
     }
   }
 }

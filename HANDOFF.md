@@ -1,5 +1,17 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 29-08 (avond): BREIN — /admin/brein LIVE (Daimy: "één scherm, wat draait, welke agents, wie roept wat aan, terminals aansturen")
+- Verzamelaar `scripts/brein-collect.js` (launchd nl.sonty.brein-collect, elke 60 s, alleen-lezen) → POST /api/admin/brein (KV):
+  73 launchd-jobs (schema, laatste run, exit, draait, log-staart, ALARM), collega-rollen (Sunny/Nanny/Data-bot/Marketing/
+  Offerte-controle/Telegram/Techniek), Claude-sessies (aangemeld via sessies.json + ongeregistreerde uit ~/.claude transcripten),
+  wachtrijen (open aanbod 24u, mutaties, claims, stil-lijst, Sunny-hartslag), tijdlijn (gebeurtenissen.jsonl + log-staarten, ontdubbeld).
+- Postvak: pagina PUT opdracht → collector haalt op → `data/brein/postvak.json` + regel in `data/brein/inbox-<naam>.txt` → de sessie
+  (Monitor tail -f) wordt wakker → `brein-sessie.js postvak/antwoord` → antwoord staat op de pagina. BEWEZEN 19:47 (proef 8mrg5iwc).
+- Sessie-CLI `scripts/brein-sessie.js meld|status|klaar|postvak|antwoord|log|opdracht|wie`; meld met cse_-id koppelt aan het transcript.
+  REGEL in memory (feedback_brein_aanmelden): elke sessie meldt zich bij start aan + Monitor op haar inbox.
+- Fase 3 "nieuwe werknemer" (opdracht → `claude -p` sessie) is gebouwd maar UIT: vlag `data/brein/.werknemer-aan` ontbreekt (V7 aan Daimy).
+- Bekende ruis: alarmen voor bewust uitgezette jobs (wa-desktop-queue, keten-zelfcontrole, sonny-rapport niet geladen) staan als 'laag'.
+
 ## 29-08 (avond): WEBSITEFOTO-TOOL /admin/websitefotos + ORANJE STREEPJES WEG (website e91488c + vervolg)
 - Daimy: "overal op het vercel-domein dat oranje streepje voor/onder de blokken weg" + "website foto tool: foto's per blok
   kiezen en zien waar ze allemaal getoond worden". Streepje = 60x4 balkje (#BF5317/#FFCC01) onder sectiekoppen: 43 stuks

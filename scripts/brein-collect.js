@@ -221,7 +221,11 @@ async function pushEnHaalOp(snapshot) {
   let nieuw = 0;
   for (const o of d.nieuweOpdrachten || []) {
     if (o.aan === 'nieuwe werknemer') { startWerknemer(o); continue; }
-    if (fs.existsSync(path.join(SONTY, 'medewerkers', o.aan, 'profiel.md'))) { startMedewerkerOpdracht(o); continue; }
+    if (fs.existsSync(path.join(SONTY, 'medewerkers', o.aan, 'profiel.md'))) {
+      let sessieProfiel = false; try { sessieProfiel = /^sessie:\s*ja/m.test(fs.readFileSync(path.join(SONTY, 'medewerkers', o.aan, 'profiel.md'), 'utf8')); } catch { /* profiel onleesbaar */ }
+      if (!sessieProfiel) { startMedewerkerOpdracht(o); continue; }
+      // levende sessie (bv. claude): gewoon in de inbox, de sessie wordt wakker via haar Monitor
+    }
     if (B.nieuweOpdracht({ aan: o.aan, tekst: o.tekst, van: o.van || 'Daimy', id: o.id })) nieuw++;
   }
   return nieuw;
@@ -258,10 +262,23 @@ function medewerkers(jobLijst) {
   let team = [];
   try { team = require('./medewerker.js').team(); } catch (e) { return { fout: e.message, lijst: [] }; }
   const st = lees(path.join(B.DIR, 'medewerkers.json'), {});
+  const M = require('./medewerker.js');
   return { lijst: team.map((m) => {
-    const s = st[m.slug] || {};
+    let s = st[m.slug] || {};
+    if (m.sessie === 'ja') {
+      // levende sessie: laatste dagrapport-bestand is de stand
+      try {
+        const dir = path.join(SONTY, 'medewerkers', m.slug, 'dagrapport');
+        const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md')).sort();
+        if (files.length) {
+          const f = files[files.length - 1]; const txt = fs.readFileSync(path.join(dir, f), 'utf8'); const r = M.parseRapport(txt);
+          const mt = fs.statSync(path.join(dir, f)).mtime.toISOString();
+          s = { status: r.vragen.length ? 'wacht op Daimy' : 'bezig', laatsteActie: mt, laatsteDienst: mt, rapport: { ...r, pad: `~/sonty/medewerkers/${m.slug}/dagrapport/${f}` } };
+        } else s = { status: 'nog geen rapport' };
+      } catch { s = { status: 'nog geen rapport' }; }
+    }
     const mijnJobs = jobLijst.filter((j) => m.jobs.includes(j.kort));
-    return { slug: m.slug, naam: m.naam, functie: m.functie, afdeling: m.afdeling || '', niveau: m.niveau || 'medewerker', rapporteertAan: m.rapporteertAan || 'daimy', model: m.model, dienst: m.dienst || null, kpis: m.kpis, magZelf: m.magZelf, fout: m.fout || s.fout || null,
+    return { slug: m.slug, naam: m.naam, functie: m.functie, afdeling: m.afdeling || '', niveau: m.niveau || 'medewerker', rapporteertAan: m.rapporteertAan || 'daimy', model: m.model, sessie: m.sessie === 'ja', dienst: m.dienst || null, kpis: m.kpis, magZelf: m.magZelf, fout: m.fout || s.fout || null,
       status: s.status || 'nog nooit gedraaid', laatsteDienst: s.laatsteDienst || null, laatsteActie: s.laatsteActie || null, bezigMet: s.bezigMet || null, duurMin: s.duurMin ?? null, kostenUsd: s.kostenUsd ?? null,
       rapport: s.rapport || null, jobs: mijnJobs.map((j) => ({ kort: j.kort, schema: j.schema, draait: j.draait, laatst: j.laatst, alarm: j.alarm })), openOpdrachten: B.opdrachtenVoor(m.slug).length };
   }) };
@@ -290,7 +307,7 @@ function laatsteBriefing() {
   const snapshot = {
     bijgewerkt: new Date().toISOString(), host: os.hostname(), uptimeUur: Math.round(os.uptime() / 360) / 10, load: os.loadavg()[0].toFixed(2),
     alarmen, jobs: jobLijst, collegas: col, wachtrijen: wr, tijdlijn: tijdlijn(), medewerkers: medewerkers(jobLijst),
-    briefing: laatsteBriefing(),
+    briefing: laatsteBriefing(), schaduw: fs.existsSync(path.join(B.DIR, '.schaduw')),
     postvak: B.postvak().slice(-100).reverse(), werknemerAan: fs.existsSync(path.join(B.DIR, '.werknemer-aan')),
     collegaNamen: [...new Set([...medewerkers(jobLijst).lijst.map((m) => m.slug), ...col.sessies.filter((s) => s.status !== 'klaar' && s.status !== 'verlopen').map((s) => s.naam), 'nieuwe werknemer'])],
   };

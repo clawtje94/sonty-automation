@@ -6,6 +6,7 @@
 //  O4 Scheduler: een dienst draait pas als de diensttijd is verstreken, nog niet vandaag draaide en (weekend) alleen bij
 //     weekend: ja. Volgorde = diensttijd: medewerkers vóór hun hoofd, Bram ná alle hoofden (Ori mag na Bram).
 //  O5 Profiel: lijstvelden zijn arrays, model bekend, dienst HH:MM, ## Regels aanwezig; zonder frontmatter = zichtbare fout.
+//     Uitzondering: sessie: ja (levende Claude-sessie) heeft géén dienst en géén claude -p-model.
 //  O6 Piramide: hoofden/directie rapporteren aan daimy, medewerkers aan een hoofd, niemand aan zichzelf; alleen Bram
 //     mag Telegram sturen; niemand heeft muterende tools (launchctl kickstart/bootout, rm, git push).
 const path = require('path');
@@ -106,8 +107,10 @@ function voerUitC(s) {
   if (['hoofd', 'directie'].includes(m.niveau) && m.rapporteertAan !== 'daimy') p.push('hoofd rapporteert niet aan Daimy');
   if (m.niveau === 'medewerker' && (alle.find((x) => x.slug === m.rapporteertAan) || {}).niveau !== 'hoofd') p.push('medewerker rapporteert niet aan een hoofd');
   if (![m.tools, m.jobs, m.kpis, m.magZelf].every(Array.isArray)) p.push('lijstvelden geen array');
-  if (!/^\d\d:\d\d$/.test(String(m.dienst))) p.push('dienst geen HH:MM');
-  if (!['haiku', 'sonnet', 'opus'].includes(m.model)) p.push('model onbekend');
+  const levend = m.sessie === 'ja'; // levende Claude-sessie: geen scheduler-dienst, geen claude -p-model
+  if (!levend && !/^\d\d:\d\d$/.test(String(m.dienst))) p.push('dienst geen HH:MM');
+  if (!levend && !['haiku', 'sonnet', 'opus'].includes(m.model)) p.push('model onbekend');
+  if (levend && m.dienst) p.push('levende sessie mag geen scheduler-dienst hebben');
   if (!/## Regels/.test(m.tekst)) p.push('geen ## Regels in profiel');
   if (m.tools.some((t) => /brein-telegram/.test(t)) && m.slug !== 'bram') p.push('mag Telegram sturen maar is Bram niet');
   if (m.tools.some((t) => /launchctl (kickstart|bootout|bootstrap)|\brm\b|git push|Write\(|Edit\(/.test(t))) p.push('heeft muterende tool');

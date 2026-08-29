@@ -32,7 +32,7 @@ function leesProfiel(slug) {
     const lijst = regel.match(/^\s+- (.*)$/);
     if (lijst && sleutel) { (fm[sleutel] = Array.isArray(fm[sleutel]) ? fm[sleutel] : []).push(lijst[1].trim()); continue; }
     const kv = regel.match(/^([a-zA-Z_]+):\s*(.*)$/);
-    if (kv) { sleutel = kv[1]; fm[sleutel] = kv[2].trim() === '' ? [] : kv[2].trim(); }
+    if (kv) { sleutel = kv[1]; fm[sleutel] = kv[2].trim(); } // leeg = '' (lijstregels eronder maken er een array van)
   }
   return { slug, ...fm, tekst: m[2].trim(), model: fm.model || 'sonnet', tools: Array.isArray(fm.tools) ? fm.tools : [], jobs: Array.isArray(fm.jobs) ? fm.jobs : [], kpis: Array.isArray(fm.kpis) ? fm.kpis : [], magZelf: Array.isArray(fm.magZelf) ? fm.magZelf : [] };
 }
@@ -119,7 +119,7 @@ if (require.main === module) (async () => {
     // alleen wie nu aan de beurt is: dienst-tijd (HH:MM) is verstreken en vandaag nog niet gedraaid
     const nu = new Date(); const nuMin = nu.getHours() * 60 + nu.getMinutes(); const s = stand();
     // volgorde = diensttijd: medewerkers eerst, dan de hoofden (07:45), dan Bram (08:00)
-    for (const prof of team().filter((m) => m.dienst && !m.fout).sort((x, y) => String(x.dienst).localeCompare(String(y.dienst)))) {
+    for (const prof of team().filter((m) => m.dienst && !m.fout && m.sessie !== 'ja').sort((x, y) => String(x.dienst).localeCompare(String(y.dienst)))) {
       const [h, mi] = String(prof.dienst).split(':').map(Number);
       const st = s[prof.slug] || {};
       const vandaagGedaan = st.laatsteDienst && datumNL(new Date(st.laatsteDienst)) === datumNL();
@@ -138,7 +138,9 @@ if (require.main === module) (async () => {
       console.log(r.fout ? '   FOUT: ' + r.fout : `   klaar in ${r.duurMin} min, ${r.rapport.vragen.length} vragen`);
     }
   } else if (cmd === 'opdracht' && a && b) {
-    const r = draai(leesProfiel(a), b, { soort: 'opdracht', opdrachtId: c || null });
+    const prof = leesProfiel(a);
+    if (prof.sessie === 'ja') { console.error(`${a} is een levende sessie: opdracht gaat via het postvak/inbox, niet via claude -p`); process.exit(2); }
+    const r = draai(prof, b, { soort: 'opdracht', opdrachtId: c || null });
     console.log(r.fout ? 'FOUT: ' + r.fout : r.tekst.slice(0, 1500));
     process.exit(r.fout ? 1 : 0);
   } else { console.error('gebruik: lijst | dienst <slug> | diensten | opdracht <slug> "<tekst>" [id]'); process.exit(1); }

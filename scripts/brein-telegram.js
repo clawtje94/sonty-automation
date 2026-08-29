@@ -8,6 +8,14 @@ const tok = (env.match(/^TELEGRAM_BOT_TOKEN=(.+)$/m) || [])[1];
 const chat = (env.match(/^TELEGRAM_CHAT_ID=(.+)$/m) || [])[1] || '1700128390';
 const tekst = process.argv.slice(2).join(' ').trim();
 if (!tok || !tekst) { console.error('token of tekst ontbreekt'); process.exit(1); }
+// SCHADUWSTAND (Daimy 29-08: "team even in de schaduw draaien"): vlag data/brein/.schaduw → briefing bewaren voor de
+// Dagstart-tab en in de tijdlijn zetten, maar NIET naar Telegram. Daimy leest alles in het Brein.
+if (fs.existsSync(path.join(__dirname, '..', 'data', 'brein', '.schaduw'))) {
+  const B = require('./lib/brein.js');
+  try { const dir = path.join(B.DIR, 'briefings'); fs.mkdirSync(dir, { recursive: true }); fs.writeFileSync(path.join(dir, new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Amsterdam' }) + '.txt'), tekst); } catch { /* best effort */ }
+  B.gebeurtenis('Bram', 'SCHADUW: briefing alleen in het Brein gezet (niet naar Telegram): ' + tekst.slice(0, 80));
+  console.log('schaduwstand: bewaard, niet verstuurd'); process.exit(0);
+}
 (async () => {
   for (let poging = 1; poging <= 3; poging++) {
     try {

@@ -1,5 +1,13 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 29-08 (middag): UUR-VERTRAGING VÓÓR SUNNY'S VOORSTEL + WINKEL-PLANT-OVERRIDE (Stefan v.d. Spek)
+- Daimy: winkel gaf Stefan een datum, Sunny stuurde 10:46 een ander voorstel (do 1 okt 09:00 Joey). Voorstel ingetrokken
+  (verlopen), state.winkelPlant[rpItemId] gezet, claims 'winkel' op WA 977193905 + mail 977193909; Sunny (planningRolVoor)
+  en reply-route blijven 24u weg. V4 aan Daimy: welke datum gaf de winkel → dan boeken + klant informeren.
+- GEBOUWD: magStarten wacht 60 min na eerste zien op het dashboard (state.gezien) → kaart "Sunny wacht: net binnen (x min)
+  — winkel kan zelf plannen"; winkel-plant-vlag (7 dgn) blokkeert Sunny volledig. Lab-laag A uitgebreid (dimensie binnen).
+- Nog te bouwen: knop op het dashboard "winkel plant zelf" (zet vlag + claims) i.p.v. handmatig via state.
+
 ## 29-08 (ochtend): OFFERTETOOL — VRIJE REGEL (zelf typen + eigen prijs) LIVE (website ccaeb1b)
 - Daimy: "in de offertetool ook een product zelf kunnen toevoegen door zelf te typen, zoals een lasmontagebeugel of
   demontage, waar we zelf de prijs aan geven". Gebouwd in app/admin/offerte-tool: knop "+ Vrije regel (zelf typen)" →

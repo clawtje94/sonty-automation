@@ -79,6 +79,8 @@ Nieuwe klant = nieuwe map `bedrijven/<naam>/` met dezelfde structuur. De **onboa
 - Stijl: admin-thema (licht/donker), afdelingkleuren, één avatar-set in dezelfde tekenstijl, geen lappen tekst.
 
 ## 6. Wat nu staat en wat volgt
-- Staat (29-08): motor, scheduler, audit, zelfherstel-herkansing, 15 profielen voor Sonty, Team-tab, postvak, lab (221 sc.).
-- Volgt: gezichten (avatar-set), Dagstart-tab, kosten-per-dag in het Brein, Ori (onboarding-agent) als profiel + intake-
-  script, `bedrijven/`-structuur zodat een tweede bedrijf naast Sonty kan draaien, bronnen-adapters per systeem.
+- Staat (30-08): motor, scheduler, audit per run, zelfherstel-herkansing, padbeperking (`--setting-sources project`), 18 profielen
+  voor Sonty (incl. Claude als levende sessie), gezichten, Team-/Dagstart-tab, postvak twee-fasen, schaduwstand, Ori-coaching,
+  wekelijkse bijscholing (vakkennis.md), lab brein-medewerkers (224 sc.), audit door het team zelf (21 bevindingen, 17 verwerkt).
+- Volgt: kosten-per-dag in het Brein, automatisch afbreken van hangende runs, `bedrijven/`-structuur voor een tweede bedrijf,
+  bronnen-adapters per systeem, Ori's intake-script voor onboarding, bevoegdheden per medewerker uitbreiden op verzoek van Daimy.

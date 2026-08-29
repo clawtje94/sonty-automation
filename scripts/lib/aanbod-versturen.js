@@ -268,6 +268,7 @@ async function stuurWhatsApp(aanbod, url) {
       .replace(/^(we komen graag bij je langs om in te meten\..*?eerste moment dat we je kunnen aanbieden|we'd love to come by and measure\..*?first moment we can offer you): /i, '')
       .replace(/^(goed nieuws|good news): /i, '');
   }
+  if (aanbod.stijl === 'sunny') vrijeTekst = vrijeTekst.replace(/Nanny van Sonty/g, 'Sunny van Sonty').replace(/Nanny from Sonty/g, 'Sunny from Sonty');
   const stuurVrij = async () => {
     const ticket = await zoekWaTicket(aanbod.lead.telefoon);
     if (!ticket) return { ok: false, reden: 'geen WhatsApp-gesprek' };
@@ -375,9 +376,9 @@ async function stuurMail(aanbod, url) {
 <p>${een ? `Past het? Gewoon "ja" terugmailen werkt ook. De tijd staat ${geldigUren} uur voor je vast.` : `De tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, beantwoord dan gewoon deze mail.`}</p>
 <p>Goed om te weten: onze inmeter rijdt een route, dus het kan soms een uur eerder of later worden dan het gekozen moment. Als dat zo is laten we het je even weten.</p>
 <p>Groetjes,<br>Nanny van Sonty</p>`;
-  const htmlUit = aanbod.stijl === 'sunny'
+  const htmlUit = aanbod.stijl === 'sunny' && !aanbod.klantReply && !aanbod.herhaling
     ? require('./sunny-start.js').voorstelMailHtml({ voornaam, slots: aanbod.slots, duurMin: aanbod.duurMin, ver: aanbod.ver === true, taal, url, geldigUren })
-    : html;
+    : (aanbod.stijl === 'sunny' ? html.replace(/Nanny van Sonty/g, 'Sunny van Sonty').replace(/Nanny from Sonty/g, 'Sunny from Sonty') : html);
   const r2 = await tFetch(`/tickets/${nieuw.id}/messages`, {
     method: 'POST',
     body: JSON.stringify({ message: htmlUit, body_type: 'html' }),

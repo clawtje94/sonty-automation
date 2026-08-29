@@ -1994,6 +1994,27 @@ async function verwerkDashboardVerzoek(m) {
       }
       if (m.voorkeurDagen?.length || m.voorkeurDagdeel || m.vanaf) {
         const { pasBijVoorkeur } = require('./lib/planning-antwoord.js');
+        // HORIZON UITBREIDEN VOOR EEN DAGVOORKEUR (Daimy 29-08, Christian Keus: "maandag" → geen maandag in de
+        // standaardhorizon → stil teruggevallen op di/do). Eerst strikt kijken; niets? Dan tot ~3 maanden vooruit.
+        const strikt = (lijst) => lijst
+          .filter((x) => !(m.voorkeurDagen?.length) || m.voorkeurDagen.includes(new Date(x.aankomst).getDay()))
+          .filter((x) => !m.voorkeurDagdeel || (new Date(x.aankomst).getHours() < 12 ? 'ochtend' : 'middag') === m.voorkeurDagdeel)
+          .filter((x) => !m.vanaf || +x.aankomst >= +new Date(m.vanaf + 'T00:00:00+02:00'));
+        if (!strikt(beste).length) {
+          console.log('  (geen plek op de voorkeur in de standaardhorizon — verder vooruit kijken)');
+          for (const inm of inmetersVoor(lead)) {
+            const sl = await zoekSlots({
+              agenda: agenda[inm.naam], adres: lead.volledigAdres, duurMin: duur,
+              werkdagen: werkdagenVoor(inm.naam, 60, m.vanaf),
+              startAdres: ROOSTER[inm.naam]?.startAdres || undefined,
+              eindAdres: ROOSTER[inm.naam]?.eindAdres || undefined,
+            }).catch(() => []);
+            beste.push(...sl.map((x) => ({ ...x, inmeter: inm.naam })));
+          }
+          const gezienS = new Set();
+          beste = beste.filter((x) => { const k = `${x.inmeter}|${+x.aankomst}`; if (gezienS.has(k)) return false; gezienS.add(k); return true; });
+          beste.sort((a, b) => a.extraRijtijdMin - b.extraRijtijdMin || a.aankomst - b.aankomst);
+        }
         const passend = pasBijVoorkeur(beste, { dagen: m.voorkeurDagen || [], dagdeel: m.voorkeurDagdeel || null, vanaf: m.vanaf || null });
         if (passend.length) beste = passend;
         else if (m.vanaf) throw new Error(`geen enkele plek vanaf ${m.vanaf} — niets verstuurd, mens nodig`);
@@ -2016,7 +2037,8 @@ async function verwerkDashboardVerzoek(m) {
         throw new Error(`vroegst haalbare is ${aanbod[0].datum} — NIET eerder dan wat de klant al had (${m.eerderDan.slice(0, 10)}); niets verstuurd, mens nodig`);
       }
     }
-    const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda, null, { herhaling: !!m.herhaling, klantReply: m.bron === 'klant-reply' ? { dagen: m.voorkeurDagen || [] } : null });
+    const wensM = (m.voorkeurDagen?.length || m.voorkeurDagdeel || m.vanaf || m.nietDeze?.length || m.nietDagen?.length) ? { dagen: m.voorkeurDagen || [], dagdeel: m.voorkeurDagdeel || null, vanaf: m.vanaf || null, nietDeze: m.nietDeze || [], nietDagen: m.nietDagen || [] } : null;
+    const url = await maakEnVerstuurAanbod(lead, item, aanbod, duur, agenda, wensM, { bron: m.bron || null, stijl: m.stijl || (m.bron === 'sunny' ? 'sunny' : null), herhaling: !!m.herhaling, klantReply: m.bron === 'klant-reply' ? { dagen: m.voorkeurDagen || [] } : null });
     // Werkelijk verstuurde aantal rapporteren: bij aantalTijden=1 krijgt de klant één
     // moment, ook al lagen er hier 3 kandidaten (het oude "(3 tijd(en))" zette ons
     // 26-08 op het verkeerde been bij het uitzoeken van de Hensing-zaak).

@@ -2878,3 +2878,8 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
   HANDOFF/launchd (69 nl.sonty-jobs). Feiten gecheckt: /offerte-aanvragen op Vercel linkt al naar /configurator
   (RP-widget alleen nog op oude sonty.nl), verzendcentrum-bron staat op "rp".
 - Memory: project_sonty_configurator_grenzen.md.
+
+## 2026-08-29 — Analyse €1-rijen sheet vs Gripp (alleen-lezen, opdracht Daimy)
+- Scripts in scratchpad (niet in repo): gripp-dump.js + analyse.js; sheet via `node scripts/conversie-sheet.js --jaar 2026`.
+- Uitkomst: 377 €1-rijen, maar 6 dubbel met een volle rij (tel-match) — €1 wordt in dezelfde rij overschreven. 41 €1-rijen met aanbetalingsfactuur maar zonder volle bedragen (26 uit jul/aug). Gripp open: 103 offertes (apr 2, jun 11, jul 63, aug 27), 30 waarschijnlijk oude versies.
+- 29-08 17:20: werklijst-PDF gemaakt: rapporten/werklijst-offertesheet-2026-08-29.pdf (generator: scratchpad pdf.js, Playwright headless). 48 €1-rijen met aanbetalingsfactuur (hard), 46 op naam, 6 dubbel, 103 open Gripp-offertes. Naar Daimy gestuurd via Telegram.

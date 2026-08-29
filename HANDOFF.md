@@ -6,6 +6,11 @@
   en reply-route blijven 24u weg. V4 aan Daimy: welke datum gaf de winkel → dan boeken + klant informeren.
 - GEBOUWD: magStarten wacht 60 min na eerste zien op het dashboard (state.gezien) → kaart "Sunny wacht: net binnen (x min)
   — winkel kan zelf plannen"; winkel-plant-vlag (7 dgn) blokkeert Sunny volledig. Lab-laag A uitgebreid (dimensie binnen).
+- CORRECTIE 11:05: Daimy's dashboard-klik "boeken" WAS wél verwerkt (mutatie boek winkel 10:46 → daemon 10:53: Sjoerd di
+  29 sep 10:10, Gripp 6577, Bookings, Planado, sheet r1462; Bookings stuurde zelf de bevestigingsmail, bevestigingSturen
+  staat uit voor winkel). Race: Sunny's planner-ronde (10:46) en de winkel-klik liepen gelijk; Sunny's 1-okt-voorstel
+  ging eerst de deur uit. Klant per mail gecorrigeerd (29 sep staat, 1 okt vervalt; ticket 977195501). winkelPlant-vlag
+  en winkel-claims weer weggehaald (boeking staat). V4 daarmee overbodig.
 - Nog te bouwen: knop op het dashboard "winkel plant zelf" (zet vlag + claims) i.p.v. handmatig via state.
 
 ## 29-08 (ochtend): OFFERTETOOL — VRIJE REGEL (zelf typen + eigen prijs) LIVE (website ccaeb1b)

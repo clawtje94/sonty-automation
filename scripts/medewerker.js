@@ -47,7 +47,15 @@ function datumNL(d = new Date()) { return d.toLocaleDateString('sv-SE', { timeZo
 
 /** Rapport in vier vaste kopjes uit elkaar halen; ontbrekend kopje = zichtbaar leeg, nooit stil. */
 function parseRapport(txt) {
-  const pak = (kop) => { const m = txt.match(new RegExp(`##\\s*${kop}\\s*\\n([\\s\\S]*?)(?=\\n##\\s|$)`, 'i')); return m ? m[1].trim() : ''; };
+  // secties op kopregels knippen; een lege sectie blijft leeg (en lekt nooit de volgende sectie)
+  const secties = {};
+  let huidig = null;
+  for (const regel of String(txt || '').split('\n')) {
+    const kop = regel.match(/^\s*##\s*(.+?)\s*$/);
+    if (kop) { huidig = kop[1].toUpperCase(); secties[huidig] = []; continue; }
+    if (huidig) secties[huidig].push(regel);
+  }
+  const pak = (kop) => (secties[kop.toUpperCase()] || []).join('\n').trim();
   const vragen = pak('VRAGEN AAN DAIMY').split('\n').map((r) => r.replace(/^\s*(\d+[.)]|[-*])\s*/, '').trim()).filter((r) => r && !/^(geen|niets|nvt|n\.v\.t\.|-)\.?$/i.test(r));
   return { gedaan: pak('GEDAAN'), cijfers: pak('CIJFERS'), vragen, morgen: pak('MORGEN'), volledig: ['GEDAAN', 'CIJFERS', 'VRAGEN AAN DAIMY', 'MORGEN'].every((k) => new RegExp(`##\\s*${k}`, 'i').test(txt)) };
 }

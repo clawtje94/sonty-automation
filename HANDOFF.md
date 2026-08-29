@@ -1,5 +1,19 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 29-08 (avond): BREIN v2 — het bedrijf als piramide van AI-medewerkers (Daimy: "CEO-board dat aan mij rapporteert")
+- Onderzoek functies top-bedrijven: docs/brein-medewerkers-onderzoek.md (15 functies; welke agent, welke mens).
+- medewerkers/: BEDRIJF.md (handvest), ORGANISATIE.md (piramide), 15 profielen: Bram (directiesecretaris, dagstart-Telegram 08:00,
+  V-nummers vanaf V100), hoofden Lars/Noor/Isa/Fenna/Mats (07:45, Mats 07:30 ook weekend), medewerkers Milan, Jules, Nanny, Ruben,
+  Tess, Sunny, Yara, Sam, Pip (07:00–07:35, haiku). Runner scripts/medewerker.js (claude -p, --system-prompt profiel+handvest+
+  geheugen, --allowedTools uit profiel, rapport in 4 kopjes → data/brein/medewerkers.json + dagrapport/<datum>.md + geheugen.md).
+- Scheduler nl.sonty.medewerkers-dienst (elke 5 min: wie aan de beurt is, tijdsvolgorde; weekend alleen weekend: ja).
+  Brein-collector: snapshot.medewerkers; postvak-opdracht aan een slug → `medewerker.js opdracht` (los proces).
+- /admin/brein tab Team: Daimy bovenaan met "beslissingen die op jou wachten", directie, hoofden, medewerkers per afdeling;
+  per kaart cijfers/vragen/volledig rapport, knoppen "opdracht geven" en "dienst nu draaien". Lab brein-medewerkers 221 sc. 0x FOUT-STIL.
+- Eerste ronde 29-08 avond handmatig gestart (scratchpad ronde.sh) om het team gevuld te tonen; daarna dagelijks automatisch.
+- v1 = lezen en adviseren. Bevoegdheden uitbreiden per medewerker (magZelf + tools) op verzoek van Daimy, met lab.
+- OPEN: V7 (nieuwe-werknemer-knop aan?), kosten per dag meten (kostenUsd per dienst staat op de kaart) en zo nodig modellen omlaag.
+
 ## 29-08 (avond): BREIN — /admin/brein LIVE (Daimy: "één scherm, wat draait, welke agents, wie roept wat aan, terminals aansturen")
 - Verzamelaar `scripts/brein-collect.js` (launchd nl.sonty.brein-collect, elke 60 s, alleen-lezen) → POST /api/admin/brein (KV):
   73 launchd-jobs (schema, laatste run, exit, draait, log-staart, ALARM), collega-rollen (Sunny/Nanny/Data-bot/Marketing/

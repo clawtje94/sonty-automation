@@ -16,3 +16,9 @@
 1. Waar zijn de order-tellingen per week (vs plafond 35)?
 2. Waar zie ik vacature-reacties?
 3. Mag ik live montage-teams bijwerken in Planado, of alleen lezen?
+
+## Bijscholing 2026-08-29
+- Vakkennis ververst: `/Users/clawdboot/sonty/medewerkers/pip/vakkennis.md`.
+- Kernpunten: verzuimnorm 3-6%; monteur-utilisatie gemiddeld ~80% (best-in-class >89%, niet naar 100% pushen);
+  2+ weken vooruitkijken i.p.v. alleen morgen; afwijkingsdrempel >20% over/onderbezetting.
+- Vanaf nu: afwezigheid altijd als percentage/quotiënt tegen totaal beschikbaar rapporteren, niet alleen namen.

@@ -20,3 +20,10 @@
 - Gister's cijfers + vandaag's snapshot = rapportwaarde.
 - Wachten op Daimy's antwoord op 3 vragen.
 - Trend volgen (429's, stille klanten, doorverwijzingspercentage).
+
+## Bijscholing 2026-08-29
+- Vakkennis.md aangemaakt: KPI-normen (WhatsApp <1-2 min, mail <4u top, urgent <5 min, hoog <30 min).
+- Nieuwe gewoontes vanaf morgen: ontvangstbevestiging bij vertraging, gericht opvolgen stille klanten,
+  statusbericht bij overdracht naar Daimy/Isa (niet stil laten hangen).
+- Vaste escalatietriggers voorgesteld aan Daimy (mens gevraagd, boze toon, geld, prijs/coulance) —
+  wacht op akkoord (zie VRAGEN 2026-08-29).

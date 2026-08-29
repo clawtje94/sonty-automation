@@ -15,3 +15,8 @@
 
 ## Let op volgende dienst
 - Eerste dienst was 29-08, dus nog geen week-op-week vergelijking mogelijk. Vanaf 30-08 wel gisteren-vergelijking doen.
+
+## Bijscholing 29-08
+- vakkennis.md aangemaakt (was er nog niet). Kernpunten: max 5-8 KPI's op MT-rapport, wekelijks rollende
+  13-weken cashflowprognose, risico-cijfers (zoals orders zonder aanbetaling) altijd met leeftijd in
+  dagen. Vanaf morgen dit toepassen in het MT-rapport.

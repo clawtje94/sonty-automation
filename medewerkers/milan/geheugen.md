@@ -17,3 +17,7 @@
 - Open aanbod: snapshot wachtrijen.
 
 ## Next: Daimy volgen op Luuk Post-vraag, dan morgen routine herhalen.
+
+## Bijscholing 29-8-2026
+- Vakkennis ververst: /Users/clawdboot/sonty/medewerkers/milan/vakkennis.md (research: opvolgsnelheid, cadans 5-12 contacten, 48-uurs opvolgnorm, bezwaren wegnemen zonder korting).
+- Vanaf morgen: ook "vroege attentie" bij 2-3 dagen geen reactie (niet alleen 7-dagen lijst); reden/twijfel per klant benoemen; lang-stille klanten (>14 dagen) expliciet voorstel "afsluiten of escaleren".

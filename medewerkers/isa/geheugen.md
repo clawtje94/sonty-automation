@@ -10,3 +10,4 @@
 - Snapshot-alarmen zijn vaak Techniek/infra (job-exitcodes), niet automatisch klantimpact. Eerst checken of het klant/service raakt voor ik het als vraag aan Daimy stempel.
 - Sunny's "stilLijst" in wachtrijen komt overeen met de namen in Sunny's eigen dagrapport - goede kruiscontrole.
 - Definitie ">2 uur onbeantwoord" bij Sunny nog niet geverifieerd, navragen bij Techniek/Mats indien relevant wordt.
+- 29-8 bijscholing: vakkennis.md aangemaakt. Kern: stuur voortaan ook op First Contact Resolution en Customer Effort (niet alleen "stille klanten"-aantal), en stel nazorg als vast contactmoment voor i.p.v. reactief.

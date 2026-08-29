@@ -26,3 +26,9 @@
 - Doel: 2 posts per week (gegeven in profiel)
 - Kanalen: LinkedIn, Instagram, Google Bedrijfsprofiel (assuming)
 - Status: onbekend waar planning staat
+
+## Bijscholing 29 aug
+- vakkennis.md geschreven (eerste versie), 8 zoekopdrachten gedaan (social/PR/GBP/netwerk/boek)
+- Vanaf nu: dagelijks 15-30 min reageren op posts/reviews van anderen, niet alleen eigen content
+- Pitches aan lokale media: altijd mens-verhaal + lokale invalshoek, nooit productaankondiging
+- Elk voorstel aan Daimy voortaan met meetplan (welk cijfer, welke bron) erbij

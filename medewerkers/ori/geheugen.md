@@ -21,6 +21,17 @@
 - Mijn profiel zegt max 3 voorstellen/dag; bij een expliciete audit-opdracht van Daimy heb ik
   er 6 gegeven (met vraag of dat mag). Wachten op zijn antwoord voor de volgende keer.
 
+## Bijscholing 29-08-2026
+- vakkennis.md aangemaakt (was er nog niet): 10 web-bronnen gelezen (Anthropic agent-ontwerp,
+  onboarding-KPI's, SOP-schrijven, Radical Candor, LLM-eval-rubrics, franchise-playbooks).
+- Belangrijkste les voor mezelf: "minimum path to value" — bij intake nieuw bedrijf eerst de ene
+  output bepalen die per se nodig is, pas daarna uitbreiden. Ga ik verwerken in de
+  intake-vragenlijst hieronder.
+- Tweede les: mijn dagelijkse audit moet een vaste mini-rubric zijn (kopjes/cijfers+bron/echte
+  vraag/lengte, elk ja-nee) in plaats van totaalindruk — consistenter dag op dag.
+- Radical Candor-format overnemen in mijn feedback/<slug>.md: concreet gedrag + concreet
+  vervolgvoorstel, geen algemene opmerking.
+
 ## Intake-vragenlijst nieuw bedrijf (nog op te bouwen, begin)
 - Feiten: wie is eigenaar/beslisser, wie zit op de vloer (mens), team-plafond/capaciteitsgetal.
 - Klantproces: stappen van aanvraag tot nazorg, welke systemen per stap (CRM, planning, boekhouding).

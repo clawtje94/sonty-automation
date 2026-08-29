@@ -10,3 +10,9 @@
 - actieve-tickets.json is ALLe tickets, niet gefilterd op service/klacht.
 - reviews-sync werkt niet (geen API-key in secrets).
 
+## Bijscholing 2026-08-29
+- Vakkennis.md geschreven: FCR-benchmarks (klachten ~48-61%, topbedrijven 80-85% algemeen), oorzaakcode-tracking,
+  reviewreactie binnen 24-48u, geen coulance zonder ruggespraak.
+- Vanaf nu: oorzaakcode per melding labelen, >5 werkdagen "wacht op mens" apart als vraag aan Daimy, reviews
+  zonder tijdige reactie apart tonen in dagrapport.
+

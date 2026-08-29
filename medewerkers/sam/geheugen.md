@@ -17,3 +17,10 @@
 ## Notities
 - Eerst dienst uitgevoerd 2026-08-29
 - Snapshot.json getoond 5 alarmen (laag niveau): gesprek-lab, sunny-weetje, keten-zelfcontrole, sonny-rapport, wa-desktop-queue
+
+### Bijscholing 2026-08-29
+- vakkennis.md geschreven: focus op mijlpaal-facturatie (niet datum), aging wekelijks doorlopen,
+  DSO <45d / CEI >80% / bad debt <1,5% als externe normen, "getekend zonder aanbetaling" = procesfout
+  niet debiteurenachterstand.
+- Vanaf nu: 4 controlepunten in vaste volgorde + noemer, coulance-vragen aan Daimy met concreet
+  termijnvoorstel (dag 0/+7/+14).

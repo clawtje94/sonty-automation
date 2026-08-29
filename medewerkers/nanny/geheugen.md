@@ -23,6 +23,14 @@
 - Aanbod-replies: 163 bewaarde, 30 per scan, gisteren/vandaag 0 reacties gemeld
 - Vakantie geblokkeerd: Joey 12 dgn, Sjoerd 19 dgn (stand 29 aug)
 
+## Vakkennis (bijscholing 2026-08-29)
+
+- Vakkennis-bestand ververst: zie `vakkennis.md`. Kern: reactietijd <5 min, bevestiging 24-48u + 2-4u vooraf,
+  korte aankomstvensters, bezetting 75-80% (niet hoger), vaste opvolg-cadans voor stille klanten i.p.v.
+  losse pogingen, mutaties altijd per oorzaak splitsen, systemen (Outlook/Planado/Bookings) kruiselings checken.
+- Vanaf nu: wachtrij >5 werkdagen niet direct "verlopen" voorstellen, eerst cadans-check; mislukte mutaties
+  per oorzaak rapporteren; boeking-zonder-bevestiging apart als systeemmismatch-afwijking melden.
+
 ## Vorige diensten
 
 (Geen eerdere diensten opgenomen; start vandaag)

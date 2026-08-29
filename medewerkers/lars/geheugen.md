@@ -14,3 +14,7 @@
 
 ## Leerpunten
 - Snapshot-alarmen zijn vaak Techniek/Sunny-gerelateerd (jobs/cron), niet automatisch relevant voor Commercie-rapport; alleen vermelden als het echt impact heeft op sales/marketing werk.
+- 2026-08-29 bijscholing: vakkennis.md aangemaakt. Kern: reactietijd <5 min telt zwaar voor conversie,
+  stuur op conversie per fase (niet totaal leadvolume), reviews als doorlopend ritme i.p.v. actie.
+  Vanaf nu: Milan altijd concrete opvolgdatum bij offerte laten noteren; weekbeeld ook fase
+  offerte→akkoord apart benoemen.

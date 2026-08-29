@@ -7,6 +7,12 @@
 - Wachtrij inmeten: 6 klanten 23-24 dagen zonder reactie (3x sinds 4 aug, 3x sinds 5 aug). Voorstel nabellen/verlopen ligt bij Daimy.
 - Gedelegeerd 29-08: Tess (Luuk Post nabellen offerte), Ruben (aanbetaling 6489/6556 morgen checken).
 
+## Vakkennis (bijgewerkt 29-08, wekelijkse bijscholing)
+- Nieuw vakkennis.md geschreven (was leeg): Theory of Constraints (bottleneck = inmeten nu), First Time
+  Right vs First Time Fix, leverbetrouwbaarheid als inkoop-KPI, schedule adherence-norm 90-100%.
+- Vanaf nu in MT-rapport benoemen dat inmeten de bottleneck is; Ruben vragen om % op-tijd-leveringen
+  i.p.v. alleen prijscontrole; Tess/Nanny vragen naar schedule adherence-cijfer.
+
 ## Leerpunten
 - Eerste dagrapport 29-08: nog geen vergelijkingsbasis met "gisteren" — vanaf morgen wel afwijkingen t.o.v. vorige dag melden.
 - Max 3 delegaties/dag (brein-sessie.js opdracht) — vandaag 2 gebruikt.

@@ -29,6 +29,15 @@ Op 29-08 allemaal ok, geen alarm.
 - Nog geen bevestiging van Daimy op de 3 vragen van 29-08. Bij volgende dienst eerst checken of
   er antwoord is voor ik opnieuw vraag.
 
+## Bijscholing 29-08 (vakkennis.md geschreven, was nog leeg)
+- SRE-kernidee: alarmeer op symptoom/gebruikersimpact, niet op oorzaak. Vanaf nu bij twijfelgevallen
+  expliciet vastleggen of er gebruikersimpact was (zoals bij sunny-weetje: bericht kwam toch aan).
+  Toepassen op gesprek-lab en sunny-weetje in de vraag aan Daimy.
+- Dead-man's-switch/heartbeat is het standaardpatroon voor "stille" cronjob-storingen; kan ik als
+  VOORSTEL noemen bij een job die zonder alarm silent kan falen (zelf niet bouwen).
+  429's: standaardadvies is backoff+jitter+Retry-After; bij sonny-watch voortaan concreet
+  poll-frequentie-advies geven i.p.v. alleen het aantal melden.
+
 ## Brein-code-review 29-08 (opdracht van Daimy) — bevindingen, nog geen akkoord om te fixen
 - medewerker.js:76 geeft ELKE medewerker altijd Write+Edit zonder padbeperking, ongeacht profiel
   ("alleen lezen"-profielen incluis). Risico: agent kan eigen profiel.md overschrijven en zichzelf

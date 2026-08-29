@@ -1,5 +1,12 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (00:xx): MOBIEL + DESIGNER FEE
+- iPhone-emulatie (Playwright WebKit, iPhone 13): pagina laadt in 4-5 s, 0 fouten; Daimy's "laadt niet" waarschijnlijk niet ingelogd
+  op de telefoon (pagina toont nu na 8 s een uitleg + 401 = "niet ingelogd"). Kaarten echt compact: 28.000 → 4.500 px. V10 gevraagd.
+- Designer Fee (Commercie, onder Lars, 07:14, sonnet): eerste ronde vond 8 knoppen met emoji op de publieke site (huisstijlregel),
+  o.a. "✓ Akkoord & onderteken" in de offerte-tool en "Toevoegen aan aanvraag ✓" in de configurator → voorstel op haar kaart.
+- Bram stuurt vragen over team/raamwerk/Brein automatisch door naar Claude (levende sessie).
+
 ## 30-08 (nacht): DAIMY STUURT VIA HET BREIN — V1/V5/V8/V9 beantwoord op mijn kaart, inline invoer, Ja/Nee, live
 - Daimy antwoordde via mijn Brein-kaart (inbox-claude → Monitor → deze sessie): V1 ja (FileVault/auto-login: stappen voor hem op de kaart,
   ik controleer na "V1 gedaan"), V5 ja (kolom T backfill: scripts/akkoord-datum-backfill.js, dry-run 88 rijen kolom T; ronde 1 ~30 geschreven,

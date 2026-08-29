@@ -1,5 +1,22 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 29-08 (avond): SEO-ONDERZOEK (website: content/seo-onderzoek-2026-08.md, artifact voor Daimy)
+- Daimy (/goal): "zo veel mogelijk onderzoek hoe SEO werkt, zoekwoorden voor Sonty, wat we het best kunnen doen".
+- GEMETEN 29-08: live sonty.nl (Webflow) heeft op ALLE stadspagina's de titel "Rijswijk | Kwaliteitstuinen, geleverd
+  met een glimlach" (tuinbedrijf-template), geen meta description, geen canonical, 0 JSON-LD, sitemap met template-rommel;
+  Sonty staat NIET in de top voor "zonwering rijswijk" en "zonwering den haag" (Eyelux, JS, REM, Marino, Zwamon, Van Rijn,
+  Trustoo wel). Trustpilot 4,2 (6 reviews, nodigt niet uit). Nieuwe site (vercel): 103 URL's, titels + JSON-LD goed,
+  niet geïndexeerd, wel index,follow (dubbel-content-risico tot domeinswitch); 3,1 MB per pagina door foto's 220-367 KB.
+  Marktdata Marktmonitor 31-03-2026: 106.030 zoekopdrachten/mnd, zonnescherm ~100k, rolluik ~96k, screens 18% (groei).
+  Google-autocomplete NL: prijsvragen per breedte ("wat kost een knikarmscherm van 5 meter breed"), vergelijk ("screens
+  of rolluiken tegen warmte"), plaats + reparatie, kantoor/vve, subsidie per gemeente.
+- ADVIES P0 (deze week, gratis): stadspagina-titels/meta's fixen in Webflow (of domeinswitch versnellen), Search Console
+  koppelen, Google Bedrijfsprofiel (categorie, foto's, diensten, Q&A), reviews-automatisering na montage (doel 4/week),
+  noindex op vercel.app. P1 (30 d): domeinswitch met 301-kaart, foto's ≤150 KB, stadspagina's uniek (echte projecten,
+  reviews per plaats, "tijden voor inmeten"-knop), "wat kost"-pagina's uit de prijsmotor, vergelijkartikelen, LocalBusiness-
+  schema. P2 (90 d): reparatie per plaats, subsidiepagina ZH (bedragen eerst verifiëren), zakelijk, lokale links, meten.
+- NIET gemeten: geen Search Console/Ahrefs (geen exacte volumes/posities), PSI-quota op (geen CrUX), backlinks alleen 2024-rapport.
+
 ## 29-08 (namiddag): CHRISTIAN KEUS (+31622008261) — "waarom geen planning aangeboden?" (horizon-gat gefixt)
 - Feiten: onderwijsgezin, wil maandag/vrijdag. 10:07 Sunny bood ma 28 sep 12:30 (niet vastgehouden); 15:07 was die plek
   weg; Sunny bood di/do; 17:09 "maandag ben ik vrij, hele dag" → Sunny: "geen enkele maandag vrij" + escalatie. ONJUIST:

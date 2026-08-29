@@ -144,8 +144,8 @@ function omschrijving(subject) {
   let s = (subject || '')
     .replace(/^geannuleerd:\s*/i, '')
     .replace(/^(telefonisch advies|service afspraak sonty|montage sonty|inmeten sonty)\s*-\s*/i, '')
-    .replace(/^vakantie\s*-\s*/i, '')
-    .replace(/^vakantie$/i, '')
+    .replace(/^(vakantie|vrij|verlof|ziek)\s*-\s*/i, '')
+    .replace(/^(vakantie|vrij|verlof|ziek)$/i, '')
     .trim();
   return s;
 }

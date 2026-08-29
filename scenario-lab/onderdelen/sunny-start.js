@@ -110,7 +110,7 @@ const dimB = [
 ];
 const NU_B = T(DI, 10, 0);
 function orakelB(s) {
-  return { wil: 'tekst', taalOk: true, handtekening: 'Sunny', tijdGenoemd: true, marge: true, vraag: true, geenGoedNieuwsBijDrukte: s.weken.w >= 3, verWegUitleg: s.ver.v, jaAntwoord: s.aantal.n === 1, knop: s.vorm.label === 'mail' };
+  return { wil: 'tekst', taalOk: true, handtekening: 'Sunny', tijdGenoemd: true, marge: true, vraag: true, geenGoedNieuwsBijDrukte: s.weken.w >= 3, verWegUitleg: false, /* KORT (29-08): geen route-uitleg in het voorstel */ jaAntwoord: s.aantal.n === 1, knop: s.vorm.label === 'mail' };
 }
 function voerUitB(s) {
   const slots = Array.from({ length: s.aantal.n }, (_, i) => ({ aankomst: new Date(NU_B + s.weken.w * 7 * 86400000 + i * 86400000 + 2 * 3600000).toISOString(), inmeter: 'Joey' }));
@@ -123,11 +123,11 @@ function voerUitB(s) {
     taalOk: en ? !/\b(Hoi|Groetjes|inmeten)\b/.test(plat) && /Hi Kim/.test(plat) : !/\b(Hi Kim|Kind regards|measure)\b/.test(plat) && /Hoi Kim/.test(plat),
     handtekening: /Sunny/.test(plat) && !/Nanny|Jaimy/.test(plat) ? 'Sunny' : 'ANDERS',
     tijdGenoemd: en ? /around \d\d:\d\d/.test(plat) : /rond \d\d:\d\d/.test(plat),
-    marge: en ? /hour earlier or later/.test(plat) && /text message/.test(plat) : /een uur eerder of later/.test(plat) && /sms/.test(plat),
+    marge: en ? /hour earlier or later/.test(plat) : /een uur eerder of later/.test(plat),
     vraag: /\?/.test(plat),
     geenGoedNieuwsBijDrukte: !/goed nieuws|good news/i.test(plat),
     verWegUitleg: en ? /combine jobs/.test(plat) : /combineren klussen/.test(plat),
-    jaAntwoord: en ? /reply "yes"/.test(plat) : /gewoon "ja"/.test(plat),
+    jaAntwoord: en ? /Reply "yes"/.test(plat) : /Antwoord "ja"/.test(plat),
     knop: /<a href=/.test(txt),
     melding: true,
   };
@@ -231,7 +231,7 @@ function voerUitE(s) {
   const r = S.navraagBesluit({ nu, lead, state, eerder: s.eerder.n });
   const t = S.navraagTekst({ voornaam: 'Kim', taal: s.taal.label });
   const en = s.taal.label === 'en';
-  const tekstOk = /Sunny/.test(t) && /\?/.test(t) && (en ? /Hi Kim/.test(t) && !/Hoi/.test(t) : /Hoi Kim/.test(t) && !/\bHi\b/.test(t));
+  const tekstOk = /Sunny/.test(t) && /\?/.test(t) && (en ? /Hi Kim/.test(t) && !/Hoi/.test(t) : /Hoi Kim/.test(t) && !/\bHi\b/.test(t)) && t.length < 260;
   return { uitkomst: r.actie === 'navragen' ? 'navragen' : 'blokkeer', actie: r.actie, tekstOk, reden: r.reden, melding: true };
 }
 function vergelijkE(w, e) { return w.actie === e.actie && e.tekstOk; }
@@ -253,7 +253,7 @@ function voerUitF(s) {
   const r = S.wachtmeldingBesluit({ nu: s.tijd.nu, lead: { rpItemId: 'rp-f', telefoon: s.contact.tel, email: s.contact.email }, state, wachtDagen: 0 });
   const t = S.wachtmeldingTekst({ voornaam: 'Kim', taal: s.taal.label });
   const en = s.taal.label === 'en';
-  const tekstOk = /Sunny/.test(t) && /\?/.test(t) && (en ? /within 4 working days/.test(t) && /emissions and fuel/.test(t) : /binnen 4 werkdagen/.test(t) && /uitstoot en brandstof/.test(t));
+  const tekstOk = /Sunny/.test(t) && /\?/.test(t) && (en ? /within 4 working days/.test(t) : /binnen 4 werkdagen/.test(t)) && t.length < 320;
   return { uitkomst: r.actie === 'melden' ? 'melden' : 'blokkeer', actie: r.actie, tekstOk, melding: true };
 }
 function vergelijkF(w, e) { return w.actie === e.actie && e.tekstOk; }

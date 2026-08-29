@@ -87,8 +87,8 @@ function verWegRegel(ver, taal = 'nl') {
   // gaat nu over ónze routeplanning en zegt niets over waar de klant woont.
   if (!ver) return '';
   return taal === 'en'
-    ? ' We plan our measuring routes as efficiently as possible and combine jobs in your area: that saves unnecessary kilometres, emissions and fuel, but it can mean it takes a little longer before we get to you.'
-    : ' We plannen onze inmeetroutes zo efficiënt mogelijk en combineren klussen bij jou in de buurt: dat scheelt onnodige kilometers, uitstoot en brandstof, maar daardoor kan het soms iets langer duren voor we bij je zijn.';
+    ? ' (We combine jobs in your area for an efficient route, so it can take a bit longer.)'
+    : ' (We combineren klussen bij jou in de buurt voor een efficiënte route, daardoor duurt het soms iets langer.)';
 }
 
 /** Ligt het voorgestelde moment ver weg? Dan is "goed nieuws" de verkeerde toon
@@ -117,12 +117,12 @@ function berichtTekst(voornaam, url, duurMin, geldigUren = 24, ver = false, slot
   const wanneer = lijst.map((sl) => slotTekst(sl, taal)).join(taal === 'en' ? ' or ' : ' of ');
   if (taal === 'en') {
     if (lijst.length === 1) {
-      return `${opening(voornaam, slots, 'en')}: ${wanneer} (takes about ${duurMin} minutes).${verWegRegel(ver, 'en')} Does that work for you? Reply "yes" and I'll lock it in, or pick another time here:\n\n${url}\n\nThe time is held for you for ${geldigUren} hours.\n\n${GROET.en}`;
+      return `${opening(voornaam, slots, 'en')}: ${wanneer} (about ${duurMin} min, may be an hour earlier or later).${verWegRegel(ver, 'en')} Does that work? Reply "yes" and I'll lock it in; otherwise let me know what suits you.\n\n${GROET.en}`;
     }
     return `${opening(voornaam, slots, 'en')}${wanneer ? `: ${wanneer}` : ''} (takes about ${duurMin} minutes).${verWegRegel(ver, 'en')} Pick the time that suits you best here:\n\n${url}\n\nThe times are held for you for ${geldigUren} hours. If choosing doesn't work, just reply to this message.\n\n${GROET.en}`;
   }
   if (lijst.length === 1) {
-    return `${opening(voornaam, slots)}: ${wanneer} (duurt ongeveer ${duurMin} minuten).${verWegRegel(ver)} Past dat bij je? Antwoord dan gewoon "ja", dan zet ik het vast. Past het niet, kies hier een andere tijd:\n\n${url}\n\nDe tijd staat ${geldigUren} uur voor je vast.\n\n${GROET.nl}`;
+    return `${opening(voornaam, slots)}: ${wanneer} (ca. ${duurMin} min, kan een uur eerder of later zijn).${verWegRegel(ver)} Past dat? Antwoord "ja", dan zet ik hem vast; anders hoor ik graag wanneer het wél uitkomt.\n\n${GROET.nl}`;
   }
   return `${opening(voornaam, slots)}${wanneer ? `: ${wanneer}` : ''} (duurt ongeveer ${duurMin} minuten).${verWegRegel(ver)} Kies hier de tijd die jou het beste uitkomt:\n\n${url}\n\nDe tijden staan ${geldigUren} uur voor je vast. Lukt kiezen niet, stuur dan gewoon een berichtje terug.\n\n${GROET.nl}`;
 }

@@ -147,10 +147,8 @@ function navraagBesluit({ nu = Date.now(), lead = {}, state = {}, eerder = 0, mi
 }
 
 function navraagTekst({ voornaam = 'daar', taal = 'nl' } = {}) {
-  if (taal === 'en') {
-    return `Hi ${voornaam}, I suggested a couple of moments for the measuring appointment earlier, but haven't heard back from you yet. Would you still like us to come by? Just let me know which days or parts of the day suit you (or from when), and I'll schedule it right away. If you'd rather not go ahead, I'd like to hear that too.\n\nKind regards, Sunny from Sonty`;
-  }
-  return `Hoi ${voornaam}, ik heb je eerder een paar momenten voorgesteld voor het inmeten, maar nog niets van je gehoord. Wil je nog steeds dat we langskomen? Laat even weten welke dagen of dagdelen jou uitkomen (of vanaf wanneer), dan plan ik het meteen voor je in. Wil je er toch vanaf zien, dan hoor ik dat ook graag.\n\nGroetjes, Sunny van Sonty`;
+  if (taal === 'en') return `Hi ${voornaam}, I suggested a few moments for the measuring but haven't heard back. Still want us to come by? Tell me which days suit you and I'll schedule it.\n\nSunny, Sonty`;
+  return `Hoi ${voornaam}, ik stelde eerder een paar momenten voor het inmeten voor maar hoorde niets terug. Wil je nog dat we komen? Zeg welke dagen je uitkomen, dan plan ik het in.\n\nSunny van Sonty`;
 }
 
 /**
@@ -168,10 +166,8 @@ function wachtmeldingBesluit({ nu = Date.now(), lead = {}, state = {}, wachtDage
   return { actie: 'melden', reden: `dag ${wachtDagen}/${maxWachtDagen}: Sunny meldt de wachttijd en vraagt de voorkeur` };
 }
 function wachtmeldingTekst({ voornaam = 'daar', taal = 'nl', maxWachtDagen = 4 } = {}) {
-  if (taal === 'en') {
-    return `Hi ${voornaam}, thanks for your go-ahead! I'm scheduling the measuring appointment for you. We plan our measuring routes as efficiently as possible and combine jobs in your area (that saves unnecessary kilometres, emissions and fuel), so it can take a few days before I can offer you a concrete moment; you'll hear from me within ${maxWachtDagen} working days at the latest. Do you already have a preference for certain days or parts of the day? Let me know and I'll take it into account.\n\nKind regards, Sunny from Sonty`;
-  }
-  return `Hoi ${voornaam}, bedankt voor je akkoord! Ik ga de inmeetafspraak voor je inplannen. We plannen onze inmeetroutes zo efficiënt mogelijk en combineren klussen bij jou in de buurt (dat scheelt onnodige kilometers, uitstoot en brandstof), daardoor kan het een paar dagen duren voor ik je een concreet moment kan geven; uiterlijk binnen ${maxWachtDagen} werkdagen hoor je van mij. Heb je zelf al voorkeur voor bepaalde dagen of dagdelen? Laat het weten, dan houd ik daar rekening mee.\n\nGroetjes, Sunny van Sonty`;
+  if (taal === 'en') return `Hi ${voornaam}, thanks for the go-ahead! I'm planning your measuring as efficiently as possible in our route; you'll get a concrete moment within ${maxWachtDagen} working days. Any preferred days? Let me know.\n\nSunny, Sonty`;
+  return `Hoi ${voornaam}, bedankt voor je akkoord! Ik plan het inmeten zo efficiënt mogelijk in onze route; binnen ${maxWachtDagen} werkdagen krijg je een concreet moment. Heb je voorkeursdagen? Laat het weten.\n\nSunny van Sonty`;
 }
 
 // ── Sunny's tekst ─────────────────────────────────────────────────────────────
@@ -204,31 +200,20 @@ function wekenWeg(slots, nu = Date.now()) {
  * (BOT_PATRONEN in verzend-poort kent deze handtekening, anders telt hij als mens-actief).
  */
 function voorstelTekst({ voornaam = 'daar', slots = [], duurMin = 30, ver = false, taal = 'nl', nu = Date.now() } = {}) {
+  // KORT (Daimy 29-08): één tijd, één vraag. Marge in vier woorden; sms-uitleg pas in de bevestiging.
   const lijst = (slots || []).filter((s) => s && s.aankomst).slice(0, 3);
   const inmeter = lijst[0]?.inmeter || (taal === 'en' ? 'our surveyor' : 'onze inmeter');
   const druk = wekenWeg(lijst, nu) >= 3;
   if (taal === 'en') {
     const when = lijst.map((s) => slotZin(s, 'en')).join(' or ');
-    const open = druk
-      ? `Hi ${voornaam}, I'd love to get the measuring scheduled for you. It's extra busy at the moment (summer holidays and the construction break), so this is the first moment I can offer`
-      : `Hi ${voornaam}, good news: I can schedule the measuring for you`;
-    const ver_ = ver ? ' We plan our measuring routes as efficiently as possible and combine jobs in your area: that saves unnecessary kilometres, emissions and fuel, but it can mean it takes a little longer before we get to you.' : '';
-    const marge = ' As we drive a route that day we can be up to an hour earlier or later; as soon as we\'re on our way you\'ll get a text message with a link to follow us live.';
-    const vraag = lijst.length === 1
-      ? ' Does that work for you? Just reply "yes" and I\'ll lock it in. If not, let me know from when it suits you (or which days/parts of the day), and I\'ll have another look.'
-      : ' Which one suits you best? Just reply with the day and I\'ll lock it in. None of them work? Let me know from when it suits you and I\'ll have another look.';
-    return `${open}: ${inmeter} can come by ${when} to measure, which takes about ${duurMin} minutes.${ver_}${marge}${vraag}\n\nKind regards, Sunny from Sonty`;
+    const open = druk ? `Hi ${voornaam}, the first moment I can offer for the measuring` : `Hi ${voornaam}, I can schedule the measuring`;
+    const vraag = lijst.length === 1 ? 'Does that work? Reply "yes" and I\'ll lock it in; otherwise let me know what suits you.' : 'Which one suits you? Reply with the day and I\'ll lock it in.';
+    return `${open}: ${inmeter} ${when} (about ${duurMin} min, may be an hour earlier or later). ${vraag}\n\nSunny, Sonty`;
   }
   const wanneer = lijst.map((s) => slotZin(s, 'nl')).join(' of ');
-  const open = druk
-    ? `Hoi ${voornaam}, ik plan het inmeten graag voor je in. Het is op dit moment extra druk (bouwvak en vakanties), dus dit is het eerste moment dat ik je kan aanbieden`
-    : `Hoi ${voornaam}, goed nieuws: ik kan het inmeten voor je inplannen`;
-  const ver_ = ver ? ' We plannen onze inmeetroutes zo efficiënt mogelijk en combineren klussen bij jou in de buurt: dat scheelt onnodige kilometers, uitstoot en brandstof, maar daardoor kan het soms iets langer duren voor we bij je zijn.' : '';
-  const marge = ' Omdat we die dag een route rijden kunnen we een uur eerder of later zijn; zodra we onderweg zijn krijg je een sms met een link waarmee je ons live kunt volgen.';
-  const vraag = lijst.length === 1
-    ? ' Past dat? Antwoord dan gewoon "ja", dan zet ik hem voor je vast. Komt het niet uit, laat dan even weten vanaf wanneer het jou wél uitkomt (of welke dagen/dagdelen), dan kijk ik verder.'
-    : ' Welke past jou het beste? Antwoord gewoon met de dag, dan zet ik hem voor je vast. Past geen van beide, laat dan even weten vanaf wanneer het jou wél uitkomt, dan kijk ik verder.';
-  return `${open}: ${inmeter} kan ${wanneer} bij je langskomen om in te meten, dat duurt ongeveer ${duurMin} minuten.${ver_}${marge}${vraag}\n\nGroetjes, Sunny van Sonty`;
+  const open = druk ? `Hoi ${voornaam}, het eerste moment dat ik kan aanbieden voor het inmeten` : `Hoi ${voornaam}, ik kan het inmeten inplannen`;
+  const vraag = lijst.length === 1 ? 'Past dat? Antwoord "ja", dan zet ik hem vast; anders hoor ik graag wanneer het wél uitkomt.' : 'Welke past? Antwoord met de dag, dan zet ik hem vast.';
+  return `${open}: ${inmeter} ${wanneer} (ca. ${duurMin} min, kan een uur eerder of later zijn). ${vraag}\n\nSunny van Sonty`;
 }
 
 /** Mailversie (HTML) van hetzelfde voorstel; de knop is een gemak, "ja" terugmailen werkt ook. */

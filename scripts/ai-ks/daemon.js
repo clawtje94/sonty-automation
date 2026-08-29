@@ -1084,6 +1084,7 @@ async function verwerkTicket(t, state) {
     const sendRes = await sendActiefReply(t, res.antwoord);
     console.log(`  → ACTIEF antwoord verstuurd naar ${t.contact?.phone}: ${sendRes.ok ? 'OK' : 'FOUT ' + sendRes.status + ' ' + sendRes.body.substring(0, 200)}`);
     if (!sendRes.ok) await telegram(`⚠️ AI-KS actief-gesprek verzenden MISLUKT op ticket ${t.id}: ${sendRes.status} ${sendRes.body.substring(0, 200)}`);
+    if (sendRes.ok) { try { require('../lib/brein.js').gebeurtenis('Sunny', `antwoord gestuurd aan ${(t.contact && t.contact.name) || 'klant'} (ticket ${t.id})`); } catch { /* brein is best effort */ } }
     if (sendRes.ok) { try { require('../lib/sunny-start.js').noteerSunnyVerstuurd(t.id); } catch { /* best effort */ } }
   } else if (liveTest && res.antwoord) {
     // Menselijke typ-vertraging (config REPLY_DELAY; uit tijdens test, aan bij livegang)

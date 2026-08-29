@@ -34,6 +34,7 @@ async function telegram(tekst) {
 
 /** Bij elke boeking aanroepen: bewaart ALLE sleutels die een rollback nodig heeft. */
 function registreerBoeking({ rpItemId, naam, telefoon, email, planadoJobUuid, outlookEventId, agendaVia, grippNr, sheet, slot, duurMin, aanbodToken, bron }) {
+  try { require('./brein.js').gebeurtenis(bron === 'sunny' ? 'Sunny' : 'Nanny', `inmeetafspraak geboekt: ${naam} ${slot && slot.aankomst ? new Date(slot.aankomst).toLocaleString('nl-NL', { timeZone: 'Europe/Amsterdam', weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : ''} (${agendaVia || 'agenda'}, bron ${bron || '?'})`); } catch { /* brein is best effort */ }
   const boekingen = laadBoekingen();
   boekingen[rpItemId] = {
     naam, telefoon, email, planadoJobUuid, outlookEventId: outlookEventId || null, agendaVia: agendaVia || null,
@@ -92,6 +93,7 @@ function vindBoeking({ telefoon, email, naam }) {
  * Geeft { gelukt, stappen: [{stap, ok, detail}] } — deels mislukt = zichtbaar, nooit stil.
  */
 async function muteerBoeking(rpItemId, soort, { reden = '', bron = 'onbekend' } = {}) {
+  try { require('./brein.js').gebeurtenis(bron === 'sunny' ? 'Sunny' : 'Nanny', `mutatie ${soort} gestart (${bron})${reden ? ': ' + String(reden).slice(0, 80) : ''}`); } catch { /* brein is best effort */ }
   const boekingen = laadBoekingen();
   const b = boekingen[rpItemId];
   if (!b || b.status !== 'geboekt') return { gelukt: false, stappen: [{ stap: 'vinden', ok: false, detail: 'geen actieve boeking' }] };

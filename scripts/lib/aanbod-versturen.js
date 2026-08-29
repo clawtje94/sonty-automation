@@ -591,6 +591,7 @@ async function verstuurAanbod(aanbod, url) {
     const slots = (aanbod.slots || []).map((sl, i) => `${i + 1}. ${slotTekst(sl)}`).join('\n');
     const spiegel = `Hoi ${(aanbod.lead.naam || 'daar').split(' ')[0]}, goed nieuws: we kunnen bij je langskomen om in te meten.${aanbod.ver ? ' [ver-weg-versie]' : ''}\n\n${slots || '(GEEN TIJDEN?!)'}\n\nTik op een knop en we zetten hem vast.`;
     const { planningTelegram } = require('./telegram-planning.js');
+    try { require('./brein.js').gebeurtenis((aanbod.stijl === 'sunny' || aanbod.bron === 'sunny') ? 'Sunny' : 'Nanny', `inmeet-voorstel verstuurd aan ${aanbod.lead.naam} (wa: ${wa.ok ? wa.via : 'niet'}, mail: ${mail.ok ? 'ok' : 'niet'})`); } catch { /* brein is best effort */ }
     await planningTelegram(`📤 Verstuurd naar ${aanbod.lead.naam} (wa: ${wa.ok ? wa.via : 'niet — ' + wa.reden}, mail: ${mail.ok ? 'ok' : 'niet — ' + mail.reden}). Dit kreeg de klant:\n\n${spiegel}`);
   } catch { /* spiegel mag verzending nooit blokkeren */ }
   return { wa, mail, ergensGelukt: wa.ok || mail.ok };

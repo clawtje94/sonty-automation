@@ -1,4 +1,26 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
+
+## 29-08 (avond): WEBSITEFOTO-TOOL /admin/websitefotos + ORANJE STREEPJES WEG (website e91488c + vervolg)
+- Daimy: "overal op het vercel-domein dat oranje streepje voor/onder de blokken weg" + "website foto tool: foto's per blok
+  kiezen en zien waar ze allemaal getoond worden". Streepje = 60x4 balkje (#BF5317/#FFCC01) onder sectiekoppen: 43 stuks
+  in 15 pagina's/components verwijderd (script scratch, geen restanten: grep 'height: 4,' in publieke tsx = 0).
+- Tool: elk publiek server-component haalt zijn foto's door `wf()` uit lib/websitefotos.ts (codemod scripts/websitefotos-codemod.js,
+  66 plekken, idempotent). Slot = bestand::standaard-src. Keuzes GEVERSIONEERD in Blob admin/websitefotos/keuzes-<ts>.json
+  (vast pad overschrijven bleek tot ~9 s stale + even "not found"; mailfotos doet dat nog wel → risico als iemand daar direct
+  na opslaan leest). unstable_cache tag websitefotos (5 min) + revalidateTag/Path("/", "layout") na opslaan → direct live.
+  KV bewust niet: Upstash-maandlimiet (500k) is vol (build-log 29-08), uploads-lijst uit KV valt dan stil terug op leeg.
+- Slotlijst: scripts/websitefotos-scan.js → data/websitefoto-slots.json (211 slots, 160 foto's). Lab scripts/websitefotos-lab.js
+  (echte next start op :3057, testprefix admin/websitefotos-LAB/, ADMIN_PASSWORD+BLOB-token via vercel env pull in scratchpad):
+  api-validatie 150 + render-wissel 210 (elk slot unieke marker, standaard mag nergens plain lekken) + reset 51 = 411, 0x FOUT-STIL.
+  Lab schrijft data/websitefoto-routes-gemeten.json (op welke concrete pagina's elk slot echt staat) → tool toont die;
+  19 slots die nergens renderen (dode fallback-data: hero: in lib/diensten.ts, ZAKELIJK_FALLBACK, montage-actie-fallback) verborgen.
+- Tool: tabs Per pagina (zijlijst met telling, "Overal op de site" voor footer-logo e.d., kaart per blok met huidige foto,
+  Andere foto kiezen → kiezer met categorieën portfolio/eigen uploads/staat al op de site + upload via /api/admin/fotoupload,
+  Terug naar standaard) en Per foto (elke foto met alle plekken, klik = naar die pagina). Opslaan en live zetten = 1 knop.
+- Buiten scope (bewust): client-components (SontyHeader-logo, DoekCollectie, galleries, 3D-texturen), metadata/og-images,
+  portfolio (eigen tool /admin/fotos). Nieuwe foto-plek in code: codemod → scan → lab → build.
+- Live gecheckt: home/diensten/showroom/zakelijk 0 balkjes (vorige main had er 4 op home), /admin/websitefotos 200, API 401
+  zonder login, 192 slots / 51 routes / 1265 foto's in bibliotheek; screenshots desktop + iPhone 12 in scratchpad.
 
 ## 29-08 (avond): CONCURRENTIEONDERZOEK BETAALDE ZOEKWOORDEN (website content/concurrentie-zoekwoorden-2026-08.md)
 - Daimy (/goal): concurrentieonderzoek op de zoekwoorden waar we voor betalen, rapport hoe we nummer 1 worden; kloppend,
@@ -2957,3 +2979,10 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 - Zakelijke zoekformuleringen (Google-autocomplete): 23 gevonden (o.a. zonwering vve, zonwering appartement vve, zonwering appartementencomplex, zonwering kantoor); brief in data/seo-agent/briefs/ zodra de weekronde echt draait.
 - Linkbronnen gecorrigeerd: Somfy /vind-een-dealer, ROMA /haendlerfinden, Plaspoelpolder = gemeentepagina; Sunmaster heeft geen openbare dealerzoeker (via accountmanager). L14 Service Nodi mist nog een URL.
 - Open: V8 Search Console-toegang (service-account of export) voor het positie-blok; bij livegang: proefgeval L-verzoek laten zien, dan verzendenAan aan.
+
+## 2026-08-29 (avond) — Tracking van Webflow overgezet naar de Vercel-site
+- Gemeten op sonty.nl (headless): GTM-MLLGCPR via server-side tagging sst.sonty.nl (TAGGRS-loader hip7aki0th), in de container: Cookiebot (cbid 6d3ae62d…, Consent Mode), GA4 G-S480E56ZQE, Google Ads AW-302987183 (3 conversies met enhanced conversions), Meta Pixel 1180729206424422, Pinterest-tag 2613438783703, klik-triggers tel:/mailto:/"outlook.office". Los daarvan HubSpot-script 147970649 (draaide op Webflow al vóór toestemming).
+- Container-export ontleed (`scratchpad gtm-resource.json`, 26 tags/12 predicates/11 rules): events die de tags verwachten: `configurator.conversion` (+ configuration.values.voornaam/achternaam/e-mailadres/telefoonnummer/postcode/plaats/straatnaam/land), `contact_form_submit` (+ user_data.*), `zakelijk_form_submit`, paginalading `/reparatie-bedankt`.
+- Gebouwd in sonty-website (commit "Tracking overgezet van Webflow…", deploy success): `components/Analytics.tsx` (GTM via sst + noscript, HubSpot pas na Cookiebot-marketingtoestemming, WhatsApp-klik-event, geen tracking op /admin /inmeten /zon /meetbon /rekentool), `lib/tracking.ts` (event-helpers, telefoon naar +31, bedankpagina als volledige paginalading), eigen CookieConsent-banner verwijderd (Cookiebot neemt over), CookieVoorkeurenKnop → Cookiebot.renew(), ContactForm/FormHandler/ProductConfigurator pushen de events, Bookings-links kregen `&ref=outlook.office` zodat de bestaande GA4-trigger Klik_Afspraak_Maken blijft vuren, cookiebeleid-tekst bijgewerkt.
+- Gemeten lokaal (build) en op sonty-website.vercel.app: GTM laadt via sst, zonder toestemming geen GA/Ads/Meta-verzoeken, tel-klik geeft gtm.click, contactformulier (API gemockt) pusht contact_form_submit met user_data en laadt /contact-bedankt volledig.
+- OPEN: Cookiebot toont op sonty-website.vercel.app geen banner ("domain not authorized for domain group"); pas op sonty.nl (of na toevoegen van het vercel-domein in Cookiebot) werkt de toestemming en dus de meting. First-party cookies (FPID, _ga op .sonty.nl) werken pas na de domeinswitch. WhatsApp-klik en showroom-boeking hebben nog geen tag in GTM (geen bewerkrechten). Scripts: `scripts/tracking-meting.mjs` (live-site), `scripts/tracking-meting-lokaal.mjs`.

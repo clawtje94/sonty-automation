@@ -401,6 +401,8 @@ async function planningRolVoor(t, rows) {
   try {
     const cA = require('../lib/gesprek-claims.js').claimVan(t.id);
     if (cA && cA.door === 'annulering-loopt' && Date.now() - Date.parse(cA.op) < 2 * 3600000) return { blijfWeg: true, reden: 'annulering-loopt', context: '' };
+    // winkel plant zelf (Daimy 29-08): kantoor/winkel heeft dit gesprek; Sunny doet niets aan de planning
+    if (cA && cA.door === 'winkel' && Date.now() - Date.parse(cA.op) < 24 * 3600000) return { blijfWeg: true, reden: 'winkel-plant-zelf', context: '' };
   } catch { /* geen claims-administratie */ }
   const fs2 = require('fs');
   const st = JSON.parse(fs2.readFileSync('/Users/clawdboot/sonty/data/inmeten-planner-state.json', 'utf8'));

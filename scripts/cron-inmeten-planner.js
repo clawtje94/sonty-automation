@@ -938,7 +938,7 @@ async function main() {
     // (eerst 1, dan de rest). Wat niet verstuurd wordt, staat mét reden op de kaart.
     if (!LIVE && sunnyStart.aan()) {
       const beperkTot = sunnyStart.alleenNaam();
-      const gate = sunnyStart.magStarten({ lead: { ...lead, rpItemId: item.id }, slots: aanbod, lopend: false, geboekt: false, state });
+      const gate = sunnyStart.magStarten({ lead: { ...lead, rpItemId: item.id }, slots: aanbod, lopend: false, geboekt: false, state, gezienOp: state.gezien?.[item.id] || null });
       if (beperkTot && !`${lead.naam} ${item.id}`.toLowerCase().includes(beperkTot)) {
         kaart.reden = `Sunny wacht: proefstand, alleen "${beperkTot}"`;
       } else if (!gate.ok && /voorstellen gestuurd zonder boeking/.test(gate.reden)) {

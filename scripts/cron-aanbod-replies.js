@@ -394,6 +394,7 @@ async function main() {
         // een 'sunny-voorstel'-claim (planner stuurde Sunny's voorstel) blokkeert de keuze-verwerking NIET:
         // een kale "ja" moet direct geboekt worden (review 28-08)
         if (require('./lib/gesprek-claims.js').geclaimd(ticketId, 30, 'sunny-voorstel')) continue;
+        { const cw = require('./lib/gesprek-claims.js').claimVan(ticketId); if (cw && cw.door === 'winkel' && Date.now() - Date.parse(cw.op) < 24 * 3600000) { console.log(`  ${info.naam}: winkel plant zelf — reply-route blijft eraf`); continue; } }
         // Sunny noemde zelf tijden (28-08): een kale keuze hoort bij Sunny's tijden, nooit bij
         // het oude planner-aanbod — deze route blijft er dan 24 uur helemaal vanaf.
         // Sunny noemde zelf tijden: dan nooit een keuze op het OUDE aanbod registreren; de rest van

@@ -95,8 +95,11 @@ function laatsteVoorstelOp(state, lead) {
  * en worden dáár getoetst; hier alleen wat de planner zelf al weet.
  * @returns {{ok:boolean, reden:string, mensNodig?:boolean, wachtTot?:string}}
  */
-function magStarten({ nu = Date.now(), lead = {}, slots = [], lopend = false, geboekt = false, state = {}, vlagAan = aan(), opVerzoek = false, maxEerder = 2 } = {}) {
+function magStarten({ nu = Date.now(), lead = {}, slots = [], lopend = false, geboekt = false, state = {}, vlagAan = aan(), opVerzoek = false, maxEerder = 2, gezienOp = null, minMinutenNaBinnenkomst = 60 } = {}) {
   if (!vlagAan) return { ok: false, reden: 'sunny-start staat uit' };
+  // WINKEL PLANT ZELF (Daimy 29-08, Stefan v.d. Spek): klant die in de winkel al een datum kreeg → Sunny blijft eraf
+  const wp = (state.winkelPlant || {})[String(lead.rpItemId || '')];
+  if (wp?.op && nu - Date.parse(wp.op) < 7 * DAG_MS) return { ok: false, reden: `winkel plant zelf (gezet ${wp.op.slice(0, 10)}${wp.door ? ' door ' + wp.door : ''}) — Sunny blijft eraf` };
   if (geboekt) return { ok: false, reden: 'al geboekt' };
   if (lopend) return { ok: false, reden: 'lopend aanbod (keuzelink of eerder voorstel) — wachten tot dat is afgehandeld' };
   if (!lead.telefoon && !lead.email) return { ok: false, reden: 'geen telefoon en geen e-mail — mens nodig', mensNodig: true };
@@ -110,6 +113,12 @@ function magStarten({ nu = Date.now(), lead = {}, slots = [], lopend = false, ge
   if (!opVerzoek && vorige && nu - vorige < DAG_MS) {
     const uren = Math.max(1, Math.round((DAG_MS - (nu - vorige)) / 3600000));
     return { ok: false, reden: `al een voorstel gestuurd <24u geleden — volgende op zijn vroegst over ${uren} u` };
+  }
+  // UUR VERTRAGING (Daimy 29-08): iemand die net op het dashboard komt, wil de winkel eventueel zelf inplannen
+  // (klant staat aan de balie). Pas na minMinutenNaBinnenkomst stuurt Sunny automatisch.
+  if (gezienOp) {
+    const minuten = (nu - Date.parse(gezienOp)) / 60000;
+    if (minuten < minMinutenNaBinnenkomst) return { ok: false, reden: `net binnen (${Math.max(0, Math.round(minuten))} min) — winkel kan zelf plannen; Sunny stuurt na ${minMinutenNaBinnenkomst} min` };
   }
   if (!binnenVenster(nu)) return { ok: false, reden: `buiten verzendvenster (ma–za 08:30–20:00) — gaat ${volgendeVensterTekst(nu)}`, wachtTot: volgendeVensterTekst(nu) };
   return { ok: true, reden: 'ok' };

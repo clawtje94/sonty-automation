@@ -46,6 +46,7 @@ const dimA = [
   ] },
   { naam: 'slots', waarden: [{ label: '1', n: 1 }, { label: '0', n: 0 }] },
   { naam: 'opVerzoek', waarden: [{ label: 'nee', v: false }, { label: 'ja', v: true }] },
+  { naam: 'binnen', waarden: [{ label: '5min', min: 5 }, { label: '90min', min: 90 }, { label: 'winkel-plant', min: 90, winkel: true }] },
 ];
 
 function orakelA(s) {
@@ -56,7 +57,9 @@ function orakelA(s) {
   const vorigeBlokkeert = b.vorigeUur !== undefined && b.vorigeUur < 24 && !s.opVerzoek.v && koppelbaar;
   // O1-bis: 2+ eerdere voorstellen zonder boeking → geen bot meer, mens nodig (tenzij op verzoek)
   const teVaak = (b.eerder || 0) >= 2 && !s.opVerzoek.v;
-  const mag = s.vlag.aan && contactOk && !b.lopend && !b.geboekt && !vorigeBlokkeert && !teVaak && s.slots.n > 0 && s.tijd.open;
+  // uur-vertraging (Daimy 29-08): <60 min op het dashboard → wachten; winkel-plant-vlag → nooit
+  const teVers = s.binnen.min < 60;
+  const mag = s.vlag.aan && contactOk && !b.lopend && !b.geboekt && !vorigeBlokkeert && !teVaak && !teVers && !s.binnen.winkel && s.slots.n > 0 && s.tijd.open;
   return { wil: mag ? 'sturen' : 'blokkeer', mensNodig: s.vlag.aan && !b.geboekt && !b.lopend && (!contactOk || (teVaak && s.slots.n > 0)) };
 }
 function voerUitA(s) {
@@ -73,7 +76,8 @@ function voerUitA(s) {
       : { rpItemId: 'rp-lab-1', naam: 'Lab Klant', telefoon: c.telefoon || null, email: c.email || null, verstuurdOp: new Date(s.tijd.nu - uur(b.vorigeUur)).toISOString() };
   }
   const slots = s.slots.n ? [{ aankomst: new Date(s.tijd.nu + 5 * 86400000).toISOString(), inmeter: 'Joey' }] : [];
-  const r = S.magStarten({ nu: s.tijd.nu, lead, slots, lopend: !!b.lopend, geboekt: !!b.geboekt, state, vlagAan: s.vlag.aan, opVerzoek: s.opVerzoek.v });
+  if (s.binnen.winkel) state.winkelPlant = { 'rp-lab-1': { op: new Date(s.tijd.nu - 3600000).toISOString(), door: 'lab' } };
+  const r = S.magStarten({ nu: s.tijd.nu, lead, slots, lopend: !!b.lopend, geboekt: !!b.geboekt, state, vlagAan: s.vlag.aan, opVerzoek: s.opVerzoek.v, gezienOp: new Date(s.tijd.nu - s.binnen.min * 60000).toISOString() });
   // reden is altijd zichtbaar op de kaart (O16), behalve als er gestuurd wordt (dan is het bericht zelf zichtbaar)
   return { uitkomst: r.ok ? 'sturen' : 'blokkeer', reden: r.reden, mensNodig: !!r.mensNodig, melding: true };
 }
@@ -83,12 +87,14 @@ function vergelijkA(w, e, s) {
     // de reden moet kloppen met de oorzaak (geen "computer says no")
     const b = s.bestaand;
     if (!s.vlag.aan) return /uit/.test(e.reden);
+    if (s.binnen.winkel) return /winkel plant zelf/.test(e.reden);
     if (b.geboekt) return /geboekt/.test(e.reden);
     if (b.lopend) return /lopend/.test(e.reden);
     if (!s.contact.telefoon && !s.contact.email) return /mens nodig/.test(e.reden) && e.mensNodig;
     if (s.slots.n === 0) return /geen tijd/.test(e.reden);
     if ((b.eerder || 0) >= 2 && !s.opVerzoek.v) return /mens nodig/.test(e.reden) && e.mensNodig;
     if (b.vorigeUur !== undefined && b.vorigeUur < 24 && !s.opVerzoek.v && (!b.opTelefoon || !!s.contact.telefoon)) return /<24u/.test(e.reden);
+    if (s.binnen.min < 60) return /net binnen/.test(e.reden);
     if (!s.tijd.open) return /verzendvenster/.test(e.reden);
   }
   return true;

@@ -24,3 +24,9 @@ en melden via `brein-sessie.js opdracht <hoofd-slug> "V<n> is verlopen, beslis z
 - Eerste dienst 29-8-2026: alle 5 hoofden (Lars, Noor, Isa, Fenna, Mats) leverden op tijd een rapport.
 - Reviews-API-key probleem kwam apart van 2 hoofden (Lars én Isa) — voortaan overlap tussen MT-rapporten checken en samenvoegen tot 1 V-nummer.
 - Telegram-bericht: max 3 vragen erin, rest van de vragenlijst alleen in het dagrapport-bestand.
+- Brein-audit 29-8: data/brein/briefings/ was leeg terwijl ik "verstuurd" rapporteerde — geen bewijs-check op mijn eigen Telegram-send. Team-tab toont mijn hele vragenlijst (tot 25) als "beslissingen die op je wachten" i.p.v. de 3 die ik echt stuur. Beide gemeld als V110/V111. Bo (Lars' team) had geen dagrapport, niet gemeld door Lars — V112.
+
+## Openstaand uit Brein-audit (V110-V112, sinds 29-8)
+- V110 — prioriteit Brein-fixes (briefing-bewijs + beslissingenlijst) — nog niet gestuurd
+- V111 — wie pakt de fix op (Mats direct of via Ori) — nog niet gestuurd
+- V112 — hoofden-profielen: expliciete regel "ontbrekend rapport melden" — nog niet gestuurd

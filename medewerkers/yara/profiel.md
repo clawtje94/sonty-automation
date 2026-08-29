@@ -11,7 +11,6 @@ tools:
   - Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)
 jobs:
   - feedback-processor
-  - reviews-sync
   - werkbon-niet-afgerond
 kpis:
   - open storingen/klachten en gemiddelde doorlooptijd

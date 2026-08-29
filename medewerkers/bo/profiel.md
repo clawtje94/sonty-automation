@@ -11,7 +11,6 @@ tools:
   - Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)
 jobs:
   - linkedin
-  - seo-agent-week
   - reviews-sync
 kpis:
   - merkzichtbaarheid: vermeldingen, reviews, social bereik (met bron)

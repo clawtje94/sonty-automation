@@ -59,7 +59,16 @@ switch (cmd) {
   }
   case 'antwoord': toon(B.markeer(a, 'klaar', b || '') || 'onbekende opdracht ' + a); break;
   case 'log': toon(B.gebeurtenis(a, b || '')); break;
-  case 'opdracht': toon(B.nieuweOpdracht({ aan: a, tekst: b || '', van: process.env.USER || 'mens' })); break;
+  case 'opdracht': {
+    const van = process.env.BREIN_VAN || process.env.USER || 'mens';
+    // M7 (Mats-audit): een medewerker mag max 3 opdrachten per dag delegeren; weigering is zichtbaar
+    if (process.env.BREIN_VAN) {
+      const vandaag = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Amsterdam' });
+      const n = B.postvak().filter((o) => o.van === van && String(o.op).slice(0, 10) === vandaag).length;
+      if (n >= 3) { B.gebeurtenis(van, `delegatie geweigerd (al ${n} vandaag): ${String(b || '').slice(0, 80)}`); console.log(`GEWEIGERD: je hebt vandaag al ${n} opdrachten gedelegeerd (max 3). Zet dit in je rapport.`); process.exit(3); }
+    }
+    toon(B.nieuweOpdracht({ aan: a, tekst: b || '', van })); break;
+  }
   case 'wie': {
     const s = B.sessies();
     for (const k of Object.keys(s)) toon(`${s[k].status.padEnd(14)} ${k.padEnd(24)} ${s[k].taak.slice(0, 70)}  (laatst ${s[k].laatst.slice(11, 16)})`);

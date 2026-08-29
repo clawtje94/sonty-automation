@@ -214,8 +214,11 @@ function tijdlijn() {
 
 // ── 5. postvak-uitwisseling met de pagina ──
 async function pushEnHaalOp(snapshot) {
-  const antwoorden = B.postvak().filter((o) => o.status !== 'nieuw').slice(-200).map((o) => ({ id: o.id, status: o.status, antwoord: o.antwoord, antwoordOp: o.antwoordOp }));
-  const r = await fetch(API, { method: 'POST', headers: AUTH, body: JSON.stringify({ snapshot, antwoorden }), signal: AbortSignal.timeout(20000) });
+  const lokaal = B.postvak();
+  const antwoorden = lokaal.filter((o) => o.status !== 'nieuw').slice(-200).map((o) => ({ id: o.id, status: o.status, antwoord: o.antwoord, antwoordOp: o.antwoordOp }));
+  // M6 (Mats-audit): de server zet een opdracht pas op 'opgehaald' als wij bevestigen dat hij lokaal staat
+  const bevestigd = lokaal.slice(-300).map((o) => o.id);
+  const r = await fetch(API, { method: 'POST', headers: AUTH, body: JSON.stringify({ snapshot, antwoorden, bevestigd }), signal: AbortSignal.timeout(20000) });
   if (!r.ok) throw new Error(`API ${r.status}: ${(await r.text()).slice(0, 120)}`);
   const d = await r.json();
   let nieuw = 0;
@@ -279,7 +282,7 @@ function medewerkers(jobLijst) {
     }
     const mijnJobs = jobLijst.filter((j) => m.jobs.includes(j.kort));
     return { slug: m.slug, naam: m.naam, functie: m.functie, afdeling: m.afdeling || '', niveau: m.niveau || 'medewerker', rapporteertAan: m.rapporteertAan || 'daimy', model: m.model, sessie: m.sessie === 'ja', dienst: m.dienst || null, kpis: m.kpis, magZelf: m.magZelf, fout: m.fout || s.fout || null,
-      status: s.status || 'nog nooit gedraaid', laatsteDienst: s.laatsteDienst || null, laatsteActie: s.laatsteActie || null, bezigMet: s.bezigMet || null, duurMin: s.duurMin ?? null, kostenUsd: s.kostenUsd ?? null,
+      status: s.status || 'nog nooit gedraaid', laatsteDienst: s.laatsteDienst || null, laatsteActie: s.laatsteActie || null, bezigMet: s.bezigMet || null, bezigSinds: s.bezigSinds || null, duurMin: s.duurMin ?? null, kostenUsd: s.kostenUsd ?? null,
       rapport: s.rapport || null, jobs: mijnJobs.map((j) => ({ kort: j.kort, schema: j.schema, draait: j.draait, laatst: j.laatst, alarm: j.alarm })), openOpdrachten: B.opdrachtenVoor(m.slug).length };
   }) };
 }
@@ -298,18 +301,22 @@ function laatsteBriefing() {
   const jobLijst = jobs();
   const col = collegas(jobLijst);
   const wr = await wachtrijen();
+  const mw = medewerkers(jobLijst);
   const alarmen = [
     ...jobLijst.filter((j) => j.alarm).map((j) => ({ ernst: j.laatst && NU - Date.parse(j.laatst) > 3 * 86400000 ? 'laag' : (j.label.includes('sonny') || /inmeet|aanbod|telegram/.test(j.label)) ? 'hoog' : 'midden', wie: j.collega, wat: `${j.kort}: ${j.alarm}${j.laatst && NU - Date.parse(j.laatst) > 3 * 86400000 ? ' (al dagen stil, waarschijnlijk bewust uit)' : ''}` })),
     ...(wr.sunnyLeeft ? [] : [{ ernst: 'hoog', wie: 'Sunny', wat: 'geen hartslag in de laatste 20 min' }]),
     ...(wr.mutaties.open > 5 ? [{ ernst: 'midden', wie: 'Nanny', wat: `${wr.mutaties.open} mutaties staan open` }] : []),
     ...col.sessies.filter((s) => s.wachtOpMens && s.status !== 'klaar').map((s) => ({ ernst: 'laag', wie: s.naam, wat: 'wacht op Daimy' })),
+    // M4/M5 (Mats-audit): mislukte diensten en hangende runs van medewerkers zijn alarmen
+    ...mw.lijst.filter((m) => m.status === 'fout').map((m) => ({ ernst: 'midden', wie: m.naam, wat: `dienst mislukt: ${String(m.fout || '').slice(0, 100)}` })),
+    ...mw.lijst.filter((m) => m.bezigMet && m.bezigSinds && NU - Date.parse(m.bezigSinds) > 40 * 60000).map((m) => ({ ernst: 'midden', wie: m.naam, wat: `al ${Math.round((NU - Date.parse(m.bezigSinds)) / 60000)} min bezig (hangt?)` })),
   ];
   const snapshot = {
     bijgewerkt: new Date().toISOString(), host: os.hostname(), uptimeUur: Math.round(os.uptime() / 360) / 10, load: os.loadavg()[0].toFixed(2),
-    alarmen, jobs: jobLijst, collegas: col, wachtrijen: wr, tijdlijn: tijdlijn(), medewerkers: medewerkers(jobLijst),
+    alarmen, jobs: jobLijst, collegas: col, wachtrijen: wr, tijdlijn: tijdlijn(), medewerkers: mw,
     briefing: laatsteBriefing(), schaduw: fs.existsSync(path.join(B.DIR, '.schaduw')),
     postvak: B.postvak().slice(-100).reverse(), werknemerAan: fs.existsSync(path.join(B.DIR, '.werknemer-aan')),
-    collegaNamen: [...new Set([...medewerkers(jobLijst).lijst.map((m) => m.slug), ...col.sessies.filter((s) => s.status !== 'klaar' && s.status !== 'verlopen').map((s) => s.naam), 'nieuwe werknemer'])],
+    collegaNamen: [...new Set([...mw.lijst.map((m) => m.slug), ...col.sessies.filter((s) => s.status !== 'klaar' && s.status !== 'verlopen').map((s) => s.naam), 'nieuwe werknemer'])],
   };
   fs.mkdirSync(B.DIR, { recursive: true });
   fs.writeFileSync(path.join(B.DIR, 'snapshot.json'), JSON.stringify(snapshot));

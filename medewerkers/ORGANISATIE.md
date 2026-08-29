@@ -9,19 +9,22 @@ de keukentafel) blijft mens en staat hier als "mens" vermeld.
 ```
                           DAIMY  (eigenaar / directeur)
                                     │
-        ┌───────────┬───────────────┼───────────────┬──────────────┐
-      Bram        Lars            Noor             Isa           Fenna          Mats
-  directie-    hoofd Commercie  hoofd Operatie  hoofd Klant   hoofd Financiën  hoofd Techniek
-  secretaris   (sales+marketing) (planning,      & Service     & Sturing        & Systemen
-  (briefing,                     inkoop,montage) (KS, nazorg)  (controller,HR)
-   vragenlijst)     │                │               │              │               │
-                 Milan            Nanny            Sunny          Sam            (zelf)
-                 sales-binnen     planner (AI)     klantenservice facturatie &
-                 Jules            Ruben            Yara           debiteuren
-                 marketing        inkoop           service &      Pip
-                 mens: showroom,  Tess             nazorg         HR & capaciteit
-                 buitendienst     montage-coörd.
-                                  mens: Joey, Sjoerd (inmeten), montageteams, magazijn
+   directie: Claude (bouwer, levende sessie) · Bram (directiesecretaris) · Ori (onboarding & raamwerk)
+        ┌───────────────┬───────────────┼───────────────┬──────────────┐
+      Lars            Noor             Isa           Fenna          Mats
+  hoofd Commercie  hoofd Operatie  hoofd Klant   hoofd Financiën  hoofd Techniek
+  (sales, marketing (planning,      & Service     & Sturing        & Systemen
+   brand)           inkoop,montage) (KS, nazorg)  (controller,HR)
+        │                │               │              │               │
+     Milan            Nanny            Sunny          Sam            (zelf)
+     sales-binnen     planner (AI)     klantenservice facturatie &
+     Jules            Ruben            Yara           debiteuren
+     marketing (ads,  inkoop           service &      Pip
+     mail, SEO)       Tess             nazorg         HR & capaciteit
+     Bo               montage-coörd.
+     brand, media,    mens: Joey, Sjoerd (inmeten), montageteams, magazijn
+     partners
+     mens: showroom, buitendienst
 ```
 
 ## Ritme (werkdagen)

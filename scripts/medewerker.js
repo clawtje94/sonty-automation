@@ -41,7 +41,7 @@ function team() {
   return fs.readdirSync(MAP).filter((d) => fs.existsSync(path.join(MAP, d, 'profiel.md'))).map((d) => { try { return leesProfiel(d); } catch (e) { return { slug: d, naam: d, fout: e.message }; } });
 }
 function stand() { try { return JSON.parse(fs.readFileSync(STAND, 'utf8')); } catch { return {}; } }
-function bewaarStand(s) { fs.mkdirSync(B.DIR, { recursive: true }); fs.writeFileSync(STAND, JSON.stringify(s, null, 1)); }
+function bewaarStand(s) { fs.mkdirSync(B.DIR, { recursive: true }); const tmp = STAND + '.' + process.pid + '.tmp'; fs.writeFileSync(tmp, JSON.stringify(s, null, 1)); fs.renameSync(tmp, STAND); } // atomisch (M3)
 function lees(p, leeg = '') { try { return fs.readFileSync(p, 'utf8'); } catch { return leeg; } }
 function datumNL(d = new Date()) { return d.toLocaleDateString('sv-SE', { timeZone: 'Europe/Amsterdam' }); }
 
@@ -68,18 +68,21 @@ function draai(prof, opdracht, { soort = 'dienst', opdrachtId = null } = {}) {
   fs.mkdirSync(path.dirname(rapportPad), { recursive: true });
   const systeem = [
     `Je bent ${prof.naam}, ${prof.functie} bij Sonty. Vandaag is ${vandaag}.`,
-    '\n# BEDRIJFSHANDVEST\n' + lees(path.join(MAP, 'BEDRIJF.md')),
+    '\n# RAAMWERK-REGELS (gelden in elk bedrijf)\n' + lees(path.join(MAP, 'RAAMWERK.md')),
+    '\n# BEDRIJFSHANDVEST (dit bedrijf)\n' + lees(path.join(MAP, 'BEDRIJF.md')),
     '\n# JOUW PROFIEL\n' + prof.tekst,
     '\n# JOUW GEHEUGEN (door jou bijgehouden, pad: ' + geheugenPad + ')\n' + (lees(geheugenPad) || '(nog leeg)'),
     `\n# OPLEVERING\nSchrijf je rapport ALS BESTAND naar ${rapportPad} met precies de kopjes ## GEDAAN, ## CIJFERS, ## VRAGEN AAN DAIMY, ## MORGEN (in die volgorde) en werk ${geheugenPad} bij. Je laatste tekstantwoord is een kopie van dat rapport. Kort, telefoon-leesbaar, geen gedachtestreepjes.`,
   ].join('\n');
-  const tools = ['Read', 'Write', 'Edit', 'Grep', 'Glob', ...prof.tools];
+  // M1 (Mats-audit 29-08): schrijven/bewerken ALLEEN in de eigen medewerkersmap; lezen mag overal (Read zonder pad).
+  const eigenMap = `//Users/clawdboot/sonty/medewerkers/${prof.slug}/**`;
+  const tools = ['Read', `Write(${eigenMap})`, `Edit(${eigenMap})`, 'Grep', 'Glob', ...prof.tools];
   // markering zodat het Brein deze run niet als 'Claude-terminal' telt (collector slaat '[medewerker:…]'-transcripten over)
   const args = ['-p', `[medewerker:${prof.slug}] ${opdracht}`, '--model', prof.model, '--system-prompt', systeem, '--allowedTools', ...tools, '--permission-mode', 'default', '--output-format', 'json'];
   const t0 = Date.now();
   const s = stand(); s[prof.slug] = { ...(s[prof.slug] || {}), naam: prof.naam, status: soort === 'dienst' ? 'in dienst' : 'aan een opdracht', bezigSinds: new Date().toISOString(), bezigMet: opdracht.slice(0, 160) }; bewaarStand(s);
   B.gebeurtenis(prof.naam, `${soort === 'dienst' ? 'begint dienst' : 'pakt opdracht op'}: ${opdracht.slice(0, 100)}`);
-  const r = spawnSync(CLAUDE, args, { cwd: ROOT, encoding: 'utf8', maxBuffer: 20e6, timeout: 25 * 60000, env: { ...process.env, PATH: '/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin' } });
+  const r = spawnSync(CLAUDE, args, { cwd: ROOT, encoding: 'utf8', maxBuffer: 20e6, timeout: 25 * 60000, env: { ...process.env, BREIN_VAN: prof.slug, PATH: '/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin' } });
   let tekst = '', kosten = null, fout = null;
   if (r.error) fout = r.error.message;
   try { const j = JSON.parse(r.stdout || '{}'); tekst = j.result || ''; kosten = j.total_cost_usd ?? null; if (j.is_error) fout = (j.result || 'agent-fout').slice(0, 300); } catch { tekst = (r.stdout || '').trim(); }
@@ -97,7 +100,7 @@ function draai(prof, opdracht, { soort = 'dienst', opdrachtId = null } = {}) {
     const oud = fs.readdirSync(auditDir).sort(); for (const f of oud.slice(0, Math.max(0, oud.length - 60))) fs.unlinkSync(path.join(auditDir, f));
   } catch (e) { B.gebeurtenis('Mats', `audit-log mislukt voor ${prof.slug}: ${e.message.slice(0, 80)}`); }
   const s2 = stand();
-  s2[prof.slug] = { naam: prof.naam, functie: prof.functie, afdeling: prof.afdeling || '', status: fout ? 'fout' : rapport.vragen.length ? 'wacht op Daimy' : 'klaar', laatsteDienst: soort === 'dienst' ? new Date().toISOString() : (s2[prof.slug] || {}).laatsteDienst || null, laatsteActie: new Date().toISOString(), soort, duurMin, kostenUsd: kosten, fout, rapport: { ...rapport, pad: rapportPad.replace(ROOT, '~/sonty') }, bezigMet: null, bezigSinds: null };
+  s2[prof.slug] = { herkansing: (s2[prof.slug] || {}).herkansing || false, naam: prof.naam, functie: prof.functie, afdeling: prof.afdeling || '', status: fout ? 'fout' : rapport.vragen.length ? 'wacht op Daimy' : 'klaar', laatsteDienst: soort === 'dienst' ? new Date().toISOString() : (s2[prof.slug] || {}).laatsteDienst || null, laatsteActie: new Date().toISOString(), soort, duurMin, kostenUsd: kosten, fout, rapport: { ...rapport, pad: rapportPad.replace(ROOT, '~/sonty') }, bezigMet: null, bezigSinds: null };
   bewaarStand(s2);
   B.gebeurtenis(prof.naam, fout ? `FOUT in ${soort}: ${fout.slice(0, 120)}` : `${soort} klaar (${duurMin} min${kosten ? ', $' + kosten.toFixed(2) : ''}): ${rapport.gedaan.split('\n')[0].slice(0, 100)}${rapport.vragen.length ? ` · ${rapport.vragen.length} vraag/vragen aan Daimy` : ''}`);
   if (opdrachtId) B.markeer(opdrachtId, fout ? 'fout' : 'klaar', fout ? 'Mislukt: ' + fout : (opBestand || tekst).slice(0, 3500));
@@ -124,9 +127,9 @@ if (require.main === module) (async () => {
       const st = s[prof.slug] || {};
       const vandaagGedaan = st.laatsteDienst && datumNL(new Date(st.laatsteDienst)) === datumNL();
       // zelfherstel: is de dienst van vandaag op 'fout' geëindigd, dan één herkansing (nooit eindeloos)
-      if (vandaagGedaan && st.status === 'fout' && !st.herkansing) {
+      if (vandaagGedaan && st.status === 'fout' && st.herkansing !== datumNL()) {
         console.log(`→ herkansing ${prof.slug} (vorige dienst mislukt: ${String(st.fout).slice(0, 80)})`);
-        const s3 = stand(); s3[prof.slug] = { ...s3[prof.slug], herkansing: true }; bewaarStand(s3);
+        const s3 = stand(); s3[prof.slug] = { ...s3[prof.slug], herkansing: datumNL() }; bewaarStand(s3);
         const r = draai(prof, prof.dienstOpdracht || 'Doe je dagelijkse dienst zoals in je profiel beschreven en lever het rapport op.', { soort: 'dienst' });
         console.log(r.fout ? '   FOUT (ook na herkansing): ' + r.fout : `   klaar in ${r.duurMin} min`);
         continue;

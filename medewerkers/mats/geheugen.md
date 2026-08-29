@@ -28,3 +28,23 @@ Op 29-08 allemaal ok, geen alarm.
 ## Openstaand
 - Nog geen bevestiging van Daimy op de 3 vragen van 29-08. Bij volgende dienst eerst checken of
   er antwoord is voor ik opnieuw vraag.
+
+## Brein-code-review 29-08 (opdracht van Daimy) — bevindingen, nog geen akkoord om te fixen
+- medewerker.js:76 geeft ELKE medewerker altijd Write+Edit zonder padbeperking, ongeacht profiel
+  ("alleen lezen"-profielen incluis). Risico: agent kan eigen profiel.md overschrijven en zichzelf
+  extra tools geven. Voorstel: scopen tot medewerkers/<eigen-slug>/**.
+- medewerker.js: herkansing-vlag (regel 129) wordt door draai()'s volledige stand-overwrite
+  (regel 100) weer gewist. Bij herhaald falen: retry ELKE scheduler-tick (5 min) i.p.v. 1x/dag.
+  Live bevestigd: dagstart.png toonde "medewerkers-dienst: al 30 min niets in de log" — matcht
+  precies dit patroon (retries blokkeren tot 25 min elk). Grootste kostenrisico dat ik zag.
+- medewerkers.json (STAND) wordt niet atomisch geschreven (geen tmp+rename, i.t.t. lib/brein.js)
+  en gedeeld tussen alle processen: race bij gelijktijdige runs. Zag zelf mats+ori tegelijk "aan
+  een opdracht" in het bestand tijdens mijn eigen run.
+- brein-collect.js alarmen-lijst (regel 301-306) checkt NIET op medewerkers met status 'fout' —
+  alleen launchd-jobs/Sunny/mutaties/wachtOpMens. Een mislukte agent-dienst is dus onzichtbaar
+  in "Let op" boven aan het scherm.
+- Geen stale-detectie voor "bezigSinds" (vastgelopen proces blijft eeuwig 'in dienst' tonen).
+- route.ts markeert opdracht als 'opgehaald' vóór lokale bevestiging: crash ertussen = stille
+  verdwijning van de opdracht.
+- "max 3 opdrachten/dag" delegatielimiet is nergens in code gehandhaafd (puur tekst in profiel).
+Wacht op Daimy's ja voordat ik dit (of iemand anders) laat repareren; zelf niets aangepast.

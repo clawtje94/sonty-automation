@@ -16,7 +16,6 @@ jobs:
   - email-weekbot
   - email-sync
   - email
-  - reviews-sync
   - vve-signalen
   - vacaturemail
 kpis:

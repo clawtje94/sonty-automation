@@ -1427,8 +1427,9 @@ function reminderNu(rest, uurNu) {
 }
 
 /** Reminder-tekst in de taal van de klant. */
-function reminderTekst(lead, slot) {
-  const { taalVan, GROET } = require('./lib/aanbod-versturen');
+function reminderTekst(lead, slot, afzender = 'Nanny') {
+  const { taalVan } = require('./lib/aanbod-versturen');
+  const GROET = { nl: `Groetjes, ${afzender} van Sonty`, en: `Kind regards, ${afzender} from Sonty` };
   const taalR = taalVan(lead);
   const voornaamR = String(lead?.naam || 'daar').split(' ')[0];
   const wanneer = new Date(slot.aankomst).toLocaleString(taalR === 'en' ? 'en-GB' : 'nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
@@ -1471,7 +1472,8 @@ async function verwerkAanbiedingen() {
           if (!poortH.ok) { console.log(`  reminder ${a.lead.naam} overgeslagen (${poortH.reden})`); }
           else {
             const TT4 = fs.readFileSync(path.join(__dirname, '.trengo-api-token.txt'), 'utf8').trim();
-            const tekstR = reminderTekst(a.lead, a.slots[0]);
+            const afzR = (laadState().aanbodTickets?.[a.token]?.bron === 'sunny') ? 'Sunny' : 'Nanny';
+            const tekstR = reminderTekst(a.lead, a.slots[0], afzR);
             await fetch(`https://app.trengo.com/api/v2/tickets/${tk}/messages`, {
               method: 'POST', headers: { Authorization: 'Bearer ' + TT4, 'Content-Type': 'application/json' },
               body: JSON.stringify({ message: tekstR, type: 'OUTBOUND' }),
@@ -1514,7 +1516,7 @@ async function verwerkAanbiedingen() {
         }).catch(() => null);
         await telegram(`⏰ ${a.lead.naam} reageerde niet binnen 24 uur. ${r?.ok ? 'Herhaald voorstel wordt nu gestuurd (ronde 2).' : 'Nieuw aanbod aanvragen MISLUKT — handmatig oppakken.'}`);
       } else {
-        await telegram(`📞 ${a.lead.naam} heeft nu 2x niet gereageerd op een voorstel. Ik stop met sturen; hij staat op het belscherm — even bellen is nu het beste.`);
+        await telegram(`📞 ${a.lead.naam} heeft nu 2x niet gereageerd op een voorstel. Geen derde voorstel; Sunny vraagt nog één keer persoonlijk na (dag 3) en na 5 dagen stilte komt hij op het belscherm.`);
       }
     }
   }

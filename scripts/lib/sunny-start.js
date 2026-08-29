@@ -70,8 +70,9 @@ function aantalEerdereVoorstellen(state, lead) {
     const zelfde = (lead?.rpItemId && a.rpItemId && String(a.rpItemId) === String(lead.rpItemId))
       || (tel9(lead?.telefoon).length === 9 && tel9(a.telefoon) === tel9(lead?.telefoon))
       || (!!mailNorm(lead?.email) && mailNorm(a.email) === mailNorm(lead?.email));
-    // herinneringen en door de klant gevraagde her-voorstellen tellen niet; ouder dan 14 dagen ook niet
-    if (zelfde && a.verstuurdOp && !a.herhaling && !a.opVerzoek && Date.now() - Date.parse(a.verstuurdOp) < 14 * DAG_MS) n++;
+    // ronde-2-herhalingen tellen mee (de klant liet ze onbeantwoord); door de klant gevraagde her-voorstellen niet;
+    // ouder dan 14 dagen ook niet
+    if (zelfde && a.verstuurdOp && !a.opVerzoek && Date.now() - Date.parse(a.verstuurdOp) < 14 * DAG_MS) n++;
   }
   return n;
 }

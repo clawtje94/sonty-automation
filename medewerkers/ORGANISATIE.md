@@ -16,8 +16,8 @@ de keukentafel) blijft mens en staat hier als "mens" vermeld.
   (sales, marketing (planning,      & Service     & Sturing        & Systemen
    brand)           inkoop,montage) (KS, nazorg)  (controller,HR)
         │                │               │              │               │
-     Milan            Nanny            Sunny          Sam            (zelf)
-     sales-binnen     planner (AI)     klantenservice facturatie &
+     Milan            Nanny            Sunny          Sam            Kai
+     sales-binnen     planner (AI)     klantenservice facturatie &   AI-innovatie & R&D
      Jules            Ruben            Yara           debiteuren
      marketing (ads,  inkoop           service &      Pip
      mail, SEO)       Tess             nazorg         HR & capaciteit

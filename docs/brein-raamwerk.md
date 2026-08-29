@@ -27,6 +27,7 @@ een rapport in vaste vorm en een postvak. Eén scherm (het Brein) om alles te zi
 | Brein | verzamelaar (jobs, sessies, wachtrijen, tijdlijn) + pagina (Team, Overzicht, Jobs, Tijdlijn, Postvak) | bronnen-adapters (welke registers/logs/APIs) |
 | Audit | elke run één auditbestand (opdracht, tools, output, kosten, duur, fout) + tijdlijn-gebeurtenissen | bewaartermijn |
 | Gezichten | avatar per medewerker (vaste stijl, één set), status-ring, afdelingkleur | namen en gezichten |
+| Vakkennis | wekelijkse **bijscholing** per medewerker (WebSearch/WebFetch: vakartikelen, boeksamenvattingen, vacatureteksten van topbedrijven, video-transcripten) → `vakkennis.md` in vaste vorm, elke dienst meegegeven; coaching-feedback van Ori per medewerker | bronnen/vakgebied per functie |
 
 ## 3. De medewerker (het "wireframe" van één agent)
 ```
@@ -35,6 +36,7 @@ medewerkers/<slug>/
   geheugen.md     mijn werkgeheugen (leerpunten, lopende zaken), door mij bijgehouden
   dagrapport/     <datum>.md (dienst) en <datum>-opdracht-<id>.md (ad-hoc), vaste vier kopjes
   avatar.png      mijn gezicht (gegenereerd in de huisstijl van de set)
+  vakkennis.md    hoe de besten mijn vak doen (wekelijkse bijscholing, ma 05:30): werkregels, routine, KPI-normen, valkuilen, bronnen
 data/brein/
   medewerkers.json   stand per medewerker (status, laatste dienst, kosten, rapport-samenvatting)
   audit/<slug>/      één json per run
@@ -51,7 +53,9 @@ Regels van het wireframe:
 4. **Zelfherstel**: mislukte dienst → één herkansing dezelfde dag; verzamelaar controleert elke minuut of de scheduler
    geladen is; Mats (Techniek) rapporteert wat blijvend stuk is. Agents "zetten zichzelf aan": de scheduler is de motor,
    geen mens hoeft iets te starten.
-5. **Kosten zichtbaar**: per run kosten en duur op de kaart; per dag totaal in het Brein; standaard haiku voor routine,
+5. **Altijd de beste in je vak** (Daimy 29-08): elke medewerker schoolt zichzelf wekelijks bij op het web en past zijn
+   werkwijze aan ("wat ik vanaf morgen anders doe"); Ori bewaakt of het gebeurt en coacht per medewerker.
+6. **Kosten zichtbaar**: per run kosten en duur op de kaart; per dag totaal in het Brein; standaard haiku voor routine,
    sonnet voor hoofden en de directiesecretaris.
 
 ## 4. Onboarding van een nieuw bedrijf (begeleid door agents)

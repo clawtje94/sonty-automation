@@ -1,5 +1,13 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (nacht): BIJSCHOLING — "altijd voorop lopen, de besten zijn in hun vak" (Daimy)
+- `medewerker.js bijscholing <slug>` / `bijscholingen` (launchd nl.sonty.medewerkers-bijscholing, ma 05:30, wie >6 dagen geleden):
+  sonnet + WebSearch/WebFetch, schrijft `medewerkers/<slug>/vakkennis.md` in vaste vorm (werkregels, routine, KPI-normen, valkuilen,
+  "wat ik vanaf morgen anders doe", ≥4 bronnen); de runner geeft vakkennis.md elke dienst mee. Proef Sam: 85 s, 66 regels, 5 bronnen.
+  Eerste ronde voor alle 16 overige gestart 29-08 ~23:40 (scratchpad bijscholing.log). Kaart toont "vakkennis bijgeschoold <tijd>".
+- Coaching-lus: Ori schrijft `medewerkers/ori/feedback/<slug>.md`; runner geeft dat mee als "FEEDBACK VAN ORI".
+- Padbeperking medewerkers DEFINITIEF via `--setting-sources project` (gebruikersinstellingen bypass gelden niet meer); bewezen.
+
 ## 29-08 (nacht): AUDIT DOOR HET TEAM ZELF (Ori, Mats, Bram) — 21 bevindingen, 17 doorgevoerd
 - Motor: Write/Edit alleen in eigen medewerkersmap (`Write(//…/medewerkers/<slug>/**)`), herkansing-vlag per dag, stand atomisch,
   mislukte dienst + run >40 min = alarm in het Brein, opdrachten twee-fasen (server 'opgehaald' pas na bevestiging), delegatie

@@ -87,6 +87,14 @@ function draai(prof, opdracht, { soort = 'dienst', opdrachtId = null } = {}) {
   const rapport = parseRapport(opBestand || tekst);
   if (!opBestand && tekst) fs.writeFileSync(rapportPad, tekst);
   const duurMin = Math.round((Date.now() - t0) / 6000) / 10;
+  // AUDIT (Daimy 29-08: "alles moet gelogd"): per run één bestand met opdracht, systeemprompt-lengte, tools, ruwe output, kosten.
+  try {
+    const auditDir = path.join(B.DIR, 'audit', prof.slug); fs.mkdirSync(auditDir, { recursive: true });
+    let usage = null, sessionId = null; try { const j = JSON.parse(r.stdout || '{}'); usage = j.usage || null; sessionId = j.session_id || null; } catch { /* geen json */ }
+    fs.writeFileSync(path.join(auditDir, `${new Date(t0).toISOString().replace(/[:.]/g, '-')}-${soort}.json`), JSON.stringify({ medewerker: prof.slug, naam: prof.naam, soort, opdrachtId, opdracht, model: prof.model, tools, systeemTekens: systeem.length, start: new Date(t0).toISOString(), duurMin, kostenUsd: kosten, usage, sessionId, fout, exit: r.status, rapportPad, stderr: (r.stderr || '').slice(-2000), output: tekst.slice(0, 20000) }, null, 1));
+    // oude audits opruimen: max 60 per medewerker
+    const oud = fs.readdirSync(auditDir).sort(); for (const f of oud.slice(0, Math.max(0, oud.length - 60))) fs.unlinkSync(path.join(auditDir, f));
+  } catch (e) { B.gebeurtenis('Mats', `audit-log mislukt voor ${prof.slug}: ${e.message.slice(0, 80)}`); }
   const s2 = stand();
   s2[prof.slug] = { naam: prof.naam, functie: prof.functie, afdeling: prof.afdeling || '', status: fout ? 'fout' : rapport.vragen.length ? 'wacht op Daimy' : 'klaar', laatsteDienst: soort === 'dienst' ? new Date().toISOString() : (s2[prof.slug] || {}).laatsteDienst || null, laatsteActie: new Date().toISOString(), soort, duurMin, kostenUsd: kosten, fout, rapport: { ...rapport, pad: rapportPad.replace(ROOT, '~/sonty') }, bezigMet: null, bezigSinds: null };
   bewaarStand(s2);
@@ -110,7 +118,16 @@ if (require.main === module) (async () => {
     // volgorde = diensttijd: medewerkers eerst, dan de hoofden (07:45), dan Bram (08:00)
     for (const prof of team().filter((m) => m.dienst && !m.fout).sort((x, y) => String(x.dienst).localeCompare(String(y.dienst)))) {
       const [h, mi] = String(prof.dienst).split(':').map(Number);
-      const vandaagGedaan = s[prof.slug]?.laatsteDienst && datumNL(new Date(s[prof.slug].laatsteDienst)) === datumNL();
+      const st = s[prof.slug] || {};
+      const vandaagGedaan = st.laatsteDienst && datumNL(new Date(st.laatsteDienst)) === datumNL();
+      // zelfherstel: is de dienst van vandaag op 'fout' geëindigd, dan één herkansing (nooit eindeloos)
+      if (vandaagGedaan && st.status === 'fout' && !st.herkansing) {
+        console.log(`→ herkansing ${prof.slug} (vorige dienst mislukt: ${String(st.fout).slice(0, 80)})`);
+        const s3 = stand(); s3[prof.slug] = { ...s3[prof.slug], herkansing: true }; bewaarStand(s3);
+        const r = draai(prof, prof.dienstOpdracht || 'Doe je dagelijkse dienst zoals in je profiel beschreven en lever het rapport op.', { soort: 'dienst' });
+        console.log(r.fout ? '   FOUT (ook na herkansing): ' + r.fout : `   klaar in ${r.duurMin} min`);
+        continue;
+      }
       const weekend = nu.getDay() === 0 || nu.getDay() === 6;
       if (nuMin < h * 60 + mi || vandaagGedaan || (weekend && prof.weekend !== 'ja')) continue;
       console.log(`→ dienst ${prof.slug} (${prof.dienst})`);

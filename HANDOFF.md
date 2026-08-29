@@ -1,5 +1,24 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-28, rekentool inmeters)
 
+## 29-08 (avond): ADMIN LICHT/DONKER — contrast overal gemeten en gefixt (website 8f2d9f5)
+- Daimy: "je hebt net die kleuren gedaan, overal licht of donker kiezen is leuk maar de contrasten kloppen niet
+  overal." Oorzaak: thema-knop (c96fad4, andere sessie) stond op elke admin-pagina, maar alleen /admin/pipeline was
+  op thema-variabelen gezet; de rest had vaste donkere/witte kleuren (witte kop op lichte achtergrond, 1,05:1).
+- GEBOUWD: scripts/admin-contrast-audit.mjs (headless, per pagina × thema, echte tekst- vs achtergrondkleur met
+  alpha, WCAG-ratio, screenshots in /tmp/contrast-shots, rapport /tmp/contrast-audit.json) en
+  scripts/admin-thema-migratie.mjs (eigenschap-bewust: tekst/achtergrond/rand; wit op oranje → --adm-on-accent,
+  wit op groen/rood/indigo → vast wit; ternaries per tak; geneste stijlobjecten, stijl-functies, kleurconstanten en
+  -maps; blokscan die strings/commentaar overslaat). admin.css: --adm-accent/-accent-text/-on-accent/-ok/-warn/
+  -bad/-info per thema, --adm-muted ≥4,5:1, body + inputs volgen het thema, wit logo zwart in het licht.
+  Pipeline: tekstOp() kiest wit/zwart op RP-statuskleuren. Eigen-lichte pagina's (meetbon, rekentool, belscherm)
+  vaste tekstkleur zodat ze niet wit worden in het donker. zr-btn en winkels-balk contrast.
+- METING: lokaal (productie-build) 848 → 61 tekst-elementen onder 4,5:1; van die 61: 56 magazine-drukvoorbeeld
+  (eigen donker ontwerp, bewust gelaten), 2 externe Leaflet-link, 1 pipeline-chip (3,9:1, RP-kleur), personeel 0.
+  Productie-steekproef (7 pagina's × 2 thema's): 2. bellijst laadt niet binnen 45 s in de audit (data-zwaar), niet gemeten.
+- LES: de dev-server gaf verouderde builds tijdens het meten → altijd meten tegen `next build` + `next start`.
+  Een generieke blok-migratie zonder stijlobject-check brak code (tsc); nu isStijlObject + recursief zoeken.
+- Nieuwe pagina's: kleuren als var(--adm-…) schrijven, daarna audit draaien: node scripts/admin-contrast-audit.mjs <url> [pagina,…].
+
 ## 29-08 (middag): DAIMY'S TESTGESPREK +31683500506 — "waarom wordt dit niet zelf opgepakt?" (3 gaten gedicht)
 - Feiten: 10:36 "hoi, ik zit toch een beetje te twijfelen nog" (na zijn annulering van gisteren). 10:40 daemon: "klant
   reageerde opnieuw op overgedragen gesprek → terug naar Mens nodig" (de oude annuleer-notitie "@jorren …" van 28-08 gold

@@ -3136,3 +3136,13 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
   (200+ kleuren)"; (6) startmaat nu ook bij directBreedte/directHoogte (ROMA/horren/markiezen stonden leeg).
   Live gemeten (deploys success): uitbouw-uitleg, ROMA-knoppen, korte uitleg, extra's-teksten, ROMA 2400×2400.
   Lab 3.200 groen. Screenshots scratchpad/flow2/desk-suneye-uitbouw.png, desk-roma-bediening.png.
+- 30-08 (ochtend) Daimy: "kloppen alle vanaf-prijzen nu met de nieuwe prijzen?" + "kan een Sunmaster screen 5 m
+  breed?" → GEMETEN: 33/33 live vanaf-prijzen (productie-API) == motor op nieuw peil; kruiscontrole-dagelijks
+  groen (alle prijssystemen + config gelijk); referenties nieuw peil (SunEye 500×300 €4.320, ROMA zip 200×200
+  €2.228) live bevestigd. Maatgrenzen tegen Sunmaster Prijscatalogus 2026 (data/prijsboeken/sunmaster-2026-
+  tekst.txt): Zip Design 110 (=Windvast) max 500 cm breed × 270 hoog, 13,5 m² (p11, tabel prijst t/m 500×270)
+  → configurator 5000×2700 = boek, dus 5 m KAN. Screen Square (niet windvast) 400×280, 8 m² → configurator bij
+  4000 max 2000 hoog = boek. Rolluik S-42 boek-tabel prijst 300×280 (8,4 m²) terwijl de inhoudsopgave "max 7,5 m²"
+  zegt; onze tabel = boek-tabel (zelfde cellen). Knikarm: uitval 150/200 via minderprijs (−180/−160, boek) op de
+  250-tabel = motor. TE STRENG t.o.v. boek: SunEye vanaf 169 cm (boek) vs onze tabel vanaf 269; SunBasic 180 vs 300
+  (kleine breedtes staan niet in onze tabel) → bij V1 meenemen.

@@ -188,14 +188,19 @@ async function ronde() {
       if (m.type === 'adres') {
         // adres uit de winkel terugschrijven naar RP (Kenny-geval: RP-kaart zonder
         // adres) en direct verse tijden rekenen
-        if (require('./lib/eigen-crm.js').isEigen(m.rpItemId)) { /* eigen lead: geen RP-item nodig, gegevens komen mee in de mutatie */ }
-        const rA = await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${SALES}/items/${m.rpItemId}`, {
-          method: 'PATCH', headers: { Authorization: 'Bearer ' + RP_API_KEY, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ item: { fields: { address: m.adres } } }),
-        });
-        if (!rA.ok) throw new Error('RP-adres opslaan: HTTP ' + rA.status);
+        const E = require('./lib/eigen-crm.js');
+        if (E.isEigen(m.rpItemId)) {
+          // eigen CRM-lead: adres in het eigen CRM zetten, niet in RP (blok 1 RP-uitzetten)
+          if (!(await E.zetAdres(m.rpItemId, m.adres))) throw new Error('eigen-crm adres opslaan mislukt');
+        } else {
+          const rA = await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${SALES}/items/${m.rpItemId}`, {
+            method: 'PATCH', headers: { Authorization: 'Bearer ' + RP_API_KEY, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ item: { fields: { address: m.adres } } }),
+          });
+          if (!rA.ok) throw new Error('RP-adres opslaan: HTTP ' + rA.status);
+        }
         res = await verwerkReken({ ...m, naam: m.naam || '' });
-        res.uitkomst = 'adres in RP gezet; ' + (res.uitkomst || '');
+        res.uitkomst = (E.isEigen(m.rpItemId) ? 'adres in eigen CRM gezet; ' : 'adres in RP gezet; ') + (res.uitkomst || '');
       } else if (m.type === 'ververs') {
         // handmatige verversing vanaf het dashboard (Daimy 06-08: "ik weet niet
         // wanneer die dingen ophaalt") — draait een volledige schaduw-ronde

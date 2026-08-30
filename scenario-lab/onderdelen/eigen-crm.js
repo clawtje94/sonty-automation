@@ -2,7 +2,7 @@
 // Orakel (beleid):
 //  O1 Een eigen lead (id LEAD-…) in RP-itemvorm wordt door de bestaande lezer (leesLeadCompleet) gelezen als een gewone lead:
 //     naam, telefoon, e-mail, adres en producten kloppen; de offerte komt van het item zelf, er gaat GEEN call naar Reuzenpanda.
-//  O2 Statuswissel voor een eigen lead gaat naar het eigen CRM (PATCH /api/eigen-crm), nooit naar RP; voor een RP-id blijft RP.
+//  O2 Statuswissel, adres-terugschrijven en item-ophalen voor een eigen lead gaan naar het eigen CRM, nooit naar RP; voor een RP-id blijft RP.
 //  O3 Vlag data/.eigen-crm-bron uit → eigen leads worden niet opgehaald (geen fetch), zichtbaar in de log; aan → wel.
 //  O4 Een eigen lead die al uit RP komt (offerte.rpNummer) telt niet dubbel (API-filter); dubbele ids worden in de planner ontdubbeld.
 //  O5 Testkaarten (naam met 'test') blijven in de planner overgeslagen, ook als ze uit het eigen CRM komen.
@@ -55,16 +55,23 @@ function vergelijkA(w, e) { return w.naam === e.naam && w.telefoon === e.telefoo
 const dimB = [
   { naam: 'id', waarden: [{ label: 'eigen', v: 'LEAD-1788083796567-MVTA', eigen: true }, { label: 'rp', v: '60903772-3c0c-4ce4-8271-9425a5caa9bf', eigen: false }] },
   { naam: 'status', waarden: [{ label: 'grip-invullen', v: 'f895f76f-175e-4ea0-bb7c-6cc2f4e5d846' }, { label: 'inmeten', v: '2e9819bd-26f0-4082-8f18-32bb48f87f54' }] },
+  { naam: 'actie', waarden: [{ label: 'kolom' }, { label: 'adres' }, { label: 'item-ophalen' }] },
 ];
 function orakelB(s) { return { wil: 'ok', naarEigen: s.id.eigen, naarRp: !s.id.eigen }; }
 async function voerUitB(s) {
   const E = require('../../scripts/lib/eigen-crm.js');
   const { calls } = await metFetchVanger(async () => {
-    if (E.isEigen(s.id.v)) return E.zetKolom(s.id.v, s.status.v);
+    if (s.actie.label === 'item-ophalen') {
+      // dezelfde beslisregel als lib/inmeet-tijden.haalRpItem en de planner (eigen id → eigen CRM, anders RP)
+      if (E.isEigen(s.id.v)) return E.haalItem(s.id.v);
+      return fetch(`https://backend.reuzenpanda.nl/contact-service/x/backlogs/y/items/${s.id.v}`);
+    }
+    if (E.isEigen(s.id.v)) return s.actie.label === 'adres' ? E.zetAdres(s.id.v, 'Frijdastraat 8F, 2288EX Rijswijk') : E.zetKolom(s.id.v, s.status.v);
     // RP-pad: de planner roept fetch op backend.reuzenpanda.nl (hier gesimuleerd door dezelfde beslisregel)
     return fetch(`https://backend.reuzenpanda.nl/contact-service/x/backlogs/y/items/${s.id.v}`, { method: 'PATCH' });
   });
-  return { naarEigen: calls.some((c) => /\/api\/eigen-crm/.test(c.url) && c.method === 'PATCH'), naarRp: calls.some((c) => /reuzenpanda/.test(c.url)), melding: false };
+  const eigenCall = calls.some((c) => /\/api\/eigen-crm/.test(c.url) && (s.actie.label === 'item-ophalen' ? c.method === 'GET' : c.method === 'PATCH'));
+  return { naarEigen: eigenCall, naarRp: calls.some((c) => /reuzenpanda/.test(c.url)), melding: false };
 }
 function vergelijkB(w, e) { return w.naarEigen === e.naarEigen && w.naarRp === e.naarRp; }
 

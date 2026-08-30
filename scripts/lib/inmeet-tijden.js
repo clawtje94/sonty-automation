@@ -11,6 +11,8 @@ const PID = '731483fa-ef6b-4aae-afcf-883ec09219dd';
 const SALES = 'e9d5462b-0f3e-43b5-ba60-d61a1ca4f0d7';
 
 async function haalRpItem(itemId) {
+  // eigen CRM-lead (LEAD-…): uit het eigen CRM, niet uit RP (blok 1 RP-uitzetten)
+  { const E = require('./eigen-crm.js'); if (E.isEigen(itemId)) return E.haalItem(itemId); }
   const r = await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${SALES}/items/${itemId}`, {
     headers: { Authorization: 'Bearer ' + RP_API_KEY },
   });

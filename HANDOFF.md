@@ -1,5 +1,12 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (middag): ELIZA +31641168331 (ticket 976794298) — 24u stil op Mens nodig
+- Feiten: 27-08 13:51 klant appt na gemiste oproep; Sunny antwoordde pas 28-08 10:37 (QA keurde concept af, Trengo-429's) met een
+  terugbel-standaardtekst terwijl kantoor haar 27-08 15:00 al had gebeld en de afspraak had gemaakt. 29-08 12:14 vroeg ze om een
+  bevestigingsmail → Mens nodig, niemand antwoordde. Afspraak bestaat: MONTAGE op naam Sven de Been, wo 2 sept 11:00–13:00,
+  Touwslagerijbaan 42 Nieuwegein (Outlook + Bookings); Bookings-mail ging naar Svens adres. 30-08 WA-bevestiging gestuurd als Nanny.
+- V12 aan Daimy: Sunny feitelijke afspraakvragen laten beantwoorden (aantoonbaar in Outlook/Bookings) ook op Mens nodig.
+
 ## 30-08 (middag): TEAM-CLOU + HERONTWERP TOPSCHERM
 - Daimy: "Bram moet het aan de experts doorzetten en pas aan het eind terugkoppelen". Gebouwd: delegaties (soort 'delegatie',
   bron = opdracht waarbinnen gedelegeerd, via BREIN_OPDRACHT_ID) komen na 'klaar' automatisch als TERUGKOPPELING-opdracht terug bij

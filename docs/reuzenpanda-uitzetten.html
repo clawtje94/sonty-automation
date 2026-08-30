@@ -1,0 +1,193 @@
+<title>Reuzenpanda uitzetten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #FBF9F6; --paper: #FFFFFF; --ink: #1B1815; --ink-2: #4A443E; --muted: #7A736B; --line: #E7E1DA; --line-2: #D8D0C6;
+    --accent: #F97316; --accent-ink: #B4500E; --accent-soft: #FFF1E6;
+    --ok: #1F7A3E; --ok-soft: #E6F4EA; --warn: #A65A00; --warn-soft: #FFF4DF; --bad: #B42318; --bad-soft: #FCE8E6; --info: #2D5FA6; --info-soft: #E8F0FB;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17140F; --paper: #1F1B16; --ink: #F3EEE7; --ink-2: #CFC6BB; --muted: #9A9186; --line: #3A332B; --line-2: #4A423A;
+      --accent: #FB8C3C; --accent-ink: #FFB27A; --accent-soft: #3A2414;
+      --ok: #5AC27C; --ok-soft: #1B3324; --warn: #F2B24C; --warn-soft: #3B2C10; --bad: #F08A80; --bad-soft: #3D1D1A; --info: #7FA9E8; --info-soft: #1C2A40;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17140F; --paper: #1F1B16; --ink: #F3EEE7; --ink-2: #CFC6BB; --muted: #9A9186; --line: #3A332B; --line-2: #4A423A;
+    --accent: #FB8C3C; --accent-ink: #FFB27A; --accent-soft: #3A2414;
+    --ok: #5AC27C; --ok-soft: #1B3324; --warn: #F2B24C; --warn-soft: #3B2C10; --bad: #F08A80; --bad-soft: #3D1D1A; --info: #7FA9E8; --info-soft: #1C2A40;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Figtree", "Segoe UI", system-ui, sans-serif; font-size: 16px; line-height: 1.55; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 40px 20px 96px; }
+  header.kop { border-bottom: 3px solid var(--accent); padding-bottom: 20px; margin-bottom: 28px; }
+  .merk { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 10px; }
+  h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.05; margin: 0 0 12px; font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; }
+  .lead { font-size: 1.15rem; color: var(--ink-2); max-width: 66ch; margin: 0; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin-top: 12px; }
+  nav.toc { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 28px; }
+  nav.toc a { font-size: 0.85rem; font-weight: 600; color: var(--ink-2); text-decoration: none; padding: 6px 12px; border: 1px solid var(--line-2); border-radius: 999px; background: var(--paper); }
+  nav.toc a:hover, nav.toc a:focus-visible { border-color: var(--accent); color: var(--accent-ink); outline: none; }
+  h2 { font-size: 1.5rem; margin: 44px 0 12px; letter-spacing: -0.01em; text-wrap: balance; scroll-margin-top: 16px; }
+  h3 { font-size: 1.1rem; margin: 26px 0 8px; }
+  p { max-width: 70ch; }
+  .verdict { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 22px 0 8px; }
+  .tegel { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .tegel .k { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 700; }
+  .tegel .v { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; margin: 2px 0; }
+  .tegel .s { font-size: 0.9rem; color: var(--ink-2); }
+  .callout { background: var(--accent-soft); border-left: 4px solid var(--accent); border-radius: 10px; padding: 14px 18px; margin: 18px 0; max-width: none; }
+  .callout p { margin: 0; max-width: none; }
+  .chip { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; letter-spacing: 0.02em; }
+  .chip.ok { background: var(--ok-soft); color: var(--ok); } .chip.deels { background: var(--warn-soft); color: var(--warn); } .chip.niet { background: var(--bad-soft); color: var(--bad); } .chip.info { background: var(--info-soft); color: var(--info); }
+  .tabel-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); margin: 12px 0 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.9rem; min-width: 640px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 700; background: var(--bg); }
+  tr:last-child td { border-bottom: none; }
+  code { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 0.82em; background: var(--bg); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; }
+  ol.stappen { list-style: none; padding: 0; margin: 16px 0; counter-reset: stap; display: grid; gap: 12px; }
+  ol.stappen li { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px 16px 62px; position: relative; }
+  ol.stappen li::before { counter-increment: stap; content: counter(stap); position: absolute; left: 16px; top: 16px; width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+  ol.stappen li b.t { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+  ol.stappen li .why { color: var(--ink-2); margin: 0 0 6px; }
+  ol.stappen li ul { margin: 6px 0 0; padding-left: 18px; color: var(--ink-2); }
+  .klein { font-size: 0.85rem; color: var(--muted); }
+  ul.punt { padding-left: 20px; } ul.punt li { margin: 4px 0; }
+  .legenda { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; font-size: 0.85rem; color: var(--muted); margin: 6px 0 0; }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+  @media (prefers-reduced-motion: no-preference) { nav.toc a { transition: border-color .15s, color .15s; } }
+</style>
+
+<div class="wrap">
+  <header class="kop">
+    <span class="merk">Sonty · eigen CRM</span>
+    <h1>Reuzenpanda uitzetten</h1>
+    <p class="lead">Wat Reuzenpanda vandaag nog voor Sonty doet, alles wat eraan vastzit, wat al vervangen is en wat er in welke volgorde moet gebeuren voordat de stekker eruit kan.</p>
+    <div class="meta">Stand 30 augustus 2026 · uit de code en launchd-jobs gelezen, niet aangenomen · opgesteld door Claude voor Daimy</div>
+  </header>
+
+  <nav class="toc" aria-label="Inhoud">
+    <a href="#oordeel">Oordeel</a><a href="#wat">Wat RP doet</a><a href="#hangt">Wat eraan hangt</a><a href="#vervangen">Al vervangen</a><a href="#moet">Wat er moet gebeuren</a><a href="#volgorde">Volgorde</a><a href="#vragen">Vragen aan jou</a>
+  </nav>
+
+  <h2 id="oordeel">Oordeel in één blik</h2>
+  <div class="verdict">
+    <div class="tegel"><div class="k">Kan RP nu uit?</div><div class="v" style="color:var(--bad)">Nee</div><div class="s">5 harde blokkers, allemaal in het dagelijkse proces</div></div>
+    <div class="tegel"><div class="k">Jobs die RP lezen of schrijven</div><div class="v">19</div><div class="s">van de 75 launchd-jobs op de Mac mini</div></div>
+    <div class="tegel"><div class="k">Website-routes aan RP</div><div class="v">13</div><div class="s">offerte-tool, verzendcentrum, pipeline, index-cron</div></div>
+    <div class="tegel"><div class="k">Al vervangen</div><div class="v">3 <span class="klein">van 11</span></div><div class="s">offerte-PDF, meetbon, rekentool</div></div>
+  </div>
+  <div class="callout"><p><b>De kern:</b> Reuzenpanda is niet alleen "de plek waar offertes staan". De <b>statuskolommen van RP zijn het besturingssysteem</b> van bijna alles wat automatisch loopt: de offertecontrole (V4), Sunny, Nanny's inmeetplanning, Gripp invullen, de Google Sheet, Klaviyo en de tekenbonus lezen of zetten RP-statussen. Zolang die nog op RP kijken, kan RP niet uit, hoe mooi de eigen pipeline ook is.</p></div>
+
+  <h2 id="wat">Wat Reuzenpanda vandaag doet</h2>
+  <div class="tabel-wrap"><table>
+    <thead><tr><th>Functie</th><th>Hoe het nu loopt</th><th>Eigen vervanging</th></tr></thead>
+    <tbody>
+      <tr><td><b>Leadopslag en pipeline-bord</b></td><td>±16.700 items in één backlog; het team werkt dagelijks in de kolommen (Offerte controle → Gecontroleerd → Offerte verstuurd → Inmeten inplannen → grip invullen → Afgerond, plus 11 nevenkolommen)</td><td><span class="chip deels">deels</span> eigen pipeline op KV bestaat; RP blijft de bron</td></tr>
+      <tr><td><b>Offerte (quotation) maken</b></td><td>Configurator-widget of offerte-tool maakt een RP-lead + quotation; V4 en Sunny corrigeren regels via de RP-API</td><td><span class="chip deels">deels</span> offerte-tool heeft een "eigen systeem"-modus (S-nummers), standaardweg is nog RP</td></tr>
+      <tr><td><b>Prijsvoorstel-mail</b></td><td>RP-automation mailt zodra een item op "Offerte verstuurd" komt</td><td><span class="chip deels">deels</span> verzendcentrum mailt zelf via Trengo, staat in testmodus, RP-automation nog aan</td></tr>
+      <tr><td><b>Klantlink + online tekenen (DOCSIGN)</b></td><td><code>document.reuzenpanda.nl/…?pdfAction=DOCSIGN</code>, gebruikt in mails, Klaviyo en de tekenbonus</td><td><span class="chip ok">vervangen</span> <code>/offerte/&lt;token&gt;</code> met handtekening, audit-trail, PDF</td></tr>
+      <tr><td><b>Offerte-PDF</b></td><td>RP-renderer</td><td><span class="chip ok">vervangen</span> eigen brochure (12 pagina's)</td></tr>
+      <tr><td><b>Configurator op de site</b></td><td>Eigen configurator is live; RP-widget bestaat nog als fallback op /offerte-aanvragen, productfoto's komen deels van <code>user-info.reuzenpanda.nl</code></td><td><span class="chip deels">deels</span></td></tr>
+      <tr><td><b>Statussen als trigger</b></td><td>19 jobs + Sunny + Nanny lezen en zetten RP-status-id's (hardcoded in ±40 bestanden)</td><td><span class="chip niet">niet</span> eigen automations bestaan, maar de jobs kijken nog naar RP</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 id="hangt">Wat er allemaal aan RP hangt</h2>
+  <h3>Automation op de Mac mini (launchd)</h3>
+  <div class="tabel-wrap"><table>
+    <thead><tr><th>Job</th><th>Wanneer</th><th>Leest uit RP</th><th>Schrijft naar RP</th><th>Gaat naar</th></tr></thead>
+    <tbody>
+      <tr><td>offerte-v4 (offertecontrole)</td><td>09:00, 17:00</td><td>items op Offerte controle + quotations</td><td>status → Gecontroleerd / te ver / Gordijnen / Handmatig, regels via PUT, → Offerte verstuurd</td><td>Google Sheet, Trengo (mail + WA-template), Telegram</td></tr>
+      <tr><td>v4-selfcheck</td><td>09:45, 17:45</td><td>vastgelopen items</td><td>status opnieuw zetten</td><td>Telegram</td></tr>
+      <tr><td>markiezen</td><td>08:30, 16:30</td><td>Handmatige controle</td><td>quotation PUT, → Gecontroleerd</td><td>Telegram</td></tr>
+      <tr><td>gripp-invullen</td><td>7× per dag</td><td>grip invullen + getekende quotation</td><td>→ Afgerond</td><td>Gripp (relatie + offerte), Telegram</td></tr>
+      <tr><td>sheet-vangnet</td><td>08:15, 20:15</td><td>4 flow-statussen</td><td>kortingen strippen, status terug</td><td>Google Sheet, Telegram</td></tr>
+      <tr><td>inmeet-dashboard / -verwerker / -verzoeken (Nanny)</td><td>30 min / 5 min / continu</td><td>items op Inmeten inplannen, offerte-inhoud</td><td>→ grip invullen na boeking</td><td>Planado (external_id <code>rp-&lt;id&gt;</code>), Outlook, Bookings, Trengo, Sheet, website</td></tr>
+      <tr><td>sonny (Sunny)</td><td>continu</td><td>items op klantmatch + quotations</td><td>→ Ai offerte verstuurd, → Inmeten inplannen, → Geen herinnering meer; offerteregels bewerken</td><td>Trengo/WhatsApp, Telegram</td></tr>
+      <tr><td>keten-zelfcontrole, meeneem-melding, getekend-rapport, prijs-steekproef, cohortrapport, gripp-verrijken</td><td>dagelijks/uurlijks</td><td>items en quotations (alleen lezen)</td><td>—</td><td>Telegram, Planado</td></tr>
+      <tr><td>tekenbonus + opruim</td><td>ma–za 10:30, 09:45</td><td>quotations</td><td>bonusregels PUT + terugdraaien</td><td>Klaviyo-flow met DOCSIGN-link</td></tr>
+      <tr><td>email-sync (rp-export)</td><td>06:30</td><td>board + quotations</td><td>—</td><td>Klaviyo-profielen en opt-outs</td></tr>
+      <tr><td>auto-sync (HubSpot-verrijking)</td><td>15 min</td><td>items + omschrijvingen</td><td>—</td><td>HubSpot (gaat sowieso uit)</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Website (sonty-website)</h3>
+  <ul class="punt">
+    <li><b>Offerte-tool</b> maakt standaard een échte RP-lead + quotation en haalt de RP-PDF op; de "eigen systeem"-modus is er, maar is niet de standaard.</li>
+    <li><b>Verzendcentrum</b> leest offertes uit RP (Gecontroleerd + Offerte verstuurd, 14 dagen), mailt via Trengo en zet bij livegang de RP-status.</li>
+    <li><b>Pipeline</b> gebruikt de 17 RP-kolom-id's; slepen wijzigt alleen de lokale spiegel, niet RP.</li>
+    <li><b>Cron offerte-index</b> (elke 30 min) bouwt een index van alle RP-quotations; <b>offerte-herinneringen</b> gebruiken RP-status en -links.</li>
+    <li><b>Configurator-fallback</b> met de RP-widget; productfoto's deels van RP gehost.</li>
+    <li><b>Inmeet-API's</b> (dashboard, aanbod, mutatie) werken op de sleutel <code>rpItemId</code>.</li>
+  </ul>
+
+  <h3>Buiten de code</h3>
+  <ul class="punt">
+    <li><b>Google Sheet offerteregister</b>: dedupe-sleutel is de kolom "RP offerte" (8-cijferig RP-nummer); V4, sheet-vangnet en de inmeetplanning schrijven erin.</li>
+    <li><b>Gripp</b>: offertes en relaties worden uit RP-quotationregels opgebouwd; meetbon en rekentool draaien al op Gripp, niet op RP.</li>
+    <li><b>Klaviyo</b>: dagelijkse RP-export vult profielen; tekenbonusmails linken naar RP-DOCSIGN.</li>
+    <li><b>Trengo</b>: WA-template 235187 "offerte met link" en de V4-mail dragen de RP-link.</li>
+    <li><b>Planado</b>: elke inmeetopdracht heeft <code>external_id = rp-&lt;itemId&gt;</code>; de hele nazorg (annuleren, verzetten, nacontrole) zoekt daarop.</li>
+    <li><b>Zapier</b>: in de code alleen bouwscripts en blauwdrukken; of er in het Zapier-account nog live zaps met RP draaien is uit de repo niet vast te stellen. Vraag 2 hieronder.</li>
+    <li><b>HubSpot</b>: de RP→HubSpot-verrijking kan gewoon uit (HubSpot vervalt).</li>
+  </ul>
+
+  <h2 id="vervangen">Wat al vervangen is</h2>
+  <div class="legenda"><span class="chip ok">vervangen</span> klaar en in gebruik · <span class="chip deels">deels</span> bestaat, maar RP is nog de bron of standaard · <span class="chip niet">niet</span> nog niets eigen</div>
+  <div class="tabel-wrap"><table>
+    <thead><tr><th>Onderdeel</th><th>Status</th><th>Wat er nog aan ontbreekt</th></tr></thead>
+    <tbody>
+      <tr><td>Offerte-PDF (brochure)</td><td><span class="chip ok">vervangen</span></td><td>—</td></tr>
+      <tr><td>Meetbon</td><td><span class="chip ok">vervangen</span></td><td>— (draait op Gripp)</td></tr>
+      <tr><td>Rekentool inmeters</td><td><span class="chip ok">vervangen</span></td><td>— (Gripp + eigen prijsconfig)</td></tr>
+      <tr><td>Klantlink + online tekenen</td><td><span class="chip ok">vervangen</span></td><td>tekenbonus en Klaviyo linken nog naar RP-DOCSIGN</td></tr>
+      <tr><td>Lead-intake (configurator)</td><td><span class="chip deels">deels</span></td><td>RP-widget-fallback en RP-gehoste foto's weg</td></tr>
+      <tr><td>Pipeline-bord</td><td><span class="chip deels">deels</span></td><td>wordt pas bron van waarheid als de jobs erop kijken</td></tr>
+      <tr><td>Offerte maken (offerte-tool)</td><td><span class="chip deels">deels</span></td><td>eigen systeem als standaard; bewerken vanuit de pipeline</td></tr>
+      <tr><td>Prijsvoorstel versturen</td><td><span class="chip deels">deels</span></td><td>automatisch na controle (nu handmatige knop), testmodus uit, RP-automation uit</td></tr>
+      <tr><td>Automations (statuswissel → actie)</td><td><span class="chip deels">deels</span></td><td>eigen register bestaat; jobs lezen nog RP-statussen</td></tr>
+      <tr><td>Inmeetplanning (Nanny/Sunny)</td><td><span class="chip niet">niet</span></td><td>hele planner + Sunny-tools op eigen leads en eigen sleutel</td></tr>
+      <tr><td>Offertecontrole (V4), Gripp invullen, Sheet-koppeling, rapporten</td><td><span class="chip niet">niet</span></td><td>alle jobs op eigen offertes en S-nummers</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 id="moet">Wat er moet gebeuren vóór RP uit kan</h2>
+  <p>Vijf harde blokkers en drie afrondende stappen. Elke stap krijgt een scenario-lab en een proefweek naast RP; RP blijft leidend tot de stap bewezen werkt.</p>
+  <ol class="stappen">
+    <li><b class="t">Eén eigen sleutel in de hele keten</b><p class="why">Nu is <code>rpItemId</code> de sleutel van Planado, de inmeet-API's, de Sheet en Nanny's nazorg. Zonder eigen sleutel kan geen enkele job worden omgezet.</p><ul><li>Lead-id (<code>LEAD-…</code>) en S-nummer als sleutel; Planado <code>external_id = lead-&lt;id&gt;</code>; Sheet-kolom "RP offerte" krijgt een zusterkolom voor het S-nummer.</li><li>Vertaaltabel RP-item ↔ lead-id bewaren voor alles wat al loopt.</li></ul></li>
+    <li><b class="t">Nanny en Sunny op het eigen CRM</b><p class="why">Blokker nummer één: een getekende eigen offerte komt vandaag nergens terecht. De planner leest alleen RP.</p><ul><li>Planner leest leads op "Inmeten inplannen" uit <code>/api/admin/leads</code> naast (later in plaats van) RP; offerte-inhoud uit <code>lead.offerte</code>.</li><li>Sunny's tools (tijden, boeken, annuleren, akkoord-doorzetten, geen herinnering) zetten de eigen kolom in plaats van RP-status-id's.</li><li>Verzoek-daemon, aanbod-replies, nacontrole, mutaties en de Sheet-koppeling op de nieuwe sleutel.</li></ul></li>
+    <li><b class="t">Offertecontrole en prijsvoorstel voor eigen leads</b><p class="why">V4 controleert en corrigeert nu RP-quotations; de prijsvoorstel-mail komt van de RP-automation.</p><ul><li>Controle-stap (regels, montage, kortingen, markiezen-handmatig) op <code>lead.offerte</code> met dezelfde regels als V4.</li><li>Na "gecontroleerd" automatisch versturen via het verzendcentrum (mail + WhatsApp + klantlink); testmodus uit; RP-automation op "Offerte verstuurd" uit.</li><li>Herinneringen en tekenbonus op de eigen klantlink in plaats van DOCSIGN.</li></ul></li>
+    <li><b class="t">Gripp, Sheet en rapporten op eigen offertes</b><p class="why">Gripp invullen, de Sheet-vangnet, getekend-rapport, prijs-steekproef, cohort- en weekrapport en de meeneem-melding lezen RP.</p><ul><li>Gripp-relatie en -offerte uit <code>lead.offerte</code> (S-nummer) na akkoord.</li><li>Sheet-schrijvers en rapporten op de eigen pipeline; Klaviyo-export uit de eigen leads.</li></ul></li>
+    <li><b class="t">Website volledig los van RP</b><p class="why">De offerte-tool maakt standaard nog RP-leads; het verzendcentrum en de index-cron lezen RP.</p><ul><li>Offerte-tool: eigen systeem als enige weg; "bewerken" vanuit de pipeline.</li><li>Verzendcentrum bron = eigen leads; offerte-index-cron en RP-herinneringen uit.</li><li>RP-widget-fallback verwijderen; productfoto's naar eigen hosting.</li></ul></li>
+    <li><b class="t">Data veiligstellen en migreren</b><p class="why">Ruim 16.700 items, alle quotations en de getekende DOCSIGN-documenten zijn bedrijfs- en bewijsdata.</p><ul><li>Volledige export (items, offertes, statussen, PDF's van getekende offertes) naar eigen opslag, met <code>rp_lead_id</code> per lead.</li><li>Open dossiers (alles vóór Afgerond) als eigen leads importeren met hun status.</li></ul></li>
+    <li><b class="t">Team en overgang</b><p class="why">Het team werkt dagelijks in het RP-bord.</p><ul><li>Twee tot vier weken parallel: eigen pipeline leidend, RP alleen lezen.</li><li>Gebruikers en toegang in de admin staan al klaar; per persoon de juiste pagina's aanzetten.</li></ul></li>
+    <li><b class="t">Contract en opruimen</b><ul><li>Opzegtermijn en einddatum RP-contract vaststellen; RP één maand alleen-lezen aanhouden na de overstap.</li><li>RP-API-sleutel intrekken en uit ±40 bestanden verwijderen; status-id's uit de code; HubSpot-verrijking en Zapier-zaps uit.</li></ul></li>
+  </ol>
+
+  <h2 id="volgorde">Volgorde en inschatting</h2>
+  <div class="tabel-wrap"><table>
+    <thead><tr><th>Blok</th><th>Bevat stappen</th><th>Inschatting bouw + lab</th><th>Resultaat</th></tr></thead>
+    <tbody>
+      <tr><td>1 · Sleutel + planning</td><td>1, 2</td><td>3 tot 5 werkdagen</td><td>Een eigen offerte loopt na akkoord door naar Nanny/Sunny, Planado, Outlook en de Sheet</td></tr>
+      <tr><td>2 · Offerte en versturen</td><td>3, 5 (offerte-tool, verzendcentrum)</td><td>3 tot 4 werkdagen</td><td>Configurator → controle → prijsvoorstel → klantlink zonder RP</td></tr>
+      <tr><td>3 · Achterkant</td><td>4</td><td>2 tot 3 werkdagen</td><td>Gripp, Sheet, Klaviyo en rapporten zonder RP</td></tr>
+      <tr><td>4 · Migratie + parallel</td><td>6, 7</td><td>1 dag export + 2 tot 4 weken parallel</td><td>Team op eigen CRM, RP alleen-lezen</td></tr>
+      <tr><td>5 · Uitzetten</td><td>8</td><td>halve dag</td><td>Contract beëindigd, sleutels en id's weg</td></tr>
+    </tbody>
+  </table></div>
+  <p class="klein">Inschattingen zijn bouwtijd van Claude inclusief scenario-lab en proef op echte historie; de proefweken zijn kalendertijd voor het team. Besparing volgens het masterplan: ruim €12.000 per jaar.</p>
+
+  <h2 id="vragen">Vragen aan jou</h2>
+  <ul class="punt">
+    <li><b>Opzegtermijn en einddatum</b> van het RP-contract: dat bepaalt het tempo van blok 4 en 5.</li>
+    <li><b>Zapier-account</b>: staan er nog live zaps aan met Reuzenpanda erin (de "RP Offerte → Sheets"-zap)? In de code is dat niet te zien.</li>
+    <li><b>Wie test mee</b> in de parallelweken (voorstel: Jaimy en de planning), en welke pagina's krijgen zij in Gebruikers en toegang.</li>
+    <li><b>Start blok 1 morgen?</b> Dit is dezelfde vraag als V16: de planner op het eigen CRM aansluiten, met lab vooraf.</li>
+  </ul>
+
+  <footer>Bronnen: launchd-plists op de Mac mini, ~/sonty/scripts, ~/sonty-website (app, lib), docs/sonty-crm-masterplan.md, memory-notities Reuzenpanda-API en ketenblokkers. Geen namen van andere zonweringbedrijven; RP-sleutels bewust niet in dit document.</footer>
+</div>

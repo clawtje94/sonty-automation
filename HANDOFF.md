@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (avond): DOCUMENT "REUZENPANDA UITZETTEN"
+- Inventaris (Explore-agent, code + plists): 19 launchd-jobs lezen/schrijven RP, 13 website-routes, Sunny/Nanny volledig op RP-statussen,
+  Sheet (sleutel "RP offerte"), Gripp uit RP-quotations, Klaviyo (rp-export, tekenbonus → DOCSIGN), Trengo-template, Planado external_id rp-<id>.
+- Document: docs/reuzenpanda-uitzetten.html + artifact https://claude.ai/code/artifact/39635bc0-f5a1-4606-a4e5-8d2f04c44771
+  Oordeel: RP kan nog NIET uit; 5 blokkers: (1) eigen sleutel i.p.v. rpItemId, (2) Nanny/Sunny op eigen CRM, (3) V4-controle +
+  prijsvoorstel voor eigen leads, (4) Gripp/Sheet/rapporten op eigen offertes, (5) website los van RP (offerte-tool, verzendcentrum,
+  index-cron, widget-fallback); daarna migratie 16,7k items, parallelweken, contract/opzegtermijn, sleutels/ids opruimen.
+- Vragen: opzegtermijn RP, live Zapier-zaps?, wie test mee, start blok 1 (= V16).
+
 ## 30-08 (avond): E2E-TEST EIGEN PIPELINE ("werkt alles zoals met Reuzenpanda?") — eerlijke stand
 - ✅ Configurator-aanvraag → lead in KV, Klaviyo, Telegram, bevestigingsmail (0,4 s). Daimy testte zelf (daimyboot@gmail.com 11:46).
 - ✅ Pipeline dealkaart: knoppen "Offerte versturen" (verzendcentrum verstuur-eigen: S-nummer auto, mail + WhatsApp + klantlink),

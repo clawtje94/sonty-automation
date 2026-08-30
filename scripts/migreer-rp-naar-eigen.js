@@ -5,6 +5,7 @@
 // /api/eigen-crm/import. Hervatbaar: data/migratie-rp.json onthoudt welke items al staan (id → tijd).
 //   node scripts/migreer-rp-naar-eigen.js --dry-run [--max=20]   → toont voorbeelden, schrijft niets
 //   node scripts/migreer-rp-naar-eigen.js [--max=N] [--alleen-actief] [--overschrijf]
+//   node scripts/migreer-rp-naar-eigen.js --sync   → doorlopend (launchd nl.sonty.rp-sync, 30 min): nieuwe + gewijzigde items bijwerken tot de overstap
 // Zuinig op RP: 3 parallel, 80 ms pauze per bundel; bij 429/5xx even wachten en opnieuw.
 const fs = require('fs');
 const path = require('path');
@@ -18,6 +19,15 @@ const DRY = process.argv.includes('--dry-run');
 const ALLEEN_ACTIEF = process.argv.includes('--alleen-actief');
 const OVERSCHRIJF = process.argv.includes('--overschrijf');
 const MAX = Number((process.argv.find((a) => a.startsWith('--max=')) || '').split('=')[1] || 0) || 0;
+const SYNC = process.argv.includes('--sync'); // doorlopend: alleen nieuwe of sinds de vorige keer gewijzigde items, mét overschrijven
+
+/** Moet dit RP-item (opnieuw) overgezet worden? stand-entry = ISO-string (oude vorm) of { op, upd }. Puur; lab: scenario-lab/onderdelen/migratie-rp.js */
+function moetSync(item, entry) {
+  if (!entry) return true; // nog nooit gezien
+  const upd = Number(item.timestamp_updated || item.timestamp_created || 0);
+  if (typeof entry === 'string') return upd > Date.parse(entry); // oude stand: gewijzigd ná het overzetten
+  return upd > Number(entry.upd || 0);
+}
 const PARALLEL = 3;
 
 function rpKey() { try { return require('./ai-ks/config.js').RP_API_KEY; } catch { return process.env.RP_API_KEY; } }
@@ -83,7 +93,7 @@ function rpItemNaarLead(item, quotations = []) {
     products: producten,
     bericht: opmerking || undefined,
     gearchiveerd: gearchiveerd || undefined,
-    migratie: { bron: 'rp-migratie-2026-08-30', rpItemId: item.id },
+    migratie: { bron: 'rp-migratie-2026-08-30', rpItemId: item.id, rpUpdated: Number(item.timestamp_updated || item.timestamp_created || 0) },
   };
   if (beste) {
     lead.offerte = {
@@ -114,14 +124,14 @@ async function main() {
     if (DRY) { verwerkt += leads.length; return; }
     const r = await fetch('https://sonty-website.vercel.app/api/eigen-crm/import', {
       method: 'POST', headers: { Authorization: 'Bearer ' + adminPw(), 'Content-Type': 'application/json' },
-      body: JSON.stringify({ leads, overschrijf: OVERSCHRIJF }), signal: AbortSignal.timeout(60000),
+      body: JSON.stringify({ leads, overschrijf: OVERSCHRIJF || SYNC }), signal: AbortSignal.timeout(60000),
     });
     const d = await r.json().catch(() => ({}));
     if (!r.ok) throw new Error('import ' + r.status + ' ' + JSON.stringify(d).slice(0, 120));
     aangemaakt += d.aangemaakt || 0; bijgewerkt += d.bijgewerkt || 0; overgeslagen += d.overgeslagen || 0;
     for (const f of d.fouten || []) { fouten++; log('  FOUT ' + f); }
     const nu = new Date().toISOString();
-    for (const l of leads) gedaan[l.id] = nu;
+    for (const l of leads) gedaan[l.id] = { op: nu, upd: Number(l.migratie && l.migratie.rpUpdated || 0) };
     verwerkt += leads.length;
     fs.writeFileSync(STAND, JSON.stringify({ gedaan, laatsteRun: nu }));
   }
@@ -132,6 +142,7 @@ async function main() {
     if (!items.length) break;
     const todo = items.filter((it) => {
       gezien++;
+      if (SYNC) return moetSync(it, gedaan['LEAD-RP-' + it.id]);
       if (!OVERSCHRIJF && gedaan['LEAD-RP-' + it.id]) return false;
       if (ALLEEN_ACTIEF && (it.technical_labels || []).some((l) => l.type === 'ITEM_ARCHIVED')) return false;
       return true;
@@ -158,7 +169,7 @@ async function main() {
   if (DRY) for (const v of voorbeelden) { const c = v.contact, o = v.offerte || {}; console.log(`VOORBEELD ${v.id} | ${c.voornaam} ${c.achternaam} | ${c.email} | ${c.telefoon} | ${c.straat} ${c.huisnummer}, ${c.postcode} ${c.plaats} | kolom ${(v.rpKolom || '').slice(0, 8)} (${v.source.kolomLabel}) | ${v.type} | afkomst ${v.source.afkomst} | offerte ${o.rpNummer || '-'} ${o.status || ''} €${o.totaalInclBTW ?? '-'} (${o.aantalDocs || 0} docs) | producten ${(v.products || []).map((p) => p.quantity + 'x ' + p.product).join(', ')}${v.gearchiveerd ? ' | ARCHIEF' : ''}`); }
   const samenvatting = `klaar: ${gezien} items gezien, ${verwerkt} verwerkt, ${aangemaakt} aangemaakt, ${bijgewerkt} bijgewerkt, ${overgeslagen} overgeslagen, ${fouten} fouten`;
   log(samenvatting);
-  if (!DRY) {
+  if (!DRY && (!SYNC || fouten > 0)) {
     try {
       const env = fs.readFileSync(path.join(__dirname, '..', '.env'), 'utf8');
       const tok = (env.match(/TELEGRAM_BOT_TOKEN=["']?([^"'\n]+)/) || [])[1];
@@ -167,5 +178,5 @@ async function main() {
   }
 }
 
-module.exports = { rpItemNaarLead, splitsAdres, veld };
+module.exports = { rpItemNaarLead, splitsAdres, veld, moetSync };
 if (require.main === module) main().catch((e) => { log('FOUT ' + e.message); process.exit(1); });

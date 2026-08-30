@@ -1,5 +1,16 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (avond, laat): BLOK 4/5 KLAAR — ALLES STAAT KLAAR VOOR DE OVERSTAP (runbook in docs/reuzenpanda-uitzetten.html §Stand)
+- Migratie RP → eigen CRM loopt/klaar (data/migratie-rp.log; wachter herindexeert na afloop). Overgezette dossiers: id LEAD-RP-<rp-item-id>,
+  kolom = RP-kolom, gearchiveerd → set 'archief' (niet op het bord), offerte.rpNummer/link/status/totaal, source.bron=reuzenpanda.
+- Rapporten zonder RP: scripts/lib/dossiers.js (RP-vervanger uit /api/eigen-crm?export=1, 9k dossiers in 5 s) in weekrapport-conversie,
+  weekrapport-cohorten, conversie-per-kanaal, cron-getekend-rapport. Lab dossiers-rp-uit 72 sc.
+- Schakelaars: (1) website: /admin/verzendcentrum bron eigen + testmodus uit + automatisch versturen aan; (2) Mac mini: node scripts/rp-uitzetten.js uit
+  (vlag data/.rp-uit → planner/Sunny/Gripp/rapporten lezen alleen eigen CRM; RP-only jobs gestopt). Terugdraaien: bron rp + rp-uitzetten.js aan.
+- Zolang bron ≠ eigen: overgezette dossiers doen NIET mee in automation-queries (dubbel werk voorkomen); ?inclusiefRp=1 toont ze.
+- Sunny: klant-context zoekt eigen CRM ook op offertenummer (S- én RP-nummer). Sonny-daemon herstart 30-08 avond.
+- OPEN (Daimy): V20 overstap inzetten (RP-automation "Offerte verstuurd" uit → dan schakel ik), Zapier-zaps uit, RP-opzegtermijn.
+
 ## 30-08 (avond): BLOK 4 RP-UITZETTEN — OPSLAG V2 + MIGRATIE LOOPT
 - Opslag v2 (sonty-website lib/lead-store.ts): lead:<id> + indexen (leads:z:alle, leads:s:kolom:<id> incl. 'archief', leads:s:tel/email,
   leads:k:nummer, leads:z:verstuurd, leads:z:offerte). Zelfde functies + gerichte lezers (leadsInKolom, bord, zoekLeads, leadsVerstuurd,

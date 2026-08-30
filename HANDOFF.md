@@ -1,4 +1,4 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, online offertepagina huisstijl)
 
 ## 30-08 (avond): RP-SYNC TOT DE OVERSTAP (Daimy: "migratie up to date houden tot we wisselen")
 - launchd nl.sonty.rp-sync (30 min): `migreer-rp-naar-eigen.js --sync` → nieuwe + in RP gewijzigde items (timestamp_updated > stand) opnieuw
@@ -244,6 +244,20 @@
   REGEL in memory (feedback_brein_aanmelden): elke sessie meldt zich bij start aan + Monitor op haar inbox.
 - Fase 3 "nieuwe werknemer" (opdracht → `claude -p` sessie) is gebouwd maar UIT: vlag `data/brein/.werknemer-aan` ontbreekt (V7 aan Daimy).
 - Bekende ruis: alarmen voor bewust uitgezette jobs (wa-desktop-queue, keten-zelfcontrole, sonny-rapport niet geladen) staan als 'laag'.
+
+## 30-08 (ochtend): ONLINE OFFERTEPAGINA IN SONTY-HUISSTIJL (website, app/offerte/[token])
+- Daimy: "die online offerte pagina ook wel sonty style? kijk er goed naar en maak hem zo goed mogelijk". Was: Inter-font,
+  bruin #191511, amber #F9B233, gele productstrook, 52px productfoto's, eigen stappen/FAQ-stijl. Nu exact de site-tokens:
+  Figtree, zwart #0a0a0a/#1a1a1a, oranje #BF5317, geel #FFCC01, crème #FAF8F5, pilknoppen, witte kaarten 16px, Sonty-lijniconen.
+- Opbouw: topbalk als site-header (logo, telefoon, Onderteken-knop; op mobiel verborgen), hero met eerste productfoto op de
+  achtergrond + gele accenten + 4 cijfers (3000+, 4,9/5, 12+, 3/5/7), offertekaart met 112px productfoto's (76px mobiel),
+  spec-grid, waarom-blok, totalen in crème, ondertekenblok (zelfde logica: canvas, naam, checkbox, POST /sign), donker
+  5-stappenblok (stap 3 of 4 actief), zekerheden met iconen, reviews met sterren, FAQ als <details> zoals dienstpagina's,
+  showroomkaart, zwarte footer, sticky onderbalk. Geen streepjes/randen.
+- Admin-preview: /offerte/<token>?preview=ongetekend toont de ongetekende staat, alleen met admin-cookie (page.tsx). Er is
+  1 share-token in KV (test-lead S26-1001, al getekend); GEEN nieuwe share aangemaakt (shareOfferte triggert Klaviyo/Telegram/mail).
+- Gecheckt: build groen, deploy succes, live Figtree + topbar-knop verborgen op iPhone + 0 overflow; screenshots desktop/iPhone
+  getekend én ongetekend (lokaal op de productie-build) bekeken.
 
 ## 29-08 (avond): DOORTEST MET SCHERMOPNAMES + ORANJE RANDEN WEG + UPLOADS IN FOTOKIEZER (website)
 - Daimy: "screen records maken en de website helemaal doortesten, ook de configurator, scrollen, klikken, of het scherm op de

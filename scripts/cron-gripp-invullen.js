@@ -52,6 +52,7 @@ async function fetchRetry(url, options, tries = 3) {
 }
 
 async function rpGet(ep) {
+  if (require('./lib/dossiers.js').rpUit()) return /\/items/.test(ep) ? { items: [] } : null; // RP uit: alleen eigen leads
   const res = await fetchRetry('https://backend.reuzenpanda.nl' + ep, { headers: { 'Authorization': 'Bearer ' + RP_API_KEY } });
   if (!res.ok) return null;
   try { return await res.json(); } catch { return null; }

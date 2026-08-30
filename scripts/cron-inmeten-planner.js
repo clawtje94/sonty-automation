@@ -127,6 +127,8 @@ const { planningTelegram } = require('./lib/telegram-planning.js');
 async function telegram(tekst, opties) { await planningTelegram(tekst, opties); }
 
 async function rpGet(ep) {
+  // RP uit (vlag data/.rp-uit, scripts/rp-uitzetten.js): geen RP-calls meer; lijsten leeg, losse items null. Eigen leads komen via eigen-crm.
+  if (require('./lib/dossiers.js').rpUit()) return /\/items\?|\/items$/.test(ep) ? { items: [] } : null;
   const r = await fetch('https://backend.reuzenpanda.nl' + ep, { headers: { Authorization: 'Bearer ' + RP_API_KEY } });
   if (!r.ok) throw new Error(`RP ${r.status}`);
   return r.json();

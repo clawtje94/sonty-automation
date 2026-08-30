@@ -25,7 +25,8 @@ async function findRpOffertes({ email, phone, naam, adres, offertenummer }) {
   // EIGEN CRM eerst (blok 1 RP-uitzetten): eigen leads op telefoon/e-mail, in RP-itemvorm met id LEAD-…
   let eigenItems = [];
   try { eigenItems = await require('../lib/eigen-crm.js').zoek({ telefoon: phone, email, nummer: offertenummer }); } catch { eigenItems = []; }
-  const data = await rpGet(`/contact-service/${CFG.RP_PID}/boards/${CFG.RP_BOARD}/items`);
+  // RP uit (vlag data/.rp-uit): alleen het eigen CRM (bevat sinds 30-08 ook alle overgezette RP-dossiers)
+  const data = require('../lib/dossiers.js').rpUit() ? { items: [] } : await rpGet(`/contact-service/${CFG.RP_PID}/boards/${CFG.RP_BOARD}/items`);
   if (eigenItems.length) { data.items = [...eigenItems, ...(data?.items || [])]; }
   if (!data?.items) return { fout: 'Reuzenpanda was even niet bereikbaar — probeer het zo nog een keer voordat je concludeert dat er geen offerte is.' };
   const items = data.items;

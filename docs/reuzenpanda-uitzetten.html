@@ -168,7 +168,21 @@
     <li><b class="t">Contract en opruimen</b><ul><li>Opzegtermijn en einddatum RP-contract vaststellen; RP één maand alleen-lezen aanhouden na de overstap.</li><li>RP-API-sleutel intrekken en uit ±40 bestanden verwijderen; status-id's uit de code; HubSpot-verrijking en Zapier-zaps uit.</li></ul></li>
   </ol>
 
-  <h2 id="volgorde">Volgorde en inschatting</h2>
+  <section id="stand" style="margin:2.5rem 0">
+<h2 style="margin:0 0 .5rem">Stand 30 augustus, avond: alles staat klaar</h2>
+<p style="margin:0 0 1rem;max-width:70ch">Vier van de vijf blokken zijn gebouwd en getest (labs: eigen-crm 40, sheet-eigen-offerte 64, offertecontrole 1.728, gripp-eigen 96, lead-store 324, migratie-rp 72, dossiers-rp-uit 72 scenario's, allemaal 0× fout-stil). De 19.700 RP-dossiers staan in het eigen CRM (opslag v2 met indexen). Er verandert pas iets voor klanten als de schakelaars hieronder omgaan.</p>
+<table style="border-collapse:collapse;width:100%;max-width:900px;font-size:.95rem">
+<thead><tr><th style="text-align:left;padding:.4rem .6rem;border-bottom:2px solid #ccc">Stap</th><th style="text-align:left;padding:.4rem .6rem;border-bottom:2px solid #ccc">Wie</th><th style="text-align:left;padding:.4rem .6rem;border-bottom:2px solid #ccc">Wat precies</th></tr></thead>
+<tbody>
+<tr><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">1</td><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">Daimy</td><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">In Reuzenpanda de automation op "Offerte verstuurd" uitzetten (anders mailt RP er overheen).</td></tr>
+<tr><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">2</td><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">Claude</td><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">/admin/verzendcentrum: bron <b>eigen</b>, testmodus <b>uit</b>, automatisch versturen <b>aan</b>. Vanaf nu: configurator → controle → prijsvoorstel (mail + WhatsApp + klantlink) zonder RP; offerte-tool maakt eigen offertes; overgezette dossiers doen mee in planner, Sunny en Gripp.</td></tr>
+<tr><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">3</td><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">Claude</td><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">Eerste echte aanvraag volgen: pipeline-badge, verzendlog, Sheet-rij (Telegram), Sunny-opvolging. Twee weken parallel: RP alleen-lezen, geen nieuwe leads meer in RP (widget/offerte-tool wijzen naar eigen).</td></tr>
+<tr><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">4</td><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">Claude</td><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5"><code>node scripts/rp-uitzetten.js uit</code>: vlag data/.rp-uit (planner, Sunny, Gripp-cron en de vier rapporten lezen dan alleen het eigen CRM) + RP-only jobs gestopt (v4-selfcheck, gripp-verrijken, keten-zelfcontrole, prijs-steekproef, markiezen, meeneem-melding). Zapier "RP Offerte → Sheets" uit (eigen Sheet-sync loopt al).</td></tr>
+<tr><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">5</td><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">Daimy</td><td style="padding:.4rem .6rem;border-bottom:1px solid #e5e5e5">Contract opzeggen; laatste RP-export bewaren (staat al in het eigen CRM als LEAD-RP-…, incl. RP-nummer en documentlink).</td></tr>
+</tbody></table>
+<p style="margin:1rem 0 0;max-width:70ch"><b>Terugdraaien</b> kan op elk moment: bron terug op RP in het verzendcentrum en <code>node scripts/rp-uitzetten.js aan</code>.</p>
+</section>
+<h2 id="volgorde">Volgorde en inschatting</h2>
   <div class="tabel-wrap"><table>
     <thead><tr><th>Blok</th><th>Bevat stappen</th><th>Inschatting bouw + lab</th><th>Resultaat</th></tr></thead>
     <tbody>

@@ -229,7 +229,11 @@ async function pushEnHaalOp(snapshot) {
       if (!sessieProfiel) { startMedewerkerOpdracht(o); continue; }
       // levende sessie (bv. claude): gewoon in de inbox, de sessie wordt wakker via haar Monitor
     }
-    if (B.nieuweOpdracht({ aan: o.aan, tekst: o.tekst, van: o.van || 'Daimy', id: o.id })) nieuw++;
+    if (B.nieuweOpdracht({ aan: o.aan, tekst: o.tekst, van: o.van || 'Daimy', id: o.id })) {
+      nieuw++;
+      // CC naar Claude (levende bouwer): Daimy verwacht dat dingen veranderen; medewerkers adviseren alleen
+      if (o.aan !== 'claude' && (o.van || 'Daimy') === 'Daimy') { try { fs.appendFileSync(B.P.inbox('claude'), `[${new Date().toISOString()}] CC ${o.id} Daimy → ${o.aan}: ${String(o.tekst).replace(/\s+/g, ' ').slice(0, 300)}\n`); } catch { /* best effort */ } }
+    }
   }
   return nieuw;
 }

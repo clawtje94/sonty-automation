@@ -186,6 +186,8 @@ if (require.main === module) (async () => {
     }
   } else if (cmd === 'opdracht' && a && b) {
     const prof = leesProfiel(a);
+    // Daimy leest het antwoord op zijn telefoon: eerst een direct antwoord, dan pas het rapport
+    b = `OPDRACHT VAN ${c ? 'Daimy' : 'een collega'} (ad hoc): ${b}\n\nBegin je tekstantwoord én je rapportbestand met een kopje "## ANTWOORD" met maximaal 5 korte zinnen die de vraag direct beantwoorden in gewone taal (wat je gedaan hebt, wat het antwoord is, wat er nu gebeurt). Kun je iets niet zelf (bouwen, wijzigen, aanzetten), zeg dat dan letterlijk en zet het door: \`node scripts/brein-sessie.js opdracht claude "<de vraag + jouw advies>"\`. Daarna pas de vier vaste kopjes.`;
     if (prof.sessie === 'ja') { console.error(`${a} is een levende sessie: opdracht gaat via het postvak/inbox, niet via claude -p`); process.exit(2); }
     const r = draai(prof, b, { soort: 'opdracht', opdrachtId: c || null });
     console.log(r.fout ? 'FOUT: ' + r.fout : r.tekst.slice(0, 1500));

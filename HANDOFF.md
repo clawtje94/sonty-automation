@@ -4,8 +4,9 @@
 - fotoupload/route.ts: de 'beoordeel'-tak (Mac-triage, wa-luisteraar.js) zette ELK aangeboden item op status 'voorstel', ook als Daimy
   al 'ok' had gekozen → zijn categorie-keuzes verdwenen ("elke keer hetzelfde doen"). Fix: ok/afgewezen wordt nooit meer overschreven.
   /admin/fotos: besluit() meldt een mislukte POST nu met een alert (was stil). 8 showroomfoto's (16-08 + 28-08) alsnog als 'showroom'
-  geaccepteerd via de API; live geteld: 8 eigen uploads onder Showroom in de websitefoto-tool. KV-uploadlijst is gecapt op 500
-  (266 afgewezen erin) — nog niet aangepakt.
+  geaccepteerd via de API; live geteld: 8 eigen uploads onder Showroom in de websitefoto-tool. KV-uploadlijst gecapt op 500: sinds 30-08 (Daimy: ja) worden
+  afgewezen uploads ouder dan 30 dagen automatisch uit de lijst gehaald (bij lezen en schrijven; bestanden blijven in Blob). Nu 0 verwijderd:
+  alle 266 afgewezen zijn jonger dan 30 dagen.
 
 ## 30-08 (01:xx): ANTWOORDEN ZICHTBAAR, RELAY-BUG, WEBSITEFOTO-CATEGORIEËN
 - Daimy zag Brams antwoorden niet (verstopt onder kaart, rapportvorm) → paneel "Jouw vragen en opdrachten" bovenaan Team met status en kort

@@ -289,6 +289,8 @@
   preview, groot lettertype), Leaflet-attributie 2 (extern). Alle 43 admin-pagina's in donker + 14 in licht zelf bekeken (screenshots
   in scratchpad/klein): geen lay-outbreuk gezien. Niet achter code-login bekeken: inmeet-dashboard, planning-instellingen,
   inmeet-mutatie, chat, financiering (audit logt in met meetbon/belscherm/pipeline-code, niet met de inmeet-code).
+- Bijvangst: /admin/bellijst crashte echt ("This page couldn't load"): /api/bellijst geeft uit de 10-min-cache {leads, cached} en anders een
+  kale lijst; pagina deed leads.filter op het object. Pagina accepteert nu beide vormen (route.ts is van de security-ronde 30-08 van de andere sessie).
 - Andere sessie werkt gelijktijdig in deze repo (admin-login/wachtwoord, commit cab13ec nam mijn offerte-uitlijning mee); lokale
   build faalde even op hun ongecommitte tsc-fout. Let op bij `git add -A`.
 

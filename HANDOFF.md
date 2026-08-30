@@ -1,5 +1,15 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (eind middag): OFFERTEFOTO'S BEHEREN + VOORTGANGSBALK
+- /admin/offertefotos (lib/offertefotos.ts, /api/admin/offertefotos, KV offertefotos:keuzes): per productcategorie (rolluik, screen,
+  knikarm, uitval, markies, pergola, serre, hor) een foto kiezen uit de websitefoto-bibliotheek; brochure-PDF (data.ts, IMG() accepteert
+  http-url) en klantofferte (page.tsx fotoWeb) gebruiken de keuze; verrijking geeft nu `categorie` terug. Keten getest: kiezen → PDF 200
+  (3,7 s) → teruggezet.
+- Pipeline dealkaart: voortgangsbalk met de 6 procesfasen (Offerte controle → Gecontroleerd → Offerte verstuurd → Inmeten inplannen →
+  grip invullen → Afgerond), huidige gevuld/gehad ✓; alle andere RP-kolommen (Jorren, 25% korting, Winkel, te ver, Gordijnen, Ai/winkel
+  verstuurd, Geen herinnering, Inmeet whatsapp/in de wacht, Handmatige controle) onder "Andere status" + badge als de deal daar staat.
+  OPEN VRAAG: welke van die kolommen zijn echt niet meer in gebruik (Daimy: "dingen die helemaal niet live staan") → dan uit RP_KOLOMMEN.
+
 ## 30-08 (namiddag): OFFERTE = BROCHURE MET ALLE PAGINA'S + FULL REVIEW ADMIN
 - Daimy: "kijk naar de RP-offertes, daar zitten al die pagina's in". De brochure (lib/offerte-pdf/OfferteBrochure, 12 pagina's: voorblad,
   intro, regels met foto/waarom/garantie, alternatieven, reviews, voorwaarden) bestond al voor de klantlink. Nu: lib/offerte-pdf/data.ts

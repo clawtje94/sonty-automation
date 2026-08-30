@@ -30,6 +30,7 @@ async function api(pad, init = {}) {
   return r.json();
 }
 async function haalInmeetItems() { if (!bronAan()) return []; const d = await api('?kolom=inmeten'); return d.items || []; }
+async function haalKolom(kolomId) { if (!bronAan()) return []; const d = await api('?kolom=' + encodeURIComponent(kolomId)); return d.items || []; }
 async function haalItem(id) { const d = await api('?id=' + encodeURIComponent(id)); return d.item || null; }
 async function zoek({ telefoon, email }) {
   if (!bronAan()) return [];
@@ -43,4 +44,4 @@ async function zetKolom(id, kolomId) { const d = await api('', { method: 'PATCH'
 async function zetAdres(id, adres) { const d = await api('', { method: 'PATCH', body: JSON.stringify({ id, adres }) }); return !!d.ok; }
 async function notitie(id, tekst, actor = 'automation') { const d = await api('', { method: 'PATCH', body: JSON.stringify({ id, notitie: tekst, actor }) }); return !!d.ok; }
 
-module.exports = { isEigen, bronAan, haalInmeetItems, haalItem, zoek, verstuurd, zetKolom, zetAdres, notitie, VLAG, BASIS };
+module.exports = { isEigen, bronAan, haalInmeetItems, haalKolom, haalItem, zoek, verstuurd, zetKolom, zetAdres, notitie, VLAG, BASIS };

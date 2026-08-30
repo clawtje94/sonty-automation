@@ -66,6 +66,8 @@ async function rpPatch(ep, body) {
 }
 
 async function setStatus(itemId, statusId) {
+  // eigen CRM-lead (LEAD-…): kolom in het eigen CRM, niet in RP (blok 3 RP-uitzetten, 30-08)
+  { const E = require('./lib/eigen-crm.js'); if (E.isEigen(itemId)) return E.zetKolom(itemId, statusId); }
   return rpPatch('/contact-service/' + PID + '/backlogs/' + BACKLOG_ID + '/items/' + itemId, { item: { status_id: statusId } });
 }
 
@@ -237,6 +239,35 @@ function findGrippProductId(description) {
 
 // ============ MAIN ============
 
+/**
+ * Eigen offerte (uit /api/eigen-crm, RP-itemvorm) → dezelfde documentvorm als een RP-quotation, zodat de
+ * bestaande Gripp-lus (regels, korting, hoofdproduct, montage) ongewijzigd draait. Puur; getest in scenario-lab/onderdelen/gripp-eigen.js.
+ *  - offerte-tool: toolLines (description/pricePerUnit/units) zijn de bron
+ *  - configurator: regels (omschrijving + beschrijving/details, subtotaal, aantal); negatieve kortingregels eruit, korting apart
+ */
+function eigenDocs(item) {
+  const o = item.offerte || {};
+  let lines = [];
+  if (Array.isArray(o.toolLines) && o.toolLines.length) {
+    lines = o.toolLines.filter((l) => l && l.description).map((l) => ({ description: String(l.description), pricePerUnit: Number(l.pricePerUnit || 0), units: Number(l.units || 1) }));
+  } else if (Array.isArray(o.regels)) {
+    lines = o.regels.filter((r) => r && r.omschrijving && Number(r.subtotaal || 0) >= 0).map((r) => {
+      const aantal = Math.max(1, Number(r.aantal || 1));
+      const perStuk = r.prijsPerStuk != null ? Number(r.prijsPerStuk) : Math.round((Number(r.subtotaal || 0) / aantal) * 100) / 100;
+      const spec = String(r.beschrijving || r.details || '').replace(/ \| /g, '\n').replace(/ · /g, '\n');
+      return { description: String(r.omschrijving).replace(/^\d+× /, '') + (spec ? '\n' + spec : ''), pricePerUnit: perStuk, units: aantal };
+    });
+  }
+  const k = o.korting && Number(o.korting.pct) > 0 ? { type: 'PERCENTAGE', amount: Number(o.korting.pct), name: o.korting.naam || (o.korting.pct + '% korting') } : null;
+  const nummer = (o.nummers || [])[0] || item.id;
+  const ts = o.datums && o.datums[0] ? Date.parse(o.datums[0]) : Date.now();
+  return [{
+    info: { quotationNumber: nummer, quotationCreationTimestamp: ts, documentId: item.id },
+    full: { quotationData: { quotationStatus: o.status || 'SENT', segments: { defaultTemplatePriceLineGroup: { data: { lines, groupDiscount: k } } } } },
+    status: o.status || 'SENT', eigen: true,
+  }];
+}
+
 async function main() {
   console.log('[' + new Date().toISOString().substring(11, 19) + '] Gripp invullen v2 start');
 
@@ -264,7 +295,14 @@ async function main() {
       if (item?.id) extra.push(item);
     } catch { /* verwijderd item: valt vanzelf van de volglijst */ }
   }
-  const itemsData = { items: [...gezien, ...extra] };
+  // Eigen CRM-leads op "Gripp invullen" (blok 3 RP-uitzetten): zelfde itemvorm, offerte zit al in het item
+  const eigenItems = [];
+  try {
+    const E = require('./lib/eigen-crm.js');
+    if (E.bronAan()) { const d = await E.haalKolom(GRIP_INVULLEN_STATUS); for (const it of d) if (!gezien.some((x) => x.id === it.id)) eigenItems.push(it); }
+    if (eigenItems.length) console.log('Eigen CRM-leads op Gripp invullen:', eigenItems.length);
+  } catch (e) { console.log('eigen CRM niet bereikbaar: ' + e.message); }
+  const itemsData = { items: [...gezien, ...extra, ...eigenItems] };
   // --item=<rp-id>: verwerk gericht één item, ook als het in RP gearchiveerd is
   // (testlead 2026-08-05 stond gearchiveerd en werd daardoor stil overgeslagen).
   const ITEM_FILTER = (process.argv.find(a => a.startsWith('--item=')) || '').split('=')[1] || null;
@@ -335,17 +373,21 @@ async function main() {
       const lcId = item.item_subject?.id;
       if (!lcId) { console.log('  SKIP: Geen lead_configuration_id'); failed++; continue; }
 
-      const docData = await rpGet('/document-service/v1/' + PID + '/quotations?lead_configuration_id=' + lcId);
-      const docs = (docData?.quotationDatas || []);
-      if (docs.length === 0) { console.log('  SKIP: Geen offerte gevonden'); failed++; continue; }
-
       // BELANGRIJK: kies de offerte die de klant heeft GEACCEPTEERD.
       // Status zit in de volledige quotation data, dus per doc ophalen.
       // Prioriteit: ACCEPTED (nieuwste) > SENT (nieuwste) > rest (nieuwste)
       const fullDocs = [];
-      for (const d of docs) {
-        const fd = await rpGet('/document-service/v1/' + PID + '/quotations/' + d.documentId);
-        if (fd?.quotationData) fullDocs.push({ info: d, full: fd, status: fd.quotationData.quotationStatus || '' });
+      if (item.eigen) {
+        // eigen CRM-lead: offerte zit in het item (blok 3 RP-uitzetten)
+        fullDocs.push(...eigenDocs(item));
+      } else {
+        const docData = await rpGet('/document-service/v1/' + PID + '/quotations?lead_configuration_id=' + lcId);
+        const docs = (docData?.quotationDatas || []);
+        if (docs.length === 0) { console.log('  SKIP: Geen offerte gevonden'); failed++; continue; }
+        for (const d of docs) {
+          const fd = await rpGet('/document-service/v1/' + PID + '/quotations/' + d.documentId);
+          if (fd?.quotationData) fullDocs.push({ info: d, full: fd, status: fd.quotationData.quotationStatus || '' });
+        }
       }
       if (fullDocs.length === 0) { console.log('  SKIP: Geen quotation data'); failed++; continue; }
       const statusRank = { 'ACCEPTED': 0, 'SENT': 1 };
@@ -510,7 +552,7 @@ async function main() {
           });
         }
 
-        const beschrijving = ['Overgenomen uit Reuzenpanda #' + docInfo.quotationNumber];
+        const beschrijving = [(docEntry.eigen ? 'Eigen offerte ' : 'Overgenomen uit Reuzenpanda #') + docInfo.quotationNumber];
         // Markering in het opmerkingenveld van de Gripp-offerte (Daimy 2026-08-17): puur
         // op RP-aanmaakdatum. Bij aanmaak liggen de prijzen vast, dus aangemaakt ná het
         // verhogingsmoment = nieuwe prijzen, ervoor = oude (ook als de klant later tekent).
@@ -596,4 +638,5 @@ async function main() {
   }
 }
 
-main().catch(e => { console.error(e); process.exit(1); });
+module.exports = { eigenDocs };
+if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });

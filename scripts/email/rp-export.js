@@ -127,6 +127,29 @@ async function rp(ep) {
     await new Promise((s) => setTimeout(s, 60));
   }
 
+  // Eigen offertes (S-nummers, eigen CRM) erbij — blok 3 RP-uitzetten (30-08): zelfde rijvorm, nieuwste offerte per adres wint.
+  try {
+    const E = require('../lib/eigen-crm.js');
+    const eigen = await E.verstuurd(365);
+    let eigenTeller = 0;
+    for (const it of eigen) {
+      const blob = (it.summary || '') + '\n' + (it.description || '');
+      const email = (veld(blob, 'E-?mailadres') || '').toLowerCase().trim();
+      if (!bruikbaarAdres(email)) continue;
+      const o = it.offerte || {};
+      const regel = {
+        email, voornaam: veld(blob, 'Voornaam'), achternaam: veld(blob, 'Achternaam'), telefoon: veld(blob, 'Telefoonnummer'),
+        plaats: veld(blob, 'Plaats'), postcode: veld(blob, 'Postcode'), bron: (it.sheet && it.sheet.afkomst) || 'Website', product: product(blob),
+        itemId: it.id, offerteNummer: o.nummers?.[0] || null, offerteStatus: o.status || null, offerteBedrag: o.totaalInclBTW ?? null,
+        offerteDatum: o.datums?.[0] ? Date.parse(o.datums[0]) : null, offerteVerlooptOp: null, offerteLink: o.klantlink || null,
+        aantalOffertes: 1, heeftAkkoord: o.status === 'ACCEPTED', eigen: true,
+      };
+      const bestaand = perEmail.get(email);
+      if (!bestaand || (regel.offerteDatum || 0) > (bestaand.offerteDatum || 0)) { perEmail.set(email, regel); eigenTeller++; }
+    }
+    console.log(`${eigen.length} eigen offertes bekeken, ${eigenTeller} rij(en) uit het eigen CRM.`);
+  } catch (e) { console.log('eigen CRM overgeslagen: ' + e.message); }
+
   fs.mkdirSync(UIT, { recursive: true });
   const rijen = [...perEmail.values()];
   fs.writeFileSync(path.join(UIT, 'rp-export.json'), JSON.stringify(rijen, null, 1));

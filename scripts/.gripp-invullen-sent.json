@@ -5504,5 +5504,18 @@
       }
     ],
     "processedAt": "2026-08-29T10:36:47.655Z"
+  },
+  "item:0f17b46b-46e0-4916-9d6b-08d155a20897": {
+    "summary": "P Butteling",
+    "grippCompanyId": 99845,
+    "grippOfferId": 9246,
+    "rpDocNumber": "202611401",
+    "allOffers": [
+      {
+        "grippOfferId": 9246,
+        "rpDocNumber": "202611401"
+      }
+    ],
+    "processedAt": "2026-08-30T08:17:43.612Z"
   }
 }

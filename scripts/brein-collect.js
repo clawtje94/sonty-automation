@@ -312,6 +312,14 @@ function schaduwStand() {
 }
 
 /** Delegaties die lokaal ontstonden (hoofd → medewerker via brein-sessie.js) staan alleen in het postvak; hier worden ze gestart. */
+/** Zelfherstel: 'gestart' zonder levend proces na 30 min = fout (zichtbaar), nooit eeuwig 'bezig'. */
+function ruimHangendeOpdrachten() {
+  let procs = ''; try { procs = execFileSync('ps', ['-axo', 'command='], { encoding: 'utf8', maxBuffer: 8e6 }); } catch { return; }
+  for (const o of B.postvak().filter((x) => x.status === 'gestart')) {
+    const leeft = procs.includes(`[medewerker:${o.aan}]`) || procs.includes(o.id);
+    if (!leeft && NU - Date.parse(o.antwoordOp || o.op) > 30 * 60000) B.markeer(o.id, 'fout', `Geen antwoord: de run van ${o.aan} is gestopt zonder resultaat (zie data/brein/opdracht-${o.id}.log). Stuur de opdracht opnieuw.`);
+  }
+}
 function startLokaleDelegaties() {
   let n = 0;
   for (const o of B.postvak().filter((x) => x.status === 'nieuw')) {
@@ -367,6 +375,7 @@ function werknemerKnopPlanning() {
   let nieuw = 0, fout = null;
   try { nieuw = await pushEnHaalOp(snapshot); } catch (e) { fout = e.message; }
   werknemerKnopPlanning();
+  ruimHangendeOpdrachten();
   const gedelegeerd = startLokaleDelegaties();
   if (gedelegeerd) console.log(`  ${gedelegeerd} gedelegeerde opdracht(en) gestart`);
   console.log(`${snapshot.bijgewerkt} brein: ${jobLijst.length} jobs (${alarmen.length} alarm), ${col.sessies.length} sessies, ${nieuw} nieuwe opdrachten, ${Date.now() - t0} ms${fout ? ' — PUSH FOUT: ' + fout : ''}`);

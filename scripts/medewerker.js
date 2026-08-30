@@ -138,7 +138,9 @@ Vaste vorm van ${vk}:
 Regels: NOOIT namen van andere zonweringbedrijven (schrijf "een groot zonweringbedrijf"); geen verzonnen bronnen; vervang verouderde punten uit je vorige versie in plaats van eindeloos aan te vullen; Nederlands. Lever daarna je rapport in de vaste vier kopjes: onder GEDAAN welke bronnen je las en wat je veranderde in je vakkennis, onder MORGEN wat je vanaf morgen anders doet.`;
 }
 
-const [, , cmd, a, b, c] = process.argv;
+let [, , cmd, a, b, c] = process.argv; // let: de opdracht-tak herschrijft b (was const → crash 'Assignment to constant variable', 30-08)
+const WEB = process.argv.includes('--web');
+if (require.main === module) process.on('uncaughtException', (e) => { try { if (cmd === 'opdracht' && c && !c.startsWith('--')) B.markeer(c, 'fout', 'Runner crashte: ' + String(e.message || e).slice(0, 200)); B.gebeurtenis(a || 'medewerker', 'runner-crash: ' + String(e.message || e).slice(0, 120)); } catch { /* laatste redmiddel */ } console.error(e); process.exit(1); });
 if (require.main === module) (async () => {
   if (cmd === 'lijst') {
     for (const m of team()) console.log(m.fout ? `!! ${m.slug}: ${m.fout}` : `${m.slug.padEnd(18)} ${m.naam.padEnd(10)} ${String(m.functie).padEnd(34)} ${m.afdeling || ''} · model ${m.model} · dienst ${m.dienst || '-'} · jobs ${m.jobs.length}`);
@@ -192,7 +194,7 @@ if (require.main === module) (async () => {
     // Daimy leest het antwoord op zijn telefoon: eerst een direct antwoord, dan pas het rapport
     b = `OPDRACHT VAN ${c ? 'Daimy' : 'een collega'} (ad hoc): ${b}\n\nBegin je tekstantwoord én je rapportbestand met een kopje "## ANTWOORD" met maximaal 5 korte zinnen die de vraag direct beantwoorden in gewone taal (wat je gedaan hebt, wat het antwoord is, wat er nu gebeurt). Kun je iets niet zelf (bouwen, wijzigen, aanzetten), zeg dat dan letterlijk en zet het door: \`node scripts/brein-sessie.js opdracht claude "<de vraag + jouw advies>"\`. Daarna pas de vier vaste kopjes.`;
     if (prof.sessie === 'ja') { console.error(`${a} is een levende sessie: opdracht gaat via het postvak/inbox, niet via claude -p`); process.exit(2); }
-    const r = draai(prof, b, { soort: 'opdracht', opdrachtId: c || null });
+    const r = draai(prof, b, { soort: 'opdracht', opdrachtId: c && !c.startsWith('--') ? c : null, extraTools: WEB ? ['WebSearch', 'WebFetch'] : [] });
     console.log(r.fout ? 'FOUT: ' + r.fout : r.tekst.slice(0, 1500));
     process.exit(r.fout ? 1 : 0);
   } else { console.error('gebruik: lijst | dienst <slug> | diensten | bijscholing <slug> | bijscholingen | opdracht <slug> "<tekst>" [id]'); process.exit(1); }

@@ -1,5 +1,12 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (ochtend): SHOWROOMFOTO'S — besluiten werden teruggezet op 'voorstel'
+- fotoupload/route.ts: de 'beoordeel'-tak (Mac-triage, wa-luisteraar.js) zette ELK aangeboden item op status 'voorstel', ook als Daimy
+  al 'ok' had gekozen → zijn categorie-keuzes verdwenen ("elke keer hetzelfde doen"). Fix: ok/afgewezen wordt nooit meer overschreven.
+  /admin/fotos: besluit() meldt een mislukte POST nu met een alert (was stil). 8 showroomfoto's (16-08 + 28-08) alsnog als 'showroom'
+  geaccepteerd via de API; live geteld: 8 eigen uploads onder Showroom in de websitefoto-tool. KV-uploadlijst is gecapt op 500
+  (266 afgewezen erin) — nog niet aangepakt.
+
 ## 30-08 (01:xx): ANTWOORDEN ZICHTBAAR, RELAY-BUG, WEBSITEFOTO-CATEGORIEËN
 - Daimy zag Brams antwoorden niet (verstopt onder kaart, rapportvorm) → paneel "Jouw vragen en opdrachten" bovenaan Team met status en kort
   antwoord; ad-hoc opdrachten beginnen met "## ANTWOORD"; laatste uitwisseling ook op compacte kaart.

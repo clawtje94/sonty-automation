@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, online offertepagina huisstijl)
 
+## 30-08 (avond): AFSLUITEND DUIMPJE SLOOT WA-TICKET NIET (Daimy: "dit soort tickets sluit je toch gewoon?")
+- Ticket 974473514 (+31642426847, verkeerd nummer bij lead Jennifer de Vries, offerte 202611742): klant zei 👍 op Sunny's excuus (17-08),
+  bleef 13 dagen open bij Sunny. Oorzaak: het pure-bevestigingspad in ai-ks/daemon.js stopte vóór de sluit-logica (regel ~941).
+- Fix (commit 2757bfc, daemon herstart): afsluitend duimpje/bedankje op een Sunny-bericht → ticket dicht via dezelfde poort (mag-sluiten.js:
+  geen service/belofte, geen lopende escalatie, alleen WA in live-modus, ons laatste bericht van user 747786).
+- Scan 31 open WA-tickets: 3 met dit patroon. 974473514 + 977092267 + 977073139 handmatig gesloten; 976931222 (John) open gelaten (lopende escalatie).
+- Open: lead Jennifer de Vries heeft een telefoonnummer van een vreemde; alleen e-mail (jenniferdevries9@hotmail.com) klopt mogelijk. A/B-template
+  "kortweg" ging al naar dat nummer (17-08). Niets meer gepland gevonden. Mens: nummer navragen per mail?
+
 ## 30-08 (avond): SECURITY-RONDE ADMIN/CRM (Daimy: "niet 10 miljoen gegevens lekken")
 - Gevonden en gedicht: /api/bellijst stond volledig open (klantbellijst); /api/offerte-tool zoek/zoekklant/opslaan zonder auth (klantdata + RP-schrijven);
   /api/eigen-crm accepteerde de 4-cijferige meet-code (19k dossiers) → nu alleen admin/Bearer; hoofdadmin-cookie was het wachtwoord zelf en

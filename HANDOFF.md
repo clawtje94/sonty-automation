@@ -1,5 +1,17 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (namiddag): OFFERTE = BROCHURE MET ALLE PAGINA'S + FULL REVIEW ADMIN
+- Daimy: "kijk naar de RP-offertes, daar zitten al die pagina's in". De brochure (lib/offerte-pdf/OfferteBrochure, 12 pagina's: voorblad,
+  intro, regels met foto/waarom/garantie, alternatieven, reviews, voorwaarden) bestond al voor de klantlink. Nu: lib/offerte-pdf/data.ts
+  (gedeelde opbouw), /api/admin/offerte-pdf?lead=<id> (ook concepten), en het pipeline-documentpaneel toont die PDF ingebed + knop
+  "PDF openen"; de korte regels/totalen staan eronder ingeklapt. Gemeten: 12 pagina's, 5,2 MB, 5 s.
+- Dealkaart: statusstappen met naam en nummer (huidige gevuld, gehad = vinkje) i.p.v. anonieme bolletjes.
+- Full review (deliverable-reviewer op 82 screenshots, 41 pagina's × licht/donker): 19 punten. Gefixt: bellijst 59 s → 7,6 s (parallel +
+  10 min cache; blijft HubSpot tot V14), zonradar/vve-*/winkels licht thema, meetbon/rekentool/chat achtergrond, thema-knop naar
+  onderaan rechts (overlap met kopknoppen), wit logo in licht thema (--adm-logo-filter), select-labels gebruikers.
+  Open: personeel-tabel (kolom afgekapt), fotos-chips (scroll-hint), offerte-tool knop-span, pipeline dark icoontjes, linkedin-personal
+  serif, voicebot-inlog links, belscherm bewust eigen licht ontwerp (audit 29-08), 14 pagina's met eigen toegangscode (2288) = bewust.
+
 ## 30-08 (middag): OFFERTE-PANEEL IN DE PIPELINE ("lelijke offerte")
 - Oorzaak: bij de thema-migratie (29-08) kreeg het documentpaneel in app/admin/pipeline/page.tsx var(--adm-text) als achtergrond én
   tekstkleur → kop, naam, tabel en totalen onzichtbaar; markdown-sterretjes uit de beschrijving werden getoond.

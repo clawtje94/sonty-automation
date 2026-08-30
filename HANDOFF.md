@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
+## 30-08 (avond): PIPELINE-LEADPANEEL = MINI-CRM (Daimy: "producten + samenvatting WhatsApp en mail")
+- Nieuw in het detailpaneel (/admin/pipeline): sectie "Aangevraagde producten" (configurator-products met maat/opties, anders offerteregels)
+  en sectie "Contact met de klant": per kanaal (WA + mail) een Haiku-samenvatting uit Trengo + laatste berichten uitklapbaar + Trengo-link.
+- API: /api/admin/leads/contact?leadId= (admin-auth). Samenvatting gecachet in KV (crm:contacthist:v2, vingerafdruk = aantal+laatste tijd).
+- Gemeten op productie: 4 echte leads goed (o.a. Daimy Boot 15 WA-ber., Bram Van Doorn mail); sweep 25 leads 0 fouten. Twee bugs gevonden
+  en gefixt: term-search gaf gesprekken van ándere klanten (nu filter op nummer-staart/contact-adres) en Trengo-429 leek op "geen gesprek"
+  (heet nu "Trengo is even overbelast"). Commits 6797f0b + 2 fixes, PR #52.
+- LET OP: lokale build gaf Upstash KV "max requests limit exceeded (500000)" op google-reviews-reads; live leads-API werkte gewoon. Checken.
+
 ## 30-08 (avond): AFSLUITEND DUIMPJE SLOOT WA-TICKET NIET (Daimy: "dit soort tickets sluit je toch gewoon?")
 - Ticket 974473514 (+31642426847, verkeerd nummer bij lead Jennifer de Vries, offerte 202611742): klant zei 👍 op Sunny's excuus (17-08),
   bleef 13 dagen open bij Sunny. Oorzaak: het pure-bevestigingspad in ai-ks/daemon.js stopte vóór de sluit-logica (regel ~941).

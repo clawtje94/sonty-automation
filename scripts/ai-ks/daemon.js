@@ -941,6 +941,36 @@ async function verwerkTicket(t, state) {
   if (isBevestiging) {
     state.verwerkt[sleutel] = { tijd: new Date().toISOString(), bevestiging: true };
     console.log(`  ticket ${t.id}: pure bevestiging ("${laatste.tekst.slice(0, 20)}"), niet op reageren`);
+    // AFSLUITEND DUIMPJE = GESPREK KLAAR → TICKET DICHT (Daimy 2026-08-30, +31642426847).
+    // Dit pad stopte hier, vóór de sluit-logica verderop; de klant zei "👍" op ons laatste
+    // bericht en het ticket bleef 13 dagen open bij Sunny. Zelfde poort als daar: alleen
+    // WhatsApp in een live-modus, nooit met een lopende escalatie, en nooit als er een
+    // service-melding of belofte in zit (mag-sluiten.js). Bot-tickets alleen: ons laatste
+    // bericht moet van Sunny zijn, een collega die zelf appt sluit zijn eigen gesprek.
+    try {
+      const onsLaatsteRij = [...rows].reverse().find((r) => r.van === 'sonty');
+      const liveModus = isWaTicket(t) && (sonnyActiefNu() || isActiefTicket(t) || isLiveTestContact(t));
+      const vanSunny = onsLaatsteRij && Number(onsLaatsteRij.userId) === 747786;
+      const lopendeEscalatie = (msgs?.data || []).some((m) => {
+        const tk = m.body || m.message || '';
+        return (m.internal_note || m.type === 'NOTE') && m.user_id === 747786 &&
+          (OVERDRACHT_HERKENNING.test(tk) || /De AI kan dit niet zelf afhandelen en draagt het over/i.test(tk));
+      });
+      if (liveModus && vanSunny && !lopendeEscalatie) {
+        const { magSluiten } = require('./mag-sluiten.js');
+        const poort = magSluiten({
+          klantTekst: rows.filter((r) => r.van !== 'sonty').map((r) => r.tekst).join(' '),
+          antwoord: onsLaatsteRij.tekst, acties: [],
+        });
+        if (poort.mag) {
+          const dicht = await tPost(`/tickets/${t.id}/close`, {});
+          console.log(`  ${dicht.ok ? '✓ afsluitende bevestiging → ticket gesloten' : '⚠️ ticket sluiten mislukte: ' + dicht.status}`);
+          log({ ticket: t.id, kanaal: 'WA', klant: t.contact?.phone || null, bevestigingGesloten: dicht.ok, laatsteKlantBericht: laatste.tekst });
+        } else {
+          console.log(`  ticket ${t.id} NIET gesloten na bevestiging (${poort.soort}: ${poort.reden})`);
+        }
+      }
+    } catch (e) { console.error(`  [${t.id}] sluiten na bevestiging FOUT: ${e.message}`); }
     return;
   }
 

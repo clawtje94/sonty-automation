@@ -80,7 +80,10 @@ function draai(prof, opdracht, { soort = 'dienst', opdrachtId = null, extraTools
   ].join('\n');
   // M1 (Mats-audit 29-08): schrijven/bewerken ALLEEN in de eigen medewerkersmap; lezen mag overal (Read zonder pad).
   const eigenMap = `//Users/clawdboot/sonty/medewerkers/${prof.slug}/**`;
-  const tools = ['Read', `Write(${eigenMap})`, `Edit(${eigenMap})`, 'Grep', 'Glob', ...prof.tools, ...extraTools];
+  // Bram-les 30-08: agents typen vaak `node scripts/x.js` (relatief) i.p.v. het absolute pad → "requires approval".
+  // Daarom staan we van elk toegestaan script ook de relatieve vormen toe.
+  const relatief = prof.tools.flatMap((t) => { const m = t.match(/^Bash\(node \/Users\/clawdboot\/sonty\/scripts\/(.+)\)$/); return m ? [`Bash(node scripts/${m[1]})`, `Bash(node ./scripts/${m[1]})`, `Bash(cd /Users/clawdboot/sonty && node scripts/${m[1]})`] : []; });
+  const tools = ['Read', `Write(${eigenMap})`, `Edit(${eigenMap})`, 'Grep', 'Glob', ...prof.tools, ...relatief, ...extraTools];
   // markering zodat het Brein deze run niet als 'Claude-terminal' telt (collector slaat '[medewerker:…]'-transcripten over)
   // '--setting-sources project': de gebruikersinstellingen van Daimy (bypassPermissions, Edit(*)) gelden NIET voor
   // medewerkers; alleen de whitelist hieronder. Bewezen 29-08: eigen map schrijfbaar, BEDRIJF.md geweigerd.

@@ -1,5 +1,19 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (avond): E2E-TEST EIGEN PIPELINE ("werkt alles zoals met Reuzenpanda?") — eerlijke stand
+- ✅ Configurator-aanvraag → lead in KV, Klaviyo, Telegram, bevestigingsmail (0,4 s). Daimy testte zelf (daimyboot@gmail.com 11:46).
+- ✅ Pipeline dealkaart: knoppen "Offerte versturen" (verzendcentrum verstuur-eigen: S-nummer auto, mail + WhatsApp + klantlink),
+  "Klantlink", "PDF" (brochure). Test LEAD-…-MVTA: S26-1001, mail-ticket 977330185 (testmodus → joey@/daimy@), WA overgeslagen (testmodus).
+- ✅ Klantlink /offerte/<token> 200, PDF 200 (5,3 MB, 12 pagina's). ✅ Online tekenen: status akkoord, rpKolom Inmeten inplannen,
+  akkoord-mail "Je akkoord is binnen" (ticket 977330198), timeline offerte_signed.
+- ❌ NA AKKOORD GEBEURT NIETS MEER: de inmeet-planner (Nanny/Sunny) leest alleen RP-backlog-items; eigen-CRM-leads op "Inmeten
+  inplannen" komen nooit op het inmeet-dashboard. V16: planner ook eigen leads laten lezen (/api/admin/leads, rpKolom Inmeten inplannen,
+  leesLeadCompleet-variant op lead.offerte, geen RP-statuswissel) — met scenario-lab vóór livegang.
+- ❌ Prijsindicatie voor configurator-leads gaat niet automatisch (RP-flow: V4/verzendcentrum); nu handmatig via de knop.
+- ❌ Offerte-opvolging/herinneringen voor eigen leads: verzendcentrum herinneringenAan=false, bron=rp. ❌ Gripp invullen/meetbon-keten
+  hangt aan RP-items. ⚠️ Verzendcentrum staat in testmodus (mails naar joey@/daimy@, geen WhatsApp) — bewust; uitzetten = echte klantmails.
+- Bewerken van een eigen offerte: via /admin/offerte-tool (leadId-upsert); nog geen knop "bewerken" vanuit de pipeline (V16-lijst).
+
 ## 30-08 (eind middag): OFFERTEFOTO'S BEHEREN + VOORTGANGSBALK
 - /admin/offertefotos (lib/offertefotos.ts, /api/admin/offertefotos, KV offertefotos:keuzes): per productcategorie (rolluik, screen,
   knikarm, uitval, markies, pergola, serre, hor) een foto kiezen uit de websitefoto-bibliotheek; brochure-PDF (data.ts, IMG() accepteert

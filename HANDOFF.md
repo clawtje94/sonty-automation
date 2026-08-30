@@ -3334,3 +3334,12 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 - 30-08 ~15:10: sonty.nl/showroom verbeterd (commit 7e0e35b in sonty-website): boekknop (MS Bookings) als primaire knop in de hero, blok "Plan je bezoek" (met/zonder afspraak) direct onder de hero, sticky boekbalk op mobiel (StickyCtaBar, verschijnt na de hero, ruimte voor WhatsApp-knop), extra boekknop na de foto's, FAQ-link, eind-CTA herschreven. Nieuw icoon IconCalendar in SontyIcons. LET OP: components/WhatsAppWidget.tsx is door een ANDERE terminal herschreven (uncommitted, chatbot eruit) en niet door mij aangeraakt.
 - 30-08: ALARM Vercel KV/Upstash op 500.000/500.000 requests (uit build-log), alle KV-reads falen; op Telegram gemeld als V1.
 - 30-08 15:30: showroom-wijziging staat live op https://sonty-website.vercel.app/showroom (GH-run 33312432362 success). www.sonty.nl/showroom wordt NOG door Webflow geserveerd (openresty, Cookiebot), Next.js-site is nog niet aan het domein gekoppeld. V2 aan Daimy gesteld.
+
+## 30-08 (middag): EXPERIENCE CENTER, LOODS ZOEKEN IN DE ONDERZOCHTE HOEK
+- Daimy (/goal): ideale loods met veel passerend verkeer op de plek uit het winkellocatie-onderzoek (/admin/winkels: advies
+  hoek Reijerwaard/Cornelisland, Barendrecht-Ridderkerk, A15/A16, 350-500 m², min 4 m hoog, € 80-95/m²/jr).
+- Resultaat in docs/experience-center-loods-aanbod-2026-08-30.md. Top 3 beschikbaar: Pesetastraat 84 Ridderkerk (351 m², zicht A15,
+  € 3.150/mnd), Zwaalweg 7 Barendrecht (462 m², 6,6 m, hoek naast woonboulevard, € 4.250/mnd, Van Vliet), Schaapherderweg 5-f/3-d
+  Ridderkerk (263/345 m², 6,5 m, Cornelisland, € 2.700/€ 3.000). Groter: Brugge 14-16 (600 m², Vaanpark), Handelsweg 87 (800 m²).
+- Funda in business blokkeert geautomatiseerd lezen (ook headless Chrome); status gecheckt via iLocate/Van Vliet/makelaars.
+- Open: Daimy belt makelaars; hoogte Pesetastraat 84 onbekend.

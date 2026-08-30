@@ -1,5 +1,16 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (middag): CONFIGURATOR VERZENDEN 18 s → 0,4 s + ECHTE /bedankt MET VIDEO
+- app/api/configurator/submit: HubSpot (3 calls) en bevestigingsmail (Trengo) draaien nu in Next `after()` ná het antwoord.
+  Gemeten: 18,0 s → 0,42 s. Bewijs mail: Trengo-tickets "Bedankt voor je aanvraag bij Sonty" 11:49 (oud) en 11:56 (na after()).
+  LET OP: HubSpot maakt géén contact/deal aan (ook niet vóór de wijziging): legacy-koppeling faalt stil; HubSpot wordt toch vervangen (eigen CRM).
+- Configurator stuurt na succes door naar /bedankt?naam=<voornaam>&bron=configurator (done-scherm blijft vangnet).
+- Nieuwe /bedankt (app/bedankt/page.tsx): kop met naam, 3 stappen "wat gebeurt er nu", VIDEO-blok (KV site:bedankt via /admin/bedankt:
+  YouTube/Vimeo/mp4), traject in 7 stappen (Sonty-regels: €75 zonder opdracht, 40% aanbetaling, garantie 3/5/7), reviews, contact,
+  tracking (dataLayer bedankt_pagina, GA4 generate_lead, Meta Lead). iPhone-check: geen horizontale scroll, 5.573 px.
+- Er staat nog geen video (site had er geen): Daimy levert link → /admin/bedankt. Testleads "Claude TEST snelheidsmeting (2)" staan in
+  de pipeline (geen delete-API); handmatig verwijderen.
+
 ## 30-08 (middag): ELIZA +31641168331 (ticket 976794298) — 24u stil op Mens nodig
 - Feiten: 27-08 13:51 klant appt na gemiste oproep; Sunny antwoordde pas 28-08 10:37 (QA keurde concept af, Trengo-429's) met een
   terugbel-standaardtekst terwijl kantoor haar 27-08 15:00 al had gebeld en de afspraak had gemaakt. 29-08 12:14 vroeg ze om een

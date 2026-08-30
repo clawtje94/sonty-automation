@@ -3213,3 +3213,25 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
   zegt; onze tabel = boek-tabel (zelfde cellen). Knikarm: uitval 150/200 via minderprijs (−180/−160, boek) op de
   250-tabel = motor. TE STRENG t.o.v. boek: SunEye vanaf 169 cm (boek) vs onze tabel vanaf 269; SunBasic 180 vs 300
   (kleine breedtes staan niet in onze tabel) → bij V1 meenemen.
+
+## 30-08 (middag): STILTE-CASUS JOHN VAN KRIMPEN (+31614890704) → ZOEKTOOL GEFIXT + ESCALATIE-WACHTER LIVE
+- Daimy: "wat gebeurt hier.. +31614890704 we moeten echt zorgen dat dingen niet stil blijven". Feiten: WA-ticket
+  976931222; John kan offerte 202612048 (Suneye voorraadscherm 5000×3000, €3.175, 23-08, Instagram) niet openen.
+  Sunny 28-08 08:36 vroeg gegevens, 09:04 escaleerde (interne notitie @Jorren, label Urgent, ticket toegewezen aan
+  Sunny zelf 747786), 29-08 (za) 09:46 vroeg John opnieuw, Sunny escaleerde nogmaals. Geen mens reageerde; geen
+  Telegram-alarm bestond voor WA-escalaties. Offerte verloopt 30-08. PDF gewoon ophaalbaar:
+  document.reuzenpanda.nl/renderer/v1/<pid>/quotations/92dea541-3f52-4eab-be73-1941b0a024ca/artifact.pdf
+  (scratchpad/offerte-202612048.pdf). RP-telefoon = +31614870704 (1 cijfer anders dan zijn WhatsApp).
+- OORZAAK zoektool (klant-context.findRpOffertes): e-mail matchte wél, maar "adres: Rotterdam" matchte honderden
+  borditems en de lijst werd na 5 afgekapt → John viel eraf; telefoon 1 cijfer anders; naam in RP met dubbele spatie.
+- FIX (scripts/ai-ks/klant-context.js): scoren op sterkte (e-mail 8 > telefoon 6 > naam 4 > telefoon-1-cijfer-bij-
+  naam 3 > adres 2, kaal plaatsnaam telt niet), spaties samengevoegd, regeleinden bewaard voor cijferreeksen;
+  NIEUW: parameter offertenummer (tools.js schema) → documentId uit offerte-backups/rp-offerte-cache → directe hit
+  met DOCSIGN-link. Regressie oud vs nieuw op 12 recente WA-klanten: 12/12 gelijk (eerste versie brak 11/12 door
+  weggehaalde regeleinden → gevangen door de regressie). John: gevonden op naam+mail én op nummer. Sunny herstart.
+- NIEUW: scripts/ai-ks/escalatie-watch.js + launchd nl.sonty.escalatie-watch (elk uur): eerste escalatie per ticket
+  uit log.jsonl (7 dagen), Trengo-check op OUTBOUND van een mens (user_id ≠ 747786) of CLOSED; na 4 werkuren
+  (ma-vr 08-18) één gebundeld Telegram-alarm op de hoofdchat, herhaald per 24 u. Eerste run 30-08: 22 escalaties,
+  3 open: 976839737 Marijke van Aalst (aanbetaling), 976794298 Eliza (terugbelverzoek), 976931222 John.
+- NOG TE DOEN (wacht op Daimy, V1): John vandaag antwoorden met het PDF (WA + mail) en de vervaldatum verlengen
+  (RP-aanpassing = mens). Let op: 29/30-08 = weekend; Sunny belooft "je hoort snel van ons" ook op zaterdag.

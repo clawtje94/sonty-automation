@@ -39,6 +39,7 @@ const TOOL_DEFS = [
         phone: { type: 'string' },
         naam: { type: 'string', description: 'Volledige naam als bekend' },
         adres: { type: 'string', description: 'Straat/postcode/plaats als bekend' },
+        offertenummer: { type: 'string', description: 'Offertenummer (8 cijfers, bv. 202612048) als de klant dat noemt: ALTIJD meegeven, dit is de sterkste sleutel en werkt ook als telefoon/naam net anders in het systeem staan.' },
       },
     },
   },

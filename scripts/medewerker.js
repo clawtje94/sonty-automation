@@ -91,7 +91,7 @@ function draai(prof, opdracht, { soort = 'dienst', opdrachtId = null, extraTools
   const t0 = Date.now();
   const s = stand(); s[prof.slug] = { ...(s[prof.slug] || {}), naam: prof.naam, status: soort === 'dienst' ? 'in dienst' : 'aan een opdracht', bezigSinds: new Date().toISOString(), bezigMet: opdracht.slice(0, 160) }; bewaarStand(s);
   B.gebeurtenis(prof.naam, `${soort === 'dienst' ? 'begint dienst' : 'pakt opdracht op'}: ${opdracht.slice(0, 100)}`);
-  const r = spawnSync(CLAUDE, args, { cwd: ROOT, encoding: 'utf8', maxBuffer: 20e6, timeout: 25 * 60000, env: { ...process.env, BREIN_VAN: prof.slug, PATH: '/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin' } });
+  const r = spawnSync(CLAUDE, args, { cwd: ROOT, encoding: 'utf8', maxBuffer: 20e6, timeout: 25 * 60000, env: { ...process.env, BREIN_VAN: prof.slug, BREIN_OPDRACHT_ID: opdrachtId || '', PATH: '/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin' } });
   let tekst = '', kosten = null, fout = null;
   if (r.error) fout = r.error.message;
   try { const j = JSON.parse(r.stdout || '{}'); tekst = j.result || ''; kosten = j.total_cost_usd ?? null; if (j.is_error) fout = (j.result || 'agent-fout').slice(0, 300); } catch { tekst = (r.stdout || '').trim(); }

@@ -36,10 +36,42 @@ en melden via `brein-sessie.js opdracht <hoofd-slug> "V<n> is verlopen, beslis z
   niemand bewaakt UX/conversie-optimalisatie actief). Voorstel: Kai pilot laten scopen, rapportlijn
   bij Lars. — VANDAAG AAN DAIMY GESTUURD (ad-hoc, in sessie, geen Telegram).
 
+- V117 — Claude (bouwer) — sinds 30-8 — Daimy ad-hoc: foto's die hij in de upload tool in de juiste
+  categorie zet, staan in de website foto tool weer niet goed (herhaald probleem, eerder al gemeld).
+  Relay via brein-sessie.js opdracht claude 2x geprobeerd, beide keren "command requires approval",
+  niet afgeleverd (inbox-claude.txt niet bijgewerkt, laatste regel nog 29-8 22:01). Zelfde
+  relay-bug als V102/V103/V114. Voorstel: bij eerstvolgende gelegenheid opnieuw proberen; blijft
+  het hangen dan meenemen in de V110/V111-escalatie over de structurele relay-bug. — nog niet
+  gestuurd (ad-hoc, in sessie beantwoord, geen Telegram deze ronde).
+
+- V118 — Claude (bouwer) — sinds 30-8 — Daimy ad-hoc: Brein-dashboard moet extreem logisch,
+  bruikbaar en overzichtelijk zijn (algemene eis, geen los bugje). Gekoppeld aan eerdere concrete
+  punten: mobiel werkt niet lekker (V114), teamdashboard moet direct kunnen typen/versturen i.p.v.
+  naar postvak, en online aanpassingen eerst voorstellen voor akkoord i.p.v. direct live (beide
+  losse Daimy-opmerkingen 29-8 avond, nog geen apart V-nummer, nu meegenomen in V118). Relay naar
+  Claude via brein-sessie.js opdracht gaf weer "command requires approval", inbox-claude.txt niet
+  bijgewerkt (laatste regel nog 29-8 22:01). Dit is de 4e mislukte relay vandaag (na V103, V114,
+  V117) — nu behandeld als BEVESTIGD STRUCTUREEL, niet meer als toeval. — nog niet gestuurd (ad-hoc
+  in sessie beantwoord).
+
+## Ad-hoc opdracht 30-8 #3 (dashboard nog steeds onduidelijk, aanscherping V118)
+- Daimy: vindt het dashboard nog steeds niet duidelijk, wil goed onderzoek hoe we dit zo goed
+  mogelijk kunnen inrichten. Kan ik niet zelf (geen bouw/onderzoekstoegang), dus doorgezet naar
+  Claude als opdracht ik3tsap5 (08:49), samengevoegd met V118 zodat het geen los meldingetje wordt.
+  Advies mee ingebouwd: kort gebruiksonderzoek (welke schermen Daimy echt gebruikt, wat hij mist,
+  mobiel vs desktop) i.p.v. losse patches. Bewijs gecheckt in inbox-claude.txt: aangekomen.
+  Relay werkte dit keer meteen (ook g8p8bwn1 vroeg vandaag al goed aangekomen/beantwoord door
+  Daimy zelf: "V10: ja, doe het zoals voorgesteld") — de relay-bug lijkt niet meer structureel
+  actief vandaag, blijf het wel volgen voor V110/V111.
+- Geen Telegram gestuurd (ad-hoc buiten 08:00-dienst, geen nieuwe beslisvraag voor Daimy).
+
 ## Volgen (geen open vraag, wel in de gaten houden)
+- Reactie van Claude op ik3tsap5 (dashboard-onderzoek, gekoppeld aan V118): bij volgende briefing
+  terugkoppelen aan Daimy zodra Claude heeft geantwoord.
 - Teamgat design/CRO (V116): wacht op Daimy's akkoord voor Kai-pilot.
-- Relay-bug brein-sessie.js opdracht (V110/V111): trad nu 2x op dezelfde dienst op (V103, V114),
-  bij eerdere gevallen loste het na uren vanzelf op. Blijft dit aanhouden, dan is het structureel.
+- Relay-bug brein-sessie.js opdracht (V110/V111): vandaag 4x mislukt (V103, V114, V117, V118).
+  Niet langer als "lost vanzelf op" behandelen — als hard bewijs meenemen in de V110/V111-escalatie
+  naar Mats/Ori.
 - Isa/Yara: serviceticket 965923606 (26 dagen stil), Yara pakt op 29-8. Mogelijk later coulance-vraag.
 - Werkbonnen-stagnatie: 72 open, 0 afgerond op 29-8. Kijken of dit doorzet.
 - Sjoerd terug 11 sept — check dan of capaciteitsdruk (V100) opgelost is.
@@ -54,6 +86,24 @@ en melden via `brein-sessie.js opdracht <hoofd-slug> "V<n> is verlopen, beslis z
 - V110 — prioriteit Brein-fixes (briefing-bewijs + beslissingenlijst) — nog niet gestuurd
 - V111 — wie pakt de fix op (Mats direct of via Ori) — nog niet gestuurd
 - V112 — hoofden-profielen: expliciete regel "ontbrekend rapport melden" — nog niet gestuurd
+
+## Ad-hoc opdracht 30-8 #2 (V118, Brein moet super logisch/overzichtelijk zijn)
+- Daimy: "dit dashboard met het brein" moet echt super logisch werken en extreem goed bruikbaar en
+  overzichtelijk zijn voor hem. Geen concrete bug maar een bruikbaarheids-eis, dus als opdracht
+  doorgezet aan Claude (de bouwer) met verwijzing naar eerdere concrete klachten (mobiel V114,
+  teamdashboard direct typen/versturen, aanpassingen eerst voorstellen). Relay mislukte
+  ("command requires approval"), geen bewijs in inbox-claude.txt. Vastgelegd als V118. Vierde
+  mislukte relay vandaag, nu als structureel bestempeld i.p.v. incident. Geen Telegram (ad-hoc,
+  geen beslisvraag).
+
+## Ad-hoc opdracht 30-8 #1 (V117, foto-categorieen website)
+- Daimy klaagt direct: foto's die hij lang in de juiste categorie had staan in de upload tool,
+  staan nu weer niet goed in de website foto tool. Herhaald probleem, zichtbaar gefrustreerd.
+  Dit is een technisch bug in de website-tooling (sonty-website), dus doorgezet als opdracht aan
+  Claude (de bouwer, enige die kan bouwen) met verzoek het structureel op te lossen i.p.v. los te
+  fixen. Relay 2x geprobeerd via brein-sessie.js opdracht, beide keren "command requires approval",
+  geen bewijs van aflevering (inbox-claude.txt ongewijzigd). Vastgelegd als V117. Geen Telegram
+  gestuurd (ad-hoc buiten de 08:00-dienst, kort in sessie beantwoord).
 
 ## Ad-hoc opdracht 29-8 #6 (V116, teamgat design/CRO + relay-bug herbevestigd)
 - Daimy vroeg direct: waarom werken agents met openstaande opdracht soms niet, en waarom is er geen

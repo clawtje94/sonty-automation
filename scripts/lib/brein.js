@@ -62,9 +62,9 @@ function afmelden(naam) { const s = sessies(); if (s[naam]) { s[naam].status = '
 /** Postvak. */
 function postvak() { return lees(P.postvak, []); }
 function bewaarPostvak(lijst) { schrijf(P.postvak, lijst.slice(-500)); }
-function nieuweOpdracht({ aan, tekst, van = 'Daimy', id = null }) {
+function nieuweOpdracht({ aan, tekst, van = 'Daimy', id = null, bron = null, soort = null }) {
   const lijst = postvak();
-  const o = { id: id || Math.random().toString(36).slice(2, 10), aan, tekst: String(tekst).slice(0, 4000), van, op: new Date().toISOString(), status: 'nieuw', antwoord: null, antwoordOp: null };
+  const o = { id: id || Math.random().toString(36).slice(2, 10), aan, tekst: String(tekst).slice(0, 4000), van, op: new Date().toISOString(), status: 'nieuw', antwoord: null, antwoordOp: null, bron: bron || null, soort: soort || null };
   if (lijst.some((x) => x.id === o.id)) return null; // al bekend (idempotent bij herhaalde pull)
   lijst.push(o); bewaarPostvak(lijst);
   // wakker maken: één regel in het inbox-bestand van de collega

@@ -320,6 +320,25 @@ function ruimHangendeOpdrachten() {
     if (!leeft && NU - Date.parse(o.antwoordOp || o.op) > 30 * 60000) B.markeer(o.id, 'fout', `Geen antwoord: de run van ${o.aan} is gestopt zonder resultaat (zie data/brein/opdracht-${o.id}.log). Stuur de opdracht opnieuw.`);
   }
 }
+/** De clou van een team (Daimy 30-08): Bram/een hoofd delegeert aan de expert, de expert denkt na, en het antwoord komt
+ *  als TERUGKOPPELING terug bij de delegeerder, die bundelt en pas dan naar Daimy/Claude gaat. */
+function terugkoppelingen() {
+  let n = 0;
+  const lijst = B.postvak();
+  for (const o of lijst) {
+    if (o.soort !== 'delegatie' || !['klaar', 'fout'].includes(o.status) || o.teruggekoppeld) continue;
+    const pf = path.join(SONTY, 'medewerkers', o.van, 'profiel.md');
+    if (!fs.existsSync(pf)) { o.teruggekoppeld = true; continue; }
+    let sessieProfiel = false; try { sessieProfiel = /^sessie:\s*ja/m.test(fs.readFileSync(pf, 'utf8')); } catch { /* profiel onleesbaar */ }
+    const origineel = o.bron ? lijst.find((x) => x.id === o.bron) : null;
+    const tekst = `TERUGKOPPELING van ${o.aan} op jouw delegatie ${o.id}${origineel ? ` (oorspronkelijke vraag van ${origineel.van}, opdracht ${origineel.id}: "${String(origineel.tekst).slice(0, 200)}")` : ''}:\n\n${String(o.antwoord || '(geen antwoord: ' + o.status + ')').slice(0, 3000)}\n\nVerwerk dit als de ontvanger van het advies: bundel het (met eventuele andere terugkoppelingen), trek je conclusie en geef het eindantwoord. ${origineel ? `Werk het antwoord op de oorspronkelijke vraag bij met: node scripts/brein-sessie.js antwoord ${origineel.id} "<eindantwoord in gewone taal>".` : ''} Moet er iets gebouwd of gewijzigd worden, zet dan één gebundelde opdracht door aan claude.`;
+    B.nieuweOpdracht({ aan: o.van, tekst, van: o.aan, soort: 'terugkoppeling', bron: o.bron || o.id });
+    o.teruggekoppeld = true; n++;
+    if (sessieProfiel) { /* levende sessie leest zijn inbox */ }
+  }
+  if (n) B.bewaarPostvak(lijst);
+  return n;
+}
 function startLokaleDelegaties() {
   let n = 0;
   for (const o of B.postvak().filter((x) => x.status === 'nieuw')) {
@@ -376,6 +395,8 @@ function werknemerKnopPlanning() {
   try { nieuw = await pushEnHaalOp(snapshot); } catch (e) { fout = e.message; }
   werknemerKnopPlanning();
   ruimHangendeOpdrachten();
+  const terug = terugkoppelingen();
+  if (terug) console.log(`  ${terug} terugkoppeling(en) naar de delegeerder`);
   const gedelegeerd = startLokaleDelegaties();
   if (gedelegeerd) console.log(`  ${gedelegeerd} gedelegeerde opdracht(en) gestart`);
   console.log(`${snapshot.bijgewerkt} brein: ${jobLijst.length} jobs (${alarmen.length} alarm), ${col.sessies.length} sessies, ${nieuw} nieuwe opdrachten, ${Date.now() - t0} ms${fout ? ' — PUSH FOUT: ' + fout : ''}`);

@@ -67,7 +67,7 @@ switch (cmd) {
       const n = B.postvak().filter((o) => o.van === van && String(o.op).slice(0, 10) === vandaag).length;
       if (n >= 3) { B.gebeurtenis(van, `delegatie geweigerd (al ${n} vandaag): ${String(b || '').slice(0, 80)}`); console.log(`GEWEIGERD: je hebt vandaag al ${n} opdrachten gedelegeerd (max 3). Zet dit in je rapport.`); process.exit(3); }
     }
-    toon(B.nieuweOpdracht({ aan: a, tekst: b || '', van })); break;
+    toon(B.nieuweOpdracht({ aan: a, tekst: b || '', van, bron: process.env.BREIN_OPDRACHT_ID || null, soort: process.env.BREIN_VAN ? 'delegatie' : null })); break;
   }
   case 'wie': {
     const s = B.sessies();

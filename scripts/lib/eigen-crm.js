@@ -6,6 +6,7 @@
 //   haalInmeetItems()                → eigen leads op "Inmeten inplannen" (RP-vorm)
 //   haalItem(id)                     → één eigen lead (RP-vorm)
 //   zoek({telefoon,email})           → eigen leads (RP-vorm) voor de klantcontext van Sunny
+//   verstuurd(dagen)                 → eigen offertes verstuurd in de laatste N dagen (+ .sheet-velden voor het register)
 //   zetKolom(id, kolomId)            → i.p.v. rpZetStatus voor eigen leads
 //   zetAdres(id, adres)              → adres uit de winkel terugschrijven (i.p.v. RP fields.address)
 //   notitie(id, tekst)               → i.p.v. description-PATCH in RP
@@ -37,8 +38,9 @@ async function zoek({ telefoon, email }) {
   if (email) { try { for (const it of (await api('?email=' + encodeURIComponent(email))).items || []) if (!uit.some((x) => x.id === it.id)) uit.push(it); } catch { /* geen match */ } }
   return uit;
 }
+async function verstuurd(dagen = 45) { if (!bronAan()) return []; const d = await api('?verstuurd=' + Number(dagen)); return d.items || []; }
 async function zetKolom(id, kolomId) { const d = await api('', { method: 'PATCH', body: JSON.stringify({ id, kolomId }) }); return !!d.ok; }
 async function zetAdres(id, adres) { const d = await api('', { method: 'PATCH', body: JSON.stringify({ id, adres }) }); return !!d.ok; }
 async function notitie(id, tekst, actor = 'automation') { const d = await api('', { method: 'PATCH', body: JSON.stringify({ id, notitie: tekst, actor }) }); return !!d.ok; }
 
-module.exports = { isEigen, bronAan, haalInmeetItems, haalItem, zoek, zetKolom, zetAdres, notitie, VLAG, BASIS };
+module.exports = { isEigen, bronAan, haalInmeetItems, haalItem, zoek, verstuurd, zetKolom, zetAdres, notitie, VLAG, BASIS };

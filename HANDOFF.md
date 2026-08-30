@@ -6,8 +6,10 @@
   inmeten-planner-lees.leesOfferte gebruikt item.offerte; Sunny: klant-context zoekt eigen leads eerst, akkoord-tool + zetStatus routeren
   eigen ids naar het eigen CRM. Lab eigen-crm 32 sc. 0x FOUT-STIL. Schaduw-run: "1 eigen-CRM lead(s) meegenomen" (testkaart overgeslagen).
   VLAG STAAT AAN; eerste echte eigen lead op Inmeten inplannen wordt door de live planner opgepakt (Sunny-voorstel, Planado external_id rp-LEAD-…).
-  NOG NIET: Sheet-koppeling voor eigen offertes (S-nummer staat niet in de Sheet → 'niet gevonden', zichtbaar), verzoek-daemon winkelklik voor eigen
-  leads, inmeet_tijden-tool voor eigen ids (leest item via RP) → volgende stap.
+  AANGEVULD 30-08 middag: inmeet_tijden (lib/inmeet-tijden.js) en winkel-adres (verzoek-daemon → PATCH {id,adres}) voor eigen ids; lab eigen-crm 40 sc.
+  Sheet: scripts/lib/sheet-eigen-offerte.js schrijft de offerte-rij (zelfde kolommen als de Zapier-zap, via kopregel) + scripts/eigen-offerte-sheet-sync.js
+  (launchd nl.sonty.eigen-offerte-sheet, 10 min, bron /api/eigen-crm?verstuurd=45, stand data/eigen-offerte-sheet.json, eerste 3 rijen op Telegram).
+  Lab sheet-eigen-offerte 64 sc. 0x FOUT-STIL. Nog open in blok 1: Planado external_id voor eigen ids controleren bij eerste echte boeking.
 - Website: chat-assistent vervangen door WhatsApp-onderwerpkeuze (components/WhatsAppWidget.tsx, 7 onderwerpen, bericht met "Onderwerp: …");
   Sunny-prompt regel WEBSITE-ONDERWERPBERICHT (gerichte vervolgvragen per onderwerp). Event sonty:openchat blijft werken.
 
@@ -3255,3 +3257,6 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
   3 open: 976839737 Marijke van Aalst (aanbetaling), 976794298 Eliza (terugbelverzoek), 976931222 John.
 - NOG TE DOEN (wacht op Daimy, V1): John vandaag antwoorden met het PDF (WA + mail) en de vervaldatum verlengen
   (RP-aanpassing = mens). Let op: 29/30-08 = weekend; Sunny belooft "je hoort snel van ons" ook op zaterdag.
+- 30-08 ~15:10: sonty.nl/showroom verbeterd (commit 7e0e35b in sonty-website): boekknop (MS Bookings) als primaire knop in de hero, blok "Plan je bezoek" (met/zonder afspraak) direct onder de hero, sticky boekbalk op mobiel (StickyCtaBar, verschijnt na de hero, ruimte voor WhatsApp-knop), extra boekknop na de foto's, FAQ-link, eind-CTA herschreven. Nieuw icoon IconCalendar in SontyIcons. LET OP: components/WhatsAppWidget.tsx is door een ANDERE terminal herschreven (uncommitted, chatbot eruit) en niet door mij aangeraakt.
+- 30-08: ALARM Vercel KV/Upstash op 500.000/500.000 requests (uit build-log), alle KV-reads falen; op Telegram gemeld als V1.
+- 30-08 15:30: showroom-wijziging staat live op https://sonty-website.vercel.app/showroom (GH-run 33312432362 success). www.sonty.nl/showroom wordt NOG door Webflow geserveerd (openresty, Cookiebot), Next.js-site is nog niet aan het domein gekoppeld. V2 aan Daimy gesteld.

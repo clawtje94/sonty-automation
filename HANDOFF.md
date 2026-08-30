@@ -1,5 +1,10 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (avond): RP-SYNC TOT DE OVERSTAP (Daimy: "migratie up to date houden tot we wisselen")
+- launchd nl.sonty.rp-sync (30 min): `migreer-rp-naar-eigen.js --sync` → nieuwe + in RP gewijzigde items (timestamp_updated > stand) opnieuw
+  overzetten met overschrijven; import behoudt eigen velden (timeline, notities, share, controle, inmeting). Log data/migratie-rp.log,
+  Telegram alleen bij fouten. Bij de overstap: `launchctl bootout gui/501/nl.sonty.rp-sync` (staat in rp-uitzetten.js? NEE, apart doen).
+
 ## 30-08 (avond, laat): BLOK 4/5 KLAAR — ALLES STAAT KLAAR VOOR DE OVERSTAP (runbook in docs/reuzenpanda-uitzetten.html §Stand)
 - Migratie RP → eigen CRM loopt/klaar (data/migratie-rp.log; wachter herindexeert na afloop). Overgezette dossiers: id LEAD-RP-<rp-item-id>,
   kolom = RP-kolom, gearchiveerd → set 'archief' (niet op het bord), offerte.rpNummer/link/status/totaal, source.bron=reuzenpanda.

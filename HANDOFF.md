@@ -1,5 +1,15 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, online offertepagina huisstijl)
 
+## 30-08 (avond): ADMIN-LOGIN COMPLEET (Daimy: "100% zeker dat wachtwoord + gebruikers werken, zelf wachtwoord aanmaken, vergeten")
+- Eén loginformulier voor ALLE admin-pagina's via components/admin/AdminToegang.tsx (e-mail + eigen wachtwoord; hoofdadmin alleen wachtwoord).
+  Vondst: 17 pagina's hadden een eigen formulier met alleen een wachtwoordveld → medewerkers konden daar niet in. Nu nooit meer bereikt.
+- Uitnodiging: /admin/gebruikers "Uitnodiging mailen" → mail (aanvragen@) met link /admin/wachtwoord?token=… (24 u, 1×) → medewerker kiest wachtwoord.
+  Vergeten: link op het loginscherm → /admin/wachtwoord → mail met resetlink; max 3 mails/adres/uur; antwoord verraadt niet of adres bestaat.
+  Hoofdadmin-knop "resetlink mailen" per gebruiker. Hashes: scrypt (s2$…), oude sha256 wordt bij eerste login omgezet.
+- E2E bewezen (Playwright + Gmail): uitnodiging → mail → kiezen → login medewerker → pipeline ok / gebruikers geblokkeerd → fout ww geweigerd →
+  hoofdadmin ok → vergeten → resetmail → nieuw ww → oud 401, nieuw 200, link 1×. Testgebruiker "Daimy test" (daimyboot@gmail.com, alleen pipeline) staat er nog.
+- Niet gedekt: hoofdadmin-wachtwoord (ADMIN_PASSWORD op Vercel) valt buiten de resetflow; lopende sessies blijven na een reset max 30 dagen geldig.
+
 ## 30-08 (avond): RP-SYNC TOT DE OVERSTAP (Daimy: "migratie up to date houden tot we wisselen")
 - launchd nl.sonty.rp-sync (30 min): `migreer-rp-naar-eigen.js --sync` → nieuwe + in RP gewijzigde items (timestamp_updated > stand) opnieuw
   overzetten met overschrijven; import behoudt eigen velden (timeline, notities, share, controle, inmeting). Log data/migratie-rp.log,

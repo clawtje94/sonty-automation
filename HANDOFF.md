@@ -1,5 +1,17 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (middag/avond): BLOK 2 RP-UITZETTEN GEBOUWD (offerte en versturen zonder RP)
+- lib/offerte-controle/eigen.ts: V4-regels voor eigen offertes (prijs uit motor, geen handbediening op zonwering, sommen/totaal, e-mail,
+  testkaart); lab scripts/lab-offerte-controle.ts 1.728 sc. 0x FOUT-STIL; regressie op echte eigen leads: 2 echte ok, 2 testkaarten geblokkeerd.
+- lib/verzendcentrum/verstuur-eigen.ts: versturen (mail+WA+klantlink+verzendlog) als functie; controle erin (mens mag met force passeren, automaat nooit).
+  Admin-route acties: controle-eigen, preview-eigen (met controle), verstuur-eigen (force).
+- Configurator-submit: na de aanvraag controle op de kaart (pipeline-badge ✓/⚠) en, ALLEEN bij verzendcentrum bron=eigen + "Automatisch versturen"
+  aan, direct het prijsvoorstel naar de klant. Beide instellingen staan nog UIT (bron rp, testmodus aan) — dat is het overstapmoment (Daimy).
+- Offerte-tool: bij bron=eigen is "+ Nieuwe offerte" de eigen-CRM-flow (geen RP-lead/wachttijd), kanaal winkel → kolom Winkel + Sheet "Winkel".
+- Herinneringen-cron kende eigen keys al (lead:<id>). Tekenbonus/Klaviyo op eigen tekenen: nog niet (blok 3).
+- OVERSTAP-CHECKLIST (in deze volgorde): 1) RP-automation "Offerte verstuurd" UIT in RP; 2) verzendcentrum: bron eigen, testmodus uit,
+  automatisch versturen aan; 3) eerste echte configurator-aanvraag volgen (pipeline-badge, verzendlog, Sheet-rij op Telegram).
+
 ## 30-08 (avond): BLOK 1 RP-UITZETTEN GEBOUWD (schaduw) + WHATSAPP-ONDERWERPKNOP
 - /api/eigen-crm (website): eigen leads in RP-itemvorm (?kolom=inmeten, ?id, ?telefoon/?email; PATCH kolom/notitie). scripts/lib/eigen-crm.js
   (isEigen 'LEAD-…', vlag data/.eigen-crm-bron). Planner: eigen items meegenomen in main(), rpZetStatus → eigen kolom, item-ophaal op id;

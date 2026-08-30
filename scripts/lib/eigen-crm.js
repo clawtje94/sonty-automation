@@ -5,7 +5,7 @@
 //   bronAan()                        → vlag data/.eigen-crm-bron (uit = eigen leads worden genegeerd)
 //   haalInmeetItems()                → eigen leads op "Inmeten inplannen" (RP-vorm)
 //   haalItem(id)                     → één eigen lead (RP-vorm)
-//   zoek({telefoon,email})           → eigen leads (RP-vorm) voor de klantcontext van Sunny
+//   zoek({telefoon,email,nummer})    → eigen leads (RP-vorm) voor de klantcontext van Sunny (nummer = S- of RP-nummer)
 //   verstuurd(dagen)                 → eigen offertes verstuurd in de laatste N dagen (+ .sheet-velden voor het register)
 //   zetKolom(id, kolomId)            → i.p.v. rpZetStatus voor eigen leads
 //   zetAdres(id, adres)              → adres uit de winkel terugschrijven (i.p.v. RP fields.address)
@@ -32,9 +32,10 @@ async function api(pad, init = {}) {
 async function haalInmeetItems() { if (!bronAan()) return []; const d = await api('?kolom=inmeten'); return d.items || []; }
 async function haalKolom(kolomId) { if (!bronAan()) return []; const d = await api('?kolom=' + encodeURIComponent(kolomId)); return d.items || []; }
 async function haalItem(id) { const d = await api('?id=' + encodeURIComponent(id)); return d.item || null; }
-async function zoek({ telefoon, email }) {
+async function zoek({ telefoon, email, nummer }) {
   if (!bronAan()) return [];
   const uit = [];
+  if (nummer) { try { uit.push(...((await api('?nummer=' + encodeURIComponent(nummer))).items || [])); } catch { /* geen match */ } }
   if (telefoon) { try { uit.push(...((await api('?telefoon=' + encodeURIComponent(telefoon))).items || [])); } catch { /* geen match */ } }
   if (email) { try { for (const it of (await api('?email=' + encodeURIComponent(email))).items || []) if (!uit.some((x) => x.id === it.id)) uit.push(it); } catch { /* geen match */ } }
   return uit;

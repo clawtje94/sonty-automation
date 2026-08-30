@@ -28,8 +28,10 @@ const pct = (a, b) => b ? (a / b * 100).toFixed(1).replace('.', ',') + '%' : 'â€
 (async () => {
   // 1. WA-verzendingen: item-id -> tijdstip, plus telefoon uit het bord
   const waLog = JSON.parse(fs.readFileSync(__dirname + '/.wa-offerte-sent.json', 'utf8'));
-  const r = await fetch(`${RP}/contact-service/${PID}/backlogs/${KS.RP_BACKLOG}/items`, { headers: H });
-  const items = (await r.json()).items || [];
+  const D = require('./lib/dossiers.js');
+  const items = D.rpUit()
+    ? ((await D.rpGetVervanger('/contact-service/x/backlogs/y/items')).items || []) // RP uit â†’ eigen CRM
+    : ((await (await fetch(`${RP}/contact-service/${PID}/backlogs/${KS.RP_BACKLOG}/items`, { headers: H })).json()).items || []);
   const waPerTel = new Map(); // tel(9) -> [Date, ...]
   for (const it of items) {
     const t = waLog[it.id]; if (!t) continue;

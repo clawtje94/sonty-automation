@@ -76,6 +76,8 @@ const dm = (d) => `${d.getUTCDate()}-${d.getUTCMonth() + 1}`;
 const pct = (a, b) => (b ? (a / b) * 100 : 0);
 
 async function rpItems() {
+  // RP uit (vlag data/.rp-uit) → bord uit het eigen CRM (scripts/lib/dossiers.js)
+  { const D = require('./lib/dossiers.js'); if (D.rpUit()) return (await D.rpGetVervanger('/contact-service/x/backlogs/y/items')).items || []; }
   const url = `https://backend.reuzenpanda.nl/contact-service/${CFG.RP_PID}/backlogs/${CFG.RP_BACKLOG}/items`;
   const r = await fetch(url, { headers: { Authorization: 'Bearer ' + CFG.RP_API_KEY } });
   if (!r.ok) throw new Error(`RP gaf ${r.status}`);

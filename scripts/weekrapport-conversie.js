@@ -24,10 +24,13 @@ const CATEGORIEEN = [
 ];
 const kies = (tekst) => (CATEGORIEEN.find(([re]) => new RegExp(re, 'i').test(tekst)) || [null, 'Overig'])[1];
 
-const rpGet = async (ep) => {
+const rpGetRp = async (ep) => {
   const r = await fetch('https://backend.reuzenpanda.nl' + ep, { headers: { Authorization: 'Bearer ' + KS.RP_API_KEY } });
   return r.ok ? r.json() : null;
 };
+// RP uit (vlag data/.rp-uit) → dezelfde vragen beantwoord uit het eigen CRM (scripts/lib/dossiers.js)
+const D = require('./lib/dossiers.js');
+const rpGet = (ep) => (D.rpUit() ? D.rpGetVervanger(ep) : rpGetRp(ep));
 const dagVan = (i) => new Date((i.timestamp_created || 0) * (String(i.timestamp_created).length > 10 ? 1 : 1000)).toISOString().slice(0, 10);
 const eur = (n) => '€' + Math.round(n).toLocaleString('nl-NL');
 

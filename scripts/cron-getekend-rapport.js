@@ -18,11 +18,14 @@ const TG_CHAT = 1700128390;
 const STATE_FILE = path.join(__dirname, '..', 'data', 'getekend-gemeld.json');
 const MAX_LEEFTIJD_DAGEN = 45; // alleen recente leads scannen (90d = 5500+ leads = ~1 uur; 45d houdt de run behapbaar)
 
-async function rpGet(ep) {
+async function rpGetRp(ep) {
   const r = await fetch(B + ep, { headers: H });
   if (!r.ok) throw new Error('RP ' + r.status + ' op ' + ep);
   return r.json();
 }
+// RP uit (vlag data/.rp-uit) → dezelfde vragen beantwoord uit het eigen CRM (scripts/lib/dossiers.js)
+const D = require('./lib/dossiers.js');
+const rpGet = (ep) => (D.rpUit() ? D.rpGetVervanger(ep) : rpGetRp(ep));
 async function telegram(text) {
   await fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
     method: 'POST', headers: { 'Content-Type': 'application/json' },

@@ -1,4 +1,4 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, online offertepagina huisstijl)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
 ## 30-08 (avond): AFSLUITEND DUIMPJE SLOOT WA-TICKET NIET (Daimy: "dit soort tickets sluit je toch gewoon?")
 - Ticket 974473514 (+31642426847, verkeerd nummer bij lead Jennifer de Vries, offerte 202611742): klant zei 👍 op Sunny's excuus (17-08),
@@ -275,6 +275,22 @@
   REGEL in memory (feedback_brein_aanmelden): elke sessie meldt zich bij start aan + Monitor op haar inbox.
 - Fase 3 "nieuwe werknemer" (opdracht → `claude -p` sessie) is gebouwd maar UIT: vlag `data/brein/.werknemer-aan` ontbreekt (V7 aan Daimy).
 - Bekende ruis: alarmen voor bewust uitgezette jobs (wa-desktop-queue, keten-zelfcontrole, sonny-rapport niet geladen) staan als 'laag'.
+
+## 30-08 (middag): ADMIN LICHT/DONKER OVERAL NAGELOPEN (website) — Daimy: "veel verneukt, kijk 1 voor 1 elke pagina, rekentool is een zooi"
+- Oorzaak: het tsx-migratiescript van 29-08 sloeg pagina's met een eigen stylesheet over (rekentool, meetbon, zonradar, belscherm,
+  vve-radar, winkels, bellijst): die bleven vaste lichte kleuren houden en werden in donker half-donker (zwarte kop op zwart).
+- Nieuw scripts/admin-css-migratie.mjs: eigenschap-bewust (tekst/achtergrond/rand) alle hex in die .css-bestanden en <style>-blokken
+  naar --adm-variabelen; witte tekst in een blok met gekleurde achtergrond -> --adm-on-accent. Plus handmatig: badges met vaste
+  donkere tint houden vaste lichte tekst (leesbaar in beide thema's), bellijst inline, systemen-chips, leads cyaan -> --adm-info,
+  pipeline-avatar Joey (rgb-notatie ontsnapte aan tekstOp), login-kaart + logo op thema (wachtwoord-pagina van de andere sessie),
+  websitefotos-opslaanbalk vrij van de thema-knop.
+- Gemeten (scripts/admin-contrast-audit.mjs, nu met AUDIT_ENV/AUDIT_UIT/AUDIT_JSON): productie vóór 699 tekst-elementen < 4,5:1 in
+  28 pagina/thema-combinaties -> na deploy 288, waarvan bellijst-donker 224 (fix in deze commit), magazine 56 (bewuste brochure-
+  preview, groot lettertype), Leaflet-attributie 2 (extern). Alle 43 admin-pagina's in donker + 14 in licht zelf bekeken (screenshots
+  in scratchpad/klein): geen lay-outbreuk gezien. Niet achter code-login bekeken: inmeet-dashboard, planning-instellingen,
+  inmeet-mutatie, chat, financiering (audit logt in met meetbon/belscherm/pipeline-code, niet met de inmeet-code).
+- Andere sessie werkt gelijktijdig in deze repo (admin-login/wachtwoord, commit cab13ec nam mijn offerte-uitlijning mee); lokale
+  build faalde even op hun ongecommitte tsc-fout. Let op bij `git add -A`.
 
 ## 30-08 (ochtend): ONLINE OFFERTEPAGINA IN SONTY-HUISSTIJL (website, app/offerte/[token])
 - Daimy: "die online offerte pagina ook wel sonty style? kijk er goed naar en maak hem zo goed mogelijk". Was: Inter-font,

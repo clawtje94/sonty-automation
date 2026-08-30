@@ -1,5 +1,18 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (avond): BLOK 4 RP-UITZETTEN — OPSLAG V2 + MIGRATIE LOOPT
+- Opslag v2 (sonty-website lib/lead-store.ts): lead:<id> + indexen (leads:z:alle, leads:s:kolom:<id> incl. 'archief', leads:s:tel/email,
+  leads:k:nummer, leads:z:verstuurd, leads:z:offerte). Zelfde functies + gerichte lezers (leadsInKolom, bord, zoekLeads, leadsVerstuurd,
+  leadsMetOfferte). Alle getLeads()-aanroepers omgezet; pipeline laadt ?vorm=bord (werk-kolommen volledig, rest nieuwste 150 + totalen).
+  Admin-acties: migreer_opslag (oude hash → v2, gedaan: 4), herindexeer. Lab scripts/lab-lead-store.ts 324 sc. 0x fout.
+- Migratie RP → eigen CRM: scripts/migreer-rp-naar-eigen.js (hervatbaar, stand data/migratie-rp.json, log data/migratie-rp.log) →
+  POST /api/eigen-crm/import (batch 200, id LEAD-RP-<rp-item-id>, status uit kolom). Lab migratie-rp 72 sc. Proefrun 50 ok, volledige run
+  gestart 15:59 (≈19.700 items, ±1 uur). NA AFLOOP: POST {action:"herindexeer"} (archief-set voor gearchiveerde dossiers) — wachter draait.
+- REGEL in /api/eigen-crm: zolang verzendcentrum bron ≠ eigen doen overgezette RP-dossiers (source.bron=reuzenpanda) NIET mee in kolom-/zoek-
+  queries (anders dubbel werk Gripp/planner/Sunny); ?inclusiefRp=1 toont ze wel. Na de overstap komen ze vanzelf mee.
+- NOG: rapporten (weekrapport-conversie/-cohorten, conversie-per-kanaal, getekend-rapport) op eigen CRM; Sunny klant_opzoeken op RP-nummer
+  via eigen CRM na overstap testen; pipeline visueel checken met 17k dossiers; RP alleen-lezen zetten + opzeggen (Daimy).
+
 ## 30-08 (avond): BLOK 3 RP-UITZETTEN GEBOUWD (achterkant zonder RP)
 - Gripp invullen (cron-gripp-invullen.js): eigen leads op kolom "Gripp invullen" komen mee (eigen-crm haalKolom), eigenDocs() zet de eigen
   offerte (toolLines of regels, korting apart, Waarom/garantieblok eruit) in de RP-documentvorm zodat de bestaande Gripp-lus ongewijzigd draait;

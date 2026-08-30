@@ -1,5 +1,18 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (middag): ADMIN-INLOG PER GEBRUIKER + HUBSPOT UIT DE WEBSITE
+- lib/admin-gebruikers.ts: gebruikers in KV admin:gebruikers (email, naam, rol hoofd/medewerker, paginas[], sha256+zout), token
+  `u1.<payload>.<hmac>` getekend met ADMIN_PASSWORD (30 dagen). lib/admin-auth.ts: isAdminAuthorized accepteert hoofdwachtwoord óf
+  gebruikerstoken; adminIdentiteit(request). /api/admin/login: {password} = hoofdadmin, {email,password} = medewerker.
+  /api/admin/me, /api/admin/gebruikers (alleen paginas === "*"), /admin/gebruikers (beheer met vinkjes per pagina, ADMIN_PAGINAS),
+  AdminToegang in de admin-layout blokkeert pagina's buiten de toegang. AdminLogin en useAdminAuth hebben een e-mailveld.
+  E2E getest via API: aanmaken → login → /me met juiste paginas → 403 op beheer → 401 fout wachtwoord → verwijderd.
+  v1-beperking: API-routes zijn voor elke ingelogde gebruiker bereikbaar; de blokkade is op paginaniveau.
+- HubSpot uit de website: configurator-submit, lib/notifications.createHubSpotContact (+ contact/reparatie/offerte), Analytics-script,
+  cookie/privacy-teksten, .env.example. NOG NIET: belscherm (Marijn) draait volledig op de HubSpot-pipeline (lib/belscherm.ts, hardcoded
+  token!) en ~/sonty auto-sync (cron-sync-rp-hubspot → hubspot-bel-taken/enrich/trengo-sync) voedt die. Pas uit als belscherm op het
+  eigen CRM (lib/leads) staat → V14. Zapier-zaps met HubSpot: alleen via Zapier zelf uit te zetten.
+
 ## 30-08 (middag): CONFIGURATOR VERZENDEN 18 s → 0,4 s + ECHTE /bedankt MET VIDEO
 - app/api/configurator/submit: HubSpot (3 calls) en bevestigingsmail (Trengo) draaien nu in Next `after()` ná het antwoord.
   Gemeten: 18,0 s → 0,42 s. Bewijs mail: Trengo-tickets "Bedankt voor je aanvraag bij Sonty" 11:49 (oud) en 11:56 (na after()).

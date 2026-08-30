@@ -254,7 +254,8 @@ function eigenDocs(item) {
     lines = o.regels.filter((r) => r && r.omschrijving && Number(r.subtotaal || 0) >= 0).map((r) => {
       const aantal = Math.max(1, Number(r.aantal || 1));
       const perStuk = r.prijsPerStuk != null ? Number(r.prijsPerStuk) : Math.round((Number(r.subtotaal || 0) / aantal) * 100) / 100;
-      const spec = String(r.beschrijving || r.details || '').replace(/ \| /g, '\n').replace(/ · /g, '\n');
+      // alleen de specificaties: het 'Waarom'-/garantieblok van de klantofferte hoort niet in Gripp
+      const spec = String(r.beschrijving || r.details || '').split(/\n\s*\*{0,2}(?:waarom|garantie)/i)[0].replace(/ \| /g, '\n').replace(/ · /g, '\n').trim();
       return { description: String(r.omschrijving).replace(/^\d+× /, '') + (spec ? '\n' + spec : ''), pricePerUnit: perStuk, units: aantal };
     });
   }

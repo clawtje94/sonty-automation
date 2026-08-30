@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (avond): BLOK 3 RP-UITZETTEN GEBOUWD (achterkant zonder RP)
+- Gripp invullen (cron-gripp-invullen.js): eigen leads op kolom "Gripp invullen" komen mee (eigen-crm haalKolom), eigenDocs() zet de eigen
+  offerte (toolLines of regels, korting apart, Waarom/garantieblok eruit) in de RP-documentvorm zodat de bestaande Gripp-lus ongewijzigd draait;
+  status → eigen kolom. Lab gripp-eigen 96 sc. 0x FOUT-STIL. Nog niet live bewezen met een echte eigen lead (eerste echte volgen!).
+- Klaviyo: scripts/email/rp-export.js neemt eigen offertes (verstuurd ≤365 d) mee als rijen (klantlink i.p.v. DOCSIGN); tekenbonus-flows
+  draaien op dezelfde rijen. /api/eigen-crm geeft nu ook toolLines/regels/korting/opmerking mee.
+- Rapporten die RP nog lezen (weekrapport-conversie/-cohorten, conversie-per-kanaal, cron-getekend-rapport): pas omzetten bij de migratie (blok 4),
+  tot die tijd blijven ze kloppen omdat RP tot de overstap leidend is.
+
 ## 30-08 (middag/avond): BLOK 2 RP-UITZETTEN GEBOUWD (offerte en versturen zonder RP)
 - lib/offerte-controle/eigen.ts: V4-regels voor eigen offertes (prijs uit motor, geen handbediening op zonwering, sommen/totaal, e-mail,
   testkaart); lab scripts/lab-offerte-controle.ts 1.728 sc. 0x FOUT-STIL; regressie op echte eigen leads: 2 echte ok, 2 testkaarten geblokkeerd.

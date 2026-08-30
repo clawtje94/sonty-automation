@@ -1,5 +1,17 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, online offertepagina huisstijl)
 
+## 30-08 (avond): SECURITY-RONDE ADMIN/CRM (Daimy: "niet 10 miljoen gegevens lekken")
+- Gevonden en gedicht: /api/bellijst stond volledig open (klantbellijst); /api/offerte-tool zoek/zoekklant/opslaan zonder auth (klantdata + RP-schrijven);
+  /api/eigen-crm accepteerde de 4-cijferige meet-code (19k dossiers) → nu alleen admin/Bearer; hoofdadmin-cookie was het wachtwoord zelf en
+  leesbaar door JS → nu getekend h1-token, httpOnly, 14 d; medewerker-token u1 7 d met zout-fragment (sessie vervalt na reset/deactivering);
+  login-rem 10 fout/15 min per IP+e-mail (429); meet-code-rem 20 fout/uur per IP (lib/meetbon/server.ts checkMeetCodeMetRem, in 12 routes);
+  RP_API_KEY en HUBSPOT_TOKEN uit de website-code naar Vercel-env (production); /api/admin/logout wist de httpOnly-cookie.
+- Live bewezen (curl): cookies h1/u1 + HttpOnly, medewerker 200 op bord / 403 op gebruikers, open routes 401, publiek products 200,
+  Bearer voor scripts 200, RP via env 155 items, logout → 401, 11e foute login → 429.
+- NOG OPEN (bewust): meet-code blijft 4 cijfers (telefoon-toetsenbord, Daimy 05-08) — nu met rem; BELSCHERM_CODE default 'sonty2288' in code →
+  env zetten; RP/Trengo/Gripp-sleutels staan nog in ~/sonty-scripts (Mac mini, niet online); geen 2FA; geen automatische back-up van KV
+  (advies: dagelijkse export naar Blob); hoofdadmin-wachtwoord periodiek roteren (Vercel-env).
+
 ## 30-08 (avond): ADMIN-LOGIN COMPLEET (Daimy: "100% zeker dat wachtwoord + gebruikers werken, zelf wachtwoord aanmaken, vergeten")
 - Eén loginformulier voor ALLE admin-pagina's via components/admin/AdminToegang.tsx (e-mail + eigen wachtwoord; hoofdadmin alleen wachtwoord).
   Vondst: 17 pagina's hadden een eigen formulier met alleen een wachtwoordveld → medewerkers konden daar niet in. Nu nooit meer bereikt.

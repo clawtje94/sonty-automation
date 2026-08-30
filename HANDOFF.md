@@ -1,5 +1,12 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (middag): OFFERTE-PANEEL IN DE PIPELINE ("lelijke offerte")
+- Oorzaak: bij de thema-migratie (29-08) kreeg het documentpaneel in app/admin/pipeline/page.tsx var(--adm-text) als achtergrond én
+  tekstkleur → kop, naam, tabel en totalen onzichtbaar; markdown-sterretjes uit de beschrijving werden getoond.
+- Fix: paneel is nu een vast "papier" (wit, #111 tekst, oranje SONTY, groen/oranje statusbadge), onafhankelijk van licht/donker;
+  ** weggefilterd. Gecontroleerd met screenshot (lead daimy boot: screens, € 3.010,20). De klantweergave /offerte/<token> (offerte-tool)
+  was al goed en wordt via "Open" in het paneel geopend zodra er een deel-token is.
+
 ## 30-08 (middag): ADMIN-INLOG PER GEBRUIKER + HUBSPOT UIT DE WEBSITE
 - lib/admin-gebruikers.ts: gebruikers in KV admin:gebruikers (email, naam, rol hoofd/medewerker, paginas[], sha256+zout), token
   `u1.<payload>.<hmac>` getekend met ADMIN_PASSWORD (30 dagen). lib/admin-auth.ts: isAdminAuthorized accepteert hoofdwachtwoord óf

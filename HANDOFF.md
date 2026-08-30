@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (middag): TEAM-CLOU + HERONTWERP TOPSCHERM
+- Daimy: "Bram moet het aan de experts doorzetten en pas aan het eind terugkoppelen". Gebouwd: delegaties (soort 'delegatie',
+  bron = opdracht waarbinnen gedelegeerd, via BREIN_OPDRACHT_ID) komen na 'klaar' automatisch als TERUGKOPPELING-opdracht terug bij
+  de delegeerder (collector `terugkoppelingen()`), die bundelt, Daimy's oorspronkelijke opdracht bijwerkt (`antwoord <id>`) en één
+  bouw-opdracht naar claude zet. Bram-profiel: vakinhoud altijd eerst naar de expert (fee/mats/kai/fenna/noor/isa/lars).
+- Runner-crash (const b) gefixt; crash markeert de opdracht als fout; collector zet hangende 'gestart' >30 min op fout; `--web` voor opdrachten.
+- Fee's UX-onderzoek (met web) → herontwerp gebouwd (v2026-08-30.02): 3 tegels bovenaan, beslissingen (cap 5) vóór alarmen, alarmen alleen
+  ernst hoog open. Gebouwd vóór Daimy's formele ja (weergave-only, low-risk) — gemeld.
+
 ## 30-08 (ochtend): SHOWROOMFOTO'S — besluiten werden teruggezet op 'voorstel'
 - fotoupload/route.ts: de 'beoordeel'-tak (Mac-triage, wa-luisteraar.js) zette ELK aangeboden item op status 'voorstel', ook als Daimy
   al 'ok' had gekozen → zijn categorie-keuzes verdwenen ("elke keer hetzelfde doen"). Fix: ok/afgewezen wordt nooit meer overschreven.

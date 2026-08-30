@@ -22,7 +22,11 @@ async function rpGet(ep) {
 
 // RP: zoek pipeline-items + offertes op e-mail of telefoon (via het snelle board-endpoint)
 async function findRpOffertes({ email, phone, naam, adres, offertenummer }) {
+  // EIGEN CRM eerst (blok 1 RP-uitzetten): eigen leads op telefoon/e-mail, in RP-itemvorm met id LEAD-…
+  let eigenItems = [];
+  try { eigenItems = await require('../lib/eigen-crm.js').zoek({ telefoon: phone, email }); } catch { eigenItems = []; }
   const data = await rpGet(`/contact-service/${CFG.RP_PID}/boards/${CFG.RP_BOARD}/items`);
+  if (eigenItems.length) { data.items = [...eigenItems, ...(data?.items || [])]; }
   if (!data?.items) return { fout: 'Reuzenpanda was even niet bereikbaar — probeer het zo nog een keer voordat je concludeert dat er geen offerte is.' };
   const items = data.items;
   const e = norm(email), p = normPhone(phone);

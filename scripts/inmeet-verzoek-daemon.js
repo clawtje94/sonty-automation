@@ -188,6 +188,7 @@ async function ronde() {
       if (m.type === 'adres') {
         // adres uit de winkel terugschrijven naar RP (Kenny-geval: RP-kaart zonder
         // adres) en direct verse tijden rekenen
+        if (require('./lib/eigen-crm.js').isEigen(m.rpItemId)) { /* eigen lead: geen RP-item nodig, gegevens komen mee in de mutatie */ }
         const rA = await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${SALES}/items/${m.rpItemId}`, {
           method: 'PATCH', headers: { Authorization: 'Bearer ' + RP_API_KEY, 'Content-Type': 'application/json' },
           body: JSON.stringify({ item: { fields: { address: m.adres } } }),

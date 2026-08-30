@@ -1,0 +1,41 @@
+{
+ "id": "LEAD-1788083796567-MVTA",
+ "eigen": true,
+ "summary": "Claude TEST snelheidsmeting 2",
+ "description": "Voornaam: Claude\nAchternaam: TEST snelheidsmeting 2\nE-mailadres: claude-test@sonty.nl\nTelefoonnummer: +31600000000\nStraatnaam: Frijdastraat\nHuisnummer: 8F\nPostcode: 2288EX\nPlaats: Rijswijk\nOpmerking: \nBron: eigen CRM (configurator)\n\n1x Knikarmscherm:",
+ "item_subject": {
+  "id": "LEAD-1788083796567-MVTA",
+  "type": "EIGEN_LEAD"
+ },
+ "status_id": "2e9819bd-26f0-4082-8f18-32bb48f87f54",
+ "fields": {
+  "address": "Frijdastraat 8F 2288EX Rijswijk"
+ },
+ "created_at": "2026-08-30T09:56:36.567Z",
+ "inmeting": {
+  "voorkeurDagdeel": "ochtend"
+ },
+ "offerte": {
+  "nummers": [
+   "S26-1001"
+  ],
+  "datums": [
+   "2026-08-30T11:53:46.298Z"
+  ],
+  "producten": [
+   {
+    "naam": "Knikarmscherm",
+    "aantal": 1,
+    "details": "breedte: 400 | hoogte: 250",
+    "subtotaal": 2778
+   }
+  ],
+  "status": "ACCEPTED",
+  "documentId": null,
+  "ambigu": false,
+  "aantalDocs": 1,
+  "totaalInclBTW": 2778,
+  "klantlink": "https://sonty-website.vercel.app/offerte/_7zcnEOtFT04n-WblyfQKrYCils",
+  "getekendOp": "2026-08-30T11:54:13.489Z"
+ }
+}

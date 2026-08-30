@@ -132,6 +132,8 @@ async function rpGet(ep) {
   return r.json();
 }
 async function rpZetStatus(itemId, statusId) {
+  // eigen CRM-lead: kolom in de eigen pipeline i.p.v. RP-status (blok 1 RP-uitzetten)
+  if (require('./lib/eigen-crm.js').isEigen(itemId)) { try { return await require('./lib/eigen-crm.js').zetKolom(itemId, statusId); } catch (e) { console.log('  eigen-crm kolom mislukt: ' + e.message.slice(0, 80)); return false; } }
   const r = await fetch(`https://backend.reuzenpanda.nl/contact-service/${PID}/backlogs/${BACKLOG_ID}/items/${itemId}`, {
     method: 'PATCH',
     headers: { Authorization: 'Bearer ' + RP_API_KEY, 'Content-Type': 'application/json' },
@@ -713,6 +715,16 @@ async function main() {
     // bekende leads van de laatste volle scan toevoegen (voor zover niet net op de pagina gezien)
     for (const b of state.inmeetLeads || []) if (!gezien.has(b.id)) items.push(b);
   }
+  // EIGEN CRM (blok 1 RP-uitzetten): leads uit de eigen pipeline op "Inmeten inplannen" doen mee, in RP-vorm.
+  // Alleen met vlag data/.eigen-crm-bron; fout = zichtbaar in de log, nooit stil.
+  try {
+    const eigen = require('./lib/eigen-crm.js');
+    if (eigen.bronAan()) {
+      const ei = await eigen.haalInmeetItems();
+      for (const it of ei) if (!items.some((x) => x.id === it.id)) items.push(it);
+      console.log(`${ei.length} eigen-CRM lead(s) op "Inmeten inplannen" meegenomen`);
+    }
+  } catch (e) { console.log('eigen-CRM bron niet bereikbaar: ' + e.message.slice(0, 80)); }
   bewaarState(state);
   const TESTKAART = /\btest\b|reuzenpanda|^[\s/|-]+$/i;
   const testkaarten = items.filter((i) => TESTKAART.test(i.summary || ''));
@@ -1933,7 +1945,7 @@ async function verwerkDashboardVerzoek(m) {
       throw new Error(`deze klant heeft al een afspraak (${wanneer} bij ${al.inmeter}) — niets dubbel geboekt`);
     }
   }
-  const item = await rpGet(`/contact-service/${PID}/backlogs/${BACKLOG_ID}/items/${m.rpItemId}`).then((d) => d.item || d);
+  const item = require('./lib/eigen-crm.js').isEigen(m.rpItemId) ? await require('./lib/eigen-crm.js').haalItem(m.rpItemId) : await rpGet(`/contact-service/${PID}/backlogs/${BACKLOG_ID}/items/${m.rpItemId}`).then((d) => d.item || d);
   if (!item?.id) throw new Error('RP-lead niet gevonden');
   const lead = await leesLeadCompleet(item);
   if (lead.ambigu) throw new Error(`${lead.aantalDocs} offerteversies, geen getekend — klant moet eerst tekenen`);

@@ -386,6 +386,24 @@ function raaktAnderPrijsboek(ctx, input) {
     // antwoordde "ik heb al getekend". Een offerte met status ACCEPTED is beter bewijs dan een
     // zin in een chat, dus die telt hier gewoon als akkoord.
     let getekendeOfferte = null;
+    // EIGEN CRM-lead (blok 1 RP-uitzetten): getekend-check, plannernotitie en kolom via /api/eigen-crm, geen RP.
+    if ((CFG.MODE === 'live' || ctx.liveTest) && input.itemId && require('../lib/eigen-crm.js').isEigen(input.itemId)) {
+      const eigen = require('../lib/eigen-crm.js');
+      try {
+        const it = await eigen.haalItem(input.itemId);
+        if (it?.offerte?.status === 'ACCEPTED') getekendeOfferte = it.offerte.nummers?.[0] || 'ja';
+        if (!getekendeOfferte && !AKKOORD_TAAL.test(citaatRuw)) {
+          return JSON.stringify({ status: 'GEBLOKKEERD', opmerking: `Het citaat "${citaatRuw.slice(0, 80)}" drukt geen akkoord uit en de offerte is nog niet online getekend.` });
+        }
+        ctx.acties.push({ type: 'inmeet_afspraak', ...input, akkoordBron: getekendeOfferte ? `offerte ${getekendeOfferte} is online ondertekend` : 'citaat' });
+        if (input.notitie) await eigen.notitie(input.itemId, `Opmerking planning (AI-klantenservice, ${CFG.amsterdamNu().datum}): ${input.notitie}`, 'sunny').catch(() => null);
+        const ok = await eigen.zetKolom(input.itemId, CFG.RP_STATUS_INMETEN_INPLANNEN);
+        if (!ok) return JSON.stringify({ status: 'MISLUKT', opmerking: 'Kolom verplaatsen in het eigen CRM lukte niet. Zeg dat een collega het oppakt en roep escaleren_naar_mens aan.' });
+        return JSON.stringify({ status: 'DOORGEVOERD', opmerking: `Doorgezet naar "Inmeten inplannen" in het eigen CRM${getekendeOfferte ? ` (offerte ${getekendeOfferte} is online ondertekend)` : ''}. De planning neemt binnen 5 werkdagen contact op.` });
+      } catch (e) {
+        return JSON.stringify({ status: 'MISLUKT', opmerking: 'Eigen CRM niet bereikbaar: ' + String(e.message).slice(0, 80) + '. Zeg dat een collega het oppakt en roep escaleren_naar_mens aan.' });
+      }
+    }
     if ((CFG.MODE === 'live' || ctx.liveTest) && input.itemId) {
       try {
         const it = await (await fetch(`https://backend.reuzenpanda.nl/contact-service/${CFG.RP_PID}/backlogs/${CFG.RP_BACKLOG}/items/${input.itemId}`,

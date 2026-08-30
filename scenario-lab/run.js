@@ -34,6 +34,7 @@ const ONDERDELEN = [
   require('./onderdelen/winkel-direct.js'),
   require('./onderdelen/seo-agent.js'),
   require('./onderdelen/brein-medewerkers.js'),
+  require('./onderdelen/eigen-crm.js'),
 ];
 // UI-laag draait tegen de echte site in een echte browser: alleen met --ui (of een filter),
 // anders wordt elke logica-run traag van het browsen.

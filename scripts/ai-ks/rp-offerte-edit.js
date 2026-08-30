@@ -284,6 +284,8 @@ async function pasOfferteAan({ documentId, verwijderen = [], toevoegen = [], aan
 
 // Status van een pipeline-item zetten (zelfde PATCH als v4's setStatus)
 async function zetStatus(itemId, statusId) {
+  // eigen CRM-lead (blok 1 RP-uitzetten): kolom in de eigen pipeline i.p.v. RP-status
+  if (require('../lib/eigen-crm.js').isEigen(itemId)) return require('../lib/eigen-crm.js').zetKolom(itemId, statusId);
   const res = await fetch(`https://backend.reuzenpanda.nl/contact-service/${CFG.RP_PID}/backlogs/${CFG.RP_BACKLOG}/items/${itemId}`, {
     method: 'PATCH', headers: { Authorization: 'Bearer ' + CFG.RP_API_KEY, 'Content-Type': 'application/json' },
     body: JSON.stringify({ item: { status_id: statusId } }),

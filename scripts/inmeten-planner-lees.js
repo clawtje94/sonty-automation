@@ -87,6 +87,8 @@ function leesKeuzeOverride(item) {
 
 async function leesOfferte(item) {
   const leeg = { producten: [], status: null, ambigu: false, aantalDocs: 0, nummers: [], datums: [] };
+  // eigen CRM-lead (blok 1 RP-uitzetten): de offerte zit al in RP-vorm op het item, geen RP-call
+  if (item && item.eigen && item.offerte) return { ...leeg, ...item.offerte };
   const lcId = item.item_subject?.id;
   if (!lcId) return leeg;
   const override = leesKeuzeOverride(item);

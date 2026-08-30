@@ -1,5 +1,15 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (01:xx): ANTWOORDEN ZICHTBAAR, RELAY-BUG, WEBSITEFOTO-CATEGORIEËN
+- Daimy zag Brams antwoorden niet (verstopt onder kaart, rapportvorm) → paneel "Jouw vragen en opdrachten" bovenaan Team met status en kort
+  antwoord; ad-hoc opdrachten beginnen met "## ANTWOORD"; laatste uitwisseling ook op compacte kaart.
+- Bram's delegatie naar Claude faalde 4x ("requires approval") omdat hij `node scripts/…` (relatief) typte; runner staat nu ook relatieve
+  vormen toe. Daimy's opdrachten aan medewerkers komen als CC in inbox-claude.txt.
+- BUG websitefoto-tool (V117 van Bram): route voegde uploads eerst toe met cat "upload" en dedupte daarna de portfolio-versie weg →
+  categorieën uit /admin/fotos verdwenen. Fix: portfolio-categorie(ën) winnen, `cats[]` per foto, kiezer filtert op alle categorieën.
+  Live gemeten: 215/234 uploads met echte categorie. LET OP: `timeout` bestaat niet in zsh op deze Mac; eerdere `timeout npx tsc` draaide
+  dus nooit (deploys bouwden wel). Gebruik gewoon `npx tsc --noEmit -p .`.
+
 ## 30-08 (00:xx): MOBIEL + DESIGNER FEE
 - iPhone-emulatie (Playwright WebKit, iPhone 13): pagina laadt in 4-5 s, 0 fouten; Daimy's "laadt niet" waarschijnlijk niet ingelogd
   op de telefoon (pagina toont nu na 8 s een uitleg + 401 = "niet ingelogd"). Kaarten echt compact: 28.000 → 4.500 px. V10 gevraagd.

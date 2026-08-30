@@ -1,5 +1,16 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-29, websitefoto-tool)
 
+## 30-08 (avond): BLOK 1 RP-UITZETTEN GEBOUWD (schaduw) + WHATSAPP-ONDERWERPKNOP
+- /api/eigen-crm (website): eigen leads in RP-itemvorm (?kolom=inmeten, ?id, ?telefoon/?email; PATCH kolom/notitie). scripts/lib/eigen-crm.js
+  (isEigen 'LEAD-…', vlag data/.eigen-crm-bron). Planner: eigen items meegenomen in main(), rpZetStatus → eigen kolom, item-ophaal op id;
+  inmeten-planner-lees.leesOfferte gebruikt item.offerte; Sunny: klant-context zoekt eigen leads eerst, akkoord-tool + zetStatus routeren
+  eigen ids naar het eigen CRM. Lab eigen-crm 32 sc. 0x FOUT-STIL. Schaduw-run: "1 eigen-CRM lead(s) meegenomen" (testkaart overgeslagen).
+  VLAG STAAT AAN; eerste echte eigen lead op Inmeten inplannen wordt door de live planner opgepakt (Sunny-voorstel, Planado external_id rp-LEAD-…).
+  NOG NIET: Sheet-koppeling voor eigen offertes (S-nummer staat niet in de Sheet → 'niet gevonden', zichtbaar), verzoek-daemon winkelklik voor eigen
+  leads, inmeet_tijden-tool voor eigen ids (leest item via RP) → volgende stap.
+- Website: chat-assistent vervangen door WhatsApp-onderwerpkeuze (components/WhatsAppWidget.tsx, 7 onderwerpen, bericht met "Onderwerp: …");
+  Sunny-prompt regel WEBSITE-ONDERWERPBERICHT (gerichte vervolgvragen per onderwerp). Event sonty:openchat blijft werken.
+
 ## 30-08 (avond): DOCUMENT "REUZENPANDA UITZETTEN"
 - Inventaris (Explore-agent, code + plists): 19 launchd-jobs lezen/schrijven RP, 13 website-routes, Sunny/Nanny volledig op RP-statussen,
   Sheet (sleutel "RP offerte"), Gripp uit RP-quotations, Klaviyo (rp-export, tekenbonus → DOCSIGN), Trengo-template, Planado external_id rp-<id>.

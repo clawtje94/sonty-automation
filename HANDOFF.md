@@ -1,5 +1,18 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
+## 31-08 (namiddag): 3 KLANTCASES + STRUCTURELE BORGING (Daimy: "het mag niet steeds gebeuren")
+- Keus (+31622008261, WA 976691471): klant kan alleen maandag; agenda geverifieerd: 12-10 is écht de eerste vrije maandag (ook 19-10/26-10).
+  Aanbod klopte dus; bal bij klant. ✅-notitie met feiten op het ticket; staat op Mens nodig, dus bij klantkeuze DIRECT vastleggen.
+- Hilgeman (mail 977320304): nette afmelding (moeder kocht lokaal; kon niet terugmailen door bekend no-reply@webflow-gat) lag 24u stil na
+  afgekeurde bot-concepten → kort bedankt, excuus voor mailprobleem, ticket gesloten; dossier mag op verloren.
+- Judith Bauwi (mail 977362303, ENGELSTALIG): kreeg 2x NL antwoord (RP-herinnering + Sunny-mail); wil bezoek vóór prijsakkoord →
+  in het Engels rechtgezet + belofte dat planning MORGEN persoonlijk belt; notitie (Engels → Sjoerd) + planning-groep gemeld. MENS MOET MORGEN BELLEN.
+- STRUCTUREEL vandaag: taalpoort (scripts/lib/taal-check.js, lab 14 sc.) blokkeert nu op BEIDE kanalen elk antwoord in de verkeerde taal
+  (mail: overdracht met uitleg; WA: notitie + blokkade); promptregels TAAL SPIEGELEN + PURE AFMELDING (afscheid kort afronden, geen Mens nodig).
+- RODE DRAAD: escalaties naar "Mens nodig" blijven liggen; escalatie-wachter meldt ze al elk uur op de hoofdchat (nu 4-6 open, o.a. Eliza 16u).
+  Echte oplossing = minder Mens-nodig: V22 aan Daimy (mandaat: boeken bij duidelijke klantkeuze óók op Mens-nodig-tickets + verzet-keten) en
+  V20 (overstap: NL-herinneringen komen nu nog uit RP en kennen geen taal).
+
 ## 31-08 (middag): VERZETTING ELVIS REMMERSWAAL UITGEVOERD (Daimy: "waarom regelt Sunny dit niet zelf?")
 - Klantmail (via i.dekoning@me.com, ticket 976755983): inmeten 4 sept moest naar ná 23 sept (nieuwe pui). Sunny pakte hem 12:18 op na
   Daimy's notitie, maar inmeet_tijden faalde op de Planado/Trengo-drukte (zelfde 429-storm als hierboven, inmiddels gefixt) → alleen belofte.

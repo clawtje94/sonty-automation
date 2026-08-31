@@ -12,10 +12,10 @@ const STAND = path.join(__dirname, '..', '..', 'data', 'trengo-429.json');
 const TOKEN = () => fs.readFileSync(path.join(__dirname, '..', '.trengo-api-token.txt'), 'utf8').trim();
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/** Pure beslisregel: alarm bij ≥ 12 429's in het kwartier, en dan hoogstens één alarm per uur. */
+/** Pure beslisregel: alarm bij ≥ 30 429's in het kwartier (retries vangen ze; alarm is voor abnormale druk), max 1/uur. */
 function moetAlarmeren(tijden, nu, laatsteAlarm) {
   const kwartier = tijden.filter((t) => nu - t <= 15 * 60000);
-  if (kwartier.length < 12) return false;
+  if (kwartier.length < 30) return false;
   return !laatsteAlarm || nu - laatsteAlarm > 60 * 60000;
 }
 

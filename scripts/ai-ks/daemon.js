@@ -1705,7 +1705,9 @@ if (require.main === module) (async () => {
     const tot = oneindig ? Infinity : Date.now() + watchMin * 60000;
     while (Date.now() < tot) {
       await pollRonde(state, { onlyTest, sonnyOnly });
-      await new Promise(r => setTimeout(r, 30000));
+      // 45s i.p.v. 30s (31-08): samen met de berichten-cache haalt dit de structurele Trengo-429-druk weg;
+      // klantberichten worden nog steeds binnen ±1 min gezien.
+      await new Promise(r => setTimeout(r, 45000));
     }
     console.log('Watch-venster afgelopen.');
   } else {

@@ -1,5 +1,12 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
+## 31-08: OFFERTETEKSTEN AANPASBAAR + FOTOKIEZER LUI (Daimy: teksten aanpassen, "lazy load, ik kan bijna niks selecteren")
+- /admin/offertefotos: per categorie knop "teksten" → kop + tekst van het "Waarom"-blok en de garantieregel overschrijven (leeg = standaard uit
+  de code). KV offertefotos:teksten; toegepast in klantofferte én PDF-brochure via lib/offertefotos.pasTekstenToe (offerte/[token]/page.tsx +
+  lib/offerte-pdf/data.ts, vóór de dedupe). E2E bewezen: override op klantlink zichtbaar en weer terug.
+- Fotokiezer /admin/offertefotos: start 60 thumbs + "Meer foto's laden (+120)", loading=lazy + decoding=async, reset bij openen.
+  Memory-regel: ALLE admin-fotogrids lui + gepagineerd (feedback_fotogrids_lazy).
+
 ## 31-08: FOTO-UITSNEDE (Daimy: "inzoomen en schuiven zodat ze beter in het frame passen") + offertefoto-vraag
 - Offertefoto's bestonden al: /admin/offertefotos (per productcategorie; direct in klantofferte + PDF-brochure) — aan Daimy bevestigd.
 - NIEUW components/admin/FotoUitsnede.tsx: editor met slepen + zoom (wiel/slider) in een kaderkeuze (4:3/16:9/1:1/3:4); snijdt client-side

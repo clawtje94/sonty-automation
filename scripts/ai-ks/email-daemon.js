@@ -118,7 +118,8 @@ async function ronde() {
 
     if (!nieuweVraagNaSluiting && laatsteUitgaand && laatsteUitgaand.user_id && Number(laatsteUitgaand.user_id) !== SONNY_USER) {
       // Daimy zelf nooit automatisch toewijzen (Daimy 23-07) — bot blijft er wel vanaf
-      if (t.status !== 'CLOSED' && Number(laatsteUitgaand.user_id) !== 736327 && Number(t.user_id) !== Number(laatsteUitgaand.user_id)) {
+      // HANDMATIGE TOEWIJZING IS HEILIG (Daimy 31-08) — zie scripts/lib/collega-toewijzing.js.
+      if (t.status !== 'CLOSED' && require('../lib/collega-toewijzing.js').magCollegaToewijzing({ huidigeUserId: t.assigned_user_id ?? t.user_id, laatsteUitUserId: laatsteUitgaand.user_id, botUserId: SONNY_USER })) {
         try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: laatsteUitgaand.user_id }); console.log(`  [${t.id}] laatste mail van collega (user ${laatsteUitgaand.user_id}) → aan hen toegewezen`); } catch (e) { console.error(`  [${t.id}] collega-toewijzing FOUT: ${e.message}`); }
       }
       // VANGNET (Daimy 30-07, casus Niels Pompe): een klantmail op een mens-gesprek die na

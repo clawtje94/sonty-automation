@@ -694,7 +694,9 @@ async function verwerkTicket(t, state) {
       // Ligt het ticket in het Mens nodig-team, dan is dat een bewuste keuze van een
       // mens: NOOIT terug-toewijzen aan wie toevallig het laatste antwoord stuurde.
       if (Number(t.team_id) === 431872) return;
-      if (t.status !== 'CLOSED' && Number(laatsteUit.user_id) !== 736327 && Number(t.user_id) !== Number(laatsteUit.user_id)) {
+      // HANDMATIGE TOEWIJZING IS HEILIG (Daimy 31-08): staat er al een mens op (Nanny), dan NOOIT
+      // stil terugzetten naar wie toevallig het laatste bericht stuurde. Beslisregel in lib, met lab.
+      if (t.status !== 'CLOSED' && require('../lib/collega-toewijzing.js').magCollegaToewijzing({ huidigeUserId: t.assigned_user_id ?? t.user_id, laatsteUitUserId: laatsteUit.user_id, botUserId: 747786 })) {
         try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: laatsteUit.user_id }); console.log(`  [${t.id}] laatste bericht van collega (user ${laatsteUit.user_id}) → aan hen toegewezen, bot eraf`); } catch (e) { console.error(`  [${t.id}] collega-toewijzing FOUT: ${e.message}`); }
       }
       const actiefLijst = loadActief();

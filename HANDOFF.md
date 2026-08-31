@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
+## 31-08 (avond): TELEGRAM-ROUTERING GEFIXT — DE DATA-BOT VERHONGERDE
+- Vondst: sinds de poortwachter van 11-08 gingen ÁLLE planningTelegram-berichten (ook die voor de data-bot) door de hoofdchat-allowlist;
+  wat niet matchte verdween stil in logs/telegram-onderdrukt.log. Daaronder: "48 klanten wachten al langer" (dagelijks 07:34!), annulerings-
+  meldingen (Remmerswaal), rate-limit-alarmen en de Judith-escalatie. Dit verklaart een flink deel van Daimy's "waarom hoor ik dit niet".
+- Fix: lib/telegram-filter.routeer() (puur, lab telegram-route 7 sc.): boeking → planning-groep; al het andere → ALTIJD data-bot;
+  vraag/alarm/urgent/rapport → óók kopie hoofdchat; alarm-regex ruimer (wachten al langer, rate-limit, geannuleerd, ❗). Daemons herstart.
+- Rowie draait op de nieuwe eigen keten: planlijst 13:40; Sunny-start stuurt de wachtmelding/het voorstel automatisch in de volgende rondes
+  (rondes elke 30 min via nl.sonty.inmeet-dashboard; versturen gebeurt óók in schaduw via sunny-start, zoals ontworpen).
+
 ## 31-08 (avond): ROWIE POST + AERTS (mail-fouten zichtbaar gemaakt)
 - Rowie Post (975234318, rowiepost@gmail.com, IJmuiden): akkoord op indicatie maar antwoord faalde 15:08 stil (email-live tPost verborg de
   HTTP-fout; NU GEFIXT: 4 pogingen met 15/30/60s + status/reden in de log + 429-teller). Alsnog beantwoord; had géén dossier → eigen lead

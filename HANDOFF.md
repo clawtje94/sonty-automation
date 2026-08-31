@@ -1,5 +1,11 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
+## 31-08: TRENGO-429 CENTRAAL (opdracht Isa via Brein, n.a.v. Lamboij)
+- scripts/lib/trengo-fetch.js: centrale fetch met backoff (Retry-After), 429-teller per bron (data/trengo-429.json) en planningsalarm bij
+  12+/kwartier (max 1/uur; moetAlarmeren puur, lab trengo-429 24 sc.). Gaten gedicht: trengo-notitie (faalde hard) en zoekWaTicketOpNummer;
+  bestaande retry-loops (sunny-daemon, aanbod-versturen, verzend-poort, aanbod-replies) voeden nu de teller. Daemons herstart.
+- Bevinding: Lamboij-stilte kwam vooral door boekfout (15:45 i.p.v. 14:15) + stille-lijst 18-08, niet primair 429; herstel ligt als V21 bij Daimy.
+
 ## 31-08: LEVERANCIERSFOTO'S KIESBAAR (Daimy: "niet zelf op de website zetten maar wel ergens kunnen kiezen")
 - scripts/fotobieb-scan.js (draait ook in de build) → data/fotobieb-repo.json: alle 1.611 repo-afbeeldingen uit public/images, map = categorie
   ("leverancier sunmaster/toppoint/markiezen/roma/arte/doeken", "images (los)", …). Bibliotheek-route voegt ze toe; per foto worden categorieën

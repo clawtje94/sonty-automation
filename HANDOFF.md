@@ -1,5 +1,13 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
+## 31-08: FOTO-UITSNEDE (Daimy: "inzoomen en schuiven zodat ze beter in het frame passen") + offertefoto-vraag
+- Offertefoto's bestonden al: /admin/offertefotos (per productcategorie; direct in klantofferte + PDF-brochure) — aan Daimy bevestigd.
+- NIEUW components/admin/FotoUitsnede.tsx: editor met slepen + zoom (wiel/slider) in een kaderkeuze (4:3/16:9/1:1/3:4); snijdt client-side
+  (canvas, max 1600px, jpeg 0.92) en slaat op via /api/admin/foto-uitsnede → Blob admin/uitsnedes/… (origineel blijft in de bibliotheek).
+  Knoppen: "uitsnede" op /admin/offertefotos en "Uitsnede" per slot op /admin/websitefotos (websitefotos: daarna gewoon opslaan-knop).
+- E2E getest in de browser: zoomen, slepen, opslaan → blob-url op de kaart → terug naar standaard. Let op: foto's van externe servers zonder
+  CORS kunnen niet bewerkt worden (editor meldt dit); eigen bibliotheek en /images werken.
+
 ## 31-08: LOGBOEK — WIE DEED WAT (Daimy: "altijd kunnen zien wie wat heeft gedaan in alle functies")
 - middleware.ts (website): elke schrijvende API-call (POST/PUT/PATCH/DELETE) → KV logboek:z met tijd, wie (Daimy h1 / medewerker u1-naam /
   automation-sleutel / bezoeker), methode, pad en kernvelden uit de body (nooit wachtwoorden; login/wachtwoord-routes niet gelogd). Max ~8000 regels.

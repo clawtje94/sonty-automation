@@ -1632,7 +1632,7 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
         tickets.push(kt);
         erbij++;
         console.log(`  notitie-sweep: ticket ${kt.id} heeft een openstaande @sonny-opdracht van ${laatsteOpdracht}`);
-        await new Promise((r) => setTimeout(r, 90));
+        await new Promise((r) => setTimeout(r, 350)); // 90→350ms (31-08): de sweep-burst was de grootste rest-bron van Trengo-429
       }
       if (erbij) console.log(`  notitie-sweep: ${erbij} gesprek(ken) met een openstaande opdracht toegevoegd`);
     } catch (e) { console.error('  notitie-sweep FOUT:', e.message); }

@@ -28,12 +28,14 @@ const TH = { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' }
 // "geen leverpad" en de klant zijn link nooit kreeg (ticket 974394420 had gewoon het
 // mailkanaal Aanvragen). 429 en 5xx zijn tijdelijk, dus opnieuw proberen; 401/404 niet.
 // GLOBALE TRENGO-REM (31-08, Daimy: "zou je het niet oplossen dan?"): alle Trengo-calls van deze
-// daemon minimaal 250ms uit elkaar. De 429-storm kwam niet van het totale volume maar van bursts:
-// 5 parallelle berichten-lezers (150ms) + sweeps die tientallen calls achter elkaar deden.
+// daemon minimaal 750ms uit elkaar. Live gemeten (31-08): Trengo's limiet is 120 calls/min per
+// token; 250ms (=240/min) bleef dus 429's geven. 750ms = max 80/min, ruimte voor opvolging/email
+// die hetzelfde Sonny-token gebruiken. De storm kwam van bursts: 5 parallelle berichten-lezers
+// (150ms) + sweeps die tientallen calls achter elkaar deden.
 let remVorige = 0; let remKetting = Promise.resolve();
 function trengoRem() {
   remKetting = remKetting.then(async () => {
-    const w = remVorige + 250 - Date.now();
+    const w = remVorige + 750 - Date.now();
     if (w > 0) await new Promise((r) => setTimeout(r, w));
     remVorige = Date.now();
   });

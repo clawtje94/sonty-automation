@@ -39,6 +39,7 @@ const ONDERDELEN = [
   require('./onderdelen/gripp-eigen.js'),
   require('./onderdelen/migratie-rp.js'),
   require('./onderdelen/dossiers-rp-uit.js'),
+  require('./onderdelen/trengo-429.js'),
 ];
 // UI-laag draait tegen de echte site in een echte browser: alleen met --ui (of een filter),
 // anders wordt elke logica-run traag van het browsen.

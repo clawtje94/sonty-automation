@@ -128,7 +128,7 @@ async function stuurWaBevestiging(ticketId, naam, slot) {
         body: JSON.stringify({ message: tekst, type: 'OUTBOUND' }),
       });
       if (r.ok) return true;
-      if (r.status === 429) { await new Promise((x) => setTimeout(x, 20000 + i * 15000)); continue; }
+      if (r.status === 429) { require('./lib/trengo-fetch.js').tel429('replies-bevestiging'); await new Promise((x) => setTimeout(x, 20000 + i * 15000)); continue; }
       await telegram(`⚠️ Bevestiging aan ${naam} kon niet verstuurd worden (Trengo ${r.status}, ticket ${ticketId}) — even handmatig bevestigen: ${tekst}`);
       return false;
     } catch { await new Promise((x) => setTimeout(x, 15000)); }
@@ -188,7 +188,7 @@ async function bevestigOntvangstRuw(ticketId, naam, tekst, taal = 'nl') {
       body: JSON.stringify({ message: `${tekst}\n\n${taal === 'en' ? GROET_EN : GROET_NL}`, type: 'OUTBOUND' }),
     });
     if (r.ok) return true;
-    if (r.status === 429) { await new Promise((x) => setTimeout(x, 15000)); continue; }
+    if (r.status === 429) { require('./lib/trengo-fetch.js').tel429('replies-ontvangst'); await new Promise((x) => setTimeout(x, 15000)); continue; }
     break;
   }
   await telegram(`⚠️ Ontvangstbevestiging aan ${naam} kon niet verstuurd worden (ticket ${ticketId}) — even handmatig laten weten dat we ermee bezig zijn.`);
@@ -222,7 +222,7 @@ async function ticketBerichten(ticketId) {
   await new Promise((x) => setTimeout(x, 1200));
   for (let poging = 0; poging < 4; poging++) {
     const r = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages?per_page=15`, { headers: TH });
-    if (r.status === 429) { await new Promise((x) => setTimeout(x, 15000 * Math.pow(2, poging))); continue; }
+    if (r.status === 429) { require('./lib/trengo-fetch.js').tel429('replies-lezen'); await new Promise((x) => setTimeout(x, 15000 * Math.pow(2, poging))); continue; }
     if (!r.ok) { console.log(`ticket ${ticketId}: HTTP ${r.status}`); return []; }
     return ((await r.json())?.data || []);
   }
@@ -233,7 +233,7 @@ async function ticketBerichten(ticketId) {
 async function zoekWaTicketOpNummer(telefoon) {
   const kaal = String(telefoon || '').replace(/\D/g, '').slice(-9);
   if (kaal.length !== 9) return null;
-  const r = await fetch(`https://app.trengo.com/api/v2/tickets?term=${kaal}`, { headers: TH });
+  const r = await require('./lib/trengo-fetch.js').trengoFetch(`/tickets?term=${kaal}`);
   if (!r.ok) return null;
   const hit = ((await r.json())?.data || []).find((t) => t.channel?.type === 'WA_BUSINESS');
   return hit?.id || null;

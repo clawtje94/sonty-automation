@@ -113,7 +113,7 @@ async function haalBerichten(ticketId) {
     const r = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages?per_page=30`, {
       headers: { Authorization: 'Bearer ' + TT },
     });
-    if (r.status === 429) { await wacht(15000 * (i + 1)); continue; }
+    if (r.status === 429) { require('./trengo-fetch.js').tel429('verzend-poort'); await wacht(15000 * (i + 1)); continue; }
     if (!r.ok) return null;
     return (await r.json())?.data || [];
   }

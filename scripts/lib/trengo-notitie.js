@@ -20,9 +20,9 @@ const TOKEN = fs.readFileSync(path.join(__dirname, '..', '.trengo-api-token.txt'
  */
 async function notitie(ticketId, tekst, { tag = false } = {}) {
   const body = tag ? `${teamTags()} ${tekst}` : tekst;
-  const r = await fetch(`https://app.trengo.com/api/v2/tickets/${ticketId}/messages`, {
+  // centrale fetch met 429-backoff en teller (opdracht Isa 31-08: notities faalden hard op rate limits)
+  const r = await require('./trengo-fetch.js').trengoFetch(`/tickets/${ticketId}/messages`, {
     method: 'POST',
-    headers: { Authorization: 'Bearer ' + TOKEN, 'Content-Type': 'application/json' },
     body: JSON.stringify({ message: body, internal_note: true }),
   });
   if (!r.ok) throw new Error(`notitie mislukt (${r.status}) op ticket ${ticketId}`);

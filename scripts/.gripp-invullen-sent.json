@@ -5517,5 +5517,18 @@
       }
     ],
     "processedAt": "2026-08-30T08:17:43.612Z"
+  },
+  "item:b50f504f-4fa9-4b15-b132-b6ac04b5ec51": {
+    "summary": "RR van Donge",
+    "grippCompanyId": 99846,
+    "grippOfferId": 9247,
+    "rpDocNumber": "202612213",
+    "allOffers": [
+      {
+        "grippOfferId": 9247,
+        "rpDocNumber": "202612213"
+      }
+    ],
+    "processedAt": "2026-08-31T08:25:57.063Z"
   }
 }

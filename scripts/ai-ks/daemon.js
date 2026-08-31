@@ -31,6 +31,7 @@ async function tGet(ep) {
   for (let poging = 1; poging <= 3; poging++) {
     const res = await fetch('https://app.trengo.com/api/v2' + ep, { headers: TH });
     if (res.ok) return res.json();
+    if (res.status === 429) { try { require('../lib/trengo-fetch.js').tel429('sunny-lezen'); } catch { /* teller is extra */ } }
     if (res.status !== 429 && res.status < 500) return null;
     if (poging < 3) {
       console.log(`  Trengo GET ${res.status} op ${ep}, nieuwe poging over ${poging * 20}s...`);
@@ -63,6 +64,7 @@ async function tPost(ep, body) {
   for (let poging = 1; poging <= 3; poging++) {
     const res = await fetch('https://app.trengo.com/api/v2' + ep, { method: 'POST', headers: TH, body: JSON.stringify(body) });
     laatste = { ok: res.ok, status: res.status, body: await res.text().catch(() => '') };
+    if (res.status === 429) { try { require('../lib/trengo-fetch.js').tel429('sunny-sturen'); } catch { /* teller is extra */ } }
     if (res.status !== 429) return laatste;
     if (poging < 3) {
       console.log(`  Trengo 429, nieuwe poging over ${poging * 20}s...`);

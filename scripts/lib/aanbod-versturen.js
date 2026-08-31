@@ -23,7 +23,7 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 async function tFetch(ep, opties = {}) {
   for (let i = 0; i < 4; i++) {
     const r = await fetch('https://app.trengo.com/api/v2' + ep, { headers: TH, ...opties });
-    if (r.status === 429) { await wacht(2000 + i * 1500); continue; }
+    if (r.status === 429) { require('./trengo-fetch.js').tel429('aanbod-versturen'); await wacht(15000 * (i + 1)); continue; }
     return r;
   }
   return { ok: false, status: 429 };

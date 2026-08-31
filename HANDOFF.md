@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
+## 31-08 (middag): VERZETTING ELVIS REMMERSWAAL UITGEVOERD (Daimy: "waarom regelt Sunny dit niet zelf?")
+- Klantmail (via i.dekoning@me.com, ticket 976755983): inmeten 4 sept moest naar ná 23 sept (nieuwe pui). Sunny pakte hem 12:18 op na
+  Daimy's notitie, maar inmeet_tijden faalde op de Planado/Trengo-drukte (zelfde 429-storm als hierboven, inmiddels gefixt) → alleen belofte.
+- Uitgevoerd: afspraak vr 4 sept 09:00 geannuleerd via lib/afspraak-annuleren (Outlook 1, Planado 1, 0 gemist, geverifieerd 0 events);
+  klant per mail 3 echte opties na 23-09 (24-09 12:10 Joey, 29-09 11:45 Joey, 30-09 13:05 Sjoerd); planning-groep gemeld; ✅-notitie op ticket.
+- LET OP: bij klantkeuze direct boeken (dossier LEAD-RP-a3dbcbd7…, rpItemId a3dbcbd7-e88a-4531-84b3-71ee69a312d8, tel +3164262328,
+  e.remmerswaal@me.com). Boeking stond NIET in data/inmeet-boekingen.json (ouder dan de store) — vindBoeking had hem dus ook niet gevonden.
+- Structureel nog te doen: "verzetten" als één keten (annuleer + aanbod in één klantbericht) voor Sunny, ook op e-mail.
+
 ## 31-08: TRENGO-429 CENTRAAL (opdracht Isa via Brein, n.a.v. Lamboij)
 - OORZAAK GEVONDEN (12:05): 45k 429-regels in logs/sonny-watch.log — de Sunny-ronde haalde elke 30 s van ELKE kandidaat de berichten op.
   Fix: berichten-cache in de ronde (75 s TTL, ongeldig zodra de ticketlijst een nieuwer latest_message toont; notities bumpen dat veld niet,

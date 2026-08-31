@@ -17,7 +17,7 @@ const dims = [
 
 function maakItem(s) {
   const desc = s.omschrijving.label === 'labels'
-    ? ['Voornaam: Kim', 'Achternaam: van der Berg', 'E-mailadres: Kim@Example.com', 'Telefoonnummer: +31611111111', 'Straatnaam: Frijdastraat', 'Huisnummer: 8F', 'Postcode: 2288 EX', 'Plaats: Rijswijk', s.afkomst.v ? 'Hoe komt u bij ons terecht?: ' + s.afkomst.v : '', 'Opmerking: graag snel', '', '2x Screens:', '1x Rolluik S-42:'].filter((x) => x !== '').join('\n')
+    ? ['Voornaam: Kim', 'Achternaam: van der Berg', 'E-mailadres: Kim@Example.com', 'Telefoonnummer: +31611111111', 'Straatnaam: Frijdastraat', 'Huisnummer: 8F', 'Postcode: 2288 EX', 'Plaats: Rijswijk', s.afkomst.v ? 'Hoe komt u bij ons terecht?: ' + s.afkomst.v : '', 'Opmerking: graag snel', '', '2x Screens:', '1x Rolluik S-42:', '', '1x Pergola:', '- framekleur: RAL 7016 structuur', '- welk_type_bediening_wil_je?: Motor + afstandsbediening', '- breedte: 7003.0', '', '1x Inclusief montage Pergola'].filter((x) => x !== '').join('\n')
     : s.omschrijving.label === 'alleen-fields' ? (s.afkomst.v ? 'Hoe komt u bij ons terecht?: ' + s.afkomst.v + '\n' : '') + '1x Screens:' : '';
   return {
     id: 'rp-item-1', summary: 'Kim van der Berg', description: desc, status_id: 'kolom-x', status_label: 'Offerte verstuurd',
@@ -37,16 +37,18 @@ function orakel(s) {
     wil: 'ok', id: 'LEAD-RP-rp-item-1', kolom: 'kolom-x', gearchiveerd: s.archief.label === 'ja',
     email: labels ? 'kim@example.com' : 'fields@example.com', telefoon: labels ? '+31611111111' : '+31622222222', postcode: labels ? '2288EX' : '2288AB', plaats: 'Rijswijk',
     rpNummer: beste ? beste[2] : null, offerteStatus: beste ? beste[0] : null, totaal: beste ? beste[3] : null,
-    type: s.afkomst.label === 'winkel' && s.omschrijving.label !== 'leeg' ? 'offerte' : 'configurator', producten: labels ? 2 : s.omschrijving.label === 'alleen-fields' ? 1 : 0,
+    type: s.afkomst.label === 'winkel' && s.omschrijving.label !== 'leeg' ? 'offerte' : 'configurator', producten: labels ? 3 : s.omschrijving.label === 'alleen-fields' ? 1 : 0,
     sync: s.stand.wil,
+    pergOpties: labels ? 'RAL 7016 structuur|Motor + afstandsbediening|7003' : '-',
   };
 }
 function voerUit(s) {
   const item = maakItem(s);
   const l = rpItemNaarLead(item, quotations(s));
   return { sync: moetSync(item, s.stand.e), id: l.id, kolom: l.rpKolom, gearchiveerd: !!l.gearchiveerd, email: l.contact.email, telefoon: l.contact.telefoon, postcode: l.contact.postcode, plaats: l.contact.plaats,
-    rpNummer: l.offerte ? l.offerte.rpNummer : null, offerteStatus: l.offerte ? l.offerte.status : null, totaal: l.offerte ? l.offerte.totaalInclBTW : null, type: l.type, producten: (l.products || []).length, melding: false };
+    rpNummer: l.offerte ? l.offerte.rpNummer : null, offerteStatus: l.offerte ? l.offerte.status : null, totaal: l.offerte ? l.offerte.totaalInclBTW : null, type: l.type, producten: (l.products || []).length, melding: false,
+    pergOpties: (() => { const pg = (l.products || []).find((x) => x.product === 'Pergola'); return pg && pg.options ? [pg.options.framekleur, pg.options['welk type bediening wil je'], pg.options.breedte].join('|') : '-'; })() };
 }
-function vergelijk(w, e) { return ['id', 'kolom', 'gearchiveerd', 'email', 'telefoon', 'postcode', 'plaats', 'rpNummer', 'offerteStatus', 'totaal', 'type', 'producten', 'sync'].every((k) => w[k] === e[k]); }
+function vergelijk(w, e) { return ['id', 'kolom', 'gearchiveerd', 'email', 'telefoon', 'postcode', 'plaats', 'rpNummer', 'offerteStatus', 'totaal', 'type', 'producten', 'sync', 'pergOpties'].every((k) => w[k] === e[k]); }
 
 module.exports = { naam: 'migratie-rp (RP-item → eigen lead: contact, offertekeuze, archief, kanaal, producten)', scenarios, orakel, voerUit, vergelijk };

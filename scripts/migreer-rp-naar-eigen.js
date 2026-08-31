@@ -72,7 +72,20 @@ function rpItemNaarLead(item, quotations = []) {
   const kanaal = /winkel/i.test(afkomst) || /winkel/i.test(item.status_label || '') ? 'winkel' : 'online';
   const producten = [];
   // alleen echte productregels; optieregels ("1x Breedte tussen …", "1x Inclusief") horen er niet bij
-  for (const m of String(item.description || '').matchAll(/(?:^|\n)(\d+)x ([^\n:]+):?/g)) { const naam = m[2].trim(); if (/^(breedte|hoogte|uitval|inclusief|kleur|bediening|montage|doek|ral|zonder|met )/i.test(naam)) continue; producten.push({ product: naam, quantity: Number(m[1]) || 1 }); }
+  // Productblok MET opties (Daimy 31-08: "1x Pergola" alleen zegt niks): de regels
+  // "- framekleur: RAL 7016" onder een product horen als options bij dat product, net als bij
+  // configurator-leads. Losse optie-/montageregels ("1x Inclusief montage") blijven geen product.
+  for (const m of String(item.description || '').matchAll(/(?:^|\n)(\d+)x ([^\n:]+):?[ \t]*((?:\n- [^\n]*)*)/g)) {
+    const naam = m[2].trim();
+    if (/^(breedte|hoogte|uitval|inclusief|kleur|bediening|montage|doek|ral|zonder|met )/i.test(naam)) continue;
+    const options = {};
+    for (const o of String(m[3] || '').matchAll(/\n- ([^:\n]+):[ \t]*([^\n]*)/g)) {
+      const k = o[1].trim().replace(/\?+$/, '').replace(/_/g, ' ');
+      const w = o[2].trim().replace(/^(\d+)\.0$/, '$1'); // "7003.0" → "7003"
+      if (k && w) options[k] = w;
+    }
+    producten.push({ product: naam, quantity: Number(m[1]) || 1, ...(Object.keys(options).length ? { options } : {}) });
+  }
   const opmerking = (String(item.description || '').match(/Opmerking:\s*([\s\S]*?)(?=\n\d+x |\n*$)/i) || [])[1]?.trim() || '';
   const rank = { ACCEPTED: 0, SENT: 1 };
   const docs = [...quotations].filter((q) => q && q.documentId).sort((a, b) => {

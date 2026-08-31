@@ -22,6 +22,12 @@
 - Leadtijdlijn: moveToKolom/changeStatus/addNote hebben nu `door` (naam van de ingelogde); pipeline-tijdlijn toont "· <naam>";
   eigen-crm-PATCH zet door=automation/actor. Live bewezen: medewerker-notitie → tijdlijn "door: Daimy test", logboek toont bezoeker/medewerker/automation.
 
+## 31-08 (ochtend): PRODUCTOPTIES IN DE PIPELINE (Daimy: "1x Pergola is dat duidelijk?" → nee)
+- Oorzaak: migreer-rp-naar-eigen.js nam alleen productnámen mee; de configurator-keuzes ("- framekleur: …") uit de RP-description vielen weg.
+- Parser gefixt (options per product, "7003.0"→"7003"); lab migratie-rp uitgebreid: 360 scenario's 0 fout-stil. Proefgeval Lia eerst, daarna
+  volledige her-migratie: 19.740 items gezien, 17.071 verwerkt, 0 fouten. Bord nu: 923 leads met producten, 827 mét opties, 96 zonder
+  (bron heeft daar ook geen opties). UI: uitval heet nu "uitval 3500 mm" (kale maat was onduidelijk); 1 Vercel-uploadflake, rerun groen.
+
 ## 30-08 (avond): PIPELINE-LEADPANEEL = MINI-CRM (Daimy: "producten + samenvatting WhatsApp en mail")
 - Nieuw in het detailpaneel (/admin/pipeline): sectie "Aangevraagde producten" (configurator-products met maat/opties, anders offerteregels)
   en sectie "Contact met de klant": per kanaal (WA + mail) een Haiku-samenvatting uit Trengo + laatste berichten uitklapbaar + Trengo-link.

@@ -1,6 +1,9 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
 ## 31-08: TRENGO-429 CENTRAAL (opdracht Isa via Brein, n.a.v. Lamboij)
+- OORZAAK GEVONDEN (12:05): 45k 429-regels in logs/sonny-watch.log — de Sunny-ronde haalde elke 30 s van ELKE kandidaat de berichten op.
+  Fix: berichten-cache in de ronde (75 s TTL, ongeldig zodra de ticketlijst een nieuwer latest_message toont; notities bumpen dat veld niet,
+  dus de korte TTL houdt notitie-reacties < ±1 min). Lab sunny-berichtcache 12 sc. Daemon herstart; effectmeting via 429-teller.
 - scripts/lib/trengo-fetch.js: centrale fetch met backoff (Retry-After), 429-teller per bron (data/trengo-429.json) en planningsalarm bij
   12+/kwartier (max 1/uur; moetAlarmeren puur, lab trengo-429 24 sc.). Gaten gedicht: trengo-notitie (faalde hard) en zoekWaTicketOpNummer;
   bestaande retry-loops (sunny-daemon, aanbod-versturen, verzend-poort, aanbod-replies) voeden nu de teller. Daemons herstart.

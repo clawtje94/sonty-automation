@@ -1,5 +1,12 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
+## 31-08: LEVERANCIERSFOTO'S KIESBAAR (Daimy: "niet zelf op de website zetten maar wel ergens kunnen kiezen")
+- scripts/fotobieb-scan.js (draait ook in de build) → data/fotobieb-repo.json: alle 1.611 repo-afbeeldingen uit public/images, map = categorie
+  ("leverancier sunmaster/toppoint/markiezen/roma/arte/doeken", "images (los)", …). Bibliotheek-route voegt ze toe; per foto worden categorieën
+  samengevoegd (site + leveranciersmap beide vindbaar). NIETS komt vanzelf op de site; kiezen blijft een actie in de tools.
+- Live: leverancier-filters in de kiezers van /admin/websitefotos en /admin/offertefotos (sunmaster 96, toppoint 40, markiezen 19, roma 7, arte 60,
+  doeken 6). Nieuwe leveranciersfoto's: in public/images/<map>/ zetten en deployen (scan draait mee), of gewoon uploaden via /admin/fotos.
+
 ## 31-08: OFFERTETEKSTEN AANPASBAAR + FOTOKIEZER LUI (Daimy: teksten aanpassen, "lazy load, ik kan bijna niks selecteren")
 - /admin/offertefotos: per categorie knop "teksten" → kop + tekst van het "Waarom"-blok en de garantieregel overschrijven (leeg = standaard uit
   de code). KV offertefotos:teksten; toegepast in klantofferte én PDF-brochure via lib/offertefotos.pasTekstenToe (offerte/[token]/page.tsx +

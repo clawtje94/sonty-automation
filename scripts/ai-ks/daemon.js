@@ -696,8 +696,8 @@ async function verwerkTicket(t, state) {
       if (Number(t.team_id) === 431872) return;
       // HANDMATIGE TOEWIJZING IS HEILIG (Daimy 31-08): staat er al een mens op (Nanny), dan NOOIT
       // stil terugzetten naar wie toevallig het laatste bericht stuurde. Beslisregel in lib, met lab.
-      if (t.status !== 'CLOSED' && require('../lib/collega-toewijzing.js').magCollegaToewijzing({ huidigeUserId: t.assigned_user_id ?? t.user_id, laatsteUitUserId: laatsteUit.user_id, botUserId: 747786 })) {
-        try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: laatsteUit.user_id }); console.log(`  [${t.id}] laatste bericht van collega (user ${laatsteUit.user_id}) → aan hen toegewezen, bot eraf`); } catch (e) { console.error(`  [${t.id}] collega-toewijzing FOUT: ${e.message}`); }
+      if (t.status !== 'CLOSED' && require('../lib/collega-toewijzing.js').magCollegaToewijzing({ huidigeUserId: t.assignee?.id ?? t.assigned_user_id ?? t.user_id, laatsteUitUserId: laatsteUit.user_id, botUserId: 747786, teamId: t.team_id })) {
+        try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: laatsteUit.user_id }); console.log(`  [${t.id}] laatste bericht van collega (user ${laatsteUit.user_id}) → aan hen toegewezen, bot eraf (was: ${t.assignee?.id ?? t.user_id ?? 'niemand'})`); } catch (e) { console.error(`  [${t.id}] collega-toewijzing FOUT: ${e.message}`); }
       }
       const actiefLijst = loadActief();
       if (actiefLijst[t.id]) { delete actiefLijst[t.id]; fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actiefLijst, null, 1)); }

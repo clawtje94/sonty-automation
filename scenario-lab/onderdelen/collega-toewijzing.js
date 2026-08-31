@@ -8,16 +8,18 @@ const BOT = 747786;
 const dims = [
   { naam: 'huidige', waarden: [{ label: 'niemand', id: 0 }, { label: 'bot', id: BOT }, { label: 'nanny', id: 736329 }, { label: 'jorren', id: 745487 }] },
   { naam: 'laatste', waarden: [{ label: 'geen', id: 0 }, { label: 'bot', id: BOT }, { label: 'daimy', id: 736327 }, { label: 'jorren', id: 745487 }] },
+  { naam: 'team', waarden: [{ label: 'geen', id: 0 }, { label: 'mens-nodig', id: 431872 }] },
 ];
 function scenarios() { return combinaties(dims); }
 function orakel(s) {
   const collegaStuurde = s.laatste.label === 'jorren';
   const botOfNiemand = s.huidige.label === 'niemand' || s.huidige.label === 'bot';
-  const mag = collegaStuurde && botOfNiemand;
+  const nietMensNodig = s.team.label !== 'mens-nodig';
+  const mag = collegaStuurde && botOfNiemand && nietMensNodig;
   return { wil: mag ? 'ok' : 'blokkeer', toewijzen: mag };
 }
 function voerUit(s) {
-  return { toewijzen: magCollegaToewijzing({ huidigeUserId: s.huidige.id, laatsteUitUserId: s.laatste.id, botUserId: BOT }), melding: false };
+  return { toewijzen: magCollegaToewijzing({ huidigeUserId: s.huidige.id, laatsteUitUserId: s.laatste.id, botUserId: BOT, teamId: s.team.id }), melding: false };
 }
 function vergelijk(w, e) { return w.toewijzen === e.toewijzen; }
 module.exports = { naam: 'collega-toewijzing (handmatige toewijzing is heilig, alleen bot/niemand → collega)', scenarios, orakel, voerUit, vergelijk };

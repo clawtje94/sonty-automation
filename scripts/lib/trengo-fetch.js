@@ -3,7 +3,7 @@
 // maar er was geen centrale teller/alarm en een paar plekken (notities, ticket-zoeken) hadden niets.
 //   trengoFetch(pad, opties?, {pogingen}) → Response (retry op 429/5xx, Retry-After gerespecteerd, backoff 15/30/60s)
 //   tel429(bron)                          → registreert een 429 (data/trengo-429.json) en alarmeert de planning-groep
-//                                           bij ≥ 12 stuks binnen 15 min (max 1 melding per uur) — stilte nooit meer.
+//                                           bij ≥ 60 stuks binnen 15 min (max 1 melding per 6 uur) — stilte nooit meer.
 //   moetAlarmeren(tijden, nu)             → pure beslisregel (scenario-lab/onderdelen/trengo-429.js)
 const fs = require('fs');
 const path = require('path');
@@ -12,11 +12,12 @@ const STAND = path.join(__dirname, '..', '..', 'data', 'trengo-429.json');
 const TOKEN = () => fs.readFileSync(path.join(__dirname, '..', '.trengo-api-token.txt'), 'utf8').trim();
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/** Pure beslisregel: alarm bij ≥ 30 429's in het kwartier (retries vangen ze; alarm is voor abnormale druk), max 1/uur. */
+/** Pure beslisregel: alarm bij ≥ 60 429's in het kwartier (retries vangen ze; alarm is alleen voor
+ *  abnormale druk), max 1 melding per 6 uur — Daimy 31-08: "ik hoef ook niet 100 berichten op een dag". */
 function moetAlarmeren(tijden, nu, laatsteAlarm) {
   const kwartier = tijden.filter((t) => nu - t <= 15 * 60000);
-  if (kwartier.length < 30) return false;
-  return !laatsteAlarm || nu - laatsteAlarm > 60 * 60000;
+  if (kwartier.length < 60) return false;
+  return !laatsteAlarm || nu - laatsteAlarm > 6 * 3600000;
 }
 
 async function tel429(bron = '') {

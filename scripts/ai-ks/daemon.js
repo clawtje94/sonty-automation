@@ -27,8 +27,22 @@ const TH = { Authorization: 'Bearer ' + TT, 'Content-Type': 'application/json' }
 // van Trengo maakte het ticket dus onzichtbaar, waarna de offerte-levering concludeerde
 // "geen leverpad" en de klant zijn link nooit kreeg (ticket 974394420 had gewoon het
 // mailkanaal Aanvragen). 429 en 5xx zijn tijdelijk, dus opnieuw proberen; 401/404 niet.
+// GLOBALE TRENGO-REM (31-08, Daimy: "zou je het niet oplossen dan?"): alle Trengo-calls van deze
+// daemon minimaal 250ms uit elkaar. De 429-storm kwam niet van het totale volume maar van bursts:
+// 5 parallelle berichten-lezers (150ms) + sweeps die tientallen calls achter elkaar deden.
+let remVorige = 0; let remKetting = Promise.resolve();
+function trengoRem() {
+  remKetting = remKetting.then(async () => {
+    const w = remVorige + 250 - Date.now();
+    if (w > 0) await new Promise((r) => setTimeout(r, w));
+    remVorige = Date.now();
+  });
+  return remKetting;
+}
+
 async function tGet(ep) {
   for (let poging = 1; poging <= 3; poging++) {
+    await trengoRem();
     const res = await fetch('https://app.trengo.com/api/v2' + ep, { headers: TH });
     if (res.ok) return res.json();
     if (res.status === 429) { try { require('../lib/trengo-fetch.js').tel429('sunny-lezen'); } catch { /* teller is extra */ } }
@@ -58,6 +72,9 @@ async function haalBerichten(ticketId, paginas = 2) {
 
 /* Berichten-cache voor de hoofd-ronde (zie hierboven). Puur getest in scenario-lab/onderdelen/sunny-berichtcache.js */
 const BERICHT_CACHE = new Map();
+// Notitie-sweep-geheugen (31-08): per ticket de laatst geziene stand, zodat de sweep onveranderde
+// gesprekken niet elke 5 min opnieuw leest. Dit was de grootste 429-bron (~150 GETs per sweep).
+const NOTITIE_SWEEP_GECHECKT = new Map();
 const ticketLaatste = (t) => String(t?.latest_message ?? t?.latest_message_at ?? t?.updated_at ?? '');
 function magBerichtCache(entry, ticket, nu) {
   if (!entry || !entry.msgs) return false;
@@ -72,6 +89,7 @@ async function tPost(ep, body) {
   // om opnieuw te proberen: 3 pogingen met 20s/40s wachttijd.
   let laatste = { ok: false, status: 429, body: 'Too Many Attempts (na 3 pogingen)' };
   for (let poging = 1; poging <= 3; poging++) {
+    await trengoRem();
     const res = await fetch('https://app.trengo.com/api/v2' + ep, { method: 'POST', headers: TH, body: JSON.stringify(body) });
     laatste = { ok: res.ok, status: res.status, body: await res.text().catch(() => '') };
     if (res.status === 429) { try { require('../lib/trengo-fetch.js').tel429('sunny-sturen'); } catch { /* teller is extra */ } }
@@ -1630,7 +1648,15 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
       let erbij = 0;
       for (const kt of kandidaten) {
         if (alBekend.has(String(kt.id))) continue;
+        // Onveranderde stand (updated_at|messages_count) binnen 15 min = overslaan. Worst case
+        // wordt een notitie op zo'n diep ticket dus na max ~15 min gezien i.p.v. ~5 — begrensd,
+        // nooit stil. Na 15 min kijken we sowieso opnieuw.
+        const nStand = `${kt.updated_at || ''}|${kt.messages_count ?? ''}`;
+        const nEerder = NOTITIE_SWEEP_GECHECKT.get(String(kt.id));
+        if (nEerder && nEerder.stand === nStand && Date.now() - nEerder.op < 15 * 60000) continue;
         const msgs = await tGet(`/tickets/${kt.id}/messages`);
+        NOTITIE_SWEEP_GECHECKT.set(String(kt.id), { stand: nStand, op: Date.now() });
+        if (NOTITIE_SWEEP_GECHECKT.size > 5000) { for (const [k, v] of NOTITIE_SWEEP_GECHECKT) if (Date.now() - v.op > 86400000) NOTITIE_SWEEP_GECHECKT.delete(k); }
         const intern = (msgs?.data || []).filter((m) => m.internal_note || m.type === 'NOTE');
         const opdrachten = intern.filter((m) => /@s[ou]nny(?!\d)/i.test(String(m.body || m.message || '')) && !String(m.body || m.message || '').includes('✅'));
         if (!opdrachten.length) continue;

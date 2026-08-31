@@ -1,0 +1,61 @@
+{
+ "medewerker": "bo",
+ "naam": "Bo",
+ "soort": "bijscholing",
+ "opdrachtId": null,
+ "opdracht": "BIJSCHOLING (wekelijks). Jouw functie: Brand en media (merk, PR, social, partners). Onderzoek online hoe de allerbesten in dit vak werken en schrijf/ververs jouw vakkennis-bestand /Users/clawdboot/sonty/medewerkers/bo/vakkennis.md (max 90 regels).\nGebruik WebSearch en WebFetch (max 12 zoekopdrachten/pagina's, token-zuinig): recente vakartikelen en blogs, samenvattingen van de beste boeken over dit vak, vacatureteksten van topbedrijven (wat vragen zij van deze functie), transcripten of beschrijvingen van YouTube-video's van vakmensen (je kunt video's niet kijken, wel de tekst erbij lezen), brancheorganisaties en cursussen.\nVaste vorm van /Users/clawdboot/sonty/medewerkers/bo/vakkennis.md:\n# Vakkennis <naam> — <functie> (bijgewerkt <datum>)\n## Zo werken de besten (10-15 concrete regels, elk toepasbaar in jouw dagelijkse dienst bij Sonty)\n## Dagelijkse routine van een topper (kort, in volgorde)\n## Cijfers waarop de besten sturen (KPI's en normen, met bron)\n## Valkuilen die de besten vermijden\n## Wat ik hiervan vanaf morgen anders doe (3 punten, concreet)\n## Bronnen (minimaal 4, met URL en één zin waarom deze bron)\nRegels: NOOIT namen van andere zonweringbedrijven (schrijf \"een groot zonweringbedrijf\"); geen verzonnen bronnen; vervang verouderde punten uit je vorige versie in plaats van eindeloos aan te vullen; Nederlands. Lever daarna je rapport in de vaste vier kopjes: onder GEDAAN welke bronnen je las en wat je veranderde in je vakkennis, onder MORGEN wat je vanaf morgen anders doet.",
+ "model": "sonnet",
+ "tools": [
+  "Read",
+  "Write(//Users/clawdboot/sonty/medewerkers/bo/**)",
+  "Edit(//Users/clawdboot/sonty/medewerkers/bo/**)",
+  "Grep",
+  "Glob",
+  "Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)",
+  "WebSearch",
+  "WebFetch"
+ ],
+ "systeemTekens": 7239,
+ "start": "2026-08-29T19:54:32.563Z",
+ "duurMin": 1.5,
+ "kostenUsd": 0.3983472,
+ "usage": {
+  "input_tokens": 12,
+  "cache_creation_input_tokens": 28401,
+  "cache_read_input_tokens": 200011,
+  "output_tokens": 5112,
+  "output_tokens_details": {
+   "thinking_tokens": 509
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 28401,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 504,
+    "cache_read_input_tokens": 44755,
+    "cache_creation_input_tokens": 631,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 631
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard"
+ },
+ "sessionId": "c82c3c58-5114-41d6-a3f9-58d9ad548e07",
+ "fout": null,
+ "exit": 0,
+ "rapportPad": "/Users/clawdboot/sonty/medewerkers/bo/dagrapport/2026-08-29-bijscholing.md",
+ "stderr": "",
+ "output": "## GEDAAN\nVakkennis-bestand geschreven (was nog leeg). 8 zoekopdrachten gedaan: social media routine/kalender 2026, PR-pitch naar lokale journalisten, brand manager vacature-eisen, Google Bedrijfsprofiel/reviews KPI's, boek Contagious (Jonah Berger), B2B-netwerk opbouwen met aannemers/makelaars, veelgemaakte social media fouten, LinkedIn-strategie MKB. Bestand vakkennis.md aangemaakt met alle verplichte kopjes, 6 bronnen met URL. Geheugen bijgewerkt met leerpunten.\n\n## CIJFERS\nOnbekend, dit was een bijscholingsdienst zonder klantwerk. 0 posts geplaatst, 0 pitches verstuurd.\n\n## VRAGEN AAN DAIMY\nGeen vandaag, puur onderzoek.\n\n## MORGEN\n1. Dagelijks 15-30 min reageren op reviews/posts van anderen (VvE-beheerders, makelaars) inbouwen in de dienst.\n2. Eerste concreet voorstel maken volgens nieuwe regel: pitch of post met lokale invalshoek plus meetplan (welk cijfer, welke bron).\n3. Nog steeds uitzoeken: reviews-sync API-key, waar contentkalender hoort te staan, wie VvE-outreach nu doet."
+}

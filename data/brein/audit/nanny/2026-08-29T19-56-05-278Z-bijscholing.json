@@ -1,0 +1,61 @@
+{
+ "medewerker": "nanny",
+ "naam": "Nanny",
+ "soort": "bijscholing",
+ "opdrachtId": null,
+ "opdracht": "BIJSCHOLING (wekelijks). Jouw functie: Planner inmeten (AI-daemon). Onderzoek online hoe de allerbesten in dit vak werken en schrijf/ververs jouw vakkennis-bestand /Users/clawdboot/sonty/medewerkers/nanny/vakkennis.md (max 90 regels).\nGebruik WebSearch en WebFetch (max 12 zoekopdrachten/pagina's, token-zuinig): recente vakartikelen en blogs, samenvattingen van de beste boeken over dit vak, vacatureteksten van topbedrijven (wat vragen zij van deze functie), transcripten of beschrijvingen van YouTube-video's van vakmensen (je kunt video's niet kijken, wel de tekst erbij lezen), brancheorganisaties en cursussen.\nVaste vorm van /Users/clawdboot/sonty/medewerkers/nanny/vakkennis.md:\n# Vakkennis <naam> — <functie> (bijgewerkt <datum>)\n## Zo werken de besten (10-15 concrete regels, elk toepasbaar in jouw dagelijkse dienst bij Sonty)\n## Dagelijkse routine van een topper (kort, in volgorde)\n## Cijfers waarop de besten sturen (KPI's en normen, met bron)\n## Valkuilen die de besten vermijden\n## Wat ik hiervan vanaf morgen anders doe (3 punten, concreet)\n## Bronnen (minimaal 4, met URL en één zin waarom deze bron)\nRegels: NOOIT namen van andere zonweringbedrijven (schrijf \"een groot zonweringbedrijf\"); geen verzonnen bronnen; vervang verouderde punten uit je vorige versie in plaats van eindeloos aan te vullen; Nederlands. Lever daarna je rapport in de vaste vier kopjes: onder GEDAAN welke bronnen je las en wat je veranderde in je vakkennis, onder MORGEN wat je vanaf morgen anders doet.",
+ "model": "sonnet",
+ "tools": [
+  "Read",
+  "Write(//Users/clawdboot/sonty/medewerkers/nanny/**)",
+  "Edit(//Users/clawdboot/sonty/medewerkers/nanny/**)",
+  "Grep",
+  "Glob",
+  "Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)",
+  "WebSearch",
+  "WebFetch"
+ ],
+ "systeemTekens": 6937,
+ "start": "2026-08-29T19:56:05.278Z",
+ "duurMin": 1.9,
+ "kostenUsd": 0.37431460000000005,
+ "usage": {
+  "input_tokens": 20,
+  "cache_creation_input_tokens": 26191,
+  "cache_read_input_tokens": 343403,
+  "output_tokens": 5778,
+  "output_tokens_details": {
+   "thinking_tokens": 615
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 26191,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 569,
+    "cache_read_input_tokens": 42303,
+    "cache_creation_input_tokens": 873,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 873
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard"
+ },
+ "sessionId": "efa2217f-db95-473f-9e8f-e9e13909dfbf",
+ "fout": null,
+ "exit": 0,
+ "rapportPad": "/Users/clawdboot/sonty/medewerkers/nanny/dagrapport/2026-08-29-bijscholing.md",
+ "stderr": "",
+ "output": "## GEDAAN\nWekelijkse bijscholing gedaan. 6 zoekopdrachten via WebSearch over: no-show reductie in field service, dispatcher-KPI's (first-time-fix, bezetting), vacaturetekst planner zonwering/kozijnen, route-optimalisatie/clustering, opvolg-cadans voor stille leads/wachtlijst, en effect van reactiesnelheid bij AI-boekingsassistenten.\nVakkennis-bestand `vakkennis.md` volledig herschreven (was nog leeg) met regels, dagroutine, KPI's, valkuilen en 3 concrete verbeterpunten, elk met bron.\n\n## CIJFERS\nBronnen geraadpleegd: 6 zoekopdrachten, 0 losse pagina's gefetcht. Vakkennis-bestand: 90 regels (binnen limiet). Reguliere dienst-cijfers: niet van toepassing vandaag (dit was bijscholing, geen ochtenddienst).\n\n## VRAGEN AAN DAIMY\nGeen. Bijscholing an sich vraagt geen beslissing.\n\n## MORGEN\n1. Wachtrij >5 werkdagen niet direct als \"verlopen\" voorstellen, eerst checken of vaste opvolg-cadans is doorlopen.\n2. Mislukte mutaties voortaan uitsplitsen naar oorzaak (klant stil / systeemfout / dubbele boeking).\n3. Boeking zonder bevestiging (zoals Annemarie Westerneng) apart melden als systeemmismatch tussen Outlook/Planado/Bookings."
+}

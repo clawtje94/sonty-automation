@@ -1,0 +1,62 @@
+{
+ "medewerker": "isa",
+ "naam": "Isa",
+ "soort": "bijscholing",
+ "opdrachtId": null,
+ "opdracht": "BIJSCHOLING (wekelijks). Jouw functie: Hoofd Klant en Service. Onderzoek online hoe de allerbesten in dit vak werken en schrijf/ververs jouw vakkennis-bestand /Users/clawdboot/sonty/medewerkers/isa/vakkennis.md (max 90 regels).\nGebruik WebSearch en WebFetch (max 12 zoekopdrachten/pagina's, token-zuinig): recente vakartikelen en blogs, samenvattingen van de beste boeken over dit vak, vacatureteksten van topbedrijven (wat vragen zij van deze functie), transcripten of beschrijvingen van YouTube-video's van vakmensen (je kunt video's niet kijken, wel de tekst erbij lezen), brancheorganisaties en cursussen.\nVaste vorm van /Users/clawdboot/sonty/medewerkers/isa/vakkennis.md:\n# Vakkennis <naam> — <functie> (bijgewerkt <datum>)\n## Zo werken de besten (10-15 concrete regels, elk toepasbaar in jouw dagelijkse dienst bij Sonty)\n## Dagelijkse routine van een topper (kort, in volgorde)\n## Cijfers waarop de besten sturen (KPI's en normen, met bron)\n## Valkuilen die de besten vermijden\n## Wat ik hiervan vanaf morgen anders doe (3 punten, concreet)\n## Bronnen (minimaal 4, met URL en één zin waarom deze bron)\nRegels: NOOIT namen van andere zonweringbedrijven (schrijf \"een groot zonweringbedrijf\"); geen verzonnen bronnen; vervang verouderde punten uit je vorige versie in plaats van eindeloos aan te vullen; Nederlands. Lever daarna je rapport in de vaste vier kopjes: onder GEDAAN welke bronnen je las en wat je veranderde in je vakkennis, onder MORGEN wat je vanaf morgen anders doet.",
+ "model": "sonnet",
+ "tools": [
+  "Read",
+  "Write(//Users/clawdboot/sonty/medewerkers/isa/**)",
+  "Edit(//Users/clawdboot/sonty/medewerkers/isa/**)",
+  "Grep",
+  "Glob",
+  "Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)",
+  "Bash(node /Users/clawdboot/sonty/scripts/medewerker.js lijst)",
+  "WebSearch",
+  "WebFetch"
+ ],
+ "systeemTekens": 6602,
+ "start": "2026-08-29T19:45:30.081Z",
+ "duurMin": 1.7,
+ "kostenUsd": 0.34032480000000004,
+ "usage": {
+  "input_tokens": 16,
+  "cache_creation_input_tokens": 25855,
+  "cache_read_input_tokens": 268314,
+  "output_tokens": 5729,
+  "output_tokens_details": {
+   "thinking_tokens": 509
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 25855,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 555,
+    "cache_read_input_tokens": 42043,
+    "cache_creation_input_tokens": 797,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 797
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard"
+ },
+ "sessionId": "d636ebf4-65af-44b0-aee7-f1de7b3d7f8a",
+ "fout": null,
+ "exit": 0,
+ "rapportPad": "/Users/clawdboot/sonty/medewerkers/isa/dagrapport/2026-08-29-bijscholing.md",
+ "stderr": "",
+ "output": "## GEDAAN\nVakkennis-bestand ververst na onderzoek (5 zoekopdrachten, 1 pagina gelezen):\n- Ringly.io en JustCall: actuele KPI-benchmarks 2026 (reactietijd, FCR, CSAT).\n- Kaizo blog: leiderschapsadvies (span of control, autonomie, onboarding).\n- Shortform-samenvatting \"The Effortless Experience\": Customer Effort Score i.p.v. alleen tevredenheid.\n- Vacatureteksten teamleider klantenservice (Indeed/Teamleiders.nl): kerncompetenties.\n- Qualident (installatiebedrijf): voorbeeld structurele nazorg/garantie-aanpak.\nNieuw in vakkennis.md: focus op Customer Effort Score, First Contact Resolution als KPI, en vast nazorg-contactmoment i.p.v. alleen reactief.\n\n## CIJFERS\nGeen operationele cijfers vandaag, dit was bijscholing (geen dienst-data verwerkt).\n\n## VRAGEN AAN DAIMY\nGeen vragen vandaag, dit is een kennisdocument, geen operationeel rapport.\n\n## MORGEN\n- Toepassen: bij servicecases met Yara ook Customer Effort meewegen, niet alleen garantietermijn.\n- Voorstel aan Daimy meenemen in reguliere dienst: vast nazorg-contactmoment na montage inrichten.\n- MT-cijfers voortaan uitsplitsen naar first response time én first contact resolution, met noemer."
+}

@@ -1,0 +1,62 @@
+{
+ "medewerker": "pip",
+ "naam": "Pip",
+ "soort": "dienst",
+ "opdrachtId": null,
+ "opdracht": "Doe je dagelijkse dienst zoals in je profiel beschreven en lever het rapport op.",
+ "model": "haiku",
+ "tools": [
+  "Read",
+  "Write(//Users/clawdboot/sonty/medewerkers/pip/**)",
+  "Edit(//Users/clawdboot/sonty/medewerkers/pip/**)",
+  "Grep",
+  "Glob",
+  "Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)",
+  "Bash(node scripts/brein-sessie.js:*)",
+  "Bash(node ./scripts/brein-sessie.js:*)",
+  "Bash(cd /Users/clawdboot/sonty && node scripts/brein-sessie.js:*)"
+ ],
+ "systeemTekens": 12425,
+ "start": "2026-08-31T05:36:51.761Z",
+ "duurMin": 1.4,
+ "kostenUsd": 0.2026782,
+ "usage": {
+  "input_tokens": 74,
+  "cache_creation_input_tokens": 59019,
+  "cache_read_input_tokens": 503752,
+  "output_tokens": 6639,
+  "output_tokens_details": {
+   "thinking_tokens": 2975
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 59019,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 8,
+    "output_tokens": 903,
+    "cache_read_input_tokens": 70461,
+    "cache_creation_input_tokens": 1105,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1105
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard"
+ },
+ "sessionId": "e029684c-be3d-4f2b-8ca8-17901cfa48c6",
+ "fout": null,
+ "exit": 0,
+ "rapportPad": "/Users/clawdboot/sonty/medewerkers/pip/dagrapport/2026-08-31.md",
+ "stderr": "",
+ "output": "Klaar! Hier is mijn dagrapport:\n\n---\n\n# Pip — Dagrapport 2026-08-31\n\n## GEDAAN\n- Vakanties-overzicht.json gelezen (bijgewerkt 05:34): 31 vakantie-periodes, 1104 agenda-items\n- Snapshot.json gescand: 78 jobs, 6 alarmen (geen capaciteitskritiek buiten inmeters)\n- Dagrapporten Nanny/Sunny/Sam gescand: 4 inmeten vandaag, 6 wachtend > 23 dgn, 1 aanbetaling resterend\n- Komende 2 weken capaciteit uitgewerkt: inmeters, montage, vakanties\n\n## CIJFERS\n**Inmeters komende 2 weken (31 aug – 14 sept, werkdagen):**\n- 31 aug – 6 sept: 2 inmeters (Joey + Sjoerd)\n- 7 – 8 sept: **0 inmeters** (Joey Disney, Sjoerd vakantie t/m 11 sept)\n- 9 – 11 sept: 1 inmeter (Joey alleen; Sjoerd nog weg)\n- 12 – 14 sept: 2 inmeters (beiden beschikbaar)\n\n**Montagecapaciteit (komende 14 dagen): Geen kritieke absentia.** ZZP, Yudi, Dennis, Jorren, Mick beschikbaar. Marvin voorbij (10-21 aug). Tygo/Kevin in rooster, verder geen alarming.\n\n**Vakanties komende 30 dagen (31 aug – 30 sept):** Sjoerd voorbij (t/m 11 sept), Joey 7-8 sept, Mick 4 sept, Yudi vrije dag 9 sept, ZZP halve dagen.\n\n**Wachtrijen (Nanny-rapport, 31 aug 05:02):** 6 klanten wachtend > 23 dagen, 5 op stil-lijst. 4 inmeten vandaag geboekt.\n\n**Orders in pijplijn vs plafond 35/week: onbekend.** Nanny zegt \"1 boeking gisteren\", geen totaal beschikbaar.\n\n**Vacature-reacties: onbekend.** vacaturemail.log toont 1744 versturende e-mails (23 jul – 1 aug), geen reactie-teller.\n\n## VRAGEN AAN DAIMY\n1. **7-8 september inmeter-crisis:** 0 inmeters beschikbaar. Hoeveel inmetersverzoeken staan voor die dagen? Hoe schakelen we die om?\n2. **Order-pijplijn vs plafond 35/week:** Waar zie ik huidigeboekingen per week? (Nodig voor capaciteitsplanning.) Totaal in pijplijn komende 2 weken bekend?\n3. **Vacature-follow-up:** Hoeveel reacties op wervingsmail? Hoeveel sollicitanten actief? (Bronnage onbekend.)\n\n## MORGEN\n- Nanny vragen naar order-teller en totale pijplijn komende 2 weken\n- Teruggekeerd Joey op 9 sept bevestigen (Disney-data)\n- Vacaturemail-reacties opvragen bij tech/HR-systeem"
+}

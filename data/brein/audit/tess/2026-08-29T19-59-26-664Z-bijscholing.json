@@ -1,0 +1,61 @@
+{
+ "medewerker": "tess",
+ "naam": "Tess",
+ "soort": "bijscholing",
+ "opdrachtId": null,
+ "opdracht": "BIJSCHOLING (wekelijks). Jouw functie: Montage-coördinatie en werkbonnen. Onderzoek online hoe de allerbesten in dit vak werken en schrijf/ververs jouw vakkennis-bestand /Users/clawdboot/sonty/medewerkers/tess/vakkennis.md (max 90 regels).\nGebruik WebSearch en WebFetch (max 12 zoekopdrachten/pagina's, token-zuinig): recente vakartikelen en blogs, samenvattingen van de beste boeken over dit vak, vacatureteksten van topbedrijven (wat vragen zij van deze functie), transcripten of beschrijvingen van YouTube-video's van vakmensen (je kunt video's niet kijken, wel de tekst erbij lezen), brancheorganisaties en cursussen.\nVaste vorm van /Users/clawdboot/sonty/medewerkers/tess/vakkennis.md:\n# Vakkennis <naam> — <functie> (bijgewerkt <datum>)\n## Zo werken de besten (10-15 concrete regels, elk toepasbaar in jouw dagelijkse dienst bij Sonty)\n## Dagelijkse routine van een topper (kort, in volgorde)\n## Cijfers waarop de besten sturen (KPI's en normen, met bron)\n## Valkuilen die de besten vermijden\n## Wat ik hiervan vanaf morgen anders doe (3 punten, concreet)\n## Bronnen (minimaal 4, met URL en één zin waarom deze bron)\nRegels: NOOIT namen van andere zonweringbedrijven (schrijf \"een groot zonweringbedrijf\"); geen verzonnen bronnen; vervang verouderde punten uit je vorige versie in plaats van eindeloos aan te vullen; Nederlands. Lever daarna je rapport in de vaste vier kopjes: onder GEDAAN welke bronnen je las en wat je veranderde in je vakkennis, onder MORGEN wat je vanaf morgen anders doet.",
+ "model": "sonnet",
+ "tools": [
+  "Read",
+  "Write(//Users/clawdboot/sonty/medewerkers/tess/**)",
+  "Edit(//Users/clawdboot/sonty/medewerkers/tess/**)",
+  "Grep",
+  "Glob",
+  "Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)",
+  "WebSearch",
+  "WebFetch"
+ ],
+ "systeemTekens": 6141,
+ "start": "2026-08-29T19:59:26.664Z",
+ "duurMin": 1.6,
+ "kostenUsd": 0.314899,
+ "usage": {
+  "input_tokens": 12,
+  "cache_creation_input_tokens": 23898,
+  "cache_read_input_tokens": 183855,
+  "output_tokens": 3793,
+  "output_tokens_details": {
+   "thinking_tokens": 433
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 23898,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 369,
+    "cache_read_input_tokens": 38395,
+    "cache_creation_input_tokens": 2488,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 2488
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard"
+ },
+ "sessionId": "32035303-fe9e-4643-ad0f-f7c25cf66ba0",
+ "fout": null,
+ "exit": 0,
+ "rapportPad": "/Users/clawdboot/sonty/medewerkers/tess/dagrapport/2026-08-29-bijscholing.md",
+ "stderr": "",
+ "output": "## GEDAAN\nVakkennis-bestand aangemaakt (was nog niet bestaan). 6 zoekopdrachten gedaan: NL vacatures montagecoördinator, field service KPI best practices, digitale werkbon-apps, planning/routeplanning montageteams, VMRG-kwaliteitseisen zonwering, field service coordinator functie-eisen. Bestand geschreven met alle 6 vaste kopjes, 11 concrete werkregels, dagroutine, KPI-benchmarks (first-time-fix 70-85%, 68% vertraging door materiaal), valkuilen en 5 bronnen.\n\n## CIJFERS\nNiet van toepassing (bijscholingstaak, geen dagcijfers).\n\n## VRAGEN AAN DAIMY\nGeen.\n\n## MORGEN\nVanaf morgen: oudste werkbon met naam+dagen expliciet melden, materiaalgereedheid apart checken vóór montagedag, en meerwerk/ontbrekende info/planning apart uitsplitsen in de cijfers."
+}

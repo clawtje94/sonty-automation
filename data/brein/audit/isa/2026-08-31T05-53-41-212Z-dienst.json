@@ -1,0 +1,66 @@
+{
+ "medewerker": "isa",
+ "naam": "Isa",
+ "soort": "dienst",
+ "opdrachtId": null,
+ "opdracht": "Doe je dagelijkse dienst zoals in je profiel beschreven en lever het rapport op.",
+ "model": "sonnet",
+ "tools": [
+  "Read",
+  "Write(//Users/clawdboot/sonty/medewerkers/isa/**)",
+  "Edit(//Users/clawdboot/sonty/medewerkers/isa/**)",
+  "Grep",
+  "Glob",
+  "Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)",
+  "Bash(node /Users/clawdboot/sonty/scripts/medewerker.js lijst)",
+  "Bash(node scripts/brein-sessie.js:*)",
+  "Bash(node ./scripts/brein-sessie.js:*)",
+  "Bash(cd /Users/clawdboot/sonty && node scripts/brein-sessie.js:*)",
+  "Bash(node scripts/medewerker.js lijst)",
+  "Bash(node ./scripts/medewerker.js lijst)",
+  "Bash(cd /Users/clawdboot/sonty && node scripts/medewerker.js lijst)"
+ ],
+ "systeemTekens": 12585,
+ "start": "2026-08-31T05:53:41.212Z",
+ "duurMin": 2.3,
+ "kostenUsd": 0.3931166,
+ "usage": {
+  "input_tokens": 38,
+  "cache_creation_input_tokens": 34189,
+  "cache_read_input_tokens": 738913,
+  "output_tokens": 10750,
+  "output_tokens_details": {
+   "thinking_tokens": 3901
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 34189,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 1083,
+    "cache_read_input_tokens": 50130,
+    "cache_creation_input_tokens": 1044,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1044
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard"
+ },
+ "sessionId": "bb809cb2-bee0-4320-ba57-483acf995c8f",
+ "fout": null,
+ "exit": 0,
+ "rapportPad": "/Users/clawdboot/sonty/medewerkers/isa/dagrapport/2026-08-31.md",
+ "stderr": "",
+ "output": "Rapport opgeleverd. Hier de kopie:\n\n# Dagrapport Isa — 2026-08-31 (zondag)\n\n## GEDAAN\n- Dagrapporten Sunny en Yara gelezen, gecheckt tegen snapshot (wachtrijen/alarmen kloppen).\n- Alarmen snapshot (9 stuks) beoordeeld: allemaal Techniek/infra (job-exitcodes), geen directe klantimpact vandaag.\n- Opvallend gevonden: Hans de Lamboij staat al sinds 18-8 op \"geen antwoord\" (keten-zelfcontrole-log, planningsvraag 27-8 14:15 nooit beantwoord) én staat vandaag (31-8) nog steeds op Sunny's stille-lijst. Mogelijk 2+ weken onopgelost.\n- Zelf besloten en gedelegeerd (1/3 vandaag): opdracht aan Sunny om Hans de Lamboij vandaag prioritair en in 1 contact op te lossen (First Contact Resolution).\n- Geen andere echte klantbeslissingen vandaag; V102 (reviews-API) blijft open, geen update.\n\n## CIJFERS\n- Sunny: 64 klanten in wachtrij, 0 openstaand aanbod, langst stil 19u (rowiepost@gmail.com). Stille-lijst: 5 klanten (norm >2u onbeantwoord). Weekendcijfers (35 geholpen/85% AI) zijn van 29-8, geen nieuwe meting vandaag (zondag, tickets-rapport draait op werkdagen).\n- Yara: 0 actieve klacht/reparatie/garantietickets (bron: feedback.log e.a.). 3 van 22 escalaties >4u zonder menselijke reactie, binnen normale \"Mens nodig\"-flow.\n- Reviews-sync: nog steeds geen API-key, 0 gemeten (bron: Yara-log), dus geen CSAT/reviewcijfer beschikbaar.\n\n## VRAGEN AAN DAIMY\n1. Reviews-API (V102): jij zei ja, bouwen en live op website. Wie bouwt 'm en wanneer? Voorstel: dit bij Techniek beleggen deze week, anders blijft Yara's nazorg/reviews-proces zonder cijfers.\n2. keten-zelfcontrole-job staat al sinds min. 18-8 uit (\"niet geladen in launchd\"), waardoor stille-planningsklanten zoals Hans de Lamboij niet meer automatisch worden gesignaleerd. Voorstel: Techniek vragen 'm weer aan te zetten; kost niets, voorkomt dat we klanten wekenlang missen.\n\n## MORGEN\n- Checken of Sunny Hans de Lamboij vandaag heeft opgelost (terugkoppeling verwacht).\n- Maandag: Sunny's volledige tickets-rapport weer beschikbaar, dan FCR/response-tijd met noemer erbij zetten.\n- Yara's voorstel nazorg-contactmoment na montage verder oppakken."
+}

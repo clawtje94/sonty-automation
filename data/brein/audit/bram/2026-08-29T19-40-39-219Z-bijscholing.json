@@ -1,0 +1,63 @@
+{
+ "medewerker": "bram",
+ "naam": "Bram",
+ "soort": "bijscholing",
+ "opdrachtId": null,
+ "opdracht": "BIJSCHOLING (wekelijks). Jouw functie: Directiesecretaris (briefing en vragenlijst voor Daimy). Onderzoek online hoe de allerbesten in dit vak werken en schrijf/ververs jouw vakkennis-bestand /Users/clawdboot/sonty/medewerkers/bram/vakkennis.md (max 90 regels).\nGebruik WebSearch en WebFetch (max 12 zoekopdrachten/pagina's, token-zuinig): recente vakartikelen en blogs, samenvattingen van de beste boeken over dit vak, vacatureteksten van topbedrijven (wat vragen zij van deze functie), transcripten of beschrijvingen van YouTube-video's van vakmensen (je kunt video's niet kijken, wel de tekst erbij lezen), brancheorganisaties en cursussen.\nVaste vorm van /Users/clawdboot/sonty/medewerkers/bram/vakkennis.md:\n# Vakkennis <naam> — <functie> (bijgewerkt <datum>)\n## Zo werken de besten (10-15 concrete regels, elk toepasbaar in jouw dagelijkse dienst bij Sonty)\n## Dagelijkse routine van een topper (kort, in volgorde)\n## Cijfers waarop de besten sturen (KPI's en normen, met bron)\n## Valkuilen die de besten vermijden\n## Wat ik hiervan vanaf morgen anders doe (3 punten, concreet)\n## Bronnen (minimaal 4, met URL en één zin waarom deze bron)\nRegels: NOOIT namen van andere zonweringbedrijven (schrijf \"een groot zonweringbedrijf\"); geen verzonnen bronnen; vervang verouderde punten uit je vorige versie in plaats van eindeloos aan te vullen; Nederlands. Lever daarna je rapport in de vaste vier kopjes: onder GEDAAN welke bronnen je las en wat je veranderde in je vakkennis, onder MORGEN wat je vanaf morgen anders doet.",
+ "model": "sonnet",
+ "tools": [
+  "Read",
+  "Write(//Users/clawdboot/sonty/medewerkers/bram/**)",
+  "Edit(//Users/clawdboot/sonty/medewerkers/bram/**)",
+  "Grep",
+  "Glob",
+  "Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)",
+  "Bash(node /Users/clawdboot/sonty/scripts/medewerker.js lijst)",
+  "Bash(node /Users/clawdboot/sonty/scripts/brein-telegram.js:*)",
+  "WebSearch",
+  "WebFetch"
+ ],
+ "systeemTekens": 8695,
+ "start": "2026-08-29T19:40:39.219Z",
+ "duurMin": 1.7,
+ "kostenUsd": 0.3436164,
+ "usage": {
+  "input_tokens": 14,
+  "cache_creation_input_tokens": 26590,
+  "cache_read_input_tokens": 229702,
+  "output_tokens": 4841,
+  "output_tokens_details": {
+   "thinking_tokens": 817
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 26590,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 405,
+    "cache_read_input_tokens": 40598,
+    "cache_creation_input_tokens": 2977,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 2977
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard"
+ },
+ "sessionId": "b2d5bf73-e9d3-4c50-ad8b-8e16b5cbe15e",
+ "fout": null,
+ "exit": 0,
+ "rapportPad": "/Users/clawdboot/sonty/medewerkers/bram/dagrapport/2026-08-29-bijscholing.md",
+ "stderr": "",
+ "output": "## GEDAAN\nOnderzoek gedaan (6 webzoekopdrachten + 1 pagina-fetch, HBR-artikel gaf weinig detail): briefing-structuur en timing voor CEO's, decision log-opbouw, KPI's voor chief-of-staff-achtige rollen, vacature-eisen, en veelgemaakte fouten (bottleneck worden, rol verwarren met assistent). Nieuw bestand vakkennis.md geschreven (was nog niet aanwezig) met 13 concrete werkregels, dagroutine, KPI's met bron, valkuilen en 3 morgen-acties.\n\n## CIJFERS\nGeen (bijscholingsdienst, geen dagcijfers).\n\n## VRAGEN AAN DAIMY\nGeen.\n\n## MORGEN\n1. Bij elke \"verstuurd\"-melding zelf bewijs checken voor ik het rapporteer.\n2. Overlappende vragen van hoofden meteen samenvoegen tot 1 V-nummer.\n3. Trechter strikt aanhouden: max 3 echte vragen onder VRAGEN AAN DAIMY, rest als wachtlijst."
+}

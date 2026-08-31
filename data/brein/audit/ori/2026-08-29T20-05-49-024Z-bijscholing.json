@@ -1,0 +1,62 @@
+{
+ "medewerker": "ori",
+ "naam": "Ori",
+ "soort": "bijscholing",
+ "opdrachtId": null,
+ "opdracht": "BIJSCHOLING (wekelijks). Jouw functie: Onboarding en raamwerk (nieuwe bedrijven, profielen, kwaliteit van het team). Onderzoek online hoe de allerbesten in dit vak werken en schrijf/ververs jouw vakkennis-bestand /Users/clawdboot/sonty/medewerkers/ori/vakkennis.md (max 90 regels).\nGebruik WebSearch en WebFetch (max 12 zoekopdrachten/pagina's, token-zuinig): recente vakartikelen en blogs, samenvattingen van de beste boeken over dit vak, vacatureteksten van topbedrijven (wat vragen zij van deze functie), transcripten of beschrijvingen van YouTube-video's van vakmensen (je kunt video's niet kijken, wel de tekst erbij lezen), brancheorganisaties en cursussen.\nVaste vorm van /Users/clawdboot/sonty/medewerkers/ori/vakkennis.md:\n# Vakkennis <naam> — <functie> (bijgewerkt <datum>)\n## Zo werken de besten (10-15 concrete regels, elk toepasbaar in jouw dagelijkse dienst bij Sonty)\n## Dagelijkse routine van een topper (kort, in volgorde)\n## Cijfers waarop de besten sturen (KPI's en normen, met bron)\n## Valkuilen die de besten vermijden\n## Wat ik hiervan vanaf morgen anders doe (3 punten, concreet)\n## Bronnen (minimaal 4, met URL en één zin waarom deze bron)\nRegels: NOOIT namen van andere zonweringbedrijven (schrijf \"een groot zonweringbedrijf\"); geen verzonnen bronnen; vervang verouderde punten uit je vorige versie in plaats van eindeloos aan te vullen; Nederlands. Lever daarna je rapport in de vaste vier kopjes: onder GEDAAN welke bronnen je las en wat je veranderde in je vakkennis, onder MORGEN wat je vanaf morgen anders doet.",
+ "model": "sonnet",
+ "tools": [
+  "Read",
+  "Write(//Users/clawdboot/sonty/medewerkers/ori/**)",
+  "Edit(//Users/clawdboot/sonty/medewerkers/ori/**)",
+  "Grep",
+  "Glob",
+  "Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)",
+  "Bash(node /Users/clawdboot/sonty/scripts/medewerker.js lijst)",
+  "WebSearch",
+  "WebFetch"
+ ],
+ "systeemTekens": 8912,
+ "start": "2026-08-29T20:05:49.024Z",
+ "duurMin": 2.1,
+ "kostenUsd": 0.49788580000000004,
+ "usage": {
+  "input_tokens": 20,
+  "cache_creation_input_tokens": 33649,
+  "cache_read_input_tokens": 398324,
+  "output_tokens": 7617,
+  "output_tokens_details": {
+   "thinking_tokens": 1320
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 33649,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 761,
+    "cache_read_input_tokens": 49604,
+    "cache_creation_input_tokens": 1030,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1030
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard"
+ },
+ "sessionId": "5996c226-9e79-48ad-a39d-06a52ed56225",
+ "fout": null,
+ "exit": 0,
+ "rapportPad": "/Users/clawdboot/sonty/medewerkers/ori/dagrapport/2026-08-29-bijscholing.md",
+ "stderr": "",
+ "output": "## GEDAAN\n- Bijscholing gedaan: 10 online bronnen gelezen (2 WebFetch, 8 WebSearch) over onboarding-vak, agent-/promptontwerp, SOP-schrijven en coaching. Bronnen: Anthropic \"building effective agents\", OnRamp onboarding-gids 2025, HubSpot/Onramp/Dock over onboarding-KPI's, Scribe/PowerDMS/Mintlify over SOP's, Radical Candor (Kim Scott), Twine/arXiv over LLM-eval-rubrics, franchise-playbooks over standaardisatie bij een tweede locatie.\n- Nieuw bestand `vakkennis.md` geschreven (bestond nog niet), met alle 6 vaste kopjes, 79 regels.\n- Kern die ik meeneem: \"minimum path to value\" (eerst de ene noodzakelijke output bepalen bij intake), rubric-per-dimensie i.p.v. totaalindruk, en Radical Candor-stijl feedback (concreet gedrag + concreet vervolgvoorstel).\n\n## CIJFERS\n- Bronnen gelezen: 10/12 toegestane zoekopdrachten gebruikt (2 web-fetch, 8 web-search).\n- vakkennis.md: 79 regels (max 90).\n- geheugen.md: 43 regels (max ~60) na bijwerken.\n\n## VRAGEN AAN DAIMY\nGeen. Bijscholing is uitvoerend werk, geen directeursbeslissing.\n\n## MORGEN\n- Dagelijkse audit doen met vaste mini-rubric per rapport (kopjes/cijfers+bron/echte vraag/lengte, elk ja-nee) i.p.v. totaalindruk.\n- Intake-vragenlijst voor een tweede bedrijf aanvullen met \"minimum path to value\"-vraag: welke ene dagelijkse output moet er per se zijn, voordat de rest wordt uitgebreid.\n- Bij eerstvolgende feedback/<slug>.md-bestanden het Radical Candor-format toepassen: concreet gedrag benoemen plus één concreet vervolgvoorstel."
+}

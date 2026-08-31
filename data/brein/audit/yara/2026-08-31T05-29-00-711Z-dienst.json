@@ -1,0 +1,62 @@
+{
+ "medewerker": "yara",
+ "naam": "Yara",
+ "soort": "dienst",
+ "opdrachtId": null,
+ "opdracht": "Doe je dagelijkse dienst zoals in je profiel beschreven en lever het rapport op.",
+ "model": "haiku",
+ "tools": [
+  "Read",
+  "Write(//Users/clawdboot/sonty/medewerkers/yara/**)",
+  "Edit(//Users/clawdboot/sonty/medewerkers/yara/**)",
+  "Grep",
+  "Glob",
+  "Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)",
+  "Bash(node scripts/brein-sessie.js:*)",
+  "Bash(node ./scripts/brein-sessie.js:*)",
+  "Bash(cd /Users/clawdboot/sonty && node scripts/brein-sessie.js:*)"
+ ],
+ "systeemTekens": 12861,
+ "start": "2026-08-31T05:29:00.711Z",
+ "duurMin": 1.5,
+ "kostenUsd": 0.19408999999999998,
+ "usage": {
+  "input_tokens": 98,
+  "cache_creation_input_tokens": 51318,
+  "cache_read_input_tokens": 591240,
+  "output_tokens": 6246,
+  "output_tokens_details": {
+   "thinking_tokens": 2791
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 51318,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 8,
+    "output_tokens": 467,
+    "cache_read_input_tokens": 62166,
+    "cache_creation_input_tokens": 1699,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1699
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard"
+ },
+ "sessionId": "b155f44e-be3f-4bd6-a464-6a20a4dec459",
+ "fout": null,
+ "exit": 0,
+ "rapportPad": "/Users/clawdboot/sonty/medewerkers/yara/dagrapport/2026-08-31.md",
+ "stderr": "",
+ "output": "Klaar. Dagdienst Yara (07:25) afgerond. Rapport bijgesloten:\n\n---\n\n## GEDAAN\n- Brein-snapshot gelezen (05:29u), logs gescand (feedback.log, reviews-sync.log, sonny-watch.log, escalatie-watch.log, trengo-bundel.log, opvolging.log).\n- Geen actieve klacht-, storing-, reparatie- of garantie-meldingen gevonden.\n- Vorige 3 tickets (29-8) allemaal geverifieerd als afgerond: 965923606 (offerte), 971967749 (Service Nodi), 972415418 (normale inmeting).\n\n## CIJFERS\n- Open meldingen: **0** actieve klacht/reparatie/garantie-tickets.\n- Oudste melding: geen.\n- Nieuw gisteren: geen (feedback-log toont geen nieuwe klachtmeldingen).\n- Herhaalklachten: geen (datastructuur beschikbaar maar geen actieve patronen).\n- Reviews nieuw: onbekend (reviews-sync werkt niet: geen API-key).\n\n## VRAGEN AAN DAIMY\nGeen vragen — alles op orde.\n\n## MORGEN\n- Reviews-sync: API-key checken/toevoegen om reviews live te monitoren.\n- Escalaties: van de 22 actieve escalaties hebben 3 geen menselijke reactie > 4u; deze liggen bij \"Mens nodig\" en volgen normale flow.\n- Routine: dagelijks snapshot scannen op nieuwe meldingen met \"klacht/storing/garantie\" tags."
+}

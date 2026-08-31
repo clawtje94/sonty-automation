@@ -1,0 +1,61 @@
+{
+ "medewerker": "sam",
+ "naam": "Sam",
+ "soort": "bijscholing",
+ "opdrachtId": null,
+ "opdracht": "BIJSCHOLING (wekelijks). Jouw functie: Facturatie en debiteuren. Onderzoek online hoe de allerbesten in dit vak werken en schrijf/ververs jouw vakkennis-bestand /Users/clawdboot/sonty/medewerkers/sam/vakkennis.md (max 90 regels).\nGebruik WebSearch en WebFetch (max 12 zoekopdrachten/pagina's, token-zuinig): recente vakartikelen en blogs, samenvattingen van de beste boeken over dit vak, vacatureteksten van topbedrijven (wat vragen zij van deze functie), transcripten of beschrijvingen van YouTube-video's van vakmensen (je kunt video's niet kijken, wel de tekst erbij lezen), brancheorganisaties en cursussen.\nVaste vorm van /Users/clawdboot/sonty/medewerkers/sam/vakkennis.md:\n# Vakkennis <naam> — <functie> (bijgewerkt <datum>)\n## Zo werken de besten (10-15 concrete regels, elk toepasbaar in jouw dagelijkse dienst bij Sonty)\n## Dagelijkse routine van een topper (kort, in volgorde)\n## Cijfers waarop de besten sturen (KPI's en normen, met bron)\n## Valkuilen die de besten vermijden\n## Wat ik hiervan vanaf morgen anders doe (3 punten, concreet)\n## Bronnen (minimaal 4, met URL en één zin waarom deze bron)\nRegels: NOOIT namen van andere zonweringbedrijven (schrijf \"een groot zonweringbedrijf\"); geen verzonnen bronnen; vervang verouderde punten uit je vorige versie in plaats van eindeloos aan te vullen; Nederlands. Lever daarna je rapport in de vaste vier kopjes: onder GEDAAN welke bronnen je las en wat je veranderde in je vakkennis, onder MORGEN wat je vanaf morgen anders doet.",
+ "model": "sonnet",
+ "tools": [
+  "Read",
+  "Write(//Users/clawdboot/sonty/medewerkers/sam/**)",
+  "Edit(//Users/clawdboot/sonty/medewerkers/sam/**)",
+  "Grep",
+  "Glob",
+  "Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)",
+  "WebSearch",
+  "WebFetch"
+ ],
+ "systeemTekens": 6144,
+ "start": "2026-08-29T19:38:57.545Z",
+ "duurMin": 1.4,
+ "kostenUsd": 0.2839898,
+ "usage": {
+  "input_tokens": 14,
+  "cache_creation_input_tokens": 23213,
+  "cache_read_input_tokens": 224219,
+  "output_tokens": 4944,
+  "output_tokens_details": {
+   "thinking_tokens": 273
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 23213,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 455,
+    "cache_read_input_tokens": 39516,
+    "cache_creation_input_tokens": 682,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 682
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard"
+ },
+ "sessionId": "18dc3cd1-59c2-401d-8a2d-959396985d44",
+ "fout": null,
+ "exit": 0,
+ "rapportPad": "/Users/clawdboot/sonty/medewerkers/sam/dagrapport/2026-08-29-bijscholing.md",
+ "stderr": "",
+ "output": "## GEDAAN\nWekelijkse bijscholing gedaan. 4 zoekopdrachten (WebSearch): AR best practices 2026, debiteuren-KPI's/DSO, credit controller vacature-eisen, deelfacturatie/aanbetaling in bouw/installatie. Vakkennis.md was nog niet aanwezig, dus nieuw opgebouwd (geen oude punten te vervangen) met alle 6 verplichte kopjes.\n\n## CIJFERS\nGeen facturatiecijfers vandaag verwerkt; dit was een bijscholingsdienst, geen reguliere controledienst.\n\n## VRAGEN AAN DAIMY\nGeen.\n\n## MORGEN\n1. Reguliere dienst: 4 controlepunten checken (getekend zonder aanbetaling, aanbetaling >7 dagen open, factuur >14 dagen open, gemonteerd zonder factuur) met noemer per stadium.\n2. \"Getekend zonder aanbetalingsfactuur\" apart als procesfout-signaal rapporteren, niet als debiteurenachterstand — o.a. Gripp 6561, 6560, 6556, 6489 opnieuw checken.\n3. Bij eventuele vraag over coulance/regeling meteen een concreet termijnvoorstel meesturen."
+}

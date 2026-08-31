@@ -1,0 +1,61 @@
+{
+ "medewerker": "yara",
+ "naam": "Yara",
+ "soort": "bijscholing",
+ "opdrachtId": null,
+ "opdracht": "BIJSCHOLING (wekelijks). Jouw functie: Service, nazorg en garantie. Onderzoek online hoe de allerbesten in dit vak werken en schrijf/ververs jouw vakkennis-bestand /Users/clawdboot/sonty/medewerkers/yara/vakkennis.md (max 90 regels).\nGebruik WebSearch en WebFetch (max 12 zoekopdrachten/pagina's, token-zuinig): recente vakartikelen en blogs, samenvattingen van de beste boeken over dit vak, vacatureteksten van topbedrijven (wat vragen zij van deze functie), transcripten of beschrijvingen van YouTube-video's van vakmensen (je kunt video's niet kijken, wel de tekst erbij lezen), brancheorganisaties en cursussen.\nVaste vorm van /Users/clawdboot/sonty/medewerkers/yara/vakkennis.md:\n# Vakkennis <naam> — <functie> (bijgewerkt <datum>)\n## Zo werken de besten (10-15 concrete regels, elk toepasbaar in jouw dagelijkse dienst bij Sonty)\n## Dagelijkse routine van een topper (kort, in volgorde)\n## Cijfers waarop de besten sturen (KPI's en normen, met bron)\n## Valkuilen die de besten vermijden\n## Wat ik hiervan vanaf morgen anders doe (3 punten, concreet)\n## Bronnen (minimaal 4, met URL en één zin waarom deze bron)\nRegels: NOOIT namen van andere zonweringbedrijven (schrijf \"een groot zonweringbedrijf\"); geen verzonnen bronnen; vervang verouderde punten uit je vorige versie in plaats van eindeloos aan te vullen; Nederlands. Lever daarna je rapport in de vaste vier kopjes: onder GEDAAN welke bronnen je las en wat je veranderde in je vakkennis, onder MORGEN wat je vanaf morgen anders doet.",
+ "model": "sonnet",
+ "tools": [
+  "Read",
+  "Write(//Users/clawdboot/sonty/medewerkers/yara/**)",
+  "Edit(//Users/clawdboot/sonty/medewerkers/yara/**)",
+  "Grep",
+  "Glob",
+  "Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)",
+  "WebSearch",
+  "WebFetch"
+ ],
+ "systeemTekens": 6104,
+ "start": "2026-08-29T20:02:41.535Z",
+ "duurMin": 1.6,
+ "kostenUsd": 0.3403578,
+ "usage": {
+  "input_tokens": 12,
+  "cache_creation_input_tokens": 26055,
+  "cache_read_input_tokens": 191214,
+  "output_tokens": 5269,
+  "output_tokens_details": {
+   "thinking_tokens": 377
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 26055,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "not_available",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 397,
+    "cache_read_input_tokens": 41733,
+    "cache_creation_input_tokens": 1307,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1307
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard"
+ },
+ "sessionId": "414f10be-4cd9-45a4-91b6-cbb3a33ede69",
+ "fout": null,
+ "exit": 0,
+ "rapportPad": "/Users/clawdboot/sonty/medewerkers/yara/dagrapport/2026-08-29-bijscholing.md",
+ "stderr": "",
+ "output": "## GEDAAN\nVakkennis.md volledig ververst met 6 webresearch queries: FCR-benchmarks, field service best practices, klachtenafhandeling/KPI's, garantie/aftersales functie-eisen, reviewbeheer, warranty root-cause tracking. Oude versie vervangen door nieuwe met 14 regels \"zo werken de besten\", routine, KPI's met bron, valkuilen en 3 concrete morgen-punten.\n\n## CIJFERS\nBronnen gebruikt: 6 zoekopdrachten, 5 bronnen citeerbaar in bestand. Geen operationele cijfers vandaag (bijscholing, geen dienst-dagrapport).\n\n## VRAGEN AAN DAIMY\nGeen. Bijscholing is onderzoek, geen operationele beslissing.\n\n## MORGEN\nVanaf morgen: oorzaakcode per open melding labelen (montage/product/bediening/communicatie), meldingen ouder dan 5 werkdagen \"wacht op mens\" apart als vraag aan Daimy markeren, reviews zonder reactie binnen 24-48u apart tonen."
+}

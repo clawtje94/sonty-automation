@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-31, Trengo-429 structureel opgelost)
 
+## 31-08 (avond): TOEWIJZING NANNY WERD STIL TERUGGEZET NAAR JORREN — GEFIXT
+- Daimy: "ik wijs tickets toe aan nanny waarom wijs jij die dan weer terug aan jorren". Oorzaak: de
+  collega-toewijzingsregel (daemon.js + email-daemon.js) gaf elk gesprek aan de LAATSTE zender zodra
+  de toegewezen persoon iemand anders was — 517 herverdelingen in de logs, vrijwel allemaal naar Jorren (745487).
+- Fix: scripts/lib/collega-toewijzing.js — bot geeft een gesprek alleen aan de laatste collega als het
+  nu van de bot (747786) of van niemand is; een mens die toegewezen staat is heilig. In beide daemons,
+  lab collega-toewijzing 16 sc. 0x FOUT-STIL, daemons herstart, gepusht. Reeds verschoven tickets NIET
+  automatisch teruggezet (welke bij Nanny horen weet alleen Daimy) — V1 aan Daimy gesteld.
+
 ## 31-08 (avond): TRENGO-429 STRUCTUREEL OPGELOST (Daimy: "zou je het niet oplossen dan?")
 - Oorzaak gemeten: Sunny-daemon = 96% van alle 429's (teller data/trengo-429.json). Bursts: 5 parallelle
   berichten-lezers (150ms) + notitie-sweep die elke 5 min ~150 gesprekken ZONDER rem las.

@@ -3517,3 +3517,14 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
   Barendrecht Van 't Hoffstraat 37 (180 m² showroom, €1.975) bleek net verhuurd — dat profiel is daar de sweet spot.
 - Let op capaciteit: teamplafond ±35 orders/week (capaciteitsmonitor) — 3 winkels verhogen instroom; winkel-direct
   (offertenummer → inmeetafspraak ±10 s) staat er al voor. Nog open: John van Krimpen wacht op V1-akkoord (PDF).
+- 31-08 VERVOLG (Daimy: "echt uitgezocht? max 20 km zoals Rijswijk"): dekking doorgerekend op 19.306 leads met
+  postcode (2.403 PC4's, PDOK-geocode, cache scratchpad/pc4-geo.json, script sweetspots.js). Rijswijk dekt maar
+  33% (6.379) binnen 20 km. Greedy max-coverage sweet spots: 1) Hoofddorp +3.227 (Amsterdam/Haarlem/Amstelveen/
+  Alphen), 2) Ridderkerk +2.525 (Dordrecht/Barendrecht/Spijkenisse), 3) Utrecht-west +1.121 na aftrek overlap
+  (Utrecht/Woerden/Nieuwegein). Ter vergelijking los: Cruquius +2.876, Leiden +1.744, Zoetermeer +1.540 (valt
+  grotendeels IN de Rijswijk-cirkel → eerdere Zoetermeer-advies vervalt). TE VER-check register: noord/Utrecht/
+  zuid vrijwel 0 TE VER → bediend gebied. Combinatie H+R+U dekt +6.873 van 12.814 ongedekte leads.
+- Panden (echt aanbod, 2e zoekronde): Heemstede Binnenweg 143 91 m² A1 (prijs op aanvraag), Drenthelaan 6 111 m²
+  ±€1.619; Hoofddorp centrum leeg aanbod dun (Doeverenplein net verhuurd), Cruquius alleen groot; Nieuwegein
+  Hoogzandveld 38 88 m² (op aanvraag), Stadsplein 20A 191 m² ±€3.820; Maarssen Kaatsbaan 2 131 m² (op aanvraag).
+  Zuidflank uit ronde 1: Ridderkerk Sint Jorisplein 20 127 m² ±€2.667, Barendrecht Middenbaan 42 68 m² €1.200.

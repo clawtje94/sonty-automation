@@ -1,4 +1,15 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-31, Trengo-429 structureel opgelost)
+
+## 31-08 (avond): TRENGO-429 STRUCTUREEL OPGELOST (Daimy: "zou je het niet oplossen dan?")
+- Oorzaak gemeten: Sunny-daemon = 96% van alle 429's (teller data/trengo-429.json). Bursts: 5 parallelle
+  berichten-lezers (150ms) + notitie-sweep die elke 5 min ~150 gesprekken ZONDER rem las.
+- LIVE GEMETEN: Trengo-limiet is 120 calls/min per token (x-ratelimit-limit header; Sonny- en hoofdtoken apart).
+- Fix in scripts/ai-ks/daemon.js: (1) globale trengoRem() 750ms tussen álle calls (max 80/min, rest voor
+  opvolging/email-live op hetzelfde Sonny-token); (2) notitie-sweep slaat tickets met onveranderde stand
+  (updated_at|messages_count) 15 min over — worst case ziet hij een notitie op zo'n diep ticket na 15 min i.p.v. 5.
+- Minder Telegram (Daimy: "ik hoef ook geen 100 berichten per dag"): 429-alarm in lib/trengo-fetch.js nu pas
+  bij ≥60/kwartier en max 1x per 6 uur. Lab trengo-429 + sunny-berichtcache: 36 sc., 0x FOUT-STIL. Gepusht.
+- Meting na fix loopt; eerste ronde na herstart is altijd druk (koude cache), daarna moet het stil zijn.
 
 ## 31-08 (avond): DUBBELE BOEKING ANGELO DE JONG → DUBBELBOEKING-POORT
 - Wat er gebeurde: klant koos eerst di 29-09 11:50; Sunny zette die vast (18:16); 2 min eerder had klant al "22 lukt wel" gestuurd en de

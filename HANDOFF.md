@@ -3488,3 +3488,21 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
   Ridderkerk (263/345 m², 6,5 m, Cornelisland, € 2.700/€ 3.000). Groter: Brugge 14-16 (600 m², Vaanpark), Handelsweg 87 (800 m²).
 - Funda in business blokkeert geautomatiseerd lezen (ook headless Chrome); status gecheckt via iLocate/Van Vliet/makelaars.
 - Open: Daimy belt makelaars; hoogte Pesetastraat 84 onbekend.
+
+## 31-08: ADVIES 3 EXTRA WINKELS (vraag Daimy) — locaties uit eigen leaddata + echt huuraanbod
+- Data: RP-bord 19.767 leads met plaats. Top werkgebied: Den Haag 1071 (gedekt door Rijswijk), Rotterdam 1021,
+  Zoetermeer 524, Dordrecht 380, Spijkenisse 287, Delft 246, Alphen 243, Barendrecht 225, Capelle 206, Leiden 192,
+  Waddinxveen 189, Gouda 185. Zuidflank-cluster (Dordrecht+Spijkenisse+Barendrecht+Ridderkerk+Papendrecht+
+  Hellevoetsluis) ≈ 1.350 leads ver van Rijswijk. TE VER-analyse register (1.072 van 20.339 rijen): top = Almere 45,
+  Tilburg 33, Amersfoort 19 → dat is látere expansie, geen kleine-winkelkeuze. Showroom-bezoek converteert ~10x.
+- ADVIES: (1) Zoetermeer Dorpsstraat, (2) Rotterdam-Noord/Hillegersberg, (3) Ridderkerk/Barendrecht (zuidflank);
+  Leiden als alternatief voor 3 als Daimy liever noord wil. m²: winkelstraat 80-140 m² (pui ≥5 m, diepte ≥12 m om
+  een knikarmscherm uitgeklapt te tonen), rand bedrijventerrein/woonboulevard 150-250 m² met parkeren.
+- ECHT AANBOD (subagent, alleen gezien aanbod; beschikbaarheid checken): Hillegersberg Bergse Dorpsstraat 80-A
+  ±93 m² €1.800; Zoetermeer Dorpsstraat 127c 140 m² ±€2.458 (ook 112-E 81 m² €1.850, 112-G 85 m² ±€1.543);
+  Ridderkerk Sint Jorisplein 20 127 m² ±€2.667 (pui ±10 m); Barendrecht Middenbaan 42 68 m² €1.200; Capelle
+  De Terp 101 m² €2.550 (geen straatpui); Leiden Breestraat 52 150 m² €2.500 en Haarlemmerstraat 192 120 m²
+  €2.250 (bron = verzamelpagina bedrijfspand.com, eerst verifiëren); Alphen: niets bruikbaars actueel.
+  Barendrecht Van 't Hoffstraat 37 (180 m² showroom, €1.975) bleek net verhuurd — dat profiel is daar de sweet spot.
+- Let op capaciteit: teamplafond ±35 orders/week (capaciteitsmonitor) — 3 winkels verhogen instroom; winkel-direct
+  (offertenummer → inmeetafspraak ±10 s) staat er al voor. Nog open: John van Krimpen wacht op V1-akkoord (PDF).

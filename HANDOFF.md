@@ -3537,3 +3537,12 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
   ±€1.619; Hoofddorp centrum leeg aanbod dun (Doeverenplein net verhuurd), Cruquius alleen groot; Nieuwegein
   Hoogzandveld 38 88 m² (op aanvraag), Stadsplein 20A 191 m² ±€3.820; Maarssen Kaatsbaan 2 131 m² (op aanvraag).
   Zuidflank uit ronde 1: Ridderkerk Sint Jorisplein 20 127 m² ±€2.667, Barendrecht Middenbaan 42 68 m² €1.200.
+- 31-08 VERVOLG 2 (Daimy: "mag ook goed aan te rijden, hoeft geen winkel; goed over nadenken"): profiel verlegd
+  naar zichtlocatie/showroom 150-400 m². Afstanden magazijn Berkel: Ridderkerk/Barendrecht 18-19 km, Hoofddorp/
+  Cruquius ~35, Nieuwegein ~42. VOORSTELLEN (echt aanbod, ronde 3): (1) Barendrecht Van 't Hoffstraat 25,
+  Reijerwaard naast woonboulevard, 303 m² €2.400 (fundainbusiness-detail; nr 37 in dezelfde straat was net in
+  dagen verhuurd → snel schakelen); (2) Hoofddorp Diamantlaan 63, Graan voor Visch-Zuid aan N201/A4, 190 m²
+  €2.100 (bron = ilocate-overzichtspagina, eerst detail verifiëren; alternatief klein/A1: Binnenweg 143
+  Heemstede); (3) De Meern Veldzigt 22, Oudenrijn aan A12/A2, 293 m² showroomruimte ±€2.125 (huurbieding-detail).
+  Extra opties: Tinstraat 8a Ridderkerk 219 m² €2.150, Gessel 4a De Meern 116 m² €1.750 zichtlocatie,
+  De Liesbosch 14B Nieuwegein 154 m² €2.200. Totaal 3 voorstellen ±€6.6k/mnd, ±790 m², dekt +6.873 leads.

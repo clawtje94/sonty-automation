@@ -42,6 +42,7 @@ const ONDERDELEN = [
   require('./onderdelen/trengo-429.js'),
   require('./onderdelen/sunny-berichtcache.js'),
   require('./onderdelen/taal-poort.js'),
+  require('./onderdelen/telegram-route.js'),
 ];
 // UI-laag draait tegen de echte site in een echte browser: alleen met --ui (of een filter),
 // anders wordt elke logica-run traag van het browsen.

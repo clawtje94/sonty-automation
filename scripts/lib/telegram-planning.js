@@ -52,16 +52,22 @@ async function planningTelegram(tekst, opties = {}) {
   // POORTWACHTER (Daimy 11-08: "alleen de berichten waar ik om heb gevraagd").
   // Vragen, boekingen, rapporten en echte alarmen komen door; procesmeldingen gaan
   // naar logs/telegram-onderdrukt.log. Zie lib/telegram-filter.js voor de regels.
+  // 31-08: routeer() bepaalt de bestemming(en); de data-bot krijgt ALTIJD zijn meldingen
+  // (die verhongerde doordat alles door de hoofdchat-allowlist ging), en vragen/alarmen
+  // gaan daarbovenop als kopie naar de hoofdchat. Zie lib/telegram-filter.js routeer().
+  let route = { bestemmingen: [opties.boeking ? 'planning-groep' : 'data-bot'], log: false };
   try {
-    const { magDoor, legVast } = require('./telegram-filter.js');
-    const oordeel = magDoor(tekst, opties);
-    if (!oordeel.door) { legVast(tekst, oordeel.reden); return; }
+    const { routeer, legVast } = require('./telegram-filter.js');
+    route = routeer(tekst, opties);
+    if (route.log) legVast(tekst, route.reden || 'procesmelding');
   } catch { /* filter stuk mag verzending nooit blokkeren */ }
-  const { token, chatId } = opties.boeking ? config() : databotConfig();
-  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: chatId, text: String(tekst).slice(0, 3900) }),
-  }).catch(() => {});
+  for (const b of route.bestemmingen) {
+    const { token, chatId } = b === 'planning-groep' ? config() : b === 'hoofdchat' ? { token: HOOFD_TOKEN, chatId: HOOFD_CHAT } : databotConfig();
+    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chatId, text: String(tekst).slice(0, 3900) }),
+    }).catch(() => {});
+  }
 }
 
 module.exports = { planningTelegram, PLANNING_TG_TOKEN, PLANNING_TG_CHAT, config, databotConfig };

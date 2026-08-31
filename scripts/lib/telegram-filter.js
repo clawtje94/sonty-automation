@@ -24,7 +24,7 @@ const VRAAG = /(^|\n)\s*(VRAAG|V\d+[:\s])/m;
 const BOEKING = /GEBOEKT/;
 const RAPPORT = /AI-resultaten|Tekenrapport|onversie|apaciteit|Gesprek-lab|dagrapport|weekrapport|maandrapport|📊|✍️|🔬/;
 const LEERVRAAG_URGENT = /🎓|🚨|LEERVRAAG|URGENT/i;
-const ALARM = /actie nodig|handmatig|mens nodig|NIET geboekt|NIET verstuurd|MISLUKT|GESTOPT|gecrasht|onbereikbaar|niet op te halen|SCHIJN-BOEKING|zelfcontrole|dood gesprek|dubbel|wacht al \d+ uur|KLACHT|geen alternatief/i;
+const ALARM = /actie nodig|handmatig|mens nodig|NIET geboekt|NIET verstuurd|MISLUKT|GESTOPT|gecrasht|onbereikbaar|niet op te halen|wachten al langer|rate-limit|geannuleerd|❗|SCHIJN-BOEKING|zelfcontrole|dood gesprek|dubbel|wacht al \d+ uur|KLACHT|geen alternatief/i;
 
 /**
  * @param {string} tekst
@@ -59,4 +59,19 @@ function legVast(tekst, reden) {
   } catch { /* log mag nooit een verzending blokkeren */ }
 }
 
-module.exports = { magDoor, legVast };
+/**
+ * ROUTERING (31-08, na de vondst dat de data-bot verhongerde: ALLE planningTelegram-berichten
+ * gingen door de hoofdchat-allowlist en verdwenen in onderdrukt.log — o.a. "48 klanten wachten",
+ * annuleringsmeldingen en rate-limit-alarmen).
+ * Nieuwe regel, puur (lab scenario-lab/onderdelen/telegram-route.js):
+ *  - boeking:true → planning-groep (zoals altijd)
+ *  - al het andere → ALTIJD naar de data-bot (dat is zijn functie)
+ *  - en is het een vraag/alarm/urgent/rapport volgens de allowlist → OOK een kopie naar de hoofdchat
+ */
+function routeer(tekst, opties = {}) {
+  if (opties.boeking) return { bestemmingen: ['planning-groep'], log: false };
+  const oordeel = magDoor(tekst, opties);
+  return { bestemmingen: oordeel.door ? ['data-bot', 'hoofdchat'] : ['data-bot'], log: !oordeel.door, reden: oordeel.reden };
+}
+
+module.exports = { magDoor, routeer, legVast };

@@ -301,6 +301,15 @@ async function verwerk(ticketId) {
   const mutaties = (res.acties || []).filter(a => a.type !== 'escalatie');
 
   if (res.antwoord && !escal) {
+    // TAALPOORT (31-08, Judith Bauwi kreeg 2x Nederlands op Engelse mails): botst de taal van het
+    // antwoord met die van de klant, dan NIET sturen maar overdragen met uitleg.
+    const laatsteKlant = [...rijen].reverse().find((b) => b.van === 'klant');
+    const { taalMismatch } = require('../lib/taal-check.js');
+    if (laatsteKlant && taalMismatch(String(laatsteKlant.tekst ?? laatsteKlant.inhoud ?? ''), res.antwoord)) {
+      await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `${teamTags()} Taalpoort: het concept-antwoord was in een andere taal dan het klantbericht en is NIET verstuurd. Graag in de taal van de klant beantwoorden.` });
+      await zetLabel(ticketId, LABEL.MENS_NODIG);
+      return { ticketId, resultaat: 'taalpoort: antwoord tegengehouden (taal klopte niet met klant)' };
+    }
     // Antwoorden → in-thread sturen, aan Sunny toewijzen, label, sluiten
     const html = naarHtml(res.antwoord);
     const verstuurd = await tPost(`/tickets/${ticketId}/messages`, { message: html });

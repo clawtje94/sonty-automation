@@ -130,6 +130,15 @@ async function sendLiveReply(t, tekst) {
   // Verdedigingslaag 2: nooit versturen als het nummer niet op de whitelist staat.
   if (!isLiveTestContact(t)) throw new Error('sendLiveReply geblokkeerd: contact staat niet op de live-test whitelist');
   if (!tekst || !tekst.trim()) throw new Error('sendLiveReply geblokkeerd: leeg antwoord');
+  // TAALPOORT (31-08): antwoord in een andere taal dan het laatste klantbericht → niet sturen.
+  try {
+    const laatsteKlant = (t._msgs?.data || []).find((m) => !m.internal_note && (m.from_contact || m.contact_id || m.contact));
+    const { taalMismatch } = require('../lib/taal-check.js');
+    if (laatsteKlant && taalMismatch(String(laatsteKlant.body || laatsteKlant.message || ''), tekst)) {
+      await plaatsNotitie(t.id, 'Taalpoort: concept-antwoord was in een andere taal dan het klantbericht en is NIET verstuurd. Antwoord in de taal van de klant.');
+      throw new Error('sendLiveReply geblokkeerd: taal antwoord klopt niet met taal klant');
+    }
+  } catch (e) { if (/taalpoort|taal antwoord/i.test(String(e.message))) throw e; /* poortfout mag verzenden niet breken */ }
   return tPost(`/tickets/${t.id}/messages`, { message: tekst, type: 'OUTBOUND' });
 }
 

@@ -5530,5 +5530,18 @@
       }
     ],
     "processedAt": "2026-08-31T08:25:57.063Z"
+  },
+  "item:7e445d46-2a8e-46c1-a983-63b25a075662": {
+    "summary": "Angelo de Jong",
+    "grippCompanyId": 99847,
+    "grippOfferId": 9254,
+    "rpDocNumber": "202612357",
+    "allOffers": [
+      {
+        "grippOfferId": 9254,
+        "rpDocNumber": "202612357"
+      }
+    ],
+    "processedAt": "2026-08-31T16:22:39.749Z"
   }
 }

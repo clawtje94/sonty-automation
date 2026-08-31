@@ -42,7 +42,48 @@ const STAFF = {
 /**
  * @returns {Promise<{via: 'bookings'|'kale-afspraak', id: string}>}
  */
-async function boekInmeetAfspraak({ slot, naam, telefoon, adres, duurMin, email }) {
+/* ── DUBBELBOEKING-POORT (31-08, Angelo de Jong stond 2x in de agenda: Sunny boekte zijn eerdere keuze
+   en de verwerker 2 min later zijn nieuwe) ──
+   Puur besluit, getest in scenario-lab/onderdelen/dubbelboeking.js. */
+function dubbelBesluit(bestaande, nieuwAankomst) {
+  if (!bestaande) return 'boek';
+  if (Math.abs(Date.parse(bestaande.aankomst) - Date.parse(nieuwAankomst)) < 60000) return 'zelfde-slot'; // heal/idempotent: gewoon door
+  return 'verzet-eerst'; // zelfde klant, andere tijd: oude afspraak eerst volledig weg
+}
+function vindBestaandeBoeking({ naam, telefoon }) {
+  try {
+    const bo = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'inmeet-boekingen.json'), 'utf8'));
+    const t9 = String(telefoon || '').replace(/\D/g, '').slice(-9);
+    const ln = String(naam || '').trim().toLowerCase();
+    return Object.entries(bo).find(([, b]) => b.status === 'geboekt' && (
+      (t9.length === 9 && String(b.telefoon || '').replace(/\D/g, '').slice(-9) === t9) ||
+      (ln && String(b.naam || '').trim().toLowerCase() === ln)
+    )) || null;
+  } catch { return null; }
+}
+
+async function boekInmeetAfspraak({ slot, naam, telefoon, adres, duurMin, email, herbouw = false }) {
+  // Poort: heeft deze klant al een geboekte afspraak op een ANDERE tijd, dan eerst die
+  // volledig annuleren (Outlook + Planado + administratie) vóór we de nieuwe zetten.
+  // herbouw:true = de Outlook→Planado-heler die een bestaand event herbouwt: poort overslaan.
+  if (!herbouw) {
+    const hit = vindBestaandeBoeking({ naam, telefoon });
+    const besluit = dubbelBesluit(hit && hit[1], slot.aankomst);
+    if (besluit === 'verzet-eerst') {
+      const [oudId, oud] = hit;
+      console.log(`  dubbelboeking-poort: ${naam} had al ${new Date(oud.aankomst).toLocaleString('nl-NL')} bij ${oud.inmeter} — oude eerst annuleren`);
+      try {
+        const u = await require('./afspraak-annuleren.js').annuleer({ naam: oud.naam, aankomst: oud.aankomst, rpItemId: oudId });
+        try {
+          const bo = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'inmeet-boekingen.json'), 'utf8'));
+          if (bo[oudId]) { bo[oudId].status = 'verzet'; bo[oudId].verzetOp = new Date().toISOString(); fs.writeFileSync(path.join(__dirname, '..', '..', 'data', 'inmeet-boekingen.json'), JSON.stringify(bo, null, 2)); }
+        } catch { /* administratie is best effort */ }
+        try { await require('./telegram-planning.js').planningTelegram(`Verzet: oude inmeetafspraak van ${naam} (${new Date(oud.aankomst).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}, ${oud.inmeter}) automatisch geannuleerd (Outlook ${u.outlook}, Planado ${u.planado}); nieuwe boeking volgt direct.`); } catch { /* melding extra */ }
+      } catch (e) {
+        throw new Error(`dubbelboeking-poort: klant heeft al een afspraak en oude annuleren mislukte (${String(e.message).slice(0, 80)}) — NIET dubbel geboekt`);
+      }
+    }
+  }
   if (!email || !/@/.test(email)) {
     const gevonden = emailUitState(naam, telefoon);
     if (gevonden) { console.log(`  mailadres uit planner-state gehaald voor ${naam}`); email = gevonden; }
@@ -81,4 +122,4 @@ async function boekInmeetAfspraak({ slot, naam, telefoon, adres, duurMin, email 
   return { via: 'kale-afspraak', id };
 }
 
-module.exports = { boekInmeetAfspraak, STAFF, DIENST_INMETEN, BIZ };
+module.exports = { boekInmeetAfspraak, dubbelBesluit, vindBestaandeBoeking, STAFF, DIENST_INMETEN, BIZ };

@@ -636,6 +636,7 @@ async function main() {
       } catch { /* geen administratie */ }
       const { boekInmeetAfspraak } = require('./lib/inmeet-boeken.js');
       const ev = (await boekInmeetAfspraak({
+        herbouw: true, // heler bouwt een bestaand event opnieuw op: dubbelboeking-poort niet van toepassing
         slot: { aankomst: new Date(van), inmeter: naam },
         naam: klant, telefoon: telefoonJ, email: emailJ,
         adres: job.address?.formatted || '', duurMin: job.scheduled_duration?.minutes || 30,

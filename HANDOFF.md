@@ -1,5 +1,10 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
+## 31-08: REVIEWS-API STATUS (Isa's navraag op V102)
+- Alles gebouwd: site leest live reviews (KV + echte seed-fallback), tools/reviews-sync.js draait dagelijks (nl.sonty.reviews-sync) en pusht
+  wijzigingen automatisch. BLOKKADE: ~/sonty/secrets/google-places-key.txt ontbreekt → V23 bij Daimy (Places API (New) key aanmaken in
+  Google Cloud). Zodra het bestand er staat werkt alles vanzelf; log zegt tot die tijd "geen API-key — overslaan".
+
 ## 31-08 (namiddag): 3 KLANTCASES + STRUCTURELE BORGING (Daimy: "het mag niet steeds gebeuren")
 - Keus (+31622008261, WA 976691471): klant kan alleen maandag; agenda geverifieerd: 12-10 is écht de eerste vrije maandag (ook 19-10/26-10).
   Aanbod klopte dus; bal bij klant. ✅-notitie met feiten op het ticket; staat op Mens nodig, dus bij klantkeuze DIRECT vastleggen.

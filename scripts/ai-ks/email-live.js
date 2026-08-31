@@ -131,11 +131,17 @@ async function tGet(ep) {
   return null;
 }
 async function tPost(ep, body) {
-  for (let i = 0; i < 6; i++) {
+  // 31-08 (Rowie Post): een mislukte verzending verdween als kaal "false" — nu loggen we status+reden
+  // en wachten we langer bij 429 (15/30/60s, zoals overal), zodat een antwoord niet stilletjes sneuvelt.
+  let laatste = null;
+  for (let i = 0; i < 4; i++) {
     const r = await fetch('https://app.trengo.com/api/v2' + ep, { method: 'POST', headers: H, body: body ? JSON.stringify(body) : undefined });
-    if (r.status === 429) { await _sleep(2000 + i * 1500); continue; }
-    return r.ok;
+    if (r.ok) return true;
+    laatste = r;
+    if (r.status === 429) { try { require('../lib/trengo-fetch.js').tel429('email-live'); } catch {} await _sleep(15000 * Math.pow(2, i)); continue; }
+    break;
   }
+  console.error(`[email-live] tPost ${ep} MISLUKT: HTTP ${laatste && laatste.status} ${laatste ? String(await laatste.text().catch(() => '')).slice(0, 150) : ''}`);
   return false;
 }
 const zetLabel = (id, l) => tPost(`/tickets/${id}/labels`, { label_id: l });

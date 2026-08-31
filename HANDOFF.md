@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
+## 31-08 (avond): ROWIE POST + AERTS (mail-fouten zichtbaar gemaakt)
+- Rowie Post (975234318, rowiepost@gmail.com, IJmuiden): akkoord op indicatie maar antwoord faalde 15:08 stil (email-live tPost verborg de
+  HTTP-fout; NU GEFIXT: 4 pogingen met 15/30/60s + status/reden in de log + 429-teller). Alsnog beantwoord; had géén dossier → eigen lead
+  LEAD-1788183011598-HQZ2 aangemaakt en op "Inmeten inplannen" gezet → planner stuurt automatisch datumopties (verre klant).
+- Aerts (974244415, offerte 202611713): "mail staat los" verklaard: offerte-mails komen nu nog uit Reuzenpanda zelf (los van het ticket);
+  na V20 in-thread uit eigen verzendcentrum. Klant nu wel in het ticket bijgepraat. OPEN GELD (V24 bij Daimy): regels staan op nieuwe
+  verhoogde prijzen, klant is oude prijzen 15-8 beloofd (2750x1750 solar = 2052,60 = boek×1,10) — wacht op "V24: ja" om alle 5 regels
+  deterministisch op boek×1,10 terug te zetten.
+
 ## 31-08: REVIEWS-API STATUS (Isa's navraag op V102)
 - Alles gebouwd: site leest live reviews (KV + echte seed-fallback), tools/reviews-sync.js draait dagelijks (nl.sonty.reviews-sync) en pusht
   wijzigingen automatisch. BLOKKADE: ~/sonty/secrets/google-places-key.txt ontbreekt → V23 bij Daimy (Places API (New) key aanmaken in

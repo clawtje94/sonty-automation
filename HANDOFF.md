@@ -1,5 +1,12 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
+## 31-08: LOGBOEK — WIE DEED WAT (Daimy: "altijd kunnen zien wie wat heeft gedaan in alle functies")
+- middleware.ts (website): elke schrijvende API-call (POST/PUT/PATCH/DELETE) → KV logboek:z met tijd, wie (Daimy h1 / medewerker u1-naam /
+  automation-sleutel / bezoeker), methode, pad en kernvelden uit de body (nooit wachtwoorden; login/wachtwoord-routes niet gelogd). Max ~8000 regels.
+- /admin/logboek (alleen hoofdadmin, link op /admin/gebruikers): filter per persoon en onderdeel. /api/admin/logboek → 403 voor medewerkers.
+- Leadtijdlijn: moveToKolom/changeStatus/addNote hebben nu `door` (naam van de ingelogde); pipeline-tijdlijn toont "· <naam>";
+  eigen-crm-PATCH zet door=automation/actor. Live bewezen: medewerker-notitie → tijdlijn "door: Daimy test", logboek toont bezoeker/medewerker/automation.
+
 ## 30-08 (avond): PIPELINE-LEADPANEEL = MINI-CRM (Daimy: "producten + samenvatting WhatsApp en mail")
 - Nieuw in het detailpaneel (/admin/pipeline): sectie "Aangevraagde producten" (configurator-products met maat/opties, anders offerteregels)
   en sectie "Contact met de klant": per kanaal (WA + mail) een Haiku-samenvatting uit Trengo + laatste berichten uitklapbaar + Trengo-link.

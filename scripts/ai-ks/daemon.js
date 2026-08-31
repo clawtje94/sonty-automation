@@ -56,6 +56,16 @@ async function haalBerichten(ticketId, paginas = 2) {
   return { data };
 }
 
+/* Berichten-cache voor de hoofd-ronde (zie hierboven). Puur getest in scenario-lab/onderdelen/sunny-berichtcache.js */
+const BERICHT_CACHE = new Map();
+const ticketLaatste = (t) => String(t?.latest_message ?? t?.latest_message_at ?? t?.updated_at ?? '');
+function magBerichtCache(entry, ticket, nu) {
+  if (!entry || !entry.msgs) return false;
+  if (nu - entry.op > 75000) return false; // notities bumpen latest_message niet: max 75s oud
+  const l = ticketLaatste(ticket);
+  return !l || l === entry.latest; // nieuwer bericht in de lijst → cache ongeldig
+}
+
 async function tPost(ep, body) {
   // Trengo geeft af en toe 429 "Too Many Attempts" — zonder retry ging het antwoord dan
   // verloren (Pieter 20:15, Vruchi 19:20 op 16 juli). 429 = niets verzonden, dus veilig
@@ -1642,7 +1652,16 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
   await Promise.all(Array.from({ length: Math.min(5, fetchRij.length) }, async () => {
     let t;
     while ((t = fetchRij.shift())) {
-      try { t._msgs = await haalBerichten(t.id); } catch {}
+      // BERICHTEN-CACHE (31-08, opdracht Isa: 45k Trengo-429's in de log): elke ronde (30s) haalden we van
+      // ELKE kandidaat de berichten op. Nu alleen opnieuw als de lijst een nieuwer latest_message toont of de
+      // cache ouder is dan 75s (notities bumpen latest_message niet, dus korte TTL houdt de notitie-reactie snel).
+      const c = BERICHT_CACHE.get(String(t.id));
+      if (c && magBerichtCache(c, t, Date.now())) { t._msgs = c.msgs; continue; }
+      try {
+        t._msgs = await haalBerichten(t.id);
+        if (t._msgs) BERICHT_CACHE.set(String(t.id), { op: Date.now(), latest: ticketLaatste(t), msgs: t._msgs });
+        await new Promise(r => setTimeout(r, 150)); // adem tussen calls
+      } catch {}
     }
   }));
   const verseNotitie = (t) => (t._msgs?.data || []).some(m => {
@@ -1672,7 +1691,8 @@ async function pollRonde(state, { onlyTest, sonnyOnly }) {
   saveState(state);
 }
 
-(async () => {
+module.exports = { magBerichtCache, ticketLaatste };
+if (require.main === module) (async () => {
   const state = loadState();
   const onlyTest = process.argv.includes('--only-test');
   const sonnyOnly = process.argv.includes('--sonny-only');

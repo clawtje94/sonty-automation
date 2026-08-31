@@ -1,5 +1,13 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-30, admin licht/donker nagelopen)
 
+## 31-08 (avond): DUBBELE BOEKING ANGELO DE JONG → DUBBELBOEKING-POORT
+- Wat er gebeurde: klant koos eerst di 29-09 11:50; Sunny zette die vast (18:16); 2 min eerder had klant al "22 lukt wel" gestuurd en de
+  aanbod-verwerker boekte 18:24 di 22-09 15:30 (Joey) + definitieve bevestiging. Twee echte afspraken in Outlook → Daimy kreeg 2 GEBOEKT-meldingen.
+  Klant kreeg alléén de juiste bevestiging (22-09). Foute 29-09 volledig verwijderd (Outlook 1, Planado 1, geverifieerd: 1 event over).
+- BORGING: dubbelboeking-poort in lib/inmeet-boeken.boekInmeetAfspraak (alle 3 boekpaden): zelfde klant (telefoon-laatste-9 of naam) met
+  bestaande geboekte afspraak op ANDERE tijd → oude eerst volledig annuleren (afspraak-annuleren) + status 'verzet' + planning-melding;
+  zelfde slot → door (heal). Outlook→Planado-heler slaat de poort over (herbouw:true). Lab dubbelboeking 16 sc. 0x FOUT-STIL.
+
 ## 31-08 (avond): TELEGRAM-ROUTERING GEFIXT — DE DATA-BOT VERHONGERDE
 - Vondst: sinds de poortwachter van 11-08 gingen ÁLLE planningTelegram-berichten (ook die voor de data-bot) door de hoofdchat-allowlist;
   wat niet matchte verdween stil in logs/telegram-onderdrukt.log. Daaronder: "48 klanten wachten al langer" (dagelijks 07:34!), annulerings-

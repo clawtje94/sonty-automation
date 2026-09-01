@@ -17,14 +17,16 @@ const fs = require('fs');
 const path = require('path');
 
 const LOG = path.join(__dirname, '..', '..', 'logs', 'telegram-onderdrukt.log');
-const DEDUP = path.join(__dirname, '..', '..', 'data', 'telegram-alarm-dedup.json');
+const DEDUP = process.env.TELEGRAM_DEDUP_PAD || path.join(__dirname, '..', '..', 'data', 'telegram-alarm-dedup.json'); // env-pad voor het scenario-lab
 const ALARM_VENSTER_UUR = 6;
 
 const VRAAG = /(^|\n)\s*(VRAAG|V\d+[:\s])/m;
 const BOEKING = /GEBOEKT/;
-const RAPPORT = /AI-resultaten|Tekenrapport|onversie|apaciteit|Gesprek-lab|dagrapport|weekrapport|maandrapport|📊|✍️|🔬/;
+const RAPPORT = /AI-resultaten|Tekenrapport|onversie|apaciteit|Gesprek-lab|dagrapport|weekrapport|maandrapport|WERKBONNEN|📊|✍️|🔬/;
 const LEERVRAAG_URGENT = /🎓|🚨|LEERVRAAG|URGENT/i;
-const ALARM = /actie nodig|handmatig|mens nodig|NIET geboekt|NIET verstuurd|MISLUKT|GESTOPT|gecrasht|onbereikbaar|niet op te halen|wachten al langer|rate-limit|geannuleerd|❗|SCHIJN-BOEKING|zelfcontrole|dood gesprek|dubbel|wacht al \d+ uur|KLACHT|geen alternatief/i;
+// 01-09 erbij: annulering(en) in uitvoering, vrijgekomen plekken (herboek-kans) en beloftes aan
+// klanten die een mens moet nakomen — die sneuvelden in de eerste meting onterecht mee als proces.
+const ALARM = /actie nodig|handmatig|mens nodig|NIET geboekt|NIET verstuurd|MISLUKT|GESTOPT|gecrasht|onbereikbaar|niet op te halen|wachten al langer|rate-limit|geannuleerd|annuleer|annulering|plek vrijgekomen|beloofd|❗|SCHIJN-BOEKING|zelfcontrole|dood gesprek|dubbel|wacht al \d+ uur|KLACHT|geen alternatief/i;
 
 /**
  * @param {string} tekst
@@ -68,10 +70,18 @@ function legVast(tekst, reden) {
  *  - al het andere → ALTIJD naar de data-bot (dat is zijn functie)
  *  - en is het een vraag/alarm/urgent/rapport volgens de allowlist → OOK een kopie naar de hoofdchat
  */
+/** 01-09 (Daimy: "ik word elke ochtend leip van 20+ berichten die 9/10x niet nodig zijn").
+ *  Meting over de echte 24u: 38 data-bot-berichten waarvan 23 herhaling en 6 procesgeluk.
+ *  Nieuwe regel, terug naar de bedoeling van 11-08 en 21-08 ("alleen fouten/alarmen"):
+ *   - procesmelding → ALLEEN logs/telegram-onderdrukt.log, geen enkele chat meer
+ *   - herhaald alarm (zelfde soort < 6u) → ook alleen de log (ging eerst nog naar de data-bot)
+ *   - wat doorkomt (vraag/alarm/urgent/rapport) → data-bot + hoofdchat, zoals sinds 31-08
+ *  De 31-08-les blijft geborgd: annuleringen, wachtende klanten en échte storingen zitten in de
+ *  ALARM-regex en komen dus altijd (1x per 6u) door — nooit meer stil weg. */
 function routeer(tekst, opties = {}) {
   if (opties.boeking) return { bestemmingen: ['planning-groep'], log: false };
   const oordeel = magDoor(tekst, opties);
-  return { bestemmingen: oordeel.door ? ['data-bot', 'hoofdchat'] : ['data-bot'], log: !oordeel.door, reden: oordeel.reden };
+  return { bestemmingen: oordeel.door ? ['data-bot', 'hoofdchat'] : [], log: !oordeel.door, reden: oordeel.reden };
 }
 
 module.exports = { magDoor, routeer, legVast };

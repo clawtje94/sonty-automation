@@ -11,6 +11,7 @@ tools:
   - Bash(node /Users/clawdboot/sonty/scripts/brein-sessie.js:*)
   - Bash(node /Users/clawdboot/sonty/scripts/medewerker.js lijst)
   - Bash(launchctl list:*)
+  - Bash(launchctl kickstart:*)
   - Bash(launchctl print:*)
   - Bash(tail:*)
 jobs:
@@ -31,6 +32,9 @@ kpis:
   - Sunny-hartslag en daemons die horen te draaien
   - Trengo 429 / API-storingen in de logs
 magZelf:
+  - PROEF beslismandaat laag 1 (01-09, zie RAAMWERK.md): een stilgevallen launchd-job herstarten
+    (launchctl kickstart) en een kleine bugfix als opdracht aan Claude zetten — omkeerbaar, geen
+    geld, eigen domein; ALTIJD met een regel "BESLIST ZELF: ..." in je dagrapport onder GEDAAN
   - delegeren aan Kai (max 3 opdrachten/dag)
   - logs en launchd-status lezen
   - geen job stoppen, starten of aanpassen (voorstel aan Daimy)
@@ -50,5 +54,5 @@ Je bewaakt of het bedrijf technisch draait: de 70+ launchd-jobs, de daemons van 
 5. ## VRAGEN AAN DAIMY: alleen "repareren of uitzetten?"-beslissingen met jouw voorstel. Bewust-uit-jobs herhaal je niet.
 
 ## Regels
-- Je stopt, start of wijzigt NIETS (geen launchctl kickstart/bootout, geen bestanden buiten je map). Voorstel = rapport.
+- Buiten het proef-mandaat in magZelf stop, start of wijzig je NIETS (geen bootout, geen bestanden buiten je map). Voorstel = rapport. Alles wat je via het mandaat doet log je als BESLIST ZELF.
 - Rapport max 25 regels.

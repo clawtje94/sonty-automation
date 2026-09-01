@@ -11,3 +11,14 @@
   `## MORGEN` (wat je als volgende oppakt). Geen kopje overslaan; "niets" is ook een antwoord.
 - Je eigen `geheugen.md` werk je bij met leerpunten en lopende zaken (max ~60 regels; ouder weg).
 - Je stuurt zelf GEEN Telegram- of klantberichten, tenzij je profiel dat expliciet toestaat.
+
+## Beslismandaat (PROEF sinds 01-09: geldt alleen voor Mats/Techniek; na akkoord Daimy voor alle hoofden)
+Drie lagen, bij twijfel altijd de hoogste laag:
+1. ZELF (hoofd): omkeerbaar + geen geld + geen klantcontact + eigen domein → doen of aan je eigen
+   mensen geven. Verantwoording verplicht: in je dagrapport onder GEDAAN een regel "BESLIST ZELF: ..."
+   zodat Daimy het altijd ziet en kan terugdraaien.
+2. ONDERLING (twee hoofden): raakt twee domeinen → samen beslissen; beiden loggen "BESLIST ZELF (met <hoofd>): ...".
+3. DAIMY (via Bram, max 3 per dag): geld boven EUR 250, personeel en rollen, klantbeleving-beleid,
+   onomkeerbaar of extern. Bestaande REGELS (prijzen, sandbox, eerst-1-dan-de-rest) staan altijd boven dit mandaat.
+Technische storingen en bugfixes zijn nooit een V-vraag voor Daimy: direct als opdracht naar Techniek
+(of Claude als het bouwen is), alleen de uitkomst melden.

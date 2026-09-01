@@ -1,5 +1,14 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-31, Trengo-429 structureel opgelost)
 
+## 01-09 (middag): TELEGRAM-DIEET — 40 -> 7 BERICHTEN PER DAG (Daimy: "9/10x niet nodig")
+- Meting echte 24u: 40 data-bot-berichten, waarvan 23 herhaling (Trengo-alarm 9x, Luuk-Post 8x, Gripp 6x)
+  en 6 procesgeluk. Nieuwe regel in lib/telegram-filter.routeer(): procesmeldingen en herhaal-alarmen (<6u)
+  bereiken GEEN chat meer, alleen logs/telegram-onderdrukt.log. Vraag/alarm/urgent/rapport blijven door.
+- Regex verrijkt zodat het waardevolle blijft: annulering(en), plek vrijgekomen, beloofd (klant-beloftes),
+  WERKBONNEN. Replay op de echte 24u: 7 door, en precies de juiste 7. Lab telegram-route 14 sc. 0x FOUT-STIL.
+- Nieuw: logs/telegram-verzonden.log logt voortaan ELK uitgaand bericht per bestemming (bestond niet).
+- Poller nl.sonty.telegram-poll was vast (711 min stil) -> gekickstart. Daemons sonny/email herstart voor verse filter.
+
 ## 01-09 (ochtend): GOOGLE ADS API-KOPPELING KLAAR, WACHT OP CREDENTIALS (opdracht Mats 16sis3xa)
 - scripts/google-ads-api.js (spiegel Meta-collector, incl. --auth-url/--code OAuth-hulp) -> campagne-spend-google.json
   + ad-spend-google-api.json; ad-spend.js laat Google-API winnen zodra de bron bestaat (regressie ongewijzigd);

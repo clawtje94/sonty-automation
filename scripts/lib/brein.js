@@ -70,7 +70,7 @@ function kapPostvak(lijst, max = 500) {
   const open = new Set(lijst.filter((o) => o && !['klaar', 'fout'].includes(o.status)));
   const dicht = lijst.filter((o) => o && !open.has(o));
   const plekken = Math.max(0, max - open.size);
-  const bewaarDicht = new Set(dicht.slice(-plekken));
+  const bewaarDicht = new Set(plekken > 0 ? dicht.slice(-plekken) : []); // slice(-0) zou ALLES teruggeven
   return {
     bewaren: lijst.filter((o) => open.has(o) || bewaarDicht.has(o)),
     archief: dicht.filter((o) => !bewaarDicht.has(o)),

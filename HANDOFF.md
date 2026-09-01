@@ -3579,3 +3579,12 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
   Heemstede); (3) De Meern Veldzigt 22, Oudenrijn aan A12/A2, 293 m² showroomruimte ±€2.125 (huurbieding-detail).
   Extra opties: Tinstraat 8a Ridderkerk 219 m² €2.150, Gessel 4a De Meern 116 m² €1.750 zichtlocatie,
   De Liesbosch 14B Nieuwegein 154 m² €2.200. Totaal 3 voorstellen ±€6.6k/mnd, ±790 m², dekt +6.873 leads.
+- 01-09: Daimy: gestuurde panden waren verhuurd/verwijderd → terecht; subagent-links waren deels verouderd/
+  verzamelpagina's en ik had ze niet zelf geverifieerd. Nu ELKE link zelf live gecheckt (curl, status+prijs+m²
+  op de detailpagina, vandaag): GOED: Hoofddorp Diamantlaan 63 190 m² €2.100 beschikbaar; Parellaan 46 230 m²
+  €3.000; Barendrecht Van 't Hoffstraat 39 (Reijerwaard, bij woonboulevard) 480 m² €4.150 excl; Ridderkerk
+  De Schans 7 306 m² prijs op aanvraag; Nieuwegein De Liesbosch 14B 154 m² €2.200; De Liesbosch 4D ±160 m²
+  €26-30k/jr. VERVALLEN: Van 't Hoffstraat 25 (funda blokkeert zelfs Playwright → onverifieerbaar), Tinstraat 8a
+  (verhuurd), Binnenweg 143 (verhuurd), Veldzigt 22 (404), Gessel 4a (404). LES: makelaar-aggregators houden
+  oude pagina's online; NOOIT pandlinks doorsturen zonder ze dezelfde dag zelf te openen. Funda in business is
+  met curl én Playwright geblokkeerd (botmuur) — ilocate/vanvliet/ooms-detailpagina's wél bruikbaar.

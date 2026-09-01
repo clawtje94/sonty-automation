@@ -1,5 +1,11 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-31, Trengo-429 structureel opgelost)
 
+## 01-09 (ochtend): GRIPP-FACTUREN-SYNC VOOR SAM (opdracht Mats thwwy3fr)
+- Sam zat 3 dagen zonder actuele facturendata (gripp-alle-facturen.json was van 3 juli). Nieuw:
+  scripts/gripp-facturen-sync.js (alleen-lezen) -> data/gripp-facturen-open.json (leesbaar; samenvatting +
+  openLanger14 + open + alles). Stand 01-09: 2696 facturen/12 mnd, 60 open EUR 105.979, 28 >14 dgn EUR 43.061.
+- Launchd-dagjob volgt PAS als Sam het formaat bevestigt (proefgeval-afspraak); handmatig verversen kan altijd.
+
 ## 01-09 (nacht): BREIN-RUNAWAY GESTOPT + MANDAAT-LADDER PROEF LIVE (opdrachten Bram p3kk9m33/jcgwwwgz)
 - Runaway: V127 was echt — bewaarPostvak ontbrak in lib/brein.js-exports; brein-collect crashte elke minuut NA het
   aanmaken van een terugkoppeling maar VOOR het opslaan van de teruggekoppeld-vlag. Gevolg: 427 dups aan Bram,

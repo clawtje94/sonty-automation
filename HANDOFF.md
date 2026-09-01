@@ -1,5 +1,16 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-31, Trengo-429 structureel opgelost)
 
+## 01-09 (nacht): BREIN-RUNAWAY GESTOPT + MANDAAT-LADDER PROEF LIVE (opdrachten Bram p3kk9m33/jcgwwwgz)
+- Runaway: V127 was echt — bewaarPostvak ontbrak in lib/brein.js-exports; brein-collect crashte elke minuut NA het
+  aanmaken van een terugkoppeling maar VOOR het opslaan van de teruggekoppeld-vlag. Gevolg: 427 dups aan Bram,
+  54 aan Isa (elk spawnde een claude -p run, 2/min), origineel o4731mwa door de 500-cap weggeduwd.
+- Fix: export toegevoegd; kapPostvak bewaart open opdrachten nu ALTIJD (afgehandelde die wegvallen -> postvak-archief.jsonl;
+  slice(-0)-bug door lab gevangen). Postvak 500->6, inbox-bram 439->13, inbox-isa 1099->7, o4731mwa hersteld. Labs groen.
+- Mandaat-ladder (akkoord-traject Daimy via Bram): RAAMWERK.md sectie Beslismandaat (PROEF, alleen Techniek) +
+  Mats-profiel laag 1 (kickstart stilgevallen job, kleine bugfix delegeren, altijd BESLIST ZELF-regel). Rest van de
+  hoofden WACHT op Daimy-check. Drempel EUR 250 = startvoorstel.
+- Los signaal in brein-collect.log: "Could not find service nl.sonty.keten-zelfcontrole / sonny-rapport" — bestaand punt (V125 al bij Daimy).
+
 ## 31-08 (avond): TOEWIJZING NANNY WERD STIL TERUGGEZET NAAR JORREN — GEFIXT
 - Daimy: "ik wijs tickets toe aan nanny waarom wijs jij die dan weer terug aan jorren". Oorzaak: de
   collega-toewijzingsregel (daemon.js + email-daemon.js) gaf elk gesprek aan de LAATSTE zender zodra

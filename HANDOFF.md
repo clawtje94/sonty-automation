@@ -1,5 +1,12 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-31, Trengo-429 structureel opgelost)
 
+## 01-09 (ochtend): GOOGLE ADS API-KOPPELING KLAAR, WACHT OP CREDENTIALS (opdracht Mats 16sis3xa)
+- scripts/google-ads-api.js (spiegel Meta-collector, incl. --auth-url/--code OAuth-hulp) -> campagne-spend-google.json
+  + ad-spend-google-api.json; ad-spend.js laat Google-API winnen zodra de bron bestaat (regressie ongewijzigd);
+  update-dashboard.sh draait hem mee met stille terugval. Launchd nl.sonty.google-ads klaargezet (07:10), NIET geladen.
+- BLOCKER bij Daimy: developer token + OAuth-client + klantnummer (12-min-stappenplan: docs/google-ads-api-setup.md).
+  Daarna: job laden + dashboard-update naar dagelijks.
+
 ## 01-09 (ochtend): GRIPP-FACTUREN-SYNC VOOR SAM (opdracht Mats thwwy3fr)
 - Sam zat 3 dagen zonder actuele facturendata (gripp-alle-facturen.json was van 3 juli). Nieuw:
   scripts/gripp-facturen-sync.js (alleen-lezen) -> data/gripp-facturen-open.json (leesbaar; samenvatting +

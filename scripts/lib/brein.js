@@ -61,7 +61,26 @@ function afmelden(naam) { const s = sessies(); if (s[naam]) { s[naam].status = '
 
 /** Postvak. */
 function postvak() { return lees(P.postvak, []); }
-function bewaarPostvak(lijst) { schrijf(P.postvak, lijst.slice(-500)); }
+// KAP-REGEL (01-09, bevinding Bram jcgwwwgz): de oude kap (slice(-500)) duwde ook OPEN opdrachten
+// weg — Daimy's o4731mwa verdween terwijl er nog op geantwoord moest worden en `antwoord <id>` gaf
+// "onbekende opdracht". Nu: open opdrachten (niet klaar/fout) worden NOOIT weggekapt; alleen
+// afgehandelde, en wat wegvalt gaat naar postvak-archief.jsonl i.p.v. verloren. Puur getest in
+// scenario-lab/onderdelen/postvak-kap.js.
+function kapPostvak(lijst, max = 500) {
+  const open = new Set(lijst.filter((o) => o && !['klaar', 'fout'].includes(o.status)));
+  const dicht = lijst.filter((o) => o && !open.has(o));
+  const plekken = Math.max(0, max - open.size);
+  const bewaarDicht = new Set(dicht.slice(-plekken));
+  return {
+    bewaren: lijst.filter((o) => open.has(o) || bewaarDicht.has(o)),
+    archief: dicht.filter((o) => !bewaarDicht.has(o)),
+  };
+}
+function bewaarPostvak(lijst) {
+  const { bewaren, archief } = kapPostvak(lijst, 500);
+  if (archief.length) { try { fs.appendFileSync(path.join(DIR, 'postvak-archief.jsonl'), archief.map((o) => JSON.stringify(o)).join('\n') + '\n'); } catch { /* archief is extra */ } }
+  schrijf(P.postvak, bewaren);
+}
 function nieuweOpdracht({ aan, tekst, van = 'Daimy', id = null, bron = null, soort = null }) {
   const lijst = postvak();
   const o = { id: id || Math.random().toString(36).slice(2, 10), aan, tekst: String(tekst).slice(0, 4000), van, op: new Date().toISOString(), status: 'nieuw', antwoord: null, antwoordOp: null, bron: bron || null, soort: soort || null };
@@ -81,4 +100,4 @@ function markeer(id, status, antwoord) {
   bewaarPostvak(lijst); return o;
 }
 
-module.exports = { DIR, P, slug, gebeurtenis, gebeurtenissen, sessies, meld, afmelden, postvak, bewaarPostvak, nieuweOpdracht, opdrachtenVoor, markeer };
+module.exports = { DIR, P, slug, gebeurtenis, gebeurtenissen, sessies, meld, afmelden, postvak, bewaarPostvak, kapPostvak, nieuweOpdracht, opdrachtenVoor, markeer };

@@ -19,6 +19,7 @@ const { draai, printRapport } = require('./runner.js');
 const ONDERDELEN = [
   require('./onderdelen/offerte-keuze.js'),
   require('./onderdelen/collega-toewijzing.js'),
+  require('./onderdelen/postvak-kap.js'),
   require('./onderdelen/koppel-ladder.js'),
   require('./onderdelen/planner-aanbod.js'),
   require('./onderdelen/planner-drukte.js'),

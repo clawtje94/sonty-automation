@@ -3588,3 +3588,11 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
   (verhuurd), Binnenweg 143 (verhuurd), Veldzigt 22 (404), Gessel 4a (404). LES: makelaar-aggregators houden
   oude pagina's online; NOOIT pandlinks doorsturen zonder ze dezelfde dag zelf te openen. Funda in business is
   met curl én Playwright geblokkeerd (botmuur) — ilocate/vanvliet/ooms-detailpagina's wél bruikbaar.
+- 01-09 VERVOLG (Daimy: "niet beschikbaar" ook op ilocate-links): verzamelsites definitief onbetrouwbaar → alles
+  nu bij de BRON-makelaar geverifieerd (eigen site, vandaag): ZUIDFLANK (Van Vliet Ridderkerk): Deventerseweg 43
+  Barendrecht zichtlocatie Vaanpark 4, ±120 m²+entresol, €1.500; Leerlooierstraat 20 én 22 Ridderkerk nieuwbouw
+  hoek/zichtlocatie Donkersloot, €1.625 p.st (koppelbaar); Keurmeesterstraat 17a 428 m² €4.100. NIEUWEGEIN
+  (Oranjeborch): De Liesbosch 12C 163 m² €25k/jr, 12P 160 m² €18k/jr, Hoogzandveld 38 winkel — alle met eigen
+  pandsite "Te huur". HOOFDDORP: geen bron-geverifieerd pand gevonden; voorstel = 2-3 lokale bedrijfsmakelaars
+  mailen met zoekprofiel (V-vraag aan Daimy). Ooms-radius gaf alleen Rotterdam/Schiedam. Les geborgd in
+  feedback_links_zelf_verifieren.

@@ -63,6 +63,9 @@ async function planningTelegram(tekst, opties = {}) {
   } catch { /* filter stuk mag verzending nooit blokkeren */ }
   for (const b of route.bestemmingen) {
     const { token, chatId } = b === 'planning-groep' ? config() : b === 'hoofdchat' ? { token: HOOFD_TOKEN, chatId: HOOFD_CHAT } : databotConfig();
+    // VERZENDLOG (Daimy 01-09: "zet alle verstuurde berichten van 24u onder elkaar" — dat kon
+    // nergens uit worden afgeleid). Eén regel per verzonden bericht, per bestemming.
+    try { fs.appendFileSync(path.join(__dirname, '..', '..', 'logs', 'telegram-verzonden.log'), `[${new Date().toISOString()}] (${b}) ${String(tekst).replace(/\n/g, ' | ').slice(0, 300)}\n`); } catch { /* log blokkeert nooit */ }
     await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: chatId, text: String(tekst).slice(0, 3900) }),

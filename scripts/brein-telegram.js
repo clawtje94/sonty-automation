@@ -23,6 +23,7 @@ if (fs.existsSync(path.join(__dirname, '..', 'data', 'brein', '.schaduw'))) {
       const d = await r.json();
       if (d.ok) {
         console.log('verstuurd');
+        try { fs.appendFileSync(path.join(__dirname, '..', 'logs', 'telegram-verzonden.log'), `[${new Date().toISOString()}] (hoofdchat/Bram) ${tekst.replace(/\n/g, ' | ').slice(0, 300)}\n`); } catch { /* log blokkeert nooit */ }
         const B = require('./lib/brein.js');
         B.gebeurtenis('Bram', 'Telegram-bericht aan Daimy: ' + tekst.slice(0, 80));
         // briefing bewaren voor de Dagstart-tab in het Brein

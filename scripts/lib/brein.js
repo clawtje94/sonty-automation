@@ -81,4 +81,4 @@ function markeer(id, status, antwoord) {
   bewaarPostvak(lijst); return o;
 }
 
-module.exports = { DIR, P, slug, gebeurtenis, gebeurtenissen, sessies, meld, afmelden, postvak, nieuweOpdracht, opdrachtenVoor, markeer };
+module.exports = { DIR, P, slug, gebeurtenis, gebeurtenissen, sessies, meld, afmelden, postvak, bewaarPostvak, nieuweOpdracht, opdrachtenVoor, markeer };

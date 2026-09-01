@@ -47,13 +47,15 @@ const geld = s => { const n = parseFloat(String(s||'').replace(/[€\s.]/g,'').r
       spend[m] = { ...(spend[m]||{}), ...v, bron: ((spend[m]||{}).bron ? spend[m].bron + ' + ' : '') + 'handmatig' };
     }
   }
-  // 3. Meta API-totalen winnen voor Meta (Google blijft uit handmatig/sheet tot de Google-API er is)
-  const API = path.join(__dirname, '..', 'data', 'ad-spend-meta-api.json');
-  if (fs.existsSync(API)) {
+  // 3. API-totalen winnen per platform van handmatig/sheet (completer; Meta sinds 20-08,
+  //    Google sinds 01-09 zodra de credentials er zijn — scripts/google-ads-api.js).
+  for (const [bestand, veld, label] of [['ad-spend-meta-api.json', 'Meta', 'Meta API'], ['ad-spend-google-api.json', 'Google', 'Google Ads API']]) {
+    const API = path.join(__dirname, '..', 'data', bestand);
+    if (!fs.existsSync(API)) continue;
     const a = JSON.parse(fs.readFileSync(API,'utf8'));
     for (const [m, v] of Object.entries(a)) {
       if (m.startsWith('_') || typeof v !== 'number') continue;
-      spend[m] = { ...(spend[m]||{}), Meta: v, bron: ((spend[m]||{}).bron ? spend[m].bron + ' + ' : '') + 'Meta API' };
+      spend[m] = { ...(spend[m]||{}), [veld]: v, bron: ((spend[m]||{}).bron ? spend[m].bron + ' + ' : '') + label };
     }
   }
   fs.writeFileSync(UIT, JSON.stringify(spend, null, 1));

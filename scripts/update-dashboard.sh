@@ -13,6 +13,8 @@ VORIG=$((JAAR-1))
 python3 scripts/meta-campagne-import.py
 # Meta API (20-08-2026) overschrijft de CSV-maanden die hij kan leveren; faalt de API, dan blijft de CSV-stand staan.
 /opt/homebrew/bin/node scripts/meta-ads-api.js || echo "meta-ads-api mislukt, CSV-stand blijft staan"
+# Google Ads API (01-09-2026): zonder credentials in .env stopt hij netjes (exit 2), oude stand blijft staan.
+/opt/homebrew/bin/node scripts/google-ads-api.js || echo "google-ads-api niet gedraaid (credentials of API-fout), oude stand blijft staan"
 /opt/homebrew/bin/node scripts/campagne-rendement.js
 /opt/homebrew/bin/node scripts/landing-analyse.js
 /opt/homebrew/bin/node scripts/ad-spend.js

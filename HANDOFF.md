@@ -37,6 +37,9 @@
   andere dagen als het eerder kan") → lezer faalde op Anthropic 529 → werd Mens nodig. Fix: bij mislukte duiding 'later' (max 3 rondes),
   daarna beslist de tekst ("eerder" → aanbod op vroegste, omrij-grens uit); Outlook-quotes ("Van: … Verzonden:") worden nu ook gestript.
   Landman handmatig als stuur-aanbod (wilEerder) in de rij gezet (mutatie de87e3ac604677a7), state gemarkeerd. Lab 192 sc. groen.
+  DAIMY 14:45 "V2 = B": Rowie kreeg 14:49 een keuzelink (stuur-aanbod voorkeurDagen do/vr, route-plek, 1 moment). Landman 14:36 keuzelink
+  (vroegste). Lijst van 10 doorgenomen: Scholten/anoek = bellen (2 voorstellen, stil), Keus = stil door Daimy, Gerdzen/Chi/De Jong = omrij-regel
+  dag 0 (wachtmelding verstuurd), Bakker = Sunny na 60 min. V3 open: omrij-grens negeren voor die 3 of regel laten werken.
   OPEN (al vóór vandaag): lab planner-berichten 600x FOUT-STIL (max-2-voorstellen-blokkade zonder melding) — zelfde op de oude versie,
   vermoedelijk door het Telegram-dieet van 01-09; nog niet onderzocht. Ook checken: slots op zondag
   (20-09/27-09 voor Rowie in ronde 00:21) — planner lijkt zondagen als werkdag te zien voor Sjoerd/Joey.

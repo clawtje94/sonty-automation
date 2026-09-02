@@ -1,4 +1,20 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-08-31, Trengo-429 structureel opgelost)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
+
+## 02-09 (middag): LAUNCHD-INTERVALTIMERS DOOD SINDS 00:42 → INTERVAL-RUNNER ALS VANGNET (vraag Daimy "6 op inmeten inplannen")
+- Vondst: ALLE nl.sonty.*-jobs met StartInterval (29 stuks: inmeet-dashboard 30 min, aanbod-replies 3 min, brein-collect 1 min,
+  vakanties-collect, inmeet-verwerker, outlook-planado-sync, ...) draaiden na 00:42 niet meer. Kalender-jobs (StartCalendarInterval)
+  en KeepAlive-daemons (Sunny, e-mail, telegram-poll) liepen door. Geen slaap (pmset sleep 0, geen sleep-entries), klok klopt.
+- Bewijs: kickstart draait 1x maar daarna niets; bootout+bootstrap helpt niet (runs=0 na 160 s); verse 15 s-testjob vuurt niet;
+  zelfs RunAtLoad spawnt niet. Alleen expliciete `launchctl kickstart` werkt. Oorzaak in launchd zelf, niet gevonden (log show leeg).
+- Vangnet: scripts/interval-runner.js + nl.sonty.interval-runner (KeepAlive). Leest elke 10 s alle StartInterval-plists en kickstart
+  elke job zodra zijn interval verstreken is; zelfrem: telt launchd zelf weer runs, dan gaat de runner per job passief (geen dubbel werk).
+  Log: logs/interval-runner.log. LET OP: KeepAlive-herstart is nu ook onbetrouwbaar — als de runner sterft: kickstart hem.
+- Echte oplossing waarschijnlijk uit-/inloggen of herstart van de Mac mini (herstart launchd-domein gui/501) — NIET gedaan, dat is aan Daimy
+  (alle terminals/daemons gaan dan plat). Daarna checken of de runner "timer leeft, runner passief" logt.
+- De 6 op "Inmeten inplannen" (12:50): Scholten (12 dgn, 2 voorstellen + navraag, geen reactie → MENS NODIG, gemeld 06:20) en
+  anoek van der wal (9 dgn, 2 voorstellen zonder reactie → belscherm sinds 26-08) wachten op een mens; Keus staat op stil-lijst door
+  Daimy 29-08 (kantoor pakt op); Landman en Rowie Post: geen aanbod, alle plekken >30 min omrijden (dag 2/1 van max 4) — regel werkt;
+  Tim Mesman kreeg om 12:50 het Sunny-voorstel (had om 08:30 gemoeten, 4 uur te laat door de timer-stilstand).
 
 ## 01-09 (middag): TELEGRAM-DIEET — 40 -> 7 BERICHTEN PER DAG (Daimy: "9/10x niet nodig")
 - Meting echte 24u: 40 data-bot-berichten, waarvan 23 herhaling (Trengo-alarm 9x, Luuk-Post 8x, Gripp 6x)

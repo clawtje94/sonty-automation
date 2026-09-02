@@ -1,6 +1,20 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 02-09 17:15: JOEY 28-09 OVERBOEKT → PLANNER LEEST NU EIGEN OUTLOOK-AGENDA'S MEE (Daimy: "meelezen MOET, nu niks wijzigen")
+- Oorzaak: Joey had Tandarts 08:30/15:30 + WINKEL 09:45-15:30 alleen in zijn EIGEN agenda (joey@, "Agenda"), niet in Planado en
+  niet in Sonty Montage. haalAgenda() bouwde bezet alleen uit Planado; laadVakanties leest Sonty Montage alleen op vakantie/verlof/vrij.
+  Eroverheen geboekt: Leeuwerink 09:00 (21-08), Hensing 11:10 (26-08), Butteling 12:15 (30-08 Sunny), Westerneng 13:30 (29-08 winkel).
+  Zelfde patroon 14-09 (tandarts 15:00 vs Fazekas+Van Nieuwkerk) en 02-10 (Vakantie eigen agenda vs Idzinga 09:00).
+- AFSPRAKEN NIET VERZET (Daimy): die gaan straks naar de nieuwe inmeter. Botsend: 4x 28-09, 2x 14-09, 1x 02-10 (+ STALEN 16:00 28-09
+  door kantoor via Bookings, botst met tandarts).
+- Bouw: cron-inmeten-planner.js laadEigenAgendas() in haalAgenda() (dus ook Sunny, winkel-direct, zelfcontrole): per inmeter eigen
+  Outlook-kalender op Owner-e-mail (EIGEN_AGENDA_EMAIL Joey/Sjoerd; rooster-veld eigenAgendaEmail voor nieuwe inmeter). Pure functie
+  eigenAgendaBlokken(): geannuleerd/Free/'Inmeten …' overslaan, hele-dag = hele dag, winkel/showroom ankert op winkel, rest magazijn.
+  Ophalen mislukt = niet plannen. Tests: tests/eigen-agenda-regressie.js (6 tests + matrix 72, groen). Live gemeten: 28-09 en 02-10 Joey
+  0 slots. Daemons inmeet-verzoeken + sonny herstart. keten-regressie: 3 falend, ook op HEAD (verwerker boek-poort, bevestigOntvangst
+  cooldown, annulering-tekst) — los van dit werk, nog te bekijken.
+
 ## 02-09 16:40: MAC-UPDATE/HERSTART GECHECKT (vraag Daimy "draait alles?")
 - Mac uit 16:29, weer op 16:32, ingelogd 16:33 (dus geen FileVault-blokkade). Alle 8 daemons draaien (telegram-poll, databot-poll,
   interval-runner, sonny, email, inmeet-verzoeken, wa-luisteraar, inmeet-dashboard); launchd-intervaltimers leven na de herstart
@@ -3682,3 +3696,8 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
   pandsite "Te huur". HOOFDDORP: geen bron-geverifieerd pand gevonden; voorstel = 2-3 lokale bedrijfsmakelaars
   mailen met zoekprofiel (V-vraag aan Daimy). Ooms-radius gaf alleen Rotterdam/Schiedam. Les geborgd in
   feedback_links_zelf_verifieren.
+
+## 2026-09-02 16:55 Reel thuis opnemen (sessie viral)
+- Nieuw: sonty-website/public/intern/reel-thuis.html (script 33s, 3 hooks, loop, montage, caption, Trial Reels, bewijs-KPIs, zonversie). Gelinkt vanuit viral-draaiboek.html. Live op https://sonty-website.vercel.app/intern/reel-thuis.html
+- Let op: sonty.nl/www is nog Cloudflare/oude site; Next-site alleen op sonty-website.vercel.app. Git push triggert GEEN deploy; handmatig `vercel --prod --yes --archive=tgz` (zonder archive faalt: >15000 files).
+- Open: V1 aan Daimy welke Amerikaanse social-expert hij bedoelt (script daar nog tegen checken). Filmen/posten nog niet gedaan.

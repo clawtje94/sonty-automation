@@ -438,7 +438,70 @@ async function haalAgenda() {
       throw new Error(`agenda ${inm.naam} onvolledig: ${opgehaald}/${inLijst} afspraken met adres — niet op plannen`);
     }
   }
+  // EIGEN OUTLOOK-AGENDA per inmeter (Daimy 02-09: 'meelezen MOET'): Joey had op 28-09
+  // Tandarts + WINKEL alleen in zijn eigen agenda staan (niet in Planado, niet in Sonty
+  // Montage) en daar zijn 4 inmetingen doorheen geboekt. Alles wat daar 'bezet' staat
+  // telt nu mee. Faalt het ophalen, dan NIET plannen (zelfde beleid als laadVakanties).
+  await laadEigenAgendas(perInmeter);
   return perInmeter;
+}
+
+/** Eigen Outlook-agenda's: welk postvak hoort bij welke inmeter. Uitbreidbaar via
+ * data/inmeters-rooster.json (veld eigenAgendaEmail), anders deze vaste lijst. */
+const EIGEN_AGENDA_EMAIL = { Joey: 'joey@sonty.nl', Sjoerd: 'sjoerd@sonty.nl' };
+const WINKEL_ADRES = 'Frijdastraat 8F, 2288 EZ Rijswijk';
+/** Pure functie (los getest in tests/eigen-agenda-regressie.js): Outlook-events → bezette blokken.
+ * Regels: geannuleerd of 'Vrij' telt niet; 'Inmeten Sonty/—' komt al uit Planado (overslaan,
+ * anders ziet de botst-check een eigen halve boeking als vreemde bezetting); hele-dag-events
+ * blokkeren de hele dag; geen adres → winkel bij winkel/showroom, anders magazijn. */
+function eigenAgendaBlokken(events) {
+  const uit = [];
+  for (const e of events || []) {
+    const onderwerp = String(e.Subject || '').trim();
+    if (e.IsCancelled || /^(geannuleerd|canceled|cancelled):/i.test(onderwerp)) continue;
+    if (String(e.ShowAs || '').toLowerCase() === 'free') continue;
+    if (/^inmeten (sonty|—|-)/i.test(onderwerp)) continue;
+    if (!e.Start?.DateTime || !e.End?.DateTime) continue;
+    let s0, e0;
+    if (e.IsAllDay) {
+      s0 = new Date(e.Start.DateTime.slice(0, 10) + 'T00:00:00+02:00');
+      e0 = new Date(e.End.DateTime.slice(0, 10) + 'T00:00:00+02:00');
+      if (!isNaN(+s0) && !(e0 > s0)) e0 = new Date(+s0 + 86400000);
+    } else {
+      s0 = new Date(e.Start.DateTime.replace(/Z?$/, 'Z'));
+      e0 = new Date(e.End.DateTime.replace(/Z?$/, 'Z'));
+    }
+    if (isNaN(+s0) || isNaN(+e0) || e0 <= s0) continue;
+    const start = s0.toISOString(), eind = e0.toISOString();
+    const adres = /winkel|showroom/i.test(onderwerp) ? WINKEL_ADRES : require('./lib/reistijd').MAGAZIJN;
+    uit.push({ start, eind, adres, klant: 'eigen agenda: ' + onderwerp.slice(0, 60), eigenAgenda: true });
+  }
+  return uit;
+}
+async function laadEigenAgendas(perInmeter, dagenVooruit = 100) {
+  const token = fs.readFileSync(path.join(__dirname, '.owa-token.txt'), 'utf8').trim();
+  const OH = { Authorization: 'Bearer ' + token };
+  const cals = (((await (await fetch('https://outlook.office.com/api/v2.0/me/calendars?$top=50', { headers: OH })).json()).value) || []);
+  if (!cals.length) throw new Error('eigen agendas: geen kalenderlijst (token verlopen?) — niet plannen');
+  const van = new Date(Date.now() - 86400000), tot = new Date(Date.now() + dagenVooruit * 86400000);
+  for (const inm of INMETERS) {
+    const email = (ROOSTER[inm.naam]?.eigenAgendaEmail || EIGEN_AGENDA_EMAIL[inm.naam] || '').toLowerCase();
+    if (!email) { console.log(`  eigen agenda ${inm.naam}: geen postvak bekend — overgeslagen`); continue; }
+    const cal = cals.find((c) => String(c.Owner?.Address || '').toLowerCase() === email && (c.IsDefaultCalendar || !/feestdagen|verjaardagen|holidays/i.test(c.Name)));
+    if (!cal) throw new Error(`eigen agenda van ${inm.naam} (${email}) niet gevonden in Outlook — niet plannen`);
+    let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView?$top=500&$select=Subject,Start,End,IsAllDay,IsCancelled,ShowAs&startDateTime=${van.toISOString()}&endDateTime=${tot.toISOString()}`;
+    const evs = [];
+    while (url) {
+      const j = await (await fetch(url, { headers: OH })).json();
+      if (j.error) throw new Error(`eigen agenda ${inm.naam}: ${j.error.message || 'fout'} — niet plannen`);
+      evs.push(...(j.value || []));
+      url = j['@odata.nextLink'] || null;
+    }
+    const blokken = eigenAgendaBlokken(evs);
+    perInmeter[inm.naam].push(...blokken);
+    const vb = blokken.slice(0, 2).map((b) => `${b.klant.replace('eigen agenda: ', '')} ${b.start.slice(0, 10)}`).join(', ');
+    console.log(`  eigen agenda ${inm.naam} (${cal.Name}): ${blokken.length} bezette blokken${vb ? ' — o.a. ' + vb : ''}`);
+  }
 }
 
 /** Werkdagen PER INMETER uit het echte rooster (data/inmeters-rooster.json is
@@ -2262,7 +2325,7 @@ async function verwerkVerzoek(m) {
   return { afgewezen: false, uitkomst: res.gelukt ? 'alle systemen bijgewerkt' : 'deels: ' + res.stappen.filter((x) => !x.ok).map((x) => x.stap).join(',') };
 }
 
-module.exports = { rpGet, PID, BACKLOG_ID, grippCall, verwerkVerzoek, ontdubbelSlots, verversRonde: main, maakEnVerstuurAanbod, haalAgenda, leesLeadCompleet, werkdagenVoor, laadVakanties, voegAanbiedingenToe, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram, reminderNu, reminderTekst };
+module.exports = { eigenAgendaBlokken, laadEigenAgendas, rpGet, PID, BACKLOG_ID, grippCall, verwerkVerzoek, ontdubbelSlots, verversRonde: main, maakEnVerstuurAanbod, haalAgenda, leesLeadCompleet, werkdagenVoor, laadVakanties, voegAanbiedingenToe, ROOSTER, MEET_CODE_EXPORT: MEET_CODE, telegram, reminderNu, reminderTekst };
 
 if (require.main === module) {
   if (process.argv.includes('--verwerk-aanbod')) {

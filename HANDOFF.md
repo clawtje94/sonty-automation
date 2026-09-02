@@ -1,6 +1,16 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 02-09 16:40: MAC-UPDATE/HERSTART GECHECKT (vraag Daimy "draait alles?")
+- Mac uit 16:29, weer op 16:32, ingelogd 16:33 (dus geen FileVault-blokkade). Alle 8 daemons draaien (telegram-poll, databot-poll,
+  interval-runner, sonny, email, inmeet-verzoeken, wa-luisteraar, inmeet-dashboard); launchd-intervaltimers leven na de herstart
+  weer zelf (interval-runner meldt "timer leeft, runner passief").
+- Enige rode job: nl.sonty.brein-collect crashte elke minuut sinds 11:26 (370x, NIET door de update): Isa deed
+  `brein-sessie.js opdracht` zonder ontvanger/tekst → postvak-item 0nrka5kr met aan=undefined → path.join crash.
+  Structureel dicht: lib/brein.js nieuweOpdracht weigert lege ontvanger/tekst (gebeurtenis-log), brein-sessie.js opdracht
+  weigert met uitleg (exit 2), brein-collect zet zo'n item op 'fout' i.p.v. crashen. Item 0nrka5kr op fout; collector groen,
+  2 wachtende delegaties gestart.
+
 ## 02-09 (avond): ONDERZOEK IG/FB-ALGORITME + VIRAL DRAAIBOEK SONTY (goal-opdracht Daimy)
 - Volledig onderzoek (12+ bronnen, kern over 3+ onafhankelijke bronnen bevestigd): IG rankt per formaat apart; Reels-signalen
   1) sends per bereik (zwaarst, Mosseri), 2) kijktijd+replays, 3) likes per bereik. Origineel 40-60% meer bereik, <90s naar

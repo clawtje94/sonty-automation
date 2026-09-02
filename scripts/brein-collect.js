@@ -342,6 +342,7 @@ function terugkoppelingen() {
 function startLokaleDelegaties() {
   let n = 0;
   for (const o of B.postvak().filter((x) => x.status === 'nieuw')) {
+    if (typeof o.aan !== 'string' || !o.aan) { B.markeer(o.id, 'fout', 'geen ontvanger (kapotte opdracht)'); continue; }
     const pf = path.join(SONTY, 'medewerkers', o.aan, 'profiel.md');
     if (!fs.existsSync(pf)) continue;
     let sessieProfiel = false; try { sessieProfiel = /^sessie:\s*ja/m.test(fs.readFileSync(pf, 'utf8')); } catch { continue; }

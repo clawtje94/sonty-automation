@@ -82,6 +82,8 @@ function bewaarPostvak(lijst) {
   schrijf(P.postvak, bewaren);
 }
 function nieuweOpdracht({ aan, tekst, van = 'Daimy', id = null, bron = null, soort = null }) {
+  // Poort (02-09): opdracht zonder ontvanger of tekst liet brein-collect elke minuut crashen (path.join(undefined)).
+  if (typeof aan !== 'string' || !aan.trim() || !String(tekst || '').trim()) { gebeurtenis(van, 'opdracht geweigerd: ontvanger of tekst ontbreekt'); return null; }
   const lijst = postvak();
   const o = { id: id || Math.random().toString(36).slice(2, 10), aan, tekst: String(tekst).slice(0, 4000), van, op: new Date().toISOString(), status: 'nieuw', antwoord: null, antwoordOp: null, bron: bron || null, soort: soort || null };
   if (lijst.some((x) => x.id === o.id)) return null; // al bekend (idempotent bij herhaalde pull)

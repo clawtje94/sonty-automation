@@ -78,10 +78,35 @@ function legVast(tekst, reden) {
  *   - wat doorkomt (vraag/alarm/urgent/rapport) → data-bot + hoofdchat, zoals sinds 31-08
  *  De 31-08-les blijft geborgd: annuleringen, wachtende klanten en échte storingen zitten in de
  *  ALARM-regex en komen dus altijd (1x per 6u) door — nooit meer stil weg. */
+/** 02-09 (Daimy: "ja 17 berichten gaat het ff"): 8 meldingen kwamen elk DUBBEL (data-bot + hoofdchat) plus
+ *  losse per-klant-alarmen over TESTklanten. Nieuwe regel, terug naar 24-08 ("alleen vragen, blok-afrondingen,
+ *  urgent; bundelen"):
+ *   - boeking → planning-groep; vraag → alleen hoofdchat; urgent/leervraag → alleen hoofdchat (1x per 6u per soort)
+ *   - alarm en rapport → DIGEST: in de wachtrij, 2x per dag (08:30 en 16:30) als ÉÉN gebundeld hoofdchat-bericht
+ *     (scripts/telegram-digest.js). Niets verdwijnt, maar het komt niet meer los binnen.
+ *   - testklanten ("… Test") → alleen de log; procesmelding en alarm-herhaling → alleen de log
+ *   - de data-bot krijgt via deze route niets meer: die beantwoordt datavragen, meldingen dupliceren was ruis */
+const TESTKLANT = /\b(Mirjam|Fatih|Marius|Kim|Jan) Test\b|\bTest(klant|kaart)\b|\btestklant\b/i;
+const URGENT_DEDUP_UUR = 6;
 function routeer(tekst, opties = {}) {
   if (opties.boeking) return { bestemmingen: ['planning-groep'], log: false };
-  const oordeel = magDoor(tekst, opties);
-  return { bestemmingen: oordeel.door ? ['data-bot', 'hoofdchat'] : [], log: !oordeel.door, reden: oordeel.reden };
+  const t = String(tekst || '');
+  if (TESTKLANT.test(t) && !VRAAG.test(t)) return { bestemmingen: [], log: true, reden: 'testklant' };
+  const oordeel = magDoor(t, opties);
+  if (!oordeel.door) return { bestemmingen: [], log: true, reden: oordeel.reden };
+  if (oordeel.reden === 'vraag') return { bestemmingen: ['hoofdchat'], log: false, reden: 'vraag' };
+  if (oordeel.reden === 'leervraag/urgent') {
+    // zelfde urgente melding niet vaker dan 1x per 6u
+    const sleutel = 'urgent:' + t.replace(/\d+/g, '#').replace(/\s+/g, ' ').slice(0, 60);
+    let dedup = {};
+    try { dedup = JSON.parse(fs.readFileSync(DEDUP, 'utf8')); } catch { /* eerste keer */ }
+    if (Date.now() - Date.parse(dedup[sleutel] || 0) < URGENT_DEDUP_UUR * 3600000) return { bestemmingen: [], log: true, reden: 'urgent-herhaling' };
+    dedup[sleutel] = new Date().toISOString();
+    try { fs.writeFileSync(DEDUP, JSON.stringify(dedup, null, 1)); } catch { /* best effort */ }
+    return { bestemmingen: ['hoofdchat'], log: false, reden: 'urgent' };
+  }
+  // alarm / rapport → gebundeld
+  return { bestemmingen: ['digest'], log: false, reden: 'digest:' + oordeel.reden };
 }
 
 module.exports = { magDoor, routeer, legVast };

@@ -62,6 +62,14 @@ async function planningTelegram(tekst, opties = {}) {
     if (route.log) legVast(tekst, route.reden || 'procesmelding');
   } catch { /* filter stuk mag verzending nooit blokkeren */ }
   for (const b of route.bestemmingen) {
+    if (b === 'digest') {
+      // 02-09: alarmen en rapporten gebundeld, 2x per dag één bericht (scripts/telegram-digest.js).
+      try {
+        fs.appendFileSync(path.join(__dirname, '..', '..', 'data', 'telegram-digest-wachtrij.jsonl'), JSON.stringify({ op: new Date().toISOString(), reden: route.reden || 'digest', tekst: String(tekst).slice(0, 600) }) + '\n');
+        fs.appendFileSync(path.join(__dirname, '..', '..', 'logs', 'telegram-verzonden.log'), `[${new Date().toISOString()}] (digest-wachtrij) ${String(tekst).replace(/\n/g, ' | ').slice(0, 300)}\n`);
+      } catch { /* wachtrij mag nooit crashen */ }
+      continue;
+    }
     const { token, chatId } = b === 'planning-groep' ? config() : b === 'hoofdchat' ? { token: HOOFD_TOKEN, chatId: HOOFD_CHAT } : databotConfig();
     // VERZENDLOG (Daimy 01-09: "zet alle verstuurde berichten van 24u onder elkaar" — dat kon
     // nergens uit worden afgeleid). Eén regel per verzonden bericht, per bestemming.

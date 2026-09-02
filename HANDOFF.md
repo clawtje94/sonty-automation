@@ -1,5 +1,17 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
+## 02-09 (middag): TELEGRAM-DIGEST + JORREN AFWEZIG/TANYA TERUG (Daimy: "ja 17 berichten gaat het ff")
+- Meting: 8 meldingen kwamen elk DUBBEL (data-bot + hoofdchat) + losse per-klant-alarmen over TESTklanten (Mirjam/Fatih Test) = 17.
+- Nieuwe routering lib/telegram-filter.routeer(): boeking → planning-groep; vraag → alleen hoofdchat; urgent/leervraag → alleen
+  hoofdchat (1x per 6u per soort); alarm + rapport → DIGEST-wachtrij (data/telegram-digest-wachtrij.jsonl); testklant/proces/herhaling
+  → alleen log. Data-bot krijgt via deze route niets meer. scripts/telegram-digest.js bundelt 2x per dag (08:30, 16:30, launchd
+  nl.sonty.telegram-digest, kalender-job dus werkt ondanks de dode intervaltimers) tot ÉÉN bericht van max 10 regels; volledige
+  inhoud in logs/telegram-digest.log. Lab telegram-route 20 sc. 0x FOUT-STIL. Daemons sonny/email herstart (14:20) voor het verse filter.
+  Verwachting: hoofdchat ~2 digests + Bram-dagstart + echte vragen per dag. Bram's dagstart gaat nog via zijn eigen pad.
+- Jorren (745487) vakantie t/m zo 06-09, Tanya (748440) terug: data/ai-ks/afwezig.json bijgewerkt (team-tags → notities taggen nu
+  alleen @tanya). Nieuw in lib/collega-toewijzing.js: afwezige collega krijgt geen gesprekken toegeschoven (afwezigeUserIds uit
+  afwezig.json); lab collega-toewijzing 96 sc. 0x FOUT-STIL. Maandag 07-09 doet Jorren vanzelf weer mee.
+
 ## 02-09 (middag): LAUNCHD-INTERVALTIMERS DOOD SINDS 00:42 → INTERVAL-RUNNER ALS VANGNET (vraag Daimy "6 op inmeten inplannen")
 - Vondst: ALLE nl.sonty.*-jobs met StartInterval (29 stuks: inmeet-dashboard 30 min, aanbod-replies 3 min, brein-collect 1 min,
   vakanties-collect, inmeet-verwerker, outlook-planado-sync, ...) draaiden na 00:42 niet meer. Kalender-jobs (StartCalendarInterval)

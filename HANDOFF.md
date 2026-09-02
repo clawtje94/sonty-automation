@@ -1,5 +1,18 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
+
+## 02-09 (avond): GRIPP-RELATIES ZONDER ADRES → 47 HERSTELD + STRUCTURELE ADRESKETEN (vraag Daimy 'gripp nummer 6470')
+- Inventarisatie live op Gripp-API: 446 door cron-gripp-invullen.js aangemaakte relaties (99206-99849), 45 helemaal zonder adres +
+  4 deels. Oorzaak bewezen: script las alleen 'Straatnaam:/Postcode:/Plaats:'-regels uit de leadtekst; sommige formulieren hebben die niet.
+- 47 ingevuld en teruggelezen (proefgeval 6470 Verkerk eerst, akkoord Daimy): bron Planado-jobdetail (lijst-endpoint heeft GEEN adres
+  en reikt maar ~5 weken terug!) → Outlook 'Sonty Montage' calendarView (telefoon in event-Body = sleutel bij naamgenoten) → Trengo;
+  alles BAG-geverifieerd (PDOK; postcode+huisnr exact). Incl. Letizia Bleeker 99224 (handmatig pad) en Peters (postcode-tikfout ZC→ZD).
+- NOG OPEN (vraag bij Daimy): Cor Haakman (99634 + DUBBEL 99851 van 02-09, offerte 6593) — tegenstrijdig: Bookings 'Westersingel B&R'
+  vs WhatsApp 'Hovenierstraat 11, 2651WW' + 'wij komen op nmr 2'; en Ganesh 99773 (nergens adres, alleen showroom 04-08).
+- Structureel in cron-gripp-invullen.js: adresBepalen-keten (lead-velden → RP-adresveld → BAG-completering/normalisatie), Telegram-alarm
+  bij aanmaak zonder compleet adres (data/gripp-adres-ontbreekt.json, 1x per relatie), adresNacontrole elke run over ALLE id>=99206
+  (vangt ook handmatige aanmaak; bewees zich direct: vond 99224/99388/99851 buiten mijn eigen lijst). Regressie 1000 echte RP-leads:
+  0 adressen verloren, 5/5 gerichte gevallen OK, node --check groen. Lijst: docs/gripp-zonder-adres-2026-09-02.md. Memory: gripp-adresketen.
 ## 02-09 (middag): TELEGRAM-DIGEST + JORREN AFWEZIG/TANYA TERUG (Daimy: "ja 17 berichten gaat het ff")
 - Meting: 8 meldingen kwamen elk DUBBEL (data-bot + hoofdchat) + losse per-klant-alarmen over TESTklanten (Mirjam/Fatih Test) = 17.
 - Nieuwe routering lib/telegram-filter.routeer(): boeking → planning-groep; vraag → alleen hoofdchat; urgent/leervraag → alleen

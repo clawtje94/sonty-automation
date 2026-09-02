@@ -135,6 +135,123 @@ async function sendTelegram(text) {
   await planningTelegram(text.substring(0, 4000));
 }
 
+// ============ ADRES-KETEN (2026-09-02) ============
+// Waarom: 45 relaties zijn maandenlang ZONDER adres aangemaakt omdat alleen de
+// "Straatnaam:/Postcode:/Plaats:"-regels uit de leadtekst gelezen werden. Sommige
+// leadformulieren hebben die regels niet. Keten: (1) losse velden, (2) vrij
+// adresveld uit RP (fields.address), (3) BAG (PDOK) completeert/normaliseert.
+// Blijft het adres incompleet, dan gaat de aanmaak WEL door (offerte mag nooit
+// blokkeren) maar volgt een Telegram-alarm + registratie, en vangt de dagelijkse
+// nacontrole (adresNacontrole) hem tot hij gevuld is. Zie docs/gripp-zonder-adres-2026-09-02.md.
+const ADRES_ONTBREEKT_LOG = path.join(__dirname, '..', 'data', 'gripp-adres-ontbreekt.json');
+
+function parseVrijAdres(f) { // "Griegplantsoen 45, 2992EH Barendrecht, Nederland" e.d.
+  if (!f) return null;
+  const s = String(f).replace(/,?\s*Nederland\.?\s*$/i, '').trim().replace(/\s+/g, ' ');
+  const pcM = s.match(/\b(\d{4})\s?([A-Za-z]{2})\b/);
+  const postcode = pcM ? (pcM[1] + pcM[2]).toUpperCase() : '';
+  const strM = s.match(/^([^,\d]+?)\s+(\d+\s?[a-zA-Z]?(?:[-\/]\d+)?)\b/);
+  const street = strM ? strM[1].trim() : '';
+  const houseNr = strM ? strM[2].replace(/\s/g, '') : '';
+  let city = '';
+  const parts = s.split(',').map((x) => x.trim()).filter(Boolean);
+  for (let i = parts.length - 1; i >= 0; i--) {
+    const p = parts[i].replace(/\b\d{4}\s?[A-Za-z]{2}\b/, '').trim();
+    if (p && !/\d/.test(p) && p.toLowerCase() !== street.toLowerCase()) { city = p; break; }
+  }
+  if (!street && !postcode) return null;
+  return { street, houseNr, zipcode: postcode, city };
+}
+
+// BAG (PDOK, gratis/openbaar): completeert postcode/plaats en normaliseert de straat.
+// Faalt de lookup of wijkt het huisnummer af → null (dan houden we de bronwaarden).
+async function bagAdres(a) {
+  try {
+    const q = a.zipcode && a.houseNr ? a.zipcode + ' ' + a.houseNr
+      : [a.street, a.houseNr, a.city].filter(Boolean).join(' ');
+    if (!q.trim()) return null;
+    const r = await fetchRetry('https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?q=' + encodeURIComponent(q) + '&fq=type:adres&rows=1', {});
+    if (!r || !r.ok) return null;
+    const d = (await r.json())?.response?.docs?.[0];
+    if (!d || !d.postcode) return null;
+    if (a.houseNr && parseInt(d.huisnummer) !== parseInt(a.houseNr)) return null;
+    const norm = (x) => String(x || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    // straat moet kloppen of een afkorting/variant zijn (zelfde staart >= 5 tekens)
+    if (a.street) {
+      const x = norm(a.street), y = norm(d.straatnaam);
+      let ok = x === y || y.endsWith(x) || x.endsWith(y);
+      for (let n = Math.min(x.length, y.length, 8); !ok && n >= 5; n--) ok = x.slice(-n) === y.slice(-n);
+      if (!ok) return null;
+    }
+    return {
+      street: d.straatnaam,
+      houseNr: String(d.huisnummer) + (d.huisletter || '') + (d.huisnummertoevoeging ? '-' + d.huisnummertoevoeging : ''),
+      zipcode: d.postcode,
+      city: d.woonplaatsnaam,
+    };
+  } catch { return null; }
+}
+
+// De keten. Geeft altijd een object terug; .compleet zegt of alle 4 velden er zijn.
+async function adresBepalen(desc, fields) {
+  let a = {
+    street: desc.match(/Straatnaam:\s*([^\n]+)/i)?.[1]?.trim() || '',
+    houseNr: desc.match(/Huisnummer:\s*([^\n]+)/i)?.[1]?.trim() || '',
+    zipcode: (desc.match(/Postcode:\s*([^\n]+)/i)?.[1]?.trim() || '').replace(/\s/g, ''),
+    city: desc.match(/Plaats:\s*([^\n]+)/i)?.[1]?.trim() || '',
+    bron: 'lead-velden',
+  };
+  const compleet = (x) => x.street && x.houseNr && x.zipcode && x.city;
+  if (!compleet(a)) {
+    const vrij = parseVrijAdres(fields?.address);
+    if (vrij) a = { street: a.street || vrij.street, houseNr: a.houseNr || vrij.houseNr, zipcode: a.zipcode || vrij.zipcode, city: a.city || vrij.city, bron: 'rp-adresveld' };
+  }
+  if (a.street || a.zipcode) {
+    const b = await bagAdres(a);
+    if (b) a = { ...b, bron: a.bron + '+bag' };
+  }
+  a.compleet = !!compleet(a);
+  return a;
+}
+
+// Registreer + alarmeer relaties die ondanks de keten zonder volledig adres zijn
+// aangemaakt (max 1 alarm per relatie).
+async function adresOntbreektMelden(companyId, naam, offerteNrs) {
+  let log = {}; try { log = JSON.parse(fs.readFileSync(ADRES_ONTBREEKT_LOG, 'utf8')); } catch {}
+  if (log[companyId]) return;
+  log[companyId] = { naam, offerteNrs, sinds: new Date().toISOString() };
+  fs.writeFileSync(ADRES_ONTBREEKT_LOG, JSON.stringify(log, null, 1));
+  await sendTelegram('⚠️ Gripp-relatie aangemaakt ZONDER volledig adres: ' + naam + (offerteNrs && offerteNrs.length ? ' (offerte ' + offerteNrs.join(', ') + ')' : '') + '. Adres stond niet in de lead. Graag opzoeken en invullen in Gripp; de nacontrole blijft er dagelijks aan herinneren tot het gevuld is.');
+}
+
+// Dagelijkse nacontrole: bestaan er door ons aangemaakte relaties (id >= 99206)
+// zonder straat? Dan alarm met namen. Gevulde relaties verdwijnen uit het log.
+async function adresNacontrole() {
+  try {
+    let first = 0; const kaal = []; const gevuld = [];
+    while (true) {
+      const [r] = await gripp([{ method: 'company.get', params: [[{ field: 'company.id', operator: 'greaterequals', value: 99206 }], { paging: { firstresult: first, maxresults: 250 } }], id: 1 }]);
+      const rows = r?.result?.rows || [];
+      for (const c of rows) {
+        if (!(c.visitingaddress_street || '').trim()) kaal.push(c); else gevuld.push(c.id);
+      }
+      if (!r?.result?.more_items_in_collection) break;
+      first += 250;
+    }
+    let log = {}; try { log = JSON.parse(fs.readFileSync(ADRES_ONTBREEKT_LOG, 'utf8')); } catch {}
+    let changed = false;
+    for (const id of gevuld) if (log[id]) { delete log[id]; changed = true; }
+    const nieuw = kaal.filter((c) => !log[c.id]);
+    for (const c of nieuw) { log[c.id] = { naam: (c.companyname || '').trim(), sinds: new Date().toISOString() }; changed = true; }
+    if (changed) fs.writeFileSync(ADRES_ONTBREEKT_LOG, JSON.stringify(log, null, 1));
+    if (kaal.length) {
+      await sendTelegram('⚠️ Nacontrole: ' + kaal.length + ' Gripp-relatie(s) zonder adres: ' + kaal.map((c) => (c.companyname || '?').trim() + ' (' + c.id + ')').slice(0, 10).join(', ') + (kaal.length > 10 ? ' …' : '') + '. Graag aanvullen.');
+    } else {
+      console.log('Nacontrole adressen: alles gevuld.');
+    }
+  } catch (e) { console.log('Nacontrole adressen FOUT:', e.message?.substring(0, 80)); }
+}
+
 // ============ PRODUCT MAPPING ============
 
 const PRODUCT_MAP = {
@@ -366,10 +483,10 @@ async function main() {
       if (!lastName) { lastName = firstName; firstName = ''; }
       const email = item.fields?.email || desc.match(/E-mailadres:\s*([^\n]+)/i)?.[1]?.trim() || '';
       const phone = item.fields?.phone || desc.match(/Telefoonnummer:\s*([^\n]+)/i)?.[1]?.trim() || '';
-      const street = desc.match(/Straatnaam:\s*([^\n]+)/i)?.[1]?.trim() || '';
-      const houseNr = desc.match(/Huisnummer:\s*([^\n]+)/i)?.[1]?.trim() || '';
-      const zipcode = desc.match(/Postcode:\s*([^\n]+)/i)?.[1]?.trim() || '';
-      const city = desc.match(/Plaats:\s*([^\n]+)/i)?.[1]?.trim() || '';
+      // Adres via de keten (lead-velden → RP-adresveld → BAG); zie ADRES-KETEN hierboven.
+      const adres = await adresBepalen(desc, item.fields);
+      const street = adres.street, houseNr = adres.houseNr, zipcode = adres.zipcode, city = adres.city;
+      if (!adres.compleet) console.log('  LET OP: adres incompleet na keten (bron ' + adres.bron + '):', JSON.stringify(adres));
 
       // Haal offerte op via lead_configuration_id
       const lcId = item.item_subject?.id;
@@ -610,6 +727,10 @@ async function main() {
 
       console.log('  Gripp: Company ' + companyId + ' + ' + createdOffers.length + ' offerte(s)');
 
+      if (!adres.compleet) {
+        await adresOntbreektMelden(companyId, item.summary, createdOffers.map((o) => o.grippOfferId));
+      }
+
       // Status naar Afgerond via API
       const statusOk = await setStatus(item.id, AFGEROND_STATUS);
       console.log('  RP status → Afgerond:', statusOk ? 'OK' : 'FAIL');
@@ -632,6 +753,8 @@ async function main() {
     }
   }
 
+  await adresNacontrole();
+
   console.log('\n=== SAMENVATTING ===');
   console.log('Verwerkt:', processed, '| Mislukt:', failed);
 
@@ -640,5 +763,5 @@ async function main() {
   }
 }
 
-module.exports = { eigenDocs };
+module.exports = { eigenDocs, parseVrijAdres, bagAdres, adresBepalen, adresNacontrole };
 if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });

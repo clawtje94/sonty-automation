@@ -1,5 +1,9 @@
 # Gripp-relaties door automatisering aangemaakt ZONDER adres
 
+**STATUS 02-09 (avond): 47 INGEVULD in Gripp** (46 van de 48 uit de lijst + Letizia Bleeker 99224 die de nieuwe nacontrole extra vond) (bron: Planado-inmeetjob / Outlook-agenda / RP, alles BAG-geverifieerd; telefoonnummer als sleutel bij naamgenoten).
+Let op: Cor Haakman staat DUBBEL in Gripp (99634 zonder offerte + 99851 van 02-09 met offerte 6593). Nog open: Cor Haakman (tegenstrijdige adressen: Westersingel vs Hovenierstraat 2/11 Berkel en Rodenrijs, vraag ligt bij Daimy) en Ganesh (nergens een adres, alleen showroombezoek 04-08).
+Peters = Cole Porterstraat 330, 3069ZD Rotterdam (Outlook had postcode-tikfout ZC, BAG corrigeerde).
+
 Gemeten live op de Gripp API, 2026-09-02. Bron: alle 446 relaties aangemaakt door cron-gripp-invullen.js (IDs 99206-99849).
 Nog niets aangepast, alleen geinventariseerd. Offertenr = het nummer dat je in Gripp ziet (voorbeeld Daimy: 6470 = Verkerk).
 

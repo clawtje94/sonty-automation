@@ -40,6 +40,10 @@
   DAIMY 14:45 "V2 = B": Rowie kreeg 14:49 een keuzelink (stuur-aanbod voorkeurDagen do/vr, route-plek, 1 moment). Landman 14:36 keuzelink
   (vroegste). Lijst van 10 doorgenomen: Scholten/anoek = bellen (2 voorstellen, stil), Keus = stil door Daimy, Gerdzen/Chi/De Jong = omrij-regel
   dag 0 (wachtmelding verstuurd), Bakker = Sunny na 60 min. V3 open: omrij-grens negeren voor die 3 of regel laten werken.
+  LET OP Rowie 14:48: keuzelink = 1 moment, do 15 OKT 09:00 Joey (6 weken weg, eerste do/vr in de route). WA-tekst was de template
+  "goed nieuws: … do 15 okt" — de eerlijkheidsregel (moment ≥3 weken → geen "goed nieuws") greep NIET op het WA-template-pad. Sessie
+  stuurde 14:53 per mail (WA vrij bericht = 422, 24u-venster) een eerlijk vervolg: deze week lukt niet, 15 okt eerste do/vr, eerder op
+  andere dag mogelijk. TE FIXEN: template-pad in aanbod-versturen ook langs de ≥3-weken-regel (of moment-template met eerlijke variant).
   OPEN (al vóór vandaag): lab planner-berichten 600x FOUT-STIL (max-2-voorstellen-blokkade zonder melding) — zelfde op de oude versie,
   vermoedelijk door het Telegram-dieet van 01-09; nog niet onderzocht. Ook checken: slots op zondag
   (20-09/27-09 voor Rowie in ronde 00:21) — planner lijkt zondagen als werkdag te zien voor Sjoerd/Joey.

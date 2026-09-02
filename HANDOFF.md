@@ -1,6 +1,18 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 02-09 18:00: ESCALATIE-WACHTER → HERINNERING PAS NA 4 DAGEN (REGEL Daimy: "anders NIET")
+- Aanleiding: wachter alarmeerde na 4 werkuren en stuurde vandaag 4x een lijst met 13 klanten. Daimy: pas na 4 dagen, en alleen als
+  nergens geholpen én geen interne opmerking.
+- Bouw: scripts/ai-ks/escalatie-besluit.js (puur): 4 kalenderdagen na eerste escalatie; "geholpen" = collega-OUTBOUND (niet Sunny
+  747786) op ENIG ticket van de klant (Trengo /tickets?contact_id=), escalatie-ticket dicht, of ander ticket ná de escalatie dicht;
+  "interne opmerking" = NOTE/internal_note van collega ná de escalatie. Een van die drie → geen herinnering. Herhaling per 24 u blijft.
+  Wachter kijkt 21 dagen terug, slaat Trengo-calls over voor escalaties < 4 dagen (anders 4+ min per run).
+- Bewijs: tests/escalatie-watch-regressie.js 15 tests + matrix 420 groen. Dry-run echte Trengo-data: 94 escalaties in 21 dagen →
+  2 herinneringen (974144885 naamloos WA 15-08, 13 d; John van Krimpen 976931222, 5 d); 65 gesloten, 6 collega antwoordde, 3 notitie.
+  Onderweg gevonden+geborgd: een ander, al lang gesloten ticket van de klant telde eerst als hulp (974797599/962338508).
+- Launchd draait het script elk uur vers, geen herstart nodig. State met 13 alarmen van vandaag ruimt zichzelf op.
+
 ## 02-09 17:15: JOEY 28-09 OVERBOEKT → PLANNER LEEST NU EIGEN OUTLOOK-AGENDA'S MEE (Daimy: "meelezen MOET, nu niks wijzigen")
 - Oorzaak: Joey had Tandarts 08:30/15:30 + WINKEL 09:45-15:30 alleen in zijn EIGEN agenda (joey@, "Agenda"), niet in Planado en
   niet in Sonty Montage. haalAgenda() bouwde bezet alleen uit Planado; laadVakanties leest Sonty Montage alleen op vakantie/verlof/vrij.
@@ -3701,3 +3713,4 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 - Nieuw: sonty-website/public/intern/reel-thuis.html (script 33s, 3 hooks, loop, montage, caption, Trial Reels, bewijs-KPIs, zonversie). Gelinkt vanuit viral-draaiboek.html. Live op https://sonty-website.vercel.app/intern/reel-thuis.html
 - Let op: sonty.nl/www is nog Cloudflare/oude site; Next-site alleen op sonty-website.vercel.app. Git push triggert GEEN deploy; handmatig `vercel --prod --yes --archive=tgz` (zonder archive faalt: >15000 files).
 - Open: V1 aan Daimy welke Amerikaanse social-expert hij bedoelt (script daar nog tegen checken). Filmen/posten nog niet gedaan.
+- 17:25 IG-analyse sonty.nl geblokkeerd (token alleen ads_read, publiek geen data). V1/V2 aan Daimy: IG koppelen aan systeemgebruiker met instagram_basic+instagram_manage_insights, of Insights-screenshots.

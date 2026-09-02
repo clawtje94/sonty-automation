@@ -126,6 +126,51 @@ function magBoekingMelden(sleutel) {
 const { planningTelegram } = require('./lib/telegram-planning.js');
 async function telegram(tekst, opties) { await planningTelegram(tekst, opties); }
 
+/** Laatste klantbericht (WA of mail) van NA `sinds` (ISO) — voor het antwoord op Sunny's wachtmelding.
+ *  Mail: alleen het nieuwe deel, niet het gequote origineel. Geen bericht → null. */
+async function klantReactieNa({ telefoon, email }, sinds) {
+  const { trengoFetch } = require('./lib/trengo-fetch');
+  const { laatsteWoordNa } = require('./lib/boek-poort.js');
+  const tickets = [];
+  if (telefoon) {
+    try {
+      const av = require('./lib/aanbod-versturen');
+      const zoek = av.zoekWaTicketBreed || av.zoekWaTicket;
+      const t = zoek ? await zoek(telefoon, { ookGesloten: true }) : null;
+      if (t) tickets.push(typeof t === 'object' ? t.id : t);
+    } catch { /* geen WA-gesprek is geen fout */ }
+  }
+  if (email) {
+    const rc = await trengoFetch(`/contacts?term=${encodeURIComponent(email)}`);
+    if (rc.ok) {
+      const cs = (((await rc.json().catch(() => ({}))).data) || []).filter((c) => String(c.email || '').toLowerCase() === String(email).toLowerCase()).slice(0, 2);
+      for (const c of cs) {
+        const rt = await trengoFetch(`/tickets?contact_id=${c.id}&page=1`);
+        if (!rt.ok) continue;
+        const ts = (((await rt.json().catch(() => ({}))).data) || [])
+          .filter((t) => t.contact?.id === c.id && String(t.updated_at || '') >= String(sinds).slice(0, 10)).slice(0, 4);
+        for (const t of ts) if (!tickets.includes(t.id)) tickets.push(t.id);
+      }
+    }
+  }
+  let beste = null;
+  for (const id of tickets.slice(0, 5)) {
+    const rm = await trengoFetch(`/tickets/${id}/messages?page=1`);
+    if (!rm.ok) continue;
+    const d = await rm.json().catch(() => ({}));
+    let alle = d.data || [];
+    const lp = d.meta?.last_page || 1;
+    if (lp > 1) { const r2 = await trengoFetch(`/tickets/${id}/messages?page=${lp}`); if (r2.ok) alle = alle.concat(((await r2.json().catch(() => ({}))).data) || []); }
+    const inbound = alle.filter((m) => (m.message_type || m.type) === 'INBOUND').sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)));
+    const l = laatsteWoordNa(inbound, sinds);
+    if (!l) continue;
+    const tekst = String(l.message || l.body || '').replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/g, ' ').replace(/\s+/g, ' ').trim();
+    const kort = tekst.split(/\bOn .{5,80}? wrote:|\bOp .{5,120}? schreef\b/i)[0].trim();
+    if (kort && (!beste || String(l.created_at) > beste.op)) beste = { tekst: kort, op: l.created_at, ticket: id };
+  }
+  return beste;
+}
+
 async function rpGet(ep) {
   // RP uit (vlag data/.rp-uit, scripts/rp-uitzetten.js): geen RP-calls meer; lijsten leeg, losse items null. Eigen leads komen via eigen-crm.
   if (require('./lib/dossiers.js').rpUit()) return /\/items\?|\/items$/.test(ep) ? { items: [] } : null;
@@ -890,6 +935,43 @@ async function main() {
               console.log(`    SUNNY MELDDE WACHTTIJD via ${uitW.via}`);
             } catch (e) { console.log(`    Sunny wachtmelding mislukt: ${e.message}`); }
           }
+        }
+        // ANTWOORD OP DE WACHTMELDING (Daimy 02-09, Rowie Post: "donderdag of vrijdag deze week" bleef 2 dagen
+        // onbeantwoord en eindigde als Mens nodig zonder antwoord). Sunny vraagt voorkeursdagen, dus leest hij
+        // het antwoord ook: voorkeur → nieuw aanbod op die dagen via de stuur-aanbod-route (omrij-grens telt dan
+        // niet); anders → Mens nodig mét de klanttekst op Telegram. Eén keer per reactie, nooit stil.
+        const wm = state.sunnyWachtmelding?.[item.id];
+        if (!LIVE && wm?.op && !state.wachtmeldingReactie?.[item.id]) {
+          try {
+            const reactie = await klantReactieNa({ telefoon: lead.telefoon, email: lead.email }, wm.op);
+            if (reactie) {
+              const { leesReactie } = require('./lib/planning-antwoord.js');
+              const duiding = await leesReactie(reactie.tekst, []);
+              const besluit = sunnyStart.wachtmeldingReactieBesluit({ tekst: reactie.tekst, duiding, gemeldOp: wm.op, reactieOp: reactie.op });
+              const noteer = (actie, extra = {}) => {
+                state.wachtmeldingReactie = { ...(state.wachtmeldingReactie || {}), [item.id]: { op: new Date().toISOString(), actie, tekst: reactie.tekst.slice(0, 200), ticket: reactie.ticket, ...extra } };
+                bewaarState(state);
+              };
+              if (besluit.actie === 'stuur-aanbod') {
+                const rW = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie', {
+                  method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': MEET_CODE },
+                  body: JSON.stringify({
+                    type: 'stuur-aanbod', rpItemId: item.id, naam: lead.naam, bron: 'wachtmelding-reply', wilEerder: true,
+                    voorkeurDagen: besluit.voorkeur.dagen, voorkeurDagdeel: besluit.voorkeur.dagdeel || undefined, vanaf: besluit.voorkeur.vanaf || undefined,
+                  }),
+                }).catch(() => null);
+                noteer('stuur-aanbod', { ok: !!rW?.ok, reden: besluit.reden });
+                sunnyWachtTekst = `klant antwoordde (${besluit.reden}) → nieuw aanbod met voorkeur ${rW?.ok ? 'in de rij' : 'AANVRAGEN MISLUKT'}`;
+                console.log(`    WACHTMELDING-ANTWOORD: ${sunnyWachtTekst}`);
+                await telegram(`🔁 ${lead.naam} (${lead.plaats}) antwoordde op de wachtmelding: "${reactie.tekst.slice(0, 120)}" → ${besluit.reden}. Nieuw aanbod met die voorkeur ${rW?.ok ? 'staat in de rij' : 'AANVRAGEN MISLUKT — handmatig sturen'}.${besluit.overigeVraag ? ' Vraag van de klant: ' + besluit.overigeVraag : ''}`);
+              } else if (besluit.actie === 'mens') {
+                noteer('mens', { reden: besluit.reden });
+                sunnyWachtTekst = `Mens nodig: ${besluit.reden}`;
+                console.log(`    WACHTMELDING-ANTWOORD: ${sunnyWachtTekst}`);
+                await telegram(`✋ ${lead.naam} (${lead.plaats}) antwoordde op de wachtmelding, maar ik haal er geen voorkeur uit: "${reactie.tekst.slice(0, 160)}". Mens nodig: antwoord de klant en plan zelf (${besluit.reden}).`);
+              }
+            }
+          } catch (e) { console.log(`    wachtmelding-antwoord lezen mislukt: ${e.message}`); }
         }
         // óók wachtende klanten krijgen hun best beschikbare 3 tijden op de kaart
         // (mét omrij-minuten): de bot wacht zelf op een buurklus, maar de winkel

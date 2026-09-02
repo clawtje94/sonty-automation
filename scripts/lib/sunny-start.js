@@ -57,6 +57,38 @@ function volgendeVensterTekst(nu = Date.now()) {
   return 'morgen 08:30';
 }
 
+/**
+ * ANTWOORD OP DE WACHTMELDING (Daimy 02-09, Rowie Post: "donderdag of vrijdag deze week" bleef
+ * 2 dagen onbeantwoord). Sunny vraagt in de wachtmelding om voorkeursdagen, dus moet hij het
+ * antwoord ook lezen. Puur: duiding komt uit planning-antwoord.leesReactie(tekst, []).
+ * @returns {{actie:'negeren'|'stuur-aanbod'|'mens', reden:string, voorkeur?:{dagen:number[],dagdeel:string|null,vanaf:string|null}, overigeVraag?:string}}
+ *  - negeren: niets nieuws (geen reactie, al verwerkt, of bericht van vóór de melding)
+ *  - stuur-aanbod: klant noemt dagen/dagdeel/vanaf → nieuw aanbod met die voorkeur (omrij-grens telt dan niet)
+ *  - mens: klant reageerde maar er is geen voorkeur uit te halen (vraag, afzegging, onduidelijk) → Mens nodig, nooit stil
+ */
+function wachtmeldingReactieBesluit({ tekst = '', duiding = null, alVerwerkt = false, gemeldOp = null, reactieOp = null } = {}) {
+  if (alVerwerkt) return { actie: 'negeren', reden: 'reactie al verwerkt' };
+  const t = String(tekst || '').replace(/\s+/g, ' ').trim();
+  if (!t) return { actie: 'negeren', reden: 'geen klantreactie na de wachtmelding' };
+  if (gemeldOp && reactieOp && Date.parse(reactieOp) <= Date.parse(gemeldOp)) return { actie: 'negeren', reden: 'bericht is van vóór de wachtmelding' };
+  const d = duiding || {};
+  const overigeVraag = String(d.overigeVraag || '').trim();
+  if (/annul|afzeg|stop|geen ?interesse|niet meer|toch niet/i.test(String(d.intent || '') + ' ' + String(d.samenvatting || ''))) {
+    return { actie: 'mens', reden: 'klant lijkt af te zeggen of te twijfelen — mens nodig', overigeVraag };
+  }
+  const dagen = Array.isArray(d.dagen) ? d.dagen.map(Number).filter((x) => Number.isInteger(x) && x >= 0 && x <= 6) : [];
+  const dagdeel = d.dagdeel === 'ochtend' || d.dagdeel === 'middag' ? d.dagdeel : null;
+  const vanaf = /^\d{4}-\d{2}-\d{2}$/.test(String(d.vanaf || '')) ? d.vanaf : null;
+  if (dagen.length || dagdeel || vanaf) {
+    const delen = [];
+    if (dagen.length) delen.push('dagen ' + dagen.map((n) => ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'][n]).join('/'));
+    if (dagdeel) delen.push(dagdeel);
+    if (vanaf) delen.push('vanaf ' + vanaf);
+    return { actie: 'stuur-aanbod', reden: 'voorkeur: ' + delen.join(', '), voorkeur: { dagen, dagdeel, vanaf }, overigeVraag };
+  }
+  return { actie: 'mens', reden: `reactie zonder herkenbare voorkeur (${d.samenvatting || 'niet te duiden'}) — mens nodig`, overigeVraag };
+}
+
 const tel9 = (t) => String(t || '').replace(/\D/g, '').slice(-9);
 const mailNorm = (m) => String(m || '').trim().toLowerCase();
 
@@ -295,4 +327,4 @@ function registreerActiefTicket(ticketId, klant) {
   }
 }
 
-module.exports = { wachtmeldingBesluit, wachtmeldingTekst, navraagBesluit, navraagTekst, aan, alleenNaam, registreerActiefTicket, noteerSunnyVerstuurd, sunnyStuurdeNet, binnenVenster, volgendeVensterTekst, magStarten, laatsteVoorstelOp, aantalEerdereVoorstellen, voorstelTekst, voorstelMailHtml, slotZin, schrijfHeartbeat, sunnyLeeft, eigenaarVanReactie, VLAG, HEARTBEAT, VENSTER };
+module.exports = { wachtmeldingReactieBesluit, wachtmeldingBesluit, wachtmeldingTekst, navraagBesluit, navraagTekst, aan, alleenNaam, registreerActiefTicket, noteerSunnyVerstuurd, sunnyStuurdeNet, binnenVenster, volgendeVensterTekst, magStarten, laatsteVoorstelOp, aantalEerdereVoorstellen, voorstelTekst, voorstelMailHtml, slotZin, schrijfHeartbeat, sunnyLeeft, eigenaarVanReactie, VLAG, HEARTBEAT, VENSTER };

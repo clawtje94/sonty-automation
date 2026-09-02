@@ -15,8 +15,14 @@
   is door NIETS opgepakt: Sunny's wachtmelding vraagt voorkeursdagen maar er is geen verwerker voor het antwoord (de voorkeur-logica
   in cron-inmeten-planner.js ~1641 geldt alleen voor antwoorden op een AANBOD). De e-mail-daemon zag de mail pas 02-09 13:01, wachtte
   107 min "reactietijd" en zette hem op Mens nodig zonder antwoord. 14:10: interim-antwoord van Sunny in ticket 975234318 gepost (stalen
-  komen mee, moment volgt vandaag); V2 aan Daimy (do/vr IJmuiden zelf prikken of eerste route-plek). TE BOUWEN: voorkeursdagen-antwoord
-  op wachtmelding → planner neemt voorkeur mee (kiesAanbod voorkeurDagen) of Mens nodig mét concept. Ook checken: slots op zondag
+  komen mee, moment volgt vandaag); V2 aan Daimy (do/vr IJmuiden zelf prikken of eerste route-plek). GEBOUWD 14:15: planner leest per wachtende
+  lead het klantantwoord op de wachtmelding (klantReactieNa: WA + mail, alleen nieuw deel, na wm.op) → leesReactie → 
+  sunny-start.wachtmeldingReactieBesluit (puur): voorkeur → stuur-aanbod (bron wachtmelding-reply, wilEerder = omrij-grens uit) +
+  Telegram 🔁; geen voorkeur/afzegging → Telegram ✋ Mens nodig mét klanttekst; één keer per reactie (state.wachtmeldingReactie).
+  Lab wachtmelding-reactie 78 sc. 0x FOUT-STIL; echte leestest op Rowie's ticket: "do/vr" → dagen [4,5] → stuur-aanbod. Rowie zelf
+  vooraf gemarkeerd (handmatig beantwoord), zodat de code haar niet dubbel benadert. Regressie sunny-start 5.648 + herplan 156 groen.
+  OPEN (al vóór vandaag): lab planner-berichten 600x FOUT-STIL (max-2-voorstellen-blokkade zonder melding) — zelfde op de oude versie,
+  vermoedelijk door het Telegram-dieet van 01-09; nog niet onderzocht. Ook checken: slots op zondag
   (20-09/27-09 voor Rowie in ronde 00:21) — planner lijkt zondagen als werkdag te zien voor Sjoerd/Joey.
 - De 6 op "Inmeten inplannen" (12:50): Scholten (12 dgn, 2 voorstellen + navraag, geen reactie → MENS NODIG, gemeld 06:20) en
   anoek van der wal (9 dgn, 2 voorstellen zonder reactie → belscherm sinds 26-08) wachten op een mens; Keus staat op stil-lijst door

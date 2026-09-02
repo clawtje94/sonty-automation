@@ -33,6 +33,7 @@ const ONDERDELEN = [
   require('./onderdelen/herplan-na-keuze.js'),
   require('./onderdelen/testrit-keten.js'),
   require('./onderdelen/sunny-start.js'),
+  require('./onderdelen/wachtmelding-reactie.js'),
   require('./onderdelen/winkel-direct.js'),
   require('./onderdelen/seo-agent.js'),
   require('./onderdelen/brein-medewerkers.js'),

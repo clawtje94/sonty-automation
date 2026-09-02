@@ -11,6 +11,13 @@
   Log: logs/interval-runner.log. LET OP: KeepAlive-herstart is nu ook onbetrouwbaar — als de runner sterft: kickstart hem.
 - Echte oplossing waarschijnlijk uit-/inloggen of herstart van de Mac mini (herstart launchd-domein gui/501) — NIET gedaan, dat is aan Daimy
   (alle terminals/daemons gaan dan plat). Daarna checken of de runner "timer leeft, runner passief" logt.
+- ROWIE POST (Daimy 14:05 "rowie had ook al terug gemaild"): haar mail van 31-08 18:33 ("donderdag of vrijdag deze week" + kleurenwaaier)
+  is door NIETS opgepakt: Sunny's wachtmelding vraagt voorkeursdagen maar er is geen verwerker voor het antwoord (de voorkeur-logica
+  in cron-inmeten-planner.js ~1641 geldt alleen voor antwoorden op een AANBOD). De e-mail-daemon zag de mail pas 02-09 13:01, wachtte
+  107 min "reactietijd" en zette hem op Mens nodig zonder antwoord. 14:10: interim-antwoord van Sunny in ticket 975234318 gepost (stalen
+  komen mee, moment volgt vandaag); V2 aan Daimy (do/vr IJmuiden zelf prikken of eerste route-plek). TE BOUWEN: voorkeursdagen-antwoord
+  op wachtmelding → planner neemt voorkeur mee (kiesAanbod voorkeurDagen) of Mens nodig mét concept. Ook checken: slots op zondag
+  (20-09/27-09 voor Rowie in ronde 00:21) — planner lijkt zondagen als werkdag te zien voor Sjoerd/Joey.
 - De 6 op "Inmeten inplannen" (12:50): Scholten (12 dgn, 2 voorstellen + navraag, geen reactie → MENS NODIG, gemeld 06:20) en
   anoek van der wal (9 dgn, 2 voorstellen zonder reactie → belscherm sinds 26-08) wachten op een mens; Keus staat op stil-lijst door
   Daimy 29-08 (kantoor pakt op); Landman en Rowie Post: geen aanbod, alle plekken >30 min omrijden (dag 2/1 van max 4) — regel werkt;

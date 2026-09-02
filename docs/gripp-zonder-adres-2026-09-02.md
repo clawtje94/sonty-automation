@@ -34,7 +34,7 @@ Nog niets aangepast, alleen geinventariseerd. Offertenr = het nummer dat je in G
 | 6419 | Kenny van Hooijdonk | 99717 | 0648086057 | liu-vanhooijdonk@outlook.com | 2026-08-07 |
 | 6430 |  Franken | 99726 | 0653638650 | familiefranken13@gmail.com | 2026-08-08 |
 | 6452 | Timo Goes | 99743 |  0634497754 |  timogoes@hotmail.com | 2026-08-10 |
-| 6470 |  Verkerk | 99757 | 0629192189 | sandraverkerk1@hotmail.com | 2026-08-12 |
+| 6470 | ~~Verkerk~~ INGEVULD 02-09 (Bizetstraat 22, 2625AX Delft, bron Planado-job + BAG) | 99757 | 0629192189 | sandraverkerk1@hotmail.com | 2026-08-12 |
 | 6472 | Monique Bijnen | 99760 | 0652546684 | monique.bijnen@gmail.com | 2026-08-13 |
 | 6484 |  Ganesh | 99773 | 0644887425 | ganeshmangal020@gmail.com | 2026-08-15 |
 | 6496 | Thijs Buijs | 99780 | 0642443020 | thijsbuijs13@hotmail.com | 2026-08-17 |

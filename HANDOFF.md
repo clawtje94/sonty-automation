@@ -1,6 +1,17 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 02-09 (avond): ONDERZOEK IG/FB-ALGORITME + VIRAL DRAAIBOEK SONTY (goal-opdracht Daimy)
+- Volledig onderzoek (12+ bronnen, kern over 3+ onafhankelijke bronnen bevestigd): IG rankt per formaat apart; Reels-signalen
+  1) sends per bereik (zwaarst, Mosseri), 2) kijktijd+replays, 3) likes per bereik. Origineel 40-60% meer bereik, <90s naar
+  niet-volgers, hook beslist in 1,7-2,1s (doel 60%+ na 3s). IG transcribeert spraak als zoeksignaal. FB: 50% feed unconnected,
+  doorkijk >72% = 2,3x verspreiding, native crossposten.
+- Rapport als artifact: https://claude.ai/code/artifact/603f2d85-9b8a-4395-a108-0746f508c58e
+  Met voorbeeldvideo "36 graden" (knikarmscherm, 32 sec, seconde-voor-seconde script, caption, hashtags, posttijden),
+  opname-checklist (5 vaste shots per klus, infrarood-thermometer mee), contentpijlers + 30-dagenplan, meetdoelen.
+- Visueel gecheckt met Playwright headless screenshots (desktop licht+donker, mobiel 390px): layout OK. Memory: sonty-social-viral.
+- Nog niet: filmen/posten zelf; eigen Insights na 2 weken leidend. Telegram-melding met link gestuurd.
+
 ## 02-09 (avond): GRIPP-RELATIES ZONDER ADRES → 47 HERSTELD + STRUCTURELE ADRESKETEN (vraag Daimy 'gripp nummer 6470')
 - Inventarisatie live op Gripp-API: 446 door cron-gripp-invullen.js aangemaakte relaties (99206-99849), 45 helemaal zonder adres +
   4 deels. Oorzaak bewezen: script las alleen 'Straatnaam:/Postcode:/Plaats:'-regels uit de leadtekst; sommige formulieren hebben die niet.

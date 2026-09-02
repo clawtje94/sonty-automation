@@ -66,12 +66,23 @@ function volgendeVensterTekst(nu = Date.now()) {
  *  - stuur-aanbod: klant noemt dagen/dagdeel/vanaf → nieuw aanbod met die voorkeur (omrij-grens telt dan niet)
  *  - mens: klant reageerde maar er is geen voorkeur uit te halen (vraag, afzegging, onduidelijk) → Mens nodig, nooit stil
  */
-function wachtmeldingReactieBesluit({ tekst = '', duiding = null, alVerwerkt = false, gemeldOp = null, reactieOp = null } = {}) {
+function wachtmeldingReactieBesluit({ tekst = '', duiding = null, alVerwerkt = false, gemeldOp = null, reactieOp = null, pogingen = 0, maxPogingen = 3 } = {}) {
   if (alVerwerkt) return { actie: 'negeren', reden: 'reactie al verwerkt' };
   const t = String(tekst || '').replace(/\s+/g, ' ').trim();
   if (!t) return { actie: 'negeren', reden: 'geen klantreactie na de wachtmelding' };
   if (gemeldOp && reactieOp && Date.parse(reactieOp) <= Date.parse(gemeldOp)) return { actie: 'negeren', reden: 'bericht is van vóór de wachtmelding' };
   const d = duiding || {};
+  // LEZER FAALDE (Landman 02-09: Anthropic 529 → "niet automatisch te duiden" → onterecht Mens nodig terwijl de klant
+  // gewoon "prima, ook andere dagen als het eerder kan" schreef). Een tijdelijke storing kost niet de enige kans:
+  // volgende ronde opnieuw proberen, pas na maxPogingen naar een mens.
+  if (d.samenvatting === 'niet automatisch te duiden' && pogingen < maxPogingen) {
+    return { actie: 'later', reden: `duiding mislukt (poging ${pogingen + 1}/${maxPogingen}) — volgende ronde opnieuw` };
+  }
+  // "mag ook eerder / zo snel mogelijk" zonder dagen → aanbod op vroegste tijden (omrij-grens uit)
+  if (/\b(eerder|zo snel mogelijk|zsm|snelst|vroegst|eerste (moment|gelegenheid))\b/i.test(t) && !(Array.isArray(d.dagen) && d.dagen.length) && !d.dagdeel && !d.vanaf
+    && !/annul|afzeg|geen ?interesse|niet meer|toch niet/i.test(String(d.intent || '') + ' ' + String(d.samenvatting || ''))) {
+    return { actie: 'stuur-aanbod', reden: 'klant wil zo vroeg mogelijk (dagen vrij)', voorkeur: { dagen: [], dagdeel: null, vanaf: null }, overigeVraag: String(d.overigeVraag || '').trim() };
+  }
   const overigeVraag = String(d.overigeVraag || '').trim();
   if (/annul|afzeg|stop|geen ?interesse|niet meer|toch niet/i.test(String(d.intent || '') + ' ' + String(d.samenvatting || ''))) {
     return { actie: 'mens', reden: 'klant lijkt af te zeggen of te twijfelen — mens nodig', overigeVraag };

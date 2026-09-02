@@ -26,23 +26,31 @@ const dim = [
     { label: 'ok-prima', tekst: 'Prima, ik wacht af', duiding: { intent: 'akkoord', dagen: [], dagdeel: null, vanaf: null, samenvatting: 'wacht af' }, verwacht: 'mens' },
     { label: 'afzeggen', tekst: 'Laat maar, we hebben geen interesse meer', duiding: { intent: 'annuleren', dagen: [], dagdeel: null, vanaf: null, samenvatting: 'geen interesse meer' }, verwacht: 'mens' },
     { label: 'afzeggen-met-dag', tekst: 'Toch niet nodig, anders donderdag', duiding: { intent: 'annuleren', dagen: [4], dagdeel: null, vanaf: null, samenvatting: 'zegt af' }, verwacht: 'mens' },
-    { label: 'onduidbaar', tekst: 'Ja', duiding: { intent: 'vraag', dagen: [], nietDatums: [], dagdeel: null, vanaf: null, samenvatting: 'niet automatisch te duiden' }, verwacht: 'mens' },
+    { label: 'onduidbaar-ja', tekst: 'Ja', duiding: { intent: 'vraag', dagen: [], nietDatums: [], dagdeel: null, vanaf: null, samenvatting: 'klant zegt alleen ja' }, verwacht: 'mens' },
     { label: 'duiding-kapot', tekst: 'Donderdag graag', duiding: undefined, verwacht: 'mens' },
+    // Landman 02-09: lezer faalde (529) → eerst opnieuw proberen; na 3 pogingen beslist de tekst zelf ("eerder" → aanbod op vroegste)
+    { label: 'lezer-faalde', tekst: 'Hi, dat is prima, mag ook op andere dagen als het dan eerder kan', duiding: { intent: 'vraag', dagen: [], nietDatums: [], dagdeel: null, vanaf: null, samenvatting: 'niet automatisch te duiden', antwoordVoorstel: '', overigeVraag: '' }, verwacht: 'later', naPogingen: 'stuur-aanbod' },
+    // "mag ook eerder" zonder dagen → aanbod op de vroegste tijden
+    { label: 'eerder-vrij', tekst: 'Prima, mag ook op andere dagen als het dan eerder kan', duiding: { intent: 'akkoord', dagen: [], dagdeel: null, vanaf: null, samenvatting: 'klant wil liefst eerder, dagen flexibel' }, verwacht: 'stuur-aanbod' },
+    { label: 'eerder-maar-afzeggen', tekst: 'Liever eerder, maar eigenlijk toch niet nodig meer', duiding: { intent: 'annuleren', dagen: [], dagdeel: null, vanaf: null, samenvatting: 'zegt af' }, verwacht: 'mens' },
   ] },
   { naam: 'tijd', waarden: [{ label: 'na-melding', op: NA }, { label: 'voor-melding', op: VOOR }, { label: 'geen-tijd', op: null }] },
   { naam: 'alVerwerkt', waarden: [{ label: 'nee', v: false }, { label: 'ja', v: true }] },
+  { naam: 'pogingen', waarden: [{ label: '0', n: 0 }, { label: '3', n: 3 }] },
 ];
 
 function orakel(s) {
   if (s.alVerwerkt.v) return { wil: 'blokkeer', actie: 'negeren' };
   if (!s.reactie.tekst) return { wil: 'blokkeer', actie: 'negeren' };
   if (s.tijd.label === 'voor-melding') return { wil: 'blokkeer', actie: 'negeren' };
-  return { wil: s.reactie.verwacht === 'stuur-aanbod' ? 'aanbod' : 'mens', actie: s.reactie.verwacht };
+  const actie = s.reactie.verwacht === 'later' && s.pogingen.n >= 3 ? s.reactie.naPogingen : s.reactie.verwacht;
+  return { wil: actie === 'stuur-aanbod' ? 'aanbod' : actie === 'later' ? 'later' : 'mens', actie };
 }
 
 async function voerUit(s) {
-  const r = S.wachtmeldingReactieBesluit({ tekst: s.reactie.tekst, duiding: s.reactie.duiding, alVerwerkt: s.alVerwerkt.v, gemeldOp: GEMELD, reactieOp: s.tijd.op });
-  const voorkeurOk = r.actie !== 'stuur-aanbod' || (r.voorkeur && (r.voorkeur.dagen.length || r.voorkeur.dagdeel || r.voorkeur.vanaf) && r.voorkeur.dagen.every((n) => Number.isInteger(n) && n >= 0 && n <= 6));
+  const r = S.wachtmeldingReactieBesluit({ tekst: s.reactie.tekst, duiding: s.reactie.duiding, alVerwerkt: s.alVerwerkt.v, gemeldOp: GEMELD, reactieOp: s.tijd.op, pogingen: s.pogingen.n });
+  // stuur-aanbod moet óf een echte voorkeur dragen óf expliciet "zo vroeg mogelijk" zijn; dagen altijd geldige weekdagnummers
+  const voorkeurOk = r.actie !== 'stuur-aanbod' || (r.voorkeur && ((r.voorkeur.dagen.length || r.voorkeur.dagdeel || r.voorkeur.vanaf) || /vroeg/.test(r.reden)) && r.voorkeur.dagen.every((n) => Number.isInteger(n) && n >= 0 && n <= 6));
   const vraagOk = !s.reactie.vraag || r.actie === 'negeren' || !!r.overigeVraag;
   return { actie: r.actie, voorkeurOk: !!voorkeurOk, vraagOk, melding: r.actie !== 'negeren' };
 }

@@ -165,7 +165,9 @@ async function klantReactieNa({ telefoon, email }, sinds) {
     const l = laatsteWoordNa(inbound, sinds);
     if (!l) continue;
     const tekst = String(l.message || l.body || '').replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/g, ' ').replace(/\s+/g, ' ').trim();
-    const kort = tekst.split(/\bOn .{5,80}? wrote:|\bOp .{5,120}? schreef\b/i)[0].trim();
+    // gequote origineel eraf: Gmail ("Op ma 31 aug ... schreef"), Apple/Outlook-EN ("On ... wrote:"),
+    // Outlook-NL ("Van: Aanvragen | Sonty ... Verzonden:"), klassiek ("-----Oorspronkelijk bericht-----")
+    const kort = tekst.split(/\bOn .{5,80}? wrote:|\bOp .{5,120}? schreef\b|\bVan: .{0,120}?Verzonden:|-{3,} ?Oorspronkelijk bericht ?-{3,}|\bFrom: .{0,120}?Sent:/i)[0].trim();
     if (kort && (!beste || String(l.created_at) > beste.op)) beste = { tekst: kort, op: l.created_at, ticket: id };
   }
   return beste;
@@ -947,7 +949,14 @@ async function main() {
             if (reactie) {
               const { leesReactie } = require('./lib/planning-antwoord.js');
               const duiding = await leesReactie(reactie.tekst, []);
-              const besluit = sunnyStart.wachtmeldingReactieBesluit({ tekst: reactie.tekst, duiding, gemeldOp: wm.op, reactieOp: reactie.op });
+              const pogingen = state.wachtmeldingReactiePoging?.[item.id] || 0;
+              const besluit = sunnyStart.wachtmeldingReactieBesluit({ tekst: reactie.tekst, duiding, gemeldOp: wm.op, reactieOp: reactie.op, pogingen });
+              if (besluit.actie === 'later') {
+                // lezer (LLM) faalde tijdelijk: volgende ronde opnieuw, niet markeren, niet melden
+                state.wachtmeldingReactiePoging = { ...(state.wachtmeldingReactiePoging || {}), [item.id]: pogingen + 1 };
+                bewaarState(state);
+                console.log(`    WACHTMELDING-ANTWOORD: ${besluit.reden}`);
+              }
               const noteer = (actie, extra = {}) => {
                 state.wachtmeldingReactie = { ...(state.wachtmeldingReactie || {}), [item.id]: { op: new Date().toISOString(), actie, tekst: reactie.tekst.slice(0, 200), ticket: reactie.ticket, ...extra } };
                 bewaarState(state);

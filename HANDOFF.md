@@ -33,6 +33,10 @@
   Telegram 🔁; geen voorkeur/afzegging → Telegram ✋ Mens nodig mét klanttekst; één keer per reactie (state.wachtmeldingReactie).
   Lab wachtmelding-reactie 78 sc. 0x FOUT-STIL; echte leestest op Rowie's ticket: "do/vr" → dagen [4,5] → stuur-aanbod. Rowie zelf
   vooraf gemarkeerd (handmatig beantwoord), zodat de code haar niet dubbel benadert. Regressie sunny-start 5.648 + herplan 156 groen.
+  PRAKTIJK 14:31 (eerste ronde met de nieuwe code): Martijn Landman bleek óók al sinds 31-08 geantwoord te hebben ("prima, mag ook
+  andere dagen als het eerder kan") → lezer faalde op Anthropic 529 → werd Mens nodig. Fix: bij mislukte duiding 'later' (max 3 rondes),
+  daarna beslist de tekst ("eerder" → aanbod op vroegste, omrij-grens uit); Outlook-quotes ("Van: … Verzonden:") worden nu ook gestript.
+  Landman handmatig als stuur-aanbod (wilEerder) in de rij gezet (mutatie de87e3ac604677a7), state gemarkeerd. Lab 192 sc. groen.
   OPEN (al vóór vandaag): lab planner-berichten 600x FOUT-STIL (max-2-voorstellen-blokkade zonder melding) — zelfde op de oude versie,
   vermoedelijk door het Telegram-dieet van 01-09; nog niet onderzocht. Ook checken: slots op zondag
   (20-09/27-09 voor Rowie in ronde 00:21) — planner lijkt zondagen als werkdag te zien voor Sjoerd/Joey.

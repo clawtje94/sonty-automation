@@ -22,7 +22,13 @@ function heeftHuisnummer(adres) { const t = String(adres || '').replace(/\b\d{4}
  * @param {{ huidig: {description?:string, address?:{formatted?:string}, contacts?:any[]}, notities?:string, adresTekst?:string, telNr?:string|null, wieKlant?:string, soortKlus?:string }} p
  * @returns {{ patch: object, redenen: string[] }}
  */
-function verfrisPatch({ huidig, notities = '', adresTekst = '', telNr = null, wieKlant = '', soortKlus = '' }) {
+const TEKEN_KOP = 'WERKBON TEKENEN (klant tekent op je telefoon):';
+/** Tekenlink voor de klant-werkbon (Daimy 03-09): alleen bij montage/service, één keer, onderaan de omschrijving. */
+function metTekenLink(desc, tekenLink) {
+  if (!tekenLink || String(desc).includes(TEKEN_KOP)) return String(desc);
+  return String(desc).trimEnd() + '\n\n' + TEKEN_KOP + '\n' + tekenLink;
+}
+function verfrisPatch({ huidig, notities = '', adresTekst = '', telNr = null, wieKlant = '', soortKlus = '', tekenLink = null }) {
   const patch = {}; const redenen = [];
   const desc = String(huidig?.description || '');
   const nu = notitieBlokUit(desc); const gewenst = norm(notities).slice(0, 900);
@@ -35,9 +41,10 @@ function verfrisPatch({ huidig, notities = '', adresTekst = '', telNr = null, wi
     patch.description = delen.filter(Boolean).join('\n\n');
     redenen.push(gewenst ? (nu ? 'notities gewijzigd' : 'notities toegevoegd') : 'notities verwijderd (leeg in Outlook)');
   }
+  if (tekenLink && ['montage', 'service'].includes(soortKlus) && !desc.includes(TEKEN_KOP)) { patch.description = metTekenLink(patch.description || desc, tekenLink); redenen.push('tekenlink toegevoegd'); }
   const pAdres = huidig?.address?.formatted || '';
   if (heeftHuisnummer(adresTekst) && !heeftHuisnummer(pAdres)) { patch.address = { formatted: String(adresTekst).trim().slice(0, 200) }; redenen.push(pAdres ? 'adres zonder huisnummer aangevuld' : 'adres toegevoegd'); }
   if (telNr && soortKlus !== 'winkel' && !(huidig?.contacts || []).length) { patch.contacts = [{ type: 'phone', name: wieKlant || 'klant', value: telNr }]; redenen.push('telefoon toegevoegd'); }
   return { patch, redenen };
 }
-module.exports = { verfrisPatch, notitieBlokUit, zonderNotitieBlok, KOP };
+module.exports = { verfrisPatch, notitieBlokUit, zonderNotitieBlok, metTekenLink, KOP, TEKEN_KOP };

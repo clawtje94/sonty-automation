@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Regressie verfris-stap Outlook → Planado (03-09-2026). Puur, geen netwerk.
 const assert = require('assert');
-const { verfrisPatch, notitieBlokUit, zonderNotitieBlok, KOP } = require('../scripts/lib/planado-verfris.js');
+const { verfrisPatch, notitieBlokUit, zonderNotitieBlok, metTekenLink, KOP, TEKEN_KOP } = require('../scripts/lib/planado-verfris.js');
 let ok = 0, fout = 0;
 function test(naam, fn) { try { fn(); ok++; console.log(`  ✓ ${naam}`); } catch (e) { fout++; console.log(`  ✗ ${naam}\n    ${e.message}`); } }
 const BASIS = 'Montage Sonty - Max Blaauboer\n(gesynct uit Outlook)\n\nGripp: 5127\nTE MONTEREN:\n- 1x Zip Design 1800 breed\n\nAdres (Outlook): Graaf arnulfpad  3 2553 GW Den haag';
@@ -41,6 +41,17 @@ test('telefoon: alleen als er nog geen contact is en geen winkelafspraak', () =>
   assert.strictEqual(verfrisPatch({ huidig: { description: 'X', contacts: [] }, telNr: '+31612345678', soortKlus: 'winkel' }).patch.contacts, undefined);
 });
 test('kapotte input crasht niet', () => { for (const h of [null, {}, { description: null }, { description: 5 }]) assert.ok(Array.isArray(verfrisPatch({ huidig: h, notities: 'x' }).redenen)); });
+test('tekenlink: alleen montage/service, één keer, onderaan; inmeten/winkel niet; samen met notities in één patch', () => {
+  const link = 'https://sonty-website.vercel.app/werkbon/u1?t=abc';
+  const p1 = verfrisPatch({ huidig: { description: 'Montage Sonty - X\n\nAdres (Outlook): Straat 1' }, soortKlus: 'montage', tekenLink: link });
+  assert.deepStrictEqual(p1.redenen, ['tekenlink toegevoegd']); assert.ok(p1.patch.description.endsWith(TEKEN_KOP + '\n' + link));
+  assert.deepStrictEqual(verfrisPatch({ huidig: { description: p1.patch.description }, soortKlus: 'montage', tekenLink: link }).patch, {}, 'tweede keer niets');
+  assert.deepStrictEqual(verfrisPatch({ huidig: { description: 'Inmeten Sonty - X' }, soortKlus: 'inmeet', tekenLink: link }).patch, {});
+  assert.deepStrictEqual(verfrisPatch({ huidig: { description: 'Winkel' }, soortKlus: 'winkel', tekenLink: link }).patch, {});
+  const p2 = verfrisPatch({ huidig: { description: 'Service afspraak Sonty - Y' }, notities: 'let op', soortKlus: 'service', tekenLink: link });
+  assert.deepStrictEqual(p2.redenen, ['notities toegevoegd', 'tekenlink toegevoegd']); assert.ok(p2.patch.description.includes(KOP + '\nlet op') && p2.patch.description.endsWith(link));
+  assert.strictEqual(metTekenLink('x', null), 'x');
+});
 // Matrix: notities {gelijk, anders, leeg, ontbreekt} × adres {planado met nr, zonder nr, leeg} × outlook-adres {met nr, zonder} × tel {ja, nee} × contacts {ja, nee} = 96
 let n = 0, mis = 0;
 for (const notS of ['gelijk', 'anders', 'leegOutlook', 'ontbreektPlanado'])

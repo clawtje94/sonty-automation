@@ -27,6 +27,8 @@ const EXECUTE = process.argv.includes('--execute');
 const VERFRIS_STATE_PAD = path.join(__dirname, '..', 'data', 'sync-verfris-state.json');
 const VERFRIS_MAX = 25;
 const VERFRIS_ALLEEN = (process.argv.find((a) => a.startsWith('--verfris-alleen=')) || '').split('=')[1] || null;
+// Klant-werkbon tekenlink (Daimy 03-09): zelfde HMAC als sonty-website lib/werkbon/klant-deel.ts (geheim = admin-wachtwoord).
+const tekenLinkVoor = (uuid) => { try { const g = require('./secrets.js').ADMIN_PASSWORD; const t = crypto.createHmac('sha256', g).update('werkbon:' + uuid).digest('hex').slice(0, 24); return `https://sonty-website.vercel.app/werkbon/${uuid}?t=${t}`; } catch { return null; } };
 
 const INMETERS = {
   Joey: '1f122cfa-17a2-6580-8257-7e80f004db9c',
@@ -371,7 +373,7 @@ async function main() {
           const det = (await planadoJson(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`)); const huidig = det.job || det;
           await wacht(2600);
           const { verfrisPatch } = require('./lib/planado-verfris.js');
-          const { patch, redenen } = verfrisPatch({ huidig, notities: notitiesUit(e), adresTekst: (e.Location?.DisplayName || '').trim() || adresUitBody(e), telNr: telefoonUit(e.Body) || echt?.tel || null, wieKlant: echt?.klantNaam || klantNaamUit(e.Subject), soortKlus: soort(e.Subject) });
+          const { patch, redenen } = verfrisPatch({ huidig, notities: notitiesUit(e), adresTekst: (e.Location?.DisplayName || '').trim() || adresUitBody(e), telNr: telefoonUit(e.Body) || echt?.tel || null, wieKlant: echt?.klantNaam || klantNaamUit(e.Subject), soortKlus: soort(e.Subject), tekenLink: tekenLinkVoor(bestaand.uuid) });
           if (redenen.length) {
             console.log(`  ↻ #${bestaand.serial_no} ${voornaam} ${startISO.slice(0, 16)} ${(e.Subject || '').slice(0, 30)}: ${redenen.join(', ')}`);
             if (EXECUTE) {
@@ -468,6 +470,7 @@ async function main() {
               if (notities && !basis.includes('Interne notities (Outlook):')) blokken.push('Interne notities (Outlook):\n' + notities);
               if (adresTekst && !basis.includes('Adres (Outlook):')) blokken.push('Adres (Outlook): ' + adresTekst);
               if (blokken.length) naPatch.description = basis.trimEnd() + '\n\n' + blokken.join('\n\n');
+              if (['montage', 'service'].includes(soort(e.Subject))) { const { metTekenLink } = require('./lib/planado-verfris.js'); naPatch.description = metTekenLink(naPatch.description || basis, tekenLinkVoor(uuid)); }
               if (!hardAdres && /\d/.test(adresTekst) && !huidig.address?.formatted) naPatch.address = { formatted: adresTekst };
             }
             const telNr = tel || echt?.tel || null;

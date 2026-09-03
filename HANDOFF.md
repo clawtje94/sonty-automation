@@ -3831,3 +3831,14 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 - 19:05 Windsor.ai heeft connectors instagram (eigen account, OAuth) en instagram_public; koppellinks naar Daimy gestuurd (V1/V2). Meta Ads Library via meta-ads MCP werkt (1.243 actieve NL-ads op zonwering) voor marktonderzoek.
 - 19:40 Windsor instagram_public gekoppeld door Daimy (account sonty.nl): alle 170 reels met likes/comments (geen views). Organische toppers = humor-sketches met Haagse Joke (5.513 / 3.134 likes, april 2026, niet geboost), parodieën (Boer zoekt vrouw, Zaai), winacties. Sectie 6b in insta-analyse.html. Nog nodig voor views/sends/saves: Windsor-connector "instagram" (eigen account) of IG aan systeemgebruiker koppelen.
 - 20:30 Diep marktonderzoek viraal af: public/intern/viraal-onderzoek.html (4 sonnet-subagents: algoritmes 2026, breinpsychologie met studies, MrBeast-document + experts, vakmensen-cases + Newcom 2026; synthese = formule van 10 punten + 3 series voor Sonty + toets van de thuis-reel). Gelinkt vanuit draaiboek en reel-thuis.
+
+## 03-09 (Claude) — /admin/inmeet-mutatie: klant opzoeken + nieuwe afspraak (Markus Naumer)
+- Was: blind formulier (naam/telefoon), kantoor-afspraken uit Outlook/Planado onvindbaar, "verzet" ketste af op "geen actieve boeking".
+- Nu: zoeklijst van ALLE inmeetafspraken (bot-boekingen + agenda-snapshot kantoor, 45 dagen geheugen) in KV `inmeetdash:afspraken`,
+  gepubliceerd door inmeet-verzoek-daemon elke 10 min + na elke mutatie (scripts/lib/afspraken-zoeklijst.js; telefoons kantoor via Planado, 12/ronde).
+- Pagina: zoeken op naam/telefoon/Gripp (lib/inmeet-zoek.js), standaard gisteren/vandaag/morgen; per afspraak: "tijden nu kiezen" (verzoek `nieuw`,
+  vervolg tijden → 5 tijden op het verzoek zelf → boek-knop), "klant kiest zelf" (stuur-aanbod), "Annuleren" (ook kantoor-afspraak op Planado-id).
+- Motor: scripts/lib/nieuwe-afspraak.js (kaart kiezen op telefoon > naam, RP gepagineerd — Naumer stond op pagina 2 —, eigen CRM; oude afspraak:
+  geweest = laten, toekomst = verzet/kantoor-annuleer). kantoor-afspraak.js: kantoorAfspraakOpUuid + annuleerKantoorAfspraakOpUuid.
+- Bewijs: lab inmeet-zoeklijst 1890 + nieuwe-afspraak 120 (0x fout-stil); productie-keten Naumer: kaart via RP op telefoon, 5 tijden in 102 s (testkaart daarna verwijderd, niets geboekt).
+- Deploy site gaat NIET via GitHub-push: `vercel deploy --prod --archive=tgz` (CLI bleef hangen na "Ready"; deploy zelf was klaar).

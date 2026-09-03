@@ -137,7 +137,7 @@ const postcode = (adres) => { const m = String(adres || '').replace(/\s/g, '').m
     const totaal = r.ontbreekt.length + r.zonderAccount.length + r.wezen.length + r.dubbel.length + r.afwijkend.length;
     if (totaal) {
       const meer = totaal - regels.length;
-      await planningTelegram(`🔎 Outlook→Planado-check (${DAGEN} dagen): ${r.ok} van ${r.klussen} klussen helemaal goed, ${totaal} punt(en):\n${regels.join('\n')}${meer > 0 ? `\n… en nog ${meer}; volledig: data/outlook-planado-audit.json` : ''}`, { alarm: true });
+      await planningTelegram(`🔎 Outlook→Planado-check (${DAGEN} dagen): ${r.ok} van ${r.klussen} klussen helemaal goed, ${totaal} punt(en):\n${regels.join('\n')}${meer > 0 ? `\n… en nog ${meer}; volledig: data/outlook-planado-audit.json` : ''}`, { boeking: true });
     } else console.log('alles goed — geen melding');
   }
 })().catch(async (e) => { console.error('FOUT', e.stack || e.message); if (MELDEN) { try { await require('./lib/telegram-planning.js').planningTelegram('⚠️ Outlook→Planado-check kon niet draaien: ' + String(e.message).slice(0, 120) + ' — sync niet gecontroleerd vandaag.', { alarm: true }); } catch {} } process.exit(1); });

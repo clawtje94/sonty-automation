@@ -1,6 +1,32 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 03-09 16:30: KLANT TEKENT DE WERKBON (Daimy: "werkbon getekend door de klant, met opmerkingenveld; volledige werkbon naar
+## kantoor; niet gereed → een DEEL naar de klant, de rest naar kantoor") — LIVE, proefgeval gedaan
+- Onderzoek: Planado kent GEEN handtekening-veld (API-docs: action/checkbox/input/textarea/image/barcode/dictionary) en sjablonen
+  zijn via de API alleen te lezen. Dus eigen tekenpagina, zoals bij de meetbon.
+- Bouw (sonty-website): /werkbon/<uuid>?t=<token> (publiek, HMAC-token van de opdracht-uuid met het admin-geheim; fout token = 401).
+  Toont het KLANTDEEL (lib/werkbon/klant-deel.ts, puur): adres, datum, team, "TE MONTEREN"-regels, gereed ja/nee + reden/wat er nog
+  gebeurt. NIET: interne notities, uren nodig, kleur, niet-gereed-foto's, uitleg voor het team. Klant: opmerkingen (optioneel), akkoord-
+  vinkje, naam, handtekening (canvas). POST /api/werkbon/<uuid>: PNG naar Vercel Blob (onraadbare naam), KV werkbon:klant:<uuid>,
+  klant-werkbon DIRECT per mail (aanvragen@, lib/werkbon/klant-mail.ts, Sonty-huisstijl, garantie 3/5/7) naar het Planado-e-mailcontact
+  of anders Gripp (offer → bedrijf → contact); geen adres bekend = niet gemaild, reden in het antwoord. Eén keer per opdracht.
+  ?proef=1 op de pagina: opslag apart, mail naar daimy@sonty.nl (WERKBON_PROEF_ADRES), niets naar de klant. ?preview=1 op de API: mail-HTML.
+  Planado-detail met retry + KV-cache 10 min (rate-limit gaf eerst "opdracht niet gevonden"); bij drukte nette 503-tekst.
+- Webhook job_finished (app/api/planado/werkbon): kantoor-werkbon krijgt bovenaan het handtekeningblok (naam, akkoord, opmerkingen,
+  handtekening) of "Klant heeft NIET getekend"; is de klant-werkbon nog niet gemaild (niet getekend), dan gaat hij nu zonder
+  handtekening — ook bij NIET GEREED, want dan hoort de klant wat er nog gebeurt. Mac-verwerker meldt in de planning-groep
+  "Klant getekend: naam (akkoord) — opmerking" of "Klant heeft NIET getekend" + klantmail-adres (GET ?uuid geeft teken-info).
+- Link in Planado: sync zet "WERKBON TEKENEN (klant tekent op je telefoon): <url>" onderaan de omschrijving bij aanmaken (montage/
+  service) en via verfris (lib/planado-verfris.js metTekenLink); scripts/werkbon-tekenlink-backfill.js zet hem eenmalig in alle
+  bestaande bus-opdrachten (draait 16:30). Proefgeval #1157 de Graaf-Muller eerst.
+- Bewijs: tests/werkbon-klant.test.mjs 7 tests + matrix 72 groen (node type-stripping); verfris-tests 9 + matrix 96 groen; tsc groen;
+  Playwright mobiel: pagina, tekenen (na hover; touch op echte telefoon = pointer events), ondertekend → "je ontvangt de werkbon op
+  daimy@sonty.nl"; mail-preview met handtekening bekeken. WhatsApp-widget verborgen op /werkbon. Proefmail staat bij Daimy.
+- NIET gedaan/te bekijken: echte klant heeft nog niet getekend (eerste echte geval volgen in planning-groep); de Mac-vangnetmail
+  (als de webhook faalt) bevat het handtekeningblok niet; mail-templates.ts GARANTIE_REGELS zegt nog 5 jr montage (klant-werkbon
+  gebruikt 3/5/7 uit memory) — inconsistentie in de oude templates.
+
 ## 03-09 13:40: WACHTER "BLIJFT HET GOED?" (Daimy: "hoe zorgen we dat alles goed blijft gaan?")
 - outlook-planado-audit.js kreeg --dagen=N en --melden: launchd nl.sonty.planado-check-dag (elke dag 06:15, 3 dagen vooruit, ~3 min)
   en nl.sonty.planado-check-week (maandag 05:30, 100 dagen, ~12 min). Bij afwijkingen één kort bericht in de planning-groep

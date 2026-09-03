@@ -3,7 +3,7 @@
 // via zijn Trengo-API-gebruiker niet mailen vanuit het kanaal "Werkbon" (werkbon@sonty.nl): Trengo weigert met
 // "geen toegang tot dit privécontact". Daarom zet de website die mails in een wachtrij en verstuurt dit script ze met de
 // kantoor-login (scripts/trengo-api.js getToken) via kanaal 1363388: contact → ticket → mail → ticket sluiten → wachtrij af.
-// Elke 3 min via launchd nl.sonty.werkbon-klantmail (+ interval-runner). --dry = niets versturen.
+// Elke minuut via launchd nl.sonty.werkbon-klantmail (+ interval-runner). --dry = niets versturen.
 const SECRETS = require('./secrets.js');
 const { getToken } = require('./trengo-api.js');
 const API = 'https://sonty-website.vercel.app/api/werkbon/wachtrij';

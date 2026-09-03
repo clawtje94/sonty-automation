@@ -1,6 +1,13 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 03-09 15:20: WERKBON-KANAAL IS EEN PRIVÉ-INBOX (slotje) — niet om te zetten in de instellingen
+- Onderzocht via de Trengo-UI (Playwright, Daimy-login, alleen gelezen): kanaalinstellingen hebben géén team/privé-schakelaar;
+  het slotje in het kanaaloverzicht (Werkbon, Scans, Facturen, Sonny mail, Orders, VVE) = privé-inbox, gekozen bij het koppelen
+  van de mailbox. Omzetten = mailbox opnieuw koppelen als team-inbox (Microsoft-login, interactief) → niet headless gedaan.
+- Praktisch: Mac-verzender nu elke minuut (plist StartInterval 60), pagina zegt "binnen een minuut". Sunny post er direct zodra
+  Daimy werkbon@ als team-inbox koppelt (Koppel E-mail → Outlook → gedeelde mailbox werkbon@ → team, oude privé-kanaal weg).
+
 ## 03-09 17:30: MEETBON ROLLUIK/SCREEN — VALSE VENSTERBANK + KOKERS/HOEKLIJNEN (Daimy, chat) — LIVE
 - Rolluik: ja/nee "Valse vensterbank?" (verplicht) + dropdown "Geleider / hoeklijn bij valse vensterbank" (HF geleider, HTF geleider, HTF68 geleider, Hoeklijn 20x30, Hoeklijn 20x70), alleen zichtbaar én verplicht bij Ja.
 - Rolluik + zipscreen: open tekstveld "Kokers of hoeklijnen voor montage nodig" (Daimy: "open vlak voor nu"; later evt. dropdown).

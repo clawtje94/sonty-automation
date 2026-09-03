@@ -105,4 +105,42 @@ async function annuleerKantoorAfspraak({ telefoon, naam, reden = '', bron = 'onb
   } catch { /* melding mag de annulering nooit blokkeren */ }
   return { gevonden: true, gelukt: alles, stappen, afspraak: a };
 }
-module.exports = { matchKantoorAfspraken, kiesOutlookEvents, vindKantoorAfspraak, annuleerKantoorAfspraak, achternaamVan, laatste9 };
+/** Kantoor-afspraak op Planado-id (zoeklijst /admin/inmeet-mutatie, 03-09): geeft { uuid, start, inmeter, klant, telefoon, adres, jobStatus } of null. */
+async function kantoorAfspraakOpUuid(uuid) {
+  const h = await planadoDetail(uuid).catch(() => null);
+  if (!h) return null;
+  const snap = lees(SNAPSHOT, { items: [] });
+  const it = (snap.items || []).find((x) => x && x.uuid === uuid) || {};
+  const tel = (h.contacts || []).map((c) => c.value).find((v) => laatste9(v).length === 9) || null;
+  const klant = (h.contacts || []).find((c) => c.name)?.name || String(it.klant || h.description || '').split('\n')[0].replace(/^Inmeten( Sonty)?\s*[-—–:]\s*/i, '').trim();
+  return { uuid, start: h.scheduled_at || it.start || null, inmeter: it.inmeter || null, klant, telefoon: tel, adres: h.address?.formatted || null, jobStatus: h.status || null, externalId: h.external_id || it.externalId || null, duurMin: h.scheduled_duration?.minutes || null };
+}
+/** Annuleer een kantoor-afspraak waarvan de Planado-id al bekend is (klant gekozen uit de zoeklijst). Zelfde stappen als
+ * annuleerKantoorAfspraak: Outlook eerst, dan Planado, dan de planning-groep. */
+async function annuleerKantoorAfspraakOpUuid(uuid, { reden = '', bron = 'onbekend' } = {}) {
+  const a = await kantoorAfspraakOpUuid(uuid);
+  if (!a || !a.start) return { gevonden: false, gelukt: false, stappen: [{ stap: 'vinden', ok: false, detail: 'Planado-opdracht niet gevonden' }], afspraak: null };
+  const stappen = []; const stap = (s, ok, detail) => stappen.push({ stap: s, ok, detail });
+  try {
+    const { id, OH } = await outlookAgenda();
+    const dag = new Date(a.start).toISOString().slice(0, 10);
+    const j = await (await fetch(`https://outlook.office.com/api/v2.0/me/calendars/${id}/calendarView?$top=100&$select=Subject,Start&startDateTime=${dag}T00:00:00Z&endDateTime=${dag}T23:59:59Z`, { headers: OH })).json();
+    const evs = kiesOutlookEvents({ events: j.value || [], naam: a.klant, aankomst: a.start });
+    let n = 0;
+    for (const e of evs) { const del = await fetch(`https://outlook.office.com/api/v2.0/me/events/${e.Id}`, { method: 'DELETE', headers: OH }); if (del.ok || del.status === 204) n++; else stap('outlook', false, `"${e.Subject}" HTTP ${del.status}`); }
+    stap('outlook', true, `${n} van ${evs.length} event(s) verwijderd`);
+  } catch (e) { stap('outlook', false, e.message.slice(0, 80)); }
+  try {
+    const key = fs.readFileSync(path.join(__dirname, '..', 'planado-api-key.txt'), 'utf8').trim();
+    const r = await planadoFetch('https://api.planadoapp.com/v2/jobs/' + a.uuid, { method: 'DELETE', headers: { Authorization: 'Bearer ' + key } });
+    stap('planado', r.ok || r.status === 404, 'HTTP ' + r.status);
+  } catch (e) { stap('planado', false, e.message.slice(0, 80)); }
+  const alles = stappen.every((s) => s.ok);
+  try {
+    const { planningTelegram } = require('./telegram-planning.js');
+    const datum = new Date(a.start).toLocaleString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+    await planningTelegram(`🛑 Inmeetafspraak geannuleerd (kantoor-afspraak uit Outlook/Planado): ${a.klant}, was ${datum} bij ${a.inmeter || '?'}.${reden ? ` Reden: ${reden}.` : ''} Via: ${bron}.${alles ? '' : ' ⚠️ niet alles lukte, kantoor kijkt na.'}`, { boeking: true });
+  } catch { /* melding mag de annulering nooit blokkeren */ }
+  return { gevonden: true, gelukt: alles, stappen, afspraak: a };
+}
+module.exports = { matchKantoorAfspraken, kiesOutlookEvents, vindKantoorAfspraak, annuleerKantoorAfspraak, kantoorAfspraakOpUuid, annuleerKantoorAfspraakOpUuid, achternaamVan, laatste9 };

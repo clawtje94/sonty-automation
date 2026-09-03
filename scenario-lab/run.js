@@ -47,6 +47,8 @@ const ONDERDELEN = [
   require('./onderdelen/taal-poort.js'),
   require('./onderdelen/telegram-route.js'),
   require('./onderdelen/dubbelboeking.js'),
+  require('./onderdelen/inmeet-zoeklijst.js'),
+  require('./onderdelen/nieuwe-afspraak.js'),
 ];
 // UI-laag draait tegen de echte site in een echte browser: alleen met --ui (of een filter),
 // anders wordt elke logica-run traag van het browsen.

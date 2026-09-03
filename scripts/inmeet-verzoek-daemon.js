@@ -98,7 +98,14 @@ async function verwerkReken(m) {
   let item = null;
   if (m.rpItemId) {
     item = (await haalInmeetItems()).find((i) => i.id === m.rpItemId) || null;
-    if (!item) return { afgewezen: true, uitkomst: `kaart ${m.rpItemId} staat niet (meer) op Inmeten inplannen` };
+    // NIEUWE AFSPRAAK bestaande klant (03-09): de kaart mag op elke status staan en op elke RP-pagina
+    // (Naumer: "Ai offerte verstuurd", pagina 2). Direct ophalen, niet alleen de eerste 1000 zoeken.
+    if (!item) {
+      const E = require('./lib/eigen-crm.js');
+      item = E.isEigen(m.rpItemId) ? await E.haalItem(m.rpItemId).catch(() => null)
+        : await planner.rpGet(`/contact-service/${PID}/backlogs/${SALES}/items/${m.rpItemId}`).then((d) => d?.item || d).catch(() => null);
+    }
+    if (!item?.id) return { afgewezen: true, uitkomst: `kaart ${m.rpItemId} niet gevonden in RP/eigen CRM` };
   } else {
     const term = zoekTerm(m.offerte || m.naam || '');
     const items = await haalInmeetItems();
@@ -176,7 +183,62 @@ async function verwerkReken(m) {
     producten: lead.producten.map((p) => `${p.aantal}x ${p.naam}`).join(', ').slice(0, 90),
     top: aanbod.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), vertrek: x.vertrek.toISOString(), extra: x.extraRijtijdMin, label: x.label || undefined })),
   } }) });
-  return { afgewezen: false, uitkomst: `${aanbod.length} tijden berekend, staan in het dashboard` };
+  return {
+    afgewezen: false, uitkomst: `${aanbod.length} tijden berekend, staan in het dashboard`,
+    // ook op het verzoek zelf (03-09): /admin/inmeet-mutatie leest de tijden hiervandaan en boekt direct
+    resultaat: { rpItemId: item.id, naam: lead.naam, plaats: lead.plaats || null, duurMin: duur, top: aanbod.map((x) => ({ inmeter: x.inmeter, datum: x.datum, venster: venster(x), aankomst: x.aankomst.toISOString(), extra: x.extraRijtijdMin, label: x.label || undefined })) },
+  };
+}
+
+/**
+ * NIEUWE AFSPRAAK voor een bestaande klant (verzoektype 'nieuw', /admin/inmeet-mutatie, 03-09 Naumer).
+ * Klant terugvinden → oude afspraak opruimen als die nog komt → tijden berekenen of aanbod sturen.
+ */
+async function verwerkNieuw(m) {
+  const NA = require('./lib/nieuwe-afspraak.js');
+  const { vindBoeking, muteerBoeking, laadBoekingen } = require('./lib/inmeet-mutatie.js');
+  const KA = require('./lib/kantoor-afspraak.js');
+  const stappen = [];
+  // 1. de oude afspraak (uit de zoeklijst: bot-boeking op rpItemId, of kantoor-afspraak op Planado-id)
+  let oud = null;
+  let klant = { naam: m.naam || '', telefoon: m.telefoon || '', email: m.email || '' };
+  if (m.rpItemId && laadBoekingen()[m.rpItemId]) {
+    const b = laadBoekingen()[m.rpItemId];
+    oud = { bron: 'bot', aankomst: b.aankomst, status: b.status === 'geboekt' ? 'komend' : b.status, inmeter: b.inmeter };
+    klant = { naam: klant.naam || b.naam, telefoon: klant.telefoon || b.telefoon, email: klant.email || b.email };
+  } else if (m.planadoJobUuid) {
+    const k = await KA.kantoorAfspraakOpUuid(m.planadoJobUuid);
+    if (k) {
+      oud = { bron: 'kantoor', aankomst: k.start, status: 'komend', inmeter: k.inmeter, uuid: k.uuid, adres: k.adres };
+      klant = { naam: klant.naam || k.klant, telefoon: klant.telefoon || k.telefoon, email: klant.email };
+    } else stappen.push('Planado-opdracht van de oude afspraak niet meer gevonden');
+  } else if (m.telefoon || m.naam) {
+    const b = vindBoeking({ telefoon: m.telefoon, email: m.email, naam: m.naam });
+    if (b) { oud = { bron: 'bot', aankomst: b.aankomst, status: 'komend', inmeter: b.inmeter, rpItemId: b.rpItemId }; klant = { naam: klant.naam || b.naam, telefoon: klant.telefoon || b.telefoon, email: klant.email || b.email }; }
+  }
+  // 2. de lead-id (RP-kaart of eigen-CRM dossier)
+  const gevonden = await NA.vindLeadId({ rpItemId: m.rpItemId || oud?.rpItemId || null, telefoon: klant.telefoon, naam: klant.naam, email: klant.email },
+    { rpGet: planner.rpGet, PID, BACKLOG_ID: SALES, vindBoeking, eigenCrm: require('./lib/eigen-crm.js') });
+  if (!gevonden.id) return { afgewezen: true, uitkomst: `klant niet gevonden: ${gevonden.reden} — niet gevonden, maak eerst een lead in het CRM` };
+  stappen.push(`kaart via ${gevonden.via}`);
+  // 3. oude afspraak opruimen (alleen als die nog komt; geweest = historie laten staan)
+  const plan = NA.bepaalPlan(oud);
+  if (plan.actie === 'verzet') {
+    const r = await muteerBoeking(gevonden.id, 'verzet', { reden: m.reden || 'nieuwe afspraak via winkel', bron: m.bron });
+    stappen.push(r.gelukt ? 'oude bot-boeking overal opgeruimd' : 'oude boeking deels opgeruimd: ' + r.stappen.filter((x) => !x.ok).map((x) => x.stap).join(','));
+  } else if (plan.actie === 'kantoor-annuleer') {
+    const r = await KA.annuleerKantoorAfspraakOpUuid(oud.uuid, { reden: m.reden || 'nieuwe afspraak via winkel', bron: m.bron });
+    stappen.push(r.gelukt ? 'oude kantoor-afspraak uit Outlook + Planado' : 'oude kantoor-afspraak deels: ' + (r.stappen || []).filter((x) => !x.ok).map((x) => x.stap).join(','));
+  } else stappen.push(plan.waarom);
+  leegAgendaCache();
+  // 4. vervolg
+  const basis = { rpItemId: gevonden.id, naam: klant.naam, telefoon: klant.telefoon, email: klant.email, bron: m.bron, reden: m.reden };
+  if (m.vervolg === 'aanbod') {
+    const uit = await planner.verwerkVerzoek({ ...basis, type: 'stuur-aanbod' });
+    return { afgewezen: !!uit.afgewezen, uitkomst: `${stappen.join('; ')}; ${uit.uitkomst}` };
+  }
+  const uit = await verwerkReken({ ...basis, type: 'reken' });
+  return { afgewezen: !!uit.afgewezen, uitkomst: `${stappen.join('; ')}; ${uit.uitkomst}`, resultaat: uit.resultaat };
 }
 
 async function ronde() {
@@ -207,7 +269,7 @@ async function ronde() {
         await planner.verversRonde();
         res = { afgewezen: false, uitkomst: 'dashboard ververst' };
       } else {
-        res = m.type === 'reken' ? await verwerkReken(m) : await planner.verwerkVerzoek(m);
+        res = m.type === 'reken' ? await verwerkReken(m) : (m.type === 'nieuw' ? await verwerkNieuw(m) : await planner.verwerkVerzoek(m));
         if (m.type !== 'reken') leegAgendaCache();
       }
     } catch (e) {
@@ -257,8 +319,10 @@ async function ronde() {
     }
     await api(MUTATIE_API, {
       method: 'PATCH',
-      body: JSON.stringify({ id: m.id, status: res.afgewezen ? 'afgewezen' : 'verwerkt', uitkomst: res.uitkomst }),
+      body: JSON.stringify({ id: m.id, status: res.afgewezen ? 'afgewezen' : 'verwerkt', uitkomst: res.uitkomst, resultaat: res.resultaat || undefined }),
     });
+    // zoeklijst voor /admin/inmeet-mutatie direct bijwerken (nieuwe boeking, annulering, verzet)
+    if (['boek', 'annuleer', 'verzet', 'nieuw'].includes(m.type)) publiceerZoeklijst(true).catch(() => {});
     // Was hier eerder een storing over gemeld? Dan nu het beloofde ✅ (Daimy 22-08).
     if (globalThis.__storingGemeld) {
       const hadStoring = [...globalThis.__storingGemeld.keys()].some((k) => k.startsWith(m.id + ':'));
@@ -299,6 +363,16 @@ async function ronde() {
 // 10 seconden zolang er werk is of net was (de winkel staat aan de balie te wachten),
 // daarna rustig terugzakken naar 60 seconden. Dat scheelt een factor 6 in rust
 // zonder dat een klik ooit traag voelt.
+// ZOEKLIJST (03-09): alle inmeetafspraken (bot + kantoor) naar de site, zodat de winkel een klant kan
+// opzoeken. Elke 10 min, en direct na een boeking/annulering/verzet.
+let zoeklijstOp = 0;
+async function publiceerZoeklijst(forceer = false) {
+  if (!forceer && Date.now() - zoeklijstOp < 10 * 60000) return;
+  zoeklijstOp = Date.now();
+  try { await require('./lib/afspraken-zoeklijst.js').publiceer({ dashApi: DASH_API, meetCode: MEET_CODE }); }
+  catch (e) { console.log(new Date().toISOString(), 'zoeklijst publiceren mislukt:', e.message); }
+}
+
 const SNEL_MS = 10000;
 const RUSTIG_MS = 60000;
 const SNEL_VENSTER_MS = 5 * 60000; // zo lang na het laatste werk blijven we snel pollen
@@ -312,6 +386,7 @@ const SNEL_VENSTER_MS = 5 * 60000; // zo lang na het laatste werk blijven we sne
       if (gedaan) laatsteWerk = Date.now();
     } catch (e) { console.log(new Date().toISOString(), 'ronde-fout:', e.message); }
     try { await detecteerNieuweKlanten(); } catch (e) { console.log(new Date().toISOString(), 'detectie-fout:', e.message); }
+    await publiceerZoeklijst();
     // In winkeluren altijd snel (de balie wacht); daarbuiten adaptief (KV-limiet-les 08-08)
     const snel = isWinkeluur() || Date.now() - laatsteWerk < SNEL_VENSTER_MS;
     await wacht(snel ? SNEL_MS : RUSTIG_MS);

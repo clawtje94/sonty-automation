@@ -2317,15 +2317,19 @@ async function verwerkVerzoek(m) {
   if (!boeking) {
     // KANTOOR-AFSPRAAK (Daimy 03-09, Lotte Vos): staat de afspraak alleen in Outlook/Planado (door kantoor gemaakt), dan
     // annuleren we die óók zelf, i.p.v. "handmatig nakijken" terwijl de inmeter al onderweg is.
-    if (m.type === 'annuleer' && m.telefoon) {
-      const { annuleerKantoorAfspraak } = require('./lib/kantoor-afspraak.js');
-      const k = await annuleerKantoorAfspraak({ telefoon: m.telefoon, naam: m.naam, reden: m.reden || '', bron: m.bron }).catch((e) => ({ gevonden: false, gelukt: false, stappen: [{ stap: 'kantoor', ok: false, detail: e.message.slice(0, 80) }] }));
+    if (m.type === 'annuleer' && (m.telefoon || m.planadoJobUuid)) {
+      const { annuleerKantoorAfspraak, annuleerKantoorAfspraakOpUuid } = require('./lib/kantoor-afspraak.js');
+      // uit de zoeklijst van /admin/inmeet-mutatie (03-09) komt de Planado-id mee: dan hoeft er niet op telefoon gezocht te worden
+      const k = await (m.planadoJobUuid
+        ? annuleerKantoorAfspraakOpUuid(m.planadoJobUuid, { reden: m.reden || '', bron: m.bron })
+        : annuleerKantoorAfspraak({ telefoon: m.telefoon, naam: m.naam, reden: m.reden || '', bron: m.bron })
+      ).catch((e) => ({ gevonden: false, gelukt: false, stappen: [{ stap: 'kantoor', ok: false, detail: e.message.slice(0, 80) }] }));
       if (k.gevonden) {
         const vn = (k.afspraak.klant || m.naam || 'daar').split(' ')[0];
         const tekst = k.gelukt
           ? `Hoi ${vn}, we hebben de inmeetafspraak geannuleerd. Mocht het later toch weer spelen, dan ben je altijd welkom.\n\nGroetjes, Nanny van Sonty`
           : `Hoi ${vn}, we zijn je inmeetafspraak aan het annuleren; een collega rondt het vandaag af en je hoort het zodra het rond is.\n\nGroetjes, Nanny van Sonty`;
-        const uit = await require('./lib/aanbod-versturen').stuurVrijBericht({ telefoon: m.telefoon, email: m.email, naam: k.afspraak.klant || m.naam, tekst, onderwerp: 'Je inmeetafspraak is geannuleerd', afzender: 'Nanny' }).catch((e) => ({ ok: false, reden: e.message }));
+        const uit = await require('./lib/aanbod-versturen').stuurVrijBericht({ telefoon: m.telefoon || k.afspraak.telefoon, email: m.email, naam: k.afspraak.klant || m.naam, tekst, onderwerp: 'Je inmeetafspraak is geannuleerd', afzender: 'Nanny' }).catch((e) => ({ ok: false, reden: e.message }));
         if (!uit.ok) await telegram(`🚨 ${k.afspraak.klant || m.naam}: kantoor-afspraak geannuleerd maar de klant kon NIET bereikt worden (${uit.reden}) — even zelf laten weten.`);
         return { afgewezen: false, uitkomst: k.gelukt ? 'kantoor-afspraak: alle systemen bijgewerkt' : 'kantoor-afspraak deels: ' + k.stappen.filter((x) => !x.ok).map((x) => x.stap + ' ' + x.detail).join(',') };
       }

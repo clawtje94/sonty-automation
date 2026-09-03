@@ -67,9 +67,12 @@ function bouwLijst({ boekingen = {}, snapshot = { items: [] }, koppelCache = {},
     });
   }
 
-  // 3. geheugen: wat eerder gezien is en nu niet meer in een bron staat
+  // 3. geheugen: telefoon/e-mail die eerder (via Planado) gevonden zijn meenemen, en wat nu niet meer in een bron staat
   for (const r of eerder || []) {
-    if (!r || !r.sleutel || uit.has(r.sleutel) || !r.aankomst || Date.parse(r.aankomst) < grens) continue;
+    if (!r || !r.sleutel) continue;
+    const vers = uit.get(r.sleutel);
+    if (vers) { if (!vers.telefoon && r.telefoon) vers.telefoon = r.telefoon; if (!vers.email && r.email) vers.email = r.email; if (r.telefoonGezocht && !vers.telefoon) vers.telefoonGezocht = r.telefoonGezocht; continue; }
+    if (!r.aankomst || Date.parse(r.aankomst) < grens) continue;
     if (r.bron === 'bot') continue; // bot-boekingen staan altijd in het boekingenbestand; weg = echt weg
     const snapshotIsVers = !!(snapshot && snapshot.ts && Date.parse(snapshot.ts) > nu - 3 * 3600e3);
     // in de toekomst en uit de snapshot verdwenen terwijl die vers is → in Outlook verwijderd
@@ -87,9 +90,30 @@ function bouwVanSchijf(nu = Date.now()) {
   return lijst;
 }
 
+/** Kantoor-regels zonder telefoon: nummer uit de Planado-opdracht halen (max `max` per ronde; blijft via het geheugen bewaard). */
+async function vulTelefoonsAan(lijst, { max = 12, opUuid } = {}) {
+  const haal = opUuid || require('./kantoor-afspraak.js').kantoorAfspraakOpUuid;
+  let n = 0;
+  for (const r of lijst) {
+    if (n >= max) break;
+    if (r.bron !== 'kantoor' || r.telefoon || !r.planadoJobUuid || r.telefoonGezocht) continue;
+    n++;
+    try {
+      const k = await haal(r.planadoJobUuid);
+      if (k?.telefoon) r.telefoon = k.telefoon;
+      if (k?.klant && (!r.naam || r.naam === 'klant')) r.naam = k.klant;
+    } catch { /* volgende ronde opnieuw */ }
+    r.telefoonGezocht = new Date().toISOString(); // ook zonder nummer: niet elke ronde opnieuw bevragen
+  }
+  return n;
+}
+
 /** Publiceer naar de site (KV), zodat /admin/inmeet-mutatie direct kan zoeken. */
 async function publiceer({ dashApi, meetCode, nu = Date.now() } = {}) {
   const lijst = bouwVanSchijf(nu);
+  try {
+    if (await vulTelefoonsAan(lijst)) fs.writeFileSync(LIJST, JSON.stringify({ bijgewerkt: new Date(nu).toISOString(), lijst }));
+  } catch { /* nummers zijn extra; de lijst zelf gaat altijd door */ }
   const r = await fetch(dashApi || 'https://sonty-website.vercel.app/api/inmeet-dashboard', {
     method: 'POST', headers: { 'Content-Type': 'application/json', 'x-meet-code': meetCode || process.env.MEETBON_CODE || '2288' },
     body: JSON.stringify({ afspraken: lijst, afsprakenBijgewerkt: new Date(nu).toISOString() }),
@@ -99,7 +123,7 @@ async function publiceer({ dashApi, meetCode, nu = Date.now() } = {}) {
   return lijst.length;
 }
 
-module.exports = { bouwLijst, klantNaam, bouwVanSchijf, publiceer, laatste9 };
+module.exports = { bouwLijst, klantNaam, bouwVanSchijf, vulTelefoonsAan, publiceer, laatste9 };
 
 if (require.main === module) {
   publiceer().then((n) => console.log('zoeklijst gepubliceerd:', n, 'afspraken')).catch((e) => { console.error(e.message); process.exit(1); });

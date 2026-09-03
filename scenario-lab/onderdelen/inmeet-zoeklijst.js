@@ -52,6 +52,8 @@ const dimensies = [
       { label: 'kantoor-toekomst-verdwenen', eerder: [{ sleutel: 'kantoor:u-weg', bron: 'kantoor', planadoJobUuid: 'u-weg', naam: 'Weg Geweest', telefoon: '0655555555', aankomst: d(24 * 3), inmeter: 'Joey', status: 'komend' }], verwacht: { sleutel: 'kantoor:u-weg', status: 'verwijderd' } },
       { label: 'bot-uit-geheugen-weg', eerder: [{ sleutel: 'bot:rp-x:2026', bron: 'bot', rpItemId: 'rp-x', naam: 'Bot Weg', telefoon: '0666666666', aankomst: d(24 * 3), inmeter: 'Joey', status: 'komend' }], verwacht: null },
       { label: 'te-oud', eerder: [{ sleutel: 'kantoor:u-oud2', bron: 'kantoor', planadoJobUuid: 'u-oud2', naam: 'Heel Oud', aankomst: d(-24 * 60), inmeter: 'Joey', status: 'komend' }], verwacht: null },
+      // zelfde kantoor-afspraak als in de snapshot, maar het geheugen kent het nummer al (uit Planado): dat moet meekomen
+      { label: 'telefoon-uit-geheugen', eerder: [{ sleutel: 'kantoor:u-k-2', bron: 'kantoor', planadoJobUuid: 'u-k-2', naam: 'Tim Mesman', telefoon: '0677777777', aankomst: d(24 * 7), inmeter: 'Sjoerd', status: 'komend' }], verwacht: null, telefoonVoor: { 'kantoor:u-k-2': '0677777777' } },
     ],
   },
   {
@@ -74,7 +76,10 @@ function orakel(s) {
   // "zelfde-als-bot": de kantoor-regel valt alleen weg als de bot-boeking met dezelfde Planado-id er is
   const snapVerwacht = s.snapshot.label === 'zelfde-als-bot' && s.botBoeking.label !== 'komend'
     ? { sleutel: 'kantoor:u-bot-1', status: 'komend', naam: 'Ingrid Verhaar' } : s.snapshot.verwacht;
-  const verwacht = [s.botBoeking.verwacht, snapVerwacht, s.geheugen.verwacht].filter(Boolean);
+  // "telefoon-uit-geheugen": zit de afspraak in de snapshot dan smelt hij samen; anders is hij (toekomst, verse snapshot) verwijderd
+  const gehVerwacht = s.geheugen.label === 'telefoon-uit-geheugen'
+    ? (s.snapshot.label === 'kantoor-komend' ? null : { sleutel: 'kantoor:u-k-2', status: 'verwijderd' }) : s.geheugen.verwacht;
+  const verwacht = [s.botBoeking.verwacht, snapVerwacht, gehVerwacht].filter(Boolean);
   const sleutels = verwacht.map((v) => v.sleutel).sort();
   return { wil: 'lijst', sleutels, statussen: Object.fromEntries(verwacht.map((v) => [v.sleutel, v.status])), namen: Object.fromEntries(verwacht.filter((v) => v.naam).map((v) => [v.sleutel, v.naam])) };
 }
@@ -90,14 +95,16 @@ async function voerUit(s) {
   // acties: annuleren alleen op "komend"
   const actiesKloppen = lijst.every((r) => actiesVoor(r, NU).annuleer === (r.status === 'komend') && actiesVoor(r, NU).nieuw === true);
   const dubbel = new Set(lijst.map((r) => r.planadoJobUuid).filter(Boolean)).size !== lijst.filter((r) => r.planadoJobUuid).length;
-  return { sleutels, statussen, namen, zoekKlopt, actiesKloppen, dubbel, melding: false };
+  // nummer uit het geheugen moet op de verse regel staan (alleen als die regel er is)
+  const telefoonsKloppen = Object.entries(s.geheugen.telefoonVoor || {}).every(([k, tel]) => { const r = lijst.find((x) => x.sleutel === k); return !r || r.telefoon === tel; });
+  return { sleutels, statussen, namen, zoekKlopt, actiesKloppen, dubbel, telefoonsKloppen, melding: false };
 }
 
 function vergelijk(verwacht, echt) {
   if (JSON.stringify(echt.sleutels) !== JSON.stringify(verwacht.sleutels)) return false;
   for (const [k, v] of Object.entries(verwacht.statussen)) if (echt.statussen[k] !== v) return false;
   for (const [k, v] of Object.entries(verwacht.namen)) if (echt.namen[k] !== v) return false;
-  return echt.zoekKlopt && echt.actiesKloppen && !echt.dubbel;
+  return echt.zoekKlopt && echt.actiesKloppen && !echt.dubbel && echt.telefoonsKloppen;
 }
 
 module.exports = { naam: 'inmeet-zoeklijst', scenarios: () => combinaties(dimensies), orakel, voerUit, vergelijk };

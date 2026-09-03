@@ -122,7 +122,9 @@ async function koppelViaPlanado({ snapshot, boekingen, bonnen }) {
     if (DRY) break;
     const det = await planadoDetail(uuid); calls++;
     const gripp = det ? grippUitOmschrijving(det.description) : null;
-    cache[uuid] = { gripp, op: new Date().toISOString() };
+    // telefoons erbij: lib/kantoor-afspraak.js vindt hiermee een afspraak op nummer zonder naam (Lotte Vos 03-09)
+    const tel = det ? (det.contacts || []).map((c) => String(c.value || '').replace(/\D/g, '').slice(-9)).filter((x) => x.length === 9) : [];
+    cache[uuid] = { gripp, tel, op: new Date().toISOString() };
     if (gripp) gevonden++;
     await new Promise((res) => setTimeout(res, WACHT_MS));
   }

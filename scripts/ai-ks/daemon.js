@@ -526,10 +526,20 @@ async function planningRolVoor(t, rows) {
   // de boeking klaar en Sunny kreeg geen annuleer-instructie. Daimy's regel: altijd
   // eerst vragen waarom en een ander moment proberen; wil hij echt annuleren, dan
   // gaat de afspraak overal weg. Dus: geboekte klant + annuleren → Sunny.
+  let kantoorAfspraak = null;
   if (plannenAan && !blijfWeg && !sunnyPlant && tekst) {
     try {
       const bo2 = JSON.parse(fs2.readFileSync('/Users/clawdboot/sonty/data/inmeet-boekingen.json', 'utf8'));
-      const geboektNu = Object.values(bo2).some((b) => b.status === 'geboekt' && tel9.length === 9 && String(b.telefoon || '').replace(/\D/g, '').slice(-9) === tel9);
+      let geboektNu = Object.values(bo2).some((b) => b.status === 'geboekt' && tel9.length === 9 && String(b.telefoon || '').replace(/\D/g, '').slice(-9) === tel9);
+      // KANTOOR-AFSPRAAK (Daimy 03-09, Lotte Vos): afspraak alleen in Outlook/Planado → telt ook als geboekt, zodat
+      // "ik wil de afspraak van donderdag afzeggen" een annulering wordt en geen "vervolg op overdracht"-notitie.
+      // Alleen bij annuleer-woorden (één Planado-call), nooit voor elk bericht.
+      if (!geboektNu && /afzeg|annul|cancel|afbel|gaat niet door|niet door(gaan| laten gaan)|afblazen/i.test(tekst)) {
+        try {
+          kantoorAfspraak = await require('../lib/kantoor-afspraak.js').vindKantoorAfspraak({ telefoon: t.contact?.phone, naam: t.contact?.full_name || t.contact?.name || info?.naam || '' });
+          if (kantoorAfspraak) { geboektNu = true; console.log(`  ticket ${t.id}: kantoor-afspraak gevonden in Planado (${kantoorAfspraak.klant}, ${kantoorAfspraak.start}) — annuleren loopt via Sunny`); }
+        } catch (e) { console.log(`  ticket ${t.id}: kantoor-afspraak zoeken faalde: ${e.message.slice(0, 80)}`); }
+      }
       if (geboektNu) {
         const { leesReactie } = require('../lib/planning-antwoord.js');
         const d3 = await leesReactie(tekst, []);
@@ -549,6 +559,7 @@ async function planningRolVoor(t, rows) {
     const bo = JSON.parse(fs2.readFileSync('/Users/clawdboot/sonty/data/inmeet-boekingen.json', 'utf8'));
     geboekt = Object.values(bo).find((b) => b.status === 'geboekt' && String(b.telefoon || '').replace(/\D/g, '').slice(-9) === tel9 && tel9.length === 9) || null;
   } catch { /* geen administratie */ }
+  if (!geboekt && kantoorAfspraak) geboekt = { naam: kantoorAfspraak.klant, slot: { aankomst: kantoorAfspraak.start, inmeter: kantoorAfspraak.inmeter }, kantoor: true };
   const context = [
     'PLANNING-CONTEXT (intern, niet letterlijk citeren):',
     geboekt

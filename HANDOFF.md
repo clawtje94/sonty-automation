@@ -1,6 +1,22 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 03-09 13:10: LOTTE VOS +31651680187 "WAAROM NIET GEANNULEERD, INMETER STAAT OP LOCATIE" → KANTOOR-AFSPRAKEN ANNULEREN GEBOUWD
+- Wat misging: Lotte zegde 01-09 11:04 per WhatsApp haar inmeetafspraak van do 03-09 13:00 (Joey) af. Die afspraak was door KANTOOR
+  via Outlook/Bookings gemaakt (Planado ol-…), niet door de planner → stond niet in data/inmeet-boekingen.json → de "geboekt + annuleren
+  → Sunny handelt af"-tak in daemon.js sloeg niet aan; het ticket stond op overdracht (@jorren, op vakantie) → bot stuurde 2x het
+  vangnet "doorgezet naar collega, waar twijfel je nog over?" + notitie. Niemand annuleerde. Escalatie-alarm 02-09 20:03 noemde haar
+  naamloos (contactnaam leeg in Trengo). Planado-opdracht stond 13:10 al op finished: niets meer te annuleren, niets aan Lotte gestuurd.
+- Bouw: scripts/lib/kantoor-afspraak.js: vindKantoorAfspraak (snapshot-kandidaten op achternaam + telefoons uit meetbon-koppelcache,
+  bewijs via Planado-contacten op nummer), annuleerKantoorAfspraak (Outlook-events van die klant binnen 90 min + precies die Planado-
+  opdracht, melding planning-groep {boeking:true}). Verwerker (planner verwerkVerzoek): geen boeking → kantoor-afspraak annuleren +
+  klantbevestiging via stuurVrijBericht; anders pas "handmatig nakijken". Daemon: annuleer-woorden zonder eigen boeking → kantoor-
+  afspraak zoeken (1 Planado-call) → telt als geboekt → Sunny krijgt de annuleer-instructie + datum in de planning-context.
+  meetbon-afspraken-sync bewaart nu ook telefoons per Planado-job in de koppelcache (vinden zonder naam).
+- Bewijs: tests/kantoor-afspraak-regressie.js 8 tests + matrix 120 groen; live alleen-lezen: Lotte gevonden op nummer, verkeerd nummer
+  → null. Daemon herstart 13:04. NIET live getest met een echte annulering (geen kandidaat vandaag; eerste echte geval = proefgeval).
+- Open: escalaties naar een collega die in afwezig.json staat gaan nog steeds naar die collega (Lotte → @jorren op vakantie).
+
 ## 03-09 12:30: +31610729433 "GEBEURT NOG STEEDS" → HEROPEN-LUS IN SONNY-DAEMON DICHT (Daimy: "je maakt er een tering zooi van")
 - Klant Andrii (WA-ticket 976691818) zei 27-08 nee op de offerte, bot antwoordde netjes, klant stuurde een hartje, collega sloot. Daarna
   wees de daemon het ticket 1.205 rondes op rij (elke ~4 min, sinds 27-08 avond) opnieuw toe aan Sunny + label AI Bot: conditie

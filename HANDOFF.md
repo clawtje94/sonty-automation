@@ -1,6 +1,22 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 03-09 09:00: MEETBON-DASHBOARD PER DAG PER ADVISEUR (Daimy: "zodat ze makkelijker per dag hun eigen dingen zien") — LIVE
+- /admin/meetbon: tabs Iedereen/Joey/Sjoerd (onthouden in localStorage), dagbalk ‹ › + datumkiezer + strook komende dagen met
+  aantallen, per dag kaarten (tijd, klant, plaats, Gripp, producten, status) → bon. Inplan-formulier, "Zonder afspraakdatum" en
+  volledige tabel (nu met kolommen Afspraak + Adviseur) ingeklapt eronder. Tabs alleen echte adviseurs (uit Planado), niet het vrije
+  inmeter-veld (daar stonden testnamen). Meetbon-app blijft bewust licht (eigen ontwerp), donker-thema n.v.t.
+- Data: nieuw veld bon.afspraak {wanneer, inmeter, planadoJob, bron, gesyncedOp}. Bron: scripts/meetbon-afspraken-sync.js (launchd
+  nl.sonty.meetbon-afspraken, elke 15 min, plist in ~/Library/LaunchAgents, valt onder interval-runner-vangnet) leest
+  data/planado-agenda-snapshot.json (nieuw: planner-ronde schrijft zijn Planado-agenda weg, geen extra Planado-calls) + inmeet-boekingen.json
+  (uuid→Gripp-koppeling) en POST't naar /api/meetbon/afspraak (alleen veld afspraak, status ongemoeid, bewaarMeetbonStil = geen
+  bijgewerkt-stempel). Planado is leidend bij verzetten/andere inmeter. Plan-formulier zet afspraak direct.
+- Bewijs: tests/meetbon-afspraken-regressie.js 9 tests + matrix 36 groen; productie-API gemeten: 103 bonnen → 83 met afspraak (Joey 44,
+  Sjoerd 39), 20 zonder (oudere/handmatige bonnen zonder Planado-koppeling); 2e sync 0 te schrijven (idempotent). Screenshots
+  Playwright headless mobiel 390 + desktop 1280 bekeken (admin-login via wachtwoord + meet-code 2288 in localStorage).
+- Let op: Planado-jobs hebben in de lijst GEEN external_id gripp-/meetbon- (0 van 158), koppeling loopt via inmeet-boekingen.json.
+  Bon zonder boeking én zonder plan-formulier blijft "Zonder afspraakdatum".
+
 ## 02-09 18:00: ESCALATIE-WACHTER → HERINNERING PAS NA 4 DAGEN (REGEL Daimy: "anders NIET")
 - Aanleiding: wachter alarmeerde na 4 werkuren en stuurde vandaag 4x een lijst met 13 klanten. Daimy: pas na 4 dagen, en alleen als
   nergens geholpen én geen interne opmerking.
@@ -3711,6 +3727,10 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 
 ## 2026-09-02 16:55 Reel thuis opnemen (sessie viral)
 - Nieuw: sonty-website/public/intern/reel-thuis.html (script 33s, 3 hooks, loop, montage, caption, Trial Reels, bewijs-KPIs, zonversie). Gelinkt vanuit viral-draaiboek.html. Live op https://sonty-website.vercel.app/intern/reel-thuis.html
-- Let op: sonty.nl/www is nog Cloudflare/oude site; Next-site alleen op sonty-website.vercel.app. Git push triggert GEEN deploy; handmatig `vercel --prod --yes --archive=tgz` (zonder archive faalt: >15000 files).
+- Let op: sonty.nl/www is nog Cloudflare/oude site; Next-site alleen op sonty-website.vercel.app. Push naar main deployt via GitHub Actions (±3 min, `gh run list`); handmatig kan met `vercel --prod --yes --archive=tgz`.
 - Open: V1 aan Daimy welke Amerikaanse social-expert hij bedoelt (script daar nog tegen checken). Filmen/posten nog niet gedaan.
 - 17:25 IG-analyse sonty.nl geblokkeerd (token alleen ads_read, publiek geen data). V1/V2 aan Daimy: IG koppelen aan systeemgebruiker met instagram_basic+instagram_manage_insights, of Insights-screenshots.
+- 18:40 IG-analyse WEL gelukt via Meta Marketing API (act_1633352477464320, ads_read): 244 geboostte IG-posts, 145 met video-kijkcurves, €351k spend. Pagina public/intern/insta-analyse.html (+links in reel-thuis en viral-draaiboek). Bevindingen: mediaan kijktijd 4 s, thruplay 7%; beste = thuis pratend over gordijnen (13 s), slechtste = showroom "15% korting" (3 s) en rolluik zonder mens (2 s). Video's zelf te downloaden via /{ad_id}/previews iframe (headless) -> video src. Scratch-data: rows.json/ads.json/adins.json in scratchpad (sessie c5677c9b).
+- 19:05 Windsor.ai heeft connectors instagram (eigen account, OAuth) en instagram_public; koppellinks naar Daimy gestuurd (V1/V2). Meta Ads Library via meta-ads MCP werkt (1.243 actieve NL-ads op zonwering) voor marktonderzoek.
+- 19:40 Windsor instagram_public gekoppeld door Daimy (account sonty.nl): alle 170 reels met likes/comments (geen views). Organische toppers = humor-sketches met Haagse Joke (5.513 / 3.134 likes, april 2026, niet geboost), parodieën (Boer zoekt vrouw, Zaai), winacties. Sectie 6b in insta-analyse.html. Nog nodig voor views/sends/saves: Windsor-connector "instagram" (eigen account) of IG aan systeemgebruiker koppelen.
+- 20:30 Diep marktonderzoek viraal af: public/intern/viraal-onderzoek.html (4 sonnet-subagents: algoritmes 2026, breinpsychologie met studies, MrBeast-document + experts, vakmensen-cases + Newcom 2026; synthese = formule van 10 punten + 3 series voor Sonty + toets van de thuis-reel). Gelinkt vanuit draaiboek en reel-thuis.

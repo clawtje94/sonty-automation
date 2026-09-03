@@ -414,6 +414,7 @@ async function haalAgenda() {
       adres = soort || require('./lib/reistijd').MAGAZIJN;
     }
     perInmeter[inm.naam].push({
+      uuid: j.uuid, externalId: j.external_id || null,
       start: j.scheduled_at,
       eind: new Date(+new Date(j.scheduled_at) + ((j.scheduled_duration?.minutes) || 60) * 60000).toISOString(),
       adres,
@@ -442,6 +443,13 @@ async function haalAgenda() {
   // Tandarts + WINKEL alleen in zijn eigen agenda staan (niet in Planado, niet in Sonty
   // Montage) en daar zijn 4 inmetingen doorheen geboekt. Alles wat daar 'bezet' staat
   // telt nu mee. Faalt het ophalen, dan NIET plannen (zelfde beleid als laadVakanties).
+  // Snapshot van de Planado-agenda (vóór de eigen-agendablokken, die hebben geen uuid) voor het
+  // meetbon-dashboard per dag/adviseur (scripts/meetbon-afspraken-sync.js) — geen extra Planado-calls.
+  try {
+    const items = [];
+    for (const inm of INMETERS) for (const x of perInmeter[inm.naam]) if (x.uuid) items.push({ uuid: x.uuid, externalId: x.externalId, start: x.start, eind: x.eind, inmeter: inm.naam, klant: x.klant || '' });
+    fs.writeFileSync(path.join(__dirname, '..', 'data', 'planado-agenda-snapshot.json'), JSON.stringify({ ts: new Date().toISOString(), items }));
+  } catch (e) { console.log('  ! agenda-snapshot niet weggeschreven: ' + e.message); }
   await laadEigenAgendas(perInmeter);
   return perInmeter;
 }

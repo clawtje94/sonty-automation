@@ -1,6 +1,17 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 03-09 14:45: KLANT-WERKBON VANUIT werkbon@ (Daimy: "niet uit aanvragen@") — LIVE via wachtrij + Mac-verzender
+- Trengo-kanaal "Werkbon" = 1363388 (werkbon@sonty.nl). De website-API-gebruiker (TRENGO_TOKEN) mag daar geen ticket aanmaken:
+  422 "Je hebt geen toegang tot dit privécontact" (kanaal is privé; geen API om gebruikers aan een kanaal te hangen). Met de
+  kantoor-login (trengo-api.js getToken, Daimy) werkt het wél. daimy@sonty.nl is bovendien zelf een privécontact → proefadres nu
+  clawtje94@proton.me (WERKBON_PROEF_ADRES).
+- Bouw: website probeert eerst zelf via kanaal 1363388; lukt dat niet → KV-wachtrij werkbon:klantmail-wachtrij + pagina zegt
+  "binnen enkele minuten". scripts/cron-werkbon-klantmail.js (launchd nl.sonty.werkbon-klantmail, elke 3 min, + interval-runner)
+  haalt de wachtrij op (/api/werkbon/wachtrij, admin), verstuurt via kanaal 1363388 (contact → ticket → mail → sluiten) en meldt
+  af; na 2 uur mislukken → alarm planning-groep + uit de wachtrij. Proef 14:40: ticket 978314827 in kanaal Werkbon, gesloten,
+  mail naar clawtje94@proton.me. Wil Daimy het direct (zonder 3 min): botgebruiker toegang geven tot kanaal Werkbon in Trengo.
+
 ## 03-09 16:30: KLANT TEKENT DE WERKBON (Daimy: "werkbon getekend door de klant, met opmerkingenveld; volledige werkbon naar
 ## kantoor; niet gereed → een DEEL naar de klant, de rest naar kantoor") — LIVE, proefgeval gedaan
 - Onderzoek: Planado kent GEEN handtekening-veld (API-docs: action/checkbox/input/textarea/image/barcode/dictionary) en sjablonen

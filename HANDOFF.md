@@ -6,6 +6,10 @@
 - Rolluik + zipscreen: open tekstveld "Kokers of hoeklijnen voor montage nodig" (Daimy: "open vlak voor nu"; later evt. dropdown).
 - Code: sonty-website lib/meetbon/producten.ts (velden), lib/meetbon/prijs.ts (Gripp-omschrijving leest "valse vensterbank met hoeklijn 20x70" onder Overige). App, server-validatie, Gripp-tekst en orders-mail lezen velden generiek, niets anders aangepast.
 - Bewijs: validatie 4 gevallen ok, meetbon-keten-lab 940 scenario's 0x FOUT-STIL, commits 896a681 + 75202ff gepusht, prod-deploy via `vercel deploy --prod --archive=tgz`.
+- Pergola (Daimy, chat): hoogte staander (cm, verplicht), stroomzijde links/rechts (verplicht), open veld "Koker of hoeklijn nodig?". Commit 10f9e7f.
+- Daimy 03-09: na elke aanpassing een VOORBEELD (screenshot) laten zien; rolluik-voorbeeld gestuurd (Telegram foto + chat).
+- VOORBEELD PLANADO-OPDRACHT #1313 (uuid 1f1a7a58-42bc-6020-ae21-3a32be08ab58, external_id voorbeeld-meetbon-1004, niet ingepland, geen monteur): meetbon 1004 (testbon Liotard) volledig in de beschrijving + custom fields Product type / Meetgegevens (max 200 tekens!) / Bijzonderheden. Script: scratch planado-voorbeeld.mts (logica: velden uit producten.ts, foto's als Blob-links). NOG NIET automatisch: meetbon → montage-opdracht koppelen is het volgende blok (Planado-API kan geen bestanden uploaden, alleen links; montage-jobs komen uit Outlook-sync met external_id ol-…, matchen op klant/adres nodig).
+- Deploy-fix: .vercelignore had alleen .army/, waardoor .next (3,3 GB) en .claude/worktrees (15 GB) meegingen en de upload 8 GB werd en vastliep; nu ook .next/ .claude/ .git/ node_modules/ test-results/ screenshots/ uitgesloten.
 - Bestaande complete bonnen blijven geldig (validatie draait alleen bij opslaan via de app); bonnen in bewerking moeten het ja/nee-veld nog invullen.
 
 ## 03-09 14:45: KLANT-WERKBON VANUIT werkbon@ (Daimy: "niet uit aanvragen@") — LIVE via wachtrij + Mac-verzender

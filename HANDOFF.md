@@ -1,6 +1,26 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 03-09 15:00: OUTLOOK → PLANADO 100%-AUDIT (Daimy: "zodat ik alle bussen Planado kan laten gebruiken") + VERFRIS-STAP
+- Nieuw, alleen-lezen: scripts/outlook-planado-audit.js (rapport data/outlook-planado-audit.json) en scripts/planado-dubbel-check.js
+  (data/planado-dubbel.json). Meting 13:09-13:22: 279 Outlook-events, 251 klussen, 600 Planado-opdrachten.
+  DEKKING 100%: 0 klussen zonder Planado-opdracht, 0 teams zonder account, 0 wezen; tijd + team klopt overal (77 via planner).
+  KWALITEIT: 215 helemaal goed, 36 echt afwijkend: 16x interne notities uit Outlook niet (meer) in Planado (sync zette ze alleen bij
+  aanmaken; latere wijzigingen in Bookings kwamen nooit door: Blaauboer windsensor/factuur, Schrooten "al 2x verzet", Brian de Boer
+  kapsteunen), 16 kantoor-blokken zonder klant/adres (TYGO MAGAZIJN, "Niks plannen", "Arnold niet plannen", naamloze "Montage Sonty",
+  "Marvin tygo mao kevin", JOEY WINKEL), 2 adressen zonder straat (Schipper #459, Van der Spek #1263), 1 telefoon (Charentestroom #456).
+  Voor planner-jobs is de notitie-check ruis (eigen body "Adres: … route") en weggefilterd.
+- DUBBEL: 6 overlappende paren, allemaal een spiegel van Outlook zelf: Bus 5 di 08-09 08:00-14:00 = twee Outlook-events voor Marvin
+  (de Graaf-Muller #1157 mét Mick, én blok "Marvin tygo mao kevin" #1158 zonder adres); Joey do 03-09 13:00 Lotte Vos (afgezegd,
+  niet geannuleerd) × Van Grimbergen × Naumer; Joey wo 09-09 WINKEL-blok × 16:30-klus; Bus 3 08-09 en 10-09 30 min bufferoverlap.
+- BOUW: lib/planado-verfris.js (puur, tests/planado-verfris-regressie.js 8 tests + matrix 96 groen): notitieblok vervangen/toevoegen/
+  verwijderen, adres alleen aanvullen als Planado geen straat+huisnummer heeft, telefoon alleen als geen contact. In de sync (bestaand-
+  tak): alleen bij gewijzigd LastModifiedDateTime (data/sync-verfris-state.json), max 25 detail-calls per run, --verfris-alleen=<nr>.
+  Proefgeval #1297 Blaauboer 14:55 uitgevoerd en teruggelezen: notities staan erin. Rest volgt via de 10-min-sync (state leeg → eerste
+  ~10 runs 25 per keer).
+- OPEN (V1 aan Daimy): kantoor-blokken zonder klant (teamnamen als klant, "niks plannen") → nu synct de sync ze als opdracht; keuze:
+  overslaan of laten staan. Bus 5 08-09 dubbel is zo'n blok.
+
 ## 03-09 13:10: LOTTE VOS +31651680187 "WAAROM NIET GEANNULEERD, INMETER STAAT OP LOCATIE" → KANTOOR-AFSPRAKEN ANNULEREN GEBOUWD
 - Wat misging: Lotte zegde 01-09 11:04 per WhatsApp haar inmeetafspraak van do 03-09 13:00 (Joey) af. Die afspraak was door KANTOOR
   via Outlook/Bookings gemaakt (Planado ol-…), niet door de planner → stond niet in data/inmeet-boekingen.json → de "geboekt + annuleren

@@ -21,6 +21,12 @@ const crypto = require('crypto');
 const PLANADO_KEY = fs.readFileSync(path.join(__dirname, 'planado-api-key.txt'), 'utf8').trim();
 const { planningTelegram } = require('./lib/telegram-planning.js');
 const EXECUTE = process.argv.includes('--execute');
+// VERFRISSEN (Daimy 03-09, audit vóór "alle bussen op Planado"): notities/adres/telefoon van BESTAANDE opdrachten volgen
+// Outlook. Alleen als het event in Outlook is gewijzigd sinds de vorige verfris (state), max 25 detail-calls per run.
+// --verfris-alleen=<serial_no> = proefgeval (eerst 1, dan de rest). Regel in lib/planado-verfris.js (getest).
+const VERFRIS_STATE_PAD = path.join(__dirname, '..', 'data', 'sync-verfris-state.json');
+const VERFRIS_MAX = 25;
+const VERFRIS_ALLEEN = (process.argv.find((a) => a.startsWith('--verfris-alleen=')) || '').split('=')[1] || null;
 
 const INMETERS = {
   Joey: '1f122cfa-17a2-6580-8257-7e80f004db9c',
@@ -90,7 +96,7 @@ async function outlookEvents() {
   const van = new Date();
   const tot = new Date(); tot.setDate(tot.getDate() + 100); // was 42: afspraken >6 weken vooruit (Kampherbeek 21 sep) werden nooit gesynct en waren onzichtbaar voor de planner (08-08)
   let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView`
-    + `?$top=500&$select=Subject,Start,End,IsCancelled,Location,Attendees,Body`
+    + `?$top=500&$select=Subject,Start,End,IsCancelled,Location,Attendees,Body,LastModifiedDateTime`
     + `&startDateTime=${van.toISOString()}&endDateTime=${tot.toISOString()}`;
   const evs = [];
   while (url) {
@@ -314,7 +320,8 @@ async function main() {
   const bookingsOk = bookAppts.length > 0;
   if (!bookingsOk) console.log('  LET OP: geen bookings-tijden — teamopdrachten en tijd-updates overgeslagen deze ronde');
 
-  let nieuw = 0, bijgewerkt = 0, overgeslagen = 0, fouten = 0;
+  let nieuw = 0, bijgewerkt = 0, overgeslagen = 0, fouten = 0, verfrist = 0, verfrisCalls = 0;
+  let verfrisState = {}; try { verfrisState = JSON.parse(fs.readFileSync(VERFRIS_STATE_PAD, 'utf8')); } catch { /* eerste run */ }
   const actieveExtIds = new Set();
 
   for (const { e, voornaam } of items) {
@@ -355,6 +362,26 @@ async function main() {
           await wacht(2600);
         } else bijgewerkt++;
       } else overgeslagen++;
+      // VERFRISSEN: notities/adres/telefoon uit Outlook naar de bestaande opdracht
+      try {
+        const lm = String(e.LastModifiedDateTime || '');
+        const alleenDit = VERFRIS_ALLEEN ? String(bestaand.serial_no) === VERFRIS_ALLEEN : true;
+        if (alleenDit && (VERFRIS_ALLEEN || (verfrisState[extId] !== lm && verfrisCalls < VERFRIS_MAX))) {
+          verfrisCalls++;
+          const det = (await planadoJson(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`)); const huidig = det.job || det;
+          await wacht(2600);
+          const { verfrisPatch } = require('./lib/planado-verfris.js');
+          const { patch, redenen } = verfrisPatch({ huidig, notities: notitiesUit(e), adresTekst: (e.Location?.DisplayName || '').trim() || adresUitBody(e), telNr: telefoonUit(e.Body) || echt?.tel || null, wieKlant: echt?.klantNaam || klantNaamUit(e.Subject), soortKlus: soort(e.Subject) });
+          if (redenen.length) {
+            console.log(`  ↻ #${bestaand.serial_no} ${voornaam} ${startISO.slice(0, 16)} ${(e.Subject || '').slice(0, 30)}: ${redenen.join(', ')}`);
+            if (EXECUTE) {
+              const r = await planadoFetch(`https://api.planadoapp.com/v2/jobs/${bestaand.uuid}`, { method: 'PATCH', headers: PH, body: JSON.stringify({ version: huidig.version, ...patch }) });
+              if (r.ok) { verfrist++; verfrisState[extId] = lm; } else { fouten++; console.log(`    verfris FOUT ${r.status}`); }
+              await wacht(2600);
+            } else if (VERFRIS_ALLEEN) console.log('    [dry] patch: ' + JSON.stringify(patch).slice(0, 600));
+          } else if (EXECUTE || !VERFRIS_ALLEEN) verfrisState[extId] = lm;
+        }
+      } catch (err) { console.log(`  verfris #${bestaand.serial_no} faalde: ${err.message.slice(0, 80)}`); }
       continue;
     }
     const werkerUuid = INMETERS[voornaam] || MONTEURS[voornaam];
@@ -687,7 +714,8 @@ async function main() {
       body: JSON.stringify({ type: 'ververs', bron: 'na-sync' }),
     }).catch(() => {});
   }
-  console.log(`\nnieuw: ${nieuw} | bijgewerkt: ${bijgewerkt} | al aanwezig: ${overgeslagen} | wees: ${wees.length} | fouten: ${fouten}`);
+  if (EXECUTE || !VERFRIS_ALLEEN) { try { fs.writeFileSync(VERFRIS_STATE_PAD, JSON.stringify(verfrisState)); } catch { /* state is best effort */ } }
+  console.log(`\nnieuw: ${nieuw} | bijgewerkt: ${bijgewerkt} | verfrist: ${verfrist} (${verfrisCalls} gecheckt) | al aanwezig: ${overgeslagen} | wees: ${wees.length} | fouten: ${fouten}`);
   if (EXECUTE && (nieuw || bijgewerkt || fouten)) {
     await telegram(`🔄 Outlook→Planado-sync (Joey+Sjoerd): ${nieuw} nieuw, ${bijgewerkt} bijgewerkt, ${overgeslagen} al aanwezig${fouten ? `, ${fouten} FOUTEN` : ''}.`);
   }

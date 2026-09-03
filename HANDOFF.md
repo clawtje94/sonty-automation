@@ -1,6 +1,13 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 03-09 17:30: MEETBON ROLLUIK/SCREEN — VALSE VENSTERBANK + KOKERS/HOEKLIJNEN (Daimy, chat) — LIVE
+- Rolluik: ja/nee "Valse vensterbank?" (verplicht) + dropdown "Geleider / hoeklijn bij valse vensterbank" (HF geleider, HTF geleider, HTF68 geleider, Hoeklijn 20x30, Hoeklijn 20x70), alleen zichtbaar én verplicht bij Ja.
+- Rolluik + zipscreen: open tekstveld "Kokers of hoeklijnen voor montage nodig" (Daimy: "open vlak voor nu"; later evt. dropdown).
+- Code: sonty-website lib/meetbon/producten.ts (velden), lib/meetbon/prijs.ts (Gripp-omschrijving leest "valse vensterbank met hoeklijn 20x70" onder Overige). App, server-validatie, Gripp-tekst en orders-mail lezen velden generiek, niets anders aangepast.
+- Bewijs: validatie 4 gevallen ok, meetbon-keten-lab 940 scenario's 0x FOUT-STIL, commits 896a681 + 75202ff gepusht, prod-deploy via `vercel deploy --prod --archive=tgz`.
+- Bestaande complete bonnen blijven geldig (validatie draait alleen bij opslaan via de app); bonnen in bewerking moeten het ja/nee-veld nog invullen.
+
 ## 03-09 14:45: KLANT-WERKBON VANUIT werkbon@ (Daimy: "niet uit aanvragen@") — LIVE via wachtrij + Mac-verzender
 - Trengo-kanaal "Werkbon" = 1363388 (werkbon@sonty.nl). De website-API-gebruiker (TRENGO_TOKEN) mag daar geen ticket aanmaken:
   422 "Je hebt geen toegang tot dit privécontact" (kanaal is privé; geen API om gebruikers aan een kanaal te hangen). Met de

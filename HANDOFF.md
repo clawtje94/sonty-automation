@@ -1,6 +1,18 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 03-09 09:20: WAAROM MAAR 1 BIJ JOEY VANDAAG → OUTLOOK/BOOKINGS-AFSPRAKEN GEKOPPELD + BONNEN VOORAF AANGEMAAKT (vraag Daimy)
+- Oorzaak: 8 van Joeys 9 inmetingen vandaag zijn Outlook/Bookings-afspraken (Planado external_id ol-…): geen eigen boeking, dus geen
+  uuid→Gripp-koppeling, én er bestond nog geen meetbon (een bon ontstaat pas als iemand de link opent). Alleen Annette (planner) stond er.
+- Fix in meetbon-afspraken-sync.js: (a) koppeling uit de Planado-omschrijving ("Gripp: 6278" of meetbon-link, gezet door
+  outlook-planado-sync/gripp-verrijken) via één detail-call per ongekoppelde inmeet-afspraak in [-1, +60 dagen], cache
+  data/meetbon-planado-gripp-cache.json (hercheck 6 u als geen nummer; max 40 calls/run, 2,6 s ertussen); (b) bonnen vooraf aanmaken
+  via GET /api/meetbon/bon/<nr> (voorgevuld uit Gripp) voor gekoppelde afspraken zonder bon, max 25/run.
+- Meting: 65 koppelingen gevonden (78 detail-calls), 70 bonnen aangemaakt (0 mislukt, 0 zonder klantnaam), productie nu 174 bonnen,
+  155 met afspraak. Joey vandaag: 8 (Wendy, Alexander van Loenen, Sjoerd van Marum, Jan van Grimbergen, Lotte Vos, Naumer, Nick
+  Heemskerk, Annette). Steven Burke 10:00 NIET: geen Gripp-nummer in zijn Planado-omschrijving (geen Gripp-offerte gevonden door
+  gripp-verrijken) → geen bon mogelijk. Tests 13 + matrix 36 groen. Screenshot mobiel bekeken.
+
 ## 03-09 09:00: MEETBON-DASHBOARD PER DAG PER ADVISEUR (Daimy: "zodat ze makkelijker per dag hun eigen dingen zien") — LIVE
 - /admin/meetbon: tabs Iedereen/Joey/Sjoerd (onthouden in localStorage), dagbalk ‹ › + datumkiezer + strook komende dagen met
   aantallen, per dag kaarten (tijd, klant, plaats, Gripp, producten, status) → bon. Inplan-formulier, "Zonder afspraakdatum" en

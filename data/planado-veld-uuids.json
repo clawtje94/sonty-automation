@@ -1,0 +1,117 @@
+{
+ "bron": "sjabloon Montage afspraak particulier, via voorbeeldopdracht 1f1a7b5b-72fd-6d40-b6c6-225507304193 op 2026-09-03",
+ "custom": {
+  "Product type": {
+   "uuid": "1f11f1b3-8a22-6d00-a93e-46264be483ca",
+   "field_type": "input",
+   "data_type": "string"
+  },
+  "Meetgegevens (van inmeet)": {
+   "uuid": "1f11f1e7-d5d0-60a0-820c-6e076340c1d4",
+   "field_type": "input",
+   "data_type": "string"
+  },
+  "Bijzonderheden": {
+   "uuid": "1f11f1e7-d5d6-6ef0-820c-6e076340c1d4",
+   "field_type": "input",
+   "data_type": "string"
+  },
+  "Product 1": {
+   "uuid": "1f1a7a92-73a3-6a40-a26a-72719e66b2bd",
+   "field_type": "input",
+   "data_type": "string"
+  },
+  "Product 2": {
+   "uuid": "1f1a7a92-73aa-6c10-a26a-72719e66b2bd",
+   "field_type": "input",
+   "data_type": "string"
+  },
+  "Product 3": {
+   "uuid": "1f1a7a92-73b0-6bb0-a26a-72719e66b2bd",
+   "field_type": "input",
+   "data_type": "string"
+  },
+  "Product 4": {
+   "uuid": "1f1a7a92-73b6-6950-a26a-72719e66b2bd",
+   "field_type": "input",
+   "data_type": "string"
+  },
+  "Algemeen (elektra, ondergrond, monteurs)": {
+   "uuid": "1f1a7a92-73be-6e10-a26a-72719e66b2bd",
+   "field_type": "input",
+   "data_type": "string"
+  },
+  "Meetbon (PDF)": {
+   "uuid": "1f1a7b07-fb49-6420-ae21-3a32be08ab58",
+   "field_type": "file",
+   "data_type": "attachment"
+  },
+  "Foto 1 inmeet": {
+   "uuid": "1f1a7b07-fb51-67b0-ae21-3a32be08ab58",
+   "field_type": "file",
+   "data_type": "attachment"
+  },
+  "Foto 2 inmeet": {
+   "uuid": "1f1a7b07-fb57-6f20-ae21-3a32be08ab58",
+   "field_type": "file",
+   "data_type": "attachment"
+  },
+  "Foto 3 inmeet": {
+   "uuid": "1f1a7b07-fb5e-6f40-ae21-3a32be08ab58",
+   "field_type": "file",
+   "data_type": "attachment"
+  },
+  "Foto 4 inmeet": {
+   "uuid": "1f1a7b07-fb64-6e10-ae21-3a32be08ab58",
+   "field_type": "file",
+   "data_type": "attachment"
+  }
+ },
+ "report": {
+  "Werk gereed?": {
+   "uuid": "1f19ca5c-22df-6890-9f8d-0e3d86cf6eee",
+   "field_type": "checkbox",
+   "data_type": "boolean"
+  },
+  "Waarom niet gereed": {
+   "uuid": "1f19ca5c-22f2-6d80-9f8d-0e3d86cf6eee",
+   "field_type": "input",
+   "data_type": "string"
+  },
+  "Wat moet er besteld worden": {
+   "uuid": "1f1a7b53-0a63-6770-b6c6-225507304193",
+   "field_type": "input",
+   "data_type": "string"
+  },
+  "Welke kleur": {
+   "uuid": "1f19ca5c-2337-6700-9f8d-0e3d86cf6eee",
+   "field_type": "input",
+   "data_type": "string"
+  },
+  "Zijn de producten bij de klant gebleven?": {
+   "uuid": "1f19ca5c-2344-6480-9f8d-0e3d86cf6eee",
+   "field_type": "checkbox",
+   "data_type": "boolean"
+  },
+  "Hoeveel uur nodig om te herstellen": {
+   "uuid": "1f19ca5c-2355-6eb0-9f8d-0e3d86cf6eee",
+   "field_type": "input",
+   "data_type": "decimal"
+  },
+  "Foto NIET-GEREED situatie (voor volgende afspraak)": {
+   "uuid": "1f19cab7-85b9-6fe0-a407-0a47751401c1",
+   "field_type": "image",
+   "data_type": "attachment"
+  },
+  "Uitleg voor de volgende service-afspraak": {
+   "uuid": "1f19cab7-85c5-6800-a407-0a47751401c1",
+   "field_type": "input",
+   "data_type": "string"
+  },
+  "Werkbon tekenen (klant)": {
+   "uuid": "1f1a7b35-6431-69a0-96d8-3261e4c71080",
+   "field_type": "link",
+   "data_type": "url"
+  }
+ }
+}

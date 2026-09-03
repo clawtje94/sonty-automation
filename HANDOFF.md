@@ -28,7 +28,16 @@
 - Deploy-fix: .vercelignore had alleen .army/, waardoor .next (3,3 GB) en .claude/worktrees (15 GB) meegingen en de upload 8 GB werd en vastliep; nu ook .next/ .claude/ .git/ node_modules/ test-results/ screenshots/ uitgesloten.
 - Bestaande complete bonnen blijven geldig (validatie draait alleen bij opslaan via de app); bonnen in bewerking moeten het ja/nee-veld nog invullen.
 
-## 03-09 14:45: KLANT-WERKBON VANUIT werkbon@ (Daimy: "niet uit aanvragen@") — LIVE via wachtrij + Mac-verzender
+## 03-09 20:00: MEETBON → PLANADO AUTOMATISCH (Daimy: "in alle montage-opdrachten zetten zodra de meetbon is ingevuld; bij
+## aanpassingen overal verwerken ZONDER nieuwe opdrachten aan te maken, alleen update"; tekenen blijft zoals het is) — LIVE
+- Verwerker: scripts/cron-meetbon-planado.js (launchd nl.sonty.meetbon-planado, elke 15 min, vangnet interval-runner; kill data/kill/nl.sonty.meetbon-planado; log logs/meetbon-planado.log). Vlaggen --dry, --alleen <gripp>, --max <n> (standaard 6/run).
+- Zuiver beslisdeel: scripts/lib/meetbon-planado-plan.js (koppeling op "Gripp: <nr>" in de omschrijving, alleen sjabloon "Montage …", alleen open opdrachten, alleen bij gewijzigde vulling-hash; NOOIT POST/DELETE/omschrijving). Website: lib/meetbon/planado-vulling.ts (tekst regel-voor-regel ≤200 incl. regeleinden, PDF-opbouw, foto's) + GET /api/meetbon/planado-lijst en /api/meetbon/bon/<nr>/planado (admin bearer).
+- Per opdracht: Product 1..4, Algemeen, Product type, Meetgegevens, Bijzonderheden (tekst), Meetbon (PDF) (jspdf op de Mac, alle velden + foto's), Foto 1..4 inmeet (sips -Z 1600 jpeg), rapportveld "Werkbon tekenen (klant)" alleen als leeg. Ontbrekende velden op oudere opdrachten worden bij PATCH toegevoegd met name+field_type+data_type (bewezen). Veld-ids: data/planado-veld-uuids.json. Stand: data/meetbon-planado-vulling.json (uuid → gripp, hash). Cache opdracht-details: data/meetbon-planado-jobs-cache.json.
+- Bewijs: lab scripts/tests/meetbon-planado-lab.ts 672 scenario's 0x FOUT-STIL; echte run op testbon 1004 → #1320 gevuld (pdf 48 kB, 1 foto), tweede run slaat over ("al actueel"). Van de 8 echte ingevulde bonnen (6579, 6325, 6332, 6278, 6489, 6561, 6560, 6556) heeft er nog géén een montage-opdracht met "Gripp: <nr>"; 30 open montage-opdrachten hebben geen Gripp-nummer in de omschrijving (Outlook-sync vond geen offerte) → die krijgen niets tot dat nummer erin staat.
+- Werkbon-mails (klant + werkbon@) lezen de producten nu eerst uit de velden Product 1..4 (klant-deel.ts productenUit), anders uit het oude TE MONTEREN-blok.
+- LET OP prod-KV ≠ .env.local-KV: de meetbon-lijst op productie is anders dan wat je lokaal uit KV leest. Testbon 1004 op productie hersteld (was door mijn PUT {} een lege stub) en op compleet gezet met valse_vensterbank Nee + parkeren/aanvoer/toegang.
+
+ (Daimy: "niet uit aanvragen@") — LIVE via wachtrij + Mac-verzender
 - Trengo-kanaal "Werkbon" = 1363388 (werkbon@sonty.nl). De website-API-gebruiker (TRENGO_TOKEN) mag daar geen ticket aanmaken:
   422 "Je hebt geen toegang tot dit privécontact" (kanaal is privé; geen API om gebruikers aan een kanaal te hangen). Met de
   kantoor-login (trengo-api.js getToken, Daimy) werkt het wél. daimy@sonty.nl is bovendien zelf een privécontact → proefadres nu
@@ -3880,3 +3889,4 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
   geweest = laten, toekomst = verzet/kantoor-annuleer). kantoor-afspraak.js: kantoorAfspraakOpUuid + annuleerKantoorAfspraakOpUuid.
 - Bewijs: lab inmeet-zoeklijst 1890 + nieuwe-afspraak 120 (0x fout-stil); productie-keten Naumer: kaart via RP op telefoon, 5 tijden in 102 s (testkaart daarna verwijderd, niets geboekt).
 - Deploy site gaat NIET via GitHub-push: `vercel deploy --prod --archive=tgz` (CLI bleef hangen na "Ready"; deploy zelf was klaar).
+- 2026-09-03 09:xx Formule-reel gebouwd: public/intern/reel-formule.html ("Koop het niet in mei", 34 s, hook ontleed per woord, 7 re-hooks, 3 humor-beats, loop, caption, Trial-test A/B/C, serie van 10 delen "Dingen die een zonweringverkoper je niet vertelt"). Gelinkt vanuit reel-thuis en viraal-onderzoek. Nog niet gefilmd.

@@ -19,6 +19,11 @@ fs.unlinkSync(TMP);
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 const crypto = require('crypto');
 const NIET_KLUS = /vrij$|later$|vakantie|ziek|verlof|^(MEENEMEN|LET OP|VOORBEELD)\b/i;
+// WACHTER (Daimy 03-09: "hoe zorgen we dat alles goed blijft gaan?"): --dagen=N beperkt het venster (dagcheck 06:15 op 3 dagen,
+// weekcheck maandag op 100 dagen), --melden stuurt bij afwijkingen één kort bericht naar de planning-groep; alles goed = stil.
+const DAGEN = Number((process.argv.find((a) => a.startsWith('--dagen=')) || '').split('=')[1] || 100);
+const MELDEN = process.argv.includes('--melden');
+const { overlappen } = require('./planado-dubbel-check.js');
 const NAAM_VAN_UUID = {};
 for (const [n, u] of Object.entries(L.INMETERS)) NAAM_VAN_UUID[u] = n;
 for (const [n, u] of Object.entries(L.MONTEURS)) if (!NAAM_VAN_UUID[u]) NAAM_VAN_UUID[u] = n;
@@ -36,7 +41,8 @@ const postcode = (adres) => { const m = String(adres || '').replace(/\s/g, '').m
     return namen.find((n) => L.INMETERS[n.split(' ')[0]] || L.MONTEURS[n.split(' ')[0]]) || namen[0] || '';
   };
   const extIdVan = (e) => 'ol-' + crypto.createHash('sha1').update(e.Id).digest('hex').slice(0, 20);
-  const klussen = evs.filter((e) => !e.IsCancelled && !/geannuleerd|canceled|cancelled/i.test(e.Subject || '') && !NIET_KLUS.test(e.Subject || ''));
+  const grens = Date.now() + DAGEN * 864e5;
+  const klussen = evs.filter((e) => !e.IsCancelled && !/geannuleerd|canceled|cancelled/i.test(e.Subject || '') && !NIET_KLUS.test(e.Subject || '') && Date.parse(new Date(e.Start.DateTime + 'Z')) < grens);
   const totB = new Date(); totB.setDate(totB.getDate() + 100);
   const bookAppts = await L.bookingsAfspraken(new Date().toISOString(), totB.toISOString());
   const jobs = await L.planadoJobs();
@@ -87,7 +93,7 @@ const postcode = (adres) => { const m = String(adres || '').replace(/\s/g, '').m
       const kn = L.klantNaamUit(e.Subject);
       if (kn !== 'klant' && !norm(desc).includes(norm(kn))) fouten.push(`klantnaam "${kn}" niet in omschrijving`);
       const not = L.notitiesUit(e);
-      if (not && !norm(desc).includes(norm(not.split('\n')[0]).slice(0, 30))) fouten.push('interne notities uit Outlook niet in omschrijving');
+      if (via === 'sync' && not && !norm(desc).includes(norm(not.split('\n')[0]).slice(0, 30))) fouten.push('interne notities uit Outlook niet in omschrijving');
       if (!(det.assignee || job.assignee)) fouten.push('niet toegewezen');
     } else fouten.push('detail niet leesbaar (rate limit) — adres/omschrijving niet gecontroleerd');
     if (fouten.length) { rapport.afwijkend.push({ ...kop, team: teamNaam, planado: '#' + (job.serial_no || job.uuid.slice(0, 8)), via, fouten }); tel(teamNaam, 'afwijkend'); }
@@ -97,13 +103,15 @@ const postcode = (adres) => { const m = String(adres || '').replace(/\s/g, '').m
   const evStarts = new Map();
   for (const e of evs.filter((x) => !x.IsCancelled)) { const echt = L.echteTijd(bookAppts, e); const s = echt ? echt.start : Date.parse(new Date(e.Start.DateTime + 'Z')); evStarts.set(Math.round(s / 60e3), true); const s2 = Date.parse(new Date(e.Start.DateTime + 'Z')); evStarts.set(Math.round(s2 / 60e3), true); }
   for (const j of jobs) {
-    if (!j.scheduled_at || Date.parse(j.scheduled_at) < nu || gebruikt.has(j.uuid)) continue;
+    if (!j.scheduled_at || Date.parse(j.scheduled_at) < nu || Date.parse(j.scheduled_at) >= grens || gebruikt.has(j.uuid)) continue;
     if (!NAAM_VAN_UUID[j.assignee?.worker_uuid]) continue;
     if ((j.external_id || '').startsWith('meeneem-')) continue;
     const m = Math.round(Date.parse(j.scheduled_at) / 60e3);
     if (evStarts.get(m) || evStarts.get(m - 1) || evStarts.get(m + 1)) continue;
     rapport.wezen.push({ wanneer: j.scheduled_at, team: team(j.assignee?.worker_uuid), planado: '#' + (j.serial_no || j.uuid.slice(0, 8)), extern: j.external_id || '-' });
   }
+  rapport.dubbel = overlappen(jobs, { dagen: DAGEN }).map((d) => ({ team: d.team, a: '#' + d.a.nr + ' ' + d.a.kop, b: '#' + d.b.nr + ' ' + d.b.kop, wanneer: new Date(d.a.s).toISOString() }));
+  rapport.dagen = DAGEN;
   rapport.duurSec = Math.round((Date.now() - t0) / 1000);
   fs.writeFileSync(path.join(S, '..', 'data', 'outlook-planado-audit.json'), JSON.stringify(rapport, null, 1));
   const r = rapport;
@@ -115,4 +123,21 @@ const postcode = (adres) => { const m = String(adres || '').replace(/\s/g, '').m
   for (const x of r.afwijkend) console.log(`  AFWIJKEND ${x.wanneer.slice(0, 16)} ${x.team} ${x.planado} (${x.via}): ${x.onderwerp} → ${x.fouten.join('; ')}`);
   for (const x of r.zonderAccount) console.log(`  GEEN ACCOUNT ${x.wanneer.slice(0, 16)} ${x.team}: ${x.onderwerp}`);
   for (const x of r.wezen) console.log(`  WEES ${x.wanneer.slice(0, 16)} ${x.team} ${x.planado} (${x.extern})`);
-})().catch((e) => { console.error('FOUT', e.stack || e.message); process.exit(1); });
+  for (const x of r.dubbel) console.log(`  DUBBEL ${x.wanneer.slice(0, 16)} ${x.team}: ${x.a} × ${x.b}`);
+  if (MELDEN) {
+    const { planningTelegram } = require('./lib/telegram-planning.js');
+    const f = (iso) => new Date(iso).toLocaleString('nl-NL', { timeZone: 'Europe/Amsterdam', weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+    const kort = (x) => x.onderwerp.replace(/^(Montage|Inmeten|Service afspraak|Stoffering\/Behangen) Sonty\s*-?\s*/, '').slice(0, 24);
+    const regels = [];
+    for (const x of r.ontbreekt.slice(0, 6)) regels.push(`• NIET IN PLANADO ${f(x.wanneer)} ${x.team}: ${kort(x)}`);
+    for (const x of r.zonderAccount.slice(0, 4)) regels.push(`• GEEN PLANADO-ACCOUNT ${f(x.wanneer)} ${x.team}: ${kort(x)}`);
+    for (const x of r.wezen.slice(0, 4)) regels.push(`• ALLEEN IN PLANADO ${f(x.wanneer)} ${x.team} ${x.planado}`);
+    for (const x of r.dubbel.slice(0, 4)) regels.push(`• DUBBEL ${f(x.wanneer)} ${x.team}: ${x.a.slice(0, 28)} × ${x.b.slice(0, 28)}`);
+    for (const x of r.afwijkend.slice(0, 6)) regels.push(`• ${f(x.wanneer)} ${x.team} ${x.planado} ${kort(x)}: ${x.fouten.join('; ').slice(0, 70)}`);
+    const totaal = r.ontbreekt.length + r.zonderAccount.length + r.wezen.length + r.dubbel.length + r.afwijkend.length;
+    if (totaal) {
+      const meer = totaal - regels.length;
+      await planningTelegram(`🔎 Outlook→Planado-check (${DAGEN} dagen): ${r.ok} van ${r.klussen} klussen helemaal goed, ${totaal} punt(en):\n${regels.join('\n')}${meer > 0 ? `\n… en nog ${meer}; volledig: data/outlook-planado-audit.json` : ''}`, { alarm: true });
+    } else console.log('alles goed — geen melding');
+  }
+})().catch(async (e) => { console.error('FOUT', e.stack || e.message); if (MELDEN) { try { await require('./lib/telegram-planning.js').planningTelegram('⚠️ Outlook→Planado-check kon niet draaien: ' + String(e.message).slice(0, 120) + ' — sync niet gecontroleerd vandaag.', { alarm: true }); } catch {} } process.exit(1); });

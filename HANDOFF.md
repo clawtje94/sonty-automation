@@ -1,6 +1,15 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 03-09 13:40: WACHTER "BLIJFT HET GOED?" (Daimy: "hoe zorgen we dat alles goed blijft gaan?")
+- outlook-planado-audit.js kreeg --dagen=N en --melden: launchd nl.sonty.planado-check-dag (elke dag 06:15, 3 dagen vooruit, ~3 min)
+  en nl.sonty.planado-check-week (maandag 05:30, 100 dagen, ~12 min). Bij afwijkingen één kort bericht in de planning-groep
+  (niet in Planado / geen account / alleen in Planado / dubbel / kwaliteit), alles goed = stil; kan de check niet draaien
+  (token/Planado) → alarm i.p.v. stilte. Log logs/planado-check.log, rapport data/outlook-planado-audit.json.
+- Proefrun 13:36 (3 dagen): 35 klussen, 19 helemaal goed, 6 kwaliteitspunten (2 notities die de verfris-stap nog moet inhalen,
+  4 kantoor-blokken zonder adres), 0 ontbreekt/wezen, 5 dubbels (spiegel van Outlook: Lotte Vos + 2 om 13:00, STALEN 16:00 + 2, Bus 5
+  naamloze montage × #1083). Bericht naar de planning-groep verstuurd.
+
 ## 03-09 15:00: OUTLOOK → PLANADO 100%-AUDIT (Daimy: "zodat ik alle bussen Planado kan laten gebruiken") + VERFRIS-STAP
 - Nieuw, alleen-lezen: scripts/outlook-planado-audit.js (rapport data/outlook-planado-audit.json) en scripts/planado-dubbel-check.js
   (data/planado-dubbel.json). Meting 13:09-13:22: 279 Outlook-events, 251 klussen, 600 Planado-opdrachten.

@@ -679,10 +679,19 @@ async function verwerkTicket(t, state) {
     // closed_at wél. Daardoor was deze check altijd false en ging elk klantbericht
     // na een afgerond gesprek tóch terug naar Mens nodig (Daimy 09-08: "Sunny wijst
     // nog steeds toe aan Jorren"). Beide velden accepteren.
-    const klantWachtNaSluiting = !!(t.closed_by || t.closed_at) && laatsteBericht && laatsteBericht.type === 'INBOUND';
+    // 03-09 (Daimy, +31610729433 "gebeurt nog steeds"): closed_by blijft staan na heropenen, dus ALLEEN heropend als het
+    // laatste klantbericht aantoonbaar ná closed_at kwam (lib/collega-toewijzing.isHeropendNaSluiting, met lab). Anders draaide
+    // de bot 1.205 rondes lang elke 4 min "klant reageert opnieuw" op een hartje van een week eerder (6 tickets in de lus).
+    const heropendBesluit = require('../lib/collega-toewijzing.js').isHeropendNaSluiting({
+      closedAt: t.closed_at, closedBy: t.closed_by, laatsteKlantOp: laatsteBericht?.created_at, laatsteBerichtType: laatsteBericht?.type,
+      huidigeUserId: t.assignee?.id ?? t.assigned_user_id ?? t.user_id, botUserId: 747786,
+    });
+    const klantWachtNaSluiting = heropendBesluit.heropend;
     if (klantWachtNaSluiting) {
-      try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 747786 }); await haalLabelWeg(t.id, LABEL.MENS_NODIG); }
-      catch (e) { console.error(`  [${t.id}] heropend-na-sluiting oppakken FOUT: ${e.message}`); }
+      if (heropendBesluit.toewijzen) {
+        try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 747786 }); await haalLabelWeg(t.id, LABEL.MENS_NODIG); }
+        catch (e) { console.error(`  [${t.id}] heropend-na-sluiting oppakken FOUT: ${e.message}`); }
+      }
       const actiefLijst = loadActief();
       if (!actiefLijst[t.id]) { actiefLijst[t.id] = { sinds: new Date().toISOString(), bron: 'heropend na sluiting door collega' }; fs.writeFileSync(ACTIEF_FILE, JSON.stringify(actiefLijst, null, 1)); }
       console.log(`  [${t.id}] collega had gesloten, klant reageert opnieuw → bot pakt het vervolg op`);
@@ -735,8 +744,11 @@ async function verwerkTicket(t, state) {
       // Zie hierboven: closed_at is het veld dat de lijst-API wél teruggeeft.
       // Alleen als de klant ná het sluiten schreef; anders is een oud gesloten-moment
       // genoeg om elk gesprek als "nieuwe vraag" te zien.
-      const werdGesloten = !!(t.closed_by || t.closed_at)
-        && (!t.closed_at || laatsteKlant > String(t.closed_at));
+      // 03-09: zelfde regel als hierboven — zonder bekend closed_at is er geen bewijs dat de klant ná het sluiten schreef.
+      const werdGesloten = require('../lib/collega-toewijzing.js').isHeropendNaSluiting({
+        closedAt: t.closed_at, closedBy: t.closed_by, laatsteKlantOp: laatsteKlant, laatsteBerichtType: 'INBOUND',
+        huidigeUserId: t.assignee?.id ?? t.assigned_user_id ?? t.user_id, botUserId: 747786,
+      }).heropend;
       if (werdGesloten && laatsteKlant > laatsteOverdracht) {
         if (Number(t.team_id) === 431872) {
           try { await tPost(`/tickets/${t.id}/assign`, { type: 'user', user_id: 747786 }); await haalLabelWeg(t.id, LABEL.MENS_NODIG); }

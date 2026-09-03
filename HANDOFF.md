@@ -1,6 +1,20 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 03-09 12:30: +31610729433 "GEBEURT NOG STEEDS" → HEROPEN-LUS IN SONNY-DAEMON DICHT (Daimy: "je maakt er een tering zooi van")
+- Klant Andrii (WA-ticket 976691818) zei 27-08 nee op de offerte, bot antwoordde netjes, klant stuurde een hartje, collega sloot. Daarna
+  wees de daemon het ticket 1.205 rondes op rij (elke ~4 min, sinds 27-08 avond) opnieuw toe aan Sunny + label AI Bot: conditie
+  "closed_by/closed_at gezet én laatste bericht INBOUND" zonder te checken of dat klantbericht ná het sluiten kwam. Trengo laat closed_by
+  staan na heropenen en de lijst-API geeft closed_at dan null → het hartje van een week eerder telde eeuwig als "klant reageert opnieuw".
+  Zelfde lus op 5 andere tickets (976794298 Eliza, 975629277, 976023215, 975772040, 975629674). Label Urgent op 976691818: niet door de
+  daemon gezet (alleen escalatie-pad), vermoedelijk handmatig.
+- Fix: lib/collega-toewijzing.js isHeropendNaSluiting(): alleen heropend als closed_at bekend is én het laatste klantbericht daarna kwam;
+  toewijzen alleen als de bot het nog niet heeft (geen assign-churn). Beide daemon-paden (heropend-na-sluiting én overdracht-tak) gebruiken hem.
+  tests/heropend-regressie.js 8 tests + matrix 36 groen. Daemon nl.sonty.sonny herstart 12:28.
+- Landman (martijnlandman1984@): alleen gelezen, niets aangepast (zie chat-rapport): ja van 01-09 20 u niet verwerkt (Anthropic 529),
+  daarna 02-09 zelfde voorstel 2x opnieuw als Nanny (mail+WA) met bouwvak-tekst; bevestiging alleen WA, mailticket 976968711 open op Mens
+  nodig; belofte "eerder mag, werk in de buurt" nergens vastgelegd; do/vr gevraagd maar niemand werkt vrijdag.
+
 ## 03-09 09:20: WAAROM MAAR 1 BIJ JOEY VANDAAG → OUTLOOK/BOOKINGS-AFSPRAKEN GEKOPPELD + BONNEN VOORAF AANGEMAAKT (vraag Daimy)
 - Oorzaak: 8 van Joeys 9 inmetingen vandaag zijn Outlook/Bookings-afspraken (Planado external_id ol-…): geen eigen boeking, dus geen
   uuid→Gripp-koppeling, én er bestond nog geen meetbon (een bon ontstaat pas als iemand de link opent). Alleen Annette (planner) stond er.

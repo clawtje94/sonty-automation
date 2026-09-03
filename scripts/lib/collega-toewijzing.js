@@ -28,4 +28,20 @@ function magCollegaToewijzing({ huidigeUserId, laatsteUitUserId, botUserId, team
   if ((afwezig || []).map(Number).includes(laatste)) return false; // collega is afwezig (vakantie) → niet toeschuiven (02-09)
   return true;
 }
-module.exports = { magCollegaToewijzing, afwezigeUserIds };
+/** HEROPEND NA SLUITING? (Daimy 03-09, +31610729433 "gebeurt nog steeds": 1.205 rondes op rij "collega had gesloten,
+ * klant reageert opnieuw" op een ticket waar de klant op 27-08 alleen een hartje stuurde; 6 tickets zaten in die lus.)
+ * Trengo laat closed_by STAAN na heropenen en de lijst-API geeft closed_at dan als null, dus "gesloten + laatste bericht
+ * is van de klant" is geen bewijs dat de klant ná het sluiten schreef. Regel: alleen heropend als het sluitmoment
+ * bekend is én het laatste klantbericht daarna kwam. Toewijzen aan de bot alleen als hij het nog niet heeft.
+ * Tijden als Trengo-strings 'YYYY-MM-DD HH:MM:SS' (UTC) of ISO; beide vergelijken na normalisatie. */
+function tijdSleutel(x) { const s = String(x || '').trim().replace('T', ' ').replace(/(\.\d+)?(Z|[+-]\d\d:?\d\d)?$/, ''); return s.length >= 19 ? s.slice(0, 19) : (s ? s : ''); }
+function isHeropendNaSluiting({ closedAt, closedBy, laatsteKlantOp, laatsteBerichtType, huidigeUserId, botUserId }) {
+  const bot = Number(botUserId || 0), huidige = Number(huidigeUserId || 0);
+  if (String(laatsteBerichtType || '').toUpperCase() !== 'INBOUND') return { heropend: false, toewijzen: false, reden: 'laatste bericht is niet van de klant' };
+  if (!closedAt && !closedBy) return { heropend: false, toewijzen: false, reden: 'nooit gesloten' };
+  const sluit = tijdSleutel(closedAt), klant = tijdSleutel(laatsteKlantOp);
+  if (!sluit) return { heropend: false, toewijzen: false, reden: 'sluitmoment onbekend (closed_by is verouderd na heropenen) — geen bewijs dat de klant ná het sluiten schreef' };
+  if (!klant || klant <= sluit) return { heropend: false, toewijzen: false, reden: 'klantbericht is van vóór het sluiten' };
+  return { heropend: true, toewijzen: !!bot && huidige !== bot, reden: 'klant schreef ná het sluiten' };
+}
+module.exports = { magCollegaToewijzing, afwezigeUserIds, isHeropendNaSluiting, tijdSleutel };

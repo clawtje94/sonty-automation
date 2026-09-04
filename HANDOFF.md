@@ -28,7 +28,11 @@
 - Deploy-fix: .vercelignore had alleen .army/, waardoor .next (3,3 GB) en .claude/worktrees (15 GB) meegingen en de upload 8 GB werd en vastliep; nu ook .next/ .claude/ .git/ node_modules/ test-results/ screenshots/ uitgesloten.
 - Bestaande complete bonnen blijven geldig (validatie draait alleen bij opslaan via de app); bonnen in bewerking moeten het ja/nee-veld nog invullen.
 
-## 04-09 ochtend: ROLLUIK TYPE GELEIDER LINKS/RECHTS (Daimy, chat) — deploy f49cf2d
+## 04-09: JOEY (via Daimy) — UITVALSCHERM MOTORCATEGORIEËN + KNIKARM 80 CM SET
+- Uitvalscherm meetbon-bediening was "Elektrisch / Brel Solar / Staaldraad / Draaistang" → nu de vier boekcategorieën: Handbediend (draaistang), Somfy LT motor (draaischakelaar), Somfy IO motor (afstandsbediening), Brel solar motor. Mapping gefixt: "draaistang"/"staaldraad" = handbediend (was draaischakelaar via "draai"), "Somfy LT" = draaischakelaar (was io). Prijzen zelf ongewijzigd: BOEKCONTROLE 03-08 p46 = SunCube +60 io/+135 solar, SunProject +134 io/+199 solar, handbediend −299, LT in de tabel — gelijk aan de motor. Gemeten SunProject 300×115: hand 1414,80 / LT 1773,60 / IO 2025,60 / Brel 2012,40 incl. btw.
+- Knikarm: veld "Verlengde muursteunen (uitbouw)?" (Nee / Set 50 cm / Set 80 cm, verplicht). Boek p27: 50 cm €75, 80 cm €105 per stuk → set = 2 stuks = €150/€210 (Joey's "80cm set 210") × sunmasterMarkup → +€165/+€231 bij de productprijs; montage automatisch "inclusief uitbouw": Gripp-montageproduct 251 i.p.v. 281, €325 i.p.v. €275 (prijs.ts muursteunenVoor). Overige-regel: "verlengde muursteunen 80 cm (2 stuks), montage inclusief uitbouw". Labs 940/672 groen, geen-losse-opslagen groen.
+
+ (Daimy, chat) — deploy f49cf2d
 - Velden geleider_links / geleider_rechts (keuze, verplicht, van buiten gezien): HTF, LHTF, FHTF12, FHTF20, HTF68. Gripp-omschrijving en Planado-veld Product n tonen het als "geleiders links X, rechts Y". Labs 940 + 672 groen. Openstaande bonnen krijgen de velden meteen (verplicht bij afronden).
 
  (Daimy: "in alle montage-opdrachten zetten zodra de meetbon is ingevuld; bij

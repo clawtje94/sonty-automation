@@ -1,6 +1,12 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 04-09 (avond) — Reviewmail ging na AKKOORD i.p.v. na montage: gefixt
+- Klaviyo-flow "Sonty E | Service en review [v0819]" (RSKdNg) triggerde op segment "5. Klant (akkoord gegeven)": E1 na 7 en E2 reviewverzoek na 14 dagen na het akkoord. 12 klanten kregen 2–4 sept een reviewverzoek zonder montage (o.a. Marco Paniagua). Daimy: "alleen na montage".
+- Fix: RSKdNg op draft. Nieuwe flow XQH9i2 "Sonty E | Service en review [v0904 na montage]" LIVE op metric "Montage afgerond" (VHaYmB). Event komt uit `scripts/email/montage-events.js` (Planado montage finished, werkbon niet "niet gereed", e-mail via Planado-contact → telefoon/RP → Gripp; dedupe per job + 90 dagen per e-mail). Draait dagelijks 06:30 als stap 5 in dagelijks.sh. Nulmeting gedaan; 6 events voor montages van 04-09 (E1 op 11-09, E2 op 18-09).
+- Staat: data/email/montage-events.json, log logs/montage-events.log, flow-ids data/email/flow-e-montage.json. Catalogus /admin/communicatie heeft nu E1/E2 (stap 10 Nazorg).
+- Open: hernoemen oude flow via API gaf 400 (naam in Klaviyo-UI nog "[v0819]", staat wel op draft). De 12 klanten stromen na hun montage gewoon de nieuwe flow in (dus nog 1x review-vraag, dan terecht).
+
 ## 04-09 19:05: KALRA + GALANTE HERSTELD na foutieve Outlook-annulering (Daimy)
 - 17:03/17:04 uit Outlook gehaald (kantoor, fout) → sync annuleerde alles, klanten kregen niets. Op verzoek Daimy teruggezet via de
   boek-wachtrij (/api/inmeet-mutatie type boek). Galante: do 1 okt 11:55 Sjoerd (oude tijd), bevestiging per mail (WA-gesprek dicht).

@@ -29,7 +29,10 @@ node scripts/email/verrijk-optout.js || { echo "opt-out-stap mislukt, stoppen om
 echo "[3/3] Profielen bijwerken in Klaviyo"
 node scripts/email/klaviyo-profielen.js --doe-het || { echo "profielsync mislukt"; exit 1; }
 
-echo "[4/4] Akkoord-events naar Klaviyo (conversietracking)"
+echo "[4/5] Akkoord-events naar Klaviyo (conversietracking)"
 node scripts/email/akkoord-events.js || echo "akkoord-events mislukt (niet fataal)"
+
+echo "[5/5] Montage-events naar Klaviyo (trigger flow E: nazorg + review PAS na montage, Daimy 04-09)"
+node scripts/email/montage-events.js || echo "montage-events mislukt (niet fataal)"
 
 echo "Klaar. Er is niets verstuurd."

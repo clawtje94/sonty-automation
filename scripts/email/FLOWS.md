@@ -65,12 +65,18 @@ mee te zijn.
 ### D. Cross-sell (trigger: segment "6. Klant met buitenzonwering")
 Eén mail: Sonty | D1 Cross-sell naar binnen. Wachttijd 3 maanden na akkoord.
 
-### E. Service (trigger: segment "5. Klant")
+### E. Service (trigger: metric "Montage afgerond" — LIVE sinds 04-09, flow XQH9i2)
+
+**Fout tot 04-09:** de flow stond op segment "5. Klant (akkoord gegeven)", dus 7/14 dagen na het
+AKKOORD (= dag van de aanbetalingsfactuur), weken vóór de montage. 12 klanten kregen zo een
+reviewverzoek (2 t/m 4 sept). Daimy 04-09: "een reviewmail stuur je alleen na montage". Oude flow
+RSKdNg staat op draft. Het event komt uit `montage-events.js` (Planado montage finished + werkbon
+niet "niet gereed", e-mail via Planado → telefoon/RP → Gripp), dagelijks in dagelijks.sh stap 5.
 
 | Stap | Wacht | Sjabloon |
 |---|---|---|
-| E1 | 7 dagen na montage | Sonty \| E1 Service en nazorg |
-| E2 | 14 dagen na montage | Sonty \| E2 Reviewverzoek |
+| E1 | 7 dagen na montage (event) | Sonty \| E1 Service en nazorg |
+| E2 | 14 dagen na montage (event) | Sonty \| E2 Reviewverzoek |
 
 ### G. Welkom (trigger: nieuwe aanvraag)
 Sonty | G1 Welkom na aanvraag, direct. Vervangt de bedankmail van Reuzenpanda.

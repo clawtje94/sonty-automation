@@ -9,7 +9,9 @@
   12:15-12:55 geboekt, bevestiging (Engels) gemaild 19:02. Daimy daarna: aansluitend op Galante (Heemstede→Badhoevedorp, geen rijtijd)
   was niet de bedoeling, maar "laat maar, niks meer mee doen". Sjoerd 1 okt: Hoffman 09:00 Heemstede, Galante 11:55 Heemstede,
   Kalra 12:15 Badhoevedorp, Kapadia 13:00 Leiden — krap, kantoor weet het.
-- Structureel open: Outlook-annulering stuurt geen klantbericht (bewust); dashboard-boeking checkt geen rijtijd tussen opeenvolgende
+- CORRECTIE (Daimy 04-09 19:15): een annulering vanuit Outlook/Bookings stuurt ZELF een annuleringsmail naar de klant (Outlook-intern).
+  Ons systeem hoeft daar dus geen extra bericht bij te sturen; bij een herstel/herboeking WEL een nieuwe bevestiging (klant heeft immers een
+  annulering gezien). Het eerdere "klant kreeg niets" was onjuist. Wel open: dashboard-boeking checkt geen rijtijd tussen opeenvolgende
   afspraken bij een handmatig gekozen slot.
 
 ## 04-09 15:30: /bedankt HERBOUWD (Daimy: "slecht, AI-slop, geen foto's, geen emotie, niks waarom mensen bij ons zouden kopen")

@@ -1,6 +1,13 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 04-09 13:30: GOOGLE ADS WINTERPLAN + MAX CPA (Daimy: "wat doen met Google Ads in de winter, wat mag de CPA zijn")
+- Rapport: docs/google-ads-winterplan-2026.md. Kern: Google winter conv 13,6% (2 seizoenen, sheet) vs zomer 10,7%; jan/feb 2026
+  CPL €69/€63, kosten per akkoord €579/€714, productmarge−spend +€35k/+€27k. Plafond: ads ≤35% productmarge → max €70/lead
+  winter (€650/akkoord), harde stop €100; Google-Ads-doel-CPA ≈ €50-55 (factor 0,75 t.o.v. sheet-lead). Pergola+markiezen uit
+  nov-jan, rolluiken+screens opschalen, knikarm aan vanaf 2e week jan, dec biedingen −20%. Budget nov 15k/dec 10-12k/jan 15-18k/feb 18-20k.
+- Open: V1 Google Ads API-credentials (docs/google-ads-api-setup.md), V2 wat is campagne "Straal", V3 Google-spend okt-dec 2025.
+
 ## 04-09 11:00: COMMUNICATIE-DASHBOARD + AANBETALINGSFACTUUR "VERLOPEN" (Daimy)
 - /admin/communicatie (menu ✉️ Communicatie): tab "Wat sturen we wanneer" = catalogus met 10 klantberichten (stap, moment, trigger,
   kanaal, afzender, onderwerp, voorbeeld uit de echte tekstfuncties of website-preview), dagelijks 06:00 door

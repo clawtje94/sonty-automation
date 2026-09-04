@@ -1,6 +1,16 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 04-09 15:30: /bedankt HERBOUWD (Daimy: "slecht, AI-slop, geen foto's, geen emotie, niks waarom mensen bij ons zouden kopen")
+- Nieuw: hero met echte foto (team-klant-blij.webp) NAAST de tekst (desktop 2 kolommen, mobiel foto boven), kop "Gelukt, [naam]. Binnen
+  24 uur staat je prijsindicatie in je mail", afzender aanvragen@ genoemd; "Waarom mensen voor Sonty kiezen": 4 kaarten met echte foto's
+  (montage-team-1, showroom-overzicht, knikarm-resultaat, sonty-bus) en echte cijfers (reviewscore/aantal live uit getReviewsData);
+  blok "Wie er bij je langskomt" met FotoJoey; één tijdlijn met echte data (vandaag/uiterlijk morgen); Google-reviews; contact.
+  Weg: dubbele stappenlijsten en vulzinnen ("Geen verrassingen", "vakkundig", "We denken graag mee" enz.). Ook uit bedankt-mail
+  ("Fijn dat je voor Sonty kiest…") en klant-werkbon ("Veel plezier…", "Bedankt voor het vertrouwen"). /admin/bedankt: alleen de video
+  wordt nog gebruikt; kop/intro-velden daar zijn nu zonder effect. Foto's via websiteFotos("app/bedankt/page.tsx").
+- Gecheckt: mobiel 390 + desktop 1280 screenshots, geen horizontale overflow. Deploy 15:20.
+
 ## 04-09 12:20: FOTO'S UIT ALBUM IN MEETBON-APP + LINKVELD "WERKBON TEKENEN (KLANT)" OP ALLE BUS-OPDRACHTEN
 - Meetbon-app foto-knop had capture="environment" (alleen camera). Weggehaald → telefoon biedt camera of fotoalbum. Live, DOM gecheckt.
 - Tekenlink: de regel onderaan de omschrijving stond op alle 10 bus-opdrachten van vandaag, maar viel niet op. cron-werkbon-tekenlink.js

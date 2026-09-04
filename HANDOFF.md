@@ -1,6 +1,21 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 04-09 11:00: COMMUNICATIE-DASHBOARD + AANBETALINGSFACTUUR "VERLOPEN" (Daimy)
+- /admin/communicatie (menu ✉️ Communicatie): tab "Wat sturen we wanneer" = catalogus met 10 klantberichten (stap, moment, trigger,
+  kanaal, afzender, onderwerp, voorbeeld uit de echte tekstfuncties of website-preview), dagelijks 06:00 door
+  scripts/communicatie-catalogus.js (launchd nl.sonty.communicatie-catalogus) naar KV. Tab "Verzonden" = logboek van elk klantbericht:
+  website via stuurMail (soort/ref meegegeven: definitieve-offerte, bedankt-na-akkoord, aanbetalingsfactuur, klant-werkbon,
+  werkbon-kantoor) en Mac via lib/communicatie-log.js (hook in aanbod-versturen tFetch: elk POST naar Trengo messages/wa_sessions,
+  soort uit zetLogContext: inmeet-aanbod, inmeet-bevestiging, annulering-bevestiging, bericht) + cron-werkbon-klantmail. Lokaal ook
+  data/communicatie-log.jsonl. API /api/communicatie (GET cookie/bearer, POST bearer). Sunny's eigen chatantwoorden (ai-ks) nog NIET
+  in het logboek. Vandaag 4 keten-mails nagelogd (Nick 6325, Annette 6579). Daemons inmeet-verzoeken + sonny herstart.
+- FACTUUR "VERLOPEN": keten-facturen (4251, 4252) hebben expirydate NULL → Gripp-UI toont "Verlopen" (viewer/klant toont wel 11-09).
+  Bewezen op testklant 99688: expirydate is via de API readonly en wordt NIET berekend, ook niet met date bij create, niet met
+  termofpayment op de relatie, niet via status/fase; invoice.send/finalize bestaan niet. Kantoorfacturen krijgen hem via de Gripp-UI.
+  Geen Gripp-webinlog beschikbaar → nu: ✍️-melding vraagt kantoor de vervaldatum in Gripp te zetten; structureel = Gripp-inlog voor
+  UI-automatisering (V1 aan Daimy) of kantoor per factuur. Testklant 99688 heeft nu termofpayment=7 (onschadelijk).
+
 ## 03-09 15:20: WERKBON-KANAAL IS EEN PRIVÉ-INBOX (slotje) — niet om te zetten in de instellingen
 - Onderzocht via de Trengo-UI (Playwright, Daimy-login, alleen gelezen): kanaalinstellingen hebben géén team/privé-schakelaar;
   het slotje in het kanaaloverzicht (Werkbon, Scans, Facturen, Sonny mail, Orders, VVE) = privé-inbox, gekozen bij het koppelen

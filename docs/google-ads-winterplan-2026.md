@@ -201,3 +201,36 @@ Google okt-dec: hoeveel spend had er maximaal mogen zijn om break-even te blijve
 - **Pergola Meta sep-feb: 9 orders, €28k marge, €30k spend, netto −€2.078.** Correctie op §7: Meta-pergola in de winter is NIET winstgevend; die 503 offertes kosten ook nog eens offertecapaciteit. Meta-pergola dus ook uit van nov t/m jan, niet alleen Google.
 - Markiezen bij Google in de winter: netto nul. Uit.
 - Meta december: verlies. Meta in december op minimum, Google-rolluiken/screens laten doorlopen.
+
+## 9. Conversie per product, Google, aug 2025 t/m mrt 2026 (op vraag Daimy 04-09)
+
+Noemer = offertes in het register met afkomst Google in die maand; teller = akkoord (inkoop/akkoordbedrag/Gripp-nummer/akkoorddatum). Maart 2026 is 5 maanden oud en dus rijp.
+
+| product | offertes | akkoord | conv | omzet | productmarge | marge/akkoord |
+|---|---|---|---|---|---|---|
+| Rolluiken | 762 | 119 | **15,6%** | €430.629 | €201.204 | €1.691 |
+| Screens | 371 | 38 | 10,2% | €167.301 | €71.364 | €1.878 |
+| Knikarmscherm | 347 | 49 | **14,1%** | €214.633 | €102.537 | €2.093 |
+| Pergola | 299 | 8 | **2,7%** | €58.241 | €29.139 | €3.642 |
+| Voorraadscherm | 157 | 12 | 7,6% | €43.066 | €26.386 | €2.199 |
+| Uitvalscherm | 71 | 9 | 12,7% | €26.514 | €12.235 | €1.359 |
+| Markiezen | 66 | 10 | 15,2% | €23.381 | €10.165 | €1.017 |
+| Zonwering buiten | 43 | 6 | 14,0% | €22.611 | €9.504 | €1.584 |
+| Raamdecoratie | 40 | 15 | 37,5% | €50.886 | €24.385 | €1.626 |
+| Reparatie | 10 | 3 | 30,0% | €6.372 | €3.501 | €1.167 |
+| **Totaal** | 2.171 | 271 | 12,5% | €1.048.220 | €491.901 | €1.815 |
+
+Per maand (akkoord/offertes):
+
+| product | aug 25 | sep 25 | okt 25 | nov 25 | dec 25 | jan 26 | feb 26 | mrt 26 |
+|---|---|---|---|---|---|---|---|---|
+| Rolluiken | 28/177 16% | 27/98 28% | 9/62 15% | 12/56 21% | 4/55 7% | 12/86 14% | 8/94 9% | 19/134 14% |
+| Screens | 10/94 11% | 2/39 5% | 3/19 16% | 1/14 7% | 3/23 13% | 5/34 15% | 5/48 10% | 9/100 9% |
+| Knikarmscherm | 12/72 17% | 5/33 15% | 1/14 7% | 3/10 30% | 2/16 13% | 1/36 3% | 7/50 14% | 18/116 16% |
+| Pergola | 3/62 5% | 3/49 6% | 0/25 0% | 0/21 0% | 0/20 0% | 1/23 4% | 0/37 0% | 1/62 2% |
+| Voorraadscherm | 4/38 11% | 1/10 10% | 0/4 | 0/1 | 0/2 | 2/16 13% | 1/22 5% | 4/64 6% |
+| Uitvalscherm | 0/12 0% | 0/5 | 1/5 | 0/3 | - | 1/6 | 2/10 20% | 5/30 17% |
+| Markiezen | 3/15 20% | 0/5 | 0/1 | 0/3 | 1/3 | 0/6 | 1/11 9% | 5/22 23% |
+| Raamdecoratie | 3/7 43% | 3/3 | 2/7 29% | 1/3 | 1/7 14% | 2/5 40% | 1/5 20% | 2/3 67% |
+
+Lezen: cellen onder ~30 offertes zijn ruis. Rolluiken en knikarm zijn de enige groepen met genoeg volume in elke maand. Pergola: 0 van 66 in okt-dec, 1 van 60 in jan-feb.

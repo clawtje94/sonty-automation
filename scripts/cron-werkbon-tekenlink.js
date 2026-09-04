@@ -2,7 +2,8 @@
 // WERKBON-TEKENLINK-WACHTER (Daimy 03-09-2026: "in opdracht 1316 staat die niet"): ELKE toekomstige Planado-opdracht met een
 // werkbon-sjabloon (Montage particulier/zakelijk, Service, Onderhoud, Reparatie) krijgt onderaan de omschrijving de tekenlink
 // voor de klant-werkbon — ongeacht wie hem maakte (Outlook-sync, kantoor in Planado, planner) of aan wie hij hangt.
-// Alleen de omschrijving wordt aangevuld (lib/planado-verfris.js metTekenLink). State per opdracht (updated_at) zodat er maar
+// Twee plekken: onderaan de omschrijving (lib/planado-verfris.js metTekenLink) én als tikbaar linkveld "Werkbon tekenen (klant)"
+// in de details (Daimy 04-09: de regel onderaan een lange omschrijving viel niet op). State per opdracht (updated_at) zodat er maar
 // één detail-call per nieuwe/gewijzigde opdracht nodig is. Elke 10 min via launchd nl.sonty.werkbon-tekenlink (+ interval-runner).
 // --dry = niets schrijven.
 const fs = require('fs');
@@ -16,13 +17,14 @@ const STATE = path.join(__dirname, '..', 'data', 'werkbon-tekenlink-state.json')
 const DRY = process.argv.includes('--dry');
 const WERKBON_SJABLOON = /montage|service|onderhoud|reparatie/i;
 const MAX_PER_RUN = 40;
+const VELD = 'Werkbon tekenen (klant)';
 const link = (uuid) => { const t = crypto.createHmac('sha256', require('./secrets.js').ADMIN_PASSWORD).update('werkbon:' + uuid).digest('hex').slice(0, 24); return `https://sonty-website.vercel.app/werkbon/${uuid}?t=${t}`; };
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 /** Pure: welke opdrachten uit de lijst moeten bekeken worden. */
 function kandidaten(jobs, state, nu = Date.now()) {
   return (jobs || []).filter((j) => j && j.uuid && j.scheduled_at && Date.parse(j.scheduled_at) > nu - 3600e3
     && WERKBON_SJABLOON.test(j.template_name || '') && !/^(meeneem|voorbeeld)-/i.test(j.external_id || '') && !/^(canceled|cancelled|deleted)$/i.test(j.status || '')
-    && !(state[j.uuid] && state[j.uuid].heeft && state[j.uuid].updated_at === j.updated_at));
+    && !(state[j.uuid] && state[j.uuid].heeft && state[j.uuid].veld && state[j.uuid].updated_at === j.updated_at));
 }
 async function main() {
   let state = {}; try { state = JSON.parse(fs.readFileSync(STATE, 'utf8')); } catch { /* eerste run */ }
@@ -33,10 +35,16 @@ async function main() {
   for (const j of lijst.slice(0, MAX_PER_RUN)) {
     const det = await (await planadoFetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { headers: PH })).json(); const h = det.job || det; await wacht(2600);
     const desc = String(h.description || '');
-    if (desc.includes(TEKEN_KOP)) { had++; state[j.uuid] = { heeft: true, updated_at: j.updated_at, op: new Date().toISOString() }; continue; }
-    if (DRY) { gezet++; console.log('  [dry] #' + h.serial_no, (h.template_name || j.template_name || ''), desc.split('\n')[0].slice(0, 40)); continue; }
-    const r = await planadoFetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { method: 'PATCH', headers: PH, body: JSON.stringify({ version: h.version, description: metTekenLink(desc, link(j.uuid)) }) });
-    if (r.ok) { gezet++; state[j.uuid] = { heeft: true, updated_at: null, op: new Date().toISOString() }; console.log('  + #' + h.serial_no, (j.template_name || ''), desc.split('\n')[0].slice(0, 40)); }
+    const velden = (h.custom_fields || []).map((x) => ({ uuid: x.uuid, name: x.name, field_type: x.field_type, value: x.value }));
+    const heeftVeld = velden.some((x) => x.name === VELD && x.value);
+    const heeftRegel = desc.includes(TEKEN_KOP);
+    if (heeftRegel && heeftVeld) { had++; state[j.uuid] = { heeft: true, veld: true, updated_at: j.updated_at, op: new Date().toISOString() }; continue; }
+    if (DRY) { gezet++; console.log('  [dry] #' + h.serial_no, (h.template_name || j.template_name || ''), desc.split('\n')[0].slice(0, 40), heeftRegel ? '' : '+regel', heeftVeld ? '' : '+veld'); continue; }
+    const patch = { version: h.version };
+    if (!heeftRegel) patch.description = metTekenLink(desc, link(j.uuid));
+    if (!heeftVeld) patch.custom_fields = [...velden.filter((x) => x.name !== VELD), { name: VELD, field_type: 'link', value: link(j.uuid) }];
+    const r = await planadoFetch('https://api.planadoapp.com/v2/jobs/' + j.uuid, { method: 'PATCH', headers: PH, body: JSON.stringify(patch) });
+    if (r.ok) { gezet++; state[j.uuid] = { heeft: true, veld: true, updated_at: null, op: new Date().toISOString() }; console.log('  + #' + h.serial_no, (j.template_name || ''), desc.split('\n')[0].slice(0, 40), heeftRegel ? '' : '+regel', heeftVeld ? '' : '+veld'); }
     else { fout++; console.log('  FOUT #' + h.serial_no, r.status); }
     await wacht(2600);
   }

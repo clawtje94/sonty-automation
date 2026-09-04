@@ -1,6 +1,16 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 04-09 12:20: FOTO'S UIT ALBUM IN MEETBON-APP + LINKVELD "WERKBON TEKENEN (KLANT)" OP ALLE BUS-OPDRACHTEN
+- Meetbon-app foto-knop had capture="environment" (alleen camera). Weggehaald → telefoon biedt camera of fotoalbum. Live, DOM gecheckt.
+- Tekenlink: de regel onderaan de omschrijving stond op alle 10 bus-opdrachten van vandaag, maar viel niet op. cron-werkbon-tekenlink.js
+  zet nu óók het custom field "Werkbon tekenen (klant)" (type link, zelfde naam als in het uitgebreide sjabloon van de andere terminal,
+  03-09 17:05) op elke montage/service/onderhoud/reparatie-opdracht; Planado accepteert dat per opdracht via PATCH custom_fields.
+  Run 12:07-12:17: 40 gezet, 43 volgen in de volgende 10-min-runs.
+- LET OP AFSTEMMING: een andere terminal bouwt "alles in het detailsvak" (voorbeeld-opdracht #1320, script scratch planado-voorbeeld3.mts,
+  wacht op akkoord Daimy). Daimy 04-09 12:15: "ik wil het gewoon hebben zoals in de testopdracht" = dat akkoord → hoort bij die terminal.
+  Onze werkzaamheden overlappen niet: dezelfde repo/main, hun commits (4aacfe1, 86e01eb, f49cf2d, 50f8e57) zitten in de live deploys.
+
 ## 04-09 13:30: GOOGLE ADS WINTERPLAN + MAX CPA (Daimy: "wat doen met Google Ads in de winter, wat mag de CPA zijn")
 - Rapport: docs/google-ads-winterplan-2026.md. Kern: Google winter conv 13,6% (2 seizoenen, sheet) vs zomer 10,7%; jan/feb 2026
   CPL €69/€63, kosten per akkoord €579/€714, productmarge−spend +€35k/+€27k. Plafond: ads ≤35% productmarge → max €70/lead

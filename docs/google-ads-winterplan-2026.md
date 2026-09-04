@@ -149,3 +149,55 @@ Alleen maanden met bekende Google-spend. Script: scratchpad netto.js.
 - Advies blijft: Google-pergola-campagne uit van nov t/m half jan (kost €900/mnd plus het aandeel PMax), in feb aan. Meta-pergola in de winter laten lopen als daar budget over is. Elke pergola-order is netto het meest waard (€2.600-3.600 na ads), dus zodra de API werkt: per campagne meten of de winter-pergola ooit een tweede order geeft.
 
 Kanttekening: "Zonwering buiten" zomer 2026 heeft 5 orders van gemiddeld €15k; dat kunnen (deels) pergola's zijn die onder een ander label staan. Als dat zo is, is pergola-zomer nog beter dan hier staat. Montage van een pergola is zwaarder (2 monteurs, 1-2 dagen); ook daarna blijft de zomer positief en de winter één order.
+
+## 8. Netto sep 2025 t/m feb 2026, per product (op vraag Daimy 04-09)
+
+Google-spend sep-dec 2025 is niet bekend. Daarom twee kolommen: NETTO (bekend) telt alleen de spend van jan-feb 2026; NETTO (schatting) rekent sep-dec op de gemeten jan-feb-CPL van €66 per lead. Meta-spend is voor alle zes maanden bekend (Meta API).
+
+**Google, 1.140 offertes, 141 orders (12,4%), omzet €562.821, productmarge €264.192**
+
+| product | off | orders | conv | omzet | productmarge | spend bekend | spend incl. schatting | NETTO (bekend) | NETTO (schatting) |
+|---|---|---|---|---|---|---|---|---|---|
+| Rolluiken | 451 | 72 | 16,0% | €272.417 | €126.044 | €11.895 | €29.781 | €114.149 | **€96.263** |
+| Knikarm | 159 | 19 | 11,9% | €94.805 | €41.443 | €5.651 | €10.469 | €35.791 | €30.973 |
+| Screens | 177 | 19 | 10,7% | €91.096 | €42.176 | €5.387 | €11.657 | €36.790 | €30.520 |
+| Raamdeco | 30 | 10 | 33,3% | €26.272 | €14.171 | €662 | €1.982 | €13.508 | €12.188 |
+| Voorraadscherm | 55 | 4 | 7,3% | €15.157 | €8.648 | €2.498 | €3.620 | €6.150 | €5.028 |
+| Uitvalscherm | 29 | 4 | 13,8% | €14.065 | €6.540 | €1.047 | €1.905 | €5.493 | €4.635 |
+| Pergola | 175 | 4 | 2,3% | €25.914 | €15.070 | €3.930 | €11.520 | €11.140 | **€3.550** |
+| Zonwering buiten | 26 | 4 | 15,4% | €10.540 | €4.483 | €536 | €1.724 | €3.947 | €2.759 |
+| Markiezen | 29 | 2 | 6,9% | €4.119 | €1.876 | €1.110 | €1.902 | €766 | **−€26** |
+| Totaal | 1.140 | 141 | 12,4% | €562.821 | €264.192 | €32.905 | €75.145 | €231.287 | €189.047 |
+
+**Meta, 1.790 offertes, 113 orders (6,3%), omzet €431.375, productmarge €197.041, spend €106.924 → netto €90.116**
+
+| product | off | orders | conv | omzet | productmarge | spend | NETTO |
+|---|---|---|---|---|---|---|---|
+| Rolluiken | 846 | 67 | 7,9% | €206.072 | €97.205 | €51.127 | **€46.079** |
+| Knikarm | 84 | 11 | 13,1% | €44.035 | €20.207 | €4.770 | €15.436 |
+| Raamdeco | 39 | 6 | 15,4% | €17.149 | €9.932 | €2.187 | €7.746 |
+| Markiezen | 15 | 2 | 13,3% | €8.472 | €8.470 | €875 | €7.595 |
+| Screens | 191 | 9 | 4,7% | €50.492 | €17.942 | €11.432 | €6.511 |
+| Voorraadscherm | 56 | 4 | 7,1% | €21.947 | €8.720 | €3.184 | €5.536 |
+| Uitvalscherm | 16 | 1 | 6,3% | €2.000 | €264 | €920 | −€656 |
+| **Pergola** | 503 | 9 | 1,8% | €65.242 | €28.032 | €30.110 | **−€2.078** |
+
+**Per maand (productmarge − spend):**
+
+| maand | Google off | orders | marge | spend | netto | Meta off | orders | marge | spend | netto |
+|---|---|---|---|---|---|---|---|---|---|---|
+| sep 25 | 256 | 46 | €86.917 | ? | ? | 349 | 24 | €34.596 | €19.778 | €14.818 |
+| okt 25 | 146 | 16 | €22.915 | ? | ? | 204 | 13 | €17.008 | €14.651 | €2.356 |
+| nov 25 | 112 | 17 | €34.532 | ? | ? | 222 | 12 | €16.090 | €14.562 | €1.528 |
+| dec 25 | 126 | 11 | €24.595 | ? | ? | 199 | 7 | €14.524 | €17.315 | **−€2.790** |
+| jan 26 | 217 | 26 | €49.931 | €15.044 | €34.888 | 378 | 22 | €41.280 | €19.284 | €21.996 |
+| feb 26 | 283 | 25 | €45.302 | €17.862 | €27.440 | 438 | 35 | €73.543 | €21.334 | €52.208 |
+
+Google okt-dec: hoeveel spend had er maximaal mogen zijn om break-even te blijven: okt €22.915 (€157/lead), nov €34.532 (€308/lead), dec €24.595 (€195/lead). Bij het jan-feb-niveau van €15k/mnd waren die maanden vrijwel zeker positief.
+
+**Conclusies sep-feb:**
+- Google sep-feb: ~€190-230k netto op ~€75k spend. Rolluiken is de helft daarvan (€96-114k). Meta: €90k netto op €107k spend, waarvan rolluiken €46k.
+- **Pergola Google sep-feb: 4 orders, €15k productmarge, netto €3,5-11k.** Positief, maar klein en afhankelijk van 4 orders; september (nazomer) zit erin. Nov-jan: 1 order.
+- **Pergola Meta sep-feb: 9 orders, €28k marge, €30k spend, netto −€2.078.** Correctie op §7: Meta-pergola in de winter is NIET winstgevend; die 503 offertes kosten ook nog eens offertecapaciteit. Meta-pergola dus ook uit van nov t/m jan, niet alleen Google.
+- Markiezen bij Google in de winter: netto nul. Uit.
+- Meta december: verlies. Meta in december op minimum, Google-rolluiken/screens laten doorlopen.

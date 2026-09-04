@@ -32,6 +32,7 @@ async function verstuur(item, H) {
     if (DRY) { console.log('  [dry]', item.id, item.naar, item.onderwerp); continue; }
     try {
       const ticket = await verstuur(item, H);
+      require('./lib/communicatie-log.js').meld({ soort: item.proef ? 'klant-werkbon (proef)' : 'klant-werkbon', kanaal: 'mail', afzender: 'werkbon@sonty.nl', naar: item.naar, klant: item.naam, onderwerp: item.onderwerp, tekst: item.html, ticket, ref: null });
       await fetch(API, { method: 'POST', headers: AH, body: JSON.stringify({ id: item.id, ticket }) });
       ok++; console.log(`  ✓ ${item.naar} "${item.onderwerp.slice(0, 50)}" ticket ${ticket}${item.proef ? ' (proef)' : ''}`);
     } catch (e) {

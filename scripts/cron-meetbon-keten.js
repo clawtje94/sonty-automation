@@ -30,7 +30,7 @@ async function main() {
     const key = `${g.gripp}:${g.factuur || ''}:${g.gemaild || ''}`;
     if (g.gemaild && !state.gemeld[key]) {
       state.gemeld[key] = new Date().toISOString();
-      await telegram(`✍️ Offerte ${g.gripp} is getekend. Aanbetalingsfactuur ${g.factuur} (40%) staat definitief in Gripp en is gemaild naar ${g.gemaild}. Zodra hij betaald is gaat de meetbon automatisch naar bestellen.`);
+      await telegram(`✍️ Offerte ${g.gripp} is getekend. Aanbetalingsfactuur ${g.factuur} (40%) staat definitief in Gripp en is gemaild naar ${g.gemaild}. Zodra hij betaald is gaat de meetbon automatisch naar bestellen.\n⚠️ Zet in Gripp nog de vervaldatum op de factuur (API kan dat niet): anders staat hij daar als Verlopen.`);
     }
   }
   for (const f of d.fouten) {

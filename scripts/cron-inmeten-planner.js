@@ -2329,7 +2329,7 @@ async function verwerkVerzoek(m) {
         const tekst = k.gelukt
           ? `Hoi ${vn}, we hebben de inmeetafspraak geannuleerd. Mocht het later toch weer spelen, dan ben je altijd welkom.\n\nGroetjes, Nanny van Sonty`
           : `Hoi ${vn}, we zijn je inmeetafspraak aan het annuleren; een collega rondt het vandaag af en je hoort het zodra het rond is.\n\nGroetjes, Nanny van Sonty`;
-        const uit = await require('./lib/aanbod-versturen').stuurVrijBericht({ telefoon: m.telefoon || k.afspraak.telefoon, email: m.email, naam: k.afspraak.klant || m.naam, tekst, onderwerp: 'Je inmeetafspraak is geannuleerd', afzender: 'Nanny' }).catch((e) => ({ ok: false, reden: e.message }));
+        const uit = await require('./lib/aanbod-versturen').stuurVrijBericht({ telefoon: m.telefoon || k.afspraak.telefoon, email: m.email, naam: k.afspraak.klant || m.naam, tekst, onderwerp: 'Je inmeetafspraak is geannuleerd', afzender: 'Nanny', soort: 'annulering-bevestiging' }).catch((e) => ({ ok: false, reden: e.message }));
         if (!uit.ok) await telegram(`🚨 ${k.afspraak.klant || m.naam}: kantoor-afspraak geannuleerd maar de klant kon NIET bereikt worden (${uit.reden}) — even zelf laten weten.`);
         return { afgewezen: false, uitkomst: k.gelukt ? 'kantoor-afspraak: alle systemen bijgewerkt' : 'kantoor-afspraak deels: ' + k.stappen.filter((x) => !x.ok).map((x) => x.stap + ' ' + x.detail).join(',') };
       }
@@ -2346,7 +2346,7 @@ async function verwerkVerzoek(m) {
     const tekst = res.gelukt
       ? `Hoi ${vn}, we hebben de inmeetafspraak geannuleerd. Mocht het later toch weer spelen, dan ben je altijd welkom.\n\nGroetjes, ${afz} van Sonty`
       : `Hoi ${vn}, we zijn je inmeetafspraak aan het annuleren; een collega rondt het vandaag af en je hoort het zodra het rond is.\n\nGroetjes, ${afz} van Sonty`;
-    const uit = await require('./lib/aanbod-versturen').stuurVrijBericht({ telefoon: boeking.telefoon, email: boeking.email, naam: boeking.naam, tekst, onderwerp: 'Je inmeetafspraak is geannuleerd', afzender: afz }).catch((e) => ({ ok: false, reden: e.message }));
+    const uit = await require('./lib/aanbod-versturen').stuurVrijBericht({ telefoon: boeking.telefoon, email: boeking.email, naam: boeking.naam, tekst, onderwerp: 'Je inmeetafspraak is geannuleerd', afzender: afz, soort: 'annulering-bevestiging' }).catch((e) => ({ ok: false, reden: e.message }));
     if (!uit.ok) await telegram(`🚨 ${boeking.naam}: afspraak geannuleerd maar de klant kon NIET bereikt worden (${uit.reden}) — even zelf laten weten.`);
   }
   return { afgewezen: false, uitkomst: res.gelukt ? 'alle systemen bijgewerkt' : 'deels: ' + res.stappen.filter((x) => !x.ok).map((x) => x.stap).join(',') };

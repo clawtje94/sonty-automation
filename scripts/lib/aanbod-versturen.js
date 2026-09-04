@@ -20,10 +20,25 @@ const AANVRAGEN_KANAAL = 1363384;
 
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// Communicatie-logboek (Daimy 04-09): elk verstuurd klantbericht (WhatsApp of mail via Trengo) wordt gemeld met de soort
+// die de aanroeper zet (verstuurAanbod → inmeet-aanbod, verstuurBevestiging → bevestiging, stuurVrijBericht → opties.soort).
+let LOG_CTX = { soort: 'bericht', klant: null, naar: null, ref: null };
+function zetLogContext(ctx) { LOG_CTX = { soort: 'bericht', klant: null, naar: null, ref: null, ...ctx }; }
+function logVerzonden(ep, opties, r) {
+  try {
+    if (!r || !r.ok || (opties.method || 'GET') !== 'POST') return;
+    const body = JSON.parse(opties.body || '{}');
+    const isWaSessie = /^\/wa_sessions/.test(ep); const isBericht = /^\/tickets\/\d+\/messages/.test(ep);
+    if (!isWaSessie && !isBericht) return;
+    const mail = isBericht && !!body.email;
+    require('./communicatie-log.js').meld({ soort: LOG_CTX.soort, kanaal: mail ? 'mail' : 'wa', afzender: mail ? 'aanvragen@sonty.nl' : 'WhatsApp 085 006 9681', naar: LOG_CTX.naar || (isWaSessie ? String(body.recipient_phone_number || body.phone || '') : ''), klant: LOG_CTX.klant, onderwerp: mail ? (body.email.subject || '') : (isWaSessie ? 'WhatsApp-template ' + (body.hsm_id || '') : ''), tekst: body.message || (body.params ? JSON.stringify(body.params) : ''), ticket: (ep.match(/\/tickets\/(\d+)/) || [])[1] || null, ref: LOG_CTX.ref });
+  } catch { /* nooit de verzending hinderen */ }
+}
 async function tFetch(ep, opties = {}) {
   for (let i = 0; i < 4; i++) {
     const r = await fetch('https://app.trengo.com/api/v2' + ep, { headers: TH, ...opties });
     if (r.status === 429) { require('./trengo-fetch.js').tel429('aanbod-versturen'); await wacht(15000 * (i + 1)); continue; }
+    logVerzonden(ep, opties, r);
     return r;
   }
   return { ok: false, status: 429 };
@@ -454,7 +469,8 @@ ${adres ? rij('Adres', adres) : ''}
 
 /** VRIJ BERICHT NAAR DE KLANT, ALTIJD ERGENS BEZORGD (review 28-08): WhatsApp als er een gesprek
  *  is, anders mail (nieuw ticket op aanvragen@). Voor annuleringsbevestigingen e.d. */
-async function stuurVrijBericht({ telefoon, email, naam, tekst, onderwerp = 'Bericht van Sonty', afzender = 'Nanny' } = {}) {
+async function stuurVrijBericht({ telefoon, email, naam, tekst, onderwerp = 'Bericht van Sonty', afzender = 'Nanny', soort = 'bericht' } = {}) {
+  zetLogContext({ soort, klant: naam || null, naar: telefoon || email || null, ref: null });
   if (telefoon) {
     const ticket = await zoekWaTicket(telefoon).catch(() => null);
     if (ticket) {
@@ -475,6 +491,7 @@ async function stuurVrijBericht({ telefoon, email, naam, tekst, onderwerp = 'Ber
 }
 
 async function verstuurBevestiging(aanbod, slot, opties = {}) {
+  zetLogContext({ soort: 'inmeet-bevestiging', klant: aanbod.lead?.naam || null, naar: aanbod.lead?.telefoon || aanbod.lead?.email || null, ref: aanbod.token || null });
   // Verzendpoort: bevestiging na boeking is fail-open (mag door bij storing en
   // mens-actief — stilte na een boeking is de enige echt foute uitkomst), maar
   // de stil-lijst wint altijd.
@@ -554,6 +571,7 @@ function herinneringTekst(voornaam, slot, duurMin, dagenVooraf = 1, taal = 'nl')
 
 /** Beide kanalen; geeft per kanaal terug wat er gebeurd is. Eén kanaal gelukt = aanbod is onderweg. */
 async function verstuurAanbod(aanbod, url) {
+  zetLogContext({ soort: 'inmeet-aanbod', klant: aanbod.lead?.naam || null, naar: aanbod.lead?.telefoon || aanbod.lead?.email || null, ref: aanbod.token || null });
   // VERZENDPOORT (18-08, Hans de Lamboij): stil-lijst + mens-actief + max 2
   // voorstellen per week — alles in één toets vóór er iets de deur uit gaat.
   {
@@ -597,7 +615,7 @@ async function verstuurAanbod(aanbod, url) {
   return { wa, mail, ergensGelukt: wa.ok || mail.ok };
 }
 
-module.exports = { verstuurAanbod, verstuurBevestiging, bevestigingMailHtml, stuurVrijBericht, herinneringTekst, bevestigingTekst, herhalingTekst, geenAlternatiefTekst, taalVan, GROET, slotTekst, stuurWhatsApp, stuurMail, zoekWaTicket, zoekWaTicketBreed };
+module.exports = { zetLogContext, verstuurAanbod, verstuurBevestiging, bevestigingMailHtml, stuurVrijBericht, herinneringTekst, bevestigingTekst, herhalingTekst, geenAlternatiefTekst, taalVan, GROET, slotTekst, stuurWhatsApp, stuurMail, zoekWaTicket, zoekWaTicketBreed };
 
 // CLI: node scripts/lib/aanbod-versturen.js <token> — verstuurt een bestaand aanbod.
 if (require.main === module) {

@@ -1,0 +1,126 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><title>Sonty: proces inmeten, Gripp en werkbon</title>
+<style>
+body{font-family:Helvetica,Arial,sans-serif;font-size:11pt;color:#111;line-height:1.45;margin:0}
+h1{font-size:20pt;margin:0 0 4px}h2{font-size:14pt;margin:22px 0 6px;border-bottom:2px solid #BF5317;padding-bottom:3px}h3{font-size:11.5pt;margin:14px 0 4px}
+p{margin:4px 0}ul{margin:4px 0 6px 18px;padding:0}li{margin:2px 0}
+table{border-collapse:collapse;width:100%;margin:6px 0 10px;font-size:10pt}th,td{border:1px solid #ccc;padding:4px 6px;vertical-align:top;text-align:left}th{background:#f3f3f3}
+.kop{color:#666;font-size:10pt}.stap{border-left:4px solid #BF5317;padding:6px 10px;margin:8px 0;background:#fafafa}
+.let{background:#fff7ed;border:1px solid #f59e0b;padding:6px 10px;border-radius:6px;margin:8px 0}
+.gat{background:#fef2f2;border:1px solid #ef4444;padding:6px 10px;border-radius:6px;margin:8px 0}
+code{font-family:Menlo,monospace;font-size:9.5pt;background:#f3f3f3;padding:0 3px}
+</style></head><body>
+<h1>Sonty: het hele proces van inmeten tot bestellen</h1>
+<p class="kop">Stand van zaken 4 september 2026, gelezen uit de draaiende code. Voor Daimy. Alles wat hier staat draait nu zo.</p>
+
+<h2>1. De keten in één oogopslag</h2>
+<table><tr><th>#</th><th>Stap</th><th>Wie of wat</th><th>Wanneer</th><th>Naar de klant</th><th>Naar kantoor</th></tr>
+<tr><td>1</td><td>Lead in RP, prijsindicatie, offerte-controle</td><td>V4-bot en offerte-controle v3</td><td>controle elk uur 09:00 tot 18:00</td><td>prijsindicatie en RP-offerte (bestaande flow)</td><td>sheet "Gecontroleerd"</td></tr>
+<tr><td>2</td><td>Klant tekent de RP-offerte, status "Inmeten inplannen"</td><td>RP</td><td>direct</td><td>–</td><td>–</td></tr>
+<tr><td>3</td><td>Inmeetmoment aanbieden</td><td>Planner (Nanny) of Sunny</td><td>elke 30 min</td><td>aanbod per WhatsApp en mail, 24 uur vast</td><td>–</td></tr>
+<tr><td>4</td><td>Boeking</td><td>Planner</td><td>direct na keuze klant</td><td>bevestiging WhatsApp en mail (uur eerder of later, sms-volglink)</td><td>planning-groep "INMEETAFSPRAAK GEBOEKT"</td></tr>
+<tr><td>5</td><td>Gripp-relatie en Gripp-offerte aanmaken</td><td>Gripp invullen</td><td>08:30, 10:30, 12:30, 14:30, 16:30, 18:00, 20:00</td><td>–</td><td>Telegram alleen bij een adres dat niet compleet is</td></tr>
+<tr><td>6</td><td>Inmeten en meetbon invullen</td><td>Inmeter op locatie</td><td>bij de klant</td><td>–</td><td>–</td></tr>
+<tr><td>7</td><td>Gripp-offerte bijwerken met exacte maten</td><td>Inmeter, knop "bijwerken"</td><td>direct</td><td>–</td><td>marker in de offerte-beschrijving</td></tr>
+<tr><td>8</td><td>Laten tekenen</td><td>Inmeter: ter plekke of knop "versturen"</td><td>direct</td><td>mail "je definitieve offerte staat klaar" vanuit de inmeter (joey@ of sjoerd@)</td><td>–</td></tr>
+<tr><td>9</td><td>Handtekening gezien: bedankt-mail en aanbetalingsfactuur 40%</td><td>Keten-wachter</td><td>elke minuut</td><td>bedankt-mail met getekende PDF, daarna aanbetalingsmail; beide vanuit aanvragen@</td><td>Telegram hoofdchat "Offerte X is getekend"</td></tr>
+<tr><td>10</td><td>Aanbetaling betaald: bestelling naar orders@</td><td>Doorzetter</td><td>elk uur</td><td>–</td><td>bestelmail naar orders@, Telegram "doorgezet naar bestellen"</td></tr>
+<tr><td>11</td><td>Montage: Outlook naar Planado, werkbon</td><td>Sync, bussen, klant tekent</td><td>sync elke 10 min</td><td>klant-werkbon vanuit werkbon@ (binnen een minuut na tekenen)</td><td>volledige werkbon naar werkbon@, planning-groep gereed/niet gereed</td></tr>
+</table>
+
+<h2>2. Per stap: wat er precies gebeurt</h2>
+
+<div class="stap"><h3>Stap 3 en 4: inmeetmoment en boeking</h3>
+<ul><li>De planner leest elke 30 minuten alle RP-kaarten op "Inmeten inplannen" en zoekt een plek in de route van Joey of Sjoerd. Engelstalige klanten altijd bij Sjoerd. Omrijden boven 30 minuten wacht maximaal 4 dagen op een klus in de buurt.</li>
+<li>Aanbod gaat per WhatsApp en mail als Nanny, of persoonlijk als Sunny. Het moment staat 24 uur vast. Reageert de klant niet, dan volgt een navraag, en na 2 voorstellen zonder reactie "Mens nodig (bellen)" op de kaart.</li>
+<li>Bij "ja" boekt de planner: afspraak in Outlook Sonty Montage (via Bookings), Planado-opdracht bij de inmeter met de meetbon-link, regel in de conversie-sheet (inkoop 1, inmeetdatum, inmeter), RP-status naar "Gripp invullen".</li>
+<li>Bevestiging naar de klant: WhatsApp of mail met "een uur eerder of later" en de sms-volglink. Melding in de planning-groep. Klopt de boeking niet helemaal, dan krijgt de klant een eerlijk bericht, nooit stilte.</li>
+<li>Zegt de klant af, dan annuleert Sunny zelf: Outlook, Planado en administratie weg, klant krijgt bevestiging, melding in de planning-groep. Sinds 3 september ook voor afspraken die kantoor zelf in Outlook zette.</li></ul></div>
+
+<div class="stap"><h3>Stap 5: Gripp invullen</h3>
+<ul><li>Zeven keer per dag (08:30 tot 20:00) pakt de Mac alle RP-kaarten op "Gripp invullen": relatie aanmaken als particulier, offerte aanmaken met de RP-producten, prijzen excl. btw (RP incl. gedeeld door 1,21), korting uit de RP-groepskorting, klantopmerking in de beschrijving. Daarna RP-status "Afgerond".</li>
+<li>Adres: uit de lead, anders het RP-adresveld, altijd aangevuld en gecontroleerd via BAG. Lukt dat niet, dan een Telegram-alarm, en elke ronde een nacontrole over alle nieuwe relaties.</li>
+<li>Het Gripp-nummer komt in de Planado-opdracht ("Gripp: 6594") met de productregels en de meetbon-link. Dat doet de planner bij de boeking, en de Gripp-verrijker om 07:50 en 13:50 voor de rest.</li></ul></div>
+
+<div class="stap"><h3>Stap 6 en 7: meetbon en Gripp bijwerken</h3>
+<ul><li>De inmeter opent de meetbon vanuit Planado. De bon is vooraf gevuld met de producten uit de Gripp-offerte. Hij vult maten, plek, foto's en de algemene velden in. Verplichte velden leeg = bon blijft "concept".</li>
+<li>Knop "bijwerken" kan alleen bij een complete bon en nooit bij een offerte die de klant al getekend heeft. De app rekent de definitieve prijzen uit met de centrale prijsmotor en past de Gripp-offerte aan: productregels bijwerken of toevoegen, overbodige regels weg, montageregels vervangen, korting bijgesteld. In de offerte-beschrijving komt "Bijgewerkt na inmeting [datum] door [inmeter] (meetbon-app)" en de geldigheid gaat naar standaard 14 dagen.</li>
+<li>Vanaf dat moment staat de bon op de wachtlijst van de keten-wachter, die elke minuut in Gripp kijkt of er getekend is.</li></ul></div>
+
+<div class="stap"><h3>Stap 8: laten tekenen</h3>
+<ul><li>Ter plekke: de klant tekent in de Gripp-viewer op de telefoon van de inmeter. De app kijkt elke 20 seconden of de handtekening binnen is.</li>
+<li>Per mail: knop "versturen". Mail "Je definitieve offerte staat klaar" met knop "Bekijk en onderteken", uit naam van de inmeter zelf, vanuit joey@ of sjoerd@. Is die mailbox niet als Trengo-kanaal gekoppeld, dan gaat er bewust niets uit en meldt de app dat. De Gripp-offerte gaat daarbij op status "Verzonden".</li></ul></div>
+
+<div class="stap"><h3>Stap 9: handtekening gezien, bedankt-mail en aanbetaling (dit is de melding die je kreeg)</h3>
+<ul><li>Elke minuut roept de Mac de keten-controle aan. Die kijkt alleen naar bonnen die via de app zijn bijgewerkt, en leest per bon de Gripp-offerte live. Getekend betekent: acceptatiestatus 1 in Gripp, of een acceptatiedatum.</li>
+<li>Bij getekend, in deze volgorde en elk precies één keer:
+  <ol><li>Bedankt-mail vanuit aanvragen@: "Bedankt voor je akkoord op offerte [nr]", met de getekende Gripp-PDF als bijlage en de uitleg dat de aanbetalingsfactuur apart komt.</li>
+  <li>Aanbetalingsfactuur: eerst zoekt hij in Gripp naar een bestaande factuur met "Aanbetaling ... ([nr])" in de naam, ook als kantoor die met de hand maakte. Bestaat die niet, dan maakt hij er een: 40% van het offertetotaal excl. btw, product Aanbetaling, één regel, factuur direct definitief met het eerstvolgende factuurnummer en datum vandaag. Bestaat er al een zonder nummer, dan maakt hij die definitief.</li>
+  <li>Aanbetalingsmail vanuit aanvragen@: "Aanbetalingsfactuur [factuurnr] voor offerte [nr]" met bedrag incl. btw en de Gripp-link naar de factuur. Alleen als de factuur een nummer heeft en de klant een e-mailadres in Gripp heeft.</li></ol></li>
+<li>Telegram, hoofdchat, één keer per factuur: "Offerte [nr] is getekend. Aanbetalingsfactuur [nr] (40%) staat definitief in Gripp en is gemaild naar [adres]." Vanochtend: Nick Heemskerk (offerte 6325, factuur 4251, 07:03) en Annette Hoogerdijk (offerte 6579, factuur 4252, 08:07).</li>
+<li>Fouten (geen e-mailadres in Gripp, factuur zonder nummer, mail mislukt) komen één keer per dag per bon op Telegram. De testbonnen 6560 en 6561 (Daimy TEST GRIP) geven zo elke dag een foutmelding.</li>
+<li>Vergrendeling van 2 minuten per bon, zodat app en wachter nooit allebei mailen of twee facturen maken.</li></ul></div>
+
+<div class="stap"><h3>Stap 10: aanbetaling betaald, bestelling naar kantoor</h3>
+<ul><li>Elk uur kijkt de doorzetter naar alle complete bonnen. Betaald betekent in Gripp: openstaand bedrag hoogstens 0,01 en betaald bedrag groter dan 0. Zolang dat niet zo is blijft de bon staan.</li>
+<li>Betaald: bestelmail naar orders@sonty.nl vanuit joey@ (Outlook) met alle producten, maten, plek, foto's en de link naar de bon. Bon op "doorgezet", Telegram "Meetbon [klant] is doorgezet naar bestellen". De klant hoort hier niets van.</li>
+<li>Compleet maar na 14 dagen geen factuur te vinden: één waarschuwing op Telegram. Mail naar orders@ mislukt: bon blijft staan plus melding.</li></ul></div>
+
+<div class="stap"><h3>Stap 11: montage en werkbon</h3>
+<ul><li>Kantoor plant de montage in Outlook Sonty Montage. De sync zet elke 10 minuten elke afspraak in Planado bij de juiste bus, met Bookings-tijd, adres, telefoon, Gripp-nummer, productregels en de interne notities. Wijzigt kantoor later iets, dan volgt Planado. Een wachter meet elke ochtend 06:15 of Outlook en Planado gelijk zijn en meldt afwijkingen in de planning-groep.</li>
+<li>Onderaan elke montage-, service-, onderhoud- en reparatie-opdracht staat "WERKBON TEKENEN". De klant ziet alleen zijn deel, zet opmerkingen, vinkt akkoord en tekent. Hij krijgt zijn werkbon binnen een minuut per mail vanuit werkbon@.</li>
+<li>Rondt de bus de opdracht af, dan gaat de volledige werkbon naar werkbon@ (met handtekeningblok of "klant heeft niet getekend"), en de planning-groep krijgt "werk gereed" (eindfactuur via Gripp sturen, handmatig), "niet gereed" of "velden leeg". Niet afgerond: klant niets, kantoor elke ochtend 08:10 een lijst met open klussen per bus.</li></ul></div>
+
+<h2>3. Wat als iemand de Gripp-offerte aanpast?</h2>
+<table><tr><th>Moment</th><th>Wat gebeurt er</th></tr>
+<tr><td>Vóór de meetbon is bijgewerkt</td><td>De meetbon leest de offerte live en vult de bon met de huidige producten. Bij "bijwerken" is de meetbon leidend voor de product-, montage- en kortingregels: die worden aangepast, toegevoegd of verwijderd. Andere regels blijven staan.</td></tr>
+<tr><td>Na bijwerken, vóór tekenen</td><td>Een kantoor-wijziging blijft staan tot de inmeter opnieuw "bijwerken" drukt, dan wint de bon weer. De keten kijkt in deze fase alleen of er getekend is. De aanbetaling wordt pas berekend op het moment van tekenen, dus over het totaal zoals het dan in Gripp staat, inclusief kantoor-wijzigingen.</td></tr>
+<tr><td>Na tekenen</td><td>"Bijwerken" vanuit de app is geblokkeerd. De factuur is 40% van het totaal op het moment van tekenen.</td></tr>
+<tr><td>Na de aanbetalingsfactuur</td><td>Wijzigingen aan de offerte veranderen de factuur niet. Kantoor moet dan zelf een creditnota of aanvullende factuur maken.</td></tr>
+<tr><td>Kantoor maakt zelf een aanbetaling aan</td><td>Zet "Aanbetaling ... ([offertenummer])" in de factuurnaam. De keten herkent hem, maakt hem definitief als hij nog concept is, en mailt die in plaats van een nieuwe te maken. Bij meerdere aanbetalingen pakt de doorzetter de betaalde.</td></tr>
+<tr><td>Iemand zet de offerte handmatig op geaccepteerd</td><td>Telt als getekend. Binnen een minuut gaan bedankt-mail en aanbetalingsfactuur uit, zonder handtekening-PDF als die er niet is.</td></tr>
+</table>
+
+<h2>4. Alle meldingen op Telegram</h2>
+<table><tr><th>Melding</th><th>Waar</th><th>Wanneer</th></tr>
+<tr><td>INMEETAFSPRAAK GEBOEKT / geannuleerd / verzet</td><td>planning-groep</td><td>direct</td></tr>
+<tr><td>Sunny vroeg na, 5 dagen geen reactie: bellen</td><td>planning-groep</td><td>na 5 dagen stilte</td></tr>
+<tr><td>Gripp-relatie zonder compleet adres</td><td>hoofdchat, digest</td><td>1x per relatie</td></tr>
+<tr><td>Offerte [nr] is getekend, aanbetalingsfactuur gemaild</td><td>hoofdchat</td><td>1x per factuur, binnen een minuut na tekenen</td></tr>
+<tr><td>Keten-fout (geen e-mail in Gripp, geen nummer, mail mislukt)</td><td>hoofdchat</td><td>1x per dag per bon</td></tr>
+<tr><td>Meetbon doorgezet naar bestellen</td><td>hoofdchat</td><td>elk uur, bij betaalde aanbetaling</td></tr>
+<tr><td>Compleet maar 14 dagen geen factuur</td><td>hoofdchat</td><td>1x</td></tr>
+<tr><td>Werkbon gereed / niet gereed / velden leeg, klant getekend ja of nee</td><td>planning-groep</td><td>binnen 30 min na afronden</td></tr>
+<tr><td>Open bus-klussen van gisteren</td><td>planning-groep</td><td>elke dag 08:10</td></tr>
+<tr><td>Outlook versus Planado afwijkingen</td><td>planning-groep</td><td>elke dag 06:15, maandag 05:30 volledig; stil als alles klopt</td></tr>
+<tr><td>Escalatie zonder reactie</td><td>hoofdchat</td><td>pas na 4 dagen, en alleen als nergens geholpen en geen interne notitie</td></tr>
+</table>
+
+<h2>5. Vaste tijden op de Mac</h2>
+<table><tr><th>Taak</th><th>Ritme</th></tr>
+<tr><td>Inmeet-planner ronde</td><td>elke 30 min</td></tr>
+<tr><td>Antwoorden op aanbod verwerken</td><td>elke 3 min</td></tr>
+<tr><td>Keten-wachter (getekend, aanbetaling)</td><td>elke minuut</td></tr>
+<tr><td>Doorzetter (betaald, bestelmail)</td><td>elk uur</td></tr>
+<tr><td>Gripp invullen</td><td>08:30, 10:30, 12:30, 14:30, 16:30, 18:00, 20:00</td></tr>
+<tr><td>Gripp-verrijker (Planado-opdrachten)</td><td>07:50 en 13:50</td></tr>
+<tr><td>Outlook naar Planado sync</td><td>elke 10 min</td></tr>
+<tr><td>Werkbon-afhandeling (vangnet naast de webhook)</td><td>elke 30 min</td></tr>
+<tr><td>Klant-werkbon verzenden vanuit werkbon@</td><td>elke minuut</td></tr>
+<tr><td>Werkbon-tekenlink in Planado-opdrachten</td><td>elke 10 min</td></tr>
+<tr><td>Outlook versus Planado controle</td><td>06:15 dagelijks, maandag 05:30</td></tr>
+</table>
+<p>Alle intervaltaken hebben de interval-runner als vangnet: valt launchd stil, dan start die ze zelf.</p>
+
+<h2>6. Bekende gaten en aandachtspunten</h2>
+<div class="gat"><ul>
+<li>Een inmeting die gedaan is maar waarvan de meetbon niet wordt afgemaakt, valt stil: geen mail naar de klant, geen herinnering aan de inmeter, geen melding aan kantoor.</li>
+<li>Tussen "compleet" en "versturen" zit een handmatige knop. Vergeet de inmeter die, dan krijgt de klant geen offerte.</li>
+<li>Bedankt-mail en aanbetalingsmail gaan alleen als de klant een e-mailadres in Gripp heeft. Anders alleen een foutmelding op Telegram.</li>
+<li>De eindfactuur na montage is handmatig werk van kantoor, op basis van de melding "werk gereed".</li>
+<li>Na de bestelmail hoort de klant niets tot de montageplanning.</li>
+<li>De oude mailtemplates noemen 5 jaar montagegarantie, de klant-werkbon 3 jaar. Eén lijn kiezen.</li>
+<li>Testbonnen 6560 en 6561 staan nog in de keten en geven elke dag een foutmelding.</li>
+<li>De klant-werkbon gaat via de Mac vanuit werkbon@ omdat dat kanaal in Trengo een privé-inbox is. Als team-inbox koppelen maakt het direct.</li>
+</ul></div>
+<p class="kop">Broncode: sonty-website (lib/meetbon, app/api/meetbon, lib/werkbon) en ~/sonty/scripts (cron-inmeten-planner, cron-gripp-invullen, cron-meetbon-keten, cron-meetbon-doorzetten, cron-outlook-planado-sync, cron-werkbon-*).</p>
+</body></html>

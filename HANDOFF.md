@@ -6,6 +6,7 @@
   CPL €69/€63, kosten per akkoord €579/€714, productmarge−spend +€35k/+€27k. Plafond: ads ≤35% productmarge → max €70/lead
   winter (€650/akkoord), harde stop €100; Google-Ads-doel-CPA ≈ €50-55 (factor 0,75 t.o.v. sheet-lead). Pergola+markiezen uit
   nov-jan, rolluiken+screens opschalen, knikarm aan vanaf 2e week jan, dec biedingen −20%. Budget nov 15k/dec 10-12k/jan 15-18k/feb 18-20k.
+- 13:50 netto per product toegevoegd (§7): pergola zomer via Google netto +€32k (mrt-jul 26), winter 1 order op 126 offertes; zomer aan, winter uit blijft.
 - Open: V1 Google Ads API-credentials (docs/google-ads-api-setup.md), V2 wat is campagne "Straal", V3 Google-spend okt-dec 2025.
 
 ## 04-09 11:00: COMMUNICATIE-DASHBOARD + AANBETALINGSFACTUUR "VERLOPEN" (Daimy)

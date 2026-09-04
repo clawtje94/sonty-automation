@@ -103,3 +103,49 @@ Waar het geld vandaan komt: Meta afschalen in de winter. Meta levert €127 prod
 - V1: Google Ads API-toegang (developer token + OAuth-client, 15 min, stappen in docs/google-ads-api-setup.md). Dan meet ik per campagne per week en kan het plafond per campagne automatisch bewaakt worden (alleen-lezen, niets aanpassen).
 - V2: wat is campagne "01 | Zonwering | Straal" (jan-feb 2026, €6.600 totaal)?
 - V3: Google-spend okt, nov, dec 2025 (drie bedragen) in data/ad-spend-handmatig.json, dan is de hele winter 25/26 doorgerekend.
+
+## 7. Netto-berekening per product (toegevoegd 04-09 op vraag Daimy: "pergola kan 0,8% zijn maar toch 100k winst")
+
+Netto = productmarge (verkoop − inkoop) − Google-spend toegerekend naar aandeel offertes in die maand. Montage en overhead zitten er nog niet af.
+Alleen maanden met bekende Google-spend. Script: scratchpad netto.js.
+
+**Winter jan-feb 2026, Google €32.905 over 500 offertes**
+
+| product | off | akk | conv | omzet | productmarge | spend | NETTO | netto/akkoord |
+|---|---|---|---|---|---|---|---|---|
+| Screens | 82 | 10 | 12,2% | €47.719 | €24.228 | €5.387 | **€18.841** | €1.884 |
+| Rolluiken | 180 | 20 | 11,1% | €49.727 | €28.989 | €11.895 | **€17.094** | €855 |
+| Knikarm | 86 | 8 | 9,3% | €35.061 | €16.004 | €5.651 | €10.353 | €1.294 |
+| Voorraadscherm | 38 | 3 | 7,9% | €12.431 | €7.412 | €2.498 | €4.914 | €1.638 |
+| Pergola | 60 | 1 | 1,7% | €6.934 | €6.554 | €3.930 | €2.624 | €2.624 |
+| Markiezen | 17 | 1 | 5,9% | €2.953 | €1.317 | €1.110 | €207 | €207 |
+
+**Zomer mrt-jul 2026, Google €168.974 over 3.285 offertes**
+
+| product | off | akk | conv | omzet | productmarge | spend | NETTO | netto/akkoord |
+|---|---|---|---|---|---|---|---|---|
+| Screens | 830 | 66 | 8,0% | €266.661 | €174.502 | €42.298 | **€132.205** | €2.003 |
+| Rolluiken | 732 | 90 | 12,3% | €265.855 | €167.186 | €37.587 | **€129.599** | €1.440 |
+| Knikarm | 514 | 47 | 9,1% | €162.782 | €95.272 | €26.859 | €68.413 | €1.456 |
+| Zonwering buiten | 64 | 5 | 7,8% | €76.760 | €40.550 | €3.448 | €37.102 | €7.420 |
+| Voorraadscherm | 544 | 31 | 5,7% | €104.974 | €64.603 | €27.711 | €36.892 | €1.190 |
+| **Pergola** | 349 | 9 | 2,6% | €97.519 | €50.236 | €17.956 | **€32.281** | €3.587 |
+| Markiezen | 110 | 20 | 18,2% | €53.339 | €26.564 | €5.693 | €20.871 | €1.044 |
+
+**Pergola absoluut, alle kanalen:**
+
+| seizoen | kanaal | offertes | akkoord | omzet | productmarge |
+|---|---|---|---|---|---|
+| zomer 2025 | Google | 163 | 11 | €96.897 | €45.365 |
+| zomer 2025 | Meta | 550 | 5 | €57.338 | €23.596 |
+| winter 25/26 | Google | 126 | 1 | €6.934 | €6.554 |
+| winter 25/26 | Meta | 389 | 9 | €65.242 | €28.032 |
+| zomer 2026 (t/m nu) | Google | 415 | 10 | €107.691 | €60.408 |
+| zomer 2026 (t/m nu) | Meta | 884 | 14 | €119.649 | €69.350 |
+
+**Conclusie pergola:**
+- **Zomer: Daimy heeft gelijk.** Google-pergola levert per zomer €45-60k productmarge, netto na ads ~€32k (mrt-jul 2026). De 0,8-2,6% conversie is geen probleem omdat één order €5-6k marge geeft. In de zomer gewoon aan laten, met het lage plafond per lead (€50-60) omdat je 40 leads per order nodig hebt.
+- **Winter: nee.** Hele winter 25/26 via Google: 126 offertes, 1 order, €6.554 marge. Netto jan-feb +€2.624, en dat hangt aan die ene order. Meta deed in de winter wél 9 pergola-orders (€28k marge) op 389 offertes. Pergola-vraag is er in de winter dus wel, maar Google-zoekers in de winter kopen niet; Meta-kijkers wel.
+- Advies blijft: Google-pergola-campagne uit van nov t/m half jan (kost €900/mnd plus het aandeel PMax), in feb aan. Meta-pergola in de winter laten lopen als daar budget over is. Elke pergola-order is netto het meest waard (€2.600-3.600 na ads), dus zodra de API werkt: per campagne meten of de winter-pergola ooit een tweede order geeft.
+
+Kanttekening: "Zonwering buiten" zomer 2026 heeft 5 orders van gemiddeld €15k; dat kunnen (deels) pergola's zijn die onder een ander label staan. Als dat zo is, is pergola-zomer nog beter dan hier staat. Montage van een pergola is zwaarder (2 monteurs, 1-2 dagen); ook daarna blijft de zomer positief en de winter één order.

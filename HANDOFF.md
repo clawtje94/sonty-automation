@@ -72,7 +72,10 @@
 - Deploy-fix: .vercelignore had alleen .army/, waardoor .next (3,3 GB) en .claude/worktrees (15 GB) meegingen en de upload 8 GB werd en vastliep; nu ook .next/ .claude/ .git/ node_modules/ test-results/ screenshots/ uitgesloten.
 - Bestaande complete bonnen blijven geldig (validatie draait alleen bij opslaan via de app); bonnen in bewerking moeten het ja/nee-veld nog invullen.
 
-## 04-09 17:30: BESTEL-DASHBOARD MET MEETBON-PANEEL + SUNMASTER BESTELPORTAAL
+## 04-09 18:36: SUNMASTER-BESTELPORTAAL ZICHTBAAR OPEN OP DE MAC MINI (verzoek Daimy "inloggen en open laten staan")
+- Login joey Engelen / S@nty24! werkt, daarna eist het portaal 2FA via Tunix ("Geen MFA-bevestiging"). Op verzoek: zichtbaar Chromium-venster via scratch sunmaster-open.mjs (pid in scratch sunmaster-open.pid, stand in sunmaster-open-stand.txt), sluit na 4 uur. NOOIT bestellen/doordrukken. V4 open: hoe bevestigt Joey de 2FA.
+
+ + SUNMASTER BESTELPORTAAL
 - /admin/bestellen: "Meetbon openen" → paneel in het scherm zelf (lib/meetbon/bestellen.ts bestelOverzicht): per product alle velden (label/waarde) met kopieerknop per waarde (clipboard, fallback execCommand) + "Kopieer alles" (label: waarde-regels), foto's als thumbnails, Algemeen incl. opm_besteller, bestelknop onderin. Deploy 7nbl217zs, screenshot gestuurd. Daimy: "bestellen moet makkelijk en snel, kopieerknoppen tegen overtikfouten".
 - Sunmaster (Daimy: "vul eens een bestelling in bij de leverancier, niet doordrukken"): dealer.sunmaster.nl (login Info@sontymontage.nl) is alleen documenten/beeldbank. Het ECHTE bestelportaal is portal.sunmaster.nl (Servoy "Vision"): login Licentiehouder "Sunmaster Nederland B.V." (voorgevuld), Portaal "cs", Gebruiker + Wachtwoord — dealer-login werkt daar niet. V3 aan Daimy: bestelportaal-login (Joey). Prijslijst 2026 VERSIE 2 (pdf + excel) staat nu in data/prijsboeken/ (onze data is op versie 1 gecontroleerd op 03-08 → later v2 vergelijken).
 

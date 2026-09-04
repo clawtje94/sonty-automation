@@ -41,16 +41,17 @@ test('telefoon: alleen als er nog geen contact is en geen winkelafspraak', () =>
   assert.strictEqual(verfrisPatch({ huidig: { description: 'X', contacts: [] }, telNr: '+31612345678', soortKlus: 'winkel' }).patch.contacts, undefined);
 });
 test('kapotte input crasht niet', () => { for (const h of [null, {}, { description: null }, { description: 5 }]) assert.ok(Array.isArray(verfrisPatch({ huidig: h, notities: 'x' }).redenen)); });
-test('tekenlink: alleen montage/service, één keer, onderaan; inmeten/winkel niet; samen met notities in één patch', () => {
+test('tekenlink: NIET meer in de omschrijving (04-09: staat onder Rapport); oude regel wordt weggehaald', () => {
   const link = 'https://sonty-website.vercel.app/werkbon/u1?t=abc';
-  const p1 = verfrisPatch({ huidig: { description: 'Montage Sonty - X\n\nAdres (Outlook): Straat 1' }, soortKlus: 'montage', tekenLink: link });
-  assert.deepStrictEqual(p1.redenen, ['tekenlink toegevoegd']); assert.ok(p1.patch.description.endsWith(TEKEN_KOP + '\n' + link));
+  assert.deepStrictEqual(verfrisPatch({ huidig: { description: 'Montage Sonty - X\n\nAdres (Outlook): Straat 1' }, soortKlus: 'montage', tekenLink: link }).patch, {}, 'geen link toevoegen');
+  const oud = 'Montage Sonty - X\n\nAdres (Outlook): Straat 1\n\n' + TEKEN_KOP + '\n' + link;
+  const p1 = verfrisPatch({ huidig: { description: oud }, soortKlus: 'montage', tekenLink: link });
+  assert.deepStrictEqual(p1.redenen, ['tekenlink uit omschrijving (staat onder Rapport)']); assert.strictEqual(p1.patch.description, 'Montage Sonty - X\n\nAdres (Outlook): Straat 1');
   assert.deepStrictEqual(verfrisPatch({ huidig: { description: p1.patch.description }, soortKlus: 'montage', tekenLink: link }).patch, {}, 'tweede keer niets');
   assert.deepStrictEqual(verfrisPatch({ huidig: { description: 'Inmeten Sonty - X' }, soortKlus: 'inmeet', tekenLink: link }).patch, {});
-  assert.deepStrictEqual(verfrisPatch({ huidig: { description: 'Winkel' }, soortKlus: 'winkel', tekenLink: link }).patch, {});
   const p2 = verfrisPatch({ huidig: { description: 'Service afspraak Sonty - Y' }, notities: 'let op', soortKlus: 'service', tekenLink: link });
-  assert.deepStrictEqual(p2.redenen, ['notities toegevoegd', 'tekenlink toegevoegd']); assert.ok(p2.patch.description.includes(KOP + '\nlet op') && p2.patch.description.endsWith(link));
-  assert.strictEqual(metTekenLink('x', null), 'x');
+  assert.deepStrictEqual(p2.redenen, ['notities toegevoegd']); assert.ok(p2.patch.description.includes(KOP + '\nlet op') && !p2.patch.description.includes(TEKEN_KOP));
+  assert.strictEqual(metTekenLink('x', link), 'x');
 });
 // Matrix: notities {gelijk, anders, leeg, ontbreekt} × adres {planado met nr, zonder nr, leeg} × outlook-adres {met nr, zonder} × tel {ja, nee} × contacts {ja, nee} = 96
 let n = 0, mis = 0;

@@ -23,10 +23,12 @@ function heeftHuisnummer(adres) { const t = String(adres || '').replace(/\b\d{4}
  * @returns {{ patch: object, redenen: string[] }}
  */
 const TEKEN_KOP = 'WERKBON TEKENEN (klant tekent op je telefoon):';
-/** Tekenlink voor de klant-werkbon (Daimy 03-09): alleen bij montage/service, één keer, onderaan de omschrijving. */
-function metTekenLink(desc, tekenLink) {
-  if (!tekenLink || String(desc).includes(TEKEN_KOP)) return String(desc);
-  return String(desc).trimEnd() + '\n\n' + TEKEN_KOP + '\n' + tekenLink;
+/** Tekenlink voor de klant-werkbon: sinds 03-09 (avond) hoort die in het RAPPORT-veld "Werkbon tekenen (klant)"
+ *  (cron-werkbon-tekenlink.js), NIET in de omschrijving (Daimy: "niet in onze opdrachtbeschrijving"). metTekenLink voegt
+ *  daarom niets meer toe; zonderTekenLink haalt een oude regel weg. */
+function metTekenLink(desc) { return String(desc); }
+function zonderTekenLink(desc) {
+  return String(desc || '').replace(new RegExp('\\n*' + TEKEN_KOP.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\n?\\S*', 'g'), '').trimEnd();
 }
 function verfrisPatch({ huidig, notities = '', adresTekst = '', telNr = null, wieKlant = '', soortKlus = '', tekenLink = null }) {
   const patch = {}; const redenen = [];
@@ -41,10 +43,11 @@ function verfrisPatch({ huidig, notities = '', adresTekst = '', telNr = null, wi
     patch.description = delen.filter(Boolean).join('\n\n');
     redenen.push(gewenst ? (nu ? 'notities gewijzigd' : 'notities toegevoegd') : 'notities verwijderd (leeg in Outlook)');
   }
-  if (tekenLink && ['montage', 'service'].includes(soortKlus) && !desc.includes(TEKEN_KOP)) { patch.description = metTekenLink(patch.description || desc, tekenLink); redenen.push('tekenlink toegevoegd'); }
+  // 04-09: oude tekenlink-regel uit de omschrijving halen (link staat onder Rapport); tekenLink-parameter blijft voor compatibiliteit
+  if (String(patch.description || desc).includes(TEKEN_KOP)) { patch.description = zonderTekenLink(patch.description || desc); redenen.push('tekenlink uit omschrijving (staat onder Rapport)'); }
   const pAdres = huidig?.address?.formatted || '';
   if (heeftHuisnummer(adresTekst) && !heeftHuisnummer(pAdres)) { patch.address = { formatted: String(adresTekst).trim().slice(0, 200) }; redenen.push(pAdres ? 'adres zonder huisnummer aangevuld' : 'adres toegevoegd'); }
   if (telNr && soortKlus !== 'winkel' && !(huidig?.contacts || []).length) { patch.contacts = [{ type: 'phone', name: wieKlant || 'klant', value: telNr }]; redenen.push('telefoon toegevoegd'); }
   return { patch, redenen };
 }
-module.exports = { verfrisPatch, notitieBlokUit, zonderNotitieBlok, metTekenLink, KOP, TEKEN_KOP };
+module.exports = { zonderTekenLink, verfrisPatch, notitieBlokUit, zonderNotitieBlok, metTekenLink, KOP, TEKEN_KOP };

@@ -25,7 +25,7 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /** Pure: welke opdrachten uit de lijst moeten bekeken worden (heeft = rapportveld gevuld, veld = details/omschrijving opgeruimd). */
 function kandidaten(jobs, state, nu = Date.now()) {
-  return (jobs || []).filter((j) => j && j.uuid && j.scheduled_at && Date.parse(j.scheduled_at) > nu - 3600e3
+  return (jobs || []).filter((j) => j && j.uuid && j.scheduled_at && Date.parse(j.scheduled_at) > nu - 36 * 3600e3
     && WERKBON_SJABLOON.test(j.template_name || '') && !/^(meeneem)-/i.test(j.external_id || '') && !/^(canceled|cancelled|deleted)$/i.test(j.status || '')
     && !(state[j.uuid] && state[j.uuid].heeft && state[j.uuid].veld && state[j.uuid].updated_at === j.updated_at));
 }
@@ -49,7 +49,7 @@ async function main() {
   for (let i = 0; i < 40; i++) {
     const d = await (await planadoFetch('https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : ''), { headers: PH })).json();
     const l = d.jobs || []; if (!l.length) break; jobs.push(...l); after = l[l.length - 1].uuid;
-    if (l.every((j) => j.scheduled_at && Date.parse(j.scheduled_at) < Date.now() - 3600e3)) break;
+    if (l.every((j) => j.scheduled_at && Date.parse(j.scheduled_at) < Date.now() - 36 * 3600e3)) break;
     await wacht(1300);
   }
   const lijst = kandidaten(jobs, state);

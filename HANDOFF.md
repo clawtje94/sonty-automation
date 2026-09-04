@@ -28,7 +28,10 @@
 - Deploy-fix: .vercelignore had alleen .army/, waardoor .next (3,3 GB) en .claude/worktrees (15 GB) meegingen en de upload 8 GB werd en vastliep; nu ook .next/ .claude/ .git/ node_modules/ test-results/ screenshots/ uitgesloten.
 - Bestaande complete bonnen blijven geldig (validatie draait alleen bij opslaan via de app); bonnen in bewerking moeten het ja/nee-veld nog invullen.
 
-## 03-09 20:00: MEETBON → PLANADO AUTOMATISCH (Daimy: "in alle montage-opdrachten zetten zodra de meetbon is ingevuld; bij
+## 04-09 ochtend: ROLLUIK TYPE GELEIDER LINKS/RECHTS (Daimy, chat) — deploy f49cf2d
+- Velden geleider_links / geleider_rechts (keuze, verplicht, van buiten gezien): HTF, LHTF, FHTF12, FHTF20, HTF68. Gripp-omschrijving en Planado-veld Product n tonen het als "geleiders links X, rechts Y". Labs 940 + 672 groen. Openstaande bonnen krijgen de velden meteen (verplicht bij afronden).
+
+ (Daimy: "in alle montage-opdrachten zetten zodra de meetbon is ingevuld; bij
 ## aanpassingen overal verwerken ZONDER nieuwe opdrachten aan te maken, alleen update"; tekenen blijft zoals het is) — LIVE
 - Verwerker: scripts/cron-meetbon-planado.js (launchd nl.sonty.meetbon-planado, elke 15 min, vangnet interval-runner; kill data/kill/nl.sonty.meetbon-planado; log logs/meetbon-planado.log). Vlaggen --dry, --alleen <gripp>, --max <n> (standaard 6/run).
 - Zuiver beslisdeel: scripts/lib/meetbon-planado-plan.js (koppeling op "Gripp: <nr>" in de omschrijving, alleen sjabloon "Montage …", alleen open opdrachten, alleen bij gewijzigde vulling-hash; NOOIT POST/DELETE/omschrijving). Website: lib/meetbon/planado-vulling.ts (tekst regel-voor-regel ≤200 incl. regeleinden, PDF-opbouw, foto's) + GET /api/meetbon/planado-lijst en /api/meetbon/bon/<nr>/planado (admin bearer).

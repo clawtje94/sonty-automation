@@ -72,7 +72,10 @@
 - Deploy-fix: .vercelignore had alleen .army/, waardoor .next (3,3 GB) en .claude/worktrees (15 GB) meegingen en de upload 8 GB werd en vastliep; nu ook .next/ .claude/ .git/ node_modules/ test-results/ screenshots/ uitgesloten.
 - Bestaande complete bonnen blijven geldig (validatie draait alleen bij opslaan via de app); bonnen in bewerking moeten het ja/nee-veld nog invullen.
 
-## 04-09 18:36: SUNMASTER-BESTELPORTAAL ZICHTBAAR OPEN OP DE MAC MINI (verzoek Daimy "inloggen en open laten staan")
+## 04-09 19:05: BESTEL-PANEEL: TIK = KOPIËREN (Daimy: "als je op een tekst drukt gelijk kopiëren, alleen nog plakken") — LIVE clhgpnblu
+- Elke regel in het paneel is tikbaar → waarde op klembord, regel groen, balk bovenin "Gekopieerd, plakken maar: …". Sunmaster-venster: Daimy "laat maar" → gesloten, portaal met rust laten (2FA, V4 open).
+
+ OP DE MAC MINI (verzoek Daimy "inloggen en open laten staan")
 - Login joey Engelen / S@nty24! werkt, daarna eist het portaal 2FA via Tunix ("Geen MFA-bevestiging"). Op verzoek: zichtbaar Chromium-venster via scratch sunmaster-open.mjs (pid in scratch sunmaster-open.pid, stand in sunmaster-open-stand.txt), sluit na 4 uur. NOOIT bestellen/doordrukken. V4 open: hoe bevestigt Joey de 2FA.
 
  + SUNMASTER BESTELPORTAAL

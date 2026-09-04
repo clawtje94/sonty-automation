@@ -1,6 +1,17 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 04-09 19:05: KALRA + GALANTE HERSTELD na foutieve Outlook-annulering (Daimy)
+- 17:03/17:04 uit Outlook gehaald (kantoor, fout) → sync annuleerde alles, klanten kregen niets. Op verzoek Daimy teruggezet via de
+  boek-wachtrij (/api/inmeet-mutatie type boek). Galante: do 1 okt 11:55 Sjoerd (oude tijd), bevestiging per mail (WA-gesprek dicht).
+  LES: eigen bron-label "kantoor-herstel" kende de bevestigingsregel niet (alleen sunny/klant-reply/herstel-keuze of instelling) → geen
+  bevestiging; alsnog met bron herstel-keuze gestuurd. Kalra: 12:50 was inmiddels bezet (Kapadia, kantoor 17:12) → op Daimy's keuze
+  12:15-12:55 geboekt, bevestiging (Engels) gemaild 19:02. Daimy daarna: aansluitend op Galante (Heemstede→Badhoevedorp, geen rijtijd)
+  was niet de bedoeling, maar "laat maar, niks meer mee doen". Sjoerd 1 okt: Hoffman 09:00 Heemstede, Galante 11:55 Heemstede,
+  Kalra 12:15 Badhoevedorp, Kapadia 13:00 Leiden — krap, kantoor weet het.
+- Structureel open: Outlook-annulering stuurt geen klantbericht (bewust); dashboard-boeking checkt geen rijtijd tussen opeenvolgende
+  afspraken bij een handmatig gekozen slot.
+
 ## 04-09 15:30: /bedankt HERBOUWD (Daimy: "slecht, AI-slop, geen foto's, geen emotie, niks waarom mensen bij ons zouden kopen")
 - Nieuw: hero met echte foto (team-klant-blij.webp) NAAST de tekst (desktop 2 kolommen, mobiel foto boven), kop "Gelukt, [naam]. Binnen
   24 uur staat je prijsindicatie in je mail", afzender aanvragen@ genoemd; "Waarom mensen voor Sonty kiezen": 4 kaarten met echte foto's
@@ -3964,3 +3975,5 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 - Deploy site gaat NIET via GitHub-push: `vercel deploy --prod --archive=tgz` (CLI bleef hangen na "Ready"; deploy zelf was klaar).
 - 2026-09-03 09:xx Formule-reel gebouwd: public/intern/reel-formule.html ("Koop het niet in mei", 34 s, hook ontleed per woord, 7 re-hooks, 3 humor-beats, loop, caption, Trial-test A/B/C, serie van 10 delen "Dingen die een zonweringverkoper je niet vertelt"). Gelinkt vanuit reel-thuis en viraal-onderzoek. Nog niet gefilmd.
 - 2026-09-04 Volledig productiescript: public/intern/reel-productiescript.html (planning + weer, prep 25 min, 3 kaders met tape-markering, 7 shots met gebaar/nadruk/tekst-tijden/takes, speelregels, montage-tijdlijn per shot, CapCut-stappen, loop-check, export A/B/C, Trial Reels 19:30/20:30/21:30, winnaar di 8 sept 18:30, meten do 10 sept, deel 2 uiterlijk 15 sept, plan B-tabel, checklists). Gelinkt vanuit reel-formule en reel-thuis.
+- 2026-09-04 Reel v3 "Jij in juli. Jij nu." (public/intern/reel-juli.html): boekhouder-grap vervangen door sketch met twee versies van Daimy (juli zwetend achter dicht gordijn vs nu bij regenraam), 9 shots, 30 s, juli-jij reageert met 1-2 woorden. Gelinkt vanuit productiescript en formule. Daimy vond de droge humor niet snappen; vermijd subtiele humor, kies beeldhumor.
+- 2026-09-04 Reel v4 "Jij in januari. Jij nu." (public/intern/reel-januari.html): Daimy: "het is september he" -> trigger omgezet naar kou/stookkosten, product rolluiken, boodschap "bel niet in november", 11 shots, 34 s. Juli-versie geparkeerd voor april. Les: seizoenstrigger moet actueel zijn (STEPPS), niet een herinnering.

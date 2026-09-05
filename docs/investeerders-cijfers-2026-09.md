@@ -18,6 +18,17 @@ Heel 2025: 9.198 offertes, 1.110 akkoorden, € 4,15 mln akkoordwaarde.
 2026 t/m augustus (augustus nog niet volledig bijgewerkt): 11.827 offertes, 1.157 akkoorden, € 4,30 mln.
 Dus: eind augustus 2026 al meer orders en meer orderwaarde dan in heel 2025.
 
+### Omzet per jaar uit het offerteregister, tab "winst verlies" (ex btw, verkoop op akkoord)
+Bron: Google Sheet 1NesKe..., tab winst verlies, gelezen 05-09.
+
+| | 2024 | 2025 | 2026 t/m 5 sep | Prognose 2026 | Doel 2026 |
+|---|---|---|---|---|---|
+| Omzet ex btw | € 1,26 mln | € 3,44 mln | € 3,34 mln | € 4,92 mln | € 5,0 mln |
+| Groei t.o.v. vorig jaar | | +172% | | +43% | +45% |
+| Bruto winst | | € 236k (8,1%) | € 456k (14,2%) | | |
+
+Dit is de basis voor de post (Daimy 05-09: omzetgroei, niet inkoopgroei).
+
 ### Facturatie uit Gripp (de hele onderneming, incl. btw, gemeten 05-09)
 Bron: Gripp API invoice.get, alle verzonden facturen sinds 2025-01-01 (4.258 stuks), op factuurdatum. Aanbetaling 40% bij akkoord, rest na montage, dus facturatie loopt 2 tot 3 maanden achter op verkoop.
 

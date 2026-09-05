@@ -1,8 +1,8 @@
-# LinkedIn-post Joey (basis Daimy 05-09, versie 4)
+# LinkedIn-post Joey (basis Daimy 05-09, versie 5, omzetcijfers uit tab winst verlies)
 
 Wij zoeken een leverancier die groei ziet als iets om samen in te investeren, niet als iets om af te romen. Een fabrikant of assembleur van zonwering die begrijpt dat een dealer die jaar op jaar tientallen procenten groeit geen risico is maar een kans, en die daar in marge, marketing en financieringsruimte naar handelt. Wie dat herkent, ik hoor het graag.
 
-Waarom ik dit nu schrijf. Ik begon met één montagebus. Vandaag rijden er vijf, met drie inmeters en een showroom in Rijswijk. Dit jaar kopen we ruim 70% meer in dan vorig jaar. Januari tot en met augustus: 69% meer aanvragen, 38% meer orders, 38% meer gefactureerd. Juli alleen al 59% boven juli vorig jaar. En het seizoen is nog niet klaar.
+Waarom ik dit nu schrijf. Ik begon met één montagebus. Vandaag rijden er vijf, met drie inmeters en een showroom in Rijswijk. In 2024 deden we 1,3 miljoen omzet. In 2025 3,4 miljoen. Dit jaar staat de teller begin september al op 3,3 miljoen en koersen we af op bijna 5 miljoen, ruim 40% groei op een jaar dat zelf al bijna verdrievoudigd was. Januari tot en met augustus kwamen er 69% meer aanvragen binnen en sloten we 38% meer orders dan vorig jaar. En het seizoen is nog niet klaar.
 
 Die groei hebben we niet gekocht met korting, maar gebouwd met een bedrijf dat het aankan. Onze backoffice is inmiddels voor 75% geautomatiseerd en gaat vóór het seizoen van 2027 naar 85%. Onze eigen AI-collega Sunny handelde sinds juli ruim 4.500 klantgesprekken op WhatsApp en e-mail af, meer dan 90% zonder tussenkomst van een mens, en maakte bijna 300 offertes. Meetbon, digitaal tekenen, aanbetaling, bestelling bij de leverancier, werkbon op de telefoon van de klant: het loopt door zonder kantoor. Het team sluit daardoor nu 41 orders per week, in juli waren dat er 25.
 

@@ -17,7 +17,7 @@ Doel-CPA €50-55, max €70 (winterregel). Na 7 dagen: ads onder 1,5% CTR of bo
 
 ## Claim-check tegen Sunny's kennisbank (05-09, op verzoek Daimy)
 Elke regel op de beelden is nagelopen tegen `data/trengo-kennisbank.md` en `data/sunny-prompt.txt`. Verwijderd omdat Sunny het niet weet: veiligheidspakket, noodkruk, servicedienst, storm/hagel, "209 kleuren", "offerte in 24 uur", "gratis inmeten" los. Gebruikte feiten: 30% energiebesparing, inbraakpreventie, geluidsdemping, 100% verduistering, Somfy Solar zonder bekabeling (laadt ook bij bewolkt weer), Tahoma-app, 10 standaardkleuren + RAL tegen meerprijs, S-42 tot 4 m breed, levertijd 8-10 weken, garantie 3/5/7, prijsindicatie → akkoord → inmeter gratis (anders €75) → harde offerte → restbedrag na montage, 3000+ klanten, 4,9 met 600+ reviews, showroom Frijdastraat Rijswijk, rolluiken goedkoper dan screens.
-Open: prijsclaim B1 (ca. €1.150 voor 120x140, uit lib/rekentool S-37 io RAL 7016, niet live gemeten) en "eigen monteurs" (Sonty Montage-team).
+Prijsclaim B1 bevestigd 05-09 op Sunny's live prijs-API (offerte-tool?action=prijs): rolluikS37 120x140 io = €1.145,40 incl. montage; Daimy akkoord (V2) en "eigen monteurs" (Sonty Montage-team).
 
 ## Formaten en bestanden (`data/ads/rolluiken/lever/`, zip: `sonty-rolluik-ads.zip`)
 - `1x1/` 14 ads 1080x1080 (feed FB/IG), `4x5/` 14 ads 1080x1350 (feed, meer schermruimte), `9x16/` 14 ads 1080x1920 (stories/reels, veilige zones 250 boven / 260 onder).
@@ -59,3 +59,8 @@ Vijf visueel andere formules om tegen de winnende kaart-formule te testen. Zelfd
 | S4 Vraag & antwoord | Grote vraag + antwoordkaart, weinig foto: test of "eerlijk antwoord" beter converteert dan beeld | raam open, rolluik of screen |
 | S5 Minimaal | Alleen foto + één regel, geen vinkjes/knop: test of minder tekst wint | dakkapel, geluid |
 Testopzet: per adset 1 kaart-ad (controle) + 1 teststijl met dezelfde boodschap, 7 dagen, minimaal €150 per variant; winnaar op kosten per lead, niet op klikratio (Video BBQ had 5,7% CTR en €154 per lead).
+
+
+## Aanvulling 05-09 (antwoorden Daimy)
+- A5-korting toegevoegd: 15% actiekorting op maatwerk-zonwering (V5 akkoord). C2 noemt de korting ook.
+- Showroom: binnenlopen is prima in de winter (V4); kennisbank aangepast naar openingstijden di-vr 9:30-17:00, za 9:30-16:00, afspraak aanraden bij twijfel.

@@ -1,16 +1,228 @@
 [
- {"id":"A1-slaapkamer","fase":"1 koud","foto":"wa-2811","label":"ROLLUIKSEIZOEN","kop":["Slaapkamer te warm","of te licht?"],"vinkjes":["100% verduistering","Koel in de zomer, warm in de winter","Elektrisch met afstandsbediening"]},
- {"id":"A2-winter","fase":"1 koud","foto":"wa-1679","label":"KLAAR VOOR DE WINTER","kop":["Tot 30% minder","energieverlies"],"vinkjes":["Isolerende luchtlaag voor je raam","Levertijd 8 tot 10 weken","3 jaar montage, 5 jaar product, 7 jaar motor"]},
- {"id":"A3-dakkapel","fase":"1 koud","foto":"wa-0024","label":"DAKKAPEL OF ZOLDER","kop":["Eindelijk slapen","zonder hitte"],"vinkjes":["Ook op dakkapel en zolderraam","Donker en koel in één beweging","Op maat gemaakt, gemonteerd door Sonty"]},
- {"id":"A4-garage","fase":"1 koud","foto":"wa-1340","label":"GARAGE EN TUINHUIS","kop":["Ook voor garage,","tuinhuis en berging"],"vinkjes":["Extra barrière tegen inbrekers","Elektrisch of op zonne-energie","Op maat, tot 4 meter breed"]},
- {"id":"B1-prijs","fase":"2 vragen","foto":"screen-034","label":"EERLIJKE PRIJS","kop":["Wat kost een","elektrisch rolluik?"],"vinkjes":["Slaapkamerraam 120x140: ca. €1.150","Inclusief Somfy-motor en montage","Prijsindicatie vooraf, geen verrassingen"]},
- {"id":"B2-inbraak","fase":"2 vragen","foto":"screen-045","label":"INBRAAKPREVENTIE","kop":["Inbrekers kiezen het","makkelijkste huis."],"vinkjes":["Gesloten rolluik = extra barrière","Dubbelwandig aluminium met isolatieschuim","Elektrisch, ook via de Somfy-app"]},
- {"id":"B3-kleur","fase":"2 vragen","foto":"wa-2447","label":"ELKE KLEUR","kop":["Past bij elke","gevel en kozijn"],"vinkjes":["10 standaardkleuren zonder meerprijs","Elke RAL-kleur mogelijk","Ook voor dakkapel, garage en tuinhuis"]},
- {"id":"B4-solar","fase":"2 vragen","foto":"wa-0751","label":"GEEN STROOMPUNT?","kop":["Rolluik op","zonne-energie"],"vinkjes":["Geen bekabeling, geen elektricien","Somfy solar-motor met afstandsbediening","Laadt ook op bij bewolkt weer"]},
- {"id":"B5-rolluik-of-screen","fase":"2 vragen","foto":"overig-025","label":"EERLIJK ADVIES","kop":["Rolluik of screen?","Wij zeggen het eerlijk."],"vinkjes":["Rolluik: 100% donker, isolatie, inbraakpreventie","Screen: daglicht en uitzicht behouden","Rolluiken zijn zelfs goedkoper dan screens"]},
- {"id":"B6-raam-open","fase":"2 vragen","foto":"wa-2431","label":"VEELGESTELDE VRAAG","kop":["Gaat mijn raam","nog gewoon open?"],"vinkjes":["Meestal wel, de inmeter checkt het bij je thuis","Opbouw of inbouw, wat bij jouw kozijn past","Eerlijk advies, ook als het niet past"]},
- {"id":"B7-geluid","fase":"2 vragen","foto":"screen-021","label":"RUST IN HUIS","kop":["Minder straatgeluid,","beter slapen"],"vinkjes":["Geluidsdemping: verkeer en vliegtuigen","Stille Somfy-motor","Privacy: volledig dicht, niemand kijkt binnen"]},
- {"id":"C1-bewijs","fase":"3 warm","foto":"wa-2578","boven":true,"label":"3000+ KLANTEN","kop":["4,9 van 5 sterren.","Eigen monteurs."],"vinkjes":["Meer dan 600 Google-reviews","Showroom in Rijswijk","3 jaar montage, 5 jaar product, 7 jaar motor"]},
- {"id":"C2-proces","fase":"3 warm","foto":"wa-1145","label":"ZO WERKT HET","kop":["Prijsindicatie vooraf,","inmeten aan huis"],"vinkjes":["Eerst een prijsindicatie op jouw maten","Na akkoord komt de inmeter gratis langs","Restbedrag betaal je pas na de montage"]},
- {"id":"C3-garantie","fase":"3 warm","foto":"knikarm-033","label":"ZONDER ZORGEN","kop":["3, 5 en 7 jaar","garantie"],"vinkjes":["3 jaar op de montage","5 jaar op het product","7 jaar op de Somfy-motor"]}
+ {
+  "id": "A1-slaapkamer",
+  "fase": "1 koud",
+  "foto": "wa-2811",
+  "label": "ROLLUIKSEIZOEN",
+  "kop": [
+   "Slaapkamer te warm",
+   "of te licht?"
+  ],
+  "vinkjes": [
+   "100% verduistering",
+   "Koel in de zomer, warm in de winter",
+   "Elektrisch met afstandsbediening"
+  ]
+ },
+ {
+  "id": "A2-winter",
+  "fase": "1 koud",
+  "foto": "wa-1679",
+  "label": "KLAAR VOOR DE WINTER",
+  "kop": [
+   "Tot 30% minder",
+   "energieverlies"
+  ],
+  "vinkjes": [
+   "Isolerende luchtlaag voor je raam",
+   "Levertijd 8 tot 10 weken",
+   "3 jaar montage, 5 jaar product, 7 jaar motor"
+  ]
+ },
+ {
+  "id": "A3-dakkapel",
+  "fase": "1 koud",
+  "foto": "wa-0024",
+  "label": "DAKKAPEL OF ZOLDER",
+  "kop": [
+   "Eindelijk slapen",
+   "zonder hitte"
+  ],
+  "vinkjes": [
+   "Ook op dakkapel en zolderraam",
+   "Donker en koel in één beweging",
+   "Op maat gemaakt, gemonteerd door Sonty"
+  ]
+ },
+ {
+  "id": "A4-garage",
+  "fase": "1 koud",
+  "foto": "wa-1340",
+  "label": "GARAGE EN TUINHUIS",
+  "kop": [
+   "Ook voor garage,",
+   "tuinhuis en berging"
+  ],
+  "vinkjes": [
+   "Extra barrière tegen inbrekers",
+   "Elektrisch of op zonne-energie",
+   "Op maat, tot 4 meter breed"
+  ]
+ },
+ {
+  "id": "B1-prijs",
+  "fase": "2 vragen",
+  "foto": "screen-034",
+  "label": "EERLIJKE PRIJS",
+  "kop": [
+   "Wat kost een",
+   "elektrisch rolluik?"
+  ],
+  "vinkjes": [
+   "Slaapkamerraam 120x140: ca. €1.150",
+   "Inclusief Somfy-motor en montage",
+   "Prijsindicatie vooraf, geen verrassingen"
+  ]
+ },
+ {
+  "id": "B2-inbraak",
+  "fase": "2 vragen",
+  "foto": "screen-045",
+  "label": "INBRAAKPREVENTIE",
+  "kop": [
+   "Inbrekers kiezen het",
+   "makkelijkste huis."
+  ],
+  "vinkjes": [
+   "Gesloten rolluik = extra barrière",
+   "Dubbelwandig aluminium met isolatieschuim",
+   "Elektrisch, ook via de Somfy-app"
+  ]
+ },
+ {
+  "id": "B3-kleur",
+  "fase": "2 vragen",
+  "foto": "wa-2447",
+  "label": "ELKE KLEUR",
+  "kop": [
+   "Past bij elke",
+   "gevel en kozijn"
+  ],
+  "vinkjes": [
+   "10 standaardkleuren zonder meerprijs",
+   "Elke RAL-kleur mogelijk",
+   "Ook voor dakkapel, garage en tuinhuis"
+  ]
+ },
+ {
+  "id": "B4-solar",
+  "fase": "2 vragen",
+  "foto": "wa-0751",
+  "label": "GEEN STROOMPUNT?",
+  "kop": [
+   "Rolluik op",
+   "zonne-energie"
+  ],
+  "vinkjes": [
+   "Geen bekabeling, geen elektricien",
+   "Somfy solar-motor met afstandsbediening",
+   "Laadt ook op bij bewolkt weer"
+  ]
+ },
+ {
+  "id": "B5-rolluik-of-screen",
+  "fase": "2 vragen",
+  "foto": "overig-025",
+  "label": "EERLIJK ADVIES",
+  "kop": [
+   "Rolluik of screen?",
+   "Wij zeggen het eerlijk."
+  ],
+  "vinkjes": [
+   "Rolluik: 100% donker, isolatie, inbraakpreventie",
+   "Screen: daglicht en uitzicht behouden",
+   "Rolluiken zijn zelfs goedkoper dan screens"
+  ]
+ },
+ {
+  "id": "B6-raam-open",
+  "fase": "2 vragen",
+  "foto": "wa-2431",
+  "label": "VEELGESTELDE VRAAG",
+  "kop": [
+   "Gaat mijn raam",
+   "nog gewoon open?"
+  ],
+  "vinkjes": [
+   "Meestal wel, de inmeter checkt het bij je thuis",
+   "Opbouw of inbouw, wat bij jouw kozijn past",
+   "Eerlijk advies, ook als het niet past"
+  ]
+ },
+ {
+  "id": "B7-geluid",
+  "fase": "2 vragen",
+  "foto": "screen-021",
+  "label": "RUST IN HUIS",
+  "kop": [
+   "Minder straatgeluid,",
+   "beter slapen"
+  ],
+  "vinkjes": [
+   "Geluidsdemping: verkeer en vliegtuigen",
+   "Stille Somfy-motor",
+   "Privacy: volledig dicht, niemand kijkt binnen"
+  ]
+ },
+ {
+  "id": "C1-bewijs",
+  "fase": "3 warm",
+  "foto": "wa-2578",
+  "boven": true,
+  "label": "3000+ KLANTEN",
+  "kop": [
+   "4,9 van 5 sterren.",
+   "Eigen monteurs."
+  ],
+  "vinkjes": [
+   "Meer dan 600 Google-reviews",
+   "Showroom in Rijswijk",
+   "3 jaar montage, 5 jaar product, 7 jaar motor"
+  ]
+ },
+ {
+  "id": "C2-proces",
+  "fase": "3 warm",
+  "foto": "wa-1145",
+  "label": "ZO WERKT HET",
+  "kop": [
+   "Prijsindicatie vooraf,",
+   "inmeten aan huis"
+  ],
+  "vinkjes": [
+   "15% actiekorting op maatwerk-zonwering",
+   "Na akkoord komt de inmeter gratis langs",
+   "Restbedrag betaal je pas na de montage"
+  ]
+ },
+ {
+  "id": "C3-garantie",
+  "fase": "3 warm",
+  "foto": "knikarm-033",
+  "label": "ZONDER ZORGEN",
+  "kop": [
+   "3, 5 en 7 jaar",
+   "garantie"
+  ],
+  "vinkjes": [
+   "3 jaar op de montage",
+   "5 jaar op het product",
+   "7 jaar op de Somfy-motor"
+  ]
+ },
+ {
+  "id": "A5-korting",
+  "fase": "1 koud",
+  "foto": "wa-1145",
+  "label": "15% ACTIEKORTING",
+  "kop": [
+   "15% korting op",
+   "maatwerk-zonwering"
+  ],
+  "vinkjes": [
+   "Geldt ook op rolluiken op maat",
+   "Inclusief Somfy-motor en montage",
+   "3 jaar montage, 5 jaar product, 7 jaar motor"
+  ]
+ }
 ]

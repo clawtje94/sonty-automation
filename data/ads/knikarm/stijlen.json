@@ -1,0 +1,64 @@
+[
+ {
+  "id": "S1-marker-vroegboek",
+  "stijl": "marker",
+  "foto": "wa-0472",
+  "kop": [
+   "Bestel nu, geniet",
+   "bij de eerste zon."
+  ],
+  "sub": [
+   "Levertijd 8 tot 10 weken, winter is de rustigste periode.",
+   "15% actiekorting op maatwerk-zonwering."
+  ],
+  "pijl": [
+   720,
+   0,
+   60,
+   -120,
+   -100,
+   -220
+  ]
+ },
+ {
+  "id": "S2-donker-prijs",
+  "stijl": "donker",
+  "foto": "knikarm-006",
+  "label": "Eerlijke prijs",
+  "kop": [
+   "Wat kost een",
+   "knikarmscherm?"
+  ],
+  "sub": [
+   "SunEye 4 bij 2,5 meter: ca. €3.700 inclusief",
+   "Somfy-motor en montage. Prijsindicatie op jouw maten."
+  ]
+ },
+ {
+  "id": "S3-grid-terras",
+  "stijl": "grid",
+  "fotos": [
+   "wa-1824",
+   "wa-0200",
+   "wa-2646",
+   "knikarm-021"
+  ],
+  "kop": [
+   "Elk terras",
+   "zijn eigen schaduw"
+  ],
+  "sub": [
+   "Op maat tot 7,45 meter breed. Honderden doeken. Gemonteerd door Sonty."
+  ]
+ },
+ {
+  "id": "S5-minimaal-zon",
+  "stijl": "minimaal",
+  "foto": "wa-2763",
+  "kop": [
+   "Bestel in de winter.",
+   "Geniet bij de eerste zon."
+  ],
+  "cta": "Knikarmschermen op maat · Sonty.nl"
+ }
+]

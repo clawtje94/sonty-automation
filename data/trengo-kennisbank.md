@@ -32,9 +32,9 @@ Sonty is de specialist in zonwering en woninginrichting in de regio Haaglanden e
 - Website: sonty.nl
 
 ### Showroom bezoeken
-- ALLEEN OP AFSPRAAK — geen vrij binnenlopen
-- Op afspraak te bezoeken op: woensdag, vrijdag en zaterdag
-- Afspraak plannen via de boekingslink (die toont de beschikbare tijden)
+- Binnenlopen kan tijdens openingstijden (bevestigd Daimy 05-09-2026, zeker in de winter): dinsdag t/m vrijdag 9:30-17:00, zaterdag 9:30-16:00, maandag en zondag gesloten
+- Met een afspraak zit er zeker een specialist klaar: plannen via de boekingslink (45 minuten)
+- Twijfelt de klant of wil hij een voorstel doornemen: altijd de afspraak aanraden
 
 ### Het team
 - Daimy Boot — eigenaar, sales

@@ -1,6 +1,11 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 05-09 13:10: ARNOUD KORTENBOUT nooit geholpen: e-mail-verzending faalde, ticket toch gesloten (analyse, Daimy: niks mee doen)
+- Ticket 977178183 (mail, 29-08). 11:05 klant vraagt showroomafspraak za 5 sept 14:00. 13:02 Sunny had een goed antwoord (14:00 bezet, 13:30 of 14:30) maar tPost naar Trengo faalde; email-live.js sloot het ticket daarna TOCH (label AI Bot, geen notitie, geen Mens nodig, geen Telegram). Geen Bookings-afspraak, geen RP, geen HubSpot. Klant kreeg niets.
+- Patroon: 29 tickets "versturen mislukt" (15-07 t/m 30-08), 27 nooit meer beantwoord, 2 later door een mens. 11 echte verzoeken stil gebleven: Els Frigge, Wikash Gokoel, Vidastone (zakelijk), 971296101 (maten), Marco Both (offerte 2 solar rolluiken), 973827740 (service), M.Q. Broerse (motor RS100), Erik Siebers (maten), Geoffrey en Karin (showroom), Marjan Halma (buren), Arnoud. Rest afmeldingen/bedankjes/spam.
+- Oorzaak: oude tPost gaf stil false (waarschijnlijk 429 door Sunny-daemon-bursts). Sinds fix 31-08 (retry 15/30/60s) 0 mislukkingen. Gat dat BLIJFT: email-live.js regel ~334-353 sluit ook bij verstuurd=false. Voorstel (nog niet gebouwd): bij mislukking niet sluiten, notitie + Mens nodig + Telegram, en lab-scenario. Stil-sluitingen zonder antwoord in log.jsonl: 0.
+
 ## 05-09 12:30: FOTO'S KWIJT — 500-CAP + HERSTEL (Daimy flink gebaald, terecht)
 - OORZAAK: app/api/admin/fotoupload MAX_LIJST=500 met opgeschoond()=slice(0,500) die de lijst bij ELKE GET terugschreef → 700+
   geUploade foto's (KV sonty:media-uploads) verdwenen uit de kiezer. GEFIXT: MAX 5000 + nooit goedgekeurde/te-beoordelen wegknippen.

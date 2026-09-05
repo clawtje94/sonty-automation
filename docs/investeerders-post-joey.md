@@ -1,7 +1,5 @@
 # LinkedIn-post Joey, finale versie (05-09, alleen percentages)
 
-Een eerlijk bericht aan onze leveranciers, en aan iedereen die in groei wil investeren.
-
 Wij zoeken een leverancier die groei ziet als iets om samen in te investeren, niet als iets om af te romen. Een fabrikant of assembleur van zonwering die begrijpt dat een dealer die jaar op jaar tientallen procenten groeit geen risico is maar een kans, en die daar in marge, marketing en financieringsruimte naar handelt. Wie dat herkent, ik hoor het graag.
 
 Waarom ik dit nu schrijf. Ik begon met één montagebus. Vandaag rijden er vijf, met drie inmeters en een showroom in Rijswijk. In 2025 groeide onze omzet met 172% ten opzichte van 2024. Dit jaar komt daar volgens onze prognose nog eens ruim 40% bovenop. Januari tot en met augustus: 69% meer aanvragen en 38% meer orders dan vorig jaar. En het seizoen is nog niet klaar.

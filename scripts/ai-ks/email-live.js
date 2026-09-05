@@ -335,22 +335,25 @@ async function verwerk(ticketId) {
     await tPost(`/tickets/${ticketId}/assign`, { type: 'user', user_id: SONNY_USER });
     await zetLabel(ticketId, LABEL.AI_BOT);
     if (mutaties.some(a => a.type === 'inmeet_afspraak')) await zetLabel(ticketId, LABEL.OPMETING);
-    if (mutaties.some(a => /offerte/.test(a.type))) await zetLabel(ticketId, LABEL.OFFERTE_VERSTUURD);
+    if (verstuurd && mutaties.some(a => /offerte/.test(a.type))) await zetLabel(ticketId, LABEL.OFFERTE_VERSTUURD);
     // Alleen het NIEUWE berichtdeel telt voor het sluit-oordeel, niet de geciteerde thread
     // (Daimy 2026-08-03, casus Theo/ghosty_buster: onze eigen FAQ-zin "hoe snel lossen jullie een
     // storing op" stond meegequote en werd als service/klacht gezien → onterecht naar Mens nodig).
     const poortMail = magSluiten({ klantTekst: rijen.filter(r => r.van === 'klant').map(r => String(r.tekst).split('[EINDE NIEUW BERICHT')[0]).join(' '), antwoord: res.antwoord, acties: res.acties });
-    if (!poortMail.mag) {
-      // Servicemelding: alleen open laten, geen Mens nodig en geen notitie (Daimy 2026-08-06,
-      // "die dingen die doorgezet worden naar service hoeven niet naar mens nodig, en ook die
-      // opmerking niet"). Het team ziet het ticket gewoon in de open lijst. Beloftes en
-      // escalaties gaan nog wel naar Mens nodig, want daar moet echt iemand iets mee.
-      if (poortMail.soort !== 'service') {
-        await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
-        await zetLabel(ticketId, LABEL.MENS_NODIG);
-        await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `👤 Ticket blijft OPEN bij Mens nodig: ${poortMail.reden}.` });
-      }
-    } else await tPost(`/tickets/${ticketId}/close`, {});
+    // NA-VERZENDBESLUIT (Daimy 05-09, casus Kortenbout): mislukte verzending = NIET sluiten,
+    // Mens nodig + notitie met het concept + Telegram. Servicemelding: alleen open laten (06-08).
+    const besluit = require('../lib/mail-verzend-besluit.js').naVerzending({ verstuurd, poort: poortMail });
+    if (besluit.mensNodig) {
+      await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
+      await zetLabel(ticketId, LABEL.MENS_NODIG);
+    }
+    if (besluit.notitie) {
+      await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: verstuurd
+        ? `👤 Ticket blijft OPEN bij Mens nodig: ${poortMail.reden}.`
+        : `${teamTags()} ⚠️ Sunny's antwoord kon NIET verstuurd worden (Trengo-fout). De klant heeft NIETS ontvangen. Graag zelf sturen of bellen. Klaarstaand antwoord:\n\n${schoonKlantTekst(res.antwoord)}` });
+    }
+    if (besluit.telegram) await telegram(`⚠️ E-mail aan ${gesprek.klant.naam || gesprek.klant.email} (ticket ${ticketId}) kon NIET verstuurd worden. Ticket staat open bij Mens nodig met het klaarstaande antwoord in een notitie.`);
+    if (besluit.sluiten) await tPost(`/tickets/${ticketId}/close`, {});
     logKS({ ticket: ticketId, laatsteKlantBericht: rijen[rijen.length - 1]?.tekst?.slice(0, 200), antwoord: schoonKlantTekst(res.antwoord), acties: mutaties });
     return { ticketId, klant: gesprek.klant.naam || gesprek.klant.email, resultaat: verstuurd ? '✅ BEANTWOORD + gesloten' : '⚠️ versturen mislukt', concept: schoonKlantTekst(res.antwoord).slice(0, 220), acties: mutaties.map(a => a.type) };
   }

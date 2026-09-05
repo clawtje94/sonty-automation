@@ -1,6 +1,10 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 05-09 14:15: VERZENDFOUT SLUIT NOOIT MEER EEN TICKET (V3 Daimy: "ja, belangrijk dat het gewoon goed gaat")
+- Bouw: scripts/lib/mail-verzend-besluit.js (puur naVerzending), email-live.js: mislukte tPost → ticket OPEN, team Mens nodig + label, notitie met het klaarstaande concept, Telegram; label "offerte verstuurd" alleen als echt verstuurd. Lab scenario-lab/onderdelen/verzend-mislukt.js: 30 scenario's (volledige beslisruimte), 0x FOUT-STIL. Daemon nl.sonty.email herstart 14:12.
+- Herstel oude gevallen: scripts/ai-ks/heropen-mislukte-verzending.js <ticketIds> (reopen + notitie met concept + team Mens nodig + label). PROEFGEVAL 977178183 Kortenbout gedaan 14:14: OPEN, geen user, team 431872, labels AI Bot + Mens nodig. Daemon pakt hem niet (team gezet, geen user). Wacht op Daimy's check, dan de andere 10: 968536624 968947247 969993922 971296101 973456036 973827740 975142827 976210941 977050313 977065333.
+
 ## 05-09 13:10: ARNOUD KORTENBOUT nooit geholpen: e-mail-verzending faalde, ticket toch gesloten (analyse, Daimy: niks mee doen)
 - Ticket 977178183 (mail, 29-08). 11:05 klant vraagt showroomafspraak za 5 sept 14:00. 13:02 Sunny had een goed antwoord (14:00 bezet, 13:30 of 14:30) maar tPost naar Trengo faalde; email-live.js sloot het ticket daarna TOCH (label AI Bot, geen notitie, geen Mens nodig, geen Telegram). Geen Bookings-afspraak, geen RP, geen HubSpot. Klant kreeg niets.
 - Patroon: 29 tickets "versturen mislukt" (15-07 t/m 30-08), 27 nooit meer beantwoord, 2 later door een mens. 11 echte verzoeken stil gebleven: Els Frigge, Wikash Gokoel, Vidastone (zakelijk), 971296101 (maten), Marco Both (offerte 2 solar rolluiken), 973827740 (service), M.Q. Broerse (motor RS100), Erik Siebers (maten), Geoffrey en Karin (showroom), Marjan Halma (buren), Arnoud. Rest afmeldingen/bedankjes/spam.

@@ -50,6 +50,7 @@ const ONDERDELEN = [
   require('./onderdelen/inmeet-zoeklijst.js'),
   require('./onderdelen/nieuwe-afspraak.js'),
   require('./onderdelen/offerte-poort.js'),
+  require('./onderdelen/verzend-mislukt.js'),
 ];
 // UI-laag draait tegen de echte site in een echte browser: alleen met --ui (of een filter),
 // anders wordt elke logica-run traag van het browsen.

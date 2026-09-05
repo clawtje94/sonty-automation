@@ -1,6 +1,18 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 05-09 12:30: FOTO'S KWIJT — 500-CAP + HERSTEL (Daimy flink gebaald, terecht)
+- OORZAAK: app/api/admin/fotoupload MAX_LIJST=500 met opgeschoond()=slice(0,500) die de lijst bij ELKE GET terugschreef → 700+
+  geUploade foto's (KV sonty:media-uploads) verdwenen uit de kiezer. GEFIXT: MAX 5000 + nooit goedgekeurde/te-beoordelen wegknippen.
+- Foto's zelf nooit weg: Klaviyo-mediabibliotheek 852 (d3k81ch9hvuctc.cloudfront.net/company/U3fsjA), repo 1611.
+- HERSTEL: scripts/email/herstel-uploads-uit-klaviyo.js zette 362 ontbrekende terug als 'nieuw'; upload-triage.js (Haiku vision)
+  categoriseerde ze; daarna via de OFFICIËLE besluit-route (herstel-uploads-galerij-besluit.js: POST besluit ok+cat) in de galerij
+  gezet zodat het PERSISTEERT en op de site komt. Direct KV-schrijven naar portfolio-additions hield GEEN stand (reverte naar 7) —
+  altijd via de app-endpoint werken. Galerij nu 1266 (pergola 30→105), publiek /portfolio toont 105.
+- LET OP: de oude categorie-indeling van die 362 is niet te herstellen (Klaviyo bewaart alleen UUID) → AI-categorie, deel kan scheef
+  staan. Daimy corrigeert losse foto's in /admin/fotos. De homepage-pergolafoto (2a0a2e6e, slot pergola-tuin-2) stond al die tijd
+  gewoon live; keuze intact.
+
 ## 05-09 12:30: OFFERTE-POORT E-MAIL (Daimy: "Sunny mag niet meer alleen een prijs geven in de mail")
 - Aanleiding: klant in de winkel met een prijs uit een Sunny-mail, er bestond nog geen offerte.
 - Regel: per e-mail alleen een bedrag als er een offerte bij hoort: in dezelfde beurt offerte_aanmaken/offerte_aanpassen ECHT gelukt (ctx.offerteGemaakt), of klant heeft al een offerte (ctx.offerteBekend via klant_opzoeken/offerte_bekijken) én de mail benoemt "offerte". €75/€25 en bedragen < €100 tellen niet. WhatsApp valt er (nog) buiten: V1 aan Daimy.

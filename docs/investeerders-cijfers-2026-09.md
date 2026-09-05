@@ -98,24 +98,26 @@ De interne aanname "showroombezoekers converteren bijna 10x beter" staat nergens
 - Conversie na de prijsverhoging ligt lager (5 tot 8% tegen 10 tot 14% in juli). Deels vertraging in de administratie, deels seizoen, maar het is een vraag die een investeerder gaat stellen.
 - Marketingkosten per order (€ 355) zijn niet met 2025 te vergelijken door ontbrekende Google-cijfers.
 
-## 4. Post (LinkedIn)
+## 4. Post (LinkedIn), versie 3: investeerder eerst, leverancier krijgt het signaal
+Daimy 05-09: "er belt niemand" (salesteam-zin weg), hoofddoel investeerder, leverancier moet wakker worden dat we weggaan.
 
-Joey begon met één montagebus. Vandaag rijden er vijf.
+Joey begon met één montagebus. Vandaag rijden er vijf. En ik zoek geld om er een keten van te maken.
 
-Daartussen zit een tijdlijn die ik graag eerlijk vertel. Van januari tot en met juli kwamen er 69% meer aanvragen binnen dan vorig jaar. We sloten 38% meer orders. Eind augustus staat 2026 al boven heel 2025, en het seizoen is nog niet klaar.
+De cijfers eerst, want daar kijk je naar. Januari tot en met juli, tegenover vorig jaar: 69% meer aanvragen, 38% meer orders, 41% meer orderwaarde. Eind augustus stond 2026 al boven heel 2025. Gemiddelde order 3.700 euro, ruim 600 Google-reviews met een 4,9.
 
-Het gat tussen die 69% en die 38% was ons probleem. In juli deed het team 25 orders per week terwijl er 500 offertes per week binnenkwamen. Offertes verouderden, klanten kochten elders. We hebben toen niet de marketing uitgezet, maar het bedrijf verbouwd: extra bussen, drie inmeters, een salesteam dat vanaf deze maand elke lead persoonlijk belt, en een eigen softwarelaag.
+Het gat tussen die 69% en 38% hebben we deze zomer gedicht. Niet met meer marketing, maar met een bedrijf dat het aankan: van 25 naar 41 orders per week, en een backoffice die nu voor 75% geautomatiseerd is en voor het seizoen van 2027 naar 85% gaat. Onze eigen AI-collega Sunny handelde sinds juli ruim 4.500 klantgesprekken af, meer dan 90% zonder mens, en maakte bijna 300 offertes. Offerte, meetbon, tekenen, aanbetaling, bestelling, werkbon: het loopt door zonder kantoor.
 
-Die softwarelaag is het echte verhaal. Onze backoffice is nu voor 75% geautomatiseerd en gaat naar 85% voordat het seizoen van 2027 begint. Onze AI-collega Sunny heeft sinds juli ruim 4.500 klantgesprekken op WhatsApp en e-mail afgehandeld, meer dan 90% zonder tussenkomst van een mens. Ze rekent prijzen, heeft bijna 300 offertes gemaakt of aangepast en ruim 120 inmeetafspraken ingepland. Meetbon, digitaal tekenen, aanbetaling, bestelling bij de leverancier, werkbon op de telefoon van de klant: het loopt door zonder kantoor. Gemeten resultaat: het team sluit nu 41 orders per week met een plafond van ruim 50, de wachtrij is weg, de vraag is niet gezakt.
+Waar we nu op vastlopen is niet vraag en niet capaciteit. Het zijn winkels. Onze data is daar hard over: een aanvraag binnen 10 kilometer van onze showroom wordt 2 tot 4 keer zo vaak een order als een aanvraag verder weg. Mensen willen zonwering zien en voelen. En omdat alles erachter geautomatiseerd is, hoeft er in zo'n winkel alleen nog een verkoper te zitten. Dat is het model dat we willen kopiëren.
 
-En nu het gekke. We lopen niet meer vast op klanten en niet meer op capaciteit. We lopen vast op winkels. Onze cijfers zijn daar heel duidelijk over: een aanvraag binnen 10 kilometer van onze showroom wordt 2 tot 4 keer zo vaak een order als een aanvraag verder weg. Mensen willen zonwering zien en voelen. Met alles geautomatiseerd hoeft er in zo'n winkel alleen nog een verkoper te zitten.
+Concreet: vijf winkels, open vóór het seizoen van 2027, Rotterdam als eerste. We zoeken investeerders met een minimale inleg van 100.000 euro. De onderbouwing (cijfers per week, kosten per winkel, terugverdientijd) deel ik in een gesprek, niet in een post.
 
-Daarom zoeken we twee partners, en ik begin met de belangrijkste.
+En één ding wil ik hier ook gewoon zeggen. Ons inkoopvolume groeide dit jaar met ruim 70%, en het gaat volgend jaar met vijf winkels nog een keer flink omhoog. Dat volume brengen we onder bij de fabrikant die daarin mee wil investeren, in marge, marketing en financieringsruimte. Wie dat is, staat nog niet vast.
 
-Een leverancier die groei ziet als iets om samen in te investeren, niet als iets om af te romen. Een fabrikant of assembleur van zonwering die begrijpt dat een dealer die dit jaar ruim 70% meer inkoopt en volgend jaar vijf winkels opent geen risico is maar een kans, en die daar in marge, marketing en financieringsruimte naar handelt. Wie dat herkent, ik hoor het graag.
-
-En investeerders die vijf winkels willen financieren, het liefst nog vóór het tweede kwartaal van 2027, zodat ze open zijn als het seizoen begint. Rotterdam is de eerste. We denken aan een minimale inleg van 100.000 euro per investeerder. Het model is gemeten, de software staat, de marketing werkt. Wat we nodig hebben is de brandstof om te schalen.
-
-Ken je iemand die hierbij past, of ben je dat zelf? Stuur me een bericht of tag ze hieronder.
+Ben jij die investeerder of die fabrikant, of ken je er een? Stuur me een bericht.
 
 #zonwering #groei #ondernemen #retail #groeikapitaal
+
+### Wat er nog naast de post moet liggen voordat iemand instapt (nu nog niet beschikbaar)
+- Kosten per winkel (huur 350-500 m² à € 80-95/m²/jr = grofweg € 30-45k/jr, inrichting, verkoper) tegenover verwachte orders per winkel, terugverdientijd. Bron huur: onderzoek /admin/winkels. Rest ontbreekt.
+- Marge per order en nettoresultaat 2025 en 2026 t/m augustus. Niet in onze systemen.
+- Structuur van de deal: lening, aandelen of per winkel. Keuze Daimy.

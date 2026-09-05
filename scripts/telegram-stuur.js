@@ -9,7 +9,13 @@ const token = g('TELEGRAM_BOT_TOKEN'), chat = g('TELEGRAM_CHAT_ID');
 const a = process.argv.slice(2);
 (async () => {
   let r;
-  if (a[0] === '--foto') {
+  if (a[0] === '--album') {
+    // --album bijschrift foto1 foto2 ... (max 10)
+    const fotos = a.slice(2, 12); const fd = new FormData(); fd.append('chat_id', chat);
+    fd.append('media', JSON.stringify(fotos.map((f, i) => ({ type: 'photo', media: `attach://f${i}`, caption: i === 0 ? a[1] : undefined }))));
+    fotos.forEach((f, i) => fd.append(`f${i}`, new Blob([fs.readFileSync(f)]), path.basename(f)));
+    r = await fetch(`https://api.telegram.org/bot${token}/sendMediaGroup`, { method: 'POST', body: fd });
+  } else if (a[0] === '--foto') {
     const fd = new FormData();
     fd.append('chat_id', chat);
     fd.append('photo', new Blob([fs.readFileSync(a[1])]), path.basename(a[1]));

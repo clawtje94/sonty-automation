@@ -113,7 +113,7 @@ De interne aanname "showroombezoekers converteren bijna 10x beter" staat nergens
 ## 4. Post (LinkedIn van Joey), versie 3: investeerder eerst, leverancier krijgt het signaal
 Daimy 05-09: "er belt niemand" (salesteam-zin weg), hoofddoel investeerder, leverancier moet wakker worden dat we weggaan.
 
-Ik begon met één montagebus. Vandaag rijden er vijf. En ik zoek geld om er een keten van te maken.
+Ik begon met één montagebus. Vandaag rijden er vijf. Volgend jaar openen we vijf winkels.
 
 De cijfers eerst, want daar kijk je naar. Januari tot en met augustus, tegenover vorig jaar: 69% meer aanvragen, 38% meer verkochte orders en 38% meer gefactureerd. Juli alleen al: 59% meer omzet dan juli vorig jaar. In verkochte orders stonden we eind augustus al boven heel 2025. Gemiddelde order 3.700 euro, ruim 600 Google-reviews met een 4,9.
 

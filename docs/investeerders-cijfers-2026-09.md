@@ -98,10 +98,10 @@ De interne aanname "showroombezoekers converteren bijna 10x beter" staat nergens
 - Conversie na de prijsverhoging ligt lager (5 tot 8% tegen 10 tot 14% in juli). Deels vertraging in de administratie, deels seizoen, maar het is een vraag die een investeerder gaat stellen.
 - Marketingkosten per order (€ 355) zijn niet met 2025 te vergelijken door ontbrekende Google-cijfers.
 
-## 4. Post (LinkedIn), versie 3: investeerder eerst, leverancier krijgt het signaal
+## 4. Post (LinkedIn van Joey), versie 3: investeerder eerst, leverancier krijgt het signaal
 Daimy 05-09: "er belt niemand" (salesteam-zin weg), hoofddoel investeerder, leverancier moet wakker worden dat we weggaan.
 
-Joey begon met één montagebus. Vandaag rijden er vijf. En ik zoek geld om er een keten van te maken.
+Ik begon met één montagebus. Vandaag rijden er vijf. En ik zoek geld om er een keten van te maken.
 
 De cijfers eerst, want daar kijk je naar. Januari tot en met juli, tegenover vorig jaar: 69% meer aanvragen, 38% meer orders, 41% meer orderwaarde. Eind augustus stond 2026 al boven heel 2025. Gemiddelde order 3.700 euro, ruim 600 Google-reviews met een 4,9.
 

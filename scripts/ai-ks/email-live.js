@@ -316,6 +316,19 @@ async function verwerk(ticketId) {
       await zetLabel(ticketId, LABEL.MENS_NODIG);
       return { ticketId, resultaat: 'taalpoort: antwoord tegengehouden (taal klopte niet met klant)' };
     }
+    // OFFERTE-POORT (Daimy 05-09, klant stond in de winkel met een prijs uit een mail zonder
+    // offerte): een prijs per mail mag alleen mét offerte. Tweede slot na de agent-poort.
+    try {
+      const { beoordeel } = require('../lib/offerte-poort.js');
+      const poort = beoordeel({ tekst: res.antwoord, kanaal: 'EMAIL', offerteGemaakt: !!res.offerteGemaakt, offerteBekend: !!res.offerteBekend });
+      if (poort.blok) {
+        await tPost(`/tickets/${ticketId}/messages`, { internal_note: true, message: `${teamTags()} Offerte-poort: ${poort.reden}. Het concept is NIET verstuurd. Graag een echte offerte maken en die naar de klant sturen (prijs alleen als tekst mag niet meer, regel Daimy 05-09).\n\nConcept:\n${schoonKlantTekst(res.antwoord)}` });
+        await tPost(`/tickets/${ticketId}/assign`, { type: 'team', team_id: TEAM_MENS_NODIG });
+        await zetLabel(ticketId, LABEL.MENS_NODIG);
+        logKS({ ticket: ticketId, laatsteKlantBericht: rijen[rijen.length - 1]?.tekst?.slice(0, 200), antwoord: null, offertePoort: poort.reden, concept: schoonKlantTekst(res.antwoord).slice(0, 300), acties: mutaties });
+        return { ticketId, resultaat: 'offerte-poort: prijs zonder offerte tegengehouden (' + poort.reden + ')' };
+      }
+    } catch (e) { if (/offerte-poort/i.test(String(e.message))) throw e; /* poortfout mag verzenden niet breken */ }
     // Antwoorden → in-thread sturen, aan Sunny toewijzen, label, sluiten
     const html = naarHtml(res.antwoord);
     const verstuurd = await tPost(`/tickets/${ticketId}/messages`, { message: html });

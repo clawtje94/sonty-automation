@@ -5,6 +5,7 @@ const Anthropic = require('@anthropic-ai/sdk');
 const CFG = require('./config.js');
 const { buildSystemPrompt } = require('./system-prompt.js');
 const { TOOL_DEFS, runTool } = require('./tools.js');
+const offertePoort = require('../lib/offerte-poort.js');
 
 const apiKey = process.env.ANTHROPIC_API_KEY ||
   fs.readFileSync(path.join(__dirname, '..', '.anthropic-api-key.txt'), 'utf8').trim();
@@ -114,6 +115,7 @@ async function beantwoord(gesprek) {
 
   let usage = { input_tokens: 0, output_tokens: 0 };
   let qaHerkansing = false;
+  let offerteHerkansing = false; // offerte-poort (05-09): max 1 herkansing
 
   for (let iter = 0; iter < 9; iter++) {
     const response = await client.messages.create({
@@ -168,6 +170,27 @@ async function beantwoord(gesprek) {
     // [STIL] zonder escalatie = afsluitend bedankje van de klant → niets sturen én gesprek klaar
     else if (tekst === '[STIL]' || /^\[STIL\]$/m.test(tekst)) { tekst = null; klaar = true; }
 
+    // OFFERTE-POORT (Daimy 05-09): per e-mail nooit alleen een prijs als tekst, er moet een
+    // offerte bij (aangemaakt/aangepast in deze beurt, of een bestaande die wordt toegelicht).
+    // Eén herkansing; daarna eerlijk wachtbericht + overdracht (nooit stilte, nooit losse prijs).
+    if (tekst) {
+      const poort = offertePoort.beoordeel({ tekst, kanaal: ctx.kanaal, offerteGemaakt: !!ctx.offerteGemaakt, offerteBekend: !!ctx.offerteBekend });
+      if (poort.blok) {
+        console.log('  offerte-poort: ' + poort.reden);
+        if (!offerteHerkansing) {
+          offerteHerkansing = true;
+          messages.push({ role: 'assistant', content: response.content });
+          messages.push({ role: 'user', content: offertePoort.herkansingsTekst(poort) });
+          continue;
+        }
+        ctx.acties.push({ type: 'escalatie', reden: 'Offerte-poort: ' + poort.reden + ' (tweemaal). Concept NIET verstuurd; graag zelf de offerte maken en sturen.', stil: true, urgentie: 'normaal' });
+        return {
+          antwoord: 'Ik werk je offerte nu uit, zodat je alles zwart op wit hebt in plaats van alleen een bedrag in een mail. Je ontvangt hem zo snel mogelijk per mail.',
+          acties: ctx.acties, toolCalls, usage, qa: 'offerte-poort: ' + poort.reden, offertePoort: poort, offerteGemaakt: !!ctx.offerteGemaakt, offerteBekend: !!ctx.offerteBekend,
+        };
+      }
+    }
+
     // Kwaliteitspoort: past dit antwoord echt bij het gesprek? (max 1 herkansing)
     if (tekst) {
       const gedaan = ctx.acties.filter(a => a.type !== 'escalatie').map(a => a.samenvatting || a.type);
@@ -207,7 +230,7 @@ async function beantwoord(gesprek) {
         };
       }
     }
-    return { antwoord: tekst, acties: ctx.acties, toolCalls, usage, qa: 'OK', klaar, opgelost };
+    return { antwoord: tekst, acties: ctx.acties, toolCalls, usage, qa: 'OK', klaar, opgelost, offerteGemaakt: !!ctx.offerteGemaakt, offerteBekend: !!ctx.offerteBekend };
   }
 
   ctx.acties.push({ type: 'escalatie', reden: 'Tool-loop limiet bereikt', urgentie: 'normaal' });

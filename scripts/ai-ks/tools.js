@@ -275,6 +275,8 @@ async function runTool(name, input, ctx) {
   }
   if (name === 'klant_opzoeken') {
     const res = await buildKlantContext(input);
+    // Offerte-poort (05-09): onthouden of deze klant al een offerte heeft.
+    try { if ((res?.rp || []).some(r => (r.offertes || []).length)) ctx.offerteBekend = true; } catch { /* poortinfo is extra */ }
     // Komende showroomafspraak meegeven (casus Eveline 31-07: klant stond bij het pand met
     // een afspraak die de bot niet kon zien). Mag klant_opzoeken nooit laten falen.
     try {
@@ -293,6 +295,7 @@ async function runTool(name, input, ctx) {
   }
   if (name === 'offerte_bekijken') {
     const res = await getOfferteInhoud(input.documentId);
+    if (res && !res.error) ctx.offerteBekend = true; // offerte-poort (05-09)
     return JSON.stringify(res).substring(0, 6000);
   }
 /**
@@ -327,6 +330,7 @@ function raaktAnderPrijsboek(ctx, input) {
       const res = await pasOfferteAan(input);
       if (res.error) return JSON.stringify({ status: 'MISLUKT', fout: res.error, opmerking: 'Zeg tegen de klant dat een collega de aanpassing zo snel mogelijk verwerkt. Roep ook escaleren_naar_mens aan.' });
       if (input.itemId) await zetStatus(input.itemId, CFG.RP_STATUS_AI_OFFERTE_VERSTUURD).catch(() => {});
+      ctx.offerteGemaakt = true; // offerte-poort (05-09): echt doorgevoerd, prijs in de mail mag
       return JSON.stringify({ status: 'DOORGEVOERD', ...res, opmerking: 'De offerte is nu echt aangepast. Deel de link met de klant, noem het nieuwe totaal en dat de offerte 7 dagen geldig is.' });
     }
     // Schaduwmodus: alleen voorstel. BELANGRIJK: beloof de klant NIET dat er al iets is aangepast of verstuurd.
@@ -483,6 +487,7 @@ function raaktAnderPrijsboek(ctx, input) {
       const res = await maakLead(input);
       if (res.error) return JSON.stringify({ status: 'MISLUKT', fout: res.error, opmerking: 'Zeg dat een collega de offerte zo snel mogelijk maakt en roep escaleren_naar_mens aan.' });
       registreerPending({ lcId: res.lcId, ticketId: ctx.ticketId, klantNaam: input.naam, producten: input.producten, sonny: !!ctx.sonny, kanaal: ctx.kanaal });
+      ctx.offerteGemaakt = true; // offerte-poort (05-09): lead+offerte staan in de wachtrij, link volgt automatisch
       return JSON.stringify({ status: 'IN_BEHANDELING', opmerking: `De offerte wordt aangemaakt (±5 minuten). De klant krijgt de link daarna AUTOMATISCH ${ctx.kanaal === 'EMAIL' ? 'per mail' : 'hier op WhatsApp'} — zeg dat erbij en beloof geen exacte tijd korter dan dat.` });
     }
     return JSON.stringify({ status: 'VOORGESTELD (schaduwmodus — niet uitgevoerd)', opmerking: 'Er is nog niets aangemaakt. Zeg dat de offerte zo snel mogelijk volgt via een collega.' });

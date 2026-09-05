@@ -1,6 +1,13 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
 
 
+## 05-09 12:30: OFFERTE-POORT E-MAIL (Daimy: "Sunny mag niet meer alleen een prijs geven in de mail")
+- Aanleiding: klant in de winkel met een prijs uit een Sunny-mail, er bestond nog geen offerte.
+- Regel: per e-mail alleen een bedrag als er een offerte bij hoort: in dezelfde beurt offerte_aanmaken/offerte_aanpassen ECHT gelukt (ctx.offerteGemaakt), of klant heeft al een offerte (ctx.offerteBekend via klant_opzoeken/offerte_bekijken) én de mail benoemt "offerte". €75/€25 en bedragen < €100 tellen niet. WhatsApp valt er (nog) buiten: V1 aan Daimy.
+- Bouw: scripts/lib/offerte-poort.js (puur), agent.js (poort vóór QA, 1 herkansing, daarna eerlijk wachtbericht + stille escalatie), email-live.js (tweede slot: notitie + Mens nodig, niet versturen), system-prompt.js (# PRIJZEN + e-mailblok), tools.js (vlaggen). Lab scenario-lab/onderdelen/offerte-poort.js: 1.088 scenario's, 0x FOUT-STIL.
+- Regressie op echte historie (log.jsonl, 1.466 e-mailantwoorden 19-07 t/m 05-09): 402 met een productbedrag, daarvan 89 mét offerte-actie; ~297 zouden onder de nieuwe regel zijn tegengehouden (veel prijsbezwaar-mails met een goedkoper alternatief als losse tekst). V2 aan Daimy: alternatief bij prijsbezwaar direct in de offerte zetten, of eerst vragen.
+- Daemons herstart 12:29 (nl.sonty.email, nl.sonty.sonny). Let op in de logs: "offerte-poort:" regels en Mens-nodig-notities "Offerte-poort:".
+
 ## 04-09 (avond) — Reviewmail ging na AKKOORD i.p.v. na montage: gefixt
 - Klaviyo-flow "Sonty E | Service en review [v0819]" (RSKdNg) triggerde op segment "5. Klant (akkoord gegeven)": E1 na 7 en E2 reviewverzoek na 14 dagen na het akkoord. 12 klanten kregen 2–4 sept een reviewverzoek zonder montage (o.a. Marco Paniagua). Daimy: "alleen na montage".
 - Fix: RSKdNg op draft. Nieuwe flow XQH9i2 "Sonty E | Service en review [v0904 na montage]" LIVE op metric "Montage afgerond" (VHaYmB). Event komt uit `scripts/email/montage-events.js` (Planado montage finished, werkbon niet "niet gereed", e-mail via Planado-contact → telefoon/RP → Gripp; dedupe per job + 90 dagen per e-mail). Draait dagelijks 06:30 als stap 5 in dagelijks.sh. Nulmeting gedaan; 6 events voor montages van 04-09 (E1 op 11-09, E2 op 18-09).

@@ -48,3 +48,14 @@ Alle ads: CTA "Offerte aanvragen", link https://sonty.nl/offerte-aanvragen/?utm_
 1. Daimy: akkoord op set en prijsclaim B1.
 2. Concepten klaarzetten in Ads Manager (via MCP), pas live na "ja".
 3. Na 7 dagen: winnaars dupliceren met tweede foto (102 rolluikfoto's beschikbaar).
+
+## Test-stijlen (05-09, op verzoek Daimy: "bijna alles hetzelfde")
+Vijf visueel andere formules om tegen de winnende kaart-formule te testen. Zelfde feiten (kennisbank-gecheckt), andere vorm. Bestanden: `lever/test-stijlen/{1x1,4x5,9x16}`, spec `stijlen.json`, bouwen met `FONTCONFIG_FILE=data/ads/fonts/fonts.conf node scripts/ad-stijlen.js`.
+| Stijl | Wat het test | Ads |
+|---|---|---|
+| S1 Marker | Handgeschreven kop (Permanent Marker, merkfont) + pijl op full-bleed foto, "authentiek" gevoel | slaapkamer, prijs |
+| S2 Donker | Zwarte brand-look met oranje accent, foto in kader, rustige statement | inbraak, winter |
+| S3 Grid | 4 projectfoto's in één beeld: bewijs van variatie/kleur | kleur, overal |
+| S4 Vraag & antwoord | Grote vraag + antwoordkaart, weinig foto: test of "eerlijk antwoord" beter converteert dan beeld | raam open, rolluik of screen |
+| S5 Minimaal | Alleen foto + één regel, geen vinkjes/knop: test of minder tekst wint | dakkapel, geluid |
+Testopzet: per adset 1 kaart-ad (controle) + 1 teststijl met dezelfde boodschap, 7 dagen, minimaal €150 per variant; winnaar op kosten per lead, niet op klikratio (Video BBQ had 5,7% CTR en €154 per lead).

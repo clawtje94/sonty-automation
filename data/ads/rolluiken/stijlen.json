@@ -1,0 +1,152 @@
+[
+ {
+  "id": "S1-marker-slaapkamer",
+  "stijl": "marker",
+  "foto": "screen-025",
+  "kop": [
+   "Slaapkamer te warm",
+   "of te licht?"
+  ],
+  "sub": [
+   "Rolluik op maat, elektrisch met afstandsbediening.",
+   "100% verduistering, koel in de zomer."
+  ],
+  "pijl": [
+   700,
+   0,
+   60,
+   -120,
+   -90,
+   -220
+  ]
+ },
+ {
+  "id": "S1-marker-prijs",
+  "stijl": "marker",
+  "foto": "screen-034",
+  "kop": [
+   "Wat kost zo'n",
+   "rolluik nou?"
+  ],
+  "sub": [
+   "Slaapkamerraam 120x140: ca. €1.150",
+   "incl. Somfy-motor, afstandsbediening en montage."
+  ],
+  "pijl": [
+   760,
+   0,
+   60,
+   -120,
+   -110,
+   -230
+  ]
+ },
+ {
+  "id": "S2-donker-inbraak",
+  "stijl": "donker",
+  "foto": "screen-045",
+  "label": "Inbraakpreventie",
+  "kop": [
+   "Inbrekers kiezen het",
+   "makkelijkste huis."
+  ],
+  "sub": [
+   "Een gesloten rolluik is een extra barrière.",
+   "Dubbelwandig aluminium, elektrisch, ook via de app."
+  ]
+ },
+ {
+  "id": "S2-donker-winter",
+  "stijl": "donker",
+  "foto": "wa-1679",
+  "label": "Klaar voor de winter",
+  "kop": [
+   "Tot 30% minder",
+   "energieverlies."
+  ],
+  "sub": [
+   "Isolerende luchtlaag voor je raam. Levertijd 8-10 weken.",
+   "Garantie: 3 jaar montage, 5 jaar product, 7 jaar motor."
+  ]
+ },
+ {
+  "id": "S3-grid-kleur",
+  "stijl": "grid",
+  "fotos": [
+   "wa-1916",
+   "wa-1145",
+   "wa-2447",
+   "screen-021"
+  ],
+  "kop": [
+   "Welke kleur past",
+   "bij jouw huis?"
+  ],
+  "sub": [
+   "10 standaardkleuren zonder meerprijs, elke RAL-kleur mogelijk."
+  ]
+ },
+ {
+  "id": "S3-grid-overal",
+  "stijl": "grid",
+  "fotos": [
+   "wa-2811",
+   "wa-1340",
+   "knikarm-033",
+   "wa-2330"
+  ],
+  "kop": [
+   "Elk raam, elke garage,",
+   "elk tuinhuis."
+  ],
+  "sub": [
+   "Op maat tot 4 meter breed. Elektrisch of op zonne-energie."
+  ]
+ },
+ {
+  "id": "S4-vraag-raam",
+  "stijl": "vraag",
+  "foto": "wa-2431",
+  "kop": [
+   "Gaat mijn raam",
+   "nog gewoon open?"
+  ],
+  "antwoord": [
+   "Meestal wel. De inmeter checkt het bij je thuis",
+   "en adviseert opbouw of inbouw, wat bij jouw",
+   "kozijn past. Eerlijk advies, ook als het niet past."
+  ]
+ },
+ {
+  "id": "S4-vraag-screen",
+  "stijl": "vraag",
+  "foto": "overig-025",
+  "kop": [
+   "Rolluik of screen,",
+   "wat moet ik kiezen?"
+  ],
+  "antwoord": [
+   "Rolluik: 100% donker, isolatie, inbraakpreventie",
+   "en geluidsdemping. Screen: daglicht en uitzicht.",
+   "En ja: rolluiken zijn zelfs goedkoper dan screens."
+  ]
+ },
+ {
+  "id": "S5-minimaal-dakkapel",
+  "stijl": "minimaal",
+  "foto": "wa-0024",
+  "kop": [
+   "Eindelijk slapen",
+   "zonder hitte."
+  ]
+ },
+ {
+  "id": "S5-minimaal-geluid",
+  "stijl": "minimaal",
+  "foto": "wa-0751",
+  "kop": [
+   "Minder straatgeluid.",
+   "Beter slapen."
+  ]
+ }
+]

@@ -18,6 +18,18 @@ Heel 2025: 9.198 offertes, 1.110 akkoorden, € 4,15 mln akkoordwaarde.
 2026 t/m augustus (augustus nog niet volledig bijgewerkt): 11.827 offertes, 1.157 akkoorden, € 4,30 mln.
 Dus: eind augustus 2026 al meer orders en meer orderwaarde dan in heel 2025.
 
+### Facturatie uit Gripp (de hele onderneming, incl. btw, gemeten 05-09)
+Bron: Gripp API invoice.get, alle verzonden facturen sinds 2025-01-01 (4.258 stuks), op factuurdatum. Aanbetaling 40% bij akkoord, rest na montage, dus facturatie loopt 2 tot 3 maanden achter op verkoop.
+
+| | 2025 | 2026 | Verschil |
+|---|---|---|---|
+| Jan t/m jul | € 1,91 mln | € 2,74 mln | +44% |
+| Jan t/m aug | € 2,30 mln | € 3,18 mln | +38% |
+| Juli | € 401k | € 638k | +59% |
+| Heel jaar | € 3,76 mln | € 3,25 mln t/m 5 sep | 2025 wordt naar verwachting in oktober gepasseerd |
+
+Let op het verschil met het register: het register telt VERKOCHTE orders (akkoordwaarde) en stond eind augustus boven heel 2025; de facturatie volgt later en staat daar nog € 0,5 mln onder. Beide zijn waar, zeg erbij welke je bedoelt.
+
 ### Teamcapaciteit (wat er aan output bij is gekomen)
 Bron: scripts/capaciteitsmonitor.js op het offerteregister, gedraaid 5 september 2026.
 
@@ -103,7 +115,7 @@ Daimy 05-09: "er belt niemand" (salesteam-zin weg), hoofddoel investeerder, leve
 
 Ik begon met één montagebus. Vandaag rijden er vijf. En ik zoek geld om er een keten van te maken.
 
-De cijfers eerst, want daar kijk je naar. Januari tot en met juli, tegenover vorig jaar: 69% meer aanvragen, 38% meer orders, 41% meer orderwaarde. Eind augustus stond 2026 al boven heel 2025. Gemiddelde order 3.700 euro, ruim 600 Google-reviews met een 4,9.
+De cijfers eerst, want daar kijk je naar. Januari tot en met augustus, tegenover vorig jaar: 69% meer aanvragen, 38% meer verkochte orders en 38% meer gefactureerd. Juli alleen al: 59% meer omzet dan juli vorig jaar. In verkochte orders stonden we eind augustus al boven heel 2025. Gemiddelde order 3.700 euro, ruim 600 Google-reviews met een 4,9.
 
 Het gat tussen die 69% en 38% hebben we deze zomer gedicht. Niet met meer marketing, maar met een bedrijf dat het aankan: van 25 naar 41 orders per week, en een backoffice die nu voor 75% geautomatiseerd is en voor het seizoen van 2027 naar 85% gaat. Onze eigen AI-collega Sunny handelde sinds juli ruim 4.500 klantgesprekken af, meer dan 90% zonder mens, en maakte bijna 300 offertes. Offerte, meetbon, tekenen, aanbetaling, bestelling, werkbon: het loopt door zonder kantoor.
 

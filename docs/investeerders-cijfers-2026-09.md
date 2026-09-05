@@ -123,7 +123,7 @@ Waar we nu op vastlopen is niet vraag en niet capaciteit. Het zijn winkels. Onze
 
 Concreet: vijf winkels, open vóór het seizoen van 2027, Rotterdam als eerste. We zoeken investeerders met een minimale inleg van 100.000 euro. De onderbouwing (cijfers per week, kosten per winkel, terugverdientijd) deel ik in een gesprek, niet in een post.
 
-En één ding wil ik hier ook gewoon zeggen. Ons inkoopvolume groeide dit jaar met ruim 70%, en het gaat volgend jaar met vijf winkels nog een keer flink omhoog. Dat volume brengen we onder bij de fabrikant die daarin mee wil investeren, in marge, marketing en financieringsruimte. Wie dat is, staat nog niet vast.
+En dan de leverancier. Wij zoeken een fabrikant of assembleur van zonwering die groei ziet als iets om samen in te investeren, niet als iets om af te romen. Een dealer die dit jaar ruim 70% meer inkoopt en volgend jaar vijf winkels opent, is geen risico maar een kans. Wie dat herkent, handelt daar in marge, marketing en financieringsruimte naar. Dat volume brengen we onder bij de partij die dat doet, en wie dat wordt, staat nog niet vast.
 
 Ben jij die investeerder of die fabrikant, of ken je er een? Stuur me een bericht.
 

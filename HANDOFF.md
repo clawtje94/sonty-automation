@@ -3999,3 +3999,4 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 
 - 05-09 later: set v2 = 14 ads x 3 formaten + carrousel + 4 video (data/ads/rolluiken/lever, zip 27 MB), claims gecheckt tegen trengo-kennisbank.md; naar Daimy gestuurd, wacht op V2-akkoord. Daarna concepten in Ads Manager via MCP.
 - 05-09 avond: 5 teststijlen (scripts/ad-stijlen.js, fonts in data/ads/fonts, FONTCONFIG_FILE nodig), 10 ads x 3 formaten in lever/test-stijlen. Drive-upload-watcher draait (scripts/drive-upload-ads.js, log data/drive-upload-ads.log) tot map gedeeld is met de service-account.
+- 05-09: Drive-upload OPGELOST: service-account heeft geen quota in persoonlijke Drive; werkwijze = placeholder-bestanden via de chat-Drive-koppeling (eigendom Daimy) + scripts/drive-vul-placeholders.js vult inhoud via SA. 82 bestanden in Ads jan anne > Rolluiken (map-id 1ALGxqnZVEM6HJYs12A6QBgBTj2Q9BpVy).

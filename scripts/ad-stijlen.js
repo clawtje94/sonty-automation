@@ -3,11 +3,12 @@
 // Gebruik: FONTCONFIG_FILE=data/ads/fonts/fonts.conf node scripts/ad-stijlen.js spec.json uitmap [1x1|4x5|9x16]
 const sharp = require('sharp'); const fs = require('fs'); const path = require('path');
 const [specPad, uitmap, format = '1x1'] = process.argv.slice(2);
-const P = '/Users/clawdboot/sonty-website/public/images/portfolio/rolluik/';
+const P = process.env.AD_FOTOMAP || '/Users/clawdboot/sonty-website/public/images/portfolio/rolluik/';
 const F = { '1x1': { W: 1080, H: 1080, top: 0, bottom: 0 }, '4x5': { W: 1080, H: 1350, top: 0, bottom: 0 }, '9x16': { W: 1080, H: 1920, top: 250, bottom: 260 } }[format];
 const { W, H } = F; const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const HV = 'Helvetica Neue, Helvetica, Arial, sans-serif', MK = 'Permanent Marker', OR = '#FF6B00', GEEL = '#FFCC01';
-const foto = (naam, w, h, pos) => sharp(P + naam + '.webp').resize(w, h, { fit: 'cover', position: pos || 'centre' }).toBuffer();
+const fotoPad = n => { const b = P + n; for (const e of ['.webp', '.jpg', '.jpeg', '.png']) if (fs.existsSync(b + e)) return b + e; return b + '.webp'; };
+const foto = (naam, w, h, pos) => sharp(fotoPad(naam)).resize(w, h, { fit: 'cover', position: pos || 'centre' }).toBuffer();
 const rond = (w, h, r) => Buffer.from(`<svg width="${w}" height="${h}"><rect width="${w}" height="${h}" rx="${r}" fill="#fff"/></svg>`);
 async function fotoRond(naam, w, h, r, pos) { return sharp(await foto(naam, w, h, pos)).composite([{ input: rond(w, h, r), blend: 'dest-in' }]).png().toBuffer(); }
 const cta = (x, y, w, tekst, kleur = OR) => `<rect x="${x}" y="${y}" width="${w}" height="84" rx="42" fill="${kleur}"/><text x="${x + w / 2}" y="${y + 55}" text-anchor="middle" font-family="${HV}" font-size="32" font-weight="700" fill="#fff">${esc(tekst)}</text>`;

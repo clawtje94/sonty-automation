@@ -15,6 +15,10 @@ const a = process.argv.slice(2);
     fd.append('media', JSON.stringify(fotos.map((f, i) => ({ type: 'photo', media: `attach://f${i}`, caption: i === 0 ? a[1] : undefined }))));
     fotos.forEach((f, i) => fd.append(`f${i}`, new Blob([fs.readFileSync(f)]), path.basename(f)));
     r = await fetch(`https://api.telegram.org/bot${token}/sendMediaGroup`, { method: 'POST', body: fd });
+  } else if (a[0] === '--video' || a[0] === '--bestand') {
+    const fd = new FormData(); fd.append('chat_id', chat); const veld = a[0] === '--video' ? 'video' : 'document';
+    fd.append(veld, new Blob([fs.readFileSync(a[1])]), path.basename(a[1])); if (a[2]) fd.append('caption', a[2]);
+    r = await fetch(`https://api.telegram.org/bot${token}/send${veld === 'video' ? 'Video' : 'Document'}`, { method: 'POST', body: fd });
   } else if (a[0] === '--foto') {
     const fd = new FormData();
     fd.append('chat_id', chat);

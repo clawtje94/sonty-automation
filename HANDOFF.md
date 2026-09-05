@@ -3989,3 +3989,5 @@ Digitale meetbon op sonty.nl (Planado kan geen conditionele velden; eigen app = 
 ## 2026-09-05 Meta Ads rolluiken
 - 8 rolluik-ads gebouwd (data/ads/rolluiken, spec.json, scripts/ad-kaart.js) op winnende formule; flow + Meta-teksten in docs/meta-ads-rolluiken-flow.md; album naar Daimy op Telegram. Wacht op akkoord (V2) en OpenAI-tegoed (V1). Volgende: concept klaarzetten in Ads Manager, video-varianten, 4:5/9:16.
 - Nieuwe helpers: scripts/telegram-stuur.js (tekst/foto/album), scripts/openai-beeld.js (OPENAI_API_KEY in .env).
+
+- 05-09 later: set v2 = 14 ads x 3 formaten + carrousel + 4 video (data/ads/rolluiken/lever, zip 27 MB), claims gecheckt tegen trengo-kennisbank.md; naar Daimy gestuurd, wacht op V2-akkoord. Daarna concepten in Ads Manager via MCP.

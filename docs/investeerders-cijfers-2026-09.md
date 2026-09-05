@@ -110,11 +110,11 @@ Die softwarelaag is het echte verhaal. Onze backoffice is nu voor 75% geautomati
 
 En nu het gekke. We lopen niet meer vast op klanten en niet meer op capaciteit. We lopen vast op winkels. Onze cijfers zijn daar heel duidelijk over: een aanvraag binnen 10 kilometer van onze showroom wordt 2 tot 4 keer zo vaak een order als een aanvraag verder weg. Mensen willen zonwering zien en voelen. Met alles geautomatiseerd hoeft er in zo'n winkel alleen nog een verkoper te zitten.
 
-Daarom zoeken we twee partners.
+Daarom zoeken we twee partners, en ik begin met de belangrijkste.
 
-Een investeerder die vijf winkels wil financieren, het liefst nog vóór het tweede kwartaal van 2027, zodat ze open zijn als het seizoen begint. Rotterdam is de eerste. Het model is gemeten, de software staat, de marketing werkt. Wat we nodig hebben is de brandstof om te schalen.
+Een leverancier die groei ziet als iets om samen in te investeren, niet als iets om af te romen. Een fabrikant of assembleur van zonwering die begrijpt dat een dealer die dit jaar ruim 70% meer inkoopt en volgend jaar vijf winkels opent geen risico is maar een kans, en die daar in marge, marketing en financieringsruimte naar handelt. Wie dat herkent, ik hoor het graag.
 
-En een leverancier die groei ziet als iets om samen in te investeren, niet als iets om af te romen. Een fabrikant of assembleur van zonwering die begrijpt dat een dealer die dit jaar ruim 70% meer inkoopt en volgend jaar vijf winkels opent geen risico is maar een kans, en die daar in marge, marketing en financieringsruimte naar handelt.
+En investeerders die vijf winkels willen financieren, het liefst nog vóór het tweede kwartaal van 2027, zodat ze open zijn als het seizoen begint. Rotterdam is de eerste. We denken aan een minimale inleg van 100.000 euro per investeerder. Het model is gemeten, de software staat, de marketing werkt. Wat we nodig hebben is de brandstof om te schalen.
 
 Ken je iemand die hierbij past, of ben je dat zelf? Stuur me een bericht of tag ze hieronder.
 

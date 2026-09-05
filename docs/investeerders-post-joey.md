@@ -12,7 +12,7 @@ Binnenkort komt daar een nieuwe website bij met eigen configuratoren en AI-visua
 
 Waarom er dan geen eigen kapitaal klaarligt? Omdat we elke verdiende euro direct hebben teruggestopt in marketing en naamsbekendheid. Dat is gelukt: in onze regio kent iedereen Sonty. Maar binnen 10 kilometer van de showroom slagen we op 26% van de aanvragen, en daarbuiten een stuk minder. Mensen willen zonwering zien en voelen. Marketing werkt pas echt met een winkel om de hoek. Meer winkels is dus geen luxe, het is de manier om die 26% verder omhoog te krijgen. En omdat alles erachter geautomatiseerd is, hoeft er in zo'n winkel alleen nog een verkoper te zitten.
 
-Daarom zijn we klaar voor de volgende stap. Rotterdam staat op de planning en daarna willen we door, naar vijf winkels vóór het seizoen van 2027. Daarvoor zoeken we financiers die groeikapitaal willen inzetten om nieuwe vestigingen te openen en van Sonty een keten te maken. Ook particuliere investeerders zijn welkom, vanaf 100.000 euro. Het model bewijst zich al, de marketing werkt, de vraag is er. Wat we nodig hebben is de brandstof om sneller te schalen.
+Daarom zijn we klaar voor de volgende stap: meerdere winkels tegelijk, vijf in totaal, open vóór het seizoen van 2027. Daarvoor zoeken we financiers die groeikapitaal willen inzetten om nieuwe vestigingen te openen en van Sonty een keten te maken. Ook particuliere investeerders zijn welkom, vanaf 100.000 euro. Het model bewijst zich al, de marketing werkt, de vraag is er. Wat we nodig hebben is de brandstof om sneller te schalen.
 
 Ken je iemand die hierbij past, of ben je dat zelf? Stuur me een bericht.
 

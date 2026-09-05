@@ -1,0 +1,380 @@
+{
+ "gemaakt": "2026-09-05T12:12:03.400Z",
+ "additions": {
+  "/images/portfolio-extra/overig/overig-132.webp": {
+   "cat": "knikarm",
+   "alt": "Projectfoto Sonty"
+  },
+  "/images/portfolio-extra/overig/overig-024.webp": {
+   "cat": "raamdeco",
+   "alt": "Projectfoto Sonty"
+  },
+  "/images/portfolio-extra/overig/overig-122.webp": {
+   "cat": "markies",
+   "alt": "Projectfoto Sonty"
+  },
+  "/images/portfolio-extra/overig/overig-135.webp": {
+   "cat": "raamdeco",
+   "alt": "Projectfoto Sonty"
+  },
+  "/images/portfolio-extra/overig/overig-134.webp": {
+   "cat": "knikarm",
+   "alt": "Projectfoto Sonty"
+  },
+  "/images/portfolio-extra/showroom/showroom-008.webp": {
+   "cat": "zakelijk",
+   "alt": "Projectfoto Sonty"
+  },
+  "/images/portfolio-extra/showroom/showroom-007.webp": {
+   "cat": "zakelijk",
+   "alt": "Projectfoto Sonty"
+  }
+ },
+ "overrides": {
+  "/images/portfolio/knikarm/knikarm-026.webp": {
+   "cat": "uitvalscherm"
+  },
+  "/images/portfolio/showroom/showroom-037.webp": {
+   "hidden": true
+  },
+  "/images/portfolio/knikarm/knikarm-002.webp": {
+   "cat": "markies"
+  },
+  "/images/portfolio/screen/screen-004.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/screen-005.webp": {
+   "cat": "knikarm"
+  },
+  "/images/portfolio/screen/screen-016.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/screen-019.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/screen-020.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/screen-022.webp": {
+   "cat": "raamdeco"
+  },
+  "/images/portfolio/screen/screen-027.webp": {
+   "cat": "rolluik",
+   "also": [
+    "knikarm"
+   ]
+  },
+  "/images/portfolio/screen/screen-030.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/screen-033.webp": {
+   "cat": "knikarm"
+  },
+  "/images/portfolio/screen/screen-040.webp": {
+   "also": [
+    "knikarm"
+   ]
+  },
+  "/images/portfolio/screen/screen-042.webp": {
+   "cat": "knikarm"
+  },
+  "/images/portfolio/screen/screen-044.webp": {
+   "cat": "knikarm"
+  },
+  "/images/portfolio/screen/screen-046.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/screen-048.webp": {
+   "cat": "knikarm"
+  },
+  "/images/portfolio/screen/screen-050.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/screen-051.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/screen-055.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/screen-060.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/screen-061.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/screen-066.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/showroom/showroom-006.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/showroom/showroom-009.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/showroom/showroom-016.webp": {
+   "hidden": true
+  },
+  "/images/portfolio/showroom/showroom-018.webp": {
+   "hidden": true
+  },
+  "/images/portfolio/showroom/showroom-021.webp": {
+   "hidden": true
+  },
+  "/images/portfolio/showroom/showroom-040.webp": {
+   "hidden": true
+  },
+  "/images/portfolio/showroom/showroom-042.webp": {
+   "hidden": true
+  },
+  "/images/portfolio/werk/werk-048.webp": {
+   "cat": "knikarm"
+  },
+  "/images/portfolio/werk/werk-050.webp": {
+   "cat": "knikarm"
+  },
+  "/images/portfolio/werk/werk-051.webp": {
+   "cat": "screen"
+  },
+  "/images/portfolio/markies/overig-006.webp": {
+   "also": [
+    "rolluik"
+   ]
+  },
+  "/images/portfolio/markies/overig-127.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/rolluik/overig-026.webp": {
+   "cat": "screen"
+  },
+  "/images/portfolio/rolluik/overig-123.webp": {
+   "cat": "screen"
+  },
+  "/images/portfolio/rolluik/pergola-018.webp": {
+   "cat": "screen"
+  },
+  "/images/portfolio/rolluik/screen-062.webp": {
+   "cat": "raamdeco"
+  },
+  "/images/portfolio/rolluik/screen-064.webp": {
+   "cat": "screen"
+  },
+  "/images/portfolio/rolluik/screen-068.webp": {
+   "cat": "screen"
+  },
+  "/images/portfolio/screen/overig-012.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/raamdeco-011.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/knikarm/wa-0430.webp": {
+   "cat": "uitvalscherm"
+  },
+  "/images/portfolio/knikarm/wa-0472.webp": {
+   "cat": "veranda"
+  },
+  "/images/portfolio/knikarm/wa-0874.webp": {
+   "cat": "pergola"
+  },
+  "/images/portfolio/knikarm/wa-1364.webp": {
+   "cat": "uitvalscherm"
+  },
+  "/images/portfolio/knikarm/wa-1851.webp": {
+   "cat": "veranda"
+  },
+  "/images/portfolio/knikarm/wa-2452.webp": {
+   "cat": "pergola"
+  },
+  "/images/portfolio/knikarm/wa-2646.webp": {
+   "cat": "pergola"
+  },
+  "/images/portfolio/knikarm/wa-2841.webp": {
+   "cat": "veranda"
+  },
+  "/images/portfolio/knikarm/wa-2924.webp": {
+   "cat": "uitvalscherm"
+  },
+  "/images/portfolio/knikarm/wa-3013.webp": {
+   "cat": "pergola"
+  },
+  "/images/portfolio/knikarm/wa-3138.webp": {
+   "cat": "uitvalscherm"
+  },
+  "/images/portfolio/markies/wa-0122.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/markies/wa-0242.webp": {
+   "cat": "uitvalscherm"
+  },
+  "/images/portfolio/markies/wa-0456.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/markies/wa-0514.webp": {
+   "cat": "knikarm"
+  },
+  "/images/portfolio/markies/wa-0517.webp": {
+   "cat": "uitvalscherm"
+  },
+  "/images/portfolio/markies/wa-0669.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/markies/wa-0688.webp": {
+   "also": [
+    "uitvalscherm"
+   ]
+  },
+  "/images/portfolio/markies/wa-0893.webp": {
+   "cat": "uitvalscherm"
+  },
+  "/images/portfolio/markies/wa-1077.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/markies/wa-1357.webp": {
+   "cat": "veranda"
+  },
+  "/images/portfolio/markies/wa-1860.webp": {
+   "cat": "uitvalscherm"
+  },
+  "/images/portfolio/markies/wa-2509.webp": {
+   "cat": "knikarm"
+  },
+  "/images/portfolio/markies/wa-2557.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/markies/wa-2585.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/markies/wa-2729.webp": {
+   "cat": "knikarm",
+   "also": [
+    "screen"
+   ]
+  },
+  "/images/portfolio/markies/wa-3125.webp": {
+   "cat": "veranda"
+  },
+  "/images/portfolio/pergola/wa-0113.webp": {
+   "cat": "screen"
+  },
+  "/images/portfolio/pergola/wa-1334.webp": {
+   "cat": "screen"
+  },
+  "/images/portfolio/pergola/wa-1754.webp": {
+   "cat": "pergola"
+  },
+  "/images/portfolio/pergola/wa-2435.webp": {
+   "cat": "veranda"
+  },
+  "/images/portfolio/pergola/wa-3006.webp": {
+   "cat": "pergola"
+  },
+  "/images/portfolio/screen/wa-0464.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-0555.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-0571.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-0684.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-0811.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-0818.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-0947.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/screen/wa-0950.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/screen/wa-0956.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-0969.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-0979.webp": {
+   "cat": "uitvalscherm"
+  },
+  "/images/portfolio/screen/wa-0987.webp": {
+   "cat": "uitvalscherm"
+  },
+  "/images/portfolio/screen/wa-1034.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-1183.webp": {
+   "cat": "veranda"
+  },
+  "/images/portfolio/screen/wa-1286.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-1898.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-1927.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-1939.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-1965.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/screen/wa-2162.webp": {
+   "cat": "knikarm"
+  },
+  "/images/portfolio/screen/wa-2200.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-2403.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-2414.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-2418.webp": {
+   "cat": "raamdeco"
+  },
+  "/images/portfolio/screen/wa-2482.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-2496.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-2516.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-2522.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-2738.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-2869.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-2895.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-2904.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/screen/wa-2935.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/screen/wa-2939.webp": {
+   "cat": "zakelijk"
+  },
+  "/images/portfolio/screen/wa-3020.webp": {
+   "cat": "rolluik"
+  },
+  "/images/portfolio/showroom/wa-3127.webp": {
+   "cat": "pergola"
+  }
+ }
+}

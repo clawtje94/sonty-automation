@@ -179,17 +179,23 @@ async function haalOngelezen(page, token, mailbox) {
   // opent, moet hij alsnog verwerkt worden. We scannen alles van de laatste 3 dagen; het eigen
   // verwerkings-geheugen (state op InternetMessageId) voorkomt dubbel werk. De gelezen-status
   // is puur een signaal voor mensen (verwerkt = gelezen, onverwerkbaar = ongelezen).
-  const vanaf = new Date(Date.now() - 3 * 86400000).toISOString().slice(0, 19) + 'Z';
+  // INHAAL-MODUS (07-09): INHAAL_ORDERNRS=2609286,2607509 INHAAL_VANAF=2026-06-01 → doorzoekt de
+  // HELE mailbox (ook submappen zoals "Sunmaster") vanaf die datum en houdt alleen mails over
+  // waarvan het onderwerp een van die ordernummers bevat. Zonder env-var: ongewijzigd gedrag.
+  const INHAAL = (process.env.INHAAL_ORDERNRS || '').split(',').map((x) => x.trim()).filter(Boolean);
+  const vanaf = INHAAL.length ? `${process.env.INHAAL_VANAF || '2026-06-01'}T00:00:00Z` : new Date(Date.now() - 3 * 86400000).toISOString().slice(0, 19) + 'Z';
   const alle = [];
-  for (let skip = 0; skip < 1000; skip += 50) {
-    const url = `https://outlook.office.com/api/v2.0/users/${mailbox}/MailFolders/Inbox/messages?$filter=ReceivedDateTime ge ${vanaf}&$top=50&$skip=${skip}&$select=Subject,From,ReceivedDateTime,Body,IsRead,HasAttachments,InternetMessageId&$orderby=ReceivedDateTime asc`;
+  for (let skip = 0; skip < (INHAAL.length ? 6000 : 1000); skip += 50) {
+    const url = `https://outlook.office.com/api/v2.0/users/${mailbox}${INHAAL.length ? '' : '/MailFolders/Inbox'}/messages?$filter=ReceivedDateTime ge ${vanaf}&$top=50&$skip=${skip}&$select=Subject,From,ReceivedDateTime,Body,IsRead,HasAttachments,InternetMessageId&$orderby=ReceivedDateTime asc`;
     const r = await page.request.get(url, { headers: H });
     if (!r.ok()) { console.log(`  ${mailbox}: fout ${r.status()}`); break; }
     const batch = ((await r.json()).value) || [];
     alle.push(...batch);
     if (batch.length < 50) break;
   }
-  return alle.map((m) => ({
+  const gefilterd = INHAAL.length ? alle.filter((m) => INHAAL.some((nr) => (m.Subject || '').includes(nr))) : alle;
+  if (INHAAL.length) console.log(`  ${mailbox}: inhaal-modus, ${alle.length} mails gescand, ${gefilterd.length} met gevraagd ordernr`);
+  return gefilterd.map((m) => ({
     id: m.Id, imid: m.InternetMessageId || m.Id, mailbox, hasAtt: !!m.HasAttachments,
     subject: (m.Subject || '').replace(/^(FW|RE|Fwd|Antw):\s*/i, '').trim(),
     from: m.From?.EmailAddress?.Address || '',
@@ -379,8 +385,10 @@ const LOCK = '/Users/clawdboot/sonty/data/planning-mail.lock';
       const f = String((rows[i] || [])[9] ?? '').trim();
       if (!f) continue;
       if (f === String(ordernr) || f === kaal) return i;
-      const fd = f.replace(/\D/g, ''), kd = kaal.replace(/\D/g, '');
-      if (fd.length >= 7 && kd.length >= 7 && (kd.startsWith(fd) || fd.startsWith(kd.slice(0, 7)))) return i;
+      // 07-09: alleen op héél ordernummer koppelen (los token in de cel, bv. "2607947 / 2607948" of
+      // "CV2607947"). De oude 7-cijfer-prefixmatch plakte Sunmaster 2608675 op Toppoint 26086755.
+      const kd = kaal.replace(/\D/g, '');
+      if (kd.length >= 5 && f.split(/\D+/).some((tok) => tok === kd)) return i;
     }
     return -1;
   };

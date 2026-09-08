@@ -1,18 +1,23 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-08, nieuwe inmeter Patrick)
 
-## 08-09 (avond): NIEUWE INMETER PATRICK — START MA 21-09, INVENTARISATIE (nog niks live)
-- Daimy: Patrick, start 21-09, ma-do 08:00-17:00, spreekt Engels, woont Nieuw-Beijerland (start+eind thuis). M365-login
-  adviseur1@sonty.nl ("Patrick | Sonty") in memory reference_sonty_credentials.
-- Gevraagd (Telegram V1-V5): huisadres, achternaam+06, akkoord Planado-aanmaak + agenda delen met joey@, Engels-regel
-  (Sjoerd én Patrick?), foto. WACHT OP DAIMY.
-- Wat er moet gebeuren zodra antwoord binnen is (12 plekken): data/inmeters-rooster.json (placeholder "Nieuwe inmeter" vervangen,
-  startDatum 2026-09-21, eigenAgendaEmail adviseur1@), INMETERS in cron-inmeten-planner.js (+ uuid Planado), lib/inmeet-tijden.js
-  Engels-filter, planner regel 1381, collega-antwoord.js + cron-inmeet-herinneringen.js + cron-outlook-planado-sync.js (uuid-maps),
-  wa-luisteraar.js COLLEGAS (06), vakanties-collect.js (volledige naam + mail), website: lib/meetbon/inmeters.ts (+ Trengo-kanaal
-  adviseur1@ voor offerte-mail namens inmeter), personeel-dashboard contracturen (36), pipeline UITVOERDERS, bedankt-pagina tekst,
-  ai-ks system-prompt regel "inmeters ma-do 09-15 / Engels alleen Sjoerd". Extern: Planado-medewerker, Bookings-staff, Outlook-agenda
-  gedeeld met joey@ (anders gooit laadEigenAgendas() "niet gevonden — niet plannen" en stopt ALLE planning).
-
+## 08-09 (middag): NIEUWE INMETER PATRICK FITTERS — INGERICHT, START MA 21-09 (Daimy 08-09 via chat)
+- Feiten: Patrick Fitters, ma-do 08:00-17:00, spreekt Engels, start+eind thuis Kerkdoel 9, 3264 AG Nieuw-Beijerland. M365 adviseur1@sonty.nl
+  (startwachtwoord was verlopen → eerste login gedaan, nieuw wachtwoord in memory reference_sonty_credentials; GEEN MFA gevraagd).
+- Rooster data/inmeters-rooster.json is nu DE bron: Patrick met startDatum 2026-09-21, engels:true (Sjoerd ook), eigenAgendaEmail
+  adviseur1@, uuidPlanado 1f1ab7fe-4b47-6390-befe-022d6b897a01. INMETERS in cron-inmeten-planner.js, inmeet-herinneringen, outlook-planado-
+  sync, collega-antwoord en de Engels-filters (planner inmetersVoor + lib/inmeet-tijden) lezen het rooster; uuidPlanado null = telt niet mee.
+- Planado: buitendienstmedewerker aangemaakt + uitnodiging geactiveerd (login adviseur1@ / wachtwoord in memory). GEEN betaalde licentie
+  (12/12 in gebruik) → Daimy moet 13e licentie kopen (Instellingen → Abonnement beheren), anders geen app/opdrachten voltooien.
+- Outlook: Patricks agenda gedeeld met joey@ ("Kan alle details weergeven"); staat niet als tab in joeys lijst, daarom fallback in
+  laadEigenAgendas(): niet in kalenderlijst → /users/<mail>/calendarView rechtstreeks (bewezen met testafspraak: onderwerp zichtbaar).
+- Verificatie (scratch check-patrick.js): werkdagen Patrick eerste 21-09, alleen ma-do; slots Oud-Beijerland 21-09 08:00/12:30 (+27 min);
+  Joey/Sjoerd ongewijzigd; tests/eigen-agenda-regressie 6/6 groen. Daemons inmeet-verzoeken, sonny, inmeet-dashboard herstart.
+- Website ce4d06c: meetbon-inmeters (Patrick/adviseur1@), contracturen "Patrick Fitters" 36, pipeline-uitvoerder, bedankt-pagina
+  "Joey, Sjoerd of Patrick". Sunny-prompt: "Engels = Sjoerd of Patrick", inmeters "ma-do overdag".
+- OPEN: (1) 06-nummer Patrick (wa-luisteraar COLLEGAS, Planado-profiel, WhatsApp-assistent); (2) Planado-licentie; (3) Trengo-mailkanaal voor
+  adviseur1@ + env MEETBON_INMETER_KANALEN, anders kan meetbon-offerte NIET namens Patrick gemaild worden (bewust geen terugval);
+  (4) Bookings-staff "Sonty": Graph geeft 409 "already exists" maar Patrick staat niet in de lijst → via Bookings-UI toevoegen;
+  (5) testafspraak "TEST-CLAUDE zichtbaarheid" 08-09 12:30 in Patricks agenda: DELETE gaf 204 maar blijft staan (alleen vandaag, geen effect).
 
 ## 05-09 14:15: VERZENDFOUT SLUIT NOOIT MEER EEN TICKET (V3 Daimy: "ja, belangrijk dat het gewoon goed gaat")
 - Bouw: scripts/lib/mail-verzend-besluit.js (puur naVerzending), email-live.js: mislukte tPost → ticket OPEN, team Mens nodig + label, notitie met het klaarstaande concept, Telegram; label "offerte verstuurd" alleen als echt verstuurd. Lab scenario-lab/onderdelen/verzend-mislukt.js: 30 scenario's (volledige beslisruimte), 0x FOUT-STIL. Daemon nl.sonty.email herstart 14:12.

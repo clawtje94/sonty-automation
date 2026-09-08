@@ -25,7 +25,7 @@ const { ADMIN_PASSWORD, KLAVIYO_API_KEY } = require('./secrets.js');
 const GROEP = '31628209480-1583527515@g.us';
 // Read-only assistent (Daimy 19-08): ALLEEN deze twee nummers krijgen antwoord op
 // opzoekvragen; alle andere prive-berichten worden alleen als grapverzoek gelogd.
-const COLLEGAS = { '31628209480@s.whatsapp.net': 'Joey', '31641102319@s.whatsapp.net': 'Sjoerd', '31683500506@s.whatsapp.net': 'Daimy' };
+const COLLEGAS = { '31628209480@s.whatsapp.net': 'Joey', '31641102319@s.whatsapp.net': 'Sjoerd', '31626221864@s.whatsapp.net': 'Patrick', '31683500506@s.whatsapp.net': 'Daimy' };
 const DATA = path.join(__dirname, '..', 'data');
 const OUTBOX = path.join(DATA, 'wa-outbox');
 const PIDBESTAND = path.join(DATA, 'wa-luisteraar.pid');
@@ -53,7 +53,7 @@ function bewaarGeschiedenis(rec) {
 }
 // Weergavenamen zoals de contacten op Sunny's telefoon zijn opgeslagen (19-08): de
 // reserve-route zoekt de chat in WhatsApp Desktop op naam.
-const DESKTOPNAAM = { Daimy: 'Daimy Boot', Joey: 'Joey Engelen', Sjoerd: 'Sjoerd' };
+const DESKTOPNAAM = { Daimy: 'Daimy Boot', Joey: 'Joey Engelen', Sjoerd: 'Sjoerd', Patrick: 'Patrick Fitters' };
 const CATS = ['knikarm', 'uitvalscherm', 'screen', 'rolluik', 'pergola', 'veranda', 'markies', 'raamdeco', 'behang', 'horren', 'vloeren', 'showroom', 'werk', 'zakelijk'];
 const SITE = { Authorization: 'Bearer ' + ADMIN_PASSWORD, 'Content-Type': 'application/json' };
 const MIN_SCORE = 6;

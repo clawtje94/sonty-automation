@@ -83,7 +83,8 @@
       "engels": true,
       "eigenAgendaEmail": "adviseur1@sonty.nl",
       "startAdres": "Kerkdoel 9, 3264 AG, Nieuw-Beijerland",
-      "eindAdres": "Kerkdoel 9, 3264 AG, Nieuw-Beijerland"
+      "eindAdres": "Kerkdoel 9, 3264 AG, Nieuw-Beijerland",
+      "telefoon": "0626221864"
     }
   },
   "let_op_startadres": "startAdres = vertrekpunt 's ochtends, eindAdres = waar de dag eindigt (Joey: winkel Frijdastraat, Sjoerd: thuis Woerden). null = magazijn Noordeindseweg 256a Berkel.",

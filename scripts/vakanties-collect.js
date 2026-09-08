@@ -47,6 +47,7 @@ const ALIAS = { djo: 'Joey Engelen', jor: 'Jorren Plugge' };
 const PERSONEN = [
   { naam: 'Sjoerd Hoogduin', email: 'sjoerd@sonty.nl', rol: 'inmeter' },
   { naam: 'Joey Engelen', email: 'joey@sonty.nl', rol: 'inmeter' },
+  { naam: 'Patrick Fitters', email: 'adviseur1@sonty.nl', rol: 'inmeter' }, // start 21-09-2026
   { naam: 'Yudi den Heijer', email: 'yudi@sonty.nl', rol: 'montage' },
   { naam: 'Mick', email: 'mick@sonty.nl', rol: 'montage' },
   { naam: 'Marvin', email: 'marvin@sonty.nl', rol: 'montage' },

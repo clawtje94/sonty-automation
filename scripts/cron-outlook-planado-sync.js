@@ -30,10 +30,9 @@ const VERFRIS_ALLEEN = (process.argv.find((a) => a.startsWith('--verfris-alleen=
 // Klant-werkbon tekenlink (Daimy 03-09): zelfde HMAC als sonty-website lib/werkbon/klant-deel.ts (geheim = admin-wachtwoord).
 const tekenLinkVoor = (uuid) => { try { const g = require('./secrets.js').ADMIN_PASSWORD; const t = crypto.createHmac('sha256', g).update('werkbon:' + uuid).digest('hex').slice(0, 24); return `https://sonty-website.vercel.app/werkbon/${uuid}?t=${t}`; } catch { return null; } };
 
-const INMETERS = {
-  Joey: '1f122cfa-17a2-6580-8257-7e80f004db9c',
-  Sjoerd: '1f122d19-e43e-6da0-8ffb-661a4ff9bb36',
-};
+// naam -> uuid uit het rooster (één bron; Patrick erbij 08-09-2026)
+const INMETERS = Object.fromEntries(Object.entries(require('../data/inmeters-rooster.json').inmeters)
+  .filter(([, v]) => v.uuidPlanado).map(([naam, v]) => [naam, v.uuidPlanado]));
 const TYPES = {
   inmeet: '1f11c802-6340-6680-9d06-7e73cee772e4',
   montage: '1f11c802-634b-6ef0-9d06-7e73cee772e4',
@@ -127,6 +126,15 @@ function klantNaamUit(subject) {
 
 function soort(subject) {
   const s = (subject || '').toLowerCase();
+  // Winkeldienst = eigen dienstblok "<medewerker> winkel" (bv. "JOEY WINKEL"), ook
+  // onder "Inmeten Sonty -". ALLEEN als de eerste naam een eigen medewerker is, zodat
+  // een klant met achternaam Winkel ("Robbert Winkel", "Winkelman") gewoon inmeet
+  // blijft. Daimy 08-09: de bot mag Joey niet boeken tijdens winkeldienst (de planner
+  // regelt dat al); zo'n blok hoeft geen Planado-job en geen audit-melding.
+  const naam = klantNaamUit(subject);
+  const eerste = (naam.split(/\s+/)[0] || '');
+  const eersteCap = eerste.charAt(0).toUpperCase() + eerste.slice(1).toLowerCase();
+  if (/\bwinkel\b/i.test(naam) && (INMETERS[eersteCap] || MONTEURS[eersteCap])) return 'winkel';
   if (/inmeet|inmeten/.test(s)) return 'inmeet';
   if (/montage/.test(s)) return 'montage';
   if (/service/.test(s)) return 'service';           // service-afspraken mee (Daimy 20-08)
@@ -238,7 +246,11 @@ async function planadoJson(url, opties = undefined) {
 async function planadoJobs() {
   const alles = [];
   let after = null;
-  for (let i = 0; i < 30; i++) {
+  // Alle pagina's laden tot leeg (safety-cap 100 = 2000 jobs). Stond op 30 (=600),
+  // maar Planado heeft er 714 (08-09): de laatste 114 vielen buiten het dedup-venster,
+  // waardoor de sync bestaande jobs opnieuw AANMAAKTE → 422 "external_id in gebruik"
+  // (25 inmeet-afspraken faalden elke run) en de audit ze als "NIET IN PLANADO" zag.
+  for (let i = 0; i < 100; i++) {
     const u = 'https://api.planadoapp.com/v2/jobs' + (after ? '?after=' + after : '');
     const d = await planadoJson(u);
     const l = d.jobs || [];
@@ -277,7 +289,9 @@ async function main() {
     .filter((e) => !e.IsCancelled && !/geannuleerd|canceled|cancelled/i.test(e.Subject || '') && !NIET_KLUS.test(e.Subject || ''))
     .map((e) => ({ e, voornaam: wie(e).split(' ')[0] }))
     .filter((x) => {
-      if (INMETERS[x.voornaam]) return true;
+      // Winkeldienst-blok ("<inmeter> winkel") is geen klus: niet naar Planado (de
+      // planner ziet het al als bezet in Joey's agenda). Daimy 08-09.
+      if (INMETERS[x.voornaam]) return soort(x.e.Subject) !== 'winkel';
       if (MONTAGE_AAN && TEAM_SOORTEN.has(soort(x.e.Subject))) {
         if (MONTEURS[x.voornaam]) return true;
         onbekendTeam[x.voornaam || '?'] = (onbekendTeam[x.voornaam || '?'] || 0) + 1;

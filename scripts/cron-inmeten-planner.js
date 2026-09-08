@@ -22,11 +22,11 @@ const GRIP_INVULLEN = 'f895f76f-175e-4ea0-bb7c-6cc2f4e5d846';
 const PLANADO_KEY = fs.readFileSync(path.join(__dirname, 'planado-api-key.txt'), 'utf8').trim();
 const { PLANNING_TG_TOKEN: TG_TOKEN, PLANNING_TG_CHAT: TG_CHAT } = require('./lib/telegram-planning.js');
 
-// De twee inmeters waarmee we starten (Daimy 2026-08-04).
-const INMETERS = [
-  { naam: 'Sjoerd', uuid: '1f122d19-e43e-6da0-8ffb-661a4ff9bb36' },
-  { naam: 'Joey', uuid: '1f122cfa-17a2-6580-8257-7e80f004db9c' },
-];
+// Inmeters komen uit data/inmeters-rooster.json (één bron, Patrick erbij 08-09-2026).
+// Alleen wie een Planado-uuid heeft telt mee; startDatum regelt vanaf wanneer er tijden komen.
+const INMETERS = Object.entries(require('../data/inmeters-rooster.json').inmeters)
+  .filter(([, v]) => v.uuidPlanado)
+  .map(([naam, v]) => ({ naam, uuid: v.uuidPlanado }));
 
 const LIVE = process.argv.includes('--live');
 // SUNNY PLANT ZELF (Daimy 28-08): eerste voorstel automatisch, door dezelfde poorten. Zie lib/sunny-start.js.
@@ -496,8 +496,13 @@ async function laadEigenAgendas(perInmeter, dagenVooruit = 100) {
     const email = (ROOSTER[inm.naam]?.eigenAgendaEmail || EIGEN_AGENDA_EMAIL[inm.naam] || '').toLowerCase();
     if (!email) { console.log(`  eigen agenda ${inm.naam}: geen postvak bekend — overgeslagen`); continue; }
     const cal = cals.find((c) => String(c.Owner?.Address || '').toLowerCase() === email && (c.IsDefaultCalendar || !/feestdagen|verjaardagen|holidays/i.test(c.Name)));
-    if (!cal) throw new Error(`eigen agenda van ${inm.naam} (${email}) niet gevonden in Outlook — niet plannen`);
-    let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView?$top=500&$select=Subject,Start,End,IsAllDay,IsCancelled,ShowAs&startDateTime=${van.toISOString()}&endDateTime=${tot.toISOString()}`;
+    // Niet in joeys kalenderlijst (bv. Patrick, agenda gedeeld maar niet als tab toegevoegd)? Dan
+    // rechtstreeks het postvak van de inmeter lezen; joeys token mag dat na het delen (bewezen 08-09).
+    // Werkt ook dat niet, dan blijft de harde stop: niet plannen.
+    let url = cal
+      ? `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView?$top=500&$select=Subject,Start,End,IsAllDay,IsCancelled,ShowAs&startDateTime=${van.toISOString()}&endDateTime=${tot.toISOString()}`
+      : `https://outlook.office.com/api/v2.0/users/${encodeURIComponent(email)}/calendarView?$top=500&$select=Subject,Start,End,IsAllDay,IsCancelled,ShowAs&startDateTime=${van.toISOString()}&endDateTime=${tot.toISOString()}`;
+    if (!cal) console.log(`  eigen agenda ${inm.naam}: niet in kalenderlijst, lees postvak ${email} rechtstreeks`);
     const evs = [];
     while (url) {
       const j = await (await fetch(url, { headers: OH })).json();
@@ -508,7 +513,7 @@ async function laadEigenAgendas(perInmeter, dagenVooruit = 100) {
     const blokken = eigenAgendaBlokken(evs);
     perInmeter[inm.naam].push(...blokken);
     const vb = blokken.slice(0, 2).map((b) => `${b.klant.replace('eigen agenda: ', '')} ${b.start.slice(0, 10)}`).join(', ');
-    console.log(`  eigen agenda ${inm.naam} (${cal.Name}): ${blokken.length} bezette blokken${vb ? ' — o.a. ' + vb : ''}`);
+    console.log(`  eigen agenda ${inm.naam} (${cal ? cal.Name : email}): ${blokken.length} bezette blokken${vb ? ' — o.a. ' + vb : ''}`);
   }
 }
 
@@ -1376,9 +1381,10 @@ async function combiPas(wachtenden, agenda, regels, dash = null) {
 /** Minimaal 3 tijden garanderen (Daimy 06-08: "stuur je dan ook altijd 3 opties?" —
  * het knoppen-template heeft er altijd 3 nodig). Te weinig? Dan verder vooruit
  * kijken (dubbele horizon). Lukt ook dat niet, dan wordt er NIET verstuurd. */
-// Welke inmeters mogen deze lead doen? Engelstalig = alleen Sjoerd (Daimy 13-08).
+// Welke inmeters mogen deze lead doen? Engelstalig = alleen wie engels:true heeft in het
+// rooster (Daimy 13-08: Sjoerd, niet Joey; 08-09: Sjoerd én Patrick).
 function inmetersVoor(lead) {
-  return lead?.engels ? INMETERS.filter((i) => i.naam === 'Sjoerd') : INMETERS;
+  return lead?.engels ? INMETERS.filter((i) => ROOSTER[i.naam]?.engels) : INMETERS;
 }
 
 async function zorgVoorDrieOpties(lead, duur, agenda, huidigAanbod) {

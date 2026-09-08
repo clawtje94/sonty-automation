@@ -49,10 +49,10 @@ async function zoekInmeetTijden({ itemId, dagen = [], dagdeel = null, vanaf = nu
   // open aanbiedingen bij andere klanten zijn bezet (samenloop-fix 07-08)
   try { await planner.voegAanbiedingenToe(agenda); } catch { /* register onbereikbaar: indicatief */ }
 
-  // Engelstalig meet alleen Sjoerd (Daimy 13-08)
+  // Engelstalig = alleen inmeters met engels:true in het rooster (Sjoerd, Patrick; niet Joey)
   const inmeters = Object.keys(planner.ROOSTER)
     .filter((n) => planner.ROOSTER[n].uuidPlanado)
-    .filter((n) => !lead.engels || n === 'Sjoerd');
+    .filter((n) => !lead.engels || planner.ROOSTER[n].engels);
 
   let beste = [];
   // HORIZON UITBREIDEN ZOLANG DE VOORKEUR NIET GEHAALD IS (Daimy 29-08, Christian Keus: "kan het op een

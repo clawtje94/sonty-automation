@@ -13,10 +13,9 @@ const { herinneringTekst, zoekWaTicket, stuurMail } = require('./lib/aanbod-vers
 const PLANADO_KEY = fs.readFileSync(path.join(__dirname, 'planado-api-key.txt'), 'utf8').trim();
 const PH = { Authorization: 'Bearer ' + PLANADO_KEY };
 const EXECUTE = process.argv.includes('--execute');
-const INMETERS = {
-  '1f122cfa-17a2-6580-8257-7e80f004db9c': 'Joey',
-  '1f122d19-e43e-6da0-8ffb-661a4ff9bb36': 'Sjoerd',
-};
+// uuid -> naam uit het rooster (één bron; Patrick erbij 08-09-2026)
+const INMETERS = Object.fromEntries(Object.entries(require('../data/inmeters-rooster.json').inmeters)
+  .filter(([, v]) => v.uuidPlanado).map(([naam, v]) => [v.uuidPlanado, naam]));
 const STATE = path.join(__dirname, '..', 'data', 'inmeet-herinneringen-state.json');
 const { planningTelegram } = require('./lib/telegram-planning.js');
 const wacht = (ms) => new Promise((r) => setTimeout(r, ms));

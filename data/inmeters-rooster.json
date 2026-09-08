@@ -1,5 +1,5 @@
 {
-  "bron": "Daimy, 2026-08-04/05 via Telegram (roosters + vertrekadressen)",
+  "bron": "Daimy, 2026-08-04/05 via Telegram (roosters + vertrekadressen); Patrick: Daimy 2026-09-08 via chat",
   "let_op": "Dit gaat vóór alles wat uit de agenda afgeleid wordt. De Outlook-agenda is niet netjes bijgehouden, dus een patroon uit die data is geen rooster.",
   "inmeters": {
     "Joey": {
@@ -24,7 +24,8 @@
       },
       "opmerking": "Vrijdag is TIJDELIJK vrij; normaal 09:00-15:00. Zet vr terug zodra dat weer ingaat.",
       "startAdres": "Molenbrink 36, Den Haag",
-      "eindAdres": "Frijdastraat 8F, Rijswijk"
+      "eindAdres": "Frijdastraat 8F, Rijswijk",
+      "engels": false
     },
     "Sjoerd": {
       "uuidPlanado": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
@@ -51,36 +52,40 @@
       },
       "opmerking": "Maandag t/m donderdag 09:00-15:00 (Daimy 2026-08-04).",
       "startAdres": "Amsteloord 14, 3448 BA, Woerden",
-      "eindAdres": "Amsteloord 14, 3448 BA, Woerden"
+      "eindAdres": "Amsteloord 14, 3448 BA, Woerden",
+      "engels": true
     },
-    "Nieuwe inmeter": {
-      "uuidPlanado": null,
-      "startDatum": "2026-09-01",
+    "Patrick": {
+      "uuidPlanado": "1f1ab7fe-4b47-6390-befe-022d6b897a01",
+      "startDatum": "2026-09-21",
       "dagen": {
         "ma": {
-          "van": "09:00",
-          "tot": "15:00"
+          "van": "08:00",
+          "tot": "17:00"
         },
         "di": {
-          "van": "09:00",
-          "tot": "15:00"
+          "van": "08:00",
+          "tot": "17:00"
         },
         "wo": {
-          "van": "09:00",
-          "tot": "15:00"
+          "van": "08:00",
+          "tot": "17:00"
         },
         "do": {
-          "van": "09:00",
-          "tot": "15:00"
+          "van": "08:00",
+          "tot": "17:00"
         },
         "vr": null,
         "za": null,
         "zo": null
       },
-      "opmerking": "Start 1 september 2026 (Daimy 2026-08-04). Naam, echte werkdagen en Planado-account nog niet bekend; hier staat voorlopig hetzelfde rooster als Sjoerd. Vervangen zodra bekend.",
-      "startAdres": null,
-      "eindAdres": null
+      "opmerking": "Patrick Fitters, start ma 21 september 2026, ma t/m do 08:00-17:00, spreekt Engels (Daimy 2026-09-08). uuidPlanado invullen zodra hij de Planado-uitnodiging (adviseur1@sonty.nl) heeft geaccepteerd.",
+      "engels": true,
+      "eigenAgendaEmail": "adviseur1@sonty.nl",
+      "startAdres": "Kerkdoel 9, 3264 AG, Nieuw-Beijerland",
+      "eindAdres": "Kerkdoel 9, 3264 AG, Nieuw-Beijerland"
     }
   },
-  "let_op_startadres": "startAdres = vertrekpunt 's ochtends, eindAdres = waar de dag eindigt (Joey: winkel Frijdastraat, Sjoerd: thuis Woerden). null = magazijn Noordeindseweg 256a Berkel."
+  "let_op_startadres": "startAdres = vertrekpunt 's ochtends, eindAdres = waar de dag eindigt (Joey: winkel Frijdastraat, Sjoerd: thuis Woerden). null = magazijn Noordeindseweg 256a Berkel.",
+  "let_op_engels": "engels:true = mag Engelstalige klanten inmeten (Daimy 13-08 Sjoerd, 08-09 Sjoerd én Patrick). uuidPlanado null = telt nergens mee."
 }

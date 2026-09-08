@@ -24,6 +24,8 @@ const BUS_NAMEN = {
   '1f122da2-8a5b-6c80-9ca9-72f9240343d3': 'Jorren',
   '1f122cfa-17a2-6580-8257-7e80f004db9c': 'Joey',
   '1f122d19-e43e-6da0-8ffb-661a4ff9bb36': 'Sjoerd',
+  // inmeters uit het rooster (Patrick erbij zodra zijn uuid bekend is)
+  ...Object.fromEntries(Object.entries(require('../../data/inmeters-rooster.json').inmeters).filter(([, v]) => v.uuidPlanado).map(([n, v]) => [v.uuidPlanado, n])),
 };
 const JOBS_CACHE = path.join(__dirname, '..', '..', 'data', 'planado-jobs-cache.json');
 

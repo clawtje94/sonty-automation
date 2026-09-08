@@ -1,4 +1,17 @@
-# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-02, launchd-timers dood → interval-runner)
+# Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-08, nieuwe inmeter Patrick)
+
+## 08-09 (avond): NIEUWE INMETER PATRICK — START MA 21-09, INVENTARISATIE (nog niks live)
+- Daimy: Patrick, start 21-09, ma-do 08:00-17:00, spreekt Engels, woont Nieuw-Beijerland (start+eind thuis). M365-login
+  adviseur1@sonty.nl ("Patrick | Sonty") in memory reference_sonty_credentials.
+- Gevraagd (Telegram V1-V5): huisadres, achternaam+06, akkoord Planado-aanmaak + agenda delen met joey@, Engels-regel
+  (Sjoerd én Patrick?), foto. WACHT OP DAIMY.
+- Wat er moet gebeuren zodra antwoord binnen is (12 plekken): data/inmeters-rooster.json (placeholder "Nieuwe inmeter" vervangen,
+  startDatum 2026-09-21, eigenAgendaEmail adviseur1@), INMETERS in cron-inmeten-planner.js (+ uuid Planado), lib/inmeet-tijden.js
+  Engels-filter, planner regel 1381, collega-antwoord.js + cron-inmeet-herinneringen.js + cron-outlook-planado-sync.js (uuid-maps),
+  wa-luisteraar.js COLLEGAS (06), vakanties-collect.js (volledige naam + mail), website: lib/meetbon/inmeters.ts (+ Trengo-kanaal
+  adviseur1@ voor offerte-mail namens inmeter), personeel-dashboard contracturen (36), pipeline UITVOERDERS, bedankt-pagina tekst,
+  ai-ks system-prompt regel "inmeters ma-do 09-15 / Engels alleen Sjoerd". Extern: Planado-medewerker, Bookings-staff, Outlook-agenda
+  gedeeld met joey@ (anders gooit laadEigenAgendas() "niet gevonden — niet plannen" en stopt ALLE planning).
 
 
 ## 05-09 14:15: VERZENDFOUT SLUIT NOOIT MEER EEN TICKET (V3 Daimy: "ja, belangrijk dat het gewoon goed gaat")

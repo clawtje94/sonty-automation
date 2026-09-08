@@ -12,8 +12,10 @@
   laadEigenAgendas(): niet in kalenderlijst → /users/<mail>/calendarView rechtstreeks (bewezen met testafspraak: onderwerp zichtbaar).
 - Verificatie (scratch check-patrick.js): werkdagen Patrick eerste 21-09, alleen ma-do; slots Oud-Beijerland 21-09 08:00/12:30 (+27 min);
   Joey/Sjoerd ongewijzigd; tests/eigen-agenda-regressie 6/6 groen. Daemons inmeet-verzoeken, sonny, inmeet-dashboard herstart.
-- Website ce4d06c: meetbon-inmeters (Patrick/adviseur1@), contracturen "Patrick Fitters" 36, pipeline-uitvoerder, bedankt-pagina
-  "Joey, Sjoerd of Patrick". Sunny-prompt: "Engels = Sjoerd of Patrick", inmeters "ma-do overdag".
+- Website ce4d06c LIVE op sonty-website.vercel.app (deploy gv6s7l0ga, schone git-export): meetbon-inmeters (Patrick/adviseur1@),
+  contracturen "Patrick Fitters" 36, pipeline-uitvoerder, bedankt-pagina "Joey, Sjoerd of Patrick" (LET OP: www.sonty.nl/bedankt is
+  Webflow/Cloudflare, dus daar niet zichtbaar). Sunny-prompt: "Engels = Sjoerd of Patrick", inmeters "ma-do overdag".
+- Telegram 14:40: eindmelding + V1 Planado-licentie, V2 06-nummer, V3 Trengo-kanaal adviseur1@. WACHT OP DAIMY.
 - OPEN: (1) 06-nummer Patrick (wa-luisteraar COLLEGAS, Planado-profiel, WhatsApp-assistent); (2) Planado-licentie; (3) Trengo-mailkanaal voor
   adviseur1@ + env MEETBON_INMETER_KANALEN, anders kan meetbon-offerte NIET namens Patrick gemaild worden (bewust geen terugval);
   (4) Bookings-staff "Sonty": Graph geeft 409 "already exists" maar Patrick staat niet in de lijst → via Bookings-UI toevoegen;

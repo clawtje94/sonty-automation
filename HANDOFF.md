@@ -18,7 +18,12 @@
 - 15:10 Daimy: V2 06 26221864 (verwerkt: Planado mobile_phone, rooster.telefoon, wa-luisteraar COLLEGAS+DESKTOPNAAM, daemon herstart);
   V3 "ja doe maar" + "hij gebruikt gewoon Outlook, kan dat niet via daar?"; V1 "moet hij een app hebben? wie heeft er geen nodig?".
 - Planado-licenties (API users + jobs-cache 90d): alle 12 uses_license=true; jobs/90d Joey 219, Sjoerd 174, Bus3 40, Bus1 38, Bus4/5 25,
-  Bus2 15, Bus6 12, Daimy 4, Nanny 1, Jaimy 0, Jorren 0. Advies: licentie van Jaimy of Jorren naar Patrick. WACHT OP DAIMY.
+  Bus2 15, Bus6 12, Daimy 4, Nanny 1, Jaimy 0, Jorren 0. Daimy 15:40: "jaimy kan er uit die werkt niet meer".
+- GEDAAN (Planado-UI headless, API-PATCH uses_license werkt niet): Jaimy de Wit gedeactiveerd = web-login, mobiel-login en
+  opdrachten-voltooien uit (account NIET verwijderd, historie blijft; uses_license false). Patrick: "Bewerkingsrechten"
+  (= licentie-hoofdschakelaar onder "Gebruikerslicentie gebruiken") + "Mag opdrachten voltooien" aan → uses_license true,
+  complete true, web false (zelfde profiel als Sjoerd). API: 12/12 licenties. Jaimy staat nog wel in Trengo/Outlook/Bookings/
+  pipeline-UITVOERDERS (niet gevraagd, niet aangeraakt).
 - Trengo-kanaal adviseur1@: NIET gelukt headless. Nieuwe e-mailkanalen zijn NYLASV3 + meta.provider MICROSOFT + email_address via
   Microsoft-OAuth-popup (SPA POST /api/v2/channels geeft 422 zonder). aanvragen@/scans@/orders@ zijn zo gemaakt. Joey's 1347358 is
   ouder type OUTLOOK (joey@sontymontage.nl, team "Joey Engelen"). Sjoerd heeft GEEN kanaal → MEETBON_INMETER_KANALEN kent alleen Joey.

@@ -15,7 +15,16 @@
 - Website ce4d06c LIVE op sonty-website.vercel.app (deploy gv6s7l0ga, schone git-export): meetbon-inmeters (Patrick/adviseur1@),
   contracturen "Patrick Fitters" 36, pipeline-uitvoerder, bedankt-pagina "Joey, Sjoerd of Patrick" (LET OP: www.sonty.nl/bedankt is
   Webflow/Cloudflare, dus daar niet zichtbaar). Sunny-prompt: "Engels = Sjoerd of Patrick", inmeters "ma-do overdag".
-- Telegram 14:40: eindmelding + V1 Planado-licentie, V2 06-nummer, V3 Trengo-kanaal adviseur1@. WACHT OP DAIMY.
+- 15:10 Daimy: V2 06 26221864 (verwerkt: Planado mobile_phone, rooster.telefoon, wa-luisteraar COLLEGAS+DESKTOPNAAM, daemon herstart);
+  V3 "ja doe maar" + "hij gebruikt gewoon Outlook, kan dat niet via daar?"; V1 "moet hij een app hebben? wie heeft er geen nodig?".
+- Planado-licenties (API users + jobs-cache 90d): alle 12 uses_license=true; jobs/90d Joey 219, Sjoerd 174, Bus3 40, Bus1 38, Bus4/5 25,
+  Bus2 15, Bus6 12, Daimy 4, Nanny 1, Jaimy 0, Jorren 0. Advies: licentie van Jaimy of Jorren naar Patrick. WACHT OP DAIMY.
+- Trengo-kanaal adviseur1@: NIET gelukt headless. Nieuwe e-mailkanalen zijn NYLASV3 + meta.provider MICROSOFT + email_address via
+  Microsoft-OAuth-popup (SPA POST /api/v2/channels geeft 422 zonder). aanvragen@/scans@/orders@ zijn zo gemaakt. Joey's 1347358 is
+  ouder type OUTLOOK (joey@sontymontage.nl, team "Joey Engelen"). Sjoerd heeft GEEN kanaal → MEETBON_INMETER_KANALEN kent alleen Joey.
+  Gevraagd: kantoor logt in Trengo als adviseur1@ (Microsoft); daarna env MEETBON_INMETER_KANALEN uitbreiden + deploy.
+  Alternatief (Daimy's Outlook-idee): site mailen via Graph namens inmeters = admin consent voor app "Sonty AI Bookings" (Azure) +
+  bouwen; joey-token kan NIET send-as adviseur1@ (404). Send-as/Bookings-staff-409 blijven open.
 - OPEN: (1) 06-nummer Patrick (wa-luisteraar COLLEGAS, Planado-profiel, WhatsApp-assistent); (2) Planado-licentie; (3) Trengo-mailkanaal voor
   adviseur1@ + env MEETBON_INMETER_KANALEN, anders kan meetbon-offerte NIET namens Patrick gemaild worden (bewust geen terugval);
   (4) Bookings-staff "Sonty": Graph geeft 409 "already exists" maar Patrick staat niet in de lijst → via Bookings-UI toevoegen;
@@ -4050,3 +4059,10 @@ Sunmaster-export (350 verkooporders) vergeleken met tab "2026 goed" (= de leiden
 
 ## Sunny ochtend/weetje half of niet verstuurd (08-09, gefixt)
 Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/350; Sonnet 5 denkt standaard na (adaptive thinking) en die tokens tellen mee → tekst afgekapt (halve zinnen in de groep) of helemaal geen tekstblok ('generatie mislukt', 3 pogingen, dan niks). Log: 14x FOUT vs 10x verstuurd. Fix: thinking {type:'disabled'} + max_tokens 1500 + afgekapt (stop_reason max_tokens) telt als mislukt en wordt opnieuw geprobeerd. Proef ochtend + weetje beide compleet.
+
+## 2026-09-08 Outlook->Planado audit opgelost
+- 600-job-cap in cron-outlook-planado-sync.js opgehoogd naar alle paginas (714 jobs): 25 verborgen 422-fouten/run -> 0, 3 valse "NIET IN PLANADO" -> 0 (dry-run + audit bewezen).
+- soort() herkent "<inmeter> winkel" als winkeldienst (JOEY WINKEL), sync maakt er geen job van; klant "Robbert Winkel" blijft inmeet. #271 verwijderd.
+- postcode-regex in outlook-planado-audit.js gefixt (Maatrijk vals-positief weg).
+- Rest (mens-check): 3 bus-dubbels + adresloze interne blokken (niks plannen/verhuizen/stalen mee). VRAAG 8 gesteld: die interne blokken uit sync/melding houden?
+- ~/sonty is geen git-repo: edits direct live voor volgende cron.

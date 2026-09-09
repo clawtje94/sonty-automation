@@ -113,3 +113,8 @@ data/brein/*.json
 data/brein/*.jsonl
 data/brein/*.txt
 data/brein/*.log
+data/prijsonderzoek/proton-profile/
+data/prijsonderzoek/proton-state.json
+data/prijsonderzoek/proton-wachtwoord.txt
+data/prijsonderzoek/verificatie-*.txt
+data/prijsonderzoek/*.log

@@ -1,5 +1,10 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-08, nieuwe inmeter Patrick)
 
+## 09-09 20:20: PRIJSONDERZOEK MARKT (mystery shopping) — mailbox klaar, wacht op akkoord adres (Daimy 09-09 via chat)
+- Persona Sanne Vermeulen, sanne.vermeulen84@proton.me (wachtwoord + Playwright-sessie in data/prijsonderzoek/, niet in git). Verificatie via daimyboot@gmail.com, herstelzin niet bewaard.
+- Longlist 15 online aanbieders (data/prijsonderzoek/aanbieders.md, namen alleen daar), standaard-uitvraag in persona.md, status in offertes.csv (nog leeg).
+- Open: V1 adres Backershagenlaan 34A Wassenaar (echt huis van een ander) of eigen/neutraal adres; daarna offertes opvragen via configurators + formulieren.
+
 ## 08-09 (middag): NIEUWE INMETER PATRICK FITTERS — INGERICHT, START MA 21-09 (Daimy 08-09 via chat)
 - Feiten: Patrick Fitters, ma-do 08:00-17:00, spreekt Engels, start+eind thuis Kerkdoel 9, 3264 AG Nieuw-Beijerland. M365 adviseur1@sonty.nl
   (startwachtwoord was verlopen → eerste login gedaan, nieuw wachtwoord in memory reference_sonty_credentials; GEEN MFA gevraagd).
@@ -4071,3 +4076,6 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
 - postcode-regex in outlook-planado-audit.js gefixt (Maatrijk vals-positief weg).
 - Rest (mens-check): 3 bus-dubbels + adresloze interne blokken (niks plannen/verhuizen/stalen mee). VRAAG 8 gesteld: die interne blokken uit sync/melding houden?
 - ~/sonty is geen git-repo: edits direct live voor volgende cron.
+
+## 2026-09-09 Offerte-zoek "Netwerkfout" opgelost
+- Blob-zoekindex was niet vers -> zoek op offertenummer viel terug op 20-93s RP-scan -> timeout -> "Netwerkfout". Index herbouwd (zoek ~1,5s) + Mac-vangnet nl.sonty.offerte-index-refresh (elke 30 min, scripts/cron-offerte-index-refresh.js).

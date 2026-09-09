@@ -10,3 +10,4 @@
 1. Knikarmscherm elektrisch (Somfy io), 500 x 300 cm, cassette, antraciet frame, doek grijs, incl. montage op steen
 2. Ritsscreens elektrisch, 2 stuks 200 x 220 cm, antraciet, doek grijs, incl. montage
 3. Optioneel: zelfde spec zonder montage (DIY-prijs) als de webshop dat aanbiedt
+- Weergavenaam in Proton = "Sanne Vermeulen" (gezet 09-09). Voettekst "Verzonden met Proton Mail" weghalen is betaald (Mail Plus), staat nog aan.

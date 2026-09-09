@@ -31,5 +31,6 @@
 | Z | fegalux.nl | online + montage ZH | zoek 09-09 |
 | AA | rijkeezonwering.nl | aggregator/online | zoek 09-09 |
 
+VERVALLEN (Daimy 09-09 21:05: geen vergelijkingssites, 'dat is ruk'): O, W, X, Y, Z, AA. Nieuwe aanpak: per stad zoeken 'screen kopen <stad>', top 3 mailen -> lokaal.csv.
 Doel Daimy 09-09: minimaal 20 aanbieders ECHT een offerte aangevraagd (screen bedraad, screen solar, rolluik bedraad, rolluik solar).
 Status per aanbieder wordt bijgehouden in offertes.csv.

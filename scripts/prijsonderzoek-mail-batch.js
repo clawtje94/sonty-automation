@@ -9,7 +9,7 @@ const ADRES = {
   Vught: 'Boslaan 47, 5263 NX Vught',
   Breda: 'Ulvenhoutselaan 74, 4834 MH Breda',
   Enschede: 'Boddenkampsingel 23, 7514 AN Enschede',
-  Heemstede: process.env.ADRES_HEEMSTEDE || '',
+  Rhoon: 'Kleidijk 39, 3161 EK Rhoon',
 };
 const base = fs.readFileSync(OUT + '/aanvraag-body.txt', 'utf8');
 const list = fs.readFileSync(process.argv[2], 'utf8').split('\n').filter(l => l.trim() && !l.startsWith('#'));

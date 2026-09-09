@@ -10,7 +10,9 @@
 - 10-09 besluit Daimy: 4 winkels van 175-200 m² (kleiner is geen showroom); magazijn telt NIET mee in de score (alleen klant/omzet/winst). Advies = scenario J: 1 Rotterdam-Zuid/Oost A16, 2 Haarlemmermeer/A'dam-West A4-A9, 3 Utrecht-rand A2/A27, 4 Dordrecht-Zuid A16 (Zuidplas vervallen: overlap). Netto 200 m² zonder inloop +€146k/jr totaal; 3 en 4 pas na bewezen inloop.
 - 10-09: aanbod-agent gestart voor Rotterdam-Zuid/Oost 175-250 m² → docs/winkels-4/03-aanbod-rotterdam-zuid-oost.md (links zelf verifiëren vóór doorsturen).
 
-## 09-09 20:20: PRIJSONDERZOEK MARKT (mystery shopping) — mailbox klaar, wacht op akkoord adres (Daimy 09-09 via chat)
+## 09-09 21:10: PRIJSONDERZOEK MARKT — 13 aanvragen per mail verstuurd, lokale zoektocht per stad loopt (Daimy 09-09 via chat)
+- Stand: batch 1 (13 mails) verzonden 20:57-21:02, antwoorden komen binnen op sanne.vermeulen84@proton.me (login in memory credentials). Vergelijkingssites geschrapt. Volgende: lokaal.csv (top 3 per stad) mailen met regio-adres; daarna antwoorden verzamelen in offertes.csv en vergelijken met Sonty-prijs.
+- Oud (20:20):
 - Persona Sanne Vermeulen, sanne.vermeulen84@proton.me (wachtwoord + Playwright-sessie in data/prijsonderzoek/, niet in git). Verificatie via daimyboot@gmail.com, herstelzin niet bewaard.
 - Longlist 15 online aanbieders (data/prijsonderzoek/aanbieders.md, namen alleen daar), standaard-uitvraag in persona.md, status in offertes.csv (nog leeg).
 - Open: V1 adres Backershagenlaan 34A Wassenaar (echt huis van een ander) of eigen/neutraal adres; daarna offertes opvragen via configurators + formulieren.

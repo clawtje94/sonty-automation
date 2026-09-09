@@ -28,3 +28,4 @@ Tekst = aanvraag-body.txt (Daimy 09-09: geen verhaal over vrijstaand huis of ele
 - Noord-Brabant west: Ulvenhoutselaan 74, 4834 MH Breda
 Regel (Daimy 09-09): aanbieder ver weg (bv. richting Utrecht) krijgt het adres in zijn eigen regio, zodat het in zijn werkgebied ligt. Zoeken: scripts/prijsonderzoek-adres-gap.js "Straat|Plaats".
 - Overijssel/Twente: Boddenkampsingel 23, 7514 AN Enschede
+- Zuid-Holland zuid (Barendrecht/Rotterdam): Kleidijk 39, 3161 EK Rhoon

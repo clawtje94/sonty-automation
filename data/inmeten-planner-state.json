@@ -115,6 +115,84 @@
       "op": "2026-08-29T08:46:31.350Z",
       "aanbod": 3,
       "bron": "sunny"
+    },
+    "b50f504f-4fa9-4b15-b132-b6ac04b5ec51": {
+      "naam": "RR van Donge",
+      "op": "2026-08-31T06:31:49.678Z",
+      "aanbod": 3,
+      "bron": "sunny"
+    },
+    "818fa6ec-d149-4b74-8f54-36f058a25da3": {
+      "naam": "Nathan Johnstone",
+      "op": "2026-08-31T15:59:06.089Z",
+      "aanbod": 3,
+      "bron": "sunny"
+    },
+    "cea896b8-2be4-4549-9847-0642d17945ba": {
+      "naam": "Mark van der Togt",
+      "op": "2026-09-01T06:38:37.580Z",
+      "aanbod": 3,
+      "bron": "sunny"
+    },
+    "046f33fc-4421-4cfb-9b31-1aa8fc8b6d70": {
+      "naam": "Tim Mesman",
+      "op": "2026-09-02T10:49:30.371Z",
+      "aanbod": 3,
+      "bron": "sunny"
+    },
+    "5a27635d-d0b4-4576-b6f5-2381f9b94b90": {
+      "naam": "Marjan Evans de Wijn",
+      "op": "2026-09-03T12:15:50.398Z",
+      "aanbod": 3,
+      "bron": "sunny"
+    },
+    "e36f9bbc-9efb-4300-9ad1-cfbb7aa61c22": {
+      "naam": "Husain Kapadia",
+      "op": "2026-09-04T15:53:38.418Z",
+      "aanbod": 3,
+      "bron": "sunny"
+    },
+    "1f576933-09a7-48df-88e8-c86edc4e6b0a": {
+      "naam": "Andrea Pasero",
+      "op": "2026-09-04T17:34:05.572Z",
+      "aanbod": 3,
+      "bron": "sunny"
+    },
+    "354dfe87-d759-4148-9a1a-c25a31e90d79": {
+      "naam": "Jeffrey Gielisse",
+      "op": "2026-09-05T06:33:49.971Z",
+      "aanbod": 3,
+      "bron": "sunny"
+    },
+    "5887d58a-c36f-4e25-8ab7-a8bad024a320": {
+      "naam": "Joke Bakker Lepelaar",
+      "op": "2026-09-08T08:38:58.490Z",
+      "aanbod": 3,
+      "bron": "sunny"
+    },
+    "b47f1ea2-092b-4b03-9fa8-445d8a5be797": {
+      "naam": "anoek van der wal",
+      "op": "2026-09-08T15:47:22.751Z",
+      "aanbod": 3,
+      "bron": "sunny"
+    },
+    "5e6375e6-0855-4428-aa96-7f5a95a69d29": {
+      "naam": "Saskia Badloe",
+      "op": "2026-09-09T11:10:06.576Z",
+      "aanbod": 3,
+      "bron": "sunny"
+    },
+    "b8302c8b-031e-432e-978e-8a9eb55106fc": {
+      "naam": "Thea Kuiper",
+      "op": "2026-09-09T14:56:41.582Z",
+      "aanbod": 3,
+      "bron": "sunny"
+    },
+    "87d9b42d-3fd1-4712-a2d9-9fdd8bd37803": {
+      "naam": "Jeffrey Zweep",
+      "op": "2026-09-09T17:54:03.841Z",
+      "aanbod": 3,
+      "bron": "sunny"
     }
   },
   "wachtend": {
@@ -249,7 +327,37 @@
     "d50cebdb-0df0-4777-ae0f-c3962a690f2f": "2026-08-28T15:38:48.736Z",
     "0f17b46b-46e0-4916-9d6b-08d155a20897": "2026-08-29T08:02:37.681Z",
     "fdde5f80-e390-468d-88f3-6a543ab671d4": "2026-08-29T08:44:36.860Z",
-    "059554e8-14a7-4914-93a7-3eed6619f2fd": "2026-08-29T10:26:24.564Z"
+    "059554e8-14a7-4914-93a7-3eed6619f2fd": "2026-08-29T10:26:24.564Z",
+    "b50f504f-4fa9-4b15-b132-b6ac04b5ec51": "2026-08-30T11:50:39.961Z",
+    "de9660be-c65f-41f1-89dd-e363dfd767b8": "2026-08-31T06:29:21.369Z",
+    "7e445d46-2a8e-46c1-a983-63b25a075662": "2026-08-31T11:21:47.654Z",
+    "LEAD-1788183011598-HQZ2": "2026-08-31T13:33:22.625Z",
+    "818fa6ec-d149-4b74-8f54-36f058a25da3": "2026-08-31T14:42:29.014Z",
+    "cea896b8-2be4-4549-9847-0642d17945ba": "2026-08-31T18:40:50.767Z",
+    "046f33fc-4421-4cfb-9b31-1aa8fc8b6d70": "2026-09-01T19:07:49.464Z",
+    "6cd82346-5ef0-4b76-8299-eb124e05208a": "2026-09-02T10:46:30.693Z",
+    "06004da6-d0a0-4f47-bcc2-02f3efb3f0ad": "2026-09-02T11:51:06.391Z",
+    "786e9a12-1a9e-4149-8077-f86048ff9900": "2026-09-02T12:29:12.159Z",
+    "37060678-1892-4b17-ab1a-d82f779d5d94": "2026-09-02T12:29:12.159Z",
+    "5a27635d-d0b4-4576-b6f5-2381f9b94b90": "2026-09-03T11:06:36.487Z",
+    "37749f5c-d6b4-4010-a78e-6159e06f8548": "2026-09-03T12:08:32.845Z",
+    "1534d425-176f-4958-a5eb-4ec50911a4f1": "2026-09-04T07:59:24.300Z",
+    "354dfe87-d759-4148-9a1a-c25a31e90d79": "2026-09-04T10:46:53.293Z",
+    "e36f9bbc-9efb-4300-9ad1-cfbb7aa61c22": "2026-09-04T14:51:30.819Z",
+    "1f576933-09a7-48df-88e8-c86edc4e6b0a": "2026-09-04T16:32:04.465Z",
+    "2f525027-216c-4840-8fd0-8782402e6c22": "2026-09-05T08:43:10.537Z",
+    "6a4dbf7b-86e2-477d-85a7-b39715c52e9e": "2026-09-05T09:03:41.251Z",
+    "438e7e5f-2569-4134-ba7b-fb9cfb6d3cbe": "2026-09-05T10:12:29.388Z",
+    "2db390ee-f136-40cc-b3e0-a1690b03ff06": "2026-09-05T11:42:10.247Z",
+    "5887d58a-c36f-4e25-8ab7-a8bad024a320": "2026-09-07T07:35:55.496Z",
+    "2a671d9b-02ff-4601-89f1-8728df8b2d1b": "2026-09-07T11:45:09.236Z",
+    "fc164ed1-445b-4aa4-9c1d-2eaafce753f1": "2026-09-07T12:35:42.411Z",
+    "f80349f2-e2ec-4394-b120-70adf4a33037": "2026-09-08T08:56:49.169Z",
+    "2d540f55-df5a-4f66-9df4-8625ce964d54": "2026-09-09T09:28:49.481Z",
+    "5e6375e6-0855-4428-aa96-7f5a95a69d29": "2026-09-09T10:01:04.506Z",
+    "b8302c8b-031e-432e-978e-8a9eb55106fc": "2026-09-09T13:54:24.464Z",
+    "87d9b42d-3fd1-4712-a2d9-9fdd8bd37803": "2026-09-09T16:46:37.846Z",
+    "0dbe3c5b-3707-46e1-97df-d657f2399639": "2026-09-09T17:51:55.405Z"
   },
   "laatsteRapportHash": "0fe85bb104319c903330ed1cc67fed376372154a",
   "gemeld": {
@@ -376,7 +484,37 @@
     "d50cebdb-0df0-4777-ae0f-c3962a690f2f": "2026-08-28T15:40:48.082Z",
     "0f17b46b-46e0-4916-9d6b-08d155a20897": "2026-08-29T08:07:24.982Z",
     "fdde5f80-e390-468d-88f3-6a543ab671d4": "2026-08-29T08:46:31.599Z",
-    "059554e8-14a7-4914-93a7-3eed6619f2fd": "2026-08-29T10:29:00.523Z"
+    "059554e8-14a7-4914-93a7-3eed6619f2fd": "2026-08-29T10:29:00.523Z",
+    "b50f504f-4fa9-4b15-b132-b6ac04b5ec51": "2026-08-30T11:52:39.770Z",
+    "de9660be-c65f-41f1-89dd-e363dfd767b8": "2026-08-31T06:32:45.794Z",
+    "7e445d46-2a8e-46c1-a983-63b25a075662": "2026-08-31T11:24:35.121Z",
+    "LEAD-1788183011598-HQZ2": "2026-08-31T13:40:17.098Z",
+    "818fa6ec-d149-4b74-8f54-36f058a25da3": "2026-08-31T14:50:14.389Z",
+    "cea896b8-2be4-4549-9847-0642d17945ba": "2026-08-31T18:43:34.805Z",
+    "046f33fc-4421-4cfb-9b31-1aa8fc8b6d70": "2026-09-01T19:10:09.115Z",
+    "6cd82346-5ef0-4b76-8299-eb124e05208a": "2026-09-02T10:49:40.648Z",
+    "06004da6-d0a0-4f47-bcc2-02f3efb3f0ad": "2026-09-02T11:53:29.900Z",
+    "786e9a12-1a9e-4149-8077-f86048ff9900": "2026-09-02T12:33:43.164Z",
+    "37060678-1892-4b17-ab1a-d82f779d5d94": "2026-09-02T12:33:43.164Z",
+    "5a27635d-d0b4-4576-b6f5-2381f9b94b90": "2026-09-03T11:08:19.827Z",
+    "37749f5c-d6b4-4010-a78e-6159e06f8548": "2026-09-03T12:15:54.253Z",
+    "1534d425-176f-4958-a5eb-4ec50911a4f1": "2026-09-04T08:04:37.499Z",
+    "354dfe87-d759-4148-9a1a-c25a31e90d79": "2026-09-04T10:52:52.780Z",
+    "e36f9bbc-9efb-4300-9ad1-cfbb7aa61c22": "2026-09-04T14:53:27.917Z",
+    "1f576933-09a7-48df-88e8-c86edc4e6b0a": "2026-09-04T16:34:47.073Z",
+    "2f525027-216c-4840-8fd0-8782402e6c22": "2026-09-05T08:45:01.787Z",
+    "6a4dbf7b-86e2-477d-85a7-b39715c52e9e": "2026-09-05T09:06:15.827Z",
+    "438e7e5f-2569-4134-ba7b-fb9cfb6d3cbe": "2026-09-05T10:15:05.663Z",
+    "2db390ee-f136-40cc-b3e0-a1690b03ff06": "2026-09-05T11:44:13.221Z",
+    "5887d58a-c36f-4e25-8ab7-a8bad024a320": "2026-09-07T07:38:01.528Z",
+    "2a671d9b-02ff-4601-89f1-8728df8b2d1b": "2026-09-07T11:47:01.476Z",
+    "fc164ed1-445b-4aa4-9c1d-2eaafce753f1": "2026-09-07T12:37:33.279Z",
+    "f80349f2-e2ec-4394-b120-70adf4a33037": "2026-09-08T08:59:09.748Z",
+    "2d540f55-df5a-4f66-9df4-8625ce964d54": "2026-09-09T09:31:03.149Z",
+    "5e6375e6-0855-4428-aa96-7f5a95a69d29": "2026-09-09T10:04:52.525Z",
+    "b8302c8b-031e-432e-978e-8a9eb55106fc": "2026-09-09T13:56:25.217Z",
+    "87d9b42d-3fd1-4712-a2d9-9fdd8bd37803": "2026-09-09T16:49:07.813Z",
+    "0dbe3c5b-3707-46e1-97df-d657f2399639": "2026-09-09T17:54:37.253Z"
   },
   "opties": {
     "ccb0f0aa2ab466d873faba250a638412": [
@@ -568,30 +706,137 @@
     "3a1805d7034f69f4695f63ec7ed5f6a4": [
       "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVsBumFAAA="
     ],
-    "2de29926605f208f6f2996de8082fdfb": [
-      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVsBunQAAA="
+    "3964ddde9d522d5388da55baac5d4466": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVwUq1PAAA="
+    ],
+    "303a0960df20c0ef3e2f52091042d97a": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVwUq1jAAA="
+    ],
+    "a39fa3de958058e4d9fd3ce1e3575c91": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVwUq14AAA="
+    ],
+    "a1b849d0fcbd7b9d5c1f2a882836378a": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVwUq2TAAA="
+    ],
+    "edc56c40d51bc224c0a7bc549d25a19c": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVwUq2VAAA="
+    ],
+    "01272136a541b89f5640e2e9713b88b8": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVwUq2WAAA="
+    ],
+    "6a4c3a9d86bfd564bffc38347f6c0a90": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVwUq2mAAA="
+    ],
+    "02e5190465018e9388cdc8ce26e06e38": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAVwUq24AAA="
+    ],
+    "0922e50d9ea7f9c57b18bc37cc5e5e14": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAV0ca5pAAA="
+    ],
+    "1efb3652a42e10a1b08fde27fc7e1b71": [
+      "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAV0ca5zAAA="
     ]
   },
-  "laatsteVolleScan": "2026-08-29T16:29:33.840Z",
+  "laatsteVolleScan": "2026-09-09T18:24:42.072Z",
   "inmeetLeads": [
     {
-      "id": "0f17b46b-46e0-4916-9d6b-08d155a20897",
-      "summary": "P Butteling",
+      "id": "0dbe3c5b-3707-46e1-97df-d657f2399639",
+      "summary": "H. Tutupoly",
       "item_subject": {
-        "id": "9cb4fff2-87c8-4a96-bb8d-dc515bcd030b",
-        "identifier": "type=LEAD_CONFIGURATION,id=9cb4fff2-87c8-4a96-bb8d-dc515bcd030b",
+        "id": "c410c1e7-b3b4-4e16-9cbf-a42934221976",
+        "identifier": "type=LEAD_CONFIGURATION,id=c410c1e7-b3b4-4e16-9cbf-a42934221976",
         "type": "LEAD_CONFIGURATION"
       },
-      "description": "Land: Nederland\nE-mailadres: p_butteling@ziggo.nl\nVoornaam: P\nAchternaam: Butteling\nPostcode: 2271XH\nHuisnummer: 24\nPlaats: Voorburg\nStraatnaam: Oranjelust\nHoe komt u bij ons terecht?: Bekende\nTelefoonnummer: +31623117957\nOpmerking: Ik zie op de site “ Tijdelijke aanbieding! 15% Korting op alle zonwering en raamdecoratie.” Wordt dit meegenomen in de offerte?\n\nDe screens zijn bedoeld voor de 1e en 2e etage. \n\nHartelijke groet,\nP. Butteling \n\n1x Windvast: \n- framekleur: Andere RAL kleur\n- hoogte: 2200.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 2100.0\n\n1x Inclusief montage screen solar\n1x Windvast: \n- framekleur: Andere RAL kleur\n- hoogte: 2200.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 1100.0\n\n1x Inclusief montage screen solar\n1x Windvast: \n- framekleur: Andere RAL kleur\n- hoogte: 1609.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 1450.0\n\n1x Inclusief montage screen solar\n1x Windvast: \n- framekleur: Andere RAL kleur\n- hoogte: 1600.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 1300.0\n\n1x Inclusief montage screen solar",
+      "description": "Naam: H. Tutupoly\nTelefoonnummer: 0644096241\nE-mailadres: neeltjeabc@hotmail.com",
       "fields": {
-        "address": "Oranjelust 24, 2271XH Voorburg, Nederland",
-        "phone": "+31623117957",
+        "address": "",
+        "phone": "0644096241",
         "cf_lead_value": {
-          "amount": "7218.37",
+          "isoCurrency": "EUR",
+          "amount": "1023.3999999999997",
+          "type": "currency"
+        },
+        "email": "neeltjeabc@hotmail.com"
+      }
+    },
+    {
+      "id": "87d9b42d-3fd1-4712-a2d9-9fdd8bd37803",
+      "summary": "Jeffrey Zweep",
+      "item_subject": {
+        "id": "72c0b9d8-37ab-47a7-b30a-062b19f17cfb",
+        "identifier": "type=LEAD_CONFIGURATION,id=72c0b9d8-37ab-47a7-b30a-062b19f17cfb",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: zweepj@gmail.com\nTelefoonnummer: +31644207125\nVoornaam: Jeffrey\nAchternaam: Zweep\nPostcode: 3124RB\nPlaats: Schiedam\nStraatnaam: Kalixfors\nHuisnummer: 20\nHoe komt u bij ons terecht?: Google\n\n1x Rolluik: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1555.0\n- breedte: 1485.0\n\n1x Inclusief montage rolluik solar\n1x Rolluik: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1655.0\n- breedte: 1465.0\n\n1x Inclusief montage rolluik solar\n1x Rolluik: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 9010\n- welk_type_bediening_wil_je?: Somfy IO motor solar\n- hoogte: 1655.0\n- breedte: 1465.0\n\n1x Inclusief montage rolluik solar\n\n**Opmerking planning (AI-klantenservice, 2026-09-09):**\nKlant akkoord op offerte 202612237, wil dat wij het inmeten in orde maken. Eerstvolgende agendaplek was rond 24 september doorgegeven; adres Kalixfors 20, 3124 RB Schiedam - graag inplannen (mogelijk eerder als het op een route past).",
+      "fields": {
+        "address": "Kalixfors 20, 3124RB Schiedam, Nederland",
+        "phone": "+31644207125",
+        "cf_lead_value": {
+          "amount": "3759.295",
           "isoCurrency": "EUR",
           "type": "currency"
         },
-        "email": "p_butteling@ziggo.nl"
+        "email": "zweepj@gmail.com"
+      }
+    },
+    {
+      "id": "5e6375e6-0855-4428-aa96-7f5a95a69d29",
+      "summary": "Saskia Badloe",
+      "item_subject": {
+        "id": "8d0f104e-ca52-4d5c-b9d0-e61d7bb0f7d8",
+        "identifier": "type=LEAD_CONFIGURATION,id=8d0f104e-ca52-4d5c-b9d0-e61d7bb0f7d8",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: s_sewpersad@hotmail.com\nVoornaam: Saskia\nAchternaam: Badloe\nPostcode: 3191 PD\nHuisnummer: 34\nPlaats: Hoogvliet Rotterdam\nStraatnaam: Ridderspoor\nHoe komt u bij ons terecht?: Google\nTelefoonnummer: +31628141474\nOpmerking: Offerte graag per e-mail \n\n1x Rolluik: \n- framekleur: RAL 7039\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7039\n- welk_type_bediening_wil_je?: Draaischakelaar\n- hoogte: 1200.0\n- breedte: 1000.0\n\n1x Inclusief montage rolluik solar\n1x Rolluik: \n- framekleur: RAL 7039\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7039\n- welk_type_bediening_wil_je?: Draaischakelaar\n- hoogte: 1300.0\n- breedte: 1800.0\n\n1x Inclusief montage rolluik solar\n1x Rolluik: \n- framekleur: RAL 7039\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7039\n- welk_type_bediening_wil_je?: Draaischakelaar\n- hoogte: 1300.0\n- breedte: 1800.0\n\n1x Inclusief montage rolluik solar\n1x Rolluik: \n- framekleur: RAL 7039\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7039\n- welk_type_bediening_wil_je?: Draaischakelaar\n- hoogte: 1200.0\n- breedte: 1000.0\n\n1x Inclusief montage rolluik solar\n1x Rolluik: \n- framekleur: RAL 7039\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7039\n- welk_type_bediening_wil_je?: Draaischakelaar\n- hoogte: 1000.0\n- breedte: 1800.0\n\n1x Inclusief montage rolluik solar\n1x Rolluik: \n- framekleur: RAL 7039\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7039\n- welk_type_bediening_wil_je?: Draaischakelaar\n- hoogte: 1000.0\n- breedte: 1000.0\n\n1x Inclusief montage rolluik solar",
+      "fields": {
+        "address": "Ridderspoor 34, 3191 PD Hoogvliet Rotterdam, Nederland",
+        "phone": "+31628141474",
+        "cf_lead_value": {
+          "amount": "4614.3099999999995",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "s_sewpersad@hotmail.com"
+      }
+    },
+    {
+      "id": "2db390ee-f136-40cc-b3e0-a1690b03ff06",
+      "summary": "John  Van Krimpen",
+      "item_subject": {
+        "id": "d403ac1f-e696-4eec-a6f2-ab5a23bd8c73",
+        "identifier": "type=LEAD_CONFIGURATION,id=d403ac1f-e696-4eec-a6f2-ab5a23bd8c73",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: j.krimpen82@kpnmail.nl\nVoornaam: John \nAchternaam: Van Krimpen \nPostcode: 3089TE \nHuisnummer: 11\nPlaats: Rotterdam \nStraatnaam: Heysekade \nTelefoonnummer: +31614870704\nHoe komt u bij ons terecht?: Social media\n\n1x Voorraad scherm - 20% korting: \n- doekkleur: Grijs\n- heb_je_een_uitbouw?: Nee\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n\n1x Inclusief montage Knikarmscherm uitgebreid.: \n- heb_je_een_uitbouw?: Nee\n\n1x Somfy connectivity app bediening",
+      "fields": {
+        "address": "Heysekade  11, 3089TE  Rotterdam , Nederland",
+        "phone": "+31614870704",
+        "cf_lead_value": {
+          "amount": "3098.25",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "j.krimpen82@kpnmail.nl"
+      }
+    },
+    {
+      "id": "37749f5c-d6b4-4010-a78e-6159e06f8548",
+      "summary": "Ali Barutcu",
+      "item_subject": {
+        "id": "1d417d7e-75ae-46d1-a8ff-612a584db450",
+        "identifier": "type=LEAD_CONFIGURATION,id=1d417d7e-75ae-46d1-a8ff-612a584db450",
+        "type": "LEAD_CONFIGURATION"
+      },
+      "description": "Land: Nederland\nE-mailadres: alibarutcu86@hotmail.com\nTelefoonnummer: +31621407808\nVoornaam: Ali\nAchternaam: Barutcu\nPostcode: 2994DL\nHuisnummer: 35\nPlaats: Barendrecht\nStraatnaam: Wolvenburg\nHoe komt u bij ons terecht?: Social media\n\n1x Rolluik: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Draaischakelaar\n\n1x Breedte tussen 1000 mm - 3000 mm: \n- framekleur: RAL 7016 structuur\n- welk_type_bediening_wil_je?: Draaischakelaar\n- hoogte: 1421.0\n- breedte: 2000.0\n\n1x Inclusief montage rolluik solar",
+      "fields": {
+        "address": "Wolvenburg 35, 2994DL Barendrecht, Nederland",
+        "phone": "+31621407808",
+        "cf_lead_value": {
+          "amount": "962.2850000000001",
+          "isoCurrency": "EUR",
+          "type": "currency"
+        },
+        "email": "alibarutcu86@hotmail.com"
       }
     },
     {
@@ -612,46 +857,6 @@
           "type": "currency"
         },
         "email": "christiankeus@outlook.com"
-      }
-    },
-    {
-      "id": "b47f1ea2-092b-4b03-9fa8-445d8a5be797",
-      "summary": "anoek van der wal",
-      "item_subject": {
-        "id": "121a01ad-7aa4-4745-8d0f-2b320ae42e2b",
-        "identifier": "type=LEAD_CONFIGURATION,id=121a01ad-7aa4-4745-8d0f-2b320ae42e2b",
-        "type": "LEAD_CONFIGURATION"
-      },
-      "description": "Land: Nederland\nE-mailadres: anoekvanderwal@gmail.com\nTelefoonnummer: +3115637312\nVoornaam: anoek\nAchternaam: van der wal\nPostcode: 5215 AH\nPlaats: Den Bosch\nStraatnaam: Maastrichtseweg\nHoe komt u bij ons terecht?: Google\nHuisnummer: 122\nOpmerking: Hallo, \nWij zijn op zoek naar 2 screens voor onze dakramen. \nDaarom de vraag of de screens ook op een dakraam kunnen? De dakramen staan in een hoek van ongeveer 20 graden. \nBedankt, met vriendelijke groet, Anoek vand er Wal\n\n1x Windvast: \n- framekleur: Andere RAL kleur\n- hoogte: 1000.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 3000.0\n\n1x Inclusief montage screen solar\n1x Windvast: \n- framekleur: Andere RAL kleur\n- hoogte: 1000.0\n- welk_type_bediening_wil_je?: Motor + afstandsbediening\n- doekkleur_naar_keuze: Doekkleur naar keuze\n- breedte: 1500.0\n\n1x Inclusief montage screen solar",
-      "fields": {
-        "address": "Maastrichtseweg 122, 5215 AH Den Bosch, Nederland",
-        "phone": "+3115637312",
-        "cf_lead_value": {
-          "amount": "3735.41",
-          "isoCurrency": "EUR",
-          "type": "currency"
-        },
-        "email": "anoekvanderwal@gmail.com"
-      }
-    },
-    {
-      "id": "a79772f8-a388-4413-b19d-e926105288fc",
-      "summary": "Reinhard Scholten",
-      "item_subject": {
-        "id": "65f50945-ba42-4ab6-9887-39676200da0d",
-        "identifier": "type=LEAD_CONFIGURATION,id=65f50945-ba42-4ab6-9887-39676200da0d",
-        "type": "LEAD_CONFIGURATION"
-      },
-      "description": "Land: Nederland\nE-mailadres: reinscholten@gmail.com\nVoornaam: Reinhard\nAchternaam: Scholten\nPostcode: 2596 JG\nHuisnummer: 16\nPlaats: 's-Gravenhage\nStraatnaam: Van Panhuysstraat\nHoe komt u bij ons terecht?: Bekende\nTelefoonnummer: +31610966640\n\n4x Sunproject: \n- doekkleur: Doekkleur naar keuze\n- framekleur: Technisch aluminium\n- uitval: 950 mm\n- welk_type_bediening_wil_je?: Handbediend\n- breedte: 3040.0\n\n4x Inclusief montage  uitvalscherm",
-      "fields": {
-        "address": "Van Panhuysstraat 16, 2596 JG 's-Gravenhage, Nederland",
-        "phone": "+31610966640",
-        "cf_lead_value": {
-          "amount": "5116.762000000001",
-          "isoCurrency": "EUR",
-          "type": "currency"
-        },
-        "email": "reinscholten@gmail.com"
       }
     }
   ],
@@ -2011,6 +2216,591 @@
       "stijl": "sunny",
       "herhaling": false,
       "opVerzoek": true
+    },
+    "4463498276bc5d5ea9f2045fd57a16f1": {
+      "naam": "RR van Donge",
+      "telefoon": "+31622242220",
+      "email": "rvdonge@gmail.com",
+      "waTicket": 977093856,
+      "mailTicket": 976838224,
+      "verstuurdOp": "2026-08-31T06:31:44.302Z",
+      "rpItemId": "b50f504f-4fa9-4b15-b132-b6ac04b5ec51",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "23a59dcea911a1f25074e7a66ede6fbf": {
+      "naam": "Angelo de Jong",
+      "telefoon": "+31614962689",
+      "email": "angeloboy2@hotmail.com",
+      "waTicket": 977470229,
+      "mailTicket": 977539058,
+      "verstuurdOp": "2026-08-31T12:30:10.725Z",
+      "rpItemId": "7e445d46-2a8e-46c1-a983-63b25a075662",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "cb179428f45b0157d7c7f6748ee4028b": {
+      "naam": "Nathan Johnstone",
+      "telefoon": "06",
+      "email": "locotewz@gmail.com",
+      "waTicket": null,
+      "mailTicket": 977478018,
+      "verstuurdOp": "2026-08-31T15:59:01.060Z",
+      "rpItemId": "818fa6ec-d149-4b74-8f54-36f058a25da3",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "03a65e68475fa95d005f9d9335c43132": {
+      "naam": "Mark van der Togt",
+      "telefoon": "0651683526",
+      "email": "markvandertogt66@gmail.com",
+      "waTicket": 977721471,
+      "mailTicket": 975184524,
+      "verstuurdOp": "2026-09-01T06:38:31.633Z",
+      "rpItemId": "cea896b8-2be4-4549-9847-0642d17945ba",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "3964ddde9d522d5388da55baac5d4466": {
+      "naam": "Nathan Johnstone",
+      "telefoon": "06",
+      "email": "locotewz@gmail.com",
+      "waTicket": null,
+      "mailTicket": 977478018,
+      "verstuurdOp": "2026-09-01T16:03:06.098Z",
+      "rpItemId": "818fa6ec-d149-4b74-8f54-36f058a25da3",
+      "bron": "opvolging",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "e76a623d03111e3d86d147cbeb87dbc6": {
+      "naam": "Nathan Johnstone",
+      "telefoon": "06",
+      "email": "locotewz@gmail.com",
+      "waTicket": null,
+      "mailTicket": 977478018,
+      "verstuurdOp": "2026-09-01T17:13:15.576Z",
+      "rpItemId": "818fa6ec-d149-4b74-8f54-36f058a25da3",
+      "bron": "klant-reply",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": true
+    },
+    "dcdba7ec736a0602f43da29cc4bb8f88": {
+      "naam": "Tim Mesman",
+      "telefoon": "+31610229599",
+      "email": "leomesman@ziggo.nl",
+      "waTicket": 978045878,
+      "mailTicket": 978046031,
+      "verstuurdOp": "2026-09-02T10:49:24.406Z",
+      "rpItemId": "046f33fc-4421-4cfb-9b31-1aa8fc8b6d70",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "303a0960df20c0ef3e2f52091042d97a": {
+      "naam": "Martijn Landman",
+      "telefoon": "+31624668381",
+      "email": "martijnlandman1984@hotmail.com",
+      "waTicket": 978078487,
+      "mailTicket": 976968711,
+      "verstuurdOp": "2026-09-02T12:36:12.751Z",
+      "rpItemId": "de9660be-c65f-41f1-89dd-e363dfd767b8",
+      "bron": "wachtmelding-reply",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "f1f14cb714e9be0640a20dd6f9a46b10": {
+      "naam": "Rowie Post",
+      "telefoon": "0613263460",
+      "email": "rowiepost@gmail.com",
+      "waTicket": 978081858,
+      "mailTicket": 975234318,
+      "verstuurdOp": "2026-09-02T12:48:13.200Z",
+      "rpItemId": "LEAD-1788183011598-HQZ2",
+      "bron": "wachtmelding-reply",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": true
+    },
+    "0b2b5106eca0b15c2a65dc054a9b07ff": {
+      "naam": "Cornelis  Gerdzen",
+      "telefoon": "+31615023670",
+      "email": "keesgerdzen@gmail.com",
+      "waTicket": 974630795,
+      "mailTicket": 978085802,
+      "verstuurdOp": "2026-09-02T13:02:47.194Z",
+      "rpItemId": "6cd82346-5ef0-4b76-8299-eb124e05208a",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "8deaaaec38f62872463d146731d5cd10": {
+      "naam": "Myongsuk Chi",
+      "telefoon": "+31715721795",
+      "email": "chimyongsuk@gmail.com",
+      "waTicket": 978086047,
+      "mailTicket": 978066591,
+      "verstuurdOp": "2026-09-02T13:03:47.205Z",
+      "rpItemId": "06004da6-d0a0-4f47-bcc2-02f3efb3f0ad",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "2a3e7e5fa02308d5bc630237e5db43ca": {
+      "naam": "Richard de Jong",
+      "telefoon": "06-22659997",
+      "email": "richard261186@outlook.com",
+      "waTicket": 976978285,
+      "mailTicket": 978077832,
+      "verstuurdOp": "2026-09-02T13:30:57.831Z",
+      "rpItemId": "786e9a12-1a9e-4149-8077-f86048ff9900",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "2b462b079bd7369059f8d53cb47951ef": {
+      "naam": "Bakker -",
+      "telefoon": "0624508853",
+      "email": "germar14@ziggo.nl",
+      "waTicket": 978093691,
+      "mailTicket": 978088255,
+      "verstuurdOp": "2026-09-02T13:31:13.420Z",
+      "rpItemId": "37060678-1892-4b17-ab1a-d82f779d5d94",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "a39fa3de958058e4d9fd3ce1e3575c91": {
+      "naam": "Rowie Post",
+      "telefoon": "0613263460",
+      "email": "rowiepost@gmail.com",
+      "waTicket": 978081858,
+      "mailTicket": 975234318,
+      "verstuurdOp": "2026-09-02T15:35:41.476Z",
+      "rpItemId": "LEAD-1788183011598-HQZ2",
+      "bron": "klant-reply",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": true
+    },
+    "5831cb2940baee37c19bf1488816c1ab": {
+      "naam": "Marjan Evans de Wijn",
+      "telefoon": "+31614314360",
+      "email": "marjan.evans@gmail.com",
+      "waTicket": 978307577,
+      "mailTicket": 978303184,
+      "verstuurdOp": "2026-09-03T12:15:44.426Z",
+      "rpItemId": "5a27635d-d0b4-4576-b6f5-2381f9b94b90",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "a1b849d0fcbd7b9d5c1f2a882836378a": {
+      "naam": "Markus Naumer",
+      "telefoon": "+31622223964",
+      "email": "markus.naumer@gmail.com",
+      "waTicket": 978308863,
+      "mailTicket": 978308871,
+      "verstuurdOp": "2026-09-03T12:20:56.431Z",
+      "rpItemId": "8e98d942-defe-41bd-b595-c20e010365e5",
+      "bron": "winkel",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "edc56c40d51bc224c0a7bc549d25a19c": {
+      "naam": "Ali Barutcu",
+      "telefoon": "+31621407808",
+      "email": "alibarutcu86@hotmail.com",
+      "waTicket": 977727109,
+      "mailTicket": 978321399,
+      "verstuurdOp": "2026-09-03T13:05:37.592Z",
+      "rpItemId": "37749f5c-d6b4-4010-a78e-6159e06f8548",
+      "bron": "wachtmelding-reply",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": true
+    },
+    "01272136a541b89f5640e2e9713b88b8": {
+      "naam": "Cornelis  Gerdzen",
+      "telefoon": "+31615023670",
+      "email": "keesgerdzen@gmail.com",
+      "waTicket": 974630795,
+      "mailTicket": 978085802,
+      "verstuurdOp": "2026-09-03T13:07:45.408Z",
+      "rpItemId": "6cd82346-5ef0-4b76-8299-eb124e05208a",
+      "bron": "opvolging",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "6a4c3a9d86bfd564bffc38347f6c0a90": {
+      "naam": "Cornelis  Gerdzen",
+      "telefoon": "+31615023670",
+      "email": "keesgerdzen@gmail.com",
+      "waTicket": 974630795,
+      "mailTicket": 978085802,
+      "verstuurdOp": "2026-09-03T15:44:45.729Z",
+      "rpItemId": "6cd82346-5ef0-4b76-8299-eb124e05208a",
+      "bron": "klant-reply",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": true
+    },
+    "a385e006788e9c7dfc097406a1e93f59": {
+      "naam": "Ali Barutcu",
+      "telefoon": "+31621407808",
+      "email": "alibarutcu86@hotmail.com",
+      "waTicket": 977727109,
+      "mailTicket": 978321399,
+      "verstuurdOp": "2026-09-03T16:03:32.636Z",
+      "rpItemId": "37749f5c-d6b4-4010-a78e-6159e06f8548",
+      "bron": "klant-reply",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": true
+    },
+    "02e5190465018e9388cdc8ce26e06e38": {
+      "naam": "Marjan Evans de Wijn",
+      "telefoon": "+31614314360",
+      "email": "marjan.evans@gmail.com",
+      "waTicket": 978557880,
+      "mailTicket": 978303184,
+      "verstuurdOp": "2026-09-04T12:23:04.453Z",
+      "rpItemId": "5a27635d-d0b4-4576-b6f5-2381f9b94b90",
+      "bron": "opvolging",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "96e9995533ae4f0e5ad34207ebe44f32": {
+      "naam": "Husain Kapadia",
+      "telefoon": "+31626452743",
+      "email": "husainkapadia2811@gmail.com",
+      "waTicket": 978612805,
+      "mailTicket": 978567386,
+      "verstuurdOp": "2026-09-04T15:53:35.545Z",
+      "rpItemId": "e36f9bbc-9efb-4300-9ad1-cfbb7aa61c22",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "2e306ad3e41dec517e6e370a1a7d7570": {
+      "naam": "Andrea Pasero",
+      "telefoon": "+31642546905",
+      "email": "andrea.pasero@gmail.com",
+      "waTicket": 978627211,
+      "mailTicket": 977754300,
+      "verstuurdOp": "2026-09-04T17:34:02.540Z",
+      "rpItemId": "1f576933-09a7-48df-88e8-c86edc4e6b0a",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "730caf8db564f5cd64c4cae72171e16c": {
+      "naam": "Jeffrey Gielisse",
+      "telefoon": "+31631797472",
+      "email": "gielissejeffrey@hotmail.com",
+      "waTicket": 978670398,
+      "mailTicket": 978522250,
+      "verstuurdOp": "2026-09-05T06:33:46.309Z",
+      "rpItemId": "354dfe87-d759-4148-9a1a-c25a31e90d79",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "bc995653fb092dbf6da1c8963ea2173b": {
+      "naam": "Bas Santana",
+      "telefoon": "0657564936",
+      "email": "bastiaan.shirley@gmail.com",
+      "waTicket": 978694500,
+      "mailTicket": 978688901,
+      "verstuurdOp": "2026-09-05T09:44:42.131Z",
+      "rpItemId": "2f525027-216c-4840-8fd0-8782402e6c22",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "f3ba1d4e8aa3834e2100d94c47d7ad3d": {
+      "naam": "Mark van der ree",
+      "telefoon": "0625592034",
+      "email": "mark_ado1@hotmail.com",
+      "waTicket": 978696881,
+      "mailTicket": 978696276,
+      "verstuurdOp": "2026-09-05T10:04:39.967Z",
+      "rpItemId": "6a4dbf7b-86e2-477d-85a7-b39715c52e9e",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "8a2c3d67eaadcc5b5544cd451e25afba": {
+      "naam": "Iris Heemskerk",
+      "telefoon": "+31615341821",
+      "email": "iris.heemskerk@quicknet.nl",
+      "waTicket": 974735898,
+      "mailTicket": 978704966,
+      "verstuurdOp": "2026-09-05T11:13:59.692Z",
+      "rpItemId": "438e7e5f-2569-4134-ba7b-fb9cfb6d3cbe",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "716073a123b996341048716a4a660030": {
+      "naam": "John  Van Krimpen",
+      "telefoon": "+31614870704",
+      "email": "j.krimpen82@kpnmail.nl",
+      "waTicket": 978715211,
+      "mailTicket": 977371859,
+      "verstuurdOp": "2026-09-05T12:43:43.816Z",
+      "rpItemId": "2db390ee-f136-40cc-b3e0-a1690b03ff06",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "5c80564b75c9db6f65e2151195445f8a": {
+      "naam": "Husain Kapadia",
+      "telefoon": "+31626452743",
+      "email": "husainkapadia2811@gmail.com",
+      "waTicket": 978612805,
+      "mailTicket": 978567386,
+      "verstuurdOp": "2026-09-05T15:56:31.174Z",
+      "rpItemId": "e36f9bbc-9efb-4300-9ad1-cfbb7aa61c22",
+      "bron": "opvolging",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "8063e6e42225a57c98a595a9f2c6730f": {
+      "naam": "John  Van Krimpen",
+      "telefoon": "+31614870704",
+      "email": "j.krimpen82@kpnmail.nl",
+      "waTicket": 978715211,
+      "mailTicket": 977371859,
+      "verstuurdOp": "2026-09-06T12:49:01.216Z",
+      "rpItemId": "2db390ee-f136-40cc-b3e0-a1690b03ff06",
+      "bron": "opvolging",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "5e0892207966e4440403438336369d4d": {
+      "naam": "Joke Bakker Lepelaar",
+      "telefoon": "+3168615824",
+      "email": "jokelepelaar@gmail.com",
+      "waTicket": null,
+      "mailTicket": 978743426,
+      "verstuurdOp": "2026-09-07T08:36:33.579Z",
+      "rpItemId": "5887d58a-c36f-4e25-8ab7-a8bad024a320",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "1f621ca2925d380ab459e2cf56436377": {
+      "naam": "Wuisman",
+      "telefoon": "0642106919",
+      "email": "maudwuisman@hotmail.com",
+      "waTicket": 979001323,
+      "mailTicket": 976833518,
+      "verstuurdOp": "2026-09-07T12:47:43.261Z",
+      "rpItemId": "2a671d9b-02ff-4601-89f1-8728df8b2d1b",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "ad6206f50a74350edfe3cf0d55b33602": {
+      "naam": "Max Kempenaar",
+      "telefoon": "+31654386345",
+      "email": "kempenaarmax@gmail.com",
+      "waTicket": 979015487,
+      "mailTicket": 979015505,
+      "verstuurdOp": "2026-09-07T13:38:48.028Z",
+      "rpItemId": "fc164ed1-445b-4aa4-9c1d-2eaafce753f1",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "8a2f0a1ba0307c6226acb0bc165aecd6": {
+      "naam": "anoek van der wal",
+      "telefoon": "+3115637312",
+      "email": "anoekvanderwal@gmail.com",
+      "waTicket": null,
+      "mailTicket": 977080701,
+      "verstuurdOp": "2026-09-07T15:19:47.881Z",
+      "rpItemId": "b47f1ea2-092b-4b03-9fa8-445d8a5be797",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "4477ded924b8c5cce6d2467f38d27e00": {
+      "naam": "Joke Bakker Lepelaar",
+      "telefoon": "+3168615824",
+      "email": "jokelepelaar@gmail.com",
+      "waTicket": null,
+      "mailTicket": 978743426,
+      "verstuurdOp": "2026-09-08T08:38:52.514Z",
+      "rpItemId": "5887d58a-c36f-4e25-8ab7-a8bad024a320",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "51525ca391a1d9e6a78b6e0783fd5ff7": {
+      "naam": "Mascha Fransen",
+      "telefoon": "+31655130559",
+      "email": "m.fransen21@kpnmail.nl",
+      "waTicket": 975862484,
+      "mailTicket": 979185397,
+      "verstuurdOp": "2026-09-08T09:58:41.353Z",
+      "rpItemId": "f80349f2-e2ec-4394-b120-70adf4a33037",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "64fc29c9c8c3b78226ab00b4d41af18b": {
+      "naam": "Mascha Fransen",
+      "telefoon": "+31655130559",
+      "email": "m.fransen21@kpnmail.nl",
+      "waTicket": 975862484,
+      "mailTicket": 979185397,
+      "verstuurdOp": "2026-09-08T10:37:09.955Z",
+      "rpItemId": "f80349f2-e2ec-4394-b120-70adf4a33037",
+      "bron": "klant-reply",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": true
+    },
+    "0922e50d9ea7f9c57b18bc37cc5e5e14": {
+      "naam": "Mascha Fransen",
+      "telefoon": "+31655130559",
+      "email": "m.fransen21@kpnmail.nl",
+      "waTicket": 975862484,
+      "mailTicket": 979185397,
+      "verstuurdOp": "2026-09-08T10:43:43.684Z",
+      "rpItemId": "f80349f2-e2ec-4394-b120-70adf4a33037",
+      "bron": "klant-reply",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": true
+    },
+    "1efb3652a42e10a1b08fde27fc7e1b71": {
+      "naam": "Wuisman",
+      "telefoon": "0642106919",
+      "email": "maudwuisman@hotmail.com",
+      "waTicket": 979001323,
+      "mailTicket": 976833518,
+      "verstuurdOp": "2026-09-08T12:50:02.199Z",
+      "rpItemId": "2a671d9b-02ff-4601-89f1-8728df8b2d1b",
+      "bron": "opvolging",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "a879869ab82fbea24631d506d399577b": {
+      "naam": "anoek van der wal",
+      "telefoon": "+3115637312",
+      "email": "anoekvanderwal@gmail.com",
+      "waTicket": null,
+      "mailTicket": 977080701,
+      "verstuurdOp": "2026-09-08T15:47:20.255Z",
+      "rpItemId": "b47f1ea2-092b-4b03-9fa8-445d8a5be797",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "21460f50ab644f95cfccd27c7f29cbe8": {
+      "naam": "Wuisman",
+      "telefoon": "0642106919",
+      "email": "maudwuisman@hotmail.com",
+      "waTicket": 979001323,
+      "mailTicket": 976833518,
+      "verstuurdOp": "2026-09-09T07:22:49.835Z",
+      "rpItemId": "2a671d9b-02ff-4601-89f1-8728df8b2d1b",
+      "bron": "klant-reply",
+      "stijl": null,
+      "herhaling": false,
+      "opVerzoek": true
+    },
+    "84ad97c8b939ead81270cd1fd95d0870": {
+      "naam": "Beuker -",
+      "telefoon": "0622838590",
+      "email": "titiabeuker@hotmail.com",
+      "waTicket": 979414210,
+      "mailTicket": 978716953,
+      "verstuurdOp": "2026-09-09T10:37:57.301Z",
+      "rpItemId": "2d540f55-df5a-4f66-9df4-8625ce964d54",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "16b2885fd9205ebab4dbef1c91bb2e27": {
+      "naam": "Saskia Badloe",
+      "telefoon": "+31628141474",
+      "email": "s_sewpersad@hotmail.com",
+      "waTicket": 979446080,
+      "mailTicket": 979446096,
+      "verstuurdOp": "2026-09-09T11:10:04.687Z",
+      "rpItemId": "5e6375e6-0855-4428-aa96-7f5a95a69d29",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "63a11c6d3a82eefdb8977f8431dfd2f7": {
+      "naam": "Thea Kuiper",
+      "telefoon": "0641012914",
+      "email": "mrstkuiper@hotmail.com",
+      "waTicket": 978601088,
+      "mailTicket": 979509626,
+      "verstuurdOp": "2026-09-09T14:56:38.715Z",
+      "rpItemId": "b8302c8b-031e-432e-978e-8a9eb55106fc",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
+    },
+    "2e8a2bd9c9a7bf5790b9c4285095bbe0": {
+      "naam": "Jeffrey Zweep",
+      "telefoon": "+31644207125",
+      "email": "zweepj@gmail.com",
+      "waTicket": 979541600,
+      "mailTicket": 978170540,
+      "verstuurdOp": "2026-09-09T17:54:00.414Z",
+      "rpItemId": "87d9b42d-3fd1-4712-a2d9-9fdd8bd37803",
+      "bron": "sunny",
+      "stijl": "sunny",
+      "herhaling": false,
+      "opVerzoek": false
     }
   },
   "conflictGemeld": {
@@ -2055,7 +2845,29 @@
     "a79772f8-a388-4413-b19d-e926105288fc": 2,
     "8a172a7538b4818dd45c985f6d727edd:herinnerd": "2026-08-29T10:29:45.864Z",
     "e11ae208556c478abfe4ac6c18e44637:herinnerd": "2026-08-29T10:30:02.822Z",
-    "60903772-3c0c-4ce4-8271-9425a5caa9bf": 2
+    "60903772-3c0c-4ce4-8271-9425a5caa9bf": 2,
+    "9c6913f90ad33f392e4165121a3c1bf8:herinnerd": "2026-08-29T18:09:20.488Z",
+    "2de29926605f208f6f2996de8082fdfb:herinnerd": "2026-08-30T11:34:53.368Z",
+    "cb179428f45b0157d7c7f6748ee4028b:herinnerd": "2026-09-01T12:00:09.511Z",
+    "818fa6ec-d149-4b74-8f54-36f058a25da3": 2,
+    "0b2b5106eca0b15c2a65dc054a9b07ff:herinnerd": "2026-09-03T09:05:26.902Z",
+    "6cd82346-5ef0-4b76-8299-eb124e05208a": 2,
+    "5831cb2940baee37c19bf1488816c1ab:herinnerd": "2026-09-04T08:17:26.290Z",
+    "a385e006788e9c7dfc097406a1e93f59:herinnerd": "2026-09-04T12:06:36.842Z",
+    "5a27635d-d0b4-4576-b6f5-2381f9b94b90": 2,
+    "37749f5c-d6b4-4010-a78e-6159e06f8548": 2,
+    "96e9995533ae4f0e5ad34207ebe44f32:herinnerd": "2026-09-05T11:54:53.470Z",
+    "e36f9bbc-9efb-4300-9ad1-cfbb7aa61c22": 2,
+    "8a2c3d67eaadcc5b5544cd451e25afba:herinnerd": "2026-09-06T07:16:51.423Z",
+    "716073a123b996341048716a4a660030:herinnerd": "2026-09-06T08:48:12.848Z",
+    "5c80564b75c9db6f65e2151195445f8a:herinnerd": "2026-09-06T12:01:04.241Z",
+    "2db390ee-f136-40cc-b3e0-a1690b03ff06": 2,
+    "8063e6e42225a57c98a595a9f2c6730f:herinnerd": "2026-09-07T08:52:31.337Z",
+    "5e0892207966e4440403438336369d4d:herinnerd": "2026-09-07T18:39:03.641Z",
+    "5887d58a-c36f-4e25-8ab7-a8bad024a320": 2,
+    "1f621ca2925d380ab459e2cf56436377:herinnerd": "2026-09-08T08:48:28.717Z",
+    "8a2f0a1ba0307c6226acb0bc165aecd6:herinnerd": "2026-09-08T11:21:03.894Z",
+    "2a671d9b-02ff-4601-89f1-8728df8b2d1b": 2
   },
   "nietBezorgdAlarm": {
     "6809635b-525f-4f07-a78d-1d11a3e72e64": "2026-08-22T10:37:42.630Z",
@@ -2064,9 +2876,10 @@
     "a7e6f580-ea25-43d5-8dcd-4d6505f3f375": "2026-08-26T09:59:02.941Z",
     "acfd2f5e-c823-45dd-8024-699dbd89bc6c": "2026-08-26T11:00:05.798Z",
     "60575a1e-f242-4c17-bf5e-7c4b37e89c7b": "2026-08-26T15:31:46.802Z",
-    "60903772-3c0c-4ce4-8271-9425a5caa9bf": "2026-08-29T14:31:54.317Z"
+    "60903772-3c0c-4ce4-8271-9425a5caa9bf": "2026-08-29T14:31:54.317Z",
+    "37749f5c-d6b4-4010-a78e-6159e06f8548": "2026-09-04T16:09:42.364Z"
   },
-  "alarmDigestOp": "2026-08-29T14:31:54.467Z",
+  "alarmDigestOp": "2026-09-04T16:09:42.528Z",
   "alarmWachtrij": [],
   "sunnyNavraag": {
     "a79772f8-a388-4413-b19d-e926105288fc": {
@@ -2078,10 +2891,212 @@
       "op": "2026-08-28T14:37:00.132Z",
       "via": "mail",
       "naVoorstellen": 2
+    },
+    "2db390ee-f136-40cc-b3e0-a1690b03ff06": {
+      "op": "2026-09-08T13:04:47.863Z",
+      "via": "mail",
+      "naVoorstellen": 2
     }
   },
   "winkelPlant": {},
-  "akkoordDatumSheet": {},
+  "akkoordDatumSheet": {
+    "0f17b46b-46e0-4916-9d6b-08d155a20897": {
+      "op": "2026-08-30T08:10:32.522Z",
+      "tab": "Aug 2026",
+      "rij": 572,
+      "geschreven": "29-8-26",
+      "overgeslagen": null
+    },
+    "b50f504f-4fa9-4b15-b132-b6ac04b5ec51": {
+      "op": "2026-08-30T11:52:18.654Z",
+      "tab": "Aug 2026",
+      "rij": 1389,
+      "geschreven": "30-8-26",
+      "overgeslagen": null
+    },
+    "de9660be-c65f-41f1-89dd-e363dfd767b8": {
+      "op": "2026-08-31T06:31:52.020Z",
+      "tab": "Aug 2026",
+      "rij": 1433,
+      "geschreven": "31-8-26",
+      "overgeslagen": null
+    },
+    "818fa6ec-d149-4b74-8f54-36f058a25da3": {
+      "op": "2026-08-31T14:49:41.534Z",
+      "tab": "Juli 2026 ",
+      "rij": 1508,
+      "geschreven": "31-8-26",
+      "overgeslagen": null
+    },
+    "cea896b8-2be4-4549-9847-0642d17945ba": {
+      "op": "2026-08-31T18:43:12.595Z",
+      "tab": "Aug 2026",
+      "rij": 1418,
+      "geschreven": "31-8-26",
+      "overgeslagen": null
+    },
+    "046f33fc-4421-4cfb-9b31-1aa8fc8b6d70": {
+      "op": "2026-09-01T19:09:37.974Z",
+      "tab": "Aug 2026",
+      "rij": 1544,
+      "geschreven": "1-9-26",
+      "overgeslagen": null
+    },
+    "6cd82346-5ef0-4b76-8299-eb124e05208a": {
+      "op": "2026-09-02T10:49:31.295Z",
+      "tab": "Aug 2026",
+      "rij": 928,
+      "geschreven": "2-9-26",
+      "overgeslagen": null
+    },
+    "06004da6-d0a0-4f47-bcc2-02f3efb3f0ad": {
+      "op": "2026-09-02T11:53:04.282Z",
+      "tab": "Juni 2026 ",
+      "rij": 507,
+      "geschreven": "2-9-26",
+      "overgeslagen": null
+    },
+    "786e9a12-1a9e-4149-8077-f86048ff9900": {
+      "op": "2026-09-02T12:33:19.130Z",
+      "tab": "Aug 2026",
+      "rij": 1417,
+      "geschreven": null,
+      "overgeslagen": "akkoorddatum al gevuld: 2-9-26"
+    },
+    "37060678-1892-4b17-ab1a-d82f779d5d94": {
+      "op": "2026-09-02T12:33:31.776Z",
+      "tab": "Sep 2026",
+      "rij": 30,
+      "geschreven": null,
+      "overgeslagen": "akkoorddatum al gevuld: 2-9-26"
+    },
+    "5a27635d-d0b4-4576-b6f5-2381f9b94b90": {
+      "op": "2026-09-03T11:08:18.882Z",
+      "tab": "Aug 2026",
+      "rij": 1498,
+      "geschreven": null,
+      "overgeslagen": "akkoorddatum al gevuld: 3-9-26"
+    },
+    "37749f5c-d6b4-4010-a78e-6159e06f8548": {
+      "op": "2026-09-03T12:15:52.102Z",
+      "tab": "Aug 2026",
+      "rij": 1531,
+      "geschreven": "3-9-26",
+      "overgeslagen": null
+    },
+    "1534d425-176f-4958-a5eb-4ec50911a4f1": {
+      "op": "2026-09-04T08:03:43.740Z",
+      "tab": "Aug 2026",
+      "rij": 1520,
+      "geschreven": "4-9-26",
+      "overgeslagen": null
+    },
+    "354dfe87-d759-4148-9a1a-c25a31e90d79": {
+      "op": "2026-09-04T10:52:42.136Z",
+      "tab": "Sep 2026",
+      "rij": 67,
+      "geschreven": null,
+      "overgeslagen": "akkoorddatum al gevuld: 4-9-26"
+    },
+    "e36f9bbc-9efb-4300-9ad1-cfbb7aa61c22": {
+      "op": "2026-09-04T14:53:22.498Z",
+      "tab": "April 2026",
+      "rij": 1270,
+      "geschreven": null,
+      "overgeslagen": "akkoorddatum al gevuld: 13-7-26"
+    },
+    "2f525027-216c-4840-8fd0-8782402e6c22": {
+      "op": "2026-09-05T08:45:01.261Z",
+      "tab": "Sep 2026",
+      "rij": 98,
+      "geschreven": "5-9-26",
+      "overgeslagen": null
+    },
+    "6a4dbf7b-86e2-477d-85a7-b39715c52e9e": {
+      "op": "2026-09-05T09:06:14.893Z",
+      "tab": "Sep 2026",
+      "rij": 99,
+      "geschreven": "5-9-26",
+      "overgeslagen": null
+    },
+    "438e7e5f-2569-4134-ba7b-fb9cfb6d3cbe": {
+      "op": "2026-09-05T10:15:05.256Z",
+      "tab": "Aug 2026",
+      "rij": 988,
+      "geschreven": "5-9-26",
+      "overgeslagen": null
+    },
+    "2db390ee-f136-40cc-b3e0-a1690b03ff06": {
+      "op": "2026-09-05T11:44:12.909Z",
+      "tab": "Aug 2026",
+      "rij": 1219,
+      "geschreven": "5-9-26",
+      "overgeslagen": null
+    },
+    "5887d58a-c36f-4e25-8ab7-a8bad024a320": {
+      "op": "2026-09-07T07:38:01.190Z",
+      "tab": "Sep 2026",
+      "rij": 42,
+      "geschreven": "7-9-26",
+      "overgeslagen": null
+    },
+    "2a671d9b-02ff-4601-89f1-8728df8b2d1b": {
+      "op": "2026-09-07T11:47:01.056Z",
+      "tab": "Juli 2026 ",
+      "rij": 1677,
+      "geschreven": "7-9-26",
+      "overgeslagen": null
+    },
+    "fc164ed1-445b-4aa4-9c1d-2eaafce753f1": {
+      "op": "2026-09-07T12:37:32.862Z",
+      "tab": "Sep 2026",
+      "rij": 45,
+      "geschreven": "7-9-26",
+      "overgeslagen": null
+    },
+    "f80349f2-e2ec-4394-b120-70adf4a33037": {
+      "op": "2026-09-08T08:59:02.929Z",
+      "tab": "Aug 2026",
+      "rij": 1182,
+      "geschreven": "8-9-26",
+      "overgeslagen": null
+    },
+    "2d540f55-df5a-4f66-9df4-8625ce964d54": {
+      "op": "2026-09-09T09:31:01.254Z",
+      "tab": "Sep 2026",
+      "rij": 103,
+      "geschreven": "9-9-26",
+      "overgeslagen": null
+    },
+    "5e6375e6-0855-4428-aa96-7f5a95a69d29": {
+      "op": "2026-09-09T10:04:50.132Z",
+      "tab": "Aug 2026",
+      "rij": 1455,
+      "geschreven": "9-9-26",
+      "overgeslagen": null
+    },
+    "b8302c8b-031e-432e-978e-8a9eb55106fc": {
+      "op": "2026-09-09T13:56:22.933Z",
+      "tab": "Sep 2026",
+      "rij": 75,
+      "geschreven": "9-9-26",
+      "overgeslagen": null
+    },
+    "87d9b42d-3fd1-4712-a2d9-9fdd8bd37803": {
+      "op": "2026-09-09T16:48:34.868Z",
+      "tab": "Aug 2026",
+      "rij": 1412,
+      "geschreven": "9-9-26",
+      "overgeslagen": null
+    },
+    "0dbe3c5b-3707-46e1-97df-d657f2399639": {
+      "op": "2026-09-09T17:54:07.216Z",
+      "tab": "Aug 2026",
+      "rij": 1310,
+      "geschreven": "9-9-26",
+      "overgeslagen": null
+    }
+  },
   "voorstelIntent": {
     "b59a4d0a61231fa8972155c8db3a9bd8": {
       "stijl": null,
@@ -2226,6 +3241,205 @@
       "bron": "sunny",
       "ver": true,
       "op": "2026-08-29T15:31:50.706Z"
+    },
+    "3964ddde9d522d5388da55baac5d4466": {
+      "stijl": null,
+      "bron": "opvolging",
+      "ver": true,
+      "op": "2026-09-01T16:03:03.508Z"
+    },
+    "e76a623d03111e3d86d147cbeb87dbc6": {
+      "stijl": null,
+      "bron": "klant-reply",
+      "ver": true,
+      "op": "2026-09-01T17:13:13.085Z"
+    },
+    "303a0960df20c0ef3e2f52091042d97a": {
+      "stijl": null,
+      "bron": "wachtmelding-reply",
+      "ver": true,
+      "op": "2026-09-02T12:36:03.504Z"
+    },
+    "f1f14cb714e9be0640a20dd6f9a46b10": {
+      "stijl": null,
+      "bron": "wachtmelding-reply",
+      "ver": true,
+      "op": "2026-09-02T12:48:00.460Z"
+    },
+    "45cbca41996304c553fe5b95a0678c6b": {
+      "stijl": "sunny",
+      "bron": "sunny",
+      "ver": true,
+      "op": "2026-09-02T13:02:34.867Z"
+    },
+    "0b2b5106eca0b15c2a65dc054a9b07ff": {
+      "stijl": "sunny",
+      "bron": "sunny",
+      "ver": true,
+      "op": "2026-09-02T13:02:42.104Z"
+    },
+    "a39fa3de958058e4d9fd3ce1e3575c91": {
+      "stijl": null,
+      "bron": "klant-reply",
+      "ver": true,
+      "op": "2026-09-02T15:34:51.421Z"
+    },
+    "b00495b1b4ead4737f0060f9766c3993": {
+      "stijl": "sunny",
+      "bron": "sunny",
+      "ver": true,
+      "op": "2026-09-03T11:06:28.281Z"
+    },
+    "a1b849d0fcbd7b9d5c1f2a882836378a": {
+      "stijl": null,
+      "bron": "winkel",
+      "ver": true,
+      "op": "2026-09-03T12:20:48.338Z"
+    },
+    "edc56c40d51bc224c0a7bc549d25a19c": {
+      "stijl": null,
+      "bron": "wachtmelding-reply",
+      "ver": true,
+      "op": "2026-09-03T13:05:32.417Z"
+    },
+    "01272136a541b89f5640e2e9713b88b8": {
+      "stijl": null,
+      "bron": "opvolging",
+      "ver": true,
+      "op": "2026-09-03T13:07:39.450Z"
+    },
+    "6a4c3a9d86bfd564bffc38347f6c0a90": {
+      "stijl": null,
+      "bron": "klant-reply",
+      "ver": true,
+      "op": "2026-09-03T15:44:41.161Z"
+    },
+    "02e5190465018e9388cdc8ce26e06e38": {
+      "stijl": null,
+      "bron": "opvolging",
+      "ver": false,
+      "op": "2026-09-04T12:22:56.373Z"
+    },
+    "dc41ad89177bfcfb53ff76014afa0f23": {
+      "stijl": null,
+      "bron": "opvolging",
+      "ver": true,
+      "op": "2026-09-04T16:09:40.645Z"
+    },
+    "5c80564b75c9db6f65e2151195445f8a": {
+      "stijl": null,
+      "bron": "opvolging",
+      "ver": true,
+      "op": "2026-09-05T15:56:10.008Z"
+    },
+    "8063e6e42225a57c98a595a9f2c6730f": {
+      "stijl": null,
+      "bron": "opvolging",
+      "ver": true,
+      "op": "2026-09-06T12:48:40.452Z"
+    },
+    "8c42a8c21defef3ec5dd393fd8aaf092": {
+      "stijl": "sunny",
+      "bron": "sunny",
+      "ver": true,
+      "op": "2026-09-08T07:35:59.972Z"
+    },
+    "64fc29c9c8c3b78226ab00b4d41af18b": {
+      "stijl": null,
+      "bron": "klant-reply",
+      "ver": true,
+      "op": "2026-09-08T10:37:04.438Z"
+    },
+    "0922e50d9ea7f9c57b18bc37cc5e5e14": {
+      "stijl": null,
+      "bron": "klant-reply",
+      "ver": true,
+      "op": "2026-09-08T10:43:38.197Z"
+    },
+    "1efb3652a42e10a1b08fde27fc7e1b71": {
+      "stijl": null,
+      "bron": "opvolging",
+      "ver": false,
+      "op": "2026-09-08T12:49:56.835Z"
+    }
+  },
+  "sunnyWachtmelding": {
+    "de9660be-c65f-41f1-89dd-e363dfd767b8": {
+      "op": "2026-08-31T06:32:45.547Z",
+      "via": "mail"
+    },
+    "LEAD-1788183011598-HQZ2": {
+      "op": "2026-08-31T13:40:16.051Z",
+      "via": "mail"
+    },
+    "6cd82346-5ef0-4b76-8299-eb124e05208a": {
+      "op": "2026-09-02T10:49:39.664Z",
+      "via": "wa"
+    },
+    "06004da6-d0a0-4f47-bcc2-02f3efb3f0ad": {
+      "op": "2026-09-02T11:53:28.973Z",
+      "via": "mail"
+    },
+    "786e9a12-1a9e-4149-8077-f86048ff9900": {
+      "op": "2026-09-02T12:33:29.439Z",
+      "via": "mail"
+    },
+    "37749f5c-d6b4-4010-a78e-6159e06f8548": {
+      "op": "2026-09-03T12:44:01.001Z",
+      "via": "wa"
+    },
+    "1534d425-176f-4958-a5eb-4ec50911a4f1": {
+      "op": "2026-09-04T08:04:35.315Z",
+      "via": "mail"
+    },
+    "354dfe87-d759-4148-9a1a-c25a31e90d79": {
+      "op": "2026-09-04T10:52:49.783Z",
+      "via": "mail"
+    }
+  },
+  "wachtmeldingReactie": {
+    "LEAD-1788183011598-HQZ2": {
+      "op": "2026-09-02T12:11:23.560Z",
+      "actie": "stuur-aanbod",
+      "tekst": "Deze week donderdag of vrijdag + kleurenwaaier (31-08 18:33)",
+      "ticket": 975234318,
+      "reden": "Daimy 02-09 V2 B: eerste route-plek op do/vr; aanbod met voorkeurDagen [4,5] in de rij"
+    },
+    "de9660be-c65f-41f1-89dd-e363dfd767b8": {
+      "op": "2026-09-02T12:34:16.001Z",
+      "actie": "stuur-aanbod",
+      "tekst": "Dat is prima, mag ook op andere dagen als het dan eerder kan (31-08)",
+      "ticket": 976968711,
+      "reden": "klant wil zo vroeg mogelijk; eerste duiding faalde op 529, door sessie 02-09 handmatig in de rij gezet"
+    },
+    "37749f5c-d6b4-4010-a78e-6159e06f8548": {
+      "op": "2026-09-03T13:03:34.481Z",
+      "actie": "stuur-aanbod",
+      "tekst": "Hoi Sunny, Graag gedaan! Voor volgende week heeft maandag vanaf 10:00 uur of donderdag tot 14:00 uur mijn voorkeur. Mocht een van deze momenten in jullie route passen, dan hoor ik het graag. Alvast be",
+      "ticket": 977727109,
+      "ok": true,
+      "reden": "voorkeur: dagen ma/do"
+    },
+    "6cd82346-5ef0-4b76-8299-eb124e05208a": {
+      "op": "2026-09-03T15:42:46.712Z",
+      "actie": "mens",
+      "tekst": "Ander moment",
+      "ticket": 974630795,
+      "reden": "reactie zonder herkenbare voorkeur (Klant wil een ander moment dan het voorstel.) — mens nodig"
+    }
+  },
+  "belMelding": {
+    "a79772f8-a388-4413-b19d-e926105288fc": "2026-09-02T15:07:26.556Z",
+    "b47f1ea2-092b-4b03-9fa8-445d8a5be797": "2026-09-02T15:07:26.810Z"
+  },
+  "herplanTeller": {
+    "LEAD-1788183011598-HQZ2": {
+      "datum": "2026-09-02",
+      "n": 1
+    },
+    "f80349f2-e2ec-4394-b120-70adf4a33037": {
+      "datum": "2026-09-08",
+      "n": 2
     }
   }
 }

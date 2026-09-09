@@ -1,24 +1,27 @@
 # Geheugen Pip — HR & Capaciteit
 
-## Lopende zaken
-- **7–8 september kritiek:** 0 inmeters beschikbaar (Joey Disney, Sjoerd teruggekeerde 12 sept). Moeten inmetingen rescheduled worden.
-- **Sjoerd op vakantie:** 24 aug–11 sept (bijgewerkt via vakanties-overzicht.json)
-- **Joey op vakantie:** 7–8 sept (Disney)
-- **Nanny (kantoor):** 10–28 aug (voorbij), volgende: 1–2 okt, 15–16 okt, 20–22 okt, 6 nov, 24 dec
+## Lopende zaken (2026-09-09 05:35 UTC)
+- **9–11 sept:** Joey ✓, Sjoerd weg → **50% dekking**. 2 afspraken geboekt 10 sept (middag). Kritiek maar keten kan doorlopen.
+- **12+ sept**: Joey + Sjoerd beide ✓ → **100% dekking**.
+- **Montage:** 5 teams (Dennis & Frenky, Marvin / Bart, Marvin / Moa, Tygo / Kevin, Yudi / Nick). 30 voorgesteld, 407 niet-compleet = **92% backlog**. Plafond 7/dag.
+- **Dennis vakantie 30-9 tot 14-10** (11 werkdagen). Voorbereiding dekking volgende week starten.
+- **Nanny-status**: ✓ ONLINE.
 
-## Bronnen
-- Vakanties: `/Users/clawdboot/sonty/data/vakanties-overzicht.json` (bijgewerkt 18:14 vandaag)
-- Inmeet-boekingen: `/Users/clawdboot/sonty/data/inmeet-boekingen.json` (200+ records, status per klant)
-- Brein-snapshot: `/Users/clawdboot/sonty/data/brein/snapshot.json` (74 jobs, 5 alarmen)
-- Vacaturemail: `/Users/clawdboot/sonty/logs/vacaturemail.log` (batch compleet, geen reactie-teller)
+## Bronnen (actueel 2026-09-09 05:35 UTC)
+- Vakanties: `data/vakanties-overzicht.json` (1057 items, 35 periodes; bijgewerkt 09-09 05:31)
+- Inmeet-boekingen: `data/inmeet-boekingen.json` (2 afspraken geboekt 10 sept, veel sept+)
+- Brein-snapshot: `data/brein/snapshot.json` (88 jobs, 8 alarmen)
+- Montage-voorstellen: `logs/montage-voorstellen.log` (30 voorgesteld, 407 niet-compleet; 09-09 05:10)
+- Vakanties-collect: `logs/vakanties-collect.log` (1057 items, 35 periodes; 09-09 05:31)
+- Vacaturemail: `logs/vacaturemail.log` (1744 verstuurd tot 01-07; conversie ONBEKEND)
+- Nanny-daemons: Online (vakanties-collect, inmeet-verwerker, inmeet-verzoeken)
 
-## Vragen nog openstaand
-1. Waar zijn de order-tellingen per week (vs plafond 35)?
-2. Waar zie ik vacature-reacties?
-3. Mag ik live montage-teams bijwerken in Planado, of alleen lezen?
+## Vragen voor Daimy (09-09 rapport)
+1. **Montage 92% niet-compleet**: normaal backlog of signaal dat inname > plafond?
 
-## Bijscholing 2026-08-29
-- Vakkennis ververst: `/Users/clawdboot/sonty/medewerkers/pip/vakkennis.md`.
-- Kernpunten: verzuimnorm 3-6%; monteur-utilisatie gemiddeld ~80% (best-in-class >89%, niet naar 100% pushen);
-  2+ weken vooruitkijken i.p.v. alleen morgen; afwijkingsdrempel >20% over/onderbezetting.
-- Vanaf nu: afwezigheid altijd als percentage/quotiënt tegen totaal beschikbaar rapporteren, niet alleen namen.
+## Bijscholing & praktijk
+- **2026-08-29**: Vakkennis ververst (benchmark-normen, afwijkingsdrempel >20%).
+- **2026-09-01**: Capaciteitsberekening per dag; 7–8 sept 0%, 9–11 sept 50% vastgesteld.
+- **2026-09-07**: Vakkennis ververst; drie V-vragen gesteld (geen reactie).
+- **2026-09-08**: Bevestigd — 0% dekking KRITIEK. 
+- **2026-09-09**: 50% dekking 9–11 sept; 2 afspraken geboekt 10 sept. Montage 92% niet-compleet. Dennis-dekking volgende week voorbereiding. Vacature-funnel nog altijd onbekend (reactie-conversie).

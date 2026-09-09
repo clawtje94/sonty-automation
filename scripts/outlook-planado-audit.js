@@ -31,7 +31,11 @@ const BUS = { '1f19ca1a-5a2d': 'Bus 1 Frenk&Dennis', '1f122f72-777f': 'Bus 2 Tyg
 const team = (uuid) => BUS[String(uuid || '').slice(0, 13)] || NAAM_VAN_UUID[uuid] || (uuid ? 'onbekend ' + String(uuid).slice(0, 8) : 'geen');
 const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 const huisnr = (adres) => { const m = String(adres || '').match(/\b(\d{1,4})\s?[a-zA-Z]?\b/); return m ? m[1] : ''; };
-const postcode = (adres) => { const m = String(adres || '').replace(/\s/g, '').match(/\d{4}[A-Za-z]{2}/); return m ? m[0].toUpperCase() : ''; };
+// Postcode = 4 cijfers (1e niet 0) + evt. spatie + 2 letters, MET woordgrens erna.
+// Fix 08-09: spaties niet weggooien, anders leest "Laan van Londen 1776 Dordrecht"
+// het huisnummer 1776 + "Do" (van Dordrecht) als nep-postcode "1776DO" → valse
+// "adres wijkt af"-melding bij Maatrijk (Laan van Londen 1776, 4-cijferig huisnr).
+const postcode = (adres) => { const m = String(adres || '').match(/\b[1-9]\d{3}\s?[A-Za-z]{2}\b/); return m ? m[0].replace(/\s/g, '').toUpperCase() : ''; };
 
 (async () => {
   const t0 = Date.now();

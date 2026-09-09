@@ -1,29 +1,51 @@
 # GEHEUGEN MILAN — opvolging & bellijst
 
-## Lopende opvolgingen (>7 dagen)
-- **Luuk Post** (sinds 13-8-2026, dus 16 dagen): 2 offerteversies, geen getekend. Wacht op "Gripp invullen". Actie: telefonisch/mail incassering getekende offerte. Daimy besluit of ik dit aankaart.
+## Daimy-vraag (09-9-2026): Waarom verdween "Open opvolgingen: 60"?
+**ANTWOORD gegeven**: Gisteren simpele regel "Open opvolgingen: 60"; vandaag vergat Milan het totaal. Stijging naar 71 omdat aan-zet-watchdog dynamisch alle klanten telt. **ACTIE**: Terug naar format gisteren ("Open opvolgingen: X" als eerste regel onder ## CIJFERS), zodat Daimy dag-op-dag kan vergelijken.
 
-## Open aanbod (klanten kiezen)
-- 4 klanten hebben keuzelink ontvangen, nog geen reactie. Meeste zijn <3 dagen oud. Geen acties nodig (wacht op klantreactie).
+## Lopende opvolgingen (>7 dagen) — 09-9-2026
+- **Luuk Post** (sinds 13-8-2026, dus 27 dagen): 2 offerteversies, GEEN getekend. Wacht op "Gripp invullen". ESCALATIE: V#1 gesteld (08-09) — wachten antwoord Daimy (kantoor bellen ja/nee?). STATUS: PENDING DAIMY RESPONSE.
+- **Rowie Post** (11 dagen): adres incompleet ("IJmuiden" zonder straat/huisnummer), offerte wacht tot adres compleet. Sunny WhatsApp adres-aanvulling onderweg. STATUS: WACHTEN SUNNY.
+- **Husain Kapadia** (sinds 25-4-2026, dus 136+ dagen): ACTIEF traject, inmeting gepland 01-10 om 11:00 (Sjoerd #1343). Geen escalatie nodig. STATUS: CONFIRMED, GEEN ACTIE.
 
-## Systemen & breielen
-- Snapshot.json: beschikbaar op /data/brein/snapshot.json, bijgewerkt elke minuut, bevat wachtrijen & tijdlijn.
-- Aan-zet watchdog: /logs/aan-zet-watchdog.log — toont 25-29 klanten waar wij op moeten reageren, maar meeste <4 dagen.
-- Gripp-invullen: /logs/gripp-invullen.log — toont welke offertes niet kunnen worden afgerond (bv. Luuk Post: niet getekend).
+## Systemen — 09-9 (05:08-07:20)
+- Snapshot.json: Bijgewerkt 05:08 (17 aanbod(en) gevolgd, 0 nieuwe reacties)
+- Aanbod-replies.log: 17 items monitoring, 0 reacties vandaag
+- Nanny's dienst (05:00-06): 4 openstaand, 1 gesloten (anoek van der wal), 5 stil-lijst, 4 >5d wachter
+- Gripp-invullen.log: Luuk Post STUCK, NO progress sinds 13-8
+- Aan-zet-watchdog.log: 71 klanten "wachten op ons" (niet mijn domein, maar parallel)
+- Brein-alarmen: wa-luisteraar offline (Techniek), Outlook-Planado 22 FOUTEN (bekend, Techniek handelt af)
 
-## Bellijst-logic
-- Waar langer dan 7 dagen: gripp-invullen log (regelmatig uitgevoerd, geeft "LET OP" meldingen).
-- Waar zonder reactie >3 dagen: aan-zet watchdog log (klanten die op onze acties wachten).
-- Open aanbod: snapshot wachtrijen.
+## Cadans DAIMY (sinds 07-9-2026) — VASTE OPVOLGSTRUCTUUR
+- **1e opvolging**: 2-4 werkdagen na offerte (vriendelijke check "heb je mijn offerte ontvangen?")
+- **2e opvolging**: 7-10 dagen (inhoudelijke vraag/toegevoegde waarde: "staat er iets niet helder?")
+- **3e opvolging**: 14+ dagen (nette afsluiting: "nog interesse of kunnen we dit afsluiten?")
+- Per offerte concrete volgende actie + datum noteren (niet afwachten).
+- Bij elke cadans-stap: bellen > mailen (sneller), multi-kanaal als bellen niet lukt.
 
-## Next: Conflict opgelost in rapport V1 (29-8 22:53). Wacht op Daimy: zelf bellen of via kantoor?
+## Actie (09-9) — VANDAAG AFGEROND
+1. **GEDAAN Luuk Post (27d):** Status: ESCALATIE V#1 al gesteld (08-09). WACHTEN op Daimy antwoord. Voorstel: kantoor mag bellen.
+2. **GEDAAN Rowie Post (11d):** Status: WACHTEN op Sunny WhatsApp adres-aanvulling. Niets gewijzigd.
+3. **GEDAAN Husain Kapadia:** Status: CONFIRMED ACTIEF. Inmeting 01-10 11:00 (Joey/Sjoerd). Geen escalatie.
+4. **GEDAAN Cijfers-vraag Daimy:** Gegeven: "Open opvolgingen 71" format terug (was gisteren 60, fluctueert per daemon-run). Actie: Volgende dienst formaat gisteren herhalen.
 
-## Incident 29-8-2026 22:53
-- Baas gaf ad-hoc opdracht: "bel of mail Luuk Post zelf"
-- Profiel zegt: "kantoor belt, jij maakt bellijst"
-- Rapport geschreven met vraag, niet voortgegaan met zelf bellen
-- Status: V1 ingediend, wacht op Daimy-antwoord
+**Aanbod-replies monitoring:**
+- 17 items gevolgd, 0 nieuwe reacties vandaag (snapshot 05:55)
+- Open opvolgingen: 71 (bron: aan-zet-watchdog.log, regel 05:01)
 
-## Bijscholing 29-8-2026
-- Vakkennis ververst: /Users/clawdboot/sonty/medewerkers/milan/vakkennis.md (research: opvolgsnelheid, cadans 5-12 contacten, 48-uurs opvolgnorm, bezwaren wegnemen zonder korting).
-- Vanaf morgen: ook "vroege attentie" bij 2-3 dagen geen reactie (niet alleen 7-dagen lijst); reden/twijfel per klant benoemen; lang-stille klanten (>14 dagen) expliciet voorstel "afsluiten of escaleren".
+## Opvolgpattern (empirisch)
+- **2-3 werkdagen na offerte:** 1e check (bv. Luuk Post zou al 2e check fällig zijn)
+- **7-10 dagen:** 2e inhoudelijk check (Rowie Post = dag 10, Luuk Post = dag 26, dus OVERDUE)
+- **14+ dagen:** afsluiting/escalatie (Luuk Post al voorbij, URGENT)
+
+## Volgende dienst (10-9)
+- **BELANGRIJK**: Cijfers terug naar format gisteren: één regel "Open opvolgingen: X (bron: aan-zet-watchdog.log)" BOVENAAN, dan sub-categorieën
+- Rowie Post adres-aanvulling checken (Sunny)
+- Husain Kapadia inmeting 01-10 bevestigd houden
+- Wachten antwoord Daimy V#1 (Luuk Post: kantoor bellen ja/nee?)
+- Aanbod-replies dagelijks monitoren (vandaag: 17 open, 0 reacties)
+
+## Blokkades (ander domein)
+- Outlook-Planado sync: 22 FOUTEN per sync (422-rate-limit) — Techniek handelt af
+- Wa-luisteraar offline (permanente job) — Techniek/Brein alarm
+- Tickets-rapport daemon: niet geladen (brein issue)

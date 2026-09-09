@@ -1,81 +1,76 @@
 {
- "peildatum": "2026-08-24T05:45:33.714Z",
+ "peildatum": "2026-09-07T05:45:41.440Z",
  "dagen": 45,
  "labels": {
   "Rolluik": {
-   "leads": 620,
-   "akk": 79,
-   "waarde": 275219.56
+   "leads": 512,
+   "akk": 46,
+   "waarde": 143841.78000000003
   },
   "Windvast": {
-   "leads": 471,
-   "akk": 28,
-   "waarde": 133469.71
+   "leads": 390,
+   "akk": 24,
+   "waarde": 109772.42
   },
   "Pergola": {
-   "leads": 415,
-   "akk": 16,
-   "waarde": 128174.73999999999
+   "leads": 381,
+   "akk": 9,
+   "waarde": 70079.1
   },
   "Voorraad scherm - 20% korting": {
-   "leads": 358,
-   "akk": 24,
-   "waarde": 81702.11
+   "leads": 242,
+   "akk": 21,
+   "waarde": 87072.28
   },
   "Suneye dichte cassette": {
-   "leads": 196,
-   "akk": 25,
-   "waarde": 105177.88
+   "leads": 141,
+   "akk": 16,
+   "waarde": 69925.7
   },
   "(geen productregel)": {
-   "leads": 87,
-   "akk": 37,
-   "waarde": 205933.16
-  },
-  "Suncube XL": {
-   "leads": 73,
-   "akk": 5,
-   "waarde": 10203
+   "leads": 80,
+   "akk": 28,
+   "waarde": 132335.14
   },
   "Markiezen": {
-   "leads": 67,
-   "akk": 6,
-   "waarde": 26594.52
+   "leads": 60,
+   "akk": 3,
+   "waarde": 28752.53
+  },
+  "Suncube XL": {
+   "leads": 58,
+   "akk": 5,
+   "waarde": 11065.39
   },
   "Sunelite dichte cassette": {
-   "leads": 66,
-   "akk": 4,
-   "waarde": 17328.86
+   "leads": 46,
+   "akk": 2,
+   "waarde": 10302.119999999999
   },
   "Sunbasic dichte cassette": {
-   "leads": 62,
+   "leads": 41,
    "akk": 3,
-   "waarde": 17807
-  },
-  "Winkel offerte": {
-   "leads": 43,
-   "akk": 13,
-   "waarde": 58417.03
-  },
-  "Offerte op maat": {
-   "leads": 38,
-   "akk": 10,
-   "waarde": 34070.05
+   "waarde": 16061
   },
   "ZIP bovenliggende zonwering": {
-   "leads": 36,
+   "leads": 31,
    "akk": 1,
    "waarde": 1504.63
   },
-  "Sunbasic open cassette": {
-   "leads": 20,
-   "akk": 0,
-   "waarde": 0
+  "Offerte op maat": {
+   "leads": 29,
+   "akk": 7,
+   "waarde": 31098.94
   },
-  "Niet windvast": {
-   "leads": 19,
-   "akk": 2,
-   "waarde": 3142.46
+  "Winkel offerte": {
+   "leads": 21,
+   "akk": 8,
+   "waarde": 62837.04
+  },
+  "Sunbasic open cassette": {
+   "leads": 16,
+   "akk": 1,
+   "waarde": 2266
   }
  }
 }

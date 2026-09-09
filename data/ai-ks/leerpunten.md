@@ -160,3 +160,15 @@ precies de aanbieding die geldt zodra we hebben ingemeten.
 - (2026-08-24) [team-notitie bij e-mail Maran Verweij] je kan haar beantwoorden opbeide mails in 1 antwoord aub
 - (2026-08-27) [team-notitie bij e-mail Marcel van Beek] is marcel nou al ingeboekt? niks naar de klant sturen alleen even hier laten weten
 - (2026-08-29) [team-notitie bij e-mail edwin maclennan] oppakken aub, jorren is tot 6 september op vakantie dus iedereen die aan hem word toegewezen zelf oppakken of in mens nodig team zetten.
+- (2026-08-29) [team-notitie bij gesprek +31626088541] goed de antwoorden onder foto&#39;s ook lezen want onder de eerst afbeeldingen staat gewoon deze tekst: Sorry voor de late reactie maar we hebben het nog een keer na gemeten.Het zouden rolluiken moeten zijn van 1.20br x 1.50 maal 4 ramen slaapkamers. Kast en de lamellen in antraciet. Draaischakelaars. Het is een drive-in woning. Ik stuur je een foto met de situatie vanuit de achtertuin waar een draaitrap buiten zit met daarboven een slaapkamer. Er is geen achter in-uitgang vanuit de tuin alleen een deur vanuit de tuinkamer. Het balkon is 1.60. Wat kunnen jullie hiermee en blijft de ruim 3100 euro hetzelfde? Omdat ik veel nachten werk is het moeilijk om een bezoek te brengen aan jullie showroom.
+- (2026-08-31) [team-notitie bij e-mail Boy van Maaren] mail nog even dat hij ook ge hoogte&#39;s stuurd en niet alleen de breedte?
+- (2026-08-31) [team-notitie bij e-mail Irene De Koning] zelf opppakken dat kan je nu
+- (2026-08-31) [team-notitie bij e-mail martijn landman] waaarom staat deze bij mens nodig?
+- (2026-08-31) [team-notitie bij gesprek Fadıl] had niet terug gehoeven naar mens nodig want je heb ook al zelf gereageerd
+- (2026-08-31) [team-notitie bij e-mail rowiepost@gmail.com] hebben gewoon een indactie gehad? doe je werk
+- (2026-08-31) [team-notitie bij e-mail Angelia Daflaar] kan je zelf afhandelen!
+- (2026-08-31) [team-notitie bij gesprek Sarah Schaeffer] antwoord maar in het engels dat haar producten deze donderdag binnen komen maar dat de plannning er tot woensdag niet is dus zodat ze er weer is dat ze cotnact opneemt met sarah voor het maken van een montage afspraak.
+- (2026-08-31) [team-notitie bij e-mail Aerts] zelf oplossen.
+- (2026-08-31) [team-notitie bij e-mail martijn landman] zelf oplossen met de planning? kan makkelijk je ziet wat hij vraagt over de dagen dat hij kan voor inmeten de rest hoeft geen antwoord meer te krijgen
+- (2026-09-03) [team-notitie bij gesprek +31655130559] gesprek lezen offerte aanpassen kloppend en hier sturen, daarna inplannen voor inmeten.
+- (2026-09-06) [team-notitie bij gesprek +31610066577] weet jij dat? niks naar de klant sturen allen mij antwoorden

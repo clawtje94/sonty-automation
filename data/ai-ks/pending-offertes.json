@@ -1016,5 +1016,258 @@
   "kanaal": "EMAIL",
   "status": "klaar",
   "aangemaakt": 1787920771733
+ },
+ {
+  "lcId": "389ddcf6-95bf-47d1-b325-2a2a2ba8dc5e",
+  "ticketId": 977470229,
+  "klantNaam": "Angelo de Jong",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 3700,
+    "hoogteMM": 1080,
+    "framekleur": "RAL 9005",
+    "bediening": "io",
+    "aantal": 2
+   }
+  ],
+  "sonny": false,
+  "kanaal": "WA",
+  "status": "klaar",
+  "aangemaakt": 1788171933942
+ },
+ {
+  "lcId": "e799e348-c9eb-4d71-82aa-db4d6ccd95eb",
+  "ticketId": 977368624,
+  "klantNaam": "Hans Lubbers",
+  "producten": [
+   {
+    "product": "suncube uitvalscherm",
+    "breedteMM": 3800,
+    "uitvalMM": 1500,
+    "bediening": "io",
+    "framekleur": "Technisch aluminium",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1788199419822
+ },
+ {
+  "lcId": "5a3519c4-1547-499c-8d29-7c3c5ba5dad4",
+  "ticketId": 977792324,
+  "klantNaam": "Galina",
+  "producten": [
+   {
+    "product": "roma zipscreen",
+    "breedteMM": 2010,
+    "hoogteMM": 1870,
+    "bediening": "solar",
+    "framekleur": "diepblauw RAL 5011/5004 n.t.b.",
+    "aantal": 1
+   },
+   {
+    "product": "roma zipscreen",
+    "breedteMM": 1360,
+    "hoogteMM": 1850,
+    "bediening": "solar",
+    "framekleur": "diepblauw RAL 5011/5004 n.t.b.",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1788428107333
+ },
+ {
+  "lcId": "9d6c3fee-15af-4202-80b8-d1bc81e15c97",
+  "ticketId": 976520241,
+  "klantNaam": "Frans Baas",
+  "producten": [
+   {
+    "product": "roma zipscreen",
+    "breedteMM": 2000,
+    "hoogteMM": 2700,
+    "bediening": "io",
+    "framekleur": "n.t.b.",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1788443228434
+ },
+ {
+  "lcId": "d1554fdf-4644-4497-917b-5e48494f8fdc",
+  "ticketId": 977754300,
+  "klantNaam": "Andrea Pasero",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 2800,
+    "hoogteMM": 1300,
+    "bediening": "solar",
+    "framekleur": "RAL 9010",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1788535602484
+ },
+ {
+  "lcId": "1e4567ec-1bc1-4e97-b4e5-5352be338a78",
+  "ticketId": 979321068,
+  "klantNaam": "Laurens Koning",
+  "producten": [
+   {
+    "product": "zip design 110",
+    "breedteMM": 1600,
+    "hoogteMM": 2450,
+    "bediening": "io",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 2800,
+    "hoogteMM": 2450,
+    "bediening": "io",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 2600,
+    "hoogteMM": 2450,
+    "bediening": "io",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 1000,
+    "hoogteMM": 2450,
+    "bediening": "io",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 3200,
+    "hoogteMM": 1450,
+    "bediening": "io",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 1000,
+    "hoogteMM": 1450,
+    "bediening": "io",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 1880,
+    "hoogteMM": 1000,
+    "bediening": "io",
+    "framekleur": "antraciet structuur",
+    "aantal": 2
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 1960,
+    "hoogteMM": 1450,
+    "bediening": "io",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1788950509049
+ },
+ {
+  "lcId": "e24f8355-18b8-4518-bda3-059d6deb69bf",
+  "ticketId": 979321068,
+  "klantNaam": "Laurens Koning",
+  "producten": [
+   {
+    "product": "zip design 110",
+    "breedteMM": 1600,
+    "hoogteMM": 2450,
+    "bediening": "solar",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 2800,
+    "hoogteMM": 2450,
+    "bediening": "solar",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 2600,
+    "hoogteMM": 2450,
+    "bediening": "solar",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 1000,
+    "hoogteMM": 2450,
+    "bediening": "solar",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 3200,
+    "hoogteMM": 1450,
+    "bediening": "solar",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 1000,
+    "hoogteMM": 1450,
+    "bediening": "solar",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 1880,
+    "hoogteMM": 1000,
+    "bediening": "solar",
+    "framekleur": "antraciet structuur",
+    "aantal": 2
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 1960,
+    "hoogteMM": 1450,
+    "bediening": "solar",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1788950509181
  }
 ]

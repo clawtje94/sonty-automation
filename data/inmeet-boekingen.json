@@ -541,7 +541,40 @@
     "duurMin": 30,
     "aanbodToken": "9a69d43d5f65414d6bf6f0e2192992f3",
     "geboektOp": "2026-08-10T12:44:35.379Z",
-    "status": "geboekt"
+    "status": "geannuleerd",
+    "mutatie": {
+      "soort": "annuleer",
+      "reden": "klant annuleerde in het gesprek. Reden: geen reden gegeven — citaat: kan ik mijn afspraak toch cancelen?",
+      "bron": "sunny",
+      "op": "2026-09-04T12:28:37.089Z",
+      "stappen": [
+        {
+          "stap": "agenda",
+          "ok": true,
+          "detail": "Bookings bestond al niet meer"
+        },
+        {
+          "stap": "planado",
+          "ok": true,
+          "detail": "HTTP 200"
+        },
+        {
+          "stap": "annuleringslijst",
+          "ok": true,
+          "detail": "5 kandidaat/kandidaten gemeld"
+        },
+        {
+          "stap": "sheet",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "stap": "rp-status",
+          "ok": true,
+          "detail": "bewust niet aangeraakt (kantoor beslist)"
+        }
+      ]
+    }
   },
   "b34b62bc-f2b6-4202-8510-8e761a78852b": {
     "naam": "Rick van Nieuwkerk",
@@ -1113,8 +1146,9 @@
     "naam": "Barbara Galante",
     "telefoon": "+31621142048",
     "email": "galante.barbara@hotmail.com",
-    "planadoJobUuid": "1f19a734-e628-6990-ba62-0e0222c48ea3",
-    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEuhGu0AAAAA==",
+    "planadoJobUuid": "1f1a87ec-fe98-6e80-a2f9-5a0b02ef2c3b",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EBlAAAAA==",
+    "agendaVia": "bookings",
     "grippNr": "6497",
     "sheet": {
       "tab": "Aug 2026",
@@ -1124,9 +1158,15 @@
     "aankomst": "2026-10-01T09:55:00.000Z",
     "inmeter": "Sjoerd",
     "duurMin": 20,
-    "aanbodToken": "97736f7aa43d3b19b74d5198a09a81b4",
-    "geboektOp": "2026-08-17T19:39:23.608Z",
-    "status": "geboekt"
+    "aanbodToken": null,
+    "geboektOp": "2026-09-04T16:37:01.960Z",
+    "status": "geboekt",
+    "bron": "kantoor-herstel (Outlook-annulering was ",
+    "bevestiging": {
+      "wa": false,
+      "mail": true,
+      "op": "2026-09-04T16:53:56.294Z"
+    }
   },
   "75a71629-8fa7-4a06-a46d-e5a63d39816a": {
     "naam": "Bartho de Jong",
@@ -2094,8 +2134,8 @@
     "naam": "Mickey Kalra",
     "telefoon": "+31618600992",
     "email": "mickey.kalra.mk@gmail.com",
-    "planadoJobUuid": "1f1a3952-4baf-6680-9f64-2a58417506c4",
-    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEwvfZ8gAAAA==",
+    "planadoJobUuid": "1f1a8826-9afe-6d10-9deb-6ac8b6e2955a",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EBlgAAAA==",
     "agendaVia": "bookings",
     "grippNr": "6578",
     "sheet": {
@@ -2103,17 +2143,17 @@
       "rij": 1397,
       "kolomInkoop": 23
     },
-    "aankomst": "2026-10-01T10:50:00.000Z",
+    "aankomst": "2026-10-01T10:15:00.000Z",
     "inmeter": "Sjoerd",
     "duurMin": 40,
     "aanbodToken": null,
-    "geboektOp": "2026-08-29T10:34:21.165Z",
+    "geboektOp": "2026-09-04T17:02:40.655Z",
     "status": "geboekt",
-    "bron": "sunny",
+    "bron": "herstel-keuze",
     "bevestiging": {
-      "wa": true,
+      "wa": false,
       "mail": true,
-      "op": "2026-08-29T10:34:43.747Z"
+      "op": "2026-09-04T17:02:44.550Z"
     }
   },
   "45116778-a206-44cb-a5b1-e6656d85cbc7": {
@@ -2162,5 +2202,739 @@
     "geboektOp": "2026-08-29T10:36:59.327Z",
     "status": "geboekt",
     "bron": "winkel"
+  },
+  "0f17b46b-46e0-4916-9d6b-08d155a20897": {
+    "naam": "P Butteling",
+    "telefoon": "+31623117957",
+    "email": "p_butteling@ziggo.nl",
+    "planadoJobUuid": "1f1a44b4-31a5-6500-a77a-3270105bd76f",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EAmgAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6581",
+    "sheet": {
+      "tab": "Aug 2026",
+      "rij": 572,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-28T10:15:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 25,
+    "aanbodToken": null,
+    "geboektOp": "2026-08-30T08:17:52.285Z",
+    "status": "geboekt",
+    "bron": "sunny",
+    "bevestiging": {
+      "wa": true,
+      "mail": true,
+      "op": "2026-08-30T08:17:55.892Z"
+    }
+  },
+  "b50f504f-4fa9-4b15-b132-b6ac04b5ec51": {
+    "naam": "RR van Donge",
+    "telefoon": "+31622242220",
+    "email": "rvdonge@gmail.com",
+    "planadoJobUuid": "1f1a5159-3257-6a40-8a27-4e1313e4db55",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EAngAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6582",
+    "sheet": {
+      "tab": "Aug 2026",
+      "rij": 1389,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-22T13:30:00.000Z",
+    "inmeter": "Sjoerd",
+    "duurMin": 35,
+    "aanbodToken": "4463498276bc5d5ea9f2045fd57a16f1",
+    "geboektOp": "2026-08-31T08:26:12.885Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": true,
+      "mail": false,
+      "op": "2026-08-31T08:26:35.154Z"
+    }
+  },
+  "7e445d46-2a8e-46c1-a983-63b25a075662": {
+    "naam": "Angelo de Jong",
+    "telefoon": "+31614962689",
+    "email": "angeloboy2@hotmail.com",
+    "planadoJobUuid": "1f1a5587-18d9-6c10-8bce-5a6383d350f4",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EApQAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6585",
+    "sheet": {
+      "tab": "Aug 2026",
+      "rij": 1532,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-22T13:30:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 35,
+    "aanbodToken": "23a59dcea911a1f25074e7a66ede6fbf",
+    "geboektOp": "2026-08-31T16:24:55.153Z",
+    "status": "geannuleerd",
+    "bron": null,
+    "bevestiging": {
+      "wa": true,
+      "mail": false,
+      "op": "2026-08-31T16:24:56.976Z"
+    },
+    "mutatie": {
+      "soort": "annuleer",
+      "reden": "klant annuleerde via WhatsApp/mail: Klant ziet af van de opdracht.",
+      "bron": "klant-reply",
+      "op": "2026-09-01T06:18:38.243Z",
+      "stappen": [
+        {
+          "stap": "agenda",
+          "ok": true,
+          "detail": "Bookings 204"
+        },
+        {
+          "stap": "planado",
+          "ok": true,
+          "detail": "HTTP 200"
+        },
+        {
+          "stap": "annuleringslijst",
+          "ok": true,
+          "detail": "3 kandidaat/kandidaten gemeld"
+        },
+        {
+          "stap": "sheet",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "stap": "rp-status",
+          "ok": true,
+          "detail": "bewust niet aangeraakt (kantoor beslist)"
+        }
+      ]
+    }
+  },
+  "cea896b8-2be4-4549-9847-0642d17945ba": {
+    "naam": "Mark van der Togt",
+    "telefoon": "0651683526",
+    "email": "markvandertogt66@gmail.com",
+    "planadoJobUuid": "1f1a5d6e-604e-6a80-963f-569e51251861",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EAqwAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6586",
+    "sheet": {
+      "tab": "Aug 2026",
+      "rij": 1418,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-29T09:40:00.000Z",
+    "inmeter": "Sjoerd",
+    "duurMin": 40,
+    "aanbodToken": "03a65e68475fa95d005f9d9335c43132",
+    "geboektOp": "2026-09-01T07:30:07.738Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": true,
+      "mail": false,
+      "op": "2026-09-01T07:30:10.004Z"
+    }
+  },
+  "818fa6ec-d149-4b74-8f54-36f058a25da3": {
+    "naam": "Nathan Johnstone",
+    "telefoon": "06",
+    "email": "locotewz@gmail.com",
+    "planadoJobUuid": "1f1a63a0-36f7-6190-b610-566d43bdabbe",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EAxAAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6588",
+    "sheet": {
+      "tab": "Juli 2026 ",
+      "rij": 1508,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-22T14:05:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 20,
+    "aanbodToken": "e76a623d03111e3d86d147cbeb87dbc6",
+    "geboektOp": "2026-09-01T19:19:39.917Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": false,
+      "mail": false,
+      "op": "2026-09-01T19:19:40.817Z"
+    }
+  },
+  "de9660be-c65f-41f1-89dd-e363dfd767b8": {
+    "naam": "Martijn Landman",
+    "telefoon": "+31624668381",
+    "email": "martijnlandman1984@hotmail.com",
+    "planadoJobUuid": "1f1a6ce9-09b9-6030-bd7a-0a55e8a7cbb0",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EA5AAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6594",
+    "sheet": {
+      "tab": "Aug 2026",
+      "rij": 1433,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-24T10:30:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 30,
+    "aanbodToken": "303a0960df20c0ef3e2f52091042d97a",
+    "geboektOp": "2026-09-02T13:02:56.857Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": true,
+      "mail": false,
+      "op": "2026-09-02T13:03:54.255Z"
+    }
+  },
+  "046f33fc-4421-4cfb-9b31-1aa8fc8b6d70": {
+    "naam": "Tim Mesman",
+    "telefoon": "+31610229599",
+    "email": "leomesman@ziggo.nl",
+    "planadoJobUuid": "1f1a6d1c-2a20-6430-bef5-1e483ff46498",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EA5wAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6595",
+    "sheet": {
+      "tab": "Aug 2026",
+      "rij": 1544,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-24T12:30:00.000Z",
+    "inmeter": "Sjoerd",
+    "duurMin": 25,
+    "aanbodToken": "dcdba7ec736a0602f43da29cc4bb8f88",
+    "geboektOp": "2026-09-02T13:25:44.018Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": true,
+      "mail": false,
+      "op": "2026-09-02T13:25:46.381Z"
+    }
+  },
+  "37060678-1892-4b17-ab1a-d82f779d5d94": {
+    "naam": "Bakker -",
+    "telefoon": "0624508853",
+    "email": "germar14@ziggo.nl",
+    "planadoJobUuid": "1f1a6d63-d01a-6670-96ec-2e95275697d7",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EA7gAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6596",
+    "sheet": {
+      "tab": "Sep 2026",
+      "rij": 30,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-24T07:00:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 25,
+    "aanbodToken": null,
+    "geboektOp": "2026-09-02T13:57:50.516Z",
+    "status": "geboekt",
+    "bron": "sunny",
+    "bevestiging": {
+      "wa": true,
+      "mail": true,
+      "op": "2026-09-02T13:57:55.380Z"
+    }
+  },
+  "786e9a12-1a9e-4149-8077-f86048ff9900": {
+    "naam": "Richard de Jong",
+    "telefoon": "06-22659997",
+    "email": "richard261186@outlook.com",
+    "planadoJobUuid": "1f1a6d9e-cba9-61a0-bef5-1e483ff46498",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EA8AAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6597",
+    "sheet": {
+      "tab": "Aug 2026",
+      "rij": 1417,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-10-19T07:00:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 25,
+    "aanbodToken": null,
+    "geboektOp": "2026-09-02T14:24:16.360Z",
+    "status": "geboekt",
+    "bron": "sunny",
+    "bevestiging": {
+      "wa": true,
+      "mail": true,
+      "op": "2026-09-02T14:24:21.072Z"
+    }
+  },
+  "06004da6-d0a0-4f47-bcc2-02f3efb3f0ad": {
+    "naam": "Myongsuk Chi",
+    "telefoon": "+31715721795",
+    "email": "chimyongsuk@gmail.com",
+    "planadoJobUuid": "1f1a71eb-1ee7-6270-bc2e-3246e70c7d3f",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EA9wAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6598",
+    "sheet": {
+      "tab": "Juni 2026 ",
+      "rij": 507,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-29T10:45:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 45,
+    "aanbodToken": "8deaaaec38f62872463d146731d5cd10",
+    "geboektOp": "2026-09-02T22:36:31.216Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": false,
+      "mail": false,
+      "op": "2026-09-02T22:36:32.269Z"
+    }
+  },
+  "LEAD-1788183011598-HQZ2": {
+    "naam": "Rowie Post",
+    "telefoon": "0613263460",
+    "email": "rowiepost@gmail.com",
+    "planadoJobUuid": "1f1a7718-957a-6780-9295-529b39339dcd",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EBCwAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": null,
+    "sheet": null,
+    "aankomst": "2026-10-15T10:30:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 15,
+    "aanbodToken": "a39fa3de958058e4d9fd3ce1e3575c91",
+    "geboektOp": "2026-09-03T08:29:43.617Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": true,
+      "mail": false,
+      "op": "2026-09-03T08:29:45.591Z"
+    }
+  },
+  "8e98d942-defe-41bd-b595-c20e010365e5": {
+    "naam": "Markus Naumer",
+    "telefoon": "+31622223964",
+    "email": "markus.naumer@gmail.com",
+    "planadoJobUuid": "1f1a79f9-a5c3-6a30-ab0e-1eb7c32b6b2d",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EBMAAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6600",
+    "sheet": {
+      "tab": "Juli 2026 ",
+      "rij": 893,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-10-13T07:00:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 40,
+    "aanbodToken": "a1b849d0fcbd7b9d5c1f2a882836378a",
+    "geboektOp": "2026-09-03T13:59:22.312Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": true,
+      "mail": false,
+      "op": "2026-09-03T13:59:24.967Z"
+    }
+  },
+  "6cd82346-5ef0-4b76-8299-eb124e05208a": {
+    "naam": "Cornelis  Gerdzen",
+    "telefoon": "+31615023670",
+    "email": "keesgerdzen@gmail.com",
+    "planadoJobUuid": "1f1a7af0-874e-6220-ae21-3a32be08ab58",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EBSwAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6602",
+    "sheet": {
+      "tab": "Aug 2026",
+      "rij": 928,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-10-01T11:30:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 20,
+    "aanbodToken": "6a4c3a9d86bfd564bffc38347f6c0a90",
+    "geboektOp": "2026-09-03T15:49:49.296Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": true,
+      "mail": false,
+      "op": "2026-09-03T15:49:52.108Z"
+    }
+  },
+  "5a27635d-d0b4-4576-b6f5-2381f9b94b90": {
+    "naam": "Marjan Evans de Wijn",
+    "telefoon": "+31614314360",
+    "email": "marjan.evans@gmail.com",
+    "planadoJobUuid": "1f1a8619-089a-69a0-ac62-46237d8e860a",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EBeQAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6608",
+    "sheet": {
+      "tab": "Aug 2026",
+      "rij": 1498,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-10T13:40:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 30,
+    "aanbodToken": "02e5190465018e9388cdc8ce26e06e38",
+    "geboektOp": "2026-09-04T13:07:38.639Z",
+    "status": "geannuleerd",
+    "bron": null,
+    "bevestiging": {
+      "wa": true,
+      "mail": false,
+      "op": "2026-09-04T13:07:40.892Z"
+    },
+    "mutatie": {
+      "soort": "annuleer",
+      "reden": "klant annuleerde in het gesprek. Reden: Joey is al op 3 september langs geweest om in te meten; de afspraak van 10-09 is dubbel/overbodig. Klant zit dan bovendien in Spanje. — citaat: haal die 10-09 eruit, want wij zitten dan al in Spanje!",
+      "bron": "sunny",
+      "op": "2026-09-04T14:39:33.313Z",
+      "stappen": [
+        {
+          "stap": "agenda",
+          "ok": true,
+          "detail": "Bookings 204"
+        },
+        {
+          "stap": "planado",
+          "ok": true,
+          "detail": "HTTP 200"
+        },
+        {
+          "stap": "annuleringslijst",
+          "ok": true,
+          "detail": "6 kandidaat/kandidaten gemeld"
+        },
+        {
+          "stap": "sheet",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "stap": "rp-status",
+          "ok": true,
+          "detail": "bewust niet aangeraakt (kantoor beslist)"
+        }
+      ]
+    }
+  },
+  "1f576933-09a7-48df-88e8-c86edc4e6b0a": {
+    "naam": "Andrea Pasero",
+    "telefoon": "+31642546905",
+    "email": "andrea.pasero@gmail.com",
+    "planadoJobUuid": "1f1a88ae-80ed-6170-8647-0a5e8833ad78",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEw7EBmQAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6611",
+    "sheet": null,
+    "aankomst": "2026-10-12T07:00:00.000Z",
+    "inmeter": "Sjoerd",
+    "duurMin": 20,
+    "aanbodToken": "2e306ad3e41dec517e6e370a1a7d7570",
+    "geboektOp": "2026-09-04T18:03:53.444Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": false,
+      "mail": false,
+      "op": "2026-09-04T18:03:54.723Z"
+    }
+  },
+  "354dfe87-d759-4148-9a1a-c25a31e90d79": {
+    "naam": "Jeffrey Gielisse",
+    "telefoon": "+31631797472",
+    "email": "gielissejeffrey@hotmail.com",
+    "planadoJobUuid": "1f1a8fdc-71fe-6330-a5c8-02333ee07c33",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEx7bV9AAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6613",
+    "sheet": {
+      "tab": "Sep 2026",
+      "rij": 67,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-10-19T07:00:00.000Z",
+    "inmeter": "Sjoerd",
+    "duurMin": 50,
+    "aanbodToken": "730caf8db564f5cd64c4cae72171e16c",
+    "geboektOp": "2026-09-05T07:45:55.581Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": true,
+      "mail": false,
+      "op": "2026-09-05T07:45:57.663Z"
+    }
+  },
+  "6a4dbf7b-86e2-477d-85a7-b39715c52e9e": {
+    "naam": "Mark van der ree",
+    "telefoon": "0625592034",
+    "email": "mark_ado1@hotmail.com",
+    "planadoJobUuid": "1f1a9164-00a9-6880-a797-3e53a57b0962",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEx7bV_AAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6614",
+    "sheet": {
+      "tab": "Sep 2026",
+      "rij": 99,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-10-01T07:45:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 30,
+    "aanbodToken": null,
+    "geboektOp": "2026-09-05T10:41:07.273Z",
+    "status": "geboekt",
+    "bron": "sunny",
+    "bevestiging": {
+      "wa": true,
+      "mail": true,
+      "op": "2026-09-05T10:41:10.871Z"
+    }
+  },
+  "2f525027-216c-4840-8fd0-8782402e6c22": {
+    "naam": "Bas Santana",
+    "telefoon": "0657564936",
+    "email": "bastiaan.shirley@gmail.com",
+    "planadoJobUuid": "1f1a9576-c75e-6c20-9edd-76d68502e278",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEx8r05gAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6615",
+    "sheet": {
+      "tab": "Sep 2026",
+      "rij": 98,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-10-08T08:20:00.000Z",
+    "inmeter": "Sjoerd",
+    "duurMin": 120,
+    "aanbodToken": null,
+    "geboektOp": "2026-09-05T18:27:38.813Z",
+    "status": "geboekt",
+    "bron": "sunny",
+    "bevestiging": {
+      "wa": true,
+      "mail": true,
+      "op": "2026-09-05T18:27:42.649Z"
+    }
+  },
+  "438e7e5f-2569-4134-ba7b-fb9cfb6d3cbe": {
+    "naam": "Iris Heemskerk",
+    "telefoon": "+31615341821",
+    "email": "iris.heemskerk@quicknet.nl",
+    "planadoJobUuid": "1f1a9de4-4422-6750-9c39-16b648eb2788",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEyDaBFgAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6616",
+    "sheet": {
+      "tab": "Aug 2026",
+      "rij": 988,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-30T11:20:00.000Z",
+    "inmeter": "Sjoerd",
+    "duurMin": 35,
+    "aanbodToken": null,
+    "geboektOp": "2026-09-06T10:32:50.630Z",
+    "status": "geboekt",
+    "bron": "sunny",
+    "bevestiging": {
+      "wa": true,
+      "mail": true,
+      "op": "2026-09-06T10:33:39.758Z"
+    }
+  },
+  "fc164ed1-445b-4aa4-9c1d-2eaafce753f1": {
+    "naam": "Max Kempenaar",
+    "telefoon": "+31654386345",
+    "email": "kempenaarmax@gmail.com",
+    "planadoJobUuid": "1f1aae5f-1022-6930-940d-022ea2465c57",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEyDaBMAAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6621",
+    "sheet": {
+      "tab": "Sep 2026",
+      "rij": 45,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-29T11:15:00.000Z",
+    "inmeter": "Sjoerd",
+    "duurMin": 80,
+    "aanbodToken": null,
+    "geboektOp": "2026-09-07T18:00:23.721Z",
+    "status": "geboekt",
+    "bron": "sunny",
+    "bevestiging": {
+      "wa": true,
+      "mail": true,
+      "op": "2026-09-07T18:00:29.041Z"
+    }
+  },
+  "5887d58a-c36f-4e25-8ab7-a8bad024a320": {
+    "naam": "Joke Bakker Lepelaar",
+    "telefoon": "+3168615824",
+    "email": "jokelepelaar@gmail.com",
+    "planadoJobUuid": "1f1ab651-bd8d-6cd0-97fe-5a76fcfe2fd8",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEyaZFXwAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6623",
+    "sheet": {
+      "tab": "Sep 2026",
+      "rij": 42,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-29T11:55:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 35,
+    "aanbodToken": "4477ded924b8c5cce6d2467f38d27e00",
+    "geboektOp": "2026-09-08T09:10:56.005Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": false,
+      "mail": false,
+      "op": "2026-09-08T09:10:56.768Z"
+    }
+  },
+  "f80349f2-e2ec-4394-b120-70adf4a33037": {
+    "naam": "Mascha Fransen",
+    "telefoon": "+31655130559",
+    "email": "m.fransen21@kpnmail.nl",
+    "planadoJobUuid": "1f1ab730-39c2-6920-abdb-3202cdf530a6",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEyaZFbAAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6625",
+    "sheet": {
+      "tab": "Aug 2026",
+      "rij": 1182,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-22T13:30:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 35,
+    "aanbodToken": "0922e50d9ea7f9c57b18bc37cc5e5e14",
+    "geboektOp": "2026-09-08T10:50:27.178Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": true,
+      "mail": false,
+      "op": "2026-09-08T10:50:29.495Z"
+    }
+  },
+  "b47f1ea2-092b-4b03-9fa8-445d8a5be797": {
+    "naam": "anoek van der wal",
+    "telefoon": "+3115637312",
+    "email": "anoekvanderwal@gmail.com",
+    "planadoJobUuid": "1f1abbca-cd8d-6df0-a009-72586b9f6c7a",
+    "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAV0ca6AAAA=",
+    "agendaVia": "kale-afspraak",
+    "grippNr": "6628",
+    "sheet": {
+      "tab": "Aug 2026",
+      "rij": 188,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-21T06:00:00.000Z",
+    "inmeter": "Patrick",
+    "duurMin": 30,
+    "aanbodToken": "a879869ab82fbea24631d506d399577b",
+    "geboektOp": "2026-09-08T19:37:22.804Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": false,
+      "mail": false,
+      "op": "2026-09-08T19:37:23.535Z"
+    }
+  },
+  "2a671d9b-02ff-4601-89f1-8728df8b2d1b": {
+    "naam": "Wuisman",
+    "telefoon": "0642106919",
+    "email": "maudwuisman@hotmail.com",
+    "planadoJobUuid": "1f1ac21e-8ded-6870-b04c-5a5aaaab8700",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEye1P0QAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6629",
+    "sheet": {
+      "tab": "Juli 2026 ",
+      "rij": 1677,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-10-14T07:00:00.000Z",
+    "inmeter": "Sjoerd",
+    "duurMin": 85,
+    "aanbodToken": null,
+    "geboektOp": "2026-09-09T07:42:22.940Z",
+    "status": "geboekt",
+    "bron": "sunny",
+    "bevestiging": {
+      "wa": true,
+      "mail": true,
+      "op": "2026-09-09T07:42:26.544Z"
+    }
+  },
+  "2d540f55-df5a-4f66-9df4-8625ce964d54": {
+    "naam": "Beuker -",
+    "telefoon": "0622838590",
+    "email": "titiabeuker@hotmail.com",
+    "planadoJobUuid": "1f1ac459-7f3f-6b10-8e4e-1655acd94dc0",
+    "outlookEventId": "AAMkADQwNjY5ZTMzLWEwNTAtNDFkYy04MDc3LTQzZGIzYzMzNGQzOABGAAAAAAAtgulVyEYNTpPMpaqk9uPHBwCuhh0yywzeTLdqTJ20F-l3AAPmz6ijAACuhh0yywzeTLdqTJ20F-l3AAV0ca6RAAA=",
+    "agendaVia": "kale-afspraak",
+    "grippNr": "6631",
+    "sheet": {
+      "tab": "Sep 2026",
+      "rij": 103,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-28T10:30:00.000Z",
+    "inmeter": "Patrick",
+    "duurMin": 25,
+    "aanbodToken": null,
+    "geboektOp": "2026-09-09T11:57:30.696Z",
+    "status": "geboekt",
+    "bron": "sunny",
+    "bevestiging": {
+      "wa": true,
+      "mail": true,
+      "op": "2026-09-09T11:57:34.499Z"
+    }
+  },
+  "b8302c8b-031e-432e-978e-8a9eb55106fc": {
+    "naam": "Thea Kuiper",
+    "telefoon": "0641012914",
+    "email": "mrstkuiper@hotmail.com",
+    "planadoJobUuid": "1f1ac65c-5289-61e0-b6dd-32e27d84500a",
+    "outlookEventId": "AQMkAGUxZGU0NTQ2LTFhZmMtNGMwMi05NzRjLTUxYjhmMDZkMzE0OABGAAADyGLjGIH6DkSnDlcZIt7BqwcAwaaW28zaJ0OzFUSsFf08zAAAAgENAAAAwaaW28zaJ0OzFUSsFf08zAAEye1P8QAAAA==",
+    "agendaVia": "bookings",
+    "grippNr": "6633",
+    "sheet": {
+      "tab": "Sep 2026",
+      "rij": 75,
+      "kolomInkoop": 23
+    },
+    "aankomst": "2026-09-10T13:30:00.000Z",
+    "inmeter": "Joey",
+    "duurMin": 20,
+    "aanbodToken": "63a11c6d3a82eefdb8977f8431dfd2f7",
+    "geboektOp": "2026-09-09T15:48:06.971Z",
+    "status": "geboekt",
+    "bron": null,
+    "bevestiging": {
+      "wa": true,
+      "mail": false,
+      "op": "2026-09-09T15:48:09.437Z"
+    }
   }
 }

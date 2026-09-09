@@ -309,46 +309,90 @@
  },
  "2026-08": {
   "01 | Leads campagne - Rolluiken": {
-   "spend": 7191.12,
-   "kliks": 6079,
-   "leads": 347,
-   "impressies": 737240,
-   "cpl": 20.72
+   "spend": 9561.07,
+   "kliks": 7921,
+   "leads": 460,
+   "impressies": 939562,
+   "cpl": 20.78
   },
   "03 | Leadscampagne - Zonwering": {
-   "spend": 5592.43,
-   "kliks": 5136,
-   "leads": 326,
-   "impressies": 527377,
-   "cpl": 17.15
+   "spend": 7466.25,
+   "kliks": 6506,
+   "leads": 379,
+   "impressies": 679193,
+   "cpl": 19.7
   },
   "04 | Leadscampagne - Pergola": {
-   "spend": 1955.8,
-   "kliks": 1995,
-   "leads": 223,
-   "impressies": 135794,
-   "cpl": 8.77
+   "spend": 2621.2,
+   "kliks": 2594,
+   "leads": 284,
+   "impressies": 172755,
+   "cpl": 9.23
   },
   "05 | Leads - Screens": {
-   "spend": 1937.07,
-   "kliks": 1836,
-   "leads": 138,
-   "impressies": 154987,
-   "cpl": 14.04
+   "spend": 2602.49,
+   "kliks": 2350,
+   "leads": 171,
+   "impressies": 194260,
+   "cpl": 15.22
   },
   "06 | Gordijnen": {
-   "spend": 737.74,
-   "kliks": 500,
-   "leads": 15,
-   "impressies": 46335,
-   "cpl": 49.18
+   "spend": 965.51,
+   "kliks": 685,
+   "leads": 22,
+   "impressies": 57801,
+   "cpl": 43.89
   },
   "07 | Leadscampagne - Markiezen": {
-   "spend": 604.9,
-   "kliks": 598,
-   "leads": 29,
-   "impressies": 45654,
-   "cpl": 20.86
+   "spend": 896.61,
+   "kliks": 823,
+   "leads": 45,
+   "impressies": 69444,
+   "cpl": 19.92
+  }
+ },
+ "2026-09": {
+  "01 | Leads campagne - Rolluiken": {
+   "spend": 1844.37,
+   "kliks": 1322,
+   "leads": 72,
+   "impressies": 152785,
+   "cpl": 25.62
+  },
+  "03 | Leadscampagne - Zonwering": {
+   "spend": 143.6,
+   "kliks": 112,
+   "leads": 8,
+   "impressies": 11761,
+   "cpl": 17.95
+  },
+  "04 | Leadscampagne - Pergola": {
+   "spend": 534.36,
+   "kliks": 400,
+   "leads": 41,
+   "impressies": 30643,
+   "cpl": 13.03
+  },
+  "05 | Leads - Screens": {
+   "spend": 48.3,
+   "kliks": 42,
+   "leads": 4,
+   "impressies": 2870,
+   "cpl": 12.07
+  },
+  "06 | Gordijnen": {
+   "spend": 189.41,
+   "kliks": 136,
+   "leads": 5,
+   "impressies": 9489,
+   "cpl": 37.88
+  },
+  "07 | Leadscampagne - Markiezen": {
+   "spend": 24.41,
+   "kliks": 12,
+   "leads": 0,
+   "impressies": 2094,
+   "cpl": null
   }
  }
 }

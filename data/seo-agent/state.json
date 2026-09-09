@@ -1,7 +1,7 @@
 {
  "live": false,
  "techniek": {
-  "op": "2026-08-29T17:21:27.863Z",
+  "op": "2026-09-09T05:30:43.381Z",
   "base": "https://sonty-website.vercel.app",
   "paginas": 100,
   "problemen": [
@@ -206,10 +206,91 @@
     "probleem": "omschrijving te lang (176)"
    }
   ],
-  "laatsteNieuw": 50,
+  "laatsteNieuw": 0,
   "laatsteOpgelost": 0
  },
- "links": {},
+ "links": {
+  "L1": {
+   "status": 200,
+   "actie": "wachten-op-livegang",
+   "gecheckt": "2026-09-07T06:45:22.659Z"
+  },
+  "L2": {
+   "status": 200,
+   "actie": "wachten-op-livegang",
+   "gecheckt": "2026-09-07T06:45:22.827Z"
+  },
+  "L3": {
+   "status": 200,
+   "actie": "wachten-op-livegang",
+   "gecheckt": "2026-09-07T06:45:23.875Z"
+  },
+  "L4": {
+   "status": 200,
+   "actie": "wachten-op-livegang",
+   "gecheckt": "2026-09-07T06:45:24.744Z"
+  },
+  "L5": {
+   "status": 200,
+   "actie": "wachten-op-livegang",
+   "gecheckt": "2026-09-07T06:45:24.977Z"
+  },
+  "L6": {
+   "status": 200,
+   "actie": "wachten-op-livegang",
+   "gecheckt": "2026-09-07T06:45:25.537Z"
+  },
+  "L7": {
+   "status": 200,
+   "actie": "wachten-op-livegang",
+   "gecheckt": "2026-09-07T06:45:26.189Z"
+  },
+  "L8": {
+   "status": 403,
+   "actie": "onbereikbaar",
+   "reden": "HTTP 403",
+   "gecheckt": "2026-09-07T06:45:26.364Z"
+  },
+  "L9": {
+   "status": 200,
+   "actie": "wachten-op-livegang",
+   "gecheckt": "2026-09-07T06:45:26.482Z"
+  },
+  "L10": {
+   "status": 403,
+   "actie": "onbereikbaar",
+   "reden": "HTTP 403",
+   "gecheckt": "2026-09-07T06:45:26.606Z"
+  },
+  "L11": {
+   "status": 200,
+   "actie": "wachten-op-livegang",
+   "gecheckt": "2026-09-07T06:45:27.133Z"
+  },
+  "L12": {
+   "status": 500,
+   "actie": "onbereikbaar",
+   "gecheckt": "2026-09-07T06:45:38.596Z",
+   "reden": "HTTP 500"
+  },
+  "L13": {
+   "status": 403,
+   "actie": "onbereikbaar",
+   "reden": "HTTP 403",
+   "gecheckt": "2026-09-07T06:45:38.701Z"
+  },
+  "L14": {
+   "status": 0,
+   "actie": "overslaan",
+   "reden": "onvolledige bron",
+   "gecheckt": "2026-09-07T06:45:38.702Z"
+  },
+  "L15": {
+   "status": 200,
+   "actie": "wachten-op-livegang",
+   "gecheckt": "2026-09-07T06:45:39.179Z"
+  }
+ },
  "voorstellen": [],
  "briefs": [],
  "tenders": {
@@ -236,13 +317,1171 @@
    "237937",
    "233609",
    "232937",
-   "225358"
+   "225358",
+   "438997"
   ]
  },
- "rapporten": [],
- "goedkeuringenTot": "2026-08-29T17:21:21.721",
+ "rapporten": [
+  {
+   "op": "2026-08-31T06:45:40.121Z",
+   "tekst": "SEO-agent weekrapport (voorbereiding, sonty.nl nog oude site)\n\nWAT IK DEED\n- Techniek: 100 pagina's gecheckt, 0 nieuwe problemen, 0 opgelost, 50 open.\n- Posities: wacht op Search Console-koppeling.\n- Links: 0 bronnen met vermelding, 0 nieuwe voorstellen klaar (antwoord \"ja L<nr>\"), 0 verstuurd.\n- Content: 1 briefs, 0 concepten klaar voor controle."
+  },
+  {
+   "op": "2026-09-07T06:45:45.488Z",
+   "tekst": "SEO-agent weekrapport (voorbereiding, sonty.nl nog oude site)\n\nWAT IK DEED\n- Techniek: 100 pagina's gecheckt, 0 nieuwe problemen, 0 opgelost, 50 open.\n- Posities: wacht op Search Console-koppeling.\n- Links: 0 bronnen met vermelding, 0 nieuwe voorstellen klaar (antwoord \"ja L<nr>\"), 0 verstuurd.\n- Content: 1 briefs, 0 concepten klaar voor controle."
+  }
+ ],
+ "goedkeuringenTot": "2026-09-09T05:30:05.105",
  "laatsteRonde": {
   "mode": "dag",
-  "op": "2026-08-29T17:21:28.712Z"
- }
+  "op": "2026-09-09T05:30:44.246Z"
+ },
+ "zoekwoorden": [
+  {
+   "woord": "elektrisch screen",
+   "seed": "elektrisch screen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch screen raam",
+   "seed": "elektrisch screen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch screen overkapping",
+   "seed": "elektrisch screen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch screen zonwering",
+   "seed": "elektrisch screen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch screen gaat niet meer omhoog",
+   "seed": "elektrisch screen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch screen buiten",
+   "seed": "elektrisch screen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch screen binnen",
+   "seed": "elektrisch screen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch screen kosten",
+   "seed": "elektrisch screen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch screen op maat",
+   "seed": "elektrisch screen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch screen voor lichtstraat",
+   "seed": "elektrisch screen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm",
+   "seed": "zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm balkon",
+   "seed": "zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm auto",
+   "seed": "zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm tuin",
+   "seed": "zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm buiten",
+   "seed": "zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm doek",
+   "seed": "zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm elektrisch",
+   "seed": "zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm schoonmaken",
+   "seed": "zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm auto action",
+   "seed": "zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm bauhaus",
+   "seed": "zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "prijzen van bronckhorst feyenoord",
+   "seed": "prijzen van",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "prijzen van spijzen",
+   "seed": "prijzen van",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "prijzen van vroeger",
+   "seed": "prijzen van",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "prijzen van thuisbatterijen",
+   "seed": "prijzen van",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "prijzen van bronckhorst",
+   "seed": "prijzen van",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "prijzen van sigaretten",
+   "seed": "prijzen van",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "prijzen van oude metalen",
+   "seed": "prijzen van",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "prijzen van hoortoestellen",
+   "seed": "prijzen van",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "prijzen van pokemon kaarten",
+   "seed": "prijzen van",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "prijzen van benzine",
+   "seed": "prijzen van",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrische screens buiten",
+   "seed": "elektrische screens",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrische screens",
+   "seed": "elektrische screens",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrische screens binnen",
+   "seed": "elektrische screens",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrische screens buiten prijzen",
+   "seed": "elektrische screens",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrische screens voor overkapping",
+   "seed": "elektrische screens",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrische screens lichtstraat",
+   "seed": "elektrische screens",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrische screens buitenzonwering",
+   "seed": "elektrische screens",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrische screens aansluiting",
+   "seed": "elektrische screens",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrische screens veranda",
+   "seed": "elektrische screens",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarm zonnescherm",
+   "seed": "knikarm zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarm zonnescherm elektrisch",
+   "seed": "knikarm zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarm zonnescherm afstellen",
+   "seed": "knikarm zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarm zonnescherm doek vervangen",
+   "seed": "knikarm zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarm zonnescherm hornbach",
+   "seed": "knikarm zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarm zonnescherm handmatig",
+   "seed": "knikarm zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarm zonnescherm 250 cm breed",
+   "seed": "knikarm zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarm zonnescherm inclusief montage",
+   "seed": "knikarm zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarm zonnescherm gamma",
+   "seed": "knikarm zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarm zonnescherm vervangen",
+   "seed": "knikarm zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens zonwering",
+   "seed": "screens zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens zonwering buiten",
+   "seed": "screens zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens zonwering solar",
+   "seed": "screens zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens zonwering binnen",
+   "seed": "screens zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens zonwering buiten solar",
+   "seed": "screens zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens zonwering dordrecht",
+   "seed": "screens zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens zonwering kosten",
+   "seed": "screens zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens zonwering barendrecht",
+   "seed": "screens zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens zonwering buiten kosten",
+   "seed": "screens zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens zonwering buiten handmatig",
+   "seed": "screens zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarmscherm",
+   "seed": "knikarmscherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarmscherm elektrisch",
+   "seed": "knikarmscherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarmscherm hornbach",
+   "seed": "knikarmscherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarmscherm aanbieding",
+   "seed": "knikarmscherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarmschermen",
+   "seed": "knikarmscherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarmscherm 5 meter",
+   "seed": "knikarmscherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarmscherm zonwering",
+   "seed": "knikarmscherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarmscherm 3 meter breed",
+   "seed": "knikarmscherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarmscherm kopen",
+   "seed": "knikarmscherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "knikarmscherm 4 meter breed",
+   "seed": "knikarmscherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "markiezen",
+   "seed": "markiezen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "markiezenhof",
+   "seed": "markiezen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "markiezen zonwering",
+   "seed": "markiezen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "markiezenhof bergen op zoom",
+   "seed": "markiezen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "markiezen den haag",
+   "seed": "markiezen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "markiezen hornbach",
+   "seed": "markiezen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "markiezen schoonmaken",
+   "seed": "markiezen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "markiezen nederland",
+   "seed": "markiezen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "markiezen rotterdam",
+   "seed": "markiezen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "markiezen zonwering den haag",
+   "seed": "markiezen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluiken",
+   "seed": "rolluiken",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluiken prijs",
+   "seed": "rolluiken",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluiken laten plaatsen",
+   "seed": "rolluiken",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluiken kopen",
+   "seed": "rolluiken",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluiken rijswijk",
+   "seed": "rolluiken",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluiken buiten",
+   "seed": "rolluiken",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluiken hornbach",
+   "seed": "rolluiken",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluiken schoonmaken",
+   "seed": "rolluiken",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluiken dordrecht",
+   "seed": "rolluiken",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluiken op zonne energie",
+   "seed": "rolluiken",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm elektrisch 5 meter",
+   "seed": "zonnescherm elektrisch",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm elektrisch inclusief montage",
+   "seed": "zonnescherm elektrisch",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm elektrisch maken",
+   "seed": "zonnescherm elektrisch",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm elektrisch hornbach",
+   "seed": "zonnescherm elektrisch",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm elektrisch inclusief montage hornbach",
+   "seed": "zonnescherm elektrisch",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm elektrisch 4 meter",
+   "seed": "zonnescherm elektrisch",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm elektrisch 6 meter",
+   "seed": "zonnescherm elektrisch",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm elektrisch aanbieding",
+   "seed": "zonnescherm elektrisch",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonnescherm elektrisch inclusief montage prijs",
+   "seed": "zonnescherm elektrisch",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "pergola zonwering",
+   "seed": "pergola zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "pergola zonwering hornbach",
+   "seed": "pergola zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "pergola zonwering met doek",
+   "seed": "pergola zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "pergola zonwering waterdicht",
+   "seed": "pergola zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "pergola zonwering hout",
+   "seed": "pergola zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "pergola zonwering aan huis",
+   "seed": "pergola zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "pergola zonwering prijs",
+   "seed": "pergola zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "pergola zonwering doek",
+   "seed": "pergola zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "pergola zonwering jysk",
+   "seed": "pergola zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "pergola zonwering op maat",
+   "seed": "pergola zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluik kopen",
+   "seed": "rolluik kopen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluik kopen met montage",
+   "seed": "rolluik kopen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluik kopen prijs",
+   "seed": "rolluik kopen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluik kopen en laten plaatsen",
+   "seed": "rolluik kopen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluik kopen elektrisch",
+   "seed": "rolluik kopen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluik kopen hornbach",
+   "seed": "rolluik kopen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluik kopen goedkoop",
+   "seed": "rolluik kopen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluik kopen zonne energie",
+   "seed": "rolluik kopen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluik kopen online",
+   "seed": "rolluik kopen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluik kopen gamma",
+   "seed": "rolluik kopen",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens buiten",
+   "seed": "screens buiten",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens buitenkant raam",
+   "seed": "screens buiten",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens buiten prijzen",
+   "seed": "screens buiten",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens buitenkant",
+   "seed": "screens buiten",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens buitenzonwering",
+   "seed": "screens buiten",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens buiten zonder boren",
+   "seed": "screens buiten",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens buiten solar",
+   "seed": "screens buiten",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens buiten schoonmaken",
+   "seed": "screens buiten",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens buiten kunststof kozijnen",
+   "seed": "screens buiten",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens buiten gamma",
+   "seed": "screens buiten",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screen zonwering",
+   "seed": "screen zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screen zonwering buiten",
+   "seed": "screen zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screen zonwering gamma",
+   "seed": "screen zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screen zonwering buiten elektrisch",
+   "seed": "screen zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screen zonwering binnen",
+   "seed": "screen zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screen zonwering solar",
+   "seed": "screen zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screen zonwering kosten",
+   "seed": "screen zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screen zonwering handmatig",
+   "seed": "screen zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screen zonwering schoonmaken",
+   "seed": "screen zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screen zonwering hornbach",
+   "seed": "screen zonwering",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch zonnescherm",
+   "seed": "elektrisch zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch zonnescherm 5 meter",
+   "seed": "elektrisch zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch zonnescherm 4 meter",
+   "seed": "elektrisch zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch zonnescherm doek vervangen",
+   "seed": "elektrisch zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch zonnescherm afstellen",
+   "seed": "elektrisch zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch zonnescherm 3 meter",
+   "seed": "elektrisch zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch zonnescherm inclusief montage",
+   "seed": "elektrisch zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch zonnescherm handmatig oprollen",
+   "seed": "elektrisch zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch zonnescherm 6 meter breed",
+   "seed": "elektrisch zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch zonnescherm gaat niet meer in",
+   "seed": "elektrisch zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch markies",
+   "seed": "elektrisch markies",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "markies elektrisch maken",
+   "seed": "elektrisch markies",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "elektrisch bedienbare markies",
+   "seed": "elektrisch markies",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "bestaande markies elektrisch maken",
+   "seed": "elektrisch markies",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluik zonne energie",
+   "seed": "rolluik",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluik onderdelen",
+   "seed": "rolluik",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "rolluik met zonnepaneel",
+   "seed": "rolluik",
+   "zakelijk": false,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering vve",
+   "seed": "zonwering vve",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering appartement vve",
+   "seed": "zonwering vve",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering appartementencomplex",
+   "seed": "zonwering appartementencomplex",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering kantoor",
+   "seed": "zonwering kantoor",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering kantoorpand",
+   "seed": "zonwering kantoor",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering kantoor binnen",
+   "seed": "zonwering kantoor",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering kantoorgebouw",
+   "seed": "zonwering kantoor",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering bedrijfspand",
+   "seed": "zonwering bedrijfspand",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering school",
+   "seed": "zonwering school",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering gemeentelijk monument",
+   "seed": "zonwering gemeente",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering gemeente utrecht",
+   "seed": "zonwering gemeente",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "subsidie zonwering gemeente rotterdam",
+   "seed": "zonwering gemeente",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "subsidie zonwering gemeente putten",
+   "seed": "zonwering gemeente",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "subsidie zonwering gemeente amsterdam",
+   "seed": "zonwering gemeente",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "screens kantoor",
+   "seed": "screens kantoor",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering bedrijven",
+   "seed": "zonwering bedrijven",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering bedrijven apeldoorn",
+   "seed": "zonwering bedrijven",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering bedrijven doetinchem",
+   "seed": "zonwering bedrijven",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering bedrijven in friesland",
+   "seed": "zonwering bedrijven",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering bedrijven nederland",
+   "seed": "zonwering bedrijven",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering bedrijven limburg",
+   "seed": "zonwering bedrijven",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering bedrijven brabant",
+   "seed": "zonwering bedrijven",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "zonwering voor bedrijven",
+   "seed": "zonwering bedrijven",
+   "zakelijk": true,
+   "gezien": "2026-08-31T06:45:39.931Z"
+  },
+  {
+   "woord": "prijzen van rolluiken",
+   "seed": "prijzen van",
+   "zakelijk": false,
+   "gezien": "2026-09-07T06:45:45.350Z"
+  },
+  {
+   "woord": "prijzen van oud ijzer",
+   "seed": "prijzen van",
+   "zakelijk": false,
+   "gezien": "2026-09-07T06:45:45.350Z"
+  },
+  {
+   "woord": "elektrische screens overkapping",
+   "seed": "elektrische screens",
+   "zakelijk": false,
+   "gezien": "2026-09-07T06:45:45.350Z"
+  },
+  {
+   "woord": "elektrische screens somfy",
+   "seed": "elektrische screens",
+   "zakelijk": false,
+   "gezien": "2026-09-07T06:45:45.350Z"
+  },
+  {
+   "woord": "elektrische screens op zonne energie",
+   "seed": "elektrische screens",
+   "zakelijk": false,
+   "gezien": "2026-09-07T06:45:45.350Z"
+  },
+  {
+   "woord": "knikarm zonnescherm handbediend",
+   "seed": "knikarm zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-09-07T06:45:45.350Z"
+  },
+  {
+   "woord": "knikarm zonnescherm 300x250",
+   "seed": "knikarm zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-09-07T06:45:45.350Z"
+  },
+  {
+   "woord": "screens zonwering zwijndrecht",
+   "seed": "screens zonwering",
+   "zakelijk": false,
+   "gezien": "2026-09-07T06:45:45.350Z"
+  },
+  {
+   "woord": "knikarmscherm handbediend",
+   "seed": "knikarmscherm",
+   "zakelijk": false,
+   "gezien": "2026-09-07T06:45:45.350Z"
+  },
+  {
+   "woord": "zonnescherm elektrisch inclusief montage kosten",
+   "seed": "zonnescherm elektrisch",
+   "zakelijk": false,
+   "gezien": "2026-09-07T06:45:45.350Z"
+  },
+  {
+   "woord": "zonnescherm elektrisch 5 meter inclusief montage",
+   "seed": "zonnescherm elektrisch",
+   "zakelijk": false,
+   "gezien": "2026-09-07T06:45:45.350Z"
+  },
+  {
+   "woord": "pergola zonwering zelf maken",
+   "seed": "pergola zonwering",
+   "zakelijk": false,
+   "gezien": "2026-09-07T06:45:45.350Z"
+  },
+  {
+   "woord": "elektrisch zonnescherm hangt scheef",
+   "seed": "elektrisch zonnescherm",
+   "zakelijk": false,
+   "gezien": "2026-09-07T06:45:45.350Z"
+  }
+ ]
 }

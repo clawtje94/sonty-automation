@@ -11,6 +11,7 @@
 - 10-09: aanbod-agent gestart voor Rotterdam-Zuid/Oost 175-250 m² → docs/winkels-4/03-aanbod-rotterdam-zuid-oost.md (links zelf verifiëren vóór doorsturen).
 
 ## 09-09 21:10: PRIJSONDERZOEK MARKT — 13 aanvragen per mail verstuurd, lokale zoektocht per stad loopt (Daimy 09-09 via chat)
+- 21:30: batch 2 (35 lokale verkopers uit lokaal.csv, top 3 per stad, mailadres zelf op site geverifieerd) loopt via scripts/prijsonderzoek-mail-batch.js; log data/prijsonderzoek/mail-batch-2.log. Formulieren: G verzonden (bevestigd), B/C/F geblokkeerd (captcha/bot-check), J 'Marked as bot' -> per mail in batch 3. Telefoon in formulieren mag 0612345678 (Daimy).
 - Stand: batch 1 (13 mails) verzonden 20:57-21:02, antwoorden komen binnen op sanne.vermeulen84@proton.me (login in memory credentials). Vergelijkingssites geschrapt. Volgende: lokaal.csv (top 3 per stad) mailen met regio-adres; daarna antwoorden verzamelen in offertes.csv en vergelijken met Sonty-prijs.
 - Oud (20:20):
 - Persona Sanne Vermeulen, sanne.vermeulen84@proton.me (wachtwoord + Playwright-sessie in data/prijsonderzoek/, niet in git). Verificatie via daimyboot@gmail.com, herstelzin niet bewaard.

@@ -1,5 +1,15 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-08, nieuwe inmeter Patrick)
 
+
+## 2026-09-09 — Vestigingsonderzoek 4 winkels (175-250 m²) KLAAR
+- Vraag Daimy: geografische vergelijking met Rijswijk, beste plekken voor 4 winkels op Sonty-data + koopkracht/koopwoningen.
+- Model `scripts/winkels-4-analyse.js` → `data/winkels-4/resultaat.json`; rapport `scripts/winkels-4-rapport.js` → `docs/winkels-4/02-rapport.md`; pagina `scripts/winkels-4-pagina.js` → sonty-website `data/winkels-4.html` + `/admin/winkels-4` (LIVE op sonty-website.vercel.app). Onderzoeksbrief `docs/winkels-4/00-onderzoeksopdracht.md`, huurbronnen `01-huurprijzen-bronnen.md`.
+- Data: leads ververst t/m sep 2026 (23.276), CBS 85984NED 2024 (gemeenten+wijken), CBS 83625NED verkoopprijzen 2025, PDOK centroïden, OSRM rijtijden.
+- Advies: 1 Rotterdam-Zuid/Oost A16 (+€115k/jr zonder inloop), 2 Haarlemmermeer/A'dam-West A4-A9 (+€71k), 3 Utrecht-West, 4 Zuidplas (3+4 alleen positief met inloop ≥25% van Rijswijk = 251 akk/jr). Eerst 1, na 6 mnd meten.
+- LES: conversiecurve ALTIJD op online-leads rekenen (19,3% <10 km), niet alle kanalen (26,5%): winkelbezoekers wonen dichtbij en blazen de curve op. Het juli-onderzoek (/admin/winkels) overschatte daardoor ~1/3.
+- 10-09 besluit Daimy: 4 winkels van 175-200 m² (kleiner is geen showroom); magazijn telt NIET mee in de score (alleen klant/omzet/winst). Advies = scenario J: 1 Rotterdam-Zuid/Oost A16, 2 Haarlemmermeer/A'dam-West A4-A9, 3 Utrecht-rand A2/A27, 4 Dordrecht-Zuid A16 (Zuidplas vervallen: overlap). Netto 200 m² zonder inloop +€146k/jr totaal; 3 en 4 pas na bewezen inloop.
+- 10-09: aanbod-agent gestart voor Rotterdam-Zuid/Oost 175-250 m² → docs/winkels-4/03-aanbod-rotterdam-zuid-oost.md (links zelf verifiëren vóór doorsturen).
+
 ## 09-09 20:20: PRIJSONDERZOEK MARKT (mystery shopping) — mailbox klaar, wacht op akkoord adres (Daimy 09-09 via chat)
 - Persona Sanne Vermeulen, sanne.vermeulen84@proton.me (wachtwoord + Playwright-sessie in data/prijsonderzoek/, niet in git). Verificatie via daimyboot@gmail.com, herstelzin niet bewaard.
 - Longlist 15 online aanbieders (data/prijsonderzoek/aanbieders.md, namen alleen daar), standaard-uitvraag in persona.md, status in offertes.csv (nog leeg).

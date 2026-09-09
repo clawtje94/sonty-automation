@@ -4888,7 +4888,7 @@
      "extraAkkoord": 9.2
     }
    ],
-   "score": 83.2,
+   "score": 83.5,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -5045,7 +5045,7 @@
      "extraAkkoord": 9.2
     }
    ],
-   "score": 82.8,
+   "score": 83.1,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -5202,7 +5202,7 @@
      "extraAkkoord": 6.1
     }
    ],
-   "score": 82.2,
+   "score": 82.6,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -5220,163 +5220,6 @@
     "breakEvenAkkoord": 79,
     "conservatief": 31333,
     "vol": 191667
-   }
-  },
-  {
-   "id": "WK059901",
-   "naam": "Rotterdam – Rotterdam Centrum",
-   "gemeente": "Rotterdam",
-   "gm": "GM0599",
-   "lat": 51.91566118,
-   "lon": 4.47688569,
-   "km": 16.98079792380259,
-   "profiel": {
-    "koop": 27,
-    "eengezins": 1,
-    "woz": 413,
-    "inkStd": 42.7,
-    "oud": 86,
-    "oad": 6670,
-    "sted": 1,
-    "hh": 25430,
-    "koopwoningen": 6161
-   },
-   "gemeenteVraag": {
-    "leads": 1438,
-    "akkoord": 169,
-    "jaarLeads": 836,
-    "jaarAkkoord": 84,
-    "conv": 11.8,
-    "residu": -5.3,
-    "leadsPer1000hh": 2.4
-   },
-   "uplift": {
-    "extraAkkoordVol": 202,
-    "jaarLeadsCatchment": 2863,
-    "teVer": 0,
-    "huidigAkk": 237,
-    "koopBinnen15": 332097,
-    "koopOnbenut": 143269,
-    "hhBinnen15": 729860,
-    "inkGem15": 34.3,
-    "latentLeads": 1764,
-    "koopIndex15": 131.1
-   },
-   "lookalikeKlant": {
-    "score": 57,
-    "per": {
-     "koop": 1.4,
-     "eengezins": 2,
-     "woz": 0,
-     "inkStd": 0.2,
-     "oud": 1.6,
-     "oad": 2.6
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 41.6,
-    "per": {
-     "koop": 2.3,
-     "eengezins": 2.4,
-     "woz": 0.4,
-     "inkStd": 0.3,
-     "oud": 1.9,
-     "oad": 3.1
-    }
-   },
-   "kmBerkel": 8,
-   "topCatchment": [
-    {
-     "plaats": "rotterdam",
-     "km": 1,
-     "jaarLeads": 702,
-     "teVer": 0,
-     "huidigeConv": 10.2,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 61.4
-    },
-    {
-     "plaats": "barendrecht",
-     "km": 8,
-     "jaarLeads": 148,
-     "teVer": 0,
-     "huidigeConv": 9,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 14.5
-    },
-    {
-     "plaats": "berkel en rodenrijs",
-     "km": 9,
-     "jaarLeads": 127,
-     "teVer": 0,
-     "huidigeConv": 9.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.4
-    },
-    {
-     "plaats": "schiedam",
-     "km": 6,
-     "jaarLeads": 111,
-     "teVer": 0,
-     "huidigeConv": 8.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.3
-    },
-    {
-     "plaats": "capelle aan den ijssel",
-     "km": 7,
-     "jaarLeads": 138,
-     "teVer": 0,
-     "huidigeConv": 10.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.2
-    },
-    {
-     "plaats": "ridderkerk",
-     "km": 10,
-     "jaarLeads": 96,
-     "teVer": 0,
-     "huidigeConv": 8.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 10.1
-    },
-    {
-     "plaats": "bergschenhoek",
-     "km": 8,
-     "jaarLeads": 67,
-     "teVer": 0,
-     "huidigeConv": 4.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 9.6
-    },
-    {
-     "plaats": "spijkenisse",
-     "km": 12,
-     "jaarLeads": 190,
-     "teVer": 0,
-     "huidigeConv": 6.9,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 9.2
-    }
-   ],
-   "score": 82,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 225139,
-    "nettoInloop50": 328859,
-    "nettoInloop25_175laag": 233139,
-    "realistischAkkoord": 152,
-    "extraOmzet": 546764,
-    "brutowinst": 250418,
-    "nettoZicht200": 121418,
-    "nettoPdv250": 106168,
-    "nettoZicht175": 125918,
-    "nettoZicht175laag": 129418,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": 37945,
-    "vol": 204890
    }
   },
   {
@@ -5516,7 +5359,7 @@
      "extraAkkoord": 8.5
     }
    ],
-   "score": 82,
+   "score": 82.6,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -5534,6 +5377,163 @@
     "breakEvenAkkoord": 79,
     "conservatief": 42904,
     "vol": 214808
+   }
+  },
+  {
+   "id": "WK059901",
+   "naam": "Rotterdam – Rotterdam Centrum",
+   "gemeente": "Rotterdam",
+   "gm": "GM0599",
+   "lat": 51.91566118,
+   "lon": 4.47688569,
+   "km": 16.98079792380259,
+   "profiel": {
+    "koop": 27,
+    "eengezins": 1,
+    "woz": 413,
+    "inkStd": 42.7,
+    "oud": 86,
+    "oad": 6670,
+    "sted": 1,
+    "hh": 25430,
+    "koopwoningen": 6161
+   },
+   "gemeenteVraag": {
+    "leads": 1438,
+    "akkoord": 169,
+    "jaarLeads": 836,
+    "jaarAkkoord": 84,
+    "conv": 11.8,
+    "residu": -5.3,
+    "leadsPer1000hh": 2.4
+   },
+   "uplift": {
+    "extraAkkoordVol": 202,
+    "jaarLeadsCatchment": 2863,
+    "teVer": 0,
+    "huidigAkk": 237,
+    "koopBinnen15": 332097,
+    "koopOnbenut": 143269,
+    "hhBinnen15": 729860,
+    "inkGem15": 34.3,
+    "latentLeads": 1764,
+    "koopIndex15": 131.1
+   },
+   "lookalikeKlant": {
+    "score": 57,
+    "per": {
+     "koop": 1.4,
+     "eengezins": 2,
+     "woz": 0,
+     "inkStd": 0.2,
+     "oud": 1.6,
+     "oad": 2.6
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 41.6,
+    "per": {
+     "koop": 2.3,
+     "eengezins": 2.4,
+     "woz": 0.4,
+     "inkStd": 0.3,
+     "oud": 1.9,
+     "oad": 3.1
+    }
+   },
+   "kmBerkel": 8,
+   "topCatchment": [
+    {
+     "plaats": "rotterdam",
+     "km": 1,
+     "jaarLeads": 702,
+     "teVer": 0,
+     "huidigeConv": 10.2,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 61.4
+    },
+    {
+     "plaats": "barendrecht",
+     "km": 8,
+     "jaarLeads": 148,
+     "teVer": 0,
+     "huidigeConv": 9,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 14.5
+    },
+    {
+     "plaats": "berkel en rodenrijs",
+     "km": 9,
+     "jaarLeads": 127,
+     "teVer": 0,
+     "huidigeConv": 9.5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 11.4
+    },
+    {
+     "plaats": "schiedam",
+     "km": 6,
+     "jaarLeads": 111,
+     "teVer": 0,
+     "huidigeConv": 8.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 11.3
+    },
+    {
+     "plaats": "capelle aan den ijssel",
+     "km": 7,
+     "jaarLeads": 138,
+     "teVer": 0,
+     "huidigeConv": 10.5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 11.2
+    },
+    {
+     "plaats": "ridderkerk",
+     "km": 10,
+     "jaarLeads": 96,
+     "teVer": 0,
+     "huidigeConv": 8.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 10.1
+    },
+    {
+     "plaats": "bergschenhoek",
+     "km": 8,
+     "jaarLeads": 67,
+     "teVer": 0,
+     "huidigeConv": 4.5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 9.6
+    },
+    {
+     "plaats": "spijkenisse",
+     "km": 12,
+     "jaarLeads": 190,
+     "teVer": 0,
+     "huidigeConv": 6.9,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 9.2
+    }
+   ],
+   "score": 82.3,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 225139,
+    "nettoInloop50": 328859,
+    "nettoInloop25_175laag": 233139,
+    "realistischAkkoord": 152,
+    "extraOmzet": 546764,
+    "brutowinst": 250418,
+    "nettoZicht200": 121418,
+    "nettoPdv250": 106168,
+    "nettoZicht175": 125918,
+    "nettoZicht175laag": 129418,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": 37945,
+    "vol": 204890
    }
   },
   {
@@ -5673,7 +5673,164 @@
      "extraAkkoord": 8.6
     }
    ],
-   "score": 81.4,
+   "score": 82.2,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 228858,
+    "nettoInloop50": 332578,
+    "nettoInloop25_175laag": 236858,
+    "realistischAkkoord": 154,
+    "extraOmzet": 554884,
+    "brutowinst": 254137,
+    "nettoZicht200": 125137,
+    "nettoPdv250": 109887,
+    "nettoZicht175": 129637,
+    "nettoZicht175laag": 133137,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": 40425,
+    "vol": 209849
+   }
+  },
+  {
+   "id": "GM0542",
+   "naam": "Krimpen aan den IJssel",
+   "gemeente": "Krimpen aan den IJssel",
+   "gm": "GM0542",
+   "lat": 51.91469698,
+   "lon": 4.6021019,
+   "km": 23.300377483967843,
+   "profiel": {
+    "koop": 60,
+    "eengezins": 70,
+    "woz": 377,
+    "inkStd": 43.2,
+    "oud": 97,
+    "oad": 1971,
+    "sted": 2,
+    "hh": 12497,
+    "koopwoningen": 7570
+   },
+   "gemeenteVraag": {
+    "leads": 82,
+    "akkoord": 8,
+    "jaarLeads": 49,
+    "jaarAkkoord": 3,
+    "conv": 9.8,
+    "residu": -2.1,
+    "leadsPer1000hh": 3.9
+   },
+   "uplift": {
+    "extraAkkoordVol": 205,
+    "jaarLeadsCatchment": 2883,
+    "teVer": 0,
+    "huidigAkk": 228,
+    "koopBinnen15": 305166,
+    "koopOnbenut": 191327,
+    "hhBinnen15": 651760,
+    "inkGem15": 33.4,
+    "latentLeads": 2318,
+    "koopIndex15": 132.8
+   },
+   "lookalikeKlant": {
+    "score": 38.3,
+    "per": {
+     "koop": 2.3,
+     "eengezins": 3.2,
+     "woz": 0.4,
+     "inkStd": 0.3,
+     "oud": 1.5,
+     "oad": 3.3
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 50,
+    "per": {
+     "koop": 1.5,
+     "eengezins": 2.9,
+     "woz": 0,
+     "inkStd": 0.4,
+     "oud": 1.3,
+     "oad": 2.8
+    }
+   },
+   "kmBerkel": 12,
+   "topCatchment": [
+    {
+     "plaats": "rotterdam",
+     "km": 8,
+     "jaarLeads": 702,
+     "teVer": 0,
+     "huidigeConv": 10.2,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 61.4
+    },
+    {
+     "plaats": "barendrecht",
+     "km": 9,
+     "jaarLeads": 148,
+     "teVer": 0,
+     "huidigeConv": 9,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 14.5
+    },
+    {
+     "plaats": "capelle aan den ijssel",
+     "km": 3,
+     "jaarLeads": 138,
+     "teVer": 0,
+     "huidigeConv": 10.5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 11.2
+    },
+    {
+     "plaats": "dordrecht",
+     "km": 17,
+     "jaarLeads": 247,
+     "teVer": 0,
+     "huidigeConv": 7.6,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 10.2
+    },
+    {
+     "plaats": "ridderkerk",
+     "km": 5,
+     "jaarLeads": 96,
+     "teVer": 0,
+     "huidigeConv": 8.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 10.1
+    },
+    {
+     "plaats": "bergschenhoek",
+     "km": 10,
+     "jaarLeads": 67,
+     "teVer": 0,
+     "huidigeConv": 4.5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 9.6
+    },
+    {
+     "plaats": "spijkenisse",
+     "km": 20,
+     "jaarLeads": 190,
+     "teVer": 0,
+     "huidigeConv": 6.9,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 9.2
+    },
+    {
+     "plaats": "hendrik-ido-ambacht",
+     "km": 8,
+     "jaarLeads": 73,
+     "teVer": 0,
+     "huidigeConv": 7.1,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 8.6
+    }
+   ],
+   "score": 81.2,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -5830,7 +5987,7 @@
      "extraAkkoord": 9.2
     }
    ],
-   "score": 80.7,
+   "score": 80.9,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -5848,320 +6005,6 @@
     "breakEvenAkkoord": 79,
     "conservatief": 33813,
     "vol": 196626
-   }
-  },
-  {
-   "id": "GM0542",
-   "naam": "Krimpen aan den IJssel",
-   "gemeente": "Krimpen aan den IJssel",
-   "gm": "GM0542",
-   "lat": 51.91469698,
-   "lon": 4.6021019,
-   "km": 23.300377483967843,
-   "profiel": {
-    "koop": 60,
-    "eengezins": 70,
-    "woz": 377,
-    "inkStd": 43.2,
-    "oud": 97,
-    "oad": 1971,
-    "sted": 2,
-    "hh": 12497,
-    "koopwoningen": 7570
-   },
-   "gemeenteVraag": {
-    "leads": 82,
-    "akkoord": 8,
-    "jaarLeads": 49,
-    "jaarAkkoord": 3,
-    "conv": 9.8,
-    "residu": -2.1,
-    "leadsPer1000hh": 3.9
-   },
-   "uplift": {
-    "extraAkkoordVol": 205,
-    "jaarLeadsCatchment": 2883,
-    "teVer": 0,
-    "huidigAkk": 228,
-    "koopBinnen15": 305166,
-    "koopOnbenut": 191327,
-    "hhBinnen15": 651760,
-    "inkGem15": 33.4,
-    "latentLeads": 2318,
-    "koopIndex15": 132.8
-   },
-   "lookalikeKlant": {
-    "score": 38.3,
-    "per": {
-     "koop": 2.3,
-     "eengezins": 3.2,
-     "woz": 0.4,
-     "inkStd": 0.3,
-     "oud": 1.5,
-     "oad": 3.3
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 50,
-    "per": {
-     "koop": 1.5,
-     "eengezins": 2.9,
-     "woz": 0,
-     "inkStd": 0.4,
-     "oud": 1.3,
-     "oad": 2.8
-    }
-   },
-   "kmBerkel": 12,
-   "topCatchment": [
-    {
-     "plaats": "rotterdam",
-     "km": 8,
-     "jaarLeads": 702,
-     "teVer": 0,
-     "huidigeConv": 10.2,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 61.4
-    },
-    {
-     "plaats": "barendrecht",
-     "km": 9,
-     "jaarLeads": 148,
-     "teVer": 0,
-     "huidigeConv": 9,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 14.5
-    },
-    {
-     "plaats": "capelle aan den ijssel",
-     "km": 3,
-     "jaarLeads": 138,
-     "teVer": 0,
-     "huidigeConv": 10.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.2
-    },
-    {
-     "plaats": "dordrecht",
-     "km": 17,
-     "jaarLeads": 247,
-     "teVer": 0,
-     "huidigeConv": 7.6,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 10.2
-    },
-    {
-     "plaats": "ridderkerk",
-     "km": 5,
-     "jaarLeads": 96,
-     "teVer": 0,
-     "huidigeConv": 8.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 10.1
-    },
-    {
-     "plaats": "bergschenhoek",
-     "km": 10,
-     "jaarLeads": 67,
-     "teVer": 0,
-     "huidigeConv": 4.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 9.6
-    },
-    {
-     "plaats": "spijkenisse",
-     "km": 20,
-     "jaarLeads": 190,
-     "teVer": 0,
-     "huidigeConv": 6.9,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 9.2
-    },
-    {
-     "plaats": "hendrik-ido-ambacht",
-     "km": 8,
-     "jaarLeads": 73,
-     "teVer": 0,
-     "huidigeConv": 7.1,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 8.6
-    }
-   ],
-   "score": 80.6,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 228858,
-    "nettoInloop50": 332578,
-    "nettoInloop25_175laag": 236858,
-    "realistischAkkoord": 154,
-    "extraOmzet": 554884,
-    "brutowinst": 254137,
-    "nettoZicht200": 125137,
-    "nettoPdv250": 109887,
-    "nettoZicht175": 129637,
-    "nettoZicht175laag": 133137,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": 40425,
-    "vol": 209849
-   }
-  },
-  {
-   "id": "WK059914",
-   "naam": "Rotterdam – Prins Alexander",
-   "gemeente": "Rotterdam",
-   "gm": "GM0599",
-   "lat": 51.95336428,
-   "lon": 4.55733408,
-   "km": 18.380330478998314,
-   "profiel": {
-    "koop": 44,
-    "eengezins": 41,
-    "woz": 357,
-    "inkStd": 39.7,
-    "oud": 98,
-    "oad": 2728,
-    "sted": 1,
-    "hh": 47770,
-    "koopwoningen": 20530
-   },
-   "gemeenteVraag": {
-    "leads": 1438,
-    "akkoord": 169,
-    "jaarLeads": 836,
-    "jaarAkkoord": 84,
-    "conv": 11.8,
-    "residu": -5.3,
-    "leadsPer1000hh": 2.4
-   },
-   "uplift": {
-    "extraAkkoordVol": 182,
-    "jaarLeadsCatchment": 2787,
-    "teVer": 0,
-    "huidigAkk": 228,
-    "koopBinnen15": 325437,
-    "koopOnbenut": 141335,
-    "hhBinnen15": 698865,
-    "inkGem15": 35.1,
-    "latentLeads": 1688,
-    "koopIndex15": 131.9
-   },
-   "lookalikeKlant": {
-    "score": 70.6,
-    "per": {
-     "koop": 0.5,
-     "eengezins": 1,
-     "woz": 0.6,
-     "inkStd": 0.2,
-     "oud": 1.8,
-     "oad": 2.3
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 80.3,
-    "per": {
-     "koop": 0.3,
-     "eengezins": 0.7,
-     "woz": 0.2,
-     "inkStd": 0,
-     "oud": 1.6,
-     "oad": 1.8
-    }
-   },
-   "kmBerkel": 7,
-   "topCatchment": [
-    {
-     "plaats": "rotterdam",
-     "km": 6,
-     "jaarLeads": 702,
-     "teVer": 0,
-     "huidigeConv": 10.2,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 61.4
-    },
-    {
-     "plaats": "berkel en rodenrijs",
-     "km": 8,
-     "jaarLeads": 127,
-     "teVer": 0,
-     "huidigeConv": 9.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.4
-    },
-    {
-     "plaats": "capelle aan den ijssel",
-     "km": 3,
-     "jaarLeads": 138,
-     "teVer": 0,
-     "huidigeConv": 10.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.2
-    },
-    {
-     "plaats": "ridderkerk",
-     "km": 10,
-     "jaarLeads": 96,
-     "teVer": 0,
-     "huidigeConv": 8.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 10.1
-    },
-    {
-     "plaats": "bergschenhoek",
-     "km": 4,
-     "jaarLeads": 67,
-     "teVer": 0,
-     "huidigeConv": 4.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 9.6
-    },
-    {
-     "plaats": "spijkenisse",
-     "km": 19,
-     "jaarLeads": 190,
-     "teVer": 0,
-     "huidigeConv": 6.9,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 9.2
-    },
-    {
-     "plaats": "krimpen aan den ijssel",
-     "km": 5,
-     "jaarLeads": 49,
-     "teVer": 0,
-     "huidigeConv": 7.6,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.5
-    },
-    {
-     "plaats": "papendrecht",
-     "km": 17,
-     "jaarLeads": 87,
-     "teVer": 0,
-     "huidigeConv": 5.7,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 5.2
-    }
-   ],
-   "score": 79.7,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 200345,
-    "nettoInloop50": 304066,
-    "nettoInloop25_175laag": 208345,
-    "realistischAkkoord": 137,
-    "extraOmzet": 492629,
-    "brutowinst": 225624,
-    "nettoZicht200": 96624,
-    "nettoPdv250": 81374,
-    "nettoZicht175": 101124,
-    "nettoZicht175laag": 104624,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": 21416,
-    "vol": 171832
    }
   },
   {
@@ -6301,7 +6144,7 @@
      "extraAkkoord": 5.5
     }
    ],
-   "score": 79.4,
+   "score": 79.2,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -6458,7 +6301,7 @@
      "extraAkkoord": 9.2
     }
    ],
-   "score": 79,
+   "score": 79.2,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -6476,6 +6319,163 @@
     "breakEvenAkkoord": 79,
     "conservatief": 34639,
     "vol": 198279
+   }
+  },
+  {
+   "id": "WK059914",
+   "naam": "Rotterdam – Prins Alexander",
+   "gemeente": "Rotterdam",
+   "gm": "GM0599",
+   "lat": 51.95336428,
+   "lon": 4.55733408,
+   "km": 18.380330478998314,
+   "profiel": {
+    "koop": 44,
+    "eengezins": 41,
+    "woz": 357,
+    "inkStd": 39.7,
+    "oud": 98,
+    "oad": 2728,
+    "sted": 1,
+    "hh": 47770,
+    "koopwoningen": 20530
+   },
+   "gemeenteVraag": {
+    "leads": 1438,
+    "akkoord": 169,
+    "jaarLeads": 836,
+    "jaarAkkoord": 84,
+    "conv": 11.8,
+    "residu": -5.3,
+    "leadsPer1000hh": 2.4
+   },
+   "uplift": {
+    "extraAkkoordVol": 182,
+    "jaarLeadsCatchment": 2787,
+    "teVer": 0,
+    "huidigAkk": 228,
+    "koopBinnen15": 325437,
+    "koopOnbenut": 141335,
+    "hhBinnen15": 698865,
+    "inkGem15": 35.1,
+    "latentLeads": 1688,
+    "koopIndex15": 131.9
+   },
+   "lookalikeKlant": {
+    "score": 70.6,
+    "per": {
+     "koop": 0.5,
+     "eengezins": 1,
+     "woz": 0.6,
+     "inkStd": 0.2,
+     "oud": 1.8,
+     "oad": 2.3
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 80.3,
+    "per": {
+     "koop": 0.3,
+     "eengezins": 0.7,
+     "woz": 0.2,
+     "inkStd": 0,
+     "oud": 1.6,
+     "oad": 1.8
+    }
+   },
+   "kmBerkel": 7,
+   "topCatchment": [
+    {
+     "plaats": "rotterdam",
+     "km": 6,
+     "jaarLeads": 702,
+     "teVer": 0,
+     "huidigeConv": 10.2,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 61.4
+    },
+    {
+     "plaats": "berkel en rodenrijs",
+     "km": 8,
+     "jaarLeads": 127,
+     "teVer": 0,
+     "huidigeConv": 9.5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 11.4
+    },
+    {
+     "plaats": "capelle aan den ijssel",
+     "km": 3,
+     "jaarLeads": 138,
+     "teVer": 0,
+     "huidigeConv": 10.5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 11.2
+    },
+    {
+     "plaats": "ridderkerk",
+     "km": 10,
+     "jaarLeads": 96,
+     "teVer": 0,
+     "huidigeConv": 8.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 10.1
+    },
+    {
+     "plaats": "bergschenhoek",
+     "km": 4,
+     "jaarLeads": 67,
+     "teVer": 0,
+     "huidigeConv": 4.5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 9.6
+    },
+    {
+     "plaats": "spijkenisse",
+     "km": 19,
+     "jaarLeads": 190,
+     "teVer": 0,
+     "huidigeConv": 6.9,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 9.2
+    },
+    {
+     "plaats": "krimpen aan den ijssel",
+     "km": 5,
+     "jaarLeads": 49,
+     "teVer": 0,
+     "huidigeConv": 7.6,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.5
+    },
+    {
+     "plaats": "papendrecht",
+     "km": 17,
+     "jaarLeads": 87,
+     "teVer": 0,
+     "huidigeConv": 5.7,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 5.2
+    }
+   ],
+   "score": 79.2,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 200345,
+    "nettoInloop50": 304066,
+    "nettoInloop25_175laag": 208345,
+    "realistischAkkoord": 137,
+    "extraOmzet": 492629,
+    "brutowinst": 225624,
+    "nettoZicht200": 96624,
+    "nettoPdv250": 81374,
+    "nettoZicht175": 101124,
+    "nettoZicht175laag": 104624,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": 21416,
+    "vol": 171832
    }
   },
   {
@@ -6615,7 +6615,7 @@
      "extraAkkoord": 5.8
     }
    ],
-   "score": 76.6,
+   "score": 77.3,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -6633,477 +6633,6 @@
     "breakEvenAkkoord": 79,
     "conservatief": 19763,
     "vol": 168526
-   }
-  },
-  {
-   "id": "GM0606",
-   "naam": "Schiedam",
-   "gemeente": "Schiedam",
-   "gm": "GM0606",
-   "lat": 51.92675598,
-   "lon": 4.38526221,
-   "km": 12.875435469237837,
-   "profiel": {
-    "koop": 49,
-    "eengezins": 32,
-    "woz": 299,
-    "inkStd": 38.4,
-    "oud": 95,
-    "oad": 3382,
-    "sted": 1,
-    "hh": 38869,
-    "koopwoningen": 18796
-   },
-   "gemeenteVraag": {
-    "leads": 202,
-    "akkoord": 23,
-    "jaarLeads": 111,
-    "jaarAkkoord": 8,
-    "conv": 11.4,
-    "residu": -5.3,
-    "leadsPer1000hh": 2.9
-   },
-   "uplift": {
-    "extraAkkoordVol": 173,
-    "jaarLeadsCatchment": 2466,
-    "teVer": 0,
-    "huidigAkk": 210,
-    "koopBinnen15": 339248,
-    "koopOnbenut": 96663,
-    "hhBinnen15": 754010,
-    "inkGem15": 34.4,
-    "latentLeads": 1111,
-    "koopIndex15": 128.6
-   },
-   "lookalikeKlant": {
-    "score": 71.1,
-    "per": {
-     "koop": 1.1,
-     "eengezins": 0.3,
-     "woz": 1.2,
-     "inkStd": 0.3,
-     "oud": 0.9,
-     "oad": 1.5
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 86.7,
-    "per": {
-     "koop": 0.3,
-     "eengezins": 0,
-     "woz": 0.8,
-     "inkStd": 0.2,
-     "oud": 0.7,
-     "oad": 1
-    }
-   },
-   "kmBerkel": 10,
-   "topCatchment": [
-    {
-     "plaats": "rotterdam",
-     "km": 7,
-     "jaarLeads": 702,
-     "teVer": 0,
-     "huidigeConv": 10.2,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 61.4
-    },
-    {
-     "plaats": "spijkenisse",
-     "km": 10,
-     "jaarLeads": 190,
-     "teVer": 0,
-     "huidigeConv": 6.9,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 22.7
-    },
-    {
-     "plaats": "vlaardingen",
-     "km": 4,
-     "jaarLeads": 144,
-     "teVer": 0,
-     "huidigeConv": 8.6,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 14.9
-    },
-    {
-     "plaats": "schiedam",
-     "km": 0,
-     "jaarLeads": 111,
-     "teVer": 0,
-     "huidigeConv": 8.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.3
-    },
-    {
-     "plaats": "hoogvliet rotterdam",
-     "km": 7,
-     "jaarLeads": 63,
-     "teVer": 0,
-     "huidigeConv": 5.6,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 8.5
-    },
-    {
-     "plaats": "maassluis",
-     "km": 9,
-     "jaarLeads": 74,
-     "teVer": 0,
-     "huidigeConv": 12,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.2
-    },
-    {
-     "plaats": "rhoon",
-     "km": 10,
-     "jaarLeads": 54,
-     "teVer": 0,
-     "huidigeConv": 9.2,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.1
-    },
-    {
-     "plaats": "bergschenhoek",
-     "km": 11,
-     "jaarLeads": 67,
-     "teVer": 0,
-     "huidigeConv": 4.5,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 4.8
-    }
-   ],
-   "score": 75.4,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 189187,
-    "nettoInloop50": 292908,
-    "nettoInloop25_175laag": 197187,
-    "realistischAkkoord": 130,
-    "extraOmzet": 468268,
-    "brutowinst": 214467,
-    "nettoZicht200": 85467,
-    "nettoPdv250": 70217,
-    "nettoZicht175": 89967,
-    "nettoZicht175laag": 93467,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": 13978,
-    "vol": 156956
-   }
-  },
-  {
-   "id": "WK059904",
-   "naam": "Rotterdam – Overschie",
-   "gemeente": "Rotterdam",
-   "gm": "GM0599",
-   "lat": 51.95294109,
-   "lon": 4.42638904,
-   "km": 11.5858487714655,
-   "profiel": {
-    "koop": 51,
-    "eengezins": 43,
-    "woz": 395,
-    "inkStd": 40.9,
-    "oud": 85,
-    "oad": 1705,
-    "sted": 2,
-    "hh": 8790,
-    "koopwoningen": 4639
-   },
-   "gemeenteVraag": {
-    "leads": 1438,
-    "akkoord": 169,
-    "jaarLeads": 836,
-    "jaarAkkoord": 84,
-    "conv": 11.8,
-    "residu": -5.3,
-    "leadsPer1000hh": 2.4
-   },
-   "uplift": {
-    "extraAkkoordVol": 158,
-    "jaarLeadsCatchment": 2792,
-    "teVer": 0,
-    "huidigAkk": 253,
-    "koopBinnen15": 392535,
-    "koopOnbenut": 94541,
-    "hhBinnen15": 884365,
-    "inkGem15": 34.9,
-    "latentLeads": 1082,
-    "koopIndex15": 127.5
-   },
-   "lookalikeKlant": {
-    "score": 61.7,
-    "per": {
-     "koop": 1.3,
-     "eengezins": 1.2,
-     "woz": 0.2,
-     "inkStd": 0,
-     "oud": 1.9,
-     "oad": 3.6
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 70.7,
-    "per": {
-     "koop": 0.5,
-     "eengezins": 0.8,
-     "woz": 0.2,
-     "inkStd": 0.1,
-     "oud": 2.1,
-     "oad": 3.1
-    }
-   },
-   "kmBerkel": 6,
-   "topCatchment": [
-    {
-     "plaats": "rotterdam",
-     "km": 5,
-     "jaarLeads": 702,
-     "teVer": 0,
-     "huidigeConv": 10.2,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 61.4
-    },
-    {
-     "plaats": "vlaardingen",
-     "km": 8,
-     "jaarLeads": 144,
-     "teVer": 0,
-     "huidigeConv": 8.6,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 14.9
-    },
-    {
-     "plaats": "berkel en rodenrijs",
-     "km": 6,
-     "jaarLeads": 127,
-     "teVer": 0,
-     "huidigeConv": 9.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.4
-    },
-    {
-     "plaats": "schiedam",
-     "km": 4,
-     "jaarLeads": 111,
-     "teVer": 0,
-     "huidigeConv": 8.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.3
-    },
-    {
-     "plaats": "bergschenhoek",
-     "km": 7,
-     "jaarLeads": 67,
-     "teVer": 0,
-     "huidigeConv": 4.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 9.6
-    },
-    {
-     "plaats": "spijkenisse",
-     "km": 14,
-     "jaarLeads": 190,
-     "teVer": 0,
-     "huidigeConv": 6.9,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 9.2
-    },
-    {
-     "plaats": "barendrecht",
-     "km": 13,
-     "jaarLeads": 148,
-     "teVer": 0,
-     "huidigeConv": 9,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 4.1
-    },
-    {
-     "plaats": "hoogvliet rotterdam",
-     "km": 11,
-     "jaarLeads": 63,
-     "teVer": 0,
-     "huidigeConv": 5.6,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 3.9
-    }
-   ],
-   "score": 74.2,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 170592,
-    "nettoInloop50": 274313,
-    "nettoInloop25_175laag": 178592,
-    "realistischAkkoord": 119,
-    "extraOmzet": 427667,
-    "brutowinst": 195871,
-    "nettoZicht200": 66871,
-    "nettoPdv250": 51621,
-    "nettoZicht175": 71371,
-    "nettoZicht175laag": 74871,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": 1581,
-    "vol": 132162
-   }
-  },
-  {
-   "id": "WK059906",
-   "naam": "Rotterdam – Hillegersberg-Schiebroek",
-   "gemeente": "Rotterdam",
-   "gm": "GM0599",
-   "lat": 51.95761966,
-   "lon": 4.48740154,
-   "km": 14.145540899040586,
-   "profiel": {
-    "koop": 54,
-    "eengezins": 40,
-    "woz": 487,
-    "inkStd": 54.7,
-    "oud": 98,
-    "oad": 2346,
-    "sted": 2,
-    "hh": 20860,
-    "koopwoningen": 11422
-   },
-   "gemeenteVraag": {
-    "leads": 1438,
-    "akkoord": 169,
-    "jaarLeads": 836,
-    "jaarAkkoord": 84,
-    "conv": 11.8,
-    "residu": -5.3,
-    "leadsPer1000hh": 2.4
-   },
-   "uplift": {
-    "extraAkkoordVol": 176,
-    "jaarLeadsCatchment": 3268,
-    "teVer": 0,
-    "huidigAkk": 320,
-    "koopBinnen15": 339894,
-    "koopOnbenut": 99890,
-    "hhBinnen15": 750380,
-    "inkGem15": 35,
-    "latentLeads": 1172,
-    "koopIndex15": 128.6
-   },
-   "lookalikeKlant": {
-    "score": 49.8,
-    "per": {
-     "koop": 1.7,
-     "eengezins": 1,
-     "woz": 0.8,
-     "inkStd": 1.6,
-     "oud": 1.8,
-     "oad": 2.8
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 60.1,
-    "per": {
-     "koop": 0.8,
-     "eengezins": 0.6,
-     "woz": 1.2,
-     "inkStd": 1.7,
-     "oud": 1.6,
-     "oad": 2.3
-    }
-   },
-   "kmBerkel": 4,
-   "topCatchment": [
-    {
-     "plaats": "rotterdam",
-     "km": 4,
-     "jaarLeads": 702,
-     "teVer": 0,
-     "huidigeConv": 10.2,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 61.4
-    },
-    {
-     "plaats": "berkel en rodenrijs",
-     "km": 5,
-     "jaarLeads": 127,
-     "teVer": 0,
-     "huidigeConv": 9.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.4
-    },
-    {
-     "plaats": "schiedam",
-     "km": 8,
-     "jaarLeads": 111,
-     "teVer": 0,
-     "huidigeConv": 8.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.3
-    },
-    {
-     "plaats": "capelle aan den ijssel",
-     "km": 7,
-     "jaarLeads": 138,
-     "teVer": 0,
-     "huidigeConv": 10.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.2
-    },
-    {
-     "plaats": "bergschenhoek",
-     "km": 3,
-     "jaarLeads": 67,
-     "teVer": 0,
-     "huidigeConv": 4.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 9.6
-    },
-    {
-     "plaats": "spijkenisse",
-     "km": 16,
-     "jaarLeads": 190,
-     "teVer": 0,
-     "huidigeConv": 6.9,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 9.2
-    },
-    {
-     "plaats": "krimpen aan den ijssel",
-     "km": 9,
-     "jaarLeads": 49,
-     "teVer": 0,
-     "huidigeConv": 7.6,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.5
-    },
-    {
-     "plaats": "bleiswijk",
-     "km": 8,
-     "jaarLeads": 35,
-     "teVer": 0,
-     "huidigeConv": 3.9,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.1
-    }
-   ],
-   "score": 74,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 192907,
-    "nettoInloop50": 296627,
-    "nettoInloop25_175laag": 200907,
-    "realistischAkkoord": 132,
-    "extraOmzet": 476388,
-    "brutowinst": 218186,
-    "nettoZicht200": 89186,
-    "nettoPdv250": 73936,
-    "nettoZicht175": 93686,
-    "nettoZicht175laag": 97186,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": 16457,
-    "vol": 161914
    }
   },
   {
@@ -7243,7 +6772,7 @@
      "extraAkkoord": 3.8
     }
    ],
-   "score": 72.7,
+   "score": 77.2,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -7400,7 +6929,7 @@
      "extraAkkoord": 4.2
     }
    ],
-   "score": 72.3,
+   "score": 76.8,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -7557,7 +7086,7 @@
      "extraAkkoord": 3.8
     }
    ],
-   "score": 72.3,
+   "score": 76.6,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -7575,6 +7104,163 @@
     "breakEvenAkkoord": 79,
     "conservatief": -9990,
     "vol": 109021
+   }
+  },
+  {
+   "id": "GM0606",
+   "naam": "Schiedam",
+   "gemeente": "Schiedam",
+   "gm": "GM0606",
+   "lat": 51.92675598,
+   "lon": 4.38526221,
+   "km": 12.875435469237837,
+   "profiel": {
+    "koop": 49,
+    "eengezins": 32,
+    "woz": 299,
+    "inkStd": 38.4,
+    "oud": 95,
+    "oad": 3382,
+    "sted": 1,
+    "hh": 38869,
+    "koopwoningen": 18796
+   },
+   "gemeenteVraag": {
+    "leads": 202,
+    "akkoord": 23,
+    "jaarLeads": 111,
+    "jaarAkkoord": 8,
+    "conv": 11.4,
+    "residu": -5.3,
+    "leadsPer1000hh": 2.9
+   },
+   "uplift": {
+    "extraAkkoordVol": 173,
+    "jaarLeadsCatchment": 2466,
+    "teVer": 0,
+    "huidigAkk": 210,
+    "koopBinnen15": 339248,
+    "koopOnbenut": 96663,
+    "hhBinnen15": 754010,
+    "inkGem15": 34.4,
+    "latentLeads": 1111,
+    "koopIndex15": 128.6
+   },
+   "lookalikeKlant": {
+    "score": 71.1,
+    "per": {
+     "koop": 1.1,
+     "eengezins": 0.3,
+     "woz": 1.2,
+     "inkStd": 0.3,
+     "oud": 0.9,
+     "oad": 1.5
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 86.7,
+    "per": {
+     "koop": 0.3,
+     "eengezins": 0,
+     "woz": 0.8,
+     "inkStd": 0.2,
+     "oud": 0.7,
+     "oad": 1
+    }
+   },
+   "kmBerkel": 10,
+   "topCatchment": [
+    {
+     "plaats": "rotterdam",
+     "km": 7,
+     "jaarLeads": 702,
+     "teVer": 0,
+     "huidigeConv": 10.2,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 61.4
+    },
+    {
+     "plaats": "spijkenisse",
+     "km": 10,
+     "jaarLeads": 190,
+     "teVer": 0,
+     "huidigeConv": 6.9,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 22.7
+    },
+    {
+     "plaats": "vlaardingen",
+     "km": 4,
+     "jaarLeads": 144,
+     "teVer": 0,
+     "huidigeConv": 8.6,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 14.9
+    },
+    {
+     "plaats": "schiedam",
+     "km": 0,
+     "jaarLeads": 111,
+     "teVer": 0,
+     "huidigeConv": 8.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 11.3
+    },
+    {
+     "plaats": "hoogvliet rotterdam",
+     "km": 7,
+     "jaarLeads": 63,
+     "teVer": 0,
+     "huidigeConv": 5.6,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 8.5
+    },
+    {
+     "plaats": "maassluis",
+     "km": 9,
+     "jaarLeads": 74,
+     "teVer": 0,
+     "huidigeConv": 12,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.2
+    },
+    {
+     "plaats": "rhoon",
+     "km": 10,
+     "jaarLeads": 54,
+     "teVer": 0,
+     "huidigeConv": 9.2,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.1
+    },
+    {
+     "plaats": "bergschenhoek",
+     "km": 11,
+     "jaarLeads": 67,
+     "teVer": 0,
+     "huidigeConv": 4.5,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 4.8
+    }
+   ],
+   "score": 75.3,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 189187,
+    "nettoInloop50": 292908,
+    "nettoInloop25_175laag": 197187,
+    "realistischAkkoord": 130,
+    "extraOmzet": 468268,
+    "brutowinst": 214467,
+    "nettoZicht200": 85467,
+    "nettoPdv250": 70217,
+    "nettoZicht175": 89967,
+    "nettoZicht175laag": 93467,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": 13978,
+    "vol": 156956
    }
   },
   {
@@ -7714,7 +7400,7 @@
      "extraAkkoord": 3.8
     }
    ],
-   "score": 70.2,
+   "score": 74.2,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -7871,7 +7557,7 @@
      "extraAkkoord": 4.2
     }
    ],
-   "score": 70,
+   "score": 74,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -7892,72 +7578,72 @@
    }
   },
   {
-   "id": "GM0613",
-   "naam": "Albrandswaard",
-   "gemeente": "Albrandswaard",
-   "gm": "GM0613",
-   "lat": 51.85204293,
-   "lon": 4.43571499,
-   "km": 21.862443389426694,
+   "id": "WK059904",
+   "naam": "Rotterdam – Overschie",
+   "gemeente": "Rotterdam",
+   "gm": "GM0599",
+   "lat": 51.95294109,
+   "lon": 4.42638904,
+   "km": 11.5858487714655,
    "profiel": {
-    "koop": 70,
-    "eengezins": 80,
-    "woz": 446,
-    "inkStd": 51.2,
-    "oud": 95,
-    "oad": 1057,
-    "sted": 3,
-    "hh": 10644,
-    "koopwoningen": 7534
+    "koop": 51,
+    "eengezins": 43,
+    "woz": 395,
+    "inkStd": 40.9,
+    "oud": 85,
+    "oad": 1705,
+    "sted": 2,
+    "hh": 8790,
+    "koopwoningen": 4639
    },
    "gemeenteVraag": {
-    "leads": 126,
-    "akkoord": 16,
-    "jaarLeads": 73,
-    "jaarAkkoord": 9,
-    "conv": 12.7,
-    "residu": 0.3,
-    "leadsPer1000hh": 6.9
+    "leads": 1438,
+    "akkoord": 169,
+    "jaarLeads": 836,
+    "jaarAkkoord": 84,
+    "conv": 11.8,
+    "residu": -5.3,
+    "leadsPer1000hh": 2.4
    },
    "uplift": {
-    "extraAkkoordVol": 175,
-    "jaarLeadsCatchment": 2368,
-    "teVer": 1,
-    "huidigAkk": 199,
-    "koopBinnen15": 280453,
-    "koopOnbenut": 149252,
-    "hhBinnen15": 622825,
-    "inkGem15": 34,
-    "latentLeads": 1853,
-    "koopIndex15": 128.5
+    "extraAkkoordVol": 158,
+    "jaarLeadsCatchment": 2792,
+    "teVer": 0,
+    "huidigAkk": 253,
+    "koopBinnen15": 392535,
+    "koopOnbenut": 94541,
+    "hhBinnen15": 884365,
+    "inkGem15": 34.9,
+    "latentLeads": 1082,
+    "koopIndex15": 127.5
    },
    "lookalikeKlant": {
-    "score": 29.1,
+    "score": 61.7,
     "per": {
-     "koop": 3.5,
-     "eengezins": 4,
-     "woz": 0.4,
-     "inkStd": 1.2,
-     "oud": 0.9,
-     "oad": 4.4
+     "koop": 1.3,
+     "eengezins": 1.2,
+     "woz": 0.2,
+     "inkStd": 0,
+     "oud": 1.9,
+     "oad": 3.6
     }
    },
    "lookalikeRijswijk": {
-    "score": 30.3,
+    "score": 70.7,
     "per": {
-     "koop": 2.7,
-     "eengezins": 3.6,
-     "woz": 0.8,
-     "inkStd": 1.3,
-     "oud": 0.7,
-     "oad": 3.9
+     "koop": 0.5,
+     "eengezins": 0.8,
+     "woz": 0.2,
+     "inkStd": 0.1,
+     "oud": 2.1,
+     "oad": 3.1
     }
    },
-   "kmBerkel": 16,
+   "kmBerkel": 6,
    "topCatchment": [
     {
      "plaats": "rotterdam",
-     "km": 9,
+     "km": 5,
      "jaarLeads": 702,
      "teVer": 0,
      "huidigeConv": 10.2,
@@ -7965,26 +7651,26 @@
      "extraAkkoord": 61.4
     },
     {
-     "plaats": "spijkenisse",
-     "km": 6,
-     "jaarLeads": 190,
+     "plaats": "vlaardingen",
+     "km": 8,
+     "jaarLeads": 144,
      "teVer": 0,
-     "huidigeConv": 6.9,
+     "huidigeConv": 8.6,
      "nieuweConv": 19.3,
-     "extraAkkoord": 22.7
+     "extraAkkoord": 14.9
     },
     {
-     "plaats": "barendrecht",
+     "plaats": "berkel en rodenrijs",
      "km": 6,
-     "jaarLeads": 148,
+     "jaarLeads": 127,
      "teVer": 0,
-     "huidigeConv": 9,
+     "huidigeConv": 9.5,
      "nieuweConv": 19.3,
-     "extraAkkoord": 14.5
+     "extraAkkoord": 11.4
     },
     {
      "plaats": "schiedam",
-     "km": 9,
+     "km": 4,
      "jaarLeads": 111,
      "teVer": 0,
      "huidigeConv": 8.4,
@@ -7992,60 +7678,217 @@
      "extraAkkoord": 11.3
     },
     {
+     "plaats": "bergschenhoek",
+     "km": 7,
+     "jaarLeads": 67,
+     "teVer": 0,
+     "huidigeConv": 4.5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 9.6
+    },
+    {
+     "plaats": "spijkenisse",
+     "km": 14,
+     "jaarLeads": 190,
+     "teVer": 0,
+     "huidigeConv": 6.9,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 9.2
+    },
+    {
+     "plaats": "barendrecht",
+     "km": 13,
+     "jaarLeads": 148,
+     "teVer": 0,
+     "huidigeConv": 9,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 4.1
+    },
+    {
      "plaats": "hoogvliet rotterdam",
-     "km": 5,
+     "km": 11,
      "jaarLeads": 63,
      "teVer": 0,
      "huidigeConv": 5.6,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 8.5
-    },
-    {
-     "plaats": "oud-beijerland",
-     "km": 5,
-     "jaarLeads": 50,
-     "teVer": 0,
-     "huidigeConv": 7.7,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.7
-    },
-    {
-     "plaats": "papendrecht",
-     "km": 19,
-     "jaarLeads": 87,
-     "teVer": 0,
-     "huidigeConv": 5.7,
      "nieuweConv": 11.9,
-     "extraAkkoord": 5.2
+     "extraAkkoord": 3.9
+    }
+   ],
+   "score": 73.9,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 170592,
+    "nettoInloop50": 274313,
+    "nettoInloop25_175laag": 178592,
+    "realistischAkkoord": 119,
+    "extraOmzet": 427667,
+    "brutowinst": 195871,
+    "nettoZicht200": 66871,
+    "nettoPdv250": 51621,
+    "nettoZicht175": 71371,
+    "nettoZicht175laag": 74871,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": 1581,
+    "vol": 132162
+   }
+  },
+  {
+   "id": "WK059906",
+   "naam": "Rotterdam – Hillegersberg-Schiebroek",
+   "gemeente": "Rotterdam",
+   "gm": "GM0599",
+   "lat": 51.95761966,
+   "lon": 4.48740154,
+   "km": 14.145540899040586,
+   "profiel": {
+    "koop": 54,
+    "eengezins": 40,
+    "woz": 487,
+    "inkStd": 54.7,
+    "oud": 98,
+    "oad": 2346,
+    "sted": 2,
+    "hh": 20860,
+    "koopwoningen": 11422
+   },
+   "gemeenteVraag": {
+    "leads": 1438,
+    "akkoord": 169,
+    "jaarLeads": 836,
+    "jaarAkkoord": 84,
+    "conv": 11.8,
+    "residu": -5.3,
+    "leadsPer1000hh": 2.4
+   },
+   "uplift": {
+    "extraAkkoordVol": 176,
+    "jaarLeadsCatchment": 3268,
+    "teVer": 0,
+    "huidigAkk": 320,
+    "koopBinnen15": 339894,
+    "koopOnbenut": 99890,
+    "hhBinnen15": 750380,
+    "inkGem15": 35,
+    "latentLeads": 1172,
+    "koopIndex15": 128.6
+   },
+   "lookalikeKlant": {
+    "score": 49.8,
+    "per": {
+     "koop": 1.7,
+     "eengezins": 1,
+     "woz": 0.8,
+     "inkStd": 1.6,
+     "oud": 1.8,
+     "oad": 2.8
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 60.1,
+    "per": {
+     "koop": 0.8,
+     "eengezins": 0.6,
+     "woz": 1.2,
+     "inkStd": 1.7,
+     "oud": 1.6,
+     "oad": 2.3
+    }
+   },
+   "kmBerkel": 4,
+   "topCatchment": [
+    {
+     "plaats": "rotterdam",
+     "km": 4,
+     "jaarLeads": 702,
+     "teVer": 0,
+     "huidigeConv": 10.2,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 61.4
     },
     {
-     "plaats": "rhoon",
-     "km": 1,
-     "jaarLeads": 54,
+     "plaats": "berkel en rodenrijs",
+     "km": 5,
+     "jaarLeads": 127,
      "teVer": 0,
-     "huidigeConv": 9.2,
+     "huidigeConv": 9.5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 11.4
+    },
+    {
+     "plaats": "schiedam",
+     "km": 8,
+     "jaarLeads": 111,
+     "teVer": 0,
+     "huidigeConv": 8.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 11.3
+    },
+    {
+     "plaats": "capelle aan den ijssel",
+     "km": 7,
+     "jaarLeads": 138,
+     "teVer": 0,
+     "huidigeConv": 10.5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 11.2
+    },
+    {
+     "plaats": "bergschenhoek",
+     "km": 3,
+     "jaarLeads": 67,
+     "teVer": 0,
+     "huidigeConv": 4.5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 9.6
+    },
+    {
+     "plaats": "spijkenisse",
+     "km": 16,
+     "jaarLeads": 190,
+     "teVer": 0,
+     "huidigeConv": 6.9,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 9.2
+    },
+    {
+     "plaats": "krimpen aan den ijssel",
+     "km": 9,
+     "jaarLeads": 49,
+     "teVer": 0,
+     "huidigeConv": 7.6,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.5
+    },
+    {
+     "plaats": "bleiswijk",
+     "km": 8,
+     "jaarLeads": 35,
+     "teVer": 0,
+     "huidigeConv": 3.9,
      "nieuweConv": 19.3,
      "extraAkkoord": 5.1
     }
    ],
-   "score": 69.3,
+   "score": 73.1,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
-    "nettoInloop25": 191667,
-    "nettoInloop50": 295388,
-    "nettoInloop25_175laag": 199667,
-    "realistischAkkoord": 131,
-    "extraOmzet": 473681,
-    "brutowinst": 216946,
-    "nettoZicht200": 87946,
-    "nettoPdv250": 72696,
-    "nettoZicht175": 92446,
-    "nettoZicht175laag": 95946,
+    "nettoInloop25": 192907,
+    "nettoInloop50": 296627,
+    "nettoInloop25_175laag": 200907,
+    "realistischAkkoord": 132,
+    "extraOmzet": 476388,
+    "brutowinst": 218186,
+    "nettoZicht200": 89186,
+    "nettoPdv250": 73936,
+    "nettoZicht175": 93686,
+    "nettoZicht175laag": 97186,
     "breakEven175laag": 74,
     "breakEvenAkkoord": 79,
-    "conservatief": 15631,
-    "vol": 160261
+    "conservatief": 16457,
+    "vol": 161914
    }
   },
   {
@@ -8185,7 +8028,7 @@
      "extraAkkoord": 3.8
     }
    ],
-   "score": 68.6,
+   "score": 72.9,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -8203,163 +8046,6 @@
     "breakEvenAkkoord": 79,
     "conservatief": -18254,
     "vol": 92492
-   }
-  },
-  {
-   "id": "WK039405",
-   "naam": "Haarlemmermeer – Badhoevedorp",
-   "gemeente": "Haarlemmermeer",
-   "gm": "GM0394",
-   "lat": 52.33122357,
-   "lon": 4.77899982,
-   "km": 45.06386642636782,
-   "profiel": {
-    "koop": 70,
-    "eengezins": 69,
-    "woz": 554,
-    "inkStd": 51.4,
-    "oud": 90,
-    "oad": 1747,
-    "sted": 2,
-    "hh": 6480,
-    "koopwoningen": 4332
-   },
-   "gemeenteVraag": {
-    "leads": 777,
-    "akkoord": 92,
-    "jaarLeads": 431,
-    "jaarAkkoord": 49,
-    "conv": 11.8,
-    "residu": 4.2,
-    "leadsPer1000hh": 6.2
-   },
-   "uplift": {
-    "extraAkkoordVol": 148,
-    "jaarLeadsCatchment": 1917,
-    "teVer": 8,
-    "huidigAkk": 133,
-    "koopBinnen15": 326459,
-    "koopOnbenut": 326459,
-    "hhBinnen15": 834165,
-    "inkGem15": 40.6,
-    "latentLeads": 2962,
-    "koopIndex15": 111.1
-   },
-   "lookalikeKlant": {
-    "score": 24.7,
-    "per": {
-     "koop": 3.5,
-     "eengezins": 3.1,
-     "woz": 1.5,
-     "inkStd": 1.2,
-     "oud": 0.5,
-     "oad": 3.5
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 25.9,
-    "per": {
-     "koop": 2.7,
-     "eengezins": 2.8,
-     "woz": 1.9,
-     "inkStd": 1.3,
-     "oud": 0.7,
-     "oad": 3
-    }
-   },
-   "kmBerkel": 43,
-   "topCatchment": [
-    {
-     "plaats": "amsterdam",
-     "km": 10,
-     "jaarLeads": 319,
-     "teVer": 0,
-     "huidigeConv": 5.8,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 40.9
-    },
-    {
-     "plaats": "amstelveen",
-     "km": 7,
-     "jaarLeads": 139,
-     "teVer": 0,
-     "huidigeConv": 7.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 15.9
-    },
-    {
-     "plaats": "hoofddorp",
-     "km": 7,
-     "jaarLeads": 180,
-     "teVer": 0,
-     "huidigeConv": 10.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 15.4
-    },
-    {
-     "plaats": "haarlem",
-     "km": 11,
-     "jaarLeads": 185,
-     "teVer": 1,
-     "huidigeConv": 6.7,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 9.6
-    },
-    {
-     "plaats": "badhoevedorp",
-     "km": 0,
-     "jaarLeads": 50,
-     "teVer": 0,
-     "huidigeConv": 8,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.7
-    },
-    {
-     "plaats": "zaandam",
-     "km": 13,
-     "jaarLeads": 60,
-     "teVer": 0,
-     "huidigeConv": 3.8,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 4.8
-    },
-    {
-     "plaats": "aalsmeer",
-     "km": 7,
-     "jaarLeads": 41,
-     "teVer": 0,
-     "huidigeConv": 8.3,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 4.5
-    },
-    {
-     "plaats": "uithoorn",
-     "km": 10,
-     "jaarLeads": 62,
-     "teVer": 0,
-     "huidigeConv": 5,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 4.2
-    }
-   ],
-   "score": 67.5,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 158195,
-    "nettoInloop50": 261916,
-    "nettoInloop25_175laag": 166195,
-    "realistischAkkoord": 111,
-    "extraOmzet": 400599,
-    "brutowinst": 183474,
-    "nettoZicht200": 54474,
-    "nettoPdv250": 39224,
-    "nettoZicht175": 58974,
-    "nettoZicht175laag": 62474,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": -6684,
-    "vol": 115632
    }
   },
   {
@@ -8499,7 +8185,7 @@
      "extraAkkoord": 3.8
     }
    ],
-   "score": 67.2,
+   "score": 71.5,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -8517,6 +8203,163 @@
     "breakEvenAkkoord": 79,
     "conservatief": -17428,
     "vol": 94144
+   }
+  },
+  {
+   "id": "WK039405",
+   "naam": "Haarlemmermeer – Badhoevedorp",
+   "gemeente": "Haarlemmermeer",
+   "gm": "GM0394",
+   "lat": 52.33122357,
+   "lon": 4.77899982,
+   "km": 45.06386642636782,
+   "profiel": {
+    "koop": 70,
+    "eengezins": 69,
+    "woz": 554,
+    "inkStd": 51.4,
+    "oud": 90,
+    "oad": 1747,
+    "sted": 2,
+    "hh": 6480,
+    "koopwoningen": 4332
+   },
+   "gemeenteVraag": {
+    "leads": 777,
+    "akkoord": 92,
+    "jaarLeads": 431,
+    "jaarAkkoord": 49,
+    "conv": 11.8,
+    "residu": 4.2,
+    "leadsPer1000hh": 6.2
+   },
+   "uplift": {
+    "extraAkkoordVol": 148,
+    "jaarLeadsCatchment": 1917,
+    "teVer": 8,
+    "huidigAkk": 133,
+    "koopBinnen15": 326459,
+    "koopOnbenut": 326459,
+    "hhBinnen15": 834165,
+    "inkGem15": 40.6,
+    "latentLeads": 2962,
+    "koopIndex15": 111.1
+   },
+   "lookalikeKlant": {
+    "score": 24.7,
+    "per": {
+     "koop": 3.5,
+     "eengezins": 3.1,
+     "woz": 1.5,
+     "inkStd": 1.2,
+     "oud": 0.5,
+     "oad": 3.5
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 25.9,
+    "per": {
+     "koop": 2.7,
+     "eengezins": 2.8,
+     "woz": 1.9,
+     "inkStd": 1.3,
+     "oud": 0.7,
+     "oad": 3
+    }
+   },
+   "kmBerkel": 43,
+   "topCatchment": [
+    {
+     "plaats": "amsterdam",
+     "km": 10,
+     "jaarLeads": 319,
+     "teVer": 0,
+     "huidigeConv": 5.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 40.9
+    },
+    {
+     "plaats": "amstelveen",
+     "km": 7,
+     "jaarLeads": 139,
+     "teVer": 0,
+     "huidigeConv": 7.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 15.9
+    },
+    {
+     "plaats": "hoofddorp",
+     "km": 7,
+     "jaarLeads": 180,
+     "teVer": 0,
+     "huidigeConv": 10.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 15.4
+    },
+    {
+     "plaats": "haarlem",
+     "km": 11,
+     "jaarLeads": 185,
+     "teVer": 1,
+     "huidigeConv": 6.7,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 9.6
+    },
+    {
+     "plaats": "badhoevedorp",
+     "km": 0,
+     "jaarLeads": 50,
+     "teVer": 0,
+     "huidigeConv": 8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.7
+    },
+    {
+     "plaats": "zaandam",
+     "km": 13,
+     "jaarLeads": 60,
+     "teVer": 0,
+     "huidigeConv": 3.8,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 4.8
+    },
+    {
+     "plaats": "aalsmeer",
+     "km": 7,
+     "jaarLeads": 41,
+     "teVer": 0,
+     "huidigeConv": 8.3,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 4.5
+    },
+    {
+     "plaats": "uithoorn",
+     "km": 10,
+     "jaarLeads": 62,
+     "teVer": 0,
+     "huidigeConv": 5,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 4.2
+    }
+   ],
+   "score": 71.4,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 158195,
+    "nettoInloop50": 261916,
+    "nettoInloop25_175laag": 166195,
+    "realistischAkkoord": 111,
+    "extraOmzet": 400599,
+    "brutowinst": 183474,
+    "nettoZicht200": 54474,
+    "nettoPdv250": 39224,
+    "nettoZicht175": 58974,
+    "nettoZicht175laag": 62474,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": -6684,
+    "vol": 115632
    }
   },
   {
@@ -8656,7 +8499,7 @@
      "extraAkkoord": 3.8
     }
    ],
-   "score": 66.9,
+   "score": 70.8,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -8674,634 +8517,6 @@
     "breakEvenAkkoord": 79,
     "conservatief": -16601,
     "vol": 95797
-   }
-  },
-  {
-   "id": "WK039219",
-   "naam": "Haarlem – Boerhaavewijk",
-   "gemeente": "Haarlem",
-   "gm": "GM0392",
-   "lat": 52.36547483,
-   "lon": 4.66121058,
-   "km": 43.15296824637002,
-   "profiel": {
-    "koop": 37,
-    "eengezins": 38,
-    "woz": 384,
-    "inkStd": 38.5,
-    "oud": 70,
-    "oad": 3459,
-    "sted": 1,
-    "hh": 4055,
-    "koopwoningen": 1510
-   },
-   "gemeenteVraag": {
-    "leads": 317,
-    "akkoord": 23,
-    "jaarLeads": 185,
-    "jaarAkkoord": 15,
-    "conv": 7.3,
-    "residu": 0.7,
-    "leadsPer1000hh": 2.3
-   },
-   "uplift": {
-    "extraAkkoordVol": 136,
-    "jaarLeadsCatchment": 1977,
-    "teVer": 3,
-    "huidigAkk": 146,
-    "koopBinnen15": 249252,
-    "koopOnbenut": 249252,
-    "hhBinnen15": 541925,
-    "inkGem15": 39.4,
-    "latentLeads": 2612,
-    "koopIndex15": 128.3
-   },
-   "lookalikeKlant": {
-    "score": 74,
-    "per": {
-     "koop": 0.3,
-     "eengezins": 0.8,
-     "woz": 0.3,
-     "inkStd": 0.3,
-     "oud": 6.2,
-     "oad": 1.4
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 71.5,
-    "per": {
-     "koop": 1.1,
-     "eengezins": 0.4,
-     "woz": 0.1,
-     "inkStd": 0.2,
-     "oud": 6.4,
-     "oad": 0.9
-    }
-   },
-   "kmBerkel": 43,
-   "topCatchment": [
-    {
-     "plaats": "haarlem",
-     "km": 2,
-     "jaarLeads": 185,
-     "teVer": 1,
-     "huidigeConv": 6.7,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 23.2
-    },
-    {
-     "plaats": "amsterdam",
-     "km": 17,
-     "jaarLeads": 319,
-     "teVer": 0,
-     "huidigeConv": 5.8,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 18.4
-    },
-    {
-     "plaats": "hoofddorp",
-     "km": 7,
-     "jaarLeads": 180,
-     "teVer": 0,
-     "huidigeConv": 10.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 15.4
-    },
-    {
-     "plaats": "hillegom",
-     "km": 10,
-     "jaarLeads": 55,
-     "teVer": 0,
-     "huidigeConv": 4.9,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 7.8
-    },
-    {
-     "plaats": "amstelveen",
-     "km": 15,
-     "jaarLeads": 139,
-     "teVer": 0,
-     "huidigeConv": 7.4,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 6
-    },
-    {
-     "plaats": "heemstede",
-     "km": 4,
-     "jaarLeads": 51,
-     "teVer": 0,
-     "huidigeConv": 7.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.8
-    },
-    {
-     "plaats": "badhoevedorp",
-     "km": 9,
-     "jaarLeads": 50,
-     "teVer": 0,
-     "huidigeConv": 8,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.7
-    },
-    {
-     "plaats": "zaandam",
-     "km": 14,
-     "jaarLeads": 60,
-     "teVer": 0,
-     "huidigeConv": 3.8,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 4.8
-    }
-   ],
-   "score": 66.9,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 143319,
-    "nettoInloop50": 247040,
-    "nettoInloop25_175laag": 151319,
-    "realistischAkkoord": 102,
-    "extraOmzet": 368118,
-    "brutowinst": 168598,
-    "nettoZicht200": 39598,
-    "nettoPdv250": 24348,
-    "nettoZicht175": 44098,
-    "nettoZicht175laag": 47598,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": -16601,
-    "vol": 95797
-   }
-  },
-  {
-   "id": "GM1621",
-   "naam": "Lansingerland",
-   "gemeente": "Lansingerland",
-   "gm": "GM1621",
-   "lat": 52.00400827,
-   "lon": 4.50610722,
-   "km": 12.888903565466936,
-   "profiel": {
-    "koop": 73,
-    "eengezins": 81,
-    "woz": 500,
-    "inkStd": 53.1,
-    "oud": 87,
-    "oad": 1367,
-    "sted": 3,
-    "hh": 25526,
-    "koopwoningen": 18643
-   },
-   "gemeenteVraag": {
-    "leads": 330,
-    "akkoord": 32,
-    "jaarLeads": 229,
-    "jaarAkkoord": 23,
-    "conv": 9.7,
-    "residu": -7,
-    "leadsPer1000hh": 9
-   },
-   "uplift": {
-    "extraAkkoordVol": 156,
-    "jaarLeadsCatchment": 3090,
-    "teVer": 0,
-    "huidigAkk": 315,
-    "koopBinnen15": 363352,
-    "koopOnbenut": 92999,
-    "hhBinnen15": 819935,
-    "inkGem15": 36.7,
-    "latentLeads": 996,
-    "koopIndex15": 125.3
-   },
-   "lookalikeKlant": {
-    "score": 23.8,
-    "per": {
-     "koop": 3.8,
-     "eengezins": 4.1,
-     "woz": 0.9,
-     "inkStd": 1.4,
-     "oud": 1.3,
-     "oad": 4
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 20.3,
-    "per": {
-     "koop": 3,
-     "eengezins": 3.7,
-     "woz": 1.4,
-     "inkStd": 1.5,
-     "oud": 1.6,
-     "oad": 3.5
-    }
-   },
-   "kmBerkel": 2,
-   "topCatchment": [
-    {
-     "plaats": "rotterdam",
-     "km": 9,
-     "jaarLeads": 702,
-     "teVer": 0,
-     "huidigeConv": 10.2,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 61.4
-    },
-    {
-     "plaats": "berkel en rodenrijs",
-     "km": 3,
-     "jaarLeads": 127,
-     "teVer": 0,
-     "huidigeConv": 9.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.4
-    },
-    {
-     "plaats": "capelle aan den ijssel",
-     "km": 9,
-     "jaarLeads": 138,
-     "teVer": 0,
-     "huidigeConv": 10.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.2
-    },
-    {
-     "plaats": "bergschenhoek",
-     "km": 2,
-     "jaarLeads": 67,
-     "teVer": 0,
-     "huidigeConv": 4.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 9.6
-    },
-    {
-     "plaats": "alphen aan den rijn",
-     "km": 18,
-     "jaarLeads": 157,
-     "teVer": 0,
-     "huidigeConv": 7.4,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 6.8
-    },
-    {
-     "plaats": "bleiswijk",
-     "km": 3,
-     "jaarLeads": 35,
-     "teVer": 0,
-     "huidigeConv": 3.9,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.1
-    },
-    {
-     "plaats": "barendrecht",
-     "km": 17,
-     "jaarLeads": 148,
-     "teVer": 0,
-     "huidigeConv": 9,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 4.1
-    },
-    {
-     "plaats": "nieuwerkerk aan den ijssel",
-     "km": 9,
-     "jaarLeads": 42,
-     "teVer": 0,
-     "huidigeConv": 9.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 4
-    }
-   ],
-   "score": 66.8,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 168113,
-    "nettoInloop50": 271834,
-    "nettoInloop25_175laag": 176113,
-    "realistischAkkoord": 117,
-    "extraOmzet": 422253,
-    "brutowinst": 193392,
-    "nettoZicht200": 64392,
-    "nettoPdv250": 49142,
-    "nettoZicht175": 68892,
-    "nettoZicht175laag": 72392,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": -72,
-    "vol": 128856
-   }
-  },
-  {
-   "id": "GM0482",
-   "naam": "Alblasserdam",
-   "gemeente": "Alblasserdam",
-   "gm": "GM0482",
-   "lat": 51.86465403,
-   "lon": 4.6657289,
-   "km": 30.157268089193696,
-   "profiel": {
-    "koop": 62,
-    "eengezins": 68,
-    "woz": 343,
-    "inkStd": 41.7,
-    "oud": 96,
-    "oad": 1530,
-    "sted": 2,
-    "hh": 8510,
-    "koopwoningen": 5253
-   },
-   "gemeenteVraag": {
-    "leads": 56,
-    "akkoord": 3,
-    "jaarLeads": 40,
-    "jaarAkkoord": 3,
-    "conv": 5.4,
-    "residu": -4.4,
-    "leadsPer1000hh": 4.7
-   },
-   "uplift": {
-    "extraAkkoordVol": 157,
-    "jaarLeadsCatchment": 2463,
-    "teVer": 0,
-    "huidigAkk": 201,
-    "koopBinnen15": 234486,
-    "koopOnbenut": 191942,
-    "hhBinnen15": 487420,
-    "inkGem15": 32.4,
-    "latentLeads": 2365,
-    "koopIndex15": 136.6
-   },
-   "lookalikeKlant": {
-    "score": 36,
-    "per": {
-     "koop": 2.6,
-     "eengezins": 3.1,
-     "woz": 0.7,
-     "inkStd": 0.1,
-     "oud": 1.2,
-     "oad": 3.8
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 48.4,
-    "per": {
-     "koop": 1.8,
-     "eengezins": 2.7,
-     "woz": 0.3,
-     "inkStd": 0.2,
-     "oud": 1,
-     "oad": 3.3
-    }
-   },
-   "kmBerkel": 19,
-   "topCatchment": [
-    {
-     "plaats": "dordrecht",
-     "km": 10,
-     "jaarLeads": 247,
-     "teVer": 0,
-     "huidigeConv": 7.6,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 28.1
-    },
-    {
-     "plaats": "barendrecht",
-     "km": 10,
-     "jaarLeads": 148,
-     "teVer": 0,
-     "huidigeConv": 9,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 14.5
-    },
-    {
-     "plaats": "rotterdam",
-     "km": 14,
-     "jaarLeads": 702,
-     "teVer": 0,
-     "huidigeConv": 10.2,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 11.6
-    },
-    {
-     "plaats": "papendrecht",
-     "km": 4,
-     "jaarLeads": 87,
-     "teVer": 0,
-     "huidigeConv": 5.7,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.4
-    },
-    {
-     "plaats": "capelle aan den ijssel",
-     "km": 10,
-     "jaarLeads": 138,
-     "teVer": 0,
-     "huidigeConv": 10.5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.2
-    },
-    {
-     "plaats": "ridderkerk",
-     "km": 5,
-     "jaarLeads": 96,
-     "teVer": 0,
-     "huidigeConv": 8.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 10.1
-    },
-    {
-     "plaats": "hendrik-ido-ambacht",
-     "km": 3,
-     "jaarLeads": 73,
-     "teVer": 0,
-     "huidigeConv": 7.1,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 8.6
-    },
-    {
-     "plaats": "sliedrecht",
-     "km": 8,
-     "jaarLeads": 46,
-     "teVer": 0,
-     "huidigeConv": 4.7,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 6.7
-    }
-   ],
-   "score": 66.7,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 169352,
-    "nettoInloop50": 273073,
-    "nettoInloop25_175laag": 177352,
-    "realistischAkkoord": 118,
-    "extraOmzet": 424960,
-    "brutowinst": 194632,
-    "nettoZicht200": 65632,
-    "nettoPdv250": 50382,
-    "nettoZicht175": 70132,
-    "nettoZicht175laag": 73632,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": 754,
-    "vol": 130509
-   }
-  },
-  {
-   "id": "GM0642",
-   "naam": "Zwijndrecht",
-   "gemeente": "Zwijndrecht",
-   "gm": "GM0642",
-   "lat": 51.82184389,
-   "lon": 4.6058021,
-   "km": 30.653265138676474,
-   "profiel": {
-    "koop": 57,
-    "eengezins": 60,
-    "woz": 314,
-    "inkStd": 40.8,
-    "oud": 97,
-    "oad": 2101,
-    "sted": 2,
-    "hh": 20480,
-    "koopwoningen": 11874
-   },
-   "gemeenteVraag": {
-    "leads": 167,
-    "akkoord": 23,
-    "jaarLeads": 86,
-    "jaarAkkoord": 12,
-    "conv": 13.8,
-    "residu": 4.2,
-    "leadsPer1000hh": 4.2
-   },
-   "uplift": {
-    "extraAkkoordVol": 148,
-    "jaarLeadsCatchment": 2501,
-    "teVer": 2,
-    "huidigAkk": 202,
-    "koopBinnen15": 241760,
-    "koopOnbenut": 189438,
-    "hhBinnen15": 523405,
-    "inkGem15": 33.4,
-    "latentLeads": 2332,
-    "koopIndex15": 133.7
-   },
-   "lookalikeKlant": {
-    "score": 43.1,
-    "per": {
-     "koop": 2,
-     "eengezins": 2.5,
-     "woz": 1.1,
-     "inkStd": 0,
-     "oud": 1.5,
-     "oad": 3.1
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 57.6,
-    "per": {
-     "koop": 1.2,
-     "eengezins": 2.1,
-     "woz": 0.6,
-     "inkStd": 0.1,
-     "oud": 1.3,
-     "oad": 2.6
-    }
-   },
-   "kmBerkel": 21,
-   "topCatchment": [
-    {
-     "plaats": "dordrecht",
-     "km": 8,
-     "jaarLeads": 247,
-     "teVer": 0,
-     "huidigeConv": 7.6,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 28.1
-    },
-    {
-     "plaats": "barendrecht",
-     "km": 6,
-     "jaarLeads": 148,
-     "teVer": 0,
-     "huidigeConv": 9,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 14.5
-    },
-    {
-     "plaats": "rotterdam",
-     "km": 14,
-     "jaarLeads": 702,
-     "teVer": 0,
-     "huidigeConv": 10.2,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 11.6
-    },
-    {
-     "plaats": "papendrecht",
-     "km": 7,
-     "jaarLeads": 87,
-     "teVer": 0,
-     "huidigeConv": 5.7,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.4
-    },
-    {
-     "plaats": "ridderkerk",
-     "km": 5,
-     "jaarLeads": 96,
-     "teVer": 0,
-     "huidigeConv": 8.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 10.1
-    },
-    {
-     "plaats": "spijkenisse",
-     "km": 18,
-     "jaarLeads": 190,
-     "teVer": 0,
-     "huidigeConv": 6.9,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 9.2
-    },
-    {
-     "plaats": "hendrik-ido-ambacht",
-     "km": 3,
-     "jaarLeads": 73,
-     "teVer": 0,
-     "huidigeConv": 7.1,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 8.6
-    },
-    {
-     "plaats": "alblasserdam",
-     "km": 6,
-     "jaarLeads": 40,
-     "teVer": 0,
-     "huidigeConv": 3.7,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 6.1
-    }
-   ],
-   "score": 66,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 158195,
-    "nettoInloop50": 261916,
-    "nettoInloop25_175laag": 166195,
-    "realistischAkkoord": 111,
-    "extraOmzet": 400599,
-    "brutowinst": 183474,
-    "nettoZicht200": 54474,
-    "nettoPdv250": 39224,
-    "nettoZicht175": 58974,
-    "nettoZicht175laag": 62474,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": -6684,
-    "vol": 115632
    }
   },
   {
@@ -9441,7 +8656,7 @@
      "extraAkkoord": 3.1
     }
    ],
-   "score": 65.5,
+   "score": 70,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -9459,6 +8674,320 @@
     "breakEvenAkkoord": 79,
     "conservatief": -15775,
     "vol": 97450
+   }
+  },
+  {
+   "id": "WK039219",
+   "naam": "Haarlem – Boerhaavewijk",
+   "gemeente": "Haarlem",
+   "gm": "GM0392",
+   "lat": 52.36547483,
+   "lon": 4.66121058,
+   "km": 43.15296824637002,
+   "profiel": {
+    "koop": 37,
+    "eengezins": 38,
+    "woz": 384,
+    "inkStd": 38.5,
+    "oud": 70,
+    "oad": 3459,
+    "sted": 1,
+    "hh": 4055,
+    "koopwoningen": 1510
+   },
+   "gemeenteVraag": {
+    "leads": 317,
+    "akkoord": 23,
+    "jaarLeads": 185,
+    "jaarAkkoord": 15,
+    "conv": 7.3,
+    "residu": 0.7,
+    "leadsPer1000hh": 2.3
+   },
+   "uplift": {
+    "extraAkkoordVol": 136,
+    "jaarLeadsCatchment": 1977,
+    "teVer": 3,
+    "huidigAkk": 146,
+    "koopBinnen15": 249252,
+    "koopOnbenut": 249252,
+    "hhBinnen15": 541925,
+    "inkGem15": 39.4,
+    "latentLeads": 2612,
+    "koopIndex15": 128.3
+   },
+   "lookalikeKlant": {
+    "score": 74,
+    "per": {
+     "koop": 0.3,
+     "eengezins": 0.8,
+     "woz": 0.3,
+     "inkStd": 0.3,
+     "oud": 6.2,
+     "oad": 1.4
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 71.5,
+    "per": {
+     "koop": 1.1,
+     "eengezins": 0.4,
+     "woz": 0.1,
+     "inkStd": 0.2,
+     "oud": 6.4,
+     "oad": 0.9
+    }
+   },
+   "kmBerkel": 43,
+   "topCatchment": [
+    {
+     "plaats": "haarlem",
+     "km": 2,
+     "jaarLeads": 185,
+     "teVer": 1,
+     "huidigeConv": 6.7,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 23.2
+    },
+    {
+     "plaats": "amsterdam",
+     "km": 17,
+     "jaarLeads": 319,
+     "teVer": 0,
+     "huidigeConv": 5.8,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 18.4
+    },
+    {
+     "plaats": "hoofddorp",
+     "km": 7,
+     "jaarLeads": 180,
+     "teVer": 0,
+     "huidigeConv": 10.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 15.4
+    },
+    {
+     "plaats": "hillegom",
+     "km": 10,
+     "jaarLeads": 55,
+     "teVer": 0,
+     "huidigeConv": 4.9,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 7.8
+    },
+    {
+     "plaats": "amstelveen",
+     "km": 15,
+     "jaarLeads": 139,
+     "teVer": 0,
+     "huidigeConv": 7.4,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 6
+    },
+    {
+     "plaats": "heemstede",
+     "km": 4,
+     "jaarLeads": 51,
+     "teVer": 0,
+     "huidigeConv": 7.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.8
+    },
+    {
+     "plaats": "badhoevedorp",
+     "km": 9,
+     "jaarLeads": 50,
+     "teVer": 0,
+     "huidigeConv": 8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.7
+    },
+    {
+     "plaats": "zaandam",
+     "km": 14,
+     "jaarLeads": 60,
+     "teVer": 0,
+     "huidigeConv": 3.8,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 4.8
+    }
+   ],
+   "score": 69.5,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 143319,
+    "nettoInloop50": 247040,
+    "nettoInloop25_175laag": 151319,
+    "realistischAkkoord": 102,
+    "extraOmzet": 368118,
+    "brutowinst": 168598,
+    "nettoZicht200": 39598,
+    "nettoPdv250": 24348,
+    "nettoZicht175": 44098,
+    "nettoZicht175laag": 47598,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": -16601,
+    "vol": 95797
+   }
+  },
+  {
+   "id": "GM0613",
+   "naam": "Albrandswaard",
+   "gemeente": "Albrandswaard",
+   "gm": "GM0613",
+   "lat": 51.85204293,
+   "lon": 4.43571499,
+   "km": 21.862443389426694,
+   "profiel": {
+    "koop": 70,
+    "eengezins": 80,
+    "woz": 446,
+    "inkStd": 51.2,
+    "oud": 95,
+    "oad": 1057,
+    "sted": 3,
+    "hh": 10644,
+    "koopwoningen": 7534
+   },
+   "gemeenteVraag": {
+    "leads": 126,
+    "akkoord": 16,
+    "jaarLeads": 73,
+    "jaarAkkoord": 9,
+    "conv": 12.7,
+    "residu": 0.3,
+    "leadsPer1000hh": 6.9
+   },
+   "uplift": {
+    "extraAkkoordVol": 175,
+    "jaarLeadsCatchment": 2368,
+    "teVer": 1,
+    "huidigAkk": 199,
+    "koopBinnen15": 280453,
+    "koopOnbenut": 149252,
+    "hhBinnen15": 622825,
+    "inkGem15": 34,
+    "latentLeads": 1853,
+    "koopIndex15": 128.5
+   },
+   "lookalikeKlant": {
+    "score": 29.1,
+    "per": {
+     "koop": 3.5,
+     "eengezins": 4,
+     "woz": 0.4,
+     "inkStd": 1.2,
+     "oud": 0.9,
+     "oad": 4.4
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 30.3,
+    "per": {
+     "koop": 2.7,
+     "eengezins": 3.6,
+     "woz": 0.8,
+     "inkStd": 1.3,
+     "oud": 0.7,
+     "oad": 3.9
+    }
+   },
+   "kmBerkel": 16,
+   "topCatchment": [
+    {
+     "plaats": "rotterdam",
+     "km": 9,
+     "jaarLeads": 702,
+     "teVer": 0,
+     "huidigeConv": 10.2,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 61.4
+    },
+    {
+     "plaats": "spijkenisse",
+     "km": 6,
+     "jaarLeads": 190,
+     "teVer": 0,
+     "huidigeConv": 6.9,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 22.7
+    },
+    {
+     "plaats": "barendrecht",
+     "km": 6,
+     "jaarLeads": 148,
+     "teVer": 0,
+     "huidigeConv": 9,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 14.5
+    },
+    {
+     "plaats": "schiedam",
+     "km": 9,
+     "jaarLeads": 111,
+     "teVer": 0,
+     "huidigeConv": 8.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 11.3
+    },
+    {
+     "plaats": "hoogvliet rotterdam",
+     "km": 5,
+     "jaarLeads": 63,
+     "teVer": 0,
+     "huidigeConv": 5.6,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 8.5
+    },
+    {
+     "plaats": "oud-beijerland",
+     "km": 5,
+     "jaarLeads": 50,
+     "teVer": 0,
+     "huidigeConv": 7.7,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.7
+    },
+    {
+     "plaats": "papendrecht",
+     "km": 19,
+     "jaarLeads": 87,
+     "teVer": 0,
+     "huidigeConv": 5.7,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 5.2
+    },
+    {
+     "plaats": "rhoon",
+     "km": 1,
+     "jaarLeads": 54,
+     "teVer": 0,
+     "huidigeConv": 9.2,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.1
+    }
+   ],
+   "score": 69.4,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 191667,
+    "nettoInloop50": 295388,
+    "nettoInloop25_175laag": 199667,
+    "realistischAkkoord": 131,
+    "extraOmzet": 473681,
+    "brutowinst": 216946,
+    "nettoZicht200": 87946,
+    "nettoPdv250": 72696,
+    "nettoZicht175": 92446,
+    "nettoZicht175laag": 95946,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": 15631,
+    "vol": 160261
    }
   },
   {
@@ -9598,478 +9127,7 @@
      "extraAkkoord": 3.8
     }
    ],
-   "score": 65.1,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 144559,
-    "nettoInloop50": 248279,
-    "nettoInloop25_175laag": 152559,
-    "realistischAkkoord": 103,
-    "extraOmzet": 370825,
-    "brutowinst": 169838,
-    "nettoZicht200": 40838,
-    "nettoPdv250": 25588,
-    "nettoZicht175": 45338,
-    "nettoZicht175laag": 48838,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": -15775,
-    "vol": 97450
-   }
-  },
-  {
-   "id": "WK0363KQ",
-   "naam": "Amsterdam – Buitenveldert-West",
-   "gemeente": "Amsterdam",
-   "gm": "GM0363",
-   "lat": 52.32940154,
-   "lon": 4.85609888,
-   "km": 48.68643230208257,
-   "profiel": {
-    "koop": 39,
-    "eengezins": 13,
-    "woz": 536,
-    "inkStd": 51.1,
-    "oud": 96,
-    "oad": 3809,
-    "sted": 1,
-    "hh": 8325,
-    "koopwoningen": 3056
-   },
-   "gemeenteVraag": {
-    "leads": 551,
-    "akkoord": 38,
-    "jaarLeads": 338,
-    "jaarAkkoord": 25,
-    "conv": 6.9,
-    "residu": 2.1,
-    "leadsPer1000hh": 0.7
-   },
-   "uplift": {
-    "extraAkkoordVol": 135,
-    "jaarLeadsCatchment": 1738,
-    "teVer": 10,
-    "huidigAkk": 118,
-    "koopBinnen15": 268952,
-    "koopOnbenut": 268952,
-    "hhBinnen15": 750245,
-    "inkGem15": 40.9,
-    "latentLeads": 2199,
-    "koopIndex15": 100.1
-   },
-   "lookalikeKlant": {
-    "score": 72.2,
-    "per": {
-     "koop": 0.1,
-     "eengezins": 1.1,
-     "woz": 1.3,
-     "inkStd": 1.2,
-     "oud": 1.2,
-     "oad": 1
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 61.3,
-    "per": {
-     "koop": 0.9,
-     "eengezins": 1.5,
-     "woz": 1.8,
-     "inkStd": 1.3,
-     "oud": 1,
-     "oad": 0.5
-    }
-   },
-   "kmBerkel": 46,
-   "topCatchment": [
-    {
-     "plaats": "amsterdam",
-     "km": 6,
-     "jaarLeads": 319,
-     "teVer": 0,
-     "huidigeConv": 5.8,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 40.9
-    },
-    {
-     "plaats": "amstelveen",
-     "km": 4,
-     "jaarLeads": 139,
-     "teVer": 0,
-     "huidigeConv": 7.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 15.9
-    },
-    {
-     "plaats": "haarlem",
-     "km": 15,
-     "jaarLeads": 185,
-     "teVer": 1,
-     "huidigeConv": 6.7,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 9.6
-    },
-    {
-     "plaats": "uithoorn",
-     "km": 10,
-     "jaarLeads": 62,
-     "teVer": 0,
-     "huidigeConv": 5,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 8.8
-    },
-    {
-     "plaats": "badhoevedorp",
-     "km": 5,
-     "jaarLeads": 50,
-     "teVer": 0,
-     "huidigeConv": 8,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.7
-    },
-    {
-     "plaats": "zaandam",
-     "km": 13,
-     "jaarLeads": 60,
-     "teVer": 0,
-     "huidigeConv": 3.8,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 4.8
-    },
-    {
-     "plaats": "aalsmeer",
-     "km": 10,
-     "jaarLeads": 41,
-     "teVer": 0,
-     "huidigeConv": 8.3,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 4.5
-    },
-    {
-     "plaats": "hillegom",
-     "km": 19,
-     "jaarLeads": 55,
-     "teVer": 0,
-     "huidigeConv": 4.9,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 3.8
-    }
-   ],
-   "score": 65,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 142079,
-    "nettoInloop50": 245800,
-    "nettoInloop25_175laag": 150079,
-    "realistischAkkoord": 101,
-    "extraOmzet": 365411,
-    "brutowinst": 167358,
-    "nettoZicht200": 38358,
-    "nettoPdv250": 23108,
-    "nettoZicht175": 42858,
-    "nettoZicht175laag": 46358,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": -17428,
-    "vol": 94144
-   }
-  },
-  {
-   "id": "GM0531",
-   "naam": "Hendrik-Ido-Ambacht",
-   "gemeente": "Hendrik-Ido-Ambacht",
-   "gm": "GM0531",
-   "lat": 51.84179458,
-   "lon": 4.63879045,
-   "km": 30.505082466561294,
-   "profiel": {
-    "koop": 72,
-    "eengezins": 76,
-    "woz": 414,
-    "inkStd": 47,
-    "oud": 89,
-    "oad": 1878,
-    "sted": 2,
-    "hh": 12826,
-    "koopwoningen": 9248
-   },
-   "gemeenteVraag": {
-    "leads": 139,
-    "akkoord": 14,
-    "jaarLeads": 77,
-    "jaarAkkoord": 8,
-    "conv": 10.1,
-    "residu": 0.4,
-    "leadsPer1000hh": 6
-   },
-   "uplift": {
-    "extraAkkoordVol": 151,
-    "jaarLeadsCatchment": 2432,
-    "teVer": 0,
-    "huidigAkk": 196,
-    "koopBinnen15": 232601,
-    "koopOnbenut": 190057,
-    "hhBinnen15": 484405,
-    "inkGem15": 32.9,
-    "latentLeads": 2346,
-    "koopIndex15": 136.7
-   },
-   "lookalikeKlant": {
-    "score": 33.8,
-    "per": {
-     "koop": 3.7,
-     "eengezins": 3.7,
-     "woz": 0,
-     "inkStd": 0.7,
-     "oud": 0.8,
-     "oad": 3.4
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 31.6,
-    "per": {
-     "koop": 2.9,
-     "eengezins": 3.3,
-     "woz": 0.4,
-     "inkStd": 0.8,
-     "oud": 1,
-     "oad": 2.9
-    }
-   },
-   "kmBerkel": 20,
-   "topCatchment": [
-    {
-     "plaats": "dordrecht",
-     "km": 8,
-     "jaarLeads": 247,
-     "teVer": 0,
-     "huidigeConv": 7.6,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 28.1
-    },
-    {
-     "plaats": "barendrecht",
-     "km": 8,
-     "jaarLeads": 148,
-     "teVer": 0,
-     "huidigeConv": 9,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 14.5
-    },
-    {
-     "plaats": "rotterdam",
-     "km": 14,
-     "jaarLeads": 702,
-     "teVer": 0,
-     "huidigeConv": 10.2,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 11.6
-    },
-    {
-     "plaats": "papendrecht",
-     "km": 5,
-     "jaarLeads": 87,
-     "teVer": 0,
-     "huidigeConv": 5.7,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 11.4
-    },
-    {
-     "plaats": "ridderkerk",
-     "km": 4,
-     "jaarLeads": 96,
-     "teVer": 0,
-     "huidigeConv": 8.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 10.1
-    },
-    {
-     "plaats": "hendrik-ido-ambacht",
-     "km": 0,
-     "jaarLeads": 73,
-     "teVer": 0,
-     "huidigeConv": 7.1,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 8.6
-    },
-    {
-     "plaats": "sliedrecht",
-     "km": 9,
-     "jaarLeads": 46,
-     "teVer": 0,
-     "huidigeConv": 4.7,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 6.7
-    },
-    {
-     "plaats": "alblasserdam",
-     "km": 3,
-     "jaarLeads": 40,
-     "teVer": 0,
-     "huidigeConv": 3.7,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 6.1
-    }
-   ],
-   "score": 64.9,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 161914,
-    "nettoInloop50": 265635,
-    "nettoInloop25_175laag": 169914,
-    "realistischAkkoord": 113,
-    "extraOmzet": 408719,
-    "brutowinst": 187193,
-    "nettoZicht200": 58193,
-    "nettoPdv250": 42943,
-    "nettoZicht175": 62693,
-    "nettoZicht175laag": 66193,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": -4204,
-    "vol": 120591
-   }
-  },
-  {
-   "id": "WK039221",
-   "naam": "Haarlem – Meerwijk",
-   "gemeente": "Haarlem",
-   "gm": "GM0392",
-   "lat": 52.35468201,
-   "lon": 4.66512818,
-   "km": 42.287636341452874,
-   "profiel": {
-    "koop": 22,
-    "eengezins": 33,
-    "woz": 325,
-    "inkStd": 32.6,
-    "oud": 89,
-    "oad": 3508,
-    "sted": 1,
-    "hh": 4145,
-    "koopwoningen": 902
-   },
-   "gemeenteVraag": {
-    "leads": 317,
-    "akkoord": 23,
-    "jaarLeads": 185,
-    "jaarAkkoord": 15,
-    "conv": 7.3,
-    "residu": 0.7,
-    "leadsPer1000hh": 2.3
-   },
-   "uplift": {
-    "extraAkkoordVol": 137,
-    "jaarLeadsCatchment": 1981,
-    "teVer": 3,
-    "huidigAkk": 147,
-    "koopBinnen15": 245255,
-    "koopOnbenut": 245255,
-    "hhBinnen15": 534900,
-    "inkGem15": 40.2,
-    "latentLeads": 2541,
-    "koopIndex15": 126.9
-   },
-   "lookalikeKlant": {
-    "score": 60.3,
-    "per": {
-     "koop": 2,
-     "eengezins": 0.4,
-     "woz": 0.9,
-     "inkStd": 1,
-     "oud": 0.8,
-     "oad": 1.3
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 58.3,
-    "per": {
-     "koop": 2.8,
-     "eengezins": 0.1,
-     "woz": 0.5,
-     "inkStd": 0.8,
-     "oud": 1,
-     "oad": 0.8
-    }
-   },
-   "kmBerkel": 42,
-   "topCatchment": [
-    {
-     "plaats": "haarlem",
-     "km": 3,
-     "jaarLeads": 185,
-     "teVer": 1,
-     "huidigeConv": 6.7,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 23.2
-    },
-    {
-     "plaats": "amsterdam",
-     "km": 16,
-     "jaarLeads": 319,
-     "teVer": 0,
-     "huidigeConv": 5.8,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 18.4
-    },
-    {
-     "plaats": "hoofddorp",
-     "km": 6,
-     "jaarLeads": 180,
-     "teVer": 0,
-     "huidigeConv": 10.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 15.4
-    },
-    {
-     "plaats": "hillegom",
-     "km": 9,
-     "jaarLeads": 55,
-     "teVer": 0,
-     "huidigeConv": 4.9,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 7.8
-    },
-    {
-     "plaats": "amstelveen",
-     "km": 15,
-     "jaarLeads": 139,
-     "teVer": 0,
-     "huidigeConv": 7.4,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 6
-    },
-    {
-     "plaats": "heemstede",
-     "km": 4,
-     "jaarLeads": 51,
-     "teVer": 0,
-     "huidigeConv": 7.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.8
-    },
-    {
-     "plaats": "badhoevedorp",
-     "km": 8,
-     "jaarLeads": 50,
-     "teVer": 0,
-     "huidigeConv": 8,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.7
-    },
-    {
-     "plaats": "zaandam",
-     "km": 15,
-     "jaarLeads": 60,
-     "teVer": 0,
-     "huidigeConv": 3.8,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 4.8
-    }
-   ],
-   "score": 64.7,
+   "score": 69.1,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -10226,7 +9284,7 @@
      "extraAkkoord": 3.8
     }
    ],
-   "score": 64.3,
+   "score": 68.4,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -10244,477 +9302,6 @@
     "breakEvenAkkoord": 79,
     "conservatief": -18254,
     "vol": 92492
-   }
-  },
-  {
-   "id": "WK039207",
-   "naam": "Haarlem – Amsterdamsewijk",
-   "gemeente": "Haarlem",
-   "gm": "GM0392",
-   "lat": 52.37860511,
-   "lon": 4.65290718,
-   "km": 44.106578416639714,
-   "profiel": {
-    "koop": 45,
-    "eengezins": 48,
-    "woz": 405,
-    "inkStd": 38.6,
-    "oud": 98,
-    "oad": 4330,
-    "sted": 1,
-    "hh": 4285,
-    "koopwoningen": 1868
-   },
-   "gemeenteVraag": {
-    "leads": 317,
-    "akkoord": 23,
-    "jaarLeads": 185,
-    "jaarAkkoord": 15,
-    "conv": 7.3,
-    "residu": 0.7,
-    "leadsPer1000hh": 2.3
-   },
-   "uplift": {
-    "extraAkkoordVol": 130,
-    "jaarLeadsCatchment": 1945,
-    "teVer": 8,
-    "huidigAkk": 143,
-    "koopBinnen15": 233079,
-    "koopOnbenut": 233079,
-    "hhBinnen15": 498880,
-    "inkGem15": 36.2,
-    "latentLeads": 2477,
-    "koopIndex15": 130.2
-   },
-   "lookalikeKlant": {
-    "score": 74.6,
-    "per": {
-     "koop": 0.6,
-     "eengezins": 1.6,
-     "woz": 0.1,
-     "inkStd": 0.3,
-     "oud": 1.8,
-     "oad": 0.3
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 81.8,
-    "per": {
-     "koop": 0.2,
-     "eengezins": 1.2,
-     "woz": 0.3,
-     "inkStd": 0.2,
-     "oud": 1.6,
-     "oad": 0.2
-    }
-   },
-   "kmBerkel": 45,
-   "topCatchment": [
-    {
-     "plaats": "haarlem",
-     "km": 1,
-     "jaarLeads": 185,
-     "teVer": 1,
-     "huidigeConv": 6.7,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 23.2
-    },
-    {
-     "plaats": "amsterdam",
-     "km": 17,
-     "jaarLeads": 319,
-     "teVer": 0,
-     "huidigeConv": 5.8,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 18.4
-    },
-    {
-     "plaats": "hoofddorp",
-     "km": 8,
-     "jaarLeads": 180,
-     "teVer": 0,
-     "huidigeConv": 10.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 15.4
-    },
-    {
-     "plaats": "amstelveen",
-     "km": 17,
-     "jaarLeads": 139,
-     "teVer": 0,
-     "huidigeConv": 7.4,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 6
-    },
-    {
-     "plaats": "heemstede",
-     "km": 5,
-     "jaarLeads": 51,
-     "teVer": 0,
-     "huidigeConv": 7.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.8
-    },
-    {
-     "plaats": "zaandam",
-     "km": 14,
-     "jaarLeads": 60,
-     "teVer": 0,
-     "huidigeConv": 3.8,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 4.8
-    },
-    {
-     "plaats": "ijmuiden",
-     "km": 10,
-     "jaarLeads": 25,
-     "teVer": 0,
-     "huidigeConv": 0,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 4.6
-    },
-    {
-     "plaats": "zandvoort",
-     "km": 8,
-     "jaarLeads": 36,
-     "teVer": 0,
-     "huidigeConv": 6.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 4.3
-    }
-   ],
-   "score": 64.1,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 135881,
-    "nettoInloop50": 239602,
-    "nettoInloop25_175laag": 143881,
-    "realistischAkkoord": 98,
-    "extraOmzet": 351878,
-    "brutowinst": 161160,
-    "nettoZicht200": 32160,
-    "nettoPdv250": 16910,
-    "nettoZicht175": 36660,
-    "nettoZicht175laag": 40160,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": -21560,
-    "vol": 85880
-   }
-  },
-  {
-   "id": "WK039401",
-   "naam": "Haarlemmermeer – Hoofddorp",
-   "gemeente": "Haarlemmermeer",
-   "gm": "GM0394",
-   "lat": 52.30530398,
-   "lon": 4.68481984,
-   "km": 38.65901530214134,
-   "profiel": {
-    "koop": 62,
-    "eengezins": 70,
-    "woz": 462,
-    "inkStd": 43.9,
-    "oud": 91,
-    "oad": 1977,
-    "sted": 2,
-    "hh": 34260,
-    "koopwoningen": 20753
-   },
-   "gemeenteVraag": {
-    "leads": 777,
-    "akkoord": 92,
-    "jaarLeads": 431,
-    "jaarAkkoord": 49,
-    "conv": 11.8,
-    "residu": 4.2,
-    "leadsPer1000hh": 6.2
-   },
-   "uplift": {
-    "extraAkkoordVol": 150,
-    "jaarLeadsCatchment": 2243,
-    "teVer": 2,
-    "huidigAkk": 170,
-    "koopBinnen15": 239047,
-    "koopOnbenut": 239047,
-    "hhBinnen15": 512040,
-    "inkGem15": 40.3,
-    "latentLeads": 2486,
-    "koopIndex15": 127.3
-   },
-   "lookalikeKlant": {
-    "score": 39.2,
-    "per": {
-     "koop": 2.6,
-     "eengezins": 3.2,
-     "woz": 0.5,
-     "inkStd": 0.3,
-     "oud": 0.2,
-     "oad": 3.3
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 45.7,
-    "per": {
-     "koop": 1.8,
-     "eengezins": 2.9,
-     "woz": 1,
-     "inkStd": 0.5,
-     "oud": 0.4,
-     "oad": 2.8
-    }
-   },
-   "kmBerkel": 38,
-   "topCatchment": [
-    {
-     "plaats": "haarlem",
-     "km": 9,
-     "jaarLeads": 185,
-     "teVer": 1,
-     "huidigeConv": 6.7,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 23.2
-    },
-    {
-     "plaats": "amsterdam",
-     "km": 17,
-     "jaarLeads": 319,
-     "teVer": 0,
-     "huidigeConv": 5.8,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 18.4
-    },
-    {
-     "plaats": "hoofddorp",
-     "km": 0,
-     "jaarLeads": 180,
-     "teVer": 0,
-     "huidigeConv": 10.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 15.4
-    },
-    {
-     "plaats": "hillegom",
-     "km": 7,
-     "jaarLeads": 55,
-     "teVer": 0,
-     "huidigeConv": 4.9,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 7.8
-    },
-    {
-     "plaats": "alphen aan den rijn",
-     "km": 20,
-     "jaarLeads": 157,
-     "teVer": 0,
-     "huidigeConv": 7.4,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 6.8
-    },
-    {
-     "plaats": "amstelveen",
-     "km": 11,
-     "jaarLeads": 139,
-     "teVer": 0,
-     "huidigeConv": 7.4,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 6
-    },
-    {
-     "plaats": "heemstede",
-     "km": 6,
-     "jaarLeads": 51,
-     "teVer": 0,
-     "huidigeConv": 7.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.8
-    },
-    {
-     "plaats": "badhoevedorp",
-     "km": 7,
-     "jaarLeads": 50,
-     "teVer": 0,
-     "huidigeConv": 8,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.7
-    }
-   ],
-   "score": 64,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 160675,
-    "nettoInloop50": 264395,
-    "nettoInloop25_175laag": 168675,
-    "realistischAkkoord": 113,
-    "extraOmzet": 406013,
-    "brutowinst": 185954,
-    "nettoZicht200": 56954,
-    "nettoPdv250": 41704,
-    "nettoZicht175": 61454,
-    "nettoZicht175laag": 64954,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": -5031,
-    "vol": 118938
-   }
-  },
-  {
-   "id": "WK0363EE",
-   "naam": "Amsterdam – Landlust",
-   "gemeente": "Amsterdam",
-   "gm": "GM0363",
-   "lat": 52.38073072,
-   "lon": 4.85457299,
-   "km": 52.58989204437654,
-   "profiel": {
-    "koop": 29,
-    "eengezins": 1,
-    "woz": 415,
-    "inkStd": 37.3,
-    "oud": 99,
-    "oad": 7303,
-    "sted": 1,
-    "hh": 10515,
-    "koopwoningen": 2851
-   },
-   "gemeenteVraag": {
-    "leads": 551,
-    "akkoord": 38,
-    "jaarLeads": 338,
-    "jaarAkkoord": 25,
-    "conv": 6.9,
-    "residu": 2.1,
-    "leadsPer1000hh": 0.7
-   },
-   "uplift": {
-    "extraAkkoordVol": 125,
-    "jaarLeadsCatchment": 1763,
-    "teVer": 27,
-    "huidigAkk": 117,
-    "koopBinnen15": 304278,
-    "koopOnbenut": 304278,
-    "hhBinnen15": 808375,
-    "inkGem15": 40.8,
-    "latentLeads": 2640,
-    "koopIndex15": 106.2
-   },
-   "lookalikeKlant": {
-    "score": 55.2,
-    "per": {
-     "koop": 1.2,
-     "eengezins": 2,
-     "woz": 0,
-     "inkStd": 0.4,
-     "oud": 2.1,
-     "oad": 3.4
-    }
-   },
-   "lookalikeRijswijk": {
-    "score": 43.9,
-    "per": {
-     "koop": 2,
-     "eengezins": 2.4,
-     "woz": 0.5,
-     "inkStd": 0.3,
-     "oud": 1.9,
-     "oad": 3.9
-    }
-   },
-   "kmBerkel": 50,
-   "topCatchment": [
-    {
-     "plaats": "amsterdam",
-     "km": 3,
-     "jaarLeads": 319,
-     "teVer": 0,
-     "huidigeConv": 5.8,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 40.9
-    },
-    {
-     "plaats": "haarlem",
-     "km": 14,
-     "jaarLeads": 185,
-     "teVer": 1,
-     "huidigeConv": 6.7,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 9.6
-    },
-    {
-     "plaats": "zaandam",
-     "km": 7,
-     "jaarLeads": 60,
-     "teVer": 0,
-     "huidigeConv": 3.8,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 9.3
-    },
-    {
-     "plaats": "purmerend",
-     "km": 16,
-     "jaarLeads": 72,
-     "teVer": 11,
-     "huidigeConv": 2.9,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 6.6
-    },
-    {
-     "plaats": "amstelveen",
-     "km": 10,
-     "jaarLeads": 139,
-     "teVer": 0,
-     "huidigeConv": 7.4,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 6
-    },
-    {
-     "plaats": "badhoevedorp",
-     "km": 8,
-     "jaarLeads": 50,
-     "teVer": 0,
-     "huidigeConv": 8,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 5.7
-    },
-    {
-     "plaats": "uithoorn",
-     "km": 16,
-     "jaarLeads": 62,
-     "teVer": 0,
-     "huidigeConv": 5,
-     "nieuweConv": 11.9,
-     "extraAkkoord": 4.2
-    },
-    {
-     "plaats": "zwanenburg",
-     "km": 8,
-     "jaarLeads": 24,
-     "teVer": 0,
-     "huidigeConv": 5.4,
-     "nieuweConv": 19.3,
-     "extraAkkoord": 3.1
-    }
-   ],
-   "score": 63.9,
-   "econ": {
-    "inloopAkk25": 63,
-    "inloopAkk50": 126,
-    "nettoInloop25": 129682,
-    "nettoInloop50": 233403,
-    "nettoInloop25_175laag": 137682,
-    "realistischAkkoord": 94,
-    "extraOmzet": 338344,
-    "brutowinst": 154961,
-    "nettoZicht200": 25961,
-    "nettoPdv250": 10711,
-    "nettoZicht175": 30461,
-    "nettoZicht175laag": 33961,
-    "breakEven175laag": 74,
-    "breakEvenAkkoord": 79,
-    "conservatief": -25692,
-    "vol": 77615
    }
   },
   {
@@ -10854,7 +9441,7 @@
      "extraAkkoord": 2.6
     }
    ],
-   "score": 63.8,
+   "score": 68.3,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -10872,6 +9459,320 @@
     "breakEvenAkkoord": 79,
     "conservatief": -31478,
     "vol": 66045
+   }
+  },
+  {
+   "id": "WK0363KQ",
+   "naam": "Amsterdam – Buitenveldert-West",
+   "gemeente": "Amsterdam",
+   "gm": "GM0363",
+   "lat": 52.32940154,
+   "lon": 4.85609888,
+   "km": 48.68643230208257,
+   "profiel": {
+    "koop": 39,
+    "eengezins": 13,
+    "woz": 536,
+    "inkStd": 51.1,
+    "oud": 96,
+    "oad": 3809,
+    "sted": 1,
+    "hh": 8325,
+    "koopwoningen": 3056
+   },
+   "gemeenteVraag": {
+    "leads": 551,
+    "akkoord": 38,
+    "jaarLeads": 338,
+    "jaarAkkoord": 25,
+    "conv": 6.9,
+    "residu": 2.1,
+    "leadsPer1000hh": 0.7
+   },
+   "uplift": {
+    "extraAkkoordVol": 135,
+    "jaarLeadsCatchment": 1738,
+    "teVer": 10,
+    "huidigAkk": 118,
+    "koopBinnen15": 268952,
+    "koopOnbenut": 268952,
+    "hhBinnen15": 750245,
+    "inkGem15": 40.9,
+    "latentLeads": 2199,
+    "koopIndex15": 100.1
+   },
+   "lookalikeKlant": {
+    "score": 72.2,
+    "per": {
+     "koop": 0.1,
+     "eengezins": 1.1,
+     "woz": 1.3,
+     "inkStd": 1.2,
+     "oud": 1.2,
+     "oad": 1
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 61.3,
+    "per": {
+     "koop": 0.9,
+     "eengezins": 1.5,
+     "woz": 1.8,
+     "inkStd": 1.3,
+     "oud": 1,
+     "oad": 0.5
+    }
+   },
+   "kmBerkel": 46,
+   "topCatchment": [
+    {
+     "plaats": "amsterdam",
+     "km": 6,
+     "jaarLeads": 319,
+     "teVer": 0,
+     "huidigeConv": 5.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 40.9
+    },
+    {
+     "plaats": "amstelveen",
+     "km": 4,
+     "jaarLeads": 139,
+     "teVer": 0,
+     "huidigeConv": 7.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 15.9
+    },
+    {
+     "plaats": "haarlem",
+     "km": 15,
+     "jaarLeads": 185,
+     "teVer": 1,
+     "huidigeConv": 6.7,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 9.6
+    },
+    {
+     "plaats": "uithoorn",
+     "km": 10,
+     "jaarLeads": 62,
+     "teVer": 0,
+     "huidigeConv": 5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 8.8
+    },
+    {
+     "plaats": "badhoevedorp",
+     "km": 5,
+     "jaarLeads": 50,
+     "teVer": 0,
+     "huidigeConv": 8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.7
+    },
+    {
+     "plaats": "zaandam",
+     "km": 13,
+     "jaarLeads": 60,
+     "teVer": 0,
+     "huidigeConv": 3.8,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 4.8
+    },
+    {
+     "plaats": "aalsmeer",
+     "km": 10,
+     "jaarLeads": 41,
+     "teVer": 0,
+     "huidigeConv": 8.3,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 4.5
+    },
+    {
+     "plaats": "hillegom",
+     "km": 19,
+     "jaarLeads": 55,
+     "teVer": 0,
+     "huidigeConv": 4.9,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 3.8
+    }
+   ],
+   "score": 68.2,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 142079,
+    "nettoInloop50": 245800,
+    "nettoInloop25_175laag": 150079,
+    "realistischAkkoord": 101,
+    "extraOmzet": 365411,
+    "brutowinst": 167358,
+    "nettoZicht200": 38358,
+    "nettoPdv250": 23108,
+    "nettoZicht175": 42858,
+    "nettoZicht175laag": 46358,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": -17428,
+    "vol": 94144
+   }
+  },
+  {
+   "id": "WK0363EE",
+   "naam": "Amsterdam – Landlust",
+   "gemeente": "Amsterdam",
+   "gm": "GM0363",
+   "lat": 52.38073072,
+   "lon": 4.85457299,
+   "km": 52.58989204437654,
+   "profiel": {
+    "koop": 29,
+    "eengezins": 1,
+    "woz": 415,
+    "inkStd": 37.3,
+    "oud": 99,
+    "oad": 7303,
+    "sted": 1,
+    "hh": 10515,
+    "koopwoningen": 2851
+   },
+   "gemeenteVraag": {
+    "leads": 551,
+    "akkoord": 38,
+    "jaarLeads": 338,
+    "jaarAkkoord": 25,
+    "conv": 6.9,
+    "residu": 2.1,
+    "leadsPer1000hh": 0.7
+   },
+   "uplift": {
+    "extraAkkoordVol": 125,
+    "jaarLeadsCatchment": 1763,
+    "teVer": 27,
+    "huidigAkk": 117,
+    "koopBinnen15": 304278,
+    "koopOnbenut": 304278,
+    "hhBinnen15": 808375,
+    "inkGem15": 40.8,
+    "latentLeads": 2640,
+    "koopIndex15": 106.2
+   },
+   "lookalikeKlant": {
+    "score": 55.2,
+    "per": {
+     "koop": 1.2,
+     "eengezins": 2,
+     "woz": 0,
+     "inkStd": 0.4,
+     "oud": 2.1,
+     "oad": 3.4
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 43.9,
+    "per": {
+     "koop": 2,
+     "eengezins": 2.4,
+     "woz": 0.5,
+     "inkStd": 0.3,
+     "oud": 1.9,
+     "oad": 3.9
+    }
+   },
+   "kmBerkel": 50,
+   "topCatchment": [
+    {
+     "plaats": "amsterdam",
+     "km": 3,
+     "jaarLeads": 319,
+     "teVer": 0,
+     "huidigeConv": 5.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 40.9
+    },
+    {
+     "plaats": "haarlem",
+     "km": 14,
+     "jaarLeads": 185,
+     "teVer": 1,
+     "huidigeConv": 6.7,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 9.6
+    },
+    {
+     "plaats": "zaandam",
+     "km": 7,
+     "jaarLeads": 60,
+     "teVer": 0,
+     "huidigeConv": 3.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 9.3
+    },
+    {
+     "plaats": "purmerend",
+     "km": 16,
+     "jaarLeads": 72,
+     "teVer": 11,
+     "huidigeConv": 2.9,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 6.6
+    },
+    {
+     "plaats": "amstelveen",
+     "km": 10,
+     "jaarLeads": 139,
+     "teVer": 0,
+     "huidigeConv": 7.4,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 6
+    },
+    {
+     "plaats": "badhoevedorp",
+     "km": 8,
+     "jaarLeads": 50,
+     "teVer": 0,
+     "huidigeConv": 8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.7
+    },
+    {
+     "plaats": "uithoorn",
+     "km": 16,
+     "jaarLeads": 62,
+     "teVer": 0,
+     "huidigeConv": 5,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 4.2
+    },
+    {
+     "plaats": "zwanenburg",
+     "km": 8,
+     "jaarLeads": 24,
+     "teVer": 0,
+     "huidigeConv": 5.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 3.1
+    }
+   ],
+   "score": 68,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 129682,
+    "nettoInloop50": 233403,
+    "nettoInloop25_175laag": 137682,
+    "realistischAkkoord": 94,
+    "extraOmzet": 338344,
+    "brutowinst": 154961,
+    "nettoZicht200": 25961,
+    "nettoPdv250": 10711,
+    "nettoZicht175": 30461,
+    "nettoZicht175laag": 33961,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": -25692,
+    "vol": 77615
    }
   },
   {
@@ -11011,7 +9912,7 @@
      "extraAkkoord": 3.8
     }
    ],
-   "score": 63.7,
+   "score": 67.2,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -11029,6 +9930,1105 @@
     "breakEvenAkkoord": 79,
     "conservatief": -17428,
     "vol": 94144
+   }
+  },
+  {
+   "id": "WK039221",
+   "naam": "Haarlem – Meerwijk",
+   "gemeente": "Haarlem",
+   "gm": "GM0392",
+   "lat": 52.35468201,
+   "lon": 4.66512818,
+   "km": 42.287636341452874,
+   "profiel": {
+    "koop": 22,
+    "eengezins": 33,
+    "woz": 325,
+    "inkStd": 32.6,
+    "oud": 89,
+    "oad": 3508,
+    "sted": 1,
+    "hh": 4145,
+    "koopwoningen": 902
+   },
+   "gemeenteVraag": {
+    "leads": 317,
+    "akkoord": 23,
+    "jaarLeads": 185,
+    "jaarAkkoord": 15,
+    "conv": 7.3,
+    "residu": 0.7,
+    "leadsPer1000hh": 2.3
+   },
+   "uplift": {
+    "extraAkkoordVol": 137,
+    "jaarLeadsCatchment": 1981,
+    "teVer": 3,
+    "huidigAkk": 147,
+    "koopBinnen15": 245255,
+    "koopOnbenut": 245255,
+    "hhBinnen15": 534900,
+    "inkGem15": 40.2,
+    "latentLeads": 2541,
+    "koopIndex15": 126.9
+   },
+   "lookalikeKlant": {
+    "score": 60.3,
+    "per": {
+     "koop": 2,
+     "eengezins": 0.4,
+     "woz": 0.9,
+     "inkStd": 1,
+     "oud": 0.8,
+     "oad": 1.3
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 58.3,
+    "per": {
+     "koop": 2.8,
+     "eengezins": 0.1,
+     "woz": 0.5,
+     "inkStd": 0.8,
+     "oud": 1,
+     "oad": 0.8
+    }
+   },
+   "kmBerkel": 42,
+   "topCatchment": [
+    {
+     "plaats": "haarlem",
+     "km": 3,
+     "jaarLeads": 185,
+     "teVer": 1,
+     "huidigeConv": 6.7,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 23.2
+    },
+    {
+     "plaats": "amsterdam",
+     "km": 16,
+     "jaarLeads": 319,
+     "teVer": 0,
+     "huidigeConv": 5.8,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 18.4
+    },
+    {
+     "plaats": "hoofddorp",
+     "km": 6,
+     "jaarLeads": 180,
+     "teVer": 0,
+     "huidigeConv": 10.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 15.4
+    },
+    {
+     "plaats": "hillegom",
+     "km": 9,
+     "jaarLeads": 55,
+     "teVer": 0,
+     "huidigeConv": 4.9,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 7.8
+    },
+    {
+     "plaats": "amstelveen",
+     "km": 15,
+     "jaarLeads": 139,
+     "teVer": 0,
+     "huidigeConv": 7.4,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 6
+    },
+    {
+     "plaats": "heemstede",
+     "km": 4,
+     "jaarLeads": 51,
+     "teVer": 0,
+     "huidigeConv": 7.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.8
+    },
+    {
+     "plaats": "badhoevedorp",
+     "km": 8,
+     "jaarLeads": 50,
+     "teVer": 0,
+     "huidigeConv": 8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.7
+    },
+    {
+     "plaats": "zaandam",
+     "km": 15,
+     "jaarLeads": 60,
+     "teVer": 0,
+     "huidigeConv": 3.8,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 4.8
+    }
+   ],
+   "score": 67.1,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 144559,
+    "nettoInloop50": 248279,
+    "nettoInloop25_175laag": 152559,
+    "realistischAkkoord": 103,
+    "extraOmzet": 370825,
+    "brutowinst": 169838,
+    "nettoZicht200": 40838,
+    "nettoPdv250": 25588,
+    "nettoZicht175": 45338,
+    "nettoZicht175laag": 48838,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": -15775,
+    "vol": 97450
+   }
+  },
+  {
+   "id": "WK047911",
+   "naam": "Zaanstad – Zaandam Zuid",
+   "gemeente": "Zaanstad",
+   "gm": "GM0479",
+   "lat": 52.42894634,
+   "lon": 4.8442888,
+   "km": 56.15561838261692,
+   "profiel": {
+    "koop": 43,
+    "eengezins": 60,
+    "woz": 331,
+    "inkStd": 34.8,
+    "oud": 97,
+    "oad": 3066,
+    "sted": 1,
+    "hh": 6415,
+    "koopwoningen": 2610
+   },
+   "gemeenteVraag": {
+    "leads": 171,
+    "akkoord": 10,
+    "jaarLeads": 132,
+    "jaarAkkoord": 9,
+    "conv": 5.8,
+    "residu": 1.3,
+    "leadsPer1000hh": 1.8
+   },
+   "uplift": {
+    "extraAkkoordVol": 120,
+    "jaarLeadsCatchment": 1582,
+    "teVer": 33,
+    "huidigAkk": 101,
+    "koopBinnen15": 292437,
+    "koopOnbenut": 292437,
+    "hhBinnen15": 765375,
+    "inkGem15": 39.8,
+    "latentLeads": 2605,
+    "koopIndex15": 109.1
+   },
+   "lookalikeKlant": {
+    "score": 60.3,
+    "per": {
+     "koop": 0.4,
+     "eengezins": 2.5,
+     "woz": 0.9,
+     "inkStd": 0.7,
+     "oud": 1.5,
+     "oad": 1.9
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 67.6,
+    "per": {
+     "koop": 0.4,
+     "eengezins": 2.1,
+     "woz": 0.4,
+     "inkStd": 0.6,
+     "oud": 1.3,
+     "oad": 1.4
+    }
+   },
+   "kmBerkel": 55,
+   "topCatchment": [
+    {
+     "plaats": "amsterdam",
+     "km": 7,
+     "jaarLeads": 319,
+     "teVer": 0,
+     "huidigeConv": 5.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 40.9
+    },
+    {
+     "plaats": "haarlem",
+     "km": 14,
+     "jaarLeads": 185,
+     "teVer": 1,
+     "huidigeConv": 6.7,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 9.6
+    },
+    {
+     "plaats": "zaandam",
+     "km": 2,
+     "jaarLeads": 60,
+     "teVer": 0,
+     "huidigeConv": 3.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 9.3
+    },
+    {
+     "plaats": "purmerend",
+     "km": 12,
+     "jaarLeads": 72,
+     "teVer": 11,
+     "huidigeConv": 2.9,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 6.6
+    },
+    {
+     "plaats": "amstelveen",
+     "km": 16,
+     "jaarLeads": 139,
+     "teVer": 0,
+     "huidigeConv": 7.4,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 6
+    },
+    {
+     "plaats": "assendelft",
+     "km": 9,
+     "jaarLeads": 43,
+     "teVer": 0,
+     "huidigeConv": 7.7,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 4.9
+    },
+    {
+     "plaats": "zwanenburg",
+     "km": 10,
+     "jaarLeads": 24,
+     "teVer": 0,
+     "huidigeConv": 5.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 3.1
+    },
+    {
+     "plaats": "ijmuiden",
+     "km": 18,
+     "jaarLeads": 25,
+     "teVer": 0,
+     "huidigeConv": 0,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 2.9
+    }
+   ],
+   "score": 66.7,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 123484,
+    "nettoInloop50": 227205,
+    "nettoInloop25_175laag": 131484,
+    "realistischAkkoord": 90,
+    "extraOmzet": 324810,
+    "brutowinst": 148763,
+    "nettoZicht200": 19763,
+    "nettoPdv250": 4513,
+    "nettoZicht175": 24263,
+    "nettoZicht175laag": 27763,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": -29825,
+    "vol": 69351
+   }
+  },
+  {
+   "id": "WK039207",
+   "naam": "Haarlem – Amsterdamsewijk",
+   "gemeente": "Haarlem",
+   "gm": "GM0392",
+   "lat": 52.37860511,
+   "lon": 4.65290718,
+   "km": 44.106578416639714,
+   "profiel": {
+    "koop": 45,
+    "eengezins": 48,
+    "woz": 405,
+    "inkStd": 38.6,
+    "oud": 98,
+    "oad": 4330,
+    "sted": 1,
+    "hh": 4285,
+    "koopwoningen": 1868
+   },
+   "gemeenteVraag": {
+    "leads": 317,
+    "akkoord": 23,
+    "jaarLeads": 185,
+    "jaarAkkoord": 15,
+    "conv": 7.3,
+    "residu": 0.7,
+    "leadsPer1000hh": 2.3
+   },
+   "uplift": {
+    "extraAkkoordVol": 130,
+    "jaarLeadsCatchment": 1945,
+    "teVer": 8,
+    "huidigAkk": 143,
+    "koopBinnen15": 233079,
+    "koopOnbenut": 233079,
+    "hhBinnen15": 498880,
+    "inkGem15": 36.2,
+    "latentLeads": 2477,
+    "koopIndex15": 130.2
+   },
+   "lookalikeKlant": {
+    "score": 74.6,
+    "per": {
+     "koop": 0.6,
+     "eengezins": 1.6,
+     "woz": 0.1,
+     "inkStd": 0.3,
+     "oud": 1.8,
+     "oad": 0.3
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 81.8,
+    "per": {
+     "koop": 0.2,
+     "eengezins": 1.2,
+     "woz": 0.3,
+     "inkStd": 0.2,
+     "oud": 1.6,
+     "oad": 0.2
+    }
+   },
+   "kmBerkel": 45,
+   "topCatchment": [
+    {
+     "plaats": "haarlem",
+     "km": 1,
+     "jaarLeads": 185,
+     "teVer": 1,
+     "huidigeConv": 6.7,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 23.2
+    },
+    {
+     "plaats": "amsterdam",
+     "km": 17,
+     "jaarLeads": 319,
+     "teVer": 0,
+     "huidigeConv": 5.8,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 18.4
+    },
+    {
+     "plaats": "hoofddorp",
+     "km": 8,
+     "jaarLeads": 180,
+     "teVer": 0,
+     "huidigeConv": 10.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 15.4
+    },
+    {
+     "plaats": "amstelveen",
+     "km": 17,
+     "jaarLeads": 139,
+     "teVer": 0,
+     "huidigeConv": 7.4,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 6
+    },
+    {
+     "plaats": "heemstede",
+     "km": 5,
+     "jaarLeads": 51,
+     "teVer": 0,
+     "huidigeConv": 7.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.8
+    },
+    {
+     "plaats": "zaandam",
+     "km": 14,
+     "jaarLeads": 60,
+     "teVer": 0,
+     "huidigeConv": 3.8,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 4.8
+    },
+    {
+     "plaats": "ijmuiden",
+     "km": 10,
+     "jaarLeads": 25,
+     "teVer": 0,
+     "huidigeConv": 0,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 4.6
+    },
+    {
+     "plaats": "zandvoort",
+     "km": 8,
+     "jaarLeads": 36,
+     "teVer": 0,
+     "huidigeConv": 6.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 4.3
+    }
+   ],
+   "score": 66.6,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 135881,
+    "nettoInloop50": 239602,
+    "nettoInloop25_175laag": 143881,
+    "realistischAkkoord": 98,
+    "extraOmzet": 351878,
+    "brutowinst": 161160,
+    "nettoZicht200": 32160,
+    "nettoPdv250": 16910,
+    "nettoZicht175": 36660,
+    "nettoZicht175laag": 40160,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": -21560,
+    "vol": 85880
+   }
+  },
+  {
+   "id": "WK0363EM",
+   "naam": "Amsterdam – Hoofdweg e.o.",
+   "gemeente": "Amsterdam",
+   "gm": "GM0363",
+   "lat": 52.36710773,
+   "lon": 4.85351222,
+   "km": 51.451129079462085,
+   "profiel": {
+    "koop": 23,
+    "eengezins": 0,
+    "woz": 431,
+    "inkStd": 38.4,
+    "oud": 100,
+    "oad": 10518,
+    "sted": 1,
+    "hh": 6105,
+    "koopwoningen": 1337
+   },
+   "gemeenteVraag": {
+    "leads": 551,
+    "akkoord": 38,
+    "jaarLeads": 338,
+    "jaarAkkoord": 25,
+    "conv": 6.9,
+    "residu": 2.1,
+    "leadsPer1000hh": 0.7
+   },
+   "uplift": {
+    "extraAkkoordVol": 134,
+    "jaarLeadsCatchment": 1762,
+    "teVer": 22,
+    "huidigAkk": 117,
+    "koopBinnen15": 288187,
+    "koopOnbenut": 288187,
+    "hhBinnen15": 784935,
+    "inkGem15": 40.6,
+    "latentLeads": 2408,
+    "koopIndex15": 102.3
+   },
+   "lookalikeKlant": {
+    "score": 46.6,
+    "per": {
+     "koop": 1.9,
+     "eengezins": 2.1,
+     "woz": 0.2,
+     "inkStd": 0.3,
+     "oud": 2.4,
+     "oad": 7.4
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 35.3,
+    "per": {
+     "koop": 2.7,
+     "eengezins": 2.4,
+     "woz": 0.6,
+     "inkStd": 0.2,
+     "oud": 2.1,
+     "oad": 7.9
+    }
+   },
+   "kmBerkel": 49,
+   "topCatchment": [
+    {
+     "plaats": "amsterdam",
+     "km": 4,
+     "jaarLeads": 319,
+     "teVer": 0,
+     "huidigeConv": 5.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 40.9
+    },
+    {
+     "plaats": "amstelveen",
+     "km": 9,
+     "jaarLeads": 139,
+     "teVer": 0,
+     "huidigeConv": 7.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 15.9
+    },
+    {
+     "plaats": "haarlem",
+     "km": 14,
+     "jaarLeads": 185,
+     "teVer": 1,
+     "huidigeConv": 6.7,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 9.6
+    },
+    {
+     "plaats": "zaandam",
+     "km": 9,
+     "jaarLeads": 60,
+     "teVer": 0,
+     "huidigeConv": 3.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 9.3
+    },
+    {
+     "plaats": "purmerend",
+     "km": 17,
+     "jaarLeads": 72,
+     "teVer": 11,
+     "huidigeConv": 2.9,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 6.6
+    },
+    {
+     "plaats": "badhoevedorp",
+     "km": 6,
+     "jaarLeads": 50,
+     "teVer": 0,
+     "huidigeConv": 8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 5.7
+    },
+    {
+     "plaats": "uithoorn",
+     "km": 14,
+     "jaarLeads": 62,
+     "teVer": 0,
+     "huidigeConv": 5,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 4.2
+    },
+    {
+     "plaats": "diemen",
+     "km": 10,
+     "jaarLeads": 23,
+     "teVer": 0,
+     "huidigeConv": 2.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 3.8
+    }
+   ],
+   "score": 66.4,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 140840,
+    "nettoInloop50": 244560,
+    "nettoInloop25_175laag": 148840,
+    "realistischAkkoord": 101,
+    "extraOmzet": 362705,
+    "brutowinst": 166119,
+    "nettoZicht200": 37119,
+    "nettoPdv250": 21869,
+    "nettoZicht175": 41619,
+    "nettoZicht175laag": 45119,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": -18254,
+    "vol": 92492
+   }
+  },
+  {
+   "id": "WK0363NE",
+   "naam": "Amsterdam – Banne Buiksloot",
+   "gemeente": "Amsterdam",
+   "gm": "GM0363",
+   "lat": 52.40729338,
+   "lon": 4.91756308,
+   "km": 57.684882699289396,
+   "profiel": {
+    "koop": 30,
+    "eengezins": 18,
+    "woz": 396,
+    "inkStd": 33.9,
+    "oud": 91,
+    "oad": 2800,
+    "sted": 1,
+    "hh": 6705,
+    "koopwoningen": 1887
+   },
+   "gemeenteVraag": {
+    "leads": 551,
+    "akkoord": 38,
+    "jaarLeads": 338,
+    "jaarAkkoord": 25,
+    "conv": 6.9,
+    "residu": 2.1,
+    "leadsPer1000hh": 0.7
+   },
+   "uplift": {
+    "extraAkkoordVol": 127,
+    "jaarLeadsCatchment": 1680,
+    "teVer": 72,
+    "huidigAkk": 101,
+    "koopBinnen15": 265813,
+    "koopOnbenut": 265813,
+    "hhBinnen15": 732995,
+    "inkGem15": 40.9,
+    "latentLeads": 2252,
+    "koopIndex15": 103.8
+   },
+   "lookalikeKlant": {
+    "score": 71.2,
+    "per": {
+     "koop": 1.1,
+     "eengezins": 0.7,
+     "woz": 0.2,
+     "inkStd": 0.8,
+     "oud": 0.2,
+     "oad": 2.2
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 61.7,
+    "per": {
+     "koop": 1.9,
+     "eengezins": 1.1,
+     "woz": 0.3,
+     "inkStd": 0.7,
+     "oud": 0.4,
+     "oad": 1.7
+    }
+   },
+   "kmBerkel": 55,
+   "topCatchment": [
+    {
+     "plaats": "amsterdam",
+     "km": 4,
+     "jaarLeads": 319,
+     "teVer": 0,
+     "huidigeConv": 5.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 40.9
+    },
+    {
+     "plaats": "almere",
+     "km": 20,
+     "jaarLeads": 202,
+     "teVer": 45,
+     "huidigeConv": 2.8,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 19.4
+    },
+    {
+     "plaats": "haarlem",
+     "km": 19,
+     "jaarLeads": 185,
+     "teVer": 1,
+     "huidigeConv": 6.7,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 9.6
+    },
+    {
+     "plaats": "zaandam",
+     "km": 8,
+     "jaarLeads": 60,
+     "teVer": 0,
+     "huidigeConv": 3.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 9.3
+    },
+    {
+     "plaats": "purmerend",
+     "km": 11,
+     "jaarLeads": 72,
+     "teVer": 11,
+     "huidigeConv": 2.9,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 6.6
+    },
+    {
+     "plaats": "amstelveen",
+     "km": 14,
+     "jaarLeads": 139,
+     "teVer": 0,
+     "huidigeConv": 7.4,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 6
+    },
+    {
+     "plaats": "uithoorn",
+     "km": 19,
+     "jaarLeads": 62,
+     "teVer": 0,
+     "huidigeConv": 5,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 4.2
+    },
+    {
+     "plaats": "diemen",
+     "km": 9,
+     "jaarLeads": 23,
+     "teVer": 0,
+     "huidigeConv": 2.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 3.8
+    }
+   ],
+   "score": 66.4,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 132162,
+    "nettoInloop50": 235883,
+    "nettoInloop25_175laag": 140162,
+    "realistischAkkoord": 95,
+    "extraOmzet": 343757,
+    "brutowinst": 157441,
+    "nettoZicht200": 28441,
+    "nettoPdv250": 13191,
+    "nettoZicht175": 32941,
+    "nettoZicht175laag": 36441,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": -24039,
+    "vol": 80921
+   }
+  },
+  {
+   "id": "WK047913",
+   "naam": "Zaanstad – Pelders- en Hoornseveld",
+   "gemeente": "Zaanstad",
+   "gm": "GM0479",
+   "lat": 52.44766961,
+   "lon": 4.83973093,
+   "km": 57.5944942891462,
+   "profiel": {
+    "koop": 37,
+    "eengezins": 40,
+    "woz": 353,
+    "inkStd": 34.2,
+    "oud": 99,
+    "oad": 2703,
+    "sted": 1,
+    "hh": 4950,
+    "koopwoningen": 1780
+   },
+   "gemeenteVraag": {
+    "leads": 171,
+    "akkoord": 10,
+    "jaarLeads": 132,
+    "jaarAkkoord": 9,
+    "conv": 5.8,
+    "residu": 1.3,
+    "leadsPer1000hh": 1.8
+   },
+   "uplift": {
+    "extraAkkoordVol": 118,
+    "jaarLeadsCatchment": 1517,
+    "teVer": 46,
+    "huidigAkk": 94,
+    "koopBinnen15": 276993,
+    "koopOnbenut": 276993,
+    "hhBinnen15": 711870,
+    "inkGem15": 39.5,
+    "latentLeads": 2566,
+    "koopIndex15": 113.4
+   },
+   "lookalikeKlant": {
+    "score": 68.8,
+    "per": {
+     "koop": 0.3,
+     "eengezins": 1,
+     "woz": 0.6,
+     "inkStd": 0.8,
+     "oud": 2.1,
+     "oad": 2.4
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 68.3,
+    "per": {
+     "koop": 1.1,
+     "eengezins": 0.6,
+     "woz": 0.2,
+     "inkStd": 0.7,
+     "oud": 1.9,
+     "oad": 1.8
+    }
+   },
+   "kmBerkel": 56,
+   "topCatchment": [
+    {
+     "plaats": "amsterdam",
+     "km": 9,
+     "jaarLeads": 319,
+     "teVer": 0,
+     "huidigeConv": 5.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 40.9
+    },
+    {
+     "plaats": "haarlem",
+     "km": 15,
+     "jaarLeads": 185,
+     "teVer": 1,
+     "huidigeConv": 6.7,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 9.6
+    },
+    {
+     "plaats": "zaandam",
+     "km": 1,
+     "jaarLeads": 60,
+     "teVer": 0,
+     "huidigeConv": 3.8,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 9.3
+    },
+    {
+     "plaats": "purmerend",
+     "km": 11,
+     "jaarLeads": 72,
+     "teVer": 11,
+     "huidigeConv": 2.9,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 6.6
+    },
+    {
+     "plaats": "amstelveen",
+     "km": 18,
+     "jaarLeads": 139,
+     "teVer": 0,
+     "huidigeConv": 7.4,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 6
+    },
+    {
+     "plaats": "assendelft",
+     "km": 8,
+     "jaarLeads": 43,
+     "teVer": 0,
+     "huidigeConv": 7.7,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 4.9
+    },
+    {
+     "plaats": "ijmuiden",
+     "km": 18,
+     "jaarLeads": 25,
+     "teVer": 0,
+     "huidigeConv": 0,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 2.9
+    },
+    {
+     "plaats": "hoofddorp",
+     "km": 19,
+     "jaarLeads": 180,
+     "teVer": 0,
+     "huidigeConv": 10.4,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 2.6
+    }
+   ],
+   "score": 66.4,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 121004,
+    "nettoInloop50": 224725,
+    "nettoInloop25_175laag": 129004,
+    "realistischAkkoord": 89,
+    "extraOmzet": 319397,
+    "brutowinst": 146284,
+    "nettoZicht200": 17284,
+    "nettoPdv250": 2034,
+    "nettoZicht175": 21784,
+    "nettoZicht175laag": 25284,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": -31478,
+    "vol": 66045
+   }
+  },
+  {
+   "id": "GM0482",
+   "naam": "Alblasserdam",
+   "gemeente": "Alblasserdam",
+   "gm": "GM0482",
+   "lat": 51.86465403,
+   "lon": 4.6657289,
+   "km": 30.157268089193696,
+   "profiel": {
+    "koop": 62,
+    "eengezins": 68,
+    "woz": 343,
+    "inkStd": 41.7,
+    "oud": 96,
+    "oad": 1530,
+    "sted": 2,
+    "hh": 8510,
+    "koopwoningen": 5253
+   },
+   "gemeenteVraag": {
+    "leads": 56,
+    "akkoord": 3,
+    "jaarLeads": 40,
+    "jaarAkkoord": 3,
+    "conv": 5.4,
+    "residu": -4.4,
+    "leadsPer1000hh": 4.7
+   },
+   "uplift": {
+    "extraAkkoordVol": 157,
+    "jaarLeadsCatchment": 2463,
+    "teVer": 0,
+    "huidigAkk": 201,
+    "koopBinnen15": 234486,
+    "koopOnbenut": 191942,
+    "hhBinnen15": 487420,
+    "inkGem15": 32.4,
+    "latentLeads": 2365,
+    "koopIndex15": 136.6
+   },
+   "lookalikeKlant": {
+    "score": 36,
+    "per": {
+     "koop": 2.6,
+     "eengezins": 3.1,
+     "woz": 0.7,
+     "inkStd": 0.1,
+     "oud": 1.2,
+     "oad": 3.8
+    }
+   },
+   "lookalikeRijswijk": {
+    "score": 48.4,
+    "per": {
+     "koop": 1.8,
+     "eengezins": 2.7,
+     "woz": 0.3,
+     "inkStd": 0.2,
+     "oud": 1,
+     "oad": 3.3
+    }
+   },
+   "kmBerkel": 19,
+   "topCatchment": [
+    {
+     "plaats": "dordrecht",
+     "km": 10,
+     "jaarLeads": 247,
+     "teVer": 0,
+     "huidigeConv": 7.6,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 28.1
+    },
+    {
+     "plaats": "barendrecht",
+     "km": 10,
+     "jaarLeads": 148,
+     "teVer": 0,
+     "huidigeConv": 9,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 14.5
+    },
+    {
+     "plaats": "rotterdam",
+     "km": 14,
+     "jaarLeads": 702,
+     "teVer": 0,
+     "huidigeConv": 10.2,
+     "nieuweConv": 11.9,
+     "extraAkkoord": 11.6
+    },
+    {
+     "plaats": "papendrecht",
+     "km": 4,
+     "jaarLeads": 87,
+     "teVer": 0,
+     "huidigeConv": 5.7,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 11.4
+    },
+    {
+     "plaats": "capelle aan den ijssel",
+     "km": 10,
+     "jaarLeads": 138,
+     "teVer": 0,
+     "huidigeConv": 10.5,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 11.2
+    },
+    {
+     "plaats": "ridderkerk",
+     "km": 5,
+     "jaarLeads": 96,
+     "teVer": 0,
+     "huidigeConv": 8.4,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 10.1
+    },
+    {
+     "plaats": "hendrik-ido-ambacht",
+     "km": 3,
+     "jaarLeads": 73,
+     "teVer": 0,
+     "huidigeConv": 7.1,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 8.6
+    },
+    {
+     "plaats": "sliedrecht",
+     "km": 8,
+     "jaarLeads": 46,
+     "teVer": 0,
+     "huidigeConv": 4.7,
+     "nieuweConv": 19.3,
+     "extraAkkoord": 6.7
+    }
+   ],
+   "score": 66.2,
+   "econ": {
+    "inloopAkk25": 63,
+    "inloopAkk50": 126,
+    "nettoInloop25": 169352,
+    "nettoInloop50": 273073,
+    "nettoInloop25_175laag": 177352,
+    "realistischAkkoord": 118,
+    "extraOmzet": 424960,
+    "brutowinst": 194632,
+    "nettoZicht200": 65632,
+    "nettoPdv250": 50382,
+    "nettoZicht175": 70132,
+    "nettoZicht175laag": 73632,
+    "breakEven175laag": 74,
+    "breakEvenAkkoord": 79,
+    "conservatief": 754,
+    "vol": 130509
    }
   }
  ],
@@ -11170,7 +11170,7 @@
      "extraAkkoord": 9.2
     }
    ],
-   "score": 83.2,
+   "score": 83.5,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -11193,7 +11193,7 @@
    "alternatieven": [
     {
      "naam": "Rotterdam – Feijenoord",
-     "score": 82.8,
+     "score": 83.1,
      "extraAkkoord": 197,
      "latentLeads": 1985,
      "lookalike": 64.9,
@@ -11204,7 +11204,7 @@
     },
     {
      "naam": "Rotterdam – IJsselmonde",
-     "score": 82.2,
+     "score": 82.6,
      "extraAkkoord": 194,
      "latentLeads": 2135,
      "lookalike": 65.4,
@@ -11214,19 +11214,8 @@
      "netto175laag": 119500
     },
     {
-     "naam": "Rotterdam – Rotterdam Centrum",
-     "score": 82,
-     "extraAkkoord": 202,
-     "latentLeads": 1764,
-     "lookalike": 57,
-     "koopIndex15": 131.1,
-     "kmBerkel": 8,
-     "netto200": 121418,
-     "netto175laag": 129418
-    },
-    {
      "naam": "Rotterdam – Charlois",
-     "score": 82,
+     "score": 82.6,
      "extraAkkoord": 208,
      "latentLeads": 1895,
      "lookalike": 59.1,
@@ -11236,8 +11225,19 @@
      "netto175laag": 136856
     },
     {
+     "naam": "Rotterdam – Rotterdam Centrum",
+     "score": 82.3,
+     "extraAkkoord": 202,
+     "latentLeads": 1764,
+     "lookalike": 57,
+     "koopIndex15": 131.1,
+     "kmBerkel": 8,
+     "netto200": 121418,
+     "netto175laag": 129418
+    },
+    {
      "naam": "Ridderkerk",
-     "score": 81.4,
+     "score": 82.2,
      "extraAkkoord": 205,
      "latentLeads": 2432,
      "lookalike": 50.5,
@@ -11247,19 +11247,8 @@
      "netto175laag": 133137
     },
     {
-     "naam": "Rotterdam – Noord",
-     "score": 80.7,
-     "extraAkkoord": 197,
-     "latentLeads": 1432,
-     "lookalike": 59.6,
-     "koopIndex15": 128.3,
-     "kmBerkel": 7,
-     "netto200": 115219,
-     "netto175laag": 123219
-    },
-    {
      "naam": "Krimpen aan den IJssel",
-     "score": 80.6,
+     "score": 81.2,
      "extraAkkoord": 205,
      "latentLeads": 2318,
      "lookalike": 38.3,
@@ -11269,19 +11258,19 @@
      "netto175laag": 133137
     },
     {
-     "naam": "Rotterdam – Prins Alexander",
-     "score": 79.7,
-     "extraAkkoord": 182,
-     "latentLeads": 1688,
-     "lookalike": 70.6,
-     "koopIndex15": 131.9,
+     "naam": "Rotterdam – Noord",
+     "score": 80.9,
+     "extraAkkoord": 197,
+     "latentLeads": 1432,
+     "lookalike": 59.6,
+     "koopIndex15": 128.3,
      "kmBerkel": 7,
-     "netto200": 96624,
-     "netto175laag": 104624
+     "netto200": 115219,
+     "netto175laag": 123219
     },
     {
      "naam": "Capelle aan den IJssel",
-     "score": 79.4,
+     "score": 79.2,
      "extraAkkoord": 188,
      "latentLeads": 2052,
      "lookalike": 55,
@@ -11292,7 +11281,7 @@
     },
     {
      "naam": "Rotterdam – Delfshaven",
-     "score": 79,
+     "score": 79.2,
      "extraAkkoord": 198,
      "latentLeads": 1497,
      "lookalike": 52.6,
@@ -11302,8 +11291,19 @@
      "netto175laag": 124459
     },
     {
+     "naam": "Rotterdam – Prins Alexander",
+     "score": 79.2,
+     "extraAkkoord": 182,
+     "latentLeads": 1688,
+     "lookalike": 70.6,
+     "koopIndex15": 131.9,
+     "kmBerkel": 7,
+     "netto200": 96624,
+     "netto175laag": 104624
+    },
+    {
      "naam": "Barendrecht",
-     "score": 76.6,
+     "score": 77.3,
      "extraAkkoord": 180,
      "latentLeads": 2579,
      "lookalike": 31.4,
@@ -11451,7 +11451,7 @@
      "extraAkkoord": 3.8
     }
    ],
-   "score": 72.7,
+   "score": 77.2,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -11474,7 +11474,7 @@
    "alternatieven": [
     {
      "naam": "Amsterdam – De Aker",
-     "score": 72.3,
+     "score": 76.8,
      "extraAkkoord": 161,
      "latentLeads": 2918,
      "lookalike": 44.4,
@@ -11485,7 +11485,7 @@
     },
     {
      "naam": "Amsterdam – Osdorp-Midden",
-     "score": 72.3,
+     "score": 76.6,
      "extraAkkoord": 144,
      "latentLeads": 2986,
      "lookalike": 63,
@@ -11496,7 +11496,7 @@
     },
     {
      "naam": "Amsterdam – Osdorp-Oost",
-     "score": 70.2,
+     "score": 74.2,
      "extraAkkoord": 141,
      "latentLeads": 2814,
      "lookalike": 61.7,
@@ -11507,7 +11507,7 @@
     },
     {
      "naam": "Amsterdam – Sloten/Nieuw-Sloten",
-     "score": 70,
+     "score": 74,
      "extraAkkoord": 147,
      "latentLeads": 2880,
      "lookalike": 47.5,
@@ -11518,7 +11518,7 @@
     },
     {
      "naam": "Amsterdam – Slotermeer-Noordoost",
-     "score": 68.6,
+     "score": 72.9,
      "extraAkkoord": 134,
      "latentLeads": 2788,
      "lookalike": 65,
@@ -11528,19 +11528,8 @@
      "netto175laag": 45119
     },
     {
-     "naam": "Haarlemmermeer – Badhoevedorp",
-     "score": 67.5,
-     "extraAkkoord": 148,
-     "latentLeads": 2962,
-     "lookalike": 24.7,
-     "koopIndex15": 111.1,
-     "kmBerkel": 43,
-     "netto200": 54474,
-     "netto175laag": 62474
-    },
-    {
      "naam": "Amsterdam – Slotermeer-West",
-     "score": 67.2,
+     "score": 71.5,
      "extraAkkoord": 135,
      "latentLeads": 2793,
      "lookalike": 54.1,
@@ -11550,8 +11539,19 @@
      "netto175laag": 46358
     },
     {
+     "naam": "Haarlemmermeer – Badhoevedorp",
+     "score": 71.4,
+     "extraAkkoord": 148,
+     "latentLeads": 2962,
+     "lookalike": 24.7,
+     "koopIndex15": 111.1,
+     "kmBerkel": 43,
+     "netto200": 54474,
+     "netto175laag": 62474
+    },
+    {
      "naam": "Amsterdam – Slotervaart-Zuid",
-     "score": 66.9,
+     "score": 70.8,
      "extraAkkoord": 136,
      "latentLeads": 2685,
      "lookalike": 55.2,
@@ -11561,19 +11561,8 @@
      "netto175laag": 47598
     },
     {
-     "naam": "Haarlem – Boerhaavewijk",
-     "score": 66.9,
-     "extraAkkoord": 136,
-     "latentLeads": 2612,
-     "lookalike": 74,
-     "koopIndex15": 128.3,
-     "kmBerkel": 43,
-     "netto200": 39598,
-     "netto175laag": 47598
-    },
-    {
      "naam": "Amsterdam – De Kolenkit",
-     "score": 65.5,
+     "score": 70,
      "extraAkkoord": 137,
      "latentLeads": 2773,
      "lookalike": 42.3,
@@ -11583,15 +11572,26 @@
      "netto175laag": 48838
     },
     {
-     "naam": "Amsterdam – Buitenveldert-West",
-     "score": 65,
-     "extraAkkoord": 135,
-     "latentLeads": 2199,
-     "lookalike": 72.2,
-     "koopIndex15": 100.1,
-     "kmBerkel": 46,
-     "netto200": 38358,
-     "netto175laag": 46358
+     "naam": "Haarlem – Boerhaavewijk",
+     "score": 69.5,
+     "extraAkkoord": 136,
+     "latentLeads": 2612,
+     "lookalike": 74,
+     "koopIndex15": 128.3,
+     "kmBerkel": 43,
+     "netto200": 39598,
+     "netto175laag": 47598
+    },
+    {
+     "naam": "Amsterdam – Overtoomse Veld",
+     "score": 68.9,
+     "extraAkkoord": 136,
+     "latentLeads": 2649,
+     "lookalike": 44.6,
+     "koopIndex15": 106.1,
+     "kmBerkel": 48,
+     "netto200": 39598,
+     "netto175laag": 47598
     }
    ]
   },
@@ -11732,7 +11732,7 @@
      "extraAkkoord": 2.5
     }
    ],
-   "score": 54.4,
+   "score": 55.4,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -11755,7 +11755,7 @@
    "alternatieven": [
     {
      "naam": "Utrecht – Wijk 05 Oost",
-     "score": 54,
+     "score": 55.4,
      "extraAkkoord": 82,
      "latentLeads": 2334,
      "lookalike": 82.1,
@@ -11766,7 +11766,7 @@
     },
     {
      "naam": "Utrecht – Wijk 04 Noordoost",
-     "score": 53.3,
+     "score": 55,
      "extraAkkoord": 89,
      "latentLeads": 2414,
      "lookalike": 63.5,
@@ -11777,7 +11777,7 @@
     },
     {
      "naam": "Utrecht – Wijk 01 West",
-     "score": 53.2,
+     "score": 53.8,
      "extraAkkoord": 77,
      "latentLeads": 2328,
      "lookalike": 79,
@@ -11788,7 +11788,7 @@
     },
     {
      "naam": "Utrecht – Wijk 07 Zuid",
-     "score": 52.2,
+     "score": 53.1,
      "extraAkkoord": 77,
      "latentLeads": 2224,
      "lookalike": 82.2,
@@ -11799,7 +11799,7 @@
     },
     {
      "naam": "Utrecht – Wijk 06 Binnenstad",
-     "score": 51.9,
+     "score": 53,
      "extraAkkoord": 82,
      "latentLeads": 2303,
      "lookalike": 69.4,
@@ -11810,7 +11810,7 @@
     },
     {
      "naam": "Utrecht – Wijk 08 Zuidwest",
-     "score": 51.6,
+     "score": 52.4,
      "extraAkkoord": 82,
      "latentLeads": 2180,
      "lookalike": 74.7,
@@ -11821,7 +11821,7 @@
     },
     {
      "naam": "Utrecht – Wijk 03 Overvecht",
-     "score": 50.7,
+     "score": 51.8,
      "extraAkkoord": 75,
      "latentLeads": 2484,
      "lookalike": 58,
@@ -11831,19 +11831,8 @@
      "netto175laag": -28023
     },
     {
-     "naam": "Leiden – Bos- en Gasthuisdistrict",
-     "score": 50.5,
-     "extraAkkoord": 58,
-     "latentLeads": 918,
-     "lookalike": 84.7,
-     "koopIndex15": 140.9,
-     "kmBerkel": 16,
-     "netto200": -57098,
-     "netto175laag": -49098
-    },
-    {
      "naam": "De Bilt",
-     "score": 48.6,
+     "score": 50.9,
      "extraAkkoord": 87,
      "latentLeads": 2600,
      "lookalike": 25.2,
@@ -11853,26 +11842,37 @@
      "netto175laag": -13147
     },
     {
-     "naam": "Leiden – Leiden-Noord",
-     "score": 47.7,
-     "extraAkkoord": 68,
-     "latentLeads": 952,
-     "lookalike": 71.7,
-     "koopIndex15": 147.1,
-     "kmBerkel": 20,
-     "netto200": -44701,
-     "netto175laag": -36701
+     "naam": "Zeist",
+     "score": 48.8,
+     "extraAkkoord": 65,
+     "latentLeads": 2528,
+     "lookalike": 48.7,
+     "koopIndex15": 133.4,
+     "kmBerkel": 54,
+     "netto200": -48420,
+     "netto175laag": -40420
     },
     {
-     "naam": "Leiden – Binnenstad-Noord",
-     "score": 47.3,
-     "extraAkkoord": 69,
-     "latentLeads": 952,
-     "lookalike": 65.2,
-     "koopIndex15": 148.2,
-     "kmBerkel": 19,
-     "netto200": -43461,
-     "netto175laag": -35461
+     "naam": "Leiden – Bos- en Gasthuisdistrict",
+     "score": 47.7,
+     "extraAkkoord": 58,
+     "latentLeads": 918,
+     "lookalike": 84.7,
+     "koopIndex15": 140.9,
+     "kmBerkel": 16,
+     "netto200": -57098,
+     "netto175laag": -49098
+    },
+    {
+     "naam": "Utrecht – Wijk 09 Leidsche Rijn",
+     "score": 46.8,
+     "extraAkkoord": 78,
+     "latentLeads": 2162,
+     "lookalike": 44.4,
+     "koopIndex15": 135.6,
+     "kmBerkel": 41,
+     "netto200": -32304,
+     "netto175laag": -24304
     }
    ]
   },
@@ -12013,7 +12013,7 @@
      "extraAkkoord": 2.7
     }
    ],
-   "score": 50.5,
+   "score": 47.7,
    "econ": {
     "inloopAkk25": 63,
     "inloopAkk50": 126,
@@ -12036,7 +12036,7 @@
    "alternatieven": [
     {
      "naam": "Leiden – Leiden-Noord",
-     "score": 47.7,
+     "score": 45.2,
      "extraAkkoord": 68,
      "latentLeads": 952,
      "lookalike": 71.7,
@@ -12047,7 +12047,7 @@
     },
     {
      "naam": "Leiden – Binnenstad-Noord",
-     "score": 47.3,
+     "score": 44.7,
      "extraAkkoord": 69,
      "latentLeads": 952,
      "lookalike": 65.2,
@@ -12058,7 +12058,7 @@
     },
     {
      "naam": "Leiden – Roodenburgerdistrict",
-     "score": 47.3,
+     "score": 44.4,
      "extraAkkoord": 67,
      "latentLeads": 952,
      "lookalike": 64.4,
@@ -12068,19 +12068,8 @@
      "netto175laag": -37941
     },
     {
-     "naam": "Leiden – Binnenstad-Zuid",
-     "score": 46.7,
-     "extraAkkoord": 68,
-     "latentLeads": 942,
-     "lookalike": 64.3,
-     "koopIndex15": 145.9,
-     "kmBerkel": 18,
-     "netto200": -44701,
-     "netto175laag": -36701
-    },
-    {
      "naam": "Leiden – Morsdistrict",
-     "score": 46.7,
+     "score": 44,
      "extraAkkoord": 56,
      "latentLeads": 827,
      "lookalike": 76.8,
@@ -12090,8 +12079,30 @@
      "netto175laag": -51577
     },
     {
+     "naam": "Leiden – Binnenstad-Zuid",
+     "score": 43.9,
+     "extraAkkoord": 68,
+     "latentLeads": 942,
+     "lookalike": 64.3,
+     "koopIndex15": 145.9,
+     "kmBerkel": 18,
+     "netto200": -44701,
+     "netto175laag": -36701
+    },
+    {
+     "naam": "Breda – Breda noord",
+     "score": 42.8,
+     "extraAkkoord": 73,
+     "latentLeads": 1703,
+     "lookalike": 66.3,
+     "koopIndex15": 156.7,
+     "kmBerkel": 47,
+     "netto200": -38503,
+     "netto175laag": -30503
+    },
+    {
      "naam": "Leiden – Boerhaavedistrict",
-     "score": 44,
+     "score": 41.2,
      "extraAkkoord": 61,
      "latentLeads": 861,
      "lookalike": 62.4,
@@ -12102,7 +12113,7 @@
     },
     {
      "naam": "Leiderdorp",
-     "score": 43.4,
+     "score": 40.7,
      "extraAkkoord": 73,
      "latentLeads": 974,
      "lookalike": 41.4,
@@ -12113,7 +12124,7 @@
     },
     {
      "naam": "Dordrecht – Wijk 08 Crabbehof/Zuidhoven",
-     "score": 42.8,
+     "score": 40.6,
      "extraAkkoord": 90,
      "latentLeads": 221,
      "lookalike": 68,
@@ -12123,19 +12134,19 @@
      "netto175laag": -9428
     },
     {
-     "naam": "Breda – Breda noord",
-     "score": 42.6,
-     "extraAkkoord": 73,
-     "latentLeads": 1703,
-     "lookalike": 66.3,
-     "koopIndex15": 156.7,
-     "kmBerkel": 47,
-     "netto200": -38503,
-     "netto175laag": -30503
+     "naam": "Breda – Breda centrum",
+     "score": 39.2,
+     "extraAkkoord": 63,
+     "latentLeads": 1657,
+     "lookalike": 59.9,
+     "koopIndex15": 156.2,
+     "kmBerkel": 49,
+     "netto200": -50899,
+     "netto175laag": -42899
     },
     {
      "naam": "Leiden – Merenwijkdistrict",
-     "score": 41.7,
+     "score": 39.1,
      "extraAkkoord": 70,
      "latentLeads": 902,
      "lookalike": 38.3,
@@ -12143,17 +12154,6 @@
      "kmBerkel": 21,
      "netto200": -42222,
      "netto175laag": -34222
-    },
-    {
-     "naam": "Leiden – Stevenshofdistrict",
-     "score": 41.7,
-     "extraAkkoord": 54,
-     "latentLeads": 739,
-     "lookalike": 44,
-     "koopIndex15": 137.6,
-     "kmBerkel": 18,
-     "netto200": -62057,
-     "netto175laag": -54057
     }
    ]
   }
@@ -12175,7 +12175,7 @@
      "koopIndex15": 132.3,
      "koopBinnen15": 341638,
      "lookalike": 63.7,
-     "score": 83.2,
+     "score": 83.5,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -12266,7 +12266,7 @@
      "koopIndex15": 109.8,
      "koopBinnen15": 328552,
      "lookalike": 68.9,
-     "score": 72.7,
+     "score": 77.2,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -12357,7 +12357,7 @@
      "koopIndex15": 133.5,
      "koopBinnen15": 223621,
      "lookalike": 81.8,
-     "score": 54.4,
+     "score": 55.4,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -12448,7 +12448,7 @@
      "koopIndex15": 140.9,
      "koopBinnen15": 280134,
      "lookalike": 84.7,
-     "score": 50.5,
+     "score": 47.7,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -12555,7 +12555,7 @@
      "koopIndex15": 128.5,
      "koopBinnen15": 280453,
      "lookalike": 29.1,
-     "score": 69.3,
+     "score": 69.4,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -12646,7 +12646,7 @@
      "koopIndex15": 128.3,
      "koopBinnen15": 249252,
      "lookalike": 74,
-     "score": 66.9,
+     "score": 69.5,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -12737,7 +12737,7 @@
      "koopIndex15": 133.4,
      "koopBinnen15": 267019,
      "lookalike": 29.1,
-     "score": 51.4,
+     "score": 48.7,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -12828,7 +12828,7 @@
      "koopIndex15": 99.6,
      "koopBinnen15": 240304,
      "lookalike": 76.9,
-     "score": 52.4,
+     "score": 55.5,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -12935,7 +12935,7 @@
      "koopIndex15": 131.7,
      "koopBinnen15": 326112,
      "lookalike": 64.9,
-     "score": 82.8,
+     "score": 83.1,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -13026,7 +13026,7 @@
      "koopIndex15": 128.3,
      "koopBinnen15": 249252,
      "lookalike": 74,
-     "score": 66.9,
+     "score": 69.5,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -13117,7 +13117,7 @@
      "koopIndex15": 99.6,
      "koopBinnen15": 240304,
      "lookalike": 76.9,
-     "score": 52.4,
+     "score": 55.5,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -13208,7 +13208,7 @@
      "koopIndex15": 133.5,
      "koopBinnen15": 223621,
      "lookalike": 81.8,
-     "score": 51.6,
+     "score": 52.4,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -13315,7 +13315,7 @@
      "koopIndex15": 131.7,
      "koopBinnen15": 326112,
      "lookalike": 64.9,
-     "score": 82.8,
+     "score": 83.1,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -13406,7 +13406,7 @@
      "koopIndex15": 110.4,
      "koopBinnen15": 323742,
      "lookalike": 44.4,
-     "score": 72.3,
+     "score": 76.8,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -13497,7 +13497,7 @@
      "koopIndex15": 133.5,
      "koopBinnen15": 223621,
      "lookalike": 81.8,
-     "score": 54.4,
+     "score": 55.4,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -13604,7 +13604,7 @@
      "koopIndex15": 131.7,
      "koopBinnen15": 326112,
      "lookalike": 64.9,
-     "score": 82.8,
+     "score": 83.1,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -13695,7 +13695,7 @@
      "koopIndex15": 110.4,
      "koopBinnen15": 323742,
      "lookalike": 44.4,
-     "score": 72.3,
+     "score": 76.8,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -13786,7 +13786,7 @@
      "koopIndex15": 99.6,
      "koopBinnen15": 240304,
      "lookalike": 76.9,
-     "score": 47.6,
+     "score": 50.5,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -13877,7 +13877,7 @@
      "koopIndex15": 133.5,
      "koopBinnen15": 223621,
      "lookalike": 81.8,
-     "score": 51.6,
+     "score": 52.4,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -13984,7 +13984,7 @@
      "koopIndex15": 131.7,
      "koopBinnen15": 326112,
      "lookalike": 64.9,
-     "score": 82.8,
+     "score": 83.1,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -14075,7 +14075,7 @@
      "koopIndex15": 110.4,
      "koopBinnen15": 323742,
      "lookalike": 44.4,
-     "score": 72.3,
+     "score": 76.8,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -14166,7 +14166,7 @@
      "koopIndex15": 133.5,
      "koopBinnen15": 223621,
      "lookalike": 81.8,
-     "score": 54.4,
+     "score": 55.4,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -14257,7 +14257,7 @@
      "koopIndex15": 133.4,
      "koopBinnen15": 267019,
      "lookalike": 29.1,
-     "score": 45.6,
+     "score": 42.4,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -14364,7 +14364,7 @@
      "koopIndex15": 132.5,
      "koopBinnen15": 315226,
      "lookalike": 65.4,
-     "score": 82.2,
+     "score": 82.6,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -14455,7 +14455,7 @@
      "koopIndex15": 110.4,
      "koopBinnen15": 323742,
      "lookalike": 44.4,
-     "score": 72.3,
+     "score": 76.8,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -14546,7 +14546,7 @@
      "koopIndex15": 133.4,
      "koopBinnen15": 267019,
      "lookalike": 29.1,
-     "score": 45.2,
+     "score": 41.9,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -14637,7 +14637,7 @@
      "koopIndex15": 99.6,
      "koopBinnen15": 240304,
      "lookalike": 76.9,
-     "score": 47.6,
+     "score": 50.5,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -14729,6 +14729,766 @@
    }
   },
   {
+   "label": "J. Rotterdam + Amsterdam-West + Utrecht + Drechtsteden",
+   "winkels": [
+    {
+     "naam": "Rotterdam – Feijenoord",
+     "gemeente": "Rotterdam",
+     "lat": 51.89892595,
+     "lon": 4.50147719,
+     "kmRijswijk": 19,
+     "kmBerkel": 10,
+     "extraAkkoord": 197,
+     "jaarLeadsCatchment": 3007,
+     "latentLeads": 1985,
+     "koopIndex15": 131.7,
+     "koopBinnen15": 326112,
+     "lookalike": 64.9,
+     "score": 83.1,
+     "econ": {
+      "inloopAkk25": 63,
+      "inloopAkk50": 126,
+      "nettoInloop25": 218940,
+      "nettoInloop50": 322661,
+      "nettoInloop25_175laag": 226940,
+      "realistischAkkoord": 148,
+      "extraOmzet": 533230,
+      "brutowinst": 244219,
+      "nettoZicht200": 115219,
+      "nettoPdv250": 99969,
+      "nettoZicht175": 119719,
+      "nettoZicht175laag": 123219,
+      "breakEven175laag": 74,
+      "breakEvenAkkoord": 79,
+      "conservatief": 33813,
+      "vol": 196626
+     },
+     "gevoeligheid": {
+      "basis": 115219,
+      "huurPlus20": 111419,
+      "huurMin20": 119019,
+      "upliftMin20": 66375,
+      "upliftPlus20": 164063,
+      "leadsMin30": 41953,
+      "leadsPlus30": 188485,
+      "worst": 3963,
+      "breakEvenFactor": 0.4
+     },
+     "topCatchment": [
+      {
+       "plaats": "rotterdam",
+       "km": 3,
+       "jaarLeads": 702,
+       "teVer": 0,
+       "huidigeConv": 10.2,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 61.4
+      },
+      {
+       "plaats": "barendrecht",
+       "km": 6,
+       "jaarLeads": 148,
+       "teVer": 0,
+       "huidigeConv": 9,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 14.5
+      },
+      {
+       "plaats": "schiedam",
+       "km": 9,
+       "jaarLeads": 111,
+       "teVer": 0,
+       "huidigeConv": 8.4,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 11.3
+      },
+      {
+       "plaats": "capelle aan den ijssel",
+       "km": 7,
+       "jaarLeads": 138,
+       "teVer": 0,
+       "huidigeConv": 10.5,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 11.2
+      },
+      {
+       "plaats": "dordrecht",
+       "km": 19,
+       "jaarLeads": 247,
+       "teVer": 0,
+       "huidigeConv": 7.6,
+       "nieuweConv": 11.9,
+       "extraAkkoord": 10.2
+      }
+     ]
+    },
+    {
+     "naam": "Amsterdam – De Aker",
+     "gemeente": "Amsterdam",
+     "lat": 52.34973334,
+     "lon": 4.78278,
+     "kmRijswijk": 47,
+     "kmBerkel": 45,
+     "extraAkkoord": 161,
+     "jaarLeadsCatchment": 1888,
+     "latentLeads": 2918,
+     "koopIndex15": 110.4,
+     "koopBinnen15": 323742,
+     "lookalike": 44.4,
+     "score": 76.8,
+     "econ": {
+      "inloopAkk25": 63,
+      "inloopAkk50": 126,
+      "nettoInloop25": 174311,
+      "nettoInloop50": 278032,
+      "nettoInloop25_175laag": 182311,
+      "realistischAkkoord": 121,
+      "extraOmzet": 435787,
+      "brutowinst": 199590,
+      "nettoZicht200": 70590,
+      "nettoPdv250": 55340,
+      "nettoZicht175": 75090,
+      "nettoZicht175laag": 78590,
+      "breakEven175laag": 74,
+      "breakEvenAkkoord": 79,
+      "conservatief": 4060,
+      "vol": 137120
+     },
+     "gevoeligheid": {
+      "basis": 70590,
+      "huurPlus20": 66790,
+      "huurMin20": 74390,
+      "upliftMin20": 30672,
+      "upliftPlus20": 110508,
+      "leadsMin30": 10713,
+      "leadsPlus30": 130467,
+      "worst": -21029,
+      "breakEvenFactor": 0.5
+     },
+     "topCatchment": [
+      {
+       "plaats": "amsterdam",
+       "km": 9,
+       "jaarLeads": 319,
+       "teVer": 0,
+       "huidigeConv": 5.8,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 40.9
+      },
+      {
+       "plaats": "haarlem",
+       "km": 10,
+       "jaarLeads": 185,
+       "teVer": 1,
+       "huidigeConv": 6.7,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 23.2
+      },
+      {
+       "plaats": "amstelveen",
+       "km": 8,
+       "jaarLeads": 139,
+       "teVer": 0,
+       "huidigeConv": 7.4,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 15.9
+      },
+      {
+       "plaats": "hoofddorp",
+       "km": 8,
+       "jaarLeads": 180,
+       "teVer": 0,
+       "huidigeConv": 10.4,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 15.4
+      },
+      {
+       "plaats": "badhoevedorp",
+       "km": 2,
+       "jaarLeads": 50,
+       "teVer": 0,
+       "huidigeConv": 8,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 5.7
+      }
+     ]
+    },
+    {
+     "naam": "Utrecht – Wijk 04 Noordoost",
+     "gemeente": "Utrecht",
+     "lat": 52.1039266,
+     "lon": 5.13630165,
+     "kmRijswijk": 56,
+     "kmBerkel": 47,
+     "extraAkkoord": 87,
+     "jaarLeadsCatchment": 854,
+     "latentLeads": 2414,
+     "koopIndex15": 133.5,
+     "koopBinnen15": 221407,
+     "lookalike": 63.5,
+     "score": 54.6,
+     "econ": {
+      "inloopAkk25": 63,
+      "inloopAkk50": 126,
+      "nettoInloop25": 82574,
+      "nettoInloop50": 186295,
+      "nettoInloop25_175laag": 90574,
+      "realistischAkkoord": 65,
+      "extraOmzet": 235487,
+      "brutowinst": 107853,
+      "nettoZicht200": -21147,
+      "nettoPdv250": -36397,
+      "nettoZicht175": -16647,
+      "nettoZicht175laag": -13147,
+      "breakEven175laag": 74,
+      "breakEvenAkkoord": 79,
+      "conservatief": -57098,
+      "vol": 14804
+     },
+     "gevoeligheid": {
+      "basis": -21147,
+      "huurPlus20": -24947,
+      "huurMin20": -17347,
+      "upliftMin20": -42717,
+      "upliftPlus20": 424,
+      "leadsMin30": -53503,
+      "leadsPlus30": 11209,
+      "worst": -72402,
+      "breakEvenFactor": 0.9
+     },
+     "topCatchment": [
+      {
+       "plaats": "utrecht",
+       "km": 3,
+       "jaarLeads": 158,
+       "teVer": 0,
+       "huidigeConv": 8.3,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 17.1
+      },
+      {
+       "plaats": "amersfoort",
+       "km": 19,
+       "jaarLeads": 72,
+       "teVer": 19,
+       "huidigeConv": 0.9,
+       "nieuweConv": 11.9,
+       "extraAkkoord": 8
+      },
+      {
+       "plaats": "nieuwegein",
+       "km": 9,
+       "jaarLeads": 58,
+       "teVer": 0,
+       "huidigeConv": 5.7,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 7.8
+      },
+      {
+       "plaats": "maarssen",
+       "km": 7,
+       "jaarLeads": 43,
+       "teVer": 0,
+       "huidigeConv": 6.3,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 5.6
+      },
+      {
+       "plaats": "vleuten",
+       "km": 9,
+       "jaarLeads": 36,
+       "teVer": 0,
+       "huidigeConv": 4.3,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 5.1
+      }
+     ]
+    },
+    {
+     "naam": "Dordrecht – Wijk 08 Crabbehof/Zuidhoven",
+     "gemeente": "Dordrecht",
+     "lat": 51.79193491,
+     "lon": 4.66651587,
+     "kmRijswijk": 36,
+     "kmBerkel": 26,
+     "extraAkkoord": 89,
+     "jaarLeadsCatchment": 835,
+     "latentLeads": 180,
+     "koopIndex15": 155.8,
+     "koopBinnen15": 154690,
+     "lookalike": 68,
+     "score": 40.2,
+     "econ": {
+      "inloopAkk25": 63,
+      "inloopAkk50": 126,
+      "nettoInloop25": 85053,
+      "nettoInloop50": 188774,
+      "nettoInloop25_175laag": 93053,
+      "realistischAkkoord": 67,
+      "extraOmzet": 240901,
+      "brutowinst": 110333,
+      "nettoZicht200": -18667,
+      "nettoPdv250": -33917,
+      "nettoZicht175": -14167,
+      "nettoZicht175laag": -10667,
+      "breakEven175laag": 74,
+      "breakEvenAkkoord": 79,
+      "conservatief": -55445,
+      "vol": 18110
+     },
+     "gevoeligheid": {
+      "basis": -18667,
+      "huurPlus20": -22467,
+      "huurMin20": -14867,
+      "upliftMin20": -40734,
+      "upliftPlus20": 3399,
+      "leadsMin30": -51767,
+      "leadsPlus30": 14432,
+      "worst": -71014,
+      "breakEvenFactor": 0.9
+     },
+     "topCatchment": [
+      {
+       "plaats": "dordrecht",
+       "km": 3,
+       "jaarLeads": 247,
+       "teVer": 0,
+       "huidigeConv": 7.6,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 28.1
+      },
+      {
+       "plaats": "papendrecht",
+       "km": 5,
+       "jaarLeads": 87,
+       "teVer": 0,
+       "huidigeConv": 5.7,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 11.4
+      },
+      {
+       "plaats": "hendrik-ido-ambacht",
+       "km": 6,
+       "jaarLeads": 73,
+       "teVer": 0,
+       "huidigeConv": 7.1,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 8.6
+      },
+      {
+       "plaats": "sliedrecht",
+       "km": 8,
+       "jaarLeads": 46,
+       "teVer": 0,
+       "huidigeConv": 4.7,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 6.7
+      },
+      {
+       "plaats": "alblasserdam",
+       "km": 8,
+       "jaarLeads": 40,
+       "teVer": 0,
+       "huidigeConv": 3.7,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 6.1
+      }
+     ]
+    }
+   ],
+   "totaal": {
+    "nettoInloop25": 560878,
+    "nettoInloop50": 975762,
+    "extraAkkoord": 534,
+    "realistischAkkoord": 401,
+    "extraOmzet": 1445405,
+    "nettoZicht200": 145995,
+    "nettoZicht175laag": 177995,
+    "conservatief": -74670,
+    "latentLeads": 7497
+   }
+  },
+  {
+   "label": "K. Rotterdam + Amsterdam-West + Drechtsteden + Amsterdam-Oost",
+   "winkels": [
+    {
+     "naam": "Rotterdam – Feijenoord",
+     "gemeente": "Rotterdam",
+     "lat": 51.89892595,
+     "lon": 4.50147719,
+     "kmRijswijk": 19,
+     "kmBerkel": 10,
+     "extraAkkoord": 197,
+     "jaarLeadsCatchment": 3007,
+     "latentLeads": 1985,
+     "koopIndex15": 131.7,
+     "koopBinnen15": 326112,
+     "lookalike": 64.9,
+     "score": 83.1,
+     "econ": {
+      "inloopAkk25": 63,
+      "inloopAkk50": 126,
+      "nettoInloop25": 218940,
+      "nettoInloop50": 322661,
+      "nettoInloop25_175laag": 226940,
+      "realistischAkkoord": 148,
+      "extraOmzet": 533230,
+      "brutowinst": 244219,
+      "nettoZicht200": 115219,
+      "nettoPdv250": 99969,
+      "nettoZicht175": 119719,
+      "nettoZicht175laag": 123219,
+      "breakEven175laag": 74,
+      "breakEvenAkkoord": 79,
+      "conservatief": 33813,
+      "vol": 196626
+     },
+     "gevoeligheid": {
+      "basis": 115219,
+      "huurPlus20": 111419,
+      "huurMin20": 119019,
+      "upliftMin20": 66375,
+      "upliftPlus20": 164063,
+      "leadsMin30": 41953,
+      "leadsPlus30": 188485,
+      "worst": 3963,
+      "breakEvenFactor": 0.4
+     },
+     "topCatchment": [
+      {
+       "plaats": "rotterdam",
+       "km": 3,
+       "jaarLeads": 702,
+       "teVer": 0,
+       "huidigeConv": 10.2,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 61.4
+      },
+      {
+       "plaats": "barendrecht",
+       "km": 6,
+       "jaarLeads": 148,
+       "teVer": 0,
+       "huidigeConv": 9,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 14.5
+      },
+      {
+       "plaats": "schiedam",
+       "km": 9,
+       "jaarLeads": 111,
+       "teVer": 0,
+       "huidigeConv": 8.4,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 11.3
+      },
+      {
+       "plaats": "capelle aan den ijssel",
+       "km": 7,
+       "jaarLeads": 138,
+       "teVer": 0,
+       "huidigeConv": 10.5,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 11.2
+      },
+      {
+       "plaats": "dordrecht",
+       "km": 19,
+       "jaarLeads": 247,
+       "teVer": 0,
+       "huidigeConv": 7.6,
+       "nieuweConv": 11.9,
+       "extraAkkoord": 10.2
+      }
+     ]
+    },
+    {
+     "naam": "Amsterdam – De Aker",
+     "gemeente": "Amsterdam",
+     "lat": 52.34973334,
+     "lon": 4.78278,
+     "kmRijswijk": 47,
+     "kmBerkel": 45,
+     "extraAkkoord": 161,
+     "jaarLeadsCatchment": 1888,
+     "latentLeads": 2918,
+     "koopIndex15": 110.4,
+     "koopBinnen15": 323742,
+     "lookalike": 44.4,
+     "score": 76.8,
+     "econ": {
+      "inloopAkk25": 63,
+      "inloopAkk50": 126,
+      "nettoInloop25": 174311,
+      "nettoInloop50": 278032,
+      "nettoInloop25_175laag": 182311,
+      "realistischAkkoord": 121,
+      "extraOmzet": 435787,
+      "brutowinst": 199590,
+      "nettoZicht200": 70590,
+      "nettoPdv250": 55340,
+      "nettoZicht175": 75090,
+      "nettoZicht175laag": 78590,
+      "breakEven175laag": 74,
+      "breakEvenAkkoord": 79,
+      "conservatief": 4060,
+      "vol": 137120
+     },
+     "gevoeligheid": {
+      "basis": 70590,
+      "huurPlus20": 66790,
+      "huurMin20": 74390,
+      "upliftMin20": 30672,
+      "upliftPlus20": 110508,
+      "leadsMin30": 10713,
+      "leadsPlus30": 130467,
+      "worst": -21029,
+      "breakEvenFactor": 0.5
+     },
+     "topCatchment": [
+      {
+       "plaats": "amsterdam",
+       "km": 9,
+       "jaarLeads": 319,
+       "teVer": 0,
+       "huidigeConv": 5.8,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 40.9
+      },
+      {
+       "plaats": "haarlem",
+       "km": 10,
+       "jaarLeads": 185,
+       "teVer": 1,
+       "huidigeConv": 6.7,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 23.2
+      },
+      {
+       "plaats": "amstelveen",
+       "km": 8,
+       "jaarLeads": 139,
+       "teVer": 0,
+       "huidigeConv": 7.4,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 15.9
+      },
+      {
+       "plaats": "hoofddorp",
+       "km": 8,
+       "jaarLeads": 180,
+       "teVer": 0,
+       "huidigeConv": 10.4,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 15.4
+      },
+      {
+       "plaats": "badhoevedorp",
+       "km": 2,
+       "jaarLeads": 50,
+       "teVer": 0,
+       "huidigeConv": 8,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 5.7
+      }
+     ]
+    },
+    {
+     "naam": "Dordrecht – Wijk 08 Crabbehof/Zuidhoven",
+     "gemeente": "Dordrecht",
+     "lat": 51.79193491,
+     "lon": 4.66651587,
+     "kmRijswijk": 36,
+     "kmBerkel": 26,
+     "extraAkkoord": 89,
+     "jaarLeadsCatchment": 835,
+     "latentLeads": 180,
+     "koopIndex15": 155.8,
+     "koopBinnen15": 154690,
+     "lookalike": 68,
+     "score": 40.2,
+     "econ": {
+      "inloopAkk25": 63,
+      "inloopAkk50": 126,
+      "nettoInloop25": 85053,
+      "nettoInloop50": 188774,
+      "nettoInloop25_175laag": 93053,
+      "realistischAkkoord": 67,
+      "extraOmzet": 240901,
+      "brutowinst": 110333,
+      "nettoZicht200": -18667,
+      "nettoPdv250": -33917,
+      "nettoZicht175": -14167,
+      "nettoZicht175laag": -10667,
+      "breakEven175laag": 74,
+      "breakEvenAkkoord": 79,
+      "conservatief": -55445,
+      "vol": 18110
+     },
+     "gevoeligheid": {
+      "basis": -18667,
+      "huurPlus20": -22467,
+      "huurMin20": -14867,
+      "upliftMin20": -40734,
+      "upliftPlus20": 3399,
+      "leadsMin30": -51767,
+      "leadsPlus30": 14432,
+      "worst": -71014,
+      "breakEvenFactor": 0.9
+     },
+     "topCatchment": [
+      {
+       "plaats": "dordrecht",
+       "km": 3,
+       "jaarLeads": 247,
+       "teVer": 0,
+       "huidigeConv": 7.6,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 28.1
+      },
+      {
+       "plaats": "papendrecht",
+       "km": 5,
+       "jaarLeads": 87,
+       "teVer": 0,
+       "huidigeConv": 5.7,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 11.4
+      },
+      {
+       "plaats": "hendrik-ido-ambacht",
+       "km": 6,
+       "jaarLeads": 73,
+       "teVer": 0,
+       "huidigeConv": 7.1,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 8.6
+      },
+      {
+       "plaats": "sliedrecht",
+       "km": 8,
+       "jaarLeads": 46,
+       "teVer": 0,
+       "huidigeConv": 4.7,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 6.7
+      },
+      {
+       "plaats": "alblasserdam",
+       "km": 8,
+       "jaarLeads": 40,
+       "teVer": 0,
+       "huidigeConv": 3.7,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 6.1
+      }
+     ]
+    },
+    {
+     "naam": "Diemen",
+     "gemeente": "Diemen",
+     "lat": 52.33733243,
+     "lon": 4.99049646,
+     "kmRijswijk": 56,
+     "kmBerkel": 52,
+     "extraAkkoord": 98,
+     "jaarLeadsCatchment": 871,
+     "latentLeads": 486,
+     "koopIndex15": 99.6,
+     "koopBinnen15": 240304,
+     "lookalike": 76.9,
+     "score": 50.5,
+     "econ": {
+      "inloopAkk25": 63,
+      "inloopAkk50": 126,
+      "nettoInloop25": 96211,
+      "nettoInloop50": 199931,
+      "nettoInloop25_175laag": 104211,
+      "realistischAkkoord": 74,
+      "extraOmzet": 265262,
+      "brutowinst": 121490,
+      "nettoZicht200": -7510,
+      "nettoPdv250": -22760,
+      "nettoZicht175": -3010,
+      "nettoZicht175laag": 490,
+      "breakEven175laag": 74,
+      "breakEvenAkkoord": 79,
+      "conservatief": -48007,
+      "vol": 32986
+     },
+     "gevoeligheid": {
+      "basis": -7510,
+      "huurPlus20": -11310,
+      "huurMin20": -3710,
+      "upliftMin20": -31808,
+      "upliftPlus20": 16788,
+      "leadsMin30": -43957,
+      "leadsPlus30": 28937,
+      "worst": -64766,
+      "breakEvenFactor": 0.8
+     },
+     "topCatchment": [
+      {
+       "plaats": "amsterdam",
+       "km": 7,
+       "jaarLeads": 319,
+       "teVer": 0,
+       "huidigeConv": 5.8,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 40.9
+      },
+      {
+       "plaats": "almere",
+       "km": 16,
+       "jaarLeads": 202,
+       "teVer": 45,
+       "huidigeConv": 2.8,
+       "nieuweConv": 11.9,
+       "extraAkkoord": 19.4
+      },
+      {
+       "plaats": "purmerend",
+       "km": 18,
+       "jaarLeads": 72,
+       "teVer": 11,
+       "huidigeConv": 2.9,
+       "nieuweConv": 11.9,
+       "extraAkkoord": 6.6
+      },
+      {
+       "plaats": "diemen",
+       "km": 0,
+       "jaarLeads": 23,
+       "teVer": 0,
+       "huidigeConv": 2.8,
+       "nieuweConv": 19.3,
+       "extraAkkoord": 3.8
+      },
+      {
+       "plaats": "hilversum",
+       "km": 18,
+       "jaarLeads": 40,
+       "teVer": 8,
+       "huidigeConv": 3.6,
+       "nieuweConv": 11.9,
+       "extraAkkoord": 3.6
+      }
+     ]
+    }
+   ],
+   "totaal": {
+    "nettoInloop25": 574515,
+    "nettoInloop50": 989398,
+    "extraAkkoord": 545,
+    "realistischAkkoord": 410,
+    "extraOmzet": 1475180,
+    "nettoZicht200": 159632,
+    "nettoZicht175laag": 191632,
+    "conservatief": -65579,
+    "latentLeads": 5569
+   }
+  },
+  {
    "label": "E. Rotterdam-Zuid + Zuidplas + Haarlemmermeer + Leiden",
    "winkels": [
     {
@@ -14744,7 +15504,7 @@
      "koopIndex15": 132.5,
      "koopBinnen15": 315226,
      "lookalike": 65.4,
-     "score": 82.2,
+     "score": 82.6,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -14835,7 +15595,7 @@
      "koopIndex15": 133.4,
      "koopBinnen15": 267019,
      "lookalike": 29.1,
-     "score": 45.2,
+     "score": 41.9,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -14926,7 +15686,7 @@
      "koopIndex15": 111.1,
      "koopBinnen15": 326459,
      "lookalike": 24.7,
-     "score": 67.3,
+     "score": 71.2,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -15017,7 +15777,7 @@
      "koopIndex15": 140.9,
      "koopBinnen15": 280134,
      "lookalike": 84.7,
-     "score": 47.5,
+     "score": 44.7,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -15124,7 +15884,7 @@
      "koopIndex15": 131.7,
      "koopBinnen15": 326112,
      "lookalike": 64.9,
-     "score": 82.8,
+     "score": 83.1,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -15215,7 +15975,7 @@
      "koopIndex15": 110.4,
      "koopBinnen15": 323742,
      "lookalike": 44.4,
-     "score": 72.3,
+     "score": 76.8,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -15306,7 +16066,7 @@
      "koopIndex15": 133.5,
      "koopBinnen15": 223621,
      "lookalike": 81.8,
-     "score": 54.4,
+     "score": 55.4,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -15397,7 +16157,7 @@
      "koopIndex15": 140.9,
      "koopBinnen15": 280134,
      "lookalike": 84.7,
-     "score": 50.7,
+     "score": 48,
      "econ": {
       "inloopAkk25": 63,
       "inloopAkk50": 126,
@@ -15492,47 +16252,14 @@
  "combos": [
   {
    "set": [
-    "Albrandswaard",
-    "Haarlemmermeer – Badhoevedorp",
-    "Zuidplas",
-    "Papendrecht"
-   ],
-   "extraAkkoord": 533,
-   "latentLeads": 5919,
-   "kmBerkelMax": 43
-  },
-  {
-   "set": [
-    "Albrandswaard",
     "Haarlem – Boerhaavewijk",
-    "Zuidplas",
-    "Diemen"
+    "Albrandswaard",
+    "Diemen",
+    "Zuidplas"
    ],
    "extraAkkoord": 531,
    "latentLeads": 6141,
    "kmBerkelMax": 52
-  },
-  {
-   "set": [
-    "Albrandswaard",
-    "Haarlem – Boerhaavewijk",
-    "Diemen",
-    "Papendrecht"
-   ],
-   "extraAkkoord": 531,
-   "latentLeads": 5759,
-   "kmBerkelMax": 52
-  },
-  {
-   "set": [
-    "Amsterdam – Geuzenveld",
-    "Albrandswaard",
-    "Zuidplas",
-    "Papendrecht"
-   ],
-   "extraAkkoord": 529,
-   "latentLeads": 5904,
-   "kmBerkelMax": 48
   },
   {
    "set": [
@@ -15558,17 +16285,6 @@
   },
   {
    "set": [
-    "Albrandswaard",
-    "Haarlem – Boerhaavewijk",
-    "Zuidplas",
-    "Papendrecht"
-   ],
-   "extraAkkoord": 521,
-   "latentLeads": 5569,
-   "kmBerkelMax": 43
-  },
-  {
-   "set": [
     "Rotterdam – Kralingen-Crooswijk",
     "Haarlem – Boerhaavewijk",
     "Diemen",
@@ -15580,35 +16296,13 @@
   },
   {
    "set": [
-    "Albrandswaard",
-    "Diemen",
-    "Aalsmeer",
-    "Papendrecht"
-   ],
-   "extraAkkoord": 516,
-   "latentLeads": 5384,
-   "kmBerkelMax": 52
-  },
-  {
-   "set": [
     "Haarlem – Boerhaavewijk",
     "Zwijndrecht",
-    "Zuidplas",
-    "Diemen"
+    "Diemen",
+    "Zuidplas"
    ],
    "extraAkkoord": 512,
    "latentLeads": 6521,
-   "kmBerkelMax": 52
-  },
-  {
-   "set": [
-    "Albrandswaard",
-    "Zuidplas",
-    "Diemen",
-    "Papendrecht"
-   ],
-   "extraAkkoord": 510,
-   "latentLeads": 4911,
    "kmBerkelMax": 52
   },
   {
@@ -15635,17 +16329,6 @@
   },
   {
    "set": [
-    "Albrandswaard",
-    "Zuidplas",
-    "Aalsmeer",
-    "Papendrecht"
-   ],
-   "extraAkkoord": 508,
-   "latentLeads": 5032,
-   "kmBerkelMax": 35
-  },
-  {
-   "set": [
     "Krimpen aan den IJssel",
     "Diemen",
     "Aalsmeer",
@@ -15653,6 +16336,83 @@
    ],
    "extraAkkoord": 507,
    "latentLeads": 7522,
+   "kmBerkelMax": 52
+  },
+  {
+   "set": [
+    "Haarlemmermeer – Badhoevedorp",
+    "Albrandswaard",
+    "Zuidplas",
+    "Utrecht – Wijk 02 Noordwest"
+   ],
+   "extraAkkoord": 506,
+   "latentLeads": 8029,
+   "kmBerkelMax": 44
+  },
+  {
+   "set": [
+    "Albrandswaard",
+    "Diemen",
+    "Zuidplas",
+    "Aalsmeer"
+   ],
+   "extraAkkoord": 506,
+   "latentLeads": 5643,
+   "kmBerkelMax": 52
+  },
+  {
+   "set": [
+    "Rotterdam – Kralingen-Crooswijk",
+    "Diemen",
+    "Aalsmeer",
+    "Utrecht – Wijk 02 Noordwest"
+   ],
+   "extraAkkoord": 503,
+   "latentLeads": 6972,
+   "kmBerkelMax": 52
+  },
+  {
+   "set": [
+    "Amsterdam – Geuzenveld",
+    "Albrandswaard",
+    "Zuidplas",
+    "Utrecht – Wijk 02 Noordwest"
+   ],
+   "extraAkkoord": 502,
+   "latentLeads": 8022,
+   "kmBerkelMax": 48
+  },
+  {
+   "set": [
+    "Ridderkerk",
+    "Aalsmeer",
+    "Utrecht – Wijk 02 Noordwest",
+    "Oostzaan"
+   ],
+   "extraAkkoord": 501,
+   "latentLeads": 8322,
+   "kmBerkelMax": 58
+  },
+  {
+   "set": [
+    "Krimpen aan den IJssel",
+    "Aalsmeer",
+    "Utrecht – Wijk 02 Noordwest",
+    "Oostzaan"
+   ],
+   "extraAkkoord": 500,
+   "latentLeads": 8208,
+   "kmBerkelMax": 58
+  },
+  {
+   "set": [
+    "Barendrecht",
+    "Haarlem – Boerhaavewijk",
+    "Diemen",
+    "Utrecht – Wijk 02 Noordwest"
+   ],
+   "extraAkkoord": 500,
+   "latentLeads": 8183,
    "kmBerkelMax": 52
   }
  ],

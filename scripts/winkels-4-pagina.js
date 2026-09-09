@@ -52,6 +52,7 @@ const v = r.verificatie;
 const body = `<div class="w4">
 <header class="w4-head"><p class="eyebrow">Sonty · vestigingsonderzoek · ${esc(r.gegenereerd)}</p><h1>Vier winkels naast Rijswijk</h1><p class="lead">Waar 4 winkels van 175-200 m² (besluit Daimy 10-09: echte showroom, niet kleiner) het meeste opleveren, gerekend op ${nl(v.leadsTotaal)} Sonty-leads (mei 2024 t/m sep 2026), CBS-koopwoningen en -koopkracht per wijk, en echte rijtijden. Volgorde: <b>Rotterdam-Zuid/Oost, dan Haarlemmermeer/Amsterdam-West, dan Utrecht-rand en Dordrecht-Zuid</b>. Winkel 3 en 4 zijn alleen rendabel als een nieuwe winkel zelf inloop trekt; dat moet winkel 1 eerst laten zien.</p></header>
 
+<p class="w4-link">Alle sommen per winkel (leads per woonplaats, conversie oud/nieuw, kosten, gevoeligheid): <a href="/admin/winkels-4/berekeningen">berekeningen-dossier</a>.</p>
 <section class="w4-stores">${kaarten}</section>
 <p class="w4-total">Samen (scenario J, 200 m²): <b>+${ADVIES.totaal.realistischAkkoord} akkoorden/jr</b> uit online-leads die dichterbij komen · ${eurK(ADVIES.totaal.extraOmzet)} extra omzet · <b>${eurK(ADVIES.totaal.nettoZicht200)} netto/jr zonder inloop</b> · met 25% van de Rijswijkse inloop (${v.inloopRijswijk.akkoordJr} akkoorden/jr uit ${v.inloopRijswijk.winkelLeadsJr} winkelbezoekers) <b>${eurK(ADVIES.totaal.nettoInloop25)}</b> · conservatief (50% uplift, geen inloop) ${eurK(ADVIES.totaal.conservatief)}. Eenmalig ca. ${eurK(k.eenmalig)} inrichting per winkel (aanname).</p>
 
@@ -104,6 +105,7 @@ const css = `
 .w4-store dd{margin:0;font-size:19px;font-weight:700;font-variant-numeric:tabular-nums}
 .w4-store dd small{font-size:12px;font-weight:400;color:var(--mut);margin-left:4px}
 .w4-store .top{font-size:12.5px;color:var(--mut);margin:8px 0 0;border-top:1px solid var(--line);padding-top:8px}
+.w4-link{margin:14px 0 0;font-size:14px}.w4-link a{color:var(--accent-ink);font-weight:600}
 .w4-total{margin:14px 0 0;font-size:15px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
 .w4-map-wrap{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(240px,.8fr);gap:22px;align-items:start;margin-top:44px}
 @media (max-width:760px){.w4-map-wrap{grid-template-columns:1fr}}
@@ -140,6 +142,6 @@ const css = `
 `;
 const fonts = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Permanent+Marker&display=swap">';
 const arg = process.argv.indexOf('--artifact');
-if (arg > 0) fs.writeFileSync(process.argv[arg + 1], `<title>Vier winkels naast Rijswijk</title>\n${fonts}\n<style>body{margin:0;background:#F4F2ED}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body{background:#12110F}}:root[data-theme="dark"] body{background:#12110F}${css}</style>\n${body}`);
+if (arg > 0) fs.writeFileSync(process.argv[arg + 1], `<title>Vier winkels naast Rijswijk</title>\n${fonts}\n<style>body{margin:0;background:#F4F2ED}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body{background:#12110F}}:root[data-theme="dark"] body{background:#12110F}${css}</style>\n${body.replace('href="/admin/winkels-4/berekeningen"', 'href="BEREKENINGEN_URL"')}`);
 fs.writeFileSync('/Users/clawdboot/sonty-website/data/winkels-4.html', `<style>${css}</style>\n${body}`);
 console.log('OK pagina gebouwd', H + 'px kaart', body.length, 'bytes');

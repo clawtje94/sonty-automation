@@ -12,7 +12,7 @@ const TABS = [
   'Mei 2024', 'Juni 2024', 'Juli 2024', 'Aug 2024', 'Sep 2024', 'Okt 2024', 'Nov 2024', 'Dec 2024',
   'Jan 2025', 'Feb 2025 🐸', 'Maart 2025', 'April 2025', 'Mei 2025 ', 'Juni 2025', 'Juli 2025',
   'Aug 2025', 'Augustus 2025', 'Sep 2025', 'Okt 2025', 'Nov 2025', 'Dec 2025',
-  'Jan 2026', 'Feb 2026', 'Maart 2026', 'April 2026', 'Mei 2026', 'Juni 2026 ', 'Juli 2026',
+  'Jan 2026', 'Feb 2026', 'Maart 2026', 'April 2026', 'Mei 2026', 'Juni 2026 ', 'Juli 2026 ', 'Aug 2026', 'Sep 2026',
 ];
 
 function parseGeld(v) {

@@ -10,7 +10,8 @@
 - 10-09 besluit Daimy: 4 winkels van 175-200 m² (kleiner is geen showroom); magazijn telt NIET mee in de score (alleen klant/omzet/winst). Advies = scenario J: 1 Rotterdam-Zuid/Oost A16, 2 Haarlemmermeer/A'dam-West A4-A9, 3 Utrecht-rand A2/A27, 4 Dordrecht-Zuid A16 (Zuidplas vervallen: overlap). Netto 200 m² zonder inloop +€146k/jr totaal; 3 en 4 pas na bewezen inloop.
 - 10-09: aanbod-agent gestart voor Rotterdam-Zuid/Oost 175-250 m² → docs/winkels-4/03-aanbod-rotterdam-zuid-oost.md (links zelf verifiëren vóór doorsturen).
 
-## 09-09 21:10: PRIJSONDERZOEK MARKT — 13 aanvragen per mail verstuurd, lokale zoektocht per stad loopt (Daimy 09-09 via chat)
+## 09-09 21:45: PRIJSONDERZOEK MARKT — 50 echte offerteaanvragen verstuurd (49 mail + 1 formulier), Sent-map gecontroleerd (Daimy 09-09 via chat)
+- KLAAR: 49 mails (13 webshops + 35 lokale verkopers + 1 support-adres) allemaal teruggevonden in Proton Verzonden; 1 formulier bevestigd; 4 formulieren geblokkeerd door captcha/botcheck. Log: data/prijsonderzoek/offertes.csv. Volgende: antwoorden in Proton lezen, prijzen invullen, vergelijken met Sonty-prijs.
 - 21:30: batch 2 (35 lokale verkopers uit lokaal.csv, top 3 per stad, mailadres zelf op site geverifieerd) loopt via scripts/prijsonderzoek-mail-batch.js; log data/prijsonderzoek/mail-batch-2.log. Formulieren: G verzonden (bevestigd), B/C/F geblokkeerd (captcha/bot-check), J 'Marked as bot' -> per mail in batch 3. Telefoon in formulieren mag 0612345678 (Daimy).
 - Stand: batch 1 (13 mails) verzonden 20:57-21:02, antwoorden komen binnen op sanne.vermeulen84@proton.me (login in memory credentials). Vergelijkingssites geschrapt. Volgende: lokaal.csv (top 3 per stad) mailen met regio-adres; daarna antwoorden verzamelen in offertes.csv en vergelijken met Sonty-prijs.
 - Oud (20:20):

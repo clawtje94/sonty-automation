@@ -1,45 +1,58 @@
 code,domein,datum_aanvraag,kanaal,spec,status,prijs_knikarm,prijs_screens,montage_inbegrepen,notities
 A,zonwering-fabriek.nl,2026-09-09,configurator,"ritsscreen 237x228/176x214 + rolluik 204x236/143x197, antraciet RAL7016",configurator-prijs,,990,nee (DIY-site zonder montageoptie),"screen_bedraad=990; screen_solar=928; rolluik_bedraad=729; rolluik_solar=672 (Somfy IO motor; rolluik exact antraciet RAL7016 leverbaar, screen-doek alleen in grijs 108108 beschikbaar (geen antraciet doekkleur in assortiment, dichtstbijzijnde grijstint gebruikt); vrije mm-invoer, geen afronding nodig; 3 jr garantie, levertijd 5-8 wkn, prijzen excl. montage)"
 B,zonweringbestellen.nl,2026-09-09,configurator,"ZIP-screen 237x228 (ZB TOP ZIP 95) + rolluik ZB.41 204x236/143x197, antraciet RAL7016",configurator-prijs,,707,nee (DIY-webshop zonder montageoptie),"screen_bedraad=707 (Somfy Sunilus IO motor, doek 3030 Charcoal want geen exacte RAL7016 doekstof; kast Antraciet RAL7016 exact); screen_solar=niet beschikbaar (screens alleen bedrade Somfy-motoren, geen solar-motorkeuze aangetroffen bij ZIP 75/ZIP 95); rolluik_bedraad=571,95 (Somfy Oximo IO motor, lamel 13 antraciet RAL7016 exact); rolluik_solar=644,95 (Somfy RS100 IO SOLAR motor, zelfde antraciet kleur); vrije mm-invoer geen afronding nodig; prijzen excl. montage"
-E,zonnerij.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@zonnerij.nl; adres Wassenaar"
-H,zonweringstunter.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@zonweringstunter.nl; adres Wassenaar"
-I,screen-discount.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@jvszonwering.nl; adres Wassenaar"
-K,senft.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@senft.nl; adres Wassenaar"
-L,degalux.com,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar verkoop@degalux.com; adres Wassenaar"
-N,palszonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@palszonwering.nl; adres Wassenaar"
-Q,megazonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@megazonwering.nl; adres Wassenaar"
-R,voorraadscherm.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@voorraadscherm.nl; adres Wassenaar"
-S,screendirect.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@screendirect.nl; adres Wassenaar"
-T,aluparts.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@aluparts.nl; adres Wassenaar"
-P,byzonbuitenzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@byzon.nl; adres Bilthoven"
-U,spiegelzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@spiegelzonwering.nl; adres Bilthoven"
-V,zandschulpzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@zandschulpzonwering.nl; adres Oosterbeek"
+E,zonnerij.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@zonnerij.nl; adres Wassenaar
+H,zonweringstunter.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@zonweringstunter.nl; adres Wassenaar
+I,screen-discount.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@jvszonwering.nl; adres Wassenaar
+K,senft.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@senft.nl; adres Wassenaar
+L,degalux.com,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar verkoop@degalux.com; adres Wassenaar
+N,palszonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@palszonwering.nl; adres Wassenaar
+Q,megazonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@megazonwering.nl; adres Wassenaar
+R,voorraadscherm.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@voorraadscherm.nl; adres Wassenaar
+S,screendirect.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@screendirect.nl; adres Wassenaar
+T,aluparts.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@aluparts.nl; adres Wassenaar
+P,byzonbuitenzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@byzon.nl; adres Bilthoven
+U,spiegelzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@spiegelzonwering.nl; adres Bilthoven
+V,zandschulpzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@zandschulpzonwering.nl; adres Oosterbeek
 C,solanowonen.nl,2026-09-09,configurator,"Ritsscreen comfort 237x228/176x214 + Rolluik SR-43 204x236/143x197, antraciet RAL7016",configurator-prijs,,982.35,ja (montageservice optioneel bijbestelbaar; getoonde configuratorprijs is excl. montage),"screen_bedraad=982,35 (Somfy Sunilus io motor, kastkleur Antracietgrijs exact RAL7016, doekkleur geen exacte antraciet in Sergé 3% collectie beschikbaar dus Grijs-zwart gebruikt); screen_solar=1033,50 (Somfy Altea Solar io motor, 176x214 binnen max 350x300); rolluik_bedraad=670,35 (Somfy Oximo io motor, lamel+kast Antracietgrijs exact RAL7016); rolluik_solar=864,65 (Somfy RS100 Solar io motor, zelfde kleur); vrije cm-invoer geen afronding nodig; 5 jr garantie, levertijd 3-4 wkn (screen) / 5-6 wkn (rolluik), prijzen incl. BTW, 30% actiekorting al verrekend, montageservice apart te selecteren"
-L01,dekroonzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar contact@dekroonzonwering.nl; adres Bilthoven"
-L02,bijtjeszonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@bijtjeszonwering.nl; adres Bilthoven"
-L03,tonstassenzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@tonstassenzonwering.nl; adres Rhoon"
-L04,inhuisplaza.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@inhuisplaza.nl; adres Rhoon"
-L05,intrasolzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@intrasolzonwering.nl; adres Rhoon"
-L06,openmaatwerk.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@openmaatwerk.nl; adres Rhoon"
-L07,bastasol.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@bastasol-forma.nl; adres Rhoon"
-L08,zwamon.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,FOUT,,,onbekend,"naar info@zwamon.nl; adres Rhoon"
-L09,firmavanrijn.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@firmavanrijn.nl; adres Wassenaar"
-L10,archipelzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,FOUT,,,onbekend,"naar info@archipelzonwering.nl; adres Wassenaar"
-L11,vanzantenzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@vanzantenzonwering.nl; adres Wassenaar"
-L12,suntec-zonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@suntec-zonwering.nl; adres Wassenaar"
-L13,oudshoornenvanegmond.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@oudshoornenvanegmond.nl; adres Wassenaar"
-L14,gemro.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,FOUT,,,onbekend,"naar info@gemro.nl; adres Wassenaar"
-L15,geerszonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@geerszonwering.nl; adres Wassenaar"
+L01,dekroonzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar contact@dekroonzonwering.nl; adres Bilthoven
+L02,bijtjeszonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@bijtjeszonwering.nl; adres Bilthoven
+L03,tonstassenzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@tonstassenzonwering.nl; adres Rhoon
+L04,inhuisplaza.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@inhuisplaza.nl; adres Rhoon
+L05,intrasolzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@intrasolzonwering.nl; adres Rhoon
+L06,openmaatwerk.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@openmaatwerk.nl; adres Rhoon
+L07,bastasol.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@bastasol-forma.nl; adres Rhoon
+L08,zwamon.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@zwamon.nl; adres Rhoon (in Sent-map bevestigd)
+L09,firmavanrijn.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@firmavanrijn.nl; adres Wassenaar
+L10,archipelzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@archipelzonwering.nl; adres Wassenaar (in Sent-map bevestigd)
+L11,vanzantenzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@vanzantenzonwering.nl; adres Wassenaar
+L12,suntec-zonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@suntec-zonwering.nl; adres Wassenaar
+L13,oudshoornenvanegmond.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@oudshoornenvanegmond.nl; adres Wassenaar
+L15,geerszonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@geerszonwering.nl; adres Wassenaar
 G,zonwering-online.com,2026-09-09,formulier,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"contactformulier, bevestiging: Bedankt voor je bericht (screenshot form-G-bevestiging.png)"
-J,creon-rolluiken.nl,2026-09-09,formulier,4 producten,overgeslagen,,,onbekend,"formulier: Marked as bot; alsnog per mail naar support@creon-online.eu (batch 3)"
-L16,stuyfzand.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@stuyfzand.nl; adres Wassenaar"
-L17,zonweringsbedrijfzoetermeer.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar zonweringsbedrijfzoetermeer@gmail.com; adres Wassenaar"
-L18,toldo.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@toldo.nl; adres Wassenaar"
-L19,arzon.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@arzon.nl; adres Wassenaar"
+J,creon-rolluiken.nl,2026-09-09,formulier,4 producten,overgeslagen,,,onbekend,formulier: Marked as bot; alsnog per mail naar support@creon-online.eu (batch 3)
+L16,stuyfzand.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@stuyfzand.nl; adres Wassenaar
+L17,zonweringsbedrijfzoetermeer.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar zonweringsbedrijfzoetermeer@gmail.com; adres Wassenaar
+L18,toldo.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@toldo.nl; adres Wassenaar
+L19,arzon.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@arzon.nl; adres Wassenaar
 F,zonenscherm.nl,2026-09-09,formulier,4 producten,overgeslagen,,,onbekend,"offerteformulier heeft Cloudflare-captcha (niet omzeild), geen mailadres bekend"
-L20,sungo-zonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,FOUT,,,onbekend,"naar info@sungo-zonwering.nl; adres Wassenaar"
+L20,sungo-zonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@sungo-zonwering.nl; adres Wassenaar (in Sent-map bevestigd)
 C,solanowonen.nl,2026-09-09,formulier,4 producten,overgeslagen,,,onbekend,"contactformulier: Cloudflare bot-check bij verzenden (niet omzeild), geen mailadres bekend"
-L21,venstercenter.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@venstercenter.nl; adres Rhoon"
-L22,schaduwrijk.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@schaduwrijk.nl; adres Rhoon"
+L21,venstercenter.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@venstercenter.nl; adres Rhoon
+L22,schaduwrijk.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@schaduwrijk.nl; adres Rhoon
 B,zonweringbestellen.nl,2026-09-09,formulier,4 producten,overgeslagen,,,onbekend,"contactformulier met captcha, verzendknop niet automatisch aan te sturen; geen mailadres bekend"
-L23,vangeetzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,"naar info@vangeetzonwering.nl; adres Bilthoven"
+L23,vangeetzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@vangeetzonwering.nl; adres Bilthoven
+L24,ruiterzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@ruiterbarneveld.nl; adres Bilthoven
+L25,suncircle-nieuwegein.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@suncircle-nieuwegein.nl; adres Bilthoven
+L26,hansvanbaaren.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@hansvanbaaren.nl; adres Bilthoven (in Sent-map bevestigd)
+L27,zonweringnieuwegein.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@zonweringnieuwegein.nl; adres Bilthoven (in Sent-map bevestigd)
+L28,sundesign.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@sundesign.nl; adres Wassenaar (in Sent-map bevestigd)
+L29,factor50zonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@factor50zonwering.nl; adres Wassenaar
+L30,aanhuiszonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@aanhuiszonwering.nl; adres Rhoon
+L31,ansolzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@ansolzonwering.nl; adres Rhoon
+L32,loman-markiezen.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@loman-markiezen.nl; adres Rhoon (in Sent-map bevestigd)
+L33,techhandel.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar info@techhandel.nl; adres Rhoon
+L34,vlaardingen-zonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar raymond@zw.nl; adres Rhoon
+L35,duifhuijsenzonwering.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar planning@duifhuijsenzonwering.nl; adres Rhoon
+J,creon-rolluiken.nl,2026-09-09,mail,4 producten + pergola/knikarm-vraag,verzonden,,,onbekend,naar support@creon-online.eu; adres Wassenaar
+D,rolluiken33.nl,2026-09-09,configurator,"Somfy windvaste screen 237x228/176x214 + Alutech(Solar)Somfy rolluik 204x236/143x197, antraciet RAL7016 beoogd",configurator-prijs,,1044.47,nee (montage niet als optie gezien; DIY-achtige webshop),"screen_bedraad=1044,47 (Somfy IO motor+afstandsbediening+montage 'op de dag' meegenomen); screen_solar=991 (alleen afmeting toegepast, motor is vast solar); rolluik_bedraad=695,90 (Somfy Altus IO motor+afstandsbediening+montage 'op de dag'); rolluik_solar=686 (Somfy RS100 IO solar motor, alleen afmeting+motor); LET OP: dit is een zeer diepe multi-stap configurator (tot 7 hoofdstappen + tot 7 substappen bediening); de laatste stappen (omkastingvorm/RAL-kleur/doektype/hoeklijn) konden niet betrouwbaar automatisch doorlopen worden - de 'volgende stap'-knop na montagepositie reageerde niet consistent in headless technise, dus antraciet RAL7016 kastkleur kon NIET bevestigd worden als toegepast; prijzen zijn dus ondergrens-schattingen excl. eventuele kleur/doek-toeslag; 5 jr garantie motor, levertijd ca 4 wkn"

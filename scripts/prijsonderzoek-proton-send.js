@@ -26,7 +26,9 @@ setTimeout(()=>{log('HARD TIMEOUT');process.exit(2)},4*60*1000);
   await fr.locator('body').click({position:{x:20,y:5}});
   await page.keyboard.press('Control+Home');
   const lines=body.split('\n');
-  for(let i=0;i<lines.length;i++){ if(!lines[i]) continue; await page.keyboard.type(lines[i]); await page.keyboard.press('Enter'); if(lines[i+1]==='') { await page.keyboard.press('Enter'); } }
+  // Lijstregels ("1) ", "- "): de editor maakt zelf een lijst na de eerste regel, dus markering alleen op de eerste regel typen
+  const isList=l=>/^(\d+[\)\.]|-)\s/.test(l.replace(/\u00a0/g,' '));
+  for(let i=0;i<lines.length;i++){ if(!lines[i]) continue; let l=lines[i].replace(/\u00a0/g,' '); if(isList(l) && i>0 && isList(lines[i-1]||'')) l=l.replace(/^(\d+[\)\.]|-)\s/,''); await page.keyboard.type(l); await page.keyboard.press('Enter'); if(lines[i+1]==='') { await page.keyboard.press('Enter'); if(isList(l)) await page.keyboard.press('Enter'); } }
   await page.waitForTimeout(800);
   const txt=await fr.locator('body').innerText();
   const stamp=new Date().toISOString().replace(/[:.]/g,'-').slice(0,19);

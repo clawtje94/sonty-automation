@@ -439,7 +439,11 @@ async function main() {
         const afgehandeldSleutel = 'afgehandeld:' + sleutel;
         if (statusPer[token] === 'open' && !gemeld[afgehandeldSleutel] && tekst) {
           gemeld[afgehandeldSleutel] = new Date().toISOString();
-          if (sunnyTijden && require('./lib/sunny-start.js').sunnyLeeft()) { delete gemeld[afgehandeldSleutel]; console.log(`  ${info.naam}: Sunny noemde zelf tijden en draait — Sunny handelt het af`); continue; }
+          // EINDIG (10-09, Saskia Badloe): Sunny zei 25 rondes lang "genoteerd" zonder te boeken en deze route liet
+          // het onbeperkt aan Sunny. Zelfde 20-minutengrens als de Sunny-plant-route hieronder: daarna hier afhandelen.
+          const ouderdomMinS = (Date.now() - wanneer) / 60000;
+          if (sunnyTijden && require('./lib/sunny-start.js').sunnyLeeft() && ouderdomMinS < 20) { delete gemeld[afgehandeldSleutel]; console.log(`  ${info.naam}: Sunny noemde zelf tijden en draait — Sunny handelt het af (${Math.round(ouderdomMinS)} min)`); continue; }
+          if (sunnyTijden) console.log(`  ${info.naam}: Sunny noemde zelf tijden maar liet het ${Math.round(ouderdomMinS)} min liggen — deze route handelt het af`);
           try {
             const { leesReactie } = require('./lib/planning-antwoord.js');
             const rA = await fetch(`https://sonty-website.vercel.app/api/inmeet-aanbod/${token}`, { headers: { 'x-meet-code': MEET_CODE } });

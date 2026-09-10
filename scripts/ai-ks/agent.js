@@ -6,6 +6,7 @@ const CFG = require('./config.js');
 const { buildSystemPrompt } = require('./system-prompt.js');
 const { TOOL_DEFS, runTool } = require('./tools.js');
 const offertePoort = require('../lib/offerte-poort.js');
+const inmeetPoort = require('../lib/inmeet-bevestig-poort.js');
 
 const apiKey = process.env.ANTHROPIC_API_KEY ||
   fs.readFileSync(path.join(__dirname, '..', '.anthropic-api-key.txt'), 'utf8').trim();
@@ -116,6 +117,7 @@ async function beantwoord(gesprek) {
   let usage = { input_tokens: 0, output_tokens: 0 };
   let qaHerkansing = false;
   let offerteHerkansing = false; // offerte-poort (05-09): max 1 herkansing
+  let inmeetHerkansing = false; // inmeet-bevestig-poort (10-09): max 1 herkansing
 
   for (let iter = 0; iter < 9; iter++) {
     const response = await client.messages.create({
@@ -188,6 +190,33 @@ async function beantwoord(gesprek) {
           antwoord: 'Ik werk je offerte nu uit, zodat je alles zwart op wit hebt in plaats van alleen een bedrag in een mail. Je ontvangt hem zo snel mogelijk per mail.',
           acties: ctx.acties, toolCalls, usage, qa: 'offerte-poort: ' + poort.reden, offertePoort: poort, offerteGemaakt: !!ctx.offerteGemaakt, offerteBekend: !!ctx.offerteBekend,
         };
+      }
+    }
+
+    // INMEET-BEVESTIG-POORT (Daimy 10-09, Saskia Badloe 979446080): "staat genoteerd/vast" over een
+    // inmeetmoment mag alleen met een echte boeking (deze beurt via inmeet_boeken, of al geboekt op dat
+    // moment). Eén herkansing (boek het, of zeg eerlijk dat het nog niet vaststaat), daarna eerlijk
+    // wachtbericht + overdracht. Nooit een valse bevestiging, nooit stilte.
+    if (tekst) {
+      const contextI = (gesprek.berichten || []).map((b) => String(b.tekst || '')).join(' ');
+      let poortI = inmeetPoort.beoordeel({ tekst, context: contextI, inmeetGeboektDezeBeurt: !!ctx.inmeetGeboektDezeBeurt, bestaandeBoeking: null });
+      if (poortI.blok) { // pas dan (zeldzaam) de administratie + agenda raadplegen: kantoor boekt ook zelf
+        const bestaande = await inmeetPoort.vindBoekingVan({ naam: gesprek.klant?.naam, telefoon: gesprek.klant?.phone, email: gesprek.klant?.email, rond: inmeetPoort.momentDatum(tekst) });
+        poortI = inmeetPoort.beoordeel({ tekst, context: contextI, inmeetGeboektDezeBeurt: !!ctx.inmeetGeboektDezeBeurt, bestaandeBoeking: bestaande });
+      }
+      if (poortI.blok) {
+        console.log('  inmeet-bevestig-poort: ' + poortI.reden);
+        logQaAfkeuring(gesprek, tekst, 'INMEET-POORT: ' + poortI.reden, inmeetHerkansing);
+        if (!inmeetHerkansing) {
+          inmeetHerkansing = true;
+          messages.push({ role: 'assistant', content: response.content });
+          messages.push({ role: 'user', content: inmeetPoort.herkansingsTekst(poortI) });
+          continue;
+        }
+        ctx.acties.push({ type: 'escalatie', reden: 'Inmeet-bevestig-poort: ' + poortI.reden + ' (tweemaal). Klant kreeg een eerlijk wachtbericht; graag de gekozen tijd zelf boeken of controleren.', stil: true, urgentie: 'normaal' });
+        const laatsteKlant = (ctx.klantTeksten || []).slice(-1)[0] || '';
+        const engels = /\b(thanks|thank you|please|appointment|that works|sounds good|great|yes)\b/i.test(laatsteKlant) && !/\b(dank|graag|goed|prima|afspraak|ja|hoor)\b/i.test(laatsteKlant);
+        return { antwoord: inmeetPoort.vangnetTekst(engels ? 'en' : 'nl'), acties: ctx.acties, toolCalls, usage, qa: 'inmeet-poort: ' + poortI.reden, offerteGemaakt: !!ctx.offerteGemaakt, offerteBekend: !!ctx.offerteBekend };
       }
     }
 

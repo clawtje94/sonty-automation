@@ -563,6 +563,7 @@ function raaktAnderPrijsboek(ctx, input) {
         }),
       });
       if (!rB.ok) throw new Error('wachtrij HTTP ' + rB.status);
+      ctx.inmeetGeboektDezeBeurt = true; // inmeet-bevestig-poort (10-09): nu mag "staat vast"
       return JSON.stringify({
         status: 'IN UITVOERING',
         opmerking: 'De boeking loopt nu via de volledige keten (dubbelboek-controle, agenda, Planado). Zeg tegen de klant: "ik zet hem nu voor je vast, je krijgt zo vanzelf de definitieve bevestiging". Zeg NIET dat hij al definitief staat. Blijkt de tijd net vergeven, dan krijgt de klant automatisch bericht met nieuwe opties.',

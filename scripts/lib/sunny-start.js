@@ -317,6 +317,24 @@ function eigenaarVanReactie({ bron, geclaimd = false, leeft = sunnyLeeft(), plan
   return 'reply-route';
 }
 
+/** Staat er al een antwoord van ons (Sunny, kantoor of monitor; geen interne notitie) ná het
+ *  klantbericht? Puur; rows = Trengo-berichten, wanneer = tijd klantbericht (ms), isIn = inbound-test. */
+function onsAntwoordNa(rows, wanneer, isIn) {
+  return (rows || []).some((x) => !isIn(x) && !x.internal_note && String(x.type || '').toUpperCase() !== 'NOTE' &&
+    Date.parse(String(x.created_at || '').replace(' ', 'T')) > wanneer);
+}
+
+/** Is een klantreactie al afgehandeld, zodat de reply-route NIETS meer doet?
+ *  - ander moment / vraag / klacht: ja zodra er al een antwoord van ons na het klantbericht staat
+ *    (Jeffrey Zweep 10-09: Sunny gaf 3 nieuwe tijden, de monitor stuurde 30 min later alsnog
+ *    "ik zoek een ander moment" + een vierde voorstel).
+ *  - akkoord: ALLEEN als er echt een boeking staat of in de wachtrij zit. Een antwoord zonder
+ *    boeking ("staat genoteerd", Saskia Badloe 09-09) is juist het gat dat de reply-route dicht. */
+function reactieAlAfgehandeld({ intent = '', alBeantwoord = false, alGeboekt = false } = {}) {
+  if (intent === 'akkoord') return !!alGeboekt;
+  return !!alBeantwoord;
+}
+
 /** Proefstand: vlagbestand met inhoud "alleen:<naam>" beperkt Sunny tot één klant (eerst 1, dan de rest). */
 function alleenNaam() {
   try {
@@ -338,4 +356,4 @@ function registreerActiefTicket(ticketId, klant) {
   }
 }
 
-module.exports = { wachtmeldingReactieBesluit, wachtmeldingBesluit, wachtmeldingTekst, navraagBesluit, navraagTekst, aan, alleenNaam, registreerActiefTicket, noteerSunnyVerstuurd, sunnyStuurdeNet, binnenVenster, volgendeVensterTekst, magStarten, laatsteVoorstelOp, aantalEerdereVoorstellen, voorstelTekst, voorstelMailHtml, slotZin, schrijfHeartbeat, sunnyLeeft, eigenaarVanReactie, VLAG, HEARTBEAT, VENSTER };
+module.exports = { wachtmeldingReactieBesluit, wachtmeldingBesluit, wachtmeldingTekst, navraagBesluit, navraagTekst, aan, alleenNaam, registreerActiefTicket, noteerSunnyVerstuurd, sunnyStuurdeNet, binnenVenster, volgendeVensterTekst, magStarten, laatsteVoorstelOp, aantalEerdereVoorstellen, voorstelTekst, voorstelMailHtml, slotZin, schrijfHeartbeat, sunnyLeeft, eigenaarVanReactie, onsAntwoordNa, reactieAlAfgehandeld, VLAG, HEARTBEAT, VENSTER };

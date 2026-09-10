@@ -258,6 +258,37 @@ function voerUitF(s) {
 }
 function vergelijkF(w, e) { return w.actie === e.actie && e.tekstOk; }
 
+// ── G. al afgehandeld? (Jeffrey Zweep 10-09 / Saskia Badloe 09-09) ──
+// onsAntwoordNa + reactieAlAfgehandeld: ander moment/vraag/klacht = klaar zodra wij al antwoordden;
+// akkoord = pas klaar met een echte boeking (antwoord zonder boeking telt NIET).
+const dimG = [
+  { naam: 'intent', waarden: [{ label: 'akkoord' }, { label: 'ander-moment' }, { label: 'vraag' }, { label: 'klacht' }] },
+  { naam: 'berichten', waarden: [
+    // Trengo-tijden zijn "YYYY-MM-DD HH:mm:ss" zonder zone; de cron parst ze als lokale tijd, het lab dus ook.
+    { label: 'alleen-klant', rows: (st) => [{ type: 'INBOUND', created_at: st(0) }] },
+    { label: 'ons-voor-klant', rows: (st) => [{ type: 'OUTBOUND', created_at: st(-10) }, { type: 'INBOUND', created_at: st(0) }] },
+    { label: 'ons-na-klant', rows: (st) => [{ type: 'INBOUND', created_at: st(0) }, { type: 'OUTBOUND', created_at: st(5) }] },
+    { label: 'notitie-na-klant', rows: (st) => [{ type: 'INBOUND', created_at: st(0) }, { type: 'NOTE', internal_note: true, created_at: st(5) }] },
+    { label: 'kantoor-na-klant', rows: (st) => [{ type: 'INBOUND', created_at: st(0) }, { type: 'OUTBOUND', user_id: 1, created_at: st(15) }] },
+  ] },
+  { naam: 'geboekt', waarden: [{ label: 'ja', v: true }, { label: 'nee', v: false }] },
+];
+function orakelG(s) {
+  const beantwoord = /-na-klant$/.test(s.berichten.label) && s.berichten.label !== 'notitie-na-klant';
+  const klaar = s.intent.label === 'akkoord' ? s.geboekt.v : beantwoord;
+  return { wil: klaar ? 'niets-doen' : 'afhandelen', klaar };
+}
+function voerUitG(s) {
+  const st = (min) => { const d = new Date(2026, 8, 10, 15, min, 0); return '2026-09-10 ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0') + ':00'; };
+  const t0 = Date.parse(st(0).replace(' ', 'T')); // zelfde parse als scripts/cron-aanbod-replies.js
+  const rows = s.berichten.rows(st);
+  const isIn = (x) => String(x.type || '').toUpperCase() === 'INBOUND';
+  const alBeantwoord = S.onsAntwoordNa(rows, t0, isIn);
+  const klaar = S.reactieAlAfgehandeld({ intent: s.intent.label, alBeantwoord, alGeboekt: s.geboekt.v });
+  return { uitkomst: klaar ? 'niets-doen' : 'afhandelen', klaar, melding: false };
+}
+function vergelijkG(w, e) { return w.klaar === e.klaar; }
+
 // ── samengesteld onderdeel ───────────────────────────────────────────────────
 function scenarios() {
   return [
@@ -267,10 +298,11 @@ function scenarios() {
     ...combinaties(dimD).map((s) => ({ ...s, _laag: 'D', _label: 'D ' + s._label })),
     ...combinaties(dimE).map((s) => ({ ...s, _laag: 'E', _label: 'E ' + s._label })),
     ...combinaties(dimF).map((s) => ({ ...s, _laag: 'F', _label: 'F ' + s._label })),
+    ...combinaties(dimG).map((s) => ({ ...s, _laag: 'G', _label: 'G ' + s._label })),
   ].map((s, i) => ({ ...s, _nr: i + 1 }));
 }
-function orakel(s) { return s._laag === 'A' ? orakelA(s) : s._laag === 'B' ? orakelB(s) : s._laag === 'C' ? orakelC(s) : s._laag === 'D' ? orakelD(s) : s._laag === 'E' ? orakelE(s) : orakelF(s); }
-async function voerUit(s) { return s._laag === 'A' ? voerUitA(s) : s._laag === 'B' ? voerUitB(s) : s._laag === 'C' ? voerUitC(s) : s._laag === 'D' ? voerUitD(s) : s._laag === 'E' ? voerUitE(s) : voerUitF(s); }
-function vergelijk(w, e, s) { return s._laag === 'A' ? vergelijkA(w, e, s) : s._laag === 'B' ? vergelijkB(w, e) : s._laag === 'C' ? vergelijkC(w, e) : s._laag === 'D' ? vergelijkD(w, e) : s._laag === 'E' ? vergelijkE(w, e) : vergelijkF(w, e); }
+function orakel(s) { return s._laag === 'A' ? orakelA(s) : s._laag === 'B' ? orakelB(s) : s._laag === 'C' ? orakelC(s) : s._laag === 'D' ? orakelD(s) : s._laag === 'E' ? orakelE(s) : s._laag === 'G' ? orakelG(s) : orakelF(s); }
+async function voerUit(s) { return s._laag === 'A' ? voerUitA(s) : s._laag === 'B' ? voerUitB(s) : s._laag === 'C' ? voerUitC(s) : s._laag === 'D' ? voerUitD(s) : s._laag === 'E' ? voerUitE(s) : s._laag === 'G' ? voerUitG(s) : voerUitF(s); }
+function vergelijk(w, e, s) { return s._laag === 'A' ? vergelijkA(w, e, s) : s._laag === 'B' ? vergelijkB(w, e) : s._laag === 'C' ? vergelijkC(w, e) : s._laag === 'D' ? vergelijkD(w, e) : s._laag === 'E' ? vergelijkE(w, e) : s._laag === 'G' ? vergelijkG(w, e) : vergelijkF(w, e); }
 
 module.exports = { naam: 'sunny-start (eerste voorstel door Sunny: poort, tekst, eigenaar, verzendpoort)', scenarios, orakel, voerUit, vergelijk };

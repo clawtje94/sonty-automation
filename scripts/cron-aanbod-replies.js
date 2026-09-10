@@ -451,6 +451,31 @@ async function main() {
             const duiding = await leesReactie(reeksTekst || tekst, aanbod?.slots || []);
             console.log(`  ${info.naam}: intent ${duiding.intent}${duiding.dagen.length ? ' (dagen ' + duiding.dagen.join(',') + ')' : ''}`);
 
+            // AL AFGEHANDELD? (Jeffrey Zweep 10-09: Sunny gaf 3 nieuwe tijden, deze route stuurde 30 min later
+            // alsnog "ik zoek een ander moment" + een vierde voorstel.) Akkoord telt pas als afgehandeld met een
+            // ECHTE boeking (Saskia Badloe 09-09: "staat genoteerd" zonder boeking is juist het gat dat deze route dicht).
+            {
+              const SSa = require('./lib/sunny-start.js');
+              const alBeantwoord = SSa.onsAntwoordNa(rows, wanneer, isIn);
+              let alGeboekt = false;
+              if (duiding.intent === 'akkoord') {
+                try { alGeboekt = !!require('./lib/inmeet-mutatie.js').vindBoeking({ telefoon: info.telefoon, email: info.email, naam: info.naam }); } catch { alGeboekt = false; }
+                const rpIdA = rpItemPer[token] || aanbod?.lead?.rpItemId || info.rpItemId;
+                if (!alGeboekt && rpIdA) {
+                  try {
+                    const rq = await fetch('https://sonty-website.vercel.app/api/inmeet-mutatie?status=open', { headers: { 'x-meet-code': MEET_CODE } });
+                    const q = rq.ok ? await rq.json() : null;
+                    alGeboekt = !!(q?.mutaties || []).find((m) => m.type === 'boek' && String(m.rpItemId) === String(rpIdA));
+                  } catch { /* onbekend = niet geboekt, dan boekt deze route (dubbelboeking-poort vangt zelfde slot) */ }
+                }
+              }
+              if (SSa.reactieAlAfgehandeld({ intent: duiding.intent, alBeantwoord, alGeboekt })) {
+                console.log(`  ${info.naam}: ${duiding.intent} is al afgehandeld (${alGeboekt ? 'boeking staat of zit in de wachtrij' : 'er is al geantwoord'}) — deze route doet niets`);
+                afgehandeldDezeRun.add(ticketId);
+                continue;
+              }
+            }
+
             // SUNNY PLANT (26-08): staat de planning-knop aan, dan voert Sunny het
             // gesprek over tijden. Deze route stuurt dan geen eigen bericht en geen
             // eigen nieuw voorstel, ook niet als de duiding hier 'ander-moment' zegt.

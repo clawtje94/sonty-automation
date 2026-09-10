@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const INMETER_MAIL = { Joey: 'joey@sonty.nl', Sjoerd: 'sjoerd@sonty.nl' };
+const INMETER_MAIL = { Joey: 'joey@sonty.nl', Sjoerd: 'sjoerd@sonty.nl', Patrick: 'adviseur1@sonty.nl' }; // Patrick Fitters, eigen agenda (Daimy 10-09)
 
 function owaHeaders() {
   const token = fs.readFileSync(path.join(__dirname, '..', '.owa-token.txt'), 'utf8').trim();

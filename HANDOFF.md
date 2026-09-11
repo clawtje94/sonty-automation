@@ -19,6 +19,14 @@
 - Longlist 15 online aanbieders (data/prijsonderzoek/aanbieders.md, namen alleen daar), standaard-uitvraag in persona.md, status in offertes.csv (nog leeg).
 - Open: V1 adres Backershagenlaan 34A Wassenaar (echt huis van een ander) of eigen/neutraal adres; daarna offertes opvragen via configurators + formulieren.
 
+## 11-09: PLANADO-LICENTIES UITGEZOCHT + TANYA-ACCOUNT (Daimy: "alleen betaald voor de app? planning gratis?")
+- Bewezen in de UI (niets opgeslagen bij de test): zonder "Bewerkingsrechten" (= licentie, onder "Gebruikerslicentie gebruiken") staan
+  web-rechten vast op "alleen bekijken" (bewerken-radios disabled) en is "Mag opdrachten voltooien" disabled. Dus: plannen/bewerken op
+  web = licentie, app voltooien = licentie, gratis = alleen kijken. Banner bij vol: "Alle gebruikerslicenties zijn in gebruik".
+- Tanya Plugge tanya@sonty.nl aangemaakt (web-gebruiker, wachtwoord van Daimy, in memory credentials): opdrachten/planning/klanten
+  alleen bekijken, kaart aan, geen licentie (12/12), uuid 1f1adc2b-801b-6c30-a232-4a5629de9ef0. Wil zij plannen → 13e licentie of
+  licentie van Daimy (4 jobs/90d), Nanny (1) of Jorren (0) overzetten. WACHT OP DAIMY.
+
 ## 08-09 (middag): NIEUWE INMETER PATRICK FITTERS — INGERICHT, START MA 21-09 (Daimy 08-09 via chat)
 - Feiten: Patrick Fitters, ma-do 08:00-17:00, spreekt Engels, start+eind thuis Kerkdoel 9, 3264 AG Nieuw-Beijerland. M365 adviseur1@sonty.nl
   (startwachtwoord was verlopen → eerste login gedaan, nieuw wachtwoord in memory reference_sonty_credentials; GEEN MFA gevraagd).
@@ -4093,3 +4101,21 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
 
 ## 2026-09-09 Offerte-zoek "Netwerkfout" opgelost
 - Blob-zoekindex was niet vers -> zoek op offertenummer viel terug op 20-93s RP-scan -> timeout -> "Netwerkfout". Index herbouwd (zoek ~1,5s) + Mac-vangnet nl.sonty.offerte-index-refresh (elke 30 min, scripts/cron-offerte-index-refresh.js).
+
+## 2026-09-10 Saskia Badloe (ticket 979446080)
+- Sunny zei 2x "genoteerd" zonder inmeet_boeken; reply-monitor liet akkoord onbeperkt aan Sunny (tak "Sunny noemde zelf tijden"); 24u-reminder + ronde 2 volgden, klacht.
+- Handmatig geboekt via inmeet-mutatie type boek (id e5e2fdea1a75b831): Patrick ma 21 sep 13:40, Gripp 6636, bevestiging wa+mail 12:12Z.
+- OPEN: structurele fix (poort op "genoteerd" zonder boeking in ai-ks + 20-min grens in cron-aanbod-replies.js regel 442), wacht op go Daimy.
+
+## 2026-09-10 Patrick Fitters eigen agenda (adviseur1@sonty.nl)
+- Oorzaak: INMETER_MAIL in scripts/lib/outlook-opties.js kende Patrick niet, dus hij stond niet als genodigde op zijn inmeetafspraken; eigen agenda leeg.
+- Fix: Patrick toegevoegd aan INMETER_MAIL (commit 56f05fb). 5 bestaande afspraken (21-09 anoek, 21-09 Badloe, 23-09 Kroon, 23-09 Tutupoly, 28-09 Beuker) via PATCH als genodigde toegevoegd; alle 5 staan Accepted in zijn agenda.
+- Bewust niet: Bookings-STAFF (Patrick heeft geen Bookings-staff-id, dus kale-afspraak + planning-melding per boeking); Planado-teams zijn leeg dus ATTENDEE_TO_TEAM niet nodig.
+
+## 2026-09-10 Sunny structurele fix (Saskia Badloe)
+- scripts/lib/inmeet-bevestig-poort.js + agent.js: "staat genoteerd/vast" over een inmeetmoment alleen met boeking (deze beurt via inmeet_boeken, of bestaand in administratie/Sonty Montage-agenda); herkansing, dan eerlijk wachtbericht + Mens nodig. Lab 130, regressie 30 dagen (1857 antwoorden, 9 bevestigingen).
+- cron-aanbod-replies.js: "Sunny handelt het af"-tak nu max 20 min; daarna al-afgehandeld-check (sunny-start.js onsAntwoordNa/reactieAlAfgehandeld): ander moment/vraag klaar zodra wij antwoordden, akkoord pas met echte boeking. Lab sunny-start laag G, 5688 scenario s.
+- Incident door tussenversie: Jeffrey Zweep kreeg 18:07 dubbel "ik zoek een ander moment"; 4e voorstel (mutatie 40648ac094fe32f0) ingetrokken, klant 18:2x gecorrigeerd met Sunny s 3 tijden.
+- Sunny-daemon draait via launchd nl.sonty.sonny (herstart = kill pid, launchd start hem opnieuw; NOOIT nohup ernaast).
+- Trengo rate limit: inventarisatie open tickets concurreert met de daemon (429 bij Sunny). Open-tickets-opruiming (Daimy 10-09) NOG NIET gedaan.
+- Commits 56f05fb, e6a3fbf, +1.

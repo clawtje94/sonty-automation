@@ -11,7 +11,7 @@
 - 10-09: aanbod-agent gestart voor Rotterdam-Zuid/Oost 175-250 m² → docs/winkels-4/03-aanbod-rotterdam-zuid-oost.md (links zelf verifiëren vóór doorsturen).
 
 ## 11-09: PRIJSONDERZOEK — 34 mails gebounced (Proton rate limit), herstel loopt 5/uur; 9 antwoorden, Sonty duurder dan alle 4 concurrenten met prijs
-- Herstel: scripts/prijsonderzoek-mail-langzaam.sh draait (log data/prijsonderzoek/mail-herstel.log); daarna bounces opnieuw checken. Overzicht antwoorden + Sonty-vergelijking: data/prijsonderzoek/antwoorden/overzicht.md. Degalux-prijzen zitten in afbeeldingen (nog uitlezen). Vervolg: maandag inbox opnieuw uitlezen (scripts/prijsonderzoek-lees-gericht.js), herinnering na 4-5 werkdagen.
+- Herstel: scripts/prijsonderzoek-mail-rustig.sh draait (1 mail per 8-15 min, 9-18u; log data/prijsonderzoek/mail-rustig.log; lijst mail-batch-herstel-rest.txt). Bounce-check 12:50: nog steeds 34 (geen nieuwe), maar bounces kwamen vorige keer pas ~8 uur later; VOLGENDE SESSIE eerst bounce-dom.js (scratch, patroon in memory) opnieuw draaien en Sent vergelijken. Overzicht antwoorden + Sonty-vergelijking: data/prijsonderzoek/antwoorden/overzicht.md. Degalux-prijzen zitten in afbeeldingen (nog uitlezen). Vervolg: maandag inbox opnieuw uitlezen (scripts/prijsonderzoek-lees-gericht.js), herinnering na 4-5 werkdagen.
 
 ## 09-09 21:45: PRIJSONDERZOEK MARKT — 50 echte offerteaanvragen verstuurd (49 mail + 1 formulier), Sent-map gecontroleerd (Daimy 09-09 via chat)
 - KLAAR: 49 mails (13 webshops + 35 lokale verkopers + 1 support-adres) allemaal teruggevonden in Proton Verzonden; 1 formulier bevestigd; 4 formulieren geblokkeerd door captcha/botcheck. Log: data/prijsonderzoek/offertes.csv. Volgende: antwoorden in Proton lezen, prijzen invullen, vergelijken met Sonty-prijs.

@@ -1,17 +1,17 @@
 # Geheugen Isa
 
 ## Lopende zaken
-- Opdrachtqueue-bug BEVESTIGD NOG NIET GEFIXT (9-9): itf2311c (Mats' fix-opdracht van 8-9) staat zelf nog op status "nieuw" in postvak.json, 24u+ later. ammp6o3u/nwik8bno (John van Krimpen) ook nog "nieuw". Conclusie: niet meer wachten op "claude"-queue voor urgente zaken, rechtstreeks naar eigen team (Sunny/Yara) delegeren.
-- John van Krimpen (Trengo #976931222, tel +31614890704, mail j.krimpen82@kpnmail.nl, EUR ~3098 knikarmscherm): 12 dagen stil. 9-9 BESLIST ZELF: rechtstreeks naar Sunny gedelegeerd (ms44vmsw), buiten kapotte queue om. Morgen checken of afgerond; zo niet, dit is dan een echt escalatiegeval (mens moet bellen/mailen).
-- WhatsApp-kanaal (wa-luisteraar) plat sinds 8-9 06:06 UTC door 401-crash-loop, nog steeds plat 9-9 ochtend (~24u). Oorzaak: WA-sessie losgekoppeld, fysieke QR-herkoppeling nodig op gekoppeld toestel, Mats/Techniek kan dit niet zelf (geen fysieke toegang). Al belegd bij Bram/Techniek (rm3n4x9n, b09ns4ni). Check morgen of opgelost — dit raakt First Response Time direct.
-- Escalatie-watch (bron escalatie-watch.log, 85 casussen 9-9): 6 vast >4 dagen stil, allemaal planning-wachten (Gerda De Bruin 8d, ticket 977470229 8d, Emma Haasnoot 6d, Edwin De Graaf 4d, ticket 978509942 4d, +1). Steekproef, oudere/ergere losse gevallen (zoals John) kunnen erbuiten vallen.
-- V-vraag naar Daimy (herhaald 7-9, 8-9, 9-9): vaste regel dat >7 dagen stil automatisch naar een mens gaat i.p.v. opnieuw AI-delegatie. Nu hard bewijs: zelfs de fix-opdracht voor de queue-bug zit zelf al 24u vast in dezelfde queue.
-- Reviews-API (V102): technisch af, blokkade blijft ontbrekende ~/sonty/secrets/google-places-key.txt (Daimy). Dag 9 zonder key (sinds 31-8).
-- Hans de Lamboij (#974021221 → tel +31628079780): 21+ dagen stil sinds 18-8. Alleen Daimy/Bram met telefoon lost dit op, Isa heeft geen belfunctie. Herhaald voorstel: bel deze week of laat bewust los.
-- Yara-opdracht bk1io0x9: onderzocht, correct doorgezet naar Techniek als o1gf18t6 (bouw vast reviewmoment 90min-3u na montage). Wacht op Techniek, geen actie meer nodig van Yara/mij.
-- QA-check: Sunny's dagrapport-cijfers kunnen oude logdata als "vandaag/kritiek" tonen. Blijft zo tot logging een datumfilter heeft (bugfix nwik8bno, hangt zelf vast in queue-bug).
-- Sunny's do-not-contact-lijst blijft correct (Christian Keus, Shammi Phull, Lotte Vos, Hans-uitzondering) — alleen periodiek checken.
-- Nog niet gedaan (2 dagen op rij uitgesteld): bredere steekproef van Sunny's eigen klantberichten tegen huisregels, niet alleen haar rapportage-cijfers.
+- 11-9: NIEUW ticket #977435053 (AKKOORD-klant, vraag over vrijblijvend inmeten) stond 178u/7,4d onbeantwoord — niet gesignaleerd door Sunny/Yara zelf, ik vond 'm in aan-zet-watchdog.log. Direct gedelegeerd aan Sunny (grv40y5u). Morgen checken of beantwoord.
+- John van Krimpen (EUR 3051, #976931222/977371859): stond 10-9 nog 212u stil, verdween 11-9 uit de laatste 2 aan-zet-watchdog-runs. NIET bevestigd opgelost — morgen expliciet checken (Trengo-status), niet zomaar aannemen dat het goed is.
+- WhatsApp-kanaal (wa-luisteraar): draait weer sinds avond 10-9, geen 401-crash-loop meer gezien (alleen normale 503/428 reconnects met auto-herstel). Lijkt opgelost — 1-2 dagen bevestigen voor ik het definitief afsluit.
+- Opdrachtqueue-bug: kon 11-9 niet meer verifiëren (oude opdracht-logs itf2311c/ammp6o3u/nwik8bno niet meer vindbaar, mogelijk opgeruimd). Niet aangenomen dat gefixt is — gewoon geen nieuw bewijs. Blijf alert bij volgende delegatie (grv40y5u) of die wél oppakt.
+- Escalatie-watch (bron escalatie-watch.log, 76 casussen 11-9): 7 vast >4 dagen stil, ongewijzigd t.o.v. 10-9 (Gerda De Bruin 10d, 977470229 10d, Emma Haasnoot 8d, Edwin De Graaf 6d, 978509942 6d, +2). Steekproef, blijft losse gevallen missen (zie #977435053 hierboven — dus dit blijft een blinde vlek).
+- Escalatie-breakage ticket 979406422: al 2 dagen door Sunny én Yara gemeld (1075+ min stil na overdracht naar mens), nog steeds geen oplossing. V-vraag naar Daimy herhaald.
+- Tickets-rapport daemon (sonny-rapport.log) al sinds 6-9 (5 dagen) niet geladen in launchd — geen volledige dagcijfers antwoordtijden. Blijft liggen, elke dag herhaald bij Daimy/Techniek.
+- Reviews-API (V102): blokkade blijft ontbrekende google-places-key.txt (Daimy). Nu 21+ dagen zonder key (sinds 31-8).
+- Hans de Lamboij: langlopend, alleen Daimy/Bram met telefoon lost dit op. Niet meer elke dag herhaald tenzij nieuwe status.
+- Sunny's do-not-contact-lijst blijft correct (Keus, Phull, Vos, Hans-uitzondering) — periodiek checken.
+- Nog steeds niet gedaan (4e dag op rij uitgesteld): bredere steekproef van Sunny's eigen klantberichten tegen huisregels, niet alleen haar rapportage-cijfers. Morgen echt oppakken.
 
 ## Leerpunten
 - Niet blind op de "claude"-queue vertrouwen voor urgente/lang-stil-staande zaken: als een opdracht na 24u nog "nieuw" is, direct rechtstreeks naar eigen team delegeren i.p.v. nog een keer aan claude vragen (dat stapelt alleen maar op in dezelfde kapotte rij).

@@ -2,17 +2,17 @@
 
 ## Lopende zaaken
 
-### Aanbetaling-blokkade: updates (2026-09-09)
-**STATUS (09-09):**
+### Aanbetaling-blokkade: updates (2026-09-10)
+**STATUS (10-09):**
 - Gripp 6556 (Daimy TEST GRIP): **BEVESTIGDE TEST** — geen teller.
-- Gripp 6489 (Martin Valentin): **ECHTE KLANT** — aanbetaling onbetaald sinds 29-08 (nu 11 dagen). Doorgezet naar orders@ 02-09. Wacht Daimy: vervaldatum + herinneringsschema.
+- Gripp 6489 (Martin Valentin): **ECHTE KLANT** — aanbetaling onbetaald sinds 29-08 (nu 11+ dagen). Doorgezet naar orders@ 02-09. Wacht Daimy: vervaldatum + herinneringsschema.
 - Gripp 6332 (Sjoerd van Marum): **NIEUW 08-09** — getekend maar GEEN aanbetalingsfactuur. Eigenaar (wie voert uit) TBD.
-→ **Daimy nodig (09-09)**: (1) gripp-facturen-open.json vandaag verversen (Mats); (2) 6332 eigenaar; (3) 6489 vervaldatum + herinneringsschema.
+→ **Daimy nodig (10-09)**: (1) 6332 eigenaar + wanneer aanbetaling; (2) 6489 vervaldatum + herinneringsschema; (3) werkbon-daemon prioriteit?
 
 ### Controleverloop (4 punten):
-1. **Getekend zonder aanbetalingsfactuur**: 2 testcases (6560, 6561) — geen live-afwijkingen 03-09 (bron: meetbon-doorzetten.log)
+1. **Getekend zonder aanbetalingsfactuur**: 1 live (6332) + 2 testcases (6560, 6561) — geen nieuwe sinds 03-09 behalve 6332
 2. **Aanbetaling onbetaald >7 dagen**: 2 orders (6489 Martin, 6556 test) — bedragen onbekend, vervaldatums Daimy-nodig
-3. **Factuur open >14 dagen**: **28 van 60 open** (€43.061) — bron: gripp-facturen-open.json 01-09 ✅ LIVE
+3. **Factuur open >14 dagen**: **28 van 60 open** (€43.061) — bron: gripp-facturen-open.json 01-09, ⚠️ STALE 9 DAGEN → Techniek-refresh aangevraagd (10-09)
 4. **Gemonteerd zonder factuur**: onbekend (93 werkbonnen vs 60 facturen) — werkbon-daemon stuk, exact getal TBD
 
 ### Nieuw: gripp-facturen-open.json (Mats, 01-09)
@@ -46,3 +46,5 @@
 - 2026-09-07: Wekelijkse bijscholing, vakkennis.md vernieuwd (zie hierboven); vier controlepunten geverifieerd, status ongewijzigd sinds 04-09. Werkbon-daemon nog offline.
 - 2026-09-08: Controle herhaal (meetbon-doorzetten.log 08-09 07:01). NIEUW: Gripp 6332 (Sjoerd van Marum) zonder aanbetalingsfactuur gedetecteerd. gripp-facturen-open.json nog van 01-09 (STALE 7 DAGEN). Werkbon-daemon rapport bij Techniek.
 - 2026-09-09: Logs gelezen (meetbon-doorzetten 05:01 = 0 entries), vier controlepunten geverifieerd. gripp-facturen-open.json CONFIRMED STALE (01-09 07:56, nu 8 dagen oud). Vraag aan Mats/Techniek voor vandaag-verversen. Gripp 6332 eigenaar TBD.
+- 2026-09-10: Logs gelezen (meetbon 0, gripp-invullen 5 ok, verrijken 193, tekenbonus 0). gripp-facturen-open.json nu 9 dagen stale. OPDRACHT naar Techniek: verversen vandaag. Ori-feedback toegepast: stale-dataprobleem = technische opdracht, niet V-vraag.
+- 2026-09-11: Logs gelezen (gripp-invullen gister 18:00 = 2 fouten; tekenbonus 269 opgeruimd; meetbon 4 issues; gripp-verrijken 429 rate limits). Vier controlepunten: 6332 nog steeds TBD eigenaar, 6489 Martin Valentin nu >13d onbetaald, 6560/6561 tests zonder aanbetaling, factuur >14d = 28 (stale 10 dagen). OPDRACHT: gripp-facturen-open.json vandaag verversen (01-09 is nu 10d oud).

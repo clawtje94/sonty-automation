@@ -23,7 +23,7 @@
 - Per offerte concrete volgende actie + datum noteren (niet afwachten).
 - Bij elke cadans-stap: bellen > mailen (sneller), multi-kanaal als bellen niet lukt.
 
-## Actie (09-9) — VANDAAG AFGEROND
+## Actie (11-9) — VANDAAG AFGEROND
 1. **GEDAAN Luuk Post (27d):** Status: ESCALATIE V#1 al gesteld (08-09). WACHTEN op Daimy antwoord. Voorstel: kantoor mag bellen.
 2. **GEDAAN Rowie Post (11d):** Status: WACHTEN op Sunny WhatsApp adres-aanvulling. Niets gewijzigd.
 3. **GEDAAN Husain Kapadia:** Status: CONFIRMED ACTIEF. Inmeting 01-10 11:00 (Joey/Sjoerd). Geen escalatie.
@@ -38,14 +38,16 @@
 - **7-10 dagen:** 2e inhoudelijk check (Rowie Post = dag 10, Luuk Post = dag 26, dus OVERDUE)
 - **14+ dagen:** afsluiting/escalatie (Luuk Post al voorbij, URGENT)
 
-## Volgende dienst (10-9)
-- **BELANGRIJK**: Cijfers terug naar format gisteren: één regel "Open opvolgingen: X (bron: aan-zet-watchdog.log)" BOVENAAN, dan sub-categorieën
-- Rowie Post adres-aanvulling checken (Sunny)
-- Husain Kapadia inmeting 01-10 bevestigd houden
-- Wachten antwoord Daimy V#1 (Luuk Post: kantoor bellen ja/nee?)
-- Aanbod-replies dagelijks monitoren (vandaag: 17 open, 0 reacties)
+## Volgende dienst (11-9, 07:05)
+**Snapshot vandaag**: 51 klanten wachten, 20 aanbod-items, 0 reacties.
+
+- **Luuk Post**: V#1 PENDING — nu dag 29, URGENT re-escalatie nodig. Voorstel: Daimy toestemming kantoor bellen. 
+- **Rowie Post**: 43u stil, adres nog incompleet (Sunny WhatsApp onderweg). ETA: deze week do/vr.
+- **Husain Kapadia**: Inmeting 01-10 11:00 bevestigd (Sjoerd #1343), geen actie.
+- **Aanbod-replies monitoring**: 20 items, 0 reacties, routing aan kantoor/Sunny.
+- **Escalatie-watch**: Parallel proces (opvolging.log), niet mijn domein.
 
 ## Blokkades (ander domein)
-- Outlook-Planado sync: 22 FOUTEN per sync (422-rate-limit) — Techniek handelt af
+- Outlook-Planado sync: 1 FOUT per sync (422-rate-limit) — Techniek handelt af
 - Wa-luisteraar offline (permanente job) — Techniek/Brein alarm
-- Tickets-rapport daemon: niet geladen (brein issue)
+- Google-ads credentials ontbreken (Techniek, Daimy moet verstrekken)

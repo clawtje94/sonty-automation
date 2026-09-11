@@ -1,6 +1,6 @@
 # Nanny — geheugen
 
-**Laatst bijgewerkt**: 2026-09-09 07:00 (ochtendrapport)
+**Laatst bijgewerkt**: 2026-09-11 07:00 (ochtendrapport)
 
 ## Lopende zaken
 
@@ -14,20 +14,20 @@
 
 2. **Outlook-Planado SYNC-FOUTEN**: Structureel: FOUT 422 "external_id is used by another entity". Mats gemeld 07-09, Techniek-opdr. Status 09-09 04:53: 22 FOUTEN nog aanwezig. → Patroon houdt aan; monitoren.
 
-3. **Boeking gisteren**: anoek van der wal (ma 21 sep 08:00, Joey, 25 min). Mail-voorstel 15:47, WA-keuze 19:37, geboekt 19:37. Bevestiging OK.
+3. **Boekingen afgelopen 24u**: anoek van der wal (ma 21 sep 08:00, Joey); Beuker (ma 28 sep 12:30, onbekend inmeter); Thea Kuiper (do 10 sep 15:30, Joey). Alle nacontroleerd → OK.
 
 4. **Stil-lijst**: 5 klanten (30+ dgn geen contact)
    - Christian Keus: Sunny dag-3 check vorig weekend (31-08). Geen update 09-09 — VANAVOND bijzonder checken.
    - Shammi Phull, Hans de Lamboij, Lotte Vos, +1: no updates gisteren
 
-## Systeem-notes (09-09)
+## Systeem-notes (11-09)
 
-- Aanbod openstaand: 4 (brein snapshot 08-09 05:00)
-- Aanbod wachtend klant-keuze: 6 klanten
-- Boekingen 06-09 → 08-09: 4 verzet (Disney cadans)
+- Aanbod openstaand: 6 klanten wachtend
+- Aanbod verstuurd 24u (10-11 sept): 1 voorstel (Mirthe Kroon, 07:24 van 10-09)
+- Aanbod klant-reacties 24u: 0 
 - Nanny-daemons: OK (inmeet-verzoeken, aanbod-replies, boeking-nacontrole draaien)
-- Sunny hartslag: actief (2026-09-07T04:57:49.551Z)
-- **Techniek-alarmen**: wa-luisteraar NIET draait, outlook-planado-sync FOUTEN (patroon houdt aan)
+- Sunny hartslag: onbekend (Yara rapport 10-09 geen update)
+- **Techniek-alarmen**: outlook-planado-sync FOUTEN FOUT 422 patroon houdt aan (Mats genoteerd 07-09). HTTP 409 ronde-fout 10-09 16:11.
 
 ## Vakkennis (bijscholing 2026-09-07, vakkennis.md ververst)
 
@@ -48,7 +48,8 @@
 
 ## Vorige diensten
 
+- **2026-09-11 07:00**: Monitoring. 1 annulering (Helma Blokzijl, Outlook-verwijdering 10-09). 1 aanbod verstuurd (Mirthe Kroon, 10-09). 0 klant-reacties. Cadans week-2 lopend. HTTP 409 fout gisteren 16:11; FOUT 422 Outlook-Planado patroon. 
+- **2026-09-10 07:00**: Monitoring. 3 boekingen nacontroleerd (ok). 4 aanbodvoorstellingen openstaand (0 reacties). Sync-fouten FOUT 422 patroon houdt aan. Cadans week-2 contact gereed. Christian Keus wacht op bijzondere controle.
 - **2026-09-09 07:00**: Monitoring. 1 boeking (anoek van der wal). Sync-fouten patroon. Cadans week 2 gereed.
 - **2026-09-08 07:00**: 2 boekingen nacontroleerd (ok). Wuisman via Sunny. Dashboard ververst.
 - **2026-09-07 07:00**: Wachtrij > 5 werkdagen gescand, cadans-check voorstel opgesteld.
-- **2026-09-02 07:00**: ALARM opgelost (Nanny-daemons weer online).

@@ -117359,16 +117359,1588 @@
     "km": 28.8,
     "fileVertragingMin": 2
   },
-  "51.971,4.588>51.941,4.388@4-15": {
-    "minuten": 25,
-    "rijtijdTomTom": 20,
-    "km": 17.4,
+  "51.983,4.352>51.833,4.686@4-15": {
+    "minuten": 38,
+    "rijtijdTomTom": 31,
+    "km": 39.3,
     "fileVertragingMin": 0
   },
-  "51.941,4.388>52.040,4.329@4-16": {
-    "minuten": 24,
-    "rijtijdTomTom": 19,
-    "km": 18,
+  "51.833,4.686>52.040,4.329@4-16": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 43.9,
+    "fileVertragingMin": 0
+  },
+  "52.002,4.690>51.833,4.686@4-11": {
+    "minuten": 38,
+    "rijtijdTomTom": 31,
+    "km": 35.8,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.022,4.338@4-12": {
+    "minuten": 41,
+    "rijtijdTomTom": 33,
+    "km": 44.4,
+    "fileVertragingMin": 0
+  },
+  "51.955,4.475>51.833,4.686@1-14": {
+    "minuten": 29,
+    "rijtijdTomTom": 24,
+    "km": 27.4,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.040,4.329@1-15": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 45.6,
+    "fileVertragingMin": 0
+  },
+  "51.790,4.698>51.833,4.686@2-15": {
+    "minuten": 25,
+    "rijtijdTomTom": 21,
+    "km": 19.6,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.040,4.329@2-16": {
+    "minuten": 42,
+    "rijtijdTomTom": 35,
+    "km": 43.9,
+    "fileVertragingMin": 0
+  },
+  "51.900,4.249>51.833,4.686@2-10": {
+    "minuten": 39,
+    "rijtijdTomTom": 32,
+    "km": 38.3,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.916,4.460@2-11": {
+    "minuten": 36,
+    "rijtijdTomTom": 30,
+    "km": 23.4,
+    "fileVertragingMin": 0
+  },
+  "51.916,4.460>51.833,4.686@2-11": {
+    "minuten": 34,
+    "rijtijdTomTom": 28,
+    "km": 29.9,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.986,4.216@2-12": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 47.9,
+    "fileVertragingMin": 0
+  },
+  "51.986,4.216>51.833,4.686@2-12": {
+    "minuten": 43,
+    "rijtijdTomTom": 36,
+    "km": 46.9,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.931,4.455@2-13": {
+    "minuten": 29,
+    "rijtijdTomTom": 23,
+    "km": 27,
+    "fileVertragingMin": 0
+  },
+  "51.957,4.476>51.833,4.686@4-14": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 27,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.040,4.329@4-15": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 43.9,
+    "fileVertragingMin": 0
+  },
+  "52.040,4.495>51.833,4.686@4-9": {
+    "minuten": 43,
+    "rijtijdTomTom": 36,
+    "km": 38.3,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.018,4.333@4-10": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 44,
+    "fileVertragingMin": 0
+  },
+  "52.078,4.344>51.833,4.686@4-11": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 48.1,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.915,4.619@4-12": {
+    "minuten": 32,
+    "rijtijdTomTom": 27,
+    "km": 25.2,
+    "fileVertragingMin": 0
+  },
+  "52.040,4.329>51.833,4.686@1-15": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 43.5,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.040,4.329@1-16": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 45.6,
+    "fileVertragingMin": 0
+  },
+  "52.175,4.515>51.833,4.686@2-14": {
+    "minuten": 60,
+    "rijtijdTomTom": 49,
+    "km": 66.4,
+    "fileVertragingMin": 0
+  },
+  "52.201,4.636>51.833,4.686@2-9": {
+    "minuten": 69,
+    "rijtijdTomTom": 56,
+    "km": 68.7,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.229,4.521@2-11": {
+    "minuten": 66,
+    "rijtijdTomTom": 54,
+    "km": 68.7,
+    "fileVertragingMin": 0
+  },
+  "51.854,4.145>51.833,4.686@4-15": {
+    "minuten": 46,
+    "rijtijdTomTom": 38,
+    "km": 48.6,
+    "fileVertragingMin": 0
+  },
+  "52.050,4.234>51.833,4.686@4-9": {
+    "minuten": 52,
+    "rijtijdTomTom": 43,
+    "km": 49.3,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.026,4.181@4-10": {
+    "minuten": 54,
+    "rijtijdTomTom": 44,
+    "km": 53,
+    "fileVertragingMin": 0
+  },
+  "52.046,4.235>51.833,4.686@4-12": {
+    "minuten": 51,
+    "rijtijdTomTom": 42,
+    "km": 48.8,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.842,4.337@4-13": {
+    "minuten": 37,
+    "rijtijdTomTom": 31,
+    "km": 35.6,
+    "fileVertragingMin": 0
+  },
+  "51.548,5.097>51.833,4.686@1-14": {
+    "minuten": 63,
+    "rijtijdTomTom": 52,
+    "km": 74.5,
+    "fileVertragingMin": 0
+  },
+  "51.879,5.296>51.833,4.686@1-9": {
+    "minuten": 52,
+    "rijtijdTomTom": 43,
+    "km": 48.9,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.819,4.647@1-10": {
+    "minuten": 21,
+    "rijtijdTomTom": 17,
+    "km": 16.5,
+    "fileVertragingMin": 0
+  },
+  "51.819,4.647>51.833,4.686@1-12": {
+    "minuten": 19,
+    "rijtijdTomTom": 15,
+    "km": 14.7,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.615,4.783@1-12": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 46.4,
+    "fileVertragingMin": 0
+  },
+  "51.615,4.783>51.833,4.686@1-13": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 44.7,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.548,5.097@1-14": {
+    "minuten": 65,
+    "rijtijdTomTom": 53,
+    "km": 76.3,
+    "fileVertragingMin": 0
+  },
+  "52.385,4.892>51.833,4.686@2-9": {
+    "minuten": 93,
+    "rijtijdTomTom": 76,
+    "km": 96.2,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.040,4.329@2-11": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 45.6,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.461,4.625@4-10": {
+    "minuten": 93,
+    "rijtijdTomTom": 76,
+    "km": 103,
+    "fileVertragingMin": 0
+  },
+  "52.461,4.625>51.833,4.686@4-12": {
+    "minuten": 82,
+    "rijtijdTomTom": 67,
+    "km": 102.5,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.040,4.329@4-14": {
+    "minuten": 41,
+    "rijtijdTomTom": 33,
+    "km": 43.9,
+    "fileVertragingMin": 0
+  },
+  "51.998,4.166>51.833,4.686@1-9": {
+    "minuten": 52,
+    "rijtijdTomTom": 43,
+    "km": 50,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.040,4.329@1-10": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 45.7,
+    "fileVertragingMin": 0
+  },
+  "52.050,4.234>51.833,4.686@2-9": {
+    "minuten": 53,
+    "rijtijdTomTom": 43,
+    "km": 49.3,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.040,4.329@2-10": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 45.7,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.040,4.329@4-10": {
+    "minuten": 47,
+    "rijtijdTomTom": 39,
+    "km": 44.1,
+    "fileVertragingMin": 0
+  },
+  "52.038,4.630>51.833,4.686@1-15": {
+    "minuten": 39,
+    "rijtijdTomTom": 32,
+    "km": 36.8,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.080,4.870@1-16": {
+    "minuten": 51,
+    "rijtijdTomTom": 42,
+    "km": 53.7,
+    "fileVertragingMin": 0
+  },
+  "52.074,4.553>51.833,4.686@1-11": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 43.9,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.154,4.656@1-12": {
+    "minuten": 55,
+    "rijtijdTomTom": 45,
+    "km": 57.5,
+    "fileVertragingMin": 0
+  },
+  "52.154,4.656>51.833,4.686@1-13": {
+    "minuten": 55,
+    "rijtijdTomTom": 45,
+    "km": 57.3,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.038,4.630@1-14": {
+    "minuten": 38,
+    "rijtijdTomTom": 31,
+    "km": 36.4,
+    "fileVertragingMin": 0
+  },
+  "52.457,4.718>51.833,4.686@2-15": {
+    "minuten": 94,
+    "rijtijdTomTom": 77,
+    "km": 109.3,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.080,4.870@2-17": {
+    "minuten": 56,
+    "rijtijdTomTom": 46,
+    "km": 53.7,
+    "fileVertragingMin": 0
+  },
+  "52.315,4.649>51.833,4.686@2-14": {
+    "minuten": 75,
+    "rijtijdTomTom": 61,
+    "km": 87.5,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.457,4.718@2-15": {
+    "minuten": 93,
+    "rijtijdTomTom": 76,
+    "km": 109.3,
+    "fileVertragingMin": 0
+  },
+  "52.075,4.494>51.833,4.686@3-15": {
+    "minuten": 47,
+    "rijtijdTomTom": 39,
+    "km": 45.6,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.080,4.870@3-16": {
+    "minuten": 53,
+    "rijtijdTomTom": 43,
+    "km": 53.7,
+    "fileVertragingMin": 0
+  },
+  "52.076,4.277>51.833,4.686@3-10": {
+    "minuten": 57,
+    "rijtijdTomTom": 46,
+    "km": 49.4,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.936,4.608@3-11": {
+    "minuten": 32,
+    "rijtijdTomTom": 26,
+    "km": 23.2,
+    "fileVertragingMin": 0
+  },
+  "51.936,4.608>51.833,4.686@3-12": {
+    "minuten": 31,
+    "rijtijdTomTom": 26,
+    "km": 23.5,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.014,4.344@3-12": {
+    "minuten": 41,
+    "rijtijdTomTom": 33,
+    "km": 42.4,
+    "fileVertragingMin": 0
+  },
+  "52.324,4.964>51.833,4.686@4-15": {
+    "minuten": 75,
+    "rijtijdTomTom": 61,
+    "km": 85.3,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.080,4.870@4-17": {
+    "minuten": 58,
+    "rijtijdTomTom": 47,
+    "km": 53.7,
+    "fileVertragingMin": 0
+  },
+  "52.034,4.217>51.833,4.686@4-10": {
+    "minuten": 55,
+    "rijtijdTomTom": 45,
+    "km": 51.9,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.302,4.651@4-11": {
+    "minuten": 79,
+    "rijtijdTomTom": 65,
+    "km": 85.5,
+    "fileVertragingMin": 0
+  },
+  "52.281,4.622>51.833,4.686@4-12": {
+    "minuten": 68,
+    "rijtijdTomTom": 56,
+    "km": 80.1,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.352,4.774@4-13": {
+    "minuten": 74,
+    "rijtijdTomTom": 61,
+    "km": 91.4,
+    "fileVertragingMin": 0
+  },
+  "52.094,5.231>51.833,4.686@1-14": {
+    "minuten": 55,
+    "rijtijdTomTom": 45,
+    "km": 60.7,
+    "fileVertragingMin": 0
+  },
+  "52.141,5.204>51.833,4.686@1-12": {
+    "minuten": 56,
+    "rijtijdTomTom": 46,
+    "km": 64,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.096,5.142@1-14": {
+    "minuten": 51,
+    "rijtijdTomTom": 41,
+    "km": 57.2,
+    "fileVertragingMin": 0
+  },
+  "52.119,4.668>51.833,4.686@2-15": {
+    "minuten": 50,
+    "rijtijdTomTom": 41,
+    "km": 52.3,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.080,4.870@2-16": {
+    "minuten": 53,
+    "rijtijdTomTom": 44,
+    "km": 53.7,
+    "fileVertragingMin": 0
+  },
+  "52.178,4.498>51.833,4.686@2-9": {
+    "minuten": 69,
+    "rijtijdTomTom": 56,
+    "km": 64.8,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.169,4.529@2-10": {
+    "minuten": 63,
+    "rijtijdTomTom": 52,
+    "km": 65.2,
+    "fileVertragingMin": 0
+  },
+  "52.488,4.748>51.833,4.686@2-13": {
+    "minuten": 90,
+    "rijtijdTomTom": 74,
+    "km": 112.8,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.169,4.706@2-14": {
+    "minuten": 57,
+    "rijtijdTomTom": 46,
+    "km": 56.9,
+    "fileVertragingMin": 0
+  },
+  "52.020,4.727>51.833,4.686@3-14": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 40.9,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.080,4.870@3-15": {
+    "minuten": 51,
+    "rijtijdTomTom": 42,
+    "km": 53.7,
+    "fileVertragingMin": 0
+  },
+  "51.966,4.496>51.833,4.686@3-11": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 26.6,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.770,4.614@3-11": {
+    "minuten": 25,
+    "rijtijdTomTom": 20,
+    "km": 23.6,
+    "fileVertragingMin": 0
+  },
+  "51.773,4.447>51.833,4.686@3-12": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 28.3,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.020,4.727@3-13": {
+    "minuten": 43,
+    "rijtijdTomTom": 36,
+    "km": 39.4,
+    "fileVertragingMin": 0
+  },
+  "52.053,4.465>51.833,4.686@4-14": {
+    "minuten": 50,
+    "rijtijdTomTom": 41,
+    "km": 43,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.080,4.870@4-16": {
+    "minuten": 52,
+    "rijtijdTomTom": 43,
+    "km": 53.7,
+    "fileVertragingMin": 0
+  },
+  "51.971,5.321>51.833,4.686@4-9": {
+    "minuten": 74,
+    "rijtijdTomTom": 60,
+    "km": 64,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.957,5.225@4-10": {
+    "minuten": 59,
+    "rijtijdTomTom": 48,
+    "km": 56.6,
+    "fileVertragingMin": 0
+  },
+  "51.957,5.225>51.833,4.686@4-10": {
+    "minuten": 57,
+    "rijtijdTomTom": 47,
+    "km": 56.5,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.930,4.601@4-11": {
+    "minuten": 29,
+    "rijtijdTomTom": 24,
+    "km": 22.4,
+    "fileVertragingMin": 0
+  },
+  "51.930,4.601>51.833,4.686@4-12": {
+    "minuten": 32,
+    "rijtijdTomTom": 26,
+    "km": 23.1,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.059,4.549@4-13": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 42.5,
+    "fileVertragingMin": 0
+  },
+  "51.814,4.609>51.833,4.686@1-15": {
+    "minuten": 20,
+    "rijtijdTomTom": 16,
+    "km": 15.8,
+    "fileVertragingMin": 0
+  },
+  "51.857,4.377>51.833,4.686@1-13": {
+    "minuten": 30,
+    "rijtijdTomTom": 24,
+    "km": 25.6,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.953,4.581@1-13": {
+    "minuten": 26,
+    "rijtijdTomTom": 22,
+    "km": 24.6,
+    "fileVertragingMin": 0
+  },
+  "52.312,4.673>51.833,4.686@2-14": {
+    "minuten": 74,
+    "rijtijdTomTom": 61,
+    "km": 85.6,
+    "fileVertragingMin": 0
+  },
+  "52.194,4.436>51.833,4.686@2-9": {
+    "minuten": 67,
+    "rijtijdTomTom": 55,
+    "km": 64.1,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.005,4.230@2-10": {
+    "minuten": 48,
+    "rijtijdTomTom": 39,
+    "km": 48.8,
+    "fileVertragingMin": 0
+  },
+  "52.005,4.230>51.833,4.686@2-10": {
+    "minuten": 48,
+    "rijtijdTomTom": 39,
+    "km": 48,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.059,4.478@2-12": {
+    "minuten": 47,
+    "rijtijdTomTom": 38,
+    "km": 42.3,
+    "fileVertragingMin": 0
+  },
+  "52.059,4.478>51.833,4.686@2-12": {
+    "minuten": 47,
+    "rijtijdTomTom": 39,
+    "km": 42.6,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.312,4.673@2-13": {
+    "minuten": 73,
+    "rijtijdTomTom": 60,
+    "km": 85.8,
+    "fileVertragingMin": 0
+  },
+  "51.859,4.470>51.833,4.686@3-15": {
+    "minuten": 27,
+    "rijtijdTomTom": 22,
+    "km": 21.3,
+    "fileVertragingMin": 0
+  },
+  "51.817,5.094>51.833,4.686@3-9": {
+    "minuten": 52,
+    "rijtijdTomTom": 42,
+    "km": 33.5,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.836,4.986@3-10": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 26.4,
+    "fileVertragingMin": 0
+  },
+  "51.836,4.986>51.833,4.686@3-10": {
+    "minuten": 34,
+    "rijtijdTomTom": 28,
+    "km": 26.3,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.025,5.182@3-11": {
+    "minuten": 52,
+    "rijtijdTomTom": 43,
+    "km": 51.7,
+    "fileVertragingMin": 0
+  },
+  "52.025,5.182>51.833,4.686@3-12": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 51.6,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.092,4.268@3-13": {
+    "minuten": 60,
+    "rijtijdTomTom": 49,
+    "km": 55.2,
+    "fileVertragingMin": 0
+  },
+  "52.149,4.444>51.833,4.686@4-14": {
+    "minuten": 54,
+    "rijtijdTomTom": 44,
+    "km": 61.1,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.080,4.870@4-15": {
+    "minuten": 51,
+    "rijtijdTomTom": 42,
+    "km": 53.7,
+    "fileVertragingMin": 0
+  },
+  "52.353,4.622>51.833,4.686@4-9": {
+    "minuten": 87,
+    "rijtijdTomTom": 72,
+    "km": 90.9,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.330,4.613@4-11": {
+    "minuten": 84,
+    "rijtijdTomTom": 69,
+    "km": 88.5,
+    "fileVertragingMin": 0
+  },
+  "52.328,4.981>51.833,4.686@1-14": {
+    "minuten": 76,
+    "rijtijdTomTom": 62,
+    "km": 86,
+    "fileVertragingMin": 0
+  },
+  "52.009,4.436>51.833,4.686@1-11": {
+    "minuten": 38,
+    "rijtijdTomTom": 31,
+    "km": 34.2,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.322,4.659@1-12": {
+    "minuten": 73,
+    "rijtijdTomTom": 60,
+    "km": 86.7,
+    "fileVertragingMin": 0
+  },
+  "52.322,4.659>51.833,4.686@1-13": {
+    "minuten": 73,
+    "rijtijdTomTom": 60,
+    "km": 86.6,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.328,4.981@1-14": {
+    "minuten": 75,
+    "rijtijdTomTom": 62,
+    "km": 85.9,
+    "fileVertragingMin": 0
+  },
+  "51.819,4.602>51.833,4.686@2-14": {
+    "minuten": 19,
+    "rijtijdTomTom": 16,
+    "km": 13.5,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.080,4.870@2-15": {
+    "minuten": 51,
+    "rijtijdTomTom": 41,
+    "km": 53.7,
+    "fileVertragingMin": 0
+  },
+  "51.849,4.648>51.833,4.686@2-9": {
+    "minuten": 13,
+    "rijtijdTomTom": 11,
+    "km": 6.2,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.596,4.790@2-10": {
+    "minuten": 48,
+    "rijtijdTomTom": 39,
+    "km": 46,
+    "fileVertragingMin": 0
+  },
+  "51.596,4.790>51.833,4.686@2-13": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 44.6,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.819,4.602@2-14": {
+    "minuten": 18,
+    "rijtijdTomTom": 15,
+    "km": 14.4,
+    "fileVertragingMin": 0
+  },
+  "52.017,4.327>51.833,4.686@3-15": {
+    "minuten": 42,
+    "rijtijdTomTom": 35,
+    "km": 44.5,
+    "fileVertragingMin": 0
+  },
+  "52.083,4.649>51.833,4.686@3-9": {
+    "minuten": 55,
+    "rijtijdTomTom": 45,
+    "km": 45.1,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.017,4.327@3-10": {
+    "minuten": 42,
+    "rijtijdTomTom": 35,
+    "km": 44.1,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.833,4.686@1-15": {
+    "minuten": 35,
+    "rijtijdTomTom": 29,
+    "km": 33.8,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.811,4.340@1-16": {
+    "minuten": 40,
+    "rijtijdTomTom": 33,
+    "km": 35.7,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.811,4.340@1-15": {
+    "minuten": 43,
+    "rijtijdTomTom": 35,
+    "km": 38.5,
+    "fileVertragingMin": 0
+  },
+  "51.687,5.332>51.833,4.686@1-8": {
+    "minuten": 62,
+    "rijtijdTomTom": 51,
+    "km": 65,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.858,4.373@1-9": {
+    "minuten": 34,
+    "rijtijdTomTom": 28,
+    "km": 26.7,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>51.833,4.686@2-8": {
+    "minuten": 37,
+    "rijtijdTomTom": 30,
+    "km": 34.6,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.811,4.340@2-9": {
+    "minuten": 40,
+    "rijtijdTomTom": 32,
+    "km": 35.7,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>51.833,4.686@3-8": {
+    "minuten": 37,
+    "rijtijdTomTom": 30,
+    "km": 34.6,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.811,4.340@3-9": {
+    "minuten": 39,
+    "rijtijdTomTom": 32,
+    "km": 35.7,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>51.833,4.686@4-8": {
+    "minuten": 37,
+    "rijtijdTomTom": 30,
+    "km": 34.6,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.811,4.340@4-9": {
+    "minuten": 40,
+    "rijtijdTomTom": 32,
+    "km": 35.7,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>51.833,4.686@1-8": {
+    "minuten": 37,
+    "rijtijdTomTom": 30,
+    "km": 34.6,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.034,4.359@1-9": {
+    "minuten": 40,
+    "rijtijdTomTom": 33,
+    "km": 40.9,
+    "fileVertragingMin": 0
+  },
+  "52.034,4.359>51.833,4.686@1-12": {
+    "minuten": 39,
+    "rijtijdTomTom": 32,
+    "km": 41,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.811,4.340@1-13": {
+    "minuten": 39,
+    "rijtijdTomTom": 32,
+    "km": 35.7,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.811,4.340@1-9": {
+    "minuten": 40,
+    "rijtijdTomTom": 33,
+    "km": 35.7,
+    "fileVertragingMin": 0
+  },
+  "52.020,4.327>51.778,4.681@1-15": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 51.3,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.040,4.329@1-16": {
+    "minuten": 50,
+    "rijtijdTomTom": 41,
+    "km": 52.5,
+    "fileVertragingMin": 0
+  },
+  "52.091,4.270>51.778,4.681@2-15": {
+    "minuten": 66,
+    "rijtijdTomTom": 54,
+    "km": 61.4,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.040,4.329@2-16": {
+    "minuten": 51,
+    "rijtijdTomTom": 42,
+    "km": 50.8,
+    "fileVertragingMin": 0
+  },
+  "51.983,4.352>51.778,4.681@4-15": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 46.1,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.040,4.329@4-16": {
+    "minuten": 50,
+    "rijtijdTomTom": 41,
+    "km": 50.8,
+    "fileVertragingMin": 0
+  },
+  "52.002,4.690>51.778,4.681@4-11": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 42.5,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.022,4.338@4-13": {
+    "minuten": 48,
+    "rijtijdTomTom": 40,
+    "km": 51.3,
+    "fileVertragingMin": 0
+  },
+  "51.955,4.475>51.778,4.681@1-14": {
+    "minuten": 36,
+    "rijtijdTomTom": 29,
+    "km": 34.1,
+    "fileVertragingMin": 0
+  },
+  "51.790,4.698>51.778,4.681@2-15": {
+    "minuten": 10,
+    "rijtijdTomTom": 7,
+    "km": 2.7,
+    "fileVertragingMin": 0
+  },
+  "51.957,4.476>51.778,4.681@4-14": {
+    "minuten": 35,
+    "rijtijdTomTom": 28,
+    "km": 33.8,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.040,4.329@4-15": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 50.8,
+    "fileVertragingMin": 0
+  },
+  "52.078,4.344>51.778,4.681@4-11": {
+    "minuten": 50,
+    "rijtijdTomTom": 41,
+    "km": 54.8,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.915,4.619@4-13": {
+    "minuten": 40,
+    "rijtijdTomTom": 33,
+    "km": 32.1,
+    "fileVertragingMin": 0
+  },
+  "52.040,4.329>51.778,4.681@1-15": {
+    "minuten": 48,
+    "rijtijdTomTom": 40,
+    "km": 50.2,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.040,4.329@1-17": {
+    "minuten": 50,
+    "rijtijdTomTom": 41,
+    "km": 52.5,
+    "fileVertragingMin": 0
+  },
+  "52.175,4.515>51.778,4.681@2-14": {
+    "minuten": 66,
+    "rijtijdTomTom": 54,
+    "km": 73.2,
+    "fileVertragingMin": 0
+  },
+  "52.201,4.636>51.778,4.681@2-9": {
+    "minuten": 75,
+    "rijtijdTomTom": 61,
+    "km": 75.4,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.229,4.521@2-11": {
+    "minuten": 72,
+    "rijtijdTomTom": 59,
+    "km": 75.6,
+    "fileVertragingMin": 0
+  },
+  "51.854,4.145>51.778,4.681@4-15": {
+    "minuten": 52,
+    "rijtijdTomTom": 43,
+    "km": 55.4,
+    "fileVertragingMin": 0
+  },
+  "52.050,4.234>51.778,4.681@4-9": {
+    "minuten": 59,
+    "rijtijdTomTom": 48,
+    "km": 53.4,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.026,4.181@4-10": {
+    "minuten": 61,
+    "rijtijdTomTom": 50,
+    "km": 59.9,
+    "fileVertragingMin": 0
+  },
+  "52.046,4.235>51.778,4.681@4-12": {
+    "minuten": 57,
+    "rijtijdTomTom": 47,
+    "km": 55.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.842,4.337@4-14": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 42.5,
+    "fileVertragingMin": 0
+  },
+  "51.548,5.097>51.778,4.681@1-14": {
+    "minuten": 53,
+    "rijtijdTomTom": 44,
+    "km": 60.1,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.040,4.329@1-15": {
+    "minuten": 48,
+    "rijtijdTomTom": 40,
+    "km": 52.5,
+    "fileVertragingMin": 0
+  },
+  "51.879,5.296>51.778,4.681@1-9": {
+    "minuten": 70,
+    "rijtijdTomTom": 58,
+    "km": 70,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.819,4.647@1-11": {
+    "minuten": 18,
+    "rijtijdTomTom": 15,
+    "km": 11.4,
+    "fileVertragingMin": 0
+  },
+  "51.615,4.783>51.778,4.681@1-13": {
+    "minuten": 34,
+    "rijtijdTomTom": 28,
+    "km": 30.3,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.548,5.097@1-14": {
+    "minuten": 57,
+    "rijtijdTomTom": 47,
+    "km": 61.6,
+    "fileVertragingMin": 0
+  },
+  "52.385,4.892>51.778,4.681@2-9": {
+    "minuten": 102,
+    "rijtijdTomTom": 83,
+    "km": 106.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.040,4.329@2-11": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 52.5,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.461,4.625@4-10": {
+    "minuten": 98,
+    "rijtijdTomTom": 80,
+    "km": 109.9,
+    "fileVertragingMin": 0
+  },
+  "52.461,4.625>51.778,4.681@4-12": {
+    "minuten": 88,
+    "rijtijdTomTom": 72,
+    "km": 109.3,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.040,4.329@4-14": {
+    "minuten": 48,
+    "rijtijdTomTom": 40,
+    "km": 50.8,
+    "fileVertragingMin": 0
+  },
+  "51.998,4.166>51.778,4.681@1-9": {
+    "minuten": 59,
+    "rijtijdTomTom": 48,
+    "km": 56.8,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.040,4.329@1-10": {
+    "minuten": 50,
+    "rijtijdTomTom": 41,
+    "km": 52.6,
+    "fileVertragingMin": 0
+  },
+  "52.050,4.234>51.778,4.681@2-9": {
+    "minuten": 60,
+    "rijtijdTomTom": 49,
+    "km": 53.4,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.040,4.329@2-10": {
+    "minuten": 54,
+    "rijtijdTomTom": 44,
+    "km": 52.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.040,4.329@4-10": {
+    "minuten": 53,
+    "rijtijdTomTom": 44,
+    "km": 52.6,
+    "fileVertragingMin": 0
+  },
+  "52.038,4.630>51.778,4.681@1-15": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 43.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.080,4.870@1-16": {
+    "minuten": 59,
+    "rijtijdTomTom": 48,
+    "km": 60.6,
+    "fileVertragingMin": 0
+  },
+  "52.074,4.553>51.778,4.681@1-11": {
+    "minuten": 52,
+    "rijtijdTomTom": 42,
+    "km": 50.7,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.154,4.656@1-12": {
+    "minuten": 63,
+    "rijtijdTomTom": 51,
+    "km": 64.4,
+    "fileVertragingMin": 0
+  },
+  "52.154,4.656>51.778,4.681@1-13": {
+    "minuten": 61,
+    "rijtijdTomTom": 50,
+    "km": 64,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.038,4.630@1-14": {
+    "minuten": 46,
+    "rijtijdTomTom": 37,
+    "km": 43.5,
+    "fileVertragingMin": 0
+  },
+  "52.457,4.718>51.778,4.681@2-15": {
+    "minuten": 100,
+    "rijtijdTomTom": 82,
+    "km": 116.1,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.080,4.870@2-17": {
+    "minuten": 65,
+    "rijtijdTomTom": 54,
+    "km": 60.6,
+    "fileVertragingMin": 0
+  },
+  "52.075,4.494>51.778,4.681@3-15": {
+    "minuten": 54,
+    "rijtijdTomTom": 44,
+    "km": 52.4,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.080,4.870@3-16": {
+    "minuten": 62,
+    "rijtijdTomTom": 51,
+    "km": 60.6,
+    "fileVertragingMin": 0
+  },
+  "52.076,4.277>51.778,4.681@3-10": {
+    "minuten": 63,
+    "rijtijdTomTom": 52,
+    "km": 56.2,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.936,4.608@3-11": {
+    "minuten": 39,
+    "rijtijdTomTom": 32,
+    "km": 30.1,
+    "fileVertragingMin": 0
+  },
+  "51.936,4.608>51.778,4.681@3-12": {
+    "minuten": 38,
+    "rijtijdTomTom": 31,
+    "km": 30.3,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.014,4.344@3-13": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 49.3,
+    "fileVertragingMin": 0
+  },
+  "52.324,4.964>51.778,4.681@4-15": {
+    "minuten": 89,
+    "rijtijdTomTom": 73,
+    "km": 105.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.080,4.870@4-17": {
+    "minuten": 69,
+    "rijtijdTomTom": 56,
+    "km": 60.6,
+    "fileVertragingMin": 0
+  },
+  "52.034,4.217>51.778,4.681@4-10": {
+    "minuten": 61,
+    "rijtijdTomTom": 50,
+    "km": 58.8,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.302,4.651@4-11": {
+    "minuten": 86,
+    "rijtijdTomTom": 70,
+    "km": 92.4,
+    "fileVertragingMin": 0
+  },
+  "52.094,5.231>51.778,4.681@1-14": {
+    "minuten": 73,
+    "rijtijdTomTom": 60,
+    "km": 81.8,
+    "fileVertragingMin": 0
+  },
+  "52.141,5.204>51.778,4.681@1-12": {
+    "minuten": 74,
+    "rijtijdTomTom": 61,
+    "km": 85.2,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.096,5.142@1-14": {
+    "minuten": 68,
+    "rijtijdTomTom": 56,
+    "km": 77.8,
+    "fileVertragingMin": 0
+  },
+  "52.119,4.668>51.778,4.681@2-15": {
+    "minuten": 56,
+    "rijtijdTomTom": 46,
+    "km": 59.1,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.080,4.870@2-16": {
+    "minuten": 63,
+    "rijtijdTomTom": 51,
+    "km": 60.6,
+    "fileVertragingMin": 0
+  },
+  "52.488,4.748>51.778,4.681@2-13": {
+    "minuten": 96,
+    "rijtijdTomTom": 79,
+    "km": 119.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.169,4.706@2-15": {
+    "minuten": 65,
+    "rijtijdTomTom": 53,
+    "km": 63.8,
+    "fileVertragingMin": 0
+  },
+  "52.020,4.727>51.778,4.681@3-14": {
+    "minuten": 51,
+    "rijtijdTomTom": 42,
+    "km": 47.7,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.080,4.870@3-15": {
+    "minuten": 60,
+    "rijtijdTomTom": 49,
+    "km": 60.6,
+    "fileVertragingMin": 0
+  },
+  "51.773,4.447>51.778,4.681@3-12": {
+    "minuten": 32,
+    "rijtijdTomTom": 26,
+    "km": 21.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.020,4.727@3-14": {
+    "minuten": 51,
+    "rijtijdTomTom": 42,
+    "km": 46.3,
+    "fileVertragingMin": 0
+  },
+  "52.053,4.465>51.778,4.681@4-14": {
+    "minuten": 56,
+    "rijtijdTomTom": 46,
+    "km": 49.8,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.080,4.870@4-16": {
+    "minuten": 62,
+    "rijtijdTomTom": 50,
+    "km": 60.6,
+    "fileVertragingMin": 0
+  },
+  "51.971,5.321>51.778,4.681@4-9": {
+    "minuten": 92,
+    "rijtijdTomTom": 76,
+    "km": 87.8,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.957,5.225@4-11": {
+    "minuten": 74,
+    "rijtijdTomTom": 61,
+    "km": 77.2,
+    "fileVertragingMin": 0
+  },
+  "51.957,5.225>51.778,4.681@4-10": {
+    "minuten": 75,
+    "rijtijdTomTom": 61,
+    "km": 77.5,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.930,4.601@4-12": {
+    "minuten": 36,
+    "rijtijdTomTom": 30,
+    "km": 29.3,
+    "fileVertragingMin": 0
+  },
+  "51.814,4.609>51.778,4.681@1-15": {
+    "minuten": 18,
+    "rijtijdTomTom": 14,
+    "km": 12,
+    "fileVertragingMin": 0
+  },
+  "52.312,4.673>51.778,4.681@2-14": {
+    "minuten": 80,
+    "rijtijdTomTom": 66,
+    "km": 92.4,
+    "fileVertragingMin": 0
+  },
+  "52.194,4.436>51.778,4.681@2-9": {
+    "minuten": 73,
+    "rijtijdTomTom": 60,
+    "km": 70.9,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.005,4.230@2-11": {
+    "minuten": 55,
+    "rijtijdTomTom": 45,
+    "km": 55.7,
+    "fileVertragingMin": 0
+  },
+  "52.005,4.230>51.778,4.681@2-10": {
+    "minuten": 54,
+    "rijtijdTomTom": 44,
+    "km": 54.8,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.059,4.478@2-12": {
+    "minuten": 54,
+    "rijtijdTomTom": 44,
+    "km": 49.1,
+    "fileVertragingMin": 0
+  },
+  "52.059,4.478>51.778,4.681@2-12": {
+    "minuten": 53,
+    "rijtijdTomTom": 44,
+    "km": 49.3,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.312,4.673@2-13": {
+    "minuten": 81,
+    "rijtijdTomTom": 66,
+    "km": 92.7,
+    "fileVertragingMin": 0
+  },
+  "51.859,4.470>51.778,4.681@3-15": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 28.2,
+    "fileVertragingMin": 0
+  },
+  "51.836,4.986>51.778,4.681@3-10": {
+    "minuten": 51,
+    "rijtijdTomTom": 42,
+    "km": 47.5,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.025,5.182@3-11": {
+    "minuten": 67,
+    "rijtijdTomTom": 55,
+    "km": 72.3,
+    "fileVertragingMin": 0
+  },
+  "52.025,5.182>51.778,4.681@3-12": {
+    "minuten": 66,
+    "rijtijdTomTom": 54,
+    "km": 72.8,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.092,4.268@3-13": {
+    "minuten": 67,
+    "rijtijdTomTom": 55,
+    "km": 62.1,
+    "fileVertragingMin": 0
+  },
+  "52.149,4.444>51.778,4.681@4-14": {
+    "minuten": 60,
+    "rijtijdTomTom": 50,
+    "km": 67.9,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.080,4.870@4-15": {
+    "minuten": 59,
+    "rijtijdTomTom": 48,
+    "km": 60.6,
+    "fileVertragingMin": 0
+  },
+  "52.353,4.622>51.778,4.681@4-9": {
+    "minuten": 93,
+    "rijtijdTomTom": 77,
+    "km": 97.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.330,4.613@4-11": {
+    "minuten": 90,
+    "rijtijdTomTom": 74,
+    "km": 95.4,
+    "fileVertragingMin": 0
+  },
+  "52.328,4.981>51.778,4.681@1-14": {
+    "minuten": 92,
+    "rijtijdTomTom": 75,
+    "km": 106.3,
+    "fileVertragingMin": 0
+  },
+  "52.009,4.436>51.778,4.681@1-11": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 40.9,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.322,4.659@1-12": {
+    "minuten": 81,
+    "rijtijdTomTom": 66,
+    "km": 93.6,
+    "fileVertragingMin": 0
+  },
+  "52.322,4.659>51.778,4.681@1-13": {
+    "minuten": 79,
+    "rijtijdTomTom": 65,
+    "km": 93.3,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.328,4.981@1-14": {
+    "minuten": 92,
+    "rijtijdTomTom": 76,
+    "km": 106,
+    "fileVertragingMin": 0
+  },
+  "51.819,4.602>51.778,4.681@2-14": {
+    "minuten": 20,
+    "rijtijdTomTom": 16,
+    "km": 12.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.080,4.870@2-15": {
+    "minuten": 59,
+    "rijtijdTomTom": 48,
+    "km": 60.6,
+    "fileVertragingMin": 0
+  },
+  "51.849,4.648>51.778,4.681@2-9": {
+    "minuten": 26,
+    "rijtijdTomTom": 21,
+    "km": 13.4,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.596,4.790@2-10": {
+    "minuten": 38,
+    "rijtijdTomTom": 31,
+    "km": 30.8,
+    "fileVertragingMin": 0
+  },
+  "51.596,4.790>51.778,4.681@2-13": {
+    "minuten": 35,
+    "rijtijdTomTom": 29,
+    "km": 30.2,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.819,4.602@2-14": {
+    "minuten": 22,
+    "rijtijdTomTom": 18,
+    "km": 13.1,
+    "fileVertragingMin": 0
+  },
+  "52.017,4.327>51.778,4.681@3-15": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 51.3,
+    "fileVertragingMin": 0
+  },
+  "52.083,4.649>51.778,4.681@3-9": {
+    "minuten": 61,
+    "rijtijdTomTom": 50,
+    "km": 51.9,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.017,4.327@3-10": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 51,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.778,4.681@1-15": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 40.7,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.811,4.340@1-16": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 30.8,
+    "fileVertragingMin": 0
+  },
+  "51.687,5.332>51.778,4.681@1-8": {
+    "minuten": 74,
+    "rijtijdTomTom": 60,
+    "km": 72.8,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.858,4.373@1-10": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 30.6,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>51.778,4.681@2-8": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 30.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.811,4.340@2-9": {
+    "minuten": 48,
+    "rijtijdTomTom": 40,
+    "km": 30.8,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>51.778,4.681@3-8": {
+    "minuten": 41,
+    "rijtijdTomTom": 33,
+    "km": 30.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.811,4.340@3-9": {
+    "minuten": 47,
+    "rijtijdTomTom": 38,
+    "km": 30.8,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>51.778,4.681@4-8": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 30.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.811,4.340@4-9": {
+    "minuten": 48,
+    "rijtijdTomTom": 39,
+    "km": 30.8,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>51.778,4.681@1-8": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 30.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.034,4.359@1-9": {
+    "minuten": 50,
+    "rijtijdTomTom": 41,
+    "km": 44.8,
+    "fileVertragingMin": 0
+  },
+  "52.034,4.359>51.778,4.681@1-12": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 47.8,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.811,4.340@1-14": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 30.8,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.811,4.340@1-9": {
+    "minuten": 47,
+    "rijtijdTomTom": 39,
+    "km": 30.8,
     "fileVertragingMin": 0
   },
   "52.020,4.327>51.941,4.388@1-15": {
@@ -117399,6 +118971,12 @@
     "minuten": 21,
     "rijtijdTomTom": 17,
     "km": 12.9,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>52.040,4.329@4-16": {
+    "minuten": 24,
+    "rijtijdTomTom": 19,
+    "km": 18,
     "fileVertragingMin": 0
   },
   "52.002,4.690>51.941,4.388@4-11": {
@@ -117631,6 +119209,12 @@
   },
   "51.941,4.388>52.040,4.329@2-10": {
     "minuten": 31,
+    "rijtijdTomTom": 25,
+    "km": 18.2,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>52.040,4.329@4-10": {
+    "minuten": 30,
     "rijtijdTomTom": 25,
     "km": 18.2,
     "fileVertragingMin": 0
@@ -118085,51 +119669,39 @@
     "km": 16.6,
     "fileVertragingMin": 0
   },
+  "51.941,4.388>51.941,4.388@1-15": {
+    "minuten": 10,
+    "rijtijdTomTom": 0,
+    "km": 0,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.811,4.340@1-16": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 38.5,
+    "fileVertragingMin": 0
+  },
   "51.687,5.332>51.941,4.388@1-8": {
     "minuten": 87,
     "rijtijdTomTom": 71,
     "km": 94.2,
     "fileVertragingMin": 0
   },
-  "51.941,4.388>51.892,4.419@1-10": {
-    "minuten": 25,
-    "rijtijdTomTom": 20,
-    "km": 16.1,
-    "fileVertragingMin": 0
-  },
-  "51.892,4.419>51.941,4.388@1-10": {
-    "minuten": 23,
-    "rijtijdTomTom": 19,
-    "km": 15.3,
-    "fileVertragingMin": 0
-  },
-  "51.941,4.388>51.892,4.419@1-11": {
-    "minuten": 23,
-    "rijtijdTomTom": 19,
-    "km": 16.1,
-    "fileVertragingMin": 0
-  },
-  "51.858,4.373>51.941,4.388@1-14": {
+  "51.941,4.388>51.858,4.373@1-10": {
     "minuten": 25,
     "rijtijdTomTom": 21,
-    "km": 14.5,
+    "km": 14.4,
     "fileVertragingMin": 0
   },
-  "51.941,4.388>51.811,4.340@1-15": {
-    "minuten": 43,
-    "rijtijdTomTom": 35,
-    "km": 38.5,
-    "fileVertragingMin": 0
-  },
-  "51.892,4.419>51.941,4.388@2-8": {
-    "minuten": 22,
-    "rijtijdTomTom": 18,
-    "km": 15.3,
+  "51.811,4.340>51.941,4.388@2-8": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 38.3,
     "fileVertragingMin": 0
   },
   "51.941,4.388>51.811,4.340@2-9": {
-    "minuten": 45,
-    "rijtijdTomTom": 37,
+    "minuten": 44,
+    "rijtijdTomTom": 36,
     "km": 38.5,
     "fileVertragingMin": 0
   },
@@ -118181,820 +119753,10 @@
     "km": 38.5,
     "fileVertragingMin": 0
   },
-  "51.811,4.340>51.941,4.388@2-8": {
-    "minuten": 42,
-    "rijtijdTomTom": 34,
-    "km": 38.3,
-    "fileVertragingMin": 0
-  },
   "51.941,4.388>51.811,4.340@1-9": {
     "minuten": 43,
     "rijtijdTomTom": 36,
     "km": 38.5,
-    "fileVertragingMin": 0
-  },
-  "52.012,4.485>51.859,4.501@3-19": {
-    "minuten": 47,
-    "rijtijdTomTom": 39,
-    "km": 34.3,
-    "fileVertragingMin": 0
-  },
-  "52.012,4.485>51.941,4.388@3-19": {
-    "minuten": 26,
-    "rijtijdTomTom": 22,
-    "km": 18,
-    "fileVertragingMin": 0
-  },
-  "51.971,4.588>51.778,4.681@4-15": {
-    "minuten": 36,
-    "rijtijdTomTom": 30,
-    "km": 33,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.040,4.329@4-16": {
-    "minuten": 50,
-    "rijtijdTomTom": 41,
-    "km": 50.8,
-    "fileVertragingMin": 0
-  },
-  "52.020,4.327>51.778,4.681@1-15": {
-    "minuten": 49,
-    "rijtijdTomTom": 40,
-    "km": 51.3,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.040,4.329@1-16": {
-    "minuten": 50,
-    "rijtijdTomTom": 41,
-    "km": 52.5,
-    "fileVertragingMin": 0
-  },
-  "52.091,4.270>51.778,4.681@2-15": {
-    "minuten": 66,
-    "rijtijdTomTom": 54,
-    "km": 61.4,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.040,4.329@2-16": {
-    "minuten": 51,
-    "rijtijdTomTom": 42,
-    "km": 50.8,
-    "fileVertragingMin": 0
-  },
-  "51.983,4.352>51.778,4.681@4-15": {
-    "minuten": 44,
-    "rijtijdTomTom": 36,
-    "km": 46.1,
-    "fileVertragingMin": 0
-  },
-  "52.002,4.690>51.778,4.681@4-11": {
-    "minuten": 44,
-    "rijtijdTomTom": 36,
-    "km": 42.5,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.022,4.338@4-13": {
-    "minuten": 48,
-    "rijtijdTomTom": 40,
-    "km": 51.3,
-    "fileVertragingMin": 0
-  },
-  "51.955,4.475>51.778,4.681@1-14": {
-    "minuten": 36,
-    "rijtijdTomTom": 29,
-    "km": 34.1,
-    "fileVertragingMin": 0
-  },
-  "51.790,4.698>51.778,4.681@2-15": {
-    "minuten": 10,
-    "rijtijdTomTom": 7,
-    "km": 2.7,
-    "fileVertragingMin": 0
-  },
-  "51.957,4.476>51.778,4.681@4-14": {
-    "minuten": 35,
-    "rijtijdTomTom": 28,
-    "km": 33.8,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.040,4.329@4-15": {
-    "minuten": 49,
-    "rijtijdTomTom": 40,
-    "km": 50.8,
-    "fileVertragingMin": 0
-  },
-  "52.078,4.344>51.778,4.681@4-11": {
-    "minuten": 50,
-    "rijtijdTomTom": 41,
-    "km": 54.8,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.915,4.619@4-13": {
-    "minuten": 40,
-    "rijtijdTomTom": 33,
-    "km": 32.1,
-    "fileVertragingMin": 0
-  },
-  "52.040,4.329>51.778,4.681@1-15": {
-    "minuten": 48,
-    "rijtijdTomTom": 40,
-    "km": 50.2,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.040,4.329@1-17": {
-    "minuten": 50,
-    "rijtijdTomTom": 41,
-    "km": 52.5,
-    "fileVertragingMin": 0
-  },
-  "52.175,4.515>51.778,4.681@2-14": {
-    "minuten": 66,
-    "rijtijdTomTom": 54,
-    "km": 73.2,
-    "fileVertragingMin": 0
-  },
-  "52.201,4.636>51.778,4.681@2-9": {
-    "minuten": 75,
-    "rijtijdTomTom": 61,
-    "km": 75.4,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.229,4.521@2-11": {
-    "minuten": 72,
-    "rijtijdTomTom": 59,
-    "km": 75.6,
-    "fileVertragingMin": 0
-  },
-  "51.854,4.145>51.778,4.681@4-15": {
-    "minuten": 52,
-    "rijtijdTomTom": 43,
-    "km": 55.4,
-    "fileVertragingMin": 0
-  },
-  "52.050,4.234>51.778,4.681@4-9": {
-    "minuten": 59,
-    "rijtijdTomTom": 48,
-    "km": 53.4,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.026,4.181@4-10": {
-    "minuten": 61,
-    "rijtijdTomTom": 50,
-    "km": 59.9,
-    "fileVertragingMin": 0
-  },
-  "52.046,4.235>51.778,4.681@4-12": {
-    "minuten": 57,
-    "rijtijdTomTom": 47,
-    "km": 55.6,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.842,4.337@4-14": {
-    "minuten": 45,
-    "rijtijdTomTom": 37,
-    "km": 42.5,
-    "fileVertragingMin": 0
-  },
-  "51.548,5.097>51.778,4.681@1-14": {
-    "minuten": 53,
-    "rijtijdTomTom": 44,
-    "km": 60.1,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.040,4.329@1-15": {
-    "minuten": 48,
-    "rijtijdTomTom": 40,
-    "km": 52.5,
-    "fileVertragingMin": 0
-  },
-  "51.879,5.296>51.778,4.681@1-9": {
-    "minuten": 70,
-    "rijtijdTomTom": 58,
-    "km": 70,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.819,4.647@1-11": {
-    "minuten": 18,
-    "rijtijdTomTom": 15,
-    "km": 11.4,
-    "fileVertragingMin": 0
-  },
-  "51.615,4.783>51.778,4.681@1-13": {
-    "minuten": 34,
-    "rijtijdTomTom": 28,
-    "km": 30.3,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.548,5.097@1-14": {
-    "minuten": 57,
-    "rijtijdTomTom": 47,
-    "km": 61.6,
-    "fileVertragingMin": 0
-  },
-  "52.385,4.892>51.778,4.681@2-9": {
-    "minuten": 102,
-    "rijtijdTomTom": 83,
-    "km": 106.6,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.040,4.329@2-11": {
-    "minuten": 49,
-    "rijtijdTomTom": 40,
-    "km": 52.5,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.461,4.625@4-10": {
-    "minuten": 98,
-    "rijtijdTomTom": 80,
-    "km": 109.9,
-    "fileVertragingMin": 0
-  },
-  "52.461,4.625>51.778,4.681@4-12": {
-    "minuten": 88,
-    "rijtijdTomTom": 72,
-    "km": 109.3,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.040,4.329@4-14": {
-    "minuten": 48,
-    "rijtijdTomTom": 40,
-    "km": 50.8,
-    "fileVertragingMin": 0
-  },
-  "51.998,4.166>51.778,4.681@1-9": {
-    "minuten": 59,
-    "rijtijdTomTom": 48,
-    "km": 56.8,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.040,4.329@1-10": {
-    "minuten": 50,
-    "rijtijdTomTom": 41,
-    "km": 52.6,
-    "fileVertragingMin": 0
-  },
-  "52.050,4.234>51.778,4.681@2-9": {
-    "minuten": 60,
-    "rijtijdTomTom": 49,
-    "km": 53.4,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.040,4.329@2-10": {
-    "minuten": 54,
-    "rijtijdTomTom": 44,
-    "km": 52.6,
-    "fileVertragingMin": 0
-  },
-  "52.038,4.630>51.778,4.681@1-15": {
-    "minuten": 45,
-    "rijtijdTomTom": 37,
-    "km": 43.6,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.080,4.870@1-16": {
-    "minuten": 59,
-    "rijtijdTomTom": 48,
-    "km": 60.6,
-    "fileVertragingMin": 0
-  },
-  "52.074,4.553>51.778,4.681@1-11": {
-    "minuten": 52,
-    "rijtijdTomTom": 42,
-    "km": 50.7,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.154,4.656@1-12": {
-    "minuten": 63,
-    "rijtijdTomTom": 51,
-    "km": 64.4,
-    "fileVertragingMin": 0
-  },
-  "52.154,4.656>51.778,4.681@1-13": {
-    "minuten": 61,
-    "rijtijdTomTom": 50,
-    "km": 64,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.038,4.630@1-14": {
-    "minuten": 46,
-    "rijtijdTomTom": 37,
-    "km": 43.5,
-    "fileVertragingMin": 0
-  },
-  "52.457,4.718>51.778,4.681@2-15": {
-    "minuten": 100,
-    "rijtijdTomTom": 82,
-    "km": 116.1,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.080,4.870@2-17": {
-    "minuten": 65,
-    "rijtijdTomTom": 54,
-    "km": 60.6,
-    "fileVertragingMin": 0
-  },
-  "52.075,4.494>51.778,4.681@3-15": {
-    "minuten": 54,
-    "rijtijdTomTom": 44,
-    "km": 52.4,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.080,4.870@3-16": {
-    "minuten": 62,
-    "rijtijdTomTom": 51,
-    "km": 60.6,
-    "fileVertragingMin": 0
-  },
-  "52.076,4.277>51.778,4.681@3-10": {
-    "minuten": 63,
-    "rijtijdTomTom": 52,
-    "km": 56.2,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.936,4.608@3-11": {
-    "minuten": 39,
-    "rijtijdTomTom": 32,
-    "km": 30.1,
-    "fileVertragingMin": 0
-  },
-  "51.936,4.608>51.778,4.681@3-12": {
-    "minuten": 38,
-    "rijtijdTomTom": 31,
-    "km": 30.3,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.014,4.344@3-13": {
-    "minuten": 49,
-    "rijtijdTomTom": 40,
-    "km": 49.3,
-    "fileVertragingMin": 0
-  },
-  "52.324,4.964>51.778,4.681@4-15": {
-    "minuten": 89,
-    "rijtijdTomTom": 73,
-    "km": 105.6,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.080,4.870@4-17": {
-    "minuten": 69,
-    "rijtijdTomTom": 56,
-    "km": 60.6,
-    "fileVertragingMin": 0
-  },
-  "52.034,4.217>51.778,4.681@4-10": {
-    "minuten": 61,
-    "rijtijdTomTom": 50,
-    "km": 58.8,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.302,4.651@4-11": {
-    "minuten": 86,
-    "rijtijdTomTom": 70,
-    "km": 92.4,
-    "fileVertragingMin": 0
-  },
-  "52.094,5.231>51.778,4.681@1-14": {
-    "minuten": 73,
-    "rijtijdTomTom": 60,
-    "km": 81.8,
-    "fileVertragingMin": 0
-  },
-  "52.141,5.204>51.778,4.681@1-12": {
-    "minuten": 74,
-    "rijtijdTomTom": 61,
-    "km": 85.2,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.096,5.142@1-14": {
-    "minuten": 68,
-    "rijtijdTomTom": 56,
-    "km": 77.8,
-    "fileVertragingMin": 0
-  },
-  "52.119,4.668>51.778,4.681@2-15": {
-    "minuten": 56,
-    "rijtijdTomTom": 46,
-    "km": 59.1,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.080,4.870@2-16": {
-    "minuten": 63,
-    "rijtijdTomTom": 51,
-    "km": 60.6,
-    "fileVertragingMin": 0
-  },
-  "52.488,4.748>51.778,4.681@2-13": {
-    "minuten": 96,
-    "rijtijdTomTom": 79,
-    "km": 119.6,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.169,4.706@2-15": {
-    "minuten": 65,
-    "rijtijdTomTom": 53,
-    "km": 63.8,
-    "fileVertragingMin": 0
-  },
-  "52.020,4.727>51.778,4.681@3-14": {
-    "minuten": 51,
-    "rijtijdTomTom": 42,
-    "km": 47.7,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.080,4.870@3-15": {
-    "minuten": 60,
-    "rijtijdTomTom": 49,
-    "km": 60.6,
-    "fileVertragingMin": 0
-  },
-  "51.773,4.447>51.778,4.681@3-12": {
-    "minuten": 32,
-    "rijtijdTomTom": 26,
-    "km": 21.6,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.020,4.727@3-14": {
-    "minuten": 51,
-    "rijtijdTomTom": 42,
-    "km": 46.3,
-    "fileVertragingMin": 0
-  },
-  "52.053,4.465>51.778,4.681@4-14": {
-    "minuten": 56,
-    "rijtijdTomTom": 46,
-    "km": 49.8,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.080,4.870@4-16": {
-    "minuten": 62,
-    "rijtijdTomTom": 50,
-    "km": 60.6,
-    "fileVertragingMin": 0
-  },
-  "51.971,5.321>51.778,4.681@4-9": {
-    "minuten": 92,
-    "rijtijdTomTom": 76,
-    "km": 87.8,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.957,5.225@4-11": {
-    "minuten": 74,
-    "rijtijdTomTom": 61,
-    "km": 77.2,
-    "fileVertragingMin": 0
-  },
-  "51.957,5.225>51.778,4.681@4-10": {
-    "minuten": 75,
-    "rijtijdTomTom": 61,
-    "km": 77.5,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.930,4.601@4-12": {
-    "minuten": 36,
-    "rijtijdTomTom": 30,
-    "km": 29.3,
-    "fileVertragingMin": 0
-  },
-  "51.814,4.609>51.778,4.681@1-15": {
-    "minuten": 18,
-    "rijtijdTomTom": 14,
-    "km": 12,
-    "fileVertragingMin": 0
-  },
-  "52.312,4.673>51.778,4.681@2-14": {
-    "minuten": 80,
-    "rijtijdTomTom": 66,
-    "km": 92.4,
-    "fileVertragingMin": 0
-  },
-  "52.194,4.436>51.778,4.681@2-9": {
-    "minuten": 73,
-    "rijtijdTomTom": 60,
-    "km": 70.9,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.005,4.230@2-11": {
-    "minuten": 55,
-    "rijtijdTomTom": 45,
-    "km": 55.7,
-    "fileVertragingMin": 0
-  },
-  "52.005,4.230>51.778,4.681@2-10": {
-    "minuten": 54,
-    "rijtijdTomTom": 44,
-    "km": 54.8,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.059,4.478@2-12": {
-    "minuten": 54,
-    "rijtijdTomTom": 44,
-    "km": 49.1,
-    "fileVertragingMin": 0
-  },
-  "52.059,4.478>51.778,4.681@2-12": {
-    "minuten": 53,
-    "rijtijdTomTom": 44,
-    "km": 49.3,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.312,4.673@2-13": {
-    "minuten": 81,
-    "rijtijdTomTom": 66,
-    "km": 92.7,
-    "fileVertragingMin": 0
-  },
-  "51.859,4.470>51.778,4.681@3-15": {
-    "minuten": 33,
-    "rijtijdTomTom": 27,
-    "km": 28.2,
-    "fileVertragingMin": 0
-  },
-  "51.836,4.986>51.778,4.681@3-10": {
-    "minuten": 51,
-    "rijtijdTomTom": 42,
-    "km": 47.5,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.025,5.182@3-11": {
-    "minuten": 67,
-    "rijtijdTomTom": 55,
-    "km": 72.3,
-    "fileVertragingMin": 0
-  },
-  "52.025,5.182>51.778,4.681@3-12": {
-    "minuten": 66,
-    "rijtijdTomTom": 54,
-    "km": 72.8,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.092,4.268@3-13": {
-    "minuten": 67,
-    "rijtijdTomTom": 55,
-    "km": 62.1,
-    "fileVertragingMin": 0
-  },
-  "52.149,4.444>51.778,4.681@4-14": {
-    "minuten": 60,
-    "rijtijdTomTom": 50,
-    "km": 67.9,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.080,4.870@4-15": {
-    "minuten": 59,
-    "rijtijdTomTom": 48,
-    "km": 60.6,
-    "fileVertragingMin": 0
-  },
-  "52.353,4.622>51.778,4.681@4-9": {
-    "minuten": 93,
-    "rijtijdTomTom": 77,
-    "km": 97.6,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.330,4.613@4-11": {
-    "minuten": 90,
-    "rijtijdTomTom": 74,
-    "km": 95.4,
-    "fileVertragingMin": 0
-  },
-  "52.328,4.981>51.778,4.681@1-14": {
-    "minuten": 92,
-    "rijtijdTomTom": 75,
-    "km": 106.3,
-    "fileVertragingMin": 0
-  },
-  "52.009,4.436>51.778,4.681@1-11": {
-    "minuten": 44,
-    "rijtijdTomTom": 36,
-    "km": 40.9,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.322,4.659@1-12": {
-    "minuten": 81,
-    "rijtijdTomTom": 66,
-    "km": 93.6,
-    "fileVertragingMin": 0
-  },
-  "52.322,4.659>51.778,4.681@1-13": {
-    "minuten": 79,
-    "rijtijdTomTom": 65,
-    "km": 93.3,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.328,4.981@1-14": {
-    "minuten": 92,
-    "rijtijdTomTom": 76,
-    "km": 106,
-    "fileVertragingMin": 0
-  },
-  "51.819,4.602>51.778,4.681@2-14": {
-    "minuten": 20,
-    "rijtijdTomTom": 16,
-    "km": 12.6,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.080,4.870@2-15": {
-    "minuten": 59,
-    "rijtijdTomTom": 48,
-    "km": 60.6,
-    "fileVertragingMin": 0
-  },
-  "51.849,4.648>51.778,4.681@2-9": {
-    "minuten": 26,
-    "rijtijdTomTom": 21,
-    "km": 13.4,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.596,4.790@2-10": {
-    "minuten": 38,
-    "rijtijdTomTom": 31,
-    "km": 30.8,
-    "fileVertragingMin": 0
-  },
-  "51.596,4.790>51.778,4.681@2-13": {
-    "minuten": 35,
-    "rijtijdTomTom": 29,
-    "km": 30.2,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.819,4.602@2-14": {
-    "minuten": 22,
-    "rijtijdTomTom": 18,
-    "km": 13.1,
-    "fileVertragingMin": 0
-  },
-  "52.017,4.327>51.778,4.681@3-15": {
-    "minuten": 49,
-    "rijtijdTomTom": 40,
-    "km": 51.3,
-    "fileVertragingMin": 0
-  },
-  "52.083,4.649>51.778,4.681@3-9": {
-    "minuten": 61,
-    "rijtijdTomTom": 50,
-    "km": 51.9,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.017,4.327@3-10": {
-    "minuten": 49,
-    "rijtijdTomTom": 40,
-    "km": 51,
-    "fileVertragingMin": 0
-  },
-  "51.941,4.388>51.778,4.681@1-15": {
-    "minuten": 42,
-    "rijtijdTomTom": 34,
-    "km": 40.7,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.811,4.340@1-16": {
-    "minuten": 45,
-    "rijtijdTomTom": 37,
-    "km": 30.8,
-    "fileVertragingMin": 0
-  },
-  "51.687,5.332>51.778,4.681@1-8": {
-    "minuten": 74,
-    "rijtijdTomTom": 60,
-    "km": 72.8,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.892,4.419@1-10": {
-    "minuten": 36,
-    "rijtijdTomTom": 30,
-    "km": 28.8,
-    "fileVertragingMin": 0
-  },
-  "51.892,4.419>51.778,4.681@1-10": {
-    "minuten": 34,
-    "rijtijdTomTom": 28,
-    "km": 31.4,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.892,4.419@1-11": {
-    "minuten": 35,
-    "rijtijdTomTom": 28,
-    "km": 31.8,
-    "fileVertragingMin": 0
-  },
-  "51.892,4.419>51.778,4.681@2-8": {
-    "minuten": 33,
-    "rijtijdTomTom": 27,
-    "km": 28.7,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.811,4.340@2-9": {
-    "minuten": 49,
-    "rijtijdTomTom": 40,
-    "km": 31.1,
-    "fileVertragingMin": 0
-  },
-  "51.941,4.388>51.778,4.681@3-8": {
-    "minuten": 40,
-    "rijtijdTomTom": 33,
-    "km": 38,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.941,4.388@3-9": {
-    "minuten": 44,
-    "rijtijdTomTom": 36,
-    "km": 36.6,
-    "fileVertragingMin": 0
-  },
-  "51.941,4.388>51.941,4.388@3-8": {
-    "minuten": 10,
-    "rijtijdTomTom": 0,
-    "km": 0,
-    "fileVertragingMin": 0
-  },
-  "51.941,4.388>51.778,4.681@3-13": {
-    "minuten": 41,
-    "rijtijdTomTom": 34,
-    "km": 40.7,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.811,4.340@3-14": {
-    "minuten": 45,
-    "rijtijdTomTom": 37,
-    "km": 30.8,
-    "fileVertragingMin": 0
-  },
-  "51.941,4.388>51.811,4.340@3-13": {
-    "minuten": 43,
-    "rijtijdTomTom": 35,
-    "km": 38.5,
-    "fileVertragingMin": 0
-  },
-  "51.811,4.340>51.778,4.681@4-8": {
-    "minuten": 41,
-    "rijtijdTomTom": 34,
-    "km": 30.6,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.811,4.340@4-9": {
-    "minuten": 48,
-    "rijtijdTomTom": 39,
-    "km": 30.8,
-    "fileVertragingMin": 0
-  },
-  "51.811,4.340>51.778,4.681@1-8": {
-    "minuten": 41,
-    "rijtijdTomTom": 34,
-    "km": 30.6,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>52.034,4.359@1-9": {
-    "minuten": 50,
-    "rijtijdTomTom": 41,
-    "km": 44.8,
-    "fileVertragingMin": 0
-  },
-  "52.034,4.359>51.778,4.681@1-12": {
-    "minuten": 45,
-    "rijtijdTomTom": 37,
-    "km": 47.8,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.811,4.340@1-14": {
-    "minuten": 44,
-    "rijtijdTomTom": 36,
-    "km": 30.8,
-    "fileVertragingMin": 0
-  },
-  "51.811,4.340>51.778,4.681@2-8": {
-    "minuten": 41,
-    "rijtijdTomTom": 34,
-    "km": 30.6,
-    "fileVertragingMin": 0
-  },
-  "51.811,4.340>51.778,4.681@3-8": {
-    "minuten": 41,
-    "rijtijdTomTom": 33,
-    "km": 30.6,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.811,4.340@3-9": {
-    "minuten": 47,
-    "rijtijdTomTom": 38,
-    "km": 30.8,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.811,4.340@1-9": {
-    "minuten": 47,
-    "rijtijdTomTom": 39,
-    "km": 30.8,
-    "fileVertragingMin": 0
-  },
-  "51.941,4.388>52.070,4.272@1-15": {
-    "minuten": 36,
-    "rijtijdTomTom": 30,
-    "km": 21.6,
-    "fileVertragingMin": 0
-  },
-  "52.070,4.272>51.811,4.340@1-16": {
-    "minuten": 66,
-    "rijtijdTomTom": 54,
-    "km": 53.9,
     "fileVertragingMin": 0
   },
   "51.941,4.388>51.859,4.501@1-15": {
@@ -119009,6 +119771,48 @@
     "km": 21.5,
     "fileVertragingMin": 0
   },
+  "51.778,4.681>51.859,4.501@3-8": {
+    "minuten": 32,
+    "rijtijdTomTom": 26,
+    "km": 25.4,
+    "fileVertragingMin": 0
+  },
+  "51.859,4.501>51.833,4.686@3-9": {
+    "minuten": 26,
+    "rijtijdTomTom": 21,
+    "km": 20.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.833,4.686@3-8": {
+    "minuten": 27,
+    "rijtijdTomTom": 22,
+    "km": 20.3,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.859,4.501@3-9": {
+    "minuten": 26,
+    "rijtijdTomTom": 21,
+    "km": 21.5,
+    "fileVertragingMin": 0
+  },
+  "51.859,4.501>51.811,4.340@3-10": {
+    "minuten": 31,
+    "rijtijdTomTom": 25,
+    "km": 21.5,
+    "fileVertragingMin": 0
+  },
+  "52.012,4.485>51.859,4.501@4-10": {
+    "minuten": 36,
+    "rijtijdTomTom": 30,
+    "km": 29.4,
+    "fileVertragingMin": 0
+  },
+  "51.892,4.419>52.040,4.329@4-10": {
+    "minuten": 35,
+    "rijtijdTomTom": 28,
+    "km": 27.3,
+    "fileVertragingMin": 0
+  },
   "51.941,4.388>51.892,4.419@1-15": {
     "minuten": 23,
     "rijtijdTomTom": 19,
@@ -119021,118 +119825,2104 @@
     "km": 29.2,
     "fileVertragingMin": 0
   },
-  "51.892,4.419>51.778,4.681@1-16": {
-    "minuten": 35,
-    "rijtijdTomTom": 28,
-    "km": 31.4,
+  "51.833,4.686>51.892,4.419@3-9": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 24.9,
     "fileVertragingMin": 0
   },
-  "51.778,4.681>51.811,4.340@1-17": {
-    "minuten": 46,
-    "rijtijdTomTom": 38,
-    "km": 30.8,
+  "51.892,4.419>51.811,4.340@3-10": {
+    "minuten": 36,
+    "rijtijdTomTom": 30,
+    "km": 29.2,
     "fileVertragingMin": 0
   },
-  "51.778,4.681>51.859,4.501@1-10": {
-    "minuten": 34,
-    "rijtijdTomTom": 28,
-    "km": 25.4,
+  "51.941,4.388>52.070,4.272@1-15": {
+    "minuten": 36,
+    "rijtijdTomTom": 30,
+    "km": 21.6,
     "fileVertragingMin": 0
   },
-  "51.859,4.501>51.778,4.681@1-10": {
-    "minuten": 33,
-    "rijtijdTomTom": 27,
-    "km": 27.4,
+  "52.070,4.272>51.811,4.340@1-16": {
+    "minuten": 67,
+    "rijtijdTomTom": 55,
+    "km": 53.9,
     "fileVertragingMin": 0
   },
-  "51.778,4.681>51.859,4.501@1-11": {
-    "minuten": 33,
-    "rijtijdTomTom": 27,
-    "km": 28.4,
-    "fileVertragingMin": 0
-  },
-  "51.859,4.501>51.778,4.681@1-12": {
-    "minuten": 32,
-    "rijtijdTomTom": 26,
-    "km": 27.4,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.858,4.373@1-14": {
-    "minuten": 40,
-    "rijtijdTomTom": 33,
-    "km": 33.6,
-    "fileVertragingMin": 0
-  },
-  "51.859,4.501>51.858,4.373@1-12": {
-    "minuten": 23,
-    "rijtijdTomTom": 19,
-    "km": 11,
-    "fileVertragingMin": 0
-  },
-  "51.892,4.419>51.778,4.681@2-15": {
-    "minuten": 34,
-    "rijtijdTomTom": 28,
-    "km": 31.4,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.811,4.340@2-16": {
-    "minuten": 46,
-    "rijtijdTomTom": 38,
-    "km": 30.8,
-    "fileVertragingMin": 0
-  },
-  "52.070,4.272>51.778,4.681@2-8": {
+  "51.833,4.686>52.070,4.272@3-9": {
     "minuten": 58,
     "rijtijdTomTom": 48,
-    "km": 53.4,
+    "km": 49.1,
     "fileVertragingMin": 0
   },
-  "51.778,4.681>52.070,4.272@2-10": {
-    "minuten": 70,
-    "rijtijdTomTom": 57,
-    "km": 53,
+  "52.070,4.272>51.811,4.340@3-11": {
+    "minuten": 63,
+    "rijtijdTomTom": 51,
+    "km": 53.9,
     "fileVertragingMin": 0
   },
-  "52.070,4.272>51.778,4.681@2-13": {
-    "minuten": 61,
-    "rijtijdTomTom": 50,
-    "km": 56.1,
+  "51.778,4.681>52.070,4.272@3-13": {
+    "minuten": 63,
+    "rijtijdTomTom": 51,
+    "km": 56,
     "fileVertragingMin": 0
   },
-  "51.778,4.681>51.859,4.501@2-14": {
-    "minuten": 33,
-    "rijtijdTomTom": 27,
-    "km": 28.4,
+  "52.070,4.272>51.811,4.340@3-14": {
+    "minuten": 63,
+    "rijtijdTomTom": 52,
+    "km": 53.9,
     "fileVertragingMin": 0
   },
-  "52.070,4.272>51.778,4.681@3-8": {
-    "minuten": 58,
-    "rijtijdTomTom": 47,
-    "km": 53.4,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.892,4.419@3-10": {
-    "minuten": 35,
-    "rijtijdTomTom": 29,
-    "km": 31.8,
-    "fileVertragingMin": 0
-  },
-  "51.892,4.419>51.778,4.681@3-10": {
-    "minuten": 35,
-    "rijtijdTomTom": 29,
-    "km": 31.4,
-    "fileVertragingMin": 0
-  },
-  "51.778,4.681>51.811,4.340@3-11": {
+  "51.778,4.681>51.811,4.340@3-13": {
     "minuten": 45,
     "rijtijdTomTom": 37,
     "km": 30.8,
     "fileVertragingMin": 0
   },
-  "51.892,4.419>51.811,4.340@3-10": {
+  "51.859,4.501>51.778,4.681@3-10": {
+    "minuten": 32,
+    "rijtijdTomTom": 27,
+    "km": 27.4,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.778,4.681@3-9": {
+    "minuten": 29,
+    "rijtijdTomTom": 24,
+    "km": 24.5,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.859,4.501@3-13": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 28.4,
+    "fileVertragingMin": 0
+  },
+  "51.859,4.501>51.811,4.340@3-14": {
+    "minuten": 30,
+    "rijtijdTomTom": 25,
+    "km": 21.5,
+    "fileVertragingMin": 0
+  },
+  "52.012,4.485>51.859,4.501@4-11": {
+    "minuten": 35,
+    "rijtijdTomTom": 28,
+    "km": 29.4,
+    "fileVertragingMin": 0
+  },
+  "51.892,4.419>51.833,4.686@3-9": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 24.6,
+    "fileVertragingMin": 0
+  },
+  "51.892,4.419>51.778,4.681@3-10": {
+    "minuten": 34,
+    "rijtijdTomTom": 28,
+    "km": 31.4,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.892,4.419@3-13": {
+    "minuten": 35,
+    "rijtijdTomTom": 29,
+    "km": 31.8,
+    "fileVertragingMin": 0
+  },
+  "51.892,4.419>51.811,4.340@3-14": {
+    "minuten": 35,
+    "rijtijdTomTom": 29,
+    "km": 29.2,
+    "fileVertragingMin": 0
+  },
+  "51.858,4.373>51.941,4.388@1-10": {
+    "minuten": 26,
+    "rijtijdTomTom": 21,
+    "km": 14.5,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.858,4.373@1-15": {
+    "minuten": 25,
+    "rijtijdTomTom": 20,
+    "km": 14.4,
+    "fileVertragingMin": 0
+  },
+  "51.858,4.373>51.811,4.340@1-16": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 9.9,
+    "fileVertragingMin": 0
+  },
+  "51.858,4.373>51.833,4.686@3-9": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 26.1,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.858,4.373@3-9": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 26.7,
+    "fileVertragingMin": 0
+  },
+  "51.858,4.373>51.778,4.681@3-10": {
+    "minuten": 39,
+    "rijtijdTomTom": 32,
+    "km": 32.9,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.858,4.373@3-13": {
+    "minuten": 40,
+    "rijtijdTomTom": 33,
+    "km": 33.6,
+    "fileVertragingMin": 0
+  },
+  "51.858,4.373>51.811,4.340@3-14": {
+    "minuten": 40,
+    "rijtijdTomTom": 33,
+    "km": 9.8,
+    "fileVertragingMin": 0
+  },
+  "51.858,4.373>52.034,4.359@1-9": {
+    "minuten": 38,
+    "rijtijdTomTom": 31,
+    "km": 30.1,
+    "fileVertragingMin": 0
+  },
+  "52.034,4.359>51.858,4.373@1-12": {
+    "minuten": 36,
+    "rijtijdTomTom": 30,
+    "km": 29,
+    "fileVertragingMin": 0
+  },
+  "52.012,4.485>51.858,4.373@4-13": {
+    "minuten": 38,
+    "rijtijdTomTom": 31,
+    "km": 29.5,
+    "fileVertragingMin": 0
+  },
+  "51.858,4.373>52.070,4.272@1-10": {
+    "minuten": 46,
+    "rijtijdTomTom": 37,
+    "km": 29.9,
+    "fileVertragingMin": 0
+  },
+  "52.070,4.272>51.941,4.388@1-12": {
     "minuten": 37,
     "rijtijdTomTom": 30,
-    "km": 29.2,
+    "km": 22.9,
+    "fileVertragingMin": 0
+  },
+  "52.070,4.272>51.833,4.686@3-9": {
+    "minuten": 56,
+    "rijtijdTomTom": 46,
+    "km": 49.2,
+    "fileVertragingMin": 0
+  },
+  "52.070,4.272>51.778,4.681@3-11": {
+    "minuten": 61,
+    "rijtijdTomTom": 50,
+    "km": 56.1,
+    "fileVertragingMin": 0
+  },
+  "51.858,4.373>51.859,4.501@1-10": {
+    "minuten": 24,
+    "rijtijdTomTom": 20,
+    "km": 10.9,
+    "fileVertragingMin": 0
+  },
+  "51.859,4.501>51.941,4.388@1-11": {
+    "minuten": 29,
+    "rijtijdTomTom": 24,
+    "km": 19.1,
+    "fileVertragingMin": 0
+  },
+  "51.859,4.501>51.833,4.686@3-8": {
+    "minuten": 24,
+    "rijtijdTomTom": 20,
+    "km": 20.6,
+    "fileVertragingMin": 0
+  },
+  "52.012,4.485>51.859,4.501@4-13": {
+    "minuten": 34,
+    "rijtijdTomTom": 28,
+    "km": 29.4,
+    "fileVertragingMin": 0
+  },
+  "51.892,4.419>51.941,4.388@1-11": {
+    "minuten": 22,
+    "rijtijdTomTom": 18,
+    "km": 15.3,
+    "fileVertragingMin": 0
+  },
+  "52.012,4.485>51.859,4.501@4-14": {
+    "minuten": 34,
+    "rijtijdTomTom": 28,
+    "km": 29.4,
+    "fileVertragingMin": 0
+  },
+  "52.070,4.272>51.858,4.373@1-11": {
+    "minuten": 43,
+    "rijtijdTomTom": 35,
+    "km": 29.8,
+    "fileVertragingMin": 0
+  },
+  "51.892,4.419>51.858,4.373@1-11": {
+    "minuten": 21,
+    "rijtijdTomTom": 17,
+    "km": 11.5,
+    "fileVertragingMin": 0
+  },
+  "51.900,4.249>52.070,4.272@2-10": {
+    "minuten": 50,
+    "rijtijdTomTom": 41,
+    "km": 30.4,
+    "fileVertragingMin": 0
+  },
+  "52.070,4.272>51.986,4.216@2-11": {
+    "minuten": 30,
+    "rijtijdTomTom": 25,
+    "km": 13,
+    "fileVertragingMin": 0
+  },
+  "51.900,4.249>51.892,4.419@2-10": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 20.5,
+    "fileVertragingMin": 0
+  },
+  "51.892,4.419>51.986,4.216@2-11": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 29.4,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.986,4.216@2-10": {
+    "minuten": 27,
+    "rijtijdTomTom": 22,
+    "km": 21.9,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.859,4.501@1-10": {
+    "minuten": 30,
+    "rijtijdTomTom": 24,
+    "km": 24.4,
+    "fileVertragingMin": 0
+  },
+  "51.859,4.501>51.941,4.388@1-10": {
+    "minuten": 31,
+    "rijtijdTomTom": 25,
+    "km": 19.1,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.858,4.373@1-11": {
+    "minuten": 25,
+    "rijtijdTomTom": 20,
+    "km": 14.4,
+    "fileVertragingMin": 0
+  },
+  "51.858,4.373>51.941,4.388@1-14": {
+    "minuten": 25,
+    "rijtijdTomTom": 21,
+    "km": 14.5,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.833,4.686@3-9": {
+    "minuten": 35,
+    "rijtijdTomTom": 29,
+    "km": 33.8,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.941,4.388@3-9": {
+    "minuten": 36,
+    "rijtijdTomTom": 29,
+    "km": 32.7,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.778,4.681@3-10": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 40.7,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.941,4.388@3-13": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 39.6,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.811,4.340@3-14": {
+    "minuten": 43,
+    "rijtijdTomTom": 35,
+    "km": 38.5,
+    "fileVertragingMin": 0
+  },
+  "52.012,4.485>51.941,4.388@4-18": {
+    "minuten": 29,
+    "rijtijdTomTom": 24,
+    "km": 18,
+    "fileVertragingMin": 2
+  },
+  "52.020,4.327>52.223,4.491@1-15": {
+    "minuten": 31,
+    "rijtijdTomTom": 26,
+    "km": 30.5,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.040,4.329@1-16": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 28.2,
+    "fileVertragingMin": 0
+  },
+  "52.013,4.347>52.223,4.491@1-12": {
+    "minuten": 32,
+    "rijtijdTomTom": 27,
+    "km": 30.9,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.042,4.399@1-13": {
+    "minuten": 31,
+    "rijtijdTomTom": 26,
+    "km": 29.4,
+    "fileVertragingMin": 0
+  },
+  "52.091,4.270>52.223,4.491@2-15": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 27,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.040,4.329@2-16": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 28.2,
+    "fileVertragingMin": 0
+  },
+  "52.078,4.395>52.223,4.491@2-12": {
+    "minuten": 26,
+    "rijtijdTomTom": 21,
+    "km": 23.2,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.057,4.227@2-13": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 39.5,
+    "fileVertragingMin": 0
+  },
+  "51.983,4.352>52.223,4.491@4-15": {
+    "minuten": 35,
+    "rijtijdTomTom": 29,
+    "km": 36.3,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.040,4.329@4-16": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 28.2,
+    "fileVertragingMin": 0
+  },
+  "52.002,4.690>52.223,4.491@4-11": {
+    "minuten": 48,
+    "rijtijdTomTom": 39,
+    "km": 48.8,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.022,4.338@4-12": {
+    "minuten": 30,
+    "rijtijdTomTom": 25,
+    "km": 30.9,
+    "fileVertragingMin": 0
+  },
+  "51.955,4.475>52.223,4.491@1-14": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 45.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.040,4.329@1-15": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 28.2,
+    "fileVertragingMin": 0
+  },
+  "52.062,4.554>52.223,4.491@1-13": {
+    "minuten": 37,
+    "rijtijdTomTom": 31,
+    "km": 37.2,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.962,4.476@1-13": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 45.3,
+    "fileVertragingMin": 0
+  },
+  "51.790,4.698>52.223,4.491@2-15": {
+    "minuten": 62,
+    "rijtijdTomTom": 51,
+    "km": 70.6,
+    "fileVertragingMin": 0
+  },
+  "51.900,4.249>52.223,4.491@2-10": {
+    "minuten": 65,
+    "rijtijdTomTom": 53,
+    "km": 53.8,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.986,4.216@2-11": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 39.5,
+    "fileVertragingMin": 0
+  },
+  "51.986,4.216>52.223,4.491@2-12": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 40,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.931,4.455@2-13": {
+    "minuten": 40,
+    "rijtijdTomTom": 33,
+    "km": 42.6,
+    "fileVertragingMin": 0
+  },
+  "51.957,4.476>52.223,4.491@4-14": {
+    "minuten": 41,
+    "rijtijdTomTom": 33,
+    "km": 45.4,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.040,4.329@4-15": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 28.2,
+    "fileVertragingMin": 0
+  },
+  "52.040,4.495>52.223,4.491@4-9": {
+    "minuten": 38,
+    "rijtijdTomTom": 31,
+    "km": 33.6,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.018,4.333@4-10": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 30.5,
+    "fileVertragingMin": 0
+  },
+  "52.078,4.344>52.223,4.491@4-11": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 27.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.915,4.619@4-12": {
+    "minuten": 58,
+    "rijtijdTomTom": 47,
+    "km": 60.4,
+    "fileVertragingMin": 0
+  },
+  "51.915,4.619>52.223,4.491@4-13": {
+    "minuten": 58,
+    "rijtijdTomTom": 48,
+    "km": 59.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.957,4.476@4-14": {
+    "minuten": 40,
+    "rijtijdTomTom": 33,
+    "km": 45.2,
+    "fileVertragingMin": 0
+  },
+  "52.040,4.329>52.223,4.491@1-15": {
+    "minuten": 29,
+    "rijtijdTomTom": 24,
+    "km": 28.7,
+    "fileVertragingMin": 0
+  },
+  "52.175,4.515>52.223,4.491@2-14": {
+    "minuten": 20,
+    "rijtijdTomTom": 16,
+    "km": 9.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.040,4.329@2-15": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 28.2,
+    "fileVertragingMin": 0
+  },
+  "52.201,4.636>52.223,4.491@2-9": {
+    "minuten": 24,
+    "rijtijdTomTom": 20,
+    "km": 16.6,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.229,4.521@2-10": {
+    "minuten": 12,
+    "rijtijdTomTom": 10,
+    "km": 4.7,
+    "fileVertragingMin": 0
+  },
+  "51.854,4.145>52.223,4.491@4-15": {
+    "minuten": 57,
+    "rijtijdTomTom": 47,
+    "km": 63.8,
+    "fileVertragingMin": 0
+  },
+  "52.046,4.235>52.223,4.491@4-12": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 39.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.842,4.337@4-13": {
+    "minuten": 54,
+    "rijtijdTomTom": 44,
+    "km": 57.8,
+    "fileVertragingMin": 0
+  },
+  "51.548,5.097>52.223,4.491@1-14": {
+    "minuten": 100,
+    "rijtijdTomTom": 82,
+    "km": 125.5,
+    "fileVertragingMin": 0
+  },
+  "51.879,5.296>52.223,4.491@1-9": {
+    "minuten": 88,
+    "rijtijdTomTom": 72,
+    "km": 91.5,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.819,4.647@1-11": {
+    "minuten": 57,
+    "rijtijdTomTom": 47,
+    "km": 66.6,
+    "fileVertragingMin": 0
+  },
+  "51.819,4.647>52.223,4.491@1-12": {
+    "minuten": 56,
+    "rijtijdTomTom": 46,
+    "km": 65.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.615,4.783@1-13": {
+    "minuten": 80,
+    "rijtijdTomTom": 66,
+    "km": 96.5,
+    "fileVertragingMin": 0
+  },
+  "51.615,4.783>52.223,4.491@1-13": {
+    "minuten": 80,
+    "rijtijdTomTom": 66,
+    "km": 95.8,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.548,5.097@1-14": {
+    "minuten": 102,
+    "rijtijdTomTom": 84,
+    "km": 126.9,
+    "fileVertragingMin": 0
+  },
+  "52.385,4.892>52.223,4.491@2-9": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 41.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.040,4.329@2-10": {
+    "minuten": 31,
+    "rijtijdTomTom": 25,
+    "km": 28.3,
+    "fileVertragingMin": 0
+  },
+  "52.050,4.234>52.223,4.491@4-9": {
+    "minuten": 46,
+    "rijtijdTomTom": 38,
+    "km": 31.6,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.461,4.625@4-10": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 44.8,
+    "fileVertragingMin": 0
+  },
+  "52.461,4.625>52.223,4.491@4-12": {
+    "minuten": 39,
+    "rijtijdTomTom": 32,
+    "km": 43.8,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.040,4.329@4-13": {
+    "minuten": 27,
+    "rijtijdTomTom": 23,
+    "km": 28.2,
+    "fileVertragingMin": 0
+  },
+  "51.998,4.166>52.223,4.491@1-9": {
+    "minuten": 63,
+    "rijtijdTomTom": 51,
+    "km": 44.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.040,4.329@1-10": {
+    "minuten": 30,
+    "rijtijdTomTom": 24,
+    "km": 28.3,
+    "fileVertragingMin": 0
+  },
+  "52.050,4.234>52.223,4.491@2-9": {
+    "minuten": 47,
+    "rijtijdTomTom": 38,
+    "km": 31.6,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.040,4.329@4-10": {
+    "minuten": 32,
+    "rijtijdTomTom": 26,
+    "km": 28.3,
+    "fileVertragingMin": 0
+  },
+  "52.038,4.630>52.223,4.491@1-15": {
+    "minuten": 42,
+    "rijtijdTomTom": 35,
+    "km": 44.2,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.080,4.870@1-16": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 49.6,
+    "fileVertragingMin": 0
+  },
+  "52.074,4.553>52.223,4.491@1-11": {
+    "minuten": 35,
+    "rijtijdTomTom": 29,
+    "km": 27.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.154,4.656@1-11": {
+    "minuten": 29,
+    "rijtijdTomTom": 24,
+    "km": 25,
+    "fileVertragingMin": 0
+  },
+  "52.154,4.656>52.223,4.491@1-13": {
+    "minuten": 29,
+    "rijtijdTomTom": 24,
+    "km": 24.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.038,4.630@1-13": {
+    "minuten": 43,
+    "rijtijdTomTom": 35,
+    "km": 44.8,
+    "fileVertragingMin": 0
+  },
+  "52.457,4.718>52.223,4.491@2-15": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 50.6,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.080,4.870@2-16": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 49.6,
+    "fileVertragingMin": 0
+  },
+  "52.315,4.649>52.223,4.491@2-14": {
+    "minuten": 31,
+    "rijtijdTomTom": 25,
+    "km": 28.8,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.457,4.718@2-14": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 51,
+    "fileVertragingMin": 0
+  },
+  "52.075,4.494>52.223,4.491@3-15": {
+    "minuten": 32,
+    "rijtijdTomTom": 26,
+    "km": 25,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.080,4.870@3-16": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 49.6,
+    "fileVertragingMin": 0
+  },
+  "52.076,4.277>52.223,4.491@3-10": {
+    "minuten": 42,
+    "rijtijdTomTom": 35,
+    "km": 24.9,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.936,4.608@3-11": {
+    "minuten": 53,
+    "rijtijdTomTom": 43,
+    "km": 52.1,
+    "fileVertragingMin": 0
+  },
+  "52.324,4.964>52.223,4.491@4-15": {
+    "minuten": 50,
+    "rijtijdTomTom": 41,
+    "km": 45,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.080,4.870@4-16": {
+    "minuten": 51,
+    "rijtijdTomTom": 42,
+    "km": 49.6,
+    "fileVertragingMin": 0
+  },
+  "52.034,4.217>52.223,4.491@4-10": {
+    "minuten": 55,
+    "rijtijdTomTom": 45,
+    "km": 40.6,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.302,4.651@4-11": {
+    "minuten": 35,
+    "rijtijdTomTom": 28,
+    "km": 19.2,
+    "fileVertragingMin": 0
+  },
+  "52.281,4.622>52.223,4.491@4-12": {
+    "minuten": 26,
+    "rijtijdTomTom": 21,
+    "km": 15.8,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.352,4.774@4-13": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 34.5,
+    "fileVertragingMin": 0
+  },
+  "52.352,4.774>52.223,4.491@4-14": {
+    "minuten": 43,
+    "rijtijdTomTom": 35,
+    "km": 34.6,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.324,4.964@4-15": {
+    "minuten": 51,
+    "rijtijdTomTom": 42,
+    "km": 45.3,
+    "fileVertragingMin": 0
+  },
+  "52.094,5.231>52.223,4.491@1-14": {
+    "minuten": 67,
+    "rijtijdTomTom": 55,
+    "km": 76.2,
+    "fileVertragingMin": 0
+  },
+  "52.141,5.204>52.223,4.491@1-12": {
+    "minuten": 68,
+    "rijtijdTomTom": 56,
+    "km": 79.6,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.096,5.142@1-14": {
+    "minuten": 63,
+    "rijtijdTomTom": 52,
+    "km": 73.2,
+    "fileVertragingMin": 0
+  },
+  "52.119,4.668>52.223,4.491@2-15": {
+    "minuten": 31,
+    "rijtijdTomTom": 25,
+    "km": 29.9,
+    "fileVertragingMin": 0
+  },
+  "52.178,4.498>52.223,4.491@2-9": {
+    "minuten": 19,
+    "rijtijdTomTom": 16,
+    "km": 9.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.169,4.529@2-9": {
+    "minuten": 25,
+    "rijtijdTomTom": 20,
+    "km": 10.4,
+    "fileVertragingMin": 0
+  },
+  "52.488,4.748>52.223,4.491@2-13": {
+    "minuten": 46,
+    "rijtijdTomTom": 38,
+    "km": 54.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.169,4.706@2-14": {
+    "minuten": 32,
+    "rijtijdTomTom": 27,
+    "km": 26.4,
+    "fileVertragingMin": 0
+  },
+  "52.020,4.727>52.223,4.491@3-14": {
+    "minuten": 48,
+    "rijtijdTomTom": 40,
+    "km": 44.4,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.080,4.870@3-15": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 49.6,
+    "fileVertragingMin": 0
+  },
+  "51.966,4.496>52.223,4.491@3-11": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 44.9,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.770,4.614@3-12": {
+    "minuten": 60,
+    "rijtijdTomTom": 49,
+    "km": 73.7,
+    "fileVertragingMin": 0
+  },
+  "51.770,4.614>52.223,4.491@3-12": {
+    "minuten": 61,
+    "rijtijdTomTom": 50,
+    "km": 74,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.773,4.447@3-13": {
+    "minuten": 62,
+    "rijtijdTomTom": 50,
+    "km": 70.1,
+    "fileVertragingMin": 0
+  },
+  "51.773,4.447>52.223,4.491@3-12": {
+    "minuten": 63,
+    "rijtijdTomTom": 51,
+    "km": 69.8,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.020,4.727@3-14": {
+    "minuten": 48,
+    "rijtijdTomTom": 39,
+    "km": 44.3,
+    "fileVertragingMin": 0
+  },
+  "52.053,4.465>52.223,4.491@4-14": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 32.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.080,4.870@4-15": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 49.6,
+    "fileVertragingMin": 0
+  },
+  "51.971,5.321>52.223,4.491@4-9": {
+    "minuten": 85,
+    "rijtijdTomTom": 70,
+    "km": 85.8,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.957,5.225@4-11": {
+    "minuten": 80,
+    "rijtijdTomTom": 66,
+    "km": 84.7,
+    "fileVertragingMin": 0
+  },
+  "51.957,5.225>52.223,4.491@4-10": {
+    "minuten": 79,
+    "rijtijdTomTom": 65,
+    "km": 83.8,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.930,4.601@4-12": {
+    "minuten": 52,
+    "rijtijdTomTom": 43,
+    "km": 53,
+    "fileVertragingMin": 0
+  },
+  "51.930,4.601>52.223,4.491@4-12": {
+    "minuten": 55,
+    "rijtijdTomTom": 45,
+    "km": 54.3,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.059,4.549@4-13": {
+    "minuten": 37,
+    "rijtijdTomTom": 31,
+    "km": 37.3,
+    "fileVertragingMin": 0
+  },
+  "51.814,4.609>52.223,4.491@1-15": {
+    "minuten": 57,
+    "rijtijdTomTom": 46,
+    "km": 66.8,
+    "fileVertragingMin": 0
+  },
+  "51.936,4.439>52.223,4.491@1-10": {
+    "minuten": 39,
+    "rijtijdTomTom": 32,
+    "km": 40.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.884,4.470@1-11": {
+    "minuten": 48,
+    "rijtijdTomTom": 40,
+    "km": 54.4,
+    "fileVertragingMin": 0
+  },
+  "51.857,4.377>52.223,4.491@1-13": {
+    "minuten": 50,
+    "rijtijdTomTom": 41,
+    "km": 53.5,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.953,4.581@1-14": {
+    "minuten": 46,
+    "rijtijdTomTom": 37,
+    "km": 51.5,
+    "fileVertragingMin": 0
+  },
+  "52.312,4.673>52.223,4.491@2-14": {
+    "minuten": 30,
+    "rijtijdTomTom": 25,
+    "km": 26.9,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.080,4.870@2-15": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 49.6,
+    "fileVertragingMin": 0
+  },
+  "52.194,4.436>52.223,4.491@2-9": {
+    "minuten": 15,
+    "rijtijdTomTom": 13,
+    "km": 6.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.005,4.230@2-9": {
+    "minuten": 47,
+    "rijtijdTomTom": 38,
+    "km": 37.9,
+    "fileVertragingMin": 0
+  },
+  "52.005,4.230>52.223,4.491@2-10": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 39.8,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.059,4.478@2-12": {
+    "minuten": 31,
+    "rijtijdTomTom": 25,
+    "km": 32.3,
+    "fileVertragingMin": 0
+  },
+  "52.059,4.478>52.223,4.491@2-12": {
+    "minuten": 31,
+    "rijtijdTomTom": 26,
+    "km": 32.2,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.312,4.673@2-13": {
+    "minuten": 31,
+    "rijtijdTomTom": 25,
+    "km": 27.6,
+    "fileVertragingMin": 0
+  },
+  "51.859,4.470>52.223,4.491@3-15": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 54.6,
+    "fileVertragingMin": 0
+  },
+  "51.817,5.094>52.223,4.491@3-9": {
+    "minuten": 98,
+    "rijtijdTomTom": 80,
+    "km": 109.4,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.836,4.986@3-11": {
+    "minuten": 77,
+    "rijtijdTomTom": 63,
+    "km": 91.5,
+    "fileVertragingMin": 0
+  },
+  "51.836,4.986>52.223,4.491@3-10": {
+    "minuten": 83,
+    "rijtijdTomTom": 68,
+    "km": 90.5,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.025,5.182@3-12": {
+    "minuten": 63,
+    "rijtijdTomTom": 52,
+    "km": 73.8,
+    "fileVertragingMin": 0
+  },
+  "52.025,5.182>52.223,4.491@3-12": {
+    "minuten": 63,
+    "rijtijdTomTom": 52,
+    "km": 73.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.092,4.268@3-13": {
+    "minuten": 42,
+    "rijtijdTomTom": 35,
+    "km": 26.8,
+    "fileVertragingMin": 0
+  },
+  "52.149,4.444>52.223,4.491@4-14": {
+    "minuten": 17,
+    "rijtijdTomTom": 14,
+    "km": 11,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.080,4.870@4-14": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 49.6,
+    "fileVertragingMin": 0
+  },
+  "52.353,4.622>52.223,4.491@4-9": {
+    "minuten": 37,
+    "rijtijdTomTom": 30,
+    "km": 23.4,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.330,4.613@4-10": {
+    "minuten": 34,
+    "rijtijdTomTom": 28,
+    "km": 22.4,
+    "fileVertragingMin": 0
+  },
+  "52.328,4.981>52.223,4.491@1-14": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 43.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.080,4.870@1-15": {
+    "minuten": 48,
+    "rijtijdTomTom": 40,
+    "km": 49.6,
+    "fileVertragingMin": 0
+  },
+  "52.009,4.436>52.223,4.491@1-11": {
+    "minuten": 39,
+    "rijtijdTomTom": 32,
+    "km": 37,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.322,4.659@1-11": {
+    "minuten": 31,
+    "rijtijdTomTom": 26,
+    "km": 28.5,
+    "fileVertragingMin": 0
+  },
+  "52.322,4.659>52.223,4.491@1-13": {
+    "minuten": 30,
+    "rijtijdTomTom": 24,
+    "km": 27.8,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.328,4.981@1-13": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 43.7,
+    "fileVertragingMin": 0
+  },
+  "51.819,4.602>52.223,4.491@2-14": {
+    "minuten": 55,
+    "rijtijdTomTom": 45,
+    "km": 64.6,
+    "fileVertragingMin": 0
+  },
+  "51.849,4.648>52.223,4.491@2-9": {
+    "minuten": 68,
+    "rijtijdTomTom": 56,
+    "km": 63.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.596,4.790@2-11": {
+    "minuten": 83,
+    "rijtijdTomTom": 68,
+    "km": 96.2,
+    "fileVertragingMin": 0
+  },
+  "51.596,4.790>52.223,4.491@2-13": {
+    "minuten": 82,
+    "rijtijdTomTom": 67,
+    "km": 95.7,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.819,4.602@2-15": {
+    "minuten": 55,
+    "rijtijdTomTom": 45,
+    "km": 64.6,
+    "fileVertragingMin": 0
+  },
+  "52.017,4.327>52.223,4.491@3-15": {
+    "minuten": 31,
+    "rijtijdTomTom": 25,
+    "km": 30.6,
+    "fileVertragingMin": 0
+  },
+  "52.083,4.649>52.223,4.491@3-9": {
+    "minuten": 40,
+    "rijtijdTomTom": 33,
+    "km": 31.3,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.017,4.327@3-10": {
+    "minuten": 32,
+    "rijtijdTomTom": 26,
+    "km": 30.6,
+    "fileVertragingMin": 0
+  },
+  "51.687,5.332>52.223,4.491@1-8": {
+    "minuten": 96,
+    "rijtijdTomTom": 79,
+    "km": 111.3,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.859,4.501@1-10": {
+    "minuten": 59,
+    "rijtijdTomTom": 48,
+    "km": 57.3,
+    "fileVertragingMin": 0
+  },
+  "51.859,4.501>52.223,4.491@1-10": {
+    "minuten": 61,
+    "rijtijdTomTom": 50,
+    "km": 57,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.858,4.373@1-11": {
+    "minuten": 50,
+    "rijtijdTomTom": 41,
+    "km": 52,
+    "fileVertragingMin": 0
+  },
+  "51.858,4.373>52.223,4.491@1-14": {
+    "minuten": 50,
+    "rijtijdTomTom": 41,
+    "km": 52.4,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.811,4.340@1-15": {
+    "minuten": 69,
+    "rijtijdTomTom": 56,
+    "km": 76.1,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>52.223,4.491@2-8": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 44.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.811,4.340@2-9": {
+    "minuten": 75,
+    "rijtijdTomTom": 62,
+    "km": 76.4,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.811,4.340@2-8": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 38.5,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>52.223,4.491@3-8": {
+    "minuten": 68,
+    "rijtijdTomTom": 56,
+    "km": 76.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.833,4.686@3-9": {
+    "minuten": 60,
+    "rijtijdTomTom": 49,
+    "km": 67.8,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>52.223,4.491@3-9": {
+    "minuten": 65,
+    "rijtijdTomTom": 53,
+    "km": 67.5,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.778,4.681@3-11": {
+    "minuten": 64,
+    "rijtijdTomTom": 53,
+    "km": 74.6,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>52.223,4.491@3-13": {
+    "minuten": 65,
+    "rijtijdTomTom": 53,
+    "km": 74.4,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.811,4.340@3-14": {
+    "minuten": 68,
+    "rijtijdTomTom": 56,
+    "km": 76.1,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>52.223,4.491@4-8": {
+    "minuten": 68,
+    "rijtijdTomTom": 56,
+    "km": 76.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.811,4.340@4-9": {
+    "minuten": 73,
+    "rijtijdTomTom": 60,
+    "km": 76.1,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>52.223,4.491@1-8": {
+    "minuten": 69,
+    "rijtijdTomTom": 57,
+    "km": 76.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.034,4.359@1-9": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 30.1,
+    "fileVertragingMin": 0
+  },
+  "52.034,4.359>52.223,4.491@1-12": {
+    "minuten": 32,
+    "rijtijdTomTom": 26,
+    "km": 29.9,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.811,4.340@1-13": {
+    "minuten": 68,
+    "rijtijdTomTom": 56,
+    "km": 76.1,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>52.223,4.491@2-8": {
+    "minuten": 69,
+    "rijtijdTomTom": 56,
+    "km": 76.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.811,4.340@3-9": {
+    "minuten": 71,
+    "rijtijdTomTom": 59,
+    "km": 76.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.811,4.340@1-9": {
+    "minuten": 75,
+    "rijtijdTomTom": 61,
+    "km": 76.4,
+    "fileVertragingMin": 0
+  },
+  "52.070,4.272>52.023,4.220@3-10": {
+    "minuten": 22,
+    "rijtijdTomTom": 18,
+    "km": 8.7,
+    "fileVertragingMin": 0
+  },
+  "52.083,4.649>52.023,4.220@3-9": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 39.9,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>52.070,4.272@2-8": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 21.6,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>52.070,4.272@4-8": {
+    "minuten": 37,
+    "rijtijdTomTom": 31,
+    "km": 26.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.811,4.340@4-8": {
+    "minuten": 66,
+    "rijtijdTomTom": 54,
+    "km": 76.1,
+    "fileVertragingMin": 0
+  },
+  "51.892,4.419>52.023,4.220@3-10": {
+    "minuten": 36,
+    "rijtijdTomTom": 30,
+    "km": 30.7,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.892,4.419@2-8": {
+    "minuten": 21,
+    "rijtijdTomTom": 17,
+    "km": 16.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.892,4.419@4-8": {
+    "minuten": 46,
+    "rijtijdTomTom": 37,
+    "km": 53.7,
+    "fileVertragingMin": 0
+  },
+  "52.020,4.327>51.940,4.547@1-15": {
+    "minuten": 32,
+    "rijtijdTomTom": 26,
+    "km": 27.8,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.040,4.329@1-16": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 25.5,
+    "fileVertragingMin": 0
+  },
+  "52.091,4.270>51.940,4.547@2-15": {
+    "minuten": 48,
+    "rijtijdTomTom": 39,
+    "km": 37.1,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.040,4.329@2-16": {
+    "minuten": 29,
+    "rijtijdTomTom": 23,
+    "km": 25.5,
+    "fileVertragingMin": 0
+  },
+  "51.983,4.352>51.940,4.547@4-15": {
+    "minuten": 26,
+    "rijtijdTomTom": 22,
+    "km": 21.6,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.040,4.329@4-16": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 25.5,
+    "fileVertragingMin": 0
+  },
+  "52.002,4.690>51.940,4.547@4-11": {
+    "minuten": 26,
+    "rijtijdTomTom": 22,
+    "km": 15.7,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.022,4.338@4-12": {
+    "minuten": 30,
+    "rijtijdTomTom": 24,
+    "km": 24.4,
+    "fileVertragingMin": 0
+  },
+  "51.955,4.475>51.940,4.547@1-14": {
+    "minuten": 17,
+    "rijtijdTomTom": 14,
+    "km": 9.9,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.040,4.329@1-15": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 25.5,
+    "fileVertragingMin": 0
+  },
+  "51.790,4.698>51.940,4.547@2-15": {
+    "minuten": 29,
+    "rijtijdTomTom": 24,
+    "km": 23.4,
+    "fileVertragingMin": 0
+  },
+  "51.900,4.249>51.940,4.547@2-10": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 29.7,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.986,4.216@2-11": {
+    "minuten": 38,
+    "rijtijdTomTom": 31,
+    "km": 34.5,
+    "fileVertragingMin": 0
+  },
+  "51.957,4.476>51.940,4.547@4-14": {
+    "minuten": 16,
+    "rijtijdTomTom": 14,
+    "km": 9.5,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.040,4.329@4-15": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 25.5,
+    "fileVertragingMin": 0
+  },
+  "52.078,4.344>51.940,4.547@4-11": {
+    "minuten": 32,
+    "rijtijdTomTom": 26,
+    "km": 30.6,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.915,4.619@4-12": {
+    "minuten": 21,
+    "rijtijdTomTom": 17,
+    "km": 8.9,
+    "fileVertragingMin": 0
+  },
+  "52.040,4.329>51.940,4.547@1-15": {
+    "minuten": 30,
+    "rijtijdTomTom": 24,
+    "km": 25.9,
+    "fileVertragingMin": 0
+  },
+  "52.175,4.515>51.940,4.547@2-14": {
+    "minuten": 48,
+    "rijtijdTomTom": 39,
+    "km": 48.9,
+    "fileVertragingMin": 0
+  },
+  "52.201,4.636>51.940,4.547@2-9": {
+    "minuten": 56,
+    "rijtijdTomTom": 46,
+    "km": 51.3,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.229,4.521@2-11": {
+    "minuten": 51,
+    "rijtijdTomTom": 42,
+    "km": 50.3,
+    "fileVertragingMin": 0
+  },
+  "51.854,4.145>51.940,4.547@4-15": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 39.6,
+    "fileVertragingMin": 0
+  },
+  "52.046,4.235>51.940,4.547@4-12": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 36.4,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.842,4.337@4-14": {
+    "minuten": 38,
+    "rijtijdTomTom": 31,
+    "km": 33.4,
+    "fileVertragingMin": 0
+  },
+  "51.548,5.097>51.940,4.547@1-14": {
+    "minuten": 67,
+    "rijtijdTomTom": 55,
+    "km": 78.3,
+    "fileVertragingMin": 0
+  },
+  "51.879,5.296>51.940,4.547@1-9": {
+    "minuten": 68,
+    "rijtijdTomTom": 56,
+    "km": 67.6,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.819,4.647@1-11": {
+    "minuten": 23,
+    "rijtijdTomTom": 19,
+    "km": 19.5,
+    "fileVertragingMin": 0
+  },
+  "52.385,4.892>51.940,4.547@2-9": {
+    "minuten": 83,
+    "rijtijdTomTom": 68,
+    "km": 82.3,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.040,4.329@2-11": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 25.7,
+    "fileVertragingMin": 0
+  },
+  "52.050,4.234>51.940,4.547@4-9": {
+    "minuten": 47,
+    "rijtijdTomTom": 38,
+    "km": 36.8,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.461,4.625@4-10": {
+    "minuten": 76,
+    "rijtijdTomTom": 62,
+    "km": 84.6,
+    "fileVertragingMin": 0
+  },
+  "52.461,4.625>51.940,4.547@4-12": {
+    "minuten": 70,
+    "rijtijdTomTom": 58,
+    "km": 85,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.040,4.329@4-14": {
+    "minuten": 28,
+    "rijtijdTomTom": 23,
+    "km": 25.5,
+    "fileVertragingMin": 0
+  },
+  "51.998,4.166>51.940,4.547@1-9": {
+    "minuten": 47,
+    "rijtijdTomTom": 38,
+    "km": 37.5,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.040,4.329@1-10": {
+    "minuten": 29,
+    "rijtijdTomTom": 24,
+    "km": 25.7,
+    "fileVertragingMin": 0
+  },
+  "52.050,4.234>51.940,4.547@2-9": {
+    "minuten": 48,
+    "rijtijdTomTom": 39,
+    "km": 36.8,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.040,4.329@2-10": {
+    "minuten": 30,
+    "rijtijdTomTom": 25,
+    "km": 25.7,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.040,4.329@4-10": {
+    "minuten": 30,
+    "rijtijdTomTom": 24,
+    "km": 25.7,
+    "fileVertragingMin": 0
+  },
+  "52.038,4.630>51.940,4.547@1-15": {
+    "minuten": 27,
+    "rijtijdTomTom": 22,
+    "km": 16.7,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.080,4.870@1-16": {
+    "minuten": 40,
+    "rijtijdTomTom": 33,
+    "km": 33.9,
+    "fileVertragingMin": 0
+  },
+  "52.074,4.553>51.940,4.547@1-11": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 23.8,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.154,4.656@1-12": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 37.7,
+    "fileVertragingMin": 0
+  },
+  "52.154,4.656>51.940,4.547@1-13": {
+    "minuten": 43,
+    "rijtijdTomTom": 35,
+    "km": 37.2,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.038,4.630@1-14": {
+    "minuten": 27,
+    "rijtijdTomTom": 23,
+    "km": 16.6,
+    "fileVertragingMin": 0
+  },
+  "52.457,4.718>51.940,4.547@2-15": {
+    "minuten": 81,
+    "rijtijdTomTom": 67,
+    "km": 91.8,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.080,4.870@2-17": {
+    "minuten": 45,
+    "rijtijdTomTom": 37,
+    "km": 33.9,
+    "fileVertragingMin": 0
+  },
+  "52.075,4.494>51.940,4.547@3-15": {
+    "minuten": 36,
+    "rijtijdTomTom": 29,
+    "km": 25.5,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.080,4.870@3-16": {
+    "minuten": 42,
+    "rijtijdTomTom": 35,
+    "km": 33.9,
+    "fileVertragingMin": 0
+  },
+  "52.076,4.277>51.940,4.547@3-10": {
+    "minuten": 47,
+    "rijtijdTomTom": 38,
+    "km": 33.6,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.936,4.608@3-11": {
+    "minuten": 19,
+    "rijtijdTomTom": 15,
+    "km": 6.4,
+    "fileVertragingMin": 0
+  },
+  "52.324,4.964>51.940,4.547@4-15": {
+    "minuten": 71,
+    "rijtijdTomTom": 58,
+    "km": 78.7,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.080,4.870@4-17": {
+    "minuten": 48,
+    "rijtijdTomTom": 39,
+    "km": 33.9,
+    "fileVertragingMin": 0
+  },
+  "52.034,4.217>51.940,4.547@4-10": {
+    "minuten": 51,
+    "rijtijdTomTom": 41,
+    "km": 39.4,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.302,4.651@4-11": {
+    "minuten": 65,
+    "rijtijdTomTom": 53,
+    "km": 67,
+    "fileVertragingMin": 0
+  },
+  "52.094,5.231>51.940,4.547@1-14": {
+    "minuten": 58,
+    "rijtijdTomTom": 48,
+    "km": 60.8,
+    "fileVertragingMin": 0
+  },
+  "52.141,5.204>51.940,4.547@1-12": {
+    "minuten": 59,
+    "rijtijdTomTom": 49,
+    "km": 64.2,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.096,5.142@1-14": {
+    "minuten": 54,
+    "rijtijdTomTom": 44,
+    "km": 57.5,
+    "fileVertragingMin": 0
+  },
+  "52.119,4.668>51.940,4.547@2-15": {
+    "minuten": 38,
+    "rijtijdTomTom": 31,
+    "km": 32.2,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.080,4.870@2-16": {
+    "minuten": 43,
+    "rijtijdTomTom": 35,
+    "km": 33.9,
+    "fileVertragingMin": 0
+  },
+  "52.488,4.748>51.940,4.547@2-13": {
+    "minuten": 78,
+    "rijtijdTomTom": 64,
+    "km": 95.3,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.169,4.706@2-14": {
+    "minuten": 46,
+    "rijtijdTomTom": 38,
+    "km": 37.1,
+    "fileVertragingMin": 0
+  },
+  "52.020,4.727>51.940,4.547@3-14": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 20.8,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.080,4.870@3-15": {
+    "minuten": 41,
+    "rijtijdTomTom": 33,
+    "km": 33.9,
+    "fileVertragingMin": 0
+  },
+  "51.773,4.447>51.940,4.547@3-12": {
+    "minuten": 32,
+    "rijtijdTomTom": 27,
+    "km": 28.3,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.020,4.727@3-14": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 19.6,
+    "fileVertragingMin": 0
+  },
+  "52.053,4.465>51.940,4.547@4-14": {
+    "minuten": 38,
+    "rijtijdTomTom": 31,
+    "km": 25.5,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.080,4.870@4-16": {
+    "minuten": 42,
+    "rijtijdTomTom": 35,
+    "km": 33.9,
+    "fileVertragingMin": 0
+  },
+  "51.957,5.225>51.940,4.547@4-10": {
+    "minuten": 70,
+    "rijtijdTomTom": 57,
+    "km": 68.4,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.930,4.601@4-12": {
+    "minuten": 16,
+    "rijtijdTomTom": 13,
+    "km": 5.6,
+    "fileVertragingMin": 0
+  },
+  "51.814,4.609>51.940,4.547@1-15": {
+    "minuten": 23,
+    "rijtijdTomTom": 19,
+    "km": 19.6,
+    "fileVertragingMin": 0
+  },
+  "52.312,4.673>51.940,4.547@2-14": {
+    "minuten": 62,
+    "rijtijdTomTom": 51,
+    "km": 68.1,
+    "fileVertragingMin": 0
+  },
+  "52.194,4.436>51.940,4.547@2-9": {
+    "minuten": 54,
+    "rijtijdTomTom": 44,
+    "km": 46.8,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.005,4.230@2-10": {
+    "minuten": 40,
+    "rijtijdTomTom": 33,
+    "km": 35.5,
+    "fileVertragingMin": 0
+  },
+  "52.059,4.478>51.940,4.547@2-12": {
+    "minuten": 35,
+    "rijtijdTomTom": 29,
+    "km": 25,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.312,4.673@2-13": {
+    "minuten": 60,
+    "rijtijdTomTom": 49,
+    "km": 67.4,
+    "fileVertragingMin": 0
+  },
+  "51.859,4.470>51.940,4.547@3-15": {
+    "minuten": 27,
+    "rijtijdTomTom": 22,
+    "km": 21.3,
+    "fileVertragingMin": 0
+  },
+  "51.836,4.986>51.940,4.547@3-10": {
+    "minuten": 47,
+    "rijtijdTomTom": 39,
+    "km": 45,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.025,5.182@3-11": {
+    "minuten": 55,
+    "rijtijdTomTom": 45,
+    "km": 58.1,
+    "fileVertragingMin": 0
+  },
+  "52.025,5.182>51.940,4.547@3-12": {
+    "minuten": 54,
+    "rijtijdTomTom": 44,
+    "km": 58.3,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.092,4.268@3-13": {
+    "minuten": 47,
+    "rijtijdTomTom": 38,
+    "km": 36.7,
+    "fileVertragingMin": 0
+  },
+  "52.149,4.444>51.940,4.547@4-14": {
+    "minuten": 42,
+    "rijtijdTomTom": 35,
+    "km": 43.6,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.080,4.870@4-15": {
+    "minuten": 41,
+    "rijtijdTomTom": 33,
+    "km": 33.9,
+    "fileVertragingMin": 0
+  },
+  "52.353,4.622>51.940,4.547@4-9": {
+    "minuten": 75,
+    "rijtijdTomTom": 61,
+    "km": 73.4,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.330,4.613@4-11": {
+    "minuten": 70,
+    "rijtijdTomTom": 57,
+    "km": 70.1,
+    "fileVertragingMin": 0
+  },
+  "52.328,4.981>51.940,4.547@1-14": {
+    "minuten": 74,
+    "rijtijdTomTom": 60,
+    "km": 79.5,
+    "fileVertragingMin": 0
+  },
+  "52.009,4.436>51.940,4.547@1-11": {
+    "minuten": 25,
+    "rijtijdTomTom": 21,
+    "km": 16.6,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.322,4.659@1-12": {
+    "minuten": 60,
+    "rijtijdTomTom": 49,
+    "km": 68.3,
+    "fileVertragingMin": 0
+  },
+  "51.819,4.602>51.940,4.547@2-14": {
+    "minuten": 23,
+    "rijtijdTomTom": 18,
+    "km": 17.4,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.080,4.870@2-15": {
+    "minuten": 41,
+    "rijtijdTomTom": 33,
+    "km": 33.9,
+    "fileVertragingMin": 0
+  },
+  "51.849,4.648>51.940,4.547@2-9": {
+    "minuten": 26,
+    "rijtijdTomTom": 21,
+    "km": 16.4,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.596,4.790@2-10": {
+    "minuten": 49,
+    "rijtijdTomTom": 40,
+    "km": 50.6,
+    "fileVertragingMin": 0
+  },
+  "52.017,4.327>51.940,4.547@3-15": {
+    "minuten": 31,
+    "rijtijdTomTom": 26,
+    "km": 24.7,
+    "fileVertragingMin": 0
+  },
+  "52.083,4.649>51.940,4.547@3-9": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 25,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.023,4.220@3-10": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 35.8,
+    "fileVertragingMin": 0
+  },
+  "51.687,5.332>51.940,4.547@1-8": {
+    "minuten": 77,
+    "rijtijdTomTom": 63,
+    "km": 83.5,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.859,4.501@1-10": {
+    "minuten": 27,
+    "rijtijdTomTom": 22,
+    "km": 20.6,
+    "fileVertragingMin": 0
+  },
+  "51.859,4.501>51.940,4.547@1-10": {
+    "minuten": 27,
+    "rijtijdTomTom": 22,
+    "km": 20.5,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.858,4.373@1-11": {
+    "minuten": 33,
+    "rijtijdTomTom": 27,
+    "km": 24.6,
+    "fileVertragingMin": 0
+  },
+  "51.858,4.373>51.940,4.547@1-14": {
+    "minuten": 32,
+    "rijtijdTomTom": 26,
+    "km": 26.1,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.811,4.340@1-15": {
+    "minuten": 39,
+    "rijtijdTomTom": 32,
+    "km": 33.1,
+    "fileVertragingMin": 0
+  },
+  "51.941,4.388>51.940,4.547@2-8": {
+    "minuten": 24,
+    "rijtijdTomTom": 19,
+    "km": 17.6,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.811,4.340@2-9": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 33.1,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>51.940,4.547@3-8": {
+    "minuten": 37,
+    "rijtijdTomTom": 30,
+    "km": 34.6,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.833,4.686@3-9": {
+    "minuten": 25,
+    "rijtijdTomTom": 21,
+    "km": 20.7,
+    "fileVertragingMin": 0
+  },
+  "51.833,4.686>51.940,4.547@3-9": {
+    "minuten": 26,
+    "rijtijdTomTom": 21,
+    "km": 22,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.778,4.681@3-10": {
+    "minuten": 32,
+    "rijtijdTomTom": 26,
+    "km": 29,
+    "fileVertragingMin": 0
+  },
+  "51.778,4.681>51.940,4.547@3-13": {
+    "minuten": 32,
+    "rijtijdTomTom": 26,
+    "km": 27.2,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.811,4.340@3-14": {
+    "minuten": 39,
+    "rijtijdTomTom": 32,
+    "km": 33.1,
+    "fileVertragingMin": 0
+  },
+  "52.223,4.491>51.940,4.547@4-8": {
+    "minuten": 44,
+    "rijtijdTomTom": 36,
+    "km": 50.3,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.811,4.340@4-9": {
+    "minuten": 42,
+    "rijtijdTomTom": 34,
+    "km": 33.1,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>51.940,4.547@1-8": {
+    "minuten": 37,
+    "rijtijdTomTom": 30,
+    "km": 34.6,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>52.034,4.359@1-9": {
+    "minuten": 26,
+    "rijtijdTomTom": 21,
+    "km": 22.5,
+    "fileVertragingMin": 0
+  },
+  "52.034,4.359>51.940,4.547@1-12": {
+    "minuten": 27,
+    "rijtijdTomTom": 22,
+    "km": 23.5,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.811,4.340@1-14": {
+    "minuten": 39,
+    "rijtijdTomTom": 32,
+    "km": 33.1,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>51.940,4.547@2-8": {
+    "minuten": 37,
+    "rijtijdTomTom": 30,
+    "km": 34.6,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.811,4.340@3-9": {
+    "minuten": 40,
+    "rijtijdTomTom": 33,
+    "km": 33.1,
+    "fileVertragingMin": 0
+  },
+  "51.811,4.340>51.940,4.547@4-8": {
+    "minuten": 37,
+    "rijtijdTomTom": 30,
+    "km": 34.6,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.811,4.340@1-9": {
+    "minuten": 41,
+    "rijtijdTomTom": 34,
+    "km": 33.1,
+    "fileVertragingMin": 0
+  },
+  "51.892,4.419>51.940,4.547@1-11": {
+    "minuten": 27,
+    "rijtijdTomTom": 22,
+    "km": 24.5,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.892,4.419@1-12": {
+    "minuten": 27,
+    "rijtijdTomTom": 22,
+    "km": 22.8,
+    "fileVertragingMin": 0
+  },
+  "51.892,4.419>51.892,4.419@1-11": {
+    "minuten": 10,
+    "rijtijdTomTom": 0,
+    "km": 0,
+    "fileVertragingMin": 0
+  },
+  "51.892,4.419>51.940,4.547@2-9": {
+    "minuten": 31,
+    "rijtijdTomTom": 25,
+    "km": 24.5,
+    "fileVertragingMin": 0
+  },
+  "51.940,4.547>51.811,4.340@2-10": {
+    "minuten": 41,
+    "rijtijdTomTom": 33,
+    "km": 35,
+    "fileVertragingMin": 0
+  },
+  "52.012,4.485>51.940,4.547@5-12": {
+    "minuten": 23,
+    "rijtijdTomTom": 19,
+    "km": 13.5,
     "fileVertragingMin": 0
   }
 }

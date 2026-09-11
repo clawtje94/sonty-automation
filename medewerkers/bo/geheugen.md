@@ -1,18 +1,19 @@
-# Bo's geheugen (bijgewerkt 2026-09-09)
+# Bo's geheugen (bijgewerkt 2026-09-11)
 
 ## Status
-- Diensten 4-9 sept: reviews-sync blocker 15 dagen (API-key weg, Techniek zaak), VvE-signalen 21 actief (scan 8 sept 06:30, niet vandaag bijgewerkt).
-- Bijscholing 7 sept: vakkennis ververst, LinkedIn insights (5x engagement persoonlijk).
-- Wacht op 2 antwoorden Daimy sinds 4 sept: VvE Rijswijk (brief-pitch), contentkalender (waar?).
+- 11 sept: reviews-sync blocker 20+ dagen (API-key weg, Techniek zaak). VvE-signalen 1 nieuw (Bazarlaan 38, 8 won); scan gisteren (10 sept).
+- Voorstel klaar: VvE Turfhaven 17 ('s-Gravenhage, 272 won, gevelwerk verleend) — brief-pitch gefinaliseerd, klaar om te versturen.
+- Wacht op 3 antwoorden Daimy: (1) Turfhaven 17 brief ja/nee, (2) Rijswijk-status, (3) contentkalender-locatie.
 
 ## Open vragen aan Daimy
-1. VvE Rijswijk (Prins Constantijn Promenade 10, **128 won**, gevelwerk) — brief-pitch + fase-1 starten? Doel score 70+. (URGENT: sinds 4 sept wacht.)
-2. Contentkalender: waar staat LinkedIn/Instagram/GBP-planning? (nodig voor posting-tracking).
+1. **Turfhaven 17** (Turfhaven 17, 2511DK 's-Gravenhage, **272 won**, gevelwerk verleend) — brief-pitch + fase-1 starten? Onderwerp "Gevelwerk Den Haag — wij helpen 272 woningen". Doel: beheerders bellen na 7 dagen, ALV-agenda Q4 bereiken.
+2. Rijswijk-status: vorige VvE voorstel (Prins Constantijn Promenade 10, 128 won) vervangen door Turfhaven of nog actief?
+3. Contentkalender: waar staat LinkedIn/Instagram/GBP-planning? (nodig voor posting-tracking).
 
 ## Lopende issues
-1. **Reviews-sync blokkade** — 14 dagen zonder API-key. Logs: 175× "geen API-key — overslaan". Techniek zaak (API-key ophalen), ik zet op hold tot beschikbaar.
-2. Contentkalender niet gevonden — tracking niet mogelijk zonder dit.
-3. LinkedIn logs niet opgezet — tracking niet in scope totdat Daimy beslist.
+1. **Reviews-sync blokkade** — 20 dagen zonder API-key. Logs: 175×+ "geen API-key — overslaan". Techniek zaak (API-key ophalen), ik zet op hold tot beschikbaar.
+2. Contentkalender niet gevonden — tracking niet mogelijk zonder dit. (Q3 aan Daimy)
+3. LinkedIn logs niet opgezet — tracking niet in scope totdat Daimy beslist. (LinkedIn vanuit Daimy persoonlijk profiel; 5x engagement voordeel)
 
 ## VvE-context (uit geheugen vorige diensten)
 - Fase 1: Brief per post → opvolging bellen (7 dagen) → parallel beheerders benaderen
@@ -22,21 +23,23 @@
 - Tool beschikbaar: `/admin/vve-radar` (score 70+ eerst)
 - VvE-signalen: 19 actief (maar sinds 11 dagen niet bijgewerkt)
 
-## KPI-tracking (9 sept status)
-- Reviews: onbekend (API-key geblokkeerd 15 dagen)
+## KPI-tracking (11 sept status)
+- Reviews: onbekend (API-key geblokkeerd 20+ dagen)
 - Vermeldingen/plaatsingen: onbekend (tracking ontbreekt)
 - Posts: 0 (contentkalender niet gevonden)
-- VvE-signalen: 21 actief (8 sept 06:30 scan; hot: Rijswijk 128 won #3)
+- VvE-signalen: 1 nieuw (Bazarlaan 38, 8 won); Turfhaven 17 (272 won) brief klaar
 
 ## Contentkalender
 - Doel: 2 posts per week (profiel gegeven)
 - Kanalen: LinkedIn, Instagram, Google Bedrijfsprofiel
 - Status: onbekend waar planning staat (Q1 aan Daimy)
 
-## Voorstel vandaag (4 sept)
-- VvE Rijswijk Prins Constantijn Promenade 10 (128 won, gevelwerk) — brief-pitch klaar
-- Mes-verhaal: "Gevelwerk Rijswijk? Wij helpen die 128 woningen" (korte onderwerpregel + lokale invalshoek)
-- Meetplan: Google Bedrijfsprofiel score 70+ doel (eenmaal API-key beschikbaar)
+## Voorstel vandaag (11 sept)
+- VvE Turfhaven 17, 's-Gravenhage (272 won, gevelwerk verleend) — brief-pitch GEFINALISEERD
+- Onderwerpregel: "Gevelwerk Den Haag — wij helpen 272 woningen" (korte, lokale invalshoek, verleend = urgentie)
+- Ingang: fase-1 gratis gevelschouw + ALV-protocol; telefoonopvolging dag 7 na verzenden
+- Meting: fase-1 ja/nee → ALV-pakket verzending → ALV-agenda reactie
+- Status: KLAAR OM TE VERSTUREN, wachten op Daimy goedkeuring
 
 ## Bijscholing 29 aug — doorgezet
 - Dagelijks 15-30 min reageren op posts/reviews van anderen (nog niet volledig opgestart; LinkedIn logs ontbreken)

@@ -9,52 +9,64 @@ melden via `brein-sessie.js opdracht <hoofd-slug> "V<n> is verlopen, beslis zelf
   wachtlijst, ongewijzigd sinds vorige update (zie oude rapporten voor detail per nummer).
 - V129 — Claude — 1-9 — mandaat-ladder-uitrol na proefgeval Mats — GESTUURD 1-9 (juzdepw1), nog
   geen antwoord. Proefgeval loopt nu goed, kan snel.
-- V130 — Noor — 1-9 — Sjoerd weg tot 11-9, Joey solo — GESTUURD 1-9, geen antwoord; wachtrij
-  stabiel, even geen actie nodig.
-- V131 — Lars/Mats+Isa — 1-9 — Google Ads + reviews/Places API-sleutels — GESTUURD 1-9, nu dag 9
-  geen antwoord, niet gestuurd 8-9 en 9-9 (cap vol, V133/V137/V142/V143 gingen voor), morgen weer
-  proberen — blokkeert ads-cijfers en reviews-sync.
-- V133 — Fenna+Noor — 2-9/3-9/7-9/8-9/9-9 — aanbetaling-cluster: 6332 opgelost (Sam factureert via
-  Gripp, BESLIST ZELF Fenna), blijft open: 6489 (dag 11, nu met vraag om herinneringsschema
-  dag 0/+7/+14), 6556/6560/6561 (test-orders, los issue) — GESTUURD 9-9, cashflow-risico,
-  geld-klok 2-3 werkdagen.
-- V137 — Fenna/Pip — 4-9/8-9/9-9 — montage 407/443 (92%) boven plafond 35/week — GESTUURD 9-9,
-  dag 5-6, business-kritiek (plafond stuurt alles); Fenna geeft aan te stoppen met melden bij
-  stilte (= geaccepteerde backlog).
-- V138 — Noor — 7-9 — capaciteitsgat na vakanties (14-9) + NIEUW Dennis vakantie 30-9 t/m 14-10 —
-  Noor stelt voor beide gaten in 1x te plannen — nog niet gestuurd, wachtlijst, deadline 14-9.
-- V139 — Lars — 8-9 — Jules wil A/B-test offerte-opvolgingsmails (1 segment, 48u) — wachtlijst,
-  reversibel/lage inzet, kan wachten.
-- V140 — Lars — 8-9 — Bo wil VvE-pitchbrief naar Prins Constantijn Promenade sturen (extern,
-  onomkeerbaar, layer-3) — wachtlijst, geen bekende deadline.
-- V141 — Noor — 8-9 — Nanny wil cadans-SMS naar 3 stille wachtrij-klanten — wachtlijst,
-  reversibel/lage inzet.
-- V142 — Lars/Isa — 8-9/9-9 — Luuk Post (27d, 5e keer gevraagd, voorstel: bellen i.p.v. mailen) +
-  Hans de Lamboij (21d) + Isa's vaste-regel-voorstel (>7d stil = automatisch naar mens) —
-  GESTUURD 8-9, niet herhaald 9-9 (nog geen 2-3 werkdagen om sinds laatste send, laagprio-cat).
-- V143 — Mats/Isa — 9-9 — NIEUW — WhatsApp-kanaal 24u+ plat (WA 401-sessiefout), herstel vraagt
-  fysieke QR-herkoppeling op de telefoon, geen agent kan dat — GESTUURD 9-9, urgent (klantkanaal
-  down), geen technische bugfix dus wel een Daimy-vraag (niet naar Techniek, want Techniek heeft
-  geen handen).
+- V130 — Noor — GESLOTEN 11-9 — Sjoerd was laatste vakantiedag 11-9, terug 12-9, vervalt vanzelf.
+- V131 — Lars/Mats+Isa — 1-9 — Google Ads + reviews/Places API-sleutels — GESTUURD 1-9 én 11-9
+  (herhaald), nu dag 11 zonder Ads-data en dag 21 zonder reviews-data, blokkeert ads-cijfers en
+  reviews-sync. Nog geen antwoord.
+- V133 — Fenna+Noor — grotendeels GESLOTEN 11-9: 6332 opgelost (BESLIST ZELF Fenna), 6489 loopt nu
+  via herinneringsschema 0/+7/+14 (BESLIST ZELF Fenna), 6556/6560/6561 door Fenna bevestigd als
+  testcases (negeren in rapportage) — opgegaan in V138 (Noor wil ze wél echt verwijderen uit Gripp).
+- V137 — Fenna/Pip — GESLOTEN 9-9 — montage boven plafond, geaccepteerde backlog, geen meldplicht
+  meer, alleen volgen in cijfers.
+- V138 — Noor — 7-9 — capaciteitsgat week 14-9 (deadline maandag) + Dennis vakantie 30-9 t/m 14-10,
+  + testorders 6556/6560/6561 opschonen in Gripp (samengevoegd met Fenna's kant 11-9) — GESTUURD
+  8-9 en 11-9 (herhaald, 4e keer gevraagd door Noor, deadline dichtbij). Nog geen antwoord.
+- V139 — Lars — 8-9 — Jules wil A/B-test offerte-opvolgingsmails — wachtlijst, lage inzet.
+- V140 — Lars — 8-9 — Bo wil VvE-pitchbrief extern sturen — wachtlijst, geen deadline.
+- V141 — Noor — 8-9 — Nanny wil cadans-SMS naar 3 stille klanten — wachtlijst, lage inzet.
+- V142 — Lars/Isa — 8-9 — Luuk Post (nu 29d, 7e keer gevraagd) + Hans de Lamboij (21d) + Isa's
+  vaste-regel-voorstel (>7d stil = automatisch naar mens) — GESTUURD 8-9 én 11-9 (herhaald, was te
+  lang blijven liggen, klantcontact-zaak had sneller dan 5 dagen moeten herhalen). Nog geen antwoord.
+- V143 — Mats/Isa — GESLOTEN 11-9 — WA-storing: geen 401-crash meer sinds 10-9 11:41, Isa en Mats
+  bevestigen onafhankelijk normale werking. Geen nieuwe melding nodig, blijft ter observatie.
+- V144 — Noor — 10-9 — 3 getekende orders geblokkeerd door schrijfverbod leveranciersportalen
+  (huisregel 9) — GESTUURD 10-9, niet herhaald 11-9 (geld-klok 2-3 werkdagen nog niet om + cijfer
+  vandaag ambigu: 0 i.p.v. 3 in log, onduidelijk of al besteld). Morgen navragen en dan pas evalueren.
+- V145 — Isa — 10-9 — John van Krimpen, order €3051 — GESTUURD 10-9, niet herhaald 11-9 (Isa ziet
+  hem niet meer op "aan zet"-lijst, mogelijk zelf opgelost, nog niet bevestigd). Morgen bevestigen.
+
+## Technisch (onderschept, niet naar Daimy, direct naar Mats)
+- itf2311c: Mats meldde 9-9 "opgelost", maar Isa (queue 5xo3pxhk nog 24u+ op "nieuw") en Fenna
+  (facturen-open.json nog 9 dagen stale) zagen 10-9 geen bewijs. Opdracht teruggestuurd naar Mats
+  (j1k42ult, 10-9): opnieuw checken en pas terugkoppelen als het echt klopt.
 
 Gesloten: V100-V102, V106, V107-V109, V110/V111/V127 (runaway-loop, gefixt 1-9), V119 (opgegaan in
 V131), V121-V125, V128, V132 (opgegaan in V133), V135/V136 (opgegaan in V142, 8-9). Details in
 git-historie van dit bestand indien nodig.
 
 ## Volgen
-- Facturen-sync (gripp-facturen-open.json): nog gedateerd 1-9, Mats' fix (itf2311c) er nog niet op
-  uitgevoerd — morgen weer checken.
-- Werkbonnen: 116 open (was 113), 0 afgerond sinds 2-9, 7 werkdagen op rij, bij Mats (79jfm08q).
-  Planado 429/outlook-422 wél op 0 op 9-9 (die kant lijkt opgelost), afronding zelf blijft stil.
-- Inmeetcapaciteit 9-9: 50% (Joey terug, Sjoerd t/m 11-9), vol herstel 12-9. Montage 92% boven
-  plafond (V137, licht dalend, binnen ruis).
-- wa-luisteraar 9-9: nog steeds plat, 24u+, trekt sunny-ochtend/weetje mee om — vereist fysieke
-  QR-herkoppeling (geen agent kan dat), daarom als V143 naar Daimy. Morgen checken of hersteld.
-- Escalatie-watch (Isa): 6 van 85 casussen >4 dagen stil + Hans de Lamboij (V142); John van
-  Krimpen (12d) 9-9 BESLIST ZELF door Isa naar Sunny gedelegeerd, volgen of dat lukt.
-- Opdrachtqueue-bug itf2311c: Mats meldt OPGELOST 9-9 (0 vast, was 12), maar Isa zag 'm zelf nog
-  24u op "nieuw" staan na de fix — stabiliteit nog niet zeker, blijven volgen.
-- Google Ads/reviews-koppeling: klaar, wacht op sleutel (V131, dag 9).
+- Facturen-sync (gripp-facturen-open.json): nog 10 dagen stale (sinds 1-9), Sam stuurde 11-9 07:31
+  weer naar Techniek, los van mijn j1k42ult-opdracht — morgen checken of nu echt opgelost.
+- Werkbonnen: 130 open (was 121, +9), maar 5 afgerond op 10-9 (eerste na 8 werkdagen stilstand,
+  daemon-herstel lijkt te werken) — morgen checken of dit een trend wordt of eenmalig was.
+- Inmeetcapaciteit 11-9: 50% (Sjoerd laatste vakantiedag), vol herstel 12-9. Montage 91% boven
+  plafond, geaccepteerde backlog (V137 gesloten), blijft alleen cijfer om te volgen.
+- wa-luisteraar: sinds 10-9 11:41 geen 401-crash meer, Isa en Mats bevestigen normale werking
+  (V143 gesloten 11-9). Nog 1-2 diensten extra volgen voor definitief zeker.
+- planado-outlook: eenmalige "fetch failed" 10-9, 11-9 weer normaal gedraaid (zelf hersteld), geen
+  actie nodig.
+- Escalatie-watch (Isa): 7 van 327 actieve tickets >4 dagen stil. John van Krimpen niet meer op
+  "aan zet"-lijst, mogelijk zelf opgelost (V145, morgen bevestigen). Nieuw: ticket 979406422,
+  1075+ min stil ná overdracht naar mens — Isa's voorstel (bellen als vandaag niet opgepakt) is een
+  operationele Isa/Noor-beslissing, geen Daimy-vraag, niet doorgezet.
+- Orders-bestellen geblokkeerd (huisregel 9): cijfer 11-9 ambigu (0 i.p.v. 3 in log, onduidelijk of
+  al besteld) — V144 niet herhaald, morgen navragen bij Noor/Ruben wat er echt gebeurd is.
+- Google Ads/reviews-koppeling: klaar, wacht op sleutel (V131, dag 11/21, herhaald 11-9).
+- Boekingsgat: 3 van 7 komende dagen (12-18/9) 0 nieuwe boekingen ondanks volle bezetting vanaf
+  12-9 (Fenna, nieuw 11-9) — risico voor orderinstroom over 2-3 weken, geen V-vraag nu, morgen
+  navragen of dit doorzet.
+- Postvak "aan claude, status nieuw": 20 vast (was 18), groeiend, geen daemon verwerkt de queue
+  (Mats' eigen bouwverzoek cqrzxh6i zit er ook al in) — technisch, bij Mats/Techniek, geen V-vraag.
 
 ## Leerpunten
 - Bijscholing 7-9: escalatiesnelheid naar impact differentiëren, niet 1 vlakke 5-dagenklok —

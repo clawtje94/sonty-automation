@@ -36,30 +36,29 @@ const DAEMONS = Object.entries(REGISTER.diensten)
     maxLogAgeH: d.maxUur || null,
   }));
 
-// Extra Sonny-check: staat de Telegram-inbox verdacht lang stil? (poller bevroor 2x op 16-17 juli)
+// Extra Sonny-check: leeft de Telegram-poller? (bevroor 2x op 16-17 juli)
+// 10-09: NIET meer via getUpdates checken — dat botst met de poller (Telegram staat maar
+// één getUpdates-lezer toe → 409/ECONNRESET), waardoor deze check de poller juist sloopte
+// en berichten verloren gingen. We checken nu het heartbeat-bestand dat de poller na elke
+// geslaagde poll schrijft. Vers (<5 min) = gezond; oud = poller haalt niks op.
+const fsHC = require('fs');
+function heartbeatOud(pad, maxMin) {
+  try { return (Date.now() - fsHC.statSync(pad).mtimeMs) / 60000 > maxMin; }
+  catch { return true; } // geen bestand = poller heeft nog nooit geklopt = niet gezond
+}
 async function checkTelegramInbox() {
-  // Stille inbox is normaal (geen berichten = geen writes). Echte test: houdt de poller de
-  // getUpdates-verbinding vast? Een 409 Conflict bewijst dat hij leeft; een 200 met
-  // WACHTENDE berichten bewijst dat hij dood is (dan zou hij ze opgehaald hebben).
-  try {
-    const r = await fetch('https://api.telegram.org/bot' + TG_TOKEN + '/getUpdates?timeout=0&limit=1', { signal: AbortSignal.timeout(8000) });
-    if (r.status === 409) return []; // poller heeft de verbinding — gezond
-    const j = await r.json().catch(() => ({}));
-    if (j.ok && (j.result || []).length > 0) return ['poller haalt berichten NIET op (er staan er ' + j.result.length + '+ te wachten) — launchctl kickstart -k gui/501/nl.sonty.telegram-poll'];
-    return []; // geen wachtende berichten — onbeslist maar geen alarm
-  } catch { return []; } // netwerkprobleem bij de check zelf ≠ poller kapot
+  if (heartbeatOud('/Users/clawdboot/sonty/data/heartbeat/telegram-poll', 5))
+    return ['Telegram-poller klopt niet meer (heartbeat >5 min oud) — launchctl kickstart -k gui/501/nl.sonty.telegram-poll'];
+  return [];
 }
 
-// Zelfde 409-test voor de DATA-bot (@Sontydatabot) — die poller stierf op 28 juli.
+// DATA-bot (@Sontydatabot) — stierf op 28 juli. Ook via heartbeat i.p.v. getUpdates
+// (10-09), zodat deze check de databot-poller niet met getUpdates-conflicten sloopt.
 const DATABOT_TOKEN = '7775843600:AAHsz7X9ypMXxzQLquoMW1bVf037-WRsEeU';
 async function checkDatabotPoller() {
-  try {
-    const r = await fetch('https://api.telegram.org/bot' + DATABOT_TOKEN + '/getUpdates?timeout=0&limit=1', { signal: AbortSignal.timeout(8000) });
-    if (r.status === 409) return [];
-    const j = await r.json().catch(() => ({}));
-    if (j.ok && (j.result || []).length > 0) return ['databot-poller haalt berichten NIET op (' + j.result.length + '+ wachtend) — launchctl kickstart -k gui/501/nl.sonty.databot-poll'];
-    return [];
-  } catch { return []; }
+  if (heartbeatOud('/Users/clawdboot/sonty/data/heartbeat/databot-poll', 5))
+    return ['databot-poller klopt niet meer (heartbeat >5 min oud) — launchctl kickstart -k gui/501/nl.sonty.databot-poll'];
+  return [];
 }
 
 // De les van 28 juli: de databot-poller VING het bericht van Daimy wel, maar geen enkele

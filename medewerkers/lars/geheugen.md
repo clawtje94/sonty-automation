@@ -7,20 +7,20 @@
 - Maandag: weekbeeld conversie/leads t.o.v. vorige week (Milan/Jules rapporten + docs/).
 
 ## Lopende zaken
-- 2026-09-09: Luuk Post nu 27 dagen, V-vraag 5e keer gesteld (1-9, 2-9/3-9, 7-9, 8-9, nu 9-9), nog
-  steeds onbeantwoord. Blijven herhalen, niet zelf sluiten (mandaat geldt nog niet voor Commercie).
-- 2026-09-09: Jules mailklikrate offerte-opvolging 0,00-0,81%, 8e dag onder 1% totaal. A/B-test
-  voorstel (1 segment, 48u) herhaald als V-vraag naar Daimy (huisregel 8).
-- 2026-09-09: Bo's VvE-pitchbrief Rijswijk Prins Constantijn Promenade nog steeds niet verstuurd,
-  V-vraag herhaald naar Daimy.
-- 2026-09-09: Milan rapporteerde vandaag GEEN "open opvolgingen totaal" meer (gisteren 60, bron
-  aan-zet-watchdog.log); andere indeling (open>7d=1, stil-lijst=5, aanbod gevolgd=17). Milan
-  gedelegeerd (1/3) om metric + uitleg morgen terug te laten komen, zodat dag-op-dag vergelijkbaar
-  blijft. Nog niet naar Daimy, eerst zelf oplossen.
-- Rowie Post (adres incompleet, Sunny WhatsApp onderweg) en Husain Kapadia (136d, inmeting 01-10):
-  lopen al, alleen volgen, geen nieuwe actie nodig.
-- Jules' V2 (Google Ads credentials) en V3 (reviews API-key, ook door Bo gemeld): blijven
-  bekend/elders belegd, niet dupliceren zolang status niet wijzigt.
+- 2026-09-11: Luuk Post nu 29 dagen, V-vraag 7e keer gesteld sinds 1-9, nog steeds onbeantwoord.
+  Blijven herhalen, niet zelf sluiten (mandaat geldt nog niet voor Commercie).
+- 2026-09-11: Jules mailklikrate offerte-opvolging 0,76%, 9e dag onder 1% totaal, SEO-leads 10e dag
+  op 0. A/B-test voorstel (1 segment, 48u) opnieuw als V-vraag naar Daimy (huisregel 8).
+- 2026-09-11: wa-luisteraar draait weer (snapshot: actief, outbox verstuurt). Vandaag 16:00 Rowie
+  Post evalueren of adres alsnog via Sunny binnenkomt; zo niet, kantoor-mail overwegen.
+- 2026-09-11: Aanbod-replies open steeg van 16 naar 20, geen reden gemeld door Milan; blijven volgen,
+  nog geen actie nodig.
+- Escalatie-watch domeinverdeling bepaald: opvolging <7d = Milan/Commercie, klachten = Sunny.
+- Husain Kapadia (136d, inmeting 01-10): loopt al, alleen volgen, geen nieuwe actie nodig.
+- Jules' V2 (Google Ads credentials) en V3 (reviews API-key): al 9+ dagen open, blijven herhalen tot
+  .env gezet is.
+- Bo's VvE-zaken (pitchbrieven) zijn niet mijn domein (Bo valt niet onder Milan/Jules); niet meer
+  apart volgen tenzij het via Milan/Jules terugkomt.
 
 ## Leerpunten
 - 2026-09-07 bijscholing: vakkennis.md ververst met vaste offerte-opvolgcadans (2-4d/7-10d/14+d),

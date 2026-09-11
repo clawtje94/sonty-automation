@@ -1,9 +1,9 @@
 {
- "geholpen": 455,
- "akkoord_inmeten": 126,
- "showroom": 58,
- "overtuigd": 83,
- "dagen": 30,
+ "geholpen": 478,
+ "akkoord_inmeten": 137,
+ "showroom": 61,
+ "overtuigd": 85,
+ "dagen": 32,
  "tickets": {
   "geholpen": [
    "972975738",
@@ -460,7 +460,30 @@
    "979139338",
    "979273746",
    "978118850",
-   "979273956"
+   "979273956",
+   "979321068",
+   "979319847",
+   "979406422",
+   "979414210",
+   "979405183",
+   "979423446",
+   "979240422",
+   "979446080",
+   "979511094",
+   "979414481",
+   "979498105",
+   "979530254",
+   "979563945",
+   "979556712",
+   "979600795",
+   "979600522",
+   "979619026",
+   "979632762",
+   "979725363",
+   "979726733",
+   "979728380",
+   "979600196",
+   "971808083"
   ],
   "akkoord_inmeten": [
    "970483194",
@@ -539,7 +562,10 @@
    "978696881",
    "978791867",
    "978222966",
-   "979196054"
+   "979196054",
+   "979511094",
+   "979001323",
+   "979600196"
   ],
   "overtuigd": [
    "973053890",
@@ -624,7 +650,9 @@
    "978743426",
    "979005989",
    "979039266",
-   "979273746"
+   "979273746",
+   "979511094",
+   "979600795"
   ]
  },
  "_toelichting": "Vanaf 2026-08-10 wordt cumulatief per ticket geteld in plaats van dagcijfers optellen. De cijfers hieronder zijn de oude, onzuivere telling: 16% van de gesprekken loopt over meerdere dagen en werd elke dag opnieuw meegeteld (137 akkoord tegen 117 werkelijk getekende offertes in dezelfde 23 dagen).",
@@ -635,6 +663,6 @@
   "overtuigd": 82,
   "dagen": 23
  },
- "akkoordBron": "86 getekend + 40 doorgezet",
+ "akkoordBron": "92 getekend + 45 doorgezet",
  "onzuiver": 1
 }

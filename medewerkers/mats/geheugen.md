@@ -6,23 +6,44 @@
 - sonny-rapport: BEVESTIGD via data/kill/nl.sonty.sonny-rapport (Daimy, 19-08).
 - LEERPUNT: bij twijfel bewust-uit vs storing EERST data/kill/<jobnaam> checken.
 
-## 09-09: wa-luisteraar nog steeds down — 24u+, root cause raakt nu ook Sunny-berichten
-- Crash-loop op WA 401 loopt door sinds 08-09 ~06:06 UTC, nog actief 09-09 ~06:00 UTC (>24u).
-  Doorzetting rm3n4x9n (08-09) staat nog open, NIET herhaald, wel als échte V-vraag aan Daimy
-  gemeld (09-09): fix vraagt fysieke QR-scan op het toestel, dat kan geen agent. Check volgende
-  dienst of active count weer 1 is.
-- BELANGRIJK: sunny-ochtend/sunny-weetje exit1 is NIET meer het oude twijfelgeval (generatie-
-  fout, bericht kwam toch aan) — log toont nu expliciet "koppeling verbroken op telefoon",
-  zelfde WA-401 oorzaak als wa-luisteraar. Dus voorlopig ECHTE storing met klantimpact zolang
-  wa-luisteraar plat ligt; oude "geen-storing"-aanname pas weer laten gelden nadat WA hersteld is
-  en berichten aantoonbaar weer aankomen.
+## 11-09: wa-luisteraar HERSTELD (was 09/10-09 nog down)
+- Laatste 401 was 10-09 11:41 UTC. Sindsdien alleen normale 503/428 reconnects met auto-herstel,
+  stabiel verbonden. sunny-weetje verstuurde 11-09 2 berichten succesvol (inhoud gecontroleerd,
+  geen silent success-risico). Storing als opgelost beschouwd, geen QR-scan meer nodig geweest
+  (kennelijk zelf hersteld of eerder al gefixt). Nog 1-2 diensten volgen voor ik het definitief
+  afsluit i.p.v. los volgen.
+- sunny-ochtend/sunny-weetje exit0 op 11-09, dus de eerdere "echte storing"-conclusie (WA-401)
+  vervalt vanaf nu; terugvallen op oude "check inhoud, niet alleen exit-code"-regel blijft staan.
 
-## 09-09: opvolgingen bevestigd opgelost
-- Claude-postvak procesbug (itf2311c): 0 vastzittende "nieuw"-opdrachten meer (was 12) — opgepakt,
-  geen escalatie meer nodig.
-- Planado 429-storm (l8erbbd5): 0 nieuwe "Rate Limit Exceeded" op 09-09, lijkt gefixt. Nog 1 dag
-  bevestigen voor definitief.
+## 10/11-09: planado-outlook — eenmalige hik, zelf hersteld
+- 10-09: "FOUT: fetch failed" bij start 05:45 UTC, geen dubbelboekingscontrole die dag.
+- 11-09: weer normaal (3 dubbelboekingen gemeld, 270 opdrachten). Bevestigd zelfherstellend,
+  niet verder volgen tenzij het terugkomt.
+
+## Opvolgingen bevestigd opgelost
+- Planado 429-storm (l8erbbd5): 0 nieuwe "Rate Limit Exceeded" op zowel 09-09 als 10-09 — 2 dagen
+  op rij, DEFINITIEF gefixt beschouwen, niet meer los volgen.
 - outlook-planado-sync 422 "external_id...": 0 op 09-09, patroon lijkt weg.
+
+## 10-09: itf2311c fix bestaat NIET, mijn 09-09 conclusie was FOUT — gecorrigeerd
+- Herzien op verzoek Daimy (Isa/Fenna meldden dat 5xo3pxhk 24u+ vast staat, gripp-facturen-open.json
+  9 dagen stale). Check bevestigde: 18 opdrachten "aan: claude" in postvak.json staan vast op
+  status "nieuw" sinds 02-09, INCLUSIEF itf2311c zelf (08-09) — dus de fix is nooit uitgevoerd.
+  Root cause: er is helemaal geen launchd/cron-daemon die deze queue verwerkt, alleen handmatige
+  Claude-sessies doen dat. Mijn eerdere memory-regel "0 vastzittende nieuw-opdrachten (09-09)" was
+  een verificatiefout (waarschijnlijk verkeerd gefilterd/gecheckt) — LEERPUNT: bij "bevestigd
+  opgelost" ALTIJD de ruwe postvak.json doortellen (jq, status=nieuw + aan=claude), niet op een
+  eerdere conclusie vertrouwen.
+- gripp-facturen-open.json (9 dagen stale, sinds 1-9): scripts/gripp-facturen-sync.js heeft GEEN
+  launchd-job (bevestigd via `launchctl list`) en wordt nergens anders aangeroepen — los, ongepland
+  script. Dat is de hele verklaring, geen sync-bug in de data zelf.
+- Actie: opdracht cqrzxh6i naar claude gezet (bouw geplande job voor gripp-facturen-sync + een
+  queue-verwerker/alarm voor "aan: claude" postvak-items >X uur oud). j1k42ult beantwoord/afgesloten.
+- 11-09: cqrzxh6i ZELF staat ook nog op status "nieuw" — bevestigt dat er structureel geen daemon
+  is die deze queue oppakt (alleen handmatige sessies). Backlog "aan: claude"+"nieuw" nu 20 (was
+  18 op 10-09), gripp-facturen-open.json nog steeds 1 sept. Blijft groeien tot iemand een sessie
+  start die de queue leegwerkt of de gevraagde daemon bouwt. Niet elke dienst opnieuw als V-vraag
+  stellen, wel het aantal blijven noemen in CIJFERS/GEDAAN zodat het niet wegzakt.
 
 ## Openstaand / nog volgen
 - 113 open werkbonnen (08-09, opdracht Daimy): bevestigd user-side (teams ronden oude klussen niet

@@ -5933,5 +5933,44 @@
       }
     ],
     "processedAt": "2026-09-09T15:47:38.305Z"
+  },
+  "item:0dbe3c5b-3707-46e1-97df-d657f2399639": {
+    "summary": "H. Tutupoly",
+    "grippCompanyId": 99954,
+    "grippOfferId": 9324,
+    "rpDocNumber": "202612137",
+    "allOffers": [
+      {
+        "grippOfferId": 9324,
+        "rpDocNumber": "202612137"
+      }
+    ],
+    "processedAt": "2026-09-10T09:19:58.229Z"
+  },
+  "item:d0e52df9-491e-4b60-8961-6664a2211d28": {
+    "summary": "Mirthe Kroon",
+    "grippCompanyId": 99957,
+    "grippOfferId": 9325,
+    "rpDocNumber": "202612406",
+    "allOffers": [
+      {
+        "grippOfferId": 9325,
+        "rpDocNumber": "202612406"
+      }
+    ],
+    "processedAt": "2026-09-10T11:40:25.136Z"
+  },
+  "item:5e6375e6-0855-4428-aa96-7f5a95a69d29": {
+    "summary": "Saskia Badloe",
+    "grippCompanyId": 99959,
+    "grippOfferId": 9326,
+    "rpDocNumber": "202612277",
+    "allOffers": [
+      {
+        "grippOfferId": 9326,
+        "rpDocNumber": "202612277"
+      }
+    ],
+    "processedAt": "2026-09-10T12:11:24.070Z"
   }
 }

@@ -1269,5 +1269,124 @@
   "kanaal": "EMAIL",
   "status": "klaar",
   "aangemaakt": 1788950509181
+ },
+ {
+  "lcId": "2c07dda0-3758-4c06-b68a-b699faccb7d7",
+  "ticketId": 979498105,
+  "klantNaam": "Claudia Video Huys",
+  "producten": [
+   {
+    "product": "suneye knikarmscherm",
+    "breedteMM": 5000,
+    "uitvalMM": 2500,
+    "bediening": "io",
+    "framekleur": "antraciet structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1789025838033
+ },
+ {
+  "lcId": "8bed4a68-59ce-4cc4-871c-2957c4c0086f",
+  "ticketId": 979563945,
+  "klantNaam": "Dennis Van 't Klooster",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 1085,
+    "hoogteMM": 1335,
+    "bediening": "solar",
+    "framekleur": "antraciet",
+    "aantal": 2
+   },
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 1618,
+    "hoogteMM": 2435,
+    "bediening": "solar",
+    "framekleur": "antraciet",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1789036153345
+ },
+ {
+  "lcId": "246357d1-3d5b-4d70-956b-9f641f4bac4f",
+  "ticketId": 979556712,
+  "klantNaam": "Anne Theeuwen",
+  "producten": [
+   {
+    "product": "zip design 110",
+    "breedteMM": 1850,
+    "hoogteMM": 1550,
+    "bediening": "io",
+    "framekleur": "RAL 7016 structuur",
+    "aantal": 3
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1789060147141
+ },
+ {
+  "lcId": "de884369-307a-4521-bf2b-ecfa6f4712a6",
+  "ticketId": 979556712,
+  "klantNaam": "Anne Theeuwen",
+  "producten": [
+   {
+    "product": "zip design 110",
+    "breedteMM": 1850,
+    "hoogteMM": 1550,
+    "bediening": "draaischakelaar",
+    "framekleur": "RAL 7016 structuur",
+    "aantal": 3
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1789060147265
+ },
+ {
+  "lcId": "8fe4f749-15c6-4dd7-8312-dcf611242075",
+  "ticketId": 979862031,
+  "klantNaam": "Sylvia Jansen",
+  "producten": [
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 1600,
+    "hoogteMM": 1400,
+    "bediening": "io",
+    "framekleur": "Antraciet",
+    "aantal": 2
+   },
+   {
+    "product": "rolluik s-42",
+    "breedteMM": 2350,
+    "hoogteMM": 1550,
+    "bediening": "io",
+    "framekleur": "Antraciet",
+    "aantal": 1
+   },
+   {
+    "product": "zip design 110",
+    "breedteMM": 2350,
+    "hoogteMM": 1550,
+    "bediening": "io",
+    "framekleur": "Antraciet structuur",
+    "aantal": 1
+   }
+  ],
+  "sonny": false,
+  "kanaal": "EMAIL",
+  "status": "klaar",
+  "aangemaakt": 1789124807129
  }
 ]

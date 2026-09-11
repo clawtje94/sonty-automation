@@ -77,7 +77,6 @@ async function poll() {
   console.log(`[telegram-poll] Started. Polling every ${POLL_INTERVAL/1000}s. Inbox: ${INBOX_FILE}`);
 
   while (true) {
-    heartbeat();
     try {
       // HARDE NOODREM (12-08): na een "Request timeout" op 11-08 22:03 bleef het proces
       // 22 uur hangen in een request die nooit terugkwam — Daimy's berichten kwamen al
@@ -87,6 +86,10 @@ async function poll() {
         getUpdates(),
         new Promise((_, rej) => setTimeout(() => rej(new Error('harde 60s-noodrem')), 60000)),
       ]);
+      // Heartbeat pas NA een geslaagde poll (10-09): stond bovenaan de lus en klopte dus
+      // door terwijl getUpdates continu op ECONNRESET faalde. Nu = "laatste geslaagde poll",
+      // zodat de health-check een dode getUpdates-verbinding wél ziet.
+      heartbeat();
 
       if (data.ok && data.result.length > 0) {
         for (const update of data.result) {

@@ -11396,11 +11396,6 @@
   ],
   "msgs": [
    {
-    "op": "2026-08-31 18:05:07",
-    "richting": "INBOUND",
-    "tekst": "Phoe"
-   },
-   {
     "op": "2026-08-31 18:05:28",
     "richting": "INBOUND",
     "tekst": "Dinsdag 29 september om 11:50"
@@ -11494,6 +11489,11 @@
     "op": "2026-09-01 08:19:35",
     "richting": "INBOUND",
     "tekst": "👍🏻"
+   },
+   {
+    "op": "2026-09-09 13:33:47",
+    "richting": "NOTE",
+    "tekst": "Afgehandeld: klant heeft de opdracht geannuleerd (\"Gaat niet door\"), de annulering is automatisch uitgevoerd en de klant bevestigde met 👍🏻. Geen verdere actie nodig, ticket kan dicht. (Notitie door Claude na controle van het gesprek.)"
    }
   ]
  },
@@ -12092,7 +12092,8 @@
   "verstuurdOp": "2026-09-03T13:05:37.592Z",
   "mailUit": [
    "2026-09-03 15:05:35",
-   "2026-09-03 18:03:30"
+   "2026-09-03 18:03:30",
+   "2026-09-10 15:27:26"
   ],
   "msgs": [
    {
@@ -12427,7 +12428,8 @@
   "verstuurdOp": "2026-09-03T16:03:32.636Z",
   "mailUit": [
    "2026-09-03 15:05:35",
-   "2026-09-03 18:03:30"
+   "2026-09-03 18:03:30",
+   "2026-09-10 15:27:26"
   ],
   "msgs": [
    {
@@ -12997,7 +12999,8 @@
    "2026-08-28 12:47:11",
    "2026-09-07 13:41:45",
    "2026-09-07 14:47:41",
-   "2026-09-08 14:49:59"
+   "2026-09-08 14:49:59",
+   "2026-09-09 09:22:46"
   ],
   "msgs": [
    {
@@ -13049,6 +13052,26 @@
     "op": "2026-09-08 18:23:05",
     "richting": "OUTBOUND",
     "tekst": "Dank je wel voor het laten weten! Ik kijk meteen naar een ander moment voor je en kom er morgenochtend op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 09:20:34",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 09:22:44",
+    "richting": "OUTBOUND",
+    "tekst": "Geen probleem, ik heb even gekeken: di 22 sep om 08:00 (ca. 85 min, kan een uur eerder of later zijn). Past dat? Antwoord \"ja\", dan zet ik hem vast; anders hoor ik graag wanneer het wél uitkomt. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 09:26:17",
+    "richting": "INBOUND",
+    "tekst": "14 okt of 28 okt om 9:00, lukt dat?"
+   },
+   {
+    "op": "2026-09-09 09:39:50",
+    "richting": "OUTBOUND",
+    "tekst": "Ja, woensdag 14 oktober om 09:00 lukt! Ik zet hem nu voor je vast, je krijgt zo vanzelf de definitieve bevestiging. Door de route kan het een uur eerder of later worden, dat laten we je dan weten, en zodra we onderweg zijn krijg je een sms met een link om ons live te volgen."
    }
   ]
  },
@@ -13103,21 +13126,6 @@
   ],
   "msgs": [
    {
-    "op": "2026-09-05 16:44:25",
-    "richting": "OUTBOUND",
-    "tekst": "het verschil is dat het 1 iets dikker in aluminium is als het ander"
-   },
-   {
-    "op": "2026-09-05 17:33:59",
-    "richting": "INBOUND",
-    "tekst": "Oke. Dankjewel voor de goede info."
-   },
-   {
-    "op": "2026-09-06 12:43:46",
-    "richting": "INBOUND",
-    "tekst": "Goedemorgen, de windsensor zit er nu niet meer bij. Dat stond er wel bij. Wat is daar de reden van?"
-   },
-   {
     "op": "2026-09-06 14:55:58",
     "richting": "OUTBOUND",
     "tekst": "Oh stom, foutje van mij. staat er nu wel weer op!"
@@ -13201,6 +13209,21 @@
     "op": "2026-09-08 12:50:28",
     "richting": "OUTBOUND",
     "tekst": "Helemaal goed, hij staat! Dinsdag 22 september komt onze inmeter Joey bij je langs om in te meten. We verwachten rond 15:30 bij je te zijn. Omdat we die dag een route rijden kan het een uur eerder of later worden, dus fijn als je tussen 14:30 en 17:00 thuis bent. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty Zodra we onderweg zijn krijg je een sms met een link waarmee je ons live kunt volgen."
+   },
+   {
+    "op": "2026-09-09 08:32:56",
+    "richting": "INBOUND",
+    "tekst": "Goedemorgen, hoe lang duurt de bestelling bij de leverancier?"
+   },
+   {
+    "op": "2026-09-09 10:32:57",
+    "richting": "OUTBOUND",
+    "tekst": "Sorry dat je nog niets van ons hoorde! Je bericht is binnen, een collega pakt het nu persoonlijk op en je hoort zo snel mogelijk van ons. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 13:37:34",
+    "richting": "OUTBOUND",
+    "tekst": "De productie tijd zit op 8-12 weken en daarna ga wij hem inplannen voor montage, het mooie is wel dat je dan in iedergeval de prijs stijging van dit januari voor bent!"
    }
   ]
  },
@@ -13215,21 +13238,6 @@
   ],
   "msgs": [
    {
-    "op": "2026-09-05 16:44:25",
-    "richting": "OUTBOUND",
-    "tekst": "het verschil is dat het 1 iets dikker in aluminium is als het ander"
-   },
-   {
-    "op": "2026-09-05 17:33:59",
-    "richting": "INBOUND",
-    "tekst": "Oke. Dankjewel voor de goede info."
-   },
-   {
-    "op": "2026-09-06 12:43:46",
-    "richting": "INBOUND",
-    "tekst": "Goedemorgen, de windsensor zit er nu niet meer bij. Dat stond er wel bij. Wat is daar de reden van?"
-   },
-   {
     "op": "2026-09-06 14:55:58",
     "richting": "OUTBOUND",
     "tekst": "Oh stom, foutje van mij. staat er nu wel weer op!"
@@ -13313,6 +13321,21 @@
     "op": "2026-09-08 12:50:28",
     "richting": "OUTBOUND",
     "tekst": "Helemaal goed, hij staat! Dinsdag 22 september komt onze inmeter Joey bij je langs om in te meten. We verwachten rond 15:30 bij je te zijn. Omdat we die dag een route rijden kan het een uur eerder of later worden, dus fijn als je tussen 14:30 en 17:00 thuis bent. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty Zodra we onderweg zijn krijg je een sms met een link waarmee je ons live kunt volgen."
+   },
+   {
+    "op": "2026-09-09 08:32:56",
+    "richting": "INBOUND",
+    "tekst": "Goedemorgen, hoe lang duurt de bestelling bij de leverancier?"
+   },
+   {
+    "op": "2026-09-09 10:32:57",
+    "richting": "OUTBOUND",
+    "tekst": "Sorry dat je nog niets van ons hoorde! Je bericht is binnen, een collega pakt het nu persoonlijk op en je hoort zo snel mogelijk van ons. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 13:37:34",
+    "richting": "OUTBOUND",
+    "tekst": "De productie tijd zit op 8-12 weken en daarna ga wij hem inplannen voor montage, het mooie is wel dat je dan in iedergeval de prijs stijging van dit januari voor bent!"
    }
   ]
  },
@@ -13327,21 +13350,6 @@
   ],
   "msgs": [
    {
-    "op": "2026-09-05 16:44:25",
-    "richting": "OUTBOUND",
-    "tekst": "het verschil is dat het 1 iets dikker in aluminium is als het ander"
-   },
-   {
-    "op": "2026-09-05 17:33:59",
-    "richting": "INBOUND",
-    "tekst": "Oke. Dankjewel voor de goede info."
-   },
-   {
-    "op": "2026-09-06 12:43:46",
-    "richting": "INBOUND",
-    "tekst": "Goedemorgen, de windsensor zit er nu niet meer bij. Dat stond er wel bij. Wat is daar de reden van?"
-   },
-   {
     "op": "2026-09-06 14:55:58",
     "richting": "OUTBOUND",
     "tekst": "Oh stom, foutje van mij. staat er nu wel weer op!"
@@ -13425,6 +13433,21 @@
     "op": "2026-09-08 12:50:28",
     "richting": "OUTBOUND",
     "tekst": "Helemaal goed, hij staat! Dinsdag 22 september komt onze inmeter Joey bij je langs om in te meten. We verwachten rond 15:30 bij je te zijn. Omdat we die dag een route rijden kan het een uur eerder of later worden, dus fijn als je tussen 14:30 en 17:00 thuis bent. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty Zodra we onderweg zijn krijg je een sms met een link waarmee je ons live kunt volgen."
+   },
+   {
+    "op": "2026-09-09 08:32:56",
+    "richting": "INBOUND",
+    "tekst": "Goedemorgen, hoe lang duurt de bestelling bij de leverancier?"
+   },
+   {
+    "op": "2026-09-09 10:32:57",
+    "richting": "OUTBOUND",
+    "tekst": "Sorry dat je nog niets van ons hoorde! Je bericht is binnen, een collega pakt het nu persoonlijk op en je hoort zo snel mogelijk van ons. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 13:37:34",
+    "richting": "OUTBOUND",
+    "tekst": "De productie tijd zit op 8-12 weken en daarna ga wij hem inplannen voor montage, het mooie is wel dat je dan in iedergeval de prijs stijging van dit januari voor bent!"
    }
   ]
  },
@@ -13436,7 +13459,8 @@
    "2026-08-28 12:47:11",
    "2026-09-07 13:41:45",
    "2026-09-07 14:47:41",
-   "2026-09-08 14:49:59"
+   "2026-09-08 14:49:59",
+   "2026-09-09 09:22:46"
   ],
   "msgs": [
    {
@@ -13486,6 +13510,804 @@
    },
    {
     "op": "2026-09-08 18:23:05",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik kijk meteen naar een ander moment voor je en kom er morgenochtend op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 09:20:34",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 09:22:44",
+    "richting": "OUTBOUND",
+    "tekst": "Geen probleem, ik heb even gekeken: di 22 sep om 08:00 (ca. 85 min, kan een uur eerder of later zijn). Past dat? Antwoord \"ja\", dan zet ik hem vast; anders hoor ik graag wanneer het wél uitkomt. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 09:26:17",
+    "richting": "INBOUND",
+    "tekst": "14 okt of 28 okt om 9:00, lukt dat?"
+   },
+   {
+    "op": "2026-09-09 09:39:50",
+    "richting": "OUTBOUND",
+    "tekst": "Ja, woensdag 14 oktober om 09:00 lukt! Ik zet hem nu voor je vast, je krijgt zo vanzelf de definitieve bevestiging. Door de route kan het een uur eerder of later worden, dat laten we je dan weten, en zodra we onderweg zijn krijg je een sms met een link om ons live te volgen."
+   }
+  ]
+ },
+ "21460f50ab644f95cfccd27c7f29cbe8": {
+  "naam": "Wuisman",
+  "ticket": 979001323,
+  "verstuurdOp": "2026-09-09T07:22:49.835Z",
+  "mailUit": [
+   "2026-08-28 12:47:11",
+   "2026-09-07 13:41:45",
+   "2026-09-07 14:47:41",
+   "2026-09-08 14:49:59",
+   "2026-09-09 09:22:46"
+  ],
+  "msgs": [
+   {
+    "op": "2026-09-07 14:47:39",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Wuisman, goed nieuws: we kunnen bij je langskomen om in te meten. Ons voorstel: do 10 sep om 15:35. De afspraak duurt ongeveer 85 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-07 21:43:17",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-09-08 08:01:56",
+    "richting": "OUTBOUND",
+    "tekst": "Sorry dat je nog niets van ons hoorde! Je bericht is binnen, een collega pakt het nu persoonlijk op en je hoort zo snel mogelijk van ons. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-08 08:04:30",
+    "richting": "OUTBOUND",
+    "tekst": "Geen probleem, ik heb even naar andere momenten gekeken. Het eerstvolgende wat kan is donderdag 17 september om 15:25, of anders donderdag 24 september om 15:00 of dinsdag 29 september om 15:05. Houd er rekening mee dat het door de route een uur eerder of later kan worden, dan laten we dat weten. Welke van deze past jou het beste?"
+   },
+   {
+    "op": "2026-09-08 09:10:17",
+    "richting": "INBOUND",
+    "tekst": "We zijn nog bezig met de verbouwing, is het mogelijk om daarna af te spreken? Medio oktober zou dat zijn. Liefst op een woensdag of vrijdag"
+   },
+   {
+    "op": "2026-09-08 09:18:40",
+    "richting": "OUTBOUND",
+    "tekst": "Geen probleem, medio oktober kan prima, dan hebben jullie de verbouwing achter de rug. Ik kan op woensdag: 21 oktober om 09:00 of 12:30, of 28 oktober om 09:00 of 12:30. Door de route kan het een uur eerder of later worden, dat laten we je dan weten. Welke past het beste?"
+   },
+   {
+    "op": "2026-09-08 10:48:29",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Wuisman, kleine reminder: donderdag 10 september om 15:35 staat nog voor je klaar. Eén berichtje en ik zet hem vast! Past het toch niet, ook prima, dan kijk ik gewoon verder voor je. Groetjes, Sunny van Sonty"
+   },
+   {
+    "op": "2026-09-08 14:49:57",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Wuisman, goed nieuws: we kunnen bij je langskomen om in te meten. Ons voorstel: do 10 sep om 15:35. De afspraak duurt ongeveer 85 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-08 18:22:19",
+    "richting": "INBOUND",
+    "tekst": "Het liefst op 28 oktober om 09:00."
+   },
+   {
+    "op": "2026-09-08 18:23:05",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik kijk meteen naar een ander moment voor je en kom er morgenochtend op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 09:20:34",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 09:22:44",
+    "richting": "OUTBOUND",
+    "tekst": "Geen probleem, ik heb even gekeken: di 22 sep om 08:00 (ca. 85 min, kan een uur eerder of later zijn). Past dat? Antwoord \"ja\", dan zet ik hem vast; anders hoor ik graag wanneer het wél uitkomt. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 09:26:17",
+    "richting": "INBOUND",
+    "tekst": "14 okt of 28 okt om 9:00, lukt dat?"
+   },
+   {
+    "op": "2026-09-09 09:39:50",
+    "richting": "OUTBOUND",
+    "tekst": "Ja, woensdag 14 oktober om 09:00 lukt! Ik zet hem nu voor je vast, je krijgt zo vanzelf de definitieve bevestiging. Door de route kan het een uur eerder of later worden, dat laten we je dan weten, en zodra we onderweg zijn krijg je een sms met een link om ons live te volgen."
+   }
+  ]
+ },
+ "84ad97c8b939ead81270cd1fd95d0870": {
+  "naam": "Beuker -",
+  "ticket": 979414210,
+  "verstuurdOp": "2026-09-09T10:37:57.301Z",
+  "mailUit": [
+   "2026-09-05 15:01:08",
+   "2026-09-09 12:37:54"
+  ],
+  "msgs": [
+   {
+    "op": "2026-09-09 11:22:20",
+    "richting": "INBOUND",
+    "tekst": "Goedemorgen Jaimy, ik heb de offerte voor het rolluik zoals zaterdag besproken ondertekend. Even praktisch: ik heb volgende week een medische ingreep en ben niet telefonisch bereikbaar voor meetafspraak. Voor 14 sept of na 20 sept ben ik weer bereikbaar. Groeten Titia Beuker"
+   },
+   {
+    "op": "2026-09-09 11:29:21",
+    "richting": "OUTBOUND",
+    "tekst": "Goedemorgen Titia, wat leuk dat je getekend hebt, fijn dat we het rolluik voor je mogen gaan maken! Ik heb je bereikbaarheid meteen bij de planning neergelegd: dat je volgende week niet telefonisch bereikbaar bent, en dat je vóór 14 september of na 20 september wel te bereiken bent. Ik heb er wel bij gezet dat dat venster vóór 14 september kort is, dus mocht het bellen daarvoor niet lukken, dan nemen ze na 20 september contact met je op voor de inmeetafspraak. Sterkte alvast met je ingreep volgende week! Laat maar weten als ik nog iets voor je kan doen."
+   },
+   {
+    "op": "2026-09-09 11:29:22",
+    "richting": "NOTE",
+    "tekst": "🤖 Door de AI gedaan: • Inmeten doorgezet naar de planning voor Titia Beuker (Rolluik (offerte 202612491)), notitie voor de planner: Klant heeft getekend. LET OP bereikbaarheid: klant heeft volgende week een medische ingreep en is NIET telefonisch bereikbaar. Wel bereikbaar VOOR 14 sept (dus 9-13 sept, dat is een KRAP venster) OF NA 20 sept. Graag bellen binnen een van die vensters; als bellen voor 14 sept niet lukt, dan pas na 20 sept contact opnemen voor de inmeetafspraak."
+   },
+   {
+    "op": "2026-09-09 11:31:44",
+    "richting": "INBOUND",
+    "tekst": "Na 20 september is helemaal prima! Vooralsnog geen vragen, dank."
+   },
+   {
+    "op": "2026-09-09 11:40:16",
+    "richting": "OUTBOUND",
+    "tekst": "Helemaal goed Titia, dan houden we het op na 20 september. Sterkte volgende week en tot snel!"
+   },
+   {
+    "op": "2026-09-09 11:41:13",
+    "richting": "INBOUND",
+    "tekst": "👍"
+   },
+   {
+    "op": "2026-09-09 12:37:52",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Beuker, ik kan het inmeten inplannen: Joey donderdag 10 september rond 15:35 (ca. 25 min, kan een uur eerder of later zijn). Past dat? Antwoord \"ja\", dan zet ik hem vast; anders hoor ik graag wanneer het wél uitkomt. Sunny van Sonty"
+   },
+   {
+    "op": "2026-09-09 13:00:02",
+    "richting": "INBOUND",
+    "tekst": "Nee, dat lukt helaas niet. Laten we na 20 sept inplannen."
+   },
+   {
+    "op": "2026-09-09 13:10:12",
+    "richting": "OUTBOUND",
+    "tekst": "Geen probleem Titia, dan plannen we het na 20 september. Ik heb even gekeken en deze momenten kan ik vastzetten: - maandag 21 september om 10:10 - maandag 21 september om 12:30 - dinsdag 22 september om 08:00 De inmeter is dan ongeveer 25 minuten bij je, en door de route kan het een uur eerder of later worden. Welke van deze past het beste?"
+   },
+   {
+    "op": "2026-09-09 13:29:44",
+    "richting": "INBOUND",
+    "tekst": "Kan het ook nog een week later? Dat komt beter uit"
+   },
+   {
+    "op": "2026-09-09 13:37:25",
+    "richting": "OUTBOUND",
+    "tekst": "Prima, dat kan. Ik kan deze momenten voor je vastzetten: - maandag 28 september om 08:00 - maandag 28 september om 12:30 - dinsdag 29 september om 08:00 De inmeter is ongeveer 25 minuten bij je, en door de route kan het een uur eerder of later worden. Welke past het beste?"
+   },
+   {
+    "op": "2026-09-09 13:41:53",
+    "richting": "INBOUND",
+    "tekst": "Maandag 28 sept om 12.30 is top! Lukt dat?"
+   },
+   {
+    "op": "2026-09-09 13:55:03",
+    "richting": "OUTBOUND",
+    "tekst": "Top, ik zet maandag 28 september om 12:30 nu voor je vast. Inmeter Patrick is er ongeveer 25 minuten, en door de route kan het een uur eerder of later worden. Je krijgt zo vanzelf de definitieve bevestiging. Zodra we onderweg zijn, ontvang je een sms met een linkje om ons live te volgen. Sterkte volgende week alvast!"
+   },
+   {
+    "op": "2026-09-09 13:55:43",
+    "richting": "INBOUND",
+    "tekst": "Top, ik heb het genoteerd! Dank je wel"
+   },
+   {
+    "op": "2026-09-09 14:01:09",
+    "richting": "OUTBOUND",
+    "tekst": "Graag gedaan Titia, tot maandag de 28e! Sterkte volgende week met je ingreep en beterschap alvast."
+   },
+   {
+    "op": "2026-09-09 14:01:34",
+    "richting": "INBOUND",
+    "tekst": "🙏"
+   }
+  ]
+ },
+ "16b2885fd9205ebab4dbef1c91bb2e27": {
+  "naam": "Saskia Badloe",
+  "ticket": 979446080,
+  "verstuurdOp": "2026-09-09T11:10:04.687Z",
+  "mailUit": [
+   "2026-09-09 13:10:02",
+   "2026-09-10 13:17:10"
+  ],
+  "msgs": [
+   {
+    "op": "2026-09-09 13:10:00",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Saskia, goed nieuws: we kunnen bij je langskomen om in te meten. Ons voorstel: ma 21 sep om 13:40. De afspraak duurt ongeveer 50 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 13:17:05",
+    "richting": "INBOUND",
+    "tekst": "Dat past"
+   },
+   {
+    "op": "2026-09-09 13:17:51",
+    "richting": "INBOUND",
+    "tekst": "Hoe gaat dat met het inmeten voor de ramen op zolder? Is daar dan ook een steiger voor nodig?"
+   },
+   {
+    "op": "2026-09-09 13:25:02",
+    "richting": "OUTBOUND",
+    "tekst": "Fijn dat het past! Over de zolderramen: die meet onze adviseur tijdens de inmeetafspraak gewoon mee, net als de andere ramen. Of daar een steiger of hoogwerker voor nodig is, hangt af van de hoogte en hoe goed we erbij kunnen. Dat beoordeelt de adviseur ter plekke, dan weet je meteen waar je aan toe bent. Vaak lukt het gewoon met ladders; zit een raam boven de tweede verdieping en kan het niet anders, dan bespreken we een hoogwerker met je (dat staat dan apart en transparant op de offerte). Kun je me eventueel een foto van de zolderramen sturen? Dan kan ik alvast een beetje meekijken."
+   },
+   {
+    "op": "2026-09-09 13:39:54",
+    "richting": "INBOUND",
+    "tekst": "De vraag over de steiger is al beantwoord, er is een steiger nodig voor de installatie. Daarom vraag ik mij af, hoe er wordt *ingemeten* als een steiger nodig is."
+   },
+   {
+    "op": "2026-09-09 13:45:08",
+    "richting": "OUTBOUND",
+    "tekst": "Goeie vraag, en het zit gelukkig makkelijker dan je denkt: voor het inmeten zelf is die steiger niet nodig. Onze adviseur meet de ramen op met meetapparatuur, meestal gewoon vanaf de grond, van binnenuit of met een ladder. De steiger is puur voor de montage later, als de zonwering echt geplaatst wordt. Tijdens de inmeetafspraak op maandag 21 september bekijkt de adviseur meteen welke werkwijze voor de plaatsing nodig is (steiger of hoogwerker), zodat dat netjes en transparant op je definitieve offerte komt te staan. Zal ik de afspraak zo vast voor je vastzetten?"
+   },
+   {
+    "op": "2026-09-09 13:45:39",
+    "richting": "INBOUND",
+    "tekst": "Dat is goed, dankjewel."
+   },
+   {
+    "op": "2026-09-09 13:55:45",
+    "richting": "OUTBOUND",
+    "tekst": "Top, dan staat maandag 21 september om 13:40 voor je genoteerd. Door de route kan het trouwens een uur eerder of later worden; zodra Patrick onderweg is, krijg je een sms met een link om ons live te volgen, zodat je precies weet hoe laat hij aankomt. Fijne dag verder!"
+   },
+   {
+    "op": "2026-09-10 09:11:13",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Saskia, kleine reminder: maandag 21 september om 13:40 staat nog voor je klaar. Eén berichtje en ik zet hem vast! Past het toch niet, ook prima, dan kijk ik gewoon verder voor je. Groetjes, Sunny van Sonty"
+   },
+   {
+    "op": "2026-09-10 09:12:54",
+    "richting": "INBOUND",
+    "tekst": "Ik heb gisteren om 1317 uur al akkoord gegeven??"
+   },
+   {
+    "op": "2026-09-10 09:19:07",
+    "richting": "OUTBOUND",
+    "tekst": "Je hebt helemaal gelijk, sorry daarvoor! Je akkoord van gisteren is gewoon goed binnengekomen en maandag 21 september om 13:40 staat vast voor je genoteerd. Die reminder had je niet meer hoeven krijgen. Fijne dag Saskia!"
+   },
+   {
+    "op": "2026-09-10 13:17:08",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Saskia, goed nieuws: we kunnen bij je langskomen om in te meten. Ons voorstel: ma 21 sep om 10:00. De afspraak duurt ongeveer 50 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 13:21:17",
+    "richting": "INBOUND",
+    "tekst": "Dit is al de 3e x dat ik een afspraak krijg. Wat is er gebeurd met de inmiddels 2 maal bevestigde afspraak op 21 september om 1340 uur? Er wordt heel erg langs elkaar heen gewerkt bij jullie lijkt het, dit doet erge afbreuk aan het vertrouwen in jullie."
+   },
+   {
+    "op": "2026-09-10 13:26:43",
+    "richting": "OUTBOUND",
+    "tekst": "Wat vervelend Saskia, en je hebt helemaal gelijk. Sorry dat dit zo langs elkaar heen loopt, dat had niet mogen gebeuren. Even duidelijk voor je: jouw afspraak op maandag 21 september om 13:40 met Patrick blijft gewoon staan. Dat is het moment dat geldt. Het voorstel van 10:00 dat je vandaag kreeg was een automatisch berichtje dat er ten onrechte tussendoor kwam, dat mag je negeren. Ik heb dit nu bij onze planning neergelegd zodat ze de dubbele afspraak uit het systeem halen en je geen losse voorstellen meer ontvangt. Een collega bevestigt 21 september 13:40 ook nog even persoonlijk aan je, zodat je het zwart-op-wit hebt. Kan ik verder nog iets voor je verduidelijken, of komt het zo goed voor je?"
+   },
+   {
+    "op": "2026-09-10 13:26:44",
+    "richting": "NOTE",
+    "tekst": "@jorren745487 @tanya748440 Dubbele/verwarrende inmeetafspraken — klant Saskia Badloe Ridderspoor 34, 3191 PD Hoogvliet Rotterdam +31628141474 Saskia heeft inmiddels 3 keer een inmeetvoorstel/afspraak gekregen. Ze gaf op 09-09 om 13:17 akkoord op ma 21 september 13:40 (inmeter Patrick), en dat is daarna ook nog een keer bevestigd. Vandaag (10-09 13:17) kreeg ze automatisch een NIEUW voorstel voor ma 21 september 10:00. Ze is hier terecht gefrustreerd over en geeft aan dat het vertrouwen eronder lijdt. Graag in het systeem rechtzetten welk moment definitief is (klant houdt 13:40 aan) en de dubbele/foutieve afspraak van 10:00 verwijderen, zodat ze geen nieuwe automatische berichten meer krijgt. Neem daarna even persoonlijk contact op om te bevestigen dat 21 september 13:40 vaststaat. Ik heb de klant al gerustgesteld dat 13:40 blijft staan en dat een collega het bevestigt."
+   },
+   {
+    "op": "2026-09-10 13:58:30",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je voor je eerlijke bericht, dat snap ik goed. Ik leg het even voor aan een collega en je hoort vandaag nog van ons. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 14:12:28",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Saskia, goed nieuws, hij staat! Maandag 21 september komt Patrick bij je langs om in te meten, dat duurt zo'n 50 minuutjes. We verwachten rond 13:40 bij je te zijn. Omdat we die dag een route rijden kan het een uur eerder of later worden, dus fijn als je tussen 12:40 en 15:10 thuis bent. Zodra we onderweg zijn krijg je een sms met een link waarmee je ons live kunt volgen. Komt er iets tussen? Stuur gerust een berichtje."
+   }
+  ]
+ },
+ "63a11c6d3a82eefdb8977f8431dfd2f7": {
+  "naam": "Thea Kuiper",
+  "ticket": 978601088,
+  "verstuurdOp": "2026-09-09T14:56:38.715Z",
+  "mailUit": [
+   "2026-09-09 16:56:36"
+  ],
+  "msgs": [
+   {
+    "op": "2026-09-08 20:32:08",
+    "richting": "INBOUND",
+    "tekst": "Die 1500 is dus incl alles"
+   },
+   {
+    "op": "2026-09-08 20:40:04",
+    "richting": "OUTBOUND",
+    "tekst": "Klopt helemaal, die 1.500 euro is all-in: inclusief btw, de motor met afstandsbediening én de montage door onze eigen monteurs. Je komt dus niet voor verrassingen te staan. Op je offerte staan nu nog allebei (screen én rolluik) voor dat raam. Wil je dat ik de screen eruit haal zodat er alleen het rolluik overblijft, of wil je ze allebei houden?"
+   },
+   {
+    "op": "2026-09-08 21:11:14",
+    "richting": "INBOUND",
+    "tekst": "Nee die screen kan eruit"
+   },
+   {
+    "op": "2026-09-09 08:05:09",
+    "richting": "OUTBOUND",
+    "tekst": "Gedaan! De screen is eruit, nu staat alleen het rolluik nog op je offerte. Het totaal is 1.764,60 euro en met de 15% actiekorting betaal je 1.500 euro, all-in (btw, motor met afstandsbediening en montage). Je aangepaste offerte staat hier: https://document.reuzenpanda.nl/nl/731483fa-ef6b-4aae-afcf-883ec09219dd/fea5a566-b781-48d1-91ff-3129557c8ac1/latest?pdfAction=DOCSIGN Offertenummer: 202612455 De offerte is nog 7 dagen geldig. Zal ik hem voor je klaarzetten voor het inmeten, of wil je hem eerst zelf online bekijken en ondertekenen via de link?"
+   },
+   {
+    "op": "2026-09-09 08:05:11",
+    "richting": "NOTE",
+    "tekst": "🤖 Door de AI gedaan: • Offerte aangepast: Screen (Zip Design 110) verwijderd op verzoek klant; alleen rolluik blijft over."
+   },
+   {
+    "op": "2026-09-09 14:16:13",
+    "richting": "INBOUND",
+    "tekst": "Is wat ik nu in de offerte geb staan het meest verkochte of raad je me iets anders aan"
+   },
+   {
+    "op": "2026-09-09 14:23:51",
+    "richting": "OUTBOUND",
+    "tekst": "Goede vraag! Allebei worden veel verkocht, het hangt echt af van wat je zelf belangrijk vindt. Een rolluik is een topkeuze als je het raam helemaal wilt kunnen afsluiten: verduistering voor een slaapkamer, extra isolatie in de winter en het werkt inbraakwerend. Wil je juist overdag warmte buiten houden maar wel naar buiten blijven kijken, dan is een screen fijner. Om welk raam gaat het eigenlijk, en wat vind je het belangrijkst: verduisteren en afsluiten, of uitzicht houden? Dan denk ik gericht met je mee."
+   },
+   {
+    "op": "2026-09-09 15:19:15",
+    "richting": "INBOUND",
+    "tekst": "Screen is sowieso van de baan. Het gaat me om een rolluik. Wat wordt het meeste verkocht qua rolluik en bediening? Wat ik nu in de offerte heb"
+   },
+   {
+    "op": "2026-09-09 15:27:37",
+    "richting": "OUTBOUND",
+    "tekst": "Wat je nu in de offerte hebt staan is precies de meest gekozen combinatie: een rolluik met een breed, stevig profiel en bediening via een Somfy motor met afstandsbediening. Dat is veruit onze populairste keuze, want je bedient het luik gewoon vanuit je stoel en hebt geen kabels of gaten in het kozijn. Kortom, je zit met je huidige offerte helemaal goed. Zullen we dan de volgende stap zetten en het inmeten in gang zetten, of wil je hem eerst zelf even rustig bekijken via de link?"
+   },
+   {
+    "op": "2026-09-09 15:31:23",
+    "richting": "INBOUND",
+    "tekst": "Ja is goed. Maak de afspraak maar"
+   },
+   {
+    "op": "2026-09-09 15:36:30",
+    "richting": "OUTBOUND",
+    "tekst": "Super, bedankt voor het vertrouwen Thea! Ik zet het inmeten nu voor je in gang. Hou er wel rekening mee: als je na het inmeten toch niet met ons verder gaat, brengen we 75 euro in rekening om onze kosten te dekken. Ga je wel met ons verder, dan vervalt die 75 euro helemaal. De planning neemt binnen 5 werkdagen contact met je op om de inmeetafspraak in te plannen. Sla ons nummer vast even op, dan weet je meteen dat wij het zijn als we bellen."
+   },
+   {
+    "op": "2026-09-09 15:36:32",
+    "richting": "NOTE",
+    "tekst": "🤖 Door de AI gedaan: • Inmeten doorgezet naar de planning voor Thea Kuiper (Rolluik (RollSUPER) met motor en afstandsbediening, offerte 202612455), notitie voor de planner: Klant akkoord op offerte 202612455 (rolluik met Somfy motor + afstandsbediening). Screen is op verzoek verwijderd, alleen rolluik blijft over."
+   },
+   {
+    "op": "2026-09-09 15:38:26",
+    "richting": "INBOUND",
+    "tekst": "Is prima. De kleur die ik heb opgegeven is dat ook de meest gekozen"
+   },
+   {
+    "op": "2026-09-09 15:44:45",
+    "richting": "OUTBOUND",
+    "tekst": "Goede vraag Thea! Jij hebt gekozen voor RAL 9005 structuur, dat is een mooie mat-zwarte kleur. Onze meest gekozen kleur over de hele linie is eigenlijk RAL 9010 (wit), maar de donkere tinten zoals zwart en antraciet zijn juist heel populair bij moderne woningen met donkere kozijnen. Beide zijn standaardkleuren, dus qua prijs maakt het niks uit. De handigste vuistregel: kies dezelfde kleur als je kozijnen, dan valt het rolluik het minst op. Passen jouw kozijnen bij het zwart? Dan zit je met RAL 9005 helemaal goed. De doekkleur en eventueel de kleur kun je trouwens tot na het inmeten nog wisselen, onze adviseur neemt alle stalen mee."
+   },
+   {
+    "op": "2026-09-09 16:15:58",
+    "richting": "INBOUND",
+    "tekst": "Dat is top. Dank voor je hulp"
+   },
+   {
+    "op": "2026-09-09 16:25:39",
+    "richting": "OUTBOUND",
+    "tekst": "Graag gedaan, Thea! De planning neemt binnen 5 werkdagen contact met je op voor de inmeetafspraak. Fijne dag!"
+   },
+   {
+    "op": "2026-09-09 16:25:43",
+    "richting": "NOTE",
+    "tekst": "👤 Ticket blijft OPEN bij Mens nodig: in het antwoord is de klant beloofd dat iemand contact opneemt."
+   },
+   {
+    "op": "2026-09-09 16:56:33",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Thea, ik kan het inmeten inplannen: Joey donderdag 10 september rond 15:30 (ca. 20 min, kan een uur eerder of later zijn). Past dat? Antwoord \"ja\", dan zet ik hem vast; anders hoor ik graag wanneer het wél uitkomt. Sunny van Sonty"
+   },
+   {
+    "op": "2026-09-09 17:03:15",
+    "richting": "INBOUND",
+    "tekst": "Ja"
+   },
+   {
+    "op": "2026-09-09 17:48:07",
+    "richting": "OUTBOUND",
+    "tekst": "Helemaal goed, hij staat! Donderdag 10 september komt onze inmeter Joey bij je langs om in te meten. We verwachten rond 15:30 bij je te zijn. Omdat we die dag een route rijden kan het een uur eerder of later worden, dus fijn als je tussen 14:30 en 17:00 thuis bent. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty Zodra we onderweg zijn krijg je een sms met een link waarmee je ons live kunt volgen."
+   }
+  ]
+ },
+ "2e8a2bd9c9a7bf5790b9c4285095bbe0": {
+  "naam": "Jeffrey Zweep",
+  "ticket": 979541600,
+  "verstuurdOp": "2026-09-09T17:54:00.414Z",
+  "mailUit": [
+   "2026-09-03 08:03:53",
+   "2026-09-07 12:21:23",
+   "2026-09-09 18:18:28",
+   "2026-09-09 19:53:57",
+   "2026-09-10 18:10:55"
+  ],
+  "msgs": [
+   {
+    "op": "2026-09-09 19:53:55",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Jeffrey, goed nieuws: we kunnen bij je langskomen om in te meten. Ons voorstel: ma 21 sep om 15:00. De afspraak duurt ongeveer 30 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 17:26:18",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-09-10 17:37:44",
+    "richting": "OUTBOUND",
+    "tekst": "Geen probleem, ik heb even gekeken wat er nog vrij is. Zou een van deze je beter uitkomen: maandag 21 september om 11:00, dinsdag 22 september om 12:30 of woensdag 23 september om 08:00? Het inmeten duurt zo'n 30 minuten en kan door de route een uur eerder of later worden. Welke heeft je voorkeur?"
+   },
+   {
+    "op": "2026-09-10 18:07:53",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 18:10:53",
+    "richting": "OUTBOUND",
+    "tekst": "Geen probleem, ik heb even gekeken: di 22 sep om 08:00 (ca. 30 min, kan een uur eerder of later zijn). Past dat? Antwoord \"ja\", dan zet ik hem vast; anders hoor ik graag wanneer het wél uitkomt. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 18:11:00",
+    "richting": "OUTBOUND",
+    "tekst": "Kleine correctie van mijn kant: de tijden die je net van ons kreeg blijven gewoon staan. Maandag 21 september om 11:00, dinsdag 22 september om 12:30 of woensdag 23 september om 08:00. Laat maar weten welke je het beste uitkomt, dan zetten we hem vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 20:45:23",
+    "richting": "INBOUND",
+    "tekst": "21 september om 11:00 graag"
+   },
+   {
+    "op": "2026-09-10 20:46:58",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik kijk meteen naar een ander moment voor je en kom er morgenochtend op terug. Groetjes, Nanny van Sonty"
+   }
+  ]
+ },
+ "2ba0a587dfd9be9ee0663f3a90684d21": {
+  "naam": "H. Tutupoly",
+  "ticket": 979597692,
+  "verstuurdOp": "2026-09-10T06:51:50.272Z",
+  "mailUit": [
+   "2026-08-29 14:08:29",
+   "2026-09-10 08:51:47"
+  ],
+  "msgs": [
+   {
+    "op": "2026-09-10 08:51:45",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi H., goed nieuws: we kunnen bij je langskomen om in te meten. Ons voorstel: wo 23 sep om 08:00. De afspraak duurt ongeveer 35 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 08:56:15",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-09-10 08:56:46",
+    "richting": "INBOUND",
+    "tekst": "Goedemorgen, als het kan later op de ochtend of in de middag ."
+   },
+   {
+    "op": "2026-09-10 09:10:21",
+    "richting": "OUTBOUND",
+    "tekst": "Goedemorgen! Geen probleem. Op woensdag 23 september kan ik je ook later inplannen: om 12:30 uur (net na de middag). Zou dat je uitkomen? Kan ik dan ook eerdere data in de middag aanbieden, mocht 23 september niet lukken: woensdag 30 september om 12:30 of woensdag 7 oktober om 12:30. Het inmeten duurt zo'n 35 minuten. Door de route kan de aankomsttijd een uur eerder of later worden; we laten het je weten als dat zo is. Welke dag en tijd heeft je voorkeur?"
+   },
+   {
+    "op": "2026-09-10 11:05:54",
+    "richting": "INBOUND",
+    "tekst": "Woensdag 23-9 om 12.30 uur kan en graag een half uurtje van tevoren een belletje als ze komen. Kan dat? Oberigens had ik 2 stoffen meegekregen als voorbeeld waarvan ik heb gekozen voor de 006 maar dat moet de 002 zijn. Ik ben nu op kantoor en als ik straks thuis ben zal ik nog even het juiste nummer opgeven."
+   },
+   {
+    "op": "2026-09-10 11:17:19",
+    "richting": "OUTBOUND",
+    "tekst": "Top, woensdag 23 september om 12:30 zet ik nu voor je vast, je krijgt zo vanzelf de definitieve bevestiging. Door de route kan de aankomst een uur eerder of later worden; zodra we onderweg zijn krijg je een sms met een link om ons te volgen. Een belletje een half uur van tevoren geef ik als notitie mee. Het juiste stofnummer (002 in plaats van 006) hoor ik graag als je thuis bent, dan noteer ik het meteen bij je afspraak. Geen zorgen, de definitieve keuze maak je sowieso samen met de adviseur bij het inmeten."
+   },
+   {
+    "op": "2026-09-10 12:17:42",
+    "richting": "INBOUND",
+    "tekst": "Misschien wil ik mijn keuken ook laten doen afhankelijk van de prijs. Kan dat meteen met de meting worden gedaan?"
+   },
+   {
+    "op": "2026-09-10 12:24:19",
+    "richting": "OUTBOUND",
+    "tekst": "Wat leuk! Om je een prijsindicatie te kunnen geven voor de keuken, mag ik weten om welke raamdecoratie het gaat en ongeveer de maten (breedte x hoogte)? Dan reken ik het even voor je uit, zodat je weet waar je aan toe bent. Als het je aanspreekt, kan de adviseur de keuken meteen tijdens dezelfde afspraak op woensdag 23 september exact opmeten."
+   },
+   {
+    "op": "2026-09-10 12:25:18",
+    "richting": "INBOUND",
+    "tekst": "Is goed maar kan ik ook pas doen als ik thuis ben"
+   },
+   {
+    "op": "2026-09-10 12:28:17",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik kijk meteen naar een ander moment voor je en kom er vandaag nog op terug. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 13:29:02",
+    "richting": "INBOUND",
+    "tekst": "Een ander moment? 23-9 staat toch al vast?"
+   },
+   {
+    "op": "2026-09-10 13:40:13",
+    "richting": "OUTBOUND",
+    "tekst": "Klopt helemaal, mijn vorige berichtje was niet handig verwoord, sorry! Woensdag 23 september om 12:30 blijft gewoon staan, daar verandert niets aan. Stuur je vanavond thuis even het juiste stofnummer (002) door en de raamdecoratie plus maten voor de keuken? Dan reken ik de keuken voor je uit en noteer ik alles bij je afspraak."
+   },
+   {
+    "op": "2026-09-10 13:40:32",
+    "richting": "INBOUND",
+    "tekst": "👍"
+   },
+   {
+    "op": "2026-09-10 22:46:29",
+    "richting": "INBOUND",
+    "tekst": "Image"
+   }
+  ]
+ },
+ "6d39d1574cc8cb9db8f1b128d48c1b71": {
+  "naam": "Mirthe Kroon",
+  "ticket": 978118850,
+  "verstuurdOp": "2026-09-10T07:24:56.387Z",
+  "mailUit": [
+   "2026-09-10 09:24:54"
+  ],
+  "msgs": [
+   {
+    "op": "2026-09-02 17:03:10",
+    "richting": "OUTBOUND",
+    "tekst": "Hi Mirthe, Jaimy hier van Sonty. Leuk dat ik je mag helpen! Je prijsindicatie staat klaar. Aan producten en montage zit een waarde van 2.512 euro, maar met de actie die nu loopt betaal je 2.135 euro. Daar zit alles in, ook de btw, dus je komt niet voor verrassingen te staan. Deze prijs geldt nog tot dinsdag 8 september. Bekijk je offerte hier: https://document.reuzenpanda.nl/nl/731483fa-ef6b-4aae-afcf-883ec09219dd/2bb66b9a-b450-4468-a849-14692dd0cec5/latest — offertenummer: 202612406 Ga je akkoord, dan plannen we het inmeten in. Onze adviseur neemt alle stalen en kleuren mee, dus je kiest gewoon thuis in je eigen licht. Pas na het inmeten staat de definitieve prijs vast."
+   },
+   {
+    "op": "2026-09-08 20:53:14",
+    "richting": "INBOUND",
+    "tekst": "Goedenavond, Dank voor uw bericht. Zou u kunnen langskomen om de mogelijkheden te bekijken en ons hierin van advies voorzien? Wij hebben bijvoorbeeld op de 1e verdieping een balkon met een deur en wij vragen ons af of een rolluik hierbij mogelijk is en waar deze aan bevestigd moet worden. Ik hoor graag van u en alvast bedankt. Met vriendelijke groet, Mirthe Kroon"
+   },
+   {
+    "op": "2026-09-08 20:58:57",
+    "richting": "OUTBOUND",
+    "tekst": "Goedenavond Mirthe! Leuk dat je verder wilt kijken. Een rolluik bij een balkondeur op de eerste verdieping kan vrijwel altijd. Waar en hoe het precies bevestigd wordt, beoordeelt onze adviseur het beste ter plekke bij het inmeten. Hij bekijkt de situatie, adviseert je en neemt meteen alle kleuren en stalen mee zodat je thuis in je eigen licht kiest. Zo werkt het: je hebt nu de vrijblijvende prijsindicatie. Zodra je die akkoord geeft, zetten we het inmeten in gang en komt de adviseur langs om alles op te nemen. Hou er wel rekening mee dat als je na het inmeten toch niet met ons verder gaat, we 75 euro inmeetkosten rekenen; ga je wel door, dan vervalt dat volledig. Zal ik het inmeten voor je in gang zetten, of heb je eerst nog een vraag over de offerte?"
+   },
+   {
+    "op": "2026-09-08 21:11:35",
+    "richting": "INBOUND",
+    "tekst": "Dank voor je antwoord. De vrijblijvende prijsindicatie is akkoord. Kun je het inmeten in gang zetten?"
+   },
+   {
+    "op": "2026-09-09 08:01:33",
+    "richting": "OUTBOUND",
+    "tekst": "Fijn dat de prijs akkoord is, Mirthe! Ik zet het inmeten graag voor je in gang; ik neem het intern op en laat je snel weten wanneer onze adviseur kan langskomen. Even checken: is de rest van de week of juist begin volgende week voor jou het handigst?"
+   },
+   {
+    "op": "2026-09-09 08:01:35",
+    "richting": "NOTE",
+    "tekst": "✅ Opvolging automatisch verstuurd (AI, binnen mandaat: WA 24u-venster)."
+   },
+   {
+    "op": "2026-09-09 21:05:15",
+    "richting": "INBOUND",
+    "tekst": "Dat is goed. Zouden jullie morgen om 16:00 kunnen en anders begin volgende week?"
+   },
+   {
+    "op": "2026-09-10 08:04:27",
+    "richting": "OUTBOUND",
+    "tekst": "Ik heb het inmeten in gang gezet, Mirthe. Je voorkeur heb ik meteen doorgegeven: morgen 16:00 kan ik zelf helaas niet vastzetten en zo kort dag is lastig, maar begin volgende week is prima haalbaar. De planning neemt binnen 5 werkdagen contact met je op om samen een moment te prikken, en ze houden je voorkeur erbij. Sla ons nummer vast even op, dan weet je dat wij het zijn als we bellen."
+   },
+   {
+    "op": "2026-09-10 08:04:29",
+    "richting": "NOTE",
+    "tekst": "🤖 Door de AI gedaan: • Inmeten doorgezet naar de planning voor Mirthe Kroon (Rolluiken (o.a. balkondeur 1e verdieping)), notitie voor de planner: Klant heeft voorkeur voor morgen VRIJDAG 11 sept 16:00 — dit is heel KRAP, waarschijnlijk niet haalbaar. Anders graag begin volgende week (ma/di). Graag zo snel mogelijk bellen om af te stemmen. Adres: Rembrandtlaan 69, 3351 RG Papendrecht."
+   },
+   {
+    "op": "2026-09-10 09:24:52",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Mirthe, ik kan het inmeten inplannen: Patrick woensdag 23 september rond 09:10 (ca. 25 min, kan een uur eerder of later zijn). Past dat? Antwoord \"ja\", dan zet ik hem vast; anders hoor ik graag wanneer het wél uitkomt. Sunny van Sonty"
+   },
+   {
+    "op": "2026-09-10 10:43:15",
+    "richting": "INBOUND",
+    "tekst": "Hi, overdag lukt helaas niet i.v.m. ons werk. Zouden jullie volgende week ma, di, woe of do kunnen om 16:00 of een later tijdstip?"
+   },
+   {
+    "op": "2026-09-10 10:52:01",
+    "richting": "OUTBOUND",
+    "tekst": "Ik snap dat overdag lastig is met werk, maar onze inmeters rijden alleen overdag hun route, dus 16:00 of later kan ik helaas niet aanbieden. Het laatste wat ik die dagen heb zitten is rond het begin van de middag. Wat wel kan: maandag 21, dinsdag 22 of donderdag 24 september om 12:30 (Patrick, ca. 25 min, kan een uur eerder of later zijn). Zou je rond de lunch een uurtje kunnen vrijmaken? Laat maar weten welke dag, dan zet ik hem vast."
+   },
+   {
+    "op": "2026-09-10 13:37:42",
+    "richting": "INBOUND",
+    "tekst": "Begrijpelijk. Die 3 data komen helaas ook niet uit. Ik heb wat met mijn werk kunnen regelen waardoor woe 23 sept 9:10 nu wel past! Ik heb deze akkoord gegeven via de link per mail"
+   },
+   {
+    "op": "2026-09-10 13:40:36",
+    "richting": "OUTBOUND",
+    "tekst": "Helemaal goed, hij staat! Woensdag 23 september komt onze inmeter Patrick bij je langs om in te meten. We verwachten rond 09:10 bij je te zijn. Omdat we die dag een route rijden kan het een uur eerder of later worden, dus fijn als je tussen 08:10 en 10:40 thuis bent. Komt er iets tussen? Stuur gerust een berichtje. Groetjes, Nanny van Sonty Zodra we onderweg zijn krijg je een sms met een link waarmee je ons live kunt volgen."
+   },
+   {
+    "op": "2026-09-10 16:08:14",
+    "richting": "INBOUND",
+    "tekst": "Helemaal goed, dankjewel!"
+   },
+   {
+    "op": "2026-09-10 16:13:14",
+    "richting": "OUTBOUND",
+    "tekst": "Graag gedaan, Mirthe! Tot woensdag de 23e. Fijne dag verder!"
+   },
+   {
+    "op": "2026-09-10 16:13:29",
+    "richting": "INBOUND",
+    "tekst": "Tot dan, fijne dag!"
+   }
+  ]
+ },
+ "f10affc3f5747dbae313f12daf1b33cf": {
+  "naam": "Saskia Badloe",
+  "ticket": 979446080,
+  "verstuurdOp": "2026-09-10T11:17:12.709Z",
+  "mailUit": [
+   "2026-09-09 13:10:02",
+   "2026-09-10 13:17:10"
+  ],
+  "msgs": [
+   {
+    "op": "2026-09-09 13:10:00",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Saskia, goed nieuws: we kunnen bij je langskomen om in te meten. Ons voorstel: ma 21 sep om 13:40. De afspraak duurt ongeveer 50 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-09 13:17:05",
+    "richting": "INBOUND",
+    "tekst": "Dat past"
+   },
+   {
+    "op": "2026-09-09 13:17:51",
+    "richting": "INBOUND",
+    "tekst": "Hoe gaat dat met het inmeten voor de ramen op zolder? Is daar dan ook een steiger voor nodig?"
+   },
+   {
+    "op": "2026-09-09 13:25:02",
+    "richting": "OUTBOUND",
+    "tekst": "Fijn dat het past! Over de zolderramen: die meet onze adviseur tijdens de inmeetafspraak gewoon mee, net als de andere ramen. Of daar een steiger of hoogwerker voor nodig is, hangt af van de hoogte en hoe goed we erbij kunnen. Dat beoordeelt de adviseur ter plekke, dan weet je meteen waar je aan toe bent. Vaak lukt het gewoon met ladders; zit een raam boven de tweede verdieping en kan het niet anders, dan bespreken we een hoogwerker met je (dat staat dan apart en transparant op de offerte). Kun je me eventueel een foto van de zolderramen sturen? Dan kan ik alvast een beetje meekijken."
+   },
+   {
+    "op": "2026-09-09 13:39:54",
+    "richting": "INBOUND",
+    "tekst": "De vraag over de steiger is al beantwoord, er is een steiger nodig voor de installatie. Daarom vraag ik mij af, hoe er wordt *ingemeten* als een steiger nodig is."
+   },
+   {
+    "op": "2026-09-09 13:45:08",
+    "richting": "OUTBOUND",
+    "tekst": "Goeie vraag, en het zit gelukkig makkelijker dan je denkt: voor het inmeten zelf is die steiger niet nodig. Onze adviseur meet de ramen op met meetapparatuur, meestal gewoon vanaf de grond, van binnenuit of met een ladder. De steiger is puur voor de montage later, als de zonwering echt geplaatst wordt. Tijdens de inmeetafspraak op maandag 21 september bekijkt de adviseur meteen welke werkwijze voor de plaatsing nodig is (steiger of hoogwerker), zodat dat netjes en transparant op je definitieve offerte komt te staan. Zal ik de afspraak zo vast voor je vastzetten?"
+   },
+   {
+    "op": "2026-09-09 13:45:39",
+    "richting": "INBOUND",
+    "tekst": "Dat is goed, dankjewel."
+   },
+   {
+    "op": "2026-09-09 13:55:45",
+    "richting": "OUTBOUND",
+    "tekst": "Top, dan staat maandag 21 september om 13:40 voor je genoteerd. Door de route kan het trouwens een uur eerder of later worden; zodra Patrick onderweg is, krijg je een sms met een link om ons live te volgen, zodat je precies weet hoe laat hij aankomt. Fijne dag verder!"
+   },
+   {
+    "op": "2026-09-10 09:11:13",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Saskia, kleine reminder: maandag 21 september om 13:40 staat nog voor je klaar. Eén berichtje en ik zet hem vast! Past het toch niet, ook prima, dan kijk ik gewoon verder voor je. Groetjes, Sunny van Sonty"
+   },
+   {
+    "op": "2026-09-10 09:12:54",
+    "richting": "INBOUND",
+    "tekst": "Ik heb gisteren om 1317 uur al akkoord gegeven??"
+   },
+   {
+    "op": "2026-09-10 09:19:07",
+    "richting": "OUTBOUND",
+    "tekst": "Je hebt helemaal gelijk, sorry daarvoor! Je akkoord van gisteren is gewoon goed binnengekomen en maandag 21 september om 13:40 staat vast voor je genoteerd. Die reminder had je niet meer hoeven krijgen. Fijne dag Saskia!"
+   },
+   {
+    "op": "2026-09-10 13:17:08",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Saskia, goed nieuws: we kunnen bij je langskomen om in te meten. Ons voorstel: ma 21 sep om 10:00. De afspraak duurt ongeveer 50 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 13:21:17",
+    "richting": "INBOUND",
+    "tekst": "Dit is al de 3e x dat ik een afspraak krijg. Wat is er gebeurd met de inmiddels 2 maal bevestigde afspraak op 21 september om 1340 uur? Er wordt heel erg langs elkaar heen gewerkt bij jullie lijkt het, dit doet erge afbreuk aan het vertrouwen in jullie."
+   },
+   {
+    "op": "2026-09-10 13:26:43",
+    "richting": "OUTBOUND",
+    "tekst": "Wat vervelend Saskia, en je hebt helemaal gelijk. Sorry dat dit zo langs elkaar heen loopt, dat had niet mogen gebeuren. Even duidelijk voor je: jouw afspraak op maandag 21 september om 13:40 met Patrick blijft gewoon staan. Dat is het moment dat geldt. Het voorstel van 10:00 dat je vandaag kreeg was een automatisch berichtje dat er ten onrechte tussendoor kwam, dat mag je negeren. Ik heb dit nu bij onze planning neergelegd zodat ze de dubbele afspraak uit het systeem halen en je geen losse voorstellen meer ontvangt. Een collega bevestigt 21 september 13:40 ook nog even persoonlijk aan je, zodat je het zwart-op-wit hebt. Kan ik verder nog iets voor je verduidelijken, of komt het zo goed voor je?"
+   },
+   {
+    "op": "2026-09-10 13:26:44",
+    "richting": "NOTE",
+    "tekst": "@jorren745487 @tanya748440 Dubbele/verwarrende inmeetafspraken — klant Saskia Badloe Ridderspoor 34, 3191 PD Hoogvliet Rotterdam +31628141474 Saskia heeft inmiddels 3 keer een inmeetvoorstel/afspraak gekregen. Ze gaf op 09-09 om 13:17 akkoord op ma 21 september 13:40 (inmeter Patrick), en dat is daarna ook nog een keer bevestigd. Vandaag (10-09 13:17) kreeg ze automatisch een NIEUW voorstel voor ma 21 september 10:00. Ze is hier terecht gefrustreerd over en geeft aan dat het vertrouwen eronder lijdt. Graag in het systeem rechtzetten welk moment definitief is (klant houdt 13:40 aan) en de dubbele/foutieve afspraak van 10:00 verwijderen, zodat ze geen nieuwe automatische berichten meer krijgt. Neem daarna even persoonlijk contact op om te bevestigen dat 21 september 13:40 vaststaat. Ik heb de klant al gerustgesteld dat 13:40 blijft staan en dat een collega het bevestigt."
+   },
+   {
+    "op": "2026-09-10 13:58:30",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je voor je eerlijke bericht, dat snap ik goed. Ik leg het even voor aan een collega en je hoort vandaag nog van ons. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 14:12:28",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Saskia, goed nieuws, hij staat! Maandag 21 september komt Patrick bij je langs om in te meten, dat duurt zo'n 50 minuutjes. We verwachten rond 13:40 bij je te zijn. Omdat we die dag een route rijden kan het een uur eerder of later worden, dus fijn als je tussen 12:40 en 15:10 thuis bent. Zodra we onderweg zijn krijg je een sms met een link waarmee je ons live kunt volgen. Komt er iets tussen? Stuur gerust een berichtje."
+   }
+  ]
+ },
+ "0695b127e3c4a8cb68c3e8c4f5bbe9a0": {
+  "naam": "Ali Barutcu",
+  "ticket": 979709789,
+  "verstuurdOp": "2026-09-10T13:27:28.200Z",
+  "mailUit": [
+   "2026-09-03 15:05:35",
+   "2026-09-03 18:03:30",
+   "2026-09-10 15:27:26"
+  ],
+  "msgs": [
+   {
+    "op": "2026-09-10 15:27:24",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Ali, goed nieuws: we kunnen bij je langskomen om in te meten. Ons voorstel: ma 21 sep om 09:55. De afspraak duurt ongeveer 25 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   }
+  ]
+ },
+ "645fa211f0b7ea6016d1e976c112f00f": {
+  "naam": "Jeffrey Zweep",
+  "ticket": 979541600,
+  "verstuurdOp": "2026-09-10T16:10:58.831Z",
+  "mailUit": [
+   "2026-09-03 08:03:53",
+   "2026-09-07 12:21:23",
+   "2026-09-09 18:18:28",
+   "2026-09-09 19:53:57",
+   "2026-09-10 18:10:55"
+  ],
+  "msgs": [
+   {
+    "op": "2026-09-09 19:53:55",
+    "richting": "OUTBOUND",
+    "tekst": "Hoi Jeffrey, goed nieuws: we kunnen bij je langskomen om in te meten. Ons voorstel: ma 21 sep om 15:00. De afspraak duurt ongeveer 30 minuten en we houden dit moment 24 uur voor je vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 17:26:18",
+    "richting": "INBOUND",
+    "tekst": "Ander moment"
+   },
+   {
+    "op": "2026-09-10 17:37:44",
+    "richting": "OUTBOUND",
+    "tekst": "Geen probleem, ik heb even gekeken wat er nog vrij is. Zou een van deze je beter uitkomen: maandag 21 september om 11:00, dinsdag 22 september om 12:30 of woensdag 23 september om 08:00? Het inmeten duurt zo'n 30 minuten en kan door de route een uur eerder of later worden. Welke heeft je voorkeur?"
+   },
+   {
+    "op": "2026-09-10 18:07:53",
+    "richting": "OUTBOUND",
+    "tekst": "Dank je wel voor het laten weten! Ik zoek een ander moment voor je en stuur zo een nieuw voorstel. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 18:10:53",
+    "richting": "OUTBOUND",
+    "tekst": "Geen probleem, ik heb even gekeken: di 22 sep om 08:00 (ca. 30 min, kan een uur eerder of later zijn). Past dat? Antwoord \"ja\", dan zet ik hem vast; anders hoor ik graag wanneer het wél uitkomt. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 18:11:00",
+    "richting": "OUTBOUND",
+    "tekst": "Kleine correctie van mijn kant: de tijden die je net van ons kreeg blijven gewoon staan. Maandag 21 september om 11:00, dinsdag 22 september om 12:30 of woensdag 23 september om 08:00. Laat maar weten welke je het beste uitkomt, dan zetten we hem vast. Groetjes, Nanny van Sonty"
+   },
+   {
+    "op": "2026-09-10 20:45:23",
+    "richting": "INBOUND",
+    "tekst": "21 september om 11:00 graag"
+   },
+   {
+    "op": "2026-09-10 20:46:58",
     "richting": "OUTBOUND",
     "tekst": "Dank je wel voor het laten weten! Ik kijk meteen naar een ander moment voor je en kom er morgenochtend op terug. Groetjes, Nanny van Sonty"
    }

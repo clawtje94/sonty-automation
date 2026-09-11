@@ -6,22 +6,21 @@
 - Logs analyseren: grep "ACTIEF antwoord", "429", "FOUT" ipv alles lezen (7.3MB+).
 - Gesprek-claims.json: bron voor boekingen/claims die Sunny deed.
 
-## BLOKKEREND (vandaag 9-9)
-1. **Anthropic credits OPGELOST**: credits-check.log toont "OK" vandaag 01:00, 03:00, 05:00. Crisis van 8-9 voorbij.
-2. **John van Krimpen ESCALATIE URGENT**: Offerte 202612048 (EUR 3051,20) 12 dagen stil. Root cause: eerdere Claude-delegaties vastgelopen. Opdracht 5xo3pxhk naar Claude geplaatst. Wacht op afronding vandaag.
-3. **Tickets-rapport daemon NIET GELADEN**: draait niet sinds 6-9 nacht. Geen vandaag-cijfers beschikbaar. Techniek-prioriteit — restart nodig.
-4. **Trengo 429-overload + Planado sync**: backoff actief, maar nog niet opgelost. Cumulatief ~50.409. Techniek-prioriteit.
+## BLOKKEREND (vandaag 11-9)
+1. **Anthropic credits OPGELOST**: credits-check.log toont "OK" vandaag 01:00, 03:00, 05:00. Crisis voorbij.
+2. **Tickets-rapport daemon NIET GELADEN**: draait niet sinds 6-9 nacht. Geen vandaag-cijfers beschikbaar. Techniek-prioriteit — restart nodig. Rapportage vervangen door handmatig tellen: gisteren (10-9) 5 claims in gesprek-claims.json.
+3. **Trengo 429-rate limiting**: backoff actief, ~20+ retries vandaag. Impact: trage bericht-verwerking op /tickets/976126888, /tickets/976979121.
+4. **ESCALATIE-BREAKAGE**: ticket 979406422 staat 1075+ min onbeantwoord NA overdracht naar mens (geen respons) — bot pakt het terug op. Teken dat overdrachten niet correct afgehandeld worden.
 
 ## Lopende zaken
-- Do-not-contact-lijst (sinds 3-9): Christian Keus, Shammi Phull, Lotte Vos, +1 (bewust geen contact).
-- Boekingen vandaag (8-9): 2 (claim 979001323 op 04:57, claim 979015487 eerder van 7-9).
-- Ticket 979001323: buiten verzendvenster wacht tot 08:00, daarna verzenden als credits bijgevuld.
+- Do-not-contact-lijst (sinds 3-9): Christian Keus, Shammi Phull, Lotte Vos, Hans de Lamboij (bewust geen contact).
+- Boekingen gisteren (10-9): 5 claims (tickets 978118850, 979541600, 979557888, 979597692, 979709789).
+- Hans de Lamboij: wacht op Isa-update (bel target was 8-9 11:00, nu 36h+ stil).
 
-## Volgende diensten (9-9+)
-- Anthropic credits: OPGELOST (OK vandaag 01:00+). Tickets kunnen nu verstuurd worden.
-- Hans de Lamboij: wacht op Isa-rapport/update (bel was target 11:00 op 8-9).
-- Tickets-rapport daemon: wacht op techniek-herstart. Daarna dagcijfers van 8-9 en 9-9 beschikbaar.
-- Stille-klanten do-not-contact (Keus, Phull, Vos, +1) handhaven: niet bereiken.
+## Volgende diensten (11-9+)
+- Ticket 979406422: escalatie-breakage, 1075+ min zonder respons na overdracht → Daimy/Techniek onderzoeken.
+- Tickets-rapport daemon: wacht op techniek-herstart (maandag controle voor weerapport?).
+- Stille-klanten do-not-contact (Keus, Phull, Vos, Lamboij) handhaven: niet bereiken.
 
 ## REGELS (sinds 3-9 Daimy-opdracht)
 - Stille-klanten-drempel: WhatsApp/chat >2u, mail >24u.
@@ -29,10 +28,13 @@
 - Hans de Lamboij: uitzondering, blijft top-item tot Isa hem belt.
 - Escalatietriggers scherper toepassen: (1) expliciet — klant vraagt om mens, (2) vertrouwen — ik twijfel, (3) context — frustratie/geld/prijs/herhaald. Bij twijfel over prijs/coulance meteen escaleren.
 
-## Bijscholing 2026-09-07, update 2026-09-08, status 2026-09-09
-- Vakkennis.md ververst: WhatsApp-norm scherper (20-60 sec, was 1-2 min), mail <4u, FCR 70-85% als kernmetriek.
-- Nieuw: "context package" bij overdracht naar Daimy/Isa (vraag+geprobeerd+beslissing), i.p.v. los transcript.
-- Escalatietriggers expliciet benoemd — **INGEGAAN SINDS 8-9** (was voorstel, nu regel).
-- Nieuw: bij drukte eerst wachtrij/snapshot checken, niet op laatste losse bericht reageren.
-- **Feedback Ori (8-9)**: bugfixes (credits, daemon, Planado) direct naar Techniek als opdracht, niet als V-vragen.
-- **Status 9-9**: credits opgelost ✓, daemon nog steeds down, rapport max 25 regels nu bereikt (was 31 gisteren).
+## Bijscholing 2026-09-07, feedback Ori 2026-09-09, status 2026-09-11
+- Vakkennis.md ververst: WhatsApp-norm scherper (20-60 sec), mail <4u, FCR 70-85% als kernmetriek.
+- Escalatietriggers: (1) expliciet, (2) vertrouwen, (3) context/frustratie/herhaald. **ACTIEF SINDS 8-9**.
+- Feedback Ori: rapport max 25 regels, geen dubbel noemen (Hans de Lamboij slechts 1x).
+- **Status 11-9 BIJGEWERKT**:
+  - Ticket #977435053: 178u stilstand opgelost. Vraag: "is inmeten vrijblijvend?". Antwoord: gratis bij akkoord, EUR 75 anders. Via brein-delegatie verzonden.
+  - Credits opgelost ✓, tickets-rapport-daemon nog down (5de dag!), Trengo 429 actief.
+
+## Gelopen opdrachten (11-9)
+- **Opdracht grv40y5u** (ad hoc van Daimy 05:51): Beantwoord ticket #977435053 — klant vraag inmeting. Regel toegepast: gratis bij akkoord, EUR 75. Delegatie gestuurd naar brein.

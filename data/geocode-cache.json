@@ -3334,15 +3334,20 @@
     "lon": 4.277104,
     "gevonden": "Edisonstraat 52A, 2561 BG Den Haag"
   },
+  "schenklaan 8 den haag, nederland": {
+    "lat": 52.0340113,
+    "lon": 4.3591242,
+    "gevonden": "Schenklaan 8, 2497 AT Den Haag"
+  },
   "berberiszoom 19 19, 2719 gs, zoetermeer": {
     "lat": 52.0419242,
     "lon": 4.4733395,
     "gevonden": "Berberiszoom 19, 2719 GS Zoetermeer"
   },
-  "schenklaan 8 den haag, nederland": {
-    "lat": 52.0340113,
-    "lon": 4.3591242,
-    "gevonden": "Schenklaan 8, 2497 AT Den Haag"
+  "rembrandtlaan 69, 3351rg, papendrecht": {
+    "lat": 51.8330109,
+    "lon": 4.6857686,
+    "gevonden": "Rembrandtlaan 69, 3351 HA Papendrecht"
   },
   "kalixfors 20, 3124rb, schiedam": {
     "lat": 51.9405821,
@@ -3353,5 +3358,35 @@
     "lat": 51.7777455,
     "lon": 4.6810094,
     "gevonden": "Walenburg 89, 3328 EK Dordrecht"
+  },
+  "walenburg 89 dordrecht, nederland": {
+    "lat": 51.7777455,
+    "lon": 4.6810094,
+    "gevonden": "Walenburg 89, 3328 EK Dordrecht"
+  },
+  "rembrandtlaan 69 papendrecht, nederland": {
+    "lat": 51.8330109,
+    "lon": 4.6857686,
+    "gevonden": "Rembrandtlaan 69, 3351 HA Papendrecht"
+  },
+  "ridderspoor 34 hoogvliet rotterdam, nederland": {
+    "lat": 51.8582979,
+    "lon": 4.3733536,
+    "gevonden": "Ridderspoor 34, 3191 PD Hoogvliet"
+  },
+  "kruidenschans 16, 2215br, voorhout": {
+    "lat": 52.2231522,
+    "lon": 4.4912952,
+    "gevonden": "Kruidenschans 16, 2215 BR Voorhout"
+  },
+  "fonteinstraat 4k poeldijk, nederland": {
+    "lat": 52.0226629,
+    "lon": 4.2200181,
+    "gevonden": "Fonteinstraat 4K, 2685 CG Poeldijk"
+  },
+  "otto verdoornplaats 60, 3067ar, rotterdam": {
+    "lat": 51.9397788,
+    "lon": 4.5473505,
+    "gevonden": "Otto Verdoornplaats 60, 3067 AR Rotterdam"
   }
 }

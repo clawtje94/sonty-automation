@@ -33,18 +33,25 @@
 4. Werkbon-logs gestopt: afhandeling-daemon draait niet (sinds 22-08); geen vandaag-cijfers beschikbaar.
 5. Planado voortdurend: 429 rate-limit, 422 sync-fouten, 5 dubbele boekingen.
 
-## Status 2026-09-09 07:20u VANDAAG
-- **Werkbonnen**: 116 open (per 08-09 06:10); geen vandaag-update (log wacht op daemon-restart).
-- **Afzettingen**: 0 sinds 02-09 12:59 → nu 6 werkdagen voortgezet (113→116, stijging door inhoud, niet afzettingen).
-- **Capaciteit VANDAAG**: 50% (Joey terug, Sjoerd nog vakantie). Herstelt na 12-09 tot 100%.
-- **Montage-voorstellen**: 30 klaar, 407 geblokkeerd (normaal).
-- **Sunny-update**: credits-check vandaag 05:00 "OK" — gisteren's LEEG-melding was vals alarm of al hersteld. Tickets-rapport daemon nog steeds offline.
-- **Planado**: 429 rate-limit voortdurend, 4 dubbelingen, 4 adresfouten (gisteren: 5).
-- **V-vragen vandaag**: 3 ingediend (werkbon-blokkade, daemon-status, capaciteit 14–22 sept Dennis-vakantie).
+## Status 2026-09-10 07:20u VANDAAG
+- **Werkbonnen**: 121 open (per 09-09 06:10); trend stijging, geen afzettingen sinds 02-09 12:59 (nu 8 werkdagen).
+- **Montage-voorstellen**: 38 klaar, 399 geblokkeerd — goed volume.
+- **Montage-afzettingen vandaag**: 0; gisteren 08-09: 5 werkbonnen verwerkt (kernel draait).
+- **Planado vandaag**: 2 dubbelen (09:30 & 10:00 Yudi/Nick), 429 rate-limit voortdurend.
+- **Capaciteit**: 50% (Joey terug na vakantie, Sjoerd vakantie t/m 11-09).
+- **Sunny**: credits OK (05:00).
+- **Techniek-opdracht gestuurd**: werkbon-afhandeling-daemon restart-status (offline sinds 22-08).
 
-## Volgende acties (10-09)
-1. Werkbon-afhandeling-daemon restart-status checken (offline sinds 22-08).
-2. Tickets-rapport daemon status (offline sinds 06-09, vandaag's cijfers onbekend zonder deze).
-3. Werkbon-log volgen: eerste afzetting post-Joey-terugkeer = user-side blokkade-validatie.
-4. Planado 429 voortdurend (Mats alert, al in escalatie).
-5. Capaciteitsgat 14–22 sept voorbereiding starten (Dennis 30-9 tot 14-10 vakantie).
+## Status 2026-09-11 07:20u VANDAAG
+- **Werkbonnen**: 130 open (per 10-sep 06:10); +9 in 1 dag, +51 in 9 dagen, geen afzetting sinds gisteren.
+- **Montage-voorstellen**: 33 klaar, 389 geblokkeerd.
+- **Montage-afzettingen gisteren**: 5 werkbonnen (kernel werkt).
+- **Planado vandaag**: 2 dubbelen (09:30 & 10:00 Yudi/Nick), geen adres — sync-fout.
+- **Capaciteit**: 50% (Joey terug, Sjoerd t/m 11-09 weg).
+- **Oudste werkbonnen**: onbekend naam/dagen (link niet vandaag bijgewerkt).
+
+## Volgende acties (12-09)
+1. Sjoerd terug → capaciteit 100%.
+2. Werkbon-afhandeling-daemon herstart (10 sept): voortgang volgen.
+3. Planado adresfouten Yudi/Nick → naar Techniek.
+4. Materiaalcheck vóór montagedag: 389 geblokkeerd = veel wachtposten.

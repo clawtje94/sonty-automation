@@ -24,8 +24,11 @@
   web-rechten vast op "alleen bekijken" (bewerken-radios disabled) en is "Mag opdrachten voltooien" disabled. Dus: plannen/bewerken op
   web = licentie, app voltooien = licentie, gratis = alleen kijken. Banner bij vol: "Alle gebruikerslicenties zijn in gebruik".
 - Tanya Plugge tanya@sonty.nl aangemaakt (web-gebruiker, wachtwoord van Daimy, in memory credentials): opdrachten/planning/klanten
-  alleen bekijken, kaart aan, geen licentie (12/12), uuid 1f1adc2b-801b-6c30-a232-4a5629de9ef0. Wil zij plannen → 13e licentie of
-  licentie van Daimy (4 jobs/90d), Nanny (1) of Jorren (0) overzetten. WACHT OP DAIMY.
+  alleen bekijken, kaart aan, uuid 1f1adc2b-801b-6c30-a232-4a5629de9ef0.
+- Daimy: "dan moeten we een extra betaalde gebruiker hebben, doe maar" → Instellingen > Facturering > Abonnement Wijzigen: aantal 12→13
+  (Pro $27,04/licentie/md), nieuw totaal $351,52/md vanaf 11-09, naar rato $6,11 direct afgeschreven (kaart ****1008). Banner: 13/13.
+- Tanya daarna: Bewerkingsrechten (licentie) aan + opdrachten/planning/klanten "bewerken" (niet verwijderen). API: uses_license true,
+  jobs edit true/delete false, schedule edit true, clients edit true. Playwright-scripts in scratchpad planado-abo3.js / planado-tanya-lic.js.
 
 ## 08-09 (middag): NIEUWE INMETER PATRICK FITTERS — INGERICHT, START MA 21-09 (Daimy 08-09 via chat)
 - Feiten: Patrick Fitters, ma-do 08:00-17:00, spreekt Engels, start+eind thuis Kerkdoel 9, 3264 AG Nieuw-Beijerland. M365 adviseur1@sonty.nl

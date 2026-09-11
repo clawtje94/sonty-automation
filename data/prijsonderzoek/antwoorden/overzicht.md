@@ -41,3 +41,17 @@ Knikarm 450x300 incl. montage: Q 2715 | H 3170 | Sonty SunEye 4047 (3440 met act
 - Degalux (L): indicatieprijzen zitten in afbeeldingen in de mail (12 bijlagen), nog niet uitgelezen; geen pergola, wel knikarm; Somfy + app; levertijd 8-10 wk; garantie 3 jr.
 - Aluparts (T): levert/monteert niet in Wassenaar.
 - De Kroon: autoreply 5 werkdagen + richtprijs (zie tabel).
+
+## Merken per aanbieder (Daimy 11-09: wil weten welke merken verkocht worden)
+| Code | Screens | Rolluiken | Knikarm / pergola | Motor / bediening | App |
+|---|---|---|---|---|---|
+| Q | eigen label "Solid Screen 95" | eigen label "CD942" (Varimax) | Furore cassette / Gusta pergola (eigen label) | Somfy RS100 io / Sunea io, Situo/Smoove | Somfy Connectivity Kit (cadeau) |
+| G (DIY) | huismerk ZOL | huismerk ZOL Premium | Verano Ipanema / ZOL Cabo pergola | Somfy Sunilus/Altea/Oximo/RS100/Sunea io | Somfy Tahoma Switch 149 |
+| H | Verano | Smits rolluiken (Sedella) | Verano V280 Ipanema | Somfy (Sunilus 50 io, RS100 io) | Tahoma Switch 149 |
+| Venvo (via E) | Brustor B-1100 Zip | Alulux CD-139 | Brustor (Premium Partner) | Somfy Maestria io / RS-100 Solar / Oximo io, Situo 1 | niet vermeld |
+| L (Degalux) | eigen merk Degalux | eigen merk | knikarm eigen merk, geen pergola | Somfy | ja (app) |
+| V (Zandschulp/Möller) | eigen productie | eigen productie | knikarm eigen productie, pergola optie | Somfy | niet vermeld |
+| L01 (De Kroon) | niet vermeld | niet vermeld | geen | niet vermeld | niet vermeld |
+| S (DIY) | eigen webshopmerk | zustersite rolluikdirect | niet aan consument | | |
+Sonty ter vergelijking: Sunmaster (Zip Square/Design, SunEye/SunElite, SunControl), Roma, Unilux horren; Somfy RS100 io, Tahoma 195.
+Patroon: dealers/lokale bedrijven voeren A-merken (Verano, Brustor, Alulux, Luxaflex-achtig), webshops+montage voeren huismerken (ZOL, CD942, Degalux eigen); motor is vrijwel altijd Somfy io; app-bediening wordt overal als optie (Tahoma 149) of cadeau aangeboden.

@@ -19,6 +19,11 @@
 - Longlist 15 online aanbieders (data/prijsonderzoek/aanbieders.md, namen alleen daar), standaard-uitvraag in persona.md, status in offertes.csv (nog leeg).
 - Open: V1 adres Backershagenlaan 34A Wassenaar (echt huis van een ander) of eigen/neutraal adres; daarna offertes opvragen via configurators + formulieren.
 
+## 11-09 (later): PLANADO KLEUR PER GEBRUIKER? NEE (Daimy: "kalenderweergave staat heel veel tegelijk")
+- Gecheckt in UI: gebruikersformulier, Instellingen>Types (alleen namen), tandwiel planning (duur gepland/werkelijk, uitvoerders
+  alle/teams, hide zonder dienst). Kleur = alleen status. Aangeboden: (1) Planning lijst-icoon = rij per uitvoerder, (2) filter
+  opdrachttype, (3) Outlook Sonty Montage automatisch categorie-kleur per uitvoerder zetten (te bouwen). WACHT OP DAIMY.
+
 ## 11-09: PLANADO-LICENTIES UITGEZOCHT + TANYA-ACCOUNT (Daimy: "alleen betaald voor de app? planning gratis?")
 - Bewezen in de UI (niets opgeslagen bij de test): zonder "Bewerkingsrechten" (= licentie, onder "Gebruikerslicentie gebruiken") staan
   web-rechten vast op "alleen bekijken" (bewerken-radios disabled) en is "Mag opdrachten voltooien" disabled. Dus: plannen/bewerken op

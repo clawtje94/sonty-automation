@@ -4161,3 +4161,4 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
 - LinkedIn-reactie Niels (Veneta): docs/linkedin-reactie-niels-veneta.md, v4 naar Daimy gestuurd.
 - 12-09: fabriek-als-investeerder onderzoek: docs/fabriek-als-investeerder-onderzoek-2026-09.md (top: Aluprof/Grupa Kęty, Verano, Winsol, H&GS, Gibus, Harol). Wacht op Daimy: teaser maken + volgorde benaderen.
 - 12-09: Daimy heeft de Aluprof/Selt-mail verstuurd naar selt@selt.com + cc kontakt@selt.com. Advies: ook doorsturen naar tmarkowski@aluprof.com (export NL). Opvolgen als er na 5 werkdagen (vr 19-09) geen reactie is.
+- 12-09: Merk SUNNY (klasse 35/37) indienen bij BOIP: aanvraagtekst klaar in docs/merk-sunny-onderzoek-2026-09.md. Blokkers voor Claude: reCAPTCHA + mailactivatie bij My BOIP-account, iDEAL-betaling. Wacht op Daimy: V1 aanvrager (Sonty B.V. KvK 84113774 of KvK 70927618), V2 My BOIP-account aanmaken en login delen; daarna vult Claude de aanvraag tot de betaalstap.

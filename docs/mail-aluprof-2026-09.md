@@ -1,4 +1,4 @@
-# Mail aan Aluprof (Selt by Aluprof / Aluprof International), v2 12-09-2026, uit naam van Daimy
+# Mail aan Aluprof (Selt by Aluprof / Aluprof International), v3 12-09-2026, uit naam van Daimy
 Aan: afdeling Sun Protection Systems via aluprof.com (contactformulier), cc Aluprof International Benelux.
 Onderwerp: Supply partnership request from a fast-growing Dutch retailer: 5 stores before season 2027
 
@@ -6,9 +6,9 @@ Dear Aluprof team,
 
 My name is Daimy Boot, co-owner of Sonty in Rijswijk, the Netherlands. We sell and install outdoor sun protection: folding-arm awnings, screens, zip screens, roller shutters, veranda shading and pergolas, all motorised with Somfy.
 
-We started with one installation van. Today we run five vans, three surveyors and a showroom. In 2025 our revenue grew 172% compared to 2024, and this year we expect another 40% on top. This year alone we are purchasing around EUR 2 million from our current Dutch manufacturer.
+We started with one installation van. Today we run five vans, three surveyors and a showroom. In 2025 our revenue grew 172% compared to 2024, and this year we expect another 40% on top. This year alone we are purchasing around EUR 2 million from our current Dutch manufacturer, and we invest around EUR 600,000 per year in marketing to win market share in our region. That demand is ours; what we need is the right factory behind it.
 
-Our next step is a chain: five stores in the Netherlands before the 2027 season. For that we are looking for one manufacturing partner for our complete outdoor range, at a quality level at least equal to our current supplier, with Somfy io motors as standard, and a partner that wants to grow with us.
+Our next step is a chain: five stores in the Netherlands before the 2027 season. We are looking for one manufacturing partner for our complete outdoor range, at a quality level at least equal to our current supplier, with Somfy io motors as standard. A partner that supports these plans and offers pricing that leaves us enough margin to keep funding this growth, so that we can sell considerably more of your products every year.
 
 Your Selt by Aluprof range and the Benelux distribution centre look like a strong fit. I would like to meet the person responsible for sun protection in the Benelux or Western Europe. Rijswijk, your Benelux location or a video call all work for us.
 

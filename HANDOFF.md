@@ -4159,3 +4159,4 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
 ## 12-09-2026 Productie-leveranciers onderzoek
 - Rapport: docs/productie-leveranciers-onderzoek-2026-09.md (Selt by Aluprof, Dragon, Peraze, TKN, Llaza, eigen assemblage). Volgende stap: referentieset + offertes, wacht op Daimy.
 - LinkedIn-reactie Niels (Veneta): docs/linkedin-reactie-niels-veneta.md, v4 naar Daimy gestuurd.
+- 12-09: fabriek-als-investeerder onderzoek: docs/fabriek-als-investeerder-onderzoek-2026-09.md (top: Aluprof/Grupa Kęty, Verano, Winsol, H&GS, Gibus, Harol). Wacht op Daimy: teaser maken + volgorde benaderen.

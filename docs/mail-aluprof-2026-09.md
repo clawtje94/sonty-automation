@@ -1,5 +1,10 @@
 # Mail aan Aluprof (Selt by Aluprof / Aluprof International), v3 12-09-2026, uit naam van Daimy
-Aan: afdeling Sun Protection Systems via aluprof.com (contactformulier), cc Aluprof International Benelux.
+Aan (zonwering-exportdesk fabriek, regio Nederland, van aluprof.com/en/contact/sunshades, 12-09):
+- Tomasz Markowski, Export Sales Representative, tmarkowski@aluprof.com, +48 531 239 222
+- cc Jolanta Kowalewska, jkowalewska@aluprof.com, +48 668 865 254
+- cc Aneta Sklorz, asklorz@aluprof.com, +48 77 400 00 49
+- cc Aluprof Netherlands B.V. (kozijnen/gevels, 's-Hertogenbosch), info@aluprof-nederland.nl
+Fabriek zonwering: Selt by Aluprof, Opole (PL), sinds 2025 de zonweringtak van Aluprof; selt.com verwijst nu door naar aluprof.com.
 Onderwerp: Supply partnership request from a fast-growing Dutch retailer: 5 stores before season 2027
 
 Dear Aluprof team,

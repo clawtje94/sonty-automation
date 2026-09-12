@@ -4160,3 +4160,4 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
 - Rapport: docs/productie-leveranciers-onderzoek-2026-09.md (Selt by Aluprof, Dragon, Peraze, TKN, Llaza, eigen assemblage). Volgende stap: referentieset + offertes, wacht op Daimy.
 - LinkedIn-reactie Niels (Veneta): docs/linkedin-reactie-niels-veneta.md, v4 naar Daimy gestuurd.
 - 12-09: fabriek-als-investeerder onderzoek: docs/fabriek-als-investeerder-onderzoek-2026-09.md (top: Aluprof/Grupa Kęty, Verano, Winsol, H&GS, Gibus, Harol). Wacht op Daimy: teaser maken + volgorde benaderen.
+- 12-09: Daimy heeft de Aluprof/Selt-mail verstuurd naar selt@selt.com + cc kontakt@selt.com. Advies: ook doorsturen naar tmarkowski@aluprof.com (export NL). Opvolgen als er na 5 werkdagen (vr 19-09) geen reactie is.

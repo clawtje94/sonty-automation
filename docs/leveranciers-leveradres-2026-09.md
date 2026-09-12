@@ -46,3 +46,31 @@ Renewi (afval), PJH Verhuur (huurmateriaal, 52 mails verzonden), Het Energiecoll
 
 ## Niet gevonden
 Harol (alleen nieuwsbrief), Verano (1 onderdeel), Phantom Screens, Smits Rolluiken: geen bestellingen.
+
+## Aanvulling 12-09 (tweede ronde: 400 dagen, webshops meegenomen, portalen alleen-lezen bekeken)
+**Context gevonden:** concept-mail in joey@ (12-09 09:41, niet verzonden, alleen aan m.debakker@sunmaster.nl): "Adres wijziging
+MAGAZIJN Sonty" — nieuw magazijn **Westvlietweg 61B, 2491 ED Den Haag** vanaf **17 september**, sleutelkastje code 1527, camera's.
+Verder is er nog niets naar leveranciers verstuurd (SentItems joey@/nanny@/orders@/info@ gecheckt).
+
+**Gemiste leveranciers uit ronde 1 (nu erbij):**
+| Leverancier | Wat | Volume | Adres-bewijs |
+|---|---|---|---|
+| Dersimo | zonwering/stoffen | 65 verzonden, 34 ontvangen, orderbevestigingen | niet in mailtekst → account |
+| JAB Anstoetz Benelux | stoffen | 38 verzonden, 31 ontvangen | Sonty-mail "afleveradres wordt Noordeindseweg 256A" |
+| Cunera | vloerkleden | 25 verzonden, orderbevestigingen | account |
+| Floer | PVC-vloeren | 12 ontvangen (orders@) | account |
+| First Base Ground Screws | pergola-fundering | 7 bevestigingen op orders@ | account |
+| Kunststofplatenshop | HPL/Trespa | webshop | afleveradres **Frijdastraat 8F** (kantoor) |
+| Kabelshop, Tica, WMTC, Kluwen | klein/incidenteel | webshop/mail | per order |
+
+**Portalen (alleen-lezen ingelogd):**
+- Toppoint dealerportaal, "Mijn gegevens" (klantnr 993468): factuur- én **afleveradres = Frijdastraat 8f Rijswijk** — dus NIET het
+  magazijn, terwijl per mail wél Noordeindseweg is doorgegeven. Hier zeker aanpassen.
+- Unilux dealerportaal: ingelogd, adresvelden in Mijn account leeg → adres staat in Unilux' eigen systeem, per mail wijzigen.
+- Markiezen NL portaal: ingelogd (Bestelformulier/Orderoverzicht/Account), geen adres zichtbaar buiten het bestelformulier.
+- Velux: oude login werkt niet meer op Dealer Extranet 3 ("account aanvragen") → adres alleen via Velux zelf.
+- Sunmaster: dealer.sunmaster.nl is documentatie; bestelportaal vraagt 2FA (Joey) → adres in bestelportaal/account, per mail wijzigen.
+- ROMA-portaal (Azure B2C) niet geprobeerd; logistiek-mails tonen Noordeindseweg als vast adres.
+
+**Gmail (daimyboot@gmail.com, gekoppeld aan deze sessie):** alleen privébestellingen, geen Sonty-leveranciers.
+**Nog steeds niet leesbaar:** daimy@, sjoerd@, jorren@, tanya@, yudi@, bus-mailboxen.

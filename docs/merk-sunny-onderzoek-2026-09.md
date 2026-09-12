@@ -23,3 +23,17 @@ Een woordmerk SUNNY voor AI-software/klantenservice (klassen 9, 35, 42) is in de
 
 ## Kanttekening
 Geen juridisch advies. Vóór indienen een merkengemachtigde een quick-scan laten doen (ca. 150-300 euro) op optie 1; die kan ook inschatten of "Sunny" voor zonwering niet te beschrijvend is (zon).
+
+## Besluit Daimy 12-09: optie 1, en dan alleen het woord SUNNY
+Kan. In de Benelux staat geen SUNNY in klasse 35 of 37; in de EU zitten eMind (databases) en SMA (energiemarketing) in 35 met heel andere diensten. Let op: Shadesign GmbH (DE, zonweringbranche) heeft op 19-08-2026 "sunny wing" en "sunny flow" aangevraagd in o.a. 35/37. Die zijn eerder en deels gelijkend; kans op oppositie is aanwezig maar SUNNY alleen is niet hetzelfde teken.
+
+### Aanvraagtekst BOIP (woordmerk, aanvrager Sonty, 2 klassen = 281 euro)
+Merk: SUNNY (woordmerk, geen logo: een woordmerk dekt elke schrijfwijze en elk logo)
+Klasse 35: Detailhandel, groothandel en online detailhandel in zonwering, rolluiken, screens, terrasoverkappingen, pergola's, horren en raamdecoratie; klantenservice, advies en informatie aan consumenten met betrekking tot de aankoop van zonwering en raamdecoratie; afhandeling van klantvragen en offerteaanvragen, ook via geautomatiseerde en AI-gestuurde systemen, alle voornoemde diensten op het gebied van zonwering en raamdecoratie.
+Klasse 37: Montage, installatie, onderhoud en reparatie van zonwering, rolluiken, screens, terrasoverkappingen, pergola's, horren en raamdecoratie; het plannen en inplannen van inmeet- en montageafspraken voor voornoemde producten.
+Niet opnemen: klasse 9 en 42 (daar zitten eMind en SMA, zeker oppositie).
+
+### Stappen
+1. Account op my.boip.int (KvK Sonty), "Merk registreren" → woordmerk SUNNY → bovenstaande klassen plakken → betalen 281 euro (iDEAL).
+2. Optioneel vooraf: quick-scan door merkengemachtigde (150-300 euro) op beschrijvendheid van "Sunny" voor zonwering.
+3. Na indiening: 2-4 weken formele toets, dan 2 maanden oppositietermijn, registratie na ca. 4-6 maanden.

@@ -37,3 +37,9 @@ Niet opnemen: klasse 9 en 42 (daar zitten eMind en SMA, zeker oppositie).
 1. Account op my.boip.int (KvK Sonty), "Merk registreren" → woordmerk SUNNY → bovenstaande klassen plakken → betalen 281 euro (iDEAL).
 2. Optioneel vooraf: quick-scan door merkengemachtigde (150-300 euro) op beschrijvendheid van "Sunny" voor zonwering.
 3. Na indiening: 2-4 weken formele toets, dan 2 maanden oppositietermijn, registratie na ca. 4-6 maanden.
+
+## Status 12-09 (avond): aanvraag ingevuld, wacht op betaling door Daimy
+- Ingevuld in My BOIP (account daimyboot, Sonty B.V.): woordmerk SUNNY, klasse 35 (5 termen) + klasse 37 (2 termen), deposant Sonty B.V., Frijdastraat 8F, 2288EX Rijswijk. Claims: geen spoed, geen collectief, geen voorrang.
+- Totaal volgens BOIP: € 271,00. Aanvraag-id: 15f0b01b-9f9d-435c-bcbb-53e6b210d2c9 (wizard stap 5).
+- Termen staan als "eigen termen met suggesties" (oranje). Mag, kan de behandeling iets vertragen.
+- Daimy doet: my.boip.int → inloggen → Merk registreren (advanced) → "Ga verder met opgeslagen aanvraag" → OK → stap 5 → vinkje Akkoord → Betalen (iDEAL).

@@ -27,7 +27,11 @@
   leesbaar). Leveradres nu overal Noordeindseweg 256a Berkel; oud Frijdastraat 11 U014 (2023-24). 12 leveranciers met adres bewezen
   in mail (ROMA, Sunmaster, Toppoint, Markiezen NL, Poedercoating Culemborg, Vanderlelie, Sunstock, Hamco, Brel, Belakos, Fakro),
   ~15 waar het in portaal/account staat (Unilux, Velux, Somfy, Blend, ABZ, Interstil, Unilin, MKZ, Arte …). Scripts: scratchpad
-  mail-inventaris.js / mail-adressen2.js. NIETS gewijzigd. WACHT OP DAIMY (nieuw adres + wie past portalen aan).
+  mail-inventaris.js / mail-adressen2.js. NIETS gewijzigd.
+- Ronde 2 (Daimy: "dat was het?"): 400 dagen + webshops → Dersimo (groot!), JAB, Cunera, Floer, First Base, Kunststofplatenshop erbij.
+  Concept in joey@ Drafts 12-09 09:41 "Adres wijziging MAGAZIJN Sonty": nieuw magazijn Westvlietweg 61B 2491 ED Den Haag per 17-09,
+  code 1527; nog NIETS verstuurd. Portalen alleen-lezen: Toppoint-account heeft afleveradres Frijdastraat 8f (niet magazijn!);
+  Unilux/Markiezen geen adres zichtbaar; Velux-login werkt niet meer (Extranet 3). Gmail = daimyboot@gmail.com privé. WACHT OP DAIMY.
 
 ## 11-09 (later): PLANADO KLEUR PER GEBRUIKER? NEE (Daimy: "kalenderweergave staat heel veel tegelijk")
 - Gecheckt in UI: gebruikersformulier, Instellingen>Types (alleen namen), tandwiel planning (duur gepland/werkelijk, uitvoerders

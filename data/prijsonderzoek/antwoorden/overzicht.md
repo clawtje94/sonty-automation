@@ -1,4 +1,4 @@
-# Antwoorden prijsonderzoek — stand 2026-09-11 (INTERN: namen niet naar buiten, in rapporten lettercodes)
+# Antwoorden prijsonderzoek — stand 2026-09-12 11:00 (INTERN: namen niet naar buiten, in rapporten lettercodes)
 Spec: screen bedraad 237x228 | screen solar 176x214 | rolluik bedraad 204x236 | rolluik solar 143x197 | knikarm/pergola 450x300. Prijzen incl. btw.
 
 | Code | Aanbieder | Kanaal | Screen bedraad | Screen solar | Rolluik bedraad | Rolluik solar | Knikarm 450x300 | Pergola 450x300 | Montage | Merk / motor | App | Garantie | Levertijd |
@@ -11,6 +11,13 @@ Spec: screen bedraad 237x228 | screen solar 176x214 | rolluik bedraad 204x236 | 
 | V | zandschulpzonwering.nl / Möller Oosterbeek | offerte via link (Dexflow) | zie link | zie link | zie link | zie link | aangeboden | optie | incl.; DIY -10% | eigen productie, Somfy | niet vermeld | in AV | 8-12 wk |
 | S | screendirect.nl | mail | verwijst naar configurator (DIY) | | | | levert niet aan consument | | alleen DIY | | | | |
 | E | zonnerij.nl | mail | doorgezet naar Venvo (zie boven) | | | | | | | | | | |
+| L12 | vanzantenzonwering.nl (Den Haag) | mail richtprijs 12-09 | 1961 | 1693 | 1153 | 1690 | 3243 (V280, Verano) | verkoopt ook | montage niet duidelijk (komt langs voor offerte incl. montage; DIY-prijs mogelijk) | Verano V550 screens, RV40 rolluiken, Somfy IO 5-kanaals | niet vermeld | niet vermeld | niet vermeld |
+| L14 | oudshoornenvanegmond.nl (Leiden) | mail indicatie 12-09 | 2105 | 2093 | 2060 | 1928 | 3967 (Sunmaster SunEye!) | ja | altijd incl. montage | Luxaflex Zipscreen Beaufort, Roma rolluik, Sunmaster SunEye; Somfy Maestria/Oximo io | Tahoma 199, plaatsing gratis | 5 jr Romazo | ca. 12 wk, inmeten pas begin nov |
+| L18 | stuyfzand.nl (Delfgauw) | mail 12-09, offerte volgt | volgt | volgt | volgt | volgt | volgt | ja | | SunCircle, Somfy, Tahoma | ja | 7 jr fabrieksgarantie | 6-8 wk |
+| L04 | inhuisplaza.nl (Barendrecht) | mail 12-09 | vraagt foto + telefoon, twijfelt aan adres Kleidijk 39 | | | | verkoopt beide | | | | | | |
+| U | spiegelzonwering.nl (Utrecht) | mail 12-09 | doorgezet naar verkoop, offerte volgt | | | | verkoopt beide | | | | | | |
+| L03 | tonstassenzonwering.nl (Barendrecht) | mail 12-09 | vraagt telefoonnummer | | | | | | | | | | |
+| L20 | sungo-zonwering.nl | autoreply | | | | | | | | | | | |
 
 Totalen 4 producten incl. montage: Q 5590 | L01 6021+1000 montage = 7021 | H 4433 (+ zenders/nameten, totaal offerte 8086 incl. knikarm) | Venvo 5981 (DIY 4650) | G DIY 3646.
 
@@ -32,8 +39,10 @@ Totalen 4 producten incl. montage: Q 5590 | L01 6021+1000 montage = 7021 | H 443
 | Q (regionaal NH, altijd incl. montage) | 5590 | -27% | -14% |
 | Venvo (Westland, dealer Brustor/Alulux) | 5981 | -22% | -8% |
 | L01 (Utrecht) | 7021 (excl. zenders) | -8% | +8% |
+| L12 Den Haag (richtprijs, montage onduidelijk) | 6497 | -15% | 0% |
 | Sonty | 7664 | | |
-Knikarm 450x300 incl. montage: Q 2715 | H 3170 | Sonty SunEye 4047 (3440 met actie). Pergola: Q 6195 | Sonty 8481.
+| L14 Leiden (Luxaflex/Roma dealer) | 8186 | +7% | +26% |
+Knikarm 450x300 incl. montage: Q 2715 | H 3170 | L12 3243 (Verano V280) | L14 3967 (Sunmaster SunEye, zelfde product als Sonty) | Sonty SunEye 4047 (3440 met actie). Pergola: Q 6195 | Sonty 8481.
 
 ## DIY (los, ter info): G 3646 voor 4 producten; Venvo DIY-korting → 4650; V -10% bij zelfmontage. Configuratorprijzen 8 webshops in configurator-prijzen.md.
 
@@ -53,5 +62,12 @@ Knikarm 450x300 incl. montage: Q 2715 | H 3170 | Sonty SunEye 4047 (3440 met act
 | V (Zandschulp/Möller) | eigen productie | eigen productie | knikarm eigen productie, pergola optie | Somfy | niet vermeld |
 | L01 (De Kroon) | niet vermeld | niet vermeld | geen | niet vermeld | niet vermeld |
 | S (DIY) | eigen webshopmerk | zustersite rolluikdirect | niet aan consument | | |
+| L12 | Verano V550 | Verano RV40 | Verano V280 | Somfy IO | 5-kanaals zender |
+| L14 | Luxaflex Zipscreen Beaufort | Roma | Sunmaster SunEye | Somfy Maestria/Oximo io | Tahoma 199 |
+| L18 | SunCircle | SunCircle | SunCircle | Somfy | Tahoma |
 Sonty ter vergelijking: Sunmaster (Zip Square/Design, SunEye/SunElite, SunControl), Roma, Unilux horren; Somfy RS100 io, Tahoma 195.
 Patroon: dealers/lokale bedrijven voeren A-merken (Verano, Brustor, Alulux, Luxaflex-achtig), webshops+montage voeren huismerken (ZOL, CD942, Degalux eigen); motor is vrijwel altijd Somfy io; app-bediening wordt overal als optie (Tahoma 149) of cadeau aangeboden.
+
+## Status verzending (12-09)
+- 09-09: 15 afgeleverd, 34 gebounced (Proton rate limit). 11/12-09: alle 34 + 1 opnieuw verstuurd in menselijk tempo; bounce-check 12-09 10:50: geen nieuwe bounces, en 6 van die adressen hebben al geantwoord. Totaal afgeleverd: 49 mail + 1 formulier.
+- Reacties t/m 12-09 11:00: 15 (waarvan 7 met prijzen, 3 'offerte volgt', 2 vragen telefoon/foto, 1 buiten werkgebied, 1 DIY-verwijzing, 1 autoreply).

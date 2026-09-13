@@ -4163,4 +4163,4 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
 - 12-09: Daimy heeft de Aluprof/Selt-mail verstuurd naar selt@selt.com + cc kontakt@selt.com. Advies: ook doorsturen naar tmarkowski@aluprof.com (export NL). Opvolgen als er na 5 werkdagen (vr 19-09) geen reactie is.
 - 12-09: Merk SUNNY (klasse 35/37) indienen bij BOIP: aanvraagtekst klaar in docs/merk-sunny-onderzoek-2026-09.md. Blokkers voor Claude: reCAPTCHA + mailactivatie bij My BOIP-account, iDEAL-betaling. Wacht op Daimy: V1 aanvrager (Sonty B.V. KvK 84113774 of KvK 70927618), V2 My BOIP-account aanmaken en login delen; daarna vult Claude de aanvraag tot de betaalstap.
 - 12-09: BOIP-aanvraag SUNNY (kl. 35+37, €271) volledig ingevuld en opgeslagen in My BOIP; Daimy moet alleen nog akkoord vinken + betalen. Zie docs/merk-sunny-onderzoek-2026-09.md.
-- 13-09: SUNNY ingediend (BOIP 1557740). SONTY (kl. 22+35+37) klaargezet op stap 5, wacht op betaling Daimy.
+- 13-09: Merken ingediend bij BOIP: SUNNY 1557740 (12-09), SONTY 1557755 (13-09). Volgende: formele toets 2-4 wk, oppositietermijn 2 mnd; mail van BOIP in de gaten houden.

@@ -52,3 +52,4 @@ Niet opnemen: klasse 9 en 42 (daar zitten eMind en SMA, zeker oppositie).
 ## 13-09: SUNNY ingediend, SONTY klaargezet
 - SUNNY: ingediend 12-09-2026, BOIP-nummer 1557740 (zichtbaar onder Producten in My BOIP).
 - SONTY: woordmerk, klasse 22 (zonneschermen/markiezen van textiel, doek, zeildoek) + 35 + 37, deposant Sonty B.V.; concept-id 4b146a41-a6ea-4106-9bfc-76f2385185e3 op stap 5, wacht op betaling door Daimy (venster open op de Mac).
+- 13-09: SONTY betaald en ingediend, BOIP-nummer 1557755. Beide aanvragen staan onder Producten in My BOIP. Vervolg: formele toets (2-4 weken), daarna 2 maanden oppositietermijn; BOIP-correspondentie komt in de My BOIP-berichtenbox en per mail.

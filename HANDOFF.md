@@ -10,6 +10,8 @@
 - 10-09 besluit Daimy: 4 winkels van 175-200 m² (kleiner is geen showroom); magazijn telt NIET mee in de score (alleen klant/omzet/winst). Advies = scenario J: 1 Rotterdam-Zuid/Oost A16, 2 Haarlemmermeer/A'dam-West A4-A9, 3 Utrecht-rand A2/A27, 4 Dordrecht-Zuid A16 (Zuidplas vervallen: overlap). Netto 200 m² zonder inloop +€146k/jr totaal; 3 en 4 pas na bewezen inloop.
 - 10-09: aanbod-agent gestart voor Rotterdam-Zuid/Oost 175-250 m² → docs/winkels-4/03-aanbod-rotterdam-zuid-oost.md (links zelf verifiëren vóór doorsturen).
 
+## 13-09: PRIJSONDERZOEK — 1-oogopslag-pagina gepubliceerd (artifact dbb0c67b…, lokaal antwoorden/marktpositie.html); 19 reacties, 9 met prijs; V3 (telefoon/foto/adres-vraag van aanbieders) staat open
+
 ## 11-09: PRIJSONDERZOEK — 34 mails gebounced (Proton rate limit), herstel loopt 5/uur; 9 antwoorden, Sonty duurder dan alle 4 concurrenten met prijs
 - Herstel: scripts/prijsonderzoek-mail-rustig.sh draait (1 mail per 8-15 min, 9-18u; log data/prijsonderzoek/mail-rustig.log; lijst mail-batch-herstel-rest.txt). Bounce-check 12:50: nog steeds 34 (geen nieuwe), maar bounces kwamen vorige keer pas ~8 uur later; VOLGENDE SESSIE eerst bounce-dom.js (scratch, patroon in memory) opnieuw draaien en Sent vergelijken. Overzicht antwoorden + Sonty-vergelijking: data/prijsonderzoek/antwoorden/overzicht.md. Degalux-prijzen zitten in afbeeldingen (nog uitlezen). Vervolg: maandag inbox opnieuw uitlezen (scripts/prijsonderzoek-lees-gericht.js), herinnering na 4-5 werkdagen.
 

@@ -71,3 +71,9 @@ Patroon: dealers/lokale bedrijven voeren A-merken (Verano, Brustor, Alulux, Luxa
 ## Status verzending (12-09)
 - 09-09: 15 afgeleverd, 34 gebounced (Proton rate limit). 11/12-09: alle 34 + 1 opnieuw verstuurd in menselijk tempo; bounce-check 12-09 10:50: geen nieuwe bounces, en 6 van die adressen hebben al geantwoord. Totaal afgeleverd: 49 mail + 1 formulier.
 - Reacties t/m 12-09 11:00: 15 (waarvan 7 met prijzen, 3 'offerte volgt', 2 vragen telefoon/foto, 1 buiten werkgebied, 1 DIY-verwijzing, 1 autoreply).
+
+## Aanvulling 13-09
+- Dealer regio Zoetermeer (afzender zonzaken@gmail.com, Rainbow): screen 1173+78+275=1526 | screen solar (Brel) 1064+78+275=1417, Somfy solar +146 | rolluik 1350+78+275=1703 | rolluik solar (Brel) 1020+78+275=1373, Somfy 1216+78+275=1569 | knikarm Q230 2715+78+400=3193.
+- Ansol Spijkenisse (L?): circa 1700 / 2200 / 2200 / 2000; knikarm 2900; pergola 8000; eigen productie, Somfy, Tahoma meerprijs, 5-6 wk, 2 jr product / 5 jr Somfy.
+- Bastasol Rotterdam: prijsindicatie volgt, vraagt context pergola. Nieuwegein: vraagt etage.
+- Gepubliceerd overzicht (privé): https://claude.ai/code/artifact/dbb0c67b-55c4-495e-bf0d-88367dadf6b5 (ook lokaal: antwoorden/marktpositie.html)

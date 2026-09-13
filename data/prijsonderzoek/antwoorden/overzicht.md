@@ -77,3 +77,5 @@ Patroon: dealers/lokale bedrijven voeren A-merken (Verano, Brustor, Alulux, Luxa
 - Ansol Spijkenisse (L?): circa 1700 / 2200 / 2200 / 2000; knikarm 2900; pergola 8000; eigen productie, Somfy, Tahoma meerprijs, 5-6 wk, 2 jr product / 5 jr Somfy.
 - Bastasol Rotterdam: prijsindicatie volgt, vraagt context pergola. Nieuwegein: vraagt etage.
 - Gepubliceerd overzicht (privé): https://claude.ai/code/artifact/dbb0c67b-55c4-495e-bf0d-88367dadf6b5 (ook lokaal: antwoorden/marktpositie.html)
+
+## Correctie 13-09 (Daimy): Sonty verkoopt altijd met 15% op de lijst. Verkoopprijs 4 producten 6.514 (= markt-midden 6.497), knikarm 3.440, pergola 7.209. Conclusie: screens/rolluiken midden, knikarm boven 5 van 6; advies knikarm richting 3.200, 15% als vaste prijs communiceren, garantie/snelheid als argument.

@@ -48,3 +48,7 @@ Niet opnemen: klasse 9 en 42 (daar zitten eMind en SMA, zeker oppositie).
 - Geen merk SONTY op naam van Sonty B.V. De naam is alleen beschermd als handelsnaam via de KvK (regionaal, tegen verwarrende bedrijfsnamen), niet als merk.
 - Enige bestaande "Sonty": EU-merk van D&D Living GmbH (Oostenrijk), klassen 3, 21, 24 (schoonmaakmiddelen, poetsdoeken, theedoeken), verlengd tot 14-11-2036. Geen overlap met zonwering.
 - Advies: SONTY als woordmerk vastleggen in klasse 35 + 37 (zelfde opzet als SUNNY, 271 euro), eventueel plus klasse 22 (zonneschermen/zonweringdoek als eigen product). Kan pas als tweede aanvraag nadat SUNNY betaald is (wizard houdt één concept vast).
+
+## 13-09: SUNNY ingediend, SONTY klaargezet
+- SUNNY: ingediend 12-09-2026, BOIP-nummer 1557740 (zichtbaar onder Producten in My BOIP).
+- SONTY: woordmerk, klasse 22 (zonneschermen/markiezen van textiel, doek, zeildoek) + 35 + 37, deposant Sonty B.V.; concept-id 4b146a41-a6ea-4106-9bfc-76f2385185e3 op stap 5, wacht op betaling door Daimy (venster open op de Mac).

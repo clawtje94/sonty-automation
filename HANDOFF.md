@@ -1,6 +1,35 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-08, nieuwe inmeter Patrick)
 
 
+## 14-09 (middag): WINTER-ADVERTENTIEPLAN PER CATEGORIE + MAX CPA (Daimy: "hoeveel en welke categorieën in de winter door adverteren, max CPA, met de sheet")
+- Rapport docs/winter-advertentieplan-2026.md + 1-oogopslag docs/winter-advertentieplan-2026.html (naar Daimy gestuurd). Alles EX btw, productmarge,
+  vóór vaste lasten; akkoord-definitie/productgroepen = seizoensplan.js; scripts scratchpad winter-cat.js + winter-netto.js.
+- Meta API per campagne okt-dec 2025 bijgehaald (campagne-spend-meta.json heeft nu 2025-10..2026-09). Google okt-dec 2025 spend nog onbekend (V1).
+- Kern: Google winter 1.121 off 13,6% → plafond €65/sheet-offerte (doel-CPA Google Ads €50), Meta 2.147 off 7,8% → plafond €40, stop €55.
+  Winter 25/26 netto: Meta +€47k op €87k (okt-dec negatief, dec −€5,3k), Google jan-feb +€45,8k op €32,9k.
+  Meta-rolluiken kostte €78/offerte (2x plafond) → hard plafond €40-45; Meta-pergola €23/offerte, +€14k netto → AAN (correctie op 04-09).
+  Google-pergola uit okt-half jan, markiezen uit nov-jan, knikarm (Google+Meta) aan vanaf 2e week jan. Budget okt-feb Google €73k + Meta €66k.
+- Vaste lasten winter €1.435/order, vrijwel gelijk aan productmarge/order €1.485 → winterorders dekken op volle kostprijs net; ads beoordeeld op bijdrage (35%-regel).
+- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord budgetkader + Meta-pergola aan.
+
+## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
+- Feiten (live gemeten 14-09): 71 komende Joey-inmetingen (100 dagen) zijn ALLEMAAL Bookings-afspraken (organizer SontyMontage1@,
+  deelnemer alleen joey@sonty.nl, klant is GEEN deelnemer). Sync cron-outlook-planado-sync (launchd 600 s) leidt de inmeter af uit de
+  deelnemernaam en PATCHt bij verschil alleen assignee op de bestaande job (external_id ol-<hash event-Id>, notify-assignees false);
+  alleen telling "X bijgewerkt" in planning-Telegram. Planado stuurt geen klant-sms (docs montagetijden-overzicht-plan r.322).
+- Patrick: Planado uses_license true + mobile login (13/14 licenties); Bookings-staff adviseur1@ (id 788ce4cc…) én in service
+  "Inmeten Sonty" (staffMemberIds). Bookings-herinneringen klant (7d/1d) zijn generiek zonder naam.
+- Route A (advies): staffMemberIds Joey→Patrick via Graph PATCH mét optOutOfCustomerEmail:true; Bookings herschrijft de deelnemer,
+  sync volgt. Te bewijzen op 1 proefafspraak (eigen mail Daimy): (1) geen klantmail, (2) event-Id blijft gelijk (anders nieuwe
+  Planado-job + wees-verwijdering → meetbon.afspraak.planadoJob breekt). Route B (alleen deelnemer op agenda-event) = geen klantmail
+  maar Bookings blijft Joey (dubbelboek-risico, elke Bookings-edit zet hem terug).
+- Klant merkt: eigen herinnering (cron-inmeet-herinneringen → herinneringTekst) noemt slot.inmeter uit Planado ("komt Patrick").
+- Open: Trengo-mailkanaal adviseur1@ ontbreekt (MEETBON_INMETER_KANALEN alleen Joey → meetbon-offerte niet namens Patrick);
+  rooster Joey ongewijzigd (planner biedt Joey nog aan); sheet-kolom inmeter blijft Joey (alleenAlsLeeg); reistijd Nieuw-Beijerland.
+- Daimy 14-09: alleen vanaf 21-09 en ma-do. Droge controlelijst gedraaid (scratch controlelijst.js → docs/controlelijst-joey-patrick-2026-09-14.md):
+  51 Joey-inmetingen, OK 25 / KRAP 11 / NIET 14 / JOEY 1 (Charentestroom blijft bij Joey, Daimy 14-09; blokken >90 min of zonder klantnaam = handmatig) (keten per dag met Patricks 8 bestaande afspraken + reistijd lib/reistijd, klanttijden 08-17,
+  NIET-kandidaten vallen uit de keten). Wacht op V3 (alleen OK of ook KRAP) en V1 (proefgeval). NOG NIETS OMGEZET.
+
 ## 2026-09-09 — Vestigingsonderzoek 4 winkels (175-250 m²) KLAAR
 - Vraag Daimy: geografische vergelijking met Rijswijk, beste plekken voor 4 winkels op Sonty-data + koopkracht/koopwoningen.
 - Model `scripts/winkels-4-analyse.js` → `data/winkels-4/resultaat.json`; rapport `scripts/winkels-4-rapport.js` → `docs/winkels-4/02-rapport.md`; pagina `scripts/winkels-4-pagina.js` → sonty-website `data/winkels-4.html` + `/admin/winkels-4` (LIVE op sonty-website.vercel.app). Onderzoeksbrief `docs/winkels-4/00-onderzoeksopdracht.md`, huurbronnen `01-huurprijzen-bronnen.md`.

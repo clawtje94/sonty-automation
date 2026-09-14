@@ -353,11 +353,11 @@
  },
  "2026-09": {
   "01 | Leads campagne - Rolluiken": {
-   "spend": 1844.37,
-   "kliks": 1322,
-   "leads": 72,
-   "impressies": 152785,
-   "cpl": 25.62
+   "spend": 3988.28,
+   "kliks": 2927,
+   "leads": 138,
+   "impressies": 332001,
+   "cpl": 28.9
   },
   "03 | Leadscampagne - Zonwering": {
    "spend": 143.6,
@@ -367,11 +367,11 @@
    "cpl": 17.95
   },
   "04 | Leadscampagne - Pergola": {
-   "spend": 534.36,
-   "kliks": 400,
-   "leads": 41,
-   "impressies": 30643,
-   "cpl": 13.03
+   "spend": 1141.78,
+   "kliks": 914,
+   "leads": 95,
+   "impressies": 64229,
+   "cpl": 12.02
   },
   "05 | Leads - Screens": {
    "spend": 48.3,
@@ -381,11 +381,11 @@
    "cpl": 12.07
   },
   "06 | Gordijnen": {
-   "spend": 189.41,
-   "kliks": 136,
-   "leads": 5,
-   "impressies": 9489,
-   "cpl": 37.88
+   "spend": 400.83,
+   "kliks": 316,
+   "leads": 11,
+   "impressies": 19898,
+   "cpl": 36.44
   },
   "07 | Leadscampagne - Markiezen": {
    "spend": 24.41,
@@ -393,6 +393,175 @@
    "leads": 0,
    "impressies": 2094,
    "cpl": null
+  }
+ },
+ "2025-10": {
+  "01 | Leads campagne - Rolluiken": {
+   "spend": 10228.91,
+   "kliks": 5905,
+   "leads": 130,
+   "impressies": 972347,
+   "cpl": 78.68
+  },
+  "02 | Retargeting | Leads": {
+   "spend": 617.15,
+   "kliks": 410,
+   "leads": 12,
+   "impressies": 33853,
+   "cpl": 51.43
+  },
+  "04 | Leadscampagne - Pergola": {
+   "spend": 1857.07,
+   "kliks": 1427,
+   "leads": 68,
+   "impressies": 136330,
+   "cpl": 27.31
+  },
+  "05 | Leads - Screens": {
+   "spend": 1668.45,
+   "kliks": 729,
+   "leads": 19,
+   "impressies": 125964,
+   "cpl": 87.81
+  },
+  "06 | Gordijnen": {
+   "spend": 279.83,
+   "kliks": 266,
+   "leads": 2,
+   "impressies": 14861,
+   "cpl": 139.91
+  }
+ },
+ "2025-11": {
+  "01 | Leads campagne - Rolluiken": {
+   "spend": 8921.32,
+   "kliks": 4366,
+   "leads": 101,
+   "impressies": 718521,
+   "cpl": 88.33
+  },
+  "02 | Retargeting | Leads": {
+   "spend": 861,
+   "kliks": 487,
+   "leads": 10,
+   "impressies": 40348,
+   "cpl": 86.1
+  },
+  "04 | Leadscampagne - Pergola": {
+   "spend": 1797.78,
+   "kliks": 1318,
+   "leads": 66,
+   "impressies": 118470,
+   "cpl": 27.24
+  },
+  "05 | Leads - Screens": {
+   "spend": 1621.4,
+   "kliks": 843,
+   "leads": 17,
+   "impressies": 116703,
+   "cpl": 95.38
+  },
+  "06 | Gordijnen": {
+   "spend": 1360.57,
+   "kliks": 1204,
+   "leads": 7,
+   "impressies": 66281,
+   "cpl": 194.37
+  }
+ },
+ "2025-12": {
+  "01 | Leads campagne - Rolluiken": {
+   "spend": 9296.76,
+   "kliks": 5161,
+   "leads": 118,
+   "impressies": 933675,
+   "cpl": 78.79
+  },
+  "02 | Retargeting | Leads": {
+   "spend": 2744.01,
+   "kliks": 2310,
+   "leads": 16,
+   "impressies": 125826,
+   "cpl": 171.5
+  },
+  "04 | Leadscampagne - Pergola": {
+   "spend": 1847.88,
+   "kliks": 1199,
+   "leads": 48,
+   "impressies": 146796,
+   "cpl": 38.5
+  },
+  "05 | Leads - Screens": {
+   "spend": 1663.82,
+   "kliks": 639,
+   "leads": 31,
+   "impressies": 130820,
+   "cpl": 53.67
+  },
+  "06 | Gordijnen": {
+   "spend": 1548.39,
+   "kliks": 2035,
+   "leads": 16,
+   "impressies": 88727,
+   "cpl": 96.77
+  },
+  "Instagram-bericht: 🎉 WINACTIE! T.W.V €1000,00,-🎉...": {
+   "spend": 103.4,
+   "kliks": 212,
+   "leads": 0,
+   "impressies": 5416,
+   "cpl": null
+  },
+  "Bericht: '🎉 WINACTIE! T.W.V €1000,00,-🎉'": {
+   "spend": 72.81,
+   "kliks": 0,
+   "leads": 0,
+   "impressies": 10154,
+   "cpl": null
+  },
+  "2 Bericht: '🎉 WINACTIE! T.W.V €1000,00,-🎉' - Kopie": {
+   "spend": 37.57,
+   "kliks": 0,
+   "leads": 0,
+   "impressies": 9185,
+   "cpl": null
+  }
+ },
+ "2025-09": {
+  "01 | Leads campagne - Rolluiken": {
+   "spend": 14428.75,
+   "kliks": 8521,
+   "leads": 189,
+   "impressies": 1458069,
+   "cpl": 76.34
+  },
+  "02 | Retargeting | Leads": {
+   "spend": 599.52,
+   "kliks": 471,
+   "leads": 16,
+   "impressies": 36824,
+   "cpl": 37.47
+  },
+  "03 | Leadscampagne - Zonwering": {
+   "spend": 1387.97,
+   "kliks": 728,
+   "leads": 20,
+   "impressies": 105092,
+   "cpl": 69.4
+  },
+  "04 | Leadscampagne - Pergola": {
+   "spend": 1792.98,
+   "kliks": 1665,
+   "leads": 77,
+   "impressies": 133554,
+   "cpl": 23.29
+  },
+  "05 | Leads - Screens": {
+   "spend": 1568.81,
+   "kliks": 741,
+   "leads": 38,
+   "impressies": 131532,
+   "cpl": 41.28
   }
  }
 }

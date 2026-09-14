@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Winter-advertentieplan 2026/27</title>
+<style>
+:root{--bg:#f7f6f2;--card:#fff;--ink:#1d1d1b;--mut:#6b6a66;--line:#e4e2dc;--aan:#1f7a3a;--aanbg:#e6f4ea;--uit:#b42318;--uitbg:#fbe9e7;--jan:#8a5a00;--janbg:#fdf3dc;--acc:#f2a900}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,Segoe UI,Helvetica,Arial,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:18px;margin:34px 0 10px;border-bottom:2px solid var(--acc);padding-bottom:4px}
+.sub{color:var(--mut);margin-bottom:22px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi b{display:block;font-size:24px;margin-top:2px}.kpi span{color:var(--mut);font-size:13px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:14px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f0eee8;font-weight:600;font-size:13px}
+td.n,th.n{text-align:right;white-space:nowrap}
+.tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.aan{background:var(--aanbg);color:var(--aan)}.uit{background:var(--uitbg);color:var(--uit)}.jan{background:var(--janbg);color:var(--jan)}.test{background:#ecebff;color:#3b3a9a}
+.neg{color:var(--uit);font-weight:600}.pos{color:var(--aan);font-weight:600}
+.note{background:#fff8e6;border-left:4px solid var(--acc);padding:10px 14px;border-radius:6px;margin:14px 0;font-size:14px}
+ul{margin:8px 0 0 18px}li{margin:3px 0}
+.scroll{overflow-x:auto}
+@media print{body{background:#fff}}
+</style></head><body><div class="wrap">
+<h1>Winter-advertentieplan 2026/27</h1>
+<div class="sub">Welke categorieën, hoeveel budget, max CPA. Bron: offerte-register (sheet) okt-feb, twee winters (24/25 + 25/26), Meta API per campagne, Google-spend jan-feb. Alles ex btw, productmarge (verkoop − inkoop), vóór montage en vaste lasten. Gemaakt 14-09-2026.</div>
+
+<div class="kpis">
+<div class="kpi"><span>Max CPA Google (per sheet-offerte)</span><b>€65</b><span>doel-CPA in Google Ads ≈ €50 (factor 0,75)</span></div>
+<div class="kpi"><span>Max CPA Meta (per lead = sheet-offerte)</span><b>€40</b><span>harde stop €55; Meta-rolluiken zat vorige winter op €78</span></div>
+<div class="kpi"><span>Budget okt-feb</span><b>€139k</b><span>Google €73k + Meta €66k; vorige winter ≈ €160-170k</span></div>
+<div class="kpi"><span>Categorieën</span><b>4 + 2 + 1</b><span>4 hele winter, 2 vanaf half jan, 1 test</span></div>
+</div>
+
+<h2>1. Per categorie: aan of uit, en wat een lead maximaal mag kosten</h2>
+<div class="note">Plafond = 35% van de productmarge per offerte (niveau waarop zomer én winter 2026 aantoonbaar winst gaven). Harde stop = 50%. "Vorige winter" = wat het echt kostte per sheet-offerte in 25/26.</div>
+<div class="scroll"><table>
+<tr><th>Categorie</th><th>Kanaal</th><th class="n">Offertes</th><th class="n">Conv.</th><th class="n">Marge/akkoord</th><th class="n">Break-even/off.</th><th class="n">Plafond</th><th class="n">Stop</th><th class="n">Vorige winter</th><th>Advies</th></tr>
+<tr><td><b>Rolluiken</b></td><td>Google</td><td class="n">468</td><td class="n">13,9%</td><td class="n">€1.327</td><td class="n">€184</td><td class="n"><b>€64</b></td><td class="n">€92</td><td class="n">€64</td><td><span class="tag aan">AAN</span> opschalen, 40% van de Google-winterleads</td></tr>
+<tr><td><b>Rolluiken</b></td><td>Meta</td><td class="n">1.210</td><td class="n">9,2%</td><td class="n">€1.209</td><td class="n">€111</td><td class="n"><b>€39</b></td><td class="n">€56</td><td class="n neg">€78</td><td><span class="tag aan">AAN</span> plafond €40-45 hard; boven €56 budget omlaag; december minimum (conv 6%)</td></tr>
+<tr><td><b>Screens</b></td><td>Google</td><td class="n">156</td><td class="n">13,5%</td><td class="n">€2.011</td><td class="n">€271</td><td class="n"><b>€95</b></td><td class="n">€135</td><td class="n">€84</td><td><span class="tag aan">AAN</span> opschalen, hoogste marge per akkoord</td></tr>
+<tr><td>Screens</td><td>Meta</td><td class="n">200</td><td class="n">5,0%</td><td class="n">€1.729</td><td class="n">€86</td><td class="n">€30</td><td class="n">€43</td><td class="n neg">€54</td><td><span class="tag uit">KLEIN / UIT</span> boven €30 uit; screens horen bij Google</td></tr>
+<tr><td><b>Zonwering algemeen / PMax</b></td><td>Google</td><td class="n">65</td><td class="n">24,6%</td><td class="n">€1.119</td><td class="n">€275</td><td class="n"><b>€96</b></td><td class="n">€138</td><td class="n">≈€49</td><td><span class="tag aan">AAN</span> Performance Max houden, doel-CPA €70</td></tr>
+<tr><td><b>Pergola</b></td><td>Meta</td><td class="n">389</td><td class="n">2,3%</td><td class="n">€2.574</td><td class="n">€60</td><td class="n"><b>€21</b></td><td class="n">€30</td><td class="n">€23</td><td><span class="tag aan">AAN</span> alleen zolang ≤ €25/lead; vorige winter +€14k netto op €9k (9 orders). Correctie op advies 04-09</td></tr>
+<tr><td>Pergola</td><td>Google</td><td class="n">126</td><td class="n">0,8%</td><td class="n">€5.416</td><td class="n">€43</td><td class="n">€15</td><td class="n">€22</td><td class="n neg">€79</td><td><span class="tag uit">UIT</span> okt t/m half jan (1 order op 126); feb weer aan</td></tr>
+<tr><td><b>Knikarmscherm</b></td><td>Google</td><td class="n">148</td><td class="n">15,5%</td><td class="n">€1.550</td><td class="n">€241</td><td class="n"><b>€84</b></td><td class="n">€120</td><td class="n">€54</td><td><span class="tag jan">VANAF 2e WEEK JAN</span> okt-jan 10/88, feb 13/60 (22%)</td></tr>
+<tr><td><b>Knikarmscherm</b></td><td>Meta</td><td class="n">110</td><td class="n">12,7%</td><td class="n">€1.576</td><td class="n">€201</td><td class="n"><b>€70</b></td><td class="n">€100</td><td class="n">–</td><td><span class="tag jan">VANAF 2e WEEK JAN</span> vroegboek-set staat klaar; okt-dec 0/37, jan-feb 14/73</td></tr>
+<tr><td>Uitvalscherm</td><td>Google</td><td class="n">24</td><td class="n">16,7%</td><td class="n">€1.351</td><td class="n">€225</td><td class="n">€79</td><td class="n">€112</td><td class="n">€49</td><td><span class="tag jan">VANAF JAN</span> meeliften met knikarm (cel klein)</td></tr>
+<tr><td>Raamdecoratie binnen</td><td>Google / Meta</td><td class="n">36 / 68</td><td class="n">22% / 15%</td><td class="n">€1.024 / €1.343</td><td class="n">€228 / €197</td><td class="n">€80 / €69</td><td class="n">€114 / €99</td><td class="n neg">Meta €166</td><td><span class="tag test">TEST</span> klein, showroom als CTA; Meta "Gordijnen" was 2x te duur, ombouwen of uit</td></tr>
+<tr><td>Voorraadscherm</td><td>Google / Meta</td><td class="n">45 / 45</td><td class="n">6,7%</td><td class="n">€2.042 / €1.213</td><td class="n">€136 / €81</td><td class="n">€48 / €28</td><td class="n">€68 / €41</td><td class="n">€49</td><td><span class="tag uit">GEEN EIGEN CAMPAGNE</span> alleen via PMax; 20%-actie via Sunny/mail</td></tr>
+<tr><td>Markiezen</td><td>Google</td><td class="n">24</td><td class="n">8,3%</td><td class="n">€775</td><td class="n">€65</td><td class="n">€23</td><td class="n">€33</td><td class="n neg">€80</td><td><span class="tag uit">UIT nov-jan</span> feb aan; Meta te klein om te sturen</td></tr>
+<tr><td>Retargeting / generiek</td><td>Meta</td><td class="n">–</td><td class="n">–</td><td class="n">–</td><td class="n">–</td><td class="n">€37</td><td class="n">€53</td><td class="n">€9,6k totaal</td><td><span class="tag aan">AAN</span> ~€1.500/mnd, niet los te beoordelen</td></tr>
+</table></div>
+
+<h2>2. Winter 25/26 per maand: marge tegenover advertentiekosten</h2>
+<div class="scroll"><table>
+<tr><th>Maand</th><th class="n">Google off.</th><th class="n">Akk.</th><th class="n">Marge ex</th><th class="n">Spend</th><th class="n">Netto</th><th class="n">Meta off.</th><th class="n">Akk.</th><th class="n">Marge ex</th><th class="n">Spend</th><th class="n">Netto</th></tr>
+<tr><td>okt 25</td><td class="n">146</td><td class="n">16</td><td class="n">€18.938</td><td class="n">?</td><td class="n">?</td><td class="n">204</td><td class="n">13</td><td class="n">€14.056</td><td class="n">€14.651</td><td class="n neg">−€595</td></tr>
+<tr><td>nov 25</td><td class="n">112</td><td class="n">17</td><td class="n">€28.539</td><td class="n">?</td><td class="n">?</td><td class="n">222</td><td class="n">12</td><td class="n">€13.297</td><td class="n">€14.562</td><td class="n neg">−€1.265</td></tr>
+<tr><td>dec 25</td><td class="n">126</td><td class="n">11</td><td class="n">€20.327</td><td class="n">?</td><td class="n">?</td><td class="n">199</td><td class="n">7</td><td class="n">€12.004</td><td class="n">€17.315</td><td class="n neg">−€5.311</td></tr>
+<tr><td>jan 26</td><td class="n">217</td><td class="n">26</td><td class="n">€41.265</td><td class="n">€15.044</td><td class="n pos">+€26.222</td><td class="n">378</td><td class="n">22</td><td class="n">€34.116</td><td class="n">€19.284</td><td class="n pos">+€14.832</td></tr>
+<tr><td>feb 26</td><td class="n">283</td><td class="n">25</td><td class="n">€37.439</td><td class="n">€17.862</td><td class="n pos">+€19.578</td><td class="n">438</td><td class="n">35</td><td class="n">€60.779</td><td class="n">€21.334</td><td class="n pos">+€39.445</td></tr>
+<tr><th>winter</th><th class="n">884</th><th class="n">95 (10,7%)</th><th class="n">€146.508</th><th class="n">≥€32.905</th><th class="n">jan-feb +€45.800</th><th class="n">1.441</th><th class="n">89 (6,2%)</th><th class="n">€134.252</th><th class="n">€87.146</th><th class="n pos">+€47.106</th></tr>
+</table></div>
+<p>Meta verdiende in okt-dec niets terug en verloor in december; jan-feb maakte het goed. In jan-feb waren Google (€2,39 marge per euro) en Meta (€2,34) gelijkwaardig. Google okt-dec: spend onbekend (V1).</p>
+
+<h2>3. Budget per maand (advies)</h2>
+<div class="scroll"><table>
+<tr><th>Maand</th><th class="n">Google</th><th class="n">Meta</th><th class="n">Totaal</th><th>Wat</th></tr>
+<tr><td>okt</td><td class="n">€13k</td><td class="n">€12k</td><td class="n">€25k</td><td>woonmaand; Google rolluiken/screens/PMax; Meta rolluiken ≤€45, pergola ≤€25, showroom-test</td></tr>
+<tr><td>nov</td><td class="n">€15k</td><td class="n">€12k</td><td class="n">€27k</td><td>sterkste wintermaand op conversie (Google 15%)</td></tr>
+<tr><td>dec</td><td class="n">€10k</td><td class="n">€7k</td><td class="n">€17k</td><td>biedingen −20% vanaf 8 dec; Meta op minimum</td></tr>
+<tr><td>jan</td><td class="n">€16k</td><td class="n">€15k</td><td class="n">€31k</td><td>vanaf 2e week: knikarm aan (Google + Meta vroegboek)</td></tr>
+<tr><td>feb</td><td class="n">€19k</td><td class="n">€20k</td><td class="n">€39k</td><td>piekmaand rolluiken/knikarm/screens; Google pergola en markiezen weer aan</td></tr>
+<tr><th>winter</th><th class="n">€73k</th><th class="n">€66k</th><th class="n">€139k</th><th>vorige winter ≈ €160-170k; verschuiving van Meta-rolluiken naar Google rolluiken/screens</th></tr>
+</table></div>
+<div class="note"><b>De sturingsregel:</b> onder het plafond mag het budget omhoog. Twee weken boven het plafond: budget −30%. Boven de harde stop: campagne uit. Beoordelen op kosten per sheet-offerte (wekelijks) en pas na 4 weken op akkoorden (mediaan offerte → akkoord is 24 dagen).</div>
+
+<h2>4. Kanttekeningen</h2>
+<ul>
+<li><b>Vaste lasten:</b> winter 25/26 €409k over 285 orders = €1.435 per order, vrijwel gelijk aan de productmarge per order (€1.485). Op volle kostprijs houdt een winterorder bijna niets over en met advertentiekosten erbij is het verlies; de lasten zijn er hoe dan ook, dus advertenties worden beoordeeld op bijdrage (plafond 35% van de productmarge).</li>
+<li><b>Google okt-dec 2025 spend ontbreekt</b> (V1); marge in die maanden €67.800.</li>
+<li>Afkomst = wat de klant zegt. Meta-leads en sheet-offertes lopen 1-op-1 (1.437 vs 1.441); Google telt 1,33× meer eigen conversies (factor 0,75).</li>
+<li>Cellen onder ~40 offertes (markiezen, uitvalscherm, raamdecoratie, voorraadscherm) zijn richting, geen meetwaarde. Meta-pergola hangt aan 9 orders: plafond €21-25 is hard.</li>
+<li><b>Correctie op 04-09:</b> daar stond Meta-pergola op −€2k omdat de spend naar offerte-aandeel was verdeeld (€30k). Per campagne (Meta API) kostte de pergola-campagne okt-feb €9k voor 343 leads ↔ 389 sheet-offertes; die toewijzing klopt met de leadaantallen. Meta-pergola dus aan, met plafond.</li>
+<li>Seizoen 24/25 converteerde beter dan 25/26. Voorzichtige variant (alleen 25/26): Google €58, Meta €33.</li>
+</ul>
+
+<h2>5. Vragen aan Daimy</h2>
+<ul>
+<li><b>V1</b> Google-spend okt, nov, dec 2025 (drie bedragen uit Google Ads). Dan is de hele winter netto rond.</li>
+<li><b>V2</b> Akkoord op budgetkader (Google €73k + Meta €66k okt-feb) en op Meta-pergola AAN met plafond €25/lead (04-09 stond: uit)?</li>
+</ul>
+<p class="sub">Volledig rapport: sonty/docs/winter-advertentieplan-2026.md. Rekenscripts: winter-cat.js, winter-netto.js (zelfde akkoord-definitie als seizoensplan.js).</p>
+</div></body></html>

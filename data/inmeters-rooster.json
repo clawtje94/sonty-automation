@@ -22,10 +22,11 @@
         "za": null,
         "zo": null
       },
-      "opmerking": "Vrijdag is TIJDELIJK vrij; normaal 09:00-15:00. Zet vr terug zodra dat weer ingaat.",
+      "opmerking": "Daimy 14-09: Joey NIET meer inplannen voor inmeten (stopDatum 2026-09-14; planner biedt geen Joey-tijden meer). uuidPlanado blijft: nodig voor sync/herinneringen van zijn resterende afspraken. Vrijdag was tijdelijk vrij; normaal 09:00-15:00.",
       "startAdres": "Molenbrink 36, Den Haag",
       "eindAdres": "Frijdastraat 8F, Rijswijk",
-      "engels": false
+      "engels": false,
+      "stopDatum": "2026-09-14"
     },
     "Sjoerd": {
       "uuidPlanado": "1f122d19-e43e-6da0-8ffb-661a4ff9bb36",
@@ -88,5 +89,5 @@
     }
   },
   "let_op_startadres": "startAdres = vertrekpunt 's ochtends, eindAdres = waar de dag eindigt (Joey: winkel Frijdastraat, Sjoerd: thuis Woerden). null = magazijn Noordeindseweg 256a Berkel.",
-  "let_op_engels": "engels:true = mag Engelstalige klanten inmeten (Daimy 13-08 Sjoerd, 08-09 Sjoerd én Patrick). uuidPlanado null = telt nergens mee."
+  "let_op_engels": "engels:true = mag Engelstalige klanten inmeten (Daimy 13-08 Sjoerd, 08-09 Sjoerd én Patrick). uuidPlanado null = telt nergens mee. stopDatum = laatste dag waarop de planner nog tijden geeft (Joey 14-09)."
 }

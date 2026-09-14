@@ -568,6 +568,7 @@ function werkdagenVoor(inmeterNaam, aantal = 15, vanafDatum) {
   // 10 dagen horizon "geen enkel gat" gaf terwijl er eind augustus wél plek is.
   const vast = ROOSTER[inmeterNaam]?.dagen;
   const startDatum = ROOSTER[inmeterNaam]?.startDatum;
+  const stopDatum = ROOSTER[inmeterNaam]?.stopDatum; // 14-09: Joey niet meer inplannen voor inmeten (Daimy)
   const dagen = [];
   const d = new Date();
   d.setDate(d.getDate() + 1);
@@ -583,7 +584,7 @@ function werkdagenVoor(inmeterNaam, aantal = 15, vanafDatum) {
     const code = DAGCODE[d.getDay()];
     const blok = vast?.[code];
     const datum = d.toISOString().slice(0, 10);
-    const naStart = !startDatum || datum >= startDatum;
+    const naStart = (!startDatum || datum >= startDatum) && (!stopDatum || datum <= stopDatum);
     const vakantie = VAKANTIES[inmeterNaam]?.has(datum);
     if (blok && naStart && !vakantie) dagen.push({ datum, van: blok.van, tot: blok.tot });
     d.setDate(d.getDate() + 1);

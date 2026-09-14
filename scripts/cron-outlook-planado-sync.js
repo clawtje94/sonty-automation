@@ -409,6 +409,34 @@ async function main() {
     }
     const werkerUuid = INMETERS[voornaam] || MONTEURS[voornaam];
     if (opStartWie.has(`${Date.parse(startISO)}|${werkerUuid}`)) { overgeslagen++; continue; }
+    // TOEWIJZING VOLGT OUTLOOK, ook voor planner-opdrachten (14-09: 23 dubbelen toen Joey's
+    // Bookings-afspraken naar Patrick gingen — de rp-job stond op Joey, de sleutel
+    // tijd+inmeter miste, en de sync maakte een tweede opdracht op Patrick). Staat er op
+    // dezelfde tijd een niet-ol-opdracht van een ANDERE inmeter voor dezelfde klant, dan
+    // zetten we die om in plaats van een nieuwe te maken.
+    const anderRp = jobs.filter((j) => j.scheduled_at && !(j.external_id || '').startsWith('ol-')
+      && Date.parse(j.scheduled_at) === Date.parse(startISO) && j.assignee?.worker_uuid && j.assignee.worker_uuid !== werkerUuid
+      && Object.values(INMETERS).includes(j.assignee.worker_uuid));
+    if (anderRp.length && INMETERS[voornaam]) {
+      const normN = (t) => String(t || '').toLowerCase().replace(/[^a-z]/g, '');
+      const klant = normN(klantNaamUit(e.Subject));
+      let omgezet = false;
+      for (const j of anderRp) {
+        try {
+          const det = await planadoJson(`https://api.planadoapp.com/v2/jobs/${j.uuid}`); const huidig = det.job || det;
+          const kop = normN(String(huidig.description || '').split('\n')[0]);
+          if (!klant || klant.length < 4 || !(kop.includes(klant) || klant.includes(kop.replace(/^inmeten(sonty)?/, '')))) continue;
+          console.log(`  ~ ${voornaam} ${startISO.slice(0, 16)} ${(e.Subject || '').slice(0, 30)} (toewijzing gewijzigd, planner-opdracht #${huidig.serial_no})`);
+          if (EXECUTE) {
+            const r = await planadoFetch(`https://api.planadoapp.com/v2/jobs/${j.uuid}`, { method: 'PATCH', headers: PH, body: JSON.stringify({ version: huidig.version, assignee: { worker: { uuid: werkerUuid } } }) });
+            if (!r.ok) { fouten++; console.log(`    PATCH mislukt: HTTP ${r.status}`); } else bijgewerkt++;
+            await wacht(2600);
+          }
+          omgezet = true; break;
+        } catch (err) { console.log(`  planner-opdracht check faalde: ${err.message.slice(0, 80)}`); }
+      }
+      if (omgezet) continue;
+    }
 
     console.log(`  + ${voornaam} ${startISO.slice(0, 16)} [${soort(e.Subject)}] ${(e.Subject || '').slice(0, 40)}`);
     nieuw++;

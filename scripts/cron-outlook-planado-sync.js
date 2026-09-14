@@ -97,7 +97,7 @@ async function outlookEvents() {
   const van = new Date();
   const tot = new Date(); tot.setDate(tot.getDate() + 100); // was 42: afspraken >6 weken vooruit (Kampherbeek 21 sep) werden nooit gesynct en waren onzichtbaar voor de planner (08-08)
   let url = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView`
-    + `?$top=500&$select=Subject,Start,End,IsCancelled,Location,Attendees,Body,LastModifiedDateTime`
+    + `?$top=500&$select=Subject,Start,End,IsCancelled,Location,Attendees,Body,LastModifiedDateTime,Categories`
     + `&startDateTime=${van.toISOString()}&endDateTime=${tot.toISOString()}`;
   const evs = [];
   while (url) {
@@ -105,7 +105,11 @@ async function outlookEvents() {
     evs.push(...(j.value || []));
     url = j['@odata.nextLink'] || null;
   }
-  return evs;
+  // 14-09: kale planner-afspraken die alsnog in Bookings zijn gezet krijgen de categorie
+  // GEMIGREERD (verwijderen zou de klant een Outlook-annulering sturen; hij staat als
+  // deelnemer op de kale afspraak). Voor de sync bestaan ze niet meer: de Planado-opdracht
+  // hangt aan het nieuwe Bookings-event.
+  return evs.filter((e) => !(e.Categories || []).some((c) => /gemigreerd/i.test(c)));
 }
 
 // Telefoonnummer uit het Outlook-opmerkingenveld (Body). Nederlandse nummers:

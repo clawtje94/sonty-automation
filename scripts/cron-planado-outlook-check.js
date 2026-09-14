@@ -97,17 +97,18 @@ const wacht = (ms) => new Promise((r) => setTimeout(r, ms));
   // hetzelfde moment bij Joey en niemand zag het). Elke overlap tussen twee klussen
   // van dezelfde inmeter wordt gemeld, elk paar één keer. Montage (Yudi) valt buiten
   // dit rapport: die draait met meerdere teams en is niet mijn planning.
-  const INM = ['Joey', 'Sjoerd'];
+  const INM = Object.keys(require('../data/inmeters-rooster.json').inmeters); // 14-09: uit het rooster (Patrick ontbrak)
   const wieVan = (e) => {
     const att = (e.Attendees || []).map((a) => a.EmailAddress?.Name || '').filter((n) => n && !/^sonty$/i.test(n));
     return att.map((n) => n.split(' ')[0]).find((v) => INM.includes(v)) || null;
   };
-  let urlA = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView?$top=200&$select=Subject,Start,End,Attendees,IsCancelled&startDateTime=${new Date().toISOString()}&endDateTime=${tot.toISOString()}`;
+  let urlA = `https://outlook.office.com/api/v2.0/me/calendars/${cal.Id}/calendarView?$top=200&$select=Subject,Start,End,Attendees,IsCancelled,Categories&startDateTime=${new Date().toISOString()}&endDateTime=${tot.toISOString()}`;
   const evsA = [];
   while (urlA) { const j = await (await fetch(urlA, { headers: OH })).json(); evsA.push(...(j.value || [])); urlA = j['@odata.nextLink'] || null; }
   const perInm = {};
   for (const e of evsA) {
     if (e.IsCancelled || /geannuleerd|cancell?ed|^OPTIE bot|vakantie|verlof|\bvrij\b|ziek|stoffering|behangen/i.test(e.Subject || '')) continue; // stoffering blokkeert niet (Daimy 11-08)
+    if ((e.Categories || []).some((c) => /gemigreerd/i.test(c))) continue; // kale afspraak die alsnog in Bookings staat (14-09)
     const n = wieVan(e);
     if (!n) continue;
     (perInm[n] = perInm[n] || []).push({ van: Date.parse(e.Start.DateTime + 'Z'), tot: Date.parse(e.End.DateTime + 'Z'), s: e.Subject || '' });

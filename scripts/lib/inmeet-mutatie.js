@@ -125,6 +125,14 @@ async function muteerBoeking(rpItemId, soort, { reden = '', bron = 'onbekend' } 
     }
     stap('agenda', gelukt, detail);
   } else stap('agenda', true, 'geen event-id bekend (oudere boeking)');
+  // 14-09: kale planner-afspraak die later alsnog in Bookings is gezet (migratie, categorie
+  // GEMIGREERD): bij annuleren ook die weghalen, anders blijft hij in de agenda staan. De
+  // klant staat er als deelnemer op en krijgt dan de Outlook-annulering — bij een echte
+  // annulering is dat juist goed.
+  if (b.kaleEventId) {
+    try { await require('./outlook-opties.js').verwijderOpties([b.kaleEventId]); stap('agenda-kaal', true, 'kale afspraak verwijderd'); }
+    catch (e) { stap('agenda-kaal', false, e.message.slice(0, 80)); }
+  }
 
   // 2. Planado-job echt verwijderen
   try {

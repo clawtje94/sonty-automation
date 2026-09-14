@@ -37,6 +37,7 @@ const DIENST_INMETEN = 'fd1a8a20-57f6-42f1-8d4d-c18bc3c5ddce';
 const STAFF = {
   Joey: '445fbea9-68c9-46f4-b72a-efa451762ac3',
   Sjoerd: '60ebce1b-d133-4731-830f-5e5906c02c63',
+  Patrick: '788ce4cc-5ad3-440c-a22d-7ac9f486bf80', // adviseur1@sonty.nl, Bookings-staff sinds 09-2026 (14-09: ontbrak → 8 kale afspraken)
 };
 
 /**

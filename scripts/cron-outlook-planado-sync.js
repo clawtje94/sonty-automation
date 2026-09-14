@@ -218,13 +218,16 @@ function bodyKern(e) {
 function notitiesUit(e) {
   const t = String(e.Body?.Content || '').replace(/<style[\s\S]*?<\/style>/gi, '').replace(/<[^>]+>/g, '\n').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
     .split('\n').map((r) => r.trim()).filter(Boolean).join('\n');
-  const m = t.match(/Interne notities\n([\s\S]*?)(?:\nOPMERKING: Dit is een alleen-lezen|\nGebruik Microsoft Bookings|$)/i);
+  // 14-09: na een staff-wijziging via de Graph-API schrijft Bookings de body in het ENGELS
+  // ("Internal Notes", "NOTE: This is a read-only view"); proefgeval Paap #586 verloor zo zijn
+  // notities. Beide talen accepteren, anders gooit de verfris-stap de notities weg.
+  const m = t.match(/(?:Interne notities|Internal Notes)\n(?:-{3,}\n)?([\s\S]*?)(?:\nOPMERKING: Dit is een alleen-lezen|\nNOTE: This is a read-only|\nGebruik Microsoft Bookings|\nPlease use Microsoft Bookings|$)/i);
   return m ? m[1].split('\n').filter((r) => !/^\*+$/.test(r) && !/Eventuele wijzigingen gaan verloren|^-{3,}/.test(r)).join('\n').trim().slice(0, 900) : '';
 }
 // Adres als tekst uit de body ("Adres:"/"Locatie:") als de event-locatie geen huisnummer heeft.
 function adresUitBody(e) {
   const t = String(e.Body?.Content || '').replace(/<[^>]+>/g, '\n').replace(/&nbsp;/g, ' ');
-  const m = t.match(/^\s*(?:Adres|Locatie):\s*(.+)$/im);
+  const m = t.match(/^\s*(?:Adres|Locatie|Location):\s*(.+)$/im);
   return m && /\d/.test(m[1]) ? m[1].trim() : '';
 }
 

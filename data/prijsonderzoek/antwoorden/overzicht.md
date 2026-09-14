@@ -79,3 +79,9 @@ Patroon: dealers/lokale bedrijven voeren A-merken (Verano, Brustor, Alulux, Luxa
 - Gepubliceerd overzicht (privé): https://claude.ai/code/artifact/dbb0c67b-55c4-495e-bf0d-88367dadf6b5 (ook lokaal: antwoorden/marktpositie.html)
 
 ## Correctie 13-09 (Daimy): Sonty verkoopt altijd met 15% op de lijst. Verkoopprijs 4 producten 6.514 (= markt-midden 6.497), knikarm 3.440, pergola 7.209. Conclusie: screens/rolluiken midden, knikarm boven 5 van 6; advies knikarm richting 3.200, 15% als vaste prijs communiceren, garantie/snelheid als argument.
+
+## Aanvulling 14-09
+- Van Geet (Amersfoort, Sunmaster-dealer): Zip Design 110 237x228 io 1833 + 175 montage; solar 1688 + 125; S-42 204x236 1353 + 175; S-42 solar 1289 + 125 → 6763 incl. montage. Brustor B50 knikarm 2975 incl.; Brustor B128 pergola 6175 incl. Alleen Somfy, 8 wk, 5 jr / 7 jr Somfy solar. (Sonty zelfde producten verkoopprijs 6683.)
+- Stuyfzand (Delfgauw, SunCircle): screen 1439 + 150; screen solar 1539 + 150; knikarm 3273 + 200; doekoverkapping 7000 + 500; rolluiken niet geoffreerd.
+- Ton Stassen (Barendrecht, xls-offerte 2026397): V550 screen io 1268, solar (Brel) 1219, rolluik RS100 io 975, rolluik solar (Brel) 855, alles incl. meten+montage; zenders 60-85; Tahoma 185; knikarm V280 Ipanema 2660 (V225 Porto 2270, V255 Salou 2420); Verano/Heroal; 5 jr Verano; 6 wk. Goedkoopste van allemaal: 4 producten 4317.
+- Creon: alleen DIY-webshop, geen montage, geen knikarm. Venster Center: alleen Dordrecht.

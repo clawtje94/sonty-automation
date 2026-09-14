@@ -51,7 +51,11 @@
   automatische "Geannuleerd"-mail naar klant (Bookings-afspraak stuurde met optOut geen mail) → V7 aan Daimy: A laten staan (weg na datum,
   laatste 28-09) of B verwijderen + Sunny-WhatsApp "afspraak staat gewoon". Graph met OWA-token = 401 (invalid audience), dus geen /cancel met
   comment mogelijk via die token. Van Leeuwen = 2 klanten (Leidschendam 15-09 Patrick / Woerden 21-09 Sjoerd), Patrick kan di+do al (Daimy).
-- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings, V5 prijs/korting-checks, V6 5 kale Patrick-boekingen migreren, V7 7 dubbele kale events laten/verwijderen.
+- 14-09 ~16:20Z Daimy: "lege toewijzingen toewijzen aan wie het hoort (bv. Tara Quevedo)" → V6 uitgevoerd met het recept van de andere
+  sessie (kopie migreer-alle.js in eigen scratchpad): Quevedo 21-09 11:40, Engincicek 21-09 15:20, Van Maastrigt 22-09 09:50, De Haan 24-09
+  13:25, Vlek 08-10 08:00 → Bookings op Patrick, optOut true, kale events categorie GEMIGREERD, records bijgewerkt. Sent items ongewijzigd.
+  Controle: Bookings 53 op Patrick, 12 zonder medewerker = precies de 12 gemigreerde kale events; sync dry-run nieuw 0 / wees 0.
+- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings, V5 prijs/korting-checks, V7 12 dubbele kale events laten/verwijderen.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
 - Feiten (live gemeten 14-09): 71 komende Joey-inmetingen (100 dagen) zijn ALLEMAAL Bookings-afspraken (organizer SontyMontage1@,

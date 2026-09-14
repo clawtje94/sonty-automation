@@ -40,7 +40,13 @@
   (Telegram gestuurd). Live gemeten: S-37 120x140 io = (716+76)x1,20 + 195 = €1.145,40; sunmasterMarkup 1,2 sinds 3 aug (memory + checklist
   sonty-website 777177b bijgewerkt, daar stond nog 1,10). Korting = maandactie 15% (lib/acties/maandactie.ts, KV crm:maandacties) over alles
   incl. montage; voorraad 20% nooit stapelen; buren max 20%; +2,5-5% discretionair. V5: kennisbank-tegenstrijdigheid, Roma netto/bruto.
-- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings, V5 prijs/korting-checks.
+- 14-09 ~16:10Z Daimy: "veel inmetingen in Bookings zonder toegewezen persoon, dubbel met Patrick?" → alleen-lezen check via bookings-api
+  (weekchunks! 30-dagen-chunk kapt af op 200): 169 inmeetafspraken 119 dgn (Sjoerd 83, Patrick 48, Joey 26, GEEN 12). De 12 zonder
+  medewerker = exact de kale agenda-events van Sunny's 13 Patrick-boekingen (inmeet-boekingen.json, match op aankomst). 7 = dubbel met
+  de gemigreerde Bookings-afspraak (kale event categorie GEMIGREERD bewust laten staan; verdwijnt na datum). 5 NOG NIET gemigreerd en dus
+  alleen kaal: Quevedo 21-09 09:40Z, Engincicek 21-09 13:20Z, Van Maastrigt 22-09 07:50Z, De Haan 24-09 11:25Z, Vlek 08-10 06:00Z → V6.
+  Naam-dubbels: Jeffrey Penning 2x Sjoerd 23-09 10:35Z; Van Leeuwen Patrick 15-09 + Sjoerd 21-09; Sylvia Jansen Patrick 22-09 + Sjoerd 07-10.
+- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings, V5 prijs/korting-checks, V6 5 kale Patrick-boekingen migreren.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
 - Feiten (live gemeten 14-09): 71 komende Joey-inmetingen (100 dagen) zijn ALLEMAAL Bookings-afspraken (organizer SontyMontage1@,

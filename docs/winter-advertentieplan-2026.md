@@ -11,7 +11,7 @@ Vervangt de Google-notitie van 04-09 (docs/google-ads-winterplan-2026.md) als he
 - **Twee categorieën aan vanaf de tweede week januari:** knikarmschermen (Google + Meta vroegboek), uitvalschermen (meeliften in knikarm-campagne). Okt t/m dec halen ze vrijwel niets (knikarm okt-jan 10 orders op 88 Google-offertes; Meta 0 op 37).
 - **Eén test, klein:** raamdecoratie binnen met de showroom als CTA (slaging 22-27%, maar cel klein).
 - **Uit:** Google-pergola (1 order op 126 winteroffertes), markiezen nov-jan, eigen voorraadscherm-campagne, Meta-screens zodra boven €30 per lead.
-- **Max CPA (per offerte in de sheet), per maand in §4, regel B (doel 50% / plafond 70% / stop 100% van de marge per online-offerte).** Google rolluiken: okt-nov €90-100 / €125-140 / €175-200, dec €45 / €65 / €95, jan €90 / €125 / €180, feb €65 / €90 / €125. Meta rolluiken: okt-nov €40 / €70 / €100, dec €25 / €45 / €65, jan €55 / €80 / €115, feb €45 / €60 / €90. Kanaalbreed (alle categorieën, §5): Google plafond okt €115 · nov €155 · dec €45 · jan €115 · feb €80 · mrt €95 · apr €95 · mei €100; Meta €50 · €50 · €35 · €75 · €60 · €80 · €50 · €55.
+- **Max CPA (per offerte in de sheet), per maand in §4, regel B (doel 50% / plafond 70% / stop 100% van de marge per online-offerte).** Google rolluiken: okt-nov €90-100 / €125-140 / €175-200, dec €45 / €65 / €95, jan €90 / €125 / €180, feb €65 / €90 / €125. Meta rolluiken: okt-nov €40 / €55 / €75-80, dec €25 / €35 / €50, jan €55 / €80 / €115, feb €45 / €65 / €90. Kanaalbreed (alle categorieën, §5): Google plafond okt €115 · nov €155 · dec €45 · jan €115 · feb €80 · mrt €95 · apr €95 · mei €100; Meta €50 · €50 · €35 · €75 · €60 · €80 · €50 · €55.
 - **Budget okt-feb:** €129k (bij doel) tot €177k (bij plafond): okt €22-30k, nov €21-29k, dec €11-15k, jan €38-54k, feb €36-49k (§4). Vorige winter ≈ €160-170k, anders verdeeld: okt-nov omhoog (die orders houden het team in dec-jan aan het werk), Meta okt-dec op plafond, december laag.
 - **Doorrekening tot mei 2027 (§5):** advies okt-mei Google €175k + Meta €154k (was €166k + €166k). Conservatief (zelfde conversie en leadprijs als 25/26) +€38k resultaat: €84k → €122k. Als de plafonds gehaald worden +€72k (€156k). De grote hefboom is de lente: mrt-mei levert €228k en Meta-leads kosten daar €27-29 bij een break-even van €70-76; meer winst daar vraagt montagecapaciteit (mrt 123%, apr 100%).
 
@@ -30,7 +30,9 @@ Netto = productmarge ex btw − advertentiekosten. Vaste lasten (monteurs, lease
 
 Lezen: Meta verdiende in okt-dec niets terug (€0,85 productmarge per advertentie-euro) en verloor in december €5.300; jan-feb maakte het goed (€2,34 per euro). Google deed in jan-feb €2,39 per euro, dus in de kernwinter zijn beide kanalen gelijkwaardig; het verschil zit in okt-dec bij Meta. Google okt-dec 2025 kan niet netto berekend worden: spend onbekend (V1).
 
-## 3. Per categorie: conversie, break-even en max CPA
+## 3. Per categorie: conversie en break-even, winter (eerste versie, incl. showroom)
+
+> Let op: de plafonds in deze paragraaf zijn de eerste versie (35%-regel, incl. showroomorders). De geldende doel/plafond/stop-waarden staan in §4d (regel B, online-only, per maand). De ruwe cijfers (offertes, conversie, marge) blijven bruikbaar.
 
 Break-even per offerte = productmarge per offerte (conv × marge per akkoord). **Plafond = 35% daarvan** (het niveau waarop zomer én winter 2026 aantoonbaar winst gaven; 65% blijft over voor montage en vaste lasten). **Harde stop = 50%.** "Gerealiseerd" = kosten per sheet-offerte winter 25/26 (Meta: campagne-spend, Google: jan-feb, eigen campagne + aandeel generieke campagnes naar offerte-aandeel).
 
@@ -127,15 +129,15 @@ Maandindex (marge per online-offerte t.o.v. seizoensgemiddelde): okt 1.15 · nov
 
 | productgroep | conv online W / L | marge per akkoord W / L | BE online W / L | okt | nov | dec | jan | feb | mrt | apr | mei |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| Rolluiken | 12,6% / 11,5% | €1.227 / €1.320 | €154 / €151 | 90 / 125 / 175 | 100 / 140 / 200 | 45 / 65 / 95 | 90 / 125 / 180 | 65 / 90 / 125 | 75 / 105 / 150 | 75 / 105 / 150 | 80 / 110 / 155 |
-| Screens | 8,3% / 10,2% | €1.842 / €1.969 | €154 / €200 | 90 / 125 / 175 | 100 / 140 / 200 | 45 / 65 / 90 | 90 / 125 / 175 | 65 / 90 / 125 | 100 / 140 / 195 | 100 / 135 / 195 | 105 / 145 / 205 |
-| Knikarmscherm | 9,8% / 10,6% | €1.330 / €1.350 | €130 / €143 | 75 / 105 / 150 | 85 / 120 / 170 | 40 / 55 / 80 | 75 / 105 / 150 | 55 / 75 / 105 | 70 / 100 / 140 | 70 / 100 / 140 | 75 / 105 / 150 |
-| Zonwering buiten | 23,8% / 10,3% | €1.123 / €1.312 | €267 / €136 | 155 / 215 / 305 | 175 / 245 / 350 | uit: 80 / 110 / 160 | 155 / 215 / 310 | 110 / 155 / 220 | 65 / 95 / 135 | 65 / 95 / 130 | 70 / 100 / 140 |
-| Markiezen | 4,3% / 12,5% | €462 / €781 | €20 / €98 | 10 / 15 / 25 | 15 / 20 / 25 | 5 / 10 / 10 | 10 / 15 / 25 | 10 / 10 / 15 | 50 / 65 / 95 | 50 / 65 / 95 | 50 / 70 / 100 |
-| Uitvalscherm | 16,7% / 8,2% | €1.351 / €1.061 | €225 / €87 | 130 / 180 / 260 | 145 / 205 / 295 | uit: 70 / 95 / 135 | 130 / 180 / 260 | 90 / 130 / 185 | 45 / 60 / 85 | 40 / 60 / 85 | 45 / 60 / 90 |
-| Raamdecoratie | 7,4% / 30,0% | €2.028 / €1.244 | €150 / €373 | 85 / 120 / 170 | 100 / 135 / 195 | 45 / 65 / 90 | 85 / 120 / 175 | 60 / 85 / 125 | 185 / 255 / 365 | 180 / 255 / 365 | uit: 190 / 270 / 385 |
-| Voorraadscherm | 6,7% / 2,8% | €2.042 / €1.778 | €136 / €50 | 80 / 110 / 155 | 90 / 125 / 175 | 40 / 55 / 80 | 80 / 110 / 155 | 55 / 80 / 110 | 25 / 35 / 50 | 25 / 35 / 50 | 25 / 35 / 50 |
-| Pergola | 0,8% / 0,0% | €5.416 / €0 | €44 / €0 | uit: 25 / 35 / 50 | uit: 30 / 40 / 55 | uit: 15 / 20 / 25 | uit: 25 / 35 / 50 | uit: 20 / 25 / 35 | uit: 0 / 0 / 0 | uit: 0 / 0 / 0 | uit: 0 / 0 / 0 |
+| Rolluiken (n 453 / 663) | 12,6% / 11,5% | €1.227 / €1.320 | €154 / €151 | 90 / 125 / 175 | 100 / 140 / 200 | 45 / 65 / 95 | 90 / 125 / 180 | 65 / 90 / 125 | 75 / 105 / 150 | 75 / 105 / 150 | 80 / 110 / 155 |
+| Screens (n 144 / 452) | 8,3% / 10,2% | €1.842 / €1.969 | €154 / €200 | 90 / 125 / 175 | 100 / 140 / 200 | 45 / 65 / 90 | 90 / 125 / 175 | 65 / 90 / 125 | 100 / 140 / 195 | 100 / 135 / 195 | 105 / 145 / 205 |
+| Knikarmscherm (n 133 / 649) | 9,8% / 10,6% | €1.330 / €1.350 | €130 / €143 | 75 / 105 / 150 | 85 / 120 / 170 | 40 / 55 / 80 | 75 / 105 / 150 | 55 / 75 / 105 | 70 / 100 / 140 | 70 / 100 / 140 | 75 / 105 / 150 |
+| Zonwering buiten (n 63 / 116) | 23,8% / 10,3% | €1.123 / €1.312 | €267 / €136 | 155 / 215 / 305 | 175 / 245 / 350 | uit: 80 / 110 / 160 | 155 / 215 / 310 | 110 / 155 / 220 | 65 / 95 / 135 | 65 / 95 / 130 | 70 / 100 / 140 |
+| Markiezen (n 23 / 80, klein) | 4,3% / 12,5% | €462 / €781 | €20 / €98 | 10 / 15 / 25 | 15 / 20 / 25 | 5 / 10 / 10 | 10 / 15 / 25 | 10 / 10 / 15 | 50 / 65 / 95 | 50 / 65 / 95 | 50 / 70 / 100 |
+| Uitvalscherm (n 24 / 98, klein) | 16,7% / 8,2% | €1.351 / €1.061 | €225 / €87 | 130 / 180 / 260 | 145 / 205 / 295 | uit: 70 / 95 / 135 | 130 / 180 / 260 | 90 / 130 / 185 | 45 / 60 / 85 | 40 / 60 / 85 | 45 / 60 / 90 |
+| Raamdecoratie (n 27 / 10, klein) | 7,4% / 30,0% | €2.028 / €1.244 | €150 / €373 | 85 / 120 / 170 | 100 / 135 / 195 | 45 / 65 / 90 | 85 / 120 / 175 | 60 / 85 / 125 | 185 / 255 / 365 | 180 / 255 / 365 | uit: 190 / 270 / 385 |
+| Voorraadscherm (n 45 / 213) | 6,7% / 2,8% | €2.042 / €1.778 | €136 / €50 | 80 / 110 / 155 | 90 / 125 / 175 | 40 / 55 / 80 | 80 / 110 / 155 | 55 / 80 / 110 | 25 / 35 / 50 | 25 / 35 / 50 | 25 / 35 / 50 |
+| Pergola (n 124 / 190) | 0,8% / 0,0% | €5.416 / €0 | €44 / €0 | uit: 25 / 35 / 50 | uit: 30 / 40 / 55 | uit: 15 / 20 / 25 | uit: 25 / 35 / 50 | uit: 20 / 25 / 35 | uit: 0 / 0 / 0 | uit: 0 / 0 / 0 | uit: 0 / 0 / 0 |
 
 **Google: max spend per maand (verwachte online-offertes × plafond; basis = × doel) met verwachte orders, en wat het vorig jaar was**
 
@@ -175,15 +177,15 @@ Maandindex (marge per online-offerte t.o.v. seizoensgemiddelde): okt 0.89 · nov
 
 | productgroep | conv online W / L | marge per akkoord W / L | BE online W / L | okt | nov | dec | jan | feb | mrt | apr | mei |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| Rolluiken | 7,8% / 8,0% | €1.110 / €1.164 | €87 / €93 | 40 / 55 / 75 | 40 / 55 / 80 | 25 / 35 / 50 | 55 / 80 / 115 | 45 / 65 / 90 | 60 / 85 / 120 | 40 / 55 / 75 | 40 / 60 / 85 |
-| Knikarmscherm | 8,2% / 6,7% | €1.514 / €1.450 | €125 / €96 | 55 / 80 / 110 | 55 / 80 / 110 | 35 / 50 / 75 | 80 / 115 / 160 | 65 / 90 / 130 | 65 / 90 / 125 | 40 / 55 / 80 | 45 / 60 / 85 |
-| Screens | 4,1% / 6,3% | €2.152 / €1.625 | €89 / €103 | 40 / 55 / 80 | 40 / 55 / 80 | 25 / 35 / 55 | 60 / 80 / 115 | 45 / 65 / 90 | 65 / 95 / 135 | 40 / 60 / 85 | 45 / 65 / 90 |
-| Pergola | 1,6% / 1,0% | €1.969 / €2.856 | €31 / €28 | 15 / 20 / 25 | 15 / 20 / 25 | 10 / 15 / 20 | 20 / 30 / 40 | 15 / 20 / 30 | 20 / 25 / 35 | 10 / 15 / 25 | 15 / 20 / 25 |
-| Raamdecoratie | 12,7% / 23,3% | €1.509 / €865 | €192 / €202 | 85 / 120 / 170 | 85 / 120 / 170 | 60 / 80 / 115 | 125 / 175 / 250 | 100 / 140 / 200 | 130 / 185 / 260 | 85 / 115 / 165 | 90 / 125 / 180 |
-| Markiezen | 18,2% / 12,5% | €3.500 / €903 | €636 / €113 | uit: 280 / 395 / 565 | uit: 285 / 400 / 570 | uit: 190 / 265 / 380 | uit: 415 / 580 / 825 | 330 / 460 / 655 | 75 / 105 / 145 | 45 / 65 / 95 | 50 / 70 / 100 |
-| Uitvalscherm | 0,0% / 11,8% | €0 / €1.825 | €0 / €215 | uit: 0 / 0 / 0 | uit: 0 / 0 / 0 | uit: 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | 140 / 195 / 280 | 90 / 125 / 175 | 95 / 135 / 190 |
-| Zonwering buiten | 4,8% / 4,5% | €1.041 / €1.881 | €50 / €85 | uit: 20 / 30 / 45 | uit: 20 / 30 / 45 | uit: 15 / 20 / 30 | uit: 30 / 45 / 65 | uit: 25 / 35 / 50 | uit: 55 / 75 / 110 | uit: 35 / 50 / 70 | uit: 40 / 55 / 75 |
-| Voorraadscherm | 4,5% / 1,5% | €1.229 / €2.117 | €56 / €32 | uit: 25 / 35 / 50 | uit: 25 / 35 / 50 | uit: 15 / 25 / 35 | uit: 35 / 50 / 75 | uit: 30 / 40 / 60 | uit: 20 / 30 / 40 | uit: 15 / 20 / 25 | uit: 15 / 20 / 30 |
+| Rolluiken (n 1176 / 1670) | 7,8% / 8,0% | €1.110 / €1.164 | €87 / €93 | 40 / 55 / 75 | 40 / 55 / 80 | 25 / 35 / 50 | 55 / 80 / 115 | 45 / 65 / 90 | 60 / 85 / 120 | 40 / 55 / 75 | 40 / 60 / 85 |
+| Knikarmscherm (n 97 / 827) | 8,2% / 6,7% | €1.514 / €1.450 | €125 / €96 | 55 / 80 / 110 | 55 / 80 / 110 | 35 / 50 / 75 | 80 / 115 / 160 | 65 / 90 / 130 | 65 / 90 / 125 | 40 / 55 / 80 | 45 / 60 / 85 |
+| Screens (n 194 / 490) | 4,1% / 6,3% | €2.152 / €1.625 | €89 / €103 | 40 / 55 / 80 | 40 / 55 / 80 | 25 / 35 / 55 | 60 / 80 / 115 | 45 / 65 / 90 | 65 / 95 / 135 | 40 / 60 / 85 | 45 / 65 / 90 |
+| Pergola (n 385 / 402) | 1,6% / 1,0% | €1.969 / €2.856 | €31 / €28 | 15 / 20 / 25 | 15 / 20 / 25 | 10 / 15 / 20 | 20 / 30 / 40 | 15 / 20 / 30 | 20 / 25 / 35 | 10 / 15 / 25 | 15 / 20 / 25 |
+| Raamdecoratie (n 55 / 30, klein) | 12,7% / 23,3% | €1.509 / €865 | €192 / €202 | 85 / 120 / 170 | 85 / 120 / 170 | 60 / 80 / 115 | 125 / 175 / 250 | 100 / 140 / 200 | 130 / 185 / 260 | 85 / 115 / 165 | 90 / 125 / 180 |
+| Markiezen (n 11 / 48, klein) | 18,2% / 12,5% | €3.500 / €903 | €636 / €113 | uit: 280 / 395 / 565 | uit: 285 / 400 / 570 | uit: 190 / 265 / 380 | uit: 415 / 580 / 825 | uit: 330 / 460 / 655 | 75 / 105 / 145 | 45 / 65 / 95 | 50 / 70 / 100 |
+| Uitvalscherm (n 11 / 51, klein) | 0,0% / 11,8% | €0 / €1.825 | €0 / €215 | uit: 0 / 0 / 0 | uit: 0 / 0 / 0 | uit: 0 / 0 / 0 | uit: 0 / 0 / 0 | uit: 0 / 0 / 0 | 140 / 195 / 280 | 90 / 125 / 175 | 95 / 135 / 190 |
+| Zonwering buiten (n 84 / 133) | 4,8% / 4,5% | €1.041 / €1.881 | €50 / €85 | uit: 20 / 30 / 45 | uit: 20 / 30 / 45 | uit: 15 / 20 / 30 | uit: 30 / 45 / 65 | uit: 25 / 35 / 50 | uit: 55 / 75 / 110 | uit: 35 / 50 / 70 | uit: 40 / 55 / 75 |
+| Voorraadscherm (n 44 / 399) | 4,5% / 1,5% | €1.229 / €2.117 | €56 / €32 | uit: 25 / 35 / 50 | uit: 25 / 35 / 50 | uit: 15 / 25 / 35 | uit: 35 / 50 / 75 | uit: 30 / 40 / 60 | uit: 20 / 30 / 40 | uit: 15 / 20 / 25 | uit: 15 / 20 / 30 |
 
 **Meta: max spend per maand (verwachte online-offertes × plafond; basis = × doel) met verwachte orders, en wat het vorig jaar was**
 
@@ -194,11 +196,11 @@ Maandindex (marge per online-offerte t.o.v. seizoensgemiddelde): okt 0.89 · nov
 | Screens | 19 off · 1 ord · **€1.045** (basis €760) · was 19 off à €88 | 23 off · 1 ord · **€1.265** (basis €920) · was 23 off à €70 | 23 off · 1 ord · **€805** (basis €575) · was 23 off à €72 | 26 off · 1 ord · **€2.080** (basis €1.560) · was 32 off à €52 | 39 off · 2 ord · **€2.535** (basis €1.755) · was 49 off à €32 | 85 off · 5 ord · **€8.075** (basis €5.525) · was 77 off à €23 | 120 off · 8 ord · **€7.200** (basis €4.800) · was 109 off à €14 | 127 off · 8 ord · **€8.255** (basis €5.715) · was 115 off à €15 |
 | Pergola | 70 off · 1 ord · **€1.400** (basis €1.050) · was 70 off à €27 | 75 off · 1 ord · **€1.500** (basis €1.125) · was 75 off à €24 | 41 off · 1 ord · **€615** (basis €410) · was 41 off à €45 | 99 off · 2 ord · **€2.970** (basis €1.980) · was 99 off à €19 | 100 off · 2 ord · **€2.000** (basis €1.500) · was 100 off à €17 | 69 off · 1 ord · **€1.725** (basis €1.380) · was 138 off à €13 | 57 off · 1 ord · **€855** (basis €570) · was 114 off à €14 | 67 off · 1 ord · **€1.340** (basis €1.005) · was 134 off à €13 |
 | Raamdecoratie | 2 off · 0 ord · **€240** (basis €170) · was 1 off à €280 | 6 off · 1 ord · **€720** (basis €510) · was 4 off à €340 | 3 off · 0 ord · **€240** (basis €180) · was 2 off à €774 | 9 off · 1 ord · **€1.575** (basis €1.125) · was 8 off à €193 | 11 off · 1 ord · **€1.540** (basis €1.100) · was 10 off à €140 | 11 off · 3 ord · **€2.035** (basis €1.430) · was 7 off à €215 | 14 off · 3 ord · **€1.610** (basis €1.190) · was 9 off à €134 | 14 off · 3 ord · **€1.750** (basis €1.260) · was 9 off à €136 |
-| Markiezen | uit (was 1 off à €0) | uit (was 0 off à €0) | uit (was 2 off à €0) | uit (was 2 off à €0) | 5 off · 1 ord · **€2.300** (basis €1.650) · was 5 off à €0 | 9 off · 1 ord · **€945** (basis €675) · was 9 off à €40 | 16 off · 2 ord · **€1.040** (basis €720) · was 16 off à €44 | 11 off · 1 ord · **€770** (basis €550) · was 11 off à €35 |
-| Uitvalscherm | uit (was 2 off) | uit (was 1 off) | uit (was 1 off) | 3 off · 0 ord · **€0** (basis €0) · was 3 off | 4 off · 0 ord · **€0** (basis €0) · was 4 off | 11 off · 1 ord · **€2.145** (basis €1.540) · was 11 off | 20 off · 2 ord · **€2.500** (basis €1.800) · was 20 off | 17 off · 2 ord · **€2.295** (basis €1.615) · was 17 off |
+| Markiezen | uit (was 1 off à €0) | uit (was 0 off à €0) | uit (was 2 off à €0) | uit (was 2 off à €0) | uit (was 5 off à €0) | 9 off · 1 ord · **€945** (basis €675) · was 9 off à €40 | 16 off · 2 ord · **€1.040** (basis €720) · was 16 off à €44 | 11 off · 1 ord · **€770** (basis €550) · was 11 off à €35 |
+| Uitvalscherm | uit (was 2 off) | uit (was 1 off) | uit (was 1 off) | uit (was 3 off) | uit (was 4 off) | 11 off · 1 ord · **€2.145** (basis €1.540) · was 11 off | 20 off · 2 ord · **€2.500** (basis €1.800) · was 20 off | 17 off · 2 ord · **€2.295** (basis €1.615) · was 17 off |
 | Zonwering buiten | uit (was 3 off) | uit (was 4 off) | uit (was 3 off) | uit (was 6 off) | uit (was 7 off) | uit (was 15 off) | uit (was 16 off) | uit (was 29 off) |
 | Voorraadscherm | uit (was 2 off) | uit (was 2 off) | uit (was 7 off) | uit (was 8 off) | uit (was 25 off) | uit (was 87 off) | uit (was 143 off) | uit (was 169 off) |
-| **totaal Meta** | **190 off · 10 ord · max €8.155 (basis €5.955)** | **208 off · 11 ord · max €9.280 (basis €6.760)** | **146 off · 8 ord · max €4.470 (basis €3.170)** | **346 off · 20 ord · max €24.150 (basis €16.735)** | **382 off · 23 ord · max €23.820 (basis €16.800)** | **606 off · 43 ord · max €51.280 (basis €36.380)** | **704 off · 52 ord · max €39.440 (basis €28.160)** | **767 off · 55 ord · max €46.270 (basis €32.235)** |
+| **totaal Meta** | **190 off · 10 ord · max €8.155 (basis €5.955)** | **208 off · 11 ord · max €9.280 (basis €6.760)** | **146 off · 8 ord · max €4.470 (basis €3.170)** | **343 off · 20 ord · max €24.150 (basis €16.735)** | **373 off · 22 ord · max €21.520 (basis €15.150)** | **606 off · 43 ord · max €51.280 (basis €36.380)** | **704 off · 52 ord · max €39.440 (basis €28.160)** | **767 off · 55 ord · max €46.270 (basis €32.235)** |
 
 **Meta: okt-mei per productgroep** (verwacht bij regel B; netto = marge − spend, vóór lasten)
 
@@ -209,11 +211,11 @@ Maandindex (marge per online-offerte t.o.v. seizoensgemiddelde): okt 0.89 · nov
 | Screens | 462 | 26 | €45.668 | €21.610-€31.260 | €24.058 / €14.408 | 447 / 25 / €46.851 / €13.265 / €33.586 |
 | Pergola | 578 | 8 | €17.300 | €9.020-€12.405 | €8.280 / €4.895 | 771 / 10 / €23.240 / €14.089 / €9.150 |
 | Raamdecoratie | 70 | 13 | €13.822 | €6.965-€9.710 | €6.857 / €4.112 | 50 / 10 / €12.753 / €10.066 / €2.687 |
-| Markiezen | 41 | 5 | €7.246 | €3.595-€5.055 | €3.651 / €2.191 | 46 / 6 / €11.410 / €1.448 / €9.962 |
-| Uitvalscherm | 55 | 6 | €10.305 | €4.955-€6.940 | €5.350 / €3.365 | 59 / 6 / €10.949 / ≥€0 / ? |
+| Markiezen | 36 | 5 | €4.064 | €1.945-€2.755 | €2.119 / €1.309 | 46 / 6 / €11.410 / €1.448 / €9.962 |
+| Uitvalscherm | 48 | 6 | €10.305 | €4.955-€6.940 | €5.350 / €3.365 | 59 / 6 / €10.949 / ≥€0 / ? |
 | Zonwering buiten | 0 | 0 | €0 | €0-€0 | €0 / €0 | 83 / 5 / €11.077 / ≥€0 / ? |
 | Voorraadscherm | 0 | 0 | €0 | €0-€0 | €0 / €0 | 443 / 8 / €15.163 / ≥€0 / ? |
-| **totaal** | 3349 | 223 | €292.945 | €146.195-€206.865 | €146.750 / €86.080 | 3885 / 208 / €299.858 / ≥€136.221 / - |
+| **totaal** | 3337 | 222 | €289.764 | €144.545-€204.565 | €145.219 / €85.199 | 3885 / 208 / €299.858 / ≥€136.221 / - |
 
 **Lezen.**
 - Okt-mei per kanaal: Google basis €177k / max €247k (2.372 offertes, 250 orders, €352k marge), Meta basis €146k / max €207k (3.349 offertes, 223 orders, €293k marge). Basis = het budgetadvies (§5); max = tot waar het mag zolang de leads onder het plafond blijven.

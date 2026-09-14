@@ -28,6 +28,10 @@
   (okt-mei) doel/plafond/stop (regel B op online-BE × maandindex), verwachte offertes/orders, basis (×doel) en max spend (×plafond), werkelijk
   25/26 per categorie (Meta per campagne, Google jan-mei). Rapport §4d + pagina §3 vervangen. Totaal okt-mei: Google basis 177k/max 247k,
   Meta basis 146k/max 207k. Google-pergola hele jaar uit (0/197 online in lente), Meta-rolluiken okt-nov was €88-104/online-offerte vs plafond €55.
+- 14-09 12:50 Daimy: "maak pdf, stuur Telegram, moet 100% zeker" → oplevercheck: totalen opnieuw uit jaar-cat.js/forecast.js gedraaid en tegen
+  de tekst gelegd (Google basis 177.370/max 247.130, Meta 146.195/206.865, resultaat 83.673 → 121.527 / 155.573); pagina-sectie 1 herbouwd op
+  regel B (oude 35%-tabel weg), KPI Meta-kaart gecorrigeerd (okt-nov 40/55/75-80, niet 40/70/100), cellen <40 offertes gemarkeerd "klein",
+  Meta markiezen/uitvalscherm winter uit. PDF via Playwright (A4 liggend, 6 p.): docs/winter-advertentieplan-2026.pdf, per sendDocument verstuurd.
 - Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
@@ -62,6 +66,13 @@
   kaleEventId mee. Record inmeet-boekingen.json: agendaVia bookings, outlookEventId=Bookings-id, kaleEventId bewaard. Geen klantmail.
   Recept: scratch migreer-1.js (stap 1-5, stap 5 external_id kan weg) + migreer-1b.js (6-9). Wacht op V7 Daimy → dan de andere 7.
   LET OP: HANDOFF wordt ook door een andere sessie (winter-advertentieplan) geschreven; eerdere regels van dit blok raakten kwijt.
+- 14-09 ~11:50Z Daimy "staat goed in bookings, zet de rest er ook in" → scratch migreer-alle.js: Van der Wal, Badloe, Van Eeden, Guijt,
+  Dunk, Kroon, Tutupoly ALLE 7 OK (Bookings optOut true, staff Patrick, kale events categorie GEMIGREERD, records bijgewerkt,
+  geen klantmail in sent items). Sync-run erna: nieuw 0, wees 0 (fouten: 2 = pre-existing). Alle 8 Sunny-boekingen Patrick nu in Bookings.
+- 14-09 Daimy: Planado-wachtwoord Patrick → #263275639764ug. API PATCH /v2/users gaf 200 maar onverifieerbaar (web-login uit voor
+  Patrick), daarom ook via beheer-UI (scratch planado-user-pw.js, login daimy@) opgeslagen zonder fout. Memory credentials bijgewerkt.
+- OPEN: V4 = de 24 OK-afspraken van Joey → Patrick (recept Paap: Graph PATCH staffMemberIds + optOutOfCustomerEmail:true, sync volgt;
+  notities-parser is nu NL+EN). Lijst: docs/controlelijst-joey-patrick-2026-09-14.md, bak OK minus Paap.
 
 ## 2026-09-09 — Vestigingsonderzoek 4 winkels (175-250 m²) KLAAR
 - Vraag Daimy: geografische vergelijking met Rijswijk, beste plekken voor 4 winkels op Sonty-data + koopkracht/koopwoningen.

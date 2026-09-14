@@ -11,8 +11,8 @@ Vervangt de Google-notitie van 04-09 (docs/google-ads-winterplan-2026.md) als he
 - **Twee categorieën aan vanaf de tweede week januari:** knikarmschermen (Google + Meta vroegboek), uitvalschermen (meeliften in knikarm-campagne). Okt t/m dec halen ze vrijwel niets (knikarm okt-jan 10 orders op 88 Google-offertes; Meta 0 op 37).
 - **Eén test, klein:** raamdecoratie binnen met de showroom als CTA (slaging 22-27%, maar cel klein).
 - **Uit:** Google-pergola (1 order op 126 winteroffertes), markiezen nov-jan, eigen voorraadscherm-campagne, Meta-screens zodra boven €30 per lead.
-- **Max CPA (per offerte in de sheet):** Google gemiddeld €65, Meta gemiddeld €40. Per categorie in §3. Harde stop = plafond × 1,4.
-- **Budget:** Google €73k + Meta €66k over okt-feb (≈ €28k/mnd), december het laagst. Vorige winter was het ≈ €160-170k; verschuiving weg van Meta-rolluiken (te duur) naar Google rolluiken/screens.
+- **Max CPA (per offerte in de sheet), per maand in §4.** Okt-nov (verlies minimaliseren, team aan het werk): Google rolluiken doel €90-100 / plafond €125-140 / stop €175-200, Meta rolluiken €40 / €70 / €100. December: de helft. Jan-feb (winst per lead, montage valt in vol voorjaar): Google rolluiken €45-60 / €55-75 / €75-105, Meta €30-40 / €40-50 / €55-70.
+- **Budget:** €106k (bij doel-CPA) tot €144k (bij plafond) over okt-feb: okt €22-30k, nov €21-29k, dec €11-15k, jan €27-35k, feb €25-34k (§4). Google €61-101k, Meta €45-66k. Vorige winter ≈ €160-170k. Zwaartepunt naar okt-nov, want die orders worden in dec-jan gemonteerd (team op 24-32%); jan-feb-orders landen in mrt-apr (100-123%).
 
 ## 2. Wat de sheet zegt over winter 25/26 (okt-feb), per kanaal per maand
 
@@ -85,21 +85,104 @@ Als de generieke Meta-spend (€9.646) naar offerte-aandeel over de categorieën
 
 December is overal de zwakste maand. Knikarm doet vóór januari niets. Pergola-Meta-orders komen in alle maanden behalve december.
 
-## 4. Budget per maand (advies)
+## 4. Per maand: max CPA en budget (bijgewerkt 14-09 middag na "heb je goed gekeken?" en "verlies minimaliseren, personeel aan het werk houden")
 
-| maand | Google | Meta | totaal | toelichting |
-|---|---|---|---|---|
-| okt | €13k | €12k | €25k | woonmaand; Google rolluiken/screens/PMax; Meta rolluiken ≤€45 + pergola ≤€25 + showroom-test |
-| nov | €15k | €12k | €27k | sterkste wintermaand op conversie (Google 15%) |
-| dec | €10k | €7k | €17k | biedingen −20% vanaf 8 dec; Meta op minimum (vorig jaar −€5.300 op €17k) |
-| jan | €16k | €15k | €31k | vanaf 2e week: knikarm aan (Google + Meta vroegboek) |
-| feb | €19k | €20k | €39k | piekmaand rolluiken/knikarm/screens; pergola en markiezen Google weer aan |
-| **winter** | **€73k** | **€66k** | **€139k** | vorige winter ≈ €160-170k (Meta €87k + Google €33k jan-feb + okt-dec onbekend) |
+### 4a. Twee correcties op de eerste versie
 
-Verdeling Google per maand (richting): PMax 45%, rolluiken 20%, screens 18%, plaatsen/branding/remarketing 10%, knikarm 0% tot jan dan 10%. "Straal" (€6,6k jan-feb 2026) blijft onbekend (V2 van 04-09), tot dan niet meer dan €1.500/mnd.
-Verdeling Meta: rolluiken 55%, pergola 15%, retargeting 10%, showroom/raamdeco 10%, knikarm vanaf jan 15% (ten koste van rolluiken).
+1. **Showroom zat in de cijfers.** Kolom kanaal = Winkel: showroomklanten die "Google" of "Instagram" als afkomst opgeven converteren 49-63% en trokken de plafonds omhoog. Online-only is de conversie Google 11% (marge per offerte €142 i.p.v. €189) en Meta 6% (€81 i.p.v. €108). Ads brengen wél mensen naar de showroom (afkomst winkelklanten: Google 102, Instagram 94), dus die orders helemaal wegstrepen klopt ook niet. Daarom per categorie per maand drie getallen: **doel** (hierop bieden), **plafond** (tot hier aantoonbaar goed) en **stop** (daarboven uit).
+2. **Het doel is niet winst per lead maar verlies minimaliseren en het team aan het werk houden** (Daimy 14-09). De vaste lasten (€64-92k per wintermaand) zijn er hoe dan ook; elke offerte die minder kost dan zijn productmarge verkleint het verlies. Dat vraagt een ruimere regel dan 35%.
 
-Het geld is niet de schaarse factor, het plafond is: zolang een categorie onder het plafond blijft mag het budget omhoog, zodra de kosten per offerte twee weken boven het plafond zitten gaat het budget 30% omlaag, boven de harde stop gaat de campagne uit. Dat is de hele sturing.
+### 4b. Teambezetting: waar het werk ontbreekt
+
+| maand | orders (alle kanalen) | offertes | lasten | lasten/order | bezetting t.o.v. ~150 orders/mnd (35/week) |
+|---|---|---|---|---|---|
+| sep 25 | 81 | 661 | €95.000 | €1.173 | 54% |
+| okt 25 | 48 | 390 | €91.900 | €1.915 | 32% |
+| nov 25 | 48 | 375 | €83.899 | €1.748 | 32% |
+| dec 25 | 36 | 377 | €64.000 | €1.778 | 24% |
+| jan 26 | 69 | 646 | €82.500 | €1.196 | 46% |
+| feb 26 | 84 | 795 | €86.749 | €1.033 | 56% |
+| mrt 26 | 185 | 1.499 | €106.096 | €573 | 123% |
+| apr 26 | 150 | 1.592 | €108.214 | €721 | 100% |
+
+Okt-dec draait het team op een kwart tot een derde van de zomercapaciteit, terwijl de lasten per maand vrijwel gelijk blijven. Dat is het verlies. Levertijd is 8-10 weken (kennisbank): **orders uit okt-nov worden in dec-jan gemonteerd, de leegste maanden; orders uit jan-feb landen in mrt-apr, als het team al op 100-123% zit.** Extra ads in jan-feb houden dus niemand aan het werk in de winter, ze verzwaren het voorjaar.
+
+### 4c. De regel per maand
+
+- **Okt, nov, dec: regel B (verlies minimaliseren).** Doel = 50%, plafond = 70%, stop = 100% van de productmarge per online-offerte (showroomorders zijn upside, niet ingerekend). Boven het plafond blijft een offerte bijdragen, maar steeds minder; boven stop kost hij geld.
+- **Jan, feb: regel A (winst per lead).** Doel = 35% online, plafond = 35% incl. showroom, stop = 50% incl. showroom. Montage van deze orders valt in het volle voorjaar.
+- Maandverschil via één index per kanaal (marge per online-offerte in die maand t.o.v. het wintergemiddelde, beide winters, begrensd 0,6-1,3; Google okt 1,15 · nov 1,30 · dec 0,60 · jan 1,16 · feb 0,82; Meta 0,89 · 0,89 · 0,60 · 1,30 · 1,03). Losse maandcellen per categorie (5-70 offertes) zijn te klein voor een eigen conversie.
+- Budget = verwachte offertes (volume 25/26 × groeifactor: okt-dec Google rolluiken/screens ×1,5, Meta-rolluiken ×1,0; jan-feb Google ×1,3, Meta-rolluiken ×0,8-0,9) × doel tot × plafond. Scripts: scratchpad winter-maand.js, winter-maand2.js (A), winter-maand2b.js (B), fragC.js.
+
+**Google: doel / plafond / stop per sheet-offerte** (okt-dec regel B, jan-feb regel A)
+
+| categorie | BE online / incl. winkel | okt | nov | dec | jan | feb |
+|---|---|---|---|---|---|---|
+| Rolluiken | €154 / €184 | 90 / 125 / 175 | 100 / 140 / 200 | 45 / 65 / 95 | 60 / 75 / 105 | 45 / 55 / 75 |
+| Screens | €154 / €271 | 90 / 125 / 175 | 100 / 140 / 200 | 45 / 65 / 90 | 60 / 110 / 155 | 45 / 75 / 110 |
+| Zonwering buiten | €267 / €275 | 155 / 215 / 305 | 175 / 245 / 350 | uit: 80 / 110 / 160 | 110 / 110 / 160 | 75 / 80 / 110 |
+| Knikarmscherm | €130 / €241 | 75 / 105 / 150 | 85 / 120 / 170 | 40 / 55 / 80 | 55 / 95 / 140 | 35 / 70 / 100 |
+| Uitvalscherm | €225 / €225 | 130 / 180 / 260 | 145 / 205 / 295 | uit: 70 / 95 / 135 | 90 / 90 / 130 | 65 / 65 / 90 |
+| Raamdecoratie | €150 / €228 | 85 / 120 / 170 | 100 / 135 / 195 | 45 / 65 / 90 | 60 / 90 / 130 | 45 / 65 / 95 |
+| Voorraadscherm | €136 / €136 | 80 / 110 / 155 | 90 / 125 / 175 | 40 / 55 / 80 | 55 / 55 / 80 | 40 / 40 / 55 |
+| Markiezen | €20 / €65 | 10 / 15 / 25 | 15 / 20 / 25 | 5 / 10 / 10 | uit: 10 / 25 / 35 | 5 / 20 / 25 |
+| Pergola | €44 / €43 | uit: 25 / 35 / 50 | uit: 30 / 40 / 55 | uit: 15 / 20 / 25 | 20 / 15 / 25 | 10 / 10 / 20 |
+
+**Google: budget per maand** (verwachte offertes × doel tot × plafond)
+
+| categorie | okt | nov | dec | jan | feb | winter |
+|---|---|---|---|---|---|---|
+| Rolluiken | 93 off · €8.370-€11.625 | 84 off · €8.400-€11.760 | 83 off · €3.735-€5.395 | 112 off · €6.720-€8.400 | 122 off · €5.490-€6.710 | €32.715-€43.890 |
+| Screens | 29 off · €2.610-€3.625 | 21 off · €2.100-€2.940 | 35 off · €1.575-€2.275 | 44 off · €2.640-€4.840 | 62 off · €2.790-€4.650 | €11.715-€18.330 |
+| Zonwering buiten | 7 off · €1.085-€1.505 | 1 off · €175-€245 | uit | 5 off · €550-€550 | 3 off · €225-€240 | €2.035-€2.540 |
+| Knikarmscherm | 10 off · €750-€1.050 | 7 off · €595-€840 | 11 off · €440-€605 | 36 off · €1.980-€3.420 | 60 off · €2.100-€4.200 | €5.865-€10.115 |
+| Uitvalscherm | 3 off · €390-€540 | 2 off · €290-€410 | uit | 6 off · €540-€540 | 10 off · €650-€650 | €1.870-€2.140 |
+| Raamdecoratie | 11 off · €935-€1.320 | 5 off · €500-€675 | 11 off · €495-€715 | 5 off · €300-€450 | 5 off · €225-€325 | €2.455-€3.485 |
+| Voorraadscherm | 4 off · €320-€440 | 1 off · €90-€125 | 2 off · €80-€110 | 16 off · €880-€880 | 22 off · €880-€880 | €2.250-€2.435 |
+| Markiezen | 1 off · €10-€15 | 2 off · €30-€40 | 2 off · €10-€20 | uit | 11 off · €55-€220 | €105-€295 |
+| Pergola | uit | uit | uit | 12 off · €240-€180 | 37 off · €370-€370 | €610-€550 |
+| vast (branding / remarketing) | €300 | €300 | €300 | €300 | €300 | €1.500 |
+| **totaal Google** | **158 off · €14.770-€20.420** | **123 off · €12.480-€17.335** | **144 off · €6.635-€9.420** | **236 off · €14.150-€19.560** | **332 off · €13.085-€18.545** | **€61.120-€85.280** |
+
+**Meta: doel / plafond / stop per sheet-offerte** (okt-dec regel B, jan-feb regel A)
+
+| categorie | BE online / incl. winkel | okt | nov | dec | jan | feb |
+|---|---|---|---|---|---|---|
+| Rolluiken | €87 / €111 | 40 / 55 / 75 | 40 / 55 / 80 | 25 / 35 / 50 | 40 / 50 / 70 | 30 / 40 / 55 |
+| Pergola | €31 / €60 | 15 / 20 / 25 | 15 / 20 / 25 | 10 / 15 / 20 | 15 / 25 / 40 | 10 / 20 / 30 |
+| Knikarmscherm | €125 / €201 | 55 / 80 / 110 | 55 / 80 / 110 | 35 / 50 / 75 | 55 / 90 / 130 | 45 / 70 / 105 |
+| Raamdecoratie | €192 / €197 | 85 / 120 / 170 | 85 / 120 / 170 | 60 / 80 / 115 | 85 / 90 / 130 | 70 / 70 / 100 |
+| Screens | €89 / €86 | 40 / 55 / 80 | 40 / 55 / 80 | 25 / 35 / 55 | 40 / 40 / 55 | 30 / 30 / 45 |
+
+**Meta: budget per maand** (verwachte offertes × doel tot × plafond)
+
+| categorie | okt | nov | dec | jan | feb | winter |
+|---|---|---|---|---|---|---|
+| Rolluiken | 99 off · €3.960-€5.445 | 104 off · €4.160-€5.720 | 78 off · €1.950-€2.730 | 154 off · €6.160-€7.700 | 172 off · €5.160-€6.880 | €21.390-€28.475 |
+| Pergola | 70 off · €1.050-€1.400 | 76 off · €1.140-€1.520 | 41 off · €410-€615 | 100 off · €1.500-€2.500 | 102 off · €1.020-€2.040 | €5.120-€8.075 |
+| Knikarmscherm | 2 off · €110-€160 | 3 off · €165-€240 | 3 off · €105-€150 | 24 off · €1.320-€2.160 | 50 off · €2.250-€3.500 | €3.950-€6.210 |
+| Raamdecoratie | 3 off · €255-€360 | 11 off · €935-€1.320 | 3 off · €180-€240 | 13 off · €1.105-€1.170 | 13 off · €910-€910 | €3.385-€4.000 |
+| Screens | 20 off · €800-€1.100 | 23 off · €920-€1.265 | 23 off · €575-€805 | 20 off · €800-€800 | 31 off · €930-€930 | €4.025-€4.900 |
+| vast (retargeting) | €1.500 | €1.500 | €1.500 | €1.500 | €1.500 | €7.500 |
+| **totaal Meta** | **194 off · €7.675-€9.965** | **217 off · €8.820-€11.565** | **148 off · €4.720-€6.040** | **311 off · €12.385-€15.830** | **368 off · €11.770-€15.760** | **€45.370-€59.160** |
+
+**Samen per maand**
+
+| maand | regel | Google | Meta | totaal basis | totaal max | vorige winter | teambezetting 25/26 |
+|---|---|---|---|---|---|---|---|
+| okt | B verlies minimaliseren | €14.770-€20.420 | €7.675-€9.965 | €22.445 | €30.385 | Meta €14.651 + Google ? | 32% (48 orders) |
+| nov | B verlies minimaliseren | €12.480-€17.335 | €8.820-€11.565 | €21.300 | €28.900 | Meta €14.562 + Google ? | 32% (48) |
+| dec | B verlies minimaliseren | €6.635-€9.420 | €4.720-€6.040 | €11.355 | €15.460 | Meta €17.315 + Google ? | 24% (36) |
+| jan | A winst per lead | €14.150-€19.560 | €12.385-€15.830 | €26.535 | €35.390 | Meta €19.284 + Google €15.044 | 46% (69) |
+| feb | A winst per lead | €13.085-€18.545 | €11.770-€15.760 | €24.855 | €34.305 | Meta €21.334 + Google €17.862 | 56% (84) |
+| **winter** | | | | **€106.490** | **€144.440** | Meta €87.146 + Google ≥€32.905 | 285 orders, €409k lasten |
+
+**Lezen.**
+- Totaal okt-feb €106k (bij doel) tot €144k (bij plafond); vorige winter ≈ €160-170k. Het geld verschuift naar okt-nov (nu €22-30k/mnd tegen ≈ €28k vorig jaar, maar met Google-rolluiken/screens erbij i.p.v. Meta-rolluiken op €78) en weg uit jan-feb.
+- Regel B in okt-nov betekent: Google-rolluiken mag tot €125-140 per offerte kosten en Meta-rolluiken tot €70. Vorige winter zat Meta-rolluiken op €78, dus in okt-nov is dat bijna goed, in december (plafond €45) niet.
+- Google Ads-doel-CPA in het platform zelf = doel × 0,75.
+- Budget is een gevolg, geen doel: op of onder doel mag omhoog tot het volume opdroogt; twee weken boven plafond → −30%; boven stop → uit. Beoordelen op kosten per sheet-offerte per week, op akkoorden pas na 4 weken.
+- Ads zijn niet het enige middel voor bezetting: het winteronderzoek van 16-08 wees op de berg verkocht-nog-niet-geplaatst werk en de teken-nu-campagne (prijs vast, inmeten later). Die vullen dec-jan zonder advertentiekosten en horen naast dit plan.
 
 ## 5. Sturing per week
 

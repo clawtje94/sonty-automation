@@ -10,6 +10,14 @@
   Meta-rolluiken kostte €78/offerte (2x plafond) → hard plafond €40-45; Meta-pergola €23/offerte, +€14k netto → AAN (correctie op 04-09).
   Google-pergola uit okt-half jan, markiezen uit nov-jan, knikarm (Google+Meta) aan vanaf 2e week jan. Budget okt-feb Google €73k + Meta €66k.
 - Vaste lasten winter €1.435/order, vrijwel gelijk aan productmarge/order €1.485 → winterorders dekken op volle kostprijs net; ads beoordeeld op bijdrage (35%-regel).
+- 14-09 15:xx Daimy: "heb je goed gekeken? advies per maand cpa en budget" → tweede controle: kanaal=Winkel zat in de cijfers (showroomklanten
+  met afkomst Google/Instagram converteren 49-63%). Nu doel (online-only 35%) / plafond (incl. winkel 35%) / stop (50%) per categorie per maand
+  (maandindex per kanaal) + budget bottom-up: €84k (doel) - €113k (plafond) okt-feb, Google €47-65k, Meta €37-48k; eerste kader €139k was te hoog
+  (Meta-rolluiken). §4 rapport + pagina bijgewerkt. Scripts scratchpad winter-maand.js/winter-maand2.js/frag.js.
+- 14-09 Daimy: "ook verlies minimaliseren en personeel in de winter aan het werk houden" → teambezetting 25/26: okt 32%, nov 32%, dec 24%,
+  jan 46%, feb 56% (t.o.v. ~150 orders/mnd), mrt 123%. Levertijd 8-10 wk ⇒ okt-nov-orders = montage dec-jan. Regel: okt-dec B (doel 50%/
+  plafond 70%/stop 100% productmarge per online-offerte), jan-feb A (35/35/50). Budget okt €22-30k, nov €21-29k, dec €11-15k, jan €27-35k,
+  feb €25-34k = €106-144k. Rapport §4 + pagina vervangen. WACHT OP DAIMY (V1 Google-spend okt-dec 2025, V2 akkoord regel/budget).
 - Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord budgetkader + Meta-pergola aan.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD

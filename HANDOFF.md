@@ -18,7 +18,13 @@
   jan 46%, feb 56% (t.o.v. ~150 orders/mnd), mrt 123%. Levertijd 8-10 wk ⇒ okt-nov-orders = montage dec-jan. Regel: okt-dec B (doel 50%/
   plafond 70%/stop 100% productmarge per online-offerte), jan-feb A (35/35/50). Budget okt €22-30k, nov €21-29k, dec €11-15k, jan €27-35k,
   feb €25-34k = €106-144k. Rapport §4 + pagina vervangen. WACHT OP DAIMY (V1 Google-spend okt-dec 2025, V2 akkoord regel/budget).
-- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord budgetkader + Meta-pergola aan.
+- 14-09 Daimy: "doorrekenen tot mei 2027, per maand per kanaal, doel meer winst" → §5 rapport + pagina §4: jaar-stats.js + forecast.js (scratchpad).
+  Werkelijk 25/26 okt-mei resultaat €83.673 (okt-dec −134k, jan-feb −11k, mrt-mei +228k; Google okt-dec spend aangenomen 13k). Advies budget
+  okt-mei Google €175k + Meta €154k (was 166+166). Conservatief (zelfde conv+CPL als 25/26) +€38k → €122k; plafonds gehaald +€72k → €156k.
+  Regel nu B in ALLE maanden (jan-feb op A kostte winst). Hefboom = lente (Meta apr-mei €27-29/lead vs BE €70-76), rem = montagecapaciteit.
+  Lente uit: Google-pergola eigen campagne (0/197 online), voorraadscherm eigen campagne. V3 nieuw: capaciteit bijzetten mrt-jun?
+- Adresvraag Daimy (WA 12:30): Robin du Chatinier = Gripp 99516, Van Boisotring 66, 2722 AD Zoetermeer, 06 14333845 → via Telegram gestuurd.
+- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
 - Feiten (live gemeten 14-09): 71 komende Joey-inmetingen (100 dagen) zijn ALLEMAAL Bookings-afspraken (organizer SontyMontage1@,
@@ -4203,3 +4209,5 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
 - 12-09: Merk SUNNY (klasse 35/37) indienen bij BOIP: aanvraagtekst klaar in docs/merk-sunny-onderzoek-2026-09.md. Blokkers voor Claude: reCAPTCHA + mailactivatie bij My BOIP-account, iDEAL-betaling. Wacht op Daimy: V1 aanvrager (Sonty B.V. KvK 84113774 of KvK 70927618), V2 My BOIP-account aanmaken en login delen; daarna vult Claude de aanvraag tot de betaalstap.
 - 12-09: BOIP-aanvraag SUNNY (kl. 35+37, €271) volledig ingevuld en opgeslagen in My BOIP; Daimy moet alleen nog akkoord vinken + betalen. Zie docs/merk-sunny-onderzoek-2026-09.md.
 - 13-09: Merken ingediend bij BOIP: SUNNY 1557740 (12-09), SONTY 1557755 (13-09). Volgende: formele toets 2-4 wk, oppositietermijn 2 mnd; mail van BOIP in de gaten houden.
+- 14-09 WA-OPDRACHT 1 uitgevoerd: adres Robin Du Chatinier (Gripp company.get): Van Boisotring 66, 2722 AD Zoetermeer, 06 14333845, offerte 6162 (aanbetaling betaald) → naar Daimy via WA (bezorgd) + Telegram.
+- 14-09 GROEP-OPZOEKEN (Daimy: "als iemand in de groep om een nummer of adres vraagt met @sunny mag je die ook geven"): lib/collega-antwoord.js: nieuwe tool gripp_klant (company.get op naam → adres/postcode/plaats/telefoon/email) + export isOpzoekvraag(tekst) (adres/nummer/telefoon/mail + van/bij/voor). wa-luisteraar.js beantwoordInGroep: opzoekvraag aan Sunny → antwoordCollega (feiten, geen roast, hint "alleen de gevraagde gegevens"), telt niet mee voor roast-dagmax en omzeilt dat max; killswitch data/wa-groep-antwoord-uit.txt geldt nog. Offline getest: "@sunny wat is het adres van robin du chatinier?" → "Van Boisotring 66, 2722 AD Zoetermeer." Daemon herstart.

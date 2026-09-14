@@ -36,7 +36,11 @@
   en docs/briefing-meta-ads-2026-27.html/.pdf (per productgroep per maand budget + doel/max/stop, regels, verwachting; Google-CPA ×0,75).
   Generator scripts/ads-briefing-2026-27.js (leest data/ads-jaar-cat-2026-27.json uit scripts/ads-jaar-cat-2026-27.js). Totaal okt-mei Google
   €179.800, Meta €156.400. Beide pdf's via Telegram gestuurd; V4 = Daimy checkt de regels-lijst vóór doorsturen.
-- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings.
+- 14-09 13:20 Daimy: "welke prijsboeken en kortingsregels, om aan nieuwe medewerker te vertellen" → docs/prijsboeken-en-kortingen-uitleg.html/.pdf
+  (Telegram gestuurd). Live gemeten: S-37 120x140 io = (716+76)x1,20 + 195 = €1.145,40; sunmasterMarkup 1,2 sinds 3 aug (memory + checklist
+  sonty-website 777177b bijgewerkt, daar stond nog 1,10). Korting = maandactie 15% (lib/acties/maandactie.ts, KV crm:maandacties) over alles
+  incl. montage; voorraad 20% nooit stapelen; buren max 20%; +2,5-5% discretionair. V5: kennisbank-tegenstrijdigheid, Roma netto/bruto.
+- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings, V5 prijs/korting-checks.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
 - Feiten (live gemeten 14-09): 71 komende Joey-inmetingen (100 dagen) zijn ALLEMAAL Bookings-afspraken (organizer SontyMontage1@,
@@ -75,8 +79,31 @@
   geen klantmail in sent items). Sync-run erna: nieuw 0, wees 0 (fouten: 2 = pre-existing). Alle 8 Sunny-boekingen Patrick nu in Bookings.
 - 14-09 Daimy: Planado-wachtwoord Patrick → #263275639764ug. API PATCH /v2/users gaf 200 maar onverifieerbaar (web-login uit voor
   Patrick), daarom ook via beheer-UI (scratch planado-user-pw.js, login daimy@) opgeslagen zonder fout. Memory credentials bijgewerkt.
-- OPEN: V4 = de 24 OK-afspraken van Joey → Patrick (recept Paap: Graph PATCH staffMemberIds + optOutOfCustomerEmail:true, sync volgt;
-  notities-parser is nu NL+EN). Lijst: docs/controlelijst-joey-patrick-2026-09-14.md, bak OK minus Paap.
+- 14-09 ~12:30Z Daimy "zet die 24 van joey ook over naar patrick" → scratch zet-24.js --execute: 25 Bookings-afspraken (24 OK-regels;
+  Sylvia Jansen di 22-09 10:40 staat 2x in Bookings, beide omgezet) staffMemberIds→Patrick + optOutOfCustomerEmail:true, alle GEZET.
+  Outlook direct: 34 Inmeten Sonty-events op adviseur1@ (25 + Paap + 8 migraties), Joey nog 25 (KRAP/NIET-bak). Sent items Bookings-
+  mailbox: geen klantmail. Planado volgt via sync (10 min) — CONTROLEREN: ~25x "toewijzing gewijzigd", 0x "notities verwijderd".
+  Sylvia-dubbel: Daimy heeft hem zelf uit Bookings verwijderd (14-09), geen actie.
+- 14-09 ~12:45Z Daimy "alle afspraken van di 15 sep en do 17 sep naar patrick" → scratch dagen-zet.js: 12 Joey-inmetingen (7 op 15-09,
+  5 op 17-09) in Bookings staff→Patrick + optOut true, alle 204. Sjoerds inmetingen die dagen NIET aangeraakt (Haarlem/A'dam-route).
+  Patrick werkt dus al vóór zijn roosterstart 21-09 (rooster startDatum niet aangepast; alleen relevant voor de planner-aanbiedingen).
+  Planado volgt via sync — CONTROLEREN (36 toewijzingen totaal: 24 + 12).
+- 14-09 Daimy "joey zelf niet meer inplannen voor inmeten": planner werkdagenVoor() kent nu stopDatum (rooster), Joey stopDatum
+  2026-09-14 → 0 werkdagen (Sjoerd 15, Patrick 15 v.a. 21-09), tests/eigen-agenda-regressie 6/6; commit gepusht; inmeet-verzoeken +
+  inmeet-dashboard herstart. uuidPlanado Joey blijft (sync/herinneringen resterende 25). Open vraag: Joey ook uit Bookings-dienst halen?
+- 14-09 ~13:10Z INCIDENT + HERSTEL: sync-run na de 24 gaf "nieuw: 19" (en run erna "nieuw: 4" voor 15/17-09): de door Sunny geboekte
+  afspraken hebben rp-jobs; dedup-sleutel tijd+inmeter miste na de staffwissel → 23 dubbele ol-jobs op Patrick (#1470-1492), oude
+  rp-jobs bleven op Joey. Hersteld (scratch fix-dubbel.js + fix-dubbel-2.js): 23 oude rp-jobs → Patrick (notify false), 23 dubbelen
+  verwijderd; 4 rp-jobs 15/17-09 (#447/#468/#469/#474) direct → Patrick. Eindtelling: Joey 27 Outlook-inmetingen = 27 jobs; Patrick
+  46 Outlook-inmetingen, 41 met precies 1 job, 4 "meerdere" = de net verwijderde dubbelen (dump ouder), 1 zonder job = Christian Tam
+  wo 23-09 15:00 (nieuwe Sunny-boeking van vandaag, via Bookings dankzij STAFF-fix — Planado-job ontbreekt, NAKIJKEN).
+  Structurele fix commit: sync zet bij tijd-match een rp-job van een ANDERE inmeter met dezelfde klantnaam om (PATCH assignee) i.p.v.
+  een nieuwe te maken. Notities nergens verloren (0x "notities verwijderd").
+- 14-09 Daimy: "winter, minder inmeetafspraken, niet te ver vooruit plannen anders gaten in dagen" → NOG UITZOEKEN hoe slotzoeker/
+  kiesAanbod kiest (MAX_WACHT_DAGEN, spreiding vs. dagen vullen), voorstel + scenario-run vóór wijziging.
+- 14-09 ~13:40Z controlerun sync na herstel: nieuw 0, bijgewerkt 1 (Christian Tam 23-09 → Patrick, had al ol-job), wees 0,
+  fouten 6 = 2 vaste (ZZP Nouweland/Argent PATCH, pre-existing) + 4x "verfris FOUT 404" (de net verwijderde dubbelen zaten nog in de
+  joblijst van die run; volgende run hoort weer 2 te geven). Eindstand Planado = Outlook voor Joey (27) en Patrick (46).
 
 ## 2026-09-09 — Vestigingsonderzoek 4 winkels (175-250 m²) KLAAR
 - Vraag Daimy: geografische vergelijking met Rijswijk, beste plekken voor 4 winkels op Sonty-data + koopkracht/koopwoningen.

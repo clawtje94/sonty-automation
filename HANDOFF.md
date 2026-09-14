@@ -59,7 +59,10 @@
   Van Eeden) — NIET door deze sessie; geen annuleringsmail in sent items SontyMontage1. Nog 6 dubbel (zelfde tijd+adres als Bookings op
   Patrick): Guijt 22-09 08:00, Van Maastrigt 22-09 09:50, Tutupoly 23-09 12:30, De Haan 24-09 13:25, Beuker 28-09 12:30, Vlek 08-10 08:00.
   V7 aan Daimy: heeft hij ze zelf in Bookings verwijderd? Records inmeet-boekingen.json houden kaleEventId nog (wijst naar weg event).
-- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings, V5 prijs/korting-checks, V7 wie verwijderde 7 kale events / laatste 6.
+- 14-09 ~16:45Z Daimy: "dat was ik (handmatig in Bookings), haal die 6 ook weg" → Bookings-API DELETE op zo'n kale (niet-Bookings) item
+  geeft 500 (scratch verwijder-kale.js, niets verwijderd). Outlook REST DELETE stuurt klant een annulering (attendee), dus NIET gedaan.
+  Gevraagd of Daimy de laatste 6 zelf in Bookings weghaalt (Guijt, Van Maastrigt, Tutupoly, De Haan, Beuker, Vlek) of "doe maar met mail".
+- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings, V5 prijs/korting-checks, V7 laatste 6 kale dubbelen (Daimy zelf of met mail).
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
 - Feiten (live gemeten 14-09): 71 komende Joey-inmetingen (100 dagen) zijn ALLEMAAL Bookings-afspraken (organizer SontyMontage1@,

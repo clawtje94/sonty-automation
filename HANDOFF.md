@@ -46,7 +46,12 @@
   de gemigreerde Bookings-afspraak (kale event categorie GEMIGREERD bewust laten staan; verdwijnt na datum). 5 NOG NIET gemigreerd en dus
   alleen kaal: Quevedo 21-09 09:40Z, Engincicek 21-09 13:20Z, Van Maastrigt 22-09 07:50Z, De Haan 24-09 11:25Z, Vlek 08-10 06:00Z → V6.
   Naam-dubbels: Jeffrey Penning 2x Sjoerd 23-09 10:35Z; Van Leeuwen Patrick 15-09 + Sjoerd 21-09; Sylvia Jansen Patrick 22-09 + Sjoerd 07-10.
-- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings, V5 prijs/korting-checks, V6 5 kale Patrick-boekingen migreren.
+- 14-09 ~16:05Z Daimy: "verwijder de niet-toegewezen dubbele" → NIET gedaan. Gelezen via Outlook REST (.owa-token): 7 kale events (Badloe's is
+  al weg, 404) hebben klant + adviseur1@ als Attendee (Kroon en Guijt Accepted), organizer SontyMontage1@, categorie GEMIGREERD. DELETE =
+  automatische "Geannuleerd"-mail naar klant (Bookings-afspraak stuurde met optOut geen mail) → V7 aan Daimy: A laten staan (weg na datum,
+  laatste 28-09) of B verwijderen + Sunny-WhatsApp "afspraak staat gewoon". Graph met OWA-token = 401 (invalid audience), dus geen /cancel met
+  comment mogelijk via die token. Van Leeuwen = 2 klanten (Leidschendam 15-09 Patrick / Woerden 21-09 Sjoerd), Patrick kan di+do al (Daimy).
+- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings, V5 prijs/korting-checks, V6 5 kale Patrick-boekingen migreren, V7 7 dubbele kale events laten/verwijderen.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
 - Feiten (live gemeten 14-09): 71 komende Joey-inmetingen (100 dagen) zijn ALLEMAAL Bookings-afspraken (organizer SontyMontage1@,

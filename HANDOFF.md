@@ -55,7 +55,11 @@
   sessie (kopie migreer-alle.js in eigen scratchpad): Quevedo 21-09 11:40, Engincicek 21-09 15:20, Van Maastrigt 22-09 09:50, De Haan 24-09
   13:25, Vlek 08-10 08:00 → Bookings op Patrick, optOut true, kale events categorie GEMIGREERD, records bijgewerkt. Sent items ongewijzigd.
   Controle: Bookings 53 op Patrick, 12 zonder medewerker = precies de 12 gemigreerde kale events; sync dry-run nieuw 0 / wees 0.
-- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings, V5 prijs/korting-checks, V7 12 dubbele kale events laten/verwijderen.
+- 14-09 ~16:35Z: van de 12 GEMIGREERD-kale events zijn er 7 verdwenen (Outlook 404: Van der Wal, Kroon, Badloe, Quevedo, Dunk, Engincicek,
+  Van Eeden) — NIET door deze sessie; geen annuleringsmail in sent items SontyMontage1. Nog 6 dubbel (zelfde tijd+adres als Bookings op
+  Patrick): Guijt 22-09 08:00, Van Maastrigt 22-09 09:50, Tutupoly 23-09 12:30, De Haan 24-09 13:25, Beuker 28-09 12:30, Vlek 08-10 08:00.
+  V7 aan Daimy: heeft hij ze zelf in Bookings verwijderd? Records inmeet-boekingen.json houden kaleEventId nog (wijst naar weg event).
+- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings, V5 prijs/korting-checks, V7 wie verwijderde 7 kale events / laatste 6.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
 - Feiten (live gemeten 14-09): 71 komende Joey-inmetingen (100 dagen) zijn ALLEMAAL Bookings-afspraken (organizer SontyMontage1@,

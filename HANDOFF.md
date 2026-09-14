@@ -24,6 +24,10 @@
   Regel nu B in ALLE maanden (jan-feb op A kostte winst). Hefboom = lente (Meta apr-mei €27-29/lead vs BE €70-76), rem = montagecapaciteit.
   Lente uit: Google-pergola eigen campagne (0/197 online), voorraadscherm eigen campagne. V3 nieuw: capaciteit bijzetten mrt-jun?
 - Adresvraag Daimy (WA 12:30): Robin du Chatinier = Gripp 99516, Van Boisotring 66, 2722 AD Zoetermeer, 06 14333845 → via Telegram gestuurd.
+- 14-09 Daimy: "per kanaal per productgroep doel-CPA en max spend goed uitwerken" → scratchpad jaar-cat.js: per kanaal × productgroep × maand
+  (okt-mei) doel/plafond/stop (regel B op online-BE × maandindex), verwachte offertes/orders, basis (×doel) en max spend (×plafond), werkelijk
+  25/26 per categorie (Meta per campagne, Google jan-mei). Rapport §4d + pagina §3 vervangen. Totaal okt-mei: Google basis 177k/max 247k,
+  Meta basis 146k/max 207k. Google-pergola hele jaar uit (0/197 online in lente), Meta-rolluiken okt-nov was €88-104/online-offerte vs plafond €55.
 - Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
@@ -43,6 +47,21 @@
 - Daimy 14-09: alleen vanaf 21-09 en ma-do. Droge controlelijst gedraaid (scratch controlelijst.js → docs/controlelijst-joey-patrick-2026-09-14.md):
   51 Joey-inmetingen, OK 25 / KRAP 11 / NIET 14 / JOEY 1 (Charentestroom blijft bij Joey, Daimy 14-09; blokken >90 min of zonder klantnaam = handmatig) (keten per dag met Patricks 8 bestaande afspraken + reistijd lib/reistijd, klanttijden 08-17,
   NIET-kandidaten vallen uit de keten). Wacht op V3 (alleen OK of ook KRAP) en V1 (proefgeval). NOG NIETS OMGEZET.
+- Daimy 14-09: "25 OK kun je overzetten, eerst 1 als test". PROEF Monique Paap do 24-09 10:00 GEDAAN (~10:17Z): Graph PATCH
+  bookingAppointment staffMemberIds→Patrick + optOutOfCustomerEmail:true (204); Outlook-event zelfde Id (ol-97514bdf742a85fdf21c),
+  deelnemer adviseur1@, geaccepteerd in Patricks agenda; Planado #586 via sync op Patrick (zelfde uuid); sent items Bookings-mailbox:
+  geen klantmail. LES: Bookings herschrijft de body in het ENGELS → notitiesUit() las niets → notities weg; fix commit 5a24303 (NL+EN),
+  verfris-state gewist → notities terug (11:05Z). Andere 24 wachten op Daimy (V4 open).
+- 14-09 BEVINDING: Sunny's 8 boekingen op Patrick (Van der Wal, Badloe, Van Eeden, Guijt, Dunk, Kroon, Tutupoly, Beuker) waren KALE
+  afspraken (inmeet-boeken STAFF kende Patrick niet → "onbekende inmeter"; klant kreeg wel Sunny-bevestiging, geen Bookings-mails).
+  Fix commit 556def5 (Patrick in STAFF) + nl.sonty.inmeet-verzoeken herstart. Daimy: "die moeten ook gewoon in Bookings".
+- 14-09 ~11:25Z PROEF MIGRATIE Beuker ma 28-09 12:30 GEDAAN: Bookings-afspraak (staff Patrick, optOut true, serviceNotes tel+gripp),
+  nieuw event hash ol-9e09c699a09b676d06e2; Planado #1389 ongewijzigd (rp-external_id; sync dedupt op tijd+inmeter; PATCH external_id
+  negeert Planado); kale event NIET verwijderd (klant = deelnemer → Outlook-annulering) maar categorie "GEMIGREERD naar Bookings";
+  commit ed3efd3: sync + dubbel-check slaan die categorie over, dubbel-check INM uit rooster (Patrick), inmeet-mutatie annuleert
+  kaleEventId mee. Record inmeet-boekingen.json: agendaVia bookings, outlookEventId=Bookings-id, kaleEventId bewaard. Geen klantmail.
+  Recept: scratch migreer-1.js (stap 1-5, stap 5 external_id kan weg) + migreer-1b.js (6-9). Wacht op V7 Daimy → dan de andere 7.
+  LET OP: HANDOFF wordt ook door een andere sessie (winter-advertentieplan) geschreven; eerdere regels van dit blok raakten kwijt.
 
 ## 2026-09-09 — Vestigingsonderzoek 4 winkels (175-250 m²) KLAAR
 - Vraag Daimy: geografische vergelijking met Rijswijk, beste plekken voor 4 winkels op Sonty-data + koopkracht/koopwoningen.
@@ -4211,3 +4230,4 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
 - 13-09: Merken ingediend bij BOIP: SUNNY 1557740 (12-09), SONTY 1557755 (13-09). Volgende: formele toets 2-4 wk, oppositietermijn 2 mnd; mail van BOIP in de gaten houden.
 - 14-09 WA-OPDRACHT 1 uitgevoerd: adres Robin Du Chatinier (Gripp company.get): Van Boisotring 66, 2722 AD Zoetermeer, 06 14333845, offerte 6162 (aanbetaling betaald) → naar Daimy via WA (bezorgd) + Telegram.
 - 14-09 GROEP-OPZOEKEN (Daimy: "als iemand in de groep om een nummer of adres vraagt met @sunny mag je die ook geven"): lib/collega-antwoord.js: nieuwe tool gripp_klant (company.get op naam → adres/postcode/plaats/telefoon/email) + export isOpzoekvraag(tekst) (adres/nummer/telefoon/mail + van/bij/voor). wa-luisteraar.js beantwoordInGroep: opzoekvraag aan Sunny → antwoordCollega (feiten, geen roast, hint "alleen de gevraagde gegevens"), telt niet mee voor roast-dagmax en omzeilt dat max; killswitch data/wa-groep-antwoord-uit.txt geldt nog. Offline getest: "@sunny wat is het adres van robin du chatinier?" → "Van Boisotring 66, 2722 AD Zoetermeer." Daemon herstart.
+- 14-09 GROEP-OPZOEKEN FIX (Daimy-test "@sunny adres van Johan Lievaart" → "niet gevonden"): klant stond alleen in Outlook/Planado (inmeten 23-09, Planado 1436), niet in Gripp. grippKlant in lib/collega-antwoord.js zoekt nu Gripp (volledige naam, anders op achternaam) + data/meetbon-planado-jobs-cache.json met adres uit data/planner-adres-cache.json + telefoon uit de omschrijving + NL-tijd, + rpZoek. Offline getest: Lievaart → "Noordeindse Hof 20, Berkel en Rodenrijs, 0647138198, wo 23-09 09:00". Correctie in groep gepost via outbox. Daemon herstart.

@@ -32,7 +32,11 @@
   de tekst gelegd (Google basis 177.370/max 247.130, Meta 146.195/206.865, resultaat 83.673 → 121.527 / 155.573); pagina-sectie 1 herbouwd op
   regel B (oude 35%-tabel weg), KPI Meta-kaart gecorrigeerd (okt-nov 40/55/75-80, niet 40/70/100), cellen <40 offertes gemarkeerd "klein",
   Meta markiezen/uitvalscherm winter uit. PDF via Playwright (A4 liggend, 6 p.): docs/winter-advertentieplan-2026.pdf, per sendDocument verstuurd.
-- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente.
+- 14-09 13:00 Daimy: "simpel plan om door te sturen naar Google Ads-beheerder en Meta Ads-beheerder" → docs/briefing-google-ads-2026-27.html/.pdf
+  en docs/briefing-meta-ads-2026-27.html/.pdf (per productgroep per maand budget + doel/max/stop, regels, verwachting; Google-CPA ×0,75).
+  Generator scripts/ads-briefing-2026-27.js (leest data/ads-jaar-cat-2026-27.json uit scripts/ads-jaar-cat-2026-27.js). Totaal okt-mei Google
+  €179.800, Meta €156.400. Beide pdf's via Telegram gestuurd; V4 = Daimy checkt de regels-lijst vóór doorsturen.
+- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
 - Feiten (live gemeten 14-09): 71 komende Joey-inmetingen (100 dagen) zijn ALLEMAAL Bookings-afspraken (organizer SontyMontage1@,

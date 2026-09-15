@@ -27,6 +27,9 @@ maxv = max(alle + [L["totaal4"]])
 def w(v): return f"{v / maxv * 100:.1f}%"
 med_left = w(mediaan)
 
+def goog(a):
+    return f'<span class="num">{a["google_score"]:.1f}</span> · {a["google_reviews"]} reviews'
+
 def pill(txt, kleur): return f'<span class="pill {kleur}">{html.escape(txt)}</span>'
 
 CSS = (BASE / "marktpositie.css").read_text() if (BASE / "marktpositie.css").exists() else ""
@@ -36,9 +39,9 @@ def row(lab, sub, val, cls=""):
     rows.append(f'<div class="row {cls}"><div class="lab">{lab}<span>{sub}</span></div><div class="track"><div class="bar" style="width:{w(val)}"></div><div class="median" style="left:{med_left}"></div></div><div class="val num">{eur(val)}</div></div>')
 items = [(a["totaal4"], a) for a in A] + [(S["totaal4"], "SONTY"), (L["totaal4"], "LIJST")]
 for v, a in sorted(items, key=lambda x: x[0]):
-    if a == "SONTY": row("Sonty verkoopprijs", "lijst min vaste 15% · Sunmaster Zip Square, Rolluik S-42 · Somfy RS100 io", v, "sonty")
+    if a == "SONTY": row("Sonty verkoopprijs", f"lijst min vaste 15% · Sunmaster Zip Square, Rolluik S-42 · Google {D['sonty']['google_score']:.1f} ({D['sonty']['google_reviews']})", v, "sonty")
     elif a == "LIJST": row("Sonty lijstprijs, ter info", "wordt nooit gerekend", v, "actie")
-    else: row(html.escape(a["naam"]), html.escape(f'{a["plaats"]} · {a["type"]} · {a["screens"]} · {a["montage"]}'), v)
+    else: row(html.escape(a["naam"]), html.escape(f'{a["plaats"]} · {a["type"]} · {a["screens"]} · Google {a["google_score"]:.1f} ({a["google_reviews"]})'), v)
 
 def prijsrij(a, cls=""):
     return (f'<tr class="{cls}"><td>{html.escape(a["naam"])} ({html.escape(a["plaats"])})</td>'
@@ -55,8 +58,8 @@ for a in D["deels"]:
 
 merk = []
 for a in A + D["deels"]:
-    merk.append(f'<tr><td>{html.escape(a["naam"])} ({html.escape(a["plaats"])})</td><td>{html.escape(a["screens"])}</td><td>{html.escape(a["rolluiken"])}</td><td>{html.escape(a["knikarm_merk"])}</td><td>{html.escape(a["motor"])}</td><td>{pill(a["garantie"], a["gar_kleur"])}</td><td>{html.escape(a["levertijd"])}</td></tr>')
-merk.insert(0, '<tr class="sonty"><td>Sonty</td><td>Sunmaster Zip Square / Design</td><td>Sunmaster S-42 / S-37, Roma</td><td>Sunmaster SunEye / SunElite</td><td>Somfy RS100 io · Tahoma € 195</td>' + pill("3 jr montage, 5 jr product, 7 jr motor", "good") + '<td>korter dan dealers</td></tr>')
+    merk.append(f'<tr><td>{html.escape(a["naam"])} ({html.escape(a["plaats"])})</td><td>{html.escape(a["screens"])}</td><td>{html.escape(a["rolluiken"])}</td><td>{html.escape(a["knikarm_merk"])}</td><td>{html.escape(a["motor"])}</td><td>{pill(a["garantie"], a["gar_kleur"])}</td><td>{html.escape(a["levertijd"])}</td><td>{goog(a)}</td></tr>')
+merk.insert(0, '<tr class="sonty"><td>Sonty</td><td>Sunmaster Zip Square / Design</td><td>Sunmaster S-42 / S-37, Roma</td><td>Sunmaster SunEye / SunElite</td><td>Somfy RS100 io · Tahoma € 195</td>' + pill("3 jr montage, 5 jr product, 7 jr motor", "good") + f'<td>korter dan dealers</td><td><strong>{D["sonty"]["google_score"]:.1f} · {D["sonty"]["google_reviews"]} reviews</strong></td></tr>')
 
 page = f"""<title>Marktpositie Sonty</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap">
@@ -75,7 +78,7 @@ page = f"""<title>Marktpositie Sonty</title>
     </ul>
     <ul>
       <li>Wie goedkoper is voert volwaardige merken: Verano, Brustor, Alulux, Rainbow, Roma en Sunmaster zelf. Op merk alleen kan Sonty het verschil niet uitleggen.</li>
-      <li>Waar Sonty wél wint: garantie <strong>3 jaar montage, 5 jaar product, 7 jaar motor</strong> (markt meestal 2 tot 5 jaar), en snelheid: dealers zitten op 6 tot 12 weken en meten soms pas in november in.</li>
+      <li>Waar Sonty wél wint: <strong>{D["sonty"]["google_reviews"]} Google-reviews met {D["sonty"]["google_score"]:.1f}</strong> tegen 7 tot {max(a["google_reviews"] for a in A)} bij de concurrenten (mediaan {int(statistics.median([a["google_reviews"] for a in A]))}), garantie <strong>3 jaar montage, 5 jaar product, 7 jaar motor</strong> (markt meestal 2 tot 5 jaar), en snelheid: dealers zitten op 6 tot 12 weken.</li>
       <li><strong>Advies:</strong> screens en rolluiken 3 tot 5% omlaag naar de Sunmaster-dealerband (rond € 6.300), knikarm SunEye naar rond € 3.250, de 15% als vaste prijs brengen, en garantie plus snelheid als hoofdargument. Uitwerking onderaan.</li>
     </ul>
   </section>
@@ -89,7 +92,7 @@ page = f"""<title>Marktpositie Sonty</title>
 
   <h2>Vier producten incl. montage, per aanbieder</h2>
   <div class="chart">
-    <div class="cap"><span>Balk = totaal voor de vier producten, incl. btw en montage. Stippellijn = middenprijs {eur(mediaan)}.</span><span>Bron: echte offertes en richtprijzen, 10 t/m 15 september.</span></div>
+    <div class="cap"><span>Balk = totaal voor de vier producten, incl. btw en montage. Stippellijn = middenprijs {eur(mediaan)}.</span><span>Bron: echte offertes en richtprijzen, 10 t/m 15 september. Google-score en aantal reviews via Google Maps, {D["google_datum"]}.</span></div>
     {"".join(rows)}
     <p class="note">Richtprijzen (Van Zanten, De Kroon, Ansol) zijn niet bevestigd door een offerte. Zoetermeer solar gerekend met Somfy-motor (met Brel € 6.019). Ruiter: offerte excl. btw, omgerekend.</p>
   </div>
@@ -103,7 +106,7 @@ page = f"""<title>Marktpositie Sonty</title>
 
   <h2>Merken, garantie en levertijd</h2>
   <div class="tablewrap"><table>
-    <thead><tr><th>Aanbieder</th><th>Screens</th><th>Rolluiken</th><th>Knikarm</th><th>Motor · app</th><th>Garantie</th><th>Levertijd</th></tr></thead>
+    <thead><tr><th>Aanbieder</th><th>Screens</th><th>Rolluiken</th><th>Knikarm</th><th>Motor · app</th><th>Garantie</th><th>Levertijd</th><th>Google</th></tr></thead>
     <tbody>{"".join(merk)}</tbody>
   </table></div>
   <p class="note">Motor is bij vrijwel iedereen Somfy io; Brel als goedkoper solar-alternatief bij drie aanbieders. App-bediening is overal een optie van € 149 tot € 199, bij één aanbieder cadeau. Sonty rekent € 195. {len(sunmaster)} van de {len(A)} aanbieders zijn Sunmaster-dealer, net als Sonty.</p>
@@ -112,7 +115,7 @@ page = f"""<title>Marktpositie Sonty</title>
   <div class="acties">
     <div class="actie"><h3>1. Screens en rolluiken: 3 tot 5% omlaag, en de korting als vaste prijs</h3><p>Sonty {eur(S["totaal4"])} tegen Sunmaster-dealers met dezelfde producten op {eur(sm_range[0])} tot {eur(D["aanbieders"][0]["totaal4"]) if False else eur(sorted(a["totaal4"] for a in sunmaster)[-2])}. Richtpunt rond € 6.300. En breng de 15% als de prijs, niet als actie met een einddatum die steeds opschuift.</p><div class="why">Waarom: {goedkoper} van {len(A)} concurrenten zijn goedkoper, waaronder vier dealers van exact hetzelfde merk. Een vaste prijs in de dealerband is verdedigbaar, een eeuwige actie niet.</div></div>
     <div class="actie"><h3>2. Knikarm SunEye naar rond € 3.250</h3><p>Nu {eur(S["knikarm"])}. Andere SunEye-verkopers: {", ".join(eur(v) for v in suneye)}. Verano- en Brustor-schermen van dezelfde maat gaan voor € 2.630 tot € 3.330.</p><div class="why">Waarom: dit is Sonty's belangrijkste product; {kn_goedkoper} van {len(kn)-1} aanbieders zijn goedkoper. Op € 3.250 zit Sonty gelijk met de andere SunEye-dealers in plaats van erboven.</div></div>
-    <div class="actie"><h3>3. Verkoop de garantie en de snelheid als reden voor de prijs</h3><p>7 jaar motor, 5 jaar product en 3 jaar montage is beter dan bijna alle concurrenten. Dealers leveren in 6 tot 12 weken en meten soms pas in november in. Zet dit bovenaan elke offerte.</p><div class="why">Waarom: alleen Megazonwering, Intrasol, Van Geet en Stuyfzand noemen ook 7 jaar (op motor of solar). De rest zit op 2 tot 5 jaar.</div></div>
+    <div class="actie"><h3>3. Verkoop de reviews, de garantie en de snelheid als reden voor de prijs</h3><p>{D["sonty"]["google_reviews"]} reviews met een {D["sonty"]["google_score"]:.1f} is twee keer zoveel als de nummer twee en zes keer het gemiddelde; 7 jaar motor, 5 jaar product en 3 jaar montage is beter dan bijna alle concurrenten. Dealers leveren in 6 tot 12 weken en meten soms pas in november in. Zet dit bovenaan elke offerte.</p><div class="why">Waarom: alleen Megazonwering, Intrasol, Van Geet en Stuyfzand noemen ook 7 jaar (op motor of solar). De rest zit op 2 tot 5 jaar.</div></div>
     <div class="actie"><h3>4. App-bediening als cadeau bij 3 of meer producten</h3><p>Concurrenten rekenen € 149 tot € 199 voor Tahoma, één geeft hem weg. Sonty rekent € 195. Als cadeau bij grotere orders is het een goedkoop verkoopargument.</p><div class="why">Waarom: klanten vragen er zelf om, en het kost een fractie van een verdere prijsverlaging.</div></div>
   </div>
 

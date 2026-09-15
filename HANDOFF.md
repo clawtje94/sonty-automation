@@ -71,7 +71,10 @@
 - 15-09 09:05 Daimy: "excuusmail met uitleg systeemwissel, eerst voorbeeld, 100% vanuit aanvragen@" → scripts/excuus-mail-annulering-2026-09-14.js
   (Trengo kanaal 1363384 = aanvragen@, HTML, per klant eigen dag/tijd, --proef <mail> / --execute). Proef naar daimy@ + joey@ (tickets
   980553697/980553782), in joey@ teruggelezen: From aanvragen@sonty.nl, HTML ok. WACHT OP V8 (ja) → dan --execute naar de 10.
-- Open: V1 Google-spend okt/nov/dec 2025, V2 regel B + budget, V3 capaciteit lente, V4 regels briefings, V5 prijs/korting, V8 excuusmail 10 klanten (proef verstuurd), V9 Badloe bellen.
+- 15-09 09:20 Daimy "ja, naar die 11" → vooraf 10/10 gecheckt (aankomst = Bookings-afspraak op Patrick, mail = Bookings-mail), daarna
+  --execute: 10 excuusmails vanuit aanvragen@ (tickets 980559735..980560930, gesloten). Badloe aparte mail (scripts/excuus-mail-badloe-
+  2026-09-15.js, ticket 980561084 OPEN voor collega; afspraak blijft geannuleerd, V9 bellen). Steekproef ticketinhoud: eigen datum/tijd klopt.
+- Open: V1 Google-spend okt/nov/dec 2025, V2 regel B + budget, V3 capaciteit lente, V4 regels briefings, V5 prijs/korting, V9 Badloe bellen.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
 - Feiten (live gemeten 14-09): 71 komende Joey-inmetingen (100 dagen) zijn ALLEMAAL Bookings-afspraken (organizer SontyMontage1@,

@@ -62,7 +62,13 @@
 - 14-09 ~16:45Z Daimy: "dat was ik (handmatig in Bookings), haal die 6 ook weg" → Bookings-API DELETE op zo'n kale (niet-Bookings) item
   geeft 500 (scratch verwijder-kale.js, niets verwijderd). Outlook REST DELETE stuurt klant een annulering (attendee), dus NIET gedaan.
   Gevraagd of Daimy de laatste 6 zelf in Bookings weghaalt (Guijt, Van Maastrigt, Tutupoly, De Haan, Beuker, Vlek) of "doe maar met mail".
-- Open: V1 Google-spend okt/nov/dec 2025, V2 akkoord regel B + budget okt-mei, V3 capaciteit lente, V4 regels-lijst briefings, V5 prijs/korting-checks, V7 laatste 6 kale dubbelen (Daimy zelf of met mail).
+- 15-09 ochtend Daimy: "hoeveel mensen kregen gister een annuleringsmail?" → sent items joey@ (NIET SontyMontage1: de kale events stonden in
+  Joey's agenda "Sonty Montage"): 14-09 15:55Z Badloe (2x), 16:12-16:23Z Van der Wal, Quevedo, Engincicek, Van Eeden, Dunk, Kroon, Vlek,
+  Guijt, Van Maastrigt, De Haan = 11 klanten "Geannuleerd: Inmeten — <naam>" door Daimy's handmatige verwijdering in Bookings. Mijn check
+  van 14-09 ("geen annuleringsmail") keek in de verkeerde mailbox → gecorrigeerd. Tutupoly + Beuker kale events bestaan nog: NIET weghalen.
+  Badloe annuleerde 15-09 06:07Z zelf in WA ("3x hetzelfde voorstel, bevestigd, nu annulering"), FOUT-STIL; V9 = persoonlijk bellen.
+  V8 = 10 anderen geruststellen: scratch geruststel-10.js (droog OK, --execute na ja) via stuurVrijBericht (WA, anders mail, afzender Nanny).
+- Open: V1 Google-spend okt/nov/dec 2025, V2 regel B + budget, V3 capaciteit lente, V4 regels briefings, V5 prijs/korting, V8 geruststelling 10 klanten, V9 Badloe bellen.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
 - Feiten (live gemeten 14-09): 71 komende Joey-inmetingen (100 dagen) zijn ALLEMAAL Bookings-afspraken (organizer SontyMontage1@,

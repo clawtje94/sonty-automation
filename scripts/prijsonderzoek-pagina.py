@@ -16,7 +16,7 @@ alle = sorted(tot + [S["totaal4"]])
 mediaan = statistics.median(alle)
 goedkoper = sum(1 for t in tot if t < S["totaal4"]); duurder = len(tot) - goedkoper
 pct = round((S["totaal4"] / mediaan - 1) * 100)
-kn = sorted([(a["knikarm"], a["naam"]) for a in A if a["knikarm"]] + [(S["knikarm"], "Sonty")])
+kn = sorted([(a["knikarm"], a["naam"]) for a in A + D["deels"] if a.get("knikarm")] + [(S["knikarm"], "Sonty")])
 kn_pos = [n for _, n in kn].index("Sonty") + 1
 kn_goedkoper = kn_pos - 1
 sunmaster = [a for a in A if "Sunmaster" in a["type"]]
@@ -61,9 +61,22 @@ for a in A + D["deels"]:
     merk.append(f'<tr><td>{html.escape(a["naam"])} ({html.escape(a["plaats"])})</td><td>{html.escape(a["screens"])}</td><td>{html.escape(a["rolluiken"])}</td><td>{html.escape(a["knikarm_merk"])}</td><td>{html.escape(a["motor"])}</td><td>{pill(a["garantie"], a["gar_kleur"])}</td><td>{html.escape(a["levertijd"])}</td><td>{goog(a)}</td></tr>')
 merk.insert(0, '<tr class="sonty"><td>Sonty</td><td>Sunmaster Zip Square / Design</td><td>Sunmaster S-42 / S-37, Roma</td><td>Sunmaster SunEye / SunElite</td><td>Somfy RS100 io · Tahoma € 195</td>' + pill("3 jr montage, 5 jr product, 7 jr motor", "good") + f'<td>korter dan dealers</td><td><strong>{D["sonty"]["google_score"]:.1f} · {D["sonty"]["google_reviews"]} reviews</strong></td></tr>')
 
+PROD=[("screen_io","Screen op stroom 237×228"),("screen_solar","Screen solar 176×214"),("rolluik_io","Rolluik op stroom 204×236"),("rolluik_solar","Rolluik solar 143×197"),("knikarm","Knikarm 450×300"),("pergola","Pergola 450×300")]
+prod_html=[]
+for key,titel in PROD:
+    lst=[(a[key],a["naam"]) for a in A+D["deels"] if a.get(key)]
+    lst.append((S[key],"Sonty"))
+    lst.sort()
+    vals=[v for v,_ in lst]; med=statistics.median(vals); mx=max(vals)
+    pos=[n for _,n in lst].index("Sonty")+1
+    dpct=round((S[key]/med-1)*100)
+    bars="".join(f'<div class="prow{" sonty" if n=="Sonty" else ""}"><div class="plab">{html.escape(n)}</div><div class="ptrack"><div class="pbar" style="width:{v/mx*100:.1f}%"></div><div class="median" style="left:{med/mx*100:.1f}%"></div></div><div class="pval num">{eur(v)}</div></div>' for v,n in lst)
+    prod_html.append(f'<div class="prod"><h3>{titel}</h3><p class="pmeta">Sonty {eur(S[key])} · plek {pos} van {len(lst)} · midden {eur(med)} ({dpct:+d}%)</p>{bars}</div>')
+PROD_CSS=".prods{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.prod{background:var(--surface);border:1px solid var(--line);padding:14px 16px}.prod h3{font-family:'Barlow Condensed',Figtree,sans-serif;font-size:19px;font-weight:700}.pmeta{margin:2px 0 10px;color:var(--ink2);font-size:12.5px}.prow{display:grid;grid-template-columns:150px 1fr 62px;gap:8px;align-items:center;padding:2px 0}.plab{font-size:12px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ptrack{position:relative;height:10px}.pbar{height:10px;background:var(--bar);border-radius:0 3px 3px 0}.prow.sonty .pbar{background:var(--accent)}.prow.sonty .plab,.prow.sonty .pval{font-weight:700;color:var(--accent-ink)}.pval{text-align:right;font-size:12px;font-weight:600}@media (max-width:760px){.prods{grid-template-columns:1fr}}"
+
 page = f"""<title>Marktpositie Sonty</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap">
-<style>{CSS}</style>
+<style>{CSS}{PROD_CSS}</style>
 <div class="wrap">
   <div class="eyebrow">Prijsonderzoek zonwering · {D["periode"]} · {D["aanvragen"]} aanvragen, {D["reacties"]} reacties, {D["met_prijs"]} met prijs · {D["versie"]}</div>
   <h1>Waar staat Sonty in de markt?</h1>
@@ -97,7 +110,11 @@ page = f"""<title>Marktpositie Sonty</title>
     <p class="note">Richtprijzen (Van Zanten, De Kroon, Ansol) zijn niet bevestigd door een offerte. Zoetermeer solar gerekend met Somfy-motor (met Brel € 6.019). Ruiter: offerte excl. btw, omgerekend.</p>
   </div>
 
-  <h2>Per product: wat kost het bij hen, wat kost het bij ons</h2>
+  <h2>Per product: waar staat Sonty?</h2>
+  <p class="sub">Elk product apart gerangschikt van goedkoop naar duur, incl. btw en montage. Oranje = Sonty verkoopprijs. Stippellijn = middenprijs van dat product.</p>
+  <div class="prods">{"".join(prod_html)}</div>
+
+  <h2>Per product: alle prijzen in één tabel</h2>
   <div class="tablewrap"><table>
     <thead><tr><th>Aanbieder</th><th class="n">Screen stroom<br>237×228</th><th class="n">Screen solar<br>176×214</th><th class="n">Rolluik stroom<br>204×236</th><th class="n">Rolluik solar<br>143×197</th><th class="n">Knikarm<br>450×300</th><th class="n">Pergola<br>450×300</th><th class="n">4 producten</th><th>Montage</th></tr></thead>
     <tbody>{"".join(prijs)}</tbody>

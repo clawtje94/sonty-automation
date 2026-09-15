@@ -85,3 +85,14 @@ Patroon: dealers/lokale bedrijven voeren A-merken (Verano, Brustor, Alulux, Luxa
 - Stuyfzand (Delfgauw, SunCircle): screen 1439 + 150; screen solar 1539 + 150; knikarm 3273 + 200; doekoverkapping 7000 + 500; rolluiken niet geoffreerd.
 - Ton Stassen (Barendrecht, xls-offerte 2026397): V550 screen io 1268, solar (Brel) 1219, rolluik RS100 io 975, rolluik solar (Brel) 855, alles incl. meten+montage; zenders 60-85; Tahoma 185; knikarm V280 Ipanema 2660 (V225 Porto 2270, V255 Salou 2420); Verano/Heroal; 5 jr Verano; 6 wk. Goedkoopste van allemaal: 4 producten 4317.
 - Creon: alleen DIY-webshop, geen montage, geen knikarm. Venster Center: alleen Dordrecht.
+
+## Aanvulling 15-09 (10 nieuwe reacties, 7 met prijs) — data nu in aanbieders-data.json, pagina via scripts/prijsonderzoek-pagina.py
+- Toldo (Den Haag, Sunmaster): 1695/1485/1250/1200 + montage 220 p/st = 6510; SunEye 3300; pergola Sunmaster 7000, Stobag 9500; 5-7 wk; 5 jr.
+- Ruiter (Barneveld, Roma/Brustor): excl btw 1155/1225/1025/1040 + montage 768 → 6308 incl; knikarm B-25 Elite 3326 incl; pergola B-128 7018 incl; 8-10 wk; 5 jr.
+- Pals (Hazerswoude, Zolare/Brel): 1752/1632/1607/1425 = 6416 incl; Rainbow knikarm 2631; Brel Hub 169; 3 jr/5 motor; 6 wk; totaal 9216.
+- SunCircle Nieuwegein: 1417/1474/1246/1260 + montage 865 = 6262; T2200 3208+295; totaal 9999.
+- Intrasol (Barendrecht): 1617/1577/1296/1127 = 5617 incl (20% korting verwerkt); Ibiza Plus 2649; 5 jr / 7 jr solar.
+- De Spiegel (Utrecht, Sunmaster Carré + Heroal S-42): 1689/1541/1352/1173 + 510 montage = 6265.
+- Suntec (Zoeterwoude, Sunmaster SunZip Design + Smits CD942): 1857/1612/1502/1343 = 6314 (+ zender 102, vensterbank 67 = 6483); SunEye 3236 (+74+149 = 3459); 8 wk; 5 jr.
+- Gemro: alleen showroom. Zonweringsbedrijf Zoetermeer: verwijst naar webshop, wil foto's. Schaduwrijk/Unicon: offerte online (code 289886), niet uitgelezen.
+- Stand: 17 aanbieders met totaal; mediaan 6338; Sonty 6514 (+3%), 13 goedkoper / 4 duurder; knikarm plek 13 van 15.

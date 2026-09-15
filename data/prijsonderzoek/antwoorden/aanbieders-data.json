@@ -1,0 +1,53 @@
+{
+  "versie": "versie 4, 15 september",
+  "periode": "9 t/m 15 september 2026",
+  "aanvragen": 50, "reacties": 35, "met_prijs": 19,
+  "sonty": {
+    "verkoop": {"screen_io": 1819, "screen_solar": 1776, "rolluik_io": 1495, "rolluik_solar": 1425, "knikarm": 3440, "pergola": 7209, "totaal4": 6514},
+    "lijst": {"screen_io": 2140, "screen_solar": 2089, "rolluik_io": 1759, "rolluik_solar": 1676, "knikarm": 4047, "pergola": 8481, "totaal4": 7664},
+    "design_s42_verkoop": 6683
+  },
+  "aanbieders": [
+    {"naam": "Ton Stassen Zonwering", "plaats": "Barendrecht", "type": "installateur", "screens": "Verano V550", "rolluiken": "Verano / Heroal", "knikarm_merk": "Verano V280 Ipanema", "motor": "Somfy io of Brel solar · Tahoma € 185", "garantie": "5 jr Verano", "gar_kleur": "good", "levertijd": "ca. 6 wk",
+     "screen_io": 1268, "screen_solar": 1219, "rolluik_io": 975, "rolluik_solar": 855, "knikarm": 2660, "pergola": null, "totaal4": 4317, "montage": "incl. meten + montage; zenders € 60-85", "noot": "xls-offerte 13-09"},
+    {"naam": "Zonweringstunter.nl", "plaats": "Purmerend", "type": "webshop + montage", "screens": "Verano", "rolluiken": "Smits (Sedella)", "knikarm_merk": "Verano V280 Ipanema", "motor": "Somfy io · Tahoma € 149", "garantie": "2 jr product, 5 jr motor", "gar_kleur": "warn", "levertijd": "9-12 wk",
+     "screen_io": 1256, "screen_solar": 1337, "rolluik_io": 946, "rolluik_solar": 894, "knikarm": 3170, "pergola": null, "totaal4": 4768, "montage": "incl., nameten € 85, zenders € 250", "noot": "totaal incl. zenders en nameten"},
+    {"naam": "Megazonwering", "plaats": "Cruquius", "type": "regionale specialist", "screens": "eigen label Solid Screen", "rolluiken": "eigen label CD942", "knikarm_merk": "eigen label Furore", "motor": "Somfy RS100 · Connectivity Kit cadeau", "garantie": "5 jr product, 5 jr montage, 7 jr motor", "gar_kleur": "good", "levertijd": "niet vermeld",
+     "screen_io": 1350, "screen_solar": 1270, "rolluik_io": 1525, "rolluik_solar": 1445, "knikarm": 2715, "pergola": 6195, "totaal4": 5590, "montage": "altijd incl.", "noot": ""},
+    {"naam": "Intrasol Zonwering", "plaats": "Barendrecht", "type": "installateur", "screens": "windvaste zipscreen (merk n.v.t.)", "rolluiken": "aluminium rolluik", "knikarm_merk": "Ibiza Plus", "motor": "Somfy Sunilus/Oximo/RS100 · Tahoma € 175", "garantie": "5 jr, 7 jr Somfy solar", "gar_kleur": "good", "levertijd": "niet vermeld",
+     "screen_io": 1617, "screen_solar": 1577, "rolluik_io": 1296, "rolluik_solar": 1127, "knikarm": 2649, "pergola": null, "totaal4": 5617, "montage": "incl. inmeten + montage; 20% korting verwerkt", "noot": "knikarm 2.468 + motor 110 + antraciet 71"},
+    {"naam": "Venvo Zonwering", "plaats": "Wateringen", "type": "dealer", "screens": "Brustor B-1100", "rolluiken": "Alulux CD-139", "knikarm_merk": "Brustor", "motor": "Somfy Maestria / RS100 · niet vermeld", "garantie": "niet vermeld", "gar_kleur": "grey", "levertijd": "ca. 10 wk",
+     "screen_io": 1625, "screen_solar": 1736, "rolluik_io": 1403, "rolluik_solar": 1217, "knikarm": null, "pergola": null, "totaal4": 5981, "montage": "incl.; zelf monteren € 4.650", "noot": "knikarm/pergola: vraagt foto"},
+    {"naam": "SunCircle Nieuwegein", "plaats": "Nieuwegein", "type": "dealer", "screens": "SunCircle G110", "rolluiken": "SunCircle VR-R40", "knikarm_merk": "SunCircle T2200", "motor": "Somfy Sunilus/Altea/RS100 · Tahoma € 149", "garantie": "niet vermeld", "gar_kleur": "grey", "levertijd": "niet vermeld",
+     "screen_io": 1417, "screen_solar": 1474, "rolluik_io": 1246, "rolluik_solar": 1260, "knikarm": 3503, "pergola": null, "totaal4": 6262, "montage": "montage apart: 280 + 195 + 390; knikarm 295", "noot": "totaal incl. montage"},
+    {"naam": "De Spiegel Zonwering", "plaats": "Utrecht", "type": "Sunmaster-dealer", "screens": "Sunmaster Sunzip Carré", "rolluiken": "Sunmaster / Heroal S-42", "knikarm_merk": "niet geoffreerd", "motor": "Somfy io + Smoove; solar Brel", "garantie": "Romazo", "gar_kleur": "grey", "levertijd": "niet vermeld",
+     "screen_io": 1689, "screen_solar": 1541, "rolluik_io": 1352, "rolluik_solar": 1173, "knikarm": null, "pergola": null, "totaal4": 6265, "montage": "montage 510 voor alles", "noot": "zelfde producten als Sonty"},
+    {"naam": "Ruiter Zonwering", "plaats": "Barneveld", "type": "dealer", "screens": "Roma zipSCREEN.2", "rolluiken": "Roma opbouwrolluik P", "knikarm_merk": "Brustor B-25 Elite", "motor": "Somfy Maestria+/RS100 · Tahoma € 150", "garantie": "5 jr", "gar_kleur": "good", "levertijd": "8-10 wk",
+     "screen_io": 1398, "screen_solar": 1482, "rolluik_io": 1240, "rolluik_solar": 1258, "knikarm": 3326, "pergola": 7018, "totaal4": 6308, "montage": "incl. inmeten + montage (768 excl. btw voor 4 stuks)", "noot": "offerte excl. btw omgerekend; per product incl. evenredig montagedeel"},
+    {"naam": "Suntec Zonwering", "plaats": "Zoeterwoude", "type": "Sunmaster-dealer", "screens": "Sunmaster SunZip Design", "rolluiken": "Smits Optimaxx CD942", "knikarm_merk": "Sunmaster SunEye", "motor": "Somfy io · Tahoma € 149", "garantie": "5 jr", "gar_kleur": "good", "levertijd": "ca. 8 wk",
+     "screen_io": 1857, "screen_solar": 1612, "rolluik_io": 1502, "rolluik_solar": 1343, "knikarm": 3236, "pergola": null, "totaal4": 6314, "montage": "incl. inmeten + montage; zender 102", "noot": "zelfde screens als Sonty"},
+    {"naam": "Zonweringsbedrijf Zoetermeer", "plaats": "Zoetermeer", "type": "dealer", "screens": "Rainbow Q100", "rolluiken": "Rainbow HK842", "knikarm_merk": "Rainbow Q230", "motor": "Somfy io of Brel", "garantie": "niet vermeld", "gar_kleur": "grey", "levertijd": "niet vermeld",
+     "screen_io": 1526, "screen_solar": 1563, "rolluik_io": 1703, "rolluik_solar": 1569, "knikarm": 3193, "pergola": null, "totaal4": 6361, "montage": "€ 275 p/st, zender € 78", "noot": "solar met Somfy; met Brel 6.019"},
+    {"naam": "Pals Zonwering", "plaats": "Hazerswoude", "type": "installateur", "screens": "Zolare zipscreen", "rolluiken": "Zolare", "knikarm_merk": "Rainbow", "motor": "Brel · Brel Hub € 169", "garantie": "3 jr zonwering, 5 jr motor", "gar_kleur": "warn", "levertijd": "6 wk",
+     "screen_io": 1752, "screen_solar": 1632, "rolluik_io": 1607, "rolluik_solar": 1425, "knikarm": 2631, "pergola": null, "totaal4": 6416, "montage": "incl. inmeten + montage", "noot": ""},
+    {"naam": "Van Zanten Zonwering", "plaats": "Den Haag", "type": "dealer", "screens": "Verano V550", "rolluiken": "Verano RV40", "knikarm_merk": "Verano V280", "motor": "Somfy io · 5-kanaals zender", "garantie": "niet vermeld", "gar_kleur": "grey", "levertijd": "niet vermeld",
+     "screen_io": 1961, "screen_solar": 1693, "rolluik_io": 1153, "rolluik_solar": 1690, "knikarm": 3243, "pergola": null, "totaal4": 6497, "montage": "richtprijs, montage niet bevestigd", "noot": "richtprijs"},
+    {"naam": "Toldo Zonwering", "plaats": "Den Haag", "type": "Sunmaster-dealer", "screens": "Sunmaster SunZip Design", "rolluiken": "Sunmaster RolBasic", "knikarm_merk": "Sunmaster SunEye", "motor": "Somfy io · Tahoma € 180", "garantie": "5 jr", "gar_kleur": "good", "levertijd": "5-7 wk",
+     "screen_io": 1915, "screen_solar": 1705, "rolluik_io": 1470, "rolluik_solar": 1420, "knikarm": 3300, "pergola": 7000, "totaal4": 6510, "montage": "montage 220 p/st", "noot": "pergola Sunmaster 7.000, Stobag Pergolino 9.500"},
+    {"naam": "Van Geet Zonwering", "plaats": "Amersfoort", "type": "Sunmaster-dealer", "screens": "Sunmaster SunZip Design 110", "rolluiken": "Sunmaster S-42", "knikarm_merk": "Brustor B50 / B128 pergola", "motor": "alleen Somfy · Situo 1", "garantie": "5 jr, 7 jr Somfy solar", "gar_kleur": "good", "levertijd": "ca. 8 wk",
+     "screen_io": 2008, "screen_solar": 1813, "rolluik_io": 1528, "rolluik_solar": 1414, "knikarm": 2975, "pergola": 6175, "totaal4": 6763, "montage": "screens/rolluiken + 175/125; knikarm en pergola incl.", "noot": "zelfde producten als Sonty (Sonty 6.683)"},
+    {"naam": "De Kroon Zonwering", "plaats": "Utrecht", "type": "verkoper", "screens": "niet vermeld", "rolluiken": "niet vermeld", "knikarm_merk": "geen", "motor": "niet vermeld", "garantie": "niet vermeld", "gar_kleur": "grey", "levertijd": "niet vermeld",
+     "screen_io": 1879, "screen_solar": 1870, "rolluik_io": 1625, "rolluik_solar": 1647, "knikarm": null, "pergola": null, "totaal4": 7021, "montage": "apart: 275 / 225 / 275 / 225", "noot": "richtprijs"},
+    {"naam": "Ansol Zonwering", "plaats": "Spijkenisse", "type": "showroom, eigen productie", "screens": "eigen productie", "rolluiken": "eigen productie", "knikarm_merk": "eigen productie", "motor": "Somfy · Tahoma meerprijs", "garantie": "2 jr product, 5 jr Somfy", "gar_kleur": "warn", "levertijd": "5-6 wk",
+     "screen_io": 1700, "screen_solar": 2200, "rolluik_io": 2200, "rolluik_solar": 2000, "knikarm": 2900, "pergola": 8000, "totaal4": 8100, "montage": "incl., eigen monteurs", "noot": "circa-prijzen"},
+    {"naam": "Oudshoorn & Van Egmond", "plaats": "Leiden", "type": "dealer", "screens": "Luxaflex Zipscreen Beaufort", "rolluiken": "Roma", "knikarm_merk": "Sunmaster SunEye", "motor": "Somfy Maestria / Oximo · Tahoma € 199", "garantie": "5 jr Romazo", "gar_kleur": "good", "levertijd": "12 wk, inmeten begin nov",
+     "screen_io": 2105, "screen_solar": 2093, "rolluik_io": 2060, "rolluik_solar": 1928, "knikarm": 3967, "pergola": null, "totaal4": 8186, "montage": "altijd incl.", "noot": ""}
+  ],
+  "deels": [
+    {"naam": "Stuyfzand Zonwering", "plaats": "Delfgauw", "screens": "SunCircle", "rolluiken": "SunCircle (niet geoffreerd)", "knikarm_merk": "SunCircle", "motor": "Somfy · Tahoma", "garantie": "7 jr fabrieksgarantie", "gar_kleur": "good", "levertijd": "6-8 wk", "screen_io": 1589, "screen_solar": 1689, "knikarm": 3473, "pergola": 7500, "montage": "+ 150 / 200 / 500 montage"}
+  ],
+  "afgevallen": [
+    "Creon (alleen DIY-webshop, geen montage)", "Venster Center (werkt alleen in Dordrecht)", "Aluparts (levert niet in Wassenaar)", "Screendirect (alleen DIY)", "Gemro Noordwijkerhout (alleen showroombezoek)", "Zonweringsbedrijf Zoetermeer via 2e mail: verwijst naar webshop, wil foto's"
+  ],
+  "open": ["Schaduwrijk/Unicon Zwijndrecht (offerte online met code, nog niet uitgelezen)", "Bastasol Rotterdam", "Zonwering Nieuwegein (vraagt etage)", "Degalux (prijzen in afbeeldingen)", "Möller/Zandschulp (offerte via tekenlink)", "InhuisPlaza Barendrecht (wil foto + telefoon)"]
+}

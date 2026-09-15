@@ -78,6 +78,8 @@
   mcp-chrome-3ad2989, 20 proc, 2,8 GB, renderer 36% + GPU 35% CPU, 10 dagen) gekilld (pkill -f mcp-chrome-3ad2989) → 90% idle, 3,2 GB vrij.
   Rest: 8 claude-sessies ttys000-007 (5-13 dagen, 4,1 GB + 16 MCP-node), screensharingd 45-48% (Tailscale-schermdelen), uptime 13 d.
   V10: welke oude claude-terminals mogen dicht; advies herstart als iemand kan inloggen (FileVault).
+  20:55 stand: MCP-Chrome door een sessie opnieuw gestart (10 proc, 1,2 GB, licht); schermdelen gestopt; claude-sessies 5 GB; swap 562 MB
+  ongewijzigd; CPU 87% idle. Daimy (WA 20:49) "Gelukt?" → beantwoord op Telegram, V10 open.
 - Open: V1 Google-spend okt/nov/dec 2025, V2 regel B + budget, V3 capaciteit lente, V4 regels briefings, V5 prijs/korting, V9 Badloe bellen, V10 oude terminals sluiten.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD

@@ -68,7 +68,10 @@
   van 14-09 ("geen annuleringsmail") keek in de verkeerde mailbox → gecorrigeerd. Tutupoly + Beuker kale events bestaan nog: NIET weghalen.
   Badloe annuleerde 15-09 06:07Z zelf in WA ("3x hetzelfde voorstel, bevestigd, nu annulering"), FOUT-STIL; V9 = persoonlijk bellen.
   V8 = 10 anderen geruststellen: scratch geruststel-10.js (droog OK, --execute na ja) via stuurVrijBericht (WA, anders mail, afzender Nanny).
-- Open: V1 Google-spend okt/nov/dec 2025, V2 regel B + budget, V3 capaciteit lente, V4 regels briefings, V5 prijs/korting, V8 geruststelling 10 klanten, V9 Badloe bellen.
+- 15-09 09:05 Daimy: "excuusmail met uitleg systeemwissel, eerst voorbeeld, 100% vanuit aanvragen@" → scripts/excuus-mail-annulering-2026-09-14.js
+  (Trengo kanaal 1363384 = aanvragen@, HTML, per klant eigen dag/tijd, --proef <mail> / --execute). Proef naar daimy@ + joey@ (tickets
+  980553697/980553782), in joey@ teruggelezen: From aanvragen@sonty.nl, HTML ok. WACHT OP V8 (ja) → dan --execute naar de 10.
+- Open: V1 Google-spend okt/nov/dec 2025, V2 regel B + budget, V3 capaciteit lente, V4 regels briefings, V5 prijs/korting, V8 excuusmail 10 klanten (proef verstuurd), V9 Badloe bellen.
 
 ## 14-09: ONDERZOEK Joey→Patrick voor bestaande inmetingen (Daimy: "niks doen, alleen uitzoeken") — NIETS GEWIJZIGD
 - Feiten (live gemeten 14-09): 71 komende Joey-inmetingen (100 dagen) zijn ALLEMAAL Bookings-afspraken (organizer SontyMontage1@,

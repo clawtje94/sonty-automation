@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Overstap nieuwe sonty.nl + eigen configurator/CRM: wat moet er nog (16-09-2026)</title>
+<style>
+:root{--ink:#1a1a1a;--mut:#5b5b5b;--line:#e6e2dc;--bg:#faf8f5;--card:#fff;--or:#EA580C;--groen:#166534;--rood:#b91c1c;--geel:#92400e}
+body{margin:0;font:15px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:1040px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:1.7rem;margin:0 0 4px}h2{font-size:1.25rem;margin:36px 0 10px;padding-top:10px;border-top:2px solid var(--or)}h3{font-size:1.02rem;margin:20px 0 6px}
+.sub{color:var(--mut);margin-bottom:18px}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:18px 0}
+.kpi div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi b{display:block;font-size:1.35rem}.kpi small{color:var(--mut)}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:.93rem}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}th{background:#f3efe9}
+.tag{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.78rem;font-weight:700;white-space:nowrap}
+.rood{background:#fee2e2;color:var(--rood)}.geel{background:#fef3c7;color:var(--geel)}.groen{background:#dcfce7;color:var(--groen)}.grijs{background:#eee;color:#444}
+.box{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--or);border-radius:8px;padding:12px 16px;margin:12px 0}
+.box.ok{border-left-color:var(--groen)}.box.let{border-left-color:var(--rood)}
+ul{margin:6px 0 6px 20px}li{margin:3px 0}code{background:#f1ede7;padding:1px 5px;border-radius:4px;font-size:.88em}
+.bron{color:var(--mut);font-size:.85rem}
+</style></head><body><main>
+<h1>Overstap naar de nieuwe sonty.nl en de eigen configurator/CRM</h1>
+<div class="sub">Wat er nog moet gebeuren om volledig over te gaan, zodat alles klopt en we niets over het hoofd zien. Stand 16 september 2026, 17:00. Alles hieronder is <b>gemeten</b> (DNS, Vercel, live API, code, launchd), niet aangenomen. Opgesteld door Claude voor Daimy.</div>
+
+<div class="kpi">
+<div><b>2 overstappen</b><small>A. website Webflow → Vercel (domein) · B. Reuzenpanda → eigen CRM. Ze kunnen los van elkaar, A eerst is het veiligst.</small></div>
+<div><b>A: 4 blokkers</b><small>domein niet gekoppeld · 11 sleutels missen in productie · formulieren niet in Trengo · geen back-up van de leaddata</small></div>
+<div><b>B: gebouwd, wacht op V20</b><small>schakelaars staan nog op RP (bron rp, testmodus aan). 20.098 dossiers gesynchroniseerd, 0 fouten.</small></div>
+<div><b>Vandaag gefixt</b><small>TaHoma werd bij elk volgend product opnieuw gevraagd én extra's (TaHoma, windsensor) zaten nooit in de prijs. Live.</small></div>
+</div>
+
+<div class="box let"><b>Belangrijkste conclusie.</b> De nieuwe site is inhoudelijk klaar (100 URL's, redirects voor alle 57 oude URL's, tracking overgezet), maar de <b>productieomgeving op Vercel is nog niet compleet</b>: zonder Telegram- en Klaviyo-sleutels geeft een nieuwe aanvraag geen melding en geen Klaviyo-profiel, en contact- en reparatieformulieren komen nergens in Trengo. Dat moet vóór de domeinswitch, anders vallen aanvragen stil op dag 1. Daarnaast is er <b>geen enkele back-up</b> van de KV-database die straks, zonder Reuzenpanda, de enige plek is waar alle leads en offertes staan.</div>
+
+<h2>1. Gemeten uitgangsstand</h2>
+<table><tr><th style="width:26%">Onderdeel</th><th>Gemeten (16-09)</th><th style="width:12%">Status</th></tr>
+<tr><td>Domein sonty.nl</td><td>Nameservers Neostrada; A @ 198.202.211.1, www CNAME cdn.webflow.com (Webflow, via Cloudflare-CDN). In het Vercel-project is <b>geen</b> sonty.nl-domein gekoppeld (<code>vercel domains ls</code>: alleen foreverlume.com en zonweringdirect.nl). Wildcard *.sonty.nl → 185.94.230.197 (admin.sonty.nl valt daar nu onder).</td><td><span class="tag rood">niet begonnen</span></td></tr>
+<tr><td>Nieuwe site</td><td>sonty-website.vercel.app, 100 URL's in de sitemap (44 blogs, 12 stadspagina's, alle diensten). Canonical en metadataBase wijzen al naar https://sonty.nl. Deploy via GitHub Actions bij push naar main (±3 min).</td><td><span class="tag groen">klaar</span></td></tr>
+<tr><td>Oude URL's (57 uit de live sitemap)</td><td>Allemaal 200 of 301/308 op de nieuwe site. Let op: <code>/zonwering/gouda</code> → /diensten/zonwering (Gouda-pagina bestaat alleen op de oude site), <code>/zonwering/leidschendam</code> → /zonwering/voorburg. Webflow-blog bevat geen artikel-URL's, dus geen blog-redirects nodig.</td><td><span class="tag geel">2 keuzes</span></td></tr>
+<tr><td>Productie-sleutels (Vercel env)</td><td>Aanwezig: KV, Trengo, Gripp, Planado, OpenAI, Anthropic, Gemini, Blob, Postbode, Google SA, RP, HubSpot, admin. <b>Ontbreken:</b> TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, KLAVIYO_PRIVATE_KEY, CRON_SECRET, NEXT_PUBLIC_SITE_URL, GOOGLE_PLACES_API_KEY, GOOGLE_PLACE_ID, MEETBON_CODE, WERKBON_SECRET, BELSCHERM_CODE, MONTEUR_PIN, FINANCIERING_PASSWORD, POSTBODE_MAILBOX_ID.</td><td><span class="tag rood">blokker</span></td></tr>
+<tr><td>Formulieren (contact, reparatie, zakelijk)</td><td>Maken een lead in KV (zichtbaar in /admin/formulieren) en proberen Telegram + Klaviyo (nu overgeslagen, sleutels missen). Geen Trengo-ticket op aanvragen@. Geen reCAPTCHA of rate-limit. Op Webflow komen ze nu per mail in Trengo binnen.</td><td><span class="tag rood">blokker</span></td></tr>
+<tr><td>Back-up leaddata (Vercel KV)</td><td>Geen back-upjob gevonden (launchd noch scripts). KV bevat lead-store v2 met 20.098 dossiers, offertes, verzendlog, instellingen, foto-index.</td><td><span class="tag rood">blokker</span></td></tr>
+<tr><td>Tracking</td><td>Overgezet naar server-side GTM via sst.sonty.nl (29-08 gemeten): Cookiebot, GA4, Google Ads-conversies, Meta, Pinterest. Cookiebot-banner verschijnt alleen op sonty.nl (domeingroep), dus pas na de switch zichtbaar.</td><td><span class="tag groen">klaar, na switch meten</span></td></tr>
+<tr><td>Verzendcentrum (live API)</td><td>bron <b>rp</b>, testmodus <b>aan</b>, automatisch versturen <b>uit</b>, herinneringen uit, status zetten uit. 91 RP-items in de lijst, 0 eigen.</td><td><span class="tag geel">RP leidend</span></td></tr>
+<tr><td>RP-uitzetten-vlag / sync</td><td><code>data/.rp-uit</code> bestaat niet; <code>data/.eigen-crm-bron</code> staat aan; launchd nl.sonty.rp-sync draait elke 30 min (laatste run 16:38: 20.098 items, 2 nieuw, 0 fouten).</td><td><span class="tag geel">klaar om te schakelen</span></td></tr>
+<tr><td>Configurator (eigen)</td><td>12 producten, 33 gekoppelde varianten, prijzen uit de centrale motor, maatgrenzen uit de motor (lab 3.200). 10 productfoto's staan nog op user-info.reuzenpanda.nl; RP-widget-fallback bestaat nog als bestand maar wordt nergens gebruikt.</td><td><span class="tag geel">foto's verhuizen</span></td></tr>
+</table>
+
+<h2>2. Vóór de domeinswitch (A) moet dit af</h2>
+<table><tr><th>#</th><th>Wat</th><th>Waarom</th><th>Wie</th></tr>
+<tr><td>A1</td><td>Productie-sleutels zetten in Vercel: Telegram (bot + chat), Klaviyo, CRON_SECRET, NEXT_PUBLIC_SITE_URL=https://sonty.nl, Google Places (key + place-id), plus de codes (meetbon, werkbon, belscherm, monteur-pin, financiering, Postbode-mailbox) zodat de hardcoded fallbacks uit de code kunnen.</td><td>Zonder Telegram/Klaviyo geen leadmelding en geen mailflows; zonder CRON_SECRET zijn de cron-routes (herinneringen, winkelmail) met een nagemaakte user-agent aan te roepen; zonder SITE_URL krijgen klanten vercel.app-links.</td><td>Claude (sleutels staan grotendeels in ~/sonty/.env), Places-key = Daimy (V23, staat al open)</td></tr>
+<tr><td>A2</td><td>Formulieren → Trengo: contact, reparatie en zakelijk maken een ticket op aanvragen@ (kanaal 1363384) met de klant als afzender, plus Telegram. Eenvoudige spam-rem (honeypot + limiet per IP).</td><td>Nu komen ze via Webflow-mail in Trengo; op de nieuwe site zouden ze alleen in het admin-formulierenoverzicht staan. Lost meteen het bekende no-reply@webflow-gat op.</td><td>Claude</td></tr>
+<tr><td>A3</td><td>KV-back-up: dagelijkse export van alle lead-/offerte-/instellingensleutels naar de Mac mini (en Blob), met een herstelproef, en een melding als de export uitblijft.</td><td>Na de RP-overstap is KV de enige bron van 20k dossiers. Eén verkeerde admin-actie of KV-storing is nu onherstelbaar.</td><td>Claude</td></tr>
+<tr><td>A4</td><td>Domein koppelen: sonty.nl en www.sonty.nl toevoegen aan het Vercel-project; www → sonty.nl doorsturen (code gaat uit van het kale domein); admin.sonty.nl als CNAME als gewenst.</td><td>Vercel geeft dan de exacte DNS-records; pas daarna de records bij Neostrada wijzigen.</td><td>Claude (Vercel) + Daimy (Neostrada-login of toegang geven)</td></tr>
+<tr><td>A5</td><td>DNS bij Neostrada wijzigen: alleen A @ en CNAME www. <b>Laten staan:</b> MX (Outlook), SPF, DKIM selector1/2, _dmarc, autodiscover, klaviyo-site-verification, A-record sst.sonty.nl.</td><td>Mail en tracking mogen niet omvallen. TTL vooraf verlagen; terugdraaien = records terugzetten.</td><td>Daimy of Claude met toegang</td></tr>
+<tr><td>A6</td><td>Search Console: nieuwe verificatie (er staat geen google-site-verification in de code), sitemap indienen, Bedrijfsprofiel-link controleren.</td><td>Ranking behouden, fouten na de switch snel zien.</td><td>Claude (verificatie-tag) + Daimy (Google-toegang)</td></tr>
+<tr><td>A7</td><td>Twee redirect-keuzes: Gouda-stadspagina bouwen (op echte cijfers) of bewust naar /diensten/zonwering; Leidschendam → Voorburg bevestigen.</td><td>Beide pagina's staan in de oude sitemap en hebben mogelijk ranking.</td><td>Daimy beslist, Claude bouwt</td></tr>
+<tr><td>A8</td><td>Ads-landingspagina's: bij de Google Ads- en Meta-beheerders opvragen op welke sonty.nl-paden de campagnes landen en die tegen de nieuwe sitemap leggen.</td><td>Lokaal niet zichtbaar; een 404 als landingspagina kost direct geld.</td><td>Daimy → beheerders</td></tr>
+</table>
+
+<h3>Draaiboek domeinswitch (na A1 t/m A3)</h3>
+<ul>
+<li>Dag 0: A4 en A6 klaar; TTL bij Neostrada op 5 minuten; testen op de Vercel-URL met de smoketests (38 pagina's desktop + mobiel) en de configurator-flow.</li>
+<li>Dag 1 (ochtend, rustig moment): DNS wijzigen; binnen 15 minuten controleren: <code>curl -sI https://sonty.nl</code> (Vercel), <code>https://www.sonty.nl</code> (301 naar kaal domein), <code>/diensten/shutters</code> (301), Cookiebot-banner, één echte testaanvraag via de configurator (Telegram-melding, KV-lead, bevestigingsmail), contactformulier (Trengo-ticket), tracking-meting op configurator.conversion en contact_form_submit.</li>
+<li>Dag 1 t/m 14: Webflow laten staan (terugdraaien = DNS terug); Search Console dekking en 404-rapport dagelijks lezen; automations die vercel.app-links versturen omzetten naar sonty.nl (61 scripts/databestanden in ~/sonty, klantlink, werkbon, inmeet-aanbod).</li>
+<li>Dag 14+: Webflow-hosting opzeggen; HubSpot-script en RP-widget op de oude site vervallen vanzelf.</li>
+</ul>
+
+<h2>3. Vóór Reuzenpanda uit kan (B)</h2>
+<div class="box ok">Alles uit het runbook (docs/reuzenpanda-uitzetten.html, 30-08) is gebouwd en gelabd: eigen sleutel, planner/Sunny op eigen CRM, offertecontrole + automatisch prijsvoorstel, Gripp/Sheet/Klaviyo/rapporten op eigen offertes, migratie van alle dossiers, schakelaar <code>scripts/rp-uitzetten.js</code>. De overstap is nu één besluit plus een proefperiode.</div>
+<table><tr><th>#</th><th>Stap</th><th>Wie</th><th>Stand</th></tr>
+<tr><td>B1</td><td>In Reuzenpanda de automation "Offerte verstuurd" uitzetten (anders mailt RP over ons prijsvoorstel heen). Dit is V20.</td><td>Daimy</td><td><span class="tag rood">wacht</span></td></tr>
+<tr><td>B2</td><td>/admin/verzendcentrum: bron eigen, testmodus uit, automatisch versturen aan, herinneringen aan (met taalpoort: Engels blijft Engels). Offerte-tool volgt automatisch de bron.</td><td>Claude</td><td><span class="tag geel">na B1</span></td></tr>
+<tr><td>B3</td><td>Eerste echte aanvraag volgen: pipeline-badge, verzendlog, Sheet-rij, Sunny-opvolging, planner. Nog niet live bewezen: Gripp invullen met een echte eigen lead, Planado external_id voor eigen ids bij de eerste boeking, Sunny klant_opzoeken op RP-nummer via het eigen CRM, pipeline-snelheid met 20k dossiers.</td><td>Claude</td><td><span class="tag geel">na B2</span></td></tr>
+<tr><td>B4</td><td>Twee weken parallel: eigen pipeline leidend, RP alleen lezen, geen nieuwe leads meer in RP. Team op het eigen bord (gebruikers en toegang per persoon staan klaar); voorstel testers: Jaimy + planning.</td><td>Team</td><td><span class="tag geel">plannen</span></td></tr>
+<tr><td>B5</td><td><code>node scripts/rp-uitzetten.js uit</code> (vlag .rp-uit, RP-only jobs stoppen) + <code>launchctl bootout gui/501/nl.sonty.rp-sync</code> + Zapier-zaps uit ("RP Offerte → Sheets", RP → HubSpot) + HubSpot-verrijking (auto-sync) en belscherm van HubSpot af, daarna HUBSPOT_TOKEN weg.</td><td>Claude (Zapier: Daimy)</td><td><span class="tag geel">na B4</span></td></tr>
+<tr><td>B6</td><td>10 configurator-productfoto's van user-info.reuzenpanda.nl naar eigen Blob/websitefoto-bibliotheek; RP-widget-fallbackbestand verwijderen; offerte-index-cron en RP-herinneringen op de site uit.</td><td>Claude</td><td><span class="tag geel">vóór B5</span></td></tr>
+<tr><td>B7</td><td>Contract: opzegtermijn en einddatum RP vaststellen; RP één maand alleen-lezen aanhouden; laatste export bewaren (staat al in het eigen CRM als LEAD-RP-… met RP-nummer en documentlink).</td><td>Daimy</td><td><span class="tag rood">onbekend</span></td></tr>
+<tr><td>B8</td><td>Opruimen: RP-API-sleutel intrekken en uit ±40 bestanden halen, RP-status-id's uit de code, RP_API_KEY uit Vercel.</td><td>Claude</td><td><span class="tag grijs">laatste</span></td></tr>
+</table>
+
+<h2>4. Configurator: gevonden en gefixt vandaag, en wat nog open staat</h2>
+<div class="box ok"><b>Gefixt en live (16-09).</b>
+<ul>
+<li><b>TaHoma opnieuw gevraagd bij een volgend product</b> (Daimy's voorbeeld): zit TaHoma al in de aanvraag, dan wordt hij bij het volgende product niet meer gevraagd. Is er dan niets meer te kiezen, dan wordt de Extra's-stap overgeslagen. Live nagespeeld met een browser: screens + TaHoma, dan rolluik → direct naar het overzicht.</li>
+<li><b>Extra's zaten nooit in de prijs.</b> TaHoma (€195) en windsensor (€169) kwamen alleen als tekst in de aanvraag; het accessoire-totaal stond altijd op €0. Nu eigen regels met prijs uit de productdata (nooit van de browser), TaHoma hooguit 1× per aanvraag, windsensor per stuk. Lab 1.200 scenario's, 0 fout-stil; offertecontrole accepteert de regels. Live testkaart: 6.900 + 2.067 + 195 + 338 = €9.500. Sunny rekent al zo (TaHoma €195, 1 per woning).</li>
+<li>Gekozen extra's en aantallen zijn nu zichtbaar in het overzicht (stonden er niet bij, dus de keuze leek verdwenen).</li>
+</ul></div>
+<h3>Nog te controleren of te beslissen (configurator)</h3>
+<ul>
+<li>TaHoma is ook kiesbaar bij "bedraad + draaischakelaar" en solar, terwijl de tekst zegt "alleen bij een Somfy io-motor". Keuze: alleen tonen bij afstandsbediening/io, of tekst aanpassen.</li>
+<li>"Handbediend" is kiesbaar bij Suneye (regel: geen handbediening verkopen). Open vraag uit 29-08.</li>
+<li>Serre-kleuren (site: structuur, Sunny: glad als standaard) en de exacte +15% trendkleur-toeslag op de site: apart uitzoeken (05-09).</li>
+<li>Een volledig klik-lab door alle 12 producten en varianten tot en met de aanvraag (zoals vandaag met de browser gedaan voor screens + rolluik) bestaat nog niet; het maatgrenzen-lab test alleen de motor. Voorstel: bouwen vóór de domeinswitch, dan komen fouten zoals de TaHoma-vraag vanzelf boven.</li>
+<li>Foto's van RP-host (B6) en de 2,4-3,1 MB per pagina (foto's ≤150 KB, uit het SEO-plan).</li>
+</ul>
+
+<h2>5. Volgorde-advies</h2>
+<ol>
+<li><b>Deze week:</b> A1 sleutels, A2 formulieren naar Trengo, A3 KV-back-up, klik-lab configurator, B6 foto's. Dit kan ik zonder besluit starten; alleen de Places-key en de Zapier-vraag hebben Daimy nodig.</li>
+<li><b>Daarna de domeinswitch (A4-A8):</b> laag risico, los van RP, terugdraaien is één DNS-wijziging. Vanaf dan draait de nieuwe configurator op sonty.nl terwijl RP nog leidend is (dat werkt al zo op vercel.app).</li>
+<li><b>Dan de RP-overstap (B1-B5)</b> met twee weken parallel, pas als de site stabiel op sonty.nl draait, zodat je niet twee dingen tegelijk terug hoeft te draaien.</li>
+<li><b>Opruimen (B7-B8):</b> contract, sleutels, HubSpot, Zapier, Webflow.</li>
+</ol>
+
+<h2>6. Vragen aan Daimy</h2>
+<ul>
+<li><b>V1</b> Mag ik deze week A1 t/m A3 bouwen en sonty.nl alvast aan Vercel koppelen (nog zonder DNS-wijziging)? Wie doet de DNS-wijziging bij Neostrada: jij, of geef je mij de login?</li>
+<li><b>V2</b> RP: kun je de automation "Offerte verstuurd" uitzetten (V20) zodra de site op sonty.nl staat, en wat is de opzegtermijn van het RP-contract? Staan de Zapier-zaps met Reuzenpanda nog aan?</li>
+<li>Later: Gouda-stadspagina bouwen of redirect houden; TaHoma alleen bij io-motor tonen; wie test de parallelweken.</li>
+</ul>
+
+<p class="bron">Bronnen: dig/curl op sonty.nl en sonty-website.vercel.app (16-09 16:40-17:00), <code>vercel domains ls</code>, <code>vercel env pull</code>, live GET /api/admin/verzendcentrum, /api/eigen-crm, data/migratie-rp.log, launchctl list, ~/sonty-website (app, lib, components, data, next.config.ts, vercel.json), docs/reuzenpanda-uitzetten.html (30-08), HANDOFF 28-07 go-live audit, memory-notities tracking/SEO/CRM. Geen namen van andere zonweringbedrijven; geen sleutels in dit document.</p>
+</main></body></html>

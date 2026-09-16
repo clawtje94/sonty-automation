@@ -4354,3 +4354,21 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
 - Crawler: ~/.playwright-mcp/sm-crawl-all.js (Playwright run_code, config via window.__SMCFG, resultaten window.__SMR → dump naar ~/.playwright-mcp/smr-*.json). Keuzelijsten tonen max 50 → volledige lijst via filter per teken (enumAll), cache window.__SMCACHE.
 - Rapport: python3 scripts/sunmaster-portaal-rapport.py → docs/sunmaster-bestelportaal-variabelen.md + data/sunmaster-portaal-variabelen.json.
 - KLAAR 16-09: alle 18 artikelen (basis + breedte-probe + alle Type Bediening-varianten, 78 runs) in docs/sunmaster-bestelportaal-variabelen.md + -lijsten.md; ruwe JSON in data/. Steekproef dropdown-limiet (max 50 zichtbaar, filter per teken) bewezen met BROOKE. Open: hoogtegrens rolluiken (geen directe waarschuwing), echte orderflow niet zichtbaar in demo (alleen offerte), leveringsconditie vast AFH.
+
+## 16-09 (middag): OVERSTAP-OVERZICHT NIEUWE SITE + EIGEN CONFIGURATOR/CRM (Daimy /goal "wat moeten we allemaal nog doen")
+- Overzicht: docs/overstap-website-configurator-2026-09-16.html (naar Daimy gestuurd). Gemeten 16-09: sonty.nl staat nog bij Neostrada op
+  Webflow (A 198.202.211.1, www CNAME cdn.webflow.com), sonty.nl NIET gekoppeld aan het Vercel-project (vercel domains ls: alleen
+  foreverlume.com en zonweringdirect.nl). Productie-env mist (vercel env pull): TELEGRAM_BOT_TOKEN/CHAT_ID, KLAVIYO_PRIVATE_KEY, CRON_SECRET,
+  NEXT_PUBLIC_SITE_URL, GOOGLE_PLACES_API_KEY/PLACE_ID, MEETBON_CODE, WERKBON_SECRET, BELSCHERM_CODE, MONTEUR_PIN, FINANCIERING_PASSWORD,
+  POSTBODE_MAILBOX_ID → nieuwe leads geven géén Telegram/Klaviyo (createLead slaat over met warn). Contact/reparatie-formulier maakt alleen
+  een KV-lead, geen Trengo-ticket. Geen enkele KV-back-up. Verzendcentrum live: bron rp, testmodus aan, autoVersturen uit, herinneringen uit;
+  vlag data/.rp-uit ontbreekt (RP nog leidend); rp-sync elke 30 min ok (20.098 items, 0 fouten). Alle 57 oude sitemap-URL's geven 200/301/308
+  op de nieuwe site (let op: /zonwering/gouda → /diensten/zonwering, /zonwering/leidschendam → voorburg). Webflow-blog heeft geen artikel-URL's.
+  10 configurator-productfoto's staan nog op user-info.reuzenpanda.nl (breken bij RP-uit).
+- GEFIXT + LIVE (b252bb7 + 1b09265, GH Actions): (1) Daimy: "kies 1 product met TaHoma, voeg product toe → vraagt weer TaHoma" → TaHoma die al
+  in de aanvraag zit wordt niet opnieuw gevraagd ("zit al in je aanvraag bij <product>"), Extra's-stap overgeslagen als er niets te kiezen is.
+  (2) Gekozen extra's (TaHoma €195, windsensor €169) kwamen NOOIT in de prijs (alleen tekst, totaalAccessoires altijd 0) → lib/configurator/extras.ts:
+  eigen regels (engine accessoire), prijs uit productdata, TaHoma max 1× per aanvraag, windsensor per stuk. Lab scripts/lab-configurator-extras.ts
+  1.200 sc. 0 fout-stil. Live testkaarten LEAD-1789570491492-F2K7 en LEAD-1789570529195-XDM5 (naam "Test …", rule 9 blokkeert versturen):
+  6.900 + 2.067 + 195 + 338 = 9.500 ✓. Playwright-bewijs scratchpad verify-tahoma.mjs.
+- Terzijde gezien: nl.sonty.auto-resume logt "timeout: command not found" (auto-resume.sh regel 28, macOS heeft geen timeout) → niet gefixt.

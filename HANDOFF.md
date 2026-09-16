@@ -4321,3 +4321,36 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
 - 15-09 REKENTOOL GRIPP-PAD als medewerker (Playwright, mobiel, dry-run op 6162): ophalen OK, overnemen OK (waarschuwing Roma-uitvoering), maat aanpassen → nieuwe prijs, Wie ben je incl. Patrick, "1. Laat zien wat er verandert" → voorstel €4.427 → €5.044,18 met blokkade "al getekend, bijwerken kan niet meer" (correct). Conclusie: aanpassen van een bestaande Gripp-offerte werkt; NIEUWE offerte maken vanuit de rekentool bestaat niet (dat is de offerte-tool). Daimy vraagt hoe iemand "het maakt of aanpast" → flow uitgelegd, wacht op wat hij precies mist.
 - 15-09 REKENTOOL/MEETBON MOBIEL: vaste voet (position fixed) dekte onderste velden af (padding 150/120 px < echte voethoogte met actie- en statusregel) en .adm-theme-toggle (fixed rechtsonder) stond over "+ Product". Fix: components/admin/VoetHoogte.tsx (ResizeObserver → --adm-footer-h op <html>), .rt/.meetbon padding-bottom calc(24px + var), themaknop bottom calc(14px + var). In rekentool-footer en 3 meetbon-[gripp]-footers geplaatst.
 - 15-09 "ik zie niks anders" (Daimy als adviseur 1): server geverifieerd met testmedewerker (4 tools, 403 op andere API's). sonty.nl/admin = 404 (oude Cloudflare-site), admin alleen op sonty-website.vercel.app. Waarschijnlijk browsercache of oude deployment-URL. Versiestempel (NEXT_PUBLIC_BUILD_STEMPEL uit next.config.ts, bouwtijd NL) nu in de dashboardkop "versie dd-mm hh:mm" om dit voortaan direct te zien. Geen service worker in het project.
+- 16-09: planning-check Daimy: Nouweland (Bus 4, 10:00) ontbreekt in Planado; Outlook-event verzet maar gekoppeld aan afgeronde #1154 (8-9). Zelfde patroon Morgun #270. Structurele gap: sync herkent verzette afspraak na finished job niet. Nieuw script scripts/daglijst-team.js <dag> (alleen lezen). V10 open (aanmaken?).
+- 16-09 PLANADO MIST KLUSSEN (Joris/Daimy: planning Marvin & Bart): oorzaak = Planado 422 "cannot be changed when job was started" op PATCH van afgeronde opdrachten (#1154 Nouweland Bus 3 08-09, #270 Morgun Joey 10-09, #1119 Argentini 04-09) terwijl Outlook dezelfde afspraak (zelfde event-id → zelfde ol-id) op een nieuwe dag/team zette; sync faalde elke run stil (fouten: 3, geen status gelogd). Fix cron-outlook-planado-sync.js: GESTART-set (started/finished/...), bij andere dag → nieuwe opdracht met external_id ol-<hash>-<YYYY-MM-DD> (oude blijft historie), PATCH-fouten worden gelogd. Resultaat: #1503 Morgun Patrick 16-09 09:00, #1504 Nouweland Bus 4 16-09 10:00, #1505 Argentini Bus 4 17-09 09:00 (geverifieerd: team/adres/tel/sjabloon). LET OP: outlook-planado-audit.js koppelt alleen op het basis-ol-id en meldt deze drie nog als "afwijkend" op de oude opdracht → audit moet ol-<hash>-<datum> ook herkennen (nog te doen).
+- 16-09 (sessie B, doel Daimy "Bookings/Planado koppelingen en toewijzingen moeten kloppen"): Raymond van der Ent 16-09 08:30 Patrick stond in
+  Bookings ZONDER medewerker: opdracht #1483 was 15-09 13:23 direct in Planado gezet (geen external_id, lege omschrijving), de sync-heler
+  bouwde er een KALE Outlook-afspraak van omdat de opdracht geen mailadres had, terwijl zijn Bookings-afspraak van 15-09 10:00 (Patrick)
+  het adres gewoon kende. FIX (lib/inmeet-boeken.js + bookings-api.js): (1) mailadres ook uit de Bookings-historie halen (telefoon/naam,
+  ±120 dgn in 30-dagen-blokken), (2) geen mail → TOCH Bookings op de inmeter (boek() zonderMail:true, optOutOfCustomerEmail, bewezen op
+  proefafspraak 2027-01-05, direct verwijderd incl. testklant) + planning-melding "klant zelf bevestigen"; kale afspraak alleen nog bij
+  onbekende inmeter of Bookings-storing. Test tests/inmeet-boeken-zonder-mail.test.js 7/7. nl.sonty.inmeet-verzoeken herstart.
+  daglijst-team.js leest nu de hele dag (outlookEvents(vanOverride)) en kent ol-<hash>-<datum>. LET OP Planado-rate-limit: niet meerdere
+  lezers tegelijk (daglijst + audit + sync = "Rate Limit Exceeded").
+- 16-09 (sessie B) GEKOPPELDE OPDRACHT: Daimy: "herplanning na afronding heet in Planado 'gekoppelde opdracht aanmaken'". API-test op
+  testopdrachten (direct verwijderd): completion_of_uuid/initial_job_uuid worden bij POST én PATCH genegeerd (blijven null), geen endpoint
+  (/completion, /completions, /complete, /linked, /linked_jobs, /copy, /clone = 404). Sync zet nu bovenaan de omschrijving "VERVOLG van
+  opdracht #<nr> (<status> op <datum>), tweede bezoek" + de velden gaan mee. Bestaande vervolg-opdrachten van vandaag (#1503, #1504,
+  Argentini 22-09) achteraf gepatcht. V1 aan Daimy: tekstregel genoeg, of echte koppeling via Planado-web-UI (Playwright) bouwen?
+  Audit (outlook-planado-audit.js) meldt nu ook "BOOKINGS ZONDER MEDEWERKER" (komende afspraken zonder staff).
+- 16-09 (sessie B) BEWIJS: lab tests/inmeet-boeken-lab.js 750 scenario's (mail × inmeter × Bookings × historie × telefoon) 0 fouten /
+  0 FOUT-STIL / 0 crashes; regressie echte historie: Raymond's mail nu wél gevonden in Bookings (6 s). LES: Bookings-calendarView kapt af
+  op 200 en de kalender heeft >200 per 30 dagen → emailUitBookings zoekt in WEEKBLOKKEN dichtstbij eerst (±90 dgn). Filter
+  lib/bookings-zonder-medewerker.js (test 8/8) laat vakantie/verhuis/OPTIE-blokken en zelfde-dag-dubbels (Beuker GEMIGREERD) met rust.
+  Audit 2 dgn 10:29Z: OK 31, ontbreekt 0, afwijkend 2 (Arnold niet plannen, VERHUIZEN = blokken zonder adres), Patrick 8/8, Bus 4 6/6.
+  Audit DUBBEL 17-09 Patrick #1475 × #440 = Zweep 12:45-13:15 (planner, rp-, Schiedam) overlapt Jagesar 13:00-14:00 (Rijswijk) óók in
+  Bookings zelf (bron), Planado spiegelt het; V2 aan Daimy: verzetten? Audit 3 dgn 10:33Z met nieuw filter: 0 valse Bookings-meldingen.
+  Live sync 12:30 met nieuwe code: nieuw 0, bijgewerkt 1, al aanwezig 270, fouten 0. planado-dubbel-check.js kent Patrick nu (was "onbekend").
+- 16-09 audit aangepast: outlook-planado-audit.js zoekt eerst ol-<hash>-<datum>, dan basis-id. Her-audit 2 dagen: Bus 4 Marvin&Bart 8/8 OK, Patrick 8/8 OK, alleen "Arnold niet plannen" (blok zonder adres, bewust) nog als afwijkend.
+
+## Sunmaster bestelportaal uitlezen voor ZD-configurator (16-09-2026, KLAAR)
+- Doel (Daimy /goal): PRECIES vastleggen hoe er besteld wordt en welke variabelen per product, voor de configurator van Zonwering Direct.
+- Login testaccount zonder 2FA: portal.sunmaster.nl, portaal cs, gebruiker "Daimy Boot" (wachtwoord in memory reference_leveranciers_portalen.md). Demo-omgeving "Demo portaal Zonwering Direct". NOOIT opslaan/bestellen; alleen Productingave invullen en Annuleren.
+- Crawler: ~/.playwright-mcp/sm-crawl-all.js (Playwright run_code, config via window.__SMCFG, resultaten window.__SMR → dump naar ~/.playwright-mcp/smr-*.json). Keuzelijsten tonen max 50 → volledige lijst via filter per teken (enumAll), cache window.__SMCACHE.
+- Rapport: python3 scripts/sunmaster-portaal-rapport.py → docs/sunmaster-bestelportaal-variabelen.md + data/sunmaster-portaal-variabelen.json.
+- KLAAR 16-09: alle 18 artikelen (basis + breedte-probe + alle Type Bediening-varianten, 78 runs) in docs/sunmaster-bestelportaal-variabelen.md + -lijsten.md; ruwe JSON in data/. Steekproef dropdown-limiet (max 50 zichtbaar, filter per teken) bewezen met BROOKE. Open: hoogtegrens rolluiken (geen directe waarschuwing), echte orderflow niet zichtbaar in demo (alleen offerte), leveringsconditie vast AFH.

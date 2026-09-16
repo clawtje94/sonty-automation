@@ -4,7 +4,7 @@ Verwezen vanuit sunmaster-bestelportaal-variabelen.md. Identieke lijsten zijn é
 
 ## L1: Kleur code doek (390 keuzes)
 
-Gebruikt bij: Geconfectioneerd Doek, SunElite, SunEye, SunEye XL, Sunbasic, Sunbasic Cassette
+Gebruikt bij: Geconfectioneerd Doek, SunCube 150, SunElite, SunEye, SunEye XL, SunProject 100, Sunbasic, Sunbasic Cassette
 
 - 0001 | WIT (T100)
 - 0003 | GROEN
@@ -446,9 +446,9 @@ Gebruikt bij: SunCube 150
 
 Verschil t.o.v. L10: extra = 00 | RAL, 01 | TNA Blank geanodiseerd, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST
 
-Verschil t.o.v. L12: extra = 00 | RAL, 01 | TNA Blank geanodiseerd, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST, 996 | RAL 9006 Metallic
+Verschil t.o.v. L13: extra = 00 | RAL, 01 | TNA Blank geanodiseerd, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST, 996 | RAL 9006 Metallic
 
-Verschil t.o.v. L14: extra = 00 | RAL, 01 | TNA Blank geanodiseerd, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, 997 | RAL 9010 ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 03sV | RAL 9010 ST, 04sV | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 7016 | RAL 7016, 9008 STR. | RAL 9008 ST
+Verschil t.o.v. L15: extra = 00 | RAL, 01 | TNA Blank geanodiseerd, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, 997 | RAL 9010 ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 03sV | RAL 9010 ST, 04sV | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 7016 | RAL 7016, 9008 STR. | RAL 9008 ST
 
 - 00 | RAL
 - 01 | TNA Blank geanodiseerd
@@ -1085,9 +1085,9 @@ Verschil t.o.v. L3: extra = 03m | RAL 9010 MAT, 06s | Antraciet Str., 9001 | RAL
 
 Verschil t.o.v. L10: extra = 00 | RAL, 03m | RAL 9010 MAT, 06s | Antraciet Str., 7006 STR. | RAL 7006 ST, 9001 | RAL 9001, 991 | RAL 7016, 996 | ANTRAC. ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 04s | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST
 
-Verschil t.o.v. L12: extra = 00 | RAL, 03m | RAL 9010 MAT, 06s | Antraciet Str., 7006 STR. | RAL 7006 ST, 9001 | RAL 9001, 991 | RAL 7016, 996 | ANTRAC. ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 04s | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST, 996 | RAL 9006 Metallic
+Verschil t.o.v. L13: extra = 00 | RAL, 03m | RAL 9010 MAT, 06s | Antraciet Str., 7006 STR. | RAL 7006 ST, 9001 | RAL 9001, 991 | RAL 7016, 996 | ANTRAC. ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 04s | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST, 996 | RAL 9006 Metallic
 
-Verschil t.o.v. L14: extra = 00 | RAL, 03m | RAL 9010 MAT, 06s | Antraciet Str., 7006 STR. | RAL 7006 ST, 9001 | RAL 9001, 991 | RAL 7016, 996 | ANTRAC. ST, 997 | RAL 9010 ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 03sV | RAL 9010 ST, 04s | ANTRAC. ST, 04sV | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 7016 | RAL 7016, 9008 STR. | RAL 9008 ST
+Verschil t.o.v. L15: extra = 00 | RAL, 03m | RAL 9010 MAT, 06s | Antraciet Str., 7006 STR. | RAL 7006 ST, 9001 | RAL 9001, 991 | RAL 7016, 996 | ANTRAC. ST, 997 | RAL 9010 ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 03sV | RAL 9010 ST, 04s | ANTRAC. ST, 04sV | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 7016 | RAL 7016, 9008 STR. | RAL 9008 ST
 
 - 00 | RAL
 - 03m | RAL 9010 MAT
@@ -1726,9 +1726,9 @@ Verschil t.o.v. L4: extra = 02 | Ral 9001, 03 | Ral 9010, 04s | ANTRAC. ST; ontb
 
 Verschil t.o.v. L10: extra = 00 | RAL, 02 | Ral 9001, 03 | Ral 9010, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST
 
-Verschil t.o.v. L12: extra = 00 | RAL, 02 | Ral 9001, 03 | Ral 9010, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST, 996 | RAL 9006 Metallic
+Verschil t.o.v. L13: extra = 00 | RAL, 02 | Ral 9001, 03 | Ral 9010, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST, 996 | RAL 9006 Metallic
 
-Verschil t.o.v. L14: extra = 00 | RAL, 02 | Ral 9001, 03 | Ral 9010, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 997 | RAL 9010 ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 03sV | RAL 9010 ST, 04sV | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 7016 | RAL 7016, 9008 STR. | RAL 9008 ST
+Verschil t.o.v. L15: extra = 00 | RAL, 02 | Ral 9001, 03 | Ral 9010, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 997 | RAL 9010 ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 03sV | RAL 9010 ST, 04sV | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 7016 | RAL 7016, 9008 STR. | RAL 9008 ST
 
 - 00 | RAL
 - 02 | Ral 9001
@@ -2368,9 +2368,9 @@ Verschil t.o.v. L5: extra = 995 | RAL 9010, 996 | ANTRAC. ST; ontbreekt = 03 | R
 
 Verschil t.o.v. L10: extra = 00 | RAL, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, 996 | ANTRAC. ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 04s | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST
 
-Verschil t.o.v. L12: extra = 00 | RAL, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, 996 | ANTRAC. ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 04s | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST, 996 | RAL 9006 Metallic
+Verschil t.o.v. L13: extra = 00 | RAL, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, 996 | ANTRAC. ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 04s | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST, 996 | RAL 9006 Metallic
 
-Verschil t.o.v. L14: extra = 00 | RAL, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, 996 | ANTRAC. ST, 997 | RAL 9010 ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 03sV | RAL 9010 ST, 04s | ANTRAC. ST, 04sV | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 7016 | RAL 7016, 9008 STR. | RAL 9008 ST
+Verschil t.o.v. L15: extra = 00 | RAL, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, 996 | ANTRAC. ST, 997 | RAL 9010 ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 03sV | RAL 9010 ST, 04s | ANTRAC. ST, 04sV | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 7016 | RAL 7016, 9008 STR. | RAL 9008 ST
 
 - 00 | RAL
 - 02 | Ral 9001
@@ -3012,9 +3012,9 @@ Verschil t.o.v. L6: extra = 01 | TNA Blank geanodiseerd; ontbreekt = geen
 
 Verschil t.o.v. L10: extra = 00 | RAL, 01 | TNA Blank geanodiseerd, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, 996 | ANTRAC. ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 04s | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST
 
-Verschil t.o.v. L12: extra = 00 | RAL, 01 | TNA Blank geanodiseerd, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, 996 | ANTRAC. ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 04s | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST, 996 | RAL 9006 Metallic
+Verschil t.o.v. L13: extra = 00 | RAL, 01 | TNA Blank geanodiseerd, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, 996 | ANTRAC. ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 04 | RAL 7016, 04s | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 9008 STR. | RAL 9008 ST, 996 | RAL 9006 Metallic
 
-Verschil t.o.v. L14: extra = 00 | RAL, 01 | TNA Blank geanodiseerd, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, 996 | ANTRAC. ST, 997 | RAL 9010 ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 03sV | RAL 9010 ST, 04s | ANTRAC. ST, 04sV | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 7016 | RAL 7016, 9008 STR. | RAL 9008 ST
+Verschil t.o.v. L15: extra = 00 | RAL, 01 | TNA Blank geanodiseerd, 02 | Ral 9001, 7006 STR. | RAL 7006 ST, 991 | RAL 7016, 995 | RAL 9010, 996 | ANTRAC. ST, 997 | RAL 9010 ST, BRONS STR. | BRONS ST, T29/60740 | BRONS STR. T29/60740; ontbreekt = 02 | RAL 9001, 03 | RAL 9010, 03sV | RAL 9010 ST, 04s | ANTRAC. ST, 04sV | ANTRAC. ST, 08s | BRONS ST, 7006 STR. | RAL 7006 STR., 7016 | RAL 7016, 9008 STR. | RAL 9008 ST
 
 - 00 | RAL
 - 01 | TNA Blank geanodiseerd
@@ -3663,9 +3663,11 @@ Gebruikt bij: Zipscreen 100, Zipscreen 130 (Max), Zipscreen 85
 
 ## L9: Kleur code doek (76 keuzes)
 
-Gebruikt bij: Geconfectioneerd Screendoek, Zipscreen 100, Zipscreen 130 (Max), Zipscreen 85, Zipscreen SunZip Design 110
+Gebruikt bij: Zipscreen 100, Zipscreen 130 (Max), Zipscreen 85, Zipscreen SunZip Design 110
 
-Verschil t.o.v. L13: extra = geen; ontbreekt = 001001 | Serge Effen Grijs (HR), 002007 | Serge Wit-Parelgrijs, 003002 | Serge Zand-Wit (HR), 007007 | Serge Effen Parelgrijs (HR), 008001 | Serge Safari, 008002 | Serge Vlas-Wit (HR), 008007 | Serge Vlas-Parelgrijs, 008015 | Serge Vlas-Do.Groen (HR), 010010 | Serge Effen Zwart (HR), 010011 | Serge Zwart-Brons, 011011 | Serge Effen Brons (HR)
+Verschil t.o.v. L14: extra = geen; ontbreekt = 001001 | Serge Effen Grijs (HR), 002007 | Serge Wit-Parelgrijs, 003002 | Serge Zand-Wit (HR), 007007 | Serge Effen Parelgrijs (HR), 008001 | Serge Safari, 008002 | Serge Vlas-Wit (HR), 008007 | Serge Vlas-Parelgrijs, 008015 | Serge Vlas-Do.Groen (HR), 010010 | Serge Effen Zwart (HR), 010011 | Serge Zwart-Brons, 011011 | Serge Effen Brons (HR)
+
+Verschil t.o.v. L22: extra = geen; ontbreekt = 001001 | Serge Effen Grijs (HR)
 
 - 001004 | Serge Grijs-Oranje
 - 001005 | Serge Grijs-Mandarijn
@@ -5004,7 +5006,12 @@ Gebruikt bij: Zipscreen 100, Zipscreen 130 (Max), Zipscreen 85, Zipscreen SunZip
 - 997 | RAL 9010 ST
 - 998 | RAL 7021 ST
 
-## L12: Kleur kap (625 keuzes)
+## L12: Kleur code doek (0 keuzes)
+
+Gebruikt bij: Geconfectioneerd Doek, Geconfectioneerd Screendoek, SunCube 150, SunElite, SunEye, SunEye XL, SunProject 100, Sunbasic, Sunbasic Cassette, Zipscreen 85, Zipscreen SunZip Design 110
+
+
+## L13: Kleur kap (625 keuzes)
 
 Gebruikt bij: Zipscreen SunZip Design 110
 
@@ -5636,7 +5643,7 @@ Verschil t.o.v. L10: extra = 996 | RAL 9006 Metallic; ontbreekt = geen
 - 997 | RAL 9010 ST
 - 998 | RAL 7021 ST
 
-## L13: Kleur code doek (87 keuzes)
+## L14: Kleur code doek (87 keuzes)
 
 Gebruikt bij: Zipscreen Zip Design 110 Veranda
 
@@ -5728,13 +5735,13 @@ Gebruikt bij: Zipscreen Zip Design 110 Veranda
 - 81812 | Serge Antraciet-Zand 1%
 - 81818 | Serge Antraciet-Antraciet 1%
 
-## L14: Kleur kap (625 keuzes)
+## L15: Kleur kap (625 keuzes)
 
 Gebruikt bij: Zipscreen Zip Design 110 Veranda
 
 Verschil t.o.v. L10: extra = 03sV | RAL 9010 ST, 04sV | ANTRAC. ST, 7016 | RAL 7016; ontbreekt = 04 | RAL 7016, 997 | RAL 9010 ST
 
-Verschil t.o.v. L12: extra = 03sV | RAL 9010 ST, 04sV | ANTRAC. ST, 7016 | RAL 7016; ontbreekt = 04 | RAL 7016, 996 | RAL 9006 Metallic, 997 | RAL 9010 ST
+Verschil t.o.v. L13: extra = 03sV | RAL 9010 ST, 04sV | ANTRAC. ST, 7016 | RAL 7016; ontbreekt = 04 | RAL 7016, 996 | RAL 9006 Metallic, 997 | RAL 9010 ST
 
 - 02 | RAL 9001
 - 03 | RAL 9010
@@ -6362,7 +6369,7 @@ Verschil t.o.v. L12: extra = 03sV | RAL 9010 ST, 04sV | ANTRAC. ST, 7016 | RAL 7
 - 994 | DB703 ST
 - 998 | RAL 7021 ST
 
-## L15: Kleur geleider (634 keuzes)
+## L16: Kleur geleider (634 keuzes)
 
 Gebruikt bij: Zipscreen Zip Design 110 Veranda
 
@@ -7003,7 +7010,7 @@ Verschil t.o.v. L11: extra = 03sV | RAL 9010 ST, 7016 | RAL 7016, 99001 | RAL 90
 - 997 | RAL 9010 ST
 - 998 | RAL 7021 ST
 
-## L16: Kleur onderlijst (635 keuzes)
+## L17: Kleur onderlijst (635 keuzes)
 
 Gebruikt bij: Zipscreen Zip Design 110 Veranda
 
@@ -7643,7 +7650,7 @@ Gebruikt bij: Zipscreen Zip Design 110 Veranda
 - 997 | RAL 9010 ST
 - 998 | RAL 7021 ST
 
-## L17: Kleur code doek (168 keuzes)
+## L18: Kleur code doek (168 keuzes)
 
 Gebruikt bij: Bovendak zonwering SunControl 165 ZIP
 
@@ -7816,7 +7823,7 @@ Gebruikt bij: Bovendak zonwering SunControl 165 ZIP
 - U811 | ORCHESTRA HETRE LINK
 - U814 | OLIJFGROEN
 
-## L18: Kleur frame (627 keuzes)
+## L19: Kleur frame (627 keuzes)
 
 Gebruikt bij: Bovendak zonwering SunControl 165 ZIP
 
@@ -8448,7 +8455,7 @@ Gebruikt bij: Bovendak zonwering SunControl 165 ZIP
 - 998 | RAL 7021 ST
 - DB 703 STR. | DB 703 ST
 
-## L19: Kleur kap (13 keuzes)
+## L20: Kleur kap (13 keuzes)
 
 Gebruikt bij: Rolluik S-37, Rolluik S-42
 
@@ -8466,7 +8473,7 @@ Gebruikt bij: Rolluik S-37, Rolluik S-42
 - 86s | R86s Ral 9010 STR.
 - 99 | Ral
 
-## L20: Kleur onderlijst (13 keuzes)
+## L21: Kleur onderlijst (13 keuzes)
 
 Gebruikt bij: Rolluik S-37, Rolluik S-42, Rolluik los pantser
 
@@ -8483,3 +8490,87 @@ Gebruikt bij: Rolluik S-37, Rolluik S-42, Rolluik los pantser
 - 86 | R86 Ral 9010
 - 86s | R86s Ral 9010 STR.
 - 99 | Ral
+
+## L22: Kleur code doek (77 keuzes)
+
+Gebruikt bij: Geconfectioneerd Screendoek
+
+Verschil t.o.v. L14: extra = geen; ontbreekt = 002007 | Serge Wit-Parelgrijs, 003002 | Serge Zand-Wit (HR), 007007 | Serge Effen Parelgrijs (HR), 008001 | Serge Safari, 008002 | Serge Vlas-Wit (HR), 008007 | Serge Vlas-Parelgrijs, 008015 | Serge Vlas-Do.Groen (HR), 010010 | Serge Effen Zwart (HR), 010011 | Serge Zwart-Brons, 011011 | Serge Effen Brons (HR)
+
+- 001001 | Serge Effen Grijs (HR)
+- 001004 | Serge Grijs-Oranje
+- 001005 | Serge Grijs-Mandarijn
+- 001006 | Serge Grijs-Geel
+- 001009 | Serge Grijs-Do.Blauw (HR+)
+- 001010 | Serge Grijs-Zwart (HR)
+- 001012 | Serge Grijs-Groen
+- 001014 | Serge Grijs-Turquiose
+- 001042 | Serge Shade
+- 001044 | Serge Palm
+- 001045 | Serge Coconut
+- 001061 | Serge Grijs-Wit-Parelgrijs
+- 001070 | Serge Grijs Parelgrijs-Do.Blauw
+- 001074 | Serge Grijs-Geel-Groen
+- 001094 | Serge Lagoon
+- 002002 | Serge Effen Wit (HR)
+- 002061 | Serge Wit-Wit-Parelgrijs
+- 003003 | Serge Effen Zand (HR)
+- 007002 | Serge Parelgrijs-Wit (HR+)
+- 007009 | Serge Parelgrijs-Do.Blauw
+- 007082 | Serge Parelgrijs-Wit-Zand
+- 008003 | Serge Vlas-Zand
+- 008008 | Serge Effen Vlas (HR)
+- 008016 | Serge Vlas-Bordeaux
+- 008079 | Serge Linen Grey Gold
+- 030030 | Serge Effen Nachtzwart
+- 031031 | Serge Jade river
+- 032031 | Serge Duck egg
+- 032032 | Serge Wet sand
+- 032040 | Serge Mango
+- 033001 | Serge Oyster shell
+- 033032 | Serge Soft clay
+- 033033 | Serge Sandstone
+- 033041 | Serge Maroon
+- 033043 | Serge Moss
+- 047047 | Serge Effen Antracietgrijs
+- 70101 | Serge Effen Wit (HR)
+- 70801 | Serge Grijs-Wit (HR+)
+- 70808 | Serge Effen Grijs (HR)
+- 70811 | Serge Grijs-Do.Blauw (HR+)
+- 70812 | Serge Grijs-Zand (HR+)
+- 70818 | Serge Grijs-Zwart (HR)
+- 70826 | Serge Grijs-Caramel (HR)
+- 70867 | Serge Pacific (HR)
+- 71111 | Serge Effen Marine (HR)
+- 71201 | Serge Zand-Wit (HR)
+- 71203 | Serge Zand-Geel (HR)
+- 71212 | Serge Effen Zand (HR)
+- 71213 | Serge Zand-Brons (HR+)
+- 71305 | Serge Brons-Mandarijn (HR)
+- 71308 | Serge Brons-Grijs
+- 71313 | Serge Effen Brons (HR)
+- 71315 | Serge Brons-Lime
+- 71601 | Serge Vlas-Wit (HR)
+- 71608 | Serge Vlas-Grijs
+- 71616 | Serge Effen Vlas (HR)
+- 71622 | Serge Vlas-Do.Groen (HR)
+- 71701 | Serge Parelgrijs-Wit (HR+)
+- 71708 | Serge Parelgrijs-Grijs
+- 71716 | Serge Parelgrijs-Vlas (HR+)
+- 71717 | Serge Effen Parelgrijs (HR)
+- 71812 | Serge Zwart-Zand
+- 71813 | Serge Zwart-Brons
+- 71816 | Serge Zwart-Vlas
+- 71818 | Serge Effen Zwart (HR)
+- 71836 | Serge Gravel M38
+- 71881 | Serge JAMAICA
+- 80801 | Serge Grijs-Wit 1%
+- 80808 | Serge Grijs-Grijs 1%
+- 80812 | Serge Grijs-Zand 1%
+- 80818 | Serge Grijs-Antraciet 1%
+- 81701 | Serge Parelgrijs-Wit 1%
+- 81708 | Serge Parelgrijs-Grijs 1%
+- 81717 | Serge Parelgrijs-Parelgrijs 1%
+- 81808 | Serge Antraciet-Grijs 1%
+- 81812 | Serge Antraciet-Zand 1%
+- 81818 | Serge Antraciet-Antraciet 1%

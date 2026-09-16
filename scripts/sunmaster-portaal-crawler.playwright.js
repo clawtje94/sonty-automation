@@ -24,21 +24,46 @@ async (page) => {
     }).filter(r => r.label);
   });
   const dismissWarn = async () => { const m = page.locator('.bootbox.modal.in'); if (await m.count()) { const t = (await m.innerText()).replace(/\s+/g, ' ').replace(/^Waarschuwing\s*/, '').replace(/\s*Ok$/, '').trim(); await m.locator('button').last().click(); await page.waitForTimeout(600); return t; } return null; };
+  const readStable = async (prevKey) => {
+    // gemeten: na typen is de lijst ~0,6-0,85 s verborgen tot het antwoord komt; geen treffers = blijft verborgen.
+    // Dus: pas lezen na 950 ms, non-leeg en 2x gelijk = klaar; leeg pas geloven na 2,2 s.
+    await page.waitForTimeout(950);
+    let last = null;
+    for (let t = 0; t < 12; t++) {
+      const o = await readOpts(); const key = o.join('~');
+      if (o.length && last !== null && key === last) return o;
+      if (!o.length && t >= 6) { const o2 = await readOpts(); if (!o2.length) return []; }
+      last = key; await page.waitForTimeout(200);
+    }
+    return await readOpts();
+  };
   const enumAll = async (idx, seed) => {
-    // typeahead toont max 50; filter per teken (contains) en verzamel de unie
-    const all = new Set(seed); const chars = '0123456789abcdefghijklmnopqrstuvwxyz'.split('');
-    const q = chars.map(c => c);
-    while (q.length) { const f = q.shift(); if (f.length > 3) continue;
-      const inp = page.locator('input:visible').nth(idx); await inp.click(); await inp.fill(f); await page.waitForTimeout(700);
-      const o = await readOpts(); o.forEach(x => all.add(x));
-      if (o.length >= 50) chars.forEach(c => q.push(f + c));
-      await page.keyboard.press('Escape'); await page.waitForTimeout(150); }
+    // typeahead toont max 50; filter op 'bevat'. Elk artikel heeft een code met cijfers, dus: cijferfilters recursief
+    // (0-9 -> 00-99 -> 000-999 ...) tot < 50 treffers; letters alleen op niveau 1 als vangnet (niet uitgebreid).
+    const all = new Set(seed); const digits = '0123456789'.split(''); const letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+    const q = digits.slice(); let incomplete = [], letterOverflow = []; let prevKey = seed.join('~'); const log = [];
+    const doFilter = async (f) => {
+      const inp = page.locator('input:visible').nth(idx); await inp.click(); await inp.fill(f);
+      let o = await readStable(prevKey);
+      if (o.length && o.join('~') === prevKey) { await page.keyboard.press('Escape'); await page.waitForTimeout(150); await inp.click(); await inp.fill(''); await page.waitForTimeout(150); await inp.fill(f); o = await readStable(prevKey); }
+      prevKey = o.join('~'); o.forEach(x => all.add(x)); log.push(f + ':' + o.length);
+      await page.keyboard.press('Escape'); await page.waitForTimeout(80);
+      return o;
+    };
+    // gemeten regel: filter = (code begint met X) OF (naam bevat X). Codes zijn cijfers of letter+cijfers.
+    const expand = async (start) => { const qq = [start]; while (qq.length) { const f = qq.shift(); const o = await doFilter(f); if (o.length >= 50) { if (f.length < 6) digits.forEach(c => qq.push(f + c)); else incomplete.push(f); } } };
+    const overflowDigits = [];
+    const expandD = async (start) => { const qq = [start]; while (qq.length) { const f = qq.shift(); const o = await doFilter(f); if (o.length >= 50) { overflowDigits.push(f); if (f.length < 6) digits.forEach(c => qq.push(f + c)); else incomplete.push(f); } } };
+    for (const d of digits) await expandD(d);
+    // codes met lettersuffix (04s, 03m, 06s) vallen buiten cijfer-uitbreiding als het cijferprefix overloopt: prefix+letter proberen
+    for (const f of overflowDigits.filter(x => x.length === 2)) for (const l of 'smtx') { const o = await doFilter(f + l); if (o.length >= 50) incomplete.push(f + l); }
+    for (const c of letters) { const o = await doFilter(c); if (o.length >= 50) { letterOverflow.push(c); for (const d of digits) await expand(c + d); } }
     const inp = page.locator('input:visible').nth(idx); await inp.click(); await inp.fill(''); await page.waitForTimeout(300); await page.keyboard.press('Escape');
-    return [...all];
+    const list = [...all]; list.__incomplete = incomplete; list.__log = log; list.__letterOverflow = letterOverflow; return list;
   };
   const readOpts = () => page.evaluate(() => [...document.querySelectorAll('ul.dropdown-menu li, [role=option], .typeahead-popup li')].filter(e => e.offsetParent).map(e => e.textContent.trim().replace(/\s+/g, ' ')));
   const openOpts = async (idx) => { await page.locator('input:visible').nth(idx).click(); await page.waitForTimeout(350); await page.keyboard.press('ArrowDown'); await page.waitForTimeout(800); let o = await readOpts(); if (!o.length) { await page.keyboard.type(' '); await page.waitForTimeout(600); o = await readOpts(); } return o; };
-  const pickOpt = async (field, opts, prefer) => { let i = 0; const p = (prefer || {})[field]; if (p) { const j = opts.findIndex(o => new RegExp(p, 'i').test(o)); if (j >= 0) i = j; } await page.locator('ul.dropdown-menu li:visible, [role=option]:visible').nth(i).click(); await page.waitForTimeout(1100); return opts[i]; };
+  const pickOpt = async (field, opts, prefer) => { let i = 0; const p = (prefer || {})[field]; if (p) { const j = opts.findIndex(o => new RegExp(p, 'i').test(o)); if (j >= 0) i = j; } await page.locator('ul.dropdown-menu li:visible, [role=option]:visible').nth(i).click(); await page.waitForTimeout(850); return opts[i]; };
 
   await dismissWarn();
   for (let k = 0; k < 3; k++) { const b = page.getByRole('button', { name: 'Annuleren' }).first(); if (await b.count()) { await b.click(); await page.waitForTimeout(900); } else break; }
@@ -50,7 +75,7 @@ async (page) => {
       const sb = page.locator('.svy-dialog input:visible').first();
       await sb.fill(prod); await page.waitForTimeout(1200);
       const cell = page.locator('.svy-dialog .ag-cell', { hasText: new RegExp('^' + prod.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$') }).first();
-      await cell.dblclick(); await page.waitForTimeout(2500);
+      await cell.dblclick(); await page.waitForTimeout(1800);
       const seen = {};
       for (let round = 0; round < 45; round++) {
         const rows = await dialogRows(); if (!rows) { res.errors.push('geen dialoog'); break; }
@@ -68,7 +93,7 @@ async (page) => {
             await openOpts(next.idx); }
           if (opts.length) chosen = await pickOpt(next.label, opts, prefer); else await page.keyboard.press('Escape');
           const warn = await dismissWarn();
-          res.fields.push({ field: next.label, kind: 'select', chosen, options: full || opts, truncatedAt50: opts.length >= 50, warn });
+          res.fields.push({ field: next.label, kind: 'select', chosen, options: full || opts, truncatedAt50: opts.length >= 50, enumIncomplete: (full && full.__incomplete && full.__incomplete.length) ? full.__incomplete : undefined, enumLog: (full && full.__log) ? full.__log.join(' ') : undefined, letterOverflow: (full && full.__letterOverflow) ? full.__letterOverflow.join('') : undefined, warn });
         } else {
           let val = '';
           if (/breedte/i.test(next.label)) val = String(WIDTH);
@@ -77,7 +102,7 @@ async (page) => {
           let range = null, warn = null;
           if (val) { const inp = page.locator('input:visible').nth(next.idx); await inp.click(); await inp.fill('1'); await page.keyboard.press('Tab'); await page.waitForTimeout(1200); range = await dismissWarn();
             const m = range && range.match(/tussen ([\d.]+) en ([\d.]+)/); if (m) { const mn = +m[1].replace(/\./g, ''), mx = +m[2].replace(/\./g, ''); if (+val < mn || +val > mx) val = String(Math.round(((mn + mx) / 2) / 100) * 100); if (/breedte/i.test(next.label)) { res.widthRange = [mn, mx]; res.width = +val; } }
-            await inp.click(); await inp.fill(val); await page.keyboard.press('Tab'); await page.waitForTimeout(1500); warn = await dismissWarn(); }
+            await inp.click(); await inp.fill(val); await page.keyboard.press("Tab"); await page.waitForTimeout(1200); warn = await dismissWarn(); }
           res.fields.push({ field: next.label, kind: 'text', filled: val || null, range, warn });
         }
       }
@@ -110,12 +135,14 @@ async (page) => {
   };
   for (const prod of products) {
     const base = await runOne(prod, prefer, tag);
-    if (CFG.branch) {
-      const bf = base.fields.find(f => f.field === CFG.branch && f.kind === 'select');
-      if (bf) for (const opt of bf.options.slice(1)) {
-        const esc = opt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        await runOne(prod, Object.assign({}, prefer, { [CFG.branch]: '^' + esc + '$' }), 'variant ' + CFG.branch + ' = ' + opt);
-      }
+    const branchFields = CFG.branchFields || (CFG.branch ? [CFG.branch] : []);
+    const skipRe = CFG.branchSkip ? new RegExp(CFG.branchSkip, 'i') : null;
+    let fieldsToBranch = branchFields.length ? base.fields.filter(f => f.kind === 'select' && branchFields.includes(f.field)) : [];
+    if (CFG.branchAuto) fieldsToBranch = base.fields.filter(f => f.kind === 'select' && f.options.length >= 2 && f.options.length <= (CFG.branchMax || 13) && !(skipRe && skipRe.test(f.field)));
+    for (const bf of fieldsToBranch) for (const opt of bf.options.slice(1)) {
+      if (CFG.branchOnly && !CFG.branchOnly.some(([f, o]) => f === bf.field && o === opt)) continue;
+      const esc = opt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      await runOne(prod, Object.assign({}, prefer, { [bf.field]: '^' + esc + '$' }), 'variant ' + bf.field + ' = ' + opt);
     }
   }
   return summary;

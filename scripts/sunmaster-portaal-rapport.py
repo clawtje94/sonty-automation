@@ -22,6 +22,25 @@ by_prod = {}
 for r in results:
     by_prod.setdefault(r['product'], {})[r.get('tag', 'std')] = r
 
+# grote lijsten: unie over alle runs per product+veld (elke run kan door de 50-limiet/laadtijd iets missen)
+RUNCOUNTS = {}
+for prod, tags in by_prod.items():
+    union = {}
+    for tag, r in tags.items():
+        for f in r.get('fields', []):
+            if f['kind'] == 'select' and len(f.get('options', [])) >= 50:
+                u = union.setdefault(f['field'], {})
+                for o in f['options']:
+                    u.setdefault(o.strip(), tag)
+                RUNCOUNTS.setdefault((prod, f['field']), []).append((tag, len(f['options'])))
+    for tag, r in tags.items():
+        for f in r.get('fields', []):
+            if f['kind'] == 'select' and f['field'] in union and len(f.get('options', [])) >= 50:
+                mine = {o.strip() for o in f['options']}
+                extra = [k for k in union[f['field']] if k not in mine]
+                if extra:
+                    f['options'] = [o.strip() for o in f['options']] + extra
+                    f['unionAdded'] = len(extra)
 os.makedirs(os.path.dirname(RAW), exist_ok=True)
 json.dump(by_prod, open(RAW, 'w'), indent=1, ensure_ascii=False)
 
@@ -59,6 +78,7 @@ L.append('')
 L.append('## Meetmethode en bevindingen over het portaal')
 L.append('')
 L.append('- **Keuzelijsten tonen max. 50 regels.** Scrollen helpt niet; de lijst stopt bij regel 50. De volledige lijsten zijn opgehaald door per teken (0-9, a-z, recursief) te filteren en de resultaten samen te voegen. Steekproef: doekkleur "31318 | BROOKE" staat niet in de 50 zichtbare regels, maar is via het filter wel te kiezen en blijft in het veld staan.')
+L.append('- **Volledigheid grote lijsten**: de eerste runs lazen bij zware filters (bijv. "r" of "0" op de RAL-lijst) soms te vroeg en misten daardoor kleuren. Daarna is de lezer afgestemd op het gemeten laadgedrag (antwoord na 0,6 tot 0,85 s) en zijn de grote lijsten opnieuw opgehaald; per product wordt de unie van alle runs gebruikt. Per lijst staat hieronder wat elke run vond.')
 L.append('- **Grote lijsten die bij meerdere producten identiek zijn** staan één keer in het lijstenbestand; bijna-identieke lijsten (bijv. kapkleuren per model) worden daar met hun verschillen genoemd.')
 L.append('- **Maatgrenzen** zijn gemeten door 1 mm in te vullen en de waarschuwing van het portaal te lezen. Bij rolluiken gaf het hoogteveld geen directe waarschuwing; die grens wordt vermoedelijk pas bij opslaan gecontroleerd.')
 L.append('- **Variant-runs**: voor elk product is elke keuze bij *Type Bediening* apart doorlopen; per keuze staat wat er in de vervolgvelden verandert (andere motorkabels, extra veld *Bed. optie 2* met draaistang bij handbediening, enz.). In de variant-runs zijn de grote lijsten niet opnieuw volledig opgehaald; daar telt de lijst uit de basisrun.')
@@ -75,7 +95,7 @@ L.append('')
 L.append('## Variabelen per product')
 L.append('')
 
-def render_fields(L, r):
+def render_fields(L, r, prod=None):
     if r.get('widthRange'):
         L.append(f"Breedtebereik: **{r['widthRange'][0]} – {r['widthRange'][1]} mm** (gemeten via waarschuwing van het portaal; uitgelezen bij breedte {r.get('width')}).")
         L.append('')
@@ -92,7 +112,8 @@ def render_fields(L, r):
             if n <= 12:
                 cell = '<br>'.join(cell_(o) for o in opts)
             else:
-                cell = f'{n} keuzes, zie lijst **{list_ref(f["field"], opts)}** in het lijstenbestand'
+                rc = [(t, c) for t, c in RUNCOUNTS.get((prod, f['field']), []) if not t.startswith('variant')]
+                cell = f'{n} keuzes (unie van {len(rc)} runs: ' + ', '.join(f'{t} {c}' for t, c in rc) + f'), zie lijst **{list_ref(f["field"], opts)}** in het lijstenbestand' if rc else f'{n} keuzes, zie lijst **{list_ref(f["field"], opts)}** in het lijstenbestand'
             if f.get('truncatedAt50') and n == 50:
                 cell += ' (mogelijk afgekapt op 50)'
             default = cell_(f.get('chosen') or '')
@@ -130,30 +151,71 @@ for prod, tags in by_prod.items():
     if base.get('errors'):
         L.append('> Fouten tijdens uitlezen: ' + '; '.join(cell_(e)[:120] for e in base['errors']))
         L.append('')
-    render_fields(L, base)
+    render_fields(L, base, prod)
+    # controle-run grote lijsten
+    chk = tags.get('check')
+    if chk:
+        basef0 = {f['field']: f for f in base.get('fields', [])}
+        regels = []
+        for f in chk.get('fields', []):
+            if f['kind'] != 'select' or len(f.get('options', [])) < 50: continue
+            b = basef0.get(f['field'])
+            nb = len(b['options']) if b else None
+            regels.append(f"*{f['field']}*: basisrun {nb}, controlerun (diepte 4) {len(f['options'])}" + (" ⚠ nog filters met ≥50 treffers: " + ', '.join(f['enumIncomplete']) if f.get('enumIncomplete') else ' ✔ volledig'))
+        if regels:
+            L.append('Controle volledigheid grote lijsten: ' + '; '.join(regels))
+            L.append('')
     variants = [(t, r) for t, r in tags.items() if t.startswith('variant')]
     if variants:
         basef = {f['field']: f for f in base.get('fields', [])}
-        L.append('**Varianten (andere keuze bij ' + variants[0][0].split(' = ')[0].replace('variant ', '') + '): wat verandert er in de vervolgvelden**')
-        L.append('')
+        byfield = {}
         for t, r in variants:
-            keuze = t.split(' = ', 1)[1] if ' = ' in t else t
-            diffs = []
-            for f in r.get('fields', []):
-                b = basef.get(f['field'])
-                if f['kind'] == 'select':
-                    if b is None:
-                        diffs.append(f"nieuw veld *{f['field']}*: " + ' / '.join(cell_(o) for o in f['options'][:12]) + (' …' if len(f['options']) > 12 else ''))
-                    elif optset(b) != optset(f) and f['field'] != variants[0][0].split(' = ')[0].replace('variant ', ''):
-                        diffs.append(f"*{f['field']}* wordt: " + (' / '.join(cell_(o) for o in f['options'][:12]) + (' …' if len(f['options']) > 12 else '') if f['options'] else '(geen keuzes)'))
-                elif b is None:
-                    diffs.append(f"nieuw veld *{f['field']}* (getal)")
-            weg = [n for n in basef if n not in {f['field'] for f in r.get('fields', [])} and basef[n]['kind'] != 'fixed']
-            if weg:
-                diffs.append('vervalt: ' + ', '.join(f'*{n}*' for n in weg))
-            if r.get('errors'):
-                diffs.append('⚠ fout bij uitlezen: ' + cell_(r['errors'][0])[:80])
-            L.append(f'- **{cell_(keuze)}** → ' + ('; '.join(diffs) if diffs else 'geen verschil in vervolgvelden'))
+            fld, keuze = t.replace('variant ', '', 1).split(' = ', 1)
+            byfield.setdefault(fld, []).append((keuze, r))
+        L.append('**Varianten: wat verandert er in de vervolgvelden bij een andere keuze**')
+        L.append('')
+        for fld, items in byfield.items():
+            L.append(f'*{fld}* (basis: {cell_(basef[fld]["chosen"] or "") if fld in basef else "?"})')
+            L.append('')
+            for keuze, r in items:
+                diffs = []
+                for f in r.get('fields', []):
+                    b = basef.get(f['field'])
+                    if f['kind'] == 'select':
+                        if b is None:
+                            diffs.append(f"nieuw veld *{f['field']}*: " + ' / '.join(cell_(o) for o in f['options'][:12]) + (' …' if len(f['options']) > 12 else ''))
+                        elif f['field'] != fld and optset(b) != optset(f):
+                            if len(f['options']) >= 50 or len(b['options']) >= 50:
+                                diffs.append(f"*{f['field']}*: andere lijst ({len(f['options'])} i.p.v. {len(b['options'])} keuzes, zie lijst **{list_ref(f['field'], [clean(o) for o in f['options']])}**)")
+                            else:
+                                diffs.append(f"*{f['field']}* wordt: " + (' / '.join(cell_(o) for o in f['options'][:12]) + (' …' if len(f['options']) > 12 else '') if f['options'] else '(geen keuzes)'))
+                    elif b is None:
+                        rng = f.get('range') or ''
+                        m = re.search(r'tussen ([\d.]+) en ([\d.]+)', rng)
+                        diffs.append(f"nieuw veld *{f['field']}* (getal" + (f", {m.group(1)}–{m.group(2)} mm" if m else '') + ')')
+                    elif f['kind'] == 'text' and b.get('range') != f.get('range') and f.get('range'):
+                        diffs.append(f"*{f['field']}* bereik wordt: {cell_(f['range'])}")
+                weg = [n for n in basef if n not in {f['field'] for f in r.get('fields', [])} and basef[n]['kind'] != 'fixed']
+                if weg:
+                    diffs.append('vervalt: ' + ', '.join(f'*{n}*' for n in weg))
+                # vaste waarden die veranderen
+                bfix = {x['label']: x['value'] for x in (base.get('final') or []) if x['kind'] == 'fixed'}
+                for x in (r.get('final') or []):
+                    if x['kind'] == 'fixed' and x['label'] in bfix and clean(bfix[x['label']]) != clean(x['value']):
+                        diffs.append(f"vaste waarde *{x['label']}* wordt {cell_(x['value'])}")
+                    elif x['kind'] == 'fixed' and x['label'] not in bfix and x['label'] not in basef and x.get('value'):
+                        diffs.append(f"nieuwe vaste waarde *{x['label']}* = {cell_(x['value'])}")
+                if r.get('widthRange') and base.get('widthRange') and r['widthRange'] != base['widthRange']:
+                    diffs.append(f"breedtebereik wordt {r['widthRange'][0]}–{r['widthRange'][1]} mm")
+                if r.get('errors'):
+                    diffs.append('⚠ fout bij uitlezen: ' + cell_(r['errors'][0])[:80])
+                L.append(f'- **{cell_(keuze)}** → ' + ('; '.join(diffs) if diffs else 'geen verschil in vervolgvelden'))
+            L.append('')
+        # dekking
+        alle_sel = [f for f in base.get('fields', []) if f['kind'] == 'select' and len(f['options']) >= 2]
+        gedaan = [f['field'] for f in alle_sel if f['field'] in byfield]
+        niet = [f"{f['field']} ({len(f['options'])})" for f in alle_sel if f['field'] not in byfield]
+        L.append('Dekking varianten: doorlopen voor ' + ', '.join(f'*{g}*' for g in gedaan) + ('. Niet apart doorlopen (alleen eerste keuze): ' + ', '.join(niet) if niet else '. Alle keuzevelden doorlopen.'))
         L.append('')
 
 LISTS_OUT = OUT.replace('.md', '-lijsten.md')

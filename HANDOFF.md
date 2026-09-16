@@ -4372,3 +4372,9 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
   1.200 sc. 0 fout-stil. Live testkaarten LEAD-1789570491492-F2K7 en LEAD-1789570529195-XDM5 (naam "Test …", rule 9 blokkeert versturen):
   6.900 + 2.067 + 195 + 338 = 9.500 ✓. Playwright-bewijs scratchpad verify-tahoma.mjs.
 - Terzijde gezien: nl.sonty.auto-resume logt "timeout: command not found" (auto-resume.sh regel 28, macOS heeft geen timeout) → niet gefixt.
+- 16-09 ~17:45 Daimy: "TaHoma als los product erin, dan weet je dat je hem al in je winkelmand hebt" → GEDAAN + LIVE (4f75b69): product
+  "Somfy TaHoma Switch" (id tahoma, hasConfig false) in de productlijst én als eigen regel in de aanvraag zodra hij bij een product als
+  extra gekozen wordt; nooit dubbel (grid + extra), server prijst 1× €195 via extraRegels (isTahomaProduct). Live testkaart
+  LEAD (test-extras3@example.com): Screens 2.067 + TaHoma 195 = 2.262 ✓; browserproef: 3 regels, TaHoma 1×, nogmaals toevoegen = nog 1×.
+  Redirect /diensten/vloeren → /diensten/woninginrichting (was 404) live. Checklist overgang website: docs/checklist-overgang-website-2026-09-16.md
+  (19 punten, gemeten). Telegram V1 (bouwen punt 1-5 + domein koppelen, DNS wie) en V2 (Gouda-pagina) open.

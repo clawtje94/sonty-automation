@@ -4427,3 +4427,7 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
   bullets bij alternatieven, teksten aangepast, werkgebied "Heel Zuid-Holland …" (niet verkleind), link algemene voorwaarden op de akkoord-pagina.
 - 17-09 Daimy: "prijs half op p3, half op p4 is niet nice" → OfferteBrochure (cdbb36b, live): waarom-blok + alternatieven uit de prijstabel; prijstabel + totalen
   compact op p3; nieuwe pagina "Over je producten" (alleen als er uitleg is) direct erna. Gemeten: prijstabel + totaal p3, over-je-producten p4.
+- 17-09 Daimy: "doe dat ook in de mailversie van de offerte van de nieuwe site" → enkelMail (bd03d66 + 7efe6a5, live): prijsTabel() in mail-templates.ts
+  (zelfde opzet als PDF p3: regels met maten onder elkaar, aantal ×, kortingregel oranje, totalen), knop "Bekijk en onderteken online", PDF-bijlage via
+  verstuur-eigen (renderToBuffer OfferteBrochure, best effort, soort "prijsvoorstel" in communicatie-logboek). Test: ticket 981352176 naar joey@/daimy@
+  met bijlage sonty-offerte-s26-1005.pdf. Mail-FAQ garantie stond op 5/7/5 → 3/5/7 (GARANTIE_REGELS).

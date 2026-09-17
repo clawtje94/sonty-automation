@@ -4386,3 +4386,5 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
   klik-lab, oude scripts. Pdf's van beide docs naar Telegram. TaHoma-productfoto (Somfy, public/configurator/tahoma-switch.webp) live d5d004c.
 - 17-09: Daimy: "TaHoma niet zichtbaar als product, alleen als upsell-keuze" → active:false in productdata (3a18d53, live): niet in de
   productlijst, wel eigen regel in de aanvraag zodra hij als extra gekozen wordt; nooit dubbel. Browserproef: 3 regels, TaHoma 1x, 0 in lijst.
+- 17-09: Daimy: "upsell-producten altijd onderaan in de cart, in de offerte ook onderaan" → sorteerCart() in ProductConfigurator (f050169, live):
+  TaHoma-regel altijd laatste, ook bij herladen uit localStorage; server zet extra-regels al ná de productregels (buildOfferte). Browserproef ok.

@@ -1,5 +1,5 @@
 {
- "versie": "versie 6, 17 september",
+ "versie": "versie 7, 17 september",
  "periode": "9 t/m 15 september 2026",
  "aanvragen": 50,
  "reacties": 39,
@@ -32,7 +32,14 @@
    "rolluik_io": 1329,
    "rolluik_solar": 1276,
    "totaal4": 5885
-  }
+  },
+  "lijst_product_excl_montage": {
+   "screen_io": 1945,
+   "screen_solar": 1914,
+   "rolluik_io": 1564,
+   "rolluik_solar": 1501
+  },
+  "marge_op_lijst": 0.5
  },
  "aanbieders": [
   {

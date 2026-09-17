@@ -85,6 +85,20 @@ web_rows.append('<tr class="sonty"><td>Sonty, product zonder montage (verkooppri
 webtots=[wtot(w) for w in W if wtot(w)]
 WEB_CSS=".sub2{color:var(--muted);font-size:11.5px}"
 
+# Wat-als: 5% onder zonwering-fabriek, bij 50% marge op de Sunmaster-lijstprijs
+LP=D["sonty"]["lijst_product_excl_montage"]; M=D["sonty"]["marge_op_lijst"]
+ZF=next(w for w in W if w["naam"]=="zonwering-fabriek.nl")
+KEYS=[("screen_io","Screen stroom"),("screen_solar","Screen solar"),("rolluik_io","Rolluik stroom"),("rolluik_solar","Rolluik solar")]
+wa_rows=[]; tot_zf=tot_doel=tot_kost=tot_nu=0
+for k,lab in KEYS:
+    zf=ZF[k]; doel=round(zf*0.95); kost=round(LP[k]*(1-M)); nu=SX[k]
+    marge_nu=(nu-kost)/nu*100; marge_doel=(doel-kost)/doel*100
+    tot_zf+=zf; tot_doel+=doel; tot_kost+=kost; tot_nu+=nu
+    wa_rows.append(f'<tr><td>{lab}</td><td class="n">{eur(LP[k])}</td><td class="n">{eur(kost)}</td><td class="n">{eur(nu)}</td><td class="n">{marge_nu:.0f}%</td><td class="n">{eur(zf)}</td><td class="n">{eur(doel)}</td><td class="n"><strong style="color:var(--bad)">{marge_doel:+.0f}%</strong></td><td class="n" style="color:var(--bad)">{eur(doel-kost)}</td></tr>')
+wa_rows.append(f'<tr class="sonty"><td>4 producten</td><td class="n">{eur(sum(LP.values()))}</td><td class="n">{eur(tot_kost)}</td><td class="n">{eur(tot_nu)}</td><td class="n">{(tot_nu-tot_kost)/tot_nu*100:.0f}%</td><td class="n">{eur(tot_zf)}</td><td class="n">{eur(tot_doel)}</td><td class="n"><strong style="color:var(--bad)">{(tot_doel-tot_kost)/tot_doel*100:+.0f}%</strong></td><td class="n" style="color:var(--bad)">{eur(tot_doel-tot_kost)}</td></tr>')
+WA_HTML="".join(wa_rows); WA_KOST=tot_kost; WA_DOEL=tot_doel; WA_VERLIES=tot_kost-tot_doel
+break_even_pct=round((1-(tot_kost/tot_zf))*100)
+
 page = f"""<title>Marktpositie Sonty</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap">
 <style>{CSS}{PROD_CSS}{WEB_CSS}</style>
@@ -139,6 +153,14 @@ page = f"""<title>Marktpositie Sonty</title>
     <tbody>{"".join(web_rows)}</tbody>
   </table></div>
   <p class="note">Spreiding webshops voor de vier producten zonder montage: {eur(min(webtots))} tot {eur(max(webtots))}, midden {eur(statistics.median(webtots))}. Sonty's productprijs zonder montage ({eur(SX["totaal4"])}) ligt daar {round((SX["totaal4"]/statistics.median(webtots)-1)*100):+d}% boven: een klant die zelf monteert koopt online voor ongeveer de helft. Met montage erbij (webshop + monteur) komt de klant meestal weer in de buurt van de dealerprijzen.</p>
+
+  <h2>Wat als Sonty 5% onder zonwering-fabriek gaat zitten?</h2>
+  <p class="sub">Uitgangspunt van Daimy: 50% marge op de Sunmaster-adviesverkoopprijs, dus inkoop = de helft van de lijstprijs. Prijzen incl. btw, product zonder montage. Zonwering-fabriek is de goedkoopste webshop (zelf monteren).</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Product</th><th class="n">Sonty lijst</th><th class="n">Inkoop (50%)</th><th class="n">Sonty nu (lijst -15%)</th><th class="n">Marge nu</th><th class="n">Zonwering-fabriek</th><th class="n">5% eronder</th><th class="n">Marge dan</th><th class="n">Resultaat per stuk</th></tr></thead>
+    <tbody>{WA_HTML}</tbody>
+  </table></div>
+  <p class="note"><strong>Conclusie: dat kan niet.</strong> Vijf procent onder zonwering-fabriek ({eur(WA_DOEL)} voor de vier producten) ligt onder onze inkoopprijs ({eur(WA_KOST)}): {eur(WA_VERLIES)} verlies per set, nog zonder montage, transport en handling. Zonwering-fabriek verkoopt zelfs onder onze inkoop; break-even zou al {break_even_pct}% boven hun prijs liggen. Om op hun niveau te komen moet de inkoop omlaag (ander merk of fabriek-direct), niet de marge. Marge is hier berekend als (verkoop min inkoop) gedeeld door verkoop. Leest Daimy "50% marge" als opslag op de inkoop (inkoop = lijst / 1,5), dan is het verlies nog groter.</p>
 
   <h2>Merken, garantie en levertijd</h2>
   <div class="tablewrap"><table>

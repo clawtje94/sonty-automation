@@ -1,6 +1,12 @@
 # Sonty — Overdracht / stand van zaken (bijgewerkt 2026-09-08, nieuwe inmeter Patrick)
 
 
+## 17-09: WINTER BREAK-EVEN PER MAAND (Daimy /goal: "zelfde lasten als augustus, minder ad spend, hoeveel akkoord per maand; staan ads-budgetten goed of juist meer adverteren")
+- Rapport docs/winter-breakeven-per-maand-2026.md. Aug-lasten in sheet nu €125k (was 140k), sep €115k. Winterorder €1.400 marge ex btw.
+- Break-even €125k lasten: 90 akk/mnd zonder ads, ~100 bij Meta-nu (€12,6k), ~110 bij plan-budget; vorige winter 48/48/36/69/84. NIET haalbaar -> verlies okt-feb ≈ -€365k; hefboom = lasten, niet ads.
+- Meta gemeten 17-09: rolluiken €300/dag CPL €29 (plafond €40), pergola €85/dag CPL €13, gordijnen €30/dag; totaal €12,6k/mnd, sep 1-17 €7.077/302 leads. Advies: Meta rolluiken OPschalen zolang CPL < €40 (elke €10k = ~21 orders, +€20k bijdrage). Google niet uitleesbaar (geen API).
+- Open: V1 Google-spend aug/sep + huidige Google-dagbudgetten (Daimy). Script scratchpad winter-breakeven.js + meta-budgetten.js.
+
 ## 14-09 (middag): WINTER-ADVERTENTIEPLAN PER CATEGORIE + MAX CPA (Daimy: "hoeveel en welke categorieën in de winter door adverteren, max CPA, met de sheet")
 - Rapport docs/winter-advertentieplan-2026.md + 1-oogopslag docs/winter-advertentieplan-2026.html (naar Daimy gestuurd). Alles EX btw, productmarge,
   vóór vaste lasten; akkoord-definitie/productgroepen = seizoensplan.js; scripts scratchpad winter-cat.js + winter-netto.js.

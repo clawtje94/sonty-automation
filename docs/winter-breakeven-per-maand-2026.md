@@ -94,3 +94,22 @@ Lezen:
 5. **Nu (september)**: Meta staat op €12,6k/mnd bij €23 per lead; stop-waarde september ≈ €45. Direct opschalen naar €20-25k/mnd, de rolluiken-campagne voorop.
 
 Onzekerheden: elasticiteit 0,65 is een aanname (bij 0,5 liggen de optima 30% lager, bij 0,8 hoger); Google okt-dec zonder data (V1); Meta okt-dec hangt volledig aan de nieuwe rolluik-set. Wat niet onzeker is: bij de huidige leadprijzen ligt het optimum ruim boven het winterplan.
+
+## 7. Aanvulling 17-09: woonmaand 20% (okt), Black Friday (nov), december terugschalen + week dicht
+
+Uitgangspunt: de vaste maandactie is 15% (maandactie.ts, "bestaande actie"), dus de historische marges bevatten die 15% al. 20% is dus 5 punten extra. Inkoopratio alle orders 54% van de verkoop.
+
+| korting | verkoop t.o.v. nu | marge per order | conversie nodig om gelijk te blijven |
+|---|---|---|---|
+| 15% (nu) | ×1,00 | 0% | ×1,00 |
+| 20% (woonmaand) | ×0,94 | −13% | ×1,15 |
+| 25% (Black Friday?) | ×0,88 | −26% | ×1,35 |
+| 30% | ×0,82 | −39% | ×1,63 |
+
+**Oktober, woonmaand 20%.** Marge okt in het midden-scenario €77k (online €33k + overig €44k). Bij 20% zonder extra conversie: −€10k (resultaat −€79k). Bij +15% conversie: neutraal (−€69k). Bij +30% conversie: +€10k (−€59k). De actie kan oktober dus hooguit €10k beter maken en maakt het €10k slechter als de conversie niet stijgt. Voorwaarde: de actie moet in de ads en op de landingspagina's staan (dat was al het plan, google-ads-winterplan §okt). Stop-leadprijs in een 20%-maand: ×0,87 zolang de conversie niet aantoonbaar stijgt (Meta okt €29, Google Ads €55).
+
+**November, Black Friday.** Zelfde rekensom: bij 20% neutraal vanaf +15% conversie, bij 25% pas vanaf +35%. Advies (ook merkstrategie): niet op alles, 2-3 producten (rolluiken, screens), en de aankondiging via Klaviyo aan de bestaande lijst (kost geen ads). November-marge midden-scenario €108k, dus 25% zonder conversiewinst kost €28k.
+
+**December, terugschalen + week dicht.** Dit is de grootste hefboom van de drie. Dec 2025 stond op €64k lasten (tegen €92k okt); bij dat niveau gaat december van −€79k naar −€18k (+€61k). Ads in december naar 3 weken: ~€22k in plaats van €29k, alleen Google (rolluiken, screens, PMax), Meta op de rolluik-set alleen onder €35 per lead. Leads in de dichte week wel laten binnenkomen als Sunny ze opvolgt en de inmeetafspraken in januari vallen; anders ads die week uit.
+
+Samen: okt en nov veranderen weinig (±€10k per maand, afhankelijk van conversie), december terugschalen scheelt ~€60k. Winter okt-feb dan ongeveer −€150k in plaats van −€208k.

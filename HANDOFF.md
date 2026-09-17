@@ -6,6 +6,7 @@
 - Break-even €125k lasten: 90 akk/mnd zonder ads, ~100 bij Meta-nu (€12,6k), ~110 bij plan-budget; vorige winter 48/48/36/69/84. NIET haalbaar -> verlies okt-feb ≈ -€365k; hefboom = lasten, niet ads.
 - Meta gemeten 17-09: rolluiken €300/dag CPL €29 (plafond €40), pergola €85/dag CPL €13, gordijnen €30/dag; totaal €12,6k/mnd, sep 1-17 €7.077/302 leads. Advies: Meta rolluiken OPschalen zolang CPL < €40 (elke €10k = ~21 orders, +€20k bijdrage). Google niet uitleesbaar (geen API).
 - Daimy herformuleerde: 'hoeveel ads voor winst of zo min mogelijk verlies'. Model ads-optimum.js (leads ~ spend^0,65, stop = gem. CPL 65% van break-even/offerte): optimum okt-feb €230k ads (Google 2x, Meta jan-feb 2x) = -€208k, winterplan €140k = -€346k, 0 ads = -€400k. Stop-CPL Meta okt/nov/dec/jan/feb €33/37/35/49/72, Google €84/125/105/105/79 (Ads x0,75). Nu sep: Meta €12,6k bij CPL €23 -> opschalen naar €20-25k. Rapport §6.
+- Daimy 17-09: okt woonmaand 20%, nov Black Friday, dec terugschalen + week dicht. Doorgerekend §7: 20% = marge/order -13% (15% is de vaste actie), neutraal vanaf +15% conversie, effect okt/nov ±€10k; dec op lasten-niveau dec-2025 (€64k) = +€61k -> winter ca -€150k. Stop-CPL in kortingsmaand x0,87.
 - Open: V1 Google-spend aug/sep + huidige Google-dagbudgetten (Daimy). Scripts scratchpad winter-breakeven.js, meta-budgetten.js, ads-optimum.js.
 
 ## 14-09 (middag): WINTER-ADVERTENTIEPLAN PER CATEGORIE + MAX CPA (Daimy: "hoeveel en welke categorieën in de winter door adverteren, max CPA, met de sheet")

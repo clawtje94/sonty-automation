@@ -1,9 +1,9 @@
 {
- "versie": "versie 7, 17 september",
- "periode": "9 t/m 15 september 2026",
+ "versie": "versie 8, 17 september",
+ "periode": "9 t/m 17 september 2026",
  "aanvragen": 50,
- "reacties": 39,
- "met_prijs": 21,
+ "reacties": 41,
+ "met_prijs": 24,
  "sonty": {
   "verkoop": {
    "screen_io": 1819,
@@ -478,6 +478,52 @@
    "noot": "offerte 15-09",
    "google_score": 4.7,
    "google_reviews": 68
+  },
+  {
+   "naam": "Möller / Zandschulp Zonwering",
+   "plaats": "Oosterbeek",
+   "type": "eigen productie, 4 vestigingen",
+   "screens": "eigen productie",
+   "rolluiken": "eigen productie",
+   "knikarm_merk": "Sheldan JZP semi-cassette",
+   "motor": "Somfy RS100 io · Tahoma € 149, zender € 99",
+   "garantie": "volgens AV",
+   "gar_kleur": "grey",
+   "levertijd": "8-12 wk",
+   "screen_io": 1676,
+   "screen_solar": 1730,
+   "rolluik_io": 1528,
+   "rolluik_solar": 1445,
+   "knikarm": 2531,
+   "pergola": null,
+   "totaal4": 6379,
+   "montage": "incl. btw en montage; zelf monteren -10%",
+   "noot": "online offerte (Dexflow) 10-09, totaal 9.158 incl. knikarm en zender",
+   "google_score": 4.0,
+   "google_reviews": 4
+  },
+  {
+   "naam": "Schaduwrijk / Unicon Zonweringen",
+   "plaats": "Zwijndrecht",
+   "type": "installateur",
+   "screens": "RS Classic 105 zipscreen",
+   "rolluiken": "se-40",
+   "knikarm_merk": "Rainbow Ibiza Plus",
+   "motor": "Somfy io · Situo 5 € 79",
+   "garantie": "5 jr product, 3 jr montage",
+   "gar_kleur": "good",
+   "levertijd": "7-9 wk",
+   "screen_io": 1614,
+   "screen_solar": 1488,
+   "rolluik_io": 1463,
+   "rolluik_solar": 1256,
+   "knikarm": 2516,
+   "pergola": null,
+   "totaal4": 5821,
+   "montage": "incl. btw en montage",
+   "noot": "online offerte 34892 (Moneybird) 14-09, totaal 8.416",
+   "google_score": 4.6,
+   "google_reviews": 69
   }
  ],
  "deels": [
@@ -509,12 +555,10 @@
   "Zonweringsbedrijf Zoetermeer via 2e mail: verwijst naar webshop, wil foto's"
  ],
  "open": [
-  "Schaduwrijk/Unicon Zwijndrecht (offerte online met code, nog niet uitgelezen)",
-  "Bastasol Rotterdam",
+  "Bastasol Rotterdam (vraagt context pergola)",
   "Zonwering Nieuwegein (vraagt etage)",
-  "Degalux (prijzen in afbeeldingen)",
-  "Möller/Zandschulp (offerte via tekenlink)",
-  "InhuisPlaza Barendrecht (wil foto + telefoon)"
+  "InhuisPlaza Barendrecht (wil foto + telefoon)",
+  "Stuyfzand: rolluiken niet geoffreerd"
  ],
  "google_datum": "15-09-2026",
  "webshops": [
@@ -641,14 +685,14 @@
   {
    "naam": "degalux.com",
    "type": "webshop + montage (Barneveld)",
-   "screen_io": null,
-   "screen_solar": null,
-   "rolluik_io": null,
-   "rolluik_solar": null,
-   "bron": "mail 10-09",
-   "montage": "adviseur maakt totaalofferte",
-   "noot": "indicatieprijzen in afbeeldingen, niet uitgelezen; 3 jr garantie; 8-10 wk",
-   "motor": "Somfy"
+   "screen_io": 1388,
+   "screen_solar": 1300,
+   "rolluik_io": 886,
+   "rolluik_solar": 882,
+   "bron": "prijsindicatie in afbeeldingen 10-09",
+   "montage": "excl.; adviseur maakt totaalofferte incl. montage",
+   "noot": "eigen merk; knikarm Premium 2.639 excl. montage; 3 jr garantie; 8-10 wk; Google 4,3 (223)",
+   "motor": "Somfy Sunilus/RS100/Sunea io"
   }
  ]
 }

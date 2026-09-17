@@ -102,3 +102,9 @@ Patroon: dealers/lokale bedrijven voeren A-merken (Verano, Brustor, Alulux, Luxa
 - Duifhuijsen (Vlaardingen, MySun/Sunpoint): 1750/1560/1550/1400 = 6260 incl; knikarm Harol TC130 3100; 2 jr product/5 jr motor. Google 4,7 (68).
 - Megazonwering stuurt herinnering (offerte ontvangen?). Nieuwe sectie op de pagina: alleen webshops (11 webshops, DIY-prijzen 3.319-4.433 voor 4 producten; Sonty productprijs zonder montage 5.885).
 - Stand: 19 aanbieders met totaal; mediaan 6314; Sonty 6514 (+3%), 14 goedkoper / 4 duurder.
+
+## Aanvulling 17-09 (middag): laatste open offertes uitgelezen
+- Möller/Zandschulp (Oosterbeek, Dexflow-link): 1676/1730/1528/1445 = 6379 incl. montage; knikarm Sheldan JZP 2531; zender 99; Tahoma 149; totaal 9158; DIY -10%; 8-12 wk. Google 4,0 (4).
+- Schaduwrijk/Unicon (Zwijndrecht, Moneybird code 289886): 1614/1488/1463/1256 = 5821 incl. montage; knikarm Rainbow Ibiza Plus 2516; Situo 5 79; totaal 8416; 5 jr product/3 jr montage; 7-9 wk. Google 4,6 (69).
+- Degalux (webshop + montage, prijzen uit afbeeldingen): excl. montage 1388/1300/886/882 = 4456; knikarm Premium 2639; totaal producten 7094 excl. montage; 3 jr; 8-10 wk. Google 4,3 (223). → in de webshop-tabel.
+- Nog open: Bastasol (vraagt context), Zonwering Nieuwegein (vraagt etage), InhuisPlaza (foto+telefoon). 9 aanbieders hebben nooit gereageerd.

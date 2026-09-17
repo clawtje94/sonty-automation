@@ -4423,3 +4423,5 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
 - 17-09 Daimy: "uitlijning 'hier sta je nu' klopt niet; overal moet definitieve offerte na het inmeten ertussen" → LIVE (92dfe2b): badge rechtsboven in de
   kaart (nowrap), stappen-grid 3 kolommen; 6 stappen (05 Definitieve offerte op exacte maten, tekenen, dan bestellen) op klantpagina én PDF (OfferteBrochure).
   Aanvraag-mail zei al "prijs definitief na het inmeten"; configurator-overzicht ook. Desktop, mobiel en PDF-pagina 2 visueel gecontroleerd.
+- 17-09 PDF-feedback Daimy (p2 t/m p8 + AV-link) verwerkt in lib/offerte-pdf (7cbc2b8, live): maten onder elkaar (netteDetails splitst nu ook op " | "),
+  bullets bij alternatieven, teksten aangepast, werkgebied "Heel Zuid-Holland …" (niet verkleind), link algemene voorwaarden op de akkoord-pagina.

@@ -113,3 +113,14 @@ Uitgangspunt: de vaste maandactie is 15% (maandactie.ts, "bestaande actie"), dus
 **December, terugschalen + week dicht.** Dit is de grootste hefboom van de drie. Dec 2025 stond op €64k lasten (tegen €92k okt); bij dat niveau gaat december van −€79k naar −€18k (+€61k). Ads in december naar 3 weken: ~€22k in plaats van €29k, alleen Google (rolluiken, screens, PMax), Meta op de rolluik-set alleen onder €35 per lead. Leads in de dichte week wel laten binnenkomen als Sunny ze opvolgt en de inmeetafspraken in januari vallen; anders ads die week uit.
 
 Samen: okt en nov veranderen weinig (±€10k per maand, afhankelijk van conversie), december terugschalen scheelt ~€60k. Winter okt-feb dan ongeveer −€150k in plaats van −€208k.
+
+## 8. Aanvulling 17-09: januari warm-up, februari vol gas
+
+Februari vol gas klopt met het model (€77k ads, stop Meta €72 / Google Ads €59, 107-137 orders, +€29k tot +€77k).
+
+Januari als warm-up klopt alleen als "warm-up" betekent: vanaf week 2 volledig leads kopen, geen merk-/awareness-budget. Redenen:
+- Januari-leads zijn goedkoop en onder de stop: vorig jaar Meta €51 (stop €49), Google €69 (stop €105 per offerte). Elke januari-euro leverde €1,47 (Meta) tot €2,33 (Google) marge.
+- Mediaan offerte → akkoord 24 dagen: de leads van januari zijn de akkoorden van februari. Wie in januari inhoudt, mist februari deels.
+- Model: januari op plan-niveau (€36k) −€57k, op optimum (€69k) −€38k. Inhouden kost ~€19k.
+- Winterplan: knikarm/uitvalscherm vroegboek aan vanaf de 2e week januari; rolluiken, screens en PMax lopen door.
+Advies: week 1 januari rustig (feestdagen, lage conversie), vanaf 5 januari opschalen naar het jan-budget, en 1 februari naar het feb-budget. Capaciteit: jan 90 + feb 107-137 orders vallen in montage feb-apr, binnen ~150/mnd.

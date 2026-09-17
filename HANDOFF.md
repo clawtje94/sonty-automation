@@ -4412,3 +4412,10 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
   hij 150×150 in de tekst); verrijking zag "Voorraad scherm - 20% korting" als kortingregel (geen foto/specs) → gefixt; TaHoma met foto,
   kortingregel zonder placeholder. Live testkaart LEAD-1789633567550-EPEK: 3450+2067+195−856,80 = 4.855,20 ✓ (klantlink qlqz7fyd…).
 - Offertefoto's per product: /admin/offertefotos, 1 foto per categorie (rolluik, screen, knikarm, uitval, markies, pergola, serre, hor), niet per kleur.
+- 17-09 (later) Daimy-meldingen op de testofferte, allemaal LIVE: (a) PDF gecontroleerd (lib/offerte-pdf/OfferteBrochure = de gemailde PDF; generate-offerte-pdf.ts
+  is de jspdf-variant van de offerte-tool): garantietekst was 5/10/5 → 3/5/7 (beide generators), "10+ jaar" → berekend vanaf 2013 (pagina + PDF);
+  (b) telefoonnummer 3x op de klantpagina → overal WhatsApp (wa.me/31850069681), ook in PDF ("WhatsApp 085 006 9681", "Even appen"); 0 tel-links;
+  (c) GEEN montage-/levertijd meer ("4-6 weken", "8-10 weken", "3 weken voorraad") op klantpagina, PDF, aanvraag-mail-FAQ, FAQ-pagina en 3 blogs
+  → memory feedback_geen_levertijd_communiceren; (d) details met nette labels + mm; voorraadscherm zonder model-/bedieningsalternatieven.
+  Testleads (naam "Test …", rule 9 blokkeert): LEAD-1789633567550-EPEK, LEAD-1789634138323-26XS (klantlink dvJMA6_G…). LET OP: bij 2 commits
+  ging een tsc-fout mee naar main (GH-build faalde, direct hersteld); vanaf nu commit alleen na groene tsc.

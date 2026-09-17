@@ -4431,3 +4431,10 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
   (zelfde opzet als PDF p3: regels met maten onder elkaar, aantal ×, kortingregel oranje, totalen), knop "Bekijk en onderteken online", PDF-bijlage via
   verstuur-eigen (renderToBuffer OfferteBrochure, best effort, soort "prijsvoorstel" in communicatie-logboek). Test: ticket 981352176 naar joey@/daimy@
   met bijlage sonty-offerte-s26-1005.pdf. Mail-FAQ garantie stond op 5/7/5 → 3/5/7 (GARANTIE_REGELS).
+- 17-09 Daimy: pre-launch sweep-prompt (7 secties) uitgevoerd op de nieuwe site → rapport docs/pre-launch-sweep-2026-09-17.md (34 bevindingen,
+  A-tabel, B-bestanden, C-vragen, D go/no-go = GO met 3 voorwaarden). Gefixt en live (6 commits): metadata-lengtes 100+ pagina's, 10 og-beelden,
+  h1 configurator, één <main> + skip-link + focus, gedachtestreepjes/AI-taal weg, openingstijden 9:30 overal, garantie 3/5/7 in PDF+mail,
+  36 foto's <300 KB, contrast (a11y 88→96), tabel/aria/select. OPEN: Lighthouse perf mobiel 59-63 (LCP hero 9-16 s gesimuleerd, 3,8 MB, GTM
+  550 KB), SEO 69 = noindex vercel.app (bewust), CSP, resterende contrast-badges, GTM dfp.min.js 404. VRAGEN: openingstijden 9:30?, postcode
+  EX/EZ?, u-vorm legal?, opgericht 2013 vs tijdlijn 2014?, "zonnescherm" synoniem?. Lighthouse lokaal werkt alleen via handmatig gestarte
+  Chrome met --remote-debugging-port (scratch: lh5-*.json); PSI-API quotum op.

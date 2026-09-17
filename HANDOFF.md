@@ -4390,3 +4390,25 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
   TaHoma-regel altijd laatste, ook bij herladen uit localStorage; server zet extra-regels al ná de productregels (buildOfferte). Browserproef ok.
 - 17-09 Daimy /goal "lijst wat jij al kunt regelen vóór de overstap volgende week" → docs/voorbereiding-websiteswitch-claude-2026-09-17.md
   (13 punten zelf, ±3 werkdagen; 6 punten met Daimy). Telegram V1 (go op 1-13) en V2 (DNS wie) open. NIETS gestart tot "ja".
+
+## 17-09: VOORBEREIDING WEBSITESWITCH UITGEVOERD (Daimy: "dat kan je allemaal gaan doen, check goed je eigen werk")
+- GEDAAN + GEMETEN: (1) formulieren contact/reparatie → open Trengo-ticket op aanvragen@ (1363384) + bevestigingsmail + interne notitie,
+  honeypot + max 5/IP/10 min via KV, fouten in KV formulier:trengo-fouten; live testticket 981246464 (gesloten), 429 na 5 gemeten;
+  lab scripts/lab-formulieren.ts 600 sc. (loader scripts/lab-alias-loader.mjs voor @/-imports). Reparatie-pagina heeft geen eigen formulier
+  (alleen ContactForm). (2) lib/site-url.ts: alle 8 hardcoded vercel.app-links via NEXT_PUBLIC_SITE_URL (nu vercel.app, switchdag sonty.nl).
+  (3) KV-back-up: scripts/kv-backup.js → ~/sonty/backups/kv/kv-<datum>.jsonl.gz (82.382 sleutels, 20.118 leads, 9,9 MB, 135 s) + kopie
+  ~/Backups-sonty/kv; launchd nl.sonty.kv-backup 03:30 + nl.sonty.kv-backup-wacht 09:00 (alarm >26u); herstelproef 20/20 ok. Blob-kopie
+  NIET (store is publiek). Sleutels in ~/sonty/secrets/vercel-kv.env. (4) sonty.nl + www.sonty.nl aan Vercel-project (DNS nog Neostrada;
+  Vercel wil A @ 76.76.21.21, www CNAME cname.vercel-dns.com). (5) X-Robots-Tag noindex op *.vercel.app (gemeten), www→sonty.nl 301 in
+  next.config. (6) verzendcentrum-proef testmodus: verstuur-eigen force op testkaart → ticket 981248212 naar joey@/daimy@, klantlink,
+  getekend (ACCEPTED). (7) Vercel env: NEXT_PUBLIC_SITE_URL, CRON_SECRET (~/sonty/secrets/vercel-cron-secret.txt), MEETBON_CODE, MONTEUR_PIN,
+  BELSCHERM_CODE, FINANCIERING_PASSWORD; cron-routes zonder user-agent-fallback (gemeten 401). Telegram-sleutels bewust NIET (Daimy: niet
+  nodig). (8) klik-lab scripts/klik-lab/configurator.mjs: 37/37 product/variant-paden groen, launchd nl.sonty.klik-lab-configurator 04:15.
+  (10) Ads-landingspagina's: Meta-MCP token verlopen → Daimy moet opnieuw autoriseren of beheerders vragen. (11) docs/draaiboek-switchdag-
+  sonty-nl.md. (12) scripts/site-wacht.js + launchd nl.sonty.site-wacht (5 min), sonty.nl erbij via vlag data/.site-wacht-sonty-nl.
+  (13) smoke full-site.spec 76/76 op productie. (9) Gouda/Leidschendam NIET gebouwd: 3 inmetingen / 1 montage = te dun, redirect blijft.
+- EXTRA (Daimy-meldingen op de testofferte): korting ontbrak op configurator-offertes → maandactie-korting als regel + offerte.korting
+  (Gripp/Sheet), offertecontrole kent kortingregels; voorraadscherm vast 5000×3000 RAL 7016 structuur + doekkleur in tekst (via de site had
+  hij 150×150 in de tekst); verrijking zag "Voorraad scherm - 20% korting" als kortingregel (geen foto/specs) → gefixt; TaHoma met foto,
+  kortingregel zonder placeholder. Live testkaart LEAD-1789633567550-EPEK: 3450+2067+195−856,80 = 4.855,20 ✓ (klantlink qlqz7fyd…).
+- Offertefoto's per product: /admin/offertefotos, 1 foto per categorie (rolluik, screen, knikarm, uitval, markies, pergola, serre, hor), niet per kleur.

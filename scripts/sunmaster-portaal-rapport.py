@@ -10,6 +10,25 @@ SRC = sys.argv[1:] or sorted(glob.glob(os.path.expanduser('~/.playwright-mcp/smr
 OUT = os.path.expanduser('~/sonty/docs/sunmaster-bestelportaal-variabelen.md')
 RAW = os.path.expanduser('~/sonty/data/sunmaster-portaal-variabelen.json')
 
+PROBE2 = {}
+for f in sorted(glob.glob(os.path.expanduser('~/.playwright-mcp/smp-*.json'))):
+    d2 = json.load(open(f))
+    if isinstance(d2, str): d2 = json.loads(d2)
+    for r in d2:
+        cur = PROBE2.get(r['product'])
+        if not cur:
+            PROBE2[r['product']] = r; continue
+        # samenvoegen: gevulde metingen behouden, nieuwere varianten met bevestigde keuze winnen
+        for k in ('breedte',):
+            if isinstance(r.get(k), list): cur[k] = r[k]
+        for k in ('hoogteBijBreedte', 'uitvalOmslag', 'getallen'):
+            if r.get(k) and (not cur.get(k) or len(r[k]) >= len(cur[k])): cur[k] = r[k]
+        vb = {(v['field'], v['opt']): v for v in cur.get('variantBereik', [])}
+        for v in r.get('variantBereik', []):
+            key = (v['field'], v['opt']); old = vb.get(key)
+            if old is None or v.get('picked') or (not old.get('picked') and not v.get('error')): vb[key] = v
+        cur['variantBereik'] = list(vb.values())
+
 results = []
 for f in SRC:
     d = json.load(open(f))
@@ -85,7 +104,10 @@ L.append('- **Variant-runs**: voor elk product is elke keuze bij *Type Bediening
 L.append('- **Leveringsconditie** staat in dit demo-account vast op `AFH`; de zoekknop is uitgeschakeld. **Afleveradres** is het geregistreerde klantadres, niet per order te wijzigen (alleen land en afleveropmerking).')
 L.append('- Bij het openen van een productdialoog staan alle velden even zichtbaar (o.a. *Soort doek* bij zonneschermen); na de eerste keuzes verdwijnen afgeleide velden en verschijnen de vervolgvelden. *Soort doek* wordt afgeleid van de gekozen doekkleur en is niet zelf te kiezen.')
 L.append('- **Nieuwe order plaatsen** is in dit demo-account niet zichtbaar (alleen *Nieuwe offerte*); volgens de Sunmaster-handleiding werkt de orderflow identiek aan de offerteflow.')
-L.append('- Ruwe data: `~/sonty/data/sunmaster-portaal-variabelen.json`; screenshots per product in `~/.playwright-mcp/sm-prod-*.png`.')
+L.append('- **Maatgrenzen nauwkeurig (17-09)**: per product breedtebereik in de basisconfiguratie, hoogtebereik als functie van de breedte (per 250 mm plus maximum; de maximale hoogte daalt bij zipscreens en rolluiken vanaf een bepaalde breedte), uitval-keuzes per 100 mm breedte (omslagpunten), overige maatvelden (uitval, bevestigingsmaat) en het bereik per structurele variant (uitvoering, armen, doek, kapsoort, geleider). Gemeten via de waarschuwing van het portaal bij 1 mm en 99.999 mm.')
+L.append('- **Rolluiken, ander geleidertype**: kies je links een ander geleidertype dan het standaard A3 HTF (rechts blijft standaard), dan antwoordt het portaal op elke breedte "Fout: 0 geldige opties voor Breedte", ook na binair zoeken tussen 1 en 12.000 mm. Vermoedelijk moeten links en rechts hetzelfde type zijn, of heeft het demo-account voor die types geen maattabel. Dit is niet verder te meten zonder een echte order (V1 bij Daimy).')
+L.append('- **Nog niet gemeten (bewust)**: inkoopprijzen en de controles die pas bij *Opslaan* gebeuren; combinaties van twee of meer niet-standaardkeuzes tegelijk; de exacte formule van de automatisch berekende doeklengte (wel: Sunbasic uitval 1500 → 1620).')
+L.append('- Ruwe data: `~/sonty/data/sunmaster-portaal-variabelen.json` (velden/lijsten) en `~/.playwright-mcp/smp-*.json` (maatgrenzen); screenshots per product in `~/.playwright-mcp/sm-prod-*.png`.')
 L.append('')
 L.append('## Artikellijst (Snelzoeken)')
 L.append('')
@@ -152,6 +174,45 @@ for prod, tags in by_prod.items():
         L.append('> Fouten tijdens uitlezen: ' + '; '.join(cell_(e)[:120] for e in base['errors']))
         L.append('')
     render_fields(L, base, prod)
+    p2 = PROBE2.get(prod)
+    if p2:
+        L.append('**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**')
+        L.append('')
+        if isinstance(p2.get('breedte'), list):
+            L.append(f"- Breedte basisconfiguratie: {p2['breedte'][0]} – {p2['breedte'][1]} mm")
+        for g in p2.get('getallen', []) or []:
+            b = g.get('bereik')
+            if b:
+                txt = f"{b[0]} – {b[1]} mm"
+            elif g.get('bij1') or g.get('bij99999'):
+                txt = cell_(g.get('bij99999') or g.get('bij1'))
+            else:
+                txt = 'geen directe grenscontrole'
+            L.append(f"- *{g['veld']}*: {txt}")
+        if p2.get('uitvalOmslag'):
+            L.append('- Uitval/Arm-keuzes per breedte (omslagpunten): ' + '; '.join(f"vanaf {o['vanafBreedte']} mm: {o['uitval'] or 'geen'}" for o in p2['uitvalOmslag']))
+        hb = p2.get('hoogteBijBreedte', [])
+        if hb:
+            if any('max' in h for h in hb):
+                L.append('- Hoogtebereik per breedte (max. hoogte daalt bij grotere breedte): ' + '; '.join(f"b {h['breedte']}: {h.get('min') if h.get('min') is not None else '?'}–{h.get('max') if h.get('max') is not None else '?'}" for h in hb if 'max' in h))
+            else:
+                for h in hb:
+                    mn = re.search(r'tussen ([\d.]+) en ([\d.]+)', h.get('min1') or ''); mx = re.search(r'tussen ([\d.]+) en ([\d.]+)', h.get('max99999') or '')
+                    txt = (f"{mn.group(1)} – {mn.group(2)} mm" if mn else (f"{mx.group(1)} – {mx.group(2)} mm" if mx else 'geen directe grenscontrole (waarschijnlijk pas bij opslaan)'))
+                    L.append(f"- Hoogte bij breedte {h['breedte']}: {txt}")
+        for v in p2.get('variantBereik', []):
+            if v.get('error'):
+                L.append(f"- Bij *{v['field']}* = {cell_(v['opt'])}: ⚠ niet gemeten ({cell_(v['error'])[:60]})"); continue
+            b = v.get('breedte'); hh = v.get('hoogte')
+            bt = (f"breedte {b[0]} – {b[1]} mm" if isinstance(b, list) else (f"breedte: {cell_(b)}" if b else 'breedte: geen grenscontrole'))
+            if isinstance(hh, dict):
+                m1 = hh.get('midden'); m2 = hh.get('bijMaxBreedte')
+                f1 = (f"{m1[0]}–{m1[1]}" if isinstance(m1, list) else (cell_(m1) if m1 else '?')); f2 = (f"{m2[0]}–{m2[1]}" if isinstance(m2, list) else (cell_(m2) if m2 else '?'))
+                ht = f", hoogte bij middenbreedte {f1} mm, bij maxbreedte {f2} mm"
+            else:
+                ht = (f", hoogte {hh[0]} – {hh[1]} mm" if isinstance(hh, list) else (f", hoogte: {cell_(hh)}" if hh else ''))
+            L.append(f"- Bij *{v['field']}* = {cell_(v['opt'])}: {bt}{ht}" + ('' if v.get('picked') else ' (keuze niet bevestigd)'))
+        L.append('')
     # controle-run grote lijsten
     chk = tags.get('check')
     if chk:

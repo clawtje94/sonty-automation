@@ -1,6 +1,6 @@
 # Sunmaster bestelportaal (ISP-Vision): bestelflow en variabelen per product
 
-Gemeten op 2026-09-16 in het demo-portaal "Demo portaal Zonwering Direct" (account Daimy Boot, geen 2FA). Alles is live uit de invoerdialoog van het portaal uitgelezen; niets is opgeslagen of verstuurd.
+Gemeten op 2026-09-17 in het demo-portaal "Demo portaal Zonwering Direct" (account Daimy Boot, geen 2FA). Alles is live uit de invoerdialoog van het portaal uitgelezen; niets is opgeslagen of verstuurd.
 Volledige keuzelijsten (doekkleuren, RAL-kleuren enz.) staan in `sunmaster-bestelportaal-variabelen-lijsten.md`.
 
 ## Bestelflow (zo werkt bestellen)
@@ -24,7 +24,10 @@ Volledige keuzelijsten (doekkleuren, RAL-kleuren enz.) staan in `sunmaster-beste
 - **Leveringsconditie** staat in dit demo-account vast op `AFH`; de zoekknop is uitgeschakeld. **Afleveradres** is het geregistreerde klantadres, niet per order te wijzigen (alleen land en afleveropmerking).
 - Bij het openen van een productdialoog staan alle velden even zichtbaar (o.a. *Soort doek* bij zonneschermen); na de eerste keuzes verdwijnen afgeleide velden en verschijnen de vervolgvelden. *Soort doek* wordt afgeleid van de gekozen doekkleur en is niet zelf te kiezen.
 - **Nieuwe order plaatsen** is in dit demo-account niet zichtbaar (alleen *Nieuwe offerte*); volgens de Sunmaster-handleiding werkt de orderflow identiek aan de offerteflow.
-- Ruwe data: `~/sonty/data/sunmaster-portaal-variabelen.json`; screenshots per product in `~/.playwright-mcp/sm-prod-*.png`.
+- **Maatgrenzen nauwkeurig (17-09)**: per product breedtebereik in de basisconfiguratie, hoogtebereik als functie van de breedte (per 250 mm plus maximum; de maximale hoogte daalt bij zipscreens en rolluiken vanaf een bepaalde breedte), uitval-keuzes per 100 mm breedte (omslagpunten), overige maatvelden (uitval, bevestigingsmaat) en het bereik per structurele variant (uitvoering, armen, doek, kapsoort, geleider). Gemeten via de waarschuwing van het portaal bij 1 mm en 99.999 mm.
+- **Rolluiken, ander geleidertype**: kies je links een ander geleidertype dan het standaard A3 HTF (rechts blijft standaard), dan antwoordt het portaal op elke breedte "Fout: 0 geldige opties voor Breedte", ook na binair zoeken tussen 1 en 12.000 mm. Vermoedelijk moeten links en rechts hetzelfde type zijn, of heeft het demo-account voor die types geen maattabel. Dit is niet verder te meten zonder een echte order (V1 bij Daimy).
+- **Nog niet gemeten (bewust)**: inkoopprijzen en de controles die pas bij *Opslaan* gebeuren; combinaties van twee of meer niet-standaardkeuzes tegelijk; de exacte formule van de automatisch berekende doeklengte (wel: Sunbasic uitval 1500 → 1620).
+- Ruwe data: `~/sonty/data/sunmaster-portaal-variabelen.json` (velden/lijsten) en `~/.playwright-mcp/smp-*.json` (maatgrenzen); screenshots per product in `~/.playwright-mcp/sm-prod-*.png`.
 
 ## Artikellijst (Snelzoeken)
 
@@ -83,6 +86,11 @@ Afhankelijkheid breedte → Uitval/Arm:
 | 6500 | ⚠ Waarde 6.500 ligt niet tussen 1.800 en 5.500 ! |
 | 7000 | ⚠ Waarde 7.000 ligt niet tussen 1.800 en 5.500 ! |
 
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 1800 – 5500 mm
+- Uitval/Arm-keuzes per breedte (omslagpunten): vanaf 1800 mm: geen; vanaf 2300 mm: 1500,2000; vanaf 2800 mm: 1500,2000,2500; vanaf 3300 mm: 1500,2000,2500,3000
+
 Controle volledigheid grote lijsten: *Kleur code doek*: basisrun 390, controlerun (diepte 4) 390 ✔ volledig
 
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
@@ -128,6 +136,11 @@ Afhankelijkheid breedte → Uitval/Arm:
 | 6500 | ⚠ Waarde 6.500 ligt niet tussen 1.800 en 5.518 ! |
 | 7000 | ⚠ Waarde 7.000 ligt niet tussen 1.800 en 5.518 ! |
 
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 1800 – 5518 mm
+- Uitval/Arm-keuzes per breedte (omslagpunten): vanaf 1800 mm: geen; vanaf 2300 mm: 1500,2000; vanaf 2800 mm: 1500,2000,2500; vanaf 3300 mm: 1500,2000,2500,3000; vanaf 5518 mm: 1500,2000,2500
+
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
 *Type Bediening* (basis: 5 \| Sunea IO motor)
@@ -172,6 +185,17 @@ Afhankelijkheid breedte → Type armen:
 | 6000 | 2 \| Windvaste armen, 3 \| Gasveer armen, 4 \| Hoek- / Balkon armen WVA, 7 \| Hoek- / Balkon armen WAG |
 | 6500 | ⚠ Waarde 6.500 ligt niet tussen 800 en 6.012 ! |
 | 7000 | ⚠ Waarde 7.000 ligt niet tussen 800 en 6.012 ! |
+
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 800 – 6012 mm
+- *Doeklengte (uitvalricht.) (MM)*: Fout : 0 geldige opties voor Doeklengte (uitvalricht.) !
+- Uitval/Arm-keuzes per breedte (omslagpunten): vanaf 800 mm: 01,02,03,04
+- Bij *Type armen* = 3 \| Gasveer armen: breedte 800 – 6012 mm
+- Bij *Type armen* = 4 \| Hoek- / Balkon armen WVA: breedte 800 – 6012 mm
+- Bij *Type armen* = 7 \| Hoek- / Balkon armen WAG: breedte 800 – 6012 mm
+- Bij *Doek* = 4 \| Doek in banen met doorval: breedte 800 – 6012 mm
+- Bij *Rol breedte* = 320 \| 320 cm: breedte 800 – 6012 mm
 
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
@@ -239,6 +263,11 @@ Afhankelijkheid breedte → Uitval/Arm:
 | 5500 | 2500 \| 2500 ka, 3000 \| 3000 ka, 3500 \| 3500 ka |
 | 6000 | 2500 \| 2500 ka, 3000 \| 3000 ka, 3500 \| 3500 ka |
 
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 3010 – 6000 mm
+- Uitval/Arm-keuzes per breedte (omslagpunten): vanaf 3100 mm: geen; vanaf 3700 mm: 2500,3000; vanaf 4200 mm: 2500,3000,3500
+
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
 *Type Bediening* (basis: 5 \| Sunea IO motor *)
@@ -285,6 +314,11 @@ Afhankelijkheid breedte → Uitval/Arm:
 | 6000 | 1500 \| 1500 ka, 2000 \| 2000 ka, 2500 \| 2500 ka |
 | 6500 | ⚠ Waarde 6.500 ligt niet tussen 1.690 en 6.000 ! |
 | 7000 | ⚠ Waarde 7.000 ligt niet tussen 1.690 en 6.000 ! |
+
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 1690 – 6000 mm
+- Uitval/Arm-keuzes per breedte (omslagpunten): vanaf 1700 mm: geen; vanaf 2200 mm: 1500,2000; vanaf 2700 mm: 1500,2000,2500; vanaf 3200 mm: 1500,2000,2500,3000; vanaf 5600 mm: 1500,2000,2500
 
 Controle volledigheid grote lijsten: *Kleur code doek*: basisrun 390, controlerun (diepte 4) 390 ✔ volledig; *Kleur kap*: basisrun 625, controlerun (diepte 4) 625 ✔ volledig
 
@@ -344,6 +378,11 @@ Afhankelijkheid breedte → Uitval/Arm:
 | 6500 | 1500 \| 1500 ka, 2000 \| 2000 ka, 2500 \| 2500 ka, 3000 \| 3000 ka, 3500 \| 3500 ka |
 | 7000 | 1500 \| 1500 ka, 2000 \| 2000 ka, 2500 \| 2500 ka, 3000 \| 3000 ka, 3500 \| 3500 ka |
 | 7450 | 1500 \| 1500 ka, 2000 \| 2000 ka, 2500 \| 2500 ka, 3000 \| 3000 ka, 3500 \| 3500 ka |
+
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 1990 – 7450 mm
+- Uitval/Arm-keuzes per breedte (omslagpunten): vanaf 2000 mm: geen; vanaf 2500 mm: 1500,2000; vanaf 3000 mm: 1500,2000,2500; vanaf 3500 mm: 1500,2000,2500,3000; vanaf 4100 mm: 1500,2000,2500,3000,3500
 
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
@@ -406,6 +445,17 @@ Afhankelijkheid breedte → Uitval/Arm:
 | 7500 | 01 \| 950 uitval, 02 \| 1150 uitval, 03 \| 1350 uitval, 04 \| 1500 uitval |
 | 8000 | 01 \| 950 uitval, 02 \| 1150 uitval, 03 \| 1350 uitval, 04 \| 1500 uitval |
 
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 800 – 8000 mm
+- *Doeklengte (uitvalricht.) (MM)*: Fout : 0 geldige opties voor Doeklengte (uitvalricht.) !
+- Uitval/Arm-keuzes per breedte (omslagpunten): vanaf 800 mm: 01,02,03,04
+- Bij *Type armen* = 3 \| Gasveer armen: breedte 800 – 8000 mm
+- Bij *Type armen* = 4 \| Hoek- / Balkon armen WVA: breedte 800 – 8000 mm
+- Bij *Type armen* = 7 \| Hoek- / Balkon armen WAG: breedte 800 – 8000 mm
+- Bij *Doek* = 4 \| Doek in banen met doorval: breedte 800 – 8000 mm
+- Bij *Rol breedte* = 320 \| 320 cm: breedte 800 – 8000 mm
+
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
 *Type Bediening* (basis: 5 \| Sunea IO motor)
@@ -461,6 +511,17 @@ Vaste waarden (niet te kiezen): *Type screen* = 1 \| Zipscreen 85, *doek kantele
 | 16 | Kleur kap | keuzelijst | 624 keuzes (unie van 4 runs: std 50, basis 50, recheck3 624, basis2 624), zie lijst **L10** in het lijstenbestand | 04s \| ANTRAC. ST |
 | 17 | Kleur geleider | keuzelijst | 626 keuzes (unie van 4 runs: std 240, basis 240, recheck3 625, basis2 625), zie lijst **L11** in het lijstenbestand | 04s \| ANTRAC. ST * |
 | 18 | Kleur onderlijst | keuzelijst | 626 keuzes (unie van 4 runs: std 240, basis 240, recheck3 625, basis2 625), zie lijst **L11** in het lijstenbestand | 04s \| ANTRAC. ST * |
+
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 547 – 4100 mm
+- Hoogtebereik per breedte (max. hoogte daalt bij grotere breedte): b 547: 300–2000; b 750: 300–2000; b 1000: 300–2000; b 1250: 300–2000; b 1500: 300–2000; b 1750: 300–2000; b 2000: 300–2000; b 2250: 300–2000; b 2500: 300–2000; b 2750: 300–2000; b 3000: 300–2000; b 3250: 300–2000; b 3500: 300–2000; b 3750: 300–2000; b 4000: 300–2000; b 4100: 300–1951
+- Bij *Uitvoering* = 2 \| Rechte kast: breedte 547 – 4100 mm, hoogte bij middenbreedte 300–2000 mm, bij maxbreedte 300–1951 mm
+- Bij *Geleider links* = 563 \| Zip geleider: breedte 547 – 4100 mm, hoogte bij middenbreedte 300–2000 mm, bij maxbreedte 300–1951 mm
+- Bij *Geleider links* = 568 \| Deelbare Zip geleider Veranda: breedte 547 – 4100 mm, hoogte bij middenbreedte 300–2000 mm, bij maxbreedte 300–1951 mm
+- Bij *Geleider links* = 573 \| LHTF Zip geleider: breedte 547 – 4100 mm, hoogte bij middenbreedte 300–2000 mm, bij maxbreedte 300–1951 mm
+- Bij *Geleider links* = 576 \| LHTF Deelbare Zip geleider: breedte 547 – 4100 mm, hoogte bij middenbreedte 300–2000 mm, bij maxbreedte 300–1951 mm
+- Bij *Geleider links* = 900 \| Zonder geleider: breedte 547 – 4100 mm, hoogte bij middenbreedte 300–2000 mm, bij maxbreedte 300–1951 mm
 
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
@@ -519,6 +580,17 @@ Vaste waarden (niet te kiezen): *Type screen* = 2 \| Zipscreen 100, *doek kantel
 | 17 | Kleur geleider | keuzelijst | 626 keuzes (unie van 4 runs: std 240, basis 240, recheck3 625, basis2 625), zie lijst **L11** in het lijstenbestand | 04s \| ANTRAC. ST * |
 | 18 | Kleur onderlijst | keuzelijst | 626 keuzes (unie van 4 runs: std 240, basis 240, recheck3 625, basis2 625), zie lijst **L11** in het lijstenbestand | 04s \| ANTRAC. ST * |
 
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 545 – 4105 mm
+- Hoogtebereik per breedte (max. hoogte daalt bij grotere breedte): b 545: 300–3400; b 750: 300–3400; b 1000: 300–3400; b 1250: 300–3400; b 1500: 300–3400; b 1750: 300–3400; b 2000: 300–3400; b 2250: 300–3400; b 2500: 300–3400; b 2750: 300–3400; b 3000: 300–3400; b 3250: 300–3400; b 3500: 300–3400; b 3750: 300–3200; b 4000: 300–3000; b 4105: 300–2923
+- Bij *Uitvoering* = 2 \| Rechte kast: breedte 545 – 4105 mm, hoogte bij middenbreedte 300–3400 mm, bij maxbreedte 300–2923 mm
+- Bij *Geleider links* = 563 \| Zip geleider: breedte 545 – 4105 mm, hoogte bij middenbreedte 300–3400 mm, bij maxbreedte 300–2923 mm
+- Bij *Geleider links* = 568 \| Deelbare Zip geleider Veranda: breedte 545 – 4105 mm, hoogte bij middenbreedte 300–3400 mm, bij maxbreedte 300–2923 mm
+- Bij *Geleider links* = 573 \| LHTF Zip geleider: breedte 545 – 4105 mm, hoogte bij middenbreedte 300–3400 mm, bij maxbreedte 300–2923 mm
+- Bij *Geleider links* = 576 \| LHTF Deelbare Zip geleider: breedte 545 – 4105 mm, hoogte bij middenbreedte 300–3400 mm, bij maxbreedte 300–2923 mm
+- Bij *Geleider links* = 900 \| Zonder geleider: breedte 545 – 4105 mm, hoogte bij middenbreedte 300–3400 mm, bij maxbreedte 300–2923 mm
+
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
 *Type Bediening* (basis: 2 \| IO-50 *)
@@ -575,6 +647,16 @@ Vaste waarden (niet te kiezen): *Type screen* = 4 \| Zipscreen Max, *doek kantel
 | 16 | Kleur geleider | keuzelijst | 626 keuzes (unie van 4 runs: std 240, basis 240, recheck3 625, basis2 625), zie lijst **L11** in het lijstenbestand | 04s \| ANTRAC. ST * |
 | 17 | Kleur onderlijst | keuzelijst | 626 keuzes (unie van 4 runs: std 240, basis 240, recheck3 625, basis2 625), zie lijst **L11** in het lijstenbestand | 04s \| ANTRAC. ST * |
 
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 525 – 5100 mm
+- Hoogtebereik per breedte (max. hoogte daalt bij grotere breedte): b 525: 300–5000; b 750: 300–5000; b 1000: 300–5000; b 1250: 300–5000; b 1500: 300–5000; b 1750: 300–5000; b 2000: 300–5000; b 2250: 300–5000; b 2500: 300–5000; b 2750: 300–5000; b 3000: 300–5000; b 3250: 300–4923; b 3500: 300–4571; b 3750: 300–4267; b 4000: 300–4000; b 4250: 300–3765; b 4500: 300–3556; b 4750: 300–3368; b 5000: 300–3200; b 5100: 300–3137
+- Bij *Geleider links* = 563 \| Zip geleider: breedte 525 – 5100 mm, hoogte bij middenbreedte 300–5000 mm, bij maxbreedte 300–3137 mm
+- Bij *Geleider links* = 568 \| Deelbare Zip geleider Veranda: breedte 525 – 5100 mm, hoogte bij middenbreedte 300–5000 mm, bij maxbreedte 300–3137 mm
+- Bij *Geleider links* = 573 \| LHTF Zip geleider: breedte 525 – 5100 mm, hoogte bij middenbreedte 300–5000 mm, bij maxbreedte 300–3137 mm
+- Bij *Geleider links* = 576 \| LHTF Deelbare Zip geleider: breedte 525 – 5100 mm, hoogte bij middenbreedte 300–5000 mm, bij maxbreedte 300–3137 mm
+- Bij *Geleider links* = 900 \| Zonder geleider: breedte 525 – 5100 mm, hoogte bij middenbreedte 300–5000 mm, bij maxbreedte 300–3137 mm
+
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
 *Type Bediening* (basis: 2 \| IO-50 *)
@@ -624,6 +706,16 @@ Vaste waarden (niet te kiezen): *Type screen* = 8 \| Zipscreen Zip Design 110, *
 | 13 | Kleur geleider | keuzelijst | 626 keuzes (unie van 3 runs: std 240, basis 240, recheck3 625), zie lijst **L11** in het lijstenbestand | 04s \| ANTRAC. ST * |
 | 14 | Kleur onderlijst | keuzelijst | 626 keuzes (unie van 3 runs: std 240, basis 240, recheck3 625), zie lijst **L11** in het lijstenbestand | 04s \| ANTRAC. ST * |
 
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 595 – 5000 mm
+- Hoogtebereik per breedte (max. hoogte daalt bij grotere breedte): b 595: 300–2700; b 750: 300–2700; b 1000: 300–2700; b 1250: 300–2700; b 1500: 300–2700; b 1750: 300–2700; b 2000: 300–2700; b 2250: 300–2700; b 2500: 300–2700; b 2750: 300–2700; b 3000: 300–2700; b 3250: 300–2700; b 3500: 300–2700; b 3750: 300–2700; b 4000: 300–2700; b 4250: 300–2700; b 4500: 300–2700; b 4750: 300–2700; b 5000: 300–2700
+- Bij *Geleider links* = 563 \| Zip geleider: breedte 595 – 5000 mm, hoogte bij middenbreedte 300–2700 mm, bij maxbreedte 300–2700 mm
+- Bij *Geleider links* = 568 \| Deelbare Zip geleider Veranda: breedte 595 – 5000 mm, hoogte bij middenbreedte 300–2700 mm, bij maxbreedte 300–2700 mm
+- Bij *Geleider links* = 573 \| LHTF Zip geleider: breedte 595 – 5000 mm, hoogte bij middenbreedte 300–2700 mm, bij maxbreedte 300–2700 mm
+- Bij *Geleider links* = 576 \| LHTF Deelbare Zip geleider: breedte 595 – 5000 mm, hoogte bij middenbreedte 300–2700 mm, bij maxbreedte 300–2700 mm
+- Bij *Geleider links* = 900 \| Zonder geleider: breedte 595 – 5000 mm, hoogte bij middenbreedte 300–2700 mm, bij maxbreedte 300–2700 mm
+
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
 *Type Bediening* (basis: 12 \| RS 100 IO Solar *)
@@ -672,6 +764,16 @@ Vaste waarden (niet te kiezen): *Type screen* = 9 \| Zipscreen Zip Design 110 Ve
 | 14 | Kleur geleider | keuzelijst | 634 keuzes (unie van 4 runs: std 243, basis 243, recheck3 634, basis2 634), zie lijst **L16** in het lijstenbestand | 04s \| ANTRAC. ST * |
 | 15 | Kleur onderlijst | keuzelijst | 635 keuzes (unie van 4 runs: std 226, basis 226, recheck3 635, basis2 635), zie lijst **L17** in het lijstenbestand | 04s \| ANTRAC. ST * |
 
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 600 – 6000 mm
+- Hoogtebereik per breedte (max. hoogte daalt bij grotere breedte): b 600: 300–2700; b 750: 300–2700; b 1000: 300–2700; b 1250: 300–2700; b 1500: 300–2700; b 1750: 300–2700; b 2000: 300–2700; b 2250: 300–2700; b 2500: 300–2700; b 2750: 300–2700; b 3000: 300–2700; b 3250: 300–2700; b 3500: 300–2700; b 3750: 300–2700; b 4000: 300–2700; b 4250: 300–2700; b 4500: 300–2700; b 4750: 300–2700; b 5000: 300–2700; b 5250: 300–2700; b 5500: 300–2700; b 5750: 300–2700; b 6000: 300–2667
+- Bij *Geleider links* = 563 \| Zip geleider: breedte 600 – 6000 mm, hoogte bij middenbreedte 300–2700 mm, bij maxbreedte 300–2667 mm
+- Bij *Geleider links* = 566 \| Deelbare Zip geleider: breedte 600 – 6000 mm, hoogte bij middenbreedte 300–2700 mm, bij maxbreedte 300–2667 mm
+- Bij *Geleider links* = 573 \| LHTF Zip geleider: breedte 600 – 6000 mm, hoogte bij middenbreedte 300–2700 mm, bij maxbreedte 300–2667 mm
+- Bij *Geleider links* = 576 \| LHTF Deelbare Zip geleider: breedte 600 – 6000 mm, hoogte bij middenbreedte 300–2700 mm, bij maxbreedte 300–2667 mm
+- Bij *Geleider links* = 900 \| Zonder geleider: breedte 600 – 6000 mm, hoogte bij middenbreedte 300–2700 mm, bij maxbreedte 300–2667 mm
+
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
 *Type Bediening* (basis: 2 \| IO-50 *)
@@ -714,6 +816,11 @@ Vaste waarden (niet te kiezen): *Scherm model* = 03 \| Bovendak zonwering SunCon
 | 10 | Kleur frame | keuzelijst | 627 keuzes (unie van 4 runs: std 52, basis 52, recheck3 627, basis2 627), zie lijst **L19** in het lijstenbestand | 04s \| ANTRAC. ST |
 | 11 | Soort montage | keuzelijst | 01 \| Standaard<br>07 \| Standaard + hoek<br>09 \| Geleider montagevoet 150 mm<br>10 \| Geleider montagevoet 200 mm<br>11 \| Geleider montagevoet 300 mm<br>12 \| Geleider montagevoet 150 mm + hoek<br>13 \| Geleider montagevoet 200 mm + hoek<br>14 \| Geleider montagevoet 300 mm + hoek | 01 \| Standaard |
 | 12 | Doekondersteuning | keuzelijst | xxx \| NVT *<br>2 \| Tussenrol onder de geleider | xxx \| NVT * |
+
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- *Bevestigingsmaat=Bestelmaat (MM)*: 1380 – 12000 mm
+- *Uitval (MM)*: 1000 – 4500 mm
 
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
@@ -761,6 +868,20 @@ Vaste waarden (niet te kiezen): *Soort lamellen* = 8 \| RS37, *Montage* = 1 \| g
 | 14 | Kleur lamellen | keuzelijst | 53 \| R53 Antraciet *<br>71 \| R71 Cremewit<br>86 \| R86 Ral 9010<br>66 \| R66 Kwartsgrijs<br>44 \| R44 Ral 9005<br>20 \| R20 Naturel<br>10 \| R10 Ral 9007<br>70 \| R70 DB703<br>49 \| R49 Dennengroen<br>72 \| R72 Ral 7021 | 53 \| R53 Antraciet * |
 | 15 | Kleur onderlijst | keuzelijst | 13 keuzes, zie lijst **L21** in het lijstenbestand | 53 \| R53 Antraciet * |
 | 16 | Kleur geleiders | keuzelijst | 13 keuzes, zie lijst **L21** in het lijstenbestand | 53 \| R53 Antraciet * |
+
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 363 – 3000 mm
+- Hoogtebereik per breedte (max. hoogte daalt bij grotere breedte): b 363: 0–3500; b 500: 0–3500; b 750: 0–3500; b 1000: 0–3500; b 1250: 0–3500; b 1500: 0–3500; b 1750: 0–3429; b 2000: 0–3000; b 2250: 0–2667; b 2500: 0–2400; b 2750: 0–2182; b 3000: 0–2000
+- Bij *Uitvoering* = 3 \| Rolluik gekoppeld: breedte 1500 – 6000 mm, hoogte bij middenbreedte 0–3158 mm, bij maxbreedte 0–2000 mm
+- Bij *Geleider links* = 575 \| DB HTF BASIS + DEKSEL: breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Geleider links* = 514 \| A4 LHTF: breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Geleider links* = 505 \| A5 HF: breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Geleider links* = 516 \| A6 LHF: breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Geleider links* = 812 \| A8-12 F-HTF: breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Geleider links* = 820 \| A8-20 F-HTF: breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Geleider links* = 513 \| A13 HTF (68 mm): breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Kapsoort* = 2 \| Rond Rolvorm: breedte 363 – 3000 mm, hoogte bij middenbreedte 0–3500 mm, bij maxbreedte 0–2000 mm
 
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
@@ -823,6 +944,21 @@ Vaste waarden (niet te kiezen): *Soort lamellen* = 9 \| RS42, *Montage* = 1 \| g
 | 15 | Kleur onderlijst | keuzelijst | 13 keuzes, zie lijst **L21** in het lijstenbestand | 53 \| R53 Antraciet * |
 | 16 | Kleur geleiders | keuzelijst | 13 keuzes, zie lijst **L21** in het lijstenbestand | 53 \| R53 Antraciet * |
 
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 363 – 4000 mm
+- Hoogtebereik per breedte (max. hoogte daalt bij grotere breedte): b 363: 0–2820; b 500: 0–2820; b 750: 0–2820; b 1000: 0–2820; b 1250: 0–2820; b 1500: 0–2820; b 1750: 0–2820; b 2000: 0–2820; b 2250: 0–2820; b 2500: 0–2820; b 2750: 0–2727; b 3000: 0–2500; b 3250: 0–2308; b 3500: 0–2143; b 3750: 0–2000; b 4000: 0–1875
+- Bij *Soort uitvoering* = 3 \| Rolluik gekoppeld: breedte 363 – 4000 mm, hoogte bij middenbreedte 0–2820 mm, bij maxbreedte 0–1875 mm (keuze niet bevestigd)
+- Bij *Uitvoering* = 3 \| Rolluik gekoppeld: breedte 1500 – 6000 mm, hoogte bij middenbreedte 0–2800 mm, bij maxbreedte 0–2500 mm
+- Bij *Geleider links* = 575 \| DB HTF BASIS + DEKSEL: breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Geleider links* = 514 \| A4 LHTF: breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Geleider links* = 505 \| A5 HF: breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Geleider links* = 516 \| A6 LHF: breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Geleider links* = 812 \| A8-12 F-HTF: breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Geleider links* = 820 \| A8-20 F-HTF: breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Geleider links* = 513 \| A13 HTF (68 mm): breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+- Bij *Kapsoort* = 2 \| Rond Rolvorm: breedte 363 – 4000 mm, hoogte bij middenbreedte 0–2820 mm, bij maxbreedte 0–1875 mm
+
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
 *Type Bediening* (basis: 9 \| RS 100 IO Solar)
@@ -880,6 +1016,13 @@ Vaste waarden (niet te kiezen): *Soort lamellen* = 9 \| RS42, *Montage* = 1 \| g
 | 7 | Kleur lamellen | keuzelijst | 53 \| R53 Antraciet<br>71 \| R71 Cremewit<br>86 \| R86 Ral 9010<br>66 \| R66 Kwartsgrijs<br>44 \| R44 Ral 9005<br>20 \| R20 Naturel<br>10 \| R10 Ral 9007<br>70 \| R70 DB703<br>49 \| R49 Dennengroen<br>72 \| R72 Ral 7021 | 53 \| R53 Antraciet |
 | 8 | Kleur onderlijst | keuzelijst | 13 keuzes, zie lijst **L21** in het lijstenbestand | 53 \| R53 Antraciet * |
 
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 562 – 4000 mm
+- Hoogtebereik per breedte (max. hoogte daalt bij grotere breedte): b 562: 0–2820; b 750: 0–2820; b 1000: 0–2820; b 1250: 0–2820; b 1500: 0–2820; b 1750: 0–2820; b 2000: 0–2820; b 2250: 0–2820; b 2500: 0–2820; b 2750: 0–2727; b 3000: 0–2500; b 3250: 0–2308; b 3500: 0–2143; b 3750: 0–2000; b 4000: 0–1875
+- Bij *Soort uitvoering* = 02 \| Rolluik S-37: ⚠ niet gemeten (TimeoutError: locator.click: Timeout 30000ms exceeded. Call )
+- Bij *Geleider links* = 822 \| HF / LHF: breedte: Fout : 0 geldige opties voor Breedte ! / Fout : 0 geldige opties voor Breedte !
+
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
 *Soort uitvoering* (basis: 01 \| Rolluik S-42)
@@ -905,6 +1048,18 @@ Vaste waarden (niet te kiezen): *Uitval/Arm* = xxx \| NVT, *Bed. optie 3* = xxx 
 | 3 | Uitval (MM) | getal | 100 – 4.200 mm | 2000 |
 | 4 | Doeklengte (uitvalricht.) (MM) | getal | vrije invoer (mm), geen directe grenscontrole gezien | (automatisch berekend / leeg) |
 | 5 | Kleur code doek | keuzelijst | 390 keuzes (unie van 4 runs: std 390, basis 390, recheck3 390, basis2 390), zie lijst **L1** in het lijstenbestand | 0001 \| WIT (T100) |
+
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 50 – 9300 mm
+- *Uitval (MM)*: 100 – 4200 mm
+- Uitval/Arm-keuzes per breedte (omslagpunten): vanaf 100 mm: xxx
+- Bij *scherm model* = Y02 \| Geconfectioneerd Uitvaldoek Naadloos: breedte 50 – 9300 mm
+- Bij *scherm model* = Y03 \| Volant in banen Grote Golf: breedte 50 – 9300 mm
+- Bij *scherm model* = Y04 \| Volant in banen Recht Model: breedte 50 – 9300 mm
+- Bij *scherm model* = Y05 \| Volant in banen Kleine Golf: breedte 50 – 9300 mm
+- Bij *scherm model* = Y06 \| Geconfectioneerd Uitvaldoek in banen met klikpees bovenlangs: breedte 50 – 9300 mm
+- Bij *scherm model* = Y07 \| Geconfectioneerd Uitvaldoek in banen met klikpees onderlangs: breedte 50 – 9300 mm
 
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 
@@ -933,6 +1088,23 @@ Vaste waarden (niet te kiezen): *Montage* = xxx \| NVT, *Bed. optie 1* = xxx \| 
 | 4 | Kleur code doek | keuzelijst | 77 keuzes (unie van 3 runs: std 76, recheck3 76, basis2 76), zie lijst **L22** in het lijstenbestand | 001004 \| Serge Grijs-Oranje |
 | 5 | Kleurcode 2 | keuzelijst | 01 \| Standaard *<br>02 \| Grijze zijde buiten | 01 \| Standaard * |
 | 6 | Lasband | keuzelijst | 2 \| Zonder lasband *<br>1 \| Met lasband | 2 \| Zonder lasband * |
+
+**Maatgrenzen, nauwkeurig gemeten (per 100 mm, per variant)**
+
+- Breedte basisconfiguratie: 200 – 6000 mm
+- Hoogtebereik per breedte (max. hoogte daalt bij grotere breedte): b 200: 175–5500; b 250: 175–5500; b 500: 175–5500; b 750: 175–5500; b 1000: 175–5500; b 1250: 175–5500; b 1500: 175–5500; b 1750: 175–5500; b 2000: 175–5500; b 2250: 175–5500; b 2500: 175–5500; b 2750: 175–5500; b 3000: 175–5500; b 3250: 175–5500; b 3500: 175–5500; b 3750: 175–5500; b 4000: 175–5500; b 4250: 175–5500; b 4500: 175–5500; b 4750: 175–5500; b 5000: 175–5500; b 5250: 175–5500; b 5500: 175–5500; b 5750: 175–5500; b 6000: 175–5500
+- Bij *Segment* = 90002 \| Doek Zip zoom boven en onder: breedte: Fout : 0 geldige opties voor Breedte !, hoogte: Fout : 0 geldige opties voor Hoogte ! (keuze niet bevestigd)
+- Bij *Segment* = 90011 \| Doek klikpees boven en zoom onder: breedte: Fout : 0 geldige opties voor Breedte !, hoogte: Fout : 0 geldige opties voor Hoogte ! (keuze niet bevestigd)
+- Bij *Segment* = 90012 \| Doek Zip klikpees boven en zoom onder: breedte: Fout : 0 geldige opties voor Breedte !, hoogte: Fout : 0 geldige opties voor Hoogte ! (keuze niet bevestigd)
+- Bij *Segment* = 90067 \| Doek zoom 27 mm onder\| Rits boven: breedte: Fout : 0 geldige opties voor Breedte !, hoogte: Fout : 0 geldige opties voor Hoogte ! (keuze niet bevestigd)
+- Bij *Segment* = 90070 \| Doek lasband rondom: breedte: Fout : 0 geldige opties voor Breedte !, hoogte: Fout : 0 geldige opties voor Hoogte ! (keuze niet bevestigd)
+- Bij *Segment* = 90071 \| Doek zoom rondom: breedte: Fout : 0 geldige opties voor Breedte !, hoogte: Fout : 0 geldige opties voor Hoogte ! (keuze niet bevestigd)
+- Bij *Type screen* = 90002 \| Doek Zip zoom boven en onder: breedte 200 – 6000 mm, hoogte bij middenbreedte 175–5500 mm, bij maxbreedte 175–5500 mm
+- Bij *Type screen* = 90011 \| Doek klikpees boven en zoom onder: breedte 200 – 6000 mm, hoogte bij middenbreedte 175–5500 mm, bij maxbreedte 175–5500 mm
+- Bij *Type screen* = 90012 \| Doek Zip klikpees boven en zoom onder: breedte 200 – 6000 mm, hoogte bij middenbreedte 175–5500 mm, bij maxbreedte 175–5500 mm
+- Bij *Type screen* = 90067 \| Doek zoom 27 mm onder\| Rits boven: breedte 200 – 6000 mm, hoogte bij middenbreedte 175–5500 mm, bij maxbreedte 175–5500 mm
+- Bij *Type screen* = 90070 \| Doek lasband rondom: breedte 200 – 6000 mm, hoogte bij middenbreedte 175–5500 mm, bij maxbreedte 175–5500 mm
+- Bij *Type screen* = 90071 \| Doek zoom rondom: breedte 200 – 6000 mm, hoogte bij middenbreedte 175–5500 mm, bij maxbreedte 175–5500 mm
 
 **Varianten: wat verandert er in de vervolgvelden bij een andere keuze**
 

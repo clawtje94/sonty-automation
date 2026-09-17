@@ -4384,3 +4384,5 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
   met Webflow) → verzendcentrum op eigen bij de switch; echt nodig: formulieren→Trengo, verzendcentrum eigen, domein+DNS, site-URL, Ads-landing,
   noindex+Search Console, Gouda/Leidschendam-keuze, KV-back-up. NIET nodig: Telegram/Klaviyo/Places-sleutels, CRON_SECRET/codes, RP-foto's,
   klik-lab, oude scripts. Pdf's van beide docs naar Telegram. TaHoma-productfoto (Somfy, public/configurator/tahoma-switch.webp) live d5d004c.
+- 17-09: Daimy: "TaHoma niet zichtbaar als product, alleen als upsell-keuze" → active:false in productdata (3a18d53, live): niet in de
+  productlijst, wel eigen regel in de aanvraag zodra hij als extra gekozen wordt; nooit dubbel. Browserproef: 3 regels, TaHoma 1x, 0 in lijst.

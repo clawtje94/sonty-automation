@@ -4425,3 +4425,5 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
   Aanvraag-mail zei al "prijs definitief na het inmeten"; configurator-overzicht ook. Desktop, mobiel en PDF-pagina 2 visueel gecontroleerd.
 - 17-09 PDF-feedback Daimy (p2 t/m p8 + AV-link) verwerkt in lib/offerte-pdf (7cbc2b8, live): maten onder elkaar (netteDetails splitst nu ook op " | "),
   bullets bij alternatieven, teksten aangepast, werkgebied "Heel Zuid-Holland …" (niet verkleind), link algemene voorwaarden op de akkoord-pagina.
+- 17-09 Daimy: "prijs half op p3, half op p4 is niet nice" → OfferteBrochure (cdbb36b, live): waarom-blok + alternatieven uit de prijstabel; prijstabel + totalen
+  compact op p3; nieuwe pagina "Over je producten" (alleen als er uitleg is) direct erna. Gemeten: prijstabel + totaal p3, over-je-producten p4.

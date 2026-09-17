@@ -4388,3 +4388,5 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
   productlijst, wel eigen regel in de aanvraag zodra hij als extra gekozen wordt; nooit dubbel. Browserproef: 3 regels, TaHoma 1x, 0 in lijst.
 - 17-09: Daimy: "upsell-producten altijd onderaan in de cart, in de offerte ook onderaan" → sorteerCart() in ProductConfigurator (f050169, live):
   TaHoma-regel altijd laatste, ook bij herladen uit localStorage; server zet extra-regels al ná de productregels (buildOfferte). Browserproef ok.
+- 17-09 Daimy /goal "lijst wat jij al kunt regelen vóór de overstap volgende week" → docs/voorbereiding-websiteswitch-claude-2026-09-17.md
+  (13 punten zelf, ±3 werkdagen; 6 punten met Daimy). Telegram V1 (go op 1-13) en V2 (DNS wie) open. NIETS gestart tot "ja".

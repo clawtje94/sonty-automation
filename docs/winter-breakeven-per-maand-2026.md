@@ -60,3 +60,37 @@ Advies:
 - Augustus: 111 van 135 akkoorden hebben nog een €1-inkoop, de marge is geschat via productratio. Kan ±10% afwijken.
 - Google-spend augustus en september ontbreekt, en Google okt-dec 2025 ook (open vraag V1 uit het winterplan). Daardoor is "alle ads-budgetten" alleen voor Meta hard gemeten.
 - Lasten-blok in de sheet is wat het team invult; €125k voor aug is de stand van 17-09.
+
+## 6. Aanvulling 17-09 (Daimy: "hoeveel ads moeten we draaien om winst of zo min mogelijk verlies te draaien")
+
+Model (scratchpad ads-optimum.js): per maand per kanaal leads = leads_vorig_jaar × (budget / budget_vorig_jaar)^0,65 (afnemende meeropbrengst: 2× budget = 1,6× leads, leadprijs +27%). Conversie en marge per akkoord = dezelfde maand vorige winter (Google conv gemaximeerd op 12%, Meta op 7%). Optimum = doorgaan tot een extra advertentie-euro nog precies één euro marge oplevert; dat is het punt waar de gemiddelde leadprijs 65% van de break-even per offerte raakt. Budget maximaal 2× vorig jaar. Google okt-dec: spend onbekend (V1), aangenomen €13k/mnd met leadprijs jan × 1,1-1,2. Meta: drie varianten voor de nieuwe rolluik-set (september kost een lead €23, vorig jaar september €57): volledig effect, half effect (midden), geen effect.
+
+**Stop-leadprijs (gemiddeld, per maand): zolang je hieronder zit, verkleint elke extra euro ads het verlies.**
+
+| | okt | nov | dec | jan | feb |
+|---|---|---|---|---|---|
+| Meta (Ads Manager CPL = sheet) | €33 | €37 | €35 | €49 | €72 |
+| Google per sheet-offerte | €84 | €125 | €105 | €105 | €79 |
+| Google doel-CPA in Google Ads (×0,75) | €63 | €94 | €79 | €79 | €59 |
+
+Vorige winter zat Meta okt-dec op €66-87 per lead: ver boven de stop, daarom verloor Meta daar geld. Google jan-feb €63-69: onder de stop, dus daar was ruimte.
+
+**Budgetadvies per maand (lasten €125k, midden-variant; bandbreedte = geen effect tot volledig effect nieuwe rolluik-set)**
+
+| maand | Meta | Google | totaal ads | online orders | resultaat | winterplan (€140k ads) | €0 ads |
+|---|---|---|---|---|---|---|---|
+| okt | €4k (€1,5-12k) | €17k | €22k | 31 | **−€69k** (−65 à −71k) | −€82k | −€81k |
+| nov | €8k (€3-23k) | €26k | €34k | 44 | **−€51k** (−43 à −54k) | −€75k | −€81k |
+| dec | €4k (€1-10k) | €25k | €29k | 25 | **−€79k** (−75 à −80k) | −€99k | −€94k |
+| jan | €39k (€17-39k) | €30k | €69k | 90 | **−€38k** (−10 à −54k) | −€57k | −€88k |
+| feb | €43k | €34k | €77k | 107 | **+€29k** (−4 à +77k) | −€33k | −€55k |
+| **okt-feb** | €98k | €132k | **€230k** | 296 | **−€208k** (−117 à −262k) | **−€346k** | **−€400k** |
+
+Lezen:
+1. **Meer adverteren, niet minder: het winterplan-budget (€140k) laat ~€140k verlies liggen.** Het optimum ligt op €230k okt-feb, vooral Google (2× vorig jaar, elke maand) en Meta in jan-feb (2×). Bij €115k lasten: elke maand €10k minder verlies, zelfde budgetten.
+2. **Okt-dec blijft verlies, wat je ook doet** (−€65k tot −€80k per maand): de vraag is te klein. Meta daar alleen als de nieuwe rolluik-set de leadprijs onder €33-37 houdt; anders bijna uit. Google wel vol aan (rolluiken, screens, PMax).
+3. **Jan-feb is waar winst te halen is**: 90-137 orders per maand haalbaar binnen capaciteit (~150). Februari kan bij €77k ads +€29k tot +€77k opleveren.
+4. **De stuurregel is belangrijker dan het budgetgetal**: budget wekelijks +20% zolang de gemiddelde leadprijs onder de stop-waarde blijft, terugschroeven zodra erboven. Akkoorden pas na 4 weken beoordelen.
+5. **Nu (september)**: Meta staat op €12,6k/mnd bij €23 per lead; stop-waarde september ≈ €45. Direct opschalen naar €20-25k/mnd, de rolluiken-campagne voorop.
+
+Onzekerheden: elasticiteit 0,65 is een aanname (bij 0,5 liggen de optima 30% lager, bij 0,8 hoger); Google okt-dec zonder data (V1); Meta okt-dec hangt volledig aan de nieuwe rolluik-set. Wat niet onzeker is: bij de huidige leadprijzen ligt het optimum ruim boven het winterplan.

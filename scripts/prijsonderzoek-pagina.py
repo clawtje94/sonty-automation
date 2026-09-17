@@ -28,7 +28,7 @@ def w(v): return f"{v / maxv * 100:.1f}%"
 med_left = w(mediaan)
 
 def goog(a):
-    return f'<span class="num">{a["google_score"]:.1f}</span> · {a["google_reviews"]} reviews'
+    return 'nog niet opgezocht' if a.get('google_score') is None else f'<span class="num">{a["google_score"]:.1f}</span> · {a["google_reviews"]} reviews'
 
 def pill(txt, kleur): return f'<span class="pill {kleur}">{html.escape(txt)}</span>'
 
@@ -41,7 +41,7 @@ items = [(a["totaal4"], a) for a in A] + [(S["totaal4"], "SONTY"), (L["totaal4"]
 for v, a in sorted(items, key=lambda x: x[0]):
     if a == "SONTY": row("Sonty verkoopprijs", f"lijst min vaste 15% · Sunmaster Zip Square, Rolluik S-42 · Google {D['sonty']['google_score']:.1f} ({D['sonty']['google_reviews']})", v, "sonty")
     elif a == "LIJST": row("Sonty lijstprijs, ter info", "wordt nooit gerekend", v, "actie")
-    else: row(html.escape(a["naam"]), html.escape(f'{a["plaats"]} · {a["type"]} · {a["screens"]} · Google {a["google_score"]:.1f} ({a["google_reviews"]})'), v)
+    else: row(html.escape(a["naam"]), html.escape(f'{a["plaats"]} · {a["type"]} · {a["screens"]} · Google ' + (f"{a['google_score']:.1f} ({a['google_reviews']})" if a.get('google_score') else '?')), v)
 
 def prijsrij(a, cls=""):
     return (f'<tr class="{cls}"><td>{html.escape(a["naam"])} ({html.escape(a["plaats"])})</td>'
@@ -74,9 +74,20 @@ for key,titel in PROD:
     prod_html.append(f'<div class="prod"><h3>{titel}</h3><p class="pmeta">Sonty {eur(S[key])} · plek {pos} van {len(lst)} · midden {eur(med)} ({dpct:+d}%)</p>{bars}</div>')
 PROD_CSS=".prods{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.prod{background:var(--surface);border:1px solid var(--line);padding:14px 16px}.prod h3{font-family:'Barlow Condensed',Figtree,sans-serif;font-size:19px;font-weight:700}.pmeta{margin:2px 0 10px;color:var(--ink2);font-size:12.5px}.prow{display:grid;grid-template-columns:150px 1fr 62px;gap:8px;align-items:center;padding:2px 0}.plab{font-size:12px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ptrack{position:relative;height:10px}.pbar{height:10px;background:var(--bar);border-radius:0 3px 3px 0}.prow.sonty .pbar{background:var(--accent)}.prow.sonty .plab,.prow.sonty .pval{font-weight:700;color:var(--accent-ink)}.pval{text-align:right;font-size:12px;font-weight:600}@media (max-width:760px){.prods{grid-template-columns:1fr}}"
 
+W=D.get("webshops",[]); SX=D["sonty"]["verkoop_excl_montage"]
+def wtot(w):
+    ks=["screen_io","screen_solar","rolluik_io","rolluik_solar"]
+    return sum(w[k] for k in ks) if all(w.get(k) for k in ks) else None
+web_rows=[]
+for w in sorted(W, key=lambda w: (wtot(w) is None, wtot(w) or 0)):
+    web_rows.append(f'<tr><td>{html.escape(w["naam"])}<br><span class="sub2">{html.escape(w["type"])}</span></td><td class="n">{eur(w["screen_io"])}</td><td class="n">{eur(w["screen_solar"])}</td><td class="n">{eur(w["rolluik_io"])}</td><td class="n">{eur(w["rolluik_solar"])}</td><td class="n"><strong>{eur(wtot(w))}</strong></td><td>{html.escape(w["montage"])}</td><td>{html.escape(w["motor"])}</td><td>{html.escape(w["bron"])}{(" · "+html.escape(w["noot"])) if w["noot"] else ""}</td></tr>')
+web_rows.append('<tr class="sonty"><td>Sonty, product zonder montage (verkoopprijs)</td>'+"".join(f'<td class="n">{eur(SX[k])}</td>' for k in ["screen_io","screen_solar","rolluik_io","rolluik_solar"])+f'<td class="n"><strong>{eur(SX["totaal4"])}</strong></td><td>montage apart 195/175</td><td>Somfy RS100 io</td><td>rekentool, lijst -15%, zonder montagedeel</td></tr>')
+webtots=[wtot(w) for w in W if wtot(w)]
+WEB_CSS=".sub2{color:var(--muted);font-size:11.5px}"
+
 page = f"""<title>Marktpositie Sonty</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap">
-<style>{CSS}{PROD_CSS}</style>
+<style>{CSS}{PROD_CSS}{WEB_CSS}</style>
 <div class="wrap">
   <div class="eyebrow">Prijsonderzoek zonwering · {D["periode"]} · {D["aanvragen"]} aanvragen, {D["reacties"]} reacties, {D["met_prijs"]} met prijs · {D["versie"]}</div>
   <h1>Waar staat Sonty in de markt?</h1>
@@ -91,7 +102,7 @@ page = f"""<title>Marktpositie Sonty</title>
     </ul>
     <ul>
       <li>Wie goedkoper is voert volwaardige merken: Verano, Brustor, Alulux, Rainbow, Roma en Sunmaster zelf. Op merk alleen kan Sonty het verschil niet uitleggen.</li>
-      <li>Waar Sonty wél wint: <strong>{D["sonty"]["google_reviews"]} Google-reviews met {D["sonty"]["google_score"]:.1f}</strong> tegen 7 tot {max(a["google_reviews"] for a in A)} bij de concurrenten (mediaan {int(statistics.median([a["google_reviews"] for a in A]))}), garantie <strong>3 jaar montage, 5 jaar product, 7 jaar motor</strong> (markt meestal 2 tot 5 jaar), en snelheid: dealers zitten op 6 tot 12 weken.</li>
+      <li>Waar Sonty wél wint: <strong>{D["sonty"]["google_reviews"]} Google-reviews met {D["sonty"]["google_score"]:.1f}</strong> tegen 7 tot {max(a["google_reviews"] for a in A if a.get("google_reviews"))} bij de concurrenten (mediaan {int(statistics.median([a["google_reviews"] for a in A if a.get("google_reviews")]))}), garantie <strong>3 jaar montage, 5 jaar product, 7 jaar motor</strong> (markt meestal 2 tot 5 jaar), en snelheid: dealers zitten op 6 tot 12 weken.</li>
       <li><strong>Advies:</strong> screens en rolluiken 3 tot 5% omlaag naar de Sunmaster-dealerband (rond € 6.300), knikarm SunEye naar rond € 3.250, de 15% als vaste prijs brengen, en garantie plus snelheid als hoofdargument. Uitwerking onderaan.</li>
     </ul>
   </section>
@@ -120,6 +131,14 @@ page = f"""<title>Marktpositie Sonty</title>
     <tbody>{"".join(prijs)}</tbody>
   </table></div>
   <p class="note">Sonty verkoopt altijd met 15% op de lijst; de verkoopprijs is de regel om mee te vergelijken. Sonty-prijzen komen uit de productie-rekentool, 11 september. Waar montage apart geprijsd is, staat het bedrag in de kolom Montage en zit het in het totaal.</p>
+
+  <h2>Alleen webshops: wat kost het online, zonder montage</h2>
+  <p class="sub">Aparte lijst, buiten de vergelijking hierboven: pure webshops (zelf monteren) en webshops met montage-optie. Prijzen incl. btw, exclusief montage tenzij vermeld, uit hun eigen configurator of echte offerte. Onderaan Sonty's productprijs zonder montagedeel, ter referentie: Sonty doet geen DIY.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Webshop</th><th class="n">Screen stroom</th><th class="n">Screen solar</th><th class="n">Rolluik stroom</th><th class="n">Rolluik solar</th><th class="n">4 producten</th><th>Montage</th><th>Motor</th><th>Bron</th></tr></thead>
+    <tbody>{"".join(web_rows)}</tbody>
+  </table></div>
+  <p class="note">Spreiding webshops voor de vier producten zonder montage: {eur(min(webtots))} tot {eur(max(webtots))}, midden {eur(statistics.median(webtots))}. Sonty's productprijs zonder montage ({eur(SX["totaal4"])}) ligt daar {round((SX["totaal4"]/statistics.median(webtots)-1)*100):+d}% boven: een klant die zelf monteert koopt online voor ongeveer de helft. Met montage erbij (webshop + monteur) komt de klant meestal weer in de buurt van de dealerprijzen.</p>
 
   <h2>Merken, garantie en levertijd</h2>
   <div class="tablewrap"><table>

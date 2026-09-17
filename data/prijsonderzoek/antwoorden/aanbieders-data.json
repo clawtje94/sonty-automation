@@ -1,9 +1,9 @@
 {
- "versie": "versie 5, 15 september",
+ "versie": "versie 6, 17 september",
  "periode": "9 t/m 15 september 2026",
  "aanvragen": 50,
- "reacties": 35,
- "met_prijs": 19,
+ "reacties": 39,
+ "met_prijs": 21,
  "sonty": {
   "verkoop": {
    "screen_io": 1819,
@@ -25,7 +25,14 @@
   },
   "design_s42_verkoop": 6683,
   "google_score": 4.9,
-  "google_reviews": 646
+  "google_reviews": 646,
+  "verkoop_excl_montage": {
+   "screen_io": 1653,
+   "screen_solar": 1627,
+   "rolluik_io": 1329,
+   "rolluik_solar": 1276,
+   "totaal4": 5885
+  }
  },
  "aanbieders": [
   {
@@ -418,6 +425,52 @@
    "noot": "",
    "google_score": 5.0,
    "google_reviews": 323
+  },
+  {
+   "naam": "Open Maatwerk",
+   "plaats": "Rotterdam",
+   "type": "installateur",
+   "screens": "MySun",
+   "rolluiken": "MySun",
+   "knikarm_merk": "niet geoffreerd",
+   "motor": "Somfy Maestria / RS100 io · Tahoma € 280",
+   "garantie": "5 jr MySun/Somfy",
+   "gar_kleur": "good",
+   "levertijd": "niet vermeld",
+   "screen_io": null,
+   "screen_solar": null,
+   "rolluik_io": null,
+   "rolluik_solar": null,
+   "knikarm": null,
+   "pergola": null,
+   "totaal4": 6299,
+   "montage": "incl. meting + montage (600) + Situo-5",
+   "noot": "richtprijs, alleen totaal",
+   "google_score": 4.4,
+   "google_reviews": 106
+  },
+  {
+   "naam": "Duifhuijsen Zonwering",
+   "plaats": "Vlaardingen",
+   "type": "installateur",
+   "screens": "MySun MyZip Ventus",
+   "rolluiken": "Sunpoint CD942",
+   "knikarm_merk": "Harol TC130",
+   "motor": "Somfy io incl. afstandsbediening",
+   "garantie": "2 jr product, 5 jr motor",
+   "gar_kleur": "warn",
+   "levertijd": "niet vermeld",
+   "screen_io": 1750,
+   "screen_solar": 1560,
+   "rolluik_io": 1550,
+   "rolluik_solar": 1400,
+   "knikarm": 3100,
+   "pergola": null,
+   "totaal4": 6260,
+   "montage": "incl. btw en montage (rvs bevestiging)",
+   "noot": "offerte 15-09",
+   "google_score": 4.7,
+   "google_reviews": 68
   }
  ],
  "deels": [
@@ -456,5 +509,139 @@
   "Möller/Zandschulp (offerte via tekenlink)",
   "InhuisPlaza Barendrecht (wil foto + telefoon)"
  ],
- "google_datum": "15-09-2026"
+ "google_datum": "15-09-2026",
+ "webshops": [
+  {
+   "naam": "zonwering-fabriek.nl",
+   "type": "DIY, fabriek-direct",
+   "screen_io": 990,
+   "screen_solar": 928,
+   "rolluik_io": 729,
+   "rolluik_solar": 672,
+   "bron": "configurator 09-09",
+   "montage": "nee",
+   "motor": "Somfy io",
+   "noot": ""
+  },
+  {
+   "naam": "zonweringbestellen.nl",
+   "type": "DIY",
+   "screen_io": 707,
+   "screen_solar": null,
+   "rolluik_io": 572,
+   "rolluik_solar": 645,
+   "bron": "configurator 09-09",
+   "montage": "nee",
+   "motor": "Somfy Sunilus io",
+   "noot": "geen solar screen"
+  },
+  {
+   "naam": "solanowonen.nl",
+   "type": "webshop, montage bij te bestellen",
+   "screen_io": 982,
+   "screen_solar": 1034,
+   "rolluik_io": 670,
+   "rolluik_solar": 865,
+   "bron": "configurator 09-09",
+   "montage": "optie",
+   "motor": "Somfy io",
+   "noot": "contactformulier geblokkeerd door botcheck"
+  },
+  {
+   "naam": "rolluiken33.nl",
+   "type": "webshop, montage-optie",
+   "screen_io": 1044,
+   "screen_solar": 991,
+   "rolluik_io": 696,
+   "rolluik_solar": 686,
+   "bron": "configurator 09-09 (deels)",
+   "montage": "optie",
+   "motor": "Somfy io",
+   "noot": "ondergrens, laatste stap niet bevestigd"
+  },
+  {
+   "naam": "zonnerij.nl",
+   "type": "DIY (verwijst montage door naar Venvo)",
+   "screen_io": 1438,
+   "screen_solar": 1368,
+   "rolluik_io": 1282,
+   "rolluik_solar": null,
+   "bron": "configurator 09-09",
+   "montage": "nee",
+   "motor": "Somfy io",
+   "noot": ""
+  },
+  {
+   "naam": "zonwering-online.com",
+   "type": "webshop, montage alleen rond Groningen",
+   "screen_io": 1022,
+   "screen_solar": 1047,
+   "rolluik_io": 802,
+   "rolluik_solar": 775,
+   "bron": "echte offerte 10-09",
+   "montage": "nee (Wassenaar buiten bereik)",
+   "motor": "Somfy Sunilus/Altea/Oximo/RS100 io · Tahoma 149",
+   "noot": "huismerk ZOL; knikarm Verano Ipanema 2.609, pergola 4.730 (DIY)"
+  },
+  {
+   "naam": "zonweringstunter.nl",
+   "type": "webshop + montage (Purmerend)",
+   "screen_io": 1256,
+   "screen_solar": 1337,
+   "rolluik_io": 946,
+   "rolluik_solar": 894,
+   "bron": "echte offerte 10-09",
+   "montage": "incl. (in de prijs)",
+   "motor": "Somfy io · Tahoma 149",
+   "noot": "Verano/Smits; DIY-configurator: 915/1.021/683/694"
+  },
+  {
+   "naam": "screen-discount.nl",
+   "type": "DIY",
+   "screen_io": 975,
+   "screen_solar": 1156,
+   "rolluik_io": 1101,
+   "rolluik_solar": 970,
+   "bron": "configurator 09-09",
+   "montage": "nee",
+   "motor": "Somfy io",
+   "noot": "rolluik via zustersite"
+  },
+  {
+   "naam": "screendirect.nl",
+   "type": "DIY",
+   "screen_io": null,
+   "screen_solar": null,
+   "rolluik_io": null,
+   "rolluik_solar": null,
+   "bron": "mail 10-09",
+   "montage": "nee",
+   "motor": "",
+   "noot": "verwijst naar eigen configurator; geen knikarm aan consument"
+  },
+  {
+   "naam": "creon-rolluiken.nl",
+   "type": "DIY",
+   "screen_io": null,
+   "screen_solar": null,
+   "rolluik_io": null,
+   "rolluik_solar": null,
+   "bron": "mail 14-09",
+   "montage": "nee",
+   "motor": "huismerk of Somfy",
+   "noot": "werkt niet met offertes; 5 jr product, 2 jr motor"
+  },
+  {
+   "naam": "degalux.com",
+   "type": "webshop + montage (Barneveld)",
+   "screen_io": null,
+   "screen_solar": null,
+   "rolluik_io": null,
+   "rolluik_solar": null,
+   "bron": "mail 10-09",
+   "montage": "adviseur maakt totaalofferte",
+   "noot": "indicatieprijzen in afbeeldingen, niet uitgelezen; 3 jr garantie; 8-10 wk",
+   "motor": "Somfy"
+  }
+ ]
 }

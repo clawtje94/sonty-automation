@@ -96,3 +96,9 @@ Patroon: dealers/lokale bedrijven voeren A-merken (Verano, Brustor, Alulux, Luxa
 - Suntec (Zoeterwoude, Sunmaster SunZip Design + Smits CD942): 1857/1612/1502/1343 = 6314 (+ zender 102, vensterbank 67 = 6483); SunEye 3236 (+74+149 = 3459); 8 wk; 5 jr.
 - Gemro: alleen showroom. Zonweringsbedrijf Zoetermeer: verwijst naar webshop, wil foto's. Schaduwrijk/Unicon: offerte online (code 289886), niet uitgelezen.
 - Stand: 17 aanbieders met totaal; mediaan 6338; Sonty 6514 (+3%), 13 goedkoper / 4 duurder; knikarm plek 13 van 15.
+
+## Aanvulling 17-09
+- Open Maatwerk (Rotterdam, MySun): richtprijs 4 producten 6299 incl. meting/montage/Situo-5; Tahoma 280; 5 jr. Google 4,4 (106).
+- Duifhuijsen (Vlaardingen, MySun/Sunpoint): 1750/1560/1550/1400 = 6260 incl; knikarm Harol TC130 3100; 2 jr product/5 jr motor. Google 4,7 (68).
+- Megazonwering stuurt herinnering (offerte ontvangen?). Nieuwe sectie op de pagina: alleen webshops (11 webshops, DIY-prijzen 3.319-4.433 voor 4 producten; Sonty productprijs zonder montage 5.885).
+- Stand: 19 aanbieders met totaal; mediaan 6314; Sonty 6514 (+3%), 14 goedkoper / 4 duurder.

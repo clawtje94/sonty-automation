@@ -97,7 +97,7 @@ for k,lab in KEYS:
     wa_rows.append(f'<tr><td>{lab}</td><td class="n">{eur(LP[k])}</td><td class="n">{eur(kost)}</td><td class="n">{eur(nu)}</td><td class="n">{marge_nu:.0f}%</td><td class="n">{eur(zf)}</td><td class="n">{eur(doel)}</td><td class="n"><strong style="color:var(--bad)">{marge_doel:+.0f}%</strong></td><td class="n" style="color:var(--bad)">{eur(doel-kost)}</td></tr>')
 wa_rows.append(f'<tr class="sonty"><td>4 producten</td><td class="n">{eur(sum(LP.values()))}</td><td class="n">{eur(tot_kost)}</td><td class="n">{eur(tot_nu)}</td><td class="n">{(tot_nu-tot_kost)/tot_nu*100:.0f}%</td><td class="n">{eur(tot_zf)}</td><td class="n">{eur(tot_doel)}</td><td class="n"><strong style="color:var(--bad)">{(tot_doel-tot_kost)/tot_doel*100:+.0f}%</strong></td><td class="n" style="color:var(--bad)">{eur(tot_doel-tot_kost)}</td></tr>')
 WA_HTML="".join(wa_rows); WA_KOST=tot_kost; WA_DOEL=tot_doel; WA_VERLIES=tot_kost-tot_doel
-break_even_pct=round((1-(tot_kost/tot_zf))*100)
+inkoop_boven_zf=round((tot_kost/tot_zf-1)*100)
 
 page = f"""<title>Marktpositie Sonty</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap">
@@ -160,7 +160,7 @@ page = f"""<title>Marktpositie Sonty</title>
     <thead><tr><th>Product</th><th class="n">Sonty lijst</th><th class="n">Inkoop (50%)</th><th class="n">Sonty nu (lijst -15%)</th><th class="n">Marge nu</th><th class="n">Zonwering-fabriek</th><th class="n">5% eronder</th><th class="n">Marge dan</th><th class="n">Resultaat per stuk</th></tr></thead>
     <tbody>{WA_HTML}</tbody>
   </table></div>
-  <p class="note"><strong>Conclusie: dat kan niet.</strong> Vijf procent onder zonwering-fabriek ({eur(WA_DOEL)} voor de vier producten) ligt onder onze inkoopprijs ({eur(WA_KOST)}): {eur(WA_VERLIES)} verlies per set, nog zonder montage, transport en handling. Zonwering-fabriek verkoopt zelfs onder onze inkoop; break-even zou al {break_even_pct}% boven hun prijs liggen. Om op hun niveau te komen moet de inkoop omlaag (ander merk of fabriek-direct), niet de marge. Marge is hier berekend als (verkoop min inkoop) gedeeld door verkoop. Leest Daimy "50% marge" als opslag op de inkoop (inkoop = lijst / 1,5), dan is het verlies nog groter.</p>
+  <p class="note"><strong>Conclusie: dat kan niet.</strong> Vijf procent onder zonwering-fabriek ({eur(WA_DOEL)} voor de vier producten) ligt onder onze inkoopprijs ({eur(WA_KOST)}): {eur(WA_VERLIES)} verlies per set, nog zonder montage, transport en handling. Zonwering-fabriek verkoopt zelfs onder onze inkoop: onze inkoopprijs ligt al {inkoop_boven_zf}% boven hun verkoopprijs. Om op hun niveau te komen moet de inkoop omlaag (ander merk of fabriek-direct), niet de marge. Marge is hier berekend als (verkoop min inkoop) gedeeld door verkoop. Leest Daimy "50% marge" als opslag op de inkoop (inkoop = lijst / 1,5), dan is het verlies nog groter.</p>
 
   <h2>Merken, garantie en levertijd</h2>
   <div class="tablewrap"><table>

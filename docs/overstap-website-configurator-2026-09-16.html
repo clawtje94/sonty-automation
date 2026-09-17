@@ -31,6 +31,29 @@ ul{margin:6px 0 6px 20px}li{margin:3px 0}code{background:#f1ede7;padding:1px 5px
 
 <div class="box let"><b>Belangrijkste conclusie.</b> De nieuwe site is inhoudelijk klaar (100 URL's, redirects voor alle 57 oude URL's, tracking overgezet), maar de <b>productieomgeving op Vercel is nog niet compleet</b>: zonder Telegram- en Klaviyo-sleutels geeft een nieuwe aanvraag geen melding en geen Klaviyo-profiel, en contact- en reparatieformulieren komen nergens in Trengo. Dat moet vóór de domeinswitch, anders vallen aanvragen stil op dag 1. Daarnaast is er <b>geen enkele back-up</b> van de KV-database die straks, zonder Reuzenpanda, de enige plek is waar alle leads en offertes staan.</div>
 
+<h2>0. Kern (aangescherpt 17-09): wat is echt nodig voor de websiteswitch</h2>
+<div class="box let"><b>De websiteswitch is ook de overstap voor nieuwe leads.</b> Met Webflow verdwijnt de RP-widget; elke nieuwe aanvraag komt via de eigen configurator in het eigen CRM. Het verzendcentrum moet daarom op het moment van de switch op "eigen" staan (testmodus uit, automatisch versturen aan), anders blijft een aanvraag stil liggen. Oude RP-leads lopen door via rp-sync, V4 en Sunny. V20 is hiervoor niet nodig.</div>
+<table><tr><th style="width:50%">Echt nodig vóór de switch</th><th>Niet nodig voor de website (later of bij RP-uit)</th></tr>
+<tr><td><ol style="margin:0 0 0 18px">
+<li>Formulieren (contact, reparatie, zakelijk) naar Trengo als ticket met de klant als afzender</li>
+<li>Verzendcentrum op eigen + eerste echte aanvraag volgen (Gripp bij akkoord nog niet live bewezen)</li>
+<li>Domein aan Vercel + DNS bij Neostrada (mail-records laten staan)</li>
+<li>Site-URL op sonty.nl (8 hardcoded vercel.app-links eruit)</li>
+<li>Ads-landingspagina's checken bij de beheerders</li>
+<li>noindex op vercel.app + Search Console + sitemap</li>
+<li>Redirect-keuzes Gouda en Leidschendam</li>
+<li>Back-up van de leaddata (sterk aangeraden, nu geen enkele)</li>
+</ol></td>
+<td><ul style="margin:0 0 0 18px">
+<li>Telegram-sleutels op de site: meldingen komen al vanaf de Mac mini</li>
+<li>Klaviyo-sleutel op de site: export loopt vanaf de Mac mini</li>
+<li>Google Places-key: reviews staan op een vaste waarde</li>
+<li>CRON_SECRET en de codes: hygiëne, 10 minuten, niet blokkerend</li>
+<li>Productfoto's van de RP-server: pas bij RP-uit</li>
+<li>Klik-lab alle producten: verbetering, niet blokkerend</li>
+<li>61 scripts met vercel.app-links: werken door</li>
+<li>Webflow opzeggen: na 14 dagen</li>
+</ul></td></tr></table>
 <h2>1. Gemeten uitgangsstand</h2>
 <table><tr><th style="width:26%">Onderdeel</th><th>Gemeten (16-09)</th><th style="width:12%">Status</th></tr>
 <tr><td>Domein sonty.nl</td><td>Nameservers Neostrada; A @ 198.202.211.1, www CNAME cdn.webflow.com (Webflow, via Cloudflare-CDN). In het Vercel-project is <b>geen</b> sonty.nl-domein gekoppeld (<code>vercel domains ls</code>: alleen foreverlume.com en zonweringdirect.nl). Wildcard *.sonty.nl → 185.94.230.197 (admin.sonty.nl valt daar nu onder).</td><td><span class="tag rood">niet begonnen</span></td></tr>

@@ -4379,3 +4379,8 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
   LEAD (test-extras3@example.com): Screens 2.067 + TaHoma 195 = 2.262 ✓; browserproef: 3 regels, TaHoma 1×, nogmaals toevoegen = nog 1×.
   Redirect /diensten/vloeren → /diensten/woninginrichting (was 404) live. Checklist overgang website: docs/checklist-overgang-website-2026-09-16.md
   (19 punten, gemeten). Telegram V1 (bouwen punt 1-5 + domein koppelen, DNS wie) en V2 (Gouda-pagina) open.
+- 17-09: Daimy: "stuur overzicht naar Telegram, denk goed na wat echt nodig is (Telegram?), TaHoma foto" → checklist aangescherpt (docs/checklist-
+  overgang-website-2026-09-16.md + kern-sectie §0 in de html): KERN = websiteswitch is ook de overstap voor nieuwe leads (RP-widget verdwijnt
+  met Webflow) → verzendcentrum op eigen bij de switch; echt nodig: formulieren→Trengo, verzendcentrum eigen, domein+DNS, site-URL, Ads-landing,
+  noindex+Search Console, Gouda/Leidschendam-keuze, KV-back-up. NIET nodig: Telegram/Klaviyo/Places-sleutels, CRON_SECRET/codes, RP-foto's,
+  klik-lab, oude scripts. Pdf's van beide docs naar Telegram. TaHoma-productfoto (Somfy, public/configurator/tahoma-switch.webp) live d5d004c.

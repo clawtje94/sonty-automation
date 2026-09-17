@@ -4420,3 +4420,6 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
   → memory feedback_geen_levertijd_communiceren; (d) details met nette labels + mm; voorraadscherm zonder model-/bedieningsalternatieven.
   Testleads (naam "Test …", rule 9 blokkeert): LEAD-1789633567550-EPEK, LEAD-1789634138323-26XS (klantlink dvJMA6_G…). LET OP: bij 2 commits
   ging een tsc-fout mee naar main (GH-build faalde, direct hersteld); vanaf nu commit alleen na groene tsc.
+- 17-09 Daimy: "uitlijning 'hier sta je nu' klopt niet; overal moet definitieve offerte na het inmeten ertussen" → LIVE (92dfe2b): badge rechtsboven in de
+  kaart (nowrap), stappen-grid 3 kolommen; 6 stappen (05 Definitieve offerte op exacte maten, tekenen, dan bestellen) op klantpagina én PDF (OfferteBrochure).
+  Aanvraag-mail zei al "prijs definitief na het inmeten"; configurator-overzicht ook. Desktop, mobiel en PDF-pagina 2 visueel gecontroleerd.

@@ -4447,3 +4447,6 @@ Oorzaak: scripts/sunny-weetje.js draait op claude-sonnet-5 met max_tokens 300/35
   550 KB), SEO 69 = noindex vercel.app (bewust), CSP, resterende contrast-badges, GTM dfp.min.js 404. VRAGEN: openingstijden 9:30?, postcode
   EX/EZ?, u-vorm legal?, opgericht 2013 vs tijdlijn 2014?, "zonnescherm" synoniem?. Lighthouse lokaal werkt alleen via handmatig gestarte
   Chrome met --remote-debugging-port (scratch: lh5-*.json); PSI-API quotum op.
+- 18-09 Daimy-antwoorden sweep: openingstijden en postcode = Google (9:30 / 2288 EX, bevestigd via zoekresultaat), opgericht 2014 door Joey en Yudi
+  (over-ons, PDF, offertepagina aangepast; jaren vanaf 2014), u-vorm juridisch laten, "zonnescherm" laten. Skip-link "Naar de inhoud" was zichtbaar
+  linksboven → verwijderd (0f0cba2). Memory reference_sonty_feiten.

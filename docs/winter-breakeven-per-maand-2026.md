@@ -124,3 +124,20 @@ Januari als warm-up klopt alleen als "warm-up" betekent: vanaf week 2 volledig l
 - Model: januari op plan-niveau (€36k) −€57k, op optimum (€69k) −€38k. Inhouden kost ~€19k.
 - Winterplan: knikarm/uitvalscherm vroegboek aan vanaf de 2e week januari; rolluiken, screens en PMax lopen door.
 Advies: week 1 januari rustig (feestdagen, lage conversie), vanaf 5 januari opschalen naar het jan-budget, en 1 februari naar het feb-budget. Capaciteit: jan 90 + feb 107-137 orders vallen in montage feb-apr, binnen ~150/mnd.
+
+## 9. Eén stuurregel (18-09, na "tegenstrijdige berichten")
+
+Google: vast omhoog, in elk scenario. Okt €17k, nov €26k, dec €22k (3 weken), jan €30k, feb €34k. Doel-CPA in Google Ads: okt €63, nov €94, dec €79, jan €79, feb €59.
+
+Meta rolluiken: geen vast bedrag, de gemiddelde leadprijs in Ads Manager bepaalt het budget. Wekelijks bijstellen.
+
+| maand | grens leadprijs | onder de grens | boven de grens | uit bij |
+|---|---|---|---|---|
+| sep | €45 | opschalen naar €20k (nu €23 per lead) | | €65 |
+| okt | €33 | €12-20k laten staan | afbouwen naar €4-8k | €50 |
+| nov | €37 | €10-20k | afbouwen | €55 |
+| dec | €35 | €8-10k | afbouwen | €50 |
+| jan | €49 | €39k | afbouwen | €75 |
+| feb | €72 | €43k | afbouwen | €110 |
+
+De €4k voor oktober in §6 was de voorzichtige variant (leadprijs verdubbelt in oktober zoals vorig jaar: sep €57 → okt €72). Blijft de nieuwe rolluik-set rond €23-29, dan geldt de bovengrens van de bandbreedte.
